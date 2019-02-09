@@ -1,6 +1,8 @@
 import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
 
+import { Layout } from '~/components'
+
 export default class CustomApp extends App {
   public static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {}
@@ -17,7 +19,9 @@ export default class CustomApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Container>
     )
   }
