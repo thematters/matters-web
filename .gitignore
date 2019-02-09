@@ -80,5 +80,5 @@ typings/
 .dynamodb/
 
 
-.next
+build
 yarn.lock

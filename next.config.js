@@ -5,6 +5,7 @@ const withSize = require('next-size')
 
 const nextConfig = {
   useFileSystemPublicRoutes: false,
+  distDir: 'build',
   webpack(config, options) {
     return config
   }

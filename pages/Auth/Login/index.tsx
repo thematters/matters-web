@@ -1,1 +1,1 @@
-export default () => <span>Follow</span>
+export default () => <span>Login</span>
