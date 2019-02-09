@@ -1,0 +1,176 @@
+/* @styled-jsx=global */
+
+/* Document
+   ========================================================================== */
+html {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  border-collapse: inherit;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Sections
+   ========================================================================== */
+main {
+  display: block;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+code,
+kbd,
+samp,
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+a {
+  background-color: transparent;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+input,
+select,
+textarea,
+button {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+
+  color: inherit;
+  font: inherit;
+  line-height: 1.15;
+
+  border-radius: 0;
+  appearance: none;
+}
+
+button {
+  width: auto;
+  background: transparent;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+}
+
+select {
+  text-transform: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+  &::-ms-value {
+    background: none;
+    color: inherit;
+  }
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+[type='search'] {
+  appearance: textfield;
+  outline-offset: -2px;
+}
+[type='search']::-webkit-search-decoration {
+  appearance: none;
+}
+::-webkit-file-upload-button {
+  appearance: button;
+  font: inherit;
+}
+
+/* Interactive
+   ========================================================================== */
+details {
+  display: block;
+}
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+[hidden] {
+  display: none !important;
+}

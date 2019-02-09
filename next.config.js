@@ -6,7 +6,24 @@ const withSize = require('next-size')
 const nextConfig = {
   useFileSystemPublicRoutes: false,
   distDir: 'build',
-  webpack(config, options) {
+  webpack(config, { defaultLoaders }) {
+    /**
+     * Styles in regular CSS files
+     * https://github.com/zeit/styled-jsx#styles-in-regular-css-files
+     */
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        defaultLoaders.babel,
+        {
+          loader: require('styled-jsx/webpack').loader,
+          options: {
+            type: 'scoped'
+          }
+        }
+      ]
+    })
+
     return config
   }
 }

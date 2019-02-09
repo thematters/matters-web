@@ -1,0 +1,19 @@
+/* @styled-jsx=global */
+
+:root {
+  --color-matters-gold: #c0a46b;
+  --color-matters-green: #0d6763;
+
+  --color-bg-green: #f2faf7;
+  --color-bg-yellow: #faf7f0;
+
+  --color-black: #333333;
+  --color-grey-darker: #808080;
+  --color-grey-dark: #999c9d;
+  --color-grey: #b3b3b3;
+  --color-grey-light: #dddddd;
+  --color-grey-lighter: #f6f6f6;
+  --color-white: #ffffff;
+
+  --color-red: #c85c41;
+}

@@ -1,0 +1,97 @@
+/* @styled-jsx=global */
+
+@lost gutter 3rem; /* 48px */
+@lost flexbox flex;
+
+/*
+ * Row
+ */
+.l-row {
+  lost-center: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+
+  @media (--sm-up) {
+    & {
+      lost-center: 704px;
+    }
+  }
+  @media (--md-up) {
+    & {
+      lost-center: 1024px;
+    }
+  }
+  @media (--lg-up) {
+    & {
+      lost-center: 1080px;
+    }
+  }
+}
+.l-row--full {
+  lost-center: 100%;
+}
+
+/*
+ * Column & Offset
+ */
+/* 4 cols in XSmall */
+@each $i in 1, 2, 3, 4 {
+  .l-col-$(i) {
+    /* prettier-ignore */
+    lost-column: $(i)/4;
+
+    @if $(i) == 4 {
+      flex-basis: 100%;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  .l-offset-$(i) {
+    /* prettier-ignore */
+    lost-offset: $(i)/4;
+  }
+}
+
+/* 4 cols in Small and Medium */
+@each $device in sm, md {
+  @media (--$(device)-up) {
+    @each $i in 1, 2, 3, 4, 5, 6, 7, 8 {
+      .l-col-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-column: $(i)/8;
+
+        @if $(i) == 8 {
+          flex-basis: 100%;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      .l-offset-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-offset: $(i)/8;
+      }
+    }
+  }
+}
+
+/* 12 cols in Large and XLarge */
+@each $device in lg, xl {
+  @media (--$(device)-up) {
+    @each $i in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+      .l-col-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-column: $(i)/12;
+
+        @if $(i) == 12 {
+          flex-basis: 100%;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      .l-offset-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-offset: $(i)/12;
+      }
+    }
+  }
+}

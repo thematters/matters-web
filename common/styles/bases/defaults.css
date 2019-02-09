@@ -1,0 +1,54 @@
+/* @styled-jsx=global */
+
+html {
+  height: 100%;
+
+  font-size: var(--sizing-root);
+  font-family: var(--font-sans-tc);
+  font-weight: var(--font-weight-base);
+  line-height: var(--line-height-base);
+  -webkit-text-size-adjust: 100%;
+
+  background-color: var(--color-grey-lighter);
+  word-wrap: break-word;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+
+  &[lang='zh-hans'] {
+    font-family: var(--font-sans-sc);
+  }
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+*:not(body) {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
+
+a,
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+a {
+  &:link,
+  &:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
