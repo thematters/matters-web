@@ -3,7 +3,7 @@ import React from 'react'
 
 import { GlobalStyles, Layout } from '~/components'
 
-export default class CustomApp extends App {
+class MattersApp extends App {
   // public static async getInitialProps({ Component, ctx }: NextAppContext) {
   //   let pageProps = {}
 
@@ -28,3 +28,5 @@ export default class CustomApp extends App {
     )
   }
 }
+
+export default MattersApp
