@@ -1,13 +1,13 @@
 #!/bin/bash
-APP_DEVELOP="matters-client-web"
+APP_DEVELOP="matters-stage"
 ENV_DEVELOP="matters-client-web-develop"
 REGION_DEVELOP="ap-southeast-1"
 
-APP_STAGING="matters-client-web"
+APP_STAGING="matters-stage"
 ENV_STAGING="matters-client-web-stage"
 REGION_STAGING="ap-southeast-1"
 
-APP_PRODUCTION="matters-client-web"
+APP_PRODUCTION="matters-stage"
 ENV_PRODUCTION="matters-client-web-prod"
 REGION_PRODUCTION="ap-southeast-1"
 
