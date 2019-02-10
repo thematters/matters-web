@@ -1,3 +1,5 @@
 export * from './Layout'
 export * from './GlobalHeader'
 export * from './GlobalStyles'
+export * from './Responsive'
+export * from './Placeholder'

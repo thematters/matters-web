@@ -47,3 +47,10 @@ export const PATH = {
   MISC_TOS: '/Misc/ToS',
   MISC_GUIDE: '/Misc/Guide'
 }
+
+export const BREAKPOINTS = {
+  Small: 768,
+  Medium: 1024,
+  Large: 1280,
+  XLarge: 1440
+}

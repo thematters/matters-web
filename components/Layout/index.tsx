@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { GlobalHeader } from '~/components'
+import { GlobalHeader, Placeholder } from '~/components'
 
 import styles from './styles.css'
 
@@ -38,8 +38,16 @@ export const Layout: React.SFC = ({ children }) => (
     <GlobalHeader />
 
     <main className="l-row">
-      <article className="l-col-4  l-col-md-5 l-col-lg-8">{children}</article>
-      <aside className="l-col-4  l-col-md-3 l-col-lg-4" />
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        <Placeholder.MattersToday />
+        <Placeholder.ArticleDigestList />
+      </article>
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Placeholder.Sidebar />
+      </aside>
+
+      {/* {children} */}
+
       <style jsx>{styles}</style>
     </main>
   </>
