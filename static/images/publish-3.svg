@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="516" height="300" viewBox="0 0 516 300">
+    <defs>
+        <path id="a" d="M0 0h516v300H0z"/>
+        <linearGradient id="c" x1="95.434%" x2="21.137%" y1="77.234%" y2="18.145%">
+            <stop offset="0%" stop-color="#79B1A6"/>
+            <stop offset="100%" stop-color="#D7EAE1"/>
+        </linearGradient>
+        <linearGradient id="d" x1="50%" x2="50%" y1="93.226%" y2="2.633%">
+            <stop offset="0%" stop-color="#D7EAE1"/>
+            <stop offset="100%" stop-color="#FFF"/>
+        </linearGradient>
+        <linearGradient id="f" x1="83.092%" x2="19.903%" y1="90.571%" y2="15.848%">
+            <stop offset="0%" stop-color="#0D6763"/>
+            <stop offset="100%" stop-color="#D7EAE1"/>
+        </linearGradient>
+        <circle id="e" cx="444.448" cy="203.648" r="61.92"/>
+        <linearGradient id="g" x1="97.457%" x2="20.421%" y1="78.844%" y2="17.577%">
+            <stop offset="0%" stop-color="#438F83"/>
+            <stop offset="100%" stop-color="#FFF"/>
+        </linearGradient>
+        <linearGradient id="i" x1="90.602%" x2="21.291%" y1="73.392%" y2="18.268%">
+            <stop offset="0%" stop-color="#A13A21"/>
+            <stop offset="100%" stop-color="#F09A85"/>
+        </linearGradient>
+        <circle id="h" cx="587.552" cy="228.416" r="11.008"/>
+        <linearGradient id="j" x1="23.784%" x2="83.518%" y1="18.443%" y2="80.419%">
+            <stop offset="0%" stop-color="#EFDAAF"/>
+            <stop offset="100%" stop-color="#BF9F5E"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <g mask="url(#b)">
+            <g transform="translate(-187.136 -33.76)">
+                <ellipse cx="444.448" cy="202.96" stroke="#92C7B8" stroke-width=".688" opacity=".7" rx="221.536" ry="123.152"/>
+                <ellipse cx="444.448" cy="205.024" stroke="#92C7B8" stroke-width=".688" opacity=".4" rx="284.832" ry="166.496"/>
+                <ellipse cx="443.76" cy="205.024" stroke="#92C7B8" stroke-width=".688" rx="149.296" ry="75.68"/>
+                <g transform="translate(554.746)">
+                    <ellipse cx="106.129" cy="96.468" fill="url(#c)" rx="12.561" ry="12.532"/>
+                    <path fill="url(#d)" d="M39.2 62.66l-8.336 8.325-8.336-8.324H5.504A5.504 5.504 0 0 1 0 57.157V5.504A5.504 5.504 0 0 1 5.504 0h51.798a5.504 5.504 0 0 1 5.504 5.504v51.653a5.504 5.504 0 0 1-5.504 5.504H39.2z" transform="translate(74.304)"/>
+                    <path stroke="#9ACABD" stroke-linecap="square" stroke-width="1.376" d="M86.865 19.582h37.684M86.865 27.414h37.684M86.865 35.247h37.684M86.865 42.296h18.842"/>
+                    <g>
+                        <path fill="url(#d)" d="M39.2 62.66l-8.336 8.325-8.336-8.324H5.504A5.504 5.504 0 0 1 0 57.157V5.504A5.504 5.504 0 0 1 5.504 0h51.798a5.504 5.504 0 0 1 5.504 5.504v51.653a5.504 5.504 0 0 1-5.504 5.504H39.2z" transform="translate(1.085 132.9)"/>
+                        <path stroke="#9ACABD" stroke-linecap="square" stroke-width="1.376" d="M13.646 152.482h37.683M13.646 160.315h37.683M13.646 168.147h37.683M13.646 175.197h18.842"/>
+                    </g>
+                </g>
+                <use fill="#437D6D" xlink:href="#e"/>
+                <use fill="#4E8764" xlink:href="#e"/>
+                <use fill="#3D725E" xlink:href="#e"/>
+                <use fill="url(#f)" xlink:href="#e"/>
+                <use fill="url(#g)" xlink:href="#h"/>
+                <use fill="url(#i)" xlink:href="#h"/>
+                <circle cx="275.2" cy="282.08" r="20.64" fill="url(#j)"/>
+                <g>
+                    <path fill="url(#d)" d="M39.503 62.22l-8.398 8.099-8.398-8.1H5.504A5.504 5.504 0 0 1 0 56.715V5.504A5.504 5.504 0 0 1 5.504 0h52.288a5.504 5.504 0 0 1 5.504 5.504v51.211a5.504 5.504 0 0 1-5.504 5.504H39.503z" transform="translate(243.552 181.632)"/>
+                    <path stroke="#9ACABD" stroke-linecap="square" stroke-width="1.376" d="M256.211 201.075h37.978M256.211 208.853h37.978M256.211 216.63h37.978M256.211 223.63H275.2"/>
+                </g>
+                <g>
+                    <path fill="url(#d)" d="M39.503 62.22l-8.398 8.099-8.398-8.1H5.504A5.504 5.504 0 0 1 0 56.715V5.504A5.504 5.504 0 0 1 5.504 0h52.288a5.504 5.504 0 0 1 5.504 5.504v51.211a5.504 5.504 0 0 1-5.504 5.504H39.503z" transform="translate(411.424 59.168)"/>
+                    <path stroke="#9ACABD" stroke-linecap="square" stroke-width="1.376" d="M424.083 78.611h37.978M424.083 86.389h37.978M424.083 94.166h37.978M424.083 101.166h18.989"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

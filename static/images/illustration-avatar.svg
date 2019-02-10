@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80" viewBox="0 0 80 80">
+    <defs>
+        <circle id="a" cx="40" cy="40" r="40"/>
+        <linearGradient id="d" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#D7EAE1"/>
+            <stop offset="100%" stop-color="#9ACABD"/>
+        </linearGradient>
+        <path id="c" d="M20 56.667h40l.65 2.603a15.641 15.641 0 0 0 7.128 9.619V80H11.11V68.889a16.206 16.206 0 0 0 8.475-10.564L20 56.667z"/>
+        <linearGradient id="f" x1="15.601%" x2="85.276%" y1="0%" y2="93.096%">
+            <stop offset="0%" stop-color="#92C7B8"/>
+            <stop offset="100%" stop-color="#0D6763"/>
+        </linearGradient>
+        <circle id="e" cx="20" cy="20" r="20"/>
+        <linearGradient id="i" x1="64.458%" x2="64.458%" y1="26.487%" y2="100%">
+            <stop offset="0%" stop-color="#C4E1D3"/>
+            <stop offset="100%" stop-color="#54A295"/>
+        </linearGradient>
+        <ellipse id="h" cx="2.222" cy="7.222" rx="22.222" ry="28.333"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <use fill="#359177" xlink:href="#a"/>
+        <use fill="#0D6763" xlink:href="#a"/>
+        <g mask="url(#b)">
+            <use fill="#92C7B8" xlink:href="#c"/>
+            <use fill="url(#d)" xlink:href="#c"/>
+        </g>
+        <path fill="#C4E1D3" d="M15.556 31.111h2.222V48.89h-2.222a4.444 4.444 0 0 1-4.445-4.445v-8.888a4.444 4.444 0 0 1 4.445-4.445zM62.222 31.111h2.222a4.444 4.444 0 0 1 4.445 4.445v8.888a4.444 4.444 0 0 1-4.445 4.445h-2.222V31.11z" mask="url(#b)"/>
+        <g mask="url(#b)">
+            <path fill="#FFF" d="M40 13.333c13.5 0 24.444 10.944 24.444 24.445v6.666c0 12.273-9.949 22.223-22.222 22.223h-4.444c-12.273 0-22.222-9.95-22.222-22.223v-6.666c0-13.5 10.944-24.445 24.444-24.445z"/>
+            <g transform="translate(20 20)">
+                <mask id="g" fill="#fff">
+                    <use xlink:href="#e"/>
+                </mask>
+                <use fill="url(#f)" xlink:href="#e"/>
+                <g mask="url(#g)">
+                    <use fill="#79B1A6" xlink:href="#h"/>
+                    <use fill="url(#i)" xlink:href="#h"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

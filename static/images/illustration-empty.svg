@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+    <defs>
+        <linearGradient id="a" x1="0%" y1="58.023%" y2="58.023%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#DDD"/>
+        </linearGradient>
+        <linearGradient id="c" x1="88.027%" x2="18.84%" y1="20.727%" y2="87.314%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#DDD"/>
+        </linearGradient>
+        <circle id="b" cx="57.939" cy="72.939" r="11.939"/>
+        <circle id="d" cx="172.939" cy="167.939" r="5.939"/>
+        <circle id="e" cx="119.439" cy="120.439" r="47.439"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path d="M0 0h240v240H0z"/>
+        <g transform="rotate(60 -93.46 123.35)">
+            <path fill="#DDD" d="M7 30h10l-1.667 4H8.667z"/>
+            <path fill="url(#a)" d="M18 11.182C18 6 14.657.09 12 0 9.343.09 6 6 6 11.182V30h12V11.182z"/>
+            <path fill="#DDD" d="M3 21c1.224-1.114 3-3.09 3-8.08V30H0v-3.06c0-2.658 1.776-4.826 3-5.94zM21 21c-1.224-1.114-3-3.09-3-8.08V30h6v-3.06c0-2.658-1.776-4.826-3-5.94z"/>
+            <circle cx="12" cy="12" r="3" fill="#FFF"/>
+        </g>
+        <use fill="#87B9AB" xlink:href="#b"/>
+        <use fill="url(#c)" xlink:href="#b"/>
+        <use fill="#87B9AB" xlink:href="#d"/>
+        <use fill="url(#c)" xlink:href="#d"/>
+        <g>
+            <use fill="#87B9AB" xlink:href="#e"/>
+            <use fill="url(#c)" xlink:href="#e"/>
+        </g>
+    </g>
+</svg>

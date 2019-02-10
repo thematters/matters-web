@@ -7,6 +7,24 @@
 
 `npm run build && npm run start`
 
+## Naming Conventions
+
+### React Component/Page
+
+foldername: `PascalCase`
+filename: `camelCase`
+
+```tree
+├── pages
+│   └── ArticleDetail
+│       ├── styles.css
+│       └── index.tsx
+└── components
+    └── Layout
+        ├── styles.css
+        └── index.tsx
+```
+
 ## Routing
 
 We customized routes with Express in `server.ts` and disabled [fs routing](https://github.com/zeit/next.js#disabling-file-system-routing).

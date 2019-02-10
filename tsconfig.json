@@ -20,5 +20,6 @@
       "~/*": ["./*"]
     }
   },
+  "includes": ["./definitions/**/*.d.ts"],
   "exclude": ["node_modules", "build"]
 }
