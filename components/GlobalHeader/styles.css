@@ -1,0 +1,23 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 4rem;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+  background: var(--color-white);
+
+  box-sizing: content-box;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 4rem;
+}

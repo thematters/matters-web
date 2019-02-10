@@ -1,0 +1,20 @@
+main {
+  margin-top: var(--spacing-x-loose);
+
+  & article {
+    /* TODO: REMOVE */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+
+    font-size: 2rem;
+    background: var(--color-grey-light);
+  }
+
+  & aside {
+    background: var(--color-grey);
+    height: 100vh;
+  }
+}

@@ -24,7 +24,9 @@ html {
 }
 
 body {
-  height: 100%;
+  min-height: 100%;
+  padding-top: 4rem; /* global header's height */
+  padding-bottom: 4rem;
   overflow-x: hidden;
 }
 

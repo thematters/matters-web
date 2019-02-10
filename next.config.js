@@ -17,10 +17,7 @@ const nextConfig = {
       use: [
         defaultLoaders.babel,
         {
-          loader: require('styled-jsx/webpack').loader,
-          options: {
-            type: 'scoped'
-          }
+          loader: require('styled-jsx/webpack').loader
         }
       ]
     })
