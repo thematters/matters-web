@@ -4,39 +4,39 @@ import MediaQuery from 'react-responsive'
 import { BREAKPOINTS } from '~/common/enums'
 
 const SmallDown: React.SFC = props => (
-  <MediaQuery maxWidth={BREAKPOINTS.Small - 1} {...props} />
+  <MediaQuery maxWidth={BREAKPOINTS.SMALL - 1} {...props} />
 )
 const MediumDown: React.SFC = props => (
-  <MediaQuery maxWidth={BREAKPOINTS.Medium - 1} {...props} />
+  <MediaQuery maxWidth={BREAKPOINTS.MEDIUM - 1} {...props} />
 )
 const MediumUp: React.SFC = props => (
-  <MediaQuery minWidth={BREAKPOINTS.Medium} {...props} />
+  <MediaQuery minWidth={BREAKPOINTS.MEDIUM} {...props} />
 )
 
 const XSmall = SmallDown
 const Small: React.SFC = props => (
   <MediaQuery
-    minWidth={BREAKPOINTS.Small}
-    maxWidth={BREAKPOINTS.Medium - 1}
+    minWidth={BREAKPOINTS.SMALL}
+    maxWidth={BREAKPOINTS.MEDIUM - 1}
     {...props}
   />
 )
 const Medium: React.SFC = props => (
   <MediaQuery
-    minWidth={BREAKPOINTS.Medium}
-    maxWidth={BREAKPOINTS.Large - 1}
+    minWidth={BREAKPOINTS.MEDIUM}
+    maxWidth={BREAKPOINTS.LARGE - 1}
     {...props}
   />
 )
 const Large: React.SFC = props => (
   <MediaQuery
-    minWidth={BREAKPOINTS.Large}
-    maxWidth={BREAKPOINTS.XLarge - 1}
+    minWidth={BREAKPOINTS.LARGE}
+    maxWidth={BREAKPOINTS.XLARGE - 1}
     {...props}
   />
 )
 const XLarge: React.SFC = props => (
-  <MediaQuery minWidth={BREAKPOINTS.XLarge} {...props} />
+  <MediaQuery minWidth={BREAKPOINTS.XLARGE} {...props} />
 )
 
 export const Responsive = {
