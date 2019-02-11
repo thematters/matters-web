@@ -49,8 +49,8 @@ export const PATH = {
 }
 
 export const BREAKPOINTS = {
-  Small: 768,
-  Medium: 1024,
-  Large: 1280,
-  XLarge: 1440
+  SMALL: 768,
+  MEDIUM: 1024,
+  LARGE: 1280,
+  XLARGE: 1440
 }
