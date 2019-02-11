@@ -5,6 +5,7 @@ module.exports = {
     require('lost'),
     require('postcss-preset-env')({
       stage: 0,
+      preserve: false,
       importFrom: [
         './common/styles/variables/breakpoints.css',
         './common/styles/variables/colors.css',
