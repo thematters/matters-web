@@ -1,9 +1,13 @@
-## Start local dev
+# matters-web
+
+## Getting Started
+
+### Start local dev
 
 - Install dependencies: `npm i`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
-## Build and run production server
+### Build and run production server
 
 `npm run build && npm run start`
 
