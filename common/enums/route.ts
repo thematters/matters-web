@@ -75,29 +75,29 @@ export const ROUTES: Array<{ key: ROUTE_KEY; fs: string; url: string }> = [
   {
     key: 'USER_ARTICLES',
     fs: '/User/Articles',
-    url: '/@:username'
+    url: '/@:userName'
   },
   {
     key: 'USER_COMMENTS',
     fs: '/User/Comments',
-    url: '/@:username/comments'
+    url: '/@:userName/comments'
   },
   {
     key: 'USER_FOLLOWERS',
     fs: '/User/Followers',
-    url: '/@:username/followers'
+    url: '/@:userName/followers'
   },
   {
     key: 'USER_FOLLOWEES',
     fs: '/User/Followees',
-    url: '/@:username/followees'
+    url: '/@:userName/followees'
   },
 
   // Article
   {
     key: 'ARTICLE_DETAIL',
     fs: '/ArticleDetail',
-    url: '/@:username/*-:mediaHash'
+    url: '/@:userName/*-:mediaHash'
   },
 
   // Me
