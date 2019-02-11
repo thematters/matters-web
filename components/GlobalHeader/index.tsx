@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Icon } from '~/components'
+import { Avatar, Icon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_LOGO from '~/static/icons/logo.svg?sprite'
@@ -11,8 +11,7 @@ const Logo = () => (
     <a>
       <Icon
         id={ICON_LOGO.id}
-        width="97px"
-        height="20px"
+        style={{ width: '97px', height: '20px' }}
         viewBox={ICON_LOGO.viewBox}
       />
     </a>
@@ -27,7 +26,9 @@ export const GlobalHeader = () => (
           <Logo />
         </section>
 
-        <section />
+        <section>
+          <Avatar size="small" />
+        </section>
       </div>
     </div>
 

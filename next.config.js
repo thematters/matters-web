@@ -37,7 +37,7 @@ module.exports = withPlugins(
       {
         handleImages: ['jpeg', 'png', 'svg'],
         optimizeImagesInDev: true,
-        inlineImageLimit: 4096,
+        inlineImageLimit: 1024,
         svgo: {
           plugins: [{ removeViewBox: true }]
         },

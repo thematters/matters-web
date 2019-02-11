@@ -19,8 +19,7 @@
   "javascript.updateImportsOnFileMove.enabled": "never",
   "typescript.updateImportsOnFileMove.enabled": "never",
 
-  "tslint.autoFixOnSave": true
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.tslint": true
-  // },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  }
 }

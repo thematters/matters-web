@@ -1,0 +1,33 @@
+img {
+  border-radius: 50%;
+}
+
+/* 20px */
+.xsmall {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* 30px */
+.small {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+/* 40px */
+.default {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* 70px */
+.large {
+  width: 4.375rem;
+  height: 4.375rem;
+}
+
+/* 140px */
+.xlarge {
+  width: 8.75rem;
+  height: 8.75rem;
+}

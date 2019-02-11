@@ -1,3 +1,7 @@
+import classNames from 'classnames'
+
+import styles from './styles.css'
+
 type IconSizes = 'small' | 'default' | 'large'
 
 interface IconProps {
@@ -5,12 +9,6 @@ interface IconProps {
   id: string
   viewBox: string
   [key: string]: any
-}
-
-const SizeMap: { [key in IconSizes]: { width: string; height: string } } = {
-  small: { width: '1rem', height: '1rem' },
-  default: { width: '1.5rem', height: '1.5rem' },
-  large: { width: '2rem', height: '2rem' }
 }
 
 /**
@@ -30,15 +28,26 @@ export const Icon: React.SFC<IconProps> = ({
   size = 'default',
   id,
   viewBox,
+  className,
   ...restProps
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    viewBox={viewBox}
-    {...SizeMap[size]}
-    {...restProps}
-  >
-    <use xlinkHref={`#${id}`} />
-  </svg>
-)
+}) => {
+  const iconClass = classNames({
+    [size]: true,
+    [className]: !!className
+  })
+
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        viewBox={viewBox}
+        className={iconClass}
+        {...restProps}
+      >
+        <use xlinkHref={`#${id}`} />
+      </svg>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
