@@ -86,3 +86,7 @@ code --install-extension wix.vscode-import-cost
 code --install-extension oderwat.indent-rainbow
 code --install-extension naumovs.color-highlight
 ```
+
+## Troubleshooting
+
+1. If `styled-jsx` is installed in both `next` and our own `package.json`, the built-in `styled-jsx` SSR of Next.js will fail. See [#533](https://github.com/zeit/styled-jsx/issues/533).
