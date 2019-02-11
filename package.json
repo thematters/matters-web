@@ -48,6 +48,7 @@
     "next-optimized-images": "^2.3.3",
     "next-size": "^2.0.1",
     "nodemon": "^1.18.10",
+    "postcss-color-function": "^4.0.1",
     "postcss-conditionals": "^2.1.0",
     "postcss-each": "^0.10.0",
     "postcss-preset-env": "^6.5.0",
@@ -64,7 +65,9 @@
   "nodemonConfig": {
     "watch": [
       "server.ts",
-      "common/enums.ts"
+      "common/enums.ts",
+      "postcss.config.js",
+      "next.config.js"
     ],
     "env": {
       "NODE_ENV": "development",

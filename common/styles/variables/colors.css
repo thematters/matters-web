@@ -16,4 +16,8 @@
   --color-white: #ffffff;
 
   --color-red: #c85c41;
+
+  /* hover */
+  --color-matters-gold-hover: color(var(--color-matters-gold) shade(5%));
+  --color-matters-green-hover: color(var(--color-matters-green) shade(5%));
 }

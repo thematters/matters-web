@@ -12,6 +12,7 @@ module.exports = {
         './common/styles/variables/spacing.css',
         './common/styles/variables/typography.css'
       ]
-    })
+    }),
+    require('postcss-color-function')
   ]
 }
