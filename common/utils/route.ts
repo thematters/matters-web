@@ -12,7 +12,7 @@ type ToPathArgs =
       id: string
     }
 
-export const toPath = (args: ToPathArgs) => {
+export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
   switch (args.page) {
     case 'articleDetail':
       return {

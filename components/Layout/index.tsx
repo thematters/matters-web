@@ -1,19 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 
 import { GlobalHeader, Placeholder } from '~/components'
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
 import styles from './styles.css'
-
-const TEST_ARTICLE_DETAIL_PATHS = toPath({
-  page: 'articleDetail',
-  userName: 'matty',
-  slug: '2019-10-20',
-  mediaHash: 'some-mediaHash'
-})
-console.log(TEST_ARTICLE_DETAIL_PATHS)
 
 export const Layout: React.SFC = ({ children }) => (
   <>
@@ -50,16 +39,6 @@ export const Layout: React.SFC = ({ children }) => (
 
     <div style={{ textAlign: 'center' }}>
       <div>{children}</div>
-      <Link href={PATHS.HOMEPAGE.fs} as={PATHS.HOMEPAGE.url}>
-        <a>Back</a>
-      </Link>{' '}
-      /{' '}
-      <Link
-        href={TEST_ARTICLE_DETAIL_PATHS.fs}
-        as={TEST_ARTICLE_DETAIL_PATHS.url}
-      >
-        <a>Goto ArticleDetail</a>
-      </Link>
     </div>
 
     <main className="l-row">
