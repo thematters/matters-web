@@ -4,7 +4,6 @@ import gridsStyles from '~/common/styles/layouts/grids.css'
 
 export const GlobalStyles = () => (
   <>
-    {/* styles */}
     <style jsx global>
       {resetStyles}
     </style>

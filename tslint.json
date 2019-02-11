@@ -6,6 +6,7 @@
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
     "no-console": false,
-    "interface-name": false
+    "interface-name": false,
+    "no-object-literal-type-assertion": false
   }
 }

@@ -37,6 +37,8 @@ export const Layout: React.SFC = ({ children }) => (
 
     <GlobalHeader />
 
+    {children}
+
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
         <Placeholder.MattersToday />
@@ -45,9 +47,6 @@ export const Layout: React.SFC = ({ children }) => (
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Placeholder.Sidebar />
       </aside>
-
-      {/* {children} */}
-
       <style jsx>{styles}</style>
     </main>
   </>

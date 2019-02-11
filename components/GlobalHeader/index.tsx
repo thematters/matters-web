@@ -8,7 +8,7 @@ export const GlobalHeader = () => (
   <header>
     <div className="l-row">
       <div className="container">
-        <section className="left">
+        <section>
           <Link href="/" as="/">
             <a>
               <IconLogo height="20px" />
@@ -16,7 +16,7 @@ export const GlobalHeader = () => (
           </Link>
         </section>
 
-        <section className="right" />
+        <section />
       </div>
     </div>
 
