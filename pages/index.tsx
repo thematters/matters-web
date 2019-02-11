@@ -1,6 +1,29 @@
+import gql from 'graphql-tag'
 import Link from 'next/link'
+import { Query } from 'react-apollo'
 
 import { toPath } from '~/common/utils'
+
+const HOME_FEED = gql`
+  query HomeFeed {
+    viewer {
+      recommendation {
+        hottest(input: { first: 10 }) {
+          edges {
+            node {
+              title
+              author {
+                userName
+                avatar
+              }
+              summary
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 const TEST_ARTICLE_DETAIL_PATHS = toPath({
   page: 'articleDetail',
@@ -18,5 +41,11 @@ export default () => (
     >
       <a>Goto: 《佳禾: 繁體中文電子書短期內有機會出現 game changer 嗎？》</a>
     </Link>
+    <Query query={HOME_FEED}>
+      {({ data }) => {
+        console.log(data)
+        return <div />
+      }}
+    </Query>
   </div>
 )
