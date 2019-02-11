@@ -7,11 +7,11 @@ import Document, {
 import React from 'react'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
-interface IMattersDocumentProps {
+interface MattersDocumentProps {
   spriteContent: string
 }
 
-class MattersDocument extends Document<IMattersDocumentProps> {
+class MattersDocument extends Document<MattersDocumentProps> {
   public static async getInitialProps(ctx: NextDocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     const spriteContent = sprite.stringify()
