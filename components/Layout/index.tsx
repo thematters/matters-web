@@ -37,7 +37,7 @@ export const Layout: React.SFC = ({ children }) => (
 
     <GlobalHeader />
 
-    {children}
+    <p style={{ textAlign: 'center' }}>{children}</p>
 
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
