@@ -67,7 +67,8 @@
       "common/enums.ts"
     ],
     "env": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
+      "BABEL_DISABLE_CACHE": 1
     },
     "exec": "npm run build:server && node build/production-server/server.js"
   },
