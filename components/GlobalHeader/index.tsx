@@ -11,7 +11,7 @@ const Logo = () => (
     <a>
       <Icon
         id={ICON_LOGO.id}
-        style={{ width: '97px', height: '20px' }}
+        style={{ width: 97, height: 20 }}
         viewBox={ICON_LOGO.viewBox}
       />
     </a>
