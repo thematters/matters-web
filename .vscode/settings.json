@@ -1,0 +1,26 @@
+{
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+
+  "files.associations": {
+    "*.css": "postcss"
+  },
+
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  },
+
+  "prettier.singleQuote": true,
+  "prettier.requireConfig": true,
+
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+
+  "tslint.autoFixOnSave": true
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.tslint": true
+  // },
+}

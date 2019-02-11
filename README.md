@@ -7,24 +7,6 @@
 
 `npm run build && npm run start`
 
-## Naming Conventions
-
-### React Component/Page
-
-foldername: `PascalCase`
-filename: `camelCase`
-
-```tree
-├── pages
-│   └── ArticleDetail
-│       ├── styles.css
-│       └── index.tsx
-└── components
-    └── Layout
-        ├── styles.css
-        └── index.tsx
-```
-
 ## Routing
 
 We customized routes with Express in `server.ts` and disabled [fs routing](https://github.com/zeit/next.js#disabling-file-system-routing).
@@ -48,3 +30,55 @@ For instances:
 ```
 
 See [next.js docs](https://github.com/zeit/next.js#routing) for more details.
+
+## Conventions
+
+### Naming
+
+#### React Component/Page
+
+foldername: `PascalCase`
+
+filename: `camelCase`
+
+```tree
+├── pages
+│   └── ArticleDetail
+│       ├── styles.css
+│       └── index.tsx
+└── components
+    └── Layout
+        ├── styles.css
+        └── index.tsx
+```
+
+## Tools
+
+### VS Code
+
+#### Settings
+
+See `.vscode/settings.json`
+
+#### Extensions
+
+##### Recommdation
+
+```bash
+code --install-extension blanu.vscode-styled-jsx
+code --install-extension EditorConfig.EditorConfig
+code --install-extension esbenp.prettier-vscode
+code --install-extension mikestead.dotenv
+code --install-extension ms-vscode.vscode-typescript-tslint-plugin
+code --install-extension Prisma.vscode-graphql
+code --install-extension ricard.postcss
+```
+
+##### Optional
+
+```bash
+code --install-extension cssho.vscode-svgviewer
+code --install-extension wix.vscode-import-cost
+code --install-extension oderwat.indent-rainbow
+code --install-extension naumovs.color-highlight
+```
