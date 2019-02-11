@@ -97,7 +97,7 @@ export const ROUTES: Array<{ key: ROUTE_KEY; fs: string; url: string }> = [
   {
     key: 'ARTICLE_DETAIL',
     fs: '/ArticleDetail',
-    url: '/@:username/:slug-:mediaHash'
+    url: '/@:username/*-:mediaHash'
   },
 
   // Me

@@ -21,15 +21,10 @@ app
     const server = express()
 
     ROUTES.forEach(({ fs, url }) => {
-      server.get(url, (req, res) => app.render(req, res, fs, req.params))
+      server.get(url, (req, res) =>
+        app.render(req, res, fs, { ...req.query, ...req.params })
+      )
     })
-
-    // // article detail
-    // server.get('/@:username/:article', (req, res) => {
-    //   const { article } = req.params
-    //   const id = article.split('-').pop() // TODO: mediaHash
-    //   return app.render(req, res, PATH.ARTICLE_DETAIL.fs, { id })
-    // })
 
     // fallback
     server.get('*', (req, res) => handle(req, res))
