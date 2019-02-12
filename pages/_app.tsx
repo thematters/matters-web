@@ -3,7 +3,7 @@ import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 
-import { GlobalStyles, Layout } from '~/components'
+import { GlobalStyles, LanguageProvider, Layout } from '~/components'
 import withApollo from '../common/utils/withApollo'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
@@ -23,12 +23,14 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <Container>
-        <ApolloProvider client={apollo}>
-          <GlobalStyles />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ApolloProvider>
+        <LanguageProvider>
+          <ApolloProvider client={apollo}>
+            <GlobalStyles />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ApolloProvider>
+        </LanguageProvider>
       </Container>
     )
   }

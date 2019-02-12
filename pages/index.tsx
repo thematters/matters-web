@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Query } from 'react-apollo'
 
 import { toPath } from '~/common/utils'
+import { LanguageConsumer } from '~/components'
 
 const HOME_FEED = gql`
   query HomeFeed {

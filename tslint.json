@@ -1,12 +1,13 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "no-implicit-dependencies": [true, ["~"]],
+    "no-implicit-dependencies": [false, ["~"]],
     "no-submodule-imports": [false],
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
     "no-console": false,
     "interface-name": false,
-    "no-object-literal-type-assertion": false
+    "no-object-literal-type-assertion": false,
+    "jsx-no-lambda": false
   }
 }
