@@ -164,7 +164,7 @@ export const Button: React.SFC<ButtonProps> = ({
   if (nodeType === 'anchor') {
     return (
       <>
-        <a href={href} className={buttonClasses} type={htmlType} {...restProps}>
+        <a href={href} className={buttonClasses} {...restProps}>
           {icon}
           {children && <span>{children}</span>}
         </a>

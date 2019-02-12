@@ -69,6 +69,7 @@
     "watch": [
       "server.ts",
       "common/enums.ts",
+      "common/styles/variables/*.css",
       "postcss.config.js",
       "next.config.js"
     ],
