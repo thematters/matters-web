@@ -8,6 +8,18 @@ import { emitter } from '~/common/services/event'
 import { Toast } from './Toast'
 import styles from './styles.css'
 
+/**
+ * ToastHolder is a container for managing Toast component.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *
+ * // Place it ontop page.
+ * <ToastHolder classes={['some', 'classes']} />
+ *
+ * ```
+ */
 const prefix: string = 'toast-'
 
 type Props = {
