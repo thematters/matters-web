@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 type TextIconSize = 'xs' | 'sm' | 'md' | 'lg'
-type TextIconSpacing = '0' | 'xxxtight' | 'xxtight' | 'xtight'
+type TextIconSpacing = '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
 type TextIconColor = 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
 type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
@@ -33,7 +33,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   text,
   icon,
 
-  color = 'black',
+  color,
   size = 'sm',
   spacing = 'xxtight',
   weight,
@@ -41,7 +41,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   className
 }) => {
   const textIconClasses = classNames({
-    [color]: !!color,
+    [color || '']: !!color,
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,

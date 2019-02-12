@@ -1,5 +1,6 @@
 span {
   & :global(*) {
+    display: inline-block;
     vertical-align: middle;
   }
 }
@@ -52,6 +53,16 @@ span {
 .spacing-xxtight {
   & :global(* + *) {
     padding-left: var(--spacing-xx-tight);
+  }
+}
+.spacing-xtight {
+  & :global(* + *) {
+    padding-left: var(--spacing-x-tight);
+  }
+}
+.spacing-tight {
+  & :global(* + *) {
+    padding-left: var(--spacing-tight);
   }
 }
 
