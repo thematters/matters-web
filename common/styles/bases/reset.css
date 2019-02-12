@@ -95,12 +95,25 @@ button {
 }
 
 button {
+  display: inline-block;
   width: auto;
   background: transparent;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
 
+  & > * {
+    vertical-align: middle;
+  }
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
+  }
+  &:disabled {
+    cursor: default;
+    cursor: not-allowed;
   }
 }
 

@@ -1,0 +1,35 @@
+.container {
+  padding: 0;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+
+  & > :global(*) {
+    vertical-align: middle;
+  }
+
+  @media (--sm-up) {
+    padding: var(--spacing-xx-tight) var(--spacing-x-tight)
+      var(--spacing-xx-tight) var(--spacing-xx-tight);
+
+    &:hover {
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+.info {
+  display: none;
+
+  max-width: 7.5rem;
+  margin-left: var(--spacing-x-tight);
+
+  @media (--sm-up) {
+    display: inline-block;
+  }
+
+  & :global(> *) {
+    display: block;
+    font-size: var(--font-size-sm);
+    line-height: 1rem;
+  }
+}

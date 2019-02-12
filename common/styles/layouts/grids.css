@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-@lost gutter 3rem; /* 48px */
+@lost gutter 48px; /* 3rem */
 @lost flexbox flex;
 
 /*

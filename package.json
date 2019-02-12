@@ -50,6 +50,7 @@
     "next-optimized-images": "^2.3.3",
     "next-size": "^2.0.1",
     "nodemon": "^1.18.10",
+    "postcss-calc": "^7.0.1",
     "postcss-color-function": "^4.0.1",
     "postcss-conditionals": "^2.1.0",
     "postcss-each": "^0.10.0",
