@@ -3,8 +3,8 @@ import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 
+import withApollo from '~/common/utils/withApollo'
 import { GlobalStyles, LanguageProvider, Layout } from '~/components'
-import withApollo from '../common/utils/withApollo'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   // public static async getInitialProps({ Component, ctx }: NextAppContext) {
