@@ -11,7 +11,7 @@ export default () => (
     <a className="container">
       <Avatar size="small" />
       <section className="info u-text-truncate">
-        <span>Matty</span>
+        <span className="username">Matty</span>
         <TextIcon
           icon={
             <Icon

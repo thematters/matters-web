@@ -27,9 +27,12 @@
     display: inline-block;
   }
 
+  & .username {
+    font-size: var(--font-size-sm);
+  }
+
   & :global(> *) {
     display: block;
-    font-size: var(--font-size-sm);
     line-height: 1rem;
   }
 }
