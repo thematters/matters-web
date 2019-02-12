@@ -14,19 +14,19 @@ export const LanguageConsumer = LanguageContext.Consumer
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState(defaultLang)
 
-  useEffect(() => {
-    // retrive from local store
-    // if (
-    //   !(typeof localStorage === 'undefined') &&
-    //   localStorage.getItem('profile')
-    // ) {
-    //   const profile = JSON.parse(localStorage.getItem('profile'))
-    //   const langLocal = profile && profile.settings && profile.settings.language
-    //   if (langLocal) {
-    //     setLang(langLocal)
-    //   }
-    // }
-  })
+  // useEffect(() => {
+  //   // retrive from local store
+  //   if (
+  //     !(typeof localStorage === 'undefined') &&
+  //     localStorage.getItem('profile')
+  //   ) {
+  //     const profile = JSON.parse(localStorage.getItem('profile'))
+  //     const langLocal = profile && profile.settings && profile.settings.language
+  //     if (langLocal) {
+  //       setLang(langLocal)
+  //     }
+  //   }
+  // })
 
   return (
     <LanguageContext.Provider
