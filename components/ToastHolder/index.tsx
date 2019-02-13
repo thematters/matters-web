@@ -1,15 +1,15 @@
 // External modules
 import classNames from 'classnames'
 import { filter } from 'lodash'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 // Internal modules
-import { emitter } from '~/common/services/event'
+import { useEventListener } from '~/components'
 import styles from './styles.css'
 import { Toast } from './Toast'
 
 /**
- * ToastHolder is a container for managing Toast component. Use emitter to create
+ * ToastHolder is a container for managing Toast component. Use event to create
  * and remove a Toast component.
  *
  * Usage:
@@ -27,7 +27,7 @@ interface Props {
   classes?: string[]
 }
 
-export const ToastHolder: React.FC<Props> = ({
+export const ToastHolder: FC<Props> = ({
   classes = ['l-col-4', 'l-col-md-5', 'l-col-lg-8']
 }) => {
   const [toasts, setToasts] = useState<any[]>([])
@@ -49,14 +49,9 @@ export const ToastHolder: React.FC<Props> = ({
     setToasts(prev => filter(prev, toast => toast.id !== id))
   }
 
-  useEffect(() => {
-    emitter.on('addToast', add)
-    emitter.on('removeToast', remove)
-    return () => {
-      emitter.off('addToast', add)
-      emitter.off('removeToast', remove)
-    }
-  }, [toasts])
+  useEventListener('addToast', add)
+
+  useEventListener('removeToast', remove)
 
   return (
     <>
