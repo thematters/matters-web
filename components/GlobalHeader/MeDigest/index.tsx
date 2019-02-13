@@ -1,15 +1,17 @@
+import gql from 'graphql-tag'
 import Link from 'next/link'
-
-import { Avatar, Icon, TextIcon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
+import { Avatar } from '../../Avatar'
+import { Icon } from '../../Icon'
+import { TextIcon } from '../../TextIcon'
 import styles from './styles.css'
 
-export default () => (
+const MeDigest = ({ user }: { user: any }) => (
   <Link href={PATHS.ME_ARTICLES.fs} as={PATHS.ME_ARTICLES.url}>
     <a className="container">
-      <Avatar size="small" />
+      <Avatar size="small" user={user} />
       <section className="info u-text-truncate">
         <span className="username">Matty</span>
         <TextIcon
@@ -31,3 +33,14 @@ export default () => (
     </a>
   </Link>
 )
+
+MeDigest.fragments = {
+  user: gql`
+    fragment MeDigestUser on User {
+      ...AvatarUser
+    }
+    ${Avatar.fragments.user}
+  `
+}
+
+export default MeDigest

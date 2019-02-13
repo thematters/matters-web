@@ -1,7 +1,7 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 
 import { AnalyticsListener } from '../Analytics'
-
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -12,7 +12,7 @@ import WriteButton from './WriteButton'
 
 import styles from './styles.css'
 
-export const GlobalHeader = () => {
+export const GlobalHeader = ({ user }: { user: any }) => {
   const isAuthed = true
   const rightClasses = classNames({
     right: true,
@@ -21,7 +21,7 @@ export const GlobalHeader = () => {
 
   return (
     <header>
-      <AnalyticsListener viewer={null} />
+      <AnalyticsListener user={user} />
       <div className="l-row">
         <div className="container">
           <section className="left">
@@ -33,7 +33,7 @@ export const GlobalHeader = () => {
               <>
                 <SearchButton />
                 <NotificationButton />
-                <MeDigest />
+                <MeDigest user={user} />
                 <WriteButton />
               </>
             ) : (
@@ -49,4 +49,15 @@ export const GlobalHeader = () => {
       <style jsx>{styles}</style>
     </header>
   )
+}
+
+GlobalHeader.fragments = {
+  user: gql`
+    fragment GlobalHeaderUser on User {
+      ...MeDigestUser
+      ...AnalyticsUser
+    }
+    ${MeDigest.fragments.user}
+    ${AnalyticsListener.fragments.user}
+  `
 }

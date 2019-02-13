@@ -1,9 +1,9 @@
 // external
-import React from 'react'
+import gql from 'graphql-tag'
 // internal
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 // local
-import { EventListener } from '../EventListener'
+import { useEventListener } from '../Hook'
 
 declare global {
   interface Window {
@@ -11,33 +11,42 @@ declare global {
   }
 }
 
-export const AnalyticsListener = ({ viewer }: { viewer: any }) => (
-  <EventListener event={ANALYTICS}>
-    {evt => {
-      // get the information out of the tracked event
-      const { type, args } = evt.detail
+export const AnalyticsListener = ({ user }: { user: any }) => {
+  useEventListener(ANALYTICS, (evt: CustomEvent) => {
+    // get the information out of the tracked event
+    const { type, args } = evt.detail
 
-      // if we have an event of type track or page
-      if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
-        window.analytics[type](...args)
+    // if we have an event of type track or page
+    if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
+      window.analytics[type](...args)
+    }
+
+    // if we have an event of type identify
+    if (type === ANALYTIC_TYPES.IDENTIFY) {
+      // logged in
+      if (user && user.id) {
+        const { info, id } = user
+        window.analytics.identify(id, {
+          email: info.email,
+          ...args
+        })
+      } else {
+        // visitor
+        window.analytics.identify(args)
       }
+    }
+  })
 
-      // if we have an event of type identify
-      if (type === ANALYTIC_TYPES.IDENTIFY) {
-        // logged in
-        if (viewer && viewer.id) {
-          const { info, id } = viewer
-          window.analytics.identify(id, {
-            email: info.email,
-            ...args
-          })
-        } else {
-          // visitor
-          window.analytics.identify(args)
-        }
+  return null
+}
+
+AnalyticsListener.fragments = {
+  user: gql`
+    fragment AnalyticsUser on User {
+      id
+      info {
+        email
       }
-
-      return null
-    }}
-  </EventListener>
-)
+    }
+  `
+}
