@@ -27,9 +27,7 @@ interface Props {
   classes?: string[]
 }
 
-export const MessageHolder: FC<Props> = ({
-  classes = []
-}) => {
+export const MessageHolder: FC<Props> = ({ classes = [] }) => {
   const [messages, setMessages] = useState<any[]>([])
 
   const mainClass = classNames(...classes)
@@ -66,4 +64,3 @@ export const MessageHolder: FC<Props> = ({
     </>
   )
 }
-

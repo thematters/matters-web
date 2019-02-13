@@ -44,7 +44,7 @@ export const Message: SFC<Props> = ({
   })
 
   const contentClass = classNames({
-    content: true,
+    content: true
   })
 
   const removeMessage = () => {
@@ -60,9 +60,7 @@ export const Message: SFC<Props> = ({
   return (
     <>
       <div className={mainClass}>
-        <div>
-          {content && <div className={contentClass}>{content}</div>}
-        </div>
+        <div>{content && <div className={contentClass}>{content}</div>}</div>
       </div>
       <style jsx>{styles}</style>
     </>
