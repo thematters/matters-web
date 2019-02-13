@@ -2,17 +2,15 @@ import React, { ReactNode, useEffect, useState } from 'react'
 
 const defaultLang = 'zh_hant'
 
-// set a default for ts typing
-const LanguageContext = React.createContext({
-  lang: defaultLang,
-  /* tslint:disable */
-  setLang: (lang: string) => {}
+const LanguageContext = React.createContext({} as {
+  lang: Language
+  setLang: (lang: Language) => void
 })
 
 export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState(defaultLang)
+  const [lang, setLang] = useState<Language>(defaultLang)
 
   // useEffect(() => {
   //   // retrive from local store
