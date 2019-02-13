@@ -14,6 +14,8 @@ interface TranslationsFn<D> {
   en?: TranslateFn<D>
 }
 
+type Translations = TranslationsStr | TranslationsFn
+
 type TranslateArgs<D> =
   | {
       translations: TranslationsStr
