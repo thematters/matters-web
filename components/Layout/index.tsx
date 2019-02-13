@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { GlobalHeader, Placeholder } from '~/components'
+import { GlobalHeader, Placeholder, ToastHolder } from '~/components'
 
 import styles from './styles.css'
 
@@ -36,6 +36,7 @@ export const Layout: React.SFC = ({ children }) => (
     </Head>
 
     <GlobalHeader />
+    <ToastHolder />
 
     <div style={{ textAlign: 'center' }}>
       <div>{children}</div>

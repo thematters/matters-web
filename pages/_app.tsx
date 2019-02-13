@@ -4,7 +4,12 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 
 import withApollo from '~/common/utils/withApollo'
-import { GlobalStyles, LanguageProvider, Layout } from '~/components'
+import {
+  AnalyticsProvider,
+  GlobalStyles,
+  LanguageProvider,
+  Layout
+} from '~/components'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   // public static async getInitialProps({ Component, ctx }: NextAppContext) {
@@ -23,14 +28,16 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <Container>
-        <LanguageProvider>
-          <ApolloProvider client={apollo}>
-            <GlobalStyles />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ApolloProvider>
-        </LanguageProvider>
+        <AnalyticsProvider>
+          <LanguageProvider>
+            <ApolloProvider client={apollo}>
+              <GlobalStyles />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ApolloProvider>
+          </LanguageProvider>
+        </AnalyticsProvider>
       </Container>
     )
   }
