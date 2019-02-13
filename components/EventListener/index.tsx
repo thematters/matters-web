@@ -1,15 +1,11 @@
 import { SFC, useEffect } from 'react'
 
-interface Event {
-  detail: { type: string; [key: string]: any }
-}
-
 export const EventListener: SFC<{
   event: string
-  children: SFC<Event>
+  children: SFC<CustomEvent>
   target?: any
 }> = ({ children, event, target = window }) => {
-  const onEvent = (evt: Event) => children(evt)
+  const onEvent = (evt: CustomEvent) => children(evt)
 
   useEffect(() => {
     target.addEventListener(event, onEvent)

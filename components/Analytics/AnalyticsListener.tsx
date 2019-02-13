@@ -1,53 +1,43 @@
-// // external imports
-// // local imports
-// import { EventListener } from 'client/components'
-// import React from 'react'
-// import { createFragmentContainer, graphql } from 'react-relay'
-// import { DS_ANALYTICS, Types } from './enums'
+// external
+import React from 'react'
+// internal
+import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
+// local
+import { EventListener } from '../EventListener'
 
-// export const AnalyticsListener = ({ root }) => (
-//   <EventListener event={DS_ANALYTICS}>
-//     {evt => {
-//       // get relevant props
-//       const { instance, viewer } = root
-//       // if the instance allows analytics
-//       if (instance.analytics.enabled) {
-//         // get the information out of the tracked event
-//         const { type, args } = evt.detail
+declare global {
+  interface Window {
+    analytics: SegmentAnalytics.AnalyticsJS & { [key: string]: any }
+  }
+}
 
-//         // if we have an event of type track or page
-//         if (type === Types.TRACK || type === Types.PAGE) {
-//           window.analytics[type](...args)
-//         }
+export const AnalyticsListener = ({ viewer }: { viewer: any }) => (
+  <EventListener event={ANALYTICS}>
+    {evt => {
+      // get the information out of the tracked event
+      const { type, args } = evt.detail
 
-//         // if we have an event of type identify
-//         if (type === Types.IDENTIFY && viewer) {
-//           const { email } = viewer
-//           const { name: customer } = instance
-//           const id = `${email}:${customer}`
-//           window.analytics.identify(id, {
-//             email,
-//             customer
-//           })
-//         }
-//       }
-//     }}
-//   </EventListener>
-// )
+      // if we have an event of type track or page
+      if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
+        window.analytics[type](...args)
+      }
 
-// export default createFragmentContainer(
-//   AnalyticsListener,
-//   graphql`
-//     fragment AnalyticsListener_root on Query {
-//       viewer {
-//         email
-//       }
-//       instance {
-//         name
-//         analytics: feature(name: "ANALYTICS") {
-//           enabled
-//         }
-//       }
-//     }
-//   `
-// )
+      // if we have an event of type identify
+      if (type === ANALYTIC_TYPES.IDENTIFY) {
+        // logged in
+        if (viewer && viewer.id) {
+          const { info, id } = viewer
+          window.analytics.identify(id, {
+            email: info.email,
+            ...args
+          })
+        } else {
+          // visitor
+          window.analytics.identify(args)
+        }
+      }
+
+      return null
+    }}
+  </EventListener>
+)

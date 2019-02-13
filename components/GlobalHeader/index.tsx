@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { AnalyticsListener } from '../Analytics'
+
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -19,6 +21,7 @@ export const GlobalHeader = () => {
 
   return (
     <header>
+      <AnalyticsListener viewer={null} />
       <div className="l-row">
         <div className="container">
           <section className="left">
