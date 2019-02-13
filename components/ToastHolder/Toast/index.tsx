@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
 // Internal modules
-import { emitter } from '~/common/services/event'
 import { Icon } from '~/components'
 import IconCloseWhite from '~/static/icons/close-white.svg'
 import IconClose from '~/static/icons/close.svg'
@@ -11,21 +10,22 @@ import styles from './styles.css'
 
 /**
  * Toast is a component for presenting pop-up message. Don't manually
- * mount component, use emitter instead.
+ * mount component, use event instead.
  *
  * Usage:
  *
  * // To create a toast
- * import { emitter } from '~/common/services/event'
- *
- * emitter.emit('addToast', {
- *   color: 'green',
- *   header: '',
- *   content: '',
- *   closeButton: true,
- *   fixed: false,
- *   duration: 3000
- * })
+ * window.dispatchEvent(new CustomEvent(
+ *   'addToast',
+ *   {
+ *     color: 'green',
+ *     header: 'header description',
+ *     content: 'content description',
+ *     closeButton: true,
+ *     fixed: false,
+ *     duration: 3000
+ *   }
+ * ))
  *
  */
 const second = 1000
@@ -48,7 +48,7 @@ export const Toast: React.SFC<Props> = ({
   header,
   content,
   closeButton,
-  button,
+  customButton,
   fixed,
   duration,
   remove
@@ -68,14 +68,12 @@ export const Toast: React.SFC<Props> = ({
   const iconCloseStyle = { cursor: 'pointer' }
 
   const removeToast = () => {
-    emitter.emit('removeToast', { id })
+    window.dispatchEvent(new CustomEvent('removeToast', { detail: { id } }))
   }
 
   useEffect(() => {
     if (fixed !== true) {
-      setTimeout(() => {
-        removeToast()
-      }, duration || 6 * second)
+      setTimeout(removeToast, duration || 6 * second)
     }
   })
 

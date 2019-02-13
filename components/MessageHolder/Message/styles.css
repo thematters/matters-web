@@ -1,4 +1,4 @@
-.toast {
+.message {
   display: flex;
   justify-content: space-between;
 
@@ -9,36 +9,15 @@
   padding: 1rem;
 }
 
-.green {
-  color: var(--color-white);
-  background: var(--color-matters-green);
-}
-
-.grey {
-  color: var(--color-white);
-  background: var(--color-grey-dark);
-}
-
-.red {
-  color: var(--color-white);
-  background: var(--color-red);
-}
-
 .white {
   color: var(--color-black);
   background: var(--color-white)
 }
 
-.header {
-  font-size: var(--font-size-md);
-  line-height: 1.5;
-}
-
 .content {
+  display: flex;
+  justify-content: center;
+
   font-size: var(--font-size-sm);
   line-height: 1.8;
-}
-
-.opaque {
-  opacity: 0.7;
 }
