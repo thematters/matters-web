@@ -50,7 +50,6 @@ type NativeButtonProps = {
 type SpanButtonProps = {
   nodeType: 'span'
   htmlType?: ButtonHTMLType
-  onClick?: React.MouseEventHandler<HTMLSpanElement>
 } & BaseButtonProps
 
 type ButtonProps =

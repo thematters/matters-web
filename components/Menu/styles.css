@@ -1,0 +1,26 @@
+.menu {
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+}
+
+.spacing-0 {
+  padding: 0;
+}
+.spacing-xxxtight {
+  padding: var(--spacing-xxx-tight) 0;
+}
+.spacing-xxtight {
+  padding: var(--spacing-xx-tight) 0;
+}
+
+.shadow-light {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+}
+.shadow-default {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+}
+.shadow-dark {
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.12),
+    0 4px 12px 0 rgba(0, 0, 0, 0.05), 0 1;
+}
