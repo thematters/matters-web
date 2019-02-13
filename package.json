@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "codebase of Matters' website",
   "author": "",
+  "engines": {
+    "node": ">=10.14.1",
+    "npm": ">=6.5.0"
+  },
   "license": "ISC",
   "scripts": {
     "dev": "nodemon",
