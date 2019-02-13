@@ -1,0 +1,84 @@
+span {
+  & :global(*) {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+/* size */
+.size-xs {
+  font-size: var(--font-size-xs);
+}
+.size-sm {
+  font-size: var(--font-size-sm);
+}
+.size-md {
+  font-size: var(--font-size-md);
+}
+.size-lg {
+  font-size: var(--font-size-lg);
+}
+
+/* color */
+.black {
+  color: var(--color-black);
+}
+.green {
+  color: var(--color-matters-green);
+}
+.gold {
+  color: var(--color-matters-gold);
+}
+.grey {
+  color: var(--color-grey);
+}
+.grey-dark {
+  color: var(--color-grey-dark);
+}
+.white {
+  color: var(--color-white);
+}
+
+/* spacing */
+.spacing-0 {
+  & :global(* + *) {
+    padding-left: 0;
+  }
+}
+.spacing-xxxtight {
+  & :global(* + *) {
+    padding-left: var(--spacing-xxx-tight);
+  }
+}
+.spacing-xxtight {
+  & :global(* + *) {
+    padding-left: var(--spacing-xx-tight);
+  }
+}
+.spacing-xtight {
+  & :global(* + *) {
+    padding-left: var(--spacing-x-tight);
+  }
+}
+.spacing-tight {
+  & :global(* + *) {
+    padding-left: var(--spacing-tight);
+  }
+}
+
+/* weight */
+.weight-light {
+  font-weight: var(--font-weight-light);
+}
+.weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+.weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+.weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+.weight-bold {
+  font-weight: var(--font-weight-bold);
+}

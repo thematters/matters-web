@@ -1,0 +1,24 @@
+/* @styled-jsx=global */
+
+.u-link-color {
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
+.u-link-color-green {
+  color: var(--color-matters-green);
+
+  &:link,
+  &:visited {
+    color: var(--color-matters-green);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--color-matters-green-hover);
+  }
+}

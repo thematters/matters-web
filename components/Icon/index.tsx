@@ -2,25 +2,30 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type IconSizes = 'small' | 'default' | 'large'
+type IconSize = 'xsmall' | 'small' | 'default' | 'large'
 
-type IconProps =
-  | {
-      size?: IconSizes
-      id: string
-      viewBox: string
-      [key: string]: any
-    }
-  | {
-      size?: IconSizes
-      src: string
-      [key: string]: any
-    }
+interface IconBaseProps {
+  size?: IconSize
+  [key: string]: any
+}
+
+type SVGIconProps = {
+  id: string
+  viewBox: string
+} & IconBaseProps
+
+type ImgIconProps = {
+  src: string
+} & IconBaseProps
+
+type IconProps = SVGIconProps | ImgIconProps
 
 /**
+ * `<Icon>` component that render as `<svg>` or `<img>`
+ *
  * Usage:
  *
- * ```jsx
+ * ```tsx
  * import ICON_LOGO from '~/static/icons/logo.svg?sprite'
  *
  * // with "size"
@@ -32,7 +37,6 @@ type IconProps =
  * // with "src" (render as <img>)
  * import ICON_LOGO from '~/static/icons/logo.svg'
  * <Icon src={ICON_LOGO} style={{ width: 97, height: 20 }} />
- *
  * ```
  */
 
@@ -44,7 +48,7 @@ export const Icon: React.SFC<IconProps> = ({
   className,
   ...restProps
 }) => {
-  const iconClass = classNames({
+  const iconClasses = classNames({
     [size]: true,
     [className]: !!className
   })
@@ -55,7 +59,7 @@ export const Icon: React.SFC<IconProps> = ({
       <>
         <img
           src={src}
-          className={iconClass}
+          className={iconClasses}
           aria-hidden="true"
           {...restProps}
         />
@@ -69,7 +73,7 @@ export const Icon: React.SFC<IconProps> = ({
     <>
       <svg
         viewBox={viewBox}
-        className={iconClass}
+        className={iconClasses}
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         {...restProps}

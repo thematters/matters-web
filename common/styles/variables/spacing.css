@@ -1,6 +1,8 @@
 /* @styled-jsx=global */
 
 :root {
+  --spacing-xxx-tight: 0.125rem;
+  --spacing-xx-tight: 0.25rem;
   --spacing-x-tight: 0.5rem;
   --spacing-tight: 1rem;
   --spacing-default: 1.5rem;

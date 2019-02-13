@@ -20,4 +20,5 @@
   /* hover */
   --color-matters-gold-hover: color(var(--color-matters-gold) shade(5%));
   --color-matters-green-hover: color(var(--color-matters-green) shade(5%));
+  --color-red-hover: color(var(--color-red) shade(5%));
 }

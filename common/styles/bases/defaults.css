@@ -9,7 +9,7 @@ html {
   line-height: var(--line-height-base);
   -webkit-text-size-adjust: 100%;
 
-  background-color: var(--color-grey-lighter);
+  background-color: var(--color-white);
   word-wrap: break-word;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
@@ -54,4 +54,11 @@ a {
   &:focus {
     text-decoration: none;
   }
+}
+
+svg {
+  display: inline-block;
+  width: auto;
+  user-select: none;
+  fill: currentColor;
 }

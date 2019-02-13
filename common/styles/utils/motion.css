@@ -1,0 +1,10 @@
+/* @styled-jsx=global */
+
+.u-motion-icon-hover {
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    transform: scale(0.9);
+  }
+}
