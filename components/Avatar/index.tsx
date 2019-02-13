@@ -3,10 +3,10 @@ import classNames from 'classnames'
 import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
 import styles from './styles.css'
 
-type AvatarSizes = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge'
+type AvatarSize = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge'
 
 interface AvatarProps {
-  size?: AvatarSizes
+  size?: AvatarSize
   [key: string]: any
 }
 
@@ -16,14 +16,14 @@ export const Avatar: React.SFC<AvatarProps> = ({
   className,
   ...restProps
 }) => {
-  const avatarClass = classNames({
+  const avatarClasses = classNames({
     [size]: true,
     [className]: !!className
   })
 
   return (
     <>
-      <img src={src} className={avatarClass} {...restProps} />
+      <img src={src} className={avatarClasses} {...restProps} />
       <style jsx>{styles}</style>
     </>
   )

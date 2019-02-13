@@ -11,6 +11,7 @@ header {
   background: var(--color-white);
 
   box-sizing: content-box;
+  overflow: hidden;
 }
 
 .container {
@@ -20,4 +21,25 @@ header {
 
   width: 100%;
   height: 4rem;
+
+  box-sizing: border-box;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.right.me {
+  & > :global(*) {
+    display: inline-block;
+  }
+  & > :global(* + *) {
+    margin-left: var(--spacing-tight);
+
+    @media (--sm-up) {
+      margin-left: var(--spacing-loose);
+    }
+  }
 }

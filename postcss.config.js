@@ -14,6 +14,7 @@ module.exports = {
         './common/styles/variables/typography.css'
       ]
     }),
+    require('postcss-calc'),
     require('postcss-color-function')
   ]
 }

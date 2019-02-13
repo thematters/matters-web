@@ -1,37 +1,49 @@
-import Link from 'next/link'
+import classNames from 'classnames'
 
-import { Avatar, Icon } from '~/components'
+import LoginButton from './LoginButton'
+import Logo from './Logo'
+import MeDigest from './MeDigest'
+import NotificationButton from './NotificationButton'
+import SearchButton from './SearchButton'
+import SignUpButton from './SignUpButton'
+import WriteButton from './WriteButton'
 
-import { PATHS } from '~/common/enums'
-import ICON_LOGO from '~/static/icons/logo.svg?sprite'
 import styles from './styles.css'
 
-const Logo = () => (
-  <Link href={PATHS.HOMEPAGE.fs} as={PATHS.HOMEPAGE.url}>
-    <a>
-      <Icon
-        id={ICON_LOGO.id}
-        style={{ width: 97, height: 20 }}
-        viewBox={ICON_LOGO.viewBox}
-      />
-    </a>
-  </Link>
-)
+export const GlobalHeader = () => {
+  const isAuthed = true
+  const rightClasses = classNames({
+    right: true,
+    me: isAuthed
+  })
 
-export const GlobalHeader = () => (
-  <header>
-    <div className="l-row">
-      <div className="container">
-        <section>
-          <Logo />
-        </section>
+  return (
+    <header>
+      <div className="l-row">
+        <div className="container">
+          <section className="left">
+            <Logo />
+          </section>
 
-        <section>
-          <Avatar size="small" />
-        </section>
+          <section className={rightClasses}>
+            {isAuthed ? (
+              <>
+                <SearchButton />
+                <NotificationButton />
+                <MeDigest />
+                <WriteButton />
+              </>
+            ) : (
+              <>
+                <LoginButton />
+                <SignUpButton />
+              </>
+            )}
+          </section>
+        </div>
       </div>
-    </div>
 
-    <style jsx>{styles}</style>
-  </header>
-)
+      <style jsx>{styles}</style>
+    </header>
+  )
+}

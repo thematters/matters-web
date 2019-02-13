@@ -1,0 +1,24 @@
+.count {
+  color: var(--color-matters-green);
+
+  vertical-align: middle;
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-serif-tc);
+
+  &[lang='zh-hans'] {
+    font-family: var(--font-serif-sc);
+  }
+}
+
+.small {
+  & .count {
+    margin-left: var(--spacing-xx-tight);
+    font-size: var(--font-size-sm);
+  }
+}
+.default {
+  & .count {
+    margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-md);
+  }
+}
