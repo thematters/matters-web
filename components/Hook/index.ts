@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 export function useEventListener(event: string, action: any, element?: any) {
-
   useEffect(() => {
     const target = element || window
     if (!target) {
@@ -13,5 +12,4 @@ export function useEventListener(event: string, action: any, element?: any) {
       target.removeEventListener(event, eventAction)
     }
   })
-
 }
