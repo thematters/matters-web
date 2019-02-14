@@ -13,7 +13,6 @@ declare global {
 
 export const AnalyticsListener = ({ user }: { user: any }) => {
   useEventListener(ANALYTICS, (evt: CustomEvent) => {
-    console.log('heard')
     if (evt.detail) {
       // get the information out of the tracked event
       const { type, args } = evt.detail
