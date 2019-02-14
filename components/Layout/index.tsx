@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Router from 'next/router'
 
+import { analytics } from '~/common/utils'
+
 import { AnalyticsListener } from '../Analytics'
 import { GlobalHeader } from '../GlobalHeader'
 import { Placeholder } from '../Placeholder'
@@ -11,7 +13,7 @@ import styles from './styles.css'
 
 // Track client-side page views with Segment
 Router.events.on('routeChangeComplete', (url: string) => {
-  window.analytics.page(url)
+  analytics.trackPage(url)
 })
 
 const fragments = {

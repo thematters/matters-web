@@ -20,7 +20,7 @@ import { throttle } from 'lodash'
  *         />
  *     ))}
  * </InfiniteScroll>
- * ``·
+ * ```
  */
 
 interface Props {
@@ -65,24 +65,22 @@ export class InfiniteScroll extends React.Component<Props, {}> {
   }
 
   private scrollHandler: () => void
-  private resizeHandler: () => void
   private sentinel: HTMLDivElement | null
 
   constructor(props: Props) {
     super(props)
     this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle)
-    this.resizeHandler = throttle(this.checkWindowScroll, this.props.throttle)
     this.sentinel = null
   }
 
   public componentDidMount() {
     window.addEventListener('scroll', this.scrollHandler)
-    window.addEventListener('resize', this.resizeHandler)
+    window.addEventListener('resize', this.scrollHandler)
   }
 
   public componentWillUnmount() {
     window.removeEventListener('scroll', this.scrollHandler)
-    window.removeEventListener('resize', this.resizeHandler)
+    window.removeEventListener('resize', this.scrollHandler)
   }
 
   public checkWindowScroll = () => {

@@ -4,7 +4,7 @@ import React from 'react'
 import { LanguageProvider } from './LanguageContext'
 import { LanguageSwitch } from './LanguageSwitch'
 
-it('can switch language', () => {
+test('can switch language', () => {
   const testLang = 'zh_hans'
   const component = mount(
     <LanguageProvider>

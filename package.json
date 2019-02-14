@@ -57,7 +57,7 @@
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^6.0.0",
     "imagemin-svgo": "^7.0.0",
-    "jest": "^24.1.0",
+    "jest": "23.6.0",
     "lost": "^8.3.0",
     "next-compose-plugins": "^2.1.1",
     "next-optimized-images": "^2.3.3",
@@ -126,6 +126,9 @@
       "json",
       "node"
     ],
+    "moduleNameMapper": {
+      "~(.*)$": "<rootDir>$1"
+    },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],

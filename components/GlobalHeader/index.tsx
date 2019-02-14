@@ -15,7 +15,6 @@ import WriteButton from './WriteButton'
 import styles from './styles.css'
 
 export const GlobalHeader = ({ user }: { user: any }) => {
-  console.log('hi2')
   useEffect(analytics.identifyUser)
 
   const isAuthed = true
