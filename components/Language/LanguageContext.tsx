@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 
-const defaultLang = 'zh_hant'
+const systemDefaultLang = 'zh_hant'
 
 const LanguageContext = React.createContext({} as {
   lang: Language
@@ -9,7 +9,13 @@ const LanguageContext = React.createContext({} as {
 
 export const LanguageConsumer = LanguageContext.Consumer
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+export const LanguageProvider = ({
+  children,
+  defaultLang = systemDefaultLang
+}: {
+  children: ReactNode
+  defaultLang?: Language
+}) => {
   const [lang, setLang] = useState<Language>(defaultLang)
 
   // useEffect(() => {

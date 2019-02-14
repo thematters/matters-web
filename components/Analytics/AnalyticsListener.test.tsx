@@ -1,33 +1,44 @@
-import { mount } from 'enzyme'
 import React from 'react'
+import { render, wait } from 'react-testing-library'
 
 import { analytics } from '~/common/utils'
 
 import { AnalyticsListener } from './AnalyticsListener'
 
-let globalDocument = global as (NodeJS.Global & { analytics?: any })
-let wrapper: any
+const mockAnalytics = {
+  track: jest.fn(),
+  page: jest.fn(),
+  identify: jest.fn()
+}
 
 beforeEach(() => {
-  globalDocument.analytics = {
-    track: jest.fn(),
-    page: jest.fn(),
-    identify: jest.fn()
-  }
+  // @ts-ignore
+  window.analytics = mockAnalytics
 })
 
-afterEach(() => {
-  globalDocument = global
-  wrapper.unmount()
+test('Invokes track method with trackEvent', async () => {
+  const tracker = { eventType: 'track' }
+  render(<AnalyticsListener user={{}} />)
+  analytics.trackEvent(tracker)
+  await wait(() => {
+    expect(mockAnalytics.track.mock.calls[0][0]).toBe(tracker)
+  })
 })
 
-test.skip('Invokes global track method if receives custom event with type track', () => {
-  wrapper = mount(<AnalyticsListener user={{}} />)
-  // expect(global.analytics.track.mock.calls.length).toBe(0)
-  // expect(global.analytics.identify.mock.calls.length).toBe(0)
-  // expect(global.analytics.page.mock.calls.length).toBe(0)
-  analytics.trackEvent('foo')
-  expect(globalDocument.analytics.track.mock.calls.length).toBe(1)
-  // expect(global.analytics.identify.mock.calls.length).toBe(0)
-  // expect(global.analytics.page.mock.calls.length).toBe(0)
+test('Invokes page method with trackPage', async () => {
+  const tracker = { eventType: 'page' }
+  render(<AnalyticsListener user={{}} />)
+  analytics.trackPage(tracker)
+  await wait(() => {
+    expect(mockAnalytics.page.mock.calls[0][0]).toBe(tracker)
+  })
+})
+
+test('Invokes identify method with identifyUser', async () => {
+  const tracker = { eventType: 'identify' }
+  render(<AnalyticsListener user={{}} />)
+  analytics.identifyUser(tracker)
+  await wait(() => {
+    expect(mockAnalytics.identify.mock.calls[0][0]).toBe(tracker)
+  })
 })
