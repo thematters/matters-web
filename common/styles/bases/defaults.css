@@ -25,9 +25,11 @@ html {
 
 body {
   min-height: 100%;
-  padding-top: 4rem; /* fallback */
-  padding-top: calc(4rem + 1px); /* global header's height + 1px border */
-  padding-bottom: 4rem;
+  padding-top: var(--global-header-height); /* fallback */
+  padding-top: calc(
+    var(--global-header-height) + 1px
+  ); /* global header's height + 1px border */
+  padding-bottom: var(--spacing-x-loose);
   overflow-x: hidden;
 }
 

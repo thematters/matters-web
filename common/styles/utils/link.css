@@ -1,6 +1,8 @@
 /* @styled-jsx=global */
 
 .u-link-color {
+  color: inherit;
+
   &:hover,
   &:active,
   &:focus {
@@ -8,13 +10,18 @@
   }
 }
 
-.u-link-color-green {
-  color: var(--color-matters-green);
+.u-link-grey-black {
+  color: var(--color-matters-grey);
 
-  &:link,
-  &:visited {
-    color: var(--color-matters-green);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--color-matters-black);
   }
+}
+
+.u-link-green {
+  color: var(--color-matters-green);
 
   &:hover,
   &:active,

@@ -1,3 +1,7 @@
-button {
+section {
   margin-left: var(--spacing-default);
+
+  @media (--sm-up) {
+    margin-left: var(--spacing-loose);
+  }
 }

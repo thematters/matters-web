@@ -1,0 +1,24 @@
+a {
+  display: inline-block;
+
+  height: var(--global-header-height);
+
+  line-height: var(--global-header-height);
+  color: var(--color-grey);
+
+  &:hover,
+  &:focus {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
+
+  & :global(+ a) {
+    margin-left: var(--spacing-default);
+  }
+
+  &.active {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    border-bottom: 2px solid currentcolor;
+  }
+}
