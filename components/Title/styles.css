@@ -1,0 +1,34 @@
+.feature {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  line-height: 1.5;
+}
+
+.article {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  line-height: 1.33333333;
+}
+
+.page {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  font-family: var(--font-serif-tc);
+
+  &[lang='zh-hans'] {
+    font-family: var(--font-serif-sc);
+  }
+}
+
+.feed {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xm);
+  line-height: 1.33333333;
+}
+
+.modal {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xm);
+  line-height: 1.77777778;
+}
