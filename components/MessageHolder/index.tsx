@@ -5,32 +5,30 @@ import { FC, useEffect, useState } from 'react'
 
 // Internal modules
 import { useEventListener } from '~/components'
+import { Message } from './Message'
 import styles from './styles.css'
-import { Toast } from './Toast'
 
 /**
- * ToastHolder is a container for managing Toast component. Use event to create
- * and remove a Toast component.
+ * MessageHolder is a container for managing Message component. Use event to create
+ * and remove a Message component.
  *
  * Usage:
  *
  * ```jsx
  *
  * // Place it on top page.
- * <ToastHolder classes={['some', 'classes']} />
+ * <MessageHolder classes={['some', 'classes']} />
  *
  * ```
  */
-const prefix: string = 'toast-'
+const prefix: string = 'message-'
 
 interface Props {
   classes?: string[]
 }
 
-export const ToastHolder: FC<Props> = ({
-  classes = ['l-col-4', 'l-col-md-5', 'l-col-lg-8']
-}) => {
-  const [toasts, setToasts] = useState<any[]>([])
+export const MessageHolder: FC<Props> = ({ classes = [] }) => {
+  const [messages, setMessages] = useState<any[]>([])
 
   const mainClass = classNames(...classes)
 
@@ -38,7 +36,7 @@ export const ToastHolder: FC<Props> = ({
     if (!payload || Object.keys(payload).length === 0) {
       return false
     }
-    setToasts(prev => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
+    setMessages(prev => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
   }
 
   const remove = (payload: { id: string }) => {
@@ -46,19 +44,19 @@ export const ToastHolder: FC<Props> = ({
     if (!id || !id.startsWith(prefix)) {
       return false
     }
-    setToasts(prev => filter(prev, toast => toast.id !== id))
+    setMessages(prev => filter(prev, message => message.id !== id))
   }
 
-  useEventListener('addToast', add)
+  useEventListener('addMessage', add)
 
-  useEventListener('removeToast', remove)
+  useEventListener('removeMessage', remove)
 
   return (
     <>
-      <div className="l-row toast-holder">
+      <div className="l-row message-holder">
         <div className={mainClass}>
-          {toasts.map(toast => (
-            <Toast key={toast.id} {...toast} remove={remove} />
+          {messages.map(message => (
+            <Message key={message.id} {...message} remove={remove} />
           ))}
         </div>
       </div>
