@@ -1,0 +1,52 @@
+.item {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+
+  & :global(> *:before) {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.spacing-vertical-xtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
+}
+.spacing-vertical-tight {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+}
+.spacing-vertical-default {
+  padding-top: var(--spacing-default);
+  padding-bottom: var(--spacing-default);
+}
+
+.spacing-horizontal-xtight {
+  padding-left: var(--spacing-x-tight);
+  padding-right: var(--spacing-x-tight);
+}
+.spacing-horizontal-tight {
+  padding-left: var(--spacing-tight);
+  padding-right: var(--spacing-tight);
+}
+.spacing-horizontal-default {
+  padding-left: var(--spacing-default);
+  padding-right: var(--spacing-default);
+}
+
+.bg-hover-grey-lighter {
+  &:hover {
+    background: var(--color-grey-lighter);
+  }
+}
+.bg-hover-green-lighter {
+  &:hover {
+    background: --color-matters-green-hover;
+  }
+}

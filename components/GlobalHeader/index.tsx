@@ -8,6 +8,7 @@ import { analytics } from '~/common/utils'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
+import Nav from './Nav'
 import NotificationButton from './NotificationButton'
 import SearchButton from './SearchButton'
 import SignUpButton from './SignUpButton'
@@ -36,6 +37,7 @@ export const GlobalHeader = ({ user }: { user: any }) => {
         <div className="container">
           <section className="left">
             <Logo />
+            <Nav />
           </section>
 
           <section className={rightClasses}>

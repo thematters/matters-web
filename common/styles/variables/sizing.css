@@ -2,4 +2,5 @@
 
 :root {
   --sizing-root: 16px;
+  --global-header-height: 4rem;
 }

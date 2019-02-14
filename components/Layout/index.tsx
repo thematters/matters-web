@@ -1,12 +1,9 @@
+import gql from 'graphql-tag'
 import Head from 'next/head'
 
 import { AnalyticsListener } from '../Analytics'
 import { GlobalHeader } from '../GlobalHeader'
-import { Placeholder } from '../Placeholder'
 import { ToastHolder } from '../ToastHolder'
-
-import gql from 'graphql-tag'
-import styles from './styles.css'
 
 const fragments = {
   user: gql`
@@ -56,24 +53,11 @@ export const Layout: React.SFC<{
         <meta name="twitter:description" content="" />
         <meta name="twitter:image" content="" />
       </Head>
-      <AnalyticsListener user={user} />
-      <GlobalHeader user={user} />
+
+      <GlobalHeader />
       <ToastHolder />
 
-      <div style={{ textAlign: 'center' }}>
-        <div>{children}</div>
-      </div>
-
-      <main className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <Placeholder.MattersToday />
-          <Placeholder.ArticleDigestList />
-        </article>
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          <Placeholder.Sidebar />
-        </aside>
-        <style jsx>{styles}</style>
-      </main>
+      {children}
     </>
   )
 

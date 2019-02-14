@@ -1,11 +1,11 @@
 /* @styled-jsx=global */
 
 :root {
-  --spacing-xxx-tight: 0.125rem;
-  --spacing-xx-tight: 0.25rem;
-  --spacing-x-tight: 0.5rem;
-  --spacing-tight: 1rem;
-  --spacing-default: 1.5rem;
-  --spacing-loose: 2rem;
-  --spacing-x-loose: 2.5rem;
+  --spacing-xxx-tight: 0.125rem; /* 2px */
+  --spacing-xx-tight: 0.25rem; /* 4px */
+  --spacing-x-tight: 0.5rem; /* 8px */
+  --spacing-tight: 1rem; /* 16px */
+  --spacing-default: 1.5rem; /* 24px */
+  --spacing-loose: 2rem; /* 32px */
+  --spacing-x-loose: 2.5rem; /* 40px */
 }

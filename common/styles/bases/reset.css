@@ -29,6 +29,17 @@ body {
 main {
   display: block;
 }
+ol,
+ul {
+  list-style: none;
+}
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 
 /* Text-level semantics
    ========================================================================== */
