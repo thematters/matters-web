@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
-import { Popover, Tooltip } from '~/components'
+import { Placeholder } from '~/components'
 
 const HOME_FEED = gql`
   query HomeFeed {
@@ -25,19 +25,27 @@ const HOME_FEED = gql`
 `
 
 export default () => (
-  <div>
-    <p>Homepage</p>
-    <Tooltip content="Dont touch me!">
-      <span>Hover Me</span>
-    </Tooltip>{' '}
-    <Popover content="PPPPPOP">
-      <span>Popover</span>
-    </Popover>
-    <Query query={HOME_FEED}>
-      {({ data }) => {
-        console.log(data)
-        return <div />
-      }}
-    </Query>
-  </div>
+  <main className="l-row">
+    <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Placeholder.MattersToday />
+
+      <Query query={HOME_FEED}>
+        {({ data, loading, error }) => {
+          if (loading) {
+            return <Placeholder.ArticleDigestList />
+          }
+
+          if (error) {
+            return <span>{JSON.stringify(error)}</span> // TODO
+          }
+
+          return <span>{JSON.stringify(data)}</span>
+        }}
+      </Query>
+    </article>
+
+    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+      <Placeholder.Sidebar />
+    </aside>
+  </main>
 )

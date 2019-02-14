@@ -33,6 +33,10 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  margin-top: var(--spacing-x-loose);
+}
+
 *:not(body) {
   background-repeat: no-repeat;
   background-position: 50%;
@@ -63,6 +67,12 @@ svg {
   width: auto;
   user-select: none;
   fill: currentColor;
+}
+
+img,
+audio,
+video {
+  max-width: 100%;
 }
 
 hr {
