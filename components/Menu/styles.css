@@ -1,0 +1,12 @@
+.menu {
+}
+
+.spacing-0 {
+  padding: 0;
+}
+.spacing-xxxtight {
+  padding: var(--spacing-xxx-tight) 0;
+}
+.spacing-xxtight {
+  padding: var(--spacing-xx-tight) 0;
+}

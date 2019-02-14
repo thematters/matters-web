@@ -1,8 +1,6 @@
 import Head from 'next/head'
 
-import { GlobalHeader, Placeholder, ToastHolder } from '~/components'
-
-import styles from './styles.css'
+import { GlobalHeader, ToastHolder } from '~/components'
 
 export const Layout: React.SFC = ({ children }) => (
   <>
@@ -38,19 +36,6 @@ export const Layout: React.SFC = ({ children }) => (
     <GlobalHeader />
     <ToastHolder />
 
-    <div style={{ textAlign: 'center' }}>
-      <div>{children}</div>
-    </div>
-
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Placeholder.MattersToday />
-        <Placeholder.ArticleDigestList />
-      </article>
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Placeholder.Sidebar />
-      </aside>
-      <style jsx>{styles}</style>
-    </main>
+    {children}
   </>
 )

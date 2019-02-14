@@ -1,19 +1,18 @@
-import { NextContext } from 'next'
+import { Placeholder } from '~/components'
 
-const ArticleDetail = ({ query }: NextContext) => {
+const ArticleDetail = () => {
   return (
-    <>
-      <p>ArticleDetail</p>
-      <pre>{JSON.stringify(query)}</pre>
-    </>
-  )
-}
+    <main className="l-row">
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        <h1>ArticleDetail</h1>
+        <Placeholder.ArticleDetail />
+      </article>
 
-ArticleDetail.getInitialProps = ({ query, pathname }: NextContext) => {
-  return {
-    query,
-    pathname
-  }
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Placeholder.Sidebar />
+      </aside>
+    </main>
+  )
 }
 
 export default ArticleDetail

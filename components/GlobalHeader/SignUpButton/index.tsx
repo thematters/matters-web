@@ -4,7 +4,7 @@ import { PATHS } from '~/common/enums'
 
 export default () => (
   <Button
-    nodeType="link"
+    is="link"
     size="large"
     bgColor="green"
     href={PATHS.AUTH_SIGNUP.fs}

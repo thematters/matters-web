@@ -1,0 +1,77 @@
+/* @styled-jsx=global */
+
+:root {
+  --shadow-light: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-default: 0 4px 12px 0 rgba(0, 0, 0, 0.05),
+    0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-dark: 0 12px 24px 0 rgba(0, 0, 0, 0.12),
+    0 4px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+/**
+ * reset
+ * https://github.com/atomiks/tippyjs/blob/master/src/scss/index.scss
+ */
+.tippy-tooltip {
+  color: inherit;
+  border-radius: 0;
+  font-size: inherit;
+  padding: 0;
+  line-height: inherit;
+  text-align: center;
+  background: var(--color-white);
+}
+
+/* dropdown */
+.tippy-tooltip.dropdown-theme {
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-dark);
+  border: 1px solid var(--color-line-grey-light);
+}
+
+/* tooltip */
+.tippy-tooltip.tooltip-theme {
+  color: var(--color-white);
+
+  padding: var(--spacing-xx-tight) var(--spacing-tight);
+
+  font-size: var(--font-size-sm);
+
+  border-radius: 4px;
+  background: var(--color-black);
+  box-shadow: var(--shadow-dark);
+}
+
+/* popover */
+.tippy-tooltip.popover-theme {
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-dark);
+  border: 1px solid var(--color-line-grey-light);
+}
+.tippy-popper[x-placement^='top'] .tippy-tooltip.popover-theme .tippy-arrow {
+  border-top-color: var(--color-white);
+}
+.tippy-popper[x-placement^='bottom'] .tippy-tooltip.popover-theme .tippy-arrow {
+  border-bottom-color: var(--color-white);
+}
+.tippy-popper[x-placement^='left'] .tippy-tooltip.popover-theme .tippy-arrow {
+  border-left-color: var(--color-white);
+}
+.tippy-popper[x-placement^='right'] .tippy-tooltip.popover-theme .tippy-arrow {
+  border-right-color: var(--color-white);
+}
+
+/* shadow */
+.tippy-tooltip.shadow-light-theme {
+  box-shadow: var(--shadow-light);
+}
+.tippy-tooltip.shadow-default-theme {
+  box-shadow: var(--shadow-default);
+}
+.tippy-tooltip.shadow-dark-theme {
+  box-shadow: var(--shadow-dark);
+}

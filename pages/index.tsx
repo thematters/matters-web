@@ -1,9 +1,7 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { Query } from 'react-apollo'
 
-import { toPath } from '~/common/utils'
-import { LanguageConsumer } from '~/components'
+import { Placeholder } from '~/components'
 
 const HOME_FEED = gql`
   query HomeFeed {
@@ -26,27 +24,28 @@ const HOME_FEED = gql`
   }
 `
 
-const TEST_ARTICLE_DETAIL_PATHS = toPath({
-  page: 'articleDetail',
-  userName: 'matty',
-  slug: '佳禾-繁體中文電子書短期內有機會出現-game-changer-嗎',
-  mediaHash: 'Qme3jGoqJWSr9eNiwMxiNonFtEHLgPeANaHtJ2GoEXhWhT'
-})
-
 export default () => (
-  <div>
-    <p>Homepage</p>
-    <Link
-      href={TEST_ARTICLE_DETAIL_PATHS.fs}
-      as={TEST_ARTICLE_DETAIL_PATHS.url}
-    >
-      <a>Goto: 《佳禾: 繁體中文電子書短期內有機會出現 game changer 嗎？》</a>
-    </Link>
-    <Query query={HOME_FEED}>
-      {({ data }) => {
-        console.log(data)
-        return <div />
-      }}
-    </Query>
-  </div>
+  <main className="l-row">
+    <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Placeholder.MattersToday />
+
+      <Query query={HOME_FEED}>
+        {({ data, loading, error }) => {
+          if (loading) {
+            return <Placeholder.ArticleDigestList />
+          }
+
+          if (error) {
+            return <span>{JSON.stringify(error)}</span> // TODO
+          }
+
+          return <span>{JSON.stringify(data)}</span>
+        }}
+      </Query>
+    </article>
+
+    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+      <Placeholder.Sidebar />
+    </aside>
+  </main>
 )

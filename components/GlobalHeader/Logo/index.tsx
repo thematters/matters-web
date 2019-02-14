@@ -8,7 +8,7 @@ import styles from './styles.css'
 export default () => (
   <>
     <Link href={PATHS.HOMEPAGE.fs} as={PATHS.HOMEPAGE.url}>
-      <a>
+      <a aria-label="首頁">
         <Icon
           id={ICON_LOGO.id}
           style={{ width: 97, height: 20 }}

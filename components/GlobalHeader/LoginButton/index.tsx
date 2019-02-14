@@ -4,13 +4,13 @@ import { PATHS } from '~/common/enums'
 
 export default () => (
   <Button
-    nodeType="link"
+    is="link"
     size="large"
     bgColor="transparent"
     href={PATHS.AUTH_LOGIN.fs}
     as={PATHS.AUTH_LOGIN.url}
     spacing="default"
-    className="u-link-color-green"
+    className="u-link-green"
   >
     登入
   </Button>

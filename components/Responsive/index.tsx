@@ -9,6 +9,10 @@ const SmallDown: React.SFC = props => (
 const MediumDown: React.SFC = props => (
   <MediaQuery maxWidth={BREAKPOINTS.MD - 1} {...props} />
 )
+
+const SmallUp: React.SFC = props => (
+  <MediaQuery minWidth={BREAKPOINTS.SM} {...props} />
+)
 const MediumUp: React.SFC = props => (
   <MediaQuery minWidth={BREAKPOINTS.MD} {...props} />
 )
@@ -42,6 +46,8 @@ const XLarge: React.SFC = props => (
 export const Responsive = {
   SmallDown,
   MediumDown,
+
+  SmallUp,
   MediumUp,
 
   XSmall,

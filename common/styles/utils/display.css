@@ -1,0 +1,14 @@
+/* @styled-jsx=global */
+
+@each $device in sm, md, lg, xl {
+  @media (--$(device)-up) {
+    .u-$(device)-up-hide {
+      display: none !important;
+    }
+  }
+  @media (--$(device)-down) {
+    .u-$(device)-down-hide {
+      display: none !important;
+    }
+  }
+}

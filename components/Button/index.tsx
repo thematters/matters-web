@@ -32,25 +32,23 @@ interface BaseButtonProps {
 }
 
 type AnchorButtonProps = {
-  nodeType: 'anchor'
+  is: 'anchor'
   href: string
 } & BaseButtonProps
 
 type LinkButtonProps = {
-  nodeType: 'link'
+  is: 'link'
   href: string
   as: string
 } & BaseButtonProps
 
 type NativeButtonProps = {
-  nodeType?: 'button'
+  is?: 'button'
   htmlType?: ButtonHTMLType
 } & BaseButtonProps
 
 type SpanButtonProps = {
-  nodeType: 'span'
-  htmlType?: ButtonHTMLType
-  onClick?: React.MouseEventHandler<HTMLSpanElement>
+  is: 'span'
 } & BaseButtonProps
 
 type ButtonProps =
@@ -85,8 +83,8 @@ type ButtonProps =
  *   取消追蹤
  * </Button>
  *
- * // nodeType:span
- * <Button nodeType="span" size="small" outlineColor="grey">
+ * // is:span
+ * <Button is="span" size="small" outlineColor="grey">
  *   追蹤了你
  * </Button>
  *
@@ -140,7 +138,7 @@ export const Button: React.SFC<ButtonProps> = ({
   outlineColor,
   className,
 
-  nodeType = 'button',
+  is = 'button',
   href,
   as,
   htmlType = 'button',
@@ -161,7 +159,7 @@ export const Button: React.SFC<ButtonProps> = ({
   })
 
   // anchor
-  if (nodeType === 'anchor') {
+  if (is === 'anchor') {
     return (
       <>
         <a href={href} className={buttonClasses} {...restProps}>
@@ -174,7 +172,7 @@ export const Button: React.SFC<ButtonProps> = ({
   }
 
   // link
-  if (nodeType === 'link') {
+  if (is === 'link') {
     return (
       <>
         <Link href={href} as={as}>
@@ -189,7 +187,7 @@ export const Button: React.SFC<ButtonProps> = ({
   }
 
   // span
-  if (nodeType === 'span') {
+  if (is === 'span') {
     return (
       <>
         <span className={buttonClasses} {...restProps}>
