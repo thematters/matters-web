@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Router from 'next/router'
 import React, { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
@@ -13,6 +14,11 @@ import SignUpButton from './SignUpButton'
 import WriteButton from './WriteButton'
 
 import styles from './styles.css'
+
+// Track client-side page views
+Router.onRouteChangeComplete = (url: string) => {
+  analytics.trackPage(url)
+}
 
 export const GlobalHeader = ({ user }: { user: any }) => {
   useEffect(analytics.identifyUser)

@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import Router from 'next/router'
-
-import { analytics } from '~/common/utils'
 
 import { AnalyticsListener } from '../Analytics'
 import { GlobalHeader } from '../GlobalHeader'
@@ -10,11 +7,6 @@ import { ToastHolder } from '../ToastHolder'
 
 import gql from 'graphql-tag'
 import styles from './styles.css'
-
-// Track client-side page views with Segment
-Router.events.on('routeChangeComplete', (url: string) => {
-  analytics.trackPage(url)
-})
 
 const fragments = {
   user: gql`
