@@ -1,5 +1,5 @@
-import { mount } from 'enzyme'
 import React from 'react'
+import { render } from 'react-testing-library'
 
 import { useEventListener } from './useEventListener'
 
@@ -13,7 +13,7 @@ const EffecfulComponent = () => {
 }
 
 test('can listen to events', () => {
-  mount(<EffecfulComponent />)
+  render(<EffecfulComponent />)
   // expect(span.textContent).toBe('extra-small')
   window.dispatchEvent(new CustomEvent(event))
 

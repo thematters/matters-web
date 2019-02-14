@@ -69,6 +69,7 @@
     "postcss-each": "^0.10.0",
     "postcss-preset-env": "^6.5.0",
     "prettier": "1.16.4",
+    "react-testing-library": "^5.8.0",
     "styled-jsx-plugin-postcss": "^2.0.0",
     "ts-jest": "^23.10.5",
     "ts-node": "^8.0.2",
@@ -132,7 +133,7 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "setupFilesAfterEnv": [
+    "setupFiles": [
       "<rootDir>common/utils/setupTests.ts"
     ],
     "globals": {
