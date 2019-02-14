@@ -13,26 +13,28 @@ declare global {
 
 export const AnalyticsListener = ({ user }: { user: any }) => {
   useEventListener(ANALYTICS, (evt: CustomEvent) => {
-    // get the information out of the tracked event
-    const { type, args } = evt.detail
+    if (evt.detail) {
+      // get the information out of the tracked event
+      const { type, args } = evt.detail
+      console.log({ user, evt })
+      // if we have an event of type track or page
+      if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
+        window.analytics[type](...args)
+      }
 
-    // if we have an event of type track or page
-    if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
-      window.analytics[type](...args)
-    }
-
-    // if we have an event of type identify
-    if (type === ANALYTIC_TYPES.IDENTIFY) {
-      // logged in
-      if (user && user.id) {
-        const { info, id } = user
-        window.analytics.identify(id, {
-          email: info.email,
-          ...args
-        })
-      } else {
-        // visitor
-        window.analytics.identify(args)
+      // if we have an event of type identify
+      if (type === ANALYTIC_TYPES.IDENTIFY) {
+        // logged in
+        if (user && user.id) {
+          const { info, id } = user
+          window.analytics.identify(id, {
+            email: info.email,
+            ...args
+          })
+        } else {
+          // visitor
+          window.analytics.identify(args)
+        }
       }
     }
   })

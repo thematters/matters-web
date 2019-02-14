@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import React, { useEffect } from 'react'
 
-import { AnalyticsListener } from '../Analytics'
+import { analytics } from '~/common/utils'
+
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -13,7 +15,11 @@ import WriteButton from './WriteButton'
 import styles from './styles.css'
 
 export const GlobalHeader = ({ user }: { user: any }) => {
+  console.log('hi2')
+  useEffect(analytics.identifyUser)
+
   const isAuthed = true
+
   const rightClasses = classNames({
     right: true,
     me: isAuthed
@@ -21,7 +27,6 @@ export const GlobalHeader = ({ user }: { user: any }) => {
 
   return (
     <header>
-      <AnalyticsListener user={user} />
       <div className="l-row">
         <div className="container">
           <section className="left">
@@ -55,9 +60,7 @@ GlobalHeader.fragments = {
   user: gql`
     fragment GlobalHeaderUser on User {
       ...MeDigestUser
-      ...AnalyticsUser
     }
     ${MeDigest.fragments.user}
-    ${AnalyticsListener.fragments.user}
   `
 }

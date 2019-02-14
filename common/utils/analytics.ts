@@ -1,16 +1,20 @@
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 
 const trackAs = (type: string) => (...args: any[]) => {
-  // construct event with details
-  const event = new CustomEvent(ANALYTICS, {
-    detail: { args, type }
-  })
+  console.log('hi')
+  if (process.browser) {
+    // construct event with details
+    const event = new CustomEvent(ANALYTICS, {
+      detail: { args, type }
+    })
 
-  // dispatch event
-  window.dispatchEvent(event)
+    // dispatch event
+    console.log({ event })
+    window.dispatchEvent(event)
+  }
 }
 
-export default {
+export const analytics = {
   trackEvent: trackAs(ANALYTIC_TYPES.TRACK),
   trackPage: trackAs(ANALYTIC_TYPES.PAGE),
   identifyUser: trackAs(ANALYTIC_TYPES.IDENTIFY)

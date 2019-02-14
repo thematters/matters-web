@@ -12,12 +12,17 @@ interface AvatarProps {
   [key: string]: any
 }
 
-export const Avatar: React.SFC<AvatarProps> & { fragments: object } = ({
-  user,
-  size = 'default',
-  className,
-  ...restProps
-}) => {
+const fragments = {
+  user: gql`
+    fragment AvatarUser on User {
+      avatar
+    }
+  `
+}
+
+export const Avatar: React.SFC<AvatarProps> & {
+  fragments: typeof fragments
+} = ({ user, size = 'default', className, ...restProps }) => {
   const src = user.avatar || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     [size]: true,
@@ -32,10 +37,4 @@ export const Avatar: React.SFC<AvatarProps> & { fragments: object } = ({
   )
 }
 
-Avatar.fragments = {
-  user: gql`
-    fragment AvatarUser on User {
-      avatar
-    }
-  `
-}
+Avatar.fragments = fragments

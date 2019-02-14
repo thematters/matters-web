@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import Router from 'next/router'
 
+import { AnalyticsListener } from '../Analytics'
 import { GlobalHeader } from '../GlobalHeader'
 import { Placeholder } from '../Placeholder'
 import { ToastHolder } from '../ToastHolder'
@@ -7,12 +9,19 @@ import { ToastHolder } from '../ToastHolder'
 import gql from 'graphql-tag'
 import styles from './styles.css'
 
+// Track client-side page views with Segment
+Router.events.on('routeChangeComplete', (url: string) => {
+  window.analytics.page(url)
+})
+
 const fragments = {
   user: gql`
     fragment LayoutUser on User {
       ...GlobalHeaderUser
+      ...AnalyticsUser
     }
     ${GlobalHeader.fragments.user}
+    ${AnalyticsListener.fragments.user}
   `
 }
 
@@ -53,7 +62,7 @@ export const Layout: React.SFC<{
         <meta name="twitter:description" content="" />
         <meta name="twitter:image" content="" />
       </Head>
-
+      <AnalyticsListener user={user} />
       <GlobalHeader user={user} />
       <ToastHolder />
 

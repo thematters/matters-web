@@ -12,10 +12,17 @@ const config: { [key: string]: any } = {
   }
 }
 
-export default withApollo(
-  ({ ctx, headers, initialState }) =>
-    new ApolloClient({
-      uri: config[env].apiUri,
-      cache: new InMemoryCache().restore(initialState || {})
-    })
-)
+let token = ''
+if (process.browser) {
+  token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwiaWF0IjoxNTUwMTA1MDY2LCJleHAiOjE1NTc4ODEwNjZ9.ILi4Cx6PHVzPzUrXds7P8QclTGjGEU2TlgsO80pwyw8' // localStorage.getItem('token') || token
+}
+
+export default withApollo(({ ctx, headers, initialState }) => {
+  console.log({ headers })
+  return new ApolloClient({
+    uri: config[env].apiUri,
+    cache: new InMemoryCache().restore(initialState || {}),
+    headers: { 'x-access-token': token, ...headers }
+  })
+})
