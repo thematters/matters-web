@@ -5,7 +5,7 @@ const env: string = process.env.NODE_ENV || 'development'
 
 const config: { [key: string]: any } = {
   development: {
-    apiUri: 'https://server-stage.matters.news/'
+    apiUri: 'http://localhost:4000'
   },
   production: {
     apiUri: 'https://server-stage.matters.news/'
