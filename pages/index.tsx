@@ -1,9 +1,7 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { Query } from 'react-apollo'
 
-import { toPath } from '~/common/utils'
-import { LanguageConsumer } from '~/components'
+import { Popover, Tooltip } from '~/components'
 
 const HOME_FEED = gql`
   query HomeFeed {
@@ -26,22 +24,15 @@ const HOME_FEED = gql`
   }
 `
 
-const TEST_ARTICLE_DETAIL_PATHS = toPath({
-  page: 'articleDetail',
-  userName: 'matty',
-  slug: '佳禾-繁體中文電子書短期內有機會出現-game-changer-嗎',
-  mediaHash: 'Qme3jGoqJWSr9eNiwMxiNonFtEHLgPeANaHtJ2GoEXhWhT'
-})
-
 export default () => (
   <div>
     <p>Homepage</p>
-    <Link
-      href={TEST_ARTICLE_DETAIL_PATHS.fs}
-      as={TEST_ARTICLE_DETAIL_PATHS.url}
-    >
-      <a>Goto: 《佳禾: 繁體中文電子書短期內有機會出現 game changer 嗎？》</a>
-    </Link>
+    <Tooltip content="Dont touch me!">
+      <span>Hover Me</span>
+    </Tooltip>{' '}
+    <Popover content="PPPPPOP">
+      <span>Popover</span>
+    </Popover>
     <Query query={HOME_FEED}>
       {({ data }) => {
         console.log(data)

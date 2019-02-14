@@ -13,7 +13,7 @@ interface MenuItemProps {
 }
 
 const Item: React.SFC<MenuItemProps> = ({
-  spacing = ['tight', 'default'],
+  spacing = ['xtight', 'default'],
   hoverBgColor = 'grey-lighter',
 
   children
@@ -26,12 +26,10 @@ const Item: React.SFC<MenuItemProps> = ({
   })
 
   return (
-    <>
-      <button type="button" className={itemClasses}>
-        {children}
-      </button>
+    <li className={itemClasses} role="menuitem">
+      {children}
       <style jsx>{styles}</style>
-    </>
+    </li>
   )
 }
 

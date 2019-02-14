@@ -9,7 +9,6 @@ import styles from './styles.css'
 interface MenuProps {
   width?: '168px' | '100%'
   spacing?: '0' | 'xxxtight' | 'xxtight'
-  shadow?: 'light' | 'default' | 'dark'
 
   style?: React.CSSProperties
   className?: string
@@ -23,7 +22,6 @@ export class Menu extends React.PureComponent<MenuProps> {
     const {
       width = '168px',
       spacing = 'xxxtight',
-      shadow = 'default',
 
       className,
       style,
@@ -33,15 +31,14 @@ export class Menu extends React.PureComponent<MenuProps> {
     const menuClasses = classNames({
       menu: true,
       [`spacing-${spacing}`]: true,
-      [`shadow-${shadow}`]: true,
       [className || '']: !!className
     })
 
     return (
       <>
-        <section className={menuClasses} style={{ width, ...style }}>
+        <ul className={menuClasses} style={{ width, ...style }} role="menu">
           {children}
-        </section>
+        </ul>
         <style jsx>{styles}</style>
       </>
     )
