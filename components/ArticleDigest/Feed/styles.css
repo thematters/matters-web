@@ -1,0 +1,109 @@
+:root {
+  --digest-feed-cover-width: 140px;
+  --digest-feed-cover-height: 77px;
+  --digest-feed-cover-width-sm: 100px;
+  --digest-feed-cover-height-sm: 70px;
+}
+
+.content {
+  position: relative;
+}
+
+.title {
+  padding-right: calc(var(--digest-feed-cover-width-sm) + 1rem);
+  min-height: var(--digest-feed-cover-height-sm);
+
+  @media (--sm-up) {
+    padding-right: calc(var(--digest-feed-cover-width) + 3rem);
+    min-height: auto;
+  }
+}
+
+.description {
+  margin-top: var(--spacing-x-tight);
+  padding-left: var(--spacing-loose);
+  padding-right: 0;
+
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  line-height: 1.71428571;
+
+  @media (--sm-up) {
+    padding-right: calc(var(--digest-feed-cover-width) + 3rem);
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  margin-top: var(--spacing-tight);
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+  line-height: 1;
+
+  & > :global(* + *) {
+    position: relative;
+    margin-left: calc(var(--spacing-tight) + 2px);
+
+    &:not(time)::before {
+      content: '';
+      display: inline-block;
+
+      position: absolute;
+      top: calc(50% - 1px);
+      left: calc(0.5rem - 2px);
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: var(--color-grey);
+    }
+  }
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: var(--digest-feed-cover-width-sm);
+
+  background-color: var(--color-grey-lighter);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 70%;
+  }
+
+  @media (--sm-up) {
+    width: var(--digest-feed-cover-width);
+
+    &::after {
+      padding-bottom: 55%;
+    }
+  }
+}
+
+/* no cover */
+.content.no-cover {
+  & .title,
+  & .description {
+    padding-right: 0;
+
+    @media (--sm-up) {
+      padding-right: 5.875rem;
+    }
+  }
+
+  & .title {
+    min-height: auto;
+  }
+
+  & .description {
+    margin-top: var(--spacing-x-tight);
+  }
+}

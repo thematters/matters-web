@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
-import { Placeholder } from '~/components'
+import { ArticleDigest, Placeholder } from '~/components'
 
 const HOME_FEED = gql`
   query HomeFeed {
@@ -31,6 +31,8 @@ export default () => (
 
       <Query query={HOME_FEED}>
         {({ data, loading, error }) => {
+          return <ArticleDigest.Feed />
+
           if (loading) {
             return <Placeholder.ArticleDigestList />
           }
