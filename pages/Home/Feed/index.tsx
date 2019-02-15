@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _ from 'lodash'
 import { Query } from 'react-apollo'
 
 import { mergeConnections } from '~/common/utils'
@@ -42,7 +43,9 @@ export default () => (
           return <span>{JSON.stringify(error)}</span> // TODO
         }
 
-        const { edges, pageInfo } = data.viewer.recommendation.feed
+        const connectionPath = 'viewer.recommendation.feed'
+
+        const { edges, pageInfo } = _.get(data, connectionPath)
 
         const loadMore = () =>
           fetchMore({
@@ -53,7 +56,7 @@ export default () => (
               mergeConnections({
                 oldData: previousResult,
                 newData: fetchMoreResult,
-                path: 'viewer.recommendation.feed'
+                path: connectionPath
               })
           })
 
