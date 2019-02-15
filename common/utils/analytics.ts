@@ -1,6 +1,6 @@
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 
-const trackAs = (type: string) => (args: { [key: string]: string }) => {
+const trackAs = (type: string) => (args?: { [key: string]: string }) => {
   // if (process.browser) {
   // construct event with details
   const event = new CustomEvent(ANALYTICS, {

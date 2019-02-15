@@ -9,6 +9,9 @@ type AvatarSize = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge'
 
 interface AvatarProps {
   size?: AvatarSize
+  user?: {
+    avatar?: string
+  }
   [key: string]: any
 }
 
@@ -23,7 +26,7 @@ const fragments = {
 export const Avatar: React.SFC<AvatarProps> & {
   fragments: typeof fragments
 } = ({ user, size = 'default', className, ...restProps }) => {
-  const src = user.avatar || ICON_AVATAR_DEFAULT
+  const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     [size]: true,
     [className]: !!className

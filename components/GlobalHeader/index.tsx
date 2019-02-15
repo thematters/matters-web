@@ -17,12 +17,19 @@ import WriteButton from './WriteButton'
 import styles from './styles.css'
 
 // Track client-side page views
-Router.onRouteChangeComplete = (url: string) => {
-  analytics.trackPage(url)
+Router.onRouteChangeComplete = () => {
+  analytics.trackPage()
 }
 
 export const GlobalHeader = ({ user }: { user: any }) => {
-  useEffect(analytics.identifyUser)
+  console.log('hi')
+  useEffect(() => {
+    console.log('id')
+    // analytics.identifyUser()
+    return () => {
+      console.log('hi again')
+    }
+  })
 
   const isAuthed = true
 
