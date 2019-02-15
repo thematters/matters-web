@@ -12,7 +12,6 @@ interface AvatarProps {
   user?: {
     avatar?: string
   }
-  [key: string]: any
 }
 
 const fragments = {
@@ -25,16 +24,15 @@ const fragments = {
 
 export const Avatar: React.SFC<AvatarProps> & {
   fragments: typeof fragments
-} = ({ user, size = 'default', className, ...restProps }) => {
+} = ({ user, size = 'default' }) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
-    [size]: true,
-    [className]: !!className
+    [size]: true
   })
 
   return (
     <>
-      <img src={src} className={avatarClasses} {...restProps} />
+      <img src={src} className={avatarClasses} />
       <style jsx>{styles}</style>
     </>
   )

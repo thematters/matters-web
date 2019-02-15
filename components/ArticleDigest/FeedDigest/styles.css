@@ -5,6 +5,11 @@
   --digest-feed-cover-height-sm: 70px;
 }
 
+.container {
+  padding: var(--spacing-default) 0;
+  border-bottom: 1px solid var(--color-line-grey);
+}
+
 .content {
   position: relative;
 }

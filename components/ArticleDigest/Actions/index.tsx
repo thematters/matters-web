@@ -1,53 +1,41 @@
-import { DateTime, Icon, TextIcon } from '~/components'
+import gql from 'graphql-tag'
+import { DateTime } from '~/components'
 
-import ICON_BOOKMARK_SM_INACTIVE from '~/static/icons/bookmark-small-inactive.svg?sprite'
-import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
-import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
+import Bookmark from './Bookmark'
+import CommentCount from './CommentCount'
+import MAT from './MAT'
+
 import styles from './styles.css'
 
-export default () => (
+interface ActionsProps {
+  article: any
+}
+
+const fragments = {
+  feedDigest: gql`
+    fragment FeedDigestActionsArticle on Article {
+      createdAt
+      ...MATArticle
+      ...CommentCountArticle
+    }
+    ${MAT.fragments.article}
+    ${CommentCount.fragments.article}
+  `
+}
+
+const Actions: React.SFC<ActionsProps> & {
+  fragments: typeof fragments
+} = ({ article }) => (
   <div className="actions">
-    {/* MAT */}
-    <TextIcon
-      icon={
-        <Icon
-          size="small"
-          id={ICON_MAT_GOLD.id}
-          viewBox={ICON_MAT_GOLD.viewBox}
-        />
-      }
-      color="gold"
-      weight="medium"
-      text="123"
-      size="sm"
-      spacing="xxxtight"
-    />
-    {/* comments */}
-    <TextIcon
-      icon={
-        <Icon
-          size="small"
-          id={ICON_COMMENT_SM.id}
-          viewBox={ICON_COMMENT_SM.viewBox}
-        />
-      }
-      color="grey"
-      weight="medium"
-      text="15"
-      size="sm"
-      spacing="xxtight"
-    />
-    {/* bookmark */}
-    <button type="button" aria-label="收藏">
-      <Icon
-        size="small"
-        className="u-motion-icon-hover"
-        id={ICON_BOOKMARK_SM_INACTIVE.id}
-        viewBox={ICON_BOOKMARK_SM_INACTIVE.viewBox}
-      />
-    </button>
-    {/* date */}
-    <DateTime date={new Date()} />
+    <MAT article={article} />
+    <CommentCount article={article} />
+    <Bookmark />
+    <DateTime date={article.createdAt} />
+
     <style jsx>{styles}</style>
   </div>
 )
+
+Actions.fragments = fragments
+
+export default Actions

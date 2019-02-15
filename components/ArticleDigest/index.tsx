@@ -1,13 +1,13 @@
-import Dropdown from './Dropdown'
-import Feature from './Feature'
-import Feed from './Feed'
-import Related from './Related'
-import Sidebar from './Sidebar'
+import DropdownDigest from './DropdownDigest'
+import FeatureDigest from './FeatureDigest'
+import FeedDigest from './FeedDigest'
+import RelatedDigest from './RelatedDigest'
+import SidebarDigest from './SidebarDigest'
 
 export const ArticleDigest = {
-  Dropdown,
-  Feature,
-  Feed,
-  Related,
-  Sidebar
+  Dropdown: DropdownDigest,
+  Feature: FeatureDigest,
+  Feed: FeedDigest,
+  Related: RelatedDigest,
+  Sidebar: SidebarDigest
 }

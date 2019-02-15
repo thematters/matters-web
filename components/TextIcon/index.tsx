@@ -8,7 +8,7 @@ type TextIconColor = 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
 type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
 interface TextIconProps {
-  text: string
+  text?: string | number
   icon: React.ReactNode
 
   color?: TextIconColor
@@ -51,7 +51,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   return (
     <span className={textIconClasses}>
       {icon}
-      <span>{text}</span>
+      {text && <span>{text}</span>}
       <style jsx>{styles}</style>
     </span>
   )

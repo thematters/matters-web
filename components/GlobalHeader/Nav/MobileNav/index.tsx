@@ -9,7 +9,7 @@ import styles from './styles.css'
 const DropdownContent = () => (
   <Menu>
     <Menu.Item>
-      <Link href={PATHS.HOMEPAGE.fs} as={PATHS.HOMEPAGE.url}>
+      <Link href={PATHS.HOME.fs} as={PATHS.HOME.url}>
         <a>發現</a>
       </Link>
     </Menu.Item>
