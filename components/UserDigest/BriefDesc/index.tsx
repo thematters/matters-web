@@ -8,12 +8,23 @@ import styles from './styles.css'
 
 /**
  * UserDigest.BriefDesc is a component for presenting user's avatar, display name and
- * description.
+ * description. Description might be truncated automatically due to container size.
  *
  * Usage:
  *
  *   <UserDigest.BriefDesc user={user} />
  */
+
+const fragments = {
+  user: gql`
+    fragment UserDigestBriefDescUser on User {
+      description
+      ...AvatarUser
+    }
+    ${Avatar.fragments.user}
+  `
+}
+
 const BriefDesc: SFC = ({ user }: { user: any }) => (
   <section>
     <div className="container">
@@ -25,13 +36,6 @@ const BriefDesc: SFC = ({ user }: { user: any }) => (
   </section>
 )
 
-BriefDesc.fragments = {
-  user: gql`
-    fragment UserDigestBriefDescUser on User {
-      ...AvatarUser
-    }
-    ${Avatar.fragments.user}
-  `
-}
+BriefDesc.fragments = fragments
 
 export default BriefDesc

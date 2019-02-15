@@ -1,6 +1,6 @@
 // External modules
 import gql from 'graphql-tag'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
@@ -25,6 +25,17 @@ const BaseButton = ({ icon, text, ...props }) => (
     {text}
   </Button>
 )
+
+const fragments = {
+  user: gql`
+    fragment UserDigestFullDescUser on User {
+      isFollower
+      isFollowee
+      ...AvatarUser
+    }
+    ${Avatar.fragments.user}
+  `
+}
 
 const FullDesc: FC = ({ user }: { user: any }) => {
   const getStateText = ({ isFollower, isFollowee }: { user: any }) => {
@@ -97,13 +108,6 @@ const FullDesc: FC = ({ user }: { user: any }) => {
   )
 }
 
-FullDesc.fragments = {
-  user: gql`
-    fragment UserDigestFullDescUser on User {
-      ...AvatarUser
-    }
-    ${Avatar.fragments.user}
-  `
-}
+FullDesc.fragments = fragments
 
 export default FullDesc

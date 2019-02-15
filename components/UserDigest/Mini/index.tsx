@@ -13,6 +13,17 @@ import styles from './styles.css'
  *
  *   <UserDigest.Mini user={user} />
  */
+
+const fragments = {
+  user: gql`
+    fragment UserDigestMiniUser on User {
+      description
+      ...AvatarUser
+    }
+    ${Avatar.fragments.user}
+  `
+}
+
 const Mini: SFC = ({ user }: { user: any }) => (
   <section>
     <div className="container">
@@ -23,13 +34,6 @@ const Mini: SFC = ({ user }: { user: any }) => (
   </section>
 )
 
-Mini.fragments = {
-  user: gql`
-    fragment UserDigestMiniUser on User {
-      ...AvatarUser
-    }
-    ${Avatar.fragments.user}
-  `
-}
+Mini.fragments = fragments
 
 export default Mini
