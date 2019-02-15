@@ -12,6 +12,7 @@ const ICYMI = gql`
       recommendation {
         icymi(input: { first: 5 }) {
           edges {
+            cursor
             node {
               ...IcymiDigestArticle
             }
@@ -42,11 +43,13 @@ export default () => (
             </header>
 
             <ul>
-              {data.viewer.recommendation.icymi.edges.map(({ node }) => (
-                <li>
-                  <ArticleDigest.Sidebar article={node} />
-                </li>
-              ))}
+              {data.viewer.recommendation.icymi.edges.map(
+                ({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <ArticleDigest.Sidebar article={node} />
+                  </li>
+                )
+              )}
             </ul>
           </>
         )

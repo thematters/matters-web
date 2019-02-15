@@ -12,6 +12,7 @@ const TOPICS = gql`
       recommendation {
         topics(input: { first: 5 }) {
           edges {
+            cursor
             node {
               ...TopicsDigestArticle
             }
@@ -42,11 +43,13 @@ export default () => (
             </header>
 
             <ol>
-              {data.viewer.recommendation.topics.edges.map(({ node }) => (
-                <li>
-                  <ArticleDigest.Sidebar article={node} />
-                </li>
-              ))}
+              {data.viewer.recommendation.topics.edges.map(
+                ({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <ArticleDigest.Sidebar article={node} />
+                  </li>
+                )
+              )}
             </ol>
           </>
         )

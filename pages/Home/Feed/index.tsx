@@ -1,17 +1,24 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
-import { ArticleDigest, Placeholder, Title } from '~/components'
+import { mergeConnections } from '~/common/utils'
+import { ArticleDigest, InfiniteScroll, Placeholder, Title } from '~/components'
 
 import styles from './styles.css'
 
 const HOME_FEED = gql`
-  query HomeFeed {
+  query HomeFeed($cursor: String) {
     viewer {
       id
       recommendation {
-        hottest(input: { first: 10 }) {
+        feed: hottest(input: { first: 10, after: $cursor }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
           edges {
+            cursor
             node {
               ...FeedDigestArticle
             }
@@ -26,7 +33,7 @@ const HOME_FEED = gql`
 export default () => (
   <>
     <Query query={HOME_FEED}>
-      {({ data, loading, error }) => {
+      {({ data, loading, error, fetchMore }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -34,6 +41,21 @@ export default () => (
         if (error) {
           return <span>{JSON.stringify(error)}</span> // TODO
         }
+
+        const { edges, pageInfo } = data.viewer.recommendation.feed
+
+        const loadMore = () =>
+          fetchMore({
+            variables: {
+              cursor: pageInfo.endCursor
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) =>
+              mergeConnections({
+                oldData: previousResult,
+                newData: fetchMoreResult,
+                path: 'viewer.recommendation.feed'
+              })
+          })
 
         return (
           <>
@@ -44,11 +66,18 @@ export default () => (
             <hr />
 
             <ul>
-              {data.viewer.recommendation.hottest.edges.map(({ node }) => (
-                <li>
-                  <ArticleDigest.Feed article={node} />
-                </li>
-              ))}
+              <InfiniteScroll
+                hasNextPage={pageInfo.hasNextPage}
+                loadMore={loadMore}
+                loading={loading}
+                loader={null}
+              >
+                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <ArticleDigest.Feed article={node} />
+                  </li>
+                ))}
+              </InfiniteScroll>
             </ul>
           </>
         )
