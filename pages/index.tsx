@@ -6,6 +6,7 @@ import { Placeholder } from '~/components'
 const HOME_FEED = gql`
   query HomeFeed {
     viewer {
+      id
       recommendation {
         hottest(input: { first: 10 }) {
           edges {

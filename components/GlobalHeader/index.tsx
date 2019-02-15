@@ -1,4 +1,9 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
+import Router from 'next/router'
+import React, { useEffect } from 'react'
+
+import { analytics } from '~/common/utils'
 
 import LoginButton from './LoginButton'
 import Logo from './Logo'
@@ -11,8 +16,16 @@ import WriteButton from './WriteButton'
 
 import styles from './styles.css'
 
-export const GlobalHeader = () => {
+// Track client-side page views
+Router.onRouteChangeComplete = () => {
+  analytics.trackPage()
+}
+
+export const GlobalHeader = ({ user }: { user: any }) => {
+  useEffect(analytics.identifyUser)
+
   const isAuthed = true
+
   const rightClasses = classNames({
     right: true,
     me: isAuthed
@@ -32,7 +45,7 @@ export const GlobalHeader = () => {
               <>
                 <SearchButton />
                 <NotificationButton />
-                <MeDigest />
+                <MeDigest user={user} />
                 <WriteButton />
               </>
             ) : (
@@ -48,4 +61,13 @@ export const GlobalHeader = () => {
       <style jsx>{styles}</style>
     </header>
   )
+}
+
+GlobalHeader.fragments = {
+  user: gql`
+    fragment GlobalHeaderUser on User {
+      ...MeDigestUser
+    }
+    ${MeDigest.fragments.user}
+  `
 }

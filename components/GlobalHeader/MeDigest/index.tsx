@@ -1,16 +1,23 @@
+import gql from 'graphql-tag'
 import Link from 'next/link'
-
-import { Avatar, Dropdown, Icon, Menu, TextIcon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_GIFT from '~/static/icons/gift.svg'
 import ICON_LOGOUT from '~/static/icons/logout.svg'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
+
+import { Avatar } from '../../Avatar'
+import { Icon } from '../../Icon'
+import { Menu } from '../../Menu'
+import { Dropdown } from '../../Popper'
+import { TextIcon } from '../../TextIcon'
+
+import styles from './styles.css'
+
 import ICON_ME from '~/static/icons/me.svg'
 import ICON_READING_HISTORY from '~/static/icons/reading-history.svg'
 import ICON_SETTINGS from '~/static/icons/settings.svg'
-import styles from './styles.css'
 
 const DropdownContent = () => (
   <>
@@ -87,11 +94,11 @@ const DropdownContent = () => (
   </>
 )
 
-export default () => (
+const MeDigest = ({ user }: { user: any }) => (
   <>
     <Dropdown content={<DropdownContent />}>
       <button type="button" className="container">
-        <Avatar size="small" />
+        <Avatar size="small" user={user} />
         <section className="info u-text-truncate">
           <span className="username">Matty</span>
           <TextIcon
@@ -114,3 +121,14 @@ export default () => (
     <style jsx>{styles}</style>
   </>
 )
+
+MeDigest.fragments = {
+  user: gql`
+    fragment MeDigestUser on User {
+      ...AvatarUser
+    }
+    ${Avatar.fragments.user}
+  `
+}
+
+export default MeDigest

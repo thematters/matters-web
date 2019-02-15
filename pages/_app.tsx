@@ -1,7 +1,7 @@
-import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import ApolloClient, { gql, InMemoryCache } from 'apollo-boost'
 import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider, Query } from 'react-apollo'
 
 import withApollo from '~/common/utils/withApollo'
 import {
@@ -23,6 +23,16 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   //   return { pageProps }
   // }
 
+  public query = gql`
+    query RootQuery {
+      viewer {
+        id
+        ...LayoutUser
+      }
+    }
+    ${Layout.fragments.user}
+  `
+
   public render() {
     const { Component, pageProps, apollo } = this.props
 
@@ -32,9 +42,17 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
           <LanguageProvider>
             <ApolloProvider client={apollo}>
               <GlobalStyles />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <Query query={this.query}>
+                {({ data, loading, error }) => (
+                  <Layout
+                    loading={loading}
+                    user={data && data.viewer}
+                    error={error}
+                  >
+                    <Component {...pageProps} />
+                  </Layout>
+                )}
+              </Query>
             </ApolloProvider>
           </LanguageProvider>
         </AnalyticsProvider>
