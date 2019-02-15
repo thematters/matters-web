@@ -1,8 +1,6 @@
-.actions {
+footer {
   display: flex;
   align-items: center;
-
-  margin-top: var(--spacing-tight);
 
   font-size: var(--font-size-xs);
   color: var(--color-grey);

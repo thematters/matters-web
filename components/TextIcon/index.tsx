@@ -41,6 +41,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   className
 }) => {
   const textIconClasses = classNames({
+    'text-icon': true,
     [color || '']: !!color,
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,

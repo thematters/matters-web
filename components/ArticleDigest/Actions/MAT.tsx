@@ -9,6 +9,7 @@ interface MATProps {
   article?: {
     MAT?: number
   }
+  size?: 'small' | 'default'
 }
 
 const fragments = {
@@ -20,12 +21,13 @@ const fragments = {
 }
 
 const MAT: React.SFC<MATProps> & { fragments: typeof fragments } = ({
-  article
+  article,
+  size = 'default'
 }) => (
   <TextIcon
     icon={
       <Icon
-        size="small"
+        size={size === 'default' ? 'small' : 'xsmall'}
         id={ICON_MAT_GOLD.id}
         viewBox={ICON_MAT_GOLD.viewBox}
       />
@@ -33,7 +35,7 @@ const MAT: React.SFC<MATProps> & { fragments: typeof fragments } = ({
     color="gold"
     weight="medium"
     text={get(article, 'MAT', '')}
-    size="sm"
+    size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxxtight"
   />
 )

@@ -11,6 +11,7 @@ interface CommentCountProps {
       totalCount?: number
     }
   }
+  size?: 'small' | 'default'
 }
 
 const fragments = {
@@ -25,11 +26,11 @@ const fragments = {
 
 const CommentCount: React.SFC<CommentCountProps> & {
   fragments: typeof fragments
-} = ({ article }) => (
+} = ({ article, size = 'default' }) => (
   <TextIcon
     icon={
       <Icon
-        size="small"
+        size={size === 'default' ? 'small' : 'xsmall'}
         id={ICON_COMMENT_SM.id}
         viewBox={ICON_COMMENT_SM.viewBox}
       />
@@ -37,7 +38,7 @@ const CommentCount: React.SFC<CommentCountProps> & {
     color="grey"
     weight="medium"
     text={get(article, 'comments.totalCount', '')}
-    size="sm"
+    size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxtight"
   />
 )

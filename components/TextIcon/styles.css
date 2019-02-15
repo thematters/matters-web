@@ -1,4 +1,6 @@
-span {
+.text-icon {
+  user-select: none;
+
   & :global(*) {
     display: inline-block;
     vertical-align: middle;

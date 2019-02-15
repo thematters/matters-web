@@ -1,35 +1,35 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
-import { ArticleDigest, Placeholder, Title } from '~/components'
+import { ArticleDigest, Label } from '~/components'
 
 import styles from './styles.css'
 
-const HOME_FEED = gql`
-  query HomeFeed {
+const TOPICS = gql`
+  query Topics {
     viewer {
       id
       recommendation {
-        hottest(input: { first: 10 }) {
+        topics(input: { first: 5 }) {
           edges {
             node {
-              ...FeedDigestArticle
+              ...TopicsDigestArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigest.Sidebar.fragments.topics}
 `
 
 export default () => (
   <>
-    <Query query={HOME_FEED}>
+    <Query query={TOPICS}>
       {({ data, loading, error }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+        // if (loading) {
+        //   return <Placeholder.Sidebar />
+        // }
 
         if (error) {
           return <span>{JSON.stringify(error)}</span> // TODO
@@ -38,18 +38,16 @@ export default () => (
         return (
           <>
             <header>
-              <Title type="page">热门文章</Title>
+              <Label>熱議話題</Label>
             </header>
 
-            <hr />
-
-            <ul>
-              {data.viewer.recommendation.hottest.edges.map(({ node }) => (
+            <ol>
+              {data.viewer.recommendation.topics.edges.map(({ node }) => (
                 <li>
-                  <ArticleDigest.Feed article={node} />
+                  <ArticleDigest.Sidebar article={node} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </>
         )
       }}

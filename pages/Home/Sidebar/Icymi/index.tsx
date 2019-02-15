@@ -1,34 +1,34 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
-import { ArticleDigest, Placeholder, Title } from '~/components'
+import { ArticleDigest, Label, Placeholder, Title } from '~/components'
 
 import styles from './styles.css'
 
-const HOME_FEED = gql`
-  query HomeFeed {
+const ICYMI = gql`
+  query Icymi {
     viewer {
       id
       recommendation {
-        hottest(input: { first: 10 }) {
+        icymi(input: { first: 5 }) {
           edges {
             node {
-              ...FeedDigestArticle
+              ...IcymiDigestArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigest.Sidebar.fragments.icymi}
 `
 
 export default () => (
   <>
-    <Query query={HOME_FEED}>
+    <Query query={ICYMI}>
       {({ data, loading, error }) => {
         if (loading) {
-          return <Placeholder.ArticleDigestList />
+          return <Placeholder.Sidebar />
         }
 
         if (error) {
@@ -38,15 +38,13 @@ export default () => (
         return (
           <>
             <header>
-              <Title type="page">热门文章</Title>
+              <Label>不要錯過</Label>
             </header>
 
-            <hr />
-
             <ul>
-              {data.viewer.recommendation.hottest.edges.map(({ node }) => (
+              {data.viewer.recommendation.icymi.edges.map(({ node }) => (
                 <li>
-                  <ArticleDigest.Feed article={node} />
+                  <ArticleDigest.Sidebar article={node} />
                 </li>
               ))}
             </ul>

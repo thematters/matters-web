@@ -1,3 +1,16 @@
-import { Placeholder } from '~/components'
+import Icymi from './Icymi'
+import Topics from './Topics'
 
-export default () => <Placeholder.Sidebar />
+import styles from './styles.css'
+
+export default () => (
+  <>
+    <section>
+      <Icymi />
+    </section>
+    <section>
+      <Topics />
+    </section>
+    <style jsx>{styles}</style>
+  </>
+)

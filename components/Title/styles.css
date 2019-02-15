@@ -32,3 +32,10 @@
   font-size: var(--font-size-xm);
   line-height: 1.77777778;
 }
+
+.sidebar {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm); /* fallback */
+  font-size: calc(var(--font-size-sm) + 1px);
+  line-height: 1.6;
+}

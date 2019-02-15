@@ -9,16 +9,6 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 interface FeedDigestProps {
-  // article: {
-  //   id: string
-  //   title: string
-  //   slug: string
-  //   cover: string
-  //   summary: string
-  //   author: {
-  //     userName: string
-  //   }
-  // }
   article: any
 }
 
@@ -76,7 +66,7 @@ const FeedDigest: React.SFC<FeedDigestProps> & {
             </a>
           </Link>
 
-          <Actions article={article} />
+          <Actions article={article} type="feed" />
         </div>
 
         {cover && (

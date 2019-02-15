@@ -1,6 +1,7 @@
 .label {
   color: var(--color-white);
   background: var(--color-matters-green);
+  user-select: none;
 }
 
 .small {

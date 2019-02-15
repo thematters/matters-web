@@ -1,0 +1,36 @@
+:root {
+  --digest-sidebar-cover-size: 72px;
+}
+
+.container {
+  padding-bottom: var(--spacing-default);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+
+  & .left {
+    padding-right: var(--spacing-default);
+
+    & :global(.actions) {
+      margin-top: var(--spacing-xx-tight);
+    }
+  }
+}
+
+.cover {
+  width: var(--digest-sidebar-cover-size);
+  height: var(--digest-sidebar-cover-size);
+}
+
+/* no cover */
+.content.no-cover {
+  display: block;
+
+  & .left {
+    padding-right: none;
+  }
+}
