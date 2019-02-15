@@ -52,7 +52,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   return (
     <span className={textIconClasses}>
       {icon}
-      {text && <span>{text}</span>}
+      <span>{text}</span>
       <style jsx>{styles}</style>
     </span>
   )
