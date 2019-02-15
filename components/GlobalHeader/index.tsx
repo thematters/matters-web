@@ -22,14 +22,7 @@ Router.onRouteChangeComplete = () => {
 }
 
 export const GlobalHeader = ({ user }: { user: any }) => {
-  console.log('hi')
-  useEffect(() => {
-    console.log('id')
-    // analytics.identifyUser()
-    return () => {
-      console.log('hi again')
-    }
-  })
+  useEffect(analytics.identifyUser)
 
   const isAuthed = true
 
