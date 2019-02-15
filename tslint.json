@@ -1,10 +1,7 @@
 {
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "no-implicit-dependencies": [
-      true,
-      ["enzyme", "enzyme-adapter-react-16", "react-testing-library", "~"]
-    ],
+    "no-implicit-dependencies": [true, ["react-testing-library", "~"]],
     "no-submodule-imports": [false],
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,
