@@ -1,4 +1,6 @@
+// external
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
 import styles from './styles.css'
@@ -7,15 +9,24 @@ type AvatarSize = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge'
 
 interface AvatarProps {
   size?: AvatarSize
+  user?: {
+    avatar?: string
+  }
   [key: string]: any
 }
 
-export const Avatar: React.SFC<AvatarProps> = ({
-  src = ICON_AVATAR_DEFAULT,
-  size = 'default',
-  className,
-  ...restProps
-}) => {
+const fragments = {
+  user: gql`
+    fragment AvatarUser on User {
+      avatar
+    }
+  `
+}
+
+export const Avatar: React.SFC<AvatarProps> & {
+  fragments: typeof fragments
+} = ({ user, size = 'default', className, ...restProps }) => {
+  const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     [size]: true,
     [className]: !!className
@@ -28,3 +39,5 @@ export const Avatar: React.SFC<AvatarProps> = ({
     </>
   )
 }
+
+Avatar.fragments = fragments

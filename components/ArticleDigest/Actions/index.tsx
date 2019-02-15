@@ -1,4 +1,4 @@
-import { Icon, TextIcon } from '~/components'
+import { DateTime, Icon, TextIcon } from '~/components'
 
 import ICON_BOOKMARK_SM_INACTIVE from '~/static/icons/bookmark-small-inactive.svg?sprite'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
@@ -47,7 +47,7 @@ export default () => (
       />
     </button>
     {/* date */}
-    <time>昨天 22:56</time>
+    <DateTime date={new Date()} />
     <style jsx>{styles}</style>
   </div>
 )

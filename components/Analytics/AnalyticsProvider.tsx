@@ -52,6 +52,7 @@ export const AnalyticsProvider: SFC = ({ children }) => {
             let e = analytics.methods[t]
             analytics[e] = analytics.factory(e)
           }
+          // @ts-ignore
           analytics.load = function(t: string, e: any) {
             let n = document.createElement('script')
             n.type = 'text/javascript'

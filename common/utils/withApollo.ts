@@ -16,6 +16,7 @@ export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
       uri: config[env].apiUri,
-      cache: new InMemoryCache().restore(initialState || {})
+      cache: new InMemoryCache().restore(initialState || {}),
+      headers
     })
 )
