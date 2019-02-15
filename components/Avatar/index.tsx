@@ -5,7 +5,13 @@ import gql from 'graphql-tag'
 import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
 import styles from './styles.css'
 
-type AvatarSize = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge'
+type AvatarSize =
+  | 'xxsmall'
+  | 'xsmall'
+  | 'small'
+  | 'default'
+  | 'large'
+  | 'xlarge'
 
 interface AvatarProps {
   size?: AvatarSize

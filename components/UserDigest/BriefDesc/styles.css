@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.name {
+  color: var(--color-black);
+  font-size: var(--font-size-sm);
+  line-height: normal;
+  padding-left: var(--spacing-x-tight);
+}
+
+.description {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+  line-height: normal;
+  padding-left: var(--spacing-x-tight);
+
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
