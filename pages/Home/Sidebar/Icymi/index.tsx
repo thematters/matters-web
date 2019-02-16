@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Label, Placeholder, Title } from '~/components'
 
+import { Icymi } from './__generated__/Icymi'
 import styles from './styles.css'
 
 const ICYMI = gql`
@@ -27,7 +28,7 @@ const ICYMI = gql`
 export default () => (
   <>
     <Query query={ICYMI}>
-      {({ data, loading, error }) => {
+      {({ data, loading, error }: QueryResult & { data: Icymi }) => {
         if (loading) {
           return <Placeholder.Sidebar />
         }

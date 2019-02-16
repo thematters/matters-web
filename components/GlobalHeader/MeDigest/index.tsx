@@ -6,18 +6,17 @@ import ICON_GIFT from '~/static/icons/gift.svg'
 import ICON_LOGOUT from '~/static/icons/logout.svg'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
+import ICON_ME from '~/static/icons/me.svg'
+import ICON_READING_HISTORY from '~/static/icons/reading-history.svg'
+import ICON_SETTINGS from '~/static/icons/settings.svg'
 
 import { Avatar } from '../../Avatar'
 import { Icon } from '../../Icon'
 import { Menu } from '../../Menu'
 import { Dropdown } from '../../Popper'
 import { TextIcon } from '../../TextIcon'
-
+import { MeDigestUser } from './__generated__/MeDigestUser'
 import styles from './styles.css'
-
-import ICON_ME from '~/static/icons/me.svg'
-import ICON_READING_HISTORY from '~/static/icons/reading-history.svg'
-import ICON_SETTINGS from '~/static/icons/settings.svg'
 
 const DropdownContent = () => (
   <>
@@ -94,7 +93,7 @@ const DropdownContent = () => (
   </>
 )
 
-const MeDigest = ({ user }: { user: any }) => (
+const MeDigest = ({ user }: { user: MeDigestUser }) => (
   <>
     <Dropdown content={<DropdownContent />}>
       <button type="button" className="container">

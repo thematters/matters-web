@@ -1,7 +1,7 @@
 import ApolloClient, { gql, InMemoryCache } from 'apollo-boost'
 import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
-import { ApolloProvider, Query } from 'react-apollo'
+import { ApolloProvider, Query, QueryResult } from 'react-apollo'
 
 import withApollo from '~/common/utils/withApollo'
 import {
@@ -10,6 +10,8 @@ import {
   LanguageProvider,
   Layout
 } from '~/components'
+
+import { RootQuery } from './__generated__/RootQuery'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   // public static async getInitialProps({ Component, ctx }: NextAppContext) {
@@ -43,7 +45,11 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
             <ApolloProvider client={apollo}>
               <GlobalStyles />
               <Query query={this.query}>
-                {({ data, loading, error }) => (
+                {({
+                  data,
+                  loading,
+                  error
+                }: QueryResult & { data: RootQuery }) => (
                   <Layout
                     loading={loading}
                     user={data && data.viewer}

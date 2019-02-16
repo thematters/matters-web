@@ -2,14 +2,16 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Title } from '~/components'
-import Actions from '../Actions'
-
 import { toPath } from '~/common/utils'
+import { Title } from '~/components'
+
+import Actions from '../Actions'
+import { IcymiDigestArticle } from './__generated__/IcymiDigestArticle'
+import { TopicsDigestArticle } from './__generated__/TopicsDigestArticle'
 import styles from './styles.css'
 
 interface FeedDigestProps {
-  article: any
+  article: IcymiDigestArticle | TopicsDigestArticle
 }
 
 const fragments = {

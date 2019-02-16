@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 // local
 import { useEventListener } from '../Hook'
+import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
 declare global {
   interface Window {
@@ -11,7 +12,7 @@ declare global {
   }
 }
 
-export const AnalyticsListener = ({ user }: { user: any }) => {
+export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
   useEventListener(ANALYTICS, (detail: CustomEvent['detail']) => {
     // get the information out of the tracked event
     const { type, args } = detail
@@ -24,8 +25,8 @@ export const AnalyticsListener = ({ user }: { user: any }) => {
     // if we have an event of type identify
     if (type === ANALYTIC_TYPES.IDENTIFY) {
       // logged in
-      if (user && user.id) {
-        const { info, id } = user
+      if ('info' in user) {
+        const { info, id } = user as AnalyticsUser
         window.analytics.identify(id, {
           email: info.email,
           ...args

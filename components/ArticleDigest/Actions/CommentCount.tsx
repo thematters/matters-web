@@ -2,15 +2,12 @@ import gql from 'graphql-tag'
 import { get } from 'lodash'
 
 import { Icon, TextIcon } from '~/components'
-
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
+import { CommentCountArticle } from './__generated__/CommentCountArticle'
+
 interface CommentCountProps {
-  article?: {
-    comments?: {
-      totalCount?: number
-    }
-  }
+  article: CommentCountArticle
   size?: 'small' | 'default'
 }
 

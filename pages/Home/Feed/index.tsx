@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _ from 'lodash'
-import { Query } from 'react-apollo'
+import { Query, QueryResult } from 'react-apollo'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -11,6 +11,7 @@ import {
   Title
 } from '~/components'
 
+import { HomeFeed } from './__generated__/HomeFeed'
 import styles from './styles.css'
 
 const HOME_FEED = gql`
@@ -40,7 +41,12 @@ const HOME_FEED = gql`
 export default () => (
   <>
     <Query query={HOME_FEED}>
-      {({ data, loading, error, fetchMore }) => {
+      {({
+        data,
+        loading,
+        error,
+        fetchMore
+      }: QueryResult & { data: HomeFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }

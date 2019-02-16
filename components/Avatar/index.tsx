@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
+
+import { AvatarUser } from './__generated__/AvatarUser'
 import styles from './styles.css'
 
 type AvatarSize =
@@ -15,9 +17,7 @@ type AvatarSize =
 
 interface AvatarProps {
   size?: AvatarSize
-  user?: {
-    avatar?: string
-  }
+  user: AvatarUser
 }
 
 const fragments = {
