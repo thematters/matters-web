@@ -24,7 +24,7 @@ interface TitleProps {
  * ```
  */
 
-export const Title: React.SFC<TitleProps> = ({
+export const Title: React.FC<TitleProps> = ({
   type,
   is = 'h1',
 

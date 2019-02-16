@@ -24,7 +24,7 @@ const fragments = {
   `
 }
 
-const CommentCount: React.SFC<CommentCountProps> & {
+const CommentCount: React.FC<CommentCountProps> & {
   fragments: typeof fragments
 } = ({ article, size = 'default' }) => (
   <TextIcon

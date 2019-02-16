@@ -23,7 +23,7 @@ import Tippy, { TippyProps } from '@tippy.js/react'
  * checkout {@url https://github.com/atomiks/tippy.js-react} for more samples
  */
 
-export const Dropdown: React.SFC<TippyProps> = props => <Tippy {...props} />
+export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
   trigger: 'mouseenter focus click',
   // trigger: 'click',
@@ -34,7 +34,7 @@ Dropdown.defaultProps = {
   theme: 'dropdown'
 }
 
-export const Tooltip: React.SFC<TippyProps> = props => <Tippy {...props} />
+export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
@@ -44,7 +44,7 @@ Tooltip.defaultProps = {
   theme: 'tooltip'
 }
 
-export const Popover: React.SFC<TippyProps> = props => <Tippy {...props} />
+export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
 Popover.defaultProps = {
   arrow: true,
   interactive: true,
