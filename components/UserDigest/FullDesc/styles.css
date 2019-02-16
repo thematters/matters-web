@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sub-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.content-container {
+  padding-left: var(--spacing-x-tight);
+  padding-right: var(--spacing-x-tight);
+}
+
+.name {
+  color: var(--color-black);
+  font-size: var(--font-size-md);
+  line-height: 1.25;
+  padding-right: var(--spacing-tight);
+}
+
+.description {
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+  padding-top: var(--spacing-x-tight);
+}

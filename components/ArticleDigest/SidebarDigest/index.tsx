@@ -44,7 +44,7 @@ const fragments = {
   `
 }
 
-const FeedDigest: React.SFC<FeedDigestProps> & {
+const FeedDigest: React.FC<FeedDigestProps> & {
   fragments: typeof fragments
 } = ({ article }) => {
   const { cover, author, slug, mediaHash, title } = article

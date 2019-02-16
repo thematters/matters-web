@@ -5,7 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { PATHS } from '~/common/enums'
 import styles from './styles.css'
 
-const DesktopNav: React.SFC<WithRouterProps> = ({ router, ...rest }) => {
+const DesktopNav: React.FC<WithRouterProps> = ({ router, ...rest }) => {
   const homeClasses = classNames({
     active: router && router.pathname === PATHS.HOME.fs
   })

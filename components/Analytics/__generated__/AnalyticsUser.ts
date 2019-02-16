@@ -7,12 +7,12 @@
 // ====================================================
 
 export interface AnalyticsUser_info {
-  __typename: 'UserInfo'
-  email: any | null
+  __typename: "UserInfo";
+  email: any | null;
 }
 
 export interface AnalyticsUser {
-  __typename: 'User'
-  id: string
-  info: AnalyticsUser_info
+  __typename: "User";
+  id: string;
+  info: AnalyticsUser_info;
 }

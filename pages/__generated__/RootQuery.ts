@@ -7,20 +7,20 @@
 // ====================================================
 
 export interface RootQuery_viewer_info {
-  __typename: 'UserInfo'
-  email: any | null
+  __typename: "UserInfo";
+  email: any | null;
 }
 
 export interface RootQuery_viewer {
-  __typename: 'User'
-  id: string
+  __typename: "User";
+  id: string;
   /**
    * URL for avatar
    */
-  avatar: any | null
-  info: RootQuery_viewer_info
+  avatar: any | null;
+  info: RootQuery_viewer_info;
 }
 
 export interface RootQuery {
-  viewer: RootQuery_viewer | null
+  viewer: RootQuery_viewer | null;
 }

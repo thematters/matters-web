@@ -7,28 +7,28 @@
 // ====================================================
 
 export interface FeedDigestArticle_author {
-  __typename: 'User'
-  userName: string
+  __typename: "User";
+  userName: string;
 }
 
 export interface FeedDigestArticle_comments {
-  __typename: 'CommentConnection'
-  totalCount: number
+  __typename: "CommentConnection";
+  totalCount: number;
 }
 
 export interface FeedDigestArticle {
-  __typename: 'Article'
-  id: string
-  title: string
-  slug: string
-  cover: any | null
-  summary: string
-  mediaHash: string | null
-  author: FeedDigestArticle_author
-  createdAt: any
+  __typename: "Article";
+  id: string;
+  title: string;
+  slug: string;
+  cover: any | null;
+  summary: string;
+  mediaHash: string | null;
+  author: FeedDigestArticle_author;
+  createdAt: any;
   /**
    * MAT recieved for this article
    */
-  MAT: number
-  comments: FeedDigestArticle_comments
+  MAT: number;
+  comments: FeedDigestArticle_comments;
 }

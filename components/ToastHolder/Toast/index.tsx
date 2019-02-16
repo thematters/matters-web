@@ -42,7 +42,7 @@ interface Props {
   remove: () => void
 }
 
-export const Toast: React.SFC<Props> = ({
+export const Toast: React.FC<Props> = ({
   id,
   color,
   header,

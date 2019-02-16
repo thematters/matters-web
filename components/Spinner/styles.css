@@ -1,0 +1,17 @@
+.spinner {
+  margin: var(--spacing-default) 0;
+  text-align: center;
+
+  & > :global(svg) {
+    animation: spinning 1s infinite linear;
+  }
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

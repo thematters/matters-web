@@ -7,25 +7,25 @@
 // ====================================================
 
 export interface TopicsDigestArticle_author {
-  __typename: 'User'
-  userName: string
+  __typename: "User";
+  userName: string;
 }
 
 export interface TopicsDigestArticle_comments {
-  __typename: 'CommentConnection'
-  totalCount: number
+  __typename: "CommentConnection";
+  totalCount: number;
 }
 
 export interface TopicsDigestArticle {
-  __typename: 'Article'
-  id: string
-  title: string
-  slug: string
-  author: TopicsDigestArticle_author
-  mediaHash: string | null
+  __typename: "Article";
+  id: string;
+  title: string;
+  slug: string;
+  author: TopicsDigestArticle_author;
+  mediaHash: string | null;
   /**
    * MAT recieved for this article
    */
-  MAT: number
-  comments: TopicsDigestArticle_comments
+  MAT: number;
+  comments: TopicsDigestArticle_comments;
 }

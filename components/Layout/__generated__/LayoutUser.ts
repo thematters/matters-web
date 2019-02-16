@@ -7,16 +7,16 @@
 // ====================================================
 
 export interface LayoutUser_info {
-  __typename: 'UserInfo'
-  email: any | null
+  __typename: "UserInfo";
+  email: any | null;
 }
 
 export interface LayoutUser {
-  __typename: 'User'
+  __typename: "User";
   /**
    * URL for avatar
    */
-  avatar: any | null
-  id: string
-  info: LayoutUser_info
+  avatar: any | null;
+  id: string;
+  info: LayoutUser_info;
 }

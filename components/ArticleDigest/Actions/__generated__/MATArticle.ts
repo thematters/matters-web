@@ -7,9 +7,9 @@
 // ====================================================
 
 export interface MATArticle {
-  __typename: 'Article'
+  __typename: "Article";
   /**
    * MAT recieved for this article
    */
-  MAT: number
+  MAT: number;
 }

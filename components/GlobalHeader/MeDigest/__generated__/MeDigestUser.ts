@@ -7,9 +7,9 @@
 // ====================================================
 
 export interface MeDigestUser {
-  __typename: 'User'
+  __typename: "User";
   /**
    * URL for avatar
    */
-  avatar: any | null
+  avatar: any | null;
 }

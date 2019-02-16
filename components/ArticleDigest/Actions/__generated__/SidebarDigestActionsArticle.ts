@@ -7,15 +7,15 @@
 // ====================================================
 
 export interface SidebarDigestActionsArticle_comments {
-  __typename: 'CommentConnection'
-  totalCount: number
+  __typename: "CommentConnection";
+  totalCount: number;
 }
 
 export interface SidebarDigestActionsArticle {
-  __typename: 'Article'
+  __typename: "Article";
   /**
    * MAT recieved for this article
    */
-  MAT: number
-  comments: SidebarDigestActionsArticle_comments
+  MAT: number;
+  comments: SidebarDigestActionsArticle_comments;
 }
