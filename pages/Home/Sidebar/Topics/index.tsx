@@ -3,11 +3,11 @@ import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Label } from '~/components'
 
-import { Topics } from './__generated__/Topics'
+import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
 
-const TOPICS = gql`
-  query Topics {
+const SIDEBAR_TOPICS = gql`
+  query SidebarTopics {
     viewer {
       id
       recommendation {
@@ -27,8 +27,8 @@ const TOPICS = gql`
 
 export default () => (
   <>
-    <Query query={TOPICS}>
-      {({ data, loading, error }: QueryResult & { data: Topics }) => {
+    <Query query={SIDEBAR_TOPICS}>
+      {({ data, loading, error }: QueryResult & { data: SidebarTopics }) => {
         // if (loading) {
         //   return <Placeholder.Sidebar />
         // }

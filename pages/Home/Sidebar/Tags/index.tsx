@@ -1,38 +1,34 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Placeholder } from '~/components'
+import { Label, Tag } from '~/components'
 
-import { SidebarIcymi } from './__generated__/SidebarIcymi'
+import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
 
-const SIDEBAR_ICYMI = gql`
-  query SidebarIcymi {
+const SIDEBAR_TAGS = gql`
+  query SidebarTags {
     viewer {
       id
       recommendation {
-        icymi(input: { first: 5 }) {
+        tags(input: { first: 8 }) {
           edges {
             cursor
             node {
-              ...IcymiDigestArticle
+              ...Tag
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.icymi}
+  ${Tag.fragments.tag}
 `
 
 export default () => (
   <>
-    <Query query={SIDEBAR_ICYMI}>
-      {({ data, loading, error }: QueryResult & { data: SidebarIcymi }) => {
-        if (loading) {
-          return <Placeholder.Sidebar />
-        }
-
+    <Query query={SIDEBAR_TAGS}>
+      {({ data, loading, error }: QueryResult & { data: SidebarTags }) => {
         if (error) {
           return <span>{JSON.stringify(error)}</span> // TODO
         }
@@ -40,14 +36,14 @@ export default () => (
         return (
           <>
             <header>
-              <Label>不要錯過</Label>
+              <Label>標簽</Label>
             </header>
 
             <ul>
-              {data.viewer.recommendation.icymi.edges.map(
+              {data.viewer.recommendation.tags.edges.map(
                 ({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <ArticleDigest.Sidebar article={node} />
+                    <Tag tag={node} type="count-fixed" />
                   </li>
                 )
               )}

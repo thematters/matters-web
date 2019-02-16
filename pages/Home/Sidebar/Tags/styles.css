@@ -1,0 +1,26 @@
+header {
+  margin-bottom: var(--spacing-default);
+}
+
+ul {
+  font-size: 0; /* remove space between <li> */
+
+  & li {
+    display: inline-block;
+    width: calc(50% - var(--spacing-default) / 2);
+
+    padding: var(--spacing-tight) 0;
+
+    border-bottom: 1px solid var(--color-line-grey);
+  }
+  & li:nth-child(1),
+  & li:nth-child(2) {
+    padding-top: 0;
+  }
+  & li:nth-child(2n) {
+    margin-left: calc(var(--spacing-default) / 2);
+  }
+  & li:nth-child(2n - 1) {
+    margin-right: calc(var(--spacing-default) / 2);
+  }
+}

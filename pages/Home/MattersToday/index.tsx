@@ -3,11 +3,11 @@ import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Placeholder } from '~/components'
 
-import { Today } from './__generated__/Today'
+import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
 
-const TODAY = gql`
-  query Today {
+const HOME_TODAY = gql`
+  query HomeToday {
     viewer {
       id
       recommendation {
@@ -22,8 +22,8 @@ const TODAY = gql`
 
 export default () => (
   <>
-    <Query query={TODAY}>
-      {({ data, loading, error }: QueryResult & { data: Today }) => {
+    <Query query={HOME_TODAY}>
+      {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
         if (loading) {
           return <Placeholder.Sidebar />
         }
