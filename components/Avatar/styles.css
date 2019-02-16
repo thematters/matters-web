@@ -3,9 +3,15 @@ img {
 }
 
 /* 20px */
-.xsmall {
+.xxsmall {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+/* 24px */
+.xsmall {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* 32px */
