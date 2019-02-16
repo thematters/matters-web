@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _ from 'lodash'
+import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
 import { mergeConnections } from '~/common/utils'
@@ -10,6 +11,7 @@ import {
   Spinner,
   Title
 } from '~/components'
+import SortDropdown from './SortDropdown'
 
 import { HomeFeed } from './__generated__/HomeFeed'
 import styles from './styles.css'
@@ -38,66 +40,71 @@ const HOME_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => (
-  <>
-    <Query query={HOME_FEED}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: HomeFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+export default () => {
+  const [sortBy, setSortBy] = useState('hottest')
 
-        if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
-        }
+  return (
+    <>
+      <Query query={HOME_FEED}>
+        {({
+          data,
+          loading,
+          error,
+          fetchMore
+        }: QueryResult & { data: HomeFeed }) => {
+          if (loading) {
+            return <Placeholder.ArticleDigestList />
+          }
 
-        const connectionPath = 'viewer.recommendation.feed'
+          if (error) {
+            return <span>{JSON.stringify(error)}</span> // TODO
+          }
 
-        const { edges, pageInfo } = _.get(data, connectionPath)
+          const connectionPath = 'viewer.recommendation.feed'
 
-        const loadMore = () =>
-          fetchMore({
-            variables: {
-              cursor: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
+          const { edges, pageInfo } = _.get(data, connectionPath)
 
-        return (
-          <>
-            <header>
-              <Title type="page">热门文章</Title>
-            </header>
+          const loadMore = () =>
+            fetchMore({
+              variables: {
+                cursor: pageInfo.endCursor
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) =>
+                mergeConnections({
+                  oldData: previousResult,
+                  newData: fetchMoreResult,
+                  path: connectionPath
+                })
+            })
 
-            <hr />
+          return (
+            <>
+              <header>
+                <Title type="page">热门文章</Title>
+                <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+              </header>
 
-            <ul>
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
-              >
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Feed article={node} />
-                  </li>
-                ))}
-              </InfiniteScroll>
-            </ul>
-          </>
-        )
-      }}
-    </Query>
-    <style jsx>{styles}</style>
-  </>
-)
+              <hr />
+
+              <ul>
+                <InfiniteScroll
+                  hasNextPage={pageInfo.hasNextPage}
+                  loadMore={loadMore}
+                  loading={loading}
+                  loader={<Spinner />}
+                >
+                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                    <li key={cursor}>
+                      <ArticleDigest.Feed article={node} />
+                    </li>
+                  ))}
+                </InfiniteScroll>
+              </ul>
+            </>
+          )
+        }}
+      </Query>
+      <style jsx>{styles}</style>
+    </>
+  )
+}

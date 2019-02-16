@@ -1,10 +1,16 @@
 import gql from 'graphql-tag'
 import Head from 'next/head'
 
-import { AnalyticsListener } from '../Analytics'
-import { GlobalHeader } from '../GlobalHeader'
-import { ToastHolder } from '../ToastHolder'
+import { AnalyticsListener } from '~/components/Analytics'
+import { GlobalHeader } from '~/components/GlobalHeader'
+import { ToastHolder } from '~/components/ToastHolder'
 import { LayoutUser } from './__generated__/LayoutUser'
+
+interface LayoutProps {
+  loading: boolean
+  user: LayoutUser
+  error?: Error
+}
 
 const fragments = {
   user: gql`
@@ -17,11 +23,7 @@ const fragments = {
   `
 }
 
-export const Layout: React.FC<{
-  loading: boolean
-  user: LayoutUser
-  error?: Error
-}> & {
+export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
 } = ({ children, loading, user, error }) =>
   loading ? null : (

@@ -1,6 +1,5 @@
 // External modules
 import gql from 'graphql-tag'
-import { SFC } from 'react'
 
 // Internal modules
 import { Avatar } from '~/components'
@@ -26,7 +25,7 @@ const fragments = {
   `
 }
 
-const Mini: SFC = ({ user }: { user: any }) => (
+const Mini = ({ user }: { user: any }) => (
   <section>
     <div className="container">
       <Avatar size="xxsmall" user={user} />

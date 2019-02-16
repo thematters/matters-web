@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 
 // Internal modules
 import { Avatar } from '~/components'
+
+import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
 import styles from './styles.css'
 
 /**
@@ -13,10 +15,6 @@ import styles from './styles.css'
  *
  *   <UserDigest.BriefDesc user={user} />
  */
-
-interface BerifDescProps {
-  user: any
-}
 
 const fragments = {
   user: gql`
@@ -30,13 +28,11 @@ const fragments = {
   `
 }
 
-const BriefDesc: React.FC<BerifDescProps> & { fragments: typeof fragments } = ({
-  user
-}) => (
+const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => (
   <section>
     <div className="container">
       <Avatar size="xsmall" user={user} />
-      <span className="name">{user.displayName}</span>
+      <span className="name">{user.info.description}</span>
       <span className="description">{user.info.description}</span>
     </div>
     <style jsx>{styles}</style>

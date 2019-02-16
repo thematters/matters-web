@@ -15,11 +15,6 @@ type AvatarSize =
   | 'large'
   | 'xlarge'
 
-interface AvatarProps {
-  size?: AvatarSize
-  user: AvatarUser
-}
-
 const fragments = {
   user: gql`
     fragment AvatarUser on User {
@@ -28,9 +23,13 @@ const fragments = {
   `
 }
 
-export const Avatar: React.FC<AvatarProps> & {
-  fragments: typeof fragments
-} = ({ user, size = 'default' }) => {
+export const Avatar = ({
+  user,
+  size = 'default'
+}: {
+  size?: AvatarSize
+  user: AvatarUser
+}) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     [size]: true

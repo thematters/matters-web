@@ -7,6 +7,18 @@
   }
 }
 
+/* placement */
+.text-right {
+}
+.text-left {
+}
+.text-bottom {
+  & :global(*) {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
 /* size */
 .size-xs {
   font-size: var(--font-size-xs);
@@ -43,28 +55,58 @@
 
 /* spacing */
 .spacing-0 {
-  & :global(* + *) {
+  &.text-right .text {
     padding-left: 0;
+  }
+  &.text-left .text {
+    padding-right: 0;
+  }
+  &.text-bottom .text {
+    padding-top: 0;
   }
 }
 .spacing-xxxtight {
-  & :global(* + *) {
+  &.text-right .text {
     padding-left: var(--spacing-xxx-tight);
+  }
+  &.text-left .text {
+    padding-right: var(--spacing-xxx-tight);
+  }
+  &.text-bottom .text {
+    padding-top: var(--spacing-xxx-tight);
   }
 }
 .spacing-xxtight {
-  & :global(* + *) {
+  &.text-right .text {
     padding-left: var(--spacing-xx-tight);
+  }
+  &.text-left .text {
+    padding-right: var(--spacing-xx-tight);
+  }
+  &.text-bottom .text {
+    padding-top: var(--spacing-xx-tight);
   }
 }
 .spacing-xtight {
-  & :global(* + *) {
+  &.text-right .text {
     padding-left: var(--spacing-x-tight);
+  }
+  &.text-left .text {
+    padding-right: var(--spacing-x-tight);
+  }
+  &.text-bottom .text {
+    padding-top: var(--spacing-x-tight);
   }
 }
 .spacing-tight {
-  & :global(* + *) {
+  &.text-right .text {
     padding-left: var(--spacing-tight);
+  }
+  &.text-left .text {
+    padding-right: var(--spacing-tight);
+  }
+  &.text-bottom .text {
+    padding-top: var(--spacing-tight);
   }
 }
 

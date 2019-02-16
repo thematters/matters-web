@@ -8,10 +8,6 @@ import Actions from '../Actions'
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 import styles from './styles.css'
 
-interface FeatureDigestProps {
-  article: TodayDigestArticle
-}
-
 const fragments = {
   today: gql`
     fragment TodayDigestArticle on Article {
@@ -30,9 +26,7 @@ const fragments = {
   `
 }
 
-const FeatureDigest: React.SFC<FeatureDigestProps> & {
-  fragments: typeof fragments
-} = ({ article }) => {
+const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
   const path = toPath({
     page: 'articleDetail',

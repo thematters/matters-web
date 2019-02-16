@@ -10,10 +10,6 @@ import { IcymiDigestArticle } from './__generated__/IcymiDigestArticle'
 import { TopicsDigestArticle } from './__generated__/TopicsDigestArticle'
 import styles from './styles.css'
 
-interface FeedDigestProps {
-  article: IcymiDigestArticle | TopicsDigestArticle
-}
-
 const fragments = {
   icymi: gql`
     fragment IcymiDigestArticle on Article {
@@ -44,9 +40,11 @@ const fragments = {
   `
 }
 
-const FeedDigest: React.FC<FeedDigestProps> & {
-  fragments: typeof fragments
-} = ({ article }) => {
+const FeedDigest = ({
+  article
+}: {
+  article: IcymiDigestArticle | TopicsDigestArticle
+}) => {
   const { cover, author, slug, mediaHash, title } = article
   const path = toPath({
     page: 'articleDetail',
