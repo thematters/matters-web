@@ -54,11 +54,13 @@ const FeedDigest: React.SFC<FeedDigestProps> & {
 
       <div className={contentClasses}>
         <div className="title">
-          <Title type="feed" is="h2">
-            <Link href={path.fs} as={path.url}>
-              <a>{title}</a>
-            </Link>
-          </Title>
+          <Link href={path.fs} as={path.url}>
+            <a>
+              <Title type="feed" is="h2">
+                {title}
+              </Title>
+            </a>
+          </Link>
         </div>
         <div className="description">
           <Link href={path.fs} as={path.url}>

@@ -60,11 +60,13 @@ const FeatureDigest: React.SFC<FeatureDigestProps> & {
         <div className="content">
           <Label>Matters Today</Label>
 
-          <Title type="feature" is="h2">
-            <Link href={path.fs} as={path.url}>
-              <a>{title}</a>
-            </Link>
-          </Title>
+          <Link href={path.fs} as={path.url}>
+            <a>
+              <Title type="feature" is="h2">
+                {title}
+              </Title>
+            </a>
+          </Link>
 
           <div className="description">
             <Link href={path.fs} as={path.url}>

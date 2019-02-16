@@ -63,11 +63,13 @@ const FeedDigest: React.FC<FeedDigestProps> & {
     <section className="container">
       <div className={contentClasses}>
         <div className="left">
-          <Title type="sidebar" is="h2">
-            <Link href={path.fs} as={path.url}>
-              <a>{title}</a>
-            </Link>
-          </Title>
+          <Link href={path.fs} as={path.url}>
+            <a>
+              <Title type="sidebar" is="h2">
+                {title}
+              </Title>
+            </a>
+          </Link>
           <Actions article={article} type="sidebar" />
         </div>
 
