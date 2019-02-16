@@ -2,13 +2,12 @@ import gql from 'graphql-tag'
 import { get } from 'lodash'
 
 import { Icon, TextIcon } from '~/components'
-
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
+import { MATArticle } from './__generated__/MATArticle'
+
 interface MATProps {
-  article?: {
-    MAT?: number
-  }
+  article: MATArticle
   size?: 'small' | 'default'
 }
 

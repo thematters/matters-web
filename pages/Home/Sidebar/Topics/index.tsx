@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Label } from '~/components'
 
+import { Topics } from './__generated__/Topics'
 import styles from './styles.css'
 
 const TOPICS = gql`
@@ -27,7 +28,7 @@ const TOPICS = gql`
 export default () => (
   <>
     <Query query={TOPICS}>
-      {({ data, loading, error }) => {
+      {({ data, loading, error }: QueryResult & { data: Topics }) => {
         // if (loading) {
         //   return <Placeholder.Sidebar />
         // }

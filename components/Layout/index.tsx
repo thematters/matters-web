@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { AnalyticsListener } from '../Analytics'
 import { GlobalHeader } from '../GlobalHeader'
 import { ToastHolder } from '../ToastHolder'
+import { LayoutUser } from './__generated__/LayoutUser'
 
 const fragments = {
   user: gql`
@@ -18,7 +19,7 @@ const fragments = {
 
 export const Layout: React.SFC<{
   loading: boolean
-  user?: any
+  user: LayoutUser
   error?: Error
 }> & {
   fragments: typeof fragments
@@ -54,7 +55,7 @@ export const Layout: React.SFC<{
         <meta name="twitter:image" content="" />
       </Head>
 
-      <GlobalHeader />
+      <GlobalHeader user={user} />
       <ToastHolder />
 
       {children}
