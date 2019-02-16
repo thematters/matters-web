@@ -6,7 +6,7 @@
  * Test route at https://forbeslindesay.github.io/express-route-tester/
  */
 type ROUTE_KEY =
-  | 'HOMEPAGE'
+  | 'HOME'
   | 'FOLLOW'
   | 'AUTHORS'
   | 'SEARCH'
@@ -39,8 +39,8 @@ type ROUTE_KEY =
 
 export const ROUTES: Array<{ key: ROUTE_KEY; fs: string; url: string }> = [
   {
-    key: 'HOMEPAGE',
-    fs: '/',
+    key: 'HOME',
+    fs: '/Home',
     url: '/'
   },
   {

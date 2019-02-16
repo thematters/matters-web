@@ -5,7 +5,7 @@ const env: string = process.env.NODE_ENV || 'development'
 
 const config: { [key: string]: any } = {
   development: {
-    apiUri: 'http://localhost:4000'
+    apiUri: 'http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/'
   },
   production: {
     apiUri: 'https://server-stage.matters.news/'

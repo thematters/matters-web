@@ -84,6 +84,9 @@ typings/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+# Local System
+.DS_Store
+
 build
 yarn.lock
 
