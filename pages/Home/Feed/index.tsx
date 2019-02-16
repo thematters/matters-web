@@ -3,7 +3,15 @@ import _ from 'lodash'
 import { Query } from 'react-apollo'
 
 import { mergeConnections } from '~/common/utils'
-import { ArticleDigest, InfiniteScroll, Placeholder, Title } from '~/components'
+import {
+  ArticleDigest,
+  Icon,
+  InfiniteScroll,
+  Placeholder,
+  Title
+} from '~/components'
+
+import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
 import styles from './styles.css'
 
@@ -60,6 +68,23 @@ export default () => (
               })
           })
 
+        const loader = (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: 24
+            }}
+          >
+            <Icon
+              id={ICON_SPINNER.id}
+              size="default"
+              viewBox={ICON_SPINNER.viewBox}
+            />
+          </div>
+        )
+
         return (
           <>
             <header>
@@ -73,7 +98,7 @@ export default () => (
                 hasNextPage={pageInfo.hasNextPage}
                 loadMore={loadMore}
                 loading={loading}
-                loader={null}
+                loader={loader}
               >
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
