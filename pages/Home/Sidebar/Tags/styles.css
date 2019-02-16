@@ -1,7 +1,3 @@
-header {
-  margin-bottom: var(--spacing-default);
-}
-
 ul {
   font-size: 0; /* remove space between <li> */
 
