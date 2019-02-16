@@ -1,9 +1,9 @@
-.sortBtn {
+.sort-button {
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 }
 
-.dropdownBtn {
+.dropdown-button {
   font-size: var(--font-size-sm);
 
   &.active {
