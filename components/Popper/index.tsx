@@ -1,5 +1,4 @@
 import Tippy, { TippyProps } from '@tippy.js/react'
-import { forwardRef } from 'react'
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -24,9 +23,7 @@ import { forwardRef } from 'react'
  * checkout {@url https://github.com/atomiks/tippy.js-react} for more samples
  */
 
-export const Dropdown: React.ForwardRefExoticComponent<TippyProps> = forwardRef(
-  props => <Tippy {...props} />
-)
+export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
   trigger: 'mouseenter focus click',
   // trigger: 'click',
@@ -37,9 +34,7 @@ Dropdown.defaultProps = {
   theme: 'dropdown'
 }
 
-export const Tooltip: React.ForwardRefExoticComponent<TippyProps> = forwardRef(
-  props => <Tippy {...props} />
-)
+export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
@@ -49,9 +44,7 @@ Tooltip.defaultProps = {
   theme: 'tooltip'
 }
 
-export const Popover: React.ForwardRefExoticComponent<TippyProps> = forwardRef(
-  props => <Tippy {...props} />
-)
+export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
 Popover.defaultProps = {
   arrow: true,
   interactive: true,

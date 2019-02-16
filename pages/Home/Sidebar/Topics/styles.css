@@ -1,0 +1,24 @@
+header {
+  margin-bottom: var(--spacing-default);
+}
+
+ol {
+  counter-reset: topics-counter;
+}
+
+li {
+  position: relative;
+  padding-left: var(--spacing-x-loose);
+
+  &::before {
+    counter-increment: topics-counter;
+    content: '0' counter(topics-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: var(--color-grey-light);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+  }
+}

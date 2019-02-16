@@ -8,7 +8,7 @@ type TextIconColor = 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
 type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
 interface TextIconProps {
-  text: string
+  text?: string | number
   icon: React.ReactNode
 
   color?: TextIconColor
@@ -29,7 +29,7 @@ interface TextIconProps {
  * ```
  */
 
-export const TextIcon: React.SFC<TextIconProps> = ({
+export const TextIcon: React.FC<TextIconProps> = ({
   text,
   icon,
 
@@ -41,6 +41,7 @@ export const TextIcon: React.SFC<TextIconProps> = ({
   className
 }) => {
   const textIconClasses = classNames({
+    'text-icon': true,
     [color || '']: !!color,
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,

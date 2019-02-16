@@ -4,7 +4,7 @@ import MobileNav from './MobileNav'
 import styles from './styles.css'
 
 export default () => (
-  <>
+  <nav>
     <section className="u-sm-up-hide">
       <MobileNav />
     </section>
@@ -12,5 +12,5 @@ export default () => (
       <DesktopNav />
     </section>
     <style jsx>{styles}</style>
-  </>
+  </nav>
 )

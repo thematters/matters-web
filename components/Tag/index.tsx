@@ -27,7 +27,7 @@ interface TagProps {
  * ```
  */
 
-export const Tag: React.SFC<TagProps> = ({
+export const Tag: React.FC<TagProps> = ({
   size = 'default',
 
   text,

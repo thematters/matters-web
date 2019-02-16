@@ -12,6 +12,7 @@ header {
 
   box-sizing: content-box;
   overflow: hidden;
+  z-index: 100;
 }
 
 .holder {

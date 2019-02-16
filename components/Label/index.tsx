@@ -5,9 +5,7 @@ import styles from './styles.css'
 type LabelSize = 'small' | 'default'
 
 interface LabelProps {
-  text: string
   size?: LabelSize
-  [key: string]: any
 }
 
 /**
@@ -15,29 +13,19 @@ interface LabelProps {
  * Usage:
  *
  * ```tsx *
- * <Label size="small" text="作者推薦" />
+ * <Label size="small">作者推薦</Label>
  * ```
  */
 
-export const Label: React.SFC<LabelProps> = ({
-  text,
-
-  size = 'default',
-
-  className,
-  ...restProps
-}) => {
+export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
   const labelClasses = classNames({
     label: true,
-    [size]: true,
-    [className]: !!className
+    [size]: true
   })
 
   return (
     <>
-      <span className={labelClasses} {...restProps}>
-        {text}
-      </span>
+      <span className={labelClasses}>{children}</span>
       <style jsx>{styles}</style>
     </>
   )

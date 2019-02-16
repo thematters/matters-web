@@ -20,8 +20,8 @@ Note that we need to specify `href` (the path inside pages directory + query str
 For instances:
 
 ```jsx
-// Homepage
-<Link href="/" as="/">
+// Home
+<Link href="/Home" as="/">
 
 // All Authors
 <Link href="/Authors" as="/authors">

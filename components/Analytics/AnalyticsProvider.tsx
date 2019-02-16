@@ -1,11 +1,11 @@
-import React, { SFC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 
 const segmentKey =
   process.env.NODE_ENV === 'production'
     ? 'Yk2ao5JvhOCyvCh9SCVBT1iTN4kfTpy7'
     : '3gE20MjzN9qncFqlKV0pDvNO7Cp2gWU3'
 
-export const AnalyticsProvider: SFC = ({ children }) => {
+export const AnalyticsProvider: FC = ({ children }) => {
   useEffect(() => {
     // injects analytics var into global scope
     // ref: https://github.com/segmentio/analytics-react#%EF%B8%8F-step-1-copy-the-snippet

@@ -126,7 +126,7 @@ type ButtonProps =
  *
  */
 
-export const Button: React.SFC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   icon,
   size = 'default',
   spacing,
