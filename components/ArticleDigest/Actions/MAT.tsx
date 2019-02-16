@@ -20,7 +20,7 @@ const fragments = {
   `
 }
 
-const MAT: React.SFC<MATProps> & { fragments: typeof fragments } = ({
+const MAT: React.FC<MATProps> & { fragments: typeof fragments } = ({
   article,
   size = 'default'
 }) => (

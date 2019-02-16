@@ -40,7 +40,7 @@ type IconProps = SVGIconProps | ImgIconProps
  * ```
  */
 
-export const Icon: React.SFC<IconProps> = ({
+export const Icon: React.FC<IconProps> = ({
   size = 'default',
   id,
   viewBox,

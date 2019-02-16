@@ -12,7 +12,7 @@ interface MenuItemProps {
   className?: string
 }
 
-const Item: React.SFC<MenuItemProps> = ({
+const Item: React.FC<MenuItemProps> = ({
   spacing = ['xtight', 'default'],
   hoverBgColor = 'grey-lighter',
 

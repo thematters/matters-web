@@ -17,10 +17,7 @@ interface LabelProps {
  * ```
  */
 
-export const Label: React.SFC<LabelProps> = ({
-  size = 'default',
-  children
-}) => {
+export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
   const labelClasses = classNames({
     label: true,
     [size]: true

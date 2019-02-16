@@ -29,7 +29,7 @@ interface TextIconProps {
  * ```
  */
 
-export const TextIcon: React.SFC<TextIconProps> = ({
+export const TextIcon: React.FC<TextIconProps> = ({
   text,
   icon,
 

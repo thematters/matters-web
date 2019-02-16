@@ -16,7 +16,7 @@ const fragments = {
   `
 }
 
-export const Layout: React.SFC<{
+export const Layout: React.FC<{
   loading: boolean
   user?: any
   error?: Error

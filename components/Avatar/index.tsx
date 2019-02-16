@@ -22,7 +22,7 @@ const fragments = {
   `
 }
 
-export const Avatar: React.SFC<AvatarProps> & {
+export const Avatar: React.FC<AvatarProps> & {
   fragments: typeof fragments
 } = ({ user, size = 'default' }) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT

@@ -25,7 +25,7 @@ interface DateTimeProps {
  * ```
  */
 
-export const DateTime: React.SFC<DateTimeProps> = ({
+export const DateTime: React.FC<DateTimeProps> = ({
   date,
   type = 'absolute'
 }) => (

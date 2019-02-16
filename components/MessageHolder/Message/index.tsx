@@ -1,6 +1,6 @@
 // External modules
 import classNames from 'classnames'
-import { SFC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 // Internal modules
 import styles from './styles.css'
@@ -31,7 +31,7 @@ interface Props {
   remove: () => void
 }
 
-export const Message: SFC<Props> = ({
+export const Message: FC<Props> = ({
   id,
   color,
   content,

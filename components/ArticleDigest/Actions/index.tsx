@@ -34,7 +34,7 @@ const fragments = {
   `
 }
 
-const Actions: React.SFC<ActionsProps> & {
+const Actions: React.FC<ActionsProps> & {
   fragments: typeof fragments
 } = ({ article, type }) => {
   const isShowDateTime = ['feature', 'feed'].indexOf(type) >= 0
