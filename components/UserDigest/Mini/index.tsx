@@ -17,7 +17,9 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
-      description
+      info {
+        description
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}
@@ -28,7 +30,7 @@ const Mini: SFC = ({ user }: { user: any }) => (
   <section>
     <div className="container">
       <Avatar size="xxsmall" user={user} />
-      <span className="name">{user.displayName}</span>
+      <span className="name">{user.info.displayName}</span>
     </div>
     <style jsx>{styles}</style>
   </section>
