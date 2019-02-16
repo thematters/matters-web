@@ -25,8 +25,7 @@ import Tippy, { TippyProps } from '@tippy.js/react'
 
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
-  // trigger: 'mouseenter focus click',
-  trigger: 'click',
+  trigger: 'mouseenter focus click',
   interactive: true,
   distance: 4,
   placement: 'bottom',

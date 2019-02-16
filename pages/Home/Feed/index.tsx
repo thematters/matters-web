@@ -11,7 +11,7 @@ import {
   Spinner,
   Title
 } from '~/components'
-import SortDropdown from './SortDropdown'
+import SortBy from './SortBy'
 
 import { HomeFeed } from './__generated__/HomeFeed'
 import styles from './styles.css'
@@ -81,7 +81,7 @@ export default () => {
             <>
               <header>
                 <Title type="page">热门文章</Title>
-                <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+                <SortBy sortBy={sortBy} setSortBy={setSortBy} />
               </header>
 
               <hr />

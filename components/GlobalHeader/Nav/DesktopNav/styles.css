@@ -1,4 +1,4 @@
-a {
+.nav-link {
   display: inline-block;
 
   height: var(--global-header-height);

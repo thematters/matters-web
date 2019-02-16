@@ -5,15 +5,12 @@ import { Dropdown, Icon, Menu, TextIcon } from '~/components'
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 import styles from './styles.css'
 
-interface SortDropdownProps {
+interface SortByProps {
   sortBy: string
   setSortBy: (sortBy: string) => void
 }
 
-const DropdownContent: React.FC<SortDropdownProps> = ({
-  sortBy,
-  setSortBy
-}) => {
+const DropdownContent: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const hottestBtnClasses = classNames({
     dropdownBtn: true,
     active: sortBy === 'hottest'
@@ -50,7 +47,7 @@ const DropdownContent: React.FC<SortDropdownProps> = ({
   )
 }
 
-const SortDropdown: React.FC<SortDropdownProps> = props => (
+const SortBy: React.FC<SortByProps> = props => (
   <>
     <Dropdown content={<DropdownContent {...props} />}>
       <button type="button" className="sortBtn">
@@ -72,4 +69,4 @@ const SortDropdown: React.FC<SortDropdownProps> = props => (
   </>
 )
 
-export default SortDropdown
+export default SortBy
