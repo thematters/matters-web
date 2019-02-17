@@ -1,7 +1,14 @@
 import classNames from 'classnames'
 import { useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance, TextIcon } from '~/components'
+import {
+  Dropdown,
+  Icon,
+  Menu,
+  PopperInstance,
+  TextIcon,
+  Translate
+} from '~/components'
 
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 import styles from './styles.css'
@@ -9,10 +16,9 @@ import styles from './styles.css'
 interface SortByProps {
   sortBy: string
   setSortBy: (sortBy: string) => void
-  hideDropdown: () => void
 }
 
-const DropdownContent: React.FC<SortByProps> = ({
+const DropdownContent: React.FC<SortByProps & { hideDropdown: () => void }> = ({
   sortBy,
   setSortBy,
   hideDropdown
@@ -38,7 +44,9 @@ const DropdownContent: React.FC<SortByProps> = ({
             }}
             className={hottestBtnClasses}
           >
-            熱門排序
+            <Translate
+              translations={{ zh_hant: '熱門排序', zh_hans: '热门排序' }}
+            />
           </button>
         </Menu.Item>
         <Menu.Item>
@@ -50,7 +58,9 @@ const DropdownContent: React.FC<SortByProps> = ({
             }}
             className={newestBtnClasses}
           >
-            最新排序
+            <Translate
+              translations={{ zh_hant: '最新排序', zh_hans: '最新排序' }}
+            />
           </button>
         </Menu.Item>
       </Menu>
