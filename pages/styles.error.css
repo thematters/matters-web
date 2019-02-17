@@ -1,0 +1,29 @@
+article {
+  margin-top: var(--spacing-x-loose);
+  text-align: center;
+}
+
+.image {
+  margin: 0 auto;
+  width: 15rem;
+  height: 15rem;
+}
+
+.error-code {
+  color: var(--color-grey);
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: var(--font-weight-normal);
+  line-height: 1.16666667;
+}
+
+.error-message {
+  margin-top: var(--spacing-x-tight);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+}
+
+.error-redirect {
+  margin-top: var(--spacing-loose);
+}
