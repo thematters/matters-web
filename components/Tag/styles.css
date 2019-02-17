@@ -15,7 +15,7 @@
       to left,
       var(--color-white),
       var(--color-white) 73%,
-      transparent
+      rgba(255, 255, 255, 0)
     );
   }
 }
