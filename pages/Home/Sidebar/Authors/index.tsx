@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Icon, Label, TextIcon, UserDigest } from '~/components'
+import { Icon, Label, TextIcon, Translate, UserDigest } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
@@ -51,7 +51,11 @@ export default () => (
         return (
           <>
             <header>
-              <Label>活躍作者</Label>
+              <Label>
+                <Translate
+                  translations={{ zh_hant: '活躍作者', zh_hans: '活跃作者' }}
+                />
+              </Label>
 
               <div>
                 <button
@@ -59,7 +63,11 @@ export default () => (
                   type="button"
                   onClick={() => refetch()}
                 >
-                  <TextIcon icon={<IconShuffle />} text="換一批" color="grey" />
+                  <TextIcon icon={<IconShuffle />} color="grey">
+                    <Translate
+                      translations={{ zh_hant: '換一批', zh_hans: '换一批' }}
+                    />
+                  </TextIcon>
                 </button>
                 <ViewAllLink type="authors" />
               </div>
