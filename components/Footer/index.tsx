@@ -10,9 +10,7 @@ const linkClass = classNames('item', 'item-link')
 const BaseLink = ({ href, as, text, style }) => (
   <>
     <Link href={href} as={as}>
-      <a className={linkClass}>
-        {text}
-      </a>
+      <a className={linkClass}>{text}</a>
     </Link>
     <style jsx>{styles}</style>
   </>
