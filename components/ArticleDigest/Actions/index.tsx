@@ -50,7 +50,7 @@ const Actions = ({
 
   return (
     <footer className="actions">
-      {isShowUserDigest && <UserDigest.Mini user={article.author}/>}
+      {isShowUserDigest && <UserDigest.Mini user={article.author} />}
       <MAT article={article} size={size} />
       <CommentCount article={article} size={size} />
       {isShowBookmark && <Bookmark />}
