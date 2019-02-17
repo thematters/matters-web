@@ -11,6 +11,10 @@ type ToPathArgs =
       page: 'tagDetail'
       id: string
     }
+  | {
+      page: 'userProfile'
+      userName: string
+    }
 
 export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
   switch (args.page) {
@@ -25,6 +29,11 @@ export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
       return {
         fs: `${PATHS.TAG_DETAIL.fs}?id=${args.id}`,
         url: `/tags/${args.id}`
+      }
+    case 'userProfile':
+      return {
+        fs: `${PATHS.USER_ARTICLES.fs}?userName=${args.userName}`,
+        url: `/@${args.userName}`
       }
   }
 }

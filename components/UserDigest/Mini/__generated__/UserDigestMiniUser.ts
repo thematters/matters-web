@@ -8,6 +8,7 @@
 
 export interface UserDigestMiniUser {
   __typename: "User";
+  userName: string;
   /**
    * Display name on profile
    */

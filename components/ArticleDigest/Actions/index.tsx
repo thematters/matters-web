@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
 import { DateTime } from '~/components'
-
+import { UserDigest } from '~/components/UserDigest'
 import Bookmark from './Bookmark'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 
-import { UserDigest } from '../../UserDigest'
 import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
 import styles from './styles.css'
 

@@ -8,6 +8,7 @@
 
 export interface FeedDigestActionsArticle_author {
   __typename: "User";
+  userName: string;
   /**
    * Display name on profile
    */

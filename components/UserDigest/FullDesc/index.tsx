@@ -94,8 +94,8 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
   }
 
   return (
-    <section>
-      <div className="container">
+    <>
+      <section className="container">
         <div className="sub-container">
           <Avatar size="default" user={user} />
           <div className="content-container">
@@ -115,9 +115,9 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
             {...buttonProps}
           />
         )}
-      </div>
+      </section>
       <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 

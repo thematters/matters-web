@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 import { Title } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
-import { UserDigest } from '../../UserDigest'
 import Actions from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
