@@ -88,5 +88,5 @@ typings/
 .DS_Store
 
 build
+static-site-build
 yarn.lock
-
