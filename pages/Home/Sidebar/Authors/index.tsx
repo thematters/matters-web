@@ -1,12 +1,21 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Label, Tag } from '~/components'
+import { Icon, Label, TextIcon } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import ViewAllLink from '../ViewAllLink'
 
+import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import styles from './styles.css'
+
+const IconShuffle = () => (
+  <Icon
+    id={ICON_RELOAD.id}
+    viewBox={ICON_RELOAD}
+    style={{ width: 14, height: 14 }}
+  />
+)
 
 const SIDEBAR_AUTHORS = gql`
   query SidebarAuthors {
@@ -39,7 +48,17 @@ export default () => (
           <>
             <header>
               <Label>活躍作者</Label>
-              <ViewAllLink type="authors" />
+
+              <div>
+                <button
+                  className="shuffle-button"
+                  type="button"
+                  onClick={() => alert('shuffling')}
+                >
+                  <TextIcon icon={<IconShuffle />} text="換一批" color="grey" />
+                </button>
+                <ViewAllLink type="authors" />
+              </div>
             </header>
 
             <ul>
