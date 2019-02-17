@@ -6,17 +6,12 @@
 // GraphQL fragment: UserDigestMiniUser
 // ====================================================
 
-export interface UserDigestMiniUser_info {
-  __typename: "UserInfo";
-  /**
-   * User desciption
-   */
-  description: string | null;
-}
-
 export interface UserDigestMiniUser {
   __typename: "User";
-  info: UserDigestMiniUser_info;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
   /**
    * URL for avatar
    */

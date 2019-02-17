@@ -9,6 +9,14 @@
 export interface HomeToday_viewer_recommendation_today_author {
   __typename: "User";
   userName: string;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface HomeToday_viewer_recommendation_today_comments {

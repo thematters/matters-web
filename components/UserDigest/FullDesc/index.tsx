@@ -5,7 +5,17 @@ import { FC, useState } from 'react'
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
+import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
+
+/**
+ * UeserDigest.FullDesc is a component for presenting user's avatar, display
+ * name, description and follower/followee state.
+ *
+ * Usage:
+ *
+ *   <UserDigest.FullDesc user={user} />
+ */
 
 const iconStyle = { width: 10, height: 10 }
 
@@ -29,6 +39,9 @@ const BaseButton = ({ icon, text, ...props }) => (
 const fragments = {
   user: gql`
     fragment UserDigestFullDescUser on User {
+      info {
+        description
+      }
       isFollower
       isFollowee
       ...AvatarUser
@@ -37,7 +50,7 @@ const fragments = {
   `
 }
 
-const FullDesc: FC = ({ user }: { user: any }) => {
+const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
   const getStateText = ({ isFollower, isFollowee }: { user: any }) => {
     if (isFollower && isFollowee) {
       return '互相追蹤'
@@ -90,7 +103,7 @@ const FullDesc: FC = ({ user }: { user: any }) => {
               <span className="name">{user.displayName}</span>
               {user.isFollowee && <BaseButton {...stateProps} />}
             </div>
-            <div className="description">{user.description}</div>
+            <div className="description">{user.info.description}</div>
           </div>
         </div>
         {!user.isFollower && <BaseButton onClick={follow} {...buttonProps} />}

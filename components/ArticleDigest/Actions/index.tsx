@@ -6,6 +6,7 @@ import Bookmark from './Bookmark'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 
+import { UserDigest } from '../../UserDigest'
 import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
 import styles from './styles.css'
 
@@ -14,10 +15,14 @@ type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
 const fragments = {
   feedDigest: gql`
     fragment FeedDigestActionsArticle on Article {
+      author {
+        ...UserDigestMiniUser
+      }
       createdAt
       ...MATArticle
       ...CommentCountArticle
     }
+    ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
   `,
@@ -38,12 +43,14 @@ const Actions = ({
   article: FeedDigestActionsArticle
   type: ActionsType
 }) => {
+  const isShowUserDigest = type === 'feature'
   const isShowDateTime = ['feature', 'feed'].indexOf(type) >= 0
   const isShowBookmark = ['feature', 'feed'].indexOf(type) >= 0
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'
 
   return (
     <footer className="actions">
+      {isShowUserDigest && <UserDigest.Mini user={article.author} />}
       <MAT article={article} size={size} />
       <CommentCount article={article} size={size} />
       {isShowBookmark && <Bookmark />}

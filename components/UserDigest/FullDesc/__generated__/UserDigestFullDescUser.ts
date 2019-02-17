@@ -6,8 +6,17 @@
 // GraphQL fragment: UserDigestFullDescUser
 // ====================================================
 
+export interface UserDigestFullDescUser_info {
+  __typename: "UserInfo";
+  /**
+   * User desciption
+   */
+  description: string | null;
+}
+
 export interface UserDigestFullDescUser {
   __typename: "User";
+  info: UserDigestFullDescUser_info;
   /**
    * This user is following viewer
    */

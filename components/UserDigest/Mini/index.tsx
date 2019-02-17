@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 // Internal modules
 import { Avatar } from '~/components'
+import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import styles from './styles.css'
 
 /**
@@ -16,20 +17,18 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
-      info {
-        description
-      }
+      displayName
       ...AvatarUser
     }
     ${Avatar.fragments.user}
   `
 }
 
-const Mini = ({ user }: { user: any }) => (
+const Mini = ({ user }: { user: UserDigestMiniUser }) => (
   <section>
     <div className="container">
       <Avatar size="xxsmall" user={user} />
-      <span className="name">{user.info.displayName}</span>
+      <span className="name">{user.displayName}</span>
     </div>
     <style jsx>{styles}</style>
   </section>

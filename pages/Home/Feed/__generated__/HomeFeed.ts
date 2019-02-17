@@ -16,6 +16,14 @@ export interface HomeFeed_viewer_recommendation_feed_pageInfo {
 export interface HomeFeed_viewer_recommendation_feed_edges_node_author {
   __typename: "User";
   userName: string;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface HomeFeed_viewer_recommendation_feed_edges_node_comments {

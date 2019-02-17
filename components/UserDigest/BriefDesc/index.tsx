@@ -19,6 +19,7 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestBriefDescUser on User {
+      displayName
       info {
         description
       }
@@ -32,7 +33,7 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => (
   <section>
     <div className="container">
       <Avatar size="xsmall" user={user} />
-      <span className="name">{user.info.description}</span>
+      <span className="name">{user.displayName}</span>
       <span className="description">{user.info.description}</span>
     </div>
     <style jsx>{styles}</style>

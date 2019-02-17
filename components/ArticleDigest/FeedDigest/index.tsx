@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { toPath } from '~/common/utils'
 import { Title } from '~/components'
 
+import { UserDigest } from '../../UserDigest'
 import Actions from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
@@ -20,9 +21,11 @@ const fragments = {
       mediaHash
       author {
         userName
+        ...UserDigestMiniUser
       }
       ...FeedDigestActionsArticle
     }
+    ${UserDigest.Mini.fragments.user}
     ${Actions.fragments.feedDigest}
   `
 }
@@ -42,9 +45,9 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
 
   return (
     <section className="container">
-      {/* <div className="header">
-
-      </div> */}
+      <div className="header">
+        <UserDigest.Mini user={author} />
+      </div>
 
       <div className={contentClasses}>
         <div className="title">
