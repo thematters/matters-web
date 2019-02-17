@@ -29,7 +29,7 @@ steps:
         from_secret: AWS_SECRET_ACCESS_KEY
       region: ap-southeast-1
       source: build/**/*
-      target: /assets
+      target: /assets/_next
       strip_prefix: build/
     when:
       branch:
