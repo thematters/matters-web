@@ -35,7 +35,7 @@ const nextConfig = {
   // @see {@url https://github.com/zeit/next.js#dynamic-assetprefix}
   // assetPrefix: isProd && process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '',
   useFileSystemPublicRoutes: false,
-  distDir: 'build',
+  // distDir: 'build',
   crossOrigin: 'anonymous',
   webpack(config, { defaultLoaders }) {
     /**

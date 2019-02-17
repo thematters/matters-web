@@ -30,7 +30,6 @@ steps:
       region: ap-southeast-1
       source: build/**/*
       target: /assets
-      strip_prefix: build/
     when:
       branch:
         - develop

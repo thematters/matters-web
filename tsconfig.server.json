@@ -7,7 +7,7 @@
     "noEmit": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "outDir": "build/production-server"
+    "outDir": ".next/production-server"
   },
   "include": ["server.ts"]
 }

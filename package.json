@@ -15,9 +15,9 @@
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-    "start": "NODE_ENV=production node build/production-server/server.js",
+    "start": "NODE_ENV=production node .next/production-server/server.js",
     "export": "npm run build && next export -o static-site-build",
-    "format": "prettier --write \"{,!(build|static-site-build|node_modules)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"{,!(.next|build|static-site-build|node_modules)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "tslint -p .",
     "analyze": "BUNDLE_ANALYZE=both next build",
@@ -89,7 +89,7 @@
     "typescript": "^3.3.3"
   },
   "_moduleAliases": {
-    "~": "./build/production-server"
+    "~": "./.next/production-server"
   },
   "nodemonConfig": {
     "watch": [
@@ -103,7 +103,7 @@
       "NODE_ENV": "development",
       "BABEL_DISABLE_CACHE": 1
     },
-    "exec": "npm run build:server && node build/production-server/server.js"
+    "exec": "npm run build:server && node .next/production-server/server.js"
   },
   "prettier": {
     "singleQuote": true,
@@ -125,7 +125,9 @@
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
+      "<rootDir>/.next/",
       "<rootDir>/build/",
+      "<rootDir>/static-site-build",
       "<rootDir>/bin/",
       "<rootDir>/static/"
     ],
