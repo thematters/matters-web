@@ -23,7 +23,7 @@ export type PopperInstance = Instance
  * <Popover>
  * ```
  *
- * checkout {@url https://github.com/atomiks/tippy.js-react} for more samples
+ * @see {@url https://github.com/atomiks/tippy.js-react}
  */
 
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />

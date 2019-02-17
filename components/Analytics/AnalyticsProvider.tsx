@@ -1,9 +1,9 @@
+import getConfig from 'next/config'
 import React, { FC, useEffect } from 'react'
 
-const segmentKey =
-  process.env.NODE_ENV === 'production'
-    ? 'Yk2ao5JvhOCyvCh9SCVBT1iTN4kfTpy7'
-    : '3gE20MjzN9qncFqlKV0pDvNO7Cp2gWU3'
+const {
+  publicRuntimeConfig: { SEGMENT_KEY }
+} = getConfig()
 
 export const AnalyticsProvider: FC = ({ children }) => {
   useEffect(() => {
@@ -67,7 +67,7 @@ export const AnalyticsProvider: FC = ({ children }) => {
             analytics._loadOptions = e
           }
           analytics.SNIPPET_VERSION = '4.1.0'
-          analytics.load(segmentKey)
+          analytics.load(SEGMENT_KEY)
         }
       }
     })()
