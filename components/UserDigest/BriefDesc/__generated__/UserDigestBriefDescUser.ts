@@ -16,6 +16,10 @@ export interface UserDigestBriefDescUser_info {
 
 export interface UserDigestBriefDescUser {
   __typename: "User";
+  /**
+   * Display name on profile
+   */
+  displayName: string;
   info: UserDigestBriefDescUser_info;
   /**
    * URL for avatar

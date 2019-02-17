@@ -39,6 +39,9 @@ const BaseButton = ({ icon, text, ...props }) => (
 const fragments = {
   user: gql`
     fragment UserDigestFullDescUser on User {
+      info {
+        description
+      }
       isFollower
       isFollowee
       ...AvatarUser
@@ -100,7 +103,7 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
               <span className="name">{user.displayName}</span>
               {user.isFollowee && <BaseButton {...stateProps} />}
             </div>
-            <div className="description">{user.description}</div>
+            <div className="description">{user.info.description}</div>
           </div>
         </div>
         {!user.isFollower && <BaseButton onClick={follow} {...buttonProps} />}
