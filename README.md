@@ -5,6 +5,7 @@
 ### Start local dev
 
 - Install dependencies: `npm i`
+- Environment variables: `cp .env.example .env`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
 ### Build and run production server

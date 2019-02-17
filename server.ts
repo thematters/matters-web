@@ -5,15 +5,27 @@
  */
 import 'module-alias/register'
 
+// load environment variables from .env
+import dotenv from 'dotenv'
+const dotEnvResult = dotenv.config()
+if (dotEnvResult.error) {
+  console.error(dotEnvResult.error)
+}
+
 import express from 'express'
 import next from 'next'
 
 import { ROUTES } from '~/common/enums'
 
-const IS_PROD = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 3000
-const app = next({ dev: !IS_PROD })
+const ASSET_PREFIX = process.env.ASSET_PREFIX
+const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
+
+if (ASSET_PREFIX) {
+  app.setAssetPrefix(ASSET_PREFIX)
+}
 
 app
   .prepare()

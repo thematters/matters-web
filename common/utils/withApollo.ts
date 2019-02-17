@@ -1,21 +1,15 @@
 import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import withApollo from 'next-with-apollo'
+import getConfig from 'next/config'
 
-const env: string = process.env.NODE_ENV || 'development'
-
-const config: { [key: string]: any } = {
-  development: {
-    apiUri: 'http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/'
-  },
-  production: {
-    apiUri: 'https://server-stage.matters.news/'
-  }
-}
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig()
 
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      uri: config[env].apiUri,
+      uri: API_URL,
       cache: new InMemoryCache().restore(initialState || {}),
       headers
     })

@@ -3,7 +3,7 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["react-testing-library", "~", "tippy.js"]
+      ["react-testing-library", "~", "tippy.js", "dotenv"]
     ],
     "no-submodule-imports": [false],
     "jsx-boolean-value": false,
