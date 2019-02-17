@@ -30,14 +30,14 @@ const fragments = {
 }
 
 const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => (
-  <section>
-    <div className="container">
+  <>
+    <section className="container">
       <Avatar size="xsmall" user={user} />
       <span className="name">{user.displayName}</span>
       <span className="description">{user.info.description}</span>
-    </div>
+    </section>
     <style jsx>{styles}</style>
-  </section>
+  </>
 )
 
 BriefDesc.fragments = fragments

@@ -11,7 +11,7 @@
 }
 
 .header {
-  padding: var(--spacing-tight) 0px;
+  margin-bottom: var(--spacing-x-tight);
 }
 
 .content {
