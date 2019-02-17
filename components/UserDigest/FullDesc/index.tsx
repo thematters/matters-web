@@ -1,6 +1,6 @@
 // External modules
 import gql from 'graphql-tag'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
@@ -17,21 +17,15 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
-const iconStyle = { width: 10, height: 10 }
-
 const IconAdd = () => (
-  <Icon id={ICON_ADD.id} viewBox={ICON_ADD.viewBox} style={iconStyle} />
+  <Icon
+    id={ICON_ADD.id}
+    viewBox={ICON_ADD.viewBox}
+    style={{ width: 10, height: 10 }}
+  />
 )
-
-const buttonStyle = { width: 64 }
-
 const BaseButton = ({ icon, text, ...props }) => (
-  <Button
-    size="small"
-    style={buttonStyle}
-    icon={icon && <IconAdd />}
-    {...props}
-  >
+  <Button size="small" icon={icon && <IconAdd />} {...props}>
     {text}
   </Button>
 )
@@ -39,6 +33,7 @@ const BaseButton = ({ icon, text, ...props }) => (
 const fragments = {
   user: gql`
     fragment UserDigestFullDescUser on User {
+      displayName
       info {
         description
       }
@@ -50,8 +45,8 @@ const fragments = {
   `
 }
 
-const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
-  const getStateText = ({ isFollower, isFollowee }: { user: any }) => {
+const FullDesc = ({ user }: { user: UserDigestFullDescUser }) => {
+  const getStateText = ({ isFollower, isFollowee }: UserDigestFullDescUser) => {
     if (isFollower && isFollowee) {
       return '互相追蹤'
     }
@@ -59,36 +54,29 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
       return '追蹤了你'
     }
   }
-
   const stateProps = {
     is: 'span',
     outlineColor: 'grey',
     text: getStateText(user),
     style: { borderWidth: '1px' }
   }
-
   const baseButtonProps = {
     bgColor: user.isFollower ? 'green' : undefined,
     outlineColor: !user.isFollower ? 'green' : undefined,
     icon: !user.isFollower,
     text: user.isFollower ? '已追蹤' : '追蹤'
   }
-
   const cancelButtonProps = {
     bgColor: 'red',
     text: '取消追蹤'
   }
 
   const [buttonProps, setButtonProps] = useState(baseButtonProps)
-
   const mouseEnter = () => setButtonProps(cancelButtonProps)
-
   const mouseLeave = () => setButtonProps(baseButtonProps)
-
   const follow = () => {
     // TODO
   }
-
   const unfollow = () => {
     // TODO
   }

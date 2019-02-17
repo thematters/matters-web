@@ -15,16 +15,21 @@
   padding-right: var(--spacing-x-tight);
 }
 
+.name,
+.description {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.33333333;
+}
+
 .name {
-  color: var(--color-black);
-  font-size: var(--font-size-md);
-  line-height: 1.25;
   padding-right: var(--spacing-tight);
+
+  color: var(--color-black);
 }
 
 .description {
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  line-height: 1.45;
   padding-top: var(--spacing-x-tight);
+
+  color: var(--color-grey);
 }
