@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { DateTime } from '~/components'
@@ -7,12 +6,10 @@ import Bookmark from './Bookmark'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 
+import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
 import styles from './styles.css'
 
-interface ActionsProps {
-  article: any
-  type: 'feature' | 'feed' | 'sidebar' | 'related'
-}
+type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
 
 const fragments = {
   feedDigest: gql`
@@ -34,9 +31,13 @@ const fragments = {
   `
 }
 
-const Actions: React.FC<ActionsProps> & {
-  fragments: typeof fragments
-} = ({ article, type }) => {
+const Actions = ({
+  article,
+  type
+}: {
+  article: FeedDigestActionsArticle
+  type: ActionsType
+}) => {
   const isShowDateTime = ['feature', 'feed'].indexOf(type) >= 0
   const isShowBookmark = ['feature', 'feed'].indexOf(type) >= 0
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'

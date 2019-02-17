@@ -16,7 +16,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
     "start": "NODE_ENV=production node build/production-server/server.js",
-    "format": "prettier --write \"{,!(build|node_modules)/**/}*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"{,!(build|node_modules)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "tslint -p .",
     "analyze": "BUNDLE_ANALYZE=both next build",

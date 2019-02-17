@@ -1,38 +1,35 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label } from '~/components'
+import { Label, Tag } from '~/components'
+import ViewAllLink from '../ViewAllLink'
 
-import { SidebarTopics } from './__generated__/SidebarTopics'
+import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
 
-const SIDEBAR_TOPICS = gql`
-  query SidebarTopics {
+const SIDEBAR_TAGS = gql`
+  query SidebarTags {
     viewer {
       id
       recommendation {
-        topics(input: { first: 5 }) {
+        tags(input: { first: 8 }) {
           edges {
             cursor
             node {
-              ...TopicsDigestArticle
+              ...Tag
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.topics}
+  ${Tag.fragments.tag}
 `
 
 export default () => (
   <>
-    <Query query={SIDEBAR_TOPICS}>
-      {({ data, loading, error }: QueryResult & { data: SidebarTopics }) => {
-        // if (loading) {
-        //   return <Placeholder.Sidebar />
-        // }
-
+    <Query query={SIDEBAR_TAGS}>
+      {({ data, loading, error }: QueryResult & { data: SidebarTags }) => {
         if (error) {
           return <span>{JSON.stringify(error)}</span> // TODO
         }
@@ -40,18 +37,19 @@ export default () => (
         return (
           <>
             <header>
-              <Label>熱議話題</Label>
+              <Label>標簽</Label>
+              <ViewAllLink type="tags" />
             </header>
 
-            <ol>
-              {data.viewer.recommendation.topics.edges.map(
+            <ul>
+              {data.viewer.recommendation.tags.edges.map(
                 ({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <ArticleDigest.Sidebar article={node} />
+                    <Tag tag={node} type="count-fixed" />
                   </li>
                 )
               )}
-            </ol>
+            </ul>
           </>
         )
       }}

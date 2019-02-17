@@ -6,11 +6,6 @@ import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { CommentCountArticle } from './__generated__/CommentCountArticle'
 
-interface CommentCountProps {
-  article: CommentCountArticle
-  size?: 'small' | 'default'
-}
-
 const fragments = {
   article: gql`
     fragment CommentCountArticle on Article {
@@ -21,9 +16,13 @@ const fragments = {
   `
 }
 
-const CommentCount: React.FC<CommentCountProps> & {
-  fragments: typeof fragments
-} = ({ article, size = 'default' }) => (
+const CommentCount = ({
+  article,
+  size = 'default'
+}: {
+  article: CommentCountArticle
+  size?: 'small' | 'default'
+}) => (
   <TextIcon
     icon={
       <Icon

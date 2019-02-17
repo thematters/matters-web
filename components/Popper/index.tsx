@@ -1,4 +1,7 @@
 import Tippy, { TippyProps } from '@tippy.js/react'
+import { Instance } from 'tippy.js'
+
+export type PopperInstance = Instance
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -26,12 +29,12 @@ import Tippy, { TippyProps } from '@tippy.js/react'
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
   trigger: 'mouseenter focus click',
-  // trigger: 'click',
   interactive: true,
   distance: 4,
   placement: 'bottom',
   animateFill: false,
-  theme: 'dropdown'
+  theme: 'dropdown',
+  zIndex: 99 // zIndex of GlobalHeader is 100
 }
 
 export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -41,7 +44,8 @@ Tooltip.defaultProps = {
   distance: 8,
   placement: 'right',
   animateFill: false,
-  theme: 'tooltip'
+  theme: 'tooltip',
+  zIndex: 99
 }
 
 export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -51,5 +55,6 @@ Popover.defaultProps = {
   distance: 8,
   placement: 'right',
   animateFill: false,
-  theme: 'popover'
+  theme: 'popover',
+  zIndex: 99
 }

@@ -2,21 +2,17 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type TextIconSize = 'xs' | 'sm' | 'md' | 'lg'
-type TextIconSpacing = '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
-type TextIconColor = 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
-type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
-
 interface TextIconProps {
   text?: string | number
+  textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
 
-  color?: TextIconColor
-  size?: TextIconSize
-  spacing?: TextIconSpacing
-  weight?: TextWeight
+  color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+  spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
+  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
-  [key: string]: any
+  className?: string
 }
 
 /**
@@ -31,6 +27,7 @@ interface TextIconProps {
 
 export const TextIcon: React.FC<TextIconProps> = ({
   text,
+  textPlacement = 'right',
   icon,
 
   color,
@@ -43,16 +40,27 @@ export const TextIcon: React.FC<TextIconProps> = ({
   const textIconClasses = classNames({
     'text-icon': true,
     [color || '']: !!color,
+    [`text-${textPlacement}`]: true,
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
-    [className]: !!className
+    [className || '']: !!className
   })
+
+  if (textPlacement === 'left') {
+    return (
+      <span className={textIconClasses}>
+        <span className="text">{text}</span>
+        {icon}
+        <style jsx>{styles}</style>
+      </span>
+    )
+  }
 
   return (
     <span className={textIconClasses}>
       {icon}
-      <span>{text}</span>
+      <span className="text">{text}</span>
       <style jsx>{styles}</style>
     </span>
   )

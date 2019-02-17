@@ -1,68 +1,85 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 
+import { toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
+import { Tag as TagType } from './__generated__/Tag'
 import styles from './styles.css'
 
 type TagSize = 'small' | 'default'
 
 interface TagProps {
   size?: TagSize
-  text: string
-  count?: number
-  [key: string]: any
+  type?: 'count-fixed' | 'default'
+  tag: TagType
 }
 
 /**
  *
  * Usage:
  *
- * ```tsx *
- * <Link href="/" as="/">
- *   <a className="u-link-color">
- *     <Tag text="大屠杀" size="small" count={200} />
- *   </a>
- * </Link>
+ * ```tsx
+ * <Tag size="small" tag={tag} />
  * ```
  */
 
-export const Tag: React.FC<TagProps> = ({
+const fragments = {
+  tag: gql`
+    fragment Tag on Tag {
+      id
+      content
+      articles(input: { first: 0 }) {
+        totalCount
+      }
+    }
+  `
+}
+
+export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
   size = 'default',
-
-  text,
-  count,
-
-  className,
-  ...restProps
+  type = 'default',
+  tag
 }) => {
   const tagClasses = classNames({
     tag: true,
     [size]: true,
-    [className]: !!className
+    'count-fixed': type === 'count-fixed',
+    'u-link-color': true
   })
   const isSmall = size !== 'default'
+  const path = toPath({
+    page: 'tagDetail',
+    id: tag.id
+  })
+  const tagCount = tag.articles.totalCount
 
   return (
     <>
-      <span className={tagClasses} {...restProps}>
-        <TextIcon
-          icon={
-            <Icon
-              size={isSmall ? 'xsmall' : 'small'}
-              id={ICON_HASHTAG.id}
-              viewBox={ICON_HASHTAG.viewBox}
-            />
-          }
-          text={text}
-          weight="medium"
-          size={isSmall ? 'sm' : 'md'}
-          spacing={isSmall ? 'xtight' : 'tight'}
-        />
+      <Link href={path.fs} as={path.url}>
+        <a className={tagClasses}>
+          <TextIcon
+            icon={
+              <Icon
+                size={isSmall ? 'xsmall' : 'small'}
+                id={ICON_HASHTAG.id}
+                viewBox={ICON_HASHTAG.viewBox}
+              />
+            }
+            text={tag.content}
+            weight="medium"
+            size={isSmall ? 'sm' : 'md'}
+            spacing={isSmall ? 'xtight' : 'tight'}
+          />
 
-        {count && <span className="count">{count}</span>}
-      </span>
+          {tagCount && <span className="count">{tagCount}</span>}
+        </a>
+      </Link>
       <style jsx>{styles}</style>
     </>
   )
 }
+
+Tag.fragments = fragments

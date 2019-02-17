@@ -9,10 +9,6 @@ import Actions from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
 
-interface FeedDigestProps {
-  article: FeedDigestArticle
-}
-
 const fragments = {
   article: gql`
     fragment FeedDigestArticle on Article {
@@ -31,9 +27,7 @@ const fragments = {
   `
 }
 
-const FeedDigest: React.SFC<FeedDigestProps> & {
-  fragments: typeof fragments
-} = ({ article }) => {
+const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
   const path = toPath({
     page: 'articleDetail',
@@ -54,11 +48,13 @@ const FeedDigest: React.SFC<FeedDigestProps> & {
 
       <div className={contentClasses}>
         <div className="title">
-          <Title type="feed" is="h2">
-            <Link href={path.fs} as={path.url}>
-              <a>{title}</a>
-            </Link>
-          </Title>
+          <Link href={path.fs} as={path.url}>
+            <a>
+              <Title type="feed" is="h2">
+                {title}
+              </Title>
+            </a>
+          </Link>
         </div>
         <div className="description">
           <Link href={path.fs} as={path.url}>

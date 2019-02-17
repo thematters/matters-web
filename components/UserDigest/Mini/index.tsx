@@ -1,6 +1,5 @@
 // External modules
 import gql from 'graphql-tag'
-import { SFC } from 'react'
 
 // Internal modules
 import { Avatar } from '~/components'
@@ -17,18 +16,20 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
-      description
+      info {
+        description
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}
   `
 }
 
-const Mini: SFC = ({ user }: { user: any }) => (
+const Mini = ({ user }: { user: any }) => (
   <section>
     <div className="container">
       <Avatar size="xxsmall" user={user} />
-      <span className="name">{user.displayName}</span>
+      <span className="name">{user.info.displayName}</span>
     </div>
     <style jsx>{styles}</style>
   </section>

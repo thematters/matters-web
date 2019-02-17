@@ -1,3 +1,13 @@
+section {
+  & :global(header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: var(--spacing-default);
+  }
+}
+
 section + section {
   margin-top: var(--spacing-x-loose);
 }

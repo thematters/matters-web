@@ -1,9 +1,32 @@
+.tag.count-fixed {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+
+  & .count {
+    position: absolute;
+    right: 0;
+    width: 3rem;
+
+    text-align: right;
+    background-image: linear-gradient(
+      to left,
+      var(--color-white),
+      var(--color-white) 73%,
+      transparent
+    );
+  }
+}
+
 .count {
   color: var(--color-matters-green);
 
   vertical-align: middle;
   font-weight: var(--font-weight-bold);
   font-family: var(--font-serif-tc);
+  user-select: none;
 
   &[lang='zh-hans'] {
     font-family: var(--font-serif-sc);
@@ -11,12 +34,16 @@
 }
 
 .small {
+  font-size: var(--font-size-sm);
+
   & .count {
     margin-left: var(--spacing-xx-tight);
     font-size: var(--font-size-sm);
   }
 }
 .default {
+  font-size: var(--font-size-md);
+
   & .count {
     margin-left: var(--spacing-x-tight);
     font-size: var(--font-size-md);

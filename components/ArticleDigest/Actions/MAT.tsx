@@ -6,11 +6,6 @@ import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MATArticle } from './__generated__/MATArticle'
 
-interface MATProps {
-  article: MATArticle
-  size?: 'small' | 'default'
-}
-
 const fragments = {
   article: gql`
     fragment MATArticle on Article {
@@ -19,9 +14,12 @@ const fragments = {
   `
 }
 
-const MAT: React.FC<MATProps> & { fragments: typeof fragments } = ({
+const MAT = ({
   article,
   size = 'default'
+}: {
+  article: MATArticle
+  size?: 'small' | 'default'
 }) => (
   <TextIcon
     icon={

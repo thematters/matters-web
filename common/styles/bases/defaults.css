@@ -34,7 +34,11 @@ body {
 }
 
 main {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--spacing-loose);
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-x-loose);
+  }
 }
 
 *:not(body) {
