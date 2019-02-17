@@ -9,6 +9,14 @@
 export interface FeedDigestArticle_author {
   __typename: "User";
   userName: string;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface FeedDigestArticle_comments {

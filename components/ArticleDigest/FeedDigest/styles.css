@@ -10,6 +10,10 @@
   border-bottom: 1px solid var(--color-line-grey);
 }
 
+.header {
+  padding: var(--spacing-tight) 0px;
+}
+
 .content {
   position: relative;
 }

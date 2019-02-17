@@ -5,7 +5,17 @@ import { FC, useState } from 'react'
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
+import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
+
+/**
+ * UeserDigest.FullDesc is a component for presenting user's avatar, display
+ * name, description and follower/followee state.
+ *
+ * Usage:
+ *
+ *   <UserDigest.FullDesc user={user} />
+ */
 
 const iconStyle = { width: 10, height: 10 }
 
@@ -37,7 +47,7 @@ const fragments = {
   `
 }
 
-const FullDesc: FC = ({ user }: { user: any }) => {
+const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
   const getStateText = ({ isFollower, isFollowee }: { user: any }) => {
     if (isFollower && isFollowee) {
       return '互相追蹤'
