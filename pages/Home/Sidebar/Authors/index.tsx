@@ -46,7 +46,7 @@ export default () => (
               {data.viewer.recommendation.authors.edges.map(
                 ({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <UserDigest.FullDesc user={node} />
+                    <UserDigest.FullDesc user={node} nameSize="small" />
                   </li>
                 )
               )}
