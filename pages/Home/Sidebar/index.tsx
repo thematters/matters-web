@@ -1,3 +1,5 @@
+import { Footer } from '~/components'
+
 import Icymi from './Icymi'
 import Tags from './Tags'
 import Topics from './Topics'
@@ -15,6 +17,7 @@ export default () => (
     <section>
       <Tags />
     </section>
+    <Footer />
     <style jsx>{styles}</style>
   </>
 )
