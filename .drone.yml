@@ -19,6 +19,25 @@ steps:
       - npm run build
 
   # === CI tasks for `develop` branch ===
+  - name: develop:upload
+    image: plugins/s3
+    settings:
+      bucket: web-develop.matters.news
+      access_key:
+        from_secret: AWS_ACCESS_KEY_ID
+      secret_key:
+        from_secret: AWS_SECRET_ACCESS_KEY
+      region: ap-southeast-1
+      source: build/**/*
+      target: /assets
+      strip_prefix: build/
+    when:
+      branch:
+        - develop
+        - feature/dotenv
+      event:
+        - push
+
   - name: develop:deploy
     image: matters/awsebcli
     environment:
@@ -35,25 +54,6 @@ steps:
     when:
       branch:
         - develop
-      event:
-        - push
-
-  - name: develop:deploy
-    image: plugins/s3
-    settings:
-      bucket: web-develop.matters.news
-      access_key:
-        from_secret: AWS_ACCESS_KEY_ID
-      secret_key:
-        from_secret: AWS_SECRET_ACCESS_KEY
-      region: ap-southeast-1
-      source: build/**/*
-      target: /assets
-      strip_prefix: build/
-    when:
-      branch:
-        - develop
-        - feature/dotenv
       event:
         - push
 
