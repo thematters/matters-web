@@ -16,6 +16,7 @@ export interface SidebarAuthors_viewer_recommendation_authors_edges_node_info {
 
 export interface SidebarAuthors_viewer_recommendation_authors_edges_node {
   __typename: "User";
+  userName: string;
   /**
    * Display name on profile
    */
