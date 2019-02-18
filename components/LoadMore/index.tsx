@@ -2,7 +2,7 @@ import styles from './styles.css'
 
 import { Button, Translate } from '~/components'
 
-export default ({ onClick }: { onClick: () => void }) => (
+export const LoadMore = ({ onClick }: { onClick: () => void }) => (
   <div className="container">
     <Button
       bgColor="green-lighter"

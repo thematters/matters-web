@@ -7,13 +7,13 @@ import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
   InfiniteScroll,
+  LoadMore,
   Placeholder,
   Responsive,
   Spinner,
   Title,
   Translate
 } from '~/components'
-import LoadMore from './LoadMore'
 import SortBy from './SortBy'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
