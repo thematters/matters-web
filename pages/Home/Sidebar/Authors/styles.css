@@ -10,6 +10,8 @@ ul {
   }
 }
 
-.shuffle-button {
-  margin-right: var(--spacing-tight);
+header {
+  & :global(.shuffle-button) {
+    margin-right: var(--spacing-tight);
+  }
 }
