@@ -6,8 +6,10 @@ import { Query, QueryResult } from 'react-apollo'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
+  Button,
   InfiniteScroll,
   Placeholder,
+  Responsive,
   Spinner,
   Title,
   Translate
@@ -131,18 +133,52 @@ export default () => {
               <hr />
 
               <ul>
-                <InfiniteScroll
-                  hasNextPage={pageInfo.hasNextPage}
-                  loadMore={loadMore}
-                  loading={loading}
-                  loader={<Spinner />}
-                >
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <ArticleDigest.Feed article={node} />
-                    </li>
-                  ))}
-                </InfiniteScroll>
+                <Responsive.SmallUp>
+                  {(match: boolean) => (
+                    <>
+                      <InfiniteScroll
+                        hasNextPage={match && pageInfo.hasNextPage}
+                        loadMore={loadMore}
+                        loading={loading}
+                        loader={<Spinner />}
+                      >
+                        {edges.map(
+                          ({ node, cursor }: { node: any; cursor: any }) => (
+                            <li key={cursor}>
+                              <ArticleDigest.Feed article={node} />
+                            </li>
+                          )
+                        )}
+                      </InfiniteScroll>
+                      {!match && pageInfo.hasNextPage && (
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            paddingTop: 24,
+                            paddingBottom: 48,
+                            alignItems: 'center'
+                          }}
+                        >
+                          <Button
+                            bgColor="green-lighter"
+                            outlineColor="green"
+                            size="default"
+                            style={{ with: 131 }}
+                            onClick={() => loadMore()}
+                          >
+                            <Translate
+                              translations={{
+                                zh_hans: '查看更多',
+                                zh_hant: '查看更多'
+                              }}
+                            />
+                          </Button>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </Responsive.SmallUp>
               </ul>
             </>
           )
