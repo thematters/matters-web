@@ -130,8 +130,6 @@ export default () => {
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
               </header>
 
-              <hr />
-
               <ul>
                 <Responsive.MediumUp>
                   {(match: boolean) => (
