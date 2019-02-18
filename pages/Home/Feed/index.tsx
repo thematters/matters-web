@@ -133,7 +133,7 @@ export default () => {
               <hr />
 
               <ul>
-                <Responsive.SmallUp>
+                <Responsive.MediumUp>
                   {(match: boolean) => (
                     <>
                       <InfiniteScroll
@@ -164,7 +164,7 @@ export default () => {
                             bgColor="green-lighter"
                             outlineColor="green"
                             size="default"
-                            style={{ with: 131 }}
+                            style={{ width: 131 }}
                             onClick={() => loadMore()}
                           >
                             <Translate
@@ -178,7 +178,7 @@ export default () => {
                       )}
                     </>
                   )}
-                </Responsive.SmallUp>
+                </Responsive.MediumUp>
               </ul>
             </>
           )
