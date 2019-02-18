@@ -1,0 +1,15 @@
+ul {
+  font-size: 0; /* remove space between <li> */
+
+  & li {
+    padding: var(--spacing-tight) 0;
+
+    & + li {
+      border-top: 1px solid var(--color-line-grey);
+    }
+  }
+}
+
+.shuffle-button {
+  margin-right: var(--spacing-tight);
+}

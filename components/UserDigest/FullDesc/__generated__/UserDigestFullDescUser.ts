@@ -16,6 +16,10 @@ export interface UserDigestFullDescUser_info {
 
 export interface UserDigestFullDescUser {
   __typename: "User";
+  /**
+   * Display name on profile
+   */
+  displayName: string;
   info: UserDigestFullDescUser_info;
   /**
    * This user is following viewer

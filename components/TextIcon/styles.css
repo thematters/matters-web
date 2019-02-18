@@ -1,5 +1,6 @@
 .text-icon {
   user-select: none;
+  line-height: 1;
 
   & :global(*) {
     display: inline-block;

@@ -1,6 +1,7 @@
 // External modules
+import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
@@ -17,21 +18,23 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
-const iconStyle = { width: 10, height: 10 }
-
 const IconAdd = () => (
-  <Icon id={ICON_ADD.id} viewBox={ICON_ADD.viewBox} style={iconStyle} />
+  <Icon
+    id={ICON_ADD.id}
+    viewBox={ICON_ADD.viewBox}
+    style={{ width: 10, height: 10 }}
+  />
 )
-
-const buttonStyle = { width: 64 }
-
-const BaseButton = ({ icon, text, ...props }) => (
-  <Button
-    size="small"
-    style={buttonStyle}
-    icon={icon && <IconAdd />}
-    {...props}
-  >
+const BaseButton = ({
+  icon,
+  text,
+  ...props
+}: {
+  icon: boolean
+  text?: string
+  [key: string]: any
+}) => (
+  <Button size="small" icon={icon && <IconAdd />} {...props}>
     {text}
   </Button>
 )
@@ -39,6 +42,7 @@ const BaseButton = ({ icon, text, ...props }) => (
 const fragments = {
   user: gql`
     fragment UserDigestFullDescUser on User {
+      displayName
       info {
         description
       }
@@ -50,8 +54,14 @@ const fragments = {
   `
 }
 
-const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
-  const getStateText = ({ isFollower, isFollowee }: { user: any }) => {
+const FullDesc = ({
+  user,
+  nameSize = 'default'
+}: {
+  user: UserDigestFullDescUser
+  nameSize?: 'default' | 'small'
+}) => {
+  const getStateText = ({ isFollower, isFollowee }: UserDigestFullDescUser) => {
     if (isFollower && isFollowee) {
       return '互相追蹤'
     }
@@ -59,36 +69,35 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
       return '追蹤了你'
     }
   }
-
+  const nameSizeClasses = classNames({
+    name: true,
+    [nameSize]: true
+  })
   const stateProps = {
     is: 'span',
+    icon: false,
     outlineColor: 'grey',
     text: getStateText(user),
     style: { borderWidth: '1px' }
   }
-
   const baseButtonProps = {
     bgColor: user.isFollower ? 'green' : undefined,
     outlineColor: !user.isFollower ? 'green' : undefined,
     icon: !user.isFollower,
     text: user.isFollower ? '已追蹤' : '追蹤'
   }
-
   const cancelButtonProps = {
+    ...baseButtonProps,
     bgColor: 'red',
     text: '取消追蹤'
   }
 
   const [buttonProps, setButtonProps] = useState(baseButtonProps)
-
   const mouseEnter = () => setButtonProps(cancelButtonProps)
-
   const mouseLeave = () => setButtonProps(baseButtonProps)
-
   const follow = () => {
     // TODO
   }
-
   const unfollow = () => {
     // TODO
   }
@@ -96,25 +105,32 @@ const FullDesc: FC = ({ user }: { user: UserDigestFullDescUser }) => {
   return (
     <>
       <section className="container">
-        <div className="sub-container">
-          <Avatar size="default" user={user} />
-          <div className="content-container">
-            <div>
-              <span className="name">{user.displayName}</span>
+        <Avatar size="default" user={user} />
+
+        <section className="content">
+          <header className="header-container">
+            <div className="header-left">
+              <span className={nameSizeClasses}>{user.displayName}</span>
               {user.isFollowee && <BaseButton {...stateProps} />}
             </div>
-            <div className="description">{user.info.description}</div>
-          </div>
-        </div>
-        {!user.isFollower && <BaseButton onClick={follow} {...buttonProps} />}
-        {user.isFollower && (
-          <BaseButton
-            onClick={unfollow}
-            onMouseEnter={mouseEnter}
-            onMouseLeave={mouseLeave}
-            {...buttonProps}
-          />
-        )}
+
+            <div className="header-right">
+              {!user.isFollower && (
+                <BaseButton onClick={follow} {...buttonProps} />
+              )}
+              {user.isFollower && (
+                <BaseButton
+                  onClick={unfollow}
+                  onMouseEnter={mouseEnter}
+                  onMouseLeave={mouseLeave}
+                  {...buttonProps}
+                />
+              )}
+            </div>
+          </header>
+
+          <p className="description">{user.info.description}</p>
+        </section>
       </section>
       <style jsx>{styles}</style>
     </>

@@ -4,6 +4,7 @@ import { Icon, TextIcon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
+import styles from './styles.css'
 
 export default ({ type }: { type: 'authors' | 'tags' }) => {
   const pathMap = {
@@ -27,6 +28,7 @@ export default ({ type }: { type: 'authors' | 'tags' }) => {
           text="查看全部"
           textPlacement="left"
         />
+        <style jsx>{styles}</style>
       </a>
     </Link>
   )
