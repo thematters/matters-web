@@ -23,6 +23,7 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
           <section className="l-row">
             <article className="l-col-4 l-col-md-5 l-col-lg-8">
               <PageHeader
+                is="h2"
                 pageTitle={
                   <Translate
                     translations={{ zh_hant: '文章', zh_hans: '文章' }}
@@ -35,6 +36,7 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
             <aside className="l-col-4 l-col-md-3 l-col-lg-4">
               <section>
                 <PageHeader
+                  is="h2"
                   pageTitle={
                     <Translate
                       translations={{ zh_hant: '標籤', zh_hans: '标签' }}
@@ -45,6 +47,7 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
               </section>
               <section>
                 <PageHeader
+                  is="h2"
                   pageTitle={
                     <Translate
                       translations={{ zh_hant: '用戶', zh_hans: '用户' }}
