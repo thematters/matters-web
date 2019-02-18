@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Icon, Label, TextIcon } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
+import { Icon, Label, TextIcon, Translate, UserDigest } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
@@ -22,7 +21,7 @@ const SIDEBAR_AUTHORS = gql`
     viewer {
       id
       recommendation {
-        authors(input: { first: 5 }) {
+        authors(input: { first: 5, filter: { random: true } }) {
           edges {
             cursor
             node {
@@ -39,7 +38,12 @@ const SIDEBAR_AUTHORS = gql`
 export default () => (
   <>
     <Query query={SIDEBAR_AUTHORS}>
-      {({ data, loading, error }: QueryResult & { data: SidebarAuthors }) => {
+      {({
+        data,
+        loading,
+        error,
+        refetch
+      }: QueryResult & { data: SidebarAuthors }) => {
         if (error) {
           return <span>{JSON.stringify(error)}</span> // TODO
         }
@@ -47,15 +51,23 @@ export default () => (
         return (
           <>
             <header>
-              <Label>活躍作者</Label>
+              <Label>
+                <Translate
+                  translations={{ zh_hant: '活躍作者', zh_hans: '活跃作者' }}
+                />
+              </Label>
 
               <div>
                 <button
                   className="shuffle-button"
                   type="button"
-                  onClick={() => alert('shuffling')}
+                  onClick={() => refetch()}
                 >
-                  <TextIcon icon={<IconShuffle />} text="換一批" color="grey" />
+                  <TextIcon icon={<IconShuffle />} color="grey">
+                    <Translate
+                      translations={{ zh_hant: '換一批', zh_hans: '换一批' }}
+                    />
+                  </TextIcon>
                 </button>
                 <ViewAllLink type="authors" />
               </div>

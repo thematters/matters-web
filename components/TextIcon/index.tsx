@@ -29,7 +29,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   text,
   textPlacement = 'right',
   icon,
-
+  children,
   color,
   size = 'sm',
   spacing = 'xxtight',
@@ -50,7 +50,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   if (textPlacement === 'left') {
     return (
       <span className={textIconClasses}>
-        <span className="text">{text}</span>
+        <span className="text">{text || children}</span>
         {icon}
         <style jsx>{styles}</style>
       </span>
@@ -60,7 +60,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   return (
     <span className={textIconClasses}>
       {icon}
-      <span className="text">{text}</span>
+      <span className="text">{text || children}</span>
       <style jsx>{styles}</style>
     </span>
   )
