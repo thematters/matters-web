@@ -21,7 +21,7 @@ const ShuffleButton = ({ onClick }: { onClick: () => void }) => (
       icon={
         <Icon
           id={ICON_RELOAD.id}
-          viewBox={ICON_RELOAD}
+          viewBox={ICON_RELOAD.viewBox}
           style={{ width: 14, height: 14 }}
         />
       }
