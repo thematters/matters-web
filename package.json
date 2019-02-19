@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel nodemon gen:watch",
     "nodemon": "nodemon",
-    "test": "BABEL_ENV=test jest",
+    "test": "jest",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
