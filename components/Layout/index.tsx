@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
+import { Modal } from '~/components/Modal'
 import { ToastHolder } from '~/components/ToastHolder'
 import { LayoutUser } from './__generated__/LayoutUser'
 
@@ -59,6 +60,7 @@ export const Layout: React.FC<LayoutProps> & {
 
       <GlobalHeader user={user} />
       <ToastHolder />
+      <Modal.Anchor />
 
       {children}
     </>
