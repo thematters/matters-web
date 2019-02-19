@@ -15,6 +15,11 @@ type ToPathArgs =
       page: 'userProfile'
       userName: string
     }
+  | {
+      page: 'search'
+      q?: string
+      type?: 'article' | 'tag' | 'user'
+    }
 
 export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
   switch (args.page) {
@@ -34,6 +39,12 @@ export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
       return {
         fs: `${PATHS.USER_ARTICLES.fs}?userName=${args.userName}`,
         url: `/@${args.userName}`
+      }
+    case 'search':
+      const typeStr = args.type ? `&type=${args.type}` : ''
+      return {
+        fs: `${PATHS.SEARCH.fs}?q=${args.q || ''}${typeStr}`,
+        url: `${PATHS.SEARCH.url}?q=${args.q || ''}${typeStr}`
       }
   }
 }

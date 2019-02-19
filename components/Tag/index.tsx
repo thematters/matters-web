@@ -55,7 +55,7 @@ export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
     id: tag.id
   })
   const tagCount = tag.articles.totalCount
-  console.log(tagCount, typeof tagCount)
+
   return (
     <>
       <Link href={path.fs} as={path.url}>

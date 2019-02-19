@@ -123,16 +123,16 @@ export default () => {
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
               </PageHeader>
 
-              <ul>
-                <Responsive.MediumUp>
-                  {(match: boolean) => (
-                    <>
-                      <InfiniteScroll
-                        hasNextPage={match && pageInfo.hasNextPage}
-                        loadMore={loadMore}
-                        loading={loading}
-                        loader={<Spinner />}
-                      >
+              <Responsive.MediumUp>
+                {(match: boolean) => (
+                  <>
+                    <InfiniteScroll
+                      hasNextPage={match && pageInfo.hasNextPage}
+                      loadMore={loadMore}
+                      loading={loading}
+                      loader={<Spinner />}
+                    >
+                      <ul>
                         {edges.map(
                           ({ node, cursor }: { node: any; cursor: any }) => (
                             <li key={cursor}>
@@ -140,14 +140,14 @@ export default () => {
                             </li>
                           )
                         )}
-                      </InfiniteScroll>
-                      {!match && pageInfo.hasNextPage && (
-                        <LoadMore onClick={loadMore} />
-                      )}
-                    </>
-                  )}
-                </Responsive.MediumUp>
-              </ul>
+                      </ul>
+                    </InfiniteScroll>
+                    {!match && pageInfo.hasNextPage && (
+                      <LoadMore onClick={loadMore} />
+                    )}
+                  </>
+                )}
+              </Responsive.MediumUp>
             </>
           )
         }}

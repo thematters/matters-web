@@ -2,14 +2,22 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Spinner, UserDigest } from '~/components'
+import {
+  InfiniteScroll,
+  PageHeader,
+  Spinner,
+  Translate,
+  UserDigest
+} from '~/components'
+import ViewAll from '../ViewAll'
 
+import { mergeConnections } from '~/common/utils'
 import { SeachUsers } from './__generated__/SeachUsers'
 import styles from './styles.css'
 
 const SEARCH_USERS = gql`
-  query SeachUsers($key: String!) {
-    search(input: { key: $key, type: User, first: 3 }) {
+  query SeachUsers($first: Int!, $key: String!, $cursor: String) {
+    search(input: { key: $key, type: User, first: $first, after: $cursor }) {
       pageInfo {
         startCursor
         endCursor
@@ -28,36 +36,72 @@ const SEARCH_USERS = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-const SearchUser = ({ q }: { q: string | string[] }) => {
-  const key = q instanceof Array ? q.join(',') : q
-
+const SearchUser = ({ q, aggregate }: { q: string; aggregate: boolean }) => {
   return (
-    <section>
-      <Query query={SEARCH_USERS} variables={{ key }}>
-        {({ data, loading, error }: QueryResult & { data: SeachUsers }) => {
-          if (loading) {
-            return <Spinner />
-          }
+    <>
+      <PageHeader
+        is="h2"
+        pageTitle={
+          <Translate translations={{ zh_hant: '用戶', zh_hans: '用户' }} />
+        }
+      >
+        {aggregate && <ViewAll q={q} type="user" />}
+      </PageHeader>
+      <section>
+        <Query
+          query={SEARCH_USERS}
+          variables={{ key: q, first: aggregate ? 3 : 10 }}
+        >
+          {({
+            data,
+            loading,
+            error,
+            fetchMore
+          }: QueryResult & { data: SeachUsers }) => {
+            if (loading) {
+              return <Spinner />
+            }
 
-          if (error) {
-            return <span>{JSON.stringify(error)}</span> // TODO
-          }
+            if (error) {
+              return <span>{JSON.stringify(error)}</span> // TODO
+            }
 
-          return (
-            <ul>
-              {data.search.edges.map(
-                ({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <UserDigest.FullDesc user={node} />
-                  </li>
-                )
-              )}
-            </ul>
-          )
-        }}
-      </Query>
-      <style jsx>{styles}</style>
-    </section>
+            const connectionPath = 'search'
+            const { edges, pageInfo } = _get(data, connectionPath)
+            const loadMore = () =>
+              fetchMore({
+                variables: {
+                  cursor: pageInfo.endCursor
+                },
+                updateQuery: (previousResult, { fetchMoreResult }) =>
+                  mergeConnections({
+                    oldData: previousResult,
+                    newData: fetchMoreResult,
+                    path: connectionPath
+                  })
+              })
+
+            return (
+              <InfiniteScroll
+                hasNextPage={!aggregate && pageInfo.hasNextPage}
+                loadMore={loadMore}
+                loading={loading}
+                loader={<Spinner />}
+              >
+                <ul>
+                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                    <li key={cursor}>
+                      <UserDigest.FullDesc user={node} />
+                    </li>
+                  ))}
+                </ul>
+              </InfiniteScroll>
+            )
+          }}
+        </Query>
+        <style jsx>{styles}</style>
+      </section>
+    </>
   )
 }
 

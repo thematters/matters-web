@@ -72,4 +72,6 @@ export interface SeachArticles {
 
 export interface SeachArticlesVariables {
   key: string;
+  first: number;
+  cursor?: string | null;
 }

@@ -1,67 +1,55 @@
 import { withRouter, WithRouterProps } from 'next/router'
-import { PageHeader, Translate } from '~/components'
+import { Footer } from '~/components'
 
 import SearchArticles from './SearchArticles'
+import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
 import styles from './styles.css'
 
 const Search: React.FC<WithRouterProps> = ({ router }) => {
-  const q = (router && router.query && router.query.q) || ''
+  const type = router && router.query && router.query.type
+  let q = router && router.query && router.query.q
+  q = q instanceof Array ? q.join(',') : q
+
+  if (!q) {
+    return <span>INPUT</span> // TODO
+  }
+
+  const isArticleOnly = type === 'article'
+  const isTagOnly = type === 'tag'
+  const isUserOnly = type === 'user'
+  const isAggregate = !isArticleOnly && !isTagOnly && !isUserOnly
 
   return (
-    <>
-      <main>
-        <section className="l-row">
-          <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-            <input value="Search Bar" />
-          </div>
-        </section>
+    <main>
+      <SearchPageHeader q={q} aggregate={isAggregate} />
+      <section className="l-row">
+        <article className="l-col-4 l-col-md-5 l-col-lg-8">
+          {(isArticleOnly || isAggregate) && (
+            <SearchArticles q={q} aggregate={isAggregate} />
+          )}
+          {isTagOnly && <SearchTags q={q} aggregate={isAggregate} />}
+          {isUserOnly && <SearchUsers q={q} aggregate={isAggregate} />}
+        </article>
 
-        {q && (
-          <section className="l-row">
-            <article className="l-col-4 l-col-md-5 l-col-lg-8">
-              <PageHeader
-                is="h2"
-                pageTitle={
-                  <Translate
-                    translations={{ zh_hant: '文章', zh_hans: '文章' }}
-                  />
-                }
-              />
-              <SearchArticles q={q} />
-            </article>
-
-            <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-              <section>
-                <PageHeader
-                  is="h2"
-                  pageTitle={
-                    <Translate
-                      translations={{ zh_hant: '標籤', zh_hans: '标签' }}
-                    />
-                  }
-                />
-                <SearchTags q={q} />
-              </section>
-              <section>
-                <PageHeader
-                  is="h2"
-                  pageTitle={
-                    <Translate
-                      translations={{ zh_hant: '用戶', zh_hans: '用户' }}
-                    />
-                  }
-                />
-                <SearchUsers q={q} />
-              </section>
-            </aside>
-          </section>
-        )}
-      </main>
+        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+          {isAggregate && (
+            <section>
+              <SearchTags q={q} aggregate={isAggregate} />
+            </section>
+          )}
+          {isAggregate && (
+            <section>
+              <SearchUsers q={q} aggregate={isAggregate} />
+            </section>
+          )}
+          <Footer />
+        </aside>
+      </section>
       <style jsx>{styles}</style>
-    </>
+    </main>
   )
 }
 

@@ -27,6 +27,7 @@ export interface SeachUsers_search_edges_node_User_info {
 
 export interface SeachUsers_search_edges_node_User {
   __typename: "User";
+  userName: string;
   /**
    * Display name on profile
    */
@@ -65,5 +66,7 @@ export interface SeachUsers {
 }
 
 export interface SeachUsersVariables {
+  first: number;
   key: string;
+  cursor?: string | null;
 }
