@@ -76,6 +76,11 @@ export class InfiniteScroll extends React.Component<Props, {}> {
   public componentDidMount() {
     window.addEventListener('scroll', this.scrollHandler)
     window.addEventListener('resize', this.scrollHandler)
+    this.scrollHandler()
+  }
+
+  public componentDidUpdate() {
+    this.scrollHandler()
   }
 
   public componentWillUnmount() {
