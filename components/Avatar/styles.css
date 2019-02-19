@@ -1,4 +1,5 @@
 .avatar {
+  display: inline-block;
   border-radius: 50%;
   background-color: var(--color-grey-lighter);
 }

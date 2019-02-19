@@ -42,7 +42,7 @@ header {
 }
 
 .right.me {
-  & > :global(*) {
+  & > :global(> *) {
     display: inline-block;
   }
   & > :global(* + *) {
