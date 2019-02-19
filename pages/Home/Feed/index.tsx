@@ -6,8 +6,8 @@ import { Query, QueryResult } from 'react-apollo'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
-  Button,
   InfiniteScroll,
+  LoadMore,
   Placeholder,
   Responsive,
   Spinner,
@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import SortBy from './SortBy'
 
-import { HomeFeed } from './__generated__/HomeFeed'
+import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
 import styles from './styles.css'
 
 const feedFragment = gql`
@@ -76,7 +76,7 @@ export default () => {
           loading,
           error,
           fetchMore
-        }: QueryResult & { data: HomeFeed }) => {
+        }: QueryResult & { data: FeedArticleConnection }) => {
           if (loading) {
             return <Placeholder.ArticleDigestList />
           }
@@ -151,30 +151,7 @@ export default () => {
                         )}
                       </InfiniteScroll>
                       {!match && pageInfo.hasNextPage && (
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            paddingTop: 24,
-                            paddingBottom: 48,
-                            alignItems: 'center'
-                          }}
-                        >
-                          <Button
-                            bgColor="green-lighter"
-                            outlineColor="green"
-                            size="default"
-                            style={{ width: 131 }}
-                            onClick={() => loadMore()}
-                          >
-                            <Translate
-                              translations={{
-                                zh_hans: '查看更多',
-                                zh_hant: '查看更多'
-                              }}
-                            />
-                          </Button>
-                        </div>
+                        <LoadMore onClick={loadMore} />
                       )}
                     </>
                   )}

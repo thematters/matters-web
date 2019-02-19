@@ -8,12 +8,13 @@
 }
 
 .item {
-  color: var(--color-grey-dark);
-  font-size: var(--font-size-sm);
   padding-top: var(--spacing-x-tight);
   padding-right: var(--spacing-default);
-}
 
-.item-link:hover {
-  color: var(--color-matters-green);
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+
+  & :hover {
+    color: var(--color-matters-green);
+  }
 }
