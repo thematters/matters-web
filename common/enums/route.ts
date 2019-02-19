@@ -38,181 +38,181 @@ type ROUTE_KEY =
   | 'MISC_TOS'
   | 'MISC_GUIDE'
 
-export const ROUTES: Array<{ key: ROUTE_KEY; fs: string; url: string }> = [
+export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
   {
     key: 'HOME',
-    fs: '/Home',
-    url: '/'
+    href: '/Home',
+    as: '/'
   },
   {
     key: 'FOLLOW',
-    fs: '/Follow',
-    url: '/follow'
+    href: '/Follow',
+    as: '/follow'
   },
   {
     key: 'AUTHORS',
-    fs: '/Authors',
-    url: '/authors'
+    href: '/Authors',
+    as: '/authors'
   },
   {
     key: 'TOPICS',
-    fs: '/Topics',
-    url: '/topics'
+    href: '/Topics',
+    as: '/topics'
   },
   {
     key: 'SEARCH',
-    fs: '/Search',
-    url: '/search'
+    href: '/Search',
+    as: '/search'
   },
 
   // Tag
   {
     key: 'TAGS',
-    fs: '/Tags',
-    url: '/tags'
+    href: '/Tags',
+    as: '/tags'
   },
   {
     key: 'TAG_DETAIL',
-    fs: '/TagDetail',
-    url: '/tags/:id'
+    href: '/TagDetail',
+    as: '/tags/:id'
   },
 
   // User
   {
     key: 'USER_ARTICLES',
-    fs: '/User/Articles',
-    url: '/@:userName'
+    href: '/User/Articles',
+    as: '/@:userName'
   },
   {
     key: 'USER_COMMENTS',
-    fs: '/User/Comments',
-    url: '/@:userName/comments'
+    href: '/User/Comments',
+    as: '/@:userName/comments'
   },
   {
     key: 'USER_FOLLOWERS',
-    fs: '/User/Followers',
-    url: '/@:userName/followers'
+    href: '/User/Followers',
+    as: '/@:userName/followers'
   },
   {
     key: 'USER_FOLLOWEES',
-    fs: '/User/Followees',
-    url: '/@:userName/followees'
+    href: '/User/Followees',
+    as: '/@:userName/followees'
   },
 
   // Article
   {
     key: 'ARTICLE_DETAIL',
-    fs: '/ArticleDetail',
-    url: '/@:userName/*-:mediaHash'
+    href: '/ArticleDetail',
+    as: '/@:userName/*-:mediaHash'
   },
 
   // Me
   {
     key: 'ME_ARTICLES',
-    fs: '/Me/Articles',
-    url: '/me'
+    href: '/Me/Articles',
+    as: '/me'
   },
   {
     key: 'ME_COMMENTS',
-    fs: '/Me/Comments',
-    url: '/me/comments'
+    href: '/Me/Comments',
+    as: '/me/comments'
   },
   {
     key: 'ME_BOOKMARKS',
-    fs: '/Me/Bookmarks',
-    url: '/me/bookmarks'
+    href: '/Me/Bookmarks',
+    as: '/me/bookmarks'
   },
   {
     key: 'ME_HISTORY',
-    fs: '/Me/History',
-    url: '/me/history'
+    href: '/Me/History',
+    as: '/me/history'
   },
   {
     key: 'ME_INVITATION',
-    fs: '/Me/Invitations',
-    url: '/me/invitations'
+    href: '/Me/Invitations',
+    as: '/me/invitations'
   },
   {
     key: 'ME_WALLET',
-    fs: '/Me/Wallet',
-    url: '/me/wallet'
+    href: '/Me/Wallet',
+    as: '/me/wallet'
   },
   {
     key: 'ME_NOTIFICATION',
-    fs: '/Me/Notifications',
-    url: '/me/notification'
+    href: '/Me/Notifications',
+    as: '/me/notification'
   },
 
   // Settings
   {
     key: 'ME_SETTINGS_ACCOUNT',
-    fs: '/Me/Settings/Account',
-    url: '/me/settings/account'
+    href: '/Me/Settings/Account',
+    as: '/me/settings/account'
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',
-    fs: '/Me/Settings/Notification',
-    url: '/me/settings/notification'
+    href: '/Me/Settings/Notification',
+    as: '/me/settings/notification'
   },
   {
     key: 'ME_SETTINGS_WALLET',
-    fs: '/Me/Settings/Wallet',
-    url: '/me/settings/wallet'
+    href: '/Me/Settings/Wallet',
+    as: '/me/settings/wallet'
   },
 
   // Draft
   {
     key: 'ME_DRAFTS',
-    fs: '/Me/Drafts',
-    url: '/me/drafts'
+    href: '/Me/Drafts',
+    as: '/me/drafts'
   },
   {
     key: 'ME_DRAFT_DETAIL',
-    fs: '/Me/DraftDetail',
-    url: '/me/drafts/:id'
+    href: '/Me/DraftDetail',
+    as: '/me/drafts/:id'
   },
   {
     key: 'EDITOR',
-    fs: '/Editor',
-    url: '/editor'
+    href: '/Editor',
+    as: '/editor'
   },
 
   // Auth
   {
     key: 'AUTH_LOGIN',
-    fs: '/Auth/Login',
-    url: '/login'
+    href: '/Auth/Login',
+    as: '/login'
   },
   {
     key: 'AUTH_SIGNUP',
-    fs: '/Auth/SignUp',
-    url: '/signup'
+    href: '/Auth/SignUp',
+    as: '/signup'
   },
 
   // Misc
   {
     key: 'MISC_ABOUT',
-    fs: '/Misc/About',
-    url: '/about'
+    href: '/Misc/About',
+    as: '/about'
   },
   {
     key: 'MISC_FAQ',
-    fs: '/Misc/FAQ',
-    url: '/faq'
+    href: '/Misc/FAQ',
+    as: '/faq'
   },
   {
     key: 'MISC_TOS',
-    fs: '/Misc/ToS',
-    url: '/tos'
+    href: '/Misc/ToS',
+    as: '/tos'
   },
   {
     key: 'MISC_GUIDE',
-    fs: '/Misc/Guide',
-    url: '/guide'
+    href: '/Misc/Guide',
+    as: '/guide'
   }
 ]
 
-export const PATHS = {} as { [key in ROUTE_KEY]: { fs: string; url: string } }
-ROUTES.forEach(({ key, url, fs }) => {
-  PATHS[key] = { fs, url }
+export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } }
+ROUTES.forEach(({ key, as, href }) => {
+  PATHS[key] = { href, as }
 })

@@ -25,8 +25,8 @@ const Error: NextFunctionComponent<ErrorProps> = ({ statusCode }) => {
             bgColor="green"
             size="large"
             is="link"
-            href={PATHS.HOME.fs}
-            as={PATHS.HOME.url}
+            href={PATHS.HOME.href}
+            as={PATHS.HOME.as}
           >
             返回首页
           </Button>

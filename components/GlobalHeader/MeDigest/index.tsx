@@ -19,7 +19,7 @@ import styles from './styles.css'
 const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
   <Menu>
     <Menu.Item>
-      <Link href={PATHS.ME_ARTICLES.fs} as={PATHS.ME_ARTICLES.url}>
+      <Link href={PATHS.ME_ARTICLES.href} as={PATHS.ME_ARTICLES.as}>
         <a onClick={hideDropdown}>
           <TextIcon
             icon={<Icon src={ICON_ME} size="small" />}
@@ -30,7 +30,7 @@ const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
       </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link href={PATHS.ME_WALLET.fs} as={PATHS.ME_WALLET.url}>
+      <Link href={PATHS.ME_WALLET.href} as={PATHS.ME_WALLET.as}>
         <a onClick={hideDropdown}>
           <TextIcon
             icon={<Icon src={ICON_MAT_BLACK} size="small" />}
@@ -41,7 +41,7 @@ const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
       </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link href={PATHS.ME_HISTORY.fs} as={PATHS.ME_HISTORY.url}>
+      <Link href={PATHS.ME_HISTORY.href} as={PATHS.ME_HISTORY.as}>
         <a onClick={hideDropdown}>
           <TextIcon
             icon={<Icon src={ICON_READING_HISTORY} size="small" />}
@@ -52,7 +52,7 @@ const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
       </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link href={PATHS.ME_INVITATION.fs} as={PATHS.ME_INVITATION.url}>
+      <Link href={PATHS.ME_INVITATION.href} as={PATHS.ME_INVITATION.as}>
         <a onClick={hideDropdown}>
           <TextIcon
             icon={<Icon src={ICON_GIFT} size="small" />}
@@ -65,8 +65,8 @@ const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
     <Menu.Divider />
     <Menu.Item>
       <Link
-        href={PATHS.ME_SETTINGS_ACCOUNT.fs}
-        as={PATHS.ME_SETTINGS_ACCOUNT.url}
+        href={PATHS.ME_SETTINGS_ACCOUNT.href}
+        as={PATHS.ME_SETTINGS_ACCOUNT.as}
       >
         <a onClick={hideDropdown}>
           <TextIcon
@@ -113,7 +113,6 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       <Dropdown
         content={<DropdownContent hideDropdown={hideDropdown} />}
         zIndex={101}
-        onHidden={hideDropdown}
         onCreate={onCreate}
       >
         <button type="button" className="container">

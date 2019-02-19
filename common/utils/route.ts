@@ -21,30 +21,30 @@ type ToPathArgs =
       type?: 'article' | 'tag' | 'user'
     }
 
-export const toPath = (args: ToPathArgs): { fs: string; url: string } => {
+export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   switch (args.page) {
     case 'articleDetail':
       return {
-        fs: `${PATHS.ARTICLE_DETAIL.fs}?userName=${args.userName}&slug=${
+        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${
           args.slug
         }&mediaHash=${args.mediaHash}`,
-        url: `/@${args.userName}/${args.slug}-${args.mediaHash}`
+        as: `/@${args.userName}/${args.slug}-${args.mediaHash}`
       }
     case 'tagDetail':
       return {
-        fs: `${PATHS.TAG_DETAIL.fs}?id=${args.id}`,
-        url: `/tags/${args.id}`
+        href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
+        as: `/tags/${args.id}`
       }
     case 'userProfile':
       return {
-        fs: `${PATHS.USER_ARTICLES.fs}?userName=${args.userName}`,
-        url: `/@${args.userName}`
+        href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
+        as: `/@${args.userName}`
       }
     case 'search':
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
-        fs: `${PATHS.SEARCH.fs}?q=${args.q || ''}${typeStr}`,
-        url: `${PATHS.SEARCH.url}?q=${args.q || ''}${typeStr}`
+        href: `${PATHS.SEARCH.href}?q=${args.q || ''}${typeStr}`,
+        as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`
       }
   }
 }

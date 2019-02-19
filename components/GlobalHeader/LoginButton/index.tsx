@@ -7,8 +7,8 @@ export default () => (
     is="link"
     size="large"
     bgColor="transparent"
-    href={PATHS.AUTH_LOGIN.fs}
-    as={PATHS.AUTH_LOGIN.url}
+    href={PATHS.AUTH_LOGIN.href}
+    as={PATHS.AUTH_LOGIN.as}
     spacing="default"
     className="u-link-green"
   >

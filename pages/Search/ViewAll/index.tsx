@@ -19,7 +19,7 @@ const ViewAll = ({
   })
 
   return (
-    <Link href={viewAllPath.fs} as={viewAllPath.url}>
+    <Link {...viewAllPath}>
       <a>
         <TextIcon
           icon={

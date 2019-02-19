@@ -40,7 +40,7 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
 
   return (
     <>
-      <Link href={path.fs} as={path.url}>
+      <Link {...path}>
         <a>
           <section className="container">
             <Avatar size="xsmall" user={user} />

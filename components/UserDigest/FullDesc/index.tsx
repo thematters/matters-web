@@ -113,7 +113,7 @@ const FullDesc = ({
   return (
     <>
       <section className="container">
-        <Link href={path.fs} as={path.url}>
+        <Link {...path}>
           <a>
             <Avatar size="default" user={user} />
           </a>
@@ -122,7 +122,7 @@ const FullDesc = ({
         <section className="content">
           <header className="header-container">
             <div className="header-left">
-              <Link href={path.fs} as={path.url}>
+              <Link {...path}>
                 <a>
                   <span className={nameSizeClasses}>{user.displayName}</span>
                 </a>
@@ -145,7 +145,7 @@ const FullDesc = ({
             </div>
           </header>
 
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <p className="description">{user.info.description}</p>
             </a>

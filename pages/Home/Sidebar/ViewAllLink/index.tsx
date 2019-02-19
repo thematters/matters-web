@@ -14,7 +14,7 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
   }
 
   return (
-    <Link href={pathMap[type].fs} as={pathMap[type].url}>
+    <Link {...pathMap[type]}>
       <a>
         <TextIcon
           icon={

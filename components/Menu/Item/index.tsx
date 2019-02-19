@@ -7,7 +7,7 @@ type MenuItemSpacing = 'xtight' | 'tight' | 'default'
 
 interface MenuItemProps {
   spacing?: [MenuItemSpacing, MenuItemSpacing]
-  hoverBgColor?: 'green-lighter' | 'grey-lighter'
+  hoverBgColor?: 'green' | 'grey'
 
   className?: string
 }

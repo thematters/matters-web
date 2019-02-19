@@ -30,23 +30,23 @@ export const Footer = () => (
     <footer className="l-row footer">
       <BaseLink href={'/'} as={'/'} text={'意見反饋'} />
       <BaseLink
-        href={PATHS.MISC_ABOUT.fs}
-        as={PATHS.MISC_ABOUT.url}
+        href={PATHS.MISC_ABOUT.href}
+        as={PATHS.MISC_ABOUT.as}
         text={'關於我們'}
       />
       <BaseLink
-        href={PATHS.MISC_FAQ.fs}
-        as={PATHS.MISC_FAQ.url}
+        href={PATHS.MISC_FAQ.href}
+        as={PATHS.MISC_FAQ.as}
         text={'常見問題'}
       />
       <BaseLink
-        href={PATHS.MISC_GUIDE.fs}
-        as={PATHS.MISC_GUIDE.url}
+        href={PATHS.MISC_GUIDE.href}
+        as={PATHS.MISC_GUIDE.as}
         text={'用戶指南'}
       />
       <BaseLink
-        href={PATHS.MISC_TOS.fs}
-        as={PATHS.MISC_TOS.url}
+        href={PATHS.MISC_TOS.href}
+        as={PATHS.MISC_TOS.as}
         text={'用戶協議'}
       />
       <BaseLink href={'/'} as={'/'} text={'下載 App'} />

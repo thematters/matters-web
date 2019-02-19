@@ -185,8 +185,11 @@ textarea {
   appearance: textfield;
   outline-offset: -2px;
 }
-[type='search']::-webkit-search-decoration {
-  appearance: none;
+[type='search']::-webkit-search-decoration,
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-results-button,
+[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
 }
 ::-webkit-file-upload-button {
   appearance: button;

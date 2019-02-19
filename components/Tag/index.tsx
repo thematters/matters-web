@@ -58,7 +58,7 @@ export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
 
   return (
     <>
-      <Link href={path.fs} as={path.url}>
+      <Link {...path}>
         <a className={tagClasses}>
           <TextIcon
             icon={
