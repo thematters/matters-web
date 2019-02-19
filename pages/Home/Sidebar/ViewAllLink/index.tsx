@@ -6,9 +6,9 @@ import { PATHS } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
 import styles from './styles.css'
 
-export default ({ type }: { type: 'authors' | 'tags' }) => {
+export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
   const pathMap = {
-    // topics: PATHS.
+    topics: PATHS.TOPICS,
     authors: PATHS.AUTHORS,
     tags: PATHS.TAGS
   }

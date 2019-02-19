@@ -9,6 +9,7 @@ type ROUTE_KEY =
   | 'HOME'
   | 'FOLLOW'
   | 'AUTHORS'
+  | 'TOPICS'
   | 'SEARCH'
   | 'TAGS'
   | 'TAG_DETAIL'
@@ -52,6 +53,11 @@ export const ROUTES: Array<{ key: ROUTE_KEY; fs: string; url: string }> = [
     key: 'AUTHORS',
     fs: '/Authors',
     url: '/authors'
+  },
+  {
+    key: 'TOPICS',
+    fs: '/Topics',
+    url: '/topics'
   },
   {
     key: 'SEARCH',

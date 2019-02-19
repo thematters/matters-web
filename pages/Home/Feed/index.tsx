@@ -8,16 +8,15 @@ import {
   ArticleDigest,
   InfiniteScroll,
   LoadMore,
+  PageHeader,
   Placeholder,
   Responsive,
   Spinner,
-  Title,
   Translate
 } from '~/components'
 import SortBy from './SortBy'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
-import styles from './styles.css'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -86,9 +85,7 @@ export default () => {
           }
 
           const connectionPath = 'viewer.recommendation.feed'
-
           const { edges, pageInfo } = _get(data, connectionPath)
-
           const loadMore = () =>
             fetchMore({
               variables: {
@@ -104,33 +101,27 @@ export default () => {
 
           return (
             <>
-              <header>
-                <Title type="page">
-                  {
-                    ({
-                      hottest: (
-                        <Translate
-                          translations={{
-                            zh_hant: '熱門文章',
-                            zh_hans: '热门文章 '
-                          }}
-                        />
-                      ),
-                      newest: (
-                        <Translate
-                          translations={{
-                            zh_hant: '最新文章',
-                            zh_hans: '最新文章 '
-                          }}
-                        />
-                      )
-                    } as { [key: string]: any })[sortBy]
-                  }
-                </Title>
+              <PageHeader
+                pageTitle={
+                  sortBy === 'hottest' ? (
+                    <Translate
+                      translations={{
+                        zh_hant: '熱門文章',
+                        zh_hans: '热门文章 '
+                      }}
+                    />
+                  ) : (
+                    <Translate
+                      translations={{
+                        zh_hant: '最新文章',
+                        zh_hans: '最新文章 '
+                      }}
+                    />
+                  )
+                }
+              >
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-              </header>
-
-              <hr />
+              </PageHeader>
 
               <ul>
                 <Responsive.MediumUp>
@@ -161,7 +152,6 @@ export default () => {
           )
         }}
       </Query>
-      <style jsx>{styles}</style>
     </>
   )
 }

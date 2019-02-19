@@ -1,0 +1,32 @@
+.container {
+  padding: var(--spacing-loose) var(--spacing-default);
+  text-align: center;
+}
+
+.spacing-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.description {
+  margin-top: var(--spacing-default);
+  font-size: var(--font-size-md);
+  color: var(--color-grey);
+}
+
+.button {
+  margin-top: var(--spacing-loose);
+}
+
+.icon-only,
+.description-only {
+  & .description {
+    margin-top: 0;
+  }
+}
+
+.button-included {
+  & .description {
+    margin-top: var(--spacing-x-tight);
+  }
+}
