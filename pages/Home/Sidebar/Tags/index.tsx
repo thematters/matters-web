@@ -45,7 +45,7 @@ export default () => (
               {data.viewer.recommendation.tags.edges.map(
                 ({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <Tag tag={node} type="count-fixed" />
+                    <Tag tag={node} size="small" type="count-fixed" />
                   </li>
                 )
               )}

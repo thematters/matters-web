@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Label } from '~/components'
+import ViewAllLink from '../ViewAllLink'
 
 import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
@@ -41,6 +42,7 @@ export default () => (
           <>
             <header>
               <Label>熱議話題</Label>
+              <ViewAllLink type="topics" />
             </header>
 
             <ol>

@@ -32,12 +32,16 @@ export const Avatar = ({
 }) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
+    avatar: true,
     [size]: true
   })
 
   return (
     <>
-      <img src={src} className={avatarClasses} />
+      <div
+        className={avatarClasses}
+        style={{ backgroundImage: `url(${src})` }}
+      />
       <style jsx>{styles}</style>
     </>
   )

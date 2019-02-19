@@ -3,24 +3,23 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
+  ArticleDigest,
   Footer,
   InfiniteScroll,
   PageHeader,
   Spinner,
-  Translate,
-  UserDigest
+  Translate
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
-import { AllAuthors } from './__generated__/AllAuthors'
-import styles from './styles.css'
+import { AllTopics } from './__generated__/AllTopics'
 
-const ALL_AUTHORS = gql`
-  query AllAuthors($cursor: String) {
+const ALL_TOPICS = gql`
+  query AllTopics($cursor: String) {
     viewer {
       id
       recommendation {
-        authors(input: { first: 10, after: $cursor }) {
+        topics(input: { first: 10, after: $cursor }) {
           pageInfo {
             startCursor
             endCursor
@@ -29,35 +28,35 @@ const ALL_AUTHORS = gql`
           edges {
             cursor
             node {
-              ...UserDigestFullDescUser
+              ...FeedDigestArticle
             }
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${ArticleDigest.Feed.fragments.article}
 `
 
-const Authors = () => (
+const Topics = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
       <PageHeader
         pageTitle={
           <Translate
-            translations={{ zh_hant: '全部作者', zh_hans: '全部作者' }}
+            translations={{ zh_hant: '全部話題', zh_hans: '全部话题' }}
           />
         }
       />
 
       <section>
-        <Query query={ALL_AUTHORS}>
+        <Query query={ALL_TOPICS}>
           {({
             data,
             loading,
             error,
             fetchMore
-          }: QueryResult & { data: AllAuthors }) => {
+          }: QueryResult & { data: AllTopics }) => {
             if (loading) {
               return <Spinner />
             }
@@ -66,7 +65,7 @@ const Authors = () => (
               return <span>{JSON.stringify(error)}</span> // TODO
             }
 
-            const connectionPath = 'viewer.recommendation.authors'
+            const connectionPath = 'viewer.recommendation.topics'
             const { edges, pageInfo } = _get(data, connectionPath)
             const loadMore = () =>
               fetchMore({
@@ -91,7 +90,7 @@ const Authors = () => (
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                     <li key={cursor}>
-                      <UserDigest.FullDesc user={node} />
+                      <ArticleDigest.Feed article={node} />
                     </li>
                   ))}
                 </ul>
@@ -105,9 +104,7 @@ const Authors = () => (
     <aside className="l-col-4 l-col-md-3 l-col-lg-4">
       <Footer />
     </aside>
-
-    <style jsx>{styles}</style>
   </main>
 )
 
-export default Authors
+export default Topics

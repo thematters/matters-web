@@ -6,18 +6,17 @@ import { Query, QueryResult } from 'react-apollo'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
-  Button,
   InfiniteScroll,
+  LoadMore,
+  PageHeader,
   Placeholder,
   Responsive,
   Spinner,
-  Title,
   Translate
 } from '~/components'
 import SortBy from './SortBy'
 
-import { HomeFeed } from './__generated__/HomeFeed'
-import styles from './styles.css'
+import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -76,7 +75,7 @@ export default () => {
           loading,
           error,
           fetchMore
-        }: QueryResult & { data: HomeFeed }) => {
+        }: QueryResult & { data: FeedArticleConnection }) => {
           if (loading) {
             return <Placeholder.ArticleDigestList />
           }
@@ -86,9 +85,7 @@ export default () => {
           }
 
           const connectionPath = 'viewer.recommendation.feed'
-
           const { edges, pageInfo } = _get(data, connectionPath)
-
           const loadMore = () =>
             fetchMore({
               variables: {
@@ -104,33 +101,27 @@ export default () => {
 
           return (
             <>
-              <header>
-                <Title type="page">
-                  {
-                    ({
-                      hottest: (
-                        <Translate
-                          translations={{
-                            zh_hant: '熱門文章',
-                            zh_hans: '热门文章 '
-                          }}
-                        />
-                      ),
-                      newest: (
-                        <Translate
-                          translations={{
-                            zh_hant: '最新文章',
-                            zh_hans: '最新文章 '
-                          }}
-                        />
-                      )
-                    } as { [key: string]: any })[sortBy]
-                  }
-                </Title>
+              <PageHeader
+                pageTitle={
+                  sortBy === 'hottest' ? (
+                    <Translate
+                      translations={{
+                        zh_hant: '熱門文章',
+                        zh_hans: '热门文章 '
+                      }}
+                    />
+                  ) : (
+                    <Translate
+                      translations={{
+                        zh_hant: '最新文章',
+                        zh_hans: '最新文章 '
+                      }}
+                    />
+                  )
+                }
+              >
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-              </header>
-
-              <hr />
+              </PageHeader>
 
               <ul>
                 <Responsive.MediumUp>
@@ -151,30 +142,7 @@ export default () => {
                         )}
                       </InfiniteScroll>
                       {!match && pageInfo.hasNextPage && (
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            paddingTop: 24,
-                            paddingBottom: 48,
-                            alignItems: 'center'
-                          }}
-                        >
-                          <Button
-                            bgColor="green-lighter"
-                            outlineColor="green"
-                            size="default"
-                            style={{ width: 131 }}
-                            onClick={() => loadMore()}
-                          >
-                            <Translate
-                              translations={{
-                                zh_hans: '查看更多',
-                                zh_hant: '查看更多'
-                              }}
-                            />
-                          </Button>
-                        </div>
+                        <LoadMore onClick={loadMore} />
                       )}
                     </>
                   )}
@@ -184,7 +152,6 @@ export default () => {
           )
         }}
       </Query>
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -1,10 +1,13 @@
 // External modules
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useState } from 'react'
 
 // Internal modules
 import { Avatar, Button, Icon } from '~/components'
+
+import { toPath } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
@@ -42,6 +45,7 @@ const BaseButton = ({
 const fragments = {
   user: gql`
     fragment UserDigestFullDescUser on User {
+      userName
       displayName
       info {
         description
@@ -91,6 +95,10 @@ const FullDesc = ({
     bgColor: 'red',
     text: '取消追蹤'
   }
+  const path = toPath({
+    page: 'userProfile',
+    userName: user.userName
+  })
 
   const [buttonProps, setButtonProps] = useState(baseButtonProps)
   const mouseEnter = () => setButtonProps(cancelButtonProps)
@@ -105,12 +113,20 @@ const FullDesc = ({
   return (
     <>
       <section className="container">
-        <Avatar size="default" user={user} />
+        <Link href={path.fs} as={path.url}>
+          <a>
+            <Avatar size="default" user={user} />
+          </a>
+        </Link>
 
         <section className="content">
           <header className="header-container">
             <div className="header-left">
-              <span className={nameSizeClasses}>{user.displayName}</span>
+              <Link href={path.fs} as={path.url}>
+                <a>
+                  <span className={nameSizeClasses}>{user.displayName}</span>
+                </a>
+              </Link>
               {user.isFollowee && <BaseButton {...stateProps} />}
             </div>
 
@@ -129,7 +145,11 @@ const FullDesc = ({
             </div>
           </header>
 
-          <p className="description">{user.info.description}</p>
+          <Link href={path.fs} as={path.url}>
+            <a>
+              <p className="description">{user.info.description}</p>
+            </a>
+          </Link>
         </section>
       </section>
       <style jsx>{styles}</style>
