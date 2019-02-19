@@ -22,11 +22,11 @@
 }
 
 .cover {
+  flex-shrink: 0;
   width: var(--digest-sidebar-cover-size);
   height: var(--digest-sidebar-cover-size);
 }
 
-/* no cover */
 .content.no-cover {
   display: block;
 
