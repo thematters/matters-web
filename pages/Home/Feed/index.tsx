@@ -6,8 +6,8 @@ import { Query, QueryResult } from 'react-apollo'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
-  Button,
   InfiniteScroll,
+  LoadMore,
   PageHeader,
   Placeholder,
   Responsive,
@@ -16,7 +16,7 @@ import {
 } from '~/components'
 import SortBy from './SortBy'
 
-import { HomeFeed } from './__generated__/HomeFeed'
+import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -68,113 +68,90 @@ export default () => {
   const [sortBy, setSortBy] = useState('hottest')
 
   return (
-    <Query query={queries[sortBy]}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: HomeFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+    <>
+      <Query query={queries[sortBy]}>
+        {({
+          data,
+          loading,
+          error,
+          fetchMore
+        }: QueryResult & { data: FeedArticleConnection }) => {
+          if (loading) {
+            return <Placeholder.ArticleDigestList />
+          }
 
-        if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
-        }
+          if (error) {
+            return <span>{JSON.stringify(error)}</span> // TODO
+          }
 
-        const connectionPath = 'viewer.recommendation.feed'
+          const connectionPath = 'viewer.recommendation.feed'
+          const { edges, pageInfo } = _get(data, connectionPath)
+          const loadMore = () =>
+            fetchMore({
+              variables: {
+                cursor: pageInfo.endCursor
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) =>
+                mergeConnections({
+                  oldData: previousResult,
+                  newData: fetchMoreResult,
+                  path: connectionPath
+                })
+            })
 
-        const { edges, pageInfo } = _get(data, connectionPath)
+          return (
+            <>
+              <PageHeader
+                pageTitle={
+                  sortBy === 'hottest' ? (
+                    <Translate
+                      translations={{
+                        zh_hant: '熱門文章',
+                        zh_hans: '热门文章 '
+                      }}
+                    />
+                  ) : (
+                    <Translate
+                      translations={{
+                        zh_hant: '最新文章',
+                        zh_hans: '最新文章 '
+                      }}
+                    />
+                  )
+                }
+              >
+                <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+              </PageHeader>
 
-        const loadMore = () =>
-          fetchMore({
-            variables: {
-              cursor: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
-
-        return (
-          <>
-            <PageHeader
-              pageTitle={
-                sortBy === 'hottest' ? (
-                  <Translate
-                    translations={{
-                      zh_hant: '熱門文章',
-                      zh_hans: '热门文章 '
-                    }}
-                  />
-                ) : (
-                  <Translate
-                    translations={{
-                      zh_hant: '最新文章',
-                      zh_hans: '最新文章 '
-                    }}
-                  />
-                )
-              }
-            >
-              <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-            </PageHeader>
-
-            <ul>
-              <Responsive.MediumUp>
-                {(match: boolean) => (
-                  <>
-                    <InfiniteScroll
-                      hasNextPage={match && pageInfo.hasNextPage}
-                      loadMore={loadMore}
-                      loading={loading}
-                      loader={<Spinner />}
-                    >
-                      {edges.map(
-                        ({ node, cursor }: { node: any; cursor: any }) => (
-                          <li key={cursor}>
-                            <ArticleDigest.Feed article={node} />
-                          </li>
-                        )
-                      )}
-                    </InfiniteScroll>
-                    {!match && pageInfo.hasNextPage && (
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          paddingTop: 24,
-                          paddingBottom: 48,
-                          alignItems: 'center'
-                        }}
+              <ul>
+                <Responsive.MediumUp>
+                  {(match: boolean) => (
+                    <>
+                      <InfiniteScroll
+                        hasNextPage={match && pageInfo.hasNextPage}
+                        loadMore={loadMore}
+                        loading={loading}
+                        loader={<Spinner />}
                       >
-                        <Button
-                          bgColor="green-lighter"
-                          outlineColor="green"
-                          size="default"
-                          style={{ width: 131 }}
-                          onClick={() => loadMore()}
-                        >
-                          <Translate
-                            translations={{
-                              zh_hans: '查看更多',
-                              zh_hant: '查看更多'
-                            }}
-                          />
-                        </Button>
-                      </div>
-                    )}
-                  </>
-                )}
-              </Responsive.MediumUp>
-            </ul>
-          </>
-        )
-      }}
-    </Query>
+                        {edges.map(
+                          ({ node, cursor }: { node: any; cursor: any }) => (
+                            <li key={cursor}>
+                              <ArticleDigest.Feed article={node} />
+                            </li>
+                          )
+                        )}
+                      </InfiniteScroll>
+                      {!match && pageInfo.hasNextPage && (
+                        <LoadMore onClick={loadMore} />
+                      )}
+                    </>
+                  )}
+                </Responsive.MediumUp>
+              </ul>
+            </>
+          )
+        }}
+      </Query>
+    </>
   )
 }

@@ -16,6 +16,7 @@ export interface UserDigestBriefDescUser_info {
 
 export interface UserDigestBriefDescUser {
   __typename: "User";
+  userName: string;
   /**
    * Display name on profile
    */

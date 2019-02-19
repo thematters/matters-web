@@ -59,31 +59,27 @@ const FeedDigest = ({
 
   return (
     <section className="container">
-      <div className={contentClasses}>
-        <div className="left">
-          <Link href={path.fs} as={path.url}>
-            <a>
+      <Link href={path.fs} as={path.url}>
+        <a>
+          <div className={contentClasses}>
+            <div className="left">
               <Title type="sidebar" is="h2">
                 {title}
               </Title>
-            </a>
-          </Link>
-          <Actions article={article} type="sidebar" />
-        </div>
+              <Actions article={article} type="sidebar" />
+            </div>
 
-        {cover && (
-          <Link href={path.fs} as={path.url}>
-            <a>
+            {cover && (
               <div
                 className="cover"
                 style={{
                   backgroundImage: `url(${cover})`
                 }}
               />
-            </a>
-          </Link>
-        )}
-      </div>
+            )}
+          </div>
+        </a>
+      </Link>
 
       <style jsx>{styles}</style>
     </section>

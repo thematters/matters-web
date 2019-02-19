@@ -1,0 +1,5 @@
+.container {
+  margin-top: var(--spacing-default);
+  margin-bottom: var(--spacing-x-loose);
+  text-align: center;
+}

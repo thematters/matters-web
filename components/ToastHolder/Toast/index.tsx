@@ -65,8 +65,6 @@ export const Toast: React.FC<Props> = ({
 
   const iconCloseSrc = color === 'white' ? IconClose : IconCloseWhite
 
-  const iconCloseStyle = { cursor: 'pointer' }
-
   const removeToast = () => {
     window.dispatchEvent(new CustomEvent('removeToast', { detail: { id } }))
   }
@@ -85,11 +83,9 @@ export const Toast: React.FC<Props> = ({
           {content && <div className={contentClass}>{content}</div>}
         </div>
         {closeButton && (
-          <Icon
-            src={iconCloseSrc}
-            style={iconCloseStyle}
-            onClick={removeToast}
-          />
+          <button type="button" onClick={removeToast}>
+            <Icon src={iconCloseSrc} />
+          </button>
         )}
         {!closeButton && customButton && customButton}
       </div>
