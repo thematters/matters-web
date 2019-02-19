@@ -145,6 +145,8 @@
       "~(.*)$": "<rootDir>$1",
       "\\.css$": "<rootDir>/__mocks__/styleMock.js"
     },
+    "coverageDirectory": "<rootDir>/coverage/",
+    "collectCoverage": true,
     "globals": {
       "ts-jest": {
         "babelConfig": {
