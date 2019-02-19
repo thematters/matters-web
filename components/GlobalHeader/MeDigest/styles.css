@@ -1,3 +1,8 @@
+:root {
+  --info-max-width: 7.5rem;
+  --info-overflow-width: 3rem;
+}
+
 .container {
   padding: 0;
   border-radius: 2rem;
@@ -19,12 +24,29 @@
 
 .info {
   display: none;
-
-  max-width: 7.5rem;
+  position: relative;
+  max-width: var(--info-max-width);
   margin-left: var(--spacing-x-tight);
+  text-align: left;
 
   @media (--sm-up) {
     display: inline-block;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(var(--info-max-width) - var(--info-overflow-width));
+    width: var(--info-overflow-width);
+    height: 100%;
+    text-align: right;
+    background-image: linear-gradient(
+      to left,
+      #fff,
+      #fff 0,
+      rgba(255, 255, 255, 0)
+    );
   }
 
   & .username {
