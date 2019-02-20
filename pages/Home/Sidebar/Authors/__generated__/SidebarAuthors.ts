@@ -16,12 +16,17 @@ export interface SidebarAuthors_viewer_recommendation_authors_edges_node_info {
 
 export interface SidebarAuthors_viewer_recommendation_authors_edges_node {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
    */
   displayName: string;
   info: SidebarAuthors_viewer_recommendation_authors_edges_node_info;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
   /**
    * This user is following viewer
    */
@@ -30,10 +35,6 @@ export interface SidebarAuthors_viewer_recommendation_authors_edges_node {
    * Viewer is following this user
    */
   isFollowee: boolean;
-  /**
-   * URL for avatar
-   */
-  avatar: any | null;
 }
 
 export interface SidebarAuthors_viewer_recommendation_authors_edges {

@@ -3,19 +3,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: UserDigestMiniUser
+// GraphQL fragment: FollowStateUser
 // ====================================================
 
-export interface UserDigestMiniUser {
+export interface FollowStateUser {
   __typename: "User";
   id: string;
-  userName: string;
   /**
-   * Display name on profile
+   * This user is following viewer
    */
-  displayName: string;
+  isFollower: boolean;
   /**
-   * URL for avatar
+   * Viewer is following this user
    */
-  avatar: any | null;
+  isFollowee: boolean;
 }

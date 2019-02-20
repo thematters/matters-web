@@ -16,6 +16,7 @@ export interface NewestFeed_viewer_recommendation_feed_pageInfo {
 export interface NewestFeed_viewer_recommendation_feed_edges_node_author {
   __typename: "User";
   userName: string;
+  id: string;
   /**
    * Display name on profile
    */

@@ -6,6 +6,19 @@
 // GraphQL fragment: LayoutUser
 // ====================================================
 
+export interface LayoutUser_status_MAT {
+  __typename: "MAT";
+  total: number;
+}
+
+export interface LayoutUser_status {
+  __typename: "UserStatus";
+  /**
+   * Total MAT left in wallet
+   */
+  MAT: LayoutUser_status_MAT;
+}
+
 export interface LayoutUser_info {
   __typename: "UserInfo";
   email: any | null;
@@ -13,10 +26,15 @@ export interface LayoutUser_info {
 
 export interface LayoutUser {
   __typename: "User";
+  id: string;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
+  status: LayoutUser_status;
   /**
    * URL for avatar
    */
   avatar: any | null;
-  id: string;
   info: LayoutUser_info;
 }

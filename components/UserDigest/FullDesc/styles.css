@@ -16,6 +16,7 @@
 }
 .header-left {
   & :global(> *) {
+    display: inline-block;
     vertical-align: middle;
   }
 }

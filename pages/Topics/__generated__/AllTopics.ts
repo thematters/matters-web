@@ -16,6 +16,7 @@ export interface AllTopics_viewer_recommendation_topics_pageInfo {
 export interface AllTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
   userName: string;
+  id: string;
   /**
    * Display name on profile
    */

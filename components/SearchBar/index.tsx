@@ -121,8 +121,7 @@ export const SearchBar = withRouter(
       return { q: q || '' }
     },
 
-    handleSubmit: (values, { setSubmitting }) => {
-      console.log(values)
+    handleSubmit: values => {
       const path = toPath({
         page: 'search',
         q: values.q

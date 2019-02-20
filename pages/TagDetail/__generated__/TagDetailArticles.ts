@@ -20,6 +20,7 @@ export interface TagDetailArticles_node_Tag_articles_pageInfo {
 export interface TagDetailArticles_node_Tag_articles_edges_node_author {
   __typename: "User";
   userName: string;
+  id: string;
   /**
    * Display name on profile
    */

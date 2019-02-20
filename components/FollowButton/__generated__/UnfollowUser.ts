@@ -3,19 +3,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: UserDigestMiniUser
+// GraphQL mutation operation: UnfollowUser
 // ====================================================
 
-export interface UserDigestMiniUser {
-  __typename: "User";
+export interface UnfollowUser {
+  unfollowUser: boolean | null;
+}
+
+export interface UnfollowUserVariables {
   id: string;
-  userName: string;
-  /**
-   * Display name on profile
-   */
-  displayName: string;
-  /**
-   * URL for avatar
-   */
-  avatar: any | null;
 }

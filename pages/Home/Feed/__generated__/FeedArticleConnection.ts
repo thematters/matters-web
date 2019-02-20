@@ -16,6 +16,7 @@ export interface FeedArticleConnection_pageInfo {
 export interface FeedArticleConnection_edges_node_author {
   __typename: "User";
   userName: string;
+  id: string;
   /**
    * Display name on profile
    */

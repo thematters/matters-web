@@ -107,20 +107,20 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
                 </button>
               )}
             </Menu.Header>
-            {recentSearches.map((key: any) => {
+            {recentSearches.map(({ node }: { node: any }) => {
               const path = toPath({
                 page: 'search',
-                q: key
+                q: node
               })
               return (
                 <Menu.Item
                   spacing={['xtight', 'tight']}
                   hoverBgColor="green"
-                  key={key}
+                  key={node}
                 >
                   <Link {...path}>
                     <a onClick={hideDropdown} className="history-item">
-                      {key}
+                      {node}
                     </a>
                   </Link>
                 </Menu.Item>

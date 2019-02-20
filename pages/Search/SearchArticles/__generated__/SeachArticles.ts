@@ -20,6 +20,7 @@ export interface SeachArticles_search_edges_node_User {
 export interface SeachArticles_search_edges_node_Article_author {
   __typename: "User";
   userName: string;
+  id: string;
   /**
    * Display name on profile
    */
