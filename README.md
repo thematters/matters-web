@@ -12,6 +12,33 @@
 
 `npm run build && npm run start`
 
+### Start local dev with docker
+
+- Environment variables: `cp .env.example .env`
+- Set command alias: `source bin/dc-alias`
+- Build docker image: `dc build`
+- Run: 
+  - `dc up` or `dc run --service-ports web npm run dev`
+  - then go to `http://localhost:3000/`
+
+### Build with docker
+
+- Set command alias: `source bin/dc-alias`
+- `dc run web npm run build`
+
+### Push and pull docker image
+
+- Set command alias: `source bin/dc-alias`
+- Build docker image: `dc build`
+- aws configure, then input your access key and secret
+- Login AWS ECR with `$(aws ecr get-login --no-include-email --region ap-southeast-1)`
+- Push: 
+  - `docker push 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
+  - `docker tag matters-web:latest 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
+- Pull: 
+  - `docker pull 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
+  - `docker tag 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest matters-web:latest`
+
 ## Routing
 
 We customized routes with Express in `server.ts` and disabled [fs routing](https://github.com/zeit/next.js#disabling-file-system-routing).
