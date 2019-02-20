@@ -2,7 +2,7 @@
 alias dc=docker-compose\ -f\ docker/docker-compose.yml
 
 echo
-echo '`dc` set as a alias for `docker-compose -f docker/docker-compose.yml`.'
+echo '`dc` is set as a alias for `docker-compose -f docker/docker-compose.yml`.'
 echo
 echo 'Usage:'
 echo '  dc build'
