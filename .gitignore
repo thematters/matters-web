@@ -90,3 +90,10 @@ typings/
 build
 static-site-build
 yarn.lock
+
+# ctags
+/tags
+/tags.*
+
+# exclude sources.list
+sources.list

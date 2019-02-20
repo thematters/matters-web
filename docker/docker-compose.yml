@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    image: matters-web:latest
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: ['npm', 'run', 'dev']
+    env_file: ../.env
+    volumes:
+      - ..:/var/app
+      - /var/app/node_modules
+    ports:
+      - '3000:3000'
