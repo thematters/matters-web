@@ -1,0 +1,23 @@
+.input {
+  border-radius: 0.15rem;
+  border-bottom: 1px solid var(--color-grey-light);
+  background-color: var(--color-grey-lighter);
+  font-size: var(--font-size-md);
+  height: 2.5rem;
+  padding: var(--spacing-x-tight) var(--spacing-tight);
+
+  &::placeholder {
+    color: var(--color-grey);
+  }
+}
+
+.feedback {
+  height: 1.333rem;
+  margin-top: var(--spacing-x-tight);
+  padding-left: var(--spacing-x-tight);
+}
+
+.error {
+  color: var(--color-red);
+  font-size: var(--font-size-sm);
+}
