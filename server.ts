@@ -32,9 +32,9 @@ app
   .then(() => {
     const server = express()
 
-    ROUTES.forEach(({ fs, url }) => {
-      server.get(url, (req, res) =>
-        app.render(req, res, fs, { ...req.query, ...req.params })
+    ROUTES.forEach(({ href, as }) => {
+      server.get(as, (req, res) =>
+        app.render(req, res, href, { ...req.query, ...req.params })
       )
     })
 

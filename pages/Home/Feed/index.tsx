@@ -104,35 +104,25 @@ export default () => {
               <PageHeader
                 pageTitle={
                   sortBy === 'hottest' ? (
-                    <Translate
-                      translations={{
-                        zh_hant: '熱門文章',
-                        zh_hans: '热门文章 '
-                      }}
-                    />
+                    <Translate zh_hant="熱門文章" zh_hans="热门文章 " />
                   ) : (
-                    <Translate
-                      translations={{
-                        zh_hant: '最新文章',
-                        zh_hans: '最新文章 '
-                      }}
-                    />
+                    <Translate zh_hant="最新文章" zh_hans="最新文章 " />
                   )
                 }
               >
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
               </PageHeader>
 
-              <ul>
-                <Responsive.MediumUp>
-                  {(match: boolean) => (
-                    <>
-                      <InfiniteScroll
-                        hasNextPage={match && pageInfo.hasNextPage}
-                        loadMore={loadMore}
-                        loading={loading}
-                        loader={<Spinner />}
-                      >
+              <Responsive.MediumUp>
+                {(match: boolean) => (
+                  <>
+                    <InfiniteScroll
+                      hasNextPage={match && pageInfo.hasNextPage}
+                      loadMore={loadMore}
+                      loading={loading}
+                      loader={<Spinner />}
+                    >
+                      <ul>
                         {edges.map(
                           ({ node, cursor }: { node: any; cursor: any }) => (
                             <li key={cursor}>
@@ -140,14 +130,14 @@ export default () => {
                             </li>
                           )
                         )}
-                      </InfiniteScroll>
-                      {!match && pageInfo.hasNextPage && (
-                        <LoadMore onClick={loadMore} />
-                      )}
-                    </>
-                  )}
-                </Responsive.MediumUp>
-              </ul>
+                      </ul>
+                    </InfiniteScroll>
+                    {!match && pageInfo.hasNextPage && (
+                      <LoadMore onClick={loadMore} />
+                    )}
+                  </>
+                )}
+              </Responsive.MediumUp>
             </>
           )
         }}

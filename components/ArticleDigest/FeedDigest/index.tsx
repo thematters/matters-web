@@ -51,7 +51,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
 
       <div className={contentClasses}>
         <div className="title">
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <Title type="feed" is="h2">
                 {title}
@@ -60,7 +60,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
           </Link>
         </div>
         <div className="description">
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <p>{summary}</p>
             </a>
@@ -70,7 +70,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
         </div>
 
         {cover && (
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <div
                 className="cover"

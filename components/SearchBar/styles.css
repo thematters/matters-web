@@ -1,0 +1,47 @@
+:root {
+  --search-bar-width: 20rem;
+  --search-bar-height: 2.25rem;
+  --search-bar-button-width: 2.5rem;
+}
+
+form {
+  position: relative;
+  width: var(--search-bar-width);
+  height: var(--search-bar-height);
+  margin-left: auto;
+  margin-right: auto;
+
+  line-height: var(--search-bar-height);
+  font-size: var(--font-size-sm);
+
+  & :global(input[type='search']) {
+    height: 100%;
+    padding: 0 var(--search-bar-button-width) 0 var(--spacing-tight);
+
+    color: var(--color-black);
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-grey-lighter);
+    border-radius: var(--search-bar-height);
+    background-color: var(--color-grey-lighter);
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      background-color: var(--color-bg-green);
+      border: 1px solid var(--color-matters-green);
+    }
+
+    &::placeholder {
+      color: var(--color-grey);
+      opacity: 1; /* Firefox */
+    }
+  }
+
+  & :global(button[type='submit']) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--search-bar-button-width);
+    height: var(--search-bar-height);
+    color: var(--color-black);
+  }
+}

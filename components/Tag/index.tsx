@@ -58,7 +58,7 @@ export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
 
   return (
     <>
-      <Link href={path.fs} as={path.url}>
+      <Link {...path}>
         <a className={tagClasses}>
           <TextIcon
             icon={
@@ -74,7 +74,7 @@ export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
             spacing={isSmall ? 'xtight' : 'tight'}
           />
 
-          {tagCount && <span className="count">{tagCount}</span>}
+          {!!tagCount && <span className="count">{tagCount}</span>}
         </a>
       </Link>
       <style jsx>{styles}</style>

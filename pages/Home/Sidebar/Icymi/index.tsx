@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Placeholder } from '~/components'
+import { ArticleDigest, Label, Placeholder, Translate } from '~/components'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -38,7 +38,9 @@ export default () => (
       return (
         <>
           <header>
-            <Label>不要錯過</Label>
+            <Label>
+              <Translate zh_hant="不要錯過" zh_hans="不要错过" />
+            </Label>
           </header>
 
           <ul>

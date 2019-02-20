@@ -37,7 +37,7 @@ const Mini = ({ user }: { user: UserDigestMiniUser }) => {
   return (
     <>
       <section>
-        <Link href={path.fs} as={path.url}>
+        <Link {...path}>
           <a className="container">
             <Avatar size="xxsmall" user={user} />
             <span className="name">{user.displayName}</span>

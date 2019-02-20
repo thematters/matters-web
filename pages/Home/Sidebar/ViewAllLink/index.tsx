@@ -1,12 +1,15 @@
 import Link from 'next/link'
+import { useContext } from 'react'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon, LanguageContext, TextIcon } from '~/components'
 
 import { PATHS } from '~/common/enums'
+import { translate } from '~/common/utils'
 import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
 import styles from './styles.css'
 
 export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
+  const { lang } = useContext(LanguageContext)
   const pathMap = {
     topics: PATHS.TOPICS,
     authors: PATHS.AUTHORS,
@@ -14,7 +17,7 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
   }
 
   return (
-    <Link href={pathMap[type].fs} as={pathMap[type].url}>
+    <Link {...pathMap[type]}>
       <a>
         <TextIcon
           icon={
@@ -25,7 +28,7 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
             />
           }
           color="green"
-          text="查看全部"
+          text={translate({ zh_hant: '查看全部', zh_hans: '查看全部', lang })}
           textPlacement="left"
         />
         <style jsx>{styles}</style>

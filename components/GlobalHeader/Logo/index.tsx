@@ -7,7 +7,7 @@ import styles from './styles.css'
 
 export default () => (
   <>
-    <Link href={PATHS.HOME.fs} as={PATHS.HOME.url}>
+    <Link href={PATHS.HOME.href} as={PATHS.HOME.as}>
       <a aria-label="首頁">
         <Icon
           id={ICON_LOGO.id}

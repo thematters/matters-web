@@ -38,7 +38,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
   return (
     <section className="container">
       <div className="cover-container">
-        <Link href={path.fs} as={path.url}>
+        <Link {...path}>
           <a>
             <div
               className="cover"
@@ -54,7 +54,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
         <div className="content">
           <Label>Matters Today</Label>
 
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <Title type="feature" is="h2">
                 {title}
@@ -63,7 +63,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
           </Link>
 
           <div className="description">
-            <Link href={path.fs} as={path.url}>
+            <Link {...path}>
               <a>
                 <p>{summary}</p>
               </a>

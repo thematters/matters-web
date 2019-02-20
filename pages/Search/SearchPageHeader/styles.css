@@ -1,0 +1,19 @@
+header {
+  margin-bottom: var(--spacing-default);
+  font-size: var(--font-size-lg);
+
+  & .keyword {
+    color: var(--color-matters-green);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & :global(svg) {
+    transform: rotate(180deg);
+  }
+}

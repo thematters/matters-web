@@ -59,7 +59,7 @@ const FeedDigest = ({
 
   return (
     <section className="container">
-      <Link href={path.fs} as={path.url}>
+      <Link {...path}>
         <a>
           <div className={contentClasses}>
             <div className="left">

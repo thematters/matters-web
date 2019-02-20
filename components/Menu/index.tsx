@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import Divider from './Divider'
+import Header from './Header'
 import Item from './Item'
 
 import styles from './styles.css'
@@ -17,6 +18,7 @@ interface MenuProps {
 export class Menu extends React.PureComponent<MenuProps> {
   public static Item = Item
   public static Divider = Divider
+  public static Header = Header
 
   public render() {
     const {

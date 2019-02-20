@@ -40,13 +40,13 @@
   padding-right: var(--spacing-default);
 }
 
-.bg-hover-grey-lighter {
+.bg-hover-grey {
   &:hover {
     background: var(--color-grey-lighter);
   }
 }
-.bg-hover-green-lighter {
+.bg-hover-green {
   &:hover {
-    background: --color-matters-green-hover;
+    background: var(--color-bg-green);
   }
 }
