@@ -41,6 +41,7 @@ export const Avatar = ({
       <div
         className={avatarClasses}
         style={{ backgroundImage: `url(${src})` }}
+        aria-hidden="true"
       />
       <style jsx>{styles}</style>
     </>

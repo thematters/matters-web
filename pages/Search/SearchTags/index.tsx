@@ -47,7 +47,15 @@ const EmptySearchResult = () => {
   return (
     <section>
       <Header />
-      <EmptySearch description="沒有找到你搜索的內容。" />
+
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到你搜尋的內容。"
+            zh_hans="没有找到你搜索的内容。"
+          />
+        }
+      />
     </section>
   )
 }

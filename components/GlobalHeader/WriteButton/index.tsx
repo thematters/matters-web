@@ -1,4 +1,4 @@
-import { Button, Icon } from '~/components'
+import { Button, Icon, Translate } from '~/components'
 
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
@@ -10,7 +10,7 @@ export default () => (
       bgColor="gold"
       icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
     >
-      創作
+      <Translate zh_hant="創作" zh_hans="创作" />
     </Button>
     <Button
       className="u-sm-up-hide"

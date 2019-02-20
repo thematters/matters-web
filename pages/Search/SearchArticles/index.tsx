@@ -81,7 +81,12 @@ const SearchArticles = ({
           return (
             <EmptySearch
               inSidebar={false}
-              description="沒有找到你搜索的內容。"
+              description={
+                <Translate
+                  zh_hant="沒有找到你搜尋的內容。"
+                  zh_hans="没有找到你搜索的内容。"
+                />
+              }
             />
           )
         }
