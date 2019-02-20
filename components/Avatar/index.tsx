@@ -28,7 +28,7 @@ export const Avatar = ({
   size = 'default'
 }: {
   size?: AvatarSize
-  user: AvatarUser
+  user?: AvatarUser
 }) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({

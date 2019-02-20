@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu default style match snapshot 1`] = `
+<ul
+  class="jsx-undefined menu spacing-xxxtight"
+  role="menu"
+  style="width: 168px;"
+/>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button default style match snapshot 1`] = `
+<button
+  class="jsx-undefined btn size-default bg-white"
+  type="button"
+>
+  <span
+    class="jsx-undefined"
+  >
+    test
+  </span>
+</button>
+`;
