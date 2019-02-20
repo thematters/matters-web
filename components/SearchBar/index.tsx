@@ -1,11 +1,11 @@
 import { FormikProps, withFormik } from 'formik'
-import Router from 'next/router'
-import { useState } from 'react'
+import Router, { withRouter, WithRouterProps } from 'next/router'
+import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, PopperInstance } from '~/components'
+import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 import AutoComplete from './AutoComplete'
 
-import { toPath } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 import styles from './styles.css'
 
@@ -33,6 +33,7 @@ const BaseSearchBar = ({
   handleSubmit,
   autoComplete = true
 }: FormikProps<FormValues> & SearchBarProps) => {
+  // dropdown
   const [
     dropdownInstance,
     setDropdownInstance
@@ -48,6 +49,19 @@ const BaseSearchBar = ({
       dropdownInstance.show()
     }
   }
+  // translations
+  const { lang } = useContext(LanguageContext)
+  const textAriaLabel = translate({
+    translations: { zh_hant: '搜尋', zh_hans: '搜索' },
+    lang
+  })
+  const textPlaceholder = translate({
+    translations: {
+      zh_hant: '搜尋文章、標籤、作者',
+      zh_hans: '搜索文章、标签、作者'
+    },
+    lang
+  })
 
   if (!autoComplete) {
     return (
@@ -55,10 +69,12 @@ const BaseSearchBar = ({
         <input
           type="search"
           name="q"
-          aria-label="搜尋"
-          placeholder="搜尋文章、標籤、作者"
+          aria-label={textAriaLabel}
+          placeholder={textPlaceholder}
           autoComplete="off"
+          autoCorrect="off"
           onChange={handleChange}
+          value={values.q}
         />
         <SearchButton />
         <style jsx>{styles}</style>
@@ -78,9 +94,10 @@ const BaseSearchBar = ({
         <input
           type="search"
           name="q"
-          aria-label="搜尋"
-          placeholder="搜尋文章、標籤、作者"
+          aria-label={textAriaLabel}
+          placeholder={textPlaceholder}
           autoComplete="off"
+          value={values.q}
           onChange={e => {
             values.q ? hideDropdown() : showDropdown()
             handleChange(e)
@@ -96,15 +113,23 @@ const BaseSearchBar = ({
   )
 }
 
-export const SearchBar = withFormik<SearchBarProps, FormValues>({
-  handleSubmit: (values, { setSubmitting }) => {
-    console.log(values)
-    const path = toPath({
-      page: 'search',
-      q: values.q
-    })
-    Router.push(path.href, path.as)
-  },
+export const SearchBar = withRouter(
+  withFormik<WithRouterProps, FormValues>({
+    mapPropsToValues: ({ router }) => {
+      let q = router && router.query && router.query.q
+      q = q instanceof Array ? q.join(',') : q
+      return { q: q || '' }
+    },
 
-  displayName: 'SearchBar'
-})(BaseSearchBar)
+    handleSubmit: (values, { setSubmitting }) => {
+      console.log(values)
+      const path = toPath({
+        page: 'search',
+        q: values.q
+      })
+      Router.push(path.href, path.as)
+    },
+
+    displayName: 'SearchBar'
+  })(BaseSearchBar)
+)

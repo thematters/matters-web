@@ -27,7 +27,7 @@ const BaseLink = ({
 
 export const Footer = () => (
   <>
-    <footer className="l-row footer">
+    <footer className="footer">
       <BaseLink href={'/'} as={'/'} text={'意見反饋'} />
       <BaseLink
         href={PATHS.MISC_ABOUT.href}

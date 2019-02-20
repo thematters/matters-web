@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react'
 
 const systemDefaultLang = 'zh_hant'
 
-const LanguageContext = React.createContext({} as {
+export const LanguageContext = React.createContext({} as {
   lang: Language
   setLang: (lang: Language) => void
 })
