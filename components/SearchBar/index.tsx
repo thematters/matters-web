@@ -113,7 +113,7 @@ const BaseSearchBar = ({
 }
 
 export const SearchBar = withRouter(
-  withFormik<WithRouterProps, FormValues>({
+  withFormik<WithRouterProps & SearchBarProps, FormValues>({
     mapPropsToValues: ({ router }) => {
       let q = router && router.query && router.query.q
       q = q instanceof Array ? q.join(',') : q
