@@ -81,7 +81,12 @@ const SearchArticles = ({
           return (
             <EmptySearch
               inSidebar={false}
-              description="沒有找到你搜索的內容。"
+              description={
+                <Translate
+                  zh_hant="沒有找到你搜尋的內容。"
+                  zh_hans="没有找到你搜索的内容。"
+                />
+              }
             />
           )
         }
@@ -95,11 +100,7 @@ const SearchArticles = ({
           >
             <PageHeader
               is="h2"
-              pageTitle={
-                <Translate
-                  translations={{ zh_hant: '文章', zh_hans: '文章' }}
-                />
-              }
+              pageTitle={<Translate zh_hant="文章" zh_hans="文章" />}
             >
               {isAggregate && pageInfo.hasNextPage && (
                 <ViewAll q={q} type="article" />

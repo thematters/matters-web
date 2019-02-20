@@ -42,11 +42,7 @@ const Topics = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
       <PageHeader
-        pageTitle={
-          <Translate
-            translations={{ zh_hant: '全部話題', zh_hans: '全部话题' }}
-          />
-        }
+        pageTitle={<Translate zh_hant="全部話題" zh_hans="全部话题" />}
       />
 
       <section>

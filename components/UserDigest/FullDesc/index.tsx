@@ -2,12 +2,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 // Internal modules
-import { Avatar, Button, Icon } from '~/components'
+import { Avatar, Button, Icon, LanguageContext } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
@@ -65,12 +65,13 @@ const FullDesc = ({
   user: UserDigestFullDescUser
   nameSize?: 'default' | 'small'
 }) => {
+  const { lang } = useContext(LanguageContext)
   const getStateText = ({ isFollower, isFollowee }: UserDigestFullDescUser) => {
     if (isFollower && isFollowee) {
-      return '互相追蹤'
+      return translate({ zh_hant: '互相追蹤', zh_hans: '互相追踪', lang })
     }
     if (isFollowee) {
-      return '追蹤了你'
+      return translate({ zh_hant: '追蹤了你', zh_hans: '追踪了你', lang })
     }
   }
   const nameSizeClasses = classNames({
@@ -88,12 +89,14 @@ const FullDesc = ({
     bgColor: user.isFollower ? 'green' : undefined,
     outlineColor: !user.isFollower ? 'green' : undefined,
     icon: !user.isFollower,
-    text: user.isFollower ? '已追蹤' : '追蹤'
+    text: user.isFollower
+      ? translate({ zh_hant: '已追蹤', zh_hans: '已追踪', lang })
+      : translate({ zh_hant: '追蹤', zh_hans: '追踪', lang })
   }
   const cancelButtonProps = {
     ...baseButtonProps,
     bgColor: 'red',
-    text: '取消追蹤'
+    text: translate({ zh_hant: '取消追蹤', zh_hans: '取消追踪', lang })
   }
   const path = toPath({
     page: 'userProfile',

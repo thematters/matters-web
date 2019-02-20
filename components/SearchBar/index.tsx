@@ -52,14 +52,13 @@ const BaseSearchBar = ({
   // translations
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({
-    translations: { zh_hant: '搜尋', zh_hans: '搜索' },
+    zh_hant: '搜尋',
+    zh_hans: '搜索',
     lang
   })
   const textPlaceholder = translate({
-    translations: {
-      zh_hant: '搜尋文章、標籤、作者',
-      zh_hans: '搜索文章、标签、作者'
-    },
+    zh_hant: '搜尋文章、標籤、作者',
+    zh_hans: '搜索文章、标签、作者',
     lang
   })
 

@@ -10,12 +10,7 @@ export const LoadMore = ({ onClick }: { onClick: () => void }) => (
       spacing="loose"
       onClick={onClick}
     >
-      <Translate
-        translations={{
-          zh_hans: '查看更多',
-          zh_hant: '查看更多'
-        }}
-      />
+      <Translate zh_hans="查看更多" zh_hant="查看更多" />
     </Button>
     <style jsx>{styles}</style>
   </div>

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label } from '~/components'
+import { ArticleDigest, Label, Translate } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import { SidebarTopics } from './__generated__/SidebarTopics'
@@ -41,7 +41,9 @@ export default () => (
         return (
           <>
             <header>
-              <Label>熱議話題</Label>
+              <Label>
+                <Translate zh_hant="熱議話題" zh_hans="热议话题" />
+              </Label>
               <ViewAllLink type="topics" />
             </header>
 

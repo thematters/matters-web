@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Label, Tag } from '~/components'
+import { Label, Tag, Translate } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import { SidebarTags } from './__generated__/SidebarTags'
@@ -37,7 +37,9 @@ export default () => (
         return (
           <>
             <header>
-              <Label>標簽</Label>
+              <Label>
+                <Translate zh_hant="標籤" zh_hans="标签" />
+              </Label>
               <ViewAllLink type="tags" />
             </header>
 

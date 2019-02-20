@@ -7,7 +7,7 @@ const EmptySearch = ({
   description
 }: {
   inSidebar?: boolean
-  description?: string
+  description?: string | React.ReactNode
 }) => (
   <>
     <Empty
