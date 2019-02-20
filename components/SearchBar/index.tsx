@@ -13,34 +13,57 @@ interface FormValues {
   q: string
 }
 
-interface FormProps {
-  defaultAutoComplete?: boolean
+interface SearchBarProps {
+  autoComplete?: boolean
 }
+
+const SearchButton = () => (
+  <button type="submit" aria-label="搜尋">
+    <Icon
+      id={ICON_SEARCH.id}
+      viewBox={ICON_SEARCH.viewBox}
+      className="u-motion-icon-hover"
+    />
+  </button>
+)
 
 const BaseSearchBar = ({
   values,
   handleChange,
-  handleSubmit
-}: FormikProps<FormValues>) => {
+  handleSubmit,
+  autoComplete = true
+}: FormikProps<FormValues> & SearchBarProps) => {
   const [
     dropdownInstance,
     setDropdownInstance
   ] = useState<PopperInstance | null>(null)
   const onCreate = (instance: any) => setDropdownInstance(instance)
   const hideDropdown = () => {
-    console.log('hideDropdown', dropdownInstance)
-
-    if (!dropdownInstance) {
-      return
+    if (dropdownInstance) {
+      dropdownInstance.hide()
     }
-    dropdownInstance.hide()
   }
   const showDropdown = () => {
-    console.log('showDropdown', dropdownInstance)
-    if (!dropdownInstance) {
-      return
+    if (dropdownInstance && !values.q) {
+      dropdownInstance.show()
     }
-    dropdownInstance.show()
+  }
+
+  if (!autoComplete) {
+    return (
+      <form onSubmit={handleSubmit}>
+        <input
+          type="search"
+          name="q"
+          aria-label="搜尋"
+          placeholder="搜尋文章、標籤、作者"
+          autoComplete="off"
+          onChange={handleChange}
+        />
+        <SearchButton />
+        <style jsx>{styles}</style>
+      </form>
+    )
   }
 
   return (
@@ -55,31 +78,27 @@ const BaseSearchBar = ({
         <input
           type="search"
           name="q"
-          onChange={handleChange}
-          value={values.q}
           aria-label="搜尋"
           placeholder="搜尋文章、標籤、作者"
           autoComplete="off"
-          onFocus={() => showDropdown()}
+          onChange={e => {
+            values.q ? hideDropdown() : showDropdown()
+            handleChange(e)
+          }}
+          onClick={showDropdown}
+          onFocus={showDropdown}
           onBlur={hideDropdown}
         />
-        <button type="submit" aria-label="搜尋">
-          <Icon
-            id={ICON_SEARCH.id}
-            viewBox={ICON_SEARCH.viewBox}
-            className="u-motion-icon-hover"
-          />
-        </button>
+        <SearchButton />
         <style jsx>{styles}</style>
       </form>
     </Dropdown>
   )
 }
 
-export const SearchBar = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => ({ q: '' }),
-
+export const SearchBar = withFormik<SearchBarProps, FormValues>({
   handleSubmit: (values, { setSubmitting }) => {
+    console.log(values)
     const path = toPath({
       page: 'search',
       q: values.q

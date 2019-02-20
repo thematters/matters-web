@@ -9,6 +9,7 @@ import {
   Spinner,
   Translate
 } from '~/components'
+import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
 
 import { mergeConnections } from '~/common/utils'
@@ -37,76 +38,84 @@ const SEARCH_ARTICLES = gql`
 
 const SearchArticles = ({
   q,
-  aggregate
+  isAggregate
 }: {
   q: string
-  aggregate: boolean
+  isAggregate: boolean
 }) => {
   return (
-    <>
-      <PageHeader
-        is="h2"
-        pageTitle={
-          <Translate translations={{ zh_hant: '文章', zh_hans: '文章' }} />
+    <Query
+      query={SEARCH_ARTICLES}
+      variables={{ key: q, first: isAggregate ? 5 : 10 }}
+    >
+      {({
+        data,
+        loading,
+        error,
+        fetchMore
+      }: QueryResult & { data: SeachArticles }) => {
+        if (loading) {
+          return <Spinner />
         }
-      >
-        {aggregate && <ViewAll q={q} type="article" />}
-      </PageHeader>
 
-      <section>
-        <Query
-          query={SEARCH_ARTICLES}
-          variables={{ key: q, first: aggregate ? 5 : 10 }}
-        >
-          {({
-            data,
-            loading,
-            error,
-            fetchMore
-          }: QueryResult & { data: SeachArticles }) => {
-            if (loading) {
-              return <Spinner />
-            }
+        if (error) {
+          return <span>{JSON.stringify(error)}</span> // TODO
+        }
 
-            if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
-            }
-
-            const connectionPath = 'search'
-            const { edges, pageInfo } = _get(data, connectionPath)
-            const loadMore = () =>
-              fetchMore({
-                variables: {
-                  cursor: pageInfo.endCursor
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) =>
-                  mergeConnections({
-                    oldData: previousResult,
-                    newData: fetchMoreResult,
-                    path: connectionPath
-                  })
+        const connectionPath = 'search'
+        const { edges, pageInfo } = _get(data, connectionPath)
+        const loadMore = () =>
+          fetchMore({
+            variables: {
+              cursor: pageInfo.endCursor
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) =>
+              mergeConnections({
+                oldData: previousResult,
+                newData: fetchMoreResult,
+                path: connectionPath
               })
+          })
 
-            return (
-              <InfiniteScroll
-                hasNextPage={!aggregate && pageInfo.hasNextPage}
-                loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
-              >
-                <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <ArticleDigest.Feed article={node} />
-                    </li>
-                  ))}
-                </ul>
-              </InfiniteScroll>
-            )
-          }}
-        </Query>
-      </section>
-    </>
+        if (edges.length <= 0) {
+          return (
+            <EmptySearch
+              inSidebar={false}
+              description="沒有找到你搜索的內容。"
+            />
+          )
+        }
+
+        return (
+          <InfiniteScroll
+            hasNextPage={!isAggregate && pageInfo.hasNextPage}
+            loadMore={loadMore}
+            loading={loading}
+            loader={<Spinner />}
+          >
+            <PageHeader
+              is="h2"
+              pageTitle={
+                <Translate
+                  translations={{ zh_hant: '文章', zh_hans: '文章' }}
+                />
+              }
+            >
+              {isAggregate && pageInfo.hasNextPage && (
+                <ViewAll q={q} type="article" />
+              )}
+            </PageHeader>
+            <ul>
+              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                <li key={cursor}>
+                  <ArticleDigest.Feed article={node} />
+                </li>
+              ))}
+            </ul>
+          </InfiniteScroll>
+        )
+      }}
+    </Query>
   )
 }
 

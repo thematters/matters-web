@@ -37,10 +37,10 @@ const BackToAggregate = ({ q }: { q: string }) => {
 
 const SearchPageHeader = ({
   q,
-  aggregate
+  isAggregate
 }: {
   q: string
-  aggregate: boolean
+  isAggregate: boolean
 }) => (
   <header className="l-row">
     <div className="l-col-4 l-col-md-5 l-col-lg-8">
@@ -51,7 +51,7 @@ const SearchPageHeader = ({
             translations={{ zh_hant: `的搜尋結果`, zh_hans: `的搜索结果` }}
           />
         </section>
-        <section>{!aggregate && <BackToAggregate q={q} />}</section>
+        <section>{!isAggregate && <BackToAggregate q={q} />}</section>
       </div>
     </div>
     <style jsx>{styles}</style>

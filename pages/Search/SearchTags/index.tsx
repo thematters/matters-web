@@ -9,6 +9,7 @@ import {
   Tag,
   Translate
 } from '~/components'
+import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
 
 import { mergeConnections } from '~/common/utils'
@@ -36,39 +37,72 @@ const SEARCH_TAGS = gql`
   ${Tag.fragments.tag}
 `
 
-const SearchTag = ({ q, aggregate }: { q: string; aggregate: boolean }) => {
+const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
+  <PageHeader
+    is="h2"
+    pageTitle={
+      <Translate translations={{ zh_hant: '標籤', zh_hans: '标签' }} />
+    }
+  >
+    {viewAll && q && <ViewAll q={q} type="tag" />}
+  </PageHeader>
+)
+
+const EmptySearchResult = () => {
+  return (
+    <section>
+      <Header />
+      <EmptySearch description="沒有找到你搜索的內容。" />
+    </section>
+  )
+}
+
+const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
   return (
     <>
-      <PageHeader
-        is="h2"
-        pageTitle={
-          <Translate translations={{ zh_hant: '標籤', zh_hans: '标签' }} />
-        }
+      <Query
+        query={SEARCH_TAGS}
+        variables={{ key: q, first: isAggregate ? 3 : 20 }}
       >
-        {aggregate && <ViewAll q={q} type="tag" />}
-      </PageHeader>
+        {({
+          data,
+          loading,
+          error,
+          fetchMore
+        }: QueryResult & { data: SeachTags }) => {
+          if (loading) {
+            return <Spinner />
+          }
 
-      <section>
-        <Query
-          query={SEARCH_TAGS}
-          variables={{ key: q, first: aggregate ? 3 : 20 }}
-        >
-          {({
-            data,
-            loading,
-            error,
-            fetchMore
-          }: QueryResult & { data: SeachTags }) => {
-            if (loading) {
-              return <Spinner />
-            }
+          if (error) {
+            return <span>{JSON.stringify(error)}</span> // TODO
+          }
 
-            if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
-            }
+          const connectionPath = 'search'
+          const { edges, pageInfo } = _get(data, connectionPath)
+          const loadMore = () =>
+            fetchMore({
+              variables: {
+                cursor: pageInfo.endCursor
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) =>
+                mergeConnections({
+                  oldData: previousResult,
+                  newData: fetchMoreResult,
+                  path: connectionPath
+                })
+            })
+          const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
+          const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
 
-            if (aggregate) {
-              return (
+          if (data.search.edges.length <= 0) {
+            return isAggregate ? null : <EmptySearchResult />
+          }
+
+          if (isAggregate) {
+            return (
+              <section>
+                <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <ul>
                   {data.search.edges.map(
                     ({ node, cursor }: { node: any; cursor: any }) => (
@@ -78,33 +112,19 @@ const SearchTag = ({ q, aggregate }: { q: string; aggregate: boolean }) => {
                     )
                   )}
                 </ul>
-              )
-            }
+              </section>
+            )
+          }
 
-            const connectionPath = 'search'
-            const { edges, pageInfo } = _get(data, connectionPath)
-            const loadMore = () =>
-              fetchMore({
-                variables: {
-                  cursor: pageInfo.endCursor
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) =>
-                  mergeConnections({
-                    oldData: previousResult,
-                    newData: fetchMoreResult,
-                    path: connectionPath
-                  })
-              })
-            const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
-            const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
-
-            return (
+          return (
+            <section>
               <InfiniteScroll
-                hasNextPage={!aggregate && pageInfo.hasNextPage}
+                hasNextPage={!isAggregate && pageInfo.hasNextPage}
                 loadMore={loadMore}
                 loading={loading}
                 loader={<Spinner />}
               >
+                <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <div className="l-row">
                   <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
                     {leftEdges.map(
@@ -126,11 +146,11 @@ const SearchTag = ({ q, aggregate }: { q: string; aggregate: boolean }) => {
                   </ul>
                 </div>
               </InfiniteScroll>
-            )
-          }}
-        </Query>
-        <style jsx>{styles}</style>
-      </section>
+            </section>
+          )
+        }}
+      </Query>
+      <style jsx>{styles}</style>
     </>
   )
 }

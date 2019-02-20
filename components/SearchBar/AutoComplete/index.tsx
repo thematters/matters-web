@@ -32,11 +32,13 @@ const SEARCH_AUTOCOMPLETE = gql`
   }
 `
 
-const EmptySearch = () => (
+const EmptyAutoComplete = () => (
   <Empty
     icon={
       <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} size="xlarge" />
     }
+    description="暫無搜尋歷史"
+    size="small"
   />
 )
 
@@ -60,6 +62,36 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
 
         return (
           <Menu width="100%">
+            <Menu.Header
+              title={
+                <Translate
+                  translations={{ zh_hant: '熱門搜尋', zh_hans: '热门搜索' }}
+                />
+              }
+            />
+            {data.frequentSearch.map((key: any) => {
+              const path = toPath({
+                page: 'search',
+                q: key
+              })
+              return (
+                <Menu.Item
+                  spacing={['xtight', 'tight']}
+                  hoverBgColor="green"
+                  key={key}
+                >
+                  <Link {...path}>
+                    <a onClick={hideDropdown} className="frequent-item">
+                      {key}
+                    </a>
+                  </Link>
+                </Menu.Item>
+              )
+            })}
+            {data.frequentSearch.length <= 0 && <EmptyAutoComplete />}
+
+            <Menu.Divider />
+
             <Menu.Header
               title={
                 <Translate
@@ -94,37 +126,7 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
                 </Menu.Item>
               )
             })}
-            {recentSearches.length <= 0 && <EmptySearch />}
-
-            <Menu.Divider />
-
-            <Menu.Header
-              title={
-                <Translate
-                  translations={{ zh_hant: '熱門搜尋', zh_hans: '热门搜索' }}
-                />
-              }
-            />
-            {data.frequentSearch.map((key: any) => {
-              const path = toPath({
-                page: 'search',
-                q: key
-              })
-              return (
-                <Menu.Item
-                  spacing={['xtight', 'tight']}
-                  hoverBgColor="green"
-                  key={key}
-                >
-                  <Link {...path}>
-                    <a onClick={hideDropdown} className="frequent-item">
-                      {key}
-                    </a>
-                  </Link>
-                </Menu.Item>
-              )
-            })}
-            {data.frequentSearch.length <= 0 && <EmptySearch />}
+            {recentSearches.length <= 0 && <EmptyAutoComplete />}
           </Menu>
         )
       }}

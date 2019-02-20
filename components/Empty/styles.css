@@ -1,12 +1,24 @@
 .container {
-  padding: var(--spacing-loose) var(--spacing-default);
   text-align: center;
   color: var(--color-grey-light);
 }
 
-.spacing-0 {
+.spacing-vertical-default {
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
+}
+.spacing-vertical-0 {
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.spacing-horizontal-default {
+  padding-left: var(--spacing-default);
+  padding-right: var(--spacing-default);
+}
+.spacing-horizontal-0 {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .description {
@@ -15,8 +27,21 @@
   color: var(--color-grey);
 }
 
-.button {
+.small {
+  & .description {
+    margin-top: var(--spacing-x-tight);
+    font-size: var(--font-size-sm);
+  }
+}
+
+.children {
   margin-top: var(--spacing-loose);
+  text-align: center;
+
+  & :global(> *) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .icon-only,
@@ -26,7 +51,7 @@
   }
 }
 
-.button-included {
+.children-included {
   & .description {
     margin-top: var(--spacing-x-tight);
   }

@@ -8,37 +8,40 @@ form {
   position: relative;
   width: var(--search-bar-width);
   height: var(--search-bar-height);
+  margin-left: auto;
+  margin-right: auto;
 
   line-height: var(--search-bar-height);
   font-size: var(--font-size-sm);
-}
 
-input[type='search'] {
-  height: 100%;
-  padding: var(--spacing-x-tight) var(--search-bar-button-width)
-    var(--spacing-x-tight) var(--spacing-tight);
+  & :global(input[type='search']) {
+    height: 100%;
+    padding: 0 var(--search-bar-button-width) 0 var(--spacing-tight);
 
-  border: 1px solid var(--color-grey-lighter);
-  border-radius: var(--search-bar-height);
-  background-color: var(--color-grey-lighter);
-  transition: all 0.2s ease-in-out;
+    color: var(--color-black);
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-grey-lighter);
+    border-radius: var(--search-bar-height);
+    background-color: var(--color-grey-lighter);
+    transition: all 0.2s ease-in-out;
 
-  &:focus {
-    background-color: var(--color-bg-green);
-    border: 1px solid var(--color-matters-green);
+    &:focus {
+      background-color: var(--color-bg-green);
+      border: 1px solid var(--color-matters-green);
+    }
+
+    &::placeholder {
+      color: var(--color-grey);
+      opacity: 1; /* Firefox */
+    }
   }
 
-  &::placeholder {
-    color: var(--color-grey);
-    opacity: 1; /* Firefox */
+  & :global(button[type='submit']) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--search-bar-button-width);
+    height: var(--search-bar-height);
+    color: var(--color-black);
   }
-}
-
-button[type='submit'] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: var(--search-bar-button-width);
-  height: var(--search-bar-height);
-  color: var(--color-black);
 }

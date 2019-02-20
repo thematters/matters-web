@@ -5,12 +5,13 @@ import React, { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 
-import { SearchBar } from '~/components'
+import { Responsive, SearchBar } from '~/components'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
 import Nav from './Nav'
 import NotificationButton from './NotificationButton'
+import SearchButton from './SearchButton'
 import SignUpButton from './SignUpButton'
 import WriteButton from './WriteButton'
 
@@ -44,7 +45,11 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           <section className={rightClasses}>
             {isAuthed ? (
               <>
-                <SearchBar />
+                <Responsive.MediumUp>
+                  {(match: boolean) =>
+                    match ? <SearchBar /> : <SearchButton />
+                  }
+                </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
                 <WriteButton />
