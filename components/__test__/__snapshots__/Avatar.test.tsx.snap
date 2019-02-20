@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar default style match snapshot 1`] = `
+<div
+  class="jsx-undefined avatar default"
+  style="background-image: url(avatar-default.svg);"
+/>
+`;

@@ -13,6 +13,17 @@ steps:
       - npm run lint
       - npm run format:check
 
+  - name: test
+    image: node:10.14
+    environment:
+      CODECOV_TOKEN: f109cbf6-b6c7-4a08-ad03-981bc4cd1fe8
+      MATTERS_ENV: test
+      API_URL: http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/
+    commands:
+      - npm install codecov -g
+      - npm run test
+      - codecov
+
   - name: build
     image: node:10.14
     commands:

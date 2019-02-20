@@ -1,0 +1,11 @@
+# `docker-compose ...` commands are too long, so we use `dc` instead
+alias dc=docker-compose\ -f\ docker/docker-compose.yml
+
+echo
+echo '`dc` is set as a alias for `docker-compose -f docker/docker-compose.yml`.'
+echo
+echo 'Usage:'
+echo '  dc build'
+echo '  dc up'
+echo '  dc run web npm run build'
+
