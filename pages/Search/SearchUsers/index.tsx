@@ -38,12 +38,7 @@ const SEARCH_USERS = gql`
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader
-    is="h2"
-    pageTitle={
-      <Translate translations={{ zh_hant: '用戶', zh_hans: '用户' }} />
-    }
-  >
+  <PageHeader is="h2" pageTitle={<Translate zh_hant="用戶" zh_hans="用户" />}>
     {viewAll && q && <ViewAll q={q} type="user" />}
   </PageHeader>
 )

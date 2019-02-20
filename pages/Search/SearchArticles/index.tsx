@@ -95,11 +95,7 @@ const SearchArticles = ({
           >
             <PageHeader
               is="h2"
-              pageTitle={
-                <Translate
-                  translations={{ zh_hant: '文章', zh_hans: '文章' }}
-                />
-              }
+              pageTitle={<Translate zh_hant="文章" zh_hans="文章" />}
             >
               {isAggregate && pageInfo.hasNextPage && (
                 <ViewAll q={q} type="article" />

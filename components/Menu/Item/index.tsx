@@ -14,7 +14,7 @@ interface MenuItemProps {
 
 const Item: React.FC<MenuItemProps> = ({
   spacing = ['xtight', 'default'],
-  hoverBgColor = 'grey-lighter',
+  hoverBgColor = 'grey',
 
   children
 }) => {

@@ -43,11 +43,7 @@ const Tags = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
       <PageHeader
-        pageTitle={
-          <Translate
-            translations={{ zh_hant: '全部標籤', zh_hans: '全部标签' }}
-          />
-        }
+        pageTitle={<Translate zh_hant="全部標籤" zh_hans="全部标签" />}
       />
 
       <section>

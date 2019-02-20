@@ -17,9 +17,7 @@ interface TitleProps {
  *
  * ```tsx
  * <Title type="page">
- *   <Translate
- *     translations={{ zh_hant: '給Matters朋友們的一封信：向星際啟航' }}
- *   />
+ *   <Translate zh_hant='給Matters朋友們的一封信：向星際啟航' />
  * </Title>
  * ```
  */

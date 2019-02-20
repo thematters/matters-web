@@ -32,9 +32,7 @@ const ViewAll = ({
           textPlacement="left"
           color="green"
         >
-          <Translate
-            translations={{ zh_hant: '顯示全部', zh_hans: '显示全部' }}
-          />
+          <Translate zh_hant="顯示全部" zh_hans="显示全部" />
         </TextIcon>
       </a>
     </Link>

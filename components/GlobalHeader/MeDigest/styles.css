@@ -16,7 +16,8 @@
     padding: var(--spacing-xx-tight) var(--spacing-x-tight)
       var(--spacing-xx-tight) var(--spacing-xx-tight);
 
-    &:hover {
+    &:hover,
+    &:focus {
       border-color: rgba(0, 0, 0, 0.08);
     }
   }
