@@ -1,5 +1,4 @@
 export const TEXT = {
-
   zh_hant: {
     login: '登入',
     register: '註冊',
@@ -13,7 +12,7 @@ export const TEXT = {
     hasNoAccount: '沒有帳號',
     verificationCode: '驗證碼',
     sendVerificationCode: '發送驗證碼',
-    required: '必填欄位',
+    required: '必填欄位'
   },
 
   zh_hans: {
@@ -29,7 +28,6 @@ export const TEXT = {
     hasNoAccount: '没有帐号',
     verificationCode: '驗證碼',
     sendVerificationCode: '发送验证码',
-    required: '必填栏位',
+    required: '必填栏位'
   }
-
 }
