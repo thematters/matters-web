@@ -36,7 +36,7 @@
   --font-size-article-base: 1rem; /* 16px; */
   --line-height-article-base: 1.875; /* 30/16 */
 
-  --font-size-article-h1: var(--font-size-xl); /* 24px */
+  --font-size-article-h1: 1.375; /* 22px */
   --font-size-article-h2: var(--font-size-lg); /* 20px */
   --font-size-article-h3: var(--font-size-xm); /* 18px */
   --font-size-article-h4: var(--font-size-md); /* 16px */

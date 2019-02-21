@@ -6,6 +6,12 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum ArticleState {
+  active = "active",
+  archived = "archived",
+  banned = "banned",
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

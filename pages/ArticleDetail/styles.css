@@ -1,0 +1,11 @@
+.author,
+.title {
+  padding-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-tight);
+
+  border-bottom: 1px solid var(--color-line-grey);
+}
+
+.date {
+  margin-top: var(--spacing-x-tight);
+}

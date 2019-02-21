@@ -28,7 +28,7 @@ const EmptySeachPage = () => {
 const Search: React.FC<WithRouterProps> = ({ router }) => {
   const type = router && router.query && router.query.type
   let q = router && router.query && router.query.q
-  q = q instanceof Array ? q.join(',') : q
+  q = q instanceof Array ? q[0] : q
 
   if (!q) {
     return <EmptySeachPage />
