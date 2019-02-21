@@ -7,7 +7,6 @@ section {
     margin-bottom: var(--spacing-default);
 
     & :global(*) {
-      vertical-align: middle;
       line-height: 1;
     }
   }

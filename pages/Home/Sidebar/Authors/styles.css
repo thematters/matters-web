@@ -9,9 +9,3 @@ ul {
     }
   }
 }
-
-header {
-  & :global(.shuffle-button) {
-    margin-right: var(--spacing-tight);
-  }
-}

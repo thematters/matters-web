@@ -84,8 +84,10 @@ FullDesc.fragments = {
       }
       ...AvatarUser
       ...FollowStateUser
+      ...FollowButtonUser
     }
     ${Avatar.fragments.user}
+    ${FollowButton.State.fragments.user}
     ${FollowButton.fragments.user}
   `
 }

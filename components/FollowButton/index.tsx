@@ -6,11 +6,11 @@ import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
 
-import { FollowStateUser } from './__generated__/FollowStateUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
 
 const fragments = {
   user: gql`
-    fragment FollowStateUser on User {
+    fragment FollowButtonUser on User {
       id
       isFollower
       isFollowee
@@ -18,7 +18,7 @@ const fragments = {
   `
 }
 
-export const FollowButton = ({ user }: { user: FollowStateUser }) => {
+export const FollowButton = ({ user }: { user: FollowButtonUser }) => {
   if (user.isFollowee) {
     return <Unfollow user={user} />
   } else {

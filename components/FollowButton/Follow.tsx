@@ -6,7 +6,8 @@ import { Mutation } from 'react-apollo'
 import { Button, Icon, Translate } from '~/components'
 
 import ICON_ADD from '~/static/icons/add.svg?sprite'
-import { FollowStateUser } from './__generated__/FollowStateUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { updateViewerFolloweeCount } from './utils'
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
@@ -26,7 +27,7 @@ const IconAdd = () => (
   />
 )
 
-const Follow = ({ user }: { user: FollowStateUser }) => (
+const Follow = ({ user }: { user: FollowButtonUser }) => (
   <Mutation
     mutation={FOLLOW_USER}
     variables={{ id: user.id }}
@@ -37,6 +38,9 @@ const Follow = ({ user }: { user: FollowStateUser }) => (
         isFollower: user.isFollower,
         __typename: 'User'
       }
+    }}
+    update={cache => {
+      updateViewerFolloweeCount({ cache, type: 'increment' })
     }}
   >
     {(follow, { data }) => (

@@ -8,8 +8,8 @@
 
 export interface TodayDigestArticle_author {
   __typename: "User";
-  userName: string;
   id: string;
+  userName: string;
   /**
    * Display name on profile
    */

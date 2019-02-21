@@ -28,6 +28,7 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
 FollowState.fragments = {
   user: gql`
     fragment FollowStateUser on User {
+      id
       isFollower
       isFollowee
     }

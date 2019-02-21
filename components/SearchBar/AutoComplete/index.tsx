@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Empty, Icon, Menu, Spinner, Translate } from '~/components'
+import { Empty, Error, Icon, Menu, Spinner, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
@@ -55,7 +55,7 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
         }
 
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
         }
 
         const recentSearches = data.viewer.activity.recentSearches.edges

@@ -6,7 +6,8 @@ import { Mutation } from 'react-apollo'
 // Internal modules
 import { Button, Translate } from '~/components'
 
-import { FollowStateUser } from './__generated__/FollowStateUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { updateViewerFolloweeCount } from './utils'
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
@@ -18,7 +19,7 @@ const UNFOLLOW_USER = gql`
   }
 `
 
-const Unfollow = ({ user }: { user: FollowStateUser }) => {
+const Unfollow = ({ user }: { user: FollowButtonUser }) => {
   const [hover, setHover] = useState(false)
 
   return (
@@ -32,6 +33,9 @@ const Unfollow = ({ user }: { user: FollowStateUser }) => {
           isFollower: user.isFollower,
           __typename: 'User'
         }
+      }}
+      update={cache => {
+        updateViewerFolloweeCount({ cache, type: 'decrement' })
       }}
     >
       {(unfollow, { data }) => (

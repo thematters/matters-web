@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Label, Tag, Translate } from '~/components'
+import { Error, Label, Tag, Translate } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import { SidebarTags } from './__generated__/SidebarTags'
@@ -32,7 +32,7 @@ export default () => (
     <Query query={SIDEBAR_TAGS}>
       {({ data, loading, error }: QueryResult & { data: SidebarTags }) => {
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
         }
 
         const edges = _get(data, 'viewer.recommendation.tags.edges', [])

@@ -8,6 +8,7 @@
 
 export interface TopicsDigestArticle_author {
   __typename: "User";
+  id: string;
   userName: string;
 }
 

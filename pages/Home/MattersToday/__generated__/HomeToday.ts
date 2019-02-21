@@ -8,8 +8,8 @@
 
 export interface HomeToday_viewer_recommendation_today_author {
   __typename: "User";
-  userName: string;
   id: string;
+  userName: string;
   /**
    * Display name on profile
    */
