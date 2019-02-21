@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
@@ -64,6 +65,12 @@ export default () => (
           return <span>{JSON.stringify(error)}</span> // TODO
         }
 
+        const edges = _get(data, 'viewer.recommendation.authors.edges', [])
+
+        if (edges.length <= 0) {
+          return null
+        }
+
         return (
           <>
             <header>
@@ -81,13 +88,11 @@ export default () => (
 
             {!loading && (
               <ul>
-                {data.viewer.recommendation.authors.edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <UserDigest.FullDesc user={node} nameSize="small" />
-                    </li>
-                  )
-                )}
+                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <UserDigest.FullDesc user={node} nameSize="small" />
+                  </li>
+                ))}
               </ul>
             )}
           </>

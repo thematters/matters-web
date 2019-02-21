@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button } from '~/components'
+import { Button, Translate } from '~/components'
 
 import { FollowStateUser } from './__generated__/FollowStateUser'
 
@@ -16,7 +16,11 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
       outlineColor="grey"
       style={{ borderWidth: 1, width: '4rem' }}
     >
-      {user.isFollowee ? '互相追蹤' : '追蹤了你'}
+      {user.isFollowee ? (
+        <Translate zh_hant="互相追蹤" zh_hans="互相追踪" />
+      ) : (
+        <Translate zh_hant="追蹤了你" zh_hans="追踪了你" />
+      )}
     </Button>
   )
 }
