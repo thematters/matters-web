@@ -1,0 +1,13 @@
+/* @styled-jsx=global */
+
+@define-mixin flex-center-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@define-mixin flex-center-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

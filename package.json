@@ -85,6 +85,7 @@
     "postcss-color-function": "^4.0.1",
     "postcss-conditionals": "^2.1.0",
     "postcss-each": "^0.10.0",
+    "postcss-mixins": "^6.2.1",
     "postcss-preset-env": "^6.5.0",
     "prettier": "1.16.4",
     "react-testing-library": "^5.8.0",
