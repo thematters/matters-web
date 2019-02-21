@@ -83,8 +83,8 @@ const Mortal: FC<Props> = ({
       'l-offset-sm-1',
       'l-col-md-4',
       'l-offset-md-2',
-      'l-col-lg-6',
-      'l-offset-lg-3'
+      'l-col-lg-4',
+      'l-offset-lg-4'
     )
 
     return (
