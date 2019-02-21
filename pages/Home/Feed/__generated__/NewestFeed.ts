@@ -47,6 +47,10 @@ export interface NewestFeed_viewer_recommendation_feed_edges_node {
    */
   MAT: number;
   comments: NewestFeed_viewer_recommendation_feed_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface NewestFeed_viewer_recommendation_feed_edges {

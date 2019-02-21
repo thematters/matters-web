@@ -40,4 +40,8 @@ export interface TodayDigestArticle {
    */
   MAT: number;
   comments: TodayDigestArticle_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }

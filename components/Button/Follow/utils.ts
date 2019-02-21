@@ -41,6 +41,6 @@ export const updateViewerFolloweeCount = ({
       data: cacheData
     })
   } catch (e) {
-    console.error('[updateViewerFolloweeCount]', e)
+    //
   }
 }

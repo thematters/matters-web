@@ -40,4 +40,8 @@ export interface FeedDigestArticle {
    */
   MAT: number;
   comments: FeedDigestArticle_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }

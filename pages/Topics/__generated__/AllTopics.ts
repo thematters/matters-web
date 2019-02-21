@@ -47,6 +47,10 @@ export interface AllTopics_viewer_recommendation_topics_edges_node {
    */
   MAT: number;
   comments: AllTopics_viewer_recommendation_topics_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface AllTopics_viewer_recommendation_topics_edges {

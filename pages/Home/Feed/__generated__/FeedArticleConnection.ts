@@ -47,6 +47,10 @@ export interface FeedArticleConnection_edges_node {
    */
   MAT: number;
   comments: FeedArticleConnection_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface FeedArticleConnection_edges {

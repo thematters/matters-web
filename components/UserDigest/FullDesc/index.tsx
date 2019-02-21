@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 // Internal modules
 import { Avatar } from '~/components'
-import { FollowButton } from '~/components/FollowButton'
+import { FollowButton } from '~/components/Button/Follow'
 
 import { toPath } from '~/common/utils'
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'

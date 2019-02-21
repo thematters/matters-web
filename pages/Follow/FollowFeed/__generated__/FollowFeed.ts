@@ -47,6 +47,10 @@ export interface FollowFeed_viewer_recommendation_followeeArticles_edges_node {
    */
   MAT: number;
   comments: FollowFeed_viewer_recommendation_followeeArticles_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface FollowFeed_viewer_recommendation_followeeArticles_edges {

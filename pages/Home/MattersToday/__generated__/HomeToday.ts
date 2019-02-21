@@ -40,6 +40,10 @@ export interface HomeToday_viewer_recommendation_today {
    */
   MAT: number;
   comments: HomeToday_viewer_recommendation_today_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface HomeToday_viewer_recommendation {

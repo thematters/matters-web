@@ -34,4 +34,9 @@ export interface FeedDigestActionsArticle {
    */
   MAT: number;
   comments: FeedDigestActionsArticle_comments;
+  id: string;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
