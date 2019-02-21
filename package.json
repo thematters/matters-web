@@ -23,7 +23,7 @@
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "gen:schema": "apollo service:download schema.json --endpoint=http://localhost:4000/",
+    "gen:schema": "apollo service:download schema.json --endpoint=https://server-develop.matters.news/",
     "gen:type": "apollo client:codegen __generated__ --target=typescript  --localSchemaFile=schema.json --includes='+(pages|components)/**/*.{ts,tsx}'",
     "gen:watch": "npm run gen:type -- --watch"
   },
