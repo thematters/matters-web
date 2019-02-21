@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Translate } from '~/components'
+import { ArticleDigest, Error, Label, Translate } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
 import { SidebarTopics } from './__generated__/SidebarTopics'
@@ -30,12 +31,14 @@ export default () => (
   <>
     <Query query={SIDEBAR_TOPICS}>
       {({ data, loading, error }: QueryResult & { data: SidebarTopics }) => {
-        // if (loading) {
-        //   return <Placeholder.Sidebar />
-        // }
-
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
+        }
+
+        const edges = _get(data, 'viewer.recommendation.topics.edges', [])
+
+        if (edges.length <= 0) {
+          return null
         }
 
         return (
@@ -48,13 +51,11 @@ export default () => (
             </header>
 
             <ol>
-              {data.viewer.recommendation.topics.edges.map(
-                ({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Sidebar article={node} />
-                  </li>
-                )
-              )}
+              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                <li key={cursor}>
+                  <ArticleDigest.Sidebar article={node} />
+                </li>
+              ))}
             </ol>
           </>
         )

@@ -21,6 +21,7 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestBriefDescUser on User {
+      id
       userName
       displayName
       info {

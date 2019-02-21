@@ -23,8 +23,8 @@
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "gen:schema": "apollo service:download schema.json --endpoint=https://server-develop.matters.news/",
-    "gen:type": "apollo client:codegen __generated__ --target=typescript  --localSchemaFile=schema.json --includes='+(pages|components)/**/*.tsx'",
+    "gen:schema": "apollo service:download schema.json --endpoint=http://localhost:4000/",
+    "gen:type": "apollo client:codegen __generated__ --target=typescript  --localSchemaFile=schema.json --includes='+(pages|components)/**/*.{ts,tsx}'",
     "gen:watch": "npm run gen:type -- --watch"
   },
   "dependencies": {
@@ -87,6 +87,7 @@
     "postcss-color-function": "^4.0.1",
     "postcss-conditionals": "^2.1.0",
     "postcss-each": "^0.10.0",
+    "postcss-mixins": "^6.2.1",
     "postcss-preset-env": "^6.5.0",
     "prettier": "1.16.4",
     "react-testing-library": "^5.8.0",

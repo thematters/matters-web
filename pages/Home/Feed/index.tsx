@@ -6,6 +6,7 @@ import { Query, QueryResult } from 'react-apollo'
 import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
+  Error,
   InfiniteScroll,
   LoadMore,
   PageHeader,
@@ -81,7 +82,7 @@ export default () => {
           }
 
           if (error) {
-            return <span>{JSON.stringify(error)}</span> // TODO
+            return <Error error={error} />
           }
 
           const connectionPath = 'viewer.recommendation.feed'

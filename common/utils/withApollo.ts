@@ -8,15 +8,19 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig()
 
-const httpLink = createHttpLink({
-  uri: API_URL,
-  credentials: 'include'
-})
+const httpLink = ({ headers }: { [key: string]: any }) =>
+  createHttpLink({
+    uri: API_URL,
+    credentials: 'include',
+    headers: {
+      ...headers
+    }
+  })
 
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: httpLink,
+      link: httpLink({ headers }),
       cache: new InMemoryCache().restore(initialState || {})
     })
 )

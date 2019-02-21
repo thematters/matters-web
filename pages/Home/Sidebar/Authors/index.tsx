@@ -1,36 +1,19 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
-  Icon,
+  Error,
   Label,
+  ShuffleButton,
   Spinner,
-  TextIcon,
   Translate,
   UserDigest
 } from '~/components'
 import ViewAllLink from '../ViewAllLink'
 
-import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import styles from './styles.css'
-
-const ShuffleButton = ({ onClick }: { onClick: () => void }) => (
-  <button className="shuffle-button" type="button" onClick={onClick}>
-    <TextIcon
-      icon={
-        <Icon
-          id={ICON_RELOAD.id}
-          viewBox={ICON_RELOAD.viewBox}
-          style={{ width: 14, height: 14 }}
-        />
-      }
-      color="grey"
-    >
-      <Translate zh_hant="換一批" zh_hans="换一批" />
-    </TextIcon>
-  </button>
-)
 
 const SIDEBAR_AUTHORS = gql`
   query SidebarAuthors {
@@ -61,7 +44,13 @@ export default () => (
         refetch
       }: QueryResult & { data: SidebarAuthors }) => {
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
+        }
+
+        const edges = _get(data, 'viewer.recommendation.authors.edges', [])
+
+        if (edges.length <= 0) {
+          return null
         }
 
         return (
@@ -81,13 +70,11 @@ export default () => (
 
             {!loading && (
               <ul>
-                {data.viewer.recommendation.authors.edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <UserDigest.FullDesc user={node} nameSize="small" />
-                    </li>
-                  )
-                )}
+                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <UserDigest.FullDesc user={node} nameSize="small" />
+                  </li>
+                ))}
               </ul>
             )}
           </>

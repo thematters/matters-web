@@ -8,6 +8,7 @@
 
 export interface FeedDigestActionsArticle_author {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
@@ -33,4 +34,9 @@ export interface FeedDigestActionsArticle {
    */
   MAT: number;
   comments: FeedDigestActionsArticle_comments;
+  id: string;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }

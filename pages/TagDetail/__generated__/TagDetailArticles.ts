@@ -19,6 +19,7 @@ export interface TagDetailArticles_node_Tag_articles_pageInfo {
 
 export interface TagDetailArticles_node_Tag_articles_edges_node_author {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
@@ -50,6 +51,10 @@ export interface TagDetailArticles_node_Tag_articles_edges_node {
    */
   MAT: number;
   comments: TagDetailArticles_node_Tag_articles_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface TagDetailArticles_node_Tag_articles_edges {

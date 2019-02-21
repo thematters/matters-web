@@ -1,7 +1,7 @@
 // External modules
 import classNames from 'classnames'
-import { filter } from 'lodash'
-import { FC, useEffect, useState } from 'react'
+import _filter from 'lodash/filter'
+import { FC, useState } from 'react'
 
 // Internal modules
 import { useEventListener } from '~/components'
@@ -44,7 +44,7 @@ export const MessageHolder: FC<Props> = ({ classes = [] }) => {
     if (!id || !id.startsWith(prefix)) {
       return false
     }
-    setMessages(prev => filter(prev, message => message.id !== id))
+    setMessages(prev => _filter(prev, message => message.id !== id))
   }
 
   useEventListener('addMessage', add)

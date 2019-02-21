@@ -1,7 +1,7 @@
 // External modules
 import classNames from 'classnames'
-import { filter } from 'lodash'
-import { FC, useEffect, useState } from 'react'
+import _filter from 'lodash/filter'
+import { FC, useState } from 'react'
 
 // Internal modules
 import { useEventListener } from '~/components'
@@ -46,7 +46,7 @@ export const ToastHolder: FC<Props> = ({
     if (!id || !id.startsWith(prefix)) {
       return false
     }
-    setToasts(prev => filter(prev, toast => toast.id !== id))
+    setToasts(prev => _filter(prev, toast => toast.id !== id))
   }
 
   useEventListener('addToast', add)

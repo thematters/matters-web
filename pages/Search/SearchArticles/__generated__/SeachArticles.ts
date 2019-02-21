@@ -19,6 +19,7 @@ export interface SeachArticles_search_edges_node_User {
 
 export interface SeachArticles_search_edges_node_Article_author {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
@@ -50,6 +51,10 @@ export interface SeachArticles_search_edges_node_Article {
    */
   MAT: number;
   comments: SeachArticles_search_edges_node_Article_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export type SeachArticles_search_edges_node = SeachArticles_search_edges_node_User | SeachArticles_search_edges_node_Article;

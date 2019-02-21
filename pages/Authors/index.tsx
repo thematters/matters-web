@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
+  Error,
   Footer,
   InfiniteScroll,
   PageHeader,
@@ -59,7 +60,7 @@ const Authors = () => (
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'viewer.recommendation.authors'

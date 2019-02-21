@@ -6,11 +6,6 @@
 // START Enums and Input Objects
 //==============================================================
 
-export interface UserLoginInput {
-  email: any;
-  password: string;
-}
-
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
