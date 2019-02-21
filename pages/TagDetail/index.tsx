@@ -6,10 +6,12 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   ArticleDigest,
   Empty,
+  Error,
   Footer,
   Icon,
   InfiniteScroll,
   PageHeader,
+  Placeholder,
   Spinner,
   Translate
 } from '~/components'
@@ -76,11 +78,11 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
             fetchMore
           }: QueryResult & { data: TagDetailArticles }) => {
             if (loading) {
-              return <Spinner />
+              return <Placeholder.ArticleDigestList />
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'node.articles'

@@ -8,6 +8,7 @@
 
 export interface SidebarTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
+  id: string;
   userName: string;
 }
 

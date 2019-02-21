@@ -15,6 +15,7 @@ export interface FeedArticleConnection_pageInfo {
 
 export interface FeedArticleConnection_edges_node_author {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
@@ -46,6 +47,10 @@ export interface FeedArticleConnection_edges_node {
    */
   MAT: number;
   comments: FeedArticleConnection_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface FeedArticleConnection_edges {

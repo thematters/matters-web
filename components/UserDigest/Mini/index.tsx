@@ -20,6 +20,7 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
+      id
       userName
       displayName
       ...AvatarUser

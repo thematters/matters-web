@@ -20,6 +20,7 @@ const fragments = {
       summary
       mediaHash
       author {
+        id
         userName
         ...UserDigestMiniUser
       }

@@ -8,6 +8,7 @@
 
 export interface TodayDigestArticle_author {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
@@ -39,4 +40,8 @@ export interface TodayDigestArticle {
    */
   MAT: number;
   comments: TodayDigestArticle_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }

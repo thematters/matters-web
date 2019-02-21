@@ -8,6 +8,7 @@
 
 export interface SidebarIcymi_viewer_recommendation_icymi_edges_node_author {
   __typename: "User";
+  id: string;
   userName: string;
 }
 

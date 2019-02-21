@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 import { DateTime } from '~/components'
+import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
-import Bookmark from './Bookmark'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 
@@ -20,10 +20,12 @@ const fragments = {
       createdAt
       ...MATArticle
       ...CommentCountArticle
+      ...BookmarkArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
+    ${BookmarkButton.fragments.article}
   `,
   sidebarDigest: gql`
     fragment SidebarDigestActionsArticle on Article {
@@ -52,7 +54,7 @@ const Actions = ({
       {isShowUserDigest && <UserDigest.Mini user={article.author} />}
       <MAT article={article} size={size} />
       <CommentCount article={article} size={size} />
-      {isShowBookmark && <Bookmark />}
+      {isShowBookmark && <BookmarkButton article={article} />}
       {isShowDateTime && <DateTime date={article.createdAt} />}
 
       <style jsx>{styles}</style>
