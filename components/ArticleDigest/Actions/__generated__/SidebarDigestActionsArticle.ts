@@ -13,6 +13,7 @@ export interface SidebarDigestActionsArticle_comments {
 
 export interface SidebarDigestActionsArticle {
   __typename: "Article";
+  id: string;
   /**
    * MAT recieved for this article
    */

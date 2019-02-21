@@ -1,12 +1,5 @@
 .content {
-  padding-left: 0;
-  padding-right: 0;
   line-height: var(--line-height-article-base);
-
-  @media (--sm-up) {
-    padding-left: var(--spacing-tight);
-    padding-right: var(--spacing-tight);
-  }
 
   & :global(> *) {
     margin: var(--spacing-default) 0;

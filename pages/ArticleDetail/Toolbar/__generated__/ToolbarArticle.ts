@@ -8,6 +8,7 @@
 
 export interface ToolbarArticle {
   __typename: "Article";
+  id: string;
   /**
    * MAT recieved for this article
    */

@@ -83,8 +83,10 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   </p>
                 </section>
 
-                <Content article={data.article} />
-                <TagList article={data.article} />
+                <section className="content">
+                  <Content article={data.article} />
+                  <TagList article={data.article} />
+                </section>
 
                 <section className="toolbar-bottom">
                   <Toolbar placement="bottom" article={data.article} />

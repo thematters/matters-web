@@ -29,6 +29,7 @@ export interface FeedDigestActionsArticle {
   __typename: "Article";
   author: FeedDigestActionsArticle_author;
   createdAt: any;
+  id: string;
   /**
    * MAT recieved for this article
    */
@@ -38,7 +39,6 @@ export interface FeedDigestActionsArticle {
    */
   hasAppreciate: boolean;
   comments: FeedDigestActionsArticle_comments;
-  id: string;
   /**
    * Viewer has subscribed
    */

@@ -9,7 +9,9 @@
 }
 
 .active {
-  background: var(--color-matters-gold);
+  & .mat-button {
+    background: var(--color-matters-gold);
+  }
 }
 
 .mat-button {

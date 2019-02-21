@@ -3,10 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: MATArticle
+// GraphQL mutation operation: AppreciateArticle
 // ====================================================
 
-export interface MATArticle {
+export interface AppreciateArticle_appreciateArticle {
   __typename: "Article";
   id: string;
   /**
@@ -17,4 +17,12 @@ export interface MATArticle {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+}
+
+export interface AppreciateArticle {
+  appreciateArticle: AppreciateArticle_appreciateArticle;
+}
+
+export interface AppreciateArticleVariables {
+  id: string;
 }
