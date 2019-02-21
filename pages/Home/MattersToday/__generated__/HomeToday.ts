@@ -39,6 +39,10 @@ export interface HomeToday_viewer_recommendation_today {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: HomeToday_viewer_recommendation_today_comments;
   /**
    * Viewer has subscribed

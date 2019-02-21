@@ -9,3 +9,9 @@
 .date {
   margin-top: var(--spacing-x-tight);
 }
+
+.toolbar-bottom {
+  padding-top: var(--spacing-default);
+
+  border-top: 1px solid var(--color-line-grey);
+}

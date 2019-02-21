@@ -29,5 +29,9 @@ export interface IcymiDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: IcymiDigestArticle_comments;
 }

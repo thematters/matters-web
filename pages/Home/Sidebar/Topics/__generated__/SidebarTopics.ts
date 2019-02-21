@@ -28,6 +28,10 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: SidebarTopics_viewer_recommendation_topics_edges_node_comments;
 }
 

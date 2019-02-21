@@ -39,6 +39,12 @@ export interface ArticleDetail_article_author {
   isFollowee: boolean;
 }
 
+export interface ArticleDetail_article_tags {
+  __typename: "Tag";
+  id: string;
+  content: string;
+}
+
 export interface ArticleDetail_article {
   __typename: "Article";
   id: string;
@@ -52,11 +58,16 @@ export interface ArticleDetail_article {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  content: string;
+  tags: ArticleDetail_article_tags[] | null;
   /**
    * MAT recieved for this article
    */
   MAT: number;
-  content: string;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
 }
 
 export interface ArticleDetail {

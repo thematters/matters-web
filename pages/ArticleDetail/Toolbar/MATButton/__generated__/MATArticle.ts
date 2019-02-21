@@ -3,15 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: SidebarDigestActionsArticle
+// GraphQL fragment: MATArticle
 // ====================================================
 
-export interface SidebarDigestActionsArticle_comments {
-  __typename: "CommentConnection";
-  totalCount: number;
-}
-
-export interface SidebarDigestActionsArticle {
+export interface MATArticle {
   __typename: "Article";
   /**
    * MAT recieved for this article
@@ -21,5 +16,4 @@ export interface SidebarDigestActionsArticle {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
-  comments: SidebarDigestActionsArticle_comments;
 }

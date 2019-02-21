@@ -28,5 +28,9 @@ export interface TopicsDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: TopicsDigestArticle_comments;
 }

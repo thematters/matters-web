@@ -39,6 +39,10 @@ export interface TodayDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: TodayDigestArticle_comments;
   /**
    * Viewer has subscribed

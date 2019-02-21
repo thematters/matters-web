@@ -3,13 +3,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: MATArticle
+// GraphQL fragment: ToolbarArticle
 // ====================================================
 
-export interface MATArticle {
+export interface ToolbarArticle {
   __typename: "Article";
   /**
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
 }

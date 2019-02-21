@@ -4,6 +4,7 @@ import _get from 'lodash/get'
 import { Tag } from '~/components'
 
 import { TagListArticle } from './__generated__/TagListArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`
@@ -21,7 +22,14 @@ const TagList = ({ article }: { article: TagListArticle }) => {
     return null
   }
 
-  return article.tags.map(tag => <Tag tag={tag} key={tag.id} />)
+  return (
+    <section className="tag-list">
+      {article.tags.map(tag => (
+        <Tag tag={tag} key={tag.id} size="small" />
+      ))}
+      <style jsx>{styles}</style>
+    </section>
+  )
 }
 
 TagList.fragments = fragments

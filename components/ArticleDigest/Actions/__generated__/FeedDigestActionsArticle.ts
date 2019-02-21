@@ -33,6 +33,10 @@ export interface FeedDigestActionsArticle {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: FeedDigestActionsArticle_comments;
   id: string;
   /**

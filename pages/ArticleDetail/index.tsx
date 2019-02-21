@@ -8,16 +8,14 @@ import {
   Empty,
   Error,
   Footer,
-  Icon,
   Placeholder,
-  Spinner,
-  Title,
-  Translate
+  Title
 } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 import Content from './Content'
-import MATButton from './MATButton'
+import TagList from './TagList'
+import Toolbar from './Toolbar'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import styles from './styles.css'
@@ -35,14 +33,16 @@ const ARTICLE_DETAIL = gql`
         ...UserDigestFullDescUser
       }
       ...BookmarkArticle
-      ...MATArticle
       ...ContentArticle
+      ...TagListArticle
+      ...ToolbarArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
   ${BookmarkButton.fragments.article}
-  ${MATButton.fragments.article}
   ${Content.fragments.article}
+  ${TagList.fragments.article}
+  ${Toolbar.fragments.article}
 `
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
@@ -75,14 +75,19 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 <section className="author">
                   <UserDigest.FullDesc user={data.article.author} />
                 </section>
+
                 <section className="title">
                   <Title type="article">{data.article.title}</Title>
                   <p className="date">
                     <DateTime date={data.article.createdAt} />
                   </p>
                 </section>
-                <section className="content">
-                  <Content article={data.article} />
+
+                <Content article={data.article} />
+                <TagList article={data.article} />
+
+                <section className="toolbar-bottom">
+                  <Toolbar placement="bottom" article={data.article} />
                 </section>
               </>
             )

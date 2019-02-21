@@ -39,6 +39,10 @@ export interface FeedDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: FeedDigestArticle_comments;
   /**
    * Viewer has subscribed

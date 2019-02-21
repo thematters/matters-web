@@ -46,6 +46,10 @@ export interface NewestFeed_viewer_recommendation_feed_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: NewestFeed_viewer_recommendation_feed_edges_node_comments;
   /**
    * Viewer has subscribed

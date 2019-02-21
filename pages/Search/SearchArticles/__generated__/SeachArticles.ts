@@ -50,6 +50,10 @@ export interface SeachArticles_search_edges_node_Article {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: SeachArticles_search_edges_node_Article_comments;
   /**
    * Viewer has subscribed

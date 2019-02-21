@@ -46,6 +46,10 @@ export interface FeedArticleConnection_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: FeedArticleConnection_edges_node_comments;
   /**
    * Viewer has subscribed

@@ -50,6 +50,10 @@ export interface TagDetailArticles_node_Tag_articles_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
+  /**
+   * Viewer has appreciate
+   */
+  hasAppreciate: boolean;
   comments: TagDetailArticles_node_Tag_articles_edges_node_comments;
   /**
    * Viewer has subscribed
