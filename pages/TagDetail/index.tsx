@@ -10,7 +10,8 @@ import {
   Icon,
   InfiniteScroll,
   PageHeader,
-  Spinner
+  Spinner,
+  Translate
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
@@ -42,7 +43,11 @@ const TAG_DETAIL = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const EmptyTagDetail = ({ description }: { description: string }) => (
+const EmptyTagDetail = ({
+  description
+}: {
+  description: string | React.ReactNode
+}) => (
   <Empty
     icon={
       <Icon id={ICON_HASHTAG.id} viewBox={ICON_HASHTAG.viewBox} size="xlarge" />
@@ -53,7 +58,11 @@ const EmptyTagDetail = ({ description }: { description: string }) => (
 
 const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
   if (!router || !router.query || !router.query.id) {
-    return <EmptyTagDetail description="標籤不存在" />
+    return (
+      <EmptyTagDetail
+        description={<Translate zh_hant="標籤不存在" zh_hans="标签不存在" />}
+      />
+    )
   }
 
   return (

@@ -63,11 +63,7 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
         return (
           <Menu width="100%">
             <Menu.Header
-              title={
-                <Translate
-                  translations={{ zh_hant: '熱門搜尋', zh_hans: '热门搜索' }}
-                />
-              }
+              title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
             />
             {data.frequentSearch.map((key: any) => {
               const path = toPath({
@@ -93,17 +89,11 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
             <Menu.Divider />
 
             <Menu.Header
-              title={
-                <Translate
-                  translations={{ zh_hant: '搜尋歷史', zh_hans: '搜索历史' }}
-                />
-              }
+              title={<Translate zh_hant="搜尋歷史" zh_hans="搜索历史" />}
             >
               {recentSearches.length > 0 && (
                 <button type="button" className="clear-history-btn">
-                  <Translate
-                    translations={{ zh_hant: '清空', zh_hans: '清空' }}
-                  />
+                  <Translate zh_hant="清空" zh_hans="清空" />
                 </button>
               )}
             </Menu.Header>

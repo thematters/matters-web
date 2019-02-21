@@ -1,4 +1,4 @@
-import { Button } from '~/components'
+import { Button, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -11,6 +11,6 @@ export default () => (
     as={PATHS.AUTH_SIGNUP.as}
     style={{ width: 80 }}
   >
-    註冊
+    <Translate zh_hant="註冊" zh_hans="注册" />
   </Button>
 )

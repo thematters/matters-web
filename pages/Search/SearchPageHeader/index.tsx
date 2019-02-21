@@ -26,9 +26,7 @@ const BackToAggregate = ({ q }: { q: string }) => {
           }
           color="green"
         >
-          <Translate
-            translations={{ zh_hant: '全部結果', zh_hans: '全部结果' }}
-          />
+          <Translate zh_hant="全部結果" zh_hans="全部结果" />
         </TextIcon>
       </a>
     </Link>
@@ -47,9 +45,7 @@ const SearchPageHeader = ({
       <div className="container">
         <section>
           <span className="keyword">{q}&nbsp;</span>
-          <Translate
-            translations={{ zh_hant: `的搜尋結果`, zh_hans: `的搜索结果` }}
-          />
+          <Translate zh_hant="的搜尋結果" zh_hans="的搜索结果" />
         </section>
         <section>{!isAggregate && <BackToAggregate q={q} />}</section>
       </div>

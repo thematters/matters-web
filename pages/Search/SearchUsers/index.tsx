@@ -38,12 +38,7 @@ const SEARCH_USERS = gql`
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader
-    is="h2"
-    pageTitle={
-      <Translate translations={{ zh_hant: '用戶', zh_hans: '用户' }} />
-    }
-  >
+  <PageHeader is="h2" pageTitle={<Translate zh_hant="用戶" zh_hans="用户" />}>
     {viewAll && q && <ViewAll q={q} type="user" />}
   </PageHeader>
 )
@@ -52,7 +47,14 @@ const EmptySearchResult = () => {
   return (
     <section>
       <Header />
-      <EmptySearch description="沒有找到你搜索的內容。" />
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到你搜尋的內容。"
+            zh_hans="没有找到你搜索的内容。"
+          />
+        }
+      />
     </section>
   )
 }

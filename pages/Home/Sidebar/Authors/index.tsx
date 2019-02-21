@@ -27,7 +27,7 @@ const ShuffleButton = ({ onClick }: { onClick: () => void }) => (
       }
       color="grey"
     >
-      <Translate translations={{ zh_hant: '換一批', zh_hans: '换一批' }} />
+      <Translate zh_hant="換一批" zh_hans="换一批" />
     </TextIcon>
   </button>
 )
@@ -68,9 +68,7 @@ export default () => (
           <>
             <header>
               <Label>
-                <Translate
-                  translations={{ zh_hant: '活躍作者', zh_hans: '活跃作者' }}
-                />
+                <Translate zh_hant="活躍作者" zh_hans="活跃作者" />
               </Label>
 
               <div>
