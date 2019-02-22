@@ -34,13 +34,15 @@ interface Props {
   closeOnEsc?: boolean
   closeOnOutsideClick?: boolean
   children: any
+  defaultActive?: boolean
 }
 
 const Mortal: FC<Props> = ({
   alignment = 'center',
   closeOnEsc = false,
   closeOnOutsideClick = false,
-  children
+  children,
+  defaultActive = false
 }) => {
   const defaultNode = 'modal-anchor'
 
@@ -48,7 +50,7 @@ const Mortal: FC<Props> = ({
 
   const [portalNode, setPortalNode] = useState(undefined)
 
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(defaultActive)
 
   const open = (event: any) => {
     if (active) {
@@ -83,8 +85,8 @@ const Mortal: FC<Props> = ({
       'l-offset-sm-1',
       'l-col-md-4',
       'l-offset-md-2',
-      'l-col-lg-6',
-      'l-offset-lg-3'
+      'l-col-lg-4',
+      'l-offset-lg-4'
     )
 
     return (
