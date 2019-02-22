@@ -23,7 +23,7 @@ export const TEXT = {
     term: '用戶協議',
     termHint: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
     disagree: '我不同意',
-    agreeAndContinue: '同意並繼續',
+    agreeAndContinue: '同意並繼續'
   },
 
   zh_hans: {
@@ -50,6 +50,6 @@ export const TEXT = {
     term: '用户协议',
     termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
     disagree: '我不同意',
-    agreeAndContinue: '同意并继续',
+    agreeAndContinue: '同意并继续'
   }
 }

@@ -50,7 +50,7 @@ const Input = ({
           value={value}
           {...props}
         />
-        { floatItem && (<div className="float-right">{floatItem}</div>)}
+        {floatItem && <div className="float-right">{floatItem}</div>}
       </div>
       <div className="info">
         {error && touched && <div className="error">{error}</div>}

@@ -20,7 +20,7 @@ const ResetModal: FC<Props> = ({ close }) => {
   const [stage, setStage] = useState('reset')
 
   const [data, setData] = useState({
-    'request': {
+    request: {
       title: translate(
         {
           zh_hant: TEXT.zh_hant.forgetPassword,
@@ -29,7 +29,7 @@ const ResetModal: FC<Props> = ({ close }) => {
         lang
       )
     },
-    'reset': {
+    reset: {
       title: translate(
         {
           zh_hant: TEXT.zh_hant.resetPassword,
@@ -60,7 +60,7 @@ const ResetModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const SendVerificationCodeButton = (props) => (
+  const SendVerificationCodeButton = props => (
     <>
       <Button
         is="button"
@@ -123,9 +123,7 @@ const ResetModal: FC<Props> = ({ close }) => {
           error={errors.code}
           touched={touched.code}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
-          floatItem={(
-            <SendVerificationCodeButton />
-          )}
+          floatItem={<SendVerificationCodeButton />}
         />
         <div className="buttons">
           <span className="previous">
@@ -139,7 +137,10 @@ const ResetModal: FC<Props> = ({ close }) => {
           </span>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
             {translate(
-              { zh_hant: TEXT.zh_hant.nextStep, zh_hans: TEXT.zh_hans.nextStep },
+              {
+                zh_hant: TEXT.zh_hant.nextStep,
+                zh_hans: TEXT.zh_hans.nextStep
+              },
               lang
             )}
           </Button>
@@ -252,7 +253,10 @@ const ResetModal: FC<Props> = ({ close }) => {
     }
     if (!isValidPassword(value)) {
       return translate(
-        { zh_hant: TEXT.zh_hant.passwordHint, zh_hans: TEXT.zh_hans.passwordHint },
+        {
+          zh_hant: TEXT.zh_hant.passwordHint,
+          zh_hans: TEXT.zh_hans.passwordHint
+        },
         lang
       )
     }
@@ -268,7 +272,10 @@ const ResetModal: FC<Props> = ({ close }) => {
     }
     if (compareValue !== value) {
       return translate(
-        { zh_hant: TEXT.zh_hant.passwordNotMatch, zh_hans: TEXT.zh_hans.passwordNotMatch },
+        {
+          zh_hant: TEXT.zh_hant.passwordNotMatch,
+          zh_hans: TEXT.zh_hans.passwordNotMatch
+        },
         lang
       )
     }
@@ -303,7 +310,10 @@ const ResetModal: FC<Props> = ({ close }) => {
     validate: ({ password, confirmedPassword }) => {
       const errors = {
         password: validatePassword(password),
-        confirmedPassword: validateConfirmedPassword(password, confirmedPassword)
+        confirmedPassword: validateConfirmedPassword(
+          password,
+          confirmedPassword
+        )
       }
       return errors
     },
@@ -311,7 +321,6 @@ const ResetModal: FC<Props> = ({ close }) => {
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
     }
-
   })(BaseResetForm)
 
   return (
@@ -320,14 +329,8 @@ const ResetModal: FC<Props> = ({ close }) => {
         <Header title={data[stage].title} />
         <div className="content-wrapper">
           <div className={contentClass}>
-            {
-              stage === 'request' &&
-              <RequestForm />
-            }
-            {
-              stage === 'reset' &&
-              <ResetForm />
-            }
+            {stage === 'request' && <RequestForm />}
+            {stage === 'reset' && <ResetForm />}
           </div>
         </div>
       </div>
