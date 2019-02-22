@@ -15,7 +15,9 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
     credentials: 'include',
     headers,
     fetchOptions: {
-      agent: new https.Agent({ rejectUnauthorized: false })
+      agent: new https.Agent({
+        rejectUnauthorized: process.env.NODE_ENV !== 'development' // allow access to https:...matters.news in localhost
+      })
     }
   })
 
