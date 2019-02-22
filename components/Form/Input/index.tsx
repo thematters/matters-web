@@ -35,19 +35,23 @@ const Input = ({
   error,
   touched,
   hint,
+  floatItem,
   ...props
 }) => {
   const inputClass = classNames('input', ...className)
 
   return (
     <>
-      <input
-        className={inputClass}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-        {...props}
-      />
+      <div className="container">
+        <input
+          className={inputClass}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+          {...props}
+        />
+        { floatItem && (<div className="float-right">{floatItem}</div>)}
+      </div>
       <div className="info">
         {error && touched && <div className="error">{error}</div>}
         {!error && hint && <div className="hint">{hint}</div>}
