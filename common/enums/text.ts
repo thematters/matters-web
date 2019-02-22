@@ -12,7 +12,11 @@ export const TEXT = {
     hasNoAccount: '沒有帳號',
     verificationCode: '驗證碼',
     sendVerificationCode: '發送驗證碼',
-    required: '必填欄位'
+    required: '必填欄位',
+    term: '用戶協議',
+    termHint: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
+    disagree: '我不同意',
+    agreeAndContinue: '同意並繼續'
   },
 
   zh_hans: {
@@ -28,6 +32,10 @@ export const TEXT = {
     hasNoAccount: '没有帐号',
     verificationCode: '驗證碼',
     sendVerificationCode: '发送验证码',
-    required: '必填栏位'
+    required: '必填栏位',
+    term: '用户协议',
+    termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
+    disagree: '我不同意',
+    agreeAndContinue: '同意并继续'
   }
 }
