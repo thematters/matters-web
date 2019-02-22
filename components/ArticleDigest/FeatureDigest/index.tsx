@@ -21,14 +21,19 @@ const fragments = {
         id
         userName
       }
-      ...FeedDigestActionsArticle
+      ...FeatureDigestActionsArticle
     }
-    ${Actions.fragments.feedDigest}
+    ${Actions.fragments.featureDigest}
   `
 }
 
 const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,

@@ -1,0 +1,45 @@
+:root {
+  --digest-related-cover-width-sm: 140px;
+  --digest-related-cover-height-sm: 70px;
+}
+
+.container {
+  padding-bottom: var(--spacing-default);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  @media (--sm-up) {
+    flex-direction: column;
+  }
+}
+
+.left {
+  & :global(.actions) {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+.cover {
+  flex-shrink: 0;
+  margin-left: var(--spacing-tight);
+  width: var(--digest-related-cover-width-sm);
+  height: var(--digest-related-cover-height-sm);
+  background-color: var(--color-grey-lighter);
+
+  @media (--sm-up) {
+    margin-left: 0;
+    margin-bottom: var(--spacing-x-tight);
+    width: 100%;
+    height: auto;
+    order: -1;
+
+    &::after {
+      content: '';
+      display: block;
+      padding-bottom: 56%;
+    }
+  }
+}

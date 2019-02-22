@@ -6,8 +6,7 @@ const ExtendButton = () => (
   <>
     <Button
       onClick={() => alert('TODO: jump to draft page')}
-      size="default"
-      bgColor="black"
+      outlineColor="black"
       icon={
         <Icon
           id={ICON_NEW_BRANCH.id}

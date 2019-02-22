@@ -76,6 +76,43 @@ export interface ArticleDetail_article_comments {
   totalCount: number;
 }
 
+export interface ArticleDetail_article_relatedArticles_edges_node_author {
+  __typename: "User";
+  id: string;
+  userName: string | null;
+}
+
+export interface ArticleDetail_article_relatedArticles_edges_node_comments {
+  __typename: "CommentConnection";
+  totalCount: number;
+}
+
+export interface ArticleDetail_article_relatedArticles_edges_node {
+  __typename: "Article";
+  id: string;
+  title: string;
+  slug: string;
+  cover: any | null;
+  mediaHash: string | null;
+  author: ArticleDetail_article_relatedArticles_edges_node_author;
+  /**
+   * MAT recieved for this article
+   */
+  MAT: number;
+  comments: ArticleDetail_article_relatedArticles_edges_node_comments;
+}
+
+export interface ArticleDetail_article_relatedArticles_edges {
+  __typename: "ArticleEdge";
+  cursor: string;
+  node: ArticleDetail_article_relatedArticles_edges_node;
+}
+
+export interface ArticleDetail_article_relatedArticles {
+  __typename: "ArticleConnection";
+  edges: ArticleDetail_article_relatedArticles_edges[] | null;
+}
+
 export interface ArticleDetail_article {
   __typename: "Article";
   id: string;
@@ -106,6 +143,7 @@ export interface ArticleDetail_article {
   appreciateLeft: number;
   appreciators: ArticleDetail_article_appreciators;
   comments: ArticleDetail_article_comments;
+  relatedArticles: ArticleDetail_article_relatedArticles;
 }
 
 export interface ArticleDetail {

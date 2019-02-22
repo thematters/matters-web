@@ -14,6 +14,7 @@ import {
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 import Content from './Content'
+import RelatedArticles from './RelatedArticles'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 
@@ -36,6 +37,7 @@ const ARTICLE_DETAIL = gql`
       ...ContentArticle
       ...TagListArticle
       ...ToolbarArticle
+      ...RelatedArticles
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -43,6 +45,7 @@ const ARTICLE_DETAIL = gql`
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${Toolbar.fragments.article}
+  ${RelatedArticles.fragments.article}
 `
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
@@ -90,6 +93,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 </section>
 
                 <Toolbar placement="bottom" article={data.article} />
+
+                <RelatedArticles article={data.article} />
               </>
             )
           }}
