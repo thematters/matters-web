@@ -38,6 +38,11 @@ export interface FeedDigestActionsArticle {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: FeedDigestActionsArticle_comments;
   /**
    * Viewer has subscribed

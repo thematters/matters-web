@@ -54,6 +54,11 @@ export interface SeachArticles_search_edges_node_Article {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: SeachArticles_search_edges_node_Article_comments;
   /**
    * Viewer has subscribed

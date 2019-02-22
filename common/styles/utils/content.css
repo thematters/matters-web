@@ -115,6 +115,11 @@
       color: var(--color-matters-gold-hover);
     }
   }
+  /* fix frequent misuse of links */
+  & :global(u > a, ins > a) {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
 
   /* Misc
    ========================================================================== */

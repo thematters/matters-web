@@ -50,6 +50,11 @@ export interface NewestFeed_viewer_recommendation_feed_edges_node {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: NewestFeed_viewer_recommendation_feed_edges_node_comments;
   /**
    * Viewer has subscribed

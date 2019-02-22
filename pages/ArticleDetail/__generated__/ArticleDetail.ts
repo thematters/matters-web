@@ -45,6 +45,37 @@ export interface ArticleDetail_article_tags {
   content: string;
 }
 
+export interface ArticleDetail_article_appreciators_edges_node {
+  __typename: "User";
+  id: string;
+  userName: string;
+  /**
+   * Display name on profile
+   */
+  displayName: string;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
+}
+
+export interface ArticleDetail_article_appreciators_edges {
+  __typename: "UserEdge";
+  cursor: string;
+  node: ArticleDetail_article_appreciators_edges_node;
+}
+
+export interface ArticleDetail_article_appreciators {
+  __typename: "UserConnection";
+  totalCount: number;
+  edges: ArticleDetail_article_appreciators_edges[] | null;
+}
+
+export interface ArticleDetail_article_comments {
+  __typename: "CommentConnection";
+  totalCount: number;
+}
+
 export interface ArticleDetail_article {
   __typename: "Article";
   id: string;
@@ -68,6 +99,13 @@ export interface ArticleDetail_article {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
+  appreciators: ArticleDetail_article_appreciators;
+  comments: ArticleDetail_article_comments;
 }
 
 export interface ArticleDetail {

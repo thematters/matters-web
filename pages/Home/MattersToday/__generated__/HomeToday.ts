@@ -43,6 +43,11 @@ export interface HomeToday_viewer_recommendation_today {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: HomeToday_viewer_recommendation_today_comments;
   /**
    * Viewer has subscribed

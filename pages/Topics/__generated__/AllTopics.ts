@@ -50,6 +50,11 @@ export interface AllTopics_viewer_recommendation_topics_edges_node {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: AllTopics_viewer_recommendation_topics_edges_node_comments;
   /**
    * Viewer has subscribed

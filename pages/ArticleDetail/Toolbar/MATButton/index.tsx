@@ -16,6 +16,8 @@ const fragments = {
       id
       MAT
       hasAppreciate
+      appreciateLimit
+      appreciateLeft
     }
   `
 }
@@ -35,6 +37,10 @@ const MATButton = ({ article }: { article: MATArticle }) => {
     container: true,
     active: article.hasAppreciate
   })
+  const buttonClasses = classNames({
+    'mat-button': true,
+    'u-motion-icon-hover': article.appreciateLeft > 0
+  })
 
   return (
     <Mutation
@@ -50,9 +56,9 @@ const MATButton = ({ article }: { article: MATArticle }) => {
       }}
     >
       {(appreciate, { data }) => (
-        <span className={containerClasses}>
+        <section className={containerClasses}>
           <button
-            className="mat-button u-motion-icon-hover"
+            className={buttonClasses}
             type="button"
             onClick={() => appreciate()}
           >
@@ -68,7 +74,7 @@ const MATButton = ({ article }: { article: MATArticle }) => {
           </button>
           <span className="mat-count">{article.MAT}</span>
           <style jsx>{styles}</style>
-        </span>
+        </section>
       )}
     </Mutation>
   )

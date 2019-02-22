@@ -32,5 +32,10 @@ export interface TopicsDigestArticle {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: TopicsDigestArticle_comments;
 }

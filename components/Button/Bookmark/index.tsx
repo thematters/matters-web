@@ -16,11 +16,17 @@ const fragments = {
   `
 }
 
-export const BookmarkButton = ({ article }: { article: BookmarkArticle }) => {
+export const BookmarkButton = ({
+  article,
+  size = 'small'
+}: {
+  article: BookmarkArticle
+  size?: 'small' | 'default'
+}) => {
   if (article.subscribed) {
-    return <Unsubscribe article={article} />
+    return <Unsubscribe article={article} size={size} />
   } else {
-    return <Subscribe article={article} />
+    return <Subscribe article={article} size={size} />
   }
 }
 

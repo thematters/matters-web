@@ -54,6 +54,11 @@ export interface TagDetailArticles_node_Tag_articles_edges_node {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: TagDetailArticles_node_Tag_articles_edges_node_comments;
   /**
    * Viewer has subscribed

@@ -33,6 +33,11 @@ export interface SidebarIcymi_viewer_recommendation_icymi_edges_node {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: SidebarIcymi_viewer_recommendation_icymi_edges_node_comments;
 }
 

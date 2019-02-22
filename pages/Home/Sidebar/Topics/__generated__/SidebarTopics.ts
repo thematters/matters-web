@@ -32,6 +32,11 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node {
    * Viewer has appreciate
    */
   hasAppreciate: boolean;
+  /**
+   * limit the nuhmber of appreciate per user
+   */
+  appreciateLimit: number;
+  appreciateLeft: number;
   comments: SidebarTopics_viewer_recommendation_topics_edges_node_comments;
 }
 
