@@ -41,11 +41,16 @@
    ========================================================================== */
   & :global(blockquote) {
     width: 100%;
-    padding: var(--blockquote-spacing);
+    padding: 0 var(--spacing-default);
+    margin: var(--spacing-loose) 0;
 
     color: var(--color-matters-gold);
     font-size: var(--font-size-md);
     line-height: 2;
+
+    @media (--sm-up) {
+      padding: 0 var(--spacing-x-loose);
+    }
   }
 
   /* List
