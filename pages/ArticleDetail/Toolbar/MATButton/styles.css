@@ -14,6 +14,12 @@
   }
 }
 
+.inactive {
+  & .mat-button {
+    cursor: not-allowed;
+  }
+}
+
 .mat-button {
   width: 3rem;
   height: 3rem;

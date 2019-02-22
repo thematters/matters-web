@@ -1,7 +1,7 @@
 .content {
   line-height: var(--line-height-article-base);
 
-  & :global(> *) {
+  & :global(> * + *) {
     margin: var(--spacing-default) 0;
   }
 

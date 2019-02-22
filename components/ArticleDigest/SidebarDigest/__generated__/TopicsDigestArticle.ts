@@ -9,7 +9,7 @@
 export interface TopicsDigestArticle_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
 }
 
 export interface TopicsDigestArticle_comments {
@@ -28,14 +28,5 @@ export interface TopicsDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: TopicsDigestArticle_comments;
 }

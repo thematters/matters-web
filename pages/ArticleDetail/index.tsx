@@ -55,7 +55,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
         <Query query={ARTICLE_DETAIL} variables={{ mediaHash }}>
           {({
             data,
@@ -86,18 +86,17 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 <section className="content">
                   <Content article={data.article} />
                   <TagList article={data.article} />
+                  <Toolbar placement="left" article={data.article} />
                 </section>
 
-                <section className="toolbar-bottom">
-                  <Toolbar placement="bottom" article={data.article} />
-                </section>
+                <Toolbar placement="bottom" article={data.article} />
               </>
             )
           }}
         </Query>
       </article>
 
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+      <aside className="l-col-4 l-col-md-6 l-col-lg-4 ">
         <Footer />
       </aside>
 

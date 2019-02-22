@@ -25,8 +25,8 @@ export interface MeDigestUser {
   /**
    * Display name on profile
    */
-  displayName: string;
-  status: MeDigestUser_status;
+  displayName: string | null;
+  status: MeDigestUser_status | null;
   /**
    * URL for avatar
    */

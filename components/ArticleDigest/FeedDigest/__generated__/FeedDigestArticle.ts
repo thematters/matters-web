@@ -9,11 +9,11 @@
 export interface FeedDigestArticle_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -39,15 +39,6 @@ export interface FeedDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: FeedDigestArticle_comments;
   /**
    * Viewer has subscribed

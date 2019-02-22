@@ -16,7 +16,13 @@ const fragments = {
   `
 }
 
-const CommentButton = ({ article }: { article: CommentButtonArticle }) => (
+const CommentButton = ({
+  article,
+  textPlacement = 'right'
+}: {
+  article: CommentButtonArticle
+  textPlacement?: 'bottom' | 'right'
+}) => (
   <button
     type="button"
     aria-label="查看評論"
@@ -34,8 +40,9 @@ const CommentButton = ({ article }: { article: CommentButtonArticle }) => (
       color="grey"
       weight="medium"
       text={_get(article, 'comments.totalCount', '')}
-      size="sm"
-      spacing="xxtight"
+      textPlacement={textPlacement}
+      size="xs"
+      spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}
     />
   </button>
 )

@@ -30,8 +30,8 @@ export interface RootQuery_viewer {
   /**
    * Display name on profile
    */
-  displayName: string;
-  status: RootQuery_viewer_status;
+  displayName: string | null;
+  status: RootQuery_viewer_status | null;
   /**
    * URL for avatar
    */

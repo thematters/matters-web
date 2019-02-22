@@ -7,12 +7,12 @@ import { Icon } from '~/components'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 import ICON_MAT_WHITE from '~/static/icons/mat-white.svg?sprite'
 
-import { MATArticle } from './__generated__/MATArticle'
+import { MATArticleDetail } from './__generated__/MATArticleDetail'
 import styles from './styles.css'
 
 const fragments = {
   article: gql`
-    fragment MATArticle on Article {
+    fragment MATArticleDetail on Article {
       id
       MAT
       hasAppreciate
@@ -32,14 +32,16 @@ const APPRECIATE_ARTICLE = gql`
   }
 `
 
-const MATButton = ({ article }: { article: MATArticle }) => {
+const MATButton = ({ article }: { article: MATArticleDetail }) => {
+  const canAppreciate = article.appreciateLeft > 0
   const containerClasses = classNames({
     container: true,
-    active: article.hasAppreciate
+    active: article.hasAppreciate,
+    inactive: !canAppreciate
   })
   const buttonClasses = classNames({
     'mat-button': true,
-    'u-motion-icon-hover': article.appreciateLeft > 0
+    'u-motion-icon-hover': canAppreciate
   })
 
   return (
@@ -60,6 +62,7 @@ const MATButton = ({ article }: { article: MATArticle }) => {
           <button
             className={buttonClasses}
             type="button"
+            disabled={!canAppreciate}
             onClick={() => appreciate()}
           >
             <Icon

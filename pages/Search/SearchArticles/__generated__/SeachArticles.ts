@@ -20,11 +20,11 @@ export interface SeachArticles_search_edges_node_User {
 export interface SeachArticles_search_edges_node_Article_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -50,15 +50,6 @@ export interface SeachArticles_search_edges_node_Article {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: SeachArticles_search_edges_node_Article_comments;
   /**
    * Viewer has subscribed

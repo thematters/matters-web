@@ -1,19 +1,36 @@
-import { Icon } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import ICON_BRANCHES from '~/static/icons/branches.svg?sprite'
 
-const StreamsButton = () => (
+const IconBranches = () => (
+  <Icon
+    size="default"
+    className="u-motion-icon-hover"
+    id={ICON_BRANCHES.id}
+    viewBox={ICON_BRANCHES.viewBox}
+  />
+)
+
+const StreamsButton = ({ showText = false }: { showText?: boolean }) => (
   <button
     type="button"
     aria-label="查看上下游"
     onClick={() => alert('TODO: popup downstreams/upsteams popper')}
   >
-    <Icon
-      size="default"
-      className="u-motion-icon-hover"
-      id={ICON_BRANCHES.id}
-      viewBox={ICON_BRANCHES.viewBox}
-    />
+    {showText ? (
+      <TextIcon
+        icon={<IconBranches />}
+        color="grey"
+        weight="medium"
+        textPlacement="bottom"
+        size="xxs"
+        spacing="xxtight"
+      >
+        <Translate zh_hant="上下游" zh_hans="上下游" />
+      </TextIcon>
+    ) : (
+      <IconBranches />
+    )}
   </button>
 )
 

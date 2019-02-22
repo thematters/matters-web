@@ -9,7 +9,7 @@
 export interface SidebarTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
 }
 
 export interface SidebarTopics_viewer_recommendation_topics_edges_node_comments {
@@ -28,15 +28,6 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: SidebarTopics_viewer_recommendation_topics_edges_node_comments;
 }
 

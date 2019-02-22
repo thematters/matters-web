@@ -16,11 +16,11 @@ export interface FollowFeed_viewer_recommendation_followeeArticles_pageInfo {
 export interface FollowFeed_viewer_recommendation_followeeArticles_edges_node_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -46,15 +46,6 @@ export interface FollowFeed_viewer_recommendation_followeeArticles_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: FollowFeed_viewer_recommendation_followeeArticles_edges_node_comments;
   /**
    * Viewer has subscribed

@@ -9,7 +9,7 @@
 export interface SidebarIcymi_viewer_recommendation_icymi_edges_node_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
 }
 
 export interface SidebarIcymi_viewer_recommendation_icymi_edges_node_comments {
@@ -29,15 +29,6 @@ export interface SidebarIcymi_viewer_recommendation_icymi_edges_node {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: SidebarIcymi_viewer_recommendation_icymi_edges_node_comments;
 }
 

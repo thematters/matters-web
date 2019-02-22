@@ -19,11 +19,11 @@ export interface ArticleDetail_article_author_info {
 export interface ArticleDetail_article_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: ArticleDetail_article_author_info;
   /**
    * URL for avatar
@@ -48,11 +48,11 @@ export interface ArticleDetail_article_tags {
 export interface ArticleDetail_article_appreciators_edges_node {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */

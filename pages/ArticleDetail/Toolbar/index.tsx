@@ -16,7 +16,7 @@ import styles from './styles.css'
 const fragments = {
   article: gql`
     fragment ToolbarArticle on Article {
-      ...MATArticle
+      ...MATArticleDetail
       ...AppreciatorsArticle
       ...BookmarkArticle
       ...CommentButtonArticle
@@ -35,8 +35,23 @@ const Toolbar = ({
   article: ToolbarArticle
   placement: 'bottom' | 'left'
 }) => {
+  if (placement === 'left') {
+    return (
+      <section className="toolbar-left">
+        <div className="container">
+          <MATButton article={article} />
+          <StreamsButton showText />
+          <CommentButton article={article} textPlacement="bottom" />
+          <BookmarkButton article={article} size="default" />
+          <ShareButton />
+        </div>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
-    <>
+    <section className="toolbar-bottom">
       <section className="left">
         <MATButton article={article} />
         <Appreciators article={article} />
@@ -50,7 +65,7 @@ const Toolbar = ({
         <MoreButton />
       </section>
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

@@ -9,7 +9,7 @@
 export interface IcymiDigestArticle_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
 }
 
 export interface IcymiDigestArticle_comments {
@@ -29,14 +29,5 @@ export interface IcymiDigestArticle {
    * MAT recieved for this article
    */
   MAT: number;
-  /**
-   * Viewer has appreciate
-   */
-  hasAppreciate: boolean;
-  /**
-   * limit the nuhmber of appreciate per user
-   */
-  appreciateLimit: number;
-  appreciateLeft: number;
   comments: IcymiDigestArticle_comments;
 }

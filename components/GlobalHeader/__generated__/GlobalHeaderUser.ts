@@ -25,8 +25,8 @@ export interface GlobalHeaderUser {
   /**
    * Display name on profile
    */
-  displayName: string;
-  status: GlobalHeaderUser_status;
+  displayName: string | null;
+  status: GlobalHeaderUser_status | null;
   /**
    * URL for avatar
    */
