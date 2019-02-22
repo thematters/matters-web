@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 
-import { Responsive, SearchBar } from '~/components'
+import { Modal, Responsive, SearchBar } from '~/components'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -22,6 +22,17 @@ import styles from './styles.css'
 Router.onRouteChangeComplete = () => {
   analytics.trackPage()
 }
+
+const MortalLoginButton = () => (
+  <Modal.Mortal closeOnEsc closeOnOutSideClick>
+    {({ open, close, portal, active }) => (
+      <>
+        <LoginButton onClick={open} />
+        {portal(<Modal.LoginModal close={close} />)}
+      </>
+    )}
+  </Modal.Mortal>
+)
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
@@ -56,7 +67,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             ) : (
               <>
-                <LoginButton />
+                <MortalLoginButton />
                 <SignUpButton />
               </>
             )}

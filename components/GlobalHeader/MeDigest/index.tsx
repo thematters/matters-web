@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { useState } from 'react'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
@@ -44,7 +45,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
               }
               color="gold"
               weight="semibold"
-              text={user.status.MAT.total}
+              text={_get(user, 'status.MAT.total')}
               size="xs"
               spacing="0"
             />

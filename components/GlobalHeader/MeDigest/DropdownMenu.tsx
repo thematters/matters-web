@@ -1,5 +1,8 @@
+import gql from 'graphql-tag'
 import Link from 'next/link'
+import Router from 'next/router'
 import { useContext } from 'react'
+import { Mutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
 
@@ -97,23 +100,32 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <button
-          type="button"
-          onClick={() => {
-            alert('[TEST] logout')
-            hideDropdown()
-          }}
+        <Mutation
+          mutation={gql`
+            mutation UserLogout {
+              userLogout
+            }
+          `}
         >
-          <TextIcon
-            icon={<Icon src={ICON_LOGOUT} size="small" />}
-            text={translate({
-              zh_hant: '登出',
-              zh_hans: '登出',
-              lang
-            })}
-            spacing="xtight"
-          />
-        </button>
+          {logout => (
+            <button
+              type="button"
+              onClick={() => {
+                logout().then(() => Router.replace('/')) // redirect to home after logout
+              }}
+            >
+              <TextIcon
+                icon={<Icon src={ICON_LOGOUT} size="small" />}
+                text={translate({
+                  zh_hant: '登出',
+                  zh_hans: '登出',
+                  lang
+                })}
+                spacing="xtight"
+              />
+            </button>
+          )}
+        </Mutation>
       </Menu.Item>
     </Menu>
   )

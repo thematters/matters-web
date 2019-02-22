@@ -1,0 +1,76 @@
+.container {
+  background-color: #fff;
+  border-radius: 0.15rem;
+  z-index: 200;
+}
+
+.header {
+  @mixin flex-center-space-between;
+  border-bottom: 1px solid var(--color-line-grey);
+  margin: 0rem var(--spacing-x-tight);
+  padding: 0.75rem var(--spacing-x-tight);
+}
+
+.form {
+  & > .term {
+    padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-default);
+
+    & > .hint {
+      color: var(--color-grey-darker);
+    }
+    & > .description {
+      font-size: var(--font-size-sm);
+      border: 1px solid var(--color-grey-light);
+      border-radius: 0.125rem;
+      max-height: 27rem;
+      margin-top: var(--spacing-tight);
+      padding: var(--spacing-x-tight);
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar-track {
+        border-radius: 0.5rem;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      &::-webkit-scrollbar {
+        width:  0.9rem;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 0.25rem solid rgba(0, 0, 0, 0);
+        border-radius: 0.75rem;
+        background-clip: padding-box;
+        box-shadow: none;
+      }
+
+      @media (--sm-down) {
+        max-height: 20rem;
+      }
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+
+  & > .button {
+    @mixin flex-center-all;
+    cursor: pointer;
+    font-weight: 500;
+    flex-grow: 1;
+    height: 2.93rem;
+  }
+
+  & > .disagree {
+    color: var(--color-black);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: var(--spacing-x-tight);
+  }
+
+  & > .agree {
+    color: var(--color-white);
+    background: var(--color-matters-green);
+  }
+}
