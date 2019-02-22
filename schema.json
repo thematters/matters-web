@@ -13561,10 +13561,7 @@
       {
         "name": "deprecated",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION",
-          "ENUM_VALUE"
-        ],
+        "locations": ["FIELD_DEFINITION", "ENUM_VALUE"],
         "args": [
           {
             "name": "reason",
@@ -13581,10 +13578,7 @@
       {
         "name": "authenticate",
         "description": "",
-        "locations": [
-          "OBJECT",
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["OBJECT", "FIELD_DEFINITION"],
         "args": [
           {
             "name": "requires",
@@ -13601,10 +13595,7 @@
       {
         "name": "authorize",
         "description": "",
-        "locations": [
-          "OBJECT",
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["OBJECT", "FIELD_DEFINITION"],
         "args": [
           {
             "name": "requires",
@@ -13621,19 +13612,13 @@
       {
         "name": "private",
         "description": "",
-        "locations": [
-          "FIELD_DEFINITION"
-        ],
+        "locations": ["FIELD_DEFINITION"],
         "args": []
       },
       {
         "name": "skip",
         "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
@@ -13654,11 +13639,7 @@
       {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
-        "locations": [
-          "FIELD",
-          "FRAGMENT_SPREAD",
-          "INLINE_FRAGMENT"
-        ],
+        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
