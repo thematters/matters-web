@@ -1,6 +1,3 @@
-import { NextContext } from 'next'
-import Router from 'next/router'
-
 import { PATHS } from '~/common/enums'
 
 type ToPathArgs =
