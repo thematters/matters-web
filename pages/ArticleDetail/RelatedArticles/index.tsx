@@ -25,7 +25,6 @@ const fragments = {
 const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
   const edges = _get(article, 'relatedArticles.edges')
 
-  console.log(edges, 'relatedArticles')
   if (!edges || edges.length <= 0) {
     return null
   }
@@ -37,7 +36,7 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
       </Title>
       <ul>
         {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-          <li>
+          <li key={cursor}>
             <ArticleDigest.Related article={node} />
           </li>
         ))}

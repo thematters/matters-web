@@ -120,6 +120,7 @@ export interface ArticleDetail_article {
   state: ArticleState;
   public: boolean;
   live: boolean;
+  summary: string;
   createdAt: any;
   author: ArticleDetail_article_author;
   /**

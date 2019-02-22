@@ -3,14 +3,7 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  DateTime,
-  Empty,
-  Error,
-  Footer,
-  Placeholder,
-  Title
-} from '~/components'
+import { DateTime, Error, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 import Content from './Content'
@@ -29,6 +22,7 @@ const ARTICLE_DETAIL = gql`
       state
       public
       live
+      summary
       createdAt
       author {
         ...UserDigestFullDescUser
@@ -75,6 +69,16 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             return (
               <>
+                <Head
+                  title={data.article.title}
+                  description={data.article.summary}
+                  keywords={data.article.tags.map(
+                    ({ content }: { content: any }) => content
+                  )}
+                  path={router && router.asPath}
+                  image={data.article.cover}
+                />
+
                 <section className="author">
                   <UserDigest.FullDesc user={data.article.author} />
                 </section>

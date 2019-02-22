@@ -10,7 +10,7 @@ const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
 
-const isProd = process.env.NODE_ENV === 'production'
+console.log(process.env)
 
 const nextConfig = {
   /**
@@ -23,6 +23,7 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     // Will be available on both server and client
+    SITE_DOMIAN: process.env.SITE_DOMIAN,
     API_URL: process.env.API_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY
   },
