@@ -7,5 +7,5 @@
 // ====================================================
 
 export interface UserLogout {
-  userLogout: boolean | null;
+  userLogout: boolean;
 }

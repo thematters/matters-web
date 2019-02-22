@@ -24,11 +24,11 @@ export interface AllAuthors_viewer_recommendation_authors_edges_node_info {
 export interface AllAuthors_viewer_recommendation_authors_edges_node {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: AllAuthors_viewer_recommendation_authors_edges_node_info;
   /**
    * URL for avatar

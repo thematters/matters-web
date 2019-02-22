@@ -9,7 +9,7 @@
 export interface TopicsDigestArticle_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
 }
 
 export interface TopicsDigestArticle_comments {

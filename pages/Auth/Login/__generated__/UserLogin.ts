@@ -10,7 +10,7 @@ import { UserLoginInput } from "./../../../../__generated__/globalTypes";
 
 export interface UserLogin_userLogin {
   __typename: "AuthResult";
-  token: string | null;
+  auth: boolean;
 }
 
 export interface UserLogin {
