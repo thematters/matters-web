@@ -1,9 +1,9 @@
 import Anchor from './Anchor'
-import Container from './Container'
+import LoginModal from './LoginModal'
 import Mortal from './Mortal'
 
 export const Modal = {
   Anchor,
-  Container,
+  LoginModal,
   Mortal
 }
