@@ -27,12 +27,17 @@ export interface SeachUsers_search_edges_node_User_info {
 
 export interface SeachUsers_search_edges_node_User {
   __typename: "User";
+  id: string;
   userName: string;
   /**
    * Display name on profile
    */
   displayName: string;
   info: SeachUsers_search_edges_node_User_info;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
   /**
    * This user is following viewer
    */
@@ -41,10 +46,6 @@ export interface SeachUsers_search_edges_node_User {
    * Viewer is following this user
    */
   isFollowee: boolean;
-  /**
-   * URL for avatar
-   */
-  avatar: any | null;
 }
 
 export type SeachUsers_search_edges_node = SeachUsers_search_edges_node_Article | SeachUsers_search_edges_node_User;

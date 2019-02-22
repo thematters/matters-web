@@ -18,6 +18,7 @@ const fragments = {
       slug
       cover
       author {
+        id
         userName
       }
       mediaHash
@@ -31,6 +32,7 @@ const fragments = {
       title
       slug
       author {
+        id
         userName
       }
       mediaHash

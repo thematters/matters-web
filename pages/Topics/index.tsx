@@ -4,9 +4,11 @@ import { Query, QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
+  Error,
   Footer,
   InfiniteScroll,
   PageHeader,
+  Placeholder,
   Spinner,
   Translate
 } from '~/components'
@@ -54,11 +56,11 @@ const Topics = () => (
             fetchMore
           }: QueryResult & { data: AllTopics }) => {
             if (loading) {
-              return <Spinner />
+              return <Placeholder.ArticleDigestList />
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'viewer.recommendation.topics'

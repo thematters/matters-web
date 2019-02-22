@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
+  Error,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -78,7 +79,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
           }
 
           if (error) {
-            return <span>{JSON.stringify(error)}</span> // TODO
+            return <Error error={error} />
           }
 
           const connectionPath = 'search'

@@ -60,7 +60,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   return (
     <span className={textIconClasses}>
       {icon}
-      <span className="text">{text || children}</span>
+      <span className="text">{text === undefined ? children : text}</span>
       <style jsx>{styles}</style>
     </span>
   )

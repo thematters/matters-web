@@ -1,0 +1,39 @@
+.container {
+  text-align: center;
+}
+
+.image {
+  margin: 0 auto;
+  max-width: 15rem;
+  max-height: 15rem;
+}
+
+.error-code {
+  color: var(--color-grey);
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: var(--font-weight-normal);
+  line-height: 1.16666667;
+}
+
+.error-message {
+  margin-top: var(--spacing-x-tight);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+}
+
+.error-redirect {
+  margin-top: var(--spacing-loose);
+}
+
+.error-detail {
+  margin-top: var(--spacing-loose);
+  padding: var(--spacing-default);
+
+  text-align: left;
+  color: var(--color-red);
+  background: var(--color-bg-yellow);
+  border: 1px solid var(--color-red);
+  overflow: auto;
+}

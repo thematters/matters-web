@@ -18,6 +18,7 @@ const fragments = {
       summary
       mediaHash
       author {
+        id
         userName
       }
       ...FeedDigestActionsArticle
