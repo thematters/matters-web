@@ -26,15 +26,20 @@ const LoginModal: FC<Props> = ({ close }) => {
     'content'
   )
 
+  const interpret = (text: string, language: string) => {
+    return translate(
+      {
+        zh_hant: TEXT.zh_hant[text],
+        zh_hans: TEXT.zh_hans[text]
+      },
+      language
+    )
+  }
+
   const Header = () => (
     <>
       <div className="header">
-        <Title type="modal">
-          {translate(
-            { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
-            lang
-          )}
-        </Title>
+        <Title type="modal">{interpret('login', lang)}</Title>
         <button onClick={close}>
           <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
         </button>
@@ -43,65 +48,26 @@ const LoginModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const BaseForm = ({
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  }) => (
+  const BaseForm = props => (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={props.handleSubmit}>
         <Form.Input
           type="text"
-          name="email"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterEmail,
-              zh_hans: TEXT.zh_hans.enterEmail
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          error={errors.email}
-          touched={touched.email}
+          field="email"
+          placeholder={interpret('enterEmail', lang)}
+          {...props}
         />
         <Form.Input
           type="password"
-          name="password"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterPassword,
-              zh_hans: TEXT.zh_hans.enterPassword
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          error={errors.password}
-          touched={touched.password}
+          field="password"
+          placeholder={interpret('enterPassword', lang)}
           style={{ marginTop: '0.5rem' }}
+          {...props}
         />
         <div className="buttons">
-          <span className="forget">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.forgetPassword,
-                zh_hans: TEXT.zh_hans.forgetPassword
-              },
-              lang
-            )}
-            ？
-          </span>
+          <span className="forget">{interpret('forgetPassword', lang)}？</span>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {translate(
-              { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
-              lang
-            )}
+            {interpret('login', lang)}
           </Button>
         </div>
       </form>
@@ -111,29 +77,17 @@ const LoginModal: FC<Props> = ({ close }) => {
 
   const validateEmail = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     if (!isValidEmail(value)) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.invalidEmail,
-          zh_hans: TEXT.zh_hans.invalidEmail
-        },
-        lang
-      )
+      return interpret('invalidEmail', lang)
     }
     return undefined
   }
 
   const validatePassword = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     return undefined
   }
@@ -145,9 +99,11 @@ const LoginModal: FC<Props> = ({ close }) => {
     }),
 
     validate: ({ email, password }) => {
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidPassword = validatePassword(password)
       const errors = {
-        email: validateEmail(email),
-        password: validatePassword(password)
+        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
+        ...(isInvalidPassword ? { password: isInvalidPassword } : {})
       }
       return errors
     },
@@ -160,19 +116,9 @@ const LoginModal: FC<Props> = ({ close }) => {
   const RegisterBlock = () => (
     <>
       <div className="register">
-        {translate(
-          {
-            zh_hant: TEXT.zh_hant.hasNoAccount,
-            zh_hans: TEXT.zh_hans.hasNoAccount
-          },
-          lang
-        )}
-        ？
+        {interpret('hasNoAccount', lang)}？
         <span className="link">
-          {translate(
-            { zh_hant: TEXT.zh_hant.register, zh_hans: TEXT.zh_hans.register },
-            lang
-          )}
+          {interpret('register', lang)}
           <Icon
             style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
             id={ICON_ARROW.id}

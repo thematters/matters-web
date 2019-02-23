@@ -17,28 +17,7 @@ interface Props {
 const ResetModal: FC<Props> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [stage, setStage] = useState('reset')
-
-  const [data, setData] = useState({
-    request: {
-      title: translate(
-        {
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword
-        },
-        lang
-      )
-    },
-    reset: {
-      title: translate(
-        {
-          zh_hant: TEXT.zh_hant.resetPassword,
-          zh_hans: TEXT.zh_hans.resetPassword
-        },
-        lang
-      )
-    }
-  })
+  const [step, setStep] = useState('request')
 
   const contentClass = classNames(
     'l-col-4',
@@ -47,6 +26,39 @@ const ResetModal: FC<Props> = ({ close }) => {
     'l-col-lg-8',
     'content'
   )
+
+  const interpret = (text: string, language: string) =>
+    translate(
+      {
+        zh_hant: TEXT.zh_hant[text],
+        zh_hans: TEXT.zh_hans[text]
+      },
+      language
+    )
+
+  const goPreviousStep = () => {
+    switch (step) {
+      case 'reqeust': {
+        break
+      }
+      case 'reset': {
+        setStep('request')
+        break
+      }
+    }
+  }
+
+  const [data, setData] = useState({
+    request: {
+      title: interpret('forgetPassword', lang)
+    },
+    reset: {
+      title: interpret('resetPassword', lang)
+    },
+    complete: {
+      title: interpret('resetPassword', lang)
+    }
+  })
 
   const Header = ({ title }) => (
     <>
@@ -60,89 +72,42 @@ const ResetModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const SendVerificationCodeButton = props => (
+  const SendVerificationCodeButton = ({ onClick }) => (
     <>
       <Button
         is="button"
         bgColor="transparent"
         className="u-link-green"
         style={{ paddingRight: '0' }}
-        {...props}
+        onClick={onClick}
       >
-        {translate(
-          {
-            zh_hant: TEXT.zh_hant.sendVerificationCode,
-            zh_hans: TEXT.zh_hans.sendVerificationCode
-          },
-          lang
-        )}
+        {interpret('sendVerificationCode', lang)}
       </Button>
       <style jsx>{styles}</style>
     </>
   )
 
-  const BaseRequestForm = ({
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  }) => (
+  const BaseRequestForm = props => (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={props.handleSubmit}>
         <Form.Input
           type="text"
-          name="email"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterRegisteredEmail,
-              zh_hans: TEXT.zh_hans.enterRegisteredEmail
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          error={errors.email}
-          touched={touched.email}
+          field="email"
+          placeholder={interpret('enterRegisteredEmail', lang)}
+          {...props}
         />
         <Form.Input
           type="text"
-          name="code"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.verificationCode,
-              zh_hans: TEXT.zh_hans.verificationCode
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.code}
-          error={errors.code}
-          touched={touched.code}
+          field="code"
+          placeholder={interpret('verificationCode', lang)}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
-          floatItem={<SendVerificationCodeButton />}
+          floatElement={<SendVerificationCodeButton />}
+          {...props}
         />
         <div className="buttons">
-          <span className="previous">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.previousStep,
-                zh_hans: TEXT.zh_hans.previousStep
-              },
-              lang
-            )}
-          </span>
+          <span className="previous">{interpret('previousStep', lang)}</span>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.nextStep,
-                zh_hans: TEXT.zh_hans.nextStep
-              },
-              lang
-            )}
+            {interpret('nextStep', lang)}
           </Button>
         </div>
       </form>
@@ -150,64 +115,28 @@ const ResetModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const BaseResetForm = ({
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  }) => (
+  const BaseResetForm = props => (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={props.handleSubmit}>
         <Form.Input
           type="password"
-          name="password"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterPassword,
-              zh_hans: TEXT.zh_hans.enterPassword
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          error={errors.password}
-          touched={touched.password}
+          field="password"
+          placeholder={interpret('enterPassword', lang)}
+          {...props}
         />
         <Form.Input
           type="password"
-          name="confirmedPassword"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterPasswordAgain,
-              zh_hans: TEXT.zh_hans.enterPasswordAgain
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.confirmedPassword}
-          error={errors.confirmedPassword}
-          touched={touched.confirmedPassword}
+          field="confirmedPassword"
+          placeholder={interpret('enterPasswordAgain', lang)}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
+          {...props}
         />
         <div className="buttons">
-          <span className="previous">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.previousStep,
-                zh_hans: TEXT.zh_hans.previousStep
-              },
-              lang
-            )}
+          <span className="previous" onClick={goPreviousStep}>
+            {interpret('previousStep', lang)}
           </span>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {translate(
-              { zh_hant: TEXT.zh_hant.confirm, zh_hans: TEXT.zh_hans.confirm },
-              lang
-            )}
+            {interpret('confirm', lang)}
           </Button>
         </div>
       </form>
@@ -217,87 +146,65 @@ const ResetModal: FC<Props> = ({ close }) => {
 
   const validateEmail = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     if (!isValidEmail(value)) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.invalidEmail,
-          zh_hans: TEXT.zh_hans.invalidEmail
-        },
-        lang
-      )
+      return interpret('invalidEmail', lang)
     }
     return undefined
   }
 
   const validateCode = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     return undefined
   }
 
   const validatePassword = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     if (!isValidPassword(value)) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.passwordHint,
-          zh_hans: TEXT.zh_hans.passwordHint
-        },
-        lang
-      )
+      return interpret('passwordHint', lang)
     }
     return undefined
   }
 
   const validateConfirmedPassword = (compareValue: string, value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required', lang)
     }
     if (compareValue !== value) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.passwordNotMatch,
-          zh_hans: TEXT.zh_hans.passwordNotMatch
-        },
-        lang
-      )
+      return interpret('passwordNotMatch', lang)
     }
     return undefined
   }
 
   const RequestForm = withFormik({
     mapPropsToValues: () => ({
-      email: '',
-      code: ''
+      email: data.request.email || '',
+      code: data.request.code || ''
     }),
 
     validate: ({ email, code }) => {
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidCode = validateCode(code)
       const errors = {
-        email: validateEmail(email),
-        code: validateCode(code)
+        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
+        ...(isInvalidCode ? { code: isInvalidCode } : {})
       }
       return errors
     },
 
-    handleSubmit: async (values, { setSubmitting }) => {
+    handleSubmit: (values, { setSubmitting }) => {
       // TODO: Add mutation
+      setData(prev => {
+        prev.request.email = values.email
+        prev.request.code = values.code
+        return prev
+      })
+      setStep('reset')
     }
   })(BaseRequestForm)
 
@@ -308,29 +215,47 @@ const ResetModal: FC<Props> = ({ close }) => {
     }),
 
     validate: ({ password, confirmedPassword }) => {
+      const isInvalidPassword = validatePassword(password)
+      const isInvalidConfirmedPassword = validateConfirmedPassword(
+        password,
+        confirmedPassword
+      )
       const errors = {
-        password: validatePassword(password),
-        confirmedPassword: validateConfirmedPassword(
-          password,
-          confirmedPassword
-        )
+        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
+        ...(isInvalidConfirmedPassword
+          ? { confirmedPassword: isInvalidConfirmedPassword }
+          : {})
       }
       return errors
     },
 
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
+      steStep('complete')
     }
   })(BaseResetForm)
+
+  const Complete = () => (
+    <>
+      <div className="complete">
+        <div className="message">
+          {interpret('resetPasswordSuccessful', lang)}
+        </div>
+        <div className="hint">{interpret('useNewPassword', lang)}。</div>
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
 
   return (
     <>
       <div className="container">
-        <Header title={data[stage].title} />
+        <Header title={data[step].title} />
         <div className="content-wrapper">
           <div className={contentClass}>
-            {stage === 'request' && <RequestForm />}
-            {stage === 'reset' && <ResetForm />}
+            {step === 'request' && <RequestForm />}
+            {step === 'reset' && <ResetForm />}
+            {step === 'complete' && <Complete />}
           </div>
         </div>
       </div>

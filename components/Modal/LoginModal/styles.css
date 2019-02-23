@@ -1,27 +1,22 @@
 .container {
   background-color: #fff;
   border-radius: 0.15rem;
-  padding: 0rem var(--spacing-x-tight);
   z-index: 200;
 }
 
 .header {
   @mixin flex-center-space-between;
   border-bottom: 1px solid var(--color-line-grey);
+  margin: 0rem var(--spacing-x-tight);
   padding: 0.75rem var(--spacing-x-tight);
 }
 
 .content-wrapper {
   @mixin flex-center-all;
-  padding: 4rem var(--spacing-x-tight);
+  padding: 4rem var(--spacing-tight);
 
   & > .content {
     margin: 0rem;
-  }
-
-  & > .divider {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    margin: 3rem 0 2rem;
   }
 
   @media (--sm-down) {

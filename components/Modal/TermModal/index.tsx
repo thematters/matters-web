@@ -17,15 +17,20 @@ interface Props {
 const TermModal: FC<Props> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
 
+  const interpret = (text: string, language: string) => {
+    return translate(
+      {
+        zh_hant: TEXT.zh_hant[text],
+        zh_hans: TEXT.zh_hans[text]
+      },
+      language
+    )
+  }
+
   const Header = () => (
     <>
       <div className="header">
-        <Title type="modal">
-          {translate(
-            { zh_hant: TEXT.zh_hant.term, zh_hans: TEXT.zh_hans.term },
-            lang
-          )}
-        </Title>
+        <Title type="modal">{interpret('term', lang)}</Title>
         <button onClick={close}>
           <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
         </button>
@@ -38,15 +43,7 @@ const TermModal: FC<Props> = ({ close }) => {
     <>
       <form className="form" onSubmit={handleSubmit}>
         <div className="term">
-          <span className="hint">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.termHint,
-                zh_hans: TEXT.zh_hans.termHint
-              },
-              lang
-            )}
-          </span>
+          <span className="hint">{interpret('termHint', lang)}</span>
           <div className="description">
             {/* TODO: Content of term */}
             <br />
@@ -54,23 +51,9 @@ const TermModal: FC<Props> = ({ close }) => {
           </div>
         </div>
         <div className="buttons">
-          <div className="button disagree">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.disagree,
-                zh_hans: TEXT.zh_hans.disagree
-              },
-              lang
-            )}
-          </div>
+          <div className="button disagree">{interpret('disagree', lang)}</div>
           <div className="button agree">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.agreeAndContinue,
-                zh_hans: TEXT.zh_hans.agreeAndContinue
-              },
-              lang
-            )}
+            {interpret('agreeAndContinue', lang)}
           </div>
         </div>
       </form>
