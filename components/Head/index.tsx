@@ -29,7 +29,7 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       ? translate({ ...props.title, lang })
       : props.title
 
-  const pathname = props.router && props.router.asPath
+  const asPath = props.router && props.router.asPath
 
   const head = {
     title: title ? `${title} - Matters` : 'Matters',
@@ -40,8 +40,8 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       : 'matters,matters.news,創作有價',
     url: props.path
       ? `${SITE_DOMIAN}${props.path}`
-      : pathname
-      ? `${SITE_DOMIAN}${pathname}`
+      : asPath
+      ? `${SITE_DOMIAN}${asPath}`
       : SITE_DOMIAN,
     image: props.image || IMAGE_INTRO
   }
