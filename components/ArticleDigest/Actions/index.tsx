@@ -85,7 +85,7 @@ const Actions = ({
 
       <CommentCount article={article} size={size} />
 
-      {isShowBookmark && 'subscribedts' in article && (
+      {isShowBookmark && 'subscribed' in article && (
         <BookmarkButton article={article} />
       )}
 
