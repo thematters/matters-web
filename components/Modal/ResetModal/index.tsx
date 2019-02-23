@@ -1,23 +1,44 @@
 // External modules
 import classNames from 'classnames'
 import { withFormik } from 'formik'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 // Internal modules
-import { TEXT } from '~/common/enums'
-import { isValidEmail, isValidPassword, translate } from '~/common/utils'
-import { Button, Form, Icon, LanguageContext, Modal, Title } from '~/components'
+import { isValidEmail, isValidPassword } from '~/common/utils'
+import { Button, Form, Icon, ModalSwitch, Title } from '~/components'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import styles from './styles.css'
 
+/**
+ * This component is for password reset modal.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Modal.ResetModal close={close} interpret={interpret} />
+ * ```
+ *
+ */
+
 interface Props {
-  close: any
+  close: () => {}
+  interpret: () => {}
 }
 
-const ResetModal: FC<Props> = ({ close }) => {
-  const { lang } = useContext(LanguageContext)
-
+const ResetModal: FC<Props> = ({ close, interpret }) => {
   const [step, setStep] = useState('request')
+
+  const [data, setData] = useState({
+    request: {
+      title: interpret('forgetPassword')
+    },
+    reset: {
+      title: interpret('resetPassword')
+    },
+    complete: {
+      title: interpret('resetPassword')
+    }
+  })
 
   const contentClass = classNames(
     'l-col-4',
@@ -27,16 +48,8 @@ const ResetModal: FC<Props> = ({ close }) => {
     'content'
   )
 
-  const interpret = (text: string, language: string) =>
-    translate(
-      {
-        zh_hant: TEXT.zh_hant[text],
-        zh_hans: TEXT.zh_hans[text]
-      },
-      language
-    )
-
-  const goPreviousStep = () => {
+  const goPreviousStep = (event: any) => {
+    event.stopPropagation()
     switch (step) {
       case 'reqeust': {
         break
@@ -47,18 +60,6 @@ const ResetModal: FC<Props> = ({ close }) => {
       }
     }
   }
-
-  const [data, setData] = useState({
-    request: {
-      title: interpret('forgetPassword', lang)
-    },
-    reset: {
-      title: interpret('resetPassword', lang)
-    },
-    complete: {
-      title: interpret('resetPassword', lang)
-    }
-  })
 
   const Header = ({ title }) => (
     <>
@@ -72,19 +73,34 @@ const ResetModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const SendVerificationCodeButton = ({ onClick }) => (
+  const SendVerificationCodeButton = () => (
     <>
       <Button
         is="button"
         bgColor="transparent"
         className="u-link-green"
         style={{ paddingRight: '0' }}
-        onClick={onClick}
       >
-        {interpret('sendVerificationCode', lang)}
+        {interpret('sendVerificationCode')}
       </Button>
       <style jsx>{styles}</style>
     </>
+  )
+
+  const ModalLoginSwitch = () => (
+    <ModalSwitch modalId="loginModal">
+      {open => (
+        <Button
+          type="button"
+          bgColor="transparent"
+          className="u-link-green"
+          style={{ paddingLeft: '0rem' }}
+          onClick={open}
+        >
+          {interpret('previousStep')}
+        </Button>
+      )}
+    </ModalSwitch>
   )
 
   const BaseRequestForm = props => (
@@ -93,21 +109,21 @@ const ResetModal: FC<Props> = ({ close }) => {
         <Form.Input
           type="text"
           field="email"
-          placeholder={interpret('enterRegisteredEmail', lang)}
+          placeholder={interpret('enterRegisteredEmail')}
           {...props}
         />
         <Form.Input
           type="text"
           field="code"
-          placeholder={interpret('verificationCode', lang)}
+          placeholder={interpret('verificationCode')}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
           floatElement={<SendVerificationCodeButton />}
           {...props}
         />
         <div className="buttons">
-          <span className="previous">{interpret('previousStep', lang)}</span>
+          <ModalLoginSwitch />
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {interpret('nextStep', lang)}
+            {interpret('nextStep')}
           </Button>
         </div>
       </form>
@@ -121,22 +137,28 @@ const ResetModal: FC<Props> = ({ close }) => {
         <Form.Input
           type="password"
           field="password"
-          placeholder={interpret('enterPassword', lang)}
+          placeholder={interpret('enterPassword')}
           {...props}
         />
         <Form.Input
           type="password"
           field="confirmedPassword"
-          placeholder={interpret('enterPasswordAgain', lang)}
+          placeholder={interpret('enterPasswordAgain')}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
           {...props}
         />
         <div className="buttons">
-          <span className="previous" onClick={goPreviousStep}>
-            {interpret('previousStep', lang)}
-          </span>
+          <Button
+            type="button"
+            bgColor="transparent"
+            className="u-link-green"
+            onClick={goPreviousStep}
+            style={{ paddingLeft: '0rem' }}
+          >
+            {interpret('previousStep')}
+          </Button>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {interpret('confirm', lang)}
+            {interpret('confirm')}
           </Button>
         </div>
       </form>
@@ -146,37 +168,37 @@ const ResetModal: FC<Props> = ({ close }) => {
 
   const validateEmail = (value: string) => {
     if (!value) {
-      return interpret('required', lang)
+      return interpret('required')
     }
     if (!isValidEmail(value)) {
-      return interpret('invalidEmail', lang)
+      return interpret('invalidEmail')
     }
     return undefined
   }
 
   const validateCode = (value: string) => {
     if (!value) {
-      return interpret('required', lang)
+      return interpret('required')
     }
     return undefined
   }
 
   const validatePassword = (value: string) => {
     if (!value) {
-      return interpret('required', lang)
+      return interpret('required')
     }
     if (!isValidPassword(value)) {
-      return interpret('passwordHint', lang)
+      return interpret('passwordHint')
     }
     return undefined
   }
 
   const validateConfirmedPassword = (compareValue: string, value: string) => {
     if (!value) {
-      return interpret('required', lang)
+      return interpret('required')
     }
     if (compareValue !== value) {
-      return interpret('passwordNotMatch', lang)
+      return interpret('passwordNotMatch')
     }
     return undefined
   }
@@ -231,17 +253,15 @@ const ResetModal: FC<Props> = ({ close }) => {
 
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
-      steStep('complete')
+      setStep('complete')
     }
   })(BaseResetForm)
 
   const Complete = () => (
     <>
       <div className="complete">
-        <div className="message">
-          {interpret('resetPasswordSuccessful', lang)}
-        </div>
-        <div className="hint">{interpret('useNewPassword', lang)}。</div>
+        <div className="message">{interpret('resetPasswordSuccess')}</div>
+        <div className="hint">{interpret('useNewPassword')}。</div>
       </div>
       <style jsx>{styles}</style>
     </>
@@ -249,14 +269,12 @@ const ResetModal: FC<Props> = ({ close }) => {
 
   return (
     <>
-      <div className="container">
-        <Header title={data[step].title} />
-        <div className="content-wrapper">
-          <div className={contentClass}>
-            {step === 'request' && <RequestForm />}
-            {step === 'reset' && <ResetForm />}
-            {step === 'complete' && <Complete />}
-          </div>
+      <Header title={data[step].title} />
+      <div className="content-wrapper">
+        <div className={contentClass}>
+          {step === 'request' && <RequestForm />}
+          {step === 'reset' && <ResetForm />}
+          {step === 'complete' && <Complete />}
         </div>
       </div>
       <style jsx>{styles}</style>
