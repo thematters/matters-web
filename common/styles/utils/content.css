@@ -61,6 +61,7 @@
   }
   & :global(li) {
     padding-left: var(--spacing-x-tight);
+    margin: var(--spacing-tight) 0;
   }
   & :global(ul) {
     list-style-type: disc;
