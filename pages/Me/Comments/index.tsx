@@ -1,12 +1,11 @@
+import { Head, UserProfile } from '~/components'
 import MeTabs from '../MeTabs'
 
 export default () => (
   <main>
-    <section className="l-row" style={{ background: '#faf7f0' }}>
-      <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <h1>Me - Comments</h1>
-      </div>
-    </section>
+    <Head title={{ zh_hant: '我的評論', zh_hans: '我的评论' }} />
+
+    <UserProfile />
 
     <section className="l-row">
       <div className="l-col-4 l-col-md-1 l-col-lg-2">
