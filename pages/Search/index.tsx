@@ -7,6 +7,7 @@ import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
+import { getQuery } from '~/common/utils'
 import styles from './styles.css'
 
 const EmptySeachPage = () => {
@@ -28,9 +29,8 @@ const EmptySeachPage = () => {
 }
 
 const Search: React.FC<WithRouterProps> = ({ router }) => {
-  const type = router && router.query && router.query.type
-  let q = router && router.query && router.query.q
-  q = q instanceof Array ? q[0] : q
+  const type = getQuery({ router, key: 'type' })
+  const q = getQuery({ router, key: 'q' })
 
   if (!q) {
     return <EmptySeachPage />

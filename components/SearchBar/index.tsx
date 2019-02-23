@@ -1,11 +1,11 @@
-import { Formik, FormikProps, withFormik } from 'formik'
+import { Formik } from 'formik'
 import Router, { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 import AutoComplete from './AutoComplete'
 
-import { toPath, translate } from '~/common/utils'
+import { getQuery, toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 import styles from './styles.css'
 
@@ -57,8 +57,7 @@ const BaseSearchBar: React.FC<
   }
 
   // parse query
-  let routerQ = router && router.query && router.query.q
-  routerQ = routerQ instanceof Array ? routerQ[0] : routerQ
+  const routerQ = getQuery({ router, key: 'q' })
 
   return (
     <Formik

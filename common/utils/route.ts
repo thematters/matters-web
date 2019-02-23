@@ -1,3 +1,5 @@
+import { SingletonRouter } from 'next/router'
+
 import { PATHS } from '~/common/enums'
 
 type ToPathArgs =
@@ -13,6 +15,10 @@ type ToPathArgs =
     }
   | {
       page: 'userProfile'
+      userName: string
+    }
+  | {
+      page: 'userComments'
       userName: string
     }
   | {
@@ -40,6 +46,11 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
         href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
         as: `/@${args.userName}`
       }
+    case 'userComments':
+      return {
+        href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
+        as: `/@${args.userName}/comments`
+      }
     case 'search':
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
@@ -47,4 +58,15 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
         as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`
       }
   }
+}
+
+export const getQuery = ({
+  router,
+  key
+}: {
+  router?: SingletonRouter
+  key: string
+}) => {
+  const value = router && router.query && router.query[key]
+  return value instanceof Array ? value[0] : value
 }

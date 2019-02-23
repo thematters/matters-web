@@ -11,6 +11,7 @@ import RelatedArticles from './RelatedArticles'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 
+import { getQuery } from '~/common/utils'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import styles from './styles.css'
 
@@ -43,8 +44,7 @@ const ARTICLE_DETAIL = gql`
 `
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
-  let mediaHash = router && router.query && router.query.mediaHash
-  mediaHash = mediaHash instanceof Array ? mediaHash[0] : mediaHash
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
 
   if (!mediaHash) {
     return <span>Empty</span> // TODO
