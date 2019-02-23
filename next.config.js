@@ -10,8 +10,6 @@ const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
 
-console.log(process.env)
-
 const nextConfig = {
   /**
    * Runtime configs

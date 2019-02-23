@@ -1,6 +1,8 @@
 import getConfig from 'next/config'
 import NextHead from 'next/head'
 
+import FAVICON_16 from '~/static/favicon-16x16.png?url'
+import FAVICON_32 from '~/static/favicon-32x32.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg'
 
 const {
@@ -45,7 +47,20 @@ export const Head: React.FC<HeadProps> = ({
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
       <meta name="keywords" key="keywords" content={head.keywords} />
-      <link rel="shortcut icon" key="favicon" href="" />
+      <link
+        rel="icon"
+        type="image/png"
+        href={FAVICON_32}
+        sizes="32x32"
+        key="favicon-32"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        href={FAVICON_16}
+        sizes="16x16"
+        key="favicon-16"
+      />
 
       {/* social */}
       <meta property="og:site_name" key="og:site_name" content="Matters" />
