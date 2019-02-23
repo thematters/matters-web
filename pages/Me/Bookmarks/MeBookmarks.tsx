@@ -9,16 +9,16 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyArticles from './EmptyArticles'
+import EmptyBookmarks from './EmptyBookmarks'
 
 import { mergeConnections } from '~/common/utils'
-import { MeArticleFeed } from './__generated__/MeArticleFeed'
+import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 
-const ME_ARTICLES_FEED = gql`
-  query MeArticleFeed($cursor: String) {
+const ME_BOOKMARK_FEED = gql`
+  query MeBookmarkFeed($cursor: String) {
     viewer {
       id
-      articles(input: { first: 10, after: $cursor }) {
+      subscriptions(input: { first: 10, after: $cursor }) {
         pageInfo {
           startCursor
           endCursor
@@ -38,13 +38,13 @@ const ME_ARTICLES_FEED = gql`
 
 export default () => {
   return (
-    <Query query={ME_ARTICLES_FEED}>
+    <Query query={ME_BOOKMARK_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: MeArticleFeed }) => {
+      }: QueryResult & { data: MeBookmarkFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -53,7 +53,7 @@ export default () => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'viewer.articles'
+        const connectionPath = 'viewer.subscriptions'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -68,8 +68,8 @@ export default () => {
               })
           })
 
-        if (edges.lengtg <= 0) {
-          return <EmptyArticles />
+        if (edges <= 0) {
+          return <EmptyBookmarks />
         }
 
         return (

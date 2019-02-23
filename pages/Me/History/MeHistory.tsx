@@ -9,25 +9,29 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyArticles from './EmptyArticles'
+import EmptyHistory from './EmptyHistory'
 
 import { mergeConnections } from '~/common/utils'
-import { MeArticleFeed } from './__generated__/MeArticleFeed'
+import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 
-const ME_ARTICLES_FEED = gql`
-  query MeArticleFeed($cursor: String) {
+const ME_HISTORY_FEED = gql`
+  query MeHistoryFeed($cursor: String) {
     viewer {
       id
-      articles(input: { first: 10, after: $cursor }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...FeedDigestArticle
+      activity {
+        history(input: { first: 10, after: $cursor }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              article {
+                ...FeedDigestArticle
+              }
+            }
           }
         }
       }
@@ -38,13 +42,13 @@ const ME_ARTICLES_FEED = gql`
 
 export default () => {
   return (
-    <Query query={ME_ARTICLES_FEED}>
+    <Query query={ME_HISTORY_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: MeArticleFeed }) => {
+      }: QueryResult & { data: MeHistoryFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -53,7 +57,7 @@ export default () => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'viewer.articles'
+        const connectionPath = 'viewer.activity.history'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -68,8 +72,8 @@ export default () => {
               })
           })
 
-        if (edges.lengtg <= 0) {
-          return <EmptyArticles />
+        if (edges.length <= 0) {
+          return <EmptyHistory />
         }
 
         return (
@@ -82,7 +86,7 @@ export default () => {
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node} />
+                  <ArticleDigest.Feed article={node.article} />
                 </li>
               ))}
             </ul>
