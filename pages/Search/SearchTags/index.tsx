@@ -111,7 +111,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                   {data.search.edges.map(
                     ({ node, cursor }: { node: any; cursor: any }) => (
                       <li key={cursor}>
-                        <Tag tag={node} />
+                        <Tag tag={node} type="count-fixed" />
                       </li>
                     )
                   )}

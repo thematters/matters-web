@@ -6,8 +6,12 @@
   display: inline-block;
   position: relative;
   width: 100%;
+  padding-bottom: var(--spacing-default);
+  margin-bottom: var(--spacing-default);
+
   overflow: hidden;
   white-space: nowrap;
+  border-bottom: 1px solid var(--color-line-grey);
 
   & .count {
     position: absolute;
