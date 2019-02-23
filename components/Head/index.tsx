@@ -1,6 +1,11 @@
 import getConfig from 'next/config'
 import NextHead from 'next/head'
+import { withRouter, WithRouterProps } from 'next/router'
+import { useContext } from 'react'
 
+import { LanguageContext } from '~/components'
+
+import { translate } from '~/common/utils'
 import FAVICON_16 from '~/static/favicon-16x16.png?url'
 import FAVICON_32 from '~/static/favicon-32x32.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg'
@@ -10,30 +15,35 @@ const {
 } = getConfig()
 
 interface HeadProps {
-  title?: string
+  title?: string | { zh_hant: string; zh_hans?: string; en?: string }
   description?: string
   keywords?: string[]
   path?: string
   image?: string
 }
 
-console.log(SITE_DOMIAN, 'SITE_DOMIAN')
+const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
+  const { lang } = useContext(LanguageContext)
+  const title =
+    typeof props.title === 'object'
+      ? translate({ ...props.title, lang })
+      : props.title
 
-export const Head: React.FC<HeadProps> = ({
-  title,
-  description,
-  keywords,
-  path,
-  image
-}) => {
+  const pathname = props.router && props.router.asPath
+
   const head = {
     title: title ? `${title} - Matters` : 'Matters',
-    description: description || '一個自由、自主、永續的創作與公共討論空間',
-    keywords: keywords
-      ? `${keywords.join(',')},matters,matters.news,創作有價`
+    description:
+      props.description || '一個自由、自主、永續的創作與公共討論空間',
+    keywords: props.keywords
+      ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
-    url: path ? `${SITE_DOMIAN}${path}` : SITE_DOMIAN,
-    image: image || IMAGE_INTRO
+    url: props.path
+      ? `${SITE_DOMIAN}${props.path}`
+      : pathname
+      ? `${SITE_DOMIAN}${pathname}`
+      : SITE_DOMIAN,
+    image: props.image || IMAGE_INTRO
   }
 
   return (
@@ -100,3 +110,5 @@ export const Head: React.FC<HeadProps> = ({
     </NextHead>
   )
 }
+
+export const Head = withRouter(BaseHead)

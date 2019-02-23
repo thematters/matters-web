@@ -75,7 +75,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   keywords={data.article.tags.map(
                     ({ content }: { content: any }) => content
                   )}
-                  path={router && router.asPath}
                   image={data.article.cover}
                 />
 

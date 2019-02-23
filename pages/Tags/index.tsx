@@ -5,6 +5,7 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -43,6 +44,8 @@ const ALL_TAGS = gql`
 const Tags = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部標籤', zh_hans: '全部标签' }} />
+
       <PageHeader
         pageTitle={<Translate zh_hant="全部標籤" zh_hans="全部标签" />}
       />

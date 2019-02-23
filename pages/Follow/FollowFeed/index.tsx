@@ -5,6 +5,7 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   ArticleDigest,
   Error,
+  Head,
   InfiniteScroll,
   PageHeader,
   Placeholder,
@@ -73,6 +74,8 @@ export default () => {
 
         return (
           <>
+            <Head title={{ zh_hant: '追蹤', zh_hans: '追踪' }} />
+
             <PageHeader
               pageTitle={<Translate zh_hant="追蹤" zh_hans="追踪" />}
             />
