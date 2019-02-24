@@ -20,6 +20,7 @@
     "format": "prettier --write \"{,!(build|static-site-build|node_modules)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "tslint -p .",
+    "lint:fix": "tslint -p . --fix",
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
