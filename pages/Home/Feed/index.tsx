@@ -3,7 +3,6 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
   Error,
@@ -15,9 +14,11 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import SortBy from './SortBy'
+
+import { mergeConnections } from '~/common/utils'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
+import SortBy from './SortBy'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {

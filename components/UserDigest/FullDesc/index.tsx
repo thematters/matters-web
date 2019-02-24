@@ -1,13 +1,12 @@
-// External modules
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-// Internal modules
 import { Avatar } from '~/components/Avatar'
 import { FollowButton } from '~/components/Button/Follow'
 
 import { toPath } from '~/common/utils'
+
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
 
@@ -33,7 +32,7 @@ const FullDesc = ({
   })
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName
+    userName: user.userName || ''
   })
 
   return (

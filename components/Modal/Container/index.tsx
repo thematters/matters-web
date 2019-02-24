@@ -3,12 +3,13 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useContext, useEffect, useState } from 'react'
 
-// Internal modules
-import { KEYCODES, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 import { Icon, LanguageContext, Title } from '~/components'
 import { useNativeEventListener } from '~/components/Hook'
+
+import { KEYCODES, TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+
 import styles from './styles.css'
 
 interface Props {

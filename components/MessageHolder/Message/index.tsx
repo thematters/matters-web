@@ -1,8 +1,6 @@
-// External modules
 import classNames from 'classnames'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 
-// Internal modules
 import styles from './styles.css'
 
 /**

@@ -1,12 +1,12 @@
-// External modules
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import { FC } from 'react'
 
-// Internal modules
-import { isValidEmail } from '~/common/utils'
 import { Button, Form, Icon, ModalSwitch } from '~/components'
+
+import { isValidEmail } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
+
 import styles from './styles.css'
 
 /**

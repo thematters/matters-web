@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import styles from '~/common/styles/utils/content.css'
+
 import { ContentArticle } from './__generated__/ContentArticle'
 
 const fragments = {

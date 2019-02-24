@@ -14,6 +14,7 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllAuthors } from './__generated__/AllAuthors'
 import styles from './styles.css'
 

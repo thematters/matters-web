@@ -1,5 +1,3 @@
-import { Placeholder } from '~/components'
-
 export default () => (
   <main>
     <section className="l-row" style={{ background: '#faf7f0' }}>

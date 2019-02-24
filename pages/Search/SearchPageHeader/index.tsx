@@ -5,6 +5,7 @@ import { Icon, TextIcon, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
+
 import styles from './styles.css'
 
 const BackToAggregate = ({ q }: { q: string }) => {

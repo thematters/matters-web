@@ -11,10 +11,11 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 
 import { mergeConnections } from '~/common/utils'
+
+import EmptySearch from '../EmptySearch'
+import ViewAll from '../ViewAll'
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`

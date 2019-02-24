@@ -4,6 +4,7 @@ import _get from 'lodash/get'
 import { Mutation } from 'react-apollo'
 
 import { Icon } from '~/components'
+
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 import ICON_MAT_WHITE from '~/static/icons/mat-white.svg?sprite'
 

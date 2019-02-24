@@ -19,6 +19,7 @@ import {
 
 import { mergeConnections } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
+
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
 
 const TAG_DETAIL = gql`

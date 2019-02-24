@@ -1,6 +1,6 @@
-// Internal modules
 import { Modal } from '~/components'
 import { ModalInstance } from '~/components/ModalManager'
+
 import styles from './styles.css'
 
 /**

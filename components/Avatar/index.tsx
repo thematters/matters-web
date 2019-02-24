@@ -1,4 +1,3 @@
-// external
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 

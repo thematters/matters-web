@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
-import DropdownContent from './DropdownContent'
 
 import ICON_MENU from '~/static/icons/menu.svg?sprite'
+
+import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
 export default () => {

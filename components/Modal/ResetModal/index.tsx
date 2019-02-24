@@ -3,10 +3,11 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import { FC, useState } from 'react'
 
-// Internal modules
-import { isValidEmail, isValidPassword } from '~/common/utils'
 import { Button, Form, Icon, ModalSwitch, Title } from '~/components'
+
+import { isValidEmail, isValidPassword } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+
 import styles from './styles.css'
 
 /**

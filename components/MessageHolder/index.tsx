@@ -1,10 +1,9 @@
-// External modules
 import classNames from 'classnames'
 import _filter from 'lodash/filter'
 import { FC, useState } from 'react'
 
-// Internal modules
 import { useEventListener } from '~/components'
+
 import { Message } from './Message'
 import styles from './styles.css'
 

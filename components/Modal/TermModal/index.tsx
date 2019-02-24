@@ -46,7 +46,7 @@ const TermModal: FC<Props> = ({ close, interpret }) => {
   )
 
   const TermForm = withFormik({
-    handleSubmit: async (valuse, { setSubmitting }) => {
+    handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
       console.log(values) // For passing linting
       setSubmitting(false)

@@ -1,8 +1,6 @@
-// External modules
 import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-// Internal modules
 import { Modal } from '~/components'
 
 const emptyModalId = ''

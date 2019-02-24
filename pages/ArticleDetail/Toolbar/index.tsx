@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { BookmarkButton } from '~/components/Button/Bookmark'
+
+import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import Appreciators from './Appreciators'
 import CommentButton from './CommentButton'
 import ExtendButton from './ExtendButton'
@@ -9,8 +11,6 @@ import MATButton from './MATButton'
 import MoreButton from './MoreButton'
 import ShareButton from './ShareButton'
 import StreamsButton from './StreamsButton'
-
-import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import styles from './styles.css'
 
 const fragments = {

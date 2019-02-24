@@ -1,11 +1,10 @@
-// External modules
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-// Internal modules
 import { Avatar } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
+
 import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
 import styles from './styles.css'
 
@@ -36,7 +35,7 @@ const fragments = {
 const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName
+    userName: user.userName || ''
   })
 
   return (

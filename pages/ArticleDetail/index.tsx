@@ -6,13 +6,13 @@ import { Query, QueryResult } from 'react-apollo'
 import { DateTime, Error, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
-import Content from './Content'
-import RelatedArticles from './RelatedArticles'
-import TagList from './TagList'
-import Toolbar from './Toolbar'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import Content from './Content'
+import RelatedArticles from './RelatedArticles'
 import styles from './styles.css'
+import TagList from './TagList'
+import Toolbar from './Toolbar'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String!) {

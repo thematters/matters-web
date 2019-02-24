@@ -1,11 +1,10 @@
-// External modules
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
-// Internal modules
 import { Button, Icon, Translate } from '~/components'
 
 import ICON_ADD from '~/static/icons/add.svg?sprite'
+
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { updateViewerFolloweeCount } from './utils'
 

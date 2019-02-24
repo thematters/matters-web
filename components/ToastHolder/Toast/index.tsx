@@ -1,11 +1,11 @@
-// External modules
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-// Internal modules
 import { Icon } from '~/components'
+
 import IconCloseWhite from '~/static/icons/close-white.svg'
 import IconClose from '~/static/icons/close.svg'
+
 import styles from './styles.css'
 
 /**

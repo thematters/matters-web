@@ -2,8 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Title } from '~/components'
+
+import { toPath } from '~/common/utils'
 
 import Actions from '../Actions'
 import { IcymiDigestArticle } from './__generated__/IcymiDigestArticle'
