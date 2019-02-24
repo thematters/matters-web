@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
+
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MATArticle } from './__generated__/MATArticle'

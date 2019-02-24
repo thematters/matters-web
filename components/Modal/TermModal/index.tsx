@@ -1,13 +1,12 @@
-// External modules
-import classNames from 'classnames'
 import { withFormik } from 'formik'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext } from 'react'
 
-// Internal modules
+import { Icon, LanguageContext, Title } from '~/components'
+
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import { Button, Icon, LanguageContext, Modal, Title } from '~/components'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+
 import styles from './styles.css'
 
 interface Props {
@@ -21,10 +20,11 @@ const TermModal: FC<Props> = ({ close }) => {
     <>
       <div className="header">
         <Title type="modal">
-          {translate(
-            { zh_hant: TEXT.zh_hant.term, zh_hans: TEXT.zh_hans.term },
+          {translate({
+            zh_hant: TEXT.zh_hant.term,
+            zh_hans: TEXT.zh_hans.term,
             lang
-          )}
+          })}
         </Title>
         <button onClick={close}>
           <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />

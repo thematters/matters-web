@@ -1,7 +1,5 @@
-// External modules
 import classNames from 'classnames'
 
-// Internal modules
 import styles from './styles.css'
 
 /**

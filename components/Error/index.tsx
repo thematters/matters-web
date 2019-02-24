@@ -1,6 +1,7 @@
 import { Translate } from '~/components'
 
 import IMAGE_ILLUSTRATION_EMPTY from '~/static/images/illustration-empty.svg'
+
 import styles from './styles.css'
 
 interface ErrorProps {

@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
+
 import styles from './styles.css'
 
 interface SortByProps {

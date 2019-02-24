@@ -7,6 +7,7 @@ import { Empty, Error, Icon, Menu, Spinner, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
+
 import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 import styles from './styles.css'
 

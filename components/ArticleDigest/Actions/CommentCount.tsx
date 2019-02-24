@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
+
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { CommentCountArticle } from './__generated__/CommentCountArticle'

@@ -1,12 +1,12 @@
-// External modules
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useEffect, useState } from 'react'
 import { Portal as ReactPortal } from 'react-portal'
 
-// Internal modules
-import { KEYCODES } from '~/common/enums'
 import { useNativeEventListener } from '~/components/Hook'
+
+import { KEYCODES } from '~/common/enums'
+
 import styles from './styles.css'
 
 /**

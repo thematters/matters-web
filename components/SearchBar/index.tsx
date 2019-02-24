@@ -3,10 +3,11 @@ import Router, { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
-import AutoComplete from './AutoComplete'
 
 import { toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
+
+import AutoComplete from './AutoComplete'
 import styles from './styles.css'
 
 const SearchButton = () => (

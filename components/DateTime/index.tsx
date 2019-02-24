@@ -1,6 +1,6 @@
-import { datetimeFormat } from '~/common/utils'
-
 import { LanguageConsumer } from '~/components'
+
+import { datetimeFormat } from '~/common/utils'
 
 import styles from './styles.css'
 

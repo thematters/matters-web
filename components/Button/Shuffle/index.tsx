@@ -1,6 +1,7 @@
 import { Icon, TextIcon, Translate } from '~/components'
 
 import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
+
 import styles from './styles.css'
 
 export const ShuffleButton = ({ onClick }: { onClick: () => void }) => (

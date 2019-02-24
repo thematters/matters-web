@@ -1,8 +1,5 @@
-// External modules
-import { useEffect, useState } from 'react'
-
-// Internal modules
 import { useEventListener } from '~/components/Hook'
+
 import styles from './styles.css'
 
 /**

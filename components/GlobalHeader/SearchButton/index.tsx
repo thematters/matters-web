@@ -4,6 +4,7 @@ import { Icon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
+
 import styles from './styles.css'
 
 export default () => (

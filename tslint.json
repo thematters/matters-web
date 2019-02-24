@@ -11,6 +11,28 @@
     "no-console": false,
     "interface-name": false,
     "no-object-literal-type-assertion": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "case-insensitive",
+        "grouped-imports": true,
+        "groups": [
+          { "name": "local", "match": "^[.]", "order": 20 },
+          {
+            "name": "internal:others",
+            "match": "^~/(common|static|page|definitions)",
+            "order": 15
+          },
+          {
+            "name": "internal:components",
+            "match": "^~/components",
+            "order": 10
+          },
+          { "name": "external", "match": ".*", "order": 5 }
+        ]
+      }
+    ]
   }
 }

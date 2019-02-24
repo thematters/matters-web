@@ -5,13 +5,14 @@ import App, { Container, NextAppContext } from 'next/app'
 import React from 'react'
 import { ApolloProvider, Query, QueryResult } from 'react-apollo'
 
-import withApollo from '~/common/utils/withApollo'
 import {
   AnalyticsProvider,
   GlobalStyles,
   LanguageProvider,
   Layout
 } from '~/components'
+
+import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
 

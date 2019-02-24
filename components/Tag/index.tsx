@@ -7,6 +7,7 @@ import { Icon, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
+
 import { Tag as TagType } from './__generated__/Tag'
 import { TagArticleDetail } from './__generated__/TagArticleDetail'
 import styles from './styles.css'

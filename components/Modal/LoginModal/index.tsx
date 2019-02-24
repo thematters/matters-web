@@ -1,14 +1,14 @@
-// External modules
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import { FC, useContext, useEffect, useState } from 'react'
 
-// Internal modules
+import { Button, Form, Icon, LanguageContext, Modal, Title } from '~/components'
+
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
-import { Button, Form, Icon, LanguageContext, Modal, Title } from '~/components'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+
 import styles from './styles.css'
 
 interface Props {

@@ -1,11 +1,10 @@
-// External modules
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-// Internal modules
 import { Avatar } from '~/components'
 
 import { toPath } from '~/common/utils'
+
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import styles from './styles.css'
 
