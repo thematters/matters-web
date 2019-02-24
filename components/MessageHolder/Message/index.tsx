@@ -52,9 +52,7 @@ export const Message: FC<Props> = ({
   }
 
   useEffect(() => {
-    if (fixed !== true) {
-      setTimeout(removeMessage, duration || 3 * second)
-    }
+    setTimeout(removeMessage, duration || 3 * second)
   })
 
   return (
