@@ -5,12 +5,12 @@ import { Label, Title } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import Actions from '../Actions'
+import Actions, { ActionsControls } from '../Actions'
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 import styles from './styles.css'
 
 const fragments = {
-  today: gql`
+  article: gql`
     fragment TodayDigestArticle on Article {
       id
       title
@@ -22,13 +22,16 @@ const fragments = {
         id
         userName
       }
-      ...FeatureDigestActionsArticle
+      ...DigestActionsArticle
     }
-    ${Actions.fragments.featureDigest}
+    ${Actions.fragments.article}
   `
 }
 
-const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
+const FeatureDigest = ({
+  article,
+  ...actionControls
+}: { article: TodayDigestArticle } & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -76,7 +79,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
               </a>
             </Link>
 
-            <Actions article={article} type="feature" />
+            <Actions article={article} type="feature" {...actionControls} />
           </div>
         </div>
       </div>

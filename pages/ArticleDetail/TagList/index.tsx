@@ -10,10 +10,10 @@ const fragments = {
   article: gql`
     fragment TagListArticle on Article {
       tags {
-        ...TagArticleDetail
+        ...DigestTag
       }
     }
-    ${Tag.fragments.articleDetail}
+    ${Tag.fragments.tag}
   `
 }
 

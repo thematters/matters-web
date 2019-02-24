@@ -54,4 +54,5 @@ export interface AllTags {
 
 export interface AllTagsVariables {
   cursor?: string | null;
+  hasDigestTagArticleCount?: boolean | null;
 }

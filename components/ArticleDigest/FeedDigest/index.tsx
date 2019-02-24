@@ -7,7 +7,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import Actions from '../Actions'
+import Actions, { ActionsControls } from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
 
@@ -25,14 +25,17 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...FeedDigestActionsArticle
+      ...DigestActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.feedDigest}
+    ${Actions.fragments.article}
   `
 }
 
-const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
+const FeedDigest = ({
+  article,
+  ...actionControls
+}: { article: FeedDigestArticle } & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -73,7 +76,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
             </a>
           </Link>
 
-          <Actions article={article} type="feed" />
+          <Actions article={article} type="feed" {...actionControls} />
         </div>
 
         {cover && (

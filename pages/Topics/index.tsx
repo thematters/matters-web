@@ -19,7 +19,11 @@ import { mergeConnections } from '~/common/utils'
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICS = gql`
-  query AllTopics($cursor: String) {
+  query AllTopics(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       recommendation {
@@ -92,7 +96,11 @@ const Topics = () => (
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                     <li key={cursor}>
-                      <ArticleDigest.Feed article={node} />
+                      <ArticleDigest.Feed
+                        article={node}
+                        hasDateTime
+                        hasBookmark
+                      />
                     </li>
                   ))}
                 </ul>

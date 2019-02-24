@@ -3,10 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: FeatureDigestActionsArticle
+// GraphQL fragment: SidebarDigestArticle
 // ====================================================
 
-export interface FeatureDigestActionsArticle_author {
+export interface SidebarDigestArticle_author {
   __typename: "User";
   id: string;
   userName: string | null;
@@ -20,21 +20,25 @@ export interface FeatureDigestActionsArticle_author {
   avatar: any | null;
 }
 
-export interface FeatureDigestActionsArticle_comments {
+export interface SidebarDigestArticle_comments {
   __typename: "CommentConnection";
   totalCount: number;
 }
 
-export interface FeatureDigestActionsArticle {
+export interface SidebarDigestArticle {
   __typename: "Article";
-  author: FeatureDigestActionsArticle_author;
+  id: string;
+  title: string;
+  slug: string;
+  cover: any | null;
+  author: SidebarDigestArticle_author;
+  mediaHash: string | null;
   createdAt: any;
   /**
    * MAT recieved for this article
    */
   MAT: number;
-  comments: FeatureDigestActionsArticle_comments;
-  id: string;
+  comments: SidebarDigestArticle_comments;
   /**
    * Viewer has subscribed
    */
