@@ -9,11 +9,11 @@
   }
 }
 
+.text {
+  line-height: 1;
+}
+
 /* placement */
-.text-right {
-}
-.text-left {
-}
 .text-bottom {
   & :global(*) {
     margin: 0 auto;
