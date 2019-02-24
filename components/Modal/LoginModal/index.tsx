@@ -61,44 +61,44 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
   }: {
     [key: string]: any
   }) => (
-      <>
-        <form className="form" onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={interpret('enterEmail')}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={interpret('enterPassword')}
-            style={{ marginTop: '0.5rem' }}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <div className="buttons">
-            <ModalResetSwitch />
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ width: 80 }}
-              disabled={isSubmitting}
-            >
-              {interpret('login')}
-            </Button>
-          </div>
-        </form>
-        <style jsx>{styles}</style>
-      </>
-    )
+    <>
+      <form className="form" onSubmit={handleSubmit}>
+        <Form.Input
+          type="text"
+          field="email"
+          placeholder={interpret('enterEmail')}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+        <Form.Input
+          type="password"
+          field="password"
+          placeholder={interpret('enterPassword')}
+          style={{ marginTop: '0.5rem' }}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+        <div className="buttons">
+          <ModalResetSwitch />
+          <Button
+            type="submit"
+            bgColor="green"
+            style={{ width: 80 }}
+            disabled={isSubmitting}
+          >
+            {interpret('login')}
+          </Button>
+        </div>
+      </form>
+      <style jsx>{styles}</style>
+    </>
+  )
 
   const validateEmail = (value: string) => {
     if (!value) {

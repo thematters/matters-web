@@ -1,6 +1,6 @@
 import { Button } from '~/components'
 
-export default (props: {[key: string]: any}) => (
+export default (props: { [key: string]: any }) => (
   <Button
     is="button"
     size="large"
