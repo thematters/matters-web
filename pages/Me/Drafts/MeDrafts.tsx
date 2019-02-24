@@ -3,22 +3,22 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
-  ArticleDigest,
+  DraftDigest,
   Error,
   InfiniteScroll,
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyArticles from './EmptyArticles'
+import EmptyDrafts from './EmptyDrafts'
 
 import { mergeConnections } from '~/common/utils'
-import { MeArticleFeed } from './__generated__/MeArticleFeed'
+import { MeDraftFeed } from './__generated__/MeDraftFeed'
 
-const ME_ARTICLES_FEED = gql`
-  query MeArticleFeed($cursor: String) {
+const ME_DRAFTS_FEED = gql`
+  query MeDraftFeed($cursor: String) {
     viewer {
       id
-      articles(input: { first: 10, after: $cursor }) {
+      drafts(input: { first: 10, after: $cursor }) {
         pageInfo {
           startCursor
           endCursor
@@ -27,24 +27,24 @@ const ME_ARTICLES_FEED = gql`
         edges {
           cursor
           node {
-            ...FeedDigestArticle
+            ...FeedDigestDraft
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${DraftDigest.Feed.fragments.draft}
 `
 
 export default () => {
   return (
-    <Query query={ME_ARTICLES_FEED}>
+    <Query query={ME_DRAFTS_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: MeArticleFeed }) => {
+      }: QueryResult & { data: MeDraftFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -53,7 +53,7 @@ export default () => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'viewer.articles'
+        const connectionPath = 'viewer.drafts'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -69,7 +69,7 @@ export default () => {
           })
 
         if (edges.length <= 0) {
-          return <EmptyArticles />
+          return <EmptyDrafts />
         }
 
         return (
@@ -82,7 +82,7 @@ export default () => {
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node} />
+                  <DraftDigest.Feed draft={node} />
                 </li>
               ))}
             </ul>

@@ -12,6 +12,13 @@ export enum ArticleState {
   banned = "banned",
 }
 
+export enum PublishState {
+  error = "error",
+  pending = "pending",
+  published = "published",
+  unpublished = "unpublished",
+}
+
 export interface UserLoginInput {
   email: any;
   password: string;
