@@ -2,12 +2,10 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import { FC } from 'react'
 
-import { Button, Form, Icon, Title } from '~/components'
+import { Button, Form, Icon, ModalSwitch } from '~/components'
 
-import { TEXT } from '~/common/enums'
-import { isValidEmail, translate } from '~/common/utils'
+import { isValidEmail } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
@@ -63,44 +61,44 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
   }: {
     [key: string]: any
   }) => (
-    <>
-      <form className="form" onSubmit={handleSubmit}>
-        <Form.Input
-          type="text"
-          field="email"
-          placeholder={interpret('enterEmail')}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="password"
-          field="password"
-          placeholder={interpret('enterPassword')}
-          style={{ marginTop: '0.5rem' }}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <div className="buttons">
-          <ModalResetSwitch />
-          <Button
-            type="submit"
-            bgColor="green"
-            style={{ width: 80 }}
-            disabled={isSubmitting}
-          >
-            {interpret('login')}
-          </Button>
-        </div>
-      </form>
-      <style jsx>{styles}</style>
-    </>
-  )
+      <>
+        <form className="form" onSubmit={handleSubmit}>
+          <Form.Input
+            type="text"
+            field="email"
+            placeholder={interpret('enterEmail')}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
+            type="password"
+            field="password"
+            placeholder={interpret('enterPassword')}
+            style={{ marginTop: '0.5rem' }}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <div className="buttons">
+            <ModalResetSwitch />
+            <Button
+              type="submit"
+              bgColor="green"
+              style={{ width: 80 }}
+              disabled={isSubmitting}
+            >
+              {interpret('login')}
+            </Button>
+          </div>
+        </form>
+        <style jsx>{styles}</style>
+      </>
+    )
 
   const validateEmail = (value: string) => {
     if (!value) {

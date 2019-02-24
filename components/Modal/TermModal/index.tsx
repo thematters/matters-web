@@ -1,11 +1,5 @@
 import { withFormik } from 'formik'
-import { FC, useContext } from 'react'
-
-import { Icon, LanguageContext, Title } from '~/components'
-
-import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+import { FC } from 'react'
 
 import styles from './styles.css'
 
@@ -52,7 +46,7 @@ const TermModal: FC<Props> = ({ close, interpret }) => {
   )
 
   const TermForm = withFormik({
-    handleSubmit: async (valuse, { setSubmitting }) => {
+    handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
       console.log(values) // For passing linting
       setSubmitting(false)
