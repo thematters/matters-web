@@ -15,6 +15,7 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICS = gql`

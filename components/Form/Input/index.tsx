@@ -1,8 +1,6 @@
-// External modules
 import classNames from 'classnames'
 import { FC } from 'react'
 
-// Internal modules
 import styles from './styles.css'
 
 /**

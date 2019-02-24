@@ -14,6 +14,7 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { FollowFeed } from './__generated__/FollowFeed'
 
 const FOLLOW_FEED = gql`

@@ -1,10 +1,9 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { Translate } from '~/components'
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 import styles from './styles.css'
 

@@ -3,8 +3,8 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Error, Label, Translate } from '~/components'
-import ViewAllLink from '../ViewAllLink'
 
+import ViewAllLink from '../ViewAllLink'
 import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
 

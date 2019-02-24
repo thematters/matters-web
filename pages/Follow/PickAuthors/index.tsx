@@ -13,6 +13,7 @@ import {
 } from '~/components'
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
+
 import { FolloweeCountViewer } from './__generated__/FolloweeCountViewer'
 import { PickAuthors as PickAuthorsType } from './__generated__/PickAuthors'
 import styles from './styles.css'

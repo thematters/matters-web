@@ -5,6 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
+
 import styles from './styles.css'
 
 const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {

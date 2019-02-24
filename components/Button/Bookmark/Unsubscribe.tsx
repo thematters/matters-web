@@ -1,12 +1,11 @@
-// External modules
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
-// Internal modules
 import { Icon } from '~/components'
 
 import ICON_BOOKMARK_REGULAR_ACTIVE from '~/static/icons/bookmark-regular-active.svg?sprite'
 import ICON_BOOKMARK_SM_ACTIVE from '~/static/icons/bookmark-small-active.svg?sprite'
+
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const UNSUBSCRIBE_ARTICLE = gql`

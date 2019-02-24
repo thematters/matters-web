@@ -1,5 +1,3 @@
-import { Placeholder } from '~/components'
-
 const SignUp = () => {
   return (
     <main className="l-row">

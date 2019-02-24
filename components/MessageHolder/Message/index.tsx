@@ -1,8 +1,6 @@
-// External modules
 import classNames from 'classnames'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 
-// Internal modules
 import styles from './styles.css'
 
 /**
@@ -52,9 +50,7 @@ export const Message: FC<Props> = ({
   }
 
   useEffect(() => {
-    if (fixed !== true) {
-      setTimeout(removeMessage, duration || 3 * second)
-    }
+    setTimeout(removeMessage, duration || 3 * second)
   })
 
   return (

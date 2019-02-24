@@ -1,17 +1,18 @@
-// External modules
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-// Internal modules
 import { Modal } from '~/components'
 
 const emptyModalId = ''
 
 const ModalContext = React.createContext({
   openedModalId: emptyModalId,
-  previousModalId: emptyModalId,
-  open: () => undefined,
-  close: () => undefined
+  open: (modalId: string) => {
+    // Do nothing
+  },
+  close: () => {
+    // Do nothing
+  }
 })
 
 /**
@@ -34,17 +35,12 @@ export const ModalProvider = ({
   defaultModalId?: string
 }) => {
   const [openedModalId, setOpenedModalId] = useState(defaultModalId)
-  const [previousModalId, setPreviousModalId] = useState(defaultModalId)
 
   const open = (id: string) => {
-    setPreviousModalId(openedModalId)
     setOpenedModalId(id)
   }
 
-  const close = (trace: boolean) => {
-    if (trace) {
-      setPreviousModalId(defaultModalId)
-    }
+  const close = () => {
     setOpenedModalId(defaultModalId)
   }
 
@@ -52,9 +48,8 @@ export const ModalProvider = ({
     <ModalContext.Provider
       value={{
         openedModalId,
-        previousModalId,
-        open: id => open(id),
-        close: trace => close(trace)
+        open: (modalId: string) => open(modalId),
+        close: () => close()
       }}
     >
       {children}
@@ -78,7 +73,7 @@ export const ModalSwitch = ({
   children,
   modalId
 }: {
-  children: ReactNode
+  children: any
   modalId: string
 }) => (
   <ModalContext.Consumer>
@@ -105,21 +100,31 @@ export const ModalInstance = ({
   modalId,
   title
 }: {
-  children: ReactNode
+  children: any
   modalId: string
   title?: string
-}) => (
-  <ModalContext.Consumer>
-    {({ close, openedModalId }) => {
-      if (openedModalId === modalId) {
-        return ReactDOM.createPortal(
-          <Modal.Container title={title} close={close}>
-            {props => <>{children(props)}</>}
-          </Modal.Container>,
-          document.getElementById(defaultAnchorNode)
-        )
-      }
-      return null
-    }}
-  </ModalContext.Consumer>
-)
+}) => {
+  const [node, setNode] = useState<Element | null>(null)
+
+  useEffect(() => {
+    if (document) {
+      setNode(document.getElementById(defaultAnchorNode))
+    }
+  })
+
+  return (
+    <ModalContext.Consumer>
+      {({ close, openedModalId }) => {
+        if (children && node && openedModalId === modalId) {
+          return ReactDOM.createPortal(
+            <Modal.Container title={title} close={close}>
+              {(props: any) => <>{children(props)}</>}
+            </Modal.Container>,
+            node
+          )
+        }
+        return null
+      }}
+    </ModalContext.Consumer>
+  )
+}

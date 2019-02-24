@@ -4,7 +4,6 @@ import React from 'react'
 import Divider from './Divider'
 import Header from './Header'
 import Item from './Item'
-
 import styles from './styles.css'
 
 interface MenuProps {

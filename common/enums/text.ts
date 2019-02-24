@@ -1,4 +1,4 @@
-export const TEXT = {
+export const TEXT: { [key: string]: any } = {
   zh_hant: {
     login: '登入',
     register: '註冊',

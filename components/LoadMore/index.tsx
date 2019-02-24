@@ -1,6 +1,6 @@
-import styles from './styles.css'
-
 import { Button, Translate } from '~/components'
+
+import styles from './styles.css'
 
 export const LoadMore = ({ onClick }: { onClick: () => void }) => (
   <div className="container">

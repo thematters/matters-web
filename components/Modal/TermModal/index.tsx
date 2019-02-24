@@ -1,10 +1,6 @@
-// External modules
-import classNames from 'classnames'
 import { withFormik } from 'formik'
 import { FC } from 'react'
 
-// Internal modules
-import { Icon } from '~/components'
 import styles from './styles.css'
 
 /**
@@ -19,11 +15,11 @@ import styles from './styles.css'
 
 interface Props {
   close: () => {}
-  interpret: () => {}
+  interpret: (text: string) => string
 }
 
 const TermModal: FC<Props> = ({ close, interpret }) => {
-  const BaseForm = props => (
+  const BaseForm = (props: { [key: string]: any }) => (
     <>
       <form className="form" onSubmit={props.handleSubmit}>
         <div className="term">
@@ -50,8 +46,11 @@ const TermModal: FC<Props> = ({ close, interpret }) => {
   )
 
   const TermForm = withFormik({
-    handleSubmit: async (valuse, { setSubmitting }) => {
+    handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
+      console.log(values) // For passing linting
+      setSubmitting(false)
+      close()
     }
   })(BaseForm)
 

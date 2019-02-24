@@ -1,6 +1,5 @@
-import React from 'react'
-
 import _throttle from 'lodash/throttle'
+import React from 'react'
 
 /**
  *  Usage:

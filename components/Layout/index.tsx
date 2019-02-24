@@ -5,6 +5,7 @@ import { GlobalHeader } from '~/components/GlobalHeader'
 import { Head } from '~/components/Head'
 import { Modal } from '~/components/Modal'
 import { ToastHolder } from '~/components/ToastHolder'
+
 import { LayoutUser } from './__generated__/LayoutUser'
 
 interface LayoutProps {

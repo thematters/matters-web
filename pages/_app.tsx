@@ -1,11 +1,10 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
-import App, { Container, NextAppContext } from 'next/app'
+import App, { Container } from 'next/app'
 import React from 'react'
 import { ApolloProvider, Query, QueryResult } from 'react-apollo'
 
-import withApollo from '~/common/utils/withApollo'
 import {
   AnalyticsProvider,
   GlobalStyles,
@@ -13,6 +12,8 @@ import {
   Layout,
   ModalProvider
 } from '~/components'
+
+import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
 
