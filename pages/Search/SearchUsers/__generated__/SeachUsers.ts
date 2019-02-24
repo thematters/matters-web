@@ -28,11 +28,11 @@ export interface SeachUsers_search_edges_node_User_info {
 export interface SeachUsers_search_edges_node_User {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: SeachUsers_search_edges_node_User_info;
   /**
    * URL for avatar

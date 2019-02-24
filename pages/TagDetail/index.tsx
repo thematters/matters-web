@@ -8,6 +8,7 @@ import {
   Empty,
   Error,
   Footer,
+  Head,
   Icon,
   InfiniteScroll,
   PageHeader,
@@ -102,6 +103,8 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             return (
               <>
+                <Head title={`#${data.node.content}`} />
+
                 <PageHeader pageTitle={data.node.content} />
 
                 <section>

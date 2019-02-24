@@ -16,11 +16,11 @@ export interface FollowFeed_viewer_recommendation_followeeArticles_pageInfo {
 export interface FollowFeed_viewer_recommendation_followeeArticles_edges_node_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */

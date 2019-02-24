@@ -4,6 +4,7 @@ import { Query, QueryResult } from 'react-apollo'
 
 import {
   Error,
+  Head,
   PageHeader,
   ShuffleButton,
   Spinner,
@@ -85,8 +86,9 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountViewer }) => (
 
       return (
         <>
-          <PickIntroHeader />
+          <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
 
+          <PickIntroHeader />
           <PageHeader
             pageTitle={<Translate zh_hant="追蹤創作者" zh_hans="追踪创作者" />}
           >

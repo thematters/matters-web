@@ -33,6 +33,11 @@ const fragments = {
 
 const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,

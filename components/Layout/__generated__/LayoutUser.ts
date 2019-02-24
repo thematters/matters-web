@@ -30,8 +30,8 @@ export interface LayoutUser {
   /**
    * Display name on profile
    */
-  displayName: string;
-  status: LayoutUser_status;
+  displayName: string | null;
+  status: LayoutUser_status | null;
   /**
    * URL for avatar
    */

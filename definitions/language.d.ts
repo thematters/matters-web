@@ -2,8 +2,6 @@ type Language = 'zh_hant' | 'zh_hans' | 'en'
 
 type TranslateFn<D> = (data: D) => string
 
-type Translations = TranslationsStr | TranslationsFn
-
 type TranslateArgs<D> =
   | {
       zh_hant: string

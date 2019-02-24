@@ -13,6 +13,7 @@ type ButtonBgColor =
   | 'gold'
   | 'red'
   | 'white'
+  | 'black'
   | 'transparent'
 type ButtonOutlineColor = 'green' | 'black' | 'grey'
 

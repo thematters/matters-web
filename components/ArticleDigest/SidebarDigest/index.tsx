@@ -47,7 +47,13 @@ const FeedDigest = ({
 }: {
   article: IcymiDigestArticle | TopicsDigestArticle
 }) => {
-  const { cover, author, slug, mediaHash, title } = article
+  const { author, slug, mediaHash, title } = article
+  const cover = 'cover' in article ? article.cover : null
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,

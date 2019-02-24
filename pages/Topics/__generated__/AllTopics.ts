@@ -16,11 +16,11 @@ export interface AllTopics_viewer_recommendation_topics_pageInfo {
 export interface AllTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
   id: string;
-  userName: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
