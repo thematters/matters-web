@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext } from 'react'
 
-import { Button, Form, Icon, LanguageContext, Modal, Title } from '~/components'
+import { Button, Form, Icon, LanguageContext, Title } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
@@ -30,10 +30,11 @@ const LoginModal: FC<Props> = ({ close }) => {
     <>
       <div className="header">
         <Title type="modal">
-          {translate(
-            { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
+          {translate({
+            zh_hant: TEXT.zh_hant.login,
+            zh_hans: TEXT.zh_hans.login,
             lang
-          )}
+          })}
         </Title>
         <button onClick={close}>
           <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
@@ -56,13 +57,11 @@ const LoginModal: FC<Props> = ({ close }) => {
         <Form.Input
           type="text"
           name="email"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterEmail,
-              zh_hans: TEXT.zh_hans.enterEmail
-            },
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterEmail,
+            zh_hans: TEXT.zh_hans.enterEmail,
             lang
-          )}
+          })}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.email}
@@ -72,13 +71,11 @@ const LoginModal: FC<Props> = ({ close }) => {
         <Form.Input
           type="password"
           name="password"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterPassword,
-              zh_hans: TEXT.zh_hans.enterPassword
-            },
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterPassword,
+            zh_hans: TEXT.zh_hans.enterPassword,
             lang
-          )}
+          })}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.password}
@@ -88,20 +85,19 @@ const LoginModal: FC<Props> = ({ close }) => {
         />
         <div className="buttons">
           <span className="forget">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.forgetPassword,
-                zh_hans: TEXT.zh_hans.forgetPassword
-              },
+            {translate({
+              zh_hant: TEXT.zh_hant.forgetPassword,
+              zh_hans: TEXT.zh_hans.forgetPassword,
               lang
-            )}
+            })}
             ？
           </span>
           <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {translate(
-              { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
+            {translate({
+              zh_hant: TEXT.zh_hant.login,
+              zh_hans: TEXT.zh_hans.login,
               lang
-            )}
+            })}
           </Button>
         </div>
       </form>
@@ -111,29 +107,29 @@ const LoginModal: FC<Props> = ({ close }) => {
 
   const validateEmail = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
+      return translate({
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required,
         lang
-      )
+      })
     }
     if (!isValidEmail(value)) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.invalidEmail,
-          zh_hans: TEXT.zh_hans.invalidEmail
-        },
+      return translate({
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail,
         lang
-      )
+      })
     }
     return undefined
   }
 
   const validatePassword = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
+      return translate({
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required,
         lang
-      )
+      })
     }
     return undefined
   }
@@ -160,19 +156,18 @@ const LoginModal: FC<Props> = ({ close }) => {
   const RegisterBlock = () => (
     <>
       <div className="register">
-        {translate(
-          {
-            zh_hant: TEXT.zh_hant.hasNoAccount,
-            zh_hans: TEXT.zh_hans.hasNoAccount
-          },
+        {translate({
+          zh_hant: TEXT.zh_hant.hasNoAccount,
+          zh_hans: TEXT.zh_hans.hasNoAccount,
           lang
-        )}
+        })}
         ？
         <span className="link">
-          {translate(
-            { zh_hant: TEXT.zh_hant.register, zh_hans: TEXT.zh_hans.register },
+          {translate({
+            zh_hant: TEXT.zh_hant.register,
+            zh_hans: TEXT.zh_hans.register,
             lang
-          )}
+          })}
           <Icon
             style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
             id={ICON_ARROW.id}

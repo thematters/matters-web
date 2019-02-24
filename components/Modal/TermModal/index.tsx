@@ -39,13 +39,11 @@ const TermModal: FC<Props> = ({ close }) => {
       <form className="form" onSubmit={handleSubmit}>
         <div className="term">
           <span className="hint">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.termHint,
-                zh_hans: TEXT.zh_hans.termHint
-              },
+            {translate({
+              zh_hant: TEXT.zh_hant.termHint,
+              zh_hans: TEXT.zh_hans.termHint,
               lang
-            )}
+            })}
           </span>
           <div className="description">
             {/* TODO: Content of term */}
@@ -55,22 +53,18 @@ const TermModal: FC<Props> = ({ close }) => {
         </div>
         <div className="buttons">
           <div className="button disagree">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.disagree,
-                zh_hans: TEXT.zh_hans.disagree
-              },
+            {translate({
+              zh_hant: TEXT.zh_hant.disagree,
+              zh_hans: TEXT.zh_hans.disagree,
               lang
-            )}
+            })}
           </div>
           <div className="button agree">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.agreeAndContinue,
-                zh_hans: TEXT.zh_hans.agreeAndContinue
-              },
+            {translate({
+              zh_hant: TEXT.zh_hant.agreeAndContinue,
+              zh_hans: TEXT.zh_hans.agreeAndContinue,
               lang
-            )}
+            })}
           </div>
         </div>
       </form>

@@ -35,7 +35,7 @@ const fragments = {
 const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName
+    userName: user.userName || ''
   })
 
   return (

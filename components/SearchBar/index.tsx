@@ -1,4 +1,4 @@
-import { Formik, FormikProps, withFormik } from 'formik'
+import { Formik } from 'formik'
 import Router, { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
@@ -22,7 +22,7 @@ const SearchButton = () => (
 
 const BaseSearchBar: React.FC<
   WithRouterProps & {
-    autoComplete: boolean
+    autoComplete?: boolean
   }
 > = ({ router, autoComplete = true }) => {
   // translations
