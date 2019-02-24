@@ -1,10 +1,11 @@
-import { useEventListener } from '~/components/Hook'
+import { Modal } from '~/components'
+import { ModalInstance } from '~/components/ModalManager'
 
 import styles from './styles.css'
 
 /**
- * This component is for hosting modal instances and manging their extra
- * shared state. We use react-portal to inject modal into this component.
+ * This component is for hosting modal instances. We use react-portal to
+ * inject modal into targeted node.
  *
  * Usage:
  *
@@ -15,21 +16,20 @@ import styles from './styles.css'
  */
 
 const Anchor = () => {
-  const open = () => {
-    // TODO: Add some safety check or manaing shared state.
-  }
-
-  const close = () => {
-    // TODO: Add some safety check or manaing shared state.
-  }
-
-  useEventListener('openModal', open)
-
-  useEventListener('closeModal', close)
-
   return (
     <>
-      <div id="modal-anchor" className="container" />
+      <div>
+        <div id="modal-anchor" className="container" />
+        <ModalInstance modalId="loginModal" title="login">
+          {props => <Modal.LoginModal {...props} />}
+        </ModalInstance>
+        <ModalInstance modalId="resetModal" defaultHeader={false}>
+          {props => <Modal.ResetModal {...props} />}
+        </ModalInstance>
+        <ModalInstance modalId="termModal" title="term">
+          {props => <Modal.TermModal {...props} />}
+        </ModalInstance>
+      </div>
       <style jsx>{styles}</style>
     </>
   )
