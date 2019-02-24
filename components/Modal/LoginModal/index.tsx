@@ -1,23 +1,31 @@
 // External modules
 import classNames from 'classnames'
 import { withFormik } from 'formik'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC } from 'react'
 
 // Internal modules
-import { TEXT } from '~/common/enums'
-import { isValidEmail, translate } from '~/common/utils'
-import { Button, Form, Icon, LanguageContext, Modal, Title } from '~/components'
+import { isValidEmail } from '~/common/utils'
+import { Button, Form, Icon, ModalSwitch } from '~/components'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import styles from './styles.css'
 
+/**
+ * This component is for login modal.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Modal.LoginModal close={close} interpret={interpret} />
+ * ```
+ *
+ */
+
 interface Props {
-  close: any
+  close: () => {}
+  interpret: () => {}
 }
 
-const LoginModal: FC<Props> = ({ close }) => {
-  const { lang } = useContext(LanguageContext)
-
+const LoginModal: FC<Props> = ({ close, interpret }) => {
   const contentClass = classNames(
     'l-col-4',
     'l-col-sm-6',
@@ -26,82 +34,47 @@ const LoginModal: FC<Props> = ({ close }) => {
     'content'
   )
 
-  const Header = () => (
-    <>
-      <div className="header">
-        <Title type="modal">
-          {translate(
-            { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
-            lang
-          )}
-        </Title>
-        <button onClick={close}>
-          <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-        </button>
-      </div>
-      <style jsx>{styles}</style>
-    </>
+  const ModalResetSwitch = () => (
+    <ModalSwitch modalId="resetModal">
+      {open => (
+        <Button
+          type="button"
+          bgColor="transparent"
+          className="u-link-green"
+          style={{ paddingLeft: '0rem' }}
+          onClick={open}
+        >
+          {interpret('forgetPassword')}？
+        </Button>
+      )}
+    </ModalSwitch>
   )
 
-  const BaseForm = ({
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  }) => (
+  const BaseForm = props => (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={props.handleSubmit}>
         <Form.Input
           type="text"
-          name="email"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterEmail,
-              zh_hans: TEXT.zh_hans.enterEmail
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          error={errors.email}
-          touched={touched.email}
+          field="email"
+          placeholder={interpret('enterEmail')}
+          {...props}
         />
         <Form.Input
           type="password"
-          name="password"
-          placeholder={translate(
-            {
-              zh_hant: TEXT.zh_hant.enterPassword,
-              zh_hans: TEXT.zh_hans.enterPassword
-            },
-            lang
-          )}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          error={errors.password}
-          touched={touched.password}
+          field="password"
+          placeholder={interpret('enterPassword')}
           style={{ marginTop: '0.5rem' }}
+          {...props}
         />
         <div className="buttons">
-          <span className="forget">
-            {translate(
-              {
-                zh_hant: TEXT.zh_hant.forgetPassword,
-                zh_hans: TEXT.zh_hans.forgetPassword
-              },
-              lang
-            )}
-            ？
-          </span>
-          <Button type="submit" bgColor="green" style={{ width: 80 }}>
-            {translate(
-              { zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login },
-              lang
-            )}
+          <ModalResetSwitch />
+          <Button
+            type="submit"
+            bgColor="green"
+            style={{ width: 80 }}
+            disabled={props.isSubmitting}
+          >
+            {interpret('login')}
           </Button>
         </div>
       </form>
@@ -111,31 +84,17 @@ const LoginModal: FC<Props> = ({ close }) => {
 
   const validateEmail = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required')
     }
     if (!isValidEmail(value)) {
-      return translate(
-        {
-          zh_hant: TEXT.zh_hant.invalidEmail,
-          zh_hans: TEXT.zh_hans.invalidEmail
-        },
-        lang
-      )
+      return interpret('invalidEmail')
     }
-    return undefined
   }
 
   const validatePassword = (value: string) => {
     if (!value) {
-      return translate(
-        { zh_hant: TEXT.zh_hant.required, zh_hans: TEXT.zh_hans.required },
-        lang
-      )
+      return interpret('required')
     }
-    return undefined
   }
 
   const LoginForm = withFormik({
@@ -145,34 +104,27 @@ const LoginModal: FC<Props> = ({ close }) => {
     }),
 
     validate: ({ email, password }) => {
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidPassword = validatePassword(password)
       const errors = {
-        email: validateEmail(email),
-        password: validatePassword(password)
+        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
+        ...(isInvalidPassword ? { password: isInvalidPassword } : {})
       }
       return errors
     },
 
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
+      setSubmitting(false)
     }
   })(BaseForm)
 
-  const RegisterBlock = () => (
+  const Footer = () => (
     <>
-      <div className="register">
-        {translate(
-          {
-            zh_hant: TEXT.zh_hant.hasNoAccount,
-            zh_hans: TEXT.zh_hans.hasNoAccount
-          },
-          lang
-        )}
-        ？
+      <div className="footer">
+        {interpret('hasNoAccount')}？
         <span className="link">
-          {translate(
-            { zh_hant: TEXT.zh_hant.register, zh_hans: TEXT.zh_hans.register },
-            lang
-          )}
+          {interpret('register')}
           <Icon
             style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
             id={ICON_ARROW.id}
@@ -186,14 +138,11 @@ const LoginModal: FC<Props> = ({ close }) => {
 
   return (
     <>
-      <div className="container">
-        <Header />
-        <div className="content-wrapper">
-          <div className={contentClass}>
-            <LoginForm />
-            <hr className="divider" />
-            <RegisterBlock />
-          </div>
+      <div className="content-wrapper">
+        <div className={contentClass}>
+          <LoginForm />
+          <hr className="divider" />
+          <Footer />
         </div>
       </div>
       <style jsx>{styles}</style>
