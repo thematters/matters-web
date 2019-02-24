@@ -1,8 +1,6 @@
 import { Button } from '~/components'
 
-import { PATHS } from '~/common/enums'
-
-export default props => (
+export default (props: { [key: string]: any }) => (
   <Button
     is="button"
     size="large"

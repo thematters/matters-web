@@ -10,10 +10,11 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 
 import { mergeConnections } from '~/common/utils'
+
+import EmptySearch from '../EmptySearch'
+import ViewAll from '../ViewAll'
 import { SeachUsers } from './__generated__/SeachUsers'
 import styles from './styles.css'
 

@@ -3,9 +3,12 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import React, { useEffect } from 'react'
 
+import { Responsive, SearchBar } from '~/components'
+import { ModalSwitch } from '~/components/ModalManager'
+
 import { analytics } from '~/common/utils'
 
-import { Modal, Responsive, SearchBar } from '~/components'
+import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -13,25 +16,18 @@ import Nav from './Nav'
 import NotificationButton from './NotificationButton'
 import SearchButton from './SearchButton'
 import SignUpButton from './SignUpButton'
-import WriteButton from './WriteButton'
-
-import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import styles from './styles.css'
+import WriteButton from './WriteButton'
 
 // Track client-side page views
 Router.onRouteChangeComplete = () => {
   analytics.trackPage()
 }
 
-const MortalLoginButton = () => (
-  <Modal.Mortal closeOnEsc closeOnOutSideClick>
-    {({ open, close, portal, active }) => (
-      <>
-        <LoginButton onClick={open} />
-        {portal(<Modal.LoginModal close={close} />)}
-      </>
-    )}
-  </Modal.Mortal>
+const ModalLoginSwitch = () => (
+  <ModalSwitch modalId="loginModal">
+    {(open: any) => <LoginButton onClick={open} />}
+  </ModalSwitch>
 )
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
@@ -67,7 +63,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             ) : (
               <>
-                <MortalLoginButton />
+                <ModalLoginSwitch />
                 <SignUpButton />
               </>
             )}

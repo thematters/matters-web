@@ -13,6 +13,7 @@ import {
 } from '~/components'
 
 import { getQuery, mergeConnections } from '~/common/utils'
+
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
 
 const USER_ARTICLES_FEED = gql`

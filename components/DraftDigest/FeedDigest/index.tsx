@@ -6,6 +6,7 @@ import { Icon, TextIcon, Title, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
+
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
 import styles from './styles.css'
 
@@ -31,7 +32,7 @@ const IconHelp = () => (
 )
 
 const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
-  const { id, title, summary, scheduledAt, createdAt, publishState } = draft
+  const { id, title, summary, publishState } = draft
 
   const path = toPath({
     page: 'draftDetail',

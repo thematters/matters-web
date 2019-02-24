@@ -10,10 +10,11 @@ import {
   Tag,
   Translate
 } from '~/components'
-import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 
 import { mergeConnections } from '~/common/utils'
+
+import EmptySearch from '../EmptySearch'
+import ViewAll from '../ViewAll'
 import { SeachTags } from './__generated__/SeachTags'
 import styles from './styles.css'
 

@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
+
 import ICON_COMMENT_REGULAR from '~/static/icons/comment-regular.svg?sprite'
 
 import { CommentButtonArticle } from './__generated__/CommentButtonArticle'

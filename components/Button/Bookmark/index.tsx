@@ -1,11 +1,8 @@
-// External modules
 import gql from 'graphql-tag'
 
-// Internal modules
+import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
-
-import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const fragments = {
   article: gql`

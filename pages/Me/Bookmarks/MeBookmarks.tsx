@@ -9,10 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyBookmarks from './EmptyBookmarks'
 
 import { mergeConnections } from '~/common/utils'
+
 import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import EmptyBookmarks from './EmptyBookmarks'
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed($cursor: String) {

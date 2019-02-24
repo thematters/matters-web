@@ -1,13 +1,14 @@
 import { withRouter, WithRouterProps } from 'next/router'
 
 import { Footer, Head, Responsive, SearchBar } from '~/components'
+
+import { getQuery } from '~/common/utils'
+
 import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
 import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
-
-import { getQuery } from '~/common/utils'
 import styles from './styles.css'
 
 const EmptySeachPage = () => {

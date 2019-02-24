@@ -10,8 +10,8 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import ViewAllLink from '../ViewAllLink'
 
+import ViewAllLink from '../ViewAllLink'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import styles from './styles.css'
 

@@ -1,8 +1,7 @@
-// external
 import gql from 'graphql-tag'
-// internal
+
 import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
-// local
+
 import { useEventListener } from '../Hook'
 import { AnalyticsUser } from './__generated__/AnalyticsUser'
 

@@ -9,10 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyDrafts from './EmptyDrafts'
 
 import { mergeConnections } from '~/common/utils'
+
 import { MeDraftFeed } from './__generated__/MeDraftFeed'
+import EmptyDrafts from './EmptyDrafts'
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($cursor: String) {

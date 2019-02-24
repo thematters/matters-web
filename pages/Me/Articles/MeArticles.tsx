@@ -9,10 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
-import EmptyArticles from './EmptyArticles'
 
 import { mergeConnections } from '~/common/utils'
+
 import { MeArticleFeed } from './__generated__/MeArticleFeed'
+import EmptyArticles from './EmptyArticles'
 
 const ME_ARTICLES_FEED = gql`
   query MeArticleFeed($cursor: String) {

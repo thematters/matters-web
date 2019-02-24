@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Error, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
+
 import styles from './styles.error.css'
 
 interface ErrorProps {
@@ -14,7 +15,12 @@ const ErrorPage: NextFunctionComponent<ErrorProps> = ({ statusCode }) => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-4 l-offset-md-2  l-col-lg-4 l-offset-lg-4">
-        <Error statusCode={statusCode}>
+        <Error
+          statusCode={statusCode}
+          type={
+            statusCode === 404 || statusCode === '404' ? 'not_found' : 'server'
+          }
+        >
           <Button
             bgColor="green"
             size="large"
