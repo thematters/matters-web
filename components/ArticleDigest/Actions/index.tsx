@@ -14,6 +14,7 @@ import styles from './styles.css'
 
 type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
 
+// TODO: refactor
 const fragments = {
   featureDigest: gql`
     fragment FeatureDigestActionsArticle on Article {
