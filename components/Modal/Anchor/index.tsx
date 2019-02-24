@@ -15,19 +15,24 @@ import styles from './styles.css'
  *
  */
 
+interface ModalInstanceProps {
+  close: () => {}
+  interpret: (text: string) => string
+}
+
 const Anchor = () => {
   return (
     <>
       <div>
         <div id="modal-anchor" className="container" />
         <ModalInstance modalId="loginModal" title="login">
-          {props => <Modal.LoginModal {...props} />}
+          {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
         </ModalInstance>
-        <ModalInstance modalId="resetModal" defaultHeader={false}>
-          {props => <Modal.ResetModal {...props} />}
+        <ModalInstance modalId="resetModal">
+          {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
         </ModalInstance>
         <ModalInstance modalId="termModal" title="term">
-          {props => <Modal.TermModal {...props} />}
+          {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
         </ModalInstance>
       </div>
       <style jsx>{styles}</style>

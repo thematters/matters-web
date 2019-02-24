@@ -26,7 +26,7 @@ Router.onRouteChangeComplete = () => {
 
 const ModalLoginSwitch = () => (
   <ModalSwitch modalId="loginModal">
-    {open => <LoginButton onClick={open} />}
+    {(open: any) => <LoginButton onClick={open} />}
   </ModalSwitch>
 )
 
