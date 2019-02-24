@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 // Internal modules
-import { Avatar } from '~/components'
+import { Avatar } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
