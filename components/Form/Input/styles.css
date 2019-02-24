@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .input {
   background-color: var(--color-grey-lighter);
   border-radius: 0.15rem;
@@ -14,6 +18,17 @@
   &::placeholder {
     color: var(--color-grey);
   }
+}
+
+.float-right {
+  @mixin flex-center-all;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 2.5rem;
+  padding: var(--spacing-x-tight);
 }
 
 .info {
