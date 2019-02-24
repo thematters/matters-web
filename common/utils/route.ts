@@ -40,7 +40,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     case 'draftDetail':
       return {
         href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}`,
-        as: `/me/${args.id}}`
+        as: `/me/drafts/${args.id}}`
       }
     case 'tagDetail':
       return {

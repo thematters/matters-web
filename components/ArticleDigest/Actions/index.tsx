@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 
-import { DateTime } from '~/components'
+import { DateTime, Icon } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
+
+import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { FeatureDigestActionsArticle } from './__generated__/FeatureDigestActionsArticle'
 import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
@@ -59,6 +61,14 @@ const fragments = {
   `
 }
 
+const IconDotDivider = () => (
+  <Icon
+    id={ICON_DOT_DIVIDER.id}
+    viewBox={ICON_DOT_DIVIDER.viewBox}
+    style={{ width: 18, height: 18 }}
+  />
+)
+
 const Actions = ({
   article,
   type
@@ -78,19 +88,27 @@ const Actions = ({
   return (
     <footer className="actions">
       {isShowUserDigest && 'author' in article && (
-        <UserDigest.Mini user={article.author} />
+        <span className="space-right">
+          <UserDigest.Mini user={article.author} />
+        </span>
       )}
 
       <MAT article={article} size={size} />
 
+      <IconDotDivider />
       <CommentCount article={article} size={size} />
 
       {isShowBookmark && 'subscribed' in article && (
-        <BookmarkButton article={article} />
+        <>
+          <IconDotDivider />
+          <BookmarkButton article={article} />
+        </>
       )}
 
       {isShowDateTime && 'createdAt' in article && (
-        <DateTime date={article.createdAt} />
+        <span className="space-left">
+          <DateTime date={article.createdAt} />
+        </span>
       )}
 
       <style jsx>{styles}</style>

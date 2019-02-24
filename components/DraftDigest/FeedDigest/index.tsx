@@ -2,12 +2,18 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, TextIcon, Title, Translate } from '~/components'
+import { DateTime, Icon, TextIcon, Title, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
+import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
+import DeleteButton from './DeleteButton'
+import ErrorState from './ErrorState'
+import PendingState from './PendingState'
+import RecallButton from './RecallButton'
+import RetryButton from './RetryButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -30,10 +36,19 @@ const IconHelp = () => (
     style={{ width: 14, height: 14 }}
   />
 )
+const IconDotDivider = () => (
+  <Icon
+    id={ICON_DOT_DIVIDER.id}
+    viewBox={ICON_DOT_DIVIDER.viewBox}
+    style={{ width: 18, height: 18 }}
+  />
+)
 
 const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
-  const { id, title, summary, publishState } = draft
-
+  const { id, title, summary, publishState, createdAt } = draft
+  const isPending = publishState === 'pending'
+  const isError = publishState === 'error'
+  const isUnpublished = publishState === 'unpublished'
   const path = toPath({
     page: 'draftDetail',
     id
@@ -45,6 +60,14 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
 
   return (
     <section className={containerClasses}>
+      {(isPending || isError) && (
+        <div className="header">
+          <span />
+          {isPending && <PendingState draft={draft} />}
+          {isError && <ErrorState />}
+        </div>
+      )}
+
       <div className="content">
         <div className="title">
           <Link {...path}>
@@ -62,11 +85,19 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
               <p>{summary}</p>
             </a>
           </Link>
+
+          {isUnpublished && (
+            <footer className="actions">
+              <DateTime date={createdAt} type="relative" />
+              <IconDotDivider />
+              <DeleteButton id={id} />
+            </footer>
+          )}
         </div>
       </div>
 
-      {publishState === 'pending' && (
-        <div className="extra">
+      {isPending && (
+        <footer className="extra">
           <p>
             <TextIcon icon={<IconHelp />}>
               <Translate
@@ -75,14 +106,15 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
               />
             </TextIcon>
           </p>
-          <button type="button" onClick={() => alert('revert')}>
-            <Translate zh_hant="撤銷" zh_hans="撤销" />
-          </button>
-        </div>
+          <RecallButton
+            id={id}
+            text={<Translate zh_hant="撤銷" zh_hans="撤销" />}
+          />
+        </footer>
       )}
 
-      {publishState === 'error' && (
-        <div className="extra">
+      {isError && (
+        <footer className="extra">
           <p>
             <TextIcon icon={<IconHelp />}>
               <Translate
@@ -92,14 +124,10 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
             </TextIcon>
           </p>
           <div>
-            <button type="button" onClick={() => alert('cancel')}>
-              <Translate zh_hant="取消" zh_hans="取消" />
-            </button>
-            <button type="button" onClick={() => alert('retry')}>
-              <Translate zh_hant="重試" zh_hans="重试" />
-            </button>
+            <RecallButton id={id} />
+            <RetryButton id={id} />
           </div>
-        </div>
+        </footer>
       )}
 
       <style jsx>{styles}</style>
