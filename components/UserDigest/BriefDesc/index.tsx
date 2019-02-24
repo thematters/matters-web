@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Avatar } from '~/components'
+import { Avatar } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
 

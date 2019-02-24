@@ -24,7 +24,7 @@ import styles from './styles.css'
 
 interface Props {
   close: () => {}
-  interpret: () => {}
+  interpret: (text: string) => string
 }
 
 const LoginModal: FC<Props> = ({ close, interpret }) => {
@@ -38,7 +38,7 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
 
   const ModalResetSwitch = () => (
     <ModalSwitch modalId="resetModal">
-      {open => (
+      {(open: any) => (
         <Button
           type="button"
           bgColor="transparent"
@@ -52,21 +52,39 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
     </ModalSwitch>
   )
 
-  const BaseForm = props => (
+  const BaseForm = ({
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit
+  }: {
+    [key: string]: any
+  }) => (
     <>
-      <form className="form" onSubmit={props.handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <Form.Input
           type="text"
           field="email"
           placeholder={interpret('enterEmail')}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <Form.Input
           type="password"
           field="password"
           placeholder={interpret('enterPassword')}
           style={{ marginTop: '0.5rem' }}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <div className="buttons">
           <ModalResetSwitch />
@@ -74,7 +92,7 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
             type="submit"
             bgColor="green"
             style={{ width: 80 }}
-            disabled={props.isSubmitting}
+            disabled={isSubmitting}
           >
             {interpret('login')}
           </Button>
@@ -117,7 +135,9 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
 
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
+      console.log(values) // For passing linting
       setSubmitting(false)
+      close()
     }
   })(BaseForm)
 

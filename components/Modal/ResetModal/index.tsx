@@ -23,13 +23,13 @@ import styles from './styles.css'
 
 interface Props {
   close: () => {}
-  interpret: () => {}
+  interpret: (text: string) => string
 }
 
 const ResetModal: FC<Props> = ({ close, interpret }) => {
   const [step, setStep] = useState('request')
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       title: interpret('forgetPassword')
     },
@@ -62,7 +62,7 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
     }
   }
 
-  const Header = ({ title }) => (
+  const Header = ({ title }: { title: string }) => (
     <>
       <div className="header">
         <Title type="modal">{title}</Title>
@@ -90,7 +90,7 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
 
   const ModalLoginSwitch = () => (
     <ModalSwitch modalId="loginModal">
-      {open => (
+      {(open: any) => (
         <Button
           type="button"
           bgColor="transparent"
@@ -104,14 +104,28 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
     </ModalSwitch>
   )
 
-  const BaseRequestForm = props => (
+  const BaseRequestForm = ({
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit
+  }: {
+    [key: string]: any
+  }) => (
     <>
-      <form className="form" onSubmit={props.handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <Form.Input
           type="text"
           field="email"
           placeholder={interpret('enterRegisteredEmail')}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <Form.Input
           type="text"
@@ -119,11 +133,20 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
           placeholder={interpret('verificationCode')}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
           floatElement={<SendVerificationCodeButton />}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <div className="buttons">
           <ModalLoginSwitch />
-          <Button type="submit" bgColor="green" style={{ width: 80 }}>
+          <Button
+            type="submit"
+            bgColor="green"
+            style={{ width: 80 }}
+            disabled={isSubmitting}
+          >
             {interpret('nextStep')}
           </Button>
         </div>
@@ -132,21 +155,39 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
     </>
   )
 
-  const BaseResetForm = props => (
+  const BaseResetForm = ({
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit
+  }: {
+    [key: string]: any
+  }) => (
     <>
-      <form className="form" onSubmit={props.handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <Form.Input
           type="password"
           field="password"
           placeholder={interpret('enterPassword')}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <Form.Input
           type="password"
           field="confirmedPassword"
           placeholder={interpret('enterPasswordAgain')}
           style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
-          {...props}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
         />
         <div className="buttons">
           <Button
@@ -158,7 +199,12 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
           >
             {interpret('previousStep')}
           </Button>
-          <Button type="submit" bgColor="green" style={{ width: 80 }}>
+          <Button
+            type="submit"
+            bgColor="green"
+            style={{ width: 80 }}
+            disabled={isSubmitting}
+          >
             {interpret('confirm')}
           </Button>
         </div>
@@ -227,6 +273,7 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
         prev.request.code = values.code
         return prev
       })
+      setSubmitting(false)
       setStep('reset')
     }
   })(BaseRequestForm)
@@ -254,6 +301,8 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
 
     handleSubmit: async (values, { setSubmitting }) => {
       // TODO: Add mutation
+      console.log(values) // For passing liniting
+      setSubmitting(false)
       setStep('complete')
     }
   })(BaseResetForm)

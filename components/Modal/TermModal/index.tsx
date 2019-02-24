@@ -21,11 +21,11 @@ import styles from './styles.css'
 
 interface Props {
   close: () => {}
-  interpret: () => {}
+  interpret: (text: string) => string
 }
 
 const TermModal: FC<Props> = ({ close, interpret }) => {
-  const BaseForm = props => (
+  const BaseForm = (props: { [key: string]: any }) => (
     <>
       <form className="form" onSubmit={props.handleSubmit}>
         <div className="term">
@@ -54,6 +54,9 @@ const TermModal: FC<Props> = ({ close, interpret }) => {
   const TermForm = withFormik({
     handleSubmit: async (valuse, { setSubmitting }) => {
       // TODO: Add mutation
+      console.log(values) // For passing linting
+      setSubmitting(false)
+      close()
     }
   })(BaseForm)
 

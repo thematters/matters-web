@@ -15,7 +15,7 @@ import styles from './styles.css'
 interface Props {
   alignment?: 'center' | 'bottom'
   children: any
-  close: () => {}
+  close: () => void
   closeOnEsc?: boolean
   closeOnOutsideClick?: boolean
   title?: string
@@ -44,16 +44,14 @@ const Container: FC<Props> = ({
     'l-offset-lg-4'
   )
 
-  const [node, setNode] = useState(undefined)
+  const [node, setNode] = useState<HTMLElement | null>(null)
 
   const interpret = (text: string) => {
-    return translate(
-      {
-        zh_hant: TEXT.zh_hant[text],
-        zh_hans: TEXT.zh_hans[text]
-      },
+    return translate({
+      zh_hant: TEXT.zh_hant[text],
+      zh_hans: TEXT.zh_hans[text],
       lang
-    )
+    })
   }
 
   const handleOnEsc = (event: any) => {
@@ -85,13 +83,17 @@ const Container: FC<Props> = ({
   useNativeEventListener('click', handleOnOutsideClick)
 
   useEffect(() => {
-    disableBodyScroll(node)
+    if (node) {
+      disableBodyScroll(node)
+    }
     return () => {
-      enableBodyScroll(node)
+      if (node) {
+        enableBodyScroll(node)
+      }
     }
   })
 
-  const Header = props => (
+  const Header = (props: { [key: string]: any }) => (
     <>
       <div className="header">
         <Title type="modal">{interpret(props.title)}</Title>
