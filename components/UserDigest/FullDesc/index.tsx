@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 // Internal modules
-import { Avatar } from '~/components'
+import { Avatar } from '~/components/Avatar'
 import { FollowButton } from '~/components/Button/Follow'
 
 import { toPath } from '~/common/utils'
