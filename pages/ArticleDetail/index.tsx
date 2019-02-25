@@ -15,7 +15,12 @@ import TagList from './TagList'
 import Toolbar from './Toolbar'
 
 const ARTICLE_DETAIL = gql`
-  query ArticleDetail($mediaHash: String!) {
+  query ArticleDetail(
+    $mediaHash: String!
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionDateTime: Boolean = false
+    $hasDigestTagArticleCount: Boolean = false
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title

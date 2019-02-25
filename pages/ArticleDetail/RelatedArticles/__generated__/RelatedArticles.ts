@@ -10,6 +10,14 @@ export interface RelatedArticles_relatedArticles_edges_node_author {
   __typename: "User";
   id: string;
   userName: string | null;
+  /**
+   * Display name on profile
+   */
+  displayName: string | null;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface RelatedArticles_relatedArticles_edges_node_comments {
@@ -25,11 +33,16 @@ export interface RelatedArticles_relatedArticles_edges_node {
   cover: any | null;
   mediaHash: string | null;
   author: RelatedArticles_relatedArticles_edges_node_author;
+  createdAt: any;
   /**
    * MAT recieved for this article
    */
   MAT: number;
   comments: RelatedArticles_relatedArticles_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface RelatedArticles_relatedArticles_edges {

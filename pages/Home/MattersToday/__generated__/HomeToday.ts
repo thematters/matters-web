@@ -63,3 +63,8 @@ export interface HomeToday_viewer {
 export interface HomeToday {
   viewer: HomeToday_viewer | null;
 }
+
+export interface HomeTodayVariables {
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
+}

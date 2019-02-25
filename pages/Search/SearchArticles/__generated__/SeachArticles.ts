@@ -79,4 +79,6 @@ export interface SeachArticlesVariables {
   key: string;
   first: number;
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

@@ -82,4 +82,6 @@ export interface HottestFeed {
 
 export interface HottestFeedVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

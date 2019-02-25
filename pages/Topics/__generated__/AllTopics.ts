@@ -82,4 +82,6 @@ export interface AllTopics {
 
 export interface AllTopicsVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

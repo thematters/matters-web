@@ -3,17 +3,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: Tag
+// GraphQL fragment: DigestTag
 // ====================================================
 
-export interface Tag_articles {
+export interface DigestTag_articles {
   __typename: "ArticleConnection";
   totalCount: number;
 }
 
-export interface Tag {
+export interface DigestTag {
   __typename: "Tag";
   id: string;
   content: string;
-  articles: Tag_articles;
+  articles: DigestTag_articles;
 }
