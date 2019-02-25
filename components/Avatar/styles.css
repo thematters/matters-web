@@ -4,6 +4,12 @@
   background-color: var(--color-grey-lighter);
 }
 
+/* 16px */
+.xxxsmall {
+  width: 1rem;
+  height: 1rem;
+}
+
 /* 20px */
 .xxsmall {
   width: 1.25rem;

@@ -1,6 +1,7 @@
 import { Head, UserProfile } from '~/components'
 
 import MeTabs from '../MeTabs'
+import MeComments from './MeComments'
 
 export default () => (
   <main>
@@ -13,7 +14,7 @@ export default () => (
         <MeTabs />
       </div>
       <div className="l-col-4 l-col-md-6 l-col-lg-8">
-        <img src="https://via.placeholder.com/600.png" />
+        <MeComments />
       </div>
     </section>
   </main>

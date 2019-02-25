@@ -5,10 +5,10 @@
 import { UserLanguage, UserState } from "./../../../__generated__/globalTypes";
 
 // ====================================================
-// GraphQL fragment: LayoutUser
+// GraphQL fragment: ViewerUser
 // ====================================================
 
-export interface LayoutUser_settings {
+export interface ViewerUser_settings {
   __typename: "UserSettings";
   /**
    * User language setting
@@ -16,26 +16,12 @@ export interface LayoutUser_settings {
   language: UserLanguage;
 }
 
-export interface LayoutUser_status_MAT {
-  __typename: "MAT";
-  total: number;
-}
-
-export interface LayoutUser_status {
+export interface ViewerUser_status {
   __typename: "UserStatus";
   state: UserState;
-  /**
-   * Total MAT left in wallet
-   */
-  MAT: LayoutUser_status_MAT;
 }
 
-export interface LayoutUser_info {
-  __typename: "UserInfo";
-  email: any | null;
-}
-
-export interface LayoutUser {
+export interface ViewerUser {
   __typename: "User";
   id: string;
   uuid: any;
@@ -48,7 +34,6 @@ export interface LayoutUser {
    * URL for avatar
    */
   avatar: any | null;
-  settings: LayoutUser_settings;
-  status: LayoutUser_status | null;
-  info: LayoutUser_info;
+  settings: ViewerUser_settings;
+  status: ViewerUser_status | null;
 }
