@@ -8,11 +8,12 @@
 }
 
 .item {
-  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
   padding-right: var(--spacing-default);
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  line-height: 1.71428571;
 
   & :hover {
     color: var(--color-matters-green);

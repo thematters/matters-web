@@ -1,0 +1,49 @@
+.container {
+  position: relative;
+}
+
+.input {
+  background-color: var(--color-grey-lighter);
+  border-radius: 0.15rem;
+  border-bottom: 1px solid var(--color-grey-light);
+  font-size: var(--font-size-md);
+  height: 2.5rem;
+  padding: var(--spacing-x-tight) var(--spacing-tight);
+
+  &:focus {
+    background-color: var(--color-bg-green);
+    border-bottom: 1px solid var(--color-matters-green);
+  }
+
+  &::placeholder {
+    color: var(--color-grey);
+  }
+}
+
+.float-right {
+  @mixin flex-center-all;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 2.5rem;
+  padding: var(--spacing-x-tight);
+}
+
+.info {
+  font-size: var(--font-size-xs);
+  line-height: 1.1;
+  height: 1rem;
+  min-height: 1rem;
+  margin-top: var(--spacing-x-tight);
+  padding-left: var(--spacing-x-tight);
+
+  & > .error {
+    color: var(--color-red);
+  }
+
+  & > .hint {
+    color: var(--color-grey-dark);
+  }
+}

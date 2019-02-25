@@ -1,11 +1,10 @@
-// External modules
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-// Internal modules
-import { Avatar } from '~/components'
+import { Avatar } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
+
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import styles from './styles.css'
 
@@ -20,6 +19,7 @@ import styles from './styles.css'
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
+      id
       userName
       displayName
       ...AvatarUser
@@ -31,13 +31,13 @@ const fragments = {
 const Mini = ({ user }: { user: UserDigestMiniUser }) => {
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName
+    userName: user.userName || ''
   })
 
   return (
     <>
       <section>
-        <Link href={path.fs} as={path.url}>
+        <Link {...path}>
           <a className="container">
             <Avatar size="xxsmall" user={user} />
             <span className="name">{user.displayName}</span>

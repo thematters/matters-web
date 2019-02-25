@@ -15,11 +15,12 @@ export interface FeedArticleConnection_pageInfo {
 
 export interface FeedArticleConnection_edges_node_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -46,6 +47,10 @@ export interface FeedArticleConnection_edges_node {
    */
   MAT: number;
   comments: FeedArticleConnection_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface FeedArticleConnection_edges {

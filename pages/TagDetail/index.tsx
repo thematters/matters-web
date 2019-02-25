@@ -6,15 +6,20 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   ArticleDigest,
   Empty,
+  Error,
   Footer,
+  Head,
   Icon,
   InfiniteScroll,
   PageHeader,
-  Spinner
+  Placeholder,
+  Spinner,
+  Translate
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
+
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
 
 const TAG_DETAIL = gql`
@@ -42,7 +47,11 @@ const TAG_DETAIL = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const EmptyTagDetail = ({ description }: { description: string }) => (
+const EmptyTagDetail = ({
+  description
+}: {
+  description: string | React.ReactNode
+}) => (
   <Empty
     icon={
       <Icon id={ICON_HASHTAG.id} viewBox={ICON_HASHTAG.viewBox} size="xlarge" />
@@ -53,7 +62,11 @@ const EmptyTagDetail = ({ description }: { description: string }) => (
 
 const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
   if (!router || !router.query || !router.query.id) {
-    return <EmptyTagDetail description="標籤不存在" />
+    return (
+      <EmptyTagDetail
+        description={<Translate zh_hant="標籤不存在" zh_hans="标签不存在" />}
+      />
+    )
   }
 
   return (
@@ -67,11 +80,11 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
             fetchMore
           }: QueryResult & { data: TagDetailArticles }) => {
             if (loading) {
-              return <Spinner />
+              return <Placeholder.ArticleDigestList />
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'node.articles'
@@ -91,6 +104,8 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             return (
               <>
+                <Head title={`#${data.node.content}`} />
+
                 <PageHeader pageTitle={data.node.content} />
 
                 <section>

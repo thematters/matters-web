@@ -3,6 +3,9 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import React, { useEffect } from 'react'
 
+import { Responsive, SearchBar } from '~/components'
+import { ModalSwitch } from '~/components/ModalManager'
+
 import { analytics } from '~/common/utils'
 
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
@@ -20,6 +23,12 @@ import WriteButton from './WriteButton'
 Router.onRouteChangeComplete = () => {
   analytics.trackPage()
 }
+
+const ModalLoginSwitch = () => (
+  <ModalSwitch modalId="loginModal">
+    {(open: any) => <LoginButton onClick={open} />}
+  </ModalSwitch>
+)
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
@@ -43,14 +52,18 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           <section className={rightClasses}>
             {isAuthed ? (
               <>
-                <SearchButton />
+                <Responsive.MediumUp>
+                  {(match: boolean) =>
+                    match ? <SearchBar /> : <SearchButton />
+                  }
+                </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
                 <WriteButton />
               </>
             ) : (
               <>
-                <LoginButton />
+                <ModalLoginSwitch />
                 <SignUpButton />
               </>
             )}

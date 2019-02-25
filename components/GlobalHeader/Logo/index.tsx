@@ -1,13 +1,15 @@
 import Link from 'next/link'
+
 import { Icon } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import ICON_LOGO from '~/static/icons/logo.svg?sprite'
+
 import styles from './styles.css'
 
 export default () => (
   <>
-    <Link href={PATHS.HOME.fs} as={PATHS.HOME.url}>
+    <Link href={PATHS.HOME.href} as={PATHS.HOME.as}>
       <a aria-label="首頁">
         <Icon
           id={ICON_LOGO.id}

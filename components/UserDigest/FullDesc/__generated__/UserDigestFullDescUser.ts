@@ -16,12 +16,17 @@ export interface UserDigestFullDescUser_info {
 
 export interface UserDigestFullDescUser {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: UserDigestFullDescUser_info;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
   /**
    * This user is following viewer
    */
@@ -30,8 +35,4 @@ export interface UserDigestFullDescUser {
    * Viewer is following this user
    */
   isFollowee: boolean;
-  /**
-   * URL for avatar
-   */
-  avatar: any | null;
 }

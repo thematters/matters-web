@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Label, Tag } from '~/components'
-import ViewAllLink from '../ViewAllLink'
+import { Error, Label, Tag, Translate } from '~/components'
 
+import ViewAllLink from '../ViewAllLink'
 import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
 
@@ -31,24 +32,30 @@ export default () => (
     <Query query={SIDEBAR_TAGS}>
       {({ data, loading, error }: QueryResult & { data: SidebarTags }) => {
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
+        }
+
+        const edges = _get(data, 'viewer.recommendation.tags.edges', [])
+
+        if (edges.length <= 0) {
+          return null
         }
 
         return (
           <>
             <header>
-              <Label>標簽</Label>
+              <Label>
+                <Translate zh_hant="標籤" zh_hans="标签" />
+              </Label>
               <ViewAllLink type="tags" />
             </header>
 
             <ul>
-              {data.viewer.recommendation.tags.edges.map(
-                ({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <Tag tag={node} size="small" type="count-fixed" />
-                  </li>
-                )
-              )}
+              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                <li key={cursor}>
+                  <Tag tag={node} size="small" type="count-fixed" />
+                </li>
+              ))}
             </ul>
           </>
         )

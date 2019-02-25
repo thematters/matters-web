@@ -8,7 +8,8 @@
 
 export interface IcymiDigestArticle_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
 }
 
 export interface IcymiDigestArticle_comments {

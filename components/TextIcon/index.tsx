@@ -8,7 +8,7 @@ interface TextIconProps {
   icon: React.ReactNode
 
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
@@ -60,7 +60,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   return (
     <span className={textIconClasses}>
       {icon}
-      <span className="text">{text || children}</span>
+      <span className="text">{text === undefined ? children : text}</span>
       <style jsx>{styles}</style>
     </span>
   )

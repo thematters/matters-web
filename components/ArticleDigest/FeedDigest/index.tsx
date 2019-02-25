@@ -2,9 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Title } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+
+import { toPath } from '~/common/utils'
 
 import Actions from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
@@ -20,6 +21,7 @@ const fragments = {
       summary
       mediaHash
       author {
+        id
         userName
         ...UserDigestMiniUser
       }
@@ -32,6 +34,11 @@ const fragments = {
 
 const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -51,7 +58,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
 
       <div className={contentClasses}>
         <div className="title">
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <Title type="feed" is="h2">
                 {title}
@@ -60,7 +67,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
           </Link>
         </div>
         <div className="description">
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <p>{summary}</p>
             </a>
@@ -70,7 +77,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
         </div>
 
         {cover && (
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <div
                 className="cover"

@@ -1,0 +1,16 @@
+.container {
+  width: 20rem;
+}
+
+.clear-history-btn {
+  color: var(--color-matters-green);
+}
+
+.history-item,
+.frequent-item {
+  font-size: var(--font-size-sm);
+}
+
+.frequent-item {
+  color: var(--color-matters-green);
+}

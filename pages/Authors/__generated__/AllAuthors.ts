@@ -23,12 +23,17 @@ export interface AllAuthors_viewer_recommendation_authors_edges_node_info {
 
 export interface AllAuthors_viewer_recommendation_authors_edges_node {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: AllAuthors_viewer_recommendation_authors_edges_node_info;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
   /**
    * This user is following viewer
    */
@@ -37,10 +42,6 @@ export interface AllAuthors_viewer_recommendation_authors_edges_node {
    * Viewer is following this user
    */
   isFollowee: boolean;
-  /**
-   * URL for avatar
-   */
-  avatar: any | null;
 }
 
 export interface AllAuthors_viewer_recommendation_authors_edges {

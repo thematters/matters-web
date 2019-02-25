@@ -25,4 +25,5 @@
   /* line */
   --color-line-grey-light: rgba(0, 0, 0, 0.08);
   --color-line-grey: rgba(0, 0, 0, 0.16);
+  --color-line-grey-dark: rgba(0, 0, 0, 0.24);
 }

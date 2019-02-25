@@ -1,0 +1,16 @@
+ul {
+  margin-top: var(--spacing-default);
+
+  @media (--sm-up) {
+    display: flex;
+
+    & li {
+      width: 33.3%;
+      flex-basis: 33.3%;
+
+      & + li {
+        margin-left: var(--spacing-default);
+      }
+    }
+  }
+}

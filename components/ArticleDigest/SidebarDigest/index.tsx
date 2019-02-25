@@ -2,8 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Title } from '~/components'
+
+import { toPath } from '~/common/utils'
 
 import Actions from '../Actions'
 import { IcymiDigestArticle } from './__generated__/IcymiDigestArticle'
@@ -18,6 +19,7 @@ const fragments = {
       slug
       cover
       author {
+        id
         userName
       }
       mediaHash
@@ -31,6 +33,7 @@ const fragments = {
       title
       slug
       author {
+        id
         userName
       }
       mediaHash
@@ -45,7 +48,13 @@ const FeedDigest = ({
 }: {
   article: IcymiDigestArticle | TopicsDigestArticle
 }) => {
-  const { cover, author, slug, mediaHash, title } = article
+  const { author, slug, mediaHash, title } = article
+  const cover = 'cover' in article ? article.cover : null
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -59,7 +68,7 @@ const FeedDigest = ({
 
   return (
     <section className="container">
-      <Link href={path.fs} as={path.url}>
+      <Link {...path}>
         <a>
           <div className={contentClasses}>
             <div className="left">

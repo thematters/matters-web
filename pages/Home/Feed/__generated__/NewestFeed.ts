@@ -15,11 +15,12 @@ export interface NewestFeed_viewer_recommendation_feed_pageInfo {
 
 export interface NewestFeed_viewer_recommendation_feed_edges_node_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -46,6 +47,10 @@ export interface NewestFeed_viewer_recommendation_feed_edges_node {
    */
   MAT: number;
   comments: NewestFeed_viewer_recommendation_feed_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface NewestFeed_viewer_recommendation_feed_edges {

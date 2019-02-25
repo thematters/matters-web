@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-import { get } from 'lodash'
+import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
+
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MATArticle } from './__generated__/MATArticle'
@@ -31,7 +32,7 @@ const MAT = ({
     }
     color="gold"
     weight="medium"
-    text={get(article, 'MAT', '')}
+    text={_get(article, 'MAT', '')}
     size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxxtight"
   />

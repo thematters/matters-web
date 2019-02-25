@@ -3,9 +3,9 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
+  Error,
   InfiniteScroll,
   LoadMore,
   PageHeader,
@@ -14,9 +14,11 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import SortBy from './SortBy'
+
+import { mergeConnections } from '~/common/utils'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
+import SortBy from './SortBy'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -81,7 +83,7 @@ export default () => {
           }
 
           if (error) {
-            return <span>{JSON.stringify(error)}</span> // TODO
+            return <Error error={error} />
           }
 
           const connectionPath = 'viewer.recommendation.feed'
@@ -104,35 +106,25 @@ export default () => {
               <PageHeader
                 pageTitle={
                   sortBy === 'hottest' ? (
-                    <Translate
-                      translations={{
-                        zh_hant: '熱門文章',
-                        zh_hans: '热门文章 '
-                      }}
-                    />
+                    <Translate zh_hant="熱門文章" zh_hans="热门文章 " />
                   ) : (
-                    <Translate
-                      translations={{
-                        zh_hant: '最新文章',
-                        zh_hans: '最新文章 '
-                      }}
-                    />
+                    <Translate zh_hant="最新文章" zh_hans="最新文章 " />
                   )
                 }
               >
                 <SortBy sortBy={sortBy} setSortBy={setSortBy} />
               </PageHeader>
 
-              <ul>
-                <Responsive.MediumUp>
-                  {(match: boolean) => (
-                    <>
-                      <InfiniteScroll
-                        hasNextPage={match && pageInfo.hasNextPage}
-                        loadMore={loadMore}
-                        loading={loading}
-                        loader={<Spinner />}
-                      >
+              <Responsive.MediumUp>
+                {(match: boolean) => (
+                  <>
+                    <InfiniteScroll
+                      hasNextPage={match && pageInfo.hasNextPage}
+                      loadMore={loadMore}
+                      loading={loading}
+                      loader={<Spinner />}
+                    >
+                      <ul>
                         {edges.map(
                           ({ node, cursor }: { node: any; cursor: any }) => (
                             <li key={cursor}>
@@ -140,14 +132,14 @@ export default () => {
                             </li>
                           )
                         )}
-                      </InfiniteScroll>
-                      {!match && pageInfo.hasNextPage && (
-                        <LoadMore onClick={loadMore} />
-                      )}
-                    </>
-                  )}
-                </Responsive.MediumUp>
-              </ul>
+                      </ul>
+                    </InfiniteScroll>
+                    {!match && pageInfo.hasNextPage && (
+                      <LoadMore onClick={loadMore} />
+                    )}
+                  </>
+                )}
+              </Responsive.MediumUp>
             </>
           )
         }}

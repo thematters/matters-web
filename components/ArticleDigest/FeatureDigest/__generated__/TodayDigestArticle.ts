@@ -8,11 +8,12 @@
 
 export interface TodayDigestArticle_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -39,4 +40,8 @@ export interface TodayDigestArticle {
    */
   MAT: number;
   comments: TodayDigestArticle_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }

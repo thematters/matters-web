@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Label, Title } from '~/components'
+
+import { toPath } from '~/common/utils'
 
 import Actions from '../Actions'
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
@@ -18,16 +19,22 @@ const fragments = {
       summary
       mediaHash
       author {
+        id
         userName
       }
-      ...FeedDigestActionsArticle
+      ...FeatureDigestActionsArticle
     }
-    ${Actions.fragments.feedDigest}
+    ${Actions.fragments.featureDigest}
   `
 }
 
 const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -38,7 +45,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
   return (
     <section className="container">
       <div className="cover-container">
-        <Link href={path.fs} as={path.url}>
+        <Link {...path}>
           <a>
             <div
               className="cover"
@@ -54,7 +61,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
         <div className="content">
           <Label>Matters Today</Label>
 
-          <Link href={path.fs} as={path.url}>
+          <Link {...path}>
             <a>
               <Title type="feature" is="h2">
                 {title}
@@ -63,7 +70,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
           </Link>
 
           <div className="description">
-            <Link href={path.fs} as={path.url}>
+            <Link {...path}>
               <a>
                 <p>{summary}</p>
               </a>

@@ -1,6 +1,5 @@
+import _throttle from 'lodash/throttle'
 import React from 'react'
-
-import { throttle } from 'lodash'
 
 /**
  *  Usage:
@@ -69,7 +68,7 @@ export class InfiniteScroll extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props)
-    this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle)
+    this.scrollHandler = _throttle(this.checkWindowScroll, this.props.throttle)
     this.sentinel = null
   }
 

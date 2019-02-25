@@ -8,11 +8,12 @@
 
 export interface UserDigestMiniUser {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */

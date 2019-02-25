@@ -11,17 +11,15 @@ import { LanguageConsumer } from './LanguageContext'
  *
  * ```tsx *
  * // current language in context
- * <Translate translations={{ zh_hant: '熱議話題', zh_hans: '热议话题' }} />
+ * <Translate zh_hant='熱議話題' zh_hans='热议话题' />
  *
  * // given language
- * <Translate translations={{ zh_hant: '排序', zh_hans: '排序', en: 'Sort By' }} lang="en" />
+ * <Translate zh_hant='排序' zh_hans='排序' en='Sort By' lang="en" />
  *
  * // dynamic data
  * <Translate
- *    translations={{
- *       zh_hant: ({ date }) => `現在時間 ${date.toTimeString()}`,
- *       zh_hans: ({ date }) => `现在时间 ${date.toTimeString()}`,
- *    }}
+ *    zh_hant={({ date }) => `現在時間 ${date.toTimeString()}`}
+ *    zh_hans={({ date }) => `现在时间 ${date.toTimeString()}`}
  *    data={{ date: new Date() }}
  *  />
  * ```

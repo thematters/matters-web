@@ -3,17 +3,16 @@
  * "module-alias" only used in this file to resolve `~` alias,
  * Next.js bundles will be resolved with Babel (see ".babelrc")
  */
+import dotenv from 'dotenv'
+import express from 'express'
 import 'module-alias/register'
+import next from 'next'
 
 // load environment variables from .env
-import dotenv from 'dotenv'
 const dotEnvResult = dotenv.config()
 if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
-
-import express from 'express'
-import next from 'next'
 
 import { ROUTES } from '~/common/enums'
 
@@ -32,9 +31,9 @@ app
   .then(() => {
     const server = express()
 
-    ROUTES.forEach(({ fs, url }) => {
-      server.get(url, (req, res) =>
-        app.render(req, res, fs, { ...req.query, ...req.params })
+    ROUTES.forEach(({ href, as }) => {
+      server.get(as, (req, res) =>
+        app.render(req, res, href, { ...req.query, ...req.params })
       )
     })
 

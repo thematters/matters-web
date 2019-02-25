@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Placeholder } from '~/components'
+import { ArticleDigest, Error, Placeholder } from '~/components'
 
 import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
@@ -29,7 +29,7 @@ export default () => (
         }
 
         if (error) {
-          return <span>{JSON.stringify(error)}</span> // TODO
+          return <Error error={error} />
         }
 
         return (

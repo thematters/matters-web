@@ -4,14 +4,18 @@ import { Query, QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
+  Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
+  Placeholder,
   Spinner,
   Translate
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICS = gql`
@@ -41,12 +45,10 @@ const ALL_TOPICS = gql`
 const Topics = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部話題', zh_hans: '全部话题' }} />
+
       <PageHeader
-        pageTitle={
-          <Translate
-            translations={{ zh_hant: '全部話題', zh_hans: '全部话题' }}
-          />
-        }
+        pageTitle={<Translate zh_hant="全部話題" zh_hans="全部话题" />}
       />
 
       <section>
@@ -58,11 +60,11 @@ const Topics = () => (
             fetchMore
           }: QueryResult & { data: AllTopics }) => {
             if (loading) {
-              return <Spinner />
+              return <Placeholder.ArticleDigestList />
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'viewer.recommendation.topics'

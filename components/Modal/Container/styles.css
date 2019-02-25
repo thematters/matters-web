@@ -1,15 +1,28 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-default);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
 .container {
   background-color: #fff;
   border-radius: 0.15rem;
-  padding: 0rem var(--spacing-x-tight);
-  z-index: 201;
+  z-index: 200
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
+  @mixin flex-center-space-between;
   border-bottom: 1px solid var(--color-line-grey);
+  margin: 0rem var(--spacing-x-tight);
   padding: 0.75rem var(--spacing-x-tight);
 }

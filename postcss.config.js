@@ -15,6 +15,9 @@ module.exports = {
       ]
     }),
     require('postcss-calc'),
-    require('postcss-color-function')
+    require('postcss-color-function'),
+    require('postcss-mixins')({
+      mixinsFiles: './common/styles/mixins/mixins.css'
+    })
   ]
 }

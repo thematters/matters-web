@@ -1,4 +1,4 @@
-import { Button } from '~/components'
+import { Button, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -7,10 +7,10 @@ export default () => (
     is="link"
     size="large"
     bgColor="green"
-    href={PATHS.AUTH_SIGNUP.fs}
-    as={PATHS.AUTH_SIGNUP.url}
+    href={PATHS.AUTH_SIGNUP.href}
+    as={PATHS.AUTH_SIGNUP.as}
     style={{ width: 80 }}
   >
-    註冊
+    <Translate zh_hant="註冊" zh_hans="注册" />
   </Button>
 )

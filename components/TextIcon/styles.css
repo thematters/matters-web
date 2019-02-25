@@ -1,6 +1,7 @@
 .text-icon {
   user-select: none;
-  line-height: 1;
+  font-size: 0;
+  vertical-align: middle;
 
   & :global(*) {
     display: inline-block;
@@ -21,17 +22,30 @@
 }
 
 /* size */
+.size-xxs {
+  & .text {
+    font-size: var(--font-size-xxs);
+  }
+}
 .size-xs {
-  font-size: var(--font-size-xs);
+  & .text {
+    font-size: var(--font-size-xs);
+  }
 }
 .size-sm {
-  font-size: var(--font-size-sm);
+  & .text {
+    font-size: var(--font-size-sm);
+  }
 }
 .size-md {
-  font-size: var(--font-size-md);
+  & .text {
+    font-size: var(--font-size-md);
+  }
 }
 .size-lg {
-  font-size: var(--font-size-lg);
+  & .text {
+    font-size: var(--font-size-lg);
+  }
 }
 
 /* color */

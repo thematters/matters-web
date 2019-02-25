@@ -8,7 +8,8 @@
 
 export interface SidebarIcymi_viewer_recommendation_icymi_edges_node_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
 }
 
 export interface SidebarIcymi_viewer_recommendation_icymi_edges_node_comments {

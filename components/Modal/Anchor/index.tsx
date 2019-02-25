@@ -1,13 +1,11 @@
-// External modules
-import { useEffect, useState } from 'react'
+import { Modal } from '~/components'
+import { ModalInstance } from '~/components/ModalManager'
 
-// Internal modules
-import { useEventListener } from '~/components/Hook'
 import styles from './styles.css'
 
 /**
- * This component is for hosting modal instances and manging their extra
- * shared state. We use react-portal to inject modal into this component.
+ * This component is for hosting modal instances. We use react-portal to
+ * inject modal into targeted node.
  *
  * Usage:
  *
@@ -17,22 +15,26 @@ import styles from './styles.css'
  *
  */
 
+interface ModalInstanceProps {
+  close: () => {}
+  interpret: (text: string) => string
+}
+
 const Anchor = () => {
-  const open = () => {
-    // TODO: Add some safety check or manaing shared state.
-  }
-
-  const close = () => {
-    // TODO: Add some safety check or manaing shared state.
-  }
-
-  useEventListener('openModal', open)
-
-  useEventListener('closeModal', close)
-
   return (
     <>
-      <div id="modal-anchor" className="container" />
+      <div>
+        <div id="modal-anchor" className="container" />
+        <ModalInstance modalId="loginModal" title="login">
+          {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
+        </ModalInstance>
+        <ModalInstance modalId="resetModal">
+          {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
+        </ModalInstance>
+        <ModalInstance modalId="termModal" title="term">
+          {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
+        </ModalInstance>
+      </div>
       <style jsx>{styles}</style>
     </>
   )

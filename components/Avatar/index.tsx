@@ -1,4 +1,3 @@
-// external
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
@@ -28,7 +27,7 @@ export const Avatar = ({
   size = 'default'
 }: {
   size?: AvatarSize
-  user: AvatarUser
+  user?: AvatarUser
 }) => {
   const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
@@ -41,6 +40,7 @@ export const Avatar = ({
       <div
         className={avatarClasses}
         style={{ backgroundImage: `url(${src})` }}
+        aria-hidden="true"
       />
       <style jsx>{styles}</style>
     </>

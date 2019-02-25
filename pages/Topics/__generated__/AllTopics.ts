@@ -15,11 +15,12 @@ export interface AllTopics_viewer_recommendation_topics_pageInfo {
 
 export interface AllTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * URL for avatar
    */
@@ -46,6 +47,10 @@ export interface AllTopics_viewer_recommendation_topics_edges_node {
    */
   MAT: number;
   comments: AllTopics_viewer_recommendation_topics_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface AllTopics_viewer_recommendation_topics_edges {

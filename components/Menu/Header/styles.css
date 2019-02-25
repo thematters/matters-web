@@ -1,0 +1,13 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0.75rem 0 var(--spacing-xx-tight);
+  padding-left: var(--spacing-tight);
+  padding-right: var(--spacing-tight);
+
+  font-size: var(--font-size-xs); /* fallback */
+  font-size: calc(var(--font-size-sm) - 1px);
+  font-weight: var(--font-weight-medium);
+}

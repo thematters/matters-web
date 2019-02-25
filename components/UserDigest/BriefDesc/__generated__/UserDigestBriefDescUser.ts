@@ -16,11 +16,12 @@ export interface UserDigestBriefDescUser_info {
 
 export interface UserDigestBriefDescUser {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
   /**
    * Display name on profile
    */
-  displayName: string;
+  displayName: string | null;
   info: UserDigestBriefDescUser_info;
   /**
    * URL for avatar

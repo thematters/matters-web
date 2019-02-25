@@ -1,3 +1,7 @@
+.tag {
+  display: inline-block;
+}
+
 .tag.count-fixed {
   display: inline-block;
   position: relative;

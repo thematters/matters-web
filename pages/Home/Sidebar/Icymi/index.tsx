@@ -1,7 +1,14 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Placeholder } from '~/components'
+import {
+  ArticleDigest,
+  Error,
+  Label,
+  Placeholder,
+  Translate
+} from '~/components'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -32,23 +39,29 @@ export default () => (
       }
 
       if (error) {
-        return <span>{JSON.stringify(error)}</span> // TODO
+        return <Error error={error} />
+      }
+
+      const edges = _get(data, 'viewer.recommendation.icymi.edges', [])
+
+      if (edges.length <= 0) {
+        return null
       }
 
       return (
         <>
           <header>
-            <Label>不要錯過</Label>
+            <Label>
+              <Translate zh_hant="不要錯過" zh_hans="不要错过" />
+            </Label>
           </header>
 
           <ul>
-            {data.viewer.recommendation.icymi.edges.map(
-              ({ node, cursor }: { node: any; cursor: any }) => (
-                <li key={cursor}>
-                  <ArticleDigest.Sidebar article={node} />
-                </li>
-              )
-            )}
+            {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+              <li key={cursor}>
+                <ArticleDigest.Sidebar article={node} />
+              </li>
+            ))}
           </ul>
         </>
       )

@@ -3,7 +3,9 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
+  Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -12,6 +14,7 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
@@ -42,12 +45,10 @@ const ALL_TAGS = gql`
 const Tags = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部標籤', zh_hans: '全部标签' }} />
+
       <PageHeader
-        pageTitle={
-          <Translate
-            translations={{ zh_hant: '全部標籤', zh_hans: '全部标签' }}
-          />
-        }
+        pageTitle={<Translate zh_hant="全部標籤" zh_hans="全部标签" />}
       />
 
       <section>
@@ -63,7 +64,7 @@ const Tags = () => (
             }
 
             if (error) {
-              return <span>{JSON.stringify(error)}</span> // TODO
+              return <Error error={error} />
             }
 
             const connectionPath = 'viewer.recommendation.tags'

@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-import { get } from 'lodash'
+import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
+
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { CommentCountArticle } from './__generated__/CommentCountArticle'
@@ -33,7 +34,7 @@ const CommentCount = ({
     }
     color="grey"
     weight="medium"
-    text={get(article, 'comments.totalCount', '')}
+    text={_get(article, 'comments.totalCount', '')}
     size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxtight"
   />

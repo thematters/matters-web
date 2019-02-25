@@ -8,7 +8,8 @@
 
 export interface TopicsDigestArticle_author {
   __typename: "User";
-  userName: string;
+  id: string;
+  userName: string | null;
 }
 
 export interface TopicsDigestArticle_comments {

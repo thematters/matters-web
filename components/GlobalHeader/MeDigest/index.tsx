@@ -1,99 +1,15 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
+import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { PATHS } from '~/common/enums'
-import ICON_GIFT from '~/static/icons/gift.svg'
-import ICON_LOGOUT from '~/static/icons/logout.svg'
-import ICON_MAT_BLACK from '~/static/icons/mat-black.svg'
-import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
-import ICON_ME from '~/static/icons/me.svg'
-import ICON_READING_HISTORY from '~/static/icons/reading-history.svg'
-import ICON_SETTINGS from '~/static/icons/settings.svg'
-
-import { Dropdown, Icon, Menu, PopperInstance, TextIcon } from '~/components'
+import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import { MeDigestUser } from './__generated__/MeDigestUser'
-import styles from './styles.css'
 
-const DropdownContent = ({ hideDropdown }: { hideDropdown: () => void }) => (
-  <Menu>
-    <Menu.Item>
-      <Link href={PATHS.ME_ARTICLES.fs} as={PATHS.ME_ARTICLES.url}>
-        <a onClick={hideDropdown}>
-          <TextIcon
-            icon={<Icon src={ICON_ME} size="small" />}
-            text="個人頁面"
-            spacing="xtight"
-          />
-        </a>
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link href={PATHS.ME_WALLET.fs} as={PATHS.ME_WALLET.url}>
-        <a onClick={hideDropdown}>
-          <TextIcon
-            icon={<Icon src={ICON_MAT_BLACK} size="small" />}
-            text="我的錢包"
-            spacing="xtight"
-          />
-        </a>
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link href={PATHS.ME_HISTORY.fs} as={PATHS.ME_HISTORY.url}>
-        <a onClick={hideDropdown}>
-          <TextIcon
-            icon={<Icon src={ICON_READING_HISTORY} size="small" />}
-            text="瀏覽記錄"
-            spacing="xtight"
-          />
-        </a>
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link href={PATHS.ME_INVITATION.fs} as={PATHS.ME_INVITATION.url}>
-        <a onClick={hideDropdown}>
-          <TextIcon
-            icon={<Icon src={ICON_GIFT} size="small" />}
-            text="邀請好友"
-            spacing="xtight"
-          />
-        </a>
-      </Link>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item>
-      <Link
-        href={PATHS.ME_SETTINGS_ACCOUNT.fs}
-        as={PATHS.ME_SETTINGS_ACCOUNT.url}
-      >
-        <a onClick={hideDropdown}>
-          <TextIcon
-            icon={<Icon src={ICON_SETTINGS} size="small" />}
-            text="設定"
-            spacing="xtight"
-          />
-        </a>
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <button
-        type="button"
-        onClick={() => {
-          alert('[TEST] logout')
-          hideDropdown()
-        }}
-      >
-        <TextIcon
-          icon={<Icon src={ICON_LOGOUT} size="small" />}
-          text="登出"
-          spacing="xtight"
-        />
-      </button>
-    </Menu.Item>
-  </Menu>
-)
+import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
+
+import { MeDigestUser } from './__generated__/MeDigestUser'
+import DropdownMenu from './DropdownMenu'
+import styles from './styles.css'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
   const [
@@ -111,15 +27,14 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
   return (
     <>
       <Dropdown
-        content={<DropdownContent hideDropdown={hideDropdown} />}
+        content={<DropdownMenu hideDropdown={hideDropdown} />}
         zIndex={101}
-        onHidden={hideDropdown}
         onCreate={onCreate}
       >
         <button type="button" className="container">
           <Avatar size="small" user={user} />
           <section className="info u-text-truncate">
-            <span className="username">Matty</span>
+            <span className="username">{user.displayName}</span>
             <TextIcon
               icon={
                 <Icon
@@ -130,7 +45,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
               }
               color="gold"
               weight="semibold"
-              text="500"
+              text={_get(user, 'status.MAT.total')}
               size="xs"
               spacing="0"
             />
@@ -145,6 +60,13 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
 MeDigest.fragments = {
   user: gql`
     fragment MeDigestUser on User {
+      id
+      displayName
+      status {
+        MAT {
+          total
+        }
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}

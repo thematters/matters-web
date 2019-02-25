@@ -129,6 +129,10 @@
   color: var(--color-black);
   background: var(--color-white);
 }
+.bg-black {
+  color: var(--color-white);
+  background: var(--color-black);
+}
 .bg-transparent {
   background: transparent;
 }

@@ -1,16 +1,13 @@
 import { Button } from '~/components'
 
-import { PATHS } from '~/common/enums'
-
-export default () => (
+export default (props: { [key: string]: any }) => (
   <Button
-    is="link"
+    is="button"
     size="large"
     bgColor="transparent"
-    href={PATHS.AUTH_LOGIN.fs}
-    as={PATHS.AUTH_LOGIN.url}
     spacing="default"
     className="u-link-green"
+    {...props}
   >
     登入
   </Button>

@@ -1,6 +1,7 @@
 import { Icon } from '~/components'
 
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
+
 import styles from './styles.css'
 
 export const Spinner = () => (

@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
+
 import styles from './styles.css'
 
 interface SortByProps {
@@ -44,9 +45,7 @@ const DropdownContent: React.FC<SortByProps & { hideDropdown: () => void }> = ({
             }}
             className={hottestBtnClasses}
           >
-            <Translate
-              translations={{ zh_hant: '熱門排序', zh_hans: '热门排序' }}
-            />
+            <Translate zh_hant="熱門排序" zh_hans="热门排序" />
           </button>
         </Menu.Item>
         <Menu.Item>
@@ -58,9 +57,7 @@ const DropdownContent: React.FC<SortByProps & { hideDropdown: () => void }> = ({
             }}
             className={newestBtnClasses}
           >
-            <Translate
-              translations={{ zh_hant: '最新排序', zh_hans: '最新排序' }}
-            />
+            <Translate zh_hant="最新排序" zh_hans="最新排序" />
           </button>
         </Menu.Item>
       </Menu>
