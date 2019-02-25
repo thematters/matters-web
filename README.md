@@ -21,6 +21,8 @@
   - `dc up` or `dc run --service-ports web npm run dev`
   - then go to `http://localhost:3000/`
 
+NOTE: If new packages are added to package.json, `dc up` will use `npm i` to install those packages. But if you are using `dc run --service-ports web npm run dev`, you need to run `dc run web npm i` manually to make sure that new packages are installed.
+
 ### Build with docker
 
 - Set command alias: `source bin/dc-alias`
