@@ -15,6 +15,7 @@ import {
 import { getQuery, mergeConnections } from '~/common/utils'
 
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
+import EmptyArticles from './EmptyArticles'
 
 const USER_ARTICLES_FEED = gql`
   query UserArticleFeed(
@@ -78,10 +79,18 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               })
           })
 
+        if (edges.length <= 0) {
+          return <EmptyArticles />
+        }
+
         return (
           <>
-            <Head title={data.user.displayName} />
-
+            <Head
+              title={{
+                zh_hant: `${data.user.displayName}發表的文章`,
+                zh_hans: `${data.user.displayName}发表的文章`
+              }}
+            />
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}

@@ -10,6 +10,7 @@
   & :global(img, video, audio) {
     display: block;
     margin: 0 auto;
+    max-height: 100vh;
   }
 
   /* Figure
