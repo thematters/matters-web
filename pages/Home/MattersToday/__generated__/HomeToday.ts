@@ -44,6 +44,7 @@ export interface HomeToday_viewer_recommendation_today {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface HomeToday_viewer_recommendation {
@@ -67,4 +68,5 @@ export interface HomeToday {
 export interface HomeTodayVariables {
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

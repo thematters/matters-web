@@ -8,12 +8,14 @@ import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 import styles from './styles.css'
+import TopicScore from './TopicScore'
 
 type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
 export interface ActionsControls {
   hasAuthor?: boolean
   hasDateTime?: boolean
   hasBookmark?: boolean
+  hasTopicScore?: boolean
 }
 type ActionsProps = {
   article: DigestActionsArticle
@@ -30,11 +32,13 @@ const fragments = {
       ...MATArticle
       ...CommentCountArticle
       ...BookmarkArticle @include(if: $hasArticleDigestActionDateTime)
+      ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
     ${BookmarkButton.fragments.article}
+    ${TopicScore.fragments.article}
   `
 }
 
@@ -43,7 +47,8 @@ const Actions = ({
   type,
   hasAuthor,
   hasDateTime,
-  hasBookmark
+  hasBookmark,
+  hasTopicScore
 }: ActionsProps) => {
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'
 
@@ -59,6 +64,10 @@ const Actions = ({
 
       {hasDateTime && 'subscribed' in article && (
         <BookmarkButton article={article} />
+      )}
+
+      {hasTopicScore && 'topicScore' in article && (
+        <TopicScore article={article} hasArrowIcon={type === 'sidebar'} />
       )}
 
       {hasBookmark && 'createdAt' in article && (

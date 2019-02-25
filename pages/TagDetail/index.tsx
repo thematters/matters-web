@@ -28,6 +28,7 @@ const TAG_DETAIL = gql`
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     node(input: { id: $id }) {
       ... on Tag {

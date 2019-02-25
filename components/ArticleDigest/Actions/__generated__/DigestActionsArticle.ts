@@ -39,4 +39,5 @@ export interface DigestActionsArticle {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }

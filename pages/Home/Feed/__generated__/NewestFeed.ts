@@ -51,6 +51,7 @@ export interface NewestFeed_viewer_recommendation_feed_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface NewestFeed_viewer_recommendation_feed_edges {
@@ -84,4 +85,5 @@ export interface NewestFeedVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

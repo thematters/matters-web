@@ -119,6 +119,7 @@ export interface ArticleDetail_article_relatedArticles_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface ArticleDetail_article_relatedArticles_edges {
@@ -175,4 +176,5 @@ export interface ArticleDetailVariables {
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
   hasDigestTagArticleCount?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }
