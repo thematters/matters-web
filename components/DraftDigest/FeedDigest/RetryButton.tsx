@@ -21,7 +21,7 @@ const RetryButton = ({ id }: { id: string }) => {
       optimisticResponse={{
         retryPublish: {
           id,
-          scheduledAt: null,
+          scheduledAt: new Date(Date.now() + 1000 * 60 * 2).toISOString(),
           publishState: 'pending',
           __typename: 'Draft'
         }

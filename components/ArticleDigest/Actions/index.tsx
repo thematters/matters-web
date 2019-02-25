@@ -78,7 +78,9 @@ const Actions = ({
       )}
 
       {hasBookmark && 'createdAt' in article && (
-        <DateTime date={article.createdAt} />
+        <span className="space-left">
+          <DateTime date={article.createdAt} />
+        </span>
       )}
 
       <style jsx>{styles}</style>
