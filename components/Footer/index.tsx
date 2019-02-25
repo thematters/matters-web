@@ -51,7 +51,7 @@ export const Footer = () => {
       <BaseLink
         href={PATHS.MISC_GUIDE.href}
         as={PATHS.MISC_GUIDE.as}
-        text={translate({ zh_hant: '用戶指南', zh_hans: '用户指南', lang })}
+        text={translate({ zh_hant: '社區约章', zh_hans: '社区约章', lang })}
       />
       <BaseLink
         href={PATHS.MISC_TOS.href}
