@@ -33,8 +33,7 @@ const ModalLoginSwitch = () => (
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
 
-  const isAuthed = true
-
+  const isAuthed = !!user.id
   const rightClasses = classNames({
     right: true,
     me: isAuthed
@@ -79,6 +78,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
 GlobalHeader.fragments = {
   user: gql`
     fragment GlobalHeaderUser on User {
+      id
       ...MeDigestUser
     }
     ${MeDigest.fragments.user}
