@@ -18,7 +18,11 @@ import { mergeConnections } from '~/common/utils'
 import { FollowFeed } from './__generated__/FollowFeed'
 
 const FOLLOW_FEED = gql`
-  query FollowFeed($cursor: String) {
+  query FollowFeed(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       recommendation {
@@ -90,7 +94,11 @@ export default () => {
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <ArticleDigest.Feed article={node} />
+                    <ArticleDigest.Feed
+                      article={node}
+                      hasDateTime
+                      hasBookmark
+                    />
                   </li>
                 ))}
               </ul>

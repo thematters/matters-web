@@ -8,8 +8,7 @@ import { Icon, TextIcon } from '~/components'
 import { toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
 
-import { Tag as TagType } from './__generated__/Tag'
-import { TagArticleDetail } from './__generated__/TagArticleDetail'
+import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
 
 type TagSize = 'small' | 'default'
@@ -17,7 +16,7 @@ type TagSize = 'small' | 'default'
 interface TagProps {
   size?: TagSize
   type?: 'count-fixed' | 'default'
-  tag: TagType | TagArticleDetail
+  tag: DigestTag
 }
 
 /**
@@ -31,27 +30,17 @@ interface TagProps {
 
 const fragments = {
   tag: gql`
-    fragment Tag on Tag {
+    fragment DigestTag on Tag {
       id
       content
-      articles(input: { first: 0 }) {
+      articles(input: { first: 0 }) @include(if: $hasDigestTagArticleCount) {
         totalCount
       }
-    }
-  `,
-  articleDetail: gql`
-    fragment TagArticleDetail on Tag {
-      id
-      content
     }
   `
 }
 
-export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
-  size = 'default',
-  type = 'default',
-  tag
-}) => {
+export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [size]: true,

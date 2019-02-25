@@ -7,7 +7,10 @@ import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
 
 const HOME_TODAY = gql`
-  query HomeToday {
+  query HomeToday(
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       recommendation {
@@ -17,7 +20,7 @@ const HOME_TODAY = gql`
       }
     }
   }
-  ${ArticleDigest.Feature.fragments.today}
+  ${ArticleDigest.Feature.fragments.article}
 `
 
 export default () => (
@@ -34,7 +37,12 @@ export default () => (
 
         return (
           <>
-            <ArticleDigest.Feature article={data.viewer.recommendation.today} />
+            <ArticleDigest.Feature
+              article={data.viewer.recommendation.today}
+              hasAuthor
+              hasDateTime
+              hasBookmark
+            />
           </>
         )
       }}

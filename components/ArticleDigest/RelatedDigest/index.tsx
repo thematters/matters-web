@@ -6,7 +6,7 @@ import { Title } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import Actions from '../Actions'
+import Actions, { ActionsControls } from '../Actions'
 import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
 import styles from './styles.css'
 
@@ -22,13 +22,18 @@ const fragments = {
         id
         userName
       }
-      ...RelatedDigestActionsArticle
+      ...DigestActionsArticle
     }
-    ${Actions.fragments.relatedDigest}
+    ${Actions.fragments.article}
   `
 }
 
-const RelatedDigest = ({ article }: { article: RelatedDigestArticle }) => {
+const RelatedDigest = ({
+  article,
+  ...actionControls
+}: {
+  article: RelatedDigestArticle
+} & ActionsControls) => {
   const { cover, author, slug, mediaHash, title } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -55,7 +60,7 @@ const RelatedDigest = ({ article }: { article: RelatedDigestArticle }) => {
               <Title type="sidebar" is="h3">
                 {title}
               </Title>
-              <Actions article={article} type="sidebar" />
+              <Actions article={article} type="sidebar" {...actionControls} />
             </div>
 
             {cover && (

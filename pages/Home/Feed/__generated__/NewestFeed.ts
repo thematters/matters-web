@@ -82,4 +82,6 @@ export interface NewestFeed {
 
 export interface NewestFeedVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

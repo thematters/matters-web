@@ -39,10 +39,16 @@ export interface ArticleDetail_article_author {
   isFollowee: boolean;
 }
 
+export interface ArticleDetail_article_tags_articles {
+  __typename: "ArticleConnection";
+  totalCount: number;
+}
+
 export interface ArticleDetail_article_tags {
   __typename: "Tag";
   id: string;
   content: string;
+  articles: ArticleDetail_article_tags_articles;
 }
 
 export interface ArticleDetail_article_appreciators_edges_node {
@@ -80,6 +86,14 @@ export interface ArticleDetail_article_relatedArticles_edges_node_author {
   __typename: "User";
   id: string;
   userName: string | null;
+  /**
+   * Display name on profile
+   */
+  displayName: string | null;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface ArticleDetail_article_relatedArticles_edges_node_comments {
@@ -95,11 +109,16 @@ export interface ArticleDetail_article_relatedArticles_edges_node {
   cover: any | null;
   mediaHash: string | null;
   author: ArticleDetail_article_relatedArticles_edges_node_author;
+  createdAt: any;
   /**
    * MAT recieved for this article
    */
   MAT: number;
   comments: ArticleDetail_article_relatedArticles_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface ArticleDetail_article_relatedArticles_edges {
@@ -153,4 +172,7 @@ export interface ArticleDetail {
 
 export interface ArticleDetailVariables {
   mediaHash: string;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
+  hasDigestTagArticleCount?: boolean | null;
 }

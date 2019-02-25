@@ -10,6 +10,14 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node_author {
   __typename: "User";
   id: string;
   userName: string | null;
+  /**
+   * Display name on profile
+   */
+  displayName: string | null;
+  /**
+   * URL for avatar
+   */
+  avatar: any | null;
 }
 
 export interface SidebarTopics_viewer_recommendation_topics_edges_node_comments {
@@ -22,13 +30,19 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node {
   id: string;
   title: string;
   slug: string;
+  cover: any | null;
   author: SidebarTopics_viewer_recommendation_topics_edges_node_author;
   mediaHash: string | null;
+  createdAt: any;
   /**
    * MAT recieved for this article
    */
   MAT: number;
   comments: SidebarTopics_viewer_recommendation_topics_edges_node_comments;
+  /**
+   * Viewer has subscribed
+   */
+  subscribed: boolean;
 }
 
 export interface SidebarTopics_viewer_recommendation_topics_edges {
@@ -55,4 +69,10 @@ export interface SidebarTopics_viewer {
 
 export interface SidebarTopics {
   viewer: SidebarTopics_viewer | null;
+}
+
+export interface SidebarTopicsVariables {
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestCover?: boolean | null;
 }

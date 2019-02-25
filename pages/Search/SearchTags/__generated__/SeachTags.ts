@@ -51,4 +51,5 @@ export interface SeachTagsVariables {
   first: number;
   key: string;
   cursor?: string | null;
+  hasDigestTagArticleCount?: boolean | null;
 }

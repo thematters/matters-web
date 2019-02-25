@@ -9,7 +9,11 @@ import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
 
 const SIDEBAR_TOPICS = gql`
-  query SidebarTopics {
+  query SidebarTopics(
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionDateTime: Boolean = false
+    $hasArticleDigestCover: Boolean = false
+  ) {
     viewer {
       id
       recommendation {
@@ -17,14 +21,14 @@ const SIDEBAR_TOPICS = gql`
           edges {
             cursor
             node {
-              ...TopicsDigestArticle
+              ...SidebarDigestArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.topics}
+  ${ArticleDigest.Sidebar.fragments.article}
 `
 
 export default () => (

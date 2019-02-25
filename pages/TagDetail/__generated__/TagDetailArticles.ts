@@ -85,4 +85,6 @@ export interface TagDetailArticles {
 export interface TagDetailArticlesVariables {
   id: string;
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }
