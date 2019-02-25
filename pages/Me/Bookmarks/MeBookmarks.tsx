@@ -16,7 +16,11 @@ import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 import EmptyBookmarks from './EmptyBookmarks'
 
 const ME_BOOKMARK_FEED = gql`
-  query MeBookmarkFeed($cursor: String) {
+  query MeBookmarkFeed(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       subscriptions(input: { first: 10, after: $cursor }) {

@@ -16,7 +16,11 @@ import { MeArticleFeed } from './__generated__/MeArticleFeed'
 import EmptyArticles from './EmptyArticles'
 
 const ME_ARTICLES_FEED = gql`
-  query MeArticleFeed($cursor: String) {
+  query MeArticleFeed(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       articles(input: { first: 10, after: $cursor }) {

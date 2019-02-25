@@ -82,4 +82,6 @@ export interface FollowFeed {
 
 export interface FollowFeedVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

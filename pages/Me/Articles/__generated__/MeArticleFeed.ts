@@ -80,4 +80,6 @@ export interface MeArticleFeed {
 
 export interface MeArticleFeedVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

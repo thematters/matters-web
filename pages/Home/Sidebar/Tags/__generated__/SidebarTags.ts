@@ -43,3 +43,7 @@ export interface SidebarTags_viewer {
 export interface SidebarTags {
   viewer: SidebarTags_viewer | null;
 }
+
+export interface SidebarTagsVariables {
+  hasDigestTagArticleCount?: boolean | null;
+}

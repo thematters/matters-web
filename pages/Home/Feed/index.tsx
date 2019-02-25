@@ -39,7 +39,11 @@ const feedFragment = gql`
 
 const queries: { [key: string]: any } = {
   hottest: gql`
-    query HottestFeed($cursor: String) {
+    query HottestFeed(
+      $cursor: String
+      $hasArticleDigestActionAuthor: Boolean = true
+      $hasArticleDigestActionDateTime: Boolean = true
+    ) {
       viewer {
         id
         recommendation {
@@ -52,7 +56,11 @@ const queries: { [key: string]: any } = {
     ${feedFragment}
   `,
   newest: gql`
-    query NewestFeed($cursor: String) {
+    query NewestFeed(
+      $cursor: String
+      $hasArticleDigestActionAuthor: Boolean = true
+      $hasArticleDigestActionDateTime: Boolean = true
+    ) {
       viewer {
         id
         recommendation {
@@ -128,7 +136,11 @@ export default () => {
                         {edges.map(
                           ({ node, cursor }: { node: any; cursor: any }) => (
                             <li key={cursor}>
-                              <ArticleDigest.Feed article={node} />
+                              <ArticleDigest.Feed
+                                article={node}
+                                hasDateTime
+                                hasBookmark
+                              />
                             </li>
                           )
                         )}

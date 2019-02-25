@@ -17,7 +17,12 @@ import { getQuery, mergeConnections } from '~/common/utils'
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
 
 const USER_ARTICLES_FEED = gql`
-  query UserArticleFeed($userName: String!, $cursor: String) {
+  query UserArticleFeed(
+    $userName: String!
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     user(input: { userName: $userName }) {
       id
       displayName

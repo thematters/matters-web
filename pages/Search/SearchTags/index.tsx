@@ -19,7 +19,12 @@ import { SeachTags } from './__generated__/SeachTags'
 import styles from './styles.css'
 
 const SEARCH_TAGS = gql`
-  query SeachTags($first: Int!, $key: String!, $cursor: String) {
+  query SeachTags(
+    $first: Int!
+    $key: String!
+    $cursor: String
+    $hasDigestTagArticleCount: Boolean = true
+  ) {
     search(input: { key: $key, type: Tag, first: $first, after: $cursor }) {
       pageInfo {
         startCursor
@@ -30,7 +35,7 @@ const SEARCH_TAGS = gql`
         cursor
         node {
           ... on Tag {
-            ...Tag
+            ...DigestTag
           }
         }
       }

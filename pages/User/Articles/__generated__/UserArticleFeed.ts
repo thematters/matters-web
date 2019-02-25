@@ -85,4 +85,6 @@ export interface UserArticleFeed {
 export interface UserArticleFeedVariables {
   userName: string;
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

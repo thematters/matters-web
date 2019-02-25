@@ -19,7 +19,7 @@ import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
 const ALL_TAGS = gql`
-  query AllTags($cursor: String) {
+  query AllTags($cursor: String, $hasDigestTagArticleCount: Boolean = true) {
     viewer {
       id
       recommendation {
@@ -32,7 +32,7 @@ const ALL_TAGS = gql`
           edges {
             cursor
             node {
-              ...Tag
+              ...DigestTag
             }
           }
         }

@@ -6,58 +6,37 @@ import { UserDigest } from '~/components/UserDigest'
 
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
-import { FeatureDigestActionsArticle } from './__generated__/FeatureDigestActionsArticle'
-import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
-import { RelatedDigestActionsArticle } from './__generated__/RelatedDigestActionsArticle'
-import { SidebarDigestActionsArticle } from './__generated__/SidebarDigestActionsArticle'
+import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
 import styles from './styles.css'
 
 type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
+export interface ActionsControls {
+  hasAuthor?: boolean
+  hasDateTime?: boolean
+  hasBookmark?: boolean
+}
+type ActionsProps = {
+  article: DigestActionsArticle
+  type: ActionsType
+} & ActionsControls
 
 const fragments = {
-  featureDigest: gql`
-    fragment FeatureDigestActionsArticle on Article {
+  article: gql`
+    fragment DigestActionsArticle on Article {
       author {
-        ...UserDigestMiniUser
+        ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
       }
       createdAt
       ...MATArticle
       ...CommentCountArticle
-      ...BookmarkArticle
+      ...BookmarkArticle @include(if: $hasArticleDigestActionDateTime)
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
     ${BookmarkButton.fragments.article}
-  `,
-  feedDigest: gql`
-    fragment FeedDigestActionsArticle on Article {
-      createdAt
-      ...MATArticle
-      ...CommentCountArticle
-      ...BookmarkArticle
-    }
-    ${MAT.fragments.article}
-    ${CommentCount.fragments.article}
-    ${BookmarkButton.fragments.article}
-  `,
-  sidebarDigest: gql`
-    fragment SidebarDigestActionsArticle on Article {
-      ...MATArticle
-      ...CommentCountArticle
-    }
-    ${MAT.fragments.article}
-    ${CommentCount.fragments.article}
-  `,
-  relatedDigest: gql`
-    fragment RelatedDigestActionsArticle on Article {
-      ...MATArticle
-      ...CommentCountArticle
-    }
-    ${MAT.fragments.article}
-    ${CommentCount.fragments.article}
   `
 }
 
@@ -71,23 +50,16 @@ const IconDotDivider = () => (
 
 const Actions = ({
   article,
-  type
-}: {
-  article:
-    | FeatureDigestActionsArticle
-    | FeedDigestActionsArticle
-    | SidebarDigestActionsArticle
-    | RelatedDigestActionsArticle
-  type: ActionsType
-}) => {
-  const isShowUserDigest = type === 'feature'
-  const isShowDateTime = ['feature', 'feed'].indexOf(type) >= 0
-  const isShowBookmark = ['feature', 'feed'].indexOf(type) >= 0
+  type,
+  hasAuthor,
+  hasDateTime,
+  hasBookmark
+}: ActionsProps) => {
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'
 
   return (
     <footer className="actions">
-      {isShowUserDigest && 'author' in article && (
+      {hasAuthor && 'author' in article && (
         <span className="space-right">
           <UserDigest.Mini user={article.author} />
         </span>
@@ -98,17 +70,15 @@ const Actions = ({
       <IconDotDivider />
       <CommentCount article={article} size={size} />
 
-      {isShowBookmark && 'subscribed' in article && (
+      {hasDateTime && 'subscribed' in article && (
         <>
           <IconDotDivider />
           <BookmarkButton article={article} />
         </>
       )}
 
-      {isShowDateTime && 'createdAt' in article && (
-        <span className="space-left">
-          <DateTime date={article.createdAt} />
-        </span>
+      {hasBookmark && 'createdAt' in article && (
+        <DateTime date={article.createdAt} />
       )}
 
       <style jsx>{styles}</style>

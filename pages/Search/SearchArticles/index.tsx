@@ -19,7 +19,13 @@ import ViewAll from '../ViewAll'
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`
-  query SeachArticles($key: String!, $first: Int!, $cursor: String) {
+  query SeachArticles(
+    $key: String!
+    $first: Int!
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     search(input: { key: $key, type: Article, first: $first, after: $cursor }) {
       pageInfo {
         startCursor
@@ -112,7 +118,7 @@ const SearchArticles = ({
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node} />
+                  <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
                 </li>
               ))}
             </ul>

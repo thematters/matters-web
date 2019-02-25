@@ -87,4 +87,6 @@ export interface MeHistoryFeed {
 
 export interface MeHistoryFeedVariables {
   cursor?: string | null;
+  hasArticleDigestActionAuthor?: boolean | null;
+  hasArticleDigestActionDateTime?: boolean | null;
 }

@@ -16,7 +16,11 @@ import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 import EmptyHistory from './EmptyHistory'
 
 const ME_HISTORY_FEED = gql`
-  query MeHistoryFeed($cursor: String) {
+  query MeHistoryFeed(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       activity {
