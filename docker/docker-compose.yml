@@ -6,10 +6,13 @@ services:
     build:
       context: ../
       dockerfile: docker/Dockerfile
-    command: ['npm', 'run', 'dev']
+    command: bash -c 'npm i && npm run dev'
     env_file: ../.env
     volumes:
       - ..:/var/app
-      - /var/app/node_modules
+      - node_modules:/var/app/node_modules
     ports:
       - '3000:3000'
+
+volumes:
+  node_modules:
