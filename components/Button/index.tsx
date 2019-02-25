@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './styles.css'
 
 type ButtonSize = 'small' | 'default' | 'large'
-type ButtonSpacing = 'xtight' | 'tight' | 'default' | 'loose'
+type ButtonSpacing = 'none' | 'xtight' | 'tight' | 'default' | 'loose'
 type ButtonHTMLType = 'submit' | 'reset' | 'button'
 type ButtonShape = 'circle'
 type ButtonBgColor =
