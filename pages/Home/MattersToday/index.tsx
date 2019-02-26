@@ -11,6 +11,7 @@ const HOME_TODAY = gql`
   query HomeToday(
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
       id

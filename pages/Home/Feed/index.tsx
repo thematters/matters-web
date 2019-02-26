@@ -43,6 +43,7 @@ const queries: { [key: string]: any } = {
       $cursor: String
       $hasArticleDigestActionAuthor: Boolean = true
       $hasArticleDigestActionDateTime: Boolean = true
+      $hasArticleDigestActionTopicScore: Boolean = false
     ) {
       viewer {
         id
@@ -60,6 +61,7 @@ const queries: { [key: string]: any } = {
       $cursor: String
       $hasArticleDigestActionAuthor: Boolean = true
       $hasArticleDigestActionDateTime: Boolean = true
+      $hasArticleDigestActionTopicScore: Boolean = false
     ) {
       viewer {
         id

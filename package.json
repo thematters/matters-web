@@ -27,10 +27,11 @@
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "gen:schema": "apollo service:download schema.json --endpoint=https://server-develop.matters.news/",
     "gen:type": "apollo client:codegen __generated__ --target=typescript  --localSchemaFile=schema.json --includes='+(pages|components)/**/*.{ts,tsx}'",
-    "gen:watch": "npm run gen:type -- --watch"
+    "gen:watch": "npm run gen:type -- --watch",
+    "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf"
   },
   "dependencies": {
-    "@tippy.js/react": "^2.1.0",
+    "@tippy.js/react": "^2.0.2",
     "apollo-cache-inmemory": "^1.4.3",
     "apollo-client": "^2.4.13",
     "apollo-link-http": "^1.5.11",

@@ -25,6 +25,7 @@ const SEARCH_ARTICLES = gql`
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     search(input: { key: $key, type: Article, first: $first, after: $cursor }) {
       pageInfo {

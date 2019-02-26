@@ -23,6 +23,7 @@ const ALL_TOPICS = gql`
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = true
   ) {
     viewer {
       id
@@ -100,6 +101,7 @@ const Topics = () => (
                         article={node}
                         hasDateTime
                         hasBookmark
+                        hasTopicScore
                       />
                     </li>
                   ))}

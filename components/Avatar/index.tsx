@@ -7,6 +7,7 @@ import { AvatarUser } from './__generated__/AvatarUser'
 import styles from './styles.css'
 
 type AvatarSize =
+  | 'xxxsmall'
   | 'xxsmall'
   | 'xsmall'
   | 'small'

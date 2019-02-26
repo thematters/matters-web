@@ -1,10 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { analytics } from '~/common/utils'
 
@@ -32,8 +33,8 @@ const ModalLoginSwitch = () => (
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
-
-  const isAuthed = !!user.id
+  const viewer = useContext(ViewerContext)
+  const isAuthed = !!viewer.id
   const rightClasses = classNames({
     right: true,
     me: isAuthed
