@@ -21,9 +21,9 @@ type ROUTE_KEY =
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
-  | 'ME_INVITATION'
+  | 'ME_INVITATIONS'
   | 'ME_WALLET'
-  | 'ME_NOTIFICATION'
+  | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_WALLET'
@@ -121,7 +121,7 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
 
   // Me
   {
-    key: 'ME_INVITATION',
+    key: 'ME_INVITATIONS',
     href: '/Me/Invitations',
     as: '/me/invitations'
   },
@@ -131,9 +131,9 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     as: '/me/wallet'
   },
   {
-    key: 'ME_NOTIFICATION',
+    key: 'ME_NOTIFICATIONS',
     href: '/Me/Notifications',
-    as: '/me/notification'
+    as: '/me/notifications'
   },
 
   // Settings

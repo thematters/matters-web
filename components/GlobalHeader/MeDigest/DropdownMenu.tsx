@@ -76,7 +76,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link href={PATHS.ME_INVITATION.href} as={PATHS.ME_INVITATION.as}>
+        <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={<Icon src={ICON_GIFT} size="small" />}
