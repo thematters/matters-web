@@ -31,7 +31,7 @@ export default () => (
       {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
         const article = _get(data, 'viewer.recommendation.today')
         if (loading || !article) {
-          return <Placeholder.Sidebar />
+          return <Placeholder.MattersToday />
         }
 
         if (error) {

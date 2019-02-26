@@ -4,7 +4,14 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Avatar, Error, Icon, TextIcon, Translate } from '~/components'
+import {
+  Avatar,
+  Error,
+  Icon,
+  Placeholder,
+  TextIcon,
+  Translate
+} from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -81,7 +88,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
   return (
     <section className="container">
       <div className="content-container l-row">
-        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2 content">
+        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <Query
             query={type === 'me' ? ME_PROFILE : USER_PROFILE}
             variables={type === 'me' ? {} : { userName }}
@@ -92,11 +99,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
               error
             }: QueryResult & { data: UserProfileUser }) => {
               if (loading) {
-                return (
-                  <section className="content">
-                    <Avatar size="xlarge" />
-                  </section>
-                )
+                return <Placeholder.UserProfile />
               }
 
               if (error) {
