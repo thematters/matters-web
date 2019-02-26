@@ -11,7 +11,7 @@ const EmptyFollowers = () => (
         size={'xxlarge'}
       />
     }
-    description={<Translate zh_hant="暂无追踪者" zh_hans="暂无追踪者" />}
+    description={<Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />}
   />
 )
 

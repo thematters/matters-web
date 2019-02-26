@@ -21,8 +21,8 @@ const USER_ARTICLES_FEED = gql`
   query UserArticleFeed(
     $userName: String!
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     user(input: { userName: $userName }) {
@@ -101,7 +101,11 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <ArticleDigest.Feed article={node} />
+                    <ArticleDigest.Feed
+                      article={node}
+                      hasBookmark
+                      hasDateTime
+                    />
                   </li>
                 ))}
               </ul>

@@ -20,8 +20,8 @@ import { FollowFeed } from './__generated__/FollowFeed'
 const FOLLOW_FEED = gql`
   query FollowFeed(
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {

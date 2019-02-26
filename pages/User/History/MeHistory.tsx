@@ -18,8 +18,8 @@ import EmptyHistory from './EmptyHistory'
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed(
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
@@ -92,7 +92,11 @@ export default () => {
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node.article} />
+                  <ArticleDigest.Feed
+                    article={node.article}
+                    hasBookmark
+                    hasDateTime
+                  />
                 </li>
               ))}
             </ul>

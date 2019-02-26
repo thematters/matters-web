@@ -23,8 +23,8 @@ const SEARCH_ARTICLES = gql`
     $key: String!
     $first: Int!
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     search(input: { key: $key, type: Article, first: $first, after: $cursor }) {

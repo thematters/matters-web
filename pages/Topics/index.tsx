@@ -21,8 +21,8 @@ import { AllTopics } from './__generated__/AllTopics'
 const ALL_TOPICS = gql`
   query AllTopics(
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = true
   ) {
     viewer {

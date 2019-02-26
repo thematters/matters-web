@@ -30,7 +30,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
   return (
     <Tabs>
       <Tabs.Tab>
-        <Link {...(isMe ? PATHS.ME_ARTICLES : userPath)}>
+        <Link {...userPath}>
           <a>
             <Translate zh_hant="返回" zh_hans="返回" />
           </a>

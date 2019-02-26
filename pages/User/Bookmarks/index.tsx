@@ -1,20 +1,20 @@
 import { Head, UserProfile } from '~/components'
 
-import MeTabs from '../MeTabs'
-import MeComments from './MeComments'
+import UserTabs from '../UserTabs'
+import MeBookmarks from './MeBookmarks'
 
 export default () => (
   <main>
-    <Head title={{ zh_hant: '我的評論', zh_hans: '我的评论' }} />
+    <Head title={{ zh_hant: '我的收藏', zh_hans: '我的收藏' }} />
 
     <UserProfile />
 
     <section className="l-row">
       <div className="l-col-4 l-col-md-1 l-col-lg-2">
-        <MeTabs />
+        <UserTabs />
       </div>
       <div className="l-col-4 l-col-md-6 l-col-lg-8">
-        <MeComments />
+        <MeBookmarks />
       </div>
     </section>
   </main>

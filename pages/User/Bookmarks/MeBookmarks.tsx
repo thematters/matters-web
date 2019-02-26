@@ -12,19 +12,19 @@ import {
 
 import { mergeConnections } from '~/common/utils'
 
-import { MeArticleFeed } from './__generated__/MeArticleFeed'
-import EmptyArticles from './EmptyArticles'
+import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import EmptyBookmarks from './EmptyBookmarks'
 
-const ME_ARTICLES_FEED = gql`
-  query MeArticleFeed(
+const ME_BOOKMARK_FEED = gql`
+  query MeBookmarkFeed(
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
       id
-      articles(input: { first: 10, after: $cursor }) {
+      subscriptions(input: { first: 10, after: $cursor }) {
         pageInfo {
           startCursor
           endCursor
@@ -44,13 +44,13 @@ const ME_ARTICLES_FEED = gql`
 
 export default () => {
   return (
-    <Query query={ME_ARTICLES_FEED}>
+    <Query query={ME_BOOKMARK_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: MeArticleFeed }) => {
+      }: QueryResult & { data: MeBookmarkFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -59,7 +59,7 @@ export default () => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'viewer.articles'
+        const connectionPath = 'viewer.subscriptions'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -74,8 +74,8 @@ export default () => {
               })
           })
 
-        if (edges.length <= 0) {
-          return <EmptyArticles />
+        if (edges <= 0) {
+          return <EmptyBookmarks />
         }
 
         return (
@@ -88,7 +88,7 @@ export default () => {
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node} />
+                  <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
                 </li>
               ))}
             </ul>

@@ -12,7 +12,7 @@ const EmptyFollowers = () => (
       />
     }
     description={
-      <Translate zh_hant="暫無追蹤的作者" zh_hans="暂无追踪的作者" />
+      <Translate zh_hant="還沒有追蹤任何人" zh_hans="还没有追踪任何人" />
     }
   />
 )

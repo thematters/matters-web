@@ -15,20 +15,18 @@ type ROUTE_KEY =
   | 'TAG_DETAIL'
   | 'USER_ARTICLES'
   | 'USER_COMMENTS'
+  | 'USER_DRAFTS'
+  | 'USER_BOOKMARKS'
+  | 'USER_HISTORY'
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
-  | 'ME_ARTICLES'
-  | 'ME_COMMENTS'
-  | 'ME_BOOKMARKS'
-  | 'ME_HISTORY'
   | 'ME_INVITATION'
   | 'ME_WALLET'
   | 'ME_NOTIFICATION'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_WALLET'
-  | 'ME_DRAFTS'
   | 'ME_DRAFT_DETAIL'
   | 'EDITOR'
   | 'AUTH_LOGIN'
@@ -89,6 +87,21 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     as: '/@:userName/comments'
   },
   {
+    key: 'USER_DRAFTS',
+    href: '/User/Drafts',
+    as: '/@:userName/drafts'
+  },
+  {
+    key: 'USER_BOOKMARKS',
+    href: '/User/Bookmarks',
+    as: '/@:userName/bookmarks'
+  },
+  {
+    key: 'USER_HISTORY',
+    href: '/User/History',
+    as: '/@:userName/history'
+  },
+  {
     key: 'USER_FOLLOWERS',
     href: '/User/Followers',
     as: '/@:userName/followers'
@@ -107,26 +120,6 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
   },
 
   // Me
-  {
-    key: 'ME_ARTICLES',
-    href: '/Me/Articles',
-    as: '/me'
-  },
-  {
-    key: 'ME_COMMENTS',
-    href: '/Me/Comments',
-    as: '/me/comments'
-  },
-  {
-    key: 'ME_BOOKMARKS',
-    href: '/Me/Bookmarks',
-    as: '/me/bookmarks'
-  },
-  {
-    key: 'ME_HISTORY',
-    href: '/Me/History',
-    as: '/me/history'
-  },
   {
     key: 'ME_INVITATION',
     href: '/Me/Invitations',
@@ -161,11 +154,6 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
   },
 
   // Draft
-  {
-    key: 'ME_DRAFTS',
-    href: '/Me/Drafts',
-    as: '/me/drafts'
-  },
   {
     key: 'ME_DRAFT_DETAIL',
     href: '/Me/DraftDetail',

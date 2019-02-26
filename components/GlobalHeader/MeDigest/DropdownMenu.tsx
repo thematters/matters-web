@@ -5,9 +5,10 @@ import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
+import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 import ICON_GIFT from '~/static/icons/gift.svg'
 import ICON_LOGOUT from '~/static/icons/logout.svg'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg'
@@ -17,11 +18,20 @@ import ICON_SETTINGS from '~/static/icons/settings.svg'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
+  const userPath = toPath({
+    page: 'userProfile',
+    userName: viewer.userName || ''
+  })
+  const userHistoryPath = toPath({
+    page: 'userHistory',
+    userName: viewer.userName || ''
+  })
 
   return (
     <Menu>
       <Menu.Item>
-        <Link href={PATHS.ME_ARTICLES.href} as={PATHS.ME_ARTICLES.as}>
+        <Link {...userPath}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={<Icon src={ICON_ME} size="small" />}
@@ -51,7 +61,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link href={PATHS.ME_HISTORY.href} as={PATHS.ME_HISTORY.as}>
+        <Link {...userHistoryPath}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={<Icon src={ICON_READING_HISTORY} size="small" />}

@@ -10,7 +10,7 @@ import styles from './styles.css'
 const HOME_TODAY = gql`
   query HomeToday(
     $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
