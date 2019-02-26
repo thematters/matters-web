@@ -3,11 +3,7 @@ import ContentLoader from 'react-content-loader'
 
 import { Responsive } from '~/components'
 
-const LoaderProps = {
-  ariaLabel: false,
-  primaryColor: '#dddddd',
-  secondaryColor: '#f6f6f6'
-}
+import { LoaderProps } from './utils'
 
 const XS = () => (
   <ContentLoader {...LoaderProps} width={343} height={533}>
