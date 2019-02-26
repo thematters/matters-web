@@ -13,8 +13,9 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
     <Button
       size="small"
       is="span"
+      bgColor="transparent"
       outlineColor="grey"
-      style={{ borderWidth: 1, width: '4rem' }}
+      style={{ borderWidth: 1, width: '4rem', lineHeight: '18px', height: 20 }}
     >
       {user.isFollowee ? (
         <Translate zh_hant="互相追蹤" zh_hans="互相追踪" />

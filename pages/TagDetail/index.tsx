@@ -26,8 +26,8 @@ const TAG_DETAIL = gql`
   query TagDetailArticles(
     $id: ID!
     $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     node(input: { id: $id }) {

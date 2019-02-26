@@ -41,8 +41,8 @@ const queries: { [key: string]: any } = {
   hottest: gql`
     query HottestFeed(
       $cursor: String
-      $hasArticleDigestActionAuthor: Boolean = true
-      $hasArticleDigestActionDateTime: Boolean = true
+      $hasArticleDigestActionAuthor: Boolean = false
+      $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
     ) {
       viewer {
@@ -59,8 +59,8 @@ const queries: { [key: string]: any } = {
   newest: gql`
     query NewestFeed(
       $cursor: String
-      $hasArticleDigestActionAuthor: Boolean = true
-      $hasArticleDigestActionDateTime: Boolean = true
+      $hasArticleDigestActionAuthor: Boolean = false
+      $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
     ) {
       viewer {

@@ -33,7 +33,7 @@ const fragments = {
       createdAt
       ...MATArticle
       ...CommentCountArticle
-      ...BookmarkArticle @include(if: $hasArticleDigestActionDateTime)
+      ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
       ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
     }
     ${UserDigest.Mini.fragments.user}
@@ -75,7 +75,7 @@ const Actions = ({
       <IconDotDivider />
       <CommentCount article={article} size={size} />
 
-      {hasDateTime && 'subscribed' in article && (
+      {hasBookmark && 'subscribed' in article && (
         <>
           <IconDotDivider />
           <BookmarkButton article={article} />
@@ -83,10 +83,13 @@ const Actions = ({
       )}
 
       {hasTopicScore && 'topicScore' in article && (
-        <TopicScore article={article} hasArrowIcon={type === 'sidebar'} />
+        <>
+          <IconDotDivider />
+          <TopicScore article={article} hasArrowIcon={type === 'sidebar'} />
+        </>
       )}
 
-      {hasBookmark && 'createdAt' in article && (
+      {hasDateTime && 'createdAt' in article && (
         <span className="space-left">
           <DateTime date={article.createdAt} />
         </span>

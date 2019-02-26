@@ -20,7 +20,7 @@ const ARTICLE_DETAIL = gql`
   query ArticleDetail(
     $mediaHash: String!
     $hasArticleDigestActionAuthor: Boolean = false
-    $hasArticleDigestActionDateTime: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = false
     $hasDigestTagArticleCount: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
