@@ -23,6 +23,11 @@
 .u-link-green {
   color: var(--color-matters-green);
 
+  &:link,
+  &:visited {
+    color: var(--color-matters-green);
+  }
+
   &:hover,
   &:active,
   &:focus {
