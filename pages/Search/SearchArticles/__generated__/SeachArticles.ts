@@ -55,6 +55,7 @@ export interface SeachArticles_search_edges_node_Article {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export type SeachArticles_search_edges_node = SeachArticles_search_edges_node_User | SeachArticles_search_edges_node_Article;
@@ -81,4 +82,5 @@ export interface SeachArticlesVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

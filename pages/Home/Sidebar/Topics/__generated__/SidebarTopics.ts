@@ -43,6 +43,7 @@ export interface SidebarTopics_viewer_recommendation_topics_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface SidebarTopics_viewer_recommendation_topics_edges {
@@ -75,4 +76,5 @@ export interface SidebarTopicsVariables {
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
   hasArticleDigestCover?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }
