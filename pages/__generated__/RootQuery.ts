@@ -38,7 +38,6 @@ export interface RootQuery_viewer_info {
 export interface RootQuery_viewer {
   __typename: "User";
   id: string;
-  uuid: any;
   userName: string | null;
   /**
    * Display name on profile

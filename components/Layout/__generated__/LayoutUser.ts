@@ -38,7 +38,6 @@ export interface LayoutUser_info {
 export interface LayoutUser {
   __typename: "User";
   id: string;
-  uuid: any;
   userName: string | null;
   /**
    * Display name on profile

@@ -24,7 +24,6 @@ export interface ViewerUser_status {
 export interface ViewerUser {
   __typename: "User";
   id: string;
-  uuid: any;
   userName: string | null;
   /**
    * Display name on profile

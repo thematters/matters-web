@@ -7,7 +7,6 @@ export const ViewerUserFragment = {
   user: gql`
     fragment ViewerUser on User {
       id
-      uuid
       userName
       displayName
       avatar
