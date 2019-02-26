@@ -1,0 +1,8 @@
+section {
+  height: 100%;
+
+  & :global(nav) {
+    position: sticky;
+    top: calc(var(--global-header-height) + var(--spacing-x-loose));
+  }
+}
