@@ -25,7 +25,9 @@
 
   &:hover,
   &:active,
-  &:focus {
+  &:focus,
+  &:link,
+  &:visited {
     color: var(--color-matters-green-hover);
   }
 }
