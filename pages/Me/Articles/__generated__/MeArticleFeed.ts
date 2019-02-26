@@ -51,6 +51,7 @@ export interface MeArticleFeed_viewer_articles_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface MeArticleFeed_viewer_articles_edges {
@@ -82,4 +83,5 @@ export interface MeArticleFeedVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

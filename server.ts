@@ -8,13 +8,13 @@ import express from 'express'
 import 'module-alias/register'
 import next from 'next'
 
+import { ROUTES } from '~/common/enums'
+
 // load environment variables from .env
 const dotEnvResult = dotenv.config()
 if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
-
-import { ROUTES } from '~/common/enums'
 
 const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 3000

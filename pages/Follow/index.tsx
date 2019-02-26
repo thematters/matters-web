@@ -12,10 +12,10 @@ const ME_FOLLOW = gql`
   query MeFollow {
     viewer {
       id
-      ...FolloweeCountViewer
+      ...FolloweeCountUser
     }
   }
-  ${PickAuthors.fragments.followeeCount}
+  ${PickAuthors.fragments.user}
 `
 
 export default () => (

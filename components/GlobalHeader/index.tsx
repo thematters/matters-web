@@ -50,7 +50,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           </section>
 
           <section className={rightClasses}>
-            {isAuthed ? (
+            {isAuthed && user ? (
               <>
                 <Responsive.MediumUp>
                   {(match: boolean) =>

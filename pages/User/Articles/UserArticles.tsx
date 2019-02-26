@@ -23,6 +23,7 @@ const USER_ARTICLES_FEED = gql`
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     user(input: { userName: $userName }) {
       id

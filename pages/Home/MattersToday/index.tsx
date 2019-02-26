@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Error, Placeholder } from '~/components'
@@ -28,7 +29,8 @@ export default () => (
   <>
     <Query query={HOME_TODAY}>
       {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
-        if (loading) {
+        const article = _get(data, 'viewer.recommendation.today')
+        if (loading || !article) {
           return <Placeholder.Sidebar />
         }
 
