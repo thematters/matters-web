@@ -43,4 +43,5 @@ export interface RelatedDigestArticle {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }

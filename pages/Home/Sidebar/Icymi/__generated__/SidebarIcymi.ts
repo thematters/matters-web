@@ -43,6 +43,7 @@ export interface SidebarIcymi_viewer_recommendation_icymi_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface SidebarIcymi_viewer_recommendation_icymi_edges {
@@ -78,4 +79,5 @@ export interface SidebarIcymiVariables {
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
   hasArticleDigestCover?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

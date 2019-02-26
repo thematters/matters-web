@@ -22,6 +22,7 @@ const ARTICLE_DETAIL = gql`
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionDateTime: Boolean = false
     $hasDigestTagArticleCount: Boolean = false
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id

@@ -51,6 +51,7 @@ export interface FeedArticleConnection_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface FeedArticleConnection_edges {

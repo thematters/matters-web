@@ -78,6 +78,9 @@
 }
 
 /* spacing */
+.spacing-none {
+  padding: 0;
+}
 .spacing-xtight {
   padding: 0 var(--spacing-x-tight);
 }

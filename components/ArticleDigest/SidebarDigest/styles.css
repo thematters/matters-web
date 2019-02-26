@@ -16,7 +16,7 @@
     padding-right: var(--spacing-default);
 
     & :global(.actions) {
-      margin-top: var(--spacing-xx-tight);
+      margin-top: var(--spacing-x-tight);
     }
   }
 }
