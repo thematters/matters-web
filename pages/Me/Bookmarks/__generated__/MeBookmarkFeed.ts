@@ -51,6 +51,7 @@ export interface MeBookmarkFeed_viewer_subscriptions_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface MeBookmarkFeed_viewer_subscriptions_edges {
@@ -79,4 +80,5 @@ export interface MeBookmarkFeedVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

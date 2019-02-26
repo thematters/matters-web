@@ -51,6 +51,7 @@ export interface MeHistoryFeed_viewer_activity_history_edges_node_article {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface MeHistoryFeed_viewer_activity_history_edges_node {
@@ -89,4 +90,5 @@ export interface MeHistoryFeedVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }
