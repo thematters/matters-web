@@ -13,6 +13,20 @@ import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
+/**
+ * This component is designed for Login from with builtin mutation.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Form.LoginForm
+ *     extraClass={[]}
+ *     purpose="modal"
+ *     submitCallback={()=> {}}
+ *   />
+ * ```
+ *
+ */
 interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
@@ -126,7 +140,6 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             handleChange={handleChange}
           />
           <div className="buttons">
-            <PasswordResetModalSwitch />
             <Button
               type="submit"
               bgColor="green"
@@ -135,6 +148,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             >
               {loginText}
             </Button>
+            {purpose === 'modal' && <PasswordResetModalSwitch />}
           </div>
         </form>
         <style jsx>{styles}</style>
