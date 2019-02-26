@@ -33,6 +33,7 @@ type ROUTE_KEY =
   | 'EDITOR'
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
+  | 'AUTH_FORGET'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -187,6 +188,11 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     key: 'AUTH_SIGNUP',
     href: '/Auth/SignUp',
     as: '/signup'
+  },
+  {
+    key: 'AUTH_FORGET',
+    href: '/Auth/Forget',
+    as: '/forget'
   },
 
   // Misc

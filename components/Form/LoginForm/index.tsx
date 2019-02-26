@@ -9,6 +9,7 @@ import { Form } from '~/components/Form'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
+import { PATHS } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -68,11 +69,27 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     }
   }
 
+  const PasswordResetRedirectButton = () => (
+    <>
+      <Button
+        is="link"
+        bgColor="transparent"
+        className="u-link-green"
+        spacing="none"
+        href={PATHS.AUTH_FORGET.href}
+        as={PATHS.AUTH_FORGET.as}
+      >
+        {translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })}？
+      </Button>
+      <style jsx>{styles}</style>
+    </>
+  )
+
   const PasswordResetModalSwitch = () => (
     <ModalSwitch modalId="resetModal">
       {(open: any) => (
         <Button
-          type="button"
+          is="button"
           bgColor="transparent"
           className="u-link-green"
           spacing="none"
@@ -149,6 +166,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
               {loginText}
             </Button>
             {purpose === 'modal' && <PasswordResetModalSwitch />}
+            {purpose === 'page' && <PasswordResetRedirectButton />}
           </div>
         </form>
         <style jsx>{styles}</style>
