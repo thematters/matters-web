@@ -23,6 +23,14 @@ type ToPathArgs =
       userName: string
     }
   | {
+      page: 'userFollowers'
+      userName: string
+    }
+  | {
+      page: 'userFollowees'
+      userName: string
+    }
+  | {
       page: 'search'
       q?: string
       type?: 'article' | 'tag' | 'user'
@@ -56,6 +64,16 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       return {
         href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/comments`
+      }
+    case 'userFollowers':
+      return {
+        href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
+        as: `/@${args.userName}/followers`
+      }
+    case 'userFollowees':
+      return {
+        href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
+        as: `/@${args.userName}/followees`
       }
     case 'search':
       const typeStr = args.type ? `&type=${args.type}` : ''

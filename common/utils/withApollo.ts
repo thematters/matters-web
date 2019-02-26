@@ -11,8 +11,10 @@ const {
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createHttpLink({
     uri: API_URL,
-    credentials: 'include',
+    // credentials: 'include',
     headers: {
+      'x-access-token':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMTQ0ODMxNGQtOGY3Zi00N2VkLWEwZjgtZTFkMjdhODNjNGEzIiwiaWF0IjoxNTUwOTMyMjY0LCJleHAiOjE1NTg3MDgyNjR9.XsxV4iaVTC8zndEBY3KwP_Jnoyo9wfDSYcJMhZW9gXc',
       ...headers
     }
   })

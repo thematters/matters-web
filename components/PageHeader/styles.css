@@ -1,7 +1,5 @@
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @mixin flex-center-space-between;
 
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-default);

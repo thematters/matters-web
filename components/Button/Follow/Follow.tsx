@@ -18,15 +18,13 @@ const FOLLOW_USER = gql`
   }
 `
 
-const IconAdd = () => (
-  <Icon
-    id={ICON_ADD.id}
-    viewBox={ICON_ADD.viewBox}
-    style={{ width: 10, height: 10 }}
-  />
-)
-
-const Follow = ({ user }: { user: FollowButtonUser }) => (
+const Follow = ({
+  user,
+  size = 'small'
+}: {
+  user: FollowButtonUser
+  size?: 'small' | 'default'
+}) => (
   <Mutation
     mutation={FOLLOW_USER}
     variables={{ id: user.id }}
@@ -44,10 +42,21 @@ const Follow = ({ user }: { user: FollowButtonUser }) => (
   >
     {(follow, { data }) => (
       <Button
-        size="small"
-        icon={<IconAdd />}
-        style={{ width: '4rem' }}
+        size={size}
+        icon={
+          <Icon
+            id={ICON_ADD.id}
+            viewBox={ICON_ADD.viewBox}
+            style={
+              size === 'small'
+                ? { width: 10, height: 10 }
+                : { width: 12, height: 12 }
+            }
+          />
+        }
+        style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
         onClick={follow}
+        bgColor="transparent"
         outlineColor="green"
       >
         <Translate zh_hant="追蹤" zh_hans="追踪" />

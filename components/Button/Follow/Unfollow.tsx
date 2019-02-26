@@ -17,7 +17,13 @@ const UNFOLLOW_USER = gql`
   }
 `
 
-const Unfollow = ({ user }: { user: FollowButtonUser }) => {
+const Unfollow = ({
+  user,
+  size = 'small'
+}: {
+  user: FollowButtonUser
+  size?: 'small' | 'default'
+}) => {
   const [hover, setHover] = useState(false)
 
   return (
@@ -38,8 +44,8 @@ const Unfollow = ({ user }: { user: FollowButtonUser }) => {
     >
       {(unfollow, { data }) => (
         <Button
-          size="small"
-          style={{ width: '4rem' }}
+          size={size}
+          style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
           onClick={unfollow}
           bgColor={hover ? 'red' : 'green'}
           onMouseEnter={() => setHover(true)}
