@@ -1,10 +1,10 @@
+import { Head, UserProfile } from '~/components'
+
 export default () => (
   <main>
-    <section className="l-row" style={{ background: '#faf7f0' }}>
-      <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <h1>User - Followees</h1>
-      </div>
-    </section>
+    <Head title={{ zh_hant: '追蹤中', zh_hans: '追踪中' }} />
+
+    <UserProfile />
 
     <section className="l-row">
       <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">

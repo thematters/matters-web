@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -16,6 +17,12 @@ import styles from './styles.css'
  *   <UserDigest.Mini user={user} />
  */
 
+interface MiniProps {
+  user: UserDigestMiniUser
+  avatarSize?: 'xxxsmall' | 'xxsmall' | 'small'
+  textWeight?: 'normal' | 'medium'
+}
+
 const fragments = {
   user: gql`
     fragment UserDigestMiniUser on User {
@@ -28,18 +35,26 @@ const fragments = {
   `
 }
 
-const Mini = ({ user }: { user: UserDigestMiniUser }) => {
+const Mini = ({
+  user,
+  avatarSize = 'xxsmall',
+  textWeight = 'normal'
+}: MiniProps) => {
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''
+  })
+  const containerClasses = classNames({
+    container: true,
+    [`text-${textWeight}`]: true
   })
 
   return (
     <>
       <section>
         <Link {...path}>
-          <a className="container">
-            <Avatar size="xxsmall" user={user} />
+          <a className={containerClasses}>
+            <Avatar size={avatarSize} user={user} />
             <span className="name">{user.displayName}</span>
           </a>
         </Link>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import styles from '~/common/styles/utils/content.css'
+import styles from '~/common/styles/utils/content.article.css'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 

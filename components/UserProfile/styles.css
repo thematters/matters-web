@@ -1,0 +1,28 @@
+.container {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: 3rem;
+  margin-top: calc(var(--spacing-loose) * -1);
+
+  background: var(--color-bg-yellow);
+
+  @media (--sm-up) {
+    padding-top: var(--spacing-x-loose);
+    padding-bottom: var(--spacing-x-loose);
+    margin-top: calc(var(--spacing-x-loose) * -1);
+  }
+}
+
+.content {
+  & :global(.avatar) {
+    /* 70px */
+    width: 4.375rem;
+    height: 4.375rem;
+
+    /* 140px */
+    @media (--sm-up) {
+      width: 8.75rem;
+      height: 8.75rem;
+    }
+  }
+}

@@ -5,6 +5,7 @@
       true,
       ["react-testing-library", "~", "tippy.js", "dotenv", "apollo-cache"]
     ],
+    "no-bitwise": false,
     "no-submodule-imports": [false],
     "jsx-boolean-value": false,
     "object-literal-sort-keys": false,

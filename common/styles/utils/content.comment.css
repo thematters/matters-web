@@ -1,8 +1,8 @@
-.content {
-  line-height: var(--line-height-article-base);
+.content-comment {
+  line-height: 1.6;
 
   & :global(> * + *) {
-    margin: var(--spacing-default) 0;
+    margin: var(--spacing-tight) 0;
   }
 
   /* Media
@@ -10,18 +10,13 @@
   & :global(img, video, audio) {
     display: block;
     margin: 0 auto;
+    max-height: 100vh;
   }
 
   /* Figure
    ========================================================================== */
   & :global(figure) {
-    margin: var(--spacing-loose) calc(var(--spacing-tight) * -1);
     text-align: center;
-
-    @media (--sm-up) {
-      margin-left: 0;
-      margin-right: 0;
-    }
 
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
@@ -41,15 +36,15 @@
    ========================================================================== */
   & :global(blockquote) {
     width: 100%;
-    padding: 0 var(--spacing-default);
-    margin: var(--spacing-loose) 0;
+    padding: 0 var(--spacing-tight);
+    margin: var(--spacing-default) 0;
 
     color: var(--color-matters-gold);
     font-size: var(--font-size-md);
     line-height: 2;
 
     @media (--sm-up) {
-      padding: 0 var(--spacing-x-loose);
+      padding: 0 var(--spacing-x-default);
     }
   }
 
@@ -57,7 +52,7 @@
    ========================================================================== */
   & :global(ul),
   & :global(ol) {
-    padding-left: var(--spacing-loose);
+    padding-left: var(--spacing-default);
   }
   & :global(li) {
     padding-left: var(--spacing-x-tight);
@@ -97,7 +92,7 @@
   & :global(h4),
   & :global(h5),
   & :global(h6) {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--spacing-default);
     line-height: var(--line-height-article-heading);
   }
 
@@ -134,7 +129,7 @@
 
     width: 10rem;
     height: 0.125rem;
-    margin: var(--spacing-loose) auto;
+    margin: var(--spacing-default) auto;
 
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);

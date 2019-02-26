@@ -4,23 +4,14 @@ footer {
 
   font-size: var(--font-size-xs);
   color: var(--color-grey);
-  line-height: 1;
 
   & > :global(* + *) {
-    position: relative;
-    margin-left: calc(var(--spacing-tight) + 2px);
-
-    &:not(time)::before {
-      content: '';
-      display: inline-block;
-
-      position: absolute;
-      top: calc(50% - 1px);
-      left: calc(-0.5rem - 2px);
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      background: var(--color-grey);
-    }
+    line-height: 1;
+  }
+  & .space-left {
+    margin-left: var(--spacing-tight);
+  }
+  & .space-right {
+    margin-right: var(--spacing-tight);
   }
 }
