@@ -30,6 +30,8 @@
         border-radius: 0.75rem;
         background-clip: padding-box;
         box-shadow: none;
+        height: 4rem;
+        min-height: 4rem;
       }
 
       @media (--sm-down) {

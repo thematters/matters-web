@@ -33,9 +33,32 @@ export enum UserState {
   onboarding = "onboarding",
 }
 
+export enum VerificationCodeType {
+  email_reset = "email_reset",
+  email_verify = "email_verify",
+  password_reset = "password_reset",
+  register = "register",
+}
+
 export enum Vote {
   down = "down",
   up = "up",
+}
+
+export interface ConfirmVerificationCodeInput {
+  email: any;
+  type: VerificationCodeType;
+  code: string;
+}
+
+export interface ResetPasswordInput {
+  password: string;
+  codeId: string;
+}
+
+export interface SendVerificationCodeInput {
+  email: any;
+  type: VerificationCodeType;
 }
 
 export interface UserLoginInput {
