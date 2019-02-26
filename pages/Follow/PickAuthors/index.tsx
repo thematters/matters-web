@@ -14,7 +14,7 @@ import {
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
-import { FolloweeCountViewer } from './__generated__/FolloweeCountViewer'
+import { FolloweeCountUser } from './__generated__/FolloweeCountUser'
 import { PickAuthors as PickAuthorsType } from './__generated__/PickAuthors'
 import styles from './styles.css'
 
@@ -66,7 +66,7 @@ const PickIntroHeader = () => {
   )
 }
 
-const PickAuthors = ({ viewer }: { viewer: FolloweeCountViewer }) => (
+const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
   <Query query={PICK_AUTHORS} notifyOnNetworkStatusChange>
     {({
       data,
@@ -122,8 +122,8 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountViewer }) => (
 )
 
 PickAuthors.fragments = {
-  followeeCount: gql`
-    fragment FolloweeCountViewer on User {
+  user: gql`
+    fragment FolloweeCountUser on User {
       followees(input: { first: 0 }) {
         totalCount
       }
