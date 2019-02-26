@@ -157,7 +157,7 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
   {
     key: 'ME_DRAFT_DETAIL',
     href: '/Me/DraftDetail',
-    as: '/me/drafts/:id'
+    as: '/me/drafts/*-:id'
   },
   {
     key: 'EDITOR',
