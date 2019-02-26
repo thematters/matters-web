@@ -80,7 +80,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
 
   return (
     <section className="container">
-      <div className="l-row">
+      <div className="content-container l-row">
         <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2 content">
           <Query
             query={type === 'me' ? ME_PROFILE : USER_PROFILE}

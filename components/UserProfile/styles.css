@@ -1,15 +1,27 @@
 .container {
-  padding-top: var(--spacing-tight);
-  padding-bottom: var(--spacing-loose);
   margin-bottom: 3rem;
   margin-top: calc(var(--spacing-loose) * -1);
 
   background: var(--color-bg-yellow);
 
   @media (--sm-up) {
+    margin-top: calc(var(--spacing-x-loose) * -1);
+  }
+  @media (--lg-up) {
+    background: initial;
+  }
+}
+
+.content-container {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-loose);
+
+  @media (--sm-up) {
     padding-top: var(--spacing-x-loose);
     padding-bottom: var(--spacing-x-loose);
-    margin-top: calc(var(--spacing-x-loose) * -1);
+  }
+  @media (--lg-up) {
+    background: var(--color-bg-yellow);
   }
 }
 
