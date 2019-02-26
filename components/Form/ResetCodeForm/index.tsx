@@ -39,7 +39,7 @@ const RequestCodeButton = ({ email, lang }: any) => {
     const { event, send } = params
     event.stopPropagation()
 
-    if (!send || isRequesting) {
+    if (!send || isRequesting || !params.email) {
       return undefined
     }
     setIsRequesting(true)
