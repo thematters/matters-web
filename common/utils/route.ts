@@ -72,7 +72,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       }
     case 'userFollowees':
       return {
-        href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
+        href: `${PATHS.USER_FOLLOWEES.href}?userName=${args.userName}`,
         as: `/@${args.userName}/followees`
       }
     case 'search':

@@ -141,7 +141,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
                           <span className="count">
                             {user.followers.totalCount}
                           </span>
-                          <Translate zh_hant="關注我的" zh_hans="关注我的" />
+                          <Translate zh_hant="追蹤者" zh_hans="追踪者" />
                         </a>
                       </Link>
                       <Link {...userFolloweesPath}>
@@ -149,7 +149,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
                           <span className="count">
                             {user.followees.totalCount}
                           </span>
-                          <Translate zh_hant="我關注的" zh_hans="我关注的" />
+                          <Translate zh_hant="追蹤中" zh_hans="追踪中" />
                         </a>
                       </Link>
                     </section>
