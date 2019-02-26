@@ -52,6 +52,7 @@ const USER_PROFILE = gql`
   }
   ${fragments.user}
 `
+
 const ME_PROFILE = gql`
   query MeProfileUser($isMe: Boolean = true) {
     viewer {
@@ -78,20 +79,18 @@ const EditProfileButton = () => (
   </button>
 )
 
-const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
-  router,
-  type
-}) => {
+const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
+  const isMe = !userName || viewer.userName === userName
 
   return (
     <section className="container">
       <div className="content-container l-row">
         <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <Query
-            query={type === 'me' ? ME_PROFILE : USER_PROFILE}
-            variables={type === 'me' ? {} : { userName }}
+            query={isMe ? ME_PROFILE : USER_PROFILE}
+            variables={isMe ? {} : { userName }}
           >
             {({
               data,
@@ -106,8 +105,7 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
                 return <Error error={error} />
               }
 
-              const user = type === 'me' ? data.viewer : data.user
-              const isMe = type === 'me' || viewer.id === user.id
+              const user = isMe ? data.viewer : data.user
               const userFollowersPath = toPath({
                 page: 'userFollowers',
                 userName: user.userName
@@ -144,7 +142,11 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
                           <span className="count">
                             {user.followers.totalCount}
                           </span>
-                          <Translate zh_hant="追蹤者" zh_hans="追踪者" />
+                          <Translate
+                            {...(isMe
+                              ? { zh_hant: '追蹤我的', zh_hans: '追踪我的' }
+                              : { zh_hant: '追蹤者', zh_hans: '追踪者' })}
+                          />
                         </a>
                       </Link>
                       <Link {...userFolloweesPath}>
@@ -152,7 +154,11 @@ const BaseUserProfile: React.FC<WithRouterProps & { type?: 'me' }> = ({
                           <span className="count">
                             {user.followees.totalCount}
                           </span>
-                          <Translate zh_hant="追蹤中" zh_hans="追踪中" />
+                          <Translate
+                            {...(isMe
+                              ? { zh_hant: '我追蹤的', zh_hans: '我追踪的' }
+                              : { zh_hant: '追蹤中', zh_hans: '追踪中' })}
+                          />
                         </a>
                       </Link>
                     </section>
