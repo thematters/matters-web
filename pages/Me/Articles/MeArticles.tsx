@@ -20,6 +20,7 @@ const ME_ARTICLES_FEED = gql`
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
       id
