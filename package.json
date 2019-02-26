@@ -17,7 +17,7 @@
     "build": "npm run build:next && npm run build:server",
     "start": "NODE_ENV=production node build/production-server/server.js",
     "export": "npm run build && next export -o static-site-build",
-    "format": "prettier --write \"{,!(build|static-site-build|node_modules)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"{,!(build|static-site-build|node_modules|coverage)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "npm run typecheck && tslint -p .",
     "lint:fix": "tslint -p . --fix",
