@@ -6,37 +6,33 @@ import {
   ArticleDigest,
   Error,
   InfiniteScroll,
-  PageHeader,
   Placeholder,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
 
-import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
-import { SeachArticles } from './__generated__/SeachArticles'
+import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import EmptyBookmarks from './EmptyBookmarks'
 
-const SEARCH_ARTICLES = gql`
-  query SeachArticles(
-    $key: String!
-    $first: Int!
+const ME_BOOKMARK_FEED = gql`
+  query MeBookmarkFeed(
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
-    search(input: { key: $key, type: Article, first: $first, after: $cursor }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on Article {
+    viewer {
+      id
+      subscriptions(input: { first: 10, after: $cursor }) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
             ...FeedDigestArticle
           }
         }
@@ -46,24 +42,15 @@ const SEARCH_ARTICLES = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const SearchArticles = ({
-  q,
-  isAggregate
-}: {
-  q: string
-  isAggregate: boolean
-}) => {
+export default () => {
   return (
-    <Query
-      query={SEARCH_ARTICLES}
-      variables={{ key: q, first: isAggregate ? 5 : 10 }}
-    >
+    <Query query={ME_BOOKMARK_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: SeachArticles }) => {
+      }: QueryResult & { data: MeBookmarkFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -72,7 +59,7 @@ const SearchArticles = ({
           return <Error error={error} />
         }
 
-        const connectionPath = 'search'
+        const connectionPath = 'viewer.subscriptions'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -87,39 +74,21 @@ const SearchArticles = ({
               })
           })
 
-        if (edges.length <= 0) {
-          return (
-            <EmptySearch
-              inSidebar={false}
-              description={
-                <Translate
-                  zh_hant="沒有找到你搜尋的內容。"
-                  zh_hans="没有找到你搜索的内容。"
-                />
-              }
-            />
-          )
+        if (edges <= 0) {
+          return <EmptyBookmarks />
         }
 
         return (
           <InfiniteScroll
-            hasNextPage={!isAggregate && pageInfo.hasNextPage}
+            hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
             loading={loading}
             loader={<Spinner />}
           >
-            <PageHeader
-              is="h2"
-              pageTitle={<Translate zh_hant="文章" zh_hans="文章" />}
-            >
-              {isAggregate && pageInfo.hasNextPage && (
-                <ViewAll q={q} type="article" />
-              )}
-            </PageHeader>
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+                  <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
                 </li>
               ))}
             </ul>
@@ -129,5 +98,3 @@ const SearchArticles = ({
     </Query>
   )
 }
-
-export default SearchArticles

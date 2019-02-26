@@ -9,9 +9,7 @@ header {
 }
 
 .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @mixin flex-center-space-between;
 
   & :global(svg) {
     transform: rotate(180deg);

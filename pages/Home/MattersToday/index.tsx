@@ -10,7 +10,7 @@ import styles from './styles.css'
 const HOME_TODAY = gql`
   query HomeToday(
     $hasArticleDigestActionAuthor: Boolean = true
-    $hasArticleDigestActionDateTime: Boolean = true
+    $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
@@ -31,7 +31,7 @@ export default () => (
       {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
         const article = _get(data, 'viewer.recommendation.today')
         if (loading || !article) {
-          return <Placeholder.Sidebar />
+          return <Placeholder.MattersToday />
         }
 
         if (error) {

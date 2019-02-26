@@ -15,11 +15,17 @@ const fragments = {
   `
 }
 
-export const FollowButton = ({ user }: { user: FollowButtonUser }) => {
+export const FollowButton = ({
+  user,
+  size = 'small'
+}: {
+  user: FollowButtonUser
+  size?: 'small' | 'default'
+}) => {
   if (user.isFollowee) {
-    return <Unfollow user={user} />
+    return <Unfollow user={user} size={size} />
   } else {
-    return <Follow user={user} />
+    return <Follow user={user} size={size} />
   }
 }
 

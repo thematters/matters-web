@@ -3,32 +3,20 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  Head,
-  InfiniteScroll,
-  Placeholder,
-  Spinner
-} from '~/components'
+import { Error, Head, InfiniteScroll, Placeholder, Spinner } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 
-import { UserArticleFeed } from './__generated__/UserArticleFeed'
-import EmptyArticles from './EmptyArticles'
+import { UserFolloweeFeed } from './__generated__/UserFolloweeFeed'
+import EmptyFollowees from './EmptyFollowees'
 
-const USER_ARTICLES_FEED = gql`
-  query UserArticleFeed(
-    $userName: String!
-    $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = false
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+const USER_FOLLOWEES_FEED = gql`
+  query UserFolloweeFeed($userName: String!, $cursor: String) {
     user(input: { userName: $userName }) {
       id
       displayName
-      articles(input: { first: 10, after: $cursor }) {
+      followees(input: { first: 10, after: $cursor }) {
         pageInfo {
           startCursor
           endCursor
@@ -37,26 +25,26 @@ const USER_ARTICLES_FEED = gql`
         edges {
           cursor
           node {
-            ...FeedDigestArticle
+            ...UserDigestFullDescUser
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${UserDigest.FullDesc.fragments.user}
 `
 
-const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
+const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
   const userName = getQuery({ router, key: 'userName' })
 
   return (
-    <Query query={USER_ARTICLES_FEED} variables={{ userName }}>
+    <Query query={USER_FOLLOWEES_FEED} variables={{ userName }}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: UserArticleFeed }) => {
+      }: QueryResult & { data: UserFolloweeFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -65,7 +53,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'user.articles'
+        const connectionPath = 'user.followees'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -81,15 +69,15 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           })
 
         if (edges.length <= 0) {
-          return <EmptyArticles />
+          return <EmptyFollowees />
         }
 
         return (
           <>
             <Head
               title={{
-                zh_hant: `${data.user.displayName}發表的文章`,
-                zh_hans: `${data.user.displayName}发表的文章`
+                zh_hant: `${data.user.displayName}追蹤的作者`,
+                zh_hans: `${data.user.displayName}追踪的作者`
               }}
             />
             <InfiniteScroll
@@ -101,11 +89,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                   <li key={cursor}>
-                    <ArticleDigest.Feed
-                      article={node}
-                      hasBookmark
-                      hasDateTime
-                    />
+                    <UserDigest.FullDesc user={node} nameSize="small" />
                   </li>
                 ))}
               </ul>
@@ -117,4 +101,4 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(UserArticles)
+export default withRouter(UserFollowees)
