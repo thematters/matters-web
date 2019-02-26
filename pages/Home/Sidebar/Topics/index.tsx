@@ -13,6 +13,7 @@ const SIDEBAR_TOPICS = gql`
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionDateTime: Boolean = false
     $hasArticleDigestCover: Boolean = false
+    $hasArticleDigestActionTopicScore: Boolean = true
   ) {
     viewer {
       id
@@ -57,7 +58,7 @@ export default () => (
             <ol>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <ArticleDigest.Sidebar article={node} />
+                  <ArticleDigest.Sidebar article={node} hasTopicScore />
                 </li>
               ))}
             </ol>

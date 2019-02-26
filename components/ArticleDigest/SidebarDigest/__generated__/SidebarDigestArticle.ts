@@ -43,4 +43,5 @@ export interface SidebarDigestArticle {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }

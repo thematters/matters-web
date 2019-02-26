@@ -51,6 +51,7 @@ export interface FollowFeed_viewer_recommendation_followeeArticles_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface FollowFeed_viewer_recommendation_followeeArticles_edges {
@@ -84,4 +85,5 @@ export interface FollowFeedVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

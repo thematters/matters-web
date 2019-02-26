@@ -17,6 +17,7 @@ const SIDEBAR_ICYMI = gql`
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionDateTime: Boolean = false
     $hasArticleDigestCover: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
       id

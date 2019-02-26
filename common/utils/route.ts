@@ -1,3 +1,5 @@
+import { SingletonRouter } from 'next/router'
+
 import { PATHS } from '~/common/enums'
 
 type ToPathArgs =
@@ -7,12 +9,17 @@ type ToPathArgs =
       slug: string
       mediaHash: string
     }
+  | { page: 'draftDetail'; id: string }
   | {
       page: 'tagDetail'
       id: string
     }
   | {
       page: 'userProfile'
+      userName: string
+    }
+  | {
+      page: 'userComments'
       userName: string
     }
   | {
@@ -30,6 +37,11 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
         }&mediaHash=${args.mediaHash}`,
         as: `/@${args.userName}/${args.slug}-${args.mediaHash}`
       }
+    case 'draftDetail':
+      return {
+        href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}`,
+        as: `/me/drafts/${args.id}}`
+      }
     case 'tagDetail':
       return {
         href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
@@ -40,6 +52,11 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
         href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
         as: `/@${args.userName}`
       }
+    case 'userComments':
+      return {
+        href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
+        as: `/@${args.userName}/comments`
+      }
     case 'search':
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
@@ -47,4 +64,15 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
         as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`
       }
   }
+}
+
+export const getQuery = ({
+  router,
+  key
+}: {
+  router?: SingletonRouter
+  key: string
+}) => {
+  const value = router && router.query && router.query[key]
+  return value instanceof Array ? value[0] : value
 }

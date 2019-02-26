@@ -2,6 +2,8 @@ import { withRouter, WithRouterProps } from 'next/router'
 
 import { Footer, Head, Responsive, SearchBar } from '~/components'
 
+import { getQuery } from '~/common/utils'
+
 import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
 import SearchPageHeader from './SearchPageHeader'
@@ -28,9 +30,8 @@ const EmptySeachPage = () => {
 }
 
 const Search: React.FC<WithRouterProps> = ({ router }) => {
-  const type = router && router.query && router.query.type
-  let q = router && router.query && router.query.q
-  q = q instanceof Array ? q[0] : q
+  const type = getQuery({ router, key: 'type' })
+  const q = getQuery({ router, key: 'q' })
 
   if (!q) {
     return <EmptySeachPage />

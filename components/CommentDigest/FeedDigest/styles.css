@@ -1,0 +1,13 @@
+.container {
+  margin: var(--spacing-default) 0;
+}
+
+.header {
+}
+
+.content-wrap {
+  padding-left: var(--spacing-x-loose);
+
+  font-size: var(--font-size-sm); /* fallback */
+  font-size: calc(var(--font-size-sm) + 1px);
+}

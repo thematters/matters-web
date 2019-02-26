@@ -9,11 +9,11 @@
   }
 }
 
+.text {
+  line-height: 1;
+}
+
 /* placement */
-.text-right {
-}
-.text-left {
-}
 .text-bottom {
   & :global(*) {
     margin: 0 auto;
@@ -66,6 +66,9 @@
 }
 .white {
   color: var(--color-white);
+}
+.red {
+  color: var(--color-red);
 }
 
 /* spacing */

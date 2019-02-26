@@ -55,6 +55,7 @@ export interface TagDetailArticles_node_Tag_articles_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface TagDetailArticles_node_Tag_articles_edges {
@@ -87,4 +88,5 @@ export interface TagDetailArticlesVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

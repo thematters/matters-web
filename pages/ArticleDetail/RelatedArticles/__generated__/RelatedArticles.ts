@@ -43,6 +43,7 @@ export interface RelatedArticles_relatedArticles_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface RelatedArticles_relatedArticles_edges {

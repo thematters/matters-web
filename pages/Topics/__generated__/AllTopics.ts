@@ -51,6 +51,7 @@ export interface AllTopics_viewer_recommendation_topics_edges_node {
    * Viewer has subscribed
    */
   subscribed: boolean;
+  topicScore: number | null;
 }
 
 export interface AllTopics_viewer_recommendation_topics_edges {
@@ -84,4 +85,5 @@ export interface AllTopicsVariables {
   cursor?: string | null;
   hasArticleDigestActionAuthor?: boolean | null;
   hasArticleDigestActionDateTime?: boolean | null;
+  hasArticleDigestActionTopicScore?: boolean | null;
 }

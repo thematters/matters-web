@@ -7,7 +7,7 @@ interface TextIconProps {
   textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
 
-  color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
+  color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'

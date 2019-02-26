@@ -10,3 +10,7 @@
   line-height: normal;
   padding-left: var(--spacing-x-tight);
 }
+
+.text-medium {
+  font-weight: var(--font-weight-medium);
+}
