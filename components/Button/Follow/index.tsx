@@ -1,12 +1,9 @@
-// External modules
 import gql from 'graphql-tag'
 
-// Internal modules
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
-
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
 
 const fragments = {
   user: gql`

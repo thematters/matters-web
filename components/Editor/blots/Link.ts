@@ -16,22 +16,22 @@ class Link extends Inline {
     node.setAttribute('id', 'link_' + childLength)
 
     node.addEventListener('click', (e: Event) => {
-      const width = node.offsetWidth
-      const scrollTop = document.body.scrollTop
-      const parentTop = parent && parent.offsetTop
-      const parentLeft = (parent && parent.offsetLeft) || 0
-      const left = node.offsetLeft
-      const px = window.devicePixelRatio
-      const isAndroid =
-        navigator.userAgent.indexOf('Android') > -1 ||
-        navigator.userAgent.indexOf('Adr') > -1
+      // const width = node.offsetWidth
+      // const scrollTop = document.body.scrollTop
+      // const parentTop = parent && parent.offsetTop
+      // const parentLeft = (parent && parent.offsetLeft) || 0
+      // const left = node.offsetLeft
+      // const px = window.devicePixelRatio
+      // const isAndroid =
+      //   navigator.userAgent.indexOf('Android') > -1 ||
+      //   navigator.userAgent.indexOf('Adr') > -1
 
-      const params = {
-        link: value,
-        index: node.getAttribute('data-id'),
-        x: width / 2 + parentLeft + left,
-        y: parentTop + node.offsetTop
-      }
+      // const params = {
+      //   link: value,
+      //   index: node.getAttribute('data-id'),
+      //   x: width / 2 + parentLeft + left,
+      //   y: parentTop + node.offsetTop
+      // }
 
       console.log(`_this.jumpToLink('onTextLinkMenu', JSON.stringify(params))`)
       e.preventDefault()

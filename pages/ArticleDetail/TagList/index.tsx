@@ -1,0 +1,37 @@
+import gql from 'graphql-tag'
+import _get from 'lodash/get'
+
+import { Tag } from '~/components'
+
+import { TagListArticle } from './__generated__/TagListArticle'
+import styles from './styles.css'
+
+const fragments = {
+  article: gql`
+    fragment TagListArticle on Article {
+      tags {
+        ...DigestTag
+      }
+    }
+    ${Tag.fragments.tag}
+  `
+}
+
+const TagList = ({ article }: { article: TagListArticle }) => {
+  if (!article || !article.tags) {
+    return null
+  }
+
+  return (
+    <section className="tag-list">
+      {article.tags.map(tag => (
+        <Tag tag={tag} key={tag.id} size="small" />
+      ))}
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
+
+TagList.fragments = fragments
+
+export default TagList

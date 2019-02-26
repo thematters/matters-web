@@ -5,6 +5,7 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -13,11 +14,12 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
 const ALL_TAGS = gql`
-  query AllTags($cursor: String) {
+  query AllTags($cursor: String, $hasDigestTagArticleCount: Boolean = true) {
     viewer {
       id
       recommendation {
@@ -30,7 +32,7 @@ const ALL_TAGS = gql`
           edges {
             cursor
             node {
-              ...Tag
+              ...DigestTag
             }
           }
         }
@@ -43,6 +45,8 @@ const ALL_TAGS = gql`
 const Tags = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部標籤', zh_hans: '全部标签' }} />
+
       <PageHeader
         pageTitle={<Translate zh_hant="全部標籤" zh_hans="全部标签" />}
       />

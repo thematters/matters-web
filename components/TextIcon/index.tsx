@@ -8,7 +8,7 @@ interface TextIconProps {
   icon: React.ReactNode
 
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white'
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 

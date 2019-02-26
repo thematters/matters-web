@@ -1,11 +1,11 @@
-// External modules
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
-// Internal modules
 import { Icon } from '~/components'
 
+import ICON_BOOKMARK_REGULAR_INACTIVE from '~/static/icons/bookmark-regular-inactive.svg?sprite'
 import ICON_BOOKMARK_SM_INACTIVE from '~/static/icons/bookmark-small-inactive.svg?sprite'
+
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const SUBSCRIBE_ARTICLE = gql`
@@ -17,7 +17,13 @@ const SUBSCRIBE_ARTICLE = gql`
   }
 `
 
-const Subscribe = ({ article }: { article: BookmarkArticle }) => (
+const Subscribe = ({
+  article,
+  size
+}: {
+  article: BookmarkArticle
+  size: 'small' | 'default'
+}) => (
   <Mutation
     mutation={SUBSCRIBE_ARTICLE}
     variables={{ id: article.id }}
@@ -32,10 +38,18 @@ const Subscribe = ({ article }: { article: BookmarkArticle }) => (
     {(subscribe, { data }) => (
       <button type="button" aria-label="收藏" onClick={() => subscribe()}>
         <Icon
-          size="small"
+          size={size}
           className="u-motion-icon-hover"
-          id={ICON_BOOKMARK_SM_INACTIVE.id}
-          viewBox={ICON_BOOKMARK_SM_INACTIVE.viewBox}
+          id={
+            size === 'small'
+              ? ICON_BOOKMARK_SM_INACTIVE.id
+              : ICON_BOOKMARK_REGULAR_INACTIVE.id
+          }
+          viewBox={
+            size === 'small'
+              ? ICON_BOOKMARK_SM_INACTIVE.viewBox
+              : ICON_BOOKMARK_REGULAR_INACTIVE.viewBox
+          }
         />
       </button>
     )}

@@ -1,11 +1,10 @@
 // import 'normalize.css'
 import Quill, { DeltaOperation } from 'quill'
-
 import React from 'react'
+
 // import 'tailwindcss/dist/utilities.min.css'
 import blots from './blots'
 import EditorTools from './EditorTools'
-
 import './quill.css'
 import Style from './style'
 // import content from './quill.css'
@@ -618,7 +617,7 @@ export class EditorIndex extends React.Component<Props, State> {
 
   // 设置图片描述
   public setPhotoDesc(params: any) {
-    const quill = this.state.quill
+    // const quill = this.state.quill
     if (typeof params === 'string') {
       params = JSON.parse(params)
     }
@@ -648,8 +647,8 @@ export class EditorIndex extends React.Component<Props, State> {
     const canUndo = state.historyStep >= 1
     const canRedo =
       state.histories && state.historyStep < state.histories.length - 1
-    const canNext =
-      state.title !== '' && (state.quill && state.quill.getContents())
+    // const canNext =
+    //   state.title !== '' && (state.quill && state.quill.getContents())
     return (
       <div>
         <div style={Style.contentBox}>

@@ -13,7 +13,11 @@ import {
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
 const SIDEBAR_ICYMI = gql`
-  query SidebarIcymi {
+  query SidebarIcymi(
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionDateTime: Boolean = false
+    $hasArticleDigestCover: Boolean = true
+  ) {
     viewer {
       id
       recommendation {
@@ -21,14 +25,14 @@ const SIDEBAR_ICYMI = gql`
           edges {
             cursor
             node {
-              ...IcymiDigestArticle
+              ...SidebarDigestArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.icymi}
+  ${ArticleDigest.Sidebar.fragments.article}
 `
 
 export default () => (
@@ -59,7 +63,7 @@ export default () => (
           <ul>
             {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
               <li key={cursor}>
-                <ArticleDigest.Sidebar article={node} />
+                <ArticleDigest.Sidebar article={node} hasCover />
               </li>
             ))}
           </ul>

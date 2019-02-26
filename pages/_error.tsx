@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Error, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
+
 import styles from './styles.error.css'
 
 interface ErrorProps {

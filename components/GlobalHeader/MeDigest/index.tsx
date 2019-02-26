@@ -2,13 +2,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
-
 import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import DropdownMenu from './DropdownMenu'
+
+import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MeDigestUser } from './__generated__/MeDigestUser'
+import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {

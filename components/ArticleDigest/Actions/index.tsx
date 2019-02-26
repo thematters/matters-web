@@ -3,59 +3,67 @@ import gql from 'graphql-tag'
 import { DateTime } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
+
+import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
-
-import { FeedDigestActionsArticle } from './__generated__/FeedDigestActionsArticle'
 import styles from './styles.css'
 
 type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related'
+export interface ActionsControls {
+  hasAuthor?: boolean
+  hasDateTime?: boolean
+  hasBookmark?: boolean
+}
+type ActionsProps = {
+  article: DigestActionsArticle
+  type: ActionsType
+} & ActionsControls
 
 const fragments = {
-  feedDigest: gql`
-    fragment FeedDigestActionsArticle on Article {
+  article: gql`
+    fragment DigestActionsArticle on Article {
       author {
-        ...UserDigestMiniUser
+        ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
       }
       createdAt
       ...MATArticle
       ...CommentCountArticle
-      ...BookmarkArticle
+      ...BookmarkArticle @include(if: $hasArticleDigestActionDateTime)
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
     ${BookmarkButton.fragments.article}
-  `,
-  sidebarDigest: gql`
-    fragment SidebarDigestActionsArticle on Article {
-      ...MATArticle
-      ...CommentCountArticle
-    }
-    ${MAT.fragments.article}
-    ${CommentCount.fragments.article}
   `
 }
 
 const Actions = ({
   article,
-  type
-}: {
-  article: FeedDigestActionsArticle
-  type: ActionsType
-}) => {
-  const isShowUserDigest = type === 'feature'
-  const isShowDateTime = ['feature', 'feed'].indexOf(type) >= 0
-  const isShowBookmark = ['feature', 'feed'].indexOf(type) >= 0
+  type,
+  hasAuthor,
+  hasDateTime,
+  hasBookmark
+}: ActionsProps) => {
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'
 
   return (
     <footer className="actions">
-      {isShowUserDigest && <UserDigest.Mini user={article.author} />}
+      {hasAuthor && 'author' in article && (
+        <UserDigest.Mini user={article.author} />
+      )}
+
       <MAT article={article} size={size} />
+
       <CommentCount article={article} size={size} />
-      {isShowBookmark && <BookmarkButton article={article} />}
-      {isShowDateTime && <DateTime date={article.createdAt} />}
+
+      {hasDateTime && 'subscribed' in article && (
+        <BookmarkButton article={article} />
+      )}
+
+      {hasBookmark && 'createdAt' in article && (
+        <DateTime date={article.createdAt} />
+      )}
 
       <style jsx>{styles}</style>
     </footer>

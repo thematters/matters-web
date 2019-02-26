@@ -1,12 +1,13 @@
 // import { throws } from 'assert'
 import React, { Component } from 'react'
+
 // import native from '../../utils/native'
-import RecordBox from '../RecordBox'
+// import RecordBox from '../RecordBox'
 import toolsConfig from './config'
 import Style from './style'
 
 const TOOLBAR_ONE = 1
-const TOOLBAR_TWO = 2
+// const TOOLBAR_TWO = 2
 const EDITOR_FORMAT_TEXT = 1
 const EDITOR_UPLOAD_PLAYER = 2
 
@@ -362,7 +363,7 @@ class EditorTools extends Component<Props, State> {
         this.showToolsHeader()}
         {// 操作栏内容区
         this.showToolsContent()}
-        {this.state.record && (
+        {/* {this.state.record && (
           <RecordBox
             setRecord={(data: any) => {
               this.setRecordData(data)
@@ -371,7 +372,7 @@ class EditorTools extends Component<Props, State> {
               console.log(`this.showRecord(false)`)
             }}
           />
-        )}
+        )} */}
       </div>
     )
   }

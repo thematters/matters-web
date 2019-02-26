@@ -1,11 +1,11 @@
-// External modules
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
-// Internal modules
 import { Icon } from '~/components'
 
+import ICON_BOOKMARK_REGULAR_ACTIVE from '~/static/icons/bookmark-regular-active.svg?sprite'
 import ICON_BOOKMARK_SM_ACTIVE from '~/static/icons/bookmark-small-active.svg?sprite'
+
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const UNSUBSCRIBE_ARTICLE = gql`
@@ -17,7 +17,13 @@ const UNSUBSCRIBE_ARTICLE = gql`
   }
 `
 
-const Unsubscribe = ({ article }: { article: BookmarkArticle }) => (
+const Unsubscribe = ({
+  article,
+  size
+}: {
+  article: BookmarkArticle
+  size: 'small' | 'default'
+}) => (
   <Mutation
     mutation={UNSUBSCRIBE_ARTICLE}
     variables={{ id: article.id }}
@@ -32,10 +38,18 @@ const Unsubscribe = ({ article }: { article: BookmarkArticle }) => (
     {(unsubscribe, { data }) => (
       <button type="button" aria-label="收藏" onClick={() => unsubscribe()}>
         <Icon
-          size="small"
+          size={size}
           className="u-motion-icon-hover"
-          id={ICON_BOOKMARK_SM_ACTIVE.id}
-          viewBox={ICON_BOOKMARK_SM_ACTIVE.viewBox}
+          id={
+            size === 'small'
+              ? ICON_BOOKMARK_SM_ACTIVE.id
+              : ICON_BOOKMARK_REGULAR_ACTIVE.id
+          }
+          viewBox={
+            size === 'small'
+              ? ICON_BOOKMARK_SM_ACTIVE.viewBox
+              : ICON_BOOKMARK_REGULAR_ACTIVE.viewBox
+          }
         />
       </button>
     )}

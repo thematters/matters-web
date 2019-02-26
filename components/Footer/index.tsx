@@ -1,13 +1,12 @@
-// External modules
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-// Internal modules
 import { LanguageContext } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
+
 import styles from './styles.css'
 
 const linkClass = classNames('item', 'item-link')

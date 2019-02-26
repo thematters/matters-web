@@ -3,10 +3,10 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import { Error, Footer, Spinner } from '~/components'
-import FollowFeed from './FollowFeed'
-import PickAuthors from './PickAuthors'
 
 import { MeFollow } from './__generated__/MeFollow'
+import FollowFeed from './FollowFeed'
+import PickAuthors from './PickAuthors'
 
 const ME_FOLLOW = gql`
   query MeFollow {

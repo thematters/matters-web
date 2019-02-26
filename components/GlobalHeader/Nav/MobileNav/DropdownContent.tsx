@@ -5,6 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { Menu, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
+
 import styles from './styles.css'
 
 const DropdownContent: React.FC<

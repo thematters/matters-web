@@ -3,13 +3,13 @@ import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
 import { Error, Label, Tag, Translate } from '~/components'
-import ViewAllLink from '../ViewAllLink'
 
+import ViewAllLink from '../ViewAllLink'
 import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTags {
+  query SidebarTags($hasDigestTagArticleCount: Boolean = true) {
     viewer {
       id
       recommendation {
@@ -17,7 +17,7 @@ const SIDEBAR_TAGS = gql`
           edges {
             cursor
             node {
-              ...Tag
+              ...DigestTag
             }
           }
         }

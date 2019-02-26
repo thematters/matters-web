@@ -1,6 +1,5 @@
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
-
 import styles from './styles.css'
 
 export default () => (

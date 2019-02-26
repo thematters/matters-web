@@ -1,15 +1,16 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Label, Title } from '~/components'
 
-import Actions from '../Actions'
+import { toPath } from '~/common/utils'
+
+import Actions, { ActionsControls } from '../Actions'
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 import styles from './styles.css'
 
 const fragments = {
-  today: gql`
+  article: gql`
     fragment TodayDigestArticle on Article {
       id
       title
@@ -21,14 +22,22 @@ const fragments = {
         id
         userName
       }
-      ...FeedDigestActionsArticle
+      ...DigestActionsArticle
     }
-    ${Actions.fragments.feedDigest}
+    ${Actions.fragments.article}
   `
 }
 
-const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
+const FeatureDigest = ({
+  article,
+  ...actionControls
+}: { article: TodayDigestArticle } & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -70,7 +79,7 @@ const FeatureDigest = ({ article }: { article: TodayDigestArticle }) => {
               </a>
             </Link>
 
-            <Actions article={article} type="feature" />
+            <Actions article={article} type="feature" {...actionControls} />
           </div>
         </div>
       </div>

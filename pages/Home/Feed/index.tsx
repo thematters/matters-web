@@ -3,7 +3,6 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { mergeConnections } from '~/common/utils'
 import {
   ArticleDigest,
   Error,
@@ -15,9 +14,11 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import SortBy from './SortBy'
+
+import { mergeConnections } from '~/common/utils'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
+import SortBy from './SortBy'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -38,7 +39,11 @@ const feedFragment = gql`
 
 const queries: { [key: string]: any } = {
   hottest: gql`
-    query HottestFeed($cursor: String) {
+    query HottestFeed(
+      $cursor: String
+      $hasArticleDigestActionAuthor: Boolean = true
+      $hasArticleDigestActionDateTime: Boolean = true
+    ) {
       viewer {
         id
         recommendation {
@@ -51,7 +56,11 @@ const queries: { [key: string]: any } = {
     ${feedFragment}
   `,
   newest: gql`
-    query NewestFeed($cursor: String) {
+    query NewestFeed(
+      $cursor: String
+      $hasArticleDigestActionAuthor: Boolean = true
+      $hasArticleDigestActionDateTime: Boolean = true
+    ) {
       viewer {
         id
         recommendation {
@@ -128,7 +137,11 @@ export default () => {
                         {edges.map(
                           ({ node, cursor }: { node: any; cursor: any }) => (
                             <li key={cursor}>
-                              <ArticleDigest.Feed article={node} />
+                              <ArticleDigest.Feed
+                                article={node}
+                                hasDateTime
+                                hasBookmark
+                              />
                             </li>
                           )
                         )}

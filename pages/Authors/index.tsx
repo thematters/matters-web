@@ -5,6 +5,7 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -13,6 +14,7 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllAuthors } from './__generated__/AllAuthors'
 import styles from './styles.css'
 
@@ -43,6 +45,8 @@ const ALL_AUTHORS = gql`
 const Authors = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部作者', zh_hans: '全部作者' }} />
+
       <PageHeader
         pageTitle={<Translate zh_hant="全部作者" zh_hans="全部作者" />}
       />

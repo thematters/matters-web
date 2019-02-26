@@ -2,52 +2,47 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Title } from '~/components'
 
-import Actions from '../Actions'
-import { IcymiDigestArticle } from './__generated__/IcymiDigestArticle'
-import { TopicsDigestArticle } from './__generated__/TopicsDigestArticle'
+import { toPath } from '~/common/utils'
+
+import Actions, { ActionsControls } from '../Actions'
+import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 import styles from './styles.css'
 
 const fragments = {
-  icymi: gql`
-    fragment IcymiDigestArticle on Article {
+  article: gql`
+    fragment SidebarDigestArticle on Article {
       id
       title
       slug
-      cover
+      cover @include(if: $hasArticleDigestCover)
       author {
         id
         userName
       }
       mediaHash
-      ...SidebarDigestActionsArticle
+      ...DigestActionsArticle
     }
-    ${Actions.fragments.sidebarDigest}
-  `,
-  topics: gql`
-    fragment TopicsDigestArticle on Article {
-      id
-      title
-      slug
-      author {
-        id
-        userName
-      }
-      mediaHash
-      ...SidebarDigestActionsArticle
-    }
-    ${Actions.fragments.sidebarDigest}
+    ${Actions.fragments.article}
   `
 }
 
 const FeedDigest = ({
-  article
+  article,
+  hasCover,
+  ...actionControls
 }: {
-  article: IcymiDigestArticle | TopicsDigestArticle
-}) => {
-  const { cover, author, slug, mediaHash, title } = article
+  article: SidebarDigestArticle
+  hasCover?: boolean
+} & ActionsControls) => {
+  const { author, slug, mediaHash, title } = article
+  const cover = 'cover' in article ? article.cover : null
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -68,10 +63,10 @@ const FeedDigest = ({
               <Title type="sidebar" is="h2">
                 {title}
               </Title>
-              <Actions article={article} type="sidebar" />
+              <Actions article={article} type="sidebar" {...actionControls} />
             </div>
 
-            {cover && (
+            {hasCover && cover && (
               <div
                 className="cover"
                 style={{

@@ -1,12 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
-import { Tag as TagType } from './__generated__/Tag'
+
+import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
 
 type TagSize = 'small' | 'default'
@@ -14,7 +16,7 @@ type TagSize = 'small' | 'default'
 interface TagProps {
   size?: TagSize
   type?: 'count-fixed' | 'default'
-  tag: TagType
+  tag: DigestTag
 }
 
 /**
@@ -28,21 +30,17 @@ interface TagProps {
 
 const fragments = {
   tag: gql`
-    fragment Tag on Tag {
+    fragment DigestTag on Tag {
       id
       content
-      articles(input: { first: 0 }) {
+      articles(input: { first: 0 }) @include(if: $hasDigestTagArticleCount) {
         totalCount
       }
     }
   `
 }
 
-export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
-  size = 'default',
-  type = 'default',
-  tag
-}) => {
+export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [size]: true,
@@ -54,7 +52,7 @@ export const Tag: React.FC<TagProps> & { fragments: typeof fragments } = ({
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = tag.articles.totalCount
+  const tagCount = _get(tag, 'articles.totalCount', 0)
 
   return (
     <>

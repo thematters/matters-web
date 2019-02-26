@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { LanguageConsumer } from './LanguageContext'
 
 export const LanguageSwitch = () => (

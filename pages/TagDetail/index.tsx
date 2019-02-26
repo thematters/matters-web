@@ -8,6 +8,7 @@ import {
   Empty,
   Error,
   Footer,
+  Head,
   Icon,
   InfiniteScroll,
   PageHeader,
@@ -18,10 +19,16 @@ import {
 
 import { mergeConnections } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
+
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
 
 const TAG_DETAIL = gql`
-  query TagDetailArticles($id: ID!, $cursor: String) {
+  query TagDetailArticles(
+    $id: ID!
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     node(input: { id: $id }) {
       ... on Tag {
         id
@@ -102,6 +109,8 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             return (
               <>
+                <Head title={`#${data.node.content}`} />
+
                 <PageHeader pageTitle={data.node.content} />
 
                 <section>
@@ -115,7 +124,11 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
                       {edges.map(
                         ({ node, cursor }: { node: any; cursor: any }) => (
                           <li key={cursor}>
-                            <ArticleDigest.Feed article={node} />
+                            <ArticleDigest.Feed
+                              article={node}
+                              hasDateTime
+                              hasBookmark
+                            />
                           </li>
                         )
                       )}

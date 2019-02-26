@@ -4,6 +4,7 @@ import { Query, QueryResult } from 'react-apollo'
 
 import {
   Error,
+  Head,
   PageHeader,
   ShuffleButton,
   Spinner,
@@ -12,6 +13,7 @@ import {
 } from '~/components'
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
+
 import { FolloweeCountViewer } from './__generated__/FolloweeCountViewer'
 import { PickAuthors as PickAuthorsType } from './__generated__/PickAuthors'
 import styles from './styles.css'
@@ -85,8 +87,9 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountViewer }) => (
 
       return (
         <>
-          <PickIntroHeader />
+          <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
 
+          <PickIntroHeader />
           <PageHeader
             pageTitle={<Translate zh_hant="追蹤創作者" zh_hans="追踪创作者" />}
           >

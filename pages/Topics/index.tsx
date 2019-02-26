@@ -6,6 +6,7 @@ import {
   ArticleDigest,
   Error,
   Footer,
+  Head,
   InfiniteScroll,
   PageHeader,
   Placeholder,
@@ -14,10 +15,15 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICS = gql`
-  query AllTopics($cursor: String) {
+  query AllTopics(
+    $cursor: String
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionDateTime: Boolean = true
+  ) {
     viewer {
       id
       recommendation {
@@ -43,6 +49,8 @@ const ALL_TOPICS = gql`
 const Topics = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Head title={{ zh_hant: '全部話題', zh_hans: '全部话题' }} />
+
       <PageHeader
         pageTitle={<Translate zh_hant="全部話題" zh_hans="全部话题" />}
       />
@@ -88,7 +96,11 @@ const Topics = () => (
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                     <li key={cursor}>
-                      <ArticleDigest.Feed article={node} />
+                      <ArticleDigest.Feed
+                        article={node}
+                        hasDateTime
+                        hasBookmark
+                      />
                     </li>
                   ))}
                 </ul>

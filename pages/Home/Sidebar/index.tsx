@@ -2,10 +2,9 @@ import { Footer } from '~/components'
 
 import Authors from './Authors'
 import Icymi from './Icymi'
+import styles from './styles.css'
 import Tags from './Tags'
 import Topics from './Topics'
-
-import styles from './styles.css'
 
 export default () => (
   <>

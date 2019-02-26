@@ -78,6 +78,9 @@
 }
 
 /* spacing */
+.spacing-none {
+  padding: 0;
+}
 .spacing-xtight {
   padding: 0 var(--spacing-x-tight);
 }
@@ -128,6 +131,10 @@
 .bg-white {
   color: var(--color-black);
   background: var(--color-white);
+}
+.bg-black {
+  color: var(--color-white);
+  background: var(--color-black);
 }
 .bg-transparent {
   background: transparent;

@@ -2,11 +2,12 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
 import { Title } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import Actions from '../Actions'
+import { toPath } from '~/common/utils'
+
+import Actions, { ActionsControls } from '../Actions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
 
@@ -24,15 +25,23 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...FeedDigestActionsArticle
+      ...DigestActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.feedDigest}
+    ${Actions.fragments.article}
   `
 }
 
-const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
+const FeedDigest = ({
+  article,
+  ...actionControls
+}: { article: FeedDigestArticle } & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
+
+  if (!author || !author.userName || !slug || !mediaHash) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
@@ -67,7 +76,7 @@ const FeedDigest = ({ article }: { article: FeedDigestArticle }) => {
             </a>
           </Link>
 
-          <Actions article={article} type="feed" />
+          <Actions article={article} type="feed" {...actionControls} />
         </div>
 
         {cover && (

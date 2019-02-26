@@ -1,9 +1,7 @@
-// External modules
 import gql from 'graphql-tag'
 import { useState } from 'react'
 import { Mutation } from 'react-apollo'
 
-// Internal modules
 import { Button, Translate } from '~/components'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'

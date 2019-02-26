@@ -1,11 +1,8 @@
-// External modules
 import gql from 'graphql-tag'
 
-// Internal modules
+import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
-
-import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const fragments = {
   article: gql`
@@ -16,11 +13,17 @@ const fragments = {
   `
 }
 
-export const BookmarkButton = ({ article }: { article: BookmarkArticle }) => {
+export const BookmarkButton = ({
+  article,
+  size = 'small'
+}: {
+  article: BookmarkArticle
+  size?: 'small' | 'default'
+}) => {
   if (article.subscribed) {
-    return <Unsubscribe article={article} />
+    return <Unsubscribe article={article} size={size} />
   } else {
-    return <Subscribe article={article} />
+    return <Subscribe article={article} size={size} />
   }
 }
 
