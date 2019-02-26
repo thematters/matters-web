@@ -30,7 +30,7 @@ const fragments = {
         totalCount
       }
       ...AvatarUser
-      ...FollowButtonUser @include(if: $isMe)
+      ...FollowButtonUser @skip(if: $isMe)
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}

@@ -88,7 +88,9 @@ export default () => {
           error,
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
-          if (loading) {
+          const connectionPath = 'viewer.recommendation.feed'
+          const connection = _get(data, connectionPath)
+          if (loading || !connection) {
             return <Placeholder.ArticleDigestList />
           }
 
@@ -96,8 +98,7 @@ export default () => {
             return <Error error={error} />
           }
 
-          const connectionPath = 'viewer.recommendation.feed'
-          const { edges, pageInfo } = _get(data, connectionPath)
+          const { edges, pageInfo } = connection
           const loadMore = () =>
             fetchMore({
               variables: {
