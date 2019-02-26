@@ -22,6 +22,7 @@ const fragments = {
       id
       title
       summary
+      slug
       scheduledAt
       createdAt
       publishState
@@ -45,12 +46,13 @@ const IconDotDivider = () => (
 )
 
 const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
-  const { id, title, summary, publishState, createdAt } = draft
+  const { id, title, summary, publishState, createdAt, slug } = draft
   const isPending = publishState === 'pending'
   const isError = publishState === 'error'
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
     page: 'draftDetail',
+    slug,
     id
   })
   const containerClasses = classNames({

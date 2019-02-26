@@ -9,7 +9,7 @@ type ToPathArgs =
       slug: string
       mediaHash: string
     }
-  | { page: 'draftDetail'; id: string }
+  | { page: 'draftDetail'; id: string; slug: string }
   | {
       page: 'tagDetail'
       id: string
@@ -40,7 +40,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     case 'draftDetail':
       return {
         href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}`,
-        as: `/me/drafts/${args.id}}`
+        as: `/me/drafts/${args.slug}-${args.id}}`
       }
     case 'tagDetail':
       return {

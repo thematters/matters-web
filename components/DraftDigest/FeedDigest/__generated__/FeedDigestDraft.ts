@@ -2,18 +2,19 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { PublishState } from "./../../../../__generated__/globalTypes";
+import { PublishState } from './../../../../__generated__/globalTypes'
 
 // ====================================================
 // GraphQL fragment: FeedDigestDraft
 // ====================================================
 
 export interface FeedDigestDraft {
-  __typename: "Draft";
-  id: string;
-  title: string | null;
-  summary: string | null;
-  scheduledAt: any | null;
-  createdAt: any;
-  publishState: PublishState;
+  __typename: 'Draft'
+  id: string
+  title: string | null
+  summary: string | null
+  slug: string
+  scheduledAt: any | null
+  createdAt: any
+  publishState: PublishState
 }

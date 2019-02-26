@@ -20,6 +20,7 @@ export interface MeDraftFeed_viewer_drafts_edges_node {
   id: string;
   title: string | null;
   summary: string | null;
+  slug: string;
   scheduledAt: any | null;
   createdAt: any;
   publishState: PublishState;
