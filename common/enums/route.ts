@@ -21,6 +21,7 @@ type ROUTE_KEY =
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
+  | 'ARTICLE_DETAIL_LEGACY'
   | 'ME_INVITATIONS'
   | 'ME_WALLET'
   | 'ME_NOTIFICATIONS'
@@ -118,6 +119,11 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     key: 'ARTICLE_DETAIL',
     href: '/ArticleDetail',
     as: '/@:userName/*-:mediaHash'
+  },
+  {
+    key: 'ARTICLE_DETAIL_LEGACY',
+    href: '/ArticleDetail',
+    as: '/forum'
   },
 
   // Me
