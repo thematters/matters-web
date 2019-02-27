@@ -4,7 +4,7 @@ import { FC, useContext } from 'react'
 import { LanguageContext } from '~/components/Language'
 
 import termStyles from '~/common/styles/utils/content.article.css'
-import { TOS } from '~/common/texts'
+import { TOS } from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'

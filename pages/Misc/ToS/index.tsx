@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Head, LanguageContext, PageHeader, Translate } from '~/components'
 
 import styles from '~/common/styles/utils/content.article.css'
-import { TOS } from '~/common/texts'
+import { TOS } from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
