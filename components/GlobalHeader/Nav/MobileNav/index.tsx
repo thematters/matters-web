@@ -8,16 +8,12 @@ import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
 export default () => {
-  const [
-    dropdownInstance,
-    setDropdownInstance
-  ] = useState<PopperInstance | null>(null)
-  const onCreate = (instance: any) => setDropdownInstance(instance)
+  const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
-    if (!dropdownInstance) {
+    if (!instance) {
       return
     }
-    dropdownInstance.hide()
+    instance.hide()
   }
 
   return (
@@ -25,7 +21,7 @@ export default () => {
       content={<DropdownContent hideDropdown={hideDropdown} />}
       distance={8}
       theme="dropdown shadow-default"
-      onCreate={onCreate}
+      onCreate={i => setInstance(i)}
       zIndex={101}
     >
       <button type="button" aria-label="菜單" className="nav-button">

@@ -1,6 +1,7 @@
 .title {
+  @mixin border-bottom-grey;
+
   padding-bottom: var(--spacing-tight);
-  border-bottom: 1px solid var(--color-line-grey);
 }
 
 .author {
@@ -12,12 +13,13 @@
 }
 
 .content {
+  @mixin border-bottom-grey;
+
   position: relative;
   padding: var(--spacing-default) 0 0 0;
   margin-bottom: var(--spacing-default);
 
   line-height: var(--line-height-article-base);
-  border-bottom: 1px solid var(--color-line-grey);
 
   @media (--sm-up) {
     padding-left: var(--spacing-tight);

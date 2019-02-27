@@ -44,17 +44,17 @@ const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
   }
 
   if (isThisHour(date)) {
-    const diffMins = differenceInMinutes(new Date(), date)
+    const diffMins = differenceInMinutes(new Date(), date) || 1
     return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minuteAgo']
   }
 
   if (isToday(date)) {
-    const diffHrs = differenceInHours(new Date(), date)
+    const diffHrs = differenceInHours(new Date(), date) || 1
     return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
   }
 
   if (isThisWeek(date)) {
-    const diffDays = differenceInDays(new Date(), date)
+    const diffDays = differenceInDays(new Date(), date) || 1
     return diffDays + DIFFS[lang][diffDays === 1 ? 'dayAgo' : 'daysAgo']
   }
 

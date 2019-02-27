@@ -1,7 +1,7 @@
 .container {
+  @mixin border-bottom-grey;
   padding-bottom: var(--spacing-default);
   margin-bottom: var(--spacing-default);
-  border-bottom: 1px solid var(--color-line-grey);
 
   &.pending,
   &.error {
@@ -54,6 +54,7 @@
 
 .extra {
   @mixin flex-center-space-between;
+  @mixin border-top-grey;
 
   margin-top: var(--spacing-tight);
   padding-top: var(--spacing-tight);
@@ -61,7 +62,6 @@
 
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
-  border-top: 1px solid var(--color-line-grey);
 
   & :global(button + button) {
     margin-left: var(--spacing-tight);

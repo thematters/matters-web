@@ -78,7 +78,7 @@ export default () => {
               })
           })
 
-        if (edges.length <= 0) {
+        if (!edges || edges.length <= 0) {
           return <EmptyHistory />
         }
 

@@ -49,7 +49,7 @@ export default () => (
 
       const edges = _get(data, 'viewer.recommendation.icymi.edges', [])
 
-      if (edges.length <= 0) {
+      if (!edges || edges.length <= 0) {
         return null
       }
 

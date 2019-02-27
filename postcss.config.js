@@ -3,6 +3,9 @@ module.exports = {
     require('postcss-each'),
     require('postcss-conditionals'),
     require('lost'),
+    require('postcss-mixins')({
+      mixinsFiles: './common/styles/mixins/mixins.css'
+    }),
     require('postcss-preset-env')({
       stage: 0,
       preserve: false,
@@ -15,9 +18,6 @@ module.exports = {
       ]
     }),
     require('postcss-calc'),
-    require('postcss-color-function'),
-    require('postcss-mixins')({
-      mixinsFiles: './common/styles/mixins/mixins.css'
-    })
+    require('postcss-color-function')
   ]
 }

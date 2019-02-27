@@ -12,16 +12,12 @@ import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
-  const [
-    dropdownInstance,
-    setDropdownInstance
-  ] = useState<PopperInstance | null>(null)
-  const onCreate = (instance: any) => setDropdownInstance(instance)
+  const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
-    if (!dropdownInstance) {
+    if (!instance) {
       return
     }
-    dropdownInstance.hide()
+    instance.hide()
   }
 
   return (
@@ -29,7 +25,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       <Dropdown
         content={<DropdownMenu hideDropdown={hideDropdown} />}
         zIndex={101}
-        onCreate={onCreate}
+        onCreate={i => setInstance(i)}
       >
         <button type="button" className="container">
           <Avatar size="small" user={user} />

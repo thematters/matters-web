@@ -13,7 +13,6 @@
   & :global(.avatar) {
     position: relative;
     border: 1.5px solid var(--color-white);
-    box-sizing: content-box;
 
     & + :global(.avatar) {
       margin-left: calc(var(--spacing-x-tight) * -1);

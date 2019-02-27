@@ -1,0 +1,21 @@
+button {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 0.5rem;
+    height: 0.5rem;
+
+    background: var(--color-matters-green);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &.unread::after {
+    transform: scale(1);
+  }
+}

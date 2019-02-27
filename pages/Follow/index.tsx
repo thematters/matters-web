@@ -21,7 +21,7 @@ const ME_FOLLOW = gql`
 export default () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Query query={ME_FOLLOW} notifyOnNetworkStatusChange>
+      <Query query={ME_FOLLOW}>
         {({ data, loading, error }: QueryResult & { data: MeFollow }) => {
           if (error) {
             return <Error error={error} />
