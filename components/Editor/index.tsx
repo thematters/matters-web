@@ -640,7 +640,6 @@ export class Editor extends React.Component<Props, State> {
   }
 
   public render() {
-    console.log(this.props)
     const state = this.state
     const canUndo = state.historyStep >= 1
     const canRedo =

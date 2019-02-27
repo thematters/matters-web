@@ -30,6 +30,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
     return <span>Empty</span> // TODO
   }
 
+  // return placeholder on SSR
   const [Editor, setEditor] = useState(
     () =>
       Placeholder.ArticleDetail as SFC<{
@@ -39,6 +40,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
       }>
   )
 
+  // use real editor on client side
   useEffect(() => {
     if (process.browser) {
       const EditorComponent = require('~/components/Editor')
@@ -48,14 +50,14 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
         <Query query={DRAFT_DETAIL} variables={{ id }}>
           {({
             data,
             loading,
             error
           }: QueryResult & { data: DraftDetailQuery }) => {
-            console.log(data)
+            console.log({ draftDetailData: data })
             const draft = data && data.node
             if (loading || !draft) {
               return <Placeholder.ArticleDetail />
@@ -85,6 +87,9 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
         </Query>
       </article>
 
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Placeholder.Sidebar />
+      </aside>
       <style jsx>{styles}</style>
     </main>
   )

@@ -52,7 +52,6 @@ const ARTICLE_DETAIL = gql`
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-
   if (!mediaHash) {
     return <span>Empty</span> // TODO
   }
@@ -73,7 +72,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
             if (error) {
               return <Error error={error} />
             }
-
             return (
               <>
                 <Head

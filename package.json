@@ -31,7 +31,7 @@
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf"
   },
   "dependencies": {
-    "@tippy.js/react": "^2.0.2",
+    "@tippy.js/react": "^2.1.1",
     "apollo-cache-inmemory": "^1.4.3",
     "apollo-client": "^2.4.13",
     "apollo-link-http": "^1.5.11",
