@@ -1,5 +1,8 @@
+import { useContext } from 'react'
+
 import { Modal } from '~/components'
-import { ModalInstance } from '~/components/ModalManager'
+import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import styles from './styles.css'
 
@@ -17,10 +20,19 @@ import styles from './styles.css'
 
 interface ModalInstanceProps {
   close: () => {}
-  interpret: (text: string) => string
 }
 
 const Anchor = () => {
+  const viewer = useContext(ViewerContext)
+
+  const isAuth = !!viewer.id
+
+  const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
+
+  const OpenedTermModal = () => (
+    <ModalSwitch modalId="termModal">{(open: any) => open()}</ModalSwitch>
+  )
+
   return (
     <>
       <div>
@@ -31,9 +43,16 @@ const Anchor = () => {
         <ModalInstance modalId="resetModal">
           {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
         </ModalInstance>
-        <ModalInstance modalId="termModal" title="term">
+        <ModalInstance
+          modalId="termModal"
+          title="term"
+          closeOnEsc={false}
+          closeOnOutsideClick={false}
+          enableCloseButton={false}
+        >
           {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
         </ModalInstance>
+        {isAuth && disagreedToS && <OpenedTermModal />}
       </div>
       <style jsx>{styles}</style>
     </>

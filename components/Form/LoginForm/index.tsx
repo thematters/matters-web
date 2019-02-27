@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import Router from 'next/router'
 import { FC, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
@@ -198,10 +199,10 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
       }
       submitAction({ variables: { input: { email, password } } })
         .then((result: any) => {
-          setSubmitting(false)
           if (submitCallback) {
             submitCallback()
           }
+          Router.replace('/')
         })
         .catch((result: any) => {
           // TODO: Handle error
