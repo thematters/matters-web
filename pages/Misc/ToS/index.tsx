@@ -3,10 +3,10 @@ import { useContext } from 'react'
 import { Head, LanguageContext, PageHeader, Translate } from '~/components'
 
 import styles from '~/common/styles/utils/content.article.css'
+import { TOS } from '~/common/texts'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
-import content from './content'
 
 export default () => {
   const { lang } = useContext(LanguageContext)
@@ -26,7 +26,7 @@ export default () => {
           <article
             dangerouslySetInnerHTML={{
               __html: translate({
-                ...content,
+                ...TOS,
                 lang
               })
             }}
