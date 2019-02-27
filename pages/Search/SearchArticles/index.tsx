@@ -87,7 +87,7 @@ const SearchArticles = ({
               })
           })
 
-        if (edges.length <= 0) {
+        if (!edges || edges.length <= 0) {
           return (
             <EmptySearch
               inSidebar={false}

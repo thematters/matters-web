@@ -37,7 +37,7 @@ export default () => (
 
         const edges = _get(data, 'viewer.recommendation.tags.edges', [])
 
-        if (edges.length <= 0) {
+        if (!edges || edges.length <= 0) {
           return null
         }
 

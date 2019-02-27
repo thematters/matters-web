@@ -80,7 +80,7 @@ const Notifications = () => (
                   })
               })
 
-            if (edges.length <= 0) {
+            if (!edges || edges.length <= 0) {
               return null
             }
 

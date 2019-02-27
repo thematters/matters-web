@@ -1,123 +1,143 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
-import { Query, QueryResult } from 'react-apollo'
 
-import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { Empty, Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import { PATHS } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
+import ICON_EMPTY_NOTIFICATION from '~/static/icons/empty-notification.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
-import { MeDropdownNotifications } from './__generated__/MeDropdownNotifications'
 import styles from './styles.css'
 
 interface DropdownNoticesProps {
   hideDropdown: () => void
-  state: 'hidden' | 'shown'
+  data: any
+  loading: boolean
+  error: any
 }
 
-const ME_NOTIFICATIONS = gql`
-  query MeDropdownNotifications($cursor: String) {
-    viewer {
-      id
-      status {
-        unreadNoticeCount
-      }
-      notices(input: { first: 7, after: $cursor }) {
-        edges {
-          cursor
-          node {
-            ...DigestNotice
+const Header = () => (
+  <header>
+    <h4>
+      <Translate zh_hant="通知" zh_hans="通知" />
+    </h4>
+    <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
+      <a>
+        <TextIcon
+          icon={
+            <Icon
+              id={ICON_SETTINGS.id}
+              viewBox={ICON_SETTINGS.viewBox}
+              size="small"
+            />
           }
-        }
-      }
-    }
-  }
-  ${NoticeDigest.fragments.notice}
-`
+          color="grey-dark"
+        >
+          <Translate zh_hant="設定" zh_hans="设定" />
+        </TextIcon>
+      </a>
+    </Link>
+    <style jsx>{styles}</style>
+  </header>
+)
 
-const DropdownNotices = ({ hideDropdown, state }: DropdownNoticesProps) => {
+const Footer = () => (
+  <footer>
+    <Link {...PATHS.ME_NOTIFICATIONS}>
+      <a>
+        <TextIcon
+          icon={
+            <Icon
+              id={ICON_ARROW_RIGHT_GREEN.id}
+              viewBox={ICON_ARROW_RIGHT_GREEN.viewBox}
+              style={{ width: 12, height: 6 }}
+            />
+          }
+          color="green"
+          textPlacement="left"
+          weight="medium"
+        >
+          <Translate zh_hant="全部通知" zh_hans="全部通知" />
+        </TextIcon>
+      </a>
+    </Link>
+    <style jsx>{styles}</style>
+  </footer>
+)
+
+const EmptyNotices = () => (
+  <Empty
+    icon={
+      <Icon
+        id={ICON_EMPTY_NOTIFICATION.id}
+        viewBox={ICON_EMPTY_NOTIFICATION.viewBox}
+        size={'xxlarge'}
+      />
+    }
+  />
+)
+
+const DropdownNotices = ({
+  hideDropdown,
+  data,
+  loading,
+  error
+}: DropdownNoticesProps) => {
+  if (loading) {
+    return (
+      <section className="container" onClick={hideDropdown}>
+        <Header />
+
+        <section className="content">
+          <Spinner />
+        </section>
+
+        <Footer />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="container" onClick={hideDropdown}>
+        <Header />
+
+        <section className="content">
+          <Error error={error} />
+        </section>
+
+        <Footer />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  const edges = _get(data, 'viewer.notices.edges')
+
   return (
     <section className="container" onClick={hideDropdown}>
-      <header>
-        <h4>
-          <Translate zh_hant="通知" zh_hans="通知" />
-        </h4>
-
-        <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
-          <a>
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_SETTINGS.id}
-                  viewBox={ICON_SETTINGS.viewBox}
-                  size="small"
-                />
-              }
-              color="grey-dark"
-            >
-              <Translate zh_hant="設定" zh_hans="设定" />
-            </TextIcon>
-          </a>
-        </Link>
-      </header>
+      <Header />
 
       <section className="content">
-        <Query query={ME_NOTIFICATIONS} skip={state === 'hidden'}>
-          {({
-            data,
-            loading,
-            error
-          }: QueryResult & { data: MeDropdownNotifications }) => {
-            if (loading) {
-              return <Spinner />
-            }
-
-            if (error) {
-              return <Error error={error} />
-            }
-
-            const edges = _get(data, 'viewer.notices.edges')
-
-            if (!edges || edges.length <= 0) {
-              return null
-            }
-
-            return (
-              <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <NoticeDigest notice={node} key={cursor} />
-                  </li>
-                ))}
-              </ul>
-            )
-          }}
-        </Query>
+        <ul>
+          {edges && edges.length > 0 ? (
+            edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+              <li key={cursor}>
+                <NoticeDigest notice={node} key={cursor} />
+              </li>
+            ))
+          ) : (
+            <EmptyNotices />
+          )}
+        </ul>
       </section>
 
-      <footer>
-        <Link {...PATHS.ME_NOTIFICATIONS}>
-          <a>
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_ARROW_RIGHT_GREEN.id}
-                  viewBox={ICON_ARROW_RIGHT_GREEN.viewBox}
-                  style={{ width: 12, height: 6 }}
-                />
-              }
-              color="green"
-              textPlacement="left"
-              weight="medium"
-            >
-              <Translate zh_hant="全部通知" zh_hans="全部通知" />
-            </TextIcon>
-          </a>
-        </Link>
-      </footer>
+      <Footer />
 
       <style jsx>{styles}</style>
     </section>

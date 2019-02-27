@@ -1,14 +1,70 @@
+import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { useState } from 'react'
+import { Mutation, Query, QueryResult } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
+import NoticeDigest from '~/components/NoticeDigest'
 
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
 
+import { MeDropdownNotifications } from './__generated__/MeDropdownNotifications'
+import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
+import styles from './styles.css'
 
-const NoticesButton = () => {
+const POLL_INTERVAL = 1000 * 10
+
+const UNREAD_NOTICE_COUNT = gql`
+  query UnreadNoticeCount {
+    viewer {
+      id
+      status {
+        unreadNoticeCount
+      }
+    }
+  }
+`
+
+const ME_NOTIFICATIONS = gql`
+  query MeDropdownNotifications($cursor: String) {
+    viewer {
+      id
+      notices(input: { first: 7, after: $cursor }) {
+        edges {
+          cursor
+          node {
+            ...DigestNotice
+          }
+        }
+      }
+    }
+  }
+  ${NoticeDigest.fragments.notice}
+`
+
+const MARK_ALL_NOTICES_AS_READ = gql`
+  mutation markAllNoticesAsRead {
+    markAllNoticesAsRead
+  }
+`
+
+const NoticeButton = ({
+  data,
+  loading,
+  error,
+  hasUnreadNotices,
+  refetch,
+  markAllNoticesAsRead
+}: {
+  data: any
+  loading: boolean
+  error: any
+  hasUnreadNotices: any
+  refetch: any
+  markAllNoticesAsRead: any
+}) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const [state, setState] = useState<'hidden' | 'shown'>('hidden')
   const hideDropdown = () => {
     if (!instance) {
       return
@@ -32,24 +88,77 @@ const NoticesButton = () => {
 
   return (
     <Dropdown
-      content={<DropdownNotices hideDropdown={hideDropdown} state={state} />}
+      content={
+        <DropdownNotices
+          hideDropdown={hideDropdown}
+          data={data}
+          loading={loading}
+          error={error}
+        />
+      }
       zIndex={101}
       distance={12}
       trigger="manual"
-      onShown={() => setState('shown')}
-      onHidden={() => setState('hidden')}
       onCreate={i => setInstance(i)}
       theme="dropdown shadow-light"
     >
-      <button type="button" aria-label="通知" onClick={toggleDropdown}>
+      <button
+        type="button"
+        aria-label="通知"
+        onClick={() => {
+          markAllNoticesAsRead()
+          toggleDropdown()
+          if (hasUnreadNotices) {
+            refetch()
+          }
+        }}
+        className={hasUnreadNotices ? 'unread' : ''}
+      >
         <Icon
           id={ICON_NOTIFICATION.id}
           viewBox={ICON_NOTIFICATION.viewBox}
           className="u-motion-icon-hover"
         />
+        <style jsx>{styles}</style>
       </button>
     </Dropdown>
   )
 }
 
-export default NoticesButton
+export default () => (
+  <Query query={UNREAD_NOTICE_COUNT} pollInterval={POLL_INTERVAL}>
+    {({ data: unreadCountData }: QueryResult & { data: UnreadNoticeCount }) => (
+      <Query query={ME_NOTIFICATIONS} notifyOnNetworkStatusChange>
+        {({
+          data,
+          loading,
+          error,
+          refetch
+        }: QueryResult & { data: MeDropdownNotifications }) => (
+          <Mutation
+            mutation={MARK_ALL_NOTICES_AS_READ}
+            refetchQueries={[
+              {
+                query: UNREAD_NOTICE_COUNT
+              }
+            ]}
+          >
+            {markAllNoticesAsRead => (
+              <NoticeButton
+                data={data}
+                loading={loading}
+                error={error}
+                refetch={refetch}
+                hasUnreadNotices={
+                  _get(unreadCountData, 'viewer.status.unreadNoticeCount', 0) >=
+                  1
+                }
+                markAllNoticesAsRead={markAllNoticesAsRead}
+              />
+            )}
+          </Mutation>
+        )}
+      </Query>
+    )}
+  </Query>
+)
