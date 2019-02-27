@@ -1,63 +1,40 @@
 import classNames from 'classnames'
-import { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { Form } from '~/components/Form'
-import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
-import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
-/**
- * This component is for password reset modal.
- *
- * Usage:
- *
- * ```jsx
- *   <Modal.ResetModal close={close} />
- * ```
- *
- */
-
-interface Props {
-  close: () => {}
-}
-
-const ResetModal: FC<Props> = ({ close }) => {
+const Forget = () => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState('request')
 
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      title: translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang }),
-      prev: 'login',
-      next: 'reset'
+      next: 'rest'
     },
     reset: {
-      title: translate({ zh_hant: '重置密碼', zh_hans: '重置密码', lang }),
       prev: 'request',
       next: 'complete'
-    },
-    complete: {
-      title: translate({
-        zh_hant: '密碼重置成功',
-        zh_hans: '密码重置成功',
-        lang
-      })
     }
   })
 
-  const contentClass = classNames(
+  const containerClass = classNames(
     'l-col-4',
     'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
+    'l-offset-sm-1',
+    'l-col-md-4',
+    'l-offset-md-2',
+    'l-col-lg-6',
+    'l-offset-lg-3',
+    'container'
   )
+
+  const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
@@ -78,18 +55,6 @@ const ResetModal: FC<Props> = ({ close }) => {
     event.stopPropagation()
     setStep('request')
   }
-
-  const Header = ({ title }: { title: string }) => (
-    <>
-      <div className="header">
-        <Title type="modal">{title}</Title>
-        <button onClick={close}>
-          <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-        </button>
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
 
   const Complete = () => (
     <>
@@ -116,30 +81,31 @@ const ResetModal: FC<Props> = ({ close }) => {
 
   return (
     <>
-      <Header title={data[step].title} />
-      <div className="container">
-        <div className={contentClass}>
+      <main className="l-row row">
+        <article className={containerClass}>
           {step === 'request' && (
             <Form.ResetCodeForm
               defaultEmail={data.request.email}
-              purpose="modal"
+              extraClass={formClass}
+              purpose="page"
               submitCallback={requestCodeCallback}
             />
           )}
           {step === 'reset' && (
             <Form.ResetForm
+              extraClass={formClass}
               codeId={data.request.codeId}
-              purpose="modal"
+              purpose="page"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
             />
           )}
           {step === 'complete' && <Complete />}
-        </div>
-      </div>
+        </article>
+      </main>
       <style jsx>{styles}</style>
     </>
   )
 }
 
-export default ResetModal
+export default Forget

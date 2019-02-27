@@ -1,0 +1,18 @@
+.row {
+  margin-top: 7rem;
+  margin-bottom: 1rem;
+}
+
+.container {
+  @mixin flex-center-all;
+  border: 1px solid var(--color-line-grey-light);
+  border-radius: 0.125rem;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 4rem 0;
+
+  @media (--sm-down) {
+    & {
+      padding: var(--spacing-loose) var(--spacing-tight);
+    }
+  }
+}

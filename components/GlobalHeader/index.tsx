@@ -25,7 +25,7 @@ Router.onRouteChangeComplete = () => {
   analytics.trackPage()
 }
 
-const ModalLoginSwitch = () => (
+const LoginModalSwitch = () => (
   <ModalSwitch modalId="loginModal">
     {(open: any) => <LoginButton onClick={open} />}
   </ModalSwitch>
@@ -63,7 +63,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             ) : (
               <>
-                <ModalLoginSwitch />
+                <LoginModalSwitch />
                 <SignUpButton />
               </>
             )}

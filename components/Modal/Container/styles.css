@@ -6,12 +6,21 @@
   bottom: 0;
 
   background-color: rgba(0, 0, 0, 0.5);
-  padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-default);
+
+  &.center {
+    @mixin flex-center-all;
+  }
 }
 
-.center {
-  display: flex;
-  align-items: center;
+.row {
+  flex: auto;
+  padding-bottom: var(--spacing-default);
+
+  @media (--sm-down) {
+    & {
+      padding-bottom: var(-spacing-x-tight);
+    }
+  }
 }
 
 .container {
