@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
+import { SFC, useEffect, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
 import { Placeholder } from '~/components'
+import { fragments as EditorFragments } from '~/components/Editor/fragments'
 
 import { getQuery } from '~/common/utils'
 
@@ -15,12 +16,11 @@ const DRAFT_DETAIL = gql`
     node(input: { id: $id }) {
       id
       ... on Draft {
-        title
-        slug
-        content
+        ...EditorDraft
       }
     }
   }
+  ${EditorFragments.draft}
 `
 
 const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
@@ -30,7 +30,21 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
     return <span>Empty</span> // TODO
   }
 
-  console.log({ id })
+  const [Editor, setEditor] = useState(
+    () =>
+      Placeholder.ArticleDetail as SFC<{
+        draft: DraftDetailQuery['node']
+        upload: any
+        submit: any
+      }>
+  )
+
+  useEffect(() => {
+    if (process.browser) {
+      const EditorComponent = require('~/components/Editor')
+      setEditor(() => EditorComponent.Editor)
+    }
+  })
 
   return (
     <main className="l-row">
@@ -41,14 +55,32 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
             loading,
             error
           }: QueryResult & { data: DraftDetailQuery }) => {
-            if (loading) {
+            console.log(data)
+            const draft = data && data.node
+            if (loading || !draft) {
               return <Placeholder.ArticleDetail />
             }
 
             // if (error) {
             //   return <Error error={error} />
             // }
-            return <span> hi</span>
+
+            const upload = (uploadata: any) => {
+              console.log('upload', uploadata)
+              return Promise.resolve({
+                data: { singleFileUpload: { id: 'test', path: 'test' } }
+              })
+            }
+
+            return (
+              <Editor
+                draft={draft}
+                upload={upload}
+                submit={() => {
+                  console.log('submit')
+                }}
+              />
+            )
           }}
         </Query>
       </article>

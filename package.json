@@ -64,6 +64,7 @@
     "@types/jest": "^24.0.6",
     "@types/lodash": "^4.14.120",
     "@types/next": "^7.0.9",
+    "@types/next-server": "^7.0.5",
     "@types/quill": "^2.0.2",
     "@types/react": "^16.8.4",
     "@types/react-portal": "^4.0.2",

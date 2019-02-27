@@ -1,8 +1,8 @@
 // import 'normalize.css'
-import Quill, { DeltaOperation } from 'quill'
 import React from 'react'
 
 // import 'tailwindcss/dist/utilities.min.css'
+import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
 import EditorTools from './EditorTools'
 import './quill.css'
@@ -23,26 +23,20 @@ interface UploadResponse {
 interface Props {
   upload: (data: string) => Promise<{ data: UploadResponse }>
   submit: any
-  draftId: string
-  data: {
-    title?: string
-    draftTitle?: string
-    content: string
-    upstream?: object
-  }
+  draft: EditorDraft
 }
 interface State {
   quill: any
   range: any
   formatType?: string
-  histories: DeltaOperation[]
+  histories: any[]
   historyStep: number
   openRedoOrUndo: boolean
   // keyboardHeight: number
   toolsMode: number
   toolsContentMode: number
-  title?: string
-  upstream?: { id?: string; title?: string }
+  title: string
+  upstream?: { id?: string; title?: string } | null
   coverAssetId: string | number | null
 }
 
@@ -50,17 +44,16 @@ const TOOLBAR_ONE = 1
 const TOOLBAR_TWO = 2
 
 const { CustomBlot, DividerBlot, ImageBlot, LinkBlot } = blots // RecordBlot
-export class EditorIndex extends React.Component<Props, State> {
+
+export class Editor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    const quill = this.initQuill()
-
     this.state = {
-      quill,
+      quill: null,
       range: null,
       formatType: '',
-      histories: [] as DeltaOperation[],
+      histories: [] as any[],
       historyStep: 0,
       openRedoOrUndo: false,
       toolsMode: TOOLBAR_ONE,
@@ -73,10 +66,14 @@ export class EditorIndex extends React.Component<Props, State> {
 
   public componentDidMount() {
     window.editor = this
+
+    const quill = this.initQuill()
+    this.setState({ quill })
   }
 
   public initQuill() {
-    this.onGetAppToken()
+    // this.onGetAppToken()
+    const Quill = require('quill')
     const Delta = Quill.import('delta')
     const SizeStyle = Quill.import('attributors/style/size')
     const AlignStyle = Quill.import('attributors/style/align')
@@ -101,9 +98,9 @@ export class EditorIndex extends React.Component<Props, State> {
           userOnly: true
         }
       }
-    }) as Quill & { history: any } // using history module
+    }) // as Quill & { history: any } // using history module
     // 監聽文字選擇
-    editor.on('selection-change', range => {
+    editor.on('selection-change', (range: any) => {
       if (range) {
         if (range.length !== 0) {
           this.setState({
@@ -124,7 +121,7 @@ export class EditorIndex extends React.Component<Props, State> {
     })
     // 監聽文字修改
     let change = new Delta()
-    editor.on('text-change', (delta, oldDelta, source) => {
+    editor.on('text-change', (delta: any, oldDelta: any, source: any) => {
       // 设置自动保存
       change = change.compose(delta)
       // 設置歷史操作
@@ -171,18 +168,18 @@ export class EditorIndex extends React.Component<Props, State> {
 
   public componentWillReceiveProps() {
     this.forceUpdate(() => {
-      console.log('props', this.props.data)
-      if (this.props.data && this.props.data != null) {
-        const data = this.props.data
+      console.log('props', this.props.draft)
+      if (this.props.draft && this.props.draft != null) {
+        const { draft } = this.props
         this.setState({
-          title: data.title ? data.title : data.draftTitle,
-          upstream:
-            data.upstream && data.upstream != null
-              ? data.upstream
-              : {
-                  id: null,
-                  title: ''
-                }
+          title: draft.title || '',
+          upstream: draft.upstream
+          // data.upstream && data.upstream != null
+          //   ? data.upstream
+          //   : {
+          //       id: undefined,
+          //       title: ''
+          //     }
         })
 
         if (this.state.quill !== null) {
@@ -199,7 +196,7 @@ export class EditorIndex extends React.Component<Props, State> {
       return false
     }
     const form = {
-      id: this.props.draftId ? this.props.draftId : null,
+      id: this.props.draft.id ? this.props.draft.id : null,
       upstreamId: this.state.upstream ? this.state.upstream.id : null,
       title: this.state.title,
       content:
@@ -484,7 +481,7 @@ export class EditorIndex extends React.Component<Props, State> {
 
   // 取消编辑
   public cancelEdit() {
-    if (this.props.data) {
+    if (this.props.draft) {
       // 草稿上传成功
       console.log(`this.jumpToLink('onEditorCancle')`)
     } else {
@@ -643,6 +640,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   public render() {
+    console.log(this.props)
     const state = this.state
     const canUndo = state.historyStep >= 1
     const canRedo =
@@ -679,7 +677,7 @@ export class EditorIndex extends React.Component<Props, State> {
               <input
                 type="text"
                 placeholder="連結上游文章（可選）"
-                value={state.upstream && state.upstream.title}
+                value={(state.upstream && state.upstream.title) || undefined}
                 style={Style.form.input(1.4, 'rgb(179, 179, 179)', false)}
                 readOnly
                 onClick={() => {
