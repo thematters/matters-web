@@ -7,7 +7,7 @@ import { DateTime, Error, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 
-import { getQuery } from '~/common/utils'
+import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
@@ -18,15 +18,18 @@ import Toolbar from './Toolbar'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
-    $mediaHash: String!
+    $mediaHash: String
+    $uuid: UUID
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
     $hasDigestTagArticleCount: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
-    article(input: { mediaHash: $mediaHash }) {
+    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
       id
       title
+      slug
+      mediaHash
       state
       public
       live
@@ -52,15 +55,16 @@ const ARTICLE_DETAIL = gql`
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const uuid = getQuery({ router, key: 'post' })
 
-  if (!mediaHash) {
+  if (!mediaHash && !uuid) {
     return <span>Empty</span> // TODO
   }
 
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
-        <Query query={ARTICLE_DETAIL} variables={{ mediaHash }}>
+        <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
           {({
             data,
             loading,
@@ -72,6 +76,17 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             if (error) {
               return <Error error={error} />
+            }
+
+            // redirect to latest verion of URL Pattern
+            if (uuid && process.browser && router) {
+              const path = toPath({
+                page: 'articleDetail',
+                userName: data.article.author.userName,
+                slug: data.article.slug,
+                mediaHash: data.article.mediaHash
+              })
+              router.push(path.href, path.as, { shallow: true })
             }
 
             return (
