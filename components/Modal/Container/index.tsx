@@ -18,6 +18,7 @@ interface Props {
   close: () => void
   closeOnEsc?: boolean
   closeOnOutsideClick?: boolean
+  enableCloseButton?: boolean
   title?: string
 }
 
@@ -27,6 +28,7 @@ const Container: FC<Props> = ({
   close,
   closeOnEsc = true,
   closeOnOutsideClick = true,
+  enableCloseButton = true,
   title
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -96,9 +98,11 @@ const Container: FC<Props> = ({
     <>
       <div className="header">
         <Title type="modal">{interpret(props.title)}</Title>
-        <button type="button" aria-label={interpret('close')} onClick={close}>
-          <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-        </button>
+        {props.enableCloseButton && (
+          <button type="button" aria-label={interpret('close')} onClick={close}>
+            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
+          </button>
+        )}
       </div>
       <style jsx>{styles}</style>
     </>
@@ -110,7 +114,9 @@ const Container: FC<Props> = ({
         <div className="l-row row">
           <div ref={setNode} className={modalClass}>
             <div className="container">
-              {title && <Header title={title} />}
+              {title && (
+                <Header title={title} enableCloseButton={enableCloseButton} />
+              )}
               {children({ close, interpret })}
             </div>
           </div>

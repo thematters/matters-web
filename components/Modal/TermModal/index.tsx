@@ -1,5 +1,8 @@
 import { withFormik } from 'formik'
+import gql from 'graphql-tag'
+import Router from 'next/router'
 import { FC, useContext } from 'react'
+import { Mutation } from 'react-apollo'
 
 import { LanguageContext } from '~/components/Language'
 
@@ -23,23 +26,53 @@ interface Props {
   close: () => {}
 }
 
-const Term = ({ lang }: any) => (
-  <>
-    <div
-      className="content"
-      dangerouslySetInnerHTML={{
-        __html: translate({
-          ...TOS,
-          lang
-        })
-      }}
-    />
-    <style jsx>{termStyles}</style>
-  </>
-)
+const MUTATION_UPDATE_AGREE_ON = gql`
+  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+    updateUserInfo(input: $input) {
+      id
+      info {
+        agreeOn
+      }
+    }
+  }
+`
+
+const MUTATION_USER_LOGOUT = gql`
+  mutation UserLogout {
+    userLogout
+  }
+`
 
 const TermModal: FC<Props> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
+
+  const disagree = (action: any) => {
+    if (action) {
+      action()
+        .then(() => {
+          close()
+          Router.replace('/')
+        })
+        .catch(() => {
+          // TODO: Handle error
+        })
+    }
+  }
+
+  const Term = () => (
+    <>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{
+          __html: translate({
+            ...TOS,
+            lang
+          })
+        }}
+      />
+      <style jsx>{termStyles}</style>
+    </>
+  )
 
   const BaseForm = (props: any) => (
     <>
@@ -56,17 +89,21 @@ const TermModal: FC<Props> = ({ close }) => {
             。
           </span>
           <div className="context">
-            <Term lang={lang} />
+            <Term />
           </div>
         </div>
         <div className="buttons">
-          <div className="button disagree">
-            {translate({
-              zh_hant: '我不同意',
-              zh_hans: '我不同意',
-              lang
-            })}
-          </div>
+          <Mutation mutation={MUTATION_USER_LOGOUT}>
+            {logout => (
+              <div className="button disagree" onClick={() => disagree(logout)}>
+                {translate({
+                  zh_hant: '我不同意',
+                  zh_hans: '我不同意',
+                  lang
+                })}
+              </div>
+            )}
+          </Mutation>
           <button
             type="submit"
             className="button agree"
@@ -84,16 +121,30 @@ const TermModal: FC<Props> = ({ close }) => {
     </>
   )
 
-  const TermForm = withFormik({
-    handleSubmit: async (values, { setSubmitting }) => {
-      // TODO: Add mutation
-      console.log(values) // For passing linting
-      setSubmitting(false)
-      close()
+  const TermForm: any = withFormik({
+    handleSubmit: (values, { props, setSubmitting }: any) => {
+      const { submitAction } = props
+      if (!submitAction) {
+        return undefined
+      }
+      submitAction({ variables: { input: { agreeOn: true } } })
+        .then((result: any) => {
+          close()
+        })
+        .catch((result: any) => {
+          // TODO: Handle error
+        })
+        .finally(() => {
+          setSubmitting(false)
+        })
     }
   })(BaseForm)
 
-  return <TermForm />
+  return (
+    <Mutation mutation={MUTATION_UPDATE_AGREE_ON}>
+      {update => <TermForm submitAction={update} />}
+    </Mutation>
+  )
 }
 
 export default TermModal

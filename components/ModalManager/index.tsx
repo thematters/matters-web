@@ -97,10 +97,16 @@ const defaultAnchorNode = 'modal-anchor'
 
 export const ModalInstance = ({
   children,
+  closeOnEsc,
+  closeOnOutsideClick,
+  enableCloseButton,
   modalId,
   title
 }: {
   children: any
+  closeOnEsc?: boolean
+  closeOnOutsideClick?: boolean
+  enableCloseButton?: boolean
   modalId: string
   title?: string
 }) => {
@@ -117,7 +123,13 @@ export const ModalInstance = ({
       {({ close, openedModalId }) => {
         if (children && node && openedModalId === modalId) {
           return ReactDOM.createPortal(
-            <Modal.Container title={title} close={close}>
+            <Modal.Container
+              title={title}
+              close={close}
+              closeOnEsc={closeOnEsc}
+              closeOnOutsideClick={closeOnOutsideClick}
+              enableCloseButton={enableCloseButton}
+            >
               {(props: any) => <>{children(props)}</>}
             </Modal.Container>,
             node

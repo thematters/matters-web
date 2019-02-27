@@ -1,9 +1,11 @@
 import classNames from 'classnames'
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 
 import { Form } from '~/components/Form'
 import { Icon } from '~/components/Icon'
+import { LanguageContext } from '~/components/Language'
 
+import { translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 
 import styles from './styles.css'
@@ -14,17 +16,18 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.LoginModal close={close} interpret={interpret} />
+ *   <Modal.LoginModal close={close} />
  * ```
  *
  */
 
 interface Props {
   close: () => {}
-  interpret: (text: string) => string
 }
 
-const LoginModal: FC<Props> = ({ close, interpret }) => {
+const LoginModal: FC<Props> = ({ close }) => {
+  const { lang } = useContext(LanguageContext)
+
   const contentClass = classNames(
     'l-col-4',
     'l-col-sm-6',
@@ -36,9 +39,18 @@ const LoginModal: FC<Props> = ({ close, interpret }) => {
   const Footer = () => (
     <>
       <div className="footer">
-        {interpret('hasNoAccount')}？
+        {translate({
+          zh_hant: '沒有帳號',
+          zh_hans: '没有帐号',
+          lang
+        })}
+        ？
         <span className="link">
-          {interpret('register')}
+          {translate({
+            zh_hant: '註冊',
+            zh_hans: '注册',
+            lang
+          })}
           <Icon
             style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
             id={ICON_ARROW.id}
