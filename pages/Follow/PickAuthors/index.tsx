@@ -81,7 +81,7 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
       const edges = _get(data, 'viewer.recommendation.authors.edges', [])
       const followeeCount = _get(viewer, 'followees.totalCount', 0)
 
-      if (edges.length <= 0) {
+      if (!edges || edges.length <= 0) {
         return null
       }
 

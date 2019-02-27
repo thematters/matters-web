@@ -1,11 +1,12 @@
-// External modules
 import classNames from 'classnames'
-import { withFormik } from 'formik'
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 
-import { Button, Form, Icon, ModalSwitch, Title } from '~/components'
+import { Form } from '~/components/Form'
+import { Icon } from '~/components/Icon'
+import { LanguageContext } from '~/components/Language'
+import { Title } from '~/components/Title'
 
-import { isValidEmail, isValidPassword } from '~/common/utils'
+import { translate } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
@@ -16,28 +17,37 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.ResetModal close={close} interpret={interpret} />
+ *   <Modal.ResetModal close={close} />
  * ```
  *
  */
 
 interface Props {
   close: () => {}
-  interpret: (text: string) => string
 }
 
-const ResetModal: FC<Props> = ({ close, interpret }) => {
+const ResetModal: FC<Props> = ({ close }) => {
+  const { lang } = useContext(LanguageContext)
+
   const [step, setStep] = useState('request')
 
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      title: interpret('forgetPassword')
+      title: translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang }),
+      prev: 'login',
+      next: 'reset'
     },
     reset: {
-      title: interpret('resetPassword')
+      title: translate({ zh_hant: '重置密碼', zh_hans: '重置密码', lang }),
+      prev: 'request',
+      next: 'complete'
     },
     complete: {
-      title: interpret('resetPassword')
+      title: translate({
+        zh_hant: '密碼重置成功',
+        zh_hans: '密码重置成功',
+        lang
+      })
     }
   })
 
@@ -49,17 +59,24 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
     'content'
   )
 
-  const goPreviousStep = (event: any) => {
+  const requestCodeCallback = (params: any) => {
+    const { email, codeId } = params
+    setData(prev => {
+      return {
+        ...prev,
+        request: {
+          ...prev.request,
+          email,
+          codeId
+        }
+      }
+    })
+    setStep('reset')
+  }
+
+  const backPreviousStep = (event: any) => {
     event.stopPropagation()
-    switch (step) {
-      case 'reqeust': {
-        break
-      }
-      case 'reset': {
-        setStep('request')
-        break
-      }
-    }
+    setStep('request')
   }
 
   const Header = ({ title }: { title: string }) => (
@@ -74,244 +91,24 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
     </>
   )
 
-  const SendVerificationCodeButton = () => (
-    <>
-      <Button
-        is="button"
-        bgColor="transparent"
-        className="u-link-green"
-        style={{ paddingRight: '0' }}
-      >
-        {interpret('sendVerificationCode')}
-      </Button>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const ModalLoginSwitch = () => (
-    <ModalSwitch modalId="loginModal">
-      {(open: any) => (
-        <Button
-          type="button"
-          bgColor="transparent"
-          className="u-link-green"
-          style={{ paddingLeft: '0rem' }}
-          onClick={open}
-        >
-          {interpret('previousStep')}
-        </Button>
-      )}
-    </ModalSwitch>
-  )
-
-  const BaseRequestForm = ({
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit
-  }: {
-    [key: string]: any
-  }) => (
-    <>
-      <form className="form" onSubmit={handleSubmit}>
-        <Form.Input
-          type="text"
-          field="email"
-          placeholder={interpret('enterRegisteredEmail')}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="text"
-          field="code"
-          placeholder={interpret('verificationCode')}
-          style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
-          floatElement={<SendVerificationCodeButton />}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <div className="buttons">
-          <ModalLoginSwitch />
-          <Button
-            type="submit"
-            bgColor="green"
-            style={{ width: 80 }}
-            disabled={isSubmitting}
-          >
-            {interpret('nextStep')}
-          </Button>
-        </div>
-      </form>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const BaseResetForm = ({
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit
-  }: {
-    [key: string]: any
-  }) => (
-    <>
-      <form className="form" onSubmit={handleSubmit}>
-        <Form.Input
-          type="password"
-          field="password"
-          placeholder={interpret('enterPassword')}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="password"
-          field="confirmedPassword"
-          placeholder={interpret('enterPasswordAgain')}
-          style={{ marginTop: '0.5rem', paddingRight: '6rem' }}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <div className="buttons">
-          <Button
-            type="button"
-            bgColor="transparent"
-            className="u-link-green"
-            onClick={goPreviousStep}
-            style={{ paddingLeft: '0rem' }}
-          >
-            {interpret('previousStep')}
-          </Button>
-          <Button
-            type="submit"
-            bgColor="green"
-            style={{ width: 80 }}
-            disabled={isSubmitting}
-          >
-            {interpret('confirm')}
-          </Button>
-        </div>
-      </form>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const validateEmail = (value: string) => {
-    if (!value) {
-      return interpret('required')
-    }
-    if (!isValidEmail(value)) {
-      return interpret('invalidEmail')
-    }
-    return undefined
-  }
-
-  const validateCode = (value: string) => {
-    if (!value) {
-      return interpret('required')
-    }
-    return undefined
-  }
-
-  const validatePassword = (value: string) => {
-    if (!value) {
-      return interpret('required')
-    }
-    if (!isValidPassword(value)) {
-      return interpret('passwordHint')
-    }
-    return undefined
-  }
-
-  const validateConfirmedPassword = (compareValue: string, value: string) => {
-    if (!value) {
-      return interpret('required')
-    }
-    if (compareValue !== value) {
-      return interpret('passwordNotMatch')
-    }
-    return undefined
-  }
-
-  const RequestForm = withFormik({
-    mapPropsToValues: () => ({
-      email: data.request.email || '',
-      code: data.request.code || ''
-    }),
-
-    validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email)
-      const isInvalidCode = validateCode(code)
-      const errors = {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
-      }
-      return errors
-    },
-
-    handleSubmit: (values, { setSubmitting }) => {
-      // TODO: Add mutation
-      setData(prev => {
-        prev.request.email = values.email
-        prev.request.code = values.code
-        return prev
-      })
-      setSubmitting(false)
-      setStep('reset')
-    }
-  })(BaseRequestForm)
-
-  const ResetForm = withFormik({
-    mapPropsToValues: () => ({
-      password: '',
-      confirmedPassword: ''
-    }),
-
-    validate: ({ password, confirmedPassword }) => {
-      const isInvalidPassword = validatePassword(password)
-      const isInvalidConfirmedPassword = validateConfirmedPassword(
-        password,
-        confirmedPassword
-      )
-      const errors = {
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidConfirmedPassword
-          ? { confirmedPassword: isInvalidConfirmedPassword }
-          : {})
-      }
-      return errors
-    },
-
-    handleSubmit: async (values, { setSubmitting }) => {
-      // TODO: Add mutation
-      console.log(values) // For passing liniting
-      setSubmitting(false)
-      setStep('complete')
-    }
-  })(BaseResetForm)
-
   const Complete = () => (
     <>
       <div className="complete">
-        <div className="message">{interpret('resetPasswordSuccess')}</div>
-        <div className="hint">{interpret('useNewPassword')}。</div>
+        <div className="message">
+          {translate({
+            zh_hant: '密碼重置成功',
+            zh_hans: '密码重置成功',
+            lang
+          })}
+        </div>
+        <div className="hint">
+          {translate({
+            zh_hant: '請使用新的密碼重新登入',
+            zh_hans: '请使用新的密码重新登入',
+            lang
+          })}
+          。
+        </div>
       </div>
       <style jsx>{styles}</style>
     </>
@@ -320,10 +117,23 @@ const ResetModal: FC<Props> = ({ close, interpret }) => {
   return (
     <>
       <Header title={data[step].title} />
-      <div className="content-wrapper">
+      <div className="container">
         <div className={contentClass}>
-          {step === 'request' && <RequestForm />}
-          {step === 'reset' && <ResetForm />}
+          {step === 'request' && (
+            <Form.ResetCodeForm
+              defaultEmail={data.request.email}
+              purpose="modal"
+              submitCallback={requestCodeCallback}
+            />
+          )}
+          {step === 'reset' && (
+            <Form.ResetForm
+              codeId={data.request.codeId}
+              purpose="modal"
+              backPreviousStep={backPreviousStep}
+              submitCallback={() => setStep('complete')}
+            />
+          )}
           {step === 'complete' && <Complete />}
         </div>
       </div>

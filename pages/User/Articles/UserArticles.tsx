@@ -80,7 +80,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               })
           })
 
-        if (edges.length <= 0) {
+        if (!edges || edges.length <= 0) {
           return <EmptyArticles />
         }
 

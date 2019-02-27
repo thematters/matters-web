@@ -1,5 +1,14 @@
 import { withFormik } from 'formik'
-import { FC } from 'react'
+import gql from 'graphql-tag'
+import Router from 'next/router'
+import { FC, useContext } from 'react'
+import { Mutation } from 'react-apollo'
+
+import { LanguageContext } from '~/components/Language'
+
+import termStyles from '~/common/styles/utils/content.article.css'
+import { TOS } from '~/common/texts/tos'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -9,35 +18,102 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.TermModal close={close} interpret={intepret} />
+ *   <Modal.TermModal close={close} />
  * ```
  */
 
 interface Props {
   close: () => {}
-  interpret: (text: string) => string
 }
 
-const TermModal: FC<Props> = ({ close, interpret }) => {
-  const BaseForm = (props: { [key: string]: any }) => (
+const MUTATION_UPDATE_AGREE_ON = gql`
+  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+    updateUserInfo(input: $input) {
+      id
+      info {
+        agreeOn
+      }
+    }
+  }
+`
+
+const MUTATION_USER_LOGOUT = gql`
+  mutation UserLogout {
+    userLogout
+  }
+`
+
+const TermModal: FC<Props> = ({ close }) => {
+  const { lang } = useContext(LanguageContext)
+
+  const disagree = (action: any) => {
+    if (action) {
+      action()
+        .then(() => {
+          close()
+          Router.replace('/')
+        })
+        .catch(() => {
+          // TODO: Handle error
+        })
+    }
+  }
+
+  const Term = () => (
+    <>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{
+          __html: translate({
+            ...TOS,
+            lang
+          })
+        }}
+      />
+      <style jsx>{termStyles}</style>
+    </>
+  )
+
+  const BaseForm = (props: any) => (
     <>
       <form className="form" onSubmit={props.handleSubmit}>
         <div className="term">
-          <span className="hint">{interpret('termHint')}</span>
+          <span className="hint">
+            {translate({
+              zh_hant:
+                '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用',
+              zh_hans:
+                '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用',
+              lang
+            })}
+            。
+          </span>
           <div className="context">
-            {/* TODO: Content of term */}
-            <br />
-            <br />
+            <Term />
           </div>
         </div>
         <div className="buttons">
-          <div className="button disagree">{interpret('disagree')}</div>
+          <Mutation mutation={MUTATION_USER_LOGOUT}>
+            {logout => (
+              <div className="button disagree" onClick={() => disagree(logout)}>
+                {translate({
+                  zh_hant: '我不同意',
+                  zh_hans: '我不同意',
+                  lang
+                })}
+              </div>
+            )}
+          </Mutation>
           <button
             type="submit"
             className="button agree"
             disabled={props.isSubmitting}
           >
-            {interpret('agreeAndContinue')}
+            {translate({
+              zh_hant: '同意並繼續',
+              zh_hans: '同意并继续',
+              lang
+            })}
           </button>
         </div>
       </form>
@@ -45,16 +121,30 @@ const TermModal: FC<Props> = ({ close, interpret }) => {
     </>
   )
 
-  const TermForm = withFormik({
-    handleSubmit: async (values, { setSubmitting }) => {
-      // TODO: Add mutation
-      console.log(values) // For passing linting
-      setSubmitting(false)
-      close()
+  const TermForm: any = withFormik({
+    handleSubmit: (values, { props, setSubmitting }: any) => {
+      const { submitAction } = props
+      if (!submitAction) {
+        return undefined
+      }
+      submitAction({ variables: { input: { agreeOn: true } } })
+        .then((result: any) => {
+          close()
+        })
+        .catch((result: any) => {
+          // TODO: Handle error
+        })
+        .finally(() => {
+          setSubmitting(false)
+        })
     }
   })(BaseForm)
 
-  return <TermForm />
+  return (
+    <Mutation mutation={MUTATION_UPDATE_AGREE_ON}>
+      {update => <TermForm submitAction={update} />}
+    </Mutation>
+  )
 }
 
 export default TermModal

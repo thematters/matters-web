@@ -67,16 +67,12 @@ const DropdownContent: React.FC<SortByProps & { hideDropdown: () => void }> = ({
 }
 
 const SortBy: React.FC<SortByProps> = props => {
-  const [
-    dropdownInstance,
-    setDropdownInstance
-  ] = useState<PopperInstance | null>(null)
-  const onCreate = (instance: any) => setDropdownInstance(instance)
+  const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
-    if (!dropdownInstance) {
+    if (!instance) {
       return
     }
-    dropdownInstance.hide()
+    instance.hide()
   }
 
   return (
@@ -84,7 +80,7 @@ const SortBy: React.FC<SortByProps> = props => {
       <Dropdown
         content={<DropdownContent {...props} hideDropdown={hideDropdown} />}
         trigger="click"
-        onCreate={onCreate}
+        onCreate={i => setInstance(i)}
       >
         <button type="button" className="sort-button">
           <TextIcon

@@ -10,6 +10,9 @@ export const ViewerUserFragment = {
       userName
       displayName
       avatar
+      info {
+        agreeOn
+      }
       settings {
         language
       }

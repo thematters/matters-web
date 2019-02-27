@@ -1,7 +1,7 @@
 header {
   @mixin flex-center-space-between;
+  @mixin border-bottom-grey;
 
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-default);
-  border-bottom: 1px solid var(--color-line-grey);
 }

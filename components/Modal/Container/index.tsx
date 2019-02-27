@@ -18,6 +18,7 @@ interface Props {
   close: () => void
   closeOnEsc?: boolean
   closeOnOutsideClick?: boolean
+  enableCloseButton?: boolean
   title?: string
 }
 
@@ -27,11 +28,11 @@ const Container: FC<Props> = ({
   close,
   closeOnEsc = true,
   closeOnOutsideClick = true,
+  enableCloseButton = true,
   title
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  // TODO: Ass styles for bottom alignment
   const overlayClass = classNames('overlay', alignment)
 
   const modalClass = classNames(
@@ -40,8 +41,8 @@ const Container: FC<Props> = ({
     'l-offset-sm-1',
     'l-col-md-4',
     'l-offset-md-2',
-    'l-col-lg-4',
-    'l-offset-lg-4'
+    'l-col-lg-6',
+    'l-offset-lg-3'
   )
 
   const [node, setNode] = useState<HTMLElement | null>(null)
@@ -97,9 +98,11 @@ const Container: FC<Props> = ({
     <>
       <div className="header">
         <Title type="modal">{interpret(props.title)}</Title>
-        <button type="button" aria-label={interpret('close')} onClick={close}>
-          <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-        </button>
+        {props.enableCloseButton && (
+          <button type="button" aria-label={interpret('close')} onClick={close}>
+            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
+          </button>
+        )}
       </div>
       <style jsx>{styles}</style>
     </>
@@ -108,10 +111,14 @@ const Container: FC<Props> = ({
   return (
     <>
       <div className={overlayClass}>
-        <div ref={setNode} className={modalClass}>
-          <div className="container">
-            {title && <Header title={title} />}
-            {children({ close, interpret })}
+        <div className="l-row row">
+          <div ref={setNode} className={modalClass}>
+            <div className="container">
+              {title && (
+                <Header title={title} enableCloseButton={enableCloseButton} />
+              )}
+              {children({ close, interpret })}
+            </div>
           </div>
         </div>
       </div>

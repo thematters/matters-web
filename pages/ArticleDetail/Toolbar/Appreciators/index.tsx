@@ -31,7 +31,7 @@ const fragments = {
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   const edges = _get(article, 'appreciators.edges')
 
-  if (edges.length <= 0) {
+  if (!edges || edges.length <= 0) {
     return null
   }
 

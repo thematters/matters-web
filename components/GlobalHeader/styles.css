@@ -1,4 +1,6 @@
 header {
+  @mixin border-bottom-grey;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -7,7 +9,6 @@ header {
   width: 100%;
   height: var(--global-header-height);
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   background: var(--color-white);
 
   box-sizing: content-box;

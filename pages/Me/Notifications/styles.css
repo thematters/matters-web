@@ -1,0 +1,7 @@
+ul {
+  & li + li {
+    @mixin border-top-grey;
+    padding-top: var(--spacing-tight);
+    margin-top: var(--spacing-tight);
+  }
+}

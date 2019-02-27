@@ -25,12 +25,14 @@ const fragments = {
 
 export const Avatar = ({
   user,
-  size = 'default'
+  size = 'default',
+  src
 }: {
   size?: AvatarSize
   user?: AvatarUser
+  src?: string
 }) => {
-  const src = (user && user.avatar) || ICON_AVATAR_DEFAULT
+  const source = src || (user && user.avatar) || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     avatar: true,
     [size]: true
@@ -40,7 +42,7 @@ export const Avatar = ({
     <>
       <div
         className={avatarClasses}
-        style={{ backgroundImage: `url(${src})` }}
+        style={{ backgroundImage: `url(${source})` }}
         aria-hidden="true"
       />
       <style jsx>{styles}</style>

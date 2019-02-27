@@ -21,9 +21,10 @@ type ROUTE_KEY =
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
-  | 'ME_INVITATION'
+  | 'ARTICLE_DETAIL_LEGACY'
+  | 'ME_INVITATIONS'
   | 'ME_WALLET'
-  | 'ME_NOTIFICATION'
+  | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_WALLET'
@@ -31,6 +32,7 @@ type ROUTE_KEY =
   | 'EDITOR'
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
+  | 'AUTH_FORGET'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -118,10 +120,15 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     href: '/ArticleDetail',
     as: '/@:userName/*-:mediaHash'
   },
+  {
+    key: 'ARTICLE_DETAIL_LEGACY',
+    href: '/ArticleDetail',
+    as: '/forum'
+  },
 
   // Me
   {
-    key: 'ME_INVITATION',
+    key: 'ME_INVITATIONS',
     href: '/Me/Invitations',
     as: '/me/invitations'
   },
@@ -131,9 +138,9 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     as: '/me/wallet'
   },
   {
-    key: 'ME_NOTIFICATION',
+    key: 'ME_NOTIFICATIONS',
     href: '/Me/Notifications',
-    as: '/me/notification'
+    as: '/me/notifications'
   },
 
   // Settings
@@ -175,6 +182,11 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     key: 'AUTH_SIGNUP',
     href: '/Auth/SignUp',
     as: '/signup'
+  },
+  {
+    key: 'AUTH_FORGET',
+    href: '/Auth/Forget',
+    as: '/forget'
   },
 
   // Misc

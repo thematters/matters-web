@@ -109,13 +109,14 @@
 }
 
 .info-follow {
+  @mixin border-top-grey;
+
   margin-top: var(--spacing-tight);
   padding-top: var(--spacing-tight);
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
   font-size: calc(var(--font-size-sm) - 1px);
-  border-top: 1px solid var(--color-line-grey);
 
   & .followers,
   & .followees {
