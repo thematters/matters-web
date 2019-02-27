@@ -5,20 +5,18 @@ import { Query, QueryResult } from 'react-apollo'
 import {
   ArticleDigest,
   Error,
-  Head,
   InfiniteScroll,
-  PageHeader,
   Placeholder,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
 
-import { FollowFeed } from './__generated__/FollowFeed'
+import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
+import EmptyHistory from './EmptyHistory'
 
-const FOLLOW_FEED = gql`
-  query FollowFeed(
+const ME_HISTORY_FEED = gql`
+  query MeHistoryFeed(
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
@@ -26,8 +24,8 @@ const FOLLOW_FEED = gql`
   ) {
     viewer {
       id
-      recommendation {
-        followeeArticles(input: { first: 10, after: $cursor }) {
+      activity {
+        history(input: { first: 10, after: $cursor }) {
           pageInfo {
             startCursor
             endCursor
@@ -36,7 +34,9 @@ const FOLLOW_FEED = gql`
           edges {
             cursor
             node {
-              ...FeedDigestArticle
+              article {
+                ...FeedDigestArticle
+              }
             }
           }
         }
@@ -48,13 +48,13 @@ const FOLLOW_FEED = gql`
 
 export default () => {
   return (
-    <Query query={FOLLOW_FEED}>
+    <Query query={ME_HISTORY_FEED}>
       {({
         data,
         loading,
         error,
         fetchMore
-      }: QueryResult & { data: FollowFeed }) => {
+      }: QueryResult & { data: MeHistoryFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -63,7 +63,7 @@ export default () => {
           return <Error error={error} />
         }
 
-        const connectionPath = 'viewer.recommendation.followeeArticles'
+        const connectionPath = 'viewer.activity.history'
         const { edges, pageInfo } = _get(data, connectionPath)
         const loadMore = () =>
           fetchMore({
@@ -78,33 +78,29 @@ export default () => {
               })
           })
 
+        if (edges.length <= 0) {
+          return <EmptyHistory />
+        }
+
         return (
-          <>
-            <Head title={{ zh_hant: '追蹤', zh_hans: '追踪' }} />
-
-            <PageHeader
-              pageTitle={<Translate zh_hant="追蹤" zh_hans="追踪" />}
-            />
-
-            <InfiniteScroll
-              hasNextPage={pageInfo.hasNextPage}
-              loadMore={loadMore}
-              loading={loading}
-              loader={<Spinner />}
-            >
-              <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Feed
-                      article={node}
-                      hasDateTime
-                      hasBookmark
-                    />
-                  </li>
-                ))}
-              </ul>
-            </InfiniteScroll>
-          </>
+          <InfiniteScroll
+            hasNextPage={pageInfo.hasNextPage}
+            loadMore={loadMore}
+            loading={loading}
+            loader={<Spinner />}
+          >
+            <ul>
+              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                <li key={cursor}>
+                  <ArticleDigest.Feed
+                    article={node.article}
+                    hasBookmark
+                    hasDateTime
+                  />
+                </li>
+              ))}
+            </ul>
+          </InfiniteScroll>
         )
       }}
     </Query>

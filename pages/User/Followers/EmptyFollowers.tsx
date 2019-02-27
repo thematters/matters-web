@@ -2,7 +2,7 @@ import { Empty, Icon, Translate } from '~/components'
 
 import ICON_EMPTY_WARNING from '~/static/icons/empty-warning.svg?sprite'
 
-const EmptyArticles = () => (
+const EmptyFollowers = () => (
   <Empty
     icon={
       <Icon
@@ -11,8 +11,8 @@ const EmptyArticles = () => (
         size={'xxlarge'}
       />
     }
-    description={<Translate zh_hant="還沒有創作" zh_hans="还没有创作" />}
+    description={<Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />}
   />
 )
 
-export default EmptyArticles
+export default EmptyFollowers

@@ -1,4 +1,4 @@
-import { Empty, Icon } from '~/components'
+import { Empty, Icon, Translate } from '~/components'
 
 import ICON_EMPTY_COMMENT from '~/static/icons/empty-comment.svg?sprite'
 
@@ -11,6 +11,7 @@ const EmptyComments = () => (
         size={'xxlarge'}
       />
     }
+    description={<Translate zh_hant="還沒有評論" zh_hans="还没有评论" />}
   />
 )
 

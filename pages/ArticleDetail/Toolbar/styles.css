@@ -43,9 +43,7 @@
     justify-content: flex-start;
   }
   & .right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @mixin flex-center-space-between;
     margin-bottom: var(--spacing-default);
     order: -1;
 
