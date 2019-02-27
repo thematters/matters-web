@@ -91,17 +91,13 @@ const Tags = () => (
                 loading={loading}
                 loader={<Spinner />}
               >
-                <div className="l-row">
-                  <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-                    {edges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
-                          <NoticeDigest notice={node} />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </div>
+                <ul>
+                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                    <li key={cursor}>
+                      <NoticeDigest notice={node} key={cursor} />
+                    </li>
+                  ))}
+                </ul>
               </InfiniteScroll>
             )
           }}

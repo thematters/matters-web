@@ -1,13 +1,70 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { Fragment } from 'react'
 
+import { Translate } from '~/components'
+
+import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
+import NoticeDate from './NoticeDate'
+import styles from './styles.css'
 
-const UserNewFollowerNotice = () => null
+const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
+  if (!notice || !notice.actors) {
+    return null
+  }
+
+  const actorsCount = notice.actors.length
+  const isMultiActors = notice.actors && actorsCount > 1
+  const avatarWrapClasses = classNames({
+    'avatar-wrap': true,
+    multi: isMultiActors
+  })
+
+  return (
+    <section className="container">
+      <section className={avatarWrapClasses}>
+        {notice.actors.slice(0, 2).map(actor => (
+          <NoticeActorAvatar
+            user={actor}
+            key={actor.id}
+            size={isMultiActors ? 'xsmall' : 'default'}
+          />
+        ))}
+      </section>
+
+      <section className="content-wrap">
+        <h4>
+          {notice.actors.slice(0, 2).map((actor, index) => (
+            <Fragment key={actor.id}>
+              <NoticeActorName user={actor} />
+              {index < actorsCount - 1 && <span>、</span>}
+            </Fragment>
+          ))}{' '}
+          {isMultiActors && (
+            <Translate
+              zh_hant={`等 ${actorsCount} 人`}
+              zh_hans={`等 ${actorsCount} 人`}
+            />
+          )}
+          <Translate zh_hant="關注了你" zh_hans="关注了你" />
+        </h4>
+
+        <NoticeDate notice={notice} />
+      </section>
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
 
 UserNewFollowerNotice.fragments = {
   notice: gql`
     fragment UserNewFollowerNotice on UserNewFollowerNotice {
+      id
+      unread
+      __typename
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -15,6 +72,7 @@ UserNewFollowerNotice.fragments = {
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
+    ${NoticeDate.fragments.notice}
   `
 }
 

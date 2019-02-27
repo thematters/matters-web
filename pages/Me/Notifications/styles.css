@@ -1,0 +1,7 @@
+ul {
+  & li + li {
+    padding-top: var(--spacing-tight);
+    margin-top: var(--spacing-tight);
+    border-top: 1px solid var(--color-line-grey);
+  }
+}

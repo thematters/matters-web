@@ -1,10 +1,19 @@
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher
+} from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
+
+import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData
+})
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -32,6 +41,6 @@ export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
       link: httpLink({ headers }),
-      cache: new InMemoryCache().restore(initialState || {})
+      cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )

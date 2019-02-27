@@ -12,7 +12,6 @@ import CommentNewUpvoteNotice from './CommentNewUpvoteNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
-import styles from './styles.css'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
 import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
 import UserNewFollowerNotice from './UserNewFollowerNotice'
@@ -20,9 +19,6 @@ import UserNewFollowerNotice from './UserNewFollowerNotice'
 const fragments = {
   notice: gql`
     fragment DigestNotice on Notice {
-      id
-      unread
-      createdAt
       ... on UserNewFollowerNotice {
         ...UserNewFollowerNotice
       }
@@ -84,13 +80,36 @@ const fragments = {
 }
 
 const FeedDigest = ({ notice }: { notice: DigestNotice }) => {
-  return (
-    <section className="container">
-      {notice.id}
-
-      <style jsx>{styles}</style>
-    </section>
-  )
+  switch (notice.__typename) {
+    case 'ArticleNewAppreciationNotice':
+      return <ArticleNewAppreciationNotice notice={notice} />
+    case 'ArticleNewCommentNotice':
+      return <ArticleNewCommentNotice notice={notice} />
+    case 'ArticleNewDownstreamNotice':
+      return <ArticleNewDownstreamNotice notice={notice} />
+    case 'ArticleNewSubscriberNotice':
+      return <ArticleNewSubscriberNotice notice={notice} />
+    case 'ArticlePublishedNotice':
+      return <ArticlePublishedNotice notice={notice} />
+    case 'CommentMentionedYouNotice':
+      return <CommentMentionedYouNotice notice={notice} />
+    case 'CommentNewReplyNotice':
+      return <CommentNewReplyNotice notice={notice} />
+    case 'CommentNewUpvoteNotice':
+      return <CommentNewUpvoteNotice notice={notice} />
+    case 'CommentPinnedNotice':
+      return <CommentPinnedNotice notice={notice} />
+    case 'DownstreamArticleArchivedNotice':
+      return <DownstreamArticleArchivedNotice notice={notice} />
+    case 'OfficialAnnouncementNotice':
+      return <OfficialAnnouncementNotice notice={notice} />
+    case 'SubscribedArticleNewCommentNotice':
+      return <SubscribedArticleNewCommentNotice notice={notice} />
+    case 'UpstreamArticleArchivedNotice':
+      return <UpstreamArticleArchivedNotice notice={notice} />
+    case 'UserNewFollowerNotice':
+      return <UserNewFollowerNotice notice={notice} />
+  }
 }
 
 FeedDigest.fragments = fragments
