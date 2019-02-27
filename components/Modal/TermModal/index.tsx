@@ -1,12 +1,11 @@
 import { withFormik } from 'formik'
 import { FC, useContext } from 'react'
 
-import { LanguageContext, Translate } from '~/components/Language'
-import { PageHeader } from '~/components/PageHeader'
+import { LanguageContext } from '~/components/Language'
 
 import termStyles from '~/common/styles/utils/content.article.css'
+import { TOS } from '~/common/texts/tos'
 import { translate } from '~/common/utils'
-import content from '~/pages/Misc/ToS/content'
 
 import styles from './styles.css'
 
@@ -26,14 +25,11 @@ interface Props {
 
 const Term = ({ lang }: any) => (
   <>
-    <PageHeader
-      pageTitle={<Translate zh_hant="用戶協議" zh_hans="用户协议" />}
-    />
     <div
       className="content"
       dangerouslySetInnerHTML={{
         __html: translate({
-          ...content,
+          ...TOS,
           lang
         })
       }}
