@@ -1,5 +1,6 @@
-.content-wrapper {
+.container {
   @mixin flex-center-all;
+  flex-wrap: auto;
   padding: 4rem var(--spacing-tight);
 
   & > .content {
@@ -8,19 +9,14 @@
 
   @media (--sm-down) {
     & {
-      padding: 2rem var(--spacing-x-tight);
+      padding: var(--spacing-default) var(--spacing-tight);
     }
   }
 }
 
-.buttons {
-  @mixin flex-center-space-between;
-  padding-top: var(--spacing-x-tight);
-}
-
 .divider {
   border: 0px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.08);
   height: 1px;
   margin: 3rem 0 2rem;
 }

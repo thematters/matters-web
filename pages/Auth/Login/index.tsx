@@ -1,52 +1,39 @@
-import gql from 'graphql-tag'
+import classNames from 'classnames'
 import Router from 'next/router'
-import { useState } from 'react'
-import { Mutation } from 'react-apollo'
 
-export const USER_LOGIN = gql`
-  mutation UserLogin($input: UserLoginInput!) {
-    userLogin(input: $input) {
-      auth
-    }
-  }
-`
+import { Form } from '~/components/Form'
+
+import styles from './styles.css'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const containerClass = classNames(
+    'l-col-4',
+    'l-col-sm-6',
+    'l-offset-sm-1',
+    'l-col-md-4',
+    'l-offset-md-2',
+    'l-col-lg-6',
+    'l-offset-lg-3',
+    'container'
+  )
+
+  const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
+
+  const redirect = () => Router.replace('/')
 
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-6 l-offset-lg-3">
-        <h1>Login</h1>
-        <Mutation mutation={USER_LOGIN}>
-          {login => (
-            <form
-              onSubmit={e => {
-                e.preventDefault()
-                login({ variables: { input: { email, password } } }).then(() =>
-                  Router.replace('/')
-                ) // redirect to home after loggin in
-              }}
-            >
-              <input
-                type="text"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="enter you email"
-              />
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="enter password"
-              />
-              <input type="submit" value="Login" />
-            </form>
-          )}
-        </Mutation>
-      </article>
-    </main>
+    <>
+      <main className="l-row row">
+        <article className={containerClass}>
+          <Form.LoginForm
+            extraClass={formClass}
+            purpose="page"
+            submitCallback={redirect}
+          />
+        </article>
+      </main>
+      <style jsx>{styles}</style>
+    </>
   )
 }
 

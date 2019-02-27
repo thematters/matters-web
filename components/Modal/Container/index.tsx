@@ -31,7 +31,6 @@ const Container: FC<Props> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  // TODO: Ass styles for bottom alignment
   const overlayClass = classNames('overlay', alignment)
 
   const modalClass = classNames(
@@ -40,8 +39,8 @@ const Container: FC<Props> = ({
     'l-offset-sm-1',
     'l-col-md-4',
     'l-offset-md-2',
-    'l-col-lg-4',
-    'l-offset-lg-4'
+    'l-col-lg-6',
+    'l-offset-lg-3'
   )
 
   const [node, setNode] = useState<HTMLElement | null>(null)
@@ -108,10 +107,12 @@ const Container: FC<Props> = ({
   return (
     <>
       <div className={overlayClass}>
-        <div ref={setNode} className={modalClass}>
-          <div className="container">
-            {title && <Header title={title} />}
-            {children({ close, interpret })}
+        <div className="l-row row">
+          <div ref={setNode} className={modalClass}>
+            <div className="container">
+              {title && <Header title={title} />}
+              {children({ close, interpret })}
+            </div>
           </div>
         </div>
       </div>
