@@ -39,20 +39,16 @@ const BaseSearchBar: React.FC<
   })
 
   // dropdown
-  const [
-    dropdownInstance,
-    setDropdownInstance
-  ] = useState<PopperInstance | null>(null)
-  const onCreate = (instance: any) => setDropdownInstance(instance)
+  const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
-    if (dropdownInstance) {
-      dropdownInstance.hide()
+    if (instance) {
+      instance.hide()
     }
   }
   const showDropdown = () => {
-    if (dropdownInstance) {
+    if (instance) {
       setTimeout(() => {
-        dropdownInstance.show()
+        instance.show()
       }, 100) // unknown bug, needs set a timeout
     }
   }
@@ -103,7 +99,7 @@ const BaseSearchBar: React.FC<
             content={<AutoComplete hideDropdown={hideDropdown} />}
             zIndex={101}
             trigger="manual"
-            onCreate={onCreate}
+            onCreate={i => setInstance(i)}
             theme="dropdown shadow-light"
           >
             <form onSubmit={handleSubmit}>

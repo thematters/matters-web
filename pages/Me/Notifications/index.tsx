@@ -40,7 +40,7 @@ const ME_NOTIFICATIONS = gql`
   ${NoticeDigest.fragments.notice}
 `
 
-const Tags = () => (
+const Notifications = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
       <Head title={{ zh_hant: '全部通知', zh_hans: '全部通知' }} />
@@ -113,4 +113,4 @@ const Tags = () => (
   </main>
 )
 
-export default Tags
+export default Notifications

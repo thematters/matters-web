@@ -26,12 +26,12 @@
 .container {
   background-color: #fff;
   border-radius: 0.15rem;
-  z-index: 200
+  z-index: 200;
 }
 
 .header {
   @mixin flex-center-space-between;
-  border-bottom: 1px solid var(--color-line-grey);
+  @mixin border-bottom-grey;
   margin: 0rem var(--spacing-x-tight);
   padding: 0.75rem var(--spacing-x-tight);
 }
