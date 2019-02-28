@@ -12,6 +12,7 @@ import { getQuery, toPath } from '~/common/utils'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
+import SideComments from './SideComments'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
@@ -124,6 +125,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
             )
           }}
         </Query>
+
+        <SideComments />
       </article>
 
       <aside className="l-col-4 l-col-md-6 l-col-lg-4 ">

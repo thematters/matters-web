@@ -11,3 +11,17 @@
   font-size: var(--font-size-sm); /* fallback */
   font-size: calc(var(--font-size-sm) + 1px);
 }
+
+.descendant-comments {
+  & li {
+    @mixin border-top-grey;
+
+    &:first-child {
+      margin-top: var(--spacing-default);
+    }
+  }
+
+  & .content-wrap {
+    padding-left: var(--spacing-loose);
+  }
+}

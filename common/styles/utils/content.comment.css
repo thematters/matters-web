@@ -37,14 +37,13 @@
   & :global(blockquote) {
     width: 100%;
     padding: 0 var(--spacing-tight);
-    margin: var(--spacing-default) 0;
 
-    color: var(--color-matters-gold);
-    font-size: var(--font-size-md);
+    color: var(--color-grey-dark);
+    font-size: var(--font-size-sm);
     line-height: 2;
 
     @media (--sm-up) {
-      padding: 0 var(--spacing-x-default);
+      padding: 0 var(--spacing-default);
     }
   }
 
