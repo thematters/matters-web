@@ -2,17 +2,11 @@ import { useState } from 'react'
 
 import { Icon, TextIcon, Translate, useInterval } from '~/components'
 
-import { leftPad } from '~/common/utils'
+import { countDownToTime, leftPad } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_LOADING from '~/static/icons/loading.svg?sprite'
 
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
-
-const countDownToTime = (timeDiff: number) => {
-  const mins = Math.floor((timeDiff / (60 * 1000)) * 1)
-  const secs = Math.floor(((timeDiff % (60 * 1000)) / 1000) * 1)
-  return { mins, secs }
-}
 
 const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
   const scheduledAt = draft.scheduledAt

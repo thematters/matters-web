@@ -15,12 +15,12 @@ aside {
   -webkit-overflow-scrolling: touch;
   z-index: 110;
 
-  @media (--sm-down) {
-    width: 100% !important;
-  }
-
   @media (--lg-down) {
     width: 30rem !important;
+  }
+
+  @media (--sm-down) {
+    width: 100% !important;
   }
 
   @media (--sm-up) {
