@@ -21,3 +21,11 @@ footer {
     margin-right: var(--spacing-tight);
   }
 }
+
+button.active {
+  color: var(--color-black);
+}
+
+.comment-form {
+  margin-top: var(--spacing-tight);
+}

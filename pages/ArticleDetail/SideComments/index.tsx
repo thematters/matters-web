@@ -121,7 +121,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                   <ul>
                     {pinnedComments.map((comment: any) => (
                       <li key={comment.id}>
-                        <CommentDigest.Feed comment={comment} />
+                        <CommentDigest.Feed comment={comment} hasComment />
                       </li>
                     ))}
                   </ul>
@@ -142,7 +142,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                     {edges.map(
                       ({ node, cursor }: { node: any; cursor: any }) => (
                         <li key={cursor}>
-                          <CommentDigest.Feed comment={node} />
+                          <CommentDigest.Feed comment={node} hasComment />
                         </li>
                       )
                     )}
