@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { withRouter, WithRouterProps } from 'next/router'
-import { SFC, useEffect, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
 import { Placeholder } from '~/components'
@@ -9,6 +8,8 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { getQuery } from '~/common/utils'
 
 import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
+import DraftContent from './Content'
+import Sidebar from './Sidebar'
 import styles from './styles.css'
 
 const DRAFT_DETAIL = gql`
@@ -17,10 +18,12 @@ const DRAFT_DETAIL = gql`
       id
       ... on Draft {
         ...EditorDraft
+        ...DraftSidebarDraft
       }
     }
   }
   ${EditorFragments.draft}
+  ${Sidebar.fragments.draft}
 `
 
 const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
@@ -30,68 +33,25 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
     return <span>Empty</span> // TODO
   }
 
-  // return placeholder on SSR
-  const [Editor, setEditor] = useState(
-    () =>
-      Placeholder.ArticleDetail as SFC<{
-        draft: DraftDetailQuery['node']
-        upload: any
-        submit: any
-      }>
-  )
-
-  // use real editor on client side
-  useEffect(() => {
-    if (process.browser) {
-      const EditorComponent = require('~/components/Editor')
-      setEditor(() => EditorComponent.Editor)
-    }
-  })
-
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Query query={DRAFT_DETAIL} variables={{ id }}>
-          {({
-            data,
-            loading,
-            error
-          }: QueryResult & { data: DraftDetailQuery }) => {
-            console.log({ draftDetailData: data })
-            const draft = data && data.node
-            if (loading || !draft) {
-              return <Placeholder.ArticleDetail />
-            }
+    <Query query={DRAFT_DETAIL} variables={{ id }}>
+      {({ data, loading, error }: QueryResult & { data: DraftDetailQuery }) => (
+        <main className="l-row">
+          <article className="l-col-4 l-col-md-5 l-col-lg-8">
+            {loading ? (
+              <Placeholder.ArticleDetail />
+            ) : (
+              <DraftContent draft={data.node} />
+            )}
+          </article>
 
-            // if (error) {
-            //   return <Error error={error} />
-            // }
-
-            const upload = (uploadata: any) => {
-              console.log('upload', uploadata)
-              return Promise.resolve({
-                data: { singleFileUpload: { id: 'test', path: 'test' } }
-              })
-            }
-
-            return (
-              <Editor
-                draft={draft}
-                upload={upload}
-                submit={() => {
-                  console.log('submit')
-                }}
-              />
-            )
-          }}
-        </Query>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Placeholder.Sidebar />
-      </aside>
-      <style jsx>{styles}</style>
-    </main>
+          <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+            {loading ? <Placeholder.Sidebar /> : <Sidebar draft={data.node} />}
+          </aside>
+          <style jsx>{styles}</style>
+        </main>
+      )}
+    </Query>
   )
 }
 

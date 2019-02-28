@@ -8,10 +8,10 @@ import { Button, Icon, LanguageContext, Translate } from '~/components'
 import { toPath, translate } from '~/common/utils'
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
-import { PutDraft } from './__generated__/PutDraft'
+import { CreateDraft } from './__generated__/CreateDraft'
 
-export const PUT_DRAFT = gql`
-  mutation PutDraft($title: String!) {
+export const CREATE_DRAFT = gql`
+  mutation CreateDraft($title: String!) {
     putDraft(input: { title: $title }) {
       id
       slug
@@ -23,13 +23,13 @@ const WriteButton = () => {
   const { lang } = useContext(LanguageContext)
   const placeholder = translate({ zh_hans: '未命名', zh_hant: '未命名', lang })
   return (
-    <Mutation mutation={PUT_DRAFT} variables={{ title: placeholder }}>
+    <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
       {putDraft => {
         return (
           <div
             onClick={() => {
               putDraft().then(result => {
-                const { data } = result as { data: PutDraft }
+                const { data } = result as { data: CreateDraft }
                 const { slug, id } = data.putDraft
                 const path = toPath({ page: 'draftDetail', slug, id })
                 Router.push(path.as)

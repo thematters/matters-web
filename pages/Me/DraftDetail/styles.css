@@ -3,6 +3,10 @@
   border-bottom: 1px solid var(--color-line-grey);
 }
 
+.sidebar-title {
+  color: var(--color-grey);
+}
+
 .author {
   margin-bottom: var(--spacing-tight);
 }

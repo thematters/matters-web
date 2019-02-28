@@ -9,11 +9,11 @@ import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
-import DeleteButton from './DeleteButton'
-import ErrorState from './ErrorState'
-import PendingState from './PendingState'
-import RecallButton from './RecallButton'
-import RetryButton from './RetryButton'
+import DeleteButton from './Components/DeleteButton'
+import ErrorState from './Components/ErrorState'
+import PendingState from './Components/PendingState'
+import RecallButton from './Components/RecallButton'
+import RetryButton from './Components/RetryButton'
 import styles from './styles.css'
 
 const fragments = {
