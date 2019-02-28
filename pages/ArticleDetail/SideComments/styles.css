@@ -1,0 +1,30 @@
+header {
+  @mixin flex-center-space-between;
+  margin-bottom: var(--spacing-tight);
+}
+
+h2,
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+h2 {
+  font-weight: var(--font-weight-medium);
+}
+
+h3 {
+  font-weight: var(--font-weight-normal);
+}
+
+.pinned-comments,
+.all-comments {
+  & ul {
+    & li + li {
+      @mixin border-top-grey;
+    }
+  }
+}
+
+.pinned-comments {
+  margin-bottom: var(--spacing-loose);
+}
