@@ -6,6 +6,7 @@ type LabelSize = 'small' | 'default'
 
 interface LabelProps {
   size?: LabelSize
+  style?: React.CSSProperties
 }
 
 /**
@@ -17,7 +18,11 @@ interface LabelProps {
  * ```
  */
 
-export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
+export const Label: React.FC<LabelProps> = ({
+  size = 'default',
+  children,
+  style
+}) => {
   const labelClasses = classNames({
     label: true,
     [size]: true
@@ -25,7 +30,9 @@ export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
 
   return (
     <>
-      <span className={labelClasses}>{children}</span>
+      <span className={labelClasses} style={style}>
+        {children}
+      </span>
       <style jsx>{styles}</style>
     </>
   )

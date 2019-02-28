@@ -1,13 +1,15 @@
 import gql from 'graphql-tag'
 
 import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft'
-import ConnectUpstream from './ConnectUpstream'
+import AddTags from './AddTags'
+// import ConnectUpstream from './ConnectUpstream'
 import DraftList from './DraftList'
 
 const Sidebar = ({ draft }: { draft: DraftSidebarDraft }) => (
   <>
     <DraftList />
-    <ConnectUpstream draft={draft} />
+    {/* <ConnectUpstream draft={draft} /> */}
+    <AddTags draft={draft} />
   </>
 )
 
@@ -15,9 +17,9 @@ Sidebar.fragments = {
   draft: gql`
     fragment DraftSidebarDraft on Draft {
       id
-      ...ConnectUpstreamDraft
+      ...AddTagsDraft
     }
-    ${ConnectUpstream.fragments.draft}
+    ${AddTags.fragments.draft}
   `
 }
 
