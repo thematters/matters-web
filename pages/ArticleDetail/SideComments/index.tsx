@@ -3,10 +3,12 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, InfiniteScroll, Spinner, Translate } from '~/components'
+import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
+import { Drawer, DrawerConsumer } from '~/components/Drawer'
 
 import { getQuery, mergeConnections } from '~/common/utils'
+import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import { ArticleComments } from './__generated__/ArticleComments'
 import styles from './styles.css'
@@ -41,6 +43,21 @@ const ARTICLE_COMMENTS = gql`
   ${CommentDigest.Feed.fragments.comment}
 `
 
+const CloseButton = () => (
+  <DrawerConsumer>
+    {({ close }) => (
+      <button type="button" onClick={() => close()}>
+        <Icon
+          id={ICON_CLOSE.id}
+          viewBox={ICON_CLOSE.viewBox}
+          size="large"
+          className="u-motion-icon-hover"
+        />
+      </button>
+    )}
+  </DrawerConsumer>
+)
+
 const SideComments: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
@@ -50,10 +67,13 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   return (
-    <aside>
-      <h2>
-        <Translate zh_hant="評論" zh_hans="评论" />
-      </h2>
+    <Drawer>
+      <header>
+        <h2>
+          <Translate zh_hant="評論" zh_hans="评论" />
+        </h2>
+        <CloseButton />
+      </header>
 
       <section>
         <textarea />
@@ -134,7 +154,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
       </Query>
 
       <style jsx>{styles}</style>
-    </aside>
+    </Drawer>
   )
 }
 

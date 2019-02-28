@@ -5,6 +5,7 @@ import { Query, QueryResult } from 'react-apollo'
 
 import { DateTime, Error, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
+import { DrawerProvider } from '~/components/Drawer'
 import { UserDigest } from '~/components/UserDigest'
 
 import { getQuery, toPath } from '~/common/utils'
@@ -63,78 +64,80 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
-        <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
-          {({
-            data,
-            loading,
-            error
-          }: QueryResult & { data: ArticleDetailType }) => {
-            if (loading) {
-              return <Placeholder.ArticleDetail />
-            }
+    <DrawerProvider>
+      <main className="l-row">
+        <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
+          <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
+            {({
+              data,
+              loading,
+              error
+            }: QueryResult & { data: ArticleDetailType }) => {
+              if (loading) {
+                return <Placeholder.ArticleDetail />
+              }
 
-            if (error) {
-              return <Error error={error} />
-            }
+              if (error) {
+                return <Error error={error} />
+              }
 
-            // redirect to latest verion of URL Pattern
-            if (uuid && process.browser && router) {
-              const path = toPath({
-                page: 'articleDetail',
-                userName: data.article.author.userName,
-                slug: data.article.slug,
-                mediaHash: data.article.mediaHash
-              })
-              router.push(path.href, path.as, { shallow: true })
-            }
+              // redirect to latest verion of URL Pattern
+              if (uuid && process.browser && router) {
+                const path = toPath({
+                  page: 'articleDetail',
+                  userName: data.article.author.userName,
+                  slug: data.article.slug,
+                  mediaHash: data.article.mediaHash
+                })
+                router.push(path.href, path.as, { shallow: true })
+              }
 
-            return (
-              <>
-                <Head
-                  title={data.article.title}
-                  description={data.article.summary}
-                  keywords={data.article.tags.map(
-                    ({ content }: { content: any }) => content
-                  )}
-                  image={data.article.cover}
-                />
+              return (
+                <>
+                  <Head
+                    title={data.article.title}
+                    description={data.article.summary}
+                    keywords={data.article.tags.map(
+                      ({ content }: { content: any }) => content
+                    )}
+                    image={data.article.cover}
+                  />
 
-                <section className="author">
-                  <UserDigest.FullDesc user={data.article.author} />
-                </section>
+                  <section className="author">
+                    <UserDigest.FullDesc user={data.article.author} />
+                  </section>
 
-                <section className="title">
-                  <Title type="article">{data.article.title}</Title>
-                  <p className="date">
-                    <DateTime date={data.article.createdAt} />
-                  </p>
-                </section>
+                  <section className="title">
+                    <Title type="article">{data.article.title}</Title>
+                    <p className="date">
+                      <DateTime date={data.article.createdAt} />
+                    </p>
+                  </section>
 
-                <section className="content">
-                  <Content article={data.article} />
-                  <TagList article={data.article} />
-                  <Toolbar placement="left" article={data.article} />
-                </section>
+                  <section className="content">
+                    <Content article={data.article} />
+                    <TagList article={data.article} />
+                    <Toolbar placement="left" article={data.article} />
+                  </section>
 
-                <Toolbar placement="bottom" article={data.article} />
+                  <Toolbar placement="bottom" article={data.article} />
 
-                <RelatedArticles article={data.article} />
-              </>
-            )
-          }}
-        </Query>
+                  <RelatedArticles article={data.article} />
+                </>
+              )
+            }}
+          </Query>
 
-        <SideComments />
-      </article>
+          <SideComments />
+        </article>
 
-      <aside className="l-col-4 l-col-md-6 l-col-lg-4 ">
-        <Footer />
-      </aside>
+        <aside className="l-col-4 l-col-md-6 l-col-lg-4" id="drawer-calc-hook">
+          <Footer />
+        </aside>
 
-      <style jsx>{styles}</style>
-    </main>
+        <style jsx>{styles}</style>
+      </main>
+    </DrawerProvider>
   )
 }
 
