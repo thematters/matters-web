@@ -6,6 +6,7 @@ import { Query, QueryResult } from 'react-apollo'
 import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
+import { Form } from '~/components/Form'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
@@ -75,10 +76,6 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
         <CloseButton />
       </header>
 
-      <section>
-        <textarea />
-      </section>
-
       <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
         {({
           data,
@@ -112,6 +109,10 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
           return (
             <>
+              <section>
+                <Form.CommentForm articleId={data.article.id} />
+              </section>
+
               {pinnedComments && pinnedComments.length > 0 && (
                 <section className="pinned-comments">
                   <h3>
