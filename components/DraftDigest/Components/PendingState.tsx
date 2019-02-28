@@ -6,7 +6,7 @@ import { countDownToTime, leftPad } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_LOADING from '~/static/icons/loading.svg?sprite'
 
-import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
+import { FeedDigestDraft } from '../__generated__/FeedDigestDraft'
 
 const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
   const scheduledAt = draft.scheduledAt

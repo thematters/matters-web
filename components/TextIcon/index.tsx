@@ -6,7 +6,7 @@ interface TextIconProps {
   text?: string | number
   textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
-
+  style?: React.CSSProperties
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
@@ -34,7 +34,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   size = 'sm',
   spacing = 'xxtight',
   weight,
-
+  style,
   className
 }) => {
   const textIconClasses = classNames({
@@ -49,7 +49,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
 
   if (textPlacement === 'left') {
     return (
-      <span className={textIconClasses}>
+      <span className={textIconClasses} style={style}>
         <span className="text">{text || children}</span>
         {icon}
         <style jsx>{styles}</style>
@@ -58,7 +58,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   }
 
   return (
-    <span className={textIconClasses}>
+    <span className={textIconClasses} style={style}>
       {icon}
       <span className="text">{text === undefined ? children : text}</span>
       <style jsx>{styles}</style>

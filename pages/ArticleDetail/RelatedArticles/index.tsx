@@ -24,7 +24,6 @@ const fragments = {
 
 const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
   const edges = _get(article, 'relatedArticles.edges')
-
   if (!edges || edges.length <= 0) {
     return null
   }
