@@ -7,3 +7,8 @@
   flex-direction: row-reverse;
   padding-top: var(--spacing-x-tight);
 }
+
+.timer {
+  display: inline-block;
+  width: 2rem;
+}
