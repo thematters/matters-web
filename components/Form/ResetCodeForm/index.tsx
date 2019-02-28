@@ -6,10 +6,16 @@ import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { useInterval } from '~/components/Hook'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { isValidEmail, translate } from '~/common/utils'
+import {
+  countDownToTime,
+  isValidEmail,
+  leftPad,
+  translate
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -32,47 +38,78 @@ export const MUTATION_CONFIRM_CODE = gql`
   }
 `
 
+const second = 1000
+
+const duration = 60 * second
+
 const RequestCodeButton = ({ email, lang }: any) => {
-  const [isRequesting, setIsRequesting] = useState(false)
+  const [sent, setSent] = useState(false)
+
+  const [timeLeft, setTimeLeft] = useState<number | null>(null)
+
+  const timer: { [key: string]: any } = timeLeft
+    ? countDownToTime(timeLeft)
+    : {}
 
   const sendCode = (params: any) => {
     const { event, send } = params
     event.stopPropagation()
 
-    if (!send || isRequesting || !params.email) {
+    if (!send || !params.email || timeLeft !== null) {
       return undefined
     }
-    setIsRequesting(true)
 
+    setTimeLeft(duration)
     send({
       variables: { input: { email: params.email, type: 'password_reset' } }
     })
       .then((result: any) => {
-        // TODO: Show hint
+        if (sent === false) {
+          setSent(true)
+        }
       })
       .catch((result: any) => {
         // TODO: Handle error
       })
-      .finally(() => {
-        setIsRequesting(false)
-      })
   }
 
+  useInterval(() => {
+    if (timeLeft !== null) {
+      if (timeLeft >= 0) {
+        setTimeLeft(timeLeft - second)
+      } else {
+        setTimeLeft(null)
+      }
+    }
+  }, second)
+
   return (
-    <Mutation mutation={MUTATION_SEND_CODE}>
-      {send => (
-        <Button
-          is="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          disabled={isRequesting}
-          onClick={(event: any) => sendCode({ event, email, send })}
-        >
-          {translate({ zh_hant: '發送驗證碼', zh_hans: '发送验证码', lang })}
-        </Button>
-      )}
-    </Mutation>
+    <>
+      <Mutation mutation={MUTATION_SEND_CODE}>
+        {send => (
+          <Button
+            is="button"
+            bgColor="transparent"
+            className="u-link-green"
+            spacing="none"
+            disabled={timeLeft !== null}
+            onClick={(event: any) => sendCode({ event, email, send })}
+          >
+            {sent === false
+              ? translate({
+                  zh_hant: '發送驗證碼',
+                  zh_hans: '发送验证码',
+                  lang
+                })
+              : translate({ zh_hant: '重新發送', zh_hans: '重新发送', lang })}
+            {timer && timer.secs > 0 && (
+              <span className="timer">({`${leftPad(timer.secs, 2, 0)}`})</span>
+            )}
+          </Button>
+        )}
+      </Mutation>
+      <style jsx>{styles}</style>
+    </>
   )
 }
 
