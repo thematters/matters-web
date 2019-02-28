@@ -27,7 +27,7 @@ const ARTICLE_COMMENTS = gql`
       pinnedComments {
         ...FeedDigestComment
       }
-      comments(input: { first: 10, after: $cursor }) {
+      comments(input: { parent: true, first: 10, after: $cursor }) {
         pageInfo {
           startCursor
           endCursor

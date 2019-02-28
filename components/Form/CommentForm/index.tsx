@@ -46,7 +46,8 @@ const CommentForm: FC<Props> = ({
     isSubmitting,
     handleBlur,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    isValid
   }: {
     [key: string]: any
   }) => {
@@ -69,8 +70,7 @@ const CommentForm: FC<Props> = ({
           <Button
             type="submit"
             bgColor="green"
-            style={{ width: 80 }}
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isValid}
             icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
           >
             {translate({ zh_hant: '送出', zh_hans: '送出', lang })}
@@ -87,7 +87,19 @@ const CommentForm: FC<Props> = ({
       content: ''
     }),
 
-    // validate: ({ content }) => {},
+    validate: ({ content }) => {
+      const errors: { content?: string } = {}
+
+      if (!content || content.length <= 0) {
+        errors.content = translate({
+          zh_hant: '請輸入評論內容',
+          zh_hans: '请输入评论内容',
+          lang
+        })
+      }
+
+      return errors
+    },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
       const { submitAction } = props

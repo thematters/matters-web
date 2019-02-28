@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
+import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
@@ -14,9 +15,13 @@ const baseCommentFragment = gql`
     id
     content
     author {
-      id
-      userName
       ...UserDigestMiniUser
+    }
+    replyTo {
+      id
+      author {
+        ...UserDigestMiniUser
+      }
     }
     ...DigestActionsComment
   }
@@ -41,18 +46,40 @@ const fragments = {
   `
 }
 
+const ReplyTo = ({ user }: any) => (
+  <>
+    <span className="reply-to">
+      <Translate zh_hant="回復" zh_hans="回复" />
+    </span>
+    <UserDigest.Mini
+      user={user}
+      avatarSize="xxxsmall"
+      textWeight="medium"
+      spacing="xxtight"
+    />
+    <style jsx>{styles}</style>
+  </>
+)
+
 const FeedDigest = ({
   comment,
   ...actionControls
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
-  const { content, author } = comment
+  const { content, author, replyTo } = comment
   const descendantComments = _get(comment, 'comments.edges', [])
 
   return (
     <section className="container">
-      <div className="header">
-        <UserDigest.Mini user={author} avatarSize="small" textWeight="medium" />
-      </div>
+      <header className="header">
+        <div className="avatars">
+          <UserDigest.Mini
+            user={author}
+            avatarSize="small"
+            textWeight="medium"
+          />
+          {replyTo && <ReplyTo user={replyTo.author} />}
+        </div>
+      </header>
 
       <div className="content-wrap">
         <div
@@ -69,13 +96,16 @@ const FeedDigest = ({
               ({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
                   <section className="container">
-                    <div className="header">
-                      <UserDigest.Mini
-                        user={node.author}
-                        avatarSize="xsmall"
-                        textWeight="medium"
-                      />
-                    </div>
+                    <header className="header">
+                      <div className="avatars">
+                        <UserDigest.Mini
+                          user={node.author}
+                          avatarSize="xsmall"
+                          textWeight="medium"
+                        />
+                        {node.replyTo && <ReplyTo user={node.replyTo.author} />}
+                      </div>
+                    </header>
 
                     <div className="content-wrap">
                       <div

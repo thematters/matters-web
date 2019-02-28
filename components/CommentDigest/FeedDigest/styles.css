@@ -3,6 +3,17 @@
 }
 
 .header {
+  @mixin flex-center-space-between;
+
+  & .avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  & .reply-to {
+    font-size: var(--font-size-sm);
+    margin: 0 var(--spacing-xx-tight);
+  }
 }
 
 .content-wrap {

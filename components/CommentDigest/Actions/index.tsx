@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
@@ -24,6 +25,15 @@ const fragments = {
     fragment DigestActionsComment on Comment {
       id
       createdAt
+      article {
+        id
+      }
+      parentComment {
+        id
+      }
+      replyTo {
+        id
+      }
       ...UpvoteComment
       ...DownvoteComment
     }
@@ -42,6 +52,8 @@ const IconDotDivider = () => (
 
 const Actions = ({ comment, hasComment }: ActionsProps) => {
   const [showForm, setShowForm] = useState(false)
+
+  console.log(comment.id, comment.parentComment, comment.replyTo)
 
   return (
     <>
@@ -77,7 +89,12 @@ const Actions = ({ comment, hasComment }: ActionsProps) => {
 
       {showForm && (
         <section className="comment-form">
-          <Form.CommentForm articleId="" />
+          <Form.CommentForm
+            articleId={comment.article.id}
+            replyToId={comment.id}
+            parentId={_get(comment, 'parentComment.id') || comment.id}
+            submitCallback={() => setShowForm(false)}
+          />
         </section>
       )}
 
