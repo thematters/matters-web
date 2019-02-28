@@ -98,13 +98,11 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                     <Translate zh_hant="置頂評論" zh_hans="置顶评论" />
                   </h3>
                   <ul>
-                    {data.article.pinnedComments.map(
-                      ({ comment }: { comment: any }) => (
-                        <li key={comment.id}>
-                          <CommentDigest.Feed comment={comment} />
-                        </li>
-                      )
-                    )}
+                    {pinnedComments.map((comment: any) => (
+                      <li key={comment.id}>
+                        <CommentDigest.Feed comment={comment} />
+                      </li>
+                    ))}
                   </ul>
                 </section>
               )}

@@ -46,9 +46,7 @@ const FeedDigest = ({
   ...actionControls
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
   const { content, author } = comment
-
   const descendantComments = _get(comment, 'comments.edges', [])
-  console.log(descendantComments)
 
   return (
     <section className="container">

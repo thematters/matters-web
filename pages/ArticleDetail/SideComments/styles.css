@@ -42,3 +42,7 @@ h3 {
     }
   }
 }
+
+.pinned-comments {
+  margin-bottom: var(--spacing-loose);
+}
