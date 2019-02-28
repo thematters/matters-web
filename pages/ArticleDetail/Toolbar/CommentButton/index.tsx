@@ -38,7 +38,6 @@ const CommentButton = ({
               size="default"
               id={ICON_COMMENT_REGULAR.id}
               viewBox={ICON_COMMENT_REGULAR.viewBox}
-              className="u-motion-icon-hover"
             />
           }
           color="grey"

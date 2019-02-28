@@ -52,7 +52,6 @@ const CloseButton = () => (
           id={ICON_CLOSE.id}
           viewBox={ICON_CLOSE.viewBox}
           size="large"
-          className="u-motion-icon-hover"
         />
       </button>
     )}

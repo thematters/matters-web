@@ -41,8 +41,7 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
     inactive: !canAppreciate
   })
   const buttonClasses = classNames({
-    'mat-button': true,
-    'u-motion-icon-hover': canAppreciate
+    'mat-button': true
   })
 
   return (

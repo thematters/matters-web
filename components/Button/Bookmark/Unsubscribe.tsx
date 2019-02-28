@@ -39,7 +39,6 @@ const Unsubscribe = ({
       <button type="button" aria-label="收藏" onClick={() => unsubscribe()}>
         <Icon
           size={size}
-          className="u-motion-icon-hover"
           id={
             size === 'small'
               ? ICON_BOOKMARK_SM_ACTIVE.id

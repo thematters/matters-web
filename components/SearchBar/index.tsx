@@ -15,7 +15,6 @@ const SearchButton = () => (
     <Icon
       id={ICON_SEARCH.id}
       viewBox={ICON_SEARCH.viewBox}
-      className="u-motion-icon-hover"
     />
   </button>
 )

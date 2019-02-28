@@ -114,11 +114,7 @@ const NoticeButton = ({
         }}
         className={hasUnreadNotices ? 'unread' : ''}
       >
-        <Icon
-          id={ICON_NOTIFICATION.id}
-          viewBox={ICON_NOTIFICATION.viewBox}
-          className="u-motion-icon-hover"
-        />
+        <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
         <style jsx>{styles}</style>
       </button>
     </Dropdown>
