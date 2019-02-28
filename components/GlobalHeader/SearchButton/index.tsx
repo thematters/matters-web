@@ -11,10 +11,7 @@ export default () => (
   <>
     <Link href={PATHS.SEARCH.href} as={PATHS.SEARCH.as}>
       <a aria-label="搜尋">
-        <Icon
-          id={ICON_SEARCH.id}
-          viewBox={ICON_SEARCH.viewBox}
-        />
+        <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
       </a>
     </Link>
     <style jsx>{styles}</style>

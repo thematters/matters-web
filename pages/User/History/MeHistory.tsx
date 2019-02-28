@@ -9,11 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
+import EmptyHistory from '~/components/Empty/EmptyHistory'
 
 import { mergeConnections } from '~/common/utils'
 
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
-import EmptyHistory from './EmptyHistory'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed(

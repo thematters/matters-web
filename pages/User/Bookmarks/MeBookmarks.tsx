@@ -9,11 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
+import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 
 import { mergeConnections } from '~/common/utils'
 
 import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
-import EmptyBookmarks from './EmptyBookmarks'
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed(
@@ -75,7 +75,7 @@ export default () => {
           })
 
         if (edges <= 0) {
-          return <EmptyBookmarks />
+          return <EmptyBookmark />
         }
 
         return (

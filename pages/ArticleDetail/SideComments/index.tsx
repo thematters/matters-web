@@ -6,6 +6,7 @@ import { Query, QueryResult } from 'react-apollo'
 import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
+import EmptyComment from '~/components/Empty/EmptyComment'
 import { Form } from '~/components/Form'
 
 import { getQuery, mergeConnections } from '~/common/utils'
@@ -48,11 +49,7 @@ const CloseButton = () => (
   <DrawerConsumer>
     {({ close }) => (
       <button type="button" onClick={() => close()}>
-        <Icon
-          id={ICON_CLOSE.id}
-          viewBox={ICON_CLOSE.viewBox}
-          size="large"
-        />
+        <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} size="large" />
       </button>
     )}
   </DrawerConsumer>
@@ -92,7 +89,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
           const pinnedComments = _get(data, 'article.pinnedComments')
           const connectionPath = 'article.comments'
-          const { edges, pageInfo } = _get(data, connectionPath)
+          const { edges, pageInfo } = _get(data, connectionPath, {})
           const loadMore = () =>
             fetchMore({
               variables: {
@@ -131,6 +128,9 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                 <h3>
                   <Translate zh_hant="全部評論" zh_hans="全部评论" />
                 </h3>
+
+                {!edges || (edges.length <= 0 && <EmptyComment />)}
+
                 <InfiniteScroll
                   hasNextPage={pageInfo.hasNextPage}
                   loadMore={loadMore}

@@ -4,12 +4,12 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
 import { Error, Head, InfiniteScroll, Placeholder, Spinner } from '~/components'
+import EmptyFollowee from '~/components/Empty/EmptyFollowee'
 import { UserDigest } from '~/components/UserDigest'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 
 import { UserFolloweeFeed } from './__generated__/UserFolloweeFeed'
-import EmptyFollowees from './EmptyFollowees'
 
 const USER_FOLLOWEES_FEED = gql`
   query UserFolloweeFeed($userName: String!, $cursor: String) {
@@ -69,7 +69,7 @@ const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
           })
 
         if (!edges || edges.length <= 0) {
-          return <EmptyFollowees />
+          return <EmptyFollowee />
         }
 
         return (

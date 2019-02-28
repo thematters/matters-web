@@ -1,12 +1,12 @@
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import { Empty, Error, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
+import EmptyNotice from '~/components/Empty/EmptyNotice'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import { PATHS } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
-import ICON_EMPTY_NOTIFICATION from '~/static/icons/empty-notification.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 import styles from './styles.css'
@@ -67,18 +67,6 @@ const Footer = () => (
   </footer>
 )
 
-const EmptyNotices = () => (
-  <Empty
-    icon={
-      <Icon
-        id={ICON_EMPTY_NOTIFICATION.id}
-        viewBox={ICON_EMPTY_NOTIFICATION.viewBox}
-        size={'xxlarge'}
-      />
-    }
-  />
-)
-
 const DropdownNotices = ({
   hideDropdown,
   data,
@@ -132,7 +120,7 @@ const DropdownNotices = ({
               </li>
             ))
           ) : (
-            <EmptyNotices />
+            <EmptyNotice />
           )}
         </ul>
       </section>

@@ -9,11 +9,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
+import EmptyDraft from '~/components/Empty/EmptyDraft'
 
 import { mergeConnections } from '~/common/utils'
 
 import { MeDraftFeed } from './__generated__/MeDraftFeed'
-import EmptyDrafts from './EmptyDrafts'
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($cursor: String) {
@@ -70,7 +70,7 @@ export default () => {
           })
 
         if (!edges || edges.length <= 0) {
-          return <EmptyDrafts />
+          return <EmptyDraft />
         }
 
         return (

@@ -12,10 +12,7 @@ import styles from './styles.css'
 
 const SearchButton = () => (
   <button type="submit" aria-label="搜尋">
-    <Icon
-      id={ICON_SEARCH.id}
-      viewBox={ICON_SEARCH.viewBox}
-    />
+    <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
   </button>
 )
 

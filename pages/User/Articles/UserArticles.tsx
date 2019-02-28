@@ -11,11 +11,11 @@ import {
   Placeholder,
   Spinner
 } from '~/components'
+import EmptyArticle from '~/components/Empty/EmptyArticle'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
-import EmptyArticles from './EmptyArticles'
 
 const USER_ARTICLES_FEED = gql`
   query UserArticleFeed(
@@ -81,7 +81,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           })
 
         if (!edges || edges.length <= 0) {
-          return <EmptyArticles />
+          return <EmptyArticle />
         }
 
         return (
