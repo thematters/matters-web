@@ -2,13 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  InfiniteScroll,
-  Placeholder,
-  Spinner
-} from '~/components'
+import { ArticleDigest, Error, InfiniteScroll, Placeholder } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 
 import { mergeConnections } from '~/common/utils'
@@ -82,8 +76,6 @@ export default () => {
           <InfiniteScroll
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

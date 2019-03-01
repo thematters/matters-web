@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, Head, InfiniteScroll, Placeholder, Spinner } from '~/components'
+import { Error, Head, InfiniteScroll, Placeholder } from '~/components'
 import EmptyFollower from '~/components/Empty/EmptyFollower'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -83,8 +83,6 @@ const UserFollowers: React.FC<WithRouterProps> = ({ router }) => {
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}
-              loading={loading}
-              loader={<Spinner />}
             >
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

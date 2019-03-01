@@ -4,14 +4,7 @@ import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  Error,
-  Head,
-  Icon,
-  InfiniteScroll,
-  Placeholder,
-  Spinner
-} from '~/components'
+import { Error, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 
@@ -147,8 +140,6 @@ const UserComments = ({ user }: UserIdUser) => {
           <InfiniteScroll
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <ul className="article-list">
               {edges.map((articleEdge: { node: any; cursor: any }) => {

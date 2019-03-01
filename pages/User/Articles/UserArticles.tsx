@@ -8,8 +8,7 @@ import {
   Error,
   Head,
   InfiniteScroll,
-  Placeholder,
-  Spinner
+  Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 
@@ -95,8 +94,6 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}
-              loading={loading}
-              loader={<Spinner />}
             >
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

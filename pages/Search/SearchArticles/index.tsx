@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   PageHeader,
   Placeholder,
-  Spinner,
   Translate
 } from '~/components'
 
@@ -105,8 +104,6 @@ const SearchArticles = ({
           <InfiniteScroll
             hasNextPage={!isAggregate && pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <PageHeader
               is="h2"

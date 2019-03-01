@@ -131,8 +131,6 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
               <InfiniteScroll
                 hasNextPage={!isAggregate && pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <div className="l-row">

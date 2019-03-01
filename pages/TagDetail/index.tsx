@@ -10,8 +10,7 @@ import {
   Head,
   InfiniteScroll,
   PageHeader,
-  Placeholder,
-  Spinner
+  Placeholder
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 
@@ -98,8 +97,6 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
                   <InfiniteScroll
                     hasNextPage={pageInfo.hasNextPage}
                     loadMore={loadMore}
-                    loading={loading}
-                    loader={<Spinner />}
                   >
                     <ul>
                       {edges.map(

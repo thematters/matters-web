@@ -6,7 +6,7 @@ import { InfiniteScroll } from './InfiniteScroll'
 test('trigger loadMore when scrolled', () => {
   const spy = jest.fn()
   render(
-    <InfiniteScroll hasNextPage={true} loadMore={spy} loading={false}>
+    <InfiniteScroll hasNextPage={true} loadMore={spy}>
       <div />
     </InfiniteScroll>
   )
@@ -19,7 +19,7 @@ test('trigger loadMore when scrolled', () => {
 test('trigger loadMore when window resize', () => {
   const spy = jest.fn()
   render(
-    <InfiniteScroll hasNextPage={true} loadMore={spy} loading={false}>
+    <InfiniteScroll hasNextPage={true} loadMore={spy}>
       <div />
     </InfiniteScroll>
   )

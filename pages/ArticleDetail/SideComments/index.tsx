@@ -1,9 +1,8 @@
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
-import { Waypoint } from 'react-waypoint'
 
-import { Error, Icon, Spinner, Translate } from '~/components'
+import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
 import EmptyComment from '~/components/Empty/EmptyComment'
@@ -105,20 +104,20 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
                 {!edges || (edges.length <= 0 && <EmptyComment />)}
 
-                {/* <InfiniteScroll
+                <InfiniteScroll
                   hasNextPage={pageInfo.hasNextPage}
                   loadMore={loadMore}
-                  loading={loading}
-                  loader={<Spinner />}
-                > */}
-                <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <CommentDigest.Feed comment={node} hasComment />
-                    </li>
-                  ))}
-                </ul>
-                {pageInfo.hasNextPage && <Waypoint onEnter={loadMore} />}
+                >
+                  <ul>
+                    {edges.map(
+                      ({ node, cursor }: { node: any; cursor: any }) => (
+                        <li key={cursor}>
+                          <CommentDigest.Feed comment={node} hasComment />
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </InfiniteScroll>
               </section>
             </>
           )
