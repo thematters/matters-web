@@ -53,8 +53,6 @@ const IconDotDivider = () => (
 const Actions = ({ comment, hasComment }: ActionsProps) => {
   const [showForm, setShowForm] = useState(false)
 
-  console.log(comment.id, comment.parentComment, comment.replyTo)
-
   return (
     <>
       <footer className="actions">

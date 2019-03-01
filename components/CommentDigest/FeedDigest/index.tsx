@@ -17,6 +17,9 @@ const baseCommentFragment = gql`
     author {
       ...UserDigestMiniUser
     }
+    parentComment {
+      id
+    }
     replyTo {
       id
       author {
@@ -33,7 +36,8 @@ const fragments = {
   comment: gql`
     fragment FeedDigestComment on Comment {
       ...BaseDigestComment
-      comments(input: { first: 100 }) @include(if: $hasDescendantComments) {
+      comments(input: { sort: oldest, first: 100 })
+        @include(if: $hasDescendantComments) {
         edges {
           cursor
           node {
@@ -65,9 +69,8 @@ const FeedDigest = ({
   comment,
   ...actionControls
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
-  const { content, author, replyTo } = comment
+  const { content, author, replyTo, parentComment } = comment
   const descendantComments = _get(comment, 'comments.edges', [])
-
   return (
     <section className="container">
       <header className="header">
@@ -77,7 +80,9 @@ const FeedDigest = ({
             avatarSize="small"
             textWeight="medium"
           />
-          {replyTo && <ReplyTo user={replyTo.author} />}
+          {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
+            <ReplyTo user={replyTo.author} />
+          )}
         </div>
       </header>
 
@@ -103,7 +108,11 @@ const FeedDigest = ({
                           avatarSize="xsmall"
                           textWeight="medium"
                         />
-                        {node.replyTo && <ReplyTo user={node.replyTo.author} />}
+                        {node.replyTo &&
+                          (!node.parentComment ||
+                            node.replyTo.id !== node.parentComment.id) && (
+                            <ReplyTo user={node.replyTo.author} />
+                          )}
                       </div>
                     </header>
 
