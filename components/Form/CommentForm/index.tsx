@@ -1,6 +1,6 @@
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
@@ -13,14 +13,6 @@ import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import styles from './styles.css'
 
-interface Props {
-  articleId: string
-  commentId?: string
-  replyToId?: string
-  parentId?: string
-  submitCallback?: () => void
-}
-
 export const PUT_COMMENT = gql`
   mutation putComment($input: PutCommentInput!) {
     putComment(input: $input) {
@@ -30,59 +22,71 @@ export const PUT_COMMENT = gql`
   }
 `
 
-const CommentForm: FC<Props> = ({
-  articleId,
-  commentId,
-  replyToId,
-  parentId,
-  submitCallback
-}) => {
+interface CommentFormProps {
+  articleId: string
+  commentId?: string
+  replyToId?: string
+  parentId?: string
+  submitCallback?: () => void
+}
+
+interface FormValues {
+  content: string
+}
+
+const InnerForm = ({
+  values,
+  errors,
+  touched,
+  isSubmitting,
+  handleBlur,
+  handleChange,
+  handleSubmit,
+  isValid
+}: FormikProps<FormValues>) => {
   const { lang } = useContext(LanguageContext)
 
-  const BaseForm = ({
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    isValid
-  }: {
-    [key: string]: any
-  }) => {
-    return (
-      <form onSubmit={handleSubmit}>
-        <Form.Textarea
-          field="content"
-          placeholder={translate({
-            zh_hant: '發表你的評論…',
-            zh_hans: '发表你的评论…',
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <div className="buttons">
-          <Button
-            type="submit"
-            bgColor="green"
-            disabled={isSubmitting || !isValid}
-            icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
-          >
-            {translate({ zh_hant: '送出', zh_hans: '送出', lang })}
-          </Button>
-        </div>
+  return (
+    <form onSubmit={handleSubmit}>
+      <Form.Textarea
+        field="content"
+        placeholder={translate({
+          zh_hant: '發表你的評論…',
+          zh_hans: '发表你的评论…',
+          lang
+        })}
+        values={values}
+        errors={errors}
+        touched={touched}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+      />
+      <div className="buttons">
+        <Button
+          type="submit"
+          bgColor="green"
+          disabled={isSubmitting || !isValid}
+          icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
+        >
+          {translate({ zh_hant: '送出', zh_hans: '送出', lang })}
+        </Button>
+      </div>
 
-        <style jsx>{styles}</style>
-      </form>
-    )
-  }
+      <style jsx>{styles}</style>
+    </form>
+  )
+}
 
-  const MainForm: any = withFormik({
+const CommentForm = ({
+  commentId,
+  parentId,
+  replyToId,
+  submitCallback,
+  articleId
+}: CommentFormProps) => {
+  const { lang } = useContext(LanguageContext)
+
+  const WrappedForm = withFormik<{ putComment: any }, FormValues>({
     mapPropsToValues: () => ({
       content: ''
     }),
@@ -101,8 +105,7 @@ const CommentForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { submitAction } = props
+    handleSubmit: (values, { setSubmitting, props: { putComment } }) => {
       const input = {
         id: commentId,
         comment: {
@@ -114,10 +117,9 @@ const CommentForm: FC<Props> = ({
         }
       }
 
-      submitAction({ variables: { input } })
+      putComment({ variables: { input } })
         .then(({ data }: any) => {
-          const { resetPassword } = data
-          if (submitCallback && resetPassword) {
+          if (submitCallback && data.putComment) {
             submitCallback()
           }
         })
@@ -128,15 +130,12 @@ const CommentForm: FC<Props> = ({
           setSubmitting(false)
         })
     }
-  })(BaseForm)
+  })(InnerForm)
 
   return (
-    <>
-      <Mutation mutation={PUT_COMMENT}>
-        {put => <MainForm submitAction={put} />}
-      </Mutation>
-      <style jsx>{styles}</style>
-    </>
+    <Mutation mutation={PUT_COMMENT}>
+      {putComment => <WrappedForm putComment={putComment} />}
+    </Mutation>
   )
 }
 

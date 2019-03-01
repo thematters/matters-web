@@ -72,12 +72,17 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
         <CloseButton />
       </header>
 
-      <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
+      <Query
+        query={ARTICLE_COMMENTS}
+        variables={{ mediaHash, uuid }}
+        notifyOnNetworkStatusChange
+      >
         {({
           data,
           loading,
           error,
-          fetchMore
+          fetchMore,
+          refetch
         }: QueryResult & { data: ArticleComments }) => {
           if (loading) {
             return <Spinner />

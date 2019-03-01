@@ -36,8 +36,8 @@ interface Props {
   values: any
   errors: any
   touched: any
-  handleBlur: () => {}
-  handleChange: () => {}
+  handleBlur: any
+  handleChange: any
 
   [key: string]: any
 }
