@@ -97,15 +97,15 @@ const defaultAnchorNode = 'modal-anchor'
 
 export const ModalInstance = ({
   children,
-  closeOnEsc,
-  closeOnOutsideClick,
+  defaultCloseOnEsc,
+  defaultCloseOnOutsideClick,
   enableCloseButton,
   modalId,
   title
 }: {
   children: any
-  closeOnEsc?: boolean
-  closeOnOutsideClick?: boolean
+  defaultCloseOnEsc?: boolean
+  defaultCloseOnOutsideClick?: boolean
   enableCloseButton?: boolean
   modalId: string
   title?: string
@@ -126,8 +126,8 @@ export const ModalInstance = ({
             <Modal.Container
               title={title}
               close={close}
-              closeOnEsc={closeOnEsc}
-              closeOnOutsideClick={closeOnOutsideClick}
+              defaultCloseOnEsc={defaultCloseOnEsc}
+              defaultCloseOnOutsideClick={defaultCloseOnOutsideClick}
               enableCloseButton={enableCloseButton}
             >
               {(props: any) => <>{children(props)}</>}

@@ -80,7 +80,7 @@ const SignUp = () => {
           </div>
           <div className="content">
             <div className="title">
-              <Title is="h2" type="page">
+              <Title is="h1" type="modal">
                 {completeTitle}
               </Title>
             </div>
@@ -89,7 +89,12 @@ const SignUp = () => {
             <p>{completeContent}</p>
           </div>
           <div className="buttons">
-            <Button type="submit" bgColor="green" onClick={redirect}>
+            <Button
+              type="submit"
+              bgColor="green"
+              size="large"
+              onClick={redirect}
+            >
               {completeStart}
             </Button>
           </div>

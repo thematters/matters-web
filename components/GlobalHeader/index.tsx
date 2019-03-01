@@ -31,6 +31,12 @@ const LoginModalSwitch = () => (
   </ModalSwitch>
 )
 
+const SignUpModalSwitch = () => (
+  <ModalSwitch modalId="signUpModal">
+    {(open: any) => <SignUpButton onClick={open} />}
+  </ModalSwitch>
+)
+
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
   const viewer = useContext(ViewerContext)
@@ -64,7 +70,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
             ) : (
               <>
                 <LoginModalSwitch />
-                <SignUpButton />
+                <SignUpModalSwitch />
               </>
             )}
           </section>
