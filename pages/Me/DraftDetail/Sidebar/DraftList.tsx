@@ -37,7 +37,10 @@ const DraftList = () => (
         }
 
         return edges.map(({ node }: MeDrafts_viewer_drafts_edges) => (
-          <DraftDigest.Sidebar draft={node} />
+          <DraftDigest.Sidebar
+            draft={node}
+            refetchQueries={[{ query: ME_DRAFTS }]}
+          />
         ))
       }}
     </Query>
