@@ -7,7 +7,7 @@ import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { Form } from '~/components/Form'
-import { ArticleComments as ArticleCommentsType } from '~/components/GQL/__generated__/ArticleComments'
+import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
 import { getQuery, mergeConnections } from '~/common/utils'
