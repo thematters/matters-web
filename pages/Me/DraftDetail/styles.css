@@ -1,0 +1,30 @@
+.title {
+  padding-bottom: var(--spacing-tight);
+  border-bottom: 1px solid var(--color-line-grey);
+}
+
+.sidebar-title {
+  color: var(--color-grey);
+}
+
+.author {
+  margin-bottom: var(--spacing-tight);
+}
+
+.date {
+  margin-top: var(--spacing-x-tight);
+}
+
+.content {
+  position: relative;
+  padding: var(--spacing-default) 0 0 0;
+  margin-bottom: var(--spacing-default);
+
+  line-height: var(--line-height-article-base);
+  border-bottom: 1px solid var(--color-line-grey);
+
+  @media (--sm-up) {
+    padding-left: var(--spacing-tight);
+    padding-right: var(--spacing-tight);
+  }
+}

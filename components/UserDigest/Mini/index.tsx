@@ -19,7 +19,7 @@ import styles from './styles.css'
 
 interface MiniProps {
   user: UserDigestMiniUser
-  avatarSize?: 'xxxsmall' | 'xxsmall' | 'small'
+  avatarSize?: 'xxxsmall' | 'xxsmall' | 'xsmall' | 'small'
   textWeight?: 'normal' | 'medium'
 }
 

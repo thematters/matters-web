@@ -1,7 +1,7 @@
 // import { throws } from 'assert'
 import React, { Component } from 'react'
 
-// import native from '../../utils/native'
+// import native from '../utils/native'
 // import RecordBox from '../RecordBox'
 import toolsConfig from './config'
 import Style from './style'
@@ -116,12 +116,12 @@ class EditorTools extends Component<Props, State> {
     if (this.state.mode === 1) {
       const wordImg =
         this.state.type === 1
-          ? require('../../assets/icon/word2.png')
-          : require('../../assets/icon/word.png')
+          ? require('../assets/icon/word2.png')
+          : require('../assets/icon/word.png')
       const addImg =
         this.state.type === 2
-          ? require('../../assets/icon/add2.png')
-          : require('../../assets/icon/add.png')
+          ? require('../assets/icon/add2.png')
+          : require('../assets/icon/add.png')
       return (
         <div
           className="flex items-center justify-between"
@@ -149,7 +149,7 @@ class EditorTools extends Component<Props, State> {
               onClick={() => this.onHeaderHandle(2)}
             />
             <img
-              src={require('../../assets/icon/undo.png')}
+              src={require('../assets/icon/undo.png')}
               alt="undo"
               style={Style.tools.header.img({
                 width: '2.4rem',
@@ -159,7 +159,7 @@ class EditorTools extends Component<Props, State> {
               onClick={() => this.changeHistroy('undo')}
             />
             <img
-              src={require('../../assets/icon/redo.png')}
+              src={require('../assets/icon/redo.png')}
               alt="redo"
               style={Style.tools.header.img({
                 width: '2.4rem',
@@ -171,7 +171,7 @@ class EditorTools extends Component<Props, State> {
           </div>
           <div>
             <img
-              src={require('../../assets/icon/arrow_down.png')}
+              src={require('../assets/icon/arrow_down.png')}
               alt="downArrow"
               style={Style.tools.header.img({
                 width: '2.4rem',
@@ -191,7 +191,7 @@ class EditorTools extends Component<Props, State> {
       >
         <div className="flex-auto text-center">
           <img
-            src={require('../../assets/icon/bold.png')}
+            src={require('../assets/icon/bold.png')}
             alt="bold"
             style={Style.tools.header.img({
               width: '3.2rem',
@@ -203,7 +203,7 @@ class EditorTools extends Component<Props, State> {
         </div>
         <div className="flex-auto text-center">
           <img
-            src={require('../../assets/icon/italic.png')}
+            src={require('../assets/icon/italic.png')}
             alt="italic"
             style={Style.tools.header.img({
               width: '3.2rem',
@@ -215,7 +215,7 @@ class EditorTools extends Component<Props, State> {
         </div>
         <div className="flex-auto text-center">
           <img
-            src={require('../../assets/icon/link.png')}
+            src={require('../assets/icon/link.png')}
             alt="link"
             style={Style.tools.header.img({
               width: '3.2rem',
@@ -227,7 +227,7 @@ class EditorTools extends Component<Props, State> {
         </div>
         <div className="flex-auto text-center">
           <img
-            src={require('../../assets/icon/more.png')}
+            src={require('../assets/icon/more.png')}
             alt="more"
             style={Style.tools.header.img({
               width: '3.2rem',
@@ -312,7 +312,7 @@ class EditorTools extends Component<Props, State> {
               style={Style.tools.contentModel.imgBox}
             >
               <img
-                src={require('../../assets/icon/camera.png')}
+                src={require('../assets/icon/camera.png')}
                 style={Style.tools.contentModel.imgBox.img}
                 alt="camera"
               />
@@ -328,7 +328,7 @@ class EditorTools extends Component<Props, State> {
               style={Style.tools.contentModel.imgBox}
             >
               <img
-                src={require('../../assets/icon/image.png')}
+                src={require('../assets/icon/image.png')}
                 style={Style.tools.contentModel.imgBox.img}
                 alt="imgBox"
               />
@@ -344,7 +344,7 @@ class EditorTools extends Component<Props, State> {
                             style={Style.tools.contentModel.imgBox}
                         >
                             <img
-                                src={require('../../assets/icon/audio.png')}
+                                src={require('../assets/icon/audio.png')}
                                 style={Style.tools.contentModel.imgBox.img}
                                 alt="audio"
                             />

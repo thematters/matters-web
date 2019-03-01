@@ -9,11 +9,11 @@ import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
-import DeleteButton from './DeleteButton'
-import ErrorState from './ErrorState'
-import PendingState from './PendingState'
-import RecallButton from './RecallButton'
-import RetryButton from './RetryButton'
+import DeleteButton from './Components/DeleteButton'
+import ErrorState from './Components/ErrorState'
+import PendingState from './Components/PendingState'
+import RecallButton from './Components/RecallButton'
+import RetryButton from './Components/RetryButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -22,6 +22,7 @@ const fragments = {
       id
       title
       summary
+      slug
       scheduledAt
       createdAt
       publishState
@@ -45,12 +46,13 @@ const IconDotDivider = () => (
 )
 
 const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
-  const { id, title, summary, publishState, createdAt } = draft
+  const { id, title, summary, publishState, createdAt, slug } = draft
   const isPending = publishState === 'pending'
   const isError = publishState === 'error'
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
     page: 'draftDetail',
+    slug,
     id
   })
   const containerClasses = classNames({

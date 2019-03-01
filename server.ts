@@ -11,9 +11,10 @@ import next from 'next'
 import { ROUTES } from '~/common/enums'
 
 // load environment variables from .env
+// skip error for CI
 const dotEnvResult = dotenv.config()
 if (dotEnvResult.error) {
-  console.error(dotEnvResult.error)
+  console.log('error loading .env file', dotEnvResult.error)
 }
 
 const isProd = process.env.NODE_ENV === 'production'

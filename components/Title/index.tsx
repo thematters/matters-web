@@ -10,6 +10,7 @@ interface TitleProps {
   type: TitleType
   is?: TitleIs
   className?: string
+  style?: React.CSSProperties
 }
 
 /**
@@ -25,7 +26,7 @@ interface TitleProps {
 export const Title: React.FC<TitleProps> = ({
   type,
   is = 'h1',
-
+  style,
   className,
   children
 }) => {
@@ -37,15 +38,25 @@ export const Title: React.FC<TitleProps> = ({
   return (
     <>
       {is === 'h1' ? (
-        <h1 className={titleClasses}>{children}</h1>
+        <h1 className={titleClasses} style={style}>
+          {children}
+        </h1>
       ) : is === 'h2' ? (
-        <h2 className={titleClasses}>{children}</h2>
+        <h2 className={titleClasses} style={style}>
+          {children}
+        </h2>
       ) : is === 'h3' ? (
-        <h3 className={titleClasses}>{children}</h3>
+        <h3 className={titleClasses} style={style}>
+          {children}
+        </h3>
       ) : is === 'p' ? (
-        <p className={titleClasses}>{children}</p>
+        <p className={titleClasses} style={style}>
+          {children}
+        </p>
       ) : (
-        <span className={titleClasses}>{children}</span>
+        <span className={titleClasses} style={style}>
+          {children}
+        </span>
       )}
       <style jsx>{styles}</style>
     </>

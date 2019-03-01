@@ -31,7 +31,11 @@ const USER_ID = gql`
   }
 `
 const USER_COMMENT_FEED = gql`
-  query UserCommentFeed($id: ID!, $cursor: String) {
+  query UserCommentFeed(
+    $id: ID!
+    $cursor: String
+    $hasDescendantComments: Boolean = false
+  ) {
     node(input: { id: $id }) {
       ... on User {
         id
