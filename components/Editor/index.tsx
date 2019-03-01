@@ -1,13 +1,13 @@
 // import 'normalize.css'
-import Quill, { DeltaOperation } from 'quill'
 import React from 'react'
 
 // import 'tailwindcss/dist/utilities.min.css'
+import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
 import EditorTools from './EditorTools'
-import './quill.css'
+import styles from './quill.css'
+// import './quill.css'
 import Style from './style'
-// import content from './quill.css'
 // import native from './utils/native'
 
 declare global {
@@ -23,26 +23,20 @@ interface UploadResponse {
 interface Props {
   upload: (data: string) => Promise<{ data: UploadResponse }>
   submit: any
-  draftId: string
-  data: {
-    title?: string
-    draftTitle?: string
-    content: string
-    upstream?: object
-  }
+  draft: EditorDraft
 }
 interface State {
   quill: any
   range: any
   formatType?: string
-  histories: DeltaOperation[]
+  histories: any[]
   historyStep: number
   openRedoOrUndo: boolean
   // keyboardHeight: number
   toolsMode: number
   toolsContentMode: number
-  title?: string
-  upstream?: { id?: string; title?: string }
+  title: string
+  upstream?: { id?: string; title?: string } | null
   coverAssetId: string | number | null
 }
 
@@ -50,33 +44,42 @@ const TOOLBAR_ONE = 1
 const TOOLBAR_TWO = 2
 
 const { CustomBlot, DividerBlot, ImageBlot, LinkBlot } = blots // RecordBlot
-export class EditorIndex extends React.Component<Props, State> {
+
+export class Editor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    const quill = this.initQuill()
+    const { title } = props.draft
 
     this.state = {
-      quill,
+      quill: null,
       range: null,
       formatType: '',
-      histories: [] as DeltaOperation[],
+      histories: [] as any[],
       historyStep: 0,
       openRedoOrUndo: false,
       toolsMode: TOOLBAR_ONE,
       toolsContentMode: 0,
       // 表单提交
-      title: '',
+      title: title || '',
       coverAssetId: null
     }
   }
 
   public componentDidMount() {
     window.editor = this
+
+    const quill = this.initQuill()
+
+    // populate with draft content
+    const { content } = this.props.draft
+    quill.container.firstChild.innerHTML = content
+    this.setState({ quill })
   }
 
-  public initQuill() {
-    this.onGetAppToken()
+  public initQuill = () => {
+    // this.onGetAppToken()
+    const Quill = require('quill')
     const Delta = Quill.import('delta')
     const SizeStyle = Quill.import('attributors/style/size')
     const AlignStyle = Quill.import('attributors/style/align')
@@ -91,6 +94,7 @@ export class EditorIndex extends React.Component<Props, State> {
     // Quill.register(RecordBlot)
 
     require('quill/dist/quill.core.css')
+    require('./quill.css')
     // 初始化quill
     const editor = new Quill('#editor', {
       placeholder: '请输入正文',
@@ -101,9 +105,10 @@ export class EditorIndex extends React.Component<Props, State> {
           userOnly: true
         }
       }
-    }) as Quill & { history: any } // using history module
+    }) // using history module
+
     // 監聽文字選擇
-    editor.on('selection-change', range => {
+    editor.on('selection-change', (range: any) => {
       if (range) {
         if (range.length !== 0) {
           this.setState({
@@ -122,9 +127,10 @@ export class EditorIndex extends React.Component<Props, State> {
         }
       }
     })
+
     // 監聽文字修改
     let change = new Delta()
-    editor.on('text-change', (delta, oldDelta, source) => {
+    editor.on('text-change', (delta: any, oldDelta: any, source: any) => {
       // 设置自动保存
       change = change.compose(delta)
       // 設置歷史操作
@@ -169,45 +175,41 @@ export class EditorIndex extends React.Component<Props, State> {
     return editor
   }
 
-  public componentWillReceiveProps() {
-    this.forceUpdate(() => {
-      console.log('props', this.props.data)
-      if (this.props.data && this.props.data != null) {
-        const data = this.props.data
-        this.setState({
-          title: data.title ? data.title : data.draftTitle,
-          upstream:
-            data.upstream && data.upstream != null
-              ? data.upstream
-              : {
-                  id: null,
-                  title: ''
-                }
-        })
+  // public componentWillReceiveProps() {
+  //   this.forceUpdate(() => {
+  //     console.log('props', this.props.draft)
+  //     if (this.props.draft && this.props.draft != null) {
+  //       const { draft } = this.props
+  //       this.setState({
+  //         title: draft.title || '',
+  //         upstream: draft.upstream
+  //         // data.upstream && data.upstream != null
+  //         //   ? data.upstream
+  //         //   : {
+  //         //       id: undefined,
+  //         //       title: ''
+  //         //     }
+  //       })
 
-        if (this.state.quill !== null) {
-          // @ts-ignore
-          this.state.quill.container.firstChild.innerHTML = data.content
-        }
+  //       if (this.state.quill !== null) {
+  //         // @ts-ignore
+  //         this.state.quill.container.firstChild.innerHTML = data.content
+  //       }
+  //     }
+  //   })
+  // }
+
+  // submit
+  public onSaveCommit = () => {
+    if (this.state.quill) {
+      const draft = {
+        id: this.props.draft.id,
+        title: this.state.title,
+        content: this.state.quill.container.firstChild.innerHTML,
+        coverAssetId: this.state.coverAssetId
       }
-    })
-  }
-
-  // 统一提交
-  public onSaveCommit() {
-    if (!this.state.title) {
-      return false
+      this.props.submit(draft)
     }
-    const form = {
-      id: this.props.draftId ? this.props.draftId : null,
-      upstreamId: this.state.upstream ? this.state.upstream.id : null,
-      title: this.state.title,
-      content:
-        // @ts-ignore
-        this.state.quill && this.state.quill.container.firstChild.innerHTML,
-      coverAssetId: this.state.coverAssetId
-    }
-    this.props.submit(form)
   }
 
   // 跳转app页面
@@ -241,14 +243,14 @@ export class EditorIndex extends React.Component<Props, State> {
   // }
 
   // 設置歷史索引值
-  public setHistoryStep() {
+  public setHistoryStep = () => {
     this.setState({
       historyStep: this.state.histories.length
     })
   }
 
   // 判斷字體樣式
-  public onClickMark(event: Event, type: string): void {
+  public onClickMark = (event: Event, type: string): void => {
     switch (type) {
       case 'heading-one':
         this.setFormatStyle('heading-one', {
@@ -349,11 +351,11 @@ export class EditorIndex extends React.Component<Props, State> {
         break
     }
   }
-  public isArray(object: any) {
+  public isArray = (object: any) => {
     return object && typeof object === 'object' && object.constructor === Array
   }
 
-  public compareObj(objA: any, objB: any, flag: boolean = true): boolean {
+  public compareObj = (objA: any, objB: any, flag: boolean = true): boolean => {
     for (const key in objA) {
       if (objA.hasOwnProperty(key)) {
         if (!flag) {
@@ -394,11 +396,11 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 設置字體樣式
-  public setFormatStyle(
+  public setFormatStyle = (
     type?: string,
     option: any = {},
     isBlock: boolean = false
-  ): void {
+  ): void => {
     const quill = this.state.quill
     const range = this.state.range
     let emptyStyle = false
@@ -445,7 +447,7 @@ export class EditorIndex extends React.Component<Props, State> {
     })
   }
   // 設置歷史計數值
-  public changeHistoryStep(type: string) {
+  public changeHistoryStep = (type: string) => {
     let index = this.state.historyStep
     const quill = this.state.quill
     switch (type) {
@@ -474,7 +476,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 设置标题
-  public handleTitle(e: any) {
+  public handleTitle = (e: any) => {
     const value = e.target.value
     this.setState({
       title: value
@@ -483,8 +485,8 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 取消编辑
-  public cancelEdit() {
-    if (this.props.data) {
+  public cancelEdit = () => {
+    if (this.props.draft) {
       // 草稿上传成功
       console.log(`this.jumpToLink('onEditorCancle')`)
     } else {
@@ -503,7 +505,7 @@ export class EditorIndex extends React.Component<Props, State> {
   // }
 
   // 设置录音
-  public onSetRecord(data: any) {
+  public onSetRecord = (data: any) => {
     const quill = this.state.quill
     const range = this.state.range ? this.state.range : quill.getSelection(true)
     // data = {
@@ -552,7 +554,7 @@ export class EditorIndex extends React.Component<Props, State> {
   // }
 
   // 获取上传图片
-  public async setPhotoResource(params: any) {
+  public setPhotoResource = async (params: any) => {
     // 设置图片
     if (typeof params === 'string') {
       params = JSON.parse(params)
@@ -576,7 +578,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 设置图片
-  public onSetPhotos(data: UploadResponse['singleFileUpload']) {
+  public onSetPhotos = (data: UploadResponse['singleFileUpload']) => {
     const quill = this.state.quill
     const range = this.state.range ? this.state.range : quill.getSelection(true)
 
@@ -603,7 +605,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 点击下一步
-  public onNextStep() {
+  public onNextStep = () => {
     const state = this.state
     if (state.title !== '' && (state.quill && state.quill.getContents())) {
       console.log(`this.jumpToLink('onAddTags', this.props.draftId)`)
@@ -616,7 +618,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 设置图片描述
-  public setPhotoDesc(params: any) {
+  public setPhotoDesc = (params: any) => {
     // const quill = this.state.quill
     if (typeof params === 'string') {
       params = JSON.parse(params)
@@ -632,7 +634,7 @@ export class EditorIndex extends React.Component<Props, State> {
   }
 
   // 删除上游链接
-  public onClearUpstream() {
+  public onClearUpstream = () => {
     this.setState({
       upstream: {
         id: undefined,
@@ -650,7 +652,7 @@ export class EditorIndex extends React.Component<Props, State> {
     // const canNext =
     //   state.title !== '' && (state.quill && state.quill.getContents())
     return (
-      <div>
+      <>
         <div style={Style.contentBox}>
           {/* <header
                         style={Style.header}
@@ -671,7 +673,7 @@ export class EditorIndex extends React.Component<Props, State> {
                             </div>
                         </div>
                     </header> */}
-          <div
+          {/* <div
             className="flex items-center justify-between"
             style={Style.form.upstreamBox}
           >
@@ -679,7 +681,7 @@ export class EditorIndex extends React.Component<Props, State> {
               <input
                 type="text"
                 placeholder="連結上游文章（可選）"
-                value={state.upstream && state.upstream.title}
+                value={(state.upstream && state.upstream.title) || undefined}
                 style={Style.form.input(1.4, 'rgb(179, 179, 179)', false)}
                 readOnly
                 onClick={() => {
@@ -696,7 +698,7 @@ export class EditorIndex extends React.Component<Props, State> {
                 斷開上遊
               </div>
             )}
-          </div>
+          </div> */}
           <div>
             <textarea
               placeholder="请输入标题"
@@ -732,8 +734,9 @@ export class EditorIndex extends React.Component<Props, State> {
             this.onSetRecord(data)
           }}
         />
-        <iframe id="frame" name="frame" hidden />
-      </div>
+        {/* <iframe id="frame" name="frame" hidden /> */}
+        <style jsx>{styles}</style>
+      </>
     )
   }
 }

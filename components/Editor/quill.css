@@ -5,13 +5,14 @@ html {
   font-size: 10px;
 }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC",
-    "WenQuanYi Micro Hei", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    'PingFang TC', 'Microsoft YaHei', 'Source Han Sans TC', 'Noto Sans CJK TC',
+    'WenQuanYi Micro Hei', sans-serif;
 }
 .ql-editor {
   padding: 0 !important;
   font-size: inherit !important;
+  outline: none;
 }
 
 .ql-editor.ql-blank::before {

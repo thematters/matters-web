@@ -1,0 +1,22 @@
+.sidebar-title-expanded {
+}
+
+.sidebar-title-collapsed {
+  color: var(--color-grey);
+}
+
+.sidebar-description {
+  color: var(--color-grey);
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+hr {
+  border-top: 0.5px solid var(--color-line-grey-dark);
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  background-color: var(--color-bg-green);
+}
