@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
+import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
@@ -10,29 +11,6 @@ import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import Actions, { CommentActionsControls } from '../Actions'
 import { FeedDigestComment } from './__generated__/FeedDigestComment'
 import styles from './styles.css'
-
-const baseCommentFragment = gql`
-  fragment BaseDigestComment on Comment {
-    id
-    content
-    pinned
-    author {
-      ...UserDigestMiniUser
-    }
-    parentComment {
-      id
-    }
-    replyTo {
-      id
-      author {
-        ...UserDigestMiniUser
-      }
-    }
-    ...DigestActionsComment
-  }
-  ${UserDigest.Mini.fragments.user}
-  ${Actions.fragments.comment}
-`
 
 const fragments = {
   comment: gql`
@@ -48,7 +26,7 @@ const fragments = {
         }
       }
     }
-    ${baseCommentFragment}
+    ${commentFragments.base}
   `
 }
 
@@ -76,12 +54,23 @@ const PinnedLabel = () => (
   </span>
 )
 
+const BannedContent = () => (
+  <p className="banned-content">
+    <Translate
+      zh_hant="此評論因違反用戶協定而被隱藏"
+      zh_hans="此评论因违反用户协定而被隐藏"
+    />
+    <style jsx>{styles}</style>
+  </p>
+)
+
 const FeedDigest = ({
   comment,
   ...actionControls
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
-  const { content, author, replyTo, parentComment, pinned } = comment
+  const { state, content, author, replyTo, parentComment, pinned } = comment
   const descendantComments = _get(comment, 'comments.edges', [])
+  console.log(state)
   return (
     <section className="container">
       <header className="header">
@@ -99,12 +88,16 @@ const FeedDigest = ({
       </header>
 
       <div className="content-wrap">
-        <div
-          className="content-comment"
-          dangerouslySetInnerHTML={{
-            __html: content || ''
-          }}
-        />
+        {state === 'active' ? (
+          <div
+            className="content-comment"
+            dangerouslySetInnerHTML={{
+              __html: content || ''
+            }}
+          />
+        ) : (
+          <BannedContent />
+        )}
         <Actions comment={comment} {...actionControls} />
 
         {descendantComments.length > 0 && (

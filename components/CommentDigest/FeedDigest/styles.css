@@ -26,6 +26,11 @@
 
   font-size: var(--font-size-sm); /* fallback */
   font-size: calc(var(--font-size-sm) + 1px);
+
+  & .banned-content {
+    margin-top: var(--spacing-x-tight);
+    color: var(--color-grey);
+  }
 }
 
 .descendant-comments {

@@ -1,49 +1,20 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
+import { Waypoint } from 'react-waypoint'
 
-import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
+import { Error, Icon, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { Form } from '~/components/Form'
+import { ArticleComments as ArticleCommentsType } from '~/components/GQL/__generated__/ArticleComments'
+import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
-import { ArticleComments } from './__generated__/ArticleComments'
 import styles from './styles.css'
-
-const ARTICLE_COMMENTS = gql`
-  query ArticleComments(
-    $mediaHash: String
-    $uuid: UUID
-    $cursor: String
-    $hasDescendantComments: Boolean = true
-  ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
-      id
-      pinnedComments {
-        ...FeedDigestComment
-      }
-      comments(input: { parent: true, first: 10, after: $cursor }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...FeedDigestComment
-          }
-        }
-      }
-    }
-  }
-  ${CommentDigest.Feed.fragments.comment}
-`
 
 const CloseButton = () => (
   <DrawerConsumer>
@@ -72,18 +43,13 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
         <CloseButton />
       </header>
 
-      <Query
-        query={ARTICLE_COMMENTS}
-        variables={{ mediaHash, uuid }}
-        notifyOnNetworkStatusChange
-      >
+      <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
         {({
           data,
           loading,
           error,
-          fetchMore,
-          refetch
-        }: QueryResult & { data: ArticleComments }) => {
+          fetchMore
+        }: QueryResult & { data: ArticleCommentsType }) => {
           if (loading) {
             return <Spinner />
           }
@@ -111,7 +77,10 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
           return (
             <>
               <section>
-                <Form.CommentForm articleId={data.article.id} />
+                <Form.CommentForm
+                  articleId={data.article.id}
+                  articleMediaHash={data.article.mediaHash}
+                />
               </section>
 
               {pinnedComments && pinnedComments.length > 0 && (
@@ -136,22 +105,20 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
                 {!edges || (edges.length <= 0 && <EmptyComment />)}
 
-                <InfiniteScroll
+                {/* <InfiniteScroll
                   hasNextPage={pageInfo.hasNextPage}
                   loadMore={loadMore}
                   loading={loading}
                   loader={<Spinner />}
-                >
-                  <ul>
-                    {edges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
-                          <CommentDigest.Feed comment={node} hasComment />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </InfiniteScroll>
+                > */}
+                <ul>
+                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                    <li key={cursor}>
+                      <CommentDigest.Feed comment={node} hasComment />
+                    </li>
+                  ))}
+                </ul>
+                {pageInfo.hasNextPage && <Waypoint onEnter={loadMore} />}
               </section>
             </>
           )

@@ -5,8 +5,10 @@ import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
+import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 
 import { translate } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
@@ -23,6 +25,7 @@ export const PUT_COMMENT = gql`
 `
 
 interface CommentFormProps {
+  articleMediaHash: string
   articleId: string
   commentId?: string
   replyToId?: string
@@ -78,6 +81,7 @@ const InnerForm = ({
 }
 
 const CommentForm = ({
+  articleMediaHash,
   commentId,
   parentId,
   replyToId,
@@ -105,7 +109,10 @@ const CommentForm = ({
       return errors
     },
 
-    handleSubmit: (values, { setSubmitting, props: { putComment } }) => {
+    handleSubmit: (
+      values,
+      { resetForm, setSubmitting, props: { putComment } }
+    ) => {
       const input = {
         id: commentId,
         comment: {
@@ -121,6 +128,16 @@ const CommentForm = ({
         .then(({ data }: any) => {
           if (submitCallback && data.putComment) {
             submitCallback()
+            resetForm({ content: '' })
+            window.dispatchEvent(
+              new CustomEvent('addMessage', {
+                detail: {
+                  content: (
+                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+                  )
+                }
+              })
+            )
           }
         })
         .catch((result: any) => {
@@ -133,7 +150,26 @@ const CommentForm = ({
   })(InnerForm)
 
   return (
-    <Mutation mutation={PUT_COMMENT}>
+    <Mutation
+      mutation={PUT_COMMENT}
+      refetchQueries={
+        commentId
+          ? [
+              {
+                query: COMMENT_COMMENTS,
+                variables: { id: commentId }
+              }
+            ]
+          : articleMediaHash
+          ? [
+              {
+                query: ARTICLE_COMMENTS,
+                variables: { mediaHash: articleMediaHash }
+              }
+            ]
+          : []
+      }
+    >
       {putComment => <WrappedForm putComment={putComment} />}
     </Mutation>
   )

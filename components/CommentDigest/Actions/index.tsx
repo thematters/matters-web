@@ -27,6 +27,7 @@ const fragments = {
       createdAt
       article {
         id
+        mediaHash
       }
       parentComment {
         id
@@ -89,9 +90,10 @@ const Actions = ({ comment, hasComment }: ActionsProps) => {
         <section className="comment-form">
           <Form.CommentForm
             articleId={comment.article.id}
+            articleMediaHash={comment.article.mediaHash || ''}
             replyToId={comment.id}
             parentId={_get(comment, 'parentComment.id') || comment.id}
-            submitCallback={() => setShowForm(false)}
+            // submitCallback={() => setShowForm(false)}
           />
         </section>
       )}

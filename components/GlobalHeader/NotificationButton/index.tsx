@@ -13,7 +13,8 @@ import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
 
-const POLL_INTERVAL = 1000 * 10
+const POLL_INTERVAL =
+  process.env.NODE_ENV === 'production' ? 1000 * 10 : 1000 * 60
 
 const UNREAD_NOTICE_COUNT = gql`
   query UnreadNoticeCount {
