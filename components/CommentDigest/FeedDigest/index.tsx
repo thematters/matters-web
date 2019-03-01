@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
+import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -14,6 +15,7 @@ const baseCommentFragment = gql`
   fragment BaseDigestComment on Comment {
     id
     content
+    pinned
     author {
       ...UserDigestMiniUser
     }
@@ -65,11 +67,20 @@ const ReplyTo = ({ user }: any) => (
   </>
 )
 
+const PinnedLabel = () => (
+  <span className="label">
+    <Label size="small">
+      <Translate zh_hant="作者推薦" zh_hans="作者推荐" />
+    </Label>
+    <style jsx>{styles}</style>
+  </span>
+)
+
 const FeedDigest = ({
   comment,
   ...actionControls
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
-  const { content, author, replyTo, parentComment } = comment
+  const { content, author, replyTo, parentComment, pinned } = comment
   const descendantComments = _get(comment, 'comments.edges', [])
   return (
     <section className="container">
@@ -83,6 +94,7 @@ const FeedDigest = ({
           {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
             <ReplyTo user={replyTo.author} />
           )}
+          {pinned && <PinnedLabel />}
         </div>
       </header>
 
@@ -113,6 +125,7 @@ const FeedDigest = ({
                             node.replyTo.id !== node.parentComment.id) && (
                             <ReplyTo user={node.replyTo.author} />
                           )}
+                        {node.pinned && <PinnedLabel />}
                       </div>
                     </header>
 
