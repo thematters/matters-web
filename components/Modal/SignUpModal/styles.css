@@ -1,0 +1,35 @@
+.container {
+  @mixin flex-center-all;
+  flex-wrap: auto;
+  padding: 4rem var(--spacing-tight);
+
+  & > .content {
+    margin: 0rem;
+  }
+
+  @media (--sm-down) {
+    & {
+      padding: var(--spacing-default) var(--spacing-tight);
+    }
+  }
+}
+
+.divider {
+  border: 0px;
+  background-color: rgba(0, 0, 0, 0.08);
+  height: 1px;
+  margin: 3rem 0 2rem;
+}
+
+.footer {
+  @mixin flex-center-all;
+  color: var(--color-grey);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+
+  & > .link {
+    @mixin flex-center-all;
+    cursor: pointer;
+    color: var(--color-matters-green);
+  }
+}

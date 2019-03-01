@@ -40,6 +40,9 @@ const Anchor = () => {
         <ModalInstance modalId="loginModal" title="login">
           {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
         </ModalInstance>
+        <ModalInstance modalId="signUpModal" title="signUp">
+          {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
+        </ModalInstance>
         <ModalInstance modalId="resetModal">
           {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
         </ModalInstance>

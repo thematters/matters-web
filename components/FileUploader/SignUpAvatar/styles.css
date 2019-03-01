@@ -1,0 +1,36 @@
+.container {
+  @mixin flex-center-space-between;
+  font-size: var(--font-size-md);
+  padding-bottom: var(--spacing-default);
+}
+
+.upload {
+  flex-grow: 1;
+  padding-left: var(--spacing-tight);
+}
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--color-matters-green);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  position: relative;
+
+  & > .input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    cursor: pointer;
+    font-size: 0;
+    opacity: 0;
+  }
+
+  & > .hint {
+    color: var(--color-grey);
+  }
+}

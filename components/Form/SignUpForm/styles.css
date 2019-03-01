@@ -1,0 +1,18 @@
+.form {
+  width: 100%;
+}
+
+.tos {
+  display: flex;
+  align-items: flex-start;
+
+  color: var(--color-black);
+  font-size: var(--font-size-sm);
+  margin-top: 0.125rem;
+}
+
+.buttons {
+  @mixin flex-center-space-between;
+  flex-direction: row-reverse;
+  padding-top: 1.5rem;
+}

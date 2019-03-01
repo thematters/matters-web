@@ -4,17 +4,15 @@ import { FC } from 'react'
 import styles from './styles.css'
 
 /**
- * This component is for rendering text input for <Formik>.
+ * This component is for rendering textarea for <Formik>.
  *
  * Usage:
  *
  * ```jsx
- *   <Form.Input
+ *   <Form.Textarea
  *     className={[]}
- *     type="text"
- *     field="email"
- *     placeholder="email"
- *     floatElement={<>}
+ *     field="description"
+ *     placeholder="description"
  *     hint="hint"
  *     style={{}}
  *     values={{}},
@@ -29,10 +27,8 @@ import styles from './styles.css'
 
 interface Props {
   className?: string[]
-  type: 'text' | 'password'
   field: string
   placeholder: string
-  floatElement?: any
   hint?: string
   style?: { [key: string]: any }
 
@@ -45,12 +41,10 @@ interface Props {
   [key: string]: any
 }
 
-const Input: FC<Props> = ({
+const Textarea: FC<Props> = ({
   className = [],
-  type,
   field,
   placeholder,
-  floatElement,
   hint,
   style,
 
@@ -61,7 +55,6 @@ const Input: FC<Props> = ({
   handleChange
 }) => {
   const inputClass = classNames('input', ...className)
-
   const value = values[field]
   const error = errors[field]
   const isTouched = touched[field]
@@ -69,9 +62,8 @@ const Input: FC<Props> = ({
   return (
     <>
       <div className="container">
-        <input
+        <textarea
           className={inputClass}
-          type={type}
           name={field}
           placeholder={placeholder}
           onBlur={handleBlur}
@@ -79,7 +71,6 @@ const Input: FC<Props> = ({
           value={value}
           style={style}
         />
-        {floatElement && <div className="float-right">{floatElement}</div>}
       </div>
       <div className="info">
         {error && isTouched && <div className="error">{error}</div>}
@@ -90,4 +81,4 @@ const Input: FC<Props> = ({
   )
 }
 
-export default Input
+export default Textarea
