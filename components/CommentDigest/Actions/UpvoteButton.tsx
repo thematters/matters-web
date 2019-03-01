@@ -57,7 +57,13 @@ const IconLikeActive = () => (
   />
 )
 
-const UpvoteButton = ({ comment }: { comment: UpvoteComment }) => {
+const UpvoteButton = ({
+  comment,
+  disabled
+}: {
+  comment: UpvoteComment
+  disabled?: boolean
+}) => {
   if (comment.myVote === 'up') {
     return (
       <Mutation
@@ -72,7 +78,7 @@ const UpvoteButton = ({ comment }: { comment: UpvoteComment }) => {
         }}
       >
         {(unvote, { data }) => (
-          <button type="button" onClick={() => unvote()}>
+          <button type="button" onClick={() => unvote()} disabled={disabled}>
             <TextIcon
               icon={<IconLikeActive />}
               color="grey"
@@ -100,7 +106,7 @@ const UpvoteButton = ({ comment }: { comment: UpvoteComment }) => {
       }}
     >
       {(upvote, { data }) => (
-        <button type="button" onClick={() => upvote()}>
+        <button type="button" onClick={() => upvote()} disabled={disabled}>
           <TextIcon
             icon={<IconLikeInactive />}
             color="grey"

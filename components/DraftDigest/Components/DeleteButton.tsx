@@ -55,7 +55,6 @@ const DeleteButton = ({ id }: { id: string }) => {
           })
         } catch (e) {
           //
-          console.log(e)
         }
       }}
     >

@@ -54,15 +54,38 @@ const PinnedLabel = () => (
   </span>
 )
 
-const BannedContent = () => (
-  <p className="banned-content">
-    <Translate
-      zh_hant="此評論因違反用戶協定而被隱藏"
-      zh_hans="此评论因违反用户协定而被隐藏"
-    />
-    <style jsx>{styles}</style>
-  </p>
-)
+const CommentContent = ({
+  content,
+  state
+}: {
+  content: string | null
+  state: string
+}) => {
+  if (state === 'active') {
+    return (
+      <div
+        className="content-comment"
+        dangerouslySetInnerHTML={{
+          __html: content || ''
+        }}
+      />
+    )
+  }
+
+  if (state === 'banned') {
+    return (
+      <p className="banned-content">
+        <Translate
+          zh_hant="此評論因違反用戶協定而被隱藏"
+          zh_hans="此评论因违反用户协定而被隐藏"
+        />
+        <style jsx>{styles}</style>
+      </p>
+    )
+  }
+
+  return null
+}
 
 const FeedDigest = ({
   comment,
@@ -70,7 +93,7 @@ const FeedDigest = ({
 }: { comment: FeedDigestComment } & CommentActionsControls) => {
   const { state, content, author, replyTo, parentComment, pinned } = comment
   const descendantComments = _get(comment, 'comments.edges', [])
-  console.log(state)
+
   return (
     <section className="container">
       <header className="header">
@@ -88,16 +111,7 @@ const FeedDigest = ({
       </header>
 
       <div className="content-wrap">
-        {state === 'active' ? (
-          <div
-            className="content-comment"
-            dangerouslySetInnerHTML={{
-              __html: content || ''
-            }}
-          />
-        ) : (
-          <BannedContent />
-        )}
+        <CommentContent state={state} content={content} />
         <Actions comment={comment} {...actionControls} />
 
         {descendantComments.length > 0 && (
@@ -123,11 +137,9 @@ const FeedDigest = ({
                     </header>
 
                     <div className="content-wrap">
-                      <div
-                        className="content-comment"
-                        dangerouslySetInnerHTML={{
-                          __html: node.content || ''
-                        }}
+                      <CommentContent
+                        state={node.state}
+                        content={node.content}
                       />
                       <Actions comment={node} {...actionControls} />
                     </div>

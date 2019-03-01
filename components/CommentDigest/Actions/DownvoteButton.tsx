@@ -57,7 +57,13 @@ const IconDislikeActive = () => (
   />
 )
 
-const DownvoteButton = ({ comment }: { comment: DownvoteComment }) => {
+const DownvoteButton = ({
+  comment,
+  disabled
+}: {
+  comment: DownvoteComment
+  disabled?: boolean
+}) => {
   if (comment.myVote === 'down') {
     return (
       <Mutation
@@ -72,7 +78,7 @@ const DownvoteButton = ({ comment }: { comment: DownvoteComment }) => {
         }}
       >
         {(unvote, { data }) => (
-          <button type="button" onClick={() => unvote()}>
+          <button type="button" onClick={() => unvote()} disabled={disabled}>
             <IconDislikeActive />
           </button>
         )}
@@ -93,7 +99,7 @@ const DownvoteButton = ({ comment }: { comment: DownvoteComment }) => {
       }}
     >
       {(downvote, { data }) => (
-        <button type="button" onClick={() => downvote()}>
+        <button type="button" onClick={() => downvote()} disabled={disabled}>
           <IconDislikeInactive />
         </button>
       )}

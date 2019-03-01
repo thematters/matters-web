@@ -25,6 +25,7 @@ const fragments = {
     fragment DigestActionsComment on Comment {
       id
       createdAt
+      state
       article {
         id
         mediaHash
@@ -53,15 +54,16 @@ const IconDotDivider = () => (
 
 const Actions = ({ comment, hasComment }: ActionsProps) => {
   const [showForm, setShowForm] = useState(false)
+  const isActive = comment.state === 'active'
 
   return (
     <>
       <footer className="actions">
         <div className="left">
-          <UpvoteButton comment={comment} />
+          <UpvoteButton comment={comment} disabled={!isActive} />
 
           <IconDotDivider />
-          <DownvoteButton comment={comment} />
+          <DownvoteButton comment={comment} disabled={!isActive} />
 
           {hasComment && (
             <>
@@ -72,6 +74,7 @@ const Actions = ({ comment, hasComment }: ActionsProps) => {
                 onClick={() => {
                   setShowForm(!showForm)
                 }}
+                disabled={!isActive}
               >
                 <Icon
                   id={ICON_COMMENT_SMALL.id}
@@ -93,7 +96,7 @@ const Actions = ({ comment, hasComment }: ActionsProps) => {
             articleMediaHash={comment.article.mediaHash || ''}
             replyToId={comment.id}
             parentId={_get(comment, 'parentComment.id') || comment.id}
-            // submitCallback={() => setShowForm(false)}
+            submitCallback={() => setShowForm(false)}
           />
         </section>
       )}

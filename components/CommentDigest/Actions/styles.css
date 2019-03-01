@@ -20,10 +20,15 @@ footer {
   & .space-right {
     margin-right: var(--spacing-tight);
   }
-}
 
-button.active {
-  color: var(--color-black);
+  & :global(button) {
+    &.active {
+      color: var(--color-black);
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
 }
 
 .comment-form {
