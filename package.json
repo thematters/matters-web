@@ -160,6 +160,9 @@
       "node"
     ],
     "moduleNameMapper": {
+      "^.+\\.(gif|png|jpg|ttf|eot)\\?(resize|sizes)(.+)?$": "<rootDir>/__mocks__/fileResizeMock.js",
+      "^.+\\.(gif|png|jpg|ttf|eot)(\\?.+)?$": "<rootDir>/__mocks__/fileMock.js",
+      "^.+\\.svg\\?(sprite|include)(.+)?$": "<rootDir>/__mocks__/svgMock.js",
       "~(.*)$": "<rootDir>$1",
       "\\.css$": "<rootDir>/__mocks__/styleMock.js"
     },
