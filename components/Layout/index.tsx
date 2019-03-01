@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { Head } from '~/components/Head'
+import { MessageHolder } from '~/components/MessageHolder'
 import { Modal } from '~/components/Modal'
 import { ToastHolder } from '~/components/ToastHolder'
 import { ViewerContext, ViewerUserFragment } from '~/components/Viewer'
@@ -36,6 +37,7 @@ export const Layout: React.FC<LayoutProps> & {
       <Head />
       <GlobalHeader user={user} />
       <ToastHolder />
+      <MessageHolder />
       <Modal.Anchor />
 
       {children}
