@@ -1,0 +1,32 @@
+.container {
+  @mixin flex-center-all;
+  position: relative;
+}
+
+.uploader {
+  @mixin flex-center-all;
+  @mixin cover;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: var(--color-matters-green);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.button {
+  @mixin flex-center-all;
+
+  & > .hint {
+    @media(--sm-down) {
+      display: none;
+    }
+  }
+}
+
+.input {
+  @mixin flex-center-all;
+  @mixin cover;
+
+  cursor: pointer;
+  opacity: 0;
+}

@@ -1,7 +1,8 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
@@ -13,6 +14,7 @@ import {
   Translate
 } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
+import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, toPath } from '~/common/utils'
@@ -62,8 +64,12 @@ const ME_PROFILE = gql`
   ${fragments.user}
 `
 
-const EditProfileButton = () => (
-  <button type="button" onClick={() => alert('TODO: Edit Profile')}>
+const EditProfileButton = ({
+  setEditing
+}: {
+  setEditing: (value: boolean) => void
+}) => (
+  <button type="button" onClick={() => setEditing(true)}>
     <TextIcon
       icon={
         <Icon
@@ -83,9 +89,11 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
+  const [editing, setEditing] = useState<boolean>(false)
+  const containerClass = classNames('container', editing ? 'editing' : '')
 
   return (
-    <section className="container">
+    <section className={containerClass}>
       <div className="content-container l-row">
         <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <Query
@@ -103,6 +111,15 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
 
               if (error) {
                 return <Error error={error} />
+              }
+
+              if (isMe && editing) {
+                return (
+                  <UserProfileEditor
+                    user={data.viewer}
+                    saveCallback={setEditing}
+                  />
+                )
               }
 
               const user = isMe ? data.viewer : data.user
@@ -127,7 +144,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                       </section>
                       <section className="action-button">
                         {isMe ? (
-                          <EditProfileButton />
+                          <EditProfileButton setEditing={setEditing} />
                         ) : (
                           <FollowButton user={user} size="default" />
                         )}

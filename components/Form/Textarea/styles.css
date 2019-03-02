@@ -3,7 +3,7 @@
 }
 
 .textarea {
-  padding: var(--spacing-x-tight);
+  padding: var(--spacing-x-tight) var(--spacing-tight);
   min-height: 2.5rem;
 
   font-size: var(--font-size-sm); /* fallbakc */
