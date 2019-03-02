@@ -1,13 +1,13 @@
-import CustomBlot from './Custom'
 import DividerBlot from './Divider'
+import GithubGistBlot from './GithubGist'
 import ImageBlot from './Image'
-import LinkBlot from './Link'
-// import RecordBlot from './Record'
+import PastebinBlot from './Pastebin'
+import VideoBlot from './Video'
 
 export default {
-  CustomBlot,
   DividerBlot,
+  GithubGistBlot,
   ImageBlot,
-  LinkBlot
-  // RecordBlot
+  PastebinBlot,
+  VideoBlot
 }

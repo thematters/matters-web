@@ -1,20 +1,21 @@
-// import 'normalize.css'
 import React from 'react'
-
+import ReactQuill, { Quill } from 'react-quill'
+import bubbleStyle from 'react-quill/dist/quill.bubble.css'
 // import 'tailwindcss/dist/utilities.min.css'
+
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
-import EditorTools from './EditorTools'
-import styles from './quill.css'
-// import './quill.css'
+import quillStyle from './quill.css'
 import Style from './style'
-// import native from './utils/native'
+import VideoUrl from './utils/videoUrl'
 
-declare global {
-  interface Window {
-    editor: any
-  }
-}
+const {
+  DividerBlot,
+  GithubGistBlot,
+  ImageBlot,
+  PastebinBlot,
+  VideoBlot
+} = blots
 
 interface UploadResponse {
   singleFileUpload: { id: string; path: string }
@@ -26,717 +27,626 @@ interface Props {
   draft: EditorDraft
 }
 interface State {
-  quill: any
-  range: any
-  formatType?: string
-  histories: any[]
-  historyStep: number
-  openRedoOrUndo: boolean
-  // keyboardHeight: number
-  toolsMode: number
-  toolsContentMode: number
+  device: number
+  content: string
+  showEditor: boolean
+  editorChoose: number
+  showPublish: boolean
   title: string
-  upstream?: { id?: string; title?: string } | null
-  coverAssetId: string | number | null
+  // upstream: Object
+  coverAssetId: string
+  draftId: string
+  tags: string[]
 }
 
-const TOOLBAR_ONE = 1
-const TOOLBAR_TWO = 2
-
-const { CustomBlot, DividerBlot, ImageBlot, LinkBlot } = blots // RecordBlot
+const modules = {
+  toolbar: [
+    [{ header: '1' }],
+    ['bold', 'italic', 'strike', 'underline', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['link']
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false
+  }
+}
 
 export class Editor extends React.Component<Props, State> {
+  public ReactQuillRef: HTMLDivElement | null
+  public quill: Quill | null
+  public ReactQuill: typeof ReactQuill | undefined
+
+  public state = {
+    device: 4,
+    content: '',
+    showEditor: false,
+    editorChoose: -1,
+    showPublish: false,
+    title: '',
+    upstream: {
+      id: null,
+      title: ''
+    },
+    coverAssetId: '',
+    draftId: '',
+    tags: []
+  }
   constructor(props: Props) {
     super(props)
 
-    const { title } = props.draft
+    this.ReactQuillRef = null // ReactQuill component
+    this.quill = null // quill editor
 
-    this.state = {
-      quill: null,
-      range: null,
-      formatType: '',
-      histories: [] as any[],
-      historyStep: 0,
-      openRedoOrUndo: false,
-      toolsMode: TOOLBAR_ONE,
-      toolsContentMode: 0,
-      // 表单提交
-      title: title || '',
-      coverAssetId: null
+    if (typeof window !== 'undefined') {
+      this.ReactQuill = ReactQuill
     }
   }
-
   public componentDidMount() {
-    window.editor = this
-
-    const quill = this.initQuill()
-
-    // populate with draft content
-    const { content } = this.props.draft
-    quill.container.firstChild.innerHTML = content
-    this.setState({ quill })
+    // const query = this.props.router.asPath.split('?')[1]
+    // const upstream = {
+    //   id: query[0].split('=')[0] === 'upstreamId' ? query[0].split('=')[1] : '',
+    //   title:
+    //     query[1].split('=')[0] === 'upstreamTitle'
+    //       ? decodeURI(query[1].split('=')[1])
+    //       : ''
+    // }
+    // this.setState({
+    //   upstream
+    // })
   }
 
-  public initQuill = () => {
-    // this.onGetAppToken()
-    const Quill = require('quill')
-    const Delta = Quill.import('delta')
-    const SizeStyle = Quill.import('attributors/style/size')
-    const AlignStyle = Quill.import('attributors/style/align')
-
-    Quill.register(SizeStyle, true)
-    Quill.register(AlignStyle, true)
-
-    Quill.register(CustomBlot)
-    Quill.register(LinkBlot)
-    Quill.register(DividerBlot)
-    Quill.register(ImageBlot)
-    // Quill.register(RecordBlot)
-
-    require('quill/dist/quill.core.css')
-    require('./quill.css')
-    // 初始化quill
-    const editor = new Quill('#editor', {
-      placeholder: '请输入正文',
-      modules: {
-        history: {
-          delay: 0,
-          maxStack: 500,
-          userOnly: true
+  public onSubmit() {
+    if (!this.state.title || !this.state.content) {
+      return false
+    }
+    // const state = this.state
+    // const form = {
+    //   id: state.draftId ? state.draftId : null,
+    //   upstreamId: state.upstream ? state.upstream.id : null,
+    //   title: state.title,
+    //   content: state.content,
+    //   coverAssetId: state.coverAssetId,
+    //   tags: state.tags && state.tags.length ? state.tags : null
+    // }
+    console.log(`this.props
+      .putDraftMutation({
+        variables: {
+          input: form
         }
-      }
-    }) // using history module
-
-    // 監聽文字選擇
-    editor.on('selection-change', (range: any) => {
-      if (range) {
-        if (range.length !== 0) {
-          this.setState({
-            range,
-            toolsMode: TOOLBAR_TWO
-          })
-        } else {
-          if (editor.hasFocus()) {
-            this.setState({
-              toolsContentMode: 0
-            })
-          }
-          this.setState({
-            toolsMode: TOOLBAR_ONE
-          })
-        }
-      }
-    })
-
-    // 監聽文字修改
-    let change = new Delta()
-    editor.on('text-change', (delta: any, oldDelta: any, source: any) => {
-      // 设置自动保存
-      change = change.compose(delta)
-      // 設置歷史操作
-      if (!this.state.openRedoOrUndo) {
-        this.state.histories.push(oldDelta.ops[0])
-        this.setHistoryStep()
-      }
-      if (source === 'api') {
-        console.log('An API call triggered this change.')
-      } else if (source === 'user') {
-        // 判斷是否是人為刪除選中樣式，如是：刪除樣式並清空選中
-        if (
-          editor.getLength() >= 1 &&
-          delta.ops &&
-          delta.ops.length > 0 &&
-          delta.ops[0].delete
-        ) {
-          this.setFormatStyle()
-          editor.history.clear()
-          this.setState({
-            range: null,
-            histories: [],
-            historyStep: 0
-          })
-        }
+      })
+      .then(data => {
         this.setState({
-          openRedoOrUndo: false
+          draftId: data.data && data.data.putDraft ? data.data.putDraft.id : ''
         })
-        console.log('A user action triggered this change.')
-      }
-    })
-
-    // 设置自动保存
-    setInterval(() => {
-      if (change.length() > 0) {
-        console.log('Saving changes', change)
-        this.onSaveCommit()
-        change = new Delta()
-      }
-    }, 2 * 1000)
-
-    return editor
+      })`)
   }
 
-  // public componentWillReceiveProps() {
-  //   this.forceUpdate(() => {
-  //     console.log('props', this.props.draft)
-  //     if (this.props.draft && this.props.draft != null) {
-  //       const { draft } = this.props
-  //       this.setState({
-  //         title: draft.title || '',
-  //         upstream: draft.upstream
-  //         // data.upstream && data.upstream != null
-  //         //   ? data.upstream
-  //         //   : {
-  //         //       id: undefined,
-  //         //       title: ''
-  //         //     }
-  //       })
-
-  //       if (this.state.quill !== null) {
-  //         // @ts-ignore
-  //         this.state.quill.container.firstChild.innerHTML = data.content
-  //       }
-  //     }
-  //   })
-  // }
-
-  // submit
-  public onSaveCommit = () => {
-    if (this.state.quill) {
-      const draft = {
-        id: this.props.draft.id,
-        title: this.state.title,
-        content: this.state.quill.container.firstChild.innerHTML,
-        coverAssetId: this.state.coverAssetId
-      }
-      this.props.submit(draft)
-    }
-  }
-
-  // 跳转app页面
-  // public jumpToLink(fn: string, params: any) {
-  //   native.call(fn, params)
-  // }
-
-  // 设置token
-  public onGetAppToken() {
-    // if (!window.native) {
-    return false
-    // }
-    // const token = window.native.getToken()
-    // if (token) {
-    //   localStorage.setItem('token', token)
-    // }
-  }
-
-  // app调用删除音频
-  // public deleteVoice(params: any) {
-  //   if (typeof params === 'string') {
-  //     params = JSON.parse(params)
-  //   }
-  //   let data = params.data
-  //   if (typeof params.data === 'string') {
-  //     data = JSON.parse(params.data)
-  //   }
-  //   const parent = document.querySelector('.record')
-  //   const el = document.getElementById('frame_' + data.index)
-  //   parent.removeChild(el)
-  // }
-
-  // 設置歷史索引值
-  public setHistoryStep = () => {
+  // 显示编辑器工具
+  public onToggleEditorTools() {
     this.setState({
-      historyStep: this.state.histories.length
+      showEditor: !this.state.showEditor
     })
   }
 
-  // 判斷字體樣式
-  public onClickMark = (event: Event, type: string): void => {
-    switch (type) {
-      case 'heading-one':
-        this.setFormatStyle('heading-one', {
-          bold: true,
-          size: '32px'
-        })
-        break
-      case 'heading-two':
-        this.setFormatStyle('heading-two', {
-          bold: true,
-          size: '18px'
-        })
-        break
-      case 'heading-three':
-        this.setFormatStyle('heading-three', {
-          bold: true,
-          size: '10px'
-        })
-        break
-      case 'heading-normal':
-        this.setFormatStyle('heading-normal', {
-          bold: false,
-          size: false
-        })
-        break
-      case 'quote-custom':
-        this.setFormatStyle('quote-custom', {
-          custom: true
-        })
-        break
-      case 'bold':
-        this.setFormatStyle('bold', {
-          bold: true
-        })
-        break
-      case 'italic':
-        this.setFormatStyle('italic', {
-          italic: true
-        })
-        break
-      case 'through-line':
-        this.setFormatStyle('through-line', {
-          strike: true
-        })
-        break
-      case 'underlined':
-        this.setFormatStyle('underlined', {
-          underline: true
-        })
-        break
-      case 'quote':
-        this.setFormatStyle(
-          'quote',
-          {
-            blockquote: true
-          },
-          true
-        )
-        break
-      case 'set-line':
-        this.setFormatStyle(
-          'set-line',
-          {
-            divider: true
-          },
-          true
-        )
-        break
-      case 'bulleted-list':
-        this.setFormatStyle(
-          'bulleted-list',
-          {
-            list: 'bullet'
-          },
-          true
-        )
-        break
-      case 'numbered-list':
-        this.setFormatStyle(
-          'numbered-list',
-          {
-            list: 'ordered'
-          },
-          true
-        )
-        break
-      case 'link':
-        this.setFormatStyle(
-          'link',
-          {
-            link: prompt('添加鏈接')
-          },
-          true
-        )
-        break
-
-      default:
-        break
-    }
-  }
-  public isArray = (object: any) => {
-    return object && typeof object === 'object' && object.constructor === Array
-  }
-
-  public compareObj = (objA: any, objB: any, flag: boolean = true): boolean => {
-    for (const key in objA) {
-      if (objA.hasOwnProperty(key)) {
-        if (!flag) {
-          break
-        }
-        if (!objB.hasOwnProperty(key)) {
-          flag = false
-          break
-        }
-        if (!this.isArray(objA[key])) {
-          if (objB[key] !== objA[key]) {
-            flag = false
-            break
-          }
-        } else {
-          if (!this.isArray(objB[key])) {
-            flag = false
-            break
-          }
-          const oA = objA[key]
-          const oB = objB[key]
-          if (oA.length !== oB.length) {
-            flag = false
-            break
-          }
-          for (const k in oA) {
-            if (oA.hasOwnProperty(k)) {
-              if (!flag) {
-                break
-              }
-              flag = this.compareObj(oA[k], oB[k], flag)
-            }
-          }
-        }
-      }
-    }
-    return flag
-  }
-
-  // 設置字體樣式
-  public setFormatStyle = (
-    type?: string,
-    option: any = {},
-    isBlock: boolean = false
-  ): void => {
-    const quill = this.state.quill
-    const range = this.state.range
-    let emptyStyle = false
-    if (!range && JSON.stringify(option) !== '{}') {
-      return alert('請選擇文字')
-    }
-    if (!range) {
-      return
-    }
-
-    const oldStyle = quill.getFormat(range)
-    // 判斷是否有傳樣式
-    if (!type || JSON.stringify(option) === '{}') {
-      quill.removeFormat(range.index, range.length)
-    } else {
-      // 獲取文字上的舊樣式，判斷是否有，如有就清除樣式
-      const style = quill.getFormat(range.index, range.length)
-      emptyStyle = JSON.stringify(style) === '{}'
-      // 判斷是否是切換樣式，如是：修改樣式
-      if (
-        emptyStyle ||
-        (this.state.histories.length > 0 && !this.compareObj(oldStyle, option))
-      ) {
-        // 判断是否是块级样式
-        if (isBlock) {
-          quill.format(Object.keys(option)[0], Object.values(option)[0])
-        } else {
-          quill.formatText(range.index, range.length, option)
-        }
-      } else {
-        quill.removeFormat(range.index, range.length)
-      }
-    }
-    // 判斷是否是切換新的樣式，否就判斷時候有舊樣式
-    const formatType =
-      this.state.histories.length > 0 && this.compareObj(oldStyle, option)
-        ? emptyStyle
-          ? type
-          : ''
-        : type
-
+  // 设置样式
+  public onSetStyle(index: number) {
     this.setState({
-      formatType
+      editorChoose: this.state.editorChoose === index ? -1 : index
     })
   }
-  // 設置歷史計數值
-  public changeHistoryStep = (type: string) => {
-    let index = this.state.historyStep
-    const quill = this.state.quill
-    switch (type) {
-      case 'undo':
-        if (index <= 0) {
-          return
-        }
-        index--
-        quill.history.undo()
-        break
-      case 'redo':
-        if (index >= this.state.histories.length) {
-          return
-        }
-        index++
-        quill.history.redo()
-        break
-      default:
-        break
-    }
 
+  // 设置默认链接 placeholder
+  public onSetDefault() {
+    const linkInput = document.querySelectorAll('.ql-tooltip-editor input')
+
+    /* tslint:disable */
+    // @ts-ignore
+    for (let i = 0; i < linkInput.length; i++) {
+      linkInput[i].setAttribute('placeholder', '輸入連結地址')
+    }
+  }
+
+  // 打开或关闭发布文章
+  public onTogglePublish() {
     this.setState({
-      historyStep: index,
-      openRedoOrUndo: true
+      showPublish: !this.state.showPublish
     })
   }
 
   // 设置标题
-  public handleTitle = (e: any) => {
+  public handleTitle(e: any) {
     const value = e.target.value
     this.setState({
       title: value
     })
-    e.target.style.height = e.target.scrollTop + e.target.scrollHeight + 'px'
   }
 
-  // 取消编辑
-  public cancelEdit = () => {
-    if (this.props.draft) {
-      // 草稿上传成功
-      console.log(`this.jumpToLink('onEditorCancle')`)
-    } else {
-      // 草稿未上传成功
-      console.log(`this.jumpToLink('showDraftNotSavedTipView')`)
-    }
-  }
-
-  // 获取native上游
-  // public setLinkToUpstreamArticle(params) {
-  //   const data = JSON.parse(params)
-  //   this.setState({
-  //     upstream: data
-  //   })
-  //   this.onSaveCommit()
-  // }
-
-  // 设置录音
-  public onSetRecord = (data: any) => {
-    const quill = this.state.quill
-    const range = this.state.range ? this.state.range : quill.getSelection(true)
-    // data = {
-    //     id: 1,
-    //     title: '撒打算',
-    //     duration: '00:00:01',
-    //     src: 'http://www.w3school.com.cn/i/horse.ogg'
+  // 获取文章ID或草稿ID
+  public onFetchArticle() {
+    // if (id) {
+    //   this.props.client
+    //     .query({
+    //       query: getArticleQuery,
+    //       variables: {
+    //         input: { id: data.id }
+    //       }
+    //     })
+    //     .then(data => {
+    //       let detail = data.data && data.data.node ? data.data.node : {}
+    //       this.setState({
+    //         content: data.content,
+    //         title: data.title ? data.title : data.draftTitle,
+    //         upstream: data.upstream ? data.upstream : {}
+    //       })
+    //     })
     // }
-    quill.insertEmbed(range.index, 'record', data, 'user')
-    quill.setSelection(range.index + 2, 'silent')
-    quill.insertText(range.index, '\n', 'user')
-    quill.blur()
   }
 
-  // 编辑录音
-  // public updateVoice(params) {
-  //   if (typeof params === 'string') {
-  //     params = JSON.parse(params)
-  //   }
-  //   let data = params.data
-  //   if (typeof params.data === 'string') {
-  //     data = JSON.parse(params.data)
-  //   }
-  //   const el = document.getElementById('frame_' + data.index)
-  //   const dom = el.contentWindow.document.body
-  //   dom.querySelector('h2').innerText = data.title
-  // }
-
-  // app调用编辑链接
-  // public updateLink(params) {
-  //   if (typeof params === 'string') {
-  //     params = JSON.parse(params)
-  //   }
-  //   let data = params.data
-  //   if (typeof params.data === 'string') {
-  //     data = JSON.parse(params.data)
-  //   }
-  //   const el = document.getElementById('link_' + data.index)
-  //   el.setAttribute('src', data.link)
-  // }
-
-  // app调用移除链接
-  // public deleteLink() {
-  //   const range = this.state.range
-  //   this.state.quill.formatText(range.index, range.length, { link: false })
-  // }
-
-  // 获取上传图片
-  public setPhotoResource = async (params: any) => {
-    // 设置图片
-    if (typeof params === 'string') {
-      params = JSON.parse(params)
+  // 发布文章
+  public onPublish() {
+    if (!this.state.draftId) {
+      return
     }
-    let array = params.data
-    if (typeof array === 'string') {
-      array = JSON.parse(array)
-    }
-    for (const i of array) {
-      const value = await this.props.upload(
-        'data:image/png;base64,' + array[i].image
-      )
 
-      if (value.data && value.data.singleFileUpload) {
-        if (i === 0) {
-          this.setState({ coverAssetId: value.data.singleFileUpload.id })
-        }
-        this.onSetPhotos(value.data.singleFileUpload)
+    // 发布文章
+    // const publishMutate = gql`
+    //   mutation PublishArticleMutation($input: PublishArticleInput!) {
+    //     data: publishArticle(input: $input) {
+    //       id
+    //     }
+    //   }
+    // `
+
+    // this.props.client
+    //   .mutate({
+    //     mutation: publishMutate,
+    //     variables: {
+    //       input: {
+    //         id: this.state.draftId
+    //       }
+    //     }
+    //   })
+    //   .then(res => {
+    //     this.onTogglePublish()
+    //   })
+  }
+
+  // 暂存草稿
+  public onSaveDraft() {
+    this.onSubmit()
+  }
+
+  // 更新 tags
+  public updateTags(tagsArray: string[]) {
+    this.setState(
+      {
+        tags: tagsArray
+      },
+      () => {
+        this.onSubmit()
       }
-    }
+    )
   }
 
-  // 设置图片
-  public onSetPhotos = (data: UploadResponse['singleFileUpload']) => {
-    const quill = this.state.quill
-    const range = this.state.range ? this.state.range : quill.getSelection(true)
+  // // 更新 上游文章
+  // public updateUpstream(el) {
+  //   this.setState(
+  //     {
+  //       upstream: el
+  //     },
+  //     () => this.onSubmit()
+  //   )
+  // }
 
-    quill.insertEmbed(range.index + 1, 'image', {
-      url: data.path,
-      action: (className: string) => {
-        const figcaption = document.querySelector(className)
-        const el =
-          figcaption &&
-          figcaption.nextSibling &&
-          (figcaption.nextSibling.nextSibling as HTMLElement)
-        const desc = el && el.innerText
-        const json = {
-          image: data.path,
-          className,
-          desc
-        }
-        console.log(
-          `this.jumpToLink('onPhotoPreview', ${JSON.stringify(json)})`
-        )
-      }
-    })
-    quill.setSelection(range.index, 'silent')
-  }
+  public updateDraft(data: any) {
+    const { content, id: draftId, title, tags } = data.node
 
-  // 点击下一步
-  public onNextStep = () => {
-    const state = this.state
-    if (state.title !== '' && (state.quill && state.quill.getContents())) {
-      console.log(`this.jumpToLink('onAddTags', this.props.draftId)`)
-    }
-  }
-
-  // 设置资源ID
-  public setAppResourceId() {
-    console.log(`this.jumpToLink('onAddTags', this.props.draftId)`)
-  }
-
-  // 设置图片描述
-  public setPhotoDesc = (params: any) => {
-    // const quill = this.state.quill
-    if (typeof params === 'string') {
-      params = JSON.parse(params)
-    }
-    let data = params.data
-    if (typeof params.data === 'string') {
-      data = JSON.parse(params.data)
-    }
-    const figcaption = document.querySelector(data.class_name)
-    if (figcaption) {
-      figcaption.nextSibling.nextSibling.innerText = data.desc
-    }
-  }
-
-  // 删除上游链接
-  public onClearUpstream = () => {
     this.setState({
-      upstream: {
-        id: undefined,
-        title: ''
-      }
+      content,
+      draftId,
+      title,
+      tags
+      // upstream
     })
-    this.onSaveCommit()
+  }
+
+  /**
+   * quill methods
+   */
+  public quillChange(content: string) {
+    //  delta:any, source, editor
+    // console.log('quillChange: ', content, delta, source, editor)
+    this.setState({ content })
+  }
+  public quillChangeSelection(range: any, editor: any) {
+    // console.log('quillChangeSelection: ', range, source, editor)
+    if (!range) {
+      return
+    }
+    const bounds = editor.getBounds(range)
+    this.setMediaBtnPosition(bounds.top + 108)
+  }
+  // public quillBlur() {
+  //   // console.log('quillBlur: ', previousRange, source, editor)
+  //   this.onSubmit()
+  // }
+  // public quillFocus() {
+  //   // console.log('quillFocus: ', range, source, editor)
+  // }
+  // public quillKeyUp(event) {
+  //   // console.log('quillKeyUp: ', event)
+  // }
+  public setMediaBtnPosition(top: number) {
+    /* tslint:disable */
+    // @ts-ignore
+    this.refs.mediaBtn.style.position = 'absolute'
+    /* tslint:disable */
+    // @ts-ignore
+    this.refs.mediaBtn.style.top = `calc(${top}px - .5em)`
+  }
+
+  public setQuill(quill: any) {
+    if (quill) {
+      this.ReactQuillRef = quill
+      this.quill = quill.getEditor()
+    }
+  }
+
+  public getPosition = () => {
+    if (!this.quill) {
+      return
+    }
+
+    const range = this.quill.getSelection()
+    const len = this.quill.getLength()
+    const position = range ? range.index : len || 0
+
+    return position
+  }
+
+  public insertImage(position: any, imgUrl: string) {
+    if (!imgUrl) {
+      return
+    }
+
+    if (this.quill) {
+      this.quill.insertEmbed(position, 'image', imgUrl)
+    }
+
+    this.setState({
+      showEditor: false,
+      editorChoose: -1
+    })
+  }
+
+  public uploadAvatar(e: any) {
+    this.updateFile(e.target.files[0])
+  }
+
+  // 上传头像
+  public updateFile(file: any) {
+    console.log('updateFile')
+    // const uploadFileMutation = gql`
+    //   mutation($input: SingleFileUploadInput!) {
+    //     singleFileUpload(input: $input) {
+    //       id
+    //       path
+    //     }
+    //   }
+    // `
+
+    // return this.props.client
+    //   .mutate({
+    //     mutation: uploadFileMutation,
+    //     variables: {
+    //       input: {
+    //         file,
+    //         type: 'embed'
+    //       }
+    //     }
+    //   })
+    //   .then(res => {
+    //     const pos = this.getPosition()
+    //     const imgUrl = res.data.singleFileUpload.path
+    //     this.insertImage(pos, imgUrl)
+    //   })
+  }
+
+  public videoUpload(url: string) {
+    if (this.quill) {
+      const range = this.quill.getSelection(true)
+      this.quill.insertEmbed(range.index, 'video', url)
+
+      this.setState({
+        showEditor: false,
+        editorChoose: -1
+      })
+    }
+  }
+
+  public codeUpload(url: string, isIframe = false) {
+    // const range = this.quill.getSelection(true)
+    // this.quill.insertEmbed(range.index, isIframe ? 'pastebin' : 'gist', url)
+    // this.setState({
+    //   showEditor: false,
+    //   editorChoose: -1
+    // })
+  }
+
+  // 视频url - keyup.enter event
+  public onVideoUrl(e: any) {
+    if (e.keyCode === 13) {
+      const url = VideoUrl(e.target.value)
+      if (url) {
+        this.videoUpload(url)
+      }
+      e.target.value = ''
+    }
+  }
+
+  public onCodeUrl(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.keyCode == 13) {
+      const codeObj = {
+        url: 'https://pastebin.com/embed_iframe/FfvyTrmN',
+        type: 'pastebin'
+      }
+      // TODO: 正则匹配url
+      // const codeObj = codeUrl(e.target.value)
+      // 'https://pastebin.com/embed_iframe/FfvyTrmN'
+      // 'https://gist.github.com/sammieho1995/fac3bbb632d07551a9a51f1afc35b76e'
+      if (codeObj) {
+        this.codeUpload(codeObj.url, codeObj.type !== 'gist')
+      }
+      // e.target.value = ''
+    }
+  }
+
+  // 分割线
+  public insertDivider() {
+    if (this.quill) {
+      this.onSetStyle(4)
+
+      const pos = this.getPosition() || 0
+      this.quill.insertEmbed(pos, 'divider', 'user')
+
+      this.setState({
+        showEditor: false,
+        editorChoose: -1
+      })
+    }
+  }
+
+  public registerBlot() {
+    Quill.register('formats/image', ImageBlot, true)
+    Quill.register('formats/video', VideoBlot, true)
+    Quill.register('formats/gist', GithubGistBlot, true)
+    Quill.register('formats/pastebin', PastebinBlot, true)
+    Quill.register('formats/divider', DividerBlot, true)
   }
 
   public render() {
-    const state = this.state
-    const canUndo = state.historyStep >= 1
-    const canRedo =
-      state.histories && state.historyStep < state.histories.length - 1
-    // const canNext =
-    //   state.title !== '' && (state.quill && state.quill.getContents())
+    const { editorChoose, showEditor, title } = this.state
+
+    const isWeb = true
+
+    const ReactQuill = this.ReactQuill
+
+    if (ReactQuill) {
+      this.registerBlot()
+    }
     return (
-      <>
-        <div style={Style.contentBox}>
-          {/* <header
-                        style={Style.header}
-                        className="flex items-center justify-between"
-                    >
-                        <div onClick={this.cancelEdit.bind(this)}>取消</div>
-                        <div className="flex items-center">
-                            <div
-                                onClick={() => this.jumpToLink('showDraftView')}
-                            >
-                                草稿
+      <div>
+        {/* <HeaderBox
+          active="none"
+          showPublishButton
+          publish={this.onTogglePublish.bind(this)}
+        /> */}
+        <section
+          className="container"
+          style={isWeb ? Style.contentBox.pc : Style.contentBox.mobile}
+        >
+          {/* 左边 */}
+          <div className="left-box relative">
+            {/* TODO: 提示 */}
+            {/* <div style={Style.notice.box}>
+                            <strong style={Style.notice.title}>
+                                正在等待發佈 (01:24)
+                            </strong>
+                            <div className="flex items-center justify-between">
+                                <div style={Style.notice.notice}>
+                                    上鏈後，文章不可刪改，永久保存
+                                </div>
+                                <div style={Style.notice.cancle}>撤銷</div>
                             </div>
-                            <div
-                                style={Style.header.next(canNext)}
-                                onClick={this.onNextStep.bind(this)}
-                            >
-                                下一步
-                            </div>
-                        </div>
-                    </header> */}
-          {/* <div
-            className="flex items-center justify-between"
-            style={Style.form.upstreamBox}
-          >
-            <div className="w-4/5">
+                        </div> */}
+            <div>
               <input
-                type="text"
-                placeholder="連結上游文章（可選）"
-                value={(state.upstream && state.upstream.title) || undefined}
-                style={Style.form.input(1.4, 'rgb(179, 179, 179)', false)}
-                readOnly
-                onClick={() => {
-                  console.log(`this.jumpToLink('onSearchArticle')`)
+                placeholder="請輸入標題…"
+                style={Style.titleInput}
+                value={title}
+                onChange={e => {
+                  this.handleTitle(e)
                 }}
+                onBlur={this.onSubmit.bind(this)}
               />
             </div>
-            {state.upstream && state.upstream.title && (
-              <div
-                style={Style.form.stopLink}
-                className="flex-auto"
-                onClick={this.onClearUpstream}
-              >
-                斷開上遊
-              </div>
-            )}
-          </div> */}
-          <div>
-            <textarea
-              placeholder="请输入标题"
-              style={Style.form.input(2.2, 'rgb(51, 51, 51)', true)}
-              value={state.title}
-              onChange={e => {
-                this.handleTitle(e)
-              }}
-              onClick={() => {
-                this.setState({ toolsContentMode: 0 })
-              }}
-              onBlur={this.onSaveCommit}
-            />
-            <div id="editor" style={Style.form.textarea}>
-              {/* {编辑器挂载} */}
+            <div onClick={this.onSetDefault.bind(this)} id="editor">
+              {typeof window !== 'undefined' && ReactQuill ? (
+                <ReactQuill
+                  theme="bubble"
+                  modules={modules}
+                  formats={[
+                    'header',
+                    'font',
+                    'size',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'strike',
+                    'blockquote',
+                    'list',
+                    'bullet',
+                    'indent',
+                    'link',
+                    'image',
+                    'video',
+                    'divider',
+                    'gist',
+                    'pastebin'
+                  ]}
+                  ref={reactQuillRef => this.setQuill(reactQuillRef)}
+                  value={this.state.content}
+                  placeholder="請輸入正文..."
+                  onChange={
+                    (content, delta, source, editor) =>
+                      this.quillChange(content) // , delta, source, editor)
+                  }
+                  onChangeSelection={
+                    (range, source, editor) =>
+                      this.quillChangeSelection(range, editor) //  source,
+                  }
+                  onBlur={(previousRange, source, editor) => this.onSubmit()}
+                  onFocus={(range, source, editor) =>
+                    console.log(`this.quillFocus(range, source, editor)`)
+                  }
+                />
+              ) : (
+                <div>loading...</div>
+              )}
+            </div>
+
+            <iframe id="frame" name="frame" hidden />
+
+            {/* media control bar */}
+            <div style={Style.tools.box} ref="mediaBtn">
+              <img
+                src={require('./assets/icons-editor-add.svg')}
+                style={Style.tools.add}
+                onClick={this.onToggleEditorTools.bind(this)}
+              />
+              {showEditor && (
+                <div
+                  className="flex items-center relative"
+                  style={Style.tools.children}
+                >
+                  {/* close button */}
+                  <img
+                    src={require('./assets/icons-editor-close.svg')}
+                    style={Style.tools.img(1)}
+                    onClick={this.onToggleEditorTools.bind(this)}
+                  />
+
+                  {/* image */}
+                  <label
+                    style={Style.tools.img(
+                      editorChoose < 0 || editorChoose === 1 ? 1 : 0.5
+                    )}
+                  >
+                    <input
+                      type="file"
+                      name="file"
+                      onChange={e => this.uploadAvatar(e)}
+                      accept=".jpg,.png,.jpeg"
+                      disabled={false}
+                      multiple={false}
+                      className="hidden"
+                    />
+                    <img
+                      src={require('./assets/icons-editor-image.svg')}
+                      onClick={() => this.onSetStyle(1)}
+                    />
+                  </label>
+
+                  {/* video */}
+                  <img
+                    src={require('./assets/icons-editor-video.svg')}
+                    onClick={() => this.onSetStyle(2)}
+                    style={Style.tools.img(
+                      editorChoose < 0 || editorChoose === 2 ? 1 : 0.5
+                    )}
+                  />
+
+                  {/* audio */}
+                  {/* <img
+                                        src={require('~/src/assets/svg/icons-editor-audio.svg')}
+                                        style={Style.tools.img(
+                                            editorChoose < 0 ||
+                                            editorChoose === 3
+                                                ? 1
+                                                : '0.5'
+                                        )}
+                                        onClick={() => this.onSetStyle(3)}
+                                    /> */}
+
+                  {/* hr */}
+                  <img
+                    src={require('./assets/icons-editor-linebreak.svg')}
+                    style={Style.tools.img(
+                      editorChoose < 0 || editorChoose === 4 ? 1 : 0.5
+                    )}
+                    onClick={() => this.insertDivider()}
+                  />
+
+                  {/* code */}
+                  <img
+                    src={require('./assets/icons-editor-code.svg')}
+                    style={Style.tools.img(
+                      editorChoose < 0 || editorChoose === 5 ? 1 : 0.5
+                    )}
+                    onClick={() => this.onSetStyle(5)}
+                  />
+
+                  {/* input video url */}
+                  {editorChoose === 2 && (
+                    <input
+                      ref="videoInput"
+                      placeholder="請粘貼視頻網站的連結（支持 Youtube，Vimeo 和 Youku），然後按回車確認"
+                      style={Style.tools.imgBox.input}
+                      onKeyUp={e => this.onVideoUrl(e)}
+                    />
+                  )}
+
+                  {/* input code */}
+                  {editorChoose === 5 && (
+                    <input
+                      ref="codeLinkInput"
+                      placeholder="請粘貼代碼網站的連結（支持 Github Gist 和 Pastebin），然後按回車確認"
+                      style={Style.tools.imgBox.input}
+                      onKeyUp={e => this.onCodeUrl(e)}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
-        </div>
-        <EditorTools
-          quill={state.quill}
-          undo={canUndo}
-          redo={canRedo}
-          mode={state.toolsMode}
-          contentType={state.toolsContentMode}
-          format={state.formatType}
-          mark={(e: Event, type: string) => {
-            this.onClickMark(e, type)
-          }}
-          changeStep={(type: string) => {
-            this.changeHistoryStep(type)
-          }}
-          setRecord={(data: any) => {
-            this.onSetRecord(data)
-          }}
-        />
-        {/* <iframe id="frame" name="frame" hidden /> */}
-        <style jsx>{styles}</style>
-      </>
+          {/* 右边 */}
+          {/* <MediaQuery
+            minWidth={992}
+            values={{ deviceWidth: 1600 }}
+            style={Style.rightPaddingTop}
+          >
+            <div className="right-box">
+              <MediaQuery minWidth={992} values={{ deviceWidth: 1600 }}>
+                <EditorMoreContent
+                  updateTags={(e, tagsArray) => this.updateTags(tagsArray)}
+                  updateUpstream={(e, stream) => this.updateUpstream(stream)}
+                  updateDraft={data => this.updateDraft(data)}
+                />
+              </MediaQuery>
+            </div>
+          </MediaQuery> */}
+          {/* {showPublish && (
+            <ArticlePublishDialog
+              close={this.onTogglePublish.bind(this)}
+              onPublish={this.onPublish.bind(this)}
+              onSaveDraft={this.onSaveDraft.bind(this)}
+            />
+          )} */}
+        </section>
+        <style jsx>{bubbleStyle}</style>
+        <style jsx>{quillStyle}</style>
+      </div>
     )
   }
 }

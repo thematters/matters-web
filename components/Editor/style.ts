@@ -1,57 +1,115 @@
 export default {
-  contentBox: {
-    padding: '0 2rem 0',
-    boxSizing: 'border-box',
-    height: '100vh',
-    overflow: 'auto'
-  } as React.CSSProperties,
-  header: {
-    padding: '1rem 0 1.2rem',
-    fontSize: '1.6rem',
-    color: 'rgb(51, 51, 51)',
-    next: (isComplete: boolean) => {
-      return {
-        color: isComplete ? 'rgb(74, 124, 110)' : 'rgba(74, 124, 110, .4)',
-        marginLeft: '2.4rem'
-      }
+  notice: {
+    box: {
+      background: '#0d6763',
+      borderRadius: '.4rem',
+      boxShadow: '0 1px 4px 0 rgba(0, 0, 0, 0.08)',
+      padding: '1.6rem 2.4rem',
+      color: '#fff',
+      fontSize: '1.4rem',
+      lineHeight: 1.71
+    },
+    title: {
+      display: 'inline-block',
+      lineHeight: '1.5',
+      marginBottom: '.4rem',
+      fontSize: '1.6rem'
+    },
+    notice: {
+      color: 'rgba(255, 255, 255, .5)'
+    },
+    cancle: {
+      cursor: 'pointer'
     }
   },
-  form: {
-    upstreamBox: {
-      borderBottom: '1px solid rgba(0, 0, 0, .16)'
+  contentBox: {
+    pc: {
+      padding: '6.4rem 0 7.8rem'
     },
-    input: (fontSize: number, color: string, hasBorder: boolean) => {
+    mobile: {
+      padding: '0 2rem 0',
+      width: '100%',
+      boxSizing: 'border-box',
+      overflowX: 'hidden'
+    }
+  },
+  rightPaddingTop: {
+    paddingTop: '3.2rem'
+  },
+  titleInput: {
+    border: 0,
+    borderBottom: '.05rem solid rgba(0, 0, 0, 0.16)',
+    padding: '4rem 0 1.6rem 0',
+    fontSize: '2.4rem',
+    color: '#333333',
+    fontWeight: 600,
+    width: '100%',
+    marginBottom: '2.4rem'
+  },
+  tools: {
+    box: {
+      position: 'absolute',
+      top: '10.8rem',
+      left: '0.9rem',
+      width: '3.3rem',
+      height: '3.3rem',
+      borderRadius: '50%',
+      background: '#fff',
+      transition: 'all .3s'
+    } as React.CSSProperties,
+    add: {
+      position: 'absolute',
+      width: '3.3rem',
+      height: '3.3rem',
+      cursor: 'pointer'
+    } as React.CSSProperties,
+    children: {
+      position: 'absolute',
+      left: '0',
+      top: '6.3rem'
+    } as React.CSSProperties,
+    img: (opacity = 1) => {
       return {
-        display: 'block',
-        padding: '1.7rem 2rem 1.6rem 0',
-        fontSize: `${fontSize}rem`,
+        width: '3.3rem',
+        height: '3.3rem',
+        marginRight: '1.6rem',
+        opacity,
+        cursor: 'pointer',
+        background: '#fff',
+        borderRadius: '50%',
+        flexShrink: 0
+      }
+    },
+    imgBox: {
+      box: {
+        position: 'absolute',
+        left: '-4.9rem',
+        top: '100%',
+        marginTop: '1.6rem',
+        borderRadius: '2px',
+        width: '36em',
+        boxSizing: 'border-box'
+      },
+      notice: {
+        fontSize: '1.2rem',
+        color: '#808080',
+        marginBottom: '.8rem'
+      },
+      noticeGrey: {
+        color: '#b3b3b3'
+      },
+      input: {
         border: 0,
         width: '100%',
-        height: '6rem',
-        borderBottom: hasBorder ? '1px solid rgba(0, 0, 0, .16)' : 0,
-        boxSizing: 'border-box',
-        appearance: 'none',
-        outline: 'none',
-        color,
-        resize: 'none',
-        borderRadius: 0
+        fontSize: '1.4rem',
+        color: '#333',
+        position: 'absolute',
+        left: '4.9rem',
+        top: '100%',
+        marginTop: '1.6rem',
+        borderRadius: '2px',
+        boxSizing: 'border-box'
       } as React.CSSProperties
-    },
-    stopLink: {
-      fontSize: '1.4rem',
-      color: 'rgba(74, 124, 110)',
-      textAlign: 'right'
-    } as React.CSSProperties,
-    textarea: {
-      margin: '1.6rem 0',
-      fontSize: '1.5rem',
-      appearance: 'none',
-      outline: 'none',
-      width: '100%',
-      height: '65vh',
-      overflow: 'auto',
-      paddingBottom: '3rem',
-      boxSizing: 'border-box'
-    } as React.CSSProperties
+    }
   }
 }

@@ -1,24 +1,13 @@
-import Quill from 'quill'
+import { Quill } from 'react-quill'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-// 自定义创建图片
+// ImageBlot
 class ImageBlot extends BlockEmbed {
   public static create(value: any) {
     const node = super.create()
-    const imageLength = document.querySelectorAll('#editor figure').length
-    node.innerHTML = `
-                    <img src="${
-                      value.url
-                    }" style="width:100%" class="cover-${imageLength}">
-                    <figcaption contenteditable="false"></figcaption>
-                `
-    node.addEventListener('click', () => value.action(`.cover-${imageLength}`))
-    const figcaption = node.querySelector('figcaption')
-    node.style.margin = 0
-    figcaption.style.color = 'rgb(179,179,179)'
-    figcaption.style.textAlign = 'center'
-
+    node.setAttribute('src', value)
+    node.setAttribute('width', '100%')
     return node
   }
 
@@ -29,6 +18,6 @@ class ImageBlot extends BlockEmbed {
   }
 }
 ImageBlot.blotName = 'image'
-ImageBlot.tagName = 'figure'
+ImageBlot.tagName = 'img'
 
 export default ImageBlot
