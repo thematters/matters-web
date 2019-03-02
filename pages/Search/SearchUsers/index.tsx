@@ -112,8 +112,6 @@ const SearchUser = ({
               <InfiniteScroll
                 hasNextPage={!isAggregate && pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <ul>

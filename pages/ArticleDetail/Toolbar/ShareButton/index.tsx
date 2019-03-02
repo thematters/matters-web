@@ -8,12 +8,7 @@ const ShareButton = () => (
     aria-label="分享"
     onClick={() => alert('TODO: popup share modal')}
   >
-    <Icon
-      size="default"
-      className="u-motion-icon-hover"
-      id={ICON_SHARE.id}
-      viewBox={ICON_SHARE.viewBox}
-    />
+    <Icon size="default" id={ICON_SHARE.id} viewBox={ICON_SHARE.viewBox} />
   </button>
 )
 

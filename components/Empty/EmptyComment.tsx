@@ -2,7 +2,7 @@ import { Empty, Icon, Translate } from '~/components'
 
 import ICON_EMPTY_COMMENT from '~/static/icons/empty-comment.svg?sprite'
 
-const EmptyComments = () => (
+const EmptyComment = ({ description }: { description?: React.ReactNode }) => (
   <Empty
     icon={
       <Icon
@@ -11,8 +11,10 @@ const EmptyComments = () => (
         size={'xxlarge'}
       />
     }
-    description={<Translate zh_hant="還沒有評論" zh_hans="还没有评论" />}
+    description={
+      description || <Translate zh_hant="還沒有評論" zh_hans="还没有评论" />
+    }
   />
 )
 
-export default EmptyComments
+export default EmptyComment

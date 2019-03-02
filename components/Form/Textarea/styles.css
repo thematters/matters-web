@@ -2,14 +2,18 @@
   position: relative;
 }
 
-.input {
+.textarea {
+  padding: var(--spacing-x-tight);
+  min-height: 2.5rem;
+
+  font-size: var(--font-size-sm); /* fallbakc */
+  font-size: calc(var(--font-size-sm) + 1px);
+  line-height: 1.5rem;
+
   background-color: var(--color-grey-lighter);
   border-top-right-radius: 0.15rem;
   border-top-left-radius: 0.15rem;
   border-bottom: 1px solid var(--color-grey-light);
-  font-size: var(--font-size-md);
-  height: 2.5rem;
-  padding: var(--spacing-x-tight) var(--spacing-tight);
   transition: all 0.2s ease-in-out;
 
   &:focus {
@@ -20,17 +24,6 @@
   &::placeholder {
     color: var(--color-grey);
   }
-}
-
-.float-right {
-  @mixin flex-center-all;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  height: 2.5rem;
-  padding: var(--spacing-x-tight);
 }
 
 .info {

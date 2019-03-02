@@ -4,20 +4,13 @@ import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  Error,
-  Head,
-  Icon,
-  InfiniteScroll,
-  Placeholder,
-  Spinner
-} from '~/components'
+import { Error, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
+import EmptyComment from '~/components/Empty/EmptyComment'
 
 import { getQuery, mergeConnections, toPath } from '~/common/utils'
 import ICON_CHEVRON_RIGHT from '~/static/icons/chevron-right.svg?sprite'
 
-import EmptyComments from '../EmptyComments'
 import { UserCommentFeed } from './__generated__/UserCommentFeed'
 import { UserIdUser } from './__generated__/UserIdUser'
 import styles from './styles.css'
@@ -140,15 +133,13 @@ const UserComments = ({ user }: UserIdUser) => {
           })
 
         if (!edges || edges.length <= 0) {
-          return <EmptyComments />
+          return <EmptyComment />
         }
 
         return (
           <InfiniteScroll
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <ul className="article-list">
               {edges.map((articleEdge: { node: any; cursor: any }) => {

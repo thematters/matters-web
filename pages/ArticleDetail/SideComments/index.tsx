@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
@@ -6,53 +5,21 @@ import { Query, QueryResult } from 'react-apollo'
 import { Error, Icon, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import { Drawer, DrawerConsumer } from '~/components/Drawer'
+import EmptyComment from '~/components/Empty/EmptyComment'
+import { Form } from '~/components/Form'
+import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
+import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
-import { ArticleComments } from './__generated__/ArticleComments'
 import styles from './styles.css'
-
-const ARTICLE_COMMENTS = gql`
-  query ArticleComments(
-    $mediaHash: String
-    $uuid: UUID
-    $cursor: String
-    $hasDescendantComments: Boolean = true
-  ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
-      id
-      pinnedComments {
-        ...FeedDigestComment
-      }
-      comments(input: { first: 10, after: $cursor }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...FeedDigestComment
-          }
-        }
-      }
-    }
-  }
-  ${CommentDigest.Feed.fragments.comment}
-`
 
 const CloseButton = () => (
   <DrawerConsumer>
     {({ close }) => (
       <button type="button" onClick={() => close()}>
-        <Icon
-          id={ICON_CLOSE.id}
-          viewBox={ICON_CLOSE.viewBox}
-          size="large"
-          className="u-motion-icon-hover"
-        />
+        <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} size="large" />
       </button>
     )}
   </DrawerConsumer>
@@ -75,17 +42,13 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
         <CloseButton />
       </header>
 
-      <section>
-        <textarea />
-      </section>
-
       <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
         {({
           data,
           loading,
           error,
           fetchMore
-        }: QueryResult & { data: ArticleComments }) => {
+        }: QueryResult & { data: ArticleCommentsType }) => {
           if (loading) {
             return <Spinner />
           }
@@ -96,7 +59,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
           const pinnedComments = _get(data, 'article.pinnedComments')
           const connectionPath = 'article.comments'
-          const { edges, pageInfo } = _get(data, connectionPath)
+          const { edges, pageInfo } = _get(data, connectionPath, {})
           const loadMore = () =>
             fetchMore({
               variables: {
@@ -112,6 +75,13 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
 
           return (
             <>
+              <section>
+                <Form.CommentForm
+                  articleId={data.article.id}
+                  articleMediaHash={data.article.mediaHash}
+                />
+              </section>
+
               {pinnedComments && pinnedComments.length > 0 && (
                 <section className="pinned-comments">
                   <h3>
@@ -120,7 +90,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                   <ul>
                     {pinnedComments.map((comment: any) => (
                       <li key={comment.id}>
-                        <CommentDigest.Feed comment={comment} />
+                        <CommentDigest.Feed comment={comment} hasComment />
                       </li>
                     ))}
                   </ul>
@@ -131,17 +101,18 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                 <h3>
                   <Translate zh_hant="全部評論" zh_hans="全部评论" />
                 </h3>
+
+                {!edges || (edges.length <= 0 && <EmptyComment />)}
+
                 <InfiniteScroll
                   hasNextPage={pageInfo.hasNextPage}
                   loadMore={loadMore}
-                  loading={loading}
-                  loader={<Spinner />}
                 >
                   <ul>
                     {edges.map(
                       ({ node, cursor }: { node: any; cursor: any }) => (
                         <li key={cursor}>
-                          <CommentDigest.Feed comment={node} />
+                          <CommentDigest.Feed comment={node} hasComment />
                         </li>
                       )
                     )}

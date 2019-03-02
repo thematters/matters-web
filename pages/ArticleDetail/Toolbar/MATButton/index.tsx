@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Icon } from '~/components'
+import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 import ICON_MAT_WHITE from '~/static/icons/mat-white.svg?sprite'
@@ -34,15 +36,16 @@ const APPRECIATE_ARTICLE = gql`
 `
 
 const MATButton = ({ article }: { article: MATArticleDetail }) => {
-  const canAppreciate = article.appreciateLeft > 0
+  const viewer = useContext(ViewerContext)
+  const viewerMAT = _get(viewer, 'status.MAT.total', 0)
+  const canAppreciate = article.appreciateLeft > 0 && viewerMAT > 0
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,
     inactive: !canAppreciate
   })
   const buttonClasses = classNames({
-    'mat-button': true,
-    'u-motion-icon-hover': canAppreciate
+    'mat-button': true
   })
 
   return (

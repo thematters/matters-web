@@ -24,7 +24,7 @@ import styles from './styles.css'
 
 interface Props {
   id: string
-  content: string
+  content: string | React.ReactNode
   type?: 'success' | 'error' | 'info'
   duration?: number
 }
@@ -54,7 +54,7 @@ export const Message: React.FC<Props> = ({
 
   return (
     <section className={mainClass}>
-      <p>{content}</p>
+      {content}
       <style jsx>{styles}</style>
     </section>
   )

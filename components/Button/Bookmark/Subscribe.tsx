@@ -39,7 +39,6 @@ const Subscribe = ({
       <button type="button" aria-label="收藏" onClick={() => subscribe()}>
         <Icon
           size={size}
-          className="u-motion-icon-hover"
           id={
             size === 'small'
               ? ICON_BOOKMARK_SM_INACTIVE.id

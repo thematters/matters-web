@@ -25,6 +25,10 @@ h3 {
   }
 }
 
+.all-comments {
+  margin-top: var(--spacing-loose);
+}
+
 .pinned-comments {
   margin-bottom: var(--spacing-loose);
 }

@@ -20,4 +20,17 @@ footer {
   & .space-right {
     margin-right: var(--spacing-tight);
   }
+
+  & :global(button) {
+    &.active {
+      color: var(--color-black);
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+.comment-form {
+  margin-top: var(--spacing-tight);
 }
