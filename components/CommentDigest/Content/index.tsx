@@ -1,5 +1,7 @@
 import { Translate } from '~/components/Language'
 
+import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+
 import styles from './styles.css'
 
 const CommentContent = ({
@@ -11,12 +13,16 @@ const CommentContent = ({
 }) => {
   if (state === 'active') {
     return (
-      <div
-        className="content-comment"
-        dangerouslySetInnerHTML={{
-          __html: content || ''
-        }}
-      />
+      <>
+        <div
+          className="content-comment"
+          dangerouslySetInnerHTML={{
+            __html: content || ''
+          }}
+        />
+        <style jsx>{styles}</style>
+        <style jsx>{contentCommentStyles}</style>
+      </>
     )
   }
 

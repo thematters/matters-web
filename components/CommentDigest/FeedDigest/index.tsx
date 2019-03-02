@@ -1,12 +1,12 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useState } from 'react'
 
+import { Form } from '~/components/Form'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
-
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
@@ -56,10 +56,65 @@ const PinnedLabel = () => (
   </span>
 )
 
+const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
+  <button className="cancel-button" type="button" onClick={() => onClick()}>
+    <Translate zh_hant="取消" zh_hans="取消" />
+    <style jsx>{styles}</style>
+  </button>
+)
+
+const DescendantComment = ({
+  comment,
+  ...actionControls
+}: { comment: any } & FooterActionsControls) => {
+  const [edit, setEdit] = useState(false)
+
+  return (
+    <section className="container">
+      <header className="header">
+        <div className="avatars">
+          <UserDigest.Mini
+            user={comment.author}
+            avatarSize="xsmall"
+            textWeight="medium"
+          />
+          {comment.replyTo &&
+            (!comment.parentComment ||
+              comment.replyTo.id !== comment.parentComment.id) && (
+              <ReplyTo user={comment.replyTo.author} />
+            )}
+          {comment.pinned && <PinnedLabel />}
+        </div>
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
+      </header>
+
+      <div className="content-wrap">
+        {edit && (
+          <Form.CommentForm
+            commentId={comment.id}
+            articleId={comment.article.id}
+            articleMediaHash={comment.article.mediaHash || ''}
+            defaultContent={comment.content}
+            submitCallback={() => setEdit(false)}
+            extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+          />
+        )}
+        {!edit && (
+          <CommentContent state={comment.state} content={comment.content} />
+        )}
+        {!edit && <FooterActions comment={comment} {...actionControls} />}
+      </div>
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
+
 const FeedDigest = ({
   comment,
   ...actionControls
 }: { comment: FeedDigestComment } & FooterActionsControls) => {
+  const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
   const descendantComments = _get(comment, 'comments.edges', []).filter(
     ({ node }: { node: any }) => node.state === 'active'
@@ -79,44 +134,29 @@ const FeedDigest = ({
           )}
           {pinned && <PinnedLabel />}
         </div>
-        <DropdownActions comment={comment} />
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
       </header>
 
       <div className="content-wrap">
-        <CommentContent state={state} content={content} />
-        <FooterActions comment={comment} {...actionControls} />
+        {edit && (
+          <Form.CommentForm
+            commentId={comment.id}
+            articleId={comment.article.id}
+            articleMediaHash={comment.article.mediaHash || ''}
+            defaultContent={comment.content}
+            submitCallback={() => setEdit(false)}
+            extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+          />
+        )}
+        {!edit && <CommentContent state={state} content={content} />}
+        {!edit && <FooterActions comment={comment} {...actionControls} />}
 
         {descendantComments.length > 0 && (
           <ul className="descendant-comments">
             {descendantComments.map(
               ({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <section className="container">
-                    <header className="header">
-                      <div className="avatars">
-                        <UserDigest.Mini
-                          user={node.author}
-                          avatarSize="xsmall"
-                          textWeight="medium"
-                        />
-                        {node.replyTo &&
-                          (!node.parentComment ||
-                            node.replyTo.id !== node.parentComment.id) && (
-                            <ReplyTo user={node.replyTo.author} />
-                          )}
-                        {node.pinned && <PinnedLabel />}
-                      </div>
-                      <DropdownActions comment={node} />
-                    </header>
-
-                    <div className="content-wrap">
-                      <CommentContent
-                        state={node.state}
-                        content={node.content}
-                      />
-                      <FooterActions comment={node} {...actionControls} />
-                    </div>
-                  </section>
+                  <DescendantComment comment={node} {...actionControls} />
                 </li>
               )
             )}
@@ -125,7 +165,6 @@ const FeedDigest = ({
       </div>
 
       <style jsx>{styles}</style>
-      <style jsx>{contentCommentStyles}</style>
     </section>
   )
 }

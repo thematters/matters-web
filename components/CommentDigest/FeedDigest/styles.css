@@ -43,3 +43,10 @@
     padding-left: var(--spacing-loose);
   }
 }
+
+.cancel-button {
+  padding: 0 var(--spacing-tight);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-matters-green);
+}

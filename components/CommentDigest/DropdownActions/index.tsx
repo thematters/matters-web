@@ -36,30 +36,31 @@ const fragments = {
 const DropdownContent: React.FC<{
   comment: DropdownActionsComment
   hideDropdown: () => void
-}> = ({ comment, hideDropdown }) => {
+  editComment?: () => void
+}> = ({ comment, editComment, hideDropdown }) => {
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
-  const canDelete = comment.state === 'active'
+  const isActive = comment.state === 'active'
 
   return (
     <Menu>
-      {isArticleAuthor && (
+      {isArticleAuthor && isActive && (
         <Menu.Item>
           <PinButton comment={comment} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
-      {isCommentAuthor && (
+      {isCommentAuthor && editComment && isActive && (
         <Menu.Item>
-          <EditButton commentId={comment.id} hideDropdown={hideDropdown} />
+          <EditButton hideDropdown={hideDropdown} editComment={editComment} />
         </Menu.Item>
       )}
-      {!isCommentAuthor && (
+      {!isCommentAuthor && isActive && (
         <Menu.Item>
           <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
-      {isCommentAuthor && canDelete && (
+      {isCommentAuthor && isActive && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
@@ -68,7 +69,13 @@ const DropdownContent: React.FC<{
   )
 }
 
-const DropdownActions = ({ comment }: { comment: DropdownActionsComment }) => {
+const DropdownActions = ({
+  comment,
+  editComment
+}: {
+  comment: DropdownActionsComment
+  editComment?: () => void
+}) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -80,7 +87,11 @@ const DropdownActions = ({ comment }: { comment: DropdownActionsComment }) => {
   return (
     <Dropdown
       content={
-        <DropdownContent comment={comment} hideDropdown={hideDropdown} />
+        <DropdownContent
+          comment={comment}
+          hideDropdown={hideDropdown}
+          editComment={editComment}
+        />
       }
       trigger="click"
       onCreate={i => setInstance(i)}

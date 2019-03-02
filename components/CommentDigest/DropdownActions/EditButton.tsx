@@ -5,16 +5,17 @@ import ICON_POST_DARK from '~/static/icons/post-dark.svg?sprite'
 import styles from './styles.css'
 
 const EditButton = ({
-  commentId,
-  hideDropdown
+  hideDropdown,
+  editComment
 }: {
-  commentId: string
   hideDropdown: () => void
+  editComment: () => void
 }) => {
   return (
     <button
       type="button"
       onClick={() => {
+        editComment()
         hideDropdown()
       }}
     >
