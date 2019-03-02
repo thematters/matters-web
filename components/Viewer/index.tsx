@@ -16,6 +16,7 @@ export const ViewerUserFragment = {
         }
       }
       info {
+        email
         agreeOn
       }
       settings {
