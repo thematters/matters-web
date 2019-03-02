@@ -1,5 +1,6 @@
 import SendCodeButton from './Button/SendCode'
 import CheckBox from './CheckBox'
+import CommentForm from './CommentForm'
 import Input from './Input'
 import LoginForm from './LoginForm'
 import ResetCodeForm from './ResetCodeForm'
@@ -17,5 +18,6 @@ export const Form = {
   SendCodeButton,
   SignUpForm,
   SignUpProfileForm,
-  Textarea
+  Textarea,
+  CommentForm
 }

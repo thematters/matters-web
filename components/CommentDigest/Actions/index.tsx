@@ -1,7 +1,11 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
+import { useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
+import { Form } from '~/components/Form'
 
+import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { DigestActionsComment } from './__generated__/DigestActionsComment'
@@ -21,6 +25,17 @@ const fragments = {
     fragment DigestActionsComment on Comment {
       id
       createdAt
+      state
+      article {
+        id
+        mediaHash
+      }
+      parentComment {
+        id
+      }
+      replyTo {
+        id
+      }
       ...UpvoteComment
       ...DownvoteComment
     }
@@ -38,26 +53,56 @@ const IconDotDivider = () => (
 )
 
 const Actions = ({ comment, hasComment }: ActionsProps) => {
+  const [showForm, setShowForm] = useState(false)
+  const isActive = comment.state === 'active'
+
   return (
-    <footer className="actions">
-      <div className="left">
-        <UpvoteButton comment={comment} />
+    <>
+      <footer className="actions">
+        <div className="left">
+          <UpvoteButton comment={comment} disabled={!isActive} />
 
-        <IconDotDivider />
-        <DownvoteButton comment={comment} />
+          <IconDotDivider />
+          <DownvoteButton comment={comment} disabled={!isActive} />
 
-        {hasComment && (
-          <>
-            <IconDotDivider />
-            <span>Comment Icon</span>
-          </>
-        )}
-      </div>
+          {hasComment && (
+            <>
+              <IconDotDivider />
+              <button
+                type="button"
+                className={showForm ? 'active' : ''}
+                onClick={() => {
+                  setShowForm(!showForm)
+                }}
+                disabled={!isActive}
+              >
+                <Icon
+                  id={ICON_COMMENT_SMALL.id}
+                  viewBox={ICON_COMMENT_SMALL.viewBox}
+                  size="small"
+                />
+              </button>
+            </>
+          )}
+        </div>
 
-      <DateTime date={comment.createdAt} />
+        <DateTime date={comment.createdAt} />
+      </footer>
+
+      {showForm && (
+        <section className="comment-form">
+          <Form.CommentForm
+            articleId={comment.article.id}
+            articleMediaHash={comment.article.mediaHash || ''}
+            replyToId={comment.id}
+            parentId={_get(comment, 'parentComment.id') || comment.id}
+            submitCallback={() => setShowForm(false)}
+          />
+        </section>
+      )}
 
       <style jsx>{styles}</style>
-    </footer>
+    </>
   )
 }
 

@@ -13,7 +13,8 @@ import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
 
-const POLL_INTERVAL = 1000 * 10
+const POLL_INTERVAL =
+  process.env.NODE_ENV === 'production' ? 1000 * 10 : 1000 * 60
 
 const UNREAD_NOTICE_COUNT = gql`
   query UnreadNoticeCount {
@@ -114,11 +115,7 @@ const NoticeButton = ({
         }}
         className={hasUnreadNotices ? 'unread' : ''}
       >
-        <Icon
-          id={ICON_NOTIFICATION.id}
-          viewBox={ICON_NOTIFICATION.viewBox}
-          className="u-motion-icon-hover"
-        />
+        <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
         <style jsx>{styles}</style>
       </button>
     </Dropdown>

@@ -1,6 +1,5 @@
-import classNames from 'classnames'
 import _filter from 'lodash/filter'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { useEventListener } from '~/components'
 
@@ -16,20 +15,14 @@ import styles from './styles.css'
  * ```jsx
  *
  * // Place it on top page.
- * <MessageHolder classes={['some', 'classes']} />
+ * <MessageHolder />
  *
  * ```
  */
 const prefix: string = 'message-'
 
-interface Props {
-  classes?: string[]
-}
-
-export const MessageHolder: FC<Props> = ({ classes = [] }) => {
+export const MessageHolder = () => {
   const [messages, setMessages] = useState<any[]>([])
-
-  const mainClass = classNames(...classes)
 
   const add = (payload: { [key: string]: any }) => {
     if (!payload || Object.keys(payload).length === 0) {
@@ -47,16 +40,19 @@ export const MessageHolder: FC<Props> = ({ classes = [] }) => {
   }
 
   useEventListener('addMessage', add)
-
   useEventListener('removeMessage', remove)
 
   return (
     <>
-      <div className="l-row message-holder">
-        <div className={mainClass}>
-          {messages.map(message => (
-            <Message key={message.id} {...message} remove={remove} />
-          ))}
+      <div className="message-holder">
+        <div className="l-row">
+          <ul className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+            {messages.map(message => (
+              <li key={message.id}>
+                <Message {...message} remove={remove} />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <style jsx>{styles}</style>

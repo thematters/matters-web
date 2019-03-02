@@ -8,7 +8,18 @@
   color: var(--color-black);
   font-size: var(--font-size-sm);
   line-height: normal;
-  padding-left: var(--spacing-x-tight);
+}
+
+.spacing-xtight {
+  & .name {
+    padding-left: var(--spacing-x-tight);
+  }
+}
+
+.spacing-xxtight {
+  & .name {
+    padding-left: var(--spacing-xx-tight);
+  }
 }
 
 .text-medium {

@@ -10,7 +10,6 @@ import {
   InfiniteScroll,
   PageHeader,
   Placeholder,
-  Spinner,
   Translate
 } from '~/components'
 
@@ -91,8 +90,6 @@ const Topics = () => (
               <InfiniteScroll
                 hasNextPage={pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

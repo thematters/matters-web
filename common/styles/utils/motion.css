@@ -8,3 +8,13 @@
     transform: scale(0.9);
   }
 }
+
+button:not([disabled]) > svg,
+button:not([disabled]) > .text-icon > svg {
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    transform: scale(0.9);
+  }
+}

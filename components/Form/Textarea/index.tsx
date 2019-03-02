@@ -35,8 +35,8 @@ interface Props {
   values: any
   errors: any
   touched: any
-  handleBlur: () => {}
-  handleChange: () => {}
+  handleBlur: any
+  handleChange: any
 
   [key: string]: any
 }
@@ -54,7 +54,7 @@ const Textarea: FC<Props> = ({
   handleBlur,
   handleChange
 }) => {
-  const inputClass = classNames('input', ...className)
+  const textareaClass = classNames('textarea', ...className)
   const value = values[field]
   const error = errors[field]
   const isTouched = touched[field]
@@ -63,7 +63,7 @@ const Textarea: FC<Props> = ({
     <>
       <div className="container">
         <textarea
-          className={inputClass}
+          className={textareaClass}
           name={field}
           placeholder={placeholder}
           onBlur={handleBlur}
