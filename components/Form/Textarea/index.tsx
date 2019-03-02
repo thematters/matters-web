@@ -11,9 +11,8 @@ import styles from './styles.css'
  * ```jsx
  *   <Form.Textarea
  *     className={[]}
- *     type="text"
- *     field="email"
- *     placeholder="email"
+ *     field="description"
+ *     placeholder="description"
  *     hint="hint"
  *     style={{}}
  *     values={{}},
@@ -46,6 +45,7 @@ const Textarea: FC<Props> = ({
   className = [],
   field,
   placeholder,
+  hint,
   style,
 
   values,
@@ -72,11 +72,10 @@ const Textarea: FC<Props> = ({
           style={style}
         />
       </div>
-      {error && isTouched && (
-        <div className="info">
-          <div className="error">{error}</div>
-        </div>
-      )}
+      <div className="info">
+        {error && isTouched && <div className="error">{error}</div>}
+        {!error && hint && <div className="hint">{hint}</div>}
+      </div>
       <style jsx>{styles}</style>
     </>
   )

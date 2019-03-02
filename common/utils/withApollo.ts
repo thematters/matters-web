@@ -3,7 +3,7 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
+import { createUploadLink } from 'apollo-upload-client'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
@@ -27,8 +27,8 @@ const agent =
         rejectUnauthorized: process.env.NODE_ENV !== 'development' // allow access to https:...matters.news in localhost
       })
 
-const httpLink = ({ headers }: { [key: string]: any }) =>
-  createHttpLink({
+const httpUploadLink = ({ headers }: { [key: string]: any }) =>
+  createUploadLink({
     uri: API_URL,
     credentials: 'include',
     headers,
@@ -40,7 +40,7 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: httpLink({ headers }),
+      link: httpUploadLink({ headers }),
       cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )

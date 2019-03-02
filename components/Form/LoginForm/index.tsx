@@ -16,7 +16,7 @@ import { isValidEmail, translate } from '~/common/utils'
 import styles from './styles.css'
 
 /**
- * This component is designed for Login from with builtin mutation.
+ * This component is designed for Login form with builtin mutation.
  *
  * Usage:
  *
@@ -150,7 +150,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             type="password"
             field="password"
             placeholder={passwordPlaceholder}
-            style={{ marginTop: '0.5rem' }}
+            style={{ marginTop: '0.6rem' }}
             values={values}
             errors={errors}
             touched={touched}
