@@ -3,7 +3,7 @@
 }
 
 .header {
-  @mixin flex-center-space-between;
+  @mixin flex-start-space-between;
 
   & .avatars {
     display: flex;
@@ -11,6 +11,8 @@
   }
 
   & .reply-to {
+    flex-shrink: 0;
+
     font-size: var(--font-size-sm);
     margin: 0 var(--spacing-xx-tight);
   }

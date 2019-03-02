@@ -8,7 +8,8 @@ import { UserDigest } from '~/components/UserDigest'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
-import Actions, { CommentActionsControls } from '../Actions'
+import DropdownActions from '../DropdownActions'
+import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { FeedDigestComment } from './__generated__/FeedDigestComment'
 import styles from './styles.css'
 
@@ -84,15 +85,26 @@ const CommentContent = ({
     )
   }
 
+  if (state === 'archived') {
+    return (
+      <p className="banned-content">
+        <Translate zh_hant="評論已刪除" zh_hans="评论已删除" />
+        <style jsx>{styles}</style>
+      </p>
+    )
+  }
+
   return null
 }
 
 const FeedDigest = ({
   comment,
   ...actionControls
-}: { comment: FeedDigestComment } & CommentActionsControls) => {
+}: { comment: FeedDigestComment } & FooterActionsControls) => {
   const { state, content, author, replyTo, parentComment, pinned } = comment
-  const descendantComments = _get(comment, 'comments.edges', [])
+  const descendantComments = _get(comment, 'comments.edges', []).filter(
+    ({ node }: { node: any }) => node.state === 'active'
+  )
 
   return (
     <section className="container">
@@ -108,11 +120,12 @@ const FeedDigest = ({
           )}
           {pinned && <PinnedLabel />}
         </div>
+        <DropdownActions comment={comment} />
       </header>
 
       <div className="content-wrap">
         <CommentContent state={state} content={content} />
-        <Actions comment={comment} {...actionControls} />
+        <FooterActions comment={comment} {...actionControls} />
 
         {descendantComments.length > 0 && (
           <ul className="descendant-comments">
@@ -134,6 +147,7 @@ const FeedDigest = ({
                           )}
                         {node.pinned && <PinnedLabel />}
                       </div>
+                      <DropdownActions comment={node} />
                     </header>
 
                     <div className="content-wrap">
@@ -141,7 +155,7 @@ const FeedDigest = ({
                         state={node.state}
                         content={node.content}
                       />
-                      <Actions comment={node} {...actionControls} />
+                      <FooterActions comment={node} {...actionControls} />
                     </div>
                   </section>
                 </li>

@@ -68,7 +68,7 @@ const Authors = () => (
             }
 
             const connectionPath = 'viewer.recommendation.authors'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {

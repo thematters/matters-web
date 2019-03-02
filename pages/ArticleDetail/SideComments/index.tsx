@@ -15,6 +15,19 @@ import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
+const filterComments = (comments: any[]) =>
+  comments.filter(comment => {
+    if (comment.state === 'active') {
+      return true
+    }
+
+    if (_get(comment, 'comments.edges.length', 0) > 0) {
+      return true
+    }
+
+    return false
+  })
+
 const CloseButton = () => (
   <DrawerConsumer>
     {({ close }) => (
@@ -57,7 +70,7 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
             return <Error error={error} />
           }
 
-          const pinnedComments = _get(data, 'article.pinnedComments')
+          const pinnedComments = _get(data, 'article.pinnedComments', [])
           const connectionPath = 'article.comments'
           const { edges, pageInfo } = _get(data, connectionPath, {})
           const loadMore = () =>
@@ -73,6 +86,11 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                 })
             })
 
+          const filteredPinnedComments = filterComments(pinnedComments)
+          const filteredAllComments = filterComments(
+            (edges || []).map(({ node }: { node: any }) => node)
+          )
+
           return (
             <>
               <section>
@@ -82,13 +100,13 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                 />
               </section>
 
-              {pinnedComments && pinnedComments.length > 0 && (
+              {filteredPinnedComments && filteredPinnedComments.length > 0 && (
                 <section className="pinned-comments">
                   <h3>
                     <Translate zh_hant="置頂評論" zh_hans="置顶评论" />
                   </h3>
                   <ul>
-                    {pinnedComments.map((comment: any) => (
+                    {filteredPinnedComments.map((comment: any) => (
                       <li key={comment.id}>
                         <CommentDigest.Feed comment={comment} hasComment />
                       </li>
@@ -102,20 +120,19 @@ const SideComments: React.FC<WithRouterProps> = ({ router }) => {
                   <Translate zh_hant="全部評論" zh_hans="全部评论" />
                 </h3>
 
-                {!edges || (edges.length <= 0 && <EmptyComment />)}
+                {!filteredAllComments ||
+                  (filteredAllComments.length <= 0 && <EmptyComment />)}
 
                 <InfiniteScroll
                   hasNextPage={pageInfo.hasNextPage}
                   loadMore={loadMore}
                 >
                   <ul>
-                    {edges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
-                          <CommentDigest.Feed comment={node} hasComment />
-                        </li>
-                      )
-                    )}
+                    {filteredAllComments.map(comment => (
+                      <li key={comment.id}>
+                        <CommentDigest.Feed comment={comment} hasComment />
+                      </li>
+                    ))}
                   </ul>
                 </InfiniteScroll>
               </section>

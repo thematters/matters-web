@@ -118,7 +118,7 @@ const UserComments = ({ user }: UserIdUser) => {
         }
 
         const connectionPath = 'node.commentedArticles'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {

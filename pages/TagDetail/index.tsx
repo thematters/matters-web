@@ -73,7 +73,7 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
             }
 
             const connectionPath = 'node.articles'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {
