@@ -40,6 +40,7 @@ const DropdownContent: React.FC<{
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
+  const canDelete = comment.state === 'active'
 
   return (
     <Menu>
@@ -58,7 +59,7 @@ const DropdownContent: React.FC<{
           <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
-      {isCommentAuthor && (
+      {isCommentAuthor && canDelete && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
@@ -83,7 +84,8 @@ const DropdownActions = ({ comment }: { comment: DropdownActionsComment }) => {
       }
       trigger="click"
       onCreate={i => setInstance(i)}
-      placement="right-start"
+      placement="bottom-end"
+      zIndex={301}
     >
       <button type="button" aria-label="更多操作">
         <Icon

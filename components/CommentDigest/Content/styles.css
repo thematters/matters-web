@@ -1,0 +1,4 @@
+.banned-content {
+  margin-top: var(--spacing-x-tight);
+  color: var(--color-grey);
+}
