@@ -1,4 +1,4 @@
-import { UserProfile } from '~/components'
+import { UserProfile } from '~/components/UserProfile'
 
 import FollowerTabs from '../FollowerTabs'
 import UserFollowees from './UserFollowees'

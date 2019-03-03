@@ -1,4 +1,6 @@
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import ICON_RELOAD from '~/static/icons/reload.svg?sprite'
 

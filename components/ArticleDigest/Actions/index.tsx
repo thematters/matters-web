@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
-import { DateTime, Icon } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
+import { DateTime } from '~/components/DateTime'
+import { Icon } from '~/components/Icon'
 import { UserDigest } from '~/components/UserDigest'
 
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'

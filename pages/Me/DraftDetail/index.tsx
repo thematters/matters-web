@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Placeholder } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
+import { Placeholder } from '~/components/Placeholder'
 
 import { getQuery } from '~/common/utils'
 

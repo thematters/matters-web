@@ -1,4 +1,4 @@
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 
 import ICON_MORE_REGULAR from '~/static/icons/more-regular.svg?sprite'
 

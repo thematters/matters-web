@@ -2,12 +2,15 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
+import { Error } from '~/components/Error'
 import { Form } from '~/components/Form'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
+import { InfiniteScroll } from '~/components/Interaction'
+import { Translate } from '~/components/Language'
+import { Spinner } from '~/components/Spinner'
 
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 

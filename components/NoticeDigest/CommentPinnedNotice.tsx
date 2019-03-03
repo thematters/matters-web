@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
+import { Translate } from '~/components/Language'
 
 import { CommentPinnedNotice as NoticeType } from './__generated__/CommentPinnedNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'

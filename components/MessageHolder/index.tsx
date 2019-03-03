@@ -1,7 +1,7 @@
 import _filter from 'lodash/filter'
 import { useState } from 'react'
 
-import { useEventListener } from '~/components'
+import { useEventListener } from '~/components/Hook'
 
 import { Message } from './Message'
 import styles from './styles.css'

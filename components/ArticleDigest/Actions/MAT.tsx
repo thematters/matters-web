@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon } from '~/components/Icon'
+import { TextIcon } from '~/components/TextIcon'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 

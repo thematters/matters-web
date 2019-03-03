@@ -1,4 +1,4 @@
-import { LanguageConsumer } from '~/components'
+import { LanguageConsumer } from '~/components/Language'
 
 import { datetimeFormat } from '~/common/utils'
 

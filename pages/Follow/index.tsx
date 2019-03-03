@@ -2,7 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, Footer, Spinner } from '~/components'
+import { Error } from '~/components/Error'
+import { Footer } from '~/components/Footer'
+import { Spinner } from '~/components/Spinner'
 
 import { MeFollow } from './__generated__/MeFollow'
 import FollowFeed from './FollowFeed'

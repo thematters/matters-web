@@ -2,8 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import { Icon } from '~/components/Icon'
+import { Dropdown, PopperInstance } from '~/components/Popper'
+import { TextIcon } from '~/components/TextIcon'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 

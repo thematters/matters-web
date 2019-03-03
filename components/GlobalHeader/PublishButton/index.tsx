@@ -1,4 +1,6 @@
-import { Button, Icon, Translate } from '~/components'
+import { Button } from '~/components/Button'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
 
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
 

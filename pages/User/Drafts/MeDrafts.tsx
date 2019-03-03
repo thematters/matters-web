@@ -2,8 +2,11 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { DraftDigest, Error, InfiniteScroll, Placeholder } from '~/components'
+import { DraftDigest } from '~/components/DraftDigest'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
+import { Error } from '~/components/Error'
+import { InfiniteScroll } from '~/components/Interaction'
+import { Placeholder } from '~/components/Placeholder'
 
 import { mergeConnections } from '~/common/utils'
 

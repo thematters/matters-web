@@ -3,16 +3,14 @@ import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  Footer,
-  Head,
-  InfiniteScroll,
-  PageHeader,
-  Placeholder
-} from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import { Error } from '~/components/Error'
+import { Footer } from '~/components/Footer'
+import { Head } from '~/components/Head'
+import { InfiniteScroll } from '~/components/Interaction'
+import { PageHeader } from '~/components/PageHeader'
+import { Placeholder } from '~/components/Placeholder'
 
 import { mergeConnections } from '~/common/utils'
 

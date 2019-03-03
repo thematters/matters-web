@@ -1,4 +1,6 @@
-import { Empty, Icon, SearchBar } from '~/components'
+import { Empty } from '~/components/Empty'
+import { Icon } from '~/components/Icon'
+import { SearchBar } from '~/components/SearchBar'
 
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 

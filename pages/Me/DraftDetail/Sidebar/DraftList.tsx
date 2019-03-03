@@ -3,7 +3,11 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { DraftDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { DraftDigest } from '~/components/DraftDigest'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { Spinner } from '~/components/Spinner'
+import { TextIcon } from '~/components/TextIcon'
 
 import COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 

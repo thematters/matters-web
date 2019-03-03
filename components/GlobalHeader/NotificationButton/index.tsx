@@ -3,8 +3,9 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Mutation, Query, QueryResult } from 'react-apollo'
 
-import { Dropdown, Icon, PopperInstance } from '~/components'
+import { Icon } from '~/components/Icon'
 import NoticeDigest from '~/components/NoticeDigest'
+import { Dropdown, PopperInstance } from '~/components/Popper'
 
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
 

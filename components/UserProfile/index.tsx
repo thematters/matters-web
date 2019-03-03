@@ -5,15 +5,13 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  Avatar,
-  Error,
-  Icon,
-  Placeholder,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Avatar } from '~/components/Avatar'
 import { FollowButton } from '~/components/Button/Follow'
+import { Error } from '~/components/Error'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { Placeholder } from '~/components/Placeholder'
+import { TextIcon } from '~/components/TextIcon'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 

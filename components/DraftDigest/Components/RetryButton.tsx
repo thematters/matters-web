@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
-import { Translate } from '~/components'
+import { Translate } from '~/components/Language'
 
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {

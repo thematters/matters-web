@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
+import { LanguageContext } from '~/components/Language'
 
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'

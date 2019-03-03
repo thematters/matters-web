@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import _filter from 'lodash/filter'
 import { FC, useState } from 'react'
 
-import { useEventListener } from '~/components'
+import { useEventListener } from '~/components/Hook'
 
 import styles from './styles.css'
 import { Toast } from './Toast'

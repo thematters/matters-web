@@ -3,17 +3,15 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  InfiniteScroll,
-  LoadMore,
-  PageHeader,
-  Placeholder,
-  Responsive,
-  Spinner,
-  Translate
-} from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
+import { Error } from '~/components/Error'
+import { InfiniteScroll } from '~/components/Interaction'
+import { Translate } from '~/components/Language'
+import { LoadMore } from '~/components/LoadMore'
+import { PageHeader } from '~/components/PageHeader'
+import { Placeholder } from '~/components/Placeholder'
+import { Responsive } from '~/components/Responsive'
+import { Spinner } from '~/components/Spinner'
 
 import { mergeConnections } from '~/common/utils'
 

@@ -1,4 +1,4 @@
-import { Button } from '~/components'
+import { Button } from '~/components/Button'
 
 export default (props: { [key: string]: any }) => (
   <Button

@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { DateTime, Icon } from '~/components'
+import { DateTime } from '~/components/DateTime'
 import { Form } from '~/components/Form'
+import { Icon } from '~/components/Icon'
 
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'

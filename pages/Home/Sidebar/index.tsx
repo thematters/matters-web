@@ -1,4 +1,4 @@
-import { Footer } from '~/components'
+import { Footer } from '~/components/Footer'
 
 import Authors from './Authors'
 import Icymi from './Icymi'

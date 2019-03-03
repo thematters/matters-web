@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { Dropdown, Icon, PopperInstance } from '~/components'
+import { Icon } from '~/components/Icon'
+import { Dropdown, PopperInstance } from '~/components/Popper'
 
 import ICON_MENU from '~/static/icons/menu.svg?sprite'
 

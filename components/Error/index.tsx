@@ -1,4 +1,4 @@
-import { Translate } from '~/components'
+import { Translate } from '~/components/Language'
 
 import IMAGE_ILLUSTRATION_EMPTY from '~/static/images/illustration-empty.svg'
 

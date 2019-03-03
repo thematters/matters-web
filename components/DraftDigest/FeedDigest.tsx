@@ -2,7 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { DateTime, Icon, TextIcon, Title, Translate } from '~/components'
+import { DateTime } from '~/components/DateTime'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
+import { Title } from '~/components/Title'
 
 import { toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'

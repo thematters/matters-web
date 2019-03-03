@@ -1,6 +1,9 @@
 import { withRouter, WithRouterProps } from 'next/router'
 
-import { Footer, Head, Responsive, SearchBar } from '~/components'
+import { Footer } from '~/components/Footer'
+import { Head } from '~/components/Head'
+import { Responsive } from '~/components/Responsive'
+import { SearchBar } from '~/components/SearchBar'
 
 import { getQuery } from '~/common/utils'
 

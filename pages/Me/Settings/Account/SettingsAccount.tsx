@@ -1,7 +1,10 @@
 import _get from 'lodash/get'
 import { useContext } from 'react'
 
-import { Button, Head, PageHeader, Translate } from '~/components'
+import { Button } from '~/components/Button'
+import { Head } from '~/components/Head'
+import { Translate } from '~/components/Language'
+import { PageHeader } from '~/components/PageHeader'
 import { ViewerContext } from '~/components/Viewer'
 
 import { LanguageSwitch } from './LanguageSwitch'

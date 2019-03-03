@@ -2,7 +2,9 @@ import { Formik } from 'formik'
 import Router, { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
+import { Icon } from '~/components/Icon'
+import { LanguageContext } from '~/components/Language'
+import { Dropdown, PopperInstance } from '~/components/Popper'
 
 import { getQuery, toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'

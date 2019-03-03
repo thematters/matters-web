@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import { Modal } from '~/components'
+import { Modal } from '~/components/Modal'
 
 const emptyModalId = ''
 

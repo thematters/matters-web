@@ -2,7 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, Label, Tag, Translate } from '~/components'
+import { Error } from '~/components/Error'
+import { Label } from '~/components/Label'
+import { Translate } from '~/components/Language'
+import { Tag } from '~/components/Tag'
 
 import ViewAllLink from '../ViewAllLink'
 import { SidebarTags } from './__generated__/SidebarTags'

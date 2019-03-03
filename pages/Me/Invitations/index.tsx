@@ -1,4 +1,4 @@
-import { Placeholder } from '~/components'
+import { Placeholder } from '~/components/Placeholder'
 
 export default () => (
   <main className="l-row">

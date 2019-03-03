@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Button, Translate } from '~/components'
+import { Button } from '~/components/Button'
+import { Translate } from '~/components/Language'
 
 import { FollowStateUser } from './__generated__/FollowStateUser'
 

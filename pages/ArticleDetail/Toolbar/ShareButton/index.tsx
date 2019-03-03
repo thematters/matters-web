@@ -1,4 +1,4 @@
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 
 import ICON_SHARE from '~/static/icons/share.svg?sprite'
 

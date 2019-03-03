@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
-import { Icon, TextIcon, Translate, useInterval } from '~/components'
+import { useInterval } from '~/components/Hook'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import { countDownToTime, leftPad } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'

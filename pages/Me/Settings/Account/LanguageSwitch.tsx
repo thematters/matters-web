@@ -1,8 +1,11 @@
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance, TextIcon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { LanguageConsumer, LanguageContext } from '~/components/Language'
+import { Menu } from '~/components/Menu'
+import { Dropdown, PopperInstance } from '~/components/Popper'
+import { TextIcon } from '~/components/TextIcon'
 
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 

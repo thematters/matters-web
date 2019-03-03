@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import { toPath } from '~/common/utils'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'

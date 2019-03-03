@@ -3,8 +3,10 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useContext, useEffect, useState } from 'react'
 
-import { Icon, LanguageContext, Title } from '~/components'
 import { useNativeEventListener } from '~/components/Hook'
+import { Icon } from '~/components/Icon'
+import { LanguageContext } from '~/components/Language'
+import { Title } from '~/components/Title'
 
 import { KEYCODES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'

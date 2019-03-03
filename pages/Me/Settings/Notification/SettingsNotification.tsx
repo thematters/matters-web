@@ -2,7 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Mutation, Query, QueryResult } from 'react-apollo'
 
-import { Head, PageHeader, Translate } from '~/components'
+import { Head } from '~/components/Head'
+import { Translate } from '~/components/Language'
+import { PageHeader } from '~/components/PageHeader'
 import { Switch } from '~/components/Switch'
 
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'

@@ -2,7 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 
-import { Menu, Translate } from '~/components'
+import { Translate } from '~/components/Language'
+import { Menu } from '~/components/Menu'
 
 import { PATHS } from '~/common/enums'
 

@@ -2,16 +2,14 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  Error,
-  Footer,
-  Head,
-  InfiniteScroll,
-  PageHeader,
-  Spinner,
-  Tag,
-  Translate
-} from '~/components'
+import { Error } from '~/components/Error'
+import { Footer } from '~/components/Footer'
+import { Head } from '~/components/Head'
+import { InfiniteScroll } from '~/components/Interaction'
+import { Translate } from '~/components/Language'
+import { PageHeader } from '~/components/PageHeader'
+import { Spinner } from '~/components/Spinner'
+import { Tag } from '~/components/Tag'
 
 import { mergeConnections } from '~/common/utils'
 

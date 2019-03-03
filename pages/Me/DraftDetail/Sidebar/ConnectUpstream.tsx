@@ -3,16 +3,13 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { Mutation, Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Button,
-  Dropdown,
-  Icon,
-  PopperInstance,
-  Spinner,
-  TextIcon,
-  Translate
-} from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
+import { Button } from '~/components/Button'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { Dropdown, PopperInstance } from '~/components/Popper'
+import { Spinner } from '~/components/Spinner'
+import { TextIcon } from '~/components/TextIcon'
 
 import COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 

@@ -1,4 +1,6 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty } from '~/components/Empty'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
 
 import ICON_EMPTY_BOOKMARK from '~/static/icons/empty-bookmark.svg?sprite'
 

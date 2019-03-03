@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Translate } from '~/components'
+import { Translate } from '~/components/Language'
 
 import { CommentNewUpvoteNotice as NoticeType } from './__generated__/CommentNewUpvoteNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'

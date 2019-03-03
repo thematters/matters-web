@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'

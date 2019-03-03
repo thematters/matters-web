@@ -1,7 +1,9 @@
 import { NextFunctionComponent } from 'next'
 import React from 'react'
 
-import { Button, Error, Translate } from '~/components'
+import { Button } from '~/components/Button'
+import { Error } from '~/components/Error'
+import { Translate } from '~/components/Language'
 
 import { PATHS } from '~/common/enums'
 

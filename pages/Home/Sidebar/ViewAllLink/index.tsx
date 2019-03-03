@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext, TextIcon } from '~/components'
+import { Icon } from '~/components/Icon'
+import { LanguageContext } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'

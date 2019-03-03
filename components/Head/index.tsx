@@ -3,7 +3,7 @@ import NextHead from 'next/head'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
+import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
 import FAVICON_16 from '~/static/favicon-16x16.png?url'

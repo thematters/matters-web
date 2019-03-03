@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Tag } from '~/components'
+import { Tag } from '~/components/Tag'
 
 import { TagListArticle } from './__generated__/TagListArticle'
 import styles from './styles.css'

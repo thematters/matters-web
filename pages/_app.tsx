@@ -5,12 +5,10 @@ import App, { Container } from 'next/app'
 import React from 'react'
 import { ApolloProvider, Query, QueryResult } from 'react-apollo'
 
-import {
-  AnalyticsProvider,
-  GlobalStyles,
-  Layout,
-  ModalProvider
-} from '~/components'
+import { AnalyticsProvider } from '~/components/Analytics'
+import { GlobalStyles } from '~/components/GlobalStyles'
+import { Layout } from '~/components/Layout'
+import { ModalProvider } from '~/components/ModalManager'
 
 import withApollo from '~/common/utils/withApollo'
 

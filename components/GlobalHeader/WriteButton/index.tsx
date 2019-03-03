@@ -3,7 +3,9 @@ import Router from 'next/router'
 import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { Button, Icon, LanguageContext, Translate } from '~/components'
+import { Button } from '~/components/Button'
+import { Icon } from '~/components/Icon'
+import { LanguageContext, Translate } from '~/components/Language'
 
 import { toPath, translate } from '~/common/utils'
 import ICON_WRITE from '~/static/icons/write.svg?sprite'

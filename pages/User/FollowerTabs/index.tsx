@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext } from 'react'
 
-import { Tabs, Translate } from '~/components'
+import { Translate } from '~/components/Language'
+import { Tabs } from '~/components/Tabs'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'

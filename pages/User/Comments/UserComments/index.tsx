@@ -4,9 +4,13 @@ import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Error, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
+import { Error } from '~/components/Error'
+import { Head } from '~/components/Head'
+import { Icon } from '~/components/Icon'
+import { InfiniteScroll } from '~/components/Interaction'
+import { Placeholder } from '~/components/Placeholder'
 
 import {
   filterComments,

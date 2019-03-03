@@ -2,7 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Error, Placeholder } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
+import { Error } from '~/components/Error'
+import { Placeholder } from '~/components/Placeholder'
 
 import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'

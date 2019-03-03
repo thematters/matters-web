@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon } from '~/components/Icon'
+import { TextIcon } from '~/components/TextIcon'
 
 import { toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'

@@ -2,15 +2,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  Error,
-  Head,
-  PageHeader,
-  ShuffleButton,
-  Spinner,
-  Translate,
-  UserDigest
-} from '~/components'
+import { ShuffleButton } from '~/components/Button/Shuffle'
+import { Error } from '~/components/Error'
+import { Head } from '~/components/Head'
+import { Translate } from '~/components/Language'
+import { PageHeader } from '~/components/PageHeader'
+import { Spinner } from '~/components/Spinner'
+import { UserDigest } from '~/components/UserDigest'
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 

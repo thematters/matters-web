@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import { Icon } from '~/components/Icon'
+import { Menu } from '~/components/Menu'
+import { Dropdown, PopperInstance } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'

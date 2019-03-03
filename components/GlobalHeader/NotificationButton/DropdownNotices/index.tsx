@@ -1,9 +1,13 @@
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
+import { Error } from '~/components/Error'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
 import NoticeDigest from '~/components/NoticeDigest'
+import { Spinner } from '~/components/Spinner'
+import { TextIcon } from '~/components/TextIcon'
 
 import { PATHS } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'

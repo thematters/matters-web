@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { SFC, useEffect, useState } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { Placeholder } from '~/components'
+import { Placeholder } from '~/components/Placeholder'
 
 import { DraftDetailQuery_node_Draft } from './__generated__/DraftDetailQuery'
 import { UpdateDraftVariables } from './__generated__/UpdateDraft'

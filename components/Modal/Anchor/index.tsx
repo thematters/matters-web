@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Modal } from '~/components'
+import { Modal } from '~/components/Modal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 

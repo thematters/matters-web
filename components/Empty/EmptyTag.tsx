@@ -1,4 +1,6 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty } from '~/components/Empty'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
 
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
 

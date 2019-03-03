@@ -3,8 +3,9 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import React, { useContext, useEffect } from 'react'
 
-import { Responsive, SearchBar } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
+import { Responsive } from '~/components/Responsive'
+import { SearchBar } from '~/components/SearchBar'
 import { ViewerContext } from '~/components/Viewer'
 
 import { analytics } from '~/common/utils'

@@ -1,5 +1,5 @@
-import { Icon } from '~/components'
 import { DrawerConsumer } from '~/components/Drawer'
+import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'

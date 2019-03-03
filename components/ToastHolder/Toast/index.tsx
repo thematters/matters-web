@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 
 import IconCloseWhite from '~/static/icons/close-white.svg'
 import IconClose from '~/static/icons/close.svg'

@@ -2,7 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Mutation } from 'react-apollo'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNPIN from '~/static/icons/unpin.svg?sprite'

@@ -3,7 +3,12 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Empty, Error, Icon, Menu, Spinner, Translate } from '~/components'
+import { Empty } from '~/components/Empty'
+import { Error } from '~/components/Error'
+import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
+import { Menu } from '~/components/Menu'
+import { Spinner } from '~/components/Spinner'
 
 import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'

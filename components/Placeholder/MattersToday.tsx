@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-import { Responsive } from '~/components'
+import { Responsive } from '~/components/Responsive'
 
 import { LoaderProps } from './utils'
 

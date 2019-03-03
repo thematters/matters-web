@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 
-import { Head, LanguageContext, PageHeader, Translate } from '~/components'
+import { Head } from '~/components/Head'
+import { LanguageContext, Translate } from '~/components/Language'
+import { PageHeader } from '~/components/PageHeader'
 
 import styles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'

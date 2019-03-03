@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Label, Title } from '~/components'
+import { Label } from '~/components/Label'
+import { Title } from '~/components/Title'
 
 import { toPath } from '~/common/utils'
 

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { DateTime } from '~/components'
+import { DateTime } from '~/components/DateTime'
 
 import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
 

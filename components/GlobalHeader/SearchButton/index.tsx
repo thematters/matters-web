@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Icon } from '~/components'
+import { Icon } from '~/components/Icon'
 
 import { PATHS } from '~/common/enums'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'

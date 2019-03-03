@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { ArticleDigest, Title, Translate } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
+import { Translate } from '~/components/Language'
+import { Title } from '~/components/Title'
 
 import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 import styles from './styles.css'

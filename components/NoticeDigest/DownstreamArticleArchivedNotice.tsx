@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import { Translate } from '~/components/Language'
 
 import ICON_AVATAR_MAT from '~/static/icons/avatar-mat.svg?url'
 

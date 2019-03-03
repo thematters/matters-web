@@ -1,4 +1,5 @@
-import { Head, UserProfile } from '~/components'
+import { Head } from '~/components/Head'
+import { UserProfile } from '~/components/UserProfile'
 
 import UserTabs from '../UserTabs'
 import MeHistory from './MeHistory'

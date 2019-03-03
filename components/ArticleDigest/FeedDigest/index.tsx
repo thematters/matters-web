@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Title } from '~/components'
+import { Title } from '~/components/Title'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
