@@ -1,3 +1,4 @@
+import _get from 'lodash/get'
 import { useContext } from 'react'
 
 import { Button, Head, PageHeader, Translate } from '~/components'
@@ -54,7 +55,7 @@ const SettingsAccount = () => {
             <span className="title">
               <Translate zh_hant="電子信箱" zh_hans="登录密码" />
             </span>
-            <span>{viewer.info.email}</span>
+            <span>{_get(viewer, 'info.email')}</span>
           </div>
           <EditButton />
         </section>

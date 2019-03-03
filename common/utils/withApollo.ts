@@ -10,7 +10,6 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import { LOCAL_LANG_KEY, DEFAULT_LANG } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -40,14 +39,10 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
   })
 
 const authLink = setContext((_, { headers }) => {
-  const language = process.browser
-    ? (localStorage.getItem(LOCAL_LANG_KEY) as Language)
-    : DEFAULT_LANG
-
   return {
     headers: {
       ...headers,
-      'Accept-Language': language
+      'x-client-name': 'web'
     }
   }
 })

@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo'
 
 import { ViewerContext } from '~/components/Viewer'
 
-import { DEFAULT_LANG, LOCAL_LANG_KEY } from '~/common/enums'
+import { DEFAULT_LANG } from '~/common/enums'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateViewerLanguage($language: UserLanguage!) {
@@ -37,8 +37,6 @@ export const LanguageProvider = ({
   const viewerLanguage = _get(viewer, 'settings.language')
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
-  console.log(viewerLanguage, lang)
-
   return (
     <Mutation mutation={UPDATE_VIEWER_LANGUAGE}>
       {updateLanguage => (
@@ -55,10 +53,6 @@ export const LanguageProvider = ({
               }
 
               setLang(targetLang)
-
-              if (process.browser) {
-                localStorage.setItem(LOCAL_LANG_KEY, targetLang)
-              }
             }
           }}
         >
