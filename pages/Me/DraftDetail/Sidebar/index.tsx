@@ -7,7 +7,7 @@ import DraftList from './DraftList'
 
 const Sidebar = ({ draft }: { draft: DraftSidebarDraft }) => (
   <>
-    <DraftList />
+    <DraftList currentId={draft.id} />
     {/* <ConnectUpstream draft={draft} /> */}
     <AddTags draft={draft} />
   </>

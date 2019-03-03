@@ -5,6 +5,7 @@ import { Mutation } from 'react-apollo'
 
 import { Button, Icon, LanguageContext, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import { toPath, translate } from '~/common/utils'
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
@@ -25,7 +26,11 @@ const WriteButton = () => {
 
   const [showLoader, setLoader] = useState(false)
 
-  const placeholder = translate({ zh_hans: '未命名', zh_hant: '未命名', lang })
+  const placeholder = translate({
+    zh_hans: TEXT.zh_hans.untitle,
+    zh_hant: TEXT.zh_hant.untitle,
+    lang
+  })
   return (
     <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
       {putDraft => {

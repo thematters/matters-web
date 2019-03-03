@@ -1,16 +1,18 @@
+/* @styled-jsx=global */
+
 .ql-container {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
 .ql-editor {
-    line-height: 1.88;
-    padding: 0;
+  line-height: 1.88;
+  padding: 0;
 }
 .ql-bubble .ql-stroke {
-    stroke: #fff;
+  stroke: #fff;
 }
 .ql-bubble .ql-fill,
 .ql-bubble .ql-stroke.ql-fill {
-    fill: #fff;
+  fill: #fff;
 }
 .ql-bubble.ql-toolbar button:hover,
 .ql-bubble .ql-toolbar button:hover,
@@ -26,7 +28,7 @@
 .ql-bubble .ql-toolbar .ql-picker-item:hover,
 .ql-bubble.ql-toolbar .ql-picker-item.ql-selected,
 .ql-bubble .ql-toolbar .ql-picker-item.ql-selected {
-    color: #c4a871;
+  color: #c4a871;
 }
 
 .ql-bubble.ql-toolbar button:hover .ql-stroke,
@@ -57,7 +59,7 @@
 .ql-bubble .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-bubble.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
 .ql-bubble .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-    stroke: #c4a871;
+  stroke: #c4a871;
 }
 .ql-bubble.ql-toolbar button:hover .ql-fill,
 .ql-bubble .ql-toolbar button:hover .ql-fill,
@@ -87,5 +89,5 @@
 .ql-bubble .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-bubble.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-bubble .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: #c4a871;
+  fill: #c4a871;
 }

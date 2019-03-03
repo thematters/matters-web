@@ -14,7 +14,7 @@ const ME_DRAFTS = gql`
   query MeDrafts {
     viewer {
       id
-      drafts(input: { first: 5 }) {
+      drafts(input: { first: 10 }) {
         edges {
           node {
             id
@@ -27,7 +27,7 @@ const ME_DRAFTS = gql`
   ${DraftDigest.Sidebar.fragments.draft}
 `
 
-const DraftList = () => (
+const DraftList = ({ currentId }: { currentId: string }) => (
   <Collapsable title={<Translate zh_hans={'草稿'} zh_hant={'草稿'} />}>
     <Query query={ME_DRAFTS}>
       {({ data, loading }: QueryResult & { data: MeDrafts }) => {
@@ -36,12 +36,17 @@ const DraftList = () => (
           return <Spinner />
         }
 
-        return edges.map(({ node }: MeDrafts_viewer_drafts_edges) => (
-          <DraftDigest.Sidebar
-            draft={node}
-            refetchQueries={[{ query: ME_DRAFTS }]}
-          />
-        ))
+        return edges
+          .filter(
+            ({ node }: MeDrafts_viewer_drafts_edges) => node.id !== currentId
+          )
+          .map(({ node }: MeDrafts_viewer_drafts_edges, i: number) => (
+            <DraftDigest.Sidebar
+              key={i}
+              draft={node}
+              refetchQueries={[{ query: ME_DRAFTS }]}
+            />
+          ))
       }}
     </Query>
   </Collapsable>

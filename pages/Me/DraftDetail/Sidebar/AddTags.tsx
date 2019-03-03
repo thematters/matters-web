@@ -81,26 +81,39 @@ const SearchTags = ({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        width: '10.5rem'
+        width: '10.5rem',
+        justifyContent: 'start'
       }}
     >
       {tags.map(tag => (
         <span
+          className="tag-search"
           onClick={() => addTag(tag.content)}
           style={{
             display: 'flex',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            height: 40,
+            alignItems: 'center'
           }}
         >
-          <span>{tag.content}</span>
-          <span>{tag.articles.totalCount}</span>
+          <span style={{ marginLeft: '1rem', marginRight: '0.5rem' }}>
+            {tag.content}
+          </span>
+          <span className="tag-count">{tag.articles.totalCount}</span>
         </span>
       ))}
       <hr />
-      <span onClick={() => addTag(search)}>
-        <Translate zh_hans="创建" zh_hant="創建" />
+      <span
+        className="tag-search"
+        style={{ height: '3.25rem', display: 'flex', alignItems: 'center' }}
+        onClick={() => addTag(search)}
+      >
+        <span style={{ marginLeft: '1rem' }}>
+          <Translate zh_hans="创建" zh_hant="創建" />
+        </span>
         <span> {search} </span>
       </span>
+      <style jsx>{styles}</style>
     </div>
   )
 

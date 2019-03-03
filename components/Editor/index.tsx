@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
-import bubbleStyle from 'react-quill/dist/quill.bubble.css'
+
 // import 'tailwindcss/dist/utilities.min.css'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
+import bubbleStyle from './quill.bubble.css'
 import quillStyle from './quill.css'
 import Style from './style'
 import VideoUrl from './utils/videoUrl'
@@ -426,7 +427,7 @@ export class Editor extends React.Component<Props, State> {
   }
 
   public render() {
-    const { editorChoose, showEditor, title } = this.state
+    const { editorChoose, showEditor } = this.state
 
     const isWeb = true
 
@@ -460,7 +461,7 @@ export class Editor extends React.Component<Props, State> {
                                 <div style={Style.notice.cancle}>撤銷</div>
                             </div>
                         </div> */}
-            <div>
+            {/* <div>
               <input
                 placeholder="請輸入標題…"
                 style={Style.titleInput}
@@ -470,7 +471,7 @@ export class Editor extends React.Component<Props, State> {
                 }}
                 onBlur={this.onSubmit.bind(this)}
               />
-            </div>
+            </div> */}
             <div onClick={this.onSetDefault.bind(this)} id="editor">
               {typeof window !== 'undefined' && ReactQuill ? (
                 <ReactQuill
@@ -644,8 +645,12 @@ export class Editor extends React.Component<Props, State> {
             />
           )} */}
         </section>
-        <style jsx>{bubbleStyle}</style>
-        <style jsx>{quillStyle}</style>
+        <style global jsx>
+          {bubbleStyle}
+        </style>
+        <style global jsx>
+          {quillStyle}
+        </style>
       </div>
     )
   }

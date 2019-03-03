@@ -17,3 +17,11 @@ hr {
   margin-top: 1.25rem;
   margin-bottom: 1.5rem;
 }
+
+.tag-search:hover {
+  background-color: var(--color-bg-green);
+}
+
+.tag-count {
+  color: var(--color-grey);
+}
