@@ -26,10 +26,10 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className={avatarWrapClasses}>
-        {notice.actors.slice(0, 2).map(actor => (
+        {notice.actors.slice(0, 2).map((actor, index) => (
           <NoticeActorAvatar
             user={actor}
-            key={actor.id}
+            key={index}
             size={isMultiActors ? 'xsmall' : 'default'}
           />
         ))}
@@ -38,7 +38,7 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <h4>
           {notice.actors.slice(0, 2).map((actor, index) => (
-            <Fragment key={actor.id}>
+            <Fragment key={index}>
               <NoticeActorName user={actor} />
               {index < actorsCount - 1 && <span>、</span>}
             </Fragment>

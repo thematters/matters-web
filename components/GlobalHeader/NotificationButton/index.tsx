@@ -107,9 +107,9 @@ const NoticeButton = ({
         type="button"
         aria-label="通知"
         onClick={() => {
-          markAllNoticesAsRead()
           toggleDropdown()
           if (hasUnreadNotices) {
+            markAllNoticesAsRead()
             refetch()
           }
         }}
