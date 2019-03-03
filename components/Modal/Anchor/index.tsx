@@ -39,6 +39,9 @@ const Anchor = () => {
     <>
       <div>
         <div id="modal-anchor" className="container" />
+        <ModalInstance modalId="emailModal" title="changeEmail">
+          {(props: ModalInstanceProps) => <Modal.EmailModal {...props} />}
+        </ModalInstance>
         <ModalInstance modalId="loginModal" title="login">
           {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
         </ModalInstance>
