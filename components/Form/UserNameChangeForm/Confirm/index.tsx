@@ -7,70 +7,63 @@ import { Mutation } from 'react-apollo'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { LanguageContext } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
 
-import { isValidEmail, translate } from '~/common/utils'
+import { isValidUserName, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 interface Props {
-  defaultEmail: string
   extraClass?: string[]
   purpose: 'modal' | 'page'
-  submitCallback?: (params: any) => void
+  submitCallback: () => void
 }
 
-export const MUTATION_CONFIRM_CODE = gql`
-  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
-    confirmVerificationCode(input: $input)
+const MUTATION_UPDATE_USER_INFO = gql`
+  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+    updateUserInfo(input: $input) {
+      id
+      userName
+    }
   }
 `
 
-const ResetCodeForm: FC<Props> = ({
-  defaultEmail = '',
+export const UserNameChangeConfirmForm: FC<Props> = ({
   extraClass = [],
   purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const validateEmail = (value: string, language: string) => {
+  const validateUserName = (value: string, language: string) => {
     let result: any
     if (!value) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
-    } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+    } else if (!isValidUserName(value)) {
+      result = {
+        zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
+        zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _'
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
     }
   }
 
-  const validateCode = (value: string, language: string) => {
+  const validateComparedUserName = (
+    value: string,
+    comparedValue: string,
+    language: string
+  ) => {
     let result: any
-    if (!value) {
+    if (!comparedValue) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+    } else if (comparedValue !== value) {
+      result = { zh_hant: 'Matters ID 不一致', zh_hans: 'Matters ID 不一致' }
     }
     if (result) {
       return translate({ ...result, lang: language })
     }
   }
-
-  const LoginModalSwitch = () => (
-    <ModalSwitch modalId="loginModal">
-      {(open: any) => (
-        <Button
-          type="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({ zh_hant: '上一步', zh_hans: '上一步', lang })}
-        </Button>
-      )}
-    </ModalSwitch>
-  )
 
   const BaseForm = ({
     values,
@@ -85,15 +78,21 @@ const ResetCodeForm: FC<Props> = ({
   }) => {
     const formClass = classNames('form', ...extraClass)
 
-    const emailPlaceholder = translate({
-      zh_hant: '請輸入你的註冊電子信箱',
-      zh_hans: '请输入你的注册邮箱',
+    const userNameHint = translate({
+      zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
+      zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _',
       lang
     })
 
-    const codePlaceholder = translate({
-      zh_hant: '請輸入驗證碼',
-      zh_hans: '请输入验证码',
+    const userNamePlaceholder = translate({
+      zh_hant: '請輸入新 Matters ID',
+      zh_hans: '请输入新 Matters ID',
+      lang
+    })
+
+    const comparedUserNamePlaceholder = translate({
+      zh_hant: '請再次輸入新 Matters ID',
+      zh_hans: '请再次输入新 Matters ID',
       lang
     })
 
@@ -102,31 +101,25 @@ const ResetCodeForm: FC<Props> = ({
         <form className={formClass} onSubmit={handleSubmit}>
           <Form.Input
             type="text"
-            field="email"
-            placeholder={emailPlaceholder}
+            field="userName"
+            placeholder={userNamePlaceholder}
             values={values}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            hint={userNameHint}
           />
           <Form.Input
             type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
-            floatElement={
-              <Form.SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="password_reset"
-              />
-            }
+            field="comparedUserName"
+            placeholder={comparedUserNamePlaceholder}
             values={values}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            style={{ marginTop: '0.6rem' }}
           />
           <div className="buttons">
             <Button
@@ -135,9 +128,8 @@ const ResetCodeForm: FC<Props> = ({
               style={{ width: 80 }}
               disabled={isSubmitting}
             >
-              {translate({ zh_hant: '下一步', zh_hans: '下一步', lang })}
+              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
             </Button>
-            {purpose === 'modal' && <LoginModalSwitch />}
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -147,34 +139,37 @@ const ResetCodeForm: FC<Props> = ({
 
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
-      email: defaultEmail,
-      code: ''
+      userName: '',
+      comparedUserName: ''
     }),
 
-    validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidCode = validateCode(code, lang)
+    validate: ({ userName, comparedUserName }) => {
+      const isInvalidUserName = validateUserName(userName, lang)
+      const isInvalidComparedUserName = validateComparedUserName(
+        userName,
+        comparedUserName,
+        lang
+      )
       const errors = {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
+        ...(isInvalidComparedUserName
+          ? { comparedUserName: isInvalidComparedUserName }
+          : {})
       }
       return errors
     },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { email, code } = values
+      const { userName } = values
       const { submitAction } = props
       if (!submitAction) {
         return undefined
       }
 
-      submitAction({
-        variables: { input: { email, type: 'password_reset', code } }
-      })
+      submitAction({ variables: { input: { userName } } })
         .then(({ data }: any) => {
-          const { confirmVerificationCode } = data
-          if (submitCallback && confirmVerificationCode) {
-            submitCallback({ email, codeId: confirmVerificationCode })
+          if (submitCallback) {
+            submitCallback()
           }
         })
         .catch((result: any) => {
@@ -188,12 +183,10 @@ const ResetCodeForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_CONFIRM_CODE}>
-        {confirmCode => <MainForm submitAction={confirmCode} />}
+      <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+        {update => <MainForm submitAction={update} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>
   )
 }
-
-export default ResetCodeForm

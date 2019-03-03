@@ -87,6 +87,12 @@ const ResetForm: FC<Props> = ({
       lang
     })
 
+    const passwordHint = translate({
+      zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
+      zh_hans: '不少于 8 位，必须包含数字和大小写字母',
+      lang
+    })
+
     const comparedPlaceholder = translate({
       zh_hant: '請再次輸入密碼',
       zh_hans: '请再次输入密码',
@@ -105,6 +111,7 @@ const ResetForm: FC<Props> = ({
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            hint={passwordHint}
           />
           <Form.Input
             type="password"
@@ -133,7 +140,7 @@ const ResetForm: FC<Props> = ({
               style={{ width: 80 }}
               disabled={isSubmitting}
             >
-              {translate({ zh_hant: '確認', zh_hans: '确认', lang })}
+              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
             </Button>
           </div>
         </form>

@@ -13,6 +13,16 @@
   }
 }
 
+.ask-buttons {
+  @mixin border-top-grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  margin: 0 var(--spacing-x-tight);
+  padding: var(--spacing-x-tight) 0;
+}
+
 .complete {
   & > .message {
     @mixin flex-center-all;

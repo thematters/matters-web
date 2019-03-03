@@ -5,6 +5,7 @@ import LoginModal from './LoginModal'
 import ResetModal from './ResetModal'
 import SignUpModal from './SignUpModal'
 import TermModal from './TermModal'
+import UserNameModal from './UserNameModal'
 
 export const Modal = {
   Anchor,
@@ -13,5 +14,6 @@ export const Modal = {
   LoginModal,
   ResetModal,
   SignUpModal,
-  TermModal
+  TermModal,
+  UserNameModal
 }

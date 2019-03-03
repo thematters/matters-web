@@ -35,7 +35,7 @@ const Container: FC<Props> = ({
 
   const overlayClass = classNames('overlay', alignment)
 
-  const modalClass = classNames(
+  const modalBaseClass = classNames(
     'l-col-4',
     'l-col-sm-6',
     'l-offset-sm-1',
@@ -44,6 +44,8 @@ const Container: FC<Props> = ({
     'l-col-lg-6',
     'l-offset-lg-3'
   )
+
+  const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
   const [node, setNode] = useState<HTMLElement | null>(null)
 
@@ -127,7 +129,8 @@ const Container: FC<Props> = ({
                 close,
                 interpret,
                 setCloseOnEsc,
-                setCloseOnOutsideClick
+                setCloseOnOutsideClick,
+                setModalClass
               })}
             </div>
           </div>

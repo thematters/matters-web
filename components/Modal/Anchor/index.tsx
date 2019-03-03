@@ -22,6 +22,7 @@ interface ModalInstanceProps {
   close: () => {}
   setCloseOnEsc: (value: boolean) => {}
   setCloseOnOutsideClick: (value: boolean) => {}
+  setModalClass: (value: string) => {}
 }
 
 const Anchor = () => {
@@ -50,6 +51,9 @@ const Anchor = () => {
         </ModalInstance>
         <ModalInstance modalId="resetModal">
           {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
+        </ModalInstance>
+        <ModalInstance modalId="userNameModal" title="changeUserName">
+          {(props: ModalInstanceProps) => <Modal.UserNameModal {...props} />}
         </ModalInstance>
         <ModalInstance
           modalId="termModal"
