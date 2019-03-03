@@ -89,7 +89,7 @@ export default () => {
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
           const connectionPath = 'viewer.recommendation.feed'
-          const connection = _get(data, connectionPath)
+          const connection = _get(data, connectionPath, {})
           if (loading && !connection) {
             return <Placeholder.ArticleDigestList />
           }

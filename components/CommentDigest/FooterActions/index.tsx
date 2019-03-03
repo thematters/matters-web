@@ -13,12 +13,12 @@ import DownvoteButton from './DownvoteButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
 
-export interface CommentActionsControls {
+export interface FooterActionsControls {
   hasComment?: boolean
 }
-type ActionsProps = {
+type FooterActionsProps = {
   comment: DigestActionsComment
-} & CommentActionsControls
+} & FooterActionsControls
 
 const fragments = {
   comment: gql`
@@ -52,7 +52,7 @@ const IconDotDivider = () => (
   />
 )
 
-const Actions = ({ comment, hasComment }: ActionsProps) => {
+const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
 
@@ -106,6 +106,6 @@ const Actions = ({ comment, hasComment }: ActionsProps) => {
   )
 }
 
-Actions.fragments = fragments
+FooterActions.fragments = fragments
 
-export default Actions
+export default FooterActions

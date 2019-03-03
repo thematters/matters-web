@@ -21,13 +21,11 @@ footer {
     margin-right: var(--spacing-tight);
   }
 
-  & :global(button) {
-    &.active {
-      color: var(--color-black);
-    }
-    &:disabled {
-      opacity: 0.5;
-    }
+  & :global(button.active) {
+    color: var(--color-black);
+  }
+  & :global(button:disabled) {
+    opacity: 0.5;
   }
 }
 

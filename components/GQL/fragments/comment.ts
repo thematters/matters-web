@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import Actions from '~/components/CommentDigest/Actions'
+import DropdownActions from '~/components/CommentDigest/DropdownActions'
+import FooterActions from '~/components/CommentDigest/FooterActions'
 import { UserDigest } from '~/components/UserDigest'
 
 export default {
@@ -23,8 +24,10 @@ export default {
         }
       }
       ...DigestActionsComment
+      ...DropdownActionsComment
     }
     ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.comment}
+    ${FooterActions.fragments.comment}
+    ${DropdownActions.fragments.comment}
   `
 }

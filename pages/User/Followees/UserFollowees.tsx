@@ -54,7 +54,7 @@ const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         const connectionPath = 'user.followees'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {

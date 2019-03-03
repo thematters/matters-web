@@ -1,0 +1,9 @@
+button {
+  font-size: var(--font-size-sm);
+
+  & {
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}

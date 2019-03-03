@@ -66,7 +66,7 @@ const Notifications = () => (
             }
 
             const connectionPath = 'viewer.notices'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {
