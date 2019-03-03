@@ -16,8 +16,8 @@ interface Props {
   alignment?: 'center' | 'bottom'
   children: any
   close: () => void
-  closeOnEsc?: boolean
-  closeOnOutsideClick?: boolean
+  defaultCloseOnEsc?: boolean
+  defaultCloseOnOutsideClick?: boolean
   enableCloseButton?: boolean
   title?: string
 }
@@ -26,8 +26,8 @@ const Container: FC<Props> = ({
   alignment = 'center',
   children,
   close,
-  closeOnEsc = true,
-  closeOnOutsideClick = true,
+  defaultCloseOnEsc = true,
+  defaultCloseOnOutsideClick = true,
   enableCloseButton = true,
   title
 }) => {
@@ -46,6 +46,12 @@ const Container: FC<Props> = ({
   )
 
   const [node, setNode] = useState<HTMLElement | null>(null)
+
+  const [closeOnEsc, setCloseOnEsc] = useState(defaultCloseOnEsc)
+
+  const [closeOnOutsideClick, setCloseOnOutsideClick] = useState(
+    defaultCloseOnOutsideClick
+  )
 
   const interpret = (text: string) => {
     return translate({
@@ -117,7 +123,12 @@ const Container: FC<Props> = ({
               {title && (
                 <Header title={title} enableCloseButton={enableCloseButton} />
               )}
-              {children({ close, interpret })}
+              {children({
+                close,
+                interpret,
+                setCloseOnEsc,
+                setCloseOnOutsideClick
+              })}
             </div>
           </div>
         </div>

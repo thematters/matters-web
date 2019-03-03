@@ -1,0 +1,18 @@
+.container {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+}
+
+.input {
+  display: none;
+}
+
+.description {
+  line-height: 1.65;
+  word-break: break-all;
+}

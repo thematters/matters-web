@@ -1,15 +1,12 @@
 import { Button, Translate } from '~/components'
 
-import { PATHS } from '~/common/enums'
-
-export default () => (
+export default (props: { [key: string]: any }) => (
   <Button
-    is="link"
+    is="button"
     size="large"
     bgColor="green"
-    href={PATHS.AUTH_SIGNUP.href}
-    as={PATHS.AUTH_SIGNUP.as}
     style={{ width: 80 }}
+    {...props}
   >
     <Translate zh_hant="註冊" zh_hans="注册" />
   </Button>

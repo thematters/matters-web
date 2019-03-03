@@ -1,46 +1,132 @@
 import classNames from 'classnames'
 import Router from 'next/router'
-import { useContext, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
+import { ModalSwitch } from '~/components/ModalManager'
 import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
+import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
+import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?sprite'
 
 import styles from './styles.css'
 
+/**
+ * This component is for sign up modal.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Modal.SignUpModal close={close} />
+ * ```
+ *
+ */
+
 type Step = 'signUp' | 'profile' | 'complete'
 
-const SignUp = () => {
+interface Props {
+  close: () => {}
+  setCloseOnEsc: (value: boolean) => {}
+  setCloseOnOutsideClick: (value: boolean) => {}
+}
+
+const SignUpModal: FC<Props> = ({
+  close,
+  setCloseOnEsc,
+  setCloseOnOutsideClick
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')
 
-  const containerClass = classNames(
+  const data: { [key: string]: any } = {
+    signUp: {
+      title: translate({ zh_hant: '註冊', zh_hans: '注册', lang })
+    },
+    profile: {
+      title: translate({ zh_hant: '個人資料', zh_hans: '个人資料', lang })
+    },
+    complete: {
+      title: translate({ zh_hant: '註冊成功', zh_hans: '註冊成功', lang })
+    }
+  }
+
+  const contentClass = classNames(
     'l-col-4',
     'l-col-sm-6',
-    'l-offset-sm-1',
-    'l-col-md-4',
-    'l-offset-md-2',
-    'l-col-lg-6',
-    'l-offset-lg-3',
-    'container'
+    'l-col-md-6',
+    'l-col-lg-8',
+    'content'
   )
 
-  const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
-
-  const signUpCallback = () => setStep('profile')
+  const signUpCallback = () => {
+    setCloseOnEsc(false)
+    setCloseOnOutsideClick(false)
+    setStep('profile')
+  }
 
   const signUpProfileCallback = () => setStep('complete')
 
   const redirect = () => Router.replace('/')
 
+  const LoginModalSwitch = () => (
+    <ModalSwitch modalId="loginModal">
+      {(open: any) => (
+        <>
+          <span className="link" onClick={open}>
+            {translate({
+              zh_hant: '登入',
+              zh_hans: '登入',
+              lang
+            })}
+            <Icon
+              style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
+              id={ICON_ARROW.id}
+              viewBox={ICON_ARROW.viewBox}
+            />
+          </span>
+          <style jsx>{styles}</style>
+        </>
+      )}
+    </ModalSwitch>
+  )
+
+  const Header = ({ title }: { title: string }) => (
+    <>
+      <div className="header">
+        <Title type="modal">{title}</Title>
+        {step === 'signUp' && (
+          <button onClick={close}>
+            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
+          </button>
+        )}
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
+
+  const Footer = () => (
+    <>
+      <div className="footer">
+        {translate({
+          zh_hant: '已有帳號',
+          zh_hans: '已有帐号',
+          lang
+        })}
+        ？
+        <LoginModalSwitch />
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
+
   const Complete = () => {
-    const completeClass = classNames(...childClass, 'complete')
+    const completeClass = classNames('complete')
 
     const completeTitle = translate({
       zh_hant: '歡迎加入 Matters！',
@@ -106,28 +192,31 @@ const SignUp = () => {
 
   return (
     <>
-      <main className="l-row row">
-        <article className={containerClass}>
+      <Header title={data[step].title} />
+      <div className="container">
+        <div className={contentClass}>
           {step === 'signUp' && (
-            <Form.SignUpForm
-              extraClass={childClass}
-              purpose="page"
-              submitCallback={signUpCallback}
-            />
+            <>
+              <Form.SignUpForm
+                purpose="modal"
+                submitCallback={signUpCallback}
+              />
+              <hr className="divider" />
+              <Footer />
+            </>
           )}
           {step === 'profile' && (
             <Form.SignUpProfileForm
-              extraClass={childClass}
-              purpose="page"
+              purpose="modal"
               submitCallback={signUpProfileCallback}
             />
           )}
           {step === 'complete' && <Complete />}
-        </article>
-      </main>
+        </div>
+      </div>
       <style jsx>{styles}</style>
     </>
   )
 }
 
-export default SignUp
+export default SignUpModal
