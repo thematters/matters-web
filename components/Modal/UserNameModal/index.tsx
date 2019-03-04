@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
@@ -28,14 +27,6 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
 
   const [step, setStep] = useState<Step>('ask')
 
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
-
   const askCallback = (event: any) => {
     event.stopPropagation()
     setStep('confirm')
@@ -46,13 +37,11 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
   const Ask = () => (
     <>
       <ModalContent>
-        <div className={classNames(contentClass)}>
-          {translate({
-            zh_hant: '您的 Matters ID 僅能永久修改一次，確定要繼續嗎？',
-            zh_hans: '您的 Matters ID 仅能永久修改一次，确定要继续吗？',
-            lang
-          })}
-        </div>
+        {translate({
+          zh_hant: '您的 Matters ID 僅能永久修改一次，確定要繼續嗎？',
+          zh_hans: '您的 Matters ID 仅能永久修改一次，确定要继续吗？',
+          lang
+        })}
       </ModalContent>
       <div className="ask-buttons">
         <Button
@@ -97,12 +86,10 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
       {step === 'ask' && <Ask />}
       {step !== 'ask' && (
         <ModalContent>
-          <div className={contentClass}>
-            {step === 'confirm' && (
-              <UserNameChangeConfirmForm submitCallback={confirmCallback} />
-            )}
-            {step === 'complete' && <Complete />}
-          </div>
+          {step === 'confirm' && (
+            <UserNameChangeConfirmForm submitCallback={confirmCallback} />
+          )}
+          {step === 'complete' && <Complete />}
         </ModalContent>
       )}
       <style jsx>{styles}</style>

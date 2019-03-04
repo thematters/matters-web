@@ -98,7 +98,7 @@ const AppreciatorList: React.FC<WithRouterProps> = ({ router }) => {
                     />
                   }
                 />
-                <ModalContent spacing="none">
+                <ModalContent spacing="none" layout="full-width">
                   <InfiniteScroll
                     hasNextPage={pageInfo.hasNextPage}
                     loadMore={loadMore}

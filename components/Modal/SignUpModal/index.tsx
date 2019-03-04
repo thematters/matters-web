@@ -47,14 +47,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
     }
   }
 
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
-
   const signUpCallback = () => {
     setCloseable(false)
     setStep('profile')
@@ -171,25 +163,20 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
       <ModalHeader title={data[step].title} closeable={closeable} />
 
       <ModalContent>
-        <div className={contentClass}>
-          {step === 'signUp' && (
-            <>
-              <Form.SignUpForm
-                purpose="modal"
-                submitCallback={signUpCallback}
-              />
-              <hr className="divider" />
-              <Footer />
-            </>
-          )}
-          {step === 'profile' && (
-            <Form.SignUpProfileForm
-              purpose="modal"
-              submitCallback={signUpProfileCallback}
-            />
-          )}
-          {step === 'complete' && <Complete />}
-        </div>
+        {step === 'signUp' && (
+          <>
+            <Form.SignUpForm purpose="modal" submitCallback={signUpCallback} />
+            <hr className="divider" />
+            <Footer />
+          </>
+        )}
+        {step === 'profile' && (
+          <Form.SignUpProfileForm
+            purpose="modal"
+            submitCallback={signUpProfileCallback}
+          />
+        )}
+        {step === 'complete' && <Complete />}
       </ModalContent>
 
       <style jsx>{styles}</style>

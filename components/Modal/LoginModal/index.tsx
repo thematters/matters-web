@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { FC, useContext } from 'react'
 
 import { Form } from '~/components/Form'
@@ -25,14 +24,6 @@ import styles from './styles.css'
 
 const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
-
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
 
   const SignUpModalSwitch = () => (
     <ModalSwitch modalId="signUpModal">
@@ -73,12 +64,10 @@ const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <ModalContent>
-      <div className={contentClass}>
-        <Form.LoginForm purpose="modal" submitCallback={close} />
-        <hr className="divider" />
-        <Footer />
-        <style jsx>{styles}</style>
-      </div>
+      <Form.LoginForm purpose="modal" submitCallback={close} />
+      <hr className="divider" />
+      <Footer />
+      <style jsx>{styles}</style>
     </ModalContent>
   )
 }

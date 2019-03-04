@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
 import {
@@ -64,14 +63,6 @@ const PasswordModal: FC<
     }
   })
 
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
-
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData(prev => {
@@ -128,25 +119,23 @@ const PasswordModal: FC<
       <ModalHeader title={data[step].title} />
 
       <ModalContent>
-        <div className={contentClass}>
-          {step === 'request' && (
-            <PasswordChangeRequestForm
-              defaultEmail={data.request.email}
-              purpose={purpose}
-              container="modal"
-              submitCallback={requestCodeCallback}
-            />
-          )}
-          {step === 'reset' && (
-            <PasswordChangeConfirmForm
-              codeId={data.request.codeId}
-              container="modal"
-              backPreviousStep={backPreviousStep}
-              submitCallback={() => setStep('complete')}
-            />
-          )}
-          {step === 'complete' && <Complete />}
-        </div>
+        {step === 'request' && (
+          <PasswordChangeRequestForm
+            defaultEmail={data.request.email}
+            purpose={purpose}
+            container="modal"
+            submitCallback={requestCodeCallback}
+          />
+        )}
+        {step === 'reset' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            container="modal"
+            backPreviousStep={backPreviousStep}
+            submitCallback={() => setStep('complete')}
+          />
+        )}
+        {step === 'complete' && <Complete />}
       </ModalContent>
 
       <style jsx>{styles}</style>

@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
 import {
@@ -43,14 +42,6 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
     }
   })
 
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
-
   const requestCallback = (params: any) => {
     const { codeId } = params
     setData(prev => {
@@ -85,21 +76,19 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
   return (
     <>
       <ModalContent>
-        <div className={contentClass}>
-          {step === 'request' && (
-            <EmailChangeRequestForm
-              defaultEmail={data.request.email}
-              submitCallback={requestCallback}
-            />
-          )}
-          {step === 'confirm' && (
-            <EmailChangeConfirmForm
-              oldData={data.request}
-              submitCallback={confirmCallback}
-            />
-          )}
-          {step === 'complete' && <Complete />}
-        </div>
+        {step === 'request' && (
+          <EmailChangeRequestForm
+            defaultEmail={data.request.email}
+            submitCallback={requestCallback}
+          />
+        )}
+        {step === 'confirm' && (
+          <EmailChangeConfirmForm
+            oldData={data.request}
+            submitCallback={confirmCallback}
+          />
+        )}
+        {step === 'complete' && <Complete />}
       </ModalContent>
       <style jsx>{styles}</style>
     </>

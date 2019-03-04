@@ -43,11 +43,7 @@ const Anchor = () => {
           <Modal.PasswordModal purpose="forget" {...props} />
         )}
       </ModalInstance>
-      <ModalInstance
-        modalId="termModal"
-        title="term"
-        defaultCloseable={false}
-      >
+      <ModalInstance modalId="termModal" title="term" defaultCloseable={false}>
         {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
       </ModalInstance>
       {isAuth && disagreedToS && <OpenedTermModal />}

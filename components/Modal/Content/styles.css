@@ -1,5 +1,13 @@
+:root {
+  --modal-header-height: 4rem;
+  --modal-footer-height: 4rem;
+}
+
 section {
   max-height: 70vh;
+  max-height: calc(
+    100vh - var(--modal-header-height) - var(--modal-footer-height)
+  );
   overflow-y: auto;
 }
 
