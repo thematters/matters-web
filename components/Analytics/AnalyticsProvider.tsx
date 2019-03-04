@@ -15,11 +15,11 @@ export const AnalyticsProvider: FC = ({ children }) => {
     !(function() {
       var analytics = (window.analytics = window.analytics || [])
       if (!analytics.initialize)
-        if (analytics.invoked)
+        if (analytics.invoked) {
           window.console &&
             console.error &&
             console.error('Segment snippet included twice.')
-        else {
+        } else {
           analytics.invoked = !0
           analytics.methods = [
             'trackSubmit',
