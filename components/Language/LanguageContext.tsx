@@ -1,8 +1,24 @@
-import React, { ReactNode, useState } from 'react'
+import gql from 'graphql-tag'
+import _get from 'lodash/get'
+import { createContext, useContext, useState } from 'react'
+import { Mutation } from 'react-apollo'
 
-const systemDefaultLang = 'zh_hant'
+import { ViewerContext } from '~/components/Viewer'
 
-export const LanguageContext = React.createContext({} as {
+import { DEFAULT_LANG } from '~/common/enums'
+
+const UPDATE_VIEWER_LANGUAGE = gql`
+  mutation UpdateViewerLanguage($language: UserLanguage!) {
+    updateUserInfo(input: { language: $language }) {
+      id
+      settings {
+        language
+      }
+    }
+  }
+`
+
+export const LanguageContext = createContext({} as {
   lang: Language
   setLang: (lang: Language) => void
 })
@@ -11,35 +27,38 @@ export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
   children,
-  defaultLang = systemDefaultLang
+  defaultLang = DEFAULT_LANG
 }: {
-  children: ReactNode
+  children: React.ReactNode
   defaultLang?: Language
 }) => {
-  const [lang, setLang] = useState<Language>(defaultLang)
-
-  // useEffect(() => {
-  //   // retrive from local store
-  //   if (
-  //     !(typeof localStorage === 'undefined') &&
-  //     localStorage.getItem('profile')
-  //   ) {
-  //     const profile = JSON.parse(localStorage.getItem('profile'))
-  //     const langLocal = profile && profile.settings && profile.settings.language
-  //     if (langLocal) {
-  //       setLang(langLocal)
-  //     }
-  //   }
-  // })
+  const viewer = useContext(ViewerContext)
+  const isAuthed = !!viewer.id
+  const viewerLanguage = _get(viewer, 'settings.language')
+  const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (
-    <LanguageContext.Provider
-      value={{
-        lang,
-        setLang
-      }}
-    >
-      {children}
-    </LanguageContext.Provider>
+    <Mutation mutation={UPDATE_VIEWER_LANGUAGE}>
+      {updateLanguage => (
+        <LanguageContext.Provider
+          value={{
+            lang: viewerLanguage || lang,
+            setLang: targetLang => {
+              if (isAuthed) {
+                try {
+                  updateLanguage({ variables: { language: targetLang } })
+                } catch (e) {
+                  //
+                }
+              }
+
+              setLang(targetLang)
+            }
+          }}
+        >
+          {children}
+        </LanguageContext.Provider>
+      )}
+    </Mutation>
   )
 }

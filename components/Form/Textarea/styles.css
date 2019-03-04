@@ -3,6 +3,8 @@
 }
 
 .textarea {
+  @mixin all-transition;
+
   padding: var(--spacing-x-tight) var(--spacing-tight);
   min-height: 2.5rem;
 
@@ -14,7 +16,6 @@
   border-top-right-radius: 0.15rem;
   border-top-left-radius: 0.15rem;
   border-bottom: 1px solid var(--color-grey-light);
-  transition: all 0.2s ease-in-out;
 
   &:focus {
     background-color: var(--color-bg-green);

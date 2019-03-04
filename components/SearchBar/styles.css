@@ -15,6 +15,8 @@ form {
   font-size: var(--font-size-sm);
 
   & :global(input[type='search']) {
+    @mixin all-transition;
+
     height: 100%;
     padding: 0 var(--search-bar-button-width) 0 var(--spacing-tight);
 
@@ -23,7 +25,6 @@ form {
     border: 1px solid var(--color-grey-lighter);
     border-radius: var(--search-bar-height);
     background-color: var(--color-grey-lighter);
-    transition: all 0.2s ease-in-out;
 
     &:focus {
       background-color: var(--color-bg-green);

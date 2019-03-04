@@ -3,6 +3,7 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import { setContext } from 'apollo-link-context'
 import { createUploadLink } from 'apollo-upload-client'
 import http from 'http'
 import https from 'https'
@@ -37,10 +38,19 @@ const httpUploadLink = ({ headers }: { [key: string]: any }) =>
     }
   })
 
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'x-client-name': 'web'
+    }
+  }
+})
+
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: httpUploadLink({ headers }),
+      link: authLink.concat(httpUploadLink({ headers })),
       cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )
