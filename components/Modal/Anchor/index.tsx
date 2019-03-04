@@ -18,12 +18,6 @@ import styles from './styles.css'
  *
  */
 
-interface ModalInstanceProps {
-  close: () => {}
-  setCloseOnEsc: (value: boolean) => {}
-  setCloseOnOutsideClick: (value: boolean) => {}
-}
-
 const Anchor = () => {
   const viewer = useContext(ViewerContext)
 
@@ -45,8 +39,10 @@ const Anchor = () => {
         <ModalInstance modalId="signUpModal">
           {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
         </ModalInstance>
-        <ModalInstance modalId="resetModal">
-          {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
+        <ModalInstance modalId="passwordResetModal">
+          {(props: ModalInstanceProps) => (
+            <Modal.PasswordModal purpose="forget" {...props} />
+          )}
         </ModalInstance>
         <ModalInstance
           modalId="termModal"

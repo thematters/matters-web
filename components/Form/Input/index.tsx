@@ -31,7 +31,7 @@ interface Props {
   className?: string[]
   type: 'text' | 'password'
   field: string
-  placeholder: string
+  placeholder?: string
   floatElement?: any
   hint?: string
   style?: { [key: string]: any }
@@ -58,7 +58,9 @@ const Input: FC<Props> = ({
   errors,
   touched,
   handleBlur,
-  handleChange
+  handleChange,
+
+  ...restProps
 }) => {
   const inputClass = classNames('input', ...className)
 
@@ -78,6 +80,7 @@ const Input: FC<Props> = ({
           onChange={handleChange}
           value={value}
           style={style}
+          {...restProps}
         />
         {floatElement && <div className="float-right">{floatElement}</div>}
       </div>

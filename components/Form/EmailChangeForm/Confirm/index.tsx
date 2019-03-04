@@ -7,29 +7,43 @@ import { Mutation } from 'react-apollo'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { LanguageContext } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 interface Props {
-  defaultEmail: string
+  oldData: { email: string; codeId: string }
   extraClass?: string[]
-  purpose: 'modal' | 'page'
-  submitCallback?: (params: any) => void
+  submitCallback: () => void
 }
 
-export const MUTATION_CONFIRM_CODE = gql`
+const MUTATION_CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
 `
 
-const ResetCodeForm: FC<Props> = ({
-  defaultEmail = '',
+const MUTATION_CHANGE_EMAIL = gql`
+  mutation ChangeEmail($input: ChangeEmailInput!) {
+    changeEmail(input: $input)
+  }
+`
+
+const QUERY_VIEWER_EMAIL = gql`
+  query ViewerEmail {
+    viewer {
+      id
+      info {
+        email
+      }
+    }
+  }
+`
+
+export const EmailChangeConfirmForm: FC<Props> = ({
+  oldData,
   extraClass = [],
-  purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -56,22 +70,6 @@ const ResetCodeForm: FC<Props> = ({
     }
   }
 
-  const LoginModalSwitch = () => (
-    <ModalSwitch modalId="loginModal">
-      {(open: any) => (
-        <Button
-          type="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({ zh_hant: '上一步', zh_hans: '上一步', lang })}
-        </Button>
-      )}
-    </ModalSwitch>
-  )
-
   const BaseForm = ({
     values,
     errors,
@@ -86,14 +84,14 @@ const ResetCodeForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: '請輸入你的註冊電子信箱',
-      zh_hans: '请输入你的注册邮箱',
+      zh_hant: '請輸入新電子信箱',
+      zh_hans: '请输入新邮箱',
       lang
     })
 
     const codePlaceholder = translate({
-      zh_hant: '驗證碼',
-      zh_hans: '验证码',
+      zh_hant: '請輸入驗證碼',
+      zh_hans: '请输入验证码',
       lang
     })
 
@@ -119,7 +117,7 @@ const ResetCodeForm: FC<Props> = ({
               <Form.SendCodeButton
                 email={values.email}
                 lang={lang}
-                type="password_reset"
+                type="email_reset"
               />
             }
             values={values}
@@ -135,9 +133,8 @@ const ResetCodeForm: FC<Props> = ({
               style={{ width: 80 }}
               disabled={isSubmitting}
             >
-              {translate({ zh_hant: '下一步', zh_hans: '下一步', lang })}
+              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
             </Button>
-            {purpose === 'modal' && <LoginModalSwitch />}
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -147,7 +144,7 @@ const ResetCodeForm: FC<Props> = ({
 
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
-      email: defaultEmail,
+      email: '',
       code: ''
     }),
 
@@ -163,18 +160,31 @@ const ResetCodeForm: FC<Props> = ({
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
       const { email, code } = values
-      const { submitAction } = props
-      if (!submitAction) {
+      const { preSubmitAction, submitAction } = props
+      if (!preSubmitAction || !submitAction) {
         return undefined
       }
 
-      submitAction({
-        variables: { input: { email, type: 'password_reset', code } }
+      preSubmitAction({
+        variables: { input: { email, type: 'email_reset', code } }
       })
         .then(({ data }: any) => {
           const { confirmVerificationCode } = data
-          if (submitCallback && confirmVerificationCode) {
-            submitCallback({ email, codeId: confirmVerificationCode })
+          const params = {
+            variables: {
+              input: {
+                oldEmail: oldData.email,
+                oldEmailCodeId: oldData.codeId,
+                newEmail: email,
+                newEmailCodeId: confirmVerificationCode
+              }
+            }
+          }
+          return submitAction(params)
+        })
+        .then((result: any) => {
+          if (submitCallback) {
+            submitCallback()
           }
         })
         .catch((result: any) => {
@@ -189,11 +199,18 @@ const ResetCodeForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={MUTATION_CONFIRM_CODE}>
-        {confirmCode => <MainForm submitAction={confirmCode} />}
+        {confirm => (
+          <Mutation
+            mutation={MUTATION_CHANGE_EMAIL}
+            refetchQueries={[{ query: QUERY_VIEWER_EMAIL }]}
+          >
+            {update => (
+              <MainForm preSubmitAction={confirm} submitAction={update} />
+            )}
+          </Mutation>
+        )}
       </Mutation>
       <style jsx>{styles}</style>
     </>
   )
 }
-
-export default ResetCodeForm

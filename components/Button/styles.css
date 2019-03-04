@@ -73,6 +73,23 @@
     height: var(--font-size-sm);
   }
 }
+.size-xlarge {
+  padding: 0 var(--spacing-default);
+
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border-radius: 2.5rem;
+  font-size: var(--font-size-md);
+
+  &.outline {
+    line-height: calc(2.5rem - 4px);
+  }
+  & :global(svg),
+  & :global(img) {
+    width: var(--font-size-sm);
+    height: var(--font-size-sm);
+  }
+}
 .block {
   width: 100%;
 }

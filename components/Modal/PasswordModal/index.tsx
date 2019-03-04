@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
-import { Form } from '~/components/Form'
+import {
+  PasswordChangeConfirmForm,
+  PasswordChangeRequestForm
+} from '~/components/Form/PasswordChangeForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
@@ -17,37 +20,51 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.ResetModal close={close} />
+ *   <Modal.PasswordModal purpose={'forget'} close={close} />
  * ```
  *
  */
 
 interface Props {
   close: () => {}
+  purpose: 'forget' | 'change'
 }
 
-const ResetModal: FC<Props> = ({ close }) => {
+const PasswordModal: FC<Props> = ({ close, purpose }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState('request')
 
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      title: translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang }),
+      title:
+        purpose === 'forget'
+          ? translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })
+          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
       prev: 'login',
       next: 'reset'
     },
     reset: {
-      title: translate({ zh_hant: '重置密碼', zh_hans: '重置密码', lang }),
+      title:
+        purpose === 'forget'
+          ? translate({ zh_hant: '重置密碼', zh_hans: '重置密码', lang })
+          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
       prev: 'request',
       next: 'complete'
     },
     complete: {
-      title: translate({
-        zh_hant: '密碼重置成功',
-        zh_hans: '密码重置成功',
-        lang
-      })
+      title:
+        purpose === 'forget'
+          ? translate({
+              zh_hant: '密碼重置成功',
+              zh_hans: '密码重置成功',
+              lang
+            })
+          : translate({
+              zh_hant: '密碼修改成功',
+              zh_hans: '密码修改成功',
+              lang
+            })
     }
   })
 
@@ -95,20 +112,28 @@ const ResetModal: FC<Props> = ({ close }) => {
     <>
       <div className="complete">
         <div className="message">
-          {translate({
-            zh_hant: '密碼重置成功',
-            zh_hans: '密码重置成功',
-            lang
-          })}
+          {purpose === 'forget'
+            ? translate({
+                zh_hant: '密碼重置成功',
+                zh_hans: '密码重置成功',
+                lang
+              })
+            : translate({
+                zh_hant: '密碼修改成功',
+                zh_hans: '密码修改成功',
+                lang
+              })}
         </div>
-        <div className="hint">
-          {translate({
-            zh_hant: '請使用新的密碼重新登入',
-            zh_hans: '请使用新的密码重新登入',
-            lang
-          })}
-          。
-        </div>
+        {purpose === 'forget' && (
+          <div className="hint">
+            {translate({
+              zh_hant: '請使用新的密碼重新登入',
+              zh_hans: '请使用新的密码重新登入',
+              lang
+            })}
+            。
+          </div>
+        )}
       </div>
       <style jsx>{styles}</style>
     </>
@@ -120,16 +145,17 @@ const ResetModal: FC<Props> = ({ close }) => {
       <div className="container">
         <div className={contentClass}>
           {step === 'request' && (
-            <Form.ResetCodeForm
+            <PasswordChangeRequestForm
               defaultEmail={data.request.email}
-              purpose="modal"
+              purpose={purpose}
+              container="modal"
               submitCallback={requestCodeCallback}
             />
           )}
           {step === 'reset' && (
-            <Form.ResetForm
+            <PasswordChangeConfirmForm
               codeId={data.request.codeId}
-              purpose="modal"
+              container="modal"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
             />
@@ -142,4 +168,4 @@ const ResetModal: FC<Props> = ({ close }) => {
   )
 }
 
-export default ResetModal
+export default PasswordModal
