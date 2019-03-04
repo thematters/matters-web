@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 
-import { Modal } from '~/components/Modal'
+import LoginModal from '~/components/Modal/LoginModal'
+import ResetModal from '~/components/Modal/ResetModal'
+import SignUpModal from '~/components/Modal/SignUpModal'
+import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -13,7 +16,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.Anchor />
+ *   <ModalAnchor />
  * ```
  *
  */
@@ -40,13 +43,13 @@ const Anchor = () => {
       <div>
         <div id="modal-anchor" className="container" />
         <ModalInstance modalId="loginModal" title="login">
-          {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
+          {(props: ModalInstanceProps) => <LoginModal {...props} />}
         </ModalInstance>
         <ModalInstance modalId="signUpModal">
-          {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
+          {(props: ModalInstanceProps) => <SignUpModal {...props} />}
         </ModalInstance>
         <ModalInstance modalId="resetModal">
-          {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
+          {(props: ModalInstanceProps) => <ResetModal {...props} />}
         </ModalInstance>
         <ModalInstance
           modalId="termModal"
@@ -55,7 +58,7 @@ const Anchor = () => {
           defaultCloseOnOutsideClick={false}
           enableCloseButton={false}
         >
-          {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
+          {(props: ModalInstanceProps) => <TermModal {...props} />}
         </ModalInstance>
         {isAuth && disagreedToS && <OpenedTermModal />}
       </div>

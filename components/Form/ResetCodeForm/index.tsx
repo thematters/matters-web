@@ -5,7 +5,8 @@ import { FC, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import SendCodeButton from '~/components/Form/Button/SendCode'
+import Input from '~/components/Form/Input'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
@@ -100,7 +101,7 @@ const ResetCodeForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
+          <Input
             type="text"
             field="email"
             placeholder={emailPlaceholder}
@@ -110,13 +111,13 @@ const ResetCodeForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="text"
             field="code"
             placeholder={codePlaceholder}
             style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
             floatElement={
-              <Form.SendCodeButton
+              <SendCodeButton
                 email={values.email}
                 lang={lang}
                 type="password_reset"

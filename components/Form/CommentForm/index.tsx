@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import Textarea from '~/components/Form/Textarea'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
@@ -57,7 +57,7 @@ const InnerForm = ({
   const { lang } = useContext(LanguageContext)
   return (
     <form onSubmit={handleSubmit}>
-      <Form.Textarea
+      <Textarea
         field="content"
         placeholder={translate({
           zh_hant: '發表你的評論…',

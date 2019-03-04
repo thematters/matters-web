@@ -9,7 +9,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.Input
+ *   <Input
  *     className={[]}
  *     type="text"
  *     field="email"

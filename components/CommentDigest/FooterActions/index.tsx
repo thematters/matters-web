@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { DateTime } from '~/components/DateTime'
-import { Form } from '~/components/Form'
+import CommentForm from '~/components/Form/CommentForm'
 import { Icon } from '~/components/Icon'
 
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
@@ -92,7 +92,7 @@ const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
 
       {showForm && (
         <section className="comment-form">
-          <Form.CommentForm
+          <CommentForm
             articleId={comment.article.id}
             articleMediaHash={comment.article.mediaHash || ''}
             replyToId={comment.id}

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { FC, useContext } from 'react'
 
-import { Form } from '~/components/Form'
+import LoginForm from '~/components/Form/LoginForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -17,7 +17,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.LoginModal close={close} />
+ *   <LoginModal close={close} />
  * ```
  *
  */
@@ -78,7 +78,7 @@ const LoginModal: FC<Props> = ({ close }) => {
     <>
       <div className="container">
         <div className={contentClass}>
-          <Form.LoginForm purpose="modal" submitCallback={close} />
+          <LoginForm purpose="modal" submitCallback={close} />
           <hr className="divider" />
           <Footer />
         </div>

@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { ProfileAvatarUploader } from '~/components/FileUploader'
-import { Form } from '~/components/Form'
+import Textarea from '~/components/Form/Textarea'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 
@@ -80,7 +80,7 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
     return (
       <>
         <form className="form" onSubmit={handleSubmit}>
-          <Form.Textarea
+          <Textarea
             field="description"
             placeholder={placeholder}
             values={values}

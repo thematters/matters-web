@@ -5,7 +5,7 @@ import { GlobalHeader } from '~/components/GlobalHeader'
 import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
 import { MessageHolder } from '~/components/MessageHolder'
-import { Modal } from '~/components/Modal'
+import ModalAnchor from '~/components/Modal/Anchor'
 import { ToastHolder } from '~/components/ToastHolder'
 import { ViewerContext, ViewerUserFragment } from '~/components/Viewer'
 
@@ -42,7 +42,7 @@ export const Layout: React.FC<LayoutProps> & {
 
         {children}
 
-        <Modal.Anchor />
+        <ModalAnchor />
         <ToastHolder />
         <MessageHolder />
       </LanguageProvider>

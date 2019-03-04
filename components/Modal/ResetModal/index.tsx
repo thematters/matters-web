@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
-import { Form } from '~/components/Form'
+import ResetCodeForm from '~/components/Form/ResetCodeForm'
+import ResetForm from '~/components/Form/ResetForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
@@ -17,7 +18,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.ResetModal close={close} />
+ *   <ResetModal close={close} />
  * ```
  *
  */
@@ -120,14 +121,14 @@ const ResetModal: FC<Props> = ({ close }) => {
       <div className="container">
         <div className={contentClass}>
           {step === 'request' && (
-            <Form.ResetCodeForm
+            <ResetCodeForm
               defaultEmail={data.request.email}
               purpose="modal"
               submitCallback={requestCodeCallback}
             />
           )}
           {step === 'reset' && (
-            <Form.ResetForm
+            <ResetForm
               codeId={data.request.codeId}
               purpose="modal"
               backPreviousStep={backPreviousStep}

@@ -9,7 +9,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.Textarea
+ *   <Textarea
  *     className={[]}
  *     field="description"
  *     placeholder="description"

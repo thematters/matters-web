@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Form } from '~/components/Form'
+import CommentForm from '~/components/Form/CommentForm'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
@@ -90,7 +90,7 @@ const DescendantComment = ({
 
       <div className="content-wrap">
         {edit && (
-          <Form.CommentForm
+          <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
             articleMediaHash={comment.article.mediaHash || ''}
@@ -139,7 +139,7 @@ const FeedDigest = ({
 
       <div className="content-wrap">
         {edit && (
-          <Form.CommentForm
+          <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
             articleMediaHash={comment.article.mediaHash || ''}

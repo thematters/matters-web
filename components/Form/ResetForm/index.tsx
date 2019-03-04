@@ -5,7 +5,7 @@ import { FC, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import Input from '~/components/Form/Input'
 import { LanguageContext } from '~/components/Language'
 
 import { isValidPassword, translate } from '~/common/utils'
@@ -96,7 +96,7 @@ const ResetForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
+          <Input
             type="password"
             field="password"
             placeholder={passwordPlaceholder}
@@ -106,7 +106,7 @@ const ResetForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="password"
             field="comparedPassword"
             placeholder={comparedPlaceholder}

@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { Form } from '~/components/Form'
+import ResetCodeForm from '~/components/Form/ResetCodeForm'
+import ResetForm from '~/components/Form/ResetForm'
 import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
@@ -84,7 +85,7 @@ const Forget = () => {
       <main className="l-row row">
         <article className={containerClass}>
           {step === 'request' && (
-            <Form.ResetCodeForm
+            <ResetCodeForm
               defaultEmail={data.request.email}
               extraClass={formClass}
               purpose="page"
@@ -92,7 +93,7 @@ const Forget = () => {
             />
           )}
           {step === 'reset' && (
-            <Form.ResetForm
+            <ResetForm
               extraClass={formClass}
               codeId={data.request.codeId}
               purpose="page"

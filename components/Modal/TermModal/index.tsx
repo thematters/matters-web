@@ -18,7 +18,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.TermModal close={close} />
+ *   <TermModal close={close} />
  * ```
  */
 

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import { Modal } from '~/components/Modal'
+import ModalContainer from '~/components/Modal/Container'
 
 const emptyModalId = ''
 
@@ -123,7 +123,7 @@ export const ModalInstance = ({
       {({ close, openedModalId }) => {
         if (children && node && openedModalId === modalId) {
           return ReactDOM.createPortal(
-            <Modal.Container
+            <ModalContainer
               title={title}
               close={close}
               defaultCloseOnEsc={defaultCloseOnEsc}
@@ -131,7 +131,7 @@ export const ModalInstance = ({
               enableCloseButton={enableCloseButton}
             >
               {(props: any) => <>{children(props)}</>}
-            </Modal.Container>,
+            </ModalContainer>,
             node
           )
         }

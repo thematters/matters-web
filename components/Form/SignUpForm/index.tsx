@@ -6,7 +6,9 @@ import { FC, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import SendCodeButton from '~/components/Form/Button/SendCode'
+import CheckBox from '~/components/Form/CheckBox'
+import Input from '~/components/Form/Input'
 import { LanguageContext } from '~/components/Language'
 
 import { PATHS } from '~/common/enums'
@@ -25,7 +27,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.SignUpForm
+ *   <SignUpForm
  *     defaultEmail={''}
  *     extraClass={[]}
  *     purpose="modal"
@@ -206,7 +208,7 @@ const SignUpForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
+          <Input
             type="text"
             field="email"
             placeholder={emailPlaceholder}
@@ -216,13 +218,13 @@ const SignUpForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="text"
             field="code"
             placeholder={codePlaceholder}
             style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
             floatElement={
-              <Form.SendCodeButton
+              <SendCodeButton
                 email={values.email}
                 lang={lang}
                 type="register"
@@ -234,7 +236,7 @@ const SignUpForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="text"
             field="displayName"
             placeholder={displayNamePlaceholder}
@@ -245,7 +247,7 @@ const SignUpForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="password"
             field="password"
             placeholder={passwordPlaceholder}
@@ -256,7 +258,7 @@ const SignUpForm: FC<Props> = ({
             handleBlur={handleBlur}
             handleChange={handleChange}
           />
-          <Form.Input
+          <Input
             type="password"
             field="comparedPassword"
             placeholder={comparedPlaceholder}
@@ -268,7 +270,7 @@ const SignUpForm: FC<Props> = ({
             handleChange={handleChange}
           />
           <div className="tos">
-            <Form.CheckBox
+            <CheckBox
               field="tos"
               values={values}
               errors={errors}
@@ -284,7 +286,7 @@ const SignUpForm: FC<Props> = ({
                   </a>
                 </Link>
               </span>
-            </Form.CheckBox>
+            </CheckBox>
           </div>
           <div className="buttons">
             <Button

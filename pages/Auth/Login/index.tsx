@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Router from 'next/router'
 
-import { Form } from '~/components/Form'
+import LoginForm from '~/components/Form/LoginForm'
 
 import styles from './styles.css'
 
@@ -25,7 +25,7 @@ const Login = () => {
     <>
       <main className="l-row row">
         <article className={containerClass}>
-          <Form.LoginForm
+          <LoginForm
             extraClass={formClass}
             purpose="page"
             submitCallback={redirect}

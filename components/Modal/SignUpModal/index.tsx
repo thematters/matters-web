@@ -3,7 +3,8 @@ import Router from 'next/router'
 import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import SignUpForm from '~/components/Form/SignUpForm'
+import SignUpProfileForm from '~/components/Form/SignUpProfileForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -22,7 +23,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.SignUpModal close={close} />
+ *   <SignUpModal close={close} />
  * ```
  *
  */
@@ -197,16 +198,13 @@ const SignUpModal: FC<Props> = ({
         <div className={contentClass}>
           {step === 'signUp' && (
             <>
-              <Form.SignUpForm
-                purpose="modal"
-                submitCallback={signUpCallback}
-              />
+              <SignUpForm purpose="modal" submitCallback={signUpCallback} />
               <hr className="divider" />
               <Footer />
             </>
           )}
           {step === 'profile' && (
-            <Form.SignUpProfileForm
+            <SignUpProfileForm
               purpose="modal"
               submitCallback={signUpProfileCallback}
             />

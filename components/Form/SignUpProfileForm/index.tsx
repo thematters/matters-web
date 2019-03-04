@@ -6,7 +6,7 @@ import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { SignUpAvatarUploader } from '~/components/FileUploader'
-import { Form } from '~/components/Form'
+import Textarea from '~/components/Form/Textarea'
 import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
@@ -19,7 +19,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.SignUpProfileForm
+ *   <SignUpProfileForm
  *     extraClass={[]}
  *     purpose="modal"
  *     submitCallback={()=> {}}
@@ -87,7 +87,7 @@ const SignUpProfileForm: FC<Props> = ({
             lang={lang}
             uploadCallback={setFieldValue}
           />
-          <Form.Textarea
+          <Textarea
             field="description"
             placeholder={descriptionPlaceholder}
             values={values}
