@@ -14,7 +14,7 @@ import { UpdateDraftVariables } from './__generated__/UpdateDraft'
 export const UPDATE_DRAFT = gql`
   mutation UpdateDraft(
     $id: ID!
-    $title: String!
+    $title: String
     $content: String
     $coverAssetId: ID
   ) {
@@ -27,6 +27,8 @@ export const UPDATE_DRAFT = gql`
       }
     ) {
       id
+      title
+      content
       slug
     }
   }
@@ -90,12 +92,11 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               style={{
                 border: 0,
                 borderBottom: '.05rem solid rgba(0, 0, 0, 0.16)',
-                padding: '4rem 0 1.6rem 0',
-                fontSize: '2.4rem',
+                paddingBottom: '1rem',
+                fontSize: 24,
                 color: '#333333',
                 fontWeight: 600,
-                width: '100%',
-                marginBottom: '2.4rem'
+                width: '100%'
               }}
               value={
                 title &&
@@ -118,7 +119,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
             draft={draft}
             upload={upload}
             submit={(newDraft: UpdateDraftVariables) => {
-              updateDraft({ variables: newDraft })
+              updateDraft({ variables: { id: draft.id, ...newDraft } })
             }}
           />
         </>

@@ -24,14 +24,15 @@ export default {
   },
   contentBox: {
     pc: {
-      padding: '6.4rem 0 7.8rem'
+      padding: '24px 0 64px',
+      fontSize: 16
     },
     mobile: {
       padding: '0 2rem 0',
       width: '100%',
       boxSizing: 'border-box',
       overflowX: 'hidden'
-    }
+    } as React.CSSProperties
   },
   rightPaddingTop: {
     paddingTop: '3.2rem'
@@ -49,8 +50,8 @@ export default {
   tools: {
     box: {
       position: 'absolute',
-      top: '10.8rem',
-      left: '0.9rem',
+      top: '12rem',
+      left: '1rem',
       width: '3.3rem',
       height: '3.3rem',
       borderRadius: '50%',
@@ -59,8 +60,8 @@ export default {
     } as React.CSSProperties,
     add: {
       position: 'absolute',
-      width: '3.3rem',
-      height: '3.3rem',
+      width: '33px',
+      height: '33px',
       cursor: 'pointer'
     } as React.CSSProperties,
     children: {

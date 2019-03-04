@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 
-// import 'tailwindcss/dist/utilities.min.css'
+import articleStyle from '~/common/styles/utils/content.article.css'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
@@ -58,23 +58,20 @@ export class Editor extends React.Component<Props, State> {
   public quill: Quill | null
   public ReactQuill: typeof ReactQuill | undefined
 
-  public state = {
-    device: 4,
-    content: '',
-    showEditor: false,
-    editorChoose: -1,
-    showPublish: false,
-    title: '',
-    upstream: {
-      id: null,
-      title: ''
-    },
-    coverAssetId: '',
-    draftId: '',
-    tags: []
-  }
   constructor(props: Props) {
     super(props)
+
+    this.state = {
+      device: 4,
+      content: this.props.draft.content || '',
+      showEditor: false,
+      editorChoose: -1,
+      showPublish: false,
+      title: '',
+      coverAssetId: '',
+      draftId: '',
+      tags: []
+    }
 
     this.ReactQuillRef = null // ReactQuill component
     this.quill = null // quill editor
@@ -95,12 +92,15 @@ export class Editor extends React.Component<Props, State> {
     // this.setState({
     //   upstream
     // })
+    // setInterval(() => {
+    //   this.onSubmit()
+    // }, 2 * 1000)
   }
 
   public onSubmit() {
-    if (!this.state.title || !this.state.content) {
-      return false
-    }
+    // if (!this.state.title || !this.state.content) {
+    //   return false
+    // }
     // const state = this.state
     // const form = {
     //   id: state.draftId ? state.draftId : null,
@@ -110,17 +110,8 @@ export class Editor extends React.Component<Props, State> {
     //   coverAssetId: state.coverAssetId,
     //   tags: state.tags && state.tags.length ? state.tags : null
     // }
-    console.log(`this.props
-      .putDraftMutation({
-        variables: {
-          input: form
-        }
-      })
-      .then(data => {
-        this.setState({
-          draftId: data.data && data.data.putDraft ? data.data.putDraft.id : ''
-        })
-      })`)
+    const { submit } = this.props
+    submit({ content: this.state.content })
   }
 
   // 显示编辑器工具
@@ -214,21 +205,21 @@ export class Editor extends React.Component<Props, State> {
   }
 
   // 暂存草稿
-  public onSaveDraft() {
-    this.onSubmit()
-  }
+  // public onSaveDraft() {
+  //   this.onSubmit()
+  // }
 
   // 更新 tags
-  public updateTags(tagsArray: string[]) {
-    this.setState(
-      {
-        tags: tagsArray
-      },
-      () => {
-        this.onSubmit()
-      }
-    )
-  }
+  // public updateTags(tagsArray: string[]) {
+  //   this.setState(
+  //     {
+  //       tags: tagsArray
+  //     },
+  //     () => {
+  //       this.onSubmit()
+  //     }
+  //   )
+  // }
 
   // // 更新 上游文章
   // public updateUpstream(el) {
@@ -266,7 +257,7 @@ export class Editor extends React.Component<Props, State> {
       return
     }
     const bounds = editor.getBounds(range)
-    this.setMediaBtnPosition(bounds.top + 108)
+    this.setMediaBtnPosition(bounds.top + 150)
   }
   // public quillBlur() {
   //   // console.log('quillBlur: ', previousRange, source, editor)
@@ -650,6 +641,9 @@ export class Editor extends React.Component<Props, State> {
         </style>
         <style global jsx>
           {quillStyle}
+        </style>
+        <style global jsx>
+          {articleStyle}
         </style>
       </div>
     )
