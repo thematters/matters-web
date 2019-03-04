@@ -30,3 +30,17 @@
   cursor: pointer;
   opacity: 0;
 }
+
+.error {
+  position: absolute;
+  bottom: -1.5rem;
+
+  color: var(--color-red);
+  font-size: var(--font-size-xs);
+
+  @media(--sm-down) {
+    left: 0;
+    bottom: -1.3rem;
+    width: 8rem;
+  }
+}

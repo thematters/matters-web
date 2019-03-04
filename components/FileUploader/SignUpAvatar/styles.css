@@ -6,7 +6,12 @@
 
 .upload {
   flex-grow: 1;
+  padding-top: var(--spacing-tight);
   padding-left: var(--spacing-tight);
+
+  & > .hint {
+    color: var(--color-grey);
+  }
 }
 
 .wrapper {
@@ -29,8 +34,11 @@
     font-size: 0;
     opacity: 0;
   }
+}
 
-  & > .hint {
-    color: var(--color-grey);
-  }
+.error {
+  color: var(--color-red);
+  font-size: var(--font-size-xs);
+  height: 1rem;
+  min-height: 1rem;
 }
