@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import styles from './styles.css'
 
-type ButtonSize = 'small' | 'default' | 'large'
+type ButtonSize = 'small' | 'default' | 'large' | 'xlarge'
 type ButtonSpacing = 'none' | 'xtight' | 'tight' | 'default' | 'loose'
 type ButtonHTMLType = 'submit' | 'reset' | 'button'
 type ButtonShape = 'circle'

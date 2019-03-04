@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { Head } from '~/components/Head'
+import { LanguageProvider } from '~/components/Language'
 import { MessageHolder } from '~/components/MessageHolder'
 import { Modal } from '~/components/Modal'
 import { ToastHolder } from '~/components/ToastHolder'
@@ -34,13 +35,17 @@ export const Layout: React.FC<LayoutProps> & {
 } = ({ children, loading, user, error }) =>
   loading ? null : (
     <ViewerContext.Provider value={user || {}}>
-      <Head />
-      <GlobalHeader user={user} />
-      <ToastHolder />
-      <MessageHolder />
-      <Modal.Anchor />
+      <LanguageProvider>
+        <Head />
 
-      {children}
+        <GlobalHeader user={user} />
+
+        {children}
+
+        <Modal.Anchor />
+        <ToastHolder />
+        <MessageHolder />
+      </LanguageProvider>
     </ViewerContext.Provider>
   )
 

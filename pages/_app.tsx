@@ -8,7 +8,6 @@ import { ApolloProvider, Query, QueryResult } from 'react-apollo'
 import {
   AnalyticsProvider,
   GlobalStyles,
-  LanguageProvider,
   Layout,
   ModalProvider
 } from '~/components'
@@ -45,28 +44,26 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
     return (
       <Container>
         <AnalyticsProvider>
-          <LanguageProvider>
-            <ModalProvider>
-              <ApolloProvider client={apollo}>
-                <GlobalStyles />
-                <Query query={this.query}>
-                  {({
-                    data,
-                    loading,
-                    error
-                  }: QueryResult & { data: RootQuery }) => (
-                    <Layout
-                      loading={loading}
-                      user={data && data.viewer}
-                      error={error}
-                    >
-                      <Component {...pageProps} />
-                    </Layout>
-                  )}
-                </Query>
-              </ApolloProvider>
-            </ModalProvider>
-          </LanguageProvider>
+          <ModalProvider>
+            <ApolloProvider client={apollo}>
+              <GlobalStyles />
+              <Query query={this.query}>
+                {({
+                  data,
+                  loading,
+                  error
+                }: QueryResult & { data: RootQuery }) => (
+                  <Layout
+                    loading={loading}
+                    user={data && data.viewer}
+                    error={error}
+                  >
+                    <Component {...pageProps} />
+                  </Layout>
+                )}
+              </Query>
+            </ApolloProvider>
+          </ModalProvider>
         </AnalyticsProvider>
       </Container>
     )

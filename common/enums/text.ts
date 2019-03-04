@@ -25,7 +25,9 @@ export const TEXT: { [key: string]: any } = {
     termHint: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
     disagree: '我不同意',
     agreeAndContinue: '同意並繼續',
-    untitle: '未命名'
+    untitle: '未命名',
+    changeEmail: '修改電子信箱',
+    changeUserName: '修改 Matters ID'
   },
 
   zh_hans: {
@@ -54,6 +56,8 @@ export const TEXT: { [key: string]: any } = {
     termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
     disagree: '我不同意',
     agreeAndContinue: '同意并继续',
-    untitle: '未命名'
+    untitle: '未命名',
+    changeEmail: '修改邮箱',
+    changeUserName: '修改 Matters ID'
   }
 }

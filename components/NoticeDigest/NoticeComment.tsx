@@ -5,7 +5,11 @@ import { toPath } from '~/common/utils'
 
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
 
-const NoticeComment = ({ comment }: { comment: NoticeCommentType }) => {
+const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
+  if (!comment) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: comment.article.author.userName || '',

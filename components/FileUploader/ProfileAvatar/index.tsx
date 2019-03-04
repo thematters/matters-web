@@ -1,12 +1,12 @@
 import gql from 'graphql-tag'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Avatar } from '~/components/Avatar'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
-import { ACCEPTED_UPLOAD_TYPES } from '~/common/enums'
+import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
 import ICON_CAMERA from '~/static/icons/camera-green.svg?sprite'
 
 import styles from './styles.css'
@@ -48,6 +48,8 @@ const MUTATION_UPDATE_USER_INFO = gql`
 export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
   const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
 
+  const [error, setError] = useState<'size' | undefined>(undefined)
+
   const handleChange = (event: any, upload: any, update: any) => {
     event.stopPropagation()
 
@@ -56,6 +58,12 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
     }
 
     const file = event.target.files[0]
+
+    if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
+      setError('size')
+      return undefined
+    }
+
     upload({ variables: { input: { file, type: 'avatar' } } })
       .then(({ data }: any) => {
         const {
@@ -67,7 +75,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
         }
       })
       .then((result: any) => {
-        // TODO: Handle success
+        setError(undefined)
       })
       .catch((result: any) => {
         // TODO: Handler error
@@ -103,6 +111,14 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
             multiple={false}
             onChange={(event: any) => handleChange(event, upload, update)}
           />
+          <div className="error">
+            {error === 'size' && (
+              <Translate
+                zh_hant="上傳檔案超過 1 MB"
+                zh_hans="上传档案超过 1 MB"
+              />
+            )}
+          </div>
         </div>
       </section>
       <style jsx>{styles}</style>
