@@ -50,7 +50,7 @@ export default () => {
         }
 
         const connectionPath = 'viewer.drafts'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {

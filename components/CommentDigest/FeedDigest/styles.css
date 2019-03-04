@@ -3,7 +3,7 @@
 }
 
 .header {
-  @mixin flex-center-space-between;
+  @mixin flex-start-space-between;
 
   & .avatars {
     display: flex;
@@ -11,6 +11,8 @@
   }
 
   & .reply-to {
+    flex-shrink: 0;
+
     font-size: var(--font-size-sm);
     margin: 0 var(--spacing-xx-tight);
   }
@@ -26,11 +28,6 @@
 
   font-size: var(--font-size-sm); /* fallback */
   font-size: calc(var(--font-size-sm) + 1px);
-
-  & .banned-content {
-    margin-top: var(--spacing-x-tight);
-    color: var(--color-grey);
-  }
 }
 
 .descendant-comments {
@@ -45,4 +42,11 @@
   & .content-wrap {
     padding-left: var(--spacing-loose);
   }
+}
+
+.cancel-button {
+  padding: 0 var(--spacing-tight);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-matters-green);
 }

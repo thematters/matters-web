@@ -2,6 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  & :global(.avatar) {
+    flex-shrink: 0;
+  }
 }
 
 .name {

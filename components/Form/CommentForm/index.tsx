@@ -25,16 +25,22 @@ export const PUT_COMMENT = gql`
 `
 
 interface CommentFormProps {
+  defaultContent?: string | null
   articleMediaHash: string
   articleId: string
   commentId?: string
   replyToId?: string
   parentId?: string
   submitCallback?: () => void
+  extraButton?: React.ReactNode
 }
 
 interface FormValues {
   content: string
+}
+
+interface InnerFormProps {
+  extraButton?: React.ReactNode
 }
 
 const InnerForm = ({
@@ -45,10 +51,10 @@ const InnerForm = ({
   handleBlur,
   handleChange,
   handleSubmit,
-  isValid
-}: FormikProps<FormValues>) => {
+  isValid,
+  extraButton
+}: InnerFormProps & FormikProps<FormValues>) => {
   const { lang } = useContext(LanguageContext)
-
   return (
     <form onSubmit={handleSubmit}>
       <Form.Textarea
@@ -65,6 +71,7 @@ const InnerForm = ({
         handleChange={handleChange}
       />
       <div className="buttons">
+        {extraButton && extraButton}
         <Button
           type="submit"
           bgColor="green"
@@ -81,18 +88,23 @@ const InnerForm = ({
 }
 
 const CommentForm = ({
+  defaultContent,
   articleMediaHash,
   commentId,
   parentId,
   replyToId,
+  articleId,
   submitCallback,
-  articleId
+  extraButton
 }: CommentFormProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const WrappedForm = withFormik<{ putComment: any }, FormValues>({
+  const WrappedForm = withFormik<
+    { putComment: any } & Pick<CommentFormProps, 'extraButton'>,
+    FormValues
+  >({
     mapPropsToValues: () => ({
-      content: ''
+      content: defaultContent || ''
     }),
 
     validate: ({ content }) => {
@@ -170,7 +182,9 @@ const CommentForm = ({
           : []
       }
     >
-      {putComment => <WrappedForm putComment={putComment} />}
+      {putComment => (
+        <WrappedForm putComment={putComment} extraButton={extraButton} />
+      )}
     </Mutation>
   )
 }

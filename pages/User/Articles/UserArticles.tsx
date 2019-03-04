@@ -65,7 +65,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         const connectionPath = 'user.articles'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {

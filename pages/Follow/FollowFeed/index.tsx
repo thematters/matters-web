@@ -63,7 +63,7 @@ export default () => {
         }
 
         const connectionPath = 'viewer.recommendation.followeeArticles'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
