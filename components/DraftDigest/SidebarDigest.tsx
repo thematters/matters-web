@@ -1,3 +1,4 @@
+import { PureQueryOptions } from 'apollo-client'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -34,7 +35,13 @@ const IconDotDivider = () => (
   />
 )
 
-const SidebarDigest = ({ draft }: { draft: SidebarDigest }) => {
+const SidebarDigest = ({
+  draft,
+  refetchQueries
+}: {
+  draft: SidebarDigest
+  refetchQueries?: PureQueryOptions[]
+}) => {
   const { id, title, publishState, createdAt, slug, wordCount } = draft
   const isPending = publishState === 'pending'
   const isError = publishState === 'error'
@@ -78,7 +85,7 @@ const SidebarDigest = ({ draft }: { draft: SidebarDigest }) => {
                 zh_hant={`${wordCount} 字`}
               />
               <IconDotDivider />
-              <DeleteButton id={id} />
+              <DeleteButton id={id} refetchQueries={refetchQueries} />
             </footer>
           )}
         </div>

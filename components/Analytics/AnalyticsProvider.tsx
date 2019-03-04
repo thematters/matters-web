@@ -13,9 +13,8 @@ export const AnalyticsProvider: FC = ({ children }) => {
     /* tslint:disable */
     // @ts-ignore
     !(function() {
-      // @ts-ignore
-      const analytics = (window.analytics = window.analytics || [])
-      if (!analytics.initialize) {
+      var analytics = (window.analytics = window.analytics || [])
+      if (!analytics.initialize)
         if (analytics.invoked) {
           window.console &&
             console.error &&
@@ -40,36 +39,40 @@ export const AnalyticsProvider: FC = ({ children }) => {
             'off',
             'on'
           ]
-          analytics.factory = function(t: any) {
+          /* tslint:disable */
+          // @ts-ignore
+          analytics.factory = function(t) {
             return function() {
-              let e = Array.prototype.slice.call(arguments)
+              var e = Array.prototype.slice.call(arguments)
               e.unshift(t)
               analytics.push(e)
               return analytics
             }
           }
-          for (let t = 0; t < analytics.methods.length; t++) {
-            let e = analytics.methods[t]
+          for (var t = 0; t < analytics.methods.length; t++) {
+            var e = analytics.methods[t]
             analytics[e] = analytics.factory(e)
           }
+          /* tslint:disable */
           // @ts-ignore
-          analytics.load = function(t: string, e: any) {
-            let n = document.createElement('script')
+          analytics.load = function(t, e) {
+            var n = document.createElement('script')
             n.type = 'text/javascript'
             n.async = !0
             n.src =
               'https://cdn.segment.com/analytics.js/v1/' +
               t +
               '/analytics.min.js'
-            let a = document.getElementsByTagName('script')[0]
+            var a = document.getElementsByTagName('script')[0]
+            /* tslint:disable */
             // @ts-ignore
             a.parentNode.insertBefore(n, a)
             analytics._loadOptions = e
           }
           analytics.SNIPPET_VERSION = '4.1.0'
-          analytics.load(SEGMENT_KEY)
+          analytics.load(SEGMENT_KEY || '3gE20MjzN9qncFqlKV0pDvNO7Cp2gWU3')
+          analytics.page()
         }
-      }
     })()
   })
 

@@ -9,6 +9,7 @@
   color: var(--color-grey);
   font-size: 12px;
   margin-top: 16px;
+  line-height: 1.67;
 }
 
 hr {
@@ -17,6 +18,10 @@ hr {
   margin-bottom: 1.5rem;
 }
 
-input {
+.tag-search:hover {
   background-color: var(--color-bg-green);
+}
+
+.tag-count {
+  color: var(--color-grey);
 }

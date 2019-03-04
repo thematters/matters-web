@@ -1,8 +1,12 @@
 import gql from 'graphql-tag'
-import { SFC, useEffect, useState } from 'react'
+import { SFC, useContext, useEffect, useState } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { Placeholder } from '~/components'
+import { LanguageContext, Placeholder } from '~/components'
+import { fragments as EditorFragments } from '~/components/Editor/fragments'
+
+import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from './__generated__/DraftDetailQuery'
 import { UpdateDraftVariables } from './__generated__/UpdateDraft'
@@ -10,8 +14,8 @@ import { UpdateDraftVariables } from './__generated__/UpdateDraft'
 export const UPDATE_DRAFT = gql`
   mutation UpdateDraft(
     $id: ID!
-    $title: String!
-    $content: String!
+    $title: String
+    $content: String
     $coverAssetId: ID
   ) {
     putDraft(
@@ -23,14 +27,27 @@ export const UPDATE_DRAFT = gql`
       }
     ) {
       id
+      title
+      content
       slug
     }
   }
 `
 
-const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> = ({
-  draft
-}) => {
+const fragments = {
+  draft: gql`
+    fragment DraftContentDraft on Draft {
+      id
+      title
+      ...EditorDraft
+    }
+    ${EditorFragments.draft}
+  `
+}
+
+const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
+  fragments: typeof fragments
+} = ({ draft }) => {
   // return placeholder on SSR
   const [Editor, setEditor] = useState(
     () =>
@@ -49,6 +66,11 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> = ({
     }
   })
 
+  // use state for controling title
+  const [title, setTitle] = useState(draft.title)
+
+  const { lang } = useContext(LanguageContext)
+
   const upload = (uploadata: any) => {
     console.log('upload', uploadata)
     return Promise.resolve({
@@ -59,16 +81,53 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> = ({
   return (
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
-        <Editor
-          draft={draft}
-          upload={upload}
-          submit={(newDraft: UpdateDraftVariables) => {
-            updateDraft({ variables: newDraft })
-          }}
-        />
+        <>
+          <div>
+            <input
+              placeholder={translate({
+                zh_hant: '請輸入標題…',
+                zh_hans: '请输入标题...',
+                lang
+              })}
+              style={{
+                border: 0,
+                borderBottom: '.05rem solid rgba(0, 0, 0, 0.16)',
+                paddingBottom: '1rem',
+                fontSize: 24,
+                color: '#333333',
+                fontWeight: 600,
+                width: '100%'
+              }}
+              value={
+                title &&
+                title !==
+                  translate({
+                    zh_hant: TEXT.zh_hant.untitle,
+                    zh_hans: TEXT.zh_hans.untitle,
+                    lang
+                  })
+                  ? title
+                  : ''
+              }
+              onChange={e => {
+                setTitle(e.target.value)
+              }}
+              onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
+            />
+          </div>
+          <Editor
+            draft={draft}
+            upload={upload}
+            submit={(newDraft: UpdateDraftVariables) => {
+              updateDraft({ variables: { id: draft.id, ...newDraft } })
+            }}
+          />
+        </>
       )}
     </Mutation>
   )
 }
+
+DraftContent.fragments = fragments
 
 export default DraftContent

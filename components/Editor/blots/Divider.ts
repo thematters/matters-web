@@ -1,10 +1,10 @@
-import Quill from 'quill'
+import { Quill } from 'react-quill'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-// 自定义创建hr
-class Divider extends BlockEmbed {}
-Divider.blotName = 'divider'
-Divider.tagName = 'hr'
+// hr
+class DividerBlot extends BlockEmbed {}
+DividerBlot.blotName = 'divider'
+DividerBlot.tagName = 'hr'
 
-export default Divider
+export default DividerBlot

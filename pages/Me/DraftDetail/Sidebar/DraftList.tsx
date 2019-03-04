@@ -1,23 +1,20 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { DraftDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
-
-import COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
+import { DraftDigest, Spinner, Translate } from '~/components'
 
 import {
   MeDrafts,
   MeDrafts_viewer_drafts_edges
 } from './__generated__/MeDrafts'
-import styles from './styles.css'
+import Collapsable from './Collapsable'
 
 const ME_DRAFTS = gql`
   query MeDrafts {
     viewer {
       id
-      drafts(input: { first: 5 }) {
+      drafts(input: { first: 10 }) {
         edges {
           node {
             id
@@ -30,54 +27,29 @@ const ME_DRAFTS = gql`
   ${DraftDigest.Sidebar.fragments.draft}
 `
 
-const DraftList = () => {
-  const [collapsed, toggleCollapse] = useState(true)
+const DraftList = ({ currentId }: { currentId: string }) => (
+  <Collapsable title={<Translate zh_hans={'草稿'} zh_hant={'草稿'} />}>
+    <Query query={ME_DRAFTS}>
+      {({ data, loading }: QueryResult & { data: MeDrafts }) => {
+        const edges = _get(data, 'viewer.drafts.edges')
+        if (loading || !edges) {
+          return <Spinner />
+        }
 
-  return (
-    <>
-      <div
-        onClick={() => {
-          toggleCollapse(!collapsed)
-        }}
-        className={`sidebar-title-${collapsed ? 'collapsed' : 'expanded'}`}
-      >
-        <TextIcon
-          icon={
-            <Icon
-              id={COLLAPSE_BRANCH.id}
-              viewBox={COLLAPSE_BRANCH.viewBox}
-              style={{
-                width: 14,
-                height: 14,
-                transform: `rotate(${collapsed ? 180 : 0}deg)`
-              }}
+        return edges
+          .filter(
+            ({ node }: MeDrafts_viewer_drafts_edges) => node.id !== currentId
+          )
+          .map(({ node }: MeDrafts_viewer_drafts_edges, i: number) => (
+            <DraftDigest.Sidebar
+              key={i}
+              draft={node}
+              refetchQueries={[{ query: ME_DRAFTS }]}
             />
-          }
-          className={'sidebar-title'}
-          textPlacement={'left'}
-        >
-          <Translate zh_hans={'草稿'} zh_hant={'草稿'} />
-        </TextIcon>
-      </div>
-      <Query query={ME_DRAFTS}>
-        {({ data, loading }: QueryResult & { data: MeDrafts }) => {
-          if (collapsed) {
-            return null
-          }
-          const edges = _get(data, 'viewer.drafts.edges')
-          if (loading || !edges) {
-            return <Spinner />
-          }
-
-          return edges.map(({ node }: MeDrafts_viewer_drafts_edges) => (
-            <DraftDigest.Sidebar draft={node} />
           ))
-        }}
-      </Query>
-      <hr />
-      <style jsx>{styles}</style>
-    </>
-  )
-}
+      }}
+    </Query>
+  </Collapsable>
+)
 
 export default DraftList

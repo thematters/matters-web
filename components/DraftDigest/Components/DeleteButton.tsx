@@ -1,3 +1,4 @@
+import { PureQueryOptions } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
@@ -27,7 +28,13 @@ const VIEWER_DRADTS = gql`
   }
 `
 
-const DeleteButton = ({ id }: { id: string }) => {
+const DeleteButton = ({
+  id,
+  refetchQueries
+}: {
+  id: string
+  refetchQueries?: PureQueryOptions[]
+}) => {
   return (
     <Mutation
       mutation={DELETE_DRAFT}
@@ -59,7 +66,7 @@ const DeleteButton = ({ id }: { id: string }) => {
       }}
     >
       {deleteDraft => (
-        <button type="button" onClick={() => deleteDraft()}>
+        <button type="button" onClick={() => deleteDraft({ refetchQueries })}>
           <Translate zh_hant="刪除" zh_hans="删除" />
         </button>
       )}
