@@ -36,6 +36,7 @@
     "@tippy.js/react": "^2.1.1",
     "apollo-cache-inmemory": "^1.4.3",
     "apollo-client": "^2.4.13",
+    "apollo-link-context": "^1.0.14",
     "apollo-link-http": "^1.5.11",
     "apollo-upload-client": "^10.0.0",
     "body-scroll-lock": "^2.6.1",

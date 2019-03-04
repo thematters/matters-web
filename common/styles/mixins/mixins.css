@@ -35,3 +35,7 @@
   right: 0;
   bottom: 0;
 }
+
+@define-mixin all-transition {
+  transition: all 0.2s ease-in-out;
+}

@@ -11,9 +11,13 @@ const NoticeActorAvatar = ({
   user,
   size = 'default'
 }: {
-  user: NoticeActorAvatarUser
+  user: NoticeActorAvatarUser | null
   size?: 'xsmall' | 'default'
 }) => {
+  if (!user) {
+    return null
+  }
+
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''

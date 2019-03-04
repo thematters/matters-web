@@ -1,0 +1,20 @@
+.section-container {
+  margin-top: var(--spacing-default);
+
+  font-size: var(--font-size-sm);
+
+  &.first {
+    margin-top: 0;
+  }
+}
+
+.setting-section {
+  @mixin flex-center-space-between;
+  padding-bottom: var(--spacing-default);
+
+  & + .setting-section {
+    @mixin border-top-grey;
+
+    padding: var(--spacing-default) 0;
+  }
+}

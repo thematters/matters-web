@@ -102,16 +102,18 @@ const NoticeButton = ({
       trigger="manual"
       onCreate={i => setInstance(i)}
       theme="dropdown shadow-light"
+      onShown={() => {
+        if (hasUnreadNotices) {
+          markAllNoticesAsRead()
+          refetch()
+        }
+      }}
     >
       <button
         type="button"
         aria-label="通知"
         onClick={() => {
-          markAllNoticesAsRead()
           toggleDropdown()
-          if (hasUnreadNotices) {
-            refetch()
-          }
         }}
         className={hasUnreadNotices ? 'unread' : ''}
       >

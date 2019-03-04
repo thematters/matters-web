@@ -5,7 +5,11 @@ import { toPath } from '~/common/utils'
 
 import { NoticeActorNameUser } from './__generated__/NoticeActorNameUser'
 
-const NoticeActorName = ({ user }: { user: NoticeActorNameUser }) => {
+const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
+  if (!user) {
+    return null
+  }
+
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''
