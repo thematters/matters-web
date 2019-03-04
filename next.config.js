@@ -1,7 +1,11 @@
 // load environment variables from .env
-const dotEnvResult = require('dotenv').config()
-if (dotEnvResult.error) {
-  console.log('error loading .env', dotEnvResult.error)
+try {
+  const dotEnvResult = require('dotenv').config()
+  if (dotEnvResult.error) {
+    console.log('error loading .env', dotEnvResult.error)
+  }
+} catch (err) {
+  console.log('error loading .env', err)
 }
 
 const withPlugins = require('next-compose-plugins')
