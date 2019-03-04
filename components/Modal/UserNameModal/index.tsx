@@ -103,10 +103,7 @@ const UserNameModal: FC<Props> = ({ close, setModalClass }) => {
         <div className="container">
           <div className={contentClass}>
             {step === 'confirm' && (
-              <UserNameChangeConfirmForm
-                purpose="modal"
-                submitCallback={confirmCallback}
-              />
+              <UserNameChangeConfirmForm submitCallback={confirmCallback} />
             )}
             {step === 'complete' && <Complete />}
           </div>

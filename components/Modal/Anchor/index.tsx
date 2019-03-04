@@ -18,13 +18,6 @@ import styles from './styles.css'
  *
  */
 
-interface ModalInstanceProps {
-  close: () => {}
-  setCloseOnEsc: (value: boolean) => {}
-  setCloseOnOutsideClick: (value: boolean) => {}
-  setModalClass: (value: string) => {}
-}
-
 const Anchor = () => {
   const viewer = useContext(ViewerContext)
 
@@ -40,20 +33,16 @@ const Anchor = () => {
     <>
       <div>
         <div id="modal-anchor" className="container" />
-        <ModalInstance modalId="emailModal" title="changeEmail">
-          {(props: ModalInstanceProps) => <Modal.EmailModal {...props} />}
-        </ModalInstance>
         <ModalInstance modalId="loginModal" title="login">
           {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
         </ModalInstance>
         <ModalInstance modalId="signUpModal">
           {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
         </ModalInstance>
-        <ModalInstance modalId="resetModal">
-          {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
-        </ModalInstance>
-        <ModalInstance modalId="userNameModal" title="changeUserName">
-          {(props: ModalInstanceProps) => <Modal.UserNameModal {...props} />}
+        <ModalInstance modalId="passwordResetModal">
+          {(props: ModalInstanceProps) => (
+            <Modal.PasswordModal purpose="forget" {...props} />
+          )}
         </ModalInstance>
         <ModalInstance
           modalId="termModal"

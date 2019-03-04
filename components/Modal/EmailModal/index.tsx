@@ -92,14 +92,12 @@ const EmailModal: FC<Props> = ({ close }) => {
           {step === 'request' && (
             <EmailChangeRequestForm
               defaultEmail={data.request.email}
-              purpose="modal"
               submitCallback={requestCallback}
             />
           )}
           {step === 'confirm' && (
             <EmailChangeConfirmForm
               oldData={data.request}
-              purpose="modal"
               submitCallback={confirmCallback}
             />
           )}

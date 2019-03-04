@@ -15,7 +15,6 @@ import styles from './styles.css'
 interface Props {
   oldData: { email: string; codeId: string }
   extraClass?: string[]
-  purpose: 'modal' | 'page'
   submitCallback: () => void
 }
 
@@ -45,7 +44,6 @@ const QUERY_VIEWER_EMAIL = gql`
 export const EmailChangeConfirmForm: FC<Props> = ({
   oldData,
   extraClass = [],
-  purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)

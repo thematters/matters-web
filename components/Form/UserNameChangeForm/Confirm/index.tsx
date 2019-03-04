@@ -14,7 +14,6 @@ import styles from './styles.css'
 
 interface Props {
   extraClass?: string[]
-  purpose: 'modal' | 'page'
   submitCallback: () => void
 }
 
@@ -29,7 +28,6 @@ const MUTATION_UPDATE_USER_INFO = gql`
 
 export const UserNameChangeConfirmForm: FC<Props> = ({
   extraClass = [],
-  purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)

@@ -87,7 +87,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
   )
 
   const PasswordResetModalSwitch = () => (
-    <ModalSwitch modalId="resetModal">
+    <ModalSwitch modalId="passwordResetModal">
       {(open: any) => (
         <Button
           is="button"

@@ -15,7 +15,7 @@ import styles from './styles.css'
 interface Props {
   codeId: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
+  container: 'modal' | 'page'
   backPreviousStep: (event: any) => void
   submitCallback?: () => void
 }
@@ -26,10 +26,10 @@ export const MUTATION_RESET_PASSWORD = gql`
   }
 `
 
-const ResetForm: FC<Props> = ({
+export const PasswordChangeConfirmForm: FC<Props> = ({
   codeId,
   extraClass = [],
-  purpose,
+  container,
   backPreviousStep,
   submitCallback
 }) => {
@@ -202,5 +202,3 @@ const ResetForm: FC<Props> = ({
     </>
   )
 }
-
-export default ResetForm

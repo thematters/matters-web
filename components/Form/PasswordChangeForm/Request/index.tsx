@@ -16,7 +16,8 @@ import styles from './styles.css'
 interface Props {
   defaultEmail: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
+  container: 'modal' | 'page'
+  purpose: 'forget' | 'change'
   submitCallback?: (params: any) => void
 }
 
@@ -26,9 +27,10 @@ export const MUTATION_CONFIRM_CODE = gql`
   }
 `
 
-const ResetCodeForm: FC<Props> = ({
+export const PasswordChangeRequestForm: FC<Props> = ({
   defaultEmail = '',
   extraClass = [],
+  container,
   purpose,
   submitCallback
 }) => {
@@ -85,11 +87,18 @@ const ResetCodeForm: FC<Props> = ({
   }) => {
     const formClass = classNames('form', ...extraClass)
 
-    const emailPlaceholder = translate({
-      zh_hant: '請輸入你的註冊電子信箱',
-      zh_hans: '请输入你的注册邮箱',
-      lang
-    })
+    const emailPlaceholder =
+      purpose === 'forget'
+        ? translate({
+            zh_hant: '請輸入你的註冊電子信箱',
+            zh_hans: '请输入你的注册邮箱',
+            lang
+          })
+        : translate({
+            zh_hant: '請輸入電子信箱',
+            zh_hans: '请输入邮箱',
+            lang
+          })
 
     const codePlaceholder = translate({
       zh_hant: '請輸入驗證碼',
@@ -137,7 +146,9 @@ const ResetCodeForm: FC<Props> = ({
             >
               {translate({ zh_hant: '下一步', zh_hans: '下一步', lang })}
             </Button>
-            {purpose === 'modal' && <LoginModalSwitch />}
+            {container === 'modal' && purpose === 'forget' && (
+              <LoginModalSwitch />
+            )}
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -195,5 +206,3 @@ const ResetCodeForm: FC<Props> = ({
     </>
   )
 }
-
-export default ResetCodeForm

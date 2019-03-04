@@ -15,7 +15,6 @@ import styles from './styles.css'
 interface Props {
   defaultEmail: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
   submitCallback?: (params: any) => void
 }
 
@@ -28,7 +27,6 @@ const MUTATION_CONFIRM_CODE = gql`
 export const EmailChangeRequestForm: FC<Props> = ({
   defaultEmail = '',
   extraClass = [],
-  purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
