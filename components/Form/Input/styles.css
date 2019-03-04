@@ -3,6 +3,8 @@
 }
 
 .input {
+  @mixin all-transition;
+
   background-color: var(--color-grey-lighter);
   border-top-right-radius: 0.15rem;
   border-top-left-radius: 0.15rem;
@@ -10,7 +12,6 @@
   font-size: var(--font-size-md);
   height: 2.5rem;
   padding: var(--spacing-x-tight) var(--spacing-tight);
-  transition: all 0.2s ease-in-out;
 
   &:focus {
     background-color: var(--color-bg-green);

@@ -5,7 +5,11 @@ import { toPath } from '~/common/utils'
 
 import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticle'
 
-const NoticeArticle = ({ article }: { article: NoticeArticleType }) => {
+const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
+  if (!article) {
+    return null
+  }
+
   const path = toPath({
     page: 'articleDetail',
     userName: article.author.userName || '',

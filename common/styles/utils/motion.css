@@ -1,7 +1,7 @@
 /* @styled-jsx=global */
 
 .u-motion-icon-hover {
-  transition: all 0.2s ease-in-out;
+  @mixin all-transition;
 
   &:hover,
   &:focus {
@@ -11,7 +11,7 @@
 
 button:not([disabled]) > svg,
 button:not([disabled]) > .text-icon > svg {
-  transition: all 0.2s ease-in-out;
+  @mixin all-transition;
 
   &:hover,
   &:focus {
