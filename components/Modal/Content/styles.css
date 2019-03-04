@@ -1,0 +1,16 @@
+section {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.none {
+  padding: 0 var(--spacing-tight);
+}
+
+.default {
+  padding: 4rem var(--spacing-tight);
+
+  @media (--sm-down) {
+    padding: var(--spacing-default) var(--spacing-tight);
+  }
+}

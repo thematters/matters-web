@@ -1,0 +1,7 @@
+header {
+  @mixin flex-center-space-between;
+  @mixin border-bottom-grey;
+
+  margin: 0 var(--spacing-x-tight);
+  padding: 0.75rem var(--spacing-x-tight);
+}

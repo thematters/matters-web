@@ -32,7 +32,7 @@ import styles from './styles.css'
 interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
-  submitCallback?: () => {}
+  submitCallback?: () => void
 }
 
 export const MUTATION_USER_LOGIN = gql`

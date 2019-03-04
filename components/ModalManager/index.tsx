@@ -5,7 +5,7 @@ import { Modal } from '~/components'
 
 const emptyModalId = ''
 
-const ModalContext = React.createContext({
+export const ModalContext = React.createContext({
   openedModalId: emptyModalId,
   open: (modalId: string) => {
     // Do nothing
@@ -21,9 +21,9 @@ const ModalContext = React.createContext({
  * Usage:
  *
  * ```jsx
- *   <ModalProdiver defaultModalId={optional}>
+ *   <ModalProvider defaultModalId={optional}>
  *     <App />
- *   </ModalProdiver>
+ *   </ModalProvider>
  * ```
  *
  */
@@ -97,16 +97,12 @@ const defaultAnchorNode = 'modal-anchor'
 
 export const ModalInstance = ({
   children,
-  defaultCloseOnEsc,
-  defaultCloseOnOutsideClick,
-  enableCloseButton,
+  defaultCloseable,
   modalId,
   title
 }: {
   children: any
-  defaultCloseOnEsc?: boolean
-  defaultCloseOnOutsideClick?: boolean
-  enableCloseButton?: boolean
+  defaultCloseable?: boolean
   modalId: string
   title?: string
 }) => {
@@ -126,11 +122,9 @@ export const ModalInstance = ({
             <Modal.Container
               title={title}
               close={close}
-              defaultCloseOnEsc={defaultCloseOnEsc}
-              defaultCloseOnOutsideClick={defaultCloseOnOutsideClick}
-              enableCloseButton={enableCloseButton}
+              defaultCloseable={defaultCloseable}
             >
-              {(props: any) => <>{children(props)}</>}
+              {(props: any) => children(props)}
             </Modal.Container>,
             node
           )

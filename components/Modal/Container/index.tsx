@@ -3,37 +3,31 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { FC, useContext, useEffect, useState } from 'react'
 
-import { Icon, LanguageContext, Title } from '~/components'
+import { LanguageContext } from '~/components'
 import { useNativeEventListener } from '~/components/Hook'
+import ModalHeader from '~/components/Modal/Header'
 
 import { KEYCODES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
 interface Props {
-  alignment?: 'center' | 'bottom'
   children: any
   close: () => void
-  defaultCloseOnEsc?: boolean
-  defaultCloseOnOutsideClick?: boolean
-  enableCloseButton?: boolean
+  defaultCloseable?: boolean
   title?: string
 }
 
 const Container: FC<Props> = ({
-  alignment = 'center',
   children,
   close,
-  defaultCloseOnEsc = true,
-  defaultCloseOnOutsideClick = true,
-  enableCloseButton = true,
+  defaultCloseable = true,
   title
 }) => {
   const { lang } = useContext(LanguageContext)
-
-  const overlayClass = classNames('overlay', alignment)
+  const [node, setNode] = useState<HTMLElement | null>(null)
+  const [closeable, setCloseable] = useState(defaultCloseable)
 
   const modalClass = classNames(
     'l-col-4',
@@ -45,14 +39,6 @@ const Container: FC<Props> = ({
     'l-offset-lg-3'
   )
 
-  const [node, setNode] = useState<HTMLElement | null>(null)
-
-  const [closeOnEsc, setCloseOnEsc] = useState(defaultCloseOnEsc)
-
-  const [closeOnOutsideClick, setCloseOnOutsideClick] = useState(
-    defaultCloseOnOutsideClick
-  )
-
   const interpret = (text: string) => {
     return translate({
       zh_hant: TEXT.zh_hant[text],
@@ -62,7 +48,7 @@ const Container: FC<Props> = ({
   }
 
   const handleOnEsc = (event: any) => {
-    if (!closeOnEsc) {
+    if (!closeable) {
       return undefined
     }
     if (event.keyCode !== KEYCODES.escape) {
@@ -72,7 +58,7 @@ const Container: FC<Props> = ({
   }
 
   const handleOnOutsideClick = (event: any) => {
-    if (!closeOnOutsideClick) {
+    if (!closeable) {
       return undefined
     }
     if (
@@ -86,9 +72,7 @@ const Container: FC<Props> = ({
   }
 
   useNativeEventListener('keydown', handleOnEsc)
-
   useNativeEventListener('click', handleOnOutsideClick)
-
   useEffect(() => {
     if (node) {
       disableBodyScroll(node)
@@ -100,41 +84,27 @@ const Container: FC<Props> = ({
     }
   })
 
-  const Header = (props: { [key: string]: any }) => (
-    <>
-      <div className="header">
-        <Title type="modal">{interpret(props.title)}</Title>
-        {props.enableCloseButton && (
-          <button type="button" aria-label={interpret('close')} onClick={close}>
-            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-          </button>
-        )}
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
-
   return (
-    <>
-      <div className={overlayClass}>
-        <div className="l-row row">
+    <div className="overlay center">
+      <div style={{ width: '100%' }}>
+        <div className="l-row">
           <div ref={setNode} className={modalClass}>
             <div className="container">
               {title && (
-                <Header title={title} enableCloseButton={enableCloseButton} />
+                <ModalHeader closeable={closeable} title={interpret(title)} />
               )}
               {children({
                 close,
                 interpret,
-                setCloseOnEsc,
-                setCloseOnOutsideClick
+                closeable,
+                setCloseable
               })}
             </div>
           </div>
         </div>
       </div>
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }
 

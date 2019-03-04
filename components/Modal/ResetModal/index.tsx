@@ -2,12 +2,11 @@ import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
 import { Form } from '~/components/Form'
-import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
-import { Title } from '~/components/Title'
+import ModalContent from '~/components/Modal/Content'
+import ModalHeader from '~/components/Modal/Header'
 
 import { translate } from '~/common/utils'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
@@ -22,11 +21,7 @@ import styles from './styles.css'
  *
  */
 
-interface Props {
-  close: () => {}
-}
-
-const ResetModal: FC<Props> = ({ close }) => {
+const ResetModal: FC<ModalInstanceProps> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState('request')
@@ -79,18 +74,6 @@ const ResetModal: FC<Props> = ({ close }) => {
     setStep('request')
   }
 
-  const Header = ({ title }: { title: string }) => (
-    <>
-      <div className="header">
-        <Title type="modal">{title}</Title>
-        <button onClick={close}>
-          <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-        </button>
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
-
   const Complete = () => (
     <>
       <div className="complete">
@@ -116,8 +99,9 @@ const ResetModal: FC<Props> = ({ close }) => {
 
   return (
     <>
-      <Header title={data[step].title} />
-      <div className="container">
+      <ModalHeader title={data[step].title} />
+
+      <ModalContent>
         <div className={contentClass}>
           {step === 'request' && (
             <Form.ResetCodeForm
@@ -136,7 +120,8 @@ const ResetModal: FC<Props> = ({ close }) => {
           )}
           {step === 'complete' && <Complete />}
         </div>
-      </div>
+      </ModalContent>
+
       <style jsx>{styles}</style>
     </>
   )
