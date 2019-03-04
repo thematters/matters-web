@@ -3,4 +3,5 @@ interface ModalInstanceProps {
   interpret: () => string
   closeable: boolean
   setCloseable: (value: boolean) => {}
+  setModalClass: (value: string) => {}
 }

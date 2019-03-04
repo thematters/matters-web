@@ -32,22 +32,25 @@ const Anchor = () => {
   return (
     <>
       <div id="modal-anchor" className="container" />
-
-      {/* global reuse's modals */}
       <ModalInstance modalId="loginModal" title="login">
         {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
       </ModalInstance>
       <ModalInstance modalId="signUpModal">
         {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
       </ModalInstance>
-      <ModalInstance modalId="resetModal">
-        {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
+      <ModalInstance modalId="passwordResetModal">
+        {(props: ModalInstanceProps) => (
+          <Modal.PasswordModal purpose="forget" {...props} />
+        )}
       </ModalInstance>
-      <ModalInstance modalId="termModal" title="term" defaultCloseable={false}>
+      <ModalInstance
+        modalId="termModal"
+        title="term"
+        defaultCloseable={false}
+      >
         {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
       </ModalInstance>
       {isAuth && disagreedToS && <OpenedTermModal />}
-
       <style jsx>{styles}</style>
     </>
   )

@@ -25,11 +25,7 @@ const Container: FC<Props> = ({
   defaultCloseable = true,
   title
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const [node, setNode] = useState<HTMLElement | null>(null)
-  const [closeable, setCloseable] = useState(defaultCloseable)
-
-  const modalClass = classNames(
+  const modalBaseClass = classNames(
     'l-col-4',
     'l-col-sm-6',
     'l-offset-sm-1',
@@ -38,6 +34,11 @@ const Container: FC<Props> = ({
     'l-col-lg-6',
     'l-offset-lg-3'
   )
+
+  const { lang } = useContext(LanguageContext)
+  const [node, setNode] = useState<HTMLElement | null>(null)
+  const [closeable, setCloseable] = useState(defaultCloseable)
+  const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
   const interpret = (text: string) => {
     return translate({
@@ -97,7 +98,8 @@ const Container: FC<Props> = ({
                 close,
                 interpret,
                 closeable,
-                setCloseable
+                setCloseable,
+                setModalClass
               })}
             </div>
           </div>

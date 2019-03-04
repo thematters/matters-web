@@ -1,0 +1,22 @@
+.ask-buttons {
+  @mixin border-top-grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  margin: 0 var(--spacing-x-tight);
+  padding: var(--spacing-x-tight) 0 0.75rem;
+}
+
+.complete {
+  & > .message {
+    @mixin flex-center-all;
+    font-size: var(--font-size-xl);
+  }
+
+  & > .hint {
+    @mixin flex-center-all;
+    color: var(--color-grey-darker);
+    padding: var(--spacing-tight) 0rem;
+  }
+}

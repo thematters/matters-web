@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { Form } from '~/components/Form'
+import {
+  PasswordChangeConfirmForm,
+  PasswordChangeRequestForm
+} from '~/components/Form/PasswordChangeForm'
 import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
@@ -84,18 +87,19 @@ const Forget = () => {
       <main className="l-row row">
         <article className={containerClass}>
           {step === 'request' && (
-            <Form.ResetCodeForm
+            <PasswordChangeRequestForm
               defaultEmail={data.request.email}
               extraClass={formClass}
-              purpose="page"
+              purpose="forget"
+              container="page"
               submitCallback={requestCodeCallback}
             />
           )}
           {step === 'reset' && (
-            <Form.ResetForm
+            <PasswordChangeConfirmForm
               extraClass={formClass}
               codeId={data.request.codeId}
-              purpose="page"
+              container="page"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
             />

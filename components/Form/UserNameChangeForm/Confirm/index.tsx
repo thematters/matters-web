@@ -8,42 +8,38 @@ import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { LanguageContext } from '~/components/Language'
 
-import { isValidPassword, translate } from '~/common/utils'
+import { isValidUserName, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 interface Props {
-  codeId: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
-  backPreviousStep: (event: any) => void
-  submitCallback?: () => void
+  submitCallback: () => void
 }
 
-export const MUTATION_RESET_PASSWORD = gql`
-  mutation ResetPassword($input: ResetPasswordInput!) {
-    resetPassword(input: $input)
+const MUTATION_UPDATE_USER_INFO = gql`
+  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+    updateUserInfo(input: $input) {
+      id
+      userName
+    }
   }
 `
 
-const ResetForm: FC<Props> = ({
-  codeId,
+export const UserNameChangeConfirmForm: FC<Props> = ({
   extraClass = [],
-  purpose,
-  backPreviousStep,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const validatePassword = (value: string, language: string) => {
+  const validateUserName = (value: string, language: string) => {
     let result: any
-
     if (!value) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
-    } else if (!isValidPassword(value)) {
+    } else if (!isValidUserName(value)) {
       result = {
-        zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
-        zh_hans: '不少于 8 位，必须包含数字和大小写字母'
+        zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
+        zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _'
       }
     }
     if (result) {
@@ -51,17 +47,16 @@ const ResetForm: FC<Props> = ({
     }
   }
 
-  const validateComparedPassword = (
+  const validateComparedUserName = (
     value: string,
     comparedValue: string,
     language: string
   ) => {
     let result: any
-
     if (!comparedValue) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
     } else if (comparedValue !== value) {
-      result = { zh_hant: '密碼不一致', zh_hans: '密码不一致' }
+      result = { zh_hant: 'Matters ID 不一致', zh_hans: 'Matters ID 不一致' }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -81,15 +76,21 @@ const ResetForm: FC<Props> = ({
   }) => {
     const formClass = classNames('form', ...extraClass)
 
-    const passwordPlaceholder = translate({
-      zh_hant: '請輸入密碼',
-      zh_hans: '请输入密码',
+    const userNameHint = translate({
+      zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
+      zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _',
       lang
     })
 
-    const comparedPlaceholder = translate({
-      zh_hant: '請再次輸入密碼',
-      zh_hans: '请再次输入密码',
+    const userNamePlaceholder = translate({
+      zh_hant: '請輸入新 Matters ID',
+      zh_hans: '请输入新 Matters ID',
+      lang
+    })
+
+    const comparedUserNamePlaceholder = translate({
+      zh_hant: '請再次輸入新 Matters ID',
+      zh_hans: '请再次输入新 Matters ID',
       lang
     })
 
@@ -97,43 +98,35 @@ const ResetForm: FC<Props> = ({
       <>
         <form className={formClass} onSubmit={handleSubmit}>
           <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
+            type="text"
+            field="userName"
+            placeholder={userNamePlaceholder}
             values={values}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            hint={userNameHint}
           />
           <Form.Input
-            type="password"
-            field="comparedPassword"
-            placeholder={comparedPlaceholder}
-            style={{ marginTop: '0.6rem' }}
+            type="text"
+            field="comparedUserName"
+            placeholder={comparedUserNamePlaceholder}
             values={values}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            style={{ marginTop: '0.6rem' }}
           />
           <div className="buttons">
-            <Button
-              type="button"
-              bgColor="transparent"
-              className="u-link-green"
-              spacing="none"
-              onClick={backPreviousStep}
-            >
-              {translate({ zh_hant: '上一步', zh_hans: '上一步', lang })}
-            </Button>
             <Button
               type="submit"
               bgColor="green"
               style={{ width: 80 }}
               disabled={isSubmitting}
             >
-              {translate({ zh_hant: '確認', zh_hans: '确认', lang })}
+              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
             </Button>
           </div>
         </form>
@@ -144,36 +137,36 @@ const ResetForm: FC<Props> = ({
 
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
-      password: '',
-      comparedPassword: ''
+      userName: '',
+      comparedUserName: ''
     }),
 
-    validate: ({ password, comparedPassword }) => {
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
+    validate: ({ userName, comparedUserName }) => {
+      const isInvalidUserName = validateUserName(userName, lang)
+      const isInvalidComparedUserName = validateComparedUserName(
+        userName,
+        comparedUserName,
         lang
       )
       const errors = {
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
+        ...(isInvalidComparedUserName
+          ? { comparedUserName: isInvalidComparedUserName }
           : {})
       }
       return errors
     },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { password } = values
+      const { userName } = values
       const { submitAction } = props
       if (!submitAction) {
         return undefined
       }
-      submitAction({ variables: { input: { password, codeId } } })
+
+      submitAction({ variables: { input: { userName } } })
         .then(({ data }: any) => {
-          const { resetPassword } = data
-          if (submitCallback && resetPassword) {
+          if (submitCallback) {
             submitCallback()
           }
         })
@@ -188,12 +181,10 @@ const ResetForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_RESET_PASSWORD}>
-        {reset => <MainForm submitAction={reset} />}
+      <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+        {update => <MainForm submitAction={update} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>
   )
 }
-
-export default ResetForm

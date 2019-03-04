@@ -13,6 +13,10 @@
   height: 2.5rem;
   padding: var(--spacing-x-tight) var(--spacing-tight);
 
+  &:disabled {
+    color: var(--color-grey-darker);
+  }
+
   &:focus {
     background-color: var(--color-bg-green);
     border-bottom: 1px solid var(--color-matters-green);

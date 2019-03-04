@@ -1,28 +1,38 @@
 import _get from 'lodash/get'
 import { useContext } from 'react'
 
-import { Button, Head, PageHeader, Translate } from '~/components'
+import { Button, Head, Modal, PageHeader, Translate } from '~/components'
+import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { LanguageSwitch } from './LanguageSwitch'
 import styles from './styles.css'
 
-const EditButton = () => (
-  <Button
-    outlineColor="green"
-    bgColor="transparent"
-    size="small"
-    style={{ width: '3rem' }}
-  >
-    <Translate zh_hant="修改" zh_hans="修改" />
-  </Button>
+const EditButton = ({ modalId }: { modalId: string }) => (
+  <ModalSwitch modalId={modalId}>
+    {(open: any) => (
+      <Button
+        outlineColor="green"
+        bgColor="transparent"
+        size="small"
+        style={{ width: '3rem' }}
+        onClick={open}
+      >
+        <Translate zh_hant="修改" zh_hans="修改" />
+      </Button>
+    )}
+  </ModalSwitch>
 )
 
 const ChangePasswrodButton = () => (
-  <button type="button" className="change-password-button">
-    <Translate zh_hant="修改密碼" zh_hans="修改密码" />
-    <style jsx>{styles}</style>
-  </button>
+  <ModalSwitch modalId="passwordChangeModal">
+    {(open: any) => (
+      <button type="button" className="change-password-button" onClick={open}>
+        <Translate zh_hant="修改密碼" zh_hans="修改密码" />
+        <style jsx>{styles}</style>
+      </button>
+    )}
+  </ModalSwitch>
 )
 
 const SettingsAccount = () => {
@@ -53,11 +63,11 @@ const SettingsAccount = () => {
         <section className="setting-section">
           <div className="left">
             <span className="title">
-              <Translate zh_hant="電子信箱" zh_hans="登录密码" />
+              <Translate zh_hant="電子信箱" zh_hans="电子邮箱" />
             </span>
             <span>{_get(viewer, 'info.email')}</span>
           </div>
-          <EditButton />
+          <EditButton modalId="emailModal" />
         </section>
 
         {/* username */}
@@ -66,7 +76,7 @@ const SettingsAccount = () => {
             <span className="title">Matters ID</span>
             <span>{viewer.userName}</span>
           </div>
-          <EditButton />
+          <EditButton modalId="userNameModal" />
         </section>
       </section>
 
@@ -84,6 +94,18 @@ const SettingsAccount = () => {
           </div>
         </section>
       </section>
+
+      <ModalInstance modalId="passwordChangeModal">
+        {(props: ModalInstanceProps) => (
+          <Modal.PasswordModal purpose="change" {...props} />
+        )}
+      </ModalInstance>
+      <ModalInstance modalId="userNameModal" title="changeUserName">
+        {(props: ModalInstanceProps) => <Modal.UserNameModal {...props} />}
+      </ModalInstance>
+      <ModalInstance modalId="emailModal" title="changeEmail">
+        {(props: ModalInstanceProps) => <Modal.EmailModal {...props} />}
+      </ModalInstance>
 
       <style jsx>{styles}</style>
     </>

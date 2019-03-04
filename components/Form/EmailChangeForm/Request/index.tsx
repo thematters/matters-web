@@ -1,54 +1,38 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { FC, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { LanguageContext } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
 
-import { PATHS } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-/**
- * This component is designed for Login form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <Form.LoginForm
- *     extraClass={[]}
- *     purpose="modal"
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
 interface Props {
+  defaultEmail: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
-  submitCallback?: () => void
+  submitCallback?: (params: any) => void
 }
 
-export const MUTATION_USER_LOGIN = gql`
-  mutation UserLogin($input: UserLoginInput!) {
-    userLogin(input: $input) {
-      auth
-    }
+const MUTATION_CONFIRM_CODE = gql`
+  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
+    confirmVerificationCode(input: $input)
   }
 `
 
-const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
+export const EmailChangeRequestForm: FC<Props> = ({
+  defaultEmail = '',
+  extraClass = [],
+  submitCallback
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const validateEmail = (value: string, language: string) => {
     let result: any
-
     if (!value) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
     } else if (!isValidEmail(value)) {
@@ -59,9 +43,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     }
   }
 
-  const validatePassword = (value: string, language: string) => {
+  const validateCode = (value: string, language: string) => {
     let result: any
-
     if (!value) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
     }
@@ -69,38 +52,6 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
       return translate({ ...result, lang: language })
     }
   }
-
-  const PasswordResetRedirectButton = () => (
-    <>
-      <Button
-        is="link"
-        bgColor="transparent"
-        className="u-link-green"
-        spacing="none"
-        href={PATHS.AUTH_FORGET.href}
-        as={PATHS.AUTH_FORGET.as}
-      >
-        {translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })}？
-      </Button>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const PasswordResetModalSwitch = () => (
-    <ModalSwitch modalId="passwordResetModal">
-      {(open: any) => (
-        <Button
-          is="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })}？
-        </Button>
-      )}
-    </ModalSwitch>
-  )
 
   const BaseForm = ({
     values,
@@ -115,21 +66,9 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
   }) => {
     const formClass = classNames('form', ...extraClass)
 
-    const emailPlaceholder = translate({
-      zh_hant: '請輸入電子信箱',
-      zh_hans: '请输入邮箱',
-      lang
-    })
-
-    const passwordPlaceholder = translate({
-      zh_hant: '請輸入密碼',
-      zh_hans: '请输入密码',
-      lang
-    })
-
-    const loginText = translate({
-      zh_hant: '登入',
-      zh_hans: '登入',
+    const codePlaceholder = translate({
+      zh_hant: '請輸入驗證碼',
+      zh_hans: '请输入验证码',
       lang
     })
 
@@ -139,18 +78,25 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           <Form.Input
             type="text"
             field="email"
-            placeholder={emailPlaceholder}
             values={values}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            disabled={true}
           />
           <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            style={{ marginTop: '0.6rem' }}
+            type="text"
+            field="code"
+            placeholder={codePlaceholder}
+            style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
+            floatElement={
+              <Form.SendCodeButton
+                email={values.email}
+                lang={lang}
+                type="email_reset"
+              />
+            }
             values={values}
             errors={errors}
             touched={touched}
@@ -164,10 +110,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
               style={{ width: 80 }}
               disabled={isSubmitting}
             >
-              {loginText}
+              {translate({ zh_hant: '下一步', zh_hans: '下一步', lang })}
             </Button>
-            {purpose === 'modal' && <PasswordResetModalSwitch />}
-            {purpose === 'page' && <PasswordResetRedirectButton />}
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -177,32 +121,35 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
 
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
-      email: '',
-      password: ''
+      email: defaultEmail,
+      code: ''
     }),
 
-    validate: ({ email, password }) => {
+    validate: ({ email, code }) => {
       const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidPassword = validatePassword(password, lang)
+      const isInvalidCode = validateCode(code, lang)
       const errors = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {})
+        ...(isInvalidCode ? { code: isInvalidCode } : {})
       }
       return errors
     },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { email, password } = values
+      const { email, code } = values
       const { submitAction } = props
       if (!submitAction) {
         return undefined
       }
-      submitAction({ variables: { input: { email, password } } })
-        .then((result: any) => {
-          if (submitCallback) {
-            submitCallback()
+
+      submitAction({
+        variables: { input: { email, type: 'email_reset', code } }
+      })
+        .then(({ data }: any) => {
+          const { confirmVerificationCode } = data
+          if (submitCallback && confirmVerificationCode) {
+            submitCallback({ codeId: confirmVerificationCode })
           }
-          Router.replace('/')
         })
         .catch((result: any) => {
           // TODO: Handle error
@@ -215,12 +162,10 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
 
   return (
     <>
-      <Mutation mutation={MUTATION_USER_LOGIN}>
-        {login => <MainForm submitAction={login} />}
+      <Mutation mutation={MUTATION_CONFIRM_CODE}>
+        {confirmCode => <MainForm submitAction={confirmCode} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>
   )
 }
-
-export default LoginForm
