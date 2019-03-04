@@ -1,7 +1,6 @@
 // External modules
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 
 import { LanguageContext } from '~/components'
 import { useNativeEventListener } from '~/components/Hook'
@@ -74,16 +73,6 @@ const Container: FC<Props> = ({
 
   useNativeEventListener('keydown', handleOnEsc)
   useNativeEventListener('click', handleOnOutsideClick)
-  useEffect(() => {
-    if (node) {
-      disableBodyScroll(node)
-    }
-    return () => {
-      if (node) {
-        enableBodyScroll(node)
-      }
-    }
-  })
 
   return (
     <div className="overlay center">

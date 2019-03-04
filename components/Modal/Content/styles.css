@@ -6,6 +6,7 @@
 section {
   max-height: 70vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
     max-height: calc(
