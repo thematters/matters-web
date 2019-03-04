@@ -20,7 +20,7 @@
     }
 
     & :global(> * + *) {
-      padding-top: var(--spacing-default);
+      margin-top: var(--spacing-default);
     }
   }
 }
@@ -52,7 +52,7 @@
       order: initial;
 
       & :global(> * + *) {
-        padding-left: var(--spacing-default);
+        margin-left: var(--spacing-default);
       }
     }
   }

@@ -81,7 +81,7 @@ export default () => {
 
   return (
     <>
-      <Query query={queries[sortBy]}>
+      <Query query={queries[sortBy]} notifyOnNetworkStatusChange>
         {({
           data,
           loading,
@@ -89,8 +89,8 @@ export default () => {
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
           const connectionPath = 'viewer.recommendation.feed'
-          const connection = _get(data, connectionPath)
-          if (loading || !connection) {
+          const connection = _get(data, connectionPath, {})
+          if (loading && !connection) {
             return <Placeholder.ArticleDigestList />
           }
 
@@ -132,8 +132,6 @@ export default () => {
                     <InfiniteScroll
                       hasNextPage={match && pageInfo.hasNextPage}
                       loadMore={loadMore}
-                      loading={loading}
-                      loader={<Spinner />}
                     >
                       <ul>
                         {edges.map(
@@ -149,7 +147,8 @@ export default () => {
                         )}
                       </ul>
                     </InfiniteScroll>
-                    {!match && pageInfo.hasNextPage && (
+                    {!match && pageInfo.hasNextPage && loading && <Spinner />}
+                    {!match && pageInfo.hasNextPage && !loading && (
                       <LoadMore onClick={loadMore} />
                     )}
                   </>

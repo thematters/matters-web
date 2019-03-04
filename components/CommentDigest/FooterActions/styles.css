@@ -1,0 +1,34 @@
+footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-tight);
+
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+
+  & .left {
+    display: flex;
+    align-items: center;
+
+    & > :global(* + *) {
+      line-height: 1;
+    }
+  }
+  & .space-left {
+    margin-left: var(--spacing-tight);
+  }
+  & .space-right {
+    margin-right: var(--spacing-tight);
+  }
+
+  & :global(button.active) {
+    color: var(--color-black);
+  }
+  & :global(button:disabled) {
+    opacity: 0.5;
+  }
+}
+
+.comment-form {
+  margin-top: var(--spacing-tight);
+}

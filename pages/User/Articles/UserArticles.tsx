@@ -8,14 +8,13 @@ import {
   Error,
   Head,
   InfiniteScroll,
-  Placeholder,
-  Spinner
+  Placeholder
 } from '~/components'
+import EmptyArticle from '~/components/Empty/EmptyArticle'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
-import EmptyArticles from './EmptyArticles'
 
 const USER_ARTICLES_FEED = gql`
   query UserArticleFeed(
@@ -66,7 +65,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         const connectionPath = 'user.articles'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
@@ -81,7 +80,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           })
 
         if (!edges || edges.length <= 0) {
-          return <EmptyArticles />
+          return <EmptyArticle />
         }
 
         return (
@@ -95,8 +94,6 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}
-              loading={loading}
-              loader={<Spinner />}
             >
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

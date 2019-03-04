@@ -3,6 +3,24 @@
 }
 
 .header {
+  @mixin flex-start-space-between;
+
+  & .avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  & .reply-to {
+    flex-shrink: 0;
+
+    font-size: var(--font-size-sm);
+    margin: 0 var(--spacing-xx-tight);
+  }
+
+  & .label {
+    margin-left: var(--spacing-x-tight);
+    font-size: 0;
+  }
 }
 
 .content-wrap {
@@ -24,4 +42,11 @@
   & .content-wrap {
     padding-left: var(--spacing-loose);
   }
+}
+
+.cancel-button {
+  padding: 0 var(--spacing-tight);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-matters-green);
 }

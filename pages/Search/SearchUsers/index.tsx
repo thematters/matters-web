@@ -89,7 +89,7 @@ const SearchUser = ({
           }
 
           const connectionPath = 'search'
-          const { edges, pageInfo } = _get(data, connectionPath)
+          const { edges, pageInfo } = _get(data, connectionPath, {})
           const loadMore = () =>
             fetchMore({
               variables: {
@@ -112,8 +112,6 @@ const SearchUser = ({
               <InfiniteScroll
                 hasNextPage={!isAggregate && pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <ul>

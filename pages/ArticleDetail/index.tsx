@@ -60,7 +60,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const uuid = getQuery({ router, key: 'post' })
 
   if (!mediaHash && !uuid) {
-    return <span>Empty</span> // TODO
+    return null
   }
 
   return (

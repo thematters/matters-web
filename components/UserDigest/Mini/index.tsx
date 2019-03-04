@@ -21,6 +21,7 @@ interface MiniProps {
   user: UserDigestMiniUser
   avatarSize?: 'xxxsmall' | 'xxsmall' | 'xsmall' | 'small'
   textWeight?: 'normal' | 'medium'
+  spacing?: 'xxtight' | 'xtight'
 }
 
 const fragments = {
@@ -38,7 +39,8 @@ const fragments = {
 const Mini = ({
   user,
   avatarSize = 'xxsmall',
-  textWeight = 'normal'
+  textWeight = 'normal',
+  spacing = 'xtight'
 }: MiniProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -46,7 +48,8 @@ const Mini = ({
   })
   const containerClasses = classNames({
     container: true,
-    [`text-${textWeight}`]: true
+    [`text-${textWeight}`]: true,
+    [`spacing-${spacing}`]: true
   })
 
   return (

@@ -9,7 +9,6 @@ import {
   InfiniteScroll,
   PageHeader,
   Placeholder,
-  Spinner,
   Translate
 } from '~/components'
 
@@ -64,7 +63,7 @@ export default () => {
         }
 
         const connectionPath = 'viewer.recommendation.followeeArticles'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
@@ -89,8 +88,6 @@ export default () => {
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}
-              loading={loading}
-              loader={<Spinner />}
             >
               <ul>
                 {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

@@ -16,7 +16,7 @@ const VIEWER_DRADTS = gql`
   query ViewerDrafts {
     viewer {
       id
-      drafts(input: { first: 10 }) {
+      drafts(input: {}) @connection(key: "viewerDrafts") {
         edges {
           cursor
           node {
@@ -62,7 +62,6 @@ const DeleteButton = ({
           })
         } catch (e) {
           //
-          console.log(e)
         }
       }}
     >

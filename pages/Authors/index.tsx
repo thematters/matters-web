@@ -68,7 +68,7 @@ const Authors = () => (
             }
 
             const connectionPath = 'viewer.recommendation.authors'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {
@@ -86,8 +86,6 @@ const Authors = () => (
               <InfiniteScroll
                 hasNextPage={pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

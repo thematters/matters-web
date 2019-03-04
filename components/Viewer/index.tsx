@@ -10,6 +10,11 @@ export const ViewerUserFragment = {
       userName
       displayName
       avatar
+      status {
+        MAT {
+          total
+        }
+      }
       info {
         agreeOn
       }

@@ -68,7 +68,7 @@ const Tags = () => (
             }
 
             const connectionPath = 'viewer.recommendation.tags'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {
@@ -88,8 +88,6 @@ const Tags = () => (
               <InfiniteScroll
                 hasNextPage={pageInfo.hasNextPage}
                 loadMore={loadMore}
-                loading={loading}
-                loader={<Spinner />}
               >
                 <div className="l-row">
                   <ul className="l-col-2 l-col-sm-4 l-col-lg-6">

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import styles from './styles.css'
 
@@ -13,36 +13,31 @@ import styles from './styles.css'
  * window.dispatchEvent(new CustomEvent(
  *   'addMessage',
  *   {
- *     content: 'content description',
- *     duration: 3000
+ *     detail: {
+ *       type: "error",
+ *       content: 'content description',
+ *     }
  *   }
  * ))
  *
  */
-const second = 1000
 
 interface Props {
   id: string
-  color: 'white'
-  content?: any
-  duration: number
-  remove: () => void
+  content: string | React.ReactNode
+  type?: 'success' | 'error' | 'info'
+  duration?: number
 }
 
-export const Message: FC<Props> = ({
+export const Message: React.FC<Props> = ({
   id,
-  color,
   content,
-  duration,
-  remove
+  type = 'success',
+  duration = 3000
 }) => {
   const mainClass = classNames({
     message: true,
-    [color]: !!color
-  })
-
-  const contentClass = classNames({
-    content: true
+    [type]: true
   })
 
   const removeMessage = () => {
@@ -50,15 +45,17 @@ export const Message: FC<Props> = ({
   }
 
   useEffect(() => {
-    setTimeout(removeMessage, duration || 3 * second)
+    setTimeout(removeMessage, duration)
   })
 
+  if (!content) {
+    return null
+  }
+
   return (
-    <>
-      <div className={mainClass}>
-        <div>{content && <div className={contentClass}>{content}</div>}</div>
-      </div>
+    <section className={mainClass}>
+      {content}
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }

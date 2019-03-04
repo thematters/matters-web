@@ -4,11 +4,13 @@
 
 .input {
   background-color: var(--color-grey-lighter);
-  border-radius: 0.15rem;
+  border-top-right-radius: 0.15rem;
+  border-top-left-radius: 0.15rem;
   border-bottom: 1px solid var(--color-grey-light);
   font-size: var(--font-size-md);
   height: 2.5rem;
   padding: var(--spacing-x-tight) var(--spacing-tight);
+  transition: all 0.2s ease-in-out;
 
   &:focus {
     background-color: var(--color-bg-green);
@@ -36,7 +38,7 @@
   line-height: 1.1;
   height: 1rem;
   min-height: 1rem;
-  margin-top: var(--spacing-x-tight);
+  margin-top: 0.4rem;
   padding-left: var(--spacing-x-tight);
 
   & > .error {

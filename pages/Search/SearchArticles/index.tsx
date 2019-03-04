@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   PageHeader,
   Placeholder,
-  Spinner,
   Translate
 } from '~/components'
 
@@ -73,7 +72,7 @@ const SearchArticles = ({
         }
 
         const connectionPath = 'search'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
@@ -105,8 +104,6 @@ const SearchArticles = ({
           <InfiniteScroll
             hasNextPage={!isAggregate && pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <PageHeader
               is="h2"

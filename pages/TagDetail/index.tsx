@@ -5,20 +5,16 @@ import { Query, QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Empty,
   Error,
   Footer,
   Head,
-  Icon,
   InfiniteScroll,
   PageHeader,
-  Placeholder,
-  Spinner,
-  Translate
+  Placeholder
 } from '~/components'
+import EmptyTag from '~/components/Empty/EmptyTag'
 
 import { mergeConnections } from '~/common/utils'
-import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
 
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
 
@@ -53,26 +49,9 @@ const TAG_DETAIL = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const EmptyTagDetail = ({
-  description
-}: {
-  description: string | React.ReactNode
-}) => (
-  <Empty
-    icon={
-      <Icon id={ICON_HASHTAG.id} viewBox={ICON_HASHTAG.viewBox} size="xlarge" />
-    }
-    description={description}
-  />
-)
-
 const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
   if (!router || !router.query || !router.query.id) {
-    return (
-      <EmptyTagDetail
-        description={<Translate zh_hant="標籤不存在" zh_hans="标签不存在" />}
-      />
-    )
+    return <EmptyTag />
   }
 
   return (
@@ -94,7 +73,7 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
             }
 
             const connectionPath = 'node.articles'
-            const { edges, pageInfo } = _get(data, connectionPath)
+            const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () =>
               fetchMore({
                 variables: {
@@ -118,8 +97,6 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
                   <InfiniteScroll
                     hasNextPage={pageInfo.hasNextPage}
                     loadMore={loadMore}
-                    loading={loading}
-                    loader={<Spinner />}
                   >
                     <ul>
                       {edges.map(

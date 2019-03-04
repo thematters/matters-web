@@ -139,3 +139,12 @@
     line-height: 1;
   }
 }
+
+.editing {
+  background-color: var(--color-white);
+
+  & > .content-container {
+    background-color: var(--color-white);
+    border: 1.5px dashed rgba(13, 103, 99, 0.8);
+  }
+}

@@ -20,6 +20,8 @@ import styles from './styles.css'
 
 interface ModalInstanceProps {
   close: () => {}
+  setCloseOnEsc: (value: boolean) => {}
+  setCloseOnOutsideClick: (value: boolean) => {}
 }
 
 const Anchor = () => {
@@ -40,14 +42,17 @@ const Anchor = () => {
         <ModalInstance modalId="loginModal" title="login">
           {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
         </ModalInstance>
+        <ModalInstance modalId="signUpModal">
+          {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
+        </ModalInstance>
         <ModalInstance modalId="resetModal">
           {(props: ModalInstanceProps) => <Modal.ResetModal {...props} />}
         </ModalInstance>
         <ModalInstance
           modalId="termModal"
           title="term"
-          closeOnEsc={false}
-          closeOnOutsideClick={false}
+          defaultCloseOnEsc={false}
+          defaultCloseOnOutsideClick={false}
           enableCloseButton={false}
         >
           {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}

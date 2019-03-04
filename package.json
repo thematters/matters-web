@@ -32,6 +32,7 @@
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js"
   },
   "dependencies": {
+    "@matters/react-waypoint": "^9.0.1",
     "@tippy.js/react": "^2.1.1",
     "apollo-cache-inmemory": "^1.4.3",
     "apollo-client": "^2.4.13",
@@ -164,6 +165,9 @@
       "node"
     ],
     "moduleNameMapper": {
+      "^.+\\.(gif|png|jpg|ttf|eot)\\?(resize|sizes)(.+)?$": "<rootDir>/__mocks__/fileResizeMock.js",
+      "^.+\\.(gif|png|jpg|ttf|eot)(\\?.+)?$": "<rootDir>/__mocks__/fileMock.js",
+      "^.+\\.svg\\?(sprite|include)(.+)?$": "<rootDir>/__mocks__/svgMock.js",
       "~(.*)$": "<rootDir>$1",
       "\\.css$": "<rootDir>/__mocks__/styleMock.js"
     },

@@ -10,7 +10,6 @@ const MoreButton = () => (
   >
     <Icon
       size="default"
-      className="u-motion-icon-hover"
       id={ICON_MORE_REGULAR.id}
       viewBox={ICON_MORE_REGULAR.viewBox}
     />

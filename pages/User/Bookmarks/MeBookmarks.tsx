@@ -2,18 +2,12 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  InfiniteScroll,
-  Placeholder,
-  Spinner
-} from '~/components'
+import { ArticleDigest, Error, InfiniteScroll, Placeholder } from '~/components'
+import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 
 import { mergeConnections } from '~/common/utils'
 
 import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
-import EmptyBookmarks from './EmptyBookmarks'
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed(
@@ -60,7 +54,7 @@ export default () => {
         }
 
         const connectionPath = 'viewer.subscriptions'
-        const { edges, pageInfo } = _get(data, connectionPath)
+        const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
@@ -75,15 +69,13 @@ export default () => {
           })
 
         if (edges <= 0) {
-          return <EmptyBookmarks />
+          return <EmptyBookmark />
         }
 
         return (
           <InfiniteScroll
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
-            loading={loading}
-            loader={<Spinner />}
           >
             <ul>
               {edges.map(({ node, cursor }: { node: any; cursor: any }) => (

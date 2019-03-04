@@ -29,7 +29,7 @@ import styles from './styles.css'
 
 interface Props {
   className?: string[]
-  type: string
+  type: 'text' | 'password'
   field: string
   placeholder: string
   floatElement?: any
