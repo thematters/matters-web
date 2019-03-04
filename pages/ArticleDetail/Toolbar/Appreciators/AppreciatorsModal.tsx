@@ -46,7 +46,7 @@ const ARTICLE_APPRECIATORS = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-const AppreciatorList: React.FC<WithRouterProps> = ({ router }) => {
+const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -124,4 +124,4 @@ const AppreciatorList: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(AppreciatorList)
+export default withRouter(AppreciatorsModal)

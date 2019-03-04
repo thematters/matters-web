@@ -6,7 +6,7 @@ import { Avatar } from '~/components/Avatar'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
-import AppreciatorList from './AppreciatorList'
+import AppreciatorsModal from './AppreciatorsModal'
 import styles from './styles.css'
 
 const fragments = {
@@ -73,7 +73,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           </button>
         )}
       </ModalSwitch>
-      <AppreciatorList />
+      <AppreciatorsModal />
     </>
   )
 }
