@@ -4,11 +4,11 @@ import { Query, QueryResult } from 'react-apollo'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
 
+import Collapsable from '../Collapsable'
 import {
   MeDrafts,
   MeDrafts_viewer_drafts_edges
 } from './__generated__/MeDrafts'
-import Collapsable from './Collapsable'
 
 const ME_DRAFTS = gql`
   query MeDrafts {

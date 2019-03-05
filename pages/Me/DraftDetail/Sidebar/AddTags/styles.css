@@ -1,0 +1,31 @@
+.tags-intro {
+  margin: var(--spacing-tight) 0;
+
+  color: var(--color-grey);
+  font-size: var(--font-size-xs);
+}
+
+.tags-container {
+}
+
+.tag {
+  display: inline-block;
+  margin-right: var(--spacing-x-tight);
+  padding: 0 var(--spacing-x-tight);
+  height: 1.5rem;
+
+  font-size: var(--font-size-sm);
+  color: var(--color-white);
+  background: var(--color-matters-green);
+  white-space: nowrap;
+
+  & button {
+    margin-left: var(--spacing-x-tight);
+    font-size: 0;
+  }
+  & :global(> *) {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+}
