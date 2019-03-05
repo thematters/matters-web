@@ -6,12 +6,13 @@ import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
+import ModalContent from '~/components/Modal/Content'
+import ModalHeader from '~/components/Modal/Header'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?sprite'
 
 import styles from './styles.css'
@@ -29,17 +30,7 @@ import styles from './styles.css'
 
 type Step = 'signUp' | 'profile' | 'complete'
 
-interface Props {
-  close: () => {}
-  setCloseOnEsc: (value: boolean) => {}
-  setCloseOnOutsideClick: (value: boolean) => {}
-}
-
-const SignUpModal: FC<Props> = ({
-  close,
-  setCloseOnEsc,
-  setCloseOnOutsideClick
-}) => {
+const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')
@@ -56,17 +47,8 @@ const SignUpModal: FC<Props> = ({
     }
   }
 
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
-
   const signUpCallback = () => {
-    setCloseOnEsc(false)
-    setCloseOnOutsideClick(false)
+    setCloseable(false)
     setStep('profile')
   }
 
@@ -94,20 +76,6 @@ const SignUpModal: FC<Props> = ({
         </>
       )}
     </ModalSwitch>
-  )
-
-  const Header = ({ title }: { title: string }) => (
-    <>
-      <div className="header">
-        <Title type="modal">{title}</Title>
-        {step === 'signUp' && (
-          <button onClick={close}>
-            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
-          </button>
-        )}
-      </div>
-      <style jsx>{styles}</style>
-    </>
   )
 
   const Footer = () => (
@@ -192,28 +160,25 @@ const SignUpModal: FC<Props> = ({
 
   return (
     <>
-      <Header title={data[step].title} />
-      <div className="container">
-        <div className={contentClass}>
-          {step === 'signUp' && (
-            <>
-              <Form.SignUpForm
-                purpose="modal"
-                submitCallback={signUpCallback}
-              />
-              <hr className="divider" />
-              <Footer />
-            </>
-          )}
-          {step === 'profile' && (
-            <Form.SignUpProfileForm
-              purpose="modal"
-              submitCallback={signUpProfileCallback}
-            />
-          )}
-          {step === 'complete' && <Complete />}
-        </div>
-      </div>
+      <ModalHeader title={data[step].title} closeable={closeable} />
+
+      <ModalContent>
+        {step === 'signUp' && (
+          <>
+            <Form.SignUpForm purpose="modal" submitCallback={signUpCallback} />
+            <hr className="divider" />
+            <Footer />
+          </>
+        )}
+        {step === 'profile' && (
+          <Form.SignUpProfileForm
+            purpose="modal"
+            submitCallback={signUpProfileCallback}
+          />
+        )}
+        {step === 'complete' && <Complete />}
+      </ModalContent>
+
       <style jsx>{styles}</style>
     </>
   )

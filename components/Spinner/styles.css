@@ -1,6 +1,7 @@
 .spinner {
-  margin: var(--spacing-default) 0;
+  padding: var(--spacing-default) 0;
   text-align: center;
+  line-height: 1;
 
   & > :global(svg) {
     animation: spinning 1s infinite linear;

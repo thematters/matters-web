@@ -26,6 +26,7 @@ nav {
 ul {
   white-space: nowrap;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 
   @media (--md-up) {
     white-space: initial;
