@@ -42,10 +42,9 @@ interface State {
 
 const modules = {
   toolbar: [
-    [{ header: '1' }],
-    ['bold', 'italic', 'strike', 'underline', 'blockquote'],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    ['link']
+    [{ header: '2' }],
+    ['bold', 'italic', 'strike', 'underline'],
+    ['blockquote', { list: 'ordered' }, { list: 'bullet' }, 'link']
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
@@ -80,6 +79,7 @@ export class Editor extends React.Component<Props, State> {
       this.ReactQuill = ReactQuill
     }
   }
+
   public componentDidMount() {
     // const query = this.props.router.asPath.split('?')[1]
     // const upstream = {
@@ -146,90 +146,12 @@ export class Editor extends React.Component<Props, State> {
     })
   }
 
-  // 设置标题
-  public handleTitle(e: any) {
-    const value = e.target.value
-    this.setState({
-      title: value
-    })
-  }
-
-  // 获取文章ID或草稿ID
-  public onFetchArticle() {
-    // if (id) {
-    //   this.props.client
-    //     .query({
-    //       query: getArticleQuery,
-    //       variables: {
-    //         input: { id: data.id }
-    //       }
-    //     })
-    //     .then(data => {
-    //       let detail = data.data && data.data.node ? data.data.node : {}
-    //       this.setState({
-    //         content: data.content,
-    //         title: data.title ? data.title : data.draftTitle,
-    //         upstream: data.upstream ? data.upstream : {}
-    //       })
-    //     })
-    // }
-  }
-
   // 发布文章
   public onPublish() {
     if (!this.state.draftId) {
       return
     }
-
-    // 发布文章
-    // const publishMutate = gql`
-    //   mutation PublishArticleMutation($input: PublishArticleInput!) {
-    //     data: publishArticle(input: $input) {
-    //       id
-    //     }
-    //   }
-    // `
-
-    // this.props.client
-    //   .mutate({
-    //     mutation: publishMutate,
-    //     variables: {
-    //       input: {
-    //         id: this.state.draftId
-    //       }
-    //     }
-    //   })
-    //   .then(res => {
-    //     this.onTogglePublish()
-    //   })
   }
-
-  // 暂存草稿
-  // public onSaveDraft() {
-  //   this.onSubmit()
-  // }
-
-  // 更新 tags
-  // public updateTags(tagsArray: string[]) {
-  //   this.setState(
-  //     {
-  //       tags: tagsArray
-  //     },
-  //     () => {
-  //       this.onSubmit()
-  //     }
-  //   )
-  // }
-
-  // // 更新 上游文章
-  // public updateUpstream(el) {
-  //   this.setState(
-  //     {
-  //       upstream: el
-  //     },
-  //     () => this.onSubmit()
-  //   )
-  // }
 
   public updateDraft(data: any) {
     const { content, id: draftId, title, tags } = data.node
@@ -429,40 +351,11 @@ export class Editor extends React.Component<Props, State> {
     }
     return (
       <div>
-        {/* <HeaderBox
-          active="none"
-          showPublishButton
-          publish={this.onTogglePublish.bind(this)}
-        /> */}
         <section
           className="container"
           style={isWeb ? Style.contentBox.pc : Style.contentBox.mobile}
         >
-          {/* 左边 */}
           <div className="left-box relative">
-            {/* TODO: 提示 */}
-            {/* <div style={Style.notice.box}>
-                            <strong style={Style.notice.title}>
-                                正在等待發佈 (01:24)
-                            </strong>
-                            <div className="flex items-center justify-between">
-                                <div style={Style.notice.notice}>
-                                    上鏈後，文章不可刪改，永久保存
-                                </div>
-                                <div style={Style.notice.cancle}>撤銷</div>
-                            </div>
-                        </div> */}
-            {/* <div>
-              <input
-                placeholder="請輸入標題…"
-                style={Style.titleInput}
-                value={title}
-                onChange={e => {
-                  this.handleTitle(e)
-                }}
-                onBlur={this.onSubmit.bind(this)}
-              />
-            </div> */}
             <div onClick={this.onSetDefault.bind(this)} id="editor">
               {typeof window !== 'undefined' && ReactQuill ? (
                 <ReactQuill

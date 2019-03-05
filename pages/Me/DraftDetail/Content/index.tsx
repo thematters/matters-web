@@ -117,6 +117,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               updateDraft({ variables: { id: draft.id, ...newDraft } })
             }}
           />
+
           <style jsx>{styles}</style>
         </>
       )}
