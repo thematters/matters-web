@@ -66,6 +66,10 @@ pre {
   font-size: 1em;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 a {
   background-color: transparent;
 }
