@@ -3,7 +3,7 @@ import Router from 'next/router'
 import { useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
-import { Form } from '~/components/Form'
+import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
@@ -109,14 +109,14 @@ const SignUp = () => {
       <main className="l-row row">
         <article className={containerClass}>
           {step === 'signUp' && (
-            <Form.SignUpForm
+            <SignUpInitForm
               extraClass={childClass}
               purpose="page"
               submitCallback={signUpCallback}
             />
           )}
           {step === 'profile' && (
-            <Form.SignUpProfileForm
+            <SignUpProfileForm
               extraClass={childClass}
               purpose="page"
               submitCallback={signUpProfileCallback}
