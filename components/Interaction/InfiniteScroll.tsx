@@ -1,4 +1,5 @@
 import { Waypoint } from '@matters/react-waypoint'
+import { ApolloQueryResult } from 'apollo-client'
 
 import { Spinner } from '~/components/Spinner'
 
@@ -32,7 +33,7 @@ interface Props {
   /**
    * Callback to load more entities
    */
-  loadMore: () => void
+  loadMore: () => Promise<ApolloQueryResult<any>>
 
   /**
    * A React component to act as loader
@@ -45,18 +46,16 @@ export const InfiniteScroll: React.FC<Props> = ({
   loader = <Spinner />,
   hasNextPage,
   loadMore
-}) => {
-  return (
-    <div>
-      {children}
-      <Waypoint
-        onEnter={() => {
-          if (hasNextPage) {
-            loadMore()
-          }
-        }}
-      />
-      {hasNextPage && loader}
-    </div>
-  )
-}
+}) => (
+  <div>
+    {children}
+    <Waypoint
+      onEnter={() => {
+        if (hasNextPage) {
+          loadMore()
+        }
+      }}
+    />
+    {hasNextPage && loader}
+  </div>
+)
