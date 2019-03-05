@@ -1,0 +1,28 @@
+:root {
+  --modal-header-height: 4rem;
+  --modal-footer-height: 4rem;
+}
+
+section {
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @media (--sm-up) {
+    max-height: calc(
+      100vh - var(--modal-header-height) - var(--modal-footer-height)
+    );
+  }
+}
+
+.none {
+  padding: 0 var(--spacing-tight);
+}
+
+.default {
+  padding: 4rem var(--spacing-tight);
+
+  @media (--sm-down) {
+    padding: var(--spacing-default) var(--spacing-tight);
+  }
+}

@@ -44,3 +44,7 @@
     color: var(--color-matters-green);
   }
 }
+
+.modal-appreciators-list {
+  margin-top: var(--spacing-default);
+}

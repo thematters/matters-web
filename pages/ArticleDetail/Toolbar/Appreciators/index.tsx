@@ -3,8 +3,10 @@ import _get from 'lodash/get'
 
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import { ModalSwitch } from '~/components/ModalManager'
 
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
+import AppreciatorsModal from './AppreciatorsModal'
 import styles from './styles.css'
 
 const fragments = {
@@ -36,36 +38,43 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   }
 
   return (
-    <button
-      type="button"
-      className="container"
-      aria-label="查看所有讚賞者"
-      onClick={() => alert('TODO: popup modal')}
-    >
-      <section className="avatar-list">
-        {edges
-          .slice(0, 5)
-          .map(({ node, cursor }: { node: any; cursor: any }) => (
-            <Avatar user={node} size="xsmall" key={cursor} />
-          ))}
-      </section>
-      <section className="name-list">
-        <p>
-          {edges
-            .slice(0, 3)
-            .map(({ node }: { node: any }) => node.displayName)
-            .join('、')}
-        </p>
-        <p className="highlight">
-          <Translate
-            zh_hant={({ count }) => `等 ${count} 人贊賞了文章`}
-            zh_hans={({ count }) => `等 ${count} 人赞赏了文章`}
-            data={{ count: article.appreciators.totalCount }}
-          />
-        </p>
-      </section>
-      <style jsx>{styles}</style>
-    </button>
+    <>
+      <ModalSwitch modalId="appreciatorsModal">
+        {(open: any) => (
+          <button
+            type="button"
+            className="container"
+            aria-label="查看所有讚賞者"
+            onClick={() => open()}
+          >
+            <section className="avatar-list">
+              {edges
+                .slice(0, 5)
+                .map(({ node, cursor }: { node: any; cursor: any }) => (
+                  <Avatar user={node} size="xsmall" key={cursor} />
+                ))}
+            </section>
+            <section className="name-list">
+              <p>
+                {edges
+                  .slice(0, 3)
+                  .map(({ node }: { node: any }) => node.displayName)
+                  .join('、')}
+              </p>
+              <p className="highlight">
+                <Translate
+                  zh_hant={({ count }) => `等 ${count} 人贊賞了文章`}
+                  zh_hans={({ count }) => `等 ${count} 人赞赏了文章`}
+                  data={{ count: article.appreciators.totalCount }}
+                />
+              </p>
+            </section>
+            <style jsx>{styles}</style>
+          </button>
+        )}
+      </ModalSwitch>
+      <AppreciatorsModal />
+    </>
   )
 }
 

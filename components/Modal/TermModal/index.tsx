@@ -22,10 +22,6 @@ import styles from './styles.css'
  * ```
  */
 
-interface Props {
-  close: () => {}
-}
-
 const MUTATION_UPDATE_AGREE_ON = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -43,7 +39,7 @@ const MUTATION_USER_LOGOUT = gql`
   }
 `
 
-const TermModal: FC<Props> = ({ close }) => {
+const TermModal: FC<ModalInstanceProps> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
 
   const disagree = (action: any) => {

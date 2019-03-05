@@ -1,9 +1,9 @@
-import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
 import { LanguageContext } from '~/components/Language'
+import ModalContent from '~/components/Modal/Content'
 
 import { translate } from '~/common/utils'
 
@@ -20,25 +20,12 @@ import styles from './styles.css'
  *
  */
 
-interface Props {
-  close: () => {}
-  setModalClass: (value: string) => void
-}
-
 type Step = 'ask' | 'confirm' | 'complete'
 
-const UserNameModal: FC<Props> = ({ close, setModalClass }) => {
+const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('ask')
-
-  const contentClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-col-md-6',
-    'l-col-lg-8',
-    'content'
-  )
 
   const askCallback = (event: any) => {
     event.stopPropagation()
@@ -49,15 +36,13 @@ const UserNameModal: FC<Props> = ({ close, setModalClass }) => {
 
   const Ask = () => (
     <>
-      <div className="container">
-        <div className={classNames(contentClass)}>
-          {translate({
-            zh_hant: '您的 Matters ID 僅能永久修改一次，確定要繼續嗎？',
-            zh_hans: '您的 Matters ID 仅能永久修改一次，确定要继续吗？',
-            lang
-          })}
-        </div>
-      </div>
+      <ModalContent>
+        {translate({
+          zh_hant: '您的 Matters ID 僅能永久修改一次，確定要繼續嗎？',
+          zh_hans: '您的 Matters ID 仅能永久修改一次，确定要继续吗？',
+          lang
+        })}
+      </ModalContent>
       <div className="ask-buttons">
         <Button
           type="button"
@@ -100,14 +85,12 @@ const UserNameModal: FC<Props> = ({ close, setModalClass }) => {
     <>
       {step === 'ask' && <Ask />}
       {step !== 'ask' && (
-        <div className="container">
-          <div className={contentClass}>
-            {step === 'confirm' && (
-              <UserNameChangeConfirmForm submitCallback={confirmCallback} />
-            )}
-            {step === 'complete' && <Complete />}
-          </div>
-        </div>
+        <ModalContent>
+          {step === 'confirm' && (
+            <UserNameChangeConfirmForm submitCallback={confirmCallback} />
+          )}
+          {step === 'complete' && <Complete />}
+        </ModalContent>
       )}
       <style jsx>{styles}</style>
     </>

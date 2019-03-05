@@ -6,32 +6,13 @@
   bottom: 0;
 
   background-color: rgba(0, 0, 0, 0.5);
-
-  &.center {
-    @mixin flex-center-all;
-  }
 }
 
-.row {
-  flex: auto;
-  padding-bottom: var(--spacing-default);
-
-  @media (--sm-down) {
-    & {
-      padding-bottom: var(-spacing-x-tight);
-    }
-  }
+.center {
+  @mixin flex-center-all;
 }
 
 .container {
-  background-color: #fff;
-  border-radius: 0.15rem;
-  z-index: 200;
-}
-
-.header {
-  @mixin flex-center-space-between;
-  @mixin border-bottom-grey;
-  margin: 0rem var(--spacing-x-tight);
-  padding: 0.75rem var(--spacing-x-tight);
+  background-color: var(--color-white);
+  border-radius: 2px;
 }

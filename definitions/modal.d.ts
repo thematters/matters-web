@@ -1,6 +1,7 @@
 interface ModalInstanceProps {
-  close: () => {}
-  setCloseOnEsc: (value: boolean) => {}
-  setCloseOnOutsideClick: (value: boolean) => {}
+  close: () => void
+  interpret: () => string
+  closeable: boolean
+  setCloseable: (value: boolean) => {}
   setModalClass: (value: string) => {}
 }

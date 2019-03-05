@@ -13,6 +13,7 @@
       margin-top: var(--spacing-tight);
       padding: var(--spacing-x-tight);
       overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
 
       &::-webkit-scrollbar-track {
         border-radius: 0.5rem;
@@ -20,7 +21,7 @@
       }
 
       &::-webkit-scrollbar {
-        width:  0.9rem;
+        width: 0.9rem;
         background-color: rgba(0, 0, 0, 0);
       }
 

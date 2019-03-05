@@ -1,18 +1,3 @@
-.container {
-  @mixin flex-center-all;
-  padding: 4rem var(--spacing-tight);
-
-  & > .content {
-    margin: 0rem;
-  }
-
-  @media (--sm-down) {
-    & {
-      padding: var(--spacing-default) var(--spacing-tight);
-    }
-  }
-}
-
 .ask-buttons {
   @mixin border-top-grey;
   display: flex;

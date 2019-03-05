@@ -31,30 +31,22 @@ const Anchor = () => {
 
   return (
     <>
-      <div>
-        <div id="modal-anchor" className="container" />
-        <ModalInstance modalId="loginModal" title="login">
-          {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
-        </ModalInstance>
-        <ModalInstance modalId="signUpModal">
-          {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
-        </ModalInstance>
-        <ModalInstance modalId="passwordResetModal">
-          {(props: ModalInstanceProps) => (
-            <Modal.PasswordModal purpose="forget" {...props} />
-          )}
-        </ModalInstance>
-        <ModalInstance
-          modalId="termModal"
-          title="term"
-          defaultCloseOnEsc={false}
-          defaultCloseOnOutsideClick={false}
-          enableCloseButton={false}
-        >
-          {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
-        </ModalInstance>
-        {isAuth && disagreedToS && <OpenedTermModal />}
-      </div>
+      <div id="modal-anchor" className="container" />
+      <ModalInstance modalId="loginModal" title="login">
+        {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
+      </ModalInstance>
+      <ModalInstance modalId="signUpModal">
+        {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
+      </ModalInstance>
+      <ModalInstance modalId="passwordResetModal">
+        {(props: ModalInstanceProps) => (
+          <Modal.PasswordModal purpose="forget" {...props} />
+        )}
+      </ModalInstance>
+      <ModalInstance modalId="termModal" title="term" defaultCloseable={false}>
+        {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
+      </ModalInstance>
+      {isAuth && disagreedToS && <OpenedTermModal />}
       <style jsx>{styles}</style>
     </>
   )
