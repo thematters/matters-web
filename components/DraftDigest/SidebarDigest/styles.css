@@ -1,0 +1,34 @@
+.container {
+  margin-top: var(--spacing-tight);
+}
+
+.content {
+  position: relative;
+
+  @media (--sm-up) {
+    padding-right: 5.875rem;
+  }
+}
+
+.title {
+  font-size: var(--font-size-sm);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  margin-top: var(--spacing-xx-tight);
+
+  font-size: var(--font-size-xs);
+  color: var(--color-grey-dark);
+
+  & > :global(*) {
+    color: var(--color-grey-dark);
+    line-height: 1;
+    vertical-align: middle;
+  }
+  & > :global(button) {
+    color: var(--color-grey);
+  }
+}

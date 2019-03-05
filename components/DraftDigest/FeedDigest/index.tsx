@@ -4,16 +4,17 @@ import Link from 'next/link'
 
 import { DateTime, Icon, TextIcon, Title, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums/text'
 import { toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
+import DeleteButton from '../Components/DeleteButton'
+import ErrorState from '../Components/ErrorState'
+import PendingState from '../Components/PendingState'
+import RecallButton from '../Components/RecallButton'
+import RetryButton from '../Components/RetryButton'
 import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
-import DeleteButton from './Components/DeleteButton'
-import ErrorState from './Components/ErrorState'
-import PendingState from './Components/PendingState'
-import RecallButton from './Components/RecallButton'
-import RetryButton from './Components/RetryButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -63,11 +64,11 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
   return (
     <section className={containerClasses}>
       {(isPending || isError) && (
-        <div className="header">
+        <header className="header">
           <span />
           {isPending && <PendingState draft={draft} />}
           {isError && <ErrorState />}
-        </div>
+        </header>
       )}
 
       <div className="content">
@@ -75,7 +76,12 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
           <Link {...path}>
             <a>
               <Title type="feed" is="h2">
-                {title}
+                {title || (
+                  <Translate
+                    zh_hant={TEXT.zh_hant.untitle}
+                    zh_hans={TEXT.zh_hans.untitle}
+                  />
+                )}
               </Title>
             </a>
           </Link>

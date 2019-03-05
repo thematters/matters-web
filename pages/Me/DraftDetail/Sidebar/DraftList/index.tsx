@@ -32,6 +32,7 @@ const DraftList = ({ currentId }: { currentId: string }) => (
     <Query query={ME_DRAFTS}>
       {({ data, loading }: QueryResult & { data: MeDrafts }) => {
         const edges = _get(data, 'viewer.drafts.edges')
+
         if (loading || !edges) {
           return <Spinner />
         }
