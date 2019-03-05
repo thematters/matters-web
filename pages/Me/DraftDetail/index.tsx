@@ -48,6 +48,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
           <aside className="l-col-4 l-col-md-3 l-col-lg-4">
             {loading ? <Placeholder.Sidebar /> : <Sidebar draft={data.node} />}
           </aside>
+
           <style jsx>{styles}</style>
         </main>
       )}

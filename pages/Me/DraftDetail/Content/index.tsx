@@ -8,8 +8,9 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import { DraftDetailQuery_node_Draft } from './__generated__/DraftDetailQuery'
+import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
 import { UpdateDraftVariables } from './__generated__/UpdateDraft'
+import styles from './styles.css'
 
 export const UPDATE_DRAFT = gql`
   mutation UpdateDraft(
@@ -82,22 +83,15 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
         <>
-          <div>
+          <header>
             <input
               placeholder={translate({
                 zh_hant: '請輸入標題…',
-                zh_hans: '请输入标题...',
+                zh_hans: '请输入标题…',
                 lang
               })}
-              style={{
-                border: 0,
-                borderBottom: '.05rem solid rgba(0, 0, 0, 0.16)',
-                paddingBottom: '1rem',
-                fontSize: 24,
-                color: '#333333',
-                fontWeight: 600,
-                width: '100%'
-              }}
+              aria-label="請輸入標題…"
+              type="text"
               value={
                 title &&
                 title !==
@@ -114,7 +108,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               }}
               onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
             />
-          </div>
+          </header>
+
           <Editor
             draft={draft}
             upload={upload}
@@ -122,6 +117,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               updateDraft({ variables: { id: draft.id, ...newDraft } })
             }}
           />
+          <style jsx>{styles}</style>
         </>
       )}
     </Mutation>

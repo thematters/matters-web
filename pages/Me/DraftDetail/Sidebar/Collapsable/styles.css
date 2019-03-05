@@ -1,0 +1,12 @@
+section {
+  @mixin border-bottom-grey;
+
+  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-default);
+
+  color: var(--color-grey);
+
+  &.expanded {
+    color: var(--color-black);
+  }
+}

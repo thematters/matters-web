@@ -1,0 +1,13 @@
+header input {
+  @mixin border-bottom-grey;
+  padding-bottom: var(--spacing-tight);
+
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  line-height: 1.33333333;
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
+  }
+}
