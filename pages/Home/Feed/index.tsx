@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -11,9 +11,9 @@ import {
   PageHeader,
   Placeholder,
   Responsive,
-  Spinner,
   Translate
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -88,7 +88,7 @@ export default () => {
           error,
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
-          if (loading) {
+          if (loading && !(data && data.pageInfo)) {
             return <Placeholder.ArticleDigestList />
           }
 
@@ -146,7 +146,6 @@ export default () => {
                         )}
                       </ul>
                     </InfiniteScroll>
-                    {!match && pageInfo.hasNextPage && loading && <Spinner />}
                     {!match && pageInfo.hasNextPage && !loading && (
                       <LoadMore onClick={loadMore} />
                     )}

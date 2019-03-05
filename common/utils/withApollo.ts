@@ -5,7 +5,7 @@ import {
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
+// import { onError } from 'apollo-link-error'
 import { createUploadLink } from 'apollo-upload-client'
 import http from 'http'
 import https from 'https'
@@ -41,20 +41,20 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
     }
   })
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.map(({ message, locations, extensions, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Code: ${
-          extensions.code
-        }`
-      )
-    )
-  }
-  if (networkError) {
-    console.log(`[Network error]: ${networkError}`)
-  }
-})
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors) {
+//     graphQLErrors.map(({ message, locations, extensions, path }) =>
+//       console.log(
+//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Code: ${
+//           extensions.code
+//         }`
+//       )
+//     )
+//   }
+//   if (networkError) {
+//     console.log(`[Network error]: ${networkError}`)
+//   }
+// })
 
 const authLink = setContext((_, { headers }) => {
   return {
@@ -68,8 +68,7 @@ const authLink = setContext((_, { headers }) => {
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: ApolloLink.from([errorLink, authLink, httpLink({ headers })]),
-
+      link: ApolloLink.from([authLink, httpLink({ headers })]),
       cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )
