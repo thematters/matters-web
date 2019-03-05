@@ -7,20 +7,17 @@ import {
   ArticleDigest,
   Button,
   Dropdown,
-  Icon,
   PopperInstance,
   Spinner,
-  TextIcon,
   Translate
 } from '~/components'
-
-import COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 
 import { ConnectUpstreamDraft } from './__generated__/ConnectUpstreamDraft'
 import {
   SearchUpstream,
   SearchUpstream_search_edges_node_Article
 } from './__generated__/SearchUpstream'
+import Collapsable from './Collapsable'
 import styles from './styles.css'
 
 const SEARCH_UPSTREAM = gql`
@@ -59,9 +56,6 @@ const SET_UPSTREAM = gql`
 `
 
 const ConnectUpstream = ({ draft }: { draft: ConnectUpstreamDraft }) => {
-  // collapse state
-  const [collapsed, toggleCollapse] = useState<boolean>(true)
-
   // dropdown state
   const [instance, setInstance] = useState<PopperInstance | null>(null)
 
@@ -87,115 +81,89 @@ const ConnectUpstream = ({ draft }: { draft: ConnectUpstreamDraft }) => {
 
   return (
     <>
-      <div
-        onClick={() => {
-          toggleCollapse(!collapsed)
-        }}
-        className={`sidebar-title-${collapsed ? 'collapsed' : 'expanded'}`}
+      <Collapsable
+        title={<Translate zh_hans={'连接上游文章'} zh_hant={'連結上游文章'} />}
       >
-        <TextIcon
-          icon={
-            <Icon
-              id={COLLAPSE_BRANCH.id}
-              viewBox={COLLAPSE_BRANCH.viewBox}
-              style={{
-                width: 14,
-                height: 14,
-                transform: `rotate(${collapsed ? 180 : 0}deg)`
-              }}
-            />
-          }
-          textPlacement={'left'}
-        >
-          <Translate zh_hans={'连接上游文章'} zh_hant={'連結上游文章'} />
-        </TextIcon>
-      </div>
-      {!collapsed && (
-        <>
-          <span className={'sidebar-description'}>
-            <Translate
-              zh_hans={'通过连接上游帮助读者更好地找到你的文章。'}
-              zh_hant={'通過連結上游幫助讀者更好地找到你的文章。'}
-            />
-          </span>
-          <Query query={SEARCH_UPSTREAM} variables={{ search }}>
-            {({ data, loading }: QueryResult & { data: SearchUpstream }) => (
-              <Mutation mutation={SET_UPSTREAM}>
-                {mutateUpsteam => (
-                  <Dropdown
-                    content={
-                      loading ? (
-                        <Spinner />
-                      ) : (
-                        <div
-                          style={{ display: 'flex', flexDirection: 'column' }}
-                        >
-                          {data.search.edges.map(
-                            ({
-                              node,
-                              cursor
-                            }: {
-                              node: SearchUpstream_search_edges_node_Article
-                              cursor: string
-                            }) => (
-                              <span
-                                key={cursor}
-                                onClick={() => {
-                                  setSearch(node.title)
-                                  mutateUpsteam({
-                                    variables: {
-                                      id: draft.id,
-                                      upstream: node.id
-                                    }
-                                  })
-                                }}
-                              >
-                                {node.title}
-                                {/* TODO:
+        <span className={'sidebar-description'}>
+          <Translate
+            zh_hans={'通过连接上游帮助读者更好地找到你的文章。'}
+            zh_hant={'通過連結上游幫助讀者更好地找到你的文章。'}
+          />
+        </span>
+        <Query query={SEARCH_UPSTREAM} variables={{ search }}>
+          {({ data, loading }: QueryResult & { data: SearchUpstream }) => (
+            <Mutation mutation={SET_UPSTREAM}>
+              {mutateUpsteam => (
+                <Dropdown
+                  content={
+                    loading ? (
+                      <Spinner />
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {data.search.edges.map(
+                          ({
+                            node,
+                            cursor
+                          }: {
+                            node: SearchUpstream_search_edges_node_Article
+                            cursor: string
+                          }) => (
+                            <span
+                              key={cursor}
+                              onClick={() => {
+                                setSearch(node.title)
+                                mutateUpsteam({
+                                  variables: {
+                                    id: draft.id,
+                                    upstream: node.id
+                                  }
+                                })
+                              }}
+                            >
+                              {node.title}
+                              {/* TODO:
                               change to ArticleDigest.Dropdown */}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      )
-                    }
-                    zIndex={101}
-                    onCreate={i => setInstance(i)}
-                  >
-                    <span style={{ display: 'flex' }}>
-                      <input
-                        type="search"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        onFocus={showDropdown}
-                        onBlur={hideDropdown}
-                      />
-                      <Button
-                        bgColor="white"
-                        is="span"
-                        outlineColor="green"
-                        size="small"
-                        onClick={() => {
-                          setSearch('')
-                          mutateUpsteam({
-                            variables: {
-                              id: draft.id,
-                              upstream: null
-                            }
-                          })
-                        }}
-                      >
-                        <Translate zh_hans={'解除'} zh_hant={'解除'} />
-                      </Button>
-                    </span>
-                  </Dropdown>
-                )}
-              </Mutation>
-            )}
-          </Query>
-        </>
-      )}
-      <hr />
+                            </span>
+                          )
+                        )}
+                      </div>
+                    )
+                  }
+                  zIndex={101}
+                  onCreate={i => setInstance(i)}
+                >
+                  <span style={{ display: 'flex' }}>
+                    <input
+                      type="search"
+                      value={search}
+                      onChange={e => setSearch(e.target.value)}
+                      onFocus={showDropdown}
+                      onBlur={hideDropdown}
+                    />
+                    <Button
+                      bgColor="white"
+                      is="span"
+                      outlineColor="green"
+                      size="small"
+                      onClick={() => {
+                        setSearch('')
+                        mutateUpsteam({
+                          variables: {
+                            id: draft.id,
+                            upstream: null
+                          }
+                        })
+                      }}
+                    >
+                      <Translate zh_hans={'解除'} zh_hant={'解除'} />
+                    </Button>
+                  </span>
+                </Dropdown>
+              )}
+            </Mutation>
+          )}
+        </Query>
+      </Collapsable>
       <style jsx>{styles}</style>
     </>
   )

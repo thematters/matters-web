@@ -3,7 +3,9 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
+import { onError } from 'apollo-link-error'
 import { createUploadLink } from 'apollo-upload-client'
 import http from 'http'
 import https from 'https'
@@ -28,7 +30,8 @@ const agent =
         rejectUnauthorized: process.env.NODE_ENV !== 'development' // allow access to https:...matters.news in localhost
       })
 
-const httpUploadLink = ({ headers }: { [key: string]: any }) =>
+// links
+const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
     uri: API_URL,
     credentials: 'include',
@@ -37,6 +40,21 @@ const httpUploadLink = ({ headers }: { [key: string]: any }) =>
       agent
     }
   })
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message, locations, extensions, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Code: ${
+          extensions.code
+        }`
+      )
+    )
+  }
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`)
+  }
+})
 
 const authLink = setContext((_, { headers }) => {
   return {
@@ -50,7 +68,8 @@ const authLink = setContext((_, { headers }) => {
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: authLink.concat(httpUploadLink({ headers })),
+      link: ApolloLink.from([errorLink, authLink, httpLink({ headers })]),
+
       cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )
