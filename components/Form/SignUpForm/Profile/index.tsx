@@ -19,7 +19,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.SignUpProfileForm
+ *   <SignUpProfileForm
  *     extraClass={[]}
  *     purpose="modal"
  *     submitCallback={()=> {}}
@@ -46,7 +46,7 @@ const MUTATION_UPDATE_USER_INFO = gql`
   }
 `
 
-const SignUpProfileForm: FC<Props> = ({
+export const SignUpProfileForm: FC<Props> = ({
   extraClass = [],
   purpose,
   submitCallback
@@ -158,5 +158,3 @@ const SignUpProfileForm: FC<Props> = ({
     </>
   )
 }
-
-export default SignUpProfileForm

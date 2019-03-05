@@ -5,12 +5,11 @@ import {
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
 import { LanguageContext } from '~/components/Language'
+import ModalComplete from '~/components/Modal/Complete'
 import ModalContent from '~/components/Modal/Content'
 import ModalHeader from '~/components/Modal/Header'
 
 import { translate } from '~/common/utils'
-
-import styles from './styles.css'
 
 /**
  * This component is for password reset modal.
@@ -83,37 +82,6 @@ const PasswordModal: FC<
     setStep('request')
   }
 
-  const Complete = () => (
-    <>
-      <div className="complete">
-        <div className="message">
-          {purpose === 'forget'
-            ? translate({
-                zh_hant: '密碼重置成功',
-                zh_hans: '密码重置成功',
-                lang
-              })
-            : translate({
-                zh_hant: '密碼修改成功',
-                zh_hans: '密码修改成功',
-                lang
-              })}
-        </div>
-        {purpose === 'forget' && (
-          <div className="hint">
-            {translate({
-              zh_hant: '請使用新的密碼重新登入',
-              zh_hans: '请使用新的密码重新登入',
-              lang
-            })}
-            。
-          </div>
-        )}
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
-
   return (
     <>
       <ModalHeader title={data[step].title} />
@@ -135,10 +103,33 @@ const PasswordModal: FC<
             submitCallback={() => setStep('complete')}
           />
         )}
-        {step === 'complete' && <Complete />}
+        {step === 'complete' && (
+          <ModalComplete
+            message={
+              purpose === 'forget'
+                ? translate({
+                    zh_hant: '密碼重置成功',
+                    zh_hans: '密码重置成功',
+                    lang
+                  })
+                : translate({
+                    zh_hant: '密碼修改成功',
+                    zh_hans: '密码修改成功',
+                    lang
+                  })
+            }
+            hint={
+              purpose === 'forget'
+                ? translate({
+                    zh_hant: '請使用新的密碼重新登入',
+                    zh_hans: '请使用新的密码重新登入',
+                    lang
+                  })
+                : ''
+            }
+          />
+        )}
       </ModalContent>
-
-      <style jsx>{styles}</style>
     </>
   )
 }
