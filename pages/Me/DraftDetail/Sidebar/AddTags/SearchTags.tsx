@@ -1,9 +1,15 @@
 import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
+import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Dropdown, LanguageContext, Spinner, Translate } from '~/components'
+import {
+  Dropdown,
+  LanguageContext,
+  Menu,
+  PopperInstance,
+  Spinner
+} from '~/components'
 
 import { translate } from '~/common/utils'
 
@@ -31,6 +37,50 @@ const SEARCH_TAGS = gql`
   }
 `
 
+const DropdownContent = ({
+  tags,
+  search,
+  addTag,
+  hideDropdown,
+  loading
+}: {
+  tags: SearchTagsQuery_search_edges_node_Tag[]
+  search: string
+  addTag: (tag: string) => void
+  hideDropdown: () => void
+  loading: boolean
+}) =>
+  loading ? (
+    <Menu>
+      <Menu.Item>
+        <Spinner />
+      </Menu.Item>
+    </Menu>
+  ) : (
+    <Menu>
+      {tags.map(tag => (
+        <Menu.Item
+          spacing={['xtight', 'tight']}
+          hoverBgColor="green"
+          key={tag.content}
+        >
+          <button
+            className="search-tag-item"
+            type="button"
+            onClick={() => {
+              addTag(tag.content)
+              hideDropdown()
+            }}
+          >
+            <span>{tag.content}</span>
+            <span className="search-tag-count">{tag.articles.totalCount}</span>
+            <style jsx>{styles}</style>
+          </button>
+        </Menu.Item>
+      ))}
+    </Menu>
+  )
+
 const SearchTags = ({
   hasTags,
   addTag
@@ -39,87 +89,68 @@ const SearchTags = ({
   addTag: (tag: string) => void
 }) => {
   const { lang } = useContext(LanguageContext)
-
   const [search, setSearch] = useState('')
-
-  const DropdownContent = ({
-    tags
-  }: {
-    tags: SearchTagsQuery_search_edges_node_Tag[]
-  }) => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '10.5rem',
-        justifyContent: 'start'
-      }}
-    >
-      {tags.map(tag => (
-        <span
-          className="tag-search"
-          onClick={() => addTag(tag.content)}
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            height: 40,
-            alignItems: 'center'
-          }}
-        >
-          <span style={{ marginLeft: '1rem', marginRight: '0.5rem' }}>
-            {tag.content}
-          </span>
-          <span className="tag-count">{tag.articles.totalCount}</span>
-        </span>
-      ))}
-      <hr />
-      <span
-        className="tag-search"
-        style={{ height: '3.25rem', display: 'flex', alignItems: 'center' }}
-        onClick={() => addTag(search)}
-      >
-        <span style={{ marginLeft: '1rem' }}>
-          <Translate zh_hans="创建" zh_hant="創建" />
-        </span>
-        <span> {search} </span>
-      </span>
-      <style jsx>{styles}</style>
-    </div>
-  )
+  const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const hideDropdown = () => {
+    if (instance) {
+      instance.hide()
+    }
+  }
+  const showDropdown = () => {
+    if (instance) {
+      setTimeout(() => {
+        instance.show()
+      }, 100) // unknown bug, needs set a timeout
+    }
+  }
 
   return (
     <>
-      <Query query={SEARCH_TAGS} variables={{ search }}>
-        {({ data, loading }: QueryResult & { data: SearchTagsQuery }) => (
-          <Dropdown
-            content={
-              loading ? (
-                <Spinner />
-              ) : (
+      <Query query={SEARCH_TAGS} variables={{ search }} skip={!search}>
+        {({ data, loading }: QueryResult & { data: SearchTagsQuery }) => {
+          return (
+            <Dropdown
+              trigger="manual"
+              onCreate={i => setInstance(i)}
+              content={
                 <DropdownContent
-                  tags={data.search.edges.map(
+                  loading={loading}
+                  search={search}
+                  tags={_get(data, 'search.edges', []).map(
                     ({
                       node
                     }: {
                       node: SearchTagsQuery_search_edges_node_Tag
                     }) => node
                   )}
+                  addTag={addTag}
+                  hideDropdown={hideDropdown}
                 />
-              )
-            }
-          >
-            <input
-              onChange={e => setSearch(e.target.value)}
-              value={search}
-              style={{ fontSize: 14, marginTop: 16 }}
-              placeholder={translate({
-                zh_hans: '增加標籤…',
-                zh_hant: '增加标签…',
-                lang
-              })}
-            />
-          </Dropdown>
-        )}
+              }
+            >
+              <input
+                className="search-tag-input"
+                onChange={e => {
+                  const value = e.target.value
+                  setSearch(value)
+                  if (value) {
+                    showDropdown()
+                  } else {
+                    hideDropdown()
+                  }
+                }}
+                onFocus={() => search && showDropdown()}
+                onClick={() => search && showDropdown()}
+                value={search}
+                placeholder={translate({
+                  zh_hans: '增加標籤…',
+                  zh_hant: '增加标签…',
+                  lang
+                })}
+              />
+            </Dropdown>
+          )
+        }}
       </Query>
       <style jsx>{styles}</style>
     </>

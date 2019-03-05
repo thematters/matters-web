@@ -5,12 +5,10 @@
   font-size: var(--font-size-xs);
 }
 
-.tags-container {
-}
-
 .tag {
   display: inline-block;
   margin-right: var(--spacing-x-tight);
+  margin-bottom: var(--spacing-x-tight);
   padding: 0 var(--spacing-x-tight);
   height: 1.5rem;
 
@@ -28,4 +26,30 @@
     line-height: 1;
     vertical-align: middle;
   }
+}
+
+.search-tag-input {
+  display: inline-block;
+  height: 1.5rem;
+  width: 5rem;
+
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+  color: var(--color-black);
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
+  }
+}
+
+.search-tag-item {
+  white-space: pre-wrap;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.search-tag-count {
+  margin-left: var(--spacing-xx-tight);
+  color: var(--color-grey);
 }

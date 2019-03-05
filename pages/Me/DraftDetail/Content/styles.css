@@ -8,5 +8,6 @@ header input {
 
   &::placeholder {
     color: var(--color-grey);
+    opacity: 1; /* Firefox */
   }
 }

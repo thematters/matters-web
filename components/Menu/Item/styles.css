@@ -3,6 +3,7 @@
   display: block;
   width: 100%;
   text-align: left;
+  overflow: hidden;
 
   & :global(> *:before) {
     content: '';

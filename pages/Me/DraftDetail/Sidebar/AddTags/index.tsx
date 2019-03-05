@@ -31,9 +31,13 @@ const UPDATE_TAGS = gql`
 
 const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
   const tags = draft.tags || []
+  const hasTags = tags.length > 0
 
   return (
-    <Collapsable title={<Translate zh_hans="增加标签" zh_hant="增加標籤" />}>
+    <Collapsable
+      title={<Translate zh_hans="增加标签" zh_hant="增加標籤" />}
+      defaultCollapsed={!hasTags}
+    >
       <p className="tags-intro">
         <Translate
           zh_hant="通過添加標籤幫助讀者更好地找到你的文章。每篇文章最多可以添加五個標籤。如果沒有合適的標籤，你可以創建新的。"
@@ -57,7 +61,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
               {tags.map(tag => (
                 <Tag tag={tag} deleteTag={deleteTag} key={tag} />
               ))}
-              <SearchTags hasTags={tags.length > 0} addTag={addTag} />
+              <SearchTags hasTags={hasTags} addTag={addTag} />
             </section>
           )
         }}

@@ -12,7 +12,7 @@ interface TagProps {
 const Tag = ({ tag, deleteTag }: TagProps) => (
   <span className="tag">
     <span>{tag}</span>
-    <button type="button" onClick={() => deleteTag}>
+    <button type="button" onClick={() => deleteTag(tag)}>
       <Icon
         id={ICON_FAIL.id}
         viewBox={ICON_FAIL.viewBox}
