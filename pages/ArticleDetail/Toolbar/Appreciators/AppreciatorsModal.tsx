@@ -27,7 +27,7 @@ const ARTICLE_APPRECIATORS = gql`
   ) {
     article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
       id
-      appreciators(input: { first: 5, after: $cursor }) {
+      appreciators(input: { first: 10, after: $cursor }) {
         totalCount
         pageInfo {
           startCursor
