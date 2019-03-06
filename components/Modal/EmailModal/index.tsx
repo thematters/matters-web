@@ -5,12 +5,11 @@ import {
   EmailChangeRequestForm
 } from '~/components/Form/EmailChangeForm'
 import { LanguageContext } from '~/components/Language'
+import ModalComplete from '~/components/Modal/Complete'
 import ModalContent from '~/components/Modal/Content'
 import { ViewerContext } from '~/components/Viewer'
 
 import { translate } from '~/common/utils'
-
-import styles from './styles.css'
 
 /**
  * This component is a modal for changing email.
@@ -58,21 +57,6 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
 
   const confirmCallback = () => setStep('complete')
 
-  const Complete = () => (
-    <>
-      <div className="complete">
-        <div className="message">
-          {translate({
-            zh_hant: '電子信箱修改成功',
-            zh_hans: '邮箱修改成功',
-            lang
-          })}
-        </div>
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
-
   return (
     <>
       <ModalContent>
@@ -88,9 +72,16 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
             submitCallback={confirmCallback}
           />
         )}
-        {step === 'complete' && <Complete />}
+        {step === 'complete' && (
+          <ModalComplete
+            message={translate({
+              zh_hant: '電子信箱修改成功',
+              zh_hans: '邮箱修改成功',
+              lang
+            })}
+          />
+        )}
       </ModalContent>
-      <style jsx>{styles}</style>
     </>
   )
 }
