@@ -24,7 +24,7 @@ type HeaderState = HeaderStateInput & {
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
-  setHeaderState: (state: HeaderStateInput) => void
+  updateHeaderState: (state: { [key: string]: any }) => void
 })
 
 export const HeaderContextConsumer = HeaderContext.Consumer
@@ -47,8 +47,8 @@ export const HeaderContextProvider = ({
     <HeaderContext.Provider
       value={{
         headerState,
-        setHeaderState: (state: HeaderStateInput) =>
-          setHeaderState({ ...state, isAuthed })
+        updateHeaderState: state =>
+          setHeaderState({ ...headerState, ...state, isAuthed })
       }}
     >
       {children}

@@ -48,8 +48,6 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
     me: isAuthed
   })
 
-  console.log({ headerState })
-
   return (
     <header>
       <div className="l-row">

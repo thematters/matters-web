@@ -35,12 +35,12 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
     return <span>Empty</span> // TODO
   }
 
-  const { setHeaderState } = useContext(HeaderContext)
+  const { updateHeaderState } = useContext(HeaderContext)
 
   useEffect(() => {
-    setHeaderState({ type: 'draft', saved: true })
+    updateHeaderState({ type: 'draft', saved: true })
 
-    return () => setHeaderState({ type: 'default' })
+    return () => updateHeaderState({ type: 'default' })
   }, [])
 
   return (
