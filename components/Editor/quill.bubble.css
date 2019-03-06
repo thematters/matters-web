@@ -46,6 +46,7 @@
 
 .ql-editor {
   height: 100%;
+  min-height: 50vh;
   outline: none;
   overflow-y: auto;
   /* tab-size: 4;
@@ -56,6 +57,15 @@
 
   & > * {
     cursor: text;
+  }
+
+  &.ql-blank::before {
+    color: var(--color-grey);
+    content: attr(data-placeholder);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 

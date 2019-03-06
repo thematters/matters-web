@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 
+import { LanguageConsumer } from '~/components/Language'
+
 import { translate } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
@@ -75,20 +77,24 @@ export class Editor extends React.Component<Props, State> {
   public render() {
     return (
       <>
-        <ReactQuill
-          theme="bubble"
-          modules={config.modules}
-          formats={config.formats}
-          ref={el => {
-            this.reactQuillRef = el
-          }}
-          value={this.state.content}
-          placeholder={translate({
-            zh_hant: '請輸入正文…',
-            zh_hans: '请输入正文…'
-            // lang: TODO
-          })}
-        />
+        <LanguageConsumer>
+          {({ lang }) => (
+            <ReactQuill
+              theme="bubble"
+              modules={config.modules}
+              formats={config.formats}
+              ref={el => {
+                this.reactQuillRef = el
+              }}
+              value={this.state.content}
+              placeholder={translate({
+                zh_hant: '請輸入正文…',
+                zh_hans: '请输入正文…',
+                lang
+              })}
+            />
+          )}
+        </LanguageConsumer>
 
         <style jsx global>
           {bubbleStyles}
