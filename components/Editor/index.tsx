@@ -1,3 +1,4 @@
+import _debounce from 'lodash/debounce'
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 
@@ -53,6 +54,8 @@ class Editor extends React.Component<Props, State> {
         top: 0
       }
     }
+
+    this.saveDraft = _debounce(this.saveDraft.bind(this), 3000)
   }
 
   public componentDidMount() {
@@ -89,7 +92,7 @@ class Editor extends React.Component<Props, State> {
       const input = this.quill.theme.tooltip.root.querySelector(
         'input[data-link]'
       )
-      input.dataset.link = '輸入連結地址'
+      input.dataset.link = '輸入連結地址' // TODO: i18n
     } catch (e) {
       //
     }
@@ -103,8 +106,14 @@ class Editor extends React.Component<Props, State> {
     Quill.register('formats/divider', DividerBlot, true)
   }
 
+  public saveDraft() {
+    console.log('saveDarft', new Date())
+    // TODO: skip if same content as before saved
+    this.props.onSave({ content: this.state.content })
+  }
+
   public handleChange = (content: string) => {
-    this.setState({ content })
+    this.setState({ content }, this.saveDraft)
   }
 
   public handleOnChangeSelection = (
@@ -160,7 +169,7 @@ class Editor extends React.Component<Props, State> {
                 onChange={this.handleChange}
                 onChangeSelection={this.handleOnChangeSelection}
                 onFocus={(...props) => console.log('onFocus', props)}
-                onBlur={(...props) => console.log('onBlur', props)}
+                onBlur={this.saveDraft}
               />
               <SideToolbar {...this.state.sideToolbar} quill={this.quill} />
             </div>
