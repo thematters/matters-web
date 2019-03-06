@@ -123,7 +123,10 @@ const SearchTags = ({
                       node: SearchTagsQuery_search_edges_node_Tag
                     }) => node
                   )}
-                  addTag={addTag}
+                  addTag={(tag: string) => {
+                    addTag(tag)
+                    setSearch('')
+                  }}
                   hideDropdown={hideDropdown}
                 />
               }
