@@ -8,7 +8,8 @@ import {
   LanguageContext,
   Menu,
   PopperInstance,
-  Spinner
+  Spinner,
+  Translate
 } from '~/components'
 
 import { translate } from '~/common/utils'
@@ -57,37 +58,51 @@ const DropdownContent = ({
       </Menu.Item>
     </Menu>
   ) : (
-    <Menu>
-      {tags.map(tag => (
-        <Menu.Item
-          spacing={['xtight', 'tight']}
-          hoverBgColor="green"
-          key={tag.content}
-        >
+    <>
+      <Menu>
+        {tags.map(tag => (
+          <Menu.Item
+            spacing={['xtight', 'tight']}
+            hoverBgColor="green"
+            key={tag.content}
+          >
+            <button
+              className="search-tag-item"
+              type="button"
+              onClick={() => {
+                addTag(tag.content)
+                hideDropdown()
+              }}
+            >
+              <span>{tag.content}</span>
+              <span className="search-tag-count">
+                {tag.articles.totalCount}
+              </span>
+            </button>
+          </Menu.Item>
+        ))}
+        {tags && tags.length > 0 && <Menu.Divider />}
+        <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
           <button
-            className="search-tag-item"
+            className="search-tag-item create"
             type="button"
             onClick={() => {
-              addTag(tag.content)
+              addTag(search)
               hideDropdown()
             }}
           >
-            <span>{tag.content}</span>
-            <span className="search-tag-count">{tag.articles.totalCount}</span>
-            <style jsx>{styles}</style>
+            <span>
+              <Translate zh_hant="創建" zh_hans="创建" />
+            </span>
+            <span className="search-tag-create"> {search}</span>
           </button>
         </Menu.Item>
-      ))}
-    </Menu>
+      </Menu>
+      <style jsx>{styles}</style>
+    </>
   )
 
-const SearchTags = ({
-  hasTags,
-  addTag
-}: {
-  hasTags: boolean
-  addTag: (tag: string) => void
-}) => {
+const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)

@@ -47,9 +47,17 @@
   white-space: pre-wrap;
   text-align: left;
   line-height: 1.4;
+
+  &.create {
+    line-height: 2;
+  }
 }
 
 .search-tag-count {
   margin-left: var(--spacing-xx-tight);
+  color: var(--color-grey);
+}
+
+.search-tag-create {
   color: var(--color-grey);
 }

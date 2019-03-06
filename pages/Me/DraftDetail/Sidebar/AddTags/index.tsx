@@ -61,7 +61,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
               {tags.map(tag => (
                 <Tag tag={tag} deleteTag={deleteTag} key={tag} />
               ))}
-              <SearchTags hasTags={hasTags} addTag={addTag} />
+              <SearchTags addTag={addTag} />
             </section>
           )
         }}
