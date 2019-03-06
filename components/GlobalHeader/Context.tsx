@@ -3,25 +3,28 @@ import { createContext, useContext, useState } from 'react'
 
 import { ViewerContext } from '~/components/Viewer'
 
-interface DefaultHeader {
+export interface DefaultHeader {
   type: 'default'
-  isAuthed: boolean
 }
 
-interface LoginHeader {
+export interface LoginHeader {
   type: 'login'
 }
 
-interface DraftHeader {
+export interface DraftHeader {
   type: 'draft'
   saved: boolean
 }
 
-type HeaderState = DefaultHeader | LoginHeader | DraftHeader
+type HeaderStateInput = DefaultHeader | LoginHeader | DraftHeader
+
+type HeaderState = HeaderStateInput & {
+  isAuthed: boolean
+}
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
-  setHeaderState: (state: HeaderState) => void
+  setHeaderState: (state: HeaderStateInput) => void
 })
 
 export const HeaderContextConsumer = HeaderContext.Consumer
@@ -33,16 +36,19 @@ export const HeaderContextProvider = ({
 }) => {
   const viewer = useContext(ViewerContext)
 
+  const isAuthed = !!viewer.id
+
   const [headerState, setHeaderState] = useState<HeaderState>({
     type: 'default',
-    isAuthed: !!viewer.id
+    isAuthed
   })
 
   return (
     <HeaderContext.Provider
       value={{
         headerState,
-        setHeaderState
+        setHeaderState: (state: HeaderStateInput) =>
+          setHeaderState({ ...state, isAuthed })
       }}
     >
       {children}

@@ -5,16 +5,18 @@ import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
-import { ViewerContext } from '~/components/Viewer'
 
 import { analytics } from '~/common/utils'
 
+import { Translate } from '../Language'
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
+import { DraftHeader, HeaderContext } from './Context'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
 import Nav from './Nav'
 import NotificationButton from './NotificationButton'
+import PublishButton from './PublishButton'
 import SearchButton from './SearchButton'
 import SignUpButton from './SignUpButton'
 import styles from './styles.css'
@@ -39,12 +41,14 @@ const SignUpModalSwitch = () => (
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
-  const viewer = useContext(ViewerContext)
-  const isAuthed = !!viewer.id
+  const { headerState } = useContext(HeaderContext)
+  const { isAuthed, type: headerType } = headerState
   const rightClasses = classNames({
     right: true,
     me: isAuthed
   })
+
+  console.log({ headerState })
 
   return (
     <header>
@@ -52,7 +56,15 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
         <div className="container">
           <section className="left">
             <Logo />
-            <Nav />
+            {headerType === 'draft' ? (
+              (headerState as DraftHeader).saved && (
+                <span className="hint">
+                  <Translate zh_hans="草稿已保存" zh_hant="草稿已保存" />
+                </span>
+              )
+            ) : (
+              <Nav />
+            )}
           </section>
 
           <section className={rightClasses}>
@@ -65,7 +77,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                <WriteButton />
+                {headerType === 'draft' ? <PublishButton /> : <WriteButton />}
               </>
             ) : (
               <>
