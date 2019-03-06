@@ -52,3 +52,9 @@ header {
     }
   }
 }
+
+.hint {
+  color: var(--color-grey);
+  font-size: 14px;
+  margin-left: 39px;
+}

@@ -51,7 +51,13 @@ const WriteButton = () => {
               className="u-sm-down-hide"
               size="large"
               bgColor="gold"
-              icon={<Icon id={icon.id} viewBox={icon.viewBox} />}
+              icon={
+                <Icon
+                  id={icon.id}
+                  viewBox={icon.viewBox}
+                  className={showLoader && 'u-motion-spin'}
+                />
+              }
             >
               <Translate zh_hant="創作" zh_hans="创作" />
             </Button>
@@ -59,7 +65,13 @@ const WriteButton = () => {
               className="u-sm-up-hide"
               bgColor="gold"
               shape="circle"
-              icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
+              icon={
+                <Icon
+                  id={icon.id}
+                  viewBox={icon.viewBox}
+                  className={showLoader && 'u-motion-spin'}
+                />
+              }
             />
           </div>
         )

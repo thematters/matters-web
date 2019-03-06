@@ -9,6 +9,19 @@
   }
 }
 
+.u-motion-spin {
+  animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 button:not([disabled]) > svg,
 button:not([disabled]) > .text-icon > svg {
   @mixin all-transition;
