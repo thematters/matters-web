@@ -106,7 +106,9 @@
     color: var(--active-color);
 
     & .ql-fill,
-    & .ql-stroke.ql-fill,
+    & .ql-stroke.ql-fill {
+      fill: var(--active-color);
+    }
     & .ql-stroke,
     & .ql-stroke-miter {
       stroke: var(--active-color);
@@ -120,7 +122,10 @@
         color: var(--inactive-color);
 
         & .ql-fill,
-        & .ql-stroke.ql-fill,
+        & .ql-stroke.ql-fill {
+          fill: var(--inactive-color);
+        }
+
         & .ql-stroke,
         & .ql-stroke-miter {
           stroke: var(--inactive-color);

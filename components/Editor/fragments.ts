@@ -5,10 +5,8 @@ export const fragments = {
     fragment EditorDraft on Draft {
       id
       title
+      publishState
       content
-      upstream {
-        id
-      }
     }
   `
 }

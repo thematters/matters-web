@@ -75,11 +75,15 @@ export class Editor extends React.Component<Props, State> {
   }
 
   public render() {
+    const { draft } = this.props
+    const isReadOnly = draft.publishState !== 'unpublished'
+
     return (
       <>
         <LanguageConsumer>
           {({ lang }) => (
             <ReactQuill
+              readOnly={isReadOnly}
               theme="bubble"
               modules={config.modules}
               formats={config.formats}
