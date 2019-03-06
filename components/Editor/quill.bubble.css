@@ -154,6 +154,7 @@
   & .ql-tooltip {
     position: absolute;
     transform: translateY(10px);
+    /* transition: all 0.2s ease-in-out; */
 
     & a {
       cursor: pointer;

@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
-import { SFC, useContext, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useContext, useState } from 'react'
 import { Mutation } from 'react-apollo'
 
-import { LanguageContext, Placeholder } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
+import { LanguageContext } from '~/components/Language'
+import { Placeholder } from '~/components/Placeholder'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -11,6 +13,11 @@ import { translate } from '~/common/utils'
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
 import { UpdateDraftVariables } from './__generated__/UpdateDraft'
 import styles from './styles.css'
+
+const Editor = dynamic(() => import('~/components/Editor'), {
+  ssr: false,
+  loading: () => <Placeholder.ArticleDetail />
+})
 
 export const UPDATE_DRAFT = gql`
   mutation UpdateDraft(
@@ -49,27 +56,12 @@ const fragments = {
 const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   fragments: typeof fragments
 } = ({ draft }) => {
-  // return placeholder on SSR
-  const [Editor, setEditor] = useState(
-    () =>
-      Placeholder.ArticleDetail as SFC<{
-        draft: DraftDetailQuery_node_Draft
-        upload: any
-        submit: any
-      }>
-  )
-
-  // use real editor on client side
-  useEffect(() => {
-    if (process.browser) {
-      const EditorComponent = require('~/components/Editor')
-      setEditor(() => EditorComponent.Editor)
-    }
-  })
+  if (!process.browser) {
+    return null
+  }
 
   // use state for controling title
   const [title, setTitle] = useState(draft.title)
-
   const { lang } = useContext(LanguageContext)
 
   const upload = (uploadata: any) => {
@@ -112,8 +104,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
 
           <Editor
             draft={draft}
-            upload={upload}
-            submit={(newDraft: UpdateDraftVariables) => {
+            onUpload={upload}
+            onSave={(newDraft: UpdateDraftVariables) => {
               updateDraft({ variables: { id: draft.id, ...newDraft } })
             }}
           />
