@@ -56,9 +56,8 @@ export const MutationErrorHandler = ({
       const mutationResult = await mutateFn(options)
       return mutationResult
     } catch (err) {
-      checkError(err)
+      throw err
     }
-    return Promise.resolve()
   }
 
   return <>{children(mutateWithCatch, result)}</>
