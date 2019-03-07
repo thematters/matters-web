@@ -14,12 +14,7 @@ import bubbleStyles from './quill.bubble.css'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 
-interface UploadResponse {
-  singleFileUpload: { id: string; path: string }
-}
-
 interface Props {
-  onUpload: (data: string) => Promise<{ data: UploadResponse }>
   onSave: any
   draft: EditorDraft
 }
@@ -123,7 +118,7 @@ class Editor extends React.Component<Props, State> {
     // hide sideToolbar
     if (!isNewLine && this.state.sideToolbar.show) {
       this.setState({
-        sideToolbar: { show: false, top: this.state.sideToolbar.top || 0 }
+        sideToolbar: { show: false, top: bounds.top || 0 }
       })
     }
 
@@ -134,7 +129,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   public render() {
-    const { draft } = this.props
+    const { draft, onSave } = this.props
     const isReadOnly = draft.publishState !== 'unpublished'
 
     return (
@@ -159,7 +154,11 @@ class Editor extends React.Component<Props, State> {
                 onFocus={(...props) => console.log('onFocus', props)}
                 onBlur={this.saveDraft}
               />
-              <SideToolbar {...this.state.sideToolbar} quill={this.quill} />
+              <SideToolbar
+                {...this.state.sideToolbar}
+                quill={this.quill}
+                onSave={onSave}
+              />
             </div>
           )}
         </LanguageConsumer>

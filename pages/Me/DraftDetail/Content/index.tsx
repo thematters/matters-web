@@ -64,13 +64,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   const [title, setTitle] = useState(draft.title)
   const { lang } = useContext(LanguageContext)
 
-  const upload = (uploadata: any) => {
-    console.log('upload', uploadata)
-    return Promise.resolve({
-      data: { singleFileUpload: { id: 'test', path: 'test' } }
-    })
-  }
-
   return (
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
@@ -104,7 +97,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
 
           <Editor
             draft={draft}
-            onUpload={upload}
             onSave={(newDraft: UpdateDraftVariables) => {
               updateDraft({ variables: { id: draft.id, ...newDraft } })
             }}
