@@ -8,9 +8,9 @@ import {
   QueryResult
 } from 'react-apollo'
 
-import { errorCode } from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums'
 
-const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
+export const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
   errors && errors.find(e => e.extensions.code === code)
 
 const checkError = ({ networkError, graphQLErrors }: ApolloError) => {
@@ -19,9 +19,9 @@ const checkError = ({ networkError, graphQLErrors }: ApolloError) => {
     console.log(networkError)
   }
 
-  if (checkFor(errorCode.UNAUTHENTICATED, graphQLErrors)) {
+  if (checkFor(ERROR_CODES.UNAUTHENTICATED, graphQLErrors)) {
     // trigger notification for log in
-    console.log(errorCode.UNAUTHENTICATED)
+    console.log(ERROR_CODES.UNAUTHENTICATED)
   }
 }
 

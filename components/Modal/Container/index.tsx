@@ -15,6 +15,7 @@ interface Props {
   children: any
   close: () => void
   defaultCloseable?: boolean
+  prevModalId: string
   title?: string
 }
 
@@ -22,8 +23,15 @@ const Container: FC<Props> = ({
   children,
   close,
   defaultCloseable = true,
+  prevModalId,
   title
 }) => {
+  const overlayClass = classNames(
+    'overlay',
+    'center',
+    prevModalId ? '' : 'fadeIn'
+  )
+
   const modalBaseClass = classNames(
     'l-col-4',
     'l-col-sm-6',
@@ -75,7 +83,7 @@ const Container: FC<Props> = ({
   useNativeEventListener('click', handleOnOutsideClick)
 
   return (
-    <div className="overlay center">
+    <div className={overlayClass}>
       <div style={{ width: '100%' }}>
         <div className="l-row">
           <div ref={setNode} className={modalClass}>
