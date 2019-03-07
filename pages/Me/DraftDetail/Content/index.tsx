@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
 
@@ -60,6 +61,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
+  const { updateHeaderState } = useContext(HeaderContext)
+
   // use state for controling title
   const [title, setTitle] = useState(draft.title)
   const { lang } = useContext(LanguageContext)
@@ -97,8 +100,14 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
 
           <Editor
             draft={draft}
-            onSave={(newDraft: UpdateDraftVariables) => {
-              updateDraft({ variables: { id: draft.id, ...newDraft } })
+            onSave={async (newDraft: UpdateDraftVariables) => {
+              updateHeaderState({ type: 'draft', state: 'saving' })
+              try {
+                await updateDraft({ variables: { id: draft.id, ...newDraft } })
+                updateHeaderState({ type: 'draft', state: 'saved' })
+              } catch (e) {
+                updateHeaderState({ type: 'draft', state: 'save-failed' })
+              }
             }}
           />
 
