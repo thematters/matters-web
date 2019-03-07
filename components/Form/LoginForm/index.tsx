@@ -3,14 +3,14 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { checkFor, Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { PATHS } from '~/common/enums'
+import { ERROR_CODES, PATHS } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -191,7 +191,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: (values, { props, setErrors, setSubmitting }: any) => {
       const { email, password } = values
       const { submitAction } = props
       if (!submitAction) {
@@ -204,8 +204,21 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           }
           Router.replace('/')
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+        .catch(({ graphQLErrors: error }: any) => {
+          if (
+            checkFor(ERROR_CODES.USER_EMAIL_NOT_FOUND, error) ||
+            checkFor(ERROR_CODES.USER_PASSWORD_INVALID, error)
+          ) {
+            const errorMessage = translate({
+              zh_hant: '帳號或密碼不正確',
+              zh_hans: '帐号或密码不正确',
+              lang
+            })
+            setErrors({
+              email: errorMessage,
+              password: errorMessage
+            })
+          }
         })
         .finally(() => {
           setSubmitting(false)
