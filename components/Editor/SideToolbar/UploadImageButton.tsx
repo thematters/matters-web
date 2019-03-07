@@ -39,7 +39,7 @@ const UploadImageButton = ({
   const insertImage = (src: string) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'image', src, 'user')
+      quill.insertEmbed(range.index, 'imageFigure', { src }, 'user')
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }

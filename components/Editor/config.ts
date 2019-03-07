@@ -25,6 +25,5 @@ export const formats = [
   'image',
   'video',
   'divider',
-  'gist',
-  'pastebin'
+  'imageFigure'
 ]
