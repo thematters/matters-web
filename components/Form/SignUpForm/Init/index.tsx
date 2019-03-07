@@ -3,13 +3,14 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { checkFormError } from '~/components/Form/Error'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
-import { PATHS } from '~/common/enums'
+import { ERROR_CODES, PATHS } from '~/common/enums'
 import {
   isValidDisplayName,
   isValidEmail,
@@ -352,7 +353,7 @@ export const SignUpInitForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
       const { email, code, displayName, password } = values
       const { preSubmitAction, submitAction } = props
       if (!preSubmitAction || !submitAction) {
@@ -373,8 +374,16 @@ export const SignUpInitForm: FC<Props> = ({
             submitCallback()
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+        .catch(({ graphQLErrors: error }: any) => {
+          const { CODE_INVALID, CODE_EXPIRED } = ERROR_CODES
+          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
+          if (codeInvalidHint) {
+            setFieldError('code', codeInvalidHint)
+          }
+          const codeExpiredHint = checkFormError(CODE_EXPIRED, error, lang)
+          if (codeExpiredHint) {
+            setFieldError('code', codeExpiredHint)
+          }
         })
         .finally(() => {
           setSubmitting(false)

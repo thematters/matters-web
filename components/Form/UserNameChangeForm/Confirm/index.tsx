@@ -2,12 +2,14 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { checkFormError } from '~/components/Form/Error'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
+import { ERROR_CODES } from '~/common/enums'
 import { isValidUserName, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -157,7 +159,7 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
       const { userName } = values
       const { submitAction } = props
       if (!submitAction) {
@@ -170,8 +172,27 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
             submitCallback()
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+        .catch(({ graphQLErrors: error }: any) => {
+          const { USER_USERNAME_EXISTS, FORBIDDEN } = ERROR_CODES
+          const userNameDuplicatedHint = checkFormError(
+            USER_USERNAME_EXISTS,
+            error,
+            lang
+          )
+          if (userNameDuplicatedHint) {
+            setFieldError('userName', userNameDuplicatedHint)
+          }
+          const userNameChangeForbidden = checkFormError(FORBIDDEN, error, lang)
+          if (userNameChangeForbidden) {
+            setFieldError(
+              'userName',
+              translate({
+                zh_hant: '您曾經修改過 Matters ID，每位使用者僅限修改一次',
+                zh_hans: '您曾经修改过 Matters ID，每位用戶仅限修改一次',
+                lang
+              })
+            )
+          }
         })
         .finally(() => {
           setSubmitting(false)

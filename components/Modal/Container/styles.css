@@ -8,6 +8,11 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.fadeIn {
+  animation: modalFadeIn 0.25s ease;
+  visibility: visible;
+}
+
 .center {
   @mixin flex-center-all;
 }
@@ -15,4 +20,15 @@
 .container {
   background-color: var(--color-white);
   border-radius: 2px;
+}
+
+@keyframes modalFadeIn {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
 }
