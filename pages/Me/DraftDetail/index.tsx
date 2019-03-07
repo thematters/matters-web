@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
 import { withRouter, WithRouterProps } from 'next/router'
+import { useContext, useEffect } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { Placeholder } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Placeholder } from '~/components/Placeholder'
 
 import { getQuery } from '~/common/utils'
 
@@ -32,6 +34,14 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   if (!id) {
     return <span>Empty</span> // TODO
   }
+
+  const { updateHeaderState } = useContext(HeaderContext)
+
+  useEffect(() => {
+    updateHeaderState({ type: 'draft', saved: true })
+
+    return () => updateHeaderState({ type: 'default' })
+  }, [])
 
   return (
     <Query query={DRAFT_DETAIL} variables={{ id }}>

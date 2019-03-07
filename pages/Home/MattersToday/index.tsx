@@ -30,6 +30,7 @@ export default () => (
     <Query query={HOME_TODAY}>
       {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
         const article = _get(data, 'viewer.recommendation.today')
+
         if (loading || !article) {
           return <Placeholder.MattersToday />
         }

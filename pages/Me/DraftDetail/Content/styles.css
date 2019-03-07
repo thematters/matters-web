@@ -1,5 +1,6 @@
 header input {
   @mixin border-bottom-grey;
+  margin-bottom: var(--spacing-default);
   padding-bottom: var(--spacing-tight);
 
   font-weight: var(--font-weight-semibold);
