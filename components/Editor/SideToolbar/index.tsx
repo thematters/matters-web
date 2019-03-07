@@ -26,9 +26,9 @@ const SideToolbar = ({ show, top, quill }: SideToolbarProps) => {
 
   const insertDivider = () => {
     if (quill) {
-      const range = quill.getSelection()
-      const position = range ? range.index : 0
-      quill.insertEmbed(position, 'divider', 'user')
+      const range = quill.getSelection(true)
+      quill.insertEmbed(range.index, 'divider', true, 'user')
+      quill.setSelection(range.index + 1, 0, 'silent')
     }
     setExpanded(false)
   }

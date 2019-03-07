@@ -14,14 +14,6 @@ import bubbleStyles from './quill.bubble.css'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 
-const {
-  DividerBlot,
-  GithubGistBlot,
-  ImageBlot,
-  PastebinBlot,
-  VideoBlot
-} = blots
-
 interface UploadResponse {
   singleFileUpload: { id: string; path: string }
 }
@@ -39,6 +31,11 @@ interface State {
     top: number
   }
 }
+
+/**
+ * Register Custom Blots
+ */
+blots.register()
 
 class Editor extends React.Component<Props, State> {
   private quill: Quill | null = null
@@ -61,7 +58,6 @@ class Editor extends React.Component<Props, State> {
   public componentDidMount() {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
-    this.registerBlots()
   }
 
   // public componentDidUpdate() {
@@ -96,14 +92,6 @@ class Editor extends React.Component<Props, State> {
     } catch (e) {
       //
     }
-  }
-
-  public registerBlots() {
-    Quill.register('formats/image', ImageBlot, true)
-    Quill.register('formats/video', VideoBlot, true)
-    Quill.register('formats/gist', GithubGistBlot, true)
-    Quill.register('formats/pastebin', PastebinBlot, true)
-    Quill.register('formats/divider', DividerBlot, true)
   }
 
   public saveDraft() {
