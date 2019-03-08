@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Mutation } from 'react-apollo'
 
-import { Icon } from '~/components'
+import { Icon, TextIcon } from '~/components'
 
+import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
 import ICON_DISLIKE_INACTIVE from '~/static/icons/dislike-inactive.svg?sprite'
 
@@ -79,7 +80,14 @@ const DownvoteButton = ({
       >
         {(unvote, { data }) => (
           <button type="button" onClick={() => unvote()} disabled={disabled}>
-            <IconDislikeActive />
+            <TextIcon
+              icon={<IconDislikeActive />}
+              color="grey"
+              weight="medium"
+              text={numAbbr(comment.downvotes)}
+              size="sm"
+              spacing="xxxtight"
+            />
           </button>
         )}
       </Mutation>
@@ -100,7 +108,14 @@ const DownvoteButton = ({
     >
       {(downvote, { data }) => (
         <button type="button" onClick={() => downvote()} disabled={disabled}>
-          <IconDislikeInactive />
+          <TextIcon
+            icon={<IconDislikeInactive />}
+            color="grey"
+            weight="medium"
+            text={numAbbr(comment.downvotes)}
+            size="sm"
+            spacing="xxxtight"
+          />
         </button>
       )}
     </Mutation>

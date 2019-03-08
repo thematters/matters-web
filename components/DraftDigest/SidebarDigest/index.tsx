@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { DateTime, Icon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { numFormat, toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import DeleteButton from '../Components/DeleteButton'
@@ -68,8 +68,8 @@ const SidebarDigest = ({
             <DateTime date={createdAt} type="relative" />
             <IconDotDivider />
             <Translate
-              zh_hans={`${wordCount} 字`}
-              zh_hant={`${wordCount} 字`}
+              zh_hans={`${numFormat(wordCount)} 字`}
+              zh_hant={`${numFormat(wordCount)} 字`}
             />
             {isUnpublished && (
               <>

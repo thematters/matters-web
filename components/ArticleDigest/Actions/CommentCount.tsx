@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
 
+import { numAbbr } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { CommentCountArticle } from './__generated__/CommentCountArticle'
@@ -34,7 +35,7 @@ const CommentCount = ({
     }
     color="grey"
     weight="medium"
-    text={_get(article, 'comments.totalCount', '')}
+    text={numAbbr(_get(article, 'comments.totalCount', 0))}
     size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxtight"
   />
