@@ -24,7 +24,6 @@ const ARTICLE_DETAIL = gql`
     $uuid: UUID
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
-    $hasDigestTagArticleCount: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
