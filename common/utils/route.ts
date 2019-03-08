@@ -1,7 +1,7 @@
 import _get from 'lodash/get'
 import Router, { SingletonRouter } from 'next/router'
 
-import { PATHS, ROUTES } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 type ToPathArgs =
   | {
