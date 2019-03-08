@@ -27,9 +27,8 @@ type ROUTE_KEY =
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
-  | 'ME_SETTINGS_WALLET'
   | 'ME_DRAFT_DETAIL'
-  | 'EDITOR'
+  // | 'EDITOR'
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
   | 'AUTH_FORGET'
@@ -154,11 +153,6 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     href: '/Me/Settings/Notification',
     as: '/me/settings/notification'
   },
-  {
-    key: 'ME_SETTINGS_WALLET',
-    href: '/Me/Settings/Wallet',
-    as: '/me/settings/wallet'
-  },
 
   // Draft
   {
@@ -166,11 +160,11 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
     href: '/Me/DraftDetail',
     as: '/me/drafts/*-:id'
   },
-  {
-    key: 'EDITOR',
-    href: '/Editor',
-    as: '/editor'
-  },
+  // {
+  //   key: 'EDITOR',
+  //   href: '/Editor',
+  //   as: '/editor'
+  // },
 
   // Auth
   {

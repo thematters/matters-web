@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo'
 
 import { Icon, TextIcon } from '~/components'
 
+import { numAbbr } from '~/common/utils'
 import ICON_LIKE_ACTIVE from '~/static/icons/like-active.svg?sprite'
 import ICON_LIKE_INACTIVE from '~/static/icons/like-inactive.svg?sprite'
 
@@ -83,7 +84,7 @@ const UpvoteButton = ({
               icon={<IconLikeActive />}
               color="grey"
               weight="medium"
-              text={comment.upvotes}
+              text={numAbbr(comment.upvotes)}
               size="sm"
               spacing="xxxtight"
             />
@@ -111,7 +112,7 @@ const UpvoteButton = ({
             icon={<IconLikeInactive />}
             color="grey"
             weight="medium"
-            text={comment.upvotes}
+            text={numAbbr(comment.upvotes)}
             size="sm"
             spacing="xxxtight"
           />

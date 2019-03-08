@@ -79,6 +79,10 @@ video {
   max-width: 100%;
 }
 
+[contenteditable] {
+  caret-color: var(--color-matters-green);
+}
+
 hr {
   @mixin border-top-grey;
 

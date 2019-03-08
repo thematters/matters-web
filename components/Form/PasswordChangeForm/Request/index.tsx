@@ -2,13 +2,15 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { checkFormError } from '~/components/Form/Error'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
+import { ERROR_CODES } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -172,7 +174,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
       const { email, code } = values
       const { submitAction } = props
       if (!submitAction) {
@@ -188,8 +190,16 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             submitCallback({ email, codeId: confirmVerificationCode })
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+        .catch(({ graphQLErrors: error }: any) => {
+          const { CODE_INVALID, CODE_EXPIRED } = ERROR_CODES
+          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
+          if (codeInvalidHint) {
+            setFieldError('code', codeInvalidHint)
+          }
+          const codeExpiredHint = checkFormError(CODE_EXPIRED, error, lang)
+          if (codeExpiredHint) {
+            setFieldError('code', codeExpiredHint)
+          }
         })
         .finally(() => {
           setSubmitting(false)

@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import Router from 'next/router'
 import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
@@ -11,7 +10,7 @@ import ModalHeader from '~/components/Modal/Header'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Title } from '~/components/Title'
 
-import { translate } from '~/common/utils'
+import { redirectToTarget, translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?sprite'
 
@@ -53,8 +52,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   }
 
   const signUpProfileCallback = () => setStep('complete')
-
-  const redirect = () => Router.replace('/')
 
   const LoginModalSwitch = () => (
     <ModalSwitch modalId="loginModal">
@@ -147,7 +144,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
               type="submit"
               bgColor="green"
               size="large"
-              onClick={redirect}
+              onClick={redirectToTarget}
             >
               {completeStart}
             </Button>

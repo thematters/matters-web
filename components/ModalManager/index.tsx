@@ -6,6 +6,7 @@ import { Modal } from '~/components'
 const emptyModalId = ''
 
 export const ModalContext = React.createContext({
+  prevModalId: emptyModalId,
   openedModalId: emptyModalId,
   open: (modalId: string) => {
     // Do nothing
@@ -34,19 +35,23 @@ export const ModalProvider = ({
   children: ReactNode
   defaultModalId?: string
 }) => {
+  const [prevModalId, setPrevModalId] = useState(emptyModalId)
   const [openedModalId, setOpenedModalId] = useState(defaultModalId)
 
   const open = (id: string) => {
+    setPrevModalId(openedModalId)
     setOpenedModalId(id)
   }
 
   const close = () => {
+    setPrevModalId(defaultModalId)
     setOpenedModalId(defaultModalId)
   }
 
   return (
     <ModalContext.Provider
       value={{
+        prevModalId,
         openedModalId,
         open: (modalId: string) => open(modalId),
         close: () => close()
@@ -116,13 +121,14 @@ export const ModalInstance = ({
 
   return (
     <ModalContext.Consumer>
-      {({ close, openedModalId }) => {
+      {({ close, prevModalId, openedModalId }) => {
         if (children && node && openedModalId === modalId) {
           return ReactDOM.createPortal(
             <Modal.Container
               title={title}
               close={close}
               defaultCloseable={defaultCloseable}
+              prevModalId={prevModalId}
             >
               {(props: any) => children(props)}
             </Modal.Container>,

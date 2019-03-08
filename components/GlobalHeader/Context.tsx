@@ -7,17 +7,17 @@ export interface DefaultHeader {
   type: 'default'
 }
 
-export interface LoginHeader {
-  type: 'login'
+export interface AuthHeader {
+  type: 'login' | 'signUp' | 'forgot'
 }
 
 export interface DraftHeader {
   type: 'draft'
-  saved: boolean
   draftId: string
+  state: 'saving' | 'saved' | 'saveFailed' | ''
 }
 
-type HeaderStateInput = DefaultHeader | LoginHeader | DraftHeader
+type HeaderStateInput = DefaultHeader | AuthHeader | DraftHeader
 
 type HeaderState = HeaderStateInput & {
   isAuthed: boolean
@@ -25,7 +25,7 @@ type HeaderState = HeaderStateInput & {
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
-  updateHeaderState: (state: HeaderStateInput) => void
+  updateHeaderState: (state: DefaultHeader | AuthHeader | DraftHeader) => void
 })
 
 export const HeaderContextConsumer = HeaderContext.Consumer
@@ -36,7 +36,6 @@ export const HeaderContextProvider = ({
   children: React.ReactNode
 }) => {
   const viewer = useContext(ViewerContext)
-
   const isAuthed = !!viewer.id
 
   const [headerState, setHeaderState] = useState<HeaderState>({

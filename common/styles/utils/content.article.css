@@ -1,7 +1,8 @@
 .content {
   line-height: var(--line-height-article-base);
 
-  & :global(> * + *) {
+  & :global(> * + *),
+  & :global(> *:last-child) {
     margin: var(--spacing-default) 0;
   }
 
@@ -134,7 +135,7 @@
     display: block;
 
     width: 10rem;
-    height: 0.125rem;
+    height: 0.25rem;
     margin: var(--spacing-loose) auto;
 
     border: 0;

@@ -8,9 +8,9 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import { analytics } from '~/common/utils'
 
-import { Translate } from '../Language'
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import { DraftHeader, HeaderContext } from './Context'
+import Hint from './Hint'
 import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
@@ -47,6 +47,9 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
     right: true,
     me: isAuthed
   })
+  const isDraft = headerType === 'draft'
+  const isLogin = headerType === 'login'
+  const isSignUp = headerType === 'signUp'
 
   return (
     <header>
@@ -54,15 +57,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
         <div className="container">
           <section className="left">
             <Logo />
-            {headerType === 'draft' ? (
-              (headerState as DraftHeader).saved && (
-                <span className="hint">
-                  <Translate zh_hans="草稿已保存" zh_hant="草稿已保存" />
-                </span>
-              )
-            ) : (
-              <Nav />
-            )}
+            {isDraft ? <Hint /> : <Nav />}
           </section>
 
           <section className={rightClasses}>
@@ -75,7 +70,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {headerType === 'draft' ? (
+
+                {isDraft ? (
                   <PublishButton
                     draftId={(headerState as DraftHeader).draftId}
                   />
@@ -85,8 +81,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             ) : (
               <>
-                <LoginModalSwitch />
-                <SignUpModalSwitch />
+                {!isLogin && <LoginModalSwitch />}
+                {!isSignUp && <SignUpModalSwitch />}
               </>
             )}
           </section>

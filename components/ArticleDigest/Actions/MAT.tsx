@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
 
+import { numAbbr } from '~/common/utils'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MATArticle } from './__generated__/MATArticle'
@@ -32,7 +33,7 @@ const MAT = ({
     }
     color="gold"
     weight="medium"
-    text={_get(article, 'MAT', '')}
+    text={numAbbr(_get(article, 'MAT', 0))}
     size={size === 'default' ? 'sm' : 'xs'}
     spacing="xxxtight"
   />

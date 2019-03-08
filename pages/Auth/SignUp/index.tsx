@@ -1,14 +1,15 @@
 import classNames from 'classnames'
-import Router from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head } from '~/components/Head'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
 
-import { translate } from '~/common/utils'
+import { redirectToTarget, translate } from '~/common/utils'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?sprite'
 
 import styles from './styles.css'
@@ -17,8 +18,13 @@ type Step = 'signUp' | 'profile' | 'complete'
 
 const SignUp = () => {
   const { lang } = useContext(LanguageContext)
-
   const [step, setStep] = useState<Step>('signUp')
+
+  const { updateHeaderState } = useContext(HeaderContext)
+  useEffect(() => {
+    updateHeaderState({ type: 'signUp' })
+    return () => updateHeaderState({ type: 'default' })
+  }, [])
 
   const containerClass = classNames(
     'l-col-4',
@@ -30,14 +36,10 @@ const SignUp = () => {
     'l-offset-lg-3',
     'container'
   )
-
   const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const signUpCallback = () => setStep('profile')
-
   const signUpProfileCallback = () => setStep('complete')
-
-  const redirect = () => Router.replace('/')
 
   const Complete = () => {
     const completeClass = classNames(...childClass, 'complete')
@@ -93,7 +95,7 @@ const SignUp = () => {
               type="submit"
               bgColor="green"
               size="large"
-              onClick={redirect}
+              onClick={redirectToTarget}
             >
               {completeStart}
             </Button>
@@ -107,6 +109,8 @@ const SignUp = () => {
   return (
     <>
       <main className="l-row row">
+        <Head title={{ zh_hant: '註冊', zh_hans: '注册' }} />
+
         <article className={containerClass}>
           {step === 'signUp' && (
             <SignUpInitForm
