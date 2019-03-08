@@ -75,7 +75,13 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {headerType === 'draft' ? <PublishButton /> : <WriteButton />}
+                {headerType === 'draft' ? (
+                  <PublishButton
+                    draftId={(headerState as DraftHeader).draftId}
+                  />
+                ) : (
+                  <WriteButton />
+                )}
               </>
             ) : (
               <>

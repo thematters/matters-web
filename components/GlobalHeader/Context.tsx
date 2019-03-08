@@ -14,6 +14,7 @@ export interface LoginHeader {
 export interface DraftHeader {
   type: 'draft'
   saved: boolean
+  draftId: string
 }
 
 type HeaderStateInput = DefaultHeader | LoginHeader | DraftHeader
@@ -24,7 +25,7 @@ type HeaderState = HeaderStateInput & {
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
-  updateHeaderState: (state: { [key: string]: any }) => void
+  updateHeaderState: (state: HeaderStateInput) => void
 })
 
 export const HeaderContextConsumer = HeaderContext.Consumer
@@ -47,8 +48,7 @@ export const HeaderContextProvider = ({
     <HeaderContext.Provider
       value={{
         headerState,
-        updateHeaderState: state =>
-          setHeaderState({ ...headerState, ...state, isAuthed })
+        updateHeaderState: state => setHeaderState({ ...state, isAuthed })
       }}
     >
       {children}

@@ -38,7 +38,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   const { updateHeaderState } = useContext(HeaderContext)
 
   useEffect(() => {
-    updateHeaderState({ type: 'draft', saved: true })
+    updateHeaderState({ type: 'draft', saved: true, draftId: id })
 
     return () => updateHeaderState({ type: 'default' })
   }, [])
