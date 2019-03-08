@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
 import ICON_HASHTAG from '~/static/icons/hashtag.svg?sprite'
 
 import { DigestTag } from './__generated__/DigestTag'
@@ -52,7 +52,7 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = _get(tag, 'articles.totalCount', 0)
+  const tagCount = numAbbr(_get(tag, 'articles.totalCount', 0))
 
   return (
     <>

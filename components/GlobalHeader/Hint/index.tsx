@@ -20,7 +20,7 @@ const Hint = () => {
       {headerState.state === 'saving' && (
         <Translate zh_hans="草稿保存中" zh_hant="草稿保存中" />
       )}
-      {headerState.state === 'save-failed' && (
+      {headerState.state === 'saveFailed' && (
         <Translate zh_hans="草稿保存失敗" zh_hant="草稿保存失败" />
       )}
       <style jsx>{styles}</style>

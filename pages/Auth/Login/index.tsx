@@ -1,11 +1,19 @@
 import classNames from 'classnames'
-import Router from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import { Form } from '~/components/Form'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head } from '~/components/Head'
 
 import styles from './styles.css'
 
 const Login = () => {
+  const { updateHeaderState } = useContext(HeaderContext)
+  useEffect(() => {
+    updateHeaderState({ type: 'login' })
+    return () => updateHeaderState({ type: 'default' })
+  }, [])
+
   const containerClass = classNames(
     'l-col-4',
     'l-col-sm-6',
@@ -16,20 +24,15 @@ const Login = () => {
     'l-offset-lg-3',
     'container'
   )
-
   const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
-
-  const redirect = () => Router.replace('/')
 
   return (
     <>
-      <main className="l-row row">
+      <main className="l-row">
+        <Head title={{ zh_hant: '登入', zh_hans: '登入' }} />
+
         <article className={containerClass}>
-          <Form.LoginForm
-            extraClass={formClass}
-            purpose="page"
-            submitCallback={redirect}
-          />
+          <Form.LoginForm extraClass={formClass} purpose="page" />
         </article>
       </main>
       <style jsx>{styles}</style>

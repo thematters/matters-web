@@ -1,10 +1,12 @@
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head } from '~/components/Head'
 import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
@@ -13,9 +15,7 @@ import styles from './styles.css'
 
 const Forget = () => {
   const { lang } = useContext(LanguageContext)
-
   const [step, setStep] = useState('request')
-
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       next: 'rest'
@@ -25,6 +25,12 @@ const Forget = () => {
       next: 'complete'
     }
   })
+
+  const { updateHeaderState } = useContext(HeaderContext)
+  useEffect(() => {
+    updateHeaderState({ type: 'forgot' })
+    return () => updateHeaderState({ type: 'default' })
+  }, [])
 
   const containerClass = classNames(
     'l-col-4',
@@ -36,7 +42,6 @@ const Forget = () => {
     'l-offset-lg-3',
     'container'
   )
-
   const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const requestCodeCallback = (params: any) => {
@@ -53,7 +58,6 @@ const Forget = () => {
     })
     setStep('reset')
   }
-
   const backPreviousStep = (event: any) => {
     event.stopPropagation()
     setStep('request')
@@ -84,7 +88,9 @@ const Forget = () => {
 
   return (
     <>
-      <main className="l-row row">
+      <main className="l-row">
+        <Head title={{ zh_hant: '忘記密碼', zh_hans: '忘记密码' }} />
+
         <article className={containerClass}>
           {step === 'request' && (
             <PasswordChangeRequestForm

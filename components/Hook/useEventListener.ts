@@ -9,6 +9,7 @@ export function useEventListener(event: string, action: any, element?: any) {
     const eventAction = ({ detail }: { detail: CustomEvent['detail'] }) =>
       action(detail)
     target.addEventListener(event, eventAction)
+
     return () => {
       target.removeEventListener(event, eventAction)
     }

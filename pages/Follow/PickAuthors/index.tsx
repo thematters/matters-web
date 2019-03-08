@@ -12,6 +12,7 @@ import {
   UserDigest
 } from '~/components'
 
+import { numFormat } from '~/common/utils'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
 import { FolloweeCountUser } from './__generated__/FolloweeCountUser'
@@ -97,7 +98,7 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
               <ShuffleButton onClick={() => refetch()} />
               <span>
                 <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
-                <span className="hightlight">{followeeCount}</span>
+                <span className="hightlight">{numFormat(followeeCount)}</span>
                 <Translate zh_hant=" 位" zh_hans=" 位" />
               </span>
             </div>

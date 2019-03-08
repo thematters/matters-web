@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { numAbbr } from '~/common/utils'
+
 import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -50,8 +52,8 @@ const SubscribedArticleNewCommentNotice = ({
           ))}{' '}
           {isMultiActors && (
             <Translate
-              zh_hant={`等 ${actorsCount} 人`}
-              zh_hans={`等 ${actorsCount} 人`}
+              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
+              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
           <Translate

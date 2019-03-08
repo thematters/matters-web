@@ -1,4 +1,5 @@
-import { SingletonRouter } from 'next/router'
+import _get from 'lodash/get'
+import Router, { SingletonRouter } from 'next/router'
 
 import { PATHS } from '~/common/enums'
 
@@ -120,4 +121,27 @@ export const getQuery = ({
 }) => {
   const value = router && router.query && router.query[key]
   return value instanceof Array ? value[0] : value
+}
+
+export const redirectToTarget = () => {
+  const target = _get(Router, 'query.target')
+
+  if (target && process.browser) {
+    return (window.location.href = decodeURIComponent(target))
+  } else {
+    return Router.push(PATHS.HOME.href, PATHS.HOME.as)
+  }
+}
+
+export const redirectToLogin = () => {
+  let target = ''
+
+  if (process.browser) {
+    target = Router.asPath ? encodeURIComponent(Router.asPath) : ''
+  }
+
+  return Router.push(
+    `${PATHS.AUTH_LOGIN.href}?target=${target}`,
+    `${PATHS.AUTH_LOGIN.as}?target=${target}`
+  )
 }
