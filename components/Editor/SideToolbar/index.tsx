@@ -5,33 +5,25 @@ import { Quill } from 'react-quill'
 import { Icon } from '~/components/Icon'
 
 import ICON_EDITOR_ADD from '~/static/icons/editor-add.svg?sprite'
-import ICON_EDITOR_IMAGE from '~/static/icons/editor-image.svg?sprite'
-import ICON_EDITOR_LINEBREAK from '~/static/icons/editor-linebreak.svg?sprite'
 
+import DividerButton from './DividerButton'
 import styles from './styles.css'
+import UploadImageButton from './UploadImageButton'
 
 interface SideToolbarProps {
   show: boolean
   top: number
   quill: Quill | null
+  onSave: any
 }
 
-const SideToolbar = ({ show, top, quill }: SideToolbarProps) => {
+const SideToolbar = ({ show, top, quill, onSave }: SideToolbarProps) => {
   const [expanded, setExpanded] = useState(false)
   const containerClasses = classNames({
     container: true,
     show,
     expanded
   })
-
-  const insertDivider = () => {
-    if (quill) {
-      const range = quill.getSelection()
-      const position = range ? range.index : 0
-      quill.insertEmbed(position, 'divider', 'user')
-    }
-    setExpanded(false)
-  }
 
   return (
     <aside className={containerClasses} style={{ top }}>
@@ -49,30 +41,16 @@ const SideToolbar = ({ show, top, quill }: SideToolbarProps) => {
       </button>
 
       <div className="toolbar">
-        <button
-          className="image-button"
-          type="button"
-          onClick={() => setExpanded(!expanded)}
-          aria-label={'新增圖片'}
-        >
-          <Icon
-            id={ICON_EDITOR_IMAGE.id}
-            viewBox={ICON_EDITOR_IMAGE.viewBox}
-            size="large"
-          />
-        </button>
-        <button
-          className="hr-button"
-          type="button"
-          onClick={() => insertDivider()}
-          aria-label={'新增分割線'}
-        >
-          <Icon
-            id={ICON_EDITOR_LINEBREAK.id}
-            viewBox={ICON_EDITOR_LINEBREAK.viewBox}
-            size="large"
-          />
-        </button>
+        <UploadImageButton
+          quill={quill}
+          onSave={onSave}
+          setExpanded={setExpanded}
+        />
+        <DividerButton
+          quill={quill}
+          onSave={onSave}
+          setExpanded={setExpanded}
+        />
       </div>
       <style jsx>{styles}</style>
     </aside>

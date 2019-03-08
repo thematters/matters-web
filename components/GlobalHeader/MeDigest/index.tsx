@@ -1,9 +1,11 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
@@ -12,6 +14,7 @@ import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
+  const { headerState } = useContext(HeaderContext)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -19,6 +22,11 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
     }
     instance.hide()
   }
+  const isDraft = headerState.type === 'draft'
+  const containerClasses = classNames({
+    container: true,
+    'u-sm-down-hide': isDraft
+  })
 
   return (
     <>
@@ -27,7 +35,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
         zIndex={101}
         onCreate={i => setInstance(i)}
       >
-        <button type="button" className="container">
+        <button type="button" className={containerClasses}>
           <Avatar size="small" user={user} />
           <section className="info u-text-truncate">
             <span className="username">{user.displayName}</span>

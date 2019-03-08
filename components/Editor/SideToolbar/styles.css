@@ -15,6 +15,7 @@
   }
   &.expanded {
     & .toolbar {
+      display: inline-block;
       opacity: 1;
     }
   }
@@ -23,12 +24,12 @@
 .toolbar {
   @mixin all-transition;
 
-  display: inline-block;
+  display: none;
   margin-left: var(--spacing-tight);
 
   opacity: 0;
 
-  & > * + * {
+  & > :global(* + *) {
     margin-left: var(--spacing-tight);
   }
 }
@@ -41,4 +42,17 @@
 
 .toggle-button {
   @mixin all-transition;
+}
+
+.upload-image-container {
+  display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
+  cursor: pointer;
+
+  & input {
+    font-size: 0;
+    position: absolute;
+    left: -99999px;
+  }
 }

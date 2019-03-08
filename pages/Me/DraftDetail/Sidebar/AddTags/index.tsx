@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
+import { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 
 import { Translate } from '~/components'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Collapsable from '../Collapsable'
 import { AddTagsDraft } from './__generated__/AddTagsDraft'
@@ -30,6 +32,8 @@ const UPDATE_TAGS = gql`
 `
 
 const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
+  const { updateHeaderState } = useContext(HeaderContext)
+
   const tags = draft.tags || []
   const hasTags = tags.length > 0
 
@@ -47,14 +51,28 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
 
       <Mutation mutation={UPDATE_TAGS}>
         {updateTags => {
-          const addTag = (tag: string) =>
-            updateTags({
-              variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
-            })
-          const deleteTag = (tag: string) =>
-            updateTags({
-              variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
-            })
+          const addTag = async (tag: string) => {
+            updateHeaderState({ type: 'draft', state: 'saving' })
+            try {
+              await updateTags({
+                variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
+              })
+              updateHeaderState({ type: 'draft', state: 'saved' })
+            } catch (e) {
+              updateHeaderState({ type: 'draft', state: 'save-failed' })
+            }
+          }
+          const deleteTag = async (tag: string) => {
+            updateHeaderState({ type: 'draft', state: 'saving' })
+            try {
+              await updateTags({
+                variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
+              })
+              updateHeaderState({ type: 'draft', state: 'saved' })
+            } catch (e) {
+              updateHeaderState({ type: 'draft', state: 'save-failed' })
+            }
+          }
 
           return (
             <section className="tags-container">

@@ -1,9 +1,11 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Mutation, Query, QueryResult } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
@@ -87,6 +89,13 @@ const NoticeButton = ({
     }
   }
 
+  const { headerState } = useContext(HeaderContext)
+  const isDraft = headerState.type === 'draft'
+  const buttonClasses = classNames({
+    hasUnreadNotices,
+    'u-sm-down-hide': isDraft
+  })
+
   return (
     <Dropdown
       content={
@@ -115,7 +124,7 @@ const NoticeButton = ({
         onClick={() => {
           toggleDropdown()
         }}
-        className={hasUnreadNotices ? 'unread' : ''}
+        className={buttonClasses}
       >
         <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
         <style jsx>{styles}</style>
