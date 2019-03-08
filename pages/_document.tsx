@@ -1,3 +1,4 @@
+import getConfig from 'next/config'
 import Document, {
   Head,
   Main,
@@ -6,6 +7,10 @@ import Document, {
 } from 'next/document'
 import React from 'react'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
+
+const {
+  publicRuntimeConfig: { GA_TRACKING_ID }
+} = getConfig()
 
 interface MattersDocumentProps {
   spriteContent: string
@@ -26,7 +31,23 @@ class MattersDocument extends Document<MattersDocumentProps> {
     return (
       // TODO: lang
       <html lang="zh-hant">
-        <Head />
+        <Head>
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_TRACKING_ID}');
+              `
+            }}
+          />
+        </Head>
 
         <body>
           <div dangerouslySetInnerHTML={{ __html: this.props.spriteContent }} />
