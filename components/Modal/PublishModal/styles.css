@@ -1,0 +1,76 @@
+.form {
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+
+  & > .image {
+    width: 100%;
+    height: 98%;
+  }
+
+  & > .title {
+    padding: var(--spacing-default) 0 var(--spacing-tight);
+  }
+}
+
+.indicator {
+  @mixin flex-center-all;
+  padding-bottom: var(--spacing-default);
+
+  & > div {
+    background-color: var(--color-grey-light);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 0 var(--spacing-x-tight);
+  }
+
+  & .active {
+    background-color: var(--color-grey-dark);
+  }
+}
+
+.descriptions {
+  padding-bottom: var(--spacing-loose);
+
+  & > .description {
+    position: relative;
+    font-size: var(--font-size-sm);
+    margin: 0 2.5rem var(--spacing-tight) 4.75rem;
+
+    & > .number {
+      position: absolute;
+      top: 0;
+      left: -1.9rem;
+
+      color: var(--color-grey-light);
+      font-weight: 900;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+
+  & > .button {
+    @mixin flex-center-all;
+    cursor: pointer;
+    font-weight: 500;
+    height: 2.93rem;
+    width: 50%;
+  }
+
+  & > .cancel {
+    color: var(--color-black);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: var(--spacing-x-tight);
+  }
+
+  & > .publish {
+    color: var(--color-white);
+    background: var(--color-matters-green);
+  }
+}

@@ -27,7 +27,8 @@ export const TEXT: { [key: string]: any } = {
     agreeAndContinue: '同意並繼續',
     untitle: '未命名',
     changeEmail: '修改電子信箱',
-    changeUserName: '修改 Matters ID'
+    changeUserName: '修改 Matters ID',
+    publish: '發佈文章'
   },
 
   zh_hans: {
@@ -58,6 +59,7 @@ export const TEXT: { [key: string]: any } = {
     agreeAndContinue: '同意并继续',
     untitle: '未命名',
     changeEmail: '修改邮箱',
-    changeUserName: '修改 Matters ID'
+    changeUserName: '修改 Matters ID',
+    publish: '发布文章'
   }
 }

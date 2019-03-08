@@ -6,6 +6,8 @@ import { Mutation } from 'react-apollo'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { LanguageContext } from '~/components/Language'
+import { PublishModal } from '~/components/Modal/PublishModal'
+import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
 
 import { TEXT } from '~/common/enums'
@@ -110,7 +112,9 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               }
             }}
           />
-
+          <ModalInstance modalId="publishModal" title="publish">
+            {(props: ModalInstanceProps) => <PublishModal {...props} />}
+          </ModalInstance>
           <style jsx>{styles}</style>
         </>
       )}

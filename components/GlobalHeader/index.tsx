@@ -39,6 +39,12 @@ const SignUpModalSwitch = () => (
   </ModalSwitch>
 )
 
+const PublishModalSwitch = () => (
+  <ModalSwitch modalId="publishModal">
+    {(open: any) => <PublishButton onClick={open} />}
+  </ModalSwitch>
+)
+
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
   const { headerState } = useContext(HeaderContext)
@@ -68,7 +74,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft ? <PublishButton /> : <WriteButton />}
+                {isDraft ? <PublishModalSwitch /> : <WriteButton />}
               </>
             ) : (
               <>
