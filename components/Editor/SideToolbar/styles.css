@@ -32,6 +32,11 @@
   & > :global(* + *) {
     margin-left: var(--spacing-tight);
   }
+
+  & :global(svg) {
+    background: var(--color-white);
+    border-radius: 50%;
+  }
 }
 
 .expanded {
