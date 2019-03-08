@@ -115,7 +115,7 @@ const UploadImageButton = ({
             id={loading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
             viewBox={loading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
             size="large"
-            className={loading ? 'u-motion-spin' : ''}
+            className={loading ? 'u-motion-spin' : 'u-motion-icon-hover'}
           />
           <style jsx>{styles}</style>
         </label>
