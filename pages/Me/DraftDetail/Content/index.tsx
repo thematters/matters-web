@@ -106,7 +106,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                 await updateDraft({ variables: { id: draft.id, ...newDraft } })
                 updateHeaderState({ type: 'draft', state: 'saved' })
               } catch (e) {
-                updateHeaderState({ type: 'draft', state: 'save-failed' })
+                updateHeaderState({ type: 'draft', state: 'saveFailed' })
               }
             }}
           />

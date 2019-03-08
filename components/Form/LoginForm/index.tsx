@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
@@ -11,7 +10,7 @@ import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
-import { isValidEmail, translate } from '~/common/utils'
+import { isValidEmail, redirectToTarget, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -201,8 +200,9 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         .then((result: any) => {
           if (submitCallback) {
             submitCallback()
+          } else {
+            redirectToTarget()
           }
-          Router.replace('/')
         })
         .catch(({ graphQLErrors: error }: any) => {
           if (
