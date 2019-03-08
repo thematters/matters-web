@@ -18,11 +18,13 @@ const fragments = {
       ...AppreciatorsArticle
       ...BookmarkArticle
       ...CommentButtonArticle
+      ...MoreButtonArticle
     }
     ${MATButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
     ${CommentButton.fragments.article}
+    ${MoreButton.fragments.article}
   `
 }
 
@@ -57,7 +59,7 @@ const Toolbar = ({
         <CommentButton article={article} />
         <BookmarkButton article={article} size="default" />
         <ShareButton />
-        <MoreButton />
+        <MoreButton article={article} />
       </section>
       <style jsx>{styles}</style>
     </section>
