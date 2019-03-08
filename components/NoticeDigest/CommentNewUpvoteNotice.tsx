@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { numAbbr } from '~/common/utils'
+
 import { CommentNewUpvoteNotice as NoticeType } from './__generated__/CommentNewUpvoteNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -45,8 +47,8 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
           ))}{' '}
           {isMultiActors && (
             <Translate
-              zh_hant={`等 ${actorsCount} 人`}
-              zh_hans={`等 ${actorsCount} 人`}
+              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
+              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
           <Translate zh_hant="讚了你的評論" zh_hans="赞了你的评论" />{' '}

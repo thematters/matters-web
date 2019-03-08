@@ -17,7 +17,7 @@ import { FollowButton } from '~/components/Button/Follow'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
-import { getQuery, toPath } from '~/common/utils'
+import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
@@ -157,7 +157,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                       <Link {...userFollowersPath}>
                         <a className="followers">
                           <span className="count">
-                            {user.followers.totalCount}
+                            {numAbbr(user.followers.totalCount)}
                           </span>
                           <Translate
                             {...(isMe
@@ -169,7 +169,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                       <Link {...userFolloweesPath}>
                         <a className="followees">
                           <span className="count">
-                            {user.followees.totalCount}
+                            {numAbbr(user.followees.totalCount)}
                           </span>
                           <Translate
                             {...(isMe

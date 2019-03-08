@@ -14,7 +14,7 @@ import ModalContent from '~/components/Modal/Content'
 import ModalHeader from '~/components/Modal/Header'
 import { ModalInstance } from '~/components/ModalManager'
 
-import { getQuery, mergeConnections } from '~/common/utils'
+import { getQuery, mergeConnections, numFormat } from '~/common/utils'
 
 import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 import styles from './styles.css'
@@ -86,7 +86,9 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                     path: connectionPath
                   })
               })
-            const totalCount = _get(data, 'article.appreciators.totalCount', 0)
+            const totalCount = numFormat(
+              _get(data, 'article.appreciators.totalCount', 0)
+            )
 
             return (
               <>

@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { numAbbr } from '~/common/utils'
+
 import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -44,8 +46,8 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
           ))}{' '}
           {isMultiActors && (
             <Translate
-              zh_hant={`等 ${actorsCount} 人`}
-              zh_hans={`等 ${actorsCount} 人`}
+              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
+              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
           <Translate zh_hant="關注了你" zh_hans="关注了你" />

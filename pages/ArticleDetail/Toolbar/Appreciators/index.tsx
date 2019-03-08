@@ -5,6 +5,8 @@ import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { ModalSwitch } from '~/components/ModalManager'
 
+import { numAbbr } from '~/common/utils'
+
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 import AppreciatorsModal from './AppreciatorsModal'
 import styles from './styles.css'
@@ -65,7 +67,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
                 <Translate
                   zh_hant={({ count }) => `等 ${count} 人贊賞了文章`}
                   zh_hans={({ count }) => `等 ${count} 人赞赏了文章`}
-                  data={{ count: article.appreciators.totalCount }}
+                  data={{ count: numAbbr(article.appreciators.totalCount) }}
                 />
               </p>
             </section>

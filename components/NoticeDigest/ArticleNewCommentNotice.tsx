@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { numAbbr } from '~/common/utils'
+
 import { ArticleNewCommentNotice as NoticeType } from './__generated__/ArticleNewCommentNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -46,8 +48,8 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
           ))}{' '}
           {isMultiActors && (
             <Translate
-              zh_hant={`等 ${actorsCount} 人`}
-              zh_hans={`等 ${actorsCount} 人`}
+              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
+              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
           <Translate zh_hant="評論了你的文章" zh_hans="评论了你的文章" />{' '}
