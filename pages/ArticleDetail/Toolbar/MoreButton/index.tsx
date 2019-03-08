@@ -50,6 +50,16 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
     instance.hide()
   }
 
+  /**
+   * REMOVE this after implement report article
+   */
+  const viewer = useContext(ViewerContext)
+  const isArchived = article.state === 'archived'
+  const isArticleAuthor = viewer.id === article.author.id
+  if (isArchived || !isArticleAuthor) {
+    return null
+  }
+
   return (
     <Dropdown
       content={
