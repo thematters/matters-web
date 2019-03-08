@@ -6,7 +6,7 @@ import styles from './styles.css'
 
 interface DateTimeProps {
   date: Date | string | number
-  type?: 'absolute' | 'relative'
+  type?: 'absolute' | 'relative' | 'standard'
 }
 
 /**
