@@ -105,8 +105,8 @@ steps:
       - bash ./bin/eb-deploy.sh prod
     when:
       branch:
-        - master
         - feature/master
+        - master
       event:
         - push
 
