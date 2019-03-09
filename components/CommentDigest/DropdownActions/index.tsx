@@ -10,7 +10,7 @@ import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
-import ReportButton from './ReportButton'
+// import ReportButton from './ReportButton'
 
 const fragments = {
   comment: gql`
@@ -55,11 +55,11 @@ const DropdownContent: React.FC<{
           <EditButton hideDropdown={hideDropdown} editComment={editComment} />
         </Menu.Item>
       )}
-      {!isCommentAuthor && isActive && (
+      {/* {!isCommentAuthor && isActive && (
         <Menu.Item>
           <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
-      )}
+      )} */}
       {isCommentAuthor && isActive && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
@@ -82,6 +82,17 @@ const DropdownActions = ({
       return
     }
     instance.hide()
+  }
+
+  /**
+   * REMOVE this after implement report comment
+   */
+  const viewer = useContext(ViewerContext)
+  const isArticleAuthor = viewer.id === comment.article.author.id
+  const isCommentAuthor = viewer.id === comment.author.id
+  const isActive = comment.state === 'active'
+  if ((!isCommentAuthor && !isArticleAuthor) || !isActive) {
+    return null
   }
 
   return (

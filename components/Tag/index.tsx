@@ -33,7 +33,7 @@ const fragments = {
     fragment DigestTag on Tag {
       id
       content
-      articles(input: { first: 0 }) @include(if: $hasDigestTagArticleCount) {
+      articles(input: { first: 0 }) {
         totalCount
       }
     }
