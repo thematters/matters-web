@@ -1,0 +1,12 @@
+.intro {
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+
+  & :global(h2) {
+    color: var(--color-black);
+  }
+
+  & * {
+    margin-top: var(--spacing-tight);
+  }
+}

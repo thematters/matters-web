@@ -121,7 +121,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
             <button
               type="button"
               onClick={() => {
-                logout().then(() => Router.replace('/')) // redirect to home after logout
+                logout().then(() => Router.push(PATHS.HOME.href, PATHS.HOME.as)) // redirect to home after logout
               }}
             >
               <TextIcon

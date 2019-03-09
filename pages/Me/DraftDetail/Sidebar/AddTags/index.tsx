@@ -59,7 +59,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
               })
               updateHeaderState({ type: 'draft', state: 'saved' })
             } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'save-failed' })
+              updateHeaderState({ type: 'draft', state: 'saveFailed' })
             }
           }
           const deleteTag = async (tag: string) => {
@@ -70,7 +70,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
               })
               updateHeaderState({ type: 'draft', state: 'saved' })
             } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'save-failed' })
+              updateHeaderState({ type: 'draft', state: 'saveFailed' })
             }
           }
 

@@ -7,6 +7,7 @@ import { Mutation } from 'react-apollo'
 import { Icon } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
+import { numAbbr } from '~/common/utils'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 import ICON_MAT_WHITE from '~/static/icons/mat-white.svg?sprite'
 
@@ -79,7 +80,7 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
               style={{ width: 28, height: 28 }}
             />
           </button>
-          <span className="mat-count">{article.MAT}</span>
+          <span className="mat-count">{numAbbr(article.MAT)}</span>
           <style jsx>{styles}</style>
         </section>
       )}

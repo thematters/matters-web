@@ -4,6 +4,7 @@ import _get from 'lodash/get'
 import { Icon, TextIcon } from '~/components'
 import { DrawerConsumer } from '~/components/Drawer'
 
+import { numAbbr } from '~/common/utils'
 import ICON_COMMENT_REGULAR from '~/static/icons/comment-regular.svg?sprite'
 
 import { CommentButtonArticle } from './__generated__/CommentButtonArticle'
@@ -42,7 +43,7 @@ const CommentButton = ({
           }
           color="grey"
           weight="medium"
-          text={_get(article, 'comments.totalCount', '')}
+          text={numAbbr(_get(article, 'comments.totalCount', 0))}
           textPlacement={textPlacement}
           size="xs"
           spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}

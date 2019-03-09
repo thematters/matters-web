@@ -4,6 +4,8 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { numAbbr, numFormat } from '~/common/utils'
+
 import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -45,8 +47,8 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
           ))}{' '}
           {isMultiActors && (
             <Translate
-              zh_hant={`等 ${actorsCount} 人`}
-              zh_hans={`等 ${actorsCount} 人`}
+              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
+              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
           <Translate zh_hant="讚賞了你的文章" zh_hans="赞赏了你的文章" />
@@ -55,8 +57,8 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
               <Translate zh_hant={`，獲得 `} zh_hans={`，获得 `} />
               <span className="highlight">
                 <Translate
-                  zh_hant={`${notice.MAT} MAT`}
-                  zh_hans={`${notice.MAT} MAT`}
+                  zh_hant={`${numFormat(notice.MAT)} MAT`}
+                  zh_hans={`${numFormat(notice.MAT)} MAT`}
                 />
               </span>
             </>

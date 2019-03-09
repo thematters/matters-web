@@ -54,6 +54,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
     me: isAuthed
   })
   const isDraft = headerType === 'draft'
+  const isLogin = headerType === 'login'
+  const isSignUp = headerType === 'signUp'
 
   return (
     <header>
@@ -78,8 +80,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             ) : (
               <>
-                <LoginModalSwitch />
-                <SignUpModalSwitch />
+                {!isLogin && <LoginModalSwitch />}
+                {!isSignUp && <SignUpModalSwitch />}
               </>
             )}
           </section>
