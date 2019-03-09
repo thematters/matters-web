@@ -5,6 +5,7 @@
  */
 import dotenv from 'dotenv'
 import express from 'express'
+import helmet from 'helmet'
 import 'module-alias/register'
 import next from 'next'
 
@@ -35,6 +36,9 @@ app
   .prepare()
   .then(() => {
     const server = express()
+
+    // middlewares
+    server.use(helmet())
 
     ROUTES.forEach(({ href, as }) => {
       server.get(as, (req, res) =>

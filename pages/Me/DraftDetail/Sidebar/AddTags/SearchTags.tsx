@@ -12,7 +12,7 @@ import {
   Translate
 } from '~/components'
 
-import { translate } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import {
   SearchTagsQuery,
@@ -76,7 +76,7 @@ const DropdownContent = ({
             >
               <span>{tag.content}</span>
               <span className="search-tag-count">
-                {tag.articles.totalCount}
+                {numAbbr(tag.articles.totalCount)}
               </span>
             </button>
           </Menu.Item>

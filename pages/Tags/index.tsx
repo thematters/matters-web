@@ -19,7 +19,7 @@ import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
 const ALL_TAGS = gql`
-  query AllTags($cursor: String, $hasDigestTagArticleCount: Boolean = true) {
+  query AllTags($cursor: String) {
     viewer {
       id
       recommendation {

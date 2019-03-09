@@ -2,7 +2,8 @@
   white-space: pre-wrap;
   line-height: 1.6;
 
-  & :global(> * + *) {
+  & :global(> * + *),
+  & :global(> *:last-child) {
     margin: var(--spacing-tight) 0;
   }
 

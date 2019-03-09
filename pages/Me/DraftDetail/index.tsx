@@ -5,7 +5,9 @@ import { Query, QueryResult } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head } from '~/components/Head'
 import { Placeholder } from '~/components/Placeholder'
+import { Protected } from '~/components/Protected'
 
 import { getQuery } from '~/common/utils'
 
@@ -31,38 +33,45 @@ const DRAFT_DETAIL = gql`
 const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   const id = getQuery({ router, key: 'id' })
 
-  if (!id) {
-    return <span>Empty</span> // TODO
-  }
-
   const { updateHeaderState } = useContext(HeaderContext)
 
   useEffect(() => {
     updateHeaderState({ type: 'draft', state: '' })
-
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
   return (
-    <Query query={DRAFT_DETAIL} variables={{ id }}>
-      {({ data, loading, error }: QueryResult & { data: DraftDetailQuery }) => (
-        <main className="l-row">
-          <article className="l-col-4 l-col-md-5 l-col-lg-8">
-            {loading ? (
-              <Placeholder.ArticleDetail />
-            ) : (
-              <DraftContent draft={data.node} />
-            )}
-          </article>
+    <Protected>
+      <Query query={DRAFT_DETAIL} variables={{ id }}>
+        {({
+          data,
+          loading,
+          error
+        }: QueryResult & { data: DraftDetailQuery }) => (
+          <main className="l-row">
+            <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
 
-          <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-            {loading ? <Placeholder.Sidebar /> : <Sidebar draft={data.node} />}
-          </aside>
+            <article className="l-col-4 l-col-md-5 l-col-lg-8">
+              {loading ? (
+                <Placeholder.ArticleDetail />
+              ) : (
+                <DraftContent draft={data.node} />
+              )}
+            </article>
 
-          <style jsx>{styles}</style>
-        </main>
-      )}
-    </Query>
+            <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+              {loading ? (
+                <Placeholder.Sidebar />
+              ) : (
+                <Sidebar draft={data.node} />
+              )}
+            </aside>
+
+            <style jsx>{styles}</style>
+          </main>
+        )}
+      </Query>
+    </Protected>
   )
 }
 
