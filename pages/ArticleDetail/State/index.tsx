@@ -3,12 +3,12 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components/Language'
 import { Toast } from '~/components/Toast'
 
-import { ToastArticle } from './__generated__/ToastArticle'
+import { StateArticle } from './__generated__/StateArticle'
 import styles from './styles.css'
 
 const fragments = {
   article: gql`
-    fragment ToastArticle on Article {
+    fragment StateArticle on Article {
       state
     }
   `
@@ -24,7 +24,7 @@ const ArchivedHeader = () => (
   <Translate zh_hant="此文章已在站內隱藏。" zh_hans="此文章已在站內隐藏。" />
 )
 
-const ArticleToast = ({ article }: { article: ToastArticle }) => {
+const State = ({ article }: { article: StateArticle }) => {
   const isBanned = article.state === 'banned'
   const isArchived = article.state === 'archived'
 
@@ -41,6 +41,6 @@ const ArticleToast = ({ article }: { article: ToastArticle }) => {
   )
 }
 
-ArticleToast.fragments = fragments
+State.fragments = fragments
 
-export default ArticleToast
+export default State

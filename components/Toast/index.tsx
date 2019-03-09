@@ -25,6 +25,7 @@ export interface ToastProps {
   closeButton?: boolean
   onCloseButtonClick?: () => any
   customButton?: any
+  buttonPlacement?: 'top' | 'bottom'
 }
 
 export const Toast: React.FC<ToastProps> = ({
@@ -34,11 +35,13 @@ export const Toast: React.FC<ToastProps> = ({
 
   closeButton,
   onCloseButtonClick,
-  customButton
+  customButton,
+  buttonPlacement = 'top'
 }) => {
   const mainClass = classNames({
     toast: true,
-    [color]: !!color
+    [color]: !!color,
+    [buttonPlacement]: buttonPlacement
   })
   const contentClass = classNames({
     content: true,

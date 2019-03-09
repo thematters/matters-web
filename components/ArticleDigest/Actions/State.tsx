@@ -6,18 +6,18 @@ import { TextIcon } from '~/components/TextIcon'
 
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
-import { StateArticle } from './__generated__/StateArticle'
+import { StateActionsArticle } from './__generated__/StateActionsArticle'
 import styles from './styles.css'
 
 const fragments = {
   article: gql`
-    fragment StateArticle on Article {
+    fragment StateActionsArticle on Article {
       state
     }
   `
 }
 
-const State = ({ article }: { article: StateArticle }) => {
+const State = ({ article }: { article: StateActionsArticle }) => {
   if (article.state === 'active') {
     return null
   }

@@ -23,10 +23,10 @@ import { ViewerContext } from '~/components/Viewer'
 import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import ArticleToast from './ArticleToast'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
 import SideComments from './SideComments'
+import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
@@ -47,6 +47,7 @@ const ARTICLE_DETAIL = gql`
       state
       public
       live
+      cover
       summary
       createdAt
       author {
@@ -57,7 +58,7 @@ const ARTICLE_DETAIL = gql`
       ...TagListArticle
       ...ToolbarArticle
       ...RelatedArticles
-      ...ToastArticle
+      ...StateArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -66,7 +67,7 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${Toolbar.fragments.article}
   ${RelatedArticles.fragments.article}
-  ${ArticleToast.fragments.article}
+  ${State.fragments.article}
 `
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
@@ -133,7 +134,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     image={data.article.cover}
                   />
 
-                  <ArticleToast article={data.article} />
+                  <State article={data.article} />
 
                   <section className="author">
                     <UserDigest.FullDesc user={data.article.author} />

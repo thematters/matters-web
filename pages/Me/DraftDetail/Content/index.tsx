@@ -62,16 +62,16 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   }
 
   const { updateHeaderState } = useContext(HeaderContext)
-
-  // use state for controling title
   const [title, setTitle] = useState(draft.title)
   const { lang } = useContext(LanguageContext)
+
+  const isPending = draft.publishState === 'pending'
 
   return (
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
         <>
-          <header>
+          <header className={isPending ? 'u-area-disable' : ''}>
             <input
               placeholder={translate({
                 zh_hant: '請輸入標題…',
