@@ -1,9 +1,8 @@
 import { NextFunctionComponent } from 'next'
 import React from 'react'
 
-import { Button, Error, Translate } from '~/components'
-
-import { PATHS } from '~/common/enums'
+import { Error } from '~/components'
+import BackToHomeButton from '~/components/Button/BackToHome'
 
 import styles from './styles.error.css'
 
@@ -21,15 +20,7 @@ const ErrorPage: NextFunctionComponent<ErrorProps> = ({ statusCode }) => {
             statusCode === 404 || statusCode === '404' ? 'not_found' : 'server'
           }
         >
-          <Button
-            bgColor="green"
-            size="large"
-            is="link"
-            href={PATHS.HOME.href}
-            as={PATHS.HOME.as}
-          >
-            <Translate zh_hant="返回首頁" zh_hans="返回首页" />
-          </Button>
+          <BackToHomeButton />
         </Error>
       </article>
       <style jsx>{styles}</style>
