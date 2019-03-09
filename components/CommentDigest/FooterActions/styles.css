@@ -24,9 +24,6 @@ footer {
   & :global(button.active) {
     color: var(--color-black);
   }
-  & :global(button:disabled) {
-    opacity: 0.5;
-  }
 }
 
 .comment-form {

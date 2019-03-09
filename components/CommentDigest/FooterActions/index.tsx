@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
 import { Form } from '~/components/Form'
+import { ViewerContext } from '~/components/Viewer'
 
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
@@ -53,6 +54,7 @@ const IconDotDivider = () => (
 )
 
 const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
+  const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
 
@@ -60,10 +62,16 @@ const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
     <>
       <footer className="actions">
         <div className="left">
-          <UpvoteButton comment={comment} disabled={!isActive} />
+          <UpvoteButton
+            comment={comment}
+            disabled={!isActive || viewer.isInactive}
+          />
 
           <IconDotDivider />
-          <DownvoteButton comment={comment} disabled={!isActive} />
+          <DownvoteButton
+            comment={comment}
+            disabled={!isActive || viewer.isInactive}
+          />
 
           {hasComment && (
             <>
@@ -74,7 +82,7 @@ const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
                 onClick={() => {
                   setShowForm(!showForm)
                 }}
-                disabled={!isActive}
+                disabled={!isActive || viewer.isInactive}
               >
                 <Icon
                   id={ICON_COMMENT_SMALL.id}

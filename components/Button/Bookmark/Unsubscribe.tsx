@@ -19,10 +19,12 @@ const UNSUBSCRIBE_ARTICLE = gql`
 
 const Unsubscribe = ({
   article,
-  size
+  size,
+  disabled
 }: {
   article: BookmarkArticle
   size: 'small' | 'default'
+  disabled?: boolean
 }) => (
   <Mutation
     mutation={UNSUBSCRIBE_ARTICLE}
@@ -36,7 +38,12 @@ const Unsubscribe = ({
     }}
   >
     {(unsubscribe, { data }) => (
-      <button type="button" aria-label="收藏" onClick={() => unsubscribe()}>
+      <button
+        type="button"
+        aria-label="收藏"
+        onClick={() => unsubscribe()}
+        disabled={disabled}
+      >
         <Icon
           size={size}
           id={

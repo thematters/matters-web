@@ -91,7 +91,11 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
-  if ((!isCommentAuthor && !isArticleAuthor) || !isActive) {
+  if (
+    (!isCommentAuthor && !isArticleAuthor) ||
+    !isActive ||
+    viewer.isInactive
+  ) {
     return null
   }
 

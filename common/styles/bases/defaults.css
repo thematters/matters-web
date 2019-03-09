@@ -50,6 +50,10 @@ main {
 a,
 button {
   @mixin all-transition;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 a {
