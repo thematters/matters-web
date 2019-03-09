@@ -9,6 +9,7 @@ import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import CommentCount from './CommentCount'
 import MAT from './MAT'
+import State from './State'
 import styles from './styles.css'
 import TopicScore from './TopicScore'
 
@@ -18,6 +19,7 @@ export interface ActionsControls {
   hasDateTime?: boolean
   hasBookmark?: boolean
   hasTopicScore?: boolean
+  hasState?: boolean
 }
 type ActionsProps = {
   article: DigestActionsArticle
@@ -35,12 +37,14 @@ const fragments = {
       ...CommentCountArticle
       ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
       ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
+      ...StateArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
     ${CommentCount.fragments.article}
     ${BookmarkButton.fragments.article}
     ${TopicScore.fragments.article}
+    ${State.fragments.article}
   `
 }
 
@@ -58,9 +62,25 @@ const Actions = ({
   hasAuthor,
   hasDateTime,
   hasBookmark,
-  hasTopicScore
+  hasTopicScore,
+  hasState
 }: ActionsProps) => {
   const size = ['feature', 'feed'].indexOf(type) >= 0 ? 'default' : 'small'
+
+  // used in user article feed
+  if (hasState && article.state !== 'active') {
+    return (
+      <footer className="actions">
+        <State article={article} />
+
+        <span className="space-left">
+          <DateTime date={article.createdAt} />
+        </span>
+
+        <style jsx>{styles}</style>
+      </footer>
+    )
+  }
 
   return (
     <footer className="actions">
