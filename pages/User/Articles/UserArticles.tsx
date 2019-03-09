@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
+import { useContext } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
 import {
@@ -11,6 +12,7 @@ import {
   Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, mergeConnections } from '~/common/utils'
 
@@ -47,6 +49,9 @@ const USER_ARTICLES_FEED = gql`
 
 const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   const userName = getQuery({ router, key: 'userName' })
+
+  const viewer = useContext(ViewerContext)
+  const isMe = viewer.userName === userName
 
   return (
     <Query query={USER_ARTICLES_FEED} variables={{ userName }}>
@@ -102,6 +107,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                       article={node}
                       hasBookmark
                       hasDateTime
+                      hasFingerprint={isMe}
                     />
                   </li>
                 ))}
