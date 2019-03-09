@@ -6,7 +6,10 @@ import { useContext, useState } from 'react'
 import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Translate } from '~/components/Language'
+import { ViewerContext } from '~/components/Viewer'
 
+import { TEXT } from '~/common/enums/text'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MeDigestUser } from './__generated__/MeDigestUser'
@@ -14,6 +17,7 @@ import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
+  const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -25,6 +29,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
   const isDraft = headerState.type === 'draft'
   const containerClasses = classNames({
     container: true,
+    inactive: viewer.isInactive,
     'u-sm-down-hide': isDraft
   })
 
@@ -36,23 +41,45 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
         onCreate={i => setInstance(i)}
       >
         <button type="button" className={containerClasses}>
-          <Avatar size="small" user={user} />
+          <Avatar size="small" user={viewer.isInactive ? undefined : user} />
           <section className="info u-text-truncate">
-            <span className="username">{user.displayName}</span>
-            <TextIcon
-              icon={
-                <Icon
-                  size="xsmall"
-                  id={ICON_MAT_GOLD.id}
-                  viewBox={ICON_MAT_GOLD.viewBox}
+            {viewer.isActive && (
+              <>
+                <span className="username">{user.displayName}</span>
+                <TextIcon
+                  icon={
+                    <Icon
+                      size="xsmall"
+                      id={ICON_MAT_GOLD.id}
+                      viewBox={ICON_MAT_GOLD.viewBox}
+                    />
+                  }
+                  color="gold"
+                  weight="semibold"
+                  text={_get(user, 'status.MAT.total')}
+                  size="xs"
+                  spacing="0"
                 />
-              }
-              color="gold"
-              weight="semibold"
-              text={_get(user, 'status.MAT.total')}
-              size="xs"
-              spacing="0"
-            />
+              </>
+            )}
+            {viewer.isFrozen && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountFrozen}
+                zh_hans={TEXT.zh_hans.accountFrozen}
+              />
+            )}
+            {viewer.isArchived && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountArchived}
+                zh_hans={TEXT.zh_hans.accountArchived}
+              />
+            )}
+            {viewer.isBanned && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountBanned}
+                zh_hans={TEXT.zh_hans.accountBanned}
+              />
+            )}
           </section>
         </button>
       </Dropdown>

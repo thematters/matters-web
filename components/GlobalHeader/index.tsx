@@ -8,6 +8,7 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import { analytics } from '~/common/utils'
 
+import { ViewerContext } from '../Viewer'
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import { HeaderContext } from './Context'
 import Hint from './Hint'
@@ -41,11 +42,12 @@ const SignUpModalSwitch = () => (
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
+  const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
-  const { isAuthed, type: headerType } = headerState
+  const { type: headerType } = headerState
   const rightClasses = classNames({
     right: true,
-    me: isAuthed
+    me: viewer.isAuthed
   })
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
@@ -61,7 +63,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           </section>
 
           <section className={rightClasses}>
-            {isAuthed && user ? (
+            {viewer.isAuthed && user ? (
               <>
                 <Responsive.MediumUp>
                   {(match: boolean) =>
@@ -70,7 +72,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft ? <PublishButton /> : <WriteButton />}
+                {isDraft && viewer.isActive && <PublishButton />}
+                {!isDraft && viewer.isActive && <WriteButton />}
               </>
             ) : (
               <>

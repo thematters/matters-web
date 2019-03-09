@@ -6,9 +6,8 @@ import { redirectToLogin } from '~/common/utils'
 
 export const Protected: React.FC = ({ children }) => {
   const viewer = useContext(ViewerContext)
-  const isAuthed = !!viewer.id
 
-  if (isAuthed) {
+  if (viewer.isAuthed) {
     return <>{children}</>
   }
 

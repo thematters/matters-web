@@ -11,13 +11,15 @@ import { Toast, ToastProps } from '~/components/Toast'
  * // To create a toast
  * window.dispatchEvent(new CustomEvent(
  *   'addToast',
- *   {
- *     color: 'green',
- *     header: 'header description',
- *     content: 'content description',
- *     closeButton: true,
- *     fixed: false,
- *     duration: 3000
+ *   { detail:
+ *     {
+ *       color: 'green',
+ *       header: 'header description',
+ *       content: 'content description',
+ *       closeButton: true,
+ *       fixed: false,
+ *       duration: 3000
+ *     }
  *   }
  * ))
  *

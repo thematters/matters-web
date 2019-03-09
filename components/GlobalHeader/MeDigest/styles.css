@@ -7,6 +7,7 @@
   padding: 0;
   border-radius: 2rem;
   border: 1px solid transparent;
+  font-size: var(--font-size-sm);
 
   & > :global(*) {
     vertical-align: middle;
@@ -20,6 +21,10 @@
     &:focus {
       border-color: rgba(0, 0, 0, 0.08);
     }
+  }
+
+  &.inactive {
+    color: var(--color-grey-dark);
   }
 }
 
@@ -48,10 +53,6 @@
       #fff 0,
       rgba(255, 255, 255, 0)
     );
-  }
-
-  & .username {
-    font-size: var(--font-size-sm);
   }
 
   & :global(> *) {
