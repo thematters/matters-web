@@ -6,9 +6,11 @@ import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 import { useEventListener } from '../Hook'
 import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
-const {
-  publicRuntimeConfig: { GA_TRACKING_ID }
-} = getConfig()
+let GA_TRACKING_ID = ''
+if (process.env.NODE_ENV !== 'test') {
+  const { publicRuntimeConfig } = getConfig()
+  GA_TRACKING_ID = publicRuntimeConfig.GA_TRACKING_ID
+}
 
 declare global {
   interface Window {

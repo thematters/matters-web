@@ -24,26 +24,23 @@ export default ({ draftId }: { draftId: string }) => {
   return (
     <Mutation mutation={PUBLISH_ARTICLE}>
       {publishArticle => (
-        <div
+        <Button
+          size="large"
+          bgColor="green"
+          icon={
+            <Icon
+              id={icon.id}
+              viewBox={icon.viewBox}
+              className={showLoader && 'u-motion-spin'}
+            />
+          }
           onClick={() => {
             setLoader(true)
             publishArticle({ variables: { draftId } })
           }}
         >
-          <Button
-            size="large"
-            bgColor="green"
-            icon={
-              <Icon
-                id={icon.id}
-                viewBox={icon.viewBox}
-                className={showLoader && 'u-motion-spin'}
-              />
-            }
-          >
-            <Translate zh_hant="發佈" zh_hans="发布" />
-          </Button>
-        </div>
+          <Translate zh_hant="發佈" zh_hans="发布" />
+        </Button>
       )}
     </Mutation>
   )
