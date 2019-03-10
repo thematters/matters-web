@@ -1,10 +1,16 @@
-import { withFormik } from 'formik'
+import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { FC, useContext, useState } from 'react'
 
+import { Mutation } from '~/components/GQL'
+import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
+import ModalContent from '~/components/Modal/Content'
 import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
+import ICON_ARROW_LEFT from '~/static/icons/arrow-left.svg?sprite'
+import ICON_ARROW_RIGHT from '~/static/icons/arrow-right.svg?sprite'
 import PUBLISH_SLIDE_1 from '~/static/images/publish-1.svg'
 import PUBLISH_SLIDE_2 from '~/static/images/publish-2.svg'
 import PUBLISH_SLIDE_3 from '~/static/images/publish-3.svg'
@@ -18,11 +24,49 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <PublishModal close={close} />
+ *   <PublishModal
+ *     close={close}
+ *     draftId={draftId}
+ *     makePendingToast={makePendingToast}
+ *   />
  * ```
  */
 
 const dummy = [0, 1, 2, 3]
+
+const Images = ({ src, slide, setSlide }: any) => {
+  const disabledStyle = { cursor: 'initial', opacity: 0.2 }
+
+  const changeSlide = (next: number) => {
+    if (next < 0 || next > 3) {
+      return false
+    }
+    setSlide(next)
+  }
+
+  return (
+    <>
+      <div className="image-container">
+        <img className="image" src={src} />
+        <div
+          className="arrow left"
+          style={slide === 0 ? disabledStyle : {}}
+          onClick={() => changeSlide(slide - 1)}
+        >
+          <Icon id={ICON_ARROW_LEFT.id} viewBox={ICON_ARROW_LEFT.viewBox} />
+        </div>
+        <div
+          className="arrow right"
+          style={slide === 3 ? disabledStyle : {}}
+          onClick={() => changeSlide(slide + 1)}
+        >
+          <Icon id={ICON_ARROW_RIGHT.id} viewBox={ICON_ARROW_RIGHT.viewBox} />
+        </div>
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 const Indicator = ({ slide, setSlide }: any) => (
   <>
@@ -43,7 +87,7 @@ const Descriptions = ({ data }: any) => (
   <>
     <div className="descriptions">
       {data.map((desc: string, index: number) => (
-        <div className="description">
+        <div key={index} className="description">
           {desc}
           <div className="number">{`0${index + 1}`}</div>
         </div>
@@ -116,7 +160,7 @@ const PublishSlide = ({ lang }: { lang: Language }) => {
   return (
     <>
       <div className="slide">
-        <img className="image" src={images[slide]} />
+        <Images src={images[slide]} slide={slide} setSlide={setSlide} />
         <div className="title">
           <Title is="h3" type="modal" style={{ textAlign: 'center' }}>
             {titles[slide]}
@@ -130,10 +174,28 @@ const PublishSlide = ({ lang }: { lang: Language }) => {
   )
 }
 
-export const PublishModal: FC<ModalInstanceProps> = ({ close }) => {
+interface Props extends ModalInstanceProps {
+  draftId: string
+  makePendingToast: () => void
+}
+
+const MUTATION_PUBLISH_ARTICLE = gql`
+  mutation PublishArticle($draftId: ID!) {
+    publishArticle(input: { id: $draftId, delay: 0 }) {
+      id
+      publishState
+    }
+  }
+`
+
+export const PublishModal: FC<Props> = ({
+  close,
+  draftId,
+  makePendingToast
+}) => {
   const { lang } = useContext(LanguageContext)
 
-  const cancelButton = translate({
+  const saveButton = translate({
     zh_hant: '暫存草稿箱',
     zh_hans: '暫存草稿箱',
     lang
@@ -145,51 +207,53 @@ export const PublishModal: FC<ModalInstanceProps> = ({ close }) => {
     lang
   })
 
-  const BaseForm = (props: any) => (
-    <>
-      <form className="form" onSubmit={props.handleSubmit}>
-        <div className="content">
-          <PublishSlide lang={lang} />
-        </div>
-        <div className="buttons">
-          <div className="button cancel">{cancelButton}</div>
-          <button
-            type="submit"
-            className="button publish"
-            disabled={props.isSubmitting}
-          >
-            {publishButton}
-          </button>
-        </div>
-      </form>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const PublishForm: any = withFormik({
-    handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { submitAction } = props
-      if (!submitAction) {
-        return undefined
-      }
-      // submitAction({ variables: { input: { agreeOn: true } } })
-      //   .then((result: any) => {
-      //     close()
-      //   })
-      //   .catch((result: any) => {
-      //     // TODO: Handle error
-      //   })
-      //   .finally(() => {
-      //     setSubmitting(false)
-      //   })
+  const publishArticle = (publish: any) => {
+    if (!publish) {
+      return undefined
     }
-  })(BaseForm)
+
+    publish({ variables: { draftId } })
+      .then(({ data }: any) => {
+        const state = _get(data, 'publishArticle.publishState', 'unpublished')
+        if (state === 'pending') {
+          close()
+          makePendingToast()
+        }
+      })
+      .catch((result: any) => {
+        // TODO: Handle error
+      })
+  }
 
   return (
-    <PublishForm
-      submitAction={() => {
-        /* Do something */
-      }}
-    />
+    <>
+      <section>
+        <ModalContent
+          layout="full-width"
+          spacing="none"
+          containerStyle={{ padding: 0 }}
+        >
+          <PublishSlide lang={lang} />
+        </ModalContent>
+        <div className="buttons">
+          <button className="button save" onClick={close}>
+            {saveButton}
+          </button>
+          <Mutation mutation={MUTATION_PUBLISH_ARTICLE}>
+            {publish => (
+              <button
+                className="button publish"
+                onClick={() => {
+                  publishArticle(publish)
+                }}
+              >
+                {publishButton}
+              </button>
+            )}
+          </Mutation>
+        </div>
+        <style jsx>{styles}</style>
+      </section>
+    </>
   )
 }

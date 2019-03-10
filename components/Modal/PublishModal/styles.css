@@ -1,6 +1,3 @@
-.form {
-}
-
 .slide {
   display: flex;
   flex-direction: column;
@@ -12,6 +9,30 @@
 
   & > .title {
     padding: var(--spacing-default) 0 var(--spacing-tight);
+  }
+}
+
+.image-container {
+  position: relative;
+
+  & > .image {
+    width: 100%;
+    height: 98%;
+  }
+
+  & > .arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+
+  & > .left {
+    left: 0;
+  }
+
+  & > .right {
+    right: 0;
   }
 }
 
@@ -63,7 +84,7 @@
     width: 50%;
   }
 
-  & > .cancel {
+  & > .save {
     color: var(--color-black);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     margin-left: var(--spacing-x-tight);
