@@ -63,19 +63,16 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
-  const draftId = draft.id
-
   const { lang } = useContext(LanguageContext)
-
   const { updateHeaderState } = useContext(HeaderContext)
-
   const [title, setTitle] = useState(draft.title)
+  const isPending = draft.publishState === 'pending'
 
   return (
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
         <>
-          <header>
+          <header className={isPending ? 'u-area-disable' : ''}>
             <input
               placeholder={translate({
                 zh_hant: '請輸入標題…',
@@ -116,7 +113,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
           />
           <ModalInstance modalId="publishModal" title="publish">
             {(props: ModalInstanceProps) => (
-              <PublishModal draftId={draftId} {...props} />
+              <PublishModal draftId={draft.id} {...props} />
             )}
           </ModalInstance>
           <style jsx>{styles}</style>

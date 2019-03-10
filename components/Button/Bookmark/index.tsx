@@ -1,4 +1,7 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+
+import { ViewerContext } from '~/components/Viewer'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import Subscribe from './Subscribe'
@@ -20,10 +23,24 @@ export const BookmarkButton = ({
   article: BookmarkArticle
   size?: 'small' | 'default'
 }) => {
+  const viewer = useContext(ViewerContext)
+
   if (article.subscribed) {
-    return <Unsubscribe article={article} size={size} />
+    return (
+      <Unsubscribe
+        article={article}
+        size={size}
+        disabled={viewer.isArchived || viewer.isFrozen}
+      />
+    )
   } else {
-    return <Subscribe article={article} size={size} />
+    return (
+      <Subscribe
+        article={article}
+        size={size}
+        disabled={viewer.isArchived || viewer.isFrozen}
+      />
+    )
   }
 }
 

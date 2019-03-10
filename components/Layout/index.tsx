@@ -8,7 +8,11 @@ import { LanguageProvider } from '~/components/Language'
 import { MessageHolder } from '~/components/MessageHolder'
 import { Modal } from '~/components/Modal'
 import { ToastHolder } from '~/components/ToastHolder'
-import { ViewerContext, ViewerUserFragment } from '~/components/Viewer'
+import {
+  processViewer,
+  ViewerContext,
+  ViewerUserFragment
+} from '~/components/Viewer'
 
 import { LayoutUser } from './__generated__/LayoutUser'
 
@@ -35,7 +39,7 @@ export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
 } = ({ children, loading, user, error }) =>
   loading ? null : (
-    <ViewerContext.Provider value={user || {}}>
+    <ViewerContext.Provider value={processViewer(user || {})}>
       <LanguageProvider>
         <HeaderContextProvider>
           <Head />

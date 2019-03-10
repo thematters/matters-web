@@ -16,7 +16,7 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
   const [left, setLeft] = useState(timeLeft || 0)
   useInterval(() => {
     if (left > 0) {
-      setLeft(left - 1000)
+      setLeft(Math.max(left - 1000, 0))
     }
   }, 1000)
   const leftFormatted = countDownToTime(left)

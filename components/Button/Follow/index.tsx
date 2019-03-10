@@ -1,4 +1,7 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+
+import { ViewerContext } from '~/components/Viewer'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import Follow from './Follow'
@@ -22,6 +25,12 @@ export const FollowButton = ({
   user: FollowButtonUser
   size?: 'small' | 'default'
 }) => {
+  const viewer = useContext(ViewerContext)
+
+  if (viewer.isInactive) {
+    return <span />
+  }
+
   if (user.isFollowee) {
     return <Unfollow user={user} size={size} />
   } else {

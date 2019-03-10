@@ -1,0 +1,64 @@
+.toast {
+  margin-bottom: var(--spacing-tight);
+  padding: var(--spacing-tight);
+  width: 100%;
+
+  font-size: var(--font-size-sm);
+  border-radius: 0 0 0.25rem 0.25rem;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  animation: toastFadeIn 0.25s ease;
+  visibility: visible;
+
+  &.top {
+    @mixin flex-start-space-between;
+  }
+  &.bottom {
+    @mixin flex-end-space-between;
+  }
+}
+
+.header {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+}
+
+.content {
+  margin-top: var(--spacing-xx-tight);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+}
+
+.opaque {
+  opacity: 0.5;
+}
+
+.green {
+  color: var(--color-white);
+  background: var(--color-matters-green);
+}
+
+.grey {
+  color: var(--color-white);
+  background: var(--color-grey-dark);
+}
+
+.red {
+  color: var(--color-white);
+  background: var(--color-red);
+}
+
+.white {
+  color: var(--color-black);
+  background: var(--color-white);
+}
+
+@keyframes toastFadeIn {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}

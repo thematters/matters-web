@@ -182,6 +182,7 @@ const MUTATION_PUBLISH_ARTICLE = gql`
     publishArticle(input: { id: $draftId, delay: 0 }) {
       id
       publishState
+      scheduledAt
     }
   }
 `
@@ -232,7 +233,17 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
           <button className="button save" onClick={close}>
             {saveButton}
           </button>
-          <Mutation mutation={MUTATION_PUBLISH_ARTICLE}>
+          <Mutation
+            mutation={MUTATION_PUBLISH_ARTICLE}
+            optimisticResponse={{
+              publishArticle: {
+                id: draftId,
+                scheduledAt: new Date(Date.now() + 1000 * 60 * 2).toISOString(),
+                publishState: 'pending',
+                __typename: 'Draft'
+              }
+            }}
+          >
             {publish => (
               <button
                 className="button publish"

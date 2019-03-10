@@ -19,10 +19,12 @@ const SUBSCRIBE_ARTICLE = gql`
 
 const Subscribe = ({
   article,
-  size
+  size,
+  disabled
 }: {
   article: BookmarkArticle
   size: 'small' | 'default'
+  disabled?: boolean
 }) => (
   <Mutation
     mutation={SUBSCRIBE_ARTICLE}
@@ -36,7 +38,12 @@ const Subscribe = ({
     }}
   >
     {(subscribe, { data }) => (
-      <button type="button" aria-label="收藏" onClick={() => subscribe()}>
+      <button
+        type="button"
+        aria-label="收藏"
+        onClick={() => subscribe()}
+        disabled={disabled}
+      >
         <Icon
           size={size}
           id={

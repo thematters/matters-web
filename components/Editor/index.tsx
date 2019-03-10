@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
@@ -130,15 +131,19 @@ class Editor extends React.Component<Props, State> {
 
   public render() {
     const { draft, onSave } = this.props
-    const isReadOnly = draft.publishState !== 'unpublished'
+    const isPending = draft.publishState === 'pending'
+    const containerClasses = classNames({
+      container: true,
+      'u-area-disable': isPending
+    })
 
     return (
       <>
         <LanguageConsumer>
           {({ lang }) => (
-            <div className="container">
+            <div className={containerClasses}>
               <ReactQuill
-                readOnly={isReadOnly}
+                readOnly={isPending}
                 theme="bubble"
                 modules={config.modules}
                 formats={config.formats}

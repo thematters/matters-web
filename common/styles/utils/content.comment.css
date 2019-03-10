@@ -2,9 +2,11 @@
   white-space: pre-wrap;
   line-height: 1.6;
 
-  & :global(> * + *),
-  & :global(> *:last-child) {
+  & :global(> * + *) {
     margin: var(--spacing-tight) 0;
+  }
+  & :global(> *:last-child) {
+    margin-bottom: var(--spacing-tight);
   }
 
   /* Media
