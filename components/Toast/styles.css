@@ -6,6 +6,8 @@
   font-size: var(--font-size-sm);
   border-radius: 0 0 0.25rem 0.25rem;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  animation: toastFadeIn 0.25s ease;
+  visibility: visible;
 
   &.top {
     @mixin flex-start-space-between;
@@ -48,4 +50,15 @@
 .white {
   color: var(--color-black);
   background: var(--color-white);
+}
+
+@keyframes toastFadeIn {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
 }
