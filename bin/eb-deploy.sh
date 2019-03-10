@@ -7,7 +7,7 @@ APP_STAGING="matters-stage"
 ENV_STAGING="matters-client-web-stage"
 REGION_STAGING="ap-southeast-1"
 
-APP_PRODUCTION="matters-stage"
+APP_PRODUCTION="matters-prod"
 ENV_PRODUCTION="matters-client-web-prod"
 REGION_PRODUCTION="ap-southeast-1"
 
