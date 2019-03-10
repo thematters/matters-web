@@ -27,7 +27,6 @@ import styles from './styles.css'
  *   <PublishModal
  *     close={close}
  *     draftId={draftId}
- *     makePendingToast={makePendingToast}
  *   />
  * ```
  */
@@ -176,7 +175,6 @@ const PublishSlide = ({ lang }: { lang: Language }) => {
 
 interface Props extends ModalInstanceProps {
   draftId: string
-  makePendingToast: () => void
 }
 
 const MUTATION_PUBLISH_ARTICLE = gql`
@@ -188,11 +186,7 @@ const MUTATION_PUBLISH_ARTICLE = gql`
   }
 `
 
-export const PublishModal: FC<Props> = ({
-  close,
-  draftId,
-  makePendingToast
-}) => {
+export const PublishModal: FC<Props> = ({ close, draftId }) => {
   const { lang } = useContext(LanguageContext)
 
   const saveButton = translate({
@@ -217,7 +211,6 @@ export const PublishModal: FC<Props> = ({
         const state = _get(data, 'publishArticle.publishState', 'unpublished')
         if (state === 'pending') {
           close()
-          makePendingToast()
         }
       })
       .catch((result: any) => {
