@@ -37,7 +37,7 @@ const fragments = {
       ...CommentCountArticle
       ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
       ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
-      ...StateArticle
+      ...StateActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${MAT.fragments.article}
