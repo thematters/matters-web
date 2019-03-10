@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
+import { PublishModal } from '~/components/Modal/PublishModal'
+import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
 
 import { TEXT } from '~/common/enums'
@@ -61,10 +63,9 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
+  const { lang } = useContext(LanguageContext)
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
-  const { lang } = useContext(LanguageContext)
-
   const isPending = draft.publishState === 'pending'
 
   return (
@@ -110,7 +111,11 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               }
             }}
           />
-
+          <ModalInstance modalId="publishModal" title="publish">
+            {(props: ModalInstanceProps) => (
+              <PublishModal draftId={draft.id} {...props} />
+            )}
+          </ModalInstance>
           <style jsx>{styles}</style>
         </>
       )}
