@@ -11,20 +11,22 @@ import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-interface Props {
+export interface ContainerProps {
   children: any
   close: () => void
   defaultCloseable?: boolean
-  prevModalId: string
+  prevModalId?: string
   title?: string
+  layout?: 'default' | 'small'
 }
 
-const Container: FC<Props> = ({
+const Container: FC<ContainerProps> = ({
   children,
   close,
   defaultCloseable = true,
   prevModalId,
-  title
+  title,
+  layout = 'default'
 }) => {
   const overlayClass = classNames(
     'overlay',
@@ -32,15 +34,12 @@ const Container: FC<Props> = ({
     prevModalId ? '' : 'fadeIn'
   )
 
-  const modalBaseClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-offset-sm-1',
-    'l-col-md-4',
-    'l-offset-md-2',
-    'l-col-lg-6',
-    'l-offset-lg-3'
-  )
+  const modalBaseClass = classNames({
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
+      layout === 'default',
+    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4':
+      layout === 'small'
+  })
 
   const { lang } = useContext(LanguageContext)
   const [node, setNode] = useState<HTMLElement | null>(null)
@@ -69,6 +68,7 @@ const Container: FC<Props> = ({
     if (!closeable) {
       return undefined
     }
+
     if (
       !node ||
       node.contains(event.target) ||

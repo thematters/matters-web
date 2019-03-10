@@ -16,7 +16,7 @@ section {
 }
 
 .none {
-  padding: 0 var(--spacing-tight);
+  padding: 0;
 }
 
 .default {

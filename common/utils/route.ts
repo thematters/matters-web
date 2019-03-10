@@ -145,3 +145,13 @@ export const redirectToLogin = () => {
     `${PATHS.AUTH_LOGIN.as}?target=${target}`
   )
 }
+
+export const objectToGetParams = (object: { [key: string]: string }) => {
+  return (
+    '?' +
+    Object.keys(object)
+      .filter(key => !!object[key])
+      .map(key => `${key}=${encodeURIComponent(object[key])}`)
+      .join('&')
+  )
+}

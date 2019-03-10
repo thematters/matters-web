@@ -104,12 +104,14 @@ export const ModalInstance = ({
   children,
   defaultCloseable,
   modalId,
-  title
+  title,
+  layout
 }: {
   children: any
   defaultCloseable?: boolean
   modalId: string
   title?: string
+  layout?: 'default' | 'small'
 }) => {
   const [node, setNode] = useState<Element | null>(null)
 
@@ -129,6 +131,7 @@ export const ModalInstance = ({
               close={close}
               defaultCloseable={defaultCloseable}
               prevModalId={prevModalId}
+              layout={layout}
             >
               {(props: any) => children(props)}
             </Modal.Container>,

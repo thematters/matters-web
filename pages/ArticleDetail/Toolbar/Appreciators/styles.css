@@ -47,4 +47,5 @@
 
 .modal-appreciators-list {
   margin-top: var(--spacing-default);
+  padding: 0 var(--spacing-tight);
 }
