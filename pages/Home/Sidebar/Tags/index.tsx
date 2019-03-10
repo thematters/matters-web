@@ -9,7 +9,7 @@ import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTags($hasDigestTagArticleCount: Boolean = true) {
+  query SidebarTags {
     viewer {
       id
       recommendation {
