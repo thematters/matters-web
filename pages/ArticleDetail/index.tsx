@@ -30,6 +30,8 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
+import ShareModal from './Toolbar/ShareButton/ShareModal'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
@@ -162,6 +164,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
           </Query>
 
           <SideComments />
+          <AppreciatorsModal />
+          <ShareModal />
         </article>
 
         <aside className="l-col-4 l-col-md-6 l-col-lg-4" id="drawer-calc-hook">

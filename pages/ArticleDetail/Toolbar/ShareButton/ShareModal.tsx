@@ -1,5 +1,4 @@
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
@@ -19,7 +18,7 @@ import WeChat from './WeChat'
 import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
-const ShareModal: React.FC<WithRouterProps> = ({ router }) => {
+const ShareModal = () => {
   return (
     <ModalInstance modalId="shareModal" layout="small">
       {(props: ModalInstanceProps) => (
@@ -70,4 +69,4 @@ const ShareModal: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(ShareModal)
+export default ShareModal

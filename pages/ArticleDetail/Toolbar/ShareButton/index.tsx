@@ -3,8 +3,6 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import ICON_SHARE from '~/static/icons/share.svg?sprite'
 
-import ShareModal from './ShareModal'
-
 const ShareButton = () => (
   <>
     <ModalSwitch modalId="shareModal">
@@ -18,7 +16,6 @@ const ShareButton = () => (
         </button>
       )}
     </ModalSwitch>
-    <ShareModal />
   </>
 )
 
