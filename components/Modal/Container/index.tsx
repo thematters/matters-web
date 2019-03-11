@@ -1,9 +1,9 @@
 // External modules
 import classNames from 'classnames'
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useRef, useState } from 'react'
 
 import { LanguageContext } from '~/components'
-import { useNativeEventListener } from '~/components/Hook'
+import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
 import ModalHeader from '~/components/Modal/Header'
 
 import { KEYCODES, TEXT } from '~/common/enums'
@@ -41,8 +41,8 @@ const Container: FC<ContainerProps> = ({
       layout === 'small'
   })
 
+  const node = useRef(null)
   const { lang } = useContext(LanguageContext)
-  const [node, setNode] = useState<HTMLElement | null>(null)
   const [closeable, setCloseable] = useState(defaultCloseable)
   const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
@@ -64,29 +64,21 @@ const Container: FC<ContainerProps> = ({
     close()
   }
 
-  const handleOnOutsideClick = (event: any) => {
+  const handleOnOutsideClick = () => {
     if (!closeable) {
-      return undefined
-    }
-
-    if (
-      !node ||
-      node.contains(event.target) ||
-      (event.button && event.button !== 0)
-    ) {
       return undefined
     }
     close()
   }
 
   useNativeEventListener('keydown', handleOnEsc)
-  useNativeEventListener('click', handleOnOutsideClick)
+  useOutsideClick(node, handleOnOutsideClick)
 
   return (
     <div className={overlayClass}>
       <div style={{ width: '100%' }}>
         <div className="l-row">
-          <div ref={setNode} className={modalClass}>
+          <div ref={node} className={modalClass}>
             <div className="container">
               {title && (
                 <ModalHeader closeable={closeable} title={interpret(title)} />
