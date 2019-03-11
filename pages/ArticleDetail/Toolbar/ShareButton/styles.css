@@ -1,0 +1,46 @@
+.socials-container {
+  padding-top: var(--spacing-xx-tight);
+  padding-bottom: var(--spacing-xx-tight);
+}
+
+.left,
+.right {
+  display: inline-block;
+  width: 50%;
+
+  & :global(button) {
+    display: block;
+
+    padding-left: var(--spacing-default);
+    padding-right: var(--spacing-default);
+
+    width: 100%;
+    height: 2.5rem;
+
+    text-align: left;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: var(--color-grey-lighter);
+      }
+    }
+  }
+}
+
+.link-container {
+  @mixin flex-center-space-between;
+  @mixin border-top-grey;
+  padding: var(--spacing-tight) var(--spacing-default);
+
+  & :global(.text-icon) {
+    flex-shrink: 0;
+  }
+
+  & input {
+    margin-left: var(--spacing-x-tight);
+
+    color: var(--color-grey);
+    font-size: var(--font-size-sm);
+  }
+}

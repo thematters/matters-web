@@ -9,6 +9,7 @@ import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
 import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
+import ClearHistoryButton from './ClearHistoryButton'
 import styles from './styles.css'
 
 const SEARCH_AUTOCOMPLETE = gql`
@@ -16,21 +17,10 @@ const SEARCH_AUTOCOMPLETE = gql`
     frequentSearch(input: { first: 5 })
     viewer {
       id
-      activity {
-        recentSearches(input: { first: 3 }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node
-          }
-        }
-      }
+      ...RecentSearchesUser
     }
   }
+  ${ClearHistoryButton.fragments.user}
 `
 
 const EmptyAutoComplete = () => (
@@ -92,11 +82,7 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
             <Menu.Header
               title={<Translate zh_hant="搜尋歷史" zh_hans="搜索历史" />}
             >
-              {recentSearches.length > 0 && (
-                <button type="button" className="clear-history-btn">
-                  <Translate zh_hant="清空" zh_hans="清空" />
-                </button>
-              )}
+              {recentSearches.length > 0 && <ClearHistoryButton />}
             </Menu.Header>
             {recentSearches.map(({ node }: { node: any }) => {
               const path = toPath({

@@ -33,11 +33,11 @@ export const Footer = () => {
 
   return (
     <footer className="footer">
-      <BaseLink
+      {/* <BaseLink
         href={'/'}
         as={'/'}
         text={translate({ zh_hant: '意見反饋', zh_hans: '意见反馈', lang })}
-      />
+      /> */}
       <BaseLink
         href={PATHS.MISC_ABOUT.href}
         as={PATHS.MISC_ABOUT.as}
@@ -58,11 +58,11 @@ export const Footer = () => {
         as={PATHS.MISC_TOS.as}
         text={translate({ zh_hant: '用戶協議', zh_hans: '用户协议', lang })}
       />
-      <BaseLink
+      {/* <BaseLink
         href={'/'}
         as={'/'}
         text={translate({ zh_hant: '下載 App', zh_hans: '下载 App', lang })}
-      />
+      /> */}
       <p className="item">© 2019 Matters</p>
       <style jsx>{styles}</style>
     </footer>
