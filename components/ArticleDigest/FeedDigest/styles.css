@@ -13,6 +13,8 @@
 
 .header {
   margin-bottom: var(--spacing-x-tight);
+  display: flex;
+  justify-content: space-between;
 }
 
 .content {

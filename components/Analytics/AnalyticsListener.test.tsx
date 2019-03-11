@@ -11,9 +11,12 @@ const mockAnalytics = {
   identify: jest.fn()
 }
 
+const mockGA = jest.fn()
+
 beforeEach(() => {
   // @ts-ignore
   window.analytics = mockAnalytics
+  window.gtag = mockGA
 })
 
 test('Invokes track method with trackEvent', async () => {
@@ -31,6 +34,7 @@ test('Invokes page method with trackPage', async () => {
   analytics.trackPage(tracker)
   await wait(() => {
     expect(mockAnalytics.page.mock.calls[0][0]).toBe(tracker)
+    expect(mockGA.mock.calls.length).toBeTruthy()
   })
 })
 

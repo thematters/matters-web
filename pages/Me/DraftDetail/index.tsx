@@ -38,10 +38,15 @@ const DRAFT_DETAIL = gql`
 const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   const id = getQuery({ router, key: 'id' })
 
+  if (!id) {
+    return null
+  }
+
   const { updateHeaderState } = useContext(HeaderContext)
 
   useEffect(() => {
-    updateHeaderState({ type: 'draft', state: '' })
+    updateHeaderState({ type: 'draft', state: '', draftId: id })
+
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
