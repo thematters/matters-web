@@ -1,0 +1,23 @@
+.fingerprint {
+  color: var(--color-matters-green);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.fingerprint-content {
+  color: var(--color-yellow);
+  font-size: var(--font-size-md);
+  background: var(--color-bg-yellow);
+  height: var(--spacing-loose);
+  width: 100%;
+  display: block;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.copy {
+  color: var(--color-matters-green);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}

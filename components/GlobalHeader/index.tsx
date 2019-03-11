@@ -24,8 +24,9 @@ import styles from './styles.css'
 import WriteButton from './WriteButton'
 
 // Track client-side page views
-Router.onRouteChangeComplete = () => {
-  analytics.trackPage()
+Router.onRouteChangeComplete = (url: string) => {
+  // segment
+  analytics.trackPage({ url })
 }
 
 const LoginModalSwitch = () => (

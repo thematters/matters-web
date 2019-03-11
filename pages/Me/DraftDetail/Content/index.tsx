@@ -63,6 +63,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
+  const draftId = draft.id
+
   const { lang } = useContext(LanguageContext)
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
@@ -102,12 +104,16 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
           <Editor
             draft={draft}
             onSave={async (newDraft: UpdateDraftVariables) => {
-              updateHeaderState({ type: 'draft', state: 'saving' })
+              updateHeaderState({ type: 'draft', state: 'saving', draftId })
               try {
                 await updateDraft({ variables: { id: draft.id, ...newDraft } })
-                updateHeaderState({ type: 'draft', state: 'saved' })
+                updateHeaderState({ type: 'draft', state: 'saved', draftId })
               } catch (e) {
-                updateHeaderState({ type: 'draft', state: 'saveFailed' })
+                updateHeaderState({
+                  type: 'draft',
+                  state: 'saveFailed',
+                  draftId
+                })
               }
             }}
           />

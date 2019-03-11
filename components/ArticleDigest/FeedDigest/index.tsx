@@ -8,6 +8,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
+import { Fingerprint } from '../Fingerprint'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
 
@@ -26,16 +27,21 @@ const fragments = {
         ...UserDigestMiniUser
       }
       ...DigestActionsArticle
+      ...FingerprintArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${Actions.fragments.article}
+    ${Fingerprint.fragments.article}
   `
 }
 
 const FeedDigest = ({
   article,
+  hasFingerprint,
   ...actionControls
-}: { article: FeedDigestArticle } & ActionsControls) => {
+}: { article: FeedDigestArticle } & {
+  hasFingerprint?: boolean
+} & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -57,6 +63,8 @@ const FeedDigest = ({
     <section className="container">
       <div className="header">
         <UserDigest.Mini user={author} />
+
+        {hasFingerprint && <Fingerprint article={article} />}
       </div>
 
       <div className={contentClasses}>

@@ -11,6 +11,7 @@ export interface AuthHeader {
 
 export interface DraftHeader {
   type: 'draft'
+  draftId: string
   state: 'saving' | 'saved' | 'saveFailed' | ''
 }
 

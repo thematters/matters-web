@@ -36,6 +36,7 @@ const UPDATE_TAGS = gql`
 const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
   const { updateHeaderState } = useContext(HeaderContext)
 
+  const draftId = draft.id
   const tags = draft.tags || []
   const hasTags = tags.length > 0
   const isPending = draft.publishState === 'pending'
@@ -59,25 +60,25 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
       <Mutation mutation={UPDATE_TAGS}>
         {updateTags => {
           const addTag = async (tag: string) => {
-            updateHeaderState({ type: 'draft', state: 'saving' })
+            updateHeaderState({ type: 'draft', state: 'saving', draftId })
             try {
               await updateTags({
                 variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
               })
-              updateHeaderState({ type: 'draft', state: 'saved' })
+              updateHeaderState({ type: 'draft', state: 'saved', draftId })
             } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'saveFailed' })
+              updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
             }
           }
           const deleteTag = async (tag: string) => {
-            updateHeaderState({ type: 'draft', state: 'saving' })
+            updateHeaderState({ type: 'draft', state: 'saving', draftId })
             try {
               await updateTags({
                 variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
               })
-              updateHeaderState({ type: 'draft', state: 'saved' })
+              updateHeaderState({ type: 'draft', state: 'saved', draftId })
             } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'saveFailed' })
+              updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
             }
           }
 

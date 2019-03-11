@@ -17,6 +17,7 @@
   --color-white: #ffffff;
 
   --color-red: #c85c41;
+  --color-yellow: #bfa267;
 
   /* hover */
   --color-matters-gold-hover: color(var(--color-matters-gold) shade(5%));
