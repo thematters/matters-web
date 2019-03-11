@@ -1,7 +1,5 @@
 import _get from 'lodash/get'
-import { createContext, useContext, useState } from 'react'
-
-import { ViewerContext } from '~/components/Viewer'
+import { createContext, useState } from 'react'
 
 export interface DefaultHeader {
   type: 'default'
@@ -17,11 +15,7 @@ export interface DraftHeader {
   state: 'saving' | 'saved' | 'saveFailed' | ''
 }
 
-type HeaderStateInput = DefaultHeader | AuthHeader | DraftHeader
-
-type HeaderState = HeaderStateInput & {
-  isAuthed: boolean
-}
+type HeaderState = DefaultHeader | AuthHeader | DraftHeader
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
@@ -35,19 +29,19 @@ export const HeaderContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const viewer = useContext(ViewerContext)
-  const isAuthed = !!viewer.id
-
   const [headerState, setHeaderState] = useState<HeaderState>({
-    type: 'default',
-    isAuthed
+    type: 'default'
   })
 
   return (
     <HeaderContext.Provider
       value={{
         headerState,
-        updateHeaderState: state => setHeaderState({ ...state, isAuthed })
+        updateHeaderState: state =>
+          setHeaderState({
+            ...headerState,
+            ...state
+          })
       }}
     >
       {children}

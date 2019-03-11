@@ -9,6 +9,7 @@ import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
+import { ViewerContext } from '~/components/Viewer'
 
 import { translate } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
@@ -55,6 +56,8 @@ const InnerForm = ({
   extraButton
 }: InnerFormProps & FormikProps<FormValues>) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
+
   return (
     <form onSubmit={handleSubmit}>
       <Form.Textarea
@@ -75,7 +78,9 @@ const InnerForm = ({
         <Button
           type="submit"
           bgColor="green"
-          disabled={isSubmitting || !isValid}
+          disabled={
+            isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
+          }
           icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
         >
           {translate({ zh_hant: '送出', zh_hans: '送出', lang })}

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Label, Title } from '~/components'
 
 import { toPath } from '~/common/utils'
+import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
 import Actions, { ActionsControls } from '../Actions'
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
@@ -53,7 +54,7 @@ const FeatureDigest = ({
             <div
               className="cover"
               style={{
-                backgroundImage: `url(${cover})`
+                backgroundImage: `url(${cover || IMAGE_COVER_FALLBACK})`
               }}
             />
           </a>

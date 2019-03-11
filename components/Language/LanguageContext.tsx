@@ -33,7 +33,6 @@ export const LanguageProvider = ({
   defaultLang?: Language
 }) => {
   const viewer = useContext(ViewerContext)
-  const isAuthed = !!viewer.id
   const viewerLanguage = _get(viewer, 'settings.language')
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
@@ -44,7 +43,7 @@ export const LanguageProvider = ({
           value={{
             lang: viewerLanguage || lang,
             setLang: targetLang => {
-              if (isAuthed) {
+              if (viewer.isAuthed) {
                 try {
                   updateLanguage({ variables: { language: targetLang } })
                 } catch (e) {

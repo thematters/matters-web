@@ -8,7 +8,17 @@
     margin-top: calc(var(--spacing-x-loose) * -1);
   }
   @media (--lg-up) {
-    background: initial;
+    background: initial !important;
+  }
+
+  &.inactive {
+    background: var(--color-grey-lighter);
+
+    & .content-container {
+      @media (--lg-up) {
+        background: var(--color-grey-lighter);
+      }
+    }
   }
 }
 

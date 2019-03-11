@@ -27,7 +27,11 @@ export const TEXT: { [key: string]: any } = {
     agreeAndContinue: '同意並繼續',
     untitle: '未命名',
     changeEmail: '修改電子信箱',
-    changeUserName: '修改 Matters ID'
+    changeUserName: '修改 Matters ID',
+    accountFrozen: '賬戶已凍結',
+    accountArchived: '賬戶已註銷',
+    accountBanned: '賬戶已禁言',
+    publish: '發佈文章'
   },
 
   zh_hans: {
@@ -58,6 +62,10 @@ export const TEXT: { [key: string]: any } = {
     agreeAndContinue: '同意并继续',
     untitle: '未命名',
     changeEmail: '修改邮箱',
-    changeUserName: '修改 Matters ID'
+    changeUserName: '修改 Matters ID',
+    accountFrozen: '账户已冻结',
+    accountArchived: '账户已注销',
+    accountBanned: '账户已禁言',
+    publish: '发布文章'
   }
 }

@@ -1,12 +1,24 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
+import { useContext } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
-import { DateTime, Error, Footer, Head, Placeholder, Title } from '~/components'
+import {
+  DateTime,
+  Error,
+  Footer,
+  Head,
+  Placeholder,
+  Title,
+  Translate
+} from '~/components'
+import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
+import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { UserDigest } from '~/components/UserDigest'
+import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, toPath } from '~/common/utils'
 
@@ -14,6 +26,7 @@ import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetai
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
 import SideComments from './SideComments'
+import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
@@ -34,6 +47,7 @@ const ARTICLE_DETAIL = gql`
       state
       public
       live
+      cover
       summary
       createdAt
       author {
@@ -44,6 +58,7 @@ const ARTICLE_DETAIL = gql`
       ...TagListArticle
       ...ToolbarArticle
       ...RelatedArticles
+      ...StateArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -52,9 +67,11 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${Toolbar.fragments.article}
   ${RelatedArticles.fragments.article}
+  ${State.fragments.article}
 `
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
+  const viewer = useContext(ViewerContext)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -91,6 +108,21 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 router.push(path.href, path.as, { shallow: true })
               }
 
+              if (
+                data.article.state !== 'active' &&
+                viewer.id !== data.article.author.id
+              ) {
+                return (
+                  <EmptyArticle
+                    description={
+                      <Translate zh_hant="文章被隱藏" zh_hans="文章被隐藏" />
+                    }
+                  >
+                    <BackToHomeButton />
+                  </EmptyArticle>
+                )
+              }
+
               return (
                 <>
                   <Head
@@ -101,6 +133,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     )}
                     image={data.article.cover}
                   />
+
+                  <State article={data.article} />
 
                   <section className="author">
                     <UserDigest.FullDesc user={data.article.author} />

@@ -198,8 +198,3 @@
     width: 2.25rem;
   }
 }
-
-/* state */
-[disabled] {
-  opacity: 0.3;
-}

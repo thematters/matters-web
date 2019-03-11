@@ -1,11 +1,12 @@
 .content {
   line-height: var(--line-height-article-base);
 
-  & :global(> * + *),
-  & :global(> *:last-child) {
+  & :global(> * + *) {
     margin: var(--spacing-default) 0;
   }
-
+  & :global(> *:last-child) {
+    margin-bottom: var(--spacing-default);
+  }
   /* Media
    ========================================================================== */
   & :global(img, video, audio) {

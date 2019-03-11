@@ -39,7 +39,8 @@ const APPRECIATE_ARTICLE = gql`
 const MATButton = ({ article }: { article: MATArticleDetail }) => {
   const viewer = useContext(ViewerContext)
   const viewerMAT = _get(viewer, 'status.MAT.total', 0)
-  const canAppreciate = article.appreciateLeft > 0 && viewerMAT > 0
+  const canAppreciate =
+    article.appreciateLeft > 0 && viewerMAT > 0 && !viewer.isInactive
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,

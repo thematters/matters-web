@@ -108,6 +108,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                       hasBookmark
                       hasDateTime
                       hasFingerprint={isMe}
+                      hasState
                     />
                   </li>
                 ))}

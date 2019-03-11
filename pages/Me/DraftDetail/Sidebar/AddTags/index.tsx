@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
@@ -17,6 +18,7 @@ const fragments = {
     fragment AddTagsDraft on Draft {
       id
       tags
+      publishState
     }
   `
 }
@@ -37,6 +39,11 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
   const draftId = draft.id
   const tags = draft.tags || []
   const hasTags = tags.length > 0
+  const isPending = draft.publishState === 'pending'
+  const tagsContainerClasses = classNames({
+    'tags-container': true,
+    'u-area-disable': isPending
+  })
 
   return (
     <Collapsable
@@ -76,7 +83,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
           }
 
           return (
-            <section className="tags-container">
+            <section className={tagsContainerClasses}>
               {tags.map(tag => (
                 <Tag tag={tag} deleteTag={deleteTag} key={tag} />
               ))}
