@@ -79,10 +79,10 @@ const settingsMap = {
       key: 'articleSubscription',
       title: <Translate zh_hant="文章被收藏" zh_hans="文章被收藏" />
     },
-    {
-      key: 'downstream',
-      title: <Translate zh_hant="文章上游变更" zh_hans="文章上游变更" />
-    },
+    // {
+    //   key: 'downstream',
+    //   title: <Translate zh_hant="文章上游变更" zh_hans="文章上游变更" />
+    // },
     {
       key: 'commentSubscribed',
       title: (
@@ -149,8 +149,8 @@ const SettingsNotification = () => (
               <>
                 <Head title={{ zh_hant: '通知設定', zh_hans: '通知设定' }} />
 
-                <div className="l-row">
-                  <section className="section-container first l-col-4 l-col-md-4 l-lg-6">
+                <div className="l-row first">
+                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
                     <PageHeader
                       pageTitle={
                         <Translate zh_hant="與我有關" zh_hans="与我有关" />
@@ -159,6 +159,23 @@ const SettingsNotification = () => (
                     />
 
                     {settingsMap.me.map(setting => (
+                      <section className="setting-section" key={setting.key}>
+                        <span className="title">{setting.title}</span>
+                        <Switch
+                          checked={settings[setting.key]}
+                          onChange={() => onChange(setting.key)}
+                        />
+                      </section>
+                    ))}
+                  </section>
+
+                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+                    <PageHeader
+                      pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
+                      is="h2"
+                    />
+
+                    {settingsMap.others.map(setting => (
                       <section className="setting-section" key={setting.key}>
                         <span className="title">{setting.title}</span>
                         <Switch
@@ -195,25 +212,6 @@ const SettingsNotification = () => (
                     />
 
                     {settingsMap.comment.map(setting => (
-                      <section className="setting-section" key={setting.key}>
-                        <span className="title">{setting.title}</span>
-                        <Switch
-                          checked={settings[setting.key]}
-                          onChange={() => onChange(setting.key)}
-                        />
-                      </section>
-                    ))}
-                  </section>
-                </div>
-
-                <div className="l-row">
-                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
-                    <PageHeader
-                      pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
-                      is="h2"
-                    />
-
-                    {settingsMap.others.map(setting => (
                       <section className="setting-section" key={setting.key}>
                         <span className="title">{setting.title}</span>
                         <Switch
