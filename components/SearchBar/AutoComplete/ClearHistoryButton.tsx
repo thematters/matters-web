@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo'
 import { Translate } from '~/components/Language'
 
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
+import styles from './styles.css'
 
 const fragments = {
   user: gql`
@@ -77,6 +78,7 @@ const ClearHistoryButton = () => (
         onClick={() => clear()}
       >
         <Translate zh_hant="清空" zh_hans="清空" />
+        <style jsx>{styles}</style>
       </button>
     )}
   </Mutation>
