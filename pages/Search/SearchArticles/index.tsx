@@ -1,15 +1,15 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Error,
   InfiniteScroll,
   PageHeader,
   Placeholder,
   Translate
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -65,10 +65,6 @@ const SearchArticles = ({
       }: QueryResult & { data: SeachArticles }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const connectionPath = 'search'

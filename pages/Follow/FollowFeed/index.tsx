@@ -1,16 +1,16 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Error,
   Head,
   InfiniteScroll,
   PageHeader,
   Placeholder,
   Translate
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -56,10 +56,6 @@ export default () => {
       }: QueryResult & { data: FollowFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const connectionPath = 'viewer.recommendation.followeeArticles'

@@ -11,6 +11,7 @@ import {
   Layout,
   ModalProvider
 } from '~/components'
+import ErrorBoundary from '~/components/ErrorBoundary'
 
 import withApollo from '~/common/utils/withApollo'
 
@@ -43,28 +44,30 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <Container>
-        <AnalyticsProvider>
-          <ModalProvider>
-            <ApolloProvider client={apollo}>
-              <GlobalStyles />
-              <Query query={this.query}>
-                {({
-                  data,
-                  loading,
-                  error
-                }: QueryResult & { data: RootQuery }) => (
-                  <Layout
-                    loading={loading}
-                    user={data && data.viewer}
-                    error={error}
-                  >
-                    <Component {...pageProps} />
-                  </Layout>
-                )}
-              </Query>
-            </ApolloProvider>
-          </ModalProvider>
-        </AnalyticsProvider>
+        <ErrorBoundary>
+          <AnalyticsProvider>
+            <ModalProvider>
+              <ApolloProvider client={apollo}>
+                <GlobalStyles />
+                <Query query={this.query}>
+                  {({
+                    data,
+                    loading,
+                    error
+                  }: QueryResult & { data: RootQuery }) => (
+                    <Layout
+                      loading={loading}
+                      user={data && data.viewer}
+                      error={error}
+                    >
+                      <Component {...pageProps} />
+                    </Layout>
+                  )}
+                </Query>
+              </ApolloProvider>
+            </ModalProvider>
+          </AnalyticsProvider>
+        </ErrorBoundary>
       </Container>
     )
   }

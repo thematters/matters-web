@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Error, Placeholder } from '~/components'
+import { ArticleDigest, Placeholder } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
@@ -33,10 +34,6 @@ export default () => (
 
         if (loading || !article) {
           return <Placeholder.MattersToday />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         return (

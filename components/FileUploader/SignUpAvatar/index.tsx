@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { FC, useState } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Avatar } from '~/components/Avatar'
+import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 
 import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'

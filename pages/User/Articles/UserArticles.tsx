@@ -2,16 +2,11 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  Head,
-  InfiniteScroll,
-  Placeholder
-} from '~/components'
+import { ArticleDigest, Head, InfiniteScroll, Placeholder } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { Query } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, mergeConnections } from '~/common/utils'
@@ -63,10 +58,6 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
       }: QueryResult & { data: UserArticleFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const connectionPath = 'user.articles'

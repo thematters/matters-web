@@ -1,10 +1,10 @@
 import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { Mutation } from '~/components/GQL'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { FC, useState } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
+import { Mutation } from '~/components/GQL'
 import { useInterval } from '~/components/Hook'
 
 import { countDownToTime, leftPad, translate } from '~/common/utils'

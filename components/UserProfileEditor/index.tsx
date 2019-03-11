@@ -1,11 +1,11 @@
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { ProfileAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
+import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 

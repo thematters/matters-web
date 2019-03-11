@@ -5,7 +5,6 @@ import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Error,
   InfiniteScroll,
   LoadMore,
   PageHeader,
@@ -85,15 +84,10 @@ export default () => {
         {({
           data,
           loading,
-          error,
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
           if (loading && !(data && data.viewer)) {
             return <Placeholder.ArticleDigestList />
-          }
-
-          if (error) {
-            return <Error error={error} />
           }
 
           const connectionPath = 'viewer.recommendation.feed'

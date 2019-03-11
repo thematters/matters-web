@@ -2,8 +2,8 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
 import termStyles from '~/common/styles/utils/content.article.css'

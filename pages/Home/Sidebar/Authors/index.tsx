@@ -1,15 +1,15 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Label,
   ShuffleButton,
   Spinner,
   Translate,
   UserDigest
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import ViewAllLink from '../ViewAllLink'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
@@ -43,10 +43,6 @@ export default () => (
         error,
         refetch
       }: QueryResult & { data: SidebarAuthors }) => {
-        if (error) {
-          return <Error error={error} />
-        }
-
         const edges = _get(data, 'viewer.recommendation.authors.edges', [])
 
         if (!edges || edges.length <= 0) {

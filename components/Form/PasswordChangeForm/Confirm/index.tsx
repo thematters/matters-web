@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
 import { isValidPassword, translate } from '~/common/utils'

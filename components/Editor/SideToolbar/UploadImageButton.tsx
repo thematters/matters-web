@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import React from 'react'
-import { Mutation } from 'react-apollo'
 import { Quill } from 'react-quill'
 
+import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 

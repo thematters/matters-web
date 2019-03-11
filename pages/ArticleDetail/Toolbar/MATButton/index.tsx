@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Icon } from '~/components'
+import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'

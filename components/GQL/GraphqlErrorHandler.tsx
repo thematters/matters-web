@@ -13,16 +13,18 @@ import { ERROR_CODES } from '~/common/enums'
 export const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
   errors && errors.find(e => e.extensions.code === code)
 
-const checkError = ({ networkError, graphQLErrors }: ApolloError) => {
-  if (networkError) {
-    // should redirect to error page
-    console.log(networkError)
+const checkError = (error: ApolloError) => {
+  if (error.networkError) {
+    throw error
   }
 
-  if (checkFor(ERROR_CODES.UNAUTHENTICATED, graphQLErrors)) {
+  if (checkFor(ERROR_CODES.UNAUTHENTICATED, error.graphQLErrors)) {
     // trigger notification for log in
     console.log(ERROR_CODES.UNAUTHENTICATED)
+    return
   }
+
+  throw error
 }
 
 export const QueryErrorHandler = ({
@@ -35,6 +37,7 @@ export const QueryErrorHandler = ({
   if (result.error) {
     checkError(result.error)
   }
+
   return <>{children(result)}</>
 }
 

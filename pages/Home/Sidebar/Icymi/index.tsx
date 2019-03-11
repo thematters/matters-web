@@ -1,14 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  Label,
-  Placeholder,
-  Translate
-} from '~/components'
+import { ArticleDigest, Label, Placeholder, Translate } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -41,10 +36,6 @@ export default () => (
     {({ data, loading, error }: QueryResult & { data: SidebarIcymi }) => {
       if (loading) {
         return <Placeholder.Sidebar />
-      }
-
-      if (error) {
-        return <Error error={error} />
       }
 
       const edges = _get(data, 'viewer.recommendation.icymi.edges', [])
