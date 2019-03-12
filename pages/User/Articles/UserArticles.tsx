@@ -9,7 +9,8 @@ import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
-import { getQuery, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
 
@@ -62,8 +63,12 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
 
         const connectionPath = 'user.articles'
         const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () =>
-          fetchMore({
+        const loadMore = () => {
+          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+            type: FEED_TYPE.USER_ARTICLE,
+            location: edges.length
+          })
+          return fetchMore({
             variables: {
               cursor: pageInfo.endCursor
             },
@@ -74,6 +79,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
+        }
 
         if (!edges || edges.length <= 0) {
           return <EmptyArticle />
@@ -92,17 +98,27 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               loadMore={loadMore}
             >
               <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Feed
-                      article={node}
-                      hasBookmark
-                      hasDateTime
-                      hasFingerprint={isMe}
-                      hasState
-                    />
-                  </li>
-                ))}
+                {edges.map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: FEED_TYPE.USER_ARTICLE,
+                          location: i
+                        })
+                      }
+                    >
+                      <ArticleDigest.Feed
+                        article={node}
+                        hasBookmark
+                        hasDateTime
+                        hasFingerprint={isMe}
+                        hasState
+                      />
+                    </li>
+                  )
+                )}
               </ul>
             </InfiniteScroll>
           </>

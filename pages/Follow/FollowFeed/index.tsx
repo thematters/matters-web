@@ -12,7 +12,8 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { FollowFeed } from './__generated__/FollowFeed'
 
@@ -60,8 +61,12 @@ export default () => {
 
         const connectionPath = 'viewer.recommendation.followeeArticles'
         const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () =>
-          fetchMore({
+        const loadMore = () => {
+          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+            type: FEED_TYPE.FOLLOW,
+            location: edges.length
+          })
+          return fetchMore({
             variables: {
               cursor: pageInfo.endCursor
             },
@@ -72,6 +77,7 @@ export default () => {
                 path: connectionPath
               })
           })
+        }
 
         return (
           <>
@@ -86,15 +92,25 @@ export default () => {
               loadMore={loadMore}
             >
               <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Feed
-                      article={node}
-                      hasDateTime
-                      hasBookmark
-                    />
-                  </li>
-                ))}
+                {edges.map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: FEED_TYPE.FOLLOW,
+                          location: i
+                        })
+                      }
+                    >
+                      <ArticleDigest.Feed
+                        article={node}
+                        hasDateTime
+                        hasBookmark
+                      />
+                    </li>
+                  )
+                )}
               </ul>
             </InfiniteScroll>
           </>

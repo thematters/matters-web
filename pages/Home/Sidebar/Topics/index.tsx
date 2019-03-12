@@ -5,6 +5,9 @@ import { QueryResult } from 'react-apollo'
 import { ArticleDigest, Label, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
+
 import ViewAllLink from '../ViewAllLink'
 import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
@@ -55,11 +58,21 @@ export default () => (
             <ol>
               {edges
                 .filter(({ node }: { node: any }) => !!node.mediaHash)
-                .map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <ArticleDigest.Sidebar article={node} hasTopicScore />
-                  </li>
-                ))}
+                .map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: FEED_TYPE.TOPICS,
+                          location: i
+                        })
+                      }
+                    >
+                      <ArticleDigest.Sidebar article={node} hasTopicScore />
+                    </li>
+                  )
+                )}
             </ol>
           </>
         )

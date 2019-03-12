@@ -5,6 +5,9 @@ import { QueryResult } from 'react-apollo'
 import { Label, Tag, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
+
 import ViewAllLink from '../ViewAllLink'
 import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
@@ -48,11 +51,21 @@ export default () => (
             </header>
 
             <ul>
-              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                <li key={cursor}>
-                  <Tag tag={node} size="small" type="count-fixed" />
-                </li>
-              ))}
+              {edges.map(
+                ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                  <li
+                    key={cursor}
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: FEED_TYPE.TAGS,
+                        location: i
+                      })
+                    }
+                  >
+                    <Tag tag={node} size="small" type="count-fixed" />
+                  </li>
+                )
+              )}
             </ul>
           </>
         )

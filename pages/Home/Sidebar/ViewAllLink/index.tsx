@@ -3,8 +3,8 @@ import { useContext } from 'react'
 
 import { Icon, LanguageContext, TextIcon } from '~/components'
 
-import { PATHS } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { analytics, translate } from '~/common/utils'
 import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
 
 import styles from './styles.css'
@@ -19,7 +19,11 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
 
   return (
     <Link {...pathMap[type]}>
-      <a>
+      <a
+        onClick={() =>
+          analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, { type })
+        }
+      >
         <TextIcon
           icon={
             <Icon
