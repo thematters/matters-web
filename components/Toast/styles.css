@@ -15,6 +15,9 @@
   &.bottom {
     @mixin flex-end-space-between;
   }
+  &.center {
+    @mixin flex-center-space-between;
+  }
 }
 
 .header {
@@ -22,7 +25,7 @@
   font-weight: var(--font-weight-medium);
 }
 
-.content {
+.header + .content {
   margin-top: var(--spacing-xx-tight);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);

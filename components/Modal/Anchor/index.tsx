@@ -20,9 +20,6 @@ import styles from './styles.css'
 
 const Anchor = () => {
   const viewer = useContext(ViewerContext)
-
-  const isAuth = !!viewer.id
-
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
   const OpenedTermModal = () => (
@@ -46,7 +43,7 @@ const Anchor = () => {
       <ModalInstance modalId="termModal" title="term" defaultCloseable={false}>
         {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
       </ModalInstance>
-      {isAuth && disagreedToS && <OpenedTermModal />}
+      {viewer.isAuthed && disagreedToS && <OpenedTermModal />}
       <style jsx>{styles}</style>
     </>
   )

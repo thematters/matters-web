@@ -24,8 +24,8 @@ export interface ToastProps {
 
   closeButton?: boolean
   onCloseButtonClick?: () => any
-  customButton?: any
-  buttonPlacement?: 'top' | 'bottom'
+  customButton?: React.ReactNode
+  buttonPlacement?: 'top' | 'bottom' | 'center'
 }
 
 export const Toast: React.FC<ToastProps> = ({

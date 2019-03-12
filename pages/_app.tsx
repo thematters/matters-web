@@ -18,17 +18,6 @@ import withApollo from '~/common/utils/withApollo'
 import { RootQuery } from './__generated__/RootQuery'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
-  // public static async getInitialProps({ Component, ctx }: NextAppContext) {
-  //   let pageProps = {}
-
-  //   if (Component.getInitialProps) {
-  //     console.log('Component.getInitialProps')
-  //     pageProps = await Component.getInitialProps(ctx)
-  //   }
-
-  //   return { pageProps }
-  // }
-
   public query = gql`
     query RootQuery {
       viewer {

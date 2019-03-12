@@ -147,8 +147,9 @@ const CommentForm = ({
             submitCallback()
             resetForm({ content: '' })
             window.dispatchEvent(
-              new CustomEvent('addMessage', {
+              new CustomEvent('addToast', {
                 detail: {
+                  color: 'white',
                   content: (
                     <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
                   )
