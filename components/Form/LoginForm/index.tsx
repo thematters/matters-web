@@ -21,7 +21,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.LoginForm
+ *   <LoginForm
  *     extraClass={[]}
  *     purpose="modal"
  *     submitCallback={()=> {}}

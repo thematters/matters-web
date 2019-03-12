@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Form } from '~/components/Form'
+import LoginForm from '~/components/Form/LoginForm'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -57,7 +57,7 @@ const Footer = () => (
 const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
   return (
     <Modal.Content>
-      <Form.LoginForm purpose="modal" submitCallback={close} />
+      <LoginForm purpose="modal" submitCallback={close} />
       <Footer />
     </Modal.Content>
   )

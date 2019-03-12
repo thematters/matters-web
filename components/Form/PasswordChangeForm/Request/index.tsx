@@ -5,6 +5,7 @@ import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
+import SendCodeButton from '~/components/Form/Button/SendCode'
 import { checkFormError } from '~/components/Form/Error'
 import { Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
@@ -128,7 +129,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             placeholder={codePlaceholder}
             style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
             floatElement={
-              <Form.SendCodeButton
+              <SendCodeButton
                 email={values.email}
                 lang={lang}
                 type="password_reset"

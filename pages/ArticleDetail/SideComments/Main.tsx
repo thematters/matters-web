@@ -5,7 +5,7 @@ import { QueryResult } from 'react-apollo'
 import { InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
-import { Form } from '~/components/Form'
+import CommentForm from '~/components/Form/CommentForm'
 import { Query } from '~/components/GQL'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
@@ -58,7 +58,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         return (
           <>
             <section>
-              <Form.CommentForm
+              <CommentForm
                 articleId={data.article.id}
                 articleMediaHash={data.article.mediaHash}
               />
