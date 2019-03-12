@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import React from 'react'
-import { Mutation } from 'react-apollo'
 import { Quill } from 'react-quill'
 
+import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
@@ -55,9 +55,9 @@ const UploadImageButton = ({
 
     if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
       window.dispatchEvent(
-        new CustomEvent('addMessage', {
+        new CustomEvent('addToast', {
           detail: {
-            type: 'error',
+            color: 'red',
             content: (
               <Translate
                 zh_hant="上傳檔案請勿超過 1 MB"
@@ -79,9 +79,9 @@ const UploadImageButton = ({
       onSave({ coverAssetId: id })
       insertImage(path)
       window.dispatchEvent(
-        new CustomEvent('addMessage', {
+        new CustomEvent('addToast', {
           detail: {
-            type: 'success',
+            color: 'green',
             content: <Translate zh_hant="圖片上傳成功" zh_hans="图片上传成功" />
           }
         })
@@ -89,9 +89,9 @@ const UploadImageButton = ({
     } catch (e) {
       setExpanded(false)
       window.dispatchEvent(
-        new CustomEvent('addMessage', {
+        new CustomEvent('addToast', {
           detail: {
-            type: 'error',
+            color: 'red',
             content: <Translate zh_hant="圖片上傳失敗" zh_hans="图片上传失败" />
           }
         })

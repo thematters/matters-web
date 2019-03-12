@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { Error, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
+import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
+import { Query } from '~/components/GQL'
 
 import {
   filterComments,
@@ -81,10 +82,6 @@ const UserCommentsWrap: React.FC<WithRouterProps> = ({ router }) => {
           return <Placeholder.ArticleDigestList />
         }
 
-        if (error) {
-          return <Error error={error} />
-        }
-
         return (
           <>
             <Head
@@ -116,10 +113,6 @@ const UserComments = ({ user }: UserIdUser) => {
       }: QueryResult & { data: UserCommentFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const connectionPath = 'node.commentedArticles'

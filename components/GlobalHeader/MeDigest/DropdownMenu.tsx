@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import Router from 'next/router'
 import { useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
+import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'

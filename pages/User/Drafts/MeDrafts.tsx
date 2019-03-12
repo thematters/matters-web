@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { DraftDigest, Error, InfiniteScroll, Placeholder } from '~/components'
+import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -43,10 +44,6 @@ export default () => {
       }: QueryResult & { data: MeDraftFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const connectionPath = 'viewer.drafts'

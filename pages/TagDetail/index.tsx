@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Error,
   Footer,
   Head,
   InfiniteScroll,
@@ -13,6 +12,7 @@ import {
   Placeholder
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -66,10 +66,6 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
           }: QueryResult & { data: TagDetailArticles }) => {
             if (loading) {
               return <Placeholder.ArticleDigestList />
-            }
-
-            if (error) {
-              return <Error error={error} />
             }
 
             const connectionPath = 'node.articles'

@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   DateTime,
-  Error,
   Footer,
   Head,
   Placeholder,
@@ -17,6 +16,7 @@ import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { Query } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -86,17 +86,9 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
       <main className="l-row">
         <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
           <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
-            {({
-              data,
-              loading,
-              error
-            }: QueryResult & { data: ArticleDetailType }) => {
+            {({ data, loading }: QueryResult & { data: ArticleDetailType }) => {
               if (loading) {
                 return <Placeholder.ArticleDetail />
-              }
-
-              if (error) {
-                return <Error error={error} />
               }
 
               // redirect to latest verion of URL Pattern

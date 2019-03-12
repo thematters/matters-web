@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import App, { Container } from 'next/app'
 import React from 'react'
-import { ApolloProvider, Query, QueryResult } from 'react-apollo'
+import { ApolloProvider, QueryResult } from 'react-apollo'
 
 import {
   AnalyticsProvider,
@@ -11,23 +11,14 @@ import {
   Layout,
   ModalProvider
 } from '~/components'
+import ErrorBoundary from '~/components/ErrorBoundary'
+import { Query } from '~/components/GQL'
 
 import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
-  // public static async getInitialProps({ Component, ctx }: NextAppContext) {
-  //   let pageProps = {}
-
-  //   if (Component.getInitialProps) {
-  //     console.log('Component.getInitialProps')
-  //     pageProps = await Component.getInitialProps(ctx)
-  //   }
-
-  //   return { pageProps }
-  // }
-
   public query = gql`
     query RootQuery {
       viewer {
@@ -43,28 +34,30 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <Container>
-        <AnalyticsProvider>
-          <ModalProvider>
-            <ApolloProvider client={apollo}>
-              <GlobalStyles />
-              <Query query={this.query}>
-                {({
-                  data,
-                  loading,
-                  error
-                }: QueryResult & { data: RootQuery }) => (
-                  <Layout
-                    loading={loading}
-                    user={data && data.viewer}
-                    error={error}
-                  >
-                    <Component {...pageProps} />
-                  </Layout>
-                )}
-              </Query>
-            </ApolloProvider>
-          </ModalProvider>
-        </AnalyticsProvider>
+        <ErrorBoundary>
+          <AnalyticsProvider>
+            <ModalProvider>
+              <ApolloProvider client={apollo}>
+                <GlobalStyles />
+                <Query query={this.query}>
+                  {({
+                    data,
+                    loading,
+                    error
+                  }: QueryResult & { data: RootQuery }) => (
+                    <Layout
+                      loading={loading}
+                      user={data && data.viewer}
+                      error={error}
+                    >
+                      <Component {...pageProps} />
+                    </Layout>
+                  )}
+                </Query>
+              </ApolloProvider>
+            </ModalProvider>
+          </AnalyticsProvider>
+        </ErrorBoundary>
       </Container>
     )
   }

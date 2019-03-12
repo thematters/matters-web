@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Mutation } from 'react-apollo'
 
 import { Icon, TextIcon } from '~/components'
+import { Mutation } from '~/components/GQL'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'

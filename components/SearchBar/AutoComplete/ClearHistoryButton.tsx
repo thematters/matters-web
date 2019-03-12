@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
 
+import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'

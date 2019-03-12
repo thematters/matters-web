@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Footer,
   Head,
   Icon,
@@ -15,6 +14,7 @@ import {
   Translate
 } from '~/components'
 import EmptyMAT from '~/components/Empty/EmptyMAT'
+import { Query } from '~/components/GQL'
 import { Protected } from '~/components/Protected'
 import { Transaction } from '~/components/TransactionDigest'
 import { ViewerContext } from '~/components/Viewer'
@@ -90,10 +90,6 @@ const Wallet = () => {
               }: QueryResult & { data: MeWallet }) => {
                 if (loading) {
                   return <Spinner />
-                }
-
-                if (error) {
-                  return <Error error={error} />
                 }
 
                 const connectionPath = 'viewer.status.MAT.history'

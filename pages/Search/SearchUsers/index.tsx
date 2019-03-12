@@ -1,15 +1,15 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   InfiniteScroll,
   PageHeader,
   Spinner,
   Translate,
   UserDigest
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -82,10 +82,6 @@ const SearchUser = ({
         }: QueryResult & { data: SeachUsers }) => {
           if (loading) {
             return <Spinner />
-          }
-
-          if (error) {
-            return <Error error={error} />
           }
 
           const connectionPath = 'search'

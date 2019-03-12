@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useEffect } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Query } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { Translate } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'

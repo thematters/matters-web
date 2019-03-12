@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { createContext, useContext, useState } from 'react'
-import { Mutation } from 'react-apollo'
 
+import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { DEFAULT_LANG } from '~/common/enums'
