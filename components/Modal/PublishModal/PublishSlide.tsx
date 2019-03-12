@@ -17,8 +17,6 @@ import styles from './styles.css'
 const dummy = [0, 1, 2, 3]
 
 const Images = ({ src, slide, setSlide }: any) => {
-  const disabledStyle = { cursor: 'initial', opacity: 0.2 }
-
   const changeSlide = (next: number) => {
     if (next < 0 || next > 3) {
       return false
@@ -32,16 +30,16 @@ const Images = ({ src, slide, setSlide }: any) => {
       <button
         type="button"
         className="arrow left"
-        style={slide === 0 ? disabledStyle : {}}
         onClick={() => changeSlide(slide - 1)}
+        disabled={slide === 0}
       >
         <Icon id={ICON_ARROW_LEFT.id} viewBox={ICON_ARROW_LEFT.viewBox} />
       </button>
       <button
         type="button"
         className="arrow right"
-        style={slide === 3 ? disabledStyle : {}}
         onClick={() => changeSlide(slide + 1)}
+        disabled={slide === 3}
       >
         <Icon id={ICON_ARROW_RIGHT.id} viewBox={ICON_ARROW_RIGHT.viewBox} />
       </button>

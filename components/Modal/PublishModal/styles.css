@@ -20,24 +20,20 @@
 .image-container {
   position: relative;
 
-  & > .image {
-    width: 100%;
-    height: 98%;
-  }
-
-  & > .arrow {
-    cursor: pointer;
+  & .arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-  }
 
-  & > .left {
-    left: 0;
-  }
-
-  & > .right {
-    right: 0;
+    &.left {
+      left: 0;
+    }
+    &.right {
+      right: 0;
+    }
+    &:disabled {
+      opacity: 0.2;
+    }
   }
 }
 
