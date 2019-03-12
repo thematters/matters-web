@@ -34,7 +34,9 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...userPath}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon src={ICON_ME} size="small" />}
+              icon={
+                <Icon id={ICON_ME.id} viewBox={ICON_ME.viewBox} size="small" />
+              }
               text={translate({
                 zh_hant: '個人頁面',
                 zh_hans: '个人页面',
@@ -49,7 +51,13 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link href={PATHS.ME_WALLET.href} as={PATHS.ME_WALLET.as}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon src={ICON_MAT_BLACK} size="small" />}
+              icon={
+                <Icon
+                  id={ICON_MAT_BLACK.id}
+                  viewBox={ICON_MAT_BLACK.viewBox}
+                  size="small"
+                />
+              }
               text={translate({
                 zh_hant: '我的錢包',
                 zh_hans: '我的钱包',
@@ -64,7 +72,13 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...userHistoryPath}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon src={ICON_READING_HISTORY} size="small" />}
+              icon={
+                <Icon
+                  id={ICON_READING_HISTORY.id}
+                  viewBox={ICON_READING_HISTORY.viewBox}
+                  size="small"
+                />
+              }
               text={translate({
                 zh_hant: '瀏覽記錄',
                 zh_hans: '浏览记录',
@@ -79,7 +93,13 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon src={ICON_GIFT} size="small" />}
+              icon={
+                <Icon
+                  id={ICON_GIFT.id}
+                  viewBox={ICON_GIFT.viewBox}
+                  size="small"
+                />
+              }
               text={translate({
                 zh_hant: '邀請好友',
                 zh_hans: '邀请好友',
@@ -98,7 +118,13 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         >
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon src={ICON_SETTINGS} size="small" />}
+              icon={
+                <Icon
+                  id={ICON_SETTINGS.id}
+                  viewBox={ICON_SETTINGS.viewBox}
+                  size="small"
+                />
+              }
               text={translate({
                 zh_hant: '設定',
                 zh_hans: '设定',
@@ -125,7 +151,13 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
               }}
             >
               <TextIcon
-                icon={<Icon src={ICON_LOGOUT} size="small" />}
+                icon={
+                  <Icon
+                    id={ICON_LOGOUT.id}
+                    viewBox={ICON_LOGOUT.viewBox}
+                    size="small"
+                  />
+                }
                 text={translate({
                   zh_hant: '登出',
                   zh_hans: '登出',

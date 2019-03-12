@@ -1,25 +1,23 @@
 .complete {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 
-  & > .image {
-    @mixin flex-center-all;
+  & :global(h3) {
+    margin: var(--spacing-default) 0;
+    color: var(--color-black);
   }
 
-  & > .content {
-    color: var(--color-grey-darker);
-    font-size: var(--font-size-sm);
-
-    & > .title {
-      @mixin flex-center-all;
-      color: var(--color-black);
-      font-size: var(--font-size-md);
-      padding: var(--spacing-default) 0;
-    }
+  & img {
+    width: 5rem;
+    height: 5rem;
   }
+}
 
-  & > .buttons {
-    @mixin flex-center-all;
-    padding-top: var(--spacing-default);
-  }
+.content {
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  text-align: left;
+}
+
+.buttons {
+  padding-top: var(--spacing-default);
 }

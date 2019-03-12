@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 
 import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
+import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
 import ICON_ARROW_LEFT from '~/static/icons/arrow-left.svg?sprite'
@@ -140,7 +141,9 @@ const PublishSlide = () => {
       <div className="slide">
         <Images src={images[slide]} slide={slide} setSlide={setSlide} />
 
-        <h3>{titles[slide]}</h3>
+        <Title is="h3" type="modal-headline">
+          {titles[slide]}
+        </Title>
 
         <Indicator slide={slide} setSlide={setSlide} />
         <Descriptions data={descriptions} />

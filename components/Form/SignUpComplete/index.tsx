@@ -1,31 +1,21 @@
 import { Button } from '~/components/Button'
-import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Title } from '~/components/Title'
 
 import { redirectToTarget } from '~/common/utils'
-import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?sprite'
+import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
 
 const SignUpComplete = () => (
   <div className="l-col-4 l-col-sm-6 l-col-md-6 l-col-lg-8 complete">
-    <div className="image">
-      <Icon
-        id={ICON_AVATAR_GREEN.id}
-        viewBox={ICON_AVATAR_GREEN.viewBox}
-        style={{ width: '5rem', height: '5rem' }}
-      />
-    </div>
+    <img src={ICON_AVATAR_GREEN} />
+
     <div className="content">
-      <div className="title">
-        <Title is="h1" type="modal">
-          <Translate
-            zh_hant="歡迎加入 Matters！"
-            zh_hans="欢迎加入 Matters！"
-          />
-        </Title>
-      </div>
+      <Title is="h3" type="modal-headline">
+        <Translate zh_hant="歡迎加入 Matters！" zh_hans="欢迎加入 Matters！" />
+      </Title>
+
       <p>
         <Translate
           zh_hant="恭喜！註冊完成，你可以瀏覽社區的所有內容了。"
@@ -40,6 +30,7 @@ const SignUpComplete = () => (
         />
       </p>
     </div>
+
     <div className="buttons">
       <Button
         type="button"

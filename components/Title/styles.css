@@ -33,6 +33,21 @@
   line-height: 1.77777778;
 }
 
+.modal-headline {
+  font-size: var(--font-size-lg);
+  font-family: var(--font-serif-tc);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+
+  &[lang='zh-hans'] {
+    font-family: var(--font-serif-sc);
+  }
+
+  @media (--sm-up) {
+    font-size: var(--font-size-xl);
+  }
+}
+
 .sidebar {
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm); /* fallback */
