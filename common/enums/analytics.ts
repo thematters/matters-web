@@ -10,7 +10,10 @@ export const ANALYTICS_EVENTS = {
   CLICK_FEED: 'click-feed',
   LOAD_MORE: 'load-more',
   DISPLAY_ALL: 'display-all',
-  SHUFFLE_AUTHOR: 'shuffle-author'
+  SHUFFLE_AUTHOR: 'shuffle-author',
+  ENTER_ARTICLE: 'enter-article',
+  LEAVE_ARTICLE: 'leave-article',
+  FINISH_ARTICLE: 'finish-article'
 }
 
 export const FEED_TYPE = {
