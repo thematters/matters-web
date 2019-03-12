@@ -202,9 +202,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         .then((result: any) => {
           if (submitCallback) {
             submitCallback()
-          } else {
-            redirectToTarget()
           }
+          redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {
           if (
