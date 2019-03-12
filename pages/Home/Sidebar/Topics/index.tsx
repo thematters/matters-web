@@ -56,11 +56,13 @@ export default () => (
             </header>
 
             <ol>
-              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                <li key={cursor}>
-                  <ArticleDigest.Sidebar article={node} hasTopicScore />
-                </li>
-              ))}
+              {edges
+                .filter(({ node }: { node: any }) => !!node.mediaHash)
+                .map(({ node, cursor }: { node: any; cursor: any }) => (
+                  <li key={cursor}>
+                    <ArticleDigest.Sidebar article={node} hasTopicScore />
+                  </li>
+                ))}
             </ol>
           </>
         )
