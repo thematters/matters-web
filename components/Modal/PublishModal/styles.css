@@ -1,14 +1,19 @@
 .slide {
-  display: flex;
-  flex-direction: column;
+  & h3 {
+    margin: var(--spacing-default) 0 var(--spacing-tight);
 
-  & > .image {
-    width: 100%;
-    height: 98%;
-  }
+    font-size: var(--font-size-lg);
+    font-family: var(--font-serif-tc);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
 
-  & > .title {
-    padding: var(--spacing-default) 0 var(--spacing-tight);
+    &[lang='zh-hans'] {
+      font-family: var(--font-serif-sc);
+    }
+
+    @media (--sm-up) {
+      font-size: var(--font-size-xl);
+    }
   }
 }
 
@@ -40,40 +45,60 @@
   @mixin flex-center-all;
   padding-bottom: var(--spacing-default);
 
-  & > div {
-    background-color: var(--color-grey-light);
-    border-radius: 50%;
-    cursor: pointer;
+  & button {
+    margin: 0 var(--spacing-x-tight);
     width: 0.5rem;
     height: 0.5rem;
-    margin: 0 var(--spacing-x-tight);
-  }
 
-  & .active {
-    background-color: var(--color-grey-dark);
+    border-radius: 50%;
+    background-color: var(--color-grey-light);
+
+    &:disabled {
+      background-color: var(--color-grey-dark);
+      opacity: 1;
+    }
   }
 }
 
 .descriptions {
-  padding-bottom: var(--spacing-loose);
+  position: relative;
+  counter-reset: description-counter;
 
-  & > .description {
+  & .description {
     position: relative;
     font-size: var(--font-size-sm);
-    margin: 0 2.5rem var(--spacing-tight) 4.75rem;
+    padding: 0 var(--spacing-tight) 0
+      calc(var(--spacing-tight) + var(--spacing-loose));
 
-    & > .number {
+    & + .description {
+      margin-top: var(--spacing-tight);
+    }
+
+    &::before {
+      counter-increment: description-counter;
+      content: '0' counter(description-counter);
       position: absolute;
       top: 0;
-      left: -1.9rem;
+      left: var(--spacing-tight);
 
       color: var(--color-grey-light);
-      font-weight: 900;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-sm);
+    }
+
+    @media (--sm-up) {
+      padding: 0 var(--spacing-x-loose) 0 calc(var(--spacing-x-loose) * 2);
+
+      &::before {
+        left: var(--spacing-x-loose);
+      }
     }
   }
 }
 
 .buttons {
+  margin-top: var(--spacing-x-loose);
+
   & button {
     width: 50%;
     font-weight: var(--font-weight-medium);

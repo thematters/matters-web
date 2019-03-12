@@ -2,7 +2,7 @@ import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 import ModalComplete from '~/components/Modal/Complete'
 import ModalContent from '~/components/Modal/Content'
 
@@ -74,11 +74,12 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
           )}
           {step === 'complete' && (
             <ModalComplete
-              message={translate({
-                zh_hant: 'Matters ID 修改成功',
-                zh_hans: 'Matters ID 修改成功',
-                lang
-              })}
+              message={
+                <Translate
+                  zh_hant="Matters ID 修改成功"
+                  zh_hans="Matters ID 修改成功"
+                />
+              }
             />
           )}
         </ModalContent>

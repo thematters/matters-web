@@ -70,7 +70,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
                   <DraftContent draft={data.node} />
                 </>
               )}
-              {(error || (data && !data.node)) && (
+              {!loading && (error || (data && !data.node)) && (
                 <EmptyDraft
                   description={
                     <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />

@@ -1,26 +1,16 @@
-.divider {
-  border: 0px;
-  background-color: rgba(0, 0, 0, 0.08);
-  height: 1px;
-  margin: 2rem 0 2rem;
-
-  @media (--sm-down) {
-    & {
-      margin: 1rem 0 1rem;
-    }
-  }
-}
-
-.footer {
+footer {
   @mixin flex-center-all;
+  @mixin border-top-grey;
+  margin-top: var(--spacing-tight);
+  padding-top: var(--spacing-tight);
+
   color: var(--color-grey);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
 
-  & > .link {
-    @mixin flex-center-all;
-    cursor: pointer;
-    color: var(--color-matters-green);
+  @media (--sm-up) {
+    margin-top: var(--spacing-loose);
+    padding-top: var(--spacing-loose);
   }
 }
 

@@ -4,12 +4,10 @@ import {
   EmailChangeConfirmForm,
   EmailChangeRequestForm
 } from '~/components/Form/EmailChangeForm'
-import { LanguageContext } from '~/components/Language'
+import { Translate } from '~/components/Language'
 import ModalComplete from '~/components/Modal/Complete'
 import ModalContent from '~/components/Modal/Content'
 import { ViewerContext } from '~/components/Viewer'
-
-import { translate } from '~/common/utils'
 
 /**
  * This component is a modal for changing email.
@@ -25,12 +23,8 @@ import { translate } from '~/common/utils'
 type Step = 'request' | 'confirm' | 'complete'
 
 const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
-  const { lang } = useContext(LanguageContext)
-
   const viewer = useContext(ViewerContext)
-
   const [step, setStep] = useState<Step>('request')
-
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       next: 'confirm',
@@ -74,11 +68,9 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
         )}
         {step === 'complete' && (
           <ModalComplete
-            message={translate({
-              zh_hant: '電子信箱修改成功',
-              zh_hans: '邮箱修改成功',
-              lang
-            })}
+            message={
+              <Translate zh_hant="電子信箱修改成功" zh_hans="邮箱修改成功" />
+            }
           />
         )}
       </ModalContent>

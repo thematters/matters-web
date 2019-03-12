@@ -4,7 +4,7 @@ import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 import ModalComplete from '~/components/Modal/Complete'
 import ModalContent from '~/components/Modal/Content'
 import ModalHeader from '~/components/Modal/Header'
@@ -106,26 +106,21 @@ const PasswordModal: FC<
         {step === 'complete' && (
           <ModalComplete
             message={
-              purpose === 'forget'
-                ? translate({
-                    zh_hant: '密碼重置成功',
-                    zh_hans: '密码重置成功',
-                    lang
-                  })
-                : translate({
-                    zh_hant: '密碼修改成功',
-                    zh_hans: '密码修改成功',
-                    lang
-                  })
+              purpose === 'forget' ? (
+                <Translate zh_hant="密碼重置成功" zh_hans="密码重置成功" />
+              ) : (
+                <Translate zh_hant="密碼修改成功" zh_hans="密码修改成功" />
+              )
             }
             hint={
-              purpose === 'forget'
-                ? translate({
-                    zh_hant: '請使用新的密碼重新登入',
-                    zh_hans: '请使用新的密码重新登入',
-                    lang
-                  })
-                : ''
+              purpose === 'forget' ? (
+                <Translate
+                  zh_hant="請使用新的密碼重新登入"
+                  zh_hans="请使用新的密码重新登入"
+                />
+              ) : (
+                ''
+              )
             }
           />
         )}
