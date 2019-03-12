@@ -4,7 +4,7 @@
 
 .top-container {
   padding-top: var(--spacing-tight);
-  padding-left: var(--spacing-loose);
+  padding-left: var(--spacing-default);
   padding-right: var(--spacing-default);
 }
 
@@ -12,7 +12,7 @@
   background-color: var(--color-bg-green);
   padding-top: var(--spacing-tight);
   padding-bottom: var(--spacing-tight);
-  padding-left: var(--spacing-loose);
+  padding-left: var(--spacing-default);
   padding-right: var(--spacing-default);
   align-items: start;
 }

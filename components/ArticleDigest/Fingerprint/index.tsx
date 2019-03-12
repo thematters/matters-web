@@ -134,7 +134,10 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
 
 const Fingerprint = ({ article }: { article: FingerprintArticle }) => (
   <Dropdown
+    arrow={true}
     zIndex={101}
+    distance={8}
+    placement="right"
     content={<FingerprintContent dataHash={article.dataHash || ''} />}
   >
     <span className="fingerprint-icon">
