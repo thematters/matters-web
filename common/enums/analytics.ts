@@ -13,7 +13,8 @@ export const ANALYTICS_EVENTS = {
   SHUFFLE_AUTHOR: 'shuffle-author',
   ENTER_ARTICLE: 'enter-article',
   LEAVE_ARTICLE: 'leave-article',
-  FINISH_ARTICLE: 'finish-article'
+  FINISH_ARTICLE: 'finish-article',
+  OPEN_COMMENTS: 'open-comments'
 }
 
 export const FEED_TYPE = {
