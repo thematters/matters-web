@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import App, { Container } from 'next/app'
 import React from 'react'
-import { ApolloProvider, Query, QueryResult } from 'react-apollo'
+import { ApolloProvider, QueryResult } from 'react-apollo'
 
 import {
   AnalyticsProvider,
@@ -12,6 +12,7 @@ import {
   ModalProvider
 } from '~/components'
 import ErrorBoundary from '~/components/ErrorBoundary'
+import { Query } from '~/components/GQL'
 
 import withApollo from '~/common/utils/withApollo'
 
