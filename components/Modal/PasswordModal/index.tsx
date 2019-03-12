@@ -5,9 +5,8 @@ import {
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
 import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
-import ModalContent from '~/components/Modal/Content'
-import ModalHeader from '~/components/Modal/Header'
 
 import { translate } from '~/common/utils'
 
@@ -17,7 +16,7 @@ import { translate } from '~/common/utils'
  * Usage:
  *
  * ```jsx
- *   <Modal.PasswordModal purpose={'forget'} close={close} />
+ *   <PasswordModal purpose={'forget'} close={close} />
  * ```
  *
  */
@@ -84,9 +83,9 @@ const PasswordModal: FC<
 
   return (
     <>
-      <ModalHeader title={data[step].title} />
+      <Modal.Header title={data[step].title} />
 
-      <ModalContent>
+      <Modal.Content>
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
@@ -124,7 +123,7 @@ const PasswordModal: FC<
             }
           />
         )}
-      </ModalContent>
+      </Modal.Content>
     </>
   )
 }

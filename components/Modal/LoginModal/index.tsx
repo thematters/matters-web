@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Form } from '~/components/Form'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
-import ModalContent from '~/components/Modal/Content'
+import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 
@@ -17,7 +17,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.LoginModal close={close} />
+ *   <LoginModal close={close} />
  * ```
  *
  */
@@ -56,10 +56,10 @@ const Footer = () => (
 
 const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
   return (
-    <ModalContent>
+    <Modal.Content>
       <Form.LoginForm purpose="modal" submitCallback={close} />
       <Footer />
-    </ModalContent>
+    </Modal.Content>
   )
 }
 

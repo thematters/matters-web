@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
-import ModalContent from '~/components/Modal/Content'
+import { Modal } from '~/components/Modal'
 
 import PublishSlide from './PublishSlide'
 import styles from './styles.css'
@@ -56,13 +56,13 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
 
   return (
     <section>
-      <ModalContent
+      <Modal.Content
         layout="full-width"
         spacing="none"
         containerStyle={{ padding: 0 }}
       >
         <PublishSlide />
-      </ModalContent>
+      </Modal.Content>
       <div className="buttons">
         <button className="save" onClick={close}>
           <Translate zh_hant="暫存草稿箱" zh_hans="暫存草稿箱" />

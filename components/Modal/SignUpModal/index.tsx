@@ -4,8 +4,7 @@ import { Button } from '~/components/Button'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
-import ModalContent from '~/components/Modal/Content'
-import ModalHeader from '~/components/Modal/Header'
+import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 import { Title } from '~/components/Title'
@@ -22,7 +21,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.SignUpModal close={close} />
+ *   <SignUpModal close={close} />
  * ```
  *
  */
@@ -134,9 +133,9 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
 
   return (
     <>
-      <ModalHeader title={data[step].title} closeable={closeable} />
+      <Modal.Header title={data[step].title} closeable={closeable} />
 
-      <ModalContent>
+      <Modal.Content>
         {step === 'signUp' && (
           <>
             <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
@@ -150,7 +149,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
           />
         )}
         {step === 'complete' && <Complete />}
-      </ModalContent>
+      </Modal.Content>
 
       <style jsx>{styles}</style>
     </>

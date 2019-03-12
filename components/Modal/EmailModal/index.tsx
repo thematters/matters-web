@@ -5,8 +5,8 @@ import {
   EmailChangeRequestForm
 } from '~/components/Form/EmailChangeForm'
 import { Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
-import ModalContent from '~/components/Modal/Content'
 import { ViewerContext } from '~/components/Viewer'
 
 /**
@@ -15,7 +15,7 @@ import { ViewerContext } from '~/components/Viewer'
  * Usage:
  *
  * ```jsx
- *   <Modal.EmailModal close={close} />
+ *   <EmailModal close={close} />
  * ```
  *
  */
@@ -53,7 +53,7 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <>
-      <ModalContent>
+      <Modal.Content>
         {step === 'request' && (
           <EmailChangeRequestForm
             defaultEmail={data.request.email}
@@ -73,7 +73,7 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
             }
           />
         )}
-      </ModalContent>
+      </Modal.Content>
     </>
   )
 }
