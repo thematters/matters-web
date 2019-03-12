@@ -125,7 +125,8 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                         onClick={() =>
                           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                             type: FEED_TYPE.SEARCH_TAG,
-                            location: i
+                            location: i,
+                            entrance: q
                           })
                         }
                       >
@@ -166,7 +167,8 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                           onClick={() =>
                             analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                               type: FEED_TYPE.SEARCH_TAG,
-                              location: i
+                              location: i,
+                              entrance: q
                             })
                           }
                         >

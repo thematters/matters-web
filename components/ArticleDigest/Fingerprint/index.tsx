@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import { GatewayContext } from '~/components/Contexts/Gateway'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
-import { Dropdown } from '~/components/Popper'
+import { Popover } from '~/components/Popper'
 import { TextIcon } from '~/components/TextIcon'
 
 import { dom } from '~/common/utils'
@@ -133,7 +133,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
 }
 
 const Fingerprint = ({ article }: { article: FingerprintArticle }) => (
-  <Dropdown
+  <Popover
     arrow={true}
     zIndex={101}
     distance={8}
@@ -154,7 +154,7 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => (
       </TextIcon>
       <style jsx>{styles}</style>
     </span>
-  </Dropdown>
+  </Popover>
 )
 
 Fingerprint.fragments = {

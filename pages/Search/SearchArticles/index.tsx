@@ -77,7 +77,8 @@ const SearchArticles = ({
         const loadMore = () => {
           analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
             type: FEED_TYPE.SEARCH_ARTICLE,
-            location: edges.length
+            location: edges.length,
+            entrance: q
           })
           return fetchMore({
             variables: {
@@ -127,7 +128,8 @@ const SearchArticles = ({
                     onClick={() =>
                       analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                         type: FEED_TYPE.SEARCH_ARTICLE,
-                        location: i
+                        location: i,
+                        entrance: q
                       })
                     }
                   >
