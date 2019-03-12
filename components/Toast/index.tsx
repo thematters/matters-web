@@ -43,17 +43,13 @@ export const Toast: React.FC<ToastProps> = ({
     [color]: !!color,
     [buttonPlacement]: buttonPlacement
   })
-  const contentClass = classNames({
-    content: true,
-    opaque: header && content
-  })
   const isWhite = color === 'white'
 
   return (
     <section className={mainClass}>
       <div>
         {header && <h4 className="header">{header}</h4>}
-        {content && <p className={contentClass}>{content}</p>}
+        {content && <p className="content">{content}</p>}
       </div>
 
       {closeButton && (
