@@ -11,7 +11,8 @@ import {
   Translate
 } from '~/components'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
@@ -85,8 +86,12 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
 
           const connectionPath = 'search'
           const { edges, pageInfo } = _get(data, connectionPath, {})
-          const loadMore = () =>
-            fetchMore({
+          const loadMore = () => {
+            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+              type: FEED_TYPE.SEARCH_TAG,
+              location: edges.length
+            })
+            return fetchMore({
               variables: {
                 cursor: pageInfo.endCursor
               },
@@ -97,6 +102,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                   path: connectionPath
                 })
             })
+          }
           const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
           const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
 
@@ -110,8 +116,19 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                 <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <ul>
                   {data.search.edges.map(
-                    ({ node, cursor }: { node: any; cursor: any }) => (
-                      <li key={cursor}>
+                    (
+                      { node, cursor }: { node: any; cursor: any },
+                      i: number
+                    ) => (
+                      <li
+                        key={cursor}
+                        onClick={() =>
+                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                            type: FEED_TYPE.SEARCH_TAG,
+                            location: i
+                          })
+                        }
+                      >
                         <Tag tag={node} type="count-fixed" />
                       </li>
                     )
@@ -140,8 +157,19 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
                   </ul>
                   <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
                     {rightEdges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
+                      (
+                        { node, cursor }: { node: any; cursor: any },
+                        i: number
+                      ) => (
+                        <li
+                          key={cursor}
+                          onClick={() =>
+                            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                              type: FEED_TYPE.SEARCH_TAG,
+                              location: i
+                            })
+                          }
+                        >
                           <Tag tag={node} type="count-fixed" />
                         </li>
                       )

@@ -19,7 +19,8 @@ import { Protected } from '~/components/Protected'
 import { Transaction } from '~/components/TransactionDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { mergeConnections, numFormat } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, mergeConnections, numFormat } from '~/common/utils'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MeWallet } from './__generated__/MeWallet'
@@ -98,8 +99,12 @@ const Wallet = () => {
 
                 const connectionPath = 'viewer.status.MAT.history'
                 const { edges, pageInfo } = _get(data, connectionPath, {})
-                const loadMore = () =>
-                  fetchMore({
+                const loadMore = () => {
+                  analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                    type: 'wallet',
+                    location: edges.length
+                  })
+                  return fetchMore({
                     variables: {
                       cursor: pageInfo.endCursor
                     },
@@ -110,6 +115,7 @@ const Wallet = () => {
                         path: connectionPath
                       })
                   })
+                }
 
                 if (!edges || edges.length <= 0) {
                   return <EmptyMAT />

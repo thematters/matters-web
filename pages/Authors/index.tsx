@@ -13,12 +13,13 @@ import {
   UserDigest
 } from '~/components'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllAuthors } from './__generated__/AllAuthors'
 import styles from './styles.css'
 
-const ALL_AUTHORS = gql`
+const ALL_AUTHORSS = gql`
   query AllAuthors($cursor: String) {
     viewer {
       id
@@ -52,7 +53,7 @@ const Authors = () => (
       />
 
       <section>
-        <Query query={ALL_AUTHORS}>
+        <Query query={ALL_AUTHORSS}>
           {({
             data,
             loading,
@@ -69,8 +70,12 @@ const Authors = () => (
 
             const connectionPath = 'viewer.recommendation.authors'
             const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () =>
-              fetchMore({
+            const loadMore = () => {
+              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                type: FEED_TYPE.ALL_AUTHORS,
+                location: edges.length
+              })
+              return fetchMore({
                 variables: {
                   cursor: pageInfo.endCursor
                 },
@@ -81,6 +86,7 @@ const Authors = () => (
                     path: connectionPath
                   })
               })
+            }
 
             return (
               <InfiniteScroll
@@ -88,11 +94,24 @@ const Authors = () => (
                 loadMore={loadMore}
               >
                 <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <UserDigest.FullDesc user={node} />
-                    </li>
-                  ))}
+                  {edges.map(
+                    (
+                      { node, cursor }: { node: any; cursor: any },
+                      i: number
+                    ) => (
+                      <li
+                        key={cursor}
+                        onClick={() =>
+                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                            type: FEED_TYPE.ALL_AUTHORS,
+                            location: i
+                          })
+                        }
+                      >
+                        <UserDigest.FullDesc user={node} />
+                      </li>
+                    )
+                  )}
                 </ul>
               </InfiniteScroll>
             )

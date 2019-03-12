@@ -10,6 +10,9 @@ import {
   Translate
 } from '~/components'
 
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
+
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
 const SIDEBAR_ICYMI = gql`
@@ -62,11 +65,21 @@ export default () => (
           </header>
 
           <ul>
-            {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-              <li key={cursor}>
-                <ArticleDigest.Sidebar article={node} hasCover />
-              </li>
-            ))}
+            {edges.map(
+              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                <li
+                  key={cursor}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.ICYMI,
+                      location: i
+                    })
+                  }
+                >
+                  <ArticleDigest.Sidebar article={node} hasCover />
+                </li>
+              )
+            )}
           </ul>
         </>
       )

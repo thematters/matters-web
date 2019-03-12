@@ -13,11 +13,12 @@ import {
   Translate
 } from '~/components'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTopics } from './__generated__/AllTopics'
 
-const ALL_TOPICS = gql`
+const ALL_TOPICSS = gql`
   query AllTopics(
     $cursor: String
     $hasArticleDigestActionAuthor: Boolean = false
@@ -56,7 +57,7 @@ const Topics = () => (
       />
 
       <section>
-        <Query query={ALL_TOPICS}>
+        <Query query={ALL_TOPICSS}>
           {({
             data,
             loading,
@@ -73,8 +74,12 @@ const Topics = () => (
 
             const connectionPath = 'viewer.recommendation.topics'
             const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () =>
-              fetchMore({
+            const loadMore = () => {
+              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                type: FEED_TYPE.TOPICS,
+                location: edges.length
+              })
+              return fetchMore({
                 variables: {
                   cursor: pageInfo.endCursor
                 },
@@ -85,6 +90,7 @@ const Topics = () => (
                     path: connectionPath
                   })
               })
+            }
 
             return (
               <InfiniteScroll
@@ -92,16 +98,29 @@ const Topics = () => (
                 loadMore={loadMore}
               >
                 <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <ArticleDigest.Feed
-                        article={node}
-                        hasDateTime
-                        hasBookmark
-                        hasTopicScore
-                      />
-                    </li>
-                  ))}
+                  {edges.map(
+                    (
+                      { node, cursor }: { node: any; cursor: any },
+                      i: number
+                    ) => (
+                      <li
+                        key={cursor}
+                        onClick={() =>
+                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                            type: FEED_TYPE.ALL_TOPICS,
+                            location: i
+                          })
+                        }
+                      >
+                        <ArticleDigest.Feed
+                          article={node}
+                          hasDateTime
+                          hasBookmark
+                          hasTopicScore
+                        />
+                      </li>
+                    )
+                  )}
                 </ul>
               </InfiniteScroll>
             )

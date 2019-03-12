@@ -26,11 +26,13 @@ export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
 
     // if we have an event of type track or page
     if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
-      window.analytics[type](args)
+      window.analytics[type](...args)
       // GA tracking
-      window.gtag('config', GA_TRACKING_ID, {
-        page_location: args.url
-      })
+      if (type === ANALYTIC_TYPES.PAGE) {
+        window.gtag('config', GA_TRACKING_ID, {
+          page_location: args.url
+        })
+      }
     }
 
     // if we have an event of type identify

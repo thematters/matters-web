@@ -122,7 +122,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
           <div className="explanation-content">
             <Translate
               zh_hans={`「指纹」是一篇文章上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取文章内容。\n\n「公共节点」是一篇文章在 IPFS 网络的存储地点，你可以使用任意公共节点地址对文章进行传播。`}
-              zh_hant={`「指紋」是一篇文章上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取文章內容。\n\n「公共節點」是一篇文章在 IPFS 網絡的存儲地點，你可使用任意公共節點地址對文章進行傳播。`}
+              zh_hant={`「指紋」是一篇文章上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取文章內容。\n\n「公共節點」是一篇文章在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對文章進行傳播。`}
             />
           </div>
         )}

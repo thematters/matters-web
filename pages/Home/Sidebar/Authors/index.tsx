@@ -11,6 +11,9 @@ import {
   UserDigest
 } from '~/components'
 
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
+
 import ViewAllLink from '../ViewAllLink'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import styles from './styles.css'
@@ -61,7 +64,12 @@ export default () => (
               </Label>
 
               <div>
-                <ShuffleButton onClick={() => refetch()} />
+                <ShuffleButton
+                  onClick={() => {
+                    refetch()
+                    analytics.trackEvent(ANALYTICS_EVENTS.SHUFFLE_AUTHOR)
+                  }}
+                />
                 <ViewAllLink type="authors" />
               </div>
             </header>
@@ -70,11 +78,21 @@ export default () => (
 
             {!loading && (
               <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <UserDigest.FullDesc user={node} nameSize="small" />
-                  </li>
-                ))}
+                {edges.map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: FEED_TYPE.AUTHOR,
+                          location: i
+                        })
+                      }
+                    >
+                      <UserDigest.FullDesc user={node} nameSize="small" />
+                    </li>
+                  )
+                )}
               </ul>
             )}
           </>
