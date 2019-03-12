@@ -2,10 +2,6 @@
   margin-top: var(--spacing-default);
 
   font-size: var(--font-size-sm);
-
-  &.first {
-    margin-top: 0;
-  }
 }
 
 .setting-section {
@@ -16,5 +12,17 @@
     @mixin border-top-grey;
 
     padding: var(--spacing-default) 0;
+  }
+}
+
+.first {
+  & .section-container {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @media (--sm-up) {
+      margin-top: 0;
+    }
   }
 }
