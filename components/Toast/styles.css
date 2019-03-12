@@ -27,11 +27,6 @@
 
 .header + .content {
   margin-top: var(--spacing-xx-tight);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
-}
-
-.opaque {
   opacity: 0.5;
 }
 

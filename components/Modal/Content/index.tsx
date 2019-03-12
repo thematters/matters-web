@@ -1,6 +1,6 @@
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import styles from './styles.css'
 
@@ -25,21 +25,21 @@ const Content: React.FC<ContentProps> = ({
     'l-col-4 l-col-sm-8 l-col-lg-12': layout === 'full-width'
   })
 
-  const [node, setNode] = useState<HTMLElement | null>(null)
+  const node: React.RefObject<HTMLElement> | null = useRef(null)
 
   useEffect(() => {
-    if (node) {
-      disableBodyScroll(node)
+    if (node && node.current) {
+      disableBodyScroll(node.current)
     }
     return () => {
-      if (node) {
-        enableBodyScroll(node)
+      if (node && node.current) {
+        enableBodyScroll(node.current)
       }
     }
   })
 
   return (
-    <section ref={setNode} className={containerClasses} style={containerStyle}>
+    <section ref={node} className={containerClasses} style={containerStyle}>
       <div className={layoutClasses}>{children}</div>
       <style jsx>{styles}</style>
     </section>
