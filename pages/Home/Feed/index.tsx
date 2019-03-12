@@ -14,7 +14,8 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
 import SortBy from './SortBy'
@@ -92,8 +93,12 @@ export default () => {
 
           const connectionPath = 'viewer.recommendation.feed'
           const { edges, pageInfo } = _get(data, connectionPath, {})
-          const loadMore = () =>
-            fetchMore({
+          const loadMore = () => {
+            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+              type: sortBy,
+              location: edges.length
+            })
+            return fetchMore({
               variables: {
                 cursor: pageInfo.endCursor
               },
@@ -104,6 +109,7 @@ export default () => {
                   path: connectionPath
                 })
             })
+          }
 
           return (
             <>
@@ -128,8 +134,22 @@ export default () => {
                     >
                       <ul>
                         {edges.map(
-                          ({ node, cursor }: { node: any; cursor: any }) => (
-                            <li key={cursor}>
+                          (
+                            { node, cursor }: { node: any; cursor: any },
+                            i: number
+                          ) => (
+                            <li
+                              key={cursor}
+                              onClick={() =>
+                                analytics.trackEvent(
+                                  ANALYTICS_EVENTS.CLICK_FEED,
+                                  {
+                                    type: sortBy,
+                                    location: i
+                                  }
+                                )
+                              }
+                            >
                               <ArticleDigest.Feed
                                 article={node}
                                 hasDateTime
