@@ -2,8 +2,10 @@ import { useContext } from 'react'
 
 import { Head, LanguageContext, PageHeader, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
-import { TOS } from '~/common/texts/tos'
+import Privacy from '~/common/texts/privacy'
+import ToS from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
@@ -13,26 +15,46 @@ export default () => {
 
   return (
     <main>
-      <Head title={{ zh_hant: '用戶協議', zh_hans: '用户协议' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.termAndPrivacy,
+          zh_hans: TEXT.zh_hans.termAndPrivacy
+        }}
+      />
 
       <section className="l-row">
         <div className="l-col-4 l-col-md-1 l-col-lg-2">
           <MiscTab />
         </div>
-        <div className="l-col-4 l-col-md-6 l-col-lg-8">
+        <article className="l-col-4 l-col-md-6 l-col-lg-8">
           <PageHeader
-            pageTitle={<Translate zh_hant="用戶協議" zh_hans="用户协议" />}
+            pageTitle={
+              <Translate
+                zh_hant={TEXT.zh_hant.termAndPrivacy}
+                zh_hans={TEXT.zh_hans.termAndPrivacy}
+              />
+            }
+            is="h2"
           />
-          <article
+          <section
             dangerouslySetInnerHTML={{
               __html: translate({
-                ...TOS,
+                ...ToS,
                 lang
               })
             }}
             className="content"
           />
-        </div>
+          <section
+            dangerouslySetInnerHTML={{
+              __html: translate({
+                ...Privacy,
+                lang
+              })
+            }}
+            className="content"
+          />
+        </article>
         <style jsx>{styles}</style>
       </section>
     </main>
