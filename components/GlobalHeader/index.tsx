@@ -4,7 +4,6 @@ import Router from 'next/router'
 import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { analytics } from '~/common/utils'
 
@@ -28,24 +27,6 @@ Router.onRouteChangeComplete = (url: string) => {
   // segment
   analytics.trackPage({ url })
 }
-
-const LoginModalSwitch = () => (
-  <ModalSwitch modalId="loginModal">
-    {(open: any) => <LoginButton onClick={open} />}
-  </ModalSwitch>
-)
-
-const SignUpModalSwitch = () => (
-  <ModalSwitch modalId="signUpModal">
-    {(open: any) => <SignUpButton onClick={open} />}
-  </ModalSwitch>
-)
-
-const PublishModalSwitch = () => (
-  <ModalSwitch modalId="publishModal">
-    {(open: any) => <PublishButton onClick={open} />}
-  </ModalSwitch>
-)
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(analytics.identifyUser)
@@ -79,13 +60,13 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft && viewer.isActive && <PublishModalSwitch />}
+                {isDraft && viewer.isActive && <PublishButton />}
                 {!isDraft && viewer.isActive && <WriteButton />}
               </>
             ) : (
               <>
-                {!isLogin && <LoginModalSwitch />}
-                {!isSignUp && <SignUpModalSwitch />}
+                {!isLogin && <LoginButton />}
+                {!isSignUp && <SignUpButton />}
               </>
             )}
           </section>

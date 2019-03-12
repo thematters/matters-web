@@ -1,4 +1,57 @@
-.fingerprint {
+.dropdown-container {
+  width: 21.25rem;
+}
+
+.top-container {
+  padding-top: var(--spacing-tight);
+  padding-left: var(--spacing-default);
+  padding-right: var(--spacing-default);
+}
+
+.explanation-container {
+  background-color: var(--color-bg-green);
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+  padding-left: var(--spacing-default);
+  padding-right: var(--spacing-default);
+  align-items: start;
+}
+
+.explanation-title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: var(--font-size-xs);
+  color: var(--color-matters-green);
+  cursor: pointer;
+}
+
+.explanation-content {
+  text-align: left;
+  line-height: 1.71;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey);
+  white-space: pre-line;
+  margin-top: var(--spacing-tight);
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-tight);
+}
+
+.title-content {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+}
+
+.support-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+}
+
+.fingerprint-icon {
   color: var(--color-matters-green);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm);
@@ -11,13 +64,41 @@
   background: var(--color-bg-yellow);
   height: var(--spacing-loose);
   width: 100%;
+  margin-bottom: var(--spacing-default);
   display: block;
   overflow-x: scroll;
   white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .copy {
   color: var(--color-matters-green);
   font-size: var(--font-size-xs);
   cursor: pointer;
+}
+
+.gateway-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-tight);
+}
+
+.gateway {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.gateway-url {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+  margin-left: var(--spacing-x-tight);
+  margin-right: var(--spacing-xx-tight);
 }

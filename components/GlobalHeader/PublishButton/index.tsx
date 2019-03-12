@@ -1,14 +1,19 @@
 import { Button, Icon, Translate } from '~/components'
+import { ModalSwitch } from '~/components/ModalManager'
 
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
-export default (props: { [key: string]: any }) => (
-  <Button
-    size="large"
-    bgColor="green"
-    icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
-    {...props}
-  >
-    <Translate zh_hant="發佈" zh_hans="发布" />
-  </Button>
+export default () => (
+  <ModalSwitch modalId="publishModal">
+    {(open: any) => (
+      <Button
+        size="large"
+        bgColor="green"
+        icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
+        onClick={() => open()}
+      >
+        <Translate zh_hant="發佈" zh_hans="发布" />
+      </Button>
+    )}
+  </ModalSwitch>
 )

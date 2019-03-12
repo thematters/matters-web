@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
 
 import { Button, Icon, Translate } from '~/components'
+import { Mutation } from '~/components/GQL'
 
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Button, Translate } from '~/components'
+import { Mutation } from '~/components/GQL'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { updateViewerFolloweeCount } from './utils'

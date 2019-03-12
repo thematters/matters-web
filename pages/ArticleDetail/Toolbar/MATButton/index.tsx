@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
-import { Mutation } from 'react-apollo'
 
 import { Icon } from '~/components'
+import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'
@@ -40,7 +40,8 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
   const viewer = useContext(ViewerContext)
   const viewerMAT = _get(viewer, 'status.MAT.total', 0)
   const canAppreciate =
-    article.appreciateLeft > 0 && viewerMAT > 0 && !viewer.isInactive
+    (article.appreciateLeft > 0 && viewerMAT > 0 && !viewer.isInactive) ||
+    !viewer.isAuthed
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,

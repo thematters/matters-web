@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { MouseEventHandler } from 'react'
 
 import { Label, Title } from '~/components'
 
@@ -31,8 +32,12 @@ const fragments = {
 
 const FeatureDigest = ({
   article,
+  onClick,
   ...actionControls
-}: { article: TodayDigestArticle } & ActionsControls) => {
+}: {
+  article: TodayDigestArticle
+  onClick?: MouseEventHandler
+} & ActionsControls) => {
   const { cover, author, slug, mediaHash, title, summary } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -47,7 +52,7 @@ const FeatureDigest = ({
   })
 
   return (
-    <section className="container">
+    <section className="container" onClick={onClick}>
       <div className="cover-container">
         <Link {...path}>
           <a>

@@ -5,8 +5,8 @@ import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
-import { MessageHolder } from '~/components/MessageHolder'
 import { Modal } from '~/components/Modal'
+import ProgressBar from '~/components/ProgressBar'
 import { ToastHolder } from '~/components/ToastHolder'
 import {
   processViewer,
@@ -52,7 +52,7 @@ export const Layout: React.FC<LayoutProps> & {
 
             <Modal.Anchor />
             <ToastHolder />
-            <MessageHolder />
+            <ProgressBar />
           </GatewayContextProvider>
         </HeaderContextProvider>
       </LanguageProvider>

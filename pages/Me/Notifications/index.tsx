@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Footer,
   Head,
   InfiniteScroll,
@@ -12,6 +11,7 @@ import {
   Translate
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
+import { Query } from '~/components/GQL'
 import NoticeDigest from '~/components/NoticeDigest'
 import { Protected } from '~/components/Protected'
 
@@ -62,10 +62,6 @@ const Notifications = () => (
             }: QueryResult & { data: MeNotifications }) => {
               if (loading) {
                 return <Spinner />
-              }
-
-              if (error) {
-                return <Error error={error} />
               }
 
               const connectionPath = 'viewer.notices'

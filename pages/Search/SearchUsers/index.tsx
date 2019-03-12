@@ -1,17 +1,18 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   InfiniteScroll,
   PageHeader,
   Spinner,
   Translate,
   UserDigest
 } from '~/components'
+import { Query } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
@@ -84,14 +85,15 @@ const SearchUser = ({
             return <Spinner />
           }
 
-          if (error) {
-            return <Error error={error} />
-          }
-
           const connectionPath = 'search'
           const { edges, pageInfo } = _get(data, connectionPath, {})
-          const loadMore = () =>
-            fetchMore({
+          const loadMore = () => {
+            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+              type: FEED_TYPE.SEARCH_USER,
+              location: edges.length,
+              entrance: q
+            })
+            return fetchMore({
               variables: {
                 cursor: pageInfo.endCursor
               },
@@ -102,6 +104,7 @@ const SearchUser = ({
                   path: connectionPath
                 })
             })
+          }
 
           if (!edges || edges.length <= 0) {
             return isAggregate ? null : <EmptySearchResult />
@@ -115,11 +118,25 @@ const SearchUser = ({
               >
                 <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
                 <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <UserDigest.FullDesc user={node} />
-                    </li>
-                  ))}
+                  {edges.map(
+                    (
+                      { node, cursor }: { node: any; cursor: any },
+                      i: number
+                    ) => (
+                      <li
+                        key={cursor}
+                        onClick={() =>
+                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                            type: FEED_TYPE.SEARCH_USER,
+                            location: i,
+                            entrance: q
+                          })
+                        }
+                      >
+                        <UserDigest.FullDesc user={node} />
+                      </li>
+                    )
+                  )}
                 </ul>
               </InfiniteScroll>
             </section>

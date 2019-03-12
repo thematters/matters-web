@@ -6,29 +6,13 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://ipfs.io/ipfs/',
   'https://gateway.ipfs.io/ipfs/',
   'https://ipfs.infura.io/ipfs/',
-  'https://rx14.co.uk/ipfs/',
-  'https://xmine128.tk/ipfs/',
-  'https://upload.global/ipfs/',
   'https://ipfs.jes.xxx/ipfs/',
-  'https://catalunya.network/ipfs/',
   'https://siderus.io/ipfs/',
   'https://ipfs.eternum.io/ipfs/',
   'https://hardbin.com/ipfs/',
-  'https://ipfs.macholibre.org/ipfs/',
-  'https://ipfs.works/ipfs/',
   'https://ipfs.wa.hle.rs/ipfs/',
-  'https://api.wisdom.sh/ipfs/',
-  'https://gateway.blocksec.com/ipfs/',
-  'https://ipfs.renehsz.com/ipfs/',
   'https://cloudflare-ipfs.com/ipfs/',
-  'https://ipns.co/',
-  'https://ipfs.netw0rk.io/ipfs/',
-  'https://gateway.swedneck.xyz/ipfs/',
-  'https://ipfs.mrh.io/ipfs/',
-  'https://gateway.originprotocol.com/ipfs/',
-  'https://ipfs.dapps.earth/ipfs/',
   'https://gateway.pinata.cloud/ipfs/',
-  'https://ipfs.doolta.com/ipfs/',
   'https://ipfs.sloppyta.co/ipfs/',
   'https://ipfs.busy.org/ipfs/',
   'https://ipfs.greyh.at/ipfs/',
@@ -56,12 +40,12 @@ export const GatewayContextProvider = ({
     ): Promise<void> => {
       const testUrl = `${gatewayUrl}${hash}#x-ipfs-companion-no-redirect`
       try {
-        const { ok } = await fetch(testUrl)
-        if (ok) {
+        const res = await fetch(testUrl)
+        if (res && res.ok) {
           setGateways(prev => prev.concat([gatewayUrl]))
         }
       } catch (err) {
-        console.log(`Fail to fetch gateway ${gatewayUrl}`)
+        console.log(`Gateway not alive, skipping: ${gatewayUrl}`)
       }
     }
 

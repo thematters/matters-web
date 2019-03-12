@@ -1,11 +1,12 @@
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { Error, InfiniteScroll, Spinner, Translate } from '~/components'
+import { InfiniteScroll, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { Form } from '~/components/Form'
+import { Query } from '~/components/GQL'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
@@ -31,10 +32,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
       }: QueryResult & { data: ArticleCommentsType }) => {
         if (loading) {
           return <Spinner />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const pinnedComments = _get(data, 'article.pinnedComments', [])

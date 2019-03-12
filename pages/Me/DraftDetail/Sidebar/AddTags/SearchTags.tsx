@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   Dropdown,
@@ -11,6 +11,7 @@ import {
   Spinner,
   Translate
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { numAbbr, translate } from '~/common/utils'
 

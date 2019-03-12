@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Footer,
   Head,
   InfiniteScroll,
@@ -12,13 +11,15 @@ import {
   Tag,
   Translate
 } from '~/components'
+import { Query } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
-const ALL_TAGS = gql`
+const ALL_TAGSS = gql`
   query AllTags($cursor: String) {
     viewer {
       id
@@ -52,7 +53,7 @@ const Tags = () => (
       />
 
       <section>
-        <Query query={ALL_TAGS}>
+        <Query query={ALL_TAGSS}>
           {({
             data,
             loading,
@@ -63,14 +64,14 @@ const Tags = () => (
               return <Spinner />
             }
 
-            if (error) {
-              return <Error error={error} />
-            }
-
             const connectionPath = 'viewer.recommendation.tags'
             const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () =>
-              fetchMore({
+            const loadMore = () => {
+              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                type: FEED_TYPE.TAGS,
+                location: edges.length
+              })
+              return fetchMore({
                 variables: {
                   cursor: pageInfo.endCursor
                 },
@@ -81,6 +82,7 @@ const Tags = () => (
                     path: connectionPath
                   })
               })
+            }
             const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
             const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
 
@@ -92,8 +94,19 @@ const Tags = () => (
                 <div className="l-row">
                   <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
                     {leftEdges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
+                      (
+                        { node, cursor }: { node: any; cursor: any },
+                        i: number
+                      ) => (
+                        <li
+                          key={cursor}
+                          onClick={() =>
+                            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                              type: FEED_TYPE.TAGS,
+                              location: i * 2
+                            })
+                          }
+                        >
                           <Tag tag={node} type="count-fixed" />
                         </li>
                       )
@@ -101,8 +114,19 @@ const Tags = () => (
                   </ul>
                   <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
                     {rightEdges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
+                      (
+                        { node, cursor }: { node: any; cursor: any },
+                        i: number
+                      ) => (
+                        <li
+                          key={cursor}
+                          onClick={() =>
+                            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                              type: FEED_TYPE.TAGS,
+                              location: i * 2 + 1
+                            })
+                          }
+                        >
                           <Tag tag={node} type="count-fixed" />
                         </li>
                       )

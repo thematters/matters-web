@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
+import { Query } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import {

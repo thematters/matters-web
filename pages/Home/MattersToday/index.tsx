@@ -1,8 +1,12 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Error, Placeholder } from '~/components'
+import { ArticleDigest, Placeholder } from '~/components'
+import { Query } from '~/components/GQL'
+
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
@@ -35,14 +39,15 @@ export default () => (
           return <Placeholder.MattersToday />
         }
 
-        if (error) {
-          return <Error error={error} />
-        }
-
         return (
           <>
             <ArticleDigest.Feature
               article={data.viewer.recommendation.today}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.TODAY
+                })
+              }
               hasAuthor
               hasDateTime
               hasBookmark

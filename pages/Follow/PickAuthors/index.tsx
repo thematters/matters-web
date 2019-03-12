@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Head,
   PageHeader,
   ShuffleButton,
@@ -11,6 +10,7 @@ import {
   Translate,
   UserDigest
 } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { numFormat } from '~/common/utils'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
@@ -75,10 +75,6 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
       error,
       refetch
     }: QueryResult & { data: PickAuthorsType }) => {
-      if (error) {
-        return <Error error={error} />
-      }
-
       const edges = _get(data, 'viewer.recommendation.authors.edges', [])
       const followeeCount = _get(viewer, 'followees.totalCount', 0)
 

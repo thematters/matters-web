@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
   ArticleDigest,
-  Error,
   Footer,
   Head,
   InfiniteScroll,
@@ -13,8 +12,10 @@ import {
   Placeholder
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import { Query } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
 
@@ -68,14 +69,15 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
               return <Placeholder.ArticleDigestList />
             }
 
-            if (error) {
-              return <Error error={error} />
-            }
-
             const connectionPath = 'node.articles'
             const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () =>
-              fetchMore({
+            const loadMore = () => {
+              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                type: FEED_TYPE.TAG_DETAIL,
+                location: edges.length,
+                entrance: data.node.id
+              })
+              return fetchMore({
                 variables: {
                   cursor: pageInfo.endCursor
                 },
@@ -86,6 +88,7 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
                     path: connectionPath
                   })
               })
+            }
 
             return (
               <>
@@ -100,8 +103,23 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
                   >
                     <ul>
                       {edges.map(
-                        ({ node, cursor }: { node: any; cursor: any }) => (
-                          <li key={cursor}>
+                        (
+                          { node, cursor }: { node: any; cursor: any },
+                          i: number
+                        ) => (
+                          <li
+                            key={cursor}
+                            onClick={() =>
+                              analytics.trackEvent(
+                                ANALYTICS_EVENTS.CLICK_FEED,
+                                {
+                                  type: FEED_TYPE.TAG_DETAIL,
+                                  location: i,
+                                  entrance: data.node.id
+                                }
+                              )
+                            }
+                          >
                             <ArticleDigest.Feed
                               article={node}
                               hasDateTime

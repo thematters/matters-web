@@ -2,10 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { Mutation, Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Mutation, Query } from '~/components/GQL'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'

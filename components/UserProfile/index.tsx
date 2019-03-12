@@ -4,10 +4,11 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { Avatar, Error, Placeholder, Translate } from '~/components'
+import { Avatar, Placeholder, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
+import { Query } from '~/components/GQL'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -86,10 +87,6 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
             }: QueryResult & { data: UserProfileUser }) => {
               if (loading) {
                 return <Placeholder.UserProfile />
-              }
-
-              if (error) {
-                return <Error error={error} />
               }
 
               if (isMe && editing) {

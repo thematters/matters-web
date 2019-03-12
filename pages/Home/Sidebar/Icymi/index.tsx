@@ -1,14 +1,12 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import {
-  ArticleDigest,
-  Error,
-  Label,
-  Placeholder,
-  Translate
-} from '~/components'
+import { ArticleDigest, Label, Placeholder, Translate } from '~/components'
+import { Query } from '~/components/GQL'
+
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -43,10 +41,6 @@ export default () => (
         return <Placeholder.Sidebar />
       }
 
-      if (error) {
-        return <Error error={error} />
-      }
-
       const edges = _get(data, 'viewer.recommendation.icymi.edges', [])
 
       if (!edges || edges.length <= 0) {
@@ -62,11 +56,21 @@ export default () => (
           </header>
 
           <ul>
-            {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-              <li key={cursor}>
-                <ArticleDigest.Sidebar article={node} hasCover />
-              </li>
-            ))}
+            {edges.map(
+              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                <li
+                  key={cursor}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.ICYMI,
+                      location: i
+                    })
+                  }
+                >
+                  <ArticleDigest.Sidebar article={node} hasCover />
+                </li>
+              )
+            )}
           </ul>
         </>
       )

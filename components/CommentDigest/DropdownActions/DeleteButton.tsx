@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Mutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
+import { Mutation } from '~/components/GQL'
 
 import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 

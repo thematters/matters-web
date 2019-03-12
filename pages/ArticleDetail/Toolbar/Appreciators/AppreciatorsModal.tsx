@@ -1,20 +1,21 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import {
-  Error,
-  InfiniteScroll,
-  Spinner,
-  Translate,
-  UserDigest
-} from '~/components'
+import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
+import { Query } from '~/components/GQL'
 import ModalContent from '~/components/Modal/Content'
 import ModalHeader from '~/components/Modal/Header'
 import { ModalInstance } from '~/components/ModalManager'
 
-import { getQuery, mergeConnections, numFormat } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import {
+  analytics,
+  getQuery,
+  mergeConnections,
+  numFormat
+} from '~/common/utils'
 
 import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 import styles from './styles.css'
@@ -68,14 +69,15 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
               return <Spinner />
             }
 
-            if (error) {
-              return <Error error={error} />
-            }
-
             const connectionPath = 'article.appreciators'
             const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () =>
-              fetchMore({
+            const loadMore = () => {
+              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                type: FEED_TYPE.APPRECIATOR,
+                location: edges.length,
+                entrance: data.article.id
+              })
+              return fetchMore({
                 variables: {
                   cursor: pageInfo.endCursor
                 },
@@ -86,6 +88,7 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                     path: connectionPath
                   })
               })
+            }
             const totalCount = numFormat(
               _get(data, 'article.appreciators.totalCount', 0)
             )
@@ -107,8 +110,23 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                   >
                     <ul className="modal-appreciators-list">
                       {edges.map(
-                        ({ node, cursor }: { node: any; cursor: any }) => (
-                          <li key={cursor}>
+                        (
+                          { node, cursor }: { node: any; cursor: any },
+                          i: number
+                        ) => (
+                          <li
+                            key={cursor}
+                            onClick={() =>
+                              analytics.trackEvent(
+                                ANALYTICS_EVENTS.CLICK_FEED,
+                                {
+                                  type: FEED_TYPE.APPRECIATOR,
+                                  location: i,
+                                  entrance: data.article.id
+                                }
+                              )
+                            }
+                          >
                             <UserDigest.FullDesc user={node} />
                           </li>
                         )

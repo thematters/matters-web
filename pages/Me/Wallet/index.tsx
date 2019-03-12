@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import {
-  Error,
   Footer,
   Head,
   Icon,
@@ -15,11 +14,13 @@ import {
   Translate
 } from '~/components'
 import EmptyMAT from '~/components/Empty/EmptyMAT'
+import { Query } from '~/components/GQL'
 import { Protected } from '~/components/Protected'
 import { Transaction } from '~/components/TransactionDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { mergeConnections, numFormat } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, mergeConnections, numFormat } from '~/common/utils'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MeWallet } from './__generated__/MeWallet'
@@ -92,14 +93,14 @@ const Wallet = () => {
                   return <Spinner />
                 }
 
-                if (error) {
-                  return <Error error={error} />
-                }
-
                 const connectionPath = 'viewer.status.MAT.history'
                 const { edges, pageInfo } = _get(data, connectionPath, {})
-                const loadMore = () =>
-                  fetchMore({
+                const loadMore = () => {
+                  analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                    type: 'wallet',
+                    location: edges.length
+                  })
+                  return fetchMore({
                     variables: {
                       cursor: pageInfo.endCursor
                     },
@@ -110,6 +111,7 @@ const Wallet = () => {
                         path: connectionPath
                       })
                   })
+                }
 
                 if (!edges || edges.length <= 0) {
                   return <EmptyMAT />

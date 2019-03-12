@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { Empty, Error, Icon, Menu, Spinner, Translate } from '~/components'
+import { Empty, Icon, Menu, Spinner, Translate } from '~/components'
+import { Query } from '~/components/GQL'
 
 import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
@@ -43,10 +44,6 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
       }: QueryResult & { data: SearchAutoComplete }) => {
         if (loading) {
           return <Spinner />
-        }
-
-        if (error) {
-          return <Error error={error} />
         }
 
         const recentSearches = data.viewer.activity.recentSearches.edges

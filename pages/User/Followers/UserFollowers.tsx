@@ -1,13 +1,15 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
-import { Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
-import { Error, Head, InfiniteScroll, Placeholder } from '~/components'
+import { Head, InfiniteScroll, Placeholder } from '~/components'
 import EmptyFollower from '~/components/Empty/EmptyFollower'
+import { Query } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { getQuery, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import { UserFollowerFeed } from './__generated__/UserFollowerFeed'
 
@@ -49,14 +51,15 @@ const UserFollowers: React.FC<WithRouterProps> = ({ router }) => {
           return <Placeholder.ArticleDigestList />
         }
 
-        if (error) {
-          return <Error error={error} />
-        }
-
         const connectionPath = 'user.followers'
         const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () =>
-          fetchMore({
+        const loadMore = () => {
+          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+            type: FEED_TYPE.FOLLOWER,
+            location: edges.length,
+            entrance: data.user.id
+          })
+          return fetchMore({
             variables: {
               cursor: pageInfo.endCursor
             },
@@ -67,6 +70,7 @@ const UserFollowers: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
+        }
 
         if (!edges || edges.length <= 0) {
           return <EmptyFollower />
@@ -85,11 +89,22 @@ const UserFollowers: React.FC<WithRouterProps> = ({ router }) => {
               loadMore={loadMore}
             >
               <ul>
-                {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                  <li key={cursor}>
-                    <UserDigest.FullDesc user={node} nameSize="small" />
-                  </li>
-                ))}
+                {edges.map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: FEED_TYPE.FOLLOWER,
+                          location: i,
+                          entrance: data.user.id
+                        })
+                      }
+                    >
+                      <UserDigest.FullDesc user={node} nameSize="small" />
+                    </li>
+                  )
+                )}
               </ul>
             </InfiniteScroll>
           </>

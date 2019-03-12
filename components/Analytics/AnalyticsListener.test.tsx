@@ -20,20 +20,20 @@ beforeEach(() => {
 })
 
 test('Invokes track method with trackEvent', async () => {
-  const tracker = { eventType: 'track' }
+  const tracker = ['test-event', { some: 'detail' }]
   render(<AnalyticsListener user={{}} />)
-  analytics.trackEvent(tracker)
+  analytics.trackEvent(...tracker)
   await wait(() => {
-    expect(mockAnalytics.track.mock.calls[0][0]).toBe(tracker)
+    expect(mockAnalytics.track.mock.calls[0]).toEqual(tracker)
   })
 })
 
 test('Invokes page method with trackPage', async () => {
-  const tracker = { eventType: 'page' }
+  const tracker = ['test-page', { some: 'detail' }]
   render(<AnalyticsListener user={{}} />)
-  analytics.trackPage(tracker)
+  analytics.trackPage(...tracker)
   await wait(() => {
-    expect(mockAnalytics.page.mock.calls[0][0]).toBe(tracker)
+    expect(mockAnalytics.page.mock.calls[0]).toEqual(tracker)
     expect(mockGA.mock.calls.length).toBeTruthy()
   })
 })
@@ -43,6 +43,6 @@ test('Invokes identify method with identifyUser', async () => {
   render(<AnalyticsListener user={{}} />)
   analytics.identifyUser(tracker)
   await wait(() => {
-    expect(mockAnalytics.identify.mock.calls[0][0]).toBe(tracker)
+    expect(mockAnalytics.identify.mock.calls.length).toBeTruthy()
   })
 })
