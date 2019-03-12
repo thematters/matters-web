@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
@@ -15,21 +14,7 @@ import { FeedDigestComment } from './__generated__/FeedDigestComment'
 import styles from './styles.css'
 
 const fragments = {
-  comment: gql`
-    fragment FeedDigestComment on Comment {
-      ...BaseDigestComment
-      comments(input: { sort: oldest, first: 100 })
-        @include(if: $hasDescendantComments) {
-        edges {
-          cursor
-          node {
-            ...BaseDigestComment
-          }
-        }
-      }
-    }
-    ${commentFragments.base}
-  `
+  comment: commentFragments.feed
 }
 
 const ReplyTo = ({ user }: any) => (
