@@ -40,10 +40,13 @@ export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
       // logged in
       if ('id' in user && 'info' in user) {
         const { info, id } = user as AnalyticsUser
-        window.analytics.identify(id, {
-          email: info.email,
+        window.analytics.identify(
+          id,
+          {
+            email: info.email
+          },
           ...args
-        })
+        )
         window.gtag('config', GA_TRACKING_ID, {
           user_id: id
         })
