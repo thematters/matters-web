@@ -20,15 +20,16 @@ const fragments = {
 }
 
 const Content = ({ article }: { article: ContentArticle }) => {
+  const { id } = article
   // enter and leave article for analytics
   useEffect(() => {
     analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
-      entrance: article.id
+      entrance: id
     })
 
     return () =>
       analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, {
-        entrance: article.id
+        entrance: id
       })
   }, [])
 
@@ -51,7 +52,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
     >
       {read => (
         <>
-          <FireOnMount fn={() => read({ variables: { id: article.id } })} />
+          <FireOnMount fn={() => read({ variables: { id } })} />
           <div
             className="content"
             dangerouslySetInnerHTML={{ __html: article.content }}
@@ -59,7 +60,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
           <Waypoint
             onEnter={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-                entrance: article.id
+                entrance: id
               })
             }
           />
