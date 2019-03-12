@@ -126,7 +126,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
             <Icon
               id={ICON_AVATAR_GREEN.id}
               viewBox={ICON_AVATAR_GREEN.viewBox}
-              style={{ width: 80, height: 80 }}
+              style={{ width: '5rem', height: '5rem' }}
             />
           </div>
           <div className="content">

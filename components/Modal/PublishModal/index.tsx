@@ -230,7 +230,7 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
           <PublishSlide lang={lang} />
         </ModalContent>
         <div className="buttons">
-          <button className="button save" onClick={close}>
+          <button className="save" onClick={close}>
             {saveButton}
           </button>
           <Mutation
@@ -246,7 +246,7 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
           >
             {publish => (
               <button
-                className="button publish"
+                className="publish"
                 onClick={() => {
                   publishArticle(publish)
                 }}

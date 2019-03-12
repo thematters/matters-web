@@ -43,23 +43,28 @@
 }
 
 .buttons {
-  display: flex;
-
-  & > .button {
-    @mixin flex-center-all;
-    cursor: pointer;
-    font-weight: 500;
-    flex-grow: 1;
-    height: 2.93rem;
+  & button {
+    width: 50%;
+    font-weight: var(--font-weight-medium);
+    height: 3rem;
   }
 
-  & > .disagree {
+  & button.disagree {
+    position: relative;
     color: var(--color-black);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin-left: var(--spacing-x-tight);
+
+    &:before {
+      @mixin border-top-grey;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      margin-left: var(--spacing-x-tight);
+    }
   }
 
-  & > .agree {
+  & button.agree {
     color: var(--color-white);
     background: var(--color-matters-green);
   }

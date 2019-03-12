@@ -24,7 +24,7 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
   }
 
   & > .left {
@@ -74,23 +74,28 @@
 }
 
 .buttons {
-  display: flex;
-
-  & > .button {
-    @mixin flex-center-all;
-    cursor: pointer;
-    font-weight: 500;
-    height: 2.93rem;
+  & button {
     width: 50%;
+    font-weight: var(--font-weight-medium);
+    height: 3rem;
   }
 
-  & > .save {
+  & button.save {
+    position: relative;
     color: var(--color-black);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin-left: var(--spacing-x-tight);
+
+    &:before {
+      @mixin border-top-grey;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      margin-left: var(--spacing-x-tight);
+    }
   }
 
-  & > .publish {
+  & button.publish {
     color: var(--color-white);
     background: var(--color-matters-green);
   }

@@ -8,6 +8,7 @@ import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { checkFormError } from '~/components/Form/Error'
 import { Mutation } from '~/components/GQL'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
@@ -301,7 +302,8 @@ export const SignUpInitForm: FC<Props> = ({
               type="submit"
               bgColor="green"
               disabled={isSubmitting}
-              style={{ width: 80 }}
+              style={{ minWidth: '5rem' }}
+              icon={isSubmitting ? <IconSpinner /> : null}
             >
               {signUpText}
             </Button>

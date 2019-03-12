@@ -7,6 +7,7 @@ import { ProfileAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import { translate } from '~/common/utils'
@@ -95,9 +96,15 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
             <Button
               type="submit"
               bgColor="green"
-              style={{ width: 80 }}
+              style={{ minWidth: '5rem' }}
               disabled={isSubmitting}
-              icon={<Icon id={ICON_SAVE.id} viewBox={ICON_SAVE.viewBox} />}
+              icon={
+                isSubmitting ? (
+                  <IconSpinner />
+                ) : (
+                  <Icon id={ICON_SAVE.id} viewBox={ICON_SAVE.viewBox} />
+                )
+              }
             >
               {save}
             </Button>
