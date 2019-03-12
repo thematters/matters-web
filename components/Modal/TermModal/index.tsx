@@ -7,7 +7,8 @@ import { Mutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
 import termStyles from '~/common/styles/utils/content.article.css'
-import { TOS } from '~/common/texts/tos'
+import Privacy from '~/common/texts/privacy'
+import ToS from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -61,7 +62,16 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         className="content"
         dangerouslySetInnerHTML={{
           __html: translate({
-            ...TOS,
+            ...ToS,
+            lang
+          })
+        }}
+      />
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{
+          __html: translate({
+            ...Privacy,
             lang
           })
         }}
