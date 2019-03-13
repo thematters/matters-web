@@ -94,6 +94,7 @@ const NoticeButton = ({
   const isDraft = headerState.type === 'draft'
   const buttonClasses = classNames({
     hasUnreadNotices,
+    unread: hasUnreadNotices,
     'u-sm-down-hide': isDraft
   })
 
