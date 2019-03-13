@@ -4,7 +4,7 @@ import { FC, useContext, useRef, useState } from 'react'
 
 import { LanguageContext } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
-import ModalHeader from '~/components/Modal/Header'
+import { Modal } from '~/components/Modal'
 
 import { KEYCODES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -81,7 +81,7 @@ const Container: FC<ContainerProps> = ({
           <div ref={node} className={modalClass}>
             <div className="container">
               {title && (
-                <ModalHeader closeable={closeable} title={interpret(title)} />
+                <Modal.Header closeable={closeable} title={interpret(title)} />
               )}
               {children({
                 close,

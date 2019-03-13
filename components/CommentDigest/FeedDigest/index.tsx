@@ -1,8 +1,7 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Form } from '~/components/Form'
+import CommentForm from '~/components/Form/CommentForm'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
@@ -15,21 +14,7 @@ import { FeedDigestComment } from './__generated__/FeedDigestComment'
 import styles from './styles.css'
 
 const fragments = {
-  comment: gql`
-    fragment FeedDigestComment on Comment {
-      ...BaseDigestComment
-      comments(input: { sort: oldest, first: 100 })
-        @include(if: $hasDescendantComments) {
-        edges {
-          cursor
-          node {
-            ...BaseDigestComment
-          }
-        }
-      }
-    }
-    ${commentFragments.base}
-  `
+  comment: commentFragments.feed
 }
 
 const ReplyTo = ({ user }: any) => (
@@ -90,7 +75,7 @@ const DescendantComment = ({
 
       <div className="content-wrap">
         {edit && (
-          <Form.CommentForm
+          <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
             articleMediaHash={comment.article.mediaHash || ''}
@@ -139,7 +124,7 @@ const FeedDigest = ({
 
       <div className="content-wrap">
         {edit && (
-          <Form.CommentForm
+          <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
             articleMediaHash={comment.article.mediaHash || ''}

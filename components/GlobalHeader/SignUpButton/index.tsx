@@ -8,7 +8,7 @@ export default () => (
         is="button"
         size="large"
         bgColor="green"
-        style={{ width: 80 }}
+        style={{ minWidth: '5rem' }}
         onClick={() => open()}
       >
         <Translate zh_hant="註冊" zh_hans="注册" />

@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 
-import { Modal } from '~/components'
+import LoginModal from '~/components/Modal/LoginModal'
+import PasswordModal from '~/components/Modal/PasswordModal'
+import SignUpModal from '~/components/Modal/SignUpModal'
+import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -30,14 +33,14 @@ const Anchor = () => {
     <>
       <div id="modal-anchor" className="container" />
       <ModalInstance modalId="loginModal" title="login">
-        {(props: ModalInstanceProps) => <Modal.LoginModal {...props} />}
+        {(props: ModalInstanceProps) => <LoginModal {...props} />}
       </ModalInstance>
       <ModalInstance modalId="signUpModal">
-        {(props: ModalInstanceProps) => <Modal.SignUpModal {...props} />}
+        {(props: ModalInstanceProps) => <SignUpModal {...props} />}
       </ModalInstance>
       <ModalInstance modalId="passwordResetModal">
         {(props: ModalInstanceProps) => (
-          <Modal.PasswordModal purpose="forget" {...props} />
+          <PasswordModal purpose="forget" {...props} />
         )}
       </ModalInstance>
       <ModalInstance
@@ -45,7 +48,7 @@ const Anchor = () => {
         title="termAndPrivacy"
         defaultCloseable={false}
       >
-        {(props: ModalInstanceProps) => <Modal.TermModal {...props} />}
+        {(props: ModalInstanceProps) => <TermModal {...props} />}
       </ModalInstance>
       {viewer.isAuthed && disagreedToS && <OpenedTermModal />}
       <style jsx>{styles}</style>

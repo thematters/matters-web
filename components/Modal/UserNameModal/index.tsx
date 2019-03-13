@@ -2,9 +2,9 @@ import { FC, useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
-import ModalContent from '~/components/Modal/Content'
 
 import { translate } from '~/common/utils'
 
@@ -16,7 +16,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.UserNameModal close={close} />
+ *   <UserNameModal close={close} />
  * ```
  *
  */
@@ -39,13 +39,13 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
     <>
       {step === 'ask' && (
         <>
-          <ModalContent>
+          <Modal.Content>
             {translate({
               zh_hant: '您的 Matters ID 僅能永久修改一次，確定要繼續嗎？',
               zh_hans: '您的 Matters ID 仅能永久修改一次，确定要继续吗？',
               lang
             })}
-          </ModalContent>
+          </Modal.Content>
           <div className="ask-buttons">
             <Button
               type="button"
@@ -68,20 +68,21 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
         </>
       )}
       {step !== 'ask' && (
-        <ModalContent>
+        <Modal.Content>
           {step === 'confirm' && (
             <UserNameChangeConfirmForm submitCallback={confirmCallback} />
           )}
           {step === 'complete' && (
             <ModalComplete
-              message={translate({
-                zh_hant: 'Matters ID 修改成功',
-                zh_hans: 'Matters ID 修改成功',
-                lang
-              })}
+              message={
+                <Translate
+                  zh_hant="Matters ID 修改成功"
+                  zh_hans="Matters ID 修改成功"
+                />
+              }
             />
           )}
-        </ModalContent>
+        </Modal.Content>
       )}
       <style jsx>{styles}</style>
     </>

@@ -1,12 +1,12 @@
-import { FC, useContext } from 'react'
+import { FC } from 'react'
 
-import { Form } from '~/components/Form'
+import LoginForm from '~/components/Form/LoginForm'
 import { Icon } from '~/components/Icon'
-import { LanguageContext } from '~/components/Language'
-import ModalContent from '~/components/Modal/Content'
+import { Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
+import { TextIcon } from '~/components/TextIcon'
 
-import { translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 
 import styles from './styles.css'
@@ -17,58 +17,49 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.LoginModal close={close} />
+ *   <LoginModal close={close} />
  * ```
  *
  */
 
-const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
-  const { lang } = useContext(LanguageContext)
-
-  const SignUpModalSwitch = () => (
-    <ModalSwitch modalId="signUpModal">
-      {(open: any) => (
-        <>
-          <span className="link" onClick={open}>
-            {translate({
-              zh_hant: '註冊',
-              zh_hans: '注册',
-              lang
-            })}
+const SignUpModalSwitch = () => (
+  <ModalSwitch modalId="signUpModal">
+    {(open: any) => (
+      <button type="button" onClick={open}>
+        <TextIcon
+          icon={
             <Icon
-              style={{ width: 16, hieght: 10, marginLeft: '0.25rem' }}
+              style={{ width: 16, hieght: 10 }}
               id={ICON_ARROW.id}
               viewBox={ICON_ARROW.viewBox}
             />
-          </span>
-          <style jsx>{styles}</style>
-        </>
-      )}
-    </ModalSwitch>
-  )
+          }
+          color="green"
+          size="md"
+          textPlacement="left"
+        >
+          <Translate zh_hant="註冊" zh_hans="注册" />
+        </TextIcon>
+      </button>
+    )}
+  </ModalSwitch>
+)
 
-  const Footer = () => (
-    <>
-      <div className="footer">
-        {translate({
-          zh_hant: '沒有帳號',
-          zh_hans: '没有帐号',
-          lang
-        })}
-        ？
-        <SignUpModalSwitch />
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
+const Footer = () => (
+  <footer>
+    <Translate zh_hant="沒有帳號？" zh_hans="没有帐号？" />
+    <SignUpModalSwitch />
 
+    <style jsx>{styles}</style>
+  </footer>
+)
+
+const LoginModal: FC<ModalInstanceProps> = ({ close }) => {
   return (
-    <ModalContent>
-      <Form.LoginForm purpose="modal" submitCallback={close} />
-      <hr className="divider" />
+    <Modal.Content>
+      <LoginForm purpose="modal" submitCallback={close} />
       <Footer />
-      <style jsx>{styles}</style>
-    </ModalContent>
+    </Modal.Content>
   )
 }
 

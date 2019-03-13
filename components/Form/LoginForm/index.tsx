@@ -6,6 +6,7 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { checkFor, Mutation } from '~/components/GQL'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
@@ -20,7 +21,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.LoginForm
+ *   <LoginForm
  *     extraClass={[]}
  *     purpose="modal"
  *     submitCallback={()=> {}}
@@ -160,8 +161,9 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             <Button
               type="submit"
               bgColor="green"
-              style={{ width: 80 }}
+              style={{ minWidth: '5rem' }}
               disabled={isSubmitting}
+              icon={isSubmitting ? <IconSpinner /> : null}
             >
               {loginText}
             </Button>
@@ -200,9 +202,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         .then((result: any) => {
           if (submitCallback) {
             submitCallback()
-          } else {
-            redirectToTarget()
           }
+          redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {
           if (

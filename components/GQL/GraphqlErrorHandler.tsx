@@ -105,10 +105,6 @@ export const MutationErrorHandler = ({
   mutateFn: MutationFn
   children: MutationProps['children']
 }) => {
-  if (result.error) {
-    checkError(result.error)
-  }
-
   const mutateWithCatch: MutationFn = async options => {
     try {
       const mutationResult = await mutateFn(options)

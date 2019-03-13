@@ -8,6 +8,7 @@ import { Mutation } from '~/components/GQL'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -81,7 +82,13 @@ const InnerForm = ({
           disabled={
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
-          icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
+          icon={
+            isSubmitting ? (
+              <IconSpinner />
+            ) : (
+              <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
+            )
+          }
         >
           {translate({ zh_hant: '送出', zh_hans: '送出', lang })}
         </Button>
