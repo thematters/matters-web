@@ -2,6 +2,7 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'
+import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
@@ -10,7 +11,6 @@ import { UserDigest } from '~/components/UserDigest'
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
-import { FeedDigestComment } from './__generated__/FeedDigestComment'
 import styles from './styles.css'
 
 const fragments = {
