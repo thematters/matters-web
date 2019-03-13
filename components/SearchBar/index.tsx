@@ -108,6 +108,7 @@ const BaseSearchBar: React.FC<
                 value={values.q}
                 onChange={handleChange}
                 onFocus={() => !values.q && showDropdown()}
+                onClick={() => !values.q && showDropdown()}
                 onBlur={hideDropdown}
               />
               <SearchButton />
