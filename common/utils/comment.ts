@@ -1,14 +1,23 @@
 import _get from 'lodash/get'
 
-export const filterComments = (comments: any[]) =>
+export const filterComments = (
+  comments: any[],
+  { inactive = true, pinned }: { inactive?: boolean; pinned?: boolean } = {}
+) =>
   comments.filter(comment => {
-    if (comment.state === 'active') {
-      return true
+    let exclude = false
+
+    if (pinned && comment.pinned) {
+      exclude = true
     }
 
-    if (_get(comment, 'comments.edges.length', 0) > 0) {
-      return true
+    if (
+      inactive &&
+      comment.state !== 'active' &&
+      _get(comment, 'comments.edges.length', 0) <= 0
+    ) {
+      exclude = true
     }
 
-    return false
+    return !exclude
   })
