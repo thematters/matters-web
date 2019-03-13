@@ -8,7 +8,6 @@ const trackAs = (type: string) => (
   const event = new CustomEvent(ANALYTICS, {
     detail: { args, type }
   })
-  console.log({ type })
   // dispatch event
   window.dispatchEvent(event)
   // }
