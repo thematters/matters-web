@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { GatewayContext } from '~/components/Contexts/Gateway'
 import { Icon } from '~/components/Icon'
@@ -19,10 +19,16 @@ import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import styles from './styles.css'
 
 const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
-  const { gateways } = useContext(GatewayContext)
+  const { gateways, startCheck } = useContext(GatewayContext)
 
   const [expand, setExpand] = useState(false)
   const [explanation, setExplation] = useState(false)
+
+  useEffect(() => {
+    if (gateways.length === 0) {
+      startCheck()
+    }
+  }, [])
 
   return (
     <div className="dropdown-container">
