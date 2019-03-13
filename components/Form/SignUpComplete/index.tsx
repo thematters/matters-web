@@ -8,7 +8,7 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 import styles from './styles.css'
 
 const SignUpComplete = () => (
-  <div className="l-col-4 l-col-sm-6 l-col-md-6 l-col-lg-8 complete">
+  <div className="complete">
     <img src={ICON_AVATAR_GREEN} />
 
     <div className="content">

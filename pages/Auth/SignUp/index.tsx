@@ -54,7 +54,11 @@ const SignUp = () => {
               submitCallback={signUpProfileCallback}
             />
           )}
-          {step === 'complete' && <SignUpComplete />}
+          {step === 'complete' && (
+            <div className={classNames(childClass)}>
+              <SignUpComplete />
+            </div>
+          )}
         </article>
       </main>
       <style jsx>{styles}</style>
