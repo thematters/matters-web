@@ -56,9 +56,22 @@ class Editor extends React.Component<Props, State> {
     this.resetLinkInputPlaceholder()
   }
 
-  // public componentDidUpdate() {
-  //   this.attachQuillRefs()
-  // }
+  public componentDidUpdate(prevProps: Props) {
+    // this.attachQuillRefs()
+    // this.resetLinkInputPlaceholder()
+
+    if (prevProps.draft.id === this.props.draft.id) {
+      return
+    }
+
+    this.setState({
+      content: this.props.draft.content || '',
+      sideToolbar: {
+        show: false,
+        top: 0
+      }
+    })
+  }
 
   public attachQuillRefs = () => {
     if (

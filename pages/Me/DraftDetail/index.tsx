@@ -64,7 +64,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             <article className="l-col-4 l-col-md-5 l-col-lg-8">
               {loading && <Placeholder.ArticleDetail />}
-              {data && data.node && (
+              {!loading && data && data.node && (
                 <>
                   <PublishState draft={data.node} />
                   <DraftContent draft={data.node} />
