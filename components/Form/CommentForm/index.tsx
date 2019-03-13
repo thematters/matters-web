@@ -156,7 +156,7 @@ const CommentForm = ({
             window.dispatchEvent(
               new CustomEvent('addToast', {
                 detail: {
-                  color: 'white',
+                  color: 'green',
                   content: (
                     <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
                   )

@@ -52,7 +52,8 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
 
         const filteredPinnedComments = filterComments(pinnedComments)
         const filteredAllComments = filterComments(
-          (edges || []).map(({ node }: { node: any }) => node)
+          (edges || []).map(({ node }: { node: any }) => node),
+          { pinned: true }
         )
 
         return (

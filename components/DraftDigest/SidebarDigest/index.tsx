@@ -20,7 +20,7 @@ const fragments = {
       slug
       wordCount
       scheduledAt
-      createdAt
+      updatedAt
       publishState
     }
   `
@@ -41,7 +41,7 @@ const SidebarDigest = ({
   draft: SidebarDigest
   refetchQueries?: PureQueryOptions[]
 }) => {
-  const { id, title, publishState, createdAt, slug, wordCount } = draft
+  const { id, title, publishState, updatedAtF, slug, wordCount } = draft
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
     page: 'draftDetail',
@@ -65,7 +65,7 @@ const SidebarDigest = ({
 
         <div>
           <footer className="actions">
-            <DateTime date={createdAt} type="relative" />
+            <DateTime date={updatedAtF} type="relative" />
             <IconDotDivider />
             <Translate
               zh_hans={`${numFormat(wordCount)} 字`}
