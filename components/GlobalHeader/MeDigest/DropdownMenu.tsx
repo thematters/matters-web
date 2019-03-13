@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import Router from 'next/router'
 import { useContext } from 'react'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
 import { Mutation } from '~/components/GQL'
+import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { redirectToTarget, toPath, translate } from '~/common/utils'
 import ICON_GIFT from '~/static/icons/gift.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg?sprite'
@@ -146,8 +146,25 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           {logout => (
             <button
               type="button"
-              onClick={() => {
-                logout().then(() => Router.push(PATHS.HOME.href, PATHS.HOME.as)) // redirect to home after logout
+              onClick={async () => {
+                try {
+                  await logout()
+                  redirectToTarget()
+                } catch (e) {
+                  window.dispatchEvent(
+                    new CustomEvent('addToast', {
+                      detail: {
+                        color: 'red',
+                        content: (
+                          <Translate
+                            zh_hant="登出失敗，請重試"
+                            zh_hans="登出失败，请重试"
+                          />
+                        )
+                      }
+                    })
+                  )
+                }
               }}
             >
               <TextIcon

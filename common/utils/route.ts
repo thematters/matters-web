@@ -124,13 +124,12 @@ export const getQuery = ({
 }
 
 export const redirectToTarget = () => {
-  const target = _get(Router, 'query.target')
-
-  if (target && process.browser) {
-    return (window.location.href = decodeURIComponent(target))
-  } else {
-    return Router.push(PATHS.HOME.href, PATHS.HOME.as)
+  if (!process.browser) {
+    return
   }
+
+  const target = _get(Router, 'query.target') || '/'
+  return (window.location.href = decodeURIComponent(target))
 }
 
 export const redirectToLogin = () => {
