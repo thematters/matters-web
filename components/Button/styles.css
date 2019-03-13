@@ -116,33 +116,45 @@
   color: var(--color-white);
   background: var(--color-matters-gold);
 
-  &:hover {
-    background: var(--color-matters-gold-hover);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-matters-gold-hover);
+    }
   }
 }
 .bg-green {
   color: var(--color-white);
   background: var(--color-matters-green);
 
-  &:hover {
-    background: var(--color-matters-green-hover);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-matters-green-hover);
+    }
   }
 }
 .bg-green-lighter {
   color: var(--color-matters-green);
   background: var(--color-bg-green);
 
-  &:hover {
-    color: var(--color-white);
-    background: var(--color-matters-green);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      color: var(--color-white);
+      background: var(--color-matters-green);
+    }
   }
 }
 .bg-red {
   color: var(--color-white);
   background: var(--color-red);
 
-  &:hover {
-    background: var(--color-red-hover);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-red-hover);
+    }
   }
 }
 .bg-white {
@@ -164,18 +176,24 @@
   color: var(--color-matters-green);
   border-color: var(--color-matters-green);
 
-  &:hover {
-    color: var(--color-white);
-    background: var(--color-matters-green);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      color: var(--color-white);
+      background: var(--color-matters-green);
+    }
   }
 }
 .outline-black {
   color: var(--color-black);
   border-color: var(--color-black);
 
-  &:hover {
-    color: var(--color-white);
-    background: var(--color-black);
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      color: var(--color-white);
+      background: var(--color-black);
+    }
   }
 }
 .outline-grey {

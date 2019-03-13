@@ -1,12 +1,9 @@
 .complete {
-  & > .message {
-    @mixin flex-center-all;
-    font-size: var(--font-size-xl);
-  }
+  & .hint {
+    margin: var(--spacing-tight) 0rem;
 
-  & > .hint {
-    @mixin flex-center-all;
+    font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
-    padding: var(--spacing-tight) 0rem;
+    text-align: center;
   }
 }
