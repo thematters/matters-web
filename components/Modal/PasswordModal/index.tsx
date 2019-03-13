@@ -7,6 +7,7 @@ import {
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
+import { ViewerContext } from '~/components/Viewer'
 
 import { translate } from '~/common/utils'
 
@@ -25,6 +26,7 @@ const PasswordModal: FC<
   ModalInstanceProps & { purpose: 'forget' | 'change' }
 > = ({ purpose }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
 
   const [step, setStep] = useState('request')
 
@@ -35,7 +37,8 @@ const PasswordModal: FC<
           ? translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })
           : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
       prev: 'login',
-      next: 'reset'
+      next: 'reset',
+      email: viewer.info.email
     },
     reset: {
       title:
