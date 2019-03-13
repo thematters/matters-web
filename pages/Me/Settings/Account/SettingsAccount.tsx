@@ -88,7 +88,7 @@ const SettingsAccount = () => {
           </div>
           <EditButton
             modalId="userNameModal"
-            disabled={viewer.info.userNameEditable}
+            disabled={!viewer.info.userNameEditable}
           />
         </section>
       </section>
