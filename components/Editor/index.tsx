@@ -145,9 +145,10 @@ class Editor extends React.Component<Props, State> {
   public render() {
     const { draft, onSave } = this.props
     const isPending = draft.publishState === 'pending'
+    const isPublished = draft.publishState === 'published'
     const containerClasses = classNames({
       container: true,
-      'u-area-disable': isPending
+      'u-area-disable': isPending || isPublished
     })
 
     return (
@@ -156,7 +157,7 @@ class Editor extends React.Component<Props, State> {
           {({ lang }) => (
             <div className={containerClasses}>
               <ReactQuill
-                readOnly={isPending}
+                readOnly={isPending || isPublished}
                 theme="bubble"
                 modules={config.modules}
                 formats={config.formats}

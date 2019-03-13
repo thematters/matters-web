@@ -40,9 +40,10 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
   const tags = draft.tags || []
   const hasTags = tags.length > 0
   const isPending = draft.publishState === 'pending'
+  const isPublished = draft.publishState === 'published'
   const tagsContainerClasses = classNames({
     'tags-container': true,
-    'u-area-disable': isPending
+    'u-area-disable': isPending || isPublished
   })
 
   return (

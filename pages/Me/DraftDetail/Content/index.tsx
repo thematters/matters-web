@@ -69,6 +69,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
   const isPending = draft.publishState === 'pending'
+  const isPublished = draft.publishState === 'published'
 
   useEffect(() => {
     setTitle(draft.title)
@@ -78,7 +79,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     <Mutation mutation={UPDATE_DRAFT}>
       {updateDraft => (
         <>
-          <header className={isPending ? 'u-area-disable' : ''}>
+          <header className={isPending || isPublished ? 'u-area-disable' : ''}>
             <input
               placeholder={translate({
                 zh_hant: '請輸入標題…',
