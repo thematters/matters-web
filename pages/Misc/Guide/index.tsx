@@ -13,7 +13,7 @@ export default () => {
 
   return (
     <main>
-      <Head title={{ zh_hant: '社區约章', zh_hans: '社区约章' }} />
+      <Head title={{ zh_hant: '社區約章', zh_hans: '社区约章' }} />
 
       <section className="l-row">
         <div className="l-col-4 l-col-md-1 l-col-lg-2">
@@ -21,7 +21,7 @@ export default () => {
         </div>
         <div className="l-col-4 l-col-md-6 l-col-lg-8">
           <PageHeader
-            pageTitle={<Translate zh_hant="社區约章" zh_hans="社区约章" />}
+            pageTitle={<Translate zh_hant="社區約章" zh_hans="社区约章" />}
           />
           <article
             dangerouslySetInnerHTML={{
