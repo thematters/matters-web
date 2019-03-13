@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import Document, {
   Head,
   Main,
@@ -8,9 +7,7 @@ import Document, {
 import React from 'react'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
-const {
-  publicRuntimeConfig: { GA_TRACKING_ID }
-} = getConfig()
+import { GA_TRACKING_ID } from '~/common/enums'
 
 interface MattersDocumentProps {
   spriteContent: string

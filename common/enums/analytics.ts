@@ -1,3 +1,5 @@
+export const GA_TRACKING_ID = 'UA-127561991-1'
+
 export const ANALYTICS = 'analytics'
 
 export const ANALYTIC_TYPES = {
@@ -10,7 +12,11 @@ export const ANALYTICS_EVENTS = {
   CLICK_FEED: 'click-feed',
   LOAD_MORE: 'load-more',
   DISPLAY_ALL: 'display-all',
-  SHUFFLE_AUTHOR: 'shuffle-author'
+  SHUFFLE_AUTHOR: 'shuffle-author',
+  ENTER_ARTICLE: 'enter-article',
+  LEAVE_ARTICLE: 'leave-article',
+  FINISH_ARTICLE: 'finish-article',
+  OPEN_COMMENTS: 'open-comments'
 }
 
 export const FEED_TYPE = {

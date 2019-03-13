@@ -29,7 +29,10 @@ Router.onRouteChangeComplete = (url: string) => {
 }
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
-  useEffect(analytics.identifyUser)
+  useEffect(() => {
+    analytics.identifyUser()
+  }, [])
+
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
   const { type: headerType } = headerState
