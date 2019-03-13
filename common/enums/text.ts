@@ -29,9 +29,9 @@ export const TEXT: { [key: string]: any } = {
     untitle: '未命名',
     changeEmail: '修改電子信箱',
     changeUserName: '修改 Matters ID',
-    accountFrozen: '賬戶已凍結',
-    accountArchived: '賬戶已註銷',
-    accountBanned: '賬戶已禁言',
+    accountFrozen: '帳戶已凍結',
+    accountArchived: '帳戶已註銷',
+    accountBanned: '帳戶已禁言',
     publish: '發佈文章'
   },
 

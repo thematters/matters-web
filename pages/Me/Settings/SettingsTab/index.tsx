@@ -13,7 +13,7 @@ const SettingsTabs: React.FC<WithRouterProps> = ({ router }) => {
       <Tabs.Tab selected={pathname === PATHS.ME_SETTINGS_ACCOUNT.href}>
         <Link {...PATHS.ME_SETTINGS_ACCOUNT}>
           <a>
-            <Translate zh_hant="賬戶設定" zh_hans="账户设定" />
+            <Translate zh_hant="帳戶設定" zh_hans="账户设定" />
           </a>
         </Link>
       </Tabs.Tab>

@@ -51,7 +51,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="回復了你的評論" zh_hans="回复了你的评论" />
+          <Translate zh_hant="回覆了你的評論" zh_hans="回复了你的评论" />
         </h4>
 
         <NoticeComment comment={notice.target} />

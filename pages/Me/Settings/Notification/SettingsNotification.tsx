@@ -93,7 +93,7 @@ const settingsMap = {
   comment: [
     {
       key: 'comment',
-      title: <Translate zh_hant="評論和回復" zh_hans="评论和回复" />
+      title: <Translate zh_hant="評論和回覆" zh_hans="评论和回复" />
     },
     {
       key: 'commentPinned',
