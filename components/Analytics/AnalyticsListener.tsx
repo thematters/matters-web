@@ -42,7 +42,7 @@ const handleAnalytics = ({
   // if we have an event of type identify
   if (type === ANALYTIC_TYPES.IDENTIFY) {
     // logged in
-    if ('id' in user && 'info' in user) {
+    if (user && 'id' in user && 'info' in user) {
       const { info, id } = user as AnalyticsUser
       window.analytics.identify(
         id,
