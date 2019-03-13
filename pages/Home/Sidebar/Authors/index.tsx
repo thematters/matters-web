@@ -23,7 +23,9 @@ const SIDEBAR_AUTHORS = gql`
     viewer {
       id
       recommendation {
-        authors(input: { first: 5, filter: { random: true } }) {
+        authors(
+          input: { first: 5, filter: { random: true, followed: false } }
+        ) {
           edges {
             cursor
             node {

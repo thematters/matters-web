@@ -162,8 +162,8 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
                 onClick={() => search && showDropdown()}
                 value={search}
                 placeholder={translate({
-                  zh_hans: '增加標籤…',
-                  zh_hant: '增加标签…',
+                  zh_hant: '增加標籤…',
+                  zh_hans: '增加标签…',
                   lang
                 })}
               />
