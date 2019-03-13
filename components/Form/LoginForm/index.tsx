@@ -7,7 +7,7 @@ import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { checkFor, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
@@ -203,6 +203,14 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           if (submitCallback) {
             submitCallback()
           }
+          window.dispatchEvent(
+            new CustomEvent('addToast', {
+              detail: {
+                color: 'green',
+                content: <Translate zh_hant="登入成功" zh_hans="登入成功" />
+              }
+            })
+          )
           redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {
