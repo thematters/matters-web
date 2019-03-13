@@ -15,7 +15,7 @@ const Weibo = () => (
       const text = window.document.title
       const cover = dom.$('meta[property="og:image').getAttribute('content')
       const shareUrl =
-        'http://service.weibo.com/share/share.php?' +
+        'http://service.weibo.com/share/share.php' +
         objectToGetParams({
           url,
           title: text,
