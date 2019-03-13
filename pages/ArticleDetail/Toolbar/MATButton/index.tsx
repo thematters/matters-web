@@ -18,6 +18,9 @@ const fragments = {
   article: gql`
     fragment MATArticleDetail on Article {
       id
+      author {
+        id
+      }
       MAT
       hasAppreciate
       appreciateLimit
@@ -41,7 +44,10 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
   const viewer = useContext(ViewerContext)
   const viewerMAT = _get(viewer, 'status.MAT.total', 0)
   const canAppreciate =
-    (article.appreciateLeft > 0 && viewerMAT > 0 && !viewer.isInactive) ||
+    (article.appreciateLeft > 0 &&
+      viewerMAT > 0 &&
+      !viewer.isInactive &&
+      article.author.id !== viewer.id) ||
     !viewer.isAuthed
   const containerClasses = classNames({
     container: true,

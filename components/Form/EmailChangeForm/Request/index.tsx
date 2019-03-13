@@ -87,7 +87,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            disabled={true}
+            disabled
           />
           <Form.Input
             type="text"

@@ -85,7 +85,8 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     isSubmitting,
     handleBlur,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    setFieldError
   }: {
     [key: string]: any
   }) => {
@@ -133,6 +134,19 @@ export const PasswordChangeRequestForm: FC<Props> = ({
                 email={values.email}
                 lang={lang}
                 type="password_reset"
+                onError={error => {
+                  if (!error || !error.graphQLErrors) {
+                    return
+                  }
+                  const emailNotFoundHint = checkFormError(
+                    ERROR_CODES.USER_EMAIL_NOT_FOUND,
+                    error.graphQLErrors,
+                    lang
+                  )
+                  if (emailNotFoundHint) {
+                    setFieldError('code', emailNotFoundHint)
+                  }
+                }}
               />
             }
             values={values}
