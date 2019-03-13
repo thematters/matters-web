@@ -152,7 +152,8 @@ export const SignUpInitForm: FC<Props> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
+    setFieldError
   }: {
     [key: string]: any
   }) => {
@@ -235,6 +236,19 @@ export const SignUpInitForm: FC<Props> = ({
                 email={values.email}
                 lang={lang}
                 type="register"
+                onError={error => {
+                  if (!error || !error.graphQLErrors) {
+                    return
+                  }
+                  const emailExistsHint = checkFormError(
+                    ERROR_CODES.USER_EMAIL_EXISTS,
+                    error.graphQLErrors,
+                    lang
+                  )
+                  if (emailExistsHint) {
+                    setFieldError('code', emailExistsHint)
+                  }
+                }}
               />
             }
             values={values}

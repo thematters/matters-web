@@ -26,6 +26,7 @@ interface Props {
   email: string
   lang: Language
   type: 'register' | 'email_reset' | 'password_reset' | 'email_verify'
+  onError?: (error: any) => any
 }
 
 export const MUTATION_SEND_CODE = gql`
@@ -37,9 +38,8 @@ const second = 1000
 
 const duration = 60 * second
 
-const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
+const SendCodeButton: FC<Props> = ({ email, lang, type, onError }) => {
   const [sent, setSent] = useState(false)
-
   const [timeLeft, setTimeLeft] = useState<number | null>(null)
 
   const timer: { [key: string]: any } = timeLeft
@@ -54,17 +54,19 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
       return undefined
     }
 
-    setTimeLeft(duration)
     send({
       variables: { input: { email: params.email, type } }
     })
       .then((result: any) => {
+        setTimeLeft(duration)
         if (sent === false) {
           setSent(true)
         }
       })
-      .catch((result: any) => {
-        // TODO: Handle error
+      .catch((error: any) => {
+        if (onError) {
+          onError(error)
+        }
       })
   }
 
