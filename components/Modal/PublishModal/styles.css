@@ -7,6 +7,14 @@
 .image-container {
   position: relative;
 
+  & .image {
+    &::after {
+      content: '';
+      display: block;
+      padding-bottom: 60%;
+    }
+  }
+
   & .arrow {
     position: absolute;
     top: 50%;

@@ -27,7 +27,7 @@ const Images = ({ src, slide, setSlide }: any) => {
 
   return (
     <div className="image-container">
-      <img className="image" src={src} />
+      <div className="image" style={{ backgroundImage: `url(${src})` }} />
       <button
         type="button"
         className="arrow left"
