@@ -32,6 +32,7 @@ const APPRECIATE_ARTICLE = gql`
       id
       MAT
       hasAppreciate
+      appreciateLeft
     }
   }
 `
@@ -60,6 +61,7 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
           id: article.id,
           MAT: article.MAT + 1,
           hasAppreciate: true,
+          appreciateLeft: article.appreciateLeft - 1,
           __typename: 'Article'
         }
       }}
