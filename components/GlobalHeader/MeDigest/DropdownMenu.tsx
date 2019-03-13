@@ -7,8 +7,8 @@ import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
-import { PATHS } from '~/common/enums'
-import { redirectToTarget, toPath, translate } from '~/common/utils'
+import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { analytics, redirectToTarget, toPath, translate } from '~/common/utils'
 import ICON_GIFT from '~/static/icons/gift.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg?sprite'
@@ -149,6 +149,9 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
               onClick={async () => {
                 try {
                   await logout()
+                  analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
+                    id: viewer.id
+                  })
                   redirectToTarget()
                 } catch (e) {
                   window.dispatchEvent(

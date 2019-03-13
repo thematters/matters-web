@@ -43,18 +43,18 @@ const handleAnalytics = ({
   if (type === ANALYTIC_TYPES.IDENTIFY) {
     // logged in
     if (user && 'id' in user && 'info' in user) {
-      const { info, id } = user as AnalyticsUser
+      const { info, id, userName } = user as AnalyticsUser
       window.analytics.identify(
         id,
         {
-          email: info.email
+          email: info.email,
+          username: userName
         },
         ...args
       )
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id
       })
-      window.analytics.identify(id)
     } else {
       // visitor
       window.analytics.identify(args)
@@ -74,6 +74,7 @@ AnalyticsListener.fragments = {
   user: gql`
     fragment AnalyticsUser on User {
       id
+      userName
       info {
         email
       }
