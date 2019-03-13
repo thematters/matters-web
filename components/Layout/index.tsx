@@ -44,6 +44,7 @@ export const Layout: React.FC<LayoutProps> & {
       <LanguageProvider>
         <HeaderContextProvider>
           <GatewayContextProvider>
+            <AnalyticsListener user={user} />
             <Head />
 
             <GlobalHeader user={user} />

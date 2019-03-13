@@ -4,7 +4,8 @@ import _get from 'lodash/get'
 import { Icon, TextIcon } from '~/components'
 import { DrawerConsumer } from '~/components/Drawer'
 
-import { numAbbr } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, numAbbr } from '~/common/utils'
 import ICON_COMMENT_REGULAR from '~/static/icons/comment-regular.svg?sprite'
 
 import { CommentButtonArticle } from './__generated__/CommentButtonArticle'
@@ -12,6 +13,7 @@ import { CommentButtonArticle } from './__generated__/CommentButtonArticle'
 const fragments = {
   article: gql`
     fragment CommentButtonArticle on Article {
+      id
       comments(input: { first: 0 }) {
         totalCount
       }
@@ -31,7 +33,16 @@ const CommentButton = ({
       <button
         type="button"
         aria-label="查看評論"
-        onClick={() => (opened ? close() : open())}
+        onClick={() => {
+          if (opened) {
+            close()
+          } else {
+            open()
+            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+              entrance: article.id
+            })
+          }
+        }}
       >
         <TextIcon
           icon={

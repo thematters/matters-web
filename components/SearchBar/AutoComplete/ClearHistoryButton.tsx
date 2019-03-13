@@ -75,7 +75,22 @@ const ClearHistoryButton = () => (
       <button
         type="button"
         className="clear-history-btn"
-        onClick={() => clear()}
+        onClick={async () => {
+          await clear()
+          window.dispatchEvent(
+            new CustomEvent('addToast', {
+              detail: {
+                color: 'green',
+                content: (
+                  <Translate
+                    zh_hant="已清空搜尋紀錄"
+                    zh_hans="已清空搜索纪录"
+                  />
+                )
+              }
+            })
+          )
+        }}
       >
         <Translate zh_hant="清空" zh_hans="清空" />
         <style jsx>{styles}</style>

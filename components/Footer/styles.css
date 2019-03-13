@@ -13,9 +13,8 @@
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
-  line-height: 1.71428571;
+}
 
-  & :hover {
-    color: var(--color-matters-green);
-  }
+a.item:hover {
+  color: var(--color-matters-green);
 }

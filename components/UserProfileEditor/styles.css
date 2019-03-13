@@ -45,7 +45,6 @@
   color: rgba(51, 51, 51, 0.2);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  word-break: break-word;
 
   @media (--sm-up) {
     font-size: var(--font-size-xl);
@@ -65,5 +64,5 @@
 }
 
 .buttons {
-  margin-top: var(--spacing-default)
+  margin-top: var(--spacing-default);
 }

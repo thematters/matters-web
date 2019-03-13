@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
@@ -69,6 +69,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
   const isPending = draft.publishState === 'pending'
+
+  useEffect(() => {
+    setTitle(draft.title)
+  }, [draft.title])
 
   return (
     <Mutation mutation={UPDATE_DRAFT}>

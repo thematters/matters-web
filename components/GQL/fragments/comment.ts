@@ -4,30 +4,47 @@ import DropdownActions from '~/components/CommentDigest/DropdownActions'
 import FooterActions from '~/components/CommentDigest/FooterActions'
 import { UserDigest } from '~/components/UserDigest'
 
-export default {
-  base: gql`
-    fragment BaseDigestComment on Comment {
+const base = gql`
+  fragment BaseDigestComment on Comment {
+    id
+    state
+    content
+    pinned
+    author {
+      ...UserDigestMiniUser
+    }
+    parentComment {
       id
-      state
-      content
-      pinned
+    }
+    replyTo {
+      id
       author {
         ...UserDigestMiniUser
       }
-      parentComment {
-        id
-      }
-      replyTo {
-        id
-        author {
-          ...UserDigestMiniUser
+    }
+    ...DigestActionsComment
+    ...DropdownActionsComment
+  }
+  ${UserDigest.Mini.fragments.user}
+  ${FooterActions.fragments.comment}
+  ${DropdownActions.fragments.comment}
+`
+
+export default {
+  base,
+  feed: gql`
+    fragment FeedDigestComment on Comment {
+      ...BaseDigestComment
+      comments(input: { sort: oldest, first: 100 })
+        @include(if: $hasDescendantComments) {
+        edges {
+          cursor
+          node {
+            ...BaseDigestComment
+          }
         }
       }
-      ...DigestActionsComment
-      ...DropdownActionsComment
     }
-    ${UserDigest.Mini.fragments.user}
-    ${FooterActions.fragments.comment}
-    ${DropdownActions.fragments.comment}
+    ${base}
   `
 }

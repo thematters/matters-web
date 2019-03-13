@@ -81,7 +81,6 @@
 .name {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  word-break: break-word;
 
   @media (--sm-up) {
     font-size: var(--font-size-xl);

@@ -5,8 +5,7 @@ import { QueryResult } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
 import { Query } from '~/components/GQL'
-import ModalContent from '~/components/Modal/Content'
-import ModalHeader from '~/components/Modal/Header'
+import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -95,7 +94,7 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
 
             return (
               <>
-                <ModalHeader
+                <Modal.Header
                   title={
                     <Translate
                       zh_hant={`${totalCount} 人讚賞了文章`}
@@ -103,7 +102,7 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                     />
                   }
                 />
-                <ModalContent spacing="none" layout="full-width">
+                <Modal.Content spacing="none" layout="full-width">
                   <InfiniteScroll
                     hasNextPage={pageInfo.hasNextPage}
                     loadMore={loadMore}
@@ -134,7 +133,7 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                       <style jsx>{styles}</style>
                     </ul>
                   </InfiniteScroll>
-                </ModalContent>
+                </Modal.Content>
               </>
             )
           }}

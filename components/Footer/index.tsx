@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -8,8 +7,6 @@ import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
-
-const linkClass = classNames('item', 'item-link')
 
 const BaseLink = ({
   href,
@@ -22,7 +19,7 @@ const BaseLink = ({
 }) => (
   <>
     <Link href={href} as={as}>
-      <a className={linkClass}>{text}</a>
+      <a className="item">{text}</a>
     </Link>
     <style jsx>{styles}</style>
   </>
@@ -30,6 +27,7 @@ const BaseLink = ({
 
 export const Footer = () => {
   const { lang } = useContext(LanguageContext)
+  const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
@@ -63,7 +61,7 @@ export const Footer = () => {
         as={'/'}
         text={translate({ zh_hant: '下載 App', zh_hans: '下载 App', lang })}
       /> */}
-      <p className="item">© 2019 Matters</p>
+      <p className="item">© {year} Matters</p>
       <style jsx>{styles}</style>
     </footer>
   )

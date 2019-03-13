@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Form } from '~/components/Form'
+import LoginForm from '~/components/Form/LoginForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
@@ -32,7 +32,7 @@ const Login = () => {
         <Head title={{ zh_hant: '登入', zh_hans: '登入' }} />
 
         <article className={containerClass}>
-          <Form.LoginForm extraClass={formClass} purpose="page" />
+          <LoginForm extraClass={formClass} purpose="page" />
         </article>
       </main>
       <style jsx>{styles}</style>

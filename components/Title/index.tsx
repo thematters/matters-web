@@ -3,7 +3,14 @@ import React from 'react'
 
 import styles from './styles.css'
 
-type TitleType = 'feature' | 'article' | 'page' | 'feed' | 'modal' | 'sidebar'
+type TitleType =
+  | 'feature'
+  | 'article'
+  | 'page'
+  | 'feed'
+  | 'modal'
+  | 'modal-headline'
+  | 'sidebar'
 type TitleIs = 'h1' | 'h2' | 'h3' | 'p' | 'span'
 
 interface TitleProps {

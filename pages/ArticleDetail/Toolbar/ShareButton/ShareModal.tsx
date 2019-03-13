@@ -2,7 +2,7 @@ import _get from 'lodash/get'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
-import ModalContent from '~/components/Modal/Content'
+import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 
@@ -22,7 +22,7 @@ const ShareModal = () => {
   return (
     <ModalInstance modalId="shareModal" layout="small">
       {(props: ModalInstanceProps) => (
-        <ModalContent spacing="none" layout="full-width">
+        <Modal.Content spacing="none" layout="full-width">
           <>
             <div className="socials-container">
               <div className="left">
@@ -63,7 +63,7 @@ const ShareModal = () => {
 
             <style jsx>{styles}</style>
           </>
-        </ModalContent>
+        </Modal.Content>
       )}
     </ModalInstance>
   )

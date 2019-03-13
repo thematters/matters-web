@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { CommentDigest } from '~/components/CommentDigest'
+import commentFragments from '../fragments/comment'
 
 export default gql`
   query ArticleComments(
@@ -30,5 +30,5 @@ export default gql`
       }
     }
   }
-  ${CommentDigest.Feed.fragments.comment}
+  ${commentFragments.feed}
 `

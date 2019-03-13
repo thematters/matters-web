@@ -6,6 +6,7 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import { isValidPassword, translate } from '~/common/utils'
@@ -137,8 +138,9 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
             <Button
               type="submit"
               bgColor="green"
-              style={{ width: 80 }}
+              style={{ minWidth: '5rem' }}
               disabled={isSubmitting}
+              icon={isSubmitting ? <IconSpinner /> : null}
             >
               {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
             </Button>

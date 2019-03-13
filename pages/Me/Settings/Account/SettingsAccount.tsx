@@ -1,14 +1,23 @@
 import _get from 'lodash/get'
 import { useContext } from 'react'
 
-import { Button, Head, Modal, PageHeader, Translate } from '~/components'
+import { Button, Head, PageHeader, Translate } from '~/components'
+import EmailModal from '~/components/Modal/EmailModal'
+import PasswordModal from '~/components/Modal/PasswordModal'
+import UserNameModal from '~/components/Modal/UserNameModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { LanguageSwitch } from './LanguageSwitch'
 import styles from './styles.css'
 
-const EditButton = ({ modalId }: { modalId: string }) => (
+const EditButton = ({
+  modalId,
+  disabled
+}: {
+  modalId: string
+  disabled?: boolean
+}) => (
   <ModalSwitch modalId={modalId}>
     {(open: any) => (
       <Button
@@ -17,6 +26,7 @@ const EditButton = ({ modalId }: { modalId: string }) => (
         size="small"
         style={{ width: '3rem' }}
         onClick={open}
+        disabled={disabled}
       >
         <Translate zh_hant="修改" zh_hans="修改" />
       </Button>
@@ -76,7 +86,10 @@ const SettingsAccount = () => {
             <span className="title">Matters ID</span>
             <span>{viewer.userName}</span>
           </div>
-          <EditButton modalId="userNameModal" />
+          <EditButton
+            modalId="userNameModal"
+            disabled={viewer.info.userNameEditable}
+          />
         </section>
       </section>
 
@@ -97,14 +110,14 @@ const SettingsAccount = () => {
 
       <ModalInstance modalId="passwordChangeModal">
         {(props: ModalInstanceProps) => (
-          <Modal.PasswordModal purpose="change" {...props} />
+          <PasswordModal purpose="change" {...props} />
         )}
       </ModalInstance>
       <ModalInstance modalId="userNameModal" title="changeUserName">
-        {(props: ModalInstanceProps) => <Modal.UserNameModal {...props} />}
+        {(props: ModalInstanceProps) => <UserNameModal {...props} />}
       </ModalInstance>
       <ModalInstance modalId="emailModal" title="changeEmail">
-        {(props: ModalInstanceProps) => <Modal.EmailModal {...props} />}
+        {(props: ModalInstanceProps) => <EmailModal {...props} />}
       </ModalInstance>
 
       <style jsx>{styles}</style>

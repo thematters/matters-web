@@ -4,6 +4,7 @@ import Router from 'next/router'
 import { FC, useContext } from 'react'
 
 import { Mutation } from '~/components/GQL'
+import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import termStyles from '~/common/styles/utils/content.article.css'
@@ -19,7 +20,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Modal.TermModal close={close} />
+ *   <TermModal close={close} />
  * ```
  */
 
@@ -101,25 +102,27 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         <div className="buttons">
           <Mutation mutation={MUTATION_USER_LOGOUT}>
             {logout => (
-              <div className="button disagree" onClick={() => disagree(logout)}>
+              <button
+                type="button"
+                className="disagree"
+                onClick={() => disagree(logout)}
+              >
                 {translate({
                   zh_hant: '我不同意',
                   zh_hans: '我不同意',
                   lang
                 })}
-              </div>
+              </button>
             )}
           </Mutation>
-          <button
-            type="submit"
-            className="button agree"
-            disabled={props.isSubmitting}
-          >
-            {translate({
-              zh_hant: '同意並繼續',
-              zh_hans: '同意并继续',
-              lang
-            })}
+          <button type="submit" className="agree" disabled={props.isSubmitting}>
+            {props.isSubmitting && <IconSpinner />}
+            {!props.isSubmitting &&
+              translate({
+                zh_hant: '同意並繼續',
+                zh_hans: '同意并继续',
+                lang
+              })}
           </button>
         </div>
       </form>

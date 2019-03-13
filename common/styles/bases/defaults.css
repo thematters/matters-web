@@ -10,7 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
 
   background-color: var(--color-white);
-  word-break: break-all;
+  word-break: break-word;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 
   -webkit-tap-highlight-color: transparent;

@@ -25,7 +25,7 @@ const fragments = {
       summary
       slug
       scheduledAt
-      createdAt
+      updatedAt
       publishState
     }
   `
@@ -47,7 +47,7 @@ const IconDotDivider = () => (
 )
 
 const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
-  const { id, title, summary, publishState, createdAt, slug } = draft
+  const { id, title, summary, publishState, updatedAt, slug } = draft
   const isPending = publishState === 'pending'
   const isError = publishState === 'error'
   const isUnpublished = publishState === 'unpublished'
@@ -96,7 +96,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
 
           {isUnpublished && (
             <footer className="actions">
-              <DateTime date={createdAt} type="relative" />
+              <DateTime date={updatedAt} type="relative" />
               <IconDotDivider />
               <DeleteButton id={id} />
             </footer>

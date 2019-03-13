@@ -6,7 +6,8 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { checkFor, Mutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
+import IconSpinner from '~/components/Icon/Spinner'
+import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
@@ -20,7 +21,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.LoginForm
+ *   <LoginForm
  *     extraClass={[]}
  *     purpose="modal"
  *     submitCallback={()=> {}}
@@ -160,8 +161,9 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             <Button
               type="submit"
               bgColor="green"
-              style={{ width: 80 }}
+              style={{ minWidth: '5rem' }}
               disabled={isSubmitting}
+              icon={isSubmitting ? <IconSpinner /> : null}
             >
               {loginText}
             </Button>
@@ -200,9 +202,16 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         .then((result: any) => {
           if (submitCallback) {
             submitCallback()
-          } else {
-            redirectToTarget()
           }
+          window.dispatchEvent(
+            new CustomEvent('addToast', {
+              detail: {
+                color: 'green',
+                content: <Translate zh_hant="登入成功" zh_hans="登入成功" />
+              }
+            })
+          )
+          redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {
           if (

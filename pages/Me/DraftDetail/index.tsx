@@ -64,13 +64,13 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             <article className="l-col-4 l-col-md-5 l-col-lg-8">
               {loading && <Placeholder.ArticleDetail />}
-              {data && data.node && (
+              {!loading && data && data.node && (
                 <>
                   <PublishState draft={data.node} />
                   <DraftContent draft={data.node} />
                 </>
               )}
-              {(error || (data && !data.node)) && (
+              {!loading && (error || (data && !data.node)) && (
                 <EmptyDraft
                   description={
                     <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />

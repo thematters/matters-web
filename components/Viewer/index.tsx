@@ -20,6 +20,7 @@ export const ViewerUserFragment = {
       info {
         email
         agreeOn
+        userNameEditable
       }
       settings {
         language
