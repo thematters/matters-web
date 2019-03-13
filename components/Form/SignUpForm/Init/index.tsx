@@ -14,6 +14,7 @@ import { LanguageContext } from '~/components/Language'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
 import {
+  analytics,
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
@@ -404,6 +405,7 @@ export const SignUpInitForm: FC<Props> = ({
         })
         .finally(() => {
           setSubmitting(false)
+          analytics.identifyUser()
         })
     }
   })(BaseForm)
