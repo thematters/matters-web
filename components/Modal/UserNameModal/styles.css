@@ -1,9 +1,10 @@
 .ask-buttons {
   @mixin border-top-grey;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 
-  margin: 0 var(--spacing-x-tight);
-  padding: var(--spacing-x-tight) 0 0.75rem;
+  & :global(button) {
+    display: inline-block;
+    width: 50%;
+    height: 3rem;
+    font-weight: var(--font-weight-medium);
+  }
 }

@@ -11,7 +11,13 @@ import { ViewerContext } from '~/components/Viewer'
 import { LanguageSwitch } from './LanguageSwitch'
 import styles from './styles.css'
 
-const EditButton = ({ modalId }: { modalId: string }) => (
+const EditButton = ({
+  modalId,
+  disabled
+}: {
+  modalId: string
+  disabled?: boolean
+}) => (
   <ModalSwitch modalId={modalId}>
     {(open: any) => (
       <Button
@@ -20,6 +26,7 @@ const EditButton = ({ modalId }: { modalId: string }) => (
         size="small"
         style={{ width: '3rem' }}
         onClick={open}
+        disabled={disabled}
       >
         <Translate zh_hant="修改" zh_hans="修改" />
       </Button>
@@ -79,7 +86,10 @@ const SettingsAccount = () => {
             <span className="title">Matters ID</span>
             <span>{viewer.userName}</span>
           </div>
-          <EditButton modalId="userNameModal" />
+          <EditButton
+            modalId="userNameModal"
+            disabled={viewer.info.userNameEditable}
+          />
         </section>
       </section>
 
