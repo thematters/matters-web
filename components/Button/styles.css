@@ -4,11 +4,7 @@
 }
 
 .btn {
-  @mixin inline-flex-center-all;
-
   font-weight: var(--font-weight-medium);
-  text-align: center;
-  white-space: nowrap;
 
   & :global(svg + span),
   & :global(img + span) {
