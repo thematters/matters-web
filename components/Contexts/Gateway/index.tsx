@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 
 const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
 const PUBLIC_GATEWAYS: string[] = [
@@ -19,8 +19,12 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://gateway.serph.network/ipfs/'
 ]
 
-export const GatewayContext = createContext({ gateways: [] } as {
+export const GatewayContext = createContext({
+  gateways: [],
+  startCheck: () => null
+} as {
   gateways: string[]
+  startCheck: () => void
 })
 
 export const GatewayContextConsumer = GatewayContext.Consumer
@@ -32,7 +36,7 @@ export const GatewayContextProvider = ({
 }) => {
   const [gateways, setGateways] = useState<string[]>([])
 
-  useEffect(() => {
+  const startCheck = () => {
     // check accessbility for a given hash and gateway
     const checkGateway = async (
       hash: string,
@@ -50,12 +54,13 @@ export const GatewayContextProvider = ({
     }
 
     PUBLIC_GATEWAYS.map(url => checkGateway(TEST_HASH, url))
-  }, [])
+  }
 
   return (
     <GatewayContext.Provider
       value={{
-        gateways
+        gateways,
+        startCheck
       }}
     >
       {children}

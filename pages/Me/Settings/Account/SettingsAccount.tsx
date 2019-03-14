@@ -50,11 +50,11 @@ const SettingsAccount = () => {
 
   return (
     <>
-      <Head title={{ zh_hant: '賬戶設定', zh_hans: '账户设定' }} />
+      <Head title={{ zh_hant: '帳戶設定', zh_hans: '账户设定' }} />
 
       <section className="section-container">
         <PageHeader
-          pageTitle={<Translate zh_hant="賬戶設定" zh_hans="账户设定" />}
+          pageTitle={<Translate zh_hant="帳戶設定" zh_hans="账户设定" />}
           is="h2"
         />
 
@@ -88,20 +88,20 @@ const SettingsAccount = () => {
           </div>
           <EditButton
             modalId="userNameModal"
-            disabled={viewer.info.userNameEditable}
+            disabled={!viewer.info.userNameEditable}
           />
         </section>
       </section>
 
       <section className="section-container">
         <PageHeader
-          pageTitle={<Translate zh_hant="界面設定" zh_hans="界面设定" />}
+          pageTitle={<Translate zh_hant="介面設定" zh_hans="界面设定" />}
           is="h2"
         />
         <section className="setting-section">
           <div className="left">
             <span className="title">
-              <Translate zh_hant="界面語言" zh_hans="界面语言" />
+              <Translate zh_hant="介面語言" zh_hans="界面语言" />
             </span>
             <LanguageSwitch />
           </div>

@@ -8,7 +8,7 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 import styles from './styles.css'
 
 const SignUpComplete = () => (
-  <div className="l-col-4 l-col-sm-6 l-col-md-6 l-col-lg-8 complete">
+  <div className="complete">
     <img src={ICON_AVATAR_GREEN} />
 
     <div className="content">
@@ -25,7 +25,7 @@ const SignUpComplete = () => (
       <br />
       <p>
         <Translate
-          zh_hant="目前 Matters 是一個邀請制社區，你的賬號需要激活才能擁有創作資格，你可以向你認識的 Matters 老用戶索取激活資格。"
+          zh_hant="目前 Matters 是一個邀請制社區，你的帳號需要激活才能擁有創作資格，你可以向你認識的 Matters 老用戶索取激活資格。"
           zh_hans="目前 Matters 是一个邀请制社区，你的账号需要激活才能拥有创作资格，你可以向你认识的 Matters 老用户索取激活资格。"
         />
       </p>

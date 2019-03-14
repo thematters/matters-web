@@ -11,7 +11,12 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
-import { isValidEmail, redirectToTarget, translate } from '~/common/utils'
+import {
+  analytics,
+  isValidEmail,
+  redirectToTarget,
+  translate
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -211,6 +216,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
               }
             })
           )
+          analytics.identifyUser()
           redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {

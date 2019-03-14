@@ -20,7 +20,7 @@ const fragments = {
 const ReplyTo = ({ user }: any) => (
   <>
     <span className="reply-to">
-      <Translate zh_hant="回復" zh_hans="回复" />
+      <Translate zh_hant="回覆" zh_hans="回复" />
     </span>
     <UserDigest.Mini
       user={user}

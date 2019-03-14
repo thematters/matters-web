@@ -28,7 +28,7 @@ interface Props extends ModalInstanceProps {
 
 const MUTATION_PUBLISH_ARTICLE = gql`
   mutation PublishArticle($draftId: ID!) {
-    publishArticle(input: { id: $draftId, delay: 0 }) {
+    publishArticle(input: { id: $draftId }) {
       id
       publishState
       scheduledAt
