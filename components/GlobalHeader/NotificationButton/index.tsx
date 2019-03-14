@@ -2,11 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { Query, QueryResult } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation, Query } from '~/components/GQL'
+import { Mutation } from '~/components/GQL'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
@@ -136,9 +136,18 @@ const NoticeButton = ({
 }
 
 export default () => (
-  <Query query={UNREAD_NOTICE_COUNT} pollInterval={POLL_INTERVAL}>
+  <Query
+    query={UNREAD_NOTICE_COUNT}
+    pollInterval={POLL_INTERVAL}
+    errorPolicy="none"
+    skip={!process.browser}
+  >
     {({ data: unreadCountData }: QueryResult & { data: UnreadNoticeCount }) => (
-      <Query query={ME_NOTIFICATIONS} notifyOnNetworkStatusChange>
+      <Query
+        query={ME_NOTIFICATIONS}
+        errorPolicy="none"
+        notifyOnNetworkStatusChange
+      >
         {({
           data,
           loading,
