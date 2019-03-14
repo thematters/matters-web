@@ -120,7 +120,6 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            style={{ marginTop: '0.6rem' }}
           />
           <div className="buttons">
             <Button

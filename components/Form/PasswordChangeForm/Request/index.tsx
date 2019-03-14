@@ -128,7 +128,6 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             type="text"
             field="code"
             placeholder={codePlaceholder}
-            style={{ marginTop: '0.6rem', paddingRight: '6rem' }}
             floatElement={
               <SendCodeButton
                 email={values.email}

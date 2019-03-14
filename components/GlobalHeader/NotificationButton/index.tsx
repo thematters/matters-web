@@ -34,7 +34,7 @@ const ME_NOTIFICATIONS = gql`
   query MeDropdownNotifications($cursor: String) {
     viewer {
       id
-      notices(input: { first: 7, after: $cursor }) {
+      notices(input: { first: 5, after: $cursor }) {
         edges {
           cursor
           node {

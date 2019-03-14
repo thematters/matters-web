@@ -83,11 +83,12 @@ const Input: FC<Props> = ({
           {...restProps}
         />
         {floatElement && <div className="float-right">{floatElement}</div>}
-      </div>
-      <div className="info">
-        {/* {error && isTouched && <div className="error">{error}</div>} */}
-        {error && <div className="error">{error}</div>}
-        {!error && hint && <div className="hint">{hint}</div>}
+
+        <div className="info">
+          {/* {error && isTouched && <div className="error">{error}</div>} */}
+          {error && <div className="error">{error}</div>}
+          {!error && hint && <div className="hint">{hint}</div>}
+        </div>
       </div>
       <style jsx>{styles}</style>
     </>
