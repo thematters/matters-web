@@ -8,11 +8,11 @@
 
   font-weight: var(--font-weight-medium);
   text-align: center;
-  vertical-align: baseline;
+  vertical-align: middle;
   white-space: nowrap;
 
   & > :global(*) {
-    vertical-align: baseline;
+    vertical-align: middle;
   }
 
   & :global(svg + span),

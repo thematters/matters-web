@@ -94,11 +94,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
         <Avatar size="xlarge" user={user} />
         <div className="uploader">
           <div className="button">
-            <Icon
-              id={ICON_CAMERA.id}
-              viewBox={ICON_CAMERA.viewBox}
-              style={{ width: 24, height: 24, marginRight: '0.25rem' }}
-            />
+            <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
             <span className="hint">
               <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
             </span>
