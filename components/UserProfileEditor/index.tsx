@@ -10,7 +10,7 @@ import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { translate } from '~/common/utils'
+import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
 import styles from './styles.css'
@@ -34,6 +34,21 @@ const MUTATION_UPDATE_USER_INFO = gql`
 
 export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
   const { lang } = useContext(LanguageContext)
+
+  const validateDisplayName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+    } else if (!isValidDisplayName(value)) {
+      result = {
+        zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
+        zh_hans: '请输入 2 至 20 个字符，仅支持中英文及数字'
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
 
   const validateDescription = (value: string, language: Language) => {
     let result: any
@@ -140,9 +155,11 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
       description: user.info.description
     }),
 
-    validate: ({ description }) => {
+    validate: ({ displayName, description }) => {
+      const inInvalidDisplayName = validateDisplayName(displayName, lang)
       const isInvalidDescription = validateDescription(description, lang)
       const errors = {
+        ...(inInvalidDisplayName ? { displayName: inInvalidDisplayName } : {}),
         ...(isInvalidDescription ? { description: isInvalidDescription } : {})
       }
       return errors
