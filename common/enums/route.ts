@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from 'express'
 /**
  * Route paths for Next.js custom routing
  *
@@ -37,7 +38,12 @@ type ROUTE_KEY =
   | 'MISC_TOS'
   | 'MISC_GUIDE'
 
-export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
+export const ROUTES: Array<{
+  key: ROUTE_KEY
+  href: string
+  as: string
+  handler?: (req: Request, res: Response, next: NextFunction) => any
+}> = [
   {
     key: 'HOME',
     href: '/Home',
@@ -122,7 +128,12 @@ export const ROUTES: Array<{ key: ROUTE_KEY; href: string; as: string }> = [
   {
     key: 'ARTICLE_DETAIL_LEGACY',
     href: '/ArticleDetail',
-    as: '/forum'
+    as: '/forum',
+    handler: (req, res) => {
+      if (!req.query || !req.query.post) {
+        return res.redirect('/')
+      }
+    }
   },
 
   // Me
