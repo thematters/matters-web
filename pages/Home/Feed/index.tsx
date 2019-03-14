@@ -87,7 +87,15 @@ export default () => {
           loading,
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
-          if (loading || !(data && data.viewer)) {
+          if (
+            loading &&
+            !(
+              data &&
+              data.viewer &&
+              data.viewer.recommendation &&
+              data.viewer.recommendation.feed
+            )
+          ) {
             return <Placeholder.ArticleDigestList />
           }
 
