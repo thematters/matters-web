@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { GatewayContext } from '~/components/Contexts/Gateway'
 import { Icon } from '~/components/Icon'
@@ -18,17 +18,15 @@ import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import styles from './styles.css'
 
-const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
-  const { gateways, startCheck } = useContext(GatewayContext)
-
+const FingerprintContent = ({
+  dataHash,
+  gateways
+}: {
+  dataHash: string
+  gateways: string[]
+}) => {
   const [expand, setExpand] = useState(false)
   const [explanation, setExplation] = useState(false)
-
-  useEffect(() => {
-    if (gateways.length === 0) {
-      startCheck()
-    }
-  }, [])
 
   return (
     <div className="dropdown-container">
@@ -138,30 +136,44 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
   )
 }
 
-const Fingerprint = ({ article }: { article: FingerprintArticle }) => (
-  <Popover
-    arrow={true}
-    zIndex={101}
-    distance={8}
-    placement="right"
-    content={<FingerprintContent dataHash={article.dataHash || ''} />}
-  >
-    <span className="fingerprint-icon">
-      <TextIcon
-        icon={
-          <Icon
-            id={ICON_CHECK_ACTIVE.id}
-            viewBox={ICON_CHECK_ACTIVE.viewBox}
-            size="small"
-          />
+const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
+  const { startCheck, gateways } = useContext(GatewayContext)
+  return (
+    <Popover
+      arrow={true}
+      zIndex={101}
+      distance={8}
+      onShow={() => {
+        if (gateways.length === 0) {
+          startCheck()
         }
-      >
-        <Translate zh_hans="已发布至IPFS" zh_hant="已發佈至IPFS" />
-      </TextIcon>
-      <style jsx>{styles}</style>
-    </span>
-  </Popover>
-)
+      }}
+      placement="right"
+      offset="100,0"
+      content={
+        <FingerprintContent
+          gateways={gateways}
+          dataHash={article.dataHash || ''}
+        />
+      }
+    >
+      <span className="fingerprint-icon">
+        <TextIcon
+          icon={
+            <Icon
+              id={ICON_CHECK_ACTIVE.id}
+              viewBox={ICON_CHECK_ACTIVE.viewBox}
+              size="small"
+            />
+          }
+        >
+          <Translate zh_hans="已发布至IPFS" zh_hant="已發佈至IPFS" />
+        </TextIcon>
+        <style jsx>{styles}</style>
+      </span>
+    </Popover>
+  )
+}
 
 Fingerprint.fragments = {
   article: gql`
