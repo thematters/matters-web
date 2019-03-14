@@ -4,6 +4,12 @@
   & + .container {
     margin-top: var(--spacing-x-tight);
   }
+
+  &.has-float {
+    & .input {
+      padding-right: 6rem;
+    }
+  }
 }
 
 .input {
