@@ -4,16 +4,11 @@
 }
 
 .btn {
-  display: inline-block;
+  @mixin inline-flex-center-all;
 
   font-weight: var(--font-weight-medium);
   text-align: center;
-  vertical-align: middle;
   white-space: nowrap;
-
-  & > :global(*) {
-    vertical-align: middle;
-  }
 
   & :global(svg + span),
   & :global(img + span) {
@@ -26,13 +21,9 @@
   padding: 0 var(--spacing-x-tight);
 
   height: 1.5rem;
-  line-height: 1.5rem;
   border-radius: 1.5rem;
   font-size: var(--font-size-xs);
 
-  &.outline {
-    line-height: calc(1.5rem - 4px);
-  }
   & :global(svg),
   & :global(img) {
     width: var(--font-size-xs);
@@ -43,13 +34,9 @@
   padding: 0 var(--spacing-tight);
 
   height: 2rem;
-  line-height: 2rem;
   border-radius: 2rem;
   font-size: var(--font-size-sm);
 
-  &.outline {
-    line-height: calc(2rem - 4px);
-  }
   & :global(svg),
   & :global(img) {
     width: var(--font-size-sm);
@@ -60,13 +47,9 @@
   padding: 0 var(--spacing-tight);
 
   height: 2.25rem;
-  line-height: 2.25rem;
   border-radius: 2.25rem;
   font-size: var(--font-size-sm);
 
-  &.outline {
-    line-height: calc(2.25rem - 4px);
-  }
   & :global(svg),
   & :global(img) {
     width: var(--font-size-sm);
@@ -77,13 +60,9 @@
   padding: 0 var(--spacing-default);
 
   height: 2.5rem;
-  line-height: 2.5rem;
   border-radius: 2.5rem;
   font-size: var(--font-size-md);
 
-  &.outline {
-    line-height: calc(2.5rem - 4px);
-  }
   & :global(svg),
   & :global(img) {
     width: var(--font-size-sm);

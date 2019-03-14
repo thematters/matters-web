@@ -59,6 +59,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {
+      'x-access-token':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMTRiMzc0NDYtNTBiOS00Y2MxLTgwY2MtNjUzMmM1MWJhNDBhIiwiaWF0IjoxNTUyNTMyMDY4LCJleHAiOjkzMjg1MzIwNjh9.2zPBmr2dBeu1EI_-CsoV9iO3425mEm7Yh5liKrQ_gtI',
       ...headers,
       'x-client-name': 'web'
     }
