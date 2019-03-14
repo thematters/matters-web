@@ -40,10 +40,14 @@ app
     // middlewares
     server.use(helmet())
 
-    ROUTES.forEach(({ href, as }) => {
-      server.get(as, (req, res) =>
-        app.render(req, res, href, { ...req.query, ...req.params })
-      )
+    ROUTES.forEach(({ href, as, handler }) => {
+      server.get(as, (req, res, nx) => {
+        if (handler) {
+          handler(req, res, nx)
+        }
+
+        return app.render(req, res, href, { ...req.query, ...req.params })
+      })
     })
 
     // fallback
