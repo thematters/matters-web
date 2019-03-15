@@ -7,7 +7,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { Avatar, Placeholder, Translate } from '~/components'
+import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
@@ -67,12 +67,15 @@ const ME_PROFILE = gql`
 `
 
 const SeedBadge = () => (
-  <Icon
-    className="badge"
-    id={ICON_SEED_BADGE.id}
-    viewBox={ICON_SEED_BADGE.viewBox}
-    style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
-  />
+  <Tooltip content={<Translate zh_hant="種子用戶" zh_hans="种子用户" />}>
+    <span>
+      <Icon
+        id={ICON_SEED_BADGE.id}
+        viewBox={ICON_SEED_BADGE.viewBox}
+        style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
+      />
+    </span>
+  </Tooltip>
 )
 
 const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
