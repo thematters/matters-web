@@ -153,17 +153,15 @@ const CommentForm = ({
           if (submitCallback && data.putComment) {
             submitCallback()
             resetForm({ content: '' })
-            window.dispatchEvent(
-              new CustomEvent('addToast', {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-                  )
-                }
-              })
-            )
           }
+          window.dispatchEvent(
+            new CustomEvent('addToast', {
+              detail: {
+                color: 'green',
+                content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+              }
+            })
+          )
         })
         .catch((result: any) => {
           // TODO: Handle error

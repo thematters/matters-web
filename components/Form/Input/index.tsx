@@ -63,6 +63,10 @@ const Input: FC<Props> = ({
   ...restProps
 }) => {
   const inputClass = classNames('input', ...className)
+  const containerClass = classNames({
+    container: true,
+    'has-float': floatElement
+  })
 
   const value = values[field]
   const error = errors[field]
@@ -70,7 +74,7 @@ const Input: FC<Props> = ({
 
   return (
     <>
-      <div className="container">
+      <div className={containerClass}>
         <input
           className={inputClass}
           type={type}
@@ -83,11 +87,12 @@ const Input: FC<Props> = ({
           {...restProps}
         />
         {floatElement && <div className="float-right">{floatElement}</div>}
-      </div>
-      <div className="info">
-        {/* {error && isTouched && <div className="error">{error}</div>} */}
-        {error && <div className="error">{error}</div>}
-        {!error && hint && <div className="hint">{hint}</div>}
+
+        <div className="info">
+          {/* {error && isTouched && <div className="error">{error}</div>} */}
+          {error && <div className="error">{error}</div>}
+          {!error && hint && <div className="hint">{hint}</div>}
+        </div>
       </div>
       <style jsx>{styles}</style>
     </>

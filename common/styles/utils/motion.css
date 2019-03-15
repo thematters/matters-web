@@ -24,7 +24,7 @@
 
 button:not([disabled]) > svg,
 button:not([disabled]) > .text-icon > svg {
-  @mixin all-transition;
+  transition: transform 0.2s ease-in-out;
 
   &:hover,
   &:focus {

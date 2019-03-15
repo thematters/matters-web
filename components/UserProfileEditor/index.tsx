@@ -10,7 +10,7 @@ import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { translate } from '~/common/utils'
+import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
 import styles from './styles.css'
@@ -24,6 +24,7 @@ const MUTATION_UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
+      displayName
       info {
         description
       }
@@ -34,7 +35,20 @@ const MUTATION_UPDATE_USER_INFO = gql`
 export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
   const { lang } = useContext(LanguageContext)
 
-  const { displayName } = user
+  const validateDisplayName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+    } else if (!isValidDisplayName(value)) {
+      result = {
+        zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
+        zh_hans: '请输入 2 至 20 个字符，仅支持中英文及数字'
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
 
   const validateDescription = (value: string, language: Language) => {
     let result: any
@@ -60,18 +74,26 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
   }: {
     [key: string]: any
   }) => {
-    const placeholder = translate({
+    const displayNamePlaceholder = translate({
+      zh_hant: '輸入姓名',
+      zh_hans: '输入姓名',
+      lang
+    })
+    const descriptionPlaceholder = translate({
       zh_hant: '輸入個人簡介',
       zh_hans: '输入个人简介',
       lang
     })
-
-    const hint = translate({
-      zh_hant: '建議 50 字以內，最長 200 字。',
-      zh_hans: '建议 50 字以内，最长 200 字。',
+    const displayNameHint = translate({
+      zh_hant: '2-20 個字符，仅支持中英文或数字',
+      zh_hans: '2-20 个字符，仅支持中英文或数字',
       lang
     })
-
+    const descriptionHint = translate({
+      zh_hant: '建議 50 字以內，最長 200 字',
+      zh_hans: '建议 50 字以内，最长 200 字',
+      lang
+    })
     const save = translate({
       zh_hant: '儲存',
       zh_hans: '保存',
@@ -81,13 +103,25 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
     return (
       <>
         <form className="form" onSubmit={handleSubmit}>
-          <Form.Textarea
-            field="description"
-            placeholder={placeholder}
+          <Form.Input
+            type="text"
+            field="displayName"
+            className={['name']}
             values={values}
             errors={errors}
             touched={touched}
-            hint={hint}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            placeholder={displayNamePlaceholder}
+            hint={displayNameHint}
+          />
+          <Form.Textarea
+            field="description"
+            placeholder={descriptionPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            hint={descriptionHint}
             handleBlur={handleBlur}
             handleChange={handleChange}
             style={{ height: '5rem', resize: 'none' }}
@@ -117,25 +151,28 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
 
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
+      displayName: user.displayName,
       description: user.info.description
     }),
 
-    validate: ({ description }) => {
+    validate: ({ displayName, description }) => {
+      const inInvalidDisplayName = validateDisplayName(displayName, lang)
       const isInvalidDescription = validateDescription(description, lang)
       const errors = {
+        ...(inInvalidDisplayName ? { displayName: inInvalidDisplayName } : {}),
         ...(isInvalidDescription ? { description: isInvalidDescription } : {})
       }
       return errors
     },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { description } = values
+      const { displayName, description } = values
       const { submitAction } = props
       if (!submitAction) {
         return undefined
       }
 
-      submitAction({ variables: { input: { description } } })
+      submitAction({ variables: { input: { displayName, description } } })
         .then(({ data }: any) => {
           if (saveCallback) {
             saveCallback(false)
@@ -155,7 +192,6 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
       <section className="content">
         <ProfileAvatarUploader user={user} />
         <section className="info">
-          <span className="name">{displayName}</span>
           <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
             {update => <MainForm submitAction={update} />}
           </Mutation>

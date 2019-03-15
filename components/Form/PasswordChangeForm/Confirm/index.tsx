@@ -118,7 +118,6 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
             type="password"
             field="comparedPassword"
             placeholder={comparedPlaceholder}
-            style={{ marginTop: '0.6rem' }}
             values={values}
             errors={errors}
             touched={touched}

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { toPath } from '~/common/utils'
 
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
@@ -18,11 +19,19 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   })
 
   return (
-    <Link {...path}>
-      <a>
-        <span>{comment.content}</span>
-      </a>
-    </Link>
+    <>
+      <Link {...path}>
+        <a>
+          <div
+            className="content-comment"
+            dangerouslySetInnerHTML={{
+              __html: comment.content || ''
+            }}
+          />
+        </a>
+      </Link>
+      <style jsx>{contentCommentStyles}</style>
+    </>
   )
 }
 

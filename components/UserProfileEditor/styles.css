@@ -60,7 +60,9 @@
 }
 
 .form {
-  margin-top: var(--spacing-tight);
+  & :global(textarea) {
+    margin-top: var(--spacing-tight);
+  }
 }
 
 .buttons {
