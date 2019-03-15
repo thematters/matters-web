@@ -1,8 +1,7 @@
 import { Translate } from '~/components'
 import RetryButton from '~/components/DraftDigest/Components/RetryButton'
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { Toast } from '~/components/Toast'
-
-import { PublishStateDraft } from './__generated__/PublishStateDraft'
 
 const ErrorState = ({ draft }: { draft: PublishStateDraft }) => {
   return (

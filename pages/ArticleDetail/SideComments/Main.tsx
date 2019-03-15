@@ -73,7 +73,11 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 <ul>
                   {filteredPinnedComments.map((comment: any) => (
                     <li key={comment.id}>
-                      <CommentDigest.Feed comment={comment} hasComment />
+                      <CommentDigest.Feed
+                        comment={comment}
+                        hasComment
+                        inArticle
+                      />
                     </li>
                   ))}
                 </ul>
@@ -95,7 +99,11 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 <ul>
                   {filteredAllComments.map(comment => (
                     <li key={comment.id}>
-                      <CommentDigest.Feed comment={comment} hasComment />
+                      <CommentDigest.Feed
+                        comment={comment}
+                        hasComment
+                        inArticle
+                      />
                     </li>
                   ))}
                 </ul>

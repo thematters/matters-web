@@ -37,7 +37,8 @@ const DropdownContent: React.FC<{
   comment: DropdownActionsComment
   hideDropdown: () => void
   editComment?: () => void
-}> = ({ comment, editComment, hideDropdown }) => {
+  refetch?: boolean
+}> = ({ comment, editComment, hideDropdown, refetch }) => {
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
@@ -47,7 +48,11 @@ const DropdownContent: React.FC<{
     <Menu>
       {isArticleAuthor && isActive && (
         <Menu.Item>
-          <PinButton comment={comment} hideDropdown={hideDropdown} />
+          <PinButton
+            comment={comment}
+            hideDropdown={hideDropdown}
+            refetch={refetch}
+          />
         </Menu.Item>
       )}
       {isCommentAuthor && editComment && isActive && (
@@ -71,10 +76,12 @@ const DropdownContent: React.FC<{
 
 const DropdownActions = ({
   comment,
-  editComment
+  editComment,
+  refetch
 }: {
   comment: DropdownActionsComment
   editComment?: () => void
+  refetch?: boolean
 }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -106,6 +113,7 @@ const DropdownActions = ({
           comment={comment}
           hideDropdown={hideDropdown}
           editComment={editComment}
+          refetch={refetch}
         />
       }
       trigger="click"

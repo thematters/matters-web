@@ -59,4 +59,8 @@
     display: block;
     line-height: 1rem;
   }
+
+  & .username {
+    margin-left: var(--spacing-xxx-tight);
+  }
 }

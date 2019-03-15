@@ -12,9 +12,10 @@
 
   & .reply-to {
     flex-shrink: 0;
+    margin: 0 var(--spacing-xx-tight);
 
     font-size: var(--font-size-sm);
-    margin: 0 var(--spacing-xx-tight);
+    line-height: 1;
   }
 
   & .label {
