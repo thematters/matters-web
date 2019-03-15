@@ -126,6 +126,8 @@ button {
 
 button {
   display: inline-block;
+  @mixin inline-flex-center-all;
+
   width: auto;
   background: transparent;
   cursor: pointer;
@@ -141,7 +143,8 @@ button {
     border: 0;
     padding: 0;
   }
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     cursor: default;
     cursor: not-allowed;
   }

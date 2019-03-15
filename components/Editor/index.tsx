@@ -104,7 +104,6 @@ class Editor extends React.Component<Props, State> {
   }
 
   public saveDraft() {
-    console.log('saveDarft', new Date())
     // TODO: skip if same content as before saved
     this.props.onSave({ content: this.state.content })
   }

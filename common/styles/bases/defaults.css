@@ -51,7 +51,8 @@ a,
 button {
   @mixin all-transition;
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled='true'] {
     opacity: 0.5;
   }
 }

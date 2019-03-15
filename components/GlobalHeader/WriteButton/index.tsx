@@ -65,6 +65,7 @@ const WriteButton = () => {
               className="u-sm-up-hide"
               bgColor="gold"
               shape="circle"
+              aria-label="創作"
               icon={
                 <Icon
                   id={icon.id}

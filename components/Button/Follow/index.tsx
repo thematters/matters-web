@@ -27,7 +27,7 @@ export const FollowButton = ({
 }) => {
   const viewer = useContext(ViewerContext)
 
-  if (viewer.isInactive) {
+  if (viewer.isInactive || viewer.id === user.id) {
     return <span />
   }
 

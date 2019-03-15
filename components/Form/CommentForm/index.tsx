@@ -34,6 +34,7 @@ interface CommentFormProps {
   replyToId?: string
   parentId?: string
   submitCallback?: () => void
+  refetch?: boolean
   extraButton?: React.ReactNode
 }
 
@@ -107,6 +108,7 @@ const CommentForm = ({
   replyToId,
   articleId,
   submitCallback,
+  refetch,
   extraButton
 }: CommentFormProps) => {
   const { lang } = useContext(LanguageContext)
@@ -153,17 +155,15 @@ const CommentForm = ({
           if (submitCallback && data.putComment) {
             submitCallback()
             resetForm({ content: '' })
-            window.dispatchEvent(
-              new CustomEvent('addToast', {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-                  )
-                }
-              })
-            )
           }
+          window.dispatchEvent(
+            new CustomEvent('addToast', {
+              detail: {
+                color: 'green',
+                content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+              }
+            })
+          )
         })
         .catch((result: any) => {
           // TODO: Handle error
@@ -178,7 +178,9 @@ const CommentForm = ({
     <Mutation
       mutation={PUT_COMMENT}
       refetchQueries={
-        commentId
+        !refetch
+          ? []
+          : commentId
           ? [
               {
                 query: COMMENT_COMMENTS,

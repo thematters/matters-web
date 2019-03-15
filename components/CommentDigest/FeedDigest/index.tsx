@@ -2,7 +2,10 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'
-import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
+import {
+  FeedDigestComment,
+  FeedDigestComment_comments_edges_node
+} from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
@@ -50,8 +53,12 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
 
 const DescendantComment = ({
   comment,
+  inArticle,
   ...actionControls
-}: { comment: any } & FooterActionsControls) => {
+}: {
+  comment: FeedDigestComment_comments_edges_node
+  inArticle?: boolean
+} & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
 
   return (
@@ -70,7 +77,11 @@ const DescendantComment = ({
             )}
           {comment.pinned && <PinnedLabel />}
         </div>
-        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
+        <DropdownActions
+          comment={comment}
+          editComment={() => setEdit(true)}
+          refetch={inArticle}
+        />
       </header>
 
       <div className="content-wrap">
@@ -81,6 +92,7 @@ const DescendantComment = ({
             articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
+            refetch={inArticle}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
           />
         )}
@@ -97,8 +109,12 @@ const DescendantComment = ({
 
 const FeedDigest = ({
   comment,
+  inArticle,
   ...actionControls
-}: { comment: FeedDigestComment } & FooterActionsControls) => {
+}: {
+  comment: FeedDigestComment
+  inArticle?: boolean
+} & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
   const descendantComments = _get(comment, 'comments.edges', []).filter(
@@ -119,7 +135,11 @@ const FeedDigest = ({
           )}
           {pinned && <PinnedLabel />}
         </div>
-        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
+        <DropdownActions
+          comment={comment}
+          editComment={() => setEdit(true)}
+          refetch={inArticle}
+        />
       </header>
 
       <div className="content-wrap">
@@ -130,6 +150,7 @@ const FeedDigest = ({
             articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
+            refetch={inArticle}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
           />
         )}
@@ -141,7 +162,11 @@ const FeedDigest = ({
             {descendantComments.map(
               ({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
-                  <DescendantComment comment={node} {...actionControls} />
+                  <DescendantComment
+                    comment={node}
+                    inArticle={inArticle}
+                    {...actionControls}
+                  />
                 </li>
               )
             )}

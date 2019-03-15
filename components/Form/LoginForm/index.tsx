@@ -155,7 +155,6 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             type="password"
             field="password"
             placeholder={passwordPlaceholder}
-            style={{ marginTop: '0.6rem' }}
             values={values}
             errors={errors}
             touched={touched}

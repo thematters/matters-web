@@ -22,9 +22,9 @@
   }
 }
 
-button:not([disabled]) > svg,
-button:not([disabled]) > .text-icon > svg {
-  @mixin all-transition;
+button:not([disabled], [aria-disabled='true']) > svg,
+button:not([disabled], [aria-disabled='true']) > .text-icon > svg {
+  transition: transform 0.2s ease-in-out;
 
   &:hover,
   &:focus {

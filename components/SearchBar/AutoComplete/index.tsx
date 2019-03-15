@@ -36,7 +36,7 @@ const EmptyAutoComplete = () => (
 
 const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
   <section className="container">
-    <Query query={SEARCH_AUTOCOMPLETE}>
+    <Query query={SEARCH_AUTOCOMPLETE} skip={!process.browser}>
       {({
         data,
         loading,
