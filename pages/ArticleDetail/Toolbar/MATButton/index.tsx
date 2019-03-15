@@ -1,10 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useContext } from 'react'
+import { forwardRef, useContext } from 'react'
 
-import { Icon } from '~/components'
+import { Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'
@@ -40,22 +41,52 @@ const APPRECIATE_ARTICLE = gql`
   }
 `
 
+const AppreciateButton = forwardRef<
+  HTMLButtonElement,
+  {
+    article: MATArticleDetail
+    appreciate: () => any
+    canAppreciate: boolean
+  }
+>(({ article, appreciate, canAppreciate }, ref) => {
+  const buttonClasses = classNames({
+    'mat-button': true
+  })
+
+  return (
+    <button
+      className={buttonClasses}
+      type="button"
+      ref={ref}
+      aria-disabled={!canAppreciate}
+      onClick={() => canAppreciate && appreciate()}
+      aria-label="讚賞文章"
+    >
+      <Icon
+        id={article.hasAppreciate ? ICON_MAT_WHITE.id : ICON_MAT_GOLD.id}
+        viewBox={
+          article.hasAppreciate ? ICON_MAT_WHITE.viewBox : ICON_MAT_GOLD.viewBox
+        }
+        style={{ width: 28, height: 28 }}
+      />
+      <style jsx>{styles}</style>
+    </button>
+  )
+})
+
 const MATButton = ({ article }: { article: MATArticleDetail }) => {
   const viewer = useContext(ViewerContext)
   const viewerMAT = _get(viewer, 'status.MAT.total', 0)
+  const isReachLimit = article.appreciateLeft <= 0
+  const isNotEnoughMAT = viewerMAT <= 0
+  const isMe = article.author.id === viewer.id
   const canAppreciate =
-    (article.appreciateLeft > 0 &&
-      viewerMAT > 0 &&
-      !viewer.isInactive &&
-      article.author.id !== viewer.id) ||
+    (!isReachLimit && !isNotEnoughMAT && !isMe && !viewer.isInactive) ||
     !viewer.isAuthed
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,
     inactive: !canAppreciate
-  })
-  const buttonClasses = classNames({
-    'mat-button': true
   })
 
   return (
@@ -74,22 +105,43 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
     >
       {(appreciate, { data }) => (
         <section className={containerClasses}>
-          <button
-            className={buttonClasses}
-            type="button"
-            disabled={!canAppreciate}
-            onClick={() => appreciate()}
-          >
-            <Icon
-              id={article.hasAppreciate ? ICON_MAT_WHITE.id : ICON_MAT_GOLD.id}
-              viewBox={
-                article.hasAppreciate
-                  ? ICON_MAT_WHITE.viewBox
-                  : ICON_MAT_GOLD.viewBox
-              }
-              style={{ width: 28, height: 28 }}
+          {canAppreciate && (
+            <AppreciateButton
+              article={article}
+              canAppreciate={canAppreciate}
+              appreciate={appreciate}
             />
-          </button>
+          )}
+          {!canAppreciate && (
+            <Tooltip
+              content={
+                <Translate
+                  {...(isReachLimit
+                    ? {
+                        zh_hant: '你最多可讚賞 5 次',
+                        zh_hans: '你最多可打赏 5 次'
+                      }
+                    : isNotEnoughMAT
+                    ? {
+                        zh_hant: '你沒有足夠的 MAT 用於讚賞',
+                        zh_hans: '你沒有足够的MAT用作打赏'
+                      }
+                    : isMe
+                    ? {
+                        zh_hant: '去讚賞其他用戶吧',
+                        zh_hans: '去打赏其他用户吧'
+                      }
+                    : { zh_hant: '你無法進行讚賞', zh_hans: '你无法进行打赏' })}
+                />
+              }
+            >
+              <AppreciateButton
+                article={article}
+                canAppreciate={canAppreciate}
+                appreciate={appreciate}
+              />
+            </Tooltip>
+          )}
           <span className="mat-count">{numAbbr(article.MAT)}</span>
           <style jsx>{styles}</style>
         </section>

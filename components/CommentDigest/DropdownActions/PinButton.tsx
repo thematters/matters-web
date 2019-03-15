@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNPIN from '~/static/icons/unpin.svg?sprite'
@@ -45,6 +46,7 @@ const fragments = {
       pinned
       article {
         id
+        mediaHash
         pinCommentLimit
         pinCommentLeft
       }
@@ -78,12 +80,24 @@ const TextIconPin = () => (
 
 const PinButton = ({
   comment,
-  hideDropdown
+  hideDropdown,
+  refetch
 }: {
   comment: PinButtonComment
   hideDropdown: () => void
+  refetch?: boolean
 }) => {
   const canPin = comment.article.pinCommentLeft > 0
+  const { mediaHash } = comment.article
+  const refetchQueries =
+    refetch && mediaHash
+      ? [
+          {
+            query: ARTICLE_COMMENTS,
+            variables: { mediaHash }
+          }
+        ]
+      : []
 
   if (comment.pinned) {
     return (
@@ -97,6 +111,7 @@ const PinButton = ({
             __typename: 'Comment'
           }
         }}
+        refetchQueries={refetchQueries}
       >
         {unpinComment => (
           <button
@@ -125,6 +140,7 @@ const PinButton = ({
           __typename: 'Comment'
         }
       }}
+      refetchQueries={refetchQueries}
     >
       {pinComment => (
         <button

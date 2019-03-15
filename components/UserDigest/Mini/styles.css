@@ -11,7 +11,7 @@
 .name {
   color: var(--color-black);
   font-size: var(--font-size-sm);
-  line-height: normal;
+  line-height: 1;
 }
 
 .spacing-xtight {
