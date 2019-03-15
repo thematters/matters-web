@@ -60,6 +60,7 @@ const AppreciateButton = forwardRef<
       ref={ref}
       aria-disabled={!canAppreciate}
       onClick={() => canAppreciate && appreciate()}
+      aria-label="讚賞文章"
     >
       <Icon
         id={article.hasAppreciate ? ICON_MAT_WHITE.id : ICON_MAT_GOLD.id}

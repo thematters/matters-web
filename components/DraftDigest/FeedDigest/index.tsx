@@ -51,6 +51,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
   const isPending = publishState === 'pending'
   const isError = publishState === 'error'
   const isUnpublished = publishState === 'unpublished'
+  const isPublished = publishState === 'published'
   const path = toPath({
     page: 'draftDetail',
     slug,
@@ -58,7 +59,8 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
   })
   const containerClasses = classNames({
     container: true,
-    [publishState]: true
+    [publishState]: true,
+    'u-area-disable': isPublished
   })
 
   return (

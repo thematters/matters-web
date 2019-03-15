@@ -1,20 +1,10 @@
-import gql from 'graphql-tag'
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
+import draftFragments from '~/components/GQL/fragments/draft'
 
-import { PublishStateDraft } from './__generated__/PublishStateDraft'
 import ErrorState from './ErrorState'
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
-
-const fragments = {
-  draft: gql`
-    fragment PublishStateDraft on Draft {
-      id
-      publishState
-      scheduledAt
-    }
-  `
-}
 
 const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   const isPending = draft.publishState === 'pending'
@@ -31,6 +21,8 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   )
 }
 
-PublishState.fragments = fragments
+PublishState.fragments = {
+  draft: draftFragments.publishState
+}
 
 export default PublishState
