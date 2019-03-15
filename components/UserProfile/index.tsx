@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _some from 'lodash/some'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
@@ -9,11 +10,13 @@ import { QueryResult } from 'react-apollo'
 import { Avatar, Placeholder, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import { Query } from '~/components/GQL'
+import { Icon } from '~/components/Icon'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
+import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import EditProfileButton from './EditProfileButton'
@@ -26,6 +29,9 @@ const fragments = {
       userName
       displayName
       info {
+        badges {
+          type
+        }
         description
       }
       followees(input: { first: 0 }) {
@@ -59,6 +65,15 @@ const ME_PROFILE = gql`
   }
   ${fragments.user}
 `
+
+const SeedBadge = () => (
+  <Icon
+    className="badge"
+    id={ICON_SEED_BADGE.id}
+    viewBox={ICON_SEED_BADGE.viewBox}
+    style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
+  />
+)
 
 const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
@@ -107,6 +122,8 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                 page: 'userFollowees',
                 userName: user.userName
               })
+              const badges = _get(user, 'info.badges', [])
+              const hasSeedBadge = _some(badges, { type: 'seed' })
 
               // me profile
               if (isMe) {
@@ -121,7 +138,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                       <header className="header">
                         <section className="name">
                           {!viewer.isInactive && (
-                            <span>{user.displayName}</span>
+                            <span>
+                              {user.displayName}
+                              {hasSeedBadge && <SeedBadge />}
+                            </span>
                           )}
                           {viewer.isArchived && (
                             <span>
@@ -190,7 +210,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                   <section className="info">
                     <header className="header">
                       <section className="name">
-                        <span>{user.displayName}</span>
+                        <span>
+                          {user.displayName}
+                          {hasSeedBadge && <SeedBadge />}
+                        </span>
                         <FollowButton.State user={user} />
                       </section>
 
