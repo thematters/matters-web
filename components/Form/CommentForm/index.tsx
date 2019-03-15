@@ -34,6 +34,7 @@ interface CommentFormProps {
   replyToId?: string
   parentId?: string
   submitCallback?: () => void
+  refetch?: boolean
   extraButton?: React.ReactNode
 }
 
@@ -107,6 +108,7 @@ const CommentForm = ({
   replyToId,
   articleId,
   submitCallback,
+  refetch,
   extraButton
 }: CommentFormProps) => {
   const { lang } = useContext(LanguageContext)
@@ -176,7 +178,9 @@ const CommentForm = ({
     <Mutation
       mutation={PUT_COMMENT}
       refetchQueries={
-        commentId
+        !refetch
+          ? []
+          : commentId
           ? [
               {
                 query: COMMENT_COMMENTS,

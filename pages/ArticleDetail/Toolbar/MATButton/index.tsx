@@ -118,19 +118,19 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
                   {...(isReachLimit
                     ? {
                         zh_hant: '你最多可讚賞 5 次',
-                        zh_hans: '你最多可赞赏 5 次'
+                        zh_hans: '你最多可打赏 5 次'
                       }
                     : isNotEnoughMAT
                     ? {
-                        zh_hant: '你沒有足夠的 MAT 進行讚賞',
-                        zh_hans: '你没有足够的 MAT 进行赞赏'
+                        zh_hant: '你沒有足夠的 MAT 用於讚賞',
+                        zh_hans: '你沒有足够的MAT用作打赏'
                       }
                     : isMe
                     ? {
-                        zh_hant: '不能讚賞自己文章',
-                        zh_hans: '不能赞赏自己文章'
+                        zh_hant: '去讚賞其他用戶吧',
+                        zh_hans: '去打赏其他用户吧'
                       }
-                    : { zh_hant: '你無法進行讚賞', zh_hans: '你无法进行赞赏' })}
+                    : { zh_hant: '你無法進行讚賞', zh_hans: '你无法进行打赏' })}
                 />
               }
             >
