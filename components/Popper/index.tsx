@@ -41,7 +41,7 @@ export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
-  distance: 8,
+  distance: 12,
   placement: 'right',
   animateFill: false,
   theme: 'tooltip',
