@@ -101,7 +101,7 @@ const Wallet = () => {
                       {edges.map(
                         ({ node, cursor }: { node: any; cursor: any }) => (
                           <li key={cursor}>
-                            {/* <Invitation invitation={node} /> */}
+                            <Invitation invitation={node} />
                           </li>
                         )
                       )}

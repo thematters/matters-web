@@ -8,3 +8,36 @@
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 }
+
+.invitation {
+  @mixin flex-center-space-between;
+  @mixin border-top-grey;
+  padding: var(--spacing-default) 0;
+
+  & .right {
+    flex-shrink: 0;
+    margin-left: var(--spacing-tight);
+
+    & :global(time) {
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  & .status {
+    margin-left: var(--spacing-x-tight);
+    width: 5rem;
+
+    font-size: var(--font-size-sm);
+
+    &.pending {
+      color: var(--color-grey);
+    }
+    &.accepted {
+      color: var(--color-matters-green);
+    }
+
+    @media (--sm-up) {
+      margin-left: var(--spacing-default);
+    }
+  }
+}
