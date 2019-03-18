@@ -1,0 +1,10 @@
+.highlight {
+  color: var(--color-matters-green);
+}
+
+.reward {
+  margin: var(--spacing-tight) 0;
+
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
+}
