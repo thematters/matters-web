@@ -43,6 +43,8 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
   const isSignUp = headerType === 'signUp'
+  const isAllowedWrite =
+    viewer.isActive === true && viewer.isOnboarding === false
 
   return (
     <header>
@@ -64,7 +66,9 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 <NotificationButton />
                 <MeDigest user={user} />
                 {isDraft && viewer.isActive && <PublishButton />}
-                {!isDraft && viewer.isActive && <WriteButton />}
+                {!isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                  <WriteButton allowed={isAllowedWrite} />
+                )}
               </>
             ) : (
               <>
