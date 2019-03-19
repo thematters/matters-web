@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 
 import LoginModal from '~/components/Modal/LoginModal'
+import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
 import TermModal from '~/components/Modal/TermModal'
@@ -49,6 +50,9 @@ const Anchor = () => {
         defaultCloseable={false}
       >
         {(props: ModalInstanceProps) => <TermModal {...props} />}
+      </ModalInstance>
+      <ModalInstance modalId="onboardingInfoModal" title="onboardingInfo">
+        {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
       </ModalInstance>
       {viewer.isAuthed && disagreedToS && <OpenedTermModal />}
       <style jsx>{styles}</style>
