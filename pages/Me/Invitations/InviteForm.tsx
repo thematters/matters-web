@@ -3,22 +3,25 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
+import Link from 'next/link'
 import { FC, useContext, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import UserList from '~/components/Dropdown/UserList'
 import { Form } from '~/components/Form'
-import { checkFormError } from '~/components/Form/Error'
-import { Mutation, Query } from '~/components/GQL'
+import { checkFor, Mutation, Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Dropdown, PopperInstance } from '~/components/Popper'
+import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
+import { ViewerContext } from '~/components/Viewer'
 
 import { ERROR_CODES } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
+import ICON_ARROW from '~/static/icons/arrow-right-white.svg?sprite'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import {
@@ -43,8 +46,8 @@ const SEARCH_USERS = gql`
 `
 
 interface Props {
-  defaultDisabled: boolean
-  submitCallback?: (params: any) => void
+  invitationLeft: number
+  submitCallback: () => void
 }
 
 const INVITE = gql`
@@ -57,7 +60,7 @@ const debouncedSetSearch = _debounce((value, setSearch) => {
   setSearch(value)
 }, 300)
 
-const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
+const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
   const { lang } = useContext(LanguageContext)
   const [inviteInput, setInviteInput] = useState<{
     user: SearchUsers_search_edges_node_User | null
@@ -76,6 +79,7 @@ const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
     [key: string]: any
   }) => {
     const [search, setSearch] = useState('')
+    const viewer = useContext(ViewerContext)
     const [instance, setInstance] = useState<PopperInstance | null>(null)
     const hideDropdown = () => {
       if (instance) {
@@ -89,9 +93,10 @@ const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
         }, 100) // unknown bug, needs set a timeout
       }
     }
+    const canInvite = (viewer.isActive && invitationLeft > 0) || viewer.isAdmin
     const formClass = classNames({
-      form: true
-      // 'u-area-disable': defaultDisabled
+      form: true,
+      'u-area-disable': !canInvite
     })
 
     return (
@@ -162,7 +167,7 @@ const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
                 <Button
                   type="submit"
                   bgColor="green"
-                  disabled={defaultDisabled || isSubmitting}
+                  disabled={!canInvite || isSubmitting}
                   icon={isSubmitting ? <IconSpinner /> : null}
                 >
                   <Translate zh_hant="邀請好友" zh_hans="邀请好友" />
@@ -178,12 +183,22 @@ const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
   }
 
   const MainForm: any = withFormik({
-    // mapPropsToValues: () => ({
-    //   invite: ''
-    // }),
-
     handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
       const { submitAction } = props
+      const displayName = _get(inviteInput, 'user.displayName')
+      const path = toPath({
+        page: 'userProfile',
+        userName: _get(inviteInput, 'user.userName', '')
+      })
+      const TEXT_INVITE_FAILED = translate({
+        zh_hant: '邀請失敗',
+        zh_hans: '邀请失败',
+        lang
+      })
+      const baseErrorToastProps = {
+        color: 'red',
+        duration: 1000 * 5
+      }
 
       // TODO
 
@@ -192,17 +207,126 @@ const InviteForm: FC<Props> = ({ defaultDisabled, submitCallback }) => {
           input: { id: _get(inviteInput, 'user.id'), email: inviteInput.email }
         }
       })
-        .then(({ data }: any) => {
-          const { confirmVerificationCode } = data
-          if (submitCallback && confirmVerificationCode) {
-            submitCallback({ codeId: confirmVerificationCode })
+        .then(() => {
+          submitCallback()
+
+          if (inviteInput.email) {
+            return window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  color: 'green',
+                  header: translate({
+                    zh_hant: '邀請已發送',
+                    zh_hans: '邀请已发送',
+                    lang
+                  }),
+                  content: translate({
+                    zh_hant:
+                      '請提醒你的朋友檢查電子信箱，如果沒有收到郵件，請查看垃圾信件匣。',
+                    zh_hans:
+                      '请提醒你的朋友检查邮箱，如果没有收到邮件，请查看垃圾箱。',
+                    lang
+                  })
+                }
+              })
+            )
+          } else {
+            return window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  color: 'green',
+                  header: translate({
+                    zh_hant: '邀請成功',
+                    zh_hans: '邀请成功',
+                    lang
+                  }),
+                  content: translate({
+                    zh_hant: `你的好友 ${displayName} 已透過你的邀請成為 Matters 創作者，感謝你們一起搭建 Matters 社群，5MAT 獎勵已送達。`,
+                    zh_hans: `你的好友 ${displayName} 已通过你的邀请成为 Matters 创作者，感谢你们一起搭建 Matters 社区，5MAT 奖励已送达。`,
+                    lang
+                  })
+                }
+              })
+            )
           }
         })
         .catch(({ graphQLErrors: error }: any) => {
-          const { CODE_INVALID } = ERROR_CODES
-          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
-          if (codeInvalidHint) {
-            setFieldError('code', codeInvalidHint)
+          if (checkFor(ERROR_CODES.USER_INVITE_STATE_INVALID, error)) {
+            return window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  ...baseErrorToastProps,
+                  header: TEXT_INVITE_FAILED,
+                  content: translate({
+                    zh_hant: `你的好友 ${displayName} 已經是創作者了，無需開啟資格。`,
+                    zh_hans: `你的好友 ${displayName} 已经是创作者了，无需开启资格。`,
+                    lang
+                  }),
+                  customButton: (
+                    <Link {...path}>
+                      <a>
+                        <TextIcon
+                          icon={
+                            <Icon
+                              style={{ width: 16, hieght: 10 }}
+                              id={ICON_ARROW.id}
+                              viewBox={ICON_ARROW.viewBox}
+                            />
+                          }
+                          size="sm"
+                          textPlacement="left"
+                        >
+                          <Translate
+                            zh_hant="查看他／她的主頁"
+                            zh_hans="查看 ta 的主页"
+                          />
+                        </TextIcon>
+                      </a>
+                    </Link>
+                  )
+                }
+              })
+            )
+          }
+
+          if (checkFor(ERROR_CODES.USER_EMAIL_EXISTS, error)) {
+            return window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  ...baseErrorToastProps,
+                  header: TEXT_INVITE_FAILED,
+                  content: translate({
+                    zh_hant: `你的好友 ${
+                      inviteInput.email
+                    } 已經是創作者了，無需邀請。`,
+                    zh_hans: `你的好友 ${
+                      inviteInput.email
+                    } 已经是创作者了，无需邀请。`,
+                    lang
+                  })
+                }
+              })
+            )
+          }
+
+          if (checkFor(ERROR_CODES.USER_INVITE_EMAIL_INVITED, error)) {
+            return window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  ...baseErrorToastProps,
+                  header: TEXT_INVITE_FAILED,
+                  content: translate({
+                    zh_hant: `你的好友 ${
+                      inviteInput.email
+                    } 已經是創作者了，無需開啟資格。`,
+                    zh_hans: `你的好友 ${
+                      inviteInput.email
+                    } 已经是创作者了，无需开启资格。`,
+                    lang
+                  })
+                }
+              })
+            )
           }
         })
         .finally(() => {

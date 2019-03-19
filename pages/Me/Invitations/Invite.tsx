@@ -43,17 +43,20 @@ const Invite = ({
             </span>{' '}
             <span className="highlight">{invitation.left}</span>{' '}
             <span>
-              <Translate zh_hant="個激活名額" zh_hans="个激活名额" />
+              <Translate
+                zh_hant="個創作者邀請名額"
+                zh_hans="个创作者邀请名额"
+              />
             </span>
           </TextIcon>
         </div>
 
-        <p className="reward">{invitation.reward}</p>
-
-        <InviteForm
-          defaultDisabled={invitation.left <= 0}
-          submitCallback={refetch}
+        <p
+          className="reward"
+          dangerouslySetInnerHTML={{ __html: invitation.reward }}
         />
+
+        <InviteForm invitationLeft={invitation.left} submitCallback={refetch} />
       </section>
 
       <style jsx>{styles}</style>
