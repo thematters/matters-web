@@ -5,6 +5,7 @@ import { forwardRef, useContext } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import { ModalSwitch } from '~/components/ModalManager'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -40,6 +41,36 @@ const APPRECIATE_ARTICLE = gql`
     }
   }
 `
+
+const OnboardingAppreciateButton = ({
+  article
+}: {
+  article: MATArticleDetail
+}) => {
+  const buttonClasses = classNames({
+    'mat-button': true
+  })
+
+  return (
+    <ModalSwitch modalId="onboardingInfoModal">
+      {(open: any) => (
+        <button
+          className={buttonClasses}
+          type="button"
+          onClick={open}
+          aria-label="讚賞文章"
+        >
+          <Icon
+            id={ICON_MAT_GOLD.id}
+            viewBox={ICON_MAT_GOLD.viewBox}
+            style={{ width: 28, height: 28 }}
+          />
+          <style jsx>{styles}</style>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
 
 const AppreciateButton = forwardRef<
   HTMLButtonElement,
@@ -90,63 +121,76 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
   })
 
   return (
-    <Mutation
-      mutation={APPRECIATE_ARTICLE}
-      variables={{ id: article.id }}
-      optimisticResponse={{
-        appreciateArticle: {
-          id: article.id,
-          MAT: article.MAT + 1,
-          hasAppreciate: true,
-          appreciateLeft: article.appreciateLeft - 1,
-          __typename: 'Article'
-        }
-      }}
-    >
-      {(appreciate, { data }) => (
-        <section className={containerClasses}>
-          {canAppreciate && (
-            <AppreciateButton
-              article={article}
-              canAppreciate={canAppreciate}
-              appreciate={appreciate}
-            />
-          )}
-          {!canAppreciate && (
-            <Tooltip
-              content={
-                <Translate
-                  {...(isReachLimit
-                    ? {
-                        zh_hant: '你最多可讚賞 5 次',
-                        zh_hans: '你最多可打赏 5 次'
-                      }
-                    : isNotEnoughMAT
-                    ? {
-                        zh_hant: '你沒有足夠的 MAT 用於讚賞',
-                        zh_hans: '你沒有足够的MAT用作打赏'
-                      }
-                    : isMe
-                    ? {
-                        zh_hant: '去讚賞其他用戶吧',
-                        zh_hans: '去打赏其他用户吧'
-                      }
-                    : { zh_hant: '你無法進行讚賞', zh_hans: '你无法进行打赏' })}
+    <>
+      {viewer.isActive ? (
+        <Mutation
+          mutation={APPRECIATE_ARTICLE}
+          variables={{ id: article.id }}
+          optimisticResponse={{
+            appreciateArticle: {
+              id: article.id,
+              MAT: article.MAT + 1,
+              hasAppreciate: true,
+              appreciateLeft: article.appreciateLeft - 1,
+              __typename: 'Article'
+            }
+          }}
+        >
+          {(appreciate, { data }) => (
+            <section className={containerClasses}>
+              {canAppreciate && (
+                <AppreciateButton
+                  article={article}
+                  canAppreciate={canAppreciate}
+                  appreciate={appreciate}
                 />
-              }
-            >
-              <AppreciateButton
-                article={article}
-                canAppreciate={canAppreciate}
-                appreciate={appreciate}
-              />
-            </Tooltip>
+              )}
+              {!canAppreciate && (
+                <Tooltip
+                  content={
+                    <Translate
+                      {...(isReachLimit
+                        ? {
+                            zh_hant: '你最多可讚賞 5 次',
+                            zh_hans: '你最多可打赏 5 次'
+                          }
+                        : isNotEnoughMAT
+                        ? {
+                            zh_hant: '你沒有足夠的 MAT 用於讚賞',
+                            zh_hans: '你沒有足够的MAT用作打赏'
+                          }
+                        : isMe
+                        ? {
+                            zh_hant: '去讚賞其他用戶吧',
+                            zh_hans: '去打赏其他用户吧'
+                          }
+                        : {
+                            zh_hant: '你無法進行讚賞',
+                            zh_hans: '你无法进行打赏'
+                          })}
+                    />
+                  }
+                >
+                  <AppreciateButton
+                    article={article}
+                    canAppreciate={canAppreciate}
+                    appreciate={appreciate}
+                  />
+                </Tooltip>
+              )}
+              <span className="mat-count">{numAbbr(article.MAT)}</span>
+              <style jsx>{styles}</style>
+            </section>
           )}
+        </Mutation>
+      ) : (
+        <section className="container">
+          <OnboardingAppreciateButton article={article} />
           <span className="mat-count">{numAbbr(article.MAT)}</span>
           <style jsx>{styles}</style>
         </section>
       )}
-    </Mutation>
+    </>
   )
 }
 
