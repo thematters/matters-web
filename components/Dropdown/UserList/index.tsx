@@ -36,7 +36,7 @@ const DropdownUserList = ({
             key={user.id}
           >
             <button
-              className="search-tag-item"
+              className="search-user-item"
               type="button"
               onClick={() => {
                 onClick(user)

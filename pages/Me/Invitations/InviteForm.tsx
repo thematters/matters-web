@@ -176,12 +176,8 @@ const handleInviteSubmit = async (
             header: TEXT_INVITE_FAILED,
             content: (
               <Translate
-                zh_hant={`你的好友 ${
-                  inviteInput.email
-                } 已經是創作者了，無需邀請。`}
-                zh_hans={`你的好友 ${
-                  inviteInput.email
-                } 已经是创作者了，无需邀请。`}
+                zh_hant="你輸入的電子信箱的所屬用戶已註冊。請直接輸入好友站內姓名，為他／她開啟創作者資格。"
+                zh_hans="你输入邮箱所属用户已经在站上。请直接输入好友站内姓名，为 ta 开启创作者资格。"
               />
             )
           }
@@ -199,10 +195,10 @@ const handleInviteSubmit = async (
               <Translate
                 zh_hant={`你的好友 ${
                   inviteInput.email
-                } 已經是創作者了，無需開啟資格。`}
+                } 已經被其他人邀請了，請提醒他／她檢查電子信箱，如果沒有收到郵件，請查看垃圾信件匣。你可以幫助其他好友開啟創作者資格。`}
                 zh_hans={`你的好友 ${
                   inviteInput.email
-                } 已经是创作者了，无需开启资格。`}
+                } 已经被其他人邀请了，请提示 ta 检查邮箱，如果没有收到邮件，请查看垃圾箱。你可以继续帮助其他好友开启创作者资格。`}
               />
             )
           }
@@ -307,6 +303,7 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                             errors={{}}
                             touched={touched}
                             handleBlur={handleBlur}
+                            autoComplete="off"
                             handleChange={e => {
                               const value = e.target.value
                               handleChange(e)
