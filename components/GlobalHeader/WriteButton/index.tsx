@@ -36,71 +36,72 @@ const WriteButton = ({ allowed }: Props) => {
     zh_hant: TEXT.zh_hant.untitle,
     lang
   })
+
+  if (!allowed) {
+    return (
+      <ModalSwitch modalId="onboardingInfoModal">
+        {(open: any) => (
+          <Button
+            className="u-sm-down-hide"
+            size="large"
+            bgColor="gold"
+            icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
+            onClick={open}
+          >
+            <Translate zh_hant="創作" zh_hans="创作" />
+          </Button>
+        )}
+      </ModalSwitch>
+    )
+  }
+
   return (
-    <>
-      {allowed ? (
-        <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
-          {putDraft => {
-            const icon = showLoader ? ICON_SPINNER : ICON_WRITE
-            return (
-              <div
-                onClick={() => {
-                  setLoader(true)
-                  putDraft().then(result => {
-                    const { data } = result as { data: CreateDraft }
-                    const { slug, id } = data.putDraft
-                    const path = toPath({ page: 'draftDetail', slug, id })
-                    Router.push(path.as)
-                  })
-                }}
-              >
-                <Button
-                  className="u-sm-down-hide"
-                  size="large"
-                  bgColor="gold"
-                  icon={
-                    <Icon
-                      id={icon.id}
-                      viewBox={icon.viewBox}
-                      className={showLoader && 'u-motion-spin'}
-                    />
-                  }
-                >
-                  <Translate zh_hant="創作" zh_hans="创作" />
-                </Button>
-                <Button
-                  className="u-sm-up-hide"
-                  bgColor="gold"
-                  shape="circle"
-                  aria-label="創作"
-                  icon={
-                    <Icon
-                      id={icon.id}
-                      viewBox={icon.viewBox}
-                      className={showLoader && 'u-motion-spin'}
-                    />
-                  }
-                />
-              </div>
-            )
-          }}
-        </Mutation>
-      ) : (
-        <ModalSwitch modalId="onboardingInfoModal">
-          {(open: any) => (
+    <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
+      {putDraft => {
+        const icon = showLoader ? ICON_SPINNER : ICON_WRITE
+        return (
+          <div
+            onClick={() => {
+              setLoader(true)
+              putDraft().then(result => {
+                const { data } = result as { data: CreateDraft }
+                const { slug, id } = data.putDraft
+                const path = toPath({ page: 'draftDetail', slug, id })
+                Router.push(path.as)
+              })
+            }}
+          >
             <Button
               className="u-sm-down-hide"
               size="large"
               bgColor="gold"
-              icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
-              onClick={open}
+              icon={
+                <Icon
+                  id={icon.id}
+                  viewBox={icon.viewBox}
+                  className={showLoader && 'u-motion-spin'}
+                />
+              }
             >
               <Translate zh_hant="創作" zh_hans="创作" />
             </Button>
-          )}
-        </ModalSwitch>
-      )}
-    </>
+            <Button
+              className="u-sm-up-hide"
+              bgColor="gold"
+              shape="circle"
+              aria-label="創作"
+              icon={
+                <Icon
+                  id={icon.id}
+                  viewBox={icon.viewBox}
+                  className={showLoader && 'u-motion-spin'}
+                />
+              }
+            />
+          </div>
+        )
+      }}
+    </Mutation>
   )
 }
 
