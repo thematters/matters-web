@@ -63,8 +63,12 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 </Responsive.MediumUp>
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft && viewer.isActive && <PublishButton />}
-                {!isDraft && viewer.isActive && <WriteButton />}
+                {isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                  <PublishButton allowed={viewer.isActive} />
+                )}
+                {!isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                  <WriteButton allowed={viewer.isActive} />
+                )}
               </>
             ) : (
               <>
