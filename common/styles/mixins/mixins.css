@@ -57,3 +57,10 @@
 @define-mixin all-transition {
   transition: all 0.2s ease-in-out;
 }
+
+@define-mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}

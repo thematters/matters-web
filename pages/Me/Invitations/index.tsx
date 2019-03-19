@@ -48,79 +48,81 @@ const ME_INVITATIONS = gql`
   ${Invitation.fragments.invitation}
 `
 
-const Wallet = () => {
-  return (
-    <Protected>
-      <main className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <Head title={{ zh_hant: '邀請好友', zh_hans: '邀请好友' }} />
+const Invitations = () => (
+  <Protected>
+    <main className="l-row">
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        <Head title={{ zh_hant: '邀請好友', zh_hans: '邀请好友' }} />
 
-          <PageHeader
-            pageTitle={<Translate zh_hant="邀請好友" zh_hans="邀请好友" />}
-          />
+        <PageHeader
+          pageTitle={<Translate zh_hant="邀請好友" zh_hans="邀请好友" />}
+        />
 
-          <Query query={ME_INVITATIONS}>
-            {({
-              data,
-              loading,
-              error,
-              fetchMore
-            }: QueryResult & { data: MeInvitations }) => {
-              if (loading) {
-                return <Spinner />
-              }
+        <Query query={ME_INVITATIONS}>
+          {({
+            data,
+            loading,
+            error,
+            fetchMore,
+            refetch
+          }: QueryResult & { data: MeInvitations }) => {
+            if (loading) {
+              return <Spinner />
+            }
 
-              const connectionPath = 'viewer.status.invitation.sent'
-              const { edges, pageInfo } = _get(data, connectionPath, {})
-              const loadMore = () =>
-                fetchMore({
-                  variables: {
-                    cursor: pageInfo.endCursor
-                  },
-                  updateQuery: (previousResult, { fetchMoreResult }) =>
-                    mergeConnections({
-                      oldData: previousResult,
-                      newData: fetchMoreResult,
-                      path: connectionPath
-                    })
-                })
+            const connectionPath = 'viewer.status.invitation.sent'
+            const { edges, pageInfo } = _get(data, connectionPath, {})
+            const loadMore = () =>
+              fetchMore({
+                variables: {
+                  cursor: pageInfo.endCursor
+                },
+                updateQuery: (previousResult, { fetchMoreResult }) =>
+                  mergeConnections({
+                    oldData: previousResult,
+                    newData: fetchMoreResult,
+                    path: connectionPath
+                  })
+              })
 
-              // if (!edges || edges.length <= 0) {
-              //   return <EmptyMAT />
-              // }
+            // if (!edges || edges.length <= 0) {
+            //   return <EmptyMAT />
+            // }
 
-              return (
-                <>
-                  <Invite invitation={data.viewer.status.invitation} />
+            return (
+              <>
+                <Invite
+                  invitation={data.viewer.status.invitation}
+                  refetch={refetch}
+                />
 
-                  <InfiniteScroll
-                    hasNextPage={pageInfo.hasNextPage}
-                    loadMore={loadMore}
-                  >
-                    <ul>
-                      {edges.map(
-                        ({ node, cursor }: { node: any; cursor: any }) => (
-                          <li key={cursor}>
-                            <Invitation invitation={node} />
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </InfiniteScroll>
-                </>
-              )
-            }}
-          </Query>
-        </article>
+                <InfiniteScroll
+                  hasNextPage={pageInfo.hasNextPage}
+                  loadMore={loadMore}
+                >
+                  <ul>
+                    {edges.map(
+                      ({ node, cursor }: { node: any; cursor: any }) => (
+                        <li key={cursor}>
+                          <Invitation invitation={node} />
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </InfiniteScroll>
+              </>
+            )
+          }}
+        </Query>
+      </article>
 
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          <Footer />
-        </aside>
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Footer />
+      </aside>
 
-        <style jsx>{styles}</style>
-      </main>
-    </Protected>
-  )
-}
+      <style jsx>{styles}</style>
+    </main>
+  </Protected>
+)
 
-export default Wallet
+export default Invitations

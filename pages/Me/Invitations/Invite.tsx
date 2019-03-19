@@ -7,6 +7,7 @@ import { TextIcon } from '~/components/TextIcon'
 import ICON_GIFT_GREEN from '~/static/icons/gift-green.svg?sprite'
 
 import { InvitationStatus } from './__generated__/InvitationStatus'
+import InviteForm from './InviteForm'
 import styles from './styles.css'
 
 const fragments = {
@@ -18,7 +19,13 @@ const fragments = {
   `
 }
 
-const Invite = ({ invitation }: { invitation: InvitationStatus }) => {
+const Invite = ({
+  invitation,
+  refetch
+}: {
+  invitation: InvitationStatus
+  refetch: () => any
+}) => {
   return (
     <>
       <section>
@@ -42,6 +49,11 @@ const Invite = ({ invitation }: { invitation: InvitationStatus }) => {
         </div>
 
         <p className="reward">{invitation.reward}</p>
+
+        <InviteForm
+          defaultDisabled={invitation.left <= 0}
+          submitCallback={refetch}
+        />
       </section>
 
       <style jsx>{styles}</style>

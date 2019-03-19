@@ -50,14 +50,18 @@
 
   &.create {
     line-height: 2;
+
+    & .hint {
+      flex-shrink: 0;
+    }
+    & .tag {
+      margin-left: var(--spacing-xx-tight);
+      color: var(--color-grey);
+    }
   }
 }
 
 .search-tag-count {
   margin-left: var(--spacing-xx-tight);
-  color: var(--color-grey);
-}
-
-.search-tag-create {
   color: var(--color-grey);
 }

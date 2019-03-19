@@ -41,3 +41,43 @@
     }
   }
 }
+
+.form {
+  margin: var(--spacing-default) 0 var(--spacing-x-loose);
+
+  & .buttons {
+    margin-top: var(--spacing-tight);
+    text-align: right;
+  }
+
+  & .input-container {
+    position: relative;
+  }
+
+  & .input-user {
+    @mixin flex-center-space-between;
+    @mixin cover;
+    padding: var(--spacing-x-tight) var(--spacing-tight);
+
+    background: var(--color-grey-lighter);
+  }
+
+  & :global(input + .info) {
+    display: none;
+  }
+
+  @media (--sm-up) {
+    & .buttons {
+      margin-top: 0;
+    }
+
+    & :global(> *) {
+      display: inline-block;
+    }
+
+    & .input-container {
+      margin-right: var(--spacing-tight);
+      width: 20rem;
+    }
+  }
+}

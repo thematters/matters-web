@@ -42,7 +42,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       >
         <button type="button" className={containerClasses}>
           <Avatar size="small" user={viewer.isInactive ? undefined : user} />
-          <section className="info u-text-truncate">
+          <section className="info">
             {viewer.isActive && (
               <>
                 <span className="username">{user.displayName}</span>

@@ -39,8 +39,8 @@ interface Props {
   values: any
   errors: any
   touched: any
-  handleBlur: () => {}
-  handleChange: () => {}
+  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 
   [key: string]: any
 }
