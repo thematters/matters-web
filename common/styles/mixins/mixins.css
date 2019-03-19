@@ -64,3 +64,26 @@
   white-space: nowrap;
   word-wrap: normal;
 }
+
+@define-mixin unread-dot {
+  position: relative;
+
+  &::after {
+    @mixin all-transition;
+
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 0.5rem;
+    height: 0.5rem;
+
+    background: var(--color-matters-green);
+    border-radius: 50%;
+    transform: scale(0);
+  }
+
+  &.unread::after {
+    transform: scale(1);
+  }
+}

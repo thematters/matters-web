@@ -25,8 +25,11 @@ const fragments = {
 const Invitation = ({ invitation }: { invitation: InvitationType }) => {
   return (
     <section className="invitation">
-      {invitation.email && <span>{invitation.email}</span>}
-      {invitation.user && <UserDigest.Mini user={invitation.user} />}
+      {invitation.user ? (
+        <UserDigest.Mini user={invitation.user} />
+      ) : (
+        <span>{invitation.email}</span>
+      )}
 
       <div className="right">
         <DateTime date={invitation.createdAt} type="standard" />

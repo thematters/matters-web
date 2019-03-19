@@ -28,7 +28,7 @@ export type PopperInstance = Instance
 
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
-  trigger: 'mouseenter focus click',
+  trigger: ' click',
   interactive: true,
   distance: 4,
   placement: 'bottom',
