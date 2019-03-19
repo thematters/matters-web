@@ -12,6 +12,7 @@
 .invitation {
   @mixin flex-center-space-between;
   @mixin border-top-grey;
+  font-size: var(--font-size-sm);
   padding: var(--spacing-default) 0;
 
   & .right {
@@ -59,7 +60,7 @@
     @mixin cover;
     padding: var(--spacing-x-tight) var(--spacing-tight);
 
-    background: var(--color-grey-lighter);
+    background: var(--color-bg-green);
   }
 
   & :global(input + .info) {

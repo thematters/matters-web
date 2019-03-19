@@ -111,7 +111,7 @@ const NoticeButton = ({
       zIndex={101}
       distance={12}
       trigger="manual"
-      onCreate={i => setInstance(i)}
+      onCreate={setInstance}
       theme="dropdown shadow-light"
       onShown={() => {
         if (hasUnreadNotices) {

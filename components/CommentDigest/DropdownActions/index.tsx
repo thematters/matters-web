@@ -117,7 +117,7 @@ const DropdownActions = ({
         />
       }
       trigger="click"
-      onCreate={i => setInstance(i)}
+      onCreate={setInstance}
       placement="bottom-end"
       zIndex={301}
     >

@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
+import { ViewerContext } from '~/components/Viewer'
 
 import ICON_GIFT_GREEN from '~/static/icons/gift-green.svg?sprite'
 
@@ -26,6 +28,8 @@ const Invite = ({
   invitation: InvitationStatus
   refetch: () => any
 }) => {
+  const viewer = useContext(ViewerContext)
+
   return (
     <>
       <section>
@@ -41,7 +45,9 @@ const Invite = ({
             <span>
               <Translate zh_hant="你有" zh_hans="你有" />
             </span>{' '}
-            <span className="highlight">{invitation.left}</span>{' '}
+            <span className="highlight">
+              {viewer.isAdmin ? '∞' : invitation.left}
+            </span>{' '}
             <span>
               <Translate
                 zh_hant="個創作者邀請名額"

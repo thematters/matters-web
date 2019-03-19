@@ -38,7 +38,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       <Dropdown
         content={<DropdownMenu hideDropdown={hideDropdown} />}
         zIndex={101}
-        onCreate={i => setInstance(i)}
+        onCreate={setInstance}
       >
         <button type="button" className={containerClasses}>
           <Avatar size="small" user={viewer.isInactive ? undefined : user} />

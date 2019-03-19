@@ -137,7 +137,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
           return (
             <Dropdown
               trigger="manual"
-              onCreate={i => setInstance(i)}
+              onCreate={setInstance}
               content={
                 <DropdownContent
                   loading={loading}
