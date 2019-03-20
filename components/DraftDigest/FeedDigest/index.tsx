@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { DateTime, Icon, TextIcon, Title, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums/text'
-import { toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
@@ -62,6 +62,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
     [publishState]: true,
     'u-area-disable': isPublished
   })
+  const cleanedSummary = stripHtml(summary)
 
   return (
     <section className={containerClasses}>
@@ -92,7 +93,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
         <div className="description">
           <Link {...path}>
             <a>
-              <p dangerouslySetInnerHTML={{ __html: summary || '' }} />
+              <p>{cleanedSummary}</p>
             </a>
           </Link>
 
