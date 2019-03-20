@@ -11,12 +11,14 @@ import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
+import { TextIcon } from '~/components/TextIcon'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
+import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import EditProfileButton from './EditProfileButton'
@@ -39,6 +41,9 @@ const fragments = {
       }
       followers(input: { first: 0 }) {
         totalCount
+      }
+      status {
+        state
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
@@ -76,6 +81,23 @@ const SeedBadge = () => (
       />
     </span>
   </Tooltip>
+)
+
+const OnboardingBadge = () => (
+  <span>
+    <TextIcon
+      color="grey"
+      icon={
+        <Icon
+          id={ICON_LOCK.id}
+          viewBox={ICON_LOCK.viewBox}
+          style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
+        />
+      }
+    >
+      <Translate zh_hant="帳號待激活" zh_hans="账户待激活" />
+    </TextIcon>
+  </span>
 )
 
 const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
@@ -127,6 +149,8 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
               })
               const badges = _get(user, 'info.badges', [])
               const hasSeedBadge = _some(badges, { type: 'seed' })
+              const state = _get(user, 'status.state')
+              const isOnboarding = state === 'onboarding'
 
               // me profile
               if (isMe) {
@@ -144,6 +168,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                             <span>
                               {user.displayName}
                               {hasSeedBadge && <SeedBadge />}
+                              {isOnboarding && <OnboardingBadge />}
                             </span>
                           )}
                           {viewer.isArchived && (
@@ -216,6 +241,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                         <span>
                           {user.displayName}
                           {hasSeedBadge && <SeedBadge />}
+                          {isOnboarding && <OnboardingBadge />}
                         </span>
                         <FollowButton.State user={user} />
                       </section>
