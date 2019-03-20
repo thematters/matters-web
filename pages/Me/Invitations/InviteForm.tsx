@@ -96,7 +96,7 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            color: 'red',
+            color: 'green',
             duration: TOAST_DURATION,
             header: <Translate zh_hant="邀請已發送" zh_hans="邀请已发送" />,
             content: (
@@ -112,7 +112,7 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            color: 'red',
+            color: 'green',
             duration: TOAST_DURATION,
             header: <Translate zh_hant="邀請成功" zh_hans="邀请成功" />,
             content: (
@@ -172,7 +172,7 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            color: 'green',
+            color: 'red',
             duration: TOAST_DURATION,
             header: TEXT_INVITE_FAILED,
             content: (
@@ -190,7 +190,7 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            color: 'green',
+            color: 'red',
             duration: TOAST_DURATION,
             header: TEXT_INVITE_FAILED,
             content: (
