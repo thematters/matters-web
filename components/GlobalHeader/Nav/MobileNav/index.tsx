@@ -21,7 +21,7 @@ export default () => {
       content={<DropdownContent hideDropdown={hideDropdown} />}
       distance={8}
       theme="dropdown shadow-default"
-      onCreate={i => setInstance(i)}
+      onCreate={setInstance}
       zIndex={101}
     >
       <button type="button" aria-label="菜單" className="nav-button">

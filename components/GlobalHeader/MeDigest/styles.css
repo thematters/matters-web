@@ -34,6 +34,7 @@
   max-width: var(--info-max-width);
   margin-left: var(--spacing-x-tight);
   text-align: left;
+  overflow: hidden;
 
   @media (--sm-up) {
     display: inline-block;
@@ -62,5 +63,14 @@
 
   & .username {
     margin-left: var(--spacing-xxx-tight);
+  }
+}
+
+.invitations {
+  @mixin unread-dot;
+
+  &::after {
+    top: -0.25rem;
+    right: calc((var(--spacing-x-tight) + 0.25rem) * -1);
   }
 }

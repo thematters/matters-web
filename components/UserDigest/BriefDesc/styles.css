@@ -1,23 +1,26 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  white-space: normal;
+
+  & :global(.avatar) {
+    flex-shrink: 0;
+  }
 }
 
 .name {
+  flex-shrink: 0;
+
   color: var(--color-black);
   font-size: var(--font-size-sm);
-  line-height: normal;
   padding-left: var(--spacing-x-tight);
 }
 
 .description {
+  @mixin truncate;
+  min-width: 0;
+
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
-  line-height: normal;
   padding-left: var(--spacing-x-tight);
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

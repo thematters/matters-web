@@ -27,7 +27,7 @@
 
 .header + .content {
   margin-top: var(--spacing-xx-tight);
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .green {

@@ -80,7 +80,7 @@ const SortBy: React.FC<SortByProps> = props => {
       <Dropdown
         content={<DropdownContent {...props} hideDropdown={hideDropdown} />}
         trigger="click"
-        onCreate={i => setInstance(i)}
+        onCreate={setInstance}
       >
         <button type="button" className="sort-button">
           <TextIcon
