@@ -76,7 +76,6 @@ const handleInviteSubmit = async (
     page: 'userProfile',
     userName: _get(inviteInput, 'user.userName', '')
   })
-  const TEXT_INVITE_FAILED = <Translate zh_hant="邀請失敗" zh_hans="邀请失败" />
   const TOAST_DURATION = 1000 * 8
 
   try {
@@ -134,7 +133,7 @@ const handleInviteSubmit = async (
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
-            header: TEXT_INVITE_FAILED,
+            header: <Translate zh_hant="無需邀請" zh_hans="无需邀請" />,
             content: (
               <Translate
                 zh_hant={`你的好友 ${displayName} 已經是創作者了，無需開啟資格。`}
@@ -174,7 +173,7 @@ const handleInviteSubmit = async (
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
-            header: TEXT_INVITE_FAILED,
+            header: <Translate zh_hant="直接開啟" zh_hans="直接开启" />,
             content: (
               <Translate
                 zh_hant="你輸入的電子信箱的所屬用戶已註冊。請直接輸入好友站內姓名，為他／她開啟創作者資格。"
@@ -192,7 +191,7 @@ const handleInviteSubmit = async (
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
-            header: TEXT_INVITE_FAILED,
+            header: <Translate zh_hant="邀請失敗" zh_hans="邀请失败" />,
             content: (
               <Translate
                 zh_hant={`你的好友 ${
