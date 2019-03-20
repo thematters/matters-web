@@ -97,7 +97,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           </a>
         </Link>
       </Menu.Item>
-      { viewer.isActive === true &&
+      {viewer.isActive === true && (
         <Menu.Item>
           <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
             <a onClick={hideDropdown}>
@@ -119,7 +119,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
             </a>
           </Link>
         </Menu.Item>
-      }
+      )}
       <Menu.Divider />
       <Menu.Item>
         <Link
