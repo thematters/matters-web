@@ -36,7 +36,7 @@ const Invitation = ({ invitation }: { invitation: InvitationType }) => {
 
         {invitation.accepted && (
           <span className="status accepted">
-            <Translate zh_hant="賬號已激活" zh_hans="账号已激活" />
+            <Translate zh_hant="資格已開啟" zh_hans="资格已开启" />
           </span>
         )}
 
