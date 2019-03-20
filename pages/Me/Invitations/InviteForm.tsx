@@ -77,10 +77,7 @@ const handleInviteSubmit = async (
     userName: _get(inviteInput, 'user.userName', '')
   })
   const TEXT_INVITE_FAILED = <Translate zh_hant="邀請失敗" zh_hans="邀请失败" />
-  const baseErrorToastProps = {
-    color: 'red',
-    duration: 1000 * 5
-  }
+  const TOAST_DURATION = 1000 * 8
 
   try {
     await invite({
@@ -100,6 +97,7 @@ const handleInviteSubmit = async (
         new CustomEvent('addToast', {
           detail: {
             color: 'green',
+            duration: TOAST_DURATION,
             header: <Translate zh_hant="邀請已發送" zh_hans="邀请已发送" />,
             content: (
               <Translate
@@ -115,6 +113,7 @@ const handleInviteSubmit = async (
         new CustomEvent('addToast', {
           detail: {
             color: 'green',
+            duration: TOAST_DURATION,
             header: <Translate zh_hant="邀請成功" zh_hans="邀请成功" />,
             content: (
               <Translate
@@ -133,7 +132,8 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            ...baseErrorToastProps,
+            color: 'red',
+            duration: TOAST_DURATION,
             header: TEXT_INVITE_FAILED,
             content: (
               <Translate
@@ -172,7 +172,8 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            ...baseErrorToastProps,
+            color: 'red',
+            duration: TOAST_DURATION,
             header: TEXT_INVITE_FAILED,
             content: (
               <Translate
@@ -189,7 +190,8 @@ const handleInviteSubmit = async (
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            ...baseErrorToastProps,
+            color: 'red',
+            duration: TOAST_DURATION,
             header: TEXT_INVITE_FAILED,
             content: (
               <Translate
