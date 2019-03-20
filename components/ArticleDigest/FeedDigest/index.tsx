@@ -80,7 +80,7 @@ const FeedDigest = ({
         <div className="description">
           <Link {...path}>
             <a>
-              <p dangerouslySetInnerHTML={{ __html: summary }} />
+              <p dangerouslySetInnerHTML={{ __html: summary || '' }} />
             </a>
           </Link>
 
