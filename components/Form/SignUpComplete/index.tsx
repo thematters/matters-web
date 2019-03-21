@@ -32,18 +32,42 @@ const SignUpComplete = () => (
       <br />
       <p>
         <Translate zh_hant="你可以加入" zh_hans="你可以加入" />
-        <a className="u-link-green" href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ" target="_blank">
-          <Translate zh_hant="官方 Telegram 群组" zh_hans="官方 Telegram 群组" />
+        <a
+          className="u-link-green"
+          href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
+          target="_blank"
+        >
+          <Translate
+            zh_hant="官方 Telegram 群组"
+            zh_hans="官方 Telegram 群组"
+          />
         </a>
-        <Translate zh_hant="尋找老用户，或關注 " zh_hans="寻找老用户，或关注 "/>
-        <a className="u-link-green" href="https://www.facebook.com/MattersLab2018" target="_blank">
+        <Translate
+          zh_hant="尋找老用户，或關注 "
+          zh_hans="寻找老用户，或关注 "
+        />
+        <a
+          className="u-link-green"
+          href="https://www.facebook.com/MattersLab2018"
+          target="_blank"
+        >
           <Translate zh_hant="Matters 臉書" zh_hans="Matters 脸书" />
         </a>
         <Translate zh_hant="和" zh_hans="和" />
-        <a className="u-link-green" href="https://weibo.com/6695370718/profile?topnav=1&wvr=6" target="_blank">
-          <Translate zh_hant="微博帳號 MattersLab" zh_hans="微博帳號 MattersLab" />
+        <a
+          className="u-link-green"
+          href="https://weibo.com/6695370718/profile?topnav=1&wvr=6"
+          target="_blank"
+        >
+          <Translate
+            zh_hant="微博帳號 MattersLab"
+            zh_hans="微博帳號 MattersLab"
+          />
         </a>
-        <Translate zh_hant="，即時了解開啟權限新玩法。" zh_hans="，即时了解开启权限新玩法。" />
+        <Translate
+          zh_hant="，即時了解開啟權限新玩法。"
+          zh_hans="，即时了解开启权限新玩法。"
+        />
       </p>
     </div>
 
