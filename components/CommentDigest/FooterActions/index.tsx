@@ -16,6 +16,7 @@ import UpvoteButton from './UpvoteButton'
 
 export interface FooterActionsControls {
   hasComment?: boolean
+  refetch?: boolean
 }
 type FooterActionsProps = {
   comment: DigestActionsComment
@@ -53,7 +54,11 @@ const IconDotDivider = () => (
   />
 )
 
-const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
+const FooterActions = ({
+  comment,
+  hasComment,
+  refetch
+}: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
@@ -104,6 +109,7 @@ const FooterActions = ({ comment, hasComment }: FooterActionsProps) => {
             articleMediaHash={comment.article.mediaHash || ''}
             replyToId={comment.id}
             parentId={_get(comment, 'parentComment.id') || comment.id}
+            refetch={refetch}
             submitCallback={() => setShowForm(false)}
           />
         </section>

@@ -152,10 +152,10 @@ const CommentForm = ({
 
       putComment({ variables: { input } })
         .then(({ data }: any) => {
-          if (submitCallback && data.putComment) {
+          if (submitCallback) {
             submitCallback()
-            resetForm({ content: '' })
           }
+          resetForm({ content: '' })
           window.dispatchEvent(
             new CustomEvent('addToast', {
               detail: {
@@ -180,11 +180,11 @@ const CommentForm = ({
       refetchQueries={
         !refetch
           ? []
-          : commentId
+          : parentId
           ? [
               {
                 query: COMMENT_COMMENTS,
-                variables: { id: commentId }
+                variables: { id: parentId }
               }
             ]
           : articleMediaHash
