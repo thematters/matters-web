@@ -2,7 +2,7 @@
 
 exports[`Menu default style match snapshot 1`] = `
 <ul
-  class="jsx-undefined menu spacing-xxxtight"
+  class="jsx-undefined menu spacing-xxtight"
   role="menu"
   style="width: 168px;"
 />

@@ -28,7 +28,7 @@ export const LanguageSwitch = () => {
     <Dropdown
       content={<DropdownContent hideDropdown={hideDropdown} />}
       trigger="click"
-      onCreate={i => setInstance(i)}
+      onCreate={setInstance}
     >
       <button type="button" className="sort-button">
         <TextIcon

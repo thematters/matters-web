@@ -22,7 +22,7 @@ export class Menu extends React.PureComponent<MenuProps> {
   public render() {
     const {
       width = '168px',
-      spacing = 'xxxtight',
+      spacing = 'xxtight',
       className,
       style,
       children

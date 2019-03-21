@@ -1,4 +1,6 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -16,6 +18,8 @@ import ICON_ME from '~/static/icons/me.svg?sprite'
 import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
+import styles from './styles.css'
+
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
@@ -26,6 +30,10 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const userHistoryPath = toPath({
     page: 'userHistory',
     userName: viewer.userName || ''
+  })
+  const invitationsClass = classNames({
+    invitations: true,
+    unread: _get(viewer, 'status.invitation.left', 0) > 0
   })
 
   return (
@@ -89,27 +97,29 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           </a>
         </Link>
       </Menu.Item>
-      <Menu.Item>
-        <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
-          <a onClick={hideDropdown}>
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_GIFT.id}
-                  viewBox={ICON_GIFT.viewBox}
-                  size="small"
-                />
-              }
-              text={translate({
-                zh_hant: '邀請好友',
-                zh_hans: '邀请好友',
-                lang
-              })}
-              spacing="xtight"
-            />
-          </a>
-        </Link>
-      </Menu.Item>
+      {viewer.isActive === true && (
+        <Menu.Item>
+          <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
+            <a onClick={hideDropdown}>
+              <TextIcon
+                icon={
+                  <Icon
+                    id={ICON_GIFT.id}
+                    viewBox={ICON_GIFT.viewBox}
+                    size="small"
+                  />
+                }
+                spacing="xtight"
+              >
+                <span className={invitationsClass}>
+                  <Translate zh_hant="邀請好友" zh_hans="邀请好友" />
+                  <style jsx>{styles}</style>
+                </span>
+              </TextIcon>
+            </a>
+          </Link>
+        </Menu.Item>
+      )}
       <Menu.Divider />
       <Menu.Item>
         <Link

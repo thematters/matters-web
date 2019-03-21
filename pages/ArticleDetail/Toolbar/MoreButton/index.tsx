@@ -66,7 +66,7 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
         <DropdownContent article={article} hideDropdown={hideDropdown} />
       }
       trigger="click"
-      onCreate={i => setInstance(i)}
+      onCreate={setInstance}
       placement="bottom-end"
       zIndex={301}
     >

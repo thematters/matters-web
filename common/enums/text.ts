@@ -32,7 +32,8 @@ export const TEXT: { [key: string]: any } = {
     accountFrozen: '帳戶已凍結',
     accountArchived: '帳戶已註銷',
     accountBanned: '帳戶已禁言',
-    publish: '發佈文章'
+    publish: '發佈文章',
+    onboardingInfo: '你還不是創作者'
   },
 
   zh_hans: {
@@ -68,6 +69,7 @@ export const TEXT: { [key: string]: any } = {
     accountFrozen: '账户已冻结',
     accountArchived: '账户已注销',
     accountBanned: '账户已禁言',
-    publish: '发布文章'
+    publish: '发布文章',
+    onboardingInfo: '你还不是创作者'
   }
 }

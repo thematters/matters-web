@@ -13,8 +13,12 @@ export const ViewerUserFragment = {
       avatar
       status {
         state
+        role
         MAT {
           total
+        }
+        invitation {
+          left
         }
       }
       info {
@@ -40,17 +44,20 @@ type Viewer = ViewerUser & {
   isFrozen: boolean
   isOnboarding: boolean
   isInactive: boolean
+  isAdmin: boolean
 }
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
   const isAuthed = !!viewer.id
   const state = _get(viewer, 'status.state')
+  const role = _get(viewer, 'status.role')
   const isActive = state === 'active'
   const isFrozen = state === 'frozen'
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'
   const isOnboarding = state === 'onboarding'
   const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
+  const isAdmin = role === 'admin'
 
   return {
     ...viewer,
@@ -60,7 +67,8 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isArchived,
     isFrozen,
     isOnboarding,
-    isInactive
+    isInactive,
+    isAdmin
   }
 }
 

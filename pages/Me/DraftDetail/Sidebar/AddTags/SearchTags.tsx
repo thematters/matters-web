@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { QueryResult } from 'react-apollo'
@@ -92,10 +93,10 @@ const DropdownContent = ({
               hideDropdown()
             }}
           >
-            <span>
+            <span className="hint">
               <Translate zh_hant="創建" zh_hans="创建" />
             </span>
-            <span className="search-tag-create"> {search}</span>
+            <span className="tag">{search}</span>
           </button>
         </Menu.Item>
       </Menu>
@@ -103,9 +104,14 @@ const DropdownContent = ({
     </>
   )
 
+const debouncedSetQuerySearch = _debounce((value, setQuerySearch) => {
+  setQuerySearch(value)
+}, 300)
+
 const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
+  const [querySearch, setQuerySearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (instance) {
@@ -122,12 +128,16 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
 
   return (
     <>
-      <Query query={SEARCH_TAGS} variables={{ search }} skip={!search}>
+      <Query
+        query={SEARCH_TAGS}
+        variables={{ search: querySearch }}
+        skip={!querySearch}
+      >
         {({ data, loading }: QueryResult & { data: SearchTagsQuery }) => {
           return (
             <Dropdown
               trigger="manual"
-              onCreate={i => setInstance(i)}
+              onCreate={setInstance}
               content={
                 <DropdownContent
                   loading={loading}
@@ -152,6 +162,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
                 onChange={e => {
                   const value = e.target.value
                   setSearch(value)
+                  debouncedSetQuerySearch(value, setQuerySearch)
                   if (value) {
                     showDropdown()
                   } else {

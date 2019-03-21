@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Title } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
 import { Fingerprint } from '../Fingerprint'
@@ -58,6 +58,7 @@ const FeedDigest = ({
     content: true,
     'no-cover': !cover
   })
+  const cleanedSummary = stripHtml(summary)
 
   return (
     <section className="container">
@@ -80,7 +81,7 @@ const FeedDigest = ({
         <div className="description">
           <Link {...path}>
             <a>
-              <p>{summary}</p>
+              <p>{cleanedSummary}</p>
             </a>
           </Link>
 

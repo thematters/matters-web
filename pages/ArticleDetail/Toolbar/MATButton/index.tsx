@@ -5,6 +5,7 @@ import { forwardRef, useContext } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import { ModalSwitch } from '~/components/ModalManager'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -40,6 +41,36 @@ const APPRECIATE_ARTICLE = gql`
     }
   }
 `
+
+const OnboardingAppreciateButton = ({
+  article
+}: {
+  article: MATArticleDetail
+}) => {
+  const buttonClasses = classNames({
+    'mat-button': true
+  })
+
+  return (
+    <ModalSwitch modalId="onboardingInfoModal">
+      {(open: any) => (
+        <button
+          className={buttonClasses}
+          type="button"
+          onClick={open}
+          aria-label="讚賞文章"
+        >
+          <Icon
+            id={ICON_MAT_GOLD.id}
+            viewBox={ICON_MAT_GOLD.viewBox}
+            style={{ width: 28, height: 28 }}
+          />
+          <style jsx>{styles}</style>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
 
 const AppreciateButton = forwardRef<
   HTMLButtonElement,
@@ -89,6 +120,16 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
     inactive: !canAppreciate
   })
 
+  if (viewer.isOnboarding) {
+    return (
+      <section className="container">
+        <OnboardingAppreciateButton article={article} />
+        <span className="mat-count">{numAbbr(article.MAT)}</span>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <Mutation
       mutation={APPRECIATE_ARTICLE}
@@ -131,7 +172,10 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
                         zh_hant: '去讚賞其他用戶吧',
                         zh_hans: '去打赏其他用户吧'
                       }
-                    : { zh_hant: '你無法進行讚賞', zh_hans: '你无法进行打赏' })}
+                    : {
+                        zh_hant: '你無法進行讚賞',
+                        zh_hans: '你无法进行打赏'
+                      })}
                 />
               }
             >

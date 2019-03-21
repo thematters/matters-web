@@ -95,7 +95,7 @@ const BaseSearchBar: React.FC<
             content={<AutoComplete hideDropdown={hideDropdown} />}
             zIndex={101}
             trigger="manual"
-            onCreate={i => setInstance(i)}
+            onCreate={setInstance}
             theme="dropdown shadow-light"
           >
             <form onSubmit={handleSubmit}>

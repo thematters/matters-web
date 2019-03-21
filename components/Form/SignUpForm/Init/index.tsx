@@ -17,7 +17,7 @@ import {
   analytics,
   isValidDisplayName,
   isValidEmail,
-  isValidPassword,
+  isValidStrictPassword,
   translate
 } from '~/common/utils'
 
@@ -108,7 +108,7 @@ export const SignUpInitForm: FC<Props> = ({
     let result: any
     if (!value) {
       result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
-    } else if (!isValidPassword(value)) {
+    } else if (!isValidStrictPassword(value)) {
       result = {
         zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
         zh_hans: '不少于 8 位，必须包含数字和大小写字母'
