@@ -19,5 +19,5 @@
 }
 
 .buttons {
-  padding-top: var(--spacing-default);
+  padding-top: var(--spacing-loose);
 }

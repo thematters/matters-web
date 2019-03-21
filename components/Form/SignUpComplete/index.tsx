@@ -18,15 +18,55 @@ const SignUpComplete = () => (
 
       <p>
         <Translate
-          zh_hant="恭喜！註冊完成，你可以瀏覽社區的所有內容了。"
-          zh_hans="恭喜！註冊完成，你可以瀏覽社區的所有內容了。"
+          zh_hant="恭喜！註冊完成，你可以瀏覽並分享社區的所有內容了。"
+          zh_hans="恭喜！注册完成，你可以浏览并分享社区的所有内容了。"
         />
       </p>
       <br />
       <p>
         <Translate
-          zh_hant="目前 Matters 是一個邀請制社區，你的帳號需要激活才能擁有創作資格，你可以向你認識的 Matters 老用戶索取激活資格。"
-          zh_hans="目前 Matters 是一个邀请制社区，你的账号需要激活才能拥有创作资格，你可以向你认识的 Matters 老用户索取激活资格。"
+          zh_hant="目前，Matters 實行邀請制，新註冊的用戶需要透過老用戶邀請，才可以獲得創作者資格。"
+          zh_hans="目前，Matters 实行邀请制，新注册的用户需要通過老用户邀请，才可以获得创作者资格。"
+        />
+      </p>
+      <br />
+      <p>
+        <Translate zh_hant="你可以加入" zh_hans="你可以加入" />
+        <a
+          className="u-link-green"
+          href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
+          target="_blank"
+        >
+          <Translate
+            zh_hant="官方 Telegram 群组"
+            zh_hans="官方 Telegram 群组"
+          />
+        </a>
+        <Translate
+          zh_hant="尋找老用户，或關注 "
+          zh_hans="寻找老用户，或关注 "
+        />
+        <a
+          className="u-link-green"
+          href="https://www.facebook.com/MattersLab2018"
+          target="_blank"
+        >
+          <Translate zh_hant="Matters 臉書" zh_hans="Matters 脸书" />
+        </a>
+        <Translate zh_hant="和" zh_hans="和" />
+        <a
+          className="u-link-green"
+          href="https://weibo.com/6695370718/profile?topnav=1&wvr=6"
+          target="_blank"
+        >
+          <Translate
+            zh_hant="微博帳號 MattersLab"
+            zh_hans="微博帳號 MattersLab"
+          />
+        </a>
+        <Translate
+          zh_hant="，即時了解開啟權限新玩法。"
+          zh_hans="，即时了解开启权限新玩法。"
         />
       </p>
     </div>
