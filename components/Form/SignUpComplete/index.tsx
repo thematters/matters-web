@@ -2,6 +2,7 @@ import { Button } from '~/components/Button'
 import { Translate } from '~/components/Language'
 import { Title } from '~/components/Title'
 
+import { EXTERNAL_LINKS } from '~/common/enums'
 import { redirectToTarget } from '~/common/utils'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
@@ -34,7 +35,7 @@ const SignUpComplete = () => (
         <Translate zh_hant="你可以加入" zh_hans="你可以加入" />
         <a
           className="u-link-green"
-          href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
+          href={EXTERNAL_LINKS.TELEGRAM}
           target="_blank"
         >
           <Translate
@@ -48,17 +49,13 @@ const SignUpComplete = () => (
         />
         <a
           className="u-link-green"
-          href="https://www.facebook.com/MattersLab2018"
+          href={EXTERNAL_LINKS.FACEBOOK}
           target="_blank"
         >
           <Translate zh_hant="Matters 臉書" zh_hans="Matters 脸书" />
         </a>
         <Translate zh_hant="和" zh_hans="和" />
-        <a
-          className="u-link-green"
-          href="https://weibo.com/6695370718/profile?topnav=1&wvr=6"
-          target="_blank"
-        >
+        <a className="u-link-green" href={EXTERNAL_LINKS.WEIBO} target="_blank">
           <Translate
             zh_hant="微博帳號 MattersLab"
             zh_hans="微博帳號 MattersLab"
