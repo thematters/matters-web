@@ -116,8 +116,8 @@ const handleInviteSubmit = async (
             header: <Translate zh_hant="邀請成功" zh_hans="邀请成功" />,
             content: (
               <Translate
-                zh_hant={`你的好友 ${displayName} 已透過你的邀請成為 Matters 創作者，感謝你們一起搭建 Matters 社群，5MAT 獎勵已送達。`}
-                zh_hans={`你的好友 ${displayName} 已通过你的邀请成为 Matters 创作者，感谢你们一起搭建 Matters 社区，5MAT 奖励已送达。`}
+                zh_hant={`你的好友 ${displayName} 已透過你的邀請成為 Matters 創作者，感謝你們一起搭建 Matters 社群，5 MAT 獎勵已送達。`}
+                zh_hans={`你的好友 ${displayName} 已通过你的邀请成为 Matters 创作者，感谢你们一起搭建 Matters 社区，5 MAT 奖励已送达。`}
               />
             )
           }
