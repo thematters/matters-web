@@ -92,14 +92,19 @@ const DescendantComment = ({
             articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
-            refetch={inArticle}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
           />
         )}
         {!edit && (
           <CommentContent state={comment.state} content={comment.content} />
         )}
-        {!edit && <FooterActions comment={comment} {...actionControls} />}
+        {!edit && (
+          <FooterActions
+            comment={comment}
+            refetch={inArticle}
+            {...actionControls}
+          />
+        )}
       </div>
 
       <style jsx>{styles}</style>
@@ -150,12 +155,17 @@ const FeedDigest = ({
             articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
-            refetch={inArticle}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
           />
         )}
         {!edit && <CommentContent state={state} content={content} />}
-        {!edit && <FooterActions comment={comment} {...actionControls} />}
+        {!edit && (
+          <FooterActions
+            comment={comment}
+            refetch={inArticle}
+            {...actionControls}
+          />
+        )}
 
         {descendantComments.length > 0 && (
           <ul className="descendant-comments">
