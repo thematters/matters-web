@@ -26,7 +26,7 @@ const SignUpComplete = () => (
       <p>
         <Translate
           zh_hant="目前，Matters 實行邀請制，新註冊的用戶需要透過老用戶邀請，才可以獲得創作者資格。"
-          zh_hans="目前，Matters 实行邀请制，新注册的用户需要通過老用户邀请，才可以获得创作者资格。"
+          zh_hans="目前，Matters 实行邀请制，新注册的用户需要通过老用户邀请，才可以获得创作者资格。"
         />
       </p>
       <br />
