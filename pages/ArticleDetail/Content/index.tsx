@@ -54,7 +54,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
         <>
           <FireOnMount fn={() => read({ variables: { id } })} />
           <div
-            className="content"
+            className="u-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
           <Waypoint

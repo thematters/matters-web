@@ -5,13 +5,13 @@ import ReactQuill, { Quill } from 'react-quill'
 
 import { LanguageConsumer } from '~/components/Language'
 
+import contentStyles from '~/common/styles/utils/content.article.css'
+import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
 import * as config from './config'
-import contentStyles from './content.editor.css'
-import bubbleStyles from './quill.bubble.css'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 
@@ -169,7 +169,6 @@ class Editor extends React.Component<Props, State> {
                 })}
                 onChange={this.handleChange}
                 onChangeSelection={this.handleOnChangeSelection}
-                onFocus={(...props) => console.log('onFocus', props)}
                 onBlur={this.saveDraft}
               />
               <SideToolbar

@@ -1,4 +1,7 @@
-.content-comment {
+/* @styled-jsx=global */
+
+.u-content-comment,
+.ql-editor {
   white-space: pre-wrap;
   line-height: 1.6;
 

@@ -60,7 +60,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
   const Term = () => (
     <>
       <div
-        className="content"
+        className="u-content"
         dangerouslySetInnerHTML={{
           __html: translate({
             ...ToS,
@@ -69,7 +69,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         }}
       />
       <div
-        className="content"
+        className="u-content"
         dangerouslySetInnerHTML={{
           __html: translate({
             ...Privacy,
