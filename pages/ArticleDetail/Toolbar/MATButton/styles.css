@@ -24,7 +24,6 @@
   & .mat-button:active {
     background: var(--color-matters-gold);
     color: #fff;
-    fill: currentColor;
   }
 }
 
