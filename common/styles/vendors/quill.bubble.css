@@ -5,12 +5,8 @@
   --input-padding-width: 5px;
   --input-padding-height: 3px;
 
-  --color-item-margin: 2px;
-  --color-item-size: 16px;
-  --color-items-per-row: 7;
-
   --background-color: var(--color-white);
-  --text-color: var(--color-white);
+  --text-color: var(--color-black);
 
   --inactive-color: var(--color-black);
   --active-color: var(--color-matters-gold);
@@ -250,7 +246,7 @@
     content: ' ';
     display: block;
     left: 50%;
-    margin-left: -1 * var(--arrow-width);
+    margin-left: calc(-1 * var(--arrow-width));
     position: absolute;
   }
 

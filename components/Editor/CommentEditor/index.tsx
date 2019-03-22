@@ -74,7 +74,7 @@ class CommentEditor extends React.Component<Props, State> {
 
     return (
       <>
-        <div className={containerClasses}>
+        <div className={containerClasses} id="comment-editor">
           <ReactQuill
             // readOnly={isSubmitting}
             theme="bubble"
@@ -86,6 +86,7 @@ class CommentEditor extends React.Component<Props, State> {
             onChange={handleChange}
             onFocus={() => this.setState({ focus: true })}
             onBlur={() => this.setState({ focus: false })}
+            bounds="#comment-editor"
           />
         </div>
 

@@ -12,10 +12,9 @@ aside {
   background-color: var(--color-white);
   transform: translateX(100%);
   opacity: 0;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 110;
-  overflow-x: initial;
-  overflow-y: auto;
 
   @media (--lg-down) {
     width: 30rem !important;
