@@ -9,6 +9,7 @@ import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
+import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
 import { translate } from '~/common/utils'
@@ -19,7 +20,8 @@ import styles from './styles.css'
 const CommentEditor = dynamic(
   () => import('~/components/Editor/CommentEditor'),
   {
-    ssr: false
+    ssr: false,
+    loading: () => <Spinner />
   }
 )
 

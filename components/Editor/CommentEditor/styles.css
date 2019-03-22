@@ -2,7 +2,6 @@
   @mixin all-transition;
 
   padding: var(--spacing-x-tight) var(--spacing-tight);
-  min-height: 2.5rem;
 
   font-size: var(--font-size-sm); /* fallbakc */
   font-size: calc(var(--font-size-sm) + 1px);
@@ -16,5 +15,9 @@
   &.focus {
     background-color: var(--color-bg-green);
     border-bottom: 1px solid var(--color-matters-green);
+  }
+
+  & :global(.ql-editor) {
+    min-height: 4rem;
   }
 }
