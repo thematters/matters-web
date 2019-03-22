@@ -22,12 +22,9 @@
 
 .unlogged {
   & .mat-button:active {
-    color: #fff;
     background: var(--color-matters-gold);
-
-    & svg {
-      fill: currentColor;
-    }
+    color: #fff;
+    fill: currentColor;
   }
 }
 
