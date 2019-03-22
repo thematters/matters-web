@@ -1,5 +1,7 @@
+import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
+import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate } from '~/components'
@@ -7,12 +9,31 @@ import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
 import { Query } from '~/components/GQL'
+import { ArticleDetailComments } from '~/components/GQL/fragments/article'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
+
+const SUBSCRIBE_COMMENTS = gql`
+  subscription ArticleCommentAdded(
+    $id: ID!
+    $first: Int!
+    $cursor: String
+    $hasDescendantComments: Boolean = true
+  ) {
+    nodeEdited(input: { id: $id }) {
+      id
+      ... on Article {
+        id
+        ...ArticleDetailComments
+      }
+    }
+  }
+  ${ArticleDetailComments}
+`
 
 const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -27,8 +48,8 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
       {({
         data,
         loading,
-        error,
-        fetchMore
+        fetchMore,
+        subscribeToMore
       }: QueryResult & { data: ArticleCommentsType }) => {
         if (loading) {
           return <Spinner />
@@ -56,6 +77,15 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           { pinned: true }
         )
 
+        // if (data.article.live) {
+        useEffect(() =>
+          subscribeToMore({
+            document: SUBSCRIBE_COMMENTS,
+            variables: { id: data.article.id, first: edges.length }
+          })
+        )
+        // }
+
         return (
           <>
             <section>
@@ -65,7 +95,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 refetch
               />
             </section>
-
             {filteredPinnedComments && filteredPinnedComments.length > 0 && (
               <section className="pinned-comments">
                 <h3>

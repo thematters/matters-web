@@ -3,10 +3,12 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
+import { ApolloLink, split } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
 import { onError } from 'apollo-link-error'
+import { WebSocketLink } from 'apollo-link-ws'
 import { createUploadLink } from 'apollo-upload-client'
+import { getMainDefinition } from 'apollo-utilities'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
@@ -19,7 +21,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 })
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL, WS_URL }
 } = getConfig()
 
 // toggle http for local dev
@@ -40,6 +42,29 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
       agent
     }
   })
+
+// only do ws with browser
+const wsLink = process.browser
+  ? new WebSocketLink({
+      uri: WS_URL,
+      options: {
+        reconnect: true
+      }
+    })
+  : null
+
+const dataLink = process.browser
+  ? ({ headers }: { [key: string]: any }) =>
+      split(
+        // split based on operation type
+        ({ query }) => {
+          const { kind, operation } = getMainDefinition(query)
+          return kind === 'OperationDefinition' && operation === 'subscription'
+        },
+        wsLink as WebSocketLink,
+        httpLink({ headers })
+      )
+  : httpLink
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -68,7 +93,7 @@ const authLink = setContext((_, { headers }) => {
 export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
-      link: ApolloLink.from([errorLink, authLink, httpLink({ headers })]),
+      link: ApolloLink.from([errorLink, authLink, dataLink({ headers })]),
       cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
     })
 )
