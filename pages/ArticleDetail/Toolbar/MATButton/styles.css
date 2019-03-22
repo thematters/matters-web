@@ -20,6 +20,17 @@
   }
 }
 
+.unlogged {
+  & .mat-button:active {
+    color: #fff;
+    background: var(--color-matters-gold);
+
+    & svg {
+      fill: currentColor;
+    }
+  }
+}
+
 .mat-button {
   width: 3rem;
   height: 3rem;
