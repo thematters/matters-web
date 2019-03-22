@@ -7,6 +7,7 @@
 
   --background-color: var(--color-white);
   --text-color: var(--color-black);
+  --border-color: rgba(0, 0, 0, 0.08);
 
   --inactive-color: var(--color-black);
   --active-color: var(--color-matters-gold);
@@ -59,11 +60,11 @@
   }
 }
 
-/* Base */
+/* Toolbar */
 .ql-bubble .ql-toolbar {
-  border: solid 1px rgba(0, 0, 0, 0.08);
-  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.08),
-    0 4px 12px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.08);
+  border: solid 1px var(--border-color);
+  box-shadow: 0 12px 24px 0 var(--border-color),
+    0 4px 12px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 var(--border-color);
   border-radius: var(--spacing-xx-tight);
 
   &:after {
@@ -223,7 +224,7 @@
   }
 }
 
-/* Bubble - Toolbar */
+/* Toolbar - Formats */
 .ql-bubble .ql-toolbar .ql-formats {
   margin: var(--spacing-x-tight) var(--spacing-tight);
 
@@ -232,34 +233,46 @@
   }
 }
 
-/* Bubble - Tooltip */
 .ql-bubble {
-  & .ql-tooltip {
-    background-color: var(--background-color);
-    border-radius: 0.25rem;
-    color: var(--text-color);
-  }
-
+  /* Tooltip - Arrow */
   & .ql-tooltip-arrow {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-top: 1px;
+    margin-left: calc(-1 * var(--arrow-width));
     border-left: var(--arrow-width) solid transparent;
     border-right: var(--arrow-width) solid transparent;
-    content: ' ';
-    display: block;
-    left: 50%;
-    margin-left: calc(-1 * var(--arrow-width));
-    position: absolute;
-  }
 
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc((var(--arrow-width) + 2px) * -1);
+      border-left: calc(var(--arrow-width) + 2px) solid transparent;
+      border-right: calc(var(--arrow-width) + 2px) solid transparent;
+      z-index: -1;
+    }
+  }
   & .ql-tooltip:not(.ql-flip) .ql-tooltip-arrow {
     border-bottom: var(--arrow-width) solid var(--background-color);
     top: calc(-1 * var(--arrow-width));
-  }
 
+    &::before {
+      top: -2px;
+      border-bottom: calc(var(--arrow-width) + 2px) solid var(--border-color);
+    }
+  }
   & .ql-tooltip.ql-flip .ql-tooltip-arrow {
     border-top: var(--arrow-width) solid var(--background-color);
     bottom: calc(-1 * var(--arrow-width));
+
+    &::before {
+      bottom: -2px;
+      border-top: calc(var(--arrow-width) + 2px) solid var(--border-color);
+    }
   }
 
+  /* Tooltip - Editing */
   & .ql-tooltip.ql-editing {
     & .ql-tooltip-editor {
       display: block;
@@ -270,6 +283,7 @@
     }
   }
 
+  /* Tooltip - Editor */
   & .ql-tooltip-editor {
     display: none;
 
@@ -284,66 +298,6 @@
       background: transparent;
       border: none;
       outline: none;
-    }
-
-    & a {
-      top: 10px;
-      position: absolute;
-      right: 20px;
-
-      &:before {
-        color: var(--inactive-color);
-        content: '\00D7';
-        font-size: 16px;
-        font-weight: bold;
-      }
-    }
-  }
-}
-
-/* Bubble */
-.ql-container.ql-bubble:not(.ql-disabled) {
-  & a {
-    position: relative;
-
-    &::before,
-    &::after {
-      left: 0;
-      margin-left: 50%;
-      position: absolute;
-      transform: translate(-50%, -100%);
-      transition: visibility 0s ease 200ms;
-      visibility: hidden;
-      white-space: nowrap;
-    }
-
-    &::before {
-      background-color: var(--background-color);
-      border-radius: 0.25rem;
-      top: -5px;
-      font-size: var(--font-size-xs);
-      color: var(--text-color);
-      content: attr(href);
-      font-weight: normal;
-      overflow: hidden;
-      padding: var(--spacing-xx-tight) var(--spacing-x-tight);
-      text-decoration: none;
-      z-index: 1;
-    }
-
-    &::after {
-      border-top: 6px solid var(--background-color);
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      top: 0;
-      content: ' ';
-      height: 0;
-      width: 0;
-    }
-
-    &:hover::before,
-    &:hover::after {
-      visibility: visible;
     }
   }
 }
