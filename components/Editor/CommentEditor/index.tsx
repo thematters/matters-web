@@ -3,8 +3,11 @@ import _debounce from 'lodash/debounce'
 import React from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 
+import { LanguageConsumer } from '~/components/Language'
+
 import contentStyles from '~/common/styles/utils/content.comment.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
+import { translate } from '~/common/utils'
 
 import * as config from './config'
 import styles from './styles.css'
@@ -13,7 +16,7 @@ interface Props {
   content?: string
   handleChange: (props: any) => any
   handleBlur?: (props: any) => any
-  placeholder?: string
+  lang: Language
 }
 
 interface State {
@@ -26,7 +29,6 @@ class CommentEditor extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-
     this.state = { focus: false }
   }
 
@@ -59,14 +61,19 @@ class CommentEditor extends React.Component<Props, State> {
       const input = this.quill.theme.tooltip.root.querySelector(
         'input[data-link]'
       )
-      input.dataset.link = '輸入連結地址' // TODO: i18n
+
+      input.dataset.link = translate({
+        zh_hant: '輸入連結地址',
+        zh_hans: '输入链接地址',
+        lang: this.props.lang
+      })
     } catch (e) {
       //
     }
   }
 
   public render() {
-    const { content, handleChange, placeholder } = this.props
+    const { content, handleChange, lang } = this.props
     const containerClasses = classNames({
       container: true,
       focus: this.state.focus
@@ -82,7 +89,11 @@ class CommentEditor extends React.Component<Props, State> {
             formats={config.formats}
             ref={this.reactQuillRef}
             value={content}
-            placeholder={placeholder}
+            placeholder={translate({
+              zh_hant: '發表你的評論…',
+              zh_hans: '发表你的评论…',
+              lang
+            })}
             onChange={handleChange}
             onFocus={() => this.setState({ focus: true })}
             onBlur={() => this.setState({ focus: false })}
@@ -102,4 +113,8 @@ class CommentEditor extends React.Component<Props, State> {
   }
 }
 
-export default CommentEditor
+export default (props: Omit<Props, 'lang'>) => (
+  <LanguageConsumer>
+    {({ lang }) => <CommentEditor lang={lang} {...props} />}
+  </LanguageConsumer>
+)

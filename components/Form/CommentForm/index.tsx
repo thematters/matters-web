@@ -145,15 +145,7 @@ const CommentForm = ({
 
       return (
         <form onSubmit={handleSubmit}>
-          <CommentEditor
-            content={content}
-            placeholder={translate({
-              zh_hant: '發表你的評論…',
-              zh_hans: '发表你的评论…',
-              lang
-            })}
-            handleChange={handleChange}
-          />
+          <CommentEditor content={content} handleChange={handleChange} />
           <div className="buttons">
             {extraButton && extraButton}
             <Button
