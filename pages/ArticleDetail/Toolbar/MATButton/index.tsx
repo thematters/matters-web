@@ -118,7 +118,7 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
     container: true,
     active: article.hasAppreciate,
     inactive: !canAppreciate,
-    unlogged: !viewer.isAuthed,
+    unlogged: !viewer.isAuthed
   })
 
   if (viewer.isOnboarding) {
