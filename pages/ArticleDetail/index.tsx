@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -86,7 +87,11 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
       <main className="l-row">
         <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
           <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
-            {({ data, loading }: QueryResult & { data: ArticleDetailType }) => {
+            {({
+              data,
+              loading,
+              subscribeToMore
+            }: QueryResult & { data: ArticleDetailType }) => {
               if (loading) {
                 return <Placeholder.ArticleDetail />
               }
@@ -116,6 +121,30 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   </EmptyArticle>
                 )
               }
+
+              useEffect(() => {
+                if (data.article.live) {
+                  subscribeToMore({
+                    document: gql`
+                      subscription ArticleEdited($id: ID!) {
+                        nodeEdited(input: { id: $id }) {
+                          id
+                          ... on Article {
+                            id
+                            ...ToolbarArticle
+                          }
+                        }
+                      }
+                      ${Toolbar.fragments.article}
+                    `,
+                    variables: { id: data.article.id },
+                    updateQuery: (prev, { subscriptionData }) =>
+                      _merge(prev, {
+                        article: subscriptionData.data.nodeEdited
+                      })
+                  })
+                }
+              })
 
               return (
                 <>

@@ -27,6 +27,7 @@ const nextConfig = {
     // Will be available on both server and client
     SITE_DOMIAN: process.env.SITE_DOMIAN,
     API_URL: process.env.API_URL,
+    WS_URL: process.env.WS_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY
   },
 
