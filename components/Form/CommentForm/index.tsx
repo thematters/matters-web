@@ -8,11 +8,10 @@ import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext, Translate } from '~/components/Language'
+import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { translate } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import styles from './styles.css'
@@ -82,29 +81,10 @@ const CommentForm = ({
     {putComment => {
       const [isSubmitting, setSubmitting] = useState(false)
       const [content, setContent] = useState(defaultContent || '')
-      const [error, setError] = useState<string | null>(null)
       const viewer = useContext(ViewerContext)
-      const { lang } = useContext(LanguageContext)
-      const isValid = !error && content
+      const isValid = !!content
 
-      const validate = (c: string) => {
-        if (!c || c.length <= 0) {
-          setError(
-            translate({
-              zh_hant: '請輸入評論內容',
-              zh_hans: '请输入评论内容',
-              lang
-            })
-          )
-        }
-      }
-
-      const handleChange = (c: string) => {
-        validate(c)
-        setContent(c)
-      }
-
-      const handleSubmit = () => {
+      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const input = {
           id: commentId,
           comment: {
@@ -116,6 +96,7 @@ const CommentForm = ({
           }
         }
 
+        event.preventDefault()
         setSubmitting(true)
 
         putComment({ variables: { input } })
@@ -145,7 +126,7 @@ const CommentForm = ({
 
       return (
         <form onSubmit={handleSubmit}>
-          <CommentEditor content={content} handleChange={handleChange} />
+          <CommentEditor content={content} handleChange={setContent} />
           <div className="buttons">
             {extraButton && extraButton}
             <Button
@@ -165,7 +146,7 @@ const CommentForm = ({
                 )
               }
             >
-              {translate({ zh_hant: '送出', zh_hans: '送出', lang })}
+              <Translate zh_hant="送出" zh_hans="送出" />
             </Button>
           </div>
 

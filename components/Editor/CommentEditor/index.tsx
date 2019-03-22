@@ -83,7 +83,6 @@ class CommentEditor extends React.Component<Props, State> {
       <>
         <div className={containerClasses} id="comment-editor">
           <ReactQuill
-            // readOnly={isSubmitting}
             theme="bubble"
             modules={config.modules}
             formats={config.formats}
