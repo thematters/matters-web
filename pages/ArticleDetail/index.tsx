@@ -122,8 +122,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 )
               }
 
-              if (data.article.live) {
-                useEffect(() =>
+              useEffect(() => {
+                if (data.article.live) {
                   subscribeToMore({
                     document: gql`
                       subscription ArticleEdited($id: ID!) {
@@ -143,8 +143,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                         article: subscriptionData.data.nodeEdited
                       })
                   })
-                )
-              }
+                }
+              })
 
               return (
                 <>
