@@ -122,27 +122,29 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 )
               }
 
-              useEffect(() =>
-                subscribeToMore({
-                  document: gql`
-                    subscription ArticleEdited($id: ID!) {
-                      nodeEdited(input: { id: $id }) {
-                        id
-                        ... on Article {
+              if (data.article.live) {
+                useEffect(() =>
+                  subscribeToMore({
+                    document: gql`
+                      subscription ArticleEdited($id: ID!) {
+                        nodeEdited(input: { id: $id }) {
                           id
-                          ...ToolbarArticle
+                          ... on Article {
+                            id
+                            ...ToolbarArticle
+                          }
                         }
                       }
-                    }
-                    ${Toolbar.fragments.article}
-                  `,
-                  variables: { id: data.article.id },
-                  updateQuery: (prev, { subscriptionData }) =>
-                    _merge(prev, {
-                      article: subscriptionData.data.nodeEdited
-                    })
-                })
-              )
+                      ${Toolbar.fragments.article}
+                    `,
+                    variables: { id: data.article.id },
+                    updateQuery: (prev, { subscriptionData }) =>
+                      _merge(prev, {
+                        article: subscriptionData.data.nodeEdited
+                      })
+                  })
+                )
+              }
 
               return (
                 <>

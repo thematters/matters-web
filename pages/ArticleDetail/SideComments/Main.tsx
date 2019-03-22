@@ -77,14 +77,14 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           { pinned: true }
         )
 
-        // if (data.article.live) {
-        useEffect(() =>
-          subscribeToMore({
-            document: SUBSCRIBE_COMMENTS,
-            variables: { id: data.article.id, first: edges.length }
-          })
-        )
-        // }
+        if (data.article.live) {
+          useEffect(() =>
+            subscribeToMore({
+              document: SUBSCRIBE_COMMENTS,
+              variables: { id: data.article.id, first: edges.length }
+            })
+          )
+        }
 
         return (
           <>
