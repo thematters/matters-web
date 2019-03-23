@@ -8,14 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: var(--spacing-x-tight);
 }
 
 .author {
   margin-bottom: var(--spacing-tight);
-}
-
-.date {
-  margin-top: var(--spacing-x-tight);
 }
 
 .content {

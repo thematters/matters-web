@@ -171,12 +171,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <p className="date">
                         <DateTime date={data.article.createdAt} />
                       </p>
-                      <Icon
-                        id={ICON_LIVE.id}
-                        viewBox={ICON_LIVE.viewBox}
-                        size="xlarge"
-                        style={{ height: '2rem' }}
-                      />
+                      {data.article.live && (
+                        <Icon
+                          id={ICON_LIVE.id}
+                          viewBox={ICON_LIVE.viewBox}
+                          size="xlarge"
+                          style={{ height: '2rem' }}
+                        />
+                      )}
                     </span>
                   </section>
 
