@@ -23,7 +23,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
       <Link {...path}>
         <a>
           <div
-            className="content-comment"
+            className="u-content-comment"
             dangerouslySetInnerHTML={{
               __html: comment.content || ''
             }}

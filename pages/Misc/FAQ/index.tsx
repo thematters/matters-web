@@ -30,7 +30,7 @@ export default () => {
                 lang
               })
             }}
-            className="content"
+            className="u-content"
           />
         </div>
         <style jsx>{styles}</style>

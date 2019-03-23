@@ -5,19 +5,20 @@ import ReactQuill, { Quill } from 'react-quill'
 
 import { LanguageConsumer } from '~/components/Language'
 
+import contentStyles from '~/common/styles/utils/content.article.css'
+import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
 import * as config from './config'
-import contentStyles from './content.editor.css'
-import bubbleStyles from './quill.bubble.css'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 
 interface Props {
   onSave: any
   draft: EditorDraft
+  lang: Language
 }
 
 interface State {
@@ -97,7 +98,11 @@ class Editor extends React.Component<Props, State> {
       const input = this.quill.theme.tooltip.root.querySelector(
         'input[data-link]'
       )
-      input.dataset.link = '輸入連結地址' // TODO: i18n
+      input.dataset.link = translate({
+        zh_hant: '輸入連結地址',
+        zh_hans: '输入链接地址',
+        lang: this.props.lang
+      })
     } catch (e) {
       //
     }
@@ -142,7 +147,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   public render() {
-    const { draft, onSave } = this.props
+    const { draft, onSave, lang } = this.props
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
     const containerClasses = classNames({
@@ -152,34 +157,29 @@ class Editor extends React.Component<Props, State> {
 
     return (
       <>
-        <LanguageConsumer>
-          {({ lang }) => (
-            <div className={containerClasses}>
-              <ReactQuill
-                readOnly={isPending || isPublished}
-                theme="bubble"
-                modules={config.modules}
-                formats={config.formats}
-                ref={this.reactQuillRef}
-                value={this.state.content}
-                placeholder={translate({
-                  zh_hant: '請輸入正文…',
-                  zh_hans: '请输入正文…',
-                  lang
-                })}
-                onChange={this.handleChange}
-                onChangeSelection={this.handleOnChangeSelection}
-                onFocus={(...props) => console.log('onFocus', props)}
-                onBlur={this.saveDraft}
-              />
-              <SideToolbar
-                {...this.state.sideToolbar}
-                quill={this.quill}
-                onSave={onSave}
-              />
-            </div>
-          )}
-        </LanguageConsumer>
+        <div className={containerClasses}>
+          <ReactQuill
+            readOnly={isPending || isPublished}
+            theme="bubble"
+            modules={config.modules}
+            formats={config.formats}
+            ref={this.reactQuillRef}
+            value={this.state.content}
+            placeholder={translate({
+              zh_hant: '請輸入正文…',
+              zh_hans: '请输入正文…',
+              lang
+            })}
+            onChange={this.handleChange}
+            onChangeSelection={this.handleOnChangeSelection}
+            onBlur={this.saveDraft}
+          />
+          <SideToolbar
+            {...this.state.sideToolbar}
+            quill={this.quill}
+            onSave={onSave}
+          />
+        </div>
 
         <style jsx>{styles}</style>
         <style jsx global>
@@ -193,4 +193,8 @@ class Editor extends React.Component<Props, State> {
   }
 }
 
-export default Editor
+export default (props: Omit<Props, 'lang'>) => (
+  <LanguageConsumer>
+    {({ lang }) => <Editor lang={lang} {...props} />}
+  </LanguageConsumer>
+)
