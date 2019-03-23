@@ -4,6 +4,12 @@
   padding-bottom: var(--spacing-tight);
 }
 
+.subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .author {
   margin-bottom: var(--spacing-tight);
 }

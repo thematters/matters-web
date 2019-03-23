@@ -3,9 +3,11 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Title } from '~/components'
+import { Icon } from '~/components/Icon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { stripHtml, toPath } from '~/common/utils'
+import ICON_LIVE from '~/static/icons/label-live.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
 import { Fingerprint } from '../Fingerprint'
@@ -21,6 +23,7 @@ const fragments = {
       cover
       summary
       mediaHash
+      live
       author {
         id
         userName
@@ -42,7 +45,7 @@ const FeedDigest = ({
 }: { article: FeedDigestArticle } & {
   hasFingerprint?: boolean
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title, summary } = article
+  const { cover, author, slug, mediaHash, title, summary, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -65,6 +68,14 @@ const FeedDigest = ({
       <div className="header">
         <UserDigest.Mini user={author} />
 
+        {!hasFingerprint && live && (
+          <Icon
+            id={ICON_LIVE.id}
+            viewBox={ICON_LIVE.viewBox}
+            size="xlarge"
+            style={{ height: '2rem' }}
+          />
+        )}
         {hasFingerprint && <Fingerprint article={article} />}
       </div>
 
