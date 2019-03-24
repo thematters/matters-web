@@ -8,8 +8,8 @@ import { ViewerContext } from '~/components/Viewer'
 import { DEFAULT_LANG } from '~/common/enums'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
-  mutation UpdateViewerLanguage($language: UserLanguage!) {
-    updateUserInfo(input: { language: $language }) {
+  mutation updateLanguage($input: UpdateUserInfoInput!) {
+    updateUserInfo(input: $input) {
       id
       settings {
         language
@@ -45,7 +45,19 @@ export const LanguageProvider = ({
             setLang: targetLang => {
               if (viewer.isAuthed) {
                 try {
-                  updateLanguage({ variables: { language: targetLang } })
+                  updateLanguage({
+                    variables: { input: { language: targetLang } },
+                    optimisticResponse: {
+                      updateUserInfo: {
+                        id: viewer.id,
+                        settings: {
+                          language: targetLang,
+                          __typename: 'UserSettings'
+                        },
+                        __typename: 'User'
+                      }
+                    }
+                  })
                 } catch (e) {
                   //
                 }
