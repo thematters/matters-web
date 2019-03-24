@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
@@ -81,7 +82,11 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           if (data.article.live) {
             subscribeToMore({
               document: SUBSCRIBE_COMMENTS,
-              variables: { id: data.article.id, first: edges.length }
+              variables: { id: data.article.id, first: edges.length },
+              updateQuery: (prev, { subscriptionData }) =>
+                _merge(prev, {
+                  article: subscriptionData.data.nodeEdited
+                })
             })
           }
         })

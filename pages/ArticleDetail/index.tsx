@@ -9,6 +9,7 @@ import {
   DateTime,
   Footer,
   Head,
+  Icon,
   Placeholder,
   Title,
   Translate
@@ -22,6 +23,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, toPath } from '~/common/utils'
+import ICON_LIVE from '~/static/icons/label-live.svg?sprite'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
@@ -165,9 +167,19 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
                   <section className="title">
                     <Title type="article">{data.article.title}</Title>
-                    <p className="date">
-                      <DateTime date={data.article.createdAt} />
-                    </p>
+                    <span className="subtitle">
+                      <p className="date">
+                        <DateTime date={data.article.createdAt} />
+                      </p>
+                      {data.article.live && (
+                        <Icon
+                          id={ICON_LIVE.id}
+                          viewBox={ICON_LIVE.viewBox}
+                          size="xlarge"
+                          style={{ height: '2rem' }}
+                        />
+                      )}
+                    </span>
                   </section>
 
                   <section className="content">
