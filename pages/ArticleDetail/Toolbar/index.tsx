@@ -14,6 +14,7 @@ import styles from './styles.css'
 const fragments = {
   article: gql`
     fragment ToolbarArticle on Article {
+      id
       ...MATArticleDetail
       ...AppreciatorsArticle
       ...BookmarkArticle

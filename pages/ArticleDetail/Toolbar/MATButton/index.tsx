@@ -117,7 +117,8 @@ const MATButton = ({ article }: { article: MATArticleDetail }) => {
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,
-    inactive: !canAppreciate
+    inactive: !canAppreciate,
+    unlogged: !viewer.isAuthed
   })
 
   if (viewer.isOnboarding) {

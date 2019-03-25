@@ -4,12 +4,15 @@
   padding-bottom: var(--spacing-tight);
 }
 
-.author {
-  margin-bottom: var(--spacing-tight);
+.subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--spacing-x-tight);
 }
 
-.date {
-  margin-top: var(--spacing-x-tight);
+.author {
+  margin-bottom: var(--spacing-tight);
 }
 
 .content {

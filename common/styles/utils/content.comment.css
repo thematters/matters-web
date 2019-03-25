@@ -1,4 +1,7 @@
-.content-comment {
+/* @styled-jsx=global */
+
+.u-content-comment,
+.ql-editor {
   white-space: pre-wrap;
   line-height: 1.6;
 
@@ -42,7 +45,7 @@
     width: 100%;
     padding: 0 var(--spacing-tight);
 
-    color: var(--color-grey-dark);
+    color: var(--color-matters-gold);
     font-size: var(--font-size-sm);
     line-height: 2;
 
@@ -59,7 +62,7 @@
   }
   & :global(li) {
     padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-tight) 0;
+    margin: var(--spacing-x-tight) 0;
   }
   & :global(ul) {
     list-style-type: disc;

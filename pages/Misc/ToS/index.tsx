@@ -43,7 +43,7 @@ export default () => {
                 lang
               })
             }}
-            className="content"
+            className="u-content"
           />
           <section
             dangerouslySetInnerHTML={{
@@ -52,7 +52,7 @@ export default () => {
                 lang
               })
             }}
-            className="content"
+            className="u-content"
           />
         </article>
         <style jsx>{styles}</style>

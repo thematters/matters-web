@@ -20,6 +20,13 @@
   }
 }
 
+.unlogged {
+  & .mat-button:active {
+    background: var(--color-matters-gold);
+    color: #fff;
+  }
+}
+
 .mat-button {
   width: 3rem;
   height: 3rem;

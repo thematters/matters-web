@@ -15,7 +15,7 @@ const CommentContent = ({
     return (
       <>
         <div
-          className="content-comment"
+          className="u-content-comment"
           dangerouslySetInnerHTML={{
             __html: content || ''
           }}

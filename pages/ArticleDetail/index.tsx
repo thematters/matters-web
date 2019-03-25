@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -17,6 +18,7 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
+import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -86,7 +88,11 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
       <main className="l-row">
         <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
           <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
-            {({ data, loading }: QueryResult & { data: ArticleDetailType }) => {
+            {({
+              data,
+              loading,
+              subscribeToMore
+            }: QueryResult & { data: ArticleDetailType }) => {
               if (loading) {
                 return <Placeholder.ArticleDetail />
               }
@@ -117,6 +123,30 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 )
               }
 
+              useEffect(() => {
+                if (data.article.live) {
+                  subscribeToMore({
+                    document: gql`
+                      subscription ArticleEdited($id: ID!) {
+                        nodeEdited(input: { id: $id }) {
+                          id
+                          ... on Article {
+                            id
+                            ...ToolbarArticle
+                          }
+                        }
+                      }
+                      ${Toolbar.fragments.article}
+                    `,
+                    variables: { id: data.article.id },
+                    updateQuery: (prev, { subscriptionData }) =>
+                      _merge(prev, {
+                        article: subscriptionData.data.nodeEdited
+                      })
+                  })
+                }
+              })
+
               return (
                 <>
                   <Head
@@ -136,9 +166,12 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
                   <section className="title">
                     <Title type="article">{data.article.title}</Title>
-                    <p className="date">
-                      <DateTime date={data.article.createdAt} />
-                    </p>
+                    <span className="subtitle">
+                      <p className="date">
+                        <DateTime date={data.article.createdAt} />
+                      </p>
+                      {data.article.live && <IconLive />}
+                    </span>
                   </section>
 
                   <section className="content">
