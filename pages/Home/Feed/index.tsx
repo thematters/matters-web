@@ -77,7 +77,7 @@ const queries: { [key: string]: any } = {
 }
 
 export default () => {
-  const [sortBy, setSortBy] = useState('hottest')
+  const [sortBy, setSortBy] = useState<'hottest' | 'newest'>('hottest')
 
   return (
     <>
@@ -126,9 +126,9 @@ export default () => {
               <PageHeader
                 pageTitle={
                   sortBy === 'hottest' ? (
-                    <Translate zh_hant="熱門文章" zh_hans="热门文章 " />
+                    <Translate zh_hant="熱門文章" zh_hans="热门文章" />
                   ) : (
-                    <Translate zh_hant="最新文章" zh_hans="最新文章 " />
+                    <Translate zh_hant="最新文章" zh_hans="最新文章" />
                   )
                 }
               >
