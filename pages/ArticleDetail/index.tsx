@@ -9,7 +9,6 @@ import {
   DateTime,
   Footer,
   Head,
-  Icon,
   Placeholder,
   Title,
   Translate
@@ -19,11 +18,11 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
+import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, toPath } from '~/common/utils'
-import ICON_LIVE from '~/static/icons/label-live.svg?sprite'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
@@ -171,14 +170,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <p className="date">
                         <DateTime date={data.article.createdAt} />
                       </p>
-                      {data.article.live && (
-                        <Icon
-                          id={ICON_LIVE.id}
-                          viewBox={ICON_LIVE.viewBox}
-                          size="xlarge"
-                          style={{ height: '2rem' }}
-                        />
-                      )}
+                      {data.article.live && <IconLive />}
                     </span>
                   </section>
 
