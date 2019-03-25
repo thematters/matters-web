@@ -1,6 +1,10 @@
 export default (url: string) => {
   let id: string | null
 
+  if (!url) {
+    return ''
+  }
+
   if (url.match('(http(s)?://)?(www.)?youtube|youtu.be')) {
     id = url.match('embed')
       ? url.split(/embed\//)[1].split('"')[0]
@@ -16,6 +20,5 @@ export default (url: string) => {
 
     return 'http://player.youku.com/embed/' + id
   }
-
-  return false
+  return ''
 }
