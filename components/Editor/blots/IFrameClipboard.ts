@@ -13,7 +13,7 @@ interface IFrameParams {
   placeholder: string
 }
 
-class IFramePastebin extends BlockEmbed {
+class IFrameClipboard extends BlockEmbed {
   public static create(value: IFrameParams) {
     const node = super.create(value)
     if (value.purpose) {
@@ -102,14 +102,15 @@ class IFramePastebin extends BlockEmbed {
     }
   }
 
+  convertToText(url: string) {
+    this.replaceWith('text', url)
+  }
+
   insertIFrame(url: string) {
     const range = this.quill.getSelection(true)
     this.quill.insertEmbed(range.index, this.purpose, url, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
-  }
-
-  convertToText(url: string) {
-    this.replaceWith('text', url)
+    this.remove()
   }
 
   replaceWithText() {
@@ -120,8 +121,8 @@ class IFramePastebin extends BlockEmbed {
   }
 }
 
-IFramePastebin.blotName = 'iframePastebin'
-IFramePastebin.className = 'iframe-pastebin'
-IFramePastebin.tagName = 'input'
+IFrameClipboard.blotName = 'iframeClipboard'
+IFrameClipboard.className = 'iframe-clipboard'
+IFrameClipboard.tagName = 'input'
 
-export default IFramePastebin
+export default IFrameClipboard

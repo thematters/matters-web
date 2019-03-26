@@ -34,7 +34,7 @@ const VideoButton = ({ quill, setExpanded }: Props) => {
         placeholder
       }
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'iframePastebin', data, 'user')
+      quill.insertEmbed(range.index, 'iframeClipboard', data, 'user')
       quill.setSelection(range.index + 1, 0, 'silent')
     }
     setExpanded(false)

@@ -148,7 +148,7 @@
   }
 }
 
-.iframe-pastebin {
+.iframe-clipboard {
   background: var(--color-grey-lighter);
   border-radius: 0.15rem;
   padding: var(--spacing-tight) var(--spacing-x-tight);
