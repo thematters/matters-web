@@ -56,5 +56,6 @@ export const formats = [
   'video',
   'divider',
   'break',
-  'imageFigure'
+  'imageFigure',
+  'mention'
 ]

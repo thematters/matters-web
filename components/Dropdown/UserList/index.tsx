@@ -8,12 +8,10 @@ import styles from './styles.css'
 const DropdownUserList = ({
   users,
   onClick,
-  hideDropdown,
   loading
 }: {
   users: UserDigestBriefDescUser[]
   onClick: (user: UserDigestBriefDescUser) => void
-  hideDropdown: () => void
   loading?: boolean
 }) => {
   if (loading) {
@@ -40,7 +38,6 @@ const DropdownUserList = ({
               type="button"
               onClick={() => {
                 onClick(user)
-                hideDropdown()
               }}
             >
               <UserDigest.BriefDesc user={user} />
