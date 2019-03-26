@@ -2,6 +2,7 @@ import { Quill } from 'react-quill'
 
 import DividerBlot from './Divider'
 import ImageFigure from './ImageFigure'
+import SmartBreak from './SmartBreak'
 // import GithubGistBlot from './GithubGist'
 // import PastebinBlot from './Pastebin'
 // import VideoBlot from './Video'
@@ -11,5 +12,6 @@ export default {
   register: () => {
     Quill.register('formats/divider', DividerBlot)
     Quill.register('formats/imageFigure', ImageFigure)
+    Quill.register('formats/break', SmartBreak)
   }
 }

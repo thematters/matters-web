@@ -1,3 +1,4 @@
 export const KEYCODES = {
-  escape: 27
+  escape: 27,
+  enter: 13
 }
