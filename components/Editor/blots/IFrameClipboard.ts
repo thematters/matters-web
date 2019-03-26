@@ -1,12 +1,13 @@
 import { Quill } from 'react-quill'
 
+import pastebinUrl from '~/components/Editor/utils/pastebinUrl'
 import videoUrl from '~/components/Editor/utils/videoUrl'
 
 import { KEYCODES } from '~/common/enums'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-type Purpose = 'video' | 'code'
+type Purpose = 'video' | 'pastebin'
 
 interface IFrameParams {
   purpose: Purpose
@@ -93,8 +94,8 @@ class IFrameClipboard extends BlockEmbed {
       case 'video': {
         return videoUrl(url)
       }
-      case 'code': {
-        return ''
+      case 'pastebin': {
+        return pastebinUrl(url)
       }
       default: {
         return ''

@@ -7,6 +7,7 @@ import { Icon } from '~/components/Icon'
 import ICON_EDITOR_ADD from '~/static/icons/editor-add.svg?sprite'
 
 import DividerButton from './DividerButton'
+import PastebinButton from './PastebinButton'
 import styles from './styles.css'
 import UploadImageButton from './UploadImageButton'
 import VideoButton from './VideoButton'
@@ -48,6 +49,7 @@ const SideToolbar = ({ show, top, quill, onSave }: SideToolbarProps) => {
           setExpanded={setExpanded}
         />
         <VideoButton quill={quill} setExpanded={setExpanded} />
+        <PastebinButton quill={quill} setExpanded={setExpanded} />
         <DividerButton
           quill={quill}
           onSave={onSave}

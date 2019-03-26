@@ -26,5 +26,6 @@ export const formats = [
   'video',
   'divider',
   'imageFigure',
-  'iframeClipboard'
+  'iframeClipboard',
+  'pastebin'
 ]

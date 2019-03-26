@@ -3,10 +3,8 @@ import { Quill } from 'react-quill'
 import DividerBlot from './Divider'
 import IFrameClipboard from './IFrameClipboard'
 import ImageFigure from './ImageFigure'
-import VideoBlot from './Video'
-
-// import GithubGistBlot from './GithubGist'
-// import PastebinBlot from './Pastebin'
+import Pastebin from './Pastebin'
+import Video from './Video'
 
 export default {
   DividerBlot,
@@ -14,6 +12,7 @@ export default {
     Quill.register('formats/divider', DividerBlot)
     Quill.register('formats/imageFigure', ImageFigure)
     Quill.register('formats/iframeClipboard', IFrameClipboard)
-    Quill.register('formats/video', VideoBlot)
+    Quill.register('formats/pastebin', Pastebin)
+    Quill.register('formats/video', Video)
   }
 }

@@ -2,49 +2,31 @@ import { Quill } from 'react-quill'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-class VideoBlot extends BlockEmbed {
+const iframeStyle =
+  'position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;'
+
+const containerStyle = 'position:relative;width:100%;height:0;padding-top:55%;'
+
+class Video extends BlockEmbed {
   public static create(url: string) {
     const node = super.create()
-    const editor = document.querySelector('div.quill')
-    node.setAttribute('src', url)
-    node.setAttribute('frameborder', '0')
-    node.setAttribute('allowfullscreen', false)
-    node.setAttribute('width', '100%')
-    if (editor && editor.clientWidth) {
-      node.setAttribute('height', `${editor.clientWidth * 0.55}px`)
-    }
+    const iframe = document.createElement('iframe')
+    iframe.setAttribute('src', url)
+    iframe.setAttribute('frameborder', '0')
+    iframe.setAttribute('allowfullscreen', 'false')
+    iframe.setAttribute('style', iframeStyle)
+    node.setAttribute('style', containerStyle)
+    node.appendChild(iframe)
     return node
-  }
-
-  public static formats(node: HTMLElement) {
-    let format = {}
-    if (node.hasAttribute('height')) {
-      format = { height: node.getAttribute('height') }
-    }
-    if (node.hasAttribute('width')) {
-      format = { width: node.getAttribute('width'), ...format }
-    }
-    return format
   }
 
   public static value(node: HTMLElement) {
     return node.getAttribute('src')
   }
-
-  public format(name: string, value: any) {
-    if (name === 'height' || name === 'width') {
-      if (value) {
-        this.domNode.setAttribute(name, value)
-      } else {
-        this.domNode.removeAttribute(name, value)
-      }
-    } else {
-      super.format(name, value)
-    }
-  }
 }
 
-VideoBlot.blotName = 'video'
-VideoBlot.tagName = 'iframe'
+Video.blotName = 'video'
+Video.className = 'iframe-container'
+Video.tagName = 'div'
 
-export default VideoBlot
+export default Video
