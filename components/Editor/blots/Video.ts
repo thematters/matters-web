@@ -5,12 +5,14 @@ const BlockEmbed = Quill.import('blots/block/embed')
 class VideoBlot extends BlockEmbed {
   public static create(url: string) {
     const node = super.create()
-    const clientWidth = document.body.clientWidth
+    const editor = document.querySelector('div.quill')
     node.setAttribute('src', url)
     node.setAttribute('frameborder', '0')
-    node.setAttribute('allowfullscreen', true)
+    node.setAttribute('allowfullscreen', false)
     node.setAttribute('width', '100%')
-    node.setAttribute('height', clientWidth > 425 ? '500px' : '250px')
+    if (editor && editor.clientWidth) {
+      node.setAttribute('height', `${editor.clientWidth * 0.55}px`)
+    }
     return node
   }
 
@@ -41,6 +43,7 @@ class VideoBlot extends BlockEmbed {
     }
   }
 }
+
 VideoBlot.blotName = 'video'
 VideoBlot.tagName = 'iframe'
 
