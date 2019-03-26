@@ -20,6 +20,7 @@ import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
 import * as config from '../configs/comment'
+import '../modules/mention'
 import styles from './styles.css'
 
 interface Props {
@@ -124,7 +125,6 @@ class CommentEditor extends React.Component<Props, State> {
                       onMentionChange: this.onMentionChange
                     }
                   }}
-                  formats={config.formats}
                   ref={this.reactQuillRef}
                   value={content}
                   placeholder={translate({

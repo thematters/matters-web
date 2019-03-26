@@ -162,7 +162,6 @@ class Editor extends React.Component<Props, State> {
             readOnly={isPending || isPublished}
             theme="bubble"
             modules={config.modules}
-            formats={config.formats}
             ref={this.reactQuillRef}
             value={this.state.content}
             placeholder={translate({

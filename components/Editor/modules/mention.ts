@@ -12,30 +12,28 @@ class Mention {
   mentionDenotationChars: string[]
   quill: Quill
   mentionCharPos: any
+  cursorPos: number | null
   maxChars: number
   offsetTop: number
   offsetLeft: number
   isolateCharacter: boolean
-  showDenotationChar: boolean
   onMentionChange: (value: string) => void
   mentionContainer: HTMLElement
 
   constructor(quill: Quill, options: any) {
     this.mentionCharPos = null
+    this.cursorPos = null
 
     this.mentionDenotationChars = ['@']
     this.maxChars = 31
     this.offsetTop = 16
     this.offsetLeft = 0
     this.isolateCharacter = false
-    this.showDenotationChar = true
 
     this.quill = quill
 
     this.onMentionChange = options.onMentionChange
     this.mentionContainer = options.mentionContainer
-
-    console.log(options)
 
     quill.on('text-change', this.onTextChange.bind(this))
     quill.on('selection-change', this.onSelectionChange.bind(this))
@@ -51,23 +49,17 @@ class Mention {
     this.mentionContainer.style.display = 'none'
   }
 
-  public insertItem(data: any) {
-    const render = data
-
-    if (render === null) {
+  insertItem(data: any) {
+    if (!data || !this.cursorPos) {
       return
     }
 
-    if (!this.showDenotationChar) {
-      render.denotationChar = ''
-    }
-
-    // this.quill.deleteText(
-    //   this.mentionCharPos,
-    //   cursorPos - this.mentionCharPos,
-    //   'user'
-    // )
-    this.quill.insertEmbed(this.mentionCharPos, 'mention', render, 'user')
+    this.quill.deleteText(
+      this.mentionCharPos,
+      this.cursorPos - this.mentionCharPos,
+      'user'
+    )
+    this.quill.insertEmbed(this.mentionCharPos, 'mention', data, 'user')
     this.quill.insertText(this.mentionCharPos + 1, ' ', 'user')
     this.quill.setSelection(this.mentionCharPos + 2, 'user')
   }
@@ -113,7 +105,6 @@ class Mention {
      * handle vertical positioning
      */
     topPos += mentionCharPos.bottom
-    console.log(mentionCharPos.bottom)
     if (this.containerBottomIsNotVisible(topPos, containerPos)) {
       let overMentionCharPos = this.offsetTop * -1
       overMentionCharPos += mentionCharPos.top
@@ -127,21 +118,21 @@ class Mention {
 
   handleChange() {
     const range = this.quill.getSelection()
-    console.log('range', range)
     if (range == null) {
       return
     }
 
-    const cursorPos = range.index
-    const startPos = Math.max(0, cursorPos - this.maxChars)
-    const beforeCursorPos = this.quill.getText(startPos, cursorPos - startPos)
+    this.cursorPos = range.index
+    const startPos = Math.max(0, this.cursorPos - this.maxChars)
+    const beforeCursorPos = this.quill.getText(
+      startPos,
+      this.cursorPos - startPos
+    )
     const mentionCharIndex = this.mentionDenotationChars.reduce((prev, cur) => {
       const previousIndex = prev
       const mentionIndex = beforeCursorPos.lastIndexOf(cur)
       return mentionIndex > previousIndex ? mentionIndex : previousIndex
     }, -1)
-
-    console.log(mentionCharIndex)
 
     if (mentionCharIndex <= -1) {
       this.hideMentionContainer()
@@ -160,7 +151,7 @@ class Mention {
     }
 
     const mentionCharPos =
-      cursorPos - (beforeCursorPos.length - mentionCharIndex)
+      this.cursorPos - (beforeCursorPos.length - mentionCharIndex)
     const textAfter = beforeCursorPos.substring(mentionCharIndex + 1)
 
     this.mentionCharPos = mentionCharPos
@@ -169,7 +160,6 @@ class Mention {
       this.hideMentionContainer()
       return
     }
-    console.log('textAfter', textAfter)
 
     // const mentionChar = beforeCursorPos[mentionCharIndex]
     this.onMentionChange(textAfter)
@@ -190,5 +180,7 @@ class Mention {
     }
   }
 }
+
+Quill.register('modules/mention', Mention)
 
 export default Mention
