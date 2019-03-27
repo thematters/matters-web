@@ -136,10 +136,11 @@ class Editor extends React.Component<Props, State> {
     const [blot] = this.quill ? this.quill.getLeaf(range.index) : [null]
 
     // hide sideToolbar
-    if (
-      (!isNewLine || this.isCustomBlot(blot)) &&
-      this.state.sideToolbar.show
-    ) {
+    if (this.isCustomBlot(blot)) {
+      this.setState({
+        sideToolbar: { show: false, top: bounds.top || 0 }
+      })
+    } else if (!isNewLine && this.state.sideToolbar.show) {
       this.setState({
         sideToolbar: { show: false, top: bounds.top || 0 }
       })
