@@ -7,4 +7,6 @@ class DividerBlot extends BlockEmbed {}
 DividerBlot.blotName = 'divider'
 DividerBlot.tagName = 'HR'
 
+Quill.register('formats/divider', DividerBlot)
+
 export default DividerBlot

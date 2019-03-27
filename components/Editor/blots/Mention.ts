@@ -32,4 +32,6 @@ Mention.blotName = 'mention'
 Mention.tagName = 'a'
 Mention.className = 'mention'
 
+Quill.register('formats/mention', Mention)
+
 export default Mention

@@ -10,7 +10,6 @@ import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
-import blots from './blots'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
@@ -28,11 +27,6 @@ interface State {
     top: number
   }
 }
-
-/**
- * Register Custom Blots
- */
-blots.register()
 
 class Editor extends React.Component<Props, State> {
   private quill: Quill | null = null

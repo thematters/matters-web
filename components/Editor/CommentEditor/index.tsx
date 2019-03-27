@@ -33,6 +33,7 @@ interface Props {
 interface State {
   focus: boolean
   search: string
+  mentionInstance: any
 }
 
 class CommentEditor extends React.Component<Props, State> {
@@ -42,7 +43,7 @@ class CommentEditor extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
-    this.state = { focus: false, search: '' }
+    this.state = { focus: false, search: '', mentionInstance: null }
   }
 
   componentDidMount() {
@@ -89,8 +90,12 @@ class CommentEditor extends React.Component<Props, State> {
     this.setState({ search })
   }
 
+  onMentionModuleInit = (instance: any) => {
+    this.setState({ mentionInstance: instance })
+  }
+
   render() {
-    const { focus, search } = this.state
+    const { focus, search, mentionInstance } = this.state
     const { content, handleChange, lang } = this.props
     const containerClasses = classNames({
       container: true,
@@ -103,14 +108,7 @@ class CommentEditor extends React.Component<Props, State> {
           const users = _get(data, 'search.edges', []).map(
             ({ node }: { node: SearchUsers_search_edges_node_User }) => node
           )
-
-          // if (users && users.length) {
-          //   this.setState({ showMention: true })
-          // } else {
-          //   this.setState({ showMention: false })
-          // }
-          console.log('users', users, this.mentionContainerRef, data, search)
-
+          console.log('content', content)
           return (
             <>
               <div className={containerClasses} id="comment-editor">
@@ -122,7 +120,8 @@ class CommentEditor extends React.Component<Props, State> {
                       mentionContainer:
                         this.mentionContainerRef &&
                         this.mentionContainerRef.current,
-                      onMentionChange: this.onMentionChange
+                      onMentionChange: this.onMentionChange,
+                      onInit: this.onMentionModuleInit
                     }
                   }}
                   ref={this.reactQuillRef}
@@ -148,9 +147,10 @@ class CommentEditor extends React.Component<Props, State> {
                     <UserList
                       users={users}
                       onClick={(user: SearchUsers_search_edges_node_User) => {
-                        console.log(this.quill)
-                        // setInviteInput({ user, email: null })
-                        // this.setState({ showMention: false })
+                        mentionInstance.insertMention({
+                          displayName: user.displayName,
+                          userName: user.userName
+                        })
                       }}
                     />
                   )}

@@ -2,12 +2,9 @@ import { Quill } from 'react-quill'
 
 import { REGEXP_DISPLAY_NAME } from '~/common/utils'
 
-// import Keys from './constants/keys';
-
-// import '../blots/mention';
-
-// const numberIsNaN = require('./imports/numberisnan.js')
-
+/**
+ * https://github.com/afconsult/quill-mention
+ */
 class Mention {
   mentionDenotationChars: string[]
   quill: Quill
@@ -17,8 +14,9 @@ class Mention {
   offsetTop: number
   offsetLeft: number
   isolateCharacter: boolean
-  onMentionChange: (value: string) => void
+
   mentionContainer: HTMLElement
+  onMentionChange: (value: string) => void
 
   constructor(quill: Quill, options: any) {
     this.mentionCharPos = null
@@ -35,6 +33,7 @@ class Mention {
     this.onMentionChange = options.onMentionChange
     this.mentionContainer = options.mentionContainer
 
+    options.onInit(this)
     quill.on('text-change', this.onTextChange.bind(this))
     quill.on('selection-change', this.onSelectionChange.bind(this))
   }
@@ -49,7 +48,7 @@ class Mention {
     this.mentionContainer.style.display = 'none'
   }
 
-  insertItem(data: any) {
+  insertMention(data: { displayName: string; userName: string }) {
     if (!data || !this.cursorPos) {
       return
     }
@@ -153,7 +152,6 @@ class Mention {
     const mentionCharPos =
       this.cursorPos - (beforeCursorPos.length - mentionCharIndex)
     const textAfter = beforeCursorPos.substring(mentionCharIndex + 1)
-
     this.mentionCharPos = mentionCharPos
 
     if (!this.hasValidChars(textAfter)) {

@@ -126,7 +126,10 @@ const CommentForm = ({
 
       return (
         <form onSubmit={handleSubmit}>
-          <CommentEditor content={content} handleChange={setContent} />
+          <CommentEditor
+            content={content}
+            handleChange={value => setContent(value)}
+          />
           <div className="buttons">
             {extraButton && extraButton}
             <Button

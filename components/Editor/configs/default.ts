@@ -1,5 +1,6 @@
 import { KEYCODES } from '~/common/enums'
 
+import '../blots'
 import lineBreakMatcher from '../utils/lineBreakMatcher'
 
 export const modules = {
