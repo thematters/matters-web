@@ -9,7 +9,7 @@ import contentStyles from '~/common/styles/utils/content.comment.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
-import * as config from './config'
+import * as config from '../configs/comment'
 import styles from './styles.css'
 
 interface Props {

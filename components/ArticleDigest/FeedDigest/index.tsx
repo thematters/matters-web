@@ -3,11 +3,10 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Title } from '~/components'
-import { Icon } from '~/components/Icon'
+import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 
 import { stripHtml, toPath } from '~/common/utils'
-import ICON_LIVE from '~/static/icons/label-live.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
 import { Fingerprint } from '../Fingerprint'
@@ -68,14 +67,7 @@ const FeedDigest = ({
       <div className="header">
         <UserDigest.Mini user={author} />
 
-        {!hasFingerprint && live && (
-          <Icon
-            id={ICON_LIVE.id}
-            viewBox={ICON_LIVE.viewBox}
-            size="xlarge"
-            style={{ height: '2rem' }}
-          />
-        )}
+        {!hasFingerprint && live && <IconLive />}
         {hasFingerprint && <Fingerprint article={article} />}
       </div>
 

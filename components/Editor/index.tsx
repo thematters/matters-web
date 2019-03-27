@@ -12,7 +12,7 @@ import { translate } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import blots from './blots'
-import * as config from './config'
+import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 

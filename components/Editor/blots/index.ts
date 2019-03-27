@@ -4,6 +4,7 @@ import DividerBlot from './Divider'
 import IFrameClipboard from './IFrameClipboard'
 import ImageFigure from './ImageFigure'
 import Pastebin from './Pastebin'
+import SmartBreak from './SmartBreak'
 import Video from './Video'
 
 export default {
@@ -14,5 +15,6 @@ export default {
     Quill.register('formats/iframeClipboard', IFrameClipboard)
     Quill.register('formats/pastebin', Pastebin)
     Quill.register('formats/video', Video)
+    Quill.register('formats/break', SmartBreak)
   }
 }
