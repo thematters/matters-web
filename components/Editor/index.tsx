@@ -1,9 +1,19 @@
 import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
+import _get from 'lodash/get'
 import React from 'react'
+import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 
+import UserList from '~/components/Dropdown/UserList'
+import { Query } from '~/components/GQL'
+import {
+  SearchUsers,
+  SearchUsers_search_edges_node_User
+} from '~/components/GQL/queries/__generated__/SearchUsers'
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageConsumer } from '~/components/Language'
+import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
@@ -26,11 +36,14 @@ interface State {
     show: boolean
     top: number
   }
+  search: string
+  mentionInstance: any
 }
 
 class Editor extends React.Component<Props, State> {
   private quill: Quill | null = null
   private reactQuillRef = React.createRef<ReactQuill>()
+  private mentionContainerRef = React.createRef<HTMLElement>()
 
   constructor(props: Props) {
     super(props)
@@ -40,18 +53,20 @@ class Editor extends React.Component<Props, State> {
       sideToolbar: {
         show: false,
         top: 0
-      }
+      },
+      search: '',
+      mentionInstance: null
     }
 
     this.saveDraft = _debounce(this.saveDraft.bind(this), 3000)
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props) {
     // this.attachQuillRefs()
     // this.resetLinkInputPlaceholder()
 
@@ -68,7 +83,7 @@ class Editor extends React.Component<Props, State> {
     })
   }
 
-  public attachQuillRefs = () => {
+  attachQuillRefs = () => {
     if (
       !this.reactQuillRef ||
       !this.reactQuillRef.current ||
@@ -82,7 +97,7 @@ class Editor extends React.Component<Props, State> {
   /**
    * https://github.com/quilljs/quill/issues/1107#issuecomment-259938173
    */
-  public resetLinkInputPlaceholder = () => {
+  resetLinkInputPlaceholder = () => {
     if (!this.quill) {
       return
     }
@@ -102,16 +117,16 @@ class Editor extends React.Component<Props, State> {
     }
   }
 
-  public saveDraft() {
+  saveDraft() {
     // TODO: skip if same content as before saved
     this.props.onSave({ content: this.state.content })
   }
 
-  public handleChange = (content: string) => {
+  handleChange = (content: string) => {
     this.setState({ content }, this.saveDraft)
   }
 
-  public handleOnChangeSelection = (
+  handleOnChangeSelection = (
     range: {
       index: number
       length: number
@@ -140,8 +155,17 @@ class Editor extends React.Component<Props, State> {
     }
   }
 
-  public render() {
+  onMentionChange = (search: string) => {
+    this.setState({ search })
+  }
+
+  onMentionModuleInit = (instance: any) => {
+    this.setState({ mentionInstance: instance })
+  }
+
+  render() {
     const { draft, onSave, lang } = this.props
+    const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
     const containerClasses = classNames({
@@ -150,38 +174,77 @@ class Editor extends React.Component<Props, State> {
     })
 
     return (
-      <>
-        <div className={containerClasses}>
-          <ReactQuill
-            readOnly={isPending || isPublished}
-            theme="bubble"
-            modules={config.modules}
-            ref={this.reactQuillRef}
-            value={this.state.content}
-            placeholder={translate({
-              zh_hant: '請輸入正文…',
-              zh_hans: '请输入正文…',
-              lang
-            })}
-            onChange={this.handleChange}
-            onChangeSelection={this.handleOnChangeSelection}
-            onBlur={this.saveDraft}
-          />
-          <SideToolbar
-            {...this.state.sideToolbar}
-            quill={this.quill}
-            onSave={onSave}
-          />
-        </div>
+      <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
+        {({ data, loading }: QueryResult & { data: SearchUsers }) => {
+          const users = _get(data, 'search.edges', []).map(
+            ({ node }: { node: SearchUsers_search_edges_node_User }) => node
+          )
 
-        <style jsx>{styles}</style>
-        <style jsx global>
-          {bubbleStyles}
-        </style>
-        <style jsx global>
-          {contentStyles}
-        </style>
-      </>
+          return (
+            <>
+              <div className={containerClasses}>
+                <ReactQuill
+                  readOnly={isPending || isPublished}
+                  theme="bubble"
+                  modules={{
+                    ...config.modules,
+                    mention: {
+                      mentionContainer:
+                        this.mentionContainerRef &&
+                        this.mentionContainerRef.current,
+                      onMentionChange: this.onMentionChange,
+                      onInit: this.onMentionModuleInit
+                    }
+                  }}
+                  ref={this.reactQuillRef}
+                  value={this.state.content}
+                  placeholder={translate({
+                    zh_hant: '請輸入正文…',
+                    zh_hans: '请输入正文…',
+                    lang
+                  })}
+                  onChange={this.handleChange}
+                  onChangeSelection={this.handleOnChangeSelection}
+                  onBlur={this.saveDraft}
+                />
+                <SideToolbar
+                  {...this.state.sideToolbar}
+                  quill={this.quill}
+                  onSave={onSave}
+                />
+
+                <section
+                  className="mention-container"
+                  ref={this.mentionContainerRef}
+                  hidden={users.length <= 0}
+                >
+                  {loading && <Spinner />}
+                  {!loading && (
+                    <UserList
+                      users={users}
+                      onClick={(user: SearchUsers_search_edges_node_User) => {
+                        mentionInstance.insertMention({
+                          id: user.id,
+                          displayName: user.displayName,
+                          userName: user.userName
+                        })
+                      }}
+                    />
+                  )}
+                </section>
+              </div>
+
+              <style jsx>{styles}</style>
+              <style jsx global>
+                {bubbleStyles}
+              </style>
+              <style jsx global>
+                {contentStyles}
+              </style>
+            </>
+          )
+        }}
+      </Query>
     )
   }
 }

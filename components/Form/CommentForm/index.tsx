@@ -119,7 +119,16 @@ const CommentForm = ({
             )
           })
           .catch((result: any) => {
-            // TODO: Handle error
+            window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  color: 'red',
+                  content: (
+                    <Translate zh_hant="評論送出失敗" zh_hans="评论失败送出" />
+                  )
+                }
+              })
+            )
           })
           .finally(() => {
             setSubmitting(false)

@@ -20,7 +20,6 @@ import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
 
 import * as config from '../configs/comment'
-import '../modules/mention'
 import styles from './styles.css'
 
 interface Props {
