@@ -27,7 +27,7 @@ const VideoButton = ({ quill, setExpanded }: Props) => {
     lang
   })
 
-  const insertIframeClipboard = () => {
+  const insertIFrameClipboard = () => {
     if (quill) {
       const data = { purpose: 'video', placeholder }
       const range = quill.getSelection(true)
@@ -41,7 +41,7 @@ const VideoButton = ({ quill, setExpanded }: Props) => {
     <button
       className="video-button"
       type="button"
-      onClick={insertIframeClipboard}
+      onClick={insertIFrameClipboard}
       aria-label={hint}
     >
       <Icon

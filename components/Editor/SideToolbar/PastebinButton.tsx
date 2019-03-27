@@ -16,8 +16,8 @@ const PastebinButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const placeholder = translate({
-    zh_hant: '貼上 Gist、JSFiddle 連結後，Enter 進行新增',
-    zh_hans: '贴上 Gist、JSFiddle 链结後，Enter 进行新增',
+    zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
+    zh_hans: '贴上 JSFiddle 链结後，Enter 进行新增',
     lang
   })
 

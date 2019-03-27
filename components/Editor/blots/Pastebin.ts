@@ -1,7 +1,5 @@
 import { Quill } from 'react-quill'
 
-import sourceUrl from '~/components/Editor/utils/sourceUrl'
-
 const BlockEmbed = Quill.import('blots/block/embed')
 
 const iframeStyle =
@@ -12,11 +10,8 @@ const containerStyle = 'position:relative;width:100%;height:0;padding-top:55%;'
 class Pastebin extends BlockEmbed {
   public static create(url: string) {
     const node = super.create()
-    const source = sourceUrl(url)
     const iframe = document.createElement('iframe')
-    if (source !== 'gist') {
-      iframe.setAttribute('src', url)
-    }
+    iframe.setAttribute('src', url)
     iframe.setAttribute('frameborder', '0')
     iframe.setAttribute('allowfullscreen', 'false')
     iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin')
