@@ -3,28 +3,21 @@ import { Quill } from 'react-quill'
 const Embed = Quill.import('blots/embed')
 
 class Mention extends Embed {
-  static create(value: { displayName: string; userName: string }) {
+  static create(value: { id: string; displayName: string; userName: string }) {
     const node = super.create(value) as HTMLElement
 
     node.setAttribute('href', `/@${value.userName}`)
     node.setAttribute('target', '_blank')
+    node.dataset.displayName = value.displayName
+    node.dataset.userName = value.userName
+    node.dataset.id = value.id
     node.textContent = `@${value.displayName}`
 
     return node
   }
 
   static value(domNode: HTMLElement) {
-    const embed = domNode.querySelector('span')
-
-    const value: { displayName?: string; userName?: string } = {}
-
-    if (embed) {
-      value.displayName = embed.innerHTML.replace('@', '')
-    }
-
-    value.userName = (domNode.getAttribute('href') || '').replace('/@', '')
-
-    return value
+    return domNode.dataset
   }
 }
 

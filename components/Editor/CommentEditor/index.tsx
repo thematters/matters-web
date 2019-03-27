@@ -148,6 +148,7 @@ class CommentEditor extends React.Component<Props, State> {
                       users={users}
                       onClick={(user: SearchUsers_search_edges_node_User) => {
                         mentionInstance.insertMention({
+                          id: user.id,
                           displayName: user.displayName,
                           userName: user.userName
                         })

@@ -48,7 +48,7 @@ class Mention {
     this.mentionContainer.style.display = 'none'
   }
 
-  insertMention(data: { displayName: string; userName: string }) {
+  insertMention(data: { id: string; displayName: string; userName: string }) {
     if (!data || !this.cursorPos) {
       return
     }
@@ -159,7 +159,6 @@ class Mention {
       return
     }
 
-    // const mentionChar = beforeCursorPos[mentionCharIndex]
     this.onMentionChange(textAfter)
     this.showMentionContainer()
   }
