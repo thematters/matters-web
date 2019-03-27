@@ -23,25 +23,33 @@ class IFrameClipboard extends BlockEmbed {
     if (value.placeholder) {
       this.placeholder = value.placeholder
     }
-    node.setAttribute('value', '')
-    node.setAttribute('purpose', value.purpose || this.purpose)
-    node.setAttribute('placeholder', value.placeholder || this.placeholder)
+    const input = document.createElement('input')
+    input.setAttribute('value', '')
+    input.setAttribute('purpose', value.purpose || this.purpose)
+    input.setAttribute('placeholder', value.placeholder || this.placeholder)
+    node.setAttribute('contenteditable', 'false')
+    node.appendChild(input)
     return node
   }
 
   constructor(domNode: HTMLElement) {
     super(domNode)
-    const { purpose, placeholder } = this.value(domNode)
+    const input = domNode.querySelector('input')
+    const { purpose, placeholder } = this.value(input)
     this.purpose = purpose
     this.placeholder = placeholder
     this.insertIFrame = this.insertIFrame.bind(this)
     this.convertToText = this.convertToText.bind(this)
     this.replaceWithText = this.replaceWithText.bind(this)
+    this.onBlur = this.onBlur.bind(this)
     this.onPaste = this.onPaste.bind(this)
     this.onPress = this.onPress.bind(this)
 
-    domNode.addEventListener('paste', this.onPaste)
-    domNode.addEventListener('keydown', this.onPress)
+    if (input) {
+      input.addEventListener('blur', this.onBlur)
+      input.addEventListener('paste', this.onPaste)
+      input.addEventListener('keydown', this.onPress)
+    }
   }
 
   private get quill() {
@@ -51,10 +59,16 @@ class IFrameClipboard extends BlockEmbed {
     return Quill.find(this.scroll.domNode.parentNode)
   }
 
-  value(domNode: HTMLElement): { [key: string]: any } {
+  value(domNode: HTMLElement | null): { [key: string]: any } {
     return {
       purpose: domNode ? domNode.getAttribute('purpose') || null : null,
       placeholder: domNode ? domNode.getAttribute('placeholder') || null : null
+    }
+  }
+
+  onBlur(event: any) {
+    if (!this.url) {
+      this.remove()
     }
   }
 
@@ -124,6 +138,6 @@ class IFrameClipboard extends BlockEmbed {
 
 IFrameClipboard.blotName = 'iframeClipboard'
 IFrameClipboard.className = 'iframe-clipboard'
-IFrameClipboard.tagName = 'input'
+IFrameClipboard.tagName = 'div'
 
 export default IFrameClipboard
