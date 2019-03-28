@@ -18,6 +18,3 @@ export default class SmartBreak extends Break {
     Embed.prototype.insertInto.call(this, parent, ref)
   }
 }
-
-SmartBreak.blotName = 'break'
-SmartBreak.tagName = 'BR'
