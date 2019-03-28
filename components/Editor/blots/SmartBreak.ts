@@ -6,7 +6,7 @@ const Embed = Quill.import('blots/embed')
 /**
  * @see {@url https://github.com/quilljs/quill/issues/252}
  */
-export default class SmartBreak extends Break {
+class SmartBreak extends Break {
   // length() {
   //   return 1
   // }
@@ -17,3 +17,7 @@ export default class SmartBreak extends Break {
     Embed.prototype.insertInto.call(this, parent, ref)
   }
 }
+
+Quill.register('formats/break', SmartBreak)
+
+export default SmartBreak

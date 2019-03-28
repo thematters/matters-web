@@ -11,6 +11,11 @@ import { Button } from '~/components/Button'
 import UserList from '~/components/Dropdown/UserList'
 import { Form } from '~/components/Form'
 import { checkFor, Mutation, Query } from '~/components/GQL'
+import {
+  SearchUsers,
+  SearchUsers_search_edges_node_User
+} from '~/components/GQL/queries/__generated__/SearchUsers'
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
@@ -24,10 +29,6 @@ import { isValidEmail, toPath, translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-white.svg?sprite'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User
-} from './__generated__/SearchUsers'
 import styles from './styles.css'
 
 interface InviteInputState {
@@ -39,21 +40,6 @@ interface Props {
   invitationLeft: number
   submitCallback: () => void
 }
-
-const SEARCH_USERS = gql`
-  query SearchUsers($search: String!) {
-    search(input: { key: $search, type: User, first: 5 }) {
-      edges {
-        node {
-          ... on User {
-            ...UserDigestBriefDescUser
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.BriefDesc.fragments.user}
-`
 
 const INVITE = gql`
   mutation Invite($input: InviteInput!) {
@@ -291,8 +277,8 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                               user: SearchUsers_search_edges_node_User
                             ) => {
                               setInviteInput({ user, email: null })
+                              hideDropdown()
                             }}
-                            hideDropdown={hideDropdown}
                           />
                         }
                       >

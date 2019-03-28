@@ -7,5 +7,3 @@ export const modules = {
     ['blockquote', { list: 'ordered' }, { list: 'bullet' }, 'link']
   ]
 }
-
-export const formats = config.formats

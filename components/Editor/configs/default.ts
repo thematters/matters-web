@@ -2,6 +2,8 @@ import { Quill } from 'react-quill'
 
 import { KEYCODES } from '~/common/enums'
 
+import '../blots'
+import '../modules/mention'
 import lineBreakMatcher from '../utils/lineBreakMatcher'
 
 const Parchment = Quill.import('parchment')
@@ -91,25 +93,3 @@ export const modules = {
     }
   }
 }
-
-export const formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video',
-  'divider',
-  'break',
-  'imageFigure',
-  'iframeClipboard',
-  'pastebin'
-]

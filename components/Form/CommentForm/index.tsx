@@ -12,6 +12,7 @@ import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
+import { dom } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import styles from './styles.css'
@@ -85,14 +86,15 @@ const CommentForm = ({
       const isValid = !!content
 
       const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        const mentions = dom.getAttributes('data-id', content)
         const input = {
           id: commentId,
           comment: {
             content,
             replyTo: replyToId,
             articleId,
-            parentId
-            // mentions:
+            parentId,
+            mentions
           }
         }
 
@@ -117,7 +119,16 @@ const CommentForm = ({
             )
           })
           .catch((result: any) => {
-            // TODO: Handle error
+            window.dispatchEvent(
+              new CustomEvent('addToast', {
+                detail: {
+                  color: 'red',
+                  content: (
+                    <Translate zh_hant="評論送出失敗" zh_hans="评论失败送出" />
+                  )
+                }
+              })
+            )
           })
           .finally(() => {
             setSubmitting(false)
@@ -126,7 +137,10 @@ const CommentForm = ({
 
       return (
         <form onSubmit={handleSubmit}>
-          <CommentEditor content={content} handleChange={setContent} />
+          <CommentEditor
+            content={content}
+            handleChange={value => setContent(value)}
+          />
           <div className="buttons">
             {extraButton && extraButton}
             <Button

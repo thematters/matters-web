@@ -140,4 +140,6 @@ IFrameClipboard.blotName = 'iframeClipboard'
 IFrameClipboard.className = 'iframe-clipboard'
 IFrameClipboard.tagName = 'div'
 
+Quill.register('formats/iframeClipboard', IFrameClipboard)
+
 export default IFrameClipboard

@@ -29,4 +29,6 @@ Video.blotName = 'video'
 Video.className = 'iframe-container'
 Video.tagName = 'div'
 
+Quill.register('formats/video', Video)
+
 export default Video

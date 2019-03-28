@@ -40,4 +40,6 @@ ImageFigure.blotName = 'imageFigure'
 ImageFigure.tagName = 'figure'
 ImageFigure.className = 'image'
 
+Quill.register('formats/imageFigure', ImageFigure)
+
 export default ImageFigure

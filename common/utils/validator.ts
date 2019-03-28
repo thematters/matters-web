@@ -35,6 +35,8 @@ export const isValidStrictPassword = (password: string): boolean => {
  *
  * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
  */
+export const REGEXP_DISPLAY_NAME = /^[A-Za-z0-9\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF\u2e80-\u33ffh]*$/
+
 export const isValidDisplayName = (name: string): boolean => {
   if (
     !name ||
@@ -43,9 +45,7 @@ export const isValidDisplayName = (name: string): boolean => {
   ) {
     return false
   }
-  return /^[A-Za-z0-9\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF\u2e80-\u33ffh]*$/.test(
-    name
-  )
+  return REGEXP_DISPLAY_NAME.test(name)
 }
 
 /**

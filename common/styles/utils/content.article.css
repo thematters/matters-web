@@ -107,24 +107,17 @@
     line-height: var(--line-height-article-heading);
   }
 
-  /* Paragraph
-   ========================================================================== */
-  & :global(> p) {
-    text-align: justify;
-    text-justify: inter-ideograph;
-  }
-
   /* Link
    ========================================================================== */
   & :global(a) {
-    color: var(--color-matters-gold);
+    color: var(--color-matters-green);
     border-bottom: 1px solid currentcolor;
     padding-bottom: 2px;
 
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-gold-hover);
+      color: var(--color-matters-green-hover);
     }
   }
   /* fix frequent misuse of links */

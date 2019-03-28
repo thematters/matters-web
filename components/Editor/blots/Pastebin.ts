@@ -30,4 +30,6 @@ Pastebin.blotName = 'pastebin'
 Pastebin.className = 'iframe-container'
 Pastebin.tagName = 'div'
 
+Quill.register('formats/pastebin', Pastebin)
+
 export default Pastebin

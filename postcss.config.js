@@ -14,7 +14,8 @@ module.exports = {
         './common/styles/variables/colors.css',
         './common/styles/variables/sizing.css',
         './common/styles/variables/spacing.css',
-        './common/styles/variables/typography.css'
+        './common/styles/variables/typography.css',
+        './common/styles/variables/shadows.css'
       ]
     }),
     require('postcss-calc'),
