@@ -1,9 +1,9 @@
 import './Divider'
+import './IFrameClipboard'
 import './ImageFigure'
 import './Mention'
+import './Pastebin'
 import './SmartBreak'
-// import GithubGistBlot from './GithubGist'
-// import PastebinBlot from './Pastebin'
-// import VideoBlot from './Video'
+import './Video'
 
 export default null

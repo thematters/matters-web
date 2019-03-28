@@ -50,6 +50,11 @@ class CommentEditor extends React.Component<Props, State> {
     this.resetLinkInputPlaceholder()
   }
 
+  componentDidUpdate() {
+    this.attachQuillRefs()
+    this.resetLinkInputPlaceholder()
+  }
+
   attachQuillRefs = () => {
     if (
       !this.reactQuillRef ||

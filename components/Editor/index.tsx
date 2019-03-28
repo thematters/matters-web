@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
+import _includes from 'lodash/includes'
 import React from 'react'
 import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
@@ -67,8 +68,8 @@ class Editor extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    // this.attachQuillRefs()
-    // this.resetLinkInputPlaceholder()
+    this.attachQuillRefs()
+    this.resetLinkInputPlaceholder()
 
     if (prevProps.draft.id === this.props.draft.id) {
       return
@@ -141,18 +142,29 @@ class Editor extends React.Component<Props, State> {
     const bounds = editor.getBounds(range)
     const nextChar = editor.getText(range.index, 1).replace(/\s/, '')
     const isNewLine = bounds.left === 0 && !nextChar
+    const [blot] = this.quill ? this.quill.getLeaf(range.index) : [null]
 
     // hide sideToolbar
-    if (!isNewLine && this.state.sideToolbar.show) {
+    if (this.isCustomBlot(blot)) {
       this.setState({
         sideToolbar: { show: false, top: bounds.top || 0 }
       })
-    }
-
-    // show sideToolbar
-    if (isNewLine) {
+    } else if (!isNewLine && this.state.sideToolbar.show) {
+      this.setState({
+        sideToolbar: { show: false, top: bounds.top || 0 }
+      })
+    } else if (isNewLine) {
+      // show sideToolbar
       this.setState({ sideToolbar: { show: true, top: bounds.top } })
     }
+  }
+
+  public isCustomBlot(blot: any): boolean {
+    const types = ['iframeClipboard']
+    if (blot && blot.statics && _includes(types, blot.statics.blotName)) {
+      return true
+    }
+    return false
   }
 
   onMentionChange = (search: string) => {
