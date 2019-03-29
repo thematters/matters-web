@@ -5,6 +5,7 @@ import { Head } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Features from './Features'
+import Footer from './Footer'
 import Goal from './Goal'
 import Reports from './Reports'
 import Slogan from './Slogan'
@@ -34,6 +35,7 @@ export default () => {
         <Goal />
         <Features />
         <Reports />
+        <Footer />
       </article>
 
       <style jsx>{styles}</style>
