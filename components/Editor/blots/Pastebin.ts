@@ -16,13 +16,16 @@ class Pastebin extends BlockEmbed {
     iframe.setAttribute('allowfullscreen', 'false')
     iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin')
     iframe.setAttribute('style', iframeStyle)
+
+    node.setAttribute('contenteditable', 'fasle')
     node.setAttribute('style', containerStyle)
     node.appendChild(iframe)
     return node
   }
 
   public static value(node: HTMLElement) {
-    return node.getAttribute('src')
+    const iframe = node.querySelector('iframe')
+    return iframe ? iframe.getAttribute('src') : null
   }
 }
 
