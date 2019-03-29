@@ -30,16 +30,13 @@
 }
 
 .count {
+  @mixin font-serif;
+
   color: var(--color-matters-green);
 
   vertical-align: middle;
   font-weight: var(--font-weight-bold);
-  font-family: var(--font-serif-tc);
   user-select: none;
-
-  &[lang='zh-hans'] {
-    font-family: var(--font-serif-sc);
-  }
 }
 
 .small {

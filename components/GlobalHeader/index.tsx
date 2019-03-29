@@ -1,12 +1,15 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import Router from 'next/router'
 import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
 
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
+import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import { HeaderContext } from './Context'
@@ -36,25 +39,34 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
   const { type: headerType } = headerState
-  const rightClasses = classNames({
-    right: true,
-    me: viewer.isAuthed
-  })
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
   const isSignUp = headerType === 'signUp'
+  const isAbout = headerType === 'about'
+
+  const headerClass = classNames({
+    transparent:
+      isAbout &&
+      'bgColor' in headerState &&
+      headerState.bgColor === 'transparent'
+  })
+  const rightClass = classNames({
+    right: true,
+    me: viewer.isAuthed
+  })
 
   return (
-    <header>
+    <header className={headerClass}>
       <div className="l-row">
         <div className="container">
           <section className="left">
             <Logo />
-            {isDraft ? <Hint /> : <Nav />}
+            {!isAbout && isDraft && <Hint />}
+            {!isAbout && !isDraft && <Nav />}
           </section>
 
-          <section className={rightClasses}>
-            {viewer.isAuthed && user ? (
+          <section className={rightClass}>
+            {!isAbout && viewer.isAuthed && user && (
               <>
                 <Responsive.MediumUp>
                   {(match: boolean) =>
@@ -70,11 +82,21 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                   <WriteButton allowed={viewer.isActive} />
                 )}
               </>
-            ) : (
+            )}
+
+            {!isAbout && (!viewer.isAuthed || !user) && (
               <>
                 {!isLogin && <LoginButton />}
                 {!isSignUp && <SignUpButton />}
               </>
+            )}
+
+            {isAbout && (
+              <Link {...PATHS.HOME}>
+                <a className="u-link-green">
+                  <Translate zh_hant="返回發現" zh_hans="返回发现" />
+                </a>
+              </Link>
             )}
           </section>
         </div>

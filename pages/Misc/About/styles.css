@@ -1,0 +1,53 @@
+.slogan {
+  @mixin flex-center-space-between;
+  align-items: flex-start;
+
+  position: relative;
+  padding-top: 8.125rem;
+  margin-top: calc((var(--spacing-loose) + var(--global-header-height)) * -1);
+  margin-top: calc(
+    (var(--spacing-loose) + var(--global-header-height) + 1px) * -1
+  );
+  height: 100vh;
+
+  background-color: var(--color-bg-green);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+  text-align: center;
+
+  @media (--sm-up) {
+    align-items: center;
+    padding-top: 0;
+    margin-top: calc(
+      (var(--spacing-x-loose) + var(--global-header-height)) * -1
+    );
+    margin-top: calc(
+      (var(--spacing-x-loose) + var(--global-header-height) + 1px) * -1
+    );
+    height: 50rem;
+    background-position: right center;
+    text-align: left;
+  }
+
+  & img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+
+  & h1 {
+    @mixin font-serif;
+    font-size: 1.7rem;
+    line-height: 1.4;
+
+    @media (--sm-up) {
+      font-size: 2.5rem;
+    }
+  }
+
+  & .buttons {
+    margin-top: var(--spacing-x-loose);
+  }
+}

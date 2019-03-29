@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 export default () => (
   <>
-    <Link href={PATHS.HOME.href} as={PATHS.HOME.as}>
+    <Link {...PATHS.HOME}>
       <a aria-label="首頁">
         <Icon
           id={ICON_LOGO.id}

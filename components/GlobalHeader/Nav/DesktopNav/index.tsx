@@ -20,12 +20,12 @@ const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <>
-      <Link href={PATHS.HOME.href} as={PATHS.HOME.as}>
+      <Link {...PATHS.HOME}>
         <a className={homeClasses}>
           <Translate zh_hant="發現" zh_hans="发现" />
         </a>
       </Link>
-      <Link href={PATHS.FOLLOW.href} as={PATHS.FOLLOW.as}>
+      <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
           <Translate zh_hant="追蹤" zh_hans="追踪" />
         </a>

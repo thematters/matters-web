@@ -1,40 +1,27 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
-import { Head, LanguageContext, PageHeader, Translate } from '~/components'
+import { Head } from '~/components'
+import { HeaderContext } from '~/components/GlobalHeader/Context'
 
-import styles from '~/common/styles/utils/content.article.css'
-import { translate } from '~/common/utils'
-
-import MiscTab from '../MiscTab'
-import content from './content'
+import Slogan from './Slogan'
+import styles from './styles.css'
 
 export default () => {
-  const { lang } = useContext(LanguageContext)
+  const { updateHeaderState } = useContext(HeaderContext)
+  useEffect(() => {
+    updateHeaderState({ type: 'about', bgColor: 'transparent' })
+    return () => updateHeaderState({ type: 'default' })
+  }, [])
 
   return (
     <main>
       <Head title={{ zh_hant: '關於我們', zh_hans: '关于我们' }} />
 
-      <section className="l-row">
-        <div className="l-col-4 l-col-md-1 l-col-lg-2">
-          <MiscTab />
-        </div>
-        <div className="l-col-4 l-col-md-6 l-col-lg-8">
-          <PageHeader
-            pageTitle={<Translate zh_hant="關於我們" zh_hans="关于我们" />}
-          />
-          <article
-            dangerouslySetInnerHTML={{
-              __html: translate({
-                ...content,
-                lang
-              })
-            }}
-            className="u-content"
-          />
-        </div>
-        <style jsx>{styles}</style>
-      </section>
+      <article>
+        <Slogan />
+      </article>
+
+      <style jsx>{styles}</style>
     </main>
   )
 }
