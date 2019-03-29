@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="267" height="304" viewBox="0 0 267 304">
+  <defs>
+    <path id="about-2-a" d="M28.488694,45.5384615 L22.4303081,51.5879143 L16.3719223,45.5384615 L4,45.5384615 C1.790861,45.5384615 4.19476067e-15,43.7476005 0,41.5384615 L-8.8817842e-16,4 C-1.15871992e-15,1.790861 1.790861,4.05812251e-16 4,0 L41.643739,-8.8817842e-16 C43.852878,-1.29399067e-15 45.643739,1.790861 45.643739,4 L45.643739,41.5384615 C45.643739,43.7476005 43.852878,45.5384615 41.643739,45.5384615 L28.488694,45.5384615 Z"/>
+    <linearGradient id="about-2-b" x1="23.784%" x2="83.518%" y1="18.443%" y2="80.419%">
+      <stop offset="0%" stop-color="#EFDAAF"/>
+      <stop offset="100%" stop-color="#BF9F5E"/>
+    </linearGradient>
+    <path id="about-2-c" d="M28.488694,45.5384615 L22.4303081,51.5879143 L16.3719223,45.5384615 L4,45.5384615 C1.790861,45.5384615 4.19476067e-15,43.7476005 0,41.5384615 L-8.8817842e-16,4 C-1.15871992e-15,1.790861 1.790861,4.05812251e-16 4,0 L41.643739,-8.8817842e-16 C43.852878,-1.29399067e-15 45.643739,1.790861 45.643739,4 L45.643739,41.5384615 C45.643739,43.7476005 43.852878,45.5384615 41.643739,45.5384615 L28.488694,45.5384615 Z"/>
+    <linearGradient id="about-2-d" x1="95.434%" x2="21.137%" y1="77.234%" y2="18.145%">
+      <stop offset="0%" stop-color="#79B1A6"/>
+      <stop offset="100%" stop-color="#D7EAE1"/>
+    </linearGradient>
+    <path id="about-2-e" d="M28.488694,45.5384615 L22.4303081,51.5879143 L16.3719223,45.5384615 L4,45.5384615 C1.790861,45.5384615 4.19476067e-15,43.7476005 0,41.5384615 L-8.8817842e-16,4 C-1.15871992e-15,1.790861 1.790861,4.05812251e-16 4,0 L41.643739,-8.8817842e-16 C43.852878,-1.29399067e-15 45.643739,1.790861 45.643739,4 L45.643739,41.5384615 C45.643739,43.7476005 43.852878,45.5384615 41.643739,45.5384615 L28.488694,45.5384615 Z"/>
+    <path id="about-2-f" d="M28.488694,45.5384615 L22.4303081,51.5879143 L16.3719223,45.5384615 L4,45.5384615 C1.790861,45.5384615 4.19476067e-15,43.7476005 0,41.5384615 L-8.8817842e-16,4 C-1.15871992e-15,1.790861 1.790861,4.05812251e-16 4,0 L41.643739,-8.8817842e-16 C43.852878,-1.29399067e-15 45.643739,1.790861 45.643739,4 L45.643739,41.5384615 C45.643739,43.7476005 43.852878,45.5384615 41.643739,45.5384615 L28.488694,45.5384615 Z"/>
+    <path id="about-2-g" d="M28.488694,45.5384615 L22.4303081,51.5879143 L16.3719223,45.5384615 L4,45.5384615 C1.790861,45.5384615 4.19476067e-15,43.7476005 0,41.5384615 L-8.8817842e-16,4 C-1.15871992e-15,1.790861 1.790861,4.05812251e-16 4,0 L41.643739,-8.8817842e-16 C43.852878,-1.29399067e-15 45.643739,1.790861 45.643739,4 L45.643739,41.5384615 C45.643739,43.7476005 43.852878,45.5384615 41.643739,45.5384615 L28.488694,45.5384615 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-26 -8)">
+    <rect width="320" height="320"/>
+    <ellipse cx="159.5" cy="118.5" stroke="#92C7B8" stroke-width=".5" rx="132.5" ry="38.5"/>
+    <ellipse cx="159.5" cy="167.5" stroke="#92C7B8" stroke-width=".5" rx="132.5" ry="38.5"/>
+    <ellipse cx="159.5" cy="215.5" stroke="#92C7B8" stroke-width=".5" rx="132.5" ry="38.5"/>
+    <ellipse cx="159.5" cy="263.5" stroke="#92C7B8" stroke-width=".5" rx="132.5" ry="38.5"/>
+    <g transform="translate(136 8)">
+      <use fill="#DEF3ED" xlink:href="#about-2-a"/>
+      <use fill="#ECF6F1" xlink:href="#about-2-a"/>
+      <use fill="#F2FAF7" xlink:href="#about-2-a"/>
+      <use fill="#F3FAED" xlink:href="#about-2-a"/>
+      <use fill="#F2FAF8" xlink:href="#about-2-a"/>
+      <path stroke="#9ACABD" stroke-linecap="square" d="M9.1287478 14.2307692L36.5149912 14.2307692M9.1287478 19.9230769L36.5149912 19.9230769M9.1287478 25.6153846L36.5149912 25.6153846M9.1287478 30.7384615L22.8218695 30.7384615"/>
+    </g>
+    <circle cx="160" cy="79" r="11" fill="url(#about-2-b)"/>
+    <g transform="translate(47 76)">
+      <use fill="#DEF3ED" xlink:href="#about-2-c"/>
+      <use fill="#ECF6F1" xlink:href="#about-2-c"/>
+      <use fill="#F2FAF7" xlink:href="#about-2-c"/>
+      <use fill="#F3FAED" xlink:href="#about-2-c"/>
+      <use fill="#F2FAF8" xlink:href="#about-2-c"/>
+      <path stroke="#9ACABD" stroke-linecap="square" d="M9.1287478 14.2307692L36.5149912 14.2307692M9.1287478 19.9230769L36.5149912 19.9230769M9.1287478 25.6153846L36.5149912 25.6153846M9.1287478 30.7384615L22.8218695 30.7384615"/>
+    </g>
+    <circle cx="71" cy="147" r="11" fill="url(#about-2-d)"/>
+    <g transform="translate(227 123)">
+      <use fill="#DEF3ED" xlink:href="#about-2-e"/>
+      <use fill="#ECF6F1" xlink:href="#about-2-e"/>
+      <use fill="#F2FAF7" xlink:href="#about-2-e"/>
+      <use fill="#F3FAED" xlink:href="#about-2-e"/>
+      <use fill="#F2FAF8" xlink:href="#about-2-e"/>
+      <path stroke="#9ACABD" stroke-linecap="square" d="M9.1287478 14.2307692L36.5149912 14.2307692M9.1287478 19.9230769L36.5149912 19.9230769M9.1287478 25.6153846L36.5149912 25.6153846M9.1287478 30.7384615L22.8218695 30.7384615"/>
+    </g>
+    <circle cx="250" cy="194" r="11" fill="url(#about-2-d)"/>
+    <g transform="translate(103 183)">
+      <use fill="#DEF3ED" xlink:href="#about-2-f"/>
+      <use fill="#ECF6F1" xlink:href="#about-2-f"/>
+      <use fill="#F2FAF7" xlink:href="#about-2-f"/>
+      <use fill="#F3FAED" xlink:href="#about-2-f"/>
+      <use fill="#F2FAF8" xlink:href="#about-2-f"/>
+      <path stroke="#9ACABD" stroke-linecap="square" d="M9.1287478 14.2307692L36.5149912 14.2307692M9.1287478 19.9230769L36.5149912 19.9230769M9.1287478 25.6153846L36.5149912 25.6153846M9.1287478 30.7384615L22.8218695 30.7384615"/>
+    </g>
+    <circle cx="126" cy="254" r="11" fill="url(#about-2-d)"/>
+    <g transform="translate(188 230)">
+      <use fill="#DEF3ED" xlink:href="#about-2-g"/>
+      <use fill="#ECF6F1" xlink:href="#about-2-g"/>
+      <use fill="#F2FAF7" xlink:href="#about-2-g"/>
+      <use fill="#F3FAED" xlink:href="#about-2-g"/>
+      <use fill="#F2FAF8" xlink:href="#about-2-g"/>
+      <path stroke="#9ACABD" stroke-linecap="square" d="M9.1287478 14.2307692L36.5149912 14.2307692M9.1287478 19.9230769L36.5149912 19.9230769M9.1287478 25.6153846L36.5149912 25.6153846M9.1287478 30.7384615L22.8218695 30.7384615"/>
+    </g>
+    <circle cx="211" cy="301" r="11" fill="url(#about-2-d)"/>
+  </g>
+</svg>

@@ -1,3 +1,13 @@
+h2 {
+  @mixin font-serif;
+  font-size: 1.7rem;
+  line-height: 1.4;
+
+  @media (--sm-up) {
+    font-size: 2.5rem;
+  }
+}
+
 .slogan {
   @mixin flex-center-space-between;
   align-items: flex-start;
@@ -37,17 +47,35 @@
     height: 100%;
   }
 
-  & h1 {
-    @mixin font-serif;
-    font-size: 1.7rem;
-    line-height: 1.4;
-
-    @media (--sm-up) {
-      font-size: 2.5rem;
-    }
-  }
-
   & .buttons {
     margin-top: var(--spacing-x-loose);
+  }
+}
+
+.goal {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  & img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  & h2 {
+    margin-top: var(--spacing-x-loose);
+    text-align: center;
+  }
+
+  & p {
+    margin-top: var(--spacing-default);
+  }
+
+  @media (--sm-up) {
+    padding-top: 8rem;
+
+    & h2 {
+      margin-top: 0;
+      text-align: left;
+    }
   }
 }

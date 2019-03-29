@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react'
 import { Head } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
+import Goal from './Goal'
 import Slogan from './Slogan'
 import styles from './styles.css'
 
@@ -19,6 +20,7 @@ export default () => {
 
       <article>
         <Slogan />
+        <Goal />
       </article>
 
       <style jsx>{styles}</style>

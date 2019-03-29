@@ -14,31 +14,29 @@ const Slogan = () => (
     <div style={{ width: '100%' }}>
       <div className="l-row">
         <div className="l-col-4 l-col-md-8 l-col-lg-12 ">
-          <section className="content">
-            <h1>
-              <Translate
-                zh_hant="一個自由、自主、永續的"
-                zh_hans="一个自由、自主、永续的"
-              />
-              <br />
-              <Translate
-                zh_hant="創作與公共討論空間"
-                zh_hans="创作与公共讨论空间"
-              />
-            </h1>
+          <h2>
+            <Translate
+              zh_hant="一個自由、自主、永續的"
+              zh_hans="一个自由、自主、永续的"
+            />
+            <br />
+            <Translate
+              zh_hant="創作與公共討論空間"
+              zh_hans="创作与公共讨论空间"
+            />
+          </h2>
 
-            <div className="buttons">
-              <Button
-                size="large"
-                bgColor="green"
-                is="link"
-                as={PATHS.HOME.as}
-                href={PATHS.HOME.href}
-              >
-                <Translate zh_hant="開始創作" zh_hans="开始创作" />
-              </Button>
-            </div>
-          </section>
+          <div className="buttons">
+            <Button
+              size="large"
+              bgColor="green"
+              is="link"
+              as={PATHS.HOME.as}
+              href={PATHS.HOME.href}
+            >
+              <Translate zh_hant="開始創作" zh_hans="开始创作" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
