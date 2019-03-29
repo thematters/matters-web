@@ -132,12 +132,13 @@ h2 {
     }
 
     & .intro {
-      align-items: flex-start;
-      flex-direction: column;
       text-align: center;
 
       @media (--sm-up) {
-        @mixin flex-center-all;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         text-align: left;
       }
 
@@ -153,6 +154,61 @@ h2 {
 
         @media (--sm-up) {
           margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.reports {
+  margin-top: 7.5rem;
+
+  & h2 {
+    margin-bottom: var(--spacing-x-loose);
+    text-align: center;
+  }
+
+  & .item {
+    margin-bottom: var(--spacing-tight);
+
+    & a {
+      @mixin all-transition;
+      position: relative;
+      display: block;
+      padding: var(--spacing-tight);
+      background: var(--color-grey-lighter);
+
+      &:hover,
+      &:focus {
+        background: var(--color-bg-green);
+
+        & h3 {
+          color: var(--color-matters-green);
+        }
+      }
+
+      & h3 {
+        @mixin font-serif;
+        margin-bottom: var(--spacing-x-tight);
+        font-size: var(--font-size-xl);
+        line-height: 1.3333333;
+      }
+    }
+
+    @media (--sm-up) {
+      margin-bottom: 3rem;
+
+      & a {
+        height: 17rem;
+
+        & cite {
+          position: absolute;
+          bottom: var(--spacing-tight);
+          left: var(--spacing-tight);
+          right: var(--spacing-tight);
+          color: var(--color-grey-darker);
+          font-style: normal;
+          font-weight: var(--font-weight-medium);
         }
       }
     }
