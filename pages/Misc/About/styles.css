@@ -85,16 +85,6 @@ h2 {
   margin-top: 2.375rem;
   background-color: var(--color-bg-yellow);
 
-  @media (--sm-up) {
-    margin-top: 3.5rem;
-    background: linear-gradient(
-        90deg,
-        var(--color-bg-yellow) 50%,
-        transparent 50%
-      )
-      no-repeat;
-  }
-
   & .title {
     position: relative;
     text-align: center;
@@ -106,41 +96,17 @@ h2 {
       width: 100%;
       margin-top: -2.375rem;
     }
-
-    @media (--sm-up) {
-      text-align: left;
-
-      & h2 {
-        margin-top: -3.5rem;
-      }
-    }
   }
 
   & .feature-section {
     padding-top: 4rem;
 
-    @media (--sm-up) {
-      padding-top: 9rem;
-    }
-
     &:last-child {
       padding-bottom: 4rem;
-
-      @media (--sm-up) {
-        padding-bottom: 9rem;
-      }
     }
 
     & .intro {
       text-align: center;
-
-      @media (--sm-up) {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        text-align: left;
-      }
 
       & h3 {
         font-size: var(--font-size-xl);
@@ -151,8 +117,42 @@ h2 {
         margin-bottom: var(--spacing-loose);
         color: var(--color-matters-gold);
         font-size: var(--font-size-sm);
+      }
+    }
+  }
 
-        @media (--sm-up) {
+  @media (--sm-up) {
+    margin-top: 3.5rem;
+    background: linear-gradient(
+        90deg,
+        var(--color-bg-yellow) 50%,
+        transparent 50%
+      )
+      no-repeat;
+
+    & .title {
+      text-align: left;
+
+      & h2 {
+        margin-top: -3.5rem;
+      }
+    }
+
+    & .feature-section {
+      padding-top: 9rem;
+
+      &:last-child {
+        padding-bottom: 9rem;
+      }
+
+      & .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+
+        & p {
           margin-bottom: 0;
         }
       }
@@ -161,7 +161,7 @@ h2 {
 }
 
 .reports {
-  margin-top: 7.5rem;
+  margin-top: 5rem;
 
   & h2 {
     margin-bottom: var(--spacing-x-loose);
@@ -194,8 +194,12 @@ h2 {
         line-height: 1.3333333;
       }
     }
+  }
 
-    @media (--sm-up) {
+  @media (--sm-up) {
+    margin-top: 7.5rem;
+
+    & .item {
       margin-bottom: 3rem;
 
       & a {
