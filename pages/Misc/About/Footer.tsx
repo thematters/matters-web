@@ -98,13 +98,14 @@ const Footer = () => {
                   zh_hans: '你的电子邮箱',
                   lang
                 })}
+                defaultValue=""
               />
               <input
                 style={{ position: 'absolute', left: '-5000px' }}
                 aria-hidden="true"
                 type="text"
                 name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
-                value=""
+                defaultValue=""
               />
               <Button type="submit" bgColor="green" size="xlarge">
                 <Translate zh_hant="訂閱" zh_hans="订阅" />

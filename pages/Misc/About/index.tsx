@@ -31,6 +31,11 @@ export default () => {
           onLeave={() => {
             updateHeaderState({ type: 'about', bgColor: 'default' })
           }}
+          onPositionChange={({ currentPosition }) => {
+            if (currentPosition === 'above') {
+              updateHeaderState({ type: 'about', bgColor: 'default' })
+            }
+          }}
         />
         <Goal />
         <Features />
