@@ -7,7 +7,8 @@ import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 
 import UserList from '~/components/Dropdown/UserList'
-import { Query } from '~/components/GQL'
+import { Mutation, Query } from '~/components/GQL'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -24,11 +25,21 @@ import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
+// import imageMatcher from './utils/imageMatcher'
+import lineBreakMatcher from './utils/lineBreakMatcher'
 
 interface Props {
   onSave: any
   draft: EditorDraft
   lang: Language
+  // upload: (input: {
+  //   file?: any
+  //   url?: string
+  // }) => Promise<void | {
+  //   id: string
+  //   path: string
+  // }>
+  // uploading: boolean
 }
 
 interface State {
@@ -193,67 +204,81 @@ class Editor extends React.Component<Props, State> {
           )
 
           return (
-            <>
-              <div className={containerClasses}>
-                <ReactQuill
-                  readOnly={isPending || isPublished}
-                  theme="bubble"
-                  modules={{
-                    ...config.modules,
-                    mention: {
-                      mentionContainer:
-                        this.mentionContainerRef &&
-                        this.mentionContainerRef.current,
-                      onMentionChange: this.onMentionChange,
-                      onInit: this.onMentionModuleInit
-                    }
-                  }}
-                  ref={this.reactQuillRef}
-                  value={this.state.content}
-                  placeholder={translate({
-                    zh_hant: '請輸入正文…',
-                    zh_hans: '请输入正文…',
-                    lang
-                  })}
-                  onChange={this.handleChange}
-                  onChangeSelection={this.handleOnChangeSelection}
-                  onBlur={this.saveDraft}
-                />
-                <SideToolbar
-                  {...this.state.sideToolbar}
-                  quill={this.quill}
-                  onSave={onSave}
-                />
-
-                <section
-                  className="mention-container"
-                  ref={this.mentionContainerRef}
-                  hidden={users.length <= 0}
-                >
-                  {loading && <Spinner />}
-                  {!loading && (
-                    <UserList
-                      users={users}
-                      onClick={(user: SearchUsers_search_edges_node_User) => {
-                        mentionInstance.insertMention({
-                          id: user.id,
-                          displayName: user.displayName,
-                          userName: user.userName
-                        })
+            <Mutation mutation={MUTATION_UPLOAD_FILE}>
+              {(singleFileUpload, { loading: uploading }) => (
+                <>
+                  <div className={containerClasses}>
+                    <ReactQuill
+                      readOnly={isPending || isPublished}
+                      theme="bubble"
+                      modules={{
+                        ...config.modules,
+                        clipboard: {
+                          // toggle to add extra line breaks when pasting HTML:
+                          matchVisual: false,
+                          matchers: [
+                            ['BR', lineBreakMatcher]
+                            // ['IMG', imageMatcher(this.upload)]
+                          ]
+                        },
+                        mention: {
+                          mentionContainer:
+                            this.mentionContainerRef &&
+                            this.mentionContainerRef.current,
+                          onMentionChange: this.onMentionChange,
+                          onInit: this.onMentionModuleInit
+                        }
                       }}
+                      ref={this.reactQuillRef}
+                      value={this.state.content}
+                      placeholder={translate({
+                        zh_hant: '請輸入正文…',
+                        zh_hans: '请输入正文…',
+                        lang
+                      })}
+                      onChange={this.handleChange}
+                      onChangeSelection={this.handleOnChangeSelection}
+                      onBlur={this.saveDraft}
                     />
-                  )}
-                </section>
-              </div>
+                    <SideToolbar
+                      {...this.state.sideToolbar}
+                      quill={this.quill}
+                      onSave={onSave}
+                    />
 
-              <style jsx>{styles}</style>
-              <style jsx global>
-                {bubbleStyles}
-              </style>
-              <style jsx global>
-                {contentStyles}
-              </style>
-            </>
+                    <section
+                      className="mention-container"
+                      ref={this.mentionContainerRef}
+                      hidden={users.length <= 0}
+                    >
+                      {loading && <Spinner />}
+                      {!loading && (
+                        <UserList
+                          users={users}
+                          onClick={(
+                            user: SearchUsers_search_edges_node_User
+                          ) => {
+                            mentionInstance.insertMention({
+                              id: user.id,
+                              displayName: user.displayName,
+                              userName: user.userName
+                            })
+                          }}
+                        />
+                      )}
+                    </section>
+                  </div>
+
+                  <style jsx>{styles}</style>
+                  <style jsx global>
+                    {bubbleStyles}
+                  </style>
+                  <style jsx global>
+                    {contentStyles}
+                  </style>
+                </>
+              )}
+            </Mutation>
           )
         }}
       </Query>
