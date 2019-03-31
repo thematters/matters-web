@@ -15,11 +15,17 @@ export interface DraftHeader {
   state: 'saving' | 'saved' | 'saveFailed' | ''
 }
 
-type HeaderState = DefaultHeader | AuthHeader | DraftHeader
+export interface AboutHeader {
+  type: 'about'
+  bgColor: 'transparent' | 'default'
+}
+type HeaderState = DefaultHeader | AuthHeader | DraftHeader | AboutHeader
 
 export const HeaderContext = createContext({} as {
   headerState: HeaderState
-  updateHeaderState: (state: DefaultHeader | AuthHeader | DraftHeader) => void
+  updateHeaderState: (
+    state: DefaultHeader | AuthHeader | DraftHeader | AboutHeader
+  ) => void
 })
 
 export const HeaderContextConsumer = HeaderContext.Consumer

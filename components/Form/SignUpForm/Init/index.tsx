@@ -298,7 +298,7 @@ export const SignUpInitForm: FC<Props> = ({
             >
               <span>
                 {agreeText}
-                <Link href={PATHS.MISC_TOS.href} as={PATHS.MISC_TOS.as}>
+                <Link {...PATHS.MISC_TOS}>
                   <a className="u-link-green" target="_blank">
                     {' '}
                     {tosText}
