@@ -15,18 +15,22 @@ interface IFrameParams {
 }
 
 class IFrameClipboard extends BlockEmbed {
-  public static create(value: IFrameParams) {
+  static create(value: IFrameParams) {
     const node = super.create(value)
+
     if (value.purpose) {
       this.purpose = value.purpose
     }
+
     if (value.placeholder) {
       this.placeholder = value.placeholder
     }
+
     const input = document.createElement('input')
     input.setAttribute('value', '')
     input.setAttribute('purpose', value.purpose || this.purpose)
     input.setAttribute('placeholder', value.placeholder || this.placeholder)
+
     node.setAttribute('contenteditable', 'false')
     node.appendChild(input)
     return node
@@ -34,21 +38,18 @@ class IFrameClipboard extends BlockEmbed {
 
   constructor(domNode: HTMLElement) {
     super(domNode)
+
     const input = domNode.querySelector('input')
     const { purpose, placeholder } = this.value(input)
+
     this.purpose = purpose
     this.placeholder = placeholder
-    this.insertIFrame = this.insertIFrame.bind(this)
-    this.convertToText = this.convertToText.bind(this)
-    this.replaceWithText = this.replaceWithText.bind(this)
-    this.onBlur = this.onBlur.bind(this)
-    this.onPaste = this.onPaste.bind(this)
-    this.onPress = this.onPress.bind(this)
 
     if (input) {
       input.addEventListener('blur', this.onBlur)
       input.addEventListener('paste', this.onPaste)
       input.addEventListener('keydown', this.onPress)
+      // input.focus()
     }
   }
 
@@ -66,13 +67,13 @@ class IFrameClipboard extends BlockEmbed {
     }
   }
 
-  onBlur(event: any) {
+  onBlur = (event: any) => {
     if (!this.url) {
       this.remove()
     }
   }
 
-  onPaste(event: ClipboardEvent) {
+  onPaste = (event: ClipboardEvent) => {
     event.stopPropagation()
     const windowObject = window as any
     if (windowObject.clipboardData && windowObject.clipboardData.getData) {
@@ -82,7 +83,7 @@ class IFrameClipboard extends BlockEmbed {
     }
   }
 
-  onPress(event: KeyboardEvent) {
+  onPress = (event: KeyboardEvent) => {
     event.stopPropagation()
     const key = event.which || event.keyCode
     const ctrl = event.ctrlKey || event.metaKey
@@ -103,7 +104,7 @@ class IFrameClipboard extends BlockEmbed {
     }
   }
 
-  processUrl(purpose: Purpose, url: string) {
+  processUrl = (purpose: Purpose, url: string) => {
     switch (this.purpose) {
       case 'video': {
         return videoUrl(url)
@@ -117,18 +118,18 @@ class IFrameClipboard extends BlockEmbed {
     }
   }
 
-  convertToText(url: string) {
+  convertToText = (url: string) => {
     this.replaceWith('text', url)
   }
 
-  insertIFrame(url: string) {
+  insertIFrame = (url: string) => {
     const range = this.quill.getSelection(true)
     this.quill.insertEmbed(range.index, this.purpose, url, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
     this.remove()
   }
 
-  replaceWithText() {
+  replaceWithText = () => {
     const range = this.quill.getSelection(true)
     this.quill.insertEmbed(range.index, 'P', true, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
