@@ -15,44 +15,6 @@ interface IFrameParams {
 }
 
 class IFrameClipboard extends BlockEmbed {
-  static create(value: IFrameParams) {
-    const node = super.create(value)
-
-    if (value.purpose) {
-      this.purpose = value.purpose
-    }
-
-    if (value.placeholder) {
-      this.placeholder = value.placeholder
-    }
-
-    const input = document.createElement('input')
-    input.setAttribute('value', '')
-    input.setAttribute('purpose', value.purpose || this.purpose)
-    input.setAttribute('placeholder', value.placeholder || this.placeholder)
-
-    node.setAttribute('contenteditable', 'false')
-    node.appendChild(input)
-    return node
-  }
-
-  constructor(domNode: HTMLElement) {
-    super(domNode)
-
-    const input = domNode.querySelector('input')
-    const { purpose, placeholder } = this.value(input)
-
-    this.purpose = purpose
-    this.placeholder = placeholder
-
-    if (input) {
-      input.addEventListener('blur', this.onBlur)
-      input.addEventListener('paste', this.onPaste)
-      input.addEventListener('keydown', this.onPress)
-      // input.focus()
-    }
-  }
-
   private get quill() {
     if (!this.scroll || !this.scroll.domNode.parentNode) {
       return null
@@ -60,86 +22,115 @@ class IFrameClipboard extends BlockEmbed {
     return Quill.find(this.scroll.domNode.parentNode)
   }
 
-  value(domNode: HTMLElement | null): { [key: string]: any } {
+  static create(value: IFrameParams) {
+    const node = super.create(value)
+
+    node.setAttribute('value', '')
+    node.setAttribute('data-purpose', value.purpose)
+    node.setAttribute('placeholder', value.placeholder)
+    node.setAttribute('contenteditable', 'false')
+
+    return node
+  }
+
+  static value(domNode: HTMLElement) {
     return {
-      purpose: domNode ? domNode.getAttribute('purpose') || null : null,
-      placeholder: domNode ? domNode.getAttribute('placeholder') || null : null
+      purpose: domNode.getAttribute('data-purpose') || null,
+      placeholder: domNode.getAttribute('placeholder') || null
     }
   }
 
-  onBlur = (event: any) => {
-    if (!this.url) {
-      this.remove()
+  constructor(domNode: HTMLElement) {
+    super(domNode)
+
+    domNode.addEventListener('blur', this.onBlur)
+    domNode.addEventListener('paste', this.onPaste)
+    domNode.addEventListener('keydown', this.onPress)
+    setTimeout(() => {
+      domNode.focus()
+    })
+  }
+
+  onBlur = (event: FocusEvent) => {
+    const target = event.currentTarget as HTMLInputElement
+
+    if (!target.value) {
+      this.removeBlot()
+    } else {
+      this.submit(target.value)
     }
   }
 
   onPaste = (event: ClipboardEvent) => {
     event.stopPropagation()
-    const windowObject = window as any
-    if (windowObject.clipboardData && windowObject.clipboardData.getData) {
-      this.url = windowObject.clipboardData.getData('Text')
-    } else if (event.clipboardData && event.clipboardData.getData) {
-      this.url = event.clipboardData.getData('text/plain')
-    }
   }
 
   onPress = (event: KeyboardEvent) => {
     event.stopPropagation()
+
     const key = event.which || event.keyCode
-    const ctrl = event.ctrlKey || event.metaKey
+    const target = event.currentTarget as HTMLInputElement
 
-    if (ctrl && key === KEYCODES.v) {
-      // Capture paste keydown event
-    } else if (key === KEYCODES.enter) {
-      if (this.url) {
-        const url = this.processUrl(this.purpose, this.url)
-        if (url && this.quill) {
-          this.insertIFrame(url)
-        } else {
-          this.convertToText(this.url)
-        }
-      }
-    } else if (!ctrl) {
-      this.replaceWithText()
+    if (!target.value && key !== KEYCODES.enter) {
+      return
     }
+
+    // blur to trigger `this.onBlur` to fire `this.submit`
+    target.blur()
   }
 
-  processUrl = (purpose: Purpose, url: string) => {
-    switch (this.purpose) {
-      case 'video': {
-        return videoUrl(url)
-      }
-      case 'pastebin': {
-        return pastebinUrl(url)
-      }
-      default: {
-        return ''
-      }
+  removeBlot = () => {
+    this.remove()
+
+    if (!this.quill) {
+      return
     }
+
+    const range = this.quill.getSelection(true)
+    this.quill.setSelection(range.index, 0, 'silent')
   }
 
-  convertToText = (url: string) => {
-    this.replaceWith('text', url)
+  submit = (text: string) => {
+    const { iframeClipboard } = this.value()
+    let url = ''
+
+    if (!this.quill) {
+      return
+    }
+
+    if (iframeClipboard.purpose === 'video') {
+      url = videoUrl(text)
+    } else if (iframeClipboard.purpose === 'pastebin') {
+      url = pastebinUrl(text)
+    }
+
+    if (url) {
+      this.insertIFrame(url)
+    } else {
+      this.replaceWithText(text)
+    }
   }
 
   insertIFrame = (url: string) => {
+    const { iframeClipboard } = this.value()
     const range = this.quill.getSelection(true)
-    this.quill.insertEmbed(range.index, this.purpose, url, 'user')
+    const blotName = iframeClipboard.purpose
+    this.removeBlot()
+    this.quill.insertEmbed(range.index, blotName, url, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
-    this.remove()
   }
 
-  replaceWithText = () => {
+  replaceWithText = (text: string) => {
     const range = this.quill.getSelection(true)
-    this.quill.insertEmbed(range.index, 'P', true, 'user')
-    this.quill.setSelection(range.index + 1, 0, 'silent')
-    this.remove()
+    this.removeBlot()
+    this.quill.insertText(range.index, text, 'user')
+    this.quill.setSelection(range.index + text.length, 0, 'silent')
   }
 }
 
 IFrameClipboard.blotName = 'iframeClipboard'
 IFrameClipboard.className = 'iframe-clipboard'
-IFrameClipboard.tagName = 'div'
+IFrameClipboard.tagName = 'input'
 
 Quill.register('formats/iframeClipboard', IFrameClipboard)
 

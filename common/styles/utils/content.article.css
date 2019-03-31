@@ -162,7 +162,7 @@
 }
 
 .ql-editor {
-  & .iframe-clipboard {
+  & input.iframe-clipboard {
     line-height: 1.875;
   }
 }
