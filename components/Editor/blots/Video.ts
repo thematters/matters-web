@@ -15,13 +15,16 @@ class Video extends BlockEmbed {
     iframe.setAttribute('frameborder', '0')
     iframe.setAttribute('allowfullscreen', 'false')
     iframe.setAttribute('style', iframeStyle)
+
+    node.setAttribute('contenteditable', 'fasle')
     node.setAttribute('style', containerStyle)
     node.appendChild(iframe)
     return node
   }
 
   public static value(node: HTMLElement) {
-    return node.getAttribute('src')
+    const iframe = node.querySelector('iframe')
+    return iframe ? iframe.getAttribute('src') : null
   }
 }
 
