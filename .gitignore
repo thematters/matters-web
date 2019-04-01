@@ -100,3 +100,4 @@ yarn.lock
 
 # exclude sources.list
 sources.list
+*.rdb

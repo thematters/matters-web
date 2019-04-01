@@ -32,7 +32,6 @@ const PastebinButton = ({ quill, setExpanded }: Props) => {
       const data = { purpose: 'pastebin', placeholder }
       const range = quill.getSelection(true)
       quill.insertEmbed(range.index, 'iframeClipboard', data, 'user')
-      quill.setSelection(range.index + 1, 0, 'silent')
     }
     setExpanded(false)
   }
