@@ -1,4 +1,5 @@
 import './Divider'
+import './Figcaption'
 import './IFrameClipboard'
 import './ImageFigure'
 import './Mention'
