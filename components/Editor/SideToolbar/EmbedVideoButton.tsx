@@ -17,7 +17,7 @@ const EmbedVideoButton = ({ quill, setExpanded }: Props) => {
 
   const placeholder = translate({
     zh_hant: '貼上 YouTube、Vimeo 連結後，Enter 進行新增',
-    zh_hans: '贴上 YouTube、Vimeo 链结後，Enter 进行新增',
+    zh_hans: '贴上 YouTube、Vimeo 链接後，Enter 进行新增',
     lang
   })
 
