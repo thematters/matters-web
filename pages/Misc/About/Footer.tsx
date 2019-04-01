@@ -43,7 +43,7 @@ const Footer = () => {
             />
             <br />
             <a className="u-link-green" href="mailto:hi@matters.news">
-              hi@matters.news
+              ask@matters.news
             </a>
           </p>
         </section>
