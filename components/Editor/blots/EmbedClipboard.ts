@@ -1,20 +1,19 @@
 import { Quill } from 'react-quill'
 
-import pastebinUrl from '~/components/Editor/utils/pastebinUrl'
-import videoUrl from '~/components/Editor/utils/videoUrl'
+import * as embedUrl from '~/components/Editor/utils/embedUrl'
 
 import { KEYCODES } from '~/common/enums'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-type Purpose = 'video' | 'pastebin'
+type Purpose = 'video' | 'code'
 
-interface IFrameParams {
+interface EmbedParams {
   purpose: Purpose
   placeholder: string
 }
 
-class IFrameClipboard extends BlockEmbed {
+class EmbedClipboard extends BlockEmbed {
   private get quill() {
     if (!this.scroll || !this.scroll.domNode.parentNode) {
       return null
@@ -22,7 +21,7 @@ class IFrameClipboard extends BlockEmbed {
     return Quill.find(this.scroll.domNode.parentNode)
   }
 
-  static create(value: IFrameParams) {
+  static create(value: EmbedParams) {
     const node = super.create(value)
 
     node.setAttribute('value', '')
@@ -91,30 +90,33 @@ class IFrameClipboard extends BlockEmbed {
   }
 
   submit = (text: string) => {
-    const { iframeClipboard } = this.value()
+    const { embedClipboard } = this.value()
     let url = ''
 
     if (!this.quill) {
       return
     }
 
-    if (iframeClipboard.purpose === 'video') {
-      url = videoUrl(text)
-    } else if (iframeClipboard.purpose === 'pastebin') {
-      url = pastebinUrl(text)
+    if (embedClipboard.purpose === 'video') {
+      url = embedUrl.video(text)
+    } else if (embedClipboard.purpose === 'code') {
+      url = embedUrl.code(text)
     }
 
     if (url) {
-      this.insertIFrame(url)
+      this.insertEmbed(url)
     } else {
       this.replaceWithText(text)
     }
   }
 
-  insertIFrame = (url: string) => {
-    const { iframeClipboard } = this.value()
+  insertEmbed = (url: string) => {
+    const { embedClipboard } = this.value()
     const range = this.quill.getSelection(true)
-    const blotName = iframeClipboard.purpose
+    const blotName = {
+      video: 'embedVideo',
+      code: 'embedCode'
+    }[embedClipboard.purpose as Purpose]
     this.removeBlot()
     this.quill.insertEmbed(range.index, blotName, url, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
@@ -128,10 +130,10 @@ class IFrameClipboard extends BlockEmbed {
   }
 }
 
-IFrameClipboard.blotName = 'iframeClipboard'
-IFrameClipboard.className = 'iframe-clipboard'
-IFrameClipboard.tagName = 'input'
+EmbedClipboard.blotName = 'embedClipboard'
+EmbedClipboard.className = 'embed-clipboard'
+EmbedClipboard.tagName = 'input'
 
-Quill.register('formats/iframeClipboard', IFrameClipboard)
+Quill.register('formats/embedClipboard', EmbedClipboard)
 
-export default IFrameClipboard
+export default EmbedClipboard

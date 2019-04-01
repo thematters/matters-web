@@ -12,7 +12,7 @@ interface Props {
   setExpanded: (expanded: boolean) => void
 }
 
-const VideoButton = ({ quill, setExpanded }: Props) => {
+const EmbedVideoButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const placeholder = translate({
@@ -27,22 +27,17 @@ const VideoButton = ({ quill, setExpanded }: Props) => {
     lang
   })
 
-  const insertIFrameClipboard = () => {
+  const insertEmbedClipboard = () => {
     if (quill) {
       const data = { purpose: 'video', placeholder }
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'iframeClipboard', data, 'user')
+      quill.insertEmbed(range.index, 'embedClipboard', data, 'user')
     }
     setExpanded(false)
   }
 
   return (
-    <button
-      className="video-button"
-      type="button"
-      onClick={insertIFrameClipboard}
-      aria-label={hint}
-    >
+    <button type="button" onClick={insertEmbedClipboard} aria-label={hint}>
       <Icon
         id={ICON_EDITOR_VIDEO.id}
         viewBox={ICON_EDITOR_VIDEO.viewBox}
@@ -52,4 +47,4 @@ const VideoButton = ({ quill, setExpanded }: Props) => {
   )
 }
 
-export default VideoButton
+export default EmbedVideoButton

@@ -43,9 +43,9 @@
     }
   }
 
-  /* iframe
+  /* Embed
    ========================================================================== */
-  & :global(.iframe-container) {
+  & :global(figure[class*='embed']) {
     position: relative;
     width: 100%;
     height: 0;
@@ -162,7 +162,7 @@
 }
 
 .ql-editor {
-  & input.iframe-clipboard {
+  & input.embed-clipboard {
     line-height: 1.875;
   }
 }

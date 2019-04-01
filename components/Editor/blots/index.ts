@@ -1,9 +1,9 @@
 import './Divider'
-import './IFrameClipboard'
+import './EmbedClipboard'
+import './EmbedCode'
+import './EmbedVideo'
 import './ImageFigure'
 import './Mention'
-import './Pastebin'
 import './SmartBreak'
-import './Video'
 
 export default null

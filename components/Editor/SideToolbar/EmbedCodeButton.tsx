@@ -12,7 +12,7 @@ interface Props {
   setExpanded: (expanded: boolean) => void
 }
 
-const PastebinButton = ({ quill, setExpanded }: Props) => {
+const EmbedCodeButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const placeholder = translate({
@@ -27,22 +27,17 @@ const PastebinButton = ({ quill, setExpanded }: Props) => {
     lang
   })
 
-  const insertIframeClipboard = () => {
+  const insertEmbedClipboard = () => {
     if (quill) {
-      const data = { purpose: 'pastebin', placeholder }
+      const data = { purpose: 'code', placeholder }
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'iframeClipboard', data, 'user')
+      quill.insertEmbed(range.index, 'embedClipboard', data, 'user')
     }
     setExpanded(false)
   }
 
   return (
-    <button
-      className="pastebin-button"
-      type="button"
-      onClick={insertIframeClipboard}
-      aria-label={hint}
-    >
+    <button type="button" onClick={insertEmbedClipboard} aria-label={hint}>
       <Icon
         id={ICON_EDITOR_CODE.id}
         viewBox={ICON_EDITOR_CODE.viewBox}
@@ -52,4 +47,4 @@ const PastebinButton = ({ quill, setExpanded }: Props) => {
   )
 }
 
-export default PastebinButton
+export default EmbedCodeButton
