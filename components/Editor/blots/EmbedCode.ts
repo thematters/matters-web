@@ -2,14 +2,17 @@ import { Quill } from 'react-quill'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-class Pastebin extends BlockEmbed {
+class EmbedCode extends BlockEmbed {
   static create(url: string) {
     const node = super.create()
     const iframe = document.createElement('iframe')
     iframe.setAttribute('src', url)
     iframe.setAttribute('frameborder', '0')
     iframe.setAttribute('allowfullscreen', 'false')
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin')
+    iframe.setAttribute(
+      'sandbox',
+      'allow-scripts allow-same-origin allow-popups'
+    )
 
     node.setAttribute('contenteditable', 'fasle')
     node.appendChild(iframe)
@@ -22,10 +25,10 @@ class Pastebin extends BlockEmbed {
   }
 }
 
-Pastebin.blotName = 'pastebin'
-Pastebin.className = 'iframe-container'
-Pastebin.tagName = 'div'
+EmbedCode.blotName = 'embedCode'
+EmbedCode.className = 'embed-code'
+EmbedCode.tagName = 'figure'
 
-Quill.register('formats/pastebin', Pastebin)
+Quill.register('formats/embedCode', EmbedCode)
 
-export default Pastebin
+export default EmbedCode

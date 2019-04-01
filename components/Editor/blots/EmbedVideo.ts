@@ -2,13 +2,17 @@ import { Quill } from 'react-quill'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
-class Video extends BlockEmbed {
+class EmbedVideo extends BlockEmbed {
   static create(url: string) {
     const node = super.create()
     const iframe = document.createElement('iframe')
     iframe.setAttribute('src', url)
     iframe.setAttribute('frameborder', '0')
-    iframe.setAttribute('allowfullscreen', 'false')
+    iframe.setAttribute('allowfullscreen', 'true')
+    iframe.setAttribute(
+      'sandbox',
+      'allow-scripts allow-same-origin allow-popups'
+    )
 
     node.setAttribute('contenteditable', 'fasle')
     node.appendChild(iframe)
@@ -21,10 +25,10 @@ class Video extends BlockEmbed {
   }
 }
 
-Video.blotName = 'video'
-Video.className = 'iframe-container'
-Video.tagName = 'div'
+EmbedVideo.blotName = 'embedVideo'
+EmbedVideo.className = 'embed-video'
+EmbedVideo.tagName = 'figure'
 
-Quill.register('formats/video', Video)
+Quill.register('formats/embedVideo', EmbedVideo)
 
-export default Video
+export default EmbedVideo
