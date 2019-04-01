@@ -7,7 +7,7 @@ const Reports = () => (
     <div className="l-row">
       <div className="l-col-4 l-col-md-8 l-col-lg-12">
         <h2>
-          <Translate zh_hant="媒體報道" zh_hans="媒体报道" />
+          <Translate zh_hant="媒體報導" zh_hans="媒体报道" />
         </h2>
       </div>
     </div>
@@ -44,7 +44,7 @@ const Reports = () => (
       </div>
       <div className="item l-waffle-1 l-waffle-sm-2 l-waffle-md-4">
         <a
-          href="hhttps://www.bnext.com.tw/article/49272/blockchain-blog-content-"
+          href="https://www.bnext.com.tw/article/49272/blockchain-blog-content-"
           target="_blank"
         >
           <h3>區塊鏈內容平台觀察：挑戰與現有解法</h3>
