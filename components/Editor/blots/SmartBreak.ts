@@ -8,7 +8,7 @@ const Embed = Quill.import('blots/embed')
 class SmartBreak extends Embed {}
 
 SmartBreak.blotName = 'smartBreak'
-SmartBreak.className = 'inline'
+SmartBreak.className = 'smart-break'
 SmartBreak.tagName = 'br'
 
 Quill.register('formats/smartBreak', SmartBreak)

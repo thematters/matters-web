@@ -20,6 +20,12 @@ export const modules = {
   },
   keyboard: {
     bindings: {
+      tab: {
+        key: KEYCODES.tab,
+        handler() {
+          return false
+        }
+      },
       handleEnter: {
         key: KEYCODES.enter,
         handler(range: any, context: any) {
