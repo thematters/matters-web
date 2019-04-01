@@ -9,6 +9,7 @@ import { translate } from '~/common/utils'
 import FAVICON_16 from '~/static/favicon-16x16.png?url'
 import FAVICON_32 from '~/static/favicon-32x32.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg'
+import OPENSEARCH from '~/static/opensearach.xml'
 
 const {
   publicRuntimeConfig: { SITE_DOMIAN }
@@ -70,6 +71,13 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
         href={FAVICON_16}
         sizes="16x16"
         key="favicon-16"
+      />
+      <link
+        rel="search"
+        title="Matters"
+        href={OPENSEARCH}
+        type="application/opensearchdescription+xml"
+        key="opensearch"
       />
 
       {/* social */}

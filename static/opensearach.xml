@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <ShortName>Matters</ShortName>
+  <Description>Matters - 搜尋文章、標籤、作者</Description>
+  <Image height="16" width="16" type="image/x-icon">
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABAlBMVEX////GoUzEpEzFpUzFpUzGpEvCpE/EpEvFpE2qqlXDpUvFpUu/v0DFpk3DpkzEp0rFpkvGpUzFpUvEpUvGpE3Ipk7MmU3EpE3FpU3GqkfFpU3GpEvDo0zIpEnFpEvFpUzFpUzFpUzGpUzFpky/n0DGpk3Epk3EpU3Dp0rGpUzDqErEpEvFpE3FpUzFpUvFpkzGpUvEpUzGpErEpEzGqlXFpkzGpk3EpUvGpUvGpU3Epky/qlXEpk3//wDFpk3FpEvFpU3FpUvGpUzEp07GpkrFpEzGpUzGpUvEpUzFpEzFpUzGpk3Hp1DFpUzGp07FpUvFpE3Gpk22tknFpUrEpUzFpU28LPNQAAAAVnRSTlMAG3mRkIEqX5IDEXcEjE00XDafUlouCjhgEplwQByVr7yNk4kIKFaCN5cmmKOnsJpVoS2HCaugQX10rgyPAXuElmlvGkhlXo5sdn94IKgxWEZQBz6liPUxr/EAAADKSURBVBjTNc/JQoJQAEDRCzwEFUyQetgrKxxSoVHDrGywcs7M6v9/pYV2l2d3AdB0QwjDzLDNsjXIkjPzDgBuAdgpAp7vAKUAdvdkiAQvD+V9QB3I8NAGzAyBBFTl6PgkAnIm1RrUldU4bbbagIEAYpWcnV9EAhBbuNSvrlsb6HQhVjdxkkYCMGj04Lbvde7uqw+g6Tj+gN5j+vScvAzBfoW3dxiNJ9PZfEDBAhj2YZF+LOHT3cyt/K+1DLvfldL/rrNylz+/QRngD/N4FMUfQ5V3AAAAAElFTkSuQmCC
+  </Image>
+  <Url type="text/html" template="https://matters.news/search?q={searchTerms}"/>
+  <moz:SearchForm>https://matters.news/search</moz:SearchForm>
+</OpenSearchDescription>
+
+
