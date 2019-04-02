@@ -17,13 +17,13 @@ const EmbedCodeButton = ({ quill, setExpanded }: Props) => {
 
   const placeholder = translate({
     zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
-    zh_hans: '贴上 JSFiddle 链结後，Enter 进行新增',
+    zh_hans: '贴上 JSFiddle 链接後，Enter 进行新增',
     lang
   })
 
   const hint = translate({
     zh_hant: '新增程式碼連結',
-    zh_hans: '新增代碼链结',
+    zh_hans: '新增代碼链接',
     lang
   })
 

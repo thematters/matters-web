@@ -7,6 +7,9 @@
   & :global(> * + *) {
     margin: var(--spacing-default) 0;
   }
+  & :global(> *:first-child) {
+    margin-top: 0;
+  }
   & :global(> *:last-child) {
     margin-bottom: var(--spacing-default);
   }
