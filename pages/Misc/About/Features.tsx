@@ -34,7 +34,10 @@ const Features = () => (
             target="_blank"
             href="https://matters.news/@jidongjie1984/对谈精华整理-弦子-麦烧-不让任何看似庄严的存在摧毁自己-zdpuAviGvLYewPr3AYmGJ5jPTPjikEnYHWKBMmbxjwfMzAKmv"
           >
-            【对谈精华整理】弦子、麦烧：不让任何看似庄严的存在摧毁自己
+            <Translate
+              zh_hant="弦子、麥燒：MeToo 讓我們相信，柔軟可以改變世界"
+              zh_hans="弦子、麦烧：MeToo 让我们相信，柔软可以改变世界"
+            />
           </a>
         </p>
       </div>
@@ -62,8 +65,10 @@ const Features = () => (
             target="_blank"
             href="https://matters.news/@hi176/%E5%9C%A8%E7%BA%BF%E9%97%AE%E7%AD%94-%E9%93%81%E5%B9%95%E9%99%8D%E4%B8%B4-%E4%B8%AD%E7%BE%8E%E5%85%B3%E7%B3%BB%E5%B0%86%E8%B5%B0%E5%90%91%E4%BD%95%E6%96%B9-5-000%E5%AD%97%E9%87%8D%E7%A3%85%E5%AF%B9%E8%B0%88%E7%B2%BE%E5%8D%8E-%E6%8A%A2%E5%85%88%E9%87%8A%E5%87%BA-zdpuB3MQ6KdwVCXnGSvLRXYdQ9mk1yFh9eer9MLdrEgJxYLgt"
           >
-            在線問答｜鐵幕降臨，中美關係將走向何方？（5,000
-            字重磅對談精華，搶先釋出！）
+            <Translate
+              zh_hant="在線問答｜鐵幕降臨，中美關係將走向何方？（5,000 字重磅對談精華，搶先釋出！）"
+              zh_hans="在线问答｜铁幕降临，中美关系将走向何方？（5,000 字重磅对谈精华，抢先释出！）"
+            />
           </a>
         </p>
       </div>
@@ -88,7 +93,10 @@ const Features = () => (
             target="_blank"
             href="https://matters.news/@wancat/%E5%9C%A8%E7%B7%9A%E5%95%8F%E7%AD%94-15%E6%AD%B2%E7%9A%84%E7%94%9F%E6%B6%AF%E9%81%B8%E6%93%87-%E6%88%91%E7%82%BA%E4%BD%95%E6%8B%92%E8%AE%80%E9%AB%98%E4%B8%AD-zdpuAydyYM9LWpBNsdx5VqnH6M5LYDsttLJDKMi1yXAchEV3y"
           >
-            在線問答 | 15 歲的生涯選擇，我為何拒讀高中？
+            <Translate
+              zh_hant="在線問答 | 15 歲的生涯選擇，我為何拒讀高中？"
+              zh_hans="在线问答 | 15 岁的生涯选择，我为何拒读高中？"
+            />
           </a>
         </p>
       </div>
