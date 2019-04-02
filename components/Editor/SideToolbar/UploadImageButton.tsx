@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Quill } from 'react-quill'
 
 import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 
 import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import { translate } from '~/common/utils'
 import ICON_EDITOR_IMAGE from '~/static/icons/editor-image.svg?sprite'
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
@@ -36,10 +37,23 @@ const UploadImageButton = ({
   onSave,
   setExpanded
 }: UploadImageButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
+  const placeholder = translate({
+    zh_hant: '添加說明文字…',
+    zh_hans: '添加说明文字…',
+    lang
+  })
+
   const insertImage = (src: string) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'imageFigure', { src }, 'user')
+      quill.insertEmbed(
+        range.index,
+        'imageFigure',
+        { src, placeholder },
+        'user'
+      )
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }

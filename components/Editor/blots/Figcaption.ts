@@ -3,24 +3,47 @@ import { Quill } from 'react-quill'
 const BlockEmbed = Quill.import('blots/block/embed')
 
 class Figcaption extends BlockEmbed {
-  static create(value: { src?: string; caption?: string }) {
+  static create(value: { caption?: string; placeholder?: string }) {
     const node = super.create(value)
-    node.setAttribute('contenteditable', 'true')
-    node.textContent = value
+
+    const input = document.createElement('input')
+    input.value = value.caption || ''
+    input.setAttribute('placeholder', value.placeholder || '添加說明文字…')
+    input.setAttribute('contenteditable', 'false')
+
+    const caption = document.createElement('span')
+    caption.textContent = value.caption || ''
+
+    node.appendChild(caption)
+    node.appendChild(input)
+
     return node
   }
 
   static value(domNode: HTMLElement): any {
-    return domNode.textContent
+    return {
+      caption: domNode.textContent
+    }
   }
+
+  figcaption: HTMLElement
 
   constructor(domNode: HTMLElement) {
     super(domNode)
-    domNode.addEventListener('change', this.onPress)
+
+    this.figcaption = domNode
+    domNode.addEventListener('change', this.onChange)
   }
 
-  onPress = (event: Event) => {
-    event.stopPropagation()
+  onChange = (e: Event) => {
+    e.stopPropagation()
+
+    const caption = this.figcaption.querySelector('span')
+    const input = e.target as HTMLInputElement
+
+    if (caption && input) {
+      caption.textContent = input.value
+    }
   }
 }
 
