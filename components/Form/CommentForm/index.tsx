@@ -12,7 +12,7 @@ import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { dom } from '~/common/utils'
+import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import styles from './styles.css'
@@ -90,7 +90,7 @@ const CommentForm = ({
         const input = {
           id: commentId,
           comment: {
-            content,
+            content: trimLineBreaks(content),
             replyTo: replyToId,
             articleId,
             parentId,
