@@ -56,7 +56,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link href={PATHS.ME_WALLET.href} as={PATHS.ME_WALLET.as}>
+        <Link {...PATHS.ME_WALLET}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={
@@ -99,7 +99,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
       </Menu.Item>
       {viewer.isActive === true && (
         <Menu.Item>
-          <Link href={PATHS.ME_INVITATIONS.href} as={PATHS.ME_INVITATIONS.as}>
+          <Link {...PATHS.ME_INVITATIONS}>
             <a onClick={hideDropdown}>
               <TextIcon
                 icon={

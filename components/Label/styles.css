@@ -10,14 +10,11 @@
 }
 
 .default {
+  @mixin font-serif;
+
   padding: var(--spacing-xx-tight) var(--spacing-tight);
 
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  font-family: var(--font-serif-tc);
   line-height: 1.42857143;
-
-  &[lang='zh-hans'] {
-    font-family: var(--font-serif-sc);
-  }
 }

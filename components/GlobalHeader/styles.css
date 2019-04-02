@@ -1,5 +1,6 @@
 header {
   @mixin border-bottom-grey;
+  @mixin all-transition;
 
   position: fixed;
   top: 0;
@@ -14,6 +15,10 @@ header {
   box-sizing: content-box;
   overflow: hidden;
   z-index: 100;
+
+  &.transparent {
+    background: transparent;
+  }
 }
 
 .holder {

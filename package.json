@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "codebase of Matters' website",
   "author": "",
   "engines": {
@@ -154,7 +154,7 @@
     "preset": "ts-jest/presets/js-with-ts",
     "transform": {
       "^.+\\.tsx?$": "ts-jest",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/assetsTransformer.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|xml)$": "<rootDir>/__mocks__/assetsTransformer.js"
     },
     "testMatch": [
       "**/__tests__/*.(ts|tsx)",

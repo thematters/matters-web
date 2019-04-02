@@ -15,7 +15,7 @@ export default () => {
 
   return (
     <>
-      <Link href={PATHS.SEARCH.href} as={PATHS.SEARCH.as}>
+      <Link {...PATHS.SEARCH}>
         <a aria-label="搜尋" hidden={isDraft}>
           <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
         </a>

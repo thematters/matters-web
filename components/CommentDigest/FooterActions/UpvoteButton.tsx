@@ -101,7 +101,7 @@ const UpvoteButton = ({
       optimisticResponse={{
         voteComment: {
           id: comment.id,
-          myVote: null,
+          myVote: 'up',
           __typename: 'Comment'
         }
       }}

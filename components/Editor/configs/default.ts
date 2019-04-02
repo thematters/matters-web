@@ -14,6 +14,12 @@ export const modules = {
   ],
   keyboard: {
     bindings: {
+      tab: {
+        key: KEYCODES.tab,
+        handler() {
+          return false
+        }
+      },
       handleEnter: {
         key: KEYCODES.enter,
         handler(range: any, context: any) {
@@ -72,12 +78,12 @@ export const modules = {
           const currentLeaf = quill.getLeaf(range.index)[0]
           const nextLeaf = quill.getLeaf(range.index + 1)[0]
 
-          quill.insertEmbed(range.index, 'break', true, 'user')
+          quill.insertEmbed(range.index, 'smartBreak', true, 'user')
 
           // Insert a second break if:
           // At the end of the editor, OR next leaf has a different parent (<p>)
           if (nextLeaf === null || currentLeaf.parent !== nextLeaf.parent) {
-            quill.insertEmbed(range.index, 'break', true, 'user')
+            quill.insertEmbed(range.index, 'smartBreak', true, 'user')
           }
 
           // Now that we've inserted a line break, move the cursor forward
