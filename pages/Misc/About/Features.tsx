@@ -35,8 +35,8 @@ const Features = () => (
             href="https://matters.news/@jidongjie1984/对谈精华整理-弦子-麦烧-不让任何看似庄严的存在摧毁自己-zdpuAviGvLYewPr3AYmGJ5jPTPjikEnYHWKBMmbxjwfMzAKmv"
           >
             <Translate
-              zh_hant="弦子、麥燒：MeToo 讓我們相信，柔軟可以改變世界"
-              zh_hans="弦子、麦烧：MeToo 让我们相信，柔软可以改变世界"
+              zh_hant="【對談精華整理】弦子、麥燒：不讓任何看似莊嚴的存在摧毀自己"
+              zh_hans="【对谈精华整理】弦子、麦烧：不让任何看似庄严的存在摧毁自己"
             />
           </a>
         </p>
