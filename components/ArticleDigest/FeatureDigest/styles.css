@@ -19,7 +19,7 @@
 
 .content-container {
   position: relative;
-  margin: -8rem 0 var(--spacing-x-loose) 0;
+  margin: -7.5rem 0 var(--spacing-x-loose) 0;
   padding: 0;
   background: var(--color-white);
 

@@ -76,10 +76,10 @@ const Features = () => (
     <section className="feature-section l-row">
       <div className="intro l-col-4 l-col-sm-4 l-col-md-4 l-col-lg-4">
         <h3>
-          <Translate zh_hant="跨时代跨学科交流" zh_hans="跨时代跨学科交流" />
+          <Translate zh_hant="跨時代跨學科交流" zh_hans="跨时代跨学科交流" />
           <br />
           <Translate
-            zh_hant="跨世代对人生选择的诚恳对话"
+            zh_hant="跨世代對人生選擇的誠懇對話"
             zh_hans="跨世代对人生选择的诚恳对话"
           />
         </h3>

@@ -1,10 +1,10 @@
 import './Divider'
+import './EmbedClipboard'
+import './EmbedCode'
+import './EmbedVideo'
 import './Figcaption'
-import './IFrameClipboard'
 import './ImageFigure'
 import './Mention'
-import './Pastebin'
 import './SmartBreak'
-import './Video'
 
 export default null

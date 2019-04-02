@@ -12,37 +12,32 @@ interface Props {
   setExpanded: (expanded: boolean) => void
 }
 
-const PastebinButton = ({ quill, setExpanded }: Props) => {
+const EmbedCodeButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const placeholder = translate({
     zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
-    zh_hans: '贴上 JSFiddle 链结後，Enter 进行新增',
+    zh_hans: '贴上 JSFiddle 链接後，Enter 进行新增',
     lang
   })
 
   const hint = translate({
     zh_hant: '新增程式碼連結',
-    zh_hans: '新增代碼链结',
+    zh_hans: '新增代碼链接',
     lang
   })
 
-  const insertIframeClipboard = () => {
+  const insertEmbedClipboard = () => {
     if (quill) {
-      const data = { purpose: 'pastebin', placeholder }
+      const data = { purpose: 'code', placeholder }
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'iframeClipboard', data, 'user')
+      quill.insertEmbed(range.index, 'embedClipboard', data, 'user')
     }
     setExpanded(false)
   }
 
   return (
-    <button
-      className="pastebin-button"
-      type="button"
-      onClick={insertIframeClipboard}
-      aria-label={hint}
-    >
+    <button type="button" onClick={insertEmbedClipboard} aria-label={hint}>
       <Icon
         id={ICON_EDITOR_CODE.id}
         viewBox={ICON_EDITOR_CODE.viewBox}
@@ -52,4 +47,4 @@ const PastebinButton = ({ quill, setExpanded }: Props) => {
   )
 }
 
-export default PastebinButton
+export default EmbedCodeButton
