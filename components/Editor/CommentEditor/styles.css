@@ -1,6 +1,7 @@
 .container {
   @mixin all-transition;
 
+  position: relative;
   padding: var(--spacing-x-tight) var(--spacing-tight);
 
   font-size: var(--font-size-sm); /* fallbakc */
@@ -20,4 +21,17 @@
   & :global(.ql-editor) {
     min-height: 4rem;
   }
+}
+
+.mention-container {
+  position: absolute;
+
+  width: 20rem;
+  visibility: hidden;
+
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-dark);
+  border: 1px solid var(--color-line-grey-light);
 }

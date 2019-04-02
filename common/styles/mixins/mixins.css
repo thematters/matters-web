@@ -36,6 +36,14 @@
   justify-content: space-between;
 }
 
+@define-mixin font-serif {
+  font-family: var(--font-serif-tc);
+
+  &[lang='zh-hans'] {
+    font-family: var(--font-serif-sc);
+  }
+}
+
 @define-mixin border-bottom-grey {
   border-bottom: 1px solid var(--color-line-grey); /* fallback */
   border-bottom: 0.5px solid var(--color-line-grey);

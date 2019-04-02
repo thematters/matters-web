@@ -37,7 +37,9 @@ class ImageFigure extends BlockEmbed {
 }
 
 ImageFigure.blotName = 'imageFigure'
-ImageFigure.tagName = 'figure'
 ImageFigure.className = 'image'
+ImageFigure.tagName = 'figure'
+
+Quill.register('formats/imageFigure', ImageFigure)
 
 export default ImageFigure

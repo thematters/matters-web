@@ -99,8 +99,6 @@ export default () => {
             return <Placeholder.ArticleDigestList />
           }
 
-          // console.log(data.viewer.recommendation.feed)
-
           const connectionPath = 'viewer.recommendation.feed'
           const { edges, pageInfo } = _get(data, connectionPath, {})
           const loadMore = () => {

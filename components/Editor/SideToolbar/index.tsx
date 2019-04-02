@@ -7,6 +7,8 @@ import { Icon } from '~/components/Icon'
 import ICON_EDITOR_ADD from '~/static/icons/editor-add.svg?sprite'
 
 import DividerButton from './DividerButton'
+import EmbedCodeButton from './EmbedCodeButton'
+import EmbedVideoButton from './EmbedVideoButton'
 import styles from './styles.css'
 import UploadImageButton from './UploadImageButton'
 
@@ -46,6 +48,8 @@ const SideToolbar = ({ show, top, quill, onSave }: SideToolbarProps) => {
           onSave={onSave}
           setExpanded={setExpanded}
         />
+        <EmbedVideoButton quill={quill} setExpanded={setExpanded} />
+        <EmbedCodeButton quill={quill} setExpanded={setExpanded} />
         <DividerButton
           quill={quill}
           onSave={onSave}

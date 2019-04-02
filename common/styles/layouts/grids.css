@@ -92,3 +92,23 @@
     }
   }
 }
+
+/*
+ * Waffle
+ */
+@each $i in 1, 2, 3, 4 {
+  .l-waffle-$(i) {
+    /* prettier-ignore */
+    lost-column: 1/$(i);
+  }
+}
+@each $device in sm, md, lg, xl {
+  @media (--$(device)-up) {
+    @each $i in 1, 2, 3, 4 {
+      .l-waffle-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-column: 1/$(i);
+      }
+    }
+  }
+}

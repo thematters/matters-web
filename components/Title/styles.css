@@ -11,14 +11,11 @@
 }
 
 .page {
+  @mixin font-serif;
+
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-lg);
   line-height: 1.5;
-  font-family: var(--font-serif-tc);
-
-  &[lang='zh-hans'] {
-    font-family: var(--font-serif-sc);
-  }
 }
 
 .feed {
@@ -34,14 +31,11 @@
 }
 
 .modal-headline {
+  @mixin font-serif;
+
   font-size: var(--font-size-lg);
-  font-family: var(--font-serif-tc);
   font-weight: var(--font-weight-bold);
   text-align: center;
-
-  &[lang='zh-hans'] {
-    font-family: var(--font-serif-sc);
-  }
 
   @media (--sm-up) {
     font-size: var(--font-size-xl);
