@@ -165,7 +165,11 @@
 }
 
 .ql-editor {
+  /* global import in editor, so we don't need `:global()` here */
   & input.embed-clipboard {
     line-height: 1.875;
+  }
+  & figure.focused-blot {
+    border: 3px solid var(--color-matters-green);
   }
 }

@@ -3,12 +3,14 @@ import { Quill } from 'react-quill'
 import { KEYCODES } from '~/common/enums'
 
 import '../blots'
+// import '../modules/focus'
 import '../modules/mention'
 import lineBreakMatcher from '../utils/lineBreakMatcher'
 
 const Parchment = Quill.import('parchment')
 
 export const modules = {
+  // focus: true,
   toolbar: [
     [{ header: '2' }, 'bold', 'italic', 'strike', 'underline'],
     ['blockquote', { list: 'ordered' }, { list: 'bullet' }, 'link']
