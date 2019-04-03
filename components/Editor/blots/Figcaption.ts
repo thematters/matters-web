@@ -1,18 +1,27 @@
 import { Quill } from 'react-quill'
 
+import { getLangFromRoot, langConvert, translate } from '~/common/utils'
+
 const BlockEmbed = Quill.import('blots/block/embed')
 
 class Figcaption extends BlockEmbed {
-  static create(value: { caption?: string; placeholder?: string }) {
+  static create(value: string) {
     const node = super.create(value)
 
+    const lang = langConvert.html2sys(getLangFromRoot())
+    const placeholder = translate({
+      zh_hant: '添加說明文字…',
+      zh_hans: '添加说明文字…',
+      lang
+    })
+
     const input = document.createElement('input')
-    input.value = value.caption || ''
-    input.setAttribute('placeholder', value.placeholder || '添加說明文字…')
+    input.value = value
+    input.setAttribute('placeholder', placeholder)
     input.setAttribute('contenteditable', 'false')
 
     const caption = document.createElement('span')
-    caption.textContent = value.caption || ''
+    caption.textContent = value
 
     node.appendChild(caption)
     node.appendChild(input)
@@ -21,9 +30,7 @@ class Figcaption extends BlockEmbed {
   }
 
   static value(domNode: HTMLElement): any {
-    return {
-      caption: domNode.textContent
-    }
+    return domNode.textContent
   }
 
   figcaption: HTMLElement

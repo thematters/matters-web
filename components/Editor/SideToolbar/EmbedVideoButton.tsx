@@ -15,12 +15,6 @@ interface Props {
 const EmbedVideoButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
-  const placeholder = translate({
-    zh_hant: '貼上 YouTube、Vimeo 連結後，Enter 進行新增',
-    zh_hans: '贴上 YouTube、Vimeo 链接後，Enter 进行新增',
-    lang
-  })
-
   const hint = translate({
     zh_hant: '新增影片',
     zh_hans: '新增影片',
@@ -29,7 +23,7 @@ const EmbedVideoButton = ({ quill, setExpanded }: Props) => {
 
   const insertEmbedClipboard = () => {
     if (quill) {
-      const data = { purpose: 'video', placeholder }
+      const data = { purpose: 'video' }
       const range = quill.getSelection(true)
       quill.insertEmbed(range.index, 'embedClipboard', data, 'user')
     }

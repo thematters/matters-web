@@ -3,6 +3,7 @@ import { Quill } from 'react-quill'
 import * as embedUrl from '~/components/Editor/utils/embedUrl'
 
 import { KEYCODES } from '~/common/enums'
+import { getLangFromRoot, langConvert, translate } from '~/common/utils'
 
 const BlockEmbed = Quill.import('blots/block/embed')
 
@@ -10,7 +11,6 @@ type Purpose = 'video' | 'code'
 
 interface EmbedParams {
   purpose: Purpose
-  placeholder: string
 }
 
 class EmbedClipboard extends BlockEmbed {
@@ -24,9 +24,23 @@ class EmbedClipboard extends BlockEmbed {
   static create(value: EmbedParams) {
     const node = super.create(value)
 
+    const lang = langConvert.html2sys(getLangFromRoot())
+    const placeholder =
+      value.purpose === 'code'
+        ? translate({
+            zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
+            zh_hans: '贴上 JSFiddle 链接後，Enter 进行新增',
+            lang
+          })
+        : translate({
+            zh_hant: '貼上 YouTube、Vimeo 連結後，Enter 進行新增',
+            zh_hans: '贴上 YouTube、Vimeo 链接後，Enter 进行新增',
+            lang
+          })
+
     node.setAttribute('value', '')
     node.setAttribute('data-purpose', value.purpose)
-    node.setAttribute('placeholder', value.placeholder)
+    node.setAttribute('placeholder', placeholder)
     node.setAttribute('contenteditable', 'false')
 
     return node
@@ -34,8 +48,7 @@ class EmbedClipboard extends BlockEmbed {
 
   static value(domNode: HTMLElement) {
     return {
-      purpose: domNode.getAttribute('data-purpose') || null,
-      placeholder: domNode.getAttribute('placeholder') || null
+      purpose: domNode.getAttribute('data-purpose') || null
     }
   }
 

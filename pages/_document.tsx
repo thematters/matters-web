@@ -1,3 +1,4 @@
+import _get from 'lodash/get'
 import Document, {
   Head,
   Main,
@@ -8,17 +9,34 @@ import React from 'react'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 import { GA_TRACKING_ID } from '~/common/enums'
+import { langConvert } from '~/common/utils'
 
 interface MattersDocumentProps {
   spriteContent: string
+  lang: HTMLLanguage
 }
 
 class MattersDocument extends Document<MattersDocumentProps> {
   public static async getInitialProps(ctx: NextDocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     const spriteContent = sprite.stringify()
+    const heads = initialProps.head as any[]
+
+    let lang: HTMLLanguage = 'zh-Hant'
+    if (heads) {
+      heads.every(head => {
+        const property = _get(head, 'props.property')
+        const content = _get(head, 'props.content')
+        if (property === 'og:locale') {
+          lang = langConvert.og2html(content)
+          return false
+        }
+        return true
+      })
+    }
 
     return {
+      lang,
       spriteContent,
       ...initialProps
     }
@@ -26,8 +44,7 @@ class MattersDocument extends Document<MattersDocumentProps> {
 
   public render() {
     return (
-      // TODO: lang
-      <html lang="zh-hant">
+      <html lang={this.props.lang}>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
