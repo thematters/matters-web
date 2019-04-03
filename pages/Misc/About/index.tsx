@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react'
-import { Waypoint } from 'react-waypoint'
 
 import { Head } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
@@ -24,19 +23,6 @@ export default () => {
 
       <article>
         <Slogan />
-        <Waypoint
-          onEnter={() => {
-            updateHeaderState({ type: 'about', bgColor: 'transparent' })
-          }}
-          onLeave={() => {
-            updateHeaderState({ type: 'about', bgColor: 'default' })
-          }}
-          onPositionChange={({ currentPosition }) => {
-            if (currentPosition === 'above') {
-              updateHeaderState({ type: 'about', bgColor: 'default' })
-            }
-          }}
-        />
         <Goal />
         <Features />
         <Reports />

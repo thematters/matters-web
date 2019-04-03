@@ -1,5 +1,6 @@
 header {
   @mixin border-bottom-grey;
+  @mixin all-transition;
 
   position: fixed;
   top: 0;
