@@ -131,7 +131,7 @@ class EmbedClipboard extends BlockEmbed {
       code: 'embedCode'
     }[embedClipboard.purpose as Purpose]
     this.removeBlot()
-    this.quill.insertEmbed(range.index, blotName, url, 'user')
+    this.quill.insertEmbed(range.index, blotName, { url }, 'user')
     this.quill.setSelection(range.index + 1, 0, 'silent')
   }
 

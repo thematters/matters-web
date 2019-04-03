@@ -183,7 +183,6 @@
     & textarea {
       font-size: var(--font-size-sm); /* fallback */
       font-size: calc(var(--font-size-sm) - 1px);
-      color: var(--color-grey);
       text-align: center;
       resize: none;
       overflow: hidden;

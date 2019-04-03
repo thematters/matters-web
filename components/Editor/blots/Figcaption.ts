@@ -16,11 +16,11 @@ class Figcaption extends BlockEmbed {
     })
 
     const textarea = document.createElement('textarea')
-    textarea.value = value
+    textarea.value = value || ''
     textarea.setAttribute('placeholder', placeholder)
 
     const caption = document.createElement('span')
-    caption.textContent = value
+    caption.textContent = value || ''
 
     node.appendChild(caption)
     node.appendChild(textarea)

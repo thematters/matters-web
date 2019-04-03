@@ -13,7 +13,6 @@ class ImageFigure extends BlockEmbed {
     const image = document.createElement('img')
     image.setAttribute('src', value.src || '')
 
-    node.setAttribute('contenteditable', 'fasle')
     node.appendChild(image)
     node.appendChild(figcaption)
 
@@ -24,17 +23,10 @@ class ImageFigure extends BlockEmbed {
     const image = domNode.querySelector('img')
     const caption = domNode.querySelector('figcaption')
 
-    const value: { src?: string; caption?: string } = {}
-
-    if (image) {
-      value.src = image.getAttribute('src') || undefined
+    return {
+      src: image ? image.getAttribute('src') : '',
+      caption: caption ? caption.innerText : ''
     }
-
-    if (caption) {
-      value.caption = caption.innerText || undefined
-    }
-
-    return value
   }
 }
 

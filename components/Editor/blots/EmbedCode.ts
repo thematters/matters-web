@@ -4,10 +4,10 @@ const BlockEmbed = Quill.import('blots/block/embed')
 const Parchment = Quill.import('parchment')
 
 class EmbedCode extends BlockEmbed {
-  static create(url: string) {
+  static create({ url, caption }: { url: string; caption?: string }) {
     const node = super.create()
 
-    const figcaption = Parchment.create('figcaption', '').domNode
+    const figcaption = Parchment.create('figcaption', caption).domNode
 
     const iframe = document.createElement('iframe')
     iframe.setAttribute('src', url)
@@ -22,16 +22,20 @@ class EmbedCode extends BlockEmbed {
     iframeContainer.setAttribute('class', 'iframe-container')
     iframeContainer.appendChild(iframe)
 
-    node.setAttribute('contenteditable', 'fasle')
     node.appendChild(iframeContainer)
     node.appendChild(figcaption)
 
     return node
   }
 
-  static value(node: HTMLElement) {
-    const iframe = node.querySelector('iframe')
-    return iframe ? iframe.getAttribute('src') : null
+  static value(domNode: HTMLElement): any {
+    const iframe = domNode.querySelector('iframe')
+    const caption = domNode.querySelector('figcaption')
+
+    return {
+      url: iframe ? iframe.getAttribute('src') : '',
+      caption: caption ? caption.innerText : ''
+    }
   }
 }
 
