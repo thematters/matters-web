@@ -15,16 +15,15 @@ class Figcaption extends BlockEmbed {
       lang
     })
 
-    const input = document.createElement('input')
-    input.value = value
-    input.setAttribute('placeholder', placeholder)
-    input.setAttribute('contenteditable', 'false')
+    const textarea = document.createElement('textarea')
+    textarea.value = value
+    textarea.setAttribute('placeholder', placeholder)
 
     const caption = document.createElement('span')
     caption.textContent = value
 
     node.appendChild(caption)
-    node.appendChild(input)
+    node.appendChild(textarea)
 
     return node
   }
@@ -39,18 +38,25 @@ class Figcaption extends BlockEmbed {
     super(domNode)
 
     this.figcaption = domNode
-    domNode.addEventListener('change', this.onChange)
+
+    domNode.addEventListener('keydown', this.onPress)
+    domNode.addEventListener('paste', this.onPaste)
+    domNode.addEventListener('change', this.onPress)
   }
 
-  onChange = (e: Event) => {
-    e.stopPropagation()
+  onPaste = (event: ClipboardEvent) => {
+    event.stopPropagation()
+  }
 
+  onPress = (event: Event) => {
     const caption = this.figcaption.querySelector('span')
-    const input = e.target as HTMLInputElement
+    const textarea = event.target as HTMLTextAreaElement
 
-    if (caption && input) {
-      caption.textContent = input.value
+    if (caption && textarea) {
+      caption.textContent = textarea.value
     }
+
+    textarea.style.height = `${textarea.scrollHeight}px`
   }
 }
 
