@@ -34,7 +34,7 @@ interface Props {
   upload: (input: {
     file?: any
     url?: string
-  }) => Promise<void | {
+  }) => Promise<{
     id: string
     path: string
   }>
@@ -185,7 +185,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { draft, onSave, lang } = this.props
+    const { draft, onSave, lang, upload, uploading } = this.props
     const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
@@ -198,7 +198,7 @@ class Editor extends React.Component<Props, State> {
       this.quill.clipboard.addMatcher('BR', lineBreakMatcher)
       this.quill.clipboard.addMatcher(
         'IMG',
-        createImageMatcher(this.props.upload, this.quill)
+        createImageMatcher(upload, this.quill)
       )
     }
 
@@ -239,6 +239,8 @@ class Editor extends React.Component<Props, State> {
                 <SideToolbar
                   {...this.state.sideToolbar}
                   quill={this.quill}
+                  upload={upload}
+                  uploading={uploading}
                   onSave={onSave}
                 />
 

@@ -1,8 +1,6 @@
-import gql from 'graphql-tag'
 import React from 'react'
 import { Quill } from 'react-quill'
 
-import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
@@ -12,29 +10,30 @@ import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
 import styles from './styles.css'
 
+type Upload = (input: {
+  file?: any
+  url?: string
+}) => Promise<{
+  id: string
+  path: string
+}>
+
 interface UploadImageButtonProps {
   quill: Quill | null
   onSave: any
+  upload: Upload
+  uploading: boolean
   setExpanded: (expanded: boolean) => void
 }
-
-const MUTATION_UPLOAD_FILE = gql`
-  mutation SingleFileUpload($input: SingleFileUploadInput!) {
-    singleFileUpload(input: $input) {
-      ... on Asset {
-        id
-        path
-      }
-    }
-  }
-`
 
 const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
 
 const UploadImageButton = ({
   quill,
   onSave,
-  setExpanded
+  setExpanded,
+  upload,
+  uploading
 }: UploadImageButtonProps) => {
   const insertImage = (src: string) => {
     if (quill) {
@@ -44,7 +43,7 @@ const UploadImageButton = ({
     }
   }
 
-  const handleUploadChange = async (event: any, upload: any) => {
+  const handleUploadChange = async (event: any) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -71,11 +70,7 @@ const UploadImageButton = ({
     }
 
     try {
-      const {
-        data: {
-          singleFileUpload: { id, path }
-        }
-      } = await upload({ variables: { input: { file, type: 'embed' } } })
+      const { id, path } = await upload({ file })
       onSave({ coverAssetId: id })
       insertImage(path)
       window.dispatchEvent(
@@ -100,27 +95,23 @@ const UploadImageButton = ({
   }
 
   return (
-    <Mutation mutation={MUTATION_UPLOAD_FILE}>
-      {(upload, { loading }) => (
-        <label className="upload-image-container">
-          <input
-            className="input"
-            type="file"
-            accept={acceptTypes}
-            multiple={false}
-            aria-label="新增圖片"
-            onChange={(event: any) => handleUploadChange(event, upload)}
-          />
-          <Icon
-            id={loading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
-            viewBox={loading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
-            size="large"
-            className={loading ? 'u-motion-spin' : 'u-motion-icon-hover'}
-          />
-          <style jsx>{styles}</style>
-        </label>
-      )}
-    </Mutation>
+    <label className="upload-image-container">
+      <input
+        className="input"
+        type="file"
+        accept={acceptTypes}
+        multiple={false}
+        aria-label="新增圖片"
+        onChange={(event: any) => handleUploadChange(event)}
+      />
+      <Icon
+        id={uploading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
+        viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
+        size="large"
+        className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
+      />
+      <style jsx>{styles}</style>
+    </label>
   )
 }
 

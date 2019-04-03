@@ -6,7 +6,7 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
@@ -120,6 +120,21 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                       }
                     } = result
                     return { id, path }
+                  } else {
+                    window.dispatchEvent(
+                      new CustomEvent('addToast', {
+                        detail: {
+                          color: 'red',
+                          content: (
+                            <Translate
+                              zh_hant="圖片上傳失敗"
+                              zh_hans="图片上传失败"
+                            />
+                          )
+                        }
+                      })
+                    )
+                    throw new Error('upload not successful')
                   }
                 }}
                 uploading={uploading}
