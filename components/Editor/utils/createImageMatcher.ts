@@ -5,6 +5,39 @@ import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.png'
 
 const Delta = Quill.import('delta')
 
+/**
+ * Convert a base64 string in a Blob according to the data and contentType.
+ *
+ * @param b64Data {String} Pure base64 string without contentType
+ * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+ * @param sliceSize {Int} SliceSize to process the byteCharacters
+ * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+ * @return Blob
+ */
+const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
+  contentType = contentType
+  sliceSize = sliceSize
+
+  const byteCharacters = atob(b64Data)
+  const byteArrays = []
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize)
+
+    const byteNumbers = new Array(slice.length)
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i)
+    }
+
+    const byteArray = new Uint8Array(byteNumbers)
+
+    byteArrays.push(byteArray)
+  }
+
+  const blob = new Blob(byteArrays, { type: contentType })
+  return blob
+}
+
 const createImageMatcher = (upload: any, quill: Quill) => (
   node: Element,
   delta: any
@@ -14,44 +47,59 @@ const createImageMatcher = (upload: any, quill: Quill) => (
     return delta
   }
 
-  // replace with placeholder and wrap image with figure
+  // get attributes and src
   const { attributes } = delta.ops[0]
   const srcOrg = delta.ops[0].insert.image
 
-  // copying from matters internally
+  let imageFigure
+  // don't upload if copying from matters internally
+  // retrieve asset id from url
   if (srcOrg.indexOf(DOMAIN) !== -1) {
     const assetId = srcOrg.split('/').slice(-2, -1)[0]
 
-    return new Delta().insert(
-      {
-        imageFigure: {
-          src: srcOrg,
-          assetId
-        }
-      },
-      attributes
-    )
+    imageFigure = {
+      src: srcOrg,
+      assetId
+    }
+  } else {
+    // upload if copying from external resource
+    // make placeholder first
+    const placeholderId = (+new Date()).toString(36).slice(-5)
+    imageFigure = {
+      src: IMAGE_PLACEHOLDER,
+      id: placeholderId
+    }
+
+    let input
+    // handle data url
+    if (srcOrg.startsWith('data:')) {
+      // Split the base64 string in data and contentType
+      const block = srcOrg.split(';')
+      // Get the content type of the image
+      const contentType = block[0].split(':')[1]
+      // get the real base64 content of the file
+      const realData = block[1].split(',')[1]
+
+      // Convert it to a blob to upload
+      const blob = b64toBlob(realData, contentType)
+      input = { file: blob }
+    } else {
+      // handle http url
+      input = { url: srcOrg }
+    }
+
+    upload(input).then(({ path, id }: any) => {
+      const img = quill.root.querySelector(`#${placeholderId}`)
+      if (img) {
+        img.setAttribute('src', path)
+        img.setAttribute('data-asset-id', id)
+      }
+    })
   }
 
-  // copying from external resource
-  const placeholderId = (+new Date()).toString(36).slice(-5)
-  upload({
-    url: srcOrg
-  }).then(({ path, id }: any) => {
-    const img = quill.root.querySelector(`#${placeholderId}`)
-    if (img) {
-      img.setAttribute('src', path)
-      img.setAttribute('data-asset-id', id)
-    }
-  })
-
-  // return placeholder
   return new Delta().insert(
     {
-      imageFigure: {
-        src: IMAGE_PLACEHOLDER,
-        id: placeholderId
-      }
+      imageFigure
     },
     attributes
   )
