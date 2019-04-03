@@ -18,7 +18,7 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { translate } from '~/common/utils'
+import { translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
@@ -119,8 +119,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   saveDraft() {
-    // TODO: skip if same content as before saved
-    this.props.onSave({ content: this.state.content })
+    this.props.onSave({ content: trimLineBreaks(this.state.content) })
   }
 
   handleChange = (content: string) => {
