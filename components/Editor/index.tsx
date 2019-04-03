@@ -7,8 +7,7 @@ import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 
 import UserList from '~/components/Dropdown/UserList'
-import { Mutation, Query } from '~/components/GQL'
-import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { Query } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -25,21 +24,21 @@ import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
-// import imageMatcher from './utils/imageMatcher'
+import createImageMatcher from './utils/createImageMatcher'
 import lineBreakMatcher from './utils/lineBreakMatcher'
 
 interface Props {
   onSave: any
   draft: EditorDraft
   lang: Language
-  // upload: (input: {
-  //   file?: any
-  //   url?: string
-  // }) => Promise<void | {
-  //   id: string
-  //   path: string
-  // }>
-  // uploading: boolean
+  upload: (input: {
+    file?: any
+    url?: string
+  }) => Promise<void | {
+    id: string
+    path: string
+  }>
+  uploading: boolean
 }
 
 interface State {
@@ -196,6 +195,14 @@ class Editor extends React.Component<Props, State> {
       'u-area-disable': isPending || isPublished
     })
 
+    if (this.quill) {
+      this.quill.clipboard.addMatcher('BR', lineBreakMatcher)
+      this.quill.clipboard.addMatcher(
+        'IMG',
+        createImageMatcher(this.props.upload, this.quill)
+      )
+    }
+
     return (
       <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
         {({ data, loading }: QueryResult & { data: SearchUsers }) => {
@@ -204,81 +211,67 @@ class Editor extends React.Component<Props, State> {
           )
 
           return (
-            <Mutation mutation={MUTATION_UPLOAD_FILE}>
-              {(singleFileUpload, { loading: uploading }) => (
-                <>
-                  <div className={containerClasses}>
-                    <ReactQuill
-                      readOnly={isPending || isPublished}
-                      theme="bubble"
-                      modules={{
-                        ...config.modules,
-                        clipboard: {
-                          // toggle to add extra line breaks when pasting HTML:
-                          matchVisual: false,
-                          matchers: [
-                            ['BR', lineBreakMatcher]
-                            // ['IMG', imageMatcher(this.upload)]
-                          ]
-                        },
-                        mention: {
-                          mentionContainer:
-                            this.mentionContainerRef &&
-                            this.mentionContainerRef.current,
-                          onMentionChange: this.onMentionChange,
-                          onInit: this.onMentionModuleInit
-                        }
+            <>
+              <div className={containerClasses}>
+                <ReactQuill
+                  readOnly={isPending || isPublished}
+                  theme="bubble"
+                  modules={{
+                    ...config.modules,
+                    mention: {
+                      mentionContainer:
+                        this.mentionContainerRef &&
+                        this.mentionContainerRef.current,
+                      onMentionChange: this.onMentionChange,
+                      onInit: this.onMentionModuleInit
+                    }
+                  }}
+                  ref={this.reactQuillRef}
+                  value={this.state.content}
+                  placeholder={translate({
+                    zh_hant: '請輸入正文…',
+                    zh_hans: '请输入正文…',
+                    lang
+                  })}
+                  onChange={this.handleChange}
+                  onChangeSelection={this.handleOnChangeSelection}
+                  onBlur={this.saveDraft}
+                />
+                <SideToolbar
+                  {...this.state.sideToolbar}
+                  quill={this.quill}
+                  onSave={onSave}
+                />
+
+                <section
+                  className="mention-container"
+                  ref={this.mentionContainerRef}
+                  hidden={users.length <= 0}
+                >
+                  {loading && <Spinner />}
+                  {!loading && (
+                    <UserList
+                      users={users}
+                      onClick={(user: SearchUsers_search_edges_node_User) => {
+                        mentionInstance.insertMention({
+                          id: user.id,
+                          displayName: user.displayName,
+                          userName: user.userName
+                        })
                       }}
-                      ref={this.reactQuillRef}
-                      value={this.state.content}
-                      placeholder={translate({
-                        zh_hant: '請輸入正文…',
-                        zh_hans: '请输入正文…',
-                        lang
-                      })}
-                      onChange={this.handleChange}
-                      onChangeSelection={this.handleOnChangeSelection}
-                      onBlur={this.saveDraft}
                     />
-                    <SideToolbar
-                      {...this.state.sideToolbar}
-                      quill={this.quill}
-                      onSave={onSave}
-                    />
+                  )}
+                </section>
+              </div>
 
-                    <section
-                      className="mention-container"
-                      ref={this.mentionContainerRef}
-                      hidden={users.length <= 0}
-                    >
-                      {loading && <Spinner />}
-                      {!loading && (
-                        <UserList
-                          users={users}
-                          onClick={(
-                            user: SearchUsers_search_edges_node_User
-                          ) => {
-                            mentionInstance.insertMention({
-                              id: user.id,
-                              displayName: user.displayName,
-                              userName: user.userName
-                            })
-                          }}
-                        />
-                      )}
-                    </section>
-                  </div>
-
-                  <style jsx>{styles}</style>
-                  <style jsx global>
-                    {bubbleStyles}
-                  </style>
-                  <style jsx global>
-                    {contentStyles}
-                  </style>
-                </>
-              )}
-            </Mutation>
+              <style jsx>{styles}</style>
+              <style jsx global>
+                {bubbleStyles}
+              </style>
+              <style jsx global>
+                {contentStyles}
+              </style>
+            </>
           )
         }}
       </Query>

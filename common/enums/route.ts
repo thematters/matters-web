@@ -217,6 +217,8 @@ export const ROUTES: Array<{
   }
 ]
 
+export const DOMAIN = 'matters.news'
+
 export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } }
 ROUTES.forEach(({ key, as, href }) => {
   PATHS[key] = { href, as }

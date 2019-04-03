@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { LanguageContext } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
@@ -105,42 +106,50 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
             />
           </header>
-          <Editor
-            // upload={async input => {
-            //   const result = await singleFileUpload({
-            //     variables: { input: { ...input, type: 'embed' } }
-            //   })
-            //   if (result) {
-            //     const {
-            //       data: {
-            //         singleFileUpload: { id, path }
-            //       }
-            //     } = result
-            //     return { id, path }
-            //   }
-            // }}
-            // uploading={uploading}
-            draft={draft}
-            onSave={async (newDraft: UpdateDraftVariables) => {
-              updateHeaderState({ type: 'draft', state: 'saving', draftId })
-              try {
-                await updateDraft({
-                  variables: { id: draft.id, ...newDraft }
-                })
-                updateHeaderState({
-                  type: 'draft',
-                  state: 'saved',
-                  draftId
-                })
-              } catch (e) {
-                updateHeaderState({
-                  type: 'draft',
-                  state: 'saveFailed',
-                  draftId
-                })
-              }
-            }}
-          />
+          <Mutation mutation={MUTATION_UPLOAD_FILE}>
+            {(singleFileUpload, { loading: uploading }) => (
+              <Editor
+                upload={async input => {
+                  const result = await singleFileUpload({
+                    variables: { input: { ...input, type: 'embed' } }
+                  })
+                  if (result) {
+                    const {
+                      data: {
+                        singleFileUpload: { id, path }
+                      }
+                    } = result
+                    return { id, path }
+                  }
+                }}
+                uploading={uploading}
+                draft={draft}
+                onSave={async (newDraft: UpdateDraftVariables) => {
+                  updateHeaderState({
+                    type: 'draft',
+                    state: 'saving',
+                    draftId
+                  })
+                  try {
+                    await updateDraft({
+                      variables: { id: draft.id, ...newDraft }
+                    })
+                    updateHeaderState({
+                      type: 'draft',
+                      state: 'saved',
+                      draftId
+                    })
+                  } catch (e) {
+                    updateHeaderState({
+                      type: 'draft',
+                      state: 'saveFailed',
+                      draftId
+                    })
+                  }
+                }}
+              />
+            )}
+          </Mutation>
 
           <ModalInstance modalId="publishModal" title="publish">
             {(props: ModalInstanceProps) => (
