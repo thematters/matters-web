@@ -1,10 +1,11 @@
 /* @styled-jsx=global */
 
 html {
+  @mixin font-sans;
+
   height: 100%;
 
   font-size: var(--sizing-root);
-  font-family: var(--font-sans-tc);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
   -webkit-text-size-adjust: 100%;
@@ -17,10 +18,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeSpeed;
-
-  &[lang='zh-hans'] {
-    font-family: var(--font-sans-sc);
-  }
 }
 
 body {

@@ -5,7 +5,7 @@ import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { translate } from '~/common/utils'
+import { langConvert, translate } from '~/common/utils'
 import FAVICON_16 from '~/static/favicon-16x16.png?url'
 import FAVICON_32 from '~/static/favicon-32x32.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg'
@@ -90,7 +90,11 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
         key="og:description"
         content={head.description}
       />
-      <meta property="og:locale" key="og:locale" content="zh_HK" />
+      <meta
+        property="og:locale"
+        key="og:locale"
+        content={langConvert.sys2Og(lang)}
+      />
       <meta
         property="og:locale:alternate"
         key="og:locale:zh_HK"

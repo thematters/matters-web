@@ -59,7 +59,7 @@ class Editor extends React.Component<Props, State> {
       mentionInstance: null
     }
 
-    this.saveDraft = _debounce(this.saveDraft.bind(this), 3000)
+    this.saveDraft = _debounce(this.saveDraft.bind(this), 300)
   }
 
   componentDidMount() {
