@@ -15,12 +15,6 @@ interface Props {
 const EmbedCodeButton = ({ quill, setExpanded }: Props) => {
   const { lang } = useContext(LanguageContext)
 
-  const placeholder = translate({
-    zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
-    zh_hans: '贴上 JSFiddle 链接後，Enter 进行新增',
-    lang
-  })
-
   const hint = translate({
     zh_hant: '新增程式碼連結',
     zh_hans: '新增代碼链接',
@@ -29,7 +23,7 @@ const EmbedCodeButton = ({ quill, setExpanded }: Props) => {
 
   const insertEmbedClipboard = () => {
     if (quill) {
-      const data = { purpose: 'code', placeholder }
+      const data = { purpose: 'code' }
       const range = quill.getSelection(true)
       quill.insertEmbed(range.index, 'embedClipboard', data, 'user')
     }

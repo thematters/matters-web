@@ -13,6 +13,7 @@
   & :global(> *:last-child) {
     margin-bottom: var(--spacing-default);
   }
+
   /* Media
    ========================================================================== */
   & :global(img, video, audio) {
@@ -39,6 +40,7 @@
       font-size: var(--font-size-sm); /* fallback */
       font-size: calc(var(--font-size-sm) - 1px);
       color: var(--color-grey);
+      white-space: pre-wrap;
 
       @media (--sm-up) {
         padding: 0;
@@ -50,19 +52,25 @@
    ========================================================================== */
   & :global(figure[class*='embed']) {
     position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 56.25%;
-    background: var(--color-grey-lighter);
 
-    & iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    & > .iframe-container {
+      position: relative;
       width: 100%;
-      height: 100%;
+      height: 0;
+      padding-top: 56.25%;
+      background: var(--color-grey-lighter);
+
+      & iframe {
+        @mixin cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    /* fit legacy iframe */
+    & > iframe {
+      width: 100%;
+      height: 24rem;
     }
   }
 
@@ -167,5 +175,17 @@
 .ql-editor {
   & input.embed-clipboard {
     line-height: 1.875;
+  }
+
+  & figure figcaption {
+    font-size: 0;
+
+    & textarea {
+      font-size: var(--font-size-sm); /* fallback */
+      font-size: calc(var(--font-size-sm) - 1px);
+      text-align: center;
+      resize: none;
+      overflow: hidden;
+    }
   }
 }

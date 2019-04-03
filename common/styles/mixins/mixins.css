@@ -39,8 +39,16 @@
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
-  &[lang='zh-hans'] {
+  &[lang='zh-Hans'] {
     font-family: var(--font-serif-sc);
+  }
+}
+
+@define-mixin font-sans {
+  font-family: var(--font-sans-tc);
+
+  &[lang='zh-Hans'] {
+    font-family: var(--font-sans-sc);
   }
 }
 

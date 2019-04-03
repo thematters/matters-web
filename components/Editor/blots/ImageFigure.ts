@@ -1,5 +1,6 @@
 import { Quill } from 'react-quill'
 
+const Parchment = Quill.import('parchment')
 const BlockEmbed = Quill.import('blots/block/embed')
 
 const ATTRIBUTES = ['alt', 'height', 'width']
@@ -12,8 +13,10 @@ class ImageFigure extends BlockEmbed {
     id?: string
     assetId?: string
   }) {
-    console.log({ value })
     const node = super.create(value)
+
+    const figcaption = Parchment.create('figcaption', value.caption || '')
+      .domNode
 
     const image = document.createElement('img')
     image.setAttribute('src', value.src || '')
@@ -30,26 +33,19 @@ class ImageFigure extends BlockEmbed {
     caption.innerText = value.caption || ''
 
     node.appendChild(image)
-    node.appendChild(caption)
+    node.appendChild(figcaption)
 
     return node
   }
 
-  public static value(domNode: HTMLElement): any {
+  static value(domNode: HTMLElement): any {
     const image = domNode.querySelector('img')
     const caption = domNode.querySelector('figcaption')
 
-    const value: { src?: string; caption?: string } = {}
-
-    if (image) {
-      value.src = image.getAttribute('src') || undefined
+    return {
+      src: image ? image.getAttribute('src') : '',
+      caption: caption ? caption.innerText : ''
     }
-
-    if (caption) {
-      value.caption = caption.innerText || undefined
-    }
-
-    return value
   }
 
   static formats(domNode: HTMLElement) {
