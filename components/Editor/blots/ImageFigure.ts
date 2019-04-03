@@ -26,7 +26,7 @@ class ImageFigure extends BlockEmbed {
     }
 
     if (value.assetId) {
-      image.setAttribute('asset-id', value.assetId)
+      image.setAttribute('data-asset-id', value.assetId)
     }
 
     const caption = document.createElement('figcaption')

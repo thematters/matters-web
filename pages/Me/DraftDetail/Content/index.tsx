@@ -15,7 +15,6 @@ import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
-import { UpdateDraftVariables } from './__generated__/UpdateDraft'
 import styles from './styles.css'
 
 const Editor = dynamic(() => import('~/components/Editor'), {
@@ -139,7 +138,11 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                 }}
                 uploading={uploading}
                 draft={draft}
-                onSave={async (newDraft: UpdateDraftVariables) => {
+                onSave={async (newDraft: {
+                  title?: string | null
+                  content?: string | null
+                  coverAssetId?: string | null
+                }) => {
                   updateHeaderState({
                     type: 'draft',
                     state: 'saving',

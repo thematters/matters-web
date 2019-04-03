@@ -18,7 +18,7 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { translate, trimLineBreaks } from '~/common/utils'
+import { dom, translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
@@ -28,7 +28,11 @@ import createImageMatcher from './utils/createImageMatcher'
 import lineBreakMatcher from './utils/lineBreakMatcher'
 
 interface Props {
-  onSave: any
+  onSave: (input: {
+    title?: string | null
+    content?: string | null
+    coverAssetId?: string | null
+  }) => Promise<void>
   draft: EditorDraft
   lang: Language
   upload: (input: {
@@ -129,7 +133,13 @@ class Editor extends React.Component<Props, State> {
   }
 
   saveDraft() {
-    this.props.onSave({ content: trimLineBreaks(this.state.content) })
+    const content = this.state.content
+    const assets = dom.getAttributes('data-asset-id', content)
+    const coverAssetId = assets.length > 0 ? assets[0] : null
+    this.props.onSave({
+      content: trimLineBreaks(content),
+      coverAssetId
+    })
   }
 
   handleChange = (content: string) => {

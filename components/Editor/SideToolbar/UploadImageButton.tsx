@@ -20,7 +20,6 @@ type Upload = (input: {
 
 interface UploadImageButtonProps {
   quill: Quill | null
-  onSave: any
   upload: Upload
   uploading: boolean
   setExpanded: (expanded: boolean) => void
@@ -30,15 +29,14 @@ const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
 
 const UploadImageButton = ({
   quill,
-  onSave,
   setExpanded,
   upload,
   uploading
 }: UploadImageButtonProps) => {
-  const insertImage = (src: string) => {
+  const insertImage = (src: string, assetId: string) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'imageFigure', { src }, 'user')
+      quill.insertEmbed(range.index, 'imageFigure', { src, assetId }, 'user')
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }
@@ -71,8 +69,8 @@ const UploadImageButton = ({
 
     try {
       const { id, path } = await upload({ file })
-      onSave({ coverAssetId: id })
-      insertImage(path)
+      insertImage(path, id)
+      setExpanded(false)
       window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {

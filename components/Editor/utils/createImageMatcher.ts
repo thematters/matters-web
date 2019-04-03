@@ -41,7 +41,7 @@ const createImageMatcher = (upload: any, quill: Quill) => (
     const img = quill.root.querySelector(`#${placeholderId}`)
     if (img) {
       img.setAttribute('src', path)
-      img.setAttribute('asset-id', id)
+      img.setAttribute('data-asset-id', id)
     }
   })
 

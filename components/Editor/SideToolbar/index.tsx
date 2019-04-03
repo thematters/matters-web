@@ -60,7 +60,6 @@ const SideToolbar = ({
       <div className="toolbar">
         <UploadImageButton
           quill={quill}
-          onSave={onSave}
           setExpanded={setExpanded}
           upload={upload}
           uploading={uploading}
