@@ -14,10 +14,11 @@ const Delta = Quill.import('delta')
  * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
  * @return Blob
  */
-const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
-  contentType = contentType
-  sliceSize = sliceSize
-
+const b64toBlob = (
+  b64Data: string,
+  contentType: string = '',
+  sliceSize: number = 512
+) => {
   const byteCharacters = atob(b64Data)
   const byteArrays = []
 
