@@ -24,6 +24,9 @@ const fragments = {
         id
         userName
       }
+      oss {
+        todayCover
+      }
       ...DigestActionsArticle
     }
     ${Actions.fragments.article}
@@ -38,7 +41,15 @@ const FeatureDigest = ({
   article: TodayDigestArticle
   onClick?: MouseEventHandler
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title, summary } = article
+  const {
+    cover,
+    author,
+    slug,
+    mediaHash,
+    title,
+    summary,
+    oss: { todayCover }
+  } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -59,7 +70,9 @@ const FeatureDigest = ({
             <div
               className="cover"
               style={{
-                backgroundImage: `url(${cover || IMAGE_COVER_FALLBACK})`
+                backgroundImage: `url(${todayCover ||
+                  cover ||
+                  IMAGE_COVER_FALLBACK})`
               }}
             />
           </a>
