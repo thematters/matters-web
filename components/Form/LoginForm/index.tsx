@@ -233,7 +233,10 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
               email: errorMessage,
               password: errorMessage
             })
-            analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, { email })
+            analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
+              email,
+              error
+            })
           }
         })
         .finally(() => {
