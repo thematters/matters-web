@@ -18,17 +18,30 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { translate, trimLineBreaks } from '~/common/utils'
+import { dom, translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
+import createImageMatcher from './utils/createImageMatcher'
 
 interface Props {
-  onSave: any
+  onSave: (input: {
+    title?: string | null
+    content?: string | null
+    coverAssetId?: string | null
+  }) => Promise<void>
   draft: EditorDraft
   lang: Language
+  upload: (input: {
+    file?: any
+    url?: string
+  }) => Promise<{
+    id: string
+    path: string
+  }>
+  uploading: boolean
 }
 
 interface State {
@@ -119,7 +132,18 @@ class Editor extends React.Component<Props, State> {
   }
 
   saveDraft() {
-    this.props.onSave({ content: trimLineBreaks(this.state.content) })
+    const content = this.state.content
+    const assets = dom.getAttributes('data-asset-id', content)
+    const draft =
+      assets.length > 0
+        ? {
+            content: trimLineBreaks(content),
+            coverAssetId: assets[0]
+          }
+        : {
+          content: trimLineBreaks(content),
+        }
+    this.props.onSave(draft)
   }
 
   handleChange = (content: string) => {
@@ -175,7 +199,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { draft, onSave, lang } = this.props
+    const { draft, onSave, lang, upload, uploading } = this.props
     const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
@@ -183,6 +207,10 @@ class Editor extends React.Component<Props, State> {
       container: true,
       'u-area-disable': isPending || isPublished
     })
+
+    if (this.quill) {
+      this.quill.clipboard.addMatcher('IMG', createImageMatcher(upload))
+    }
 
     return (
       <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
@@ -221,6 +249,8 @@ class Editor extends React.Component<Props, State> {
                 <SideToolbar
                   {...this.state.sideToolbar}
                   quill={this.quill}
+                  upload={upload}
+                  uploading={uploading}
                   onSave={onSave}
                 />
 

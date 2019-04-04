@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { Mutation } from '~/components/GQL'
@@ -33,6 +33,9 @@ const Content = ({ article }: { article: ContentArticle }) => {
       })
   }, [])
 
+  const [trackedFinish, setTrackedFinish] = useState(false)
+  const [trackedRead, setTrackedRead] = useState(false)
+
   const FireOnMount = ({ fn }: { fn: () => void }) => {
     useEffect(() => {
       fn()
@@ -52,17 +55,27 @@ const Content = ({ article }: { article: ContentArticle }) => {
     >
       {read => (
         <>
-          <FireOnMount fn={() => read({ variables: { id } })} />
+          <FireOnMount
+            fn={() => {
+              if (!trackedRead) {
+                read({ variables: { id } })
+                setTrackedRead(true)
+              }
+            }}
+          />
           <div
             className="u-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
           <Waypoint
-            onEnter={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-                entrance: id
-              })
-            }
+            onEnter={() => {
+              if (!trackedFinish) {
+                analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
+                  entrance: id
+                })
+                setTrackedFinish(true)
+              }
+            }}
           />
           <style jsx>{styles}</style>
         </>

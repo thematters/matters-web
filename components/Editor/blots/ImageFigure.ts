@@ -3,8 +3,14 @@ import { Quill } from 'react-quill'
 const Parchment = Quill.import('parchment')
 const BlockEmbed = Quill.import('blots/block/embed')
 
+// ref: https://github.com/quilljs/quill/blob/develop/formats/image.js
 class ImageFigure extends BlockEmbed {
-  static create(value: { src?: string; caption?: string }) {
+  public static create(value: {
+    src?: string
+    caption?: string
+    id?: string
+    assetId?: string
+  }) {
     const node = super.create(value)
 
     const figcaption = Parchment.create('figcaption', value.caption || '')
@@ -12,6 +18,14 @@ class ImageFigure extends BlockEmbed {
 
     const image = document.createElement('img')
     image.setAttribute('src', value.src || '')
+
+    if (value.id) {
+      image.setAttribute('id', value.id)
+    }
+
+    if (value.assetId) {
+      image.dataset.assetId = value.assetId
+    }
 
     node.appendChild(image)
     node.appendChild(figcaption)
@@ -25,7 +39,8 @@ class ImageFigure extends BlockEmbed {
 
     return {
       src: image ? image.getAttribute('src') : '',
-      caption: caption ? caption.innerText : ''
+      caption: caption ? caption.innerText : '',
+      assetId: image ? image.dataset.assetId : undefined
     }
   }
 }

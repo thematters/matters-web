@@ -12,7 +12,7 @@ import IMAGE_INTRO from '~/static/images/intro.jpg'
 import OPENSEARCH from '~/static/opensearach.xml'
 
 const {
-  publicRuntimeConfig: { SITE_DOMIAN }
+  publicRuntimeConfig: { SITE_DOMAIN }
 } = getConfig()
 
 interface HeadProps {
@@ -40,10 +40,10 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${SITE_DOMIAN}${props.path}`
+      ? `${SITE_DOMAIN}${props.path}`
       : asPath
-      ? `${SITE_DOMIAN}${asPath}`
-      : SITE_DOMIAN,
+      ? `${SITE_DOMAIN}${asPath}`
+      : SITE_DOMAIN,
     image: props.image || IMAGE_INTRO
   }
 

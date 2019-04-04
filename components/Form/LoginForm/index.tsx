@@ -10,7 +10,7 @@ import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { ERROR_CODES, PATHS } from '~/common/enums'
+import { ANALYTICS_EVENTS, ERROR_CODES, PATHS } from '~/common/enums'
 import {
   analytics,
   isValidEmail,
@@ -216,6 +216,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             })
           )
           analytics.identifyUser()
+          analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
           redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {
@@ -231,6 +232,10 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             setErrors({
               email: errorMessage,
               password: errorMessage
+            })
+            analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
+              email,
+              error
             })
           }
         })
