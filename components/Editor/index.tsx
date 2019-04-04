@@ -134,11 +134,16 @@ class Editor extends React.Component<Props, State> {
   saveDraft() {
     const content = this.state.content
     const assets = dom.getAttributes('data-asset-id', content)
-    const coverAssetId = assets.length > 0 ? assets[0] : null
-    this.props.onSave({
-      content: trimLineBreaks(content),
-      coverAssetId
-    })
+    const draft =
+      assets.length > 0
+        ? {
+            content: trimLineBreaks(content),
+            coverAssetId: assets[0]
+          }
+        : {
+          content: trimLineBreaks(content),
+        }
+    this.props.onSave(draft)
   }
 
   handleChange = (content: string) => {

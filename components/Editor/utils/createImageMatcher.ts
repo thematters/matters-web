@@ -1,9 +1,13 @@
+import getConfig from 'next/config'
 import { Quill } from 'react-quill'
 
-import { DOMAIN } from '~/common/enums'
 import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.svg'
 
 const Delta = Quill.import('delta')
+
+const {
+  publicRuntimeConfig: { SITE_DOMAIN }
+} = getConfig()
 
 /**
  * Convert a base64 string in a Blob according to the data and contentType.
@@ -52,7 +56,7 @@ const createImageMatcher = (upload: any) => (node: Element, delta: any) => {
   let imageFigure
   // don't upload if copying from matters internally
   // retrieve asset id from url
-  if (srcOrg.indexOf(DOMAIN) !== -1) {
+  if (srcOrg.indexOf(SITE_DOMAIN) !== -1) {
     const assetId = srcOrg.split('/').slice(-2, -1)[0]
 
     imageFigure = {

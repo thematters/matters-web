@@ -26,7 +26,7 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     // Will be available on both server and client
-    SITE_DOMIAN: process.env.SITE_DOMIAN,
+    SITE_DOMAIN: process.env.SITE_DOMAIN,
     API_URL: process.env.API_URL,
     WS_URL: process.env.WS_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY
