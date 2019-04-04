@@ -33,7 +33,8 @@ const Content = ({ article }: { article: ContentArticle }) => {
       })
   }, [])
 
-  const [tracked, setTracked] = useState(false)
+  const [trackedFinish, setTrackedFinish] = useState(false)
+  const [trackedRead, setTrackedRead] = useState(false)
 
   const FireOnMount = ({ fn }: { fn: () => void }) => {
     useEffect(() => {
@@ -54,18 +55,25 @@ const Content = ({ article }: { article: ContentArticle }) => {
     >
       {read => (
         <>
-          <FireOnMount fn={() => read({ variables: { id } })} />
+          <FireOnMount
+            fn={() => {
+              if (!trackedRead) {
+                read({ variables: { id } })
+                setTrackedRead(true)
+              }
+            }}
+          />
           <div
             className="u-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
           <Waypoint
             onEnter={() => {
-              if (!tracked) {
+              if (!trackedFinish) {
                 analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
                   entrance: id
                 })
-                setTracked(true)
+                setTrackedFinish(true)
               }
             }}
           />
