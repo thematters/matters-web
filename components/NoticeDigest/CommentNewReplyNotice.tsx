@@ -54,7 +54,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate zh_hant="回覆了你的評論" zh_hans="回复了你的评论" />
         </h4>
 
-        <NoticeComment comment={notice.target} />
+        <NoticeComment comment={notice.reply} />
 
         <NoticeDate notice={notice} />
       </section>
