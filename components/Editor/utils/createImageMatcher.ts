@@ -1,7 +1,7 @@
 import { Quill } from 'react-quill'
 
 import { DOMAIN } from '~/common/enums'
-import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.png'
+import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.svg'
 
 const Delta = Quill.import('delta')
 
@@ -39,10 +39,7 @@ const b64toBlob = (
   return blob
 }
 
-const createImageMatcher = (upload: any, quill: Quill) => (
-  node: Element,
-  delta: any
-) => {
+const createImageMatcher = (upload: any) => (node: Element, delta: any) => {
   // prevent recursion
   if (delta.ops[0].insert.imageFigure) {
     return delta
@@ -90,7 +87,7 @@ const createImageMatcher = (upload: any, quill: Quill) => (
     }
 
     upload(input).then(({ path, id }: any) => {
-      const img = quill.root.querySelector(`#${placeholderId}`)
+      const img = document.getElementById(placeholderId)
       if (img) {
         img.setAttribute('src', path)
         img.setAttribute('data-asset-id', id)

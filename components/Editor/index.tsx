@@ -25,7 +25,6 @@ import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 import createImageMatcher from './utils/createImageMatcher'
-import lineBreakMatcher from './utils/lineBreakMatcher'
 
 interface Props {
   onSave: (input: {
@@ -205,11 +204,7 @@ class Editor extends React.Component<Props, State> {
     })
 
     if (this.quill) {
-      this.quill.clipboard.addMatcher('BR', lineBreakMatcher)
-      this.quill.clipboard.addMatcher(
-        'IMG',
-        createImageMatcher(upload, this.quill)
-      )
+      this.quill.clipboard.addMatcher('IMG', createImageMatcher(upload))
     }
 
     return (

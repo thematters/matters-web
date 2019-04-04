@@ -3,8 +3,6 @@ import { Quill } from 'react-quill'
 const Parchment = Quill.import('parchment')
 const BlockEmbed = Quill.import('blots/block/embed')
 
-const ATTRIBUTES = ['alt', 'height', 'width']
-
 // ref: https://github.com/quilljs/quill/blob/develop/formats/image.js
 class ImageFigure extends BlockEmbed {
   public static create(value: {
@@ -26,11 +24,8 @@ class ImageFigure extends BlockEmbed {
     }
 
     if (value.assetId) {
-      image.setAttribute('data-asset-id', value.assetId)
+      image.dataset.assetId = value.assetId
     }
-
-    const caption = document.createElement('figcaption')
-    caption.innerText = value.caption || ''
 
     node.appendChild(image)
     node.appendChild(figcaption)
@@ -44,41 +39,8 @@ class ImageFigure extends BlockEmbed {
 
     return {
       src: image ? image.getAttribute('src') : '',
-      caption: caption ? caption.innerText : ''
-    }
-  }
-
-  static formats(domNode: HTMLElement) {
-    const image = domNode.querySelector('img')
-    if (!image) {
-      return {}
-    }
-
-    return ATTRIBUTES.reduce(
-      (formats: { [key: string]: string | null }, attribute: string) => {
-        if (domNode.hasAttribute(attribute)) {
-          formats[attribute] = image.getAttribute(attribute)
-        }
-        return formats
-      },
-      {}
-    )
-  }
-
-  format(name: string, value: string | number) {
-    const image = this.domNode.querySelector('img')
-    if (!image) {
-      return {}
-    }
-
-    if (ATTRIBUTES.indexOf(name) > -1) {
-      if (value) {
-        image.setAttribute(name, value)
-      } else {
-        image.removeAttribute(name)
-      }
-    } else {
-      super.format(name, value)
+      caption: caption ? caption.innerText : '',
+      assetId: image ? image.dataset.assetId : undefined
     }
   }
 }
