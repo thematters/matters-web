@@ -1,14 +1,18 @@
+const getPath = (url: string) => new URL(url).pathname.replace(/\//g, '')
+
 export const code = (value: string) => {
   if (!value) {
     return ''
   }
 
   if (value.match(/http(s)?:\/\/jsfiddle.net\//)) {
-    const path = new URL(value).pathname
-    return `https://jsfiddle.net${path}${
-      path.endsWith('/') ? '' : '/'
-    }embedded/`
+    return `https://jsfiddle.net/${getPath(value)}/embedded/`
   }
+
+  if (value.match(/http(s)?:\/\/button\.like\.co\//)) {
+    return `https://button.like.co/in/embed/${getPath(value)}/button`
+  }
+
   return ''
 }
 
