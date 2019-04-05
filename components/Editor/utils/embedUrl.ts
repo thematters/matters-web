@@ -9,7 +9,7 @@ export const code = (value: string) => {
     return `https://jsfiddle.net/${getPath(value)}/embedded/`
   }
 
-  if (value.match(/http(s)?:\/\/button\.like\.co\//)) {
+  if (value.match(/http(s)?:\/\/(button\.)?like\.co\//)) {
     return `https://button.like.co/in/embed/${getPath(value)}/button`
   }
 

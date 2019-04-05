@@ -5,11 +5,14 @@ const Parchment = Quill.import('parchment')
 
 class EmbedCode extends BlockEmbed {
   static create({ url, caption }: { url: string; caption?: string }) {
+    const codeType = this.getType(url)
+
     const node = super.create()
 
     const figcaption = Parchment.create('figcaption', caption).domNode
 
     const iframe = document.createElement('iframe')
+
     iframe.setAttribute('src', url)
     iframe.setAttribute('frameborder', '0')
     iframe.setAttribute('allowfullscreen', 'false')
@@ -17,6 +20,7 @@ class EmbedCode extends BlockEmbed {
       'sandbox',
       'allow-scripts allow-same-origin allow-popups'
     )
+    iframe.className = codeType
 
     const iframeContainer = document.createElement('div')
     iframeContainer.setAttribute('class', 'iframe-container')
@@ -35,6 +39,14 @@ class EmbedCode extends BlockEmbed {
     return {
       url: iframe ? iframe.getAttribute('src') : '',
       caption: caption ? caption.innerText : ''
+    }
+  }
+
+  static getType(url: string) {
+    if (url.match(/http(s)?:\/\/button\.like\.co\//)) {
+      return 'likebutton'
+    } else {
+      return 'default'
     }
   }
 }
