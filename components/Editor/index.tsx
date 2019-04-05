@@ -141,8 +141,8 @@ class Editor extends React.Component<Props, State> {
             coverAssetId: assets[0]
           }
         : {
-          content: trimLineBreaks(content),
-        }
+            content: trimLineBreaks(content)
+          }
     this.props.onSave(draft)
   }
 
