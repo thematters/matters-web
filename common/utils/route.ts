@@ -9,6 +9,7 @@ type ToPathArgs =
       userName: string
       slug: string
       mediaHash: string
+      fragment?: string
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -52,10 +53,11 @@ type ToPathArgs =
 export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   switch (args.page) {
     case 'articleDetail':
+      const url = `${PATHS.ARTICLE_DETAIL.href}?userName=${
+        args.userName
+      }&slug=${args.slug}&mediaHash=${args.mediaHash}`
       return {
-        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${
-          args.slug
-        }&mediaHash=${args.mediaHash}`,
+        href: args.fragment ? `${url}$${args.fragment}` : url,
         as: `/@${args.userName}/${args.slug}-${args.mediaHash}`
       }
     case 'draftDetail':
