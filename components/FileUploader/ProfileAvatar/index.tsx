@@ -58,6 +58,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
     }
 
     const file = event.target.files[0]
+    event.target.value = ''
 
     if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
       setError('size')
