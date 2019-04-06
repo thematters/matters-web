@@ -4,6 +4,7 @@ import { MouseEventHandler } from 'react'
 
 import { Label, Title } from '~/components'
 
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
@@ -18,6 +19,7 @@ const fragments = {
       title
       slug
       cover
+      live
       summary
       mediaHash
       author {
@@ -47,6 +49,7 @@ const FeatureDigest = ({
     slug,
     mediaHash,
     title,
+    live,
     summary,
     oss: { todayCover }
   } = article
@@ -59,7 +62,8 @@ const FeatureDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: live ? UrlFragments.COMMENTS : ''
   })
 
   return (

@@ -5,7 +5,7 @@ import { dom } from '~/common/utils'
 
 import styles from './styles.css'
 
-const DrawerContext = React.createContext({
+export const DrawerContext = React.createContext({
   opened: false,
   open: () => {
     // Do nothing

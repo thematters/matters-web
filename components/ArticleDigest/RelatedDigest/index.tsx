@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { Title } from '~/components'
 
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -18,6 +19,7 @@ const fragments = {
       slug
       cover
       mediaHash
+      live
       author {
         id
         userName
@@ -34,7 +36,7 @@ const RelatedDigest = ({
 }: {
   article: RelatedDigestArticle
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title } = article
+  const { cover, author, slug, mediaHash, title, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -44,7 +46,8 @@ const RelatedDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: live ? UrlFragments.COMMENTS : ''
   })
   const contentClasses = classNames({
     content: true,
