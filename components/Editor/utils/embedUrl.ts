@@ -22,7 +22,7 @@ export const video = (value: string) => {
   }
 
   let id: string | null
-  if (value.match('(http(s)?://)?(www.)?youtube|youtu.be')) {
+  if (value.match('/(http(s)?://)?(www.)?youtube|youtu.be/')) {
     id = value.match('embed')
       ? value.split(/embed\//)[1].split('"')[0]
       : value.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0]

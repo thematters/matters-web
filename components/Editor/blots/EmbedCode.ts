@@ -43,7 +43,7 @@ class EmbedCode extends BlockEmbed {
   }
 
   static getType(url: string) {
-    if (url.match(/http(s)?:\/\/button\.like\.co\//)) {
+    if (url.match(/http(s)?:\/\/(button\.)?like\.co\//)) {
       return 'likebutton'
     } else {
       return 'default'
