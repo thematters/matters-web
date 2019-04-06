@@ -19,7 +19,6 @@ const fragments = {
       title
       slug
       cover
-      live
       summary
       mediaHash
       author {
@@ -49,7 +48,6 @@ const FeatureDigest = ({
     slug,
     mediaHash,
     title,
-    live,
     summary,
     oss: { todayCover }
   } = article
@@ -63,7 +61,7 @@ const FeatureDigest = ({
     userName: author.userName,
     slug,
     mediaHash,
-    fragment: live ? UrlFragments.COMMENTS : ''
+    fragment: UrlFragments.COMMENTS
   })
 
   return (
