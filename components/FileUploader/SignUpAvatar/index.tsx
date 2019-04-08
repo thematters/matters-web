@@ -58,14 +58,14 @@ export const SignUpAvatarUploader: FC<Props> = ({
   })
 
   const avatarHint = translate({
-    zh_hant: '上傳圖片作為大頭照 (1 MB 內)',
-    zh_hans: '上传图片作为头像 (1 MB 內)',
+    zh_hant: '上傳圖片作為大頭照 (5 MB 內)',
+    zh_hans: '上传图片作为头像 (5 MB 內)',
     lang
   })
 
   const sizeError = translate({
-    zh_hant: '上傳檔案超過 1 MB',
-    zh_hans: '上传档案超过 1 MB',
+    zh_hant: '上傳檔案超過 5 MB',
+    zh_hans: '上传档案超过 5 MB',
     lang
   })
 
