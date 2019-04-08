@@ -49,6 +49,7 @@ const UploadImageButton = ({
     }
 
     const file = event.target.files[0]
+    event.target.value = ''
 
     if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
       window.dispatchEvent(

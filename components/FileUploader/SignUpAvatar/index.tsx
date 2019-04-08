@@ -73,6 +73,7 @@ export const SignUpAvatarUploader: FC<Props> = ({
 
   const handleChange = (event: any, upload: any) => {
     event.stopPropagation()
+    event.target.value = ''
 
     if (!upload || !event.target || !event.target.files) {
       return undefined
