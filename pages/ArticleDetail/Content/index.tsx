@@ -29,9 +29,9 @@ const Content = ({ article }: { article: ContentArticle }) => {
     })
 
     // send referrer to likebutton
-    const likeButtonIframe = document.getElementsByClassName(
-      'likebutton'
-    )[0] as HTMLFrameElement
+    const likeButtonIframe = document.querySelector(
+      '.likebutton iframe'
+    ) as HTMLFrameElement
     if (likeButtonIframe) {
       likeButtonIframe.addEventListener('load', () => {
         if (likeButtonIframe.contentWindow) {
