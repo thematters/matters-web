@@ -111,8 +111,8 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
           <div className="error">
             {error === 'size' && (
               <Translate
-                zh_hant="上傳檔案超過 1 MB"
-                zh_hans="上传档案超过 1 MB"
+                zh_hant="上傳檔案超過 5 MB"
+                zh_hans="上传档案超过 5 MB"
               />
             )}
           </div>

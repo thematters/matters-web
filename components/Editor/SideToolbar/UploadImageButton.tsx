@@ -58,8 +58,8 @@ const UploadImageButton = ({
             color: 'red',
             content: (
               <Translate
-                zh_hant="上傳檔案請勿超過 1 MB"
-                zh_hans="上传档案请勿超过 1 MB"
+                zh_hant="上傳檔案請勿超過 5 MB"
+                zh_hans="上传档案请勿超过 5 MB"
               />
             )
           }
