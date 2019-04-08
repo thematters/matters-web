@@ -183,7 +183,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   public isCustomBlot(blot: any): boolean {
-    const types = ['embedClipboard']
+    const types = ['embedClipboard', 'embedCode', 'embedVideo']
     if (blot && blot.statics && _includes(types, blot.statics.blotName)) {
       return true
     }
