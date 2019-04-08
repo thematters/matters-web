@@ -141,8 +141,8 @@ class Editor extends React.Component<Props, State> {
             coverAssetId: assets[0]
           }
         : {
-          content: trimLineBreaks(content),
-        }
+            content: trimLineBreaks(content)
+          }
     this.props.onSave(draft)
   }
 
@@ -235,6 +235,7 @@ class Editor extends React.Component<Props, State> {
                       onInit: this.onMentionModuleInit
                     }
                   }}
+                  formats={config.foramts}
                   ref={this.reactQuillRef}
                   value={this.state.content}
                   placeholder={translate({

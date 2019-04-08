@@ -128,6 +128,7 @@ class CommentEditor extends React.Component<Props, State> {
                       onInit: this.onMentionModuleInit
                     }
                   }}
+                  formats={config.foramts}
                   ref={this.reactQuillRef}
                   value={content}
                   placeholder={translate({

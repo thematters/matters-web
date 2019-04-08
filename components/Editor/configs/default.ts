@@ -47,3 +47,27 @@ export const modules = {
     }
   }
 }
+
+export const foramts = [
+  'bold',
+  'code',
+  'italic',
+  'link',
+  'strike',
+  'script',
+  'underline',
+
+  'header',
+  'blockquote',
+  'list',
+  'code-block',
+
+  'divider',
+  'embedClipboard',
+  'embedCode',
+  'embedVideo',
+  'figcaption',
+  'imageFigure',
+  'mention',
+  'smartBreak'
+]
