@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2019-04-09
+
+### Added
+
+- Editor: Caption #178
+- Editor: Auto upload external images #190
+- Editor: Embed LikeButton #194
+
+# Changed
+
+- Removes extra line breaks #188
+- Set cover to be first image #190
+- Fix issues with analytics and add new events #190
+- Summarize content of notice comment #192
+- Use `notice.reply.content` as `CommentNewReplyNotice`'s content #192
+- Fix polling requests read data from the cache #193
+- Auto open comments drawer #194
+- Fix upload same file again not working issue #195
+- Restrict editor formats for pasted content #197
+- Update upload file size limit to 5MB #198
+
 ## [1.2.0] - 2019-04-02
 
 ### Added
