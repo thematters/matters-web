@@ -3,10 +3,6 @@
   --digest-related-cover-height-sm: 70px;
 }
 
-a {
-  cursor: pointer;
-}
-
 .container {
   padding-bottom: var(--spacing-default);
 }

@@ -2,10 +2,6 @@
   --digest-sidebar-cover-size: 72px;
 }
 
-a {
-  cursor: pointer;
-}
-
 .container {
   padding-bottom: var(--spacing-default);
 }
