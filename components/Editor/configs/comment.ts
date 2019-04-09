@@ -9,10 +9,17 @@ export const modules = {
 }
 
 export const foramts = [
+  // inline
   'bold',
   'italic',
   'underline',
+
+  // block
   'blockquote',
   'list',
-  'link'
+  'link',
+
+  // custom
+  'mention',
+  'smartBreak'
 ]
