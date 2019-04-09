@@ -112,7 +112,7 @@ class CommentEditor extends React.Component<Props, State> {
           const users = _get(data, 'search.edges', []).map(
             ({ node }: { node: SearchUsers_search_edges_node_User }) => node
           )
-          console.log('content', content)
+
           return (
             <>
               <div className={containerClasses} id="comment-editor">
@@ -128,6 +128,7 @@ class CommentEditor extends React.Component<Props, State> {
                       onInit: this.onMentionModuleInit
                     }
                   }}
+                  formats={config.foramts}
                   ref={this.reactQuillRef}
                   value={content}
                   placeholder={translate({

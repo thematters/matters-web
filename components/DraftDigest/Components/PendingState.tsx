@@ -24,6 +24,7 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
       query={DRAFT_PUBLISH_STATE}
       pollInterval={1000 * 5}
       errorPolicy="none"
+      fetchPolicy="network-only"
       skip={!process.browser || !isPublishing}
     >
       {({ data }: QueryResult & { data: DraftPublishState }) => {

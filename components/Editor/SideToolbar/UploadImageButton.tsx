@@ -1,8 +1,6 @@
-import gql from 'graphql-tag'
 import React from 'react'
 import { Quill } from 'react-quill'
 
-import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
@@ -12,39 +10,38 @@ import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
 import styles from './styles.css'
 
+type Upload = (input: {
+  file?: any
+  url?: string
+}) => Promise<{
+  id: string
+  path: string
+}>
+
 interface UploadImageButtonProps {
   quill: Quill | null
-  onSave: any
+  upload: Upload
+  uploading: boolean
   setExpanded: (expanded: boolean) => void
 }
-
-const MUTATION_UPLOAD_FILE = gql`
-  mutation SingleFileUpload($input: SingleFileUploadInput!) {
-    singleFileUpload(input: $input) {
-      ... on Asset {
-        id
-        path
-      }
-    }
-  }
-`
 
 const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
 
 const UploadImageButton = ({
   quill,
-  onSave,
-  setExpanded
+  setExpanded,
+  upload,
+  uploading
 }: UploadImageButtonProps) => {
-  const insertImage = (src: string) => {
+  const insertImage = (src: string, assetId: string) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'imageFigure', { src }, 'user')
+      quill.insertEmbed(range.index, 'imageFigure', { src, assetId }, 'user')
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }
 
-  const handleUploadChange = async (event: any, upload: any) => {
+  const handleUploadChange = async (event: any) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -52,6 +49,7 @@ const UploadImageButton = ({
     }
 
     const file = event.target.files[0]
+    event.target.value = ''
 
     if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
       window.dispatchEvent(
@@ -60,8 +58,8 @@ const UploadImageButton = ({
             color: 'red',
             content: (
               <Translate
-                zh_hant="上傳檔案請勿超過 1 MB"
-                zh_hans="上传档案请勿超过 1 MB"
+                zh_hant="上傳檔案請勿超過 5 MB"
+                zh_hans="上传档案请勿超过 5 MB"
               />
             )
           }
@@ -71,13 +69,9 @@ const UploadImageButton = ({
     }
 
     try {
-      const {
-        data: {
-          singleFileUpload: { id, path }
-        }
-      } = await upload({ variables: { input: { file, type: 'embed' } } })
-      onSave({ coverAssetId: id })
-      insertImage(path)
+      const { id, path } = await upload({ file })
+      insertImage(path, id)
+      setExpanded(false)
       window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
@@ -100,27 +94,23 @@ const UploadImageButton = ({
   }
 
   return (
-    <Mutation mutation={MUTATION_UPLOAD_FILE}>
-      {(upload, { loading }) => (
-        <label className="upload-image-container">
-          <input
-            className="input"
-            type="file"
-            accept={acceptTypes}
-            multiple={false}
-            aria-label="新增圖片"
-            onChange={(event: any) => handleUploadChange(event, upload)}
-          />
-          <Icon
-            id={loading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
-            viewBox={loading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
-            size="large"
-            className={loading ? 'u-motion-spin' : 'u-motion-icon-hover'}
-          />
-          <style jsx>{styles}</style>
-        </label>
-      )}
-    </Mutation>
+    <label className="upload-image-container">
+      <input
+        className="input"
+        type="file"
+        accept={acceptTypes}
+        multiple={false}
+        aria-label="新增圖片"
+        onChange={(event: any) => handleUploadChange(event)}
+      />
+      <Icon
+        id={uploading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
+        viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
+        size="large"
+        className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
+      />
+      <style jsx>{styles}</style>
+    </label>
   )
 }
 

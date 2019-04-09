@@ -17,7 +17,9 @@ export const ANALYTICS_EVENTS = {
   LEAVE_ARTICLE: 'leave-article',
   FINISH_ARTICLE: 'finish-article',
   OPEN_COMMENTS: 'open-comments',
-  LOG_OUT: 'log-out'
+  LOG_OUT: 'log-out',
+  LOG_IN: 'log-in',
+  LOG_IN_FAILED: 'log-in-failed'
 }
 
 export const FEED_TYPE = {

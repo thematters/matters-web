@@ -17,9 +17,24 @@ interface SideToolbarProps {
   top: number
   quill: Quill | null
   onSave: any
+  upload: (input: {
+    file?: any
+    url?: string
+  }) => Promise<{
+    id: string
+    path: string
+  }>
+  uploading: boolean
 }
 
-const SideToolbar = ({ show, top, quill, onSave }: SideToolbarProps) => {
+const SideToolbar = ({
+  show,
+  top,
+  quill,
+  onSave,
+  upload,
+  uploading
+}: SideToolbarProps) => {
   const [expanded, setExpanded] = useState(false)
   const containerClasses = classNames({
     container: true,
@@ -45,8 +60,9 @@ const SideToolbar = ({ show, top, quill, onSave }: SideToolbarProps) => {
       <div className="toolbar">
         <UploadImageButton
           quill={quill}
-          onSave={onSave}
           setExpanded={setExpanded}
+          upload={upload}
+          uploading={uploading}
         />
         <EmbedVideoButton quill={quill} setExpanded={setExpanded} />
         <EmbedCodeButton quill={quill} setExpanded={setExpanded} />

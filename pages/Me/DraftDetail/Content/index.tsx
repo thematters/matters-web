@@ -5,7 +5,8 @@ import { useContext, useEffect, useState } from 'react'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { LanguageContext, Translate } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
@@ -14,7 +15,6 @@ import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
-import { UpdateDraftVariables } from './__generated__/UpdateDraft'
 import styles from './styles.css'
 
 const Editor = dynamic(() => import('~/components/Editor'), {
@@ -105,23 +105,70 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
             />
           </header>
+          <Mutation mutation={MUTATION_UPLOAD_FILE}>
+            {(singleFileUpload, { loading: uploading }) => (
+              <Editor
+                upload={async input => {
+                  const result = await singleFileUpload({
+                    variables: { input: { ...input, type: 'embed' } }
+                  })
+                  if (result) {
+                    const {
+                      data: {
+                        singleFileUpload: { id, path }
+                      }
+                    } = result
+                    return { id, path }
+                  } else {
+                    window.dispatchEvent(
+                      new CustomEvent('addToast', {
+                        detail: {
+                          color: 'red',
+                          content: (
+                            <Translate
+                              zh_hant="圖片上傳失敗"
+                              zh_hans="图片上传失败"
+                            />
+                          )
+                        }
+                      })
+                    )
+                    throw new Error('upload not successful')
+                  }
+                }}
+                uploading={uploading}
+                draft={draft}
+                onSave={async (newDraft: {
+                  title?: string | null
+                  content?: string | null
+                  coverAssetId?: string | null
+                }) => {
+                  updateHeaderState({
+                    type: 'draft',
+                    state: 'saving',
+                    draftId
+                  })
+                  try {
+                    await updateDraft({
+                      variables: { id: draft.id, ...newDraft }
+                    })
+                    updateHeaderState({
+                      type: 'draft',
+                      state: 'saved',
+                      draftId
+                    })
+                  } catch (e) {
+                    updateHeaderState({
+                      type: 'draft',
+                      state: 'saveFailed',
+                      draftId
+                    })
+                  }
+                }}
+              />
+            )}
+          </Mutation>
 
-          <Editor
-            draft={draft}
-            onSave={async (newDraft: UpdateDraftVariables) => {
-              updateHeaderState({ type: 'draft', state: 'saving', draftId })
-              try {
-                await updateDraft({ variables: { id: draft.id, ...newDraft } })
-                updateHeaderState({ type: 'draft', state: 'saved', draftId })
-              } catch (e) {
-                updateHeaderState({
-                  type: 'draft',
-                  state: 'saveFailed',
-                  draftId
-                })
-              }
-            }}
-          />
           <ModalInstance modalId="publishModal" title="publish">
             {(props: ModalInstanceProps) => (
               <PublishModal draftId={draft.id} {...props} />

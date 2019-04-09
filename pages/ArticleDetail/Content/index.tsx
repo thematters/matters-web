@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { Mutation } from '~/components/GQL'
@@ -21,17 +21,39 @@ const fragments = {
 
 const Content = ({ article }: { article: ContentArticle }) => {
   const { id } = article
-  // enter and leave article for analytics
+
   useEffect(() => {
+    // enter and leave article for analytics
     analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
       entrance: id
     })
+
+    // send referrer to likebutton
+    const likeButtonIframe = document.querySelector(
+      '.likebutton iframe'
+    ) as HTMLFrameElement
+    if (likeButtonIframe) {
+      likeButtonIframe.addEventListener('load', () => {
+        if (likeButtonIframe.contentWindow) {
+          likeButtonIframe.contentWindow.postMessage(
+            {
+              action: 'SET_REFERRER',
+              content: { referrer: window.location.href }
+            },
+            'https://button.like.co'
+          )
+        }
+      })
+    }
 
     return () =>
       analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, {
         entrance: id
       })
   }, [])
+
+  const [trackedFinish, setTrackedFinish] = useState(false)
+  const [trackedRead, setTrackedRead] = useState(false)
 
   const FireOnMount = ({ fn }: { fn: () => void }) => {
     useEffect(() => {
@@ -52,17 +74,27 @@ const Content = ({ article }: { article: ContentArticle }) => {
     >
       {read => (
         <>
-          <FireOnMount fn={() => read({ variables: { id } })} />
+          <FireOnMount
+            fn={() => {
+              if (!trackedRead) {
+                read({ variables: { id } })
+                setTrackedRead(true)
+              }
+            }}
+          />
           <div
             className="u-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
           <Waypoint
-            onEnter={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-                entrance: id
-              })
-            }
+            onEnter={() => {
+              if (!trackedFinish) {
+                analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
+                  entrance: id
+                })
+                setTrackedFinish(true)
+              }
+            }}
           />
           <style jsx>{styles}</style>
         </>

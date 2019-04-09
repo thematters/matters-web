@@ -6,6 +6,7 @@ import { Title } from '~/components'
 import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 
+import { UrlFragments } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -54,7 +55,8 @@ const FeedDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: live ? UrlFragments.COMMENTS : ''
   })
   const contentClasses = classNames({
     content: true,

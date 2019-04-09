@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { Title } from '~/components'
 
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -18,6 +19,7 @@ const fragments = {
       slug
       cover
       mediaHash
+      live
       author {
         id
         userName
@@ -34,7 +36,7 @@ const RelatedDigest = ({
 }: {
   article: RelatedDigestArticle
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title } = article
+  const { cover, author, slug, mediaHash, title, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -44,7 +46,8 @@ const RelatedDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: live ? UrlFragments.COMMENTS : ''
   })
   const contentClasses = classNames({
     content: true,
@@ -53,16 +56,9 @@ const RelatedDigest = ({
 
   return (
     <section className="container">
-      <Link {...path}>
-        <a>
-          <div className={contentClasses}>
-            <div className="left">
-              <Title type="sidebar" is="h3">
-                {title}
-              </Title>
-              <Actions article={article} type="sidebar" {...actionControls} />
-            </div>
-
+      <div className={contentClasses}>
+        <Link {...path}>
+          <a>
             {cover && (
               <div
                 className="cover"
@@ -71,9 +67,14 @@ const RelatedDigest = ({
                 }}
               />
             )}
-          </div>
-        </a>
-      </Link>
+            <Title className="left" type="sidebar" is="h3">
+              {title}
+            </Title>
+          </a>
+        </Link>
+
+        <Actions article={article} type="sidebar" {...actionControls} />
+      </div>
 
       <style jsx>{styles}</style>
     </section>

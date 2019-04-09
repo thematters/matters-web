@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { Title } from '~/components'
 
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -16,6 +17,7 @@ const fragments = {
       id
       title
       slug
+      live
       cover @include(if: $hasArticleDigestCover)
       author {
         id
@@ -36,7 +38,7 @@ const FeedDigest = ({
   article: SidebarDigestArticle
   hasCover?: boolean
 } & ActionsControls) => {
-  const { author, slug, mediaHash, title } = article
+  const { author, slug, mediaHash, title, live } = article
   const cover = 'cover' in article ? article.cover : null
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -47,7 +49,8 @@ const FeedDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: live ? UrlFragments.COMMENTS : ''
   })
   const contentClasses = classNames({
     content: true,
@@ -57,25 +60,27 @@ const FeedDigest = ({
   return (
     <section className="container">
       <Link {...path}>
-        <a>
-          <div className={contentClasses}>
-            <div className="left">
+        <div className={contentClasses}>
+          <div className="left">
+            <a>
               <Title type="sidebar" is="h2">
                 {title}
               </Title>
-              <Actions article={article} type="sidebar" {...actionControls} />
-            </div>
+            </a>
+            <Actions article={article} type="sidebar" {...actionControls} />
+          </div>
 
-            {hasCover && cover && (
+          {hasCover && cover && (
+            <a>
               <div
                 className="cover"
                 style={{
                   backgroundImage: `url(${cover})`
                 }}
               />
-            )}
-          </div>
-        </a>
+            </a>
+          )}
+        </div>
       </Link>
 
       <style jsx>{styles}</style>

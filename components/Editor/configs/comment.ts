@@ -7,3 +7,19 @@ export const modules = {
     ['blockquote', { list: 'ordered' }, { list: 'bullet' }, 'link']
   ]
 }
+
+export const foramts = [
+  // inline
+  'bold',
+  'italic',
+  'underline',
+
+  // block
+  'blockquote',
+  'list',
+  'link',
+
+  // custom
+  'mention',
+  'smartBreak'
+]

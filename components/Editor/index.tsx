@@ -18,17 +18,30 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { translate } from '~/common/utils'
+import { dom, translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
+import createImageMatcher from './utils/createImageMatcher'
 
 interface Props {
-  onSave: any
+  onSave: (input: {
+    title?: string | null
+    content?: string | null
+    coverAssetId?: string | null
+  }) => Promise<void>
   draft: EditorDraft
   lang: Language
+  upload: (input: {
+    file?: any
+    url?: string
+  }) => Promise<{
+    id: string
+    path: string
+  }>
+  uploading: boolean
 }
 
 interface State {
@@ -59,7 +72,7 @@ class Editor extends React.Component<Props, State> {
       mentionInstance: null
     }
 
-    this.saveDraft = _debounce(this.saveDraft.bind(this), 3000)
+    this.saveDraft = _debounce(this.saveDraft.bind(this), 300)
   }
 
   componentDidMount() {
@@ -119,8 +132,18 @@ class Editor extends React.Component<Props, State> {
   }
 
   saveDraft() {
-    // TODO: skip if same content as before saved
-    this.props.onSave({ content: this.state.content })
+    const content = this.state.content
+    const assets = dom.getAttributes('data-asset-id', content)
+    const draft =
+      assets.length > 0
+        ? {
+            content: trimLineBreaks(content),
+            coverAssetId: assets[0]
+          }
+        : {
+            content: trimLineBreaks(content)
+          }
+    this.props.onSave(draft)
   }
 
   handleChange = (content: string) => {
@@ -160,7 +183,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   public isCustomBlot(blot: any): boolean {
-    const types = ['embedClipboard']
+    const types = ['embedClipboard', 'embedCode', 'embedVideo']
     if (blot && blot.statics && _includes(types, blot.statics.blotName)) {
       return true
     }
@@ -176,7 +199,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { draft, onSave, lang } = this.props
+    const { draft, onSave, lang, upload, uploading } = this.props
     const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
@@ -184,6 +207,10 @@ class Editor extends React.Component<Props, State> {
       container: true,
       'u-area-disable': isPending || isPublished
     })
+
+    if (this.quill) {
+      this.quill.clipboard.addMatcher('IMG', createImageMatcher(upload))
+    }
 
     return (
       <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
@@ -208,6 +235,7 @@ class Editor extends React.Component<Props, State> {
                       onInit: this.onMentionModuleInit
                     }
                   }}
+                  formats={config.foramts}
                   ref={this.reactQuillRef}
                   value={this.state.content}
                   placeholder={translate({
@@ -222,6 +250,8 @@ class Editor extends React.Component<Props, State> {
                 <SideToolbar
                   {...this.state.sideToolbar}
                   quill={this.quill}
+                  upload={upload}
+                  uploading={uploading}
                   onSave={onSave}
                 />
 

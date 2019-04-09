@@ -4,6 +4,7 @@ import { MouseEventHandler } from 'react'
 
 import { Label, Title } from '~/components'
 
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
@@ -24,6 +25,9 @@ const fragments = {
         id
         userName
       }
+      oss {
+        todayCover
+      }
       ...DigestActionsArticle
     }
     ${Actions.fragments.article}
@@ -38,7 +42,15 @@ const FeatureDigest = ({
   article: TodayDigestArticle
   onClick?: MouseEventHandler
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title, summary } = article
+  const {
+    cover,
+    author,
+    slug,
+    mediaHash,
+    title,
+    summary,
+    oss: { todayCover }
+  } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -48,7 +60,8 @@ const FeatureDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash
+    mediaHash,
+    fragment: UrlFragments.COMMENTS
   })
 
   return (
@@ -59,7 +72,9 @@ const FeatureDigest = ({
             <div
               className="cover"
               style={{
-                backgroundImage: `url(${cover || IMAGE_COVER_FALLBACK})`
+                backgroundImage: `url(${todayCover ||
+                  cover ||
+                  IMAGE_COVER_FALLBACK})`
               }}
             />
           </a>

@@ -140,6 +140,7 @@ export default () => (
     query={UNREAD_NOTICE_COUNT}
     pollInterval={POLL_INTERVAL}
     errorPolicy="none"
+    fetchPolicy="network-only"
     skip={!process.browser}
   >
     {({ data: unreadCountData }: QueryResult & { data: UnreadNoticeCount }) => (

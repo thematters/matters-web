@@ -6,6 +6,7 @@ import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { DEFAULT_LANG } from '~/common/enums'
+import { langConvert } from '~/common/utils'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation updateLanguage($input: UpdateUserInfoInput!) {
@@ -64,6 +65,13 @@ export const LanguageProvider = ({
               }
 
               setLang(targetLang)
+
+              if (process.browser) {
+                document.documentElement.setAttribute(
+                  'lang',
+                  langConvert.sys2html(targetLang)
+                )
+              }
             }
           }}
         >
