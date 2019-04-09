@@ -49,6 +49,7 @@ export const modules = {
 }
 
 export const foramts = [
+  // inline
   'bold',
   'code',
   'italic',
@@ -57,11 +58,13 @@ export const foramts = [
   'script',
   'underline',
 
+  // block
   'header',
   'blockquote',
   'list',
   'code-block',
 
+  // custom
   'divider',
   'embedClipboard',
   'embedCode',
