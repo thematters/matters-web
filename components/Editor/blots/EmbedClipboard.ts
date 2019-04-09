@@ -28,8 +28,8 @@ class EmbedClipboard extends BlockEmbed {
     const placeholder =
       value.purpose === 'code'
         ? translate({
-            zh_hant: '貼上 JSFiddle 連結後，Enter 進行新增',
-            zh_hans: '贴上 JSFiddle 链接後，Enter 进行新增',
+            zh_hant: '貼上 JSFiddle、LikeButton 連結後，Enter 進行新增',
+            zh_hans: '贴上 JSFiddle、LikeButton 链接後，Enter 进行新增',
             lang
           })
         : translate({

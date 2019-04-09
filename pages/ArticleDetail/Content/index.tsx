@@ -21,11 +21,30 @@ const fragments = {
 
 const Content = ({ article }: { article: ContentArticle }) => {
   const { id } = article
-  // enter and leave article for analytics
+
   useEffect(() => {
+    // enter and leave article for analytics
     analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
       entrance: id
     })
+
+    // send referrer to likebutton
+    const likeButtonIframe = document.querySelector(
+      '.likebutton iframe'
+    ) as HTMLFrameElement
+    if (likeButtonIframe) {
+      likeButtonIframe.addEventListener('load', () => {
+        if (likeButtonIframe.contentWindow) {
+          likeButtonIframe.contentWindow.postMessage(
+            {
+              action: 'SET_REFERRER',
+              content: { referrer: window.location.href }
+            },
+            'https://button.like.co'
+          )
+        }
+      })
+    }
 
     return () =>
       analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, {

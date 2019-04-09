@@ -74,6 +74,13 @@
       height: 24rem;
     }
   }
+  & :global(figure.embed-code.likebutton) {
+    & > .iframe-container {
+      height: 200px;
+      background: transparent;
+      padding-top: 0;
+    }
+  }
 
   /* Blockquote
    ========================================================================== */
