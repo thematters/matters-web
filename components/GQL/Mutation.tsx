@@ -5,7 +5,7 @@ import { MutationErrorHandler } from './GraphqlErrorHandler'
 
 export const Mutation = ({ children, ...rest }: MutationProps) => (
   <ApolloMutation {...rest}>
-    {(mutateFn, result) => (
+    {(mutateFn: any, result: any) => (
       <MutationErrorHandler result={result} mutateFn={mutateFn}>
         {children}
       </MutationErrorHandler>

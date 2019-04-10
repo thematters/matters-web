@@ -8,7 +8,7 @@ import { QueryErrorHandler } from './GraphqlErrorHandler'
 export const Query = ({ children, ...rest }: QueryProps) => (
   <ErrorBoundary>
     <ApolloQuery errorPolicy="all" {...rest}>
-      {result => (
+      {(result: any) => (
         <QueryErrorHandler result={result}>{children}</QueryErrorHandler>
       )}
     </ApolloQuery>
