@@ -8,6 +8,7 @@ import express from 'express'
 import helmet from 'helmet'
 import 'module-alias/register'
 import next from 'next'
+import path from 'path'
 
 import { ROUTES } from '~/common/enums'
 
@@ -50,8 +51,19 @@ app
       })
     })
 
+    console.log(handle)
+
     // fallback
-    server.get('*', (req, res) => handle(req, res))
+    server.get('*', (req, res) => {
+      // handle GET request to /service-worker.js
+      if (req.path === '/service-worker.js') {
+        const filePath = path.join('build', req.path)
+        console.log(filePath)
+        return app.serveStatic(req, res, filePath)
+      }
+
+      return handle(req, res)
+    })
 
     server.listen(PORT, (err: any) => {
       if (err) {

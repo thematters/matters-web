@@ -13,7 +13,7 @@ const withTypescript = require('@zeit/next-typescript')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
-const ASSET_PREFIX = process.env.ASSET_PREFIX
+const withOffline = require('next-offline')
 
 const nextConfig = {
   /**
@@ -42,7 +42,10 @@ const nextConfig = {
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, { defaultLoaders, isServer }) {
+  webpack(config, {
+    defaultLoaders,
+    isServer
+  }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -62,23 +65,23 @@ const nextConfig = {
      */
     config.module.rules.push({
       test: /\.xml$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: `${ASSET_PREFIX}/_next/static/`,
-            outputPath: `${isServer ? '../' : ''}static/`,
-            name: '[name]-[hash].[ext]'
-          }
+      use: [{
+        loader: 'file-loader',
+        options: {
+          publicPath: '/_next/static/',
+          outputPath: `${isServer ? '../' : ''}static/`,
+          name: '[name]-[hash].[ext]'
         }
-      ]
+      }]
     })
 
     return config
   },
-  exportPathMap: async function(defaultPathMap) {
+  exportPathMap: async function (defaultPathMap) {
     return {
-      '/': { page: '/_error' }
+      '/': {
+        page: '/_error'
+      }
     }
   }
 }
@@ -96,7 +99,9 @@ module.exports = withPlugins(
         optimizeImagesInDev: true,
         inlineImageLimit: 1024,
         svgo: {
-          plugins: [{ removeViewBox: true }]
+          plugins: [{
+            removeViewBox: true
+          }]
         },
         svgSpriteLoader: {}
       }
@@ -124,7 +129,10 @@ module.exports = withPlugins(
           }
         }
       }
-    ]
+    ],
+
+    // offline
+    // withOffline,
   ],
   nextConfig
 )
