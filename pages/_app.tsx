@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import ErrorBoundary from '~/components/ErrorBoundary'
 import { Query } from '~/components/GQL'
-import OfflineSupport from '~/components/OfflineSupport'
 
 import withApollo from '~/common/utils/withApollo'
 
@@ -40,7 +39,6 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
             <ModalProvider>
               <ApolloProvider client={apollo}>
                 <GlobalStyles />
-                <OfflineSupport />
                 <Query query={this.query}>
                   {({
                     data,

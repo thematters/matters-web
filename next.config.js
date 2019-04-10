@@ -36,21 +36,10 @@ const nextConfig = {
    * Build time configs
    */
   env: {},
-  // note: "assetPrefix" is in build time, we also use dynamic assetPrefix in "server.ts"
-  // @see {@url https://github.com/zeit/next.js#dynamic-assetprefix}
-  assetPrefix: process.env.ASSET_PREFIX || '',
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, {
-    defaultLoaders,
-    isServer,
-    buildId,
-    dev,
-    config: {
-      distDir
-    }
-  }) {
+  webpack(config, { defaultLoaders, isServer }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -70,19 +59,21 @@ const nextConfig = {
      */
     config.module.rules.push({
       test: /\.xml$/,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          publicPath: '/_next/static/',
-          outputPath: `${isServer ? '../' : ''}static/`,
-          name: '[name]-[hash].[ext]'
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            publicPath: '/_next/static/',
+            outputPath: `${isServer ? '../' : ''}static/`,
+            name: '[name]-[hash].[ext]'
+          }
         }
-      }]
+      ]
     })
 
     return config
   },
-  exportPathMap: async function (defaultPathMap) {
+  exportPathMap: async function(defaultPathMap) {
     return {
       '/': {
         page: '/_error'
@@ -104,14 +95,15 @@ module.exports = withPlugins(
         optimizeImagesInDev: true,
         inlineImageLimit: 1024,
         svgo: {
-          plugins: [{
-            removeViewBox: true
-          }]
+          plugins: [
+            {
+              removeViewBox: true
+            }
+          ]
         },
         svgSpriteLoader: {}
       }
     ],
-
 
     // output build size
     withSize,
@@ -142,29 +134,28 @@ module.exports = withPlugins(
       withOffline,
       {
         workboxOpts: {
-          // globPatterns: ['static/**/*'],
-          // globDirectory: '.',
-          runtimeCaching: [{
+          runtimeCaching: [
+            {
               urlPattern: '/',
               handler: 'networkFirst',
               options: {
-                cacheName: 'html-cache',
-              },
+                cacheName: 'homepage-cache'
+              }
             },
             {
-              urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+              urlPattern: new RegExp('/_next/static/'),
               handler: 'cacheFirst',
               options: {
-                cacheName: 'image-cache',
+                cacheName: 'static-cache',
                 cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
+                  statuses: [0, 200]
+                }
+              }
+            }
           ]
         }
       }
-    ],
+    ]
   ],
   nextConfig
 )
