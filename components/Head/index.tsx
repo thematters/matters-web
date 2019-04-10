@@ -12,7 +12,7 @@ import IMAGE_INTRO from '~/static/images/intro.jpg'
 import OPENSEARCH from '~/static/opensearach.xml'
 
 const {
-  publicRuntimeConfig: { SITE_DOMAIN }
+  publicRuntimeConfig: { SITE_DOMAIN, FB_APP_ID }
 } = getConfig()
 
 interface HeadProps {
@@ -81,6 +81,8 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       />
 
       {/* social */}
+      <meta property="fb:app_id" content={FB_APP_ID} />
+      <meta name="og:title" key="og:title" content={head.title} />
       <meta property="og:site_name" key="og:site_name" content="Matters" />
       <meta property="og:url" key="og:url" content={head.url} />
       <meta property="og:type" key="og:type" content="website" />
