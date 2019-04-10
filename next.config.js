@@ -29,7 +29,8 @@ const nextConfig = {
     SITE_DOMAIN: process.env.SITE_DOMAIN,
     API_URL: process.env.API_URL,
     WS_URL: process.env.WS_URL,
-    SEGMENT_KEY: process.env.SEGMENT_KEY
+    SEGMENT_KEY: process.env.SEGMENT_KEY,
+    FB_APP_ID: process.env.FB_APP_ID
   },
 
   /**
