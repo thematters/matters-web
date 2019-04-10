@@ -36,15 +36,20 @@ const nextConfig = {
    * Build time configs
    */
   env: {},
-  // note: "assetPrefix" is in build time, we use dynamic assetPrefix in "server.ts"
+  // note: "assetPrefix" is in build time, we also use dynamic assetPrefix in "server.ts"
   // @see {@url https://github.com/zeit/next.js#dynamic-assetprefix}
-  // assetPrefix: isProd && process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '',
+  assetPrefix: process.env.ASSET_PREFIX || '',
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
   webpack(config, {
     defaultLoaders,
-    isServer
+    isServer,
+    buildId,
+    dev,
+    config: {
+      distDir
+    }
   }) {
     /**
      * Styles in regular CSS files
@@ -107,6 +112,7 @@ module.exports = withPlugins(
       }
     ],
 
+
     // output build size
     withSize,
 
@@ -132,7 +138,33 @@ module.exports = withPlugins(
     ],
 
     // offline
-    // withOffline,
+    [
+      withOffline,
+      {
+        workboxOpts: {
+          // globPatterns: ['static/**/*'],
+          // globDirectory: '.',
+          runtimeCaching: [{
+              urlPattern: '/',
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'html-cache',
+              },
+            },
+            {
+              urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+              handler: 'cacheFirst',
+              options: {
+                cacheName: 'image-cache',
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ]
+        }
+      }
+    ],
   ],
   nextConfig
 )

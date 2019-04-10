@@ -51,14 +51,11 @@ app
       })
     })
 
-    console.log(handle)
-
     // fallback
     server.get('*', (req, res) => {
-      // handle GET request to /service-worker.js
       if (req.path === '/service-worker.js') {
         const filePath = path.join('build', req.path)
-        console.log(filePath)
+        res.setHeader('Service-Worker-Allowed', '/')
         return app.serveStatic(req, res, filePath)
       }
 
