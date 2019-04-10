@@ -7,10 +7,9 @@ import { LanguageContext } from '~/components'
 
 import { langConvert, translate } from '~/common/utils'
 import FAVICON_16 from '~/static/favicon-16x16.png?url'
-import FAVICON_192 from '~/static/favicon-192x192.png?url'
 import FAVICON_32 from '~/static/favicon-32x32.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg'
-import OPENSEARCH from '~/static/opensearach.xml'
+import OPENSEARCH from '~/static/opensearch.xml'
 
 const {
   publicRuntimeConfig: { SITE_DOMAIN }
@@ -122,32 +121,11 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       <meta name="twitter:image" key="twitter:image" content={head.image} />
 
       {/* PWA */}
-      <meta name="theme-color" content="#ffffff" key="theme-color" />
+      <meta name="theme-color" key="theme-color" content="#ffffff" />
       <link
-        rel="apple-touch-icon"
-        sizes="192x192"
-        href={FAVICON_192}
-        key="apple-touch-icon"
-      />
-      <meta
-        name="apple-mobile-web-app-title"
-        content="Matters"
-        key="apple-mobile-web-app-title"
-      />
-      <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="white"
-        key="apple-mobile-web-app-status-bar-style"
-      />
-      <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-        key="apple-mobile-web-app-capable"
-      />
-      <meta
-        name="mobile-web-app-capable"
-        content="yes"
-        key="mobile-web-app-capable"
+        rel="manifest"
+        key="manifest"
+        href="/static/manifest/manifest.json"
       />
     </NextHead>
   )
