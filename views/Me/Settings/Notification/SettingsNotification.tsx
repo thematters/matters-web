@@ -123,7 +123,7 @@ const SettingsNotification = () => (
 
       return (
         <Mutation mutation={UPDATE_VIEWER_NOTIFICATION}>
-          {updateNotification => {
+          {(updateNotification: any) => {
             const onChange = (type: string) =>
               updateNotification({
                 variables: {

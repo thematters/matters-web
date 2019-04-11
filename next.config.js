@@ -13,7 +13,7 @@ const withTypescript = require('@zeit/next-typescript')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
-const ASSET_PREFIX = process.env.ASSET_PREFIX
+const withOffline = require('next-offline')
 
 const nextConfig = {
   /**
@@ -37,9 +37,6 @@ const nextConfig = {
    * Build time configs
    */
   env: {},
-  // note: "assetPrefix" is in build time, we use dynamic assetPrefix in "server.ts"
-  // @see {@url https://github.com/zeit/next.js#dynamic-assetprefix}
-  // assetPrefix: isProd && process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '',
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
@@ -67,7 +64,7 @@ const nextConfig = {
         {
           loader: 'file-loader',
           options: {
-            publicPath: `${ASSET_PREFIX}/_next/static/`,
+            publicPath: '/_next/static/',
             outputPath: `${isServer ? '../' : ''}static/`,
             name: '[name]-[hash].[ext]'
           }
@@ -129,6 +126,34 @@ module.exports = withPlugins(
             analyzerMode: 'static',
             reportFilename: './bundles/client.html'
           }
+        }
+      }
+    ],
+
+    // offline
+    [
+      withOffline,
+      {
+        workboxOpts: {
+          runtimeCaching: [
+            {
+              urlPattern: '/',
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'homepage-cache'
+              }
+            },
+            {
+              urlPattern: new RegExp('/_next/static/'),
+              handler: 'cacheFirst',
+              options: {
+                cacheName: 'static-cache',
+                cacheableResponse: {
+                  statuses: [0, 200]
+                }
+              }
+            }
+          ]
         }
       }
     ]
