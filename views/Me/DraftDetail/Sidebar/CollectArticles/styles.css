@@ -1,0 +1,6 @@
+.intro {
+  margin: var(--spacing-tight) 0;
+
+  color: var(--color-grey);
+  font-size: var(--font-size-xs);
+}
