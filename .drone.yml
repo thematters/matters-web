@@ -3,12 +3,12 @@ name: default
 
 steps:
   - name: node modules
-    image: node:10.14
+    image: node:10.15.0
     commands:
       - npm install --no-progress --quiet --unsafe-perm >  npm-install.log
 
   - name: tslint
-    image: node:10.14
+    image: node:10.15.0
     commands:
       - npm run gen:clean # temperally clean
       - npm run gen:type
@@ -16,7 +16,7 @@ steps:
       - npm run format:check
 
   - name: test
-    image: node:10.14
+    image: node:10.15.0
     environment:
       CODECOV_TOKEN: f109cbf6-b6c7-4a08-ad03-981bc4cd1fe8
       MATTERS_ENV: test
@@ -27,7 +27,7 @@ steps:
       - codecov
 
   - name: build
-    image: node:10.14
+    image: node:10.15.0
     commands:
       - npm run build
 
