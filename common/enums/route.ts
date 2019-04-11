@@ -156,12 +156,12 @@ export const ROUTES: Array<{
   // Settings
   {
     key: 'ME_SETTINGS_ACCOUNT',
-    href: '/MeSettings/Account',
+    href: '/MeSettingsAccount',
     as: '/me/settings/account'
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',
-    href: '/MeSettings/Notification',
+    href: '/MeSettingsNotification',
     as: '/me/settings/notification'
   },
 
