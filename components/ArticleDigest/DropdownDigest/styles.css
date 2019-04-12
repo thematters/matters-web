@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  padding: var(--spacing-x-tight) var(--spacing-default) var(--spacing-x-tight)
+    var(--spacing-x-tight);
+
+  & :global(h2) {
+    margin-bottom: var(--spacing-x-tight);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+.arrow {
+  @mixin flex-center-all;
+  position: absolute;
+  right: var(--spacing-x-tight);
+  top: 0;
+  height: 100%;
+}

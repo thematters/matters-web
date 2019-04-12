@@ -59,18 +59,20 @@ const FeedDigest = ({
 
   return (
     <section className="container">
-      <Link {...path}>
-        <div className={contentClasses}>
-          <div className="left">
+      <div className={contentClasses}>
+        <div className="left">
+          <Link {...path}>
             <a>
               <Title type="sidebar" is="h2">
                 {title}
               </Title>
             </a>
-            <Actions article={article} type="sidebar" {...actionControls} />
-          </div>
+          </Link>
+          <Actions article={article} type="sidebar" {...actionControls} />
+        </div>
 
-          {hasCover && cover && (
+        {hasCover && cover && (
+          <Link {...path}>
             <a>
               <div
                 className="cover"
@@ -79,9 +81,9 @@ const FeedDigest = ({
                 }}
               />
             </a>
-          )}
-        </div>
-      </Link>
+          </Link>
+        )}
+      </div>
 
       <style jsx>{styles}</style>
     </section>
