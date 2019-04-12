@@ -1,22 +1,7 @@
 .container {
-  @mixin all-transition;
+  @mixin text-input;
 
   position: relative;
-  padding: var(--spacing-x-tight) var(--spacing-tight);
-
-  font-size: var(--font-size-sm); /* fallbakc */
-  font-size: calc(var(--font-size-sm) + 1px);
-  line-height: 1.5rem;
-
-  background-color: var(--color-grey-lighter);
-  border-top-right-radius: 0.15rem;
-  border-top-left-radius: 0.15rem;
-  border-bottom: 1px solid var(--color-grey-light);
-
-  &.focus {
-    background-color: var(--color-bg-green);
-    border-bottom: 1px solid var(--color-matters-green);
-  }
 
   & :global(.ql-editor) {
     min-height: 4rem;
