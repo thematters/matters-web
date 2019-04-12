@@ -5,14 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import {
-  DateTime,
-  Footer,
-  Head,
-  Placeholder,
-  Title,
-  Translate
-} from '~/components'
+import { DateTime, Head, Placeholder, Title, Translate } from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
@@ -27,6 +20,7 @@ import { getQuery, toPath } from '~/common/utils'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
+import Sidebar from './Sidebar'
 import SideComments from './SideComments'
 import State from './State'
 import styles from './styles.css'
@@ -194,7 +188,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
         </article>
 
         <aside className="l-col-4 l-col-md-6 l-col-lg-4" id="drawer-calc-hook">
-          <Footer />
+          <Sidebar />
         </aside>
 
         <style jsx>{styles}</style>

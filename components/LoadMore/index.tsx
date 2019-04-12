@@ -2,7 +2,13 @@ import { Button, Translate } from '~/components'
 
 import styles from './styles.css'
 
-export const LoadMore = ({ onClick }: { onClick: () => void }) => (
+export const LoadMore = ({
+  onClick,
+  text
+}: {
+  onClick: () => void
+  text?: any
+}) => (
   <div className="container">
     <Button
       bgColor="green-lighter"
@@ -10,7 +16,7 @@ export const LoadMore = ({ onClick }: { onClick: () => void }) => (
       spacing="loose"
       onClick={onClick}
     >
-      <Translate zh_hans="查看更多" zh_hant="查看更多" />
+      {text ? text : <Translate zh_hans="查看更多" zh_hant="查看更多" />}
     </Button>
     <style jsx>{styles}</style>
   </div>
