@@ -1,14 +1,16 @@
 // import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-// import { useContext } from 'react'
 
 import { Translate } from '~/components'
-// import { HeaderContext } from '~/components/GlobalHeader/Context'
+import CollectionEditor from '~/components/CollectionEditor'
 
 import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import styles from './styles.css'
+// import { useContext } from 'react'
+
+// import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 const fragments = {
   draft: gql`
@@ -42,6 +44,8 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
           zh_hans="关联自己或他人的作品，帮助读者更好地发现内容。"
         />
       </p>
+
+      <CollectionEditor />
 
       <style jsx>{styles}</style>
     </Collapsable>

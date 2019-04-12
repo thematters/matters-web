@@ -1,20 +1,33 @@
 .container {
   position: relative;
-  padding: var(--spacing-x-tight) var(--spacing-default) var(--spacing-x-tight)
-    var(--spacing-x-tight);
+
+  &.has-arrow {
+    padding-right: calc(1rem + var(--spacing-xx-tight));
+
+    &:hover,
+    &:focus {
+      & .arrow {
+        display: flex;
+      }
+    }
+  }
 
   & :global(h2) {
-    margin-bottom: var(--spacing-x-tight);
+    @mixin truncate;
+    min-width: 0;
+    margin-bottom: var(--spacing-xx-tight);
 
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
   }
-}
 
-.arrow {
-  @mixin flex-center-all;
-  position: absolute;
-  right: var(--spacing-x-tight);
-  top: 0;
-  height: 100%;
+  & .arrow {
+    @mixin flex-center-all;
+
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+  }
 }

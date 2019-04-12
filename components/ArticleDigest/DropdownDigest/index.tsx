@@ -49,7 +49,7 @@ const DropdownDigest = ({
   })
 
   return (
-    <section className="container">
+    <section className={`container ${hasArrow ? 'has-arrow' : ''}`}>
       <Link {...path}>
         <a>
           <Title type="sidebar" is="h2">
