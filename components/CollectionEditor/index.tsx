@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -56,6 +57,9 @@ const CollectionEditor = ({ articles, onEdit }: CollectionEditorProps) => {
                       ref={dragProvided.innerRef}
                       {...dragProvided.draggableProps}
                       {...dragProvided.dragHandleProps}
+                      className={classNames({
+                        dragging: dragSnapshot.isDragging
+                      })}
                     >
                       <span className="drag-handler" aria-label="拖拽">
                         <Icon
@@ -64,7 +68,9 @@ const CollectionEditor = ({ articles, onEdit }: CollectionEditorProps) => {
                           size="small"
                         />
                       </span>
+
                       <ArticleDigest.Dropdown article={article} hasArrow />
+
                       <button
                         type="button"
                         className="delete-handler"

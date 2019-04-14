@@ -23,6 +23,8 @@ ul {
     & .drag-handler,
     & .delete-handler {
       @mixin flex-center-all;
+      @mixin all-transition;
+
       position: absolute;
       top: 0;
       height: 100%;
@@ -37,7 +39,8 @@ ul {
     }
 
     &:hover,
-    &:focus {
+    &:focus,
+    &.dragging {
       border-color: var(--color-matters-green);
       background: var(--color-bg-green);
     }
