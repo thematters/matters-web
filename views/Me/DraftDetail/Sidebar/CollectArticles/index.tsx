@@ -2,11 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
-import CollectionEditor from '~/components/CollectionEditor'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation, Query } from '~/components/GQL'
 
@@ -14,6 +14,14 @@ import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
 import styles from './styles.css'
+
+const CollectionEditor = dynamic(
+  () => import('~/components/CollectionEditor'),
+  {
+    ssr: false,
+    loading: () => <Spinner />
+  }
+)
 
 const fragments = {
   draft: gql`
