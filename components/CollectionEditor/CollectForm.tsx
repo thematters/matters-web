@@ -18,14 +18,14 @@ import { translate } from '~/common/utils'
 import styles from './styles.css'
 
 interface Props {
-  onSubmit: (id: string) => void
+  onAdd: (articleId: string) => void
 }
 
 const debouncedSetSearch = _debounce((value, setSearch) => {
   setSearch(value)
 }, 300)
 
-const CollectForm: FC<Props> = ({ onSubmit }) => {
+const CollectForm: FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
@@ -49,8 +49,9 @@ const CollectForm: FC<Props> = ({ onSubmit }) => {
         const articles = _get(data, 'search.edges', []).map(
           ({ node }: { node: SearchArticles_search_edges_node_Article }) => node
         )
+        const isShowDropdown = (articles && articles.length) || loading
 
-        if (articles && articles.length) {
+        if (isShowDropdown) {
           showDropdown()
         } else {
           hideDropdown()
@@ -70,7 +71,8 @@ const CollectForm: FC<Props> = ({ onSubmit }) => {
                   onClick={(
                     article: SearchArticles_search_edges_node_Article
                   ) => {
-                    onSubmit(article.id)
+                    onAdd(article.id)
+                    setSearch('')
                     hideDropdown()
                   }}
                 />
@@ -86,6 +88,11 @@ const CollectForm: FC<Props> = ({ onSubmit }) => {
                 onChange={event => {
                   const value = event.target.value
                   debouncedSetSearch(value, setSearch)
+                }}
+                onFocus={() => {
+                  if (isShowDropdown) {
+                    showDropdown()
+                  }
                 }}
               />
             </Dropdown>

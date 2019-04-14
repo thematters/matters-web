@@ -236,7 +236,10 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
           ({ node }: { node: SearchUsers_search_edges_node_User }) => node
         )
 
-        if (users && users.length && !inviteInput.user && !inviteInput.email) {
+        if (
+          (users && users.length && !inviteInput.user && !inviteInput.email) ||
+          loading
+        ) {
           showDropdown()
         } else {
           hideDropdown()
@@ -273,6 +276,7 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                         content={
                           <UserList
                             users={users}
+                            loading={loading}
                             onClick={(
                               user: SearchUsers_search_edges_node_User
                             ) => {

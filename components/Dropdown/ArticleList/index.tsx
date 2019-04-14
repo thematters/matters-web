@@ -17,7 +17,7 @@ const DropdownArticleList = ({
   if (loading) {
     return (
       <Menu width="100%">
-        <Menu.Item>
+        <Menu.Item style={{ width: '20rem' }}>
           <Spinner />
         </Menu.Item>
       </Menu>
@@ -31,6 +31,7 @@ const DropdownArticleList = ({
           <Menu.Item
             spacing={['xtight', 'tight']}
             hoverBgColor="green"
+            style={{ width: '20rem' }}
             key={article.id}
           >
             <button

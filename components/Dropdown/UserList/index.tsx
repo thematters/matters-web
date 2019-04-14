@@ -17,7 +17,7 @@ const DropdownUserList = ({
   if (loading) {
     return (
       <Menu width="100%">
-        <Menu.Item>
+        <Menu.Item style={{ width: '20rem' }}>
           <Spinner />
         </Menu.Item>
       </Menu>
@@ -31,6 +31,7 @@ const DropdownUserList = ({
           <Menu.Item
             spacing={['xtight', 'tight']}
             hoverBgColor="green"
+            style={{ width: '20rem' }}
             key={user.id}
           >
             <button

@@ -29,5 +29,7 @@
     right: 0;
     top: 0;
     height: 100%;
+
+    pointer-events: initial;
   }
 }

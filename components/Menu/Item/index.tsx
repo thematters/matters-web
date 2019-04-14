@@ -9,6 +9,7 @@ interface MenuItemProps {
   spacing?: [MenuItemSpacing, MenuItemSpacing]
   hoverBgColor?: 'green' | 'grey'
 
+  style?: React.CSSProperties
   className?: string
 }
 
@@ -16,6 +17,7 @@ const Item: React.FC<MenuItemProps> = ({
   spacing = ['xtight', 'default'],
   hoverBgColor = 'grey',
 
+  style,
   children
 }) => {
   const itemClasses = classNames({
@@ -26,7 +28,7 @@ const Item: React.FC<MenuItemProps> = ({
   })
 
   return (
-    <li className={itemClasses} role="menuitem">
+    <li className={itemClasses} style={style} role="menuitem">
       {children}
       <style jsx>{styles}</style>
     </li>

@@ -54,7 +54,7 @@
     & .hint {
       flex-shrink: 0;
     }
-    & .tag {
+    & .keyword {
       margin-left: var(--spacing-xx-tight);
       color: var(--color-grey);
     }

@@ -96,7 +96,7 @@ const DropdownContent = ({
             <span className="hint">
               <Translate zh_hant="創建" zh_hans="创建" />
             </span>
-            <span className="tag">{search}</span>
+            <span className="keyword">{search}</span>
           </button>
         </Menu.Item>
       </Menu>
