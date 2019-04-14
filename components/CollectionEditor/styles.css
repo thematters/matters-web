@@ -4,8 +4,6 @@ input {
 
 ul {
   & li {
-    @mixin all-transition;
-
     position: relative;
 
     padding: var(--spacing-x-tight);
@@ -15,6 +13,7 @@ ul {
     border-radius: 2px;
     background: var(--color-white);
     box-shadow: var(--shadow-light);
+    /* transition: background, border 0.2s ease-in-out; */
 
     & :global(a) {
       pointer-events: none;

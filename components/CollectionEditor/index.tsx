@@ -1,5 +1,12 @@
 import classNames from 'classnames'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import _isEqual from 'lodash/isEqual'
+import React from 'react'
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult
+} from 'react-beautiful-dnd'
 
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
@@ -11,89 +18,139 @@ import ICON_DRAG from '~/static/icons/drag.svg?sprite'
 import CollectForm from './CollectForm'
 import styles from './styles.css'
 
-interface CollectionEditorProps {
+interface State {
+  articles: DropdownDigestArticle[]
+  prevArticleIds: string[]
+}
+
+interface Props {
   articles: DropdownDigestArticle[]
   onEdit: (articleIds: string[]) => void
 }
 
-const CollectionEditor = ({ articles, onEdit }: CollectionEditorProps) => {
-  const onAdd = (articleId: string) => {
-    const prevArticleIds = articles.map(({ id }) => id)
-    onEdit([...prevArticleIds, articleId])
-  }
-  //  const applyDrag = (arr, dragResult) => {
-  //   const { removedIndex, addedIndex, payload } = dragResult;
-  //   if (removedIndex === null && addedIndex === null) return arr;
+const reorder = (list: any[], startIndex: number, endIndex: number) => {
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
 
-  //   const result = [...arr];
-  //   let itemToAdd = payload;
+  return result
+}
 
-  //   if (removedIndex !== null) {
-  //     itemToAdd = result.splice(removedIndex, 1)[0];
-  //   }
+class CollectionEditor extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props)
 
-  //   if (addedIndex !== null) {
-  //     result.splice(addedIndex, 0, itemToAdd);
-  //   }
-
-  //   return result;
-  // };
-  const onDragEnd = () => {
-    console.log('')
+    this.state = {
+      articles: this.props.articles,
+      prevArticleIds: this.props.articles.map(({ id }) => id)
+    }
   }
 
-  return (
-    <>
-      <CollectForm onAdd={onAdd} />
+  componentDidUpdate() {
+    const { prevArticleIds } = this.state
+    const articleIds = this.props.articles.map(({ id }) => id)
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable-1">
-          {(dropProvided, dropSnapshot) => (
-            <ul ref={dropProvided.innerRef} {...dropProvided.droppableProps}>
-              {articles.map((article, index) => (
-                <Draggable draggableId={article.id} index={index}>
-                  {(dragProvided, dragSnapshot) => (
-                    <li
-                      ref={dragProvided.innerRef}
-                      {...dragProvided.draggableProps}
-                      {...dragProvided.dragHandleProps}
-                      className={classNames({
-                        dragging: dragSnapshot.isDragging
-                      })}
-                    >
-                      <span className="drag-handler" aria-label="拖拽">
-                        <Icon
-                          id={ICON_DRAG.id}
-                          viewBox={ICON_DRAG.viewBox}
-                          size="small"
-                        />
-                      </span>
+    if (_isEqual(prevArticleIds, articleIds)) {
+      return
+    }
 
-                      <ArticleDigest.Dropdown article={article} hasArrow />
+    this.setState({ articles: this.props.articles, prevArticleIds: articleIds })
+  }
 
-                      <button
-                        type="button"
-                        className="delete-handler"
-                        aria-label="刪除"
+  onAdd = (articleId: string) => {
+    const prevArticleIds = this.state.articles.map(({ id }) => id)
+    this.props.onEdit([...prevArticleIds, articleId])
+  }
+
+  onDelete = (articleId: string) => {
+    const prevArticleIds = this.state.articles.map(({ id }) => id)
+    this.props.onEdit(prevArticleIds.filter(id => id !== articleId))
+  }
+
+  onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+
+    const sourceIndex = result.source.index
+    const destinationIndex = result.destination.index
+
+    if (sourceIndex === destinationIndex) {
+      return
+    }
+
+    const newItems = reorder(
+      this.state.articles,
+      result.source.index,
+      result.destination.index
+    )
+    this.setState({ articles: newItems })
+    this.props.onEdit(newItems.map(({ id }) => id))
+  }
+
+  render() {
+    const { articles } = this.state
+
+    return (
+      <>
+        <CollectForm onAdd={this.onAdd} />
+
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable-1">
+            {(dropProvided, dropSnapshot) => (
+              <ul ref={dropProvided.innerRef} {...dropProvided.droppableProps}>
+                {articles.map((article, index) => (
+                  <Draggable
+                    draggableId={article.id}
+                    index={index}
+                    key={article.id}
+                  >
+                    {(dragProvided, dragSnapshot) => (
+                      <li
+                        ref={dragProvided.innerRef}
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        className={classNames({
+                          dragging: dragSnapshot.isDragging
+                        })}
                       >
-                        <Icon
-                          id={ICON_DELETE_BLACK_CIRCLE.id}
-                          viewBox={ICON_DELETE_BLACK_CIRCLE.viewBox}
-                          size="small"
-                        />
-                      </button>
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
+                        <span className="drag-handler" aria-label="拖拽">
+                          <Icon
+                            id={ICON_DRAG.id}
+                            viewBox={ICON_DRAG.viewBox}
+                            size="small"
+                          />
+                        </span>
 
-      <style jsx>{styles}</style>
-    </>
-  )
+                        <ArticleDigest.Dropdown article={article} hasArrow />
+
+                        <button
+                          type="button"
+                          className="delete-handler"
+                          aria-label="刪除"
+                          onClick={() => this.onDelete(article.id)}
+                        >
+                          <Icon
+                            id={ICON_DELETE_BLACK_CIRCLE.id}
+                            viewBox={ICON_DELETE_BLACK_CIRCLE.viewBox}
+                            size="small"
+                          />
+                        </button>
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+
+                {dropProvided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+        <style jsx>{styles}</style>
+      </>
+    )
+  }
 }
 
 export default CollectionEditor
