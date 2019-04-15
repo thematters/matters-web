@@ -15,6 +15,8 @@ const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
 const withOffline = require('next-offline')
 
+const packageJson = require('./package.json')
+
 const nextConfig = {
   /**
    * Runtime configs
@@ -36,11 +38,16 @@ const nextConfig = {
   /**
    * Build time configs
    */
-  env: {},
+  env: {
+    app_version: packageJson.version
+  },
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, { defaultLoaders, isServer }) {
+  webpack(config, {
+    defaultLoaders,
+    isServer
+  }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -60,21 +67,19 @@ const nextConfig = {
      */
     config.module.rules.push({
       test: /\.xml$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next/static/',
-            outputPath: `${isServer ? '../' : ''}static/`,
-            name: '[name]-[hash].[ext]'
-          }
+      use: [{
+        loader: 'file-loader',
+        options: {
+          publicPath: '/_next/static/',
+          outputPath: `${isServer ? '../' : ''}static/`,
+          name: '[name]-[hash].[ext]'
         }
-      ]
+      }]
     })
 
     return config
   },
-  exportPathMap: async function(defaultPathMap) {
+  exportPathMap: async function (defaultPathMap) {
     return {
       '/': {
         page: '/_error'
@@ -96,11 +101,9 @@ module.exports = withPlugins(
         optimizeImagesInDev: true,
         inlineImageLimit: 1024,
         svgo: {
-          plugins: [
-            {
-              removeViewBox: true
-            }
-          ]
+          plugins: [{
+            removeViewBox: true
+          }]
         },
         svgSpriteLoader: {}
       }
@@ -135,8 +138,7 @@ module.exports = withPlugins(
       withOffline,
       {
         workboxOpts: {
-          runtimeCaching: [
-            {
+          runtimeCaching: [{
               urlPattern: '/',
               handler: 'networkFirst',
               options: {

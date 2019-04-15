@@ -15,6 +15,7 @@ import { LanguageContext } from '~/components/Language'
 import { ERROR_CODES, PATHS } from '~/common/enums'
 import {
   analytics,
+  clearPersistCache,
   isValidDisplayName,
   isValidEmail,
   isValidStrictPassword,
@@ -386,6 +387,7 @@ export const SignUpInitForm: FC<Props> = ({
         .then((result: any) => {
           if (submitCallback) {
             submitCallback()
+            clearPersistCache()
           }
         })
         .catch(({ graphQLErrors: error }: any) => {
