@@ -1,0 +1,68 @@
+input {
+  @mixin text-input;
+}
+
+ul {
+  & li {
+    position: relative;
+
+    padding: var(--spacing-x-tight);
+    margin: var(--spacing-tight) var(--spacing-tight) 0 var(--spacing-tight);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    background: var(--color-white);
+    box-shadow: var(--shadow-light);
+    /* transition: background, border 0.2s ease-in-out; */
+
+    & :global(a) {
+      pointer-events: none;
+    }
+
+    & .drag-handler,
+    & .delete-handler {
+      @mixin flex-center-all;
+      @mixin all-transition;
+
+      position: absolute;
+      top: 0;
+      height: 100%;
+    }
+    & .drag-handler {
+      padding-right: var(--spacing-x-tight);
+      right: 100%;
+    }
+    & .delete-handler {
+      padding-left: var(--spacing-x-tight);
+      left: 100%;
+    }
+
+    &:hover,
+    &:focus,
+    &.dragging {
+      border-color: var(--color-matters-green);
+      background: var(--color-bg-green);
+    }
+
+    @media (--sm-up) {
+      margin-right: 0;
+      margin-left: 0;
+
+      & .drag-handler,
+      & .delete-handler {
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-matters-green);
+        background: var(--color-bg-green);
+
+        & .drag-handler,
+        & .delete-handler {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

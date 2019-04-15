@@ -1,17 +1,17 @@
+import { ArticleDigest } from '~/components/ArticleDigest'
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { Menu } from '~/components/Menu'
 import { Spinner } from '~/components/Spinner'
-import { UserDigest } from '~/components/UserDigest'
-import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
 
 import styles from './styles.css'
 
-const DropdownUserList = ({
-  users,
+const DropdownArticleList = ({
+  articles,
   onClick,
   loading
 }: {
-  users: UserDigestBriefDescUser[]
-  onClick: (user: UserDigestBriefDescUser) => void
+  articles: DropdownDigestArticle[]
+  onClick: (article: DropdownDigestArticle) => void
   loading?: boolean
 }) => {
   if (loading) {
@@ -27,21 +27,21 @@ const DropdownUserList = ({
   return (
     <>
       <Menu width="100%">
-        {users.map(user => (
+        {articles.map(article => (
           <Menu.Item
             spacing={['xtight', 'tight']}
             hoverBgColor="green"
             style={{ width: '20rem' }}
-            key={user.id}
+            key={article.id}
           >
             <button
-              className="search-user-item"
+              className="search-article-item"
               type="button"
               onClick={() => {
-                onClick(user)
+                onClick(article)
               }}
             >
-              <UserDigest.BriefDesc user={user} />
+              <ArticleDigest.Dropdown article={article} hasArrow />
             </button>
           </Menu.Item>
         ))}
@@ -51,4 +51,4 @@ const DropdownUserList = ({
   )
 }
 
-export default DropdownUserList
+export default DropdownArticleList
