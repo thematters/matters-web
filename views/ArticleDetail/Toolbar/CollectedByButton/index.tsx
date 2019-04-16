@@ -8,17 +8,17 @@ import { Popover, PopperInstance } from '~/components/Popper'
 
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 
-import { AritlceCollectedBy_node_Article_collectedBy_edges } from './__generated__/AritlceCollectedBy'
 import {
-  CollectedByAritcle,
-  CollectedByAritcle_collectedBy
-} from './__generated__/CollectedByAritcle'
+  CollectedByArticle,
+  CollectedByArticle_collectedBy,
+  CollectedByArticle_collectedBy_edges
+} from './__generated__/CollectedByArticle'
 import styles from './styles.css'
 
 const CollectedBy = ({
   collectedBy
 }: {
-  collectedBy: CollectedByAritcle_collectedBy
+  collectedBy: CollectedByArticle_collectedBy
 }) => (
   <div className="container">
     <div className="container-title">
@@ -27,7 +27,7 @@ const CollectedBy = ({
     <div>
       {collectedBy.edges &&
         collectedBy.edges.map(
-          ({ node }: AritlceCollectedBy_node_Article_collectedBy_edges) => (
+          ({ node }: CollectedByArticle_collectedBy_edges) => (
             <div>
               <hr />
               <div className="article-digest">
@@ -45,7 +45,7 @@ const CollectedByButton = ({
   article,
   popperPlacement = 'right'
 }: {
-  article: CollectedByAritcle
+  article: CollectedByArticle
   popperPlacement?: 'right' | 'top'
 }) => {
   if (
