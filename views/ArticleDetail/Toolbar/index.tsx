@@ -5,6 +5,7 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 
 import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import Appreciators from './Appreciators'
+import CollectedByButton from './CollectedByButton'
 import CommentButton from './CommentButton'
 import MATButton from './MATButton'
 import MoreButton from './MoreButton'
@@ -20,12 +21,14 @@ const fragments = {
       ...BookmarkArticle
       ...CommentButtonArticle
       ...MoreButtonArticle
+      ...CollectedByArticle
     }
     ${MATButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
     ${CommentButton.fragments.article}
     ${MoreButton.fragments.article}
+    ${CollectedByButton.fragments.article}
   `
 }
 
@@ -42,6 +45,7 @@ const Toolbar = ({
         <div className="container">
           <MATButton article={article} />
           <CommentButton article={article} textPlacement="bottom" />
+          <CollectedByButton article={article} />
           <BookmarkButton article={article} size="default" />
           <ShareButton />
         </div>
@@ -58,6 +62,7 @@ const Toolbar = ({
       </section>
       <section className="right">
         <CommentButton article={article} />
+        <CollectedByButton article={article} popperPlacement="top" />
         <BookmarkButton article={article} size="default" />
         <ShareButton />
         <MoreButton article={article} />

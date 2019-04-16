@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
@@ -37,6 +37,8 @@ const MUTATION_PUBLISH_ARTICLE = gql`
 `
 
 export const PublishModal: FC<Props> = ({ close, draftId }) => {
+  const [hasClicked, setClicked] = useState(false)
+
   const publishArticle = (publish: any) => {
     if (!publish) {
       return undefined
@@ -82,7 +84,9 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
           {publish => (
             <button
               className="publish"
+              disabled={hasClicked}
               onClick={() => {
+                setClicked(true)
                 publishArticle(publish)
               }}
             >
