@@ -7,7 +7,7 @@ import Item from './Item'
 import styles from './styles.css'
 
 interface MenuProps {
-  width?: '168px' | '100%'
+  width?: 'sm' | 'full' | 'md'
   spacing?: '0' | 'xxxtight' | 'xxtight'
 
   style?: React.CSSProperties
@@ -21,7 +21,7 @@ export class Menu extends React.PureComponent<MenuProps> {
 
   public render() {
     const {
-      width = '168px',
+      width = 'sm',
       spacing = 'xxtight',
       className,
       style,
@@ -30,13 +30,14 @@ export class Menu extends React.PureComponent<MenuProps> {
 
     const menuClasses = classNames({
       menu: true,
+      [`width-${width}`]: true,
       [`spacing-${spacing}`]: true,
       [className || '']: !!className
     })
 
     return (
       <>
-        <ul className={menuClasses} style={{ width, ...style }} role="menu">
+        <ul className={menuClasses} style={style} role="menu">
           {children}
         </ul>
         <style jsx>{styles}</style>

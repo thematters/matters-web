@@ -16,8 +16,8 @@ const DropdownUserList = ({
 }) => {
   if (loading) {
     return (
-      <Menu width="100%">
-        <Menu.Item style={{ width: '20rem' }}>
+      <Menu width="md">
+        <Menu.Item>
           <Spinner />
         </Menu.Item>
       </Menu>
@@ -26,12 +26,11 @@ const DropdownUserList = ({
 
   return (
     <>
-      <Menu width="100%">
+      <Menu width="md">
         {users.map(user => (
           <Menu.Item
             spacing={['xtight', 'tight']}
             hoverBgColor="green"
-            style={{ width: '20rem' }}
             key={user.id}
           >
             <button

@@ -21,22 +21,20 @@ const CollectedBy = ({
   collectedBy: CollectedByArticle_collectedBy
 }) => (
   <div className="container">
-    <div className="container-title">
+    <h3>
       <Translate zh_hant="關聯了本文的作品" zh_hans="关联了本文的作品" />
-    </div>
-    <div>
+    </h3>
+
+    <ul>
       {collectedBy.edges &&
         collectedBy.edges.map(
           ({ node }: CollectedByArticle_collectedBy_edges) => (
-            <div>
-              <hr />
-              <div className="article-digest">
-                <ArticleDigest.Dropdown article={node} />
-              </div>
-            </div>
+            <li>
+              <ArticleDigest.Dropdown article={node} />
+            </li>
           )
         )}
-    </div>
+    </ul>
     <style jsx>{styles}</style>
   </div>
 )

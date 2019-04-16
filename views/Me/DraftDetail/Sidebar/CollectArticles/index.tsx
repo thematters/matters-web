@@ -40,7 +40,7 @@ const DRAFT_COLLECTION = gql`
     node(input: { id: $id }) {
       id
       ... on Draft {
-        collection(input: { first: 20 }) {
+        collection(input: { first: null }) {
           edges {
             node {
               ...DropdownDigestArticle
@@ -57,7 +57,7 @@ const SET_DRAFT_COLLECTION = gql`
   mutation SetDraftCollection($id: ID!, $collection: [ID]) {
     putDraft(input: { id: $id, collection: $collection }) {
       id
-      collection(input: { first: 20 }) {
+      collection(input: { first: null }) {
         edges {
           node {
             ...DropdownDigestArticle
@@ -110,7 +110,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
 
   return (
     <Collapsable
-      title={<Translate zh_hans="關聯" zh_hant="关联" />}
+      title={<Translate zh_hant="關聯" zh_hans="关联" />}
       defaultCollapsed={draft.collection.totalCount <= 0}
     >
       <p className="intro">

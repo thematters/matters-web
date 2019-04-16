@@ -269,7 +269,6 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                   return (
                     <form className={formClass} onSubmit={handleSubmit}>
                       <Dropdown
-                        maxWidth="20rem"
                         trigger="manual"
                         placement="bottom-start"
                         onCreate={setInstance}

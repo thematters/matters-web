@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  text-align: left;
 
   &.has-arrow {
     padding-right: calc(1rem + var(--spacing-xx-tight));

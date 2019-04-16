@@ -78,7 +78,7 @@
 
     & .input-container {
       margin-right: var(--spacing-tight);
-      width: 20rem;
+      width: var(--sizing-menu-md);
     }
   }
 }

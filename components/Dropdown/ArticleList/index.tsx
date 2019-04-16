@@ -16,8 +16,8 @@ const DropdownArticleList = ({
 }) => {
   if (loading) {
     return (
-      <Menu width="100%">
-        <Menu.Item style={{ width: '20rem' }}>
+      <Menu width="md">
+        <Menu.Item>
           <Spinner />
         </Menu.Item>
       </Menu>
@@ -26,12 +26,11 @@ const DropdownArticleList = ({
 
   return (
     <>
-      <Menu width="100%">
+      <Menu width="md">
         {articles.map(article => (
           <Menu.Item
             spacing={['xtight', 'tight']}
             hoverBgColor="green"
-            style={{ width: '20rem' }}
             key={article.id}
           >
             <button
