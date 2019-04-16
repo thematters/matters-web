@@ -1,4 +1,4 @@
-FROM node:10.15
+FROM node:10.15.3
 
 # install os level packages
 RUN apt-get update && apt-get -y install \
