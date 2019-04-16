@@ -13,6 +13,7 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { ANALYTICS_EVENTS, ERROR_CODES, PATHS } from '~/common/enums'
 import {
   analytics,
+  clearPersistCache,
   isValidEmail,
   redirectToTarget,
   translate
@@ -203,7 +204,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         return undefined
       }
       submitAction({ variables: { input: { email, password } } })
-        .then((result: any) => {
+        .then(async (result: any) => {
           if (submitCallback) {
             submitCallback()
           }
@@ -217,6 +218,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           )
           analytics.identifyUser()
           analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
+
+          await clearPersistCache()
           redirectToTarget()
         })
         .catch(({ graphQLErrors: error }: any) => {

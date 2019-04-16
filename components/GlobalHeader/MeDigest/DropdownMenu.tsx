@@ -10,7 +10,13 @@ import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
-import { analytics, redirectToTarget, toPath, translate } from '~/common/utils'
+import {
+  analytics,
+  clearPersistCache,
+  redirectToTarget,
+  toPath,
+  translate
+} from '~/common/utils'
 import ICON_GIFT from '~/static/icons/gift.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
 import ICON_MAT_BLACK from '~/static/icons/mat-black.svg?sprite'
@@ -162,6 +168,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                   analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
                     id: viewer.id
                   })
+                  await clearPersistCache()
                   redirectToTarget()
                 } catch (e) {
                   window.dispatchEvent(
