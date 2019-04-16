@@ -102,7 +102,7 @@ CollectedByButton.fragments = {
   article: gql`
     fragment CollectedByArticle on Article {
       id
-      collectedBy(input: {}) {
+      collectedBy(input: { first: null }) {
         edges {
           node {
             id
