@@ -1,0 +1,19 @@
+.container {
+  width: 20.5rem;
+  max-height: 30.5rem;
+}
+
+.container-title {
+  height: 3.5rem;
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.article-digest {
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
