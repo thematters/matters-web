@@ -49,7 +49,6 @@ const DropdownDigest = ({
     return null
   }
 
-  console.log(disabled)
   const path = toPath({
     page: 'articleDetail',
     userName: author.userName,
