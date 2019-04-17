@@ -29,7 +29,7 @@ const CollectedBy = ({
       {collectedBy.edges &&
         collectedBy.edges.map(
           ({ node }: CollectedByArticle_collectedBy_edges) => (
-            <li>
+            <li key={node.id}>
               <ArticleDigest.Dropdown article={node} />
             </li>
           )
@@ -72,11 +72,9 @@ const CollectedByButton = ({
 
   return (
     <Popover
-      arrow={true}
-      zIndex={101}
+      arrow
       trigger="manual"
       onCreate={setInstance}
-      offset="40,0"
       content={<CollectedBy collectedBy={article.collectedBy} />}
       placement={popperPlacement}
     >
