@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const ToastHolder: FC<Props> = ({
-  layoutClasses = 'l-col-4 l-col-md-5 l-col-lg-8'
+  layoutClasses = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
 }) => {
   const [toasts, setToasts] = useState<any[]>([])
 

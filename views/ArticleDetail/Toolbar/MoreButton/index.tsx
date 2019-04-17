@@ -68,7 +68,6 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
       trigger="click"
       onCreate={setInstance}
       placement="bottom-end"
-      zIndex={301}
     >
       <button type="button" aria-label="更多操作">
         <Icon

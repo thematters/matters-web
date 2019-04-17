@@ -1,5 +1,5 @@
 .container {
-  width: 20.5rem;
+  width: var(--sizing-menu-md);
 
   text-align: initial;
 }

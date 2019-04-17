@@ -1,5 +1,5 @@
 :root {
-  --search-bar-width: 20rem;
+  --search-bar-width: var(--sizing-menu-md);
   --search-bar-height: 2.25rem;
   --search-bar-button-width: 2.5rem;
 }

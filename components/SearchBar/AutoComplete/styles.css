@@ -1,5 +1,5 @@
 .container {
-  width: 20rem;
+  width: var(--sizing-menu-md);
 }
 
 .clear-history-btn {

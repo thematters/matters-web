@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  text-align: left;
 
   &.has-arrow {
     padding-right: calc(1rem + var(--spacing-xx-tight));
@@ -31,5 +32,15 @@
     height: 100%;
 
     pointer-events: initial;
+  }
+}
+
+.content {
+  &.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.disabled {
+    pointer-events: none;
   }
 }

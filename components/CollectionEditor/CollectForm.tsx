@@ -60,7 +60,6 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
         return (
           <>
             <Dropdown
-              maxWidth="20rem"
               trigger="manual"
               placement="bottom-start"
               onCreate={setInstance}

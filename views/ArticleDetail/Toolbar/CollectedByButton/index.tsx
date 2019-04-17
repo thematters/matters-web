@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
-import { Popover, PopperInstance } from '~/components/Popper'
+import { Popover } from '~/components/Popper'
 
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 
@@ -21,22 +20,20 @@ const CollectedBy = ({
   collectedBy: CollectedByArticle_collectedBy
 }) => (
   <div className="container">
-    <div className="container-title">
+    <h3>
       <Translate zh_hant="關聯了本文的作品" zh_hans="关联了本文的作品" />
-    </div>
-    <div>
+    </h3>
+
+    <ul>
       {collectedBy.edges &&
         collectedBy.edges.map(
           ({ node }: CollectedByArticle_collectedBy_edges) => (
-            <div>
-              <hr />
-              <div className="article-digest">
-                <ArticleDigest.Dropdown article={node} />
-              </div>
-            </div>
+            <li key={node.id}>
+              <ArticleDigest.Dropdown article={node} hasArchivedTooltip />
+            </li>
           )
         )}
-    </div>
+    </ul>
     <style jsx>{styles}</style>
   </div>
 )
@@ -56,38 +53,14 @@ const CollectedByButton = ({
     return null
   }
 
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const toggleDropdown = () => {
-    if (!instance) {
-      return
-    }
-    if (
-      instance.state.isMounted ||
-      instance.state.isShown ||
-      instance.state.isVisible
-    ) {
-      instance.hide()
-    } else {
-      instance.show()
-    }
-  }
-
   return (
     <Popover
-      arrow={true}
-      zIndex={101}
-      trigger="manual"
-      onCreate={setInstance}
+      trigger="click"
       offset="40,0"
       content={<CollectedBy collectedBy={article.collectedBy} />}
       placement={popperPlacement}
     >
-      <button
-        type="button"
-        onClick={() => {
-          toggleDropdown()
-        }}
-      >
+      <button type="button">
         <Icon
           size="default"
           id={ICON_DIRECTION.id}

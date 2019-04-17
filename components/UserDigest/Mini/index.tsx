@@ -40,7 +40,7 @@ const fragments = {
 const Mini = ({
   user,
   avatarSize = 'xxsmall',
-  textSize = 'xsmall',
+  textSize = 'small',
   textWeight = 'normal',
   spacing = 'xtight'
 }: MiniProps) => {

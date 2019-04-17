@@ -30,12 +30,6 @@
   justify-content: space-between;
 }
 
-@define-mixin flex-center-space-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 

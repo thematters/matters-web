@@ -9,7 +9,7 @@
 .mention-container {
   position: absolute;
 
-  width: 20rem;
+  width: var(--sizing-menu-md);
   visibility: hidden;
 
   color: var(--color-black);

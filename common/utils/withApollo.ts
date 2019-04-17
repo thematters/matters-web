@@ -10,7 +10,10 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import { inMemoryCache, setupPersistCache } from './cache'
+import {
+  inMemoryCache
+  // setupPersistCache
+} from './cache'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -87,7 +90,7 @@ const authLink = setContext((_, { headers }) => {
 export default withApollo(({ ctx, headers, initialState }) => {
   inMemoryCache.restore(initialState || {})
 
-  setupPersistCache()
+  // setupPersistCache()
 
   return new ApolloClient({
     link: ApolloLink.from([errorLink, authLink, dataLink({ headers })]),
