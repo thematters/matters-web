@@ -122,7 +122,11 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           />
                         </span>
 
-                        <ArticleDigest.Dropdown article={article} hasArrow />
+                        <ArticleDigest.Dropdown
+                          article={article}
+                          hasArrow
+                          disabled
+                        />
 
                         <button
                           type="button"

@@ -29,7 +29,7 @@ const CollectedBy = ({
         collectedBy.edges.map(
           ({ node }: CollectedByArticle_collectedBy_edges) => (
             <li key={node.id}>
-              <ArticleDigest.Dropdown article={node} />
+              <ArticleDigest.Dropdown article={node} hasArchivedTooltip />
             </li>
           )
         )}
@@ -55,7 +55,6 @@ const CollectedByButton = ({
 
   return (
     <Popover
-      arrow
       trigger="click"
       offset="40,0"
       content={<CollectedBy collectedBy={article.collectedBy} />}

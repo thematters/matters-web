@@ -34,3 +34,13 @@
     pointer-events: initial;
   }
 }
+
+.content {
+  &.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.disabled {
+    pointer-events: none;
+  }
+}

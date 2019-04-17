@@ -198,7 +198,12 @@ const CollectionList = ({
                     })
                   }
                 >
-                  <ArticleDigest.Sidebar article={node} hasCover hasAuthor />
+                  <ArticleDigest.Sidebar
+                    article={node}
+                    hasCover
+                    hasAuthor
+                    hasArchivedTooltip
+                  />
                 </li>
               )
             )}

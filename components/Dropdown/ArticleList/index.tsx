@@ -40,7 +40,7 @@ const DropdownArticleList = ({
                 onClick(article)
               }}
             >
-              <ArticleDigest.Dropdown article={article} hasArrow />
+              <ArticleDigest.Dropdown article={article} hasArrow disabled />
             </button>
           </Menu.Item>
         ))}
