@@ -57,6 +57,7 @@ const CollectedByButton = ({
     <Popover
       arrow
       trigger="click"
+      offset="40,0"
       content={<CollectedBy collectedBy={article.collectedBy} />}
       placement={popperPlacement}
     >
