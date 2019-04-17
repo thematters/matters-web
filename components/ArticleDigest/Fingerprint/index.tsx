@@ -176,6 +176,7 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
         }
       }}
       offset="100,0"
+      trigger="click"
       content={
         <FingerprintContent
           gateways={gateways}

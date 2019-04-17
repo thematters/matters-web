@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
-import { Popover, PopperInstance } from '~/components/Popper'
+import { Popover } from '~/components/Popper'
 
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 
@@ -54,36 +53,14 @@ const CollectedByButton = ({
     return null
   }
 
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const toggleDropdown = () => {
-    if (!instance) {
-      return
-    }
-    if (
-      instance.state.isMounted ||
-      instance.state.isShown ||
-      instance.state.isVisible
-    ) {
-      instance.hide()
-    } else {
-      instance.show()
-    }
-  }
-
   return (
     <Popover
       arrow
-      trigger="manual"
-      onCreate={setInstance}
+      trigger="click"
       content={<CollectedBy collectedBy={article.collectedBy} />}
       placement={popperPlacement}
     >
-      <button
-        type="button"
-        onClick={() => {
-          toggleDropdown()
-        }}
-      >
+      <button type="button">
         <Icon
           size="default"
           id={ICON_DIRECTION.id}

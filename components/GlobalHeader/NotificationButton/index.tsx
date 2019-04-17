@@ -75,20 +75,6 @@ const NoticeButton = ({
     }
     instance.hide()
   }
-  const toggleDropdown = () => {
-    if (!instance) {
-      return
-    }
-    if (
-      instance.state.isMounted ||
-      instance.state.isShown ||
-      instance.state.isVisible
-    ) {
-      instance.hide()
-    } else {
-      instance.show()
-    }
-  }
 
   const { headerState } = useContext(HeaderContext)
   const isDraft = headerState.type === 'draft'
@@ -110,7 +96,7 @@ const NoticeButton = ({
       }
       zIndex={101}
       distance={12}
-      trigger="manual"
+      trigger="click"
       onCreate={setInstance}
       theme="dropdown shadow-light"
       onShown={() => {
@@ -120,14 +106,7 @@ const NoticeButton = ({
         }
       }}
     >
-      <button
-        type="button"
-        aria-label="通知"
-        onClick={() => {
-          toggleDropdown()
-        }}
-        className={buttonClasses}
-      >
+      <button type="button" aria-label="通知" className={buttonClasses}>
         <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
         <style jsx>{styles}</style>
       </button>
