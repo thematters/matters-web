@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import { DigestNotice } from './__generated__/DigestNotice'
+import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
 import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
 import ArticleNewCommentNotice from './ArticleNewCommentNotice'
 import ArticleNewDownstreamNotice from './ArticleNewDownstreamNotice'
@@ -37,6 +38,9 @@ const fragments = {
       ... on ArticleNewCommentNotice {
         ...ArticleNewCommentNotice
       }
+      ... on ArticleMentionedYouNotice {
+        ...ArticleMentionedYouNotice
+      }
       ... on SubscribedArticleNewCommentNotice {
         ...SubscribedArticleNewCommentNotice
       }
@@ -67,6 +71,7 @@ const fragments = {
     ${ArticleNewDownstreamNotice.fragments.notice}
     ${ArticleNewSubscriberNotice.fragments.notice}
     ${ArticlePublishedNotice.fragments.notice}
+    ${ArticleMentionedYouNotice.fragments.notice}
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentNewReplyNotice.fragments.notice}
     ${CommentNewUpvoteNotice.fragments.notice}
@@ -91,6 +96,8 @@ const FeedDigest = ({ notice }: { notice: DigestNotice }) => {
       return <ArticleNewSubscriberNotice notice={notice} />
     case 'ArticlePublishedNotice':
       return <ArticlePublishedNotice notice={notice} />
+    case 'ArticleMentionedYouNotice':
+      return <ArticleMentionedYouNotice notice={notice} />
     case 'CommentMentionedYouNotice':
       return <CommentMentionedYouNotice notice={notice} />
     case 'CommentNewReplyNotice':
