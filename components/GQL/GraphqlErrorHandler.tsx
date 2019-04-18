@@ -1,4 +1,5 @@
 import { ApolloError } from 'apollo-client'
+import _get from 'lodash/get'
 import React from 'react'
 import {
   MutationFn,
@@ -15,6 +16,23 @@ import { ERROR_CODES } from '~/common/enums'
 
 export const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
   errors && errors.find(e => e.extensions.code === code)
+
+export const getErrorCodes = (error: any) => {
+  const errorCodes: string[] = []
+
+  if (!error || !error.graphQLErrors) {
+    return errorCodes
+  }
+
+  error.graphQLErrors.forEach((e: any) => {
+    const code = _get(e, 'extensions.code')
+    if (code) {
+      errorCodes.push(code)
+    }
+  })
+
+  return errorCodes
+}
 
 const checkError = (error: ApolloError) => {
   if (!process.browser) {

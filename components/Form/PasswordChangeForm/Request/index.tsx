@@ -6,13 +6,12 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { checkFormError } from '~/components/Form/Error'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { ERROR_CODES } from '~/common/enums'
+import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -120,6 +119,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             placeholder={emailPlaceholder}
             values={values}
             errors={errors}
+            disabled={!!defaultEmail}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
@@ -133,19 +133,6 @@ export const PasswordChangeRequestForm: FC<Props> = ({
                 email={values.email}
                 lang={lang}
                 type="password_reset"
-                onError={error => {
-                  if (!error || !error.graphQLErrors) {
-                    return
-                  }
-                  const emailNotFoundHint = checkFormError(
-                    ERROR_CODES.USER_EMAIL_NOT_FOUND,
-                    error.graphQLErrors,
-                    lang
-                  )
-                  if (emailNotFoundHint) {
-                    setFieldError('code', emailNotFoundHint)
-                  }
-                }}
               />
             }
             values={values}
@@ -206,16 +193,14 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             submitCallback({ email, codeId: confirmVerificationCode })
           }
         })
-        .catch(({ graphQLErrors: error }: any) => {
-          const { CODE_INVALID, CODE_EXPIRED } = ERROR_CODES
-          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
-          if (codeInvalidHint) {
-            setFieldError('code', codeInvalidHint)
-          }
-          const codeExpiredHint = checkFormError(CODE_EXPIRED, error, lang)
-          if (codeExpiredHint) {
-            setFieldError('code', codeExpiredHint)
-          }
+        .catch((error: any) => {
+          const errorCode = getErrorCodes(error)[0]
+          const errorMessage = translate({
+            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+            lang
+          })
+          setFieldError('code', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)

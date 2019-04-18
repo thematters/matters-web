@@ -1,4 +1,4 @@
-export const TEXT: { [key: string]: any } = {
+export const TEXT = {
   zh_hant: {
     login: '登入',
     register: '註冊',
@@ -33,7 +33,23 @@ export const TEXT: { [key: string]: any } = {
     accountArchived: '帳戶已註銷',
     accountBanned: '帳戶已禁言',
     publish: '發佈文章',
-    onboardingInfo: '你還不是創作者'
+    onboardingInfo: '你還不是創作者',
+    error: {
+      UNKNOWN_ERROR: '未知錯誤，請稍候重試',
+      NETWORK_ERROR: '網路錯誤，請稍候重試',
+      INTERNAL_SERVER_ERROR: '伺服器錯誤，請稍候重試',
+      BAD_USER_INPUT: '輸入有誤',
+      FORBIDDEN: '被禁止的操作',
+      USER_EMAIL_INVALID: '電子信箱不正確',
+      USER_EMAIL_EXISTS: '該電子信箱已被其他使用者使用',
+      USER_EMAIL_NOT_FOUND: '帳號不正確',
+      USER_PASSWORD_INVALID: '密碼不正確',
+      USER_USERNAME_INVALID: 'Matters ID 不正確',
+      USER_USERNAME_EXISTS: '該 Matters ID 已被其他使用者使用',
+      USER_DISPLAYNAME_INVALID: '姓名不正確',
+      CODE_INVALID: '驗證碼不正確',
+      CODE_EXPIRED: '驗證碼已過期'
+    } as { [key: string]: string }
   },
 
   zh_hans: {
@@ -70,6 +86,22 @@ export const TEXT: { [key: string]: any } = {
     accountArchived: '账户已注销',
     accountBanned: '账户已禁言',
     publish: '发布文章',
-    onboardingInfo: '你还不是创作者'
+    onboardingInfo: '你还不是创作者',
+    error: {
+      UNKNOWN_ERROR: '未知错误，请稍候重试',
+      NETWORK_ERROR: '網路錯誤，请稍候重试',
+      INTERNAL_SERVER_ERROR: '服务器错误，请稍候重试',
+      BAD_USER_INPUT: '输入有误',
+      FORBIDDEN: '被禁止的操作',
+      USER_EMAIL_INVALID: '邮箱不正确',
+      USER_EMAIL_EXISTS: '该邮箱已被其他用户使用',
+      USER_EMAIL_NOT_FOUND: '帐号不正确',
+      USER_PASSWORD_INVALID: '密码不正确',
+      USER_USERNAME_INVALID: 'Matters ID 不正确',
+      USER_USERNAME_EXISTS: '该 Matters ID 已被其他用户使用',
+      USER_DISPLAYNAME_INVALID: '姓名不正确',
+      CODE_INVALID: '验证码不正确',
+      CODE_EXPIRED: '验证码已过期'
+    } as { [key: string]: string }
   }
 }

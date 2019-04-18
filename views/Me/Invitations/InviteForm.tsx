@@ -10,7 +10,7 @@ import { QueryResult } from 'react-apollo'
 import { Button } from '~/components/Button'
 import UserList from '~/components/Dropdown/UserList'
 import { Form } from '~/components/Form'
-import { checkFor, Mutation, Query } from '~/components/GQL'
+import { getErrorCodes, Mutation, Query } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -110,10 +110,12 @@ const handleInviteSubmit = async (
         })
       )
     }
-  } catch ({ graphQLErrors: error }) {
+  } catch (error) {
     setSubmitting(false)
 
-    if (checkFor(ERROR_CODES.USER_INVITE_STATE_INVALID, error)) {
+    const errorCodes = getErrorCodes(error)
+
+    if (errorCodes.indexOf(ERROR_CODES.USER_INVITE_STATE_INVALID) >= 0) {
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
@@ -151,9 +153,7 @@ const handleInviteSubmit = async (
           }
         })
       )
-    }
-
-    if (checkFor(ERROR_CODES.USER_EMAIL_EXISTS, error)) {
+    } else if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_EXISTS) >= 0) {
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
@@ -169,9 +169,7 @@ const handleInviteSubmit = async (
           }
         })
       )
-    }
-
-    if (checkFor(ERROR_CODES.USER_INVITE_EMAIL_INVITED, error)) {
+    } else if (errorCodes.indexOf(ERROR_CODES.USER_INVITE_EMAIL_INVITED) >= 0) {
       return window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
@@ -188,6 +186,17 @@ const handleInviteSubmit = async (
                 } 已经被其他人邀请了，请提示 ta 检查邮箱，如果没有收到邮件，请查看垃圾箱。你可以继续帮助其他好友开启创作者资格。`}
               />
             )
+          }
+        })
+      )
+    } else {
+      return window.dispatchEvent(
+        new CustomEvent('addToast', {
+          detail: {
+            color: 'red',
+            duration: TOAST_DURATION,
+            header: <Translate zh_hant="邀請失敗" zh_hans="邀请失败" />,
+            content: errorCodes[0]
           }
         })
       )

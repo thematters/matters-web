@@ -48,7 +48,9 @@ const Container: FC<ContainerProps> = ({
 
   const interpret = (text: string) => {
     return translate({
+      // @ts-ignore
       zh_hant: TEXT.zh_hant[text],
+      // @ts-ignore
       zh_hans: TEXT.zh_hans[text],
       lang
     })
