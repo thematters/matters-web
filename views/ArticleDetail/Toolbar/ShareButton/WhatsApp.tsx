@@ -3,7 +3,8 @@ import _get from 'lodash/get'
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
-import { objectToGetParams } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, objectToGetParams } from '~/common/utils'
 import ICON_SHARE_WHATSAPP from '~/static/icons/share-whatsapp.svg?sprite'
 
 const Whatsapp = () => (
@@ -17,6 +18,11 @@ const Whatsapp = () => (
         objectToGetParams({
           text: text ? text + ' ' + url : url
         })
+
+      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
+        type: SHARE_TYPE.WHATSAPP,
+        url
+      })
       return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >

@@ -20,7 +20,19 @@ export const ANALYTICS_EVENTS = {
   LOG_OUT: 'log-out',
   LOG_IN: 'log-in',
   LOG_IN_FAILED: 'log-in-failed',
-  CLICK_COLLECTION: 'click-collection'
+  CLICK_COLLECTION: 'click-collection',
+  SHARE: 'share'
+}
+
+export const SHARE_TYPE = {
+  LINE: 'line',
+  WHATSAPP: 'whatsapp',
+  TELEGRAM: 'telegram',
+  WECHAT: 'wechat',
+  TWITTER: 'twitter',
+  EMAIL: 'email',
+  FACEBOOK: 'facebook',
+  WEIBO: 'weibo'
 }
 
 export const FEED_TYPE = {
