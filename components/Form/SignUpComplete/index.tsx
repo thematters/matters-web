@@ -8,7 +8,8 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
 
-const postUrl = 'https://matters.news/@hi176/' +
+const postUrl =
+  'https://matters.news/@hi176/' +
   '新老用戶配對2-0-我們因此寫作-你也是-太好了-zdpuAvrpbhq9KJHBH1fbXdGxXYgQECiBbohU8ybBG3EpJkj4t'
 
 const SignUpComplete = () => (
@@ -36,15 +37,8 @@ const SignUpComplete = () => (
       <br />
       <p>
         <Translate zh_hant="你可以在 " zh_hans="你可以在 " />
-        <a
-          className="u-link-green"
-          href={postUrl}
-          target="_blank"
-        >
-          <Translate
-            zh_hant="Matters 站内"
-            zh_hans="Matters 站內"
-          />
+        <a className="u-link-green" href={postUrl} target="_blank">
+          <Translate zh_hant="Matters 站内" zh_hans="Matters 站內" />
         </a>
         <Translate
           zh_hant="尋找老用户，或關注 "
