@@ -41,6 +41,7 @@
           { "name": "ArticleNewAppreciationNotice" },
           { "name": "ArticleNewSubscriberNotice" },
           { "name": "ArticleNewCommentNotice" },
+          { "name": "ArticleMentionedYouNotice" },
           { "name": "SubscribedArticleNewCommentNotice" },
           { "name": "UpstreamArticleArchivedNotice" },
           { "name": "DownstreamArticleArchivedNotice" },
