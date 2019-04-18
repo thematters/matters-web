@@ -6,12 +6,11 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { checkFormError } from '~/components/Form/Error'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { ERROR_CODES } from '~/common/enums'
+import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -81,7 +80,8 @@ export const EmailChangeConfirmForm: FC<Props> = ({
     isSubmitting,
     handleBlur,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    setFieldError
   }: {
     [key: string]: any
   }) => {
@@ -191,20 +191,14 @@ export const EmailChangeConfirmForm: FC<Props> = ({
             submitCallback()
           }
         })
-        .catch(({ graphQLErrors: error }: any) => {
-          const { CODE_INVALID, CODE_EXPIRED, USER_EMAIL_EXISTS } = ERROR_CODES
-          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
-          if (codeInvalidHint) {
-            setFieldError('code', codeInvalidHint)
-          }
-          const codeExpiredHint = checkFormError(CODE_EXPIRED, error, lang)
-          if (codeExpiredHint) {
-            setFieldError('code', codeExpiredHint)
-          }
-          const emailExistsHint = checkFormError(USER_EMAIL_EXISTS, error, lang)
-          if (emailExistsHint) {
-            setFieldError('email', emailExistsHint)
-          }
+        .catch((error: any) => {
+          const errorCode = getErrorCodes(error)[0]
+          const errorMessage = translate({
+            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+            lang
+          })
+          setFieldError('code', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)

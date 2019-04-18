@@ -7,12 +7,11 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { checkFormError } from '~/components/Form/Error'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { ERROR_CODES, PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -237,19 +236,6 @@ export const SignUpInitForm: FC<Props> = ({
                 email={values.email}
                 lang={lang}
                 type="register"
-                onError={error => {
-                  if (!error || !error.graphQLErrors) {
-                    return
-                  }
-                  const emailExistsHint = checkFormError(
-                    ERROR_CODES.USER_EMAIL_EXISTS,
-                    error.graphQLErrors,
-                    lang
-                  )
-                  if (emailExistsHint) {
-                    setFieldError('code', emailExistsHint)
-                  }
-                }}
               />
             }
             values={values}
@@ -390,16 +376,14 @@ export const SignUpInitForm: FC<Props> = ({
             clearPersistCache()
           }
         })
-        .catch(({ graphQLErrors: error }: any) => {
-          const { CODE_INVALID, CODE_EXPIRED } = ERROR_CODES
-          const codeInvalidHint = checkFormError(CODE_INVALID, error, lang)
-          if (codeInvalidHint) {
-            setFieldError('code', codeInvalidHint)
-          }
-          const codeExpiredHint = checkFormError(CODE_EXPIRED, error, lang)
-          if (codeExpiredHint) {
-            setFieldError('code', codeExpiredHint)
-          }
+        .catch((error: any) => {
+          const errorCode = getErrorCodes(error)[0]
+          const errorMessage = translate({
+            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+            lang
+          })
+          setFieldError('code', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)

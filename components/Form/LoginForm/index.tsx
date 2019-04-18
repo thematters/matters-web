@@ -5,12 +5,12 @@ import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
-import { checkFor, Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { ANALYTICS_EVENTS, ERROR_CODES, PATHS } from '~/common/enums'
+import { ANALYTICS_EVENTS, ERROR_CODES, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -222,25 +222,41 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           await clearPersistCache()
           redirectToTarget()
         })
-        .catch(({ graphQLErrors: error }: any) => {
-          if (
-            checkFor(ERROR_CODES.USER_EMAIL_NOT_FOUND, error) ||
-            checkFor(ERROR_CODES.USER_PASSWORD_INVALID, error)
-          ) {
-            const errorMessage = translate({
-              zh_hant: '帳號或密碼不正確',
-              zh_hans: '帐号或密码不正确',
-              lang
-            })
+        .catch((error: any) => {
+          const errorCodes = getErrorCodes(error)
+
+          if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
             setErrors({
-              email: errorMessage,
-              password: errorMessage
+              email: translate({
+                zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
+                zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
+                lang
+              })
             })
-            analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
-              email,
-              error
+          } else if (
+            errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0
+          ) {
+            setErrors({
+              password: translate({
+                zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
+                zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
+                lang
+              })
+            })
+          } else {
+            setErrors({
+              email: translate({
+                zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
+                zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
+                lang
+              })
             })
           }
+
+          analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
+            email,
+            error
+          })
         })
         .finally(() => {
           setSubmitting(false)
