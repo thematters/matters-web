@@ -70,7 +70,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
       title: translate({ zh_hant: '個人資料', zh_hans: '个人資料', lang })
     },
     complete: {
-      title: translate({ zh_hant: '註冊成功', zh_hans: '註冊成功', lang })
+      title: translate({ zh_hant: '註冊成功', zh_hans: '注册成功', lang })
     }
   }
 
