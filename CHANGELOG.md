@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2019-04-20
+
+### Added
+
+- Article mention notification #217
+- PWA #204
+- [Disabled] Collection #207 #209 #210 #212 #213
+- [Disabled] Persist Cache #211
+
+# Changed
+
+- Add "fb:app_id" and "og:title" meta tags
+- Enhance error handing #218
+
 ## [1.3.0] - 2019-04-09
 
 ### Added
