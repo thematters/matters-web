@@ -1,7 +1,3 @@
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher
-} from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink, split } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
@@ -14,11 +10,12 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
+import {
+  inMemoryCache
+  // setupPersistCache
+} from './cache'
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData
-})
+const isProd = process.env.NODE_ENV === 'production'
 
 const {
   publicRuntimeConfig: { API_URL, WS_URL }
@@ -29,7 +26,7 @@ const agent =
   API_URL.split(':')[0] === 'http'
     ? new http.Agent()
     : new https.Agent({
-        rejectUnauthorized: process.env.NODE_ENV !== 'development' // allow access to https:...matters.news in localhost
+        rejectUnauthorized: isProd // allow access to https:...matters.news in localhost
       })
 
 // links
@@ -90,10 +87,13 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-export default withApollo(
-  ({ ctx, headers, initialState }) =>
-    new ApolloClient({
-      link: ApolloLink.from([errorLink, authLink, dataLink({ headers })]),
-      cache: new InMemoryCache({ fragmentMatcher }).restore(initialState || {})
-    })
-)
+export default withApollo(({ ctx, headers, initialState }) => {
+  inMemoryCache.restore(initialState || {})
+
+  // setupPersistCache()
+
+  return new ApolloClient({
+    link: ApolloLink.from([errorLink, authLink, dataLink({ headers })]),
+    cache: inMemoryCache
+  })
+})

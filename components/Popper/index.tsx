@@ -52,7 +52,7 @@ export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
 Popover.defaultProps = {
   arrow: true,
   interactive: true,
-  distance: 8,
+  distance: 16,
   placement: 'right',
   animateFill: false,
   theme: 'popover',

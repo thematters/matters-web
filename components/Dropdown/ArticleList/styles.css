@@ -1,0 +1,9 @@
+.search-article-item {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+
+  & :global(a) {
+    pointer-events: none;
+  }
+}

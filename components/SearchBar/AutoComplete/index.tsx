@@ -49,7 +49,7 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
         const recentSearches = data.viewer.activity.recentSearches.edges
 
         return (
-          <Menu width="100%">
+          <Menu width="full">
             <Menu.Header
               title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
             />

@@ -85,37 +85,37 @@ export const ROUTES: Array<{
   // User
   {
     key: 'USER_ARTICLES',
-    href: '/User/Articles',
+    href: '/UserArticles',
     as: '/@:userName'
   },
   {
     key: 'USER_COMMENTS',
-    href: '/User/Comments',
+    href: '/UserComments',
     as: '/@:userName/comments'
   },
   {
     key: 'USER_DRAFTS',
-    href: '/User/Drafts',
+    href: '/UserDrafts',
     as: '/@:userName/drafts'
   },
   {
     key: 'USER_BOOKMARKS',
-    href: '/User/Bookmarks',
+    href: '/UserBookmarks',
     as: '/@:userName/bookmarks'
   },
   {
     key: 'USER_HISTORY',
-    href: '/User/History',
+    href: '/UserHistory',
     as: '/@:userName/history'
   },
   {
     key: 'USER_FOLLOWERS',
-    href: '/User/Followers',
+    href: '/UserFollowers',
     as: '/@:userName/followers'
   },
   {
     key: 'USER_FOLLOWEES',
-    href: '/User/Followees',
+    href: '/UserFollowees',
     as: '/@:userName/followees'
   },
 
@@ -139,36 +139,36 @@ export const ROUTES: Array<{
   // Me
   {
     key: 'ME_INVITATIONS',
-    href: '/Me/Invitations',
+    href: '/MeInvitations',
     as: '/me/invitations'
   },
   {
     key: 'ME_WALLET',
-    href: '/Me/Wallet',
+    href: '/MeWallet',
     as: '/me/wallet'
   },
   {
     key: 'ME_NOTIFICATIONS',
-    href: '/Me/Notifications',
+    href: '/MeNotifications',
     as: '/me/notifications'
   },
 
   // Settings
   {
     key: 'ME_SETTINGS_ACCOUNT',
-    href: '/Me/Settings/Account',
+    href: '/MeSettingsAccount',
     as: '/me/settings/account'
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',
-    href: '/Me/Settings/Notification',
+    href: '/MeSettingsNotification',
     as: '/me/settings/notification'
   },
 
   // Draft
   {
     key: 'ME_DRAFT_DETAIL',
-    href: '/Me/DraftDetail',
+    href: '/MeDraftDetail',
     as: '/me/drafts/*-:id'
   },
   // {
@@ -180,39 +180,39 @@ export const ROUTES: Array<{
   // Auth
   {
     key: 'AUTH_LOGIN',
-    href: '/Auth/Login',
+    href: '/AuthLogin',
     as: '/login'
   },
   {
     key: 'AUTH_SIGNUP',
-    href: '/Auth/SignUp',
+    href: '/AuthSignUp',
     as: '/signup'
   },
   {
     key: 'AUTH_FORGET',
-    href: '/Auth/Forget',
+    href: '/AuthForget',
     as: '/forget'
   },
 
   // Misc
   {
     key: 'MISC_ABOUT',
-    href: '/Misc/About',
+    href: '/MiscAbout',
     as: '/about'
   },
   {
     key: 'MISC_FAQ',
-    href: '/Misc/FAQ',
+    href: '/MiscFAQ',
     as: '/faq'
   },
   {
     key: 'MISC_TOS',
-    href: '/Misc/ToS',
+    href: '/MiscToS',
     as: '/tos'
   },
   {
     key: 'MISC_GUIDE',
-    href: '/Misc/Guide',
+    href: '/MiscGuide',
     as: '/guide'
   }
 ]

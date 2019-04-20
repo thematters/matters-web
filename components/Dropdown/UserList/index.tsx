@@ -16,7 +16,7 @@ const DropdownUserList = ({
 }) => {
   if (loading) {
     return (
-      <Menu width="100%">
+      <Menu width="md">
         <Menu.Item>
           <Spinner />
         </Menu.Item>
@@ -26,7 +26,7 @@ const DropdownUserList = ({
 
   return (
     <>
-      <Menu width="100%">
+      <Menu width="md">
         {users.map(user => (
           <Menu.Item
             spacing={['xtight', 'tight']}

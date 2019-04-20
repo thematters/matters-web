@@ -4,7 +4,6 @@ import { MouseEventHandler } from 'react'
 
 import { Label, Title } from '~/components'
 
-import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
@@ -60,8 +59,7 @@ const FeatureDigest = ({
     page: 'articleDetail',
     userName: author.userName,
     slug,
-    mediaHash,
-    fragment: UrlFragments.COMMENTS
+    mediaHash
   })
 
   return (

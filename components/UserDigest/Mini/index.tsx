@@ -20,6 +20,7 @@ import styles from './styles.css'
 interface MiniProps {
   user: UserDigestMiniUser
   avatarSize?: 'xxxsmall' | 'xxsmall' | 'xsmall' | 'small'
+  textSize?: 'small' | 'xsmall'
   textWeight?: 'normal' | 'medium'
   spacing?: 'xxtight' | 'xtight'
 }
@@ -39,6 +40,7 @@ const fragments = {
 const Mini = ({
   user,
   avatarSize = 'xxsmall',
+  textSize = 'small',
   textWeight = 'normal',
   spacing = 'xtight'
 }: MiniProps) => {
@@ -49,7 +51,8 @@ const Mini = ({
   const containerClasses = classNames({
     container: true,
     [`text-${textWeight}`]: true,
-    [`spacing-${spacing}`]: true
+    [`spacing-${spacing}`]: true,
+    [`text-${textSize}`]: true
   })
 
   return (

@@ -13,28 +13,13 @@
 }
 
 .input {
-  @mixin all-transition;
-  @mixin border-bottom-grey;
+  @mixin text-input;
 
-  background-color: var(--color-grey-lighter);
-  border-top-right-radius: 0.15rem;
-  border-top-left-radius: 0.15rem;
   font-size: var(--font-size-md);
   height: 2.5rem;
-  padding: var(--spacing-x-tight) var(--spacing-tight);
 
   &:disabled {
     color: var(--color-grey-darker);
-  }
-
-  &:focus {
-    background-color: var(--color-bg-green);
-    border-bottom-color: var(--color-matters-green);
-  }
-
-  &::placeholder {
-    color: var(--color-grey);
-    opacity: 1; /* Firefox */
   }
 }
 

@@ -27,10 +27,19 @@
   height: var(--digest-sidebar-cover-size);
 }
 
-.content.no-cover {
-  display: block;
+.content {
+  &.no-cover {
+    display: block;
 
-  & .left {
-    padding-right: none;
+    & .left {
+      padding-right: none;
+    }
+  }
+  &.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.disabled {
+    pointer-events: none;
   }
 }

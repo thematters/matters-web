@@ -30,12 +30,6 @@
   justify-content: space-between;
 }
 
-@define-mixin flex-center-space-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
@@ -101,5 +95,31 @@
 
   &.unread::after {
     transform: scale(1);
+  }
+}
+
+@define-mixin text-input {
+  @mixin all-transition;
+
+  padding: var(--spacing-x-tight) var(--spacing-tight);
+
+  font-size: var(--font-size-sm); /* fallback */
+  font-size: calc(var(--font-size-sm) + 1px);
+  line-height: 1.5rem;
+
+  background-color: var(--color-grey-lighter);
+  border-top-right-radius: 0.15rem;
+  border-top-left-radius: 0.15rem;
+  border-bottom: 1px solid var(--color-grey-light);
+
+  &:focus,
+  &.focus {
+    background-color: var(--color-bg-green);
+    border-bottom-color: var(--color-matters-green);
+  }
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
   }
 }

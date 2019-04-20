@@ -1,0 +1,46 @@
+.container {
+  position: relative;
+  text-align: left;
+
+  &.has-arrow {
+    padding-right: calc(1rem + var(--spacing-xx-tight));
+
+    &:hover,
+    &:focus {
+      & .arrow {
+        display: flex;
+      }
+    }
+  }
+
+  & :global(h2) {
+    @mixin truncate;
+    min-width: 0;
+    margin-bottom: var(--spacing-xx-tight);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
+
+  & .arrow {
+    @mixin flex-center-all;
+
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+
+    pointer-events: initial;
+  }
+}
+
+.content {
+  &.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.disabled {
+    pointer-events: none;
+  }
+}

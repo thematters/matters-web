@@ -21,6 +21,10 @@ import styles from './styles.css'
  *
  */
 
+const postUrl =
+  'https://matters.news/@hi176/' +
+  '新老用戶配對2-0-我們因此寫作-你也是-太好了-zdpuAvrpbhq9KJHBH1fbXdGxXYgQECiBbohU8ybBG3EpJkj4t'
+
 const InfoIcon = () => (
   <Icon
     id={ICON_INFORMATION.id}
@@ -43,28 +47,18 @@ const OnboardingInfoModal: FC<ModalInstanceProps> = ({ close }) => {
             <div className="text">
               <Translate
                 zh_hant="Matters 目前是一個邀請制社群，你可以透過以下兩種方法獲得創作者資格。"
-                zh_hans="Matters 目前是一个邀请制社区，你可以通过以下两种方法获得创作者资格。"
+                zh_hans="Matters 目前是一个邀请制社群，你可以通过以下两种方法获得创作者资格。"
               />
             </div>
             <div className="info-item">
               <div className="info-icon">
                 <InfoIcon />
               </div>
-              <Translate
-                zh_hant="透過老用戶邀請（你可以加入"
-                zh_hans="通过老用户邀请（你可以加入"
-              />
-              <a
-                className="u-link-green link"
-                href={EXTERNAL_LINKS.TELEGRAM}
-                target="_blank"
-              >
-                <Translate
-                  zh_hant="官方 Telegram 群組"
-                  zh_hans="官方 Telegram 群組"
-                />
+              <Translate zh_hant="你可以在 " zh_hans="你可以在 " />
+              <a className="u-link-green link" href={postUrl} target="_blank">
+                <Translate zh_hant="Matters 站內" zh_hans="Matters 站内" />
               </a>
-              <Translate zh_hant="尋找老用戶）。" zh_hans="寻找老用户）。" />
+              <Translate zh_hant="尋找老用戶。" zh_hans="寻找老用户。" />
             </div>
             <div className="info-item">
               <div className="info-icon">
@@ -91,8 +85,8 @@ const OnboardingInfoModal: FC<ModalInstanceProps> = ({ close }) => {
                   />
                 </a>
                 <Translate
-                  zh_hant="，即時了解激活權限新玩法。"
-                  zh_hans="，即时了解激活权限新玩法。"
+                  zh_hant="，即時了解開啟權限新玩法。"
+                  zh_hans="，即时了解开启权限新玩法。"
                 />
               </div>
             </div>

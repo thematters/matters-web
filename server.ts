@@ -8,6 +8,7 @@ import express from 'express'
 import helmet from 'helmet'
 import 'module-alias/register'
 import next from 'next'
+import path from 'path'
 
 import { ROUTES } from '~/common/enums'
 
@@ -24,13 +25,8 @@ try {
 
 const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 3000
-const ASSET_PREFIX = process.env.ASSET_PREFIX
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
-
-if (ASSET_PREFIX) {
-  app.setAssetPrefix(ASSET_PREFIX)
-}
 
 app
   .prepare()
@@ -51,7 +47,15 @@ app
     })
 
     // fallback
-    server.get('*', (req, res) => handle(req, res))
+    server.get('*', (req, res) => {
+      if (req.path === '/service-worker.js') {
+        const filePath = path.join('build', req.path)
+        res.setHeader('Service-Worker-Allowed', '/')
+        return app.serveStatic(req, res, filePath)
+      }
+
+      return handle(req, res)
+    })
 
     server.listen(PORT, (err: any) => {
       if (err) {

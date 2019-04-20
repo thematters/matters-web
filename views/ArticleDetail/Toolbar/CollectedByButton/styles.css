@@ -1,0 +1,22 @@
+.container {
+  width: var(--sizing-menu-md);
+  max-height: 50vh;
+  overflow: auto;
+}
+
+h3 {
+  padding: var(--spacing-tight);
+
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+
+  text-align: left;
+}
+
+ul {
+  & li {
+    @mixin border-top-grey;
+    margin: 0 var(--spacing-x-tight);
+    padding: var(--spacing-tight) var(--spacing-x-tight);
+  }
+}

@@ -19,7 +19,8 @@ export const ANALYTICS_EVENTS = {
   OPEN_COMMENTS: 'open-comments',
   LOG_OUT: 'log-out',
   LOG_IN: 'log-in',
-  LOG_IN_FAILED: 'log-in-failed'
+  LOG_IN_FAILED: 'log-in-failed',
+  CLICK_COLLECTION: 'click-collection'
 }
 
 export const FEED_TYPE = {
@@ -36,6 +37,7 @@ export const FEED_TYPE = {
   SEARCH_ARTICLE: 'search-article',
   READ_HISTORY: 'read-history',
   RELATED_ARTICLE: 'related-article',
+  COLLECTION: 'collection',
   // user
   AUTHOR: 'author',
   ALL_AUTHORS: 'all-authors',

@@ -10,7 +10,6 @@
 
 .name {
   color: var(--color-black);
-  font-size: var(--font-size-sm);
   line-height: 1;
 }
 
@@ -28,4 +27,12 @@
 
 .text-medium {
   font-weight: var(--font-weight-medium);
+}
+
+.text-small {
+  font-size: var(--font-size-sm);
+}
+
+.text-xsmall {
+  font-size: var(--font-size-xs);
 }

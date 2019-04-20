@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Title } from '~/components'
+import { Translate } from '~/components/Language'
+import { Tooltip } from '~/components/Popper'
 
 import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -10,6 +12,12 @@ import { toPath } from '~/common/utils'
 import Actions, { ActionsControls } from '../Actions'
 import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 import styles from './styles.css'
+
+type SidebarDigestProps = {
+  article: SidebarDigestArticle
+  hasCover?: boolean
+  disabled?: boolean
+} & ActionsControls
 
 const fragments = {
   article: gql`
@@ -30,15 +38,13 @@ const fragments = {
   `
 }
 
-const FeedDigest = ({
+const SidebarDigest = ({
   article,
   hasCover,
+  disabled,
   ...actionControls
-}: {
-  article: SidebarDigestArticle
-  hasCover?: boolean
-} & ActionsControls) => {
-  const { author, slug, mediaHash, title, live } = article
+}: SidebarDigestProps) => {
+  const { author, slug, mediaHash, title, live, state } = article
   const cover = 'cover' in article ? article.cover : null
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -54,23 +60,27 @@ const FeedDigest = ({
   })
   const contentClasses = classNames({
     content: true,
-    'no-cover': !cover
+    'no-cover': !cover,
+    inactive: state !== 'active',
+    disabled
   })
 
   return (
     <section className="container">
-      <Link {...path}>
-        <div className={contentClasses}>
-          <div className="left">
+      <div className={contentClasses}>
+        <div className="left">
+          <Link {...path}>
             <a>
               <Title type="sidebar" is="h2">
                 {title}
               </Title>
             </a>
-            <Actions article={article} type="sidebar" {...actionControls} />
-          </div>
+          </Link>
+          <Actions article={article} type="sidebar" {...actionControls} />
+        </div>
 
-          {hasCover && cover && (
+        {hasCover && cover && (
+          <Link {...path}>
             <a>
               <div
                 className="cover"
@@ -79,15 +89,45 @@ const FeedDigest = ({
                 }}
               />
             </a>
-          )}
-        </div>
-      </Link>
+          </Link>
+        )}
+      </div>
 
       <style jsx>{styles}</style>
     </section>
   )
 }
 
-FeedDigest.fragments = fragments
+const SidebarDigestWrapper = ({
+  hasArchivedTooltip,
+  article,
+  ...props
+}: { hasArchivedTooltip?: boolean } & SidebarDigestProps) => {
+  const isInactive = article.state !== 'active'
 
-export default FeedDigest
+  if (hasArchivedTooltip && isInactive) {
+    return (
+      <Tooltip
+        boundary="window"
+        content={
+          <Translate
+            zh_hant="該作品已從站內隱藏"
+            zh_hans="该作品已从站内隐藏"
+          />
+        }
+        zIndex={100}
+        placement="left"
+      >
+        <div>
+          <SidebarDigest article={article} {...props} />
+        </div>
+      </Tooltip>
+    )
+  }
+
+  return <SidebarDigest article={article} {...props} />
+}
+
+SidebarDigestWrapper.fragments = fragments
+
+export default SidebarDigestWrapper

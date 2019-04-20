@@ -2,9 +2,11 @@ import gql from 'graphql-tag'
 import { FC, useState } from 'react'
 
 import { Button } from '~/components/Button'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
+import { Translate } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -26,7 +28,6 @@ interface Props {
   email: string
   lang: Language
   type: 'register' | 'email_reset' | 'password_reset' | 'email_verify'
-  onError?: (error: any) => any
 }
 
 export const MUTATION_SEND_CODE = gql`
@@ -35,7 +36,7 @@ export const MUTATION_SEND_CODE = gql`
   }
 `
 
-const SendCodeButton: FC<Props> = ({ email, lang, type, onError }) => {
+const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
   const [sent, setSent] = useState(false)
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0
@@ -57,9 +58,22 @@ const SendCodeButton: FC<Props> = ({ email, lang, type, onError }) => {
         setSent(true)
       })
       .catch((error: any) => {
-        if (onError) {
-          onError(error)
-        }
+        const errorCode = getErrorCodes(error)[0]
+        const errorMessage = (
+          <Translate
+            zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
+            zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
+          />
+        )
+
+        window.dispatchEvent(
+          new CustomEvent('addToast', {
+            detail: {
+              color: 'red',
+              content: errorMessage
+            }
+          })
+        )
       })
   }
 

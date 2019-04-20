@@ -5,12 +5,11 @@ import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
-import { checkFormError } from '~/components/Form/Error'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { ERROR_CODES } from '~/common/enums'
+import { TEXT } from '~/common/enums'
 import { isValidUserName, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -173,27 +172,14 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
             submitCallback()
           }
         })
-        .catch(({ graphQLErrors: error }: any) => {
-          const { USER_USERNAME_EXISTS, FORBIDDEN } = ERROR_CODES
-          const userNameDuplicatedHint = checkFormError(
-            USER_USERNAME_EXISTS,
-            error,
+        .catch((error: any) => {
+          const errorCode = getErrorCodes(error)[0]
+          const errorMessage = translate({
+            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
             lang
-          )
-          if (userNameDuplicatedHint) {
-            setFieldError('userName', userNameDuplicatedHint)
-          }
-          const userNameChangeForbidden = checkFormError(FORBIDDEN, error, lang)
-          if (userNameChangeForbidden) {
-            setFieldError(
-              'userName',
-              translate({
-                zh_hant: '您曾經修改過 Matters ID，每位使用者僅限修改一次',
-                zh_hans: '您曾经修改过 Matters ID，每位用戶仅限修改一次',
-                lang
-              })
-            )
-          }
+          })
+          setFieldError('code', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)
