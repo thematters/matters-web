@@ -17,7 +17,7 @@
 }
 
 .left {
-  & :global(.actions) {
+  & :global(.actions > *) {
     margin-top: var(--spacing-x-tight);
   }
 }
