@@ -9,6 +9,8 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Query } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { Translate } from '~/components/Language'
+import { PublishModal } from '~/components/Modal/PublishModal'
+import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
 import { Protected } from '~/components/Protected'
 
@@ -83,6 +85,12 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
               {loading && <Placeholder.Sidebar />}
               {data && data.node && <Sidebar draft={data.node} />}
             </aside>
+
+            <ModalInstance modalId="publishModal" title="publish">
+              {(props: ModalInstanceProps) => (
+                <PublishModal draft={data.node} {...props} />
+              )}
+            </ModalInstance>
 
             <style jsx>{styles}</style>
           </main>
