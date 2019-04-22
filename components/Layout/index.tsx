@@ -1,4 +1,6 @@
 import gql from 'graphql-tag'
+import getConfig from 'next/config'
+import { useContext } from 'react'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
@@ -16,6 +18,11 @@ import {
 
 import { GatewayContextProvider } from '../Contexts/Gateway'
 import { LayoutUser } from './__generated__/LayoutUser'
+
+const {
+  publicRuntimeConfig: { ENV }
+} = getConfig()
+const isProd = ENV === 'production'
 
 interface LayoutProps {
   loading: boolean
@@ -36,10 +43,24 @@ const fragments = {
   `
 }
 
+const Protected: React.FC = ({ children }) => {
+  const viewer = useContext(ViewerContext)
+
+  if (!isProd && !viewer.isAdmin) {
+    return <span>Access Denied</span>
+  } else {
+    return <>{children}</>
+  }
+}
+
 export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
-} = ({ children, loading, user, error }) =>
-  loading ? null : (
+} = ({ children, loading, user, error }) => {
+  if (loading) {
+    return null
+  }
+
+  return (
     <ViewerContext.Provider value={processViewer(user || {})}>
       <LanguageProvider>
         <HeaderContextProvider>
@@ -49,7 +70,7 @@ export const Layout: React.FC<LayoutProps> & {
 
             <GlobalHeader user={user} />
 
-            {children}
+            <Protected>{children}</Protected>
 
             <Modal.Anchor />
             <ToastHolder />
@@ -59,5 +80,6 @@ export const Layout: React.FC<LayoutProps> & {
       </LanguageProvider>
     </ViewerContext.Provider>
   )
+}
 
 Layout.fragments = fragments
