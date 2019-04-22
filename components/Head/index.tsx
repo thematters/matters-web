@@ -13,8 +13,9 @@ import IMAGE_INTRO from '~/static/images/intro.jpg'
 import OPENSEARCH from '~/static/opensearch.xml'
 
 const {
-  publicRuntimeConfig: { SITE_DOMAIN, FB_APP_ID }
+  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID }
 } = getConfig()
+const isProd = ENV === 'production'
 
 interface HeadProps {
   title?: string | { zh_hant: string; zh_hans?: string; en?: string }
@@ -80,6 +81,14 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
+
+      {/* noinedx for non-production enviroment */}
+      {!isProd && (
+        <meta name="robots" content="noindex, nofollow" key="robots" />
+      )}
+      {!isProd && (
+        <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
+      )}
 
       {/* social */}
       <meta property="fb:app_id" content={FB_APP_ID} />
