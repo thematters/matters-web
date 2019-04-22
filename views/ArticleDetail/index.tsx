@@ -20,6 +20,7 @@ import { DrawerProvider } from '~/components/Drawer'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
 import IconLive from '~/components/Icon/Live'
+import { Popover } from '~/components/Popper'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -27,6 +28,7 @@ import { getQuery, toPath } from '~/common/utils'
 import ICON_COLLECTION from '~/static/icons/collection.svg?sprite'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
 import Sidebar from './Sidebar'
@@ -210,9 +212,34 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <span>
                         {data.article.live && <IconLive />}
                         {data.article.collection.totalCount > 0 && (
-                          <CollectionTextIcon
-                            count={data.article.collection.totalCount as number}
-                          />
+                          <Popover
+                            trigger="click"
+                            placement="bottom-end"
+                            content={
+                              <section className="collection-popover">
+                                <h3>
+                                  <Translate
+                                    zh_hant={`關聯 ${
+                                      data.article.collection.totalCount
+                                    } 篇作品`}
+                                    zh_hans={`关联 ${
+                                      data.article.collection.totalCount
+                                    } 篇作品`}
+                                  />
+                                </h3>
+
+                                <Collection />
+                              </section>
+                            }
+                          >
+                            <button type="button" className="collection-meta">
+                              <CollectionTextIcon
+                                count={
+                                  data.article.collection.totalCount as number
+                                }
+                              />
+                            </button>
+                          </Popover>
                         )}
                       </span>
                     </span>

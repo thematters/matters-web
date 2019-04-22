@@ -11,6 +11,12 @@
   right: 0;
 }
 
+.editing-list {
+  padding: 0 var(--spacing-default);
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
 ol {
   counter-reset: collection-counter;
 }

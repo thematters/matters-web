@@ -305,25 +305,33 @@ const CollectionEditingList = ({
         }
         const { id } = _get(data, 'article', {})
         const { edges } = _get(data, 'article.collection', {})
+
         return (
-          <Mutation
-            mutation={EDITOR_SET_COLLECTION}
-            refetchQueries={refetchQueries}
-          >
-            {setCollection => (
-              <CollectionEditor
-                articles={edges.map(({ node }: { node: any }) => node)}
-                onEdit={onEdit(id, setCollection)}
-              />
-            )}
-          </Mutation>
+          <section className="editing-list">
+            <Mutation
+              mutation={EDITOR_SET_COLLECTION}
+              refetchQueries={refetchQueries}
+            >
+              {setCollection => (
+                <CollectionEditor
+                  articles={edges.map(({ node }: { node: any }) => node)}
+                  onEdit={onEdit(id, setCollection)}
+                />
+              )}
+            </Mutation>
+
+            <style jsx>{styles}</style>
+          </section>
         )
       }}
     </Query>
   )
 }
 
-const Collection: React.FC<WithRouterProps> = ({ router }) => {
+const Collection: React.FC<WithRouterProps & { hasEdit?: boolean }> = ({
+  router,
+  hasEdit
+}) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [editing, setEditing] = useState<boolean>(false)
@@ -336,7 +344,7 @@ const Collection: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <>
-      {viewer.isAdmin && (
+      {hasEdit && viewer.isAdmin && (
         <CollectionEditButton editing={editing} setEditing={setEditing} />
       )}
 

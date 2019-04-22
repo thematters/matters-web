@@ -1,14 +1,21 @@
-import { Footer } from '~/components'
+import { Footer, Responsive } from '~/components'
 
 import Collection from '../Collection'
 import styles from './styles.css'
 
 export default () => (
-  <div className="sticky-container">
-    <section className="collection">
-      <Collection />
-    </section>
-    <Footer />
-    <style jsx>{styles}</style>
-  </div>
+  <Responsive.LargeUp>
+    {(match: boolean) => (
+      <div className="sticky-container">
+        {match && (
+          <section className="collection">
+            <Collection hasEdit />
+          </section>
+        )}
+
+        <Footer />
+        <style jsx>{styles}</style>
+      </div>
+    )}
+  </Responsive.LargeUp>
 )

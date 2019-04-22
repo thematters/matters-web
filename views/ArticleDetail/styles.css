@@ -33,3 +33,28 @@
     padding-right: var(--spacing-tight);
   }
 }
+
+.collection-popover {
+  padding: var(--spacing-tight);
+  max-height: 50vh;
+
+  overflow: auto;
+  text-align: left;
+
+  @media (--sm-up) {
+    max-height: 70vh;
+  }
+
+  & h3 {
+    margin-bottom: var(--spacing-tight);
+    padding-left: var(--spacing-x-tight);
+
+    font-size: var(--font-size-md);
+  }
+}
+
+.collection-meta {
+  @media (--lg-up) {
+    pointer-events: none;
+  }
+}
