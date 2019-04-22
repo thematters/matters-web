@@ -1,10 +1,6 @@
 .container {
   @mixin border-bottom-grey;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
+  @mixin flex-start-space-between;
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-tight);
 }
@@ -15,9 +11,7 @@
 }
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @mixin flex-start-space-between;
 }
 .header-left {
 }
