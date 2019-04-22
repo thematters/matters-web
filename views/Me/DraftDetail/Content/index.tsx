@@ -7,8 +7,6 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { LanguageContext, Translate } from '~/components/Language'
-import { PublishModal } from '~/components/Modal/PublishModal'
-import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
 
 import { TEXT } from '~/common/enums'
@@ -63,11 +61,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
-  const draftId = draft.id
-
   const { lang } = useContext(LanguageContext)
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
+  const draftId = draft.id
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 
@@ -169,11 +166,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
             )}
           </Mutation>
 
-          <ModalInstance modalId="publishModal" title="publish">
-            {(props: ModalInstanceProps) => (
-              <PublishModal draftId={draft.id} {...props} />
-            )}
-          </ModalInstance>
           <style jsx>{styles}</style>
         </>
       )}
