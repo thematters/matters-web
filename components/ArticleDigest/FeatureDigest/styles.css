@@ -57,7 +57,7 @@
   font-size: var(--font-size-sm);
   line-height: 1.71428571;
 
-  & :global(.actions) {
+  & :global(.actions > *) {
     margin-top: var(--spacing-tight);
   }
 }

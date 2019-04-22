@@ -45,7 +45,7 @@
     padding-right: calc(var(--digest-feed-cover-width) + 3rem);
   }
 
-  & :global(.actions) {
+  & :global(.actions > *) {
     margin-top: var(--spacing-tight);
   }
 }
