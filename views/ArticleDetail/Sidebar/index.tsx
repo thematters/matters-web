@@ -1,13 +1,13 @@
 import { Footer } from '~/components'
 
-// import Collection from './Collection'
+import Collection from './Collection'
 import styles from './styles.css'
 
 export default () => (
   <>
-    {/* <section>
+    <section>
       <Collection />
-    </section> */}
+    </section>
     <Footer />
     <style jsx>{styles}</style>
   </>
