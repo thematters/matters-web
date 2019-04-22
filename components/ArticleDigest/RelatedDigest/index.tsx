@@ -70,7 +70,7 @@ const RelatedDigest = ({
 
         {cover && (
           <Link {...path}>
-            <a>
+            <a className="cover-wrap">
               <div
                 className="cover"
                 style={{
