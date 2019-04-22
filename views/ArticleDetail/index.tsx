@@ -5,7 +5,15 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { DateTime, Head, Placeholder, Title, Translate } from '~/components'
+import {
+  DateTime,
+  Head,
+  Icon,
+  Placeholder,
+  TextIcon,
+  Title,
+  Translate
+} from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { DrawerProvider } from '~/components/Drawer'
@@ -16,6 +24,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery, toPath } from '~/common/utils'
+import ICON_COLLECTION from '~/static/icons/collection.svg?sprite'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Content from './Content'
@@ -51,6 +60,9 @@ const ARTICLE_DETAIL = gql`
       author {
         ...UserDigestFullDescUser
       }
+      collection(input: { first: 0 }) {
+        totalCount
+      }
       ...BookmarkArticle
       ...ContentArticle
       ...TagListArticle
@@ -67,6 +79,37 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
 `
+
+const CollectionTextIcon = ({ count }: { count: number }) => {
+  return (
+    <>
+      <span className="collection">
+        <TextIcon
+          icon={
+            <Icon
+              id={ICON_COLLECTION.id}
+              viewBox={ICON_COLLECTION.viewBox}
+              size="small"
+            />
+          }
+          color="grey"
+          spacing="xxtight"
+          size="xs"
+        >
+          <span>
+            <Translate zh_hant="關聯" zh_hans="关联" />
+          </span>
+          <span className="count">&nbsp;{count}&nbsp;</span>
+          <span>
+            <Translate zh_hant="篇作品" zh_hans="篇作品" />
+          </span>
+        </TextIcon>
+      </span>
+
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
@@ -164,7 +207,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <p className="date">
                         <DateTime date={data.article.createdAt} />
                       </p>
-                      {data.article.live && <IconLive />}
+                      <span>
+                        {data.article.live && <IconLive />}
+                        {data.article.collection.totalCount > 0 && (
+                          <CollectionTextIcon
+                            count={data.article.collection.totalCount as number}
+                          />
+                        )}
+                      </span>
                     </span>
                   </section>
 

@@ -5,10 +5,14 @@
 }
 
 .subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @mixin flex-center-space-between;
   padding-top: var(--spacing-x-tight);
+
+  & .collection {
+    & .count {
+      color: var(--color-grey-darker);
+    }
+  }
 }
 
 .author {
