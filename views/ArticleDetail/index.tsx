@@ -82,9 +82,24 @@ const ARTICLE_DETAIL = gql`
   ${State.fragments.article}
 `
 
-const CollectionTextIcon = ({ count }: { count: number }) => {
-  return (
-    <>
+const CollectionMeta = ({ count }: { count: number }) => (
+  <Popover
+    trigger="click"
+    placement="bottom-end"
+    content={
+      <section className="collection-popover">
+        <h3>
+          <Translate
+            zh_hant={`關聯 ${count} 篇作品`}
+            zh_hans={`关联 ${count} 篇作品`}
+          />
+        </h3>
+
+        <Collection />
+      </section>
+    }
+  >
+    <button type="button" className="collection-meta">
       <span className="collection">
         <TextIcon
           icon={
@@ -109,9 +124,9 @@ const CollectionTextIcon = ({ count }: { count: number }) => {
       </span>
 
       <style jsx>{styles}</style>
-    </>
-  )
-}
+    </button>
+  </Popover>
+)
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
@@ -123,154 +138,139 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   return (
-    <DrawerProvider>
-      <main className="l-row">
-        <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
-          <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
-            {({
-              data,
-              loading,
-              subscribeToMore
-            }: QueryResult & { data: ArticleDetailType }) => {
-              if (loading) {
-                return <Placeholder.ArticleDetail />
-              }
+    <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
+      {({
+        data,
+        loading,
+        subscribeToMore
+      }: QueryResult & { data: ArticleDetailType }) => (
+        <DrawerProvider>
+          <main className="l-row">
+            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
+              {(() => {
+                if (loading) {
+                  return <Placeholder.ArticleDetail />
+                }
 
-              // redirect to latest verion of URL Pattern
-              if (uuid && process.browser && router) {
-                const path = toPath({
-                  page: 'articleDetail',
-                  userName: data.article.author.userName,
-                  slug: data.article.slug,
-                  mediaHash: data.article.mediaHash
-                })
-                router.push(path.href, path.as, { shallow: true })
-              }
+                // redirect to latest verion of URL Pattern
+                if (uuid && process.browser && router) {
+                  const path = toPath({
+                    page: 'articleDetail',
+                    userName: data.article.author.userName,
+                    slug: data.article.slug,
+                    mediaHash: data.article.mediaHash
+                  })
+                  router.push(path.href, path.as, { shallow: true })
+                }
 
-              if (
-                data.article.state !== 'active' &&
-                viewer.id !== data.article.author.id
-              ) {
-                return (
-                  <EmptyArticle
-                    description={
-                      <Translate zh_hant="文章被隱藏" zh_hans="文章被隐藏" />
-                    }
-                  >
-                    <BackToHomeButton />
-                  </EmptyArticle>
-                )
-              }
+                if (
+                  data.article.state !== 'active' &&
+                  viewer.id !== data.article.author.id
+                ) {
+                  return (
+                    <EmptyArticle
+                      description={
+                        <Translate zh_hant="文章被隱藏" zh_hans="文章被隐藏" />
+                      }
+                    >
+                      <BackToHomeButton />
+                    </EmptyArticle>
+                  )
+                }
 
-              useEffect(() => {
-                if (data.article.live) {
-                  subscribeToMore({
-                    document: gql`
-                      subscription ArticleEdited($id: ID!) {
-                        nodeEdited(input: { id: $id }) {
-                          id
-                          ... on Article {
+                useEffect(() => {
+                  if (data.article.live) {
+                    subscribeToMore({
+                      document: gql`
+                        subscription ArticleEdited($id: ID!) {
+                          nodeEdited(input: { id: $id }) {
                             id
-                            ...ToolbarArticle
+                            ... on Article {
+                              id
+                              ...ToolbarArticle
+                            }
                           }
                         }
-                      }
-                      ${Toolbar.fragments.article}
-                    `,
-                    variables: { id: data.article.id },
-                    updateQuery: (prev, { subscriptionData }) =>
-                      _merge(prev, {
-                        article: subscriptionData.data.nodeEdited
-                      })
-                  })
-                }
-              })
+                        ${Toolbar.fragments.article}
+                      `,
+                      variables: { id: data.article.id },
+                      updateQuery: (prev, { subscriptionData }) =>
+                        _merge(prev, {
+                          article: subscriptionData.data.nodeEdited
+                        })
+                    })
+                  }
+                })
 
-              return (
-                <>
-                  <Head
-                    title={data.article.title}
-                    description={data.article.summary}
-                    keywords={data.article.tags.map(
-                      ({ content }: { content: any }) => content
-                    )}
-                    image={data.article.cover}
-                  />
+                const collectionCount = data.article.collection
+                  .totalCount as number
 
-                  <State article={data.article} />
+                return (
+                  <>
+                    <Head
+                      title={data.article.title}
+                      description={data.article.summary}
+                      keywords={data.article.tags.map(
+                        ({ content }: { content: any }) => content
+                      )}
+                      image={data.article.cover}
+                    />
 
-                  <section className="author">
-                    <UserDigest.FullDesc user={data.article.author} />
-                  </section>
+                    <State article={data.article} />
 
-                  <section className="title">
-                    <Title type="article">{data.article.title}</Title>
-                    <span className="subtitle">
-                      <p className="date">
-                        <DateTime date={data.article.createdAt} />
-                      </p>
-                      <span>
-                        {data.article.live && <IconLive />}
-                        {data.article.collection.totalCount > 0 && (
-                          <Popover
-                            trigger="click"
-                            placement="bottom-end"
-                            content={
-                              <section className="collection-popover">
-                                <h3>
-                                  <Translate
-                                    zh_hant={`關聯 ${
-                                      data.article.collection.totalCount
-                                    } 篇作品`}
-                                    zh_hans={`关联 ${
-                                      data.article.collection.totalCount
-                                    } 篇作品`}
-                                  />
-                                </h3>
+                    <section className="author">
+                      <UserDigest.FullDesc user={data.article.author} />
+                    </section>
 
-                                <Collection />
-                              </section>
-                            }
-                          >
-                            <button type="button" className="collection-meta">
-                              <CollectionTextIcon
-                                count={
-                                  data.article.collection.totalCount as number
-                                }
-                              />
-                            </button>
-                          </Popover>
-                        )}
+                    <section className="title">
+                      <Title type="article">{data.article.title}</Title>
+                      <span className="subtitle">
+                        <p className="date">
+                          <DateTime date={data.article.createdAt} />
+                        </p>
+                        <span>
+                          {data.article.live && <IconLive />}
+                          {collectionCount > 0 && (
+                            <CollectionMeta count={collectionCount} />
+                          )}
+                        </span>
                       </span>
-                    </span>
-                  </section>
+                    </section>
 
-                  <section className="content">
-                    <Content article={data.article} />
-                    <TagList article={data.article} />
-                    <Toolbar placement="left" article={data.article} />
-                  </section>
+                    <section className="content">
+                      <Content article={data.article} />
+                      <TagList article={data.article} />
+                      <Toolbar placement="left" article={data.article} />
+                    </section>
 
-                  <Toolbar placement="bottom" article={data.article} />
+                    <Toolbar placement="bottom" article={data.article} />
 
-                  <RelatedArticles article={data.article} />
-                </>
-              )
-            }}
-          </Query>
+                    <RelatedArticles article={data.article} />
+                  </>
+                )
+              })()}
 
-          <SideComments />
-          <AppreciatorsModal />
-          <ShareModal />
-        </article>
+              <SideComments />
+              <AppreciatorsModal />
+              <ShareModal />
+            </article>
 
-        <aside className="l-col-4 l-col-md-6 l-col-lg-4" id="drawer-calc-hook">
-          <Sidebar />
-        </aside>
+            <aside
+              className="l-col-4 l-col-md-6 l-col-lg-4"
+              id="drawer-calc-hook"
+            >
+              <Sidebar
+                hasCollection={
+                  !loading && data.article.collection.totalCount > 0
+                }
+              />
+            </aside>
 
-        <style jsx>{styles}</style>
-      </main>
-    </DrawerProvider>
+            <style jsx>{styles}</style>
+          </main>
+        </DrawerProvider>
+      )}
+    </Query>
   )
 }
 
