@@ -45,7 +45,7 @@ const Toolbar = ({
         <div className="container">
           <MATButton article={article} />
           <CommentButton article={article} textPlacement="bottom" />
-          <CollectedByButton article={article} />
+          <CollectedByButton article={article} textPlacement="bottom" />
           <BookmarkButton article={article} size="default" />
           <ShareButton />
         </div>

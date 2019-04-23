@@ -1,3 +1,12 @@
+:root {
+  --collection-top-spacing: calc(var(--spacing-x-loose) + var(--spacing-tight));
+}
+
+.sticky-container {
+  position: sticky;
+  top: calc(var(--global-header-height) + var(--collection-top-spacing));
+}
+
 section {
   & :global(> header) {
     @mixin flex-center-space-between;
@@ -12,4 +21,27 @@ section {
 
 section + section {
   margin-top: var(--spacing-x-loose);
+}
+
+.collection {
+  position: relative;
+  margin-top: 3rem;
+  padding: var(--spacing-tight);
+
+  background: var(--color-grey-lighter);
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    right: 100%;
+    top: var(--spacing-tight);
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-width: 12px 12px 12px 0;
+    border-color: transparent var(--color-grey-lighter) transparent transparent;
+  }
 }

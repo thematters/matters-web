@@ -16,6 +16,9 @@ const SmallUp: React.FC = props => (
 const MediumUp: React.FC = props => (
   <MediaQuery minWidth={BREAKPOINTS.MD} {...props} />
 )
+const LargeUp: React.FC = props => (
+  <MediaQuery minWidth={BREAKPOINTS.LG} {...props} />
+)
 
 const XSmall = SmallDown
 const Small: React.FC = props => (
@@ -49,6 +52,7 @@ export const Responsive = {
 
   SmallUp,
   MediumUp,
+  LargeUp,
 
   XSmall,
   Small,
