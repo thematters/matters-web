@@ -51,7 +51,7 @@ export const FEED_TYPE = {
   RELATED_ARTICLE: 'related-article',
   COLLECTION: 'collection',
   // user
-  AUTHOR: 'author',
+  AUTHORS: 'authors',
   ALL_AUTHORS: 'all-authors',
   FOLLOWEE: 'followee',
   FOLLOWER: 'follower',
