@@ -18,7 +18,7 @@ import { Mutation, Query } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, PARTNERS } from '~/common/enums'
 import {
   analytics,
   getQuery,
@@ -328,15 +328,15 @@ const CollectionEditingList = ({
   )
 }
 
-const Collection: React.FC<WithRouterProps & { hasEdit?: boolean }> = ({
-  router,
-  hasEdit
-}) => {
+const Collection: React.FC<
+  WithRouterProps & { authorId?: any; hasEdit?: boolean }
+> = ({ router, authorId, hasEdit }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [editing, setEditing] = useState<boolean>(false)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
+  const isPartner = PARTNERS.includes(viewer.userName || '')
 
   if (!mediaHash && !uuid) {
     return null
@@ -344,7 +344,7 @@ const Collection: React.FC<WithRouterProps & { hasEdit?: boolean }> = ({
 
   return (
     <>
-      {hasEdit && viewer.isAdmin && (
+      {hasEdit && (viewer.isAdmin || (isPartner && viewer.id === authorId)) && (
         <CollectionEditButton editing={editing} setEditing={setEditing} />
       )}
 

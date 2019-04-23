@@ -7,7 +7,13 @@ import { dom } from '~/common/utils'
 import Collection from '../Collection'
 import styles from './styles.css'
 
-export default ({ hasCollection }: { hasCollection: boolean }) => {
+export default ({
+  authorId,
+  hasCollection
+}: {
+  authorId: any
+  hasCollection: boolean
+}) => {
   const collectionRef: React.RefObject<HTMLElement> = useRef(null)
 
   /**
@@ -34,7 +40,7 @@ export default ({ hasCollection }: { hasCollection: boolean }) => {
         <div className="sticky-container">
           {match && hasCollection && (
             <section className="collection" ref={collectionRef}>
-              <Collection hasEdit />
+              <Collection authorId={authorId} hasEdit />
             </section>
           )}
 

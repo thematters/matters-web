@@ -262,6 +262,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
               id="drawer-calc-hook"
             >
               <Sidebar
+                authorId={_get(data, 'article.author.id')}
                 hasCollection={
                   !loading && data.article.collection.totalCount > 0
                 }
