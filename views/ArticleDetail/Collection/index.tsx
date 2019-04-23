@@ -328,10 +328,9 @@ const CollectionEditingList = ({
   )
 }
 
-const Collection: React.FC<WithRouterProps & { hasEdit?: boolean }> = ({
-  router,
-  hasEdit
-}) => {
+const Collection: React.FC<
+  WithRouterProps & { authorId?: any; hasEdit?: boolean }
+> = ({ router, authorId, hasEdit }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [editing, setEditing] = useState<boolean>(false)
@@ -345,7 +344,7 @@ const Collection: React.FC<WithRouterProps & { hasEdit?: boolean }> = ({
 
   return (
     <>
-      {hasEdit && (viewer.isAdmin || isPartner) && (
+      {hasEdit && (viewer.isAdmin || (isPartner && viewer.id === authorId)) && (
         <CollectionEditButton editing={editing} setEditing={setEditing} />
       )}
 
