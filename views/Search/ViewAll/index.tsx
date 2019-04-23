@@ -2,7 +2,8 @@ import Link from 'next/link'
 
 import { Icon, TextIcon, Translate } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, toPath } from '~/common/utils'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
 
 const ViewAll = ({
@@ -20,7 +21,13 @@ const ViewAll = ({
 
   return (
     <Link {...viewAllPath}>
-      <a>
+      <a
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
+            type: `${type}-search`
+          })
+        }}
+      >
         <TextIcon
           icon={
             <Icon
