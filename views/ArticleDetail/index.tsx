@@ -101,7 +101,7 @@ const CollectionMeta = ({ count }: { count: number }) => (
       </section>
     }
   >
-    <button type="button" className="collection-meta">
+    <button type="button" className="collection-meta" id="collection-meta-hook">
       <span className="collection">
         <TextIcon
           icon={
