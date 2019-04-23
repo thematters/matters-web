@@ -7,14 +7,12 @@ import styles from './styles.css'
 interface ContentProps {
   spacing?: 'none' | 'small' | 'default'
   layout?: 'full-width' | 'default'
-  containerStyle?: { [key: string]: any }
 }
 
 const Content: React.FC<ContentProps> = ({
   children,
   spacing = 'default',
-  layout = 'default',
-  containerStyle
+  layout = 'default'
 }) => {
   const containerClasses = classNames({
     [spacing]: true
@@ -39,7 +37,7 @@ const Content: React.FC<ContentProps> = ({
   })
 
   return (
-    <section ref={node} className={containerClasses} style={containerStyle}>
+    <section ref={node} className={containerClasses}>
       <div className={layoutClasses}>{children}</div>
       <style jsx>{styles}</style>
     </section>

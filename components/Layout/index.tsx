@@ -38,8 +38,12 @@ const fragments = {
 
 export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
-} = ({ children, loading, user, error }) =>
-  loading ? null : (
+} = ({ children, loading, user, error }) => {
+  if (loading) {
+    return null
+  }
+
+  return (
     <ViewerContext.Provider value={processViewer(user || {})}>
       <LanguageProvider>
         <HeaderContextProvider>
@@ -59,5 +63,6 @@ export const Layout: React.FC<LayoutProps> & {
       </LanguageProvider>
     </ViewerContext.Provider>
   )
+}
 
 Layout.fragments = fragments

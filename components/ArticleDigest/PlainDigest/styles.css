@@ -1,0 +1,17 @@
+.container {
+}
+
+.content {
+  & h2 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
+
+  &.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.disabled {
+    pointer-events: none;
+  }
+}

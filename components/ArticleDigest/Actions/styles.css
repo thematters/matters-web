@@ -1,6 +1,7 @@
 footer {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   font-size: var(--font-size-xs);
   color: var(--color-grey);

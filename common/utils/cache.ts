@@ -3,10 +3,14 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory'
 import { CachePersistor } from 'apollo-cache-persist'
+import getConfig from 'next/config'
 
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 
-const isProd = process.env.NODE_ENV === 'production'
+const {
+  publicRuntimeConfig: { ENV }
+} = getConfig()
+const isProd = ENV === 'production'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData

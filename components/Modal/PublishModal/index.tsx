@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { FC, useState } from 'react'
+import { FC } from 'react'
+import { DraftDetailQuery_node_Draft } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 
 import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
@@ -23,7 +24,7 @@ import styles from './styles.css'
  */
 
 interface Props extends ModalInstanceProps {
-  draftId: string
+  draft: DraftDetailQuery_node_Draft
 }
 
 const MUTATION_PUBLISH_ARTICLE = gql`
@@ -36,35 +37,19 @@ const MUTATION_PUBLISH_ARTICLE = gql`
   }
 `
 
-export const PublishModal: FC<Props> = ({ close, draftId }) => {
-  const [hasClicked, setClicked] = useState(false)
-
-  const publishArticle = (publish: any) => {
-    if (!publish) {
-      return undefined
-    }
-
-    publish({ variables: { draftId } })
-      .then(({ data }: any) => {
-        const state = _get(data, 'publishArticle.publishState', 'unpublished')
-        if (state === 'pending') {
-          close()
-        }
-      })
-      .catch((result: any) => {
-        // TODO: Handle error
-      })
-  }
+export const PublishModal: FC<Props> = ({ close, draft }) => {
+  const draftId = draft.id
+  const hasContent = draft.content && draft.content.length > 0
+  const hasTitle = draft.title && draft.title.length > 0
+  const isUnpublished = draft.publishState === 'unpublished'
+  const publishable = draftId && isUnpublished && hasContent && hasTitle
 
   return (
     <section>
-      <Modal.Content
-        layout="full-width"
-        spacing="none"
-        containerStyle={{ padding: 0 }}
-      >
+      <Modal.Content layout="full-width" spacing="none">
         <PublishSlide />
       </Modal.Content>
+
       <div className="buttons">
         <button className="save" onClick={close}>
           <Translate zh_hant="暫存草稿箱" zh_hans="暫存草稿箱" />
@@ -81,13 +66,21 @@ export const PublishModal: FC<Props> = ({ close, draftId }) => {
             }
           }}
         >
-          {publish => (
+          {(publish, loading) => (
             <button
               className="publish"
-              disabled={hasClicked}
-              onClick={() => {
-                setClicked(true)
-                publishArticle(publish)
+              disabled={!publishable}
+              onClick={async () => {
+                const { data }: any = await publish({ variables: { draftId } })
+                const state = _get(
+                  data,
+                  'publishArticle.publishState',
+                  'unpublished'
+                )
+
+                if (state === 'pending') {
+                  close()
+                }
               }}
             >
               <Translate zh_hant="發佈" zh_hans="发布" />

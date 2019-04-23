@@ -57,23 +57,29 @@ const RelatedDigest = ({
   return (
     <section className="container">
       <div className={contentClasses}>
-        <Link {...path}>
-          <a>
-            {cover && (
+        <div className="left">
+          <Link {...path}>
+            <a>
+              <Title type="sidebar" is="h3">
+                {title}
+              </Title>
+            </a>
+          </Link>
+          <Actions article={article} type="sidebar" {...actionControls} />
+        </div>
+
+        {cover && (
+          <Link {...path}>
+            <a className="cover-wrap">
               <div
                 className="cover"
                 style={{
                   backgroundImage: `url(${cover})`
                 }}
               />
-            )}
-            <Title className="left" type="sidebar" is="h3">
-              {title}
-            </Title>
-          </a>
-        </Link>
-
-        <Actions article={article} type="sidebar" {...actionControls} />
+            </a>
+          </Link>
+        )}
       </div>
 
       <style jsx>{styles}</style>

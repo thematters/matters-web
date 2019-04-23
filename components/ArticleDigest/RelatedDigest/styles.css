@@ -17,13 +17,19 @@
 }
 
 .left {
-  & :global(.actions) {
+  & :global(.actions > *) {
     margin-top: var(--spacing-x-tight);
   }
 }
 
-.cover {
+.cover-wrap {
   flex-shrink: 0;
+
+  @media (--sm-up) {
+    order: -1;
+  }
+}
+.cover {
   margin-left: var(--spacing-tight);
   width: var(--digest-related-cover-width-sm);
   height: var(--digest-related-cover-height-sm);
@@ -34,7 +40,6 @@
     margin-bottom: var(--spacing-x-tight);
     width: 100%;
     height: auto;
-    order: -1;
 
     &::after {
       content: '';
