@@ -96,6 +96,8 @@ const CollectionMeta = ({ count }: { count: number }) => (
         </h3>
 
         <Collection />
+
+        <style jsx>{styles}</style>
       </section>
     }
   >

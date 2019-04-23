@@ -50,10 +50,14 @@
     padding-left: var(--spacing-x-tight);
 
     font-size: var(--font-size-md);
+    font-size: var(--font-weight-medium);
   }
 }
 
 .collection-meta {
+  margin-left: var(--spacing-tight);
+  vertical-align: middle;
+
   @media (--lg-up) {
     pointer-events: none;
   }

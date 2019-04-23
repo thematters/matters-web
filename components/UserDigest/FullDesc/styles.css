@@ -32,7 +32,7 @@
 }
 
 .description {
-  padding-top: var(--spacing-x-tight);
+  padding-top: var(--spacing-xxx-tight);
 
   color: var(--color-grey);
   font-size: var(--font-size-sm);
