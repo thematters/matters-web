@@ -71,7 +71,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
               className="publish"
               disabled={!publishable}
               onClick={async () => {
-                const data = await publish({ variables: { draftId } })
+                const { data }: any = await publish({ variables: { draftId } })
                 const state = _get(
                   data,
                   'publishArticle.publishState',

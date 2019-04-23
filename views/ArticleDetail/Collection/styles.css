@@ -7,7 +7,7 @@
 
 .edit-button {
   position: absolute;
-  bottom: calc(100% + var(--spacing-default));
+  bottom: calc(100% + var(--spacing-tight));
   right: 0;
 }
 

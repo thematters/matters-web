@@ -1,6 +1,10 @@
+:root {
+  --collection-top-spacing: calc(var(--spacing-x-loose) + var(--spacing-tight));
+}
+
 .sticky-container {
   position: sticky;
-  top: calc(var(--global-header-height) + var(--spacing-default));
+  top: calc(var(--global-header-height) + var(--collection-top-spacing));
 }
 
 section {
