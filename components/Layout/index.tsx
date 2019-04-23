@@ -1,6 +1,4 @@
 import gql from 'graphql-tag'
-import getConfig from 'next/config'
-import { useContext } from 'react'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
@@ -18,11 +16,6 @@ import {
 
 import { GatewayContextProvider } from '../Contexts/Gateway'
 import { LayoutUser } from './__generated__/LayoutUser'
-
-const {
-  publicRuntimeConfig: { ENV }
-} = getConfig()
-const isProd = ENV === 'production'
 
 interface LayoutProps {
   loading: boolean
@@ -43,16 +36,6 @@ const fragments = {
   `
 }
 
-const Protected: React.FC = ({ children }) => {
-  const viewer = useContext(ViewerContext)
-
-  if (!isProd && !viewer.isAdmin) {
-    return <span>Access Denied</span>
-  } else {
-    return <>{children}</>
-  }
-}
-
 export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
 } = ({ children, loading, user, error }) => {
@@ -70,7 +53,7 @@ export const Layout: React.FC<LayoutProps> & {
 
             <GlobalHeader user={user} />
 
-            <Protected>{children}</Protected>
+            {children}
 
             <Modal.Anchor />
             <ToastHolder />
