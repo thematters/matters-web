@@ -14,7 +14,7 @@ class EmbedCode extends BlockEmbed {
     iframe.setAttribute('allowfullscreen', 'false')
     iframe.setAttribute(
       'sandbox',
-      'allow-scripts allow-same-origin allow-popups'
+      'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation'
     )
 
     const iframeContainer = document.createElement('div')
