@@ -15,11 +15,16 @@ if [[ $1 == 'develop' ]]
 then
     echo "Deploying to development environment..."
     printf '\n\n' | eb init $APP_DEVELOP --region $REGION_DEVELOP
+    # only apply in develop/staging environments
+    # https://forums.aws.amazon.com/message.jspa?messageID=855383#855383
+    # https://stackoverflow.com/a/30389695
+    cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
     eb deploy $ENV_DEVELOP
 elif [[ $1 == 'staging' ]]
 then
     echo "Deploying to staging environment..."
     printf '\n\n' | eb init $APP_STAGING --region $REGION_STAGING
+    cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
     eb deploy $ENV_STAGING
 elif [[ $1 == 'prod' ]]
 then
