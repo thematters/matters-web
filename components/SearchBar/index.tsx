@@ -93,7 +93,6 @@ const BaseSearchBar: React.FC<
         return (
           <Dropdown
             content={<AutoComplete hideDropdown={hideDropdown} />}
-            zIndex={101}
             trigger="manual"
             onCreate={setInstance}
             theme="dropdown shadow-light"

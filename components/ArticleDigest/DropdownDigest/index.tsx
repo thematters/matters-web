@@ -116,7 +116,6 @@ const DropdownDigestWrapper = ({
             zh_hans="该作品已从站内隐藏"
           />
         }
-        zIndex={100}
       >
         <div>
           <DropdownDigest article={article} {...props} />

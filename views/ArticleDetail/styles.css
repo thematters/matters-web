@@ -36,9 +36,6 @@
 
 .collection-popover {
   padding: var(--spacing-tight);
-  max-height: 50vh;
-
-  overflow: auto;
   text-align: left;
 
   & h3 {

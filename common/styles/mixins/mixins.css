@@ -75,6 +75,16 @@
   word-wrap: normal;
 }
 
+@define-mixin max-height-scroll {
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @media (--lg-up) {
+    max-height: 70vh;
+  }
+}
+
 @define-mixin unread-dot {
   position: relative;
 

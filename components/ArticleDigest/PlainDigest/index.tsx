@@ -81,7 +81,6 @@ const PlainDigestWrapper = ({
             zh_hans="该作品已从站内隐藏"
           />
         }
-        zIndex={100}
         placement="left"
       >
         <div>

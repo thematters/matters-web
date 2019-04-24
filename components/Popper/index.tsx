@@ -35,7 +35,7 @@ Dropdown.defaultProps = {
   animateFill: false,
   theme: 'dropdown',
   boundary: 'window',
-  zIndex: 99 // zIndex of GlobalHeader is 100
+  zIndex: 101 // zIndex of GlobalHeader is 100
 }
 
 export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -47,7 +47,7 @@ Tooltip.defaultProps = {
   animateFill: false,
   theme: 'tooltip',
   boundary: 'window',
-  zIndex: 99
+  zIndex: 101 // zIndex of GlobalHeader is 100
 }
 
 export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -59,5 +59,5 @@ Popover.defaultProps = {
   animateFill: false,
   theme: 'popover',
   boundary: 'window',
-  zIndex: 99
+  zIndex: 101 // zIndex of GlobalHeader is 100
 }
