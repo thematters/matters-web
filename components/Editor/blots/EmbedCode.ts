@@ -9,12 +9,16 @@ class EmbedCode extends BlockEmbed {
     const figcaption = Parchment.create('figcaption', caption).domNode
     const iframe = document.createElement('iframe')
 
+    const codeType = this.getType(url)
+
     iframe.setAttribute('src', url)
     iframe.setAttribute('frameborder', '0')
     iframe.setAttribute('allowfullscreen', 'false')
     iframe.setAttribute(
       'sandbox',
-      'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation'
+      codeType === 'likebutton'
+        ? 'allow-scripts allow-same-origin allow-popups'
+        : 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation'
     )
 
     const iframeContainer = document.createElement('div')
@@ -24,7 +28,6 @@ class EmbedCode extends BlockEmbed {
     node.appendChild(iframeContainer)
     node.appendChild(figcaption)
 
-    const codeType = this.getType(url)
     if (codeType) {
       node.classList.add(codeType)
     }
