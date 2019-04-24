@@ -31,6 +31,10 @@ aside {
     z-index: 80;
   }
 
+  @supports (position: sticky) {
+    padding-top: 0;
+  }
+
   &.opened {
     transform: translateX(0%);
     opacity: 1;

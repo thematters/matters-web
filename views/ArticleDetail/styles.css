@@ -35,6 +35,7 @@
 }
 
 .collection-popover {
+  @mixin max-height-scroll;
   padding: var(--spacing-tight);
   text-align: left;
 

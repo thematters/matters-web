@@ -17,7 +17,6 @@
 }
 
 ol {
-  @mixin max-height-scroll;
   counter-reset: collection-counter;
 }
 

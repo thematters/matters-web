@@ -37,7 +37,7 @@ export default ({
   return (
     <Responsive.LargeUp>
       {(match: boolean) => (
-        <div className="sticky-container">
+        <>
           {match && hasCollection && (
             <section className="collection" ref={collectionRef}>
               <Collection authorId={authorId} hasEdit />
@@ -46,7 +46,7 @@ export default ({
 
           <Footer />
           <style jsx>{styles}</style>
-        </div>
+        </>
       )}
     </Responsive.LargeUp>
   )
