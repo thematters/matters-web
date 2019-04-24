@@ -1,5 +1,13 @@
 /* @styled-jsx=global */
 
+:root {
+  /*
+   * Calculated by RGB_background rgb(255, 255, 255) and RGBA_color rgba(0, 0, 0, 0.08)
+   * https://marcodiiga.github.io/rgba-to-rgb-conversion
+   */
+  --popper-border-color: #ebebeb;
+}
+
 /**
  * reset
  * https://github.com/atomiks/tippyjs/blob/master/src/scss/index.scss
@@ -20,7 +28,7 @@
   border-radius: 2px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  border: 1px solid var(--color-line-grey-light);
+  border: 1px solid var(--popper-border-color);
 }
 
 /* tooltip */
@@ -42,10 +50,10 @@
   border-radius: 2px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  border: 1px solid var(--color-line-grey-light);
+  border: 1px solid var(--popper-border-color);
 }
 .tippy-popper[x-placement^='top'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-top-color: rgba(0, 0, 0, 0.08);
+  border-top-color: var(--popper-border-color);
   bottom: -8px;
 
   &::before {
@@ -59,7 +67,7 @@
   }
 }
 .tippy-popper[x-placement^='bottom'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-bottom-color: rgba(0, 0, 0, 0.08);
+  border-bottom-color: var(--popper-border-color);
   top: -8px;
 
   &::before {
@@ -73,7 +81,7 @@
   }
 }
 .tippy-popper[x-placement^='left'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-left-color: rgba(0, 0, 0, 0.08);
+  border-left-color: var(--popper-border-color);
   right: -8px;
 
   &::before {
@@ -87,7 +95,7 @@
   }
 }
 .tippy-popper[x-placement^='right'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-right-color: rgba(0, 0, 0, 0.08);
+  border-right-color: var(--popper-border-color);
   left: -8px;
 
   &::before {
