@@ -45,16 +45,60 @@
   border: 1px solid var(--color-line-grey-light);
 }
 .tippy-popper[x-placement^='top'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-top-color: var(--color-white);
+  border-top-color: rgba(0, 0, 0, 0.08);
+  bottom: -8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    bottom: 1px;
+    border-top: 7px solid var(--color-white);
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+  }
 }
 .tippy-popper[x-placement^='bottom'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-bottom-color: var(--color-white);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+  top: -8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 1px;
+    border-bottom: 7px solid var(--color-white);
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+  }
 }
 .tippy-popper[x-placement^='left'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-left-color: var(--color-white);
+  border-left-color: rgba(0, 0, 0, 0.08);
+  right: -8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: 1px;
+    border-left: 7px solid var(--color-white);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
 }
 .tippy-popper[x-placement^='right'] .tippy-tooltip.popover-theme .tippy-arrow {
-  border-right-color: var(--color-white);
+  border-right-color: rgba(0, 0, 0, 0.08);
+  left: -8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 1px;
+    border-right: 7px solid var(--color-white);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
 }
 
 /* shadow */
