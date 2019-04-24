@@ -34,6 +34,7 @@ Dropdown.defaultProps = {
   placement: 'bottom',
   animateFill: false,
   theme: 'dropdown',
+  boundary: 'window',
   zIndex: 99 // zIndex of GlobalHeader is 100
 }
 
@@ -45,6 +46,7 @@ Tooltip.defaultProps = {
   placement: 'right',
   animateFill: false,
   theme: 'tooltip',
+  boundary: 'window',
   zIndex: 99
 }
 
@@ -56,5 +58,6 @@ Popover.defaultProps = {
   placement: 'right',
   animateFill: false,
   theme: 'popover',
+  boundary: 'window',
   zIndex: 99
 }

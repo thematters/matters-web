@@ -3,6 +3,7 @@
   @mixin flex-start-space-between;
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-tight);
+  font-size: 0;
 }
 
 .content {

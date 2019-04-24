@@ -110,7 +110,6 @@ const DropdownDigestWrapper = ({
   if (hasArchivedTooltip && isInactive) {
     return (
       <Tooltip
-        boundary="window"
         content={
           <Translate
             zh_hant="該作品已從站內隱藏"
