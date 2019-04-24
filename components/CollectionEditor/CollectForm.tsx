@@ -80,8 +80,8 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
               <input
                 type="search"
                 placeholder={translate({
-                  zh_hant: '搜索標題或作者…',
-                  zh_hans: '搜索标题或作者…',
+                  zh_hant: '搜尋作品標題…',
+                  zh_hans: '搜索作品标题…',
                   lang
                 })}
                 onChange={event => {
