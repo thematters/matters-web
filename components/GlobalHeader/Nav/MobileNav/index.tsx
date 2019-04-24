@@ -22,7 +22,6 @@ export default () => {
       distance={8}
       theme="dropdown shadow-default"
       onCreate={setInstance}
-      zIndex={101}
     >
       <button type="button" aria-label="菜單" className="nav-button">
         <Icon

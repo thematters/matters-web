@@ -99,7 +99,6 @@ const NoticeButton = ({
           error={error}
         />
       }
-      zIndex={101}
       distance={12}
       trigger="click"
       onCreate={setInstance}

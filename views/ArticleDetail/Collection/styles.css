@@ -12,12 +12,12 @@
 }
 
 .editing-list {
+  @mixin max-height-scroll;
   padding: 0 var(--spacing-default);
-  max-height: 50vh;
-  overflow-y: auto;
 }
 
 ol {
+  @mixin max-height-scroll;
   counter-reset: collection-counter;
 }
 
