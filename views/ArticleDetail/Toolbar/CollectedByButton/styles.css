@@ -1,7 +1,6 @@
 .container {
+  @mixin max-height-scroll;
   width: var(--sizing-menu-md);
-  max-height: 50vh;
-  overflow: auto;
 }
 
 h3 {

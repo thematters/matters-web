@@ -5,10 +5,14 @@
 }
 
 .subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @mixin flex-center-space-between;
   padding-top: var(--spacing-x-tight);
+
+  & .collection {
+    & .count {
+      color: var(--color-grey-darker);
+    }
+  }
 }
 
 .author {
@@ -27,5 +31,28 @@
   @media (--sm-up) {
     padding-left: var(--spacing-tight);
     padding-right: var(--spacing-tight);
+  }
+}
+
+.collection-popover {
+  @mixin max-height-scroll;
+  padding: var(--spacing-tight);
+  text-align: left;
+
+  & h3 {
+    margin-bottom: var(--spacing-tight);
+    padding-left: var(--spacing-x-tight);
+
+    font-size: var(--font-size-md);
+    font-size: var(--font-weight-medium);
+  }
+}
+
+.collection-meta {
+  margin-left: var(--spacing-tight);
+  vertical-align: middle;
+
+  @media (--lg-up) {
+    pointer-events: none;
   }
 }

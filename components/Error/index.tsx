@@ -1,16 +1,21 @@
+import getConfig from 'next/config'
+
 import { Translate } from '~/components'
 
 import IMAGE_ILLUSTRATION_EMPTY from '~/static/images/illustration-empty.svg'
 
 import styles from './styles.css'
 
+const {
+  publicRuntimeConfig: { ENV }
+} = getConfig()
+const isProd = ENV === 'production'
+
 interface ErrorProps {
   statusCode?: number | string | null
   error?: any
   type?: 'network' | 'server' | 'not_found'
 }
-
-const isProd = process.env.NODE_ENV === 'production'
 
 const ServerError = () => (
   <Translate

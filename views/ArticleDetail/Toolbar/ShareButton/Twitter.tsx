@@ -3,7 +3,8 @@ import _get from 'lodash/get'
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
-import { objectToGetParams } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, objectToGetParams } from '~/common/utils'
 import ICON_SHARE_TWITTER from '~/static/icons/share-twitter.svg?sprite'
 
 const Twitter = () => (
@@ -19,6 +20,10 @@ const Twitter = () => (
           text,
           via: 'matterslab'
         })
+      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
+        type: SHARE_TYPE.TWITTER,
+        url
+      })
       return window.open(shareUrl, 'Share to Twitter')
     }}
   >

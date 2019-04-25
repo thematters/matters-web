@@ -1,0 +1,53 @@
+:root {
+  --collection-list-number-width: 1.25rem;
+  --collection-list-spacing: calc(
+    var(--collection-list-number-width) + var(--spacing-x-tight)
+  );
+}
+
+.edit-button {
+  position: absolute;
+  bottom: calc(100% + var(--spacing-tight));
+  right: 0;
+}
+
+.editing-list {
+  @mixin max-height-scroll;
+  padding: 0 var(--spacing-default);
+}
+
+ol {
+  counter-reset: collection-counter;
+}
+
+li {
+  position: relative;
+  padding-left: var(--collection-list-spacing);
+
+  & + li {
+    margin-top: var(--spacing-tight);
+  }
+
+  &::before {
+    counter-increment: collection-counter;
+    content: counter(collection-counter) '. ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--collection-list-number-width);
+
+    color: var(--color-grey);
+    font-size: var(--font-size-sm);
+    text-align: right;
+  }
+}
+
+.load-more {
+  padding: var(--spacing-tight) var(--collection-list-spacing)
+    var(--spacing-x-tight);
+
+  & :global(svg) {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}

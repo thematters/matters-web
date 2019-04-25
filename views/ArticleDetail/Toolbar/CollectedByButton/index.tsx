@@ -1,10 +1,13 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 
+import { TextIcon } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
 
+import { numAbbr } from '~/common/utils'
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 
 import {
@@ -40,16 +43,14 @@ const CollectedBy = ({
 
 const CollectedByButton = ({
   article,
-  popperPlacement = 'right'
+  popperPlacement = 'right',
+  textPlacement = 'right'
 }: {
   article: CollectedByArticle
   popperPlacement?: 'right' | 'top'
+  textPlacement?: 'bottom' | 'right'
 }) => {
-  if (
-    !article.collectedBy ||
-    !article.collectedBy.edges ||
-    article.collectedBy.edges.length === 0
-  ) {
+  if (_get(article, 'collectedBy.edges.length', 0) <= 0) {
     return null
   }
 
@@ -61,10 +62,20 @@ const CollectedByButton = ({
       placement={popperPlacement}
     >
       <button type="button">
-        <Icon
-          size="default"
-          id={ICON_DIRECTION.id}
-          viewBox={ICON_DIRECTION.viewBox}
+        <TextIcon
+          icon={
+            <Icon
+              size="default"
+              id={ICON_DIRECTION.id}
+              viewBox={ICON_DIRECTION.viewBox}
+            />
+          }
+          text={numAbbr(_get(article, 'collectedBy.totalCount', 0))}
+          textPlacement={textPlacement}
+          color="grey"
+          weight="medium"
+          size="xs"
+          spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}
         />
       </button>
     </Popover>
@@ -76,6 +87,7 @@ CollectedByButton.fragments = {
     fragment CollectedByArticle on Article {
       id
       collectedBy(input: { first: null }) {
+        totalCount
         edges {
           node {
             id

@@ -37,7 +37,6 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
     <>
       <Dropdown
         content={<DropdownMenu hideDropdown={hideDropdown} />}
-        zIndex={101}
         onCreate={setInstance}
       >
         <button type="button" className={containerClasses}>

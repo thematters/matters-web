@@ -1,6 +1,13 @@
 header {
   @mixin flex-center-space-between;
-  margin-bottom: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+
+  @supports (position: sticky) {
+    position: sticky;
+    top: 0;
+    padding-top: var(--spacing-loose);
+    background: var(--color-white);
+  }
 }
 
 h2,

@@ -12,10 +12,8 @@
 }
 
 .header {
+  @mixin flex-center-space-between;
   margin-bottom: var(--spacing-x-tight);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .content {
@@ -45,7 +43,7 @@
     padding-right: calc(var(--digest-feed-cover-width) + 3rem);
   }
 
-  & :global(.actions) {
+  & :global(.actions > *) {
     margin-top: var(--spacing-tight);
   }
 }

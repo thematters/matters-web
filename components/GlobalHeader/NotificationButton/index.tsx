@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import getConfig from 'next/config'
 import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
@@ -16,8 +17,12 @@ import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
 
-const POLL_INTERVAL =
-  process.env.NODE_ENV === 'production' ? 1000 * 10 : 1000 * 60
+const {
+  publicRuntimeConfig: { ENV }
+} = getConfig()
+const isProd = ENV === 'production'
+
+const POLL_INTERVAL = isProd ? 1000 * 10 : 1000 * 60
 
 const UNREAD_NOTICE_COUNT = gql`
   query UnreadNoticeCount {
@@ -94,7 +99,6 @@ const NoticeButton = ({
           error={error}
         />
       }
-      zIndex={101}
       distance={12}
       trigger="click"
       onCreate={setInstance}

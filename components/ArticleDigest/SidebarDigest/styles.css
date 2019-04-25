@@ -15,7 +15,7 @@
   & .left {
     padding-right: var(--spacing-default);
 
-    & :global(.actions) {
+    & :global(.actions > *) {
       margin-top: var(--spacing-x-tight);
     }
   }

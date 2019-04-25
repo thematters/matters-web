@@ -4,7 +4,8 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 
-import { dom, objectToGetParams } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, dom, objectToGetParams } from '~/common/utils'
 import ICON_SHARE_EMAIL from '~/static/icons/share-email.svg?sprite'
 
 const Email = () => (
@@ -19,6 +20,10 @@ const Email = () => (
       const shareUrl =
         'mailto:' +
         objectToGetParams({ subject: text, body: `${description}\n\n${url}` })
+      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
+        type: SHARE_TYPE.EMAIL,
+        url
+      })
       return (window.location.href = shareUrl)
     }}
   >

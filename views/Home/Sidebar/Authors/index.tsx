@@ -65,7 +65,9 @@ export default () => (
                 <ShuffleButton
                   onClick={() => {
                     refetch()
-                    analytics.trackEvent(ANALYTICS_EVENTS.SHUFFLE_AUTHOR)
+                    analytics.trackEvent(ANALYTICS_EVENTS.SHUFFLE_AUTHOR, {
+                      type: FEED_TYPE.AUTHORS
+                    })
                   }}
                 />
                 <ViewAllLink type="authors" />
@@ -82,7 +84,7 @@ export default () => (
                       key={cursor}
                       onClick={() =>
                         analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                          type: FEED_TYPE.AUTHOR,
+                          type: FEED_TYPE.AUTHORS,
                           location: i
                         })
                       }
