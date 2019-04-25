@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2019-04-25
+
+### Added
+
+- Allow partner to edit collections #230
+- HTTP Basic Authentication for testing enviroments #231
+
+# Changed
+
+- Disable publish button if draft content, title or publishState is incorrect #225
+- Fix incorrect style of related article digest and wrap "<Actions>" #226
+- Update style of sidebar collection #229
+- Analytics & iframe sandbox #232
+- Fix & Update collection related issues #233
+- Remove sidebar sticky feature #234
+- Fix reversed condition #235
+
 ## [1.4.0] - 2019-04-20
 
 ### Added
