@@ -3,7 +3,8 @@ import _get from 'lodash/get'
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
-import { objectToGetParams } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, objectToGetParams } from '~/common/utils'
 import ICON_SHARE_TELEGRAM from '~/static/icons/share-telegram.svg?sprite'
 
 const Telegram = () => (
@@ -18,6 +19,10 @@ const Telegram = () => (
           url,
           text
         })
+      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
+        type: SHARE_TYPE.TELEGRAM,
+        url
+      })
       return window.open(shareUrl, 'Share to Telegram')
     }}
   >

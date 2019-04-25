@@ -3,7 +3,8 @@ import _get from 'lodash/get'
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
-import { objectToGetParams } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, objectToGetParams } from '~/common/utils'
 import ICON_SHARE_FACEBOOK from '~/static/icons/share-facebook.svg?sprite'
 
 const Facebook = () => (
@@ -16,6 +17,10 @@ const Facebook = () => (
         objectToGetParams({
           u: url
         })
+      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
+        type: SHARE_TYPE.FACEBOOK,
+        url
+      })
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
