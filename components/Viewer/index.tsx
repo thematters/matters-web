@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import React from 'react'
@@ -58,6 +59,16 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isOnboarding = state === 'onboarding'
   const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
   const isAdmin = role === 'admin'
+
+  // Add user info for Sentry
+  Sentry.configureScope((scope: any) => {
+    scope.setUser({
+      id: viewer.id,
+      role,
+      language: _get(viewer, 'settings.language')
+    })
+    scope.setTag('source', 'web')
+  })
 
   return {
     ...viewer,

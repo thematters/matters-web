@@ -33,7 +33,8 @@ const nextConfig = {
     API_URL: process.env.API_URL,
     WS_URL: process.env.WS_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY,
-    FB_APP_ID: process.env.FB_APP_ID
+    FB_APP_ID: process.env.FB_APP_ID,
+    SENTRY_DSN: process.env.SENTRY_DSN
   },
 
   /**

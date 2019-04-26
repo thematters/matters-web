@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
 import _get from 'lodash/get'
 
@@ -27,6 +28,9 @@ export const getErrorCodes = (error: any) => {
 }
 
 export const checkError = (error: ApolloError) => {
+  // Add info to Sentry
+  Sentry.captureException(error)
+
   if (!process.browser) {
     throw error
   }
