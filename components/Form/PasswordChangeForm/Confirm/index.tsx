@@ -5,10 +5,11 @@ import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
-import { Mutation } from '~/components/GQL'
+import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { isValidStrictPassword, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -172,7 +173,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
       const { password } = values
       const { submitAction } = props
       if (!submitAction) {
@@ -185,8 +186,14 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
             submitCallback()
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+        .catch((error: any) => {
+          const errorCode = getErrorCodes(error)[0]
+          const errorMessage = translate({
+            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+            lang
+          })
+          setFieldError('password', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)
