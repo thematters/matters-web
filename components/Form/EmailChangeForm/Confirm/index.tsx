@@ -120,7 +120,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
               <SendCodeButton
                 email={values.email}
                 lang={lang}
-                type="email_reset"
+                type="email_reset_confirm"
               />
             }
             values={values}
@@ -170,7 +170,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
       }
 
       preSubmitAction({
-        variables: { input: { email, type: 'email_reset', code } }
+        variables: { input: { email, type: 'email_reset_confirm', code } }
       })
         .then(({ data }: any) => {
           const { confirmVerificationCode } = data

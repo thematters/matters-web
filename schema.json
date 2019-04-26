@@ -5484,8 +5484,8 @@
                 }
               }
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "not used"
           },
           {
             "name": "comments",
@@ -6013,6 +6013,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "oss",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -6938,7 +6948,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "ConnectionArgs",
+                    "name": "TagsInput",
                     "ofType": null
                   }
                 },
@@ -7095,6 +7105,76 @@
         ],
         "interfaces": null,
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TagsInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "after",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "first",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "sort",
+            "description": "",
+            "type": {
+              "kind": "ENUM",
+              "name": "TagsSort",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "TagsSort",
+        "description": "",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "newest",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "oldest",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hottest",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -10750,6 +10830,12 @@
             "deprecationReason": null
           },
           {
+            "name": "email_reset_confirm",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "password_reset",
             "description": "",
             "isDeprecated": false,
@@ -13969,7 +14055,10 @@
       {
         "name": "deprecated",
         "description": "",
-        "locations": ["FIELD_DEFINITION", "ENUM_VALUE"],
+        "locations": [
+          "FIELD_DEFINITION",
+          "ENUM_VALUE"
+        ],
         "args": [
           {
             "name": "reason",
@@ -13986,7 +14075,10 @@
       {
         "name": "authenticate",
         "description": "",
-        "locations": ["OBJECT", "FIELD_DEFINITION"],
+        "locations": [
+          "OBJECT",
+          "FIELD_DEFINITION"
+        ],
         "args": [
           {
             "name": "requires",
@@ -14003,7 +14095,10 @@
       {
         "name": "authorize",
         "description": "",
-        "locations": ["OBJECT", "FIELD_DEFINITION"],
+        "locations": [
+          "OBJECT",
+          "FIELD_DEFINITION"
+        ],
         "args": [
           {
             "name": "requires",
@@ -14020,13 +14115,19 @@
       {
         "name": "private",
         "description": "",
-        "locations": ["FIELD_DEFINITION"],
+        "locations": [
+          "FIELD_DEFINITION"
+        ],
         "args": []
       },
       {
         "name": "skip",
         "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
-        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+        "locations": [
+          "FIELD",
+          "FRAGMENT_SPREAD",
+          "INLINE_FRAGMENT"
+        ],
         "args": [
           {
             "name": "if",
@@ -14047,7 +14148,11 @@
       {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
-        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+        "locations": [
+          "FIELD",
+          "FRAGMENT_SPREAD",
+          "INLINE_FRAGMENT"
+        ],
         "args": [
           {
             "name": "if",

@@ -27,7 +27,7 @@ import styles from './styles.css'
 interface Props {
   email: string
   lang: Language
-  type: 'register' | 'email_reset' | 'password_reset' | 'email_verify'
+  type: 'register' | 'email_reset' | 'email_reset_confirm' | 'password_reset' | 'email_verify'
 }
 
 export const MUTATION_SEND_CODE = gql`
