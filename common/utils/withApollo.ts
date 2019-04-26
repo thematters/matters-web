@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink, split } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
@@ -9,6 +10,8 @@ import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
+
+import { genSentryActionId } from '~/common/utils'
 
 import {
   inMemoryCache
@@ -87,13 +90,33 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const sentryLink = setContext((_, { headers }) => {
+  // Add action id for Sentry
+  const actionId = genSentryActionId()
+  Sentry.configureScope((scope: any) => {
+    scope.setTag('action-id', actionId)
+  })
+
+  return {
+    headers: {
+      ...headers,
+      'x-sentry-action-id': actionId
+    }
+  }
+})
+
 export default withApollo(({ ctx, headers, initialState }) => {
   inMemoryCache.restore(initialState || {})
 
   // setupPersistCache()
 
   return new ApolloClient({
-    link: ApolloLink.from([errorLink, authLink, dataLink({ headers })]),
+    link: ApolloLink.from([
+      errorLink,
+      authLink,
+      sentryLink,
+      dataLink({ headers })
+    ]),
     cache: inMemoryCache
   })
 })
