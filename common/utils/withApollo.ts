@@ -111,7 +111,12 @@ export default withApollo(({ ctx, headers, initialState }) => {
   // setupPersistCache()
 
   return new ApolloClient({
-    link: ApolloLink.from([errorLink, authLink, sentryLink, dataLink({ headers })]),
+    link: ApolloLink.from([
+      errorLink,
+      authLink,
+      sentryLink,
+      dataLink({ headers })
+    ]),
     cache: inMemoryCache
   })
 })
