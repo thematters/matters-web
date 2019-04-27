@@ -1,7 +1,9 @@
+import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import App, { Container } from 'next/app'
+import getConfig from 'next/config'
 import React from 'react'
 import { ApolloProvider, QueryResult } from 'react-apollo'
 
@@ -17,6 +19,13 @@ import { Query } from '~/components/GQL'
 import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
+
+// start Sentry
+const {
+  publicRuntimeConfig: { SENTRY_DSN }
+} = getConfig()
+
+Sentry.init({ dsn: SENTRY_DSN || '' })
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   public query = gql`
