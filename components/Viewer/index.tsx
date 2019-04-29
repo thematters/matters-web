@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import React from 'react'
 
+import { PARTNERS } from '~/common/enums'
+
 import { ViewerUser } from './__generated__/ViewerUser'
 
 export const ViewerUserFragment = {
@@ -46,6 +48,7 @@ type Viewer = ViewerUser & {
   isOnboarding: boolean
   isInactive: boolean
   isAdmin: boolean
+  isPartner: boolean
 }
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
@@ -59,6 +62,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isOnboarding = state === 'onboarding'
   const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
   const isAdmin = role === 'admin'
+  const isPartner = PARTNERS.includes(viewer.userName || '')
 
   // Add user info for Sentry
   Sentry.configureScope((scope: any) => {
@@ -79,7 +83,8 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isFrozen,
     isOnboarding,
     isInactive,
-    isAdmin
+    isAdmin,
+    isPartner
   }
 }
 

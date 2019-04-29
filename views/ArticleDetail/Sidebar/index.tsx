@@ -8,11 +8,11 @@ import Collection from '../Collection'
 import styles from './styles.css'
 
 export default ({
-  authorId,
-  hasCollection
+  hasCollection,
+  canEditCollection
 }: {
-  authorId: any
   hasCollection: boolean
+  canEditCollection?: boolean
 }) => {
   const collectionRef: React.RefObject<HTMLElement> = useRef(null)
 
@@ -38,9 +38,9 @@ export default ({
     <Responsive.LargeUp>
       {(match: boolean) => (
         <>
-          {match && hasCollection && (
+          {match && (hasCollection || canEditCollection) && (
             <section className="collection" ref={collectionRef}>
-              <Collection authorId={authorId} hasEdit />
+              <Collection canEdit={canEditCollection} />
             </section>
           )}
 

@@ -44,7 +44,7 @@ ul {
       background: var(--color-bg-green);
     }
 
-    @media (--sm-up) {
+    @media (--lg-up) {
       margin-right: 0;
       margin-left: 0;
 
