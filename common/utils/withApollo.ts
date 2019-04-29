@@ -1,4 +1,8 @@
 import * as Sentry from '@sentry/browser'
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher
+} from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink, split } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
@@ -11,13 +15,14 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
+import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { genSentryActionId } from '~/common/utils'
 
-import {
-  inMemoryCache
-  // setupPersistCache
-} from './cache'
+// import { setupPersistCache } from './cache'
 
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData
+})
 const isProd = process.env.NODE_ENV === 'production'
 
 const {
@@ -106,9 +111,10 @@ const sentryLink = setContext((_, { headers }) => {
 })
 
 export default withApollo(({ ctx, headers, initialState }) => {
+  const inMemoryCache = new InMemoryCache({ fragmentMatcher })
   inMemoryCache.restore(initialState || {})
 
-  // setupPersistCache()
+  // setupPersistCache(inMemoryCache)
 
   return new ApolloClient({
     link: ApolloLink.from([
