@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, numAbbr, toPath } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { CommentCountArticle } from './__generated__/CommentCountArticle'
@@ -12,11 +13,10 @@ import { CommentCountArticle } from './__generated__/CommentCountArticle'
 const fragments = {
   article: gql`
     fragment CommentCountArticle on Article {
+      id
       slug
       mediaHash
-      comments(input: { first: 0 }) {
-        totalCount
-      }
+      commentCount
       author {
         userName
       }
@@ -47,7 +47,14 @@ const CommentCount = ({
 
   return (
     <Link {...path}>
-      <a>
+      <a
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+            entrance: article.id,
+            type: 'article-digest'
+          })
+        }}
+      >
         <TextIcon
           icon={
             <Icon
@@ -58,7 +65,7 @@ const CommentCount = ({
           }
           color="grey"
           weight="medium"
-          text={numAbbr(_get(article, 'comments.totalCount', 0))}
+          text={numAbbr(_get(article, 'commentCount', 0))}
           size={size === 'default' ? 'sm' : 'xs'}
           spacing="xxtight"
         />
