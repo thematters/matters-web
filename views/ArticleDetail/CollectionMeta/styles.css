@@ -1,0 +1,27 @@
+.collection-popover {
+  @mixin max-height-scroll;
+  width: var(--sizing-menu-md);
+  padding: var(--spacing-tight);
+  text-align: left;
+
+  & h3 {
+    margin-bottom: var(--spacing-tight);
+    padding-left: var(--spacing-x-tight);
+
+    font-size: var(--font-size-md);
+    font-size: var(--font-weight-medium);
+  }
+}
+
+.collection-meta {
+  margin-left: var(--spacing-tight);
+  vertical-align: middle;
+
+  @media (--lg-up) {
+    pointer-events: none;
+  }
+
+  & .count {
+    color: var(--color-grey-darker);
+  }
+}

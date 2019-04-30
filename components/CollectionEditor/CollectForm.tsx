@@ -18,7 +18,7 @@ import { translate } from '~/common/utils'
 import styles from './styles.css'
 
 interface Props {
-  onAdd: (articleId: string) => void
+  onAdd: (article: SearchArticles_search_edges_node_Article) => void
 }
 
 const debouncedSetSearch = _debounce((value, setSearch) => {
@@ -70,7 +70,7 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
                   onClick={(
                     article: SearchArticles_search_edges_node_Article
                   ) => {
-                    onAdd(article.id)
+                    onAdd(article)
                     setSearch('')
                     hideDropdown()
                   }}

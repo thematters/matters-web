@@ -38,6 +38,7 @@
           { "name": "UserNewFollowerNotice" },
           { "name": "ArticlePublishedNotice" },
           { "name": "ArticleNewDownstreamNotice" },
+          { "name": "ArticleNewCollectedNotice" },
           { "name": "ArticleNewAppreciationNotice" },
           { "name": "ArticleNewSubscriberNotice" },
           { "name": "ArticleNewCommentNotice" },

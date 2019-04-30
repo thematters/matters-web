@@ -9,11 +9,22 @@
   position: absolute;
   bottom: calc(100% + var(--spacing-tight));
   right: 0;
+  line-height: 1;
+
+  &.inner {
+    bottom: auto;
+    top: var(--spacing-tight);
+    right: var(--spacing-tight);
+  }
 }
 
 .editing-list {
   @mixin max-height-scroll;
-  padding: 0 var(--spacing-default);
+  padding: 0 var(--spacing-x-tight);
+
+  @media (--lg-up) {
+    padding: 0 var(--spacing-default);
+  }
 }
 
 ol {
