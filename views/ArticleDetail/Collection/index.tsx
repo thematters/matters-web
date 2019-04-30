@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
@@ -16,15 +17,15 @@ import {
 } from '~/components'
 import { Mutation, Query } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
-import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, PARTNERS } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import {
   analytics,
   getQuery,
   mergeConnections,
   translate
 } from '~/common/utils'
+import ICON_ADD from '~/static/icons/add.svg?sprite'
 import ICON_EDIT from '~/static/icons/collection-edit.svg?sprite'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 import ICON_SAVE from '~/static/icons/pen.svg?sprite'
@@ -42,12 +43,14 @@ const SIDEBAR_COLLECTION = gql`
   ) {
     article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
       id
-      collection(input: { after: $cursor, first: $first }) {
+      collection(input: { after: $cursor, first: $first })
+        @connection(key: "articleCollection") {
         pageInfo {
           startCursor
           endCursor
           hasNextPage
         }
+        totalCount
         edges {
           cursor
           node {
@@ -64,12 +67,14 @@ const EDITOR_COLLECTION = gql`
   query EditorCollection($mediaHash: String, $uuid: UUID, $first: Int) {
     article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
       id
-      collection(input: { first: $first }) {
+      collection(input: { first: $first })
+        @connection(key: "articleCollection") {
         pageInfo {
           startCursor
           endCursor
           hasNextPage
         }
+        totalCount
         edges {
           cursor
           node {
@@ -86,7 +91,9 @@ const EDITOR_SET_COLLECTION = gql`
   mutation EditorSetCollection($id: ID!, $collection: [ID!]!, $first: Int) {
     setCollection(input: { id: $id, collection: $collection }) {
       id
-      collection(input: { first: $first }) {
+      collection(input: { first: $first })
+        @connection(key: "articleCollection") {
+        totalCount
         edges {
           cursor
           node {
@@ -113,14 +120,21 @@ const IconBox = ({ icon }: { icon: any }) => (
 
 const CollectionEditButton = ({
   editing,
-  setEditing
+  setEditing,
+  inPopover
 }: {
   editing: boolean
   setEditing: any
+  inPopover?: boolean
 }) => {
+  const editButtonClass = classNames({
+    'edit-button': true,
+    inner: inPopover
+  })
+
   if (editing) {
     return (
-      <span className="edit-button">
+      <span className={editButtonClass}>
         <Button
           icon={<IconBox icon={ICON_SAVE} />}
           size="small"
@@ -135,7 +149,7 @@ const CollectionEditButton = ({
   }
 
   return (
-    <span className="edit-button">
+    <span className={editButtonClass}>
       <button onClick={() => setEditing(true)}>
         <TextIcon color="grey" icon={<IconBox icon={ICON_EDIT} />}>
           <Translate zh_hant="修訂" zh_hans="修订" />
@@ -148,10 +162,14 @@ const CollectionEditButton = ({
 
 const CollectionList = ({
   mediaHash,
-  uuid
+  uuid,
+  setEditing,
+  canEdit
 }: {
   mediaHash: string | undefined
   uuid: string | undefined
+  setEditing: any
+  canEdit?: boolean
 }) => (
   <Query query={SIDEBAR_COLLECTION} variables={{ mediaHash, uuid, first: 10 }}>
     {({
@@ -165,7 +183,7 @@ const CollectionList = ({
       }
 
       const path = 'article.collection'
-      const { edges, pageInfo } = _get(data, path, {})
+      const { edges, pageInfo, totalCount } = _get(data, path, {})
       const loadRest = () =>
         fetchMore({
           variables: {
@@ -181,6 +199,27 @@ const CollectionList = ({
               path
             })
         })
+
+      if (totalCount <= 0 && canEdit) {
+        return (
+          <button type="button" onClick={() => setEditing(true)}>
+            <TextIcon
+              icon={
+                <Icon
+                  id={ICON_ADD.id}
+                  viewBox={ICON_ADD.viewBox}
+                  size="xsmall"
+                />
+              }
+              spacing="xtight"
+              color="green"
+              size="sm"
+            >
+              <Translate zh_hant="關聯一篇作品" zh_hans="关联一篇作品" />
+            </TextIcon>
+          </button>
+        )
+      }
 
       return (
         <>
@@ -329,14 +368,15 @@ const CollectionEditingList = ({
 }
 
 const Collection: React.FC<
-  WithRouterProps & { authorId?: any; hasEdit?: boolean }
-> = ({ router, authorId, hasEdit }) => {
-  const viewer = useContext(ViewerContext)
+  WithRouterProps & {
+    inPopover?: boolean
+    canEdit?: boolean
+  }
+> = ({ router, inPopover, canEdit }) => {
   const { lang } = useContext(LanguageContext)
   const [editing, setEditing] = useState<boolean>(false)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
-  const isPartner = PARTNERS.includes(viewer.userName || '')
 
   if (!mediaHash && !uuid) {
     return null
@@ -344,11 +384,22 @@ const Collection: React.FC<
 
   return (
     <>
-      {hasEdit && (viewer.isAdmin || (isPartner && viewer.id === authorId)) && (
-        <CollectionEditButton editing={editing} setEditing={setEditing} />
+      {canEdit && (
+        <CollectionEditButton
+          editing={editing}
+          setEditing={setEditing}
+          inPopover={inPopover}
+        />
       )}
 
-      {!editing && <CollectionList mediaHash={mediaHash} uuid={uuid} />}
+      {!editing && (
+        <CollectionList
+          mediaHash={mediaHash}
+          uuid={uuid}
+          setEditing={setEditing}
+          canEdit={canEdit}
+        />
+      )}
 
       {editing && (
         <CollectionEditingList mediaHash={mediaHash} uuid={uuid} lang={lang} />
