@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import _uniq from 'lodash/uniq'
+import _uniqBy from 'lodash/uniqBy'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
@@ -77,7 +77,7 @@ const EditingList = ({
         <section className="editing-list">
           <CollectionEditor
             articles={editingArticles}
-            onEdit={articles => setEditingArticles(articles)}
+            onEdit={articles => setEditingArticles(_uniqBy(articles, 'id'))}
           />
 
           <style jsx>{styles}</style>
