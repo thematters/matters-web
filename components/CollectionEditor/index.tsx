@@ -20,12 +20,11 @@ import styles from './styles.css'
 
 interface State {
   articles: DropdownDigestArticle[]
-  prevArticleIds: string[]
 }
 
 interface Props {
   articles: DropdownDigestArticle[]
-  onEdit: (articleIds: string[]) => void
+  onEdit: (articles: DropdownDigestArticle[]) => void
 }
 
 const reorder = (list: any[], startIndex: number, endIndex: number) => {
@@ -41,30 +40,28 @@ class CollectionEditor extends React.PureComponent<Props, State> {
     super(props)
 
     this.state = {
-      articles: this.props.articles,
-      prevArticleIds: this.props.articles.map(({ id }) => id)
+      articles: this.props.articles
     }
   }
 
   componentDidUpdate() {
-    const { prevArticleIds } = this.state
+    const { articles } = this.state
+    const prevArticleIds = articles.map(({ id }) => id)
     const articleIds = this.props.articles.map(({ id }) => id)
 
     if (_isEqual(prevArticleIds, articleIds)) {
       return
     }
 
-    this.setState({ articles: this.props.articles, prevArticleIds: articleIds })
+    this.setState({ articles: this.props.articles })
   }
 
-  onAdd = (articleId: string) => {
-    const prevArticleIds = this.state.articles.map(({ id }) => id)
-    this.props.onEdit([...prevArticleIds, articleId])
+  onAdd = (article: any) => {
+    this.props.onEdit([...this.state.articles, article])
   }
 
-  onDelete = (articleId: string) => {
-    const prevArticleIds = this.state.articles.map(({ id }) => id)
-    this.props.onEdit(prevArticleIds.filter(id => id !== articleId))
+  onDelete = (article: any) => {
+    this.props.onEdit(this.state.articles.filter(({ id }) => id !== article.id))
   }
 
   onDragEnd = (result: DropResult) => {
@@ -85,7 +82,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
       result.destination.index
     )
     this.setState({ articles: newItems })
-    this.props.onEdit(newItems.map(({ id }) => id))
+    this.props.onEdit(newItems)
   }
 
   render() {
