@@ -5,13 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2019-04-30
+
+### Added
+
+- Add Collection notice #247
+
+### Changed
+
+- Fix memory leak caused by inMemoryCache #243
+- Create collection in article sidebar #244
+- Add editing support for collection popover #244
+- Fix comment count #245
 
 ## [1.6.0] - 2019-04-27
 
 ### Added
+
 - Sentry bug tracker #240
 
 ### Changed
+
 - Add error handler for changing password #238
 - Add "email_reset_confirm" code type #239
 
