@@ -5,117 +5,52 @@
         "kind": "INTERFACE",
         "name": "Node",
         "possibleTypes": [
-          {
-            "name": "Article"
-          },
-          {
-            "name": "User"
-          },
-          {
-            "name": "Tag"
-          },
-          {
-            "name": "Draft"
-          },
-          {
-            "name": "Comment"
-          }
+          { "name": "Article" },
+          { "name": "User" },
+          { "name": "Tag" },
+          { "name": "Draft" },
+          { "name": "Comment" }
         ]
       },
       {
         "kind": "INTERFACE",
         "name": "Connection",
         "possibleTypes": [
-          {
-            "name": "ArticleConnection"
-          },
-          {
-            "name": "TagConnection"
-          },
-          {
-            "name": "UserConnection"
-          },
-          {
-            "name": "DraftConnection"
-          },
-          {
-            "name": "AudiodraftConnection"
-          },
-          {
-            "name": "ReadHistoryConnection"
-          },
-          {
-            "name": "RecentSearchConnection"
-          },
-          {
-            "name": "TransactionConnection"
-          },
-          {
-            "name": "InvitationConnection"
-          },
-          {
-            "name": "NoticeConnection"
-          },
-          {
-            "name": "CommentConnection"
-          },
-          {
-            "name": "SearchResultConnection"
-          },
-          {
-            "name": "ReportConnection"
-          }
+          { "name": "ArticleConnection" },
+          { "name": "TagConnection" },
+          { "name": "UserConnection" },
+          { "name": "DraftConnection" },
+          { "name": "AudiodraftConnection" },
+          { "name": "ReadHistoryConnection" },
+          { "name": "RecentSearchConnection" },
+          { "name": "TransactionConnection" },
+          { "name": "InvitationConnection" },
+          { "name": "NoticeConnection" },
+          { "name": "CommentConnection" },
+          { "name": "SearchResultConnection" },
+          { "name": "ReportConnection" }
         ]
       },
       {
         "kind": "INTERFACE",
         "name": "Notice",
         "possibleTypes": [
-          {
-            "name": "UserNewFollowerNotice"
-          },
-          {
-            "name": "ArticlePublishedNotice"
-          },
-          {
-            "name": "ArticleNewDownstreamNotice"
-          },
-          {
-            "name": "ArticleNewAppreciationNotice"
-          },
-          {
-            "name": "ArticleNewSubscriberNotice"
-          },
-          {
-            "name": "ArticleNewCommentNotice"
-          },
-          {
-            "name": "ArticleMentionedYouNotice"
-          },
-          {
-            "name": "SubscribedArticleNewCommentNotice"
-          },
-          {
-            "name": "UpstreamArticleArchivedNotice"
-          },
-          {
-            "name": "DownstreamArticleArchivedNotice"
-          },
-          {
-            "name": "CommentPinnedNotice"
-          },
-          {
-            "name": "CommentNewReplyNotice"
-          },
-          {
-            "name": "CommentNewUpvoteNotice"
-          },
-          {
-            "name": "CommentMentionedYouNotice"
-          },
-          {
-            "name": "OfficialAnnouncementNotice"
-          }
+          { "name": "UserNewFollowerNotice" },
+          { "name": "ArticlePublishedNotice" },
+          { "name": "ArticleNewDownstreamNotice" },
+          { "name": "ArticleNewCollectedNotice" },
+          { "name": "ArticleNewAppreciationNotice" },
+          { "name": "ArticleNewSubscriberNotice" },
+          { "name": "ArticleNewCommentNotice" },
+          { "name": "ArticleMentionedYouNotice" },
+          { "name": "SubscribedArticleNewCommentNotice" },
+          { "name": "UpstreamArticleArchivedNotice" },
+          { "name": "DownstreamArticleArchivedNotice" },
+          { "name": "CommentPinnedNotice" },
+          { "name": "CommentNewReplyNotice" },
+          { "name": "CommentNewUpvoteNotice" },
+          { "name": "CommentMentionedYouNotice" },
+          { "name": "OfficialAnnouncementNotice" }
         ]
       }
     ]

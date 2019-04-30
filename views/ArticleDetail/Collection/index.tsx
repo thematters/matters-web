@@ -299,7 +299,7 @@ const CollectionEditingList = ({
       window.dispatchEvent(
         new CustomEvent('addToast', {
           detail: {
-            color: 'white',
+            color: 'green',
             content: translate({
               zh_hant: '關聯已更新',
               zh_hans: '关联已更新',
