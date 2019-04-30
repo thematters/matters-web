@@ -17,8 +17,10 @@ export const mergeConnections = ({
   const { edges: newEdges, pageInfo: newPageInfo } = _get(newData, path)
 
   const result = oldData
+
   if (newPageInfo.endCursor !== oldPageInfo.endCursor) {
-    _set(result, path, {
+    const copy = JSON.parse(JSON.stringify(result))
+    return _set(copy, path, {
       ...rest,
       pageInfo: newPageInfo,
       edges: [...oldEdges, ...newEdges]
