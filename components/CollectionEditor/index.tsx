@@ -129,7 +129,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           type="button"
                           className="delete-handler"
                           aria-label="刪除"
-                          onClick={() => this.onDelete(article.id)}
+                          onClick={() => this.onDelete(article)}
                         >
                           <Icon
                             id={ICON_DELETE_BLACK_CIRCLE.id}
