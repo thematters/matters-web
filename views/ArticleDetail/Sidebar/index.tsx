@@ -4,13 +4,16 @@ import { Footer, Responsive } from '~/components'
 
 import { dom } from '~/common/utils'
 
+import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import Collection from '../Collection'
 import styles from './styles.css'
 
 export default ({
+  article,
   hasCollection,
   canEditCollection
 }: {
+  article: ArticleDetail_article
   hasCollection: boolean
   canEditCollection?: boolean
 }) => {
@@ -38,9 +41,9 @@ export default ({
     <Responsive.LargeUp>
       {(match: boolean) => (
         <>
-          {match && (hasCollection || canEditCollection) && (
+          {match && article && (hasCollection || canEditCollection) && (
             <section className="collection" ref={collectionRef}>
-              <Collection canEdit={canEditCollection} />
+              <Collection article={article} canEdit={canEditCollection} />
             </section>
           )}
 

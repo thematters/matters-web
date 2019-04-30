@@ -182,6 +182,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             {data.article.live && <IconLive />}
                             {(collectionCount > 0 || canEditCollection) && (
                               <CollectionMeta
+                                article={data.article}
                                 count={collectionCount}
                                 canEditCollection={canEditCollection}
                               />
@@ -213,6 +214,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 id="drawer-calc-hook"
               >
                 <Sidebar
+                  article={data.article}
                   hasCollection={!loading && collectionCount > 0}
                   canEditCollection={canEditCollection}
                 />

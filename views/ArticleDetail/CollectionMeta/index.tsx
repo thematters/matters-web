@@ -6,6 +6,7 @@ import { Popover } from '~/components/Popper'
 
 import ICON_COLLECTION from '~/static/icons/collection.svg?sprite'
 
+import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import Collection from '../Collection'
 import styles from './styles.css'
 
@@ -18,9 +19,11 @@ const IconCollection = () => (
 )
 
 const CollectionMeta = ({
+  article,
   count,
   canEditCollection
 }: {
+  article: ArticleDetail_article
   count: number
   canEditCollection?: boolean
 }) => {
@@ -37,7 +40,7 @@ const CollectionMeta = ({
             />
           </h3>
 
-          <Collection inPopover canEdit={canEditCollection} />
+          <Collection article={article} inPopover canEdit={canEditCollection} />
 
           <style jsx>{styles}</style>
         </section>

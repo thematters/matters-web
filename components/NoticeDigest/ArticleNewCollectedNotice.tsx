@@ -18,7 +18,6 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
   const avatarWrapClasses = classNames({
     'avatar-wrap': true
   })
-  console.log(notice)
 
   return (
     <section className="container">
@@ -34,7 +33,7 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
           <NoticeActorName user={notice.actor} />{' '}
           <Translate zh_hant="在其作品" zh_hans="在其作品" />{' '}
           <NoticeArticle article={notice.collection} />{' '}
-          <Translate zh_hant="中關聯推薦。" zh_hans="中关联推荐。" />
+          <Translate zh_hant="中關聯推薦" zh_hans="中关联推荐" />
         </h4>
 
         <NoticeDate notice={notice} />

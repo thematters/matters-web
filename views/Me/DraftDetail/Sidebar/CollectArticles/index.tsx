@@ -80,7 +80,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
   })
 
   const handleCollectionChange = (setCollection: any) => async (
-    articleIds: string[]
+    articles: any[]
   ) => {
     updateHeaderState({
       type: 'draft',
@@ -91,7 +91,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
       await setCollection({
         variables: {
           id: draft.id,
-          collection: _uniq(articleIds)
+          collection: _uniq(articles.map(({ id }) => id))
         }
       })
       updateHeaderState({
