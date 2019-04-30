@@ -16,9 +16,7 @@ const fragments = {
     fragment CommentButtonArticle on Article {
       id
       live
-      comments(input: { first: 0 }) {
-        totalCount
-      }
+      commentCount
     }
   `
 }
@@ -74,7 +72,8 @@ const CommentButton = ({
             } else {
               open()
               analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-                entrance: article.id
+                entrance: article.id,
+                type: 'article-detail'
               })
             }
           }}
@@ -86,7 +85,7 @@ const CommentButton = ({
               open()
             }
           }}
-          text={numAbbr(_get(article, 'comments.totalCount', 0))}
+          text={numAbbr(_get(article, 'commentCount', 0))}
           textPlacement={textPlacement}
         />
       )}
