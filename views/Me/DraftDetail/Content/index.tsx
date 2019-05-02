@@ -107,7 +107,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               <Editor
                 upload={async input => {
                   const result = await singleFileUpload({
-                    variables: { input: { ...input, type: 'embed' } }
+                    variables: { input: { ...input, type: 'embed', entityType: 'draft', entityId: draft.id } }
                   })
                   if (result) {
                     const {
