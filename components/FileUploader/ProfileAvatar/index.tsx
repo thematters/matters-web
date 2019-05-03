@@ -65,7 +65,11 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
       return undefined
     }
 
-    upload({ variables: { input: { file, type: 'avatar' } } })
+    upload({
+      variables: {
+        input: { file, type: 'avatar', entityType: 'user' }
+      }
+    })
       .then(({ data }: any) => {
         const {
           singleFileUpload: { id }

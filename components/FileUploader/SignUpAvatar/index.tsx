@@ -73,20 +73,22 @@ export const SignUpAvatarUploader: FC<Props> = ({
 
   const handleChange = (event: any, upload: any) => {
     event.stopPropagation()
-    event.target.value = ''
 
     if (!upload || !event.target || !event.target.files) {
       return undefined
     }
 
     const file = event.target.files[0]
+    event.target.value = ''
 
     if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
       setError('size')
       return undefined
     }
 
-    upload({ variables: { input: { file, type: 'avatar' } } })
+    upload({
+      variables: { input: { file, type: 'avatar', entityType: 'user' } }
+    })
       .then(({ data }: any) => {
         const {
           singleFileUpload: { id, path }
