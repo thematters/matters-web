@@ -198,6 +198,13 @@ class Editor extends React.Component<Props, State> {
     this.setState({ mentionInstance: instance })
   }
 
+  onImageDrop = async (file: any): Promise<{ [key: string]: any }> => {
+    if (this.props.upload) {
+      return this.props.upload({ file })
+    }
+    return {}
+  }
+
   render() {
     const { draft, onSave, lang, upload, uploading } = this.props
     const { search, mentionInstance } = this.state
@@ -233,6 +240,10 @@ class Editor extends React.Component<Props, State> {
                         this.mentionContainerRef.current,
                       onMentionChange: this.onMentionChange,
                       onInit: this.onMentionModuleInit
+                    },
+                    imageDrop: {
+                      language: lang,
+                      onImageDrop: this.onImageDrop
                     }
                   }}
                   formats={config.foramts}
