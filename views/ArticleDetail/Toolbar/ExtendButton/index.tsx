@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext } from '~/components'
+import { Icon, LanguageContext, Tooltip, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -50,23 +50,28 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
       variables={{ title: placeholder, collection: [article.id] }}
     >
       {extend => (
-        <button
-          type="button"
-          aria-label="關聯當前作品"
-          onClick={async () => {
-            const result = await extend()
-            const { data } = result as { data: ExtendArticle }
-            const { slug, id } = data.putDraft
-            const path = toPath({ page: 'draftDetail', slug, id })
-            Router.push(path.as)
-          }}
+        <Tooltip
+          content={<Translate zh_hant="關聯當前作品" zh_hans="关联当前作品" />}
+          placement="top"
         >
-          <Icon
-            size="default"
-            id={ICON_COLLECTION.id}
-            viewBox={ICON_COLLECTION.viewBox}
-          />
-        </button>
+          <button
+            type="button"
+            aria-label="關聯當前作品"
+            onClick={async () => {
+              const result = await extend()
+              const { data } = result as { data: ExtendArticle }
+              const { slug, id } = data.putDraft
+              const path = toPath({ page: 'draftDetail', slug, id })
+              Router.push(path.as)
+            }}
+          >
+            <Icon
+              size="default"
+              id={ICON_COLLECTION.id}
+              viewBox={ICON_COLLECTION.viewBox}
+            />
+          </button>
+        </Tooltip>
       )}
     </Mutation>
   )
