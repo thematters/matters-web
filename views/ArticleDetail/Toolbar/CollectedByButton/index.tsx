@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { QueryResult } from 'react-apollo'
 
-import { TextIcon } from '~/components'
+import { Spinner, TextIcon } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
+import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
@@ -10,33 +12,71 @@ import { Popover } from '~/components/Popper'
 import { numAbbr } from '~/common/utils'
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 
-import {
-  CollectedByArticle,
-  CollectedByArticle_collectedBy,
-  CollectedByArticle_collectedBy_edges
-} from './__generated__/CollectedByArticle'
+import { CollectedBy_article_collectedBy_edges_node } from './__generated__/CollectedBy'
+import { CollectedByArticle } from './__generated__/CollectedByArticle'
 import styles from './styles.css'
 
-const CollectedBy = ({
-  collectedBy
-}: {
-  collectedBy: CollectedByArticle_collectedBy
-}) => (
-  <div className="container">
-    <h3>
-      <Translate zh_hant="關聯了本文的作品" zh_hans="关联了本文的作品" />
-    </h3>
+export const COLLECTED_BY = gql`
+  query CollectedBy($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash })
+      @connection(key: "articleCollectedBy") {
+      id
+      collectedBy(input: { first: null }) {
+        totalCount
+        edges {
+          node {
+            id
+            ...DropdownDigestArticle
+          }
+        }
+      }
+    }
+  }
+  ${ArticleDigest.Dropdown.fragments.article}
+`
 
-    <ul>
-      {collectedBy.edges &&
-        collectedBy.edges.map(
-          ({ node }: CollectedByArticle_collectedBy_edges) => (
-            <li key={node.id}>
-              <ArticleDigest.Dropdown article={node} hasArchivedTooltip />
-            </li>
-          )
-        )}
-    </ul>
+const CollectedBy = ({ article }: { article: any }) => (
+  <div className="container">
+    <Query query={COLLECTED_BY} variables={{ mediaHash: article.mediaHash }}>
+      {({ data, loading, error }: QueryResult) => {
+        if (loading) {
+          return <Spinner />
+        }
+
+        const path = 'article.collectedBy'
+        const { edges } = _get(data, path, {})
+
+        return (
+          <>
+            <h3>
+              <Translate
+                zh_hant="關聯了本文的作品"
+                zh_hans="关联了本文的作品"
+              />
+            </h3>
+
+            <ul>
+              {edges &&
+                edges.map(
+                  ({
+                    node
+                  }: {
+                    node: CollectedBy_article_collectedBy_edges_node
+                  }) => (
+                    <li key={node.id}>
+                      <ArticleDigest.Dropdown
+                        article={node}
+                        hasArchivedTooltip
+                      />
+                    </li>
+                  )
+                )}
+            </ul>
+          </>
+        )
+      }}
+    </Query>
+
     <style jsx>{styles}</style>
   </div>
 )
@@ -50,7 +90,9 @@ const CollectedByButton = ({
   popperPlacement?: 'right' | 'top'
   textPlacement?: 'bottom' | 'right'
 }) => {
-  if (_get(article, 'collectedBy.edges.length', 0) <= 0) {
+  const collectedByCount = _get(article, 'collectedBy.totalCount', 0)
+
+  if (collectedByCount <= 0) {
     return null
   }
 
@@ -58,7 +100,7 @@ const CollectedByButton = ({
     <Popover
       trigger="click"
       offset="40,0"
-      content={<CollectedBy collectedBy={article.collectedBy} />}
+      content={<CollectedBy article={article} />}
       placement={popperPlacement}
     >
       <button type="button">
@@ -70,7 +112,7 @@ const CollectedByButton = ({
               viewBox={ICON_DIRECTION.viewBox}
             />
           }
-          text={numAbbr(_get(article, 'collectedBy.totalCount', 0))}
+          text={numAbbr(collectedByCount)}
           textPlacement={textPlacement}
           color="grey"
           weight="medium"
@@ -86,17 +128,11 @@ CollectedByButton.fragments = {
   article: gql`
     fragment CollectedByArticle on Article {
       id
-      collectedBy(input: { first: null }) {
+      mediaHash
+      collectedBy(input: { first: 0 }) @connection(key: "articleCollectedBy") {
         totalCount
-        edges {
-          node {
-            id
-            ...DropdownDigestArticle
-          }
-        }
       }
     }
-    ${ArticleDigest.Dropdown.fragments.article}
   `
 }
 
