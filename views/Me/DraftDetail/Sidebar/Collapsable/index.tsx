@@ -3,7 +3,7 @@ import { FC, ReactNode, useState } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 
-import COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
+import ICON_COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 
 import styles from './styles.css'
 
@@ -26,8 +26,8 @@ const Collapsable: FC<{ title: ReactNode; defaultCollapsed?: boolean }> = ({
           <TextIcon
             icon={
               <Icon
-                id={COLLAPSE_BRANCH.id}
-                viewBox={COLLAPSE_BRANCH.viewBox}
+                id={ICON_COLLAPSE_BRANCH.id}
+                viewBox={ICON_COLLAPSE_BRANCH.viewBox}
                 style={{
                   width: 14,
                   height: 14,

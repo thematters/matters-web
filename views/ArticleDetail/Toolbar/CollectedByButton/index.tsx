@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import { Spinner, TextIcon } from '~/components'
@@ -11,21 +12,21 @@ import { Popover } from '~/components/Popper'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
+import ICON_EXPAND_BRANCH from '~/static/icons/expand-branch.svg?sprite'
 
-import { CollectedBy_article_collectedBy_edges_node } from './__generated__/CollectedBy'
 import { CollectedByArticle } from './__generated__/CollectedByArticle'
 import styles from './styles.css'
 
-export const COLLECTED_BY = gql`
-  query CollectedBy($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash })
-      @connection(key: "articleCollectedBy") {
+export const ARTICLE_COLLECTION = gql`
+  query Collection($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
       id
-      collectedBy(input: { first: null }) {
+      collection(input: { first: null }) @connection(key: "articleCollection") {
         totalCount
         edges {
           node {
             id
+            mediaHash
             ...DropdownDigestArticle
           }
         }
@@ -34,6 +35,104 @@ export const COLLECTED_BY = gql`
   }
   ${ArticleDigest.Dropdown.fragments.article}
 `
+
+export const COLLECTED_BY = gql`
+  query CollectedBy($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      collectedBy(input: { first: null })
+        @connection(key: "articleCollectedBy") {
+        totalCount
+        edges {
+          node {
+            id
+            mediaHash
+            collection(input: { first: 0 }) {
+              totalCount
+            }
+            ...DropdownDigestArticle
+          }
+        }
+      }
+    }
+  }
+  ${ArticleDigest.Dropdown.fragments.article}
+`
+
+const CollectedByArticleItem = ({
+  article,
+  rootArticle
+}: {
+  article: any
+  rootArticle: any
+}) => {
+  const [expand, setExpand] = useState(false)
+  const collectionCount = _get(article, 'collection.totalCount', 0)
+
+  return (
+    <li className={`collected-by-item ${expand ? 'expand' : ''}`}>
+      <div className="content">
+        <ArticleDigest.Dropdown article={article} hasArchivedTooltip />
+
+        {collectionCount > 0 && (
+          <button onClick={() => setExpand(!expand)} type="button">
+            <TextIcon
+              icon={
+                <Icon
+                  id={ICON_EXPAND_BRANCH.id}
+                  viewBox={ICON_EXPAND_BRANCH.viewBox}
+                  size="small"
+                />
+              }
+              size="xs"
+              color="green"
+              spacing="0"
+            >
+              <Translate
+                zh_hant={expand ? '收起' : '展開'}
+                zh_hans={expand ? '收起' : '展开'}
+              />
+            </TextIcon>
+          </button>
+        )}
+      </div>
+
+      {expand && collectionCount > 0 && (
+        <Query
+          query={ARTICLE_COLLECTION}
+          variables={{ mediaHash: article.mediaHash }}
+        >
+          {({ data, loading, error }: QueryResult) => {
+            if (loading) {
+              return <Spinner />
+            }
+
+            const path = 'article.collection'
+            const { edges } = _get(data, path, {})
+
+            return (
+              <ul className="sublist">
+                {edges &&
+                  edges.map(({ node }: { node: any }) => (
+                    <li
+                      key={node.id}
+                      className={
+                        rootArticle.mediaHash === node.mediaHash ? 'active' : ''
+                      }
+                    >
+                      <ArticleDigest.Plain article={node} />
+                    </li>
+                  ))}
+              </ul>
+            )
+          }}
+        </Query>
+      )}
+
+      <style jsx>{styles}</style>
+    </li>
+  )
+}
 
 const CollectedBy = ({ article }: { article: any }) => (
   <div className="container">
@@ -57,20 +156,13 @@ const CollectedBy = ({ article }: { article: any }) => (
 
             <ul>
               {edges &&
-                edges.map(
-                  ({
-                    node
-                  }: {
-                    node: CollectedBy_article_collectedBy_edges_node
-                  }) => (
-                    <li key={node.id}>
-                      <ArticleDigest.Dropdown
-                        article={node}
-                        hasArchivedTooltip
-                      />
-                    </li>
-                  )
-                )}
+                edges.map(({ node }: { node: any }) => (
+                  <CollectedByArticleItem
+                    key={node.id}
+                    article={node}
+                    rootArticle={article}
+                  />
+                ))}
             </ul>
           </>
         )
