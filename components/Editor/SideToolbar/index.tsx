@@ -10,6 +10,7 @@ import DividerButton from './DividerButton'
 import EmbedCodeButton from './EmbedCodeButton'
 import EmbedVideoButton from './EmbedVideoButton'
 import styles from './styles.css'
+import UploadAudioButton from './UploadAudioButton'
 import UploadImageButton from './UploadImageButton'
 
 interface SideToolbarProps {
@@ -24,7 +25,6 @@ interface SideToolbarProps {
     id: string
     path: string
   }>
-  uploading: boolean
 }
 
 const SideToolbar = ({
@@ -32,8 +32,7 @@ const SideToolbar = ({
   top,
   quill,
   onSave,
-  upload,
-  uploading
+  upload
 }: SideToolbarProps) => {
   const [expanded, setExpanded] = useState(false)
   const containerClasses = classNames({
@@ -62,7 +61,6 @@ const SideToolbar = ({
           quill={quill}
           setExpanded={setExpanded}
           upload={upload}
-          uploading={uploading}
         />
         <EmbedVideoButton quill={quill} setExpanded={setExpanded} />
         <EmbedCodeButton quill={quill} setExpanded={setExpanded} />
@@ -70,6 +68,11 @@ const SideToolbar = ({
           quill={quill}
           onSave={onSave}
           setExpanded={setExpanded}
+        />
+        <UploadAudioButton
+          quill={quill}
+          setExpanded={setExpanded}
+          upload={upload}
         />
       </div>
       <style jsx>{styles}</style>

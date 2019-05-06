@@ -1,3 +1,4 @@
+import './AudioFigure'
 import './Divider'
 import './EmbedClipboard'
 import './EmbedCode'

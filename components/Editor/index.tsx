@@ -41,7 +41,6 @@ interface Props {
     id: string
     path: string
   }>
-  uploading: boolean
 }
 
 interface State {
@@ -206,7 +205,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { draft, onSave, lang, upload, uploading } = this.props
+    const { draft, onSave, lang, upload } = this.props
     const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
@@ -262,7 +261,6 @@ class Editor extends React.Component<Props, State> {
                   {...this.state.sideToolbar}
                   quill={this.quill}
                   upload={upload}
-                  uploading={uploading}
                   onSave={onSave}
                 />
 

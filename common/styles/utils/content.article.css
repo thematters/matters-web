@@ -20,7 +20,10 @@
     display: block;
     margin: 0 auto;
     /* max-height: 100vh; */
-    background: var(--color-grey-lighter);
+    /* background: var(--color-grey-lighter); */
+  }
+  & :global(audio) {
+    width: 100%;
   }
 
   /* Figure

@@ -1,6 +1,9 @@
 import { Quill } from 'react-quill'
 
-import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  UPLOAD_IMAGE_SIZE_LIMIT
+} from '~/common/enums'
 import { translate } from '~/common/utils'
 
 class ImageDrop {
@@ -33,7 +36,7 @@ class ImageDrop {
               color: 'red',
               content: translate({
                 zh_hant: '請一次上傳一個檔案',
-                zh_hans: '请一次上传一个档案',
+                zh_hans: '请一次上传一个文件',
                 lang: this.language
               })
             }
@@ -42,14 +45,14 @@ class ImageDrop {
         return undefined
       }
       const file = event.dataTransfer.files[0]
-      if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
+      if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
         window.dispatchEvent(
           new CustomEvent('addToast', {
             detail: {
               color: 'red',
               content: translate({
                 zh_hant: '上傳檔案請勿超過 5 MB',
-                zh_hans: '上传档案请勿超过 5 MB',
+                zh_hans: '上传文件请勿超过 5 MB',
                 lang: this.language
               })
             }
@@ -65,7 +68,7 @@ class ImageDrop {
   }
 
   async handleFiles(file: any): Promise<any[]> {
-    if (file && file.type && ACCEPTED_UPLOAD_TYPES.includes(file.type)) {
+    if (file && file.type && ACCEPTED_UPLOAD_IMAGE_TYPES.includes(file.type)) {
       try {
         const asset = await this.onImageDrop(file)
         window.dispatchEvent(

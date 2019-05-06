@@ -130,8 +130,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                           color: 'red',
                           content: (
                             <Translate
-                              zh_hant="圖片上傳失敗"
-                              zh_hans="图片上传失败"
+                              zh_hant="檔案上傳失敗"
+                              zh_hans="文件上传失败"
                             />
                           )
                         }
@@ -140,7 +140,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     throw new Error('upload not successful')
                   }
                 }}
-                uploading={uploading}
                 draft={draft}
                 onSave={async (newDraft: {
                   title?: string | null
