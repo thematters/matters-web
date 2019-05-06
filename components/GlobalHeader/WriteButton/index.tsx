@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import { useContext } from 'react'
+import { FC, useContext } from 'react'
 
 import { Button, Icon, LanguageContext, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
@@ -15,6 +15,7 @@ import { CreateDraft } from './__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
+  CustomButton?: FC<{ onClick: (event: React.MouseEvent<HTMLElement>) => void }>
 }
 
 export const CREATE_DRAFT = gql`
@@ -26,7 +27,7 @@ export const CREATE_DRAFT = gql`
   }
 `
 
-const WriteButton = ({ allowed }: Props) => {
+const WriteButton = ({ allowed, CustomButton }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const placeholder = translate({
@@ -75,7 +76,9 @@ const WriteButton = ({ allowed }: Props) => {
           })
         }
 
-        return (
+        return CustomButton ? (
+          <CustomButton onClick={onClick} />
+        ) : (
           <>
             <Button
               className="u-sm-down-hide"

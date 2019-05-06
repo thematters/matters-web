@@ -33,14 +33,13 @@ export const translate = <D>({
   const translations = { zh_hant, zh_hans, en }
   const t = translations[lang] || translations.zh_hant
 
-  if (typeof t === 'string') {
-    return t
+  if (typeof t === 'function') {
+    if ('data' in rest) {
+      return t(rest.data)
+    } else {
+      throw new Error('data has to be provided for translation function.')
+    }
   }
 
-  if ('data' in rest) {
-    const data = rest.data
-    return t(data)
-  }
-
-  return 'UNTRANSLATED'
+  return t
 }
