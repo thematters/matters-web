@@ -12,10 +12,40 @@ h3 {
   text-align: left;
 }
 
-ul {
-  & li {
-    @mixin border-top-grey;
-    margin: 0 var(--spacing-x-tight);
-    padding: var(--spacing-tight) var(--spacing-x-tight);
+.collected-by-item {
+  @mixin border-top-grey;
+  margin: 0 var(--spacing-x-tight);
+  padding: var(--spacing-tight) var(--spacing-x-tight);
+
+  & .content {
+    position: relative;
+  }
+
+  & button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.expand {
+    & button {
+      & :global(svg) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  & .sublist {
+    & li {
+      margin-top: var(--spacing-tight);
+      padding: 0 var(--spacing-x-tight);
+      text-align: left;
+    }
+
+    & .active {
+      & :global(h2) {
+        font-weight: var(--font-weight-medium);
+      }
+    }
   }
 }

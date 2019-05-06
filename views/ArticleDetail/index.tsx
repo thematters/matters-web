@@ -52,7 +52,7 @@ const ARTICLE_DETAIL = gql`
       author {
         ...UserDigestFullDescUser
       }
-      collection(input: { first: 0 }) @connection(key: "articleCollection") {
+      collection(input: { first: 0 }) {
         totalCount
       }
       ...BookmarkArticle
