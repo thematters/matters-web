@@ -63,7 +63,6 @@ const Anchor = () => {
         {(props: ModalInstanceProps) => <SelfActivationModal {...props} />}
       </ModalInstance>
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
-      {<OpenedModal modalId="selfActivationModal" />}
       <style jsx>{styles}</style>
     </>
   )

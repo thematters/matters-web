@@ -7,6 +7,7 @@ import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
 import { TextIcon } from '~/components/TextIcon'
 
+import { ADD_TOAST } from '~/common/enums'
 import { dom } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_CHECK_ACTIVE from '~/static/icons/checkbox-check-active.svg?sprite'
@@ -41,7 +42,7 @@ const FingerprintContent = ({
             onClick={() => {
               dom.copyToClipboard(dataHash)
               window.dispatchEvent(
-                new CustomEvent('addToast', {
+                new CustomEvent(ADD_TOAST, {
                   detail: {
                     color: 'green',
                     content: <Translate zh_hant="複製成功" zh_hans="复制成功" />

@@ -1,7 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import { Modal } from '~/components'
+import { Modal, useEventListener } from '~/components'
+
+import { OPEN_MODAL } from '~/common/enums'
 
 const emptyModalId = ''
 
@@ -47,6 +49,13 @@ export const ModalProvider = ({
     setPrevModalId(defaultModalId)
     setOpenedModalId(defaultModalId)
   }
+
+  // listen for open modal event
+  useEventListener(OPEN_MODAL, (detail: CustomEvent['detail']) => {
+    if (detail.id) {
+      open(detail.id)
+    }
+  })
 
   return (
     <ModalContext.Provider

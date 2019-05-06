@@ -12,6 +12,7 @@ import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
+import { ADD_TOAST, OPEN_MODAL } from '~/common/enums'
 import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
@@ -108,7 +109,7 @@ const CommentForm = ({
             }
             setContent('')
             window.dispatchEvent(
-              new CustomEvent('addToast', {
+              new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'green',
                   content: (
@@ -117,10 +118,25 @@ const CommentForm = ({
                 }
               })
             )
+
+            if (viewer.isOnboarding) {
+              setTimeout(async () => {
+                await viewer.refetch()
+                if (viewer.isActive) {
+                  window.dispatchEvent(
+                    new CustomEvent(OPEN_MODAL, {
+                      detail: {
+                        id: 'selfActivationModal'
+                      }
+                    })
+                  )
+                }
+              }, 3000)
+            }
           })
           .catch((result: any) => {
             window.dispatchEvent(
-              new CustomEvent('addToast', {
+              new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'red',
                   content: (

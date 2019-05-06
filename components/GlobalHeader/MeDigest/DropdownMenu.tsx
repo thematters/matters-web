@@ -9,7 +9,7 @@ import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -172,7 +172,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                   redirectToTarget()
                 } catch (e) {
                   window.dispatchEvent(
-                    new CustomEvent('addToast', {
+                    new CustomEvent(ADD_TOAST, {
                       detail: {
                         color: 'red',
                         content: (
