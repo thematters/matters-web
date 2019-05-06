@@ -42,7 +42,10 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
   const hasContent = draft.content && draft.content.length > 0
   const hasTitle = draft.title && draft.title.length > 0
   const isUnpublished = draft.publishState === 'unpublished'
-  const publishable = draftId && isUnpublished && hasContent && hasTitle
+  const needSelectCover =
+    !draft.cover && draft.assets && draft.assets.length > 0
+  const publishable =
+    draftId && isUnpublished && hasContent && hasTitle && !needSelectCover
 
   return (
     <section>
