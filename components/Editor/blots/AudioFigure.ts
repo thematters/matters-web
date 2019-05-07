@@ -5,29 +5,51 @@ const BlockEmbed = Quill.import('blots/block/embed')
 
 class AudioFigure extends BlockEmbed {
   public static create(value: {
-    src?: string
+    sources: Array<{ src: string; type: string }>
+    fileName?: string
     caption?: string
-    id?: string
-    assetId?: string
   }) {
     const node = super.create(value)
 
     const figcaption = Parchment.create('figcaption', value.caption || '')
       .domNode
 
+    // audio
     const audio = document.createElement('audio')
-    audio.setAttribute('src', value.src || '')
-    audio.setAttribute('controls', '')
+    audio.setAttribute('controlsList', 'nodownload')
+    audio.dataset.fileName = value.fileName
+    value.sources.forEach(({ src, type }) => {
+      const source = Parchment.create('source', { src, type }).domNode
+      audio.appendChild(source)
+    })
 
-    if (value.id) {
-      audio.setAttribute('id', value.id)
-    }
+    // player
+    const player = document.createElement('div')
+    player.setAttribute('class', 'player')
+    node.setAttribute('contenteditable', 'false')
+    player.innerHTML = `
+      <header>
+        <div class="meta">
+          <h4 class="title">${value.fileName}</h4>
 
-    if (value.assetId) {
-      audio.dataset.assetId = value.assetId
-    }
+          <div class="time">
+            <span class="current"></span>
+            <span class="duration"></span>
+          </div>
+        </div>
+
+        <span class="play" role="button" aria-label="播放/暫停"></span>
+      </header>
+
+      <footer>
+        <div class="progress-bar">
+          <span></span>
+        </div>
+      </footer>
+    `
 
     node.appendChild(audio)
+    node.appendChild(player)
     node.appendChild(figcaption)
 
     return node
@@ -36,11 +58,22 @@ class AudioFigure extends BlockEmbed {
   static value(domNode: HTMLElement): any {
     const audio = domNode.querySelector('audio')
     const caption = domNode.querySelector('figcaption')
+    const sources = domNode.querySelectorAll('source')
+
+    const sourcesVal: Array<{ src: string; type: string }> = []
+    if (sources.length > 0) {
+      Array.prototype.forEach.call(sources, (node: HTMLElement) => {
+        sourcesVal.push({
+          src: node.getAttribute('src') || '',
+          type: node.getAttribute('type') || ''
+        })
+      })
+    }
 
     return {
-      src: audio ? audio.getAttribute('src') : '',
-      caption: caption ? caption.innerText : '',
-      assetId: audio ? audio.dataset.assetId : undefined
+      sources: sourcesVal,
+      fileName: audio ? audio.dataset.fileName : '',
+      caption: caption ? caption.innerText : ''
     }
   }
 }

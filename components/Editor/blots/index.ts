@@ -7,5 +7,6 @@ import './Figcaption'
 import './ImageFigure'
 import './Mention'
 import './SmartBreak'
+import './Source'
 
 export default null

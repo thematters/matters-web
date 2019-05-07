@@ -74,5 +74,6 @@ export const foramts = [
   'imageFigure',
   'audioFigure',
   'mention',
-  'smartBreak'
+  'smartBreak',
+  'source'
 ]

@@ -18,7 +18,12 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { dom, translate, trimLineBreaks } from '~/common/utils'
+import {
+  dom,
+  initAudioPlayers,
+  translate,
+  trimLineBreaks
+} from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
@@ -77,11 +82,13 @@ class Editor extends React.Component<Props, State> {
   componentDidMount() {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
+    initAudioPlayers()
   }
 
   componentDidUpdate(prevProps: Props) {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
+    initAudioPlayers()
 
     if (prevProps.draft.id === this.props.draft.id) {
       return

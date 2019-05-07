@@ -28,10 +28,23 @@ const UploadAudioButton = ({
 }: UploadAudioButtonProps) => {
   const [uploading, setUploading] = useState(false)
 
-  const insertAudio = (src: string, assetId: string) => {
+  const insertAudio = ({
+    src,
+    fileName,
+    mimeType
+  }: {
+    src: string
+    fileName: string
+    mimeType: string
+  }) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'audioFigure', { src, assetId }, 'user')
+      quill.insertEmbed(
+        range.index,
+        'audioFigure',
+        { sources: [{ src, type: mimeType }], fileName },
+        'user'
+      )
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }
@@ -44,6 +57,8 @@ const UploadAudioButton = ({
     }
 
     const file = event.target.files[0]
+    const fileName = file.name.split('.')[0]
+    const mimeType = file.type
     event.target.value = ''
 
     if (file && file.size > UPLOAD_AUDIO_SIZE_LIMIT) {
@@ -65,8 +80,8 @@ const UploadAudioButton = ({
 
     try {
       setUploading(true)
-      const { id, path } = await upload({ file })
-      insertAudio(path, id)
+      const { path } = await upload({ file })
+      insertAudio({ src: path, fileName, mimeType })
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
