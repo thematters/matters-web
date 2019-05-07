@@ -1,6 +1,10 @@
 import { Quill } from 'react-quill'
 
-import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import {
+  ACCEPTED_UPLOAD_TYPES,
+  ADD_TOAST,
+  UPLOAD_FILE_SIZE_LIMIT
+} from '~/common/enums'
 import { translate } from '~/common/utils'
 
 class ImageDrop {
@@ -28,7 +32,7 @@ class ImageDrop {
     ) {
       if (event.dataTransfer.files.length > 1) {
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
               content: translate({
@@ -44,7 +48,7 @@ class ImageDrop {
       const file = event.dataTransfer.files[0]
       if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
               content: translate({
@@ -69,7 +73,7 @@ class ImageDrop {
       try {
         const asset = await this.onImageDrop(file)
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
               content: translate({
@@ -83,7 +87,7 @@ class ImageDrop {
         return [asset]
       } catch (error) {
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
               content: translate({

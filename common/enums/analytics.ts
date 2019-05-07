@@ -1,7 +1,5 @@
 export const GA_TRACKING_ID = 'UA-127561991-1'
 
-export const ANALYTICS = 'analytics'
-
 export const ANALYTIC_TYPES = {
   TRACK: 'track',
   PAGE: 'page',

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import LoginModal from '~/components/Modal/LoginModal'
 import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
+import SelfActivationModal from '~/components/Modal/SelfActivationModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
 import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
@@ -26,8 +27,8 @@ const Anchor = () => {
   const viewer = useContext(ViewerContext)
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
-  const OpenedTermModal = () => (
-    <ModalSwitch modalId="termModal">{(open: any) => open()}</ModalSwitch>
+  const OpenedModal = ({ modalId }: { modalId: string }) => (
+    <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
   )
 
   return (
@@ -54,7 +55,14 @@ const Anchor = () => {
       <ModalInstance modalId="onboardingInfoModal" title="onboardingInfo">
         {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
       </ModalInstance>
-      {viewer.isAuthed && disagreedToS && <OpenedTermModal />}
+      <ModalInstance
+        defaultCloseable={true}
+        modalId="selfActivationModal"
+        title="welcomeAuthor"
+      >
+        {(props: ModalInstanceProps) => <SelfActivationModal {...props} />}
+      </ModalInstance>
+      {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
       <style jsx>{styles}</style>
     </>
   )

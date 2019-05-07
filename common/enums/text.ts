@@ -4,6 +4,7 @@ export const TEXT = {
     register: '註冊',
     previousStep: '上一步',
     nextStep: '下一步',
+    welcomeAuthor: '歡迎成為創作者',
     close: '關閉',
     confirm: '確認',
     enterEmail: '請輸入電子信箱',
@@ -71,6 +72,7 @@ export const TEXT = {
   zh_hans: {
     login: '登入',
     register: '注册',
+    welcomeAuthor: '欢迎成为创作者',
     previousStep: '上一步',
     nextStep: '下一步',
     close: '关闭',

@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/browser'
+import { ApolloQueryResult } from 'apollo-client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import React from 'react'
@@ -49,9 +50,12 @@ type Viewer = ViewerUser & {
   isInactive: boolean
   isAdmin: boolean
   isPartner: boolean
+  refetch: () => Promise<ApolloQueryResult<any>>
 }
 
-export const processViewer = (viewer: ViewerUser): Viewer => {
+export const processViewer = (
+  viewer: ViewerUser & { refetch: () => Promise<ApolloQueryResult<any>> }
+): Viewer => {
   const isAuthed = !!viewer.id
   const state = _get(viewer, 'status.state')
   const role = _get(viewer, 'status.role')
