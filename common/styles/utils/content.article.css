@@ -89,7 +89,7 @@
               content: attr(data-time);
             }
           }
-          & .current {
+          & .current[data-time] {
             &::after {
               content: ' / ';
             }

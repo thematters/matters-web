@@ -38,7 +38,7 @@ class AudioFigure extends BlockEmbed {
           </div>
         </div>
 
-        <span class="play" role="button" aria-label="播放/暫停"></span>
+        <span class="play"></span>
       </header>
 
       <footer>

@@ -23,41 +23,27 @@ function toHHMMSS(num: string | number) {
   }
 }
 
-function removeAllListeners(element: HTMLElement) {
-  const newElement = element.cloneNode(true)
-
-  if (!element || !element.parentNode) {
-    return
-  }
-
-  element.parentNode.replaceChild(newElement, element)
-
-  return newElement
-}
-
 export const initAudioPlayers = () => {
   const audioFigures = dom.$$('figure.audio')
 
   Array.prototype.forEach.call(audioFigures, ($audioFigure: HTMLElement) => {
-    // remove all listeners to re-initialize audio player
-    const $newAudioFigure = removeAllListeners($audioFigure) as HTMLElement
-
-    if (!$audioFigure) {
+    if ($audioFigure.hasAttribute('initialized')) {
       return
+    } else {
+      $audioFigure.setAttribute('initialized', '')
     }
 
-    const $audio = $newAudioFigure.querySelector('audio') as HTMLAudioElement
-    const $play = $newAudioFigure.querySelector('.play') as HTMLElement
-    const $current = $newAudioFigure.querySelector(
-      '.time .current'
-    ) as HTMLElement
-    const $duration = $newAudioFigure.querySelector(
+    const $audio = $audioFigure.querySelector('audio') as HTMLAudioElement
+    const $player = $audioFigure.querySelector('.player') as HTMLElement
+    const $play = $audioFigure.querySelector('.play') as HTMLElement
+    const $current = $audioFigure.querySelector('.time .current') as HTMLElement
+    const $duration = $audioFigure.querySelector(
       '.time .duration'
     ) as HTMLElement
-    const $progressBar = $newAudioFigure.querySelector(
+    const $progressBar = $audioFigure.querySelector(
       '.progress-bar'
     ) as HTMLElement
-    const $progressBarValue = $newAudioFigure.querySelector(
+    const $progressBarValue = $audioFigure.querySelector(
       '.progress-bar span'
     ) as HTMLElement
 
@@ -65,11 +51,23 @@ export const initAudioPlayers = () => {
       return
     }
 
-    // meta
-    $audio.addEventListener('loadeddata', () => {
-      $current.dataset.time = toHHMMSS($audio.currentTime)
-      $duration.dataset.time = toHHMMSS($audio.duration)
+    // init
+    if ($audio.readyState <= 3) {
+      $player.classList.add('u-area-disable')
+    }
+    $audio.addEventListener('canplay', () => {
+      $player.classList.remove('u-area-disable')
     })
+    $audio.addEventListener('loadeddata', () => {
+      const currTime = toHHMMSS($audio.currentTime)
+      $current.dataset.time = currTime
+      $current.setAttribute('aira-label', `當前 ${currTime}`)
+
+      $duration.dataset.time = toHHMMSS($audio.duration)
+      $duration.setAttribute('aira-label', `時長 ${toHHMMSS($audio.duration)}`)
+    })
+    $play.setAttribute('role', 'button')
+    $play.setAttribute('aria-label', '播放')
 
     // time update
     $audio.addEventListener('timeupdate', () => {
@@ -83,10 +81,6 @@ export const initAudioPlayers = () => {
     })
 
     // play state
-    $audio.classList.add('u-area-disable')
-    $audio.addEventListener('canplay', () => {
-      $audio.classList.remove('u-area-disable')
-    })
     $audio.addEventListener('pause', () => {
       pause()
     })
@@ -103,17 +97,23 @@ export const initAudioPlayers = () => {
 
     // helper fns
     function timeUpdate() {
+      // update time
+      const currTime = toHHMMSS($audio.currentTime)
+      $current.dataset.time = currTime
+      $current.setAttribute('aira-label', `當前 ${currTime}`)
+
+      // update progress
       const percent = ($audio.currentTime / $audio.duration) * 100 + '%'
-      $current.dataset.time = toHHMMSS($audio.currentTime)
-      console.log(percent, toHHMMSS($audio.currentTime))
       $progressBarValue.style.width = percent
     }
     function play() {
       $play.classList.add('paused')
+      $play.setAttribute('aria-label', '暫停')
       $audio.play()
     }
     function pause() {
       $play.classList.remove('paused')
+      $play.setAttribute('aria-label', '播放')
       $audio.pause()
     }
   })

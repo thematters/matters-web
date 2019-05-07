@@ -6,7 +6,7 @@ import { Mutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
-import { analytics } from '~/common/utils'
+import { analytics, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 
@@ -51,6 +51,10 @@ const Content = ({ article }: { article: ContentArticle }) => {
         entrance: id
       })
   }, [])
+
+  useEffect(() => {
+    initAudioPlayers()
+  })
 
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [trackedRead, setTrackedRead] = useState(false)
