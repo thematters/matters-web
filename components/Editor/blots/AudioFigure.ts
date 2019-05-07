@@ -5,7 +5,7 @@ const BlockEmbed = Quill.import('blots/block/embed')
 
 class AudioFigure extends BlockEmbed {
   public static create(value: {
-    sources: Array<{ src: string; type: string }>
+    sources: Array<{ src: string; type: string; assetId: string }>
     fileName?: string
     caption?: string
   }) {
@@ -18,8 +18,9 @@ class AudioFigure extends BlockEmbed {
     const audio = document.createElement('audio')
     audio.setAttribute('controlsList', 'nodownload')
     audio.dataset.fileName = value.fileName
-    value.sources.forEach(({ src, type }) => {
+    value.sources.forEach(({ src, type, assetId }) => {
       const source = Parchment.create('source', { src, type }).domNode
+      source.dataset.assetId = assetId
       audio.appendChild(source)
     })
 
@@ -30,7 +31,7 @@ class AudioFigure extends BlockEmbed {
     player.innerHTML = `
       <header>
         <div class="meta">
-          <h4 class="title">${value.fileName}</h4>
+          <h4 class="title" contenteditable="true">${value.fileName}</h4>
 
           <div class="time">
             <span class="current"></span>
@@ -60,12 +61,13 @@ class AudioFigure extends BlockEmbed {
     const caption = domNode.querySelector('figcaption')
     const sources = domNode.querySelectorAll('source')
 
-    const sourcesVal: Array<{ src: string; type: string }> = []
+    const sourcesVal: Array<{ src: string; type: string; assetId: string }> = []
     if (sources.length > 0) {
       Array.prototype.forEach.call(sources, (node: HTMLElement) => {
         sourcesVal.push({
           src: node.getAttribute('src') || '',
-          type: node.getAttribute('type') || ''
+          type: node.getAttribute('type') || '',
+          assetId: node.dataset.assetId || ''
         })
       })
     }
@@ -75,6 +77,37 @@ class AudioFigure extends BlockEmbed {
       fileName: audio ? audio.dataset.fileName : '',
       caption: caption ? caption.innerText : ''
     }
+  }
+
+  $title: HTMLElement | null
+  $audio: HTMLAudioElement | null
+
+  constructor(domNode: HTMLElement) {
+    super(domNode)
+
+    this.$title = domNode.querySelector('.title')
+    this.$audio = domNode.querySelector('audio')
+
+    if (!this.$title || !this.$audio) {
+      return
+    }
+
+    this.$title.addEventListener('keydown', this.onPress)
+    this.$title.addEventListener('paste', this.onPaste)
+    this.$title.addEventListener('change', this.onPress)
+    this.$title.addEventListener('blur', this.onPress)
+  }
+
+  onPaste = (event: ClipboardEvent) => {
+    event.stopPropagation()
+  }
+
+  onPress = () => {
+    if (!this.$title || !this.$audio) {
+      return
+    }
+
+    this.$audio.dataset.fileName = this.$title.innerText
   }
 }
 

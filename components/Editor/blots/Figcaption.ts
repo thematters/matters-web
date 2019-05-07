@@ -32,12 +32,12 @@ class Figcaption extends BlockEmbed {
     return domNode.textContent
   }
 
-  figcaption: HTMLElement
+  $figcaption: HTMLElement
 
   constructor(domNode: HTMLElement) {
     super(domNode)
 
-    this.figcaption = domNode
+    this.$figcaption = domNode
 
     domNode.addEventListener('keydown', this.onPress)
     domNode.addEventListener('paste', this.onPaste)
@@ -49,7 +49,7 @@ class Figcaption extends BlockEmbed {
   }
 
   onPress = (event: Event) => {
-    const caption = this.figcaption.querySelector('span')
+    const caption = this.$figcaption.querySelector('span')
     const textarea = event.target as HTMLTextAreaElement
 
     if (caption && textarea) {
