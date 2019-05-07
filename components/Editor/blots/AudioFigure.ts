@@ -16,6 +16,7 @@ class AudioFigure extends BlockEmbed {
 
     // audio
     const audio = document.createElement('audio')
+    audio.setAttribute('controls', '')
     audio.setAttribute('controlsList', 'nodownload')
     audio.dataset.fileName = value.fileName
     value.sources.forEach(({ src, type, assetId }) => {
