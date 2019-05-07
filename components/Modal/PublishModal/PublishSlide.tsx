@@ -1,68 +1,13 @@
 import _get from 'lodash/get'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Icon } from '~/components/Icon'
 import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
-import ICON_ARROW_LEFT from '~/static/icons/arrow-left.svg?sprite'
-import ICON_ARROW_RIGHT from '~/static/icons/arrow-right.svg?sprite'
-import PUBLISH_SLIDE_1 from '~/static/images/publish-1.svg?url'
-import PUBLISH_SLIDE_2 from '~/static/images/publish-2.svg?url'
-import PUBLISH_SLIDE_3 from '~/static/images/publish-3.svg?url'
-import PUBLISH_SLIDE_4 from '~/static/images/publish-4.svg?url'
+import PUBLISH_IMAGE from '~/static/images/publish-1.svg?url'
 
 import styles from './styles.css'
-
-const dummy = [0, 1, 2, 3]
-
-const Images = ({ src, slide, setSlide }: any) => {
-  const changeSlide = (next: number) => {
-    if (next < 0 || next > 3) {
-      return false
-    }
-    setSlide(next)
-  }
-
-  return (
-    <div className="image-container">
-      <div className="image" style={{ backgroundImage: `url(${src})` }} />
-      <button
-        type="button"
-        className="arrow left"
-        onClick={() => changeSlide(slide - 1)}
-        disabled={slide === 0}
-      >
-        <Icon id={ICON_ARROW_LEFT.id} viewBox={ICON_ARROW_LEFT.viewBox} />
-      </button>
-      <button
-        type="button"
-        className="arrow right"
-        onClick={() => changeSlide(slide + 1)}
-        disabled={slide === 3}
-      >
-        <Icon id={ICON_ARROW_RIGHT.id} viewBox={ICON_ARROW_RIGHT.viewBox} />
-      </button>
-
-      <style jsx>{styles}</style>
-    </div>
-  )
-}
-
-const Indicator = ({ slide, setSlide }: any) => (
-  <div className="indicator">
-    {dummy.map(item => (
-      <button
-        type="button"
-        key={item}
-        onClick={() => setSlide(item)}
-        disabled={item === slide}
-      />
-    ))}
-    <style jsx>{styles}</style>
-  </div>
-)
 
 const Descriptions = ({ data }: any) => (
   <div className="descriptions">
@@ -77,61 +22,37 @@ const Descriptions = ({ data }: any) => (
 
 const PublishSlide = () => {
   const { lang } = useContext(LanguageContext)
-  const [slide, setSlide] = useState<number>(0)
 
-  const images = [
-    PUBLISH_SLIDE_1,
-    PUBLISH_SLIDE_2,
-    PUBLISH_SLIDE_3,
-    PUBLISH_SLIDE_4
-  ]
+  const title = translate({
+    zh_hant: '歡迎上船！',
+    zh_hans: '欢迎上船！',
+    lang
+  })
 
-  const titles = [
-    translate({
-      zh_hant: '文章即將發佈到分佈式網絡',
-      zh_hans: '文章即将发布到分布式网络',
-      lang
-    }),
-    translate({
-      zh_hant: '文章擁有唯一的數字指紋',
-      zh_hans: '文章拥有唯一的数字指纹',
-      lang
-    }),
-    translate({
-      zh_hant: '文章將永久存儲在IPFS上',
-      zh_hans: '文章将永久存储在IPFS上',
-      lang
-    }),
-    translate({
-      zh_hant: '發佈之後可從站內隱藏',
-      zh_hans: '发布之后可从站内隐藏',
-      lang
-    })
-  ]
+  const subTitle = translate({
+    zh_hant:
+      '你的作品即將永久存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。',
+    zh_hans:
+      '你的作品即将永久存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。',
+    lang
+  })
 
   const descriptions = [
     translate({
-      zh_hant:
-        '文章將發佈並永久存儲在星際文件系統（IPFS）分佈式節點中。存儲費用目前由Matters平台支付。',
-      zh_hans:
-        '文章将发布并永久存储在星际文件系统（IPFS）分布式节点中。存储费用目前由Matters平台支付。',
+      zh_hant: '作品將發佈至 IPFS，無法被隨意刪改，創作權歸你所有。',
+      zh_hans: '作品将发布至 IPFS，无法被随意删改，创作权归你所有。',
       lang
     }),
     translate({
       zh_hant:
-        '文章在發佈的 2 分鐘內可撤回並重新編輯。2 分鐘後文章內容（標題、內文、用戶名）將不可修改。',
+        '如需修訂你的作品，請將該作品從站上隱藏，并將修訂后的作品重新發佈，隱藏后的作品僅作者本人可見。',
       zh_hans:
-        '文章在发布的 2 分钟内可撤回并重新编辑。2 分钟后文章内容（标题、内文、用户名）将不可修改。',
+        '如需修订你的作品，请将该作品从站上隐藏，并将修订后的作品重新发布，隐藏后的作品仅作者本人可见。',
       lang
     }),
     translate({
-      zh_hant: '文章發佈後，可從站內隱藏，但無法從分佈式節點刪除。',
-      zh_hans: '文章发布后，可从站内隐藏，但无法从分布式节点删除。',
-      lang
-    }),
-    translate({
-      zh_hant: '文章評論及互動僅保存在站上，可編輯，可刪除。',
-      zh_hans: '文章评论及互动仅保存在站上，可编辑，可删除。',
+      zh_hant: '可以通過 Matters 網址或節點網址，與讀者分享你的作品。',
+      zh_hans: '可以通过 Matters 网址或节点网址，与读者分享你的作品。',
       lang
     })
   ]
@@ -139,13 +60,18 @@ const PublishSlide = () => {
   return (
     <>
       <div className="slide">
-        <Images src={images[slide]} slide={slide} setSlide={setSlide} />
-
-        <Title is="h3" type="modal-headline">
-          {titles[slide]}
-        </Title>
-
-        <Indicator slide={slide} setSlide={setSlide} />
+        <div className="image-container">
+          <div
+            className="image"
+            style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
+          />
+        </div>
+        <div className="title-container">
+          <Title is="h3" type="modal-headline" style={{ textAlign: 'left' }}>
+            {title}
+          </Title>
+          <span className="subTitle">{subTitle}</span>
+        </div>
         <Descriptions data={descriptions} />
       </div>
       <style jsx>{styles}</style>
