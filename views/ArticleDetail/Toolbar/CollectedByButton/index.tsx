@@ -85,14 +85,9 @@ const CollectedByArticleItem = ({
                 />
               }
               size="xs"
-              color="green"
+              color={expand ? 'black' : 'grey'}
               spacing="0"
-            >
-              <Translate
-                zh_hant={expand ? '收起' : '展開'}
-                zh_hans={expand ? '收起' : '展开'}
-              />
-            </TextIcon>
+            />
           </button>
         )}
       </div>
