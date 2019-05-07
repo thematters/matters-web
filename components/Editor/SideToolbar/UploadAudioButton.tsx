@@ -15,7 +15,7 @@ import styles from './styles.css'
 
 interface UploadAudioButtonProps {
   quill: Quill | null
-  upload: Upload
+  upload: DraftAssetUpload
   setExpanded: (expanded: boolean) => void
 }
 
@@ -82,7 +82,7 @@ const UploadAudioButton = ({
 
     try {
       setUploading(true)
-      const { id: assetId, path } = await upload({ file })
+      const { id: assetId, path } = await upload({ file, type: 'embedaudio' })
       insertAudio({ src: path, fileName, mimeType, assetId })
       setExpanded(false)
       setUploading(false)

@@ -15,7 +15,7 @@ import styles from './styles.css'
 
 interface UploadImageButtonProps {
   quill: Quill | null
-  upload: Upload
+  upload: DraftAssetUpload
   setExpanded: (expanded: boolean) => void
 }
 

@@ -43,15 +43,10 @@ const b64toBlob = (
   return blob
 }
 
-const createImageMatcher = (
-  upload: (input: {
-    file?: any
-    url?: string
-  }) => Promise<{
-    id: string
-    path: string
-  }>
-) => (node: Element, delta: any) => {
+const createImageMatcher = (upload: DraftAssetUpload) => (
+  node: Element,
+  delta: any
+) => {
   // prevent recursion
   if (delta.ops[0].insert.imageFigure) {
     return delta

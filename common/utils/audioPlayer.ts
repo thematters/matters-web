@@ -27,6 +27,9 @@ export const initAudioPlayers = () => {
   const audioFigures = dom.$$('figure.audio')
 
   Array.prototype.forEach.call(audioFigures, ($audioFigure: HTMLElement) => {
+    /**
+     * Init
+     */
     if ($audioFigure.hasAttribute('initialized')) {
       return
     } else {
@@ -51,36 +54,47 @@ export const initAudioPlayers = () => {
       return
     }
 
-    // init
     if ($audio.readyState <= 3) {
+      loading()
       $player.classList.add('u-area-disable')
+    } else {
+      timeUpdate()
     }
-    $audio.addEventListener('canplay', () => {
-      $player.classList.remove('u-area-disable')
-    })
-    $audio.addEventListener('loadeddata', () => {
-      const currTime = toHHMMSS($audio.currentTime)
-      $current.dataset.time = currTime
-      $current.setAttribute('aira-label', `當前 ${currTime}`)
-
-      $duration.dataset.time = toHHMMSS($audio.duration)
-      $duration.setAttribute('aira-label', `時長 ${toHHMMSS($audio.duration)}`)
-    })
     $play.setAttribute('role', 'button')
     $play.setAttribute('aria-label', '播放')
 
-    // time update
+    /**
+     * Events
+     */
+    $audio.addEventListener('canplay', () => {
+      loaded()
+      $player.classList.remove('u-area-disable')
+    })
+    $audio.addEventListener('loadedmetadata', () => {
+      timeUpdate()
+    })
+    $audio.addEventListener('durationchange	', () => {
+      timeUpdate()
+    })
     $audio.addEventListener('timeupdate', () => {
       timeUpdate()
+    })
+    $audio.addEventListener('seeked', () => {
+      loaded()
+    })
+    $audio.addEventListener('seeking', () => {
+      loading()
+    })
+    $audio.addEventListener('waiting', () => {
+      loading()
     })
     $progressBar.addEventListener('click', e => {
       const position = e.pageX - $progressBar.getBoundingClientRect().left
       const percent = position / $progressBar.offsetWidth
       $audio.currentTime = $audio.duration * percent
+      updateProgress(percent * 100 + '%')
       play()
     })
-
-    // play state
     $audio.addEventListener('pause', () => {
       pause()
     })
@@ -95,15 +109,21 @@ export const initAudioPlayers = () => {
       }
     })
 
-    // helper fns
+    /**
+     * Helpers
+     */
     function timeUpdate() {
       // update time
       const currTime = toHHMMSS($audio.currentTime)
       $current.dataset.time = currTime
       $current.setAttribute('aira-label', `當前 ${currTime}`)
 
-      // update progress
-      const percent = ($audio.currentTime / $audio.duration) * 100 + '%'
+      $duration.dataset.time = toHHMMSS($audio.duration)
+      $duration.setAttribute('aira-label', `時長 ${toHHMMSS($audio.duration)}`)
+
+      updateProgress(($audio.currentTime / $audio.duration) * 100 + '%')
+    }
+    function updateProgress(percent: string) {
       $progressBarValue.style.width = percent
     }
     function play() {
@@ -115,6 +135,12 @@ export const initAudioPlayers = () => {
       $play.classList.remove('paused')
       $play.setAttribute('aria-label', '播放')
       $audio.pause()
+    }
+    function loaded() {
+      $play.classList.remove('loading')
+    }
+    function loading() {
+      $play.classList.add('loading')
     }
   })
 }

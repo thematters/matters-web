@@ -39,13 +39,7 @@ interface Props {
   }) => Promise<void>
   draft: EditorDraft
   lang: Language
-  upload: (input: {
-    file?: any
-    url?: string
-  }) => Promise<{
-    id: string
-    path: string
-  }>
+  upload: DraftAssetUpload
 }
 
 interface State {

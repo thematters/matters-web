@@ -109,10 +109,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                   const result = await singleFileUpload({
                     variables: {
                       input: {
-                        ...input,
                         type: 'embed',
                         entityType: 'draft',
-                        entityId: draft.id
+                        entityId: draft.id,
+                        ...input
                       }
                     }
                   })

@@ -18,13 +18,7 @@ interface SideToolbarProps {
   top: number
   quill: Quill | null
   onSave: any
-  upload: (input: {
-    file?: any
-    url?: string
-  }) => Promise<{
-    id: string
-    path: string
-  }>
+  upload: DraftAssetUpload
 }
 
 const SideToolbar = ({
