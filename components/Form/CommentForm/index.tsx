@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -121,8 +122,9 @@ const CommentForm = ({
 
             if (viewer.isOnboarding) {
               setTimeout(async () => {
-                await viewer.refetch()
-                if (viewer.isActive) {
+                const result = await viewer.refetch()
+                const newState = _get(result, 'data.viewer.status.state')
+                if (newState === 'active') {
                   window.dispatchEvent(
                     new CustomEvent(OPEN_MODAL, {
                       detail: {
