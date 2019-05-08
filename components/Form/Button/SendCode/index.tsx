@@ -95,7 +95,11 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
             onClick={(event: any) => sendCode({ event, email, send })}
           >
             {sent
-              ? translate({ zh_hant: '重新發送', zh_hans: '重新发送', lang })
+              ? translate({
+                  zh_hant: TEXT.zh_hant.resend,
+                  zh_hans: TEXT.zh_hans.resend,
+                  lang
+                })
               : translate({
                   zh_hant: TEXT.zh_hant.sendVerificationCode,
                   zh_hans: TEXT.zh_hans.sendVerificationCode,

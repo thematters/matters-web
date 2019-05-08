@@ -6,10 +6,10 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { LanguageContext, Translate } from '~/components/Language'
+import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
@@ -117,19 +117,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     } = result
                     return { id, path }
                   } else {
-                    window.dispatchEvent(
-                      new CustomEvent(ADD_TOAST, {
-                        detail: {
-                          color: 'red',
-                          content: (
-                            <Translate
-                              zh_hant="圖片上傳失敗"
-                              zh_hans="图片上传失败"
-                            />
-                          )
-                        }
-                      })
-                    )
                     throw new Error('upload not successful')
                   }
                 }}

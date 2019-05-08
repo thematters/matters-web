@@ -76,8 +76,8 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
             <ModalComplete
               message={
                 <Translate
-                  zh_hant="Matters ID 修改成功"
-                  zh_hans="Matters ID 修改成功"
+                  zh_hant={TEXT.zh_hant.changeUserNameSuccess}
+                  zh_hans={TEXT.zh_hans.changeUserNameSuccess}
                 />
               }
             />

@@ -5,7 +5,7 @@ import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftP
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_LOADING from '~/static/icons/loading.svg?sprite'
 
@@ -39,7 +39,12 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
-                content: <Translate zh_hant="作品已發布" zh_hans="作品已发布" />
+                content: (
+                  <Translate
+                    zh_hant={TEXT.zh_hant.published}
+                    zh_hans={TEXT.zh_hans.published}
+                  />
+                )
               }
             })
           )
@@ -63,11 +68,18 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
             weight="medium"
           >
             {isPublishing ? (
-              <Translate zh_hant="正在發佈" zh_hans="正在发布" />
+              <Translate
+                zh_hant={TEXT.zh_hant.publishing}
+                zh_hans={TEXT.zh_hans.publishing}
+              />
             ) : (
               <Translate
-                zh_hant={`正在等待發佈 (${formattedTimeLeft.mmss})`}
-                zh_hans={`正在等待发布 (${formattedTimeLeft.mmss})`}
+                zh_hant={`${TEXT.zh_hant.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
+                zh_hans={`${TEXT.zh_hans.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
               />
             )}
           </TextIcon>

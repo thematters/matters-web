@@ -7,6 +7,8 @@ import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
 import { Toast } from '~/components/Toast'
 
+import { TEXT } from '~/common/enums'
+
 const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
   const scheduledAt = draft.scheduledAt
   const {
@@ -29,11 +31,18 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
           color="green"
           header={
             isPublishing ? (
-              <Translate zh_hant="正在發佈" zh_hans="正在发布" />
+              <Translate
+                zh_hant={TEXT.zh_hant.publishing}
+                zh_hans={TEXT.zh_hans.publishing}
+              />
             ) : (
               <Translate
-                zh_hant={`正在等待發佈 (${formattedTimeLeft.mmss})`}
-                zh_hans={`正在等待发布 (${formattedTimeLeft.mmss})`}
+                zh_hant={`${TEXT.zh_hant.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
+                zh_hans={`${TEXT.zh_hans.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
               />
             )
           }

@@ -119,7 +119,12 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
           </p>
           <RecallButton
             id={id}
-            text={<Translate zh_hant="撤銷" zh_hans="撤销" />}
+            text={
+              <Translate
+                zh_hant={TEXT.zh_hant.revoke}
+                zh_hans={TEXT.zh_hans.revoke}
+              />
+            }
           />
         </footer>
       )}

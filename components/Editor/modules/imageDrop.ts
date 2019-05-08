@@ -3,6 +3,7 @@ import { Quill } from 'react-quill'
 import {
   ACCEPTED_UPLOAD_TYPES,
   ADD_TOAST,
+  TEXT,
   UPLOAD_FILE_SIZE_LIMIT
 } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -77,8 +78,8 @@ class ImageDrop {
             detail: {
               color: 'green',
               content: translate({
-                zh_hant: '圖片上傳成功',
-                zh_hans: '图片上传成功',
+                zh_hant: TEXT.zh_hant.uploadImageSuccess,
+                zh_hans: TEXT.zh_hans.uploadImageSuccess,
                 lang: this.language
               })
             }
@@ -91,8 +92,8 @@ class ImageDrop {
             detail: {
               color: 'red',
               content: translate({
-                zh_hant: '圖片上傳失敗',
-                zh_hans: '图片上传失败',
+                zh_hant: TEXT.zh_hant.uploadImageFailed,
+                zh_hans: TEXT.zh_hans.uploadImageFailed,
                 lang: this.language
               })
             }

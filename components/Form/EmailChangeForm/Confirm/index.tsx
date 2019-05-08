@@ -97,14 +97,14 @@ export const EmailChangeConfirmForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: '請輸入新電子信箱',
-      zh_hans: '请输入新邮箱',
+      zh_hant: TEXT.zh_hant.enterNewEmail,
+      zh_hans: TEXT.zh_hans.enterNewEmail,
       lang
     })
 
     const codePlaceholder = translate({
-      zh_hant: '請輸入驗證碼',
-      zh_hans: '请输入验证码',
+      zh_hant: TEXT.zh_hant.enterVerificationCode,
+      zh_hans: TEXT.zh_hans.enterVerificationCode,
       lang
     })
 
@@ -146,7 +146,11 @@ export const EmailChangeConfirmForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.done,
+                zh_hans: TEXT.zh_hans.done,
+                lang
+              })}
             </Button>
           </div>
         </form>

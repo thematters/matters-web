@@ -315,7 +315,7 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                             }}
                             placeholder={translate({
                               zh_hant: '好友姓名或電子信箱',
-                              zh_hans: '好友姓名或电子信箱',
+                              zh_hans: '好友姓名或邮箱',
                               lang
                             })}
                           />

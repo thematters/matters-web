@@ -59,8 +59,8 @@ const EmptySearchResult = () => {
       <EmptySearch
         description={
           <Translate
-            zh_hant="沒有找到你搜尋的內容。"
-            zh_hans="没有找到你搜索的内容。"
+            zh_hant={TEXT.zh_hant.emptySearchResults}
+            zh_hans={TEXT.zh_hans.emptySearchResults}
           />
         }
       />

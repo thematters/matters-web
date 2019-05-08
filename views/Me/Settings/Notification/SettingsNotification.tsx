@@ -5,6 +5,8 @@ import { Mutation, Query, QueryResult } from 'react-apollo'
 import { Head, PageHeader, Translate } from '~/components'
 import { Switch } from '~/components/Switch'
 
+import { TEXT } from '~/common/enums'
+
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import styles from './styles.css'
 
@@ -147,7 +149,12 @@ const SettingsNotification = () => (
 
             return (
               <>
-                <Head title={{ zh_hant: '通知設定', zh_hans: '通知设定' }} />
+                <Head
+                  title={{
+                    zh_hant: TEXT.zh_hant.notificationSetting,
+                    zh_hans: TEXT.zh_hans.notificationSetting
+                  }}
+                />
 
                 <div className="l-row first">
                   <section className="section-container l-col-4 l-col-md-4 l-lg-6">

@@ -237,7 +237,12 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
-                content: <Translate zh_hant="登入成功" zh_hans="登入成功" />
+                content: (
+                  <Translate
+                    zh_hant={TEXT.zh_hant.loginSuccess}
+                    zh_hans={TEXT.zh_hans.loginSuccess}
+                  />
+                )
               }
             })
           )

@@ -118,8 +118,8 @@ export const PasswordChangeRequestForm: FC<Props> = ({
           })
 
     const codePlaceholder = translate({
-      zh_hant: '請輸入驗證碼',
-      zh_hans: '请输入验证码',
+      zh_hant: TEXT.zh_hant.enterVerificationCode,
+      zh_hans: TEXT.zh_hans.enterVerificationCode,
       lang
     })
 

@@ -28,7 +28,7 @@ export default {
 
 <h3>如何獲取創作者資格？</h3>
 <p>無論是否已註冊成為 Matters 會員，您都需要透過老用戶邀請，方可解锁創作者資格。</p>
-<p>未登錄時，您可以閱讀與分享 Matters 站上作品。在登陸狀態下，若您尚未獲取創作者資格，也可使用除創作和讚賞以外的其他站內功能，包括閱讀、分享、收藏、評論、點踩評論、追蹤他人。您可以透過各種社交工具尋找 Matters 老用戶，加入<a href="${
+<p>未登入時，您可以閱讀與分享 Matters 站上作品。在登入狀態下，若您尚未獲取創作者資格，也可使用除創作和讚賞以外的其他站內功能，包括閱讀、分享、收藏、評論、點踩評論、追蹤他人。您可以透過各種社交工具尋找 Matters 老用戶，加入<a href="${
     EXTERNAL_LINKS.TELEGRAM
   }" target="_blank>官方 Telegram 群組</a>，也可以關注 <a href="${
     EXTERNAL_LINKS.FACEBOOK
@@ -48,7 +48,7 @@ export default {
 <p>如果你發現有違反 Matters《社區約章》的情況，可以點擊進入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 看板，在相關板塊添加反饋，或發送郵件至 ask@matters.news 進行檢舉，並描述具體情況。被檢舉的信息一旦經站方查實，站方將根據《用戶協議》和《社區約章》條例進行處理。包括但不限於隱藏作品、用戶禁言、禁止互動，甚至凍結帳戶。與此同時，被檢舉的用戶可以進行意見反饋，或發送郵件至 ask@matters.news 向站方申訴。</p>
 
 <h3>更多建議和意見要對 Matters 說</h3>
-<p>若您希望向 Matters 提出建議，或遭遇操作異常，請登陸 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相關板塊進行反饋，也可以發送郵件至 ask@matters.news，我們會儘快回覆！</p>
+<p>若您希望向 Matters 提出建議，或遭遇操作異常，請登入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相關板塊進行反饋，也可以發送郵件至 ask@matters.news，我們會儘快回覆！</p>
   `,
   zh_hans: `
 <h3>Matters 是什么？</h3>
@@ -78,7 +78,7 @@ export default {
 
 <h3>如何獲取創作者資格？</h3>
 <p>无论是否已注册成为 Matters 会员，您都需要透过老用户邀请，方可解锁创作者资格。</p>
-<p>未登录时，您可以阅读与分享 Matters 站上作品。在登陆状态下，若您尚未获取创作者资格，也可使用除创作和赞赏以外的其他站内功能，包括阅读、分享、收藏、评论、点踩评论、追踪他人。您可以透过各种社交工具寻找 Matters 老用户，加入<a href="${
+<p>未登入时，您可以阅读与分享 Matters 站上作品。在登入状态下，若您尚未获取创作者资格，也可使用除创作和赞赏以外的其他站内功能，包括阅读、分享、收藏、评论、点踩评论、追踪他人。您可以透过各种社交工具寻找 Matters 老用户，加入<a href="${
     EXTERNAL_LINKS.TELEGRAM
   }" target="_blank>官方 Telegram 群组</a>，也可以关注 <a href="${
     EXTERNAL_LINKS.FACEBOOK
@@ -99,7 +99,7 @@ export default {
 <p>如果你发现有违反 Matters《社区约章》的情况，可以点击进入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 看板，在相关板块添加反馈，或发送邮件至 ask@matters.news 进行举报，并描述具体情况。被举报的信息一旦经站方查实，站方将根据《用户协议》和《社区约章》条例进行处理。包括但不限于隐藏作品、用户禁言、禁止互动，甚至冻结帐户。与此同时，被举报的用户可以进行意见反馈，或发送邮件至 ask@matters.news 向站方申诉。</p>
 
 <h3>更多建议和意见要对 Matters 说</h3>
-<p>若您希望向 Matters 提出建议，或遭遇操作异常，请登陆 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相关板块进行反馈，也可以发送邮件至 ask@matters.news，我们会尽快回覆！</p>
+<p>若您希望向 Matters 提出建议，或遭遇操作异常，请登入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相关板块进行反馈，也可以发送邮件至 ask@matters.news，我们会尽快回覆！</p>
 
   `
 }

@@ -70,8 +70,8 @@ export const SignUpProfileForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const descriptionPlaceholder = translate({
-      zh_hant: '個人簡介',
-      zh_hans: '个人简介',
+      zh_hant: TEXT.zh_hant.userProfile,
+      zh_hans: TEXT.zh_hans.userProfile,
       lang
     })
 

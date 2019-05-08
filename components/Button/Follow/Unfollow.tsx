@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Button, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
+
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { updateViewerFolloweeCount } from './utils'
 
@@ -52,9 +54,15 @@ const Unfollow = ({
           onMouseLeave={() => setHover(false)}
         >
           {hover ? (
-            <Translate zh_hant="取消追蹤" zh_hans="取消追踪" />
+            <Translate
+              zh_hant={TEXT.zh_hant.unfollow}
+              zh_hans={TEXT.zh_hans.unfollow}
+            />
           ) : (
-            <Translate zh_hant="已追蹤" zh_hans="已追踪" />
+            <Translate
+              zh_hant={TEXT.zh_hant.followed}
+              zh_hans={TEXT.zh_hans.followed}
+            />
           )}
         </Button>
       )}

@@ -5,7 +5,7 @@ import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import NoticeDigest from '~/components/NoticeDigest'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
@@ -35,7 +35,10 @@ const Header = () => (
           }
           color="grey-dark"
         >
-          <Translate zh_hant="設定" zh_hans="设定" />
+          <Translate
+            zh_hant={TEXT.zh_hant.setting}
+            zh_hans={TEXT.zh_hans.setting}
+          />
         </TextIcon>
       </a>
     </Link>

@@ -6,7 +6,7 @@ import { QueryResult } from 'react-apollo'
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
@@ -135,7 +135,10 @@ const CollectionList = ({
                   textPlacement="left"
                   spacing="xxtight"
                 >
-                  <Translate zh_hans="查看全部" zh_hant="查看全部" />
+                  <Translate
+                    zh_hans={TEXT.zh_hant.viewAll}
+                    zh_hant={TEXT.zh_hans.viewAll}
+                  />
                 </TextIcon>
               </button>
             </section>

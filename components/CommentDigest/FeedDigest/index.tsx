@@ -25,7 +25,7 @@ const fragments = {
 const ReplyTo = ({ user }: any) => (
   <>
     <span className="reply-to">
-      <Translate zh_hant="回覆" zh_hans="回复" />
+      <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
     <UserDigest.Mini
       user={user}
@@ -40,7 +40,10 @@ const ReplyTo = ({ user }: any) => (
 const PinnedLabel = () => (
   <span className="label">
     <Label size="small">
-      <Translate zh_hant="作者推薦" zh_hans="作者推荐" />
+      <Translate
+        zh_hant={TEXT.zh_hant.authorRecommend}
+        zh_hans={TEXT.zh_hant.authorRecommend}
+      />
     </Label>
     <style jsx>{styles}</style>
   </span>

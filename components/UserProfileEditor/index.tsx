@@ -89,18 +89,18 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
       lang
     })
     const displayNameHint = translate({
-      zh_hant: '2-20 個字符，仅支持中英文或数字',
-      zh_hans: '2-20 个字符，仅支持中英文或数字',
+      zh_hant: TEXT.zh_hant.displayNameHint,
+      zh_hans: TEXT.zh_hans.displayNameHint,
       lang
     })
     const descriptionHint = translate({
-      zh_hant: '建議 50 字以內，最長 200 字',
-      zh_hans: '建议 50 字以内，最长 200 字',
+      zh_hant: TEXT.zh_hant.descriptionHint,
+      zh_hans: TEXT.zh_hans.descriptionHint,
       lang
     })
     const save = translate({
-      zh_hant: '儲存',
-      zh_hans: '保存',
+      zh_hant: TEXT.zh_hant.save,
+      zh_hans: TEXT.zh_hans.save,
       lang
     })
 

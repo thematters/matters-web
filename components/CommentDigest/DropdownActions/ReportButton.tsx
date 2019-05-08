@@ -1,5 +1,6 @@
 import { Icon, TextIcon, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import ICON_FLAG from '~/static/icons/flag.svg?sprite'
 
 import styles from './styles.css'
@@ -25,7 +26,10 @@ const EditButton = ({
         }
         spacing="tight"
       >
-        <Translate zh_hant="檢舉" zh_hans="检举" />
+        <Translate
+          zh_hant={TEXT.zh_hant.report}
+          zh_hans={TEXT.zh_hans.report}
+        />
       </TextIcon>
       <style jsx>{styles}</style>
     </button>

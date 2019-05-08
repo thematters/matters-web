@@ -155,7 +155,11 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.done,
+                zh_hans: TEXT.zh_hans.done,
+                lang
+              })}
             </Button>
           </div>
         </form>

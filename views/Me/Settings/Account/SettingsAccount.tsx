@@ -8,6 +8,8 @@ import UserNameModal from '~/components/Modal/UserNameModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
+import { TEXT } from '~/common/enums'
+
 import { LanguageSwitch } from './LanguageSwitch'
 import styles from './styles.css'
 
@@ -28,7 +30,10 @@ const EditButton = ({
         onClick={open}
         disabled={disabled}
       >
-        <Translate zh_hant="修改" zh_hans="修改" />
+        <Translate
+          zh_hant={TEXT.zh_hant.change}
+          zh_hans={TEXT.zh_hans.change}
+        />
       </Button>
     )}
   </ModalSwitch>
@@ -38,7 +43,10 @@ const ChangePasswrodButton = () => (
   <ModalSwitch modalId="passwordChangeModal">
     {(open: any) => (
       <button type="button" className="change-password-button" onClick={open}>
-        <Translate zh_hant="修改密碼" zh_hans="修改密码" />
+        <Translate
+          zh_hant={TEXT.zh_hant.changePassword}
+          zh_hans={TEXT.zh_hans.changePasswordSuccess}
+        />
         <style jsx>{styles}</style>
       </button>
     )}
@@ -50,11 +58,21 @@ const SettingsAccount = () => {
 
   return (
     <>
-      <Head title={{ zh_hant: '帳戶設定', zh_hans: '账户设定' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.accountSetting,
+          zh_hans: TEXT.zh_hans.accountSetting
+        }}
+      />
 
       <section className="section-container">
         <PageHeader
-          pageTitle={<Translate zh_hant="帳戶設定" zh_hans="账户设定" />}
+          pageTitle={
+            <Translate
+              zh_hant={TEXT.zh_hant.accountSetting}
+              zh_hans={TEXT.zh_hans.accountSetting}
+            />
+          }
           is="h2"
         />
 
@@ -62,7 +80,10 @@ const SettingsAccount = () => {
         <section className="setting-section">
           <div className="left">
             <span className="title">
-              <Translate zh_hant="登錄密碼" zh_hans="登录密码" />
+              <Translate
+                zh_hant={TEXT.zh_hant.loginPassword}
+                zh_hans={TEXT.zh_hans.loginPassword}
+              />
             </span>
             <ChangePasswrodButton />
           </div>
@@ -73,7 +94,10 @@ const SettingsAccount = () => {
         <section className="setting-section">
           <div className="left">
             <span className="title">
-              <Translate zh_hant="電子信箱" zh_hans="电子邮箱" />
+              <Translate
+                zh_hant={TEXT.zh_hant.email}
+                zh_hans={TEXT.zh_hans.email}
+              />
             </span>
             <span>{_get(viewer, 'info.email')}</span>
           </div>
@@ -95,7 +119,12 @@ const SettingsAccount = () => {
 
       <section className="section-container">
         <PageHeader
-          pageTitle={<Translate zh_hant="介面設定" zh_hans="界面设定" />}
+          pageTitle={
+            <Translate
+              zh_hant={TEXT.zh_hant.uiSetting}
+              zh_hans={TEXT.zh_hans.uiSetting}
+            />
+          }
           is="h2"
         />
         <section className="setting-section">

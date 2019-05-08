@@ -40,7 +40,11 @@ const PasswordModal: FC<
               zh_hans: TEXT.zh_hans.forgetPassword,
               lang
             })
-          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
+          : translate({
+              zh_hant: TEXT.zh_hant.changePassword,
+              zh_hans: TEXT.zh_hans.changeEmail,
+              lang
+            }),
       prev: 'login',
       next: 'reset',
       email: viewer.info.email
@@ -53,7 +57,11 @@ const PasswordModal: FC<
               zh_hans: TEXT.zh_hans.resetPassword,
               lang
             })
-          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
+          : translate({
+              zh_hant: TEXT.zh_hant.changePassword,
+              zh_hans: TEXT.zh_hans.changePassword,
+              lang
+            }),
       prev: 'request',
       next: 'complete'
     },
@@ -66,8 +74,8 @@ const PasswordModal: FC<
               lang
             })
           : translate({
-              zh_hant: '密碼修改成功',
-              zh_hans: '密码修改成功',
+              zh_hant: TEXT.zh_hant.changePasswordSuccess,
+              zh_hans: TEXT.zh_hans.changePasswordSuccess,
               lang
             })
     }
@@ -123,7 +131,10 @@ const PasswordModal: FC<
                   zh_hans={TEXT.zh_hans.resetPasswordSuccess}
                 />
               ) : (
-                <Translate zh_hant="密碼修改成功" zh_hans="密码修改成功" />
+                <Translate
+                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
+                />
               )
             }
             hint={
