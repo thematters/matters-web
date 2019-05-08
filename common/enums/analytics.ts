@@ -19,6 +19,8 @@ export const ANALYTICS_EVENTS = {
   LOG_IN: 'log-in',
   LOG_IN_FAILED: 'log-in-failed',
   CLICK_COLLECTION: 'click-collection',
+  OPEN_COLLECTION: 'open-collection',
+  OPEN_COLLECTED: 'open-collected',
   SHARE: 'share'
 }
 

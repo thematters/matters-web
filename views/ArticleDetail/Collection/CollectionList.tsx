@@ -108,7 +108,7 @@ const CollectionList = ({
                 <li
                   key={cursor}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_COLLECTION, {
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.COLLECTION,
                       location: i
                     })

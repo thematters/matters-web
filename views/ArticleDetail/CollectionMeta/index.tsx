@@ -4,6 +4,8 @@ import _merge from 'lodash/merge'
 import { Icon, TextIcon, Translate } from '~/components'
 import { Popover } from '~/components/Popper'
 
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import ICON_COLLECTION from '~/static/icons/collection.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
@@ -50,6 +52,11 @@ const CollectionMeta = ({
         type="button"
         className="collection-meta"
         id="collection-meta-hook"
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COLLECTION, {
+            entrance: article.id
+          })
+        }}
       >
         <TextIcon
           icon={<IconCollection />}
