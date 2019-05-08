@@ -72,6 +72,8 @@ export const foramts = [
   'embedVideo',
   'figcaption',
   'imageFigure',
+  'audioFigure',
   'mention',
-  'smartBreak'
+  'smartBreak',
+  'source'
 ]

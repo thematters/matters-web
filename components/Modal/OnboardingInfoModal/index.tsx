@@ -65,6 +65,17 @@ const OnboardingInfoModal: FC<ModalInstanceProps> = ({ close }) => {
                 <InfoIcon />
               </div>
               <div>
+                <Translate
+                  zh_hant="發佈高質量評論，激活創作者權限。"
+                  zh_hans="发布高质量评论，激活创作者权限。"
+                />
+              </div>
+            </div>
+            <div className="info-item">
+              <div className="info-icon">
+                <InfoIcon />
+              </div>
+              <div>
                 <Translate zh_hant="關注" zh_hans="关注" />
                 <a
                   className="u-link-green link"

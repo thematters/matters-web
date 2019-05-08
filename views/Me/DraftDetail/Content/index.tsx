@@ -21,24 +21,17 @@ const Editor = dynamic(() => import('~/components/Editor'), {
 })
 
 export const UPDATE_DRAFT = gql`
-  mutation UpdateDraft(
-    $id: ID!
-    $title: String
-    $content: String
-    $coverAssetId: ID
-  ) {
-    putDraft(
-      input: {
-        id: $id
-        title: $title
-        content: $content
-        coverAssetId: $coverAssetId
-      }
-    ) {
+  mutation UpdateDraft($id: ID!, $title: String, $content: String) {
+    putDraft(input: { id: $id, title: $title, content: $content }) {
       id
       title
       content
+      cover
       slug
+      assets {
+        id
+        path
+      }
     }
   }
 `
@@ -109,10 +102,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                   const result = await singleFileUpload({
                     variables: {
                       input: {
-                        ...input,
                         type: 'embed',
                         entityType: 'draft',
-                        entityId: draft.id
+                        entityId: draft.id,
+                        ...input
                       }
                     }
                   })
@@ -130,8 +123,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                           color: 'red',
                           content: (
                             <Translate
-                              zh_hant="圖片上傳失敗"
-                              zh_hans="图片上传失败"
+                              zh_hant="檔案上傳失敗"
+                              zh_hans="文件上传失败"
                             />
                           )
                         }
@@ -140,7 +133,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     throw new Error('upload not successful')
                   }
                 }}
-                uploading={uploading}
                 draft={draft}
                 onSave={async (newDraft: {
                   title?: string | null

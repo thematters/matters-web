@@ -86,7 +86,7 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
               {data && data.node && <Sidebar draft={data.node} />}
             </aside>
 
-            <ModalInstance modalId="publishModal" title="publish">
+            <ModalInstance modalId="publishModal" title="publishNote">
               {(props: ModalInstanceProps) => (
                 <PublishModal draft={data.node} {...props} />
               )}
