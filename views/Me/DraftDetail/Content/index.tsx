@@ -21,24 +21,17 @@ const Editor = dynamic(() => import('~/components/Editor'), {
 })
 
 export const UPDATE_DRAFT = gql`
-  mutation UpdateDraft(
-    $id: ID!
-    $title: String
-    $content: String
-    $coverAssetId: ID
-  ) {
-    putDraft(
-      input: {
-        id: $id
-        title: $title
-        content: $content
-        coverAssetId: $coverAssetId
-      }
-    ) {
+  mutation UpdateDraft($id: ID!, $title: String, $content: String) {
+    putDraft(input: { id: $id, title: $title, content: $content }) {
       id
       title
       content
+      cover
       slug
+      assets {
+        id
+        path
+      }
     }
   }
 `
