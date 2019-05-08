@@ -4,6 +4,8 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
+
 import { ViewerDrafts } from './__generated__/ViewerDrafts'
 
 const DELETE_DRAFT = gql`
@@ -67,7 +69,10 @@ const DeleteButton = ({
     >
       {deleteDraft => (
         <button type="button" onClick={() => deleteDraft({ refetchQueries })}>
-          <Translate zh_hant="刪除" zh_hans="删除" />
+          <Translate
+            zh_hant={TEXT.zh_hant.delete}
+            zh_hans={TEXT.zh_hant.delete}
+          />
         </button>
       )}
     </Mutation>

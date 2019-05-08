@@ -11,6 +11,8 @@ import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
+
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
@@ -46,7 +48,7 @@ const PinnedLabel = () => (
 
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <button className="cancel-button" type="button" onClick={() => onClick()}>
-    <Translate zh_hant="取消" zh_hans="取消" />
+    <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
     <style jsx>{styles}</style>
   </button>
 )

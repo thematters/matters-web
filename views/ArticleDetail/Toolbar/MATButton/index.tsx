@@ -58,7 +58,7 @@ const OnboardingAppreciateButton = ({
           className={buttonClasses}
           type="button"
           onClick={open}
-          aria-label="讚賞文章"
+          aria-label="讚賞作品"
         >
           <Icon
             id={ICON_MAT_GOLD.id}
@@ -91,7 +91,7 @@ const AppreciateButton = forwardRef<
       ref={ref}
       aria-disabled={!canAppreciate}
       onClick={() => canAppreciate && appreciate()}
-      aria-label="讚賞文章"
+      aria-label="讚賞作品"
     >
       <Icon
         id={article.hasAppreciate ? ICON_MAT_WHITE.id : ICON_MAT_GOLD.id}

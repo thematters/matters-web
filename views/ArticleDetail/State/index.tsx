@@ -16,12 +16,12 @@ const fragments = {
 
 const BannedHeader = () => (
   <Translate
-    zh_hant="此文章因違反用戶協定而被強制隱藏。"
-    zh_hans="此文章因违反用户协定而被强制隐藏。"
+    zh_hant="此作品因違反用戶協定而被強制隱藏。"
+    zh_hans="此作品因违反用户协定而被强制隐藏。"
   />
 )
 const ArchivedHeader = () => (
-  <Translate zh_hant="此文章已在站內隱藏。" zh_hans="此文章已在站內隐藏。" />
+  <Translate zh_hant="此作品已在站內隱藏。" zh_hans="此作品已在站內隐藏。" />
 )
 
 const State = ({ article }: { article: StateArticle }) => {

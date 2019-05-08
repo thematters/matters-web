@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { Tabs, Translate } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
 const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
@@ -41,35 +41,50 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
         <Tabs.Tab selected={pathname === PATHS.USER_ARTICLES.href}>
           <Link {...userArticlePath}>
             <a>
-              <Translate zh_hant="我的文章" zh_hans="我的文章" />
+              <Translate
+                zh_hant={TEXT.zh_hant.myArticles}
+                zh_hans={TEXT.zh_hans.myArticles}
+              />
             </a>
           </Link>
         </Tabs.Tab>
         <Tabs.Tab selected={pathname === PATHS.USER_DRAFTS.href}>
           <Link {...userDraftsPath}>
             <a>
-              <Translate zh_hant="我的草稿" zh_hans="我的草稿" />
+              <Translate
+                zh_hant={TEXT.zh_hant.myDrafts}
+                zh_hans={TEXT.zh_hans.myDrafts}
+              />
             </a>
           </Link>
         </Tabs.Tab>
         <Tabs.Tab selected={pathname === PATHS.USER_COMMENTS.href}>
           <Link {...userCommentsPath}>
             <a>
-              <Translate zh_hant="我的評論" zh_hans="我的评论" />
+              <Translate
+                zh_hant={TEXT.zh_hant.myComments}
+                zh_hans={TEXT.zh_hans.myComments}
+              />
             </a>
           </Link>
         </Tabs.Tab>
         <Tabs.Tab selected={pathname === PATHS.USER_BOOKMARKS.href}>
           <Link {...userBookmarksPath}>
             <a>
-              <Translate zh_hant="我的收藏" zh_hans="我的收藏" />
+              <Translate
+                zh_hant={TEXT.zh_hant.myBookmarks}
+                zh_hans={TEXT.zh_hans.myBookmarks}
+              />
             </a>
           </Link>
         </Tabs.Tab>
         <Tabs.Tab selected={pathname === PATHS.USER_HISTORY.href}>
           <Link {...userHistoryPath}>
             <a>
-              <Translate zh_hant="瀏覽記錄" zh_hans="浏览记录" />
+              <Translate
+                zh_hant={TEXT.zh_hant.readHistory}
+                zh_hans={TEXT.zh_hans.readHistory}
+              />
             </a>
           </Link>
         </Tabs.Tab>
@@ -82,14 +97,20 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
       <Tabs.Tab selected={pathname === PATHS.USER_ARTICLES.href}>
         <Link {...userArticlePath}>
           <a>
-            <Translate zh_hant="文章" zh_hans="文章" />
+            <Translate
+              zh_hant={TEXT.zh_hant.article}
+              zh_hans={TEXT.zh_hans.article}
+            />
           </a>
         </Link>
       </Tabs.Tab>
       <Tabs.Tab selected={pathname === PATHS.USER_COMMENTS.href}>
         <Link {...userCommentsPath}>
           <a>
-            <Translate zh_hant="評論" zh_hans="评论" />
+            <Translate
+              zh_hant={TEXT.zh_hant.comment}
+              zh_hans={TEXT.zh_hans.comment}
+            />
           </a>
         </Link>
       </Tabs.Tab>

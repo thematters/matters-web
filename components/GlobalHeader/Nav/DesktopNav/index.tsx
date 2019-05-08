@@ -4,7 +4,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 
 import { Translate } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -22,12 +22,18 @@ const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
     <>
       <Link {...PATHS.HOME}>
         <a className={homeClasses}>
-          <Translate zh_hant="發現" zh_hans="发现" />
+          <Translate
+            zh_hant={TEXT.zh_hant.discover}
+            zh_hans={TEXT.zh_hans.discover}
+          />
         </a>
       </Link>
       <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
-          <Translate zh_hant="追蹤" zh_hans="追踪" />
+          <Translate
+            zh_hant={TEXT.zh_hant.follow}
+            zh_hans={TEXT.zh_hans.follow}
+          />
         </a>
       </Link>
       <style jsx>{styles}</style>

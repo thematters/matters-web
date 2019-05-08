@@ -129,8 +129,8 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
           <p>
             <TextIcon icon={<IconHelp />}>
               <Translate
-                zh_hant="文章已存至草稿箱，請檢查網絡後重試。"
-                zh_hans="文章已存至草稿箱，请检查网络后重试。"
+                zh_hant="作品已存至草稿箱，請檢查網絡後重試。"
+                zh_hans="作品已存至草稿箱，请检查网络后重试。"
               />
             </TextIcon>
           </p>

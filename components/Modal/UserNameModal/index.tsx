@@ -6,6 +6,8 @@ import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
 
+import { TEXT } from '~/common/enums'
+
 import styles from './styles.css'
 
 /**
@@ -48,7 +50,10 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
               size="xlarge"
               onClick={close}
             >
-              <Translate zh_hant="取消" zh_hans="取消" />
+              <Translate
+                zh_hant={TEXT.zh_hant.cancel}
+                zh_hans={TEXT.zh_hans.cancel}
+              />
             </Button>
             <Button
               type="button"

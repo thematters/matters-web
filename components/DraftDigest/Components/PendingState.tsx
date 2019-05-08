@@ -39,7 +39,7 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
-                content: <Translate zh_hant="文章已發布" zh_hans="文章已发布" />
+                content: <Translate zh_hant="作品已發布" zh_hans="作品已发布" />
               }
             })
           )

@@ -51,7 +51,7 @@ const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="收藏了你的文章" zh_hans="收藏了你的文章" />
+          <Translate zh_hant="收藏了你的作品" zh_hans="收藏了你的作品" />
         </h4>
 
         <NoticeArticle article={notice.target} />

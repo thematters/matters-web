@@ -9,7 +9,7 @@ import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -94,8 +94,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 />
               }
               text={translate({
-                zh_hant: '瀏覽記錄',
-                zh_hans: '浏览记录',
+                zh_hant: TEXT.zh_hant.readHistory,
+                zh_hans: TEXT.zh_hans.readHistory,
                 lang
               })}
               spacing="xtight"

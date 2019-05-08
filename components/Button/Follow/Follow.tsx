@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Button, Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
@@ -59,7 +60,10 @@ const Follow = ({
         bgColor="transparent"
         outlineColor="green"
       >
-        <Translate zh_hant="追蹤" zh_hans="追踪" />
+        <Translate
+          zh_hant={TEXT.zh_hant.follow}
+          zh_hans={TEXT.zh_hans.follow}
+        />
       </Button>
     )}
   </Mutation>
