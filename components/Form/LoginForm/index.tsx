@@ -62,9 +62,15 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     let result: any
 
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -75,7 +81,10 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     let result: any
 
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -92,7 +101,12 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
         href={PATHS.AUTH_FORGET.href}
         as={PATHS.AUTH_FORGET.as}
       >
-        {translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })}？
+        {translate({
+          zh_hant: TEXT.zh_hant.forgetPassword,
+          zh_hans: TEXT.zh_hans.forgetPassword,
+          lang
+        })}
+        ？
       </Button>
       <style jsx>{styles}</style>
     </>
@@ -108,7 +122,12 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           spacing="none"
           onClick={open}
         >
-          {translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })}？
+          {translate({
+            zh_hant: TEXT.zh_hant.forgetPassword,
+            zh_hans: TEXT.zh_hans.forgetPassword,
+            lang
+          })}
+          ？
         </Button>
       )}
     </ModalSwitch>
@@ -128,20 +147,20 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: '請輸入電子信箱',
-      zh_hans: '请输入邮箱',
+      zh_hant: TEXT.zh_hant.enterEmail,
+      zh_hans: TEXT.zh_hans.enterEmail,
       lang
     })
 
     const passwordPlaceholder = translate({
-      zh_hant: '請輸入密碼',
-      zh_hans: '请输入密码',
+      zh_hant: TEXT.zh_hant.enterPassword,
+      zh_hans: TEXT.zh_hans.enterPassword,
       lang
     })
 
     const loginText = translate({
-      zh_hant: '登入',
-      zh_hans: '登入',
+      zh_hant: TEXT.zh_hant.login,
+      zh_hans: TEXT.zh_hans.login,
       lang
     })
 

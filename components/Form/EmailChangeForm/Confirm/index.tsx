@@ -54,9 +54,15 @@ export const EmailChangeConfirmForm: FC<Props> = ({
   const validateEmail = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -66,7 +72,10 @@ export const EmailChangeConfirmForm: FC<Props> = ({
   const validateCode = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })

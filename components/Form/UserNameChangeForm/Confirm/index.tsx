@@ -37,7 +37,10 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
   const validateUserName = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidUserName(value)) {
       result = {
         zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
@@ -56,7 +59,10 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
   ) => {
     let result: any
     if (!comparedValue) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (comparedValue !== value) {
       result = { zh_hant: 'Matters ID 不一致', zh_hans: 'Matters ID 不一致' }
     }

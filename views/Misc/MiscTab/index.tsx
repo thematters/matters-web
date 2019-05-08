@@ -3,7 +3,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -30,7 +30,10 @@ const MiscTabs: React.FC<WithRouterProps> = ({ router }) => {
         <Tabs.Tab selected={asPath === PATHS.MISC_TOS.as}>
           <Link {...PATHS.MISC_TOS}>
             <a>
-              <Translate zh_hant="用戶協議" zh_hans="用户协议" />
+              <Translate
+                zh_hant={TEXT.zh_hant.term}
+                zh_hans={TEXT.zh_hans.term}
+              />
             </a>
           </Link>
         </Tabs.Tab>

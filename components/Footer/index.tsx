@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -54,7 +54,11 @@ export const Footer = () => {
       <BaseLink
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
-        text={translate({ zh_hant: '用戶協議', zh_hans: '用户协议', lang })}
+        text={translate({
+          zh_hant: TEXT.zh_hant.term,
+          zh_hans: TEXT.zh_hans.term,
+          lang
+        })}
       />
       {/* <BaseLink
         href={'/'}

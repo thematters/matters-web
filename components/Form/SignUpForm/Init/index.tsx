@@ -70,9 +70,15 @@ export const SignUpInitForm: FC<Props> = ({
   const validateEmail = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -82,7 +88,10 @@ export const SignUpInitForm: FC<Props> = ({
   const validateCode = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -92,7 +101,10 @@ export const SignUpInitForm: FC<Props> = ({
   const validateDisplayName = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidDisplayName(value)) {
       result = {
         zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
@@ -107,11 +119,14 @@ export const SignUpInitForm: FC<Props> = ({
   const validatePassword = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidStrictPassword(value)) {
       result = {
-        zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
-        zh_hans: '不少于 8 位，必须包含数字和大小写字母'
+        zh_hant: TEXT.zh_hant.passwordHint,
+        zh_hans: TEXT.zh_hans.passwordHint
       }
     }
     if (result) {
@@ -126,9 +141,15 @@ export const SignUpInitForm: FC<Props> = ({
   ) => {
     let result: any
     if (!comparedValue) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (comparedValue !== value) {
-      result = { zh_hant: '密碼不一致', zh_hans: '密码不一致' }
+      result = {
+        zh_hant: TEXT.zh_hant.passwordNotMatch,
+        zh_hans: TEXT.zh_hans.passwordNotMatch
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -161,14 +182,14 @@ export const SignUpInitForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: '請輸入電子信箱',
-      zh_hans: '请输入邮箱',
+      zh_hant: TEXT.zh_hant.enterEmail,
+      zh_hans: TEXT.zh_hans.enterEmail,
       lang
     })
 
     const codePlaceholder = translate({
-      zh_hant: '驗證碼',
-      zh_hans: '验证码',
+      zh_hant: TEXT.zh_hant.verificationCode,
+      zh_hans: TEXT.zh_hans.verificationCode,
       lang
     })
 
@@ -179,26 +200,26 @@ export const SignUpInitForm: FC<Props> = ({
     })
 
     const passwordPlaceholder = translate({
-      zh_hant: '請輸入密碼',
-      zh_hans: '请输入密码',
+      zh_hant: TEXT.zh_hant.enterPassword,
+      zh_hans: TEXT.zh_hans.enterPassword,
       lang
     })
 
     const passwordHint = translate({
-      zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
-      zh_hans: '不少于 8 位，必须包含数字和大小写字母',
+      zh_hant: TEXT.zh_hant.passwordHint,
+      zh_hans: TEXT.zh_hans.passwordHint,
       lang
     })
 
     const comparedPlaceholder = translate({
-      zh_hant: '請再次輸入密碼',
-      zh_hans: '请再次输入密码',
+      zh_hant: TEXT.zh_hant.enterPasswordAgain,
+      zh_hans: TEXT.zh_hans.enterPasswordAgain,
       lang
     })
 
     const signUpText = translate({
-      zh_hant: '註冊',
-      zh_hans: '注册',
+      zh_hant: TEXT.zh_hant.register,
+      zh_hans: TEXT.zh_hans.register,
       lang
     })
 

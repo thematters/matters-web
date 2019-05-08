@@ -1,6 +1,8 @@
 import { Button, Translate } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
 
+import { TEXT } from '~/common/enums'
+
 export default () => (
   <ModalSwitch modalId="signUpModal">
     {(open: any) => (
@@ -11,7 +13,10 @@ export default () => (
         style={{ minWidth: '5rem' }}
         onClick={() => open()}
       >
-        <Translate zh_hant="註冊" zh_hans="注册" />
+        <Translate
+          zh_hant={TEXT.zh_hant.register}
+          zh_hans={TEXT.zh_hans.register}
+        />
       </Button>
     )}
   </ModalSwitch>

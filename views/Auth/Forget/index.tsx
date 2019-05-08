@@ -9,6 +9,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -68,15 +69,15 @@ const Forget = () => {
       <div className="complete">
         <div className="message">
           {translate({
-            zh_hant: '密碼重置成功',
-            zh_hans: '密码重置成功',
+            zh_hant: TEXT.zh_hant.resetPasswordSuccess,
+            zh_hans: TEXT.zh_hans.resetPasswordSuccess,
             lang
           })}
         </div>
         <div className="hint">
           {translate({
-            zh_hant: '請使用新的密碼重新登入',
-            zh_hans: '请使用新的密码重新登入',
+            zh_hant: TEXT.zh_hant.useNewPassword,
+            zh_hans: TEXT.zh_hans.useNewPassword,
             lang
           })}
           。
@@ -89,7 +90,12 @@ const Forget = () => {
   return (
     <>
       <main className="l-row">
-        <Head title={{ zh_hant: '忘記密碼', zh_hans: '忘记密码' }} />
+        <Head
+          title={{
+            zh_hant: TEXT.zh_hant.forgetPassword,
+            zh_hans: TEXT.zh_hans.forgetPassword
+          }}
+        />
 
         <article className={containerClass}>
           {step === 'request' && (

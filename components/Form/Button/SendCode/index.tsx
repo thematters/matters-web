@@ -97,8 +97,8 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
             {sent
               ? translate({ zh_hant: '重新發送', zh_hans: '重新发送', lang })
               : translate({
-                  zh_hant: '發送驗證碼',
-                  zh_hans: '发送验证码',
+                  zh_hant: TEXT.zh_hant.sendVerificationCode,
+                  zh_hans: TEXT.zh_hans.sendVerificationCode,
                   lang
                 })}
             {sent && countdown.timeLeft !== 0 && (

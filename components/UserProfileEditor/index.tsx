@@ -10,6 +10,7 @@ import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
@@ -38,7 +39,10 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
   const validateDisplayName = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidDisplayName(value)) {
       result = {
         zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
