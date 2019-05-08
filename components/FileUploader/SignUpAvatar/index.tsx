@@ -5,7 +5,10 @@ import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 
-import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  UPLOAD_IMAGE_SIZE_LIMIT
+} from '~/common/enums'
 import { translate } from '~/common/utils'
 import ICON_CAMERA from '~/static/icons/camera-green.svg?sprite'
 
@@ -65,11 +68,11 @@ export const SignUpAvatarUploader: FC<Props> = ({
 
   const sizeError = translate({
     zh_hant: '上傳檔案超過 5 MB',
-    zh_hans: '上传档案超过 5 MB',
+    zh_hans: '上传文件超过 5 MB',
     lang
   })
 
-  const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
+  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = (event: any, upload: any) => {
     event.stopPropagation()
@@ -81,7 +84,7 @@ export const SignUpAvatarUploader: FC<Props> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
+    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
       return undefined
     }

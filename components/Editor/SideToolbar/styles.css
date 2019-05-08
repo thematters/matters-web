@@ -49,7 +49,7 @@
   @mixin all-transition;
 }
 
-.upload-image-container {
+.upload-container {
   display: inline-block;
   font-size: 0;
   vertical-align: middle;
