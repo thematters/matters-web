@@ -18,12 +18,7 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import {
-  dom,
-  initAudioPlayers,
-  translate,
-  trimLineBreaks
-} from '~/common/utils'
+import { initAudioPlayers, translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
@@ -133,16 +128,9 @@ class Editor extends React.Component<Props, State> {
 
   saveDraft() {
     const content = this.state.content
-    const assets = dom.getAttributes('data-asset-id', content)
-    const draft =
-      assets.length > 0
-        ? {
-            content: trimLineBreaks(content),
-            coverAssetId: assets[0]
-          }
-        : {
-            content: trimLineBreaks(content)
-          }
+    const draft = {
+      content: trimLineBreaks(content)
+    }
     this.props.onSave(draft)
   }
 
