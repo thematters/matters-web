@@ -40,7 +40,9 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
     lang
   })
 
-  if (!viewer.isActive) {
+  const canExtend = viewer.isActive && (viewer.isAdmin || viewer.isPartner)
+
+  if (!canExtend) {
     return null
   }
 
