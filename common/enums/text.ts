@@ -34,6 +34,7 @@ export const TEXT = {
     accountArchived: '帳戶已註銷',
     accountBanned: '帳戶已禁言',
     publish: '發佈文章',
+    publishNote: '發佈須知',
     onboardingInfo: '你還不是創作者',
     error: {
       UNKNOWN_ERROR: '未知錯誤，請稍候重試',
@@ -104,6 +105,7 @@ export const TEXT = {
     accountArchived: '账户已注销',
     accountBanned: '账户已禁言',
     publish: '发布文章',
+    publishNote: '发布须知',
     onboardingInfo: '你还不是创作者',
     error: {
       UNKNOWN_ERROR: '未知错误，请稍候重试',
