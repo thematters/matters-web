@@ -53,9 +53,7 @@ const CollectionMeta = ({
         className="collection-meta"
         id="collection-meta-hook"
         onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COLLECTION, {
-            entrance: article.id
-          })
+          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COLLECTION)
         }}
       >
         <TextIcon

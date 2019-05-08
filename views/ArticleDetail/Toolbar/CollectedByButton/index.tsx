@@ -10,7 +10,8 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
 
-import { numAbbr } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, numAbbr } from '~/common/utils'
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 import ICON_EXPAND_BRANCH from '~/static/icons/expand-branch.svg?sprite'
 
@@ -195,7 +196,12 @@ const CollectedByButton = ({
       content={<CollectedBy article={article} />}
       placement={popperPlacement}
     >
-      <button type="button">
+      <button
+        type="button"
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COLLECTED)
+        }}
+      >
         <TextIcon
           icon={
             <Icon
