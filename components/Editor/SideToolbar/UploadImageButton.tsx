@@ -6,6 +6,7 @@ import { Translate } from '~/components/Language'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 import ICON_EDITOR_IMAGE from '~/static/icons/editor-image.svg?sprite'
@@ -48,7 +49,7 @@ const UploadImageButton = ({
 
     if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: (
@@ -70,7 +71,7 @@ const UploadImageButton = ({
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             content: <Translate zh_hant="圖片上傳成功" zh_hans="图片上传成功" />
@@ -81,7 +82,7 @@ const UploadImageButton = ({
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: <Translate zh_hant="圖片上傳失敗" zh_hans="图片上传失败" />

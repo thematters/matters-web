@@ -9,7 +9,7 @@ import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
@@ -125,7 +125,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     return { id, path }
                   } else {
                     window.dispatchEvent(
-                      new CustomEvent('addToast', {
+                      new CustomEvent(ADD_TOAST, {
                         detail: {
                           color: 'red',
                           content: (

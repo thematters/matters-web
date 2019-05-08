@@ -6,7 +6,7 @@ import { getErrorCodes, Mutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -72,7 +72,7 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
         )
 
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
               content: errorMessage

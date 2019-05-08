@@ -10,7 +10,13 @@ import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { ANALYTICS_EVENTS, ERROR_CODES, PATHS, TEXT } from '~/common/enums'
+import {
+  ADD_TOAST,
+  ANALYTICS_EVENTS,
+  ERROR_CODES,
+  PATHS,
+  TEXT
+} from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -209,7 +215,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             submitCallback()
           }
           window.dispatchEvent(
-            new CustomEvent('addToast', {
+            new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
                 content: <Translate zh_hant="登入成功" zh_hans="登入成功" />

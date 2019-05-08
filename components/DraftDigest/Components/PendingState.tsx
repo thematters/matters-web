@@ -5,6 +5,7 @@ import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftP
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
 
+import { ADD_TOAST } from '~/common/enums'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_LOADING from '~/static/icons/loading.svg?sprite'
 
@@ -35,7 +36,7 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
           process.browser
         ) {
           window.dispatchEvent(
-            new CustomEvent('addToast', {
+            new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
                 content: <Translate zh_hant="文章已發布" zh_hans="文章已发布" />

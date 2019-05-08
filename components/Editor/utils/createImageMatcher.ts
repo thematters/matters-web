@@ -1,6 +1,7 @@
 import getConfig from 'next/config'
 import { Quill } from 'react-quill'
 
+import { extractDomain } from '~/common/utils'
 import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.svg'
 
 const Delta = Quill.import('delta')
@@ -59,7 +60,8 @@ const createImageMatcher = (upload: DraftAssetUpload) => (
   let imageFigure
   // don't upload if copying from matters internally
   // retrieve asset id from url
-  if (srcOrg.indexOf(SITE_DOMAIN) !== -1) {
+  const domain = extractDomain(SITE_DOMAIN || '') || 'matters.news'
+  if (srcOrg.indexOf(domain) !== -1) {
     const assetId = srcOrg.split('/').slice(-2, -1)[0]
 
     imageFigure = {
