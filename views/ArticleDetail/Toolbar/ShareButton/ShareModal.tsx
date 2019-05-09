@@ -6,6 +6,8 @@ import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 
+import { ADD_TOAST } from '~/common/enums/events'
+import { dom } from '~/common/utils'
 import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
 import Email from './Email'
@@ -47,6 +49,22 @@ const ShareModal = () => {
                     id={ICON_SHARE_LINK.id}
                     viewBox={ICON_SHARE_LINK.viewBox}
                     size="small"
+                    onClick={() => {
+                      dom.copyToClipboard(decodeURI(window.location.href))
+                      window.dispatchEvent(
+                        new CustomEvent(ADD_TOAST, {
+                          detail: {
+                            color: 'green',
+                            content: (
+                              <Translate
+                                zh_hant="複製成功"
+                                zh_hans="复制成功"
+                              />
+                            )
+                          }
+                        })
+                      )
+                    }}
                   />
                 }
                 spacing="tight"
