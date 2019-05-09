@@ -50,6 +50,7 @@ export const FEED_TYPE = {
   READ_HISTORY: 'read-history',
   RELATED_ARTICLE: 'related-article',
   COLLECTION: 'collection',
+  COLLECTED: 'collected',
   // user
   AUTHORS: 'authors',
   ALL_AUTHORS: 'all-authors',

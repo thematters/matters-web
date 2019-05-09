@@ -10,7 +10,7 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, numAbbr } from '~/common/utils'
 import ICON_DIRECTION from '~/static/icons/direction.svg?sprite'
 import ICON_EXPAND_BRANCH from '~/static/icons/expand-branch.svg?sprite'
@@ -62,10 +62,12 @@ export const COLLECTED_BY = gql`
 
 const CollectedByArticleItem = ({
   article,
-  rootArticle
+  rootArticle,
+  location
 }: {
   article: any
   rootArticle: any
+  location: number
 }) => {
   const [expand, setExpand] = useState(false)
   const collectionCount = _get(article, 'collection.totalCount', 0)
@@ -73,7 +75,16 @@ const CollectedByArticleItem = ({
   return (
     <li className={`collected-by-item ${expand ? 'expand' : ''}`}>
       <div className="content">
-        <ArticleDigest.Dropdown article={article} hasArchivedTooltip />
+        <ArticleDigest.Dropdown
+          article={article}
+          hasArchivedTooltip
+          onClick={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+              type: FEED_TYPE.COLLECTED,
+              location
+            })
+          }}
+        />
 
         {collectionCount > 0 && (
           <button onClick={() => setExpand(!expand)} type="button">
@@ -152,8 +163,9 @@ const CollectedBy = ({ article }: { article: any }) => (
 
             <ul>
               {edges &&
-                edges.map(({ node }: { node: any }) => (
+                edges.map(({ node }: { node: any }, index: number) => (
                   <CollectedByArticleItem
+                    location={index}
                     key={node.id}
                     article={node}
                     rootArticle={article}
