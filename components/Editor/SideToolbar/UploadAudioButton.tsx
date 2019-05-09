@@ -3,6 +3,7 @@ import { Quill } from 'react-quill'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
+import { Tooltip } from '~/components/Popper'
 
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
@@ -110,23 +111,33 @@ const UploadAudioButton = ({
   }
 
   return (
-    <label className="upload-container">
-      <input
-        className="input"
-        type="file"
-        accept={acceptTypes}
-        multiple={false}
-        aria-label="新增音頻"
-        onChange={(event: any) => handleUploadChange(event)}
-      />
-      <Icon
-        id={uploading ? ICON_SPINNER.id : ICON_EDITOR_AUDIO.id}
-        viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_AUDIO.viewBox}
-        size="large"
-        className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
-      />
-      <style jsx>{styles}</style>
-    </label>
+    <Tooltip
+      content={
+        <Translate
+          zh_hant="MP3 或 AAC 格式，不超過 100 MB"
+          zh_hans="MP3 或 AAC 格式，不超过 100 MB"
+        />
+      }
+      placement="top"
+    >
+      <label className="upload-container">
+        <input
+          className="input"
+          type="file"
+          accept={acceptTypes}
+          multiple={false}
+          aria-label="新增音頻"
+          onChange={(event: any) => handleUploadChange(event)}
+        />
+        <Icon
+          id={uploading ? ICON_SPINNER.id : ICON_EDITOR_AUDIO.id}
+          viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_AUDIO.viewBox}
+          size="large"
+          className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
+        />
+        <style jsx>{styles}</style>
+      </label>
+    </Tooltip>
   )
 }
 
