@@ -9,7 +9,6 @@ const trackAs = (type: string) => (
     detail: { args, type }
   })
 
-  console.log({ args })
   // dispatch event
   window.dispatchEvent(event)
   // }
