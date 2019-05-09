@@ -38,7 +38,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
           likeButtonIframe.contentWindow.postMessage(
             {
               action: 'SET_REFERRER',
-              content: { referrer: window.location.href }
+              content: { referrer: window.location.href.split('#')[0] }
             },
             'https://button.like.co'
           )
