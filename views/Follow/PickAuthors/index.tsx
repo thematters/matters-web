@@ -1,42 +1,14 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
 
 import {
   Head,
-  PageHeader,
-  ShuffleButton,
-  Spinner,
-  Translate,
-  UserDigest
+  Translate
 } from '~/components'
-import { Query } from '~/components/GQL'
+import { AuthorPicker } from '~/components/Follow'
 
-import { numFormat } from '~/common/utils'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
-import { FolloweeCountUser } from './__generated__/FolloweeCountUser'
-import { PickAuthors as PickAuthorsType } from './__generated__/PickAuthors'
 import styles from './styles.css'
-
-const PICK_AUTHORS = gql`
-  query PickAuthors {
-    viewer {
-      id
-      recommendation {
-        authors(input: { first: 5, filter: { random: true } }) {
-          edges {
-            cursor
-            node {
-              ...UserDigestFullDescUser
-            }
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.FullDesc.fragments.user}
-`
 
 const PickIntroHeader = () => {
   return (
@@ -67,65 +39,18 @@ const PickIntroHeader = () => {
   )
 }
 
-const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
-  <Query query={PICK_AUTHORS} notifyOnNetworkStatusChange>
-    {({
-      data,
-      loading,
-      error,
-      refetch
-    }: QueryResult & { data: PickAuthorsType }) => {
-      const edges = _get(data, 'viewer.recommendation.authors.edges', [])
-      const followeeCount = _get(viewer, 'followees.totalCount', 0)
-
-      if (!edges || edges.length <= 0) {
-        return null
-      }
-
-      return (
-        <>
-          <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
-
-          <PickIntroHeader />
-          <PageHeader
-            pageTitle={<Translate zh_hant="追蹤創作者" zh_hans="追踪创作者" />}
-          >
-            <div className="follow-info">
-              <ShuffleButton onClick={() => refetch()} />
-              <span>
-                <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
-                <span className="hightlight">{numFormat(followeeCount)}</span>
-                <Translate zh_hant=" 位" zh_hans=" 位" />
-              </span>
-            </div>
-          </PageHeader>
-
-          {loading && <Spinner />}
-
-          {!loading && (
-            <ul>
-              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                <li key={cursor}>
-                  <UserDigest.FullDesc user={node} nameSize="small" />
-                </li>
-              ))}
-            </ul>
-          )}
-          <style jsx>{styles}</style>
-        </>
-      )
-    }}
-  </Query>
+const PickAuthors = ({ viewer }: {[key: string]: any}) => (
+  <>
+    <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
+    <PickIntroHeader />
+    <AuthorPicker
+      viewer={viewer}
+      title={<Translate zh_hant="追蹤創作者" zh_hans="追踪创作者" />}
+    />
+    <style jsx>{styles}</style>
+  </>
 )
 
-PickAuthors.fragments = {
-  user: gql`
-    fragment FolloweeCountUser on User {
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  `
-}
+PickAuthors.fragments = AuthorPicker.fragments
 
 export default PickAuthors

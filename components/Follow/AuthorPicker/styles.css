@@ -1,0 +1,28 @@
+.small-size-header {
+  & :global(> header) {
+
+    & :global(> h1) {
+      color: var(--color-grey-darker);
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+.follow-info {
+  font-size: var(--font-size-sm);
+  color: var(--color-grey);
+  line-height: 1;
+
+  & .hightlight {
+    color: var(--color-matters-green);
+  }
+
+  & :global(> *) {
+    line-height: 1;
+    vertical-align: middle;
+  }
+}
+
+ul {
+  font-size: 0; /* remove space between <li> */
+}

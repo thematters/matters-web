@@ -1,7 +1,11 @@
 import { FC, useContext, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
-import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
+import {
+  SignUpFollowForm,
+  SignUpInitForm,
+  SignUpProfileForm
+} from '~/components/Form/SignUpForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -24,7 +28,7 @@ import styles from './styles.css'
  *
  */
 
-type Step = 'signUp' | 'profile' | 'complete'
+type Step = 'signUp' | 'profile' | 'follow' | 'complete'
 
 const LoginModalSwitch = () => (
   <ModalSwitch modalId="loginModal">
@@ -60,6 +64,8 @@ const Footer = () => (
 const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
 
+  const [layout, setLayout] = useState<'default' | 'full-width'>('default')
+
   const [step, setStep] = useState<Step>('signUp')
 
   const data: { [key: string]: any } = {
@@ -68,6 +74,9 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
     },
     profile: {
       title: translate({ zh_hant: '個人資料', zh_hans: '个人資料', lang })
+    },
+    follow: {
+      title: translate({ zh_hant: '追蹤創作者', zh_hans: '追踪创作者', lang })
     },
     complete: {
       title: translate({ zh_hant: '註冊成功', zh_hans: '注册成功', lang })
@@ -79,13 +88,21 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
     setStep('profile')
   }
 
-  const signUpProfileCallback = () => setStep('complete')
+  const signUpProfileCallback = () => {
+    setStep('follow')
+    setLayout('full-width')
+  }
+
+  const signUpFollowCallback = () => {
+    setStep('complete')
+    setLayout('default')
+  }
 
   return (
     <>
       <Modal.Header title={data[step].title} closeable={closeable} />
 
-      <Modal.Content>
+      <Modal.Content layout={layout}>
         {step === 'signUp' && (
           <>
             <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
@@ -96,6 +113,12 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
           <SignUpProfileForm
             purpose="modal"
             submitCallback={signUpProfileCallback}
+          />
+        )}
+        {step === 'follow' && (
+          <SignUpFollowForm
+            purpose="modal"
+            submitCallback={signUpFollowCallback}
           />
         )}
         {step === 'complete' && <SignUpComplete />}
