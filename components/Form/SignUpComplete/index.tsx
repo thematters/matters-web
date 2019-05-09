@@ -30,39 +30,51 @@ const SignUpComplete = () => (
       <br />
       <p>
         <Translate
-          zh_hant="目前，Matters 實行邀請制，新註冊的用戶需要透過老用戶邀請，才可以獲得創作者資格。"
-          zh_hans="目前，Matters 实行邀请制，新注册的用户需要通过老用户邀请，才可以获得创作者资格。"
+          zh_hant="目前，Matters 實行邀請制，新註冊的用戶可以通過以下方法獲得創作者資格："
+          zh_hans="目前，Matters 实行邀请制，新注册的用户可以通过以下方法获得创作者资格："
         />
       </p>
       <br />
-      <p>
-        <Translate zh_hant="你可以在 " zh_hans="你可以在 " />
-        <a className="u-link-green" href={postUrl} target="_blank">
-          <Translate zh_hant="Matters 站内" zh_hans="Matters 站內" />
-        </a>
-        <Translate
-          zh_hant="尋找老用户，或關注 "
-          zh_hans="寻找老用户，或关注 "
-        />
-        <a
-          className="u-link-green"
-          href={EXTERNAL_LINKS.FACEBOOK}
-          target="_blank"
-        >
-          <Translate zh_hant="Matters 臉書" zh_hans="Matters 脸书" />
-        </a>
-        <Translate zh_hant="和" zh_hans="和" />
-        <a className="u-link-green" href={EXTERNAL_LINKS.WEIBO} target="_blank">
+      <ol type="1">
+        <li>
+          <Translate zh_hant="你可以在 " zh_hans="你可以在 " />
+          <a className="u-link-green" href={postUrl} target="_blank">
+            <Translate zh_hant="Matters 站内" zh_hans="Matters 站內" />
+          </a>
+          <Translate zh_hant="尋找老用户。" zh_hans="寻找老用户。" />
+        </li>
+        <li>
           <Translate
-            zh_hant="微博帳號 MattersLab"
-            zh_hans="微博帳號 MattersLab"
+            zh_hant="發佈高質量評論，激活創作者權限。"
+            zh_hans="发布高质量评论，激活创作者权限。"
           />
-        </a>
-        <Translate
-          zh_hant="，即時了解開啟權限新玩法。"
-          zh_hans="，即时了解开启权限新玩法。"
-        />
-      </p>
+        </li>
+        <li>
+          <Translate zh_hant="關注" zh_hans="关注" />
+          <a
+            className="u-link-green"
+            href={EXTERNAL_LINKS.FACEBOOK}
+            target="_blank"
+          >
+            <Translate zh_hant="Matters 臉書" zh_hans="Matters 脸书" />
+          </a>
+          <Translate zh_hant="和" zh_hans="和" />
+          <a
+            className="u-link-green"
+            href={EXTERNAL_LINKS.WEIBO}
+            target="_blank"
+          >
+            <Translate
+              zh_hant="微博帳號 MattersLab"
+              zh_hans="微博帳號 MattersLab"
+            />
+          </a>
+          <Translate
+            zh_hant="，即時了解開啟權限新玩法。"
+            zh_hans="，即时了解开启权限新玩法。"
+          />
+        </li>
+      </ol>
     </div>
 
     <div className="buttons">
