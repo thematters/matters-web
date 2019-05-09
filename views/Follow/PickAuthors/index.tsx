@@ -1,9 +1,6 @@
 import _get from 'lodash/get'
 
-import {
-  Head,
-  Translate
-} from '~/components'
+import { Head, Translate } from '~/components'
 import { AuthorPicker } from '~/components/Follow'
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
@@ -39,7 +36,7 @@ const PickIntroHeader = () => {
   )
 }
 
-const PickAuthors = ({ viewer }: {[key: string]: any}) => (
+const PickAuthors = ({ viewer }: { [key: string]: any }) => (
   <>
     <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
     <PickIntroHeader />
