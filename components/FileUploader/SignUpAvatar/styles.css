@@ -39,6 +39,5 @@
 .error {
   color: var(--color-red);
   font-size: var(--font-size-xs);
-  height: 1rem;
   min-height: 1rem;
 }

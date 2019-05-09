@@ -10,7 +10,7 @@ import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
-import { isValidStrictPassword, translate } from '~/common/utils'
+import { isValidPassword, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -45,7 +45,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
       }
-    } else if (!isValidStrictPassword(value)) {
+    } else if (!isValidPassword(value)) {
       result = {
         zh_hant: TEXT.zh_hant.passwordHint,
         zh_hans: TEXT.zh_hans.passwordHint

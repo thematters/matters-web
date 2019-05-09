@@ -17,7 +17,7 @@ import {
   clearPersistCache,
   isValidDisplayName,
   isValidEmail,
-  isValidStrictPassword,
+  isValidPassword,
   translate
 } from '~/common/utils'
 
@@ -107,8 +107,8 @@ export const SignUpInitForm: FC<Props> = ({
       }
     } else if (!isValidDisplayName(value)) {
       result = {
-        zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
-        zh_hans: '请输入 2 至 20 个字符，仅支持中英文及数字'
+        zh_hant: TEXT.zh_hant.displayNameHint,
+        zh_hans: TEXT.zh_hans.displayNameHint
       }
     }
     if (result) {
@@ -123,7 +123,7 @@ export const SignUpInitForm: FC<Props> = ({
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
       }
-    } else if (!isValidStrictPassword(value)) {
+    } else if (!isValidPassword(value)) {
       result = {
         zh_hant: TEXT.zh_hant.passwordHint,
         zh_hans: TEXT.zh_hans.passwordHint

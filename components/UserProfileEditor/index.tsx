@@ -45,8 +45,8 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
       }
     } else if (!isValidDisplayName(value)) {
       result = {
-        zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
-        zh_hans: '请输入 2 至 20 个字符，仅支持中英文及数字'
+        zh_hant: TEXT.zh_hant.displayNameHint,
+        zh_hans: TEXT.zh_hans.displayNameHint
       }
     }
     if (result) {
