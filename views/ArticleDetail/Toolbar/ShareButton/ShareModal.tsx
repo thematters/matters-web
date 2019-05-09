@@ -55,7 +55,7 @@ const ShareModal = () => {
               </TextIcon>
               <input
                 type="text"
-                value={window.location.href}
+                value={decodeURI(window.location.href)}
                 readOnly
                 onClick={event => event.currentTarget.select()}
               />
