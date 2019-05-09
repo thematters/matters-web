@@ -102,10 +102,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                   const result = await singleFileUpload({
                     variables: {
                       input: {
-                        ...input,
                         type: 'embed',
                         entityType: 'draft',
-                        entityId: draft.id
+                        entityId: draft.id,
+                        ...input
                       }
                     }
                   })
@@ -120,7 +120,6 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     throw new Error('upload not successful')
                   }
                 }}
-                uploading={uploading}
                 draft={draft}
                 onSave={async (newDraft: {
                   title?: string | null

@@ -18,7 +18,7 @@ import { Spinner } from '~/components/Spinner'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
-import { translate, trimLineBreaks } from '~/common/utils'
+import { initAudioPlayers, translate, trimLineBreaks } from '~/common/utils'
 
 import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
@@ -34,14 +34,7 @@ interface Props {
   }) => Promise<void>
   draft: EditorDraft
   lang: Language
-  upload: (input: {
-    file?: any
-    url?: string
-  }) => Promise<{
-    id: string
-    path: string
-  }>
-  uploading: boolean
+  upload: DraftAssetUpload
 }
 
 interface State {
@@ -78,11 +71,13 @@ class Editor extends React.Component<Props, State> {
   componentDidMount() {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
+    initAudioPlayers()
   }
 
   componentDidUpdate(prevProps: Props) {
     this.attachQuillRefs()
     this.resetLinkInputPlaceholder()
+    initAudioPlayers()
 
     if (prevProps.draft.id === this.props.draft.id) {
       return
@@ -199,7 +194,7 @@ class Editor extends React.Component<Props, State> {
   }
 
   render() {
-    const { draft, onSave, lang, upload, uploading } = this.props
+    const { draft, onSave, lang, upload } = this.props
     const { search, mentionInstance } = this.state
     const isPending = draft.publishState === 'pending'
     const isPublished = draft.publishState === 'published'
@@ -255,7 +250,6 @@ class Editor extends React.Component<Props, State> {
                   {...this.state.sideToolbar}
                   quill={this.quill}
                   upload={upload}
-                  uploading={uploading}
                   onSave={onSave}
                 />
 

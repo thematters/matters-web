@@ -5,35 +5,48 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
 import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
-  TEXT,
-  UPLOAD_IMAGE_SIZE_LIMIT
+  ACCEPTED_UPLOAD_AUDIO_TYPES,
+  UPLOAD_AUDIO_SIZE_LIMIT
 } from '~/common/enums'
-import ICON_EDITOR_IMAGE from '~/static/icons/editor-image.svg?sprite'
+import ICON_EDITOR_AUDIO from '~/static/icons/editor-audio.svg?sprite'
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
 import styles from './styles.css'
 
-interface UploadImageButtonProps {
+interface UploadAudioButtonProps {
   quill: Quill | null
   upload: DraftAssetUpload
   setExpanded: (expanded: boolean) => void
 }
 
-const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
 
-const UploadImageButton = ({
+const UploadAudioButton = ({
   quill,
   setExpanded,
   upload
-}: UploadImageButtonProps) => {
+}: UploadAudioButtonProps) => {
   const [uploading, setUploading] = useState(false)
 
-  const insertImage = (src: string, assetId: string) => {
+  const insertAudio = ({
+    src,
+    fileName,
+    mimeType,
+    assetId
+  }: {
+    src: string
+    fileName: string
+    mimeType: string
+    assetId: string
+  }) => {
     if (quill) {
       const range = quill.getSelection(true)
-      quill.insertEmbed(range.index, 'imageFigure', { src, assetId }, 'user')
+      quill.insertEmbed(
+        range.index,
+        'audioFigure',
+        { sources: [{ src, type: mimeType, assetId }], fileName },
+        'user'
+      )
       quill.setSelection(range.index + 1, 0, 'silent')
     }
   }
@@ -46,17 +59,19 @@ const UploadImageButton = ({
     }
 
     const file = event.target.files[0]
+    const fileName = file.name.split('.')[0]
+    const mimeType = file.type
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
+    if (file && file.size > UPLOAD_AUDIO_SIZE_LIMIT) {
       window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
+        new CustomEvent('addToast', {
           detail: {
             color: 'red',
             content: (
               <Translate
-                zh_hant="上傳檔案請勿超過 5 MB"
-                zh_hans="上传文件请勿超过 5 MB"
+                zh_hant="上傳檔案請勿超過 100 MB"
+                zh_hans="上传文件请勿超过 100 MB"
               />
             )
           }
@@ -67,20 +82,15 @@ const UploadImageButton = ({
 
     try {
       setUploading(true)
-      const { id, path } = await upload({ file })
-      insertImage(path, id)
+      const { id: assetId, path } = await upload({ file, type: 'embedaudio' })
+      insertAudio({ src: path, fileName, mimeType, assetId })
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
+        new CustomEvent('addToast', {
           detail: {
             color: 'green',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.uploadImageSuccess}
-                zh_hans={TEXT.zh_hans.uploadImageSuccess}
-              />
-            )
+            content: <Translate zh_hant="音頻上傳成功" zh_hans="音频上传成功" />
           }
         })
       )
@@ -88,15 +98,10 @@ const UploadImageButton = ({
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
+        new CustomEvent('addToast', {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.uploadImageFailed}
-                zh_hans={TEXT.zh_hans.uploadImageFailed}
-              />
-            )
+            content: <Translate zh_hant="音頻上傳失敗" zh_hans="音频上传失败" />
           }
         })
       )
@@ -111,12 +116,12 @@ const UploadImageButton = ({
         type="file"
         accept={acceptTypes}
         multiple={false}
-        aria-label="新增圖片"
+        aria-label="新增音頻"
         onChange={(event: any) => handleUploadChange(event)}
       />
       <Icon
-        id={uploading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
-        viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
+        id={uploading ? ICON_SPINNER.id : ICON_EDITOR_AUDIO.id}
+        viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_AUDIO.viewBox}
         size="large"
         className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
       />
@@ -125,4 +130,4 @@ const UploadImageButton = ({
   )
 }
 
-export default UploadImageButton
+export default UploadAudioButton

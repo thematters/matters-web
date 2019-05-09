@@ -48,6 +48,19 @@ const MUTATION_UPDATE_USER_INFO = gql`
   }
 `
 
+const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
+  const error = errors[field]
+  const isTouched = touched[field]
+  return (
+    <>
+      <div className="info">
+        {error && isTouched && <div className="error">{error}</div>}
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
+
 export const SignUpProfileForm: FC<Props> = ({
   extraClass = [],
   purpose,
@@ -70,8 +83,8 @@ export const SignUpProfileForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const descriptionPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.userProfile,
-      zh_hans: TEXT.zh_hans.userProfile,
+      zh_hant: '介紹你自己，獲得更多社區關注',
+      zh_hans: '介绍你自己，获得更多社区关注',
       lang
     })
 
@@ -89,6 +102,7 @@ export const SignUpProfileForm: FC<Props> = ({
             lang={lang}
             uploadCallback={setFieldValue}
           />
+          <AvatarError field="avatar" errors={errors} touched={touched} />
           <Form.Textarea
             field="description"
             placeholder={descriptionPlaceholder}
@@ -116,14 +130,46 @@ export const SignUpProfileForm: FC<Props> = ({
     )
   }
 
+  const validateAvatar = (value: string | null, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
+  const validateDescription = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
       avatar: null,
       description: ''
     }),
 
-    validate: ({ description }) => {
-      return undefined
+    validate: ({ avatar, description }) => {
+      const isValidAvatar = validateAvatar(avatar, lang)
+      const isValidDescription = validateDescription(description, lang)
+      const errors = {
+        ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
+        ...(isValidDescription ? { description: isValidDescription } : {})
+      }
+      return errors
     },
 
     handleSubmit: (values, { props, setSubmitting }: any) => {

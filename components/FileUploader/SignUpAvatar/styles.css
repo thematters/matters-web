@@ -1,7 +1,6 @@
 .container {
   @mixin flex-center-space-between;
   font-size: var(--font-size-md);
-  padding-bottom: var(--spacing-default);
 }
 
 .upload {
