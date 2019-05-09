@@ -1,8 +1,8 @@
-import gql from 'graphql-tag'
 import { FC, useState } from 'react'
 
 import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 
 import {
@@ -33,17 +33,6 @@ interface Props {
   lang: Language
   uploadCallback: (field: string, value: any, validate?: boolean) => {}
 }
-
-const MUTATION_UPLOAD_FILE = gql`
-  mutation SingleFileUpload($input: SingleFileUploadInput!) {
-    singleFileUpload(input: $input) {
-      ... on Asset {
-        id
-        path
-      }
-    }
-  }
-`
 
 export const SignUpAvatarUploader: FC<Props> = ({
   field,

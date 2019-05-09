@@ -30,6 +30,7 @@ const nextConfig = {
     // Will be available on both server and client
     ENV: process.env.ENV,
     SITE_DOMAIN: process.env.SITE_DOMAIN,
+    ASSET_DOMAIN: process.env.ASSET_DOMAIN,
     API_URL: process.env.API_URL,
     WS_URL: process.env.WS_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY,
