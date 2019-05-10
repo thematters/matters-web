@@ -21,7 +21,7 @@ const urlMatcher = (node: Node & { data: any }, delta: any) => {
       ops.push({ insert: decodeURI(match), attributes: { link: match } })
 
       // preserved the rest
-      str = split.join(decodeURI(match))
+      str = split.join(match)
     })
 
     // push the rest of data
