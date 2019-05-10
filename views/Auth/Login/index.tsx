@@ -5,6 +5,8 @@ import LoginForm from '~/components/Form/LoginForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
+import { TEXT } from '~/common/enums'
+
 import styles from './styles.css'
 
 const Login = () => {
@@ -29,7 +31,9 @@ const Login = () => {
   return (
     <>
       <main className="l-row">
-        <Head title={{ zh_hant: '登入', zh_hans: '登入' }} />
+        <Head
+          title={{ zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login }}
+        />
 
         <article className={containerClass}>
           <LoginForm extraClass={formClass} purpose="page" />

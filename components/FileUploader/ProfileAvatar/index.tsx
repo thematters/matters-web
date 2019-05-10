@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 
 import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
@@ -27,17 +28,6 @@ import styles from './styles.css'
 interface Props {
   user?: any
 }
-
-const MUTATION_UPLOAD_FILE = gql`
-  mutation SingleFileUpload($input: SingleFileUploadInput!) {
-    singleFileUpload(input: $input) {
-      ... on Asset {
-        id
-        path
-      }
-    }
-  }
-`
 
 const MUTATION_UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {

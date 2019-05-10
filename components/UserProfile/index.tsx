@@ -213,7 +213,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                             <span className="count">
                               {numAbbr(user.followers.totalCount)}
                             </span>
-                            <Translate zh_hant="追蹤我的" zh_hans="追踪我的" />
+                            <Translate
+                              zh_hant={TEXT.zh_hant.followingMe}
+                              zh_hans={TEXT.zh_hans.followingMe}
+                            />
                           </a>
                         </Link>
                         <Link {...userFolloweesPath}>
@@ -221,7 +224,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                             <span className="count">
                               {numAbbr(user.followees.totalCount)}
                             </span>
-                            <Translate zh_hant="我追蹤的" zh_hans="我追踪的" />
+                            <Translate
+                              zh_hant={TEXT.zh_hant.myFollowees}
+                              zh_hans={TEXT.zh_hans.myFollowees}
+                            />
                           </a>
                         </Link>
                       </section>
@@ -259,7 +265,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                           <span className="count">
                             {numAbbr(user.followers.totalCount)}
                           </span>
-                          <Translate zh_hant="追蹤者" zh_hans="追踪者" />
+                          <Translate
+                            zh_hant={TEXT.zh_hant.follower}
+                            zh_hans={TEXT.zh_hans.follower}
+                          />
                         </a>
                       </Link>
                       <Link {...userFolloweesPath}>
@@ -267,7 +276,10 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                           <span className="count">
                             {numAbbr(user.followees.totalCount)}
                           </span>
-                          <Translate zh_hant="追蹤中" zh_hans="追踪中" />
+                          <Translate
+                            zh_hant={TEXT.zh_hant.following}
+                            zh_hans={TEXT.zh_hans.following}
+                          />
                         </a>
                       </Link>
                     </section>

@@ -11,6 +11,8 @@ import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
+
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
@@ -23,7 +25,7 @@ const fragments = {
 const ReplyTo = ({ user }: any) => (
   <>
     <span className="reply-to">
-      <Translate zh_hant="回覆" zh_hans="回复" />
+      <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
     <UserDigest.Mini
       user={user}
@@ -38,7 +40,10 @@ const ReplyTo = ({ user }: any) => (
 const PinnedLabel = () => (
   <span className="label">
     <Label size="small">
-      <Translate zh_hant="作者推薦" zh_hans="作者推荐" />
+      <Translate
+        zh_hant={TEXT.zh_hant.authorRecommend}
+        zh_hans={TEXT.zh_hant.authorRecommend}
+      />
     </Label>
     <style jsx>{styles}</style>
   </span>
@@ -46,7 +51,7 @@ const PinnedLabel = () => (
 
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <button className="cancel-button" type="button" onClick={() => onClick()}>
-    <Translate zh_hant="取消" zh_hans="取消" />
+    <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
     <style jsx>{styles}</style>
   </button>
 )

@@ -10,6 +10,7 @@ import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
@@ -38,11 +39,14 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
   const validateDisplayName = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidDisplayName(value)) {
       result = {
-        zh_hant: '請輸入 2 至 20 個字元，僅支持中英文及數字',
-        zh_hans: '请输入 2 至 20 个字符，仅支持中英文及数字'
+        zh_hant: TEXT.zh_hant.displayNameHint,
+        zh_hans: TEXT.zh_hans.displayNameHint
       }
     }
     if (result) {
@@ -85,18 +89,18 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
       lang
     })
     const displayNameHint = translate({
-      zh_hant: '2-20 個字符，仅支持中英文或数字',
-      zh_hans: '2-20 个字符，仅支持中英文或数字',
+      zh_hant: TEXT.zh_hant.displayNameHint,
+      zh_hans: TEXT.zh_hans.displayNameHint,
       lang
     })
     const descriptionHint = translate({
-      zh_hant: '建議 50 字以內，最長 200 字',
-      zh_hans: '建议 50 字以内，最长 200 字',
+      zh_hant: TEXT.zh_hant.descriptionHint,
+      zh_hans: TEXT.zh_hans.descriptionHint,
       lang
     })
     const save = translate({
-      zh_hant: '儲存',
-      zh_hans: '保存',
+      zh_hant: TEXT.zh_hant.save,
+      zh_hans: TEXT.zh_hans.save,
       lang
     })
 

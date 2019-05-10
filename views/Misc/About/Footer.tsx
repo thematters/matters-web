@@ -5,6 +5,7 @@ import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 import ICON_FACEBOOK from '~/static/icons/footer-facebook.svg?sprite'
 import ICON_INSTAGRAM from '~/static/icons/footer-instagram.svg?sprite'
@@ -94,8 +95,8 @@ const Footer = () => {
                 type="email"
                 name="EMAIL"
                 placeholder={translate({
-                  zh_hant: '你的電子信箱',
-                  zh_hans: '你的电子邮箱',
+                  zh_hant: TEXT.zh_hant.yourEmail,
+                  zh_hans: TEXT.zh_hans.yourEmail,
                   lang
                 })}
                 defaultValue=""

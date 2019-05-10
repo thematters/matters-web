@@ -6,6 +6,7 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
+import { TEXT } from '~/common/enums'
 import ICON_ASTRONAUT from '~/static/icons/astronaut.svg?sprite'
 
 import styles from './styles.css'
@@ -20,7 +21,10 @@ const SelfActivationModal: FC<ModalInstanceProps> = ({ close }) => (
           style={{ width: 80, height: 80 }}
         />
         <h2>
-          <Translate zh_hans="欢迎成为创作者" zh_hant="歡迎成為創作者" />
+          <Translate
+            zh_hant={TEXT.zh_hant.welcomeAuthor}
+            zh_hans={TEXT.zh_hans.welcomeAuthor}
+          />
         </h2>
 
         <span className="support-text">

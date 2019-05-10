@@ -10,6 +10,8 @@ import {
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
+import { TEXT } from '~/common/enums'
+
 import styles from './styles.css'
 
 type Step = 'signUp' | 'profile' | 'follow' | 'complete'
@@ -42,7 +44,12 @@ const SignUp = () => {
   return (
     <>
       <main className="l-row row">
-        <Head title={{ zh_hant: '註冊', zh_hans: '注册' }} />
+        <Head
+          title={{
+            zh_hant: TEXT.zh_hant.register,
+            zh_hans: TEXT.zh_hans.register
+          }}
+        />
 
         <article className={containerClass}>
           {step === 'signUp' && (

@@ -9,7 +9,7 @@ import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -52,8 +52,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 <Icon id={ICON_ME.id} viewBox={ICON_ME.viewBox} size="small" />
               }
               text={translate({
-                zh_hant: '個人頁面',
-                zh_hans: '个人页面',
+                zh_hant: TEXT.zh_hant.myProfile,
+                zh_hans: TEXT.zh_hans.myProfile,
                 lang
               })}
               spacing="xtight"
@@ -73,8 +73,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 />
               }
               text={translate({
-                zh_hant: '我的錢包',
-                zh_hans: '我的钱包',
+                zh_hant: TEXT.zh_hant.myWallet,
+                zh_hans: TEXT.zh_hans.myWallet,
                 lang
               })}
               spacing="xtight"
@@ -94,8 +94,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 />
               }
               text={translate({
-                zh_hant: '瀏覽記錄',
-                zh_hans: '浏览记录',
+                zh_hant: TEXT.zh_hant.readHistory,
+                zh_hans: TEXT.zh_hans.readHistory,
                 lang
               })}
               spacing="xtight"
@@ -142,8 +142,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 />
               }
               text={translate({
-                zh_hant: '設定',
-                zh_hans: '设定',
+                zh_hant: TEXT.zh_hant.setting,
+                zh_hans: TEXT.zh_hans.setting,
                 lang
               })}
               spacing="xtight"
@@ -177,8 +177,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                         color: 'red',
                         content: (
                           <Translate
-                            zh_hant="登出失敗，請重試"
-                            zh_hans="登出失败，请重试"
+                            zh_hant={TEXT.zh_hant.logoutFailed}
+                            zh_hans={TEXT.zh_hans.logoutFailed}
                           />
                         )
                       }
@@ -196,8 +196,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                   />
                 }
                 text={translate({
-                  zh_hant: '登出',
-                  zh_hans: '登出',
+                  zh_hant: TEXT.zh_hant.logout,
+                  zh_hans: TEXT.zh_hans.logout,
                   lang
                 })}
                 spacing="xtight"

@@ -97,8 +97,8 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                 <Modal.Header
                   title={
                     <Translate
-                      zh_hant={`${totalCount} 人讚賞了文章`}
-                      zh_hans={`${totalCount} 人赞赏了文章`}
+                      zh_hant={`${totalCount} 人讚賞了作品`}
+                      zh_hans={`${totalCount} 人赞赏了作品`}
                     />
                   }
                 />

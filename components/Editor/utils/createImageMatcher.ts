@@ -7,7 +7,7 @@ import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.svg'
 const Delta = Quill.import('delta')
 
 const {
-  publicRuntimeConfig: { SITE_DOMAIN }
+  publicRuntimeConfig: { ASSET_DOMAIN }
 } = getConfig()
 
 /**
@@ -60,7 +60,7 @@ const createImageMatcher = (upload: DraftAssetUpload) => (
   let imageFigure
   // don't upload if copying from matters internally
   // retrieve asset id from url
-  const domain = extractDomain(SITE_DOMAIN || '') || 'matters.news'
+  const domain = extractDomain(ASSET_DOMAIN || '') || 'matters.news'
   if (srcOrg.indexOf(domain) !== -1) {
     const assetId = srcOrg.split('/').slice(-2, -1)[0]
 

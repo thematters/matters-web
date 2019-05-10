@@ -5,7 +5,7 @@ import { QueryResult } from 'react-apollo'
 import { Label, Tag, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import ViewAllLink from '../ViewAllLink'
@@ -45,7 +45,10 @@ export default () => (
           <>
             <header>
               <Label>
-                <Translate zh_hant="標籤" zh_hans="标签" />
+                <Translate
+                  zh_hant={TEXT.zh_hant.tag}
+                  zh_hans={TEXT.zh_hans.tag}
+                />
               </Label>
               <ViewAllLink type="tags" />
             </header>

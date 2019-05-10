@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
@@ -24,13 +25,13 @@ const BaseSearchBar: React.FC<
   // translations
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({
-    zh_hant: '搜尋',
-    zh_hans: '搜索',
+    zh_hant: TEXT.zh_hant.search,
+    zh_hans: TEXT.zh_hans.search,
     lang
   })
   const textPlaceholder = translate({
-    zh_hant: '搜尋文章、標籤、作者',
-    zh_hans: '搜索文章、标签、作者',
+    zh_hant: '搜尋作品、標籤、作者',
+    zh_hans: '搜索作品、标签、作者',
     lang
   })
 

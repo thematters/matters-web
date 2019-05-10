@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { Tabs, Translate } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
 const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
@@ -32,7 +32,10 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
       <Tabs.Tab>
         <Link {...userPath}>
           <a>
-            <Translate zh_hant="返回" zh_hans="返回" />
+            <Translate
+              zh_hant={TEXT.zh_hant.back}
+              zh_hans={TEXT.zh_hant.back}
+            />
           </a>
         </Link>
       </Tabs.Tab>
@@ -41,8 +44,14 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
           <a>
             <Translate
               {...(isMe
-                ? { zh_hant: '追蹤我的', zh_hans: '追踪我的' }
-                : { zh_hant: '追蹤者', zh_hans: '追踪者' })}
+                ? {
+                    zh_hant: TEXT.zh_hant.followingMe,
+                    zh_hans: TEXT.zh_hans.followingMe
+                  }
+                : {
+                    zh_hant: TEXT.zh_hant.follower,
+                    zh_hans: TEXT.zh_hans.follower
+                  })}
             />
           </a>
         </Link>
@@ -52,8 +61,14 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
           <a>
             <Translate
               {...(isMe
-                ? { zh_hant: '我追蹤的', zh_hans: '我追踪的' }
-                : { zh_hant: '追蹤中', zh_hans: '追踪中' })}
+                ? {
+                    zh_hant: TEXT.zh_hant.myFollowees,
+                    zh_hans: TEXT.zh_hans.myFollowees
+                  }
+                : {
+                    zh_hant: TEXT.zh_hant.following,
+                    zh_hans: TEXT.zh_hans.following
+                  })}
             />
           </a>
         </Link>

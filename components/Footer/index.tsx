@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -39,22 +39,38 @@ export const Footer = () => {
       <BaseLink
         href={PATHS.MISC_ABOUT.href}
         as={PATHS.MISC_ABOUT.as}
-        text={translate({ zh_hant: '關於我們', zh_hans: '关于我们', lang })}
+        text={translate({
+          zh_hant: TEXT.zh_hant.about,
+          zh_hans: TEXT.zh_hans.about,
+          lang
+        })}
       />
       <BaseLink
         href={PATHS.MISC_FAQ.href}
         as={PATHS.MISC_FAQ.as}
-        text={translate({ zh_hant: '常見問題', zh_hans: '常见问题', lang })}
+        text={translate({
+          zh_hant: TEXT.zh_hant.faq,
+          zh_hans: TEXT.zh_hans.faq,
+          lang
+        })}
       />
       <BaseLink
         href={PATHS.MISC_GUIDE.href}
         as={PATHS.MISC_GUIDE.as}
-        text={translate({ zh_hant: '社區約章', zh_hans: '社区约章', lang })}
+        text={translate({
+          zh_hant: TEXT.zh_hant.guide,
+          zh_hans: TEXT.zh_hans.guide,
+          lang
+        })}
       />
       <BaseLink
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
-        text={translate({ zh_hant: '用戶協議', zh_hans: '用户协议', lang })}
+        text={translate({
+          zh_hant: TEXT.zh_hant.term,
+          zh_hans: TEXT.zh_hans.term,
+          lang
+        })}
       />
       {/* <BaseLink
         href={'/'}

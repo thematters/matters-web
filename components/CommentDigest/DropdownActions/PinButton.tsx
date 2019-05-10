@@ -5,6 +5,7 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
+import { TEXT } from '~/common/enums'
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNPIN from '~/static/icons/unpin.svg?sprite'
 
@@ -59,7 +60,10 @@ const TextIconUnpin = () => (
     icon={<Icon id={ICON_UNPIN.id} viewBox={ICON_UNPIN.viewBox} size="small" />}
     spacing="tight"
   >
-    <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
+    <Translate
+      zh_hant={TEXT.zh_hant.cancelPin}
+      zh_hans={TEXT.zh_hans.cancelPin}
+    />
   </TextIcon>
 )
 
@@ -74,7 +78,7 @@ const TextIconPin = () => (
     }
     spacing="tight"
   >
-    <Translate zh_hant="置頂" zh_hans="置顶" />
+    <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
   </TextIcon>
 )
 

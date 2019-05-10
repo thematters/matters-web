@@ -12,6 +12,7 @@ import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 
@@ -46,7 +47,10 @@ const LoginModalSwitch = () => (
           size="md"
           textPlacement="left"
         >
-          <Translate zh_hant="登入" zh_hans="登入" />
+          <Translate
+            zh_hant={TEXT.zh_hant.login}
+            zh_hans={TEXT.zh_hans.login}
+          />
         </TextIcon>
       </button>
     )}
@@ -70,16 +74,28 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
 
   const data: { [key: string]: any } = {
     signUp: {
-      title: translate({ zh_hant: '註冊', zh_hans: '注册', lang })
+      title: translate({
+        zh_hant: TEXT.zh_hant.register,
+        zh_hans: TEXT.zh_hans.register,
+        lang
+      })
     },
     profile: {
-      title: translate({ zh_hant: '個人資料', zh_hans: '个人資料', lang })
+      title: translate({
+        zh_hant: TEXT.zh_hant.userProfile,
+        zh_hans: TEXT.zh_hans.userProfile,
+        lang
+      })
     },
     follow: {
       title: translate({ zh_hant: '追蹤創作者', zh_hans: '追踪创作者', lang })
     },
     complete: {
-      title: translate({ zh_hant: '註冊成功', zh_hans: '注册成功', lang })
+      title: translate({
+        zh_hant: TEXT.zh_hant.registerSuccess,
+        zh_hans: TEXT.zh_hans.registerSuccess,
+        lang
+      })
     }
   }
 

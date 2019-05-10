@@ -14,6 +14,7 @@ import { Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -92,8 +93,8 @@ export const SignUpProfileForm: FC<Props> = ({
     })
 
     const nextText = translate({
-      zh_hant: '下一步',
-      zh_hans: '下一步',
+      zh_hant: TEXT.zh_hant.nextStep,
+      zh_hans: TEXT.zh_hans.nextStep,
       lang
     })
 
@@ -136,7 +137,10 @@ export const SignUpProfileForm: FC<Props> = ({
   const validateAvatar = (value: string | null, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -146,7 +150,10 @@ export const SignUpProfileForm: FC<Props> = ({
   const validateDescription = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })

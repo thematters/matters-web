@@ -12,8 +12,8 @@ const Intro = () => {
 
       <p>
         <Translate
-          zh_hant="MAT 是 Matters 的基本貨幣，可用來讚賞，你可通過發佈文章或領取站上活動紅包獲得。"
-          zh_hans="MAT 是 Matters 的基本货币，可用来赞赏，你可通过发布文章或领取站上活动红包获得。"
+          zh_hant="MAT 是 Matters 的基本貨幣，可用來讚賞，你可通過發佈作品或領取站上活動紅包獲得。"
+          zh_hans="MAT 是 Matters 的基本货币，可用来赞赏，你可通过发布作品或领取站上活动红包获得。"
         />
       </p>
 

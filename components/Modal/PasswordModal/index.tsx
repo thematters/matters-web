@@ -9,6 +9,7 @@ import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
 import { ViewerContext } from '~/components/Viewer'
 
+import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 /**
@@ -34,8 +35,16 @@ const PasswordModal: FC<
     request: {
       title:
         purpose === 'forget'
-          ? translate({ zh_hant: '忘記密碼', zh_hans: '忘记密码', lang })
-          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
+          ? translate({
+              zh_hant: TEXT.zh_hant.forgetPassword,
+              zh_hans: TEXT.zh_hans.forgetPassword,
+              lang
+            })
+          : translate({
+              zh_hant: TEXT.zh_hant.changePassword,
+              zh_hans: TEXT.zh_hans.changeEmail,
+              lang
+            }),
       prev: 'login',
       next: 'reset',
       email: viewer.info.email
@@ -43,8 +52,16 @@ const PasswordModal: FC<
     reset: {
       title:
         purpose === 'forget'
-          ? translate({ zh_hant: '重置密碼', zh_hans: '重置密码', lang })
-          : translate({ zh_hant: '修改密碼', zh_hans: '修改密码', lang }),
+          ? translate({
+              zh_hant: TEXT.zh_hant.resetPassword,
+              zh_hans: TEXT.zh_hans.resetPassword,
+              lang
+            })
+          : translate({
+              zh_hant: TEXT.zh_hant.changePassword,
+              zh_hans: TEXT.zh_hans.changePassword,
+              lang
+            }),
       prev: 'request',
       next: 'complete'
     },
@@ -52,13 +69,13 @@ const PasswordModal: FC<
       title:
         purpose === 'forget'
           ? translate({
-              zh_hant: '密碼重置成功',
-              zh_hans: '密码重置成功',
+              zh_hant: TEXT.zh_hant.resetPasswordSuccess,
+              zh_hans: TEXT.zh_hans.resetPasswordSuccess,
               lang
             })
           : translate({
-              zh_hant: '密碼修改成功',
-              zh_hans: '密码修改成功',
+              zh_hant: TEXT.zh_hant.changePasswordSuccess,
+              zh_hans: TEXT.zh_hans.changePasswordSuccess,
               lang
             })
     }
@@ -109,16 +126,22 @@ const PasswordModal: FC<
           <ModalComplete
             message={
               purpose === 'forget' ? (
-                <Translate zh_hant="密碼重置成功" zh_hans="密码重置成功" />
+                <Translate
+                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                />
               ) : (
-                <Translate zh_hant="密碼修改成功" zh_hans="密码修改成功" />
+                <Translate
+                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
+                />
               )
             }
             hint={
               purpose === 'forget' ? (
                 <Translate
-                  zh_hant="請使用新的密碼重新登入"
-                  zh_hans="请使用新的密码重新登入"
+                  zh_hant={TEXT.zh_hant.useNewPassword}
+                  zh_hans={TEXT.zh_hans.useNewPassword}
                 />
               ) : (
                 ''

@@ -6,7 +6,7 @@ import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { Translate } from '../Language'
@@ -94,7 +94,10 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
             {isAbout && (
               <Link {...PATHS.HOME}>
                 <a className="u-link-green">
-                  <Translate zh_hant="返回發現" zh_hans="返回发现" />
+                  <Translate
+                    zh_hant={TEXT.zh_hant.backToDiscover}
+                    zh_hans={TEXT.zh_hans.backToDiscover}
+                  />
                 </a>
               </Link>
             )}

@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -95,8 +95,8 @@ const SearchArticles = ({
               inSidebar={false}
               description={
                 <Translate
-                  zh_hant="沒有找到你搜尋的內容。"
-                  zh_hans="没有找到你搜索的内容。"
+                  zh_hant={TEXT.zh_hant.emptySearchResults}
+                  zh_hans={TEXT.zh_hans.emptySearchResults}
                 />
               }
             />
@@ -110,7 +110,12 @@ const SearchArticles = ({
           >
             <PageHeader
               is="h2"
-              pageTitle={<Translate zh_hant="文章" zh_hans="文章" />}
+              pageTitle={
+                <Translate
+                  zh_hant={TEXT.zh_hant.article}
+                  zh_hans={TEXT.zh_hans.article}
+                />
+              }
             >
               {isAggregate && pageInfo.hasNextPage && (
                 <ViewAll q={q} type="article" />

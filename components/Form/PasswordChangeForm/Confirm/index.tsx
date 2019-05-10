@@ -10,7 +10,7 @@ import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
-import { isValidStrictPassword, translate } from '~/common/utils'
+import { isValidPassword, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -41,11 +41,14 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     let result: any
 
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
-    } else if (!isValidStrictPassword(value)) {
       result = {
-        zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
-        zh_hans: '不少于 8 位，必须包含数字和大小写字母'
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidPassword(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.passwordHint,
+        zh_hans: TEXT.zh_hans.passwordHint
       }
     }
     if (result) {
@@ -61,9 +64,15 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     let result: any
 
     if (!comparedValue) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (comparedValue !== value) {
-      result = { zh_hant: '密碼不一致', zh_hans: '密码不一致' }
+      result = {
+        zh_hant: TEXT.zh_hant.passwordNotMatch,
+        zh_hans: TEXT.zh_hans.passwordNotMatch
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -84,20 +93,20 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const passwordPlaceholder = translate({
-      zh_hant: '請輸入密碼',
-      zh_hans: '请输入密码',
+      zh_hant: TEXT.zh_hant.enterPassword,
+      zh_hans: TEXT.zh_hans.enterPassword,
       lang
     })
 
     const passwordHint = translate({
-      zh_hant: '不少於 8 位，必須包含數字和大小寫字母',
-      zh_hans: '不少于 8 位，必须包含数字和大小写字母',
+      zh_hant: TEXT.zh_hant.passwordHint,
+      zh_hans: TEXT.zh_hans.passwordHint,
       lang
     })
 
     const comparedPlaceholder = translate({
-      zh_hant: '請再次輸入密碼',
-      zh_hans: '请再次输入密码',
+      zh_hant: TEXT.zh_hant.enterPasswordAgain,
+      zh_hans: TEXT.zh_hans.enterPasswordAgain,
       lang
     })
 
@@ -133,7 +142,11 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
               spacing="none"
               onClick={backPreviousStep}
             >
-              {translate({ zh_hant: '上一步', zh_hans: '上一步', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.previousStep,
+                zh_hans: TEXT.zh_hans.previousStep,
+                lang
+              })}
             </Button>
             <Button
               type="submit"
@@ -142,7 +155,11 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.done,
+                zh_hans: TEXT.zh_hans.done,
+                lang
+              })}
             </Button>
           </div>
         </form>

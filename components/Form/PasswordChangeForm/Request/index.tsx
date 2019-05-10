@@ -42,9 +42,15 @@ export const PasswordChangeRequestForm: FC<Props> = ({
   const validateEmail = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -54,7 +60,10 @@ export const PasswordChangeRequestForm: FC<Props> = ({
   const validateCode = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -71,7 +80,11 @@ export const PasswordChangeRequestForm: FC<Props> = ({
           spacing="none"
           onClick={open}
         >
-          {translate({ zh_hant: '上一步', zh_hans: '上一步', lang })}
+          {translate({
+            zh_hant: TEXT.zh_hant.previousStep,
+            zh_hans: TEXT.zh_hans.previousStep,
+            lang
+          })}
         </Button>
       )}
     </ModalSwitch>
@@ -94,19 +107,19 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     const emailPlaceholder =
       purpose === 'forget'
         ? translate({
-            zh_hant: '請輸入你的註冊電子信箱',
-            zh_hans: '请输入你的注册邮箱',
+            zh_hant: TEXT.zh_hant.enterRegisteredEmail,
+            zh_hans: TEXT.zh_hans.enterRegisteredEmail,
             lang
           })
         : translate({
-            zh_hant: '請輸入電子信箱',
-            zh_hans: '请输入邮箱',
+            zh_hant: TEXT.zh_hant.enterEmail,
+            zh_hans: TEXT.zh_hans.enterEmail,
             lang
           })
 
     const codePlaceholder = translate({
-      zh_hant: '請輸入驗證碼',
-      zh_hans: '请输入验证码',
+      zh_hant: TEXT.zh_hant.enterVerificationCode,
+      zh_hans: TEXT.zh_hans.enterVerificationCode,
       lang
     })
 
@@ -149,7 +162,11 @@ export const PasswordChangeRequestForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '下一步', zh_hans: '下一步', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.nextStep,
+                zh_hans: TEXT.zh_hans.nextStep,
+                lang
+              })}
             </Button>
             {container === 'modal' && purpose === 'forget' && (
               <LoginModalSwitch />

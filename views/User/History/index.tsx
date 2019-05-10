@@ -1,13 +1,20 @@
 import { Head, UserProfile } from '~/components'
 import { Protected } from '~/components/Protected'
 
+import { TEXT } from '~/common/enums'
+
 import UserTabs from '../UserTabs'
 import MeHistory from './MeHistory'
 
 export default () => (
   <Protected>
     <main>
-      <Head title={{ zh_hant: '瀏覽記錄', zh_hans: '浏览记录' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.readHistory,
+          zh_hans: TEXT.zh_hans.readHistory
+        }}
+      />
 
       <UserProfile />
 
