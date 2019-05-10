@@ -222,7 +222,7 @@ export const TEXT = {
     commentDeleted: '评论已被删除',
     back: '返回',
     backToDiscover: '返回发现',
-    discover: '返回',
+    discover: '发现',
     write: '创作',
     follow: '追踪',
     following: '追踪中',
