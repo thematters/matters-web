@@ -44,8 +44,8 @@ const ChangePasswrodButton = () => (
     {(open: any) => (
       <button type="button" className="change-password-button" onClick={open}>
         <Translate
-          zh_hant={TEXT.zh_hant.changePasswordSuccess}
-          zh_hans={TEXT.zh_hans.changePasswordSuccess}
+          zh_hant={TEXT.zh_hant.changePassword}
+          zh_hans={TEXT.zh_hans.changePassword}
         />
         <style jsx>{styles}</style>
       </button>
