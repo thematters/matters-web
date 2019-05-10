@@ -7,7 +7,7 @@ import ICON_MENU from '~/static/icons/menu.svg?sprite'
 import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
-export default () => {
+export default ({ unread }: { unread: boolean }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {

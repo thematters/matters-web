@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import getConfig from 'next/config'
 import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
 
@@ -10,19 +9,13 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 import NoticeDigest from '~/components/NoticeDigest'
 
+import { POLL_INTERVAL } from '~/common/enums'
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
 
 import { MeDropdownNotifications } from './__generated__/MeDropdownNotifications'
 import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
-
-const {
-  publicRuntimeConfig: { ENV }
-} = getConfig()
-const isProd = ENV === 'production'
-
-const POLL_INTERVAL = isProd ? 1000 * 10 : 1000 * 60
 
 const UNREAD_NOTICE_COUNT = gql`
   query UnreadNoticeCount {

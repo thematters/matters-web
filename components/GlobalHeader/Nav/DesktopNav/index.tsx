@@ -8,7 +8,10 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
-const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
+const DesktopNav: React.FC<WithRouterProps & { unread: boolean }> = ({
+  router,
+  unread
+}) => {
   const homeClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.HOME.href
