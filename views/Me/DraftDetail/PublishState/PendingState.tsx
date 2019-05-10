@@ -1,7 +1,6 @@
 import { Query } from 'react-apollo'
 
 import { Translate } from '~/components'
-import RecallButton from '~/components/DraftDigest/Components/RecallButton'
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
@@ -21,7 +20,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
     <Query
       variables={{ id: draft.id }}
       query={DRAFT_PUBLISH_STATE}
-      pollInterval={1000 * 5}
+      pollInterval={1000 * 2}
       errorPolicy="none"
       fetchPolicy="network-only"
       skip={!process.browser || !isPublishing}
@@ -50,12 +49,6 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
             <Translate
               zh_hant="上鏈後，作品不可刪改，永久保存"
               zh_hans="上链后，作品不可删改，永久保存"
-            />
-          }
-          customButton={
-            <RecallButton
-              id={draft.id}
-              text={<Translate zh_hant="撤銷" zh_hans="撤销" />}
             />
           }
           buttonPlacement="bottom"
