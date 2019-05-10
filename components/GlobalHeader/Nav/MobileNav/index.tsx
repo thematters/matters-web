@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useState } from 'react'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
@@ -15,15 +16,19 @@ export default ({ unread }: { unread: boolean }) => {
     }
     instance.hide()
   }
+  const navButtonClass = classNames({
+    'nav-button': true,
+    unread
+  })
 
   return (
     <Dropdown
-      content={<DropdownContent hideDropdown={hideDropdown} />}
+      content={<DropdownContent hideDropdown={hideDropdown} unread={unread} />}
       distance={8}
       theme="dropdown shadow-default"
       onCreate={setInstance}
     >
-      <button type="button" aria-label="菜單" className="nav-button">
+      <button type="button" aria-label="菜單" className={navButtonClass}>
         <Icon
           id={ICON_MENU.id}
           viewBox={ICON_MENU.viewBox}

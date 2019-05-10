@@ -20,6 +20,10 @@ const DesktopNav: React.FC<WithRouterProps & { unread: boolean }> = ({
     'nav-link': true,
     active: router && router.pathname === PATHS.FOLLOW.href
   })
+  const followTextClass = classNames({
+    follow: true,
+    unread
+  })
 
   return (
     <>
@@ -33,10 +37,12 @@ const DesktopNav: React.FC<WithRouterProps & { unread: boolean }> = ({
       </Link>
       <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
-          <Translate
-            zh_hant={TEXT.zh_hant.follow}
-            zh_hans={TEXT.zh_hans.follow}
-          />
+          <span className={followTextClass}>
+            <Translate
+              zh_hant={TEXT.zh_hant.follow}
+              zh_hans={TEXT.zh_hans.follow}
+            />
+          </span>
         </a>
       </Link>
       <style jsx>{styles}</style>

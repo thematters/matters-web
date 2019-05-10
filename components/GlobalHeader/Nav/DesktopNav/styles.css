@@ -22,3 +22,7 @@
     border-bottom: 2px solid currentcolor;
   }
 }
+
+.follow {
+  @mixin unread-dot-loose;
+}

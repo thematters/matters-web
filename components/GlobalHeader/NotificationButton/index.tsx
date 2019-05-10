@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { Query, QueryResult } from 'react-apollo'
@@ -7,7 +6,11 @@ import { Query, QueryResult } from 'react-apollo'
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
-import NoticeDigest from '~/components/NoticeDigest'
+import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
+import {
+  ME_NOTIFICATIONS,
+  UNREAD_NOTICE_COUNT
+} from '~/components/GQL/queries/notice'
 
 import { POLL_INTERVAL } from '~/common/enums'
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
@@ -16,40 +19,6 @@ import { MeDropdownNotifications } from './__generated__/MeDropdownNotifications
 import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
-
-const UNREAD_NOTICE_COUNT = gql`
-  query UnreadNoticeCount {
-    viewer {
-      id
-      status {
-        unreadNoticeCount
-      }
-    }
-  }
-`
-
-const ME_NOTIFICATIONS = gql`
-  query MeDropdownNotifications($cursor: String) {
-    viewer {
-      id
-      notices(input: { first: 5, after: $cursor }) {
-        edges {
-          cursor
-          node {
-            ...DigestNotice
-          }
-        }
-      }
-    }
-  }
-  ${NoticeDigest.fragments.notice}
-`
-
-const MARK_ALL_NOTICES_AS_READ = gql`
-  mutation markAllNoticesAsRead {
-    markAllNoticesAsRead
-  }
-`
 
 const NoticeButton = ({
   data,
@@ -122,6 +91,7 @@ export default () => (
     {({ data: unreadCountData }: QueryResult & { data: UnreadNoticeCount }) => (
       <Query
         query={ME_NOTIFICATIONS}
+        variables={{ first: 5 }}
         errorPolicy="none"
         notifyOnNetworkStatusChange
       >

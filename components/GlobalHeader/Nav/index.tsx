@@ -1,6 +1,7 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { Query, QueryResult } from 'react-apollo'
+
+import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
 
 import { POLL_INTERVAL } from '~/common/enums'
 
@@ -8,17 +9,6 @@ import { UnreadFolloweeArticles } from './__generated__/UnreadFolloweeArticles'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import styles from './styles.css'
-
-const UNREAD_FOLLOWEE_ARTICLES = gql`
-  query UnreadFolloweeArticles {
-    viewer {
-      id
-      status {
-        unreadFolloweeArticles
-      }
-    }
-  }
-`
 
 export default () => (
   <Query
