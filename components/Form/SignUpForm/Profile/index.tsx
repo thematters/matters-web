@@ -2,6 +2,10 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
+import { queries as HOME_FEED } from '~/views/Home/Feed'
+import { HOME_TODAY } from '~/views/Home/MattersToday'
+import { SIDEBAR_ICYMI } from '~/views/Home/Sidebar/Icymi'
+import { SIDEBAR_TOPICS } from '~/views/Home/Sidebar/Topics'
 
 import { Button } from '~/components/Button'
 import { SignUpAvatarUploader } from '~/components/FileUploader'
@@ -191,9 +195,22 @@ export const SignUpProfileForm: FC<Props> = ({
     }
   })(BaseForm)
 
+  const relatedQueries =
+    purpose === 'modal'
+      ? [
+          { query: HOME_FEED.hottest },
+          { query: HOME_TODAY },
+          { query: SIDEBAR_ICYMI },
+          { query: SIDEBAR_TOPICS }
+        ]
+      : []
+
   return (
     <>
-      <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+      <Mutation
+        mutation={MUTATION_UPDATE_USER_INFO}
+        refetchQueries={relatedQueries}
+      >
         {update => <MainForm submitAction={update} />}
       </Mutation>
       <style jsx>{styles}</style>

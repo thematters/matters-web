@@ -1,6 +1,10 @@
 ol {
   list-style: decimal;
   margin-left: 1rem;
+
+  & > li {
+    line-height: 1.9;
+  }
 }
 
 .complete {
@@ -21,6 +25,10 @@ ol {
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
   text-align: left;
+}
+
+.sub-title {
+  color: var(--color-black);
 }
 
 .buttons {

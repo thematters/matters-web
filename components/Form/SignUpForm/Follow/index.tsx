@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { FC, useContext } from 'react'
@@ -51,6 +52,10 @@ export const SignUpFollowForm: FC<Props> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
+  const containerStyle = classNames(
+    purpose === 'modal' ? 'modal-container' : 'page-container'
+  )
+
   const titleText = translate({
     zh_hant: '請至少選擇 5 位作者',
     zh_hans: '请至少选择 5 位作者',
@@ -70,13 +75,14 @@ export const SignUpFollowForm: FC<Props> = ({
           return <Spinner />
         }
 
-        const followeeCount = _get(data, 'followees.totalCount', 0)
+        const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
         return (
-          <>
+          <div className={containerStyle}>
             <AuthorPicker
               viewer={data.viewer}
               title={titleText}
               titleIs="span"
+              readonly={true}
             />
             <div className="buttons">
               <Button
@@ -84,12 +90,13 @@ export const SignUpFollowForm: FC<Props> = ({
                 bgColor="green"
                 style={{ minWidth: '5rem' }}
                 disabled={followeeCount < 5}
+                onClick={submitCallback}
               >
                 {nextText}
               </Button>
             </div>
             <style jsx>{styles}</style>
-          </>
+          </div>
         )
       }}
     </Query>

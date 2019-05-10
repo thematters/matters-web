@@ -1,3 +1,11 @@
+.modal-container {
+  padding: 0 var(--spacing-tight);
+}
+
+.page-container {
+  width: 88%;
+}
+
 .buttons {
   @mixin flex-center-space-between;
   flex-direction: row-reverse;

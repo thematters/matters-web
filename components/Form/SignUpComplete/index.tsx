@@ -21,10 +21,10 @@ const SignUpComplete = () => (
         <Translate zh_hant="歡迎加入 Matters！" zh_hans="欢迎加入 Matters！" />
       </Title>
 
-      <p>
+      <p className="sub-title">
         <Translate
-          zh_hant="恭喜！註冊完成，你可以瀏覽並分享社區的所有內容了。"
-          zh_hans="恭喜！注册完成，你可以浏览并分享社区的所有内容了。"
+          zh_hant="恭喜！註冊完成，你可以閱讀、評論並分享社區的所有內容了。"
+          zh_hans="恭喜！注册完成，你可以阅读、评论并分享社区的所有内容了。"
         />
       </p>
       <br />
@@ -41,7 +41,10 @@ const SignUpComplete = () => (
           <a className="u-link-green" href={postUrl} target="_blank">
             <Translate zh_hant="Matters 站内" zh_hans="Matters 站內" />
           </a>
-          <Translate zh_hant="尋找老用户。" zh_hans="寻找老用户。" />
+          <Translate
+            zh_hant="尋找激活你的老用户。"
+            zh_hans="寻找激活你的老用户。"
+          />
         </li>
         <li>
           <Translate

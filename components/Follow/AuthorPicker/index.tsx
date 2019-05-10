@@ -35,11 +35,13 @@ const AUTHOR_PICKER = gql`
 export const AuthorPicker = ({
   viewer,
   title,
-  titleIs
+  titleIs,
+  readonly
 }: {
   viewer: FolloweeCountUser
   title: any
   titleIs?: string
+  readonly?: boolean
 }) => {
   const containerStyle = classNames({
     'small-size-header': titleIs === 'span'
@@ -82,7 +84,11 @@ export const AuthorPicker = ({
                 <ul>
                   {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
                     <li key={cursor}>
-                      <FullDesc user={node} nameSize="small" />
+                      <FullDesc
+                        user={node}
+                        nameSize="small"
+                        readonly={readonly}
+                      />
                     </li>
                   ))}
                 </ul>
