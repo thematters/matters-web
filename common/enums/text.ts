@@ -59,7 +59,7 @@ export const TEXT = {
     published: '作品已發佈',
     publishing: '正在發佈',
     waitingForPublish: '正在等待發佈',
-    publishFailed: '發失敗',
+    publishFailed: '發佈失敗',
     publishNote: '發佈須知',
     onboardingInfo: '你還不是創作者',
     articleArchived: '該作品已從站內隱藏',
