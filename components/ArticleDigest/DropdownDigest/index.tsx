@@ -9,6 +9,7 @@ import { Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_ARROW_UP_RIGHT from '~/static/icons/arrow-up-right.svg?sprite'
 
@@ -118,8 +119,8 @@ const DropdownDigestWrapper = ({
       <Tooltip
         content={
           <Translate
-            zh_hant="該作品已從站內隱藏"
-            zh_hans="该作品已从站内隐藏"
+            zh_hant={TEXT.zh_hant.articleArchived}
+            zh_hans={TEXT.zh_hans.articleArchived}
           />
         }
       >

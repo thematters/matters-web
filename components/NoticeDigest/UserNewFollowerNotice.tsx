@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
@@ -50,7 +51,10 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="關注了你" zh_hans="关注了你" />
+          <Translate
+            zh_hant={TEXT.zh_hant.followingYou}
+            zh_hans={TEXT.zh_hans.followingYou}
+          />
         </h4>
 
         <NoticeDate notice={notice} />

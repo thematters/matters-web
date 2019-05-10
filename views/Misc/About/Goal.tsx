@@ -23,8 +23,8 @@ const Goal = () => (
         </p>
         <p>
           <Translate
-            zh_hant="所有在 Matters 上發佈的文章（不含評論），皆會上載到星際文件系統（InterPlanetary File System，IPFS）的節點上，實現文章內容的分佈式存儲，完成將數據回歸創作者的第一步。"
-            zh_hans="所有在 Matters 上发布的文章（不含评论），皆会上载到星际文件系统（InterPlanetary File System，IPFS）的节点上，实现文章内容的分布式存储，完成将数据回归创作者的第一步。"
+            zh_hant="所有在 Matters 上發佈的作品（不含評論），皆會上載到星際文件系統（InterPlanetary File System，IPFS）的節點上，實現作品內容的分佈式存儲，完成將數據回歸創作者的第一步。"
+            zh_hans="所有在 Matters 上发布的作品（不含评论），皆会上载到星际文件系统（InterPlanetary File System，IPFS）的节点上，实现作品内容的分布式存储，完成将数据回归创作者的第一步。"
           />
         </p>
         <p>

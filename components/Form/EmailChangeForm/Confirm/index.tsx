@@ -54,9 +54,15 @@ export const EmailChangeConfirmForm: FC<Props> = ({
   const validateEmail = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidEmail(value)) {
-      result = { zh_hant: '電子信箱格式有誤', zh_hans: '邮箱格式有误' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidEmail,
+        zh_hans: TEXT.zh_hans.invalidEmail
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -66,7 +72,10 @@ export const EmailChangeConfirmForm: FC<Props> = ({
   const validateCode = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -88,14 +97,14 @@ export const EmailChangeConfirmForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: '請輸入新電子信箱',
-      zh_hans: '请输入新邮箱',
+      zh_hant: TEXT.zh_hant.enterNewEmail,
+      zh_hans: TEXT.zh_hans.enterNewEmail,
       lang
     })
 
     const codePlaceholder = translate({
-      zh_hant: '請輸入驗證碼',
-      zh_hans: '请输入验证码',
+      zh_hant: TEXT.zh_hant.enterVerificationCode,
+      zh_hans: TEXT.zh_hans.enterVerificationCode,
       lang
     })
 
@@ -137,7 +146,11 @@ export const EmailChangeConfirmForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.done,
+                zh_hans: TEXT.zh_hans.done,
+                lang
+              })}
             </Button>
           </div>
         </form>

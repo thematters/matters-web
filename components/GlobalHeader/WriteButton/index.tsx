@@ -47,7 +47,10 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
             icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
             onClick={open}
           >
-            <Translate zh_hant="創作" zh_hans="创作" />
+            <Translate
+              zh_hant={TEXT.zh_hant.write}
+              zh_hans={TEXT.zh_hans.write}
+            />
           </Button>
         )}
       </ModalSwitch>

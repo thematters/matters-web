@@ -12,6 +12,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
 import { numFormat } from '~/common/utils'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
@@ -84,16 +85,29 @@ const PickAuthors = ({ viewer }: { viewer: FolloweeCountUser }) => (
 
       return (
         <>
-          <Head title={{ zh_hant: '追蹤創作者', zh_hans: '追踪创作者' }} />
+          <Head
+            title={{
+              zh_hant: TEXT.zh_hant.followAuthor,
+              zh_hans: TEXT.zh_hans.followAuthor
+            }}
+          />
 
           <PickIntroHeader />
           <PageHeader
-            pageTitle={<Translate zh_hant="追蹤創作者" zh_hans="追踪创作者" />}
+            pageTitle={
+              <Translate
+                zh_hant={TEXT.zh_hant.followAuthor}
+                zh_hans={TEXT.zh_hans.followAuthor}
+              />
+            }
           >
             <div className="follow-info">
               <ShuffleButton onClick={() => refetch()} />
               <span>
-                <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
+                <Translate
+                  zh_hant={`${TEXT.zh_hant.followed} `}
+                  zh_hans={`${TEXT.zh_hans.followed} `}
+                />
                 <span className="hightlight">{numFormat(followeeCount)}</span>
                 <Translate zh_hant=" 位" zh_hans=" 位" />
               </span>

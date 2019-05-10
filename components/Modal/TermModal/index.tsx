@@ -7,6 +7,7 @@ import { Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import termStyles from '~/common/styles/utils/content.article.css'
 import Privacy from '~/common/texts/privacy'
 import ToS from '~/common/texts/tos'
@@ -108,8 +109,8 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
                 onClick={() => disagree(logout)}
               >
                 {translate({
-                  zh_hant: '我不同意',
-                  zh_hans: '我不同意',
+                  zh_hant: TEXT.zh_hant.disagree,
+                  zh_hans: TEXT.zh_hans.disagree,
                   lang
                 })}
               </button>
@@ -119,8 +120,8 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
             {props.isSubmitting && <IconSpinner />}
             {!props.isSubmitting &&
               translate({
-                zh_hant: '同意並繼續',
-                zh_hans: '同意并继续',
+                zh_hant: TEXT.zh_hant.agreeAndContinue,
+                zh_hans: TEXT.zh_hans.agreeAndContinue,
                 lang
               })}
           </button>

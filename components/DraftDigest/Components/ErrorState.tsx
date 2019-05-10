@@ -1,5 +1,6 @@
 import { Icon, TextIcon, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
 import ICON_DELETE_RED_CIRCLE from '~/static/icons/delete-red-circle.svg?sprite'
 
 const ErrorState = () => {
@@ -16,7 +17,10 @@ const ErrorState = () => {
       color="red"
       weight="medium"
     >
-      <Translate zh_hant="發布失敗" zh_hans="发布失败" />
+      <Translate
+        zh_hant={TEXT.zh_hant.publishFailed}
+        zh_hans={TEXT.zh_hans.publishFailed}
+      />
     </TextIcon>
   )
 }

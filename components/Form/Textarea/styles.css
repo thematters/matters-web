@@ -9,8 +9,6 @@
 
 .info {
   font-size: var(--font-size-xs);
-  line-height: 1.1;
-  height: 1rem;
   min-height: 1rem;
   margin-top: var(--spacing-x-tight);
   padding-left: var(--spacing-x-tight);

@@ -1,13 +1,20 @@
 import { Head, UserProfile } from '~/components'
 import { Protected } from '~/components/Protected'
 
+import { TEXT } from '~/common/enums'
+
 import UserTabs from '../UserTabs'
 import MeDrafts from './MeDrafts'
 
 export default () => (
   <Protected>
     <main>
-      <Head title={{ zh_hant: '我的草稿', zh_hans: '我的草稿' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.myDrafts,
+          zh_hans: TEXT.zh_hans.myDrafts
+        }}
+      />
 
       <UserProfile />
 

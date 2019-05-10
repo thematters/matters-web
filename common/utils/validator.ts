@@ -8,26 +8,13 @@ import { INVALID_NAMES } from '~/common/enums'
 export const isValidEmail = isEmail
 
 /**
- * Validate user raw pass word. It only accepts alphabets and numbers.
+ * Validate user raw pass word. It only accepts any ASCII character.
  */
 export const isValidPassword = (password: string): boolean => {
   if (!password || password.length < 8) {
     return false
   }
-  return /^[a-zA-Z0-9]*$/.test(password)
-}
-
-/**
- * Validate user raw pass word. It must has at least one alphabet, one
- * number and minimum length should be 8.
- *
- * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
- */
-export const isValidStrictPassword = (password: string): boolean => {
-  if (!password || password.length < 8) {
-    return false
-  }
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)
+  return /^[\x00-\x7F]*$/.test(password)
 }
 
 /**

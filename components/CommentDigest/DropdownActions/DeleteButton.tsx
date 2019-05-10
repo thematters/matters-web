@@ -4,6 +4,7 @@ import _get from 'lodash/get'
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
 import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 
 import styles from './styles.css'
@@ -51,7 +52,10 @@ const DeleteButton: React.FC<{
             }
             spacing="tight"
           >
-            <Translate zh_hant="刪除" zh_hans="删除" />
+            <Translate
+              zh_hant={TEXT.zh_hant.delete}
+              zh_hans={TEXT.zh_hant.delete}
+            />
           </TextIcon>
           <style jsx>{styles}</style>
         </button>

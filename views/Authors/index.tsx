@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllAuthors } from './__generated__/AllAuthors'
@@ -46,10 +46,20 @@ const ALL_AUTHORSS = gql`
 const Authors = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ zh_hant: '全部作者', zh_hans: '全部作者' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.allAuthors,
+          zh_hans: TEXT.zh_hans.allAuthors
+        }}
+      />
 
       <PageHeader
-        pageTitle={<Translate zh_hant="全部作者" zh_hans="全部作者" />}
+        pageTitle={
+          <Translate
+            zh_hant={TEXT.zh_hant.allAuthors}
+            zh_hans={TEXT.zh_hans.allAuthors}
+          />
+        }
       />
 
       <section>

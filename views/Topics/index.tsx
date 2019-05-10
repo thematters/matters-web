@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTopics } from './__generated__/AllTopics'
@@ -50,10 +50,20 @@ const ALL_TOPICSS = gql`
 const Topics = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ zh_hant: '全部話題', zh_hans: '全部话题' }} />
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.allTopics,
+          zh_hans: TEXT.zh_hans.allTopics
+        }}
+      />
 
       <PageHeader
-        pageTitle={<Translate zh_hant="全部話題" zh_hans="全部话题" />}
+        pageTitle={
+          <Translate
+            zh_hant={TEXT.zh_hant.allTopics}
+            zh_hans={TEXT.zh_hans.allTopics}
+          />
+        }
       />
 
       <section>

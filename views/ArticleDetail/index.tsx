@@ -121,8 +121,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <EmptyArticle
                         description={
                           <Translate
-                            zh_hant="文章被隱藏"
-                            zh_hans="文章被隐藏"
+                            zh_hant="作品被隱藏"
+                            zh_hans="作品被隐藏"
                           />
                         }
                       >

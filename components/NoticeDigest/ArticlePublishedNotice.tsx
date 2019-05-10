@@ -20,8 +20,8 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <h4>
           <Translate
-            zh_hant="你的文章已發佈到分佈式網絡"
-            zh_hans="你的文章已发布到分布式网络"
+            zh_hant="你的作品已發佈到分佈式網絡"
+            zh_hans="你的作品已发布到分布式网络"
           />
         </h4>
 

@@ -9,6 +9,8 @@ import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
 import { ViewerContext } from '~/components/Viewer'
 
+import { TEXT } from '~/common/enums'
+
 /**
  * This component is a modal for changing email.
  *
@@ -69,7 +71,10 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
         {step === 'complete' && (
           <ModalComplete
             message={
-              <Translate zh_hant="電子信箱修改成功" zh_hans="邮箱修改成功" />
+              <Translate
+                zh_hant={TEXT.zh_hant.changeEmailSuccess}
+                zh_hans={TEXT.zh_hans.changeEmailSuccess}
+              />
             }
           />
         )}

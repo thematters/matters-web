@@ -63,8 +63,8 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
             </p>
             <p className="highlight">
               <Translate
-                zh_hant={({ count }) => `等 ${count} 人贊賞了文章`}
-                zh_hans={({ count }) => `等 ${count} 人赞赏了文章`}
+                zh_hant={({ count }) => `等 ${count} 人贊賞了作品`}
+                zh_hans={({ count }) => `等 ${count} 人赞赏了作品`}
                 data={{ count: numAbbr(article.appreciators.totalCount) }}
               />
             </p>

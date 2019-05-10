@@ -5,6 +5,8 @@ import { Mutation, Query, QueryResult } from 'react-apollo'
 import { Head, PageHeader, Translate } from '~/components'
 import { Switch } from '~/components/Switch'
 
+import { TEXT } from '~/common/enums'
+
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import styles from './styles.css'
 
@@ -73,20 +75,20 @@ const settingsMap = {
   article: [
     {
       key: 'appreciation',
-      title: <Translate zh_hant="文章被贊賞" zh_hans="文章被赞赏" />
+      title: <Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" />
     },
     {
       key: 'articleSubscription',
-      title: <Translate zh_hant="文章被收藏" zh_hans="文章被收藏" />
+      title: <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />
     },
     // {
     //   key: 'downstream',
-    //   title: <Translate zh_hant="文章上游变更" zh_hans="文章上游变更" />
+    //   title: <Translate zh_hant="作品上游变更" zh_hans="作品上游变更" />
     // },
     {
       key: 'commentSubscribed',
       title: (
-        <Translate zh_hant="收藏的文章有新評論" zh_hans="收藏的文章有新评论" />
+        <Translate zh_hant="收藏的作品有新評論" zh_hans="收藏的作品有新评论" />
       )
     }
   ],
@@ -147,7 +149,12 @@ const SettingsNotification = () => (
 
             return (
               <>
-                <Head title={{ zh_hant: '通知設定', zh_hans: '通知设定' }} />
+                <Head
+                  title={{
+                    zh_hant: TEXT.zh_hant.notificationSetting,
+                    zh_hans: TEXT.zh_hans.notificationSetting
+                  }}
+                />
 
                 <div className="l-row first">
                   <section className="section-container l-col-4 l-col-md-4 l-lg-6">
@@ -190,7 +197,7 @@ const SettingsNotification = () => (
                 <div className="l-row">
                   <section className="section-container l-col-4 l-col-md-4 l-lg-6">
                     <PageHeader
-                      pageTitle={<Translate zh_hant="文章" zh_hans="文章" />}
+                      pageTitle={<Translate zh_hant="作品" zh_hans="作品" />}
                       is="h2"
                     />
 

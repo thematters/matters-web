@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
+
 const RECALL_PUBLISH = gql`
   mutation RecallPublish($id: ID!) {
     recallPublish(input: { id: $id }) {
@@ -29,7 +31,12 @@ const RecallButton = ({ id, text }: { id: string; text?: React.ReactNode }) => {
     >
       {recall => (
         <button type="button" onClick={() => recall()}>
-          {text || <Translate zh_hant="取消" zh_hans="取消" />}
+          {text || (
+            <Translate
+              zh_hant={TEXT.zh_hant.cancel}
+              zh_hans={TEXT.zh_hans.cancel}
+            />
+          )}
         </button>
       )}
     </Mutation>

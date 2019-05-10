@@ -51,7 +51,7 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="讚賞了你的文章" zh_hans="赞赏了你的文章" />
+          <Translate zh_hant="讚賞了你的作品" zh_hans="赞赏了你的作品" />
           {notice.MAT && (
             <>
               <Translate zh_hant={`，獲得 `} zh_hans={`，获得 `} />
