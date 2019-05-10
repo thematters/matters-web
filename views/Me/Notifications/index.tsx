@@ -22,7 +22,6 @@ import { Protected } from '~/components/Protected'
 
 import { mergeConnections } from '~/common/utils'
 
-import { MeNotifications } from './__generated__/MeNotifications'
 import styles from './styles.css'
 
 const Notifications = () => (
@@ -37,12 +36,7 @@ const Notifications = () => (
 
         <section>
           <Query query={ME_NOTIFICATIONS} variables={{ first: 20 }}>
-            {({
-              data,
-              loading,
-              error,
-              fetchMore
-            }: QueryResult & { data: MeNotifications }) => {
+            {({ data, loading, error, fetchMore }: QueryResult) => {
               if (loading) {
                 return <Spinner />
               }

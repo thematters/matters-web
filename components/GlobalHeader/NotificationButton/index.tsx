@@ -15,8 +15,6 @@ import {
 import { POLL_INTERVAL } from '~/common/enums'
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
 
-import { MeDropdownNotifications } from './__generated__/MeDropdownNotifications'
-import { UnreadNoticeCount } from './__generated__/UnreadNoticeCount'
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
 
@@ -88,19 +86,14 @@ export default () => (
     fetchPolicy="network-only"
     skip={!process.browser}
   >
-    {({ data: unreadCountData }: QueryResult & { data: UnreadNoticeCount }) => (
+    {({ data: unreadCountData }: QueryResult) => (
       <Query
         query={ME_NOTIFICATIONS}
         variables={{ first: 5 }}
         errorPolicy="none"
         notifyOnNetworkStatusChange
       >
-        {({
-          data,
-          loading,
-          error,
-          refetch
-        }: QueryResult & { data: MeDropdownNotifications }) => (
+        {({ data, loading, error, refetch }: QueryResult) => (
           <Mutation
             mutation={MARK_ALL_NOTICES_AS_READ}
             refetchQueries={[

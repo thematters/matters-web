@@ -5,7 +5,6 @@ import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArt
 
 import { POLL_INTERVAL } from '~/common/enums'
 
-import { UnreadFolloweeArticles } from './__generated__/UnreadFolloweeArticles'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import styles from './styles.css'
@@ -18,7 +17,7 @@ export default () => (
     fetchPolicy="network-only"
     skip={!process.browser}
   >
-    {({ data }: QueryResult & { data: UnreadFolloweeArticles }) => {
+    {({ data }: QueryResult) => {
       const unread = !!_get(data, 'viewer.status.unreadFolloweeArticles')
 
       return (
