@@ -2,7 +2,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Placeholder, Translate } from '~/components'
+import { Label, Placeholder, Translate } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -10,7 +11,7 @@ import { analytics } from '~/common/utils'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
-const SIDEBAR_ICYMI = gql`
+export const SIDEBAR_ICYMI = gql`
   query SidebarIcymi(
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false

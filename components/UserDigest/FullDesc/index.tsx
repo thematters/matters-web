@@ -21,19 +21,23 @@ import styles from './styles.css'
 
 const FullDesc = ({
   user,
-  nameSize = 'default'
+  nameSize = 'default',
+  readonly
 }: {
   user: UserDigestFullDescUser
   nameSize?: 'default' | 'small'
+  readonly?: boolean
 }) => {
   const nameSizeClasses = classNames({
     name: true,
     [nameSize]: true
   })
-  const path = toPath({
-    page: 'userProfile',
-    userName: user.userName || ''
-  })
+  const path = readonly
+    ? {}
+    : toPath({
+        page: 'userProfile',
+        userName: user.userName || ''
+      })
 
   return (
     <>

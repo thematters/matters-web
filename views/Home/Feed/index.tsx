@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
-  ArticleDigest,
   InfiniteScroll,
   LoadMore,
   PageHeader,
@@ -12,6 +11,7 @@ import {
   Responsive,
   Translate
 } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -37,7 +37,7 @@ const feedFragment = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const queries: { [key: string]: any } = {
+export const queries: { [key: string]: any } = {
   hottest: gql`
     query HottestFeed(
       $cursor: String
@@ -100,7 +100,10 @@ export default () => {
           }
 
           const connectionPath = 'viewer.recommendation.feed'
-          const { edges, pageInfo } = _get(data, connectionPath, {})
+          const { edges, pageInfo } = _get(data, connectionPath, {
+            edges: [],
+            pageInfo: {}
+          })
           const loadMore = () => {
             analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
               type: sortBy,

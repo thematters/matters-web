@@ -46,8 +46,8 @@ const OnboardingInfoModal: FC<ModalInstanceProps> = ({ close }) => {
           <div className="desc">
             <div className="text">
               <Translate
-                zh_hant="Matters 目前是一個邀請制社群，你可以透過以下兩種方法獲得創作者資格。"
-                zh_hans="Matters 目前是一个邀请制社群，你可以通过以下两种方法获得创作者资格。"
+                zh_hant="Matters 目前是一個邀請制社群，你可以透過以下方法獲得創作者資格："
+                zh_hans="Matters 目前是一个邀请制社群，你可以通过以下方法获得创作者资格："
               />
             </div>
             <div className="info-item">
@@ -58,7 +58,10 @@ const OnboardingInfoModal: FC<ModalInstanceProps> = ({ close }) => {
               <a className="u-link-green link" href={postUrl} target="_blank">
                 <Translate zh_hant="Matters 站內" zh_hans="Matters 站内" />
               </a>
-              <Translate zh_hant="尋找老用戶。" zh_hans="寻找老用户。" />
+              <Translate
+                zh_hant="尋找激活你的老用户。"
+                zh_hans="寻找激活你的老用户。"
+              />
             </div>
             <div className="info-item">
               <div className="info-icon">
