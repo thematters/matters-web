@@ -90,8 +90,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
       }: QueryResult & { data: ArticleDetailType }) => {
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
-        const canEditCollection =
-          viewer.isAdmin || (viewer.isPartner && viewer.id === authorId)
+        const canEditCollection = viewer.id === authorId
 
         return (
           <DrawerProvider>
