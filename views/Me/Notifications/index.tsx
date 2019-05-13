@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -11,36 +11,18 @@ import {
   Translate
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { Query } from '~/components/GQL'
+import { Mutation, Query } from '~/components/GQL'
+import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
+import {
+  ME_NOTIFICATIONS,
+  UNREAD_NOTICE_COUNT
+} from '~/components/GQL/queries/notice'
 import NoticeDigest from '~/components/NoticeDigest'
 import { Protected } from '~/components/Protected'
 
 import { mergeConnections } from '~/common/utils'
 
-import { MeNotifications } from './__generated__/MeNotifications'
 import styles from './styles.css'
-
-const ME_NOTIFICATIONS = gql`
-  query MeNotifications($cursor: String) {
-    viewer {
-      id
-      notices(input: { first: 20, after: $cursor }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...DigestNotice
-          }
-        }
-      }
-    }
-  }
-  ${NoticeDigest.fragments.notice}
-`
 
 const Notifications = () => (
   <Protected>
@@ -53,13 +35,8 @@ const Notifications = () => (
         />
 
         <section>
-          <Query query={ME_NOTIFICATIONS}>
-            {({
-              data,
-              loading,
-              error,
-              fetchMore
-            }: QueryResult & { data: MeNotifications }) => {
+          <Query query={ME_NOTIFICATIONS} variables={{ first: 20 }}>
+            {({ data, loading, error, fetchMore }: QueryResult) => {
               if (loading) {
                 return <Spinner />
               }
@@ -69,6 +46,7 @@ const Notifications = () => (
               const loadMore = () =>
                 fetchMore({
                   variables: {
+                    first: 20,
                     cursor: pageInfo.endCursor
                   },
                   updateQuery: (previousResult, { fetchMoreResult }) =>
@@ -84,20 +62,37 @@ const Notifications = () => (
               }
 
               return (
-                <InfiniteScroll
-                  hasNextPage={pageInfo.hasNextPage}
-                  loadMore={loadMore}
+                <Mutation
+                  mutation={MARK_ALL_NOTICES_AS_READ}
+                  refetchQueries={[
+                    {
+                      query: UNREAD_NOTICE_COUNT
+                    }
+                  ]}
                 >
-                  <ul>
-                    {edges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
-                          <NoticeDigest notice={node} key={cursor} />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </InfiniteScroll>
+                  {markAllNoticesAsRead => {
+                    useEffect(() => {
+                      markAllNoticesAsRead()
+                    }, [])
+
+                    return (
+                      <InfiniteScroll
+                        hasNextPage={pageInfo.hasNextPage}
+                        loadMore={loadMore}
+                      >
+                        <ul>
+                          {edges.map(
+                            ({ node, cursor }: { node: any; cursor: any }) => (
+                              <li key={cursor}>
+                                <NoticeDigest notice={node} key={cursor} />
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </InfiniteScroll>
+                    )
+                  }}
+                </Mutation>
               )
             }}
           </Query>

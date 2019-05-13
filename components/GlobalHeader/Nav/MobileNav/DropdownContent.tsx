@@ -11,14 +11,16 @@ import styles from './styles.css'
 const DropdownContent: React.FC<
   WithRouterProps & {
     hideDropdown: () => void
+    unread: boolean
   }
-> = ({ router, hideDropdown }) => {
+> = ({ router, hideDropdown, unread }) => {
   const homeClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.HOME.href
   })
   const followClasses = classNames({
     'nav-link': true,
+    unread,
     active: router && router.pathname === PATHS.FOLLOW.href
   })
 

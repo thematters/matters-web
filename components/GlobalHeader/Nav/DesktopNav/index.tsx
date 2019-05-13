@@ -8,7 +8,10 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
-const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
+const DesktopNav: React.FC<WithRouterProps & { unread: boolean }> = ({
+  router,
+  unread
+}) => {
   const homeClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.HOME.href
@@ -16,6 +19,10 @@ const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
   const followClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.FOLLOW.href
+  })
+  const followTextClass = classNames({
+    follow: true,
+    unread
   })
 
   return (
@@ -30,10 +37,12 @@ const DesktopNav: React.FC<WithRouterProps> = ({ router }) => {
       </Link>
       <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
-          <Translate
-            zh_hant={TEXT.zh_hant.follow}
-            zh_hans={TEXT.zh_hans.follow}
-          />
+          <span className={followTextClass}>
+            <Translate
+              zh_hant={TEXT.zh_hant.follow}
+              zh_hans={TEXT.zh_hans.follow}
+            />
+          </span>
         </a>
       </Link>
       <style jsx>{styles}</style>
