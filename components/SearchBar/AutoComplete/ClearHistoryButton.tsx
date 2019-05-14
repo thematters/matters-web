@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { Mutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 
+import { ADD_TOAST } from '~/common/enums'
+
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
 import styles from './styles.css'
 
@@ -78,7 +80,7 @@ const ClearHistoryButton = () => (
         onClick={async () => {
           await clear()
           window.dispatchEvent(
-            new CustomEvent('addToast', {
+            new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'green',
                 content: (

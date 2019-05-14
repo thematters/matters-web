@@ -21,7 +21,11 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
       <header>
         <Title type="modal">{title || children}</Title>
         {closeable && (
-          <button onClick={() => close()}>
+          <button
+            onClick={() => {
+              close()
+            }}
+          >
             <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
           </button>
         )}

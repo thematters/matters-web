@@ -52,7 +52,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
 
       <div className="buttons">
         <button className="save" onClick={close}>
-          <Translate zh_hant="暫存草稿箱" zh_hans="暫存草稿箱" />
+          <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
         </button>
 
         <Mutation
@@ -60,7 +60,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
           optimisticResponse={{
             publishArticle: {
               id: draftId,
-              scheduledAt: new Date(Date.now() + 1000 * 60 * 2).toISOString(),
+              scheduledAt: new Date(Date.now() + 1000).toISOString(),
               publishState: 'pending',
               __typename: 'Draft'
             }
@@ -83,7 +83,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
                 }
               }}
             >
-              <Translate zh_hant="發佈" zh_hans="发布" />
+              <Translate zh_hant="發佈作品" zh_hans="发布作品" />
             </button>
           )}
         </Mutation>

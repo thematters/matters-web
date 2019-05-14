@@ -2,17 +2,18 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Label, Translate } from '~/components'
+import { Label, Translate } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import ViewAllLink from '../ViewAllLink'
 import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
 
-const SIDEBAR_TOPICS = gql`
+export const SIDEBAR_TOPICS = gql`
   query SidebarTopics(
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
@@ -50,7 +51,10 @@ export default () => (
           <>
             <header>
               <Label>
-                <Translate zh_hant="熱議話題" zh_hans="热议话题" />
+                <Translate
+                  zh_hant={TEXT.zh_hant.hotTopics}
+                  zh_hans={TEXT.zh_hans.hotTopics}
+                />
               </Label>
               <ViewAllLink type="topics" />
             </header>

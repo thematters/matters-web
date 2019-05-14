@@ -1,3 +1,4 @@
+import { ApolloQueryResult } from 'apollo-client'
 import gql from 'graphql-tag'
 
 import { AnalyticsListener } from '~/components/Analytics'
@@ -20,6 +21,7 @@ import { LayoutUser } from './__generated__/LayoutUser'
 interface LayoutProps {
   loading: boolean
   user: LayoutUser
+  refetch: () => Promise<ApolloQueryResult<any>>
   error?: Error
 }
 
@@ -38,13 +40,13 @@ const fragments = {
 
 export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
-} = ({ children, loading, user, error }) => {
+} = ({ children, loading, user, error, refetch }) => {
   if (loading) {
     return null
   }
 
   return (
-    <ViewerContext.Provider value={processViewer(user || {})}>
+    <ViewerContext.Provider value={processViewer({ refetch, ...(user || {}) })}>
       <LanguageProvider>
         <HeaderContextProvider>
           <GatewayContextProvider>

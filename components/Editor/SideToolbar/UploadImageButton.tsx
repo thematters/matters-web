@@ -1,38 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Quill } from 'react-quill'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
-import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
+  TEXT,
+  UPLOAD_IMAGE_SIZE_LIMIT
+} from '~/common/enums'
 import ICON_EDITOR_IMAGE from '~/static/icons/editor-image.svg?sprite'
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 
 import styles from './styles.css'
 
-type Upload = (input: {
-  file?: any
-  url?: string
-}) => Promise<{
-  id: string
-  path: string
-}>
-
 interface UploadImageButtonProps {
   quill: Quill | null
-  upload: Upload
-  uploading: boolean
+  upload: DraftAssetUpload
   setExpanded: (expanded: boolean) => void
 }
 
-const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
+const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
 const UploadImageButton = ({
   quill,
   setExpanded,
-  upload,
-  uploading
+  upload
 }: UploadImageButtonProps) => {
+  const [uploading, setUploading] = useState(false)
+
   const insertImage = (src: string, assetId: string) => {
     if (quill) {
       const range = quill.getSelection(true)
@@ -51,15 +48,15 @@ const UploadImageButton = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
+    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: (
               <Translate
                 zh_hant="上傳檔案請勿超過 5 MB"
-                zh_hans="上传档案请勿超过 5 MB"
+                zh_hans="上传文件请勿超过 5 MB"
               />
             )
           }
@@ -69,32 +66,46 @@ const UploadImageButton = ({
     }
 
     try {
+      setUploading(true)
       const { id, path } = await upload({ file })
       insertImage(path, id)
       setExpanded(false)
+      setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate zh_hant="圖片上傳成功" zh_hans="图片上传成功" />
+            content: (
+              <Translate
+                zh_hant={TEXT.zh_hant.uploadImageSuccess}
+                zh_hans={TEXT.zh_hans.uploadImageSuccess}
+              />
+            )
           }
         })
       )
     } catch (e) {
       setExpanded(false)
+      setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate zh_hant="圖片上傳失敗" zh_hans="图片上传失败" />
+            content: (
+              <Translate
+                zh_hant={TEXT.zh_hant.uploadImageFailed}
+                zh_hans={TEXT.zh_hans.uploadImageFailed}
+              />
+            )
           }
         })
       )
+      console.error(e)
     }
   }
 
   return (
-    <label className="upload-image-container">
+    <label className="upload-container">
       <input
         className="input"
         type="file"

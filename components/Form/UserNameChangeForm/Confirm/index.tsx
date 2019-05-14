@@ -37,11 +37,14 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
   const validateUserName = (value: string, language: string) => {
     let result: any
     if (!value) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (!isValidUserName(value)) {
       result = {
-        zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
-        zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _'
+        zh_hant: TEXT.zh_hant.userNameHint,
+        zh_hans: TEXT.zh_hans.userNameHint
       }
     }
     if (result) {
@@ -56,9 +59,15 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
   ) => {
     let result: any
     if (!comparedValue) {
-      result = { zh_hant: '必填欄位', zh_hans: '必填栏位' }
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
     } else if (comparedValue !== value) {
-      result = { zh_hant: 'Matters ID 不一致', zh_hans: 'Matters ID 不一致' }
+      result = {
+        zh_hant: TEXT.zh_hant.invalidUserName,
+        zh_hans: TEXT.zh_hans.invalidUserName
+      }
     }
     if (result) {
       return translate({ ...result, lang: language })
@@ -79,20 +88,20 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const userNameHint = translate({
-      zh_hant: '最多輸入至 40 個字元，僅支持英文、數字及 _',
-      zh_hans: '最多输入至 40 个字符，仅支持英文、数字及 _',
+      zh_hant: TEXT.zh_hant.userNameHint,
+      zh_hans: TEXT.zh_hans.userNameHint,
       lang
     })
 
     const userNamePlaceholder = translate({
-      zh_hant: '請輸入新 Matters ID',
-      zh_hans: '请输入新 Matters ID',
+      zh_hant: TEXT.zh_hant.enterUserName,
+      zh_hans: TEXT.zh_hans.enterUserName,
       lang
     })
 
     const comparedUserNamePlaceholder = translate({
-      zh_hant: '請再次輸入新 Matters ID',
-      zh_hans: '请再次输入新 Matters ID',
+      zh_hant: TEXT.zh_hant.enterUserNameAgign,
+      zh_hans: TEXT.zh_hans.enterUserNameAgign,
       lang
     })
 
@@ -128,7 +137,11 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
               disabled={isSubmitting}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
-              {translate({ zh_hant: '完成', zh_hans: '完成', lang })}
+              {translate({
+                zh_hant: TEXT.zh_hant.done,
+                zh_hans: TEXT.zh_hans.done,
+                lang
+              })}
             </Button>
           </div>
         </form>

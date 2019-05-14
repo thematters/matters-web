@@ -1,5 +1,6 @@
 import { Translate } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
 import styles from './styles.css'
@@ -41,7 +42,10 @@ const CommentContent = ({
   if (state === 'archived') {
     return (
       <p className="banned-content">
-        <Translate zh_hant="評論已被刪除" zh_hans="评论已被删除" />
+        <Translate
+          zh_hant={TEXT.zh_hant.commentDeleted}
+          zh_hans={TEXT.zh_hans.commentDeleted}
+        />
         <style jsx>{styles}</style>
       </p>
     )

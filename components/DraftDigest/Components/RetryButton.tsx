@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
+
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
     retryPublish: publishArticle(input: { id: $id }) {
@@ -24,9 +26,7 @@ const RetryButton = ({ id }: { id: string }) => {
               optimisticResponse: {
                 retryPublish: {
                   id,
-                  scheduledAt: new Date(
-                    Date.now() + 1000 * 60 * 2
-                  ).toISOString(),
+                  scheduledAt: new Date(Date.now() + 1000).toISOString(),
                   publishState: 'pending',
                   __typename: 'Draft'
                 }
@@ -34,7 +34,10 @@ const RetryButton = ({ id }: { id: string }) => {
             })
           }
         >
-          <Translate zh_hant="重試" zh_hans="重试" />
+          <Translate
+            zh_hant={TEXT.zh_hant.retry}
+            zh_hans={TEXT.zh_hans.retry}
+          />
         </button>
       )}
     </Mutation>

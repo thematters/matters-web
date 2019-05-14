@@ -51,7 +51,7 @@ const ArticleNewDownstreamNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="引申了你的文章" zh_hans="引申了你的文章" />{' '}
+          <Translate zh_hant="引申了你的作品" zh_hans="引申了你的作品" />{' '}
           <NoticeArticle article={notice.target} />
         </h4>
 

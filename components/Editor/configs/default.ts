@@ -1,8 +1,10 @@
 import { KEYCODES } from '~/common/enums'
 
 import '../blots'
+import '../modules/imageDrop'
 import '../modules/mention'
 import lineBreakMatcher from '../utils/lineBreakMatcher'
+import urlMatcher from '../utils/urlMatcher'
 
 export const modules = {
   toolbar: [
@@ -12,7 +14,7 @@ export const modules = {
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
-    matchers: [['BR', lineBreakMatcher]]
+    matchers: [['BR', lineBreakMatcher], [Node.TEXT_NODE, urlMatcher]]
   },
   keyboard: {
     bindings: {
@@ -71,6 +73,8 @@ export const foramts = [
   'embedVideo',
   'figcaption',
   'imageFigure',
+  'audioFigure',
   'mention',
-  'smartBreak'
+  'smartBreak',
+  'source'
 ]

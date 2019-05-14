@@ -57,8 +57,8 @@ const SubscribedArticleNewCommentNotice = ({
             />
           )}
           <Translate
-            zh_hant="評論了你收藏的文章"
-            zh_hans="评论了你收藏的文章"
+            zh_hant="評論了你收藏的作品"
+            zh_hans="评论了你收藏的作品"
           />{' '}
           <NoticeArticle article={notice.target} />
         </h4>

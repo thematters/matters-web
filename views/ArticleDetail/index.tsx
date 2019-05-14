@@ -52,7 +52,7 @@ const ARTICLE_DETAIL = gql`
       author {
         ...UserDigestFullDescUser
       }
-      collection(input: { first: 0 }) @connection(key: "articleCollection") {
+      collection(input: { first: 0 }) {
         totalCount
       }
       ...BookmarkArticle
@@ -90,8 +90,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
       }: QueryResult & { data: ArticleDetailType }) => {
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
-        const canEditCollection =
-          viewer.isAdmin || (viewer.isPartner && viewer.id === authorId)
+        const canEditCollection = viewer.id === authorId
 
         return (
           <DrawerProvider>
@@ -121,8 +120,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <EmptyArticle
                         description={
                           <Translate
-                            zh_hant="文章被隱藏"
-                            zh_hans="文章被隐藏"
+                            zh_hant="作品被隱藏"
+                            zh_hans="作品被隐藏"
                           />
                         }
                       >

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { MouseEventHandler } from 'react'
 
 import { Title } from '~/components'
 import { Icon } from '~/components/Icon'
@@ -8,6 +9,7 @@ import { Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_ARROW_UP_RIGHT from '~/static/icons/arrow-up-right.svg?sprite'
 
@@ -41,8 +43,9 @@ const fragments = {
 const DropdownDigest = ({
   article,
   hasArrow,
-  disabled
-}: DropdownDigestProps) => {
+  disabled,
+  onClick
+}: DropdownDigestProps & { onClick?: MouseEventHandler }) => {
   const { author, slug, mediaHash, title, state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -67,7 +70,7 @@ const DropdownDigest = ({
 
   return (
     <section className={conatinerClass}>
-      <div className={contentClass}>
+      <div className={contentClass} onClick={onClick}>
         <Link {...path}>
           <a>
             <Title type="sidebar" is="h2">
@@ -103,8 +106,12 @@ const DropdownDigest = ({
 const DropdownDigestWrapper = ({
   hasArchivedTooltip,
   article,
+  onClick,
   ...props
-}: { hasArchivedTooltip?: boolean } & DropdownDigestProps) => {
+}: {
+  hasArchivedTooltip?: boolean
+  onClick?: MouseEventHandler
+} & DropdownDigestProps) => {
   const isInactive = article.state !== 'active'
 
   if (hasArchivedTooltip && isInactive) {
@@ -112,8 +119,8 @@ const DropdownDigestWrapper = ({
       <Tooltip
         content={
           <Translate
-            zh_hant="該作品已從站內隱藏"
-            zh_hans="该作品已从站内隐藏"
+            zh_hant={TEXT.zh_hant.articleArchived}
+            zh_hans={TEXT.zh_hans.articleArchived}
           />
         }
       >
@@ -124,7 +131,7 @@ const DropdownDigestWrapper = ({
     )
   }
 
-  return <DropdownDigest article={article} {...props} />
+  return <DropdownDigest article={article} onClick={onClick} {...props} />
 }
 
 DropdownDigestWrapper.fragments = fragments

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -12,6 +13,7 @@ import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
+import { ADD_TOAST, OPEN_MODAL } from '~/common/enums'
 import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
@@ -108,7 +110,7 @@ const CommentForm = ({
             }
             setContent('')
             window.dispatchEvent(
-              new CustomEvent('addToast', {
+              new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'green',
                   content: (
@@ -117,10 +119,26 @@ const CommentForm = ({
                 }
               })
             )
+
+            if (viewer.isOnboarding) {
+              setTimeout(async () => {
+                const result = await viewer.refetch()
+                const newState = _get(result, 'data.viewer.status.state')
+                if (newState === 'active') {
+                  window.dispatchEvent(
+                    new CustomEvent(OPEN_MODAL, {
+                      detail: {
+                        id: 'selfActivationModal'
+                      }
+                    })
+                  )
+                }
+              }, 3000)
+            }
           })
           .catch((result: any) => {
             window.dispatchEvent(
-              new CustomEvent('addToast', {
+              new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'red',
                   content: (

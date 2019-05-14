@@ -24,7 +24,7 @@ import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ERROR_CODES } from '~/common/enums'
+import { ADD_TOAST, ERROR_CODES } from '~/common/enums'
 import { isValidEmail, toPath, translate } from '~/common/utils'
 import ICON_ARROW from '~/static/icons/arrow-right-white.svg?sprite'
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
@@ -79,7 +79,7 @@ const handleInviteSubmit = async (
 
     if (inviteInput.email) {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             duration: TOAST_DURATION,
@@ -95,7 +95,7 @@ const handleInviteSubmit = async (
       )
     } else {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             duration: TOAST_DURATION,
@@ -117,7 +117,7 @@ const handleInviteSubmit = async (
 
     if (errorCodes.indexOf(ERROR_CODES.USER_INVITE_STATE_INVALID) >= 0) {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
@@ -155,7 +155,7 @@ const handleInviteSubmit = async (
       )
     } else if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_EXISTS) >= 0) {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
@@ -171,7 +171,7 @@ const handleInviteSubmit = async (
       )
     } else if (errorCodes.indexOf(ERROR_CODES.USER_INVITE_EMAIL_INVITED) >= 0) {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
@@ -191,7 +191,7 @@ const handleInviteSubmit = async (
       )
     } else {
       return window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             duration: TOAST_DURATION,
@@ -315,7 +315,7 @@ const InviteForm: FC<Props> = ({ invitationLeft, submitCallback }) => {
                             }}
                             placeholder={translate({
                               zh_hant: '好友姓名或電子信箱',
-                              zh_hans: '好友姓名或电子信箱',
+                              zh_hans: '好友姓名或邮箱',
                               lang
                             })}
                           />

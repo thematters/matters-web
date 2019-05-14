@@ -7,6 +7,7 @@ import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 import { TextIcon } from '~/components/TextIcon'
 
+import { TEXT } from '~/common/enums'
 import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 
 import styles from './styles.css'
@@ -38,7 +39,10 @@ const SignUpModalSwitch = () => (
           size="md"
           textPlacement="left"
         >
-          <Translate zh_hant="註冊" zh_hans="注册" />
+          <Translate
+            zh_hant={TEXT.zh_hant.register}
+            zh_hans={TEXT.zh_hans.register}
+          />
         </TextIcon>
       </button>
     )}
@@ -47,7 +51,10 @@ const SignUpModalSwitch = () => (
 
 const Footer = () => (
   <footer>
-    <Translate zh_hant="沒有帳號？" zh_hans="没有帐号？" />
+    <Translate
+      zh_hant={TEXT.zh_hant.hasNoAccount}
+      zh_hans={TEXT.zh_hans.hasNoAccount}
+    />
     <SignUpModalSwitch />
 
     <style jsx>{styles}</style>

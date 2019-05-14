@@ -89,8 +89,8 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           <>
             <Head
               title={{
-                zh_hant: `${data.user.displayName}發表的文章`,
-                zh_hans: `${data.user.displayName}发表的文章`
+                zh_hant: `${data.user.displayName}發表的作品`,
+                zh_hans: `${data.user.displayName}发表的作品`
               }}
             />
             <InfiniteScroll

@@ -6,7 +6,7 @@ import { Title } from '~/components'
 import { Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 
-import { UrlFragments } from '~/common/enums'
+import { TEXT, UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -110,8 +110,8 @@ const SidebarDigestWrapper = ({
       <Tooltip
         content={
           <Translate
-            zh_hant="該作品已從站內隱藏"
-            zh_hans="该作品已从站内隐藏"
+            zh_hant={TEXT.zh_hant.articleArchived}
+            zh_hans={TEXT.zh_hans.articleArchived}
           />
         }
         placement="left"

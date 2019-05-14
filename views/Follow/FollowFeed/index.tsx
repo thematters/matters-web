@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { FollowFeed } from './__generated__/FollowFeed'
@@ -81,10 +81,20 @@ export default () => {
 
         return (
           <>
-            <Head title={{ zh_hant: '追蹤', zh_hans: '追踪' }} />
+            <Head
+              title={{
+                zh_hant: TEXT.zh_hant.follow,
+                zh_hans: TEXT.zh_hans.follow
+              }}
+            />
 
             <PageHeader
-              pageTitle={<Translate zh_hant="追蹤" zh_hans="追踪" />}
+              pageTitle={
+                <Translate
+                  zh_hant={TEXT.zh_hant.follow}
+                  zh_hans={TEXT.zh_hans.follow}
+                />
+              }
             />
 
             <InfiniteScroll

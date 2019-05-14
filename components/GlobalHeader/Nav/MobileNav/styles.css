@@ -9,3 +9,8 @@
     font-weight: var(--font-weight-bold);
   }
 }
+
+.nav-button,
+.nav-link {
+  @mixin unread-dot-loose;
+}

@@ -1,12 +1,13 @@
 import getConfig from 'next/config'
 import { Quill } from 'react-quill'
 
+import { extractDomain } from '~/common/utils'
 import IMAGE_PLACEHOLDER from '~/static/images/image-placeholder.svg'
 
 const Delta = Quill.import('delta')
 
 const {
-  publicRuntimeConfig: { SITE_DOMAIN }
+  publicRuntimeConfig: { ASSET_DOMAIN }
 } = getConfig()
 
 /**
@@ -43,15 +44,10 @@ const b64toBlob = (
   return blob
 }
 
-const createImageMatcher = (
-  upload: (input: {
-    file?: any
-    url?: string
-  }) => Promise<{
-    id: string
-    path: string
-  }>
-) => (node: Element, delta: any) => {
+const createImageMatcher = (upload: DraftAssetUpload) => (
+  node: Element,
+  delta: any
+) => {
   // prevent recursion
   if (delta.ops[0].insert.imageFigure) {
     return delta
@@ -64,7 +60,8 @@ const createImageMatcher = (
   let imageFigure
   // don't upload if copying from matters internally
   // retrieve asset id from url
-  if (srcOrg.indexOf(SITE_DOMAIN) !== -1) {
+  const domain = extractDomain(ASSET_DOMAIN || '') || 'matters.news'
+  if (srcOrg.indexOf(domain) !== -1) {
     const assetId = srcOrg.split('/').slice(-2, -1)[0]
 
     imageFigure = {

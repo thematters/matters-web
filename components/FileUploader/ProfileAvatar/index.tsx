@@ -3,10 +3,14 @@ import { FC, useState } from 'react'
 
 import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
+import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
-import { ACCEPTED_UPLOAD_TYPES, UPLOAD_FILE_SIZE_LIMIT } from '~/common/enums'
+import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  UPLOAD_IMAGE_SIZE_LIMIT
+} from '~/common/enums'
 import ICON_CAMERA from '~/static/icons/camera-green.svg?sprite'
 
 import styles from './styles.css'
@@ -25,17 +29,6 @@ interface Props {
   user?: any
 }
 
-const MUTATION_UPLOAD_FILE = gql`
-  mutation SingleFileUpload($input: SingleFileUploadInput!) {
-    singleFileUpload(input: $input) {
-      ... on Asset {
-        id
-        path
-      }
-    }
-  }
-`
-
 const MUTATION_UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -46,7 +39,7 @@ const MUTATION_UPDATE_USER_INFO = gql`
 `
 
 export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
-  const acceptTypes = ACCEPTED_UPLOAD_TYPES.join(',')
+  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const [error, setError] = useState<'size' | undefined>(undefined)
 
@@ -60,12 +53,16 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_FILE_SIZE_LIMIT) {
+    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
       return undefined
     }
 
-    upload({ variables: { input: { file, type: 'avatar' } } })
+    upload({
+      variables: {
+        input: { file, type: 'avatar', entityType: 'user' }
+      }
+    })
       .then(({ data }: any) => {
         const {
           singleFileUpload: { id }
@@ -112,7 +109,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
             {error === 'size' && (
               <Translate
                 zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传档案超过 5 MB"
+                zh_hans="上传文件超过 5 MB"
               />
             )}
           </div>

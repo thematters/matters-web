@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
 import _get from 'lodash/get'
 
-import { ERROR_CODES, TEXT } from '~/common/enums'
+import { ADD_TOAST, ERROR_CODES, TEXT } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ModalSwitch } from '../ModalManager'
@@ -79,7 +79,7 @@ export const checkError = (error: ApolloError) => {
     }
 
     return window.dispatchEvent(
-      new CustomEvent('addToast', {
+      new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
           content: errorMessage,
@@ -125,7 +125,7 @@ export const checkError = (error: ApolloError) => {
     if (errorMap[code]) {
       isCatched = true
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: (

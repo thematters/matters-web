@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
@@ -46,10 +46,17 @@ const ALL_TAGSS = gql`
 const Tags = () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ zh_hant: '全部標籤', zh_hans: '全部标签' }} />
+      <Head
+        title={{ zh_hant: TEXT.zh_hant.allTags, zh_hans: TEXT.zh_hans.allTags }}
+      />
 
       <PageHeader
-        pageTitle={<Translate zh_hant="全部標籤" zh_hans="全部标签" />}
+        pageTitle={
+          <Translate
+            zh_hant={TEXT.zh_hant.allTags}
+            zh_hans={TEXT.zh_hans.allTags}
+          />
+        }
       />
 
       <section>

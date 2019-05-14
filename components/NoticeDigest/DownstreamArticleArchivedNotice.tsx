@@ -24,8 +24,8 @@ const DownstreamArticleArchivedNotice = ({
       <section className="content-wrap">
         <h4>
           <Translate
-            zh_hant="你的文章的引申文章"
-            zh_hans="你的文章的引申文章"
+            zh_hant="你的作品的引申作品"
+            zh_hans="你的作品的引申作品"
           />{' '}
           <NoticeArticle article={notice.target} />{' '}
           <Translate zh_hant="被隐藏" zh_hans="被隐藏" />

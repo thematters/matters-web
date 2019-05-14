@@ -108,6 +108,15 @@
   }
 }
 
+@define-mixin unread-dot-loose {
+  @mixin unread-dot;
+
+  &::after {
+    top: -0.25rem;
+    right: calc((var(--spacing-x-tight) + 0.25rem) * -1);
+  }
+}
+
 @define-mixin text-input {
   @mixin all-transition;
 

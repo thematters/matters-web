@@ -14,6 +14,7 @@ import {
 } from '~/components'
 import { Mutation } from '~/components/GQL'
 
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 import ICON_EDIT from '~/static/icons/collection-edit.svg?sprite'
 import ICON_SAVE from '~/static/icons/pen.svg?sprite'
@@ -94,7 +95,7 @@ const EditButton = ({
                     }
                   })
                   window.dispatchEvent(
-                    new CustomEvent('addToast', {
+                    new CustomEvent(ADD_TOAST, {
                       detail: {
                         color: 'green',
                         content: translate({
@@ -109,7 +110,7 @@ const EditButton = ({
                   )
                 } catch (error) {
                   window.dispatchEvent(
-                    new CustomEvent('addToast', {
+                    new CustomEvent(ADD_TOAST, {
                       detail: {
                         color: 'red',
                         content: translate({
@@ -127,7 +128,10 @@ const EditButton = ({
               }}
               outlineColor="green"
             >
-              <Translate zh_hant="完成" zh_hans="完成" />
+              <Translate
+                zh_hant={TEXT.zh_hant.done}
+                zh_hans={TEXT.zh_hans.done}
+              />
             </Button>
             <style jsx>{styles}</style>
           </span>

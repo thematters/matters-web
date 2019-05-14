@@ -20,7 +20,7 @@ section {
 }
 
 .default {
-  padding: 4rem var(--spacing-tight);
+  padding: 3.5rem var(--spacing-tight);
 
   @media (--sm-down) {
     padding: var(--spacing-default) var(--spacing-tight);

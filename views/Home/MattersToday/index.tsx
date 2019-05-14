@@ -2,7 +2,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Placeholder } from '~/components'
+import { Placeholder } from '~/components'
+import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -11,7 +12,7 @@ import { analytics } from '~/common/utils'
 import { HomeToday } from './__generated__/HomeToday'
 import styles from './styles.css'
 
-const HOME_TODAY = gql`
+export const HOME_TODAY = gql`
   query HomeToday(
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = true

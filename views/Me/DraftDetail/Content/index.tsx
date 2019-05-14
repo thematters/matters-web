@@ -6,7 +6,7 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { LanguageContext, Translate } from '~/components/Language'
+import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
 
 import { TEXT } from '~/common/enums'
@@ -21,24 +21,17 @@ const Editor = dynamic(() => import('~/components/Editor'), {
 })
 
 export const UPDATE_DRAFT = gql`
-  mutation UpdateDraft(
-    $id: ID!
-    $title: String
-    $content: String
-    $coverAssetId: ID
-  ) {
-    putDraft(
-      input: {
-        id: $id
-        title: $title
-        content: $content
-        coverAssetId: $coverAssetId
-      }
-    ) {
+  mutation UpdateDraft($id: ID!, $title: String, $content: String) {
+    putDraft(input: { id: $id, title: $title, content: $content }) {
       id
       title
       content
+      cover
       slug
+      assets {
+        id
+        path
+      }
     }
   }
 `
@@ -107,7 +100,14 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               <Editor
                 upload={async input => {
                   const result = await singleFileUpload({
-                    variables: { input: { ...input, type: 'embed' } }
+                    variables: {
+                      input: {
+                        type: 'embed',
+                        entityType: 'draft',
+                        entityId: draft.id,
+                        ...input
+                      }
+                    }
                   })
                   if (result) {
                     const {
@@ -117,23 +117,9 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
                     } = result
                     return { id, path }
                   } else {
-                    window.dispatchEvent(
-                      new CustomEvent('addToast', {
-                        detail: {
-                          color: 'red',
-                          content: (
-                            <Translate
-                              zh_hant="圖片上傳失敗"
-                              zh_hans="图片上传失败"
-                            />
-                          )
-                        }
-                      })
-                    )
                     throw new Error('upload not successful')
                   }
                 }}
-                uploading={uploading}
                 draft={draft}
                 onSave={async (newDraft: {
                   title?: string | null

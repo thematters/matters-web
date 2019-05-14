@@ -7,6 +7,7 @@ import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
 import { TextIcon } from '~/components/TextIcon'
 
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
 import ICON_CHECK_ACTIVE from '~/static/icons/checkbox-check-active.svg?sprite'
@@ -31,20 +32,28 @@ const FingerprintContent = ({
   return (
     <div className="dropdown-container">
       <div className="top-container">
-        {/* hash */}
+        複製成功{/* hash */}
         <section className="section-title">
           <h4>
-            <Translate zh_hans="文章指纹" zh_hant="文章指紋" />
+            <Translate
+              zh_hant={TEXT.zh_hant.articleFingerprint}
+              zh_hans={TEXT.zh_hans.articleFingerprint}
+            />
           </h4>
           <button
             type="button"
             onClick={() => {
               dom.copyToClipboard(dataHash)
               window.dispatchEvent(
-                new CustomEvent('addToast', {
+                new CustomEvent(ADD_TOAST, {
                   detail: {
                     color: 'green',
-                    content: <Translate zh_hant="複製成功" zh_hans="复制成功" />
+                    content: (
+                      <Translate
+                        zh_hant={TEXT.zh_hant.copySuccess}
+                        zh_hans={TEXT.zh_hans.copySuccess}
+                      />
+                    )
                   }
                 })
               )
@@ -62,11 +71,13 @@ const FingerprintContent = ({
               weight="medium"
               size="xs"
             >
-              <Translate zh_hant="複製" zh_hans="复制" />
+              <Translate
+                zh_hant={TEXT.zh_hant.copy}
+                zh_hans={TEXT.zh_hans.copy}
+              />
             </TextIcon>
           </button>
         </section>
-
         <input
           className="fingerprint-content"
           type="text"
@@ -74,7 +85,6 @@ const FingerprintContent = ({
           readOnly
           onClick={event => event.currentTarget.select()}
         />
-
         {/* gateways */}
         <section className="section-title">
           <h4>
@@ -106,7 +116,6 @@ const FingerprintContent = ({
             </TextIcon>
           </button>
         </section>
-
         <ul className="gateway-container">
           {gateways.slice(0, gatewaysExpand ? undefined : 2).map((url, i) => {
             const gatewayUrl = `${url}${dataHash}`
@@ -154,8 +163,8 @@ const FingerprintContent = ({
         {helpExpand && (
           <p>
             <Translate
-              zh_hans={`「指纹」是一篇文章上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取文章内容。\n\n「公共节点」是一篇文章在 IPFS 网络的存储地点，你可以使用任意公共节点地址对文章进行传播。`}
-              zh_hant={`「指紋」是一篇文章上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取文章內容。\n\n「公共節點」是一篇文章在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對文章進行傳播。`}
+              zh_hans={`「指纹」是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。\n\n「公共节点」是一篇作品在 IPFS 网络的存储地点，你可以使用任意公共节点地址对作品进行传播。`}
+              zh_hant={`「指紋」是一篇作品上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取作品內容。\n\n「公共節點」是一篇作品在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對作品進行傳播。`}
             />
           </p>
         )}
@@ -197,7 +206,7 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
           color="green"
           weight="medium"
         >
-          <Translate zh_hans="已发布至IPFS" zh_hant="已發佈至IPFS" />
+          <Translate zh_hans="已发布至 IPFS" zh_hant="已發佈至 IPFS" />
         </TextIcon>
         <style jsx>{styles}</style>
       </button>

@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { Query } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -41,7 +41,12 @@ const SEARCH_USERS = gql`
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader is="h2" pageTitle={<Translate zh_hant="用戶" zh_hans="用户" />}>
+  <PageHeader
+    is="h2"
+    pageTitle={
+      <Translate zh_hant={TEXT.zh_hant.user} zh_hans={TEXT.zh_hans.user} />
+    }
+  >
     {viewAll && q && <ViewAll q={q} type="user" />}
   </PageHeader>
 )
@@ -53,8 +58,8 @@ const EmptySearchResult = () => {
       <EmptySearch
         description={
           <Translate
-            zh_hant="沒有找到你搜尋的內容。"
-            zh_hans="没有找到你搜索的内容。"
+            zh_hant={TEXT.zh_hant.emptySearchResults}
+            zh_hans={TEXT.zh_hans.emptySearchResults}
           />
         }
       />

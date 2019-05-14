@@ -6,7 +6,7 @@ import { getErrorCodes, Mutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -72,7 +72,7 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
         )
 
         window.dispatchEvent(
-          new CustomEvent('addToast', {
+          new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
               content: errorMessage
@@ -95,10 +95,14 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
             onClick={(event: any) => sendCode({ event, email, send })}
           >
             {sent
-              ? translate({ zh_hant: '重新發送', zh_hans: '重新发送', lang })
+              ? translate({
+                  zh_hant: TEXT.zh_hant.resend,
+                  zh_hans: TEXT.zh_hans.resend,
+                  lang
+                })
               : translate({
-                  zh_hant: '發送驗證碼',
-                  zh_hans: '发送验证码',
+                  zh_hant: TEXT.zh_hant.sendVerificationCode,
+                  zh_hans: TEXT.zh_hans.sendVerificationCode,
                   lang
                 })}
             {sent && countdown.timeLeft !== 0 && (

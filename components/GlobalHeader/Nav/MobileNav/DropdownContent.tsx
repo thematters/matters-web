@@ -4,21 +4,23 @@ import { withRouter, WithRouterProps } from 'next/router'
 
 import { Menu, Translate } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
 const DropdownContent: React.FC<
   WithRouterProps & {
     hideDropdown: () => void
+    unread: boolean
   }
-> = ({ router, hideDropdown }) => {
+> = ({ router, hideDropdown, unread }) => {
   const homeClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.HOME.href
   })
   const followClasses = classNames({
     'nav-link': true,
+    unread,
     active: router && router.pathname === PATHS.FOLLOW.href
   })
 
@@ -28,14 +30,20 @@ const DropdownContent: React.FC<
         <Menu.Item>
           <Link {...PATHS.HOME}>
             <a onClick={hideDropdown} className={homeClasses}>
-              <Translate zh_hant="發現" zh_hans="发现" />
+              <Translate
+                zh_hant={TEXT.zh_hant.discover}
+                zh_hans={TEXT.zh_hans.discover}
+              />
             </a>
           </Link>
         </Menu.Item>
         <Menu.Item>
           <Link {...PATHS.FOLLOW}>
             <a onClick={hideDropdown} className={followClasses}>
-              <Translate zh_hant="追蹤" zh_hans="追踪" />
+              <Translate
+                zh_hant={TEXT.zh_hant.follow}
+                zh_hans={TEXT.zh_hans.follow}
+              />
             </a>
           </Link>
         </Menu.Item>

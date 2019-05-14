@@ -19,7 +19,7 @@ const UpstreamArticleArchivedNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <h4>
-          <Translate zh_hant="你的文章上游" zh_hans="你的文章上游" />{' '}
+          <Translate zh_hant="你的作品上游" zh_hans="你的作品上游" />{' '}
           <NoticeArticle article={notice.upstream} />{' '}
           <Translate zh_hant="已断开" zh_hans="已断开" />
         </h4>

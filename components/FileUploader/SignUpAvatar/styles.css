@@ -1,7 +1,6 @@
 .container {
   @mixin flex-center-space-between;
   font-size: var(--font-size-md);
-  padding-bottom: var(--spacing-default);
 }
 
 .upload {
@@ -39,6 +38,5 @@
 .error {
   color: var(--color-red);
   font-size: var(--font-size-xs);
-  height: 1rem;
   min-height: 1rem;
 }
