@@ -61,7 +61,7 @@ export const initAudioPlayers = () => {
       timeUpdate()
     }
     $play.setAttribute('role', 'button')
-    $play.setAttribute('aria-label', '播放')
+    pause()
 
     /**
      * Events
