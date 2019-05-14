@@ -171,8 +171,8 @@ export default () => {
                         )}
                       </ul>
                     </InfiniteScroll>
-                    {!match && pageInfo.hasNextPage && !loading && (
-                      <LoadMore onClick={loadMore} />
+                    {!match && pageInfo.hasNextPage && (
+                      <LoadMore onClick={loadMore} loading={loading} />
                     )}
                   </>
                 )}

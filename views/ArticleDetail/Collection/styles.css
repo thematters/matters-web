@@ -56,9 +56,4 @@ li {
 .load-more {
   padding: var(--spacing-tight) var(--collection-list-spacing)
     var(--spacing-x-tight);
-
-  & :global(svg) {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
 }

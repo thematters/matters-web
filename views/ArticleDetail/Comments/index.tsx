@@ -5,7 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { InfiniteScroll, Spinner, Translate } from '~/components'
+import { LoadMore, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
@@ -46,15 +46,19 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   return (
-    <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
+    <Query
+      query={ARTICLE_COMMENTS}
+      variables={{ mediaHash, uuid, first: 8 }}
+      notifyOnNetworkStatusChange
+    >
       {({
         data,
         loading,
         fetchMore,
         subscribeToMore
       }: QueryResult & { data: ArticleCommentsType }) => {
-        if (loading) {
-          return <Spinner />
+        if (!data || !data.article) {
+          return null
         }
 
         const connectionPath = 'article.comments'
@@ -87,14 +91,16 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 })
             })
           }
+        })
 
+        useEffect(() => {
           if (
             process.browser &&
             window.location.hash === `#${UrlFragments.COMMENTS}`
           ) {
             dom.scrollTo('#comments-hook')
           }
-        })
+        }, [])
 
         return (
           <section className="comments" id="comments-hook">
@@ -119,22 +125,21 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               {!filteredAllComments ||
                 (filteredAllComments.length <= 0 && <EmptyComment />)}
 
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-              >
-                <ul>
-                  {filteredAllComments.map(comment => (
-                    <li key={comment.id}>
-                      <CommentDigest.Feed
-                        comment={comment}
-                        hasComment
-                        inArticle
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </InfiniteScroll>
+              <ul>
+                {filteredAllComments.map(comment => (
+                  <li key={comment.id}>
+                    <CommentDigest.Feed
+                      comment={comment}
+                      hasComment
+                      inArticle
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              {pageInfo.hasNextPage && (
+                <LoadMore onClick={() => loadMore()} loading={loading} />
+              )}
             </section>
 
             <style jsx>{styles}</style>

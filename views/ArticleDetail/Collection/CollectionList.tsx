@@ -128,6 +128,7 @@ const CollectionList = ({
                     <Icon
                       id={ICON_MORE_CONTENT.id}
                       viewBox={ICON_MORE_CONTENT.viewBox}
+                      size="small"
                     />
                   }
                   color="green"
