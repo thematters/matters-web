@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { MouseEventHandler, useEffect } from 'react'
+import { MouseEventHandler } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 
-import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
-import { analytics, numAbbr } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, dom, numAbbr } from '~/common/utils'
 import ICON_COMMENT_REGULAR from '~/static/icons/comment-regular.svg?sprite'
 
 import { CommentButtonArticle } from './__generated__/CommentButtonArticle'
@@ -22,17 +22,13 @@ const fragments = {
 
 const ButtonWithEffect = ({
   onClick,
-  effect,
   text,
   textPlacement
 }: {
   onClick: MouseEventHandler
-  effect: () => (() => void) | void
   text: string
   textPlacement?: 'bottom' | 'right'
 }) => {
-  useEffect(effect, [process.browser && window.location.pathname])
-
   return (
     <button type="button" aria-label="查看評論" onClick={onClick}>
       <TextIcon
@@ -64,19 +60,12 @@ const CommentButton = ({
   return (
     <ButtonWithEffect
       onClick={() => {
-        // TODO
+        dom.scrollTo('#comments-hook')
+
         analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
           entrance: article.id,
           type: 'article-detail'
         })
-      }}
-      effect={() => {
-        if (
-          process.browser &&
-          window.location.hash === `#${UrlFragments.COMMENTS}`
-        ) {
-          open()
-        }
       }}
       text={numAbbr(_get(article, 'commentCount', 0))}
       textPlacement={textPlacement}

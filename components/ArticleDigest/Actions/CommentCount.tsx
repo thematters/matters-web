@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr, toPath } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
@@ -42,7 +42,7 @@ const CommentCount = ({
     userName: author.userName,
     slug,
     mediaHash,
-    fragment: 'comments'
+    fragment: UrlFragments.COMMENTS
   })
 
   return (

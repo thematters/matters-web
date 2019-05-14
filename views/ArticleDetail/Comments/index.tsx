@@ -14,8 +14,8 @@ import { ArticleDetailComments } from '~/components/GQL/fragments/article'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 
-import { TEXT } from '~/common/enums'
-import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+import { TEXT, UrlFragments } from '~/common/enums'
+import { dom, filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -87,10 +87,17 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 })
             })
           }
+
+          if (
+            process.browser &&
+            window.location.hash === `#${UrlFragments.COMMENTS}`
+          ) {
+            dom.scrollTo('#comments-hook')
+          }
         })
 
         return (
-          <section className="comments">
+          <section className="comments" id="comments-hook">
             <header>
               <h2>
                 <Translate
