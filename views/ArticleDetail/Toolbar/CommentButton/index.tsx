@@ -3,7 +3,6 @@ import _get from 'lodash/get'
 import { MouseEventHandler, useEffect } from 'react'
 
 import { Icon, TextIcon } from '~/components'
-import { DrawerConsumer } from '~/components/Drawer'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr } from '~/common/utils'
@@ -63,33 +62,25 @@ const CommentButton = ({
   textPlacement?: 'bottom' | 'right'
 }) => {
   return (
-    <DrawerConsumer>
-      {({ opened, open, close }) => (
-        <ButtonWithEffect
-          onClick={() => {
-            if (opened) {
-              close()
-            } else {
-              open()
-              analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-                entrance: article.id,
-                type: 'article-detail'
-              })
-            }
-          }}
-          effect={() => {
-            if (
-              process.browser &&
-              window.location.hash === `#${UrlFragments.COMMENTS}`
-            ) {
-              open()
-            }
-          }}
-          text={numAbbr(_get(article, 'commentCount', 0))}
-          textPlacement={textPlacement}
-        />
-      )}
-    </DrawerConsumer>
+    <ButtonWithEffect
+      onClick={() => {
+        // TODO
+        analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+          entrance: article.id,
+          type: 'article-detail'
+        })
+      }}
+      effect={() => {
+        if (
+          process.browser &&
+          window.location.hash === `#${UrlFragments.COMMENTS}`
+        ) {
+          open()
+        }
+      }}
+      text={numAbbr(_get(article, 'commentCount', 0))}
+      textPlacement={textPlacement}
+    />
   )
 }
 

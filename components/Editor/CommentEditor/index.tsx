@@ -15,6 +15,7 @@ import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageConsumer } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 
+import { TEXT } from '~/common/enums'
 import contentStyles from '~/common/styles/utils/content.comment.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
@@ -24,6 +25,7 @@ import styles from './styles.css'
 
 interface Props {
   content?: string
+  expand?: boolean
   handleChange: (props: any) => any
   handleBlur?: (props: any) => any
   lang: Language
@@ -100,11 +102,29 @@ class CommentEditor extends React.Component<Props, State> {
 
   render() {
     const { focus, search, mentionInstance } = this.state
-    const { content, handleChange, lang } = this.props
+    const { content, expand, handleChange, lang } = this.props
     const containerClasses = classNames({
       container: true,
       focus
     })
+    const placeholder = translate({
+      zh_hant: TEXT.zh_hant.commentPlaceholder,
+      zh_hans: TEXT.zh_hans.commentPlaceholder,
+      lang
+    })
+
+    if (!expand) {
+      return (
+        <>
+          <input
+            className="collapsed-input"
+            placeholder={placeholder}
+            aria-label={placeholder}
+          />
+          <style jsx>{styles}</style>
+        </>
+      )
+    }
 
     return (
       <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
@@ -131,11 +151,7 @@ class CommentEditor extends React.Component<Props, State> {
                   formats={config.foramts}
                   ref={this.reactQuillRef}
                   value={content}
-                  placeholder={translate({
-                    zh_hant: '發表你的評論…',
-                    zh_hans: '发表你的评论…',
-                    lang
-                  })}
+                  placeholder={placeholder}
                   onChange={handleChange}
                   onFocus={() => this.setState({ focus: true })}
                   onBlur={() => this.setState({ focus: false })}
