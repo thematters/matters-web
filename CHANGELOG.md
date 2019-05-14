@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2019-05-14
+
+### Added
+
+- Enable dropping image into editor #246
+- Add extend article button in article detail page #252
+- Expandable collectedBy articles #253
+- Audio Support #254
+- Self activation by comment #255
+- Add cover selector #256
+- Events trackers for collection #263
+- Add author picker into signup procedure #266
+- Notice dot for "Follow" page #268
+
+### Changed
+
+- Alter singleFileUpload for asset mapping #251
+- Alter same domain checker for editor #257
+- Simplify publishing procedure #258
+- Update collection expand icon #259
+- Make signup profile step unskipped #260
+- Update password rule #261
+- Fix text copy #262
+- Revise descriptions #264
+- Add "ASSET_DOMAIN" env to fix dups upload image by "createImageMatcher" #265
+- URI munging #267
+- Fix typo #269 #270
+- Alter publishing state toast #271
+- No longer need a cover to publish an article #272
+- Enable collection for all #273
+- Fix audio player button show as playing state #274
+
 ## [1.6.1] - 2019-04-30
 
 ### Added
