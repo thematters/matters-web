@@ -1,5 +1,5 @@
 export const getUserAgent = () =>
-  (navigator && navigator.userAgent || '').toLowerCase()
+  ((navigator && navigator.userAgent) || '').toLowerCase()
 
 export const isSafari = () => {
   const userAgent = getUserAgent()
