@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
@@ -37,10 +38,12 @@ const fragments = {
 
 const Toolbar = ({
   article,
-  placement
+  placement,
+  fixed
 }: {
   article: ToolbarArticle
   placement: 'bottom' | 'left'
+  fixed?: boolean
 }) => {
   if (placement === 'left') {
     return (
@@ -57,8 +60,13 @@ const Toolbar = ({
     )
   }
 
+  const bottomToolbarClass = classNames({
+    'toolbar-bottom': true,
+    fixed
+  })
+
   return (
-    <section className="toolbar-bottom">
+    <section className={bottomToolbarClass}>
       <section className="left">
         <MATButton article={article} />
         <Appreciators article={article} />

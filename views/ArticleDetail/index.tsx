@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
+import { Waypoint } from 'react-waypoint'
 
 import { DateTime, Head, Placeholder, Title, Translate } from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
@@ -87,6 +88,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
         loading,
         subscribeToMore
       }: QueryResult & { data: ArticleDetailType }) => {
+        const [fixedToolbar, setFixedToolbar] = useState(true)
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
         const canEditCollection = viewer.id === authorId
@@ -188,7 +190,19 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                       <Toolbar placement="left" article={data.article} />
                     </section>
 
-                    <Toolbar placement="bottom" article={data.article} />
+                    <Waypoint
+                      onEnter={() => {
+                        setFixedToolbar(false)
+                      }}
+                      onLeave={() => {
+                        setFixedToolbar(true)
+                      }}
+                    />
+                    <Toolbar
+                      placement="bottom"
+                      article={data.article}
+                      fixed={fixedToolbar}
+                    />
 
                     <Comments />
 
