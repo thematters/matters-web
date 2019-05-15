@@ -83,9 +83,10 @@ const CommentForm = ({
   >
     {putComment => {
       const [isSubmitting, setSubmitting] = useState(false)
+      const [expand, setExpand] = useState(false)
       const [content, setContent] = useState(defaultContent || '')
       const viewer = useContext(ViewerContext)
-      const isValid = !!content
+      const isValid = !!trimLineBreaks(content)
 
       const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const mentions = dom.getAttributes('data-id', content)
@@ -154,9 +155,14 @@ const CommentForm = ({
       }
 
       return (
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className={expand ? 'expand' : ''}
+          onFocus={() => setExpand(true)}
+        >
           <CommentEditor
             content={content}
+            expand={expand}
             handleChange={value => setContent(value)}
           />
           <div className="buttons">

@@ -7,7 +7,7 @@ export default gql`
     node(input: { id: $id }) {
       ... on Comment {
         id
-        comments(input: { sort: oldest, first: 100 })
+        comments(input: { sort: oldest, first: null })
           @include(if: $hasDescendantComments) {
           edges {
             cursor

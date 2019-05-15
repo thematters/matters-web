@@ -29,8 +29,6 @@
   display: flex;
   flex-direction: column;
 
-  margin-bottom: var(--spacing-x-loose);
-
   @media (--sm-up) {
     flex-direction: row;
     justify-content: space-between;

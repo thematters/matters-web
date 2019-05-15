@@ -1,13 +1,10 @@
+.comments {
+  padding-top: var(--spacing-xx-loose);
+}
+
 header {
   @mixin flex-center-space-between;
   padding-bottom: var(--spacing-tight);
-
-  @supports (position: sticky) {
-    position: sticky;
-    top: 0;
-    padding-top: var(--spacing-loose);
-    background: var(--color-white);
-  }
 }
 
 h2,

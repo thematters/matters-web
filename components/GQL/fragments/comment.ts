@@ -35,7 +35,7 @@ export default {
   feed: gql`
     fragment FeedDigestComment on Comment {
       ...BaseDigestComment
-      comments(input: { sort: oldest, first: 100 })
+      comments(input: { sort: oldest, first: null })
         @include(if: $hasDescendantComments) {
         edges {
           cursor

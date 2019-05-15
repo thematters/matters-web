@@ -1,23 +1,30 @@
 import { Button, Translate } from '~/components'
 
+import { Spinner } from '../Spinner'
 import styles from './styles.css'
 
 export const LoadMore = ({
   onClick,
-  text
+  text,
+  loading
 }: {
   onClick: () => void
   text?: any
+  loading?: boolean
 }) => (
   <div className="container">
-    <Button
-      bgColor="green-lighter"
-      outlineColor="green"
-      spacing="loose"
-      onClick={onClick}
-    >
-      {text ? text : <Translate zh_hans="查看更多" zh_hant="查看更多" />}
-    </Button>
+    {loading ? (
+      <Spinner />
+    ) : (
+      <Button
+        bgColor="green-lighter"
+        outlineColor="green"
+        spacing="loose"
+        onClick={onClick}
+      >
+        {text ? text : <Translate zh_hans="查看更多" zh_hant="查看更多" />}
+      </Button>
+    )}
     <style jsx>{styles}</style>
   </div>
 )
