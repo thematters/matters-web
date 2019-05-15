@@ -1,17 +1,20 @@
 import { Quill } from 'react-quill'
 
+import { dom, isSafari } from '~/common/utils'
+
 const Clipboard = Quill.import('modules/clipboard')
 
 class RemadeClipboard extends Clipboard {
   onPaste(event: any) {
-    const html = document.querySelector('html')
-    const scrollTop = html ? html.scrollTop || 0 : 0
+    const target = isSafari() ? 'body' : 'html'
+    const element = dom.$(target)
+    const scrollTop = element ? element.scrollTop || 0 : 0
 
     super.onPaste(event)
 
     setTimeout(() => {
-      if (html) {
-        html.scrollTop = scrollTop
+      if (element) {
+        element.scrollTop = scrollTop
       }
     }, 1)
   }
