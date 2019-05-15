@@ -74,10 +74,10 @@ const Toolbar = ({
       <section className="right">
         <CommentButton article={article} />
         <CollectedByButton article={article} popperPlacement="top" />
+        <ExtendButton article={article} />
         <BookmarkButton article={article} size="default" />
         <ShareButton />
         <MoreButton article={article} />
-        <ExtendButton article={article} />
       </section>
       <style jsx>{styles}</style>
     </section>

@@ -56,15 +56,17 @@
   }
 
   &.fixed .right {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    padding: var(--spacing-tight);
+    @media (--sm-down) {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      padding: var(--spacing-tight);
 
-    background: var(--color-white);
-    box-shadow: -8px 0px 24px rgba(0, 0, 0, 0.08);
-    z-index: 4;
+      background: var(--color-white);
+      box-shadow: -8px 0px 24px rgba(0, 0, 0, 0.08);
+      z-index: 5;
+    }
   }
 }

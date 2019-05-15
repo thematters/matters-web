@@ -74,6 +74,7 @@ const ARTICLE_DETAIL = gql`
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
+  const [fixedToolbar, setFixedToolbar] = useState(true)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -88,7 +89,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
         loading,
         subscribeToMore
       }: QueryResult & { data: ArticleDetailType }) => {
-        const [fixedToolbar, setFixedToolbar] = useState(true)
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
         const canEditCollection = viewer.id === authorId
@@ -191,11 +191,12 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     </section>
 
                     <Waypoint
-                      onEnter={() => {
-                        setFixedToolbar(false)
-                      }}
-                      onLeave={() => {
-                        setFixedToolbar(true)
+                      onPositionChange={({ currentPosition }) => {
+                        if (currentPosition === 'below') {
+                          setFixedToolbar(true)
+                        } else {
+                          setFixedToolbar(false)
+                        }
                       }}
                     />
                     <Toolbar
