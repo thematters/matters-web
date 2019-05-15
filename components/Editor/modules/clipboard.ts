@@ -5,7 +5,7 @@ const Clipboard = Quill.import('modules/clipboard')
 class RemadeClipboard extends Clipboard {
   onPaste(event: any) {
     const html = document.querySelector('html')
-    const scrollTop = html ? (html.scrollTop || 0) : 0
+    const scrollTop = html ? html.scrollTop || 0 : 0
 
     super.onPaste(event)
 
