@@ -6,7 +6,14 @@ import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
 
-import { DateTime, Head, Placeholder, Title, Translate } from '~/components'
+import {
+  DateTime,
+  Head,
+  Placeholder,
+  Responsive,
+  Title,
+  Translate
+} from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
@@ -75,12 +82,44 @@ const ARTICLE_DETAIL = gql`
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [reading, setReading] = useState(true)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
   if (!mediaHash && !uuid) {
     return null
   }
+
+  let lastKnownScrollY = 0
+  let currentScrollY = 0
+  let ticking = false
+
+  function onScroll() {
+    currentScrollY = window.pageYOffset
+    requestTick()
+  }
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(update)
+    }
+    ticking = true
+  }
+  function update() {
+    if (currentScrollY < lastKnownScrollY) {
+      document.documentElement.classList.remove('immersive-mode')
+    } else if (currentScrollY > lastKnownScrollY && reading) {
+      document.documentElement.classList.add('immersive-mode')
+    }
+    lastKnownScrollY = currentScrollY
+    ticking = false
+  }
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll, false)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  })
 
   return (
     <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
@@ -149,66 +188,89 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 })
 
                 return (
-                  <>
-                    <Head
-                      title={data.article.title}
-                      description={data.article.summary}
-                      keywords={data.article.tags.map(
-                        ({ content }: { content: any }) => content
-                      )}
-                      image={data.article.cover}
-                    />
-
-                    <State article={data.article} />
-
-                    <section className="author">
-                      <UserDigest.FullDesc user={data.article.author} />
-                    </section>
-
-                    <section className="title">
-                      <Title type="article">{data.article.title}</Title>
-                      <span className="subtitle">
-                        <p className="date">
-                          <DateTime date={data.article.createdAt} />
-                        </p>
-                        <span>
-                          {data.article.live && <IconLive />}
-                          {(collectionCount > 0 || canEditCollection) && (
-                            <CollectionMeta
-                              article={data.article}
-                              count={collectionCount}
-                              canEditCollection={canEditCollection}
-                            />
+                  <Responsive.MediumUp>
+                    {(isMediumUp: boolean) => (
+                      <>
+                        <Head
+                          title={data.article.title}
+                          description={data.article.summary}
+                          keywords={data.article.tags.map(
+                            ({ content }: { content: any }) => content
                           )}
-                        </span>
-                      </span>
-                    </section>
+                          image={data.article.cover}
+                        />
 
-                    <section className="content">
-                      <Content article={data.article} />
-                      <TagList article={data.article} />
-                      <Toolbar placement="left" article={data.article} />
-                    </section>
+                        <State article={data.article} />
 
-                    <Waypoint
-                      onPositionChange={({ currentPosition }) => {
-                        if (currentPosition === 'below') {
-                          setFixedToolbar(true)
-                        } else {
-                          setFixedToolbar(false)
-                        }
-                      }}
-                    />
-                    <Toolbar
-                      placement="bottom"
-                      article={data.article}
-                      fixed={fixedToolbar}
-                    />
+                        <section className="author">
+                          <UserDigest.FullDesc user={data.article.author} />
+                        </section>
 
-                    <Comments />
+                        <section className="title">
+                          <Title type="article">{data.article.title}</Title>
+                          <span className="subtitle">
+                            <p className="date">
+                              <DateTime date={data.article.createdAt} />
+                            </p>
+                            <span>
+                              {data.article.live && <IconLive />}
+                              {(collectionCount > 0 || canEditCollection) && (
+                                <CollectionMeta
+                                  article={data.article}
+                                  count={collectionCount}
+                                  canEditCollection={canEditCollection}
+                                />
+                              )}
+                            </span>
+                          </span>
+                        </section>
 
-                    <RelatedArticles article={data.article} />
-                  </>
+                        {/* content:start */}
+                        {!isMediumUp && (
+                          <Waypoint
+                            topOffset={64}
+                            onPositionChange={({ currentPosition }) => {
+                              console.log(currentPosition)
+                              if (currentPosition === 'above') {
+                                setReading(true)
+                              } else {
+                                setReading(false)
+                              }
+                            }}
+                          />
+                        )}
+
+                        <section className="content">
+                          <Content article={data.article} />
+                          <TagList article={data.article} />
+                          <Toolbar placement="left" article={data.article} />
+                        </section>
+
+                        {/* content:end */}
+                        {!isMediumUp && (
+                          <Waypoint
+                            onPositionChange={({ currentPosition }) => {
+                              if (currentPosition === 'below') {
+                                setFixedToolbar(true)
+                              } else {
+                                setFixedToolbar(false)
+                              }
+                            }}
+                          />
+                        )}
+
+                        <Toolbar
+                          placement="bottom"
+                          article={data.article}
+                          fixed={fixedToolbar}
+                        />
+
+                        <Comments />
+
+                        <RelatedArticles article={data.article} />
+                      </>
+                    )}
+                  </Responsive.MediumUp>
                 )
               })()}
 
