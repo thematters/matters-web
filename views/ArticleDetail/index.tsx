@@ -18,6 +18,7 @@ import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
+import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
@@ -82,44 +83,12 @@ const ARTICLE_DETAIL = gql`
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
-  const [reading, setReading] = useState(true)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
   if (!mediaHash && !uuid) {
     return null
   }
-
-  let lastKnownScrollY = 0
-  let currentScrollY = 0
-  let ticking = false
-
-  function onScroll() {
-    currentScrollY = window.pageYOffset
-    requestTick()
-  }
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(update)
-    }
-    ticking = true
-  }
-  function update() {
-    if (currentScrollY < lastKnownScrollY) {
-      document.documentElement.classList.remove('immersive-mode')
-    } else if (currentScrollY > lastKnownScrollY && reading) {
-      document.documentElement.classList.add('immersive-mode')
-    }
-    lastKnownScrollY = currentScrollY
-    ticking = false
-  }
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll, false)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-    }
-  })
 
   return (
     <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
@@ -187,6 +156,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   }
                 })
 
+                useImmersiveMode('article > .content')
+
                 return (
                   <Responsive.MediumUp>
                     {(isMediumUp: boolean) => (
@@ -224,21 +195,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             </span>
                           </span>
                         </section>
-
-                        {/* content:start */}
-                        {!isMediumUp && (
-                          <Waypoint
-                            topOffset={64}
-                            onPositionChange={({ currentPosition }) => {
-                              console.log(currentPosition)
-                              if (currentPosition === 'above') {
-                                setReading(true)
-                              } else {
-                                setReading(false)
-                              }
-                            }}
-                          />
-                        )}
 
                         <section className="content">
                           <Content article={data.article} />
