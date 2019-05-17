@@ -54,4 +54,30 @@
       }
     }
   }
+
+  &.fixed .right {
+    @media (--md-down) {
+      @mixin all-transition;
+
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      padding: var(--spacing-tight);
+
+      background: var(--color-white);
+      box-shadow: -8px 0px 24px rgba(0, 0, 0, 0.08);
+      z-index: 5;
+    }
+  }
+}
+
+:global(.immersive-mode) {
+  @media (--md-down) {
+    & .toolbar-bottom.fixed .right {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
 }
