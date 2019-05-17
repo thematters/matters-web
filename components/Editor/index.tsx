@@ -216,7 +216,7 @@ class Editor extends React.Component<Props, State> {
 
           return (
             <>
-              <div className={containerClasses}>
+              <div className={containerClasses} id="article-editor">
                 <ReactQuill
                   readOnly={isPending || isPublished}
                   theme="bubble"
