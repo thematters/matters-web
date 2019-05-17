@@ -16,6 +16,7 @@ const fragments = {
       cover
       assets {
         id
+        type
         path
       }
     }
@@ -74,7 +75,10 @@ const CoverList = ({
 const AddCover = ({ draft }: any) => {
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
-  const hasAssets = assets && assets.length > 0
+  const imageAssets = assets.filter(
+    ({ type }: { type: string }) => type === 'embed'
+  )
+  const hasAssets = imageAssets && imageAssets.length > 0
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
   const containerStyle = classNames({
@@ -101,7 +105,7 @@ const AddCover = ({ draft }: any) => {
               updateHeaderState={updateHeaderState}
               update={update}
               cover={cover}
-              assets={assets}
+              assets={imageAssets}
             />
           )}
         </Mutation>
