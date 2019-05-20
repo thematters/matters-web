@@ -55,7 +55,7 @@ const USER_COMMENT_FEED = gql`
                 userName
               }
               mediaHash
-              comments(input: { filter: { author: $id } }) {
+              comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor
                   node {
