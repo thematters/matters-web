@@ -59,6 +59,13 @@ const scrollTo = (selector: string) => {
   })
 }
 
+const scrollBy = (distance: number) => {
+  window.scrollBy({
+    top: distance,
+    behavior: 'smooth'
+  })
+}
+
 export const getLangFromRoot = (): HTMLLanguage => {
   return (document.documentElement.getAttribute('lang') ||
     'zh-Hant') as HTMLLanguage
@@ -71,6 +78,7 @@ export const dom = {
   getWindowWidth,
   offset,
   scrollTo,
+  scrollBy,
   copyToClipboard,
   getAttributes,
   getLangFromRoot
