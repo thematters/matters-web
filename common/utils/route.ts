@@ -125,6 +125,21 @@ export const getQuery = ({
   return value instanceof Array ? value[0] : value
 }
 
+export const getFragment = ({
+  router,
+  pattern
+}: {
+  router?: SingletonRouter
+  pattern: string
+}) => {
+  if (router && router.asPath) {
+    const regex = new RegExp(pattern)
+    const match = router.asPath.match(regex)
+    return match ? match[1] : ''
+  }
+  return ''
+}
+
 export const redirectToTarget = () => {
   if (!process.browser) {
     return

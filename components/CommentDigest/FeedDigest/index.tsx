@@ -140,7 +140,7 @@ const FeedDigest = ({
   const [expand, setExpand] = useState(restDescendantCommentCount <= 0)
 
   return (
-    <section className="container">
+    <section className="container" id={`comment-${comment.id}`}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
