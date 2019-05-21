@@ -10,7 +10,6 @@ type ToPathArgs =
       slug: string
       mediaHash: string
       fragment?: string
-      anchor?: string
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -51,23 +50,15 @@ type ToPathArgs =
       type?: 'article' | 'tag' | 'user'
     }
 
-const getAnchor = (
-  anchor: string | undefined
-): { param: string; id: string } => ({
-  param: anchor ? `&anchor=${anchor}` : '',
-  id: anchor ? `=${anchor}` : ''
-})
-
 export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   switch (args.page) {
     case 'articleDetail':
       const asUrl = `/@${args.userName}/${args.slug}-${args.mediaHash}`
-      const anchor = getAnchor(args.anchor)
       return {
         href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${
           args.slug
-        }&mediaHash=${args.mediaHash}${anchor.param}`,
-        as: args.fragment ? `${asUrl}#${args.fragment}${anchor.id}` : asUrl
+        }&mediaHash=${args.mediaHash}`,
+        as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl
       }
     case 'draftDetail':
       return {
@@ -134,7 +125,7 @@ export const getQuery = ({
   return value instanceof Array ? value[0] : value
 }
 
-export const getHash = ({
+export const getFragment = ({
   router,
   pattern
 }: {

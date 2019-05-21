@@ -218,7 +218,6 @@ export const ROUTES: Array<{
 ]
 
 export const UrlFragments = {
-  COMMENT: 'comment',
   COMMENTS: 'comments'
 }
 

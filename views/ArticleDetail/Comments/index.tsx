@@ -13,9 +13,15 @@ import { Query } from '~/components/GQL'
 import { ArticleDetailComments } from '~/components/GQL/fragments/article'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
+import { useScrollTo } from '~/components/Hook'
 
 import { TEXT, UrlFragments } from '~/common/enums'
-import { dom, filterComments, getQuery, mergeConnections } from '~/common/utils'
+import {
+  filterComments,
+  getFragment,
+  getQuery,
+  mergeConnections
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -25,6 +31,9 @@ const SUBSCRIBE_COMMENTS = gql`
     $first: Int!
     $cursor: String
     $hasDescendantComments: Boolean = true
+    $before: String
+    $includeAfter: Boolean
+    $includeBefore: Boolean
   ) {
     nodeEdited(input: { id: $id }) {
       id
@@ -40,6 +49,8 @@ const SUBSCRIBE_COMMENTS = gql`
 const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
+  const fragment = getFragment({ router, pattern: '#([^&]+)(&|$)' })
+  const before = fragment === UrlFragments.COMMENTS ? null : fragment
 
   if (!mediaHash && !uuid) {
     return <EmptyComment />
@@ -48,7 +59,13 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   return (
     <Query
       query={ARTICLE_COMMENTS}
-      variables={{ mediaHash, uuid, first: 8 }}
+      variables={{
+        mediaHash,
+        uuid,
+        first: before ? null : 8,
+        before: before || undefined,
+        includeBefore: !!before
+      }}
       notifyOnNetworkStatusChange
     >
       {({
@@ -66,7 +83,9 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         const loadMore = () =>
           fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              cursor: pageInfo.endCursor,
+              before: null,
+              first: 8
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({
@@ -93,14 +112,28 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           }
         })
 
-        useEffect(() => {
-          if (
-            process.browser &&
-            window.location.hash === `#${UrlFragments.COMMENTS}`
-          ) {
-            dom.scrollTo('#comments-hook')
+        const getScrollOptions = (param: string) => {
+          switch (param) {
+            case 'comments': {
+              return {
+                selector: `#${param}-hook`,
+                offset: -10
+              }
+            }
+            default: {
+              return {
+                selector: `#comment-${param}`,
+                offset: -80
+              }
+            }
           }
-        }, [])
+        }
+
+        useScrollTo({
+          enable: !!fragment,
+          trigger: [router],
+          ...getScrollOptions(fragment)
+        })
 
         return (
           <section className="comments" id="comments-hook">

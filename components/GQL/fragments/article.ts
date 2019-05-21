@@ -9,7 +9,14 @@ export const ArticleDetailComments = gql`
       ...FeedDigestComment
     }
     comments(
-      input: { filter: { parentComment: null }, first: $first, after: $cursor }
+      input: {
+        filter: { parentComment: null }
+        first: $first
+        after: $cursor
+        before: $before
+        includeAfter: $includeAfter
+        includeBefore: $includeBefore
+      }
     ) {
       pageInfo {
         startCursor
