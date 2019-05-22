@@ -8,6 +8,7 @@ import { Waypoint } from 'react-waypoint'
 
 import {
   DateTime,
+  Footer,
   Head,
   Placeholder,
   Responsive,
@@ -26,11 +27,10 @@ import { ViewerContext } from '~/components/Viewer'
 import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import CollectionMeta from './CollectionMeta'
+import Collection from './Collection'
 import Comments from './Comments'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
-import Sidebar from './Sidebar'
 import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
@@ -103,7 +103,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
         return (
           <main className="l-row">
-            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
+            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
               {(() => {
                 if (loading) {
                   return <Placeholder.ArticleDetail />
@@ -183,22 +183,22 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             <p className="date">
                               <DateTime date={data.article.createdAt} />
                             </p>
-                            <span>
-                              {data.article.live && <IconLive />}
-                              {(collectionCount > 0 || canEditCollection) && (
-                                <CollectionMeta
-                                  article={data.article}
-                                  count={collectionCount}
-                                  canEditCollection={canEditCollection}
-                                />
-                              )}
-                            </span>
+                            <span>{data.article.live && <IconLive />}</span>
                           </span>
                         </section>
 
                         <section className="content">
                           <Content article={data.article} />
                           <TagList article={data.article} />
+
+                          {(collectionCount > 0 || canEditCollection) && (
+                            <Collection
+                              article={data.article}
+                              canEdit={canEditCollection}
+                              collectionCount={collectionCount}
+                            />
+                          )}
+
                           <Toolbar placement="left" article={data.article} />
                         </section>
 
@@ -234,13 +234,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
               <ShareModal />
             </article>
 
-            <aside className="l-col-4 l-col-md-6 l-col-lg-4">
-              <Sidebar
-                article={data.article}
-                hasCollection={!loading && collectionCount > 0}
-                canEditCollection={canEditCollection}
-              />
-            </aside>
+            <Footer />
 
             <style jsx>{styles}</style>
           </main>
