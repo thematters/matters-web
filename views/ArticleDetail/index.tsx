@@ -234,7 +234,9 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
               <ShareModal />
             </article>
 
-            <Footer />
+            <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+              <Footer />
+            </section>
 
             <style jsx>{styles}</style>
           </main>

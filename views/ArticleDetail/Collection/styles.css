@@ -41,6 +41,5 @@
 }
 
 .load-more {
-  padding: var(--spacing-tight) var(--collection-list-spacing)
-    var(--spacing-x-tight);
+  padding: var(--spacing-tight) 0 0;
 }
