@@ -115,28 +115,23 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         const getScrollOptions = (param: string) => {
           switch (param) {
             case 'comments': {
-              return {
-                selector: `#${param}-hook`,
-                offset: -10
-              }
+              return { offset: -10 }
             }
             default: {
-              return {
-                selector: `#comment-${param}`,
-                offset: -80
-              }
+              return { offset: -80 }
             }
           }
         }
 
         useScrollTo({
           enable: !!fragment,
+          selector: `#${fragment}`,
           trigger: [router],
           ...getScrollOptions(fragment)
         })
 
         return (
-          <section className="comments" id="comments-hook">
+          <section className="comments" id="comments">
             <header>
               <h2>
                 <Translate
