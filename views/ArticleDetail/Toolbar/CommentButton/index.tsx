@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import _get from 'lodash/get'
 import { MouseEventHandler } from 'react'
 
@@ -60,7 +61,10 @@ const CommentButton = ({
   return (
     <ButtonWithEffect
       onClick={() => {
-        dom.scrollTo('#comments-hook')
+        const element = dom.$('#comments')
+        if (element) {
+          jump('#comments', { offset: -10 })
+        }
 
         analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
           entrance: article.id,
