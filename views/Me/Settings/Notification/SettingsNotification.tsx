@@ -18,6 +18,7 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
         language
         notification {
           enable
+          email
           mention
           follow
           comment
@@ -45,6 +46,7 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
       settings {
         notification {
           mention
+          email
           follow
           comment
           appreciation
@@ -107,6 +109,10 @@ const settingsMap = {
     }
   ],
   others: [
+    {
+      key: 'email',
+      title: <Translate zh_hant="電子信箱通知" zh_hans="邮箱通知" />
+    },
     {
       key: 'officialNotice',
       title: <Translate zh_hant="官方公告" zh_hans="官方公告" />
