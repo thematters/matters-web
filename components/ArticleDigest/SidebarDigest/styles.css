@@ -40,6 +40,7 @@
     padding: var(--spacing-tight);
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
 
     & .cover {
       display: none;
