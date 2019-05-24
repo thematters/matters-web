@@ -52,6 +52,9 @@
   /* Audio
    ========================================================================== */
   & :global(figure.audio) {
+    margin-left: 0;
+    margin-right: 0;
+
     & audio {
       display: none;
     }
