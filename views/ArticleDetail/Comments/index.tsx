@@ -16,12 +16,7 @@ import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import { useScrollTo } from '~/components/Hook'
 
 import { TEXT, UrlFragments } from '~/common/enums'
-import {
-  filterComments,
-  getFragment,
-  getQuery,
-  mergeConnections
-} from '~/common/utils'
+import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -49,8 +44,13 @@ const SUBSCRIBE_COMMENTS = gql`
 const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
-  const fragment = getFragment({ router, pattern: '#([^&]+)(&|$)' })
-  const before = fragment === UrlFragments.COMMENTS ? null : fragment
+
+  let fragment = ''
+  let before = null
+  if (process.browser) {
+    fragment = window.location.hash.replace('#', '')
+    before = fragment === UrlFragments.COMMENTS ? null : fragment
+  }
 
   if (!mediaHash && !uuid) {
     return <EmptyComment />
@@ -66,6 +66,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         before: before || undefined,
         includeBefore: !!before
       }}
+      errorPolicy="none"
       notifyOnNetworkStatusChange
     >
       {({

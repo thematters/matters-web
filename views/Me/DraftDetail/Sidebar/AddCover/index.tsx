@@ -8,12 +8,14 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
+import { AddCoverDraft } from './__generated__/AddCoverDraft'
 import styles from './styles.css'
 
 const fragments = {
   draft: gql`
     fragment AddCoverDraft on Draft {
       id
+      publishState
       cover
       assets {
         id
@@ -74,7 +76,7 @@ const CoverList = ({
   })
 }
 
-const AddCover = ({ draft }: any) => {
+const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
   const imageAssets = assets.filter(
