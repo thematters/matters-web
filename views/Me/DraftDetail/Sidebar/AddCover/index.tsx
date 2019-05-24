@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
 import { Translate } from '~/components'
@@ -46,7 +47,8 @@ const CoverList = ({
   cover: string | null
   assets: any
 }) => {
-  return assets.map((asset: any, index: number) => {
+  const uniqAssets = _uniqBy(assets, 'path') as any
+  return uniqAssets.map((asset: any, index: number) => {
     const css = classNames({
       'cover-image': true,
       'cover-selected': asset.path === cover
