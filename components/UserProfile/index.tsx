@@ -95,7 +95,7 @@ const OnboardingBadge = () => (
         />
       }
     >
-      <Translate zh_hant="帳號待激活" zh_hans="账户待激活" />
+      <Translate zh_hant="還不是創作者" zh_hans="还不是创作者" />
     </TextIcon>
   </span>
 )

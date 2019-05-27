@@ -6,7 +6,7 @@
   @mixin all-transition;
   position: absolute;
   top: 0;
-  left: calc((var(--side-toolbar-button-size) + var(--spacing-tight)) * -1);
+  right: 0;
   transform: translateY(calc(var(--spacing-x-tight) * -1));
   opacity: 0;
 
@@ -18,6 +18,11 @@
       display: inline-block;
       opacity: 1;
     }
+  }
+
+  @media (--sm-up) {
+    right: auto;
+    left: calc((var(--side-toolbar-button-size) + var(--spacing-tight)) * -1);
   }
 }
 
