@@ -8,7 +8,16 @@ export const ArticleDetailComments = gql`
     pinnedComments {
       ...FeedDigestComment
     }
-    comments(input: { parent: true, first: $first, after: $cursor }) {
+    comments(
+      input: {
+        filter: { parentComment: null }
+        first: $first
+        after: $cursor
+        before: $before
+        includeAfter: $includeAfter
+        includeBefore: $includeBefore
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor

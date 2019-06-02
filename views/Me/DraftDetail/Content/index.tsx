@@ -30,6 +30,7 @@ export const UPDATE_DRAFT = gql`
       slug
       assets {
         id
+        type
         path
       }
     }

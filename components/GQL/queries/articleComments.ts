@@ -9,6 +9,9 @@ export default gql`
     $cursor: String
     $first: Int = 10
     $hasDescendantComments: Boolean = true
+    $before: String
+    $includeAfter: Boolean
+    $includeBefore: Boolean
   ) {
     article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
       id

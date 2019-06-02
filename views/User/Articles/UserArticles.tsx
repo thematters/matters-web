@@ -49,6 +49,10 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const isMe = viewer.userName === userName
 
+  if (!userName) {
+    return null
+  }
+
   return (
     <Query query={USER_ARTICLES_FEED} variables={{ userName }}>
       {({

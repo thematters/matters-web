@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
 import { Translate } from '~/components'
@@ -7,12 +8,14 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
+import { AddCoverDraft } from './__generated__/AddCoverDraft'
 import styles from './styles.css'
 
 const fragments = {
   draft: gql`
     fragment AddCoverDraft on Draft {
       id
+      publishState
       cover
       assets {
         id
@@ -46,7 +49,8 @@ const CoverList = ({
   cover: string | null
   assets: any
 }) => {
-  return assets.map((asset: any, index: number) => {
+  const uniqAssets = _uniqBy(assets, 'path') as any
+  return uniqAssets.map((asset: any, index: number) => {
     const css = classNames({
       'cover-image': true,
       'cover-selected': asset.path === cover
@@ -72,7 +76,7 @@ const CoverList = ({
   })
 }
 
-const AddCover = ({ draft }: any) => {
+const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
   const imageAssets = assets.filter(

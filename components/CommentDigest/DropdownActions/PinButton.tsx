@@ -60,10 +60,7 @@ const TextIconUnpin = () => (
     icon={<Icon id={ICON_UNPIN.id} viewBox={ICON_UNPIN.viewBox} size="small" />}
     spacing="tight"
   >
-    <Translate
-      zh_hant={TEXT.zh_hant.cancelPin}
-      zh_hans={TEXT.zh_hans.cancelPin}
-    />
+    <Translate zh_hant={TEXT.zh_hant.unpin} zh_hans={TEXT.zh_hans.unpin} />
   </TextIcon>
 )
 

@@ -5,7 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { InfiniteScroll, Spinner, Translate } from '~/components'
+import { LoadMore, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
@@ -13,7 +13,9 @@ import { Query } from '~/components/GQL'
 import { ArticleDetailComments } from '~/components/GQL/fragments/article'
 import { ArticleComments as ArticleCommentsType } from '~/components/GQL/queries/__generated__/ArticleComments'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
+import { useScrollTo } from '~/components/Hook'
 
+import { TEXT, UrlFragments } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -24,6 +26,9 @@ const SUBSCRIBE_COMMENTS = gql`
     $first: Int!
     $cursor: String
     $hasDescendantComments: Boolean = true
+    $before: String
+    $includeAfter: Boolean
+    $includeBefore: Boolean
   ) {
     nodeEdited(input: { id: $id }) {
       id
@@ -40,29 +45,48 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
+  let fragment = ''
+  let before = null
+  if (process.browser) {
+    fragment = window.location.hash.replace('#', '')
+    before = fragment === UrlFragments.COMMENTS ? null : fragment
+  }
+
   if (!mediaHash && !uuid) {
     return <EmptyComment />
   }
 
   return (
-    <Query query={ARTICLE_COMMENTS} variables={{ mediaHash, uuid }}>
+    <Query
+      query={ARTICLE_COMMENTS}
+      variables={{
+        mediaHash,
+        uuid,
+        first: before ? null : 8,
+        before: before || undefined,
+        includeBefore: !!before
+      }}
+      errorPolicy="none"
+      notifyOnNetworkStatusChange
+    >
       {({
         data,
         loading,
         fetchMore,
         subscribeToMore
       }: QueryResult & { data: ArticleCommentsType }) => {
-        if (loading) {
-          return <Spinner />
+        if (!data || !data.article) {
+          return null
         }
 
-        const pinnedComments = _get(data, 'article.pinnedComments', [])
         const connectionPath = 'article.comments'
         const { edges, pageInfo } = _get(data, connectionPath, {})
         const loadMore = () =>
           fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              cursor: pageInfo.endCursor,
+              before: null,
+              first: 8
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({
@@ -72,10 +96,8 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               })
           })
 
-        const filteredPinnedComments = filterComments(pinnedComments)
         const filteredAllComments = filterComments(
-          (edges || []).map(({ node }: { node: any }) => node),
-          { pinned: true }
+          (edges || []).map(({ node }: { node: any }) => node)
         )
 
         useEffect(() => {
@@ -91,8 +113,35 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           }
         })
 
+        const getScrollOptions = (param: string) => {
+          switch (param) {
+            case 'comments': {
+              return { offset: -10 }
+            }
+            default: {
+              return { offset: -80 }
+            }
+          }
+        }
+
+        useScrollTo({
+          enable: !!fragment,
+          selector: `#${fragment}`,
+          trigger: [router],
+          ...getScrollOptions(fragment)
+        })
+
         return (
-          <>
+          <section className="comments" id="comments">
+            <header>
+              <h2>
+                <Translate
+                  zh_hant={TEXT.zh_hant.response}
+                  zh_hans={TEXT.zh_hans.response}
+                />
+              </h2>
+            </header>
+
             <section>
               <CommentForm
                 articleId={data.article.id}
@@ -100,53 +149,30 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 refetch
               />
             </section>
-            {filteredPinnedComments && filteredPinnedComments.length > 0 && (
-              <section className="pinned-comments">
-                <h3>
-                  <Translate zh_hant="置頂評論" zh_hans="置顶评论" />
-                </h3>
-                <ul>
-                  {filteredPinnedComments.map((comment: any) => (
-                    <li key={comment.id}>
-                      <CommentDigest.Feed
-                        comment={comment}
-                        hasComment
-                        inArticle
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
 
             <section className="all-comments">
-              <h3>
-                <Translate zh_hant="全部評論" zh_hans="全部评论" />
-              </h3>
-
               {!filteredAllComments ||
                 (filteredAllComments.length <= 0 && <EmptyComment />)}
 
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-              >
-                <ul>
-                  {filteredAllComments.map(comment => (
-                    <li key={comment.id}>
-                      <CommentDigest.Feed
-                        comment={comment}
-                        hasComment
-                        inArticle
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </InfiniteScroll>
+              <ul>
+                {filteredAllComments.map(comment => (
+                  <li key={comment.id}>
+                    <CommentDigest.Feed
+                      comment={comment}
+                      hasComment
+                      inArticle
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              {pageInfo.hasNextPage && (
+                <LoadMore onClick={() => loadMore()} loading={loading} />
+              )}
             </section>
 
             <style jsx>{styles}</style>
-          </>
+          </section>
         )
       }}
     </Query>

@@ -2,15 +2,24 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
+import { Waypoint } from 'react-waypoint'
 
-import { DateTime, Head, Placeholder, Title, Translate } from '~/components'
+import {
+  DateTime,
+  Footer,
+  Head,
+  Placeholder,
+  Responsive,
+  Title,
+  Translate
+} from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
-import { DrawerProvider } from '~/components/Drawer'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
+import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
@@ -18,11 +27,10 @@ import { ViewerContext } from '~/components/Viewer'
 import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import CollectionMeta from './CollectionMeta'
+import Collection from './Collection'
+import Comments from './Comments'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
-import Sidebar from './Sidebar'
-import SideComments from './SideComments'
 import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
@@ -74,6 +82,7 @@ const ARTICLE_DETAIL = gql`
 
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
+  const [fixedToolbar, setFixedToolbar] = useState(true)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -93,135 +102,144 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
         const canEditCollection = viewer.id === authorId
 
         return (
-          <DrawerProvider>
-            <main className="l-row">
-              <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-0">
-                {(() => {
-                  if (loading) {
-                    return <Placeholder.ArticleDetail />
-                  }
+          <main className="l-row">
+            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+              {(() => {
+                if (loading) {
+                  return <Placeholder.ArticleDetail />
+                }
 
-                  // redirect to latest verion of URL Pattern
-                  if (uuid && process.browser && router) {
-                    const path = toPath({
-                      page: 'articleDetail',
-                      userName: data.article.author.userName,
-                      slug: data.article.slug,
-                      mediaHash: data.article.mediaHash
-                    })
-                    router.push(path.href, path.as, { shallow: true })
-                  }
+                // redirect to latest verion of URL Pattern
+                if (uuid && process.browser && router) {
+                  const path = toPath({
+                    page: 'articleDetail',
+                    userName: data.article.author.userName,
+                    slug: data.article.slug,
+                    mediaHash: data.article.mediaHash
+                  })
+                  router.push(path.href, path.as, { shallow: true })
+                }
 
-                  if (
-                    data.article.state !== 'active' &&
-                    viewer.id !== authorId
-                  ) {
-                    return (
-                      <EmptyArticle
-                        description={
-                          <Translate
-                            zh_hant="作品被隱藏"
-                            zh_hans="作品被隐藏"
-                          />
-                        }
-                      >
-                        <BackToHomeButton />
-                      </EmptyArticle>
-                    )
-                  }
+                if (data.article.state !== 'active' && viewer.id !== authorId) {
+                  return (
+                    <EmptyArticle
+                      description={
+                        <Translate zh_hant="作品被隱藏" zh_hans="作品被隐藏" />
+                      }
+                    >
+                      <BackToHomeButton />
+                    </EmptyArticle>
+                  )
+                }
 
-                  useEffect(() => {
-                    if (data.article.live) {
-                      subscribeToMore({
-                        document: gql`
-                          subscription ArticleEdited($id: ID!) {
-                            nodeEdited(input: { id: $id }) {
+                useEffect(() => {
+                  if (data.article.live) {
+                    subscribeToMore({
+                      document: gql`
+                        subscription ArticleEdited($id: ID!) {
+                          nodeEdited(input: { id: $id }) {
+                            id
+                            ... on Article {
                               id
-                              ... on Article {
-                                id
-                                ...ToolbarArticle
-                              }
+                              ...ToolbarArticle
                             }
                           }
-                          ${Toolbar.fragments.article}
-                        `,
-                        variables: { id: data.article.id },
-                        updateQuery: (prev, { subscriptionData }) =>
-                          _merge(prev, {
-                            article: subscriptionData.data.nodeEdited
-                          })
-                      })
-                    }
-                  })
+                        }
+                        ${Toolbar.fragments.article}
+                      `,
+                      variables: { id: data.article.id },
+                      updateQuery: (prev, { subscriptionData }) =>
+                        _merge(prev, {
+                          article: subscriptionData.data.nodeEdited
+                        })
+                    })
+                  }
+                })
 
-                  return (
-                    <>
-                      <Head
-                        title={data.article.title}
-                        description={data.article.summary}
-                        keywords={data.article.tags.map(
-                          ({ content }: { content: any }) => content
-                        )}
-                        image={data.article.cover}
-                      />
+                useImmersiveMode('article > .content')
 
-                      <State article={data.article} />
+                return (
+                  <Responsive.MediumUp>
+                    {(isMediumUp: boolean) => (
+                      <>
+                        <Head
+                          title={data.article.title}
+                          description={data.article.summary}
+                          keywords={data.article.tags.map(
+                            ({ content }: { content: any }) => content
+                          )}
+                          image={data.article.cover}
+                        />
 
-                      <section className="author">
-                        <UserDigest.FullDesc user={data.article.author} />
-                      </section>
+                        <State article={data.article} />
 
-                      <section className="title">
-                        <Title type="article">{data.article.title}</Title>
-                        <span className="subtitle">
-                          <p className="date">
-                            <DateTime date={data.article.createdAt} />
-                          </p>
-                          <span>
-                            {data.article.live && <IconLive />}
-                            {(collectionCount > 0 || canEditCollection) && (
-                              <CollectionMeta
-                                article={data.article}
-                                count={collectionCount}
-                                canEditCollection={canEditCollection}
-                              />
-                            )}
+                        <section className="author">
+                          <UserDigest.FullDesc user={data.article.author} />
+                        </section>
+
+                        <section className="title">
+                          <Title type="article">{data.article.title}</Title>
+                          <span className="subtitle">
+                            <p className="date">
+                              <DateTime date={data.article.createdAt} />
+                            </p>
+                            <span>{data.article.live && <IconLive />}</span>
                           </span>
-                        </span>
-                      </section>
+                        </section>
 
-                      <section className="content">
-                        <Content article={data.article} />
-                        <TagList article={data.article} />
-                        <Toolbar placement="left" article={data.article} />
-                      </section>
+                        <section className="content">
+                          <Content article={data.article} />
+                          <TagList article={data.article} />
 
-                      <Toolbar placement="bottom" article={data.article} />
+                          {(collectionCount > 0 || canEditCollection) && (
+                            <Collection
+                              article={data.article}
+                              canEdit={canEditCollection}
+                              collectionCount={collectionCount}
+                            />
+                          )}
 
-                      <RelatedArticles article={data.article} />
-                    </>
-                  )
-                })()}
+                          <Toolbar placement="left" article={data.article} />
+                        </section>
 
-                <SideComments />
-                <AppreciatorsModal />
-                <ShareModal />
-              </article>
+                        {/* content:end */}
+                        {!isMediumUp && (
+                          <Waypoint
+                            onPositionChange={({ currentPosition }) => {
+                              if (currentPosition === 'below') {
+                                setFixedToolbar(true)
+                              } else {
+                                setFixedToolbar(false)
+                              }
+                            }}
+                          />
+                        )}
 
-              <aside
-                className="l-col-4 l-col-md-6 l-col-lg-4"
-                id="drawer-calc-hook"
-              >
-                <Sidebar
-                  article={data.article}
-                  hasCollection={!loading && collectionCount > 0}
-                  canEditCollection={canEditCollection}
-                />
-              </aside>
+                        <Toolbar
+                          placement="bottom"
+                          article={data.article}
+                          fixed={fixedToolbar}
+                        />
 
-              <style jsx>{styles}</style>
-            </main>
-          </DrawerProvider>
+                        <Comments />
+
+                        <RelatedArticles article={data.article} />
+                      </>
+                    )}
+                  </Responsive.MediumUp>
+                )
+              })()}
+
+              <AppreciatorsModal />
+              <ShareModal />
+            </article>
+
+            <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+              <Footer />
+            </section>
+
+            <style jsx>{styles}</style>
+          </main>
         )
       }}
     </Query>

@@ -14,6 +14,7 @@ import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 import styles from './styles.css'
 
 type SidebarDigestProps = {
+  type?: 'collection'
   article: SidebarDigestArticle
   hasCover?: boolean
   disabled?: boolean
@@ -39,6 +40,7 @@ const fragments = {
 }
 
 const SidebarDigest = ({
+  type,
   article,
   hasCover,
   disabled,
@@ -61,6 +63,7 @@ const SidebarDigest = ({
   const contentClasses = classNames({
     content: true,
     'no-cover': !cover,
+    'type-collection': type === 'collection',
     inactive: state !== 'active',
     disabled
   })
