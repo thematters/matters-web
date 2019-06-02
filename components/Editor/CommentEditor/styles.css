@@ -8,6 +8,11 @@
   }
 }
 
+.collapsed-input {
+  @mixin text-input;
+  height: 2.5rem;
+}
+
 .mention-container {
   position: absolute;
 

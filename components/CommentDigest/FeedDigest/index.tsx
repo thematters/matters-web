@@ -7,16 +7,21 @@ import {
   FeedDigestComment_comments_edges_node
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
+import { Icon } from '~/components/Icon'
 import { Label } from '~/components/Label'
 import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
+import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import styles from './styles.css'
+
+const COLLAPSE_DESCENDANT_COUNT = 2
 
 const fragments = {
   comment: commentFragments.feed
@@ -130,9 +135,12 @@ const FeedDigest = ({
   const descendantComments = _get(comment, 'comments.edges', []).filter(
     ({ node }: { node: any }) => node.state === 'active'
   )
+  const restDescendantCommentCount =
+    descendantComments.length - COLLAPSE_DESCENDANT_COUNT
+  const [expand, setExpand] = useState(restDescendantCommentCount <= 0)
 
   return (
-    <section className="container">
+    <section className="container" id={`${comment.id}`}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
@@ -174,8 +182,9 @@ const FeedDigest = ({
 
         {descendantComments.length > 0 && (
           <ul className="descendant-comments">
-            {descendantComments.map(
-              ({ node, cursor }: { node: any; cursor: any }) => (
+            {descendantComments
+              .slice(0, expand ? undefined : COLLAPSE_DESCENDANT_COUNT)
+              .map(({ node, cursor }: { node: any; cursor: any }) => (
                 <li key={cursor}>
                   <DescendantComment
                     comment={node}
@@ -183,7 +192,32 @@ const FeedDigest = ({
                     {...actionControls}
                   />
                 </li>
-              )
+              ))}
+            {!expand && (
+              <button
+                className="more-button"
+                type="button"
+                onClick={() => setExpand(true)}
+              >
+                <TextIcon
+                  icon={
+                    <Icon
+                      id={ICON_MORE_CONTENT.id}
+                      viewBox={ICON_MORE_CONTENT.viewBox}
+                      size="small"
+                    />
+                  }
+                  color="green"
+                  size="sm"
+                  textPlacement="left"
+                  spacing="xxtight"
+                >
+                  <Translate
+                    zh_hans={`查看 ${restDescendantCommentCount} 條回應`}
+                    zh_hant={`查看 ${restDescendantCommentCount} 条回应`}
+                  />
+                </TextIcon>
+              </button>
             )}
           </ul>
         )}

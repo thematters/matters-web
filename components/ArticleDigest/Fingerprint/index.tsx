@@ -32,7 +32,6 @@ const FingerprintContent = ({
   return (
     <div className="dropdown-container">
       <div className="top-container">
-        複製成功{/* hash */}
         <section className="section-title">
           <h4>
             <Translate

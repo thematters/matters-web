@@ -50,19 +50,16 @@ const EditButton = ({
   article,
   editing,
   setEditing,
-  editingArticles,
-  inPopover
+  editingArticles
 }: {
   article: ArticleDetail_article
   editing: boolean
   setEditing: any
   editingArticles: string[]
-  inPopover?: boolean
 }) => {
   const { lang } = useContext(LanguageContext)
   const editButtonClass = classNames({
-    'edit-button': true,
-    inner: inPopover
+    'edit-button': true
   })
 
   if (editing) {

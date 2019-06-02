@@ -1,3 +1,7 @@
+.related-articles {
+  padding-top: var(--spacing-xx-loose);
+}
+
 ul {
   margin-top: var(--spacing-default);
 

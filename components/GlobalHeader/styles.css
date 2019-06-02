@@ -21,6 +21,15 @@ header {
   }
 }
 
+:global(.immersive-mode) {
+  @media (--md-down) {
+    & header {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+}
+
 .holder {
   height: var(--global-header-height); /* fallback */
   height: calc(

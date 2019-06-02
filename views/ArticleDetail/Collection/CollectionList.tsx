@@ -16,7 +16,15 @@ import { SidebarCollection } from './__generated__/SidebarCollection'
 import styles from './styles.css'
 
 export const SIDEBAR_COLLECTION = gql`
-  query SidebarCollection($mediaHash: String, $cursor: String, $first: Int) {
+  query SidebarCollection(
+    $mediaHash: String
+    $cursor: String
+    $first: Int
+    $hasArticleDigestActionAuthor: Boolean = true
+    $hasArticleDigestActionBookmark: Boolean = false
+    $hasArticleDigestCover: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       collection(input: { after: $cursor, first: $first })
@@ -30,13 +38,13 @@ export const SIDEBAR_COLLECTION = gql`
         edges {
           cursor
           node {
-            ...PlainDigestArticle
+            ...SidebarDigestArticle
           }
         }
       }
     }
   }
-  ${ArticleDigest.Plain.fragments.article}
+  ${ArticleDigest.Sidebar.fragments.article}
 `
 
 const CollectionList = ({
@@ -102,7 +110,7 @@ const CollectionList = ({
 
       return (
         <>
-          <ol>
+          <ul className="collection-list">
             {edges.map(
               ({ node, cursor }: { node: any; cursor: any }, i: number) => (
                 <li
@@ -114,11 +122,17 @@ const CollectionList = ({
                     })
                   }
                 >
-                  <ArticleDigest.Plain article={node} hasArchivedTooltip />
+                  <ArticleDigest.Sidebar
+                    type="collection"
+                    article={node}
+                    hasArchivedTooltip
+                    hasCover
+                    hasAuthor
+                  />
                 </li>
               )
             )}
-          </ol>
+          </ul>
 
           {pageInfo.hasNextPage && (
             <section className="load-more">
@@ -128,6 +142,7 @@ const CollectionList = ({
                     <Icon
                       id={ICON_MORE_CONTENT.id}
                       viewBox={ICON_MORE_CONTENT.viewBox}
+                      size="small"
                     />
                   }
                   color="green"

@@ -51,3 +51,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-matters-green);
 }
+
+.more-button {
+  padding-left: var(--spacing-loose);
+}

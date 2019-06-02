@@ -7,7 +7,7 @@ main {
   @mixin flex-center-all;
   border: 1px solid var(--color-line-grey-light);
   border-radius: 0.125rem;
-  padding: 4rem 0;
+  padding: var(--spacing-xx-loose) 0;
   background: var(--color-white);
 
   @media (--sm-down) {

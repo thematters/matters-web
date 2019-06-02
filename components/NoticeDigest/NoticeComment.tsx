@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import Link from 'next/link'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
@@ -15,7 +16,8 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     page: 'articleDetail',
     userName: comment.article.author.userName || '',
     slug: comment.article.slug || '',
-    mediaHash: comment.article.mediaHash || ''
+    mediaHash: comment.article.mediaHash || '',
+    fragment: _get(comment, 'parentComment.id') || comment.id
   })
 
   return (
@@ -46,6 +48,9 @@ NoticeComment.fragments = {
           id
           userName
         }
+      }
+      parentComment {
+        id
       }
     }
   `

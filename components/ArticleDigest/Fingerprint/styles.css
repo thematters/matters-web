@@ -69,6 +69,7 @@
       color: var(--color-grey);
       margin-left: var(--spacing-x-tight);
       margin-right: var(--spacing-xx-tight);
+      text-align: left;
     }
 
     & a {
