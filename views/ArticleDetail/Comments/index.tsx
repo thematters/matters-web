@@ -160,7 +160,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                   <li key={comment.id}>
                     <CommentDigest.Feed
                       comment={comment}
-                      refetch
                       hasComment
                       inArticle
                     />

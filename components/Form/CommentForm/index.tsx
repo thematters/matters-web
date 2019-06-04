@@ -48,6 +48,7 @@ interface CommentFormProps {
   extraButton?: React.ReactNode
 }
 
+// TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
   defaultContent,
   articleMediaHash,
@@ -56,15 +57,12 @@ const CommentForm = ({
   replyToId,
   articleId,
   submitCallback,
-  refetch,
   extraButton
 }: CommentFormProps) => (
   <Mutation
     mutation={PUT_COMMENT}
     refetchQueries={
-      !refetch
-        ? []
-        : parentId
+      parentId
         ? [
             {
               query: COMMENT_COMMENTS,
