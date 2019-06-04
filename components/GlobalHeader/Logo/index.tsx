@@ -3,8 +3,8 @@ import Link from 'next/link'
 // import { Icon } from '~/components'
 
 import { PATHS } from '~/common/enums'
-// import ICON_LOGO from '~/static/icons/logo.svg?sprite'
-import ICON_LOGO from '~/static/icons/logo-rainbow.png'
+import ICON_LOGO from '~/static/icons/logo.svg?sprite'
+// import ICON_LOGO from '~/static/icons/logo-rainbow.png'
 
 import styles from './styles.css'
 
