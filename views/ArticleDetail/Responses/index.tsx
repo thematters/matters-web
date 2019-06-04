@@ -175,7 +175,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               <CommentForm
                 articleId={data.article.id}
                 articleMediaHash={data.article.mediaHash}
-                refetch
+                submitCallback={refetch}
               />
             </section>
 
