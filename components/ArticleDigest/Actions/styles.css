@@ -9,12 +9,21 @@ footer {
   & > :global(* + *) {
     line-height: 1;
   }
+  & .left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   & .space-left {
     margin-left: var(--spacing-tight);
   }
   & .space-right {
     margin-right: var(--spacing-tight);
   }
+}
+
+.space {
+  @mixin flex-center-space-between;
 }
 
 .state {

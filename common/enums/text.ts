@@ -123,6 +123,8 @@ export const TEXT = {
     emptySearchResults: '沒有找到你搜索的內容',
     uploadImageSuccess: '圖片上傳成功',
     uploadImageFailed: '圖片上傳失敗',
+    collected: '關聯了本作品',
+    collectedOnly: '只看回應作品',
     error: {
       UNKNOWN_ERROR: '未知錯誤，請稍候重試',
       NETWORK_ERROR: '網路錯誤，請稍候重試',
@@ -281,6 +283,8 @@ export const TEXT = {
     emptySearchResults: '没有找到你搜寻的内容',
     uploadImageSuccess: '图片上传成功',
     uploadImageFailed: '图片上传失败',
+    collected: '关联了本作品',
+    collectedOnly: '只看回应作品',
     error: {
       UNKNOWN_ERROR: '未知错误，请稍候重试',
       NETWORK_ERROR: '网路错误，请稍候重试',

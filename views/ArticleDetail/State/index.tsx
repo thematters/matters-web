@@ -11,6 +11,11 @@ const fragments = {
     fragment StateArticle on Article {
       state
     }
+  `,
+  response: gql`
+    fragment StateResponse on Article {
+      articleState: state
+    }
   `
 }
 
