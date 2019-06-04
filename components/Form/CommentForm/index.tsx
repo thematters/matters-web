@@ -57,12 +57,15 @@ const CommentForm = ({
   replyToId,
   articleId,
   submitCallback,
+  refetch,
   extraButton
 }: CommentFormProps) => (
   <Mutation
     mutation={PUT_COMMENT}
     refetchQueries={
-      parentId
+      !refetch
+        ? []
+        : parentId
         ? [
             {
               query: COMMENT_COMMENTS,
