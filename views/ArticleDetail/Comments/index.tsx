@@ -73,7 +73,8 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         data,
         loading,
         fetchMore,
-        subscribeToMore
+        subscribeToMore,
+        refetch
       }: QueryResult & { data: ArticleCommentsType }) => {
         if (!data || !data.article) {
           return null
@@ -146,7 +147,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               <CommentForm
                 articleId={data.article.id}
                 articleMediaHash={data.article.mediaHash}
-                refetch
+                submitCallback={refetch}
               />
             </section>
 
