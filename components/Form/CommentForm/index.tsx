@@ -48,6 +48,7 @@ interface CommentFormProps {
   extraButton?: React.ReactNode
 }
 
+// TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
   defaultContent,
   articleMediaHash,
