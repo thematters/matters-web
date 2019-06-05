@@ -12,7 +12,7 @@ import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
 import { Query } from '~/components/GQL'
-import { ArticleDetailComments } from '~/components/GQL/fragments/article'
+import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
 import { useScrollTo } from '~/components/Hook'
@@ -23,25 +23,29 @@ import { filterResponses, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-const SUBSCRIBE_COMMENTS = gql`
+const SUBSCRIBE_RESPONSES = gql`
   subscription ArticleCommentAdded(
     $id: ID!
     $before: String
     $cursor: String
     $first: Int!
-    $hasDescendantComments: Boolean = true
     $includeAfter: Boolean
     $includeBefore: Boolean
+    $hasDescendantComments: Boolean = true
+    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionBookmark: Boolean = true
+    $hasArticleDigestActionTopicScore: Boolean = false
+    $articleOnly: Boolean
   ) {
     nodeEdited(input: { id: $id }) {
       id
       ... on Article {
         id
-        ...ArticleDetailComments
+        ...ArticleDetailResponses
       }
     }
   }
-  ${ArticleDetailComments}
+  ${ArticleDetailResponses}
 `
 
 const Main: React.FC<WithRouterProps> = ({ router }) => {
@@ -118,8 +122,12 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         useEffect(() => {
           if (data.article.live) {
             subscribeToMore({
-              document: SUBSCRIBE_COMMENTS,
-              variables: { id: data.article.id, first: edges.length },
+              document: SUBSCRIBE_RESPONSES,
+              variables: {
+                id: data.article.id,
+                first: edges.length,
+                articleOnly: articleOnlyMode
+              },
               updateQuery: (prev, { subscriptionData }) =>
                 _merge(prev, {
                   article: subscriptionData.data.nodeEdited

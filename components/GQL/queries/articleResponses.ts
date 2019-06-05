@@ -8,7 +8,7 @@ export default gql`
     $uuid: UUID
     $before: String
     $cursor: String
-    $first: Int = 10
+    $first: Int = 8
     $includeAfter: Boolean
     $includeBefore: Boolean
     $hasDescendantComments: Boolean = true
