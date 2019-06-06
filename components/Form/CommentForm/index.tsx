@@ -84,7 +84,7 @@ const CommentForm = ({
   >
     {putComment => {
       const [isSubmitting, setSubmitting] = useState(false)
-      const [expand, setExpand] = useState(false)
+      const [expand, setExpand] = useState(true)
       const [content, setContent] = useState(defaultContent || '')
       const viewer = useContext(ViewerContext)
       const isValid = !!trimLineBreaks(content)
