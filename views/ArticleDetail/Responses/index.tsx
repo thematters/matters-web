@@ -6,7 +6,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { LoadMore, Translate } from '~/components'
+import { Icon, LoadMore, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
@@ -20,6 +20,8 @@ import { Switch } from '~/components/Switch'
 
 import { TEXT, UrlFragments } from '~/common/enums'
 import { filterResponses, getQuery, mergeConnections } from '~/common/utils'
+import ICON_CLOSE from '~/static/icons/close.svg?sprite'
+import ICON_STAR from '~/static/icons/star.svg?sprite'
 
 import styles from './styles.css'
 
@@ -47,6 +49,46 @@ const SUBSCRIBE_RESPONSES = gql`
   }
   ${ArticleDetailResponses}
 `
+
+const ResponseTip = () => {
+  const [toggle, setToggle] = useState<boolean>(true)
+
+  if (toggle === false) {
+    return null
+  }
+
+  return (
+    <>
+      <div className="tip">
+        <div className="star">
+          <Icon
+            id={ICON_STAR.id}
+            viewBox={ICON_STAR.viewBox}
+            style={{ width: 16, height: 16 }}
+          />
+        </div>
+        <p className="header">
+          <Translate zh_hant="評論區域升級啦！" zh_hans="评论区域升级啦！" />
+        </p>
+        <p>
+          <Translate
+            zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
+            zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
+          />
+        </p>
+        <div className="close">
+          <Icon
+            id={ICON_CLOSE.id}
+            viewBox={ICON_CLOSE.viewBox}
+            style={{ width: 16, height: 16 }}
+            onClick={() => setToggle(false)}
+          />
+        </div>
+      </div>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -178,6 +220,8 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 </span>
               </div>
             </header>
+
+            <ResponseTip />
 
             <section>
               <CommentForm
