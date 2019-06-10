@@ -21,6 +21,28 @@ import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
 const ShareModal = () => {
+
+  const copy = () => {
+    dom.copyToClipboard(decodeURI(window.location.href))
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="複製成功"
+              zh_hans="复制成功"
+            />
+          )
+        }
+      })
+    )
+    const element = dom.$('#shareLinkInput')
+    if (element) {
+      element.select()
+    }
+  }
+
   return (
     <ModalInstance modalId="shareModal" layout="small">
       {(props: ModalInstanceProps) => (
@@ -42,29 +64,16 @@ const ShareModal = () => {
               </div>
             </div>
 
-            <div className="link-container">
+            <div
+              className="link-container"
+              onClick={copy}
+            >
               <TextIcon
                 icon={
                   <Icon
                     id={ICON_SHARE_LINK.id}
                     viewBox={ICON_SHARE_LINK.viewBox}
                     size="small"
-                    onClick={() => {
-                      dom.copyToClipboard(decodeURI(window.location.href))
-                      window.dispatchEvent(
-                        new CustomEvent(ADD_TOAST, {
-                          detail: {
-                            color: 'green',
-                            content: (
-                              <Translate
-                                zh_hant="複製成功"
-                                zh_hans="复制成功"
-                              />
-                            )
-                          }
-                        })
-                      )
-                    }}
                   />
                 }
                 spacing="tight"
@@ -72,10 +81,10 @@ const ShareModal = () => {
                 <Translate zh_hant="連結" zh_hans="链接" />
               </TextIcon>
               <input
+                id="shareLinkInput"
                 type="text"
                 value={decodeURI(window.location.href)}
                 readOnly
-                onClick={event => event.currentTarget.select()}
               />
             </div>
 
