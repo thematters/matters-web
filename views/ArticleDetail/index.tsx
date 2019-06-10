@@ -189,8 +189,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
                         <section className="content">
                           <Content article={data.article} />
-                          <TagList article={data.article} />
-
                           {(collectionCount > 0 || canEditCollection) && (
                             <Collection
                               article={data.article}
@@ -199,6 +197,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             />
                           )}
 
+                          <TagList article={data.article} />
                           <Toolbar placement="left" article={data.article} />
                         </section>
 
