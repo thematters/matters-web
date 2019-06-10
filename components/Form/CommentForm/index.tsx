@@ -46,6 +46,7 @@ interface CommentFormProps {
   submitCallback?: () => void
   refetch?: boolean
   extraButton?: React.ReactNode
+  defaultExpand?: boolean
 }
 
 // TODO: remove refetchQueries, use refetch in submitCallback instead
@@ -58,7 +59,8 @@ const CommentForm = ({
   articleId,
   submitCallback,
   refetch,
-  extraButton
+  extraButton,
+  defaultExpand
 }: CommentFormProps) => (
   <Mutation
     mutation={PUT_COMMENT}
@@ -84,7 +86,7 @@ const CommentForm = ({
   >
     {putComment => {
       const [isSubmitting, setSubmitting] = useState(false)
-      const [expand, setExpand] = useState(true)
+      const [expand, setExpand] = useState(defaultExpand || false)
       const [content, setContent] = useState(defaultContent || '')
       const viewer = useContext(ViewerContext)
       const isValid = !!trimLineBreaks(content)
