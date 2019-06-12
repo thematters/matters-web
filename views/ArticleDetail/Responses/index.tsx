@@ -11,10 +11,12 @@ import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
-import { Query } from '~/components/GQL'
+import { Mutation, Query } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
+import { UnreadResponseInfoPopUp as UnreadResponseInfoPopUpType } from '~/components/GQL/queries/__generated__/UnreadResponseInfoPopUp'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
+import UNREAD_RESPONSE_INFO_POP_UP from '~/components/GQL/queries/unreadResponseInfoPopUp'
 import { useScrollTo } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
@@ -50,43 +52,73 @@ const SUBSCRIBE_RESPONSES = gql`
   ${ArticleDetailResponses}
 `
 
-const ResponseTip = () => {
-  const [toggle, setToggle] = useState<boolean>(true)
-
-  if (toggle === false) {
-    return null
+const READ_RESPONSE_INFO_POP_UP = gql`
+  mutation ReadResponseInfoPopUp {
+    logRecord(input: { type: ReadResponseInfoPopUp })
   }
+`
 
+const ResponseTip = () => {
   return (
-    <>
-      <div className="tip">
-        <div className="star">
-          <Icon
-            id={ICON_STAR.id}
-            viewBox={ICON_STAR.viewBox}
-            style={{ width: 16, height: 16 }}
-          />
-        </div>
-        <p className="header">
-          <Translate zh_hant="評論區域升級啦！" zh_hans="评论区域升级啦！" />
-        </p>
-        <p>
-          <Translate
-            zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
-            zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
-          />
-        </p>
-        <div className="close">
-          <Icon
-            id={ICON_CLOSE.id}
-            viewBox={ICON_CLOSE.viewBox}
-            style={{ width: 16, height: 16 }}
-            onClick={() => setToggle(false)}
-          />
-        </div>
-      </div>
-      <style jsx>{styles}</style>
-    </>
+    <Query query={UNREAD_RESPONSE_INFO_POP_UP}>
+      {({
+        data,
+        loading
+      }: QueryResult & { data: UnreadResponseInfoPopUpType }) => {
+        const path = 'viewer.status'
+        const { unreadResponseInfoPopUp } = _get(data, path, {})
+
+        if (unreadResponseInfoPopUp === false) {
+          return null
+        }
+
+        return (
+          <Mutation
+            mutation={READ_RESPONSE_INFO_POP_UP}
+            refetchQueries={[
+              {
+                query: UNREAD_RESPONSE_INFO_POP_UP
+              }
+            ]}
+          >
+            {readResponseInfoPopUp => (
+              <>
+                <div className="tip">
+                  <div className="star">
+                    <Icon
+                      id={ICON_STAR.id}
+                      viewBox={ICON_STAR.viewBox}
+                      style={{ width: 16, height: 16 }}
+                    />
+                  </div>
+                  <p className="header">
+                    <Translate
+                      zh_hant="評論區域升級啦！"
+                      zh_hans="评论区域升级啦！"
+                    />
+                  </p>
+                  <p>
+                    <Translate
+                      zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
+                      zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
+                    />
+                  </p>
+                  <div className="close">
+                    <Icon
+                      id={ICON_CLOSE.id}
+                      viewBox={ICON_CLOSE.viewBox}
+                      style={{ width: 16, height: 16 }}
+                      onClick={readResponseInfoPopUp}
+                    />
+                  </div>
+                </div>
+                <style jsx>{styles}</style>
+              </>
+            )}
+          </Mutation>
+        )
+      }}
+    </Query>
   )
 }
 
