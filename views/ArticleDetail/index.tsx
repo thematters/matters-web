@@ -197,22 +197,22 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             />
                           )}
 
+                          {/* content:end */}
+                          {!isMediumUp && (
+                            <Waypoint
+                              onPositionChange={({ currentPosition }) => {
+                                if (currentPosition === 'below') {
+                                  setFixedToolbar(true)
+                                } else {
+                                  setFixedToolbar(false)
+                                }
+                              }}
+                            />
+                          )}
+
                           <TagList article={data.article} />
                           <Toolbar placement="left" article={data.article} />
                         </section>
-
-                        {/* content:end */}
-                        {!isMediumUp && (
-                          <Waypoint
-                            onPositionChange={({ currentPosition }) => {
-                              if (currentPosition === 'below') {
-                                setFixedToolbar(true)
-                              } else {
-                                setFixedToolbar(false)
-                              }
-                            }}
-                          />
-                        )}
 
                         <Toolbar
                           placement="bottom"
