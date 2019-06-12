@@ -27,7 +27,6 @@ const Collection: React.FC<{
 }> = ({ article, collectionCount, canEdit }) => {
   const [editing, setEditing] = useState<boolean>(false)
   const [editingArticles, setEditingArticles] = useState<any[]>([])
-  console.log(canEdit)
   return (
     <section className="collection">
       <header>

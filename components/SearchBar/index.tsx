@@ -84,7 +84,6 @@ const BaseSearchBar: React.FC<
           )
         }
 
-        console.log({ q: values.q, autoComplete, hideDropdown })
         return (
           <Dropdown
             content={
