@@ -58,24 +58,28 @@ const ShareModal = () => {
               </div>
             </div>
 
-            <div className="link-container" onClick={copy}>
+            <div className="link-container">
               <TextIcon
                 icon={
                   <Icon
                     id={ICON_SHARE_LINK.id}
                     viewBox={ICON_SHARE_LINK.viewBox}
                     size="small"
+                    onClick={copy}
                   />
                 }
                 spacing="tight"
               >
-                <Translate zh_hant="連結" zh_hans="链接" />
+                <span onClick={copy}>
+                  <Translate zh_hant="連結" zh_hans="链接" />
+                </span>
               </TextIcon>
               <input
                 id="shareLinkInput"
                 type="text"
                 value={decodeURI(window.location.href)}
                 readOnly
+                onClick={copy}
               />
             </div>
 
