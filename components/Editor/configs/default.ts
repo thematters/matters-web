@@ -9,7 +9,7 @@ import urlMatcher from '../utils/urlMatcher'
 
 export const modules = {
   toolbar: [
-    [{ header: '2' }, 'bold', 'italic', 'strike', 'underline'],
+    [{ header: '2' }, 'bold', 'italic', 'strike', 'underline', 'code-block'],
     ['blockquote', { list: 'ordered' }, { list: 'bullet' }, 'link']
   ],
   clipboard: {

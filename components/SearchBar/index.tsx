@@ -64,13 +64,6 @@ const BaseSearchBar: React.FC<
         })
         Router.push(path.href, path.as)
       }}
-      validate={values => {
-        if (values.q) {
-          hideDropdown()
-        } else {
-          showDropdown()
-        }
-      }}
       render={({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {
           return (
@@ -93,7 +86,9 @@ const BaseSearchBar: React.FC<
 
         return (
           <Dropdown
-            content={<AutoComplete hideDropdown={hideDropdown} />}
+            content={
+              <AutoComplete searchKey={values.q} hideDropdown={hideDropdown} />
+            }
             trigger="manual"
             onCreate={setInstance}
             theme="dropdown shadow-light"
@@ -106,7 +101,10 @@ const BaseSearchBar: React.FC<
                 placeholder={textPlaceholder}
                 autoComplete="off"
                 value={values.q}
-                onChange={handleChange}
+                onChange={e => {
+                  handleChange(e)
+                  showDropdown()
+                }}
                 onFocus={() => !values.q && showDropdown()}
                 onClick={() => !values.q && showDropdown()}
                 onBlur={hideDropdown}
