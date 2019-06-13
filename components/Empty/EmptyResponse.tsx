@@ -19,11 +19,12 @@ const EmptyResponse = ({
         />
       }
       description={
-        description || (
-          articleOnlyMode
-            ? <Translate zh_hant="還沒有衍生作品" zh_hans="还没有衍生作品" />
-            : <Translate zh_hant="還沒有評論" zh_hans="还没有评论" />
-        )
+        description ||
+        (articleOnlyMode ? (
+          <Translate zh_hant="還沒有衍生作品" zh_hans="还没有衍生作品" />
+        ) : (
+          <Translate zh_hant="還沒有評論" zh_hans="还没有评论" />
+        ))
       }
     />
   )

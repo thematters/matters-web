@@ -264,7 +264,10 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
             </section>
 
             <section className="all-comments">
-              {!responses || (responses.length <= 0 && <EmptyResponse articleOnlyMode={articleOnlyMode} />)}
+              {!responses ||
+                (responses.length <= 0 && (
+                  <EmptyResponse articleOnlyMode={articleOnlyMode} />
+                ))}
               <ul>
                 {responses.map(response => (
                   <li key={response.id}>
