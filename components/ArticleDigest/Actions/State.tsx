@@ -6,6 +6,7 @@ import { TextIcon } from '~/components/TextIcon'
 
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
+import { ResponseStateActionsArticle } from './__generated__/ResponseStateActionsArticle'
 import { StateActionsArticle } from './__generated__/StateActionsArticle'
 import styles from './styles.css'
 
@@ -14,11 +15,30 @@ const fragments = {
     fragment StateActionsArticle on Article {
       state
     }
+  `,
+  response: gql`
+    fragment ResponseStateActionsArticle on Article {
+      articleState: state
+    }
   `
 }
 
-const State = ({ article }: { article: StateActionsArticle }) => {
-  if (article.state === 'active') {
+const isActive = (article: any): boolean => {
+  if (article.hasOwnProperty('state')) {
+    return article.state === 'active'
+  }
+  if (article.hasOwnProperty('articleState')) {
+    return article.articleState === 'active'
+  }
+  return false
+}
+
+const State = ({
+  article
+}: {
+  article: StateActionsArticle | ResponseStateActionsArticle
+}) => {
+  if (isActive(article)) {
     return null
   }
 

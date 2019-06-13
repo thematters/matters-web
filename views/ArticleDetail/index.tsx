@@ -28,9 +28,9 @@ import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Collection from './Collection'
-import Comments from './Comments'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
+import Responses from './Responses'
 import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
@@ -221,7 +221,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                           fixed={fixedToolbar}
                         />
 
-                        <Comments />
+                        <Responses />
 
                         <RelatedArticles article={data.article} />
                       </>
