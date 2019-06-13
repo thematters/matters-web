@@ -1,4 +1,4 @@
-import { EXTERNAL_LINKS, PATHS } from '~/common/enums'
+import { EXTERNAL_LINKS } from '~/common/enums'
 
 export default {
   zh_hant: `
