@@ -64,14 +64,15 @@ const ShareModal = () => {
                   <Icon
                     id={ICON_SHARE_LINK.id}
                     viewBox={ICON_SHARE_LINK.viewBox}
-                    size="small"
+                    size="xsmall"
                     onClick={copy}
                   />
                 }
-                spacing="tight"
+                spacing="xtight"
+                textPlacement="left"
               >
                 <span onClick={copy}>
-                  <Translate zh_hant="連結" zh_hans="链接" />
+                  <Translate zh_hant="點擊複製" zh_hans="点击复制" />
                 </span>
               </TextIcon>
               <input
