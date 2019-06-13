@@ -9,7 +9,7 @@ import { QueryResult } from 'react-apollo'
 import { Icon, LoadMore, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
-import EmptyComment from '~/components/Empty/EmptyComment'
+import EmptyResponse from '~/components/Empty/EmptyResponse'
 import CommentForm from '~/components/Form/CommentForm'
 import { Mutation, Query } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
@@ -135,7 +135,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   if (!mediaHash && !uuid) {
-    return <EmptyComment />
+    return <EmptyResponse articleOnlyMode={articleOnlyMode} />
   }
 
   const queryVariables = {
@@ -264,7 +264,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
             </section>
 
             <section className="all-comments">
-              {!responses || (responses.length <= 0 && <EmptyComment />)}
+              {!responses || (responses.length <= 0 && <EmptyResponse articleOnlyMode={articleOnlyMode} />)}
               <ul>
                 {responses.map(response => (
                   <li key={response.id}>
