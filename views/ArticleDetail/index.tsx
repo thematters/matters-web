@@ -189,8 +189,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
                         <section className="content">
                           <Content article={data.article} />
-                          <TagList article={data.article} />
-
                           {(collectionCount > 0 || canEditCollection) && (
                             <Collection
                               article={data.article}
@@ -199,21 +197,22 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             />
                           )}
 
+                          {/* content:end */}
+                          {!isMediumUp && (
+                            <Waypoint
+                              onPositionChange={({ currentPosition }) => {
+                                if (currentPosition === 'below') {
+                                  setFixedToolbar(true)
+                                } else {
+                                  setFixedToolbar(false)
+                                }
+                              }}
+                            />
+                          )}
+
+                          <TagList article={data.article} />
                           <Toolbar placement="left" article={data.article} />
                         </section>
-
-                        {/* content:end */}
-                        {!isMediumUp && (
-                          <Waypoint
-                            onPositionChange={({ currentPosition }) => {
-                              if (currentPosition === 'below') {
-                                setFixedToolbar(true)
-                              } else {
-                                setFixedToolbar(false)
-                              }
-                            }}
-                          />
-                        )}
 
                         <Toolbar
                           placement="bottom"
