@@ -21,6 +21,22 @@ import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
 const ShareModal = () => {
+  const copy = () => {
+    dom.copyToClipboard(decodeURI(window.location.href))
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: <Translate zh_hant="複製成功" zh_hans="复制成功" />
+        }
+      })
+    )
+    const element = dom.$('#shareLinkInput')
+    if (element) {
+      element.select()
+    }
+  }
+
   return (
     <ModalInstance modalId="shareModal" layout="small">
       {(props: ModalInstanceProps) => (
@@ -48,34 +64,23 @@ const ShareModal = () => {
                   <Icon
                     id={ICON_SHARE_LINK.id}
                     viewBox={ICON_SHARE_LINK.viewBox}
-                    size="small"
-                    onClick={() => {
-                      dom.copyToClipboard(decodeURI(window.location.href))
-                      window.dispatchEvent(
-                        new CustomEvent(ADD_TOAST, {
-                          detail: {
-                            color: 'green',
-                            content: (
-                              <Translate
-                                zh_hant="複製成功"
-                                zh_hans="复制成功"
-                              />
-                            )
-                          }
-                        })
-                      )
-                    }}
+                    size="xsmall"
+                    onClick={copy}
                   />
                 }
-                spacing="tight"
+                spacing="xtight"
+                textPlacement="left"
               >
-                <Translate zh_hant="連結" zh_hans="链接" />
+                <span onClick={copy}>
+                  <Translate zh_hant="點擊複製" zh_hans="点击复制" />
+                </span>
               </TextIcon>
               <input
+                id="shareLinkInput"
                 type="text"
                 value={decodeURI(window.location.href)}
                 readOnly
-                onClick={event => event.currentTarget.select()}
+                onClick={copy}
               />
             </div>
 

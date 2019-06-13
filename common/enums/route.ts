@@ -23,7 +23,6 @@ type ROUTE_KEY =
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_LEGACY'
-  | 'ME_INVITATIONS'
   | 'ME_WALLET'
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
@@ -137,11 +136,6 @@ export const ROUTES: Array<{
   },
 
   // Me
-  {
-    key: 'ME_INVITATIONS',
-    href: '/MeInvitations',
-    as: '/me/invitations'
-  },
   {
     key: 'ME_WALLET',
     href: '/MeWallet',

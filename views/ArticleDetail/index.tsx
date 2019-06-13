@@ -28,9 +28,9 @@ import { getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Collection from './Collection'
-import Comments from './Comments'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
+import Responses from './Responses'
 import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
@@ -189,8 +189,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
                         <section className="content">
                           <Content article={data.article} />
-                          <TagList article={data.article} />
-
                           {(collectionCount > 0 || canEditCollection) && (
                             <Collection
                               article={data.article}
@@ -199,21 +197,22 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             />
                           )}
 
+                          {/* content:end */}
+                          {!isMediumUp && (
+                            <Waypoint
+                              onPositionChange={({ currentPosition }) => {
+                                if (currentPosition === 'below') {
+                                  setFixedToolbar(true)
+                                } else {
+                                  setFixedToolbar(false)
+                                }
+                              }}
+                            />
+                          )}
+
+                          <TagList article={data.article} />
                           <Toolbar placement="left" article={data.article} />
                         </section>
-
-                        {/* content:end */}
-                        {!isMediumUp && (
-                          <Waypoint
-                            onPositionChange={({ currentPosition }) => {
-                              if (currentPosition === 'below') {
-                                setFixedToolbar(true)
-                              } else {
-                                setFixedToolbar(false)
-                              }
-                            }}
-                          />
-                        )}
 
                         <Toolbar
                           placement="bottom"
@@ -221,7 +220,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                           fixed={fixedToolbar}
                         />
 
-                        <Comments />
+                        <Responses />
 
                         <RelatedArticles article={data.article} />
                       </>

@@ -14,8 +14,8 @@ import ClearHistoryButton from './ClearHistoryButton'
 import styles from './styles.css'
 
 const SEARCH_AUTOCOMPLETE = gql`
-  query SearchAutoComplete {
-    frequentSearch(input: { first: 5 })
+  query SearchAutoComplete($searchKey: String) {
+    frequentSearch(input: { first: 5, key: $searchKey })
     viewer {
       id
       ...RecentSearchesUser
@@ -34,9 +34,19 @@ const EmptyAutoComplete = () => (
   />
 )
 
-const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
+const AutoComplete = ({
+  hideDropdown,
+  searchKey = ''
+}: {
+  hideDropdown: () => void
+  searchKey?: string
+}) => (
   <section className="container">
-    <Query query={SEARCH_AUTOCOMPLETE} skip={!process.browser}>
+    <Query
+      query={SEARCH_AUTOCOMPLETE}
+      skip={!process.browser}
+      variables={{ searchKey }}
+    >
       {({
         data,
         loading,
@@ -49,59 +59,68 @@ const AutoComplete = ({ hideDropdown }: { hideDropdown: () => void }) => (
         const recentSearches = data.viewer.activity.recentSearches.edges
 
         return (
-          <Menu width="full">
-            <Menu.Header
-              title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
-            />
-            {data.frequentSearch.map((key: any) => {
-              const path = toPath({
-                page: 'search',
-                q: key
-              })
-              return (
-                <Menu.Item
-                  spacing={['xtight', 'tight']}
-                  hoverBgColor="green"
-                  key={key}
-                >
-                  <Link {...path}>
-                    <a onClick={hideDropdown} className="frequent-item">
-                      {key}
-                    </a>
-                  </Link>
-                </Menu.Item>
-              )
-            })}
-            {data.frequentSearch.length <= 0 && <EmptyAutoComplete />}
+          (!searchKey || data.frequentSearch.length > 0) && (
+            <Menu width="full">
+              {data.frequentSearch.length > 0 && (
+                <>
+                  <Menu.Header
+                    title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
+                  />
+                  {data.frequentSearch.map((key: any) => {
+                    const path = toPath({
+                      page: 'search',
+                      q: key
+                    })
+                    return (
+                      <Menu.Item
+                        spacing={['xtight', 'tight']}
+                        hoverBgColor="green"
+                        key={key}
+                      >
+                        <Link {...path}>
+                          <a onClick={hideDropdown} className="frequent-item">
+                            {key}
+                          </a>
+                        </Link>
+                      </Menu.Item>
+                    )
+                  })}
+                </>
+              )}
 
-            <Menu.Divider />
+              {!searchKey && (
+                <>
+                  <Menu.Divider />
 
-            <Menu.Header
-              title={<Translate zh_hant="搜尋歷史" zh_hans="搜索历史" />}
-            >
-              {recentSearches.length > 0 && <ClearHistoryButton />}
-            </Menu.Header>
-            {recentSearches.map(({ node }: { node: any }) => {
-              const path = toPath({
-                page: 'search',
-                q: node
-              })
-              return (
-                <Menu.Item
-                  spacing={['xtight', 'tight']}
-                  hoverBgColor="green"
-                  key={node}
-                >
-                  <Link {...path}>
-                    <a onClick={hideDropdown} className="history-item">
-                      {node}
-                    </a>
-                  </Link>
-                </Menu.Item>
-              )
-            })}
-            {recentSearches.length <= 0 && <EmptyAutoComplete />}
-          </Menu>
+                  <Menu.Header
+                    title={<Translate zh_hant="搜尋歷史" zh_hans="搜索历史" />}
+                  >
+                    {recentSearches.length > 0 && <ClearHistoryButton />}
+                  </Menu.Header>
+                  {recentSearches.map(({ node }: { node: any }) => {
+                    const path = toPath({
+                      page: 'search',
+                      q: node
+                    })
+                    return (
+                      <Menu.Item
+                        spacing={['xtight', 'tight']}
+                        hoverBgColor="green"
+                        key={node}
+                      >
+                        <Link {...path}>
+                          <a onClick={hideDropdown} className="history-item">
+                            {node}
+                          </a>
+                        </Link>
+                      </Menu.Item>
+                    )
+                  })}
+                  {recentSearches.length <= 0 && <EmptyAutoComplete />}
+                </>
+              )}
+            </Menu>
+          )
         )
       }}
     </Query>

@@ -27,6 +27,7 @@
           { "name": "InvitationConnection" },
           { "name": "NoticeConnection" },
           { "name": "CommentConnection" },
+          { "name": "ResponseConnection" },
           { "name": "SearchResultConnection" },
           { "name": "ReportConnection" }
         ]
@@ -52,6 +53,11 @@
           { "name": "CommentMentionedYouNotice" },
           { "name": "OfficialAnnouncementNotice" }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Response",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       }
     ]
   }

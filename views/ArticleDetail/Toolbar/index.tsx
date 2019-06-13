@@ -7,10 +7,10 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import Appreciators from './Appreciators'
 import CollectedByButton from './CollectedByButton'
-import CommentButton from './CommentButton'
 import ExtendButton from './ExtendButton'
 import MATButton from './MATButton'
 import MoreButton from './MoreButton'
+import ResponseButton from './ResponseButton'
 import ShareButton from './ShareButton'
 import styles from './styles.css'
 
@@ -21,7 +21,7 @@ const fragments = {
       ...MATArticleDetail
       ...AppreciatorsArticle
       ...BookmarkArticle
-      ...CommentButtonArticle
+      ...ResponseButtonArticle
       ...MoreButtonArticle
       ...CollectedByArticle
       ...ExtendButtonArticle
@@ -29,7 +29,7 @@ const fragments = {
     ${MATButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
-    ${CommentButton.fragments.article}
+    ${ResponseButton.fragments.article}
     ${MoreButton.fragments.article}
     ${CollectedByButton.fragments.article}
     ${ExtendButton.fragments.article}
@@ -50,8 +50,7 @@ const Toolbar = ({
       <section className="toolbar-left">
         <div className="container">
           <MATButton article={article} />
-          <CommentButton article={article} textPlacement="bottom" />
-          <CollectedByButton article={article} textPlacement="bottom" />
+          <ResponseButton article={article} textPlacement="bottom" />
           <BookmarkButton article={article} size="default" />
           <ShareButton />
         </div>
@@ -72,8 +71,7 @@ const Toolbar = ({
         <Appreciators article={article} />
       </section>
       <section className="right">
-        <CommentButton article={article} />
-        <CollectedByButton article={article} popperPlacement="top" />
+        <ResponseButton article={article} />
         <ExtendButton article={article} />
         <BookmarkButton article={article} size="default" />
         <ShareButton />
