@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import { Icon, LoadMore, Translate } from '~/components'
@@ -19,6 +19,7 @@ import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
 import UNREAD_RESPONSE_INFO_POP_UP from '~/components/GQL/queries/unreadResponseInfoPopUp'
 import { useScrollTo } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
+import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT, UrlFragments } from '~/common/enums'
 import { filterResponses, getQuery, mergeConnections } from '~/common/utils'
@@ -58,7 +59,47 @@ const READ_RESPONSE_INFO_POP_UP = gql`
   }
 `
 
-const ResponseTip = () => {
+const ResponseTip = ({ closeCallback }: { closeCallback?: any }) => (
+  <>
+    <div className="tip">
+      <div className="star">
+        <Icon
+          id={ICON_STAR.id}
+          viewBox={ICON_STAR.viewBox}
+          style={{ width: 16, height: 16 }}
+        />
+      </div>
+      <p className="header">
+        <Translate zh_hant="評論區域升級啦！" zh_hans="评论区域升级啦！" />
+      </p>
+      <p>
+        <Translate
+          zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
+          zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
+        />
+      </p>
+      {closeCallback && (
+        <div className="close">
+          <Icon
+            id={ICON_CLOSE.id}
+            viewBox={ICON_CLOSE.viewBox}
+            style={{ width: 16, height: 16 }}
+            onClick={closeCallback}
+          />
+        </div>
+      )}
+    </div>
+    <style jsx>{styles}</style>
+  </>
+)
+
+const ResponseTipContainer = () => {
+  const viewer = useContext(ViewerContext)
+
+  if (!viewer || !viewer.isAuthed) {
+    return <ResponseTip />
+  }
+
   return (
     <Query query={UNREAD_RESPONSE_INFO_POP_UP}>
       {({
@@ -82,38 +123,7 @@ const ResponseTip = () => {
             ]}
           >
             {readResponseInfoPopUp => (
-              <>
-                <div className="tip">
-                  <div className="star">
-                    <Icon
-                      id={ICON_STAR.id}
-                      viewBox={ICON_STAR.viewBox}
-                      style={{ width: 16, height: 16 }}
-                    />
-                  </div>
-                  <p className="header">
-                    <Translate
-                      zh_hant="評論區域升級啦！"
-                      zh_hans="评论区域升级啦！"
-                    />
-                  </p>
-                  <p>
-                    <Translate
-                      zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
-                      zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
-                    />
-                  </p>
-                  <div className="close">
-                    <Icon
-                      id={ICON_CLOSE.id}
-                      viewBox={ICON_CLOSE.viewBox}
-                      style={{ width: 16, height: 16 }}
-                      onClick={readResponseInfoPopUp}
-                    />
-                  </div>
-                </div>
-                <style jsx>{styles}</style>
-              </>
+              <ResponseTip closeCallback={readResponseInfoPopUp} />
             )}
           </Mutation>
         )
@@ -253,7 +263,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               </div>
             </header>
 
-            <ResponseTip />
+            <ResponseTipContainer />
 
             <section>
               <CommentForm
