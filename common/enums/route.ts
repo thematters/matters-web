@@ -138,11 +138,6 @@ export const ROUTES: Array<{
 
   // Me
   {
-    key: 'ME_INVITATIONS',
-    href: '/MeInvitations',
-    as: '/me/invitations'
-  },
-  {
     key: 'ME_WALLET',
     href: '/MeWallet',
     as: '/me/wallet'
