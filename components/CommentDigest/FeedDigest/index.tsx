@@ -103,6 +103,7 @@ const DescendantComment = ({
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+            defaultExpand={edit}
           />
         )}
         {!edit && (
@@ -169,6 +170,7 @@ const FeedDigest = ({
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+            defaultExpand={edit}
           />
         )}
         {!edit && <CommentContent state={state} content={content} />}
