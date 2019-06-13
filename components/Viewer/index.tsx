@@ -19,9 +19,6 @@ export const ViewerUserFragment = {
         MAT {
           total
         }
-        invitation {
-          left
-        }
       }
       info {
         email
