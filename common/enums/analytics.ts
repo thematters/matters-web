@@ -20,7 +20,9 @@ export const ANALYTICS_EVENTS = {
   LOG_IN_FAILED: 'log-in-failed',
   OPEN_COLLECTION: 'open-collection',
   OPEN_COLLECTED: 'open-collected',
-  SHARE: 'share'
+  SHARE: 'share',
+  SIGNUP_START: 'signup-start',
+  SIGNUP_SUCCESS: 'signup-success'
 }
 
 export const SHARE_TYPE = {
