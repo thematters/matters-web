@@ -39,3 +39,14 @@ export const trimLineBreaks = (html: string) => {
   const re = new RegExp(`(^(${LINE_BREAK})*)|((${LINE_BREAK})*$)`, 'g')
   return html.replace(re, '')
 }
+
+/**
+ * Simple words' length counting.
+ */
+export const countWordsLength = (text: string) => {
+  return text
+    ? text.split('').reduce((count, char, index) => {
+        return count + (text.charCodeAt(index) < 256 ? 1 : 2)
+      }, 0)
+    : 0
+}

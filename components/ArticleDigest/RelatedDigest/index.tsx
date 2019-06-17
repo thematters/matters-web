@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Title } from '~/components'
 
 import { UrlFragments } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { countWordsLength, makeSummary, toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
 import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
@@ -18,12 +18,15 @@ const fragments = {
       title
       slug
       cover
+      summary
       mediaHash
       live
       author {
         id
         userName
+        displayName
       }
+      subscribed
       ...DigestActionsArticle
     }
     ${Actions.fragments.article}
@@ -36,7 +39,7 @@ const RelatedDigest = ({
 }: {
   article: RelatedDigestArticle
 } & ActionsControls) => {
-  const { cover, author, slug, mediaHash, title, live } = article
+  const { cover, author, slug, summary, mediaHash, title, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -49,15 +52,30 @@ const RelatedDigest = ({
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
+
+  const isMultiLineTitle = countWordsLength(title) > 40
+
+  const cleanedSummary = makeSummary(summary, isMultiLineTitle ? 60 : 80)
+
   const contentClasses = classNames({
     content: true,
-    'no-cover': !cover
+    'has-cover': !!cover
   })
 
   return (
     <section className="container">
+      {cover && (
+        <Link {...path}>
+          <a>
+            <div
+              className="cover"
+              style={{ backgroundImage: `url(${cover})` }}
+            />
+          </a>
+        </Link>
+      )}
       <div className={contentClasses}>
-        <div className="left">
+        <div className="title">
           <Link {...path}>
             <a>
               <Title type="sidebar" is="h3">
@@ -65,23 +83,18 @@ const RelatedDigest = ({
               </Title>
             </a>
           </Link>
-          <Actions article={article} type="sidebar" {...actionControls} />
         </div>
-
-        {cover && (
-          <Link {...path}>
-            <a className="cover-wrap">
-              <div
-                className="cover"
-                style={{
-                  backgroundImage: `url(${cover})`
-                }}
-              />
-            </a>
-          </Link>
+        {!cover && (
+          <div className="summary">
+            <Link {...path}>
+              <a>{cleanedSummary}</a>
+            </Link>
+          </div>
         )}
+        <div className="actions">
+          <Actions article={article} type="related" {...actionControls} />
+        </div>
       </div>
-
       <style jsx>{styles}</style>
     </section>
   )

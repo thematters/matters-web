@@ -80,6 +80,21 @@ const ARTICLE_DETAIL = gql`
   ${State.fragments.article}
 `
 
+const Block = ({
+  type = 'article',
+  children
+}: {
+  type?: 'article' | 'section'
+  children: any
+}) => {
+  const classes = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
+  return type === 'article' ? (
+    <article className={classes}>{children}</article>
+  ) : (
+    <section className={classes}>{children}</section>
+  )
+}
+
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
@@ -103,25 +118,29 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
         return (
           <main className="l-row">
-            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-              {(() => {
-                if (loading) {
-                  return <Placeholder.ArticleDetail />
-                }
+            {(() => {
+              if (loading) {
+                return (
+                  <Block>
+                    <Placeholder.ArticleDetail />
+                  </Block>
+                )
+              }
 
-                // redirect to latest verion of URL Pattern
-                if (uuid && process.browser && router) {
-                  const path = toPath({
-                    page: 'articleDetail',
-                    userName: data.article.author.userName,
-                    slug: data.article.slug,
-                    mediaHash: data.article.mediaHash
-                  })
-                  router.push(path.href, path.as, { shallow: true })
-                }
+              // redirect to latest verion of URL Pattern
+              if (uuid && process.browser && router) {
+                const path = toPath({
+                  page: 'articleDetail',
+                  userName: data.article.author.userName,
+                  slug: data.article.slug,
+                  mediaHash: data.article.mediaHash
+                })
+                router.push(path.href, path.as, { shallow: true })
+              }
 
-                if (data.article.state !== 'active' && viewer.id !== authorId) {
-                  return (
+              if (data.article.state !== 'active' && viewer.id !== authorId) {
+                return (
+                  <Block>
                     <EmptyArticle
                       description={
                         <Translate zh_hant="作品被隱藏" zh_hans="作品被隐藏" />
@@ -129,109 +148,112 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     >
                       <BackToHomeButton />
                     </EmptyArticle>
-                  )
-                }
+                  </Block>
+                )
+              }
 
-                useEffect(() => {
-                  if (data.article.live) {
-                    subscribeToMore({
-                      document: gql`
-                        subscription ArticleEdited($id: ID!) {
-                          nodeEdited(input: { id: $id }) {
+              useEffect(() => {
+                if (data.article.live) {
+                  subscribeToMore({
+                    document: gql`
+                      subscription ArticleEdited($id: ID!) {
+                        nodeEdited(input: { id: $id }) {
+                          id
+                          ... on Article {
                             id
-                            ... on Article {
-                              id
-                              ...ToolbarArticle
-                            }
+                            ...ToolbarArticle
                           }
                         }
-                        ${Toolbar.fragments.article}
-                      `,
-                      variables: { id: data.article.id },
-                      updateQuery: (prev, { subscriptionData }) =>
-                        _merge(prev, {
-                          article: subscriptionData.data.nodeEdited
-                        })
-                    })
-                  }
-                })
+                      }
+                      ${Toolbar.fragments.article}
+                    `,
+                    variables: { id: data.article.id },
+                    updateQuery: (prev, { subscriptionData }) =>
+                      _merge(prev, {
+                        article: subscriptionData.data.nodeEdited
+                      })
+                  })
+                }
+              })
 
-                useImmersiveMode('article > .content')
+              useImmersiveMode('article > .content')
 
-                return (
-                  <Responsive.MediumUp>
-                    {(isMediumUp: boolean) => (
-                      <>
-                        <Head
-                          title={data.article.title}
-                          description={data.article.summary}
-                          keywords={data.article.tags.map(
-                            ({ content }: { content: any }) => content
-                          )}
-                          image={data.article.cover}
-                        />
+              return (
+                <Responsive.MediumUp>
+                  {(isMediumUp: boolean) => (
+                    <Block>
+                      <Head
+                        title={data.article.title}
+                        description={data.article.summary}
+                        keywords={data.article.tags.map(
+                          ({ content }: { content: any }) => content
+                        )}
+                        image={data.article.cover}
+                      />
 
-                        <State article={data.article} />
+                      <State article={data.article} />
 
-                        <section className="author">
-                          <UserDigest.FullDesc user={data.article.author} />
-                        </section>
+                      <section className="author">
+                        <UserDigest.FullDesc user={data.article.author} />
+                      </section>
 
-                        <section className="title">
-                          <Title type="article">{data.article.title}</Title>
-                          <span className="subtitle">
-                            <p className="date">
-                              <DateTime date={data.article.createdAt} />
-                            </p>
-                            <span>{data.article.live && <IconLive />}</span>
-                          </span>
-                        </section>
+                      <section className="title">
+                        <Title type="article">{data.article.title}</Title>
+                        <span className="subtitle">
+                          <p className="date">
+                            <DateTime date={data.article.createdAt} />
+                          </p>
+                          <span>{data.article.live && <IconLive />}</span>
+                        </span>
+                      </section>
 
-                        <section className="content">
-                          <Content article={data.article} />
-                          {(collectionCount > 0 || canEditCollection) && (
-                            <Collection
-                              article={data.article}
-                              canEdit={canEditCollection}
-                              collectionCount={collectionCount}
-                            />
-                          )}
+                      <section className="content">
+                        <Content article={data.article} />
+                        {(collectionCount > 0 || canEditCollection) && (
+                          <Collection
+                            article={data.article}
+                            canEdit={canEditCollection}
+                            collectionCount={collectionCount}
+                          />
+                        )}
 
-                          {/* content:end */}
-                          {!isMediumUp && (
-                            <Waypoint
-                              onPositionChange={({ currentPosition }) => {
-                                if (currentPosition === 'below') {
-                                  setFixedToolbar(true)
-                                } else {
-                                  setFixedToolbar(false)
-                                }
-                              }}
-                            />
-                          )}
+                        {/* content:end */}
+                        {!isMediumUp && (
+                          <Waypoint
+                            onPositionChange={({ currentPosition }) => {
+                              if (currentPosition === 'below') {
+                                setFixedToolbar(true)
+                              } else {
+                                setFixedToolbar(false)
+                              }
+                            }}
+                          />
+                        )}
 
-                          <TagList article={data.article} />
-                          <Toolbar placement="left" article={data.article} />
-                        </section>
+                        <TagList article={data.article} />
+                        <Toolbar placement="left" article={data.article} />
+                      </section>
 
-                        <Toolbar
-                          placement="bottom"
-                          article={data.article}
-                          fixed={fixedToolbar}
-                        />
+                      <Toolbar
+                        placement="bottom"
+                        article={data.article}
+                        fixed={fixedToolbar}
+                      />
+                    </Block>
+                  )}
+                </Responsive.MediumUp>
+              )
+            })()}
 
-                        <Responses />
+            <section className="l-col-4 l-col-md-8 l-col-lg-12">
+              <RelatedArticles article={data.article} />
+            </section>
 
-                        <RelatedArticles article={data.article} />
-                      </>
-                    )}
-                  </Responsive.MediumUp>
-                )
-              })()}
-
+            <Block type="section">
+              <Responses />
               <AppreciatorsModal />
               <ShareModal />
-            </article>
+            </Block>
 
             <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
               <Footer />

@@ -1,20 +1,17 @@
 .related-articles {
-  padding-top: var(--spacing-xx-loose);
+  padding-top: 3rem;
 }
 
-ul {
-  margin-top: var(--spacing-default);
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  @media (--sm-up) {
-    display: flex;
+  padding-bottom: 0.5rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
 
-    & li {
-      width: 33.3%;
-      flex-basis: 33.3%;
-
-      & + li {
-        margin-left: var(--spacing-default);
-      }
-    }
+  & div:not(:first-child) {
+    margin-left: var(--spacing-x-tight);
   }
 }
