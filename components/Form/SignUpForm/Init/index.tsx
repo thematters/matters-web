@@ -11,7 +11,7 @@ import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -237,7 +237,13 @@ export const SignUpInitForm: FC<Props> = ({
 
     return (
       <>
-        <form className={formClass} onSubmit={handleSubmit}>
+        <form
+          className={formClass}
+          onSubmit={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
+            handleSubmit()
+          }}
+        >
           <Form.Input
             type="text"
             field="email"
