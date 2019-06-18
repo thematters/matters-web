@@ -10,6 +10,7 @@ export const ArticleDetailResponses = gql`
     pinnedComments {
       ...FeedDigestComment
     }
+    responseCount
     responses(
       input: {
         after: $cursor

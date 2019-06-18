@@ -176,8 +176,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         const connectionPath = 'article.responses'
-        const { totalCount, edges, pageInfo } = _get(data, connectionPath, {
-          totalCount: 0,
+        const { edges, pageInfo } = _get(data, connectionPath, {
           edges: {},
           pageInfo: {}
         })
@@ -196,7 +195,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
-
+        const { responseCount } = _get(data, 'article', 0)
         const responses = filterResponses(
           (edges || []).map(({ node }: { node: any }) => node)
         )
@@ -246,7 +245,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                   zh_hant={TEXT.zh_hant.response}
                   zh_hans={TEXT.zh_hans.response}
                 />
-                <span className="count">{totalCount}</span>
+                <span className="count">{responseCount}</span>
               </h2>
               <div className="switch">
                 <Switch
