@@ -12,6 +12,6 @@
   overflow-y: hidden;
 
   & div:not(:first-child) {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--spacing-tight);
   }
 }
