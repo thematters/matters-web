@@ -1,7 +1,8 @@
 import { Button, Translate } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 export default () => (
   <ModalSwitch modalId="signUpModal">
@@ -11,7 +12,10 @@ export default () => (
         size="large"
         bgColor="green"
         style={{ minWidth: '5rem' }}
-        onClick={() => open()}
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START)
+          open()
+        }}
       >
         <Translate
           zh_hant={TEXT.zh_hant.register}
