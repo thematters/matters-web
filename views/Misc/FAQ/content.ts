@@ -51,7 +51,7 @@ export default {
 
 <h3>怎样把作品发布至分布式网络？</h3>
 <p>当您在编辑器中点击「发布」时，会先弹出「作品即将发布到分布式网络」的说明视窗，告知发布规则，并要求您再次确认「发布」，或者「暂存草稿箱」回到一般编辑状态。</p>
-<p>当您再次确认「发布」后，系统会立即将作品存至草稿箱。此时页面会自动跳转到预览状态，出现「正在等待发佈」的标籤，作品发布成功后会存储在 IPFS 的公共节点之中，不可再修改或删除。</p>
+<p>当您再次确认「发布」后，系统会立即将作品存至草稿箱。此时页面会自动跳转到预览状态，出现「正在等待发佈」的标签，作品发布成功后会存储在 IPFS 的公共节点之中，不可再修改或删除。</p>
 
 <h3>作品发布后想删除怎么办？</h3>
 <p>已成功发布的作品，理论上会实现永久存储，无法被删除和修改。若必要，您可以选择在 Matters 站上将已发布的作品「站内隐藏」，隐藏之后，作品在您的列表中会标记为隐藏状态，仅作者可见。作品指纹只有您本人可见，是否要继续传播公共节点所保存的链接，决定权也在您。</p>
@@ -74,7 +74,7 @@ export default {
 <p>如果你发现有违反 Matters《社区约章》的情况，可以点击进入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 看板，在相关板块添加反馈，或发送邮件至 ask@matters.news 进行举报，并描述具体情况。被举报的信息一旦经站方查实，站方将根据《用户协议》和《社区约章》条例进行处理。包括但不限于隐藏作品、用户禁言、禁止互动，甚至冻结帐户。与此同时，被举报的用户可以进行意见反馈，或发送邮件至 ask@matters.news 向站方申诉。</p>
 
 <h3>更多建议和意见要对 Matters 说</h3>
-<p>若您希望向 Matters 提出建议，或遭遇操作异常，请登入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相关板块进行反馈，也可以发送邮件至 ask@matters.news，我们会尽快回覆！</p>
+<p>若您希望向 Matters 提出建议，或遭遇操作异常，请登入 <a href="https://trello.com/invite/b/oltVvMMi/8321a9c27ee10fbf2b831119a1e3c90c/matters-lab" target="_blank">MattersLab Trello</a> 相关板块进行反馈，也可以发送邮件至 ask@matters.news，我们会尽快回复！</p>
 
   `
 }
