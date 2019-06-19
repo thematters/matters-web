@@ -30,7 +30,7 @@ export const video = (value: string) => {
   } else if (value.match(/vimeo.com\/(\d+)/)) {
     const matches = value.match(/vimeo.com\/(\d+)/)
     id = matches && matches[1]
-    return 'http://player.vimeo.com/video/' + id
+    return 'https://player.vimeo.com/video/' + id
   } else if (value.match(/id_(.*)\.html/i)) {
     const matches = value.match(/id_(.*)\.html/i)
     id = matches && matches[1]

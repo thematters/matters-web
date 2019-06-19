@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { Button, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { updateViewerFolloweeCount } from './utils'
@@ -48,7 +49,12 @@ const Unfollow = ({
         <Button
           size={size}
           style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
-          onClick={unfollow}
+          onClick={() => {
+            unfollow()
+            analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
+              id: user.id
+            })
+          }}
           bgColor={hover ? 'red' : 'green'}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
