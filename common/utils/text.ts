@@ -5,6 +5,8 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
   (html || '')
     .replace(/(<\/p><p>|&nbsp;)/g, ' ') // replace line break and space first
     .replace(/(<([^>]+)>)/gi, replacement)
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
 
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
