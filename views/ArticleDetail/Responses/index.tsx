@@ -74,8 +74,8 @@ const ResponseTip = ({ closeCallback }: { closeCallback?: any }) => (
       </p>
       <p>
         <Translate
-          zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
-          zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
+          zh_hant="現在「回應」包含了評論和關聯本作品的衍生創作，你可以選擇「只看衍生作品」。"
+          zh_hans="现在「回应」包含了评论和关联本作品的衍生创作，你可以选择「只看衍生作品」。"
         />
       </p>
       {closeCallback && (
