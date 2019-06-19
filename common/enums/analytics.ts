@@ -23,7 +23,9 @@ export const ANALYTICS_EVENTS = {
   OPEN_COLLECTED: 'open-collected',
   SHARE: 'share',
   SIGNUP_START: 'signup-start',
-  SIGNUP_SUCCESS: 'signup-success'
+  SIGNUP_SUCCESS: 'signup-success',
+  FOLLOW_USER: 'follow-user',
+  UNFOLLOW_USER: 'unfollow-user'
 }
 
 export const SHARE_TYPE = {
