@@ -24,7 +24,8 @@ import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { getQuery, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Collection from './Collection'
@@ -156,6 +157,8 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   }
                 })
 
+                const [trackedFinish, setTrackedFinish] = useState(false)
+
                 useImmersiveMode('article > .content')
 
                 return (
@@ -223,6 +226,20 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                         <Responses />
 
                         <RelatedArticles article={data.article} />
+
+                        <Waypoint
+                          onEnter={() => {
+                            if (!trackedFinish) {
+                              analytics.trackEvent(
+                                ANALYTICS_EVENTS.FINISH_COMMENTS,
+                                {
+                                  entrance: data.article.id
+                                }
+                              )
+                              setTrackedFinish(true)
+                            }
+                          }}
+                        />
                       </>
                     )}
                   </Responsive.MediumUp>

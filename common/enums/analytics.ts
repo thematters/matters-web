@@ -14,6 +14,7 @@ export const ANALYTICS_EVENTS = {
   ENTER_ARTICLE: 'enter-article',
   LEAVE_ARTICLE: 'leave-article',
   FINISH_ARTICLE: 'finish-article',
+  FINISH_COMMENTS: 'finish-comments',
   OPEN_COMMENTS: 'open-comments',
   LOG_OUT: 'log-out',
   LOG_IN: 'log-in',
