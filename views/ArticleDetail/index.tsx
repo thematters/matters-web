@@ -183,6 +183,7 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
               return (
                 <Responsive.MediumUp>
                   {(isMediumUp: boolean) => (
+                    <>
                     <Block>
                       <Head
                         title={data.article.title}
@@ -242,30 +243,31 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                         fixed={fixedToolbar}
                       />
                     </Block>
+
+                    <section className="l-col-4 l-col-md-8 l-col-lg-12">
+                      <RelatedArticles article={data.article} />
+                    </section>
+
+                    <Block type="section">
+                      <Responses />
+                      <Waypoint
+                        onEnter={() => {
+                          if (!trackedFinish) {
+                            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
+                              entrance: data.article.id
+                            })
+                            setTrackedFinish(true)
+                          }
+                        }}
+                      />
+                      <AppreciatorsModal />
+                      <ShareModal />
+                    </Block>
+                    </>
                   )}
                 </Responsive.MediumUp>
               )
             })()}
-
-            <section className="l-col-4 l-col-md-8 l-col-lg-12">
-              <RelatedArticles article={data.article} />
-            </section>
-
-            <Block type="section">
-              <Responses />
-              <Waypoint
-                onEnter={() => {
-                  if (!trackedFinish) {
-                    analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
-                      entrance: data.article.id
-                    })
-                    setTrackedFinish(true)
-                  }
-                }}
-              />
-              <AppreciatorsModal />
-              <ShareModal />
-            </Block>
 
             <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
               <Footer />
