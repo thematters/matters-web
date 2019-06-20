@@ -184,85 +184,88 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                 <Responsive.MediumUp>
                   {(isMediumUp: boolean) => (
                     <>
-                    <Block>
-                      <Head
-                        title={data.article.title}
-                        description={data.article.summary}
-                        keywords={data.article.tags.map(
-                          ({ content }: { content: any }) => content
-                        )}
-                        image={data.article.cover}
-                      />
+                      <Block>
+                        <Head
+                          title={data.article.title}
+                          description={data.article.summary}
+                          keywords={data.article.tags.map(
+                            ({ content }: { content: any }) => content
+                          )}
+                          image={data.article.cover}
+                        />
 
-                      <State article={data.article} />
+                        <State article={data.article} />
 
-                      <section className="author">
-                        <UserDigest.FullDesc user={data.article.author} />
+                        <section className="author">
+                          <UserDigest.FullDesc user={data.article.author} />
+                        </section>
+
+                        <section className="title">
+                          <Title type="article">{data.article.title}</Title>
+                          <span className="subtitle">
+                            <p className="date">
+                              <DateTime date={data.article.createdAt} />
+                            </p>
+                            <span>{data.article.live && <IconLive />}</span>
+                          </span>
+                        </section>
+
+                        <section className="content">
+                          <Content article={data.article} />
+                          {(collectionCount > 0 || canEditCollection) && (
+                            <Collection
+                              article={data.article}
+                              canEdit={canEditCollection}
+                              collectionCount={collectionCount}
+                            />
+                          )}
+
+                          {/* content:end */}
+                          {!isMediumUp && (
+                            <Waypoint
+                              onPositionChange={({ currentPosition }) => {
+                                if (currentPosition === 'below') {
+                                  setFixedToolbar(true)
+                                } else {
+                                  setFixedToolbar(false)
+                                }
+                              }}
+                            />
+                          )}
+
+                          <TagList article={data.article} />
+                          <Toolbar placement="left" article={data.article} />
+                        </section>
+
+                        <Toolbar
+                          placement="bottom"
+                          article={data.article}
+                          fixed={fixedToolbar}
+                        />
+                      </Block>
+
+                      <section className="l-col-4 l-col-md-8 l-col-lg-12">
+                        <RelatedArticles article={data.article} />
                       </section>
 
-                      <section className="title">
-                        <Title type="article">{data.article.title}</Title>
-                        <span className="subtitle">
-                          <p className="date">
-                            <DateTime date={data.article.createdAt} />
-                          </p>
-                          <span>{data.article.live && <IconLive />}</span>
-                        </span>
-                      </section>
-
-                      <section className="content">
-                        <Content article={data.article} />
-                        {(collectionCount > 0 || canEditCollection) && (
-                          <Collection
-                            article={data.article}
-                            canEdit={canEditCollection}
-                            collectionCount={collectionCount}
-                          />
-                        )}
-
-                        {/* content:end */}
-                        {!isMediumUp && (
-                          <Waypoint
-                            onPositionChange={({ currentPosition }) => {
-                              if (currentPosition === 'below') {
-                                setFixedToolbar(true)
-                              } else {
-                                setFixedToolbar(false)
-                              }
-                            }}
-                          />
-                        )}
-
-                        <TagList article={data.article} />
-                        <Toolbar placement="left" article={data.article} />
-                      </section>
-
-                      <Toolbar
-                        placement="bottom"
-                        article={data.article}
-                        fixed={fixedToolbar}
-                      />
-                    </Block>
-
-                    <section className="l-col-4 l-col-md-8 l-col-lg-12">
-                      <RelatedArticles article={data.article} />
-                    </section>
-
-                    <Block type="section">
-                      <Responses />
-                      <Waypoint
-                        onEnter={() => {
-                          if (!trackedFinish) {
-                            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
-                              entrance: data.article.id
-                            })
-                            setTrackedFinish(true)
-                          }
-                        }}
-                      />
-                      <AppreciatorsModal />
-                      <ShareModal />
-                    </Block>
+                      <Block type="section">
+                        <Responses />
+                        <Waypoint
+                          onEnter={() => {
+                            if (!trackedFinish) {
+                              analytics.trackEvent(
+                                ANALYTICS_EVENTS.FINISH_COMMENTS,
+                                {
+                                  entrance: data.article.id
+                                }
+                              )
+                              setTrackedFinish(true)
+                            }
+                          }}
+                        />
+                        <AppreciatorsModal />
+                        <ShareModal />
+                      </Block>
                     </>
                   )}
                 </Responsive.MediumUp>
