@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { ArticleDigest, Title, Translate } from '~/components'
+import { ArticleDigest } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -34,13 +34,10 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
 
   return (
     <section className="related-articles">
-      <Title type="page" is="h2">
-        <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />
-      </Title>
-      <ul>
+      <div className="container">
         {edges.map(
           ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-            <li
+            <div
               key={cursor}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
@@ -50,11 +47,11 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
                 })
               }
             >
-              <ArticleDigest.Related article={node} />
-            </li>
+              <ArticleDigest.Related article={node} hasAuthor hasBookmark />
+            </div>
           )
         )}
-      </ul>
+      </div>
       <style jsx>{styles}</style>
     </section>
   )

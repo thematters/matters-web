@@ -81,9 +81,25 @@ const ARTICLE_DETAIL = gql`
   ${State.fragments.article}
 `
 
+const Block = ({
+  type = 'article',
+  children
+}: {
+  type?: 'article' | 'section'
+  children: any
+}) => {
+  const classes = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
+  return type === 'article' ? (
+    <article className={classes}>{children}</article>
+  ) : (
+    <section className={classes}>{children}</section>
+  )
+}
+
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [trackedFinish, setTrackedFinish] = useState(false)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -104,25 +120,29 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
         return (
           <main className="l-row">
-            <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-              {(() => {
-                if (loading) {
-                  return <Placeholder.ArticleDetail />
-                }
+            {(() => {
+              if (loading) {
+                return (
+                  <Block>
+                    <Placeholder.ArticleDetail />
+                  </Block>
+                )
+              }
 
-                // redirect to latest verion of URL Pattern
-                if (uuid && process.browser && router) {
-                  const path = toPath({
-                    page: 'articleDetail',
-                    userName: data.article.author.userName,
-                    slug: data.article.slug,
-                    mediaHash: data.article.mediaHash
-                  })
-                  router.push(path.href, path.as, { shallow: true })
-                }
+              // redirect to latest verion of URL Pattern
+              if (uuid && process.browser && router) {
+                const path = toPath({
+                  page: 'articleDetail',
+                  userName: data.article.author.userName,
+                  slug: data.article.slug,
+                  mediaHash: data.article.mediaHash
+                })
+                router.push(path.href, path.as, { shallow: true })
+              }
 
-                if (data.article.state !== 'active' && viewer.id !== authorId) {
-                  return (
+              if (data.article.state !== 'active' && viewer.id !== authorId) {
+                return (
+                  <Block>
                     <EmptyArticle
                       description={
                         <Translate zh_hant="作品被隱藏" zh_hans="作品被隐藏" />
@@ -130,41 +150,41 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     >
                       <BackToHomeButton />
                     </EmptyArticle>
-                  )
-                }
+                  </Block>
+                )
+              }
 
-                useEffect(() => {
-                  if (data.article.live) {
-                    subscribeToMore({
-                      document: gql`
-                        subscription ArticleEdited($id: ID!) {
-                          nodeEdited(input: { id: $id }) {
+              useEffect(() => {
+                if (data.article.live) {
+                  subscribeToMore({
+                    document: gql`
+                      subscription ArticleEdited($id: ID!) {
+                        nodeEdited(input: { id: $id }) {
+                          id
+                          ... on Article {
                             id
-                            ... on Article {
-                              id
-                              ...ToolbarArticle
-                            }
+                            ...ToolbarArticle
                           }
                         }
-                        ${Toolbar.fragments.article}
-                      `,
-                      variables: { id: data.article.id },
-                      updateQuery: (prev, { subscriptionData }) =>
-                        _merge(prev, {
-                          article: subscriptionData.data.nodeEdited
-                        })
-                    })
-                  }
-                })
+                      }
+                      ${Toolbar.fragments.article}
+                    `,
+                    variables: { id: data.article.id },
+                    updateQuery: (prev, { subscriptionData }) =>
+                      _merge(prev, {
+                        article: subscriptionData.data.nodeEdited
+                      })
+                  })
+                }
+              })
 
-                const [trackedFinish, setTrackedFinish] = useState(false)
+              useImmersiveMode('article > .content')
 
-                useImmersiveMode('article > .content')
-
-                return (
-                  <Responsive.MediumUp>
-                    {(isMediumUp: boolean) => (
-                      <>
+              return (
+                <Responsive.MediumUp>
+                  {(isMediumUp: boolean) => (
+                    <>
+                      <Block>
                         <Head
                           title={data.article.title}
                           description={data.article.summary}
@@ -222,11 +242,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                           article={data.article}
                           fixed={fixedToolbar}
                         />
+                      </Block>
 
-                        <Responses />
-
+                      <section className="l-col-4 l-col-md-8 l-col-lg-12">
                         <RelatedArticles article={data.article} />
+                      </section>
 
+                      <Block type="section">
+                        <Responses />
                         <Waypoint
                           onEnter={() => {
                             if (!trackedFinish) {
@@ -240,15 +263,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             }
                           }}
                         />
-                      </>
-                    )}
-                  </Responsive.MediumUp>
-                )
-              })()}
-
-              <AppreciatorsModal />
-              <ShareModal />
-            </article>
+                        <AppreciatorsModal />
+                        <ShareModal />
+                      </Block>
+                    </>
+                  )}
+                </Responsive.MediumUp>
+              )
+            })()}
 
             <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
               <Footer />

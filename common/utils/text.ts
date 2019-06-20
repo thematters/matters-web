@@ -41,3 +41,35 @@ export const trimLineBreaks = (html: string) => {
   const re = new RegExp(`(^(${LINE_BREAK})*)|((${LINE_BREAK})*$)`, 'g')
   return html.replace(re, '')
 }
+
+/**
+ * Simple words' length counting.
+ */
+export const countWordsLength = (text: string) => {
+  return text
+    ? text.split('').reduce((count, char, index) => {
+        return count + (text.charCodeAt(index) < 256 ? 1 : 2)
+      }, 0)
+    : 0
+}
+
+/**
+ * Simple substring title by words' length counting.
+ */
+export const makeTitle = (text: string, limit: number) => {
+  const buffer = 3
+  const length = countWordsLength(text)
+  if (text && length > limit) {
+    let sum = 0
+    let lastIndex = 0
+    for (let index = 0; index < text.length; index++) {
+      sum = sum + (text.charCodeAt(index) < 256 ? 1 : 2)
+      if (sum >= limit - buffer && lastIndex === 0) {
+        lastIndex = index
+        break
+      }
+    }
+    return text.substring(0, lastIndex) + '...'
+  }
+  return text
+}
