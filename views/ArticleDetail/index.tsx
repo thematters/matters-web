@@ -24,7 +24,8 @@ import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { getQuery, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, getQuery, toPath } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Collection from './Collection'
@@ -98,6 +99,7 @@ const Block = ({
 const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [trackedFinish, setTrackedFinish] = useState(false)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -251,6 +253,16 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
 
             <Block type="section">
               <Responses />
+              <Waypoint
+                onEnter={() => {
+                  if (!trackedFinish) {
+                    analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
+                      entrance: data.article.id
+                    })
+                    setTrackedFinish(true)
+                  }
+                }}
+              />
               <AppreciatorsModal />
               <ShareModal />
             </Block>

@@ -14,6 +14,7 @@ export const ANALYTICS_EVENTS = {
   ENTER_ARTICLE: 'enter-article',
   LEAVE_ARTICLE: 'leave-article',
   FINISH_ARTICLE: 'finish-article',
+  FINISH_COMMENTS: 'finish-comments',
   OPEN_COMMENTS: 'open-comments',
   LOG_OUT: 'log-out',
   LOG_IN: 'log-in',
@@ -22,7 +23,9 @@ export const ANALYTICS_EVENTS = {
   OPEN_COLLECTED: 'open-collected',
   SHARE: 'share',
   SIGNUP_START: 'signup-start',
-  SIGNUP_SUCCESS: 'signup-success'
+  SIGNUP_SUCCESS: 'signup-success',
+  FOLLOW_USER: 'follow-user',
+  UNFOLLOW_USER: 'unfollow-user'
 }
 
 export const SHARE_TYPE = {

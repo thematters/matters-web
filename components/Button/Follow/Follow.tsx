@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import { Button, Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
@@ -56,7 +57,10 @@ const Follow = ({
           />
         }
         style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
-        onClick={follow}
+        onClick={() => {
+          follow()
+          analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
+        }}
         bgColor="transparent"
         outlineColor="green"
       >
