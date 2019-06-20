@@ -52,3 +52,24 @@ export const countWordsLength = (text: string) => {
       }, 0)
     : 0
 }
+
+/**
+ * Simple substring title by words' length counting.
+ */
+export const makeTitle = (text: string, limit: number) => {
+  const buffer = 3
+  const length = countWordsLength(text)
+  if (text && length > limit) {
+    let sum = 0
+    let lastIndex = 0
+    for (let index = 0; index < text.length; index++) {
+      sum = sum + (text.charCodeAt(index) < 256 ? 1 : 2)
+      if (sum >= limit - buffer && lastIndex === 0) {
+        lastIndex = index
+        break
+      }
+    }
+    return text.substring(0, lastIndex) + '...'
+  }
+  return text
+}

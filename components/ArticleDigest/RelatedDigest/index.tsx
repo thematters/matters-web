@@ -5,7 +5,12 @@ import Link from 'next/link'
 import { Title } from '~/components'
 
 import { UrlFragments } from '~/common/enums'
-import { countWordsLength, makeSummary, toPath } from '~/common/utils'
+import {
+  countWordsLength,
+  makeSummary,
+  makeTitle,
+  toPath
+} from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
 import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
@@ -53,9 +58,11 @@ const RelatedDigest = ({
     fragment: live ? UrlFragments.COMMENTS : ''
   })
 
-  const isMultiLineTitle = countWordsLength(title) > 40
-
-  const cleanedSummary = makeSummary(summary, isMultiLineTitle ? 60 : 80)
+  const cleanedTitle = makeTitle(title, 70)
+  const cleanedSummary = makeSummary(
+    summary,
+    countWordsLength(title) > 40 ? 60 : 80
+  )
 
   const contentClasses = classNames({
     content: true,
@@ -79,7 +86,7 @@ const RelatedDigest = ({
           <Link {...path}>
             <a>
               <Title type="sidebar" is="h3">
-                {title}
+                {cleanedTitle}
               </Title>
             </a>
           </Link>
