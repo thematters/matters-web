@@ -10,7 +10,7 @@ import { TextIcon } from '~/components/TextIcon'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
 import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
-import ICON_CHECK_ACTIVE from '~/static/icons/checkbox-check-active.svg?sprite'
+import ICON_BOX from '~/static/icons/box.svg?sprite'
 import ICON_COPY from '~/static/icons/copy.svg?sprite'
 import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
@@ -195,11 +195,7 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
       <button type="button">
         <TextIcon
           icon={
-            <Icon
-              id={ICON_CHECK_ACTIVE.id}
-              viewBox={ICON_CHECK_ACTIVE.viewBox}
-              size="small"
-            />
+            <Icon id={ICON_BOX.id} viewBox={ICON_BOX.viewBox} size="small" />
           }
           size="sm"
           color="green"
