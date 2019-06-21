@@ -34,6 +34,7 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
 
   return (
     <section className="related-articles">
+      <div className="divider" />
       <div className="container">
         {edges.map(
           ({ node, cursor }: { node: any; cursor: any }, i: number) => (
