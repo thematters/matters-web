@@ -17,7 +17,7 @@ class EmbedCode extends BlockEmbed {
     iframe.setAttribute(
       'sandbox',
       codeType === 'likebutton'
-        ? 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation'
+        ? 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation allow-top-navigation-by-user-activation'
         : 'allow-scripts allow-same-origin allow-popups'
     )
 

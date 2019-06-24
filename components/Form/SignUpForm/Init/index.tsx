@@ -11,7 +11,7 @@ import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   clearPersistCache,
@@ -375,41 +375,44 @@ export const SignUpInitForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
+    handleSubmit: async (
+      values,
+      { props, setFieldError, setSubmitting }: any
+    ) => {
       const { email, code, displayName, password } = values
       const { preSubmitAction, submitAction } = props
       if (!preSubmitAction || !submitAction) {
         return undefined
       }
 
-      preSubmitAction({
-        variables: { input: { email, code, type: 'register' } }
-      })
-        .then(({ data }: any) => {
-          const { confirmVerificationCode: codeId } = data
-          return submitAction({
-            variables: { input: { email, codeId, displayName, password } }
-          })
+      try {
+        const {
+          data: { confirmVerificationCode: codeId }
+        } = await preSubmitAction({
+          variables: { input: { email, code, type: 'register' } }
         })
-        .then((result: any) => {
-          if (submitCallback) {
-            submitCallback()
-            clearPersistCache()
-          }
+
+        await submitAction({
+          variables: { input: { email, codeId, displayName, password } }
         })
-        .catch((error: any) => {
-          const errorCode = getErrorCodes(error)[0]
-          const errorMessage = translate({
-            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-            lang
-          })
-          setFieldError('code', errorMessage)
+
+        if (submitCallback) {
+          submitCallback()
+          clearPersistCache()
+        }
+      } catch (error) {
+        const errorCode = getErrorCodes(error)[0]
+        const errorMessage = translate({
+          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          lang
         })
-        .finally(() => {
-          setSubmitting(false)
-          analytics.identifyUser()
-        })
+        setFieldError('code', errorMessage)
+      }
+
+      setSubmitting(false)
+      analytics.identifyUser()
+      analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
     }
   })(BaseForm)
 

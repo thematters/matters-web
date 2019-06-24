@@ -74,8 +74,8 @@ const ResponseTip = ({ closeCallback }: { closeCallback?: any }) => (
       </p>
       <p>
         <Translate
-          zh_hant="現在「回應」包含了評論和其他作者關聯本作品的衍生創作，你可以選擇只看回應作品。"
-          zh_hans="现在「回应」包含了评论和其他作者关联本作品的衍生创作，你可以选择只看回应作品。"
+          zh_hant="現在「回應」包含了評論和關聯本作品的衍生創作，你可以選擇「只看衍生作品」。"
+          zh_hans="现在「回应」包含了评论和关联本作品的衍生创作，你可以选择「只看衍生作品」。"
         />
       </p>
       {closeCallback && (
@@ -161,6 +161,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
     <Query
       query={ARTICLE_RESPONSES}
       variables={queryVariables}
+      fetchPolicy="cache-and-network"
       errorPolicy="none"
       notifyOnNetworkStatusChange
     >
@@ -176,8 +177,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         const connectionPath = 'article.responses'
-        const { totalCount, edges, pageInfo } = _get(data, connectionPath, {
-          totalCount: 0,
+        const { edges, pageInfo } = _get(data, connectionPath, {
           edges: {},
           pageInfo: {}
         })
@@ -196,7 +196,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
-
+        const { responseCount } = _get(data, 'article', 0)
         const responses = filterResponses(
           (edges || []).map(({ node }: { node: any }) => node)
         )
@@ -246,7 +246,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                   zh_hant={TEXT.zh_hant.response}
                   zh_hans={TEXT.zh_hans.response}
                 />
-                <span className="count">{totalCount}</span>
+                <span className="count">{responseCount}</span>
               </h2>
               <div className="switch">
                 <Switch

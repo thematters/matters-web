@@ -1,20 +1,37 @@
 .related-articles {
-  padding-top: var(--spacing-xx-loose);
+  padding-top: 3rem;
+
+  @media (--md-down) {
+    padding-top: 2rem;
+  }
 }
 
-ul {
-  margin-top: var(--spacing-default);
+.divider {
+  border: 0px;
+  padding: 0px;
 
-  @media (--sm-up) {
-    display: flex;
+  @media (--md-down) {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.161175);
+    height: 0px;
+    padding-bottom: 2.5rem;
+  }
+}
 
-    & li {
-      width: 33.3%;
-      flex-basis: 33.3%;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-      & + li {
-        margin-left: var(--spacing-default);
-      }
-    }
+  padding: 2px 2px 0.75rem 2px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  & div:not(:first-child) {
+    margin-left: var(--spacing-tight);
+  }
+
+  & div:last-child {
+    padding-right: 1px;
   }
 }
