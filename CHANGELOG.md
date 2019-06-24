@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2019-06-24
+
+### Changed
+
+- Fix for Response tip when user is logged out #312
+- Redesign of related articles block #314 #325
+- Update FAQ #315
+- Fix response count #316
+- Change fetch policy for Response query #317
+- Fix unable to register #320
+- Convert specific html tag in summary #321
+- Like button optimization & additional analytic events #322
+- Update IPFS entry icon #324
+
 ## [1.7.0] - 2019-05-14
 
 ### Added
