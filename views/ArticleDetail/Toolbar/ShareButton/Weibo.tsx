@@ -13,7 +13,7 @@ const Weibo = () => (
     onClick={() => {
       const url = window.location.href
       const text = window.document.title
-      const cover = dom.$('meta[property="og:image').getAttribute('content')
+      const cover = dom.$('meta[property="og:image"]').getAttribute('content')
       const shareUrl =
         'http://service.weibo.com/share/share.php' +
         objectToGetParams({

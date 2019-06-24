@@ -36,7 +36,8 @@ export const SHARE_TYPE = {
   TWITTER: 'twitter',
   EMAIL: 'email',
   FACEBOOK: 'facebook',
-  WEIBO: 'weibo'
+  WEIBO: 'weibo',
+  DOUBAN: 'douban'
 }
 
 export const FEED_TYPE = {
