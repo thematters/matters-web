@@ -134,7 +134,6 @@ class Mention {
       return mentionIndex > previousIndex ? mentionIndex : previousIndex
     }, -1)
 
-
     if (mentionCharIndex <= -1) {
       this.hideMentionContainer()
       return
@@ -155,7 +154,6 @@ class Mention {
       this.cursorPos - (beforeCursorPos.length - mentionCharIndex)
     const textAfter = beforeCursorPos.substring(mentionCharIndex + 1)
     this.mentionCharPos = mentionCharPos
-
 
     if (!this.hasValidChars(textAfter)) {
       this.hideMentionContainer()
