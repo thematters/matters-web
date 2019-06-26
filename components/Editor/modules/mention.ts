@@ -53,14 +53,15 @@ class Mention {
       return
     }
 
+    const tempMentionCharPos = this.mentionCharPos
     this.quill.deleteText(
       this.mentionCharPos,
       this.cursorPos - this.mentionCharPos,
       'user'
     )
-    this.quill.insertEmbed(this.mentionCharPos, 'mention', data, 'user')
-    this.quill.insertText(this.mentionCharPos + 1, ' ', 'user')
-    this.quill.setSelection(this.mentionCharPos + 2, 'user')
+    this.quill.insertEmbed(tempMentionCharPos, 'mention', data, 'user')
+    this.quill.insertText(tempMentionCharPos + 1, ' ', 'user')
+    this.quill.setSelection(tempMentionCharPos + 2, 'user')
   }
 
   hasValidChars(s: string) {
