@@ -15,6 +15,7 @@ import {
   mergeConnections,
   toPath
 } from '~/common/utils'
+import ICON_192 from '~/static/icon-192x192.png?url'
 import ICON_CHEVRON_RIGHT from '~/static/icons/chevron-right.svg?sprite'
 
 import { UserCommentFeed } from './__generated__/UserCommentFeed'
@@ -26,6 +27,9 @@ const USER_ID = gql`
     user(input: { userName: $userName }) {
       id
       displayName
+      info {
+        description
+      }
     }
   }
 `
@@ -89,6 +93,8 @@ const UserCommentsWrap: React.FC<WithRouterProps> = ({ router }) => {
                 zh_hant: `${data.user.displayName}發表的評論`,
                 zh_hans: `${data.user.displayName}发表的评论`
               }}
+              description={data.user.info.description}
+              image={ICON_192}
             />
             <UserComments user={data.user} />
           </>
