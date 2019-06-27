@@ -5,7 +5,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { LoadMore, Translate } from '~/components'
+import { LoadMore, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import CommentForm from '~/components/Form/CommentForm'
@@ -77,7 +77,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         refetch
       }: QueryResult & { data: ArticleCommentsType }) => {
         if (!data || !data.article) {
-          return null
+          return <Spinner />
         }
 
         const connectionPath = 'article.comments'

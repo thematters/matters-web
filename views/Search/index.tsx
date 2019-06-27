@@ -37,10 +37,9 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
     return <EmptySeachPage />
   }
 
-  const isArticleOnly = type === 'article'
   const isTagOnly = type === 'tag'
   const isUserOnly = type === 'user'
-  const isAggregate = !isArticleOnly && !isTagOnly && !isUserOnly
+  const isAggregate = !isTagOnly && !isUserOnly
 
   return (
     <main>
@@ -56,9 +55,7 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
 
       <section className="l-row">
         <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          {(isArticleOnly || isAggregate) && (
-            <SearchArticles q={q} isAggregate={isAggregate} />
-          )}
+          {isAggregate && <SearchArticles q={q} />}
           {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
           {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
         </article>
