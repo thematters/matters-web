@@ -134,7 +134,8 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
 
       {/* PWA */}
       <link rel="apple-touch-icon" key="apple-touch-icon" href={ICON_192} />
-      <meta name="theme-color" key="theme-color" content="#ffffff" />
+      <meta name="application-name" key="application-name" content="Matters" />
+      <meta name="theme-color" key="theme-color" content="#0d6763" />
       <meta
         name="apple-mobile-web-app-status-bar-style"
         key="apple-mobile-web-app-status-bar-style"
