@@ -1,6 +1,6 @@
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useRef, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
@@ -29,6 +29,7 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
 
   const hideDropdown = () => {
     if (instance) {
@@ -73,11 +74,15 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
                     onAdd(article)
                     setSearch('')
                     hideDropdown()
+                    if (inputNode && inputNode.current) {
+                      inputNode.current.value = ''
+                    }
                   }}
                 />
               }
             >
               <input
+                ref={inputNode}
                 type="search"
                 placeholder={translate({
                   zh_hant: '搜尋作品標題…',
