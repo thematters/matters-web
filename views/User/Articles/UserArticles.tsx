@@ -11,6 +11,7 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import ICON_192 from '~/static/icon-192x192.png?url'
 
 import { UserArticleFeed } from './__generated__/UserArticleFeed'
 
@@ -25,6 +26,9 @@ const USER_ARTICLES_FEED = gql`
     user(input: { userName: $userName }) {
       id
       displayName
+      info {
+        description
+      }
       articles(input: { first: 10, after: $cursor }) {
         pageInfo {
           startCursor
@@ -93,9 +97,11 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           <>
             <Head
               title={{
-                zh_hant: `${data.user.displayName}發表的作品`,
-                zh_hans: `${data.user.displayName}发表的作品`
+                zh_hant: `${data.user.displayName}的創作空間站`,
+                zh_hans: `${data.user.displayName}的创作空间站`
               }}
+              description={data.user.info.description}
+              image={ICON_192}
             />
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
