@@ -6,7 +6,7 @@ import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { Icon, LoadMore, Translate } from '~/components'
+import { Icon, LoadMore, Spinner, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
@@ -173,7 +173,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         refetch
       }: QueryResult & { data: ArticleResponsesType }) => {
         if (!data || !data.article) {
-          return null
+          return <Spinner />
         }
 
         const connectionPath = 'article.responses'
