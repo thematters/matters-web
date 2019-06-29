@@ -1,8 +1,10 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import IconLive from '~/components/Icon/Live'
 import { Translate } from '~/components/Language'
+import { Title } from '~/components/Title'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT, UrlFragments } from '~/common/enums'
@@ -44,7 +46,7 @@ const ResponseDigest = ({
 }: { article: ResponseDigestArticle } & {
   hasFingerprint?: boolean
 } & ActionsControls) => {
-  const { author, slug, mediaHash, title, live } = article
+  const { author, cover, slug, mediaHash, title, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -56,6 +58,11 @@ const ResponseDigest = ({
     slug,
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
+  })
+
+  const contentClasses = classNames({
+    content: true,
+    'has-cover': !!cover
   })
 
   return (
@@ -77,16 +84,31 @@ const ResponseDigest = ({
         {!hasFingerprint && live && <IconLive />}
       </div>
 
-      <div className="content-wrap">
-        <div className="title">
-          <Link {...path}>
-            <a>
-              <p>{title}</p>
-            </a>
-          </Link>
-        </div>
-        <div className="description">
-          <Actions article={article} type="response" {...actionControls} />
+      <div className="digest-wrap">
+        <div className={contentClasses}>
+          <div className="left">
+            <Link {...path}>
+              <a>
+                <Title type="sidebar" is="h2">
+                  {title}
+                </Title>
+              </a>
+            </Link>
+            <Actions article={article} type="sidebar" {...actionControls} />
+          </div>
+
+          {cover && (
+            <Link {...path}>
+              <a>
+                <div
+                  className="cover"
+                  style={{
+                    backgroundImage: `url(${cover})`
+                  }}
+                />
+              </a>
+            </Link>
+          )}
         </div>
       </div>
 

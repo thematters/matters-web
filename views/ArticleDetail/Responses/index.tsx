@@ -284,7 +284,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                     {_has(response, 'title') ? (
                       <ArticleDigest.Response
                         article={response}
-                        hasDateTime
+                        hasAuthor
                         hasBookmark
                       />
                     ) : (
