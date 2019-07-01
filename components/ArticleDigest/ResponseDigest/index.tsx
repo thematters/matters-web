@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
+import { ArticleDigest } from '~/components'
 import IconLive from '~/components/Icon/Live'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
-import { TEXT, UrlFragments } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { TEXT } from '~/common/enums'
 
 import Actions, { ActionsControls } from '../Actions'
 import { Fingerprint } from '../Fingerprint'
@@ -44,19 +43,13 @@ const ResponseDigest = ({
 }: { article: ResponseDigestArticle } & {
   hasFingerprint?: boolean
 } & ActionsControls) => {
-  const { author, slug, mediaHash, title, live } = article
+  const { author, slug, mediaHash, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
   }
 
-  const path = toPath({
-    page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
-    fragment: live ? UrlFragments.COMMENTS : ''
-  })
+  const remadeArticle = { ...article, state: article.articleState }
 
   return (
     <section className="container">
@@ -77,17 +70,15 @@ const ResponseDigest = ({
         {!hasFingerprint && live && <IconLive />}
       </div>
 
-      <div className="content-wrap">
-        <div className="title">
-          <Link {...path}>
-            <a>
-              <p>{title}</p>
-            </a>
-          </Link>
-        </div>
-        <div className="description">
-          <Actions article={article} type="response" {...actionControls} />
-        </div>
+      <div className="digest-wrap">
+        <ArticleDigest.Sidebar
+          type="collection"
+          article={remadeArticle}
+          hasCover
+          hasAuthor
+          hasBookmark
+          extraContainerClass="no-padding"
+        />
       </div>
 
       <style jsx>{styles}</style>

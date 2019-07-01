@@ -18,6 +18,7 @@ type SidebarDigestProps = {
   article: SidebarDigestArticle
   hasCover?: boolean
   disabled?: boolean
+  extraContainerClass?: string
 } & ActionsControls
 
 const fragments = {
@@ -44,6 +45,7 @@ const SidebarDigest = ({
   article,
   hasCover,
   disabled,
+  extraContainerClass,
   ...actionControls
 }: SidebarDigestProps) => {
   const { author, slug, mediaHash, title, live, state } = article
@@ -60,6 +62,12 @@ const SidebarDigest = ({
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
+  const containerClasses = classNames({
+    container: true,
+    ...(extraContainerClass
+      ? { [extraContainerClass]: extraContainerClass }
+      : {})
+  })
   const contentClasses = classNames({
     content: true,
     'no-cover': !cover,
@@ -69,7 +77,7 @@ const SidebarDigest = ({
   })
 
   return (
-    <section className="container">
+    <section className={containerClasses}>
       <div className={contentClasses}>
         <div className="left">
           <Link {...path}>
