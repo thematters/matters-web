@@ -1,14 +1,11 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
+import { ArticleDigest } from '~/components'
 import IconLive from '~/components/Icon/Live'
 import { Translate } from '~/components/Language'
-import { Title } from '~/components/Title'
 import { UserDigest } from '~/components/UserDigest'
 
-import { TEXT, UrlFragments } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { TEXT } from '~/common/enums'
 
 import Actions, { ActionsControls } from '../Actions'
 import { Fingerprint } from '../Fingerprint'
@@ -46,24 +43,13 @@ const ResponseDigest = ({
 }: { article: ResponseDigestArticle } & {
   hasFingerprint?: boolean
 } & ActionsControls) => {
-  const { author, cover, slug, mediaHash, title, live } = article
+  const { author, slug, mediaHash, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
   }
 
-  const path = toPath({
-    page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
-    fragment: live ? UrlFragments.COMMENTS : ''
-  })
-
-  const contentClasses = classNames({
-    content: true,
-    'has-cover': !!cover
-  })
+  const remadeArticle = { ...article, state: article.articleState }
 
   return (
     <section className="container">
@@ -85,31 +71,14 @@ const ResponseDigest = ({
       </div>
 
       <div className="digest-wrap">
-        <div className={contentClasses}>
-          <div className="left">
-            <Link {...path}>
-              <a>
-                <Title type="sidebar" is="h2">
-                  {title}
-                </Title>
-              </a>
-            </Link>
-            <Actions article={article} type="sidebar" {...actionControls} />
-          </div>
-
-          {cover && (
-            <Link {...path}>
-              <a>
-                <div
-                  className="cover"
-                  style={{
-                    backgroundImage: `url(${cover})`
-                  }}
-                />
-              </a>
-            </Link>
-          )}
-        </div>
+        <ArticleDigest.Sidebar
+          type="collection"
+          article={remadeArticle}
+          hasCover
+          hasAuthor
+          hasBookmark
+          extraContainerClass="no-padding"
+        />
       </div>
 
       <style jsx>{styles}</style>

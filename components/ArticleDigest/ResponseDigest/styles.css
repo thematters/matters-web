@@ -25,51 +25,6 @@
 }
 
 .digest-wrap {
-  border-radius: 0.25rem;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
   margin-top: 0.75rem;
   margin-left: 2.5rem;
-}
-
-.content {
-  display: block;
-  position: relative;
-
-  & .left {
-    padding: var(--spacing-tight);
-
-    & :global(.actions > *) {
-      margin-top: var(--spacing-x-tight);
-    }
-  }
-}
-
-.cover {
-  display: none;
-}
-
-.has-cover {
-  display: block;
-
-  & .left {
-    padding-right: calc(var(--spacing-tight) + var(--digest-response-cover-size));
-
-    @media (--sm-down) {
-      padding-right: var(--spacing-tight);
-    }
-  }
-
-  & .cover {
-    display: none;
-    flex-shrink: 0;
-
-    @media (--sm-up) {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: var(--digest-response-cover-size);
-    }
-  }
 }
