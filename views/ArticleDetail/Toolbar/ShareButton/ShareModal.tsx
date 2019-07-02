@@ -10,13 +10,13 @@ import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
 import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
+import Douban from './Douban'
 import Email from './Email'
 import Facebook from './Facebook'
 import LINE from './LINE'
 import styles from './styles.css'
 import Telegram from './Telegram'
 import Twitter from './Twitter'
-import WeChat from './WeChat'
 import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
@@ -47,7 +47,7 @@ const ShareModal = () => {
                 <LINE />
                 <WhatsApp />
                 <Telegram />
-                <WeChat />
+                <Douban />
               </div>
 
               <div className="right">
@@ -71,9 +71,9 @@ const ShareModal = () => {
                 spacing="xtight"
                 textPlacement="left"
               >
-                <span onClick={copy}>
+                <button onClick={copy} type="button">
                   <Translate zh_hant="點擊複製" zh_hans="点击复制" />
-                </span>
+                </button>
               </TextIcon>
               <input
                 id="shareLinkInput"

@@ -87,15 +87,7 @@ export default () => {
           loading,
           fetchMore
         }: QueryResult & { data: FeedArticleConnection }) => {
-          if (
-            loading &&
-            !(
-              data &&
-              data.viewer &&
-              data.viewer.recommendation &&
-              data.viewer.recommendation.feed
-            )
-          ) {
+          if (loading && !_get(data, 'viewer.recommendation.feed')) {
             return <Placeholder.ArticleDigestList />
           }
 
@@ -171,6 +163,7 @@ export default () => {
                         )}
                       </ul>
                     </InfiniteScroll>
+
                     {!match && pageInfo.hasNextPage && (
                       <LoadMore onClick={loadMore} loading={loading} />
                     )}

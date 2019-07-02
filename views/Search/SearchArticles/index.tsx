@@ -5,8 +5,10 @@ import { QueryResult } from 'react-apollo'
 import {
   ArticleDigest,
   InfiniteScroll,
+  LoadMore,
   PageHeader,
   Placeholder,
+  Responsive,
   Translate
 } from '~/components'
 import { Query } from '~/components/GQL'
@@ -15,7 +17,6 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`
@@ -46,17 +47,12 @@ const SEARCH_ARTICLES = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const SearchArticles = ({
-  q,
-  isAggregate
-}: {
-  q: string
-  isAggregate: boolean
-}) => {
+const SearchArticles = ({ q }: { q: string }) => {
   return (
     <Query
       query={SEARCH_ARTICLES}
-      variables={{ key: q, first: isAggregate ? 5 : 10 }}
+      variables={{ key: q, first: 10 }}
+      notifyOnNetworkStatusChange
     >
       {({
         data,
@@ -64,7 +60,7 @@ const SearchArticles = ({
         error,
         fetchMore
       }: QueryResult & { data: SeachArticles }) => {
-        if (loading) {
+        if (loading && !_get(data, 'search')) {
           return <Placeholder.ArticleDigestList />
         }
 
@@ -104,46 +100,53 @@ const SearchArticles = ({
         }
 
         return (
-          <InfiniteScroll
-            hasNextPage={!isAggregate && pageInfo.hasNextPage}
-            loadMore={loadMore}
-          >
-            <PageHeader
-              is="h2"
-              pageTitle={
-                <Translate
-                  zh_hant={TEXT.zh_hant.article}
-                  zh_hans={TEXT.zh_hans.article}
-                />
-              }
-            >
-              {isAggregate && pageInfo.hasNextPage && (
-                <ViewAll q={q} type="article" />
-              )}
-            </PageHeader>
-            <ul>
-              {edges.map(
-                ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                  <li
-                    key={cursor}
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: FEED_TYPE.SEARCH_ARTICLE,
-                        location: i,
-                        entrance: q
-                      })
-                    }
-                  >
-                    <ArticleDigest.Feed
-                      article={node}
-                      hasDateTime
-                      hasBookmark
+          <Responsive.MediumUp>
+            {(match: boolean) => (
+              <InfiniteScroll
+                hasNextPage={match && pageInfo.hasNextPage}
+                loadMore={loadMore}
+              >
+                <PageHeader
+                  is="h2"
+                  pageTitle={
+                    <Translate
+                      zh_hant={TEXT.zh_hant.article}
+                      zh_hans={TEXT.zh_hans.article}
                     />
-                  </li>
-                )
-              )}
-            </ul>
-          </InfiniteScroll>
+                  }
+                />
+                <ul>
+                  {edges.map(
+                    (
+                      { node, cursor }: { node: any; cursor: any },
+                      i: number
+                    ) => (
+                      <li
+                        key={cursor}
+                        onClick={() =>
+                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                            type: FEED_TYPE.SEARCH_ARTICLE,
+                            location: i,
+                            entrance: q
+                          })
+                        }
+                      >
+                        <ArticleDigest.Feed
+                          article={node}
+                          hasDateTime
+                          hasBookmark
+                        />
+                      </li>
+                    )
+                  )}
+                </ul>
+
+                {!match && pageInfo.hasNextPage && (
+                  <LoadMore onClick={loadMore} loading={loading} />
+                )}
+              </InfiniteScroll>
+            )}
+          </Responsive.MediumUp>
         )
       }}
     </Query>
