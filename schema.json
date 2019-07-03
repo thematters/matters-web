@@ -266,11 +266,11 @@
       {
         "kind": "OBJECT",
         "name": "Article",
-        "description": "",
+        "description": "This type contains metadata, content, hash and related data of an article. If you\nwant information about article's comments. Please check Comment type.",
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": "Unique ID of this article",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -286,7 +286,7 @@
           },
           {
             "name": "topicScore",
-            "description": "",
+            "description": "The number represents how popular is this article.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -298,7 +298,7 @@
           },
           {
             "name": "slug",
-            "description": "",
+            "description": "Slugified article title.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -314,7 +314,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": "Time of this article was created.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -330,7 +330,7 @@
           },
           {
             "name": "state",
-            "description": "",
+            "description": "State of this article.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -346,7 +346,7 @@
           },
           {
             "name": "public",
-            "description": "",
+            "description": "This value determines if this article is accessible to visitors.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -362,7 +362,7 @@
           },
           {
             "name": "live",
-            "description": "",
+            "description": "This value determines if this article is under Subscription or not.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -378,7 +378,7 @@
           },
           {
             "name": "author",
-            "description": "",
+            "description": "Author of this article.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -394,7 +394,7 @@
           },
           {
             "name": "title",
-            "description": "",
+            "description": "Article title.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -410,7 +410,7 @@
           },
           {
             "name": "cover",
-            "description": "",
+            "description": "Article cover's link.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -422,7 +422,7 @@
           },
           {
             "name": "summary",
-            "description": "",
+            "description": "A short summary for this article.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -438,7 +438,7 @@
           },
           {
             "name": "tags",
-            "description": "",
+            "description": "Tags attached to this article.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -458,7 +458,7 @@
           },
           {
             "name": "wordCount",
-            "description": "",
+            "description": "Word count of this article.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -470,7 +470,7 @@
           },
           {
             "name": "dataHash",
-            "description": "",
+            "description": "IPFS hash of this article.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -482,7 +482,7 @@
           },
           {
             "name": "mediaHash",
-            "description": "",
+            "description": "Media hash, composed of cid encoding, of this article.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -494,7 +494,7 @@
           },
           {
             "name": "content",
-            "description": "",
+            "description": "Content of this article.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -510,7 +510,7 @@
           },
           {
             "name": "collectedBy",
-            "description": "",
+            "description": "List of articles which added this article into their collections.",
             "args": [
               {
                 "name": "input",
@@ -541,7 +541,7 @@
           },
           {
             "name": "collection",
-            "description": "",
+            "description": "List of articles added into this articles' collection.",
             "args": [
               {
                 "name": "input",
@@ -572,7 +572,7 @@
           },
           {
             "name": "relatedArticles",
-            "description": "",
+            "description": "Related articles to this articles.",
             "args": [
               {
                 "name": "input",
@@ -603,7 +603,7 @@
           },
           {
             "name": "MAT",
-            "description": "MAT recieved for this article",
+            "description": "MAT recieved for this article ",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -651,7 +651,7 @@
           },
           {
             "name": "subscribers",
-            "description": "",
+            "description": "Subscribers of this articles.",
             "args": [
               {
                 "name": "input",
@@ -682,7 +682,7 @@
           },
           {
             "name": "appreciators",
-            "description": "",
+            "description": "Appreciators of this articles.",
             "args": [
               {
                 "name": "input",
@@ -713,7 +713,7 @@
           },
           {
             "name": "appreciatorCount",
-            "description": "",
+            "description": "Total count of this article's appreciations.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -729,7 +729,7 @@
           },
           {
             "name": "appreciateLimit",
-            "description": "limit the nuhmber of appreciate per user",
+            "description": "Limit the nuhmber of appreciate per user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -745,7 +745,7 @@
           },
           {
             "name": "appreciateLeft",
-            "description": "",
+            "description": "Number represents how many times per user can appreciate this article.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -761,7 +761,7 @@
           },
           {
             "name": "hasAppreciate",
-            "description": "Viewer has appreciate",
+            "description": "This value determines if current viewer has appreciated or not.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -777,7 +777,7 @@
           },
           {
             "name": "subscribed",
-            "description": "Viewer has subscribed",
+            "description": "This value determines if current Viewer has subscribed of not.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1043,7 +1043,7 @@
       {
         "kind": "SCALAR",
         "name": "Int",
-        "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. ",
+        "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1063,7 +1063,7 @@
       {
         "kind": "ENUM",
         "name": "ArticleState",
-        "description": "",
+        "description": "Enums for an article state.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1106,7 +1106,7 @@
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": "Global id of an user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1122,7 +1122,7 @@
           },
           {
             "name": "uuid",
-            "description": "",
+            "description": "UUID of an user, for backward compatibility.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1138,7 +1138,7 @@
           },
           {
             "name": "userName",
-            "description": "",
+            "description": "Global unique user name of a user.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1150,7 +1150,7 @@
           },
           {
             "name": "displayName",
-            "description": "Display name on profile",
+            "description": "Display name on user profile, can be duplicated.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1162,7 +1162,7 @@
           },
           {
             "name": "avatar",
-            "description": "URL for avatar",
+            "description": "URL for user avatar.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1174,7 +1174,7 @@
           },
           {
             "name": "info",
-            "description": "",
+            "description": "User information.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1190,7 +1190,7 @@
           },
           {
             "name": "settings",
-            "description": "",
+            "description": "User settings.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1206,7 +1206,7 @@
           },
           {
             "name": "recommendation",
-            "description": "",
+            "description": "Article recommendations for current user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1222,7 +1222,7 @@
           },
           {
             "name": "articles",
-            "description": "Articles written by this user",
+            "description": "Articles authored by current user.",
             "args": [
               {
                 "name": "input",
@@ -1253,7 +1253,7 @@
           },
           {
             "name": "drafts",
-            "description": "",
+            "description": "Drafts authored by current user.",
             "args": [
               {
                 "name": "input",
@@ -1284,7 +1284,7 @@
           },
           {
             "name": "audiodrafts",
-            "description": "",
+            "description": "Audiodraft by user, currently not used.",
             "args": [
               {
                 "name": "input",
@@ -1315,7 +1315,7 @@
           },
           {
             "name": "commentedArticles",
-            "description": "Comments posted by this user",
+            "description": "Articles current user commented on",
             "args": [
               {
                 "name": "input",
@@ -1346,7 +1346,7 @@
           },
           {
             "name": "subscriptions",
-            "description": "",
+            "description": "Artilces current user subscribed to.",
             "args": [
               {
                 "name": "input",
@@ -1377,7 +1377,7 @@
           },
           {
             "name": "activity",
-            "description": "",
+            "description": "Record of user activity, only accessable by current user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1393,7 +1393,7 @@
           },
           {
             "name": "followers",
-            "description": "Followers of this user",
+            "description": "Followers of this user.",
             "args": [
               {
                 "name": "input",
@@ -1424,7 +1424,7 @@
           },
           {
             "name": "followees",
-            "description": "Users that this user follows",
+            "description": "Users that this user follows.",
             "args": [
               {
                 "name": "input",
@@ -1455,7 +1455,7 @@
           },
           {
             "name": "isFollower",
-            "description": "This user is following viewer",
+            "description": "Whether current user is following viewer.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1471,7 +1471,7 @@
           },
           {
             "name": "isFollowee",
-            "description": "Viewer is following this user",
+            "description": "Whether viewer is following current user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1487,7 +1487,7 @@
           },
           {
             "name": "status",
-            "description": "",
+            "description": "Status of current user.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -2795,11 +2795,11 @@
       {
         "kind": "OBJECT",
         "name": "Tag",
-        "description": "",
+        "description": "This type contains content, count and related data of an article tag.",
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": "Unique id of this tag.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2815,7 +2815,7 @@
           },
           {
             "name": "content",
-            "description": "",
+            "description": "Content of this tag.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2847,7 +2847,7 @@
           },
           {
             "name": "articles",
-            "description": "",
+            "description": "List of how many articles were attached with this tag.",
             "args": [
               {
                 "name": "input",
@@ -2878,7 +2878,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": "Time of this tag was created.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4331,16 +4331,12 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "InvitationStatus",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "InvitationStatus",
+              "ofType": null
             },
-            "isDeprecated": false,
-            "deprecationReason": null
+            "isDeprecated": true,
+            "deprecationReason": "removed"
           },
           {
             "name": "articleCount",
@@ -4879,20 +4875,16 @@
       {
         "kind": "OBJECT",
         "name": "InvitationStatus",
-        "description": "",
+        "description": "# TODO: remove in OSS",
         "fields": [
           {
             "name": "reward",
             "description": "",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4902,13 +4894,9 @@
             "description": "invitation number left",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4933,13 +4921,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "InvitationConnection",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "InvitationConnection",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4953,7 +4937,7 @@
       {
         "kind": "OBJECT",
         "name": "InvitationConnection",
-        "description": "",
+        "description": "# TODO: remove in OSS",
         "fields": [
           {
             "name": "totalCount",
@@ -5022,7 +5006,7 @@
       {
         "kind": "OBJECT",
         "name": "InvitationEdge",
-        "description": "",
+        "description": "# TODO: remove in OSS",
         "fields": [
           {
             "name": "cursor",
@@ -5065,7 +5049,7 @@
       {
         "kind": "OBJECT",
         "name": "Invitation",
-        "description": "",
+        "description": "# TODO: remove in OSS",
         "fields": [
           {
             "name": "id",
@@ -6863,26 +6847,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "gatewayUrls",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "URL",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -7722,7 +7686,7 @@
       {
         "kind": "ENUM",
         "name": "TagsSort",
-        "description": "",
+        "description": "Enums for sorting tags.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -8127,7 +8091,7 @@
         "fields": [
           {
             "name": "publishArticle",
-            "description": "",
+            "description": "Publish an article onto IPFS.",
             "args": [
               {
                 "name": "input",
@@ -8158,7 +8122,7 @@
           },
           {
             "name": "archiveArticle",
-            "description": "",
+            "description": "Archive an article and users won't be able to view this article.",
             "args": [
               {
                 "name": "input",
@@ -8189,7 +8153,7 @@
           },
           {
             "name": "subscribeArticle",
-            "description": "",
+            "description": "Subscribe an artcile.",
             "args": [
               {
                 "name": "input",
@@ -8220,7 +8184,7 @@
           },
           {
             "name": "unsubscribeArticle",
-            "description": "",
+            "description": "Unsubscribe an article.",
             "args": [
               {
                 "name": "input",
@@ -8251,7 +8215,7 @@
           },
           {
             "name": "reportArticle",
-            "description": "",
+            "description": "Report an article to team.",
             "args": [
               {
                 "name": "input",
@@ -8278,7 +8242,7 @@
           },
           {
             "name": "appreciateArticle",
-            "description": "",
+            "description": "Appreciate an article.",
             "args": [
               {
                 "name": "input",
@@ -8309,7 +8273,7 @@
           },
           {
             "name": "readArticle",
-            "description": "",
+            "description": "Read an article.",
             "args": [
               {
                 "name": "input",
@@ -8340,7 +8304,7 @@
           },
           {
             "name": "recallPublish",
-            "description": "",
+            "description": "Recall while publishing.",
             "args": [
               {
                 "name": "input",
@@ -8371,7 +8335,7 @@
           },
           {
             "name": "setCollection",
-            "description": "",
+            "description": "Set collection of an article.",
             "args": [
               {
                 "name": "input",
@@ -9192,7 +9156,7 @@
           },
           {
             "name": "sendVerificationCode",
-            "description": "send/confirm verification code",
+            "description": "Send verification code for email.",
             "args": [
               {
                 "name": "input",
@@ -9219,7 +9183,7 @@
           },
           {
             "name": "confirmVerificationCode",
-            "description": "",
+            "description": "Confirm verification code from email.",
             "args": [
               {
                 "name": "input",
@@ -9250,7 +9214,7 @@
           },
           {
             "name": "resetPassword",
-            "description": "change or reset password",
+            "description": "Reset user password.",
             "args": [
               {
                 "name": "input",
@@ -9277,7 +9241,7 @@
           },
           {
             "name": "changeEmail",
-            "description": "change email",
+            "description": "Change user email.",
             "args": [
               {
                 "name": "input",
@@ -9304,7 +9268,7 @@
           },
           {
             "name": "verifyEmail",
-            "description": "verify email",
+            "description": "Verify user email.",
             "args": [
               {
                 "name": "input",
@@ -9331,7 +9295,7 @@
           },
           {
             "name": "userRegister",
-            "description": "register",
+            "description": "Register user.",
             "args": [
               {
                 "name": "input",
@@ -9362,7 +9326,7 @@
           },
           {
             "name": "userLogin",
-            "description": "login",
+            "description": "Login user.",
             "args": [
               {
                 "name": "input",
@@ -9393,7 +9357,7 @@
           },
           {
             "name": "userLogout",
-            "description": "",
+            "description": "Logout user.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9409,7 +9373,7 @@
           },
           {
             "name": "updateUserInfo",
-            "description": "addOAuth(input: AddOAuthInput!): Boolean\nupdate info/ setting",
+            "description": "Update user information.",
             "args": [
               {
                 "name": "input",
@@ -9440,7 +9404,7 @@
           },
           {
             "name": "updateNotificationSetting",
-            "description": "",
+            "description": "Update user notification settings.",
             "args": [
               {
                 "name": "input",
@@ -9471,7 +9435,7 @@
           },
           {
             "name": "followUser",
-            "description": "follow/unfollow",
+            "description": "Follow a given user.",
             "args": [
               {
                 "name": "input",
@@ -9502,7 +9466,7 @@
           },
           {
             "name": "unfollowUser",
-            "description": "",
+            "description": "Unfollow curent user.",
             "args": [
               {
                 "name": "input",
@@ -9533,7 +9497,7 @@
           },
           {
             "name": "clearReadHistory",
-            "description": "importArticles(input: ImportArticlesInput!): [Article!]",
+            "description": "Clear read history for user.",
             "args": [
               {
                 "name": "input",
@@ -9560,7 +9524,7 @@
           },
           {
             "name": "clearSearchHistory",
-            "description": "",
+            "description": "Clear search history for user.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9571,35 +9535,8 @@
             "deprecationReason": null
           },
           {
-            "name": "invite",
-            "description": "",
-            "args": [
-              {
-                "name": "input",
-                "description": "",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "InviteInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updateUserState",
-            "description": "OSS",
+            "description": "Update state of a user, used in OSS.",
             "args": [
               {
                 "name": "input",
@@ -10095,7 +10032,7 @@
       {
         "kind": "ENUM",
         "name": "RecommendTypes",
-        "description": "",
+        "description": "Enums for types of recommend articles.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -12042,37 +11979,6 @@
                 "name": "ID",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "InviteInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "email",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "EmailAddress",
-              "ofType": null
             },
             "defaultValue": null
           }
@@ -14652,6 +14558,37 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CostComplexity",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "min",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": "1"
+          },
+          {
+            "name": "max",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "ImportArticlesInput",
         "description": "",
         "fields": null,
@@ -14727,19 +14664,50 @@
           }
         ],
         "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Float",
-        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). ",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
       }
     ],
     "directives": [
+      {
+        "name": "cost",
+        "description": "",
+        "locations": ["OBJECT", "FIELD_DEFINITION"],
+        "args": [
+          {
+            "name": "multipliers",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "useMultipliers",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "complexity",
+            "description": "",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CostComplexity",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ]
+      },
       {
         "name": "deprecated",
         "description": "",

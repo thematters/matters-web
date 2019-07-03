@@ -1,10 +1,13 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import _get from 'lodash/get'
+import { useState } from 'react'
+import { QueryResult } from 'react-apollo'
 
-import { GatewayContext } from '~/components/Contexts/Gateway'
+import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
+import { Spinner } from '~/components/Spinner'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
@@ -19,12 +22,20 @@ import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import styles from './styles.css'
 
+const GATEWAYS = gql`
+  query Gateways {
+    official {
+      gatewayUrls @client
+    }
+  }
+`
+
 const FingerprintContent = ({
-  dataHash,
-  gateways
+  shown,
+  dataHash
 }: {
+  shown: boolean
   dataHash: string
-  gateways: string[]
 }) => {
   const [gatewaysExpand, setGatewaysExpand] = useState(false)
   const [helpExpand, setHelpExpand] = useState(false)
@@ -32,6 +43,7 @@ const FingerprintContent = ({
   return (
     <div className="dropdown-container">
       <div className="top-container">
+        {/* hash */}
         <section className="section-title">
           <h4>
             <Translate
@@ -84,6 +96,7 @@ const FingerprintContent = ({
           readOnly
           onClick={event => event.currentTarget.select()}
         />
+
         {/* gateways */}
         <section className="section-title">
           <h4>
@@ -115,32 +128,49 @@ const FingerprintContent = ({
             </TextIcon>
           </button>
         </section>
-        <ul className="gateway-container">
-          {gateways.slice(0, gatewaysExpand ? undefined : 2).map((url, i) => {
-            const gatewayUrl = `${url}${dataHash}`
+
+        <Query query={GATEWAYS} skip={!shown}>
+          {({ data, loading, error }: QueryResult & { data: any }) => {
+            console.log(data, loading)
+            if (loading) {
+              return <Spinner />
+            }
+
+            const gateways: string[] = _get(data, 'official.gatewayUrls', [])
+
             return (
-              <li key={i}>
-                <Icon
-                  id={ICON_SHARE_LINK.id}
-                  viewBox={ICON_SHARE_LINK.viewBox}
-                  size="small"
-                />
+              <ul className="gateway-container">
+                {gateways
+                  .slice(0, gatewaysExpand ? undefined : 2)
+                  .map((url, i) => {
+                    const gatewayUrl = `${url}${dataHash}`
+                    return (
+                      <li key={i}>
+                        <Icon
+                          id={ICON_SHARE_LINK.id}
+                          viewBox={ICON_SHARE_LINK.viewBox}
+                          size="small"
+                        />
 
-                <span className="gateway-url">{gatewayUrl}</span>
+                        <span className="gateway-url">{gatewayUrl}</span>
 
-                <a href={gatewayUrl} target="_blank">
-                  <Icon
-                    id={ICON_ARROW_CIRCLE.id}
-                    viewBox={ICON_ARROW_CIRCLE.viewBox}
-                    size="small"
-                  />
-                </a>
-              </li>
+                        <a href={gatewayUrl} target="_blank">
+                          <Icon
+                            id={ICON_ARROW_CIRCLE.id}
+                            viewBox={ICON_ARROW_CIRCLE.viewBox}
+                            size="small"
+                          />
+                        </a>
+                      </li>
+                    )
+                  })}
+              </ul>
             )
-          })}
-        </ul>
+          }}
+        </Query>
       </div>
 
+      {/* help */}
       <div className={`help-container ${helpExpand ? 'expand' : ''}`}>
         <button type="button" onClick={() => setHelpExpand(!helpExpand)}>
           <TextIcon
@@ -174,22 +204,15 @@ const FingerprintContent = ({
 }
 
 const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
-  const { startCheck, gateways } = useContext(GatewayContext)
+  const [shown, setShown] = useState(false)
 
   return (
     <Popover
-      onShow={() => {
-        if (gateways.length === 0) {
-          startCheck()
-        }
-      }}
       offset="100,0"
       trigger="click"
+      onShown={() => setShown(true)}
       content={
-        <FingerprintContent
-          gateways={gateways}
-          dataHash={article.dataHash || ''}
-        />
+        <FingerprintContent shown={shown} dataHash={article.dataHash || ''} />
       }
     >
       <button type="button">
