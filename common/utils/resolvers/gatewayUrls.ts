@@ -19,6 +19,15 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://gateway.serph.network/ipfs/'
 ]
 
+function timeout(ms: number, promise: any) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('timeout'))
+    }, ms)
+    promise.then(resolve, reject)
+  })
+}
+
 // check accessbility for a given hash and gateway
 const checkGateway = async (
   hash: string,
@@ -27,7 +36,11 @@ const checkGateway = async (
   const testUrl = `${gatewayUrl}${hash}#x-ipfs-companion-no-redirect`
 
   try {
-    const res = await fetch(testUrl)
+    // const res = await fetch(testUrl)
+    const res = (await timeout(
+      2000,
+      fetch(testUrl)
+    )) as fetch.IsomorphicResponse
     if (res && res.ok) {
       return true
     }

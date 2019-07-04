@@ -131,7 +131,6 @@ const FingerprintContent = ({
 
         <Query query={GATEWAYS} skip={!shown}>
           {({ data, loading, error }: QueryResult & { data: any }) => {
-            console.log(data, loading)
             if (loading) {
               return <Spinner />
             }
