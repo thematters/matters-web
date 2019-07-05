@@ -15,7 +15,6 @@ import {
   ViewerUserFragment
 } from '~/components/Viewer'
 
-import { GatewayContextProvider } from '../Contexts/Gateway'
 import { LayoutUser } from './__generated__/LayoutUser'
 
 interface LayoutProps {
@@ -49,18 +48,16 @@ export const Layout: React.FC<LayoutProps> & {
     <ViewerContext.Provider value={processViewer({ refetch, ...(user || {}) })}>
       <LanguageProvider>
         <HeaderContextProvider>
-          <GatewayContextProvider>
-            <AnalyticsListener user={user || {}} />
-            <Head />
+          <AnalyticsListener user={user || {}} />
+          <Head />
 
-            <GlobalHeader user={user} />
+          <GlobalHeader user={user} />
 
-            {children}
+          {children}
 
-            <Modal.Anchor />
-            <ToastHolder />
-            <ProgressBar />
-          </GatewayContextProvider>
+          <Modal.Anchor />
+          <ToastHolder />
+          <ProgressBar />
         </HeaderContextProvider>
       </LanguageProvider>
     </ViewerContext.Provider>

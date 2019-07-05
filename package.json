@@ -26,7 +26,7 @@
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "gen:schema": "apollo service:download schema.json --endpoint=https://server-develop.matters.news/",
-    "gen:type": "apollo client:codegen __generated__ --target=typescript  --localSchemaFile=schema.json --includes='+(pages|views|components)/**/*.{ts,tsx}'",
+    "gen:type": "apollo client:codegen __generated__ --target=typescript --config apollo.config.js",
     "gen:watch": "npm run gen:type -- --watch",
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js"
