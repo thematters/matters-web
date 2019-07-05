@@ -57,7 +57,7 @@ app
       return handle(req, res)
     })
 
-    server.listen(PORT, (err: any) => {
+    server.listen(PORT as number, (err: any) => {
       if (err) {
         throw err
       }
