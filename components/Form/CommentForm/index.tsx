@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
-import { Mutation } from '~/components/GQL'
+import { Mutation, Query } from '~/components/GQL'
 import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
@@ -13,7 +13,7 @@ import { Translate } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, OPEN_MODAL } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
@@ -30,6 +30,15 @@ const CommentEditor = dynamic(
 export const PUT_COMMENT = gql`
   mutation putComment($input: PutCommentInput!) {
     putComment(input: $input) {
+      id
+      content
+    }
+  }
+`
+
+const COMMENT_DRAFT = gql`
+  query CommentDraft($id: ID!) {
+    commentDraft(input: { id: $id }) @client(always: true) {
       id
       content
     }
@@ -61,141 +70,157 @@ const CommentForm = ({
   refetch,
   extraButton,
   defaultExpand
-}: CommentFormProps) => (
-  <Mutation
-    mutation={PUT_COMMENT}
-    refetchQueries={
-      !refetch
-        ? []
-        : parentId
-        ? [
-            {
-              query: COMMENT_COMMENTS,
-              variables: { id: parentId }
-            }
-          ]
-        : articleMediaHash
-        ? [
-            {
-              query: ARTICLE_COMMENTS,
-              variables: { mediaHash: articleMediaHash }
-            }
-          ]
-        : []
-    }
-  >
-    {putComment => {
-      const [isSubmitting, setSubmitting] = useState(false)
-      const [expand, setExpand] = useState(defaultExpand || false)
-      const [content, setContent] = useState(defaultContent || '')
-      const viewer = useContext(ViewerContext)
-      const isValid = !!trimLineBreaks(content)
-
-      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        const mentions = dom.getAttributes('data-id', content)
-        const input = {
-          id: commentId,
-          comment: {
-            content: trimLineBreaks(content),
-            replyTo: replyToId,
-            articleId,
-            parentId,
-            mentions
-          }
+}: CommentFormProps) => {
+  const commentDraftId = `${articleId}:${commentId || '0'}:${parentId ||
+    '0'}:${replyToId || '0'}`
+  const refetchQueries = !refetch
+    ? []
+    : parentId
+    ? [
+        {
+          query: COMMENT_COMMENTS,
+          variables: { id: parentId }
         }
+      ]
+    : articleMediaHash
+    ? [
+        {
+          query: ARTICLE_COMMENTS,
+          variables: { mediaHash: articleMediaHash }
+        }
+      ]
+    : []
 
-        event.preventDefault()
-        setSubmitting(true)
+  return (
+    <Query
+      query={COMMENT_DRAFT}
+      variables={{
+        id: commentDraftId
+      }}
+    >
+      {({ data: commentDraftData, client }) => {
+        const draftContent = _get(commentDraftData, 'commentDraft.content', '')
 
-        putComment({ variables: { input } })
-          .then(({ data }: any) => {
-            if (submitCallback) {
-              submitCallback()
-            }
-            setContent('')
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-                  )
+        return (
+          <Mutation mutation={PUT_COMMENT} refetchQueries={refetchQueries}>
+            {putComment => {
+              const [isSubmitting, setSubmitting] = useState(false)
+              const [expand, setExpand] = useState(defaultExpand || false)
+              const [content, setContent] = useState(
+                draftContent || defaultContent || ''
+              )
+              const viewer = useContext(ViewerContext)
+              const isValid = !!trimLineBreaks(content)
+
+              const handleSubmit = (
+                event: React.FormEvent<HTMLFormElement>
+              ) => {
+                const mentions = dom.getAttributes('data-id', content)
+                const input = {
+                  id: commentId,
+                  comment: {
+                    content: trimLineBreaks(content),
+                    replyTo: replyToId,
+                    articleId,
+                    parentId,
+                    mentions
+                  }
                 }
-              })
-            )
 
-            if (viewer.isOnboarding) {
-              setTimeout(async () => {
-                const result = await viewer.refetch()
-                const newState = _get(result, 'data.viewer.status.state')
-                if (newState === 'active') {
-                  window.dispatchEvent(
-                    new CustomEvent(OPEN_MODAL, {
-                      detail: {
-                        id: 'selfActivationModal'
+                event.preventDefault()
+                setSubmitting(true)
+
+                putComment({ variables: { input } })
+                  .then(({ data }: any) => {
+                    if (submitCallback) {
+                      submitCallback()
+                    }
+                    setContent('')
+                    window.dispatchEvent(
+                      new CustomEvent(ADD_TOAST, {
+                        detail: {
+                          color: 'green',
+                          content: (
+                            <Translate
+                              zh_hant="評論已送出"
+                              zh_hans="评论已送出"
+                            />
+                          )
+                        }
+                      })
+                    )
+                  })
+                  .catch((result: any) => {
+                    window.dispatchEvent(
+                      new CustomEvent(ADD_TOAST, {
+                        detail: {
+                          color: 'red',
+                          content: (
+                            <Translate
+                              zh_hant="評論送出失敗"
+                              zh_hans="评论失败送出"
+                            />
+                          )
+                        }
+                      })
+                    )
+                  })
+                  .finally(() => {
+                    setSubmitting(false)
+                  })
+              }
+
+              return (
+                <form
+                  onSubmit={handleSubmit}
+                  className={expand ? 'expand' : ''}
+                  onFocus={() => setExpand(true)}
+                  onBlur={() => {
+                    client.writeData({
+                      id: `CommentDraft:${commentDraftId}`,
+                      data: {
+                        content
                       }
                     })
-                  )
-                }
-              }, 3000)
-            }
-          })
-          .catch((result: any) => {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'red',
-                  content: (
-                    <Translate zh_hant="評論送出失敗" zh_hans="评论失败送出" />
-                  )
-                }
-              })
-            )
-          })
-          .finally(() => {
-            setSubmitting(false)
-          })
-      }
+                  }}
+                >
+                  <CommentEditor
+                    content={content}
+                    expand={expand}
+                    handleChange={value => setContent(value)}
+                  />
+                  <div className="buttons">
+                    {extraButton && extraButton}
+                    <Button
+                      type="submit"
+                      bgColor="green"
+                      disabled={
+                        isSubmitting ||
+                        !isValid ||
+                        !viewer.isAuthed ||
+                        viewer.isInactive
+                      }
+                      icon={
+                        isSubmitting ? (
+                          <IconSpinner />
+                        ) : (
+                          <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
+                        )
+                      }
+                    >
+                      <Translate zh_hant="送出" zh_hans="送出" />
+                    </Button>
+                  </div>
 
-      return (
-        <form
-          onSubmit={handleSubmit}
-          className={expand ? 'expand' : ''}
-          onFocus={() => setExpand(true)}
-        >
-          <CommentEditor
-            content={content}
-            expand={expand}
-            handleChange={value => setContent(value)}
-          />
-          <div className="buttons">
-            {extraButton && extraButton}
-            <Button
-              type="submit"
-              bgColor="green"
-              disabled={
-                isSubmitting ||
-                !isValid ||
-                !viewer.isAuthed ||
-                viewer.isInactive
-              }
-              icon={
-                isSubmitting ? (
-                  <IconSpinner />
-                ) : (
-                  <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
-                )
-              }
-            >
-              <Translate zh_hant="送出" zh_hans="送出" />
-            </Button>
-          </div>
-
-          <style jsx>{styles}</style>
-        </form>
-      )
-    }}
-  </Mutation>
-)
+                  <style jsx>{styles}</style>
+                </form>
+              )
+            }}
+          </Mutation>
+        )
+      }}
+    </Query>
+  )
+}
 
 export default CommentForm
