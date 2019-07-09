@@ -5,7 +5,7 @@ import React, { ReactNode, useState } from 'react'
  *
  */
 export const SystemContext = React.createContext({} as {
-  feedSortBy: 'hottest' | 'newest',
+  feedSortBy: 'hottest' | 'newest'
   setFeedSortBy: (type: 'hottest' | 'newest') => void
 })
 
