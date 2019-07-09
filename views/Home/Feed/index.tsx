@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -13,6 +13,7 @@ import {
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
+import { SystemContext } from '~/components/System'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -76,8 +77,11 @@ export const queries: { [key: string]: any } = {
   `
 }
 
+type SortBy = 'hottest' | 'newest'
+
 export default () => {
-  const [sortBy, setSortBy] = useState<'hottest' | 'newest'>('hottest')
+  const { feedSortBy, setFeedSortBy } = useContext(SystemContext)
+  const sortBy = (feedSortBy || 'hottest') as SortBy
 
   return (
     <>
@@ -125,7 +129,7 @@ export default () => {
                   )
                 }
               >
-                <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+                <SortBy sortBy={sortBy} setSortBy={setFeedSortBy} />
               </PageHeader>
 
               <Responsive.MediumUp>

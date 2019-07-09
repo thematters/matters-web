@@ -8,6 +8,7 @@ import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import ProgressBar from '~/components/ProgressBar'
+import { SystemProvider } from '~/components/System'
 import { ToastHolder } from '~/components/ToastHolder'
 import {
   processViewer,
@@ -46,20 +47,22 @@ export const Layout: React.FC<LayoutProps> & {
 
   return (
     <ViewerContext.Provider value={processViewer({ refetch, ...(user || {}) })}>
-      <LanguageProvider>
-        <HeaderContextProvider>
-          <AnalyticsListener user={user || {}} />
-          <Head />
+      <SystemProvider>
+        <LanguageProvider>
+          <HeaderContextProvider>
+            <AnalyticsListener user={user || {}} />
+            <Head />
 
-          <GlobalHeader user={user} />
+            <GlobalHeader user={user} />
 
-          {children}
+            {children}
 
-          <Modal.Anchor />
-          <ToastHolder />
-          <ProgressBar />
-        </HeaderContextProvider>
-      </LanguageProvider>
+            <Modal.Anchor />
+            <ToastHolder />
+            <ProgressBar />
+          </HeaderContextProvider>
+        </LanguageProvider>
+      </SystemProvider>
     </ViewerContext.Provider>
   )
 }
