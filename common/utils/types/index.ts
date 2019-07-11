@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 export default gql`
   extend type Query {
     commentDraft(input: CommentDraftInput!): CommentDraft!
+    clientPreference(input: ClientPreferenceInput!): ClientPreference!
   }
 
   extend type Official {
@@ -16,5 +17,19 @@ export default gql`
 
   input CommentDraftInput {
     id: ID!
+  }
+
+  type ClientPreference {
+    id: ID!
+    feedSortType: FeedSortType
+  }
+
+  input ClientPreferenceInput {
+    id: ID!
+  }
+
+  enum FeedSortType {
+    hottest
+    newest
   }
 `
