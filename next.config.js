@@ -45,6 +45,7 @@ const nextConfig = {
   },
   useFileSystemPublicRoutes: false,
   distDir: 'build',
+  pageExtensions: ['tsx'],
   crossOrigin: 'anonymous',
   webpack(config, { defaultLoaders, isServer }) {
     /**
