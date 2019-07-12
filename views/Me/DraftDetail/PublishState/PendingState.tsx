@@ -36,8 +36,12 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
               />
             ) : (
               <Translate
-                zh_hant={`${TEXT.zh_hant.waitingForPublish} (${formattedTimeLeft.mmss})`}
-                zh_hans={`${TEXT.zh_hans.waitingForPublish} (${formattedTimeLeft.mmss})`}
+                zh_hant={`${TEXT.zh_hant.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
+                zh_hans={`${TEXT.zh_hans.waitingForPublish} (${
+                  formattedTimeLeft.mmss
+                })`}
               />
             )
           }

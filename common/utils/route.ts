@@ -55,7 +55,9 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     case 'articleDetail':
       const asUrl = `/@${args.userName}/${args.slug}-${args.mediaHash}`
       return {
-        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${args.slug}&mediaHash=${args.mediaHash}`,
+        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${
+          args.slug
+        }&mediaHash=${args.mediaHash}`,
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl
       }
     case 'draftDetail':
