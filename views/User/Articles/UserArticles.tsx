@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -47,7 +47,8 @@ const USER_ARTICLES_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
+const UserArticles = () => {
+  const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
   const viewer = useContext(ViewerContext)
@@ -147,4 +148,4 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(UserArticles)
+export default UserArticles

@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import NextHead from 'next/head'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
@@ -25,14 +25,15 @@ interface HeadProps {
   image?: string
 }
 
-const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
+export const Head: React.FC<HeadProps> = props => {
+  const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const title =
     typeof props.title === 'object'
       ? translate({ ...props.title, lang })
       : props.title
 
-  const asPath = props.router && props.router.asPath
+  const asPath = router && router.asPath
 
   const head = {
     title: title ? `${title} - Matters` : 'Matters',
@@ -209,5 +210,3 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
     </NextHead>
   )
 }
-
-export const Head = withRouter(BaseHead)

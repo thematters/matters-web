@@ -1,4 +1,4 @@
-import { NextFunctionComponent } from 'next'
+import { NextPage } from 'next'
 import React from 'react'
 
 import { Error } from '~/components'
@@ -10,7 +10,7 @@ interface ErrorProps {
   statusCode: number | string | null
 }
 
-const ErrorPage: NextFunctionComponent<ErrorProps> = ({ statusCode }) => {
+const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-4 l-offset-md-2  l-col-lg-4 l-offset-lg-4">
@@ -28,17 +28,16 @@ const ErrorPage: NextFunctionComponent<ErrorProps> = ({ statusCode }) => {
   )
 }
 
-ErrorPage.getInitialProps = ({ res, err }) => {
+ErrorPage.getInitialProps = async ({ res, err }) => {
   let statusCode
 
   try {
-    const error = err as { statusCode?: any }
-    statusCode = res ? res.statusCode : error ? error.statusCode : null
+    statusCode = res ? res.statusCode : err ? err.statusCode : null
   } catch (e) {
     statusCode = 500
   }
 
-  return { statusCode }
+  return { statusCode } as ErrorProps
 }
 
 export default ErrorPage

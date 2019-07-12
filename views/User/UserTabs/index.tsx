@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import { Tabs, Translate } from '~/components'
@@ -8,7 +8,8 @@ import { ViewerContext } from '~/components/Viewer'
 import { PATHS, TEXT } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
-const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
+const MeTabs = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const pathname = router && router.pathname
   const userName = getQuery({ router, key: 'userName' }) || ''
@@ -118,4 +119,4 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(MeTabs)
+export default MeTabs

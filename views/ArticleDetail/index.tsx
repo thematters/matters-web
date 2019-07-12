@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
@@ -96,7 +96,8 @@ const Block = ({
   )
 }
 
-const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
+const ArticleDetail = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
   const [trackedFinish, setTrackedFinish] = useState(false)
@@ -284,4 +285,4 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(ArticleDetail)
+export default ArticleDetail

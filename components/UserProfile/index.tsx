@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _some from 'lodash/some'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -100,7 +100,8 @@ const OnboardingBadge = () => (
   </span>
 )
 
-const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
+export const UserProfile = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
@@ -295,5 +296,3 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
     </section>
   )
 }
-
-export const UserProfile = withRouter(BaseUserProfile)

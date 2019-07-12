@@ -1,8 +1,8 @@
 import _get from 'lodash/get'
 import Document, {
+  DocumentContext,
   Head,
   Main,
-  NextDocumentContext,
   NextScript
 } from 'next/document'
 import React from 'react'
@@ -17,7 +17,7 @@ interface MattersDocumentProps {
 }
 
 class MattersDocument extends Document<MattersDocumentProps> {
-  public static async getInitialProps(ctx: NextDocumentContext) {
+  public static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     const spriteContent = sprite.stringify()
     const heads = initialProps.head as any[]

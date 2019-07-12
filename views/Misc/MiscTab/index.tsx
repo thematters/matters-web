@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
@@ -7,7 +7,8 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
-const MiscTabs: React.FC<WithRouterProps> = ({ router }) => {
+const MiscTabs = () => {
+  const router = useRouter()
   const asPath = router && router.asPath
 
   return (
@@ -60,4 +61,4 @@ const MiscTabs: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(MiscTabs)
+export default MiscTabs

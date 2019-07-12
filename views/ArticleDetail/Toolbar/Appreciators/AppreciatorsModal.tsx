@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
@@ -46,7 +46,8 @@ const ARTICLE_APPRECIATORS = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
+const AppreciatorsModal = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -143,4 +144,4 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(AppreciatorsModal)
+export default AppreciatorsModal

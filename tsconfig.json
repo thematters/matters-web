@@ -19,8 +19,12 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["./*"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
   },
   "includes": ["./definitions/**/*.d.ts"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

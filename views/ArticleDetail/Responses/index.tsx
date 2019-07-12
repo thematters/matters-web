@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -132,7 +132,8 @@ const ResponseTipContainer = () => {
   )
 }
 
-const Main: React.FC<WithRouterProps> = ({ router }) => {
+const Main = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
@@ -311,4 +312,4 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(Main)
+export default Main

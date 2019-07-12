@@ -1,5 +1,5 @@
 import _get from 'lodash/get'
-import Router, { SingletonRouter } from 'next/router'
+import Router, { NextRouter } from 'next/router'
 
 import { PATHS } from '~/common/enums'
 
@@ -116,7 +116,7 @@ export const getQuery = ({
   router,
   key
 }: {
-  router?: SingletonRouter
+  router?: NextRouter
   key: string
 }) => {
   const value = router && router.query && router.query[key]

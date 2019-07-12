@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import Router from 'next/router'
+// import Router from 'next/router'
 import React, { useContext, useEffect } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
@@ -26,10 +26,10 @@ import styles from './styles.css'
 import WriteButton from './WriteButton'
 
 // Track client-side page views
-Router.onRouteChangeComplete = (url: string) => {
-  // segment
-  analytics.trackPage({ url })
-}
+// Router.onRouteChangeComplete = (url: string) => {
+//   // segment
+//   analytics.trackPage({ url })
+// }
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   useEffect(() => {

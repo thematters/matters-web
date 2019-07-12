@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -41,7 +41,8 @@ const SUBSCRIBE_COMMENTS = gql`
   ${ArticleDetailComments}
 `
 
-const Main: React.FC<WithRouterProps> = ({ router }) => {
+const Main = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const uuid = getQuery({ router, key: 'post' })
 
@@ -180,4 +181,4 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(Main)
+export default Main

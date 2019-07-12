@@ -1,11 +1,12 @@
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
-const SettingsTabs: React.FC<WithRouterProps> = ({ router }) => {
+const SettingsTabs = () => {
+  const router = useRouter()
   const pathname = router && router.pathname
 
   return (
@@ -34,4 +35,4 @@ const SettingsTabs: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(SettingsTabs)
+export default SettingsTabs

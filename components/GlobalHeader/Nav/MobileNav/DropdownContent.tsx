@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Menu, Translate } from '~/components'
 
@@ -8,12 +8,11 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
-const DropdownContent: React.FC<
-  WithRouterProps & {
-    hideDropdown: () => void
-    unread: boolean
-  }
-> = ({ router, hideDropdown, unread }) => {
+const DropdownContent: React.FC<{
+  hideDropdown: () => void
+  unread: boolean
+}> = ({ hideDropdown, unread }) => {
+  const router = useRouter()
   const homeClasses = classNames({
     'nav-link': true,
     active: router && router.pathname === PATHS.HOME.href
@@ -53,4 +52,4 @@ const DropdownContent: React.FC<
   )
 }
 
-export default withRouter(DropdownContent)
+export default DropdownContent
