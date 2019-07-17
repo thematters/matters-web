@@ -42,7 +42,7 @@ const agent =
 // links
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
-    uri: API_URL,
+    uri: `${API_URL}/graphql`,
     credentials: 'include',
     headers,
     fetchOptions: {
