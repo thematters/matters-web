@@ -31,6 +31,7 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
           <form action={OAUTH_AUTHORIZE_ENDPOINT} method="post">
             <input type="hidden" name="client_id" value={qs.client_id} />
             {qs.state && <input type="hidden" name="state" value={qs.state} />}
+            {qs.scope && <input type="hidden" name="scope" value={qs.scope} />}
             {qs.redirect_uri && (
               <input
                 type="hidden"
