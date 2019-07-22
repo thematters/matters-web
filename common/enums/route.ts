@@ -32,6 +32,7 @@ type ROUTE_KEY =
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
   | 'AUTH_FORGET'
+  | 'OAUTH_AUTHORIZE'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -186,6 +187,13 @@ export const ROUTES: Array<{
     key: 'AUTH_FORGET',
     href: '/AuthForget',
     as: '/forget'
+  },
+
+  // OAuth
+  {
+    key: 'OAUTH_AUTHORIZE',
+    href: '/OAuthAuthorize',
+    as: '/oauth/authorize'
   },
 
   // Misc
