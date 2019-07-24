@@ -20,7 +20,7 @@ steps:
     environment:
       CODECOV_TOKEN: f109cbf6-b6c7-4a08-ad03-981bc4cd1fe8
       MATTERS_ENV: test
-      API_URL: http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/
+      API_URL: http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/graphql
     commands:
       - npm install codecov -g
       - npm run test
