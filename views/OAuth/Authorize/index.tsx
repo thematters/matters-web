@@ -7,9 +7,9 @@ import { Button } from '~/components'
 import styles from './styles.css'
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { OAUTH_URL }
 } = getConfig()
-const OAUTH_AUTHORIZE_ENDPOINT = `${API_URL}/oauth/authorize`
+const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`
 
 const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
   const containerClass = classNames(

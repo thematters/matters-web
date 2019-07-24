@@ -8,12 +8,16 @@ if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
 
-fetch(`${process.env.API_URL}/graphql`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    variables: {},
-    query: `
+fetch($ {
+    process.env.API_URL
+  }, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      variables: {},
+      query: `
       {
         __schema {
           types {
@@ -26,8 +30,8 @@ fetch(`${process.env.API_URL}/graphql`, {
         }
       }
     `
+    })
   })
-})
   .then(result => result.json())
   .then(result => {
     // here we're filtering out any type information unrelated to unions or interfaces
