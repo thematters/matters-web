@@ -8,9 +8,7 @@ if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
 
-fetch($ {
-    process.env.API_URL
-  }, {
+fetch(process.env.API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

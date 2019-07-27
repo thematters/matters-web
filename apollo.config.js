@@ -3,7 +3,7 @@ module.exports = {
     name: 'Matters Web',
     service: {
       name: 'matters',
-      localSchemaFile: './schema.json'
+      url: 'https://server-develop.matters.news/graphql'
     },
     includes: [
       '+(pages|views|components)/**/*.{ts,tsx}',
