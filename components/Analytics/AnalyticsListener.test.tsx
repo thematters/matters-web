@@ -1,5 +1,5 @@
+import { render, wait } from '@testing-library/react'
 import React from 'react'
-import { render, wait } from 'react-testing-library'
 
 import { analytics } from '~/common/utils'
 

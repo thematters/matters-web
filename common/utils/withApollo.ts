@@ -19,6 +19,8 @@ import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { genSentryActionId } from '~/common/utils'
 
 // import { setupPersistCache } from './cache'
+import resolvers from './resolvers'
+import typeDefs from './types'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
@@ -123,6 +125,8 @@ export default withApollo(({ ctx, headers, initialState }) => {
       sentryLink,
       dataLink({ headers })
     ]),
-    cache: inMemoryCache
+    cache: inMemoryCache,
+    resolvers,
+    typeDefs
   })
 })

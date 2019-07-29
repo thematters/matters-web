@@ -89,20 +89,29 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           })
         }
 
+        const CustomHead = () => (
+          <Head
+            title={{
+              zh_hant: `${data.user.displayName}的創作空間站`,
+              zh_hans: `${data.user.displayName}的创作空间站`
+            }}
+            description={data.user.info.description}
+            image={ICON_192}
+          />
+        )
+
         if (!edges || edges.length <= 0) {
-          return <EmptyArticle />
+          return (
+            <>
+              <CustomHead />
+              <EmptyArticle />
+            </>
+          )
         }
 
         return (
           <>
-            <Head
-              title={{
-                zh_hant: `${data.user.displayName}的創作空間站`,
-                zh_hans: `${data.user.displayName}的创作空间站`
-              }}
-              description={data.user.info.description}
-              image={ICON_192}
-            />
+            <CustomHead />
             <InfiniteScroll
               hasNextPage={pageInfo.hasNextPage}
               loadMore={loadMore}

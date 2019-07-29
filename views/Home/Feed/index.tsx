@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -13,6 +12,7 @@ import {
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { Query } from '~/components/GQL'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -76,8 +76,17 @@ export const queries: { [key: string]: any } = {
   `
 }
 
-export default () => {
-  const [sortBy, setSortBy] = useState<'hottest' | 'newest'>('hottest')
+type SortBy = 'hottest' | 'newest'
+
+const Feed = ({ feedSortType: sortBy, client }: any) => {
+  const setSortBy = (type: SortBy) => {
+    if (client) {
+      client.writeData({
+        id: 'ClientPreference:local',
+        data: { feedSortType: type }
+      })
+    }
+  }
 
   return (
     <>
@@ -177,3 +186,14 @@ export default () => {
     </>
   )
 }
+
+export default () => (
+  <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
+    {({ data, client }) => {
+      const { feedSortType } = _get(data, 'clientPreference', {
+        feedSortType: 'hottest'
+      })
+      return <Feed feedSortType={feedSortType} client={client} />
+    }}
+  </Query>
+)

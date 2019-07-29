@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2019-07-29
+
+### Changed
+
+- Remove response tip. #345
+- Fix missing custom `<meta>` tags in UserArticle page #344
+- Store feed sorter type in local via Apollo. #343
+- CommentDraft @client; Remove <SelfActivationModal>; #341
+- Local Schema for "Official.gatewayUrls" #340
+
+## [1.9.0] - 2019-07-02
+
+### Changed
+
+- Fix styles of about page #336
+- Alter article's design in Response #335
+- Infinite article feed in the search result page #334
+- Clear search input after the user selected search results #333
+- Alter meta tags of user profile pages #332
+- Share to Douban #327
+
 ## [1.8.0] - 2019-06-24
 
 ### Changed
