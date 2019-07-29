@@ -1,0 +1,15 @@
+.info {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.161175);
+  color: var(--color-grey);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  & > span {
+    color: var(--color-grey-darker);
+    font-weight: 600;
+    margin: 0 0.25rem;
+  }
+}
