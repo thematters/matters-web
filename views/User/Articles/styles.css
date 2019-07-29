@@ -10,6 +10,6 @@
   & > span {
     color: var(--color-grey-darker);
     font-weight: 600;
-    margin: 0 0.25rem;
+    margin: 0 0.3rem;
   }
 }
