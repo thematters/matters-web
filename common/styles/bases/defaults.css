@@ -102,3 +102,10 @@ hr {
     border-color: var(--color-line-grey-light);
   }
 }
+
+code,
+kbd,
+samp,
+pre {
+  background: var(--color-grey-lighter);
+}
