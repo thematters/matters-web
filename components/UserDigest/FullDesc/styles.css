@@ -38,4 +38,11 @@
   color: var(--color-grey);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+  overflow: hidden;
 }
