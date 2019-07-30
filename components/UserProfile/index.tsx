@@ -152,113 +152,60 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
               const state = _get(user, 'status.state')
               const isOnboarding = state === 'onboarding'
 
-              // me profile
-              if (isMe) {
-                return (
-                  <section className="content">
-                    <Avatar
-                      size="xlarge"
-                      user={viewer.isInactive ? undefined : user}
-                    />
-
-                    <section className="info">
-                      <header className="header">
-                        <section className="name">
-                          {!viewer.isInactive && (
-                            <span>
-                              {user.displayName}
-                              {hasSeedBadge && <SeedBadge />}
-                              {isOnboarding && <OnboardingBadge />}
-                            </span>
-                          )}
-                          {viewer.isArchived && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountArchived}
-                                zh_hans={TEXT.zh_hans.accountArchived}
-                              />
-                            </span>
-                          )}
-                          {viewer.isFrozen && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountFrozen}
-                                zh_hans={TEXT.zh_hans.accountFrozen}
-                              />
-                            </span>
-                          )}
-                          {viewer.isBanned && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountBanned}
-                                zh_hans={TEXT.zh_hans.accountBanned}
-                              />
-                            </span>
-                          )}
-                        </section>
-                        <section className="action-button">
-                          {!viewer.isInactive && (
-                            <EditProfileButton setEditing={setEditing} />
-                          )}
-                        </section>
-                      </header>
-
-                      {!viewer.isInactive && (
-                        <p className="description">{user.info.description}</p>
-                      )}
-
-                      <section className="info-follow">
-                        <Link {...userFollowersPath}>
-                          <a className="followers">
-                            <span className="count">
-                              {numAbbr(user.followers.totalCount)}
-                            </span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.followingMe}
-                              zh_hans={TEXT.zh_hans.followingMe}
-                            />
-                          </a>
-                        </Link>
-                        <Link {...userFolloweesPath}>
-                          <a className="followees">
-                            <span className="count">
-                              {numAbbr(user.followees.totalCount)}
-                            </span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.myFollowees}
-                              zh_hans={TEXT.zh_hans.myFollowees}
-                            />
-                          </a>
-                        </Link>
-                      </section>
-                    </section>
-                  </section>
-                )
-              }
-
-              // other's profile
               return (
                 <section className="content">
-                  <Avatar size="xlarge" user={user} />
+                  <Avatar
+                    size="xlarge"
+                    user={!isMe && viewer.isInactive ? undefined : user}
+                  />
 
                   <section className="info">
                     <header className="header">
                       <section className="name">
-                        <span>
-                          {user.displayName}
-                          {hasSeedBadge && <SeedBadge />}
-                          {isOnboarding && <OnboardingBadge />}
-                        </span>
-                        <FollowButton.State user={user} />
+                        {!viewer.isInactive && (
+                          <span>
+                            {user.displayName}
+                            {hasSeedBadge && <SeedBadge />}
+                            {isOnboarding && <OnboardingBadge />}
+                            {!isMe && <FollowButton.State user={user} />}
+                          </span>
+                        )}
+                        {viewer.isArchived && (
+                          <span>
+                            <Translate
+                              zh_hant={TEXT.zh_hant.accountArchived}
+                              zh_hans={TEXT.zh_hans.accountArchived}
+                            />
+                          </span>
+                        )}
+                        {viewer.isFrozen && (
+                          <span>
+                            <Translate
+                              zh_hant={TEXT.zh_hant.accountFrozen}
+                              zh_hans={TEXT.zh_hans.accountFrozen}
+                            />
+                          </span>
+                        )}
+                        {viewer.isBanned && (
+                          <span>
+                            <Translate
+                              zh_hant={TEXT.zh_hant.accountBanned}
+                              zh_hans={TEXT.zh_hans.accountBanned}
+                            />
+                          </span>
+                        )}
                       </section>
-
                       <section className="action-button">
-                        <FollowButton user={user} size="default" />
+                        {isMe && !viewer.isInactive && (
+                          <EditProfileButton setEditing={setEditing} />
+                        )}
+                        {!isMe && <FollowButton user={user} size="default" />}
                       </section>
                     </header>
 
-                    <p className="description">{user.info.description}</p>
-
+                    {!viewer.isInactive && (
+                      <p className="description">{user.info.description}</p>
+                    )}
                     <section className="info-follow">
                       <Link {...userFollowersPath}>
                         <a className="followers">
