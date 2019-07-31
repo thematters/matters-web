@@ -18,10 +18,10 @@ import { ViewerContext } from '~/components/Viewer'
 import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
-import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
+import Description from './Description'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -152,7 +152,6 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
               const hasSeedBadge = _some(badges, { type: 'seed' })
               const state = _get(user, 'status.state')
               const isOnboarding = state === 'onboarding'
-              const [descExpand, setDescExpand] = useState(false)
 
               return (
                 <section className="content">
@@ -206,33 +205,9 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                     </header>
 
                     {!viewer.isInactive && (
-                      <section
-                        className={`description ${descExpand ? 'expand' : ''}`}
-                      >
-                        <p>{user.info.description}</p>
-
-                        <button
-                          type="button"
-                          onClick={() => setDescExpand(true)}
-                        >
-                          <TextIcon
-                            icon={
-                              <Icon
-                                id={ICON_EXPAND.id}
-                                viewBox={ICON_EXPAND.viewBox}
-                                size="xsmall"
-                                color="green"
-                              />
-                            }
-                            size="md"
-                            weight="normal"
-                            color="green"
-                          >
-                            <Translate zh_hant="展開" zh_hans="展开" />
-                          </TextIcon>
-                        </button>
-                      </section>
+                      <Description description={user.info.description} />
                     )}
+
                     <section className="info-follow">
                       <Link {...userFollowersPath}>
                         <a className="followers">

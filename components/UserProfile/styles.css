@@ -121,9 +121,8 @@
   & p {
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    /* autoprefixer: off */
+    /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
-    /* autoprefixer: on */
     overflow: hidden;
   }
 
@@ -155,17 +154,6 @@
     & p {
       -webkit-line-clamp: unset;
     }
-    & button {
-      display: none;
-    }
-  }
-}
-
-.expand {
-  cursor: pointer;
-
-  & input:checked {
-    color: red;
   }
 }
 
