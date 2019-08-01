@@ -3,7 +3,10 @@ import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
-import { ProfileAvatarUploader } from '~/components/FileUploader'
+import {
+  ProfileAvatarUploader,
+  ProfileCoverUploader
+} from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
@@ -193,14 +196,23 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
 
   return (
     <>
-      <section className="content">
-        <ProfileAvatarUploader user={user} />
-        <section className="info">
-          <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
-            {update => <MainForm submitAction={update} />}
-          </Mutation>
+      <div className="cover-container l-row">
+        <section className="l-col-4 l-col-md-8 l-col-lg-12">
+          <ProfileCoverUploader user={user} />
         </section>
-      </section>
+      </div>
+      <div className="content-container l-row">
+        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+          <section className="content">
+            <ProfileAvatarUploader user={user} />
+            <section className="info">
+              <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+                {update => <MainForm submitAction={update} />}
+              </Mutation>
+            </section>
+          </section>
+        </section>
+      </div>
       <style jsx>{styles}</style>
     </>
   )
