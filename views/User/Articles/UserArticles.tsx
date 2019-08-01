@@ -76,7 +76,7 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticleFeed }) => {
           viewBox={ICON_DOT_DIVIDER.viewBox}
           style={{ width: 18, height: 18 }}
         />
-        <Translate zh_hant="累積創作" zh_hans="累積創作" />
+        <Translate zh_hant="累積創作" zh_hans="累积创作" />
         <span>{words}</span>
         <Translate zh_hant="字" zh_hans="字" />
       </div>
