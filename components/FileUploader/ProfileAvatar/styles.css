@@ -6,9 +6,9 @@
 .uploader {
   @mixin flex-center-all;
   @mixin cover;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
-  color: var(--color-matters-green);
+  color: var(--color-white);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }

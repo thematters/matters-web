@@ -11,7 +11,7 @@ import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import ICON_CAMERA from '~/static/icons/camera-green.svg?sprite'
+import ICON_CAMERA from '~/static/icons/camera-white.svg?sprite'
 
 import styles from './styles.css'
 
