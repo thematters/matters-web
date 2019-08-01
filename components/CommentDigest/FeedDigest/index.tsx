@@ -215,8 +215,8 @@ const FeedDigest = ({
                   spacing="xxtight"
                 >
                   <Translate
-                    zh_hans={`查看 ${restDescendantCommentCount} 條回應`}
-                    zh_hant={`查看 ${restDescendantCommentCount} 条回应`}
+                    zh_hant={`查看 ${restDescendantCommentCount} 條回應`}
+                    zh_hans={`查看 ${restDescendantCommentCount} 条回应`}
                   />
                 </TextIcon>
               </button>
