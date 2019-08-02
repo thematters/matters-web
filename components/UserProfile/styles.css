@@ -17,8 +17,6 @@
   @media (--sm-up) {
     padding-bottom: var(--spacing-x-loose);
   }
-  @media (--lg-up) {
-  }
 }
 
 .content {
