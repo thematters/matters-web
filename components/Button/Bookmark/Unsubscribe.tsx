@@ -23,7 +23,7 @@ const Unsubscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'small' | 'default'
+  size: 'xsmall' | 'small' | 'default'
   disabled?: boolean
 }) => (
   <Mutation
@@ -47,14 +47,14 @@ const Unsubscribe = ({
         <Icon
           size={size}
           id={
-            size === 'small'
-              ? ICON_BOOKMARK_SM_ACTIVE.id
-              : ICON_BOOKMARK_REGULAR_ACTIVE.id
+            size === 'default'
+              ? ICON_BOOKMARK_REGULAR_ACTIVE.id
+              : ICON_BOOKMARK_SM_ACTIVE.id
           }
           viewBox={
-            size === 'small'
-              ? ICON_BOOKMARK_SM_ACTIVE.viewBox
-              : ICON_BOOKMARK_REGULAR_ACTIVE.viewBox
+            size === 'default'
+              ? ICON_BOOKMARK_REGULAR_ACTIVE.viewBox
+              : ICON_BOOKMARK_SM_ACTIVE.viewBox
           }
         />
       </button>

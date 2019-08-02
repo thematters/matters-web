@@ -21,7 +21,7 @@ export const BookmarkButton = ({
   size = 'small'
 }: {
   article: BookmarkArticle
-  size?: 'small' | 'default'
+  size?: 'xsmall' | 'small' | 'default'
 }) => {
   const viewer = useContext(ViewerContext)
 
