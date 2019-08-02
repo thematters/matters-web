@@ -21,6 +21,7 @@ import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
 import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
+import Description from './Description'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -204,8 +205,9 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                     </header>
 
                     {!viewer.isInactive && (
-                      <p className="description">{user.info.description}</p>
+                      <Description description={user.info.description} />
                     )}
+
                     <section className="info-follow">
                       <Link {...userFollowersPath}>
                         <a className="followers">
