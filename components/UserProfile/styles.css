@@ -152,8 +152,8 @@
       width: 7rem;
       background-image: linear-gradient(
         to left,
-        var(--color-bg-yellow),
-        var(--color-bg-yellow) 73%,
+        var(--color-white),
+        var(--color-white) 53%,
         rgba(255, 255, 255, 0)
       );
       z-index: -1;

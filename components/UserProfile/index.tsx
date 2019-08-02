@@ -132,7 +132,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
         variables={isMe ? {} : { userName }}
       >
         {({ data, loading, error }: UserProfileResultType) => {
-          if (loading === false) {
+          if (loading) {
             return (
               <CoverContainer>
                 <Placeholder.UserProfile />
