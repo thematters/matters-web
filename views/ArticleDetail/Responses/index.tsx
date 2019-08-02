@@ -92,8 +92,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
     <Query
       query={ARTICLE_RESPONSES}
       variables={queryVariables}
-      fetchPolicy="cache-and-network"
-      errorPolicy="none"
       notifyOnNetworkStatusChange
     >
       {({
