@@ -128,7 +128,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
               className="button"
               onClick={(event: any) => removeCover(event, update)}
             >
-              <Translate zh_hant="刪除" zh_hans="刪除" />
+              <Translate zh_hant="刪除" zh_hans="删除" />
             </div>
             <div className="error">
               {error === 'size' && (
