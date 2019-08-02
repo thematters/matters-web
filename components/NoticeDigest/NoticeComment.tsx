@@ -12,12 +12,13 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     return null
   }
 
+  const parentId = _get(comment, 'parentComment.id')
   const path = toPath({
     page: 'articleDetail',
     userName: comment.article.author.userName || '',
     slug: comment.article.slug || '',
     mediaHash: comment.article.mediaHash || '',
-    fragment: _get(comment, 'parentComment.id') || comment.id
+    fragment: parentId ? `${parentId}-${comment.id}` : comment.id
   })
 
   return (
