@@ -35,3 +35,7 @@ footer {
   border-radius: 2px;
   line-height: 1;
 }
+
+.response-count {
+  font-size: 0;
+}

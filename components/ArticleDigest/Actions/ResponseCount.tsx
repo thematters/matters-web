@@ -9,6 +9,7 @@ import { analytics, numAbbr, toPath } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`
@@ -48,6 +49,7 @@ const ResponseCount = ({
   return (
     <Link {...path}>
       <a
+        className="response-count"
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
             entrance: article.id,
@@ -69,6 +71,8 @@ const ResponseCount = ({
           size={size === 'default' ? 'sm' : 'xs'}
           spacing="xxtight"
         />
+
+        <style jsx>{styles}</style>
       </a>
     </Link>
   )

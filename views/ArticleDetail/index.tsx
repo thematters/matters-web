@@ -18,6 +18,7 @@ import {
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { Fingerprint } from '~/components/Fingerprint'
 import { Query } from '~/components/GQL'
 import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
@@ -70,6 +71,7 @@ const ARTICLE_DETAIL = gql`
       ...ToolbarArticle
       ...RelatedArticles
       ...StateArticle
+      ...FingerprintArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -79,6 +81,7 @@ const ARTICLE_DETAIL = gql`
   ${Toolbar.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
+  ${Fingerprint.fragments.article}
 `
 
 const Block = ({
@@ -206,7 +209,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                             <p className="date">
                               <DateTime date={data.article.createdAt} />
                             </p>
-                            <span>{data.article.live && <IconLive />}</span>
+                            <span className="right-items">
+                              {data.article.live && <IconLive />}
+                              <Fingerprint
+                                article={data.article}
+                                color="grey"
+                                size="xs"
+                              />
+                            </span>
                           </span>
                         </section>
 
