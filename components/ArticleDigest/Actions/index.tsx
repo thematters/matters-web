@@ -98,7 +98,7 @@ const Actions = ({
 }: ActionsProps) => {
   const isResponseMode = type === 'response'
   const size =
-    ['feature', 'feed', 'response'].indexOf(type) >= 0 ? 'default' : 'small'
+    ['feature', 'feed', 'response'].indexOf(type) >= 0 ? 'small' : 'xsmall'
 
   // used in user article feed
   if (hasState && isNotActive(article)) {
@@ -137,7 +137,7 @@ const Actions = ({
         {hasBookmark && 'subscribed' in article && (
           <>
             <IconDotDivider />
-            <BookmarkButton article={article} />
+            <BookmarkButton article={article} size={size} />
           </>
         )}
 

@@ -18,20 +18,28 @@
 }
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 
   padding: 2px 2px 0.75rem 2px;
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 
-  & div:not(:first-child) {
-    margin-left: var(--spacing-tight);
+  & div:nth-child(2) {
+    display: flex;
+    justify-content: center;
   }
 
   & div:last-child {
+    display: flex;
+    justify-content: flex-end;
     padding-right: 1px;
+  }
+
+  @media (--lg-down) {
+    & div:not(:first-child) {
+      padding-left: var(--spacing-tight);
+    }
   }
 }

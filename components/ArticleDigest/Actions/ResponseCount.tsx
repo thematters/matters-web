@@ -9,6 +9,7 @@ import { analytics, numAbbr, toPath } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`
@@ -26,10 +27,10 @@ const fragments = {
 
 const ResponseCount = ({
   article,
-  size = 'default'
+  size = 'small'
 }: {
   article: ResponseCountArticle
-  size?: 'small' | 'default'
+  size?: 'small' | 'xsmall'
 }) => {
   const { slug, mediaHash, author } = article
 
@@ -48,6 +49,7 @@ const ResponseCount = ({
   return (
     <Link {...path}>
       <a
+        className="response-count"
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
             entrance: article.id,
@@ -58,7 +60,7 @@ const ResponseCount = ({
         <TextIcon
           icon={
             <Icon
-              size={size === 'default' ? 'small' : 'xsmall'}
+              size={size}
               id={ICON_COMMENT_SM.id}
               viewBox={ICON_COMMENT_SM.viewBox}
             />
@@ -66,9 +68,11 @@ const ResponseCount = ({
           color="grey"
           weight="medium"
           text={numAbbr(_get(article, 'responseCount', 0))}
-          size={size === 'default' ? 'sm' : 'xs'}
+          size={size === 'small' ? 'sm' : 'xs'}
           spacing="xxtight"
         />
+
+        <style jsx>{styles}</style>
       </a>
     </Link>
   )

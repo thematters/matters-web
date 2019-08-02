@@ -202,7 +202,15 @@ const FingerprintContent = ({
   )
 }
 
-const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
+const Fingerprint = ({
+  article,
+  color = 'green',
+  size = 'sm'
+}: {
+  article: FingerprintArticle
+  color?: 'grey' | 'green'
+  size?: 'xs' | 'sm'
+}) => {
   const [shown, setShown] = useState(false)
 
   return (
@@ -217,10 +225,14 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
       <button type="button">
         <TextIcon
           icon={
-            <Icon id={ICON_BOX.id} viewBox={ICON_BOX.viewBox} size="small" />
+            <Icon
+              id={ICON_BOX.id}
+              viewBox={ICON_BOX.viewBox}
+              size={size === 'sm' ? 'small' : 'xsmall'}
+            />
           }
-          size="sm"
-          color="green"
+          size={size}
+          color={color}
           weight="medium"
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />

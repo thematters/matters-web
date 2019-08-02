@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Title } from '~/components'
+import { Fingerprint } from '~/components/Fingerprint'
 import IconLive from '~/components/Icon/Live'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -10,7 +11,6 @@ import { UrlFragments } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
-import { Fingerprint } from '../Fingerprint'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import styles from './styles.css'
 
