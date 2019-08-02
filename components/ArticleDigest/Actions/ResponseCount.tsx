@@ -27,10 +27,10 @@ const fragments = {
 
 const ResponseCount = ({
   article,
-  size = 'default'
+  size = 'small'
 }: {
   article: ResponseCountArticle
-  size?: 'small' | 'default'
+  size?: 'small' | 'xsmall'
 }) => {
   const { slug, mediaHash, author } = article
 
@@ -60,7 +60,7 @@ const ResponseCount = ({
         <TextIcon
           icon={
             <Icon
-              size={size === 'default' ? 'small' : 'xsmall'}
+              size={size}
               id={ICON_COMMENT_SM.id}
               viewBox={ICON_COMMENT_SM.viewBox}
             />
@@ -68,7 +68,7 @@ const ResponseCount = ({
           color="grey"
           weight="medium"
           text={numAbbr(_get(article, 'responseCount', 0))}
-          size={size === 'default' ? 'sm' : 'xs'}
+          size={size === 'small' ? 'sm' : 'xs'}
           spacing="xxtight"
         />
 

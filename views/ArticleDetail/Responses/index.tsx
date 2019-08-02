@@ -196,7 +196,11 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 {responses.map(response => (
                   <li key={response.id}>
                     {_has(response, 'title') ? (
-                      <ArticleDigest.Response article={response} hasAuthor />
+                      <ArticleDigest.Response
+                        article={response}
+                        hasAuthor
+                        hasBookmark
+                      />
                     ) : (
                       <CommentDigest.Feed
                         comment={response}
