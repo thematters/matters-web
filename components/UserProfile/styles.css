@@ -205,6 +205,13 @@
   }
 }
 
+.cover-container {
+  @media (--sm-down) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .profile-cover {
   &::after {
     content: '';

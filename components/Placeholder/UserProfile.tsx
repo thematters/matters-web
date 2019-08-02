@@ -9,11 +9,11 @@ const XS = () => (
   <ContentLoader {...LoaderProps} width={328} height={245}>
     <rect x="0" y="0" rx="0" ry="0" width="328" height="120" />
     <circle cx="45" cy="135" r="35" />
-    <rect x="0" y="175" rx="0" ry="0" width="151" height="15" />
-    <rect x="0" y="200" rx="0" ry="0" width="328" height="15" />
-    <rect x="0" y="225" rx="0" ry="0" width="90" height="15" />
-    <rect x="100" y="225" rx="0" ry="0" width="90" height="15" />
-    <rect x="200" y="225" rx="0" ry="0" width="90" height="15" />
+    <rect x="15" y="175" rx="0" ry="0" width="151" height="15" />
+    <rect x="15" y="200" rx="0" ry="0" width="295" height="15" />
+    <rect x="15" y="225" rx="0" ry="0" width="80" height="15" />
+    <rect x="110" y="225" rx="0" ry="0" width="80" height="15" />
+    <rect x="210" y="225" rx="0" ry="0" width="80" height="15" />
   </ContentLoader>
 )
 

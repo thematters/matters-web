@@ -45,21 +45,21 @@
   border: 1px solid #FFFFFF;
   cursor: pointer;
   height: 2rem;
-  padding: var(--spacing-x-tight);
+  padding: 0 var(--spacing-x-tight);
 
   @media (--sm-up) {
-    padding: var(--spacing-x-tight) 1.25rem;
+    padding: 0 1.25rem;
   }
 
-  &:first-child {
-    margin-right: var(--spacing-tight);
+  & + .remove {
+    margin-left: var(--spacing-tight);
 
     @media (--sm-up) {
-      margin-right: var(--spacing-default);
+      margin-left: var(--spacing-default);
     }
   }
 
-  & .upload {
+  & > .upload {
     display: none;
     margin-left: var(--spacing-xx-tight);
 

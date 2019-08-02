@@ -110,7 +110,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
         <Cover cover={user.info.profileCover} />
         <div className="uploader">
           <div className="buttons">
-            <div className="button">
+            <button type="button" className="button">
               <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
               <span className="upload">
                 <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
@@ -123,13 +123,16 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
                 multiple={false}
                 onChange={(event: any) => handleChange(event, upload, update)}
               />
-            </div>
-            <div
-              className="button"
-              onClick={(event: any) => removeCover(event, update)}
-            >
-              <Translate zh_hant="刪除" zh_hans="删除" />
-            </div>
+            </button>
+            {user.info.profileCover && (
+              <button
+                type="button"
+                className="button remove"
+                onClick={(event: any) => removeCover(event, update)}
+              >
+                <Translate zh_hant="刪除" zh_hans="删除" />
+              </button>
+            )}
             <div className="error">
               {error === 'size' && (
                 <Translate
