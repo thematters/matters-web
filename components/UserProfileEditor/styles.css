@@ -15,7 +15,7 @@
 
   & :global(> .container) {
     border-radius: 50%;
-    border: 4px solid #FFFFFF;
+    border: 4px solid #ffffff;
     margin: -3rem 0 0;
 
     @media (--sm-up) {
@@ -46,7 +46,7 @@
       padding-bottom: 37%;
 
       @media (--sm-up) {
-        padding-bottom: 27%;
+        padding-bottom: 27.777778%;
       }
     }
   }

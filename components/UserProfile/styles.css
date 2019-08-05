@@ -223,7 +223,7 @@
     padding-bottom: 35%;
 
     @media (--sm-up) {
-      padding-bottom: 27%;
+      padding-bottom: 27.777778%;
     }
   }
 }
