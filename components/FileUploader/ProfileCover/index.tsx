@@ -111,18 +111,20 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
         <div className="uploader">
           <div className="buttons">
             <button type="button" className="button">
-              <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
-              <span className="upload">
-                <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
-              </span>
-              <input
-                className="input"
-                type="file"
-                name="file"
-                accept={acceptTypes}
-                multiple={false}
-                onChange={(event: any) => handleChange(event, upload, update)}
-              />
+              <label>
+                <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
+                <span className="upload">
+                  <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
+                </span>
+                <input
+                  className="input"
+                  type="file"
+                  name="file"
+                  accept={acceptTypes}
+                  multiple={false}
+                  onChange={(event: any) => handleChange(event, upload, update)}
+                />
+              </label>
             </button>
             {user.info.profileCover && (
               <button
@@ -130,7 +132,9 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
                 className="button remove"
                 onClick={(event: any) => removeCover(event, update)}
               >
-                <Translate zh_hant="刪除" zh_hans="删除" />
+                <label>
+                  <Translate zh_hant="刪除" zh_hans="删除" />
+                </label>
               </button>
             )}
             <div className="error">

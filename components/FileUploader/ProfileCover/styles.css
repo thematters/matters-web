@@ -51,6 +51,19 @@
     padding: 0 1.25rem;
   }
 
+  & label {
+    @mixin flex-center-all;
+
+    & > .upload {
+      display: none;
+      margin-left: var(--spacing-xx-tight);
+
+      @media (--sm-up) {
+        display: inline-block;
+      }
+    }
+  }
+
   & + .remove {
     margin-left: var(--spacing-tight);
 
@@ -59,14 +72,6 @@
     }
   }
 
-  & > .upload {
-    display: none;
-    margin-left: var(--spacing-xx-tight);
-
-    @media (--sm-up) {
-      display: inline-block;
-    }
-  }
 }
 
 .input {
