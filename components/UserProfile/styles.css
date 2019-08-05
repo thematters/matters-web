@@ -42,7 +42,7 @@
 
   & :global(.avatar) {
     flex-shrink: 0;
-    border: 4px solid #FFFFFF;
+    border: 4px solid #ffffff;
     margin: -3rem 0 0;
 
     /* 70px */
@@ -112,6 +112,10 @@
     position: initial;
     top: initial;
     right: initial;
+  }
+
+  & > :global(*) + :global(*) {
+    margin-left: var(--spacing-tight);
   }
 }
 

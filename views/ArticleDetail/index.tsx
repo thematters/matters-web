@@ -22,6 +22,7 @@ import { Fingerprint } from '~/components/Fingerprint'
 import { Query } from '~/components/GQL'
 import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
+import ShareModal from '~/components/ShareButton/ShareModal'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -38,7 +39,6 @@ import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
-import ShareModal from './Toolbar/ShareButton/ShareModal'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
