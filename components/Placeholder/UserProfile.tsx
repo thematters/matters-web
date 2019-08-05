@@ -6,19 +6,26 @@ import { Responsive } from '~/components'
 import { LoaderProps } from './utils'
 
 const XS = () => (
-  <ContentLoader {...LoaderProps} width={328} height={226}>
-    <path d="M0 90h46v27H0V90zm0 39h328v16H0v-16zm0 57h62v16H0v-16zm118 0h62v16h-62v-16zM12 210h39v16H12v-16zm118 0h39v16h-39v-16zM35 0c19.33 0 35 15.67 35 35S54.33 70 35 70 0 54.33 0 35 15.67 0 35 0z" />
+  <ContentLoader {...LoaderProps} width={328} height={245}>
+    <rect x="0" y="0" rx="0" ry="0" width="328" height="120" />
+    <circle cx="45" cy="135" r="35" />
+    <rect x="15" y="175" rx="0" ry="0" width="151" height="15" />
+    <rect x="15" y="200" rx="0" ry="0" width="295" height="15" />
+    <rect x="15" y="225" rx="0" ry="0" width="80" height="15" />
+    <rect x="110" y="225" rx="0" ry="0" width="80" height="15" />
+    <rect x="210" y="225" rx="0" ry="0" width="80" height="15" />
   </ContentLoader>
 )
 
 const SM = () => (
-  <ContentLoader
-    {...LoaderProps}
-    width={516}
-    height={140}
-    style={{ height: 140 }}
-  >
-    <path d="M188 3h46v27h-46V3zm0 39h328v16H188V42zm0 57h62v16h-62V99zm118 0h62v16h-62V99zm-106 24h39v16h-39v-16zm118 0h39v16h-39v-16zM70 0c38.66 0 70 31.34 70 70s-31.34 70-70 70S0 108.66 0 70 31.34 0 70 0z" />
+  <ContentLoader {...LoaderProps} width={1080} height={460}>
+    <rect x="0" y="0" rx="0" ry="0" width="1080" height="280" />
+    <circle cx="258" cy="308" r="70" />
+    <rect x="352" y="304" width="151" height="25" />
+    <rect x="352" y="352" width="540" height="25" />
+    <rect x="352" y="400" width="100" height="25" />
+    <rect x="473" y="400" width="100" height="25" />
+    <rect x="597" y="400" width="100" height="25" />
   </ContentLoader>
 )
 

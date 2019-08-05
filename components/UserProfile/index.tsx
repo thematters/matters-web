@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import _some from 'lodash/some'
+import { get, some } from 'lodash'
 import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
@@ -21,6 +20,7 @@ import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
 import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import { UserProfileUser } from './__generated__/UserProfileUser'
+import Cover from './Cover'
 import Description from './Description'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
@@ -36,6 +36,7 @@ const fragments = {
           type
         }
         description
+        profileCover
       }
       followees(input: { first: 0 }) {
         totalCount
@@ -78,7 +79,7 @@ const SeedBadge = () => (
       <Icon
         id={ICON_SEED_BADGE.id}
         viewBox={ICON_SEED_BADGE.viewBox}
-        style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
+        style={{ width: 16, height: 16 }}
       />
     </span>
   </Tooltip>
@@ -92,7 +93,7 @@ const OnboardingBadge = () => (
         <Icon
           id={ICON_LOCK.id}
           viewBox={ICON_LOCK.viewBox}
-          style={{ width: 16, height: 16, marginLeft: '0.5rem' }}
+          style={{ width: 16, height: 16 }}
         />
       }
     >
@@ -100,6 +101,17 @@ const OnboardingBadge = () => (
     </TextIcon>
   </span>
 )
+
+const CoverContainer = ({ children }: any) => (
+  <>
+    <div className="cover-container l-row">
+      <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
+    </div>
+    <style jsx>{styles}</style>
+  </>
+)
+
+type UserProfileResultType = QueryResult & { data: UserProfileUser }
 
 const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
@@ -115,130 +127,136 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <section className={containerClass}>
-      <div className="content-container l-row">
-        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <Query
-            query={isMe ? ME_PROFILE : USER_PROFILE}
-            variables={isMe ? {} : { userName }}
-          >
-            {({
-              data,
-              loading,
-              error
-            }: QueryResult & { data: UserProfileUser }) => {
-              if (loading) {
-                return <Placeholder.UserProfile />
-              }
+      <Query
+        query={isMe ? ME_PROFILE : USER_PROFILE}
+        variables={isMe ? {} : { userName }}
+      >
+        {({ data, loading, error }: UserProfileResultType) => {
+          if (loading) {
+            return (
+              <CoverContainer>
+                <Placeholder.UserProfile />
+              </CoverContainer>
+            )
+          }
 
-              if (isMe && editing) {
-                return (
-                  <UserProfileEditor
-                    user={data.viewer}
-                    saveCallback={setEditing}
-                  />
-                )
-              }
+          if (isMe && editing) {
+            return (
+              <UserProfileEditor user={data.viewer} saveCallback={setEditing} />
+            )
+          }
 
-              const user = isMe ? data.viewer : data.user
-              const userFollowersPath = toPath({
-                page: 'userFollowers',
-                userName: user.userName
-              })
-              const userFolloweesPath = toPath({
-                page: 'userFollowees',
-                userName: user.userName
-              })
-              const badges = _get(user, 'info.badges', [])
-              const hasSeedBadge = _some(badges, { type: 'seed' })
-              const state = _get(user, 'status.state')
-              const isOnboarding = state === 'onboarding'
+          const user = isMe ? data.viewer : data.user
+          const userFollowersPath = toPath({
+            page: 'userFollowers',
+            userName: user.userName
+          })
+          const userFolloweesPath = toPath({
+            page: 'userFollowees',
+            userName: user.userName
+          })
+          const badges = get(user, 'info.badges', [])
+          const hasSeedBadge = some(badges, { type: 'seed' })
+          const state = get(user, 'status.state')
+          const isOnboarding = state === 'onboarding'
+          const profileCover = get(user, 'info.profileCover', '')
 
-              return (
-                <section className="content">
-                  <Avatar
-                    size="xlarge"
-                    user={!isMe && viewer.isInactive ? undefined : user}
-                  />
-
-                  <section className="info">
-                    <header className="header">
-                      <section className="name">
-                        {!viewer.isInactive && (
-                          <span>
-                            {user.displayName}
-                            {hasSeedBadge && <SeedBadge />}
-                            {isOnboarding && <OnboardingBadge />}
-                            {!isMe && <FollowButton.State user={user} />}
-                          </span>
-                        )}
-                        {viewer.isArchived && (
-                          <span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.accountArchived}
-                              zh_hans={TEXT.zh_hans.accountArchived}
-                            />
-                          </span>
-                        )}
-                        {viewer.isFrozen && (
-                          <span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.accountFrozen}
-                              zh_hans={TEXT.zh_hans.accountFrozen}
-                            />
-                          </span>
-                        )}
-                        {viewer.isBanned && (
-                          <span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.accountBanned}
-                              zh_hans={TEXT.zh_hans.accountBanned}
-                            />
-                          </span>
-                        )}
-                      </section>
+          return (
+            <>
+              <CoverContainer>
+                <Cover cover={profileCover} />
+              </CoverContainer>
+              <div className="content-container l-row">
+                <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+                  <section className="content">
+                    <div className="avatar-container">
+                      <Avatar
+                        size="xlarge"
+                        user={!isMe && viewer.isInactive ? undefined : user}
+                      />
                       <section className="action-button">
-                        {isMe && !viewer.isInactive && (
-                          <EditProfileButton setEditing={setEditing} />
-                        )}
                         {!isMe && <FollowButton user={user} size="default" />}
                       </section>
-                    </header>
+                    </div>
 
-                    {!viewer.isInactive && (
-                      <Description description={user.info.description} />
-                    )}
+                    <section className="info">
+                      <header className="header">
+                        <section className="name">
+                          {!viewer.isInactive && (
+                            <span>
+                              {user.displayName}
+                              {hasSeedBadge && <SeedBadge />}
+                              {isOnboarding && <OnboardingBadge />}
+                              {!isMe && <FollowButton.State user={user} />}
+                            </span>
+                          )}
+                          {viewer.isArchived && (
+                            <span>
+                              <Translate
+                                zh_hant={TEXT.zh_hant.accountArchived}
+                                zh_hans={TEXT.zh_hans.accountArchived}
+                              />
+                            </span>
+                          )}
+                          {viewer.isFrozen && (
+                            <span>
+                              <Translate
+                                zh_hant={TEXT.zh_hant.accountFrozen}
+                                zh_hans={TEXT.zh_hans.accountFrozen}
+                              />
+                            </span>
+                          )}
+                          {viewer.isBanned && (
+                            <span>
+                              <Translate
+                                zh_hant={TEXT.zh_hant.accountBanned}
+                                zh_hans={TEXT.zh_hans.accountBanned}
+                              />
+                            </span>
+                          )}
+                        </section>
+                        <section className="action-button">
+                          {isMe && !viewer.isInactive && (
+                            <EditProfileButton setEditing={setEditing} />
+                          )}
+                        </section>
+                      </header>
 
-                    <section className="info-follow">
-                      <Link {...userFollowersPath}>
-                        <a className="followers">
-                          <span className="count">
-                            {numAbbr(user.followers.totalCount)}
-                          </span>
-                          <Translate
-                            zh_hant={TEXT.zh_hant.follower}
-                            zh_hans={TEXT.zh_hans.follower}
-                          />
-                        </a>
-                      </Link>
-                      <Link {...userFolloweesPath}>
-                        <a className="followees">
-                          <span className="count">
-                            {numAbbr(user.followees.totalCount)}
-                          </span>
-                          <Translate
-                            zh_hant={TEXT.zh_hant.following}
-                            zh_hans={TEXT.zh_hans.following}
-                          />
-                        </a>
-                      </Link>
+                      {!viewer.isInactive && (
+                        <Description description={user.info.description} />
+                      )}
+                      <section className="info-follow">
+                        <Link {...userFollowersPath}>
+                          <a className="followers">
+                            <span className="count">
+                              {numAbbr(user.followers.totalCount)}
+                            </span>
+                            <Translate
+                              zh_hant={TEXT.zh_hant.follower}
+                              zh_hans={TEXT.zh_hans.follower}
+                            />
+                          </a>
+                        </Link>
+                        <Link {...userFolloweesPath}>
+                          <a className="followees">
+                            <span className="count">
+                              {numAbbr(user.followees.totalCount)}
+                            </span>
+                            <Translate
+                              zh_hant={TEXT.zh_hant.following}
+                              zh_hans={TEXT.zh_hans.following}
+                            />
+                          </a>
+                        </Link>
+                      </section>
                     </section>
                   </section>
                 </section>
-              )
-            }}
-          </Query>
-        </section>
-      </div>
+              </div>
+            </>
+          )
+        }}
+      </Query>
 
       <style jsx>{styles}</style>
     </section>

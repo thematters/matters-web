@@ -36,6 +36,7 @@ const USER_ARTICLES_FEED = gql`
       info {
         description
         totalWordCount
+        profileCover
       }
       articles(input: { first: 10, after: $cursor }) {
         totalCount
@@ -129,7 +130,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
               zh_hans: `${data.user.displayName}的创作空间站`
             }}
             description={data.user.info.description}
-            image={ICON_192}
+            image={data.user.info.profileCover || ICON_192}
           />
         )
 
