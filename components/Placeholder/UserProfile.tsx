@@ -6,48 +6,31 @@ import { Responsive } from '~/components'
 import { LoaderProps } from './utils'
 
 const XS = () => (
-  <ContentLoader {...LoaderProps} width={328} height={313}>
-    <path d="M0 0H328V120H0V0Z" />
-    <rect
-      x="13"
-      y="103"
-      width="67.5976"
-      height="67.5976"
-      rx="33.7988"
-      stroke="white"
-      stroke-width="4"
-    />
-    <rect x="15" y="190.402" width="48.1524" height="21.8049" />
-    <rect x="15" y="234.012" width="298" height="14.5366" />
-    <rect x="15" y="255.817" width="194.427" height="14.5366" />
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M15 292.159H51.4222V312.146H15V292.159ZM89.5 292.159H125.922V312.146H89.5V292.159ZM200.422 292.159H164V312.146H200.422V292.159Z"
-    />
+  <ContentLoader {...LoaderProps} width={320} height={309}>
+    <path d="M84.24 112a35.02 35.02 0 0 0-66.48 0H0V0h320v112H84.24zM51 92a31 31 0 1 1 0 62 31 31 0 0 1 0-62zm-35 85h53v24H16v-24zm0 38h288v16H16v-16zm0 21h214v16H16v-16zm0 51h40.09v22H16v-22zm82 0h40.09v22H98v-22zm122.09 0v22H180v-22h40.09z" />
   </ContentLoader>
 )
 
 const SM = () => (
-  <ContentLoader {...LoaderProps} width={1080} height={503}>
-    <path d="M0 0H1080V296C1080 298.209 1078.21 300 1076 300H4.00001C1.79087 300 0 298.209 0 296V0Z" />
-    <rect
-      x="186"
-      y="266"
-      width="144"
-      height="144"
-      rx="72"
-      stroke="white"
-      stroke-width="4"
-    />
-    <rect x="352" y="327" width="88" height="24" />
-    <rect x="352" y="375" width="540" height="16" />
-    <rect x="352" y="399" width="540" height="16" />
-    <rect x="352" y="423" width="352" height="16" />
+  <ContentLoader {...LoaderProps} width={704} height={385}>
+    <path d="M133.05 195.55A70 70 0 0 0 70 156a70 70 0 0 0-63.05 39.55H0V0h704v195.55H133.05zM70 160a66 66 0 1 1 0 132 66 66 0 0 1 0-132zm115 63h88v24h-88v-24zm0 39h517v16H185v-16zm0 24h517v16H185v-16zm0 24h352v16H185v-16zm0 53h66v22h-66v-22zm135 0h66v22h-66v-22zm201 0v22h-66v-22h66z" />
+  </ContentLoader>
+)
+
+const MD = () => (
+  <ContentLoader {...LoaderProps} width={960} height={456}>
     <path
       fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M352 481H418V503H352V481ZM487 481H553V503H487V481ZM688 481H622V503H688V481Z"
+      d="M313 294h88v24h-88v-24zm0 39h540v16H313v-16zm0 24h540v16H313v-16zm0 24h352v16H313v-16zm0 53h66v22h-66v-22zm135 0h66v22h-66v-22zm201 0v22h-66v-22h66zM258.1 266.66A70 70 0 0 0 195 227a70 70 0 0 0-63.1 39.66H0V0h960v266.66H258.1zM195 231a66 66 0 1 1 0 132 66 66 0 0 1 0-132z"
+    />
+  </ContentLoader>
+)
+
+const LG = () => (
+  <ContentLoader {...LoaderProps} width={1080} height={503}>
+    <path
+      fill-rule="evenodd"
+      d="M321.26 300a70 70 0 0 0-126.52 0H4a4 4 0 0 1-4-4V0h1080v296a4 4 0 0 1-4 4H321.26zM258 264a66 66 0 1 1 0 132 66 66 0 0 1 0-132zm118 63h88v24h-88v-24zm0 39h540v16H376v-16zm0 24h540v16H376v-16zm0 24h352v16H376v-16zm0 53h66v22h-66v-22zm135 0h66v22h-66v-22zm201 0v22h-66v-22h66z"
     />
   </ContentLoader>
 )
@@ -58,9 +41,17 @@ const UserProfile = () => (
       <XS />
     </Responsive.XSmall>
 
-    <Responsive.SmallUp>
+    <Responsive.Small>
       <SM />
-    </Responsive.SmallUp>
+    </Responsive.Small>
+
+    <Responsive.Medium>
+      <MD />
+    </Responsive.Medium>
+
+    <Responsive.LargeUp>
+      <LG />
+    </Responsive.LargeUp>
   </>
 )
 

@@ -10,6 +10,8 @@ import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
+import ShareButton from '~/components/ShareButton'
+import ShareModal from '~/components/ShareButton/ShareModal'
 import { TextIcon } from '~/components/TextIcon'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
@@ -174,9 +176,14 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                         size="xlarge"
                         user={!isMe && viewer.isInactive ? undefined : user}
                       />
-                      <section className="action-button">
-                        {!isMe && <FollowButton user={user} size="default" />}
-                      </section>
+                      {!isMe && (
+                        <section className="action-button">
+                          <FollowButton user={user} size="default" />
+                          <span className="u-sm-up-hide">
+                            <ShareButton />
+                          </span>
+                        </section>
+                      )}
                     </div>
 
                     <section className="info">
@@ -219,6 +226,9 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                           {isMe && !viewer.isInactive && (
                             <EditProfileButton setEditing={setEditing} />
                           )}
+                          <span className={!isMe ? 'u-sm-down-hide' : ''}>
+                            <ShareButton />
+                          </span>
                         </section>
                       </header>
 
@@ -257,6 +267,8 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
           )
         }}
       </Query>
+
+      <ShareModal />
 
       <style jsx>{styles}</style>
     </section>
