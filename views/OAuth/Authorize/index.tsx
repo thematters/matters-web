@@ -4,6 +4,8 @@ import { withRouter, WithRouterProps } from 'next/router'
 
 import { Button } from '~/components'
 
+import { objectToGetParams } from '~/common/utils'
+
 import styles from './styles.css'
 
 const {
@@ -23,12 +25,13 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
     'container'
   )
   const qs = (router ? router.query : {}) as { [key: string]: any }
+  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}${objectToGetParams(qs)}`
 
   return (
     <>
       <main className="l-row">
         <article className={containerClass}>
-          <form action={OAUTH_AUTHORIZE_ENDPOINT} method="post">
+          <form action={actionUrl} method="post">
             <input type="hidden" name="client_id" value={qs.client_id} />
             {qs.state && <input type="hidden" name="state" value={qs.state} />}
             {qs.scope && <input type="hidden" name="scope" value={qs.scope} />}
