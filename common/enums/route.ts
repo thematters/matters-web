@@ -33,6 +33,9 @@ type ROUTE_KEY =
   | 'AUTH_SIGNUP'
   | 'AUTH_FORGET'
   | 'OAUTH_AUTHORIZE'
+  | 'OAUTH_CALLBACK_SUCCESS'
+  | 'OAUTH_CALLBACK_FAILURE'
+  | 'OAUTH_LIKECOIN_POLLING'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -194,6 +197,23 @@ export const ROUTES: Array<{
     key: 'OAUTH_AUTHORIZE',
     href: '/OAuthAuthorize',
     as: '/oauth/authorize'
+  },
+  {
+    key: 'OAUTH_CALLBACK_SUCCESS',
+    href: '/OAuthCallbackSuccess',
+    as: '/oauth/:provider/success'
+  },
+  {
+    key: 'OAUTH_CALLBACK_FAILURE',
+    href: '/OAuthCallbackFailure',
+    as: '/oauth/:provider/failure'
+  },
+
+  // temporary endpoint
+  {
+    key: 'OAUTH_LIKECOIN_POLLING',
+    href: '/OAuthLikeCoinPolling',
+    as: '/oauth/likecoin/polling'
   },
 
   // Misc

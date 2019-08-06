@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2019-08-06
+
+### Added
+
+- PoC of OAuth login with LikeCoin #354
+- Add UI for user word count #353
+- Add profile cover #356 #358 #361 #364 #365
+
+### Changed
+
+- Add grey background to code block #355
+- Line Clamp #357
+- Alter alignment of related articles. #363
+- Support scroll to child comment; Remove unused codes; #360
+- Open IPFS Gateways #362
+
 ## [1.10.0] - 2019-07-29
 
 ### Changed

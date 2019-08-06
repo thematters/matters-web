@@ -23,6 +23,8 @@ import { filterResponses, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
+const RESPONSES_COUNT = 15
+
 const SUBSCRIBE_RESPONSES = gql`
   subscription ArticleCommentAdded(
     $id: ID!
@@ -53,22 +55,35 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   const uuid = getQuery({ router, key: 'post' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
 
-  let fragment = ''
-  let before = null
-  if (process.browser) {
-    fragment = window.location.hash.replace('#', '')
-    before = fragment === UrlFragments.COMMENTS ? null : fragment
-  }
-
   if (!mediaHash && !uuid) {
     return <EmptyResponse articleOnlyMode={articleOnlyMode} />
+  }
+
+  /**
+   * Fragment Pattern
+   * 0. ``
+   * 1. `#comment`
+   * 2. `#parentCommentId`
+   * 3. `#parentComemntId-childCommentId`
+   */
+  let fragment = ''
+  let before = null
+  let anchor = ''
+  let parentId = ''
+  let descendantId = ''
+  if (process.browser) {
+    fragment = window.location.hash.replace('#', '')
+    parentId = fragment.split('-')[0]
+    descendantId = fragment.split('-')[1]
+    before = fragment === UrlFragments.COMMENTS ? null : parentId
+    anchor = descendantId || parentId
   }
 
   const queryVariables = {
     mediaHash,
     uuid,
     before: before || undefined,
-    first: before ? null : 8,
+    first: before ? null : RESPONSES_COUNT,
     includeBefore: !!before,
     articleOnly: articleOnlyMode
   }
@@ -77,8 +92,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
     <Query
       query={ARTICLE_RESPONSES}
       variables={queryVariables}
-      fetchPolicy="cache-and-network"
-      errorPolicy="none"
       notifyOnNetworkStatusChange
     >
       {({
@@ -102,7 +115,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
             variables: {
               cursor: pageInfo.endCursor,
               before: null,
-              first: 8,
+              first: RESPONSES_COUNT,
               articleOnly: articleOnlyMode
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
@@ -112,12 +125,10 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
-        const { responseCount } = _get(data, 'article', 0)
+        const responseCount = _get(data, 'article.responseCount', 0)
         const responses = filterResponses(
           (edges || []).map(({ node }: { node: any }) => node)
         )
-
-        const changeMode = () => setArticleOnlyMode(!articleOnlyMode)
 
         useEffect(() => {
           if (data.article.live) {
@@ -148,10 +159,10 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
         }
 
         useScrollTo({
-          enable: !!fragment,
-          selector: `#${fragment}`,
+          enable: !!anchor,
+          selector: `#${anchor}`,
           trigger: [router],
-          ...getScrollOptions(fragment)
+          ...getScrollOptions(anchor)
         })
 
         return (
@@ -166,7 +177,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               </h2>
               <div className="switch">
                 <Switch
-                  onChange={changeMode}
+                  onChange={() => setArticleOnlyMode(!articleOnlyMode)}
                   checked={articleOnlyMode}
                   extraClass="narrow"
                 />
@@ -192,6 +203,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 (responses.length <= 0 && (
                   <EmptyResponse articleOnlyMode={articleOnlyMode} />
                 ))}
+
               <ul>
                 {responses.map(response => (
                   <li key={response.id}>
@@ -206,6 +218,9 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                         comment={response}
                         hasComment
                         inArticle
+                        defaultExpand={
+                          response.id === parentId && !!descendantId
+                        }
                       />
                     )}
                   </li>
@@ -213,7 +228,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
               </ul>
 
               {pageInfo.hasNextPage && (
-                <LoadMore onClick={() => loadMore()} loading={loading} />
+                <LoadMore onClick={loadMore} loading={loading} />
               )}
             </section>
 

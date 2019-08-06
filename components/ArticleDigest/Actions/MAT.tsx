@@ -18,23 +18,19 @@ const fragments = {
 
 const MAT = ({
   article,
-  size = 'default'
+  size = 'small'
 }: {
   article: MATArticle
-  size?: 'small' | 'default'
+  size?: 'small' | 'xsmall'
 }) => (
   <TextIcon
     icon={
-      <Icon
-        size={size === 'default' ? 'small' : 'xsmall'}
-        id={ICON_MAT_GOLD.id}
-        viewBox={ICON_MAT_GOLD.viewBox}
-      />
+      <Icon size={size} id={ICON_MAT_GOLD.id} viewBox={ICON_MAT_GOLD.viewBox} />
     }
     color="gold"
     weight="medium"
     text={numAbbr(_get(article, 'MAT', 0))}
-    size={size === 'default' ? 'sm' : 'xs'}
+    size={size === 'small' ? 'sm' : 'xs'}
     spacing="xxxtight"
   />
 )

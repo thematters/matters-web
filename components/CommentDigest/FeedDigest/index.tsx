@@ -72,7 +72,7 @@ const DescendantComment = ({
   const [edit, setEdit] = useState(false)
 
   return (
-    <section className="container">
+    <section className="container" id={comment.id}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
@@ -126,10 +126,12 @@ const DescendantComment = ({
 const FeedDigest = ({
   comment,
   inArticle,
+  defaultExpand,
   ...actionControls
 }: {
   comment: FeedDigestComment
   inArticle?: boolean
+  defaultExpand?: boolean
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
@@ -138,10 +140,12 @@ const FeedDigest = ({
   )
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
-  const [expand, setExpand] = useState(restDescendantCommentCount <= 0)
+  const [expand, setExpand] = useState(
+    defaultExpand || restDescendantCommentCount <= 0
+  )
 
   return (
-    <section className="container" id={`${comment.id}`}>
+    <section className="container" id={comment.id}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
@@ -215,8 +219,8 @@ const FeedDigest = ({
                   spacing="xxtight"
                 >
                   <Translate
-                    zh_hans={`查看 ${restDescendantCommentCount} 條回應`}
-                    zh_hant={`查看 ${restDescendantCommentCount} 条回应`}
+                    zh_hant={`查看 ${restDescendantCommentCount} 條回應`}
+                    zh_hans={`查看 ${restDescendantCommentCount} 条回应`}
                   />
                 </TextIcon>
               </button>

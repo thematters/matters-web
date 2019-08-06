@@ -8,7 +8,6 @@ import { UserDigest } from '~/components/UserDigest'
 import { TEXT } from '~/common/enums'
 
 import Actions, { ActionsControls } from '../Actions'
-import { Fingerprint } from '../Fingerprint'
 import { ResponseDigestArticle } from './__generated__/ResponseDigestArticle'
 import styles from './styles.css'
 
@@ -28,11 +27,9 @@ const fragments = {
         ...UserDigestMiniUser
       }
       ...ResponseDigestActionsArticle
-      ...FingerprintArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${Actions.fragments.response}
-    ${Fingerprint.fragments.article}
   `
 }
 
@@ -67,17 +64,15 @@ const ResponseDigest = ({
             />
           </span>
         </div>
-        {!hasFingerprint && live && <IconLive />}
+        {live && <IconLive />}
       </div>
 
       <div className="digest-wrap">
         <ArticleDigest.Sidebar
           type="collection"
           article={remadeArticle}
-          hasCover
-          hasAuthor
-          hasBookmark
           extraContainerClass="no-padding"
+          {...actionControls}
         />
       </div>
 
