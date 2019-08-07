@@ -17,6 +17,7 @@
   margin-left: var(--spacing-xx-tight);
   font-size: var(--font-size-sm);
   color: var(--color-grey);
+  line-height: 1;
 }
 
 .spacing-xtight {
