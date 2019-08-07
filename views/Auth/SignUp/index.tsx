@@ -74,7 +74,7 @@ const SignUp = () => {
           )}
           {step === 'complete' && (
             <div className={classNames(childClass)}>
-              <SignUpComplete />
+              <SignUpComplete purpose="page" />
             </div>
           )}
         </article>

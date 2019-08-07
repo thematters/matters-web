@@ -123,12 +123,18 @@ export const getQuery = ({
   return value instanceof Array ? value[0] : value
 }
 
-export const redirectToTarget = () => {
+export const redirectToTarget = ({
+  defaultTarget = 'current'
+}: {
+  defaultTarget?: 'homepage' | 'current'
+} = {}) => {
   if (!process.browser) {
     return
   }
 
-  const target = _get(Router, 'query.target') || '/'
+  const target =
+    _get(Router, 'query.target') ||
+    (defaultTarget === 'homepage' ? '/' : window.location.href)
   return (window.location.href = decodeURIComponent(target))
 }
 
