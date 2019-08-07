@@ -23,27 +23,50 @@ const offset = (el: HTMLElement) => {
 }
 
 // copy to clipboard
-const copyToClipboard = async (str: string) => {
-  const navigator = window.navigator
-  if (navigator && navigator.clipboard) {
-    await navigator.clipboard.writeText(str)
-  } else {
-    // Create new element
-    const el = document.createElement('textarea')
-    // Set value (string to be copied)
-    el.value = str
-    // Set non-editable to avoid focus and move outside of view
-    el.setAttribute('readonly', '')
-    el.style.position = 'absolute'
-    el.style.left = '-9999px'
-    document.body.appendChild(el)
-    // Select text inside element
-    el.select()
-    // Copy text to clipboard
-    document.execCommand('copy')
-    // Remove temporary element
-    document.body.removeChild(el)
+const copyToClipboard = (str: string) => {
+  const el = document.createElement('textarea')
+  el.value = str
+  el.setAttribute('readonly', '')
+  el.style.position = 'absolute'
+  el.style.left = '-9999px'
+  el.style.fontSize = '12pt'
+  const selection = document.getSelection()
+  let originalRange: Range | null = null
+
+  if (!selection) {
+    return
   }
+
+  if (selection.rangeCount > 0) {
+    originalRange = selection.getRangeAt(0)
+  }
+
+  document.body.appendChild(el)
+  el.select()
+  el.selectionStart = 0
+  el.selectionEnd = str.length
+
+  let success = false
+  try {
+    success = document.execCommand('copy')
+
+    if (!success) {
+      throw new Error('copy command was unsuccessful')
+    }
+  } catch (err) {
+    console.error('This error was caught while copying the text', err)
+  } finally {
+    if (originalRange) {
+      selection.removeAllRanges()
+      selection.addRange(originalRange)
+    }
+
+    if (el) {
+      document.body.removeChild(el)
+    }
+  }
+
+  return success
 }
 
 const getAttributes = (name: string, str: string): string[] | [] => {
