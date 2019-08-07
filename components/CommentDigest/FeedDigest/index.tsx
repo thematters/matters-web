@@ -27,7 +27,7 @@ const fragments = {
   comment: commentFragments.feed
 }
 
-const ReplyTo = ({ user }: any) => (
+const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
   <>
     <span className="reply-to">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
@@ -37,6 +37,7 @@ const ReplyTo = ({ user }: any) => (
       avatarSize="xxxsmall"
       textWeight="medium"
       spacing="xxtight"
+      hasUserName={inArticle}
     />
     <style jsx>{styles}</style>
   </>
@@ -79,11 +80,12 @@ const DescendantComment = ({
             user={comment.author}
             avatarSize="xsmall"
             textWeight="medium"
+            hasUserName={inArticle}
           />
           {comment.replyTo &&
             (!comment.parentComment ||
               comment.replyTo.id !== comment.parentComment.id) && (
-              <ReplyTo user={comment.replyTo.author} />
+              <ReplyTo user={comment.replyTo.author} inArticle={!!inArticle} />
             )}
           {comment.pinned && <PinnedLabel />}
         </div>
@@ -152,9 +154,10 @@ const FeedDigest = ({
             user={author}
             avatarSize="small"
             textWeight="medium"
+            hasUserName={inArticle}
           />
           {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-            <ReplyTo user={replyTo.author} />
+            <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
           {pinned && <PinnedLabel />}
         </div>

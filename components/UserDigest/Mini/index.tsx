@@ -23,6 +23,7 @@ interface MiniProps {
   textSize?: 'small' | 'xsmall'
   textWeight?: 'normal' | 'medium'
   spacing?: 'xxtight' | 'xtight'
+  hasUserName?: boolean
 }
 
 const fragments = {
@@ -42,7 +43,8 @@ const Mini = ({
   avatarSize = 'xxsmall',
   textSize = 'small',
   textWeight = 'normal',
-  spacing = 'xtight'
+  spacing = 'xtight',
+  hasUserName
 }: MiniProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -62,6 +64,7 @@ const Mini = ({
           <a className={containerClasses}>
             <Avatar size={avatarSize} user={user} />
             <span className="name">{user.displayName}</span>
+            {hasUserName && <span className="username">@{user.userName}</span>}
           </a>
         </Link>
       </section>
