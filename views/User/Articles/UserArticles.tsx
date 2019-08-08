@@ -97,7 +97,8 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
         data,
         loading,
         error,
-        fetchMore
+        fetchMore,
+        refetch
       }: QueryResult & { data: UserArticleFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
@@ -168,7 +169,10 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                         hasBookmark
                         hasDateTime
                         hasFingerprint
+                        hasMoreButton
                         hasState
+                        hasSticky
+                        refetch={refetch}
                       />
                     </li>
                   )
