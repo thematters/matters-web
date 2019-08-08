@@ -90,3 +90,7 @@
     margin-top: var(--spacing-x-tight);
   }
 }
+
+.sticky {
+  margin-bottom: var(--spacing-tight)
+}
