@@ -37,7 +37,11 @@ const DropdownContent: React.FC<{
         />
       </Menu.Item>
       <Menu.Item>
-        <ArchiveButton articleId={article.id} hideDropdown={hideDropdown} />
+        <ArchiveButton
+          articleId={article.id}
+          hideDropdown={hideDropdown}
+          refetch={refetch}
+        />
       </Menu.Item>
     </Menu>
   )

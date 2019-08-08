@@ -9,7 +9,8 @@ import styles from './styles.css'
 const ArchiveButton: React.FC<{
   articleId: string
   hideDropdown: () => void
-}> = ({ articleId, hideDropdown }) => {
+  refetch?: () => void
+}> = ({ articleId, hideDropdown, refetch }) => {
   return (
     <Mutation
       mutation={MUTATION_ARCHIVE_ARTICLE}
@@ -18,7 +19,13 @@ const ArchiveButton: React.FC<{
         archiveArticle: {
           id: articleId,
           state: 'archived',
+          sticky: false,
           __typename: 'Article'
+        }
+      }}
+      onCompleted={() => {
+        if (refetch) {
+          refetch()
         }
       }}
     >
