@@ -12,7 +12,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { UrlFragments } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
-import ICON_STICKY from '~/static/icons/pin-to-top-grey.svg?sprite'
+import ICON_STICKY from '~/static/icons/sticky.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
 import DropdownActions from '../DropdownActions'
