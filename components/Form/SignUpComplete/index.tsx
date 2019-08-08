@@ -7,7 +7,7 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
 
-const SignUpComplete = () => (
+const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
   <div className="complete">
     <img src={ICON_AVATAR_GREEN} />
 
@@ -36,7 +36,11 @@ const SignUpComplete = () => (
         type="button"
         bgColor="green"
         size="large"
-        onClick={redirectToTarget}
+        onClick={() =>
+          redirectToTarget({
+            defaultTarget: purpose === 'page' ? 'homepage' : 'current'
+          })
+        }
       >
         <Translate zh_hant="探索社區" zh_hans="探索社区" />
       </Button>
