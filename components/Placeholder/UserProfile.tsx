@@ -20,7 +20,7 @@ const SM = () => (
 const MD = () => (
   <ContentLoader {...LoaderProps} width={960} height={456}>
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M313 294h88v24h-88v-24zm0 39h540v16H313v-16zm0 24h540v16H313v-16zm0 24h352v16H313v-16zm0 53h66v22h-66v-22zm135 0h66v22h-66v-22zm201 0v22h-66v-22h66zM258.1 266.66A70 70 0 0 0 195 227a70 70 0 0 0-63.1 39.66H0V0h960v266.66H258.1zM195 231a66 66 0 1 1 0 132 66 66 0 0 1 0-132z"
     />
   </ContentLoader>
@@ -29,7 +29,7 @@ const MD = () => (
 const LG = () => (
   <ContentLoader {...LoaderProps} width={1080} height={503}>
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M321.26 300a70 70 0 0 0-126.52 0H4a4 4 0 0 1-4-4V0h1080v296a4 4 0 0 1-4 4H321.26zM258 264a66 66 0 1 1 0 132 66 66 0 0 1 0-132zm118 63h88v24h-88v-24zm0 39h540v16H376v-16zm0 24h540v16H376v-16zm0 24h352v16H376v-16zm0 53h66v22h-66v-22zm135 0h66v22h-66v-22zm201 0v22h-66v-22h66z"
     />
   </ContentLoader>
