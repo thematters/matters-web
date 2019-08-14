@@ -70,6 +70,44 @@ steps:
       event:
         - push
 
+  # === CI tasks for `likecoin` branch ===
+  - name: likecoin:upload
+    image: plugins/s3
+    settings:
+      bucket: web-likecoin.matters.news
+      access_key:
+        from_secret: AWS_ACCESS_KEY_ID
+      secret_key:
+        from_secret: AWS_SECRET_ACCESS_KEY
+      region: ap-southeast-1
+      source: build/**/*
+      target: /_next
+      strip_prefix: build/
+    when:
+      branch:
+        - likecoin
+      event:
+        - push
+
+  - name: likecoin:deploy
+    image: matters/awsebcli
+    environment:
+      AWS_ACCESS_KEY_ID:
+        from_secret: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY:
+        from_secret: AWS_SECRET_ACCESS_KEY
+      AWS_DEFAULT_REGION: ap-southeast-1
+    commands:
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws configure set aws_default_region $AWS_DEFAULT_REGION
+      - bash ./bin/eb-deploy.sh likecoin
+    when:
+      branch:
+        - likecoin
+      event:
+        - push
+
   # === CI tasks for `master` branch ===
   - name: prod:upload
     image: plugins/s3
