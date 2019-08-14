@@ -1,3 +1,4 @@
+import { createUploadLink } from '@matters/apollo-upload-client'
 import * as Sentry from '@sentry/browser'
 import {
   InMemoryCache,
@@ -7,8 +8,8 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloLink, split } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
 import { onError } from 'apollo-link-error'
+import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
 import { WebSocketLink } from 'apollo-link-ws'
-import { createUploadLink } from 'apollo-upload-client'
 import { getMainDefinition } from 'apollo-utilities'
 import http from 'http'
 import https from 'https'
@@ -40,6 +41,10 @@ const agent =
       })
 
 // links
+const persistedQueryLink = createPersistedQueryLink({
+  useGETForHashedQueries: true
+})
+
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
     uri: API_URL,
@@ -120,6 +125,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
 
   return new ApolloClient({
     link: ApolloLink.from([
+      persistedQueryLink,
       errorLink,
       authLink,
       sentryLink,
