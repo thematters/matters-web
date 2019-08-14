@@ -61,13 +61,14 @@ const USER_ARTICLES_FEED = gql`
 `
 
 const ArticleSummaryInfo = ({ data }: { data: UserArticleFeed }) => {
-  const {
-    articleCount: articles,
-    totalWordCount: words
-  } = _get(data, 'user.status', {
-    articleCount: 0,
-    totalWordCount: 0
-  })
+  const { articleCount: articles, totalWordCount: words } = _get(
+    data,
+    'user.status',
+    {
+      articleCount: 0,
+      totalWordCount: 0
+    }
+  )
   return (
     <>
       <div className="info">
