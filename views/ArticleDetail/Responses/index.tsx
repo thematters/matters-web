@@ -52,10 +52,9 @@ const SUBSCRIBE_RESPONSES = gql`
 
 const Main: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const uuid = getQuery({ router, key: 'post' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
 
-  if (!mediaHash && !uuid) {
+  if (!mediaHash) {
     return <EmptyResponse articleOnlyMode={articleOnlyMode} />
   }
 
@@ -81,7 +80,6 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
 
   const queryVariables = {
     mediaHash,
-    uuid,
     before: before || undefined,
     first: before ? null : RESPONSES_COUNT,
     includeBefore: !!before,
