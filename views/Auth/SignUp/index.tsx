@@ -2,11 +2,7 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
-import {
-  SignUpFollowForm,
-  SignUpInitForm,
-  SignUpProfileForm
-} from '~/components/Form/SignUpForm'
+import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
@@ -38,8 +34,7 @@ const SignUp = () => {
   const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const signUpCallback = () => setStep('profile')
-  const signUpProfileCallback = () => setStep('follow')
-  const signUpFollowCallback = () => setStep('complete')
+  const signUpProfileCallback = () => setStep('complete')
 
   return (
     <>
@@ -64,12 +59,6 @@ const SignUp = () => {
               extraClass={childClass}
               purpose="page"
               submitCallback={signUpProfileCallback}
-            />
-          )}
-          {step === 'follow' && (
-            <SignUpFollowForm
-              purpose="page"
-              submitCallback={signUpFollowCallback}
             />
           )}
           {step === 'complete' && (

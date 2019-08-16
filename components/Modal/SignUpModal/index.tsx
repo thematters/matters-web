@@ -1,11 +1,7 @@
 import { FC, useContext, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
-import {
-  SignUpFollowForm,
-  SignUpInitForm,
-  SignUpProfileForm
-} from '~/components/Form/SignUpForm'
+import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -105,11 +101,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   }
 
   const signUpProfileCallback = () => {
-    setStep('follow')
-    setLayout('full-width')
-  }
-
-  const signUpFollowCallback = () => {
     setStep('complete')
     setLayout('default')
   }
@@ -129,12 +120,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
           <SignUpProfileForm
             purpose="modal"
             submitCallback={signUpProfileCallback}
-          />
-        )}
-        {step === 'follow' && (
-          <SignUpFollowForm
-            purpose="modal"
-            submitCallback={signUpFollowCallback}
           />
         )}
         {step === 'complete' && <SignUpComplete />}
