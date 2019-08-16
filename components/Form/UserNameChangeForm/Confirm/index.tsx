@@ -192,7 +192,7 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
             zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
             lang
           })
-          setFieldError('code', errorMessage)
+          setFieldError('userName', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)
