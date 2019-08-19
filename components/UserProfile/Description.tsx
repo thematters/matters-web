@@ -41,7 +41,7 @@ const Description = ({ description }: { description: string }) => {
                 color="green"
               />
             }
-            size="md"
+            size="sm"
             weight="normal"
             color="green"
           >
