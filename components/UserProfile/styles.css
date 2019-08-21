@@ -142,8 +142,12 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    line-height: 24px;
+    line-height: calc(var(--font-size-sm) * var(--line-height-base));
     z-index: 1;
+
+    & :gloabl(.text) {
+      font-size: var(--font-size-sm);
+    }
 
     &::before {
       content: '';
@@ -165,6 +169,16 @@
   &.expand {
     & p {
       -webkit-line-clamp: unset;
+    }
+  }
+
+  @media (--sm-up) {
+    & button {
+      line-height: calc(var(--font-size-md) * var(--line-height-base));
+
+      & :gloabl(.text) {
+        font-size: var(--font-size-md);
+      }
     }
   }
 }
