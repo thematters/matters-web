@@ -22,7 +22,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_RESET_PASSWORD = gql`
+export const RESET_PASSWORD = gql`
   mutation ResetPassword($input: ResetPasswordInput!) {
     resetPassword(input: $input)
   }
@@ -220,7 +220,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_RESET_PASSWORD}>
+      <Mutation mutation={RESET_PASSWORD}>
         {reset => <MainForm submitAction={reset} />}
       </Mutation>
       <style jsx>{styles}</style>

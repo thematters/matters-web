@@ -40,7 +40,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-const MUTATION_UPDATE_USER_INFO = gql`
+const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -215,7 +215,7 @@ export const SignUpProfileForm: FC<Props> = ({
   return (
     <>
       <Mutation
-        mutation={MUTATION_UPDATE_USER_INFO}
+        mutation={UPDATE_USER_INFO}
         refetchQueries={relatedQueries}
       >
         {update => <MainForm submitAction={update} />}

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation markAllNoticesAsRead {
+  mutation MarkAllNoticesAsRead {
     markAllNoticesAsRead
   }
 `

@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
-import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 
 import {
@@ -127,7 +127,7 @@ export const SignUpAvatarUploader: FC<Props> = ({
   )
 
   return (
-    <Mutation mutation={MUTATION_UPLOAD_FILE}>
+    <Mutation mutation={UPLOAD_FILE}>
       {upload => <Uploader upload={upload} />}
     </Mutation>
   )

@@ -1,21 +1,12 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
 import styles from './styles.css'
-
-const ARCHIVE_ARTICLE = gql`
-  mutation archiveArticle($id: ID!) {
-    archiveArticle(input: { id: $id }) {
-      id
-      state
-    }
-  }
-`
 
 const ArchiveButton: React.FC<{
   articleId: string
