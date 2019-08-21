@@ -214,10 +214,7 @@ export const SignUpProfileForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation
-        mutation={UPDATE_USER_INFO}
-        refetchQueries={relatedQueries}
-      >
+      <Mutation mutation={UPDATE_USER_INFO} refetchQueries={relatedQueries}>
         {update => <MainForm submitAction={update} />}
       </Mutation>
       <style jsx>{styles}</style>
