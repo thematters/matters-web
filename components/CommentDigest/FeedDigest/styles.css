@@ -1,29 +1,35 @@
+:root {
+  --descendant-avatar-size: 1.5rem;
+}
+
 .container {
   margin: var(--spacing-default) 0;
 }
 
 .header {
   @mixin flex-start-space-between;
+}
 
-  & .reply-to {
-    @mixin flex-center-all;
-    margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
-      var(--spacing-loose);
+.reply-to {
+  @mixin flex-center-all;
+  margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight) var(--spacing-loose);
 
-    color: var(--color-grey-dark);
-    font-size: var(--font-size-xs);
-    font-size: calc(var(--font-size-sm) - 1px);
-    line-height: 1;
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-xs);
+  font-size: calc(var(--font-size-sm) - 1px);
+  line-height: 1;
 
-    & .wording {
-      margin-right: var(--spacing-x-tight);
-    }
+  & .wording {
+    margin-right: var(--spacing-x-tight);
   }
+}
+.container:not(.in-article) .reply-to {
+  margin-left: 2.5rem;
+}
 
-  & .label {
-    margin-left: var(--spacing-x-tight);
-    font-size: 0;
-  }
+.label {
+  margin-left: var(--spacing-x-tight);
+  font-size: 0;
 }
 
 .content-wrap {
@@ -35,11 +41,19 @@
 }
 
 .descendant-comments {
-  & li {
-    @mixin border-top-grey;
+  & .container {
+    position: relative;
+    margin: var(--spacing-tight) 0;
 
-    &:first-child {
-      margin-top: var(--spacing-default);
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(var(--descendant-avatar-size) / 2);
+      bottom: 0;
+      height: 0;
+      height: calc(100% - var(--descendant-avatar-size) - var(--spacing-tight));
+      width: 1px;
+      background-color: var(--color-line-grey-light);
     }
   }
 

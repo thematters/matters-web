@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
@@ -71,9 +72,13 @@ const DescendantComment = ({
   inArticle?: boolean
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
+  const containerClass = classNames({
+    container: true,
+    'in-article': inArticle
+  })
 
   return (
-    <section className="container" id={comment.id}>
+    <section className={containerClass} id={comment.id}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
@@ -146,9 +151,13 @@ const FeedDigest = ({
   const [expand, setExpand] = useState(
     defaultExpand || restDescendantCommentCount <= 0
   )
+  const containerClass = classNames({
+    container: true,
+    'in-article': inArticle
+  })
 
   return (
-    <section className="container" id={comment.id}>
+    <section className={containerClass} id={comment.id}>
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
