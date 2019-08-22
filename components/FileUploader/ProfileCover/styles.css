@@ -21,18 +21,19 @@
   color: var(--color-white);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  border-radius: 0 0 var(--spacing-xx-tight) var(--spacing-xx-tight);
 }
 
 .buttons {
   @mixin flex-center-all;
 
   position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 0 var(--spacing-x-tight) var(--spacing-default) 0;
+  right: var(--spacing-tight);
+  bottom: var(--spacing-tight);
 
   @media (--sm-up) {
-    margin: 0 var(--spacing-default) var(--spacing-loose) 0;
+    right: var(--spacing-default);
+    bottom: var(--spacing-default);
   }
 }
 
@@ -42,7 +43,7 @@
   position: relative;
 
   border-radius: 2.25rem;
-  border: 1px solid #FFFFFF;
+  border: 1px solid var(--color-white);
   cursor: pointer;
   height: 2rem;
   padding: 0 var(--spacing-x-tight);
@@ -71,7 +72,6 @@
       margin-left: var(--spacing-default);
     }
   }
-
 }
 
 .input {

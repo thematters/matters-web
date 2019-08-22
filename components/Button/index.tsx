@@ -16,6 +16,8 @@ type ButtonBgColor =
   | 'black'
   | 'transparent'
 type ButtonOutlineColor = 'green' | 'black' | 'grey'
+type ButtonTextColor = 'white' | 'black' | 'grey'
+type ButtonTextWeight = 'light' | 'normal'
 
 interface BaseButtonProps {
   icon?: React.ReactNode
@@ -28,6 +30,8 @@ interface BaseButtonProps {
 
   bgColor?: ButtonBgColor
   outlineColor?: ButtonOutlineColor
+  textColor?: ButtonTextColor
+  textWeight?: ButtonTextWeight
 
   [key: string]: any
 }
@@ -132,11 +136,12 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'default',
   spacing,
   shape,
-  outline = false,
   disabled = false,
   block = false,
   bgColor = 'white',
   outlineColor,
+  textColor,
+  textWeight,
   className,
 
   is = 'button',
@@ -156,6 +161,8 @@ export const Button: React.FC<ButtonProps> = ({
     [`bg-${bgColor}`]: !!bgColor,
     outline: !!outlineColor,
     [`outline-${outlineColor}`]: !!outlineColor,
+    [`text-${textColor}`]: !!textColor,
+    [`text-weight-${textWeight}`]: !!textWeight,
     [className]: !!className
   })
 
