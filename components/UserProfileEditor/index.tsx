@@ -24,7 +24,7 @@ interface Props {
   saveCallback?: (value: boolean) => void
 }
 
-const MUTATION_UPDATE_USER_INFO = gql`
+const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -206,7 +206,7 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
           <section className="content">
             <ProfileAvatarUploader user={user} />
             <section className="info">
-              <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+              <Mutation mutation={UPDATE_USER_INFO}>
                 {update => <MainForm submitAction={update} />}
               </Mutation>
             </section>

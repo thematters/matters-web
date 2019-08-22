@@ -45,7 +45,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_USER_REGISTER = gql`
+export const USER_REGISTER = gql`
   mutation UserRegister($input: UserRegisterInput!) {
     userRegister(input: $input) {
       auth
@@ -53,7 +53,7 @@ export const MUTATION_USER_REGISTER = gql`
   }
 `
 
-export const MUTATION_CONFIRM_CODE = gql`
+export const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
@@ -418,9 +418,9 @@ export const SignUpInitForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_CONFIRM_CODE}>
+      <Mutation mutation={CONFIRM_CODE}>
         {confirm => (
-          <Mutation mutation={MUTATION_USER_REGISTER}>
+          <Mutation mutation={USER_REGISTER}>
             {register => (
               <MainForm preSubmitAction={confirm} submitAction={register} />
             )}

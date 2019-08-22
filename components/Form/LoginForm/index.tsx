@@ -47,7 +47,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_USER_LOGIN = gql`
+export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
     userLogin(input: $input) {
       auth
@@ -300,7 +300,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
 
   return (
     <>
-      <Mutation mutation={MUTATION_USER_LOGIN}>
+      <Mutation mutation={USER_LOGIN}>
         {login => <MainForm submitAction={login} />}
       </Mutation>
       <style jsx>{styles}</style>

@@ -25,7 +25,7 @@ import styles from './styles.css'
  * ```
  */
 
-const MUTATION_UPDATE_AGREE_ON = gql`
+const UPDATE_AGREE_ON = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -36,7 +36,7 @@ const MUTATION_UPDATE_AGREE_ON = gql`
   }
 `
 
-const MUTATION_USER_LOGOUT = gql`
+const USER_LOGOUT = gql`
   mutation UserLogout {
     userLogout
   }
@@ -101,7 +101,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
           </div>
         </div>
         <div className="buttons">
-          <Mutation mutation={MUTATION_USER_LOGOUT}>
+          <Mutation mutation={USER_LOGOUT}>
             {logout => (
               <button
                 type="button"
@@ -151,7 +151,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
   })(BaseForm)
 
   return (
-    <Mutation mutation={MUTATION_UPDATE_AGREE_ON}>
+    <Mutation mutation={UPDATE_AGREE_ON}>
       {update => <TermForm submitAction={update} />}
     </Mutation>
   )
