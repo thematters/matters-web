@@ -5,18 +5,19 @@
 .header {
   @mixin flex-start-space-between;
 
-  & .avatars {
-    display: flex;
-    align-items: center;
-  }
-
   & .reply-to {
-    flex-shrink: 0;
-    margin: 0 var(--spacing-xx-tight);
+    @mixin flex-center-all;
+    margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
+      var(--spacing-loose);
 
     color: var(--color-grey-dark);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
+    font-size: calc(var(--font-size-sm) - 1px);
     line-height: 1;
+
+    & .wording {
+      margin-right: var(--spacing-x-tight);
+    }
   }
 
   & .label {
@@ -26,6 +27,7 @@
 }
 
 .content-wrap {
+  margin-top: var(--spacing-xx-tight);
   padding-left: var(--spacing-x-loose);
 
   font-size: var(--font-size-sm); /* fallback */
@@ -42,6 +44,7 @@
   }
 
   & .content-wrap {
+    margin-top: var(--spacing-x-tight);
     padding-left: var(--spacing-loose);
   }
 }

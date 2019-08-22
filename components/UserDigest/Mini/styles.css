@@ -40,6 +40,10 @@
   font-size: var(--font-size-sm);
 }
 
+.text-msmall {
+  font-size: calc(var(--font-size-sm) - 1px);
+}
+
 .text-xsmall {
   font-size: var(--font-size-xs);
 }

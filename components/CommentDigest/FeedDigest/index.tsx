@@ -28,8 +28,8 @@ const fragments = {
 }
 
 const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
-  <>
-    <span className="reply-to">
+  <section className="reply-to">
+    <span className="wording">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
     <UserDigest.Mini
@@ -40,7 +40,7 @@ const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
       hasUserName={inArticle}
     />
     <style jsx>{styles}</style>
-  </>
+  </section>
 )
 
 const PinnedLabel = () => (
@@ -80,6 +80,7 @@ const DescendantComment = ({
             user={comment.author}
             avatarSize="xsmall"
             textWeight="medium"
+            textSize="msmall"
             hasUserName={inArticle}
           />
           {comment.replyTo &&
