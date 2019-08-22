@@ -6,11 +6,9 @@ import { FC, useContext } from 'react'
 import { Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
+import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
-import termStyles from '~/common/styles/utils/content.article.css'
-import Privacy from '~/common/texts/privacy'
-import ToS from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -57,30 +55,6 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         })
     }
   }
-
-  const Term = () => (
-    <>
-      <div
-        className="u-content"
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...ToS,
-            lang
-          })
-        }}
-      />
-      <div
-        className="u-content"
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...Privacy,
-            lang
-          })
-        }}
-      />
-      <style jsx>{termStyles}</style>
-    </>
-  )
 
   const BaseForm = (props: any) => (
     <>
