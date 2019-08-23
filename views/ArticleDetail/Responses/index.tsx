@@ -72,10 +72,10 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   let descendantId = ''
   if (process.browser) {
     fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-    descendantId = fragment.split('-')[1]
+    parentId = fragment.split(':')[0]
+    descendantId = fragment.split(':')[1]
     before = fragment === UrlFragments.COMMENTS ? null : parentId
-    anchor = descendantId || parentId
+    anchor = fragment
   }
 
   const queryVariables = {
