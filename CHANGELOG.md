@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] - 2019-08-23
+
+### Added
+
+- Add sticky UI for user profile articles #375
+- Add english version of ToS #384
+
+### Changed
+
+- Update the redirect logic of logic/register flow #374
+- Fix copyToClipboard #373
+- Add APQ support #376
+- Change the calculation of articles. #377
+- Reuse `<CommentContent>` in `<NoticeComemnt>` to show different content by states #378
+- Fix error message not shown in `<UserNameForm.Confirm>` #379
+- Skip follow step of the sign up flow #380
+- HTTP 301 redirection for legacy article link; Add canonical meta tag; #381
+- Update UserProfile based on latest UI #385
+- New UI of Comment and Comment List #386
+
 ## [1.11.1] - 2019-08-07
 
 ### Added
