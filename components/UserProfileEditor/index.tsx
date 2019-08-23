@@ -11,7 +11,7 @@ import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
@@ -21,7 +21,7 @@ import styles from './styles.css'
 
 interface Props {
   user: { [key: string]: any }
-  saveCallback?: (value: boolean) => void
+  setEditing: (value: boolean) => void
 }
 
 const UPDATE_USER_INFO = gql`
@@ -36,7 +36,7 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
+export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
   const { lang } = useContext(LanguageContext)
 
   const validateDisplayName = (value: string, language: string) => {
@@ -131,7 +131,7 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
             hint={descriptionHint}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            style={{ height: '5rem', resize: 'none' }}
+            style={{ height: '7rem', resize: 'none' }}
           />
           <div className="buttons">
             <Button
@@ -148,6 +148,20 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
               }
             >
               {save}
+            </Button>
+            <Button
+              type="button"
+              bgColor="transparent"
+              textColor="grey"
+              textWeight="normal"
+              spacing="default"
+              disabled={isSubmitting}
+              onClick={() => setEditing(false)}
+            >
+              <Translate
+                zh_hant={TEXT.zh_hant.cancel}
+                zh_hans={TEXT.zh_hans.cancel}
+              />
             </Button>
           </div>
         </form>
@@ -181,8 +195,8 @@ export const UserProfileEditor: FC<Props> = ({ user, saveCallback }) => {
 
       submitAction({ variables: { input: { displayName, description } } })
         .then(({ data }: any) => {
-          if (saveCallback) {
-            saveCallback(false)
+          if (setEditing) {
+            setEditing(false)
           }
         })
         .catch((result: any) => {
