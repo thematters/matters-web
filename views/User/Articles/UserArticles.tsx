@@ -35,7 +35,6 @@ const USER_ARTICLES_FEED = gql`
       displayName
       info {
         description
-        totalWordCount
         profileCover
       }
       articles(input: { first: 10, after: $cursor }) {
@@ -52,18 +51,24 @@ const USER_ARTICLES_FEED = gql`
           }
         }
       }
+      status {
+        articleCount
+        totalWordCount
+      }
     }
   }
   ${ArticleDigest.Feed.fragments.article}
 `
 
 const ArticleSummaryInfo = ({ data }: { data: UserArticleFeed }) => {
-  const { totalWordCount: words } = _get(data, 'user.info', {
-    totalWordCount: 0
-  })
-  const { totalCount: articles } = _get(data, 'user.articles', {
-    totalCount: 0
-  })
+  const { articleCount: articles, totalWordCount: words } = _get(
+    data,
+    'user.status',
+    {
+      articleCount: 0,
+      totalWordCount: 0
+    }
+  )
   return (
     <>
       <div className="info">
@@ -97,7 +102,8 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
         data,
         loading,
         error,
-        fetchMore
+        fetchMore,
+        refetch
       }: QueryResult & { data: UserArticleFeed }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
@@ -138,6 +144,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           return (
             <>
               <CustomHead />
+              <ArticleSummaryInfo data={data} />
               <EmptyArticle />
             </>
           )
@@ -168,7 +175,10 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                         hasBookmark
                         hasDateTime
                         hasFingerprint
+                        hasMoreButton
                         hasState
+                        hasSticky
+                        refetch={refetch}
                       />
                     </li>
                   )

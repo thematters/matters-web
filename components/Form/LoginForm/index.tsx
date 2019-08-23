@@ -47,7 +47,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_USER_LOGIN = gql`
+export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
     userLogin(input: $input) {
       auth
@@ -57,6 +57,8 @@ export const MUTATION_USER_LOGIN = gql`
 
 const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
   const { lang } = useContext(LanguageContext)
+  const isInModal = purpose === 'modal'
+  const isInPage = purpose === 'page'
 
   const validateEmail = (value: string, language: string) => {
     let result: any
@@ -197,8 +199,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             >
               {loginText}
             </Button>
-            {purpose === 'modal' && <PasswordResetModalSwitch />}
-            {purpose === 'page' && <PasswordResetRedirectButton />}
+            {isInModal && <PasswordResetModalSwitch />}
+            {isInPage && <PasswordResetRedirectButton />}
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -250,7 +252,9 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
 
           await clearPersistCache()
-          redirectToTarget()
+          redirectToTarget({
+            defaultTarget: !!isInPage ? 'homepage' : 'current'
+          })
         })
         .catch((error: any) => {
           const errorCodes = getErrorCodes(error)
@@ -296,7 +300,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
 
   return (
     <>
-      <Mutation mutation={MUTATION_USER_LOGIN}>
+      <Mutation mutation={USER_LOGIN}>
         {login => <MainForm submitAction={login} />}
       </Mutation>
       <style jsx>{styles}</style>

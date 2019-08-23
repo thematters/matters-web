@@ -53,8 +53,8 @@ const FingerprintContent = ({
           </h4>
           <button
             type="button"
-            onClick={async () => {
-              await dom.copyToClipboard(dataHash)
+            onClick={() => {
+              dom.copyToClipboard(dataHash)
               window.dispatchEvent(
                 new CustomEvent(ADD_TOAST, {
                   detail: {

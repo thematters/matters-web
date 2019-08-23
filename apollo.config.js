@@ -3,7 +3,8 @@ module.exports = {
     name: 'Matters Web',
     service: {
       name: 'matters',
-      url: 'https://server-develop.matters.news/graphql'
+      url:
+        'http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/graphql'
     },
     includes: [
       '+(pages|views|components)/**/*.{ts,tsx}',

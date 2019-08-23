@@ -21,8 +21,8 @@ import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
 const ShareModal = () => {
-  const copy = async () => {
-    await dom.copyToClipboard(decodeURI(window.location.href))
+  const copy = () => {
+    dom.copyToClipboard(decodeURI(window.location.href))
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {

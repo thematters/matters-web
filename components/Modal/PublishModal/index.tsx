@@ -27,7 +27,7 @@ interface Props extends ModalInstanceProps {
   draft: DraftDetailQuery_node_Draft
 }
 
-const MUTATION_PUBLISH_ARTICLE = gql`
+const PUBLISH_ARTICLE = gql`
   mutation PublishArticle($draftId: ID!) {
     publishArticle(input: { id: $draftId }) {
       id
@@ -56,7 +56,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
         </button>
 
         <Mutation
-          mutation={MUTATION_PUBLISH_ARTICLE}
+          mutation={PUBLISH_ARTICLE}
           optimisticResponse={{
             publishArticle: {
               id: draftId,

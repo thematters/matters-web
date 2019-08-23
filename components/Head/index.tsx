@@ -81,8 +81,9 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
+      <link rel="canonical" href={head.url} key="canonical" />
 
-      {/* noinedx for non-production enviroment */}
+      {/* noindex for non-production enviroment */}
       {!isProd && (
         <meta name="robots" content="noindex, nofollow" key="robots" />
       )}

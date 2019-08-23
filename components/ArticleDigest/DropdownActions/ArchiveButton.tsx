@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
@@ -11,7 +9,8 @@ import styles from './styles.css'
 const ArchiveButton: React.FC<{
   articleId: string
   hideDropdown: () => void
-}> = ({ articleId, hideDropdown }) => {
+  refetch?: () => void
+}> = ({ articleId, hideDropdown, refetch }) => {
   return (
     <Mutation
       mutation={ARCHIVE_ARTICLE}
@@ -20,7 +19,13 @@ const ArchiveButton: React.FC<{
         archiveArticle: {
           id: articleId,
           state: 'archived',
+          sticky: false,
           __typename: 'Article'
+        }
+      }}
+      onCompleted={() => {
+        if (refetch) {
+          refetch()
         }
       }}
     >

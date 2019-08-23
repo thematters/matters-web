@@ -1,4 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
+import fetch from 'isomorphic-unfetch'
+import _get from 'lodash/get'
+import getConfig from 'next/config'
+
 /**
  * Route paths for Next.js custom routing
  *
@@ -132,9 +136,48 @@ export const ROUTES: Array<{
     key: 'ARTICLE_DETAIL_LEGACY',
     href: '/ArticleDetail',
     as: '/forum',
-    handler: (req, res) => {
+    handler: async (req, res) => {
       if (!req.query || !req.query.post) {
-        return res.redirect('/')
+        return res.redirect(302, '/')
+      }
+
+      const {
+        publicRuntimeConfig: { API_URL }
+      } = getConfig()
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: `
+              {
+                article(input: { uuid: "${req.query.post}" }) {
+                  slug
+                  mediaHash
+                  author {
+                    userName
+                  }
+                }
+              }
+            `
+          })
+        })
+        const data = await response.json()
+        const slug = _get(data, 'data.article.slug')
+        const mediaHash = _get(data, 'data.article.mediaHash')
+        const userName = _get(data, 'data.article.author.userName')
+
+        if (mediaHash && userName) {
+          return res.redirect(301, `/@${userName}/${slug}-${mediaHash}`)
+        } else {
+          return res.redirect(302, '/')
+        }
+      } catch (e) {
+        console.error(e)
+        return res.redirect(302, '/')
       }
     }
   },

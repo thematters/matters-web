@@ -1,4 +1,4 @@
-const Privacy: { zh_hant: string; zh_hans: string } = {
+const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   zh_hant: `
 <h3>隱私政策</h3>
 <p><small>更新日期：2019 年 3 月 14 日</small></p>
@@ -198,6 +198,106 @@ const Privacy: { zh_hant: string; zh_hans: string } = {
 <p>10.4 用户理解并承认，用户发布与转发内容的风险由用户自己承担。虽然MATTERS会限制用户对某些页面的访问，但用户承认没有任何安全措施是完美的万无一失的。另外，用户理解并承认，MATTERS无法控制其用户选择与谁共享内容。因此，用户理解并承认，MATTERS不能也不保证其用户内容一定不会被未经授权的人浏览。</p>
 
 <p>10.5 MATTERS和服务的网站可能包含其他网站或应用程序的链接。用户理解并承认，MATTERS和服务的网站上包含其他网站、应用程序或广告的链接，并不代表MATTERS认可或授权此类第三方收集用户个人信息，也不代表MATTERS与此类第三方之间有任何业务关系。用户理解并承认，一旦用户点击与访问此类网站、应用程序或广告的链接，这些网站、应用程序和广告有可能会收集他们的个人信息。用户理解并承认，这些第三方网站、应用程序和广告在收集、使用、处理或公开用户提交的个人信息时，遵循的是不同于本隐私政策的其他规则。因此，用户理解并承认，MATTERS不会对任何第三方进行的用户个人信息的收集、使用、处理或公开的行为负责。</p>
+  `,
+  en: `
+<h3>Privacy Policy </h3>
+<p>Last updated: <i>14 March, 2019</i></p>
+<p>This privacy policy (the <b><i>Privacy Policy</i></b>) was last updated on the date above and shall be updated from time to time. Any changes to this Privacy Policy will become effective upon posting of the revised policy hereunder. This Privacy Policy is intended to inform all Users about how the Data Controller treats Personal Information and Non-personal Information. If any User does not agree with any part of this Privacy Policy, then the Data Controller cannot provide the Services to such User, and such User should stop accessing the same.</p>
+
+<p><b><u>1. DEFINITIONS</u></b></p>
+<p>Capitalised terms shall be as defined in the terms and conditions unless otherwise herein defined:</p>
+<p><b><i>Data Controller</i></b>  mean Matters Lab Limited, the company responsible for the collection, holding, processing or use of Personal Information;</p>
+
+<p><b><i>GDPR</i></b> is as defined in clause 9.2 of this Privacy Policy;</p>
+
+<p><b><i>PDPO</i></b> means the Personal Data (Privacy) Ordinance, Chapter 486 of the Laws of the Hong Kong Special Administrative Region, as amended from time to time; </p>
+
+<p><b><i>Personal Information</i></b> means information collected from the Users by the Data Controller or otherwise held by the Data Controller, relating to any personal information that can be used to identify such Users as individuals, including among others, names, contact details, email addresses, age, gender, passport or other identification document details, information or account details in third-party social media sites, including Facebook, WeChat, Weixin, Google and Weibo, other registration, account or profile information and any other such personal description provided during registration of the Account, and any information provided by or in relation to such Users pursuant to this Privacy Policy; and </p>
+
+<p><b><i>Non-personal Information</i></b> means any such Personal Information which the Data Controller takes and makes it non-personally identifiable, either by combining it with information about other individuals (aggregating one User’s information with another User’s information), or by removing characteristics (such as User’s name) that make the information personally identifiable to such User (hence de-personalizing the information).</p>
+
+<p><b><u>2. COLLECTION OF PERSONAL INFORMATION BY THE DATA CONTROLLER</u></b></p>
+
+<p>2.1 The Data Controller will request all its Users to voluntarily provide it with Personal Information for purposes set out in clause 4.2 of this Privacy Policy. </p>
+
+<p>2.2 In addition, when Users use certain features of the Services, the Data Controller may receive, store and process different types of information about such Users’ location, including specific information (e.g. GPS-based functionality on mobile devices used to access the Services). If Users do not want their devices to provide the Data Controller with location-tracking information, they can disable the GPS or other location-tracking functions on their devices.</p>
+
+<p><b><u>3. ACCURACY AND RENTENTION OF PERSONAL INFORMATION BY THE DATA CONTROLLER</u></b></p>
+
+<p>3.1 The Data Controller will receive, store and process Personal Information that the Users make available when assessing or using the Services. It will take appropriate steps to protect Personal Information collected and/or held by it against unauthorized or accidental access, processing, erasure, loss, use or disclosure. </p>
+
+<p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under the PDPO) to prove their identities in relation to their requests to access and/or correct their Personal Information. Requests for access and correction of Personal Information are to be addressed in writing and sent to ask@matters.news. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased. </p>
+
+<p>3.3 Where any Personal Information held by the Data Controller is no longer required for the purposes as stated under clause 4.2 of this Privacy Policy, the Data Controller shall take practicable steps to cease processing such Personal Information as soon as reasonably practicable, provided that the Data Controller may keep copies of such Personal Information as is reasonably required (i) for archival purposes; (ii) for use in relation to any actual or potential dispute; (iii) for compliance with applicable laws and regulations; (iv) for enforcing any agreement the Data Controller has with such User; and (v) for protecting the Data Controller’s and its employees’ rights, property or safety. The Data Controller will take practicable steps to ensure such Personal Information will not be kept longer than is necessary for the fulfillment of the above purposes (including direct or indirect purposes). </p>
+
+<p>3.4 For the avoidance of doubt, the Data Controller is entitled to retain, process and use, for indefinite term, any Non-personal Information.</p>
+
+<p><b><u>4. USE OF PERSONAL INFORMATION BY THE DATA CONTROLLER </u></b></p>
+
+<p>4.1 The Data Controller will seek its Users’ (or their respective relevant persons as defined under the PDPO) express consents to changes in how it uses or discloses their Personal Information if requested by law, but otherwise use of the Services following such changes constitutes their acceptances of the revised statement then in effect.</p>
+
+<p>4.2 The Data Controller limits the collection (which shall be adequate and not excessive), use and retention of the Personal Information to the following specific and lawful purposes only: </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;to enable and provide its Users with access and use of the Services; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(ii)&nbsp;&nbsp;&nbsp;&nbsp;to communicate with its Users, including but not limited to, for provision of technical, administrative, operational and account information regarding the Services, and handling of their requests and complaints; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(iii)&nbsp;&nbsp;&nbsp;&nbsp;to contact its Users to conduct surveys and customer review about their experiences with the Services;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(iv)&nbsp;&nbsp;&nbsp;&nbsp;to operate, protect, improve and optimize the Services and to improve and customize the Users’ experiences when using the same;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;to offer tailored content to the Users in accordance with their interests or other indications; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(vi)&nbsp;&nbsp;&nbsp;&nbsp;to administer the business of the Data Controller and conduct research and development for new features, services and applications in relation to the Services; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(vii)&nbsp;&nbsp;&nbsp;&nbsp;only when its Users have provided the consents required under the PDPO, to send such Users personal newsletters, marketing and promotional messages and other information (either alone or in conjunction with features and/or services and applications offered by the Data Controller’s Affiliates or business partners) that may be of interest to such Users;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(viii)&nbsp;&nbsp;&nbsp;&nbsp;to enforce the Data Controller’s legal and/or contractual obligations and rights, and to resolve disputes between the Data Controller and the Users and third parties;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(ix)&nbsp;&nbsp;&nbsp;&nbsp;to derive, create or otherwise transfer the same into Non-personal Information for the purpose of creating general data statistics;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;for the Data Controller’s internal business and administrative purposes; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(xi)&nbsp;&nbsp;&nbsp;&nbsp;for the Data Controller’s compliance of relevant laws and regulations; and</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(xii)&nbsp;&nbsp;&nbsp;&nbsp;other purposes directly relating to any of the above. </p>
+
+<p>4.3 For the avoidance of doubt, the Data Controller is entitled to collect, retain, process and use the Non-personal Information for any lawful purpose which shall be relating to the function and activity of the Data Controller, including but not limited to researching and analyzing to improve the Data Controller’s services and businesses. </p>
+
+<p><b><u>5. DISCLOSURE AND TRANSFERRAL OF PERSONAL INFORMATION</u></b></p>
+
+<p>5.1 The Data Controller may make certain Personal Information available to its Affiliates for the purposes as stated under clause 4.2 of this Privacy Policy, who may be situated within or outside Hong Kong and all of whom are bound by this Privacy Policy.</p>
+
+<p>5.2 The Data Controller may make certain Personal Information available to below persons, who may be situated within or outside Hong Kong: (i) data storage service providers, for the sole purpose of storing data which the Data Controller collected from time to time; (ii) strategic business partners, including but not limited to (a) mail houses and email service providers, for the sole purpose of mailing and dissemination of its promotional materials; and (b) hosting and database management service providers, including but not limited to IPFS; and (iii) suppliers of the Services and other third parties appointed by the Data Controller to perform the Services, including but not limited to Google Cloud Service, Amazon Web Service, all of whom are contractually (x) prohibited from using the Personal Information for any purpose other than for the purpose(s) specified in their respective contracts and keeping Personal Information longer than is necessary for the fulfillment of such purpose(s) specified in their respective contracts; and (y) required to prevent unauthorized or accidental access, processing, erasure, loss or use of the Personal Information. Such third parties shall be informed if the Personal Information is discovered to be inaccurate and shall be provided with such particulars as will enable such third party to correct the Personal Information having regard to such purpose(s). Personal Information will not be shared with third parties for their own marketing purposes. </p>
+
+<p>5.3 By accepting this Privacy Policy, each User acknowledges, understands and agrees that his or her Personal Information may be disclosed or transferred to Affiliates and/or any such third parties (and their respective employees and representatives) under clause 5 of this Privacy Policy. </p>
+
+<p>5.4 In the circumstances where the Data Controller reorganises its group structure or undergoes a change of control or business combination, each User’s Personal Information may, at the Data Controller’s sole discretion, be transferred to a third party who will continue to operate the Data Controller or a similar service under either this Privacy Policy or a different privacy policy statement which will be notified to each User. Such a third party may be located, and use of Users’ Personal Information may be made, outside of Hong Kong in connection with such acquisition or reorganisation. </p>
+
+
+<p><b><u>6. EMAILS AND PROMOTIONS AND OPTING OUT</u></b></p>
+
+<p>6.1 Only when Users have provided the consents required under the PDPO (including indicating that they would like to receive promotional materials from the Data Controller and providing their contact details to the Data Controller specifically and expressly in order to receive direct marketing communications), the Data Controller may use the Personal Information of such Users to contact such Users and provide information about goods and services (either alone or in conjunction with products or services offered by the Data Controller’s Affiliates or business partners) that may be of interest to such Users. </p>
+
+<p>6.2 The Data Controller provides its Users with the ability to unsubscribe from all marketing communications. Every time a User receives a direct marketing email, he/she will be provided with the choice to opt-out of future direct marketing emails. Users may also opt-out of receiving promotional materials by sending an email to ask@matters.news or at any time, without charge by the Data Controller. </p>
+
+<p>6.3 The Data Controller provides its Users with the ability to request a removal of their Personal Information from its storage. Users may lodge such request in writing by sending an email to ask@matters.news. For the avoidance of doubt, the Data Controller is entitled to retain, process and use, for indefinite term and any purpose, any Non-personal Information.</p>
+
+<p><b><u>7. THIRD-PARTY SOCIAL MEDIA SITES’ PRIVACY POLICIES</u></b></p>
+
+<p>7.1 Since the Services may collect information of Users from third-party social media sites, such as Facebook, WeChat, Weixin, Google and Weibo, and support products and features offered by such third-party social media sites, the privacy policies and practices and cookies policies (as applicable), as may be amended from time to time, of such third-party social media sites are incorporated to this Privacy Policy by reference (as applicable).</p>
+
+<p><b><u>8. COOKIES</u></b></p>
+
+<p>8.1 Users understand and acknowledge that when they use the Services, the Data Controller may use cookie files to collect information about such Users. When Users use the Services, they understand and agree that any information collected by means of cookies when using the Services about them would be Personal Information. The Data Controller may use such information for compiling aggregate statistics on how Users use the Services. Such statistics are collected for managing, enhancing and improving the Users’ experiences when using the Services. </p>
+
+<p>8.2 Users may choose to “not accept” cookies by changing the settings of their web browsers. By choosing to “not accept” cookies, certain features in the Services may not be accessible and available to such Users. </p>
+
+<p><b><u>9. CROSS-BORDER DATA TRANSFER</u></b></p>
+
+<p>9.1 Where applicable, the Users understand and acknowledge that their Personal Information may be transferred to, processed, and stored in Hong Kong or Singapore Data protection laws in Hong Kong or Singapore may be different from those in the Users’ country of residence. Where applicable, the Users consent to the transfer, process and storage of their information, including Personal Information, to/in Hong Kong as set forth in this Privacy Policy by using the Services.</p>
+
+<p>9.2 The Users understand and acknowledge that it is contemplated that the collection of Personal Information shall not fall within the regulation of the General Data Protection Regulation (EU) 2016/679 (<b><i>GDPR</i></b>). If it is held by any tribunal or court of competent jurisdiction that: (i) the collection of Personal Information falls within the GDPR; and (ii) the transfer of Personal Information is to countries not deemed to provide an adequate level of personal information protection under the GDPR, the Users understand and acknowledge that the Data Controller shall transfer the Personal Information based on a data transfer mechanism recognized by the European Commission as providing adequate protection for personal information.</p>
+
+<p><b><u>10. LEGAL DISCLAIMER</u></b></p>
+
+<p>10.1 The Data Controller is committed to protecting the privacy, confidentiality and security of the Personal Information it holds by complying with the requirements of the PDPO with respect to the management of Personal Information. The Data Controller may need to disclose Personal Information when required by the relevant law or court order, or as requested by other government or law enforcement authorities. This also applies when it has reasons to believe that disclosing the Personal Information is necessary to identify, investigate, protect, contact or bring legal action against someone who may be causing interference with its Users or to others, whether intentionally or otherwise, or when anyone else could be harmed by such activities.</p>
+
+<p>10.2 The Users understand and acknowledge that the Data Controller never ask the Users to share with other Users their Private Keys for their use of the Services. </p>
+
+<p>10.3 The Users understand and acknowledge that this Privacy Policy does not apply to any unsolicited information they provide to the Data Controller through the Services or through any other means. All unsolicited information shall be deemed to be non-confidential and the Data Controller shall be free to reproduce, use, disclose, and distribute such unsolicited information to others without limitation or attribution. </p>
+
+<p>10.4 The Users understand and acknowledge that their User Contents are posted on and transmitted to others at their own risk. Although the Data Controller limits access to certain pages, the Users acknowledge that no security measures are perfect or impenetrable. Additionally, the Users understand and acknowledge that the Data Controller cannot control the actions of other Users with whom the Users may choose to share their User Contents. Therefore, the Users understand and acknowledge that the Data Controller cannot and do not guarantee that their User Contents will not be reviewed by unauthorized persons. </p>
+
+<p>10.5 The website of the Data Controller and the Services may contain links to other websites or applications. The Users understand and acknowledge that the fact that the website of the Data Controller and the Services link to a website, application or advertisement does not mean that the Data Controller endorses or authorises the collection of personal information from the Users of such third parties, nor does it constitutes a representation of any affiliation between the Data Controller and such third parties. The Users understand and acknowledge that, once the Users click on a link to third-party websites, applications or advertisements, they will access third-party websites, applications and advertisements which may collect information from such Users. The Users understand and acknowledge that such third-party websites, applications and advertisements follow different rules regarding the collection, use, processing or disclosure of the personal information such Users submit to them. Hence, the Users understand and acknowledge that the Data Controller shall not be responsible for any collection, use, processing or disclosure of personal information of Users by such third parties. </p>
   `
 }
 

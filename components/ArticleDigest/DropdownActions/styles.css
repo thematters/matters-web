@@ -1,0 +1,4 @@
+button {
+  font-size: var(--font-size-sm);
+  margin-left: var(--spacing-x-tight);
+}

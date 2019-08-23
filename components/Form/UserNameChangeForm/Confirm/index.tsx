@@ -19,7 +19,7 @@ interface Props {
   submitCallback: () => void
 }
 
-const MUTATION_UPDATE_USER_INFO = gql`
+const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -192,7 +192,7 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
             zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
             lang
           })
-          setFieldError('code', errorMessage)
+          setFieldError('userName', errorMessage)
         })
         .finally(() => {
           setSubmitting(false)
@@ -202,7 +202,7 @@ export const UserNameChangeConfirmForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+      <Mutation mutation={UPDATE_USER_INFO}>
         {update => <MainForm submitAction={update} />}
       </Mutation>
       <style jsx>{styles}</style>

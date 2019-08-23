@@ -144,7 +144,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
 
           if (isMe && editing) {
             return (
-              <UserProfileEditor user={data.viewer} saveCallback={setEditing} />
+              <UserProfileEditor user={data.viewer} setEditing={setEditing} />
             )
           }
 

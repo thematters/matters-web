@@ -2,7 +2,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import CommentContent from '~/components/CommentDigest/Content'
+
 import { makeSummary, toPath } from '~/common/utils'
 
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
@@ -20,19 +21,19 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     mediaHash: comment.article.mediaHash || '',
     fragment: parentId ? `${parentId}-${comment.id}` : comment.id
   })
+  const content = makeSummary(comment.content || '', 70)
 
-  return (
-    <>
+  if (comment.state === 'active') {
+    return (
       <Link {...path}>
         <a>
-          <div className="u-content-comment">
-            {makeSummary(comment.content || '', 70)}
-          </div>
+          <CommentContent content={content} state={comment.state} />
         </a>
       </Link>
-      <style jsx>{contentCommentStyles}</style>
-    </>
-  )
+    )
+  }
+
+  return <CommentContent content={content} state={comment.state} />
 }
 
 NoticeComment.fragments = {
@@ -40,6 +41,7 @@ NoticeComment.fragments = {
     fragment NoticeComment on Comment {
       id
       content
+      state
       article {
         id
         title

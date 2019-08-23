@@ -21,7 +21,7 @@ interface Props {
   submitCallback?: (params: any) => void
 }
 
-const MUTATION_CONFIRM_CODE = gql`
+const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
@@ -184,7 +184,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_CONFIRM_CODE}>
+      <Mutation mutation={CONFIRM_CODE}>
         {confirmCode => <MainForm submitAction={confirmCode} />}
       </Mutation>
       <style jsx>{styles}</style>

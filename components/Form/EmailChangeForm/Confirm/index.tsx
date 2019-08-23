@@ -21,13 +21,13 @@ interface Props {
   submitCallback: () => void
 }
 
-const MUTATION_CONFIRM_CODE = gql`
+const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
 `
 
-const MUTATION_CHANGE_EMAIL = gql`
+const CHANGE_EMAIL = gql`
   mutation ChangeEmail($input: ChangeEmailInput!) {
     changeEmail(input: $input)
   }
@@ -221,10 +221,10 @@ export const EmailChangeConfirmForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_CONFIRM_CODE}>
+      <Mutation mutation={CONFIRM_CODE}>
         {confirm => (
           <Mutation
-            mutation={MUTATION_CHANGE_EMAIL}
+            mutation={CHANGE_EMAIL}
             refetchQueries={[{ query: QUERY_VIEWER_EMAIL }]}
           >
             {update => (
