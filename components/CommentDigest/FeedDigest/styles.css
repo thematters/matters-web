@@ -12,6 +12,7 @@
 
 .reply-to {
   @mixin flex-center-all;
+  justify-content: flex-start;
   margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight) var(--spacing-loose);
 
   color: var(--color-grey-dark);
