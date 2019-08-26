@@ -9,16 +9,14 @@
   font-size: var(--font-size-sm);
 }
 
-.buttons {
-  & button {
-    @mixin modal-button;
+button,
+.btn {
+  @mixin modal-button;
 
-    &.login {
-      @mixin modal-button-inactive;
-    }
-
-    &[type='submit'] {
-      @mixin modal-button-active;
-    }
+  &.login {
+    @mixin modal-button-inactive;
+  }
+  &[type='submit'] {
+    @mixin modal-button-active;
   }
 }

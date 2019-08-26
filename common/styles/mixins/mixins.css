@@ -147,9 +147,14 @@
 
 @define-mixin modal-button {
   @mixin all-transition;
+  display: inline-block;
   width: 50%;
-  font-weight: var(--font-weight-medium);
   height: 3rem;
+
+  line-height: 3rem;
+  font-weight: var(--font-weight-medium);
+  vertical-align: middle;
+  text-align: center;
 }
 
 @define-mixin modal-button-inactive {

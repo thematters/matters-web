@@ -2,15 +2,14 @@
   width: 100%;
 }
 
-.buttons {
-  & button {
-    @mixin modal-button;
+button,
+.btn {
+  @mixin modal-button;
 
-    &.register {
-      @mixin modal-button-inactive;
-    }
-    &[type='submit'] {
-      @mixin modal-button-active;
-    }
+  &.register {
+    @mixin modal-button-inactive;
+  }
+  &[type='submit'] {
+    @mixin modal-button-active;
   }
 }

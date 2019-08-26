@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
@@ -55,6 +56,66 @@ export const USER_LOGIN = gql`
   }
 `
 
+const PasswordResetRedirectButton = () => (
+  <>
+    <Button
+      is="link"
+      bgColor="transparent"
+      className="u-link-green"
+      spacing="none"
+      href={PATHS.AUTH_FORGET.href}
+      as={PATHS.AUTH_FORGET.as}
+    >
+      <Translate
+        zh_hant={TEXT.zh_hant.forgetPassword}
+        zh_hans={TEXT.zh_hans.forgetPassword}
+      />
+      ？
+    </Button>
+    <style jsx>{styles}</style>
+  </>
+)
+
+const PasswordResetModalSwitch = () => (
+  <ModalSwitch modalId="passwordResetModal">
+    {(open: any) => (
+      <Button
+        is="button"
+        bgColor="transparent"
+        className="u-link-green"
+        spacing="none"
+        onClick={open}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.forgetPassword}
+          zh_hans={TEXT.zh_hans.forgetPassword}
+        />
+        ？
+      </Button>
+    )}
+  </ModalSwitch>
+)
+
+const SignUpModalSwitch = () => (
+  <ModalSwitch modalId="signUpModal">
+    {(open: any) => (
+      <button type="button" className="register" onClick={open}>
+        <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+        <style jsx>{styles}</style>
+      </button>
+    )}
+  </ModalSwitch>
+)
+
+const SignUpRedirection = () => (
+  <Link {...PATHS.AUTH_SIGNUP}>
+    <a className="btn register">
+      <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+      <style jsx>{styles}</style>
+    </a>
+  </Link>
+)
+
 const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
   const { lang } = useContext(LanguageContext)
   const isInModal = purpose === 'modal'
@@ -92,48 +153,6 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
       return translate({ ...result, lang: language })
     }
   }
-
-  const PasswordResetRedirectButton = () => (
-    <>
-      <Button
-        is="link"
-        bgColor="transparent"
-        className="u-link-green"
-        spacing="none"
-        href={PATHS.AUTH_FORGET.href}
-        as={PATHS.AUTH_FORGET.as}
-      >
-        {translate({
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword,
-          lang
-        })}
-        ？
-      </Button>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const PasswordResetModalSwitch = () => (
-    <ModalSwitch modalId="passwordResetModal">
-      {(open: any) => (
-        <Button
-          is="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({
-            zh_hant: TEXT.zh_hant.forgetPassword,
-            zh_hans: TEXT.zh_hans.forgetPassword,
-            lang
-          })}
-          ？
-        </Button>
-      )}
-    </ModalSwitch>
-  )
 
   const BaseForm = ({
     values,
@@ -196,13 +215,8 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           </Modal.Content>
 
           <div className="buttons">
-            <ModalSwitch modalId="signUpModal">
-              {(open: any) => (
-                <button type="button" className="register" onClick={open}>
-                  <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-                </button>
-              )}
-            </ModalSwitch>
+            {isInModal && <SignUpModalSwitch />}
+            {isInPage && <SignUpRedirection />}
 
             <button type="submit" disabled={isSubmitting}>
               {loginText}

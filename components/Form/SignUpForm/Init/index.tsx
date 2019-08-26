@@ -61,6 +61,26 @@ export const CONFIRM_CODE = gql`
   }
 `
 
+const LoginModalSwitch = () => (
+  <ModalSwitch modalId="loginModal">
+    {(open: any) => (
+      <button type="button" className="login" onClick={open}>
+        <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+        <style jsx>{styles}</style>
+      </button>
+    )}
+  </ModalSwitch>
+)
+
+const LoginRedirection = () => (
+  <Link {...PATHS.AUTH_LOGIN}>
+    <a className="btn login">
+      <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+      <style jsx>{styles}</style>
+    </a>
+  </Link>
+)
+
 export const SignUpInitForm: FC<Props> = ({
   defaultEmail = '',
   extraClass = [],
@@ -68,6 +88,8 @@ export const SignUpInitForm: FC<Props> = ({
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
+  const isInModal = purpose === 'modal'
+  const isInPage = purpose === 'page'
 
   const validateEmail = (value: string, language: string) => {
     let result: any
@@ -315,13 +337,8 @@ export const SignUpInitForm: FC<Props> = ({
           </Modal.Content>
 
           <div className="buttons">
-            <ModalSwitch modalId="loginModal">
-              {(open: any) => (
-                <button type="button" className="login" onClick={open}>
-                  <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-                </button>
-              )}
-            </ModalSwitch>
+            {isInModal && <LoginModalSwitch />}
+            {isInPage && <LoginRedirection />}
 
             <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               {signUpText}
