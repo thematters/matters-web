@@ -70,7 +70,7 @@ const Input: FC<Props> = ({
 
   const value = values[field]
   const error = errors[field]
-  // const isTouched = touched[field]
+  const isTouched = touched[field]
 
   return (
     <>
@@ -89,9 +89,9 @@ const Input: FC<Props> = ({
         {floatElement && <div className="float-right">{floatElement}</div>}
 
         <div className="info">
-          {/* {error && isTouched && <div className="error">{error}</div>} */}
-          {error && <div className="error">{error}</div>}
-          {!error && hint && <div className="hint">{hint}</div>}
+          {error && isTouched && <div className="error">{error}</div>}
+          {/* {error && <div className="error">{error}</div>} */}
+          {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
         </div>
       </div>
       <style jsx>{styles}</style>

@@ -3,12 +3,10 @@
 }
 
 .tos {
-  display: flex;
-  align-items: flex-start;
+  margin-top: var(--spacing-tight);
 
   color: var(--color-black);
   font-size: var(--font-size-sm);
-  margin-top: 0.125rem;
 }
 
 .buttons {

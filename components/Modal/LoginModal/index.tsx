@@ -51,12 +51,8 @@ const SignUpModalSwitch = () => (
 
 const Footer = () => (
   <footer>
-    <Translate
-      zh_hant={TEXT.zh_hant.hasNoAccount}
-      zh_hans={TEXT.zh_hans.hasNoAccount}
-    />
+    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
     <SignUpModalSwitch />
-
     <style jsx>{styles}</style>
   </footer>
 )

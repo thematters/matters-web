@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { FC, useContext } from 'react'
 
@@ -9,7 +10,7 @@ import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
@@ -18,6 +19,7 @@ import {
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
+  isValidUserName,
   translate
 } from '~/common/utils'
 
@@ -116,6 +118,24 @@ export const SignUpInitForm: FC<Props> = ({
     }
   }
 
+  const validateUserName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidUserName(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.userNameHint,
+        zh_hans: TEXT.zh_hans.userNameHint
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
   const validatePassword = (value: string, language: string) => {
     let result: any
     if (!value) {
@@ -127,28 +147,6 @@ export const SignUpInitForm: FC<Props> = ({
       result = {
         zh_hant: TEXT.zh_hant.passwordHint,
         zh_hans: TEXT.zh_hans.passwordHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang: language })
-    }
-  }
-
-  const validateComparedPassword = (
-    value: string,
-    comparedValue: string,
-    language: string
-  ) => {
-    let result: any
-    if (!comparedValue) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (comparedValue !== value) {
-      result = {
-        zh_hant: TEXT.zh_hant.passwordNotMatch,
-        zh_hans: TEXT.zh_hans.passwordNotMatch
       }
     }
     if (result) {
@@ -182,8 +180,8 @@ export const SignUpInitForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterEmail,
-      zh_hans: TEXT.zh_hans.enterEmail,
+      zh_hant: TEXT.zh_hant.email,
+      zh_hans: TEXT.zh_hans.email,
       lang
     })
 
@@ -199,21 +197,15 @@ export const SignUpInitForm: FC<Props> = ({
       lang
     })
 
+    const userNamePlaceholder = translate({
+      zh_hant: 'Matters ID',
+      zh_hans: 'Matters ID',
+      lang
+    })
+
     const passwordPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterPassword,
-      zh_hans: TEXT.zh_hans.enterPassword,
-      lang
-    })
-
-    const passwordHint = translate({
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint,
-      lang
-    })
-
-    const comparedPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterPasswordAgain,
-      zh_hans: TEXT.zh_hans.enterPasswordAgain,
+      zh_hant: TEXT.zh_hant.password,
+      zh_hans: TEXT.zh_hans.password,
       lang
     })
 
@@ -276,6 +268,16 @@ export const SignUpInitForm: FC<Props> = ({
             handleChange={handleChange}
           />
           <Form.Input
+            type="text"
+            field="userName"
+            placeholder={userNamePlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
             type="password"
             field="password"
             placeholder={passwordPlaceholder}
@@ -284,18 +286,12 @@ export const SignUpInitForm: FC<Props> = ({
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            hint={passwordHint}
+            hint={translate({
+              zh_hant: TEXT.zh_hant.passwordHint,
+              zh_hans: TEXT.zh_hans.passwordHint
+            })}
           />
-          <Form.Input
-            type="password"
-            field="comparedPassword"
-            placeholder={comparedPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+
           <div className="tos">
             <Form.CheckBox
               field="tos"
@@ -321,7 +317,7 @@ export const SignUpInitForm: FC<Props> = ({
               size="large"
               type="submit"
               bgColor="green"
-              disabled={isSubmitting}
+              disabled={!_isEmpty(errors) || isSubmitting}
               style={{ minWidth: '5rem' }}
               icon={isSubmitting ? <IconSpinner /> : null}
             >
@@ -339,37 +335,24 @@ export const SignUpInitForm: FC<Props> = ({
       email: defaultEmail,
       code: '',
       displayName: '',
+      userName: '',
       password: '',
-      comparedPassword: '',
       tos: true
     }),
 
-    validate: ({
-      email,
-      code,
-      displayName,
-      password,
-      comparedPassword,
-      tos
-    }) => {
+    validate: ({ email, code, displayName, userName, password, tos }) => {
       const isInvalidEmail = validateEmail(email, lang)
       const isInvalidCodeId = validateCode(code, lang)
       const isInvalidDisplayName = validateDisplayName(displayName, lang)
+      const isInvalidUserName = validateUserName(userName, lang)
       const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
-        lang
-      )
       const isInvalidToS = validateToS(tos, lang)
       const errors: { [key: string]: any } = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
         ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
-          : {}),
         ...(isInvalidToS ? { tos: isInvalidToS } : {})
       }
       return errors
