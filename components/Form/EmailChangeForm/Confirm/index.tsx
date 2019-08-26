@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
 import { Form } from '~/components/Form'
@@ -140,7 +141,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
             />
           </Modal.Content>
           <div className="buttons">
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               <Translate
                 zh_hant={TEXT.zh_hant.done}
                 zh_hans={TEXT.zh_hans.done}

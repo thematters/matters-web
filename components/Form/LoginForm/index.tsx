@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { FC, useContext } from 'react'
 
@@ -218,7 +219,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             {isInModal && <SignUpModalSwitch />}
             {isInPage && <SignUpRedirection />}
 
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               {loginText}
             </button>
           </div>

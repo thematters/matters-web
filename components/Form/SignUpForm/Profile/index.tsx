@@ -1,11 +1,8 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
-import { queries as HOME_FEED } from '~/views/Home/Feed'
-import { HOME_TODAY } from '~/views/Home/MattersToday'
-import { SIDEBAR_ICYMI } from '~/views/Home/Sidebar/Icymi'
-import { SIDEBAR_TOPICS } from '~/views/Home/Sidebar/Topics'
 
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
@@ -172,7 +169,7 @@ export const SignUpProfileForm: FC<Props> = ({
             <button
               type="button"
               className="previous"
-              disabled={isSubmitting}
+              disabled={!_isEmpty(errors) || isSubmitting}
               onClick={backPreviousStep}
             >
               <Translate
@@ -180,7 +177,7 @@ export const SignUpProfileForm: FC<Props> = ({
                 zh_hans={TEXT.zh_hans.previousStep}
               />
             </button>
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}
                 zh_hans={TEXT.zh_hans.nextStep}
@@ -299,15 +296,6 @@ export const SignUpProfileForm: FC<Props> = ({
             }
           }
         })
-
-        await submitAction({
-          description,
-          ...(avatar ? { avatar } : {})
-        })
-
-        if (submitCallback) {
-          submitCallback()
-        }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
@@ -315,28 +303,36 @@ export const SignUpProfileForm: FC<Props> = ({
           zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
           lang
         })
-        setFieldError('code', errorMessage)
+        setFieldError('userName', errorMessage)
+      }
+
+      try {
+        await submitAction({
+          variables: {
+            input: {
+              description,
+              ...(avatar ? { avatar } : {})
+            }
+          }
+        })
+      } catch (e) {
+        // do not block the next step since register is successfully
+        console.error(e)
+      }
+
+      if (submitCallback) {
+        submitCallback()
       }
 
       setSubmitting(false)
     }
   })(BaseForm)
 
-  const relatedQueries =
-    purpose === 'modal'
-      ? [
-          { query: HOME_FEED.hottest },
-          { query: HOME_TODAY },
-          { query: SIDEBAR_ICYMI },
-          { query: SIDEBAR_TOPICS }
-        ]
-      : []
-
   return (
     <>
       <Mutation mutation={USER_REGISTER}>
         {register => (
-          <Mutation mutation={UPDATE_USER_INFO} refetchQueries={relatedQueries}>
+          <Mutation mutation={UPDATE_USER_INFO}>
             {update => (
               <MainForm preSubmitAction={register} submitAction={update} />
             )}

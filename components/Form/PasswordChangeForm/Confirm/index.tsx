@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
 import { Form } from '~/components/Form'
@@ -147,7 +148,11 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
                 zh_hans={TEXT.zh_hans.previousStep}
               />
             </button>
-            <button type="submit" className="done" disabled={isSubmitting}>
+            <button
+              type="submit"
+              className="done"
+              disabled={!_isEmpty(errors) || isSubmitting}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.done}
                 zh_hans={TEXT.zh_hans.done}
