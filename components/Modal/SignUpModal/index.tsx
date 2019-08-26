@@ -2,15 +2,11 @@ import { FC, useContext, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
-import { Icon } from '~/components/Icon'
-import { LanguageContext, Translate } from '~/components/Language'
+import { LanguageContext } from '~/components/Language'
 import { Modal } from '~/components/Modal'
-import { ModalSwitch } from '~/components/ModalManager'
-import { TextIcon } from '~/components/TextIcon'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_ARROW from '~/static/icons/arrow-right-green.svg?sprite'
 
 import styles from './styles.css'
 
@@ -25,46 +21,10 @@ import styles from './styles.css'
  *
  */
 
-type Step = 'signUp' | 'profile' | 'follow' | 'complete'
-
-const LoginModalSwitch = () => (
-  <ModalSwitch modalId="loginModal">
-    {(open: any) => (
-      <button type="button" onClick={open}>
-        <TextIcon
-          icon={
-            <Icon
-              style={{ width: 16, hieght: 10 }}
-              id={ICON_ARROW.id}
-              viewBox={ICON_ARROW.viewBox}
-            />
-          }
-          color="green"
-          size="md"
-          textPlacement="left"
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.login}
-            zh_hans={TEXT.zh_hans.login}
-          />
-        </TextIcon>
-      </button>
-    )}
-  </ModalSwitch>
-)
-
-const Footer = () => (
-  <footer>
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-    <LoginModalSwitch />
-    <style jsx>{styles}</style>
-  </footer>
-)
+type Step = 'signUp' | 'profile' | 'complete'
 
 const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
-
-  const [layout, setLayout] = useState<'default' | 'full-width'>('default')
 
   const [step, setStep] = useState<Step>('signUp')
 
@@ -102,28 +62,22 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
 
   const signUpProfileCallback = () => {
     setStep('complete')
-    setLayout('default')
   }
 
   return (
     <>
       <Modal.Header title={data[step].title} closeable={closeable} />
 
-      <Modal.Content layout={layout}>
-        {step === 'signUp' && (
-          <>
-            <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
-            <Footer />
-          </>
-        )}
-        {step === 'profile' && (
-          <SignUpProfileForm
-            purpose="modal"
-            submitCallback={signUpProfileCallback}
-          />
-        )}
-        {step === 'complete' && <SignUpComplete />}
-      </Modal.Content>
+      {step === 'signUp' && (
+        <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
+      )}
+      {step === 'profile' && (
+        <SignUpProfileForm
+          purpose="modal"
+          submitCallback={signUpProfileCallback}
+        />
+      )}
+      {step === 'complete' && <SignUpComplete />}
 
       <style jsx>{styles}</style>
     </>

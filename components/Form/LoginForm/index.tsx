@@ -6,8 +6,8 @@ import { FC, useContext } from 'react'
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import {
@@ -169,38 +169,44 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
-              {loginText}
-            </Button>
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              placeholder={emailPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="password"
+              field="password"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+
             {isInModal && <PasswordResetModalSwitch />}
             {isInPage && <PasswordResetRedirectButton />}
+          </Modal.Content>
+
+          <div className="buttons">
+            <ModalSwitch modalId="signUpModal">
+              {(open: any) => (
+                <button type="button" className="register" onClick={open}>
+                  <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+                </button>
+              )}
+            </ModalSwitch>
+
+            <button type="submit" disabled={isSubmitting}>
+              {loginText}
+            </button>
           </div>
         </form>
         <style jsx>{styles}</style>

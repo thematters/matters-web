@@ -3,7 +3,14 @@
 }
 
 .buttons {
-  @mixin flex-center-space-between;
-  flex-direction: row-reverse;
-  padding-top: var(--spacing-x-tight);
+  & button {
+    @mixin modal-button;
+
+    &.register {
+      @mixin modal-button-inactive;
+    }
+    &[type='submit'] {
+      @mixin modal-button-active;
+    }
+  }
 }

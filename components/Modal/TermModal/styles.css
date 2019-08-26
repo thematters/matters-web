@@ -44,28 +44,14 @@
 
 .buttons {
   & button {
-    width: 50%;
-    font-weight: var(--font-weight-medium);
-    height: 3rem;
+    @mixin modal-button;
   }
 
   & button.disagree {
-    position: relative;
-    color: var(--color-black);
-
-    &:before {
-      @mixin border-top-grey;
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      margin-left: var(--spacing-x-tight);
-    }
+    @mixin modal-button-inactive;
   }
 
   & button.agree {
-    color: var(--color-white);
-    background: var(--color-matters-green);
+    @mixin modal-button-active;
   }
 }

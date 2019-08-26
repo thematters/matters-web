@@ -3,11 +3,10 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidPassword, translate } from '~/common/utils'
@@ -113,54 +112,47 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hint={passwordHint}
-          />
-          <Form.Input
-            type="password"
-            field="comparedPassword"
-            placeholder={comparedPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+          <Modal.Content>
+            <Form.Input
+              type="password"
+              field="password"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={passwordHint}
+            />
+            <Form.Input
+              type="password"
+              field="comparedPassword"
+              placeholder={comparedPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
+            <button
               type="button"
-              bgColor="transparent"
-              className="u-link-green"
-              spacing="none"
+              className="previous"
               onClick={backPreviousStep}
             >
-              {translate({
-                zh_hant: TEXT.zh_hant.previousStep,
-                zh_hans: TEXT.zh_hans.previousStep,
-                lang
-              })}
-            </Button>
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
-              {translate({
-                zh_hant: TEXT.zh_hant.done,
-                zh_hans: TEXT.zh_hans.done,
-                lang
-              })}
-            </Button>
+              <Translate
+                zh_hant={TEXT.zh_hant.previousStep}
+                zh_hans={TEXT.zh_hans.previousStep}
+              />
+            </button>
+            <button type="submit" className="done" disabled={isSubmitting}>
+              <Translate
+                zh_hant={TEXT.zh_hant.done}
+                zh_hans={TEXT.zh_hans.done}
+              />
+            </button>
           </div>
         </form>
         <style jsx>{styles}</style>

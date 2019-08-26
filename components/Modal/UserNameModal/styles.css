@@ -1,10 +1,13 @@
-.ask-buttons {
-  @mixin border-top-grey;
+.buttons {
+  & button {
+    @mixin modal-button;
 
-  & :global(button) {
-    display: inline-block;
-    width: 50%;
-    height: 3rem;
-    font-weight: var(--font-weight-medium);
+    &.cancel {
+      @mixin modal-button-inactive;
+    }
+
+    &.confirm {
+      @mixin modal-button-active;
+    }
   }
 }

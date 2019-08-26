@@ -11,7 +11,7 @@
   padding: 0px;
 
   @media (--md-down) {
-    border-top: 0.5px solid rgba(0, 0, 0, 0.161175);
+    @mixin border-bottom-grey;
     height: 0px;
     padding-bottom: 2.5rem;
   }

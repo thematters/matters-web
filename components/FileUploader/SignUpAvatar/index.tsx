@@ -100,7 +100,9 @@ export const SignUpAvatarUploader: FC<Props> = ({
   const Uploader = ({ upload }: any) => (
     <>
       <section className="container">
-        <Avatar size="large" src={avatar} />
+        <div className="avaatr">
+          <Avatar size="large" src={avatar} />
+        </div>
         <div className="upload">
           <div className="wrapper">
             <Icon

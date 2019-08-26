@@ -32,5 +32,9 @@ ol {
 }
 
 .buttons {
-  padding-top: var(--spacing-loose);
+  & button {
+    @mixin modal-button;
+    @mixin modal-button-active;
+    width: 100%;
+  }
 }

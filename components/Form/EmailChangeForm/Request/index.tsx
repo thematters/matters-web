@@ -3,12 +3,11 @@ import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
@@ -87,47 +86,43 @@ export const EmailChangeRequestForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            disabled
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="email_reset"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              disabled
+            />
+            <Form.Input
+              type="text"
+              field="code"
+              placeholder={codePlaceholder}
+              floatElement={
+                <SendCodeButton
+                  email={values.email}
+                  lang={lang}
+                  type="email_reset"
+                />
+              }
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
-              {translate({
-                zh_hant: TEXT.zh_hant.nextStep,
-                zh_hans: TEXT.zh_hans.nextStep,
-                lang
-              })}
-            </Button>
+            <button type="submit" disabled={isSubmitting}>
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
+            </button>
           </div>
         </form>
         <style jsx>{styles}</style>

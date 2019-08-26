@@ -5,12 +5,12 @@ import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
+import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
@@ -230,99 +230,102 @@ export const SignUpInitForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="register"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="displayName"
-            placeholder={displayNamePlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="userName"
-            placeholder={userNamePlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hint={translate({
-              zh_hant: TEXT.zh_hant.passwordHint,
-              zh_hans: TEXT.zh_hans.passwordHint
-            })}
-          />
-
-          <div className="tos">
-            <Form.CheckBox
-              field="tos"
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              placeholder={emailPlaceholder}
               values={values}
               errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
               handleChange={handleChange}
-              setFieldValue={setFieldValue}
-            >
-              <span>
-                {agreeText}
-                <Link {...PATHS.MISC_TOS}>
-                  <a className="u-link-green" target="_blank">
-                    {' '}
-                    {tosText}
-                  </a>
-                </Link>
-              </span>
-            </Form.CheckBox>
-          </div>
+            />
+            <Form.Input
+              type="text"
+              field="code"
+              placeholder={codePlaceholder}
+              floatElement={
+                <SendCodeButton
+                  email={values.email}
+                  lang={lang}
+                  type="register"
+                />
+              }
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="text"
+              field="displayName"
+              placeholder={displayNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="text"
+              field="userName"
+              placeholder={userNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="password"
+              field="password"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.passwordHint,
+                zh_hans: TEXT.zh_hans.passwordHint
+              })}
+            />
+
+            <div className="tos">
+              <Form.CheckBox
+                field="tos"
+                values={values}
+                errors={errors}
+                handleChange={handleChange}
+                setFieldValue={setFieldValue}
+              >
+                <span>
+                  {agreeText}
+                  <Link {...PATHS.MISC_TOS}>
+                    <a className="u-link-green" target="_blank">
+                      {' '}
+                      {tosText}
+                    </a>
+                  </Link>
+                </span>
+              </Form.CheckBox>
+            </div>
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              is="button"
-              size="large"
-              type="submit"
-              bgColor="green"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              style={{ minWidth: '5rem' }}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
+            <ModalSwitch modalId="loginModal">
+              {(open: any) => (
+                <button type="button" className="login" onClick={open}>
+                  <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+                </button>
+              )}
+            </ModalSwitch>
+
+            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               {signUpText}
-            </Button>
+            </button>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -400,17 +403,14 @@ export const SignUpInitForm: FC<Props> = ({
   })(BaseForm)
 
   return (
-    <>
-      <Mutation mutation={CONFIRM_CODE}>
-        {confirm => (
-          <Mutation mutation={USER_REGISTER}>
-            {register => (
-              <MainForm preSubmitAction={confirm} submitAction={register} />
-            )}
-          </Mutation>
-        )}
-      </Mutation>
-      <style jsx>{styles}</style>
-    </>
+    <Mutation mutation={CONFIRM_CODE}>
+      {confirm => (
+        <Mutation mutation={USER_REGISTER}>
+          {register => (
+            <MainForm preSubmitAction={confirm} submitAction={register} />
+          )}
+        </Mutation>
+      )}
+    </Mutation>
   )
 }

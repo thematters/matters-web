@@ -6,7 +6,7 @@
 
 .image-container {
   position: relative;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.16);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 
   & .image {
     &::after {
@@ -55,28 +55,14 @@
   margin-top: var(--spacing-x-loose);
 
   & button {
-    width: 50%;
-    font-weight: var(--font-weight-medium);
-    height: 3rem;
-  }
+    @mixin modal-button;
 
-  & button.save {
-    position: relative;
-    color: var(--color-black);
-
-    &:before {
-      @mixin border-top-grey;
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      margin-left: var(--spacing-x-tight);
+    &.save {
+      @mixin modal-button-inactive;
     }
-  }
 
-  & button.publish {
-    color: var(--color-white);
-    background: var(--color-matters-green);
+    &.publish {
+      @mixin modal-button-active;
+    }
   }
 }

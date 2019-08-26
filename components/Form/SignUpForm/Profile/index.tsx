@@ -7,12 +7,11 @@ import { HOME_TODAY } from '~/views/Home/MattersToday'
 import { SIDEBAR_ICYMI } from '~/views/Home/Sidebar/Icymi'
 import { SIDEBAR_TOPICS } from '~/views/Home/Sidebar/Topics'
 
-import { Button } from '~/components/Button'
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -101,32 +100,33 @@ export const SignUpProfileForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <SignUpAvatarUploader
-            field="avatar"
-            lang={lang}
-            uploadCallback={setFieldValue}
-          />
-          <AvatarError field="avatar" errors={errors} touched={touched} />
-          <Form.Textarea
-            field="description"
-            placeholder={descriptionPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            style={{ height: '5rem' }}
-          />
+          <Modal.Content>
+            <SignUpAvatarUploader
+              field="avatar"
+              lang={lang}
+              uploadCallback={setFieldValue}
+            />
+            <AvatarError field="avatar" errors={errors} touched={touched} />
+            <Form.Textarea
+              field="description"
+              placeholder={descriptionPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              style={{ height: '5rem' }}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
+            <button
               type="submit"
-              bgColor="green"
               style={{ minWidth: '5rem' }}
               disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
             >
               {nextText}
-            </Button>
+            </button>
           </div>
         </form>
         <style jsx>{styles}</style>

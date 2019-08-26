@@ -1,5 +1,6 @@
 import { Title } from '~/components/Title'
 
+import { Modal } from '..'
 import styles from './styles.css'
 
 const ModalComplete = ({
@@ -9,13 +10,15 @@ const ModalComplete = ({
   message?: React.ReactNode | string
   hint?: React.ReactNode | string
 }) => (
-  <div className="complete">
-    <Title is="h3" type="modal-headline">
-      {message}
-    </Title>
-    <p className="hint">{hint}</p>
-    <style jsx>{styles}</style>
-  </div>
+  <Modal.Content>
+    <div className="complete">
+      <Title is="h3" type="modal-headline">
+        {message}
+      </Title>
+      <p className="hint">{hint}</p>
+      <style jsx>{styles}</style>
+    </div>
+  </Modal.Content>
 )
 
 export default ModalComplete

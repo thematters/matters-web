@@ -10,7 +10,15 @@
 }
 
 .buttons {
-  @mixin flex-center-space-between;
-  flex-direction: row-reverse;
-  padding-top: 1.5rem;
+  & button {
+    @mixin modal-button;
+
+    &.login {
+      @mixin modal-button-inactive;
+    }
+
+    &[type='submit'] {
+      @mixin modal-button-active;
+    }
+  }
 }

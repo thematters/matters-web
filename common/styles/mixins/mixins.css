@@ -46,6 +46,11 @@
   }
 }
 
+@define-mixin border-grey {
+  border: 1px solid var(--color-line-grey); /* fallback */
+  border: 0.5px solid var(--color-line-grey);
+}
+
 @define-mixin border-bottom-grey {
   border-bottom: 1px solid var(--color-line-grey); /* fallback */
   border-bottom: 0.5px solid var(--color-line-grey);
@@ -140,5 +145,41 @@
   &::placeholder {
     color: var(--color-grey);
     opacity: 1; /* Firefox */
+  }
+}
+
+@define-mixin modal-button {
+  @mixin all-transition;
+  width: 50%;
+  font-weight: var(--font-weight-medium);
+  height: 3rem;
+}
+
+@define-mixin modal-button-inactive {
+  position: relative;
+  color: var(--color-black);
+  background: var(--color-white);
+
+  &:before {
+    @mixin border-top-grey;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-left: var(--spacing-x-tight);
+  }
+
+  &:hover {
+    background: var(--color-grey-lighter);
+  }
+}
+
+@define-mixin modal-button-active {
+  color: var(--color-white);
+  background: var(--color-matters-green);
+
+  &:hover {
+    background: var(--color-matters-green-hover);
   }
 }

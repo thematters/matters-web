@@ -105,51 +105,49 @@ const PasswordModal: FC<
     <>
       <Modal.Header title={data[step].title} />
 
-      <Modal.Content>
-        {step === 'request' && (
-          <PasswordChangeRequestForm
-            defaultEmail={data.request.email}
-            purpose={purpose}
-            container="modal"
-            submitCallback={requestCodeCallback}
-          />
-        )}
-        {step === 'reset' && (
-          <PasswordChangeConfirmForm
-            codeId={data.request.codeId}
-            container="modal"
-            backPreviousStep={backPreviousStep}
-            submitCallback={() => setStep('complete')}
-          />
-        )}
-        {step === 'complete' && (
-          <ModalComplete
-            message={
-              purpose === 'forget' ? (
-                <Translate
-                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                />
-              ) : (
-                <Translate
-                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
-                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
-                />
-              )
-            }
-            hint={
-              purpose === 'forget' ? (
-                <Translate
-                  zh_hant={TEXT.zh_hant.useNewPassword}
-                  zh_hans={TEXT.zh_hans.useNewPassword}
-                />
-              ) : (
-                ''
-              )
-            }
-          />
-        )}
-      </Modal.Content>
+      {step === 'request' && (
+        <PasswordChangeRequestForm
+          defaultEmail={data.request.email}
+          purpose={purpose}
+          container="modal"
+          submitCallback={requestCodeCallback}
+        />
+      )}
+      {step === 'reset' && (
+        <PasswordChangeConfirmForm
+          codeId={data.request.codeId}
+          container="modal"
+          backPreviousStep={backPreviousStep}
+          submitCallback={() => setStep('complete')}
+        />
+      )}
+      {step === 'complete' && (
+        <ModalComplete
+          message={
+            purpose === 'forget' ? (
+              <Translate
+                zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+              />
+            ) : (
+              <Translate
+                zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                zh_hans={TEXT.zh_hans.changePasswordSuccess}
+              />
+            )
+          }
+          hint={
+            purpose === 'forget' ? (
+              <Translate
+                zh_hant={TEXT.zh_hant.useNewPassword}
+                zh_hans={TEXT.zh_hans.useNewPassword}
+              />
+            ) : (
+              ''
+            )
+          }
+        />
+      )}
     </>
   )
 }

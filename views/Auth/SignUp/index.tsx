@@ -31,7 +31,6 @@ const SignUp = () => {
     'l-offset-lg-3',
     'container'
   )
-  const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const signUpCallback = () => setStep('profile')
   const signUpProfileCallback = () => setStep('complete')
@@ -48,24 +47,15 @@ const SignUp = () => {
 
         <article className={containerClass}>
           {step === 'signUp' && (
-            <SignUpInitForm
-              extraClass={childClass}
-              purpose="page"
-              submitCallback={signUpCallback}
-            />
+            <SignUpInitForm purpose="page" submitCallback={signUpCallback} />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
-              extraClass={childClass}
               purpose="page"
               submitCallback={signUpProfileCallback}
             />
           )}
-          {step === 'complete' && (
-            <div className={classNames(childClass)}>
-              <SignUpComplete purpose="page" />
-            </div>
-          )}
+          {step === 'complete' && <SignUpComplete purpose="page" />}
         </article>
       </main>
       <style jsx>{styles}</style>

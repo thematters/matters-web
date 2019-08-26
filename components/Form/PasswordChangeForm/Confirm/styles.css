@@ -3,6 +3,14 @@
 }
 
 .buttons {
-  @mixin flex-center-space-between;
-  padding-top: var(--spacing-x-tight);
+  & button {
+    @mixin modal-button;
+
+    &.previous {
+      @mixin modal-button-inactive;
+    }
+    &.done {
+      @mixin modal-button-active;
+    }
+  }
 }
