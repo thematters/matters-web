@@ -20,7 +20,7 @@ import {
 } from '~/common/enums'
 import {
   analytics,
-  clearPersistCache,
+  // clearPersistCache,
   isValidEmail,
   redirectToTarget,
   translate
@@ -271,7 +271,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           analytics.identifyUser()
           analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
 
-          await clearPersistCache()
+          // await clearPersistCache()
           redirectToTarget({
             defaultTarget: !!isInPage ? 'homepage' : 'current'
           })

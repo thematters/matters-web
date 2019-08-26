@@ -15,11 +15,8 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
-  clearPersistCache,
-  isValidDisplayName,
   isValidEmail,
   isValidPassword,
-  isValidUserName,
   translate
 } from '~/common/utils'
 
@@ -44,18 +41,10 @@ interface Props {
   defaultEmail?: string
   extraClass?: string[]
   purpose: 'modal' | 'page'
-  submitCallback?: () => void
+  submitCallback?: (params: any) => void
 }
 
-export const USER_REGISTER = gql`
-  mutation UserRegister($input: UserRegisterInput!) {
-    userRegister(input: $input) {
-      auth
-    }
-  }
-`
-
-export const CONFIRM_CODE = gql`
+const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
@@ -122,42 +111,6 @@ export const SignUpInitForm: FC<Props> = ({
     }
   }
 
-  const validateDisplayName = (value: string, language: string) => {
-    let result: any
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidDisplayName(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.displayNameHint,
-        zh_hans: TEXT.zh_hans.displayNameHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang: language })
-    }
-  }
-
-  const validateUserName = (value: string, language: string) => {
-    let result: any
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidUserName(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.userNameHint,
-        zh_hans: TEXT.zh_hans.userNameHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang: language })
-    }
-  }
-
   const validatePassword = (value: string, language: string) => {
     let result: any
     if (!value) {
@@ -213,27 +166,9 @@ export const SignUpInitForm: FC<Props> = ({
       lang
     })
 
-    const displayNamePlaceholder = translate({
-      zh_hant: '姓名',
-      zh_hans: '姓名',
-      lang
-    })
-
-    const userNamePlaceholder = translate({
-      zh_hant: 'Matters ID',
-      zh_hans: 'Matters ID',
-      lang
-    })
-
     const passwordPlaceholder = translate({
       zh_hant: TEXT.zh_hant.password,
       zh_hans: TEXT.zh_hans.password,
-      lang
-    })
-
-    const signUpText = translate({
-      zh_hant: TEXT.zh_hant.register,
-      zh_hans: TEXT.zh_hans.register,
       lang
     })
 
@@ -281,26 +216,6 @@ export const SignUpInitForm: FC<Props> = ({
               handleChange={handleChange}
             />
             <Form.Input
-              type="text"
-              field="displayName"
-              placeholder={displayNamePlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Input
-              type="text"
-              field="userName"
-              placeholder={userNamePlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Input
               type="password"
               field="password"
               placeholder={passwordPlaceholder}
@@ -311,7 +226,8 @@ export const SignUpInitForm: FC<Props> = ({
               handleChange={handleChange}
               hint={translate({
                 zh_hant: TEXT.zh_hant.passwordHint,
-                zh_hans: TEXT.zh_hans.passwordHint
+                zh_hans: TEXT.zh_hans.passwordHint,
+                lang
               })}
             />
 
@@ -341,7 +257,10 @@ export const SignUpInitForm: FC<Props> = ({
             {isInPage && <LoginRedirection />}
 
             <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
-              {signUpText}
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
             </button>
           </div>
         </form>
@@ -354,24 +273,18 @@ export const SignUpInitForm: FC<Props> = ({
     mapPropsToValues: () => ({
       email: defaultEmail,
       code: '',
-      displayName: '',
-      userName: '',
       password: '',
       tos: true
     }),
 
-    validate: ({ email, code, displayName, userName, password, tos }) => {
+    validate: ({ email, code, password, tos }) => {
       const isInvalidEmail = validateEmail(email, lang)
       const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
       const isInvalidPassword = validatePassword(password, lang)
       const isInvalidToS = validateToS(tos, lang)
       const errors: { [key: string]: any } = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
-        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
         ...(isInvalidToS ? { tos: isInvalidToS } : {})
       }
@@ -382,26 +295,21 @@ export const SignUpInitForm: FC<Props> = ({
       values,
       { props, setFieldError, setSubmitting }: any
     ) => {
-      const { email, code, displayName, password } = values
-      const { preSubmitAction, submitAction } = props
-      if (!preSubmitAction || !submitAction) {
+      const { email, code, password } = values
+      const { submitAction } = props
+      if (!submitAction) {
         return undefined
       }
 
       try {
         const {
           data: { confirmVerificationCode: codeId }
-        } = await preSubmitAction({
+        } = await submitAction({
           variables: { input: { email, code, type: 'register' } }
         })
 
-        await submitAction({
-          variables: { input: { email, codeId, displayName, password } }
-        })
-
         if (submitCallback) {
-          submitCallback()
-          clearPersistCache()
+          submitCallback({ email, codeId, password })
         }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
@@ -421,13 +329,7 @@ export const SignUpInitForm: FC<Props> = ({
 
   return (
     <Mutation mutation={CONFIRM_CODE}>
-      {confirm => (
-        <Mutation mutation={USER_REGISTER}>
-          {register => (
-            <MainForm preSubmitAction={confirm} submitAction={register} />
-          )}
-        </Mutation>
-      )}
+      {confirm => <MainForm submitAction={confirm} />}
     </Mutation>
   )
 }

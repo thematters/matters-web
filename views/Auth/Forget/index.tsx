@@ -58,7 +58,6 @@ const Forget = () => {
     setStep('reset')
   }
   const backPreviousStep = (event: any) => {
-    event.stopPropagation()
     setStep('request')
   }
 

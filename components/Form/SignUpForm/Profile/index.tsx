@@ -9,12 +9,12 @@ import { SIDEBAR_TOPICS } from '~/views/Home/Sidebar/Topics'
 
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
-import { Mutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
+import { getErrorCodes, Mutation } from '~/components/GQL'
+import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { isValidDisplayName, isValidUserName, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -36,7 +36,9 @@ import styles from './styles.css'
 interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
+  signUpData: { [key: string]: any }
   submitCallback?: () => void
+  backPreviousStep: (event: any) => void
 }
 
 const UPDATE_USER_INFO = gql`
@@ -47,6 +49,14 @@ const UPDATE_USER_INFO = gql`
       info {
         description
       }
+    }
+  }
+`
+
+const USER_REGISTER = gql`
+  mutation UserRegister($input: UserRegisterInput!) {
+    userRegister(input: $input) {
+      auth
     }
   }
 `
@@ -67,7 +77,9 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 export const SignUpProfileForm: FC<Props> = ({
   extraClass = [],
   purpose,
-  submitCallback
+  submitCallback,
+  backPreviousStep,
+  signUpData
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -79,21 +91,28 @@ export const SignUpProfileForm: FC<Props> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
+    setFieldError
   }: {
     [key: string]: any
   }) => {
     const formClass = classNames('form', ...extraClass)
 
-    const descriptionPlaceholder = translate({
-      zh_hant: '介紹你自己，獲得更多社區關注',
-      zh_hans: '介绍你自己，获得更多社区关注',
+    const displayNamePlaceholder = translate({
+      zh_hant: '姓名',
+      zh_hans: '姓名',
       lang
     })
 
-    const nextText = translate({
-      zh_hant: TEXT.zh_hant.nextStep,
-      zh_hans: TEXT.zh_hans.nextStep,
+    const userNamePlaceholder = translate({
+      zh_hant: 'Matters ID',
+      zh_hans: 'Matters ID',
+      lang
+    })
+
+    const descriptionPlaceholder = translate({
+      zh_hant: '介紹你自己，獲得更多社區關注',
+      zh_hans: '介绍你自己，获得更多社区关注',
       lang
     })
 
@@ -107,6 +126,31 @@ export const SignUpProfileForm: FC<Props> = ({
               uploadCallback={setFieldValue}
             />
             <AvatarError field="avatar" errors={errors} touched={touched} />
+            <Form.Input
+              type="text"
+              field="displayName"
+              placeholder={displayNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="text"
+              field="userName"
+              placeholder={userNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.userNameHint,
+                zh_hans: TEXT.zh_hans.userNameHint,
+                lang
+              })}
+            />
             <Form.Textarea
               field="description"
               placeholder={descriptionPlaceholder}
@@ -116,16 +160,31 @@ export const SignUpProfileForm: FC<Props> = ({
               handleBlur={handleBlur}
               handleChange={handleChange}
               style={{ height: '5rem' }}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.descriptionHint,
+                zh_hans: TEXT.zh_hans.descriptionHint,
+                lang
+              })}
             />
           </Modal.Content>
 
           <div className="buttons">
             <button
-              type="submit"
-              style={{ minWidth: '5rem' }}
+              type="button"
+              className="previous"
               disabled={isSubmitting}
+              onClick={backPreviousStep}
             >
-              {nextText}
+              <Translate
+                zh_hant={TEXT.zh_hant.previousStep}
+                zh_hans={TEXT.zh_hans.previousStep}
+              />
+            </button>
+            <button type="submit" disabled={isSubmitting}>
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
             </button>
           </div>
         </form>
@@ -140,6 +199,42 @@ export const SignUpProfileForm: FC<Props> = ({
       result = {
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
+  const validateDisplayName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidDisplayName(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.displayNameHint,
+        zh_hans: TEXT.zh_hans.displayNameHint
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
+  const validateUserName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidUserName(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.userNameHint,
+        zh_hans: TEXT.zh_hans.userNameHint
       }
     }
     if (result) {
@@ -163,42 +258,67 @@ export const SignUpProfileForm: FC<Props> = ({
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
       avatar: null,
+      displayName: '',
+      userName: '',
       description: ''
     }),
 
-    validate: ({ avatar, description }) => {
+    validate: ({ avatar, displayName, userName, description }) => {
       const isValidAvatar = validateAvatar(avatar, lang)
+      const isInvalidDisplayName = validateDisplayName(displayName, lang)
+      const isInvalidUserName = validateUserName(userName, lang)
       const isValidDescription = validateDescription(description, lang)
       const errors = {
         ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
+        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isValidDescription ? { description: isValidDescription } : {})
       }
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { avatar, description } = values
-      const { submitAction } = props
-      if (!submitAction) {
+    handleSubmit: async (
+      values,
+      { props, setFieldError, setSubmitting }: any
+    ) => {
+      const { avatar, userName, displayName, description } = values
+      const { preSubmitAction, submitAction } = props
+      if (!preSubmitAction || !submitAction) {
         return undefined
       }
-      const inputs = {
-        description,
-        ...(avatar ? { avatar } : {})
-      }
 
-      submitAction({ variables: { input: inputs } })
-        .then(({ data }: any) => {
-          if (submitCallback) {
-            submitCallback()
+      try {
+        await preSubmitAction({
+          variables: {
+            input: {
+              email: signUpData.email,
+              codeId: signUpData.codeId,
+              userName,
+              displayName,
+              password: signUpData.password
+            }
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
+
+        await submitAction({
+          description,
+          ...(avatar ? { avatar } : {})
         })
-        .finally(() => {
-          setSubmitting(false)
+
+        if (submitCallback) {
+          submitCallback()
+        }
+      } catch (error) {
+        const errorCode = getErrorCodes(error)[0]
+        const errorMessage = translate({
+          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          lang
         })
+        setFieldError('code', errorMessage)
+      }
+
+      setSubmitting(false)
     }
   })(BaseForm)
 
@@ -214,8 +334,14 @@ export const SignUpProfileForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={UPDATE_USER_INFO} refetchQueries={relatedQueries}>
-        {update => <MainForm submitAction={update} />}
+      <Mutation mutation={USER_REGISTER}>
+        {register => (
+          <Mutation mutation={UPDATE_USER_INFO} refetchQueries={relatedQueries}>
+            {update => (
+              <MainForm preSubmitAction={register} submitAction={update} />
+            )}
+          </Mutation>
+        )}
       </Mutation>
       <style jsx>{styles}</style>
     </>

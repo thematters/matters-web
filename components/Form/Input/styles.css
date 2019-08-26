@@ -1,7 +1,7 @@
 .container {
   position: relative;
 
-  & + .container {
+  & + :global(.container) {
     margin-top: var(--spacing-x-tight);
   }
 

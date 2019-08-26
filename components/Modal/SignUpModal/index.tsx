@@ -27,8 +27,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')
-
-  const data: { [key: string]: any } = {
+  const [data, setData] = useState<{ [key: string]: any }>({
     signUp: {
       title: translate({
         zh_hant: TEXT.zh_hant.register,
@@ -43,9 +42,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
         lang
       })
     },
-    follow: {
-      title: translate({ zh_hant: '追蹤創作者', zh_hans: '追踪创作者', lang })
-    },
     complete: {
       title: translate({
         zh_hant: TEXT.zh_hant.registerSuccess,
@@ -53,15 +49,30 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
         lang
       })
     }
-  }
+  })
 
-  const signUpCallback = () => {
+  const initCallback = ({ email, codeId, password }: any) => {
+    setData(prev => {
+      return {
+        ...prev,
+        signUp: {
+          ...prev.signUp,
+          email,
+          codeId,
+          password
+        }
+      }
+    })
     setCloseable(false)
     setStep('profile')
   }
 
-  const signUpProfileCallback = () => {
+  const profileCallback = () => {
     setStep('complete')
+  }
+
+  const backPreviousStep = (event: any) => {
+    setStep('signUp')
   }
 
   return (
@@ -69,12 +80,18 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
       <Modal.Header title={data[step].title} closeable={closeable} />
 
       {step === 'signUp' && (
-        <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
+        <SignUpInitForm
+          purpose="modal"
+          submitCallback={initCallback}
+          defaultEmail={data.signUp.email}
+        />
       )}
       {step === 'profile' && (
         <SignUpProfileForm
           purpose="modal"
-          submitCallback={signUpProfileCallback}
+          backPreviousStep={backPreviousStep}
+          submitCallback={profileCallback}
+          signUpData={data.signUp}
         />
       )}
       {step === 'complete' && <SignUpComplete />}

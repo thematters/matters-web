@@ -19,8 +19,10 @@
   & button {
     @mixin modal-button;
 
+    &.previous {
+      @mixin modal-button-inactive;
+    }
     &[type='submit'] {
-      width: 100%;
       @mixin modal-button-active;
     }
   }

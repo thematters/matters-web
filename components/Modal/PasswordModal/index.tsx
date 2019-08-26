@@ -97,7 +97,6 @@ const PasswordModal: FC<
   }
 
   const backPreviousStep = (event: any) => {
-    event.stopPropagation()
     setStep('request')
   }
 
