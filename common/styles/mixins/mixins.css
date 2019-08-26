@@ -47,18 +47,15 @@
 }
 
 @define-mixin border-grey {
-  border: 1px solid var(--color-line-grey); /* fallback */
-  border: 0.5px solid var(--color-line-grey);
+  border: 1px solid var(--color-line-grey-light);
 }
 
 @define-mixin border-bottom-grey {
-  border-bottom: 1px solid var(--color-line-grey); /* fallback */
-  border-bottom: 0.5px solid var(--color-line-grey);
+  border-bottom: 1px solid var(--color-line-grey-light);
 }
 
 @define-mixin border-top-grey {
-  border-top: 1px solid var(--color-line-grey); /* fallback */
-  border-top: 0.5px solid var(--color-line-grey);
+  border-top: 1px solid var(--color-line-grey-light);
 }
 
 @define-mixin cover {
