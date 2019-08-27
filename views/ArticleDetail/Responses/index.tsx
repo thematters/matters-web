@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
@@ -15,11 +16,15 @@ import { Query } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
-import { useScrollTo } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
 import { TEXT, UrlFragments } from '~/common/enums'
-import { filterResponses, getQuery, mergeConnections } from '~/common/utils'
+import {
+  dom,
+  filterResponses,
+  getQuery,
+  mergeConnections
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -66,23 +71,17 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
    * 3. `#parentComemntId-childCommentId`
    */
   let fragment = ''
-  let before = null
-  let anchor = ''
   let parentId = ''
   let descendantId = ''
   if (process.browser) {
     fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split(':')[0]
-    descendantId = fragment.split(':')[1]
-    before = fragment === UrlFragments.COMMENTS ? null : parentId
-    anchor = fragment
+    parentId = fragment.split('-')[0]
+    descendantId = fragment.split('-')[1]
   }
 
   const queryVariables = {
     mediaHash,
-    before: before || undefined,
-    first: before ? null : RESPONSES_COUNT,
-    includeBefore: !!before,
+    first: RESPONSES_COUNT,
     articleOnly: articleOnlyMode
   }
 
@@ -108,12 +107,15 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           edges: {},
           pageInfo: {}
         })
-        const loadMore = () =>
-          fetchMore({
+
+        const loadMore = (params?: { before: string }) => {
+          const loadBefore = (params && params.before) || null
+          return fetchMore({
             variables: {
               cursor: pageInfo.endCursor,
-              before: null,
+              before: loadBefore,
               first: RESPONSES_COUNT,
+              includeBefore: !!loadBefore,
               articleOnly: articleOnlyMode
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
@@ -123,11 +125,14 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
                 path: connectionPath
               })
           })
+        }
+
         const responseCount = _get(data, 'article.responseCount', 0)
         const responses = filterResponses(
           (edges || []).map(({ node }: { node: any }) => node)
         )
 
+        // real time update with websocket
         useEffect(() => {
           if (data.article.live) {
             subscribeToMore({
@@ -145,23 +150,22 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           }
         })
 
-        const getScrollOptions = (param: string) => {
-          switch (param) {
-            case 'comments': {
-              return { offset: -10 }
+        // scroll to comment
+        useEffect(() => {
+          if (fragment) {
+            const jumpToFragment = () => {
+              jump(`#${fragment}`, {
+                offset: fragment === UrlFragments.COMMENTS ? -10 : -80
+              })
             }
-            default: {
-              return { offset: -80 }
+            const element = dom.$(fragment) // !responses.filter(({ id }) => id === parentId).length
+            if (!element) {
+              loadMore({ before: parentId }).then(jumpToFragment)
+            } else {
+              jumpToFragment()
             }
           }
-        }
-
-        useScrollTo({
-          enable: !!anchor,
-          selector: `#${anchor}`,
-          trigger: [router],
-          ...getScrollOptions(anchor)
-        })
+        }, [])
 
         return (
           <section className="comments" id="comments">
