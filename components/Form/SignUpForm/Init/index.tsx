@@ -17,6 +17,7 @@ import {
   analytics,
   isValidEmail,
   isValidPassword,
+  isValidUserName,
   translate
 } from '~/common/utils'
 
@@ -47,6 +48,14 @@ interface Props {
 const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
+  }
+`
+
+const USER_REGISTER = gql`
+  mutation UserRegister($input: UserRegisterInput!) {
+    userRegister(input: $input) {
+      auth
+    }
   }
 `
 
@@ -111,6 +120,24 @@ export const SignUpInitForm: FC<Props> = ({
     }
   }
 
+  const validateUserName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidUserName(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.userNameHint,
+        zh_hans: TEXT.zh_hans.userNameHint
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
   const validatePassword = (value: string, language: string) => {
     let result: any
     if (!value) {
@@ -166,6 +193,12 @@ export const SignUpInitForm: FC<Props> = ({
       lang
     })
 
+    const userNamePlaceholder = translate({
+      zh_hant: 'Matters ID',
+      zh_hans: 'Matters ID',
+      lang
+    })
+
     const passwordPlaceholder = translate({
       zh_hant: TEXT.zh_hant.password,
       zh_hans: TEXT.zh_hans.password,
@@ -216,6 +249,21 @@ export const SignUpInitForm: FC<Props> = ({
               handleChange={handleChange}
             />
             <Form.Input
+              type="text"
+              field="userName"
+              placeholder={userNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.userNameHint,
+                zh_hans: TEXT.zh_hans.userNameHint,
+                lang
+              })}
+            />
+            <Form.Input
               type="password"
               field="password"
               placeholder={passwordPlaceholder}
@@ -230,7 +278,6 @@ export const SignUpInitForm: FC<Props> = ({
                 lang
               })}
             />
-
             <div className="tos">
               <Form.CheckBox
                 field="tos"
@@ -273,18 +320,21 @@ export const SignUpInitForm: FC<Props> = ({
     mapPropsToValues: () => ({
       email: defaultEmail,
       code: '',
+      userName: '',
       password: '',
       tos: true
     }),
 
-    validate: ({ email, code, password, tos }) => {
+    validate: ({ email, code, userName, password, tos }) => {
       const isInvalidEmail = validateEmail(email, lang)
       const isInvalidCodeId = validateCode(code, lang)
       const isInvalidPassword = validatePassword(password, lang)
+      const isInvalidUserName = validateUserName(userName, lang)
       const isInvalidToS = validateToS(tos, lang)
       const errors: { [key: string]: any } = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
         ...(isInvalidToS ? { tos: isInvalidToS } : {})
       }
@@ -295,17 +345,23 @@ export const SignUpInitForm: FC<Props> = ({
       values,
       { props, setFieldError, setSubmitting }: any
     ) => {
-      const { email, code, password } = values
-      const { submitAction } = props
-      if (!submitAction) {
+      const { email, code, userName, password } = values
+      const { preSubmitAction, submitAction } = props
+      if (!preSubmitAction || !submitAction) {
         return undefined
       }
 
       try {
         const {
           data: { confirmVerificationCode: codeId }
-        } = await submitAction({
+        } = await preSubmitAction({
           variables: { input: { email, code, type: 'register' } }
+        })
+
+        await submitAction({
+          variables: {
+            input: { email, codeId, userName, displayName: userName, password }
+          }
         })
 
         if (submitCallback) {
@@ -329,7 +385,13 @@ export const SignUpInitForm: FC<Props> = ({
 
   return (
     <Mutation mutation={CONFIRM_CODE}>
-      {confirm => <MainForm submitAction={confirm} />}
+      {confirm => (
+        <Mutation mutation={USER_REGISTER}>
+          {register => (
+            <MainForm preSubmitAction={confirm} submitAction={register} />
+          )}
+        </Mutation>
+      )}
     </Mutation>
   )
 }

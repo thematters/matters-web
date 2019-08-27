@@ -27,7 +27,7 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')
-  const [data, setData] = useState<{ [key: string]: any }>({
+  const data = {
     signUp: {
       title: translate({
         zh_hant: TEXT.zh_hant.register,
@@ -49,20 +49,9 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
         lang
       })
     }
-  })
+  }
 
-  const initCallback = ({ email, codeId, password }: any) => {
-    setData(prev => {
-      return {
-        ...prev,
-        signUp: {
-          ...prev.signUp,
-          email,
-          codeId,
-          password
-        }
-      }
-    })
+  const signUpCallback = ({ email, codeId, password }: any) => {
     setCloseable(false)
     setStep('profile')
   }
@@ -71,28 +60,15 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
     setStep('complete')
   }
 
-  const backPreviousStep = (event: any) => {
-    setStep('signUp')
-  }
-
   return (
     <>
       <Modal.Header title={data[step].title} closeable={closeable} />
 
       {step === 'signUp' && (
-        <SignUpInitForm
-          purpose="modal"
-          submitCallback={initCallback}
-          defaultEmail={data.signUp.email}
-        />
+        <SignUpInitForm purpose="modal" submitCallback={signUpCallback} />
       )}
       {step === 'profile' && (
-        <SignUpProfileForm
-          purpose="modal"
-          backPreviousStep={backPreviousStep}
-          submitCallback={profileCallback}
-          signUpData={data.signUp}
-        />
+        <SignUpProfileForm purpose="modal" submitCallback={profileCallback} />
       )}
       {step === 'complete' && <SignUpComplete />}
 

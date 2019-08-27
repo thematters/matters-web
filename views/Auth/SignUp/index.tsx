@@ -1,67 +1,26 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { LanguageContext } from '~/components'
 import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 type Step = 'signUp' | 'profile' | 'follow' | 'complete'
 
 const SignUp = () => {
-  const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState<Step>('signUp')
-  const [data, setData] = useState<{ [key: string]: any }>({
-    signUp: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.register,
-        zh_hans: TEXT.zh_hans.register,
-        lang
-      })
-    },
-    profile: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.userProfile,
-        zh_hans: TEXT.zh_hans.userProfile,
-        lang
-      })
-    },
-    complete: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.registerSuccess,
-        zh_hans: TEXT.zh_hans.registerSuccess,
-        lang
-      })
-    }
-  })
 
-  const initCallback = ({ email, codeId, password }: any) => {
-    setData(prev => {
-      return {
-        ...prev,
-        signUp: {
-          ...prev.signUp,
-          email,
-          codeId,
-          password
-        }
-      }
-    })
+  const signUpCallback = ({ email, codeId, password }: any) => {
     setStep('profile')
   }
 
   const profileCallback = () => {
     setStep('complete')
-  }
-
-  const backPreviousStep = (event: any) => {
-    setStep('signUp')
   }
 
   const { updateHeaderState } = useContext(HeaderContext)
@@ -93,18 +52,12 @@ const SignUp = () => {
 
         <article className={containerClass}>
           {step === 'signUp' && (
-            <SignUpInitForm
-              purpose="page"
-              submitCallback={initCallback}
-              defaultEmail={data.signUp.email}
-            />
+            <SignUpInitForm purpose="page" submitCallback={signUpCallback} />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
               purpose="page"
-              backPreviousStep={backPreviousStep}
               submitCallback={profileCallback}
-              signUpData={data.signUp}
             />
           )}
           {step === 'complete' && <SignUpComplete purpose="page" />}

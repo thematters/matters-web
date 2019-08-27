@@ -6,12 +6,12 @@ import { FC, useContext } from 'react'
 
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
-import { getErrorCodes, Mutation } from '~/components/GQL'
+import { Mutation } from '~/components/GQL'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidDisplayName, isValidUserName, translate } from '~/common/utils'
+import { isValidDisplayName, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -33,9 +33,7 @@ import styles from './styles.css'
 interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
-  signUpData: { [key: string]: any }
   submitCallback?: () => void
-  backPreviousStep: (event: any) => void
 }
 
 const UPDATE_USER_INFO = gql`
@@ -46,14 +44,6 @@ const UPDATE_USER_INFO = gql`
       info {
         description
       }
-    }
-  }
-`
-
-const USER_REGISTER = gql`
-  mutation UserRegister($input: UserRegisterInput!) {
-    userRegister(input: $input) {
-      auth
     }
   }
 `
@@ -74,9 +64,7 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 export const SignUpProfileForm: FC<Props> = ({
   extraClass = [],
   purpose,
-  submitCallback,
-  backPreviousStep,
-  signUpData
+  submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -98,12 +86,6 @@ export const SignUpProfileForm: FC<Props> = ({
     const displayNamePlaceholder = translate({
       zh_hant: '姓名',
       zh_hans: '姓名',
-      lang
-    })
-
-    const userNamePlaceholder = translate({
-      zh_hant: 'Matters ID',
-      zh_hans: 'Matters ID',
       lang
     })
 
@@ -133,21 +115,6 @@ export const SignUpProfileForm: FC<Props> = ({
               handleBlur={handleBlur}
               handleChange={handleChange}
             />
-            <Form.Input
-              type="text"
-              field="userName"
-              placeholder={userNamePlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              hint={translate({
-                zh_hant: TEXT.zh_hant.userNameHint,
-                zh_hans: TEXT.zh_hans.userNameHint,
-                lang
-              })}
-            />
             <Form.Textarea
               field="description"
               placeholder={descriptionPlaceholder}
@@ -166,17 +133,6 @@ export const SignUpProfileForm: FC<Props> = ({
           </Modal.Content>
 
           <div className="buttons">
-            <button
-              type="button"
-              className="previous"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              onClick={backPreviousStep}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.previousStep}
-                zh_hans={TEXT.zh_hans.previousStep}
-              />
-            </button>
             <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}
@@ -221,24 +177,6 @@ export const SignUpProfileForm: FC<Props> = ({
     }
   }
 
-  const validateUserName = (value: string, language: string) => {
-    let result: any
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidUserName(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.userNameHint,
-        zh_hans: TEXT.zh_hans.userNameHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang: language })
-    }
-  }
-
   const validateDescription = (value: string, language: string) => {
     let result: any
     if (!value) {
@@ -256,60 +194,33 @@ export const SignUpProfileForm: FC<Props> = ({
     mapPropsToValues: () => ({
       avatar: null,
       displayName: '',
-      userName: '',
       description: ''
     }),
 
-    validate: ({ avatar, displayName, userName, description }) => {
+    validate: ({ avatar, displayName, description }) => {
       const isValidAvatar = validateAvatar(avatar, lang)
       const isInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
       const isValidDescription = validateDescription(description, lang)
       const errors = {
         ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
         ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isValidDescription ? { description: isValidDescription } : {})
       }
       return errors
     },
 
-    handleSubmit: async (
-      values,
-      { props, setFieldError, setSubmitting }: any
-    ) => {
-      const { avatar, userName, displayName, description } = values
-      const { preSubmitAction, submitAction } = props
-      if (!preSubmitAction || !submitAction) {
+    handleSubmit: async (values, { props, setSubmitting }: any) => {
+      const { avatar, displayName, description } = values
+      const { submitAction } = props
+      if (!submitAction) {
         return undefined
-      }
-
-      try {
-        await preSubmitAction({
-          variables: {
-            input: {
-              email: signUpData.email,
-              codeId: signUpData.codeId,
-              userName,
-              displayName,
-              password: signUpData.password
-            }
-          }
-        })
-      } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('userName', errorMessage)
       }
 
       try {
         await submitAction({
           variables: {
             input: {
+              displayName,
               description,
               ...(avatar ? { avatar } : {})
             }
@@ -330,15 +241,10 @@ export const SignUpProfileForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={USER_REGISTER}>
-        {register => (
-          <Mutation mutation={UPDATE_USER_INFO}>
-            {update => (
-              <MainForm preSubmitAction={register} submitAction={update} />
-            )}
-          </Mutation>
-        )}
+      <Mutation mutation={UPDATE_USER_INFO}>
+        {update => <MainForm submitAction={update} />}
       </Mutation>
+
       <style jsx>{styles}</style>
     </>
   )
