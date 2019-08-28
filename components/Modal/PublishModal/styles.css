@@ -50,19 +50,3 @@
     }
   }
 }
-
-.buttons {
-  margin-top: var(--spacing-x-loose);
-
-  & button {
-    @mixin modal-button;
-
-    &.save {
-      @mixin modal-button-inactive;
-    }
-
-    &.publish {
-      @mixin modal-button-active;
-    }
-  }
-}

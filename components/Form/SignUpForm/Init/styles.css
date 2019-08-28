@@ -8,15 +8,3 @@
   color: var(--color-black);
   font-size: var(--font-size-sm);
 }
-
-button,
-.btn {
-  @mixin modal-button;
-
-  &.login {
-    @mixin modal-button-inactive;
-  }
-  &[type='submit'] {
-    @mixin modal-button-active;
-  }
-}

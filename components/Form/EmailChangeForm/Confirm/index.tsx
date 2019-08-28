@@ -141,12 +141,15 @@ export const EmailChangeConfirmForm: FC<Props> = ({
             />
           </Modal.Content>
           <div className="buttons">
-            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
+            <Modal.FooterButton
+              disabled={!_isEmpty(errors) || isSubmitting}
+              width="full"
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.done}
                 zh_hans={TEXT.zh_hans.done}
               />
-            </button>
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>

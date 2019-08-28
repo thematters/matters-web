@@ -1,16 +1,3 @@
 .form {
   width: 100%;
 }
-
-.buttons {
-  & button {
-    @mixin modal-button;
-
-    &.previous {
-      @mixin modal-button-inactive;
-    }
-    &.done {
-      @mixin modal-button-active;
-    }
-  }
-}

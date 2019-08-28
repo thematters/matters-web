@@ -138,26 +138,21 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
           </Modal.Content>
 
           <div className="buttons">
-            <button
-              type="button"
-              className="previous"
-              onClick={backPreviousStep}
-            >
+            <Modal.FooterButton onClick={backPreviousStep} bgColor="white">
               <Translate
                 zh_hant={TEXT.zh_hant.previousStep}
                 zh_hans={TEXT.zh_hans.previousStep}
               />
-            </button>
-            <button
-              type="submit"
-              className="done"
+            </Modal.FooterButton>
+            <Modal.FooterButton
+              htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
             >
               <Translate
                 zh_hant={TEXT.zh_hant.done}
                 zh_hans={TEXT.zh_hans.done}
               />
-            </button>
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>

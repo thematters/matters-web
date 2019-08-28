@@ -43,18 +43,18 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
             />
           </Modal.Content>
           <div className="buttons">
-            <button type="button" className="cancel" onClick={close}>
+            <Modal.FooterButton bgColor="white" onClick={close}>
               <Translate
                 zh_hant={TEXT.zh_hant.cancel}
                 zh_hans={TEXT.zh_hans.cancel}
               />
-            </button>
-            <button type="button" className="confirm" onClick={askCallback}>
+            </Modal.FooterButton>
+            <Modal.FooterButton onClick={askCallback}>
               <Translate
                 zh_hant={TEXT.zh_hant.confirm}
                 zh_hans={TEXT.zh_hans.confirm}
               />
-            </button>
+            </Modal.FooterButton>
           </div>
         </>
       )}

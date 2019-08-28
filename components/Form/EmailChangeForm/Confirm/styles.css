@@ -1,11 +1,3 @@
 .form {
   width: 100%;
 }
-
-.buttons {
-  & button {
-    @mixin modal-button;
-    @mixin modal-button-active;
-    width: 100%;
-  }
-}

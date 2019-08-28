@@ -62,21 +62,17 @@ const USER_REGISTER = gql`
 const LoginModalSwitch = () => (
   <ModalSwitch modalId="loginModal">
     {(open: any) => (
-      <button type="button" className="login" onClick={open}>
+      <Modal.FooterButton onClick={open} bgColor="white">
         <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-        <style jsx>{styles}</style>
-      </button>
+      </Modal.FooterButton>
     )}
   </ModalSwitch>
 )
 
 const LoginRedirection = () => (
-  <Link {...PATHS.AUTH_LOGIN}>
-    <a className="btn login">
-      <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-      <style jsx>{styles}</style>
-    </a>
-  </Link>
+  <Modal.FooterButton is="link" {...PATHS.AUTH_LOGIN} bgColor="white">
+    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+  </Modal.FooterButton>
 )
 
 export const SignUpInitForm: FC<Props> = ({
@@ -303,12 +299,15 @@ export const SignUpInitForm: FC<Props> = ({
             {isInModal && <LoginModalSwitch />}
             {isInPage && <LoginRedirection />}
 
-            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}
                 zh_hans={TEXT.zh_hans.nextStep}
               />
-            </button>
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>

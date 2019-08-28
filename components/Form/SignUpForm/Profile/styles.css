@@ -14,14 +14,3 @@
     color: var(--color-red);
   }
 }
-
-.buttons {
-  & button {
-    @mixin modal-button;
-
-    &[type='submit'] {
-      @mixin modal-button-active;
-      width: 100%;
-    }
-  }
-}

@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
-import Link from 'next/link'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
@@ -100,21 +99,17 @@ const PasswordResetModalSwitch = () => (
 const SignUpModalSwitch = () => (
   <ModalSwitch modalId="signUpModal">
     {(open: any) => (
-      <button type="button" className="register" onClick={open}>
+      <Modal.FooterButton onClick={open} bgColor="white">
         <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-        <style jsx>{styles}</style>
-      </button>
+      </Modal.FooterButton>
     )}
   </ModalSwitch>
 )
 
 const SignUpRedirection = () => (
-  <Link {...PATHS.AUTH_SIGNUP}>
-    <a className="btn register">
-      <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-      <style jsx>{styles}</style>
-    </a>
-  </Link>
+  <Modal.FooterButton is="link" {...PATHS.AUTH_SIGNUP} bgColor="white">
+    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+  </Modal.FooterButton>
 )
 
 const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
@@ -219,9 +214,12 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
             {isInModal && <SignUpModalSwitch />}
             {isInPage && <SignUpRedirection />}
 
-            <button type="submit" disabled={!_isEmpty(errors) || isSubmitting}>
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+            >
               {loginText}
-            </button>
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>

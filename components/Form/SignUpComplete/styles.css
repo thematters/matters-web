@@ -30,11 +30,3 @@ ol {
 .sub-title {
   color: var(--color-black);
 }
-
-.buttons {
-  & button {
-    @mixin modal-button;
-    @mixin modal-button-active;
-    width: 100%;
-  }
-}

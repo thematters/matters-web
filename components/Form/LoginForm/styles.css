@@ -1,15 +1,3 @@
 .form {
   width: 100%;
 }
-
-button,
-.btn {
-  @mixin modal-button;
-
-  &.register {
-    @mixin modal-button-inactive;
-  }
-  &[type='submit'] {
-    @mixin modal-button-active;
-  }
-}

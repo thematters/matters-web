@@ -37,8 +37,8 @@ const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
     </Modal.Content>
 
     <div className="buttons">
-      <button
-        type="button"
+      <Modal.FooterButton
+        width="full"
         onClick={() =>
           redirectToTarget({
             defaultTarget: purpose === 'page' ? 'homepage' : 'current'
@@ -46,7 +46,7 @@ const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
         }
       >
         <Translate zh_hant="進入社區" zh_hans="进入社区" />
-      </button>
+      </Modal.FooterButton>
     </div>
     <style jsx>{styles}</style>
   </div>

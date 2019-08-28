@@ -41,17 +41,3 @@
     }
   }
 }
-
-.buttons {
-  & button {
-    @mixin modal-button;
-  }
-
-  & button.disagree {
-    @mixin modal-button-inactive;
-  }
-
-  & button.agree {
-    @mixin modal-button-active;
-  }
-}
