@@ -179,6 +179,10 @@ select {
   }
 }
 
+label {
+  cursor: pointer;
+}
+
 textarea {
   overflow: auto;
   resize: vertical;

@@ -132,9 +132,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
                 className="button remove"
                 onClick={(event: any) => removeCover(event, update)}
               >
-                <label>
-                  <Translate zh_hant="刪除" zh_hans="删除" />
-                </label>
+                <Translate zh_hant="刪除" zh_hans="删除" />
               </button>
             )}
             <div className="error">

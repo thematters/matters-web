@@ -3,6 +3,11 @@
   height: 0.75rem;
 }
 
+.msmall {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 .small {
   width: 1rem;
   height: 1rem;

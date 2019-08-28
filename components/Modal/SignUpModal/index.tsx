@@ -8,8 +8,6 @@ import { Modal } from '~/components/Modal'
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import styles from './styles.css'
-
 /**
  * This component is for sign up modal.
  *
@@ -71,8 +69,6 @@ const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
         <SignUpProfileForm purpose="modal" submitCallback={profileCallback} />
       )}
       {step === 'complete' && <SignUpComplete />}
-
-      <style jsx>{styles}</style>
     </>
   )
 }
