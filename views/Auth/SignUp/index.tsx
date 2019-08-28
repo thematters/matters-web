@@ -2,11 +2,7 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
-import {
-  SignUpFollowForm,
-  SignUpInitForm,
-  SignUpProfileForm
-} from '~/components/Form/SignUpForm'
+import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 
@@ -18,6 +14,14 @@ type Step = 'signUp' | 'profile' | 'follow' | 'complete'
 
 const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
+
+  const signUpCallback = ({ email, codeId, password }: any) => {
+    setStep('profile')
+  }
+
+  const profileCallback = () => {
+    setStep('complete')
+  }
 
   const { updateHeaderState } = useContext(HeaderContext)
   useEffect(() => {
@@ -35,11 +39,6 @@ const SignUp = () => {
     'l-offset-lg-3',
     'container'
   )
-  const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
-
-  const signUpCallback = () => setStep('profile')
-  const signUpProfileCallback = () => setStep('follow')
-  const signUpFollowCallback = () => setStep('complete')
 
   return (
     <>
@@ -53,30 +52,15 @@ const SignUp = () => {
 
         <article className={containerClass}>
           {step === 'signUp' && (
-            <SignUpInitForm
-              extraClass={childClass}
-              purpose="page"
-              submitCallback={signUpCallback}
-            />
+            <SignUpInitForm purpose="page" submitCallback={signUpCallback} />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
-              extraClass={childClass}
               purpose="page"
-              submitCallback={signUpProfileCallback}
+              submitCallback={profileCallback}
             />
           )}
-          {step === 'follow' && (
-            <SignUpFollowForm
-              purpose="page"
-              submitCallback={signUpFollowCallback}
-            />
-          )}
-          {step === 'complete' && (
-            <div className={classNames(childClass)}>
-              <SignUpComplete purpose="page" />
-            </div>
-          )}
+          {step === 'complete' && <SignUpComplete purpose="page" />}
         </article>
       </main>
       <style jsx>{styles}</style>

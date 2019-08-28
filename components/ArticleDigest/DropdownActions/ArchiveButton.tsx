@@ -1,6 +1,6 @@
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
-import MUTATION_ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
+import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
@@ -13,7 +13,7 @@ const ArchiveButton: React.FC<{
 }> = ({ articleId, hideDropdown, refetch }) => {
   return (
     <Mutation
-      mutation={MUTATION_ARCHIVE_ARTICLE}
+      mutation={ARCHIVE_ARTICLE}
       variables={{ id: articleId }}
       optimisticResponse={{
         archiveArticle: {

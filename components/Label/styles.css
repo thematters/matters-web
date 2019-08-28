@@ -7,6 +7,7 @@
 .small {
   padding: var(--spacing-xxx-tight) var(--spacing-x-tight);
   font-size: var(--font-size-xs);
+  border-radius: 2px;
 }
 
 .default {

@@ -20,12 +20,8 @@ import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 import styles from './styles.css'
 
 const ARTICLE_APPRECIATORS = gql`
-  query AllArticleAppreciators(
-    $mediaHash: String
-    $uuid: UUID
-    $cursor: String
-  ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
+  query AllArticleAppreciators($mediaHash: String, $cursor: String) {
+    article(input: { mediaHash: $mediaHash }) {
       id
       appreciators(input: { first: 10, after: $cursor }) {
         totalCount
@@ -48,16 +44,15 @@ const ARTICLE_APPRECIATORS = gql`
 
 const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const uuid = getQuery({ router, key: 'post' })
 
-  if (!mediaHash && !uuid) {
+  if (!mediaHash) {
     return null
   }
 
   return (
     <ModalInstance modalId="appreciatorsModal">
       {(props: ModalInstanceProps) => (
-        <Query query={ARTICLE_APPRECIATORS} variables={{ mediaHash, uuid }}>
+        <Query query={ARTICLE_APPRECIATORS} variables={{ mediaHash }}>
           {({
             data,
             loading,

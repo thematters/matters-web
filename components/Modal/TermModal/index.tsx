@@ -6,13 +6,12 @@ import { FC, useContext } from 'react'
 import { Mutation } from '~/components/GQL'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
+import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
-import termStyles from '~/common/styles/utils/content.article.css'
-import Privacy from '~/common/texts/privacy'
-import ToS from '~/common/texts/tos'
 import { translate } from '~/common/utils'
 
+import { Modal } from '..'
 import styles from './styles.css'
 
 /**
@@ -25,7 +24,7 @@ import styles from './styles.css'
  * ```
  */
 
-const MUTATION_UPDATE_AGREE_ON = gql`
+const UPDATE_AGREE_ON = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -36,7 +35,7 @@ const MUTATION_UPDATE_AGREE_ON = gql`
   }
 `
 
-const MUTATION_USER_LOGOUT = gql`
+const USER_LOGOUT = gql`
   mutation UserLogout {
     userLogout
   }
@@ -58,30 +57,6 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
     }
   }
 
-  const Term = () => (
-    <>
-      <div
-        className="u-content"
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...ToS,
-            lang
-          })
-        }}
-      />
-      <div
-        className="u-content"
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...Privacy,
-            lang
-          })
-        }}
-      />
-      <style jsx>{termStyles}</style>
-    </>
-  )
-
   const BaseForm = (props: any) => (
     <>
       <form className="form" onSubmit={props.handleSubmit}>
@@ -101,22 +76,21 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
           </div>
         </div>
         <div className="buttons">
-          <Mutation mutation={MUTATION_USER_LOGOUT}>
+          <Mutation mutation={USER_LOGOUT}>
             {logout => (
-              <button
-                type="button"
-                className="disagree"
+              <Modal.FooterButton
                 onClick={() => disagree(logout)}
+                bgColor="white"
               >
                 {translate({
                   zh_hant: TEXT.zh_hant.disagree,
                   zh_hans: TEXT.zh_hans.disagree,
                   lang
                 })}
-              </button>
+              </Modal.FooterButton>
             )}
           </Mutation>
-          <button type="submit" className="agree" disabled={props.isSubmitting}>
+          <Modal.FooterButton htmlType="submit" disabled={props.isSubmitting}>
             {props.isSubmitting && <IconSpinner />}
             {!props.isSubmitting &&
               translate({
@@ -124,7 +98,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
                 zh_hans: TEXT.zh_hans.agreeAndContinue,
                 lang
               })}
-          </button>
+          </Modal.FooterButton>
         </div>
       </form>
       <style jsx>{styles}</style>
@@ -151,7 +125,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
   })(BaseForm)
 
   return (
-    <Mutation mutation={MUTATION_UPDATE_AGREE_ON}>
+    <Mutation mutation={UPDATE_AGREE_ON}>
       {update => <TermForm submitAction={update} />}
     </Mutation>
   )

@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 
-import { Button } from '~/components/Button'
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -43,32 +42,24 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
               zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
             />
           </Modal.Content>
-          <div className="ask-buttons">
-            <Button
-              type="button"
-              bgColor="transparent"
-              size="xlarge"
-              onClick={close}
-            >
+          <div className="buttons">
+            <Modal.FooterButton bgColor="white" onClick={close}>
               <Translate
                 zh_hant={TEXT.zh_hant.cancel}
                 zh_hans={TEXT.zh_hans.cancel}
               />
-            </Button>
-            <Button
-              type="button"
-              bgColor="transparent"
-              className="u-link-green"
-              size="xlarge"
-              onClick={askCallback}
-            >
-              <Translate zh_hant="確定" zh_hans="确定" />
-            </Button>
+            </Modal.FooterButton>
+            <Modal.FooterButton onClick={askCallback}>
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
+              />
+            </Modal.FooterButton>
           </div>
         </>
       )}
       {step !== 'ask' && (
-        <Modal.Content>
+        <>
           {step === 'confirm' && (
             <UserNameChangeConfirmForm submitCallback={confirmCallback} />
           )}
@@ -82,7 +73,7 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
               }
             />
           )}
-        </Modal.Content>
+        </>
       )}
       <style jsx>{styles}</style>
     </>

@@ -41,7 +41,11 @@ export const isValidDisplayName = (name: string): boolean => {
  * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
  */
 export const isValidUserName = (name: string): boolean => {
-  if (!name || name.length > 40 || INVALID_NAMES.includes(name.toLowerCase())) {
+  if (
+    !name ||
+    (name.length < 4 || name.length > 15) ||
+    INVALID_NAMES.includes(name.toLowerCase())
+  ) {
     return false
   }
   return /^[a-zA-Z0-9_]*$/.test(name)

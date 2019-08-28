@@ -13,7 +13,7 @@ import { PinButtonComment } from './__generated__/PinButtonComment'
 import styles from './styles.css'
 
 const PIN_COMMENT = gql`
-  mutation pinComment($id: ID!) {
+  mutation PinComment($id: ID!) {
     pinComment(input: { id: $id }) {
       id
       pinned
@@ -27,7 +27,7 @@ const PIN_COMMENT = gql`
 `
 
 const UNPIN_COMMENT = gql`
-  mutation unpinComment($id: ID!) {
+  mutation UnpinComment($id: ID!) {
     unpinComment(input: { id: $id }) {
       id
       pinned

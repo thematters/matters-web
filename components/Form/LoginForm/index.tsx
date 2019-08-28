@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import {
@@ -19,7 +20,7 @@ import {
 } from '~/common/enums'
 import {
   analytics,
-  clearPersistCache,
+  // clearPersistCache,
   isValidEmail,
   redirectToTarget,
   translate
@@ -47,13 +48,69 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_USER_LOGIN = gql`
+export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
     userLogin(input: $input) {
       auth
     }
   }
 `
+
+const PasswordResetRedirectButton = () => (
+  <>
+    <Button
+      is="link"
+      bgColor="transparent"
+      className="u-link-green"
+      spacing="none"
+      href={PATHS.AUTH_FORGET.href}
+      as={PATHS.AUTH_FORGET.as}
+    >
+      <Translate
+        zh_hant={TEXT.zh_hant.forgetPassword}
+        zh_hans={TEXT.zh_hans.forgetPassword}
+      />
+      ？
+    </Button>
+    <style jsx>{styles}</style>
+  </>
+)
+
+const PasswordResetModalSwitch = () => (
+  <ModalSwitch modalId="passwordResetModal">
+    {(open: any) => (
+      <Button
+        is="button"
+        bgColor="transparent"
+        className="u-link-green"
+        spacing="none"
+        onClick={open}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.forgetPassword}
+          zh_hans={TEXT.zh_hans.forgetPassword}
+        />
+        ？
+      </Button>
+    )}
+  </ModalSwitch>
+)
+
+const SignUpModalSwitch = () => (
+  <ModalSwitch modalId="signUpModal">
+    {(open: any) => (
+      <Modal.FooterButton onClick={open} bgColor="white">
+        <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+      </Modal.FooterButton>
+    )}
+  </ModalSwitch>
+)
+
+const SignUpRedirection = () => (
+  <Modal.FooterButton is="link" {...PATHS.AUTH_SIGNUP} bgColor="white">
+    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+  </Modal.FooterButton>
+)
 
 const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
   const { lang } = useContext(LanguageContext)
@@ -93,48 +150,6 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     }
   }
 
-  const PasswordResetRedirectButton = () => (
-    <>
-      <Button
-        is="link"
-        bgColor="transparent"
-        className="u-link-green"
-        spacing="none"
-        href={PATHS.AUTH_FORGET.href}
-        as={PATHS.AUTH_FORGET.as}
-      >
-        {translate({
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword,
-          lang
-        })}
-        ？
-      </Button>
-      <style jsx>{styles}</style>
-    </>
-  )
-
-  const PasswordResetModalSwitch = () => (
-    <ModalSwitch modalId="passwordResetModal">
-      {(open: any) => (
-        <Button
-          is="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({
-            zh_hant: TEXT.zh_hant.forgetPassword,
-            zh_hans: TEXT.zh_hans.forgetPassword,
-            lang
-          })}
-          ？
-        </Button>
-      )}
-    </ModalSwitch>
-  )
-
   const BaseForm = ({
     values,
     errors,
@@ -169,38 +184,42 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
-              {loginText}
-            </Button>
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              placeholder={emailPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="password"
+              field="password"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+
             {isInModal && <PasswordResetModalSwitch />}
             {isInPage && <PasswordResetRedirectButton />}
+          </Modal.Content>
+
+          <div className="buttons">
+            {isInModal && <SignUpModalSwitch />}
+            {isInPage && <SignUpRedirection />}
+
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+            >
+              {loginText}
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -251,7 +270,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
           analytics.identifyUser()
           analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
 
-          await clearPersistCache()
+          // await clearPersistCache()
           redirectToTarget({
             defaultTarget: !!isInPage ? 'homepage' : 'current'
           })
@@ -300,7 +319,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
 
   return (
     <>
-      <Mutation mutation={MUTATION_USER_LOGIN}>
+      <Mutation mutation={USER_LOGIN}>
         {login => <MainForm submitAction={login} />}
       </Mutation>
       <style jsx>{styles}</style>

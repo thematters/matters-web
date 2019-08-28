@@ -1,7 +1,7 @@
 .container {
   position: relative;
 
-  & + .container {
+  & + :global(.container) {
     margin-top: var(--spacing-x-tight);
   }
 
@@ -36,7 +36,7 @@
 
 .info {
   font-size: var(--font-size-xs);
-  min-height: 1rem;
+  min-height: calc(var(--font-size-xs) * var(--line-height-base));
   margin-top: 0.4rem;
   padding-left: var(--spacing-x-tight);
 

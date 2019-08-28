@@ -9,7 +9,7 @@ import { DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
-  mutation updateLanguage($input: UpdateUserInfoInput!) {
+  mutation UpdateLanguage($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
       settings {
