@@ -51,9 +51,9 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
       </Modal.Content>
 
       <div className="buttons">
-        <button className="save" onClick={close}>
+        <Modal.FooterButton onClick={close} bgColor="white">
           <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
-        </button>
+        </Modal.FooterButton>
 
         <Mutation
           mutation={PUBLISH_ARTICLE}
@@ -67,8 +67,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
           }}
         >
           {(publish, loading) => (
-            <button
-              className="publish"
+            <Modal.FooterButton
               disabled={!publishable}
               onClick={async () => {
                 const { data }: any = await publish({ variables: { draftId } })
@@ -84,7 +83,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
               }}
             >
               <Translate zh_hant="發佈作品" zh_hans="发布作品" />
-            </button>
+            </Modal.FooterButton>
           )}
         </Mutation>
       </div>

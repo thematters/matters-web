@@ -13,7 +13,6 @@ interface Props {
   children?: any
   className?: string[]
   field: string
-  style?: { [key: string]: any }
 
   values: any
   errors: any
@@ -28,7 +27,6 @@ const CheckBox: FC<Props> = ({
   children,
   className = [],
   field,
-  style,
 
   values,
   errors,
@@ -42,12 +40,6 @@ const CheckBox: FC<Props> = ({
 
   const inputClass = classNames('input', ...className)
 
-  const checkStyle = {
-    width: 17,
-    marginRight: '0.25rem',
-    cursor: 'pointer'
-  }
-
   const checkIcon =
     value === true
       ? ICON_CHECK_ACTIVE
@@ -55,16 +47,16 @@ const CheckBox: FC<Props> = ({
       ? ICON_CHECK_ERROR
       : ICON_CHECK_INACTIVE
 
-  const click = () => setFieldValue(field, !value, false)
+  const click = () => setFieldValue(field, !value)
 
   return (
     <>
       <div className="container">
-        <div className="check">
+        <label className="check">
           <Icon
-            style={checkStyle}
             id={checkIcon.id}
             viewBox={checkIcon.viewBox}
+            size="small"
             onClick={click}
           />
           <input
@@ -72,9 +64,8 @@ const CheckBox: FC<Props> = ({
             type="checkbox"
             name={field}
             value={value}
-            style={style}
           />
-        </div>
+        </label>
         <div className="description">{children}</div>
       </div>
       <style jsx>{styles}</style>

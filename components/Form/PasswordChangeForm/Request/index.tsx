@@ -1,15 +1,14 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
@@ -70,26 +69,6 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     }
   }
 
-  const LoginModalSwitch = () => (
-    <ModalSwitch modalId="loginModal">
-      {(open: any) => (
-        <Button
-          type="button"
-          bgColor="transparent"
-          className="u-link-green"
-          spacing="none"
-          onClick={open}
-        >
-          {translate({
-            zh_hant: TEXT.zh_hant.previousStep,
-            zh_hans: TEXT.zh_hans.previousStep,
-            lang
-          })}
-        </Button>
-      )}
-    </ModalSwitch>
-  )
-
   const BaseForm = ({
     values,
     errors,
@@ -126,51 +105,48 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            disabled={!!defaultEmail}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="password_reset"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              placeholder={emailPlaceholder}
+              values={values}
+              errors={errors}
+              disabled={!!defaultEmail}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="text"
+              field="code"
+              placeholder={codePlaceholder}
+              floatElement={
+                <SendCodeButton
+                  email={values.email}
+                  lang={lang}
+                  type="password_reset"
+                />
+              }
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
+            <Modal.FooterButton
+              width="full"
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
             >
-              {translate({
-                zh_hant: TEXT.zh_hant.nextStep,
-                zh_hans: TEXT.zh_hans.nextStep,
-                lang
-              })}
-            </Button>
-            {container === 'modal' && purpose === 'forget' && (
-              <LoginModalSwitch />
-            )}
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>

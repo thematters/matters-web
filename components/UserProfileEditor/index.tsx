@@ -1,5 +1,6 @@
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
 import { Button } from '~/components/Button'
@@ -138,7 +139,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
               type="submit"
               bgColor="green"
               style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
+              disabled={!_isEmpty(errors) || isSubmitting}
               icon={
                 isSubmitting ? (
                   <IconSpinner />
@@ -155,7 +156,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
               textColor="grey"
               textWeight="normal"
               spacing="default"
-              disabled={isSubmitting}
+              disabled={!_isEmpty(errors) || isSubmitting}
               onClick={() => setEditing(false)}
             >
               <Translate

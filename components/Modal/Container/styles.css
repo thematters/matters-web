@@ -19,7 +19,8 @@
 
 .container {
   background-color: var(--color-white);
-  border-radius: 2px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 @keyframes modalFadeIn {

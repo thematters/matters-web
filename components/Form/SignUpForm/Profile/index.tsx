@@ -1,21 +1,17 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
-import { queries as HOME_FEED } from '~/views/Home/Feed'
-import { HOME_TODAY } from '~/views/Home/MattersToday'
-import { SIDEBAR_ICYMI } from '~/views/Home/Sidebar/Icymi'
-import { SIDEBAR_TOPICS } from '~/views/Home/Sidebar/Topics'
 
-import { Button } from '~/components/Button'
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { isValidDisplayName, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -80,11 +76,18 @@ export const SignUpProfileForm: FC<Props> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
+    setFieldError
   }: {
     [key: string]: any
   }) => {
     const formClass = classNames('form', ...extraClass)
+
+    const displayNamePlaceholder = translate({
+      zh_hant: '姓名',
+      zh_hans: '姓名',
+      lang
+    })
 
     const descriptionPlaceholder = translate({
       zh_hant: '介紹你自己，獲得更多社區關注',
@@ -92,41 +95,54 @@ export const SignUpProfileForm: FC<Props> = ({
       lang
     })
 
-    const nextText = translate({
-      zh_hant: TEXT.zh_hant.nextStep,
-      zh_hans: TEXT.zh_hans.nextStep,
-      lang
-    })
-
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <SignUpAvatarUploader
-            field="avatar"
-            lang={lang}
-            uploadCallback={setFieldValue}
-          />
-          <AvatarError field="avatar" errors={errors} touched={touched} />
-          <Form.Textarea
-            field="description"
-            placeholder={descriptionPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            style={{ height: '5rem' }}
-          />
+          <Modal.Content>
+            <SignUpAvatarUploader
+              field="avatar"
+              lang={lang}
+              uploadCallback={setFieldValue}
+            />
+            <AvatarError field="avatar" errors={errors} touched={touched} />
+            <Form.Input
+              type="text"
+              field="displayName"
+              placeholder={displayNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Textarea
+              field="description"
+              placeholder={descriptionPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              style={{ height: '5rem' }}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.descriptionHint,
+                zh_hans: TEXT.zh_hans.descriptionHint,
+                lang
+              })}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              width="full"
             >
-              {nextText}
-            </Button>
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -140,6 +156,24 @@ export const SignUpProfileForm: FC<Props> = ({
       result = {
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
+      }
+    }
+    if (result) {
+      return translate({ ...result, lang: language })
+    }
+  }
+
+  const validateDisplayName = (value: string, language: string) => {
+    let result: any
+    if (!value) {
+      result = {
+        zh_hant: TEXT.zh_hant.required,
+        zh_hans: TEXT.zh_hans.required
+      }
+    } else if (!isValidDisplayName(value)) {
+      result = {
+        zh_hant: TEXT.zh_hant.displayNameHint,
+        zh_hans: TEXT.zh_hans.displayNameHint
       }
     }
     if (result) {
@@ -163,60 +197,58 @@ export const SignUpProfileForm: FC<Props> = ({
   const MainForm: any = withFormik({
     mapPropsToValues: () => ({
       avatar: null,
+      displayName: '',
       description: ''
     }),
 
-    validate: ({ avatar, description }) => {
+    validate: ({ avatar, displayName, description }) => {
       const isValidAvatar = validateAvatar(avatar, lang)
+      const isInvalidDisplayName = validateDisplayName(displayName, lang)
       const isValidDescription = validateDescription(description, lang)
       const errors = {
         ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
+        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
         ...(isValidDescription ? { description: isValidDescription } : {})
       }
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
-      const { avatar, description } = values
+    handleSubmit: async (values, { props, setSubmitting }: any) => {
+      const { avatar, displayName, description } = values
       const { submitAction } = props
       if (!submitAction) {
         return undefined
       }
-      const inputs = {
-        description,
-        ...(avatar ? { avatar } : {})
-      }
 
-      submitAction({ variables: { input: inputs } })
-        .then(({ data }: any) => {
-          if (submitCallback) {
-            submitCallback()
+      try {
+        await submitAction({
+          variables: {
+            input: {
+              displayName,
+              description,
+              ...(avatar ? { avatar } : {})
+            }
           }
         })
-        .catch((result: any) => {
-          // TODO: Handle error
-        })
-        .finally(() => {
-          setSubmitting(false)
-        })
+      } catch (e) {
+        // do not block the next step since register is successfully
+        console.error(e)
+      }
+
+      if (submitCallback) {
+        submitCallback()
+      }
+
+      setSubmitting(false)
     }
   })(BaseForm)
 
-  const relatedQueries =
-    purpose === 'modal'
-      ? [
-          { query: HOME_FEED.hottest },
-          { query: HOME_TODAY },
-          { query: SIDEBAR_ICYMI },
-          { query: SIDEBAR_TOPICS }
-        ]
-      : []
-
   return (
     <>
-      <Mutation mutation={UPDATE_USER_INFO} refetchQueries={relatedQueries}>
+      <Mutation mutation={UPDATE_USER_INFO}>
         {update => <MainForm submitAction={update} />}
       </Mutation>
+
       <style jsx>{styles}</style>
     </>
   )
