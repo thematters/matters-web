@@ -6,3 +6,10 @@ export const isSafari = () => {
   const match = userAgent.match(/version\/(\d+).+?safari/)
   return match !== null
 }
+
+export const isMobile = () => {
+  const userAgent = getUserAgent()
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    userAgent
+  )
+}

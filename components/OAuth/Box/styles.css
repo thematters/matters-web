@@ -15,8 +15,8 @@
 }
 
 header {
+  padding: 0 var(--spacing-loose);
   margin-top: calc(var(--box-avatar-size) / 2 * -1);
-  text-align: center;
 
   & :global(.avatar) {
     display: block;
@@ -28,9 +28,18 @@ header {
 
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-md);
+
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
   }
 
   @media (--md-up) {
+    padding: 0 var(--spacing-xx-loose);
+
     & :global(.avatar) {
       width: var(--box-avatar-size);
       height: var(--box-avatar-size);
