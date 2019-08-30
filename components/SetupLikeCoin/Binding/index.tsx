@@ -39,8 +39,6 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep }) => {
       {({ data, loading, error }: QueryResult) => {
         const likerId = _get(data, 'viewer.likerId')
 
-        console.log(polling, polling ? 1000 : undefined)
-
         if (likerId) {
           nextStep()
           return null

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import Binding from './Binding'
 import Complete from './Complete'
-// import Generating from './Generating'
+import Generating from './Generating'
 import Select from './Select'
 
 interface Props {
@@ -26,9 +26,9 @@ const SetupLikeCoin: React.FC<Props> = () => {
           startBind={() => setStep('binding')}
         />
       )}
-      {/* {step === 'generating' && (
+      {step === 'generating' && (
         <Generating prevStep={backToSelect} nextStep={complete} />
-      )} */}
+      )}
       {step === 'binding' && (
         <Binding prevStep={backToSelect} nextStep={complete} />
       )}

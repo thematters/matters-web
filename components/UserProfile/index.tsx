@@ -183,7 +183,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                         user={!isMe && viewer.isInactive ? undefined : user}
                       />
                       {!isMe && (
-                        <section className="action-button">
+                        <section className="buttons">
                           <FollowButton user={user} size="default" />
                           <span className="u-sm-up-hide">
                             <ShareButton />
@@ -228,7 +228,7 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                             </span>
                           )}
                         </section>
-                        <section className="action-button">
+                        <section className="buttons">
                           {isMe && !viewer.isInactive && (
                             <EditProfileButton setEditing={setEditing} />
                           )}

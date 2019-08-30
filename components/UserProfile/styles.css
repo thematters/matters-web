@@ -103,7 +103,7 @@
   }
 }
 
-.action-button {
+.buttons {
   position: absolute;
   top: -12px; /* position hack in small device */
   right: 0;
