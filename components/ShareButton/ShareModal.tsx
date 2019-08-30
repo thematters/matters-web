@@ -4,7 +4,6 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
-import { TextIcon } from '~/components/TextIcon'
 
 import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
@@ -59,22 +58,14 @@ const ShareModal = () => {
             </div>
 
             <div className="link-container">
-              <TextIcon
-                icon={
-                  <Icon
-                    id={ICON_SHARE_LINK.id}
-                    viewBox={ICON_SHARE_LINK.viewBox}
-                    size="xsmall"
-                    onClick={copy}
-                  />
-                }
-                spacing="xtight"
-                textPlacement="left"
-              >
-                <button onClick={copy} type="button">
-                  <Translate zh_hant="點擊複製" zh_hans="点击复制" />
-                </button>
-              </TextIcon>
+              <button onClick={copy} type="button">
+                <Icon
+                  id={ICON_SHARE_LINK.id}
+                  viewBox={ICON_SHARE_LINK.viewBox}
+                  size="xsmall"
+                />
+              </button>
+
               <input
                 id="shareLinkInput"
                 type="text"

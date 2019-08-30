@@ -27,7 +27,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { analytics, getQuery } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import Collection from './Collection'
@@ -43,12 +43,11 @@ import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
     $mediaHash: String
-    $uuid: UUID
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
+    article(input: { mediaHash: $mediaHash }) {
       id
       title
       slug
@@ -104,14 +103,13 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   const [fixedToolbar, setFixedToolbar] = useState(true)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const uuid = getQuery({ router, key: 'post' })
 
-  if (!mediaHash && !uuid) {
+  if (!mediaHash) {
     return null
   }
 
   return (
-    <Query query={ARTICLE_DETAIL} variables={{ mediaHash, uuid }}>
+    <Query query={ARTICLE_DETAIL} variables={{ mediaHash }}>
       {({
         data,
         loading,
@@ -130,17 +128,6 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                     <Placeholder.ArticleDetail />
                   </Block>
                 )
-              }
-
-              // redirect to latest verion of URL Pattern
-              if (uuid && process.browser && router) {
-                const path = toPath({
-                  page: 'articleDetail',
-                  userName: data.article.author.userName,
-                  slug: data.article.slug,
-                  mediaHash: data.article.mediaHash
-                })
-                router.push(path.href, path.as, { shallow: true })
               }
 
               if (data.article.state !== 'active' && viewer.id !== authorId) {

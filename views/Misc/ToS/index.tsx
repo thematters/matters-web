@@ -1,18 +1,11 @@
-import { useContext } from 'react'
-
-import { Head, LanguageContext, PageHeader, Translate } from '~/components'
+import { Head, PageHeader, Translate } from '~/components'
+import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
-import styles from '~/common/styles/utils/content.article.css'
-import Privacy from '~/common/texts/privacy'
-import ToS from '~/common/texts/tos'
-import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
 
 export default () => {
-  const { lang } = useContext(LanguageContext)
-
   return (
     <main>
       <Head
@@ -36,26 +29,9 @@ export default () => {
             }
             is="h2"
           />
-          <section
-            dangerouslySetInnerHTML={{
-              __html: translate({
-                ...ToS,
-                lang
-              })
-            }}
-            className="u-content"
-          />
-          <section
-            dangerouslySetInnerHTML={{
-              __html: translate({
-                ...Privacy,
-                lang
-              })
-            }}
-            className="u-content"
-          />
+
+          <Term />
         </article>
-        <style jsx>{styles}</style>
       </section>
     </main>
   )

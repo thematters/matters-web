@@ -10,7 +10,7 @@ import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 import styles from './styles.css'
 
 const DELETE_COMMENT = gql`
-  mutation deleteComment($id: ID!) {
+  mutation DeleteComment($id: ID!) {
     deleteComment(input: { id: $id }) {
       id
       state

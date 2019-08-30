@@ -5,7 +5,6 @@ import { ArticleDetailComments } from '../fragments/article'
 export default gql`
   query ArticleComments(
     $mediaHash: String
-    $uuid: UUID
     $cursor: String
     $first: Int = 10
     $hasDescendantComments: Boolean = true
@@ -13,7 +12,7 @@ export default gql`
     $includeAfter: Boolean
     $includeBefore: Boolean
   ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
+    article(input: { mediaHash: $mediaHash }) {
       id
       mediaHash
       live

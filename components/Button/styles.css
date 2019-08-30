@@ -90,7 +90,7 @@
   padding: 0 var(--spacing-loose);
 }
 
-/* color */
+/* background color */
 .bg-gold {
   color: var(--color-white);
   background: var(--color-matters-gold);
@@ -148,6 +148,7 @@
   background: transparent;
 }
 
+/* outline color */
 .outline {
   border: 2px solid transparent;
 }
@@ -178,6 +179,25 @@
 .outline-grey {
   color: var(--color-grey-dark);
   border-color: var(--color-grey);
+}
+
+/* text color */
+.text-white {
+  color: var(--color-white);
+}
+.text-black {
+  color: var(--color-black);
+}
+.text-grey {
+  color: var(--color-grey);
+}
+
+/* text weight */
+.text-weight-light {
+  font-weight: var(--font-weight-light);
+}
+.text-weight-normal {
+  font-weight: var(--font-weight-normal);
 }
 
 /* shape */

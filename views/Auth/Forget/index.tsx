@@ -1,25 +1,24 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
+import { Title } from '~/components'
 import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
-import { LanguageContext } from '~/components/Language'
+import { Translate } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 const Forget = () => {
-  const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'rest'
+      next: 'reset'
     },
     reset: {
       prev: 'request',
@@ -43,7 +42,6 @@ const Forget = () => {
     'l-offset-lg-3',
     'container'
   )
-  const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
@@ -60,32 +58,8 @@ const Forget = () => {
     setStep('reset')
   }
   const backPreviousStep = (event: any) => {
-    event.stopPropagation()
     setStep('request')
   }
-
-  const Complete = () => (
-    <>
-      <div className="complete">
-        <div className="message">
-          {translate({
-            zh_hant: TEXT.zh_hant.resetPasswordSuccess,
-            zh_hans: TEXT.zh_hans.resetPasswordSuccess,
-            lang
-          })}
-        </div>
-        <div className="hint">
-          {translate({
-            zh_hant: TEXT.zh_hant.useNewPassword,
-            zh_hans: TEXT.zh_hans.useNewPassword,
-            lang
-          })}
-          。
-        </div>
-      </div>
-      <style jsx>{styles}</style>
-    </>
-  )
 
   return (
     <>
@@ -101,7 +75,6 @@ const Forget = () => {
           {step === 'request' && (
             <PasswordChangeRequestForm
               defaultEmail={data.request.email}
-              extraClass={formClass}
               purpose="forget"
               container="page"
               submitCallback={requestCodeCallback}
@@ -109,14 +82,30 @@ const Forget = () => {
           )}
           {step === 'reset' && (
             <PasswordChangeConfirmForm
-              extraClass={formClass}
               codeId={data.request.codeId}
               container="page"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
             />
           )}
-          {step === 'complete' && <Complete />}
+          {step === 'complete' && (
+            <div className="complete">
+              <Title is="h3" type="modal-headline">
+                <Translate
+                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                />
+              </Title>
+
+              <p className="hint">
+                <Translate
+                  zh_hant={TEXT.zh_hant.useNewPassword}
+                  zh_hans={TEXT.zh_hans.useNewPassword}
+                />
+                。
+              </p>
+            </div>
+          )}
         </article>
       </main>
       <style jsx>{styles}</style>

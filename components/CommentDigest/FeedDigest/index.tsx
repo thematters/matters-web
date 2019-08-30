@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
@@ -28,8 +29,8 @@ const fragments = {
 }
 
 const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
-  <>
-    <span className="reply-to">
+  <section className="reply-to">
+    <span className="wording">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
     <UserDigest.Mini
@@ -40,7 +41,7 @@ const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
       hasUserName={inArticle}
     />
     <style jsx>{styles}</style>
-  </>
+  </section>
 )
 
 const PinnedLabel = () => (
@@ -71,15 +72,27 @@ const DescendantComment = ({
   inArticle?: boolean
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
+  const containerClass = classNames({
+    container: true,
+    'in-article': inArticle
+  })
 
   return (
-    <section className="container" id={comment.id}>
+    <section
+      className={containerClass}
+      id={
+        comment.parentComment
+          ? `${comment.parentComment.id}-${comment.id}`
+          : comment.id
+      }
+    >
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
             user={comment.author}
             avatarSize="xsmall"
             textWeight="medium"
+            textSize="msmall"
             hasUserName={inArticle}
           />
           {comment.replyTo &&
@@ -145,9 +158,20 @@ const FeedDigest = ({
   const [expand, setExpand] = useState(
     defaultExpand || restDescendantCommentCount <= 0
   )
+  const containerClass = classNames({
+    container: true,
+    'in-article': inArticle
+  })
 
   return (
-    <section className="container" id={comment.id}>
+    <section
+      className={containerClass}
+      id={
+        comment.parentComment
+          ? `${comment.parentComment.id}-${comment.id}`
+          : comment.id
+      }
+    >
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini

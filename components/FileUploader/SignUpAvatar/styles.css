@@ -1,6 +1,10 @@
 .container {
   @mixin flex-center-space-between;
   font-size: var(--font-size-md);
+
+  & .avatar {
+    flex-shrink: 0;
+  }
 }
 
 .upload {

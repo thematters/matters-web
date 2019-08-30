@@ -5,7 +5,6 @@ import { ArticleDetailResponses } from '../fragments/response'
 export default gql`
   query ArticleResponses(
     $mediaHash: String
-    $uuid: UUID
     $before: String
     $cursor: String
     $first: Int = 8
@@ -17,7 +16,7 @@ export default gql`
     $hasArticleDigestActionTopicScore: Boolean = false
     $articleOnly: Boolean
   ) {
-    article(input: { mediaHash: $mediaHash, uuid: $uuid }) {
+    article(input: { mediaHash: $mediaHash }) {
       id
       mediaHash
       live

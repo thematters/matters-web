@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 
 import { Avatar } from '~/components/Avatar'
 import { Mutation } from '~/components/GQL'
-import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
@@ -29,7 +29,7 @@ interface Props {
   user?: any
 }
 
-const MUTATION_UPDATE_USER_INFO = gql`
+const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
@@ -120,9 +120,9 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
   )
 
   return (
-    <Mutation mutation={MUTATION_UPDATE_USER_INFO}>
+    <Mutation mutation={UPDATE_USER_INFO}>
       {update => (
-        <Mutation mutation={MUTATION_UPLOAD_FILE}>
+        <Mutation mutation={UPLOAD_FILE}>
           {upload => <Uploader upload={upload} update={update} />}
         </Mutation>
       )}

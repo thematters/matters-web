@@ -5,7 +5,6 @@ import {
   EmailChangeRequestForm
 } from '~/components/Form/EmailChangeForm'
 import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -55,30 +54,28 @@ const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <>
-      <Modal.Content>
-        {step === 'request' && (
-          <EmailChangeRequestForm
-            defaultEmail={data.request.email}
-            submitCallback={requestCallback}
-          />
-        )}
-        {step === 'confirm' && (
-          <EmailChangeConfirmForm
-            oldData={data.request}
-            submitCallback={confirmCallback}
-          />
-        )}
-        {step === 'complete' && (
-          <ModalComplete
-            message={
-              <Translate
-                zh_hant={TEXT.zh_hant.changeEmailSuccess}
-                zh_hans={TEXT.zh_hans.changeEmailSuccess}
-              />
-            }
-          />
-        )}
-      </Modal.Content>
+      {step === 'request' && (
+        <EmailChangeRequestForm
+          defaultEmail={data.request.email}
+          submitCallback={requestCallback}
+        />
+      )}
+      {step === 'confirm' && (
+        <EmailChangeConfirmForm
+          oldData={data.request}
+          submitCallback={confirmCallback}
+        />
+      )}
+      {step === 'complete' && (
+        <ModalComplete
+          message={
+            <Translate
+              zh_hant={TEXT.zh_hant.changeEmailSuccess}
+              zh_hans={TEXT.zh_hans.changeEmailSuccess}
+            />
+          }
+        />
+      )}
     </>
   )
 }

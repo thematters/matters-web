@@ -35,7 +35,7 @@ interface Props {
     | 'email_verify'
 }
 
-export const MUTATION_SEND_CODE = gql`
+export const SEND_CODE = gql`
   mutation SendVerificationCode($input: SendVerificationCodeInput!) {
     sendVerificationCode(input: $input)
   }
@@ -84,7 +84,7 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
 
   return (
     <>
-      <Mutation mutation={MUTATION_SEND_CODE}>
+      <Mutation mutation={SEND_CODE}>
         {send => (
           <Button
             is="button"

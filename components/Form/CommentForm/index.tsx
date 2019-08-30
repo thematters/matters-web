@@ -28,7 +28,7 @@ const CommentEditor = dynamic(
 )
 
 export const PUT_COMMENT = gql`
-  mutation putComment($input: PutCommentInput!) {
+  mutation PutComment($input: PutCommentInput!) {
     putComment(input: $input) {
       id
       content

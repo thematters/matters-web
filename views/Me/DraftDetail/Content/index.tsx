@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Mutation } from '~/components/GQL'
-import MUTATION_UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
 
@@ -96,7 +96,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
             />
           </header>
-          <Mutation mutation={MUTATION_UPLOAD_FILE}>
+          <Mutation mutation={UPLOAD_FILE}>
             {(singleFileUpload, { loading: uploading }) => (
               <Editor
                 upload={async input => {

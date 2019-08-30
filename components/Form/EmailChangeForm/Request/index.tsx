@@ -1,14 +1,14 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
@@ -21,7 +21,7 @@ interface Props {
   submitCallback?: (params: any) => void
 }
 
-const MUTATION_CONFIRM_CODE = gql`
+const CONFIRM_CODE = gql`
   mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
     confirmVerificationCode(input: $input)
   }
@@ -87,47 +87,47 @@ export const EmailChangeRequestForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            disabled
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="email_reset"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+          <Modal.Content>
+            <Form.Input
+              type="text"
+              field="email"
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              disabled
+            />
+            <Form.Input
+              type="text"
+              field="code"
+              placeholder={codePlaceholder}
+              floatElement={
+                <SendCodeButton
+                  email={values.email}
+                  lang={lang}
+                  type="email_reset"
+                />
+              }
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
+            <Modal.FooterButton
+              width="full"
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
             >
-              {translate({
-                zh_hant: TEXT.zh_hant.nextStep,
-                zh_hans: TEXT.zh_hans.nextStep,
-                lang
-              })}
-            </Button>
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -184,7 +184,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_CONFIRM_CODE}>
+      <Mutation mutation={CONFIRM_CODE}>
         {confirmCode => <MainForm submitAction={confirmCode} />}
       </Mutation>
       <style jsx>{styles}</style>

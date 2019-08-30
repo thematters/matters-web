@@ -1,13 +1,13 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidPassword, translate } from '~/common/utils'
@@ -22,7 +22,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const MUTATION_RESET_PASSWORD = gql`
+export const RESET_PASSWORD = gql`
   mutation ResetPassword($input: ResetPasswordInput!) {
     resetPassword(input: $input)
   }
@@ -113,54 +113,46 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hint={passwordHint}
-          />
-          <Form.Input
-            type="password"
-            field="comparedPassword"
-            placeholder={comparedPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
+          <Modal.Content>
+            <Form.Input
+              type="password"
+              field="password"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={passwordHint}
+            />
+            <Form.Input
+              type="password"
+              field="comparedPassword"
+              placeholder={comparedPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              type="button"
-              bgColor="transparent"
-              className="u-link-green"
-              spacing="none"
-              onClick={backPreviousStep}
+            <Modal.FooterButton onClick={backPreviousStep} bgColor="white">
+              <Translate
+                zh_hant={TEXT.zh_hant.previousStep}
+                zh_hans={TEXT.zh_hans.previousStep}
+              />
+            </Modal.FooterButton>
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
             >
-              {translate({
-                zh_hant: TEXT.zh_hant.previousStep,
-                zh_hans: TEXT.zh_hans.previousStep,
-                lang
-              })}
-            </Button>
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={isSubmitting}
-              icon={isSubmitting ? <IconSpinner /> : null}
-            >
-              {translate({
-                zh_hant: TEXT.zh_hant.done,
-                zh_hans: TEXT.zh_hans.done,
-                lang
-              })}
-            </Button>
+              <Translate
+                zh_hant={TEXT.zh_hant.done}
+                zh_hans={TEXT.zh_hans.done}
+              />
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -220,7 +212,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
 
   return (
     <>
-      <Mutation mutation={MUTATION_RESET_PASSWORD}>
+      <Mutation mutation={RESET_PASSWORD}>
         {reset => <MainForm submitAction={reset} />}
       </Mutation>
       <style jsx>{styles}</style>
