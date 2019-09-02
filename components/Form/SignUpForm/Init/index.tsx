@@ -220,7 +220,7 @@ export const SignUpInitForm: FC<Props> = ({
         <form className={formClass} onSubmit={handleSubmit}>
           <Modal.Content scrollLock={scrollLock}>
             <Form.Input
-              type="text"
+              type="email"
               field="email"
               placeholder={emailPlaceholder}
               values={values}
