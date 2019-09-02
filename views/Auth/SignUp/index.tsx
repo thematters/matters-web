@@ -52,15 +52,22 @@ const SignUp = () => {
 
         <article className={containerClass}>
           {step === 'signUp' && (
-            <SignUpInitForm purpose="page" submitCallback={signUpCallback} />
+            <SignUpInitForm
+              purpose="page"
+              submitCallback={signUpCallback}
+              scrollLock={false}
+            />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
               purpose="page"
               submitCallback={profileCallback}
+              scrollLock={false}
             />
           )}
-          {step === 'complete' && <SignUpComplete purpose="page" />}
+          {step === 'complete' && (
+            <SignUpComplete purpose="page" scrollLock={false} />
+          )}
         </article>
       </main>
       <style jsx>{styles}</style>

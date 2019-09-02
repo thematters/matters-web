@@ -34,6 +34,7 @@ interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: () => void
+  scrollLock?: boolean
 }
 
 const UPDATE_USER_INFO = gql`
@@ -64,7 +65,8 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 export const SignUpProfileForm: FC<Props> = ({
   extraClass = [],
   purpose,
-  submitCallback
+  submitCallback,
+  scrollLock
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -98,7 +100,7 @@ export const SignUpProfileForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content>
+          <Modal.Content scrollLock={scrollLock}>
             <SignUpAvatarUploader
               field="avatar"
               lang={lang}
