@@ -11,7 +11,7 @@ import styles from './styles.css'
  * ```jsx
  *   <Form.Input
  *     className={[]}
- *     type="text"
+ *     type="email"
  *     field="email"
  *     placeholder="email"
  *     floatElement={<>}
@@ -29,7 +29,7 @@ import styles from './styles.css'
 
 interface Props {
   className?: string[]
-  type: 'text' | 'password'
+  type: 'text' | 'password' | 'email'
   field: string
   placeholder?: string
   floatElement?: any

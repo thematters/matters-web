@@ -89,7 +89,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
         <form className={formClass} onSubmit={handleSubmit}>
           <Modal.Content>
             <Form.Input
-              type="text"
+              type="email"
               field="email"
               values={values}
               errors={errors}
