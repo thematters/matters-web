@@ -143,6 +143,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
           </Modal.Content>
           <div className="buttons">
             <Modal.FooterButton
+              htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
               width="full"
             >
