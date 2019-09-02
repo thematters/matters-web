@@ -7,10 +7,10 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
 
-const Complete = () => {
+const Complete = ({ scrollLock }: { scrollLock?: boolean }) => {
   return (
     <>
-      <Modal.Content>
+      <Modal.Content scrollLock={scrollLock}>
         <section className="container">
           <img src={ICON_AVATAR_GREEN} />
 

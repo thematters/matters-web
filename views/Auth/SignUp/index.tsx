@@ -49,6 +49,7 @@ const SignUp = () => {
               submitCallback={() => {
                 setStep('profile')
               }}
+              scrollLock={false}
             />
           )}
           {step === 'profile' && (
@@ -57,6 +58,7 @@ const SignUp = () => {
               submitCallback={() => {
                 setStep('setupLikeCoin')
               }}
+              scrollLock={false}
             />
           )}
           {step === 'setupLikeCoin' && (
@@ -64,9 +66,12 @@ const SignUp = () => {
               submitCallback={() => {
                 setStep('complete')
               }}
+              scrollLock={false}
             />
           )}
-          {step === 'complete' && <SignUpComplete purpose="page" />}
+          {step === 'complete' && (
+            <SignUpComplete purpose="page" scrollLock={false} />
+          )}
         </article>
       </main>
       <style jsx>{styles}</style>

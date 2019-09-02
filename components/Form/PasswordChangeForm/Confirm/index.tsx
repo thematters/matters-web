@@ -20,6 +20,7 @@ interface Props {
   container: 'modal' | 'page'
   backPreviousStep: (event: any) => void
   submitCallback?: () => void
+  scrollLock?: boolean
 }
 
 export const RESET_PASSWORD = gql`
@@ -33,7 +34,8 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
   extraClass = [],
   container,
   backPreviousStep,
-  submitCallback
+  submitCallback,
+  scrollLock
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -113,7 +115,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content>
+          <Modal.Content scrollLock={scrollLock}>
             <Form.Input
               type="password"
               field="password"

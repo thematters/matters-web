@@ -16,6 +16,7 @@ import styles from './styles.css'
 interface Props {
   startGenerate: () => void
   startBind: () => void
+  scrollLock?: boolean
 }
 
 const {
@@ -72,13 +73,13 @@ const IconUnchecked = () => (
   <Icon id={ICON_UNCHECK.id} viewBox={ICON_UNCHECK.viewBox} />
 )
 
-const Select: React.FC<Props> = ({ startGenerate, startBind }) => {
+const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
   const [bindType, setBindType] = useState<'generate' | 'bind'>('generate')
   const isGenerate = bindType === 'generate'
 
   return (
     <form>
-      <Modal.Content spacing="none" layout="full-width">
+      <Modal.Content spacing="none" layout="full-width" scrollLock={scrollLock}>
         <section className="container">
           <Header />
 

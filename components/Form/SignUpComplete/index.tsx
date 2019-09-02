@@ -7,9 +7,15 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
 
-const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
+const SignUpComplete = ({
+  purpose,
+  scrollLock
+}: {
+  purpose?: 'modal' | 'page'
+  scrollLock?: boolean
+}) => (
   <div className="complete">
-    <Modal.Content>
+    <Modal.Content scrollLock={scrollLock}>
       <img src={ICON_AVATAR_GREEN} />
 
       <div className="content">

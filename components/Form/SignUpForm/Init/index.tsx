@@ -43,6 +43,7 @@ interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: (params: any) => void
+  scrollLock?: boolean
 }
 
 const CONFIRM_CODE = gql`
@@ -79,7 +80,8 @@ export const SignUpInitForm: FC<Props> = ({
   defaultEmail = '',
   extraClass = [],
   purpose,
-  submitCallback
+  submitCallback,
+  scrollLock
 }) => {
   const { lang } = useContext(LanguageContext)
   const isInModal = purpose === 'modal'
@@ -216,9 +218,9 @@ export const SignUpInitForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content>
+          <Modal.Content scrollLock={scrollLock}>
             <Form.Input
-              type="text"
+              type="email"
               field="email"
               placeholder={emailPlaceholder}
               values={values}
@@ -230,6 +232,7 @@ export const SignUpInitForm: FC<Props> = ({
             <Form.Input
               type="text"
               field="code"
+              autoComplete="off"
               placeholder={codePlaceholder}
               floatElement={
                 <SendCodeButton
@@ -247,6 +250,7 @@ export const SignUpInitForm: FC<Props> = ({
             <Form.Input
               type="text"
               field="userName"
+              autoComplete="off"
               placeholder={userNamePlaceholder}
               values={values}
               errors={errors}
@@ -262,6 +266,7 @@ export const SignUpInitForm: FC<Props> = ({
             <Form.Input
               type="password"
               field="password"
+              autoComplete="off"
               placeholder={passwordPlaceholder}
               values={values}
               errors={errors}

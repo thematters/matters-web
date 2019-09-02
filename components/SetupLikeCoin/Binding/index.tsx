@@ -14,6 +14,7 @@ import styles from './styles.css'
 interface Props {
   prevStep: () => void
   nextStep: () => void
+  scrollLock?: boolean
 }
 
 const VIEWER_LIKER_ID = gql`
@@ -25,7 +26,7 @@ const VIEWER_LIKER_ID = gql`
   }
 `
 
-const Binding: React.FC<Props> = ({ prevStep, nextStep }) => {
+const Binding: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
   const [polling, setPolling] = useState(true)
 
   return (
@@ -50,7 +51,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep }) => {
 
         return (
           <>
-            <Modal.Content>
+            <Modal.Content scrollLock={scrollLock}>
               <section className="container">
                 {!error && (
                   <>

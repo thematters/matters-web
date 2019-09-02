@@ -7,16 +7,15 @@ import Select from './Select'
 
 interface Props {
   submitCallback?: () => void
+  scrollLock?: boolean
 }
 
 type Step = 'select' | 'binding' | 'generating' | 'complete'
 
-const SetupLikeCoin: React.FC<Props> = () => {
+const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
   const [step, setStep] = useState<Step>('select')
   const backToSelect = () => setStep('select')
   const complete = () => setStep('complete')
-
-  console.log(step)
 
   return (
     <>
@@ -24,15 +23,24 @@ const SetupLikeCoin: React.FC<Props> = () => {
         <Select
           startGenerate={() => setStep('generating')}
           startBind={() => setStep('binding')}
+          scrollLock={scrollLock}
         />
       )}
       {step === 'generating' && (
-        <Generating prevStep={backToSelect} nextStep={complete} />
+        <Generating
+          prevStep={backToSelect}
+          nextStep={complete}
+          scrollLock={scrollLock}
+        />
       )}
       {step === 'binding' && (
-        <Binding prevStep={backToSelect} nextStep={complete} />
+        <Binding
+          prevStep={backToSelect}
+          nextStep={complete}
+          scrollLock={scrollLock}
+        />
       )}
-      {step === 'complete' && <Complete />}
+      {step === 'complete' && <Complete scrollLock={scrollLock} />}
     </>
   )
 }

@@ -113,7 +113,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
         <form className={formClass} onSubmit={handleSubmit}>
           <Modal.Content>
             <Form.Input
-              type="text"
+              type="email"
               field="email"
               placeholder={emailPlaceholder}
               values={values}
@@ -125,6 +125,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
             <Form.Input
               type="text"
               field="code"
+              autoComplete="off"
               placeholder={codePlaceholder}
               floatElement={
                 <SendCodeButton
@@ -142,6 +143,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
           </Modal.Content>
           <div className="buttons">
             <Modal.FooterButton
+              htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
               width="full"
             >

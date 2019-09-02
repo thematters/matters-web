@@ -14,6 +14,7 @@ import styles from './styles.css'
 interface Props {
   prevStep: () => void
   nextStep: () => void
+  scrollLock?: boolean
 }
 
 const GENERATE_LIKER_ID = gql`
@@ -25,7 +26,7 @@ const GENERATE_LIKER_ID = gql`
   }
 `
 
-const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
+const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
   return (
     <Mutation mutation={GENERATE_LIKER_ID}>
       {(generate, { data, error }) => {
@@ -42,7 +43,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
 
         return (
           <>
-            <Modal.Content>
+            <Modal.Content scrollLock={scrollLock}>
               <section className="container">
                 {!error && (
                   <>
