@@ -46,6 +46,7 @@ interface Props {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: () => void
+  scrollLock?: boolean
 }
 
 export const USER_LOGIN = gql`
@@ -112,7 +113,12 @@ const SignUpRedirection = () => (
   </Modal.FooterButton>
 )
 
-const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
+const LoginForm: FC<Props> = ({
+  extraClass = [],
+  purpose,
+  submitCallback,
+  scrollLock
+}) => {
   const { lang } = useContext(LanguageContext)
   const isInModal = purpose === 'modal'
   const isInPage = purpose === 'page'
@@ -184,7 +190,7 @@ const LoginForm: FC<Props> = ({ extraClass = [], purpose, submitCallback }) => {
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content>
+          <Modal.Content scrollLock={scrollLock}>
             <Form.Input
               type="text"
               field="email"

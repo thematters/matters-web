@@ -21,6 +21,7 @@ interface Props {
   container: 'modal' | 'page'
   purpose: 'forget' | 'change'
   submitCallback?: (params: any) => void
+  scrollLock?: boolean
 }
 
 export const CONFIRM_CODE = gql`
@@ -34,7 +35,8 @@ export const PasswordChangeRequestForm: FC<Props> = ({
   extraClass = [],
   container,
   purpose,
-  submitCallback
+  submitCallback,
+  scrollLock
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -105,7 +107,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content>
+          <Modal.Content scrollLock={scrollLock}>
             <Form.Input
               type="text"
               field="email"
@@ -120,6 +122,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
             <Form.Input
               type="text"
               field="code"
+              autoComplete="off"
               placeholder={codePlaceholder}
               floatElement={
                 <SendCodeButton

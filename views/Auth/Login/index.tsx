@@ -35,7 +35,7 @@ const Login = () => {
         />
 
         <article className={containerClass}>
-          <LoginForm purpose="page" />
+          <LoginForm purpose="page" scrollLock={false} />
         </article>
       </main>
       <style jsx>{styles}</style>
