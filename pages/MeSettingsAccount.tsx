@@ -1,3 +1,9 @@
 import MeSettingsAccount from '~/views/Me/Settings/Account'
 
-export default () => <MeSettingsAccount />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <MeSettingsAccount />
+  </Protected>
+)

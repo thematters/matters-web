@@ -15,7 +15,13 @@ type Step = 'select' | 'binding' | 'generating' | 'complete'
 const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
   const [step, setStep] = useState<Step>('select')
   const backToSelect = () => setStep('select')
-  const complete = () => setStep('complete')
+  const complete = () => {
+    if (submitCallback) {
+      submitCallback()
+    } else {
+      setStep('complete')
+    }
+  }
 
   return (
     <>

@@ -139,11 +139,7 @@ export const redirectToTarget = ({
 }
 
 export const redirectToLogin = () => {
-  let target = ''
-
-  if (process.browser) {
-    target = Router.asPath ? encodeURIComponent(Router.asPath) : ''
-  }
+  const target = encodeURIComponent(window.location.href)
 
   return Router.push(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,

@@ -12,7 +12,6 @@ import { Translate } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
-import { Protected } from '~/components/Protected'
 
 import { getQuery } from '~/common/utils'
 
@@ -54,49 +53,43 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   }, [])
 
   return (
-    <Protected>
-      <Query query={DRAFT_DETAIL} variables={{ id }}>
-        {({
-          data,
-          loading,
-          error
-        }: QueryResult & { data: DraftDetailQuery }) => (
-          <main className="l-row">
-            <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
+    <Query query={DRAFT_DETAIL} variables={{ id }}>
+      {({ data, loading, error }: QueryResult & { data: DraftDetailQuery }) => (
+        <main className="l-row">
+          <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
 
-            <article className="l-col-4 l-col-md-5 l-col-lg-8">
-              {loading && <Placeholder.ArticleDetail />}
-              {!loading && data && data.node && (
-                <>
-                  <PublishState draft={data.node} />
-                  <DraftContent draft={data.node} />
-                </>
-              )}
-              {!loading && (error || (data && !data.node)) && (
-                <EmptyDraft
-                  description={
-                    <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />
-                  }
-                />
-              )}
-            </article>
+          <article className="l-col-4 l-col-md-5 l-col-lg-8">
+            {loading && <Placeholder.ArticleDetail />}
+            {!loading && data && data.node && (
+              <>
+                <PublishState draft={data.node} />
+                <DraftContent draft={data.node} />
+              </>
+            )}
+            {!loading && (error || (data && !data.node)) && (
+              <EmptyDraft
+                description={
+                  <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />
+                }
+              />
+            )}
+          </article>
 
-            <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-              {loading && <Placeholder.Sidebar />}
-              {data && data.node && <Sidebar draft={data.node} />}
-            </aside>
+          <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+            {loading && <Placeholder.Sidebar />}
+            {data && data.node && <Sidebar draft={data.node} />}
+          </aside>
 
-            <ModalInstance modalId="publishModal" title="publishNote">
-              {(props: ModalInstanceProps) => (
-                <PublishModal draft={data.node} {...props} />
-              )}
-            </ModalInstance>
+          <ModalInstance modalId="publishModal" title="publishNote">
+            {(props: ModalInstanceProps) => (
+              <PublishModal draft={data.node} {...props} />
+            )}
+          </ModalInstance>
 
-            <style jsx>{styles}</style>
-          </main>
-        )}
-      </Query>
-    </Protected>
+          <style jsx>{styles}</style>
+        </main>
+      )}
+    </Query>
   )
 }
 
