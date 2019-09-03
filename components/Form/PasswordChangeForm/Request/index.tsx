@@ -144,6 +144,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
               width="full"
               htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
             >
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}

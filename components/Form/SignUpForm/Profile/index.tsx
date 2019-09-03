@@ -138,6 +138,7 @@ export const SignUpProfileForm: FC<Props> = ({
             <Modal.FooterButton
               htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
               width="full"
             >
               <Translate
