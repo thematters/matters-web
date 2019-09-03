@@ -1,11 +1,14 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 
+import IconSpinner from '~/components/Icon/Spinner'
+
 import styles from './styles.css'
 
 interface BaseButtonProps {
   width?: 'half' | 'full'
   bgColor?: 'white' | 'green'
+  loading?: boolean
 
   [key: string]: any
 }
@@ -26,6 +29,7 @@ type ButtonProps = LinkButtonProps | NativeButtonProps
 const FooterButton: React.FC<ButtonProps> = ({
   width = 'half',
   bgColor = 'green',
+  loading,
 
   is = 'button',
   href,
@@ -61,7 +65,8 @@ const FooterButton: React.FC<ButtonProps> = ({
   return (
     <>
       <button type={htmlType} className={buttonClasses} {...restProps}>
-        {children}
+        {loading && <IconSpinner />}
+        {!loading && children}
       </button>
       <style jsx>{styles}</style>
     </>

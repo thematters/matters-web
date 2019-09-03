@@ -223,6 +223,7 @@ const LoginForm: FC<Props> = ({
             <Modal.FooterButton
               htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
             >
               {loginText}
             </Modal.FooterButton>
