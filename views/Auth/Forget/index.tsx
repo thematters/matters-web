@@ -78,6 +78,7 @@ const Forget = () => {
               purpose="forget"
               container="page"
               submitCallback={requestCodeCallback}
+              scrollLock={false}
             />
           )}
           {step === 'reset' && (
@@ -86,6 +87,7 @@ const Forget = () => {
               container="page"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
+              scrollLock={false}
             />
           )}
           {step === 'complete' && (

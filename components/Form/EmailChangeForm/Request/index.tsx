@@ -89,7 +89,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
         <form className={formClass} onSubmit={handleSubmit}>
           <Modal.Content>
             <Form.Input
-              type="text"
+              type="email"
               field="email"
               values={values}
               errors={errors}
@@ -101,6 +101,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
             <Form.Input
               type="text"
               field="code"
+              autoComplete="off"
               placeholder={codePlaceholder}
               floatElement={
                 <SendCodeButton
@@ -122,6 +123,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
               width="full"
               htmlType="submit"
               disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
             >
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}

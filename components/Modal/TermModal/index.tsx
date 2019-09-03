@@ -90,7 +90,11 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
               </Modal.FooterButton>
             )}
           </Mutation>
-          <Modal.FooterButton htmlType="submit" disabled={props.isSubmitting}>
+          <Modal.FooterButton
+            htmlType="submit"
+            disabled={props.isSubmitting}
+            loading={props.isSubmitting}
+          >
             {props.isSubmitting && <IconSpinner />}
             {!props.isSubmitting &&
               translate({

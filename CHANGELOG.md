@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] - 2019-09-02
+
+### Added
+
+- Comment URL #392
+
+### Changed
+
+- New UI of Modals #390 #389 #395 #397
+- Update SignUp flow and user name length validation #389
+
 ## [1.12.0] - 2019-08-23
 
 ### Added
