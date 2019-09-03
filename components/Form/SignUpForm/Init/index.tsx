@@ -1,23 +1,23 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { FC, useContext } from 'react'
 
-import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext, Translate } from '~/components/Language'
+import { Modal } from '~/components/Modal'
+import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
-  clearPersistCache,
-  isValidDisplayName,
   isValidEmail,
   isValidPassword,
+  isValidUserName,
   translate
 } from '~/common/utils'
 
@@ -42,10 +42,17 @@ interface Props {
   defaultEmail?: string
   extraClass?: string[]
   purpose: 'modal' | 'page'
-  submitCallback?: () => void
+  submitCallback?: (params: any) => void
+  scrollLock?: boolean
 }
 
-export const USER_REGISTER = gql`
+const CONFIRM_CODE = gql`
+  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
+    confirmVerificationCode(input: $input)
+  }
+`
+
+const USER_REGISTER = gql`
   mutation UserRegister($input: UserRegisterInput!) {
     userRegister(input: $input) {
       auth
@@ -53,19 +60,32 @@ export const USER_REGISTER = gql`
   }
 `
 
-export const CONFIRM_CODE = gql`
-  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
-    confirmVerificationCode(input: $input)
-  }
-`
+const LoginModalSwitch = () => (
+  <ModalSwitch modalId="loginModal">
+    {(open: any) => (
+      <Modal.FooterButton onClick={open} bgColor="white">
+        <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+      </Modal.FooterButton>
+    )}
+  </ModalSwitch>
+)
+
+const LoginRedirection = () => (
+  <Modal.FooterButton is="link" {...PATHS.AUTH_LOGIN} bgColor="white">
+    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+  </Modal.FooterButton>
+)
 
 export const SignUpInitForm: FC<Props> = ({
   defaultEmail = '',
   extraClass = [],
   purpose,
-  submitCallback
+  submitCallback,
+  scrollLock
 }) => {
   const { lang } = useContext(LanguageContext)
+  const isInModal = purpose === 'modal'
+  const isInPage = purpose === 'page'
 
   const validateEmail = (value: string, language: string) => {
     let result: any
@@ -98,17 +118,17 @@ export const SignUpInitForm: FC<Props> = ({
     }
   }
 
-  const validateDisplayName = (value: string, language: string) => {
+  const validateUserName = (value: string, language: string) => {
     let result: any
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
       }
-    } else if (!isValidDisplayName(value)) {
+    } else if (!isValidUserName(value)) {
       result = {
-        zh_hant: TEXT.zh_hant.displayNameHint,
-        zh_hans: TEXT.zh_hans.displayNameHint
+        zh_hant: TEXT.zh_hant.userNameHint,
+        zh_hans: TEXT.zh_hans.userNameHint
       }
     }
     if (result) {
@@ -127,28 +147,6 @@ export const SignUpInitForm: FC<Props> = ({
       result = {
         zh_hant: TEXT.zh_hant.passwordHint,
         zh_hans: TEXT.zh_hans.passwordHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang: language })
-    }
-  }
-
-  const validateComparedPassword = (
-    value: string,
-    comparedValue: string,
-    language: string
-  ) => {
-    let result: any
-    if (!comparedValue) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (comparedValue !== value) {
-      result = {
-        zh_hant: TEXT.zh_hant.passwordNotMatch,
-        zh_hans: TEXT.zh_hans.passwordNotMatch
       }
     }
     if (result) {
@@ -182,8 +180,8 @@ export const SignUpInitForm: FC<Props> = ({
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterEmail,
-      zh_hans: TEXT.zh_hans.enterEmail,
+      zh_hant: TEXT.zh_hant.email,
+      zh_hans: TEXT.zh_hans.email,
       lang
     })
 
@@ -193,33 +191,15 @@ export const SignUpInitForm: FC<Props> = ({
       lang
     })
 
-    const displayNamePlaceholder = translate({
-      zh_hant: '姓名',
-      zh_hans: '姓名',
+    const userNamePlaceholder = translate({
+      zh_hant: 'Matters ID',
+      zh_hans: 'Matters ID',
       lang
     })
 
     const passwordPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterPassword,
-      zh_hans: TEXT.zh_hans.enterPassword,
-      lang
-    })
-
-    const passwordHint = translate({
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint,
-      lang
-    })
-
-    const comparedPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterPasswordAgain,
-      zh_hans: TEXT.zh_hans.enterPasswordAgain,
-      lang
-    })
-
-    const signUpText = translate({
-      zh_hant: TEXT.zh_hant.register,
-      zh_hans: TEXT.zh_hans.register,
+      zh_hant: TEXT.zh_hant.password,
+      zh_hans: TEXT.zh_hans.password,
       lang
     })
 
@@ -238,95 +218,102 @@ export const SignUpInitForm: FC<Props> = ({
     return (
       <>
         <form className={formClass} onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="register"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="displayName"
-            placeholder={displayNamePlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hint={passwordHint}
-          />
-          <Form.Input
-            type="password"
-            field="comparedPassword"
-            placeholder={comparedPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <div className="tos">
-            <Form.CheckBox
-              field="tos"
+          <Modal.Content scrollLock={scrollLock}>
+            <Form.Input
+              type="email"
+              field="email"
+              placeholder={emailPlaceholder}
               values={values}
               errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
               handleChange={handleChange}
-              setFieldValue={setFieldValue}
-            >
-              <span>
-                {agreeText}
-                <Link {...PATHS.MISC_TOS}>
-                  <a className="u-link-green" target="_blank">
-                    {' '}
-                    {tosText}
-                  </a>
-                </Link>
-              </span>
-            </Form.CheckBox>
-          </div>
+            />
+            <Form.Input
+              type="text"
+              field="code"
+              autoComplete="off"
+              placeholder={codePlaceholder}
+              floatElement={
+                <SendCodeButton
+                  email={values.email}
+                  lang={lang}
+                  type="register"
+                />
+              }
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <Form.Input
+              type="text"
+              field="userName"
+              autoComplete="off"
+              placeholder={userNamePlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.userNameHint,
+                zh_hans: TEXT.zh_hans.userNameHint,
+                lang
+              })}
+            />
+            <Form.Input
+              type="password"
+              field="password"
+              autoComplete="off"
+              placeholder={passwordPlaceholder}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              hint={translate({
+                zh_hant: TEXT.zh_hant.passwordHint,
+                zh_hans: TEXT.zh_hans.passwordHint,
+                lang
+              })}
+            />
+            <div className="tos">
+              <Form.CheckBox
+                field="tos"
+                values={values}
+                errors={errors}
+                handleChange={handleChange}
+                setFieldValue={setFieldValue}
+              >
+                <span>
+                  {agreeText}
+                  <Link {...PATHS.MISC_TOS}>
+                    <a className="u-link-green" target="_blank">
+                      {' '}
+                      {tosText}
+                    </a>
+                  </Link>
+                </span>
+              </Form.CheckBox>
+            </div>
+          </Modal.Content>
+
           <div className="buttons">
-            <Button
-              is="button"
-              size="large"
-              type="submit"
-              bgColor="green"
-              disabled={isSubmitting}
-              style={{ minWidth: '5rem' }}
-              icon={isSubmitting ? <IconSpinner /> : null}
+            {isInModal && <LoginModalSwitch />}
+            {isInPage && <LoginRedirection />}
+
+            <Modal.FooterButton
+              htmlType="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
             >
-              {signUpText}
-            </Button>
+              <Translate
+                zh_hant={TEXT.zh_hant.nextStep}
+                zh_hans={TEXT.zh_hans.nextStep}
+              />
+            </Modal.FooterButton>
           </div>
         </form>
         <style jsx>{styles}</style>
@@ -338,38 +325,22 @@ export const SignUpInitForm: FC<Props> = ({
     mapPropsToValues: () => ({
       email: defaultEmail,
       code: '',
-      displayName: '',
+      userName: '',
       password: '',
-      comparedPassword: '',
       tos: true
     }),
 
-    validate: ({
-      email,
-      code,
-      displayName,
-      password,
-      comparedPassword,
-      tos
-    }) => {
+    validate: ({ email, code, userName, password, tos }) => {
       const isInvalidEmail = validateEmail(email, lang)
       const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidDisplayName = validateDisplayName(displayName, lang)
       const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
-        lang
-      )
+      const isInvalidUserName = validateUserName(userName, lang)
       const isInvalidToS = validateToS(tos, lang)
       const errors: { [key: string]: any } = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
-        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
+        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
-          : {}),
         ...(isInvalidToS ? { tos: isInvalidToS } : {})
       }
       return errors
@@ -379,7 +350,7 @@ export const SignUpInitForm: FC<Props> = ({
       values,
       { props, setFieldError, setSubmitting }: any
     ) => {
-      const { email, code, displayName, password } = values
+      const { email, code, userName, password } = values
       const { preSubmitAction, submitAction } = props
       if (!preSubmitAction || !submitAction) {
         return undefined
@@ -393,12 +364,13 @@ export const SignUpInitForm: FC<Props> = ({
         })
 
         await submitAction({
-          variables: { input: { email, codeId, displayName, password } }
+          variables: {
+            input: { email, codeId, userName, displayName: userName, password }
+          }
         })
 
         if (submitCallback) {
-          submitCallback()
-          clearPersistCache()
+          submitCallback({ email, codeId, password })
         }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
@@ -417,17 +389,14 @@ export const SignUpInitForm: FC<Props> = ({
   })(BaseForm)
 
   return (
-    <>
-      <Mutation mutation={CONFIRM_CODE}>
-        {confirm => (
-          <Mutation mutation={USER_REGISTER}>
-            {register => (
-              <MainForm preSubmitAction={confirm} submitAction={register} />
-            )}
-          </Mutation>
-        )}
-      </Mutation>
-      <style jsx>{styles}</style>
-    </>
+    <Mutation mutation={CONFIRM_CODE}>
+      {confirm => (
+        <Mutation mutation={USER_REGISTER}>
+          {register => (
+            <MainForm preSubmitAction={confirm} submitAction={register} />
+          )}
+        </Mutation>
+      )}
+    </Mutation>
   )
 }

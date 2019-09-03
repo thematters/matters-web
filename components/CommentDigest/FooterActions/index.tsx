@@ -6,6 +6,7 @@ import { DateTime, Icon } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
 import { ViewerContext } from '~/components/Viewer'
 
+import { toPath } from '~/common/utils'
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
@@ -30,7 +31,11 @@ const fragments = {
       state
       article {
         id
+        slug
         mediaHash
+        author {
+          userName
+        }
       }
       parentComment {
         id
@@ -62,6 +67,21 @@ const FooterActions = ({
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
+
+  const { parentComment, id } = comment
+  const { slug, mediaHash, author } = comment.article
+
+  const commentPath =
+    author.userName && mediaHash
+      ? toPath({
+          page: 'articleDetail',
+          userName: author.userName,
+          slug,
+          mediaHash,
+          fragment:
+            parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
+        })
+      : { href: '', as: '' }
 
   return (
     <>
@@ -98,8 +118,9 @@ const FooterActions = ({
             </>
           )}
         </div>
-
-        <DateTime date={comment.createdAt} />
+        <a href={commentPath.as}>
+          <DateTime date={comment.createdAt} />
+        </a>
       </footer>
 
       {showForm && (

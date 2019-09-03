@@ -30,7 +30,3 @@ ol {
 .sub-title {
   color: var(--color-black);
 }
-
-.buttons {
-  padding-top: var(--spacing-loose);
-}

@@ -15,6 +15,14 @@ type Step = 'signUp' | 'profile' | 'follow' | 'complete'
 const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
 
+  const signUpCallback = ({ email, codeId, password }: any) => {
+    setStep('profile')
+  }
+
+  const profileCallback = () => {
+    setStep('complete')
+  }
+
   const { updateHeaderState } = useContext(HeaderContext)
   useEffect(() => {
     updateHeaderState({ type: 'signUp' })
@@ -31,10 +39,6 @@ const SignUp = () => {
     'l-offset-lg-3',
     'container'
   )
-  const childClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
-
-  const signUpCallback = () => setStep('profile')
-  const signUpProfileCallback = () => setStep('complete')
 
   return (
     <>
@@ -49,22 +53,20 @@ const SignUp = () => {
         <article className={containerClass}>
           {step === 'signUp' && (
             <SignUpInitForm
-              extraClass={childClass}
               purpose="page"
               submitCallback={signUpCallback}
+              scrollLock={false}
             />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
-              extraClass={childClass}
               purpose="page"
-              submitCallback={signUpProfileCallback}
+              submitCallback={profileCallback}
+              scrollLock={false}
             />
           )}
           {step === 'complete' && (
-            <div className={classNames(childClass)}>
-              <SignUpComplete purpose="page" />
-            </div>
+            <SignUpComplete purpose="page" scrollLock={false} />
           )}
         </article>
       </main>

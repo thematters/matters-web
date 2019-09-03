@@ -11,6 +11,7 @@ import { Term } from '~/components/Term'
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import { Modal } from '..'
 import styles from './styles.css'
 
 /**
@@ -77,20 +78,23 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         <div className="buttons">
           <Mutation mutation={USER_LOGOUT}>
             {logout => (
-              <button
-                type="button"
-                className="disagree"
+              <Modal.FooterButton
                 onClick={() => disagree(logout)}
+                bgColor="white"
               >
                 {translate({
                   zh_hant: TEXT.zh_hant.disagree,
                   zh_hans: TEXT.zh_hans.disagree,
                   lang
                 })}
-              </button>
+              </Modal.FooterButton>
             )}
           </Mutation>
-          <button type="submit" className="agree" disabled={props.isSubmitting}>
+          <Modal.FooterButton
+            htmlType="submit"
+            disabled={props.isSubmitting}
+            loading={props.isSubmitting}
+          >
             {props.isSubmitting && <IconSpinner />}
             {!props.isSubmitting &&
               translate({
@@ -98,7 +102,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
                 zh_hans: TEXT.zh_hans.agreeAndContinue,
                 lang
               })}
-          </button>
+          </Modal.FooterButton>
         </div>
       </form>
       <style jsx>{styles}</style>

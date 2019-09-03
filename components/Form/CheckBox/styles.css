@@ -1,18 +1,22 @@
 .container {
-  display: inline-flex;
-  align-items: flex-start;
+  & > * {
+    display: inline;
+    vertical-align: middle;
+  }
 }
 
 .check {
-  display: flex;
-  align-items: flex-start;
+  line-height: 1;
+  font-size: 0;
+  cursor: pointer;
+
+  & :global(svg) {
+    margin-right: var(--spacing-x-tight);
+  }
 }
 
 .input {
-  display: none;
-}
-
-.description {
-  line-height: 1.65;
-  word-break: break-all;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
 }

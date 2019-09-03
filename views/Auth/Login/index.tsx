@@ -26,7 +26,6 @@ const Login = () => {
     'l-offset-lg-3',
     'container'
   )
-  const formClass = ['l-col-4', 'l-col-sm-6', 'l-col-md-6', 'l-col-lg-8']
 
   return (
     <>
@@ -36,7 +35,7 @@ const Login = () => {
         />
 
         <article className={containerClass}>
-          <LoginForm extraClass={formClass} purpose="page" />
+          <LoginForm purpose="page" scrollLock={false} />
         </article>
       </main>
       <style jsx>{styles}</style>

@@ -11,7 +11,7 @@ import { ViewerContext } from '~/components/Viewer'
 import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
-  clearPersistCache,
+  // clearPersistCache,
   redirectToTarget,
   toPath,
   translate
@@ -137,7 +137,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                   analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
                     id: viewer.id
                   })
-                  await clearPersistCache()
+                  // await clearPersistCache()
                   redirectToTarget()
                 } catch (e) {
                   window.dispatchEvent(

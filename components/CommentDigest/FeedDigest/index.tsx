@@ -78,7 +78,14 @@ const DescendantComment = ({
   })
 
   return (
-    <section className={containerClass} id={comment.id}>
+    <section
+      className={containerClass}
+      id={
+        comment.parentComment
+          ? `${comment.parentComment.id}-${comment.id}`
+          : comment.id
+      }
+    >
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
@@ -157,7 +164,14 @@ const FeedDigest = ({
   })
 
   return (
-    <section className={containerClass} id={comment.id}>
+    <section
+      className={containerClass}
+      id={
+        comment.parentComment
+          ? `${comment.parentComment.id}-${comment.id}`
+          : comment.id
+      }
+    >
       <header className="header">
         <div className="avatars">
           <UserDigest.Mini
