@@ -25,7 +25,7 @@ type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [step, setStep] = useState<Step>('setupLikeCoin')
+  const [step, setStep] = useState<Step>('signUp')
   const data = {
     signUp: {
       title: translate({
