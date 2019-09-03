@@ -13,6 +13,7 @@ export const ViewerUserFragment = {
       userName
       displayName
       avatar
+      likerId
       status {
         state
         role

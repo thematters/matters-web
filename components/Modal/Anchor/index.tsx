@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 
-import LoginModal from '~/components/Modal/LoginModal'
+import LoginForm from '~/components/Form/LoginForm'
 import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
 import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import SetupLikeCoin from '~/components/SetupLikeCoin'
 import { ViewerContext } from '~/components/Viewer'
 
 import styles from './styles.css'
@@ -22,28 +23,34 @@ import styles from './styles.css'
  *
  */
 
+const OpenedModal = ({ modalId }: { modalId: string }) => (
+  <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
+)
+
 const Anchor = () => {
   const viewer = useContext(ViewerContext)
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
-  const OpenedModal = ({ modalId }: { modalId: string }) => (
-    <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
-  )
-
   return (
     <>
       <div id="modal-anchor" className="container" />
+
       <ModalInstance modalId="loginModal" title="login">
-        {(props: ModalInstanceProps) => <LoginModal {...props} />}
+        {(props: ModalInstanceProps) => (
+          <LoginForm purpose="modal" {...props} />
+        )}
       </ModalInstance>
+
       <ModalInstance modalId="signUpModal">
         {(props: ModalInstanceProps) => <SignUpModal {...props} />}
       </ModalInstance>
+
       <ModalInstance modalId="passwordResetModal">
         {(props: ModalInstanceProps) => (
           <PasswordModal purpose="forget" {...props} />
         )}
       </ModalInstance>
+
       <ModalInstance
         modalId="termModal"
         title="termAndPrivacy"
@@ -51,10 +58,23 @@ const Anchor = () => {
       >
         {(props: ModalInstanceProps) => <TermModal {...props} />}
       </ModalInstance>
+
       <ModalInstance modalId="onboardingInfoModal" title="onboardingInfo">
         {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
       </ModalInstance>
+
+      <ModalInstance
+        modalId="setupLikeCoinModal"
+        title="setupLikeCoin"
+        defaultCloseable={false}
+      >
+        {(props: ModalInstanceProps) => <SetupLikeCoin />}
+      </ModalInstance>
+
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
+      {/* {viewer.isAuthed && !viewer.likerId && (
+        <OpenedModal modalId="setupLikeCoinModal" />
+      )} */}
       <style jsx>{styles}</style>
     </>
   )
