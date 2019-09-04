@@ -7,9 +7,6 @@ import commentFragments from './comment'
 export const ArticleDetailResponses = gql`
   fragment ArticleDetailResponses on Article {
     id
-    pinnedComments {
-      ...FeedDigestComment
-    }
     responseCount
     responses(
       input: {

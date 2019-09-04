@@ -5,9 +5,6 @@ import commentFragments from './comment'
 export const ArticleDetailComments = gql`
   fragment ArticleDetailComments on Article {
     id
-    pinnedComments {
-      ...FeedDigestComment
-    }
     comments(
       input: {
         filter: { parentComment: null }

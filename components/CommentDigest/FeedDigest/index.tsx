@@ -102,11 +102,7 @@ const DescendantComment = ({
             )}
           {comment.pinned && <PinnedLabel />}
         </div>
-        <DropdownActions
-          comment={comment}
-          editComment={() => setEdit(true)}
-          refetch={inArticle}
-        />
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
       </header>
 
       <div className="content-wrap">
@@ -185,11 +181,7 @@ const FeedDigest = ({
           )}
           {pinned && <PinnedLabel />}
         </div>
-        <DropdownActions
-          comment={comment}
-          editComment={() => setEdit(true)}
-          refetch={inArticle}
-        />
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
       </header>
 
       <div className="content-wrap">
