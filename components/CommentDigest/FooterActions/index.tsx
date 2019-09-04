@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _get from 'lodash/get'
-import Link from 'next/link'
+import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
 import { ViewerContext } from '~/components/Viewer'
 
+import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
@@ -60,11 +61,12 @@ const IconDotDivider = () => (
   />
 )
 
-const FooterActions = ({
+const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
+  router,
   comment,
   hasComment,
   refetch
-}: FooterActionsProps) => {
+}) => {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
@@ -119,17 +121,19 @@ const FooterActions = ({
             </>
           )}
         </div>
-        <Link {...commentPath}>
-          <a
-            onClick={() => {
+        {/* We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
+        <a
+          href={commentPath.as}
+          onClick={() => {
+            if (router && router.pathname === PATHS.ARTICLE_DETAIL.href) {
               jump(`#${fragment}`, {
                 offset: -64
               })
-            }}
-          >
-            <DateTime date={comment.createdAt} />
-          </a>
-        </Link>
+            }
+          }}
+        >
+          <DateTime date={comment.createdAt} />
+        </a>
       </footer>
 
       {showForm && (
@@ -150,6 +154,8 @@ const FooterActions = ({
   )
 }
 
-FooterActions.fragments = fragments
+const WrappedFooterActions: any = withRouter(FooterActions)
 
-export default FooterActions
+WrappedFooterActions.fragments = fragments
+
+export default WrappedFooterActions
