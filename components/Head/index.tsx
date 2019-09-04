@@ -48,6 +48,7 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
       : SITE_DOMAIN,
     image: props.image || IMAGE_INTRO
   }
+  const canonicalUrl = head.url.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -81,7 +82,7 @@ const BaseHead: React.FC<WithRouterProps & HeadProps> = props => {
         type="application/opensearchdescription+xml"
         key="opensearch"
       />
-      <link rel="canonical" href={head.url} key="canonical" />
+      <link rel="canonical" href={canonicalUrl} key="canonical" />
 
       {/* noindex for non-production enviroment */}
       {!isProd && (

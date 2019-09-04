@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import _get from 'lodash/get'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
@@ -14,7 +16,6 @@ import { DigestActionsComment } from './__generated__/DigestActionsComment'
 import DownvoteButton from './DownvoteButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
-
 export interface FooterActionsControls {
   hasComment?: boolean
   refetch?: boolean
@@ -70,7 +71,8 @@ const FooterActions = ({
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
-
+  const fragment =
+    parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
   const commentPath =
     author.userName && mediaHash
       ? toPath({
@@ -78,8 +80,7 @@ const FooterActions = ({
           userName: author.userName,
           slug,
           mediaHash,
-          fragment:
-            parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
+          fragment
         })
       : { href: '', as: '' }
 
@@ -118,9 +119,17 @@ const FooterActions = ({
             </>
           )}
         </div>
-        <a href={commentPath.as}>
-          <DateTime date={comment.createdAt} />
-        </a>
+        <Link {...commentPath}>
+          <a
+            onClick={() => {
+              jump(`#${fragment}`, {
+                offset: -64
+              })
+            }}
+          >
+            <DateTime date={comment.createdAt} />
+          </a>
+        </Link>
       </footer>
 
       {showForm && (
