@@ -68,3 +68,8 @@ export const FEED_TYPE = {
   ALL_TAGS: 'all-tags',
   SEARCH_TAG: 'search-tag'
 }
+
+export const SIGNUP_TYPE = {
+  GENERAL: 'general',
+  AD_WALL: 'ad-wall'
+}

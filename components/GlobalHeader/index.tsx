@@ -6,7 +6,7 @@ import React, { useContext, useEffect } from 'react'
 import { Responsive, SearchBar } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { Translate } from '../Language'
@@ -81,7 +81,10 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               <>
                 {!isLogin && <LoginButton />}
                 {!isSignUp && (
-                  <SignUpButton extraStyle={{ minWidth: '5rem' }}>
+                  <SignUpButton
+                    extraStyle={{ minWidth: '5rem' }}
+                    type={SIGNUP_TYPE.GENERAL}
+                  >
                     <Translate
                       zh_hant={TEXT.zh_hant.register}
                       zh_hans={TEXT.zh_hans.register}

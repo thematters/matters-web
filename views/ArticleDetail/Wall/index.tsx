@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
+import { SIGNUP_TYPE } from '~/common/enums'
 import ICON_CLOSE from '~/static/icons/close-no-color.svg?sprite'
 import IMG_AD from '~/static/images/ad.svg'
 
@@ -40,7 +41,10 @@ const Wall = ({ show, client }: any) => {
                 />
               </div>
               <div className="signup">
-                <SignUpButton extraStyle={signUpButtonStyle}>
+                <SignUpButton
+                  extraStyle={signUpButtonStyle}
+                  type={SIGNUP_TYPE.AD_WALL}
+                >
                   <Translate zh_hant="註冊帳號" zh_hans="注册账号" />
                 </SignUpButton>
               </div>

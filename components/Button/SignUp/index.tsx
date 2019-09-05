@@ -4,7 +4,7 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-export default ({ children, extraStyle }: any) => (
+export default ({ children, extraStyle, type }: any) => (
   <ModalSwitch modalId="signUpModal">
     {(open: any) => (
       <Button
@@ -13,7 +13,7 @@ export default ({ children, extraStyle }: any) => (
         bgColor="green"
         style={extraStyle}
         onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START)
+          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, { type })
           open()
         }}
       >
