@@ -20,8 +20,8 @@ import { SeachUsers } from './__generated__/SeachUsers'
 import styles from './styles.css'
 
 const SEARCH_USERS = gql`
-  query SeachUsers($first: Int!, $key: String!, $cursor: String) {
-    search(input: { key: $key, type: User, first: $first, after: $cursor }) {
+  query SeachUsers($first: Int!, $key: String!, $after: String) {
+    search(input: { key: $key, type: User, first: $first, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -100,7 +100,7 @@ const SearchUser = ({
             })
             return fetchMore({
               variables: {
-                cursor: pageInfo.endCursor
+                after: pageInfo.endCursor
               },
               updateQuery: (previousResult, { fetchMoreResult }) =>
                 mergeConnections({

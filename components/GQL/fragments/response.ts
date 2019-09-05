@@ -10,7 +10,7 @@ export const ArticleDetailResponses = gql`
     responseCount
     responses(
       input: {
-        after: $cursor
+        after: $after
         before: $before
         first: $first
         includeAfter: $includeAfter

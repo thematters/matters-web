@@ -5,7 +5,7 @@ import { QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { Query } from '~/components/GQL'
-import collectionFragments from '~/components/GQL/fragments/collection'
+import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -27,10 +27,10 @@ export const COLLECTION_LIST = gql`
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     article(input: { mediaHash: $mediaHash }) {
-      ...SidebarCollection
+      ...ArticleCollection
     }
   }
-  ${collectionFragments.sidebar}
+  ${articleFragments.articleCollection}
 `
 
 const CollectionList = ({

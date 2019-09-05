@@ -5,7 +5,6 @@ import { useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { Mutation, Query } from '~/components/GQL'
-import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
@@ -80,13 +79,6 @@ const CommentForm = ({
         {
           query: COMMENT_COMMENTS,
           variables: { id: parentId }
-        }
-      ]
-    : articleMediaHash
-    ? [
-        {
-          query: ARTICLE_COMMENTS,
-          variables: { mediaHash: articleMediaHash }
         }
       ]
     : []

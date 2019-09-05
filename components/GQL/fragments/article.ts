@@ -1,32 +1,48 @@
 import gql from 'graphql-tag'
 
-import commentFragments from './comment'
+import { ArticleDigest } from '~/components'
 
-export const ArticleDetailComments = gql`
-  fragment ArticleDetailComments on Article {
-    id
-    comments(
-      input: {
-        filter: { parentComment: null }
-        first: $first
-        after: $cursor
-        before: $before
-        includeAfter: $includeAfter
-        includeBefore: $includeBefore
-      }
-    ) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ...FeedDigestComment
+export default {
+  editorCollection: gql`
+    fragment EditorCollection on Article {
+      id
+      collection(input: { after: $after, first: $first })
+        @connection(key: "editorCollection") {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            ...DropdownDigestArticle
+          }
         }
       }
     }
-  }
-  ${commentFragments.feed}
-`
+    ${ArticleDigest.Dropdown.fragments.article}
+  `,
+  articleCollection: gql`
+    fragment ArticleCollection on Article {
+      id
+      collection(input: { after: $after, first: $first })
+        @connection(key: "articleCollection") {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            ...SidebarDigestArticle
+          }
+        }
+      }
+    }
+    ${ArticleDigest.Sidebar.fragments.article}
+  `
+}

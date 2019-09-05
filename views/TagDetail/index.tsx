@@ -22,7 +22,7 @@ import { TagDetailArticles } from './__generated__/TagDetailArticles'
 const TAG_DETAIL = gql`
   query TagDetailArticles(
     $id: ID!
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
@@ -31,7 +31,7 @@ const TAG_DETAIL = gql`
       ... on Tag {
         id
         content
-        articles(input: { first: 10, after: $cursor }) {
+        articles(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -79,7 +79,7 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
               })
               return fetchMore({
                 variables: {
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({

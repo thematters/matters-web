@@ -50,13 +50,11 @@ const FeedDigest = ({
   hasFingerprint,
   hasMoreButton,
   hasSticky,
-  refetch,
   ...actionControls
 }: { article: FeedDigestArticle } & {
   hasFingerprint?: boolean
   hasMoreButton?: boolean
   hasSticky?: boolean
-  refetch?: () => void
 } & ActionsControls) => {
   const {
     cover,
@@ -111,9 +109,7 @@ const FeedDigest = ({
         <div>
           {!hasFingerprint && live && <IconLive />}
           {hasFingerprint && <Fingerprint article={article} />}
-          {hasMoreButton && (
-            <DropdownActions article={article} refetch={refetch} />
-          )}
+          {hasMoreButton && <DropdownActions article={article} />}
         </div>
       </div>
 

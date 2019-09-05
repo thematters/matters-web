@@ -3,10 +3,10 @@ import gql from 'graphql-tag'
 import NoticeDigest from '~/components/NoticeDigest'
 
 export const ME_NOTIFICATIONS = gql`
-  query MeNotifications($first: Int, $cursor: String) {
+  query MeNotifications($first: Int, $after: String) {
     viewer {
       id
-      notices(input: { first: $first, after: $cursor }) {
+      notices(input: { first: $first, after: $after }) {
         pageInfo {
           startCursor
           endCursor

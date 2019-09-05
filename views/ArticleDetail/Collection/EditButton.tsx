@@ -12,7 +12,7 @@ import {
   Translate
 } from '~/components'
 import { Mutation } from '~/components/GQL'
-import collectionFragments from '~/components/GQL/fragments/collection'
+import articleFragments from '~/components/GQL/fragments/article'
 import IconSpinner from '~/components/Icon/Spinner'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
@@ -41,10 +41,10 @@ const EDITOR_SET_COLLECTION = gql`
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     setCollection(input: { id: $id, collection: $collection }) {
-      ...SidebarCollection
+      ...ArticleCollection
     }
   }
-  ${collectionFragments.sidebar}
+  ${articleFragments.articleCollection}
 `
 
 const IconBox = ({ icon }: { icon: any }) => (

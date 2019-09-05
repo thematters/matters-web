@@ -7,7 +7,7 @@ import { QueryResult } from 'react-apollo'
 
 import { Spinner } from '~/components'
 import { Query } from '~/components/GQL'
-import collectionFragments from '~/components/GQL/fragments/collection'
+import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorCollection } from './__generated__/EditorCollection'
@@ -16,10 +16,10 @@ import styles from './styles.css'
 const EDITOR_COLLECTION = gql`
   query EditorCollection($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
-      ...DropdownCollection
+      ...EditorCollection
     }
   }
-  ${collectionFragments.dropdown}
+  ${articleFragments.editorCollection}
 `
 
 const CollectionEditor = dynamic(

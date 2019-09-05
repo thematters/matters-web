@@ -11,10 +11,10 @@ import { mergeConnections } from '~/common/utils'
 import { MeDraftFeed } from './__generated__/MeDraftFeed'
 
 const ME_DRAFTS_FEED = gql`
-  query MeDraftFeed($cursor: String) {
+  query MeDraftFeed($after: String) {
     viewer {
       id
-      drafts(input: { first: 10, after: $cursor })
+      drafts(input: { first: 10, after: $after })
         @connection(key: "viewerDrafts") {
         pageInfo {
           startCursor
@@ -51,7 +51,7 @@ export default () => {
         const loadMore = () =>
           fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({

@@ -23,12 +23,12 @@ const SEARCH_ARTICLES = gql`
   query SeachArticles(
     $key: String!
     $first: Int!
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
-    search(input: { key: $key, type: Article, first: $first, after: $cursor }) {
+    search(input: { key: $key, type: Article, first: $first, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -74,7 +74,7 @@ const SearchArticles = ({ q }: { q: string }) => {
           })
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({
