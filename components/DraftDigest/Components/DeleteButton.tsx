@@ -63,7 +63,7 @@ const DeleteButton = ({
             data
           })
         } catch (e) {
-          //
+          console.error(e)
         }
       }}
     >

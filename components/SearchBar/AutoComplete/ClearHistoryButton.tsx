@@ -69,7 +69,7 @@ const ClearHistoryButton = () => (
           data
         })
       } catch (e) {
-        //
+        console.error(e)
       }
     }}
   >
