@@ -1,20 +1,9 @@
 import { DataProxy } from 'apollo-cache'
-import gql from 'graphql-tag'
 
-import { ViewerFolloweeCount } from './__generated__/ViewerFolloweeCount'
+import { ViewerFolloweeCount } from '~/components/GQL/queries/__generated__/ViewerFolloweeCount'
+import VIEWER_FOLLOWEE_COUNT from '~/components/GQL/queries/followeeCount'
 
-const VIEWER_FOLLOWEE_COUNT = gql`
-  query ViewerFolloweeCount {
-    viewer {
-      id
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  }
-`
-
-export const updateViewerFolloweeCount = ({
+const update = ({
   cache,
   type
 }: {
@@ -44,3 +33,5 @@ export const updateViewerFolloweeCount = ({
     console.error(e)
   }
 }
+
+export default update

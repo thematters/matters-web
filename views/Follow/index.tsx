@@ -5,8 +5,7 @@ import { QueryResult } from 'react-apollo'
 
 import { Footer, Spinner } from '~/components'
 import { Mutation, Query } from '~/components/GQL'
-import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
-import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
+import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 import { ViewerContext } from '~/components/Viewer'
 
 import { MeFollow } from './__generated__/MeFollow'
@@ -37,37 +36,7 @@ export default () => {
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
         <Mutation
           mutation={READ_FOLLOWEE_ARTICLES}
-          update={cache => {
-            try {
-              const data = cache.readQuery<UnreadFolloweeArticles>({
-                query: UNREAD_FOLLOWEE_ARTICLES
-              })
-
-              if (
-                !data ||
-                !data.viewer ||
-                !data.viewer.status ||
-                !data.viewer.status.unreadFolloweeArticles
-              ) {
-                return
-              }
-
-              cache.writeQuery({
-                query: UNREAD_FOLLOWEE_ARTICLES,
-                data: {
-                  viewer: {
-                    ...data.viewer,
-                    status: {
-                      ...data.viewer.status,
-                      unreadFolloweeArticles: false
-                    }
-                  }
-                }
-              })
-            } catch (e) {
-              console.error(e)
-            }
-          }}
+          update={viewerUnreadFolloweeArticles}
         >
           {readFolloweeArticles => (
             <Query query={ME_FOLLOW}>
