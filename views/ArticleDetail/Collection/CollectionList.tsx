@@ -5,6 +5,7 @@ import { QueryResult } from 'react-apollo'
 
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { Query } from '~/components/GQL'
+import collectionFragments from '~/components/GQL/fragments/collection'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -12,13 +13,13 @@ import ICON_ADD from '~/static/icons/add.svg?sprite'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
-import { SidebarCollection } from './__generated__/SidebarCollection'
+import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
 import styles from './styles.css'
 
-export const SIDEBAR_COLLECTION = gql`
-  query SidebarCollection(
+export const COLLECTION_LIST = gql`
+  query CollectionList(
     $mediaHash: String
-    $cursor: String
+    $after: String
     $first: Int
     $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = false
@@ -26,25 +27,10 @@ export const SIDEBAR_COLLECTION = gql`
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     article(input: { mediaHash: $mediaHash }) {
-      id
-      collection(input: { after: $cursor, first: $first })
-        @connection(key: "articleCollection") {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        totalCount
-        edges {
-          cursor
-          node {
-            ...SidebarDigestArticle
-          }
-        }
-      }
+      ...SidebarCollection
     }
   }
-  ${ArticleDigest.Sidebar.fragments.article}
+  ${collectionFragments.sidebar}
 `
 
 const CollectionList = ({
@@ -57,7 +43,7 @@ const CollectionList = ({
   canEdit?: boolean
 }) => (
   <Query
-    query={SIDEBAR_COLLECTION}
+    query={COLLECTION_LIST}
     variables={{ mediaHash: article.mediaHash, first: 10 }}
   >
     {({
@@ -65,7 +51,7 @@ const CollectionList = ({
       loading,
       error,
       fetchMore
-    }: QueryResult & { data: SidebarCollection }) => {
+    }: QueryResult & { data: CollectionListTypes }) => {
       if (loading) {
         return <Spinner />
       }
@@ -76,7 +62,7 @@ const CollectionList = ({
         fetchMore({
           variables: {
             mediaHash: article.mediaHash,
-            cursor: pageInfo.endCursor,
+            after: pageInfo.endCursor,
             first: null
           },
           updateQuery: (previousResult, { fetchMoreResult }) =>

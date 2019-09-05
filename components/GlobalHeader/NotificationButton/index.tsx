@@ -82,7 +82,7 @@ const NoticeButton = ({
 export default () => (
   <Query
     query={UNREAD_NOTICE_COUNT}
-    pollInterval={POLL_INTERVAL * 1000}
+    pollInterval={POLL_INTERVAL}
     errorPolicy="none"
     fetchPolicy="network-only"
     skip={!process.browser}
