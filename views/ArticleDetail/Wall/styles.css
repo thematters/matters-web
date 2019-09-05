@@ -1,0 +1,101 @@
+.outer {
+  @mixin all-transition;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  opacity: 0;
+  z-index: 5;
+}
+
+.show {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.bg {
+  background-color: var(--color-white);
+  background-size: cover;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  position: relative;
+  padding: 0.5rem 0 1.5rem;
+
+  & div {
+    display: flex;
+    align-items: center;
+    margin: 0.25rem 0;
+  }
+
+  & .slogan {
+    @mixin font-serif;
+
+    font-size: 1.35rem;
+    font-weight: bold;
+  }
+
+  & .desc {
+    @mixin font-sans;
+    font-size: var(--font-size-sm);
+  }
+
+  & .signup {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 0;
+  }
+
+  & .close {
+    position: absolute;
+    top: 0.625rem;
+    right: 0;
+
+    stroke: var(--color-grey-dark);
+  }
+
+  @media (--md-up) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 2.25rem 0;
+
+    & div {
+      margin: 0 0;
+    }
+
+    & .slogan {
+      @mixin font-serif;
+
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    & .desc {
+      @mixin font-sans;
+    }
+
+    & .signup {
+      margin: 0;
+      padding-right: 2.5rem;
+    }
+
+    & .close {
+      position: absolute;
+      top: 0.625rem;
+      right: 0;
+    }
+  }
+
+}
