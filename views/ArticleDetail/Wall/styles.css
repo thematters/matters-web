@@ -69,6 +69,7 @@
 
       color: var(--color-black);
       font-size: var(--font-size-md);
+      letter-spacing: 2px;
     }
 
     & .signup {
