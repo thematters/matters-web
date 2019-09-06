@@ -28,33 +28,23 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 
   position: relative;
-  padding: 0.5rem 0 1.5rem;
-
-  & div {
-    display: flex;
-    align-items: center;
-    margin: 0.25rem 0;
-  }
+  padding: var(--spacing-tight) 0;
 
   & .slogan {
     @mixin font-serif;
-
-    font-size: 1.35rem;
-    font-weight: bold;
   }
 
   & .desc {
-    @mixin font-sans;
+    margin: var(--spacing-x-tight) 0 var(--spacing-tight);
+
+    color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
   }
 
   & .signup {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0 0;
+    text-align: right;
   }
 
   & .close {
@@ -64,35 +54,25 @@
   }
 
   @media (--md-up) {
+    @mixin flex-center-space-between;
     flex-direction: row;
-    justify-content: space-between;
-
     padding: 2.25rem 0;
-
-    & div {
-      margin: 0 0;
-    }
 
     & .slogan {
       @mixin font-serif;
 
-      font-size: 2rem;
-      font-weight: bold;
+      font-size: var(--font-size-xxl);
     }
 
     & .desc {
-      @mixin font-sans;
+      margin: 0;
+
+      color: var(--color-black);
+      font-size: var(--font-size-md);
     }
 
     & .signup {
-      margin: 0;
-      padding-right: 2.5rem;
-    }
-
-    & .close {
-      position: absolute;
-      top: 0.625rem;
-      right: 0;
+      padding-right: var(--spacing-x-loose);
     }
   }
 }

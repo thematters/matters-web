@@ -35,3 +35,7 @@
 .black {
   color: var(--color-black);
 }
+
+.grey-dark {
+  color: var(--color-grey-dark);
+}

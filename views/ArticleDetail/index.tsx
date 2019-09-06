@@ -101,11 +101,18 @@ const Block = ({
   )
 }
 
-const ArticleDetail = ({ mediaHash, wall }: any) => {
+const ArticleDetail = ({
+  mediaHash,
+  wall
+}: {
+  mediaHash: string
+  wall: boolean
+}) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
+  const shouldShowWall = !viewer.isAuthed && wall
 
   if (!mediaHash) {
     return null
@@ -122,9 +129,8 @@ const ArticleDetail = ({ mediaHash, wall }: any) => {
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
         const canEditCollection = viewer.id === authorId
-        const shouldShowWall = !viewer.isAuthed && wall === true
 
-        const handleWall = ({ currentPosition }: any) => {
+        const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
           if (shouldShowWall) {
             setFixedWall(currentPosition === 'inside')
           }

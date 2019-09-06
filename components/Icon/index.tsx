@@ -11,7 +11,7 @@ interface IconBaseProps {
 
 type SVGIconProps = {
   id: string
-  color?: 'white' | 'black'
+  color?: 'white' | 'black' | 'grey-dark'
   viewBox: string
 } & IconBaseProps
 
