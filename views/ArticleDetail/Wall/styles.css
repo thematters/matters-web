@@ -61,8 +61,6 @@
     position: absolute;
     top: 0.625rem;
     right: 0;
-
-    stroke: var(--color-grey-dark);
   }
 
   @media (--md-up) {
@@ -97,5 +95,4 @@
       right: 0;
     }
   }
-
 }

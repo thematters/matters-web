@@ -4,7 +4,7 @@ import { Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { SIGNUP_TYPE } from '~/common/enums'
-import ICON_CLOSE from '~/static/icons/close-no-color.svg?sprite'
+import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import IMG_AD from '~/static/images/ad.svg'
 
 import styles from './styles.css'
