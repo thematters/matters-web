@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { withRouter, WithRouterProps } from 'next/router'
@@ -20,6 +21,7 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Fingerprint } from '~/components/Fingerprint'
 import { Query } from '~/components/GQL'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
 import ShareModal from '~/components/ShareButton/ShareModal'
@@ -39,6 +41,7 @@ import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
+import Wall from './Wall'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
@@ -98,11 +101,18 @@ const Block = ({
   )
 }
 
-const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
+const ArticleDetail = ({
+  mediaHash,
+  wall
+}: {
+  mediaHash: string
+  wall: boolean
+}) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(true)
   const [trackedFinish, setTrackedFinish] = useState(false)
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const [fixedWall, setFixedWall] = useState(false)
+  const shouldShowWall = !viewer.isAuthed && wall
 
   if (!mediaHash) {
     return null
@@ -112,12 +122,19 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
     <Query query={ARTICLE_DETAIL} variables={{ mediaHash }}>
       {({
         data,
+        client,
         loading,
         subscribeToMore
       }: QueryResult & { data: ArticleDetailType }) => {
         const authorId = _get(data, 'article.author.id')
         const collectionCount = _get(data, 'article.collection.totalCount')
         const canEditCollection = viewer.id === authorId
+
+        const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
+          if (shouldShowWall) {
+            setFixedWall(currentPosition === 'inside')
+          }
+        }
 
         return (
           <main className="l-row">
@@ -167,6 +184,14 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                   })
                 }
               })
+
+              useEffect(() => {
+                if (process.browser && shouldShowWall) {
+                  if (window.location.hash) {
+                    jump('#article-footer-anchor', { offset: -10 })
+                  }
+                }
+              }, [])
 
               useImmersiveMode('article > .content')
 
@@ -241,25 +266,35 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
                         />
                       </Block>
 
-                      <section className="l-col-4 l-col-md-8 l-col-lg-12">
-                        <RelatedArticles article={data.article} />
-                      </section>
+                      <Waypoint onPositionChange={handleWall}>
+                        <section className="l-col-4 l-col-md-8 l-col-lg-12">
+                          <RelatedArticles article={data.article} />
+                        </section>
+                      </Waypoint>
+
+                      {shouldShowWall && (
+                        <Wall show={fixedWall} client={client} />
+                      )}
 
                       <Block type="section">
-                        <Responses />
-                        <Waypoint
-                          onEnter={() => {
-                            if (!trackedFinish) {
-                              analytics.trackEvent(
-                                ANALYTICS_EVENTS.FINISH_COMMENTS,
-                                {
-                                  entrance: data.article.id
+                        {!shouldShowWall && (
+                          <>
+                            <Responses />
+                            <Waypoint
+                              onEnter={() => {
+                                if (!trackedFinish) {
+                                  analytics.trackEvent(
+                                    ANALYTICS_EVENTS.FINISH_COMMENTS,
+                                    {
+                                      entrance: data.article.id
+                                    }
+                                  )
+                                  setTrackedFinish(true)
                                 }
-                              )
-                              setTrackedFinish(true)
-                            }
-                          }}
-                        />
+                              }}
+                            />
+                          </>
+                        )}
                         <AppreciatorsModal />
                         <ShareModal />
                       </Block>
@@ -269,8 +304,11 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
               )
             })()}
 
-            <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-              <Footer />
+            <section
+              id="article-footer-anchor"
+              className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2"
+            >
+              {!shouldShowWall && <Footer />}
             </section>
 
             <style jsx>{styles}</style>
@@ -281,4 +319,21 @@ const ArticleDetail: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(ArticleDetail)
+const ArticleDetailContainer: React.FC<WithRouterProps> = ({ router }) => {
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
+
+  if (!mediaHash) {
+    return null
+  }
+
+  return (
+    <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
+      {({ data }) => {
+        const { wall } = _get(data, 'clientPreference', { wall: true })
+        return <ArticleDetail mediaHash={mediaHash} wall={wall} />
+      }}
+    </Query>
+  )
+}
+
+export default withRouter(ArticleDetailContainer)

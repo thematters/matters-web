@@ -11,6 +11,7 @@ interface IconBaseProps {
 
 type SVGIconProps = {
   id: string
+  color?: 'white' | 'black' | 'grey-dark'
   viewBox: string
 } & IconBaseProps
 
@@ -42,6 +43,7 @@ type IconProps = SVGIconProps | ImgIconProps
 
 export const Icon: React.FC<IconProps> = ({
   size = 'default',
+  color,
   id,
   viewBox,
   src,
@@ -50,6 +52,7 @@ export const Icon: React.FC<IconProps> = ({
 }) => {
   const iconClasses = classNames({
     [size]: true,
+    [color]: !!color,
     [className]: !!className
   })
 
