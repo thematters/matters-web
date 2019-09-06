@@ -37,7 +37,7 @@
   }
 
   & .desc {
-    margin: var(--spacing-x-tight) 0 var(--spacing-tight);
+    margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight);
 
     color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
