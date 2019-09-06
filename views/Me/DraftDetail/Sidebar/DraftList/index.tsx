@@ -5,17 +5,19 @@ import { QueryResult } from 'react-apollo'
 import { DraftDigest, Spinner, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
+
 import Collapsable from '../Collapsable'
 import {
-  MeDrafts,
-  MeDrafts_viewer_drafts_edges
-} from './__generated__/MeDrafts'
+  MeDraftsSidebar,
+  MeDraftsSidebar_viewer_drafts_edges
+} from './__generated__/MeDraftsSidebar'
 
-const ME_DRAFTS = gql`
-  query MeDrafts {
+const ME_DRAFTS_SIDEBAR = gql`
+  query MeDraftsSidebar {
     viewer {
       id
-      drafts(input: { first: 10 }) {
+      drafts(input: { first: null }) @connection(key: "viewerDrafts") {
         edges {
           node {
             id
@@ -29,9 +31,13 @@ const ME_DRAFTS = gql`
 `
 
 const DraftList = ({ currentId }: { currentId: string }) => (
-  <Collapsable title={<Translate zh_hans={'草稿'} zh_hant={'草稿'} />}>
-    <Query query={ME_DRAFTS}>
-      {({ data, loading }: QueryResult & { data: MeDrafts }) => {
+  <Collapsable
+    title={
+      <Translate zh_hans={TEXT.zh_hant.draft} zh_hant={TEXT.zh_hans.draft} />
+    }
+  >
+    <Query query={ME_DRAFTS_SIDEBAR}>
+      {({ data, loading }: QueryResult & { data: MeDraftsSidebar }) => {
         const edges = _get(data, 'viewer.drafts.edges')
 
         if (loading || !edges) {
@@ -40,14 +46,11 @@ const DraftList = ({ currentId }: { currentId: string }) => (
 
         return edges
           .filter(
-            ({ node }: MeDrafts_viewer_drafts_edges) => node.id !== currentId
+            ({ node }: MeDraftsSidebar_viewer_drafts_edges) =>
+              node.id !== currentId
           )
-          .map(({ node }: MeDrafts_viewer_drafts_edges, i: number) => (
-            <DraftDigest.Sidebar
-              key={i}
-              draft={node}
-              refetchQueries={[{ query: ME_DRAFTS }]}
-            />
+          .map(({ node }: MeDraftsSidebar_viewer_drafts_edges, i: number) => (
+            <DraftDigest.Sidebar key={i} draft={node} />
           ))
       }}
     </Query>

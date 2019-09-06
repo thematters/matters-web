@@ -62,11 +62,20 @@ const ClearHistoryButton = () => (
           return
         }
 
-        data.viewer.activity.recentSearches.edges = []
-
         cache.writeQuery({
           query: VIEWER_RECENT_SEARCHES,
-          data
+          data: {
+            viewer: {
+              ...data.viewer,
+              activity: {
+                ...data.viewer.activity,
+                recentSearches: {
+                  ...data.viewer.activity.recentSearches,
+                  edges: []
+                }
+              }
+            }
+          }
         })
       } catch (e) {
         console.error(e)

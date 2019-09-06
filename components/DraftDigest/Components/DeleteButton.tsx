@@ -1,4 +1,3 @@
-import { PureQueryOptions } from 'apollo-client'
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
@@ -14,11 +13,11 @@ const DELETE_DRAFT = gql`
   }
 `
 
-const VIEWER_DRADTS = gql`
+const ME_DRADTS = gql`
   query ViewerDrafts {
     viewer {
       id
-      drafts(input: {}) @connection(key: "viewerDrafts") {
+      drafts(input: { first: null }) @connection(key: "viewerDrafts") {
         edges {
           cursor
           node {
@@ -30,20 +29,14 @@ const VIEWER_DRADTS = gql`
   }
 `
 
-const DeleteButton = ({
-  id,
-  refetchQueries
-}: {
-  id: string
-  refetchQueries?: PureQueryOptions[]
-}) => {
+const DeleteButton = ({ id }: { id: string }) => {
   return (
     <Mutation
       mutation={DELETE_DRAFT}
       variables={{ id }}
       update={cache => {
         try {
-          const data = cache.readQuery<ViewerDrafts>({ query: VIEWER_DRADTS })
+          const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
 
           if (
             !data ||
@@ -57,10 +50,18 @@ const DeleteButton = ({
           const edges = data.viewer.drafts.edges.filter(
             ({ node }: { node: any }) => node.id !== id
           )
-          data.viewer.drafts.edges = edges
+
           cache.writeQuery({
-            query: VIEWER_DRADTS,
-            data
+            query: ME_DRADTS,
+            data: {
+              viewer: {
+                ...data.viewer,
+                drafts: {
+                  ...data.viewer.drafts,
+                  edges
+                }
+              }
+            }
           })
         } catch (e) {
           console.error(e)
@@ -68,7 +69,7 @@ const DeleteButton = ({
       }}
     >
       {deleteDraft => (
-        <button type="button" onClick={() => deleteDraft({ refetchQueries })}>
+        <button type="button" onClick={() => deleteDraft()}>
           <Translate
             zh_hant={TEXT.zh_hant.delete}
             zh_hans={TEXT.zh_hant.delete}
