@@ -1,11 +1,14 @@
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import _get from 'lodash/get'
+import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
 import { ViewerContext } from '~/components/Viewer'
 
+import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
@@ -14,7 +17,6 @@ import { DigestActionsComment } from './__generated__/DigestActionsComment'
 import DownvoteButton from './DownvoteButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
-
 export interface FooterActionsControls {
   hasComment?: boolean
   refetch?: boolean
@@ -59,18 +61,20 @@ const IconDotDivider = () => (
   />
 )
 
-const FooterActions = ({
+const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
+  router,
   comment,
   hasComment,
   refetch
-}: FooterActionsProps) => {
+}) => {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
-
+  const fragment =
+    parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
   const commentPath =
     author.userName && mediaHash
       ? toPath({
@@ -78,8 +82,7 @@ const FooterActions = ({
           userName: author.userName,
           slug,
           mediaHash,
-          fragment:
-            parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
+          fragment
         })
       : { href: '', as: '' }
 
@@ -118,7 +121,17 @@ const FooterActions = ({
             </>
           )}
         </div>
-        <a href={commentPath.as}>
+        {/* We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
+        <a
+          href={commentPath.as}
+          onClick={() => {
+            if (router && router.pathname === PATHS.ARTICLE_DETAIL.href) {
+              jump(`#${fragment}`, {
+                offset: -64
+              })
+            }
+          }}
+        >
           <DateTime date={comment.createdAt} />
         </a>
       </footer>
@@ -141,6 +154,8 @@ const FooterActions = ({
   )
 }
 
-FooterActions.fragments = fragments
+const WrappedFooterActions: any = withRouter(FooterActions)
 
-export default FooterActions
+WrappedFooterActions.fragments = fragments
+
+export default WrappedFooterActions

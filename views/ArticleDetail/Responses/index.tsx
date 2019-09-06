@@ -155,7 +155,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           if (fragment) {
             const jumpToFragment = () => {
               jump(`#${fragment}`, {
-                offset: fragment === UrlFragments.COMMENTS ? -10 : -80
+                offset: fragment === UrlFragments.COMMENTS ? -10 : -64
               })
             }
             const element = dom.$(fragment) // !responses.filter(({ id }) => id === parentId).length

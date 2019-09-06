@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import Link from 'next/link'
 
 import CommentContent from '~/components/CommentDigest/Content'
 
@@ -25,11 +24,9 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
   if (comment.state === 'active') {
     return (
-      <Link {...path}>
-        <a>
-          <CommentContent content={content} state={comment.state} />
-        </a>
-      </Link>
+      <a href={path.as}>
+        <CommentContent content={content} state={comment.state} />
+      </a>
     )
   }
 

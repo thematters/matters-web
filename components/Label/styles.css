@@ -1,12 +1,15 @@
 .label {
+  display: inline-block;
   color: var(--color-white);
   background: var(--color-matters-green);
   user-select: none;
 }
 
 .small {
-  padding: var(--spacing-xxx-tight) var(--spacing-x-tight);
+  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+
   font-size: var(--font-size-xs);
+  line-height: 1;
   border-radius: 2px;
 }
 
