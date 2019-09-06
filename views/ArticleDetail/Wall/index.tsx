@@ -4,7 +4,7 @@ import { Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { SIGNUP_TYPE } from '~/common/enums'
-import ICON_CLOSE from '~/static/icons/close-no-color.svg?sprite'
+import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import IMG_AD from '~/static/images/ad.svg'
 
 import styles from './styles.css'
@@ -31,15 +31,15 @@ const Wall = ({ show, client }: any) => {
         <section className="l-row">
           <section className="l-col-4 l-col-md-8 l-col-lg-12">
             <section className="container">
-              <div className="slogan">
+              <h2 className="slogan">
                 <Translate zh_hant="看不過癮？" zh_hans="看不过瘾？" />
-              </div>
-              <div className="desc">
+              </h2>
+              <p className="desc">
                 <Translate
                   zh_hant="馬上加入全球最高質量華語創作社區，更多精彩文章与讨论等着你。"
                   zh_hans="马上加入全球最高质量华语创作社区，更多精彩文章与讨论等着你。"
                 />
-              </div>
+              </p>
               <div className="signup">
                 <SignUpButton
                   extraStyle={signUpButtonStyle}
@@ -54,6 +54,7 @@ const Wall = ({ show, client }: any) => {
                     id={ICON_CLOSE.id}
                     viewBox={ICON_CLOSE.viewBox}
                     size="small"
+                    color="grey-dark"
                   />
                 </button>
               </div>
