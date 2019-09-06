@@ -58,7 +58,6 @@
   display: inline-block;
   font-size: 0;
   vertical-align: middle;
-  cursor: pointer;
 
   & input {
     font-size: 0;

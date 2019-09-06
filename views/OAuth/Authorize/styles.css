@@ -1,0 +1,36 @@
+.content {
+  padding: var(--spacing-tight) var(--spacing-xx-loose) var(--spacing-xx-loose);
+  text-align: left;
+
+  & ul {
+    padding: 0 var(--spacing-x-tight) var(--spacing-loose);
+
+    color: var(--color-grey-darker);
+    font-size: var(--font-size-sm);
+
+    & li {
+      position: relative;
+      padding-left: var(--spacing-x-tight);
+
+      line-height: 1.875rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: calc(50% - 1px);
+        width: 2px;
+        height: 2px;
+        background-color: currentColor;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  & .switch-account {
+    margin-top: var(--spacing-loose);
+
+    color: var(--color-grey-dark);
+    text-align: center;
+  }
+}

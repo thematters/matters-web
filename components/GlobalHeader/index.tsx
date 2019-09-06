@@ -77,12 +77,14 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             )}
 
-            {!isAbout && (!viewer.isAuthed || !user) && (
-              <>
-                {!isLogin && <LoginButton />}
-                {!isSignUp && <SignUpButton />}
-              </>
-            )}
+            {!isAbout &&
+              (!viewer.isAuthed || !user) &&
+              (!isLogin && !isSignUp) && (
+                <>
+                  <LoginButton />
+                  <SignUpButton />
+                </>
+              )}
 
             {isAbout && (
               <Link {...PATHS.HOME}>

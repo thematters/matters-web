@@ -15,7 +15,6 @@ import {
 } from '~/components'
 import EmptyMAT from '~/components/Empty/EmptyMAT'
 import { Query } from '~/components/GQL'
-import { Protected } from '~/components/Protected'
 import { Transaction } from '~/components/TransactionDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -59,93 +58,91 @@ const Wallet = () => {
   const MAT = _get(viewer, 'status.MAT.total', 0)
 
   return (
-    <Protected>
-      <main className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <Head title={{ zh_hant: '我的錢包', zh_hans: '我的钱包' }} />
+    <main className="l-row">
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        <Head title={{ zh_hant: '我的錢包', zh_hans: '我的钱包' }} />
 
-          <PageHeader
-            pageTitle={<Translate zh_hant="我的錢包" zh_hans="我的钱包" />}
-          >
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_MAT_GOLD.id}
-                  viewBox={ICON_MAT_GOLD.viewBox}
-                  size="small"
-                />
+        <PageHeader
+          pageTitle={<Translate zh_hant="我的錢包" zh_hans="我的钱包" />}
+        >
+          <TextIcon
+            icon={
+              <Icon
+                id={ICON_MAT_GOLD.id}
+                viewBox={ICON_MAT_GOLD.viewBox}
+                size="small"
+              />
+            }
+            text={`${numFormat(MAT)} MAT`}
+            weight="semibold"
+            size="lg"
+          />
+        </PageHeader>
+
+        <section>
+          <Query query={ME_WALLET}>
+            {({
+              data,
+              loading,
+              error,
+              fetchMore
+            }: QueryResult & { data: MeWallet }) => {
+              if (loading) {
+                return <Spinner />
               }
-              text={`${numFormat(MAT)} MAT`}
-              weight="semibold"
-              size="lg"
-            />
-          </PageHeader>
 
-          <section>
-            <Query query={ME_WALLET}>
-              {({
-                data,
-                loading,
-                error,
-                fetchMore
-              }: QueryResult & { data: MeWallet }) => {
-                if (loading) {
-                  return <Spinner />
-                }
+              const connectionPath = 'viewer.status.MAT.history'
+              const { edges, pageInfo } = _get(data, connectionPath, {})
+              const loadMore = () => {
+                analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+                  type: 'wallet',
+                  location: edges.length
+                })
+                return fetchMore({
+                  variables: {
+                    cursor: pageInfo.endCursor
+                  },
+                  updateQuery: (previousResult, { fetchMoreResult }) =>
+                    mergeConnections({
+                      oldData: previousResult,
+                      newData: fetchMoreResult,
+                      path: connectionPath
+                    })
+                })
+              }
 
-                const connectionPath = 'viewer.status.MAT.history'
-                const { edges, pageInfo } = _get(data, connectionPath, {})
-                const loadMore = () => {
-                  analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                    type: 'wallet',
-                    location: edges.length
-                  })
-                  return fetchMore({
-                    variables: {
-                      cursor: pageInfo.endCursor
-                    },
-                    updateQuery: (previousResult, { fetchMoreResult }) =>
-                      mergeConnections({
-                        oldData: previousResult,
-                        newData: fetchMoreResult,
-                        path: connectionPath
-                      })
-                  })
-                }
+              if (!edges || edges.length <= 0) {
+                return <EmptyMAT />
+              }
 
-                if (!edges || edges.length <= 0) {
-                  return <EmptyMAT />
-                }
+              return (
+                <InfiniteScroll
+                  hasNextPage={pageInfo.hasNextPage}
+                  loadMore={loadMore}
+                >
+                  <ul>
+                    {edges.map(
+                      ({ node, cursor }: { node: any; cursor: any }) => (
+                        <li key={cursor}>
+                          <Transaction.Feed tx={node} />
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </InfiniteScroll>
+              )
+            }}
+          </Query>
+        </section>
+      </article>
 
-                return (
-                  <InfiniteScroll
-                    hasNextPage={pageInfo.hasNextPage}
-                    loadMore={loadMore}
-                  >
-                    <ul>
-                      {edges.map(
-                        ({ node, cursor }: { node: any; cursor: any }) => (
-                          <li key={cursor}>
-                            <Transaction.Feed tx={node} />
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </InfiniteScroll>
-                )
-              }}
-            </Query>
-          </section>
-        </article>
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Intro />
+        <Footer />
+      </aside>
 
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          <Intro />
-          <Footer />
-        </aside>
-
-        <style jsx>{styles}</style>
-      </main>
-    </Protected>
+      <style jsx>{styles}</style>
+    </main>
   )
 }
 

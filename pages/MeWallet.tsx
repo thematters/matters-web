@@ -1,3 +1,9 @@
 import MeWallet from '~/views/Me/Wallet'
 
-export default () => <MeWallet />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <MeWallet />
+  </Protected>
+)

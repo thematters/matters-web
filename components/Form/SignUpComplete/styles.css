@@ -26,7 +26,3 @@ ol {
   font-size: var(--font-size-sm);
   text-align: left;
 }
-
-.sub-title {
-  color: var(--color-black);
-}

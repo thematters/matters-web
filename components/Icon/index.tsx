@@ -2,7 +2,14 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type IconSize = 'xsmall' | 'small' | 'default' | 'large' | 'xlarge' | 'xxlarge'
+type IconSize =
+  | 'xsmall'
+  | 'msmall'
+  | 'small'
+  | 'default'
+  | 'large'
+  | 'xlarge'
+  | 'xxlarge'
 
 interface IconBaseProps {
   size?: IconSize

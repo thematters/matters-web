@@ -252,13 +252,6 @@ export const ROUTES: Array<{
     as: '/oauth/:provider/failure'
   },
 
-  // temporary endpoint
-  {
-    key: 'OAUTH_LIKECOIN_POLLING',
-    href: '/OAuthLikeCoinPolling',
-    as: '/oauth/likecoin/polling'
-  },
-
   // Misc
   {
     key: 'MISC_ABOUT',
