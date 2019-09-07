@@ -40,7 +40,7 @@ const feedFragment = gql`
 export const queries: { [key: string]: any } = {
   hottest: gql`
     query HottestFeed(
-      $cursor: String
+      $after: String
       $hasArticleDigestActionAuthor: Boolean = false
       $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
@@ -48,7 +48,7 @@ export const queries: { [key: string]: any } = {
       viewer {
         id
         recommendation {
-          feed: hottest(input: { first: 10, after: $cursor }) {
+          feed: hottest(input: { first: 10, after: $after }) {
             ...FeedArticleConnection
           }
         }
@@ -58,7 +58,7 @@ export const queries: { [key: string]: any } = {
   `,
   newest: gql`
     query NewestFeed(
-      $cursor: String
+      $after: String
       $hasArticleDigestActionAuthor: Boolean = false
       $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
@@ -66,7 +66,7 @@ export const queries: { [key: string]: any } = {
       viewer {
         id
         recommendation {
-          feed: newest(input: { first: 10, after: $cursor }) {
+          feed: newest(input: { first: 10, after: $after }) {
             ...FeedArticleConnection
           }
         }
@@ -112,7 +112,7 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
             })
             return fetchMore({
               variables: {
-                cursor: pageInfo.endCursor
+                after: pageInfo.endCursor
               },
               updateQuery: (previousResult, { fetchMoreResult }) =>
                 mergeConnections({

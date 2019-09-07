@@ -52,14 +52,12 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
                   {({
                     data,
                     loading,
-                    error,
-                    refetch
+                    error
                   }: QueryResult & { data: RootQuery }) => (
                     <Layout
                       loading={loading}
                       user={data && data.viewer}
                       error={error}
-                      refetch={refetch}
                     >
                       <Component {...pageProps} />
                     </Layout>

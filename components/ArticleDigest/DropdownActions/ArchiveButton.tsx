@@ -1,32 +1,54 @@
+import gql from 'graphql-tag'
+
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
+import updateUserArticles from '~/components/GQL/updates/userArticles'
 
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
+import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
 import styles from './styles.css'
 
-const ArchiveButton: React.FC<{
-  articleId: string
+const fragments = {
+  article: gql`
+    fragment ArchiveButtonArticle on Article {
+      id
+      state
+      author {
+        id
+        userName
+      }
+    }
+  `
+}
+
+const ArchiveButton = ({
+  article,
+  hideDropdown
+}: {
+  article: ArchiveButtonArticle
   hideDropdown: () => void
-  refetch?: () => void
-}> = ({ articleId, hideDropdown, refetch }) => {
+}) => {
   return (
     <Mutation
       mutation={ARCHIVE_ARTICLE}
-      variables={{ id: articleId }}
+      variables={{ id: article.id }}
       optimisticResponse={{
         archiveArticle: {
-          id: articleId,
+          id: article.id,
           state: 'archived',
           sticky: false,
           __typename: 'Article'
         }
       }}
-      onCompleted={() => {
-        if (refetch) {
-          refetch()
-        }
+      update={cache => {
+        updateUserArticles({
+          cache,
+          articleId: article.id,
+          userName: article.author.userName,
+          type: 'archive'
+        })
       }}
     >
       {archiveArticle => (
@@ -55,5 +77,7 @@ const ArchiveButton: React.FC<{
     </Mutation>
   )
 }
+
+ArchiveButton.fragments = fragments
 
 export default ArchiveButton

@@ -12,14 +12,14 @@ import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed(
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     viewer {
       id
-      subscriptions(input: { first: 10, after: $cursor }) {
+      subscriptions(input: { first: 10, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -55,7 +55,7 @@ export default () => {
         const loadMore = () =>
           fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({

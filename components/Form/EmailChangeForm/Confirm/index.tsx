@@ -29,13 +29,7 @@ const CONFIRM_CODE = gql`
 
 const CHANGE_EMAIL = gql`
   mutation ChangeEmail($input: ChangeEmailInput!) {
-    changeEmail(input: $input)
-  }
-`
-
-const QUERY_VIEWER_EMAIL = gql`
-  query ViewerEmail {
-    viewer {
+    changeEmail(input: $input) {
       id
       info {
         email
@@ -224,10 +218,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
     <>
       <Mutation mutation={CONFIRM_CODE}>
         {confirm => (
-          <Mutation
-            mutation={CHANGE_EMAIL}
-            refetchQueries={[{ query: QUERY_VIEWER_EMAIL }]}
-          >
+          <Mutation mutation={CHANGE_EMAIL}>
             {update => (
               <MainForm preSubmitAction={confirm} submitAction={update} />
             )}

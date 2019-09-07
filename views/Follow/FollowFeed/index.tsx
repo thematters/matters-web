@@ -19,7 +19,7 @@ import { FollowFeed } from './__generated__/FollowFeed'
 
 const FOLLOW_FEED = gql`
   query FollowFeed(
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
@@ -27,7 +27,7 @@ const FOLLOW_FEED = gql`
     viewer {
       id
       recommendation {
-        followeeArticles(input: { first: 10, after: $cursor }) {
+        followeeArticles(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -68,7 +68,7 @@ export default () => {
           })
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({

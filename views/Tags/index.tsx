@@ -20,11 +20,11 @@ import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
 const ALL_TAGSS = gql`
-  query AllTags($cursor: String) {
+  query AllTags($after: String) {
     viewer {
       id
       recommendation {
-        tags(input: { first: 20, after: $cursor }) {
+        tags(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -80,7 +80,7 @@ const Tags = () => (
               })
               return fetchMore({
                 variables: {
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({

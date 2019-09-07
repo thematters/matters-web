@@ -13,7 +13,7 @@ import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed(
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
@@ -21,7 +21,7 @@ const ME_HISTORY_FEED = gql`
     viewer {
       id
       activity {
-        history(input: { first: 10, after: $cursor }) {
+        history(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -63,7 +63,7 @@ export default () => {
           })
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({

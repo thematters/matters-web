@@ -2,22 +2,20 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import ArchiveButton from '~/components/ArticleDigest/DropdownActions/ArchiveButton'
 import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MORE_REGULAR from '~/static/icons/more-regular.svg?sprite'
 
 import { MoreButtonArticle } from './__generated__/MoreButtonArticle'
-import ArchiveButton from './ArchiveButton'
 
 const fragments = {
   article: gql`
     fragment MoreButtonArticle on Article {
       id
-      author {
-        id
-      }
-      state
+      ...ArchiveButtonArticle
     }
+    ${ArchiveButton.fragments.article}
   `
 }
 
@@ -34,7 +32,7 @@ const DropdownContent: React.FC<{
     <Menu>
       <Menu.Item>
         {!isArchived && isArticleAuthor && (
-          <ArchiveButton articleId={article.id} hideDropdown={hideDropdown} />
+          <ArchiveButton article={article} hideDropdown={hideDropdown} />
         )}
       </Menu.Item>
     </Menu>

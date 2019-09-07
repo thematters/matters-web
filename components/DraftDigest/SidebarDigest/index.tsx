@@ -1,4 +1,3 @@
-import { PureQueryOptions } from 'apollo-client'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -9,6 +8,7 @@ import { numFormat, toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import DeleteButton from '../Components/DeleteButton'
+import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
 import styles from './styles.css'
 
 const fragments = {
@@ -34,13 +34,7 @@ const IconDotDivider = () => (
   />
 )
 
-const SidebarDigest = ({
-  draft,
-  refetchQueries
-}: {
-  draft: SidebarDigest
-  refetchQueries?: PureQueryOptions[]
-}) => {
+const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
   const { id, title, publishState, updatedAt, slug, wordCount } = draft
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
@@ -74,7 +68,7 @@ const SidebarDigest = ({
             {isUnpublished && (
               <>
                 <IconDotDivider />
-                <DeleteButton id={id} refetchQueries={refetchQueries} />
+                <DeleteButton id={id} />
               </>
             )}
           </footer>

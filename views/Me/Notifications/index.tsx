@@ -13,10 +13,8 @@ import {
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { Mutation, Query } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
-import {
-  ME_NOTIFICATIONS,
-  UNREAD_NOTICE_COUNT
-} from '~/components/GQL/queries/notice'
+import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
+import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import NoticeDigest from '~/components/NoticeDigest'
 import { Protected } from '~/components/Protected'
 
@@ -47,7 +45,7 @@ const Notifications = () => (
                 fetchMore({
                   variables: {
                     first: 20,
-                    cursor: pageInfo.endCursor
+                    after: pageInfo.endCursor
                   },
                   updateQuery: (previousResult, { fetchMoreResult }) =>
                     mergeConnections({
@@ -64,11 +62,7 @@ const Notifications = () => (
               return (
                 <Mutation
                   mutation={MARK_ALL_NOTICES_AS_READ}
-                  refetchQueries={[
-                    {
-                      query: UNREAD_NOTICE_COUNT
-                    }
-                  ]}
+                  update={updateViewerUnreadNoticeCount}
                 >
                   {markAllNoticesAsRead => {
                     useEffect(() => {
