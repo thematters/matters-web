@@ -19,7 +19,6 @@ const ME_DRADTS = gql`
       id
       drafts(input: { first: null }) @connection(key: "viewerDrafts") {
         edges {
-          cursor
           node {
             id
           }
