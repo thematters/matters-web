@@ -10,9 +10,7 @@
 
     & li {
       position: relative;
-      padding-left: var(--spacing-x-tight);
-
-      line-height: 1.875rem;
+      padding: var(--spacing-x-tight) var(--spacing-x-tight);
 
       &::before {
         content: '';

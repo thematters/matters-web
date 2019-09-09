@@ -1,15 +1,20 @@
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 import { withRouter, WithRouterProps } from 'next/router'
+import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { Modal, Spinner, Translate } from '~/components'
+import { LanguageContext, Modal, Spinner, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 import OAuth from '~/components/OAuth'
 import Throw404 from '~/components/Throw404'
 
 import { TEXT } from '~/common/enums'
-import { objectToGetParams, redirectToLogin } from '~/common/utils'
+import {
+  objectToGetParams,
+  redirectToLogin,
+  toReadableScope
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -31,6 +36,7 @@ const OAUTH_CLIENT_INFO = gql`
 `
 
 const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
+  const { lang } = useContext(LanguageContext)
   const qs = (router ? router.query : {}) as { [key: string]: any }
   const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}${objectToGetParams(qs)}`
   const clientId = qs.client_id
@@ -52,22 +58,20 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
           )
         }
 
-        if (!data.oauthClient.id) {
+        if (!data || !data.oauthClient || !data.oauthClient.id) {
           return <Throw404 />
         }
+
+        const { avatar, website, name, scope: scopes } = data.oauthClient
 
         return (
           <main className="l-row">
             <OAuth.Box
-              avatar={data.oauthClient.avatar}
+              avatar={avatar}
               title={
                 <>
-                  <a
-                    className="u-link-green"
-                    href={data.oauthClient.website}
-                    target="_blank"
-                  >
-                    {data.oauthClient.name}
+                  <a className="u-link-green" href={website} target="_blank">
+                    {name}
                   </a>
                   <Translate
                     zh_hant=" 正在申請訪問你的 Matters 賬號數據："
@@ -96,10 +100,24 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
 
                 <section className="content">
                   <ul>
-                    {data.oauthClient.scope &&
-                      data.oauthClient.scope.map((s: any) => {
-                        return <li key={s}>{s}</li>
-                      })}
+                    <li>
+                      <Translate
+                        zh_hant="讀取你的公開資料"
+                        zh_hans="读取你的公开资料"
+                      />
+                    </li>
+                    {scopes.map((scope: any) => {
+                      const readableScope = toReadableScope({
+                        scope,
+                        lang
+                      })
+
+                      if (!readableScope) {
+                        return null
+                      }
+
+                      return <li key={scope}>{readableScope}</li>
+                    })}
                   </ul>
 
                   <hr />
