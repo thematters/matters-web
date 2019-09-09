@@ -6,7 +6,7 @@ export default gql`
   query ArticleResponses(
     $mediaHash: String
     $before: String
-    $cursor: String
+    $after: String
     $first: Int = 8
     $includeAfter: Boolean
     $includeBefore: Boolean

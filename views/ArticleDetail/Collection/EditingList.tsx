@@ -5,35 +5,21 @@ import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
-import { ArticleDigest, Spinner } from '~/components'
+import { Spinner } from '~/components'
 import { Query } from '~/components/GQL'
+import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorCollection } from './__generated__/EditorCollection'
 import styles from './styles.css'
 
 const EDITOR_COLLECTION = gql`
-  query EditorCollection($mediaHash: String, $first: Int) {
+  query EditorCollection($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
-      id
-      collection(input: { first: $first })
-        @connection(key: "articleCollection") {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        totalCount
-        edges {
-          cursor
-          node {
-            ...DropdownDigestArticle
-          }
-        }
-      }
+      ...EditorCollection
     }
   }
-  ${ArticleDigest.Dropdown.fragments.article}
+  ${articleFragments.editorCollection}
 `
 
 const CollectionEditor = dynamic(

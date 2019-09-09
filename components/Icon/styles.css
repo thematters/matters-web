@@ -32,3 +32,15 @@
   width: 4rem;
   height: 4rem;
 }
+
+.white {
+  color: var(--color-white);
+}
+
+.black {
+  color: var(--color-black);
+}
+
+.grey-dark {
+  color: var(--color-grey-dark);
+}

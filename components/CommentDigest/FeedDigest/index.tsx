@@ -87,26 +87,25 @@ const DescendantComment = ({
       }
     >
       <header className="header">
-        <div className="avatars">
-          <UserDigest.Mini
-            user={comment.author}
-            avatarSize="xsmall"
-            textWeight="medium"
-            textSize="msmall"
-            hasUserName={inArticle}
-          />
+        <div>
+          <section className="author-row">
+            <UserDigest.Mini
+              user={comment.author}
+              avatarSize="xsmall"
+              textWeight="medium"
+              textSize="msmall"
+              hasUserName={inArticle}
+            />
+            {comment.pinned && <PinnedLabel />}
+          </section>
+
           {comment.replyTo &&
             (!comment.parentComment ||
               comment.replyTo.id !== comment.parentComment.id) && (
               <ReplyTo user={comment.replyTo.author} inArticle={!!inArticle} />
             )}
-          {comment.pinned && <PinnedLabel />}
         </div>
-        <DropdownActions
-          comment={comment}
-          editComment={() => setEdit(true)}
-          refetch={inArticle}
-        />
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
       </header>
 
       <div className="content-wrap">
@@ -173,23 +172,22 @@ const FeedDigest = ({
       }
     >
       <header className="header">
-        <div className="avatars">
-          <UserDigest.Mini
-            user={author}
-            avatarSize="small"
-            textWeight="medium"
-            hasUserName={inArticle}
-          />
+        <div>
+          <section className="author-row">
+            <UserDigest.Mini
+              user={author}
+              avatarSize="small"
+              textWeight="medium"
+              hasUserName={inArticle}
+            />
+            {pinned && <PinnedLabel />}
+          </section>
+
           {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
             <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
-          {pinned && <PinnedLabel />}
         </div>
-        <DropdownActions
-          comment={comment}
-          editComment={() => setEdit(true)}
-          refetch={inArticle}
-        />
+        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
       </header>
 
       <div className="content-wrap">

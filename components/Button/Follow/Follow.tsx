@@ -2,13 +2,13 @@ import gql from 'graphql-tag'
 
 import { Button, Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
-import { updateViewerFolloweeCount } from './utils'
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {

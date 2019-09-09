@@ -20,7 +20,7 @@ import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICSS = gql`
   query AllTopics(
-    $cursor: String
+    $after: String
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = true
@@ -28,7 +28,7 @@ const ALL_TOPICSS = gql`
     viewer {
       id
       recommendation {
-        topics(input: { first: 10, after: $cursor }) {
+        topics(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -87,7 +87,7 @@ const Topics = () => (
               })
               return fetchMore({
                 variables: {
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({

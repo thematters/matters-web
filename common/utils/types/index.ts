@@ -22,6 +22,7 @@ export default gql`
   type ClientPreference {
     id: ID!
     feedSortType: FeedSortType
+    wall: Boolean!
   }
 
   input ClientPreferenceInput {

@@ -26,7 +26,11 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
               close()
             }}
           >
-            <Icon id={ICON_CLOSE.id} viewBox={ICON_CLOSE.viewBox} />
+            <Icon
+              id={ICON_CLOSE.id}
+              viewBox={ICON_CLOSE.viewBox}
+              color="black"
+            />
           </button>
         )}
         <style jsx>{styles}</style>

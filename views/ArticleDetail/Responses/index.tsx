@@ -34,7 +34,7 @@ const SUBSCRIBE_RESPONSES = gql`
   subscription ArticleCommentAdded(
     $id: ID!
     $before: String
-    $cursor: String
+    $after: String
     $first: Int!
     $includeAfter: Boolean
     $includeBefore: Boolean
@@ -64,7 +64,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   /**
-   * Fragment Pattern
+   * Fragment Patterns
    * 0. ``
    * 1. `#comment`
    * 2. `#parentCommentId`
@@ -112,7 +112,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           const loadBefore = (params && params.before) || null
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor,
+              after: pageInfo.endCursor,
               before: loadBefore,
               first: RESPONSES_COUNT,
               includeBefore: !!loadBefore,
@@ -155,7 +155,7 @@ const Main: React.FC<WithRouterProps> = ({ router }) => {
           if (fragment) {
             const jumpToFragment = () => {
               jump(`#${fragment}`, {
-                offset: fragment === UrlFragments.COMMENTS ? -10 : -80
+                offset: fragment === UrlFragments.COMMENTS ? -10 : -64
               })
             }
             const element = dom.$(fragment) // !responses.filter(({ id }) => id === parentId).length

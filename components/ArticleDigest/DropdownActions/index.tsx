@@ -15,45 +15,31 @@ const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
       id
-      state
+      ...ArchiveButtonArticle
       ...StickyButtonArticle
     }
     ${StickyButton.fragments.article}
+    ${ArchiveButton.fragments.article}
   `
 }
 
 const DropdownContent: React.FC<{
   article: DropdownActionsArticle
   hideDropdown: () => void
-  refetch?: () => void
-}> = ({ article, hideDropdown, refetch }) => {
+}> = ({ article, hideDropdown }) => {
   return (
     <Menu>
       <Menu.Item>
-        <StickyButton
-          article={article}
-          hideDropdown={hideDropdown}
-          refetch={refetch}
-        />
+        <StickyButton article={article} hideDropdown={hideDropdown} />
       </Menu.Item>
       <Menu.Item>
-        <ArchiveButton
-          articleId={article.id}
-          hideDropdown={hideDropdown}
-          refetch={refetch}
-        />
+        <ArchiveButton article={article} hideDropdown={hideDropdown} />
       </Menu.Item>
     </Menu>
   )
 }
 
-const DropdownActions = ({
-  article,
-  refetch
-}: {
-  article: DropdownActionsArticle
-  refetch?: () => void
-}) => {
+const DropdownActions = ({ article }: { article: DropdownActionsArticle }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -74,11 +60,7 @@ const DropdownActions = ({
     <>
       <Dropdown
         content={
-          <DropdownContent
-            article={article}
-            hideDropdown={hideDropdown}
-            refetch={refetch}
-          />
+          <DropdownContent article={article} hideDropdown={hideDropdown} />
         }
         trigger="click"
         onCreate={setInstance}

@@ -38,7 +38,6 @@ const Description = ({ description }: { description: string }) => {
                 id={ICON_EXPAND.id}
                 viewBox={ICON_EXPAND.viewBox}
                 size="xsmall"
-                color="green"
               />
             }
             size="sm"

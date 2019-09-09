@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { withRouter, WithRouterProps } from 'next/router'
 import { QueryResult } from 'react-apollo'
@@ -12,6 +11,8 @@ import {
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Query } from '~/components/GQL'
+import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
+import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
 import Throw404 from '~/components/Throw404'
 
@@ -20,48 +21,9 @@ import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import ICON_192 from '~/static/icon-192x192.png?url'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
-import { UserArticleFeed } from './__generated__/UserArticleFeed'
 import styles from './styles.css'
 
-const USER_ARTICLES_FEED = gql`
-  query UserArticleFeed(
-    $userName: String!
-    $cursor: String
-    $hasArticleDigestActionAuthor: Boolean = false
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
-    user(input: { userName: $userName }) {
-      id
-      displayName
-      info {
-        description
-        profileCover
-      }
-      articles(input: { first: 10, after: $cursor }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...FeedDigestArticle
-          }
-        }
-      }
-      status {
-        articleCount
-        totalWordCount
-      }
-    }
-  }
-  ${ArticleDigest.Feed.fragments.article}
-`
-
-const ArticleSummaryInfo = ({ data }: { data: UserArticleFeed }) => {
+const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
   const { articleCount: articles, totalWordCount: words } = _get(
     data,
     'user.status',
@@ -98,14 +60,13 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   }
 
   return (
-    <Query query={USER_ARTICLES_FEED} variables={{ userName }}>
+    <Query query={USER_ARTICLES} variables={{ userName }}>
       {({
         data,
         loading,
         error,
-        fetchMore,
-        refetch
-      }: QueryResult & { data: UserArticleFeed }) => {
+        fetchMore
+      }: QueryResult & { data: UserArticlesTypes }) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }
@@ -119,7 +80,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
           })
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({
@@ -179,7 +140,6 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
                         hasMoreButton
                         hasState
                         hasSticky
-                        refetch={refetch}
                       />
                     </li>
                   )

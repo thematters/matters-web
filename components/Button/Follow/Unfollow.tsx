@@ -3,12 +3,12 @@ import { useState } from 'react'
 
 import { Button, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
-import { updateViewerFolloweeCount } from './utils'
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
