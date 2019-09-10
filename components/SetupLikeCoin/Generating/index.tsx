@@ -29,17 +29,17 @@ const GENERATE_LIKER_ID = gql`
 const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
   return (
     <Mutation mutation={GENERATE_LIKER_ID}>
-      {(generate, { data, error }) => {
+      {(generate, { error }) => {
         useEffect(() => {
-          generate()
+          generate().then((result: any) => {
+            const likerId = _get(result, 'data.generateLikerId.likerId')
+
+            if (likerId) {
+              nextStep()
+              return null
+            }
+          })
         }, [])
-
-        const likerId = _get(data, 'likerId')
-
-        if (likerId) {
-          nextStep()
-          return null
-        }
 
         return (
           <>
