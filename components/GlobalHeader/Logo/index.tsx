@@ -19,7 +19,6 @@ export default () => (
         />
       </a>
     </Link>
-    <b>(likecoin)</b>
     <style jsx>{styles}</style>
   </>
 )

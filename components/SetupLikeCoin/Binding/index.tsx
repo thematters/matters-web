@@ -76,14 +76,10 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
             </Modal.Content>
 
             <footer>
-              <Modal.FooterButton
-                onClick={prevStep}
-                width="full"
-                disabled={!error}
-              >
+              <Modal.FooterButton onClick={prevStep} width="full">
                 <Translate
-                  zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
-                  zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
+                  zh_hant={TEXT.zh_hant.retry}
+                  zh_hans={TEXT.zh_hans.retry}
                 />
               </Modal.FooterButton>
             </footer>
