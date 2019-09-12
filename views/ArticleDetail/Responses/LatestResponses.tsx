@@ -150,18 +150,22 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
 
         // scroll to comment
         useEffect(() => {
-          if (fragment) {
-            const jumpToFragment = () => {
-              jump(`#${fragment}`, {
-                offset: fragment === UrlFragments.COMMENTS ? -10 : -64
-              })
-            }
-            const element = dom.$(fragment) // !responses.filter(({ id }) => id === parentId).length
-            if (!element) {
-              loadMore({ before: parentId }).then(jumpToFragment)
-            } else {
-              jumpToFragment()
-            }
+          if (!fragment) {
+            return
+          }
+
+          const jumpToFragment = () => {
+            console.log(fragment)
+            jump(`#${fragment}`, {
+              offset: fragment === UrlFragments.COMMENTS ? -10 : -64
+            })
+          }
+          const element = dom.$(`#${fragment}`)
+
+          if (!element) {
+            loadMore({ before: parentId }).then(jumpToFragment)
+          } else {
+            jumpToFragment()
           }
         }, [])
 
