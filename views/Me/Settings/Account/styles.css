@@ -44,3 +44,7 @@
     font-weight: var(--font-weight-bold);
   }
 }
+
+.usd-price {
+  color: var(--color-grey);
+}
