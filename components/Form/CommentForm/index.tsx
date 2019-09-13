@@ -46,7 +46,6 @@ const COMMENT_DRAFT = gql`
 
 interface CommentFormProps {
   defaultContent?: string | null
-  articleMediaHash: string
   articleId: string
   commentId?: string
   replyToId?: string
@@ -60,7 +59,6 @@ interface CommentFormProps {
 // TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
   defaultContent,
-  articleMediaHash,
   commentId,
   parentId,
   replyToId,

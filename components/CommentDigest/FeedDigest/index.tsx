@@ -76,16 +76,12 @@ const DescendantComment = ({
     container: true,
     'in-article': inArticle
   })
+  const id = comment.parentComment
+    ? `${comment.parentComment.id}-${comment.id}`
+    : comment.id
 
   return (
-    <section
-      className={containerClass}
-      id={
-        comment.parentComment
-          ? `${comment.parentComment.id}-${comment.id}`
-          : comment.id
-      }
-    >
+    <section className={containerClass} id={actionControls.hasLink ? id : ''}>
       <header className="header">
         <div>
           <section className="author-row">
@@ -113,7 +109,6 @@ const DescendantComment = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
@@ -140,12 +135,12 @@ const DescendantComment = ({
 const FeedDigest = ({
   comment,
   inArticle,
-  defaultExpand,
+  expandDescendants,
   ...actionControls
 }: {
   comment: FeedDigestComment
   inArticle?: boolean
-  defaultExpand?: boolean
+  expandDescendants?: boolean
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
@@ -155,22 +150,18 @@ const FeedDigest = ({
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(
-    defaultExpand || restDescendantCommentCount <= 0
+    expandDescendants || restDescendantCommentCount <= 0
   )
   const containerClass = classNames({
     container: true,
     'in-article': inArticle
   })
+  const id = comment.parentComment
+    ? `${comment.parentComment.id}-${comment.id}`
+    : comment.id
 
   return (
-    <section
-      className={containerClass}
-      id={
-        comment.parentComment
-          ? `${comment.parentComment.id}-${comment.id}`
-          : comment.id
-      }
-    >
+    <section className={containerClass} id={actionControls.hasLink ? id : ''}>
       <header className="header">
         <div>
           <section className="author-row">
@@ -195,7 +186,6 @@ const FeedDigest = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}

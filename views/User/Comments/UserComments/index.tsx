@@ -177,7 +177,7 @@ const UserComments = ({ user }: UserIdUser) => {
                       {filteredComments &&
                         filteredComments.map(comment => (
                           <li key={comment.id}>
-                            <CommentDigest.Feed comment={comment} />
+                            <CommentDigest.Feed comment={comment} hasLink />
                           </li>
                         ))}
                     </ul>
