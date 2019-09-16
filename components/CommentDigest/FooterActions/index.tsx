@@ -21,6 +21,7 @@ export interface FooterActionsControls {
   hasForm?: boolean
   hasLink?: boolean
   refetch?: boolean
+  commentCallback?: () => void
 }
 type FooterActionsProps = {
   comment: DigestActionsComment
@@ -67,7 +68,8 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
   comment,
   hasForm,
   hasLink,
-  refetch
+  refetch,
+  commentCallback
 }) => {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
@@ -87,6 +89,12 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
           fragment
         })
       : { href: '', as: '' }
+  const commentFormCallback = () => {
+    if (commentCallback) {
+      commentCallback()
+    }
+    setShowForm(false)
+  }
 
   return (
     <>
@@ -150,7 +158,7 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
             replyToId={comment.id}
             parentId={_get(comment, 'parentComment.id') || comment.id}
             refetch={refetch}
-            submitCallback={() => setShowForm(false)}
+            submitCallback={commentFormCallback}
           />
         </section>
       )}

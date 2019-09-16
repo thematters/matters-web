@@ -66,10 +66,12 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
 const DescendantComment = ({
   comment,
   inArticle,
+  commentCallback,
   ...actionControls
 }: {
   comment: FeedDigestComment_comments_edges_node
   inArticle?: boolean
+  commentCallback?: () => void
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const containerClass = classNames({
@@ -122,6 +124,7 @@ const DescendantComment = ({
           <FooterActions
             comment={comment}
             refetch={inArticle}
+            commentCallback={commentCallback}
             {...actionControls}
           />
         )}
@@ -136,11 +139,13 @@ const FeedDigest = ({
   comment,
   inArticle,
   expandDescendants,
+  commentCallback,
   ...actionControls
 }: {
   comment: FeedDigestComment
   inArticle?: boolean
   expandDescendants?: boolean
+  commentCallback?: () => void
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
@@ -197,6 +202,7 @@ const FeedDigest = ({
           <FooterActions
             comment={comment}
             refetch={inArticle}
+            commentCallback={commentCallback}
             {...actionControls}
           />
         )}
@@ -210,6 +216,7 @@ const FeedDigest = ({
                   <DescendantComment
                     comment={node}
                     inArticle={inArticle}
+                    commentCallback={commentCallback}
                     {...actionControls}
                   />
                 </li>

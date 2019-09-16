@@ -1,25 +1,43 @@
-import gql from 'graphql-tag'
+import _get from 'lodash/get'
+import { QueryResult } from 'react-apollo'
 
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
+import { Query } from '~/components/GQL'
+import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
+import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
 
-import { TEXT } from '~/common/enums'
+import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
-import { ResponsesArticle } from './__generated__/ResponsesArticle'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import styles from './styles.css'
 
-const fragments = {
-  article: gql`
-    fragment ResponsesArticle on Article {
-      id
-      responseCount
-    }
-  `
-}
+const ResponseCount = ({ mediaHash }: { mediaHash: string }) => (
+  <Query query={ARTICLE_RESPONSE_COUNT} variables={{ mediaHash }}>
+    {({ data }: QueryResult & { data: ArticleResponseCount }) => {
+      const count = _get(data, 'article.responseCount', 0)
+      return (
+        <>
+          <span className="count">{count}</span>
+          <style jsx>{styles}</style>
+        </>
+      )
+    }}
+  </Query>
+)
 
-const Responses = ({ article }: { article: ResponsesArticle }) => {
+const Responses = ({
+  articleId,
+  mediaHash
+}: {
+  articleId: string
+  mediaHash: string
+}) => {
+  const refetchResponses = () => {
+    window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
+  }
+
   return (
     <section className="responses" id="comments">
       <header>
@@ -28,13 +46,13 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
             zh_hant={TEXT.zh_hant.response}
             zh_hans={TEXT.zh_hans.response}
           />
-          <span className="count">{article.responseCount}</span>
+          <ResponseCount mediaHash={mediaHash} />
         </h2>
 
         <section>
           <CommentForm
-            articleId={article.id}
-            // submitCallback={refetch}
+            articleId={articleId}
+            submitCallback={refetchResponses}
           />
         </section>
       </header>
@@ -46,7 +64,5 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
     </section>
   )
 }
-
-Responses.fragments = fragments
 
 export default Responses

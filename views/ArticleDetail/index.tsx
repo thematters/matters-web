@@ -74,7 +74,6 @@ const ARTICLE_DETAIL = gql`
       ...RelatedArticles
       ...StateArticle
       ...FingerprintArticle
-      ...ResponsesArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -85,7 +84,6 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${Fingerprint.fragments.article}
-  ${Responses.fragments.article}
 `
 
 const Block = ({
@@ -281,7 +279,10 @@ const ArticleDetail = ({
                       <Block type="section">
                         {!shouldShowWall && (
                           <>
-                            <Responses article={data.article} />
+                            <Responses
+                              articleId={data.article.id}
+                              mediaHash={mediaHash}
+                            />
                             <Waypoint
                               onEnter={() => {
                                 if (!trackedFinish) {
