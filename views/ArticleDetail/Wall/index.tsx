@@ -36,7 +36,7 @@ const Wall = ({ show, client }: any) => {
               </h2>
               <p className="desc">
                 <Translate
-                  zh_hant="馬上加入全球最高質量華語創作社區，更多精彩文章与讨论等着你。"
+                  zh_hant="馬上加入全球最高質量華語創作社區，更多精彩文章與討論等著你。"
                   zh_hans="马上加入全球最高质量华语创作社区，更多精彩文章与讨论等着你。"
                 />
               </p>
