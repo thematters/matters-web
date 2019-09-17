@@ -29,3 +29,32 @@ export const mergeConnections = ({
 
   return result
 }
+
+export const unshiftConnections = ({
+  oldData,
+  newData,
+  path
+}: {
+  oldData: any
+  newData: any
+  path: string
+}) => {
+  const { edges: oldEdges, pageInfo: oldPageInfo } = _get(oldData, path)
+  const { edges: newEdges, pageInfo: newPageInfo, ...rest } = _get(
+    newData,
+    path
+  )
+  const copy = JSON.parse(JSON.stringify(newData))
+  if (newPageInfo.endCursor !== oldPageInfo.startCursor) {
+    return _set(copy, path, {
+      ...rest,
+      pageInfo: {
+        ...newPageInfo,
+        endCursor: oldPageInfo.endCursor,
+        hasNextPage: oldPageInfo.hasNextPage
+      },
+      edges: [...newEdges, ...oldEdges]
+    })
+  }
+  return oldData
+}

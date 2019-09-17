@@ -20,6 +20,9 @@ const fragments = {
       author {
         id
       }
+      parentComment {
+        id
+      }
       article {
         id
         mediaHash
@@ -37,20 +40,25 @@ const DropdownContent: React.FC<{
   comment: DropdownActionsComment
   hideDropdown: () => void
   editComment?: () => void
-}> = ({ comment, editComment, hideDropdown }) => {
-  const viewer = useContext(ViewerContext)
-  const isArticleAuthor = viewer.id === comment.article.author.id
-  const isCommentAuthor = viewer.id === comment.author.id
-  const isActive = comment.state === 'active'
-
+  isShowPinButton: boolean
+  isShowEditButton: boolean
+  isShowDeleteButton: boolean
+}> = ({
+  comment,
+  editComment,
+  hideDropdown,
+  isShowPinButton,
+  isShowEditButton,
+  isShowDeleteButton
+}) => {
   return (
     <Menu>
-      {isArticleAuthor && isActive && (
+      {isShowPinButton && (
         <Menu.Item>
           <PinButton comment={comment} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
-      {isCommentAuthor && editComment && isActive && (
+      {isShowEditButton && editComment && (
         <Menu.Item>
           <EditButton hideDropdown={hideDropdown} editComment={editComment} />
         </Menu.Item>
@@ -60,7 +68,7 @@ const DropdownContent: React.FC<{
           <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
       )} */}
-      {isCommentAuthor && isActive && (
+      {isShowDeleteButton && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
@@ -91,9 +99,13 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isDescendantComment = comment.parentComment
+  const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
+  const isShowEditButton = isCommentAuthor && !!editComment && isActive
+  const isShowDeleteButton = isCommentAuthor && isActive
+
   if (
-    (!isCommentAuthor && !isArticleAuthor) ||
-    !isActive ||
+    (!isShowPinButton && !isShowEditButton && !isShowDeleteButton) ||
     viewer.isInactive
   ) {
     return null
@@ -106,6 +118,9 @@ const DropdownActions = ({
           comment={comment}
           hideDropdown={hideDropdown}
           editComment={editComment}
+          isShowPinButton={isShowPinButton}
+          isShowEditButton={isShowEditButton}
+          isShowDeleteButton={isShowDeleteButton}
         />
       }
       trigger="click"
