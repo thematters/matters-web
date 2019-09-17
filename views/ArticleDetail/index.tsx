@@ -267,7 +267,10 @@ const ArticleDetail = ({
                       <Block type="section">
                         {!shouldShowWall && (
                           <>
-                            <Responses />
+                            <Responses
+                              articleId={data.article.id}
+                              mediaHash={mediaHash}
+                            />
                             <Waypoint
                               onEnter={() => {
                                 if (!trackedFinish) {

@@ -27,6 +27,7 @@
 .author-row {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 
   & .label {
     margin-left: var(--spacing-x-tight);

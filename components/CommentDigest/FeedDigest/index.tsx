@@ -66,26 +66,24 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
 const DescendantComment = ({
   comment,
   inArticle,
+  commentCallback,
   ...actionControls
 }: {
   comment: FeedDigestComment_comments_edges_node
   inArticle?: boolean
+  commentCallback?: () => void
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const containerClass = classNames({
     container: true,
     'in-article': inArticle
   })
+  const id = comment.parentComment
+    ? `${comment.parentComment.id}-${comment.id}`
+    : comment.id
 
   return (
-    <section
-      className={containerClass}
-      id={
-        comment.parentComment
-          ? `${comment.parentComment.id}-${comment.id}`
-          : comment.id
-      }
-    >
+    <section className={containerClass} id={actionControls.hasLink ? id : ''}>
       <header className="header">
         <div>
           <section className="author-row">
@@ -113,7 +111,6 @@ const DescendantComment = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
@@ -127,6 +124,7 @@ const DescendantComment = ({
           <FooterActions
             comment={comment}
             refetch={inArticle}
+            commentCallback={commentCallback}
             {...actionControls}
           />
         )}
@@ -140,12 +138,14 @@ const DescendantComment = ({
 const FeedDigest = ({
   comment,
   inArticle,
-  defaultExpand,
+  expandDescendants,
+  commentCallback,
   ...actionControls
 }: {
   comment: FeedDigestComment
   inArticle?: boolean
-  defaultExpand?: boolean
+  expandDescendants?: boolean
+  commentCallback?: () => void
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
@@ -155,22 +155,18 @@ const FeedDigest = ({
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(
-    defaultExpand || restDescendantCommentCount <= 0
+    expandDescendants || restDescendantCommentCount <= 0
   )
   const containerClass = classNames({
     container: true,
     'in-article': inArticle
   })
+  const id = comment.parentComment
+    ? `${comment.parentComment.id}-${comment.id}`
+    : comment.id
 
   return (
-    <section
-      className={containerClass}
-      id={
-        comment.parentComment
-          ? `${comment.parentComment.id}-${comment.id}`
-          : comment.id
-      }
-    >
+    <section className={containerClass} id={actionControls.hasLink ? id : ''}>
       <header className="header">
         <div>
           <section className="author-row">
@@ -195,7 +191,6 @@ const FeedDigest = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            articleMediaHash={comment.article.mediaHash || ''}
             defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
@@ -207,6 +202,7 @@ const FeedDigest = ({
           <FooterActions
             comment={comment}
             refetch={inArticle}
+            commentCallback={commentCallback}
             {...actionControls}
           />
         )}
@@ -220,6 +216,7 @@ const FeedDigest = ({
                   <DescendantComment
                     comment={node}
                     inArticle={inArticle}
+                    commentCallback={commentCallback}
                     {...actionControls}
                   />
                 </li>

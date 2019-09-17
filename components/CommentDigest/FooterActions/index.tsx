@@ -18,8 +18,10 @@ import DownvoteButton from './DownvoteButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
 export interface FooterActionsControls {
-  hasComment?: boolean
+  hasForm?: boolean
+  hasLink?: boolean
   refetch?: boolean
+  commentCallback?: () => void
 }
 type FooterActionsProps = {
   comment: DigestActionsComment
@@ -64,8 +66,10 @@ const IconDotDivider = () => (
 const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
   router,
   comment,
-  hasComment,
-  refetch
+  hasForm,
+  hasLink,
+  refetch,
+  commentCallback
 }) => {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
@@ -85,6 +89,12 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
           fragment
         })
       : { href: '', as: '' }
+  const commentFormCallback = () => {
+    if (commentCallback) {
+      commentCallback()
+    }
+    setShowForm(false)
+  }
 
   return (
     <>
@@ -101,7 +111,7 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
             disabled={!isActive || viewer.isInactive}
           />
 
-          {hasComment && (
+          {hasForm && (
             <>
               <IconDotDivider />
               <button
@@ -121,30 +131,34 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
             </>
           )}
         </div>
+
         {/* We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
-        <a
-          href={commentPath.as}
-          onClick={() => {
-            if (router && router.pathname === PATHS.ARTICLE_DETAIL.href) {
-              jump(`#${fragment}`, {
-                offset: -64
-              })
-            }
-          }}
-        >
+        {hasLink ? (
+          <a
+            href={commentPath.as}
+            onClick={() => {
+              if (router && router.pathname === PATHS.ARTICLE_DETAIL.href) {
+                jump(`#${fragment}`, {
+                  offset: -64
+                })
+              }
+            }}
+          >
+            <DateTime date={comment.createdAt} />
+          </a>
+        ) : (
           <DateTime date={comment.createdAt} />
-        </a>
+        )}
       </footer>
 
       {showForm && (
         <section className="comment-form">
           <CommentForm
             articleId={comment.article.id}
-            articleMediaHash={comment.article.mediaHash || ''}
             replyToId={comment.id}
             parentId={_get(comment, 'parentComment.id') || comment.id}
             refetch={refetch}
-            submitCallback={() => setShowForm(false)}
+            submitCallback={commentFormCallback}
           />
         </section>
       )}
