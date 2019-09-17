@@ -68,9 +68,9 @@ const Anchor = () => {
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
-      {viewer.isAuthed && !viewer.likerId && (
+      {/* {viewer.isAuthed && !viewer.likerId && (
         <OpenedModal modalId="setupLikerIdModal" />
-      )}
+      )} */}
       <style jsx>{styles}</style>
     </>
   )

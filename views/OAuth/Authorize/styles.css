@@ -30,9 +30,5 @@
 
     color: var(--color-grey-dark);
     text-align: center;
-
-    & :global(> *) {
-      vertical-align: middle;
-    }
   }
 }

@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, objectToGetParams } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import ICON_SHARE_TWITTER from '~/static/icons/share-twitter.svg?sprite'
 
 const Twitter = () => (
@@ -14,8 +15,8 @@ const Twitter = () => (
       const url = window.location.href
       const text = window.document.title
       const shareUrl =
-        'https://twitter.com/share' +
-        objectToGetParams({
+        'https://twitter.com/share?' +
+        queryString.stringify({
           url,
           text,
           via: 'matterslab'

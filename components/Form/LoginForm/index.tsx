@@ -21,6 +21,7 @@ import {
 import {
   analytics,
   // clearPersistCache,
+  appendTarget,
   isValidEmail,
   redirectToTarget,
   translate
@@ -64,8 +65,7 @@ const PasswordResetRedirectButton = () => (
       bgColor="transparent"
       className="u-link-green"
       spacing="none"
-      href={PATHS.AUTH_FORGET.href}
-      as={PATHS.AUTH_FORGET.as}
+      {...appendTarget(PATHS.AUTH_FORGET)}
     >
       <Translate
         zh_hant={TEXT.zh_hant.forgetPassword}
@@ -108,7 +108,11 @@ const SignUpModalSwitch = () => (
 )
 
 const SignUpRedirection = () => (
-  <Modal.FooterButton is="link" {...PATHS.AUTH_SIGNUP} bgColor="white">
+  <Modal.FooterButton
+    is="link"
+    {...appendTarget(PATHS.AUTH_SIGNUP)}
+    bgColor="white"
+  >
     <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
   </Modal.FooterButton>
 )
@@ -279,7 +283,7 @@ const LoginForm: FC<Props> = ({
 
           // await clearPersistCache()
           redirectToTarget({
-            defaultTarget: !!isInPage ? 'homepage' : 'current'
+            fallback: !!isInPage ? 'homepage' : 'current'
           })
         })
         .catch((error: any) => {
