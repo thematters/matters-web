@@ -123,7 +123,9 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
                   <hr />
 
                   <p className="switch-account">
-                    <Translate zh_hant="不是你？" zh_hans="不是你？" />
+                    <span>
+                      <Translate zh_hant="不是你？" zh_hans="不是你？" />
+                    </span>
                     <button
                       type="button"
                       onClick={redirectToLogin}
