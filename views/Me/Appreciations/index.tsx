@@ -19,16 +19,15 @@ import { Protected } from '~/components/Protected'
 import { Transaction } from '~/components/TransactionDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections, numFormat } from '~/common/utils'
 import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
-import { MeWallet } from './__generated__/MeWallet'
 import Intro from './Intro'
 import styles from './styles.css'
 
-const ME_WALLET = gql`
-  query MeWallet($after: String) {
+const ME_APPRECIATIONS = gql`
+  query MeAppreciations($after: String) {
     viewer {
       id
       status {
@@ -54,7 +53,7 @@ const ME_WALLET = gql`
   ${Transaction.Feed.fragments.transaction}
 `
 
-const Wallet = () => {
+const Appreciations = () => {
   const viewer = useContext(ViewerContext)
   const MAT = _get(viewer, 'status.MAT.total', 0)
 
@@ -62,10 +61,20 @@ const Wallet = () => {
     <Protected>
       <main className="l-row">
         <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <Head title={{ zh_hant: '我的錢包', zh_hans: '我的钱包' }} />
+          <Head
+            title={{
+              zh_hant: TEXT.zh_hant.myAppreciations,
+              zh_hans: TEXT.zh_hans.myAppreciations
+            }}
+          />
 
           <PageHeader
-            pageTitle={<Translate zh_hant="我的錢包" zh_hans="我的钱包" />}
+            pageTitle={
+              <Translate
+                zh_hant={TEXT.zh_hant.myAppreciations}
+                zh_hans={TEXT.zh_hans.myAppreciations}
+              />
+            }
           >
             <TextIcon
               icon={
@@ -82,13 +91,8 @@ const Wallet = () => {
           </PageHeader>
 
           <section>
-            <Query query={ME_WALLET}>
-              {({
-                data,
-                loading,
-                error,
-                fetchMore
-              }: QueryResult & { data: MeWallet }) => {
+            <Query query={ME_APPRECIATIONS}>
+              {({ data, loading, error, fetchMore }: QueryResult) => {
                 if (loading) {
                   return <Spinner />
                 }
@@ -97,7 +101,7 @@ const Wallet = () => {
                 const { edges, pageInfo } = _get(data, connectionPath, {})
                 const loadMore = () => {
                   analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                    type: 'wallet',
+                    type: 'appreciations',
                     location: edges.length
                   })
                   return fetchMore({
@@ -149,4 +153,4 @@ const Wallet = () => {
   )
 }
 
-export default Wallet
+export default Appreciations

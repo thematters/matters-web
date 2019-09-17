@@ -54,7 +54,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link {...PATHS.ME_WALLET}>
+        <Link {...PATHS.ME_APPRECIATIONS}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={
@@ -65,8 +65,8 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
                 />
               }
               text={translate({
-                zh_hant: TEXT.zh_hant.myWallet,
-                zh_hans: TEXT.zh_hans.myWallet,
+                zh_hant: TEXT.zh_hant.myAppreciations,
+                zh_hans: TEXT.zh_hans.myAppreciations,
                 lang
               })}
               spacing="xtight"
