@@ -15,6 +15,7 @@ import { Query } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
+import { useEventListener } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
 import { TEXT, UrlFragments } from '~/common/enums'
@@ -22,7 +23,8 @@ import {
   dom,
   filterResponses,
   getQuery,
-  mergeConnections
+  mergeConnections,
+  unshiftConnections
 } from '~/common/utils'
 
 import styles from './styles.css'
@@ -126,6 +128,33 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
           })
         }
 
+        const [storedCursor, setStoredCursor] = useState(pageInfo.startCursor)
+        const commentCallback = () => {
+          return fetchMore({
+            variables: {
+              before: storedCursor,
+              includeBefore: false,
+              articleOnly: articleOnlyMode
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const result = unshiftConnections({
+                oldData: previousResult,
+                newData: fetchMoreResult,
+                path: connectionPath
+              })
+              const {
+                article: {
+                  responses: { pageInfo: info }
+                }
+              } = result
+              if (info.startCursor) {
+                setStoredCursor(info.startCursor)
+              }
+              return result
+            }
+          })
+        }
+
         const responses = filterResponses(
           (edges || []).map(({ node }: { node: any }) => node)
         )
@@ -168,6 +197,8 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
             jumpToFragment()
           }
         }, [])
+
+        useEventListener('refetchResponses', refetch)
 
         return (
           <section className="latest-responses" id="latest-responses">
@@ -217,6 +248,7 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
                       expandDescendants={
                         response.id === parentId && !!descendantId
                       }
+                      commentCallback={commentCallback}
                     />
                   )}
                 </li>
