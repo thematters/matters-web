@@ -1,3 +1,9 @@
 import MeAppreciations from '~/views/Me/Appreciations'
 
-export default () => <MeAppreciations />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <MeAppreciations />
+  </Protected>
+)

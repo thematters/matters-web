@@ -1,3 +1,9 @@
 import UserHistory from '~/views/User/History'
 
-export default () => <UserHistory />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <UserHistory />
+  </Protected>
+)

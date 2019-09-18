@@ -1,3 +1,9 @@
 import UserDrafts from '~/views/User/Drafts'
 
-export default () => <UserDrafts />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <UserDrafts />
+  </Protected>
+)

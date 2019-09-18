@@ -13,18 +13,16 @@ import {
   Head,
   Placeholder,
   Responsive,
-  Title,
-  Translate
+  Title
 } from '~/components'
-import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { Fingerprint } from '~/components/Fingerprint'
 import { Query } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
 import ShareModal from '~/components/ShareButton/ShareModal'
+import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -148,17 +146,7 @@ const ArticleDetail = ({
               }
 
               if (data.article.state !== 'active' && viewer.id !== authorId) {
-                return (
-                  <Block>
-                    <EmptyArticle
-                      description={
-                        <Translate zh_hant="作品被隱藏" zh_hans="作品被隐藏" />
-                      }
-                    >
-                      <BackToHomeButton />
-                    </EmptyArticle>
-                  </Block>
-                )
+                return <Throw404 />
               }
 
               useEffect(() => {

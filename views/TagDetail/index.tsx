@@ -13,6 +13,7 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { Query } from '~/components/GQL'
+import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -67,6 +68,10 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
           }: QueryResult & { data: TagDetailArticles }) => {
             if (loading) {
               return <Placeholder.ArticleDigestList />
+            }
+
+            if (!data.node) {
+              return <Throw404 />
             }
 
             const connectionPath = 'node.articles'

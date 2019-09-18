@@ -101,3 +101,4 @@ yarn.lock
 # exclude sources.list
 sources.list
 *.rdb
+.ebextensions/http-basic-auth.config

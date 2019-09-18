@@ -1,3 +1,9 @@
 import OAuthAuthorize from '~/views/OAuth/Authorize'
 
-export default () => <OAuthAuthorize />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <OAuthAuthorize />
+  </Protected>
+)

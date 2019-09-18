@@ -1,3 +1,9 @@
 import MeDraftDetail from '~/views/Me/DraftDetail'
 
-export default () => <MeDraftDetail />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <MeDraftDetail />
+  </Protected>
+)
