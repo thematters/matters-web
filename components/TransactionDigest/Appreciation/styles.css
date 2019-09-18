@@ -8,35 +8,22 @@
 }
 
 .content {
-  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+}
+
+.left {
+  & :global(> * + *) {
+    margin-top: var(--spacing-x-tight);
+  }
 }
 
 .right {
   flex-shrink: 0;
   margin-left: var(--spacing-tight);
-
-  & :global(time) {
-    font-size: var(--font-size-sm);
-  }
-}
-
-.delta {
-  display: inline-block;
-
-  margin-left: var(--spacing-x-tight);
-  width: 5rem;
-
-  font-weight: var(--font-weight-bold);
   text-align: right;
 
-  &.green {
-    color: var(--color-matters-green);
-  }
-  &.red {
-    color: var(--color-red);
-  }
-
-  @media (--sm-up) {
-    margin-left: var(--spacing-default);
+  & .appreciate-count {
+    margin-bottom: var(--spacing-x-tight);
   }
 }

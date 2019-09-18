@@ -2,7 +2,11 @@ import gql from 'graphql-tag'
 
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { DateTime } from '~/components/DateTime'
+import { Icon } from '~/components/Icon'
+import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
+
+import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
 import { AppreciationTransaction } from './__generated__/AppreciationTransaction'
 import styles from './styles.css'
@@ -28,19 +32,36 @@ const fragments = {
 }
 
 const Appreciation = ({ tx }: { tx: AppreciationTransaction }) => {
-  const {
-    // amount, purpose,
-    content,
-    createdAt
-    //  unit, recipient, target
-  } = tx
+  const { amount, content, createdAt, recipient, target } = tx
 
   return (
     <section className="container">
-      <h4 className="content">{content}</h4>
-      <div className="right">
+      <section className="left">
+        {content && !target && <h4 className="content">{content}</h4>}
+        {target && <ArticleDigest.Plain article={target} />}
+        {recipient && <UserDigest.Mini user={recipient} />}
+      </section>
+
+      <section className="right">
+        <div className="appreciate-count">
+          <TextIcon
+            icon={
+              <Icon
+                id={ICON_LIKE.id}
+                viewBox={ICON_LIKE.viewBox}
+                size="small"
+              />
+            }
+            spacing="xtight"
+            weight="medium"
+            size="sm"
+            color="green"
+            text={amount}
+          />
+        </div>
+
         <DateTime date={createdAt} type="standard" />
-      </div>
+      </section>
       <style jsx>{styles}</style>
     </section>
   )
