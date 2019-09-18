@@ -18,7 +18,7 @@ const ME_APPRECIATED_BY = gql`
     viewer {
       id
       activity {
-        totalAppreciatedBy
+        ...AppreciationTabsUserActivity
         appreciatedBy(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
@@ -36,6 +36,7 @@ const ME_APPRECIATED_BY = gql`
     }
   }
   ${Transaction.AppreciatedBy.fragments.transaction}
+  ${AppreciationTabs.fragments.userActivity}
 `
 
 const AppreciatedBy = () => {
@@ -48,8 +49,6 @@ const AppreciatedBy = () => {
             zh_hans: TEXT.zh_hans.myAppreciatedBy
           }}
         />
-
-        <AppreciationTabs />
 
         <Query query={ME_APPRECIATED_BY}>
           {({ data, loading, error, fetchMore }: QueryResult) => {
@@ -78,22 +77,32 @@ const AppreciatedBy = () => {
             }
 
             if (!edges || edges.length <= 0) {
-              return <EmptyAppreciation />
+              return (
+                <>
+                  <AppreciationTabs activity={data.viewer.activity} />
+                  <EmptyAppreciation />
+                </>
+              )
             }
 
             return (
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-              >
-                <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <Transaction.AppreciatedBy tx={node} />
-                    </li>
-                  ))}
-                </ul>
-              </InfiniteScroll>
+              <>
+                <AppreciationTabs activity={data.viewer.activity} />
+                <InfiniteScroll
+                  hasNextPage={pageInfo.hasNextPage}
+                  loadMore={loadMore}
+                >
+                  <ul>
+                    {edges.map(
+                      ({ node, cursor }: { node: any; cursor: any }) => (
+                        <li key={cursor}>
+                          <Transaction.AppreciatedBy tx={node} />
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </InfiniteScroll>
+              </>
             )
           }}
         </Query>
