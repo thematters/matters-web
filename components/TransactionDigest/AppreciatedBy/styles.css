@@ -17,6 +17,13 @@
   & :global(> * + *) {
     margin-top: var(--spacing-x-tight);
   }
+
+  & header {
+    @mixin flex-center-all;
+    color: var(--color-grey-dark);
+    font-size: var(--font-size-xs); /* fallback */
+    font-size: calc(var(--font-size-sm) - 1px);
+  }
 }
 
 .right {

@@ -1,5 +1,7 @@
+import AppreciatedBy from './AppreciatedBy'
 import Appreciation from './Appreciation'
 
 export const Transaction = {
-  Appreciation
+  Appreciation,
+  AppreciatedBy
 }
