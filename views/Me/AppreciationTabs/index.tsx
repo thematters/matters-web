@@ -9,7 +9,7 @@ const AppreciationTabs: React.FC<WithRouterProps> = ({ router }) => {
   const pathname = router && router.pathname
 
   return (
-    <Tabs>
+    <Tabs layout="horizontal">
       <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS.href}>
         <Link {...PATHS.ME_APPRECIATIONS}>
           <a>
