@@ -97,9 +97,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'x-client-name': 'web',
-      'x-access-token':
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiY2FkNTdjMGEtYWQxOC00OGIzLTg0N2MtYjM1ZjBkYWE2M2MyIiwiaWF0IjoxNTY4NjQ5Nzc2LCJleHAiOjkzNDQ2NDk3NzZ9.qMct4tgrVXf8Y6YERVBph9E_tj5BKGOwx4v66KIjI_4'
+      'x-client-name': 'web'
     }
   }
 })
