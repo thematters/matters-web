@@ -18,7 +18,7 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
-import ICON_SEED_BADGE from '~/static/icons/eerly-user-badge.svg?sprite'
+import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import Throw404 from '../Throw404'

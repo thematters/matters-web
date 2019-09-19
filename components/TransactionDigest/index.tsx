@@ -1,5 +1,7 @@
-import FeedDigest from './FeedDigest'
+import AppreciatedBy from './AppreciatedBy'
+import Appreciation from './Appreciation'
 
 export const Transaction = {
-  Feed: FeedDigest
+  Appreciation,
+  AppreciatedBy
 }
