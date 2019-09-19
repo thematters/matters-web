@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, objectToGetParams } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import ICON_SHARE_LINE from '~/static/icons/share-line.svg?sprite'
 
 const LINE = () => (
@@ -14,8 +15,8 @@ const LINE = () => (
       const url = window.location.href
       const text = window.document.title
       const shareUrl =
-        'https://social-plugins.line.me/lineit/share' +
-        objectToGetParams({
+        'https://social-plugins.line.me/lineit/share?' +
+        queryString.stringify({
           url,
           text
         })

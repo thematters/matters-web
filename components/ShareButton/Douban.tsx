@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, dom, objectToGetParams } from '~/common/utils'
+import { analytics, dom } from '~/common/utils'
 import ICON_SHARE_DOUBAN from '~/static/icons/share-douban.svg?sprite'
 
 const Douban = () => (
@@ -17,8 +18,8 @@ const Douban = () => (
         .$('meta[name="description"]')
         .getAttribute('content')
       const shareUrl =
-        'http://www.douban.com/share/service' +
-        objectToGetParams({
+        'http://www.douban.com/share/service?' +
+        queryString.stringify({
           href: url,
           name: text,
           text: description

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { Title } from '~/components'
+import { Modal, Title } from '~/components'
 import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
@@ -10,7 +10,8 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
 import { Translate } from '~/components/Language'
 
-import { TEXT } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
+import { appendTarget } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -92,20 +93,33 @@ const Forget = () => {
           )}
           {step === 'complete' && (
             <div className="complete">
-              <Title is="h3" type="modal-headline">
-                <Translate
-                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                />
-              </Title>
+              <Modal.Content>
+                <Title is="h3" type="modal-headline">
+                  <Translate
+                    zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                    zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                  />
+                </Title>
 
-              <p className="hint">
+                <p className="hint">
+                  <Translate
+                    zh_hant={TEXT.zh_hant.useNewPassword}
+                    zh_hans={TEXT.zh_hans.useNewPassword}
+                  />
+                  。
+                </p>
+              </Modal.Content>
+
+              <Modal.FooterButton
+                is="link"
+                {...appendTarget(PATHS.AUTH_LOGIN)}
+                width="full"
+              >
                 <Translate
-                  zh_hant={TEXT.zh_hant.useNewPassword}
-                  zh_hans={TEXT.zh_hans.useNewPassword}
+                  zh_hant={TEXT.zh_hant.login}
+                  zh_hans={TEXT.zh_hans.login}
                 />
-                。
-              </p>
+              </Modal.FooterButton>
             </div>
           )}
         </article>

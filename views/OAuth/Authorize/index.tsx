@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
+import Link from 'next/link'
 import { withRouter, WithRouterProps } from 'next/router'
+import queryString from 'query-string'
 import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -9,12 +11,8 @@ import { Query } from '~/components/GQL'
 import OAuth from '~/components/OAuth'
 import Throw404 from '~/components/Throw404'
 
-import { TEXT } from '~/common/enums'
-import {
-  objectToGetParams,
-  redirectToLogin,
-  toReadableScope
-} from '~/common/utils'
+import { PATHS, TEXT } from '~/common/enums'
+import { appendTarget, toReadableScope } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -38,7 +36,7 @@ const OAUTH_CLIENT_INFO = gql`
 const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
   const { lang } = useContext(LanguageContext)
   const qs = (router ? router.query : {}) as { [key: string]: any }
-  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}${objectToGetParams(qs)}`
+  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(qs)}`
   const clientId = qs.client_id
 
   if (!clientId) {
@@ -123,14 +121,14 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
                   <hr />
 
                   <p className="switch-account">
-                    <Translate zh_hant="不是你？" zh_hans="不是你？" />
-                    <button
-                      type="button"
-                      onClick={redirectToLogin}
-                      className="u-link-green"
-                    >
-                      <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
-                    </button>
+                    <span>
+                      <Translate zh_hant="不是你？" zh_hans="不是你？" />
+                    </span>
+                    <Link {...appendTarget(PATHS.AUTH_LOGIN)}>
+                      <a className="u-link-green">
+                        <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
+                      </a>
+                    </Link>
                   </p>
                 </section>
 

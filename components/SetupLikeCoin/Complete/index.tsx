@@ -28,7 +28,7 @@ const Complete = ({ scrollLock }: { scrollLock?: boolean }) => {
       <footer>
         <Modal.FooterButton
           width="full"
-          onClick={() => redirectToTarget({ defaultTarget: 'homepage' })}
+          onClick={() => redirectToTarget({ fallback: 'homepage' })}
         >
           <Translate zh_hant="進入社區" zh_hans="进入社区" />
         </Modal.FooterButton>

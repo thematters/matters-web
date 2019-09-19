@@ -58,7 +58,7 @@ const SignUpComplete = ({
         width="full"
         onClick={() =>
           redirectToTarget({
-            defaultTarget: purpose === 'page' ? 'homepage' : 'current'
+            fallback: purpose === 'page' ? 'homepage' : 'current'
           })
         }
       >

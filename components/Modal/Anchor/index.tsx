@@ -63,17 +63,13 @@ const Anchor = () => {
         {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
       </ModalInstance>
 
-      <ModalInstance
-        modalId="setupLikeCoinModal"
-        title="setupLikeCoin"
-        defaultCloseable={false}
-      >
+      <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
         {(props: ModalInstanceProps) => <SetupLikeCoin />}
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
       {/* {viewer.isAuthed && !viewer.likerId && (
-        <OpenedModal modalId="setupLikeCoinModal" />
+        <OpenedModal modalId="setupLikerIdModal" />
       )} */}
       <style jsx>{styles}</style>
     </>

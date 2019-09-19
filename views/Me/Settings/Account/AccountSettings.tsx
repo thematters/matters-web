@@ -41,12 +41,11 @@ const EditButton = ({
 const ChangePasswrodButton = () => (
   <ModalSwitch modalId="passwordChangeModal">
     {(open: any) => (
-      <button type="button" className="change-password-button" onClick={open}>
+      <button type="button" className="u-link-green" onClick={open}>
         <Translate
           zh_hant={TEXT.zh_hant.changePassword}
           zh_hans={TEXT.zh_hans.changePassword}
         />
-        <style jsx>{styles}</style>
       </button>
     )}
   </ModalSwitch>
