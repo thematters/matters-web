@@ -3,6 +3,8 @@ import { DataProxy } from 'apollo-cache'
 import { ViewerFolloweeCount } from '~/components/GQL/queries/__generated__/ViewerFolloweeCount'
 import VIEWER_FOLLOWEE_COUNT from '~/components/GQL/queries/followeeCount'
 
+import { ERROR_CODES } from '~/common/enums'
+
 const update = ({
   cache,
   type
@@ -30,7 +32,11 @@ const update = ({
       data: cacheData
     })
   } catch (e) {
-    console.error(e)
+    if (e.message.startsWith("Can't find field")) {
+      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
+    } else {
+      console.error(e)
+    }
   }
 }
 
