@@ -32,13 +32,17 @@ const fragments = {
 }
 
 const Appreciation = ({ tx }: { tx: AppreciationTransaction }) => {
-  const { amount, content, createdAt, recipient, target } = tx
+  const { amount, content, purpose, createdAt, recipient, target } = tx
+
+  const isUseContent = purpose !== 'appreciate'
 
   return (
     <section className="container">
       <section className="left">
-        {content && !target && <h4 className="content">{content}</h4>}
-        {target && <ArticleDigest.Plain article={target} />}
+        {isUseContent && content && <h4 className="content">{content}</h4>}
+        {!isUseContent && target && (
+          <ArticleDigest.Plain article={target} hasArchivedTooltip />
+        )}
         {recipient && <UserDigest.Mini user={recipient} />}
       </section>
 

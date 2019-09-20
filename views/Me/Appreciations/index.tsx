@@ -45,8 +45,8 @@ const Appreciations = () => {
       <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
         <Head
           title={{
-            zh_hant: TEXT.zh_hant.myAppreciations,
-            zh_hans: TEXT.zh_hans.myAppreciations
+            zh_hant: TEXT.zh_hant.appreciate,
+            zh_hans: TEXT.zh_hans.appreciate
           }}
         />
 

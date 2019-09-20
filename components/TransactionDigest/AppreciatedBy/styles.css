@@ -19,7 +19,9 @@
   }
 
   & header {
-    @mixin flex-center-all;
+    display: flex;
+    align-items: center;
+    justify-content: left;
     color: var(--color-grey-dark);
     font-size: var(--font-size-xs); /* fallback */
     font-size: calc(var(--font-size-sm) - 1px);

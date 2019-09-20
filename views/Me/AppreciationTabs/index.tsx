@@ -34,8 +34,8 @@ const BaseAppreciationTabs: React.FC<
           <Link {...PATHS.ME_APPRECIATIONS}>
             <a>
               <Translate
-                zh_hant={TEXT.zh_hant.myAppreciations}
-                zh_hans={TEXT.zh_hant.myAppreciations}
+                zh_hant={TEXT.zh_hant.appreciate}
+                zh_hans={TEXT.zh_hant.appreciate}
               />
             </a>
           </Link>
@@ -45,8 +45,8 @@ const BaseAppreciationTabs: React.FC<
           <Link {...PATHS.ME_APPRECIATED_BY}>
             <a>
               <Translate
-                zh_hant={TEXT.zh_hant.myAppreciatedBy}
-                zh_hans={TEXT.zh_hans.myAppreciatedBy}
+                zh_hant={TEXT.zh_hant.appreciatedBy}
+                zh_hans={TEXT.zh_hans.appreciatedBy}
               />
             </a>
           </Link>
