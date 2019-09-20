@@ -61,7 +61,7 @@ const WalletSetting = () => {
         </div>
       </section>
 
-      <Query query={VIEWER_LIKE_INFO}>
+      <Query query={VIEWER_LIKE_INFO} errorPolicy="none">
         {({ data, loading, error }: QueryResult) => {
           const LIKE = _get(data, 'viewer.status.LIKE')
 
