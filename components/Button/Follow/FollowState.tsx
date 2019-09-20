@@ -38,6 +38,7 @@ FollowState.fragments = {
   user: gql`
     fragment FollowStateUser on User {
       id
+      userName
       isFollower
       isFollowee
     }

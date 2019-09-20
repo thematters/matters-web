@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { Button, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
@@ -42,6 +44,8 @@ const Unfollow = ({
         }
       }}
       update={cache => {
+        const userName = _get(user, 'userName', null)
+        updateUserFollowerCount({ cache, type: 'decrement', userName })
         updateViewerFolloweeCount({ cache, type: 'decrement' })
       }}
     >
