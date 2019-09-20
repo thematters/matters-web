@@ -96,7 +96,7 @@ export const TEXT = {
     myComments: '我的評論',
     myDrafts: '我的草稿',
     myArticles: '我的作品',
-    myAppreciations: '我讚賞的',
+    myAppreciations: '我的讚賞',
     appreciate: '我讚賞的',
     appreciatedBy: '讚賞我的',
     myProfile: '個人頁面',
