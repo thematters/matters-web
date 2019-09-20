@@ -11,7 +11,6 @@ const trackAs = (type: string) => (
 
   // dispatch event
   window.dispatchEvent(event)
-  // }
 }
 
 export const analytics = {

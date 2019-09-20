@@ -71,6 +71,7 @@ export const AnalyticsProvider: FC = ({ children }) => {
           }
           analytics.SNIPPET_VERSION = '4.1.0'
           analytics.load(SEGMENT_KEY || '3gE20MjzN9qncFqlKV0pDvNO7Cp2gWU3')
+          analytics.page()
         }
     })()
   })
