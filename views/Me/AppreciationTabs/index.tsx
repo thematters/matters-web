@@ -35,7 +35,7 @@ const BaseAppreciationTabs: React.FC<
             <a>
               <Translate
                 zh_hant={TEXT.zh_hant.appreciate}
-                zh_hans={TEXT.zh_hant.appreciate}
+                zh_hans={TEXT.zh_hans.appreciate}
               />
             </a>
           </Link>
