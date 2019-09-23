@@ -9,7 +9,7 @@ import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import { ResponseDigestActionsArticle } from './__generated__/ResponseDigestActionsArticle'
-import MAT from './MAT'
+import Appreciation from './Appreciation'
 import ResponseCount from './ResponseCount'
 import State from './State'
 import styles from './styles.css'
@@ -35,14 +35,14 @@ const fragments = {
         ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
       }
       createdAt
-      ...MATArticle
+      ...AppreciationArticle
       ...ResponseCountArticle
       ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
       ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
       ...StateActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${MAT.fragments.article}
+    ${Appreciation.fragments.article}
     ${ResponseCount.fragments.article}
     ${BookmarkButton.fragments.article}
     ${TopicScore.fragments.article}
@@ -54,14 +54,14 @@ const fragments = {
         ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
       }
       createdAt
-      ...MATArticle
+      ...AppreciationArticle
       ...ResponseCountArticle
       ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
       ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
       ...ResponseStateActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${MAT.fragments.article}
+    ${Appreciation.fragments.article}
     ${ResponseCount.fragments.article}
     ${BookmarkButton.fragments.article}
     ${TopicScore.fragments.article}
@@ -129,7 +129,7 @@ const Actions = ({
           </span>
         )}
 
-        <MAT article={article} size={size} />
+        <Appreciation article={article} size={size} />
 
         <IconDotDivider />
         <ResponseCount article={article} size={size} />
