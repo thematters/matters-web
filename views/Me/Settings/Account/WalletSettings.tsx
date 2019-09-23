@@ -65,7 +65,7 @@ const WalletSetting = () => {
         {({ data, loading, error }: QueryResult) => {
           const LIKE = _get(data, 'viewer.status.LIKE')
 
-          if (loading || error) {
+          if (loading || error || !LIKE) {
             return null
           }
 
@@ -81,7 +81,10 @@ const WalletSetting = () => {
                   <span>
                     {LIKE.total} LikeCoin
                     {USDPrice && (
-                      <span className="usd-price"> ≈ {USDPrice} USD</span>
+                      <span className="usd-price">
+                        {' '}
+                        {LIKE.total > 0 ? '≈' : '='} {USDPrice} USD
+                      </span>
                     )}
                   </span>
                 )}
