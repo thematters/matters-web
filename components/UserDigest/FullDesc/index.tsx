@@ -2,10 +2,12 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Icon, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { FollowButton } from '~/components/Button/Follow'
 
-import { toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
+import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
@@ -19,18 +21,47 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
+const AppreciatedIcon = () => (
+  <Icon size="small" id={ICON_LIKE.id} viewBox={ICON_LIKE.viewBox} />
+)
+
+const appreciatedIconStyle = { marginRight: '0.5rem' }
+
+const AppreciatedSum = ({ sum }: { sum?: number }) => {
+  if (!sum) {
+    return null
+  }
+
+  const appreciatedSum = numAbbr(sum)
+  return (
+    <TextIcon
+      icon={<AppreciatedIcon />}
+      color="green"
+      weight="medium"
+      text={appreciatedSum}
+      size="sm"
+      spacing="xtight"
+      style={appreciatedIconStyle}
+    />
+  )
+}
+
 const FullDesc = ({
   user,
   nameSize = 'default',
-  readonly
+  readonly,
+  appreciatedSum
 }: {
   user: UserDigestFullDescUser
   nameSize?: 'default' | 'small'
   readonly?: boolean
+  appreciatedSum?: number
 }) => {
+  const showAppreciatedSum = appreciatedSum && appreciatedSum > 0
   const nameSizeClasses = classNames({
     name: true,
-    [nameSize]: true
+    [nameSize]: true,
+    'name-shrink': showAppreciatedSum
   })
   const path = readonly
     ? {}
@@ -56,6 +87,7 @@ const FullDesc = ({
                   <span className={nameSizeClasses}>{user.displayName}</span>
                 </a>
               </Link>
+              {showAppreciatedSum && <AppreciatedSum sum={appreciatedSum} />}
               <FollowButton.State user={user} />
             </div>
 
