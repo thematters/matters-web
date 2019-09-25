@@ -18,8 +18,8 @@ export const OAUTH_SCOPE_TREE = {
       info: {
         email: {
           __text__: {
-            zh_hant: TEXT.zh_hant.email,
-            zh_hans: TEXT.zh_hans.email
+            zh_hant: '電郵地址',
+            zh_hans: '邮箱地址'
           }
         }
       }

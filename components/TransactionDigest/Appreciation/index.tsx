@@ -43,7 +43,7 @@ const Appreciation = ({ tx }: { tx: AppreciationTransaction }) => {
         {!isUseContent && target && (
           <ArticleDigest.Plain article={target} hasArchivedTooltip />
         )}
-        {recipient && <UserDigest.Mini user={recipient} />}
+        {recipient && !isUseContent && <UserDigest.Mini user={recipient} />}
       </section>
 
       <section className="right">
