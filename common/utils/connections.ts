@@ -45,16 +45,13 @@ export const unshiftConnections = ({
     path
   )
   const copy = JSON.parse(JSON.stringify(newData))
-  if (newPageInfo.endCursor !== oldPageInfo.startCursor) {
-    return _set(copy, path, {
-      ...rest,
-      pageInfo: {
-        ...newPageInfo,
-        endCursor: oldPageInfo.endCursor,
-        hasNextPage: oldPageInfo.hasNextPage
-      },
-      edges: [...newEdges, ...oldEdges]
-    })
-  }
-  return oldData
+  return _set(copy, path, {
+    ...rest,
+    pageInfo: {
+      ...newPageInfo,
+      endCursor: oldPageInfo.endCursor,
+      hasNextPage: oldPageInfo.hasNextPage
+    },
+    edges: [...newEdges, ...oldEdges]
+  })
 }

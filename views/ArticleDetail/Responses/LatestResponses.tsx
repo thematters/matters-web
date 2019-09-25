@@ -18,7 +18,7 @@ import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
 import { useEventListener } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
-import { TEXT, UrlFragments } from '~/common/enums'
+import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
 import {
   dom,
   filterResponses,
@@ -59,6 +59,7 @@ const SUBSCRIBE_RESPONSES = gql`
 const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
+  const [storedCursor, setStoredCursor] = useState(null)
 
   if (!mediaHash) {
     return <EmptyResponse articleOnlyMode={articleOnlyMode} />
@@ -128,7 +129,6 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
           })
         }
 
-        const [storedCursor, setStoredCursor] = useState(pageInfo.startCursor)
         const commentCallback = () => {
           return fetchMore({
             variables: {
@@ -137,20 +137,48 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
               articleOnly: articleOnlyMode
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
-              const result = unshiftConnections({
+              const newEdges = _get(
+                fetchMoreResult,
+                `${connectionPath}.edges`,
+                []
+              )
+              const newResponseCount = _get(
+                fetchMoreResult,
+                'article.responseCount'
+              )
+              const oldResponseCount = _get(
+                previousResult,
+                'article.responseCount'
+              )
+              // update if response count has changed
+              if (newEdges.length === 0) {
+                if (oldResponseCount !== newResponseCount) {
+                  return {
+                    ...previousResult,
+                    article: {
+                      ...previousResult.article,
+                      responseCount: newResponseCount
+                    }
+                  }
+                }
+                return previousResult
+              }
+
+              // update if there are new items in responses.edges
+              const newResult = unshiftConnections({
                 oldData: previousResult,
                 newData: fetchMoreResult,
                 path: connectionPath
               })
-              const {
-                article: {
-                  responses: { pageInfo: info }
-                }
-              } = result
-              if (info.startCursor) {
-                setStoredCursor(info.startCursor)
+              const newStartCursor = _get(
+                newResult,
+                `${connectionPath}.pageInfo.startCursor`,
+                null
+              )
+              if (newStartCursor) {
+                setStoredCursor(newStartCursor)
               }
-              return result
+              return newResult
             }
           })
         }
@@ -198,7 +226,13 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
           }
         }, [])
 
-        useEventListener('refetchResponses', refetch)
+        useEventListener(REFETCH_RESPONSES, refetch)
+
+        useEffect(() => {
+          if (pageInfo.startCursor) {
+            setStoredCursor(pageInfo.startCursor)
+          }
+        }, [pageInfo.startCursor])
 
         return (
           <section className="latest-responses" id="latest-responses">
