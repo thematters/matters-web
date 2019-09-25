@@ -212,7 +212,6 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
           }
 
           const jumpToFragment = () => {
-            console.log(fragment)
             jump(`#${fragment}`, {
               offset: fragment === UrlFragments.COMMENTS ? -10 : -64
             })
