@@ -62,7 +62,7 @@ const groupAppreciations = (source: any[]) =>
         return groups
       }
       const id = item.node.sender.id
-      groups.id = groups.hasOwnProperty(id) ? groups.id + (item.node.amount || 0) : item.node.amount
+      groups[id] = (groups[id] || 0) + (item.node.amount || 0)
       return groups
     },
     {}
