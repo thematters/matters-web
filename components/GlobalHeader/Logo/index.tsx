@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Icon } from '~/components'
 
 import { PATHS } from '~/common/enums'
-import ICON_LOGO from '~/static/icons/logo-mid-autumn.svg?sprite'
+import ICON_LOGO from '~/static/icons/logo.svg?sprite'
 
 import styles from './styles.css'
 
