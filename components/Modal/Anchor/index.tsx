@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import LoginForm from '~/components/Form/LoginForm'
 import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
@@ -28,6 +28,7 @@ const OpenedModal = ({ modalId }: { modalId: string }) => (
 )
 
 const Anchor = () => {
+  const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
   const viewer = useContext(ViewerContext)
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
@@ -63,14 +64,20 @@ const Anchor = () => {
         {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
       </ModalInstance>
 
-      <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
+      <ModalInstance
+        modalId="setupLikerIdModal"
+        title="setupLikeCoin"
+        onClose={() => {
+          setIsLikeCoinClosed(true)
+        }}
+      >
         {(props: ModalInstanceProps) => <SetupLikeCoin />}
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
-      {/* {viewer.isAuthed && !viewer.likerId && (
+      {!isLikeCoinClosed && viewer.isAuthed && !viewer.likerId && (
         <OpenedModal modalId="setupLikerIdModal" />
-      )} */}
+      )}
       <style jsx>{styles}</style>
     </>
   )
