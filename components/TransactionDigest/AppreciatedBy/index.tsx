@@ -39,7 +39,7 @@ const AppreciatedBy = ({ tx }: { tx: AppreciatedByTransaction }) => {
   return (
     <section className="container">
       <section className="left">
-        {sender && (
+        {sender && !isUseContent && (
           <header>
             <UserDigest.Mini user={sender} avatarSize="xsmall" />
             <span>
