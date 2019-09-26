@@ -3,24 +3,23 @@ import gql from 'graphql-tag'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { DateTime } from '~/components/DateTime'
 import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
-import { AppreciatedByTransaction } from './__generated__/AppreciatedByTransaction'
+import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction'
 import styles from './styles.css'
 
 const fragments = {
   transaction: gql`
-    fragment AppreciatedByTransaction on Transaction {
+    fragment AppreciationSentTransaction on Transaction {
       amount
       purpose
       content
       createdAt
       unit
-      sender {
+      recipient {
         ...UserDigestMiniUser
       }
       target {
@@ -32,26 +31,19 @@ const fragments = {
   `
 }
 
-const AppreciatedBy = ({ tx }: { tx: AppreciatedByTransaction }) => {
-  const { amount, content, purpose, createdAt, sender, target } = tx
+const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
+  const { amount, content, purpose, createdAt, recipient, target } = tx
+
   const isUseContent = purpose !== 'appreciate'
 
   return (
     <section className="container">
       <section className="left">
-        {sender && !isUseContent && (
-          <header>
-            <UserDigest.Mini user={sender} avatarSize="xsmall" />
-            <span>
-              &nbsp;
-              <Translate zh_hant="讚賞了" zh_hans="赞赏了" />
-            </span>
-          </header>
-        )}
         {isUseContent && content && <h4 className="content">{content}</h4>}
         {!isUseContent && target && (
           <ArticleDigest.Plain article={target} hasArchivedTooltip />
         )}
+        {recipient && !isUseContent && <UserDigest.Mini user={recipient} />}
       </section>
 
       <section className="right">
@@ -79,6 +71,6 @@ const AppreciatedBy = ({ tx }: { tx: AppreciatedByTransaction }) => {
   )
 }
 
-AppreciatedBy.fragments = fragments
+AppreciationSent.fragments = fragments
 
-export default AppreciatedBy
+export default AppreciationSent

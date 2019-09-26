@@ -1,9 +1,9 @@
-import MeAppreciations from '~/views/Me/Appreciations'
+import MeAppreciationsSent from '~/views/Me/AppreciationsSent'
 
 import { Protected } from '~/components/Protected'
 
 export default () => (
   <Protected>
-    <MeAppreciations />
+    <MeAppreciationsSent />
   </Protected>
 )

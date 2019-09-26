@@ -3,23 +3,24 @@ import gql from 'graphql-tag'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { DateTime } from '~/components/DateTime'
 import { Icon } from '~/components/Icon'
+import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
-import { AppreciationTransaction } from './__generated__/AppreciationTransaction'
+import { AppreciationReceivedTransaction } from './__generated__/AppreciationReceivedTransaction'
 import styles from './styles.css'
 
 const fragments = {
   transaction: gql`
-    fragment AppreciationTransaction on Transaction {
+    fragment AppreciationReceivedTransaction on Transaction {
       amount
       purpose
       content
       createdAt
       unit
-      recipient {
+      sender {
         ...UserDigestMiniUser
       }
       target {
@@ -31,19 +32,30 @@ const fragments = {
   `
 }
 
-const Appreciation = ({ tx }: { tx: AppreciationTransaction }) => {
-  const { amount, content, purpose, createdAt, recipient, target } = tx
-
+const AppreciationReceived = ({
+  tx
+}: {
+  tx: AppreciationReceivedTransaction
+}) => {
+  const { amount, content, purpose, createdAt, sender, target } = tx
   const isUseContent = purpose !== 'appreciate'
 
   return (
     <section className="container">
       <section className="left">
+        {sender && !isUseContent && (
+          <header>
+            <UserDigest.Mini user={sender} avatarSize="xsmall" />
+            <span>
+              &nbsp;
+              <Translate zh_hant="讚賞了" zh_hans="赞赏了" />
+            </span>
+          </header>
+        )}
         {isUseContent && content && <h4 className="content">{content}</h4>}
         {!isUseContent && target && (
           <ArticleDigest.Plain article={target} hasArchivedTooltip />
         )}
-        {recipient && !isUseContent && <UserDigest.Mini user={recipient} />}
       </section>
 
       <section className="right">
@@ -71,6 +83,6 @@ const Appreciation = ({ tx }: { tx: AppreciationTransaction }) => {
   )
 }
 
-Appreciation.fragments = fragments
+AppreciationReceived.fragments = fragments
 
-export default Appreciation
+export default AppreciationReceived
