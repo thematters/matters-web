@@ -21,27 +21,26 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
-const AppreciatedIcon = () => (
+const LikeIcon = () => (
   <Icon size="small" id={ICON_LIKE.id} viewBox={ICON_LIKE.viewBox} />
 )
 
-const appreciatedIconStyle = { marginRight: '0.5rem' }
+const appreciationIconStyle = { marginRight: '0.5rem' }
 
-const AppreciatedSum = ({ sum }: { sum?: number }) => {
+const Appreciation = ({ sum }: { sum?: number }) => {
   if (!sum) {
     return null
   }
-
-  const appreciatedSum = numAbbr(sum)
+  const abbrSum = numAbbr(sum)
   return (
     <TextIcon
-      icon={<AppreciatedIcon />}
+      icon={<LikeIcon />}
       color="green"
       weight="medium"
-      text={appreciatedSum}
+      text={abbrSum}
       size="sm"
       spacing="xtight"
-      style={appreciatedIconStyle}
+      style={appreciationIconStyle}
     />
   )
 }
@@ -50,18 +49,18 @@ const FullDesc = ({
   user,
   nameSize = 'default',
   readonly,
-  appreciatedSum
+  appreciations
 }: {
   user: UserDigestFullDescUser
   nameSize?: 'default' | 'small'
   readonly?: boolean
-  appreciatedSum?: number
+  appreciations?: number
 }) => {
-  const showAppreciatedSum = appreciatedSum && appreciatedSum > 0
+  const showAppreciations = appreciations && appreciations > 0
   const nameSizeClasses = classNames({
     name: true,
     [nameSize]: true,
-    'name-shrink': showAppreciatedSum
+    'name-shrink': showAppreciations
   })
   const path = readonly
     ? {}
@@ -87,7 +86,7 @@ const FullDesc = ({
                   <span className={nameSizeClasses}>{user.displayName}</span>
                 </a>
               </Link>
-              {showAppreciatedSum && <AppreciatedSum sum={appreciatedSum} />}
+              {showAppreciations && <Appreciation sum={appreciations} />}
               <FollowButton.State user={user} />
             </div>
 

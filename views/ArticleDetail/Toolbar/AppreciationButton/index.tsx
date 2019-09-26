@@ -22,7 +22,7 @@ const fragments = {
       author {
         id
       }
-      appreciationTotal
+      appreciationsReceivedTotal
       hasAppreciate
       appreciateLimit
       appreciateLeft
@@ -34,7 +34,7 @@ const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle($id: ID!) {
     appreciateArticle(input: { id: $id, amount: 1 }) {
       id
-      appreciationTotal
+      appreciationsReceivedTotal
       hasAppreciate
       appreciateLeft
     }
@@ -143,7 +143,7 @@ const AppreciationButtonContainer = ({
       <section className="container">
         <OnboardingAppreciateButton article={article} />
         <span className="appreciate-count">
-          {numAbbr(article.appreciationTotal)}
+          {numAbbr(article.appreciationsReceivedTotal)}
         </span>
         <style jsx>{styles}</style>
       </section>
@@ -157,7 +157,7 @@ const AppreciationButtonContainer = ({
       optimisticResponse={{
         appreciateArticle: {
           id: article.id,
-          appreciationTotal: article.appreciationTotal + 1,
+          appreciationsReceivedTotal: article.appreciationsReceivedTotal + 1,
           hasAppreciate: true,
           appreciateLeft: article.appreciateLeft - 1,
           __typename: 'Article'
@@ -204,7 +204,7 @@ const AppreciationButtonContainer = ({
             </Tooltip>
           )}
           <span className="appreciate-count">
-            {numAbbr(article.appreciationTotal)}
+            {numAbbr(article.appreciationsReceivedTotal)}
           </span>
           <style jsx>{styles}</style>
         </section>

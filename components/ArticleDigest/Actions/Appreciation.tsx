@@ -11,7 +11,7 @@ import { AppreciationArticle } from './__generated__/AppreciationArticle'
 const fragments = {
   article: gql`
     fragment AppreciationArticle on Article {
-      appreciationTotal
+      appreciationsReceivedTotal
     }
   `
 }
@@ -27,7 +27,7 @@ const Appreciation = ({
     icon={<Icon size={size} id={ICON_LIKE.id} viewBox={ICON_LIKE.viewBox} />}
     color="grey"
     weight="medium"
-    text={numAbbr(_get(article, 'appreciationTotal', 0))}
+    text={numAbbr(_get(article, 'appreciationsReceivedTotal', 0))}
     size={size === 'small' ? 'sm' : 'xs'}
     spacing="xtight"
   />
