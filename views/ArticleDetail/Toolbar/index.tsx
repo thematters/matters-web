@@ -6,9 +6,9 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/ShareButton'
 
 import { ToolbarArticle } from './__generated__/ToolbarArticle'
+import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'
 import ExtendButton from './ExtendButton'
-import MATButton from './MATButton'
 import MoreButton from './MoreButton'
 import ResponseButton from './ResponseButton'
 import styles from './styles.css'
@@ -17,14 +17,14 @@ const fragments = {
   article: gql`
     fragment ToolbarArticle on Article {
       id
-      ...MATArticleDetail
+      ...AppreciationArticleDetail
       ...AppreciatorsArticle
       ...BookmarkArticle
       ...ResponseButtonArticle
       ...MoreButtonArticle
       ...ExtendButtonArticle
     }
-    ${MATButton.fragments.article}
+    ${AppreciationButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
     ${ResponseButton.fragments.article}
@@ -46,7 +46,7 @@ const Toolbar = ({
     return (
       <section className="toolbar-left">
         <div className="container">
-          <MATButton article={article} />
+          <AppreciationButton article={article} />
           <ResponseButton article={article} textPlacement="bottom" />
           <BookmarkButton article={article} size="default" />
           <ShareButton />
@@ -64,7 +64,7 @@ const Toolbar = ({
   return (
     <section className={bottomToolbarClass}>
       <section className="left">
-        <MATButton article={article} />
+        <AppreciationButton article={article} />
         <Appreciators article={article} />
       </section>
       <section className="right">
