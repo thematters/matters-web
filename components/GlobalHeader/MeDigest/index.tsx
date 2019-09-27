@@ -75,11 +75,6 @@ MeDigest.fragments = {
     fragment MeDigestUser on User {
       id
       displayName
-      status {
-        MAT {
-          total
-        }
-      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}
