@@ -27,8 +27,8 @@ type ROUTE_KEY =
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_LEGACY'
-  | 'ME_APPRECIATIONS'
-  | 'ME_APPRECIATED_BY'
+  | 'ME_APPRECIATIONS_SENT'
+  | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
@@ -185,14 +185,14 @@ export const ROUTES: Array<{
 
   // Me
   {
-    key: 'ME_APPRECIATIONS',
-    href: '/MeAppreciations',
-    as: '/me/appreciations'
+    key: 'ME_APPRECIATIONS_SENT',
+    href: '/MeAppreciationsSent',
+    as: '/me/appreciations/sent'
   },
   {
-    key: 'ME_APPRECIATED_BY',
-    href: '/MeAppreciatedBy',
-    as: '/me/appreciated-by'
+    key: 'ME_APPRECIATIONS_RECEIVED',
+    href: '/MeAppreciationsReceived',
+    as: '/me/appreciations/received'
   },
   {
     key: 'ME_NOTIFICATIONS',

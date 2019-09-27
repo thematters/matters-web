@@ -13,13 +13,13 @@ import { analytics, mergeConnections } from '~/common/utils'
 import AppreciationTabs from '../AppreciationTabs'
 import styles from './styles.css'
 
-const ME_APPRECIATIONS = gql`
-  query MeAppreciations($after: String) {
+const ME_APPRECIATIONS_SENT = gql`
+  query MeAppreciationsSent($after: String) {
     viewer {
       id
       activity {
         ...AppreciationTabsUserActivity
-        appreciations(input: { first: 20, after: $after }) {
+        appreciationsSent(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -28,39 +28,39 @@ const ME_APPRECIATIONS = gql`
           edges {
             cursor
             node {
-              ...AppreciationTransaction
+              ...AppreciationSentTransaction
             }
           }
         }
       }
     }
   }
-  ${Transaction.Appreciation.fragments.transaction}
+  ${Transaction.AppreciationSent.fragments.transaction}
   ${AppreciationTabs.fragments.userActivity}
 `
 
-const Appreciations = () => {
+const AppreciationsSent = () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
         <Head
           title={{
-            zh_hant: TEXT.zh_hant.appreciate,
-            zh_hans: TEXT.zh_hans.appreciate
+            zh_hant: TEXT.zh_hant.appreciationsSent,
+            zh_hans: TEXT.zh_hans.appreciationsSent
           }}
         />
 
-        <Query query={ME_APPRECIATIONS}>
+        <Query query={ME_APPRECIATIONS_SENT}>
           {({ data, loading, error, fetchMore }: QueryResult) => {
             if (loading) {
               return <Spinner />
             }
 
-            const connectionPath = 'viewer.activity.appreciations'
+            const connectionPath = 'viewer.activity.appreciationsSent'
             const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () => {
               analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                type: 'appreciations',
+                type: 'appreciationsSent',
                 location: edges.length
               })
               return fetchMore({
@@ -96,7 +96,7 @@ const Appreciations = () => {
                     {edges.map(
                       ({ node, cursor }: { node: any; cursor: any }) => (
                         <li key={cursor}>
-                          <Transaction.Appreciation tx={node} />
+                          <Transaction.AppreciationSent tx={node} />
                         </li>
                       )
                     )}
@@ -117,4 +117,4 @@ const Appreciations = () => {
   )
 }
 
-export default Appreciations
+export default AppreciationsSent

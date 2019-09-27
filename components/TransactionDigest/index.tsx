@@ -1,7 +1,7 @@
-import AppreciatedBy from './AppreciatedBy'
-import Appreciation from './Appreciation'
+import AppreciationReceived from './AppreciationReceived'
+import AppreciationSent from './AppreciationSent'
 
 export const Transaction = {
-  Appreciation,
-  AppreciatedBy
+  AppreciationSent,
+  AppreciationReceived
 }

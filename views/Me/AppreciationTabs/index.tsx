@@ -16,8 +16,8 @@ interface AppreciationTabsProps {
 const fragments = {
   userActivity: gql`
     fragment AppreciationTabsUserActivity on UserActivity {
-      totalAppreciation
-      totalAppreciatedBy
+      appreciationsSentTotal
+      appreciationsReceivedTotal
     }
   `
 }
@@ -30,27 +30,27 @@ const BaseAppreciationTabs: React.FC<
   return (
     <>
       <Tabs layout="horizontal">
-        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS.href}>
-          <Link {...PATHS.ME_APPRECIATIONS}>
+        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS_SENT.href}>
+          <Link {...PATHS.ME_APPRECIATIONS_SENT}>
             <a>
               <Translate
-                zh_hant={TEXT.zh_hant.appreciate}
-                zh_hans={TEXT.zh_hans.appreciate}
+                zh_hant={TEXT.zh_hant.appreciationsSent}
+                zh_hans={TEXT.zh_hans.appreciationsSent}
               />
             </a>
           </Link>
-          <sup className="count">{activity.totalAppreciation}</sup>
+          <sup className="count">{activity.appreciationsSentTotal}</sup>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATED_BY.href}>
-          <Link {...PATHS.ME_APPRECIATED_BY}>
+        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}>
+          <Link {...PATHS.ME_APPRECIATIONS_RECEIVED}>
             <a>
               <Translate
-                zh_hant={TEXT.zh_hant.appreciatedBy}
-                zh_hans={TEXT.zh_hans.appreciatedBy}
+                zh_hant={TEXT.zh_hant.appreciationsReceived}
+                zh_hans={TEXT.zh_hans.appreciationsReceived}
               />
             </a>
           </Link>
-          <sup className="count">{activity.totalAppreciatedBy}</sup>
+          <sup className="count">{activity.appreciationsReceivedTotal}</sup>
         </Tabs.Tab>
       </Tabs>
       <style jsx>{styles}</style>
