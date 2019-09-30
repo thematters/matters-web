@@ -52,7 +52,7 @@ const OnboardingAppreciateButton = ({
   })
 
   return (
-    <ModalSwitch modalId="onboardingInfoModal">
+    <ModalSwitch modalId="likeCoinTermModal">
       {(open: any) => (
         <button
           className={buttonClasses}

@@ -12,14 +12,12 @@ import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import ShareButton from '~/components/ShareButton'
 import ShareModal from '~/components/ShareButton/ShareModal'
-import { TextIcon } from '~/components/TextIcon'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
-import ICON_LOCK from '~/static/icons/lock.svg?sprite'
 
 import Throw404 from '../Throw404'
 import { UserProfileUser } from './__generated__/UserProfileUser'
@@ -88,23 +86,6 @@ const SeedBadge = () => (
   </Tooltip>
 )
 
-const OnboardingBadge = () => (
-  <span>
-    <TextIcon
-      color="grey"
-      icon={
-        <Icon
-          id={ICON_LOCK.id}
-          viewBox={ICON_LOCK.viewBox}
-          style={{ width: 16, height: 16 }}
-        />
-      }
-    >
-      <Translate zh_hant="還不是創作者" zh_hans="还不是创作者" />
-    </TextIcon>
-  </span>
-)
-
 const CoverContainer = ({ children }: any) => (
   <>
     <div className="cover-container l-row">
@@ -165,8 +146,6 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
           })
           const badges = get(user, 'info.badges', [])
           const hasSeedBadge = some(badges, { type: 'seed' })
-          const state = get(user, 'status.state')
-          const isOnboarding = state === 'onboarding'
           const profileCover = get(user, 'info.profileCover', '')
 
           return (
@@ -199,7 +178,6 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
                             <span>
                               {user.displayName}
                               {hasSeedBadge && <SeedBadge />}
-                              {isOnboarding && <OnboardingBadge />}
                               {!isMe && <FollowButton.State user={user} />}
                             </span>
                           )}

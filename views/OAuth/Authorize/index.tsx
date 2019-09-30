@@ -72,8 +72,8 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
                     {name}
                   </a>
                   <Translate
-                    zh_hant=" 正在申請訪問你的 Matters 賬號數據："
-                    zh_hans=" 正在申请访问你的 Matters 账号数据："
+                    zh_hant=" 正在申請訪問你的 Matters 帳號數據："
+                    zh_hans=" 正在申请访问你的 Matters 帐号数据："
                   />
                 </>
               }

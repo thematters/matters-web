@@ -114,13 +114,15 @@ export const ModalInstance = ({
   defaultCloseable,
   modalId,
   title,
-  layout
+  layout,
+  onClose
 }: {
   children: any
   defaultCloseable?: boolean
   modalId: string
   title?: string
   layout?: 'default' | 'small'
+  onClose?: () => void
 }) => {
   const [node, setNode] = useState<Element | null>(null)
 
@@ -137,7 +139,12 @@ export const ModalInstance = ({
           return ReactDOM.createPortal(
             <Modal.Container
               title={title}
-              close={close}
+              close={() => {
+                close()
+                if (onClose) {
+                  onClose()
+                }
+              }}
               defaultCloseable={defaultCloseable}
               prevModalId={prevModalId}
               layout={layout}
