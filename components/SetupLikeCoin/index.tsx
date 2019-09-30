@@ -14,6 +14,9 @@ type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
   const [step, setStep] = useState<Step>('select')
+  const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(
+    undefined
+  )
   const backToSelect = () => setStep('select')
   const complete = () => {
     if (submitCallback) {
@@ -28,7 +31,12 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
       {step === 'select' && (
         <Select
           startGenerate={() => setStep('generating')}
-          startBind={() => setStep('binding')}
+          startBind={(windowRef?: Window) => {
+            setStep('binding')
+            if (windowRef) {
+              setBindingWindowRef(windowRef)
+            }
+          }}
           scrollLock={scrollLock}
         />
       )}
@@ -43,6 +51,7 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
         <Binding
           prevStep={backToSelect}
           nextStep={complete}
+          windowRef={bindingWindowRef}
           scrollLock={scrollLock}
         />
       )}

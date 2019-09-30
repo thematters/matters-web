@@ -15,7 +15,7 @@ import styles from './styles.css'
 
 interface Props {
   startGenerate: () => void
-  startBind: () => void
+  startBind: (windowRef: Window) => void
   scrollLock?: boolean
 }
 
@@ -157,8 +157,11 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
               startGenerate()
             } else {
               const url = `${OAUTH_URL}/likecoin`
-              window.open(url, '_blank')
-              startBind()
+              const windowRef = window.open(url, '_blank')
+
+              if (windowRef) {
+                startBind(windowRef)
+              }
             }
           }}
           width="full"
