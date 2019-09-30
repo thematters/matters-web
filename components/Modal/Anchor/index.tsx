@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 
 import LoginForm from '~/components/Form/LoginForm'
-import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
+import LikeCoinTermModal from '~/components/Modal/LikeCoinTermModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
 import TermModal from '~/components/Modal/TermModal'
@@ -32,6 +32,10 @@ const Anchor = () => {
   const viewer = useContext(ViewerContext)
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
+  const closeLikeCoinModal = () => {
+    setIsLikeCoinClosed(true)
+  }
+
   return (
     <>
       <div id="modal-anchor" className="container" />
@@ -60,23 +64,23 @@ const Anchor = () => {
         {(props: ModalInstanceProps) => <TermModal {...props} />}
       </ModalInstance>
 
-      <ModalInstance modalId="onboardingInfoModal" title="onboardingInfo">
-        {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
+      <ModalInstance
+        modalId="likeCoinTermModal"
+        title="likeCoinTerm"
+        onClose={closeLikeCoinModal}
+      >
+        {(props: ModalInstanceProps) => (
+          <LikeCoinTermModal {...props} submitCallback={closeLikeCoinModal} />
+        )}
       </ModalInstance>
 
-      <ModalInstance
-        modalId="setupLikerIdModal"
-        title="setupLikeCoin"
-        onClose={() => {
-          setIsLikeCoinClosed(true)
-        }}
-      >
+      <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
         {(props: ModalInstanceProps) => <SetupLikeCoin />}
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
       {!isLikeCoinClosed && viewer.isAuthed && !viewer.likerId && (
-        <OpenedModal modalId="setupLikerIdModal" />
+        <OpenedModal modalId="likeCoinTermModal" />
       )}
       <style jsx>{styles}</style>
     </>
