@@ -13,13 +13,13 @@ import { analytics, mergeConnections } from '~/common/utils'
 import AppreciationTabs from '../AppreciationTabs'
 import styles from './styles.css'
 
-const ME_APPRECIATED_BY = gql`
-  query MeAppreciatedBy($after: String) {
+const ME_APPRECIATED_RECEIVED = gql`
+  query MeAppreciationsReceived($after: String) {
     viewer {
       id
       activity {
         ...AppreciationTabsUserActivity
-        appreciatedBy(input: { first: 20, after: $after }) {
+        appreciationsReceived(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -28,39 +28,39 @@ const ME_APPRECIATED_BY = gql`
           edges {
             cursor
             node {
-              ...AppreciatedByTransaction
+              ...AppreciationReceivedTransaction
             }
           }
         }
       }
     }
   }
-  ${Transaction.AppreciatedBy.fragments.transaction}
+  ${Transaction.AppreciationReceived.fragments.transaction}
   ${AppreciationTabs.fragments.userActivity}
 `
 
-const AppreciatedBy = () => {
+const AppreciationsReceived = () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
         <Head
           title={{
-            zh_hant: TEXT.zh_hant.appreciatedBy,
-            zh_hans: TEXT.zh_hans.appreciatedBy
+            zh_hant: TEXT.zh_hant.appreciationsReceived,
+            zh_hans: TEXT.zh_hans.appreciationsReceived
           }}
         />
 
-        <Query query={ME_APPRECIATED_BY}>
+        <Query query={ME_APPRECIATED_RECEIVED}>
           {({ data, loading, error, fetchMore }: QueryResult) => {
             if (loading) {
               return <Spinner />
             }
 
-            const connectionPath = 'viewer.activity.appreciatedBy'
+            const connectionPath = 'viewer.activity.appreciationsReceived'
             const { edges, pageInfo } = _get(data, connectionPath, {})
             const loadMore = () => {
               analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                type: 'appreciatedBy',
+                type: 'appreciationsReceived',
                 location: edges.length
               })
               return fetchMore({
@@ -96,7 +96,7 @@ const AppreciatedBy = () => {
                     {edges.map(
                       ({ node, cursor }: { node: any; cursor: any }) => (
                         <li key={cursor}>
-                          <Transaction.AppreciatedBy tx={node} />
+                          <Transaction.AppreciationReceived tx={node} />
                         </li>
                       )
                     )}
@@ -117,4 +117,4 @@ const AppreciatedBy = () => {
   )
 }
 
-export default AppreciatedBy
+export default AppreciationsReceived

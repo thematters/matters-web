@@ -54,7 +54,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link {...PATHS.ME_APPRECIATIONS}>
+        <Link {...PATHS.ME_APPRECIATIONS_SENT}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={
