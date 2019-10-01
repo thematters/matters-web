@@ -1,14 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import Router from 'next/router'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
@@ -26,14 +24,6 @@ import styles from './styles.css'
 import WriteButton from './WriteButton'
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
-  Router.onRouteChangeStart = (url: string) => {
-    analytics.trackPage({ url })
-  }
-
-  useEffect(() => {
-    analytics.identifyUser()
-  }, [])
-
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
   const { type: headerType } = headerState
