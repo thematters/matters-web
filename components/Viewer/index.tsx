@@ -16,9 +16,6 @@ export const ViewerUserFragment = {
       status {
         state
         role
-        MAT {
-          total
-        }
       }
       info {
         email
