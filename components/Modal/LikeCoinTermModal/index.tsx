@@ -12,7 +12,7 @@ import content from './content'
 import styles from './styles.css'
 
 interface Props {
-  submitCallback: () => void
+  submitCallback?: () => void
 }
 
 const LikeCoinTermModal: FC<ModalInstanceProps & Props> = ({
@@ -39,7 +39,10 @@ const LikeCoinTermModal: FC<ModalInstanceProps & Props> = ({
               <Modal.FooterButton
                 onClick={() => {
                   open()
-                  submitCallback()
+
+                  if (submitCallback) {
+                    submitCallback()
+                  }
                 }}
                 width="full"
               >
