@@ -2,10 +2,7 @@ import getConfig from 'next/config'
 import Router from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import { useEventListener } from '../Hook'
 
 const {
   publicRuntimeConfig: { SEGMENT_KEY }
@@ -92,10 +89,6 @@ export const AnalyticsProvider: FC = ({ children }) => {
     Router.onRouteChangeComplete = (path: string) => {
       analytics.trackPage({ path })
     }
-  })
-
-  useEventListener('beforeunload', () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.SESSION_END)
   })
 
   return <>{children}</>

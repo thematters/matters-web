@@ -25,8 +25,7 @@ export const ANALYTICS_EVENTS = {
   SIGNUP_START: 'signup-start',
   SIGNUP_SUCCESS: 'signup-success',
   FOLLOW_USER: 'follow-user',
-  UNFOLLOW_USER: 'unfollow-user',
-  SESSION_END: 'session-end'
+  UNFOLLOW_USER: 'unfollow-user'
 }
 
 export const SHARE_TYPE = {
