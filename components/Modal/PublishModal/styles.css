@@ -27,6 +27,8 @@
 
 .descriptions {
   position: relative;
+  margin-bottom: var(--spacing-x-loose);
+
   color: var(--color-grey-darker);
 
   & .description {
