@@ -1,7 +1,6 @@
 import Router, { withRouter, WithRouterProps } from 'next/router'
 
 import { Modal, Translate } from '~/components'
-import { useCountdown } from '~/components/Hook'
 import OAuth from '~/components/OAuth'
 
 import { OAUTH_PROVIDER, PATHS, TEXT } from '~/common/enums'
@@ -11,11 +10,6 @@ import ICON_LIKECOIN from '~/static/icons/oauth/likecoin.svg?url'
 import styles from './styles.css'
 
 const OAuthCallbackSuccess: React.FC<WithRouterProps> = ({ router }) => {
-  const {
-    countdown: { timeLeft }
-  } = useCountdown({
-    timeLeft: 5000
-  })
   const provider = getQuery({ router, key: 'provider' })
   const title: { [key: string]: any } = {
     likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />
@@ -29,10 +23,6 @@ const OAuthCallbackSuccess: React.FC<WithRouterProps> = ({ router }) => {
     return null
   }
 
-  if (timeLeft / 10000 <= 0) {
-    Router.push(PATHS.HOME.as)
-  }
-
   return (
     <main className="l-row">
       <OAuth.Box avatar={avatar[provider]} title={title[provider]}>
@@ -43,8 +33,8 @@ const OAuthCallbackSuccess: React.FC<WithRouterProps> = ({ router }) => {
 
           <p>
             <Translate
-              zh_hant={`${timeLeft / 1000} 秒後窗口自動關閉`}
-              zh_hans={`${timeLeft / 1000} 秒后窗口自动关闭`}
+              zh_hant="頁面即將關閉，請回到原頁面繼續操作"
+              zh_hans="页面即将关闭，请回到原页面继续操作"
             />
           </p>
         </section>

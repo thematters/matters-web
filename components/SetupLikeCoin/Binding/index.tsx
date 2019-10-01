@@ -14,6 +14,7 @@ import styles from './styles.css'
 interface Props {
   prevStep: () => void
   nextStep: () => void
+  windowRef?: Window
   scrollLock?: boolean
 }
 
@@ -26,7 +27,12 @@ const VIEWER_LIKER_ID = gql`
   }
 `
 
-const Binding: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
+const Binding: React.FC<Props> = ({
+  prevStep,
+  nextStep,
+  windowRef,
+  scrollLock
+}) => {
   const [polling, setPolling] = useState(true)
 
   return (
@@ -42,6 +48,11 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
 
         if (likerId) {
           nextStep()
+
+          if (windowRef) {
+            windowRef.close()
+          }
+
           return null
         }
 

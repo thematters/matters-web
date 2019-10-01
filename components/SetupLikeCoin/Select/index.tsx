@@ -15,7 +15,7 @@ import styles from './styles.css'
 
 interface Props {
   startGenerate: () => void
-  startBind: () => void
+  startBind: (windowRef: Window) => void
   scrollLock?: boolean
 }
 
@@ -47,7 +47,7 @@ const Description = () => (
         spacing="xtight"
         weight="medium"
       >
-        <Translate zh_hans="什么是 Liker ID？" zh_hant="什么是 Liker ID？" />
+        <Translate zh_hant="什麼是 Liker ID？" zh_hans="什么是 Liker ID？" />
       </TextIcon>
     </section>
 
@@ -103,7 +103,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
                   <p>
                     <Translate
                       zh_hant="同意 Matters 帮我创建 Liker ID"
-                      zh_hans="同意 Matters 幫我創建 Liker ID"
+                      zh_hans="同意 Matters 帮我创建 Liker ID"
                     />
                   </p>
                 </section>
@@ -157,8 +157,11 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
               startGenerate()
             } else {
               const url = `${OAUTH_URL}/likecoin`
-              window.open(url, '_blank')
-              startBind()
+              const windowRef = window.open(url, '_blank')
+
+              if (windowRef) {
+                startBind(windowRef)
+              }
             }
           }}
           width="full"
