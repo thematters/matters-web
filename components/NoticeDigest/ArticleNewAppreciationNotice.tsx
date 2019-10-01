@@ -51,16 +51,12 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="讚賞了你的作品" zh_hans="赞赏了你的作品" />
+          <Translate zh_hant="喜歡你的作品" zh_hans="喜欢你的作品" />
           {notice.MAT && (
             <>
-              <Translate zh_hant={`，獲得 `} zh_hans={`，获得 `} />
-              <span className="highlight">
-                <Translate
-                  zh_hant={`${numFormat(notice.MAT)} MAT`}
-                  zh_hans={`${numFormat(notice.MAT)} MAT`}
-                />
-              </span>
+              <Translate zh_hant={`，並給出了 `} zh_hans={`并给出了 `} />
+              <span className="highlight">{numFormat(notice.MAT)}</span>
+              <Translate zh_hant="次讚賞" zh_hans="次赞赏" />
             </>
           )}
         </h4>
