@@ -13,6 +13,7 @@ import { Mutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
+import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
@@ -39,6 +40,7 @@ const UPDATE_USER_INFO = gql`
 
 export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
 
   const validateDisplayName = (value: string, language: string) => {
     let result: any
@@ -47,7 +49,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
         zh_hant: TEXT.zh_hant.required,
         zh_hans: TEXT.zh_hans.required
       }
-    } else if (!isValidDisplayName(value)) {
+    } else if (!isValidDisplayName(value) && !viewer.isAdmin) {
       result = {
         zh_hant: TEXT.zh_hant.displayNameHint,
         zh_hans: TEXT.zh_hans.displayNameHint
