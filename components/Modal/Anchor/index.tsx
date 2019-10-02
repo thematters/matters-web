@@ -38,24 +38,20 @@ const Anchor: React.FC<WithRouterProps> = ({ router }) => {
 
   // LikeCoin Modal
   const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
-  const excludePaths = [
+  const allowPaths = [
+    PATHS.HOME.href,
     PATHS.MISC_ABOUT.href,
     PATHS.MISC_FAQ.href,
-    PATHS.MISC_GUIDE.href,
-    PATHS.MISC_TOS.href,
-    PATHS.AUTH_FORGET.href,
-    PATHS.AUTH_LOGIN.href,
-    PATHS.AUTH_SIGNUP.href,
-    PATHS.OAUTH_AUTHORIZE.href,
-    PATHS.OAUTH_CALLBACK_FAILURE.href,
-    PATHS.OAUTH_CALLBACK_SUCCESS.href
+    PATHS.ME_SETTINGS_ACCOUNT.href,
+    PATHS.ME_APPRECIATIONS_RECEIVED.href,
+    PATHS.ME_APPRECIATIONS_SENT.href
   ]
-  const isLikeCoinExcludePath =
-    router && router.pathname && excludePaths.indexOf(router.pathname) >= 0
+  const isLikeCoinAllowPaths =
+    router && router.pathname && allowPaths.indexOf(router.pathname) >= 0
   const shouldShowLikeCoinModal =
     viewer.isAuthed &&
     !isLikeCoinClosed &&
-    !isLikeCoinExcludePath &&
+    isLikeCoinAllowPaths &&
     (viewer.isOnboarding || !viewer.likerId)
   const closeLikeCoinModal = () => {
     setIsLikeCoinClosed(true)
