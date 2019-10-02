@@ -1,3 +1,4 @@
+import { withRouter, WithRouterProps } from 'next/router'
 import { useContext, useState } from 'react'
 
 import LoginForm from '~/components/Form/LoginForm'
@@ -8,6 +9,8 @@ import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 import { ViewerContext } from '~/components/Viewer'
+
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -27,11 +30,33 @@ const OpenedModal = ({ modalId }: { modalId: string }) => (
   <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
 )
 
-const Anchor = () => {
-  const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
+const Anchor: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
+
+  // ToS Modal
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
+  // LikeCoin Modal
+  const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
+  const excludePaths = [
+    PATHS.MISC_ABOUT.href,
+    PATHS.MISC_FAQ.href,
+    PATHS.MISC_GUIDE.href,
+    PATHS.MISC_TOS.href,
+    PATHS.AUTH_FORGET.href,
+    PATHS.AUTH_LOGIN.href,
+    PATHS.AUTH_SIGNUP.href,
+    PATHS.OAUTH_AUTHORIZE.href,
+    PATHS.OAUTH_CALLBACK_FAILURE.href,
+    PATHS.OAUTH_CALLBACK_SUCCESS.href
+  ]
+  const isLikeCoinExcludePath =
+    router && router.pathname && excludePaths.indexOf(router.pathname) >= 0
+  const shouldShowLikeCoinModal =
+    viewer.isAuthed &&
+    !isLikeCoinClosed &&
+    !isLikeCoinExcludePath &&
+    (viewer.isOnboarding || !viewer.likerId)
   const closeLikeCoinModal = () => {
     setIsLikeCoinClosed(true)
   }
@@ -79,12 +104,10 @@ const Anchor = () => {
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
-      {!isLikeCoinClosed && viewer.isAuthed && !viewer.likerId && (
-        <OpenedModal modalId="likeCoinTermModal" />
-      )}
+      {shouldShowLikeCoinModal && <OpenedModal modalId="likeCoinTermModal" />}
       <style jsx>{styles}</style>
     </>
   )
 }
 
-export default Anchor
+export default withRouter(Anchor)
