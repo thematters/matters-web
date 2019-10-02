@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import LoginForm from '~/components/Form/LoginForm'
 import LikeCoinTermModal from '~/components/Modal/LikeCoinTermModal'
@@ -28,8 +28,13 @@ const OpenedModal = ({ modalId }: { modalId: string }) => (
 )
 
 const Anchor = () => {
+  const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
   const viewer = useContext(ViewerContext)
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
+
+  const closeLikeCoinModal = () => {
+    setIsLikeCoinClosed(true)
+  }
 
   return (
     <>
@@ -59,8 +64,14 @@ const Anchor = () => {
         {(props: ModalInstanceProps) => <TermModal {...props} />}
       </ModalInstance>
 
-      <ModalInstance modalId="likeCoinTermModal" title="likeCoinTerm">
-        {(props: ModalInstanceProps) => <LikeCoinTermModal {...props} />}
+      <ModalInstance
+        modalId="likeCoinTermModal"
+        title="likeCoinTerm"
+        onClose={closeLikeCoinModal}
+      >
+        {(props: ModalInstanceProps) => (
+          <LikeCoinTermModal {...props} submitCallback={closeLikeCoinModal} />
+        )}
       </ModalInstance>
 
       <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
@@ -68,6 +79,9 @@ const Anchor = () => {
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
+      {!isLikeCoinClosed && viewer.isAuthed && !viewer.likerId && (
+        <OpenedModal modalId="likeCoinTermModal" />
+      )}
       <style jsx>{styles}</style>
     </>
   )
