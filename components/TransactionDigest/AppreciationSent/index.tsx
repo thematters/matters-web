@@ -18,7 +18,6 @@ const fragments = {
       purpose
       content
       createdAt
-      unit
       recipient {
         ...UserDigestMiniUser
       }
