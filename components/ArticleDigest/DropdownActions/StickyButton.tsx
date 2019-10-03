@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import updateUserArticles from '~/components/GQL/updates/userArticles'
 
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNSTICKY from '~/static/icons/unsticky.svg?sprite'
@@ -25,6 +26,7 @@ const fragments = {
       sticky
       author {
         id
+        userName
       }
     }
   `
@@ -62,12 +64,10 @@ const TextIconSticky = () => (
 
 const StickyButton = ({
   article,
-  hideDropdown,
-  refetch
+  hideDropdown
 }: {
   article: StickyButtonArticle
   hideDropdown: () => void
-  refetch?: () => void
 }) => {
   return (
     <Mutation
@@ -80,10 +80,13 @@ const StickyButton = ({
           __typename: 'Article'
         }
       }}
-      onCompleted={() => {
-        if (refetch) {
-          refetch()
-        }
+      update={cache => {
+        updateUserArticles({
+          cache,
+          articleId: article.id,
+          userName: article.author.userName,
+          type: article.sticky ? 'unsticky' : 'sticky'
+        })
       }}
     >
       {update => (

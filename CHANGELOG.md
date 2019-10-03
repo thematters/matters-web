@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] - 2019-10-03
+
+### Added
+
+- Ad wall #402 #403 #412
+- Featured comments #408
+- Add back segment page tracking #417
+
+### Changed
+
+- Update cache after commenting #413
+- Update user follower's number after clicking button #416
+- Fix responses update handler #422
+- Update `/guide` page; Revert mid-autumn logo; #423
+- Allow admin to change special display name (e.g. Matty) #429
+- Analytics optimization #431
+- Fix translations #432
+
 ## [1.13.0] - 2019-09-02
 
 ### Added

@@ -20,6 +20,9 @@ const fragments = {
       author {
         id
       }
+      parentComment {
+        id
+      }
       article {
         id
         mediaHash
@@ -37,25 +40,25 @@ const DropdownContent: React.FC<{
   comment: DropdownActionsComment
   hideDropdown: () => void
   editComment?: () => void
-  refetch?: boolean
-}> = ({ comment, editComment, hideDropdown, refetch }) => {
-  const viewer = useContext(ViewerContext)
-  const isArticleAuthor = viewer.id === comment.article.author.id
-  const isCommentAuthor = viewer.id === comment.author.id
-  const isActive = comment.state === 'active'
-
+  isShowPinButton: boolean
+  isShowEditButton: boolean
+  isShowDeleteButton: boolean
+}> = ({
+  comment,
+  editComment,
+  hideDropdown,
+  isShowPinButton,
+  isShowEditButton,
+  isShowDeleteButton
+}) => {
   return (
     <Menu>
-      {isArticleAuthor && isActive && (
+      {isShowPinButton && (
         <Menu.Item>
-          <PinButton
-            comment={comment}
-            hideDropdown={hideDropdown}
-            refetch={refetch}
-          />
+          <PinButton comment={comment} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
-      {isCommentAuthor && editComment && isActive && (
+      {isShowEditButton && editComment && (
         <Menu.Item>
           <EditButton hideDropdown={hideDropdown} editComment={editComment} />
         </Menu.Item>
@@ -65,7 +68,7 @@ const DropdownContent: React.FC<{
           <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
       )} */}
-      {isCommentAuthor && isActive && (
+      {isShowDeleteButton && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
         </Menu.Item>
@@ -76,12 +79,10 @@ const DropdownContent: React.FC<{
 
 const DropdownActions = ({
   comment,
-  editComment,
-  refetch
+  editComment
 }: {
   comment: DropdownActionsComment
   editComment?: () => void
-  refetch?: boolean
 }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -98,9 +99,13 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isDescendantComment = comment.parentComment
+  const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
+  const isShowEditButton = isCommentAuthor && !!editComment && isActive
+  const isShowDeleteButton = isCommentAuthor && isActive
+
   if (
-    (!isCommentAuthor && !isArticleAuthor) ||
-    !isActive ||
+    (!isShowPinButton && !isShowEditButton && !isShowDeleteButton) ||
     viewer.isInactive
   ) {
     return null
@@ -113,7 +118,9 @@ const DropdownActions = ({
           comment={comment}
           hideDropdown={hideDropdown}
           editComment={editComment}
-          refetch={refetch}
+          isShowPinButton={isShowPinButton}
+          isShowEditButton={isShowEditButton}
+          isShowDeleteButton={isShowDeleteButton}
         />
       }
       trigger="click"

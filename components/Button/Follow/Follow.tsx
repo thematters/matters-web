@@ -1,14 +1,16 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 
 import { Button, Icon, Translate } from '~/components'
 import { Mutation } from '~/components/GQL'
+import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
+import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
-import { updateViewerFolloweeCount } from './utils'
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
@@ -39,6 +41,8 @@ const Follow = ({
       }
     }}
     update={cache => {
+      const userName = _get(user, 'userName', null)
+      updateUserFollowerCount({ cache, type: 'increment', userName })
       updateViewerFolloweeCount({ cache, type: 'increment' })
     }}
   >

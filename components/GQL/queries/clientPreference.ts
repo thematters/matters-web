@@ -5,6 +5,7 @@ export default gql`
     clientPreference(input: { id: $id }) @client {
       id
       feedSortType
+      wall
     }
   }
 `

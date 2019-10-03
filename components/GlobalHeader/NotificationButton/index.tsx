@@ -11,6 +11,7 @@ import {
   ME_NOTIFICATIONS,
   UNREAD_NOTICE_COUNT
 } from '~/components/GQL/queries/notice'
+import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 
 import { POLL_INTERVAL } from '~/common/enums'
 import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
@@ -96,11 +97,7 @@ export default () => (
         {({ data, loading, error, refetch }: QueryResult) => (
           <Mutation
             mutation={MARK_ALL_NOTICES_AS_READ}
-            refetchQueries={[
-              {
-                query: UNREAD_NOTICE_COUNT
-              }
-            ]}
+            update={updateViewerUnreadNoticeCount}
           >
             {markAllNoticesAsRead => (
               <NoticeButton

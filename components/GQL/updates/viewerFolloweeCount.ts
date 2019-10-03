@@ -1,20 +1,11 @@
 import { DataProxy } from 'apollo-cache'
-import gql from 'graphql-tag'
 
-import { ViewerFolloweeCount } from './__generated__/ViewerFolloweeCount'
+import { ViewerFolloweeCount } from '~/components/GQL/queries/__generated__/ViewerFolloweeCount'
+import VIEWER_FOLLOWEE_COUNT from '~/components/GQL/queries/followeeCount'
 
-const VIEWER_FOLLOWEE_COUNT = gql`
-  query ViewerFolloweeCount {
-    viewer {
-      id
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  }
-`
+import { ERROR_CODES } from '~/common/enums'
 
-export const updateViewerFolloweeCount = ({
+const update = ({
   cache,
   type
 }: {
@@ -41,6 +32,12 @@ export const updateViewerFolloweeCount = ({
       data: cacheData
     })
   } catch (e) {
-    //
+    if (e.message.startsWith("Can't find field")) {
+      console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
+    } else {
+      console.error(e)
+    }
   }
 }
+
+export default update

@@ -5,7 +5,6 @@ import { useContext, useState } from 'react'
 
 import { Button } from '~/components/Button'
 import { Mutation, Query } from '~/components/GQL'
-import ARTICLE_COMMENTS from '~/components/GQL/queries/articleComments'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
@@ -47,7 +46,6 @@ const COMMENT_DRAFT = gql`
 
 interface CommentFormProps {
   defaultContent?: string | null
-  articleMediaHash: string
   articleId: string
   commentId?: string
   replyToId?: string
@@ -61,7 +59,6 @@ interface CommentFormProps {
 // TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
   defaultContent,
-  articleMediaHash,
   commentId,
   parentId,
   replyToId,
@@ -80,13 +77,6 @@ const CommentForm = ({
         {
           query: COMMENT_COMMENTS,
           variables: { id: parentId }
-        }
-      ]
-    : articleMediaHash
-    ? [
-        {
-          query: ARTICLE_COMMENTS,
-          variables: { mediaHash: articleMediaHash }
         }
       ]
     : []

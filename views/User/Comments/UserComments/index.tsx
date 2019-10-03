@@ -36,13 +36,13 @@ const USER_ID = gql`
 const USER_COMMENT_FEED = gql`
   query UserCommentFeed(
     $id: ID!
-    $cursor: String
+    $after: String
     $hasDescendantComments: Boolean = false
   ) {
     node(input: { id: $id }) {
       ... on User {
         id
-        commentedArticles(input: { first: 5, after: $cursor }) {
+        commentedArticles(input: { first: 5, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -126,7 +126,7 @@ const UserComments = ({ user }: UserIdUser) => {
         const loadMore = () =>
           fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({
@@ -177,7 +177,7 @@ const UserComments = ({ user }: UserIdUser) => {
                       {filteredComments &&
                         filteredComments.map(comment => (
                           <li key={comment.id}>
-                            <CommentDigest.Feed comment={comment} />
+                            <CommentDigest.Feed comment={comment} hasLink />
                           </li>
                         ))}
                     </ul>

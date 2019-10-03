@@ -7,7 +7,6 @@ import ShareButton from '~/components/ShareButton'
 
 import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import Appreciators from './Appreciators'
-import CollectedByButton from './CollectedByButton'
 import ExtendButton from './ExtendButton'
 import MATButton from './MATButton'
 import MoreButton from './MoreButton'
@@ -23,7 +22,6 @@ const fragments = {
       ...BookmarkArticle
       ...ResponseButtonArticle
       ...MoreButtonArticle
-      ...CollectedByArticle
       ...ExtendButtonArticle
     }
     ${MATButton.fragments.article}
@@ -31,7 +29,6 @@ const fragments = {
     ${BookmarkButton.fragments.article}
     ${ResponseButton.fragments.article}
     ${MoreButton.fragments.article}
-    ${CollectedByButton.fragments.article}
     ${ExtendButton.fragments.article}
   `
 }

@@ -3,7 +3,6 @@ import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 const trackAs = (type: string) => (
   ...args: Array<string | { [key: string]: string | number }>
 ) => {
-  // if (process.browser) {
   // construct event with details
   const event = new CustomEvent(ANALYTICS, {
     detail: { args, type }
@@ -11,7 +10,6 @@ const trackAs = (type: string) => (
 
   // dispatch event
   window.dispatchEvent(event)
-  // }
 }
 
 export const analytics = {

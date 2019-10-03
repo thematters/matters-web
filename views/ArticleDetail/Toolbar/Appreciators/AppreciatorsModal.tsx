@@ -20,10 +20,10 @@ import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 import styles from './styles.css'
 
 const ARTICLE_APPRECIATORS = gql`
-  query AllArticleAppreciators($mediaHash: String, $cursor: String) {
+  query AllArticleAppreciators($mediaHash: String, $after: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      appreciators(input: { first: 10, after: $cursor }) {
+      appreciators(input: { first: 10, after: $after }) {
         totalCount
         pageInfo {
           startCursor
@@ -73,7 +73,7 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
               })
               return fetchMore({
                 variables: {
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({

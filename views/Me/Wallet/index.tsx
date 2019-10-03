@@ -28,13 +28,13 @@ import Intro from './Intro'
 import styles from './styles.css'
 
 const ME_WALLET = gql`
-  query MeWallet($cursor: String) {
+  query MeWallet($after: String) {
     viewer {
       id
       status {
         MAT {
           total
-          history(input: { first: 20, after: $cursor }) {
+          history(input: { first: 20, after: $after }) {
             pageInfo {
               startCursor
               endCursor
@@ -102,7 +102,7 @@ const Wallet = () => {
                   })
                   return fetchMore({
                     variables: {
-                      cursor: pageInfo.endCursor
+                      after: pageInfo.endCursor
                     },
                     updateQuery: (previousResult, { fetchMoreResult }) =>
                       mergeConnections({

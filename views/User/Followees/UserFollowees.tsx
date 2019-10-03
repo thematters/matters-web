@@ -14,11 +14,11 @@ import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import { UserFolloweeFeed } from './__generated__/UserFolloweeFeed'
 
 const USER_FOLLOWEES_FEED = gql`
-  query UserFolloweeFeed($userName: String!, $cursor: String) {
+  query UserFolloweeFeed($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
       displayName
-      followees(input: { first: 10, after: $cursor }) {
+      followees(input: { first: 10, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -61,7 +61,7 @@ const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
           })
           return fetchMore({
             variables: {
-              cursor: pageInfo.endCursor
+              after: pageInfo.endCursor
             },
             updateQuery: (previousResult, { fetchMoreResult }) =>
               mergeConnections({

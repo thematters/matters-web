@@ -5,6 +5,7 @@ export default gql`
     archiveArticle(input: { id: $id }) {
       id
       state
+      sticky
     }
   }
 `

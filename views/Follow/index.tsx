@@ -5,7 +5,7 @@ import { QueryResult } from 'react-apollo'
 
 import { Footer, Spinner } from '~/components'
 import { Mutation, Query } from '~/components/GQL'
-import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
+import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 import { ViewerContext } from '~/components/Viewer'
 
 import { MeFollow } from './__generated__/MeFollow'
@@ -36,11 +36,7 @@ export default () => {
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
         <Mutation
           mutation={READ_FOLLOWEE_ARTICLES}
-          refetchQueries={[
-            {
-              query: UNREAD_FOLLOWEE_ARTICLES
-            }
-          ]}
+          update={viewerUnreadFolloweeArticles}
         >
           {readFolloweeArticles => (
             <Query query={ME_FOLLOW}>

@@ -66,7 +66,6 @@ export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
   useEventListener(ANALYTICS, (detail: CustomEvent['detail']) => {
     handleAnalytics({ detail, user })
   })
-
   return null
 }
 

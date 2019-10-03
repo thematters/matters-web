@@ -3,15 +3,40 @@
 }
 
 .container {
-  margin: var(--spacing-default) 0;
+  padding: var(--spacing-default) 0;
+
+  &:target {
+    animation: bgFadeOut 2s ease 1s;
+  }
+}
+
+@keyframes bgFadeOut {
+  50% {
+    background: var(--color-bg-green);
+  }
+  0,
+  100% {
+    background: none;
+  }
 }
 
 .header {
   @mixin flex-start-space-between;
 }
 
+.author-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  & .label {
+    margin-left: var(--spacing-x-tight);
+    font-size: 0;
+  }
+}
+
 .reply-to {
-  @mixin flex-center-all;
+  display: flex;
   justify-content: flex-start;
   margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight) var(--spacing-loose);
 
@@ -28,11 +53,6 @@
   margin-left: 2.5rem;
 }
 
-.label {
-  margin-left: var(--spacing-x-tight);
-  font-size: 0;
-}
-
 .content-wrap {
   margin-top: var(--spacing-xx-tight);
   padding-left: var(--spacing-x-loose);
@@ -44,18 +64,24 @@
 .descendant-comments {
   & .container {
     position: relative;
-    margin: var(--spacing-tight) 0;
+    padding: var(--spacing-tight) 0;
 
     &::before {
       content: '';
       position: absolute;
       left: calc(var(--descendant-avatar-size) / 2);
-      bottom: 0;
+      bottom: var(--spacing-tight);
       height: 0;
-      height: calc(100% - var(--descendant-avatar-size) - var(--spacing-tight));
+      height: calc(
+        100% - var(--descendant-avatar-size) - var(--spacing-tight) * 3
+      );
       width: 1px;
       background-color: var(--color-line-grey-light);
     }
+  }
+  & li:first-child .container {
+    margin-top: var(--spacing-xx-tight);
+    padding-top: var(--spacing-tight);
   }
 
   & .content-wrap {

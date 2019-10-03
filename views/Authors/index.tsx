@@ -20,11 +20,11 @@ import { AllAuthors } from './__generated__/AllAuthors'
 import styles from './styles.css'
 
 const ALL_AUTHORSS = gql`
-  query AllAuthors($cursor: String) {
+  query AllAuthors($after: String) {
     viewer {
       id
       recommendation {
-        authors(input: { first: 10, after: $cursor }) {
+        authors(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -83,7 +83,7 @@ const Authors = () => (
               })
               return fetchMore({
                 variables: {
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({

@@ -20,8 +20,8 @@ import { SeachTags } from './__generated__/SeachTags'
 import styles from './styles.css'
 
 const SEARCH_TAGS = gql`
-  query SeachTags($first: Int!, $key: String!, $cursor: String) {
-    search(input: { key: $key, type: Tag, first: $first, after: $cursor }) {
+  query SeachTags($first: Int!, $key: String!, $after: String) {
+    search(input: { key: $key, type: Tag, first: $first, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -94,7 +94,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
             })
             return fetchMore({
               variables: {
-                cursor: pageInfo.endCursor
+                after: pageInfo.endCursor
               },
               updateQuery: (previousResult, { fetchMoreResult }) =>
                 mergeConnections({

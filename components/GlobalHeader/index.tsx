@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import { Responsive, SearchBar } from '~/components'
+import SignUpButton from '~/components/Button/SignUp'
 
-import { PATHS, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
@@ -20,15 +20,10 @@ import Nav from './Nav'
 import NotificationButton from './NotificationButton'
 import PublishButton from './PublishButton'
 import SearchButton from './SearchButton'
-import SignUpButton from './SignUpButton'
 import styles from './styles.css'
 import WriteButton from './WriteButton'
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
-  useEffect(() => {
-    analytics.identifyUser()
-  }, [])
-
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
   const { type: headerType } = headerState
@@ -80,7 +75,17 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
             {!isAbout && (!viewer.isAuthed || !user) && (
               <>
                 {!isLogin && <LoginButton />}
-                {!isSignUp && <SignUpButton />}
+                {!isSignUp && (
+                  <SignUpButton
+                    extraStyle={{ minWidth: '5rem' }}
+                    type={SIGNUP_TYPE.GENERAL}
+                  >
+                    <Translate
+                      zh_hant={TEXT.zh_hant.register}
+                      zh_hans={TEXT.zh_hans.register}
+                    />
+                  </SignUpButton>
+                )}
               </>
             )}
 
