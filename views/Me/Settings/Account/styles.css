@@ -17,12 +17,15 @@
   font-size: var(--font-size-sm);
 
   & .left {
+    @mixin flex-center-space-between;
+    margin-right: var(--spacing-default);
   }
 
   & .title {
+    flex-shrink: 0;
     display: inline-block;
     margin-right: var(--spacing-default);
-    width: 5rem;
+    width: 6rem;
 
     font-weight: var(--font-weight-medium);
 
@@ -32,12 +35,16 @@
   }
 }
 
-.change-password-button {
-  color: var(--color-matters-green);
-}
-
 .language-switch-button {
   &.active {
     font-weight: var(--font-weight-bold);
   }
+}
+
+.usd-price {
+  color: var(--color-grey);
+}
+
+.hint {
+  color: var(--color-grey-dark);
 }

@@ -65,7 +65,3 @@
     margin-left: var(--spacing-xxx-tight);
   }
 }
-
-.invitations {
-  @mixin unread-dot-loose;
-}

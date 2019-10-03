@@ -24,12 +24,12 @@
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
           { "name": "TransactionConnection" },
-          { "name": "InvitationConnection" },
           { "name": "NoticeConnection" },
           { "name": "CommentConnection" },
           { "name": "ResponseConnection" },
           { "name": "SearchResultConnection" },
-          { "name": "ReportConnection" }
+          { "name": "ReportConnection" },
+          { "name": "OAuthClientConnection" }
         ]
       },
       {

@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { Mutation, Query, QueryResult } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 
 import { Head, PageHeader, Translate } from '~/components'
+import { Mutation, Query } from '~/components/GQL'
 import { Switch } from '~/components/Switch'
 
 import { TEXT } from '~/common/enums'

@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 
-import { dom, objectToGetParams } from '~/common/utils'
+import { dom } from '~/common/utils'
 import ICON_SHARE_WEIBO from '~/static/icons/share-weibo.svg?sprite'
 
 const Weibo = () => (
@@ -15,8 +16,8 @@ const Weibo = () => (
       const text = window.document.title
       const cover = dom.$('meta[property="og:image"]').getAttribute('content')
       const shareUrl =
-        'http://service.weibo.com/share/share.php' +
-        objectToGetParams({
+        'http://service.weibo.com/share/share.php?' +
+        queryString.stringify({
           url,
           title: text,
           pic: cover

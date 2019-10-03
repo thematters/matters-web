@@ -3,8 +3,8 @@
 
 .content {
   & h2 {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
   }
 
   &.inactive {

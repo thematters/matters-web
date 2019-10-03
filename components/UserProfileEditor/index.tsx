@@ -158,7 +158,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
               textColor="grey"
               textWeight="normal"
               spacing="default"
-              disabled={!_isEmpty(errors) || isSubmitting}
+              disabled={isSubmitting}
               onClick={() => setEditing(false)}
             >
               <Translate

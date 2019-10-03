@@ -1,0 +1,4 @@
+.container {
+  padding: var(--spacing-default);
+  font-size: var(--font-size-sm);
+}

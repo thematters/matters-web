@@ -1,8 +1,14 @@
+import classNames from 'classnames'
+
 import styles from './styles.css'
 
 interface TabProps {
   disable?: boolean
   selected?: boolean
+}
+
+interface TabsProps {
+  layout?: 'horizontal' | 'auto'
 }
 
 const Tab: React.FC<TabProps> = ({
@@ -18,9 +24,15 @@ const Tab: React.FC<TabProps> = ({
   )
 }
 
-export const Tabs: React.FC & { Tab: typeof Tab } = ({ children }) => {
+export const Tabs: React.FC<TabsProps> & {
+  Tab: typeof Tab
+} = ({ children, layout = 'auto' }) => {
+  const navClass = classNames({
+    [layout]: !!layout
+  })
+
   return (
-    <nav>
+    <nav className={navClass}>
       <ul role="tablist">{children}</ul>
       <style jsx>{styles}</style>
     </nav>

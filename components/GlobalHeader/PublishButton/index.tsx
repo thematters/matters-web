@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default ({ allowed }: Props) => (
-  <ModalSwitch modalId={allowed ? 'publishModal' : 'onboardingInfoModal'}>
+  <ModalSwitch modalId={allowed ? 'publishModal' : 'likeCoinTermModal'}>
     {(open: any) => (
       <Button
         size="large"

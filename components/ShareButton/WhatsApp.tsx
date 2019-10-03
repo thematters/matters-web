@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, objectToGetParams } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import ICON_SHARE_WHATSAPP from '~/static/icons/share-whatsapp.svg?sprite'
 
 const Whatsapp = () => (
@@ -14,8 +15,8 @@ const Whatsapp = () => (
       const url = window.location.href
       const text = window.document.title
       const shareUrl =
-        'https://api.whatsapp.com/send' +
-        objectToGetParams({
+        'https://api.whatsapp.com/send?' +
+        queryString.stringify({
           text: text ? text + ' ' + url : url
         })
 

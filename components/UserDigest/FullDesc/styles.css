@@ -15,6 +15,8 @@
   @mixin flex-start-space-between;
 }
 .header-left {
+  display: flex;
+  align-items: center;
 }
 
 .name {
@@ -30,6 +32,10 @@
     font-size: calc(var(--font-size-sm) + 1px);
     line-height: 1.33333333;
   }
+}
+
+.name-shrink {
+  padding-right: 0.56rem;
 }
 
 .description {

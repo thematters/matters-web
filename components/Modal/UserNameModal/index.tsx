@@ -7,8 +7,6 @@ import ModalComplete from '~/components/Modal/Complete'
 
 import { TEXT } from '~/common/enums'
 
-import styles from './styles.css'
-
 /**
  * This component is a modal for changing user name.
  *
@@ -75,7 +73,6 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
           )}
         </>
       )}
-      <style jsx>{styles}</style>
     </>
   )
 }

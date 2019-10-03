@@ -3,14 +3,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, PopperInstance, TextIcon } from '~/components'
+import { Dropdown, PopperInstance } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums/text'
-import ICON_MAT_GOLD from '~/static/icons/mat-gold.svg?sprite'
 
 import { MeDigestUser } from './__generated__/MeDigestUser'
 import DropdownMenu from './DropdownMenu'
@@ -43,23 +42,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
           <Avatar size="small" user={viewer.isInactive ? undefined : user} />
           <section className="info">
             {(viewer.isActive || viewer.isOnboarding) && (
-              <>
-                <span className="username">{user.displayName}</span>
-                <TextIcon
-                  icon={
-                    <Icon
-                      size="xsmall"
-                      id={ICON_MAT_GOLD.id}
-                      viewBox={ICON_MAT_GOLD.viewBox}
-                    />
-                  }
-                  color="gold"
-                  weight="semibold"
-                  text={_get(user, 'status.MAT.total')}
-                  size="xs"
-                  spacing="0"
-                />
-              </>
+              <span className="username">{user.displayName}</span>
             )}
             {viewer.isFrozen && (
               <Translate
@@ -92,11 +75,6 @@ MeDigest.fragments = {
     fragment MeDigestUser on User {
       id
       displayName
-      status {
-        MAT {
-          total
-        }
-      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}

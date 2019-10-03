@@ -27,7 +27,8 @@ type ROUTE_KEY =
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_LEGACY'
-  | 'ME_WALLET'
+  | 'ME_APPRECIATIONS_SENT'
+  | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
@@ -39,7 +40,6 @@ type ROUTE_KEY =
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
-  | 'OAUTH_LIKECOIN_POLLING'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -184,9 +184,14 @@ export const ROUTES: Array<{
 
   // Me
   {
-    key: 'ME_WALLET',
-    href: '/MeWallet',
-    as: '/me/wallet'
+    key: 'ME_APPRECIATIONS_SENT',
+    href: '/MeAppreciationsSent',
+    as: '/me/appreciations/sent'
+  },
+  {
+    key: 'ME_APPRECIATIONS_RECEIVED',
+    href: '/MeAppreciationsReceived',
+    as: '/me/appreciations/received'
   },
   {
     key: 'ME_NOTIFICATIONS',
@@ -250,13 +255,6 @@ export const ROUTES: Array<{
     key: 'OAUTH_CALLBACK_FAILURE',
     href: '/OAuthCallbackFailure',
     as: '/oauth/:provider/failure'
-  },
-
-  // temporary endpoint
-  {
-    key: 'OAUTH_LIKECOIN_POLLING',
-    href: '/OAuthLikeCoinPolling',
-    as: '/oauth/likecoin/polling'
   },
 
   // Misc

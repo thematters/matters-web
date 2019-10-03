@@ -14,6 +14,7 @@ import { Query } from '~/components/GQL'
 import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
+import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
@@ -55,7 +56,7 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   const userName = getQuery({ router, key: 'userName' })
 
   if (!userName) {
-    return null
+    return <Throw404 />
   }
 
   return (

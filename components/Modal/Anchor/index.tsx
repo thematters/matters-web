@@ -1,12 +1,16 @@
-import { useContext } from 'react'
+import { withRouter, WithRouterProps } from 'next/router'
+import { useContext, useState } from 'react'
 
-import LoginModal from '~/components/Modal/LoginModal'
-import OnboardingInfoModal from '~/components/Modal/OnboardingInfoModal'
+import LoginForm from '~/components/Form/LoginForm'
+import LikeCoinTermModal from '~/components/Modal/LikeCoinTermModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
 import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import SetupLikeCoin from '~/components/SetupLikeCoin'
 import { ViewerContext } from '~/components/Viewer'
+
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -22,28 +26,57 @@ import styles from './styles.css'
  *
  */
 
-const Anchor = () => {
+const OpenedModal = ({ modalId }: { modalId: string }) => (
+  <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
+)
+
+const Anchor: React.FC<WithRouterProps> = ({ router }) => {
   const viewer = useContext(ViewerContext)
+
+  // ToS Modal
   const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
 
-  const OpenedModal = ({ modalId }: { modalId: string }) => (
-    <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
-  )
+  // LikeCoin Modal
+  const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
+  const allowPaths = [
+    PATHS.HOME.href,
+    PATHS.MISC_ABOUT.href,
+    PATHS.MISC_FAQ.href,
+    PATHS.ME_SETTINGS_ACCOUNT.href,
+    PATHS.ME_APPRECIATIONS_RECEIVED.href,
+    PATHS.ME_APPRECIATIONS_SENT.href
+  ]
+  const isLikeCoinAllowPaths =
+    router && router.pathname && allowPaths.indexOf(router.pathname) >= 0
+  const shouldShowLikeCoinModal =
+    viewer.isAuthed &&
+    !isLikeCoinClosed &&
+    isLikeCoinAllowPaths &&
+    (viewer.isOnboarding || !viewer.likerId)
+  const closeLikeCoinModal = () => {
+    setIsLikeCoinClosed(true)
+  }
 
   return (
     <>
       <div id="modal-anchor" className="container" />
+
       <ModalInstance modalId="loginModal" title="login">
-        {(props: ModalInstanceProps) => <LoginModal {...props} />}
+        {(props: ModalInstanceProps) => (
+          <LoginForm purpose="modal" {...props} />
+        )}
       </ModalInstance>
+
       <ModalInstance modalId="signUpModal">
         {(props: ModalInstanceProps) => <SignUpModal {...props} />}
       </ModalInstance>
+
       <ModalInstance modalId="passwordResetModal">
         {(props: ModalInstanceProps) => (
           <PasswordModal purpose="forget" {...props} />
         )}
       </ModalInstance>
+
       <ModalInstance
         modalId="termModal"
         title="termAndPrivacy"
@@ -51,13 +84,26 @@ const Anchor = () => {
       >
         {(props: ModalInstanceProps) => <TermModal {...props} />}
       </ModalInstance>
-      <ModalInstance modalId="onboardingInfoModal" title="onboardingInfo">
-        {(props: ModalInstanceProps) => <OnboardingInfoModal {...props} />}
+
+      <ModalInstance
+        modalId="likeCoinTermModal"
+        title="likeCoinTerm"
+        onClose={closeLikeCoinModal}
+      >
+        {(props: ModalInstanceProps) => (
+          <LikeCoinTermModal {...props} submitCallback={closeLikeCoinModal} />
+        )}
       </ModalInstance>
+
+      <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
+        {(props: ModalInstanceProps) => <SetupLikeCoin />}
+      </ModalInstance>
+
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
+      {shouldShowLikeCoinModal && <OpenedModal modalId="likeCoinTermModal" />}
       <style jsx>{styles}</style>
     </>
   )
 }
 
-export default Anchor
+export default withRouter(Anchor)

@@ -15,6 +15,7 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
+  appendTarget,
   isValidEmail,
   isValidPassword,
   isValidUserName,
@@ -71,7 +72,11 @@ const LoginModalSwitch = () => (
 )
 
 const LoginRedirection = () => (
-  <Modal.FooterButton is="link" {...PATHS.AUTH_LOGIN} bgColor="white">
+  <Modal.FooterButton
+    is="link"
+    {...appendTarget(PATHS.AUTH_LOGIN)}
+    bgColor="white"
+  >
     <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
   </Modal.FooterButton>
 )

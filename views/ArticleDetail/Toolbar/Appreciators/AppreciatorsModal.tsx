@@ -37,10 +37,36 @@ const ARTICLE_APPRECIATORS = gql`
           }
         }
       }
+      appreciationsReceived(input: { first: null, after: null }) {
+        edges {
+          cursor
+          node {
+            ... on Transaction {
+              amount
+              sender {
+                id
+              }
+            }
+          }
+        }
+      }
     }
   }
   ${UserDigest.FullDesc.fragments.user}
 `
+
+const groupAppreciations = (source: any[]) =>
+  source.reduce(
+    (groups: { [key: string]: any }, item: { [key: string]: any }) => {
+      if (!item.node || !item.node.sender || !item.node.sender.id) {
+        return groups
+      }
+      const id = item.node.sender.id
+      groups[id] = (groups[id] || 0) + (item.node.amount || 0)
+      return groups
+    },
+    {}
+  )
 
 const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -86,6 +112,12 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
             const totalCount = numFormat(
               _get(data, 'article.appreciators.totalCount', 0)
             )
+            const appreciations = _get(
+              data,
+              'article.appreciationsReceived.edges',
+              []
+            )
+            const groupedAppreciations = groupAppreciations(appreciations)
 
             return (
               <>
@@ -121,7 +153,10 @@ const AppreciatorsModal: React.FC<WithRouterProps> = ({ router }) => {
                               )
                             }
                           >
-                            <UserDigest.FullDesc user={node} />
+                            <UserDigest.FullDesc
+                              user={node}
+                              appreciations={groupedAppreciations[node.id]}
+                            />
                           </li>
                         )
                       )}

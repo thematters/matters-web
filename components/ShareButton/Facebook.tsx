@@ -1,10 +1,11 @@
 import _get from 'lodash/get'
+import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, objectToGetParams } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import ICON_SHARE_FACEBOOK from '~/static/icons/share-facebook.svg?sprite'
 
 const Facebook = () => (
@@ -13,8 +14,8 @@ const Facebook = () => (
     onClick={() => {
       const url = window.location.href
       const shareUrl =
-        'https://www.facebook.com/sharer/sharer.php' +
-        objectToGetParams({
+        'https://www.facebook.com/sharer/sharer.php?' +
+        queryString.stringify({
           u: url
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {

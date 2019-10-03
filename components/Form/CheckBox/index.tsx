@@ -52,13 +52,8 @@ const CheckBox: FC<Props> = ({
   return (
     <>
       <div className="container">
-        <label className="check">
-          <Icon
-            id={checkIcon.id}
-            viewBox={checkIcon.viewBox}
-            size="small"
-            onClick={click}
-          />
+        <label className="check" onClick={click}>
+          <Icon id={checkIcon.id} viewBox={checkIcon.viewBox} size="small" />
           <input
             className={inputClass}
             type="checkbox"

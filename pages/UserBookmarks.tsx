@@ -1,3 +1,9 @@
 import UserBookmarks from '~/views/User/Bookmarks'
 
-export default () => <UserBookmarks />
+import { Protected } from '~/components/Protected'
+
+export default () => (
+  <Protected>
+    <UserBookmarks />
+  </Protected>
+)

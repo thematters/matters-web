@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import Router, { SingletonRouter } from 'next/router'
+import queryString from 'query-string'
 
 import { PATHS } from '~/common/enums'
 
@@ -50,6 +51,11 @@ type ToPathArgs =
       type?: 'article' | 'tag' | 'user'
     }
 
+/**
+ * Get `href` and `as` for `<Link>` with `args`
+ *
+ * (works on SSR & CSR)
+ */
 export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   switch (args.page) {
     case 'articleDetail':
@@ -112,6 +118,11 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   }
 }
 
+/**
+ * Get a specific query value from `SingletonRouter` by `key`
+ *
+ * (works on SSR & CSR)
+ */
 export const getQuery = ({
   router,
   key
@@ -123,27 +134,36 @@ export const getQuery = ({
   return value instanceof Array ? value[0] : value
 }
 
-export const redirectToTarget = ({
-  defaultTarget = 'current'
-}: {
-  defaultTarget?: 'homepage' | 'current'
-} = {}) => {
-  if (!process.browser) {
-    return
-  }
-
-  const target =
-    _get(Router, 'query.target') ||
-    (defaultTarget === 'homepage' ? '/' : window.location.href)
-  return (window.location.href = decodeURIComponent(target))
+export const getTarget = (url?: string) => {
+  url = url || window.location.href
+  const qs = queryString.parseUrl(url).query
+  const target = encodeURIComponent((qs.target as string) || url)
+  return target
 }
 
-export const redirectToLogin = () => {
-  let target = ''
+/**
+ * Redirect to "?target=" or fallback URL with page reload.
+ *
+ * (works on CSR)
+ */
+export const redirectToTarget = ({
+  fallback = 'current'
+}: {
+  fallback?: 'homepage' | 'current'
+} = {}) => {
+  const fallbackTarget = fallback === 'homepage' ? '/' : window.location.href
+  const target = getTarget() || fallbackTarget
 
-  if (process.browser) {
-    target = Router.asPath ? encodeURIComponent(Router.asPath) : ''
-  }
+  window.location.href = decodeURIComponent(target)
+}
+
+/**
+ * Redirect to login page without page reload.
+ *
+ * (works on CSR)
+ */
+export const redirectToLogin = () => {
+  const target = getTarget()
 
   return Router.push(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
@@ -151,12 +171,20 @@ export const redirectToLogin = () => {
   )
 }
 
-export const objectToGetParams = (object: { [key: string]: string }) => {
-  return (
-    '?' +
-    Object.keys(object)
-      .filter(key => !!object[key])
-      .map(key => `${key}=${encodeURIComponent(object[key])}`)
-      .join('&')
-  )
+/**
+ * Append `?target` to `PATHS.xxx`.
+ *
+ * (works on SSR & CSR)
+ */
+export const appendTarget = ({ href, as }: { href: string; as: string }) => {
+  let target = ''
+
+  if (process.browser) {
+    target = getTarget()
+  }
+
+  return {
+    href: `${href}?target=${target}`,
+    as: `${as}?target=${target}`
+  }
 }

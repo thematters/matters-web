@@ -16,8 +16,8 @@ import {
   toPath,
   translate
 } from '~/common/utils'
+import ICON_LIKE from '~/static/icons/like.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
-import ICON_MAT_BLACK from '~/static/icons/mat-black.svg?sprite'
 import ICON_ME from '~/static/icons/me.svg?sprite'
 import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
@@ -54,19 +54,19 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Link {...PATHS.ME_WALLET}>
+        <Link {...PATHS.ME_APPRECIATIONS_SENT}>
           <a onClick={hideDropdown}>
             <TextIcon
               icon={
                 <Icon
-                  id={ICON_MAT_BLACK.id}
-                  viewBox={ICON_MAT_BLACK.viewBox}
+                  id={ICON_LIKE.id}
+                  viewBox={ICON_LIKE.viewBox}
                   size="small"
                 />
               }
               text={translate({
-                zh_hant: TEXT.zh_hant.myWallet,
-                zh_hans: TEXT.zh_hans.myWallet,
+                zh_hant: TEXT.zh_hant.myAppreciations,
+                zh_hans: TEXT.zh_hans.myAppreciations,
                 lang
               })}
               spacing="xtight"

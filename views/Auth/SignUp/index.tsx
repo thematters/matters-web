@@ -5,24 +5,16 @@ import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
+import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import { TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
-type Step = 'signUp' | 'profile' | 'follow' | 'complete'
+type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
-
-  const signUpCallback = ({ email, codeId, password }: any) => {
-    setStep('profile')
-  }
-
-  const profileCallback = () => {
-    setStep('complete')
-  }
-
   const { updateHeaderState } = useContext(HeaderContext)
   useEffect(() => {
     updateHeaderState({ type: 'signUp' })
@@ -54,14 +46,26 @@ const SignUp = () => {
           {step === 'signUp' && (
             <SignUpInitForm
               purpose="page"
-              submitCallback={signUpCallback}
+              submitCallback={() => {
+                setStep('profile')
+              }}
               scrollLock={false}
             />
           )}
           {step === 'profile' && (
             <SignUpProfileForm
               purpose="page"
-              submitCallback={profileCallback}
+              submitCallback={() => {
+                setStep('setupLikeCoin')
+              }}
+              scrollLock={false}
+            />
+          )}
+          {step === 'setupLikeCoin' && (
+            <SetupLikeCoin
+              submitCallback={() => {
+                setStep('complete')
+              }}
               scrollLock={false}
             />
           )}

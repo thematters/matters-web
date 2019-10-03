@@ -38,7 +38,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
 
   if (!allowed) {
     return (
-      <ModalSwitch modalId="onboardingInfoModal">
+      <ModalSwitch modalId="likeCoinTermModal">
         {(open: any) => (
           <Button
             className="u-sm-down-hide"

@@ -6,6 +6,7 @@ import { QueryResult } from 'react-apollo'
 import { Empty, Icon, Menu, Spinner, Translate } from '~/components'
 import { Query } from '~/components/GQL'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
@@ -93,7 +94,12 @@ const AutoComplete = ({
                   <Menu.Divider />
 
                   <Menu.Header
-                    title={<Translate zh_hant="搜尋歷史" zh_hans="搜索历史" />}
+                    title={
+                      <Translate
+                        zh_hant={TEXT.zh_hant.searchHistory}
+                        zh_hans={TEXT.zh_hans.searchHistory}
+                      />
+                    }
                   >
                     {recentSearches.length > 0 && <ClearHistoryButton />}
                   </Menu.Header>
