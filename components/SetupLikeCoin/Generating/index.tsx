@@ -22,6 +22,9 @@ const GENERATE_LIKER_ID = gql`
     generateLikerId {
       id
       likerId
+      status {
+        state
+      }
     }
   }
 `
