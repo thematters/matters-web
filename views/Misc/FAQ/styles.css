@@ -1,0 +1,40 @@
+/* @styled-jsx=global */
+
+article {
+  & summary {
+    position: relative;
+    display: block;
+    padding-left: var(--spacing-default);
+
+    cursor: pointer;
+    user-select: none;
+
+    &::-webkit-details-marker {
+      position: absolute;
+      display: inline-block;
+      top: 0.45rem;
+      left: 0;
+      width: 0.6rem;
+      height: 0.6rem;
+    }
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  & details {
+    & details {
+      padding-left: var(--spacing-default);
+
+      & summary {
+        padding-left: var(--spacing-tight);
+
+        &::-webkit-details-marker {
+          top: 0.4rem;
+          width: 0.5rem;
+          height: 0.5rem;
+        }
+      }
+    }
+  }
+}
