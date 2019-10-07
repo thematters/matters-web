@@ -22,6 +22,7 @@ const nextConfig = {
    *
    * @see {@url https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side}
    */
+  poweredByHeader: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
   },
