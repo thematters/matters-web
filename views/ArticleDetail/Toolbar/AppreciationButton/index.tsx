@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import { forwardRef, useContext, useRef, useState } from 'react'
 
@@ -184,7 +183,7 @@ const AppreciationButtonContainer = ({
       {(sendAppreciation, { data }) => {
         // bundle appreciations
         const appreciate = () => {
-          const throttle = 3000
+          const debounce = 1000
           setAppreciationAmount(appreciationAmount + 1)
 
           if (!bundling) {
@@ -197,7 +196,7 @@ const AppreciationButtonContainer = ({
                 setAppreciationAmount(0)
                 setBundling(false)
               }
-            }, throttle)
+            }, debounce)
           }
         }
 
