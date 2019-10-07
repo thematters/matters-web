@@ -142,14 +142,14 @@ module.exports = withPlugins(
           runtimeCaching: [
             {
               urlPattern: '/',
-              handler: 'networkFirst',
+              handler: 'NetworkFirst',
               options: {
                 cacheName: 'homepage-cache'
               }
             },
             {
               urlPattern: new RegExp('/_next/static/'),
-              handler: 'cacheFirst',
+              handler: 'CacheFirst',
               options: {
                 cacheName: 'static-cache',
                 cacheableResponse: {
