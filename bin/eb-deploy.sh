@@ -3,10 +3,6 @@ APP_DEVELOP="matters-stage"
 ENV_DEVELOP="matters-client-web-develop"
 REGION_DEVELOP="ap-southeast-1"
 
-APP_LIKECOIN="matters-stage"
-ENV_LIKECOIN="matters-client-web-likecoin"
-REGION_LIKECOIN="ap-southeast-1"
-
 APP_STAGING="matters-stage"
 ENV_STAGING="matters-client-web-stage"
 REGION_STAGING="ap-southeast-1"
@@ -24,12 +20,6 @@ then
     # https://stackoverflow.com/a/30389695
     cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
     eb deploy $ENV_DEVELOP
-elif [[ $1 == 'likecoin' ]]
-then
-    echo "Deploying to likecoin development environment..."
-    printf '\n\n' | eb init $APP_LIKECOIN --region $REGION_LIKECOIN
-    cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
-    eb deploy $ENV_LIKECOIN
 elif [[ $1 == 'staging' ]]
 then
     echo "Deploying to staging environment..."
@@ -42,6 +32,6 @@ then
     printf '\n\n' | eb init $APP_PRODUCTION --region $REGION_PRODUCTION
     eb deploy $ENV_PRODUCTION
 else
-    echo "Usage: bin/eb-deploy.sh [develop|likecoin|staging|prod]"
+    echo "Usage: bin/eb-deploy.sh [develop|staging|prod]"
 fi
 
