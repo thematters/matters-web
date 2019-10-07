@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
-import { numAbbr, numFormat } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 
 import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
@@ -51,14 +51,10 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="喜歡你的作品" zh_hans="喜欢你的作品" />
-          {notice.MAT && (
-            <>
-              <Translate zh_hant={`，並給出了 `} zh_hans={`并给出了 `} />
-              <span className="highlight">{numFormat(notice.MAT)}</span>
-              <Translate zh_hant="次讚賞" zh_hans="次赞赏" />
-            </>
-          )}
+          <Translate
+            zh_hant="喜歡並讚賞了你的作品"
+            zh_hans="喜欢并赞赏了你的作品"
+          />
         </h4>
 
         <NoticeArticle article={notice.target} />
@@ -77,7 +73,6 @@ ArticleNewAppreciationNotice.fragments = {
       unread
       __typename
       ...NoticeDate
-      MAT
       target {
         ...NoticeArticle
       }
