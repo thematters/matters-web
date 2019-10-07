@@ -1,5 +1,5 @@
 const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
-  zh_hant: `
+  zh_hant: /* html */ `
 <p><strong>親愛的 Matty，</strong></p>
 
 <p>為了打造更優質的創作平台，Matters 與 LikeCoin 合作啦！歡迎登入升級後的空間站。</p>
@@ -10,7 +10,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
 
 <p>了解更多創作收益的管理細節，請參考我們的 <a target="/guide" class="u-link-green" target="_blank" >新手指南</a>。</p>
   `,
-  zh_hans: `
+  zh_hans: /* html */ `
   <p><strong>亲爱的 Matty，</strong></p>
 
   <p>为了打造更优质的创作平台，Matters 与 LikeCoin 合作啦！欢迎登入升级后的空间站。</p>
