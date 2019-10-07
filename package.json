@@ -33,7 +33,7 @@
   "dependencies": {
     "@matters/apollo-upload-client": "^11.1.0",
     "@sentry/browser": "^5.6.3",
-    "@tippy.js/react": "^3.0.1",
+    "@tippy.js/react": "^2.2.3",
     "@types/jump.js": "^1.0.2",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-cache-persist": "^0.1.1",
