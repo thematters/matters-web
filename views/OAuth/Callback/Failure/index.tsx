@@ -9,10 +9,26 @@ import ICON_LIKECOIN from '~/static/icons/oauth/likecoin.svg?url'
 
 import styles from './styles.css'
 
-// const OAUTH_CALLBACK_ERROR_CODE = {
-//   userNotFound: 1,
-//   likerNotFound: 2
-// }
+const OAUTH_CALLBACK_ERROR_CODE = {
+  userNotFound: 1,
+  likerNotFound: 2,
+  likerExists: 3
+}
+
+const ERROR_TEXT = {
+  [OAUTH_CALLBACK_ERROR_CODE.userNotFound]: {
+    zh_hant: '用戶不存在，請回到 Matters 再次嘗試',
+    zh_hans: '用户不存在，请回到 Matters 再次尝试'
+  },
+  [OAUTH_CALLBACK_ERROR_CODE.likerNotFound]: {
+    zh_hant: 'Liker ID 不存在，請回到 Matters 再次嘗試',
+    zh_hans: 'Liker ID 不存在，请回到 Matters 再次尝试'
+  },
+  [OAUTH_CALLBACK_ERROR_CODE.likerExists]: {
+    zh_hant: '此 Liker ID 已與 Matters ID 綁定',
+    zh_hans: '此 Liker ID 已与 Matters ID 绑定'
+  }
+}
 
 const OAuthCallbackFailure: React.FC<WithRouterProps> = ({ router }) => {
   const code = getQuery({ router, key: 'code' })
@@ -23,6 +39,7 @@ const OAuthCallbackFailure: React.FC<WithRouterProps> = ({ router }) => {
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN
   }
+  const errorDetail = ERROR_TEXT[code as any]
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
     Router.push(PATHS.HOME.as)
@@ -37,19 +54,9 @@ const OAuthCallbackFailure: React.FC<WithRouterProps> = ({ router }) => {
             <Translate zh_hant="出錯了" zh_hans="出错了" />
           </h2>
 
-          <p>
-            <Translate
-              zh_hant="請回到 Matters 再次嘗試"
-              zh_hans="请回到 Matters 再次尝试"
-            />
-          </p>
-
-          {code && (
+          {errorDetail && (
             <p>
-              <Translate
-                zh_hant={`（錯誤代碼：${code}）`}
-                zh_hans={`（错误代码：${code}）`}
-              />
+              <Translate {...errorDetail} />
             </p>
           )}
         </section>
