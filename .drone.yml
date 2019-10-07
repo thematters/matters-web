@@ -10,7 +10,6 @@ steps:
   - name: tslint
     image: node:11.14.0
     commands:
-      - npm run gen:clean # temperally clean
       - npm run gen:type
       - npm run lint
       - npm run format:check

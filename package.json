@@ -25,7 +25,7 @@
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "gen:type": "apollo client:codegen __generated__ --target=typescript --config apollo.config.js",
+    "gen:type": "npm run gen:clean && apollo client:codegen __generated__ --target=typescript --config apollo.config.js",
     "gen:watch": "npm run gen:type -- --watch",
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js"
