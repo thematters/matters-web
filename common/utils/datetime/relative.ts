@@ -1,10 +1,11 @@
-import differenceInDays from 'date-fns/difference_in_days'
-import differenceInHours from 'date-fns/difference_in_hours'
-import differenceInMinutes from 'date-fns/difference_in_minutes'
-import isThisHour from 'date-fns/is_this_hour'
-import isThisMinute from 'date-fns/is_this_minute'
-import isThisWeek from 'date-fns/is_this_week'
-import isToday from 'date-fns/is_today'
+import differenceInDays from 'date-fns/differenceInDays'
+import differenceInHours from 'date-fns/differenceInHours'
+import differenceInMinutes from 'date-fns/differenceInMinutes'
+import isThisHour from 'date-fns/isThisHour'
+import isThisMinute from 'date-fns/isThisMinute'
+import isThisWeek from 'date-fns/isThisWeek'
+import isToday from 'date-fns/isToday'
+import parseISO from 'date-fns/parseISO'
 
 import absolute from './absolute'
 
@@ -39,6 +40,10 @@ const DIFFS = {
 }
 
 const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+
   if (isThisMinute(date)) {
     return DIFFS[lang].justNow
   }

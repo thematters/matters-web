@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -37,7 +37,8 @@ const DRAFT_DETAIL = gql`
   ${PublishState.fragments.draft}
 `
 
-const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
+const DraftDetail = () => {
+  const router = useRouter()
   const id = getQuery({ router, key: 'id' })
 
   if (!id) {
@@ -93,4 +94,4 @@ const DraftDetail: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(DraftDetail)
+export default DraftDetail

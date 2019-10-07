@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
@@ -76,7 +76,8 @@ const USER_COMMENT_FEED = gql`
   ${CommentDigest.Feed.fragments.comment}
 `
 
-const UserCommentsWrap: React.FC<WithRouterProps> = ({ router }) => {
+const UserCommentsWrap = () => {
+  const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
   return (
@@ -193,4 +194,4 @@ const UserComments = ({ user }: UserIdUser) => {
   )
 }
 
-export default withRouter(UserCommentsWrap)
+export default UserCommentsWrap

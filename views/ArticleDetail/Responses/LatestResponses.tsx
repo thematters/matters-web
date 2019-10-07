@@ -3,7 +3,7 @@ import jump from 'jump.js'
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -56,7 +56,8 @@ const SUBSCRIBE_RESPONSES = gql`
   ${ArticleDetailResponses}
 `
 
-const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
+const LatestResponses = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const [storedCursor, setStoredCursor] = useState(null)
@@ -300,4 +301,4 @@ const LatestResponses: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(LatestResponses)
+export default LatestResponses

@@ -1,4 +1,4 @@
-import Router, { withRouter, WithRouterProps } from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 import { Modal, Translate } from '~/components'
 import OAuth from '~/components/OAuth'
@@ -30,7 +30,8 @@ const ERROR_TEXT = {
   }
 }
 
-const OAuthCallbackFailure: React.FC<WithRouterProps> = ({ router }) => {
+const OAuthCallbackFailure = () => {
+  const router = useRouter()
   const code = getQuery({ router, key: 'code' })
   const provider = getQuery({ router, key: 'provider' })
   const title: { [key: string]: any } = {
@@ -75,4 +76,4 @@ const OAuthCallbackFailure: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(OAuthCallbackFailure)
+export default OAuthCallbackFailure

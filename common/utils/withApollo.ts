@@ -70,8 +70,11 @@ const dataLink = process.browser
       split(
         // split based on operation type
         ({ query }) => {
-          const { kind, operation } = getMainDefinition(query)
-          return kind === 'OperationDefinition' && operation === 'subscription'
+          const definition = getMainDefinition(query)
+          return (
+            definition.kind === 'OperationDefinition' &&
+            definition.operation === 'subscription'
+          )
         },
         wsLink as WebSocketLink,
         httpLink({ headers })
@@ -84,7 +87,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
           locations
-        )}, Path: ${JSON.stringify(path)}, Code: ${extensions.code}`
+        )}, Path: ${JSON.stringify(path)}, Code: ${extensions &&
+          extensions.code}`
       )
     )
   }

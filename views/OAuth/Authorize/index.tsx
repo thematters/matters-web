@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
 import { QueryResult } from 'react-apollo'
@@ -12,7 +12,7 @@ import OAuth from '~/components/OAuth'
 import Throw404 from '~/components/Throw404'
 
 import { PATHS, TEXT } from '~/common/enums'
-import { appendTarget, toReadableScope } from '~/common/utils'
+import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -33,11 +33,16 @@ const OAUTH_CLIENT_INFO = gql`
   }
 `
 
-const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
+const OAuthAuthorize = () => {
+  const router = useRouter()
   const { lang } = useContext(LanguageContext)
-  const qs = (router ? router.query : {}) as { [key: string]: any }
-  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(qs)}`
-  const clientId = qs.client_id
+  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
+    router.query
+  )}`
+  const clientId = getQuery({ router, key: 'client_id' })
+  const state = getQuery({ router, key: 'state' })
+  const scope = getQuery({ router, key: 'scope' })
+  const redirectUri = getQuery({ router, key: 'redirect_uri' })
 
   if (!clientId) {
     return <Throw404 />
@@ -80,18 +85,14 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
               titleAlign="left"
             >
               <form action={actionUrl} method="post">
-                <input type="hidden" name="client_id" value={qs.client_id} />
-                {qs.state && (
-                  <input type="hidden" name="state" value={qs.state} />
-                )}
-                {qs.scope && (
-                  <input type="hidden" name="scope" value={qs.scope} />
-                )}
-                {qs.redirect_uri && (
+                <input type="hidden" name="client_id" value={clientId} />
+                {state && <input type="hidden" name="state" value={state} />}
+                {scope && <input type="hidden" name="scope" value={scope} />}
+                {redirectUri && (
                   <input
                     type="hidden"
                     name="redirect_uri"
-                    value={qs.redirect_uri}
+                    value={redirectUri}
                   />
                 )}
                 <input type="hidden" name="response_type" value="code" />
@@ -104,9 +105,9 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
                         zh_hans="读取你的公开资料"
                       />
                     </li>
-                    {scopes.map((scope: any) => {
+                    {scopes.map((s: any) => {
                       const readableScope = toReadableScope({
-                        scope,
+                        scope: s,
                         lang
                       })
 
@@ -150,4 +151,4 @@ const OAuthAuthorize: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(OAuthAuthorize)
+export default OAuthAuthorize

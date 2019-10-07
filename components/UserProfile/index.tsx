@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { get, some } from 'lodash'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 
@@ -97,7 +97,8 @@ const CoverContainer = ({ children }: any) => (
 
 type UserProfileResultType = QueryResult & { data: UserProfileUser }
 
-const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
+const BaseUserProfile = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
@@ -259,4 +260,4 @@ const BaseUserProfile: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export const UserProfile = withRouter(BaseUserProfile)
+export const UserProfile = BaseUserProfile

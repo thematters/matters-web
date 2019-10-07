@@ -82,7 +82,7 @@ export const SignUpFollowForm: FC<Props> = ({
               viewer={data.viewer}
               title={titleText}
               titleIs="span"
-              readonly={true}
+              readonly
             />
             <div className="buttons">
               <Button

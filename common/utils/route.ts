@@ -1,5 +1,5 @@
 import _get from 'lodash/get'
-import Router, { SingletonRouter } from 'next/router'
+import Router, { NextRouter } from 'next/router'
 import queryString from 'query-string'
 
 import { PATHS } from '~/common/enums'
@@ -119,7 +119,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
 }
 
 /**
- * Get a specific query value from `SingletonRouter` by `key`
+ * Get a specific query value from `NextRouter` by `key`
  *
  * (works on SSR & CSR)
  */
@@ -127,10 +127,10 @@ export const getQuery = ({
   router,
   key
 }: {
-  router?: SingletonRouter
+  router: NextRouter
   key: string
 }) => {
-  const value = router && router.query && router.query[key]
+  const value = router.query && router.query[key]
   return value instanceof Array ? value[0] : value
 }
 

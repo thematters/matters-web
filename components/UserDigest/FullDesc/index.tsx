@@ -63,7 +63,7 @@ const FullDesc = ({
     'name-shrink': showAppreciations
   })
   const path = readonly
-    ? {}
+    ? { href: '' }
     : toPath({
         page: 'userProfile',
         userName: user.userName || ''

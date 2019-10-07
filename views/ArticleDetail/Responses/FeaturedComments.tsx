@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import { LoadMore, Spinner, Translate } from '~/components'
@@ -43,7 +43,8 @@ const FEATURED_COMMENTS = gql`
   ${commentFragments.feed}
 `
 
-const FeaturedComments: React.FC<WithRouterProps> = ({ router }) => {
+const FeaturedComments = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
 
   if (!mediaHash) {
@@ -122,4 +123,4 @@ const FeaturedComments: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(FeaturedComments)
+export default FeaturedComments

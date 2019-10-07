@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { QueryResult } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
@@ -310,7 +310,8 @@ const ArticleDetail = ({
   )
 }
 
-const ArticleDetailContainer: React.FC<WithRouterProps> = ({ router }) => {
+const ArticleDetailContainer = () => {
+  const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
 
   if (!mediaHash) {
@@ -327,4 +328,4 @@ const ArticleDetailContainer: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(ArticleDetailContainer)
+export default ArticleDetailContainer

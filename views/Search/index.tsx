@@ -1,4 +1,4 @@
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Footer, Head, Responsive, SearchBar } from '~/components'
 
@@ -29,7 +29,8 @@ const EmptySeachPage = () => {
   )
 }
 
-const Search: React.FC<WithRouterProps> = ({ router }) => {
+const Search = () => {
+  const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
 
@@ -71,4 +72,4 @@ const Search: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(Search)
+export default Search

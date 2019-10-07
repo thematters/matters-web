@@ -1,30 +1,35 @@
 import format from 'date-fns/format'
-import isThisYear from 'date-fns/is_this_year'
-import isToday from 'date-fns/is_today'
-import isYesterday from 'date-fns/is_yesterday'
+import isThisYear from 'date-fns/isThisYear'
+import isToday from 'date-fns/isToday'
+import isYesterday from 'date-fns/isYesterday'
+import parseISO from 'date-fns/parseISO'
 
 const FORMATS = {
   zh_hant: {
     absoluteToday: '今天 H:mm',
     absoluteYesterday: '昨天 H:mm',
-    absoluteThisYear: 'M 月 D 日',
-    absoluteFull: 'YYYY 年 M 月 D 日'
+    absoluteThisYear: 'M 月 d 日',
+    absoluteFull: 'yyyy 年 M 月 d 日'
   },
   zh_hans: {
     absoluteToday: '今天 H:mm',
     absoluteYesterday: '昨天 H:mm',
-    absoluteThisYear: 'M 月 D 日',
-    absoluteFull: 'YYYY 年 M 月 D 日'
+    absoluteThisYear: 'M 月 d 日',
+    absoluteFull: 'yyyy 年 M 月 d 日'
   },
   en: {
     absoluteToday: 'HH:mm',
-    absoluteYesterday: 'MM-DD',
-    absoluteThisYear: 'MM-DD',
-    absoluteFull: 'YYYY-MM-DD'
+    absoluteYesterday: 'MM-dd',
+    absoluteThisYear: 'MM-dd',
+    absoluteFull: 'yyyy-MM-dd'
   }
 }
 
 const absolute = (date: Date | string | number, lang: Language = 'zh_hant') => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+
   if (isToday(date)) {
     return format(date, FORMATS[lang].absoluteToday)
   }

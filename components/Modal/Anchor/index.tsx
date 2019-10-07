@@ -1,4 +1,4 @@
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import LoginForm from '~/components/Form/LoginForm'
@@ -30,7 +30,8 @@ const OpenedModal = ({ modalId }: { modalId: string }) => (
   <ModalSwitch modalId={modalId}>{(open: any) => open()}</ModalSwitch>
 )
 
-const Anchor: React.FC<WithRouterProps> = ({ router }) => {
+const Anchor = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
 
   // ToS Modal
@@ -47,7 +48,7 @@ const Anchor: React.FC<WithRouterProps> = ({ router }) => {
     PATHS.ME_APPRECIATIONS_SENT.href
   ]
   const isLikeCoinAllowPaths =
-    router && router.pathname && allowPaths.indexOf(router.pathname) >= 0
+    router.pathname && allowPaths.indexOf(router.pathname) >= 0
   const shouldShowLikeCoinModal =
     viewer.isAuthed &&
     !isLikeCoinClosed &&
@@ -106,4 +107,4 @@ const Anchor: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(Anchor)
+export default Anchor

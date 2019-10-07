@@ -86,9 +86,9 @@ export const AnalyticsProvider: FC = ({ children }) => {
       analytics.trackPage({ path: window.location.pathname })
       setSessionStarted(true)
     }
-    Router.onRouteChangeComplete = (path: string) => {
+    Router.events.on('routeChangeComplete', (path: string) => {
       analytics.trackPage({ path })
-    }
+    })
   })
 
   return <>{children}</>

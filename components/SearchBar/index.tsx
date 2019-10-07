@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import Router, { withRouter, WithRouterProps } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
@@ -17,11 +17,11 @@ const SearchButton = () => (
   </button>
 )
 
-const BaseSearchBar: React.FC<
-  WithRouterProps & {
-    autoComplete?: boolean
-  }
-> = ({ router, autoComplete = true }) => {
+const BaseSearchBar: React.FC<{
+  autoComplete?: boolean
+}> = ({ autoComplete = true }) => {
+  const router = useRouter()
+
   // translations
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({
@@ -119,4 +119,4 @@ const BaseSearchBar: React.FC<
   )
 }
 
-export const SearchBar = withRouter(BaseSearchBar)
+export const SearchBar = BaseSearchBar

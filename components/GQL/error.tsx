@@ -8,7 +8,7 @@ import { Translate } from '../Language'
 import { ModalSwitch } from '../ModalManager'
 
 export const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
-  errors && errors.find(e => e.extensions.code === code)
+  errors && errors.find(e => _get(e, 'extensions.code') === code)
 
 export const getErrorCodes = (error: any) => {
   const errorCodes: string[] = []

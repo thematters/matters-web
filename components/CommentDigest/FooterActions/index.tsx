@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
@@ -63,14 +63,10 @@ const IconDotDivider = () => (
   />
 )
 
-const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
-  router,
-  comment,
-  hasForm,
-  hasLink,
-  refetch,
-  commentCallback
-}) => {
+const FooterActions: React.FC<FooterActionsProps> & {
+  fragments: typeof fragments
+} = ({ comment, hasForm, hasLink, refetch, commentCallback }) => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
@@ -137,7 +133,7 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
           <a
             href={commentPath.as}
             onClick={() => {
-              if (router && router.pathname === PATHS.ARTICLE_DETAIL.href) {
+              if (router.pathname === PATHS.ARTICLE_DETAIL.href) {
                 jump(`#${fragment}`, {
                   offset: -64
                 })
@@ -168,8 +164,6 @@ const FooterActions: React.FC<WithRouterProps & FooterActionsProps> = ({
   )
 }
 
-const WrappedFooterActions: any = withRouter(FooterActions)
+FooterActions.fragments = fragments
 
-WrappedFooterActions.fragments = fragments
-
-export default WrappedFooterActions
+export default FooterActions

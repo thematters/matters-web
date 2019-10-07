@@ -1,5 +1,5 @@
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -52,7 +52,8 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
   )
 }
 
-const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
+const UserArticles = () => {
+  const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
   if (!userName) {
@@ -153,4 +154,4 @@ const UserArticles: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(UserArticles)
+export default UserArticles

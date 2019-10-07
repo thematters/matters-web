@@ -1,4 +1,4 @@
-import Router, { withRouter, WithRouterProps } from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 import { Modal, Translate } from '~/components'
 import OAuth from '~/components/OAuth'
@@ -9,7 +9,8 @@ import ICON_LIKECOIN from '~/static/icons/oauth/likecoin.svg?url'
 
 import styles from './styles.css'
 
-const OAuthCallbackSuccess: React.FC<WithRouterProps> = ({ router }) => {
+const OAuthCallbackSuccess = () => {
+  const router = useRouter()
   const provider = getQuery({ router, key: 'provider' })
   const title: { [key: string]: any } = {
     likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />
@@ -53,4 +54,4 @@ const OAuthCallbackSuccess: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(OAuthCallbackSuccess)
+export default OAuthCallbackSuccess

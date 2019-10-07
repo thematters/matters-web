@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import { Tabs, Translate } from '~/components'
@@ -8,9 +8,9 @@ import { ViewerContext } from '~/components/Viewer'
 import { PATHS, TEXT } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
-const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
+const MeTabs = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const pathname = router && router.pathname
   const userName = getQuery({ router, key: 'userName' }) || ''
   const isMe = viewer.userName === userName
 
@@ -38,7 +38,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
   if (isMe) {
     return (
       <Tabs>
-        <Tabs.Tab selected={pathname === PATHS.USER_ARTICLES.href}>
+        <Tabs.Tab selected={router.pathname === PATHS.USER_ARTICLES.href}>
           <Link {...userArticlePath}>
             <a>
               <Translate
@@ -48,7 +48,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
             </a>
           </Link>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.USER_DRAFTS.href}>
+        <Tabs.Tab selected={router.pathname === PATHS.USER_DRAFTS.href}>
           <Link {...userDraftsPath}>
             <a>
               <Translate
@@ -58,7 +58,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
             </a>
           </Link>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.USER_COMMENTS.href}>
+        <Tabs.Tab selected={router.pathname === PATHS.USER_COMMENTS.href}>
           <Link {...userCommentsPath}>
             <a>
               <Translate
@@ -68,7 +68,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
             </a>
           </Link>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.USER_BOOKMARKS.href}>
+        <Tabs.Tab selected={router.pathname === PATHS.USER_BOOKMARKS.href}>
           <Link {...userBookmarksPath}>
             <a>
               <Translate
@@ -78,7 +78,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
             </a>
           </Link>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.USER_HISTORY.href}>
+        <Tabs.Tab selected={router.pathname === PATHS.USER_HISTORY.href}>
           <Link {...userHistoryPath}>
             <a>
               <Translate
@@ -94,7 +94,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
 
   return (
     <Tabs>
-      <Tabs.Tab selected={pathname === PATHS.USER_ARTICLES.href}>
+      <Tabs.Tab selected={router.pathname === PATHS.USER_ARTICLES.href}>
         <Link {...userArticlePath}>
           <a>
             <Translate
@@ -104,7 +104,7 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
           </a>
         </Link>
       </Tabs.Tab>
-      <Tabs.Tab selected={pathname === PATHS.USER_COMMENTS.href}>
+      <Tabs.Tab selected={router.pathname === PATHS.USER_COMMENTS.href}>
         <Link {...userCommentsPath}>
           <a>
             <Translate
@@ -118,4 +118,4 @@ const MeTabs: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(MeTabs)
+export default MeTabs

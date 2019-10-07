@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import {
@@ -51,7 +51,9 @@ const TAG_DETAIL = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
+const TagDetail = () => {
+  const router = useRouter()
+
   if (!router || !router.query || !router.query.id) {
     return <EmptyTag />
   }
@@ -149,4 +151,4 @@ const TagDetail: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(TagDetail)
+export default TagDetail

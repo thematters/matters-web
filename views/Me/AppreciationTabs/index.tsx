@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
@@ -22,15 +22,17 @@ const fragments = {
   `
 }
 
-const BaseAppreciationTabs: React.FC<
-  WithRouterProps & AppreciationTabsProps
-> = ({ router, activity }) => {
-  const pathname = router && router.pathname
+const AppreciationTabs: React.FC<AppreciationTabsProps> & {
+  fragments: typeof fragments
+} = ({ activity }) => {
+  const router = useRouter()
 
   return (
     <>
       <Tabs layout="horizontal">
-        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS_SENT.href}>
+        <Tabs.Tab
+          selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
+        >
           <Link {...PATHS.ME_APPRECIATIONS_SENT}>
             <a>
               <Translate
@@ -41,7 +43,9 @@ const BaseAppreciationTabs: React.FC<
           </Link>
           <sup className="count">{activity.appreciationsSentTotal}</sup>
         </Tabs.Tab>
-        <Tabs.Tab selected={pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}>
+        <Tabs.Tab
+          selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
+        >
           <Link {...PATHS.ME_APPRECIATIONS_RECEIVED}>
             <a>
               <Translate
@@ -57,8 +61,6 @@ const BaseAppreciationTabs: React.FC<
     </>
   )
 }
-
-const AppreciationTabs: any = withRouter(BaseAppreciationTabs)
 
 AppreciationTabs.fragments = fragments
 

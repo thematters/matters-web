@@ -11,7 +11,7 @@ import ICON_LIKE_INACTIVE from '~/static/icons/like-inactive.svg?sprite'
 import { UpvoteComment } from './__generated__/UpvoteComment'
 
 const UPVOTE_COMMENT = gql`
-  mutation VoteComment($id: ID!) {
+  mutation UpvoteComment($id: ID!) {
     voteComment(input: { vote: up, id: $id }) {
       id
       upvotes

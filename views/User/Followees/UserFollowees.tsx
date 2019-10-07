@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { withRouter, WithRouterProps } from 'next/router'
+import { useRouter } from 'next/router'
 import { QueryResult } from 'react-apollo'
 
 import { Head, InfiniteScroll, Placeholder } from '~/components'
@@ -36,7 +36,8 @@ const USER_FOLLOWEES_FEED = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
+const UserFollowees = () => {
+  const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
   return (
@@ -114,4 +115,4 @@ const UserFollowees: React.FC<WithRouterProps> = ({ router }) => {
   )
 }
 
-export default withRouter(UserFollowees)
+export default UserFollowees

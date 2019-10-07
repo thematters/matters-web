@@ -38,6 +38,7 @@
 .reply-to {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight) var(--spacing-loose);
 
   color: var(--color-grey-dark);

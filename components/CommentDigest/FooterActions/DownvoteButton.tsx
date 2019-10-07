@@ -11,7 +11,7 @@ import ICON_DISLIKE_INACTIVE from '~/static/icons/dislike-inactive.svg?sprite'
 import { DownvoteComment } from './__generated__/DownvoteComment'
 
 const DOWNVOTE_COMMENT = gql`
-  mutation VoteComment($id: ID!) {
+  mutation DownvoteComment($id: ID!) {
     voteComment(input: { vote: down, id: $id }) {
       id
       upvotes
