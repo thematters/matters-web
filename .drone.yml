@@ -28,6 +28,7 @@ steps:
   - name: build
     image: node:11.14.0
     commands:
+      - cp .env.example .env
       - npm run build
 
   # === CI tasks for `develop` branch ===
