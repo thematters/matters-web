@@ -4,6 +4,7 @@ import Router from 'next/router'
 import { FC, useContext } from 'react'
 
 import { Mutation } from '~/components/GQL'
+import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
 import { Term } from '~/components/Term'
@@ -25,19 +26,13 @@ import styles from './styles.css'
  */
 
 const UPDATE_AGREE_ON = gql`
-  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+  mutation UpdateUserInfoAgreeOn($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
       info {
         agreeOn
       }
     }
-  }
-`
-
-const USER_LOGOUT = gql`
-  mutation UserLogout {
-    userLogout
   }
 `
 

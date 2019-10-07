@@ -7,6 +7,7 @@ import { FC, useContext } from 'react'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
@@ -20,12 +21,6 @@ interface Props {
   extraClass?: string[]
   submitCallback: () => void
 }
-
-const CONFIRM_CODE = gql`
-  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
-    confirmVerificationCode(input: $input)
-  }
-`
 
 const CHANGE_EMAIL = gql`
   mutation ChangeEmail($input: ChangeEmailInput!) {

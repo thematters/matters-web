@@ -8,6 +8,7 @@ import { FC, useContext } from 'react'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -46,12 +47,6 @@ interface Props {
   submitCallback?: (params: any) => void
   scrollLock?: boolean
 }
-
-const CONFIRM_CODE = gql`
-  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
-    confirmVerificationCode(input: $input)
-  }
-`
 
 const USER_REGISTER = gql`
   mutation UserRegister($input: UserRegisterInput!) {

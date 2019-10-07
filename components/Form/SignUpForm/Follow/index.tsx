@@ -30,7 +30,7 @@ import styles from './styles.css'
  */
 
 const ME_FOLLOW = gql`
-  query MeFollow {
+  query SignUpMeFollow {
     viewer {
       id
       ...FolloweeCountUser

@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 import { withFormik } from 'formik'
-import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { FC, useContext } from 'react'
 
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, Mutation } from '~/components/GQL'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
@@ -23,12 +23,6 @@ interface Props {
   submitCallback?: (params: any) => void
   scrollLock?: boolean
 }
-
-export const CONFIRM_CODE = gql`
-  mutation ConfirmVerificationCode($input: ConfirmVerificationCodeInput!) {
-    confirmVerificationCode(input: $input)
-  }
-`
 
 export const PasswordChangeRequestForm: FC<Props> = ({
   defaultEmail = '',

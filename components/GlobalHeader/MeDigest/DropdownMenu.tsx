@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
 import { useContext } from 'react'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
 import { Mutation } from '~/components/GQL'
+import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -121,13 +121,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Mutation
-          mutation={gql`
-            mutation UserLogout {
-              userLogout
-            }
-          `}
-        >
+        <Mutation mutation={USER_LOGOUT}>
           {logout => (
             <button
               type="button"

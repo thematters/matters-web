@@ -30,7 +30,7 @@ interface Props {
 }
 
 const UPDATE_USER_INFO = gql`
-  mutation UpdateUserInfo($input: UpdateUserInfoInput!) {
+  mutation UpdateUserInfoCover($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
       info {

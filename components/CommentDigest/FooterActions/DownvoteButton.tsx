@@ -3,34 +3,16 @@ import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
 import { Mutation } from '~/components/GQL'
+import {
+  UNVOTE_COMMENT,
+  VOTE_COMMENT
+} from '~/components/GQL/mutations/voteComment'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
 import ICON_DISLIKE_INACTIVE from '~/static/icons/dislike-inactive.svg?sprite'
 
 import { DownvoteComment } from './__generated__/DownvoteComment'
-
-const DOWNVOTE_COMMENT = gql`
-  mutation DownvoteComment($id: ID!) {
-    voteComment(input: { vote: down, id: $id }) {
-      id
-      upvotes
-      downvotes
-      myVote
-    }
-  }
-`
-
-const UNVOTE_COMMENT = gql`
-  mutation UnvoteComment($id: ID!) {
-    unvoteComment(input: { id: $id }) {
-      id
-      upvotes
-      downvotes
-      myVote
-    }
-  }
-`
 
 const fragments = {
   comment: gql`
@@ -96,7 +78,7 @@ const DownvoteButton = ({
 
   return (
     <Mutation
-      mutation={DOWNVOTE_COMMENT}
+      mutation={VOTE_COMMENT}
       variables={{ id: comment.id }}
       optimisticResponse={{
         voteComment: {
