@@ -1,5 +1,5 @@
 export default {
-  zh_hant: `
+  zh_hant: /* html */ `
 <h3>公司理念</h3>
 <p>Matters 是一個以分佈式網絡為基礎、加密貨幣驅動的公共討論平台。</p>
 <p>所有在 Matters 上發佈的作品（不含評論），皆會上載到星際文件系統（InterPlanetary File System，IPFS）的節點上，實現作品內容的分佈式存儲，完成將數據回歸創作者的第一步。</p>
@@ -34,7 +34,7 @@ export default {
   <li>微博: MattersLab</li>
 </ul>
   `,
-  zh_hans: `
+  zh_hans: /* html */ `
 <h3>公司理念</h3>
 <p>Matters 是一个以分布式网络为基础、加密货币驱动的公共讨论平台。</p>
 <p>所有在 Matters 上发布的作品（不含评论），皆会上载到星际文件系统（InterPlanetary File System，IPFS）的节点上，实现作品内容的分布式存储，完成将数据回归创作者的第一步。</p>

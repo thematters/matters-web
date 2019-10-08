@@ -3,11 +3,12 @@ import { useContext } from 'react'
 import { Head, LanguageContext, PageHeader, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import styles from '~/common/styles/utils/content.article.css'
+import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
 import content from './content'
+import styles from './styles.css'
 
 export default () => {
   const { lang } = useContext(LanguageContext)
@@ -36,10 +37,14 @@ export default () => {
                 lang
               })
             }}
-            className="u-content"
           />
         </div>
-        <style jsx>{styles}</style>
+        <style jsx global>
+          {styles}
+        </style>
+        <style jsx global>
+          {contentStyles}
+        </style>
       </section>
     </main>
   )
