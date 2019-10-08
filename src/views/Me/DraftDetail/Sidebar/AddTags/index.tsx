@@ -59,7 +59,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
       </p>
 
       <Mutation mutation={UPDATE_TAGS}>
-        {updateTags => {
+        {(updateTags: any) => {
           const addTag = async (tag: string) => {
             updateHeaderState({ type: 'draft', state: 'saving', draftId })
             try {

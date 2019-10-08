@@ -40,13 +40,13 @@ const Follow = ({
         __typename: 'User'
       }
     }}
-    update={cache => {
+    update={(cache: any) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'increment', userName })
       updateViewerFolloweeCount({ cache, type: 'increment' })
     }}
   >
-    {(follow, { data }) => (
+    {(follow: any, { data }: any) => (
       <Button
         size={size}
         icon={

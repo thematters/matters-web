@@ -72,7 +72,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
         </div>
         <div className="buttons">
           <Mutation mutation={USER_LOGOUT}>
-            {logout => (
+            {(logout: any) => (
               <Modal.FooterButton
                 onClick={() => disagree(logout)}
                 bgColor="white"
@@ -125,7 +125,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <Mutation mutation={UPDATE_AGREE_ON}>
-      {update => <TermForm submitAction={update} />}
+      {(update: any) => <TermForm submitAction={update} />}
     </Mutation>
   )
 }

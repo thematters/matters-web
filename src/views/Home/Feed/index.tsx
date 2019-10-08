@@ -189,7 +189,7 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
 
 export default () => (
   <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
-    {({ data, client }) => {
+    {({ data, client }: any) => {
       const { feedSortType } = _get(data, 'clientPreference', {
         feedSortType: 'hottest'
       })

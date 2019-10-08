@@ -61,7 +61,7 @@
     "nprogress": "^0.2.0",
     "query-string": "^6.8.3",
     "react": "^16.10.2",
-    "react-apollo": "^2.5.8",
+    "react-apollo": "^3.1.2",
     "react-beautiful-dnd": "^11.0.5",
     "react-content-loader": "^4.3.0",
     "react-dom": "^16.10.2",
@@ -72,6 +72,7 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
+    "@apollo/react-testing": "^3.1.2",
     "@testing-library/react": "^8.0.9",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/classnames": "^2.2.9",

@@ -130,7 +130,7 @@ export const SignUpAvatarUploader: FC<Props> = ({
 
   return (
     <Mutation mutation={UPLOAD_FILE}>
-      {upload => <Uploader upload={upload} />}
+      {(upload: any) => <Uploader upload={upload} />}
     </Mutation>
   )
 }

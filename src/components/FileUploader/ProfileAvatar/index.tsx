@@ -121,9 +121,9 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
 
   return (
     <Mutation mutation={UPDATE_USER_INFO}>
-      {update => (
+      {(update: any) => (
         <Mutation mutation={UPLOAD_FILE}>
-          {upload => <Uploader upload={upload} update={update} />}
+          {(upload: any) => <Uploader upload={upload} update={update} />}
         </Mutation>
       )}
     </Mutation>

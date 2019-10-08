@@ -216,7 +216,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={RESET_PASSWORD}>
-        {reset => <MainForm submitAction={reset} />}
+        {(reset: any) => <MainForm submitAction={reset} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>

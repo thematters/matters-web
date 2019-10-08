@@ -180,7 +180,7 @@ const AppreciationButtonContainer = ({
         }
       }}
     >
-      {(sendAppreciation, { data }) => {
+      {(sendAppreciation: any, { data }: any) => {
         // bundle appreciations
         const appreciate = () => {
           const debounce = 1000

@@ -82,7 +82,7 @@ const EditButton = ({
 
   return (
     <Mutation mutation={EDITOR_SET_COLLECTION} variables={{ first: null }}>
-      {(setCollection, { loading }) => (
+      {(setCollection: any, { loading }: any) => (
         <span className={editButtonClass}>
           <Button
             type="button"

@@ -331,7 +331,7 @@ const LoginForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={USER_LOGIN}>
-        {login => <MainForm submitAction={login} />}
+        {(login: any) => <MainForm submitAction={login} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>

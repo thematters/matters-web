@@ -1,9 +1,9 @@
 import React from 'react'
-import { Mutation as ApolloMutation, MutationProps } from 'react-apollo'
+import { Mutation as ApolloMutation } from 'react-apollo'
 
 import { MutationErrorHandler } from './GraphqlErrorHandler'
 
-export const Mutation = ({ children, ...rest }: MutationProps) => (
+export const Mutation = ({ children, ...rest }: any) => (
   <ApolloMutation {...rest}>
     {(mutateFn: any, result: any) => (
       <MutationErrorHandler result={result} mutateFn={mutateFn}>

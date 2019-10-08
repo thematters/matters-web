@@ -43,13 +43,13 @@ const Unfollow = ({
           __typename: 'User'
         }
       }}
-      update={cache => {
+      update={(cache: any) => {
         const userName = _get(user, 'userName', null)
         updateUserFollowerCount({ cache, type: 'decrement', userName })
         updateViewerFolloweeCount({ cache, type: 'decrement' })
       }}
     >
-      {(unfollow, { data }) => (
+      {(unfollow: any, { data }: any) => (
         <Button
           size={size}
           style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}

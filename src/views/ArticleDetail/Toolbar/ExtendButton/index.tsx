@@ -51,7 +51,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
       mutation={EXTEND_ARTICLE}
       variables={{ title: placeholder, collection: [article.id] }}
     >
-      {extend => (
+      {(extend: any) => (
         <Tooltip
           content={<Translate zh_hant="關聯當前作品" zh_hans="关联当前作品" />}
           placement="top"

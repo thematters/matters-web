@@ -85,7 +85,7 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
   return (
     <>
       <Mutation mutation={SEND_CODE}>
-        {send => (
+        {(send: any) => (
           <Button
             is="button"
             bgColor="transparent"
