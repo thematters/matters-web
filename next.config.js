@@ -10,7 +10,6 @@ try {
 
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
 const withOffline = require('next-offline')
 
@@ -110,9 +109,6 @@ module.exports = withPlugins(
         svgSpriteLoader: {}
       }
     ],
-
-    // output build size
-    withSize,
 
     // bundle analyzer
     [
