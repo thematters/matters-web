@@ -183,7 +183,8 @@
       "^.+\\.(gif|png|jpg|ttf|eot)(\\?.+)?$": "<rootDir>/__mocks__/fileMock.js",
       "^.+\\.svg(\\?.+)?$": "<rootDir>/__mocks__/svgMock.js",
       "\\.css$": "<rootDir>/__mocks__/styleMock.js",
-      "~(.*)$": "<rootDir>$1"
+      "~/static/(.*)$": "<rootDir>/public/static/$1",
+      "~/(.*)$": "<rootDir>/src/$1"
     },
     "coverageDirectory": "<rootDir>/coverage/",
     "collectCoverage": true,
