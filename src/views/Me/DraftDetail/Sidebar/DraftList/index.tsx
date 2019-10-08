@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
-import { Query } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
@@ -30,14 +29,16 @@ const ME_DRAFTS_SIDEBAR = gql`
   ${DraftDigest.Sidebar.fragments.draft}
 `
 
-const DraftList = ({ currentId }: { currentId: string }) => (
-  <Collapsable
-    title={
-      <Translate zh_hans={TEXT.zh_hant.draft} zh_hant={TEXT.zh_hans.draft} />
-    }
-  >
-    <Query query={ME_DRAFTS_SIDEBAR}>
-      {({ data, loading }: QueryResult & { data: MeDraftsSidebar }) => {
+const DraftList = ({ currentId }: { currentId: string }) => {
+  const { data, loading } = useQuery<MeDraftsSidebar>(ME_DRAFTS_SIDEBAR)
+
+  return (
+    <Collapsable
+      title={
+        <Translate zh_hans={TEXT.zh_hant.draft} zh_hant={TEXT.zh_hans.draft} />
+      }
+    >
+      {() => {
         const edges = _get(data, 'viewer.drafts.edges')
 
         if (loading || !edges) {
@@ -53,8 +54,8 @@ const DraftList = ({ currentId }: { currentId: string }) => (
             <DraftDigest.Sidebar key={i} draft={node} />
           ))
       }}
-    </Query>
-  </Collapsable>
-)
+    </Collapsable>
+  )
+}
 
 export default DraftList

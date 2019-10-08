@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
@@ -14,42 +15,38 @@ import {
   ViewerUserFragment
 } from '~/components/Viewer'
 
-import { LayoutUser } from './__generated__/LayoutUser'
+import { RootQuery } from './__generated__/RootQuery'
 
-interface LayoutProps {
-  loading: boolean
-  user: LayoutUser
-  error?: Error
-}
-
-const fragments = {
-  user: gql`
-    fragment LayoutUser on User {
+const ROOT_QUERY = gql`
+  query RootQuery {
+    viewer {
+      id
       ...ViewerUser
       ...GlobalHeaderUser
       ...AnalyticsUser
     }
-    ${ViewerUserFragment.user}
-    ${GlobalHeader.fragments.user}
-    ${AnalyticsListener.fragments.user}
-  `
-}
+  }
+  ${ViewerUserFragment.user}
+  ${GlobalHeader.fragments.user}
+  ${AnalyticsListener.fragments.user}
+`
 
-export const Layout: React.FC<LayoutProps> & {
-  fragments: typeof fragments
-} = ({ children, loading, user, error }) => {
-  if (loading) {
+export const Layout: React.FC = ({ children }) => {
+  const { loading, data } = useQuery<RootQuery>(ROOT_QUERY)
+  const viewer = data && data.viewer
+
+  if (loading || !viewer) {
     return null
   }
 
   return (
-    <ViewerContext.Provider value={processViewer({ ...(user || {}) })}>
+    <ViewerContext.Provider value={processViewer(viewer)}>
       <LanguageProvider>
         <HeaderContextProvider>
-          <AnalyticsListener user={user || {}} />
+          <AnalyticsListener user={viewer || {}} />
           <Head />
 
-          <GlobalHeader user={user} />
+          <GlobalHeader user={viewer} />
 
           {children}
 
@@ -61,5 +58,3 @@ export const Layout: React.FC<LayoutProps> & {
     </ViewerContext.Provider>
   )
 }
-
-Layout.fragments = fragments

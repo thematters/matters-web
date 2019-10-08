@@ -1,6 +1,6 @@
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -10,7 +10,6 @@ import {
   Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
-import { Query } from '~/components/GQL'
 import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
@@ -60,97 +59,92 @@ const UserArticles = () => {
     return <Throw404 />
   }
 
-  return (
-    <Query query={USER_ARTICLES} variables={{ userName }}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: UserArticlesTypes }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+  const { data, loading, fetchMore } = useQuery<UserArticlesTypes>(
+    USER_ARTICLES
+  )
 
-        const connectionPath = 'user.articles'
-        const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () => {
-          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-            type: FEED_TYPE.USER_ARTICLE,
-            location: edges.length
-          })
-          return fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
-        }
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
 
-        const CustomHead = () => (
-          <Head
-            title={{
-              zh_hant: `${data.user.displayName}的創作空間站`,
-              zh_hans: `${data.user.displayName}的创作空间站`
-            }}
-            description={data.user.info.description}
-            image={data.user.info.profileCover || IMAGE_LOGO_192}
-          />
-        )
+  if (!data || !data.user) {
+    return <Throw404 />
+  }
 
-        if (!edges || edges.length <= 0) {
-          return (
-            <>
-              <CustomHead />
-              <ArticleSummaryInfo data={data} />
-              <EmptyArticle />
-            </>
-          )
-        }
+  const user = data.user
+  const connectionPath = 'user.articles'
+  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.USER_ARTICLE,
+      location: edges.length
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
 
-        return (
-          <>
-            <CustomHead />
-            <ArticleSummaryInfo data={data} />
-            <InfiniteScroll
-              hasNextPage={pageInfo.hasNextPage}
-              loadMore={loadMore}
-            >
-              <ul>
-                {edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                    <li
-                      key={cursor}
-                      onClick={() =>
-                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                          type: FEED_TYPE.USER_ARTICLE,
-                          location: i
-                        })
-                      }
-                    >
-                      <ArticleDigest.Feed
-                        article={node}
-                        hasBookmark
-                        hasDateTime
-                        hasFingerprint
-                        hasMoreButton
-                        hasState
-                        hasSticky
-                      />
-                    </li>
-                  )
-                )}
-              </ul>
-            </InfiniteScroll>
-          </>
-        )
+  const CustomHead = () => (
+    <Head
+      title={{
+        zh_hant: `${user.displayName}的創作空間站`,
+        zh_hans: `${user.displayName}的创作空间站`
       }}
-    </Query>
+      description={user.info.description || ''}
+      image={user.info.profileCover || IMAGE_LOGO_192}
+    />
+  )
+
+  if (!edges || edges.length <= 0) {
+    return (
+      <>
+        <CustomHead />
+        <ArticleSummaryInfo data={data} />
+        <EmptyArticle />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <CustomHead />
+      <ArticleSummaryInfo data={data} />
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <ul>
+          {edges.map(
+            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.USER_ARTICLE,
+                    location: i
+                  })
+                }
+              >
+                <ArticleDigest.Feed
+                  article={node}
+                  hasBookmark
+                  hasDateTime
+                  hasFingerprint
+                  hasMoreButton
+                  hasState
+                  hasSticky
+                />
+              </li>
+            )
+          )}
+        </ul>
+      </InfiniteScroll>
+    </>
   )
 }
 

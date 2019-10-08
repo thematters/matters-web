@@ -1,10 +1,9 @@
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import { FC, useContext, useRef, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
-import { Query } from '~/components/GQL'
 import {
   SearchArticles,
   SearchArticles_search_edges_node_Article
@@ -44,68 +43,64 @@ const CollectForm: FC<Props> = ({ onAdd }) => {
     }
   }
 
+  const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
+    variables: { search },
+    skip: !search
+  })
+  const articles = _get(data, 'search.edges', []).map(
+    ({ node }: { node: SearchArticles_search_edges_node_Article }) => node
+  )
+  const isShowDropdown = (articles && articles.length) || loading
+
+  if (isShowDropdown) {
+    showDropdown()
+  } else {
+    hideDropdown()
+  }
+
   return (
-    <Query query={SEARCH_ARTICLES} variables={{ search }} skip={!search}>
-      {({ data, loading }: QueryResult & { data: SearchArticles }) => {
-        const articles = _get(data, 'search.edges', []).map(
-          ({ node }: { node: SearchArticles_search_edges_node_Article }) => node
-        )
-        const isShowDropdown = (articles && articles.length) || loading
-
-        if (isShowDropdown) {
-          showDropdown()
-        } else {
-          hideDropdown()
-        }
-
-        return (
-          <>
-            <Dropdown
-              trigger="manual"
-              placement="bottom-start"
-              onCreate={setInstance}
-              content={
-                <ArticleList
-                  articles={articles}
-                  loading={loading}
-                  onClick={(
-                    article: SearchArticles_search_edges_node_Article
-                  ) => {
-                    onAdd(article)
-                    setSearch('')
-                    hideDropdown()
-                    if (inputNode && inputNode.current) {
-                      inputNode.current.value = ''
-                    }
-                  }}
-                />
+    <>
+      <Dropdown
+        trigger="manual"
+        placement="bottom-start"
+        onCreate={setInstance}
+        content={
+          <ArticleList
+            articles={articles}
+            loading={loading}
+            onClick={(article: SearchArticles_search_edges_node_Article) => {
+              onAdd(article)
+              setSearch('')
+              hideDropdown()
+              if (inputNode && inputNode.current) {
+                inputNode.current.value = ''
               }
-            >
-              <input
-                ref={inputNode}
-                type="search"
-                placeholder={translate({
-                  zh_hant: '搜尋作品標題…',
-                  zh_hans: '搜索作品标题…',
-                  lang
-                })}
-                onChange={event => {
-                  const value = event.target.value
-                  debouncedSetSearch(value, setSearch)
-                }}
-                onFocus={() => {
-                  if (isShowDropdown) {
-                    showDropdown()
-                  }
-                }}
-              />
-            </Dropdown>
+            }}
+          />
+        }
+      >
+        <input
+          ref={inputNode}
+          type="search"
+          placeholder={translate({
+            zh_hant: '搜尋作品標題…',
+            zh_hans: '搜索作品标题…',
+            lang
+          })}
+          onChange={event => {
+            const value = event.target.value
+            debouncedSetSearch(value, setSearch)
+          }}
+          onFocus={() => {
+            if (isShowDropdown) {
+              showDropdown()
+            }
+          }}
+        />
+      </Dropdown>
 
-            <style jsx>{styles}</style>
-          </>
-        )
-      }}
-    </Query>
+      <style jsx>{styles}</style>
+    </>
   )
 }
 

@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
-import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
@@ -20,6 +19,7 @@ import ICON_HELP from '~/static/icons/help.svg?sprite'
 import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
+import { Gateways } from './__generated__/Gateways'
 import styles from './styles.css'
 
 const GATEWAYS = gql`
@@ -39,6 +39,9 @@ const FingerprintContent = ({
 }) => {
   const [gatewaysExpand, setGatewaysExpand] = useState(false)
   const [helpExpand, setHelpExpand] = useState(false)
+
+  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const gateways = (data && data.official.gatewayUrls) || []
 
   return (
     <div className="dropdown-container">
@@ -129,44 +132,32 @@ const FingerprintContent = ({
           </button>
         </section>
 
-        <Query query={GATEWAYS} skip={!shown}>
-          {({ data, loading, error }: QueryResult & { data: any }) => {
-            if (loading) {
-              return <Spinner />
-            }
+        {loading && <Spinner />}
 
-            const gateways: string[] = _get(data, 'official.gatewayUrls', [])
-
+        <ul className="gateway-container">
+          {gateways.slice(0, gatewaysExpand ? undefined : 2).map((url, i) => {
+            const gatewayUrl = `${url}${dataHash}`
             return (
-              <ul className="gateway-container">
-                {gateways
-                  .slice(0, gatewaysExpand ? undefined : 2)
-                  .map((url, i) => {
-                    const gatewayUrl = `${url}${dataHash}`
-                    return (
-                      <li key={i}>
-                        <Icon
-                          id={ICON_SHARE_LINK.id}
-                          viewBox={ICON_SHARE_LINK.viewBox}
-                          size="small"
-                        />
+              <li key={i}>
+                <Icon
+                  id={ICON_SHARE_LINK.id}
+                  viewBox={ICON_SHARE_LINK.viewBox}
+                  size="small"
+                />
 
-                        <span className="gateway-url">{gatewayUrl}</span>
+                <span className="gateway-url">{gatewayUrl}</span>
 
-                        <a href={gatewayUrl} target="_blank">
-                          <Icon
-                            id={ICON_ARROW_CIRCLE.id}
-                            viewBox={ICON_ARROW_CIRCLE.viewBox}
-                            size="small"
-                          />
-                        </a>
-                      </li>
-                    )
-                  })}
-              </ul>
+                <a href={gatewayUrl} target="_blank">
+                  <Icon
+                    id={ICON_ARROW_CIRCLE.id}
+                    viewBox={ICON_ARROW_CIRCLE.viewBox}
+                    size="small"
+                  />
+                </a>
+              </li>
             )
-          }}
-        </Query>
+          })}
+        </ul>
       </div>
 
       {/* help */}

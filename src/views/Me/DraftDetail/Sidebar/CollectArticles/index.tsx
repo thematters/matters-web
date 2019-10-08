@@ -4,11 +4,10 @@ import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useMutation, useQuery } from 'react-apollo'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation, Query } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
@@ -79,9 +78,12 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     'u-area-disable': isPending || isPublished
   })
 
-  const handleCollectionChange = (setCollection: any) => async (
-    articles: any[]
-  ) => {
+  const [setCollection] = useMutation(SET_DRAFT_COLLECTION)
+  const { data, loading } = useQuery<DraftCollectionQuery>(DRAFT_COLLECTION, {
+    variables: { id: draftId }
+  })
+
+  const handleCollectionChange = () => async (articles: any[]) => {
     updateHeaderState({
       type: 'draft',
       state: 'saving',
@@ -121,29 +123,20 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
       </p>
 
       <section className={containerClasses}>
-        <Query query={DRAFT_COLLECTION} variables={{ id: draftId }}>
-          {({
-            data,
-            loading
-          }: QueryResult & { data: DraftCollectionQuery }) => {
-            const edges = _get(data, 'node.collection.edges')
+        {() => {
+          const edges = _get(data, 'node.collection.edges')
 
-            if (loading || !edges) {
-              return <Spinner />
-            }
+          if (loading || !edges) {
+            return <Spinner />
+          }
 
-            return (
-              <Mutation mutation={SET_DRAFT_COLLECTION}>
-                {(setCollection: any) => (
-                  <CollectionEditor
-                    articles={edges.map(({ node }: { node: any }) => node)}
-                    onEdit={handleCollectionChange(setCollection)}
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+          return (
+            <CollectionEditor
+              articles={edges.map(({ node }: { node: any }) => node)}
+              onEdit={handleCollectionChange()}
+            />
+          )
+        }}
       </section>
 
       <style jsx>{styles}</style>

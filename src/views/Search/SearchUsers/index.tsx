@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   InfiniteScroll,
@@ -9,7 +9,7 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import { Query } from '~/components/GQL'
+import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -74,82 +74,74 @@ const SearchUser = ({
   q: string
   isAggregate: boolean
 }) => {
+  const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
+    variables: { key: q, first: isAggregate ? 3 : 10 }
+  })
+
+  if (loading) {
+    return <Spinner />
+  }
+
+  const connectionPath = 'search'
+  const result = _get(data, connectionPath)
+
+  if (!result || !result.edges) {
+    return <Throw404 />
+  }
+
+  const { edges, pageInfo } = result
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.SEARCH_USER,
+      location: edges.length,
+      entrance: q
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
+  if (!edges || edges.length <= 0) {
+    return isAggregate ? null : <EmptySearchResult />
+  }
+
   return (
-    <>
-      <Query
-        query={SEARCH_USERS}
-        variables={{ key: q, first: isAggregate ? 3 : 10 }}
+    <section>
+      <InfiniteScroll
+        hasNextPage={!isAggregate && pageInfo.hasNextPage}
+        loadMore={loadMore}
       >
-        {({
-          data,
-          loading,
-          error,
-          fetchMore
-        }: QueryResult & { data: SeachUsers }) => {
-          if (loading) {
-            return <Spinner />
-          }
-
-          const connectionPath = 'search'
-          const { edges, pageInfo } = _get(data, connectionPath, {})
-          const loadMore = () => {
-            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-              type: FEED_TYPE.SEARCH_USER,
-              location: edges.length,
-              entrance: q
-            })
-            return fetchMore({
-              variables: {
-                after: pageInfo.endCursor
-              },
-              updateQuery: (previousResult, { fetchMoreResult }) =>
-                mergeConnections({
-                  oldData: previousResult,
-                  newData: fetchMoreResult,
-                  path: connectionPath
-                })
-            })
-          }
-
-          if (!edges || edges.length <= 0) {
-            return isAggregate ? null : <EmptySearchResult />
-          }
-
-          return (
-            <section>
-              <InfiniteScroll
-                hasNextPage={!isAggregate && pageInfo.hasNextPage}
-                loadMore={loadMore}
+        <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
+        <ul>
+          {edges.map(
+            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.SEARCH_USER,
+                    location: i,
+                    entrance: q
+                  })
+                }
               >
-                <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
-                <ul>
-                  {edges.map(
-                    (
-                      { node, cursor }: { node: any; cursor: any },
-                      i: number
-                    ) => (
-                      <li
-                        key={cursor}
-                        onClick={() =>
-                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                            type: FEED_TYPE.SEARCH_USER,
-                            location: i,
-                            entrance: q
-                          })
-                        }
-                      >
-                        <UserDigest.FullDesc user={node} />
-                      </li>
-                    )
-                  )}
-                </ul>
-              </InfiniteScroll>
-            </section>
-          )
-        }}
-      </Query>
+                <UserDigest.FullDesc user={node} />
+              </li>
+            )
+          )}
+        </ul>
+      </InfiniteScroll>
+
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

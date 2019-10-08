@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   InfiniteScroll,
@@ -11,13 +11,11 @@ import {
   Translate
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
-import { Query } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { FeedArticleConnection } from './__generated__/FeedArticleConnection'
 import SortBy from './SortBy'
 
 const feedFragment = gql`
@@ -88,112 +86,98 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
     }
   }
 
+  const { data, loading, fetchMore } = useQuery(queries[sortBy], {
+    notifyOnNetworkStatusChange: true
+  })
+
+  if (loading && !_get(data, 'viewer.recommendation.feed')) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  const connectionPath = 'viewer.recommendation.feed'
+  const { edges, pageInfo } = _get(data, connectionPath, {
+    edges: [],
+    pageInfo: {}
+  })
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: sortBy,
+      location: edges.length
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
   return (
     <>
-      <Query query={queries[sortBy]} notifyOnNetworkStatusChange>
-        {({
-          data,
-          loading,
-          fetchMore
-        }: QueryResult & { data: FeedArticleConnection }) => {
-          if (loading && !_get(data, 'viewer.recommendation.feed')) {
-            return <Placeholder.ArticleDigestList />
-          }
-
-          const connectionPath = 'viewer.recommendation.feed'
-          const { edges, pageInfo } = _get(data, connectionPath, {
-            edges: [],
-            pageInfo: {}
-          })
-          const loadMore = () => {
-            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-              type: sortBy,
-              location: edges.length
-            })
-            return fetchMore({
-              variables: {
-                after: pageInfo.endCursor
-              },
-              updateQuery: (previousResult, { fetchMoreResult }) =>
-                mergeConnections({
-                  oldData: previousResult,
-                  newData: fetchMoreResult,
-                  path: connectionPath
-                })
-            })
-          }
-
-          return (
-            <>
-              <PageHeader
-                pageTitle={
-                  sortBy === 'hottest' ? (
-                    <Translate zh_hant="熱門作品" zh_hans="热门作品" />
-                  ) : (
-                    <Translate zh_hant="最新作品" zh_hans="最新作品" />
-                  )
-                }
-              >
-                <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-              </PageHeader>
-
-              <Responsive.MediumUp>
-                {(match: boolean) => (
-                  <>
-                    <InfiniteScroll
-                      hasNextPage={match && pageInfo.hasNextPage}
-                      loadMore={loadMore}
-                    >
-                      <ul>
-                        {edges.map(
-                          (
-                            { node, cursor }: { node: any; cursor: any },
-                            i: number
-                          ) => (
-                            <li
-                              key={cursor}
-                              onClick={() =>
-                                analytics.trackEvent(
-                                  ANALYTICS_EVENTS.CLICK_FEED,
-                                  {
-                                    type: sortBy,
-                                    location: i
-                                  }
-                                )
-                              }
-                            >
-                              <ArticleDigest.Feed
-                                article={node}
-                                hasDateTime
-                                hasBookmark
-                              />
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </InfiniteScroll>
-
-                    {!match && pageInfo.hasNextPage && (
-                      <LoadMore onClick={loadMore} loading={loading} />
-                    )}
-                  </>
-                )}
-              </Responsive.MediumUp>
-            </>
+      <PageHeader
+        pageTitle={
+          sortBy === 'hottest' ? (
+            <Translate zh_hant="熱門作品" zh_hans="热门作品" />
+          ) : (
+            <Translate zh_hant="最新作品" zh_hans="最新作品" />
           )
-        }}
-      </Query>
+        }
+      >
+        <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+      </PageHeader>
+
+      <Responsive.MediumUp>
+        {(match: boolean) => (
+          <>
+            <InfiniteScroll
+              hasNextPage={match && pageInfo.hasNextPage}
+              loadMore={loadMore}
+            >
+              <ul>
+                {edges.map(
+                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+                    <li
+                      key={cursor}
+                      onClick={() =>
+                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                          type: sortBy,
+                          location: i
+                        })
+                      }
+                    >
+                      <ArticleDigest.Feed
+                        article={node}
+                        hasDateTime
+                        hasBookmark
+                      />
+                    </li>
+                  )
+                )}
+              </ul>
+            </InfiniteScroll>
+
+            {!match && pageInfo.hasNextPage && (
+              <LoadMore onClick={loadMore} loading={loading} />
+            )}
+          </>
+        )}
+      </Responsive.MediumUp>
     </>
   )
 }
 
-export default () => (
-  <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
-    {({ data, client }: any) => {
-      const { feedSortType } = _get(data, 'clientPreference', {
-        feedSortType: 'hottest'
-      })
-      return <Feed feedSortType={feedSortType} client={client} />
-    }}
-  </Query>
-)
+export default () => {
+  const { data, client } = useQuery(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const { feedSortType } = _get(data, 'clientPreference', {
+    feedSortType: 'hottest'
+  })
+
+  return <Feed feedSortType={feedSortType} client={client} />
+}

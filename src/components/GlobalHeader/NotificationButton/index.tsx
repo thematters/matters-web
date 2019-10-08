@@ -1,11 +1,10 @@
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { useMutation, useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import {
   ME_NOTIFICATIONS,
@@ -79,42 +78,35 @@ const NoticeButton = ({
   )
 }
 
-export default () => (
-  <Query
-    query={UNREAD_NOTICE_COUNT}
-    pollInterval={POLL_INTERVAL}
-    errorPolicy="none"
-    fetchPolicy="network-only"
-    skip={!process.browser}
-  >
-    {({ data: unreadCountData }: QueryResult) => (
-      <Query
-        query={ME_NOTIFICATIONS}
-        variables={{ first: 5 }}
-        errorPolicy="none"
-        notifyOnNetworkStatusChange
-      >
-        {({ data, loading, error, refetch }: QueryResult) => (
-          <Mutation
-            mutation={MARK_ALL_NOTICES_AS_READ}
-            update={updateViewerUnreadNoticeCount}
-          >
-            {(markAllNoticesAsRead: any) => (
-              <NoticeButton
-                data={data}
-                loading={loading}
-                error={error}
-                refetch={refetch}
-                hasUnreadNotices={
-                  _get(unreadCountData, 'viewer.status.unreadNoticeCount', 0) >=
-                  1
-                }
-                markAllNoticesAsRead={markAllNoticesAsRead}
-              />
-            )}
-          </Mutation>
-        )}
-      </Query>
-    )}
-  </Query>
-)
+export default () => {
+  const { data } = useQuery(UNREAD_NOTICE_COUNT, {
+    pollInterval: POLL_INTERVAL,
+    errorPolicy: 'none',
+    fetchPolicy: 'network-only',
+    skip: !process.browser
+  })
+  const { data: unreadCountData, loading, error, refetch } = useQuery(
+    ME_NOTIFICATIONS,
+    {
+      variables: { first: 5 },
+      errorPolicy: 'none',
+      notifyOnNetworkStatusChange: true
+    }
+  )
+  const [markAllNoticesAsRead] = useMutation(MARK_ALL_NOTICES_AS_READ, {
+    update: updateViewerUnreadNoticeCount
+  })
+
+  return (
+    <NoticeButton
+      data={data}
+      loading={loading}
+      error={error}
+      refetch={refetch}
+      hasUnreadNotices={
+        _get(unreadCountData, 'viewer.status.unreadNoticeCount', 0) >= 1
+      }
+      markAllNoticesAsRead={markAllNoticesAsRead}
+    />
+  )
+}

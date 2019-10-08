@@ -1,9 +1,8 @@
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
-import { Query } from '~/components/GQL'
 import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
 import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
 
@@ -13,19 +12,19 @@ import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import styles from './styles.css'
 
-const ResponseCount = ({ mediaHash }: { mediaHash: string }) => (
-  <Query query={ARTICLE_RESPONSE_COUNT} variables={{ mediaHash }}>
-    {({ data }: QueryResult & { data: ArticleResponseCount }) => {
-      const count = _get(data, 'article.responseCount', 0)
-      return (
-        <>
-          <span className="count">{count}</span>
-          <style jsx>{styles}</style>
-        </>
-      )
-    }}
-  </Query>
-)
+const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
+  const { data } = useQuery<ArticleResponseCount>(ARTICLE_RESPONSE_COUNT, {
+    variables: { mediaHash }
+  })
+  const count = (data && data.article && data.article.responseCount) || 0
+
+  return (
+    <>
+      <span className="count">{count}</span>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 const Responses = ({
   articleId,

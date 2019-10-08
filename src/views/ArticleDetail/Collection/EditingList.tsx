@@ -3,10 +3,9 @@ import _get from 'lodash/get'
 import _uniqBy from 'lodash/uniqBy'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Spinner } from '~/components'
-import { Query } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
@@ -38,39 +37,31 @@ const EditingList = ({
   article: ArticleDetail_article
   editingArticles: any[]
   setEditingArticles: (articles: any[]) => void
-}) => (
-  <Query
-    query={EDITOR_COLLECTION}
-    variables={{ mediaHash: article.mediaHash, first: null }}
-  >
-    {({
-      data,
-      loading,
-      error,
-      fetchMore
-    }: QueryResult & { data: EditorCollection }) => {
-      if (loading) {
-        return <Spinner />
-      }
+}) => {
+  const { data, loading } = useQuery<EditorCollection>(EDITOR_COLLECTION, {
+    variables: { mediaHash: article.mediaHash, first: null }
+  })
 
-      const { edges } = _get(data, 'article.collection', {})
+  if (loading) {
+    return <Spinner />
+  }
 
-      useEffect(() => {
-        setEditingArticles(edges.map(({ node }: { node: any }) => node))
-      }, [])
+  const { edges } = _get(data, 'article.collection', {})
 
-      return (
-        <section className="editing-list">
-          <CollectionEditor
-            articles={editingArticles}
-            onEdit={articles => setEditingArticles(_uniqBy(articles, 'id'))}
-          />
+  useEffect(() => {
+    setEditingArticles(edges.map(({ node }: { node: any }) => node))
+  }, [])
 
-          <style jsx>{styles}</style>
-        </section>
-      )
-    }}
-  </Query>
-)
+  return (
+    <section className="editing-list">
+      <CollectionEditor
+        articles={editingArticles}
+        onEdit={articles => setEditingArticles(_uniqBy(articles, 'id'))}
+      />
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
 
 export default EditingList

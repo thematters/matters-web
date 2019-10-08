@@ -1,16 +1,17 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Footer, Head, InfiniteScroll, Spinner } from '~/components'
 import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'
-import { Query } from '~/components/GQL'
+import Throw404 from '~/components/Throw404'
 import { Transaction } from '~/components/TransactionDigest'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
+import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
 import styles from './styles.css'
 
 const ME_APPRECIATIONS_SENT = gql`
@@ -40,6 +41,10 @@ const ME_APPRECIATIONS_SENT = gql`
 `
 
 const AppreciationsSent = () => {
+  const { data, loading, fetchMore } = useQuery<MeAppreciationsSent>(
+    ME_APPRECIATIONS_SENT
+  )
+
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
@@ -50,62 +55,62 @@ const AppreciationsSent = () => {
           }}
         />
 
-        <Query query={ME_APPRECIATIONS_SENT}>
-          {({ data, loading, error, fetchMore }: QueryResult) => {
-            if (loading) {
-              return <Spinner />
-            }
+        {() => {
+          if (loading) {
+            return <Spinner />
+          }
 
-            const connectionPath = 'viewer.activity.appreciationsSent'
-            const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () => {
-              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                type: 'appreciationsSent',
-                location: edges.length
-              })
-              return fetchMore({
-                variables: {
-                  after: pageInfo.endCursor
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) =>
-                  mergeConnections({
-                    oldData: previousResult,
-                    newData: fetchMoreResult,
-                    path: connectionPath
-                  })
-              })
-            }
+          if (!data || !data.viewer) {
+            return <Throw404 />
+          }
 
-            if (!edges || edges.length <= 0) {
-              return (
-                <>
-                  <AppreciationTabs activity={data.viewer.activity} />
-                  <EmptyAppreciation />
-                </>
-              )
-            }
+          const connectionPath = 'viewer.activity.appreciationsSent'
+          const { edges, pageInfo } = _get(data, connectionPath, {})
+          const loadMore = () => {
+            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+              type: 'appreciationsSent',
+              location: edges.length
+            })
+            return fetchMore({
+              variables: {
+                after: pageInfo.endCursor
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) =>
+                mergeConnections({
+                  oldData: previousResult,
+                  newData: fetchMoreResult,
+                  path: connectionPath
+                })
+            })
+          }
 
+          if (!edges || edges.length <= 0) {
             return (
               <>
                 <AppreciationTabs activity={data.viewer.activity} />
-                <InfiniteScroll
-                  hasNextPage={pageInfo.hasNextPage}
-                  loadMore={loadMore}
-                >
-                  <ul>
-                    {edges.map(
-                      ({ node, cursor }: { node: any; cursor: any }) => (
-                        <li key={cursor}>
-                          <Transaction.AppreciationSent tx={node} />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </InfiniteScroll>
+                <EmptyAppreciation />
               </>
             )
-          }}
-        </Query>
+          }
+
+          return (
+            <>
+              <AppreciationTabs activity={data.viewer.activity} />
+              <InfiniteScroll
+                hasNextPage={pageInfo.hasNextPage}
+                loadMore={loadMore}
+              >
+                <ul>
+                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                    <li key={cursor}>
+                      <Transaction.AppreciationSent tx={node} />
+                    </li>
+                  ))}
+                </ul>
+              </InfiniteScroll>
+            </>
+          )
+        }}
       </article>
 
       <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">

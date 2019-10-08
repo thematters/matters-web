@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useMutation, useQuery } from 'react-apollo'
 
 import { Footer, Spinner } from '~/components'
-import { Mutation, Query } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
+import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
 import { MeFollow } from './__generated__/MeFollow'
@@ -31,41 +31,37 @@ const ME_FOLLOW = gql`
 export default () => {
   const viewer = useContext(ViewerContext)
 
+  const [readFolloweeArticles] = useMutation(READ_FOLLOWEE_ARTICLES, {
+    update: viewerUnreadFolloweeArticles
+  })
+  const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
+
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Mutation
-          mutation={READ_FOLLOWEE_ARTICLES}
-          update={viewerUnreadFolloweeArticles}
-        >
-          {(readFolloweeArticles: any) => (
-            <Query query={ME_FOLLOW}>
-              {({ data, loading, error }: QueryResult & { data: MeFollow }) => {
-                if (loading) {
-                  return <Spinner />
-                }
+        {() => {
+          if (loading) {
+            return <Spinner />
+          }
 
-                useEffect(() => {
-                  if (viewer.isAuthed) {
-                    readFolloweeArticles()
-                  }
-                }, [])
+          if (!data) {
+            return <Throw404 />
+          }
 
-                const followeeCount = _get(
-                  data,
-                  'viewer.followees.totalCount',
-                  0
-                )
+          useEffect(() => {
+            if (viewer.isAuthed) {
+              readFolloweeArticles()
+            }
+          }, [])
 
-                if (followeeCount < 5) {
-                  return <PickAuthors viewer={data.viewer} />
-                } else {
-                  return <FollowFeed />
-                }
-              }}
-            </Query>
-          )}
-        </Mutation>
+          const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
+
+          if (followeeCount < 5) {
+            return <PickAuthors viewer={data.viewer} />
+          } else {
+            return <FollowFeed />
+          }
+        }}
       </article>
 
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">

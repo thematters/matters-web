@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { useMutation, useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { Mutation, Query } from '~/components/GQL'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
@@ -81,135 +81,110 @@ const CommentForm = ({
       ]
     : []
 
+  const { data, client } = useQuery(COMMENT_DRAFT, {
+    variables: {
+      id: commentDraftId
+    }
+  })
+  const [putComment] = useMutation(PUT_COMMENT, {
+    refetchQueries
+  })
+  const draftContent = _get(data, 'commentDraft.content', '')
+
+  const [isSubmitting, setSubmitting] = useState(false)
+  const [expand, setExpand] = useState(defaultExpand || false)
+  const [content, setContent] = useState(draftContent || defaultContent || '')
+  const viewer = useContext(ViewerContext)
+  const isValid = !!trimLineBreaks(content)
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const mentions = dom.getAttributes('data-id', content)
+    const input = {
+      id: commentId,
+      comment: {
+        content: trimLineBreaks(content),
+        replyTo: replyToId,
+        articleId,
+        parentId,
+        mentions
+      }
+    }
+
+    event.preventDefault()
+    setSubmitting(true)
+
+    putComment({ variables: { input } })
+      .then(() => {
+        if (submitCallback) {
+          submitCallback()
+        }
+        setContent('')
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+            }
+          })
+        )
+      })
+      .catch((result: any) => {
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'red',
+              content: (
+                <Translate zh_hant="評論送出失敗" zh_hans="评论失败送出" />
+              )
+            }
+          })
+        )
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
+  }
+
   return (
-    <Query
-      query={COMMENT_DRAFT}
-      variables={{
-        id: commentDraftId
+    <form
+      onSubmit={handleSubmit}
+      className={expand ? 'expand' : ''}
+      onFocus={() => setExpand(true)}
+      onBlur={() => {
+        client.writeData({
+          id: `CommentDraft:${commentDraftId}`,
+          data: {
+            content
+          }
+        })
       }}
     >
-      {({ data: commentDraftData, client }: any) => {
-        const draftContent = _get(commentDraftData, 'commentDraft.content', '')
+      <CommentEditor
+        content={content}
+        expand={expand}
+        handleChange={value => setContent(value)}
+      />
+      <div className="buttons">
+        {extraButton && extraButton}
+        <Button
+          type="submit"
+          bgColor="green"
+          disabled={
+            isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
+          }
+          icon={
+            isSubmitting ? (
+              <IconSpinner />
+            ) : (
+              <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
+            )
+          }
+        >
+          <Translate zh_hant="送出" zh_hans="送出" />
+        </Button>
+      </div>
 
-        return (
-          <Mutation mutation={PUT_COMMENT} refetchQueries={refetchQueries}>
-            {(putComment: any) => {
-              const [isSubmitting, setSubmitting] = useState(false)
-              const [expand, setExpand] = useState(defaultExpand || false)
-              const [content, setContent] = useState(
-                draftContent || defaultContent || ''
-              )
-              const viewer = useContext(ViewerContext)
-              const isValid = !!trimLineBreaks(content)
-
-              const handleSubmit = (
-                event: React.FormEvent<HTMLFormElement>
-              ) => {
-                const mentions = dom.getAttributes('data-id', content)
-                const input = {
-                  id: commentId,
-                  comment: {
-                    content: trimLineBreaks(content),
-                    replyTo: replyToId,
-                    articleId,
-                    parentId,
-                    mentions
-                  }
-                }
-
-                event.preventDefault()
-                setSubmitting(true)
-
-                putComment({ variables: { input } })
-                  .then(({ data }: any) => {
-                    if (submitCallback) {
-                      submitCallback()
-                    }
-                    setContent('')
-                    window.dispatchEvent(
-                      new CustomEvent(ADD_TOAST, {
-                        detail: {
-                          color: 'green',
-                          content: (
-                            <Translate
-                              zh_hant="評論已送出"
-                              zh_hans="评论已送出"
-                            />
-                          )
-                        }
-                      })
-                    )
-                  })
-                  .catch((result: any) => {
-                    window.dispatchEvent(
-                      new CustomEvent(ADD_TOAST, {
-                        detail: {
-                          color: 'red',
-                          content: (
-                            <Translate
-                              zh_hant="評論送出失敗"
-                              zh_hans="评论失败送出"
-                            />
-                          )
-                        }
-                      })
-                    )
-                  })
-                  .finally(() => {
-                    setSubmitting(false)
-                  })
-              }
-
-              return (
-                <form
-                  onSubmit={handleSubmit}
-                  className={expand ? 'expand' : ''}
-                  onFocus={() => setExpand(true)}
-                  onBlur={() => {
-                    client.writeData({
-                      id: `CommentDraft:${commentDraftId}`,
-                      data: {
-                        content
-                      }
-                    })
-                  }}
-                >
-                  <CommentEditor
-                    content={content}
-                    expand={expand}
-                    handleChange={value => setContent(value)}
-                  />
-                  <div className="buttons">
-                    {extraButton && extraButton}
-                    <Button
-                      type="submit"
-                      bgColor="green"
-                      disabled={
-                        isSubmitting ||
-                        !isValid ||
-                        !viewer.isAuthed ||
-                        viewer.isInactive
-                      }
-                      icon={
-                        isSubmitting ? (
-                          <IconSpinner />
-                        ) : (
-                          <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
-                        )
-                      }
-                    >
-                      <Translate zh_hant="送出" zh_hans="送出" />
-                    </Button>
-                  </div>
-
-                  <style jsx>{styles}</style>
-                </form>
-              )
-            }}
-          </Mutation>
-        )
-      }}
-    </Query>
+      <style jsx>{styles}</style>
+    </form>
   )
 }
 

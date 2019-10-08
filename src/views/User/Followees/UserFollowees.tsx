@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Head, InfiniteScroll, Placeholder } from '~/components'
 import EmptyFollowee from '~/components/Empty/EmptyFollowee'
-import { Query } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -39,79 +38,72 @@ const USER_FOLLOWEES_FEED = gql`
 const UserFollowees = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
+  const { data, loading, fetchMore } = useQuery<UserFolloweeFeed>(
+    USER_FOLLOWEES_FEED,
+    {
+      variables: { userName }
+    }
+  )
+
+  if (loading || !data || !data.user) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  const user = data.user
+  const connectionPath = 'user.followees'
+  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.FOLLOWEE,
+      location: edges.length,
+      entrance: user.id
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
+  if (!edges || edges.length <= 0) {
+    return <EmptyFollowee />
+  }
 
   return (
-    <Query query={USER_FOLLOWEES_FEED} variables={{ userName }}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: UserFolloweeFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
-
-        const connectionPath = 'user.followees'
-        const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () => {
-          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-            type: FEED_TYPE.FOLLOWEE,
-            location: edges.length,
-            entrance: data.user.id
-          })
-          return fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
-        }
-
-        if (!edges || edges.length <= 0) {
-          return <EmptyFollowee />
-        }
-
-        return (
-          <>
-            <Head
-              title={{
-                zh_hant: `${data.user.displayName}追蹤的作者`,
-                zh_hans: `${data.user.displayName}追踪的作者`
-              }}
-            />
-            <InfiniteScroll
-              hasNextPage={pageInfo.hasNextPage}
-              loadMore={loadMore}
-            >
-              <ul>
-                {edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                    <li
-                      key={cursor}
-                      onClick={() =>
-                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                          type: FEED_TYPE.FOLLOWEE,
-                          location: i,
-                          entrance: data.user.id
-                        })
-                      }
-                    >
-                      <UserDigest.FullDesc user={node} nameSize="small" />
-                    </li>
-                  )
-                )}
-              </ul>
-            </InfiniteScroll>
-          </>
-        )
-      }}
-    </Query>
+    <>
+      <Head
+        title={{
+          zh_hant: `${user.displayName}追蹤的作者`,
+          zh_hans: `${user.displayName}追踪的作者`
+        }}
+      />
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <ul>
+          {edges.map(
+            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOWEE,
+                    location: i,
+                    entrance: user.id
+                  })
+                }
+              >
+                <UserDigest.FullDesc user={node} nameSize="small" />
+              </li>
+            )
+          )}
+        </ul>
+      </InfiniteScroll>
+    </>
   )
 }
 

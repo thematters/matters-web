@@ -2,11 +2,10 @@ import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import React from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 
 import UserList from '~/components/Dropdown/UserList'
-import { Query } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -126,70 +125,67 @@ class CommentEditor extends React.Component<Props, State> {
       )
     }
 
+    const { loading, data } = useQuery<SearchUsers>(SEARCH_USERS, {
+      variables: { search },
+      skip: !search
+    })
+    const users = _get(data, 'search.edges', []).map(
+      ({ node }: { node: SearchUsers_search_edges_node_User }) => node
+    )
+
     return (
-      <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
-        {({ data, loading }: QueryResult & { data: SearchUsers }) => {
-          const users = _get(data, 'search.edges', []).map(
-            ({ node }: { node: SearchUsers_search_edges_node_User }) => node
-          )
+      <>
+        <div className={containerClasses} id="comment-editor">
+          <ReactQuill
+            theme="bubble"
+            modules={{
+              ...config.modules,
+              mention: {
+                mentionContainer:
+                  this.mentionContainerRef && this.mentionContainerRef.current,
+                onMentionChange: this.onMentionChange,
+                onInit: this.onMentionModuleInit
+              }
+            }}
+            formats={config.foramts}
+            ref={this.reactQuillRef}
+            value={content}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onFocus={() => this.setState({ focus: true })}
+            onBlur={() => this.setState({ focus: false })}
+            bounds="#comment-editor"
+          />
 
-          return (
-            <>
-              <div className={containerClasses} id="comment-editor">
-                <ReactQuill
-                  theme="bubble"
-                  modules={{
-                    ...config.modules,
-                    mention: {
-                      mentionContainer:
-                        this.mentionContainerRef &&
-                        this.mentionContainerRef.current,
-                      onMentionChange: this.onMentionChange,
-                      onInit: this.onMentionModuleInit
-                    }
-                  }}
-                  formats={config.foramts}
-                  ref={this.reactQuillRef}
-                  value={content}
-                  placeholder={placeholder}
-                  onChange={handleChange}
-                  onFocus={() => this.setState({ focus: true })}
-                  onBlur={() => this.setState({ focus: false })}
-                  bounds="#comment-editor"
-                />
+          <section
+            className="mention-container"
+            ref={this.mentionContainerRef}
+            hidden={users.length <= 0}
+          >
+            {loading && <Spinner />}
+            {!loading && (
+              <UserList
+                users={users}
+                onClick={(user: SearchUsers_search_edges_node_User) => {
+                  mentionInstance.insertMention({
+                    id: user.id,
+                    displayName: user.displayName,
+                    userName: user.userName
+                  })
+                }}
+              />
+            )}
+          </section>
+        </div>
 
-                <section
-                  className="mention-container"
-                  ref={this.mentionContainerRef}
-                  hidden={users.length <= 0}
-                >
-                  {loading && <Spinner />}
-                  {!loading && (
-                    <UserList
-                      users={users}
-                      onClick={(user: SearchUsers_search_edges_node_User) => {
-                        mentionInstance.insertMention({
-                          id: user.id,
-                          displayName: user.displayName,
-                          userName: user.userName
-                        })
-                      }}
-                    />
-                  )}
-                </section>
-              </div>
-
-              <style jsx>{styles}</style>
-              <style jsx global>
-                {bubbleStyles}
-              </style>
-              <style jsx global>
-                {contentStyles}
-              </style>
-            </>
-          )
-        }}
-      </Query>
+        <style jsx>{styles}</style>
+        <style jsx global>
+          {bubbleStyles}
+        </style>
+        <style jsx global>
+          {contentStyles}
+        </style>
+      </>
     )
   }
 }

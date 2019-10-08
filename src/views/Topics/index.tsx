@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -11,7 +11,6 @@ import {
   Placeholder,
   Translate
 } from '~/components'
-import { Query } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -47,98 +46,89 @@ const ALL_TOPICSS = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-const Topics = () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.allTopics,
-          zh_hans: TEXT.zh_hans.allTopics
-        }}
-      />
+const Topics = () => {
+  const { data, loading, fetchMore } = useQuery<AllTopics>(ALL_TOPICSS)
 
-      <PageHeader
-        pageTitle={
-          <Translate
-            zh_hant={TEXT.zh_hant.allTopics}
-            zh_hans={TEXT.zh_hans.allTopics}
-          />
-        }
-      />
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
 
-      <section>
-        <Query query={ALL_TOPICSS}>
-          {({
-            data,
-            loading,
-            error,
-            fetchMore
-          }: QueryResult & { data: AllTopics }) => {
-            if (loading) {
-              return <Placeholder.ArticleDigestList />
-            }
+  const connectionPath = 'viewer.recommendation.topics'
+  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.TOPICS,
+      location: edges.length
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
 
-            const connectionPath = 'viewer.recommendation.topics'
-            const { edges, pageInfo } = _get(data, connectionPath, {})
-            const loadMore = () => {
-              analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-                type: FEED_TYPE.TOPICS,
-                location: edges.length
-              })
-              return fetchMore({
-                variables: {
-                  after: pageInfo.endCursor
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) =>
-                  mergeConnections({
-                    oldData: previousResult,
-                    newData: fetchMoreResult,
-                    path: connectionPath
-                  })
-              })
-            }
+  return (
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <ul>
+        {edges.map(
+          ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_TOPICS,
+                  location: i
+                })
+              }
+            >
+              <ArticleDigest.Feed
+                article={node}
+                hasDateTime
+                hasBookmark
+                hasTopicScore
+              />
+            </li>
+          )
+        )}
+      </ul>
+    </InfiniteScroll>
+  )
+}
 
-            return (
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-              >
-                <ul>
-                  {edges.map(
-                    (
-                      { node, cursor }: { node: any; cursor: any },
-                      i: number
-                    ) => (
-                      <li
-                        key={cursor}
-                        onClick={() =>
-                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                            type: FEED_TYPE.ALL_TOPICS,
-                            location: i
-                          })
-                        }
-                      >
-                        <ArticleDigest.Feed
-                          article={node}
-                          hasDateTime
-                          hasBookmark
-                          hasTopicScore
-                        />
-                      </li>
-                    )
-                  )}
-                </ul>
-              </InfiniteScroll>
-            )
+export default () => {
+  return (
+    <main className="l-row">
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        <Head
+          title={{
+            zh_hant: TEXT.zh_hant.allTopics,
+            zh_hans: TEXT.zh_hans.allTopics
           }}
-        </Query>
-      </section>
-    </article>
+        />
 
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
-)
+        <PageHeader
+          pageTitle={
+            <Translate
+              zh_hant={TEXT.zh_hant.allTopics}
+              zh_hans={TEXT.zh_hans.allTopics}
+            />
+          }
+        />
 
-export default Topics
+        <section>
+          <Topics />
+        </section>
+      </article>
+
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        <Footer />
+      </aside>
+    </main>
+  )
+}

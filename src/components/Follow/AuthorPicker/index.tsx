@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
-import { Query } from '~/components/GQL'
 import FullDesc from '~/components/UserDigest/FullDesc'
 
 import { numFormat } from '~/common/utils'
@@ -47,58 +45,45 @@ export const AuthorPicker = ({
     'small-size-header': titleIs === 'span'
   })
 
+  const { loading, data, refetch } = useQuery<AuthorPickerType>(AUTHOR_PICKER, {
+    notifyOnNetworkStatusChange: true
+  })
+  const edges =
+    (data && data.viewer && data.viewer.recommendation.authors.edges) || []
+  const followeeCount = viewer.followees.totalCount || 0
+
+  if (!edges || edges.length <= 0) {
+    return null
+  }
+
   return (
-    <Query query={AUTHOR_PICKER} notifyOnNetworkStatusChange>
-      {({
-        data,
-        loading,
-        error,
-        refetch
-      }: QueryResult & { data: AuthorPickerType }) => {
-        const edges = _get(data, 'viewer.recommendation.authors.edges', [])
-        const followeeCount = _get(viewer, 'followees.totalCount', 0)
+    <>
+      <div className={containerStyle}>
+        <PageHeader pageTitle={title}>
+          <div className="follow-info">
+            <ShuffleButton onClick={() => refetch()} />
+            <span>
+              <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
+              <span className="hightlight">{numFormat(followeeCount)}</span>
+              <Translate zh_hant=" 位" zh_hans=" 位" />
+            </span>
+          </div>
+        </PageHeader>
 
-        if (!edges || edges.length <= 0) {
-          return null
-        }
+        {loading && <Spinner />}
 
-        return (
-          <>
-            <div className={containerStyle}>
-              <PageHeader pageTitle={title}>
-                <div className="follow-info">
-                  <ShuffleButton onClick={() => refetch()} />
-                  <span>
-                    <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
-                    <span className="hightlight">
-                      {numFormat(followeeCount)}
-                    </span>
-                    <Translate zh_hant=" 位" zh_hans=" 位" />
-                  </span>
-                </div>
-              </PageHeader>
-
-              {loading && <Spinner />}
-
-              {!loading && (
-                <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                    <li key={cursor}>
-                      <FullDesc
-                        user={node}
-                        nameSize="small"
-                        readonly={readonly}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <style jsx>{styles}</style>
-          </>
-        )
-      }}
-    </Query>
+        {!loading && (
+          <ul>
+            {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+              <li key={cursor}>
+                <FullDesc user={node} nameSize="small" readonly={readonly} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <style jsx>{styles}</style>
+    </>
   )
 }
 

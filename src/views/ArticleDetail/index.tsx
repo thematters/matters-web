@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
 
 import {
@@ -17,7 +17,6 @@ import {
 } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { Fingerprint } from '~/components/Fingerprint'
-import { Query } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
@@ -30,6 +29,7 @@ import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import { ArticleEdited } from './__generated__/ArticleEdited'
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
@@ -84,6 +84,19 @@ const ARTICLE_DETAIL = gql`
   ${Fingerprint.fragments.article}
 `
 
+const ARTICLE_EDITED = gql`
+  subscription ArticleEdited($id: ID!) {
+    nodeEdited(input: { id: $id }) {
+      id
+      ... on Article {
+        id
+        ...ToolbarArticle
+      }
+    }
+  }
+  ${Toolbar.fragments.article}
+`
+
 const Block = ({
   type = 'article',
   children
@@ -116,197 +129,179 @@ const ArticleDetail = ({
     return null
   }
 
-  return (
-    <Query query={ARTICLE_DETAIL} variables={{ mediaHash }}>
-      {({
-        data,
-        client,
-        loading,
-        subscribeToMore
-      }: QueryResult & { data: ArticleDetailType }) => {
-        const authorId = _get(data, 'article.author.id')
-        const collectionCount = _get(data, 'article.collection.totalCount')
-        const canEditCollection = viewer.id === authorId
+  const { data, loading, subscribeToMore, client } = useQuery<
+    ArticleDetailType
+  >(ARTICLE_DETAIL, {
+    variables: { mediaHash }
+  })
+  const article = _get(data, 'article')
+  const authorId = _get(data, 'article.author.id')
+  const collectionCount = _get(data, 'article.collection.totalCount')
+  const canEditCollection = viewer.id === authorId
+  const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
+    if (shouldShowWall) {
+      setFixedWall(currentPosition === 'inside')
+    }
+  }
 
-        const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
-          if (shouldShowWall) {
-            setFixedWall(currentPosition === 'inside')
-          }
+  if (!article) {
+    return <Throw404 />
+  }
+
+  return (
+    <main className="l-row">
+      {(() => {
+        if (loading) {
+          return (
+            <Block>
+              <Placeholder.ArticleDetail />
+            </Block>
+          )
         }
 
+        if (article.state !== 'active' && viewer.id !== authorId) {
+          return <Throw404 />
+        }
+
+        useEffect(() => {
+          if (article.live) {
+            subscribeToMore<ArticleEdited>({
+              document: ARTICLE_EDITED,
+              variables: { id: article.id },
+              updateQuery: (prev, { subscriptionData }) =>
+                _merge(prev, {
+                  article: subscriptionData.data.nodeEdited
+                })
+            })
+          }
+        })
+
+        useEffect(() => {
+          if (process.browser && shouldShowWall) {
+            if (window.location.hash) {
+              jump('#article-footer-anchor', { offset: -10 })
+            }
+          }
+        }, [])
+
+        useImmersiveMode('article > .content')
+
         return (
-          <main className="l-row">
-            {(() => {
-              if (loading) {
-                return (
-                  <Block>
-                    <Placeholder.ArticleDetail />
-                  </Block>
-                )
-              }
-
-              if (data.article.state !== 'active' && viewer.id !== authorId) {
-                return <Throw404 />
-              }
-
-              useEffect(() => {
-                if (data.article.live) {
-                  subscribeToMore({
-                    document: gql`
-                      subscription ArticleEdited($id: ID!) {
-                        nodeEdited(input: { id: $id }) {
-                          id
-                          ... on Article {
-                            id
-                            ...ToolbarArticle
-                          }
-                        }
-                      }
-                      ${Toolbar.fragments.article}
-                    `,
-                    variables: { id: data.article.id },
-                    updateQuery: (prev, { subscriptionData }) =>
-                      _merge(prev, {
-                        article: subscriptionData.data.nodeEdited
-                      })
-                  })
-                }
-              })
-
-              useEffect(() => {
-                if (process.browser && shouldShowWall) {
-                  if (window.location.hash) {
-                    jump('#article-footer-anchor', { offset: -10 })
-                  }
-                }
-              }, [])
-
-              useImmersiveMode('article > .content')
-
-              return (
-                <Responsive.MediumUp>
-                  {(isMediumUp: boolean) => (
-                    <>
-                      <Block>
-                        <Head
-                          title={data.article.title}
-                          description={data.article.summary}
-                          keywords={data.article.tags.map(
+          <Responsive.MediumUp>
+            {(isMediumUp: boolean) => (
+              <>
+                <Block>
+                  <Head
+                    title={article.title}
+                    description={article.summary}
+                    keywords={
+                      article.tags
+                        ? article.tags.map(
                             ({ content }: { content: any }) => content
-                          )}
-                          image={data.article.cover}
-                        />
+                          )
+                        : []
+                    }
+                    image={article.cover}
+                  />
 
-                        <State article={data.article} />
+                  <State article={article} />
 
-                        <section className="author">
-                          <UserDigest.FullDesc user={data.article.author} />
-                        </section>
+                  <section className="author">
+                    <UserDigest.FullDesc user={article.author} />
+                  </section>
 
-                        <section className="title">
-                          <Title type="article">{data.article.title}</Title>
-                          <span className="subtitle">
-                            <p className="date">
-                              <DateTime date={data.article.createdAt} />
-                            </p>
-                            <span className="right-items">
-                              {data.article.live && <IconLive />}
-                              <Fingerprint
-                                article={data.article}
-                                color="grey"
-                                size="xs"
-                              />
-                            </span>
-                          </span>
-                        </section>
+                  <section className="title">
+                    <Title type="article">{article.title}</Title>
+                    <span className="subtitle">
+                      <p className="date">
+                        <DateTime date={article.createdAt} />
+                      </p>
+                      <span className="right-items">
+                        {article.live && <IconLive />}
+                        <Fingerprint article={article} color="grey" size="xs" />
+                      </span>
+                    </span>
+                  </section>
 
-                        <section className="content">
-                          <Content article={data.article} />
-                          {(collectionCount > 0 || canEditCollection) && (
-                            <Collection
-                              article={data.article}
-                              canEdit={canEditCollection}
-                              collectionCount={collectionCount}
-                            />
-                          )}
+                  <section className="content">
+                    <Content article={article} />
+                    {(collectionCount > 0 || canEditCollection) && (
+                      <Collection
+                        article={article}
+                        canEdit={canEditCollection}
+                        collectionCount={collectionCount}
+                      />
+                    )}
 
-                          {/* content:end */}
-                          {!isMediumUp && (
-                            <Waypoint
-                              onPositionChange={({ currentPosition }) => {
-                                if (currentPosition === 'below') {
-                                  setFixedToolbar(true)
-                                } else {
-                                  setFixedToolbar(false)
-                                }
-                              }}
-                            />
-                          )}
+                    {/* content:end */}
+                    {!isMediumUp && (
+                      <Waypoint
+                        onPositionChange={({ currentPosition }) => {
+                          if (currentPosition === 'below') {
+                            setFixedToolbar(true)
+                          } else {
+                            setFixedToolbar(false)
+                          }
+                        }}
+                      />
+                    )}
 
-                          <TagList article={data.article} />
-                          <Toolbar placement="left" article={data.article} />
-                        </section>
+                    <TagList article={article} />
+                    <Toolbar placement="left" article={article} />
+                  </section>
 
-                        <Toolbar
-                          placement="bottom"
-                          article={data.article}
-                          fixed={fixedToolbar}
-                        />
-                      </Block>
+                  <Toolbar
+                    placement="bottom"
+                    article={article}
+                    fixed={fixedToolbar}
+                  />
+                </Block>
 
-                      <Waypoint onPositionChange={handleWall}>
-                        <section className="l-col-4 l-col-md-8 l-col-lg-12">
-                          <RelatedArticles article={data.article} />
-                        </section>
-                      </Waypoint>
+                <Waypoint onPositionChange={handleWall}>
+                  <section className="l-col-4 l-col-md-8 l-col-lg-12">
+                    <RelatedArticles article={article} />
+                  </section>
+                </Waypoint>
 
-                      {shouldShowWall && (
-                        <Wall show={fixedWall} client={client} />
-                      )}
+                {shouldShowWall && <Wall show={fixedWall} client={client} />}
 
-                      <Block type="section">
-                        {!shouldShowWall && (
-                          <>
-                            <Responses
-                              articleId={data.article.id}
-                              mediaHash={mediaHash}
-                            />
-                            <Waypoint
-                              onEnter={() => {
-                                if (!trackedFinish) {
-                                  analytics.trackEvent(
-                                    ANALYTICS_EVENTS.FINISH_COMMENTS,
-                                    {
-                                      entrance: data.article.id
-                                    }
-                                  )
-                                  setTrackedFinish(true)
-                                }
-                              }}
-                            />
-                          </>
-                        )}
-                        <AppreciatorsModal />
-                        <ShareModal />
-                      </Block>
+                <Block type="section">
+                  {!shouldShowWall && (
+                    <>
+                      <Responses articleId={article.id} mediaHash={mediaHash} />
+                      <Waypoint
+                        onEnter={() => {
+                          if (!trackedFinish) {
+                            analytics.trackEvent(
+                              ANALYTICS_EVENTS.FINISH_COMMENTS,
+                              {
+                                entrance: article.id
+                              }
+                            )
+                            setTrackedFinish(true)
+                          }
+                        }}
+                      />
                     </>
                   )}
-                </Responsive.MediumUp>
-              )
-            })()}
-
-            <section
-              id="article-footer-anchor"
-              className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2"
-            >
-              {!shouldShowWall && <Footer />}
-            </section>
-
-            <style jsx>{styles}</style>
-          </main>
+                  <AppreciatorsModal />
+                  <ShareModal />
+                </Block>
+              </>
+            )}
+          </Responsive.MediumUp>
         )
-      }}
-    </Query>
+      })()}
+
+      <section
+        id="article-footer-anchor"
+        className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2"
+      >
+        {!shouldShowWall && <Footer />}
+      </section>
+
+      <style jsx>{styles}</style>
+    </main>
   )
 }
 
@@ -318,14 +313,12 @@ const ArticleDetailContainer = () => {
     return null
   }
 
-  return (
-    <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
-      {({ data }: any) => {
-        const { wall } = _get(data, 'clientPreference', { wall: true })
-        return <ArticleDetail mediaHash={mediaHash} wall={wall} />
-      }}
-    </Query>
-  )
+  const { data } = useQuery(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const { wall } = _get(data, 'clientPreference', { wall: true })
+
+  return <ArticleDetail mediaHash={mediaHash} wall={wall} />
 }
 
 export default ArticleDetailContainer

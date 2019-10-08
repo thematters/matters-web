@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   Dropdown,
@@ -12,7 +12,6 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import { Query } from '~/components/GQL'
 
 import { numAbbr, translate } from '~/common/utils'
 
@@ -126,62 +125,55 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
     }
   }
 
+  const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
+    variables: { search: querySearch },
+    skip: !querySearch
+  })
+
   return (
     <>
-      <Query
-        query={SEARCH_TAGS}
-        variables={{ search: querySearch }}
-        skip={!querySearch}
+      <Dropdown
+        trigger="manual"
+        onCreate={setInstance}
+        content={
+          <DropdownContent
+            loading={loading}
+            search={search}
+            tags={_get(data, 'search.edges', []).map(
+              ({ node }: { node: SearchTagsQuery_search_edges_node_Tag }) =>
+                node
+            )}
+            addTag={(tag: string) => {
+              addTag(tag)
+              setSearch('')
+            }}
+            hideDropdown={hideDropdown}
+          />
+        }
       >
-        {({ data, loading }: QueryResult & { data: SearchTagsQuery }) => {
-          return (
-            <Dropdown
-              trigger="manual"
-              onCreate={setInstance}
-              content={
-                <DropdownContent
-                  loading={loading}
-                  search={search}
-                  tags={_get(data, 'search.edges', []).map(
-                    ({
-                      node
-                    }: {
-                      node: SearchTagsQuery_search_edges_node_Tag
-                    }) => node
-                  )}
-                  addTag={(tag: string) => {
-                    addTag(tag)
-                    setSearch('')
-                  }}
-                  hideDropdown={hideDropdown}
-                />
-              }
-            >
-              <input
-                className="search-tag-input"
-                onChange={e => {
-                  const value = e.target.value
-                  setSearch(value)
-                  debouncedSetQuerySearch(value, setQuerySearch)
-                  if (value) {
-                    showDropdown()
-                  } else {
-                    hideDropdown()
-                  }
-                }}
-                onFocus={() => search && showDropdown()}
-                onClick={() => search && showDropdown()}
-                value={search}
-                placeholder={translate({
-                  zh_hant: '增加標籤…',
-                  zh_hans: '增加标签…',
-                  lang
-                })}
-              />
-            </Dropdown>
-          )
-        }}
-      </Query>
+        <input
+          className="search-tag-input"
+          onChange={e => {
+            const value = e.target.value
+            setSearch(value)
+            debouncedSetQuerySearch(value, setQuerySearch)
+            if (value) {
+              showDropdown()
+            } else {
+              hideDropdown()
+            }
+          }}
+          onFocus={() => search && showDropdown()}
+          onClick={() => search && showDropdown()}
+          value={search}
+          placeholder={translate({
+            zh_hant: '增加標籤…',
+            zh_hans: '增加标签…',
+            lang
+          })}
+        />
+      </Dropdown>
+
       <style jsx>{styles}</style>
     </>
   )

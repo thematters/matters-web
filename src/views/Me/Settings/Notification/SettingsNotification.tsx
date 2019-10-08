@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useMutation, useQuery } from 'react-apollo'
 
 import { Head, PageHeader, Translate } from '~/components'
-import { Mutation, Query } from '~/components/GQL'
 import { Switch } from '~/components/Switch'
 
 import { TEXT } from '~/common/enums'
@@ -125,126 +124,117 @@ const settingsMap = {
   ]
 }
 
-const SettingsNotification = () => (
-  <Query query={VIEWER_NOTIFICATION_SETTINGS}>
-    {({ data }: QueryResult & { data: ViewerNotificationSettings }) => {
-      const settings = _get(data, 'viewer.settings.notification', {})
+const SettingsNotification = () => {
+  const [updateNotification] = useMutation(UPDATE_VIEWER_NOTIFICATION)
+  const { data } = useQuery<ViewerNotificationSettings>(
+    VIEWER_NOTIFICATION_SETTINGS
+  )
+  const settings = _get(data, 'viewer.settings.notification', {})
 
-      return (
-        <Mutation mutation={UPDATE_VIEWER_NOTIFICATION}>
-          {(updateNotification: any) => {
-            const onChange = (type: string) =>
-              updateNotification({
-                variables: {
-                  type,
-                  enabled: !settings[type]
-                },
-                optimisticResponse: {
-                  updateNotificationSetting: {
-                    id: data.viewer.id,
-                    settings: {
-                      notification: {
-                        [type]: !settings[type],
-                        __typename: 'NotificationSetting'
-                      },
-                      __typename: 'UserSettings'
-                    },
-                    __typename: 'User'
-                  }
-                }
-              })
+  const onChange = (type: string) =>
+    updateNotification({
+      variables: {
+        type,
+        enabled: !settings[type]
+      },
+      optimisticResponse: {
+        updateNotificationSetting: {
+          id: data && data.viewer && data.viewer.id,
+          settings: {
+            notification: {
+              [type]: !settings[type],
+              __typename: 'NotificationSetting'
+            },
+            __typename: 'UserSettings'
+          },
+          __typename: 'User'
+        }
+      }
+    })
 
-            return (
-              <>
-                <Head
-                  title={{
-                    zh_hant: TEXT.zh_hant.notificationSetting,
-                    zh_hans: TEXT.zh_hans.notificationSetting
-                  }}
-                />
+  return (
+    <>
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.notificationSetting,
+          zh_hans: TEXT.zh_hans.notificationSetting
+        }}
+      />
 
-                <div className="l-row first">
-                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
-                    <PageHeader
-                      pageTitle={
-                        <Translate zh_hant="與我有關" zh_hans="与我有关" />
-                      }
-                      is="h2"
-                    />
+      <div className="l-row first">
+        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+          <PageHeader
+            pageTitle={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
+            is="h2"
+          />
 
-                    {settingsMap.me.map(setting => (
-                      <section className="setting-section" key={setting.key}>
-                        <span className="title">{setting.title}</span>
-                        <Switch
-                          checked={settings[setting.key]}
-                          onChange={() => onChange(setting.key)}
-                        />
-                      </section>
-                    ))}
-                  </section>
+          {settingsMap.me.map(setting => (
+            <section className="setting-section" key={setting.key}>
+              <span className="title">{setting.title}</span>
+              <Switch
+                checked={settings[setting.key]}
+                onChange={() => onChange(setting.key)}
+              />
+            </section>
+          ))}
+        </section>
 
-                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
-                    <PageHeader
-                      pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
-                      is="h2"
-                    />
+        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+          <PageHeader
+            pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
+            is="h2"
+          />
 
-                    {settingsMap.others.map(setting => (
-                      <section className="setting-section" key={setting.key}>
-                        <span className="title">{setting.title}</span>
-                        <Switch
-                          checked={settings[setting.key]}
-                          onChange={() => onChange(setting.key)}
-                        />
-                      </section>
-                    ))}
-                  </section>
-                </div>
+          {settingsMap.others.map(setting => (
+            <section className="setting-section" key={setting.key}>
+              <span className="title">{setting.title}</span>
+              <Switch
+                checked={settings[setting.key]}
+                onChange={() => onChange(setting.key)}
+              />
+            </section>
+          ))}
+        </section>
+      </div>
 
-                <div className="l-row">
-                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
-                    <PageHeader
-                      pageTitle={<Translate zh_hant="作品" zh_hans="作品" />}
-                      is="h2"
-                    />
+      <div className="l-row">
+        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+          <PageHeader
+            pageTitle={<Translate zh_hant="作品" zh_hans="作品" />}
+            is="h2"
+          />
 
-                    {settingsMap.article.map(setting => (
-                      <section className="setting-section" key={setting.key}>
-                        <span className="title">{setting.title}</span>
-                        <Switch
-                          checked={settings[setting.key]}
-                          onChange={() => onChange(setting.key)}
-                        />
-                      </section>
-                    ))}
-                  </section>
+          {settingsMap.article.map(setting => (
+            <section className="setting-section" key={setting.key}>
+              <span className="title">{setting.title}</span>
+              <Switch
+                checked={settings[setting.key]}
+                onChange={() => onChange(setting.key)}
+              />
+            </section>
+          ))}
+        </section>
 
-                  <section className="section-container l-col-4 l-col-md-4 l-lg-6">
-                    <PageHeader
-                      pageTitle={<Translate zh_hant="評論" zh_hans="评论" />}
-                      is="h2"
-                    />
+        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+          <PageHeader
+            pageTitle={<Translate zh_hant="評論" zh_hans="评论" />}
+            is="h2"
+          />
 
-                    {settingsMap.comment.map(setting => (
-                      <section className="setting-section" key={setting.key}>
-                        <span className="title">{setting.title}</span>
-                        <Switch
-                          checked={settings[setting.key]}
-                          onChange={() => onChange(setting.key)}
-                        />
-                      </section>
-                    ))}
-                  </section>
-                </div>
+          {settingsMap.comment.map(setting => (
+            <section className="setting-section" key={setting.key}>
+              <span className="title">{setting.title}</span>
+              <Switch
+                checked={settings[setting.key]}
+                onChange={() => onChange(setting.key)}
+              />
+            </section>
+          ))}
+        </section>
+      </div>
 
-                <style jsx>{styles}</style>
-              </>
-            )
-          }}
-        </Mutation>
-      )
-    }}
-  </Query>
-)
-
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 export default SettingsNotification
