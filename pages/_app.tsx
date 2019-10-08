@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import gql from 'graphql-tag'
 import App, { Container } from 'next/app'
 import getConfig from 'next/config'
 import React from 'react'
@@ -14,10 +15,20 @@ import {
 } from '~/components'
 import ErrorBoundary from '~/components/ErrorBoundary'
 import { Query } from '~/components/GQL'
-import { RootQuery } from '~/components/GQL/queries/__generated__/RootQuery'
-import ROOT_QUERY from '~/components/GQL/queries/rootQuery'
 
 import withApollo from '~/common/utils/withApollo'
+
+import { RootQuery } from './__generated__/RootQuery'
+
+const ROOT_QUERY = gql`
+  query RootQuery {
+    viewer {
+      id
+      ...LayoutUser
+    }
+  }
+  ${Layout.fragments.user}
+`
 
 // start Sentry
 const {

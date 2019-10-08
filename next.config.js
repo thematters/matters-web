@@ -41,6 +41,7 @@ const nextConfig = {
   /**
    * Build time configs
    */
+  pageExtensions: ['tsx'],
   env: {
     app_version: packageJson.version
   },
