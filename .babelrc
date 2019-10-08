@@ -14,7 +14,8 @@
       "module-resolver",
       {
         "alias": {
-          "~": "."
+          "~/static": "./public/static",
+          "~": "./src"
         }
       }
     ]
