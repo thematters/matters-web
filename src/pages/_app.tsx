@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import getConfig from 'next/config'
 import React from 'react'
 import { ApolloProvider, QueryResult } from 'react-apollo'
@@ -42,32 +42,30 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <Container>
-        <ErrorBoundary>
-          <AnalyticsProvider>
-            <ModalProvider>
-              <ApolloProvider client={apollo}>
-                <GlobalStyles />
-                <Query query={ROOT_QUERY}>
-                  {({
-                    data,
-                    loading,
-                    error
-                  }: QueryResult & { data: RootQuery }) => (
-                    <Layout
-                      loading={loading}
-                      user={data && data.viewer}
-                      error={error}
-                    >
-                      <Component {...pageProps} />
-                    </Layout>
-                  )}
-                </Query>
-              </ApolloProvider>
-            </ModalProvider>
-          </AnalyticsProvider>
-        </ErrorBoundary>
-      </Container>
+      <ErrorBoundary>
+        <AnalyticsProvider>
+          <ModalProvider>
+            <ApolloProvider client={apollo}>
+              <GlobalStyles />
+              <Query query={ROOT_QUERY}>
+                {({
+                  data,
+                  loading,
+                  error
+                }: QueryResult & { data: RootQuery }) => (
+                  <Layout
+                    loading={loading}
+                    user={data && data.viewer}
+                    error={error}
+                  >
+                    <Component {...pageProps} />
+                  </Layout>
+                )}
+              </Query>
+            </ApolloProvider>
+          </ModalProvider>
+        </AnalyticsProvider>
+      </ErrorBoundary>
     )
   }
 }
