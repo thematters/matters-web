@@ -220,7 +220,7 @@ export const SignUpProfileForm: FC<Props> = ({
       const { avatar, displayName, description } = values
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
 
       try {

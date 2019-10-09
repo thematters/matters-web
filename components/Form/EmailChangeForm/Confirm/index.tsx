@@ -174,7 +174,7 @@ export const EmailChangeConfirmForm: FC<Props> = ({
       const { email, code } = values
       const { preSubmitAction, submitAction } = props
       if (!preSubmitAction || !submitAction) {
-        return undefined
+        return
       }
 
       preSubmitAction({

@@ -6,12 +6,12 @@ export const useOutsideClick = (
 ) => {
   useEffect(() => {
     if (!action) {
-      return undefined
+      return
     }
 
     const listener = (event: any) => {
       if (!node.current || node.current.contains(event.target as Node)) {
-        return undefined
+        return
       }
       action(event)
     }

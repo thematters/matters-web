@@ -58,17 +58,17 @@ const Container: FC<ContainerProps> = ({
 
   const handleOnEsc = (event: any) => {
     if (!closeable) {
-      return undefined
+      return
     }
     if (event.keyCode !== KEYCODES.escape) {
-      return undefined
+      return
     }
     close()
   }
 
   const handleOnOutsideClick = () => {
     if (!closeable) {
-      return undefined
+      return
     }
     close()
   }

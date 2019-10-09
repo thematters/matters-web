@@ -258,7 +258,7 @@ const LoginForm: FC<Props> = ({
       const { email, password } = values
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
       submitAction({ variables: { input: { email, password } } })
         .then(async (result: any) => {

@@ -24,7 +24,7 @@ export function useNativeEventListener(
   useEffect(() => {
     const target = element || window
     if (!target) {
-      return undefined
+      return
     }
     if (toggle) {
       target.addEventListener(event, eventAction)

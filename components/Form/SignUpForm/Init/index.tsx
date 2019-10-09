@@ -358,7 +358,7 @@ export const SignUpInitForm: FC<Props> = ({
       const { email, code, userName, password } = values
       const { preSubmitAction, submitAction } = props
       if (!preSubmitAction || !submitAction) {
-        return undefined
+        return
       }
 
       try {
