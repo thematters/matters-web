@@ -9,9 +9,7 @@ try {
 }
 
 const withPlugins = require('next-compose-plugins')
-const withTypescript = require('@zeit/next-typescript')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const withSize = require('next-size')
 const optimizedImages = require('next-optimized-images')
 const withOffline = require('next-offline')
 
@@ -23,6 +21,7 @@ const nextConfig = {
    *
    * @see {@url https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side}
    */
+  poweredByHeader: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
   },
@@ -42,6 +41,7 @@ const nextConfig = {
   /**
    * Build time configs
    */
+  pageExtensions: ['tsx'],
   env: {
     app_version: packageJson.version
   },
@@ -66,19 +66,19 @@ const nextConfig = {
     /***
      * Import files as URL
      */
-    config.module.rules.push({
-      test: /\.xml$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next/static/',
-            outputPath: `${isServer ? '../' : ''}static/`,
-            name: '[name]-[hash].[ext]'
-          }
-        }
-      ]
-    })
+    // config.module.rules.push({
+    //   test: /\.xml$/,
+    //   use: [
+    //     {
+    //       loader: 'file-loader',
+    //       options: {
+    //         publicPath: '/_next/static/',
+    //         outputPath: `${isServer ? '../' : ''}static/`,
+    //         name: '[name]-[hash].[ext]'
+    //       }
+    //     }
+    //   ]
+    // })
 
     return config
   },
@@ -93,9 +93,6 @@ const nextConfig = {
 
 module.exports = withPlugins(
   [
-    // TypeScript
-    withTypescript,
-
     // images
     [
       optimizedImages,
@@ -113,9 +110,6 @@ module.exports = withPlugins(
         svgSpriteLoader: {}
       }
     ],
-
-    // output build size
-    withSize,
 
     // bundle analyzer
     [
@@ -146,14 +140,14 @@ module.exports = withPlugins(
           runtimeCaching: [
             {
               urlPattern: '/',
-              handler: 'networkFirst',
+              handler: 'NetworkFirst',
               options: {
                 cacheName: 'homepage-cache'
               }
             },
             {
               urlPattern: new RegExp('/_next/static/'),
-              handler: 'cacheFirst',
+              handler: 'CacheFirst',
               options: {
                 cacheName: 'static-cache',
                 cacheableResponse: {

@@ -7,15 +7,15 @@
           "plugins": ["styled-jsx-plugin-postcss"]
         }
       }
-    ],
-    "@zeit/next-typescript/babel"
+    ]
   ],
   "plugins": [
     [
       "module-resolver",
       {
         "alias": {
-          "~": "."
+          "~/static": "./public/static",
+          "~": "./src"
         }
       }
     ]
