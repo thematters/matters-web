@@ -83,7 +83,11 @@ const Container: FC<ContainerProps> = ({
           <div ref={node} className={modalClass}>
             <div className="container">
               {title && (
-                <Modal.Header closeable={closeable} title={interpret(title)} />
+                <Modal.Header
+                  close={close}
+                  closeable={closeable}
+                  title={interpret(title)}
+                />
               )}
               {children({
                 close,
