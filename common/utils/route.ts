@@ -137,7 +137,7 @@ export const getQuery = ({
 export const getTarget = (url?: string) => {
   url = url || window.location.href
   const qs = queryString.parseUrl(url).query
-  const target = encodeURIComponent((qs.target as string) || url)
+  const target = encodeURIComponent((qs.target as string) || '')
   return target
 }
 
@@ -183,8 +183,15 @@ export const appendTarget = ({ href, as }: { href: string; as: string }) => {
     target = getTarget()
   }
 
-  return {
-    href: `${href}?target=${target}`,
-    as: `${as}?target=${target}`
+  if (target) {
+    return {
+      href: `${href}?target=${target}`,
+      as: `${as}?target=${target}`
+    }
+  } else {
+    return {
+      href,
+      as
+    }
   }
 }
