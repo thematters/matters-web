@@ -6,9 +6,6 @@ module.exports = {
       url:
         'http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/graphql'
     },
-    includes: [
-      '+(pages|views|components)/**/*.{ts,tsx}',
-      './common/utils/types/**/*.ts'
-    ]
+    includes: ['src/**/*.{ts,tsx}']
   }
 }

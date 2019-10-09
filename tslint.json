@@ -3,7 +3,14 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["@testing-library/react", "~", "tippy.js", "dotenv", "apollo-cache"]
+      [
+        "~",
+        "@testing-library/react",
+        "tippy.js",
+        "dotenv",
+        "apollo-cache",
+        "svg-sprite-loader"
+      ]
     ],
     "no-bitwise": false,
     "no-submodule-imports": [false],
@@ -21,7 +28,11 @@
         "named-imports-order": "case-insensitive",
         "grouped-imports": true,
         "groups": [
-          { "name": "local", "match": "^[.]", "order": 20 },
+          {
+            "name": "local",
+            "match": "^[.]",
+            "order": 20
+          },
           {
             "name": "internal:others",
             "match": "^~/(common|static|page|definitions)",
@@ -32,7 +43,11 @@
             "match": "^~/components",
             "order": 10
           },
-          { "name": "external", "match": ".*", "order": 5 }
+          {
+            "name": "external",
+            "match": ".*",
+            "order": 5
+          }
         ]
       }
     ]
