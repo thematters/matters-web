@@ -66,19 +66,19 @@ const nextConfig = {
     /***
      * Import files as URL
      */
-    config.module.rules.push({
-      test: /\.xml$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next/static/',
-            outputPath: `${isServer ? '../' : ''}static/`,
-            name: '[name]-[hash].[ext]'
-          }
-        }
-      ]
-    })
+    // config.module.rules.push({
+    //   test: /\.xml$/,
+    //   use: [
+    //     {
+    //       loader: 'file-loader',
+    //       options: {
+    //         publicPath: '/_next/static/',
+    //         outputPath: `${isServer ? '../' : ''}static/`,
+    //         name: '[name]-[hash].[ext]'
+    //       }
+    //     }
+    //   ]
+    // })
 
     return config
   },

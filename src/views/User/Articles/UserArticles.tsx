@@ -18,7 +18,7 @@ import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
-import ICON_192 from '~/static/icon-192x192.png?url'
+import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import styles from './styles.css'
@@ -99,7 +99,7 @@ const UserArticles = () => {
               zh_hans: `${data.user.displayName}的创作空间站`
             }}
             description={data.user.info.description}
-            image={data.user.info.profileCover || ICON_192}
+            image={data.user.info.profileCover || IMAGE_LOGO_192}
           />
         )
 

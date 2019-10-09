@@ -1,5 +1,4 @@
 {
-
   "name": "Matters",
   "short_name": "Matters",
   "start_url": "/?utm_source=homescreen",
@@ -10,7 +9,8 @@
   "orientation": "portrait",
   "Scope": "/",
   "splash_pages": null,
-  "icons": [{
+  "icons": [
+    {
       "src": "./icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"

@@ -18,13 +18,14 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./*"]
+      "~/static/*": ["./public/static"],
+      "~/*": ["./src/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "isolatedModules": true
   },
-  "includes": ["./definitions/**/*.d.ts"],
+  "includes": ["./src/definitions/**/*.d.ts"],
   "exclude": ["node_modules", "build"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
