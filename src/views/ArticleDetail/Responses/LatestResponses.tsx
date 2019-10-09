@@ -113,11 +113,12 @@ const LatestResponses = () => {
 
         const loadMore = (params?: { before: string }) => {
           const loadBefore = (params && params.before) || null
+          const noLimit = loadBefore && pageInfo.endCursor
           return fetchMore({
             variables: {
               after: pageInfo.endCursor,
               before: loadBefore,
-              first: RESPONSES_COUNT,
+              first: noLimit ? null : RESPONSES_COUNT,
               includeBefore: !!loadBefore,
               articleOnly: articleOnlyMode
             },
