@@ -163,7 +163,7 @@ export const redirectToTarget = ({
  * (works on CSR)
  */
 export const redirectToLogin = () => {
-  const target = getTarget()
+  const target = getTarget() || encodeURIComponent(window.location.href)
 
   return Router.push(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
