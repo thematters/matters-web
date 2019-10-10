@@ -218,16 +218,16 @@ const AppreciationButtonContainer = ({
                     {...(isReachLimit
                       ? {
                           zh_hant: '你最多可讚賞 5 次',
-                          zh_hans: '你最多可打赏 5 次'
+                          zh_hans: '你最多可赞赏 5 次'
                         }
                       : isMe
                       ? {
                           zh_hant: '去讚賞其他用戶吧',
-                          zh_hans: '去打赏其他用户吧'
+                          zh_hans: '去赞赏其他用户吧'
                         }
                       : {
                           zh_hant: '你無法進行讚賞',
-                          zh_hans: '你无法进行打赏'
+                          zh_hans: '你无法进行赞赏'
                         })}
                   />
                 }

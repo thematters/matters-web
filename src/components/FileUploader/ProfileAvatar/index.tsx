@@ -47,7 +47,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
-      return undefined
+      return
     }
 
     const file = event.target.files[0]
@@ -55,7 +55,7 @@ export const ProfileAvatarUploader: FC<Props> = ({ user }) => {
 
     if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
-      return undefined
+      return
     }
 
     upload({

@@ -17,7 +17,7 @@ const Clipboard = Quill.import('modules/clipboard')
 class RemadeClipboard extends Clipboard {
   onPaste(event: any) {
     if (event.defaultPrevented || !this.quill.isEnabled()) {
-      return undefined
+      return
     }
     // store scroll position
     const target = isSafari() ? 'body' : 'html'

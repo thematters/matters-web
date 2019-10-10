@@ -193,7 +193,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
       const { displayName, description } = values
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
 
       submitAction({ variables: { input: { displayName, description } } })

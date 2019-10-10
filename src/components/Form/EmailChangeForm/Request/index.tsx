@@ -151,7 +151,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
       const { email, code } = values
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
 
       submitAction({
