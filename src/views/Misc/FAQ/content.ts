@@ -32,21 +32,21 @@ export default {
     <summary>
       <h4>我是讀者，怎樣用 LikeCoin 讚賞作品？</h4>
     </summary>
-    <p>只需點擊 LikeCoin 讚賞鍵為你欣賞的作品拍手，即可化讚為賞。你可以向一篇作品拍手5次，不需要支付任何費用，也不需要向作者轉帳，但你的每一次拍手都會轉化為作者的收入。拍手需要擁有 Liker ID，Matters 會在徵得用戶同意的情況下，為用戶自動開通 Liker ID 。為使用戶體驗更為流暢，此後每次登入 Matters 時會自動登入 Liker ID。如果你已經擁有Liker ID ，可直接與 Matters ID進行綁定。</p>
+    <p>只需點擊 LikeCoin 讚賞鍵為你欣賞的作品讚賞，即可化讚為賞。你可以向一篇作品讚賞5次，不需要支付任何費用，也不需要向作者轉帳，但你的每一次讚賞都會轉化為作者的收入。讚賞需要擁有 Liker ID，Matters 會在徵得用戶同意的情況下，為用戶自動開通 Liker ID 。為使用戶體驗更為流暢，此後每次登入 Matters 時會自動登入 Liker ID。如果你已經擁有Liker ID ，可直接與 Matters ID 進行綁定。</p>
   </details>
 
   <details class="u-content">
     <summary>
-      <h4>我是作者，讀者拍手不花錢，那我獲得的 LikeCoin，來源於哪裡？</h4>
+      <h4>我是作者，讀者讚賞不花錢，那我獲得的 LikeCoin，來源於哪裡？</h4>
     </summary>
-    <p>你所得到的 LikeCoin 分配一部分來自於 LikeCoin Foundation 基金會— 其中推動社群態的資金會用來資助沒有註冊的讀者，讓讀者在拍手不花錢的情況下也能讓作者收到 LikeCoin。另外一部分是來自於用月費支持創作者的讚賞公民另外一部分是來自用月費支持創作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">讚賞公民</a>。</p>
+    <p>你所得到的 LikeCoin 分配一部分來自於 LikeCoin Foundation 基金會— 其中推動社群態的資金會用來資助沒有註冊的讀者，讓讀者在讚賞不花錢的情況下也能讓作者收到 LikeCoin。另外一部分是來自於用月費支持創作者的讚賞公民另外一部分是來自用月費支持創作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">讚賞公民</a>。</p>
   </details>
 
   <details class="u-content">
     <summary>
       <h4>怎樣查看我的 LikeCoin 收入和當前幣值？</h4>
     </summary>
-    <p>你擁有的 LikeCoin 總額，可以在 <a class="u-link-green" href="https://like.co" target="_blank">https://like.co</a> 進行查閱。你獲得的 LikeCoin 收入，會直接儲存在 Matters 綁定的電子錢包中，回饋金額由你當日收穫的拍手次數決定，並且受到幣值、當日共有多少作者一起分享月費配對基金的影響而浮動。</p>
+    <p>你擁有的 LikeCoin 總額，可以在 <a class="u-link-green" href="https://like.co" target="_blank">https://like.co</a> 進行查閱。而你在 Matters 獲得的創作收入，可以在你的錢包設置中查看，回饋金額由你當日收穫的讚賞次數決定，並且受到幣值、當日共有多少作者一起分享月費配對基金的影響而浮動。</p>
   </details>
 
   <details class="u-content">
@@ -60,7 +60,7 @@ export default {
     <summary>
       <h4>我如果不想開通 LikeCoin 可以嗎？</h4>
     </summary>
-    <p>如果你不想使用 LikeCoin，可以在用戶協議更改時，選擇「不同意開通 Liker ID」。在此情況下，你仍然可以使用 Matters 進行閱讀和評論，你的舊作品也可以獲得 LikeCoin。但由於價值標記工具無法啟用，你將無法發表新文章和給出讚賞，也無法對由 MAT 轉換而得、以及舊作持續積累的 LikeCoin 進行管理或者提現。</p>
+    <p>可以。但請注意，如不設置LikeCoin，價值標記工具無法啟用，你將無法發表新文章和給出讚賞，也無法對由 MAT 轉換而得、以及舊作持續積累的 LikeCoin 進行管理或者提現。但你仍然可以使用 Matters 進行閱讀和評論，你的舊作品也可以繼續讚賞。</p>
   </details>
 </details>
 
@@ -181,21 +181,21 @@ export default {
     <summary>
       <h4>我是读者，怎样用 LikeCoin 赞赏作品？</h4>
     </summary>
-    <p>只需点击 LikeCoin 赞赏键为你欣赏的作品拍手，即可化赞为赏。你可以向一篇作品拍手5次，不需要支付任何费用，也不需要向作者转帐，但你的每一次拍手都会转化为作者的收入。拍手需要拥有 Liker ID，Matters 会在征得用户同意的情况下，为用户自动开通 Liker ID 。为使用户体验更为流畅，此后每次登入 Matters 时会自动登入 Liker ID。如果你已经拥有Liker ID ，可直接与 Matters ID进行绑定。</p>
+    <p>只需点击 LikeCoin 赞赏键为你欣赏的作品赞赏，即可化赞为赏。你可以向一篇作品赞赏5次，不需要支付任何费用，也不需要向作者转帐，但你的每一次赞赏都会转化为作者的收入。赞赏需要拥有 Liker ID，Matters 会在征得用户同意的情况下，为用户自动开通 Liker ID 。为使用户体验更为流畅，此后每次登入 Matters 时会自动登入 Liker ID。如果你已经拥有Liker ID ，可直接与 Matters ID 进行绑定。</p>
   </details>
 
   <details class="u-content">
     <summary>
-      <h4>我是作者，读者拍手不花钱，那我获得的 LikeCoin，来源于哪里？</h4>
+      <h4>我是作者，读者赞赏不花钱，那我获得的 LikeCoin，来源于哪里？</h4>
     </summary>
-    <p>你所得到的 LikeCoin 分配一部分来自于 LikeCoin Foundation 基金会— 其中推动社群态的资金会用来资助没有注册的读者，让读者在拍手不花钱的情况下也能让作者收到 LikeCoin。另外一部分是来自于用月费支持创作者的赞赏公民另外一部分是来自用月费支持创作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">赞赏公民</a>。</p>
+    <p>你所得到的 LikeCoin 分配一部分来自于 LikeCoin Foundation 基金会— 其中推动社群态的资金会用来资助没有注册的读者，让读者在赞赏不花钱的情况下也能让作者收到 LikeCoin。另外一部分是来自于用月费支持创作者的赞赏公民另外一部分是来自用月费支持创作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">赞赏公民</a>。</p>
   </details>
 
   <details class="u-content">
     <summary>
       <h4>怎样查看我的 LikeCoin 收入和当前币值？</h4>
     </summary>
-    <p>你拥有的 LikeCoin 总额，可以在 <a class="u-link-green" href="https://like.co" target="_blank">https://like.co</a> 进行查阅。你获得的 LikeCoin 收入，会直接储存在 Matters 绑定的电子钱包中，回馈金额由你当日收获的拍手次数决定，并且受到币值、当日共有多少作者一起分享月费配对基金的影响而浮动。</p>
+    <p>你拥有的 LikeCoin 总额，可以在 <a class="u-link-green" href="https://like.co" target="_blank">https://like.co</a> 进行查阅。而你在 Matters 获得的创作收入，可以在你的钱包设置中查看，回馈金额由你当日收获的赞赏次数决定，并且受到币值、当日共有多少作者一起分享月费配对基金的影响而浮动。</p>
   </details>
 
   <details class="u-content">
@@ -209,7 +209,7 @@ export default {
     <summary>
       <h4>我如果不想开通 LikeCoin 可以吗？</h4>
     </summary>
-    <p>如果你不想使用 LikeCoin，可以在用户协议更改时，选择「不同意开通 Liker ID」。在此情况下，你仍然可以使用 Matters 进行阅读和评论，你的旧作品也可以获得 LikeCoin。但由于价值标记工具无法启用，你将无法发表新文章和给出赞赏，也无法对由 MAT 转换而得、以及旧作持续积累的 LikeCoin 进行管理或者提现。</p>
+    <p>可以。但请注意，如不设置LikeCoin，价值标记工具无法启用，你将无法发表新文章和给出赞赏，也无法对由 MAT 转换而得、以及旧作持续积累的 LikeCoin 进行管理或者提现。但你仍然可以使用 Matters 进行阅读和评论，你的旧作品也可以继续赞赏。</p>
   </details>
 </details>
 
