@@ -1,7 +1,11 @@
 const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   zh_hant: /* html */ `
-<h3>隱私政策</h3>
-<p><small>更新日期：2019 年 3 月 14 日</small></p>
+<details class="u-content u-details">
+<summary>
+  <h3>隱私政策</h3>
+</summary>
+
+<p><small>更新日期：2019 年 10 月 15 日</small></p>
 <p>本隱私政策（隱私政策）最後更新於上述日期，並且將不時更新。本隱私政策的任何變更將於公佈本政策的修訂政策後生效。本隱私政策旨在告知所有用戶，MATTERS LAB LIMITED（以下簡稱「MATTERS」）將如何處理個人信息與非個人信息。如有用戶不同意本隱私政策中的任何一部分，則MATTERS將無法向此類用戶提供服務，而此類用戶也應當停止訪問服務。</p>
 
 <p><b><u>1. 定義</u></b></p>
@@ -12,7 +16,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>PDPO 是指不時修訂的香港特別行政區法第486章個人資料（隱私）條例；</p>
 
-<p><b><i>個人信息</i></b>是指由MATTERS從用戶處收集，或者由MATTERS以其他方式保存的涉及能夠識別出個人身份的任何個人信息，其中包括姓名、聯繫方式、電子郵件地址、年齡、性別、護照或其他能身份證明的文件資料、包括臉書、微信、谷歌和微博在內的第三方社交媒體網站中的信息或帳戶資料、其他的註冊、帳戶或個人資料信息、帳戶註冊期間提交的任何個人說明、以及根據本隱私政策由用戶提供的或與用戶相關的信息；</p>
+<p><b><i>個人信息</i></b>是指由MATTERS從用戶處收集，或者由MATTERS以其他方式保存的涉及能夠識別出個人身份的任何個人信息，其中包括姓名、聯繫方式、電子郵件地址、年齡、性別、護照、或第三方貨幣帳戶信息或其他能身份證明的文件資料、包括臉書、微信、谷歌和微博在內的第三方社交媒體網站中的信息或賬戶資料、其他的註冊、賬戶或個人資料信息、賬戶註冊期間提交的任何個人說明、以及根據本隱私政策由用戶提供的或與用戶相關的信息；</p>
 
 <p><b><i>非個人信息</i></b>是指由MATTERS採集，並通過將其與其他人的個人信息結合（將一個用戶的信息與另一個用戶的信息結合）或者通過刪除個人信息中能夠識別用戶身份的特徵信息（例如用戶姓名）的方式（對信息進行去個人化），使其無法識別具體個人的這類個人信息。</p>
 
@@ -56,7 +60,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>5.1 MATTERS可以向其附屬公司提供某些特定的個人信息，用於本隱私政策第4.2條中規定的目的，其附屬公司可以位於香港境內或者境外，並且均受本隱私政策的約束。</p>
 
-<p>5.2 MATTERS可以向位於香港境內或境外的以下人員提供某些特定的個人信息：（i）數據儲存服務提供商，目的僅限於儲存MATTERS不時收集的數據；（ii）戰略合作夥伴，包括但不限於（a）郵件公司和電子郵件服務提供商，目的僅限於郵寄和發送廣告宣傳資料；（b）托管與數據庫管理服務提供商，包括但不限於星際文件系統IPFS；（iii）服務供應商和MATTERS指定提供服務的其他第三方，包括但不限於於谷歌雲端服務、亞馬遜雲端服務等，根據合同規定所有第三方（x）禁止將個人信息用於其合同中規定的用途以外的任何目的，以及保留個人信息時間長於其合同中規定用途所需的時間；（y）應當阻止未經授權或意外的訪問、處理、刪除、丟失或使用個人信息。一旦發現個人信息不準確，應當通知第三方，並且提供詳情，以便第三方能夠更正個人信息。個人信息不會出於營銷目的與第三方共享。</p>
+<p>5.2 MATTERS可以向位於香港境內或境外的以下人員提供某些特定的個人信息：（i）數據儲存服務提供商，目的僅限於儲存MATTERS不時收集的數據；（ii）戰略合作夥伴，包括但不限於（a）郵件公司和電子郵件服務提供商，目的僅限於郵寄和發送廣告宣傳資料；（b）托管與數據庫管理服務提供商，包括但不限於星際文件系統IPFS；（iii）服務供應商和MATTERS指定提供服務的其他第三方，包括但不限於於谷歌雲端服務、亞馬遜雲端服務，虛擬貨幣運營商等根據合同規定所有第三方（x）禁止將個人信息用於其合同中規定的用途以外的任何目的，以及保留個人信息時間長於其合同中規定用途所需的時間；（y）應當阻止未經授權或意外的訪問、處理、刪除、丟失或使用個人信息。一旦發現個人信息不準確，應當通知第三方，並且提供詳情，以便第三方能夠更正個人信息。個人信息不會出於營銷目的與第三方共享。</p>
 
 <p>5.3 根據本隱私政策第5條，用戶一旦接受本隱私政策，則代表其承認、理解並同意，他或她的個人信息可能會被公開或轉移給附屬公司和/或任何此類第三方（和其員工與代表）。</p>
 
@@ -100,8 +104,12 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>10.5 MATTERS和服務的網站可能包含其他網站或應用程序的鏈接。用戶理解並承認，MATTERS和服務的網站上包含其他網站、應用程序或廣告的鏈接，並不代表MATTERS認可或授權此類第三方收集用戶個人信息，也不代表MATTERS與此類第三方之間有任何業務關係。用戶理解並承認，一旦用戶點擊與訪問此類網站、應用程序或廣告的鏈接，這些網站、應用程序和廣告有可能會收集他們的個人信息。用戶理解並承認，這些第三方網站、應用程序和廣告在收集、使用、處理或公開用戶提交的個人信息時，遵循的是不同於本隱私政策的其他規則。因此，用戶理解並承認，MATTERS不會對任何第三方進行的用戶個人信息的收集、使用、處理或公開的行為負責。</p>
   `,
   zh_hans: /* html */ `
-<h3>隐私政策</h3>
-<p><small>更新日期：2019 年 3 月 14 日</small></p>
+<details class="u-content u-details">
+<summary>
+  <h3>隐私政策</h3>
+</summary>
+
+  <p><small>更新日期：2019 年 10 月 15 日</small></p>
 <p>本隐私政策（隐私政策）最后更新于上述日期，并且将不时更新。本隐私政策的任何变更将于公布本政策的修订政策后生效。本隐私政策旨在告知所有用户，MATTERS LAB LIMITED（以下简称「MATTERS」）将如何处理个人信息与非个人信息。如有用户不同意本隐私政策中的任何一部分，则MATTERS将无法向此类用户提供服务，而此类用户也应当停止访问服务。</p>
 
 <p><b><u>1. 定义</u></b></p>
@@ -112,7 +120,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>PDPO 是指不时修订的香港特别行政区法第486章个人资料（隐私）条例；</p>
 
-<p><b><i>个人信息</i></b>是指由MATTERS从用户处收集，或者由MATTERS以其他方式保存的涉及能够识别出个人身份的任何个人信息，其中包括姓名、联系方式、电子邮件地址、年龄、性别、护照或其他能身份证明的文件资料、包括脸书、微信、谷歌和微博在内的第三方社交媒体网站中的信息或账户资料、其他的注册、账户或个人资料信息、账户注册期间提交的任何个人说明、以及根据本隐私政策由用户提供的或与用户相关的信息；</p>
+<p><b><i>个人信息</i></b>是指由MATTERS从用户处收集，或者由MATTERS以其他方式保存的涉及能够识别出个人身份的任何个人信息，其中包括姓名、联系方式、电子邮件地址、年龄、性别、护照或第三方货币帐户信息或其他能身份证明的文件资料、包括脸书、微信、谷歌和微博在内的第三方社交媒体网站中的信息或账户资料、其他的注册、账户或个人资料信息、账户注册期间提交的任何个人说明、以及根据本隐私权政策由用户提供的或与用户相关的信息；</p>
 
 <p><b><i>非个人信息</i></b>是指由MATTERS采集，并通过将其与其他人的个人信息结合（将一个用户的信息与另一个用户的信息结合）或者通过删除个人信息中能够识别用户身份的特征信息（例如用户姓名）的方式（对信息进行去个人化），使其无法识别具体个人的这类个人信息。</p>
 
@@ -156,7 +164,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>5.1 MATTERS可以向其附属公司提供某些特定的个人信息，用于本隐私政策第4.2条中规定的目的，其附属公司可以位于香港境内或者境外，并且均受本隐私政策的约束。</p>
 
-<p>5.2 MATTERS可以向位于香港境内或境外的以下人员提供某些特定的个人信息：（i）数据储存服务提供商，目的仅限于储存MATTERS不时收集的数据；（ii）战略合作伙伴，包括但不限于（a）邮件公司和电子邮件服务提供商，目的仅限于邮寄和发送广告宣传资料；（b）托管与数据库管理服务提供商，包括但不限于星际文件系统IPFS；（iii）服务供应商和MATTERS指定提供服务的其他第三方，包括但不限于于谷歌云端服务、亚马逊云端服务等，根据合同规定所有第三方（x）禁止将个人信息用于其合同中规定的用途以外的任何目的，以及保留个人信息时间长于其合同中规定用途所需的时间；（y）应当阻止未经授权或意外的访问、处理、删除、丢失或使用个人信息。一旦发现个人信息不准确，应当通知第三方，并且提供详情，以便第三方能够更正个人信息。个人信息不会出于营销目的与第三方共享。</p>
+<p>5.2 MATTERS可以向位于香港境内或境外的以下人员提供某些特定的个人信息：（i）数据储存服务提供商，目的仅限于储存MATTERS不时收集的数据；（ii）战略合作伙伴，包括但不限于（a）邮件公司和电子邮件服务提供商，目的仅限于邮寄和发送广告宣传资料；（b）托管与数据库管理服务提供商，包括但不限于星际文件系统IPFS；（iii）服务供应商和MATTERS指定提供服务的其他第三方，包括但不限于谷歌云端服务、亚马逊云端服务、虚拟货币运营商等，根据合同规定所有第三方（x）禁止将个人信息用于其合同中规定的用途以外的任何目的，以及保留个人信息时间长于其合同中规定用途所需的时间；（y）应当阻止未经授权或意外的访问、处理、删除、丢失或使用个人信息。一旦发现个人信息不准确，应当通知第三方，并且提供详情，以便第三方能够更正个人信息。个人信息不会出于营销目的与第三方共享。</p>
 
 <p>5.3 根据本隐私政策第5条，用户一旦接受本隐私政策，则代表其承认、理解并同意，他或她的个人信息可能会被公开或转移给附属公司和/或任何此类第三方（和其员工与代表）。</p>
 
@@ -198,10 +206,15 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>10.4 用户理解并承认，用户发布与转发内容的风险由用户自己承担。虽然MATTERS会限制用户对某些页面的访问，但用户承认没有任何安全措施是完美的万无一失的。另外，用户理解并承认，MATTERS无法控制其用户选择与谁共享内容。因此，用户理解并承认，MATTERS不能也不保证其用户内容一定不会被未经授权的人浏览。</p>
 
 <p>10.5 MATTERS和服务的网站可能包含其他网站或应用程序的链接。用户理解并承认，MATTERS和服务的网站上包含其他网站、应用程序或广告的链接，并不代表MATTERS认可或授权此类第三方收集用户个人信息，也不代表MATTERS与此类第三方之间有任何业务关系。用户理解并承认，一旦用户点击与访问此类网站、应用程序或广告的链接，这些网站、应用程序和广告有可能会收集他们的个人信息。用户理解并承认，这些第三方网站、应用程序和广告在收集、使用、处理或公开用户提交的个人信息时，遵循的是不同于本隐私政策的其他规则。因此，用户理解并承认，MATTERS不会对任何第三方进行的用户个人信息的收集、使用、处理或公开的行为负责。</p>
+</details>
   `,
-  en: `
-<h3>Privacy Policy </h3>
-<p>Last updated: <i>14 March, 2019</i></p>
+  en: /* html */ `
+<details class="u-content u-details">
+<summary>
+  <h3>Privacy Policy </h3>
+</summary>
+
+<p>Last updated: <i>15 October, 2019</i></p>
 <p>This privacy policy (the <b><i>Privacy Policy</i></b>) was last updated on the date above and shall be updated from time to time. Any changes to this Privacy Policy will become effective upon posting of the revised policy hereunder. This Privacy Policy is intended to inform all Users about how the Data Controller treats Personal Information and Non-personal Information. If any User does not agree with any part of this Privacy Policy, then the Data Controller cannot provide the Services to such User, and such User should stop accessing the same.</p>
 
 <p><b><u>1. DEFINITIONS</u></b></p>
@@ -212,7 +225,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p><b><i>PDPO</i></b> means the Personal Data (Privacy) Ordinance, Chapter 486 of the Laws of the Hong Kong Special Administrative Region, as amended from time to time; </p>
 
-<p><b><i>Personal Information</i></b> means information collected from the Users by the Data Controller or otherwise held by the Data Controller, relating to any personal information that can be used to identify such Users as individuals, including among others, names, contact details, email addresses, age, gender, passport or other identification document details, information or account details in third-party social media sites, including Facebook, WeChat, Weixin, Google and Weibo, other registration, account or profile information and any other such personal description provided during registration of the Account, and any information provided by or in relation to such Users pursuant to this Privacy Policy; and </p>
+<p><b><i>Personal Information</i></b> means information collected from the Users by the Data Controller or otherwise held by the Data Controller, relating to any personal information that can be used to identify such Users as individuals, including among others, names, contact details, email addresses, age, gender, passport or other identification document details, information or Third Party Coins ID or account details in third-party social media sites, including Facebook, WeChat, Weixin, Google and Weibo, other registration, account or profile information and any other such personal description provided during registration of the Account, and any information provided by or in relation to such Users pursuant to this Privacy Policy; and</p>
 
 <p><b><i>Non-personal Information</i></b> means any such Personal Information which the Data Controller takes and makes it non-personally identifiable, either by combining it with information about other individuals (aggregating one User’s information with another User’s information), or by removing characteristics (such as User’s name) that make the information personally identifiable to such User (hence de-personalizing the information).</p>
 
@@ -256,7 +269,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>5.1 The Data Controller may make certain Personal Information available to its Affiliates for the purposes as stated under clause 4.2 of this Privacy Policy, who may be situated within or outside Hong Kong and all of whom are bound by this Privacy Policy.</p>
 
-<p>5.2 The Data Controller may make certain Personal Information available to below persons, who may be situated within or outside Hong Kong: (i) data storage service providers, for the sole purpose of storing data which the Data Controller collected from time to time; (ii) strategic business partners, including but not limited to (a) mail houses and email service providers, for the sole purpose of mailing and dissemination of its promotional materials; and (b) hosting and database management service providers, including but not limited to IPFS; and (iii) suppliers of the Services and other third parties appointed by the Data Controller to perform the Services, including but not limited to Google Cloud Service, Amazon Web Service, all of whom are contractually (x) prohibited from using the Personal Information for any purpose other than for the purpose(s) specified in their respective contracts and keeping Personal Information longer than is necessary for the fulfillment of such purpose(s) specified in their respective contracts; and (y) required to prevent unauthorized or accidental access, processing, erasure, loss or use of the Personal Information. Such third parties shall be informed if the Personal Information is discovered to be inaccurate and shall be provided with such particulars as will enable such third party to correct the Personal Information having regard to such purpose(s). Personal Information will not be shared with third parties for their own marketing purposes. </p>
+<p>5.2 The Data Controller may make certain Personal Information available to below persons, who may be situated within or outside Hong Kong: (i) data storage service providers, for the sole purpose of storing data which the Data Controller collected from time to time; (ii) strategic business partners, including but not limited to (a) mail houses and email service providers, for the sole purpose of mailing and dissemination of its promotional materials; and (b) hosting and database management service providers, including but not limited to IPFS; and (iii) suppliers of the Services and other third parties appointed by the Data Controller to perform the Services, including but not limited to Google Cloud Service, Amazon Web Service, cryptocurrency operator, all of whom are contractually (x) prohibited from using the Personal Information for any purpose other than for the purpose(s) specified in their respective contracts and keeping Personal Information longer than is necessary for the fulfillment of such purpose(s) specified in their respective contracts; and (y) required to prevent unauthorized or accidental access, processing, erasure, loss or use of the Personal Information. Such third parties shall be informed if the Personal Information is discovered to be inaccurate and shall be provided with such particulars as will enable such third party to correct the Personal Information having regard to such purpose(s). Personal Information will not be shared with third parties for their own marketing purposes. </p>
 
 <p>5.3 By accepting this Privacy Policy, each User acknowledges, understands and agrees that his or her Personal Information may be disclosed or transferred to Affiliates and/or any such third parties (and their respective employees and representatives) under clause 5 of this Privacy Policy. </p>
 
@@ -298,6 +311,8 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>10.4 The Users understand and acknowledge that their User Contents are posted on and transmitted to others at their own risk. Although the Data Controller limits access to certain pages, the Users acknowledge that no security measures are perfect or impenetrable. Additionally, the Users understand and acknowledge that the Data Controller cannot control the actions of other Users with whom the Users may choose to share their User Contents. Therefore, the Users understand and acknowledge that the Data Controller cannot and do not guarantee that their User Contents will not be reviewed by unauthorized persons. </p>
 
 <p>10.5 The website of the Data Controller and the Services may contain links to other websites or applications. The Users understand and acknowledge that the fact that the website of the Data Controller and the Services link to a website, application or advertisement does not mean that the Data Controller endorses or authorises the collection of personal information from the Users of such third parties, nor does it constitutes a representation of any affiliation between the Data Controller and such third parties. The Users understand and acknowledge that, once the Users click on a link to third-party websites, applications or advertisements, they will access third-party websites, applications and advertisements which may collect information from such Users. The Users understand and acknowledge that such third-party websites, applications and advertisements follow different rules regarding the collection, use, processing or disclosure of the personal information such Users submit to them. Hence, the Users understand and acknowledge that the Data Controller shall not be responsible for any collection, use, processing or disclosure of personal information of Users by such third parties. </p>
+
+</details>
   `
 }
 

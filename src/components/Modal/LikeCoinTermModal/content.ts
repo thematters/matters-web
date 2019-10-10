@@ -8,7 +8,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
 
 <p>當你點擊同意升級，我們將開始為你提供以上轉軌服務。未來，在 Matters 發佈作品、讚賞他人，都需要擁有一個 LikeCoin 帳戶。若你不同意以上升級，你在 Matters 的歷史作品依然可以收到 LikeCoin 讚賞，但無法進行收益管理，未來也無法使用 Matters 的所有服務。</p>
 
-<p>了解更多創作收益的管理細節，請參考我們的 <a target="/guide" class="u-link-green" target="_blank" >新手指南</a>。</p>
+<p>了解更多創作收益的管理細節，請參考我們的 <a href="/guide" class="u-link-green" target="_blank" >新手指南</a>。</p>
   `,
   zh_hans: /* html */ `
   <p><strong>亲爱的 Matty，</strong></p>
@@ -19,7 +19,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
 
   <p>当你点击同意升级，我们将开始为你提供以上转轨服务。未来，在 Matters 发布作品、赞赏他人，都需要拥有一个 LikeCoin 帐户。若你不同意以上升级，你在 Matters 的历史作品依然可以收到 LikeCoin 赞赏，但无法进行收益管理，未来也无法使用 Matters 的所有服务。</p>
 
-  <p>了解更多创作收益的管理细节，请参考我们的 <a target="/guide" class="u-link-green" target="_blank" >新手指南</a>。</p>
+  <p>了解更多创作收益的管理细节，请参考我们的 <a href="/guide" class="u-link-green" target="_blank" >新手指南</a>。</p>
   `
 }
 
