@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-article {
+.u-details {
   & summary {
     position: relative;
     display: block;
@@ -23,17 +23,15 @@ article {
   }
 
   & details {
-    & details {
-      padding-left: var(--spacing-default);
+    padding-left: var(--spacing-default);
 
-      & summary {
-        padding-left: var(--spacing-tight);
+    & summary {
+      padding-left: var(--spacing-tight);
 
-        &::-webkit-details-marker {
-          top: 0.4rem;
-          width: 0.5rem;
-          height: 0.5rem;
-        }
+      &::-webkit-details-marker {
+        top: 0.4rem;
+        width: 0.5rem;
+        height: 0.5rem;
       }
     }
   }
