@@ -49,7 +49,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
-      return undefined
+      return
     }
 
     const file = event.target.files[0]
@@ -57,7 +57,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
 
     if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
-      return undefined
+      return
     }
 
     upload({
@@ -86,7 +86,7 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
     event.stopPropagation()
 
     if (!update || !user.info.profileCover) {
-      return undefined
+      return
     }
 
     update({ variables: { input: { profileCover: null } } })

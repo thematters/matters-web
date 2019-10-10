@@ -189,7 +189,7 @@ export const PasswordChangeConfirmForm: FC<Props> = ({
       const { password } = values
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
       submitAction({ variables: { input: { password, codeId } } })
         .then(({ data }: any) => {

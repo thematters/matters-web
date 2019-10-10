@@ -108,7 +108,7 @@ const TermModal: FC<ModalInstanceProps> = ({ close }) => {
     handleSubmit: (values, { props, setSubmitting }: any) => {
       const { submitAction } = props
       if (!submitAction) {
-        return undefined
+        return
       }
       submitAction({ variables: { input: { agreeOn: true } } })
         .then((result: any) => {

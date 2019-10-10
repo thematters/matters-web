@@ -44,7 +44,7 @@ class ImageDrop {
             }
           })
         )
-        return undefined
+        return
       }
       const file = event.dataTransfer.files[0]
       if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
@@ -60,7 +60,7 @@ class ImageDrop {
             }
           })
         )
-        return undefined
+        return
       }
       const assets = await this.handleFiles(file)
       assets.forEach(({ id, path }: { [key: string]: any }) =>

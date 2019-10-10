@@ -8,22 +8,28 @@ import styles from './styles.css'
 
 interface ModalHeaderProps {
   title: string | React.ReactNode
+  close?: () => void
   closeable?: boolean
 }
 
 const ModalHeader: React.FC<ModalHeaderProps> = ({
   title,
+  close,
   closeable = true,
   children
 }) => (
   <ModalContext.Consumer>
-    {({ close }) => (
+    {({ close: defaultClose }) => (
       <header>
         <Title type="modal">{title || children}</Title>
         {closeable && (
           <button
             onClick={() => {
-              close()
+              if (close) {
+                close()
+              } else {
+                defaultClose()
+              }
             }}
           >
             <Icon

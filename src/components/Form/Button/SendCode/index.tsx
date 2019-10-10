@@ -52,7 +52,7 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
     event.stopPropagation()
 
     if (!send || !params.email || countdown.timeLeft !== 0) {
-      return undefined
+      return
     }
 
     send({
