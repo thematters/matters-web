@@ -265,6 +265,7 @@ const ArticleDetail = ({
                       )}
 
                       <Block type="section">
+                        {shouldShowWall && (<section id="comments"/>)}
                         {!shouldShowWall && (
                           <>
                             <Responses
