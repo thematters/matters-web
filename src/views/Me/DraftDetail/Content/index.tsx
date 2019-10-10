@@ -68,7 +68,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
 
   return (
     <Mutation mutation={UPDATE_DRAFT}>
-      {updateDraft => (
+      {(updateDraft: any) => (
         <>
           <header className={isPending || isPublished ? 'u-area-disable' : ''}>
             <input
@@ -97,7 +97,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
             />
           </header>
           <Mutation mutation={UPLOAD_FILE}>
-            {(singleFileUpload, { loading: uploading }) => (
+            {(singleFileUpload: any, { loading: uploading }: any) => (
               <Editor
                 upload={async input => {
                   const result = await singleFileUpload({

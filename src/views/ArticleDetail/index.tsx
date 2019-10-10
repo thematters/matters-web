@@ -320,7 +320,7 @@ const ArticleDetailContainer = () => {
 
   return (
     <Query query={CLIENT_PREFERENCE} variables={{ id: 'local' }}>
-      {({ data }) => {
+      {({ data }: any) => {
         const { wall } = _get(data, 'clientPreference', { wall: true })
         return <ArticleDetail mediaHash={mediaHash} wall={wall} />
       }}

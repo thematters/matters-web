@@ -59,7 +59,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
 
   return (
     <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
-      {(putDraft, { loading }) => {
+      {(putDraft: any, { loading }: any) => {
         const WriteIcon = () => {
           const icon = loading ? ICON_SPINNER : ICON_WRITE
           return (
@@ -71,7 +71,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
           )
         }
         const onClick = () => {
-          putDraft().then(result => {
+          putDraft().then((result: any) => {
             const { data } = result as { data: CreateDraft }
             const { slug, id } = data.putDraft
             const path = toPath({ page: 'draftDetail', slug, id })

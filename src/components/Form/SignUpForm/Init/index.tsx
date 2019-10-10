@@ -390,9 +390,9 @@ export const SignUpInitForm: FC<Props> = ({
 
   return (
     <Mutation mutation={CONFIRM_CODE}>
-      {confirm => (
+      {(confirm: any) => (
         <Mutation mutation={USER_REGISTER}>
-          {register => (
+          {(register: any) => (
             <MainForm preSubmitAction={confirm} submitAction={register} />
           )}
         </Mutation>

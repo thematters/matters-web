@@ -134,7 +134,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
 
             return (
               <Mutation mutation={SET_DRAFT_COLLECTION}>
-                {setCollection => (
+                {(setCollection: any) => (
                   <CollectionEditor
                     articles={edges.map(({ node }: { node: any }) => node)}
                     onEdit={handleCollectionChange(setCollection)}

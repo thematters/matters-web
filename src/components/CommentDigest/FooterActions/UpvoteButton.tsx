@@ -60,7 +60,7 @@ const UpvoteButton = ({
           }
         }}
       >
-        {(unvote, { data }) => (
+        {(unvote: any, { data }: any) => (
           <button type="button" onClick={() => unvote()} disabled={disabled}>
             <TextIcon
               icon={<IconLikeActive />}
@@ -88,7 +88,7 @@ const UpvoteButton = ({
         }
       }}
     >
-      {(upvote, { data }) => (
+      {(upvote: any, { data }: any) => (
         <button type="button" onClick={() => upvote()} disabled={disabled}>
           <TextIcon
             icon={<IconLikeInactive />}

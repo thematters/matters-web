@@ -122,7 +122,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
       </Menu.Item>
       <Menu.Item>
         <Mutation mutation={USER_LOGOUT}>
-          {logout => (
+          {(logout: any) => (
             <button
               type="button"
               onClick={async () => {

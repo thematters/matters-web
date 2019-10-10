@@ -5,8 +5,6 @@ import { Mutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
-import { ViewerDrafts } from './__generated__/ViewerDrafts'
-
 const DELETE_DRAFT = gql`
   mutation DeleteDraft($id: ID!) {
     deleteDraft(input: { id: $id })
@@ -33,9 +31,9 @@ const DeleteButton = ({ id }: { id: string }) => {
     <Mutation
       mutation={DELETE_DRAFT}
       variables={{ id }}
-      update={cache => {
+      update={(cache: any) => {
         try {
-          const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
+          const data = cache.readQuery({ query: ME_DRADTS })
 
           if (
             !data ||
@@ -67,7 +65,7 @@ const DeleteButton = ({ id }: { id: string }) => {
         }
       }}
     >
-      {deleteDraft => (
+      {(deleteDraft: any) => (
         <button type="button" onClick={() => deleteDraft()}>
           <Translate
             zh_hant={TEXT.zh_hant.delete}

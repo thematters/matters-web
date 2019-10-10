@@ -38,7 +38,7 @@ export default () => {
           mutation={READ_FOLLOWEE_ARTICLES}
           update={viewerUnreadFolloweeArticles}
         >
-          {readFolloweeArticles => (
+          {(readFolloweeArticles: any) => (
             <Query query={ME_FOLLOW}>
               {({ data, loading, error }: QueryResult & { data: MeFollow }) => {
                 if (loading) {

@@ -37,7 +37,7 @@ const Subscribe = ({
       }
     }}
   >
-    {(subscribe, { data }) => (
+    {(subscribe: any, { data }: any) => (
       <button
         type="button"
         aria-label="收藏"

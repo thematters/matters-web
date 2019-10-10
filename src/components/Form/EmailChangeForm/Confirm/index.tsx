@@ -212,9 +212,9 @@ export const EmailChangeConfirmForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={CONFIRM_CODE}>
-        {confirm => (
+        {(confirm: any) => (
           <Mutation mutation={CHANGE_EMAIL}>
-            {update => (
+            {(update: any) => (
               <MainForm preSubmitAction={confirm} submitAction={update} />
             )}
           </Mutation>

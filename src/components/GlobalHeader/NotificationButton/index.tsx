@@ -99,7 +99,7 @@ export default () => (
             mutation={MARK_ALL_NOTICES_AS_READ}
             update={updateViewerUnreadNoticeCount}
           >
-            {markAllNoticesAsRead => (
+            {(markAllNoticesAsRead: any) => (
               <NoticeButton
                 data={data}
                 loading={loading}

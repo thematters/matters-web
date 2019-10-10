@@ -37,7 +37,7 @@ const fragments = {
 
 export const Layout: React.FC<LayoutProps> & {
   fragments: typeof fragments
-} = ({ children, loading, user, error }) => {
+} = ({ children, loading, user, error }: any) => {
   if (loading) {
     return null
   }

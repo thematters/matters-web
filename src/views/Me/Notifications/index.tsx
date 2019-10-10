@@ -62,7 +62,7 @@ const Notifications = () => (
                 mutation={MARK_ALL_NOTICES_AS_READ}
                 update={updateViewerUnreadNoticeCount}
               >
-                {markAllNoticesAsRead => {
+                {(markAllNoticesAsRead: any) => {
                   useEffect(() => {
                     markAllNoticesAsRead()
                   }, [])

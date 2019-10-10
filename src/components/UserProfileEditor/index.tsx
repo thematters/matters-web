@@ -224,7 +224,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
             <ProfileAvatarUploader user={user} />
             <section className="info">
               <Mutation mutation={UPDATE_USER_INFO}>
-                {update => <MainForm submitAction={update} />}
+                {(update: any) => <MainForm submitAction={update} />}
               </Mutation>
             </section>
           </section>

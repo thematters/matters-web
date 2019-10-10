@@ -1,12 +1,6 @@
 import _get from 'lodash/get'
 import React from 'react'
-import {
-  MutationFn,
-  MutationProps,
-  MutationResult,
-  QueryProps,
-  QueryResult
-} from 'react-apollo'
+import { MutationResult, QueryResult } from 'react-apollo'
 
 import { checkError } from './error'
 
@@ -15,7 +9,7 @@ export const QueryErrorHandler = ({
   children
 }: {
   result: QueryResult
-  children: QueryProps['children']
+  children: any
 }) => {
   if (result.error) {
     checkError(result.error)
@@ -30,10 +24,10 @@ export const MutationErrorHandler = ({
   children
 }: {
   result: MutationResult
-  mutateFn: MutationFn
-  children: MutationProps['children']
+  mutateFn: any
+  children: any
 }) => {
-  const mutateWithCatch: MutationFn = async options => {
+  const mutateWithCatch: any = async (options: any) => {
     try {
       const mutationResult = await mutateFn(options)
       return mutationResult
