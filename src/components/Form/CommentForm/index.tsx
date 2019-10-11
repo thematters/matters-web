@@ -88,12 +88,12 @@ const CommentForm = ({
         id: commentDraftId
       }}
     >
-      {({ data: commentDraftData, client }) => {
+      {({ data: commentDraftData, client }: any) => {
         const draftContent = _get(commentDraftData, 'commentDraft.content', '')
 
         return (
           <Mutation mutation={PUT_COMMENT} refetchQueries={refetchQueries}>
-            {putComment => {
+            {(putComment: any) => {
               const [isSubmitting, setSubmitting] = useState(false)
               const [expand, setExpand] = useState(defaultExpand || false)
               const [content, setContent] = useState(

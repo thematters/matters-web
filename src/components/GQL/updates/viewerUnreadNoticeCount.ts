@@ -1,11 +1,8 @@
-import { MutationUpdaterFn } from 'react-apollo'
-
-import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 
-const update: MutationUpdaterFn<any> = cache => {
+const update = (cache: any) => {
   try {
-    const cacheData = cache.readQuery<UnreadNoticeCount>({
+    const cacheData = cache.readQuery({
       query: UNREAD_NOTICE_COUNT
     })
 

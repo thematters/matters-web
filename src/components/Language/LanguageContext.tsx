@@ -39,7 +39,7 @@ export const LanguageProvider = ({
 
   return (
     <Mutation mutation={UPDATE_VIEWER_LANGUAGE}>
-      {updateLanguage => (
+      {(updateLanguage: any) => (
         <LanguageContext.Provider
           value={{
             lang: viewerLanguage || lang,

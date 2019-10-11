@@ -66,7 +66,7 @@ export const PublishModal: FC<Props> = ({ close, draft }) => {
             }
           }}
         >
-          {(publish, loading) => (
+          {(publish: any, loading: any) => (
             <Modal.FooterButton
               disabled={!publishable}
               onClick={async () => {

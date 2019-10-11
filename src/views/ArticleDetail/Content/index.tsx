@@ -76,7 +76,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
         }
       `}
     >
-      {read => (
+      {(read: any) => (
         <>
           <FireOnMount
             fn={() => {

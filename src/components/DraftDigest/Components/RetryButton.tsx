@@ -18,7 +18,7 @@ const RETRY_PUBLISH = gql`
 const RetryButton = ({ id }: { id: string }) => {
   return (
     <Mutation mutation={RETRY_PUBLISH} variables={{ id }}>
-      {retry => (
+      {(retry: any) => (
         <button
           type="button"
           onClick={() =>

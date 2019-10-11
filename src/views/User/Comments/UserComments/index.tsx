@@ -82,7 +82,7 @@ const UserCommentsWrap = () => {
 
   return (
     <Query query={USER_ID} variables={{ userName }}>
-      {({ data, loading, error }) => {
+      {({ data, loading, error }: any) => {
         if (loading) {
           return <Placeholder.ArticleDigestList />
         }

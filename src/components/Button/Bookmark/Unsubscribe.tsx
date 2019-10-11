@@ -37,7 +37,7 @@ const Unsubscribe = ({
       }
     }}
   >
-    {(unsubscribe, { data }) => (
+    {(unsubscribe: any, { data }: any) => (
       <button
         type="button"
         aria-label="收藏"

@@ -100,7 +100,7 @@ const PinButton = ({
           }
         }}
       >
-        {unpinComment => (
+        {(unpinComment: any) => (
           <button
             type="button"
             onClick={() => {
@@ -128,7 +128,7 @@ const PinButton = ({
         }
       }}
     >
-      {pinComment => (
+      {(pinComment: any) => (
         <button
           type="button"
           onClick={() => {

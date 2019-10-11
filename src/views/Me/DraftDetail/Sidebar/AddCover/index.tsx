@@ -103,7 +103,7 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
       </p>
       <section className={containerStyle}>
         <Mutation mutation={UPDATE_COVER}>
-          {update => (
+          {(update: any) => (
             <CoverList
               draftId={draftId}
               updateHeaderState={updateHeaderState}

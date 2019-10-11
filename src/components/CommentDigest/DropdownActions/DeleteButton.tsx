@@ -34,7 +34,7 @@ const DeleteButton: React.FC<{
         }
       }}
     >
-      {deleteComment => (
+      {(deleteComment: any) => (
         <button
           type="button"
           onClick={() => {

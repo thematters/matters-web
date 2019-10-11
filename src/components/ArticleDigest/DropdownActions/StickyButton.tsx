@@ -80,7 +80,7 @@ const StickyButton = ({
           __typename: 'Article'
         }
       }}
-      update={cache => {
+      update={(cache: any) => {
         updateUserArticles({
           cache,
           articleId: article.id,
@@ -89,7 +89,7 @@ const StickyButton = ({
         })
       }}
     >
-      {update => (
+      {(update: any) => (
         <button
           type="button"
           onClick={() => {

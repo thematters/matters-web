@@ -29,7 +29,7 @@ const RecallButton = ({ id, text }: { id: string; text?: React.ReactNode }) => {
         }
       }}
     >
-      {recall => (
+      {(recall: any) => (
         <button type="button" onClick={() => recall()}>
           {text || (
             <Translate

@@ -1,11 +1,8 @@
-import { MutationUpdaterFn } from 'react-apollo'
-
-import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
 
-const update: MutationUpdaterFn<any> = cache => {
+const update = (cache: any) => {
   try {
-    const data = cache.readQuery<UnreadFolloweeArticles>({
+    const data = cache.readQuery({
       query: UNREAD_FOLLOWEE_ARTICLES
     })
 

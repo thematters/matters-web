@@ -19,6 +19,6 @@ export const Protected: React.FC = ({ children }) => {
   useEffect(() => {
     redirectToLogin()
   }, [])
-  
+
   return <Spinner />
 }

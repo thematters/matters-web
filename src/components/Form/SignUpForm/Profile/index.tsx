@@ -249,7 +249,7 @@ export const SignUpProfileForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={UPDATE_USER_INFO}>
-        {update => <MainForm submitAction={update} />}
+        {(update: any) => <MainForm submitAction={update} />}
       </Mutation>
 
       <style jsx>{styles}</style>

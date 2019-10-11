@@ -42,7 +42,7 @@ const ArchiveButton = ({
           __typename: 'Article'
         }
       }}
-      update={cache => {
+      update={(cache: any) => {
         updateUserArticles({
           cache,
           articleId: article.id,
@@ -51,7 +51,7 @@ const ArchiveButton = ({
         })
       }}
     >
-      {archiveArticle => (
+      {(archiveArticle: any) => (
         <button
           type="button"
           onClick={() => {

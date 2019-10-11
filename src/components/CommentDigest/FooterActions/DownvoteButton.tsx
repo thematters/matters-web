@@ -60,7 +60,7 @@ const DownvoteButton = ({
           }
         }}
       >
-        {(unvote, { data }) => (
+        {(unvote: any, { data }: any) => (
           <button type="button" onClick={() => unvote()} disabled={disabled}>
             <TextIcon
               icon={<IconDislikeActive />}
@@ -88,7 +88,7 @@ const DownvoteButton = ({
         }
       }}
     >
-      {(downvote, { data }) => (
+      {(downvote: any, { data }: any) => (
         <button type="button" onClick={() => downvote()} disabled={disabled}>
           <TextIcon
             icon={<IconDislikeInactive />}

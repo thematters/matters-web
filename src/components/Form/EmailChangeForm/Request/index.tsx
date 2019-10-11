@@ -181,7 +181,7 @@ export const EmailChangeRequestForm: FC<Props> = ({
   return (
     <>
       <Mutation mutation={CONFIRM_CODE}>
-        {confirmCode => <MainForm submitAction={confirmCode} />}
+        {(confirmCode: any) => <MainForm submitAction={confirmCode} />}
       </Mutation>
       <style jsx>{styles}</style>
     </>

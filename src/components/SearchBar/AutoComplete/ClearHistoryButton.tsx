@@ -5,7 +5,6 @@ import { Translate } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
 import styles from './styles.css'
 
 const fragments = {
@@ -47,9 +46,9 @@ const VIEWER_RECENT_SEARCHES = gql`
 const ClearHistoryButton = () => (
   <Mutation
     mutation={CLEAR_HISTORY}
-    update={cache => {
+    update={(cache: any) => {
       try {
-        const data = cache.readQuery<ViewerRecentSearches>({
+        const data = cache.readQuery({
           query: VIEWER_RECENT_SEARCHES
         })
 
@@ -82,7 +81,7 @@ const ClearHistoryButton = () => (
       }
     }}
   >
-    {clear => (
+    {(clear: any) => (
       <button
         type="button"
         className="clear-history-btn"
