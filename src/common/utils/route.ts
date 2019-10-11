@@ -141,6 +141,10 @@ export const getTarget = (url?: string) => {
   return target
 }
 
+export const getEncodedCurrent = () => {
+  return encodeURIComponent(window.location.href)
+}
+
 /**
  * Redirect to "?target=" or fallback URL with page reload.
  *
@@ -151,7 +155,10 @@ export const redirectToTarget = ({
 }: {
   fallback?: 'homepage' | 'current'
 } = {}) => {
-  const fallbackTarget = fallback === 'homepage' ? '/' : window.location.href
+  const fallbackTarget =
+    fallback === 'homepage'
+      ? `/?t=${Date.now()}` // FIXME: to purge cache
+      : window.location.href
   const target = getTarget() || fallbackTarget
 
   window.location.href = decodeURIComponent(target)
@@ -163,7 +170,7 @@ export const redirectToTarget = ({
  * (works on CSR)
  */
 export const redirectToLogin = () => {
-  const target = getTarget() || encodeURIComponent(window.location.href)
+  const target = getTarget() || getEncodedCurrent()
 
   return Router.push(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
@@ -176,11 +183,20 @@ export const redirectToLogin = () => {
  *
  * (works on SSR & CSR)
  */
-export const appendTarget = ({ href, as }: { href: string; as: string }) => {
+export const appendTarget = ({
+  href,
+  as,
+  fallbackCurrent
+}: {
+  href: string
+  as: string
+  fallbackCurrent?: boolean
+}) => {
   let target = ''
 
   if (process.browser) {
     target = getTarget()
+    target = fallbackCurrent ? getEncodedCurrent() : target
   }
 
   if (target) {

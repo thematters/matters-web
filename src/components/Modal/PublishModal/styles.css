@@ -41,7 +41,7 @@
     }
 
     &::before {
-      content: '\2022';
+      content: attr(data-content);
       position: absolute;
       top: 0;
       left: 2.5rem;
