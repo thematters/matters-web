@@ -28,10 +28,16 @@ export type PopperInstance = Instance
 
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
+  arrow: false,
   trigger: 'mouseenter focus click',
   interactive: true,
   distance: 4,
   placement: 'bottom',
+  popperOptions: {
+    // https://github.com/atomiks/tippyjs/blob/master/MIGRATION_GUIDE.md#if-you-were-using-interactive-true
+    positionFixed: true
+  },
+  animation: 'shift-away',
   animateFill: false,
   theme: 'dropdown',
   boundary: 'window',
@@ -44,6 +50,7 @@ Tooltip.defaultProps = {
   interactive: false,
   distance: 12,
   placement: 'right',
+  animation: 'shift-away',
   animateFill: false,
   theme: 'tooltip',
   boundary: 'window',
@@ -56,6 +63,7 @@ Popover.defaultProps = {
   interactive: true,
   distance: 16,
   placement: 'right',
+  animation: 'shift-away',
   animateFill: false,
   theme: 'popover',
   boundary: 'window',
