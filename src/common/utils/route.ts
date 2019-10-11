@@ -156,7 +156,9 @@ export const redirectToTarget = ({
   fallback?: 'homepage' | 'current'
 } = {}) => {
   const fallbackTarget =
-    fallback === 'homepage' ? `/?t=${Date.now()}` : window.location.href
+    fallback === 'homepage'
+      ? `/?t=${Date.now()}` // FIXME: to purge cache
+      : window.location.href
   const target = getTarget() || fallbackTarget
 
   window.location.href = decodeURIComponent(target)
