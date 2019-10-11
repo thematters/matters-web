@@ -58,7 +58,7 @@ header {
   & > :global(> *) {
     display: inline-block;
   }
-  & > :global(* + *) {
+  & > :global(* + *:not(.tippy-popper)) {
     margin-left: var(--spacing-tight);
 
     @media (--sm-up) {
