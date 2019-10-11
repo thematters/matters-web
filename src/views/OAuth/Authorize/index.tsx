@@ -125,16 +125,19 @@ const OAuthAuthorize = () => {
                     <span>
                       <Translate zh_hant="不是你？" zh_hans="不是你？" />
                     </span>
-                    <Link
-                      {...appendTarget({
-                        ...PATHS.AUTH_LOGIN,
-                        fallbackCurrent: true
-                      })}
-                    >
-                      <a className="u-link-green">
-                        <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
-                      </a>
-                    </Link>
+                    {/* FIXME: only render at CSR to get correct `appendTarget` */}
+                    {process.browser && (
+                      <Link
+                        {...appendTarget({
+                          ...PATHS.AUTH_LOGIN,
+                          fallbackCurrent: true
+                        })}
+                      >
+                        <a className="u-link-green">
+                          <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
+                        </a>
+                      </Link>
+                    )}
                   </p>
                 </section>
 
