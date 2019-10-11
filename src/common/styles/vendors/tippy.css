@@ -93,8 +93,7 @@
 }
 
 /**
- * reset
- * https://github.com/atomiks/tippyjs/blob/master/src/scss/index.scss
+ * Custom Styles
  */
 :root {
   /*
@@ -118,7 +117,7 @@
   padding: 0;
 }
 
-/* dropdown */
+/* theme:dropdown */
 .tippy-tooltip.dropdown-theme {
   color: var(--color-black);
   border-radius: 2px;
@@ -127,91 +126,92 @@
   border: 1px solid var(--popper-border-color);
 }
 
-/* tooltip */
+/* theme:tooltip */
 .tippy-tooltip.tooltip-theme {
-  color: var(--color-white);
-
   padding: var(--spacing-xx-tight) var(--spacing-tight);
 
+  color: var(--color-white);
   font-size: var(--font-size-sm);
-
   border-radius: 4px;
   background: var(--color-black);
   box-shadow: var(--shadow-dark);
 }
 
-/* popover */
+/* theme:popover */
 .tippy-tooltip.popover-theme {
   color: var(--color-black);
   border-radius: 2px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--popper-border-color);
-}
-.tippy-tooltip.popover-theme[data-placement^='top'] .tippy-arrow {
-  border-top-color: var(--popper-border-color);
-  bottom: -8px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    bottom: 1px;
-    border-top: 7px solid var(--color-white);
-    border-right: 7px solid transparent;
-    border-left: 7px solid transparent;
+  &[data-placement^='top'] .tippy-arrow {
+    border-top-color: var(--popper-border-color);
+    bottom: -8px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      bottom: 1px;
+      border-top: 7px solid var(--color-white);
+      border-right: 7px solid transparent;
+      border-left: 7px solid transparent;
+    }
   }
-}
-.tippy-tooltip.popover-theme[data-placement^='bottom'] .tippy-arrow {
-  border-bottom-color: var(--popper-border-color);
-  top: -8px;
+  &[data-placement^='bottom'] .tippy-arrow {
+    border-bottom-color: var(--popper-border-color);
+    top: -8px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 1px;
-    border-bottom: 7px solid var(--color-white);
-    border-right: 7px solid transparent;
-    border-left: 7px solid transparent;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 1px;
+      border-bottom: 7px solid var(--color-white);
+      border-right: 7px solid transparent;
+      border-left: 7px solid transparent;
+    }
   }
-}
-.tippy-tooltip.popover-theme[data-placement^='left'] .tippy-arrow {
-  border-left-color: var(--popper-border-color);
-  right: -8px;
+  &[data-placement^='left'] .tippy-arrow {
+    border-left-color: var(--popper-border-color);
+    right: -8px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -7px;
-    right: 1px;
-    border-left: 7px solid var(--color-white);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      right: 1px;
+      border-left: 7px solid var(--color-white);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
   }
-}
-.tippy-tooltip.popover-theme[data-placement^='right'] .tippy-arrow {
-  border-right-color: var(--popper-border-color);
-  left: -8px;
+  &[data-placement^='right'] .tippy-arrow {
+    border-right-color: var(--popper-border-color);
+    left: -8px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -7px;
-    left: 1px;
-    border-right: 7px solid var(--color-white);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 1px;
+      border-right: 7px solid var(--color-white);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
   }
 }
 
 /* shadow */
-.tippy-tooltip.shadow-light-theme {
-  box-shadow: var(--shadow-light);
-}
-.tippy-tooltip.shadow-default-theme {
-  box-shadow: var(--shadow-default);
-}
-.tippy-tooltip.shadow-dark-theme {
-  box-shadow: var(--shadow-dark);
+.tippy-tooltip {
+  &.shadow-light-theme {
+    box-shadow: var(--shadow-light);
+  }
+  &.shadow-default-theme {
+    box-shadow: var(--shadow-default);
+  }
+  &.shadow-dark-theme {
+    box-shadow: var(--shadow-dark);
+  }
 }
