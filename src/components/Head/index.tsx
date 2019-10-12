@@ -8,6 +8,7 @@ import { LanguageContext } from '~/components'
 import { langConvert, translate } from '~/common/utils'
 import IMAGE_FAVICON_16 from '~/static/favicon-16x16.png?url'
 import IMAGE_FAVICON_32 from '~/static/favicon-32x32.png?url'
+import IMAGE_FAVICON_64 from '~/static/favicon-64x64.png?url'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 import IMAGE_INTRO from '~/static/images/intro.jpg?url'
 import IMAGE_LAUNCH_1125 from '~/static/images/splashscreens/launch-1125x2436.png?url'
@@ -70,15 +71,22 @@ const BaseHead: React.FC<HeadProps> = props => {
         rel="icon"
         type="image/png"
         href={IMAGE_FAVICON_16}
+        sizes="16x16"
+        key="favicon-16"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        href={IMAGE_FAVICON_32}
         sizes="32x32"
         key="favicon-32"
       />
       <link
         rel="icon"
         type="image/png"
-        href={IMAGE_FAVICON_32}
-        sizes="16x16"
-        key="favicon-16"
+        href={IMAGE_FAVICON_64}
+        sizes="64x64"
+        key="favicon-64"
       />
       <link
         rel="search"
