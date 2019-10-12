@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { Avatar } from '~/components/Avatar'
 
-import ICON_AVATAR_MAT from '~/static/icons/avatar-mat.svg?url'
+import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg?url'
 
 import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
 import NoticeDate from './NoticeDate'
@@ -14,7 +14,7 @@ const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Avatar src={ICON_AVATAR_MAT} />
+        <Avatar src={ICON_AVATAR_LOGO} />
       </section>
 
       <section className="content-wrap">
