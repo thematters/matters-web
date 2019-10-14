@@ -38,7 +38,6 @@ Dropdown.defaultProps = {
     positionFixed: true
   },
   animation: 'shift-away',
-  animateFill: false,
   theme: 'dropdown',
   boundary: 'window',
   zIndex: 101 // zIndex of GlobalHeader is 100
@@ -51,7 +50,6 @@ Tooltip.defaultProps = {
   distance: 12,
   placement: 'right',
   animation: 'shift-away',
-  animateFill: false,
   theme: 'tooltip',
   boundary: 'window',
   zIndex: 101 // zIndex of GlobalHeader is 100
@@ -64,7 +62,6 @@ Popover.defaultProps = {
   distance: 16,
   placement: 'right',
   animation: 'shift-away',
-  animateFill: false,
   theme: 'popover',
   boundary: 'window',
   zIndex: 101 // zIndex of GlobalHeader is 100
