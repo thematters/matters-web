@@ -176,7 +176,7 @@ const ArticleDetail = ({
               useEffect(() => {
                 if (process.browser && shouldShowWall) {
                   if (window.location.hash) {
-                    jump('#article-footer-anchor', { offset: -10 })
+                    jump('#comments', { offset: -10 })
                   }
                 }
               }, [])
@@ -265,6 +265,7 @@ const ArticleDetail = ({
                       )}
 
                       <Block type="section">
+                        {shouldShowWall && <section id="comments" />}
                         {!shouldShowWall && (
                           <>
                             <Responses
@@ -295,10 +296,7 @@ const ArticleDetail = ({
               )
             })()}
 
-            <section
-              id="article-footer-anchor"
-              className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2"
-            >
+            <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
               {!shouldShowWall && <Footer />}
             </section>
 
