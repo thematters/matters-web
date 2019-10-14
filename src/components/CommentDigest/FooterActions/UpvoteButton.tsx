@@ -55,6 +55,8 @@ const UpvoteButton = ({
         optimisticResponse={{
           unvoteComment: {
             id: comment.id,
+            upvotes: comment.upvotes - 1,
+            downvotes: comment.downvotes,
             myVote: null,
             __typename: 'Comment'
           }
@@ -79,10 +81,15 @@ const UpvoteButton = ({
   return (
     <Mutation
       mutation={VOTE_COMMENT}
-      variables={{ id: comment.id }}
+      variables={{ id: comment.id, vote: 'up' }}
       optimisticResponse={{
         voteComment: {
           id: comment.id,
+          upvotes: comment.upvotes + 1,
+          downvotes:
+            comment.myVote === 'down'
+              ? comment.downvotes - 1
+              : comment.downvotes,
           myVote: 'up',
           __typename: 'Comment'
         }
