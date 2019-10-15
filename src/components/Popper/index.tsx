@@ -33,10 +33,8 @@ Dropdown.defaultProps = {
   interactive: true,
   distance: 4,
   placement: 'bottom',
-  popperOptions: {
-    // https://github.com/atomiks/tippyjs/blob/master/MIGRATION_GUIDE.md#if-you-were-using-interactive-true
-    positionFixed: true
-  },
+  // https://github.com/atomiks/tippyjs/blob/master/MIGRATION_GUIDE.md#if-you-were-using-interactive-true
+  appendTo: typeof document !== 'undefined' ? document.body : undefined,
   animation: 'shift-away',
   theme: 'dropdown',
   boundary: 'window',
