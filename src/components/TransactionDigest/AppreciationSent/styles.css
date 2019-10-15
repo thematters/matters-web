@@ -1,0 +1,30 @@
+.container {
+  @mixin flex-start-space-between;
+  @mixin border-bottom-grey;
+  padding-bottom: var(--spacing-default);
+  margin-bottom: var(--spacing-default);
+
+  font-size: var(--font-size-sm);
+}
+
+.content {
+  color: var(--color-matters-gold);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+}
+
+.left {
+  & :global(> * + *) {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+.right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-tight);
+  text-align: right;
+
+  & .appreciate-count {
+    margin-bottom: var(--spacing-x-tight);
+  }
+}

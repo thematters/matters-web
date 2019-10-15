@@ -38,7 +38,7 @@ fetch(process.env.API_URL, {
     )
     result.data.__schema.types = filteredData
     fs.writeFile(
-      'common/gql/fragmentTypes.json',
+      'src/common/gql/fragmentTypes.json',
       JSON.stringify(result.data),
       err => {
         if (err) {
