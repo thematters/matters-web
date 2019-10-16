@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { AddTagsDraft } from './__generated__/AddTagsDraft'
@@ -34,8 +34,8 @@ const UPDATE_TAGS = gql`
 `
 
 const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
+  const [updateTags] = useMutation(UPDATE_TAGS)
   const { updateHeaderState } = useContext(HeaderContext)
-
   const draftId = draft.id
   const tags = draft.tags || []
   const hasTags = tags.length > 0
@@ -45,6 +45,28 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
     'tags-container': true,
     'u-area-disable': isPending || isPublished
   })
+  const addTag = async (tag: string) => {
+    updateHeaderState({ type: 'draft', state: 'saving', draftId })
+    try {
+      await updateTags({
+        variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
+      })
+      updateHeaderState({ type: 'draft', state: 'saved', draftId })
+    } catch (e) {
+      updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
+    }
+  }
+  const deleteTag = async (tag: string) => {
+    updateHeaderState({ type: 'draft', state: 'saving', draftId })
+    try {
+      await updateTags({
+        variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
+      })
+      updateHeaderState({ type: 'draft', state: 'saved', draftId })
+    } catch (e) {
+      updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
+    }
+  }
 
   return (
     <Collapsable
@@ -58,41 +80,12 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
         />
       </p>
 
-      <Mutation mutation={UPDATE_TAGS}>
-        {(updateTags: any) => {
-          const addTag = async (tag: string) => {
-            updateHeaderState({ type: 'draft', state: 'saving', draftId })
-            try {
-              await updateTags({
-                variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
-              })
-              updateHeaderState({ type: 'draft', state: 'saved', draftId })
-            } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
-            }
-          }
-          const deleteTag = async (tag: string) => {
-            updateHeaderState({ type: 'draft', state: 'saving', draftId })
-            try {
-              await updateTags({
-                variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
-              })
-              updateHeaderState({ type: 'draft', state: 'saved', draftId })
-            } catch (e) {
-              updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
-            }
-          }
-
-          return (
-            <section className={tagsContainerClasses}>
-              {tags.map(tag => (
-                <Tag tag={tag} deleteTag={deleteTag} key={tag} />
-              ))}
-              <SearchTags addTag={addTag} />
-            </section>
-          )
-        }}
-      </Mutation>
+      <section className={tagsContainerClasses}>
+        {tags.map(tag => (
+          <Tag tag={tag} deleteTag={deleteTag} key={tag} />
+        ))}
+        <SearchTags addTag={addTag} />
+      </section>
 
       <style jsx>{styles}</style>
     </Collapsable>

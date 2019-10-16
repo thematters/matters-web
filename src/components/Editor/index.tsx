@@ -3,10 +3,11 @@ import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
 import React from 'react'
-import { useQuery } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 
 import UserList from '~/components/Dropdown/UserList'
+import { Query } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -206,81 +207,84 @@ class Editor extends React.Component<Props, State> {
       this.quill.clipboard.addMatcher('IMG', createImageMatcher(upload))
     }
 
-    const { loading, data } = useQuery<SearchUsers>(SEARCH_USERS, {
-      variables: { search },
-      skip: !search
-    })
-    const users = _get(data, 'search.edges', []).map(
-      ({ node }: { node: SearchUsers_search_edges_node_User }) => node
-    )
-
     return (
-      <>
-        <div className={containerClasses} id="article-editor">
-          <ReactQuill
-            readOnly={isPending || isPublished}
-            theme="bubble"
-            modules={{
-              ...config.modules,
-              mention: {
-                mentionContainer:
-                  this.mentionContainerRef && this.mentionContainerRef.current,
-                onMentionChange: this.onMentionChange,
-                onInit: this.onMentionModuleInit
-              },
-              imageDrop: {
-                language: lang,
-                onImageDrop: this.onImageDrop
-              }
-            }}
-            formats={config.foramts}
-            ref={this.reactQuillRef}
-            value={this.state.content}
-            placeholder={translate({
-              zh_hant: '請輸入正文…',
-              zh_hans: '请输入正文…',
-              lang
-            })}
-            onChange={this.handleChange}
-            onChangeSelection={this.handleOnChangeSelection}
-            onBlur={this.saveDraft}
-          />
-          <SideToolbar
-            {...this.state.sideToolbar}
-            quill={this.quill}
-            upload={upload}
-            onSave={onSave}
-          />
+      <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
+        {({ data, loading }: QueryResult & { data: SearchUsers }) => {
+          const users = _get(data, 'search.edges', []).map(
+            ({ node }: { node: SearchUsers_search_edges_node_User }) => node
+          )
 
-          <section
-            className="mention-container"
-            ref={this.mentionContainerRef}
-            hidden={users.length <= 0}
-          >
-            {loading && <Spinner />}
-            {!loading && (
-              <UserList
-                users={users}
-                onClick={(user: SearchUsers_search_edges_node_User) => {
-                  mentionInstance.insertMention({
-                    id: user.id,
-                    displayName: user.displayName,
-                    userName: user.userName
-                  })
-                }}
-              />
-            )}
-          </section>
-        </div>
+          return (
+            <>
+              <div className={containerClasses} id="article-editor">
+                <ReactQuill
+                  readOnly={isPending || isPublished}
+                  theme="bubble"
+                  modules={{
+                    ...config.modules,
+                    mention: {
+                      mentionContainer:
+                        this.mentionContainerRef &&
+                        this.mentionContainerRef.current,
+                      onMentionChange: this.onMentionChange,
+                      onInit: this.onMentionModuleInit
+                    },
+                    imageDrop: {
+                      language: lang,
+                      onImageDrop: this.onImageDrop
+                    }
+                  }}
+                  formats={config.foramts}
+                  ref={this.reactQuillRef}
+                  value={this.state.content}
+                  placeholder={translate({
+                    zh_hant: '請輸入正文…',
+                    zh_hans: '请输入正文…',
+                    lang
+                  })}
+                  onChange={this.handleChange}
+                  onChangeSelection={this.handleOnChangeSelection}
+                  onBlur={this.saveDraft}
+                />
+                <SideToolbar
+                  {...this.state.sideToolbar}
+                  quill={this.quill}
+                  upload={upload}
+                  onSave={onSave}
+                />
 
-        <style jsx>{styles}</style>
-        <style jsx global>
-          {bubbleStyles}
-        </style>
-        <style jsx global>
-          {contentStyles}
-        </style>
-      </>
+                <section
+                  className="mention-container"
+                  ref={this.mentionContainerRef}
+                  hidden={users.length <= 0}
+                >
+                  {loading && <Spinner />}
+                  {!loading && (
+                    <UserList
+                      users={users}
+                      onClick={(user: SearchUsers_search_edges_node_User) => {
+                        mentionInstance.insertMention({
+                          id: user.id,
+                          displayName: user.displayName,
+                          userName: user.userName
+                        })
+                      }}
+                    />
+                  )}
+                </section>
+              </div>
+
+              <style jsx>{styles}</style>
+              <style jsx global>
+                {bubbleStyles}
+              </style>
+              <style jsx global>
+                {contentStyles}
+              </style>
+            </>
+          )
+        }}
+      </Query>
     )
   }
 }

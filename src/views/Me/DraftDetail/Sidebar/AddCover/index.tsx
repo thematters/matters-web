@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { AddCoverDraft } from './__generated__/AddCoverDraft'
@@ -77,6 +77,7 @@ const CoverList = ({
 }
 
 const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
+  const [update] = useMutation(UPDATE_COVER)
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
   const imageAssets = assets.filter(
@@ -102,17 +103,13 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
         />
       </p>
       <section className={containerStyle}>
-        <Mutation mutation={UPDATE_COVER}>
-          {(update: any) => (
-            <CoverList
-              draftId={draftId}
-              updateHeaderState={updateHeaderState}
-              update={update}
-              cover={cover}
-              assets={imageAssets}
-            />
-          )}
-        </Mutation>
+        <CoverList
+          draftId={draftId}
+          updateHeaderState={updateHeaderState}
+          update={update}
+          cover={cover}
+          assets={imageAssets}
+        />
       </section>
       <style jsx>{styles}</style>
     </Collapsable>

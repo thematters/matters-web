@@ -4,10 +4,8 @@ import { useContext, useEffect } from 'react'
 import { useQuery } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
-import EmptyDraft from '~/components/Empty/EmptyDraft'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Head } from '~/components/Head'
-import { Translate } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
@@ -51,11 +49,15 @@ const DraftDetail = () => {
     variables: { id }
   })
 
-  if (error || !data || !data.node || data.node.__typename !== 'Draft') {
+  if (
+    !loading &&
+    (error || !data || !data.node || data.node.__typename !== 'Draft')
+  ) {
     return <Throw404 />
   }
 
-  const draft = data.node
+  const draft =
+    data && data.node && data.node.__typename === 'Draft' && data.node
 
   return (
     <main className="l-row">
@@ -64,32 +66,26 @@ const DraftDetail = () => {
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
         {loading && <Placeholder.ArticleDetail />}
 
-        {!loading && data && draft && (
+        {!loading && draft && (
           <>
             <PublishState draft={draft} />
             <DraftContent draft={draft} />
           </>
         )}
-
-        {!loading && (error || (data && !draft)) && (
-          <EmptyDraft
-            description={
-              <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />
-            }
-          />
-        )}
       </article>
 
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         {loading && <Placeholder.Sidebar />}
-        {data && draft && <Sidebar draft={draft} />}
+        {draft && <Sidebar draft={draft} />}
       </aside>
 
-      <ModalInstance modalId="publishModal" title="publishNote">
-        {(props: ModalInstanceProps) => (
-          <PublishModal draft={draft} {...props} />
-        )}
-      </ModalInstance>
+      {draft && (
+        <ModalInstance modalId="publishModal" title="publishNote">
+          {(props: ModalInstanceProps) => (
+            <PublishModal draft={draft} {...props} />
+          )}
+        </ModalInstance>
+      )}
 
       <style jsx>{styles}</style>
     </main>

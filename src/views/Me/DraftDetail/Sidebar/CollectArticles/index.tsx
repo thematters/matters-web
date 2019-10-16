@@ -77,12 +77,6 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     container: true,
     'u-area-disable': isPending || isPublished
   })
-
-  const [setCollection] = useMutation(SET_DRAFT_COLLECTION)
-  const { data, loading } = useQuery<DraftCollectionQuery>(DRAFT_COLLECTION, {
-    variables: { id: draftId }
-  })
-
   const handleCollectionChange = () => async (articles: any[]) => {
     updateHeaderState({
       type: 'draft',
@@ -110,6 +104,17 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     }
   }
 
+  const [setCollection] = useMutation(SET_DRAFT_COLLECTION)
+  const { data, loading } = useQuery<DraftCollectionQuery>(DRAFT_COLLECTION, {
+    variables: { id: draftId }
+  })
+  const edges =
+    data &&
+    data.node &&
+    data.node.__typename === 'Draft' &&
+    data.node.collection &&
+    data.node.collection.edges
+
   return (
     <Collapsable
       title={<Translate zh_hant="關聯" zh_hans="关联" />}
@@ -123,20 +128,13 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
       </p>
 
       <section className={containerClasses}>
-        {() => {
-          const edges = _get(data, 'node.collection.edges')
-
-          if (loading || !edges) {
-            return <Spinner />
-          }
-
-          return (
-            <CollectionEditor
-              articles={edges.map(({ node }: { node: any }) => node)}
-              onEdit={handleCollectionChange()}
-            />
-          )
-        }}
+        {loading && <Spinner />}
+        {edges && (
+          <CollectionEditor
+            articles={edges.map(({ node }) => node)}
+            onEdit={handleCollectionChange()}
+          />
+        )}
       </section>
 
       <style jsx>{styles}</style>
