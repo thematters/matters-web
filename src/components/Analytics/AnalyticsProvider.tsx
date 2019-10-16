@@ -10,6 +10,7 @@ const {
 
 export const AnalyticsProvider: FC = ({ children }) => {
   const [sessionStarted, setSessionStarted] = useState(false)
+
   useEffect(() => {
     // injects analytics var into global scope
     // ref: https://github.com/segmentio/analytics-react#%EF%B8%8F-step-1-copy-the-snippet

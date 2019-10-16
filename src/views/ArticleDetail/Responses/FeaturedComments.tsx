@@ -65,7 +65,7 @@ const FeaturedComments = () => {
 
   const connectionPath = 'article.featuredComments'
   const { edges, pageInfo } = _get(data, connectionPath, {
-    edges: {},
+    edges: [],
     pageInfo: {}
   })
   const loadMore = () => {

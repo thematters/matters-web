@@ -117,12 +117,13 @@ const ArticleDetail = ({
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'medium-up' })
-  const shouldShowWall = !viewer.isAuthed && wall
   const { data, loading, subscribeToMore, client } = useQuery<
     ArticleDetailType
   >(ARTICLE_DETAIL, {
     variables: { mediaHash }
   })
+
+  const shouldShowWall = !viewer.isAuthed && wall
   const article = _get(data, 'article')
   const authorId = _get(data, 'article.author.id')
   const collectionCount = _get(data, 'article.collection.totalCount')
@@ -263,10 +264,6 @@ const ArticleDetail = ({
         <ShareModal />
       </Block>
 
-      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        {!shouldShowWall && <Footer />}
-      </section>
-
       <style jsx>{styles}</style>
     </>
   )
@@ -288,6 +285,10 @@ const ArticleDetailContainer = () => {
   return (
     <main className="l-row">
       <ArticleDetail mediaHash={mediaHash} wall={wall} />
+
+      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+        <Footer />
+      </section>
     </main>
   )
 }

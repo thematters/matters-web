@@ -93,13 +93,9 @@ const LatestResponses = () => {
     notifyOnNetworkStatusChange: true
   })
 
-  if (!data || !data.article) {
-    return <Spinner />
-  }
-
   const connectionPath = 'article.responses'
   const { edges, pageInfo } = _get(data, connectionPath, {
-    edges: {},
+    edges: [],
     pageInfo: {}
   })
 
@@ -174,7 +170,7 @@ const LatestResponses = () => {
 
   // real time update with websocket
   useEffect(() => {
-    if (data.article && data.article.live) {
+    if (data && data.article && data.article.live) {
       subscribeToMore<ArticleCommentAdded>({
         document: SUBSCRIBE_RESPONSES,
         variables: {
@@ -217,6 +213,10 @@ const LatestResponses = () => {
       setStoredCursor(pageInfo.startCursor)
     }
   }, [pageInfo.startCursor])
+
+  if (!data || !data.article) {
+    return <Spinner />
+  }
 
   return (
     <section className="latest-responses" id="latest-responses">
