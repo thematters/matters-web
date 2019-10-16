@@ -8,9 +8,9 @@ import {
   LoadMore,
   PageHeader,
   Placeholder,
-  Responsive,
   Translate
 } from '~/components'
+import { useResponsive } from '~/components/Hook'
 import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
@@ -48,6 +48,7 @@ const SEARCH_ARTICLES = gql`
 `
 
 const SearchArticles = ({ q }: { q: string }) => {
+  const isMediumUp = useResponsive({ type: 'medium-up' })
   const { data, loading, fetchMore } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {
@@ -102,46 +103,42 @@ const SearchArticles = ({ q }: { q: string }) => {
   }
 
   return (
-    <Responsive.MediumUp>
-      {(match: boolean) => (
-        <InfiniteScroll
-          hasNextPage={match && pageInfo.hasNextPage}
-          loadMore={loadMore}
-        >
-          <PageHeader
-            is="h2"
-            pageTitle={
-              <Translate
-                zh_hant={TEXT.zh_hant.article}
-                zh_hans={TEXT.zh_hans.article}
-              />
-            }
+    <InfiniteScroll
+      hasNextPage={isMediumUp && pageInfo.hasNextPage}
+      loadMore={loadMore}
+    >
+      <PageHeader
+        is="h2"
+        pageTitle={
+          <Translate
+            zh_hant={TEXT.zh_hant.article}
+            zh_hans={TEXT.zh_hans.article}
           />
-          <ul>
-            {edges.map(
-              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_ARTICLE,
-                      location: i,
-                      entrance: q
-                    })
-                  }
-                >
-                  <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-                </li>
-              )
-            )}
-          </ul>
+        }
+      />
+      <ul>
+        {edges.map(
+          ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.SEARCH_ARTICLE,
+                  location: i,
+                  entrance: q
+                })
+              }
+            >
+              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+            </li>
+          )
+        )}
+      </ul>
 
-          {!match && pageInfo.hasNextPage && (
-            <LoadMore onClick={loadMore} loading={loading} />
-          )}
-        </InfiniteScroll>
+      {!isMediumUp && pageInfo.hasNextPage && (
+        <LoadMore onClick={loadMore} loading={loading} />
       )}
-    </Responsive.MediumUp>
+    </InfiniteScroll>
   )
 }
 

@@ -32,9 +32,11 @@ const Notifications = () => {
     variables: { first: 20 }
   })
 
-  if (loading) {
-    return <Spinner />
-  }
+  useEffect(() => {
+    if (!loading) {
+      markAllNoticesAsRead()
+    }
+  }, [])
 
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = _get(data, connectionPath, {})
@@ -52,13 +54,13 @@ const Notifications = () => {
         })
     })
 
+  if (loading) {
+    return <Spinner />
+  }
+
   if (!edges || edges.length <= 0) {
     return <EmptyNotice />
   }
-
-  useEffect(() => {
-    markAllNoticesAsRead()
-  }, [])
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

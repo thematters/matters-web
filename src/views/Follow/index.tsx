@@ -28,45 +28,44 @@ const ME_FOLLOW = gql`
   ${PickAuthors.fragments.user}
 `
 
-export default () => {
+const Follow = () => {
   const viewer = useContext(ViewerContext)
-
   const [readFolloweeArticles] = useMutation(READ_FOLLOWEE_ARTICLES, {
     update: viewerUnreadFolloweeArticles
   })
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
 
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        {() => {
-          if (loading) {
-            return <Spinner />
-          }
+  if (loading) {
+    return <Spinner />
+  }
 
-          if (!data) {
-            return <Throw404 />
-          }
+  if (!data) {
+    return <Throw404 />
+  }
 
-          useEffect(() => {
-            if (viewer.isAuthed) {
-              readFolloweeArticles()
-            }
-          }, [])
+  useEffect(() => {
+    if (viewer.isAuthed) {
+      readFolloweeArticles()
+    }
+  }, [])
 
-          const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
+  const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
 
-          if (followeeCount < 5) {
-            return <PickAuthors viewer={data.viewer} />
-          } else {
-            return <FollowFeed />
-          }
-        }}
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-    </main>
-  )
+  if (followeeCount < 5) {
+    return <PickAuthors viewer={data.viewer} />
+  } else {
+    return <FollowFeed />
+  }
 }
+
+export default () => (
+  <main className="l-row">
+    <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <Follow />
+    </article>
+
+    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+      <Footer />
+    </aside>
+  </main>
+)

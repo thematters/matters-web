@@ -41,16 +41,15 @@ const EditingList = ({
   const { data, loading } = useQuery<EditorCollection>(EDITOR_COLLECTION, {
     variables: { mediaHash: article.mediaHash, first: null }
   })
-
-  if (loading) {
-    return <Spinner />
-  }
-
   const { edges } = _get(data, 'article.collection', {})
 
   useEffect(() => {
     setEditingArticles(edges.map(({ node }: { node: any }) => node))
   }, [])
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <section className="editing-list">

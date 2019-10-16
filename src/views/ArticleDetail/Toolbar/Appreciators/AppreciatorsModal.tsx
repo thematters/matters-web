@@ -55,7 +55,8 @@ const AppreciatorsModal = () => {
   }
 
   const { data, loading, fetchMore } = useQuery<AllArticleAppreciators>(
-    ARTICLE_APPRECIATORS
+    ARTICLE_APPRECIATORS,
+    { variables: { mediaHash } }
   )
   const article = data && data.article
 

@@ -7,11 +7,11 @@ import {
   LoadMore,
   PageHeader,
   Placeholder,
-  Responsive,
   Translate
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -77,6 +77,8 @@ export const queries: { [key: string]: any } = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy, client }: any) => {
+  const isMediumUp = useResponsive({ type: 'medium-up' })
+
   const setSortBy = (type: SortBy) => {
     if (client) {
       client.writeData({
@@ -131,42 +133,32 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
         <SortBy sortBy={sortBy} setSortBy={setSortBy} />
       </PageHeader>
 
-      <Responsive.MediumUp>
-        {(match: boolean) => (
-          <>
-            <InfiniteScroll
-              hasNextPage={match && pageInfo.hasNextPage}
-              loadMore={loadMore}
-            >
-              <ul>
-                {edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                    <li
-                      key={cursor}
-                      onClick={() =>
-                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                          type: sortBy,
-                          location: i
-                        })
-                      }
-                    >
-                      <ArticleDigest.Feed
-                        article={node}
-                        hasDateTime
-                        hasBookmark
-                      />
-                    </li>
-                  )
-                )}
-              </ul>
-            </InfiniteScroll>
+      <InfiniteScroll
+        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        loadMore={loadMore}
+      >
+        <ul>
+          {edges.map(
+            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: sortBy,
+                    location: i
+                  })
+                }
+              >
+                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+              </li>
+            )
+          )}
+        </ul>
+      </InfiniteScroll>
 
-            {!match && pageInfo.hasNextPage && (
-              <LoadMore onClick={loadMore} loading={loading} />
-            )}
-          </>
-        )}
-      </Responsive.MediumUp>
+      {!isMediumUp && pageInfo.hasNextPage && (
+        <LoadMore onClick={loadMore} loading={loading} />
+      )}
     </>
   )
 }
