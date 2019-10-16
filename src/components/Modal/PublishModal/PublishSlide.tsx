@@ -12,7 +12,7 @@ import styles from './styles.css'
 const Descriptions = ({ data }: any) => (
   <div className="descriptions">
     {data.map((desc: string, index: number) => (
-      <div key={index} className="description">
+      <div key={index} className="description" data-content="•">
         {desc}
       </div>
     ))}

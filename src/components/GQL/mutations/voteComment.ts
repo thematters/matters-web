@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export const VOTE_COMMENT = gql`
-  mutation VoteComment($id: ID!) {
-    voteComment(input: { vote: up, id: $id }) {
+  mutation VoteComment($id: ID!, $vote: Vote!) {
+    voteComment(input: { id: $id, vote: $vote }) {
       id
       upvotes
       downvotes

@@ -1,9 +1,9 @@
 import Router, { useRouter } from 'next/router'
 
-import { Modal, Translate } from '~/components'
+import { Translate } from '~/components'
 import OAuth from '~/components/OAuth'
 
-import { OAUTH_PROVIDER, PATHS, TEXT } from '~/common/enums'
+import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 import ICON_LIKECOIN from '~/static/icons/oauth/likecoin.svg?url'
 
@@ -39,15 +39,6 @@ const OAuthCallbackSuccess = () => {
             />
           </p>
         </section>
-
-        <footer>
-          <Modal.FooterButton is="link" {...PATHS.HOME} width="full">
-            <Translate
-              zh_hant={TEXT.zh_hant.close}
-              zh_hans={TEXT.zh_hans.close}
-            />
-          </Modal.FooterButton>
-        </footer>
       </OAuth.Box>
       <style jsx>{styles}</style>
     </main>

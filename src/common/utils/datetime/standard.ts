@@ -6,7 +6,7 @@ const standard = (date: Date | string | number) => {
     date = parseISO(date)
   }
 
-  return format(date, 'YYYY.MM.DD')
+  return format(date, 'yyyy.MM.dd')
 }
 
 export default standard

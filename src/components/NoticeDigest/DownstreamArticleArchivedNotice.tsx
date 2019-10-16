@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import ICON_AVATAR_MAT from '~/static/icons/avatar-mat.svg?url'
+import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg?url'
 
 import { DownstreamArticleArchivedNotice as NoticeType } from './__generated__/DownstreamArticleArchivedNotice'
 import NoticeArticle from './NoticeArticle'
@@ -18,7 +18,7 @@ const DownstreamArticleArchivedNotice = ({
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Avatar src={ICON_AVATAR_MAT} />
+        <Avatar src={ICON_AVATAR_LOGO} />
       </section>
 
       <section className="content-wrap">

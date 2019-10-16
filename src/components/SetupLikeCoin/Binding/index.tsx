@@ -47,7 +47,9 @@ const Binding: React.FC<Props> = ({
     nextStep()
 
     if (windowRef) {
-      windowRef.close()
+      setTimeout(() => {
+        windowRef.close()
+      }, 5000)
     }
 
     return null

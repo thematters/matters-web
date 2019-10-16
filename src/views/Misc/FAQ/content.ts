@@ -39,7 +39,7 @@ export default {
     <summary>
       <h4>我是作者，讀者讚賞不花錢，那我獲得的 LikeCoin，來源於哪裡？</h4>
     </summary>
-    <p>你所得到的 LikeCoin 分配一部分來自於 LikeCoin Foundation 基金會— 其中推動社群態的資金會用來資助沒有註冊的讀者，讓讀者在讚賞不花錢的情況下也能讓作者收到 LikeCoin。另外一部分是來自於用月費支持創作者的讚賞公民另外一部分是來自用月費支持創作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">讚賞公民</a>。</p>
+    <p>你所得到的 LikeCoin 一部分來自於 LikeCoin Foundation 基金會──其中推動社群發展的資金會用來資助沒有註冊的讀者，讓讀者在讚賞不花錢的情況下也能讓作者收到 LikeCoin。另外一部分是來自於用月費支持創作者的<a class="u-link-green" href="https://liker.land/civic?from=matters" target="_blank">讚賞公民</a>。</p>
   </details>
 
   <details class="u-content u-details">
