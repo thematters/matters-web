@@ -60,7 +60,8 @@ const UserArticles = () => {
   }
 
   const { data, loading, fetchMore } = useQuery<UserArticlesTypes>(
-    USER_ARTICLES
+    USER_ARTICLES,
+    { variables: { userName } }
   )
 
   if (loading) {

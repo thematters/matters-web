@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
@@ -79,8 +79,7 @@ const NoticeButton = ({
 }
 
 export default () => {
-  const { data } = useQuery(UNREAD_NOTICE_COUNT, {
-    pollInterval: POLL_INTERVAL,
+  const { data, startPolling } = useQuery(UNREAD_NOTICE_COUNT, {
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
     skip: !process.browser
@@ -96,6 +95,11 @@ export default () => {
   const [markAllNoticesAsRead] = useMutation(MARK_ALL_NOTICES_AS_READ, {
     update: updateViewerUnreadNoticeCount
   })
+
+  // FIXME: https://github.com/apollographql/apollo-client/issues/3775
+  useEffect(() => {
+    startPolling(POLL_INTERVAL)
+  }, [])
 
   return (
     <NoticeButton

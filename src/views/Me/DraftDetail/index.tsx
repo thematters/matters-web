@@ -47,7 +47,9 @@ const DraftDetail = () => {
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
-  const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL)
+  const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
+    variables: { id }
+  })
 
   if (error || !data || !data.node || data.node.__typename !== 'Draft') {
     return <Throw404 />

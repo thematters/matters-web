@@ -1,4 +1,5 @@
 import _get from 'lodash/get'
+import { useEffect } from 'react'
 import { useQuery } from 'react-apollo'
 
 import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
@@ -11,13 +12,20 @@ import MobileNav from './MobileNav'
 import styles from './styles.css'
 
 export default () => {
-  const { data } = useQuery<UnreadFolloweeArticles>(UNREAD_FOLLOWEE_ARTICLES, {
-    pollInterval: POLL_INTERVAL,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: !process.browser
-  })
+  const { data, startPolling } = useQuery<UnreadFolloweeArticles>(
+    UNREAD_FOLLOWEE_ARTICLES,
+    {
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: !process.browser
+    }
+  )
   const unread = !!_get(data, 'viewer.status.unreadFolloweeArticles')
+
+  // FIXME: https://github.com/apollographql/apollo-client/issues/3775
+  useEffect(() => {
+    startPolling(POLL_INTERVAL)
+  }, [])
 
   return (
     <nav>
