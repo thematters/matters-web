@@ -13,6 +13,7 @@ import Throw404 from '~/components/Throw404'
 import { PATHS, TEXT } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
 
+import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 import styles from './styles.css'
 
 const {
@@ -47,7 +48,7 @@ const OAuthAuthorize = () => {
     return <Throw404 />
   }
 
-  const { data, loading } = useQuery(OAUTH_CLIENT_INFO, {
+  const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId }
   })
   if (loading) {
@@ -100,18 +101,19 @@ const OAuthAuthorize = () => {
                   zh_hans="读取你的公开资料"
                 />
               </li>
-              {scopes.map((s: any) => {
-                const readableScope = toReadableScope({
-                  scope: s,
-                  lang
-                })
+              {scopes &&
+                scopes.map((s: any) => {
+                  const readableScope = toReadableScope({
+                    scope: s,
+                    lang
+                  })
 
-                if (!readableScope) {
-                  return null
-                }
+                  if (!readableScope) {
+                    return null
+                  }
 
-                return <li key={scope}>{readableScope}</li>
-              })}
+                  return <li key={scope}>{readableScope}</li>
+                })}
             </ul>
 
             <hr />

@@ -1,8 +1,11 @@
+import { DataProxy } from 'apollo-cache'
+
+import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
 
-const update = (cache: any) => {
+const update = (cache: DataProxy) => {
   try {
-    const data = cache.readQuery({
+    const data = cache.readQuery<UnreadFolloweeArticles>({
       query: UNREAD_FOLLOWEE_ARTICLES
     })
 

@@ -26,7 +26,7 @@ const isProd = ENV === 'production'
 
 interface HeadProps {
   title?: string | { zh_hant: string; zh_hans?: string; en?: string }
-  description?: string
+  description?: string | null
   keywords?: string[]
   path?: string
   image?: string

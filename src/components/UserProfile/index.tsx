@@ -87,7 +87,7 @@ const SeedBadge = () => (
   </Tooltip>
 )
 
-const CoverContainer = ({ children }: any) => (
+const CoverContainer: React.FC = ({ children }) => (
   <>
     <div className="cover-container l-row">
       <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>

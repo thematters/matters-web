@@ -79,12 +79,16 @@ const UserCommentsWrap = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  const { data, loading } = useQuery(USER_ID, {
+  const { data, loading } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName }
   })
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (!data || !data.user) {
+    return null
   }
 
   return (

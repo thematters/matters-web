@@ -96,7 +96,7 @@ const PasswordModal: React.FC<
     setStep('reset')
   }
 
-  const backPreviousStep = (event: any) => {
+  const backPreviousStep = () => {
     setStep('request')
   }
 

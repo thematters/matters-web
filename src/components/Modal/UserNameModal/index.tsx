@@ -23,11 +23,6 @@ type Step = 'ask' | 'confirm' | 'complete'
 const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const [step, setStep] = useState<Step>('ask')
 
-  const askCallback = (event: any) => {
-    event.stopPropagation()
-    setStep('confirm')
-  }
-
   const confirmCallback = () => setStep('complete')
 
   return (
@@ -47,7 +42,12 @@ const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
                 zh_hans={TEXT.zh_hans.cancel}
               />
             </Modal.FooterButton>
-            <Modal.FooterButton onClick={askCallback}>
+            <Modal.FooterButton
+              onClick={(event: any) => {
+                event.stopPropagation()
+                setStep('confirm')
+              }}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.confirm}
                 zh_hans={TEXT.zh_hans.confirm}

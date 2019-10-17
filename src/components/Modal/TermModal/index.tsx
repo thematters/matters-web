@@ -43,19 +43,6 @@ const TermModal: React.FC<FormProps> = formProps => {
   const [update] = useMutation(UPDATE_AGREE_ON)
   const { lang } = useContext(LanguageContext)
 
-  const disagree = (action: any) => {
-    if (action) {
-      action()
-        .then(() => {
-          formProps.close()
-          Router.replace('/')
-        })
-        .catch(() => {
-          // TODO: Handle error
-        })
-    }
-  }
-
   const InnerForm = ({
     isSubmitting,
     handleSubmit
@@ -77,7 +64,19 @@ const TermModal: React.FC<FormProps> = formProps => {
         </div>
       </div>
       <div className="buttons">
-        <Modal.FooterButton onClick={() => disagree(logout)} bgColor="white">
+        <Modal.FooterButton
+          onClick={() => {
+            logout()
+              .then(() => {
+                formProps.close()
+                Router.replace('/')
+              })
+              .catch(() => {
+                // TODO: Handle error
+              })
+          }}
+          bgColor="white"
+        >
           {translate({
             zh_hant: TEXT.zh_hant.disagree,
             zh_hans: TEXT.zh_hans.disagree,

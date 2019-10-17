@@ -1,3 +1,4 @@
+import ApolloClient from 'apollo-client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
@@ -10,6 +11,7 @@ import {
   Translate
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useResponsive } from '~/components/Hook'
 
@@ -37,7 +39,7 @@ const feedFragment = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export const queries: { [key: string]: any } = {
+export const queries = {
   hottest: gql`
     query HottestFeed(
       $after: String
@@ -78,7 +80,13 @@ export const queries: { [key: string]: any } = {
 
 type SortBy = 'hottest' | 'newest'
 
-const Feed = ({ feedSortType: sortBy, client }: any) => {
+const Feed = ({
+  feedSortType: sortBy,
+  client
+}: {
+  feedSortType: SortBy
+  client: ApolloClient<any>
+}) => {
   const isMediumUp = useResponsive({ type: 'medium-up' })
 
   const setSortBy = (type: SortBy) => {
@@ -97,13 +105,13 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
     }
   )
 
-  if (loading && !_get(data, 'viewer.recommendation.feed')) {
-    return <Placeholder.ArticleDigestList />
-  }
-
   const connectionPath = 'viewer.recommendation.feed'
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.feed) || {}
+
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
 
   if (!edges || !pageInfo) {
     return null
@@ -170,12 +178,12 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
 }
 
 export default () => {
-  const { data, client } = useQuery(CLIENT_PREFERENCE, {
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const { feedSortType } = _get(data, 'clientPreference', {
+  const { feedSortType } = (data && data.clientPreference) || {
     feedSortType: 'hottest'
-  })
+  }
 
-  return <Feed feedSortType={feedSortType} client={client} />
+  return <Feed feedSortType={feedSortType as SortBy} client={client} />
 }

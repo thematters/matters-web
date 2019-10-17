@@ -16,6 +16,7 @@ import { ADD_TOAST } from '~/common/enums'
 import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
+import { CommentDraft } from './__generated__/CommentDraft'
 import styles from './styles.css'
 
 const CommentEditor = dynamic(
@@ -81,7 +82,7 @@ const CommentForm = ({
       ]
     : []
 
-  const { data, client } = useQuery(COMMENT_DRAFT, {
+  const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: {
       id: commentDraftId
     }
@@ -89,7 +90,7 @@ const CommentForm = ({
   const [putComment] = useMutation(PUT_COMMENT, {
     refetchQueries
   })
-  const draftContent = _get(data, 'commentDraft.content', '')
+  const draftContent = (data && data.commentDraft.content) || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
   const [expand, setExpand] = useState(defaultExpand || false)

@@ -10,6 +10,7 @@ import { Waypoint } from 'react-waypoint'
 import { DateTime, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { Fingerprint } from '~/components/Fingerprint'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
@@ -277,10 +278,10 @@ const ArticleDetailContainer = () => {
     return null
   }
 
-  const { data } = useQuery(CLIENT_PREFERENCE, {
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const { wall } = _get(data, 'clientPreference', { wall: true })
+  const { wall } = (data && data.clientPreference) || { wall: true }
 
   return (
     <main className="l-row">

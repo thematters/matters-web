@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Collapsable from '../Collapsable'
@@ -77,7 +78,9 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     container: true,
     'u-area-disable': isPending || isPublished
   })
-  const handleCollectionChange = () => async (articles: any[]) => {
+  const handleCollectionChange = () => async (
+    articles: DropdownDigestArticle[]
+  ) => {
     updateHeaderState({
       type: 'draft',
       state: 'saving',

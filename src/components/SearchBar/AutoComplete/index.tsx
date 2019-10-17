@@ -77,7 +77,7 @@ const AutoComplete = ({
               title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
             />
 
-            {frequentSearch.map((key: any) => (
+            {frequentSearch.map(key => (
               <Menu.Item
                 spacing={['xtight', 'tight']}
                 hoverBgColor="green"

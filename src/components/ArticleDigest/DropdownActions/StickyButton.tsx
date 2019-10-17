@@ -78,7 +78,7 @@ const StickyButton = ({
         __typename: 'Article'
       }
     },
-    update: (cache: any) => {
+    update: cache => {
       updateUserArticles({
         cache,
         articleId: article.id,

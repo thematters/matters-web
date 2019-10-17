@@ -40,7 +40,7 @@ const Unfollow = ({
         __typename: 'User'
       }
     },
-    update: (cache: any) => {
+    update: cache => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'decrement', userName })
       updateViewerFolloweeCount({ cache, type: 'decrement' })

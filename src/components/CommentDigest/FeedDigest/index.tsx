@@ -5,7 +5,8 @@ import { useState } from 'react'
 import CommentForm from '~/components/Form/CommentForm'
 import {
   FeedDigestComment,
-  FeedDigestComment_comments_edges_node
+  FeedDigestComment_comments_edges_node,
+  FeedDigestComment_comments_edges_node_replyTo_author
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
@@ -28,7 +29,13 @@ const fragments = {
   comment: commentFragments.feed
 }
 
-const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
+const ReplyTo = ({
+  user,
+  inArticle
+}: {
+  user: FeedDigestComment_comments_edges_node_replyTo_author
+  inArticle: boolean
+}) => (
   <section className="reply-to">
     <span className="wording">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
