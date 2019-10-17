@@ -45,7 +45,7 @@ const DeleteButton = ({ id }: { id: string }) => {
         }
 
         const edges = data.viewer.drafts.edges.filter(
-          ({ node }: { node: any }) => node.id !== id
+          ({ node }) => node.id !== id
         )
 
         cache.writeQuery({

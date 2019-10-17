@@ -67,7 +67,12 @@ const TagDetail = () => {
 
   const id = data.node.id
   const connectionPath = 'node.articles'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } = data.node.articles || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAG_DETAIL,
@@ -96,22 +101,20 @@ const TagDetail = () => {
       <section>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <ul>
-            {edges.map(
-              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAG_DETAIL,
-                      location: i,
-                      entrance: id
-                    })
-                  }
-                >
-                  <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-                </li>
-              )
-            )}
+            {edges.map(({ node, cursor }, i) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.TAG_DETAIL,
+                    location: i,
+                    entrance: id
+                  })
+                }
+              >
+                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+              </li>
+            ))}
           </ul>
         </InfiniteScroll>
       </section>

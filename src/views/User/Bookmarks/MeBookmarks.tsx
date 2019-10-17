@@ -46,7 +46,13 @@ export default () => {
   }
 
   const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.subscriptions) || {}
+
+  if (!edges || !pageInfo || edges.length <= 0) {
+    return <EmptyBookmark />
+  }
+
   const loadMore = () =>
     fetchMore({
       variables: {
@@ -60,14 +66,10 @@ export default () => {
         })
     })
 
-  if (edges <= 0) {
-    return <EmptyBookmark />
-  }
-
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
-        {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+        {edges.map(({ node, cursor }) => (
           <li key={cursor}>
             <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
           </li>

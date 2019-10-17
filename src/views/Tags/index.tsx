@@ -50,7 +50,13 @@ const Tags = () => {
   }
 
   const connectionPath = 'viewer.recommendation.tags'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.recommendation.tags) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAGS,
@@ -75,38 +81,34 @@ const Tags = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <div className="l-row">
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {leftEdges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.ALL_TAGS,
-                    location: i * 2
-                  })
-                }
-              >
-                <Tag tag={node} type="count-fixed" />
-              </li>
-            )
-          )}
+          {leftEdges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_TAGS,
+                  location: i * 2
+                })
+              }
+            >
+              <Tag tag={node} type="count-fixed" />
+            </li>
+          ))}
         </ul>
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {rightEdges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.ALL_TAGS,
-                    location: i * 2 + 1
-                  })
-                }
-              >
-                <Tag tag={node} type="count-fixed" />
-              </li>
-            )
-          )}
+          {rightEdges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_TAGS,
+                  location: i * 2 + 1
+                })
+              }
+            >
+              <Tag tag={node} type="count-fixed" />
+            </li>
+          ))}
         </ul>
       </div>
     </InfiniteScroll>

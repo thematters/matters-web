@@ -48,12 +48,18 @@ const CollectionList = ({
     }
   )
 
+  const connectionPath = 'article.collection'
+  const { edges, pageInfo, totalCount } =
+    (data && data.article && data.article.collection) || {}
+
   if (loading) {
     return <Spinner />
   }
 
-  const path = 'article.collection'
-  const { edges, pageInfo, totalCount } = _get(data, path, {})
+  if (!edges || !pageInfo || !totalCount) {
+    return null
+  }
+
   const loadRest = () =>
     fetchMore({
       variables: {
@@ -65,7 +71,7 @@ const CollectionList = ({
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path
+          path: connectionPath
         })
     })
 
@@ -89,27 +95,25 @@ const CollectionList = ({
   return (
     <>
       <ul className="collection-list">
-        {edges.map(
-          ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.COLLECTION,
-                  location: i
-                })
-              }
-            >
-              <ArticleDigest.Sidebar
-                type="collection"
-                article={node}
-                hasArchivedTooltip
-                hasCover
-                hasAuthor
-              />
-            </li>
-          )
-        )}
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.COLLECTION,
+                location: i
+              })
+            }
+          >
+            <ArticleDigest.Sidebar
+              type="collection"
+              article={node}
+              hasArchivedTooltip
+              hasCover
+              hasAuthor
+            />
+          </li>
+        ))}
       </ul>
 
       {pageInfo.hasNextPage && (

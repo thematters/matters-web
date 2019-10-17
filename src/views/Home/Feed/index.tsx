@@ -16,6 +16,8 @@ import { useResponsive } from '~/components/Hook'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import { HottestFeed } from './__generated__/HottestFeed'
+import { NewestFeed } from './__generated__/NewestFeed'
 import SortBy from './SortBy'
 
 const feedFragment = gql`
@@ -88,19 +90,25 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
     }
   }
 
-  const { data, loading, fetchMore } = useQuery(queries[sortBy], {
-    notifyOnNetworkStatusChange: true
-  })
+  const { data, loading, fetchMore } = useQuery<HottestFeed | NewestFeed>(
+    queries[sortBy],
+    {
+      notifyOnNetworkStatusChange: true
+    }
+  )
 
   if (loading && !_get(data, 'viewer.recommendation.feed')) {
     return <Placeholder.ArticleDigestList />
   }
 
   const connectionPath = 'viewer.recommendation.feed'
-  const { edges, pageInfo } = _get(data, connectionPath, {
-    edges: [],
-    pageInfo: {}
-  })
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.recommendation.feed) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: sortBy,
@@ -138,21 +146,19 @@ const Feed = ({ feedSortType: sortBy, client }: any) => {
         loadMore={loadMore}
       >
         <ul>
-          {edges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: sortBy,
-                    location: i
-                  })
-                }
-              >
-                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-              </li>
-            )
-          )}
+          {edges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: sortBy,
+                  location: i
+                })
+              }
+            >
+              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+            </li>
+          ))}
         </ul>
       </InfiniteScroll>
 

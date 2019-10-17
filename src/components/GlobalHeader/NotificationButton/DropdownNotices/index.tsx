@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import { PATHS, TEXT } from '~/common/enums'
@@ -13,7 +14,7 @@ import styles from './styles.css'
 
 interface DropdownNoticesProps {
   hideDropdown: () => void
-  data: any
+  data?: MeNotifications
   loading: boolean
   error: any
 }
@@ -108,7 +109,7 @@ const DropdownNotices = ({
     )
   }
 
-  const edges = _get(data, 'viewer.notices.edges')
+  const edges = data && data.viewer && data.viewer.notices.edges
 
   return (
     <section className="container" onClick={hideDropdown}>
@@ -117,7 +118,7 @@ const DropdownNotices = ({
       <section className="content">
         <ul>
           {edges && edges.length > 0 ? (
-            edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+            edges.map(({ node, cursor }) => (
               <li key={cursor}>
                 <NoticeDigest notice={node} key={cursor} />
               </li>

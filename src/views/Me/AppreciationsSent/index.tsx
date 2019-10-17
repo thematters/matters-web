@@ -65,7 +65,12 @@ const AppreciationsSent = () => {
           }
 
           const connectionPath = 'viewer.activity.appreciationsSent'
-          const { edges, pageInfo } = _get(data, connectionPath, {})
+          const { edges, pageInfo } = data.viewer.activity.appreciationsSent
+
+          if (!edges || !pageInfo) {
+            return null
+          }
+
           const loadMore = () => {
             analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
               type: 'appreciationsSent',
@@ -101,7 +106,7 @@ const AppreciationsSent = () => {
                 loadMore={loadMore}
               >
                 <ul>
-                  {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+                  {edges.map(({ node, cursor }) => (
                     <li key={cursor}>
                       <Transaction.AppreciationSent tx={node} />
                     </li>

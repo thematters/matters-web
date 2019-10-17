@@ -60,7 +60,7 @@ const LatestResponses = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
-  const [storedCursor, setStoredCursor] = useState(null)
+  const [storedCursor, setStoredCursor] = useState<string | null>(null)
 
   if (!mediaHash) {
     return <EmptyResponse articleOnlyMode={articleOnlyMode} />
@@ -92,85 +92,13 @@ const LatestResponses = () => {
     },
     notifyOnNetworkStatusChange: true
   })
-
   const connectionPath = 'article.responses'
-  const { edges, pageInfo } = _get(data, connectionPath, {
-    edges: [],
-    pageInfo: {}
-  })
-
-  const loadMore = (params?: { before: string }) => {
-    const loadBefore = (params && params.before) || null
-    const noLimit = loadBefore && pageInfo.endCursor
-
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-        before: loadBefore,
-        first: noLimit ? null : RESPONSES_COUNT,
-        includeBefore: !!loadBefore,
-        articleOnly: articleOnlyMode
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-    })
-  }
-
-  const commentCallback = () => {
-    return fetchMore({
-      variables: {
-        before: storedCursor,
-        includeBefore: false,
-        articleOnly: articleOnlyMode
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
-        const oldResponseCount = _get(previousResult, 'article.responseCount')
-        // update if response count has changed
-        if (newEdges.length === 0) {
-          if (oldResponseCount !== newResponseCount) {
-            return {
-              ...previousResult,
-              article: {
-                ...previousResult.article,
-                responseCount: newResponseCount
-              }
-            }
-          }
-          return previousResult
-        }
-
-        // update if there are new items in responses.edges
-        const newResult = unshiftConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-        const newStartCursor = _get(
-          newResult,
-          `${connectionPath}.pageInfo.startCursor`,
-          null
-        )
-        if (newStartCursor) {
-          setStoredCursor(newStartCursor)
-        }
-        return newResult
-      }
-    })
-  }
-
-  const responses = filterResponses(
-    (edges || []).map(({ node }: { node: any }) => node)
-  )
+  const { edges, pageInfo } =
+    (data && data.article && data.article.responses) || {}
 
   // real time update with websocket
   useEffect(() => {
-    if (data && data.article && data.article.live) {
+    if (data && data.article && edges) {
       subscribeToMore<ArticleCommentAdded>({
         document: SUBSCRIBE_RESPONSES,
         variables: {
@@ -209,14 +137,86 @@ const LatestResponses = () => {
   useEventListener(REFETCH_RESPONSES, refetch)
 
   useEffect(() => {
-    if (pageInfo.startCursor) {
+    if (pageInfo && pageInfo.startCursor) {
       setStoredCursor(pageInfo.startCursor)
     }
-  }, [pageInfo.startCursor])
+  }, [pageInfo && pageInfo.startCursor])
 
-  if (!data || !data.article) {
+  if (loading) {
     return <Spinner />
   }
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
+  const loadMore = (params?: { before: string }) => {
+    const loadBefore = (params && params.before) || null
+    const noLimit = loadBefore && pageInfo.endCursor
+
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor,
+        before: loadBefore,
+        first: noLimit ? null : RESPONSES_COUNT,
+        includeBefore: !!loadBefore,
+        articleOnly: articleOnlyMode
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
+  const commentCallback = () => {
+    return fetchMore({
+      variables: {
+        before: storedCursor,
+        includeBefore: false,
+        articleOnly: articleOnlyMode
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
+        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
+        const oldResponseCount = _get(previousResult, 'article.responseCount')
+
+        // update if response count has changed
+        if (newEdges.length === 0) {
+          if (oldResponseCount !== newResponseCount) {
+            return {
+              ...previousResult,
+              article: {
+                ...previousResult.article,
+                responseCount: newResponseCount
+              }
+            }
+          }
+          return previousResult
+        }
+
+        // update if there are new items in responses.edges
+        const newResult = unshiftConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+        const newStartCursor = _get(
+          newResult,
+          `${connectionPath}.pageInfo.startCursor`,
+          null
+        )
+        if (newStartCursor) {
+          setStoredCursor(newStartCursor)
+        }
+        return newResult
+      }
+    })
+  }
+
+  const responses = filterResponses((edges || []).map(({ node }) => node))
 
   return (
     <section className="latest-responses" id="latest-responses">

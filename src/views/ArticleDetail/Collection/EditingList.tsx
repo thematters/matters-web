@@ -41,10 +41,10 @@ const EditingList = ({
   const { data, loading } = useQuery<EditorCollection>(EDITOR_COLLECTION, {
     variables: { mediaHash: article.mediaHash, first: null }
   })
-  const { edges } = _get(data, 'article.collection', {})
+  const edges = (data && data.article && data.article.collection.edges) || []
 
   useEffect(() => {
-    setEditingArticles(edges.map(({ node }: { node: any }) => node))
+    setEditingArticles(edges.map(({ node }) => node))
   }, [])
 
   if (loading) {

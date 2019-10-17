@@ -6,6 +6,8 @@ import { useMutation, useQuery } from 'react-apollo'
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
+import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 import {
   ME_NOTIFICATIONS,
   UNREAD_NOTICE_COUNT
@@ -26,7 +28,7 @@ const NoticeButton = ({
   refetch,
   markAllNoticesAsRead
 }: {
-  data: any
+  data?: MeNotifications
   loading: boolean
   error: any
   hasUnreadNotices: any
@@ -79,12 +81,15 @@ const NoticeButton = ({
 }
 
 export default () => {
-  const { data, startPolling } = useQuery(UNREAD_NOTICE_COUNT, {
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: !process.browser
-  })
-  const { data: unreadCountData, loading, error, refetch } = useQuery(
+  const { data: unreadCountData, startPolling } = useQuery<UnreadNoticeCount>(
+    UNREAD_NOTICE_COUNT,
+    {
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: !process.browser
+    }
+  )
+  const { data, loading, error, refetch } = useQuery<MeNotifications>(
     ME_NOTIFICATIONS,
     {
       variables: { first: 5 },

@@ -113,7 +113,7 @@ const AutoComplete = ({
               {recentSearches.length > 0 && <ClearHistoryButton />}
             </Menu.Header>
 
-            {recentSearches.map(({ node }: { node: any }) => {
+            {recentSearches.map(({ node }) => {
               const path = toPath({
                 page: 'search',
                 q: node

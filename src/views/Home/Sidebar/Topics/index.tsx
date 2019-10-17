@@ -58,8 +58,8 @@ export default () => {
 
       <ol>
         {edges
-          .filter(({ node }: { node: any }) => !!node.mediaHash)
-          .map(({ node, cursor }: { node: any; cursor: any }, i: number) => (
+          .filter(({ node }) => !!node.mediaHash)
+          .map(({ node, cursor }, i) => (
             <li
               key={cursor}
               onClick={() =>

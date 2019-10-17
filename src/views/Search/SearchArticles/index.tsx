@@ -11,7 +11,6 @@ import {
   Translate
 } from '~/components'
 import { useResponsive } from '~/components/Hook'
-import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -62,13 +61,12 @@ const SearchArticles = ({ q }: { q: string }) => {
   }
 
   const connectionPath = 'search'
-  const result = _get(data, connectionPath)
+  const { edges, pageInfo } = (data && data.search) || {}
 
-  if (!result || !result.edges) {
-    return <Throw404 />
+  if (!edges || !pageInfo) {
+    return null
   }
 
-  const { edges, pageInfo } = result
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_ARTICLE,
@@ -118,20 +116,21 @@ const SearchArticles = ({ q }: { q: string }) => {
       />
       <ul>
         {edges.map(
-          ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.SEARCH_ARTICLE,
-                  location: i,
-                  entrance: q
-                })
-              }
-            >
-              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-            </li>
-          )
+          ({ node, cursor }, i) =>
+            node.__typename === 'Article' && (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.SEARCH_ARTICLE,
+                    location: i,
+                    entrance: q
+                  })
+                }
+              >
+                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+              </li>
+            )
         )}
       </ul>
 

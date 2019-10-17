@@ -53,7 +53,13 @@ export default () => {
   }
 
   const connectionPath = 'viewer.recommendation.followeeArticles'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.recommendation.followeeArticles) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.FOLLOW,
@@ -92,21 +98,19 @@ export default () => {
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <ul>
-          {edges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOW,
-                    location: i
-                  })
-                }
-              >
-                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-              </li>
-            )
-          )}
+          {edges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.FOLLOW,
+                  location: i
+                })
+              }
+            >
+              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+            </li>
+          ))}
         </ul>
       </InfiniteScroll>
     </>

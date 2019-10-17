@@ -119,7 +119,18 @@ const UserComments = ({ user }: UserIdUser) => {
   }
 
   const connectionPath = 'node.commentedArticles'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } =
+    (data &&
+      data.node &&
+      data.node.__typename === 'User' &&
+      data.node.commentedArticles &&
+      data.node.commentedArticles) ||
+    {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () =>
     fetchMore({
       variables: {
@@ -140,16 +151,21 @@ const UserComments = ({ user }: UserIdUser) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul className="article-list">
-        {edges.map((articleEdge: { node: any; cursor: any }) => {
-          const commentEdges = _get(articleEdge, 'node.comments.edges')
+        {edges.map(articleEdge => {
+          const commentEdges = articleEdge.node.comments.edges
+
+          if (!commentEdges) {
+            return null
+          }
+
           const articlePath = toPath({
             page: 'articleDetail',
-            userName: articleEdge.node.author.userName,
+            userName: articleEdge.node.author.userName || '',
             slug: articleEdge.node.slug,
-            mediaHash: articleEdge.node.mediaHash
+            mediaHash: articleEdge.node.mediaHash || ''
           })
           const filteredComments = filterComments(
-            (commentEdges || []).map(({ node }: { node: any }) => node)
+            (commentEdges || []).map(({ node }) => node)
           )
 
           return (

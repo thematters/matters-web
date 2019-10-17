@@ -59,8 +59,11 @@ const AppreciatorsModal = () => {
     { variables: { mediaHash } }
   )
   const article = data && data.article
+  const connectionPath = 'article.appreciationsReceived'
+  const { edges, pageInfo } =
+    (data && data.article && data.article.appreciationsReceived) || {}
 
-  if (loading || !article) {
+  if (loading) {
     return (
       <ModalInstance modalId="appreciatorsModal">
         <Spinner />
@@ -68,8 +71,10 @@ const AppreciatorsModal = () => {
     )
   }
 
-  const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  if (!edges || !pageInfo || !article) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.APPRECIATOR,
@@ -106,23 +111,24 @@ const AppreciatorsModal = () => {
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <ul className="modal-appreciators-list">
             {edges.map(
-              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.APPRECIATOR,
-                      location: i,
-                      entrance: article.id
-                    })
-                  }
-                >
-                  <UserDigest.FullDesc
-                    user={node.sender}
-                    appreciations={node.amount}
-                  />
-                </li>
-              )
+              ({ node, cursor }, i) =>
+                node.sender && (
+                  <li
+                    key={cursor}
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: FEED_TYPE.APPRECIATOR,
+                        location: i,
+                        entrance: article.id
+                      })
+                    }
+                  >
+                    <UserDigest.FullDesc
+                      user={node.sender}
+                      appreciations={node.amount}
+                    />
+                  </li>
+                )
             )}
             <style jsx>{styles}</style>
           </ul>

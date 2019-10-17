@@ -16,7 +16,10 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
-import { SeachTags } from './__generated__/SeachTags'
+import {
+  SeachTags,
+  SeachTags_search_edges_node_Tag
+} from './__generated__/SeachTags'
 import styles from './styles.css'
 
 const SEARCH_TAGS = gql`
@@ -102,8 +105,8 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
         })
     })
   }
-  const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
-  const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
+  const leftEdges = edges.filter((_, i) => i % 2 === 0)
+  const rightEdges = edges.filter((_, i) => i % 2 === 1)
 
   if (edges.length <= 0) {
     return isAggregate ? null : <EmptySearchResult />
@@ -114,22 +117,23 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
       <section>
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
         <ul>
-          {edges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.SEARCH_TAG,
-                    location: i,
-                    entrance: q
-                  })
-                }
-              >
-                <Tag tag={node} type="count-fixed" />
-              </li>
-            )
-          )}
+          {edges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.SEARCH_TAG,
+                  location: i,
+                  entrance: q
+                })
+              }
+            >
+              <Tag
+                tag={node as SeachTags_search_edges_node_Tag}
+                type="count-fixed"
+              />
+            </li>
+          ))}
         </ul>
 
         <style jsx>{styles}</style>
@@ -146,29 +150,33 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
         <div className="l-row">
           <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-            {leftEdges.map(({ node, cursor }: { node: any; cursor: any }) => (
+            {leftEdges.map(({ node, cursor }) => (
               <li key={cursor}>
-                <Tag tag={node} type="count-fixed" />
+                <Tag
+                  tag={node as SeachTags_search_edges_node_Tag}
+                  type="count-fixed"
+                />
               </li>
             ))}
           </ul>
           <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-            {rightEdges.map(
-              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_TAG,
-                      location: i,
-                      entrance: q
-                    })
-                  }
-                >
-                  <Tag tag={node} type="count-fixed" />
-                </li>
-              )
-            )}
+            {rightEdges.map(({ node, cursor }, i) => (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.SEARCH_TAG,
+                    location: i,
+                    entrance: q
+                  })
+                }
+              >
+                <Tag
+                  tag={node as SeachTags_search_edges_node_Tag}
+                  type="count-fixed"
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </InfiniteScroll>

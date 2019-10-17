@@ -64,10 +64,7 @@ const FeaturedComments = () => {
   }
 
   const connectionPath = 'article.featuredComments'
-  const { edges, pageInfo } = _get(data, connectionPath, {
-    edges: [],
-    pageInfo: {}
-  })
+  const { edges, pageInfo } = data.article.featuredComments
   const loadMore = () => {
     return fetchMore({
       variables: {
@@ -82,9 +79,7 @@ const FeaturedComments = () => {
     })
   }
 
-  const comments = filterComments(
-    (edges || []).map(({ node }: { node: any }) => node)
-  )
+  const comments = filterComments((edges || []).map(({ node }) => node))
 
   if (!comments || comments.length <= 0) {
     return null

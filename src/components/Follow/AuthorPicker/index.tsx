@@ -74,7 +74,7 @@ export const AuthorPicker = ({
 
         {!loading && (
           <ul>
-            {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+            {edges.map(({ node, cursor }) => (
               <li key={cursor}>
                 <FullDesc user={node} nameSize="small" readonly={readonly} />
               </li>

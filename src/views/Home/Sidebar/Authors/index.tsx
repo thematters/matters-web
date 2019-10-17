@@ -42,7 +42,6 @@ export default () => {
   const { data, loading, refetch } = useQuery<SidebarAuthors>(SIDEBAR_AUTHORS, {
     notifyOnNetworkStatusChange: true
   })
-
   const edges = data && data.viewer && data.viewer.recommendation.authors.edges
 
   if (!edges || edges.length <= 0) {
@@ -73,21 +72,19 @@ export default () => {
 
       {!loading && (
         <ul>
-          {edges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.AUTHORS,
-                    location: i
-                  })
-                }
-              >
-                <UserDigest.FullDesc user={node} nameSize="small" />
-              </li>
-            )
-          )}
+          {edges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.AUTHORS,
+                  location: i
+                })
+              }
+            >
+              <UserDigest.FullDesc user={node} nameSize="small" />
+            </li>
+          ))}
         </ul>
       )}
 

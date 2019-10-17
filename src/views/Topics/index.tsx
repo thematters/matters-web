@@ -54,7 +54,13 @@ const Topics = () => {
   }
 
   const connectionPath = 'viewer.recommendation.topics'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.recommendation.topics) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TOPICS,
@@ -76,26 +82,24 @@ const Topics = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
-        {edges.map(
-          ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_TOPICS,
-                  location: i
-                })
-              }
-            >
-              <ArticleDigest.Feed
-                article={node}
-                hasDateTime
-                hasBookmark
-                hasTopicScore
-              />
-            </li>
-          )
-        )}
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.ALL_TOPICS,
+                location: i
+              })
+            }
+          >
+            <ArticleDigest.Feed
+              article={node}
+              hasDateTime
+              hasBookmark
+              hasTopicScore
+            />
+          </li>
+        ))}
       </ul>
     </InfiniteScroll>
   )

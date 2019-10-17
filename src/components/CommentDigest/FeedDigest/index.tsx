@@ -149,8 +149,8 @@ const FeedDigest = ({
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
-  const descendantComments = _get(comment, 'comments.edges', []).filter(
-    ({ node }: { node: any }) => node.state === 'active'
+  const descendantComments = (comment.comments.edges || []).filter(
+    ({ node }) => node.state === 'active'
   )
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
@@ -211,7 +211,7 @@ const FeedDigest = ({
           <ul className="descendant-comments">
             {descendantComments
               .slice(0, expand ? undefined : COLLAPSE_DESCENDANT_COUNT)
-              .map(({ node, cursor }: { node: any; cursor: any }) => (
+              .map(({ node, cursor }) => (
                 <li key={cursor}>
                   <DescendantComment
                     comment={node}

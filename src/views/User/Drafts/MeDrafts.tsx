@@ -40,7 +40,12 @@ export default () => {
   }
 
   const connectionPath = 'viewer.drafts'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } = (data && data.viewer && data.viewer.drafts) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () =>
     fetchMore({
       variables: {
@@ -61,7 +66,7 @@ export default () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
-        {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+        {edges.map(({ node, cursor }) => (
           <li key={cursor}>
             <DraftDigest.Feed draft={node} />
           </li>

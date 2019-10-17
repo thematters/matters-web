@@ -39,7 +39,12 @@ const Notifications = () => {
   }, [])
 
   const connectionPath = 'viewer.notices'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } = (data && data.viewer && data.viewer.notices) || {}
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () =>
     fetchMore({
       variables: {
@@ -65,7 +70,7 @@ const Notifications = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
-        {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
+        {edges.map(({ node, cursor }) => (
           <li key={cursor}>
             <NoticeDigest notice={node} key={cursor} />
           </li>

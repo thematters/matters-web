@@ -51,7 +51,12 @@ const UserFollowers = () => {
 
   const user = data.user
   const connectionPath = 'user.followers'
-  const { edges, pageInfo } = _get(data, connectionPath, {})
+  const { edges, pageInfo } = user.followers
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.FOLLOWER,
@@ -85,22 +90,20 @@ const UserFollowers = () => {
       />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <ul>
-          {edges.map(
-            ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOWER,
-                    location: i,
-                    entrance: user.id
-                  })
-                }
-              >
-                <UserDigest.FullDesc user={node} nameSize="small" />
-              </li>
-            )
-          )}
+          {edges.map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.FOLLOWER,
+                  location: i,
+                  entrance: user.id
+                })
+              }
+            >
+              <UserDigest.FullDesc user={node} nameSize="small" />
+            </li>
+          ))}
         </ul>
       </InfiniteScroll>
     </>
