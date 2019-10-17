@@ -20,7 +20,7 @@ export interface ContainerProps {
   layout?: 'default' | 'small'
 }
 
-const Container:React.FC<ContainerProps> = ({
+const Container: React.FC<ContainerProps> = ({
   children,
   close,
   defaultCloseable = true,

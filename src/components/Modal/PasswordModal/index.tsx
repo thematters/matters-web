@@ -23,7 +23,7 @@ import { translate } from '~/common/utils'
  *
  */
 
-const PasswordModal:React.FC<
+const PasswordModal: React.FC<
   ModalInstanceProps & { purpose: 'forget' | 'change' }
 > = ({ purpose }) => {
   const { lang } = useContext(LanguageContext)

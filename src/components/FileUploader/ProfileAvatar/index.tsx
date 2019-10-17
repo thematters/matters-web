@@ -38,7 +38,7 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const ProfileAvatarUploader:React.FC<Props> = ({ user }) => {
+export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
   const [update] = useMutation(UPDATE_USER_INFO)
   const [upload] = useMutation(UPLOAD_FILE)
   const [error, setError] = useState<'size' | undefined>(undefined)

@@ -45,7 +45,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const SignUpFollowForm:React.FC<Props> = ({
+export const SignUpFollowForm: React.FC<Props> = ({
   extraClass = [],
   purpose,
   submitCallback

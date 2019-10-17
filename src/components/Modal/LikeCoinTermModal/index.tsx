@@ -15,7 +15,7 @@ interface Props {
   submitCallback: () => void
 }
 
-const LikeCoinTermModal:React.FC<ModalInstanceProps & Props> = ({
+const LikeCoinTermModal: React.FC<ModalInstanceProps & Props> = ({
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)

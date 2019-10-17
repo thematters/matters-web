@@ -22,7 +22,10 @@ import { translate } from '~/common/utils'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
-const SignUpModal:React.FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
+const SignUpModal: React.FC<ModalInstanceProps> = ({
+  closeable,
+  setCloseable
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')

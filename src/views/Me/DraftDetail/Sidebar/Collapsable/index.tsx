@@ -7,11 +7,10 @@ import ICON_COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 
 import styles from './styles.css'
 
-const Collapsable:React.FC<{ title: ReactNode; defaultCollapsed?: boolean }> = ({
-  children,
-  title,
-  defaultCollapsed = true
-}) => {
+const Collapsable: React.FC<{
+  title: ReactNode
+  defaultCollapsed?: boolean
+}> = ({ children, title, defaultCollapsed = true }) => {
   const [collapsed, toggleCollapse] = useState(defaultCollapsed)
 
   return (

@@ -20,7 +20,7 @@ import { TEXT } from '~/common/enums'
 
 type Step = 'ask' | 'confirm' | 'complete'
 
-const UserNameModal:React.FC<ModalInstanceProps> = ({ close }) => {
+const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const [step, setStep] = useState<Step>('ask')
 
   const askCallback = (event: any) => {

@@ -24,7 +24,7 @@ const debouncedSetSearch = _debounce((value, setSearch) => {
   setSearch(value)
 }, 300)
 
-const CollectForm:React.FC<Props> = ({ onAdd }) => {
+const CollectForm: React.FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
