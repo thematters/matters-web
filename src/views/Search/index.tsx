@@ -69,6 +69,7 @@ const Search = () => {
           <Footer />
         </aside>
       </section>
+
       <style jsx>{styles}</style>
     </main>
   )

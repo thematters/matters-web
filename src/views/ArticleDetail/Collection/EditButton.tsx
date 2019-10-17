@@ -76,6 +76,7 @@ const EditButton = ({
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
         </button>
+
         <style jsx>{styles}</style>
       </span>
     )

@@ -70,6 +70,7 @@ const ArchiveButton = ({
       >
         <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
       </TextIcon>
+
       <style jsx>{styles}</style>
     </button>
   )

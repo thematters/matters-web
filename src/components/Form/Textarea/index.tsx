@@ -71,10 +71,12 @@ const Textarea: React.FC<Props> = ({
           style={style}
         />
       </div>
+
       <div className="info">
         {error && isTouched && <div className="error">{error}</div>}
         {!error && hint && <div className="hint">{hint}</div>}
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

@@ -76,6 +76,7 @@ const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
               {textMap.zh_hant}
             </button>
           </Menu.Item>
+
           <Menu.Item>
             <button
               type="button"
@@ -88,6 +89,7 @@ const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
               {textMap.zh_hans}
             </button>
           </Menu.Item>
+
           <style jsx>{styles}</style>
         </Menu>
       )

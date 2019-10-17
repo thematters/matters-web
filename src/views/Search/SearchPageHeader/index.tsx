@@ -48,9 +48,11 @@ const SearchPageHeader = ({
           <span className="keyword">{q}&nbsp;</span>
           <Translate zh_hant="的搜尋結果" zh_hans="的搜索结果" />
         </section>
+
         <section>{!isAggregate && <BackToAggregate q={q} />}</section>
       </div>
     </div>
+
     <style jsx>{styles}</style>
   </header>
 )

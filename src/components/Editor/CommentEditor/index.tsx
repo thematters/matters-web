@@ -121,6 +121,7 @@ class CommentEditor extends React.Component<Props, State> {
             placeholder={placeholder}
             aria-label={placeholder}
           />
+
           <style jsx>{styles}</style>
         </>
       )

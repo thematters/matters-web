@@ -102,6 +102,7 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
           zh_hans="选择一張圖片作為封面"
         />
       </p>
+
       <section className={containerStyle}>
         <CoverList
           draftId={draftId}
@@ -111,6 +112,7 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
           assets={imageAssets}
         />
       </section>
+
       <style jsx>{styles}</style>
     </Collapsable>
   )

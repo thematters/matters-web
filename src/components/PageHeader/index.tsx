@@ -19,6 +19,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       </Title>
 
       {children}
+
       <style jsx>{styles}</style>
     </header>
   )

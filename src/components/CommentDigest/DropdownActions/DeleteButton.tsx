@@ -56,6 +56,7 @@ const DeleteButton: React.FC<{
           zh_hans={TEXT.zh_hant.delete}
         />
       </TextIcon>
+
       <style jsx>{styles}</style>
     </button>
   )

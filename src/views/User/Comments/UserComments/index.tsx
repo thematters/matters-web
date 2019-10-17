@@ -194,6 +194,7 @@ const UserComments = ({ user }: UserIdUser) => {
             </li>
           )
         })}
+
         <style jsx>{styles}</style>
       </ul>
     </InfiniteScroll>

@@ -77,7 +77,9 @@ const BaseSearchBar: React.FC<{
                 onChange={handleChange}
                 value={values.q}
               />
+
               <SearchButton />
+
               <style jsx>{styles}</style>
             </form>
           )
@@ -108,7 +110,9 @@ const BaseSearchBar: React.FC<{
                 onClick={() => !values.q && showDropdown()}
                 onBlur={hideDropdown}
               />
+
               <SearchButton />
+
               <style jsx>{styles}</style>
             </form>
           </Dropdown>

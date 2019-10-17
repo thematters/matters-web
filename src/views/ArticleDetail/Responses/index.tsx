@@ -19,10 +19,11 @@ const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
   const count = (data && data.article && data.article.responseCount) || 0
 
   return (
-    <>
-      <span className="count">{count}</span>
-      <style jsx>{styles}</style>
-    </>
+      <span className="count">
+        {count}
+
+        <style jsx>{styles}</style>
+      </span>
   )
 }
 

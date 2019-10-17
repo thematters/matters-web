@@ -128,6 +128,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
 export default (props: Props) => (
   <section className="container">
     <AutoComplete {...props} />
+
     <style jsx>{styles}</style>
   </section>
 )

@@ -129,12 +129,14 @@ const UploadAudioButton = ({
           aria-label="新增音頻"
           onChange={(event: any) => handleUploadChange(event)}
         />
+
         <Icon
           id={uploading ? ICON_SPINNER.id : ICON_EDITOR_AUDIO.id}
           viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_AUDIO.viewBox}
           size="large"
           className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
         />
+
         <style jsx>{styles}</style>
       </label>
     </Tooltip>

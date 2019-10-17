@@ -43,6 +43,7 @@ const Header = () => (
         </TextIcon>
       </a>
     </Link>
+
     <style jsx>{styles}</style>
   </header>
 )
@@ -67,6 +68,7 @@ const Footer = () => (
         </TextIcon>
       </a>
     </Link>
+
     <style jsx>{styles}</style>
   </footer>
 )

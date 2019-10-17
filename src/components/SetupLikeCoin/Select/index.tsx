@@ -31,6 +31,7 @@ const Header = () => (
         zh_hans="接下来我们会帮你生成 Liker ID，如果你已经有 Liker ID 也可以进行绑定。"
       />
     </p>
+
     <style jsx>{styles}</style>
   </header>
 )

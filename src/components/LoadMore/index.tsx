@@ -25,6 +25,7 @@ export const LoadMore = ({
         {text ? text : <Translate zh_hans="查看更多" zh_hant="查看更多" />}
       </Button>
     )}
+
     <style jsx>{styles}</style>
   </div>
 )

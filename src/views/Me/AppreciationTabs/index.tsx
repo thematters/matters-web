@@ -57,6 +57,7 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
           <sup className="count">{activity.appreciationsReceivedTotal}</sup>
         </Tabs.Tab>
       </Tabs>
+
       <style jsx>{styles}</style>
     </>
   )

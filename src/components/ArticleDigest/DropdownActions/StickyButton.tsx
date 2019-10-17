@@ -97,6 +97,7 @@ const StickyButton = ({
       }}
     >
       {article.sticky ? <TextIconUnsticky /> : <TextIconSticky />}
+
       <style jsx>{styles}</style>
     </button>
   )

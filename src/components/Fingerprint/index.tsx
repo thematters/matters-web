@@ -188,6 +188,7 @@ const FingerprintContent = ({
           </p>
         )}
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )
@@ -228,6 +229,7 @@ const Fingerprint = ({
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>
+
         <style jsx>{styles}</style>
       </button>
     </Popover>

@@ -32,9 +32,11 @@ export default () => {
       <section className="u-sm-up-hide">
         <MobileNav unread={unread} />
       </section>
+
       <section className="u-sm-down-hide">
         <DesktopNav unread={unread} />
       </section>
+
       <style jsx>{styles}</style>
     </nav>
   )

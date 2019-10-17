@@ -114,12 +114,14 @@ const UploadImageButton = ({
         aria-label="新增圖片"
         onChange={(event: any) => handleUploadChange(event)}
       />
+
       <Icon
         id={uploading ? ICON_SPINNER.id : ICON_EDITOR_IMAGE.id}
         viewBox={uploading ? ICON_SPINNER.viewBox : ICON_EDITOR_IMAGE.viewBox}
         size="large"
         className={uploading ? 'u-motion-spin' : 'u-motion-icon-hover'}
       />
+
       <style jsx>{styles}</style>
     </label>
   )

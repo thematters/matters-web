@@ -79,6 +79,7 @@ const PasswordResetRedirectButton = () => (
       />
       ？
     </Button>
+
     <style jsx>{styles}</style>
   </>
 )

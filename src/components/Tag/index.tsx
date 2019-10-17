@@ -55,28 +55,27 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
   const tagCount = numAbbr(_get(tag, 'articles.totalCount', 0))
 
   return (
-    <>
-      <Link {...path}>
-        <a className={tagClasses}>
-          <TextIcon
-            icon={
-              <Icon
-                size={isSmall ? 'xsmall' : 'small'}
-                id={ICON_HASHTAG.id}
-                viewBox={ICON_HASHTAG.viewBox}
-              />
-            }
-            text={tag.content}
-            weight="medium"
-            size={isSmall ? 'sm' : 'md'}
-            spacing={isSmall ? 'xtight' : 'tight'}
-          />
+    <Link {...path}>
+      <a className={tagClasses}>
+        <TextIcon
+          icon={
+            <Icon
+              size={isSmall ? 'xsmall' : 'small'}
+              id={ICON_HASHTAG.id}
+              viewBox={ICON_HASHTAG.viewBox}
+            />
+          }
+          text={tag.content}
+          weight="medium"
+          size={isSmall ? 'sm' : 'md'}
+          spacing={isSmall ? 'xtight' : 'tight'}
+        />
 
-          {!!tagCount && <span className="count">{tagCount}</span>}
-        </a>
-      </Link>
-      <style jsx>{styles}</style>
-    </>
+        {!!tagCount && <span className="count">{tagCount}</span>}
+
+        <style jsx>{styles}</style>
+      </a>
+    </Link>
   )
 }
 

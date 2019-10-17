@@ -33,40 +33,40 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
   })
 
   return (
-    <>
-      <Dropdown
-        content={<DropdownMenu hideDropdown={hideDropdown} />}
-        onCreate={setInstance}
-      >
-        <button type="button" className={containerClasses}>
-          <Avatar size="small" user={viewer.isInactive ? undefined : user} />
-          <section className="info">
-            {(viewer.isActive || viewer.isOnboarding) && (
-              <span className="username">{user.displayName}</span>
-            )}
-            {viewer.isFrozen && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountFrozen}
-                zh_hans={TEXT.zh_hans.accountFrozen}
-              />
-            )}
-            {viewer.isArchived && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountArchived}
-                zh_hans={TEXT.zh_hans.accountArchived}
-              />
-            )}
-            {viewer.isBanned && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountBanned}
-                zh_hans={TEXT.zh_hans.accountBanned}
-              />
-            )}
-          </section>
-        </button>
-      </Dropdown>
-      <style jsx>{styles}</style>
-    </>
+    <Dropdown
+      content={<DropdownMenu hideDropdown={hideDropdown} />}
+      onCreate={setInstance}
+    >
+      <button type="button" className={containerClasses}>
+        <Avatar size="small" user={viewer.isInactive ? undefined : user} />
+
+        <section className="info">
+          {(viewer.isActive || viewer.isOnboarding) && (
+            <span className="username">{user.displayName}</span>
+          )}
+          {viewer.isFrozen && (
+            <Translate
+              zh_hant={TEXT.zh_hant.accountFrozen}
+              zh_hans={TEXT.zh_hans.accountFrozen}
+            />
+          )}
+          {viewer.isArchived && (
+            <Translate
+              zh_hant={TEXT.zh_hant.accountArchived}
+              zh_hans={TEXT.zh_hans.accountArchived}
+            />
+          )}
+          {viewer.isBanned && (
+            <Translate
+              zh_hant={TEXT.zh_hant.accountBanned}
+              zh_hans={TEXT.zh_hans.accountBanned}
+            />
+          )}
+        </section>
+
+        <style jsx>{styles}</style>
+      </button>
+    </Dropdown>
   )
 }
 

@@ -100,6 +100,7 @@ const Container: React.FC<ContainerProps> = ({
           </div>
         </div>
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )

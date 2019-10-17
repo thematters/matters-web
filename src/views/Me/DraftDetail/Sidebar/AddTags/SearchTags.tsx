@@ -82,7 +82,9 @@ const DropdownContent = ({
             </button>
           </Menu.Item>
         ))}
+
         {tags && tags.length > 0 && <Menu.Divider />}
+
         <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
           <button
             className="search-tag-item create"
@@ -99,6 +101,7 @@ const DropdownContent = ({
           </button>
         </Menu.Item>
       </Menu>
+
       <style jsx>{styles}</style>
     </>
   )

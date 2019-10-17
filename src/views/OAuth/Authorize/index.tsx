@@ -148,6 +148,7 @@ const OAuthAuthorize = () => {
           </footer>
         </form>
       </OAuth.Box>
+
       <style jsx>{styles}</style>
     </main>
   )

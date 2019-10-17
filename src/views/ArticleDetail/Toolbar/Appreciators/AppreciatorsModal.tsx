@@ -122,6 +122,7 @@ const AppreciatorsModal = () => {
                   </li>
                 )
             )}
+
             <style jsx>{styles}</style>
           </ul>
         </InfiniteScroll>

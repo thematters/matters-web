@@ -45,6 +45,7 @@ const DropdownUserList = ({
           </Menu.Item>
         ))}
       </Menu>
+
       <style jsx>{styles}</style>
     </>
   )

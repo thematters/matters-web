@@ -68,6 +68,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
                 .map(({ node }) => node.sender && node.sender.displayName)
                 .join('、')}
             </p>
+
             <p className="highlight">
               <Translate
                 zh_hant={({ count }) => `等 ${count} 人贊賞了作品`}
@@ -78,6 +79,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
               />
             </p>
           </section>
+
           <style jsx>{styles}</style>
         </button>
       )}

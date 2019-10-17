@@ -14,13 +14,12 @@ export default () => {
   const isDraft = headerState.type === 'draft'
 
   return (
-    <>
-      <Link {...PATHS.SEARCH}>
-        <a aria-label="搜尋" hidden={isDraft}>
-          <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
-        </a>
-      </Link>
-      <style jsx>{styles}</style>
-    </>
+    <Link {...PATHS.SEARCH}>
+      <a aria-label="搜尋" hidden={isDraft}>
+        <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
+
+        <style jsx>{styles}</style>
+      </a>
+    </Link>
   )
 }

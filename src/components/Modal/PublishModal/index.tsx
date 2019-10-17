@@ -83,6 +83,7 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
           <Translate zh_hant="發佈作品" zh_hans="发布作品" />
         </Modal.FooterButton>
       </div>
+
       <style jsx>{styles}</style>
     </section>
   )

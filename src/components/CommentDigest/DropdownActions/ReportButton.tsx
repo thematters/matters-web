@@ -31,6 +31,7 @@ const EditButton = ({
           zh_hans={TEXT.zh_hans.report}
         />
       </TextIcon>
+
       <style jsx>{styles}</style>
     </button>
   )

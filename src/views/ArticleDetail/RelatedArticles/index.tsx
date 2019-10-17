@@ -52,6 +52,7 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
           </div>
         ))}
       </div>
+
       <style jsx>{styles}</style>
     </section>
   )

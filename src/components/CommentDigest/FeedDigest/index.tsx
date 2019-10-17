@@ -40,6 +40,7 @@ const ReplyTo = ({
     <span className="wording">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
+
     <UserDigest.Mini
       user={user}
       avatarSize="xxxsmall"
@@ -47,6 +48,7 @@ const ReplyTo = ({
       spacing="xxtight"
       hasUserName={inArticle}
     />
+
     <style jsx>{styles}</style>
   </section>
 )
@@ -59,6 +61,7 @@ const PinnedLabel = () => (
         zh_hans={TEXT.zh_hant.authorRecommend}
       />
     </Label>
+
     <style jsx>{styles}</style>
   </span>
 )
@@ -66,6 +69,7 @@ const PinnedLabel = () => (
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <button className="cancel-button" type="button" onClick={() => onClick()}>
     <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
+
     <style jsx>{styles}</style>
   </button>
 )

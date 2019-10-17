@@ -117,6 +117,7 @@ const PinButton = ({
         }}
       >
         <TextIconUnpin />
+
         <style jsx>{styles}</style>
       </button>
     )
@@ -132,6 +133,7 @@ const PinButton = ({
       disabled={!canPin}
     >
       <TextIconPin />
+
       <style jsx>{styles}</style>
     </button>
   )

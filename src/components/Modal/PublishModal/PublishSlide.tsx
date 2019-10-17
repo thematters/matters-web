@@ -16,6 +16,7 @@ const Descriptions = ({ data }: any) => (
         {desc}
       </div>
     ))}
+
     <style jsx>{styles}</style>
   </div>
 )
@@ -66,6 +67,7 @@ const PublishSlide = () => {
             style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
           />
         </div>
+
         <div className="title-container">
           <Title is="h3" type="modal-headline" style={{ textAlign: 'left' }}>
             {title}
@@ -74,6 +76,7 @@ const PublishSlide = () => {
         </div>
         <Descriptions data={descriptions} />
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

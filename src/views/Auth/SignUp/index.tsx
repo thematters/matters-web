@@ -33,49 +33,48 @@ const SignUp = () => {
   )
 
   return (
-    <>
-      <main className="l-row row">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.register,
-            zh_hans: TEXT.zh_hans.register
-          }}
-        />
+    <main className="l-row row">
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.register,
+          zh_hans: TEXT.zh_hans.register
+        }}
+      />
 
-        <article className={containerClass}>
-          {step === 'signUp' && (
-            <SignUpInitForm
-              purpose="page"
-              submitCallback={() => {
-                setStep('profile')
-              }}
-              scrollLock={false}
-            />
-          )}
-          {step === 'profile' && (
-            <SignUpProfileForm
-              purpose="page"
-              submitCallback={() => {
-                setStep('setupLikeCoin')
-              }}
-              scrollLock={false}
-            />
-          )}
-          {step === 'setupLikeCoin' && (
-            <SetupLikeCoin
-              submitCallback={() => {
-                setStep('complete')
-              }}
-              scrollLock={false}
-            />
-          )}
-          {step === 'complete' && (
-            <SignUpComplete purpose="page" scrollLock={false} />
-          )}
-        </article>
-      </main>
+      <article className={containerClass}>
+        {step === 'signUp' && (
+          <SignUpInitForm
+            purpose="page"
+            submitCallback={() => {
+              setStep('profile')
+            }}
+            scrollLock={false}
+          />
+        )}
+        {step === 'profile' && (
+          <SignUpProfileForm
+            purpose="page"
+            submitCallback={() => {
+              setStep('setupLikeCoin')
+            }}
+            scrollLock={false}
+          />
+        )}
+        {step === 'setupLikeCoin' && (
+          <SetupLikeCoin
+            submitCallback={() => {
+              setStep('complete')
+            }}
+            scrollLock={false}
+          />
+        )}
+        {step === 'complete' && (
+          <SignUpComplete purpose="page" scrollLock={false} />
+        )}
+      </article>
+
       <style jsx>{styles}</style>
-    </>
+    </main>
   )
 }
 

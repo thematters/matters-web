@@ -88,12 +88,11 @@ const SeedBadge = () => (
 )
 
 const CoverContainer: React.FC = ({ children }) => (
-  <>
-    <div className="cover-container l-row">
-      <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
-    </div>
+  <div className="cover-container l-row">
+    <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
+
     <style jsx>{styles}</style>
-  </>
+  </div>
 )
 
 const BaseUserProfile = () => {
@@ -123,6 +122,7 @@ const BaseUserProfile = () => {
         <CoverContainer>
           <Placeholder.UserProfile />
         </CoverContainer>
+
         <style jsx>{styles}</style>
       </section>
     )
@@ -135,6 +135,7 @@ const BaseUserProfile = () => {
           user={_get(data, 'viewer')}
           setEditing={setEditing}
         />
+
         <style jsx>{styles}</style>
       </section>
     )

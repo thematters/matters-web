@@ -74,6 +74,7 @@ const NoticeButton = ({
     >
       <button type="button" aria-label="通知" className={buttonClasses}>
         <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
+
         <style jsx>{styles}</style>
       </button>
     </Dropdown>

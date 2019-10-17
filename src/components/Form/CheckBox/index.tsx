@@ -62,6 +62,7 @@ const CheckBox: React.FC<Props> = ({
         </label>
         <div className="description">{children}</div>
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

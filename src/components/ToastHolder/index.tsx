@@ -49,17 +49,16 @@ export const ToastHolder: React.FC<Props> = ({
   useEventListener('removeToast', remove)
 
   return (
-    <>
-      <div className="toast-holder">
-        <div className="l-row">
-          <div className={layoutClasses}>
-            {toasts.map(toast => (
-              <FixedToast key={toast.id} {...toast} />
-            ))}
-          </div>
+    <div className="toast-holder">
+      <div className="l-row">
+        <div className={layoutClasses}>
+          {toasts.map(toast => (
+            <FixedToast key={toast.id} {...toast} />
+          ))}
         </div>
       </div>
+
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }

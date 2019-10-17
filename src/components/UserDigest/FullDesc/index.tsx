@@ -102,6 +102,7 @@ const FullDesc = ({
           </Link>
         </section>
       </section>
+
       <style jsx>{styles}</style>
     </>
   )

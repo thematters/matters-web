@@ -102,6 +102,7 @@ const ClearHistoryButton = () => {
       }}
     >
       <Translate zh_hant="清空" zh_hans="清空" />
+
       <style jsx>{styles}</style>
     </button>
   )

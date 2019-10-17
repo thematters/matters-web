@@ -59,12 +59,11 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
   const error = errors[field]
   const isTouched = touched[field]
   return (
-    <>
-      <div className="info">
-        {error && isTouched && <div className="error">{error}</div>}
-      </div>
+    <div className="info">
+      {error && isTouched && <div className="error">{error}</div>}
+
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }
 

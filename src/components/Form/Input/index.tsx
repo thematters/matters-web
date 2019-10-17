@@ -93,6 +93,7 @@ const Input: React.FC<Props> = ({
           {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
         </div>
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

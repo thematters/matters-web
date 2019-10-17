@@ -25,28 +25,27 @@ const DropdownArticleList = ({
   }
 
   return (
-    <>
-      <Menu width="md">
-        {articles.map(article => (
-          <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
-            key={article.id}
+    <Menu width="md">
+      {articles.map(article => (
+        <Menu.Item
+          spacing={['xtight', 'tight']}
+          hoverBgColor="green"
+          key={article.id}
+        >
+          <button
+            className="search-article-item"
+            type="button"
+            onClick={() => {
+              onClick(article)
+            }}
           >
-            <button
-              className="search-article-item"
-              type="button"
-              onClick={() => {
-                onClick(article)
-              }}
-            >
-              <ArticleDigest.Dropdown article={article} hasArrow disabled />
-            </button>
-          </Menu.Item>
-        ))}
-      </Menu>
-      <style jsx>{styles}</style>
-    </>
+            <ArticleDigest.Dropdown article={article} hasArrow disabled />
+
+            <style jsx>{styles}</style>
+          </button>
+        </Menu.Item>
+      ))}
+    </Menu>
   )
 }
 

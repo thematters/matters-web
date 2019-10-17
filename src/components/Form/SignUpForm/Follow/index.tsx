@@ -85,6 +85,7 @@ export const SignUpFollowForm: React.FC<Props> = ({
         titleIs="span"
         readonly
       />
+
       <div className="buttons">
         <Button
           type="submit"
@@ -96,6 +97,7 @@ export const SignUpFollowForm: React.FC<Props> = ({
           {nextText}
         </Button>
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )

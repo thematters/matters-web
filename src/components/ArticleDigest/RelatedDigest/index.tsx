@@ -81,6 +81,7 @@ const RelatedDigest = ({
           </a>
         </Link>
       )}
+
       <div className={contentClasses}>
         <div className="title">
           <Link {...path}>
@@ -91,6 +92,7 @@ const RelatedDigest = ({
             </a>
           </Link>
         </div>
+
         {!cover && (
           <div className="summary">
             <Link {...path}>
@@ -98,10 +100,12 @@ const RelatedDigest = ({
             </Link>
           </div>
         )}
+
         <div className="actions">
           <Actions article={article} type="related" {...actionControls} />
         </div>
       </div>
+
       <style jsx>{styles}</style>
     </section>
   )

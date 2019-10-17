@@ -47,10 +47,11 @@ const AppreciatedCount = ({ num, limit }: { num: number; limit: number }) => {
     'appreciated-reach-limit': num === limit
   })
   return (
-    <>
-      <span className={classes}>{num}</span>
+    <span className={classes}>
+      {num}
+
       <style jsx>{styles}</style>
-    </>
+    </span>
   )
 }
 
@@ -77,6 +78,7 @@ const OnboardingAppreciateButton = ({
             viewBox={ICON_LIKE.viewBox}
             style={{ width: 22, height: 22 }}
           />
+
           <style jsx>{styles}</style>
         </button>
       )}
@@ -116,9 +118,11 @@ const AppreciateButton = forwardRef<
           viewBox={ICON_LIKE.viewBox}
           style={{ width: 22, height: 22 }}
         />
+
         {isAuthed && appreciatedCount > 0 && (
           <AppreciatedCount num={appreciatedCount} limit={appreciateLimit} />
         )}
+
         <style jsx>{styles}</style>
       </button>
     )
@@ -157,9 +161,11 @@ const AppreciationButtonContainer = ({
     return (
       <section className="container">
         <OnboardingAppreciateButton article={article} />
+
         <span className="appreciate-count">
           {numAbbr(article.appreciationsReceivedTotal)}
         </span>
+
         <style jsx>{styles}</style>
       </section>
     )

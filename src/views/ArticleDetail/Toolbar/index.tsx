@@ -67,6 +67,7 @@ const Toolbar = ({
         <AppreciationButton article={article} />
         <Appreciators article={article} />
       </section>
+
       <section className="right">
         <ResponseButton article={article} />
         <ExtendButton article={article} />
@@ -74,6 +75,7 @@ const Toolbar = ({
         <ShareButton />
         <MoreButton article={article} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -19,6 +19,7 @@ const Tab: React.FC<TabProps> = ({
   return (
     <li role="tab" aria-disabled={disable} aria-selected={selected}>
       {children}
+
       <style jsx>{styles}</style>
     </li>
   )
@@ -34,6 +35,7 @@ export const Tabs: React.FC<TabsProps> & {
   return (
     <nav className={navClass}>
       <ul role="tablist">{children}</ul>
+
       <style jsx>{styles}</style>
     </nav>
   )
