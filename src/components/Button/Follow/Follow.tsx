@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useMutation } from 'react-apollo'
 
 import { Button, Icon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
@@ -28,53 +28,49 @@ const Follow = ({
 }: {
   user: FollowButtonUser
   size?: 'small' | 'default'
-}) => (
-  <Mutation
-    mutation={FOLLOW_USER}
-    variables={{ id: user.id }}
-    optimisticResponse={{
+}) => {
+  const [follow] = useMutation(FOLLOW_USER, {
+    variables: { id: user.id },
+    optimisticResponse: {
       followUser: {
         id: user.id,
         isFollowee: true,
         isFollower: user.isFollower,
         __typename: 'User'
       }
-    }}
-    update={(cache: any) => {
+    },
+    update: (cache: any) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'increment', userName })
       updateViewerFolloweeCount({ cache, type: 'increment' })
-    }}
-  >
-    {(follow: any, { data }: any) => (
-      <Button
-        size={size}
-        icon={
-          <Icon
-            id={ICON_ADD.id}
-            viewBox={ICON_ADD.viewBox}
-            style={
-              size === 'small'
-                ? { width: 10, height: 10 }
-                : { width: 12, height: 12 }
-            }
-          />
-        }
-        style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
-        onClick={() => {
-          follow()
-          analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
-        }}
-        bgColor="transparent"
-        outlineColor="green"
-      >
-        <Translate
-          zh_hant={TEXT.zh_hant.follow}
-          zh_hans={TEXT.zh_hans.follow}
+    }
+  })
+
+  return (
+    <Button
+      size={size}
+      icon={
+        <Icon
+          id={ICON_ADD.id}
+          viewBox={ICON_ADD.viewBox}
+          style={
+            size === 'small'
+              ? { width: 10, height: 10 }
+              : { width: 12, height: 12 }
+          }
         />
-      </Button>
-    )}
-  </Mutation>
-)
+      }
+      style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
+      onClick={() => {
+        follow()
+        analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
+      }}
+      bgColor="transparent"
+      outlineColor="green"
+    >
+      <Translate zh_hant={TEXT.zh_hant.follow} zh_hans={TEXT.zh_hans.follow} />
+    </Button>
+  )
+}
 
 export default Follow

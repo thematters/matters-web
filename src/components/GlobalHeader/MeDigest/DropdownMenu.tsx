@@ -1,9 +1,9 @@
 import _get from 'lodash/get'
 import Link from 'next/link'
 import { useContext } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
-import { Mutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
@@ -23,6 +23,7 @@ import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
+  const [logout] = useMutation(USER_LOGOUT)
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({
@@ -121,53 +122,49 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Mutation mutation={USER_LOGOUT}>
-          {(logout: any) => (
-            <button
-              type="button"
-              onClick={async () => {
-                try {
-                  await logout()
-                  analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
-                    id: viewer.id
-                  })
-                  // await clearPersistCache()
-                  redirectToTarget()
-                } catch (e) {
-                  window.dispatchEvent(
-                    new CustomEvent(ADD_TOAST, {
-                      detail: {
-                        color: 'red',
-                        content: (
-                          <Translate
-                            zh_hant={TEXT.zh_hant.logoutFailed}
-                            zh_hans={TEXT.zh_hans.logoutFailed}
-                          />
-                        )
-                      }
-                    })
-                  )
-                }
-              }}
-            >
-              <TextIcon
-                icon={
-                  <Icon
-                    id={ICON_LOGOUT.id}
-                    viewBox={ICON_LOGOUT.viewBox}
-                    size="small"
-                  />
-                }
-                text={translate({
-                  zh_hant: TEXT.zh_hant.logout,
-                  zh_hans: TEXT.zh_hans.logout,
-                  lang
-                })}
-                spacing="xtight"
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await logout()
+              analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
+                id: viewer.id
+              })
+              // await clearPersistCache()
+              redirectToTarget()
+            } catch (e) {
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'red',
+                    content: (
+                      <Translate
+                        zh_hant={TEXT.zh_hant.logoutFailed}
+                        zh_hans={TEXT.zh_hans.logoutFailed}
+                      />
+                    )
+                  }
+                })
+              )
+            }
+          }}
+        >
+          <TextIcon
+            icon={
+              <Icon
+                id={ICON_LOGOUT.id}
+                viewBox={ICON_LOGOUT.viewBox}
+                size="small"
               />
-            </button>
-          )}
-        </Mutation>
+            }
+            text={translate({
+              zh_hant: TEXT.zh_hant.logout,
+              zh_hans: TEXT.zh_hans.logout,
+              lang
+            })}
+            spacing="xtight"
+          />
+        </button>
       </Menu.Item>
     </Menu>
   )

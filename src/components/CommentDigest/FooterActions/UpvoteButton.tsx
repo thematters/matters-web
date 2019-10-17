@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon } from '~/components'
-import { Mutation } from '~/components/GQL'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
@@ -47,67 +47,58 @@ const UpvoteButton = ({
   comment: UpvoteComment
   disabled?: boolean
 }) => {
+  const [unvote] = useMutation(UNVOTE_COMMENT, {
+    variables: { id: comment.id },
+    optimisticResponse: {
+      unvoteComment: {
+        id: comment.id,
+        upvotes: comment.upvotes - 1,
+        downvotes: comment.downvotes,
+        myVote: null,
+        __typename: 'Comment'
+      }
+    }
+  })
+  const [upvote] = useMutation(VOTE_COMMENT, {
+    variables: { id: comment.id, vote: 'up' },
+    optimisticResponse: {
+      voteComment: {
+        id: comment.id,
+        upvotes: comment.upvotes + 1,
+        downvotes:
+          comment.myVote === 'down' ? comment.downvotes - 1 : comment.downvotes,
+        myVote: 'up',
+        __typename: 'Comment'
+      }
+    }
+  })
+
   if (comment.myVote === 'up') {
     return (
-      <Mutation
-        mutation={UNVOTE_COMMENT}
-        variables={{ id: comment.id }}
-        optimisticResponse={{
-          unvoteComment: {
-            id: comment.id,
-            upvotes: comment.upvotes - 1,
-            downvotes: comment.downvotes,
-            myVote: null,
-            __typename: 'Comment'
-          }
-        }}
-      >
-        {(unvote: any, { data }: any) => (
-          <button type="button" onClick={() => unvote()} disabled={disabled}>
-            <TextIcon
-              icon={<IconLikeActive />}
-              color="grey"
-              weight="medium"
-              text={numAbbr(comment.upvotes)}
-              size="sm"
-              spacing="xxxtight"
-            />
-          </button>
-        )}
-      </Mutation>
+      <button type="button" onClick={() => unvote()} disabled={disabled}>
+        <TextIcon
+          icon={<IconLikeActive />}
+          color="grey"
+          weight="medium"
+          text={numAbbr(comment.upvotes)}
+          size="sm"
+          spacing="xxxtight"
+        />
+      </button>
     )
   }
 
   return (
-    <Mutation
-      mutation={VOTE_COMMENT}
-      variables={{ id: comment.id, vote: 'up' }}
-      optimisticResponse={{
-        voteComment: {
-          id: comment.id,
-          upvotes: comment.upvotes + 1,
-          downvotes:
-            comment.myVote === 'down'
-              ? comment.downvotes - 1
-              : comment.downvotes,
-          myVote: 'up',
-          __typename: 'Comment'
-        }
-      }}
-    >
-      {(upvote: any, { data }: any) => (
-        <button type="button" onClick={() => upvote()} disabled={disabled}>
-          <TextIcon
-            icon={<IconLikeInactive />}
-            color="grey"
-            weight="medium"
-            text={numAbbr(comment.upvotes)}
-            size="sm"
-            spacing="xxxtight"
-          />
-        </button>
-      )}
-    </Mutation>
+    <button type="button" onClick={() => upvote()} disabled={disabled}>
+      <TextIcon
+        icon={<IconLikeInactive />}
+        color="grey"
+        weight="medium"
+        text={numAbbr(comment.upvotes)}
+        size="sm"
+        spacing="xxxtight"
+      />
+    </button>
   )
 }
 

@@ -1,11 +1,12 @@
 import classNames from 'classnames'
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import _isEmpty from 'lodash/isEmpty'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { getErrorCodes, Mutation } from '~/components/GQL'
+import { getErrorCodes } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -15,7 +16,7 @@ import { isValidEmail, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-interface Props {
+interface FormProps {
   defaultEmail: string
   extraClass?: string[]
   container: 'modal' | 'page'
@@ -24,18 +25,24 @@ interface Props {
   scrollLock?: boolean
 }
 
-export const PasswordChangeRequestForm: FC<Props> = ({
-  defaultEmail = '',
-  extraClass = [],
-  container,
-  purpose,
-  submitCallback,
-  scrollLock
-}) => {
-  const { lang } = useContext(LanguageContext)
+interface FormValues {
+  email: string
+  code: string
+}
 
-  const validateEmail = (value: string, language: string) => {
-    let result: any
+export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
+  const [confirmCode] = useMutation(CONFIRM_CODE)
+  const { lang } = useContext(LanguageContext)
+  const {
+    defaultEmail = '',
+    extraClass = [],
+    purpose,
+    submitCallback,
+    scrollLock
+  } = formProps
+
+  const validateEmail = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -48,12 +55,12 @@ export const PasswordChangeRequestForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const validateCode = (value: string, language: string) => {
-    let result: any
+  const validateCode = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -61,11 +68,11 @@ export const PasswordChangeRequestForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const BaseForm = ({
+  const InnerForm = ({
     values,
     errors,
     touched,
@@ -74,9 +81,7 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     handleChange,
     handleSubmit,
     setFieldError
-  }: {
-    [key: string]: any
-  }) => {
+  }: FormikProps<FormValues>) => {
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder =
@@ -99,68 +104,67 @@ export const PasswordChangeRequestForm: FC<Props> = ({
     })
 
     return (
-      <>
-        <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content scrollLock={scrollLock}>
-            <Form.Input
-              type="email"
-              field="email"
-              placeholder={emailPlaceholder}
-              values={values}
-              errors={errors}
-              disabled={!!defaultEmail}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Input
-              type="text"
-              field="code"
-              autoComplete="off"
-              placeholder={codePlaceholder}
-              floatElement={
-                <SendCodeButton
-                  email={values.email}
-                  lang={lang}
-                  type="password_reset"
-                />
-              }
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-          </Modal.Content>
-
-          <div className="buttons">
-            <Modal.FooterButton
-              width="full"
-              htmlType="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.nextStep}
-                zh_hans={TEXT.zh_hans.nextStep}
+      <form className={formClass} onSubmit={handleSubmit}>
+        <Modal.Content scrollLock={scrollLock}>
+          <Form.Input
+            type="email"
+            field="email"
+            placeholder={emailPlaceholder}
+            values={values}
+            errors={errors}
+            disabled={!!defaultEmail}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
+            type="text"
+            field="code"
+            autoComplete="off"
+            placeholder={codePlaceholder}
+            floatElement={
+              <SendCodeButton
+                email={values.email}
+                lang={lang}
+                type="password_reset"
               />
-            </Modal.FooterButton>
-          </div>
-        </form>
+            }
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+        </Modal.Content>
+
+        <div className="buttons">
+          <Modal.FooterButton
+            width="full"
+            htmlType="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.nextStep}
+              zh_hans={TEXT.zh_hans.nextStep}
+            />
+          </Modal.FooterButton>
+        </div>
+
         <style jsx>{styles}</style>
-      </>
+      </form>
     )
   }
 
-  const MainForm: any = withFormik({
+  const MainForm = withFormik<FormProps, FormValues>({
     mapPropsToValues: () => ({
       email: defaultEmail,
       code: ''
     }),
 
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidCode = validateCode(code, lang)
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidCode = validateCode(code)
       const errors = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCode ? { code: isInvalidCode } : {})
@@ -168,43 +172,32 @@ export const PasswordChangeRequestForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setFieldError, setSubmitting }: any) => {
+    handleSubmit: async (values, { setFieldError, setSubmitting }) => {
       const { email, code } = values
-      const { submitAction } = props
-      if (!submitAction) {
-        return
+
+      try {
+        const {
+          data: { confirmVerificationCode }
+        } = await confirmCode({
+          variables: { input: { email, type: 'password_reset', code } }
+        })
+
+        if (submitCallback && confirmVerificationCode) {
+          submitCallback({ email, codeId: confirmVerificationCode })
+        }
+      } catch (error) {
+        const errorCode = getErrorCodes(error)[0]
+        const errorMessage = translate({
+          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          lang
+        })
+        setFieldError('code', errorMessage)
       }
 
-      submitAction({
-        variables: { input: { email, type: 'password_reset', code } }
-      })
-        .then(({ data }: any) => {
-          const { confirmVerificationCode } = data
-          if (submitCallback && confirmVerificationCode) {
-            submitCallback({ email, codeId: confirmVerificationCode })
-          }
-        })
-        .catch((error: any) => {
-          const errorCode = getErrorCodes(error)[0]
-          const errorMessage = translate({
-            zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-            zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-            lang
-          })
-          setFieldError('code', errorMessage)
-        })
-        .finally(() => {
-          setSubmitting(false)
-        })
+      setSubmitting(false)
     }
-  })(BaseForm)
+  })(InnerForm)
 
-  return (
-    <>
-      <Mutation mutation={CONFIRM_CODE}>
-        {(confirmCode: any) => <MainForm submitAction={confirmCode} />}
-      </Mutation>
-      <style jsx>{styles}</style>
-    </>
-  )
+  return <MainForm {...formProps} />
 }

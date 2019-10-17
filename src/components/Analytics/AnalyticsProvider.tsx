@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import Router from 'next/router'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { analytics } from '~/common/utils'
 
@@ -8,7 +8,7 @@ const {
   publicRuntimeConfig: { SEGMENT_KEY }
 } = getConfig()
 
-export const AnalyticsProvider: FC = ({ children }) => {
+export const AnalyticsProvider: React.FC = ({ children }) => {
   const [sessionStarted, setSessionStarted] = useState(false)
 
   useEffect(() => {

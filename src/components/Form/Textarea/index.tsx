@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { FC } from 'react'
 
 import styles from './styles.css'
 
@@ -41,7 +40,7 @@ interface Props {
   [key: string]: any
 }
 
-const Textarea: FC<Props> = ({
+const Textarea: React.FC<Props> = ({
   className = [],
   field,
   placeholder,

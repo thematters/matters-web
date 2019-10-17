@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
 import { Translate } from '~/components/Language'
@@ -20,7 +20,7 @@ import { TEXT } from '~/common/enums'
 
 type Step = 'ask' | 'confirm' | 'complete'
 
-const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
+const UserNameModal:React.FC<ModalInstanceProps> = ({ close }) => {
   const [step, setStep] = useState<Step>('ask')
 
   const askCallback = (event: any) => {

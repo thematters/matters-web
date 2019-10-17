@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
@@ -86,62 +86,54 @@ const PinButton = ({
   hideDropdown: () => void
 }) => {
   const canPin = comment.article.pinCommentLeft > 0
+  const [unpinComment] = useMutation(UNPIN_COMMENT, {
+    variables: { id: comment.id },
+    optimisticResponse: {
+      unpinComment: {
+        id: comment.id,
+        pinned: false,
+        __typename: 'Comment'
+      }
+    }
+  })
+  const [pinComment] = useMutation(PIN_COMMENT, {
+    variables: { id: comment.id },
+    optimisticResponse: {
+      pinComment: {
+        id: comment.id,
+        pinned: true,
+        __typename: 'Comment'
+      }
+    }
+  })
 
   if (comment.pinned) {
     return (
-      <Mutation
-        mutation={UNPIN_COMMENT}
-        variables={{ id: comment.id }}
-        optimisticResponse={{
-          unpinComment: {
-            id: comment.id,
-            pinned: false,
-            __typename: 'Comment'
-          }
+      <button
+        type="button"
+        onClick={() => {
+          unpinComment()
+          hideDropdown()
         }}
       >
-        {(unpinComment: any) => (
-          <button
-            type="button"
-            onClick={() => {
-              unpinComment()
-              hideDropdown()
-            }}
-          >
-            <TextIconUnpin />
-            <style jsx>{styles}</style>
-          </button>
-        )}
-      </Mutation>
+        <TextIconUnpin />
+        <style jsx>{styles}</style>
+      </button>
     )
   }
 
   return (
-    <Mutation
-      mutation={PIN_COMMENT}
-      variables={{ id: comment.id }}
-      optimisticResponse={{
-        pinComment: {
-          id: comment.id,
-          pinned: true,
-          __typename: 'Comment'
-        }
+    <button
+      type="button"
+      onClick={() => {
+        pinComment()
+        hideDropdown()
       }}
+      disabled={!canPin}
     >
-      {(pinComment: any) => (
-        <button
-          type="button"
-          onClick={() => {
-            pinComment()
-            hideDropdown()
-          }}
-          disabled={!canPin}
-        >
-          <TextIconPin />
-          <style jsx>{styles}</style>
-        </button>
-      )}
-    </Mutation>
+      <TextIconPin />
+      <style jsx>{styles}</style>
+    </button>
   )
 }
 

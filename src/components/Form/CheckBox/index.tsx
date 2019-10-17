@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { FC } from 'react'
 
 import { Icon } from '~/components/Icon'
 
@@ -17,13 +16,13 @@ interface Props {
   values: any
   errors: any
   handleBlur?: () => {}
-  handleChange: () => {}
-  setFieldValue: (field: string, value: any, validate?: boolean) => {}
+  handleChange(e: React.ChangeEvent<any>): void
+  setFieldValue(field: string, value: any): void
 
   [key: string]: any
 }
 
-const CheckBox: FC<Props> = ({
+const CheckBox: React.FC<Props> = ({
   children,
   className = [],
   field,

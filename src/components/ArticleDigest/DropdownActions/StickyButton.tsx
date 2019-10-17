@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
 import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
@@ -69,39 +69,36 @@ const StickyButton = ({
   article: StickyButtonArticle
   hideDropdown: () => void
 }) => {
+  const [update] = useMutation(UPDATE_ARTICLE_INFO, {
+    variables: { id: article.id, sticky: !article.sticky },
+    optimisticResponse: {
+      updateArticleInfo: {
+        id: article.id,
+        sticky: !article.sticky,
+        __typename: 'Article'
+      }
+    },
+    update: (cache: any) => {
+      updateUserArticles({
+        cache,
+        articleId: article.id,
+        userName: article.author.userName,
+        type: article.sticky ? 'unsticky' : 'sticky'
+      })
+    }
+  })
+
   return (
-    <Mutation
-      mutation={UPDATE_ARTICLE_INFO}
-      variables={{ id: article.id, sticky: !article.sticky }}
-      optimisticResponse={{
-        updateArticleInfo: {
-          id: article.id,
-          sticky: !article.sticky,
-          __typename: 'Article'
-        }
-      }}
-      update={(cache: any) => {
-        updateUserArticles({
-          cache,
-          articleId: article.id,
-          userName: article.author.userName,
-          type: article.sticky ? 'unsticky' : 'sticky'
-        })
+    <button
+      type="button"
+      onClick={() => {
+        update()
+        hideDropdown()
       }}
     >
-      {(update: any) => (
-        <button
-          type="button"
-          onClick={() => {
-            update()
-            hideDropdown()
-          }}
-        >
-          {article.sticky ? <TextIconUnsticky /> : <TextIconSticky />}
-          <style jsx>{styles}</style>
-        </button>
-      )}
-    </Mutation>
+      {article.sticky ? <TextIconUnsticky /> : <TextIconSticky />}
+      <style jsx>{styles}</style>
+    </button>
   )
 }
 

@@ -1,12 +1,12 @@
 import classNames from 'classnames'
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
-import { Mutation } from '~/components/GQL'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
@@ -30,11 +30,17 @@ import styles from './styles.css'
  *
  */
 
-interface Props {
+interface FormProps {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: () => void
   scrollLock?: boolean
+}
+
+interface FormValues {
+  avatar: null | string
+  displayName: string
+  description: string
 }
 
 const UPDATE_USER_INFO = gql`
@@ -62,15 +68,12 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
   )
 }
 
-export const SignUpProfileForm: FC<Props> = ({
-  extraClass = [],
-  purpose,
-  submitCallback,
-  scrollLock
-}) => {
+export const SignUpProfileForm: React.FC<FormProps> = formProps => {
+  const [update] = useMutation(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
+  const { extraClass = [], submitCallback, scrollLock } = formProps
 
-  const BaseForm = ({
+  const InnerForm = ({
     values,
     errors,
     touched,
@@ -80,9 +83,7 @@ export const SignUpProfileForm: FC<Props> = ({
     handleSubmit,
     setFieldValue,
     setFieldError
-  }: {
-    [key: string]: any
-  }) => {
+  }: FormikProps<FormValues>) => {
     const formClass = classNames('form', ...extraClass)
 
     const displayNamePlaceholder = translate({
@@ -90,7 +91,6 @@ export const SignUpProfileForm: FC<Props> = ({
       zh_hans: '姓名',
       lang
     })
-
     const descriptionPlaceholder = translate({
       zh_hant: '介紹你自己，獲得更多社區關注',
       zh_hans: '介绍你自己，获得更多社区关注',
@@ -98,63 +98,62 @@ export const SignUpProfileForm: FC<Props> = ({
     })
 
     return (
-      <>
-        <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content scrollLock={scrollLock}>
-            <SignUpAvatarUploader
-              field="avatar"
-              lang={lang}
-              uploadCallback={setFieldValue}
-            />
-            <AvatarError field="avatar" errors={errors} touched={touched} />
-            <Form.Input
-              type="text"
-              field="displayName"
-              placeholder={displayNamePlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Textarea
-              field="description"
-              placeholder={descriptionPlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              style={{ height: '5rem' }}
-              hint={translate({
-                zh_hant: TEXT.zh_hant.descriptionHint,
-                zh_hans: TEXT.zh_hans.descriptionHint,
-                lang
-              })}
-            />
-          </Modal.Content>
+      <form className={formClass} onSubmit={handleSubmit}>
+        <Modal.Content scrollLock={scrollLock}>
+          <SignUpAvatarUploader
+            field="avatar"
+            lang={lang}
+            uploadCallback={setFieldValue}
+          />
+          <AvatarError field="avatar" errors={errors} touched={touched} />
+          <Form.Input
+            type="text"
+            field="displayName"
+            placeholder={displayNamePlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Textarea
+            field="description"
+            placeholder={descriptionPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            style={{ height: '5rem' }}
+            hint={translate({
+              zh_hant: TEXT.zh_hant.descriptionHint,
+              zh_hans: TEXT.zh_hans.descriptionHint,
+              lang
+            })}
+          />
+        </Modal.Content>
 
-          <div className="buttons">
-            <Modal.FooterButton
-              htmlType="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-              width="full"
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.nextStep}
-                zh_hans={TEXT.zh_hans.nextStep}
-              />
-            </Modal.FooterButton>
-          </div>
-        </form>
+        <div className="buttons">
+          <Modal.FooterButton
+            htmlType="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+            width="full"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.nextStep}
+              zh_hans={TEXT.zh_hans.nextStep}
+            />
+          </Modal.FooterButton>
+        </div>
+
         <style jsx>{styles}</style>
-      </>
+      </form>
     )
   }
 
-  const validateAvatar = (value: string | null, language: string) => {
-    let result: any
+  const validateAvatar = (value: string | null) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -162,12 +161,12 @@ export const SignUpProfileForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const validateDisplayName = (value: string, language: string) => {
-    let result: any
+  const validateDisplayName = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -180,12 +179,12 @@ export const SignUpProfileForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const validateDescription = (value: string, language: string) => {
-    let result: any
+  const validateDescription = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -193,11 +192,11 @@ export const SignUpProfileForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const MainForm: any = withFormik({
+  const MainForm = withFormik<FormProps, FormValues>({
     mapPropsToValues: () => ({
       avatar: null,
       displayName: '',
@@ -205,9 +204,9 @@ export const SignUpProfileForm: FC<Props> = ({
     }),
 
     validate: ({ avatar, displayName, description }) => {
-      const isValidAvatar = validateAvatar(avatar, lang)
-      const isInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isValidDescription = validateDescription(description, lang)
+      const isValidAvatar = validateAvatar(avatar)
+      const isInvalidDisplayName = validateDisplayName(displayName)
+      const isValidDescription = validateDescription(description)
       const errors = {
         ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
         ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
@@ -218,13 +217,9 @@ export const SignUpProfileForm: FC<Props> = ({
 
     handleSubmit: async (values, { props, setSubmitting }: any) => {
       const { avatar, displayName, description } = values
-      const { submitAction } = props
-      if (!submitAction) {
-        return
-      }
 
       try {
-        await submitAction({
+        await update({
           variables: {
             input: {
               displayName,
@@ -244,15 +239,7 @@ export const SignUpProfileForm: FC<Props> = ({
 
       setSubmitting(false)
     }
-  })(BaseForm)
+  })(InnerForm)
 
-  return (
-    <>
-      <Mutation mutation={UPDATE_USER_INFO}>
-        {(update: any) => <MainForm submitAction={update} />}
-      </Mutation>
-
-      <style jsx>{styles}</style>
-    </>
-  )
+  return <MainForm {...formProps} />
 }

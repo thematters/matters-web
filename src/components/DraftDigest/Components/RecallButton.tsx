@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { useMutation } from 'react-apollo'
 
 import { Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
@@ -16,30 +16,27 @@ const RECALL_PUBLISH = gql`
 `
 
 const RecallButton = ({ id, text }: { id: string; text?: React.ReactNode }) => {
+  const [recall] = useMutation(RECALL_PUBLISH, {
+    variables: { id },
+    optimisticResponse: {
+      recallPublish: {
+        id,
+        scheduledAt: null,
+        publishState: 'unpublished',
+        __typename: 'Draft'
+      }
+    }
+  })
+
   return (
-    <Mutation
-      mutation={RECALL_PUBLISH}
-      variables={{ id }}
-      optimisticResponse={{
-        recallPublish: {
-          id,
-          scheduledAt: null,
-          publishState: 'unpublished',
-          __typename: 'Draft'
-        }
-      }}
-    >
-      {(recall: any) => (
-        <button type="button" onClick={() => recall()}>
-          {text || (
-            <Translate
-              zh_hant={TEXT.zh_hant.cancel}
-              zh_hans={TEXT.zh_hans.cancel}
-            />
-          )}
-        </button>
+    <button type="button" onClick={() => recall()}>
+      {text || (
+        <Translate
+          zh_hant={TEXT.zh_hant.cancel}
+          zh_hans={TEXT.zh_hans.cancel}
+        />
       )}
-    </Mutation>
+    </button>
   )
 }
 

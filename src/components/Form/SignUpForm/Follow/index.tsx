@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
@@ -45,7 +45,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const SignUpFollowForm: FC<Props> = ({
+export const SignUpFollowForm:React.FC<Props> = ({
   extraClass = [],
   purpose,
   submitCallback

@@ -1,7 +1,7 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Avatar } from '~/components/Avatar'
-import { Mutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 
@@ -31,39 +31,36 @@ import styles from './styles.css'
 interface Props {
   field: string
   lang: Language
-  uploadCallback: (field: string, value: any, validate?: boolean) => {}
+  uploadCallback: (field: string, value: any) => void
 }
 
-export const SignUpAvatarUploader: FC<Props> = ({
+export const SignUpAvatarUploader: React.FC<Props> = ({
   field,
   lang,
   uploadCallback
 }) => {
-  const [avatar, setAvatar] = useState<string | undefined>(undefined)
-
-  const [error, setError] = useState<'size' | undefined>(undefined)
+  const [upload] = useMutation(UPLOAD_FILE)
+  const [avatar, setAvatar] = useState<string>()
+  const [error, setError] = useState<'size'>()
 
   const avatarText = translate({
     zh_hant: '選擇圖片',
     zh_hans: '选择图片',
     lang
   })
-
   const avatarHint = translate({
     zh_hant: '上傳圖片作為大頭照 (5 MB 內)',
     zh_hans: '上传图片作为头像 (5 MB 內)',
     lang
   })
-
   const sizeError = translate({
     zh_hant: '上傳檔案超過 5 MB',
     zh_hans: '上传文件超过 5 MB',
     lang
   })
-
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
-  const handleChange = (event: any, upload: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -89,7 +86,7 @@ export const SignUpAvatarUploader: FC<Props> = ({
         setError(undefined)
 
         if (uploadCallback) {
-          uploadCallback(field, id, false)
+          uploadCallback(field, id)
         }
       })
       .catch((result: any) => {
@@ -97,40 +94,33 @@ export const SignUpAvatarUploader: FC<Props> = ({
       })
   }
 
-  const Uploader = ({ upload }: any) => (
-    <>
-      <section className="container">
-        <div className="avatar">
-          <Avatar size="large" src={avatar} />
-        </div>
-        <div className="upload">
-          <div className="wrapper">
-            <Icon
-              id={ICON_CAMERA.id}
-              viewBox={ICON_CAMERA.viewBox}
-              style={{ width: 24, height: 24, marginRight: '0.25rem' }}
-            />
-            {avatarText}
-            <input
-              className="input"
-              type="file"
-              name="file"
-              accept={acceptTypes}
-              multiple={false}
-              onChange={(event: any) => handleChange(event, upload)}
-            />
-          </div>
-          <div className="hint">{avatarHint}</div>
-          <div className="error">{error === 'size' && sizeError}</div>
-        </div>
-      </section>
-      <style jsx>{styles}</style>
-    </>
-  )
-
   return (
-    <Mutation mutation={UPLOAD_FILE}>
-      {(upload: any) => <Uploader upload={upload} />}
-    </Mutation>
+    <section className="container">
+      <div className="avatar">
+        <Avatar size="large" src={avatar} />
+      </div>
+      <div className="upload">
+        <div className="wrapper">
+          <Icon
+            id={ICON_CAMERA.id}
+            viewBox={ICON_CAMERA.viewBox}
+            style={{ width: 24, height: 24, marginRight: '0.25rem' }}
+          />
+          {avatarText}
+          <input
+            className="input"
+            type="file"
+            name="file"
+            accept={acceptTypes}
+            multiple={false}
+            onChange={event => handleChange(event)}
+          />
+        </div>
+        <div className="hint">{avatarHint}</div>
+        <div className="error">{error === 'size' && sizeError}</div>
+      </div>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }

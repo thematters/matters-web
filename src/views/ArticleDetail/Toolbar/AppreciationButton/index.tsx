@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { forwardRef, useContext, useRef, useState } from 'react'
+import { useMutation } from 'react-apollo'
 
 import { Icon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
@@ -165,90 +165,87 @@ const AppreciationButtonContainer = ({
     )
   }
 
+  // bundle appreciations
+  const [sendAppreciation] = useMutation(APPRECIATE_ARTICLE, {
+    variables: { id: article.id, amount: appreciationAmount },
+    optimisticResponse: {
+      appreciateArticle: {
+        id: article.id,
+        appreciationsReceivedTotal:
+          article.appreciationsReceivedTotal + appreciationAmount,
+        hasAppreciate: true,
+        appreciateLeft,
+        __typename: 'Article'
+      }
+    }
+  })
+  const appreciate = () => {
+    const debounce = 1000
+    setAppreciationAmount(appreciationAmount + 1)
+
+    if (!bundling) {
+      setBundling(true)
+      setTimeout(() => {
+        if (amountRef.current) {
+          sendAppreciation({
+            variables: { id: article.id, amount: amountRef.current }
+          })
+          setAppreciationAmount(0)
+          setBundling(false)
+        }
+      }, debounce)
+    }
+  }
+
   return (
-    <Mutation
-      mutation={APPRECIATE_ARTICLE}
-      variables={{ id: article.id, amount: appreciationAmount }}
-      optimisticResponse={{
-        appreciateArticle: {
-          id: article.id,
-          appreciationsReceivedTotal:
-            article.appreciationsReceivedTotal + appreciationAmount,
-          hasAppreciate: true,
-          appreciateLeft,
-          __typename: 'Article'
-        }
-      }}
-    >
-      {(sendAppreciation: any, { data }: any) => {
-        // bundle appreciations
-        const appreciate = () => {
-          const debounce = 1000
-          setAppreciationAmount(appreciationAmount + 1)
+    <section className={containerClasses}>
+      {canAppreciate && (
+        <AppreciateButton
+          appreciateLimit={appreciateLeft}
+          appreciatedCount={appreciatedCount}
+          canAppreciate={canAppreciate}
+          appreciate={appreciate}
+          isAuthed={viewer.isAuthed}
+        />
+      )}
 
-          if (!bundling) {
-            setBundling(true)
-            setTimeout(() => {
-              if (amountRef.current) {
-                sendAppreciation({
-                  variables: { id: article.id, amount: amountRef.current }
-                })
-                setAppreciationAmount(0)
-                setBundling(false)
-              }
-            }, debounce)
+      {!canAppreciate && (
+        <Tooltip
+          content={
+            <Translate
+              {...(isReachLimit
+                ? {
+                    zh_hant: '你最多可讚賞 5 次',
+                    zh_hans: '你最多可赞赏 5 次'
+                  }
+                : isMe
+                ? {
+                    zh_hant: '去讚賞其他用戶吧',
+                    zh_hans: '去赞赏其他用户吧'
+                  }
+                : {
+                    zh_hant: '你無法進行讚賞',
+                    zh_hans: '你无法进行赞赏'
+                  })}
+            />
           }
-        }
+        >
+          <AppreciateButton
+            appreciateLimit={appreciateLimit}
+            appreciatedCount={appreciatedCount}
+            canAppreciate={canAppreciate}
+            appreciate={appreciate}
+            isAuthed={viewer.isAuthed}
+          />
+        </Tooltip>
+      )}
 
-        return (
-          <section className={containerClasses}>
-            {canAppreciate && (
-              <AppreciateButton
-                appreciateLimit={appreciateLeft}
-                appreciatedCount={appreciatedCount}
-                canAppreciate={canAppreciate}
-                appreciate={appreciate}
-                isAuthed={viewer.isAuthed}
-              />
-            )}
-            {!canAppreciate && (
-              <Tooltip
-                content={
-                  <Translate
-                    {...(isReachLimit
-                      ? {
-                          zh_hant: '你最多可讚賞 5 次',
-                          zh_hans: '你最多可赞赏 5 次'
-                        }
-                      : isMe
-                      ? {
-                          zh_hant: '去讚賞其他用戶吧',
-                          zh_hans: '去赞赏其他用户吧'
-                        }
-                      : {
-                          zh_hant: '你無法進行讚賞',
-                          zh_hans: '你无法进行赞赏'
-                        })}
-                  />
-                }
-              >
-                <AppreciateButton
-                  appreciateLimit={appreciateLimit}
-                  appreciatedCount={appreciatedCount}
-                  canAppreciate={canAppreciate}
-                  appreciate={appreciate}
-                  isAuthed={viewer.isAuthed}
-                />
-              </Tooltip>
-            )}
-            <span className="appreciate-count">
-              {numAbbr(article.appreciationsReceivedTotal)}
-            </span>
-            <style jsx>{styles}</style>
-          </section>
-        )
-      }}
-    </Mutation>
+      <span className="appreciate-count">
+        {numAbbr(article.appreciationsReceivedTotal)}
+      </span>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { FC, useState } from 'react'
+import { useState } from 'react'
+import { useMutation } from 'react-apollo'
 
-import { Mutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
@@ -40,12 +40,13 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const ProfileCoverUploader: FC<Props> = ({ user }) => {
+export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
+  const [update] = useMutation(UPDATE_USER_INFO)
+  const [upload] = useMutation(UPLOAD_FILE)
+  const [error, setError] = useState<'size' | undefined>(undefined)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
-  const [error, setError] = useState<'size' | undefined>(undefined)
-
-  const handleChange = (event: any, upload: any, update: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -82,7 +83,9 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
       })
   }
 
-  const removeCover = (event: any, update: any) => {
+  const removeCover = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.stopPropagation()
 
     if (!update || !user.info.profileCover) {
@@ -98,66 +101,49 @@ export const ProfileCoverUploader: FC<Props> = ({ user }) => {
       })
   }
 
-  const Uploader = ({
-    upload,
-    update
-  }: {
-    upload: () => {}
-    update: () => {}
-  }) => (
-    <>
-      <div className="container">
-        <Cover cover={user.info.profileCover} />
-        <div className="uploader">
-          <div className="buttons">
-            <button type="button" className="button">
-              <label>
-                <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
-                <span className="upload">
-                  <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
-                </span>
-                <input
-                  className="input"
-                  type="file"
-                  name="file"
-                  accept={acceptTypes}
-                  multiple={false}
-                  onChange={(event: any) => handleChange(event, upload, update)}
-                />
-              </label>
+  return (
+    <section className="container">
+      <Cover cover={user.info.profileCover} />
+      <div className="uploader">
+        <div className="buttons">
+          <button type="button" className="button">
+            <label>
+              <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
+              <span className="upload">
+                <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
+              </span>
+              <input
+                className="input"
+                type="file"
+                name="file"
+                accept={acceptTypes}
+                multiple={false}
+                onChange={event => handleChange(event)}
+              />
+            </label>
+          </button>
+          {user.info.profileCover && (
+            <button
+              type="button"
+              className="button remove"
+              onClick={event => removeCover(event)}
+            >
+              <Translate zh_hant="刪除" zh_hans="删除" />
             </button>
-            {user.info.profileCover && (
-              <button
-                type="button"
-                className="button remove"
-                onClick={(event: any) => removeCover(event, update)}
-              >
-                <Translate zh_hant="刪除" zh_hans="删除" />
-              </button>
+          )}
+          <div className="error">
+            {error === 'size' && (
+              <Translate
+                zh_hant="上傳檔案超過 5 MB"
+                zh_hans="上传文件超过 5 MB"
+              />
             )}
-            <div className="error">
-              {error === 'size' && (
-                <Translate
-                  zh_hant="上傳檔案超過 5 MB"
-                  zh_hans="上传文件超过 5 MB"
-                />
-              )}
-            </div>
           </div>
         </div>
       </div>
-      <style jsx>{styles}</style>
-    </>
-  )
 
-  return (
-    <Mutation mutation={UPDATE_USER_INFO}>
-      {(update: any) => (
-        <Mutation mutation={UPLOAD_FILE}>
-          {(upload: any) => <Uploader upload={upload} update={update} />}
-        </Mutation>
-      )}
-    </Mutation>
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

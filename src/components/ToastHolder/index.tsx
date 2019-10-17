@@ -1,5 +1,5 @@
 import _filter from 'lodash/filter'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { useEventListener } from '~/components'
 
@@ -25,7 +25,7 @@ interface Props {
   layoutClasses?: string
 }
 
-export const ToastHolder: FC<Props> = ({
+export const ToastHolder:React.FC<Props> = ({
   layoutClasses = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
 }) => {
   const [toasts, setToasts] = useState<any[]>([])

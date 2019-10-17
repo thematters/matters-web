@@ -1,6 +1,6 @@
 import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
-import { FC, useContext, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useQuery } from 'react-apollo'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
@@ -24,7 +24,7 @@ const debouncedSetSearch = _debounce((value, setSearch) => {
   setSearch(value)
 }, 300)
 
-const CollectForm: FC<Props> = ({ onAdd }) => {
+const CollectForm:React.FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)

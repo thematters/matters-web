@@ -1,5 +1,5 @@
 import _get from 'lodash/get'
-import { FC, ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 
@@ -7,7 +7,7 @@ import ICON_COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
 
 import styles from './styles.css'
 
-const Collapsable: FC<{ title: ReactNode; defaultCollapsed?: boolean }> = ({
+const Collapsable:React.FC<{ title: ReactNode; defaultCollapsed?: boolean }> = ({
   children,
   title,
   defaultCollapsed = true
