@@ -39,7 +39,7 @@ const SetupLikerIdButton = () => (
 
 const WalletSetting = () => {
   const viewer = useContext(ViewerContext)
-  const likerId = _get(viewer, 'likerId')
+  const likerId = viewer.likerId
   const { data, loading, error } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none'
   })
@@ -58,6 +58,7 @@ const WalletSetting = () => {
         <span className="title">
           <Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />
         </span>
+
         {likerId && (
           <span>
             {LIKE.total} LikeCoin
@@ -96,6 +97,8 @@ const WalletSetting = () => {
           </TextIcon>
         </a>
       )}
+
+      <style jsx>{styles}</style>
     </section>
   )
 }

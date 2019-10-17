@@ -39,7 +39,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     if (instance) {
       setTimeout(() => {
         instance.show()
-      }, 100) // unknown bug, needs set a timeout
+      }, 100) // FIXME
     }
   }
 

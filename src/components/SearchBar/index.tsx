@@ -21,8 +21,6 @@ const BaseSearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
-
-  // translations
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({
     zh_hant: TEXT.zh_hant.search,
@@ -46,7 +44,7 @@ const BaseSearchBar: React.FC<{
     if (instance) {
       setTimeout(() => {
         instance.show()
-      }, 100) // unknown bug, needs set a timeout
+      }, 100) // FIXME
     }
   }
 
@@ -63,6 +61,7 @@ const BaseSearchBar: React.FC<{
           q: values.q
         })
         Router.push(path.href, path.as)
+        hideDropdown()
       }}
       render={({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {

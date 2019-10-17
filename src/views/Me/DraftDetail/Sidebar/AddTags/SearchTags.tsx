@@ -121,7 +121,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
     if (instance) {
       setTimeout(() => {
         instance.show()
-      }, 100) // unknown bug, needs set a timeout
+      }, 100) // FIXME
     }
   }
 
