@@ -84,8 +84,8 @@ const SearchUser = ({
   const connectionPath = 'search'
   const { edges, pageInfo } = (data && data.search) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return isAggregate ? null : <EmptySearchResult />
   }
 
   const loadMore = () => {
@@ -105,10 +105,6 @@ const SearchUser = ({
           path: connectionPath
         })
     })
-  }
-
-  if (!edges || edges.length <= 0) {
-    return isAggregate ? null : <EmptySearchResult />
   }
 
   return (

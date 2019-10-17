@@ -49,7 +49,7 @@ export default () => {
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.subscriptions) || {}
 
-  if (!edges || !pageInfo || edges.length <= 0) {
+  if (!edges || edges.length <= 0 || !pageInfo || edges.length <= 0) {
     return <EmptyBookmark />
   }
 

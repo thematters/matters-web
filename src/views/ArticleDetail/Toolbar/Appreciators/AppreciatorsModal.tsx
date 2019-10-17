@@ -49,29 +49,21 @@ const ARTICLE_APPRECIATORS = gql`
 const AppreciatorsModal = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-
-  if (!mediaHash) {
-    return null
-  }
-
   const { data, loading, fetchMore } = useQuery<AllArticleAppreciators>(
     ARTICLE_APPRECIATORS,
     { variables: { mediaHash } }
   )
+
   const article = data && data.article
   const connectionPath = 'article.appreciationsReceived'
   const { edges, pageInfo } =
     (data && data.article && data.article.appreciationsReceived) || {}
 
   if (loading) {
-    return (
-      <ModalInstance modalId="appreciatorsModal">
-        <Spinner />
-      </ModalInstance>
-    )
+    return <Spinner />
   }
 
-  if (!edges || !pageInfo || !article) {
+  if (!edges || edges.length <= 0 || !pageInfo || !article) {
     return null
   }
 
@@ -94,11 +86,11 @@ const AppreciatorsModal = () => {
     })
   }
   const totalCount = numFormat(
-    _get(data, 'article.appreciationsReceived.totalCount', 0)
+    (data && data.article && data.article.appreciationsReceived.totalCount) || 0
   )
 
   return (
-    <ModalInstance modalId="appreciatorsModal">
+    <>
       <Modal.Header
         title={
           <Translate
@@ -134,8 +126,12 @@ const AppreciatorsModal = () => {
           </ul>
         </InfiniteScroll>
       </Modal.Content>
-    </ModalInstance>
+    </>
   )
 }
 
-export default AppreciatorsModal
+export default () => (
+  <ModalInstance modalId="appreciatorsModal">
+    {(props: ModalInstanceProps) => <AppreciatorsModal />}
+  </ModalInstance>
+)

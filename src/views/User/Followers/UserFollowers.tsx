@@ -3,8 +3,8 @@ import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 
-import { Head, InfiniteScroll, Placeholder } from '~/components'
-import EmptyFollower from '~/components/Empty/EmptyFollower'
+import { Head, InfiniteScroll, Placeholder, Translate } from '~/components'
+import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -53,8 +53,14 @@ const UserFollowers = () => {
   const connectionPath = 'user.followers'
   const { edges, pageInfo } = user.followers
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <EmptyWarning
+        description={
+          <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+        }
+      />
+    )
   }
 
   const loadMore = () => {
@@ -74,10 +80,6 @@ const UserFollowers = () => {
           path: connectionPath
         })
     })
-  }
-
-  if (!edges || edges.length <= 0) {
-    return <EmptyFollower />
   }
 
   return (

@@ -9,7 +9,6 @@ import {
   Tag,
   Translate
 } from '~/components'
-import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -81,13 +80,12 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
   }
 
   const connectionPath = 'search'
-  const result = _get(data, connectionPath)
+  const { edges, pageInfo } = (data && data.search) || {}
 
-  if (!result || !result.edges) {
-    return <Throw404 />
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return null
   }
 
-  const { edges, pageInfo } = result
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_TAG,
@@ -116,6 +114,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
     return (
       <section>
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
+
         <ul>
           {edges.map(({ node, cursor }, i) => (
             <li

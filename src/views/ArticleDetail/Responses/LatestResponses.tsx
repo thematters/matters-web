@@ -146,7 +146,7 @@ const LatestResponses = () => {
     return <Spinner />
   }
 
-  if (!edges || !pageInfo) {
+  if (!edges || edges.length <= 0 || !pageInfo) {
     return null
   }
 

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
 
-import { Label, Translate } from '~/components'
+import { Label, Placeholder, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
@@ -37,8 +37,12 @@ export const SIDEBAR_TOPICS = gql`
 `
 
 export default () => {
-  const { data } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
+  const { data, loading } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
   const edges = data && data.viewer && data.viewer.recommendation.topics.edges
+
+  if (loading) {
+    return <Placeholder.Sidebar />
+  }
 
   if (!edges || edges.length <= 0) {
     return null

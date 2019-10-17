@@ -42,8 +42,8 @@ export default () => {
   const connectionPath = 'viewer.drafts'
   const { edges, pageInfo } = (data && data.viewer && data.viewer.drafts) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyDraft />
   }
 
   const loadMore = () =>
@@ -58,10 +58,6 @@ export default () => {
           path: connectionPath
         })
     })
-
-  if (!edges || edges.length <= 0) {
-    return <EmptyDraft />
-  }
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

@@ -32,22 +32,23 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
     }
   )
   return (
-    <>
-      <div className="info">
-        <Translate zh_hant="創作了" zh_hans="创作了" />
-        <span>{articles}</span>
-        <Translate zh_hant="篇作品" zh_hans="篇作品" />
-        <Icon
-          id={ICON_DOT_DIVIDER.id}
-          viewBox={ICON_DOT_DIVIDER.viewBox}
-          style={{ width: 18, height: 18 }}
-        />
-        <Translate zh_hant="累積創作" zh_hans="累积创作" />
-        <span>{words}</span>
-        <Translate zh_hant="字" zh_hans="字" />
-      </div>
+    <div className="info">
+      <Translate zh_hant="創作了" zh_hans="创作了" />
+      <span className="num">&nbsp;{articles}&nbsp;</span>
+      <Translate zh_hant="篇作品" zh_hans="篇作品" />
+
+      <Icon
+        id={ICON_DOT_DIVIDER.id}
+        viewBox={ICON_DOT_DIVIDER.viewBox}
+        style={{ width: 18, height: 18 }}
+      />
+
+      <Translate zh_hant="累積創作" zh_hans="累积创作" />
+      <span className="num">&nbsp;{words}&nbsp;</span>
+      <Translate zh_hant="字" zh_hans="字" />
+
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }
 
@@ -76,7 +77,7 @@ const UserArticles = () => {
   const connectionPath = 'user.articles'
   const { edges, pageInfo } = data.user.articles
 
-  if (!edges || !pageInfo) {
+  if (!edges || edges.length <= 0 || !pageInfo) {
     return null
   }
 

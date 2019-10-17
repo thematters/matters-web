@@ -52,8 +52,8 @@ export default () => {
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.activity.history) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyHistory />
   }
 
   const loadMore = () => {
@@ -72,10 +72,6 @@ export default () => {
           path: connectionPath
         })
     })
-  }
-
-  if (!edges || edges.length <= 0) {
-    return <EmptyHistory />
   }
 
   return (

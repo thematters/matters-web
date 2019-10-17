@@ -56,7 +56,7 @@ const CollectionList = ({
     return <Spinner />
   }
 
-  if (!edges || !pageInfo || !totalCount) {
+  if (!edges || edges.length <= 0 || !pageInfo || !totalCount) {
     return null
   }
 

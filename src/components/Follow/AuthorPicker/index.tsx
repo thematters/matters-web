@@ -30,7 +30,7 @@ const AUTHOR_PICKER = gql`
   ${FullDesc.fragments.user}
 `
 
-export const AuthorPicker = ({
+const AuthorPicker = ({
   viewer,
   title,
   titleIs,
@@ -52,38 +52,33 @@ export const AuthorPicker = ({
     (data && data.viewer && data.viewer.recommendation.authors.edges) || []
   const followeeCount = viewer.followees.totalCount || 0
 
-  if (!edges || edges.length <= 0) {
-    return null
-  }
-
   return (
-    <>
-      <div className={containerStyle}>
-        <PageHeader pageTitle={title}>
-          <div className="follow-info">
-            <ShuffleButton onClick={() => refetch()} />
-            <span>
-              <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
-              <span className="hightlight">{numFormat(followeeCount)}</span>
-              <Translate zh_hant=" 位" zh_hans=" 位" />
-            </span>
-          </div>
-        </PageHeader>
+    <div className={containerStyle}>
+      <PageHeader pageTitle={title}>
+        <div className="follow-info">
+          <ShuffleButton onClick={() => refetch()} />
+          <span>
+            <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
+            <span className="hightlight">{numFormat(followeeCount)}</span>
+            <Translate zh_hant=" 位" zh_hans=" 位" />
+          </span>
+        </div>
+      </PageHeader>
 
-        {loading && <Spinner />}
+      {loading && <Spinner />}
 
-        {!loading && (
-          <ul>
-            {edges.map(({ node, cursor }) => (
-              <li key={cursor}>
-                <FullDesc user={node} nameSize="small" readonly={readonly} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {!loading && (
+        <ul>
+          {edges.map(({ node, cursor }) => (
+            <li key={cursor}>
+              <FullDesc user={node} nameSize="small" readonly={readonly} />
+            </li>
+          ))}
+        </ul>
+      )}
+
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }
 
@@ -96,3 +91,5 @@ AuthorPicker.fragments = {
     }
   `
 }
+
+export default AuthorPicker

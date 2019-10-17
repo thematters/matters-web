@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
 
-import { Label, Tag, Translate } from '~/components'
+import { Label, Spinner, Tag, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -31,7 +31,7 @@ const SIDEBAR_TAGS = gql`
 `
 
 export default () => {
-  const { data } = useQuery<SidebarTags>(SIDEBAR_TAGS)
+  const { data, loading } = useQuery<SidebarTags>(SIDEBAR_TAGS)
   const edges = data && data.viewer && data.viewer.recommendation.tags.edges
 
   if (!edges || edges.length <= 0) {
@@ -46,6 +46,8 @@ export default () => {
         </Label>
         <ViewAllLink type="tags" />
       </header>
+
+      {loading && <Spinner />}
 
       <ul>
         {edges.map(({ node, cursor }, i) => (

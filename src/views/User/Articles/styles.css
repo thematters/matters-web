@@ -2,14 +2,13 @@
   @mixin border-bottom-grey;
   display: flex;
   align-items: center;
-
-  color: var(--color-grey);
   padding-bottom: var(--spacing-default);
   margin-bottom: var(--spacing-default);
 
-  & > span {
+  color: var(--color-grey);
+
+  & .num {
     color: var(--color-grey-darker);
-    font-weight: 600;
-    margin: 0 0.3rem;
+    font-weight: var(--font-weight-semibold);
   }
 }

@@ -4,7 +4,6 @@ import { useQuery } from 'react-apollo'
 
 import { Footer, Head, InfiniteScroll, Spinner } from '~/components'
 import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'
-import Throw404 from '~/components/Throw404'
 import { Transaction } from '~/components/TransactionDigest'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
@@ -45,86 +44,77 @@ const AppreciationsSent = () => {
     ME_APPRECIATIONS_SENT
   )
 
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (!data || !data.viewer) {
+    return null
+  }
+
+  const connectionPath = 'viewer.activity.appreciationsSent'
+  const { edges, pageInfo } = data.viewer.activity.appreciationsSent
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <>
+        <AppreciationTabs activity={data.viewer.activity} />
+        <EmptyAppreciation />
+      </>
+    )
+  }
+
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: 'appreciationsSent',
+      location: edges.length
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.appreciationsSent,
-            zh_hans: TEXT.zh_hans.appreciationsSent
-          }}
-        />
-
-        {() => {
-          if (loading) {
-            return <Spinner />
-          }
-
-          if (!data || !data.viewer) {
-            return <Throw404 />
-          }
-
-          const connectionPath = 'viewer.activity.appreciationsSent'
-          const { edges, pageInfo } = data.viewer.activity.appreciationsSent
-
-          if (!edges || !pageInfo) {
-            return null
-          }
-
-          const loadMore = () => {
-            analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-              type: 'appreciationsSent',
-              location: edges.length
-            })
-            return fetchMore({
-              variables: {
-                after: pageInfo.endCursor
-              },
-              updateQuery: (previousResult, { fetchMoreResult }) =>
-                mergeConnections({
-                  oldData: previousResult,
-                  newData: fetchMoreResult,
-                  path: connectionPath
-                })
-            })
-          }
-
-          if (!edges || edges.length <= 0) {
-            return (
-              <>
-                <AppreciationTabs activity={data.viewer.activity} />
-                <EmptyAppreciation />
-              </>
-            )
-          }
-
-          return (
-            <>
-              <AppreciationTabs activity={data.viewer.activity} />
-              <InfiniteScroll
-                hasNextPage={pageInfo.hasNextPage}
-                loadMore={loadMore}
-              >
-                <ul>
-                  {edges.map(({ node, cursor }) => (
-                    <li key={cursor}>
-                      <Transaction.AppreciationSent tx={node} />
-                    </li>
-                  ))}
-                </ul>
-              </InfiniteScroll>
-            </>
-          )
-        }}
-      </article>
-
-      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <Footer />
-      </section>
-
-      <style jsx>{styles}</style>
-    </main>
+    <>
+      <AppreciationTabs activity={data.viewer.activity} />
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <ul>
+          {edges.map(({ node, cursor }) => (
+            <li key={cursor}>
+              <Transaction.AppreciationSent tx={node} />
+            </li>
+          ))}
+        </ul>
+      </InfiniteScroll>
+    </>
   )
 }
 
-export default AppreciationsSent
+export default () => (
+  <main className="l-row">
+    <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.appreciationsSent,
+          zh_hans: TEXT.zh_hans.appreciationsSent
+        }}
+      />
+
+      <AppreciationsSent />
+    </article>
+
+    <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+      <Footer />
+    </section>
+
+    <style jsx>{styles}</style>
+  </main>
+)

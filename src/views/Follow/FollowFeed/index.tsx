@@ -10,6 +10,7 @@ import {
   Placeholder,
   Translate
 } from '~/components'
+import EmptyArticle from '~/components/Empty/EmptyArticle'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -56,8 +57,8 @@ export default () => {
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.followeeArticles) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyArticle />
   }
 
   const loadMore = () => {

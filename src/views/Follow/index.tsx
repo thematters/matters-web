@@ -5,7 +5,6 @@ import { useMutation, useQuery } from 'react-apollo'
 
 import { Footer, Spinner } from '~/components'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
-import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
 import { MeFollow } from './__generated__/MeFollow'
@@ -35,21 +34,22 @@ const Follow = () => {
   })
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
 
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (!data) {
-    return <Throw404 />
-  }
-
   useEffect(() => {
     if (viewer.isAuthed) {
       readFolloweeArticles()
     }
   }, [])
 
-  const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (!data) {
+    return null
+  }
+
+  const followeeCount =
+    (data && data.viewer && data.viewer.followees.totalCount) || 0
 
   if (followeeCount < 5) {
     return <PickAuthors viewer={data.viewer} />

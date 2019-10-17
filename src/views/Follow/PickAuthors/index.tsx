@@ -1,7 +1,7 @@
 import _get from 'lodash/get'
 
 import { Head, Translate } from '~/components'
-import { AuthorPicker } from '~/components/Follow'
+import AuthorPicker from '~/components/Follow/AuthorPicker'
 
 import { TEXT } from '~/common/enums'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'

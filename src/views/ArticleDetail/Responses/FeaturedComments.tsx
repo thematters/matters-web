@@ -5,7 +5,7 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 
-import { LoadMore, Spinner, Translate } from '~/components'
+import { LoadMore, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import commentFragments from '~/components/GQL/fragments/comment'
 
@@ -46,11 +46,6 @@ const FEATURED_COMMENTS = gql`
 const FeaturedComments = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-
-  if (!mediaHash) {
-    return null
-  }
-
   const { data, loading, fetchMore } = useQuery<ArticleFeaturedComments>(
     FEATURED_COMMENTS,
     {
@@ -59,12 +54,15 @@ const FeaturedComments = () => {
     }
   )
 
-  if (!data || !data.article) {
-    return <Spinner />
+  const connectionPath = 'article.featuredComments'
+  const { edges, pageInfo } =
+    (data && data.article && data.article.featuredComments) || {}
+  const comments = filterComments((edges || []).map(({ node }) => node))
+
+  if (!edges || edges.length <= 0 || !pageInfo || comments.length <= 0) {
+    return null
   }
 
-  const connectionPath = 'article.featuredComments'
-  const { edges, pageInfo } = data.article.featuredComments
   const loadMore = () => {
     return fetchMore({
       variables: {
@@ -77,12 +75,6 @@ const FeaturedComments = () => {
           path: connectionPath
         })
     })
-  }
-
-  const comments = filterComments((edges || []).map(({ node }) => node))
-
-  if (!comments || comments.length <= 0) {
-    return null
   }
 
   return (

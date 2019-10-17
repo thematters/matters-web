@@ -11,6 +11,7 @@ import {
   Translate,
   UserDigest
 } from '~/components'
+import EmptyWarning from '~/components/Empty/EmptyWarning'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -53,8 +54,12 @@ const Authors = () => {
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.authors) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <EmptyWarning
+        description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
+      />
+    )
   }
 
   const loadMore = () => {

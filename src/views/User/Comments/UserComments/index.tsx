@@ -131,8 +131,8 @@ const UserComments = ({ user }: UserIdUser) => {
       data.node.commentedArticles) ||
     {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyComment />
   }
 
   const loadMore = () =>
@@ -147,10 +147,6 @@ const UserComments = ({ user }: UserIdUser) => {
           path: connectionPath
         })
     })
-
-  if (!edges || edges.length <= 0) {
-    return <EmptyComment />
-  }
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

@@ -70,23 +70,21 @@ export default () => {
 
       {loading && <Spinner />}
 
-      {!loading && (
-        <ul>
-          {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.AUTHORS,
-                  location: i
-                })
-              }
-            >
-              <UserDigest.FullDesc user={node} nameSize="small" />
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.AUTHORS,
+                location: i
+              })
+            }
+          >
+            <UserDigest.FullDesc user={node} nameSize="small" />
+          </li>
+        ))}
+      </ul>
 
       <style jsx>{styles}</style>
     </>

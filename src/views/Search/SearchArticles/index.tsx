@@ -63,8 +63,18 @@ const SearchArticles = ({ q }: { q: string }) => {
   const connectionPath = 'search'
   const { edges, pageInfo } = (data && data.search) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <EmptySearch
+        inSidebar={false}
+        description={
+          <Translate
+            zh_hant={TEXT.zh_hant.emptySearchResults}
+            zh_hans={TEXT.zh_hans.emptySearchResults}
+          />
+        }
+      />
+    )
   }
 
   const loadMore = () => {
@@ -84,20 +94,6 @@ const SearchArticles = ({ q }: { q: string }) => {
           path: connectionPath
         })
     })
-  }
-
-  if (!edges || edges.length <= 0) {
-    return (
-      <EmptySearch
-        inSidebar={false}
-        description={
-          <Translate
-            zh_hant={TEXT.zh_hant.emptySearchResults}
-            zh_hans={TEXT.zh_hans.emptySearchResults}
-          />
-        }
-      />
-    )
   }
 
   return (

@@ -11,6 +11,7 @@ import {
   Tag,
   Translate
 } from '~/components'
+import EmptyTag from '~/components/Empty/EmptyTag'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -53,8 +54,8 @@ const Tags = () => {
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.tags) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyTag />
   }
 
   const loadMore = () => {

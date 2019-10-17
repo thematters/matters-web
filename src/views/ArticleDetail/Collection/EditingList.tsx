@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _uniqBy from 'lodash/uniqBy'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
@@ -9,7 +8,10 @@ import { Spinner } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
-import { EditorCollection } from './__generated__/EditorCollection'
+import {
+  EditorCollection,
+  EditorCollection_article_collection_edges_node
+} from './__generated__/EditorCollection'
 import styles from './styles.css'
 
 const EDITOR_COLLECTION = gql`
@@ -35,17 +37,21 @@ const EditingList = ({
   setEditingArticles
 }: {
   article: ArticleDetail_article
-  editingArticles: any[]
-  setEditingArticles: (articles: any[]) => void
+  editingArticles: EditorCollection_article_collection_edges_node[]
+  setEditingArticles: (
+    articles: EditorCollection_article_collection_edges_node[]
+  ) => void
 }) => {
   const { data, loading } = useQuery<EditorCollection>(EDITOR_COLLECTION, {
     variables: { mediaHash: article.mediaHash, first: null }
   })
   const edges = (data && data.article && data.article.collection.edges) || []
 
+  // init `editingArticles` when network collection is received
+  const edgesKeys = edges.map(({ node }) => node.id).join(',') || ''
   useEffect(() => {
     setEditingArticles(edges.map(({ node }) => node))
-  }, [])
+  }, [edgesKeys])
 
   if (loading) {
     return <Spinner />

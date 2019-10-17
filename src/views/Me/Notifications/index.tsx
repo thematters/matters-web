@@ -41,8 +41,12 @@ const Notifications = () => {
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = (data && data.viewer && data.viewer.notices) || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyNotice />
   }
 
   const loadMore = () =>
@@ -59,14 +63,6 @@ const Notifications = () => {
         })
     })
 
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (!edges || edges.length <= 0) {
-    return <EmptyNotice />
-  }
-
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <ul>
@@ -75,6 +71,8 @@ const Notifications = () => {
             <NoticeDigest notice={node} key={cursor} />
           </li>
         ))}
+
+        <style jsx>{styles}</style>
       </ul>
     </InfiniteScroll>
   )
@@ -88,6 +86,7 @@ export default () => (
       <PageHeader
         pageTitle={<Translate zh_hant="全部通知" zh_hans="全部通知" />}
       />
+
       <section>
         <Notifications />
       </section>

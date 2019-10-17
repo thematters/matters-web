@@ -12,7 +12,6 @@ import {
   Placeholder
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
-import Throw404 from '~/components/Throw404'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -62,15 +61,15 @@ const TagDetail = () => {
   }
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <Throw404 />
+    return <EmptyTag />
   }
 
   const id = data.node.id
   const connectionPath = 'node.articles'
   const { edges, pageInfo } = data.node.articles || {}
 
-  if (!edges || !pageInfo) {
-    return null
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyTag />
   }
 
   const loadMore = () => {
@@ -123,12 +122,6 @@ const TagDetail = () => {
 }
 
 export default () => {
-  const router = useRouter()
-
-  if (!router || !router.query || !router.query.id) {
-    return <EmptyTag />
-  }
-
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
