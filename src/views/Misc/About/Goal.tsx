@@ -33,6 +33,12 @@ const Goal = () => (
             zh_hans="Matters 希望围绕公共议题、知识生产，重构内容价值生态，搭建优质社群平台，保护创作版权；以独特算法令优质内容浮现，以数字货币让创作者、参与者获得持续回报。"
           />
         </p>
+        <p>
+          <Translate
+            zh_hant="2019 年 10 月，Matters 和 LikeCoin 聯手，將 LikeCoin 這一基於寫作者創造力為衡量的加密貨幣引入到 Matters 自由創作和公共討論空間之中，平台效應以收入的形式回饋給作者。"
+            zh_hans="2019年10月，Matters 和 LikeCoin 联手，将 LikeCoin 这一基于写作者创造力为衡量的加密货币引入到 Matters 自由创作和公共讨论空间之中，平台效应以收入的形式回馈给作者。"
+          />
+        </p>
       </div>
     </div>
 
