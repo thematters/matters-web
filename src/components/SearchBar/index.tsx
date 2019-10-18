@@ -21,7 +21,9 @@ const BaseSearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
+  const q = getQuery({ router, key: 'q' }) || ''
   const { lang } = useContext(LanguageContext)
+
   const textAriaLabel = translate({
     zh_hant: TEXT.zh_hant.search,
     zh_hans: TEXT.zh_hans.search,
@@ -35,6 +37,7 @@ const BaseSearchBar: React.FC<{
 
   // dropdown
   const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const [shown, setShown] = useState(false)
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
@@ -42,18 +45,13 @@ const BaseSearchBar: React.FC<{
   }
   const showDropdown = () => {
     if (instance) {
-      setTimeout(() => {
-        instance.show()
-      }, 100) // FIXME
+      instance.show()
     }
   }
 
-  // parse query
-  const routerQ = getQuery({ router, key: 'q' })
-
   return (
     <Formik
-      initialValues={{ q: routerQ || '' }}
+      initialValues={{ q }}
       enableReinitialize
       onSubmit={values => {
         const path = toPath({
@@ -88,10 +86,15 @@ const BaseSearchBar: React.FC<{
         return (
           <Dropdown
             content={
-              <AutoComplete searchKey={values.q} hideDropdown={hideDropdown} />
+              <AutoComplete
+                searchKey={values.q}
+                hideDropdown={hideDropdown}
+                isShown={shown}
+              />
             }
             trigger="manual"
             onCreate={setInstance}
+            onShown={() => setShown(true)}
             theme="dropdown shadow-light"
           >
             <form onSubmit={handleSubmit}>
@@ -106,8 +109,8 @@ const BaseSearchBar: React.FC<{
                   handleChange(e)
                   showDropdown()
                 }}
-                onFocus={() => !values.q && showDropdown()}
-                onClick={() => !values.q && showDropdown()}
+                onFocus={showDropdown}
+                onClick={showDropdown}
                 onBlur={hideDropdown}
               />
 

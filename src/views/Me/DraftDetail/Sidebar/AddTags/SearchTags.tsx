@@ -122,9 +122,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   }
   const showDropdown = () => {
     if (instance) {
-      setTimeout(() => {
-        instance.show()
-      }, 100) // FIXME
+      instance.show()
     }
   }
 

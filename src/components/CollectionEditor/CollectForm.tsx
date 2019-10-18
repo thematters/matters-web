@@ -1,5 +1,4 @@
 import _debounce from 'lodash/debounce'
-import _get from 'lodash/get'
 import { useContext, useRef, useState } from 'react'
 import { useQuery } from 'react-apollo'
 
@@ -29,7 +28,16 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
+  const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
+    variables: { search },
+    skip: !search
+  })
+  const articles = ((data && data.search.edges) || [])
+    .filter(({ node }) => node.__typename === 'Article')
+    .map(({ node }) => node) as SearchArticles_search_edges_node_Article[]
 
+  // dropdown
+  const isShowDropdown = (articles && articles.length) || loading
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
@@ -37,20 +45,9 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
   }
   const showDropdown = () => {
     if (instance) {
-      setTimeout(() => {
-        instance.show()
-      }, 100) // FIXME
+      instance.show()
     }
   }
-
-  const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
-    variables: { search },
-    skip: !search
-  })
-  const articles = _get(data, 'search.edges', []).map(
-    ({ node }: { node: SearchArticles_search_edges_node_Article }) => node
-  )
-  const isShowDropdown = (articles && articles.length) || loading
 
   if (isShowDropdown) {
     showDropdown()
@@ -68,7 +65,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           <ArticleList
             articles={articles}
             loading={loading}
-            onClick={(article: SearchArticles_search_edges_node_Article) => {
+            onClick={article => {
               onAdd(article)
               setSearch('')
               hideDropdown()

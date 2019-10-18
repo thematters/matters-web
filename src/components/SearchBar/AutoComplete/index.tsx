@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useQuery } from 'react-apollo'
+import { useEffect } from 'react'
+import { useLazyQuery } from 'react-apollo'
 
 import { Empty, Icon, Menu, Translate } from '~/components'
+import { Spinner } from '~/components/Spinner'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -14,6 +16,7 @@ import styles from './styles.css'
 
 interface Props {
   hideDropdown: () => void
+  isShown: boolean
   searchKey?: string
 }
 
@@ -38,17 +41,29 @@ const EmptyAutoComplete = () => (
   />
 )
 
-const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
-  const { data } = useQuery<SearchAutoComplete>(SEARCH_AUTOCOMPLETE, {
-    variables: { searchKey },
-    skip: !process.browser
-  })
+const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
+  const [getAutoComplete, { data, loading }] = useLazyQuery<SearchAutoComplete>(
+    SEARCH_AUTOCOMPLETE,
+    {
+      variables: { searchKey }
+    }
+  )
+
+  useEffect(() => {
+    if (isShown) {
+      getAutoComplete()
+    }
+  }, [searchKey, isShown])
 
   const frequentSearch = (data && data.frequentSearch) || []
   const recentSearches =
     (data && data.viewer && data.viewer.activity.recentSearches.edges) || []
   const showFrequentSearch = frequentSearch.length > 0
   const showSearchHistory = !searchKey
+
+  if (loading) {
+    return <Spinner />
+  }
 
   if (!showFrequentSearch && !showSearchHistory) {
     return null
