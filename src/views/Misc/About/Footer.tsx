@@ -10,9 +10,9 @@ import { translate } from '~/common/utils'
 import ICON_FACEBOOK from '~/static/icons/footer-facebook.svg?sprite'
 import ICON_INSTAGRAM from '~/static/icons/footer-instagram.svg?sprite'
 import ICON_MEDIUM from '~/static/icons/footer-medium.svg?sprite'
+import ICON_TELEGRAM from '~/static/icons/footer-telegram.svg?sprite'
 import ICON_TWITTER from '~/static/icons/footer-twitter.svg?sprite'
 import ICON_WECHAT from '~/static/icons/footer-wechat.svg?sprite'
-import ICON_WEIBO from '~/static/icons/footer-weibo.svg?sprite'
 
 import styles from './styles.css'
 
@@ -72,8 +72,11 @@ const Footer = () => {
                 <Icon id={ICON_WECHAT.id} viewBox={ICON_WECHAT.viewBox} />
               </span>
             </Tooltip>
-            <a href="https://weibo.com/6695370718/" target="_blank">
-              <Icon id={ICON_WEIBO.id} viewBox={ICON_WEIBO.viewBox} />
+            <a
+              href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
+              target="_blank"
+            >
+              <Icon id={ICON_TELEGRAM.id} viewBox={ICON_TELEGRAM.viewBox} />
             </a>
           </div>
         </section>

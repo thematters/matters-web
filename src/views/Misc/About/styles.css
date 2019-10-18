@@ -122,6 +122,11 @@ h2 {
         font-size: var(--font-size-sm);
       }
     }
+
+    & img {
+      border: 3px solid var(--color-grey-light);
+      border-radius: 10px;
+    }
   }
 
   @media (--sm-up) {
