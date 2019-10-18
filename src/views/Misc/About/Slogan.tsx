@@ -38,8 +38,8 @@ const Slogan = () => {
 
             <h2>
               <Translate
-                zh_hant="一個自由、自主、永續、有價的"
-                zh_hans="一个自由、自主、永续、有价的"
+                zh_hant="一個自主、永續、有價的"
+                zh_hans="一个自主、永续、有价的"
               />
               <br />
               <Translate
