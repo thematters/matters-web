@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import React from 'react'
 import { QueryResult } from 'react-apollo'

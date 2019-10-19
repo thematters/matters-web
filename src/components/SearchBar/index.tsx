@@ -1,10 +1,11 @@
 import { Formik } from 'formik'
 import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
+import { useDebounce } from 'use-debounce'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
@@ -23,7 +24,8 @@ const BaseSearchBar: React.FC<{
   const router = useRouter()
   const q = getQuery({ router, key: 'q' }) || ''
   const { lang } = useContext(LanguageContext)
-
+  const [search, setSearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const textAriaLabel = translate({
     zh_hant: TEXT.zh_hant.search,
     zh_hans: TEXT.zh_hans.search,
@@ -87,7 +89,7 @@ const BaseSearchBar: React.FC<{
           <Dropdown
             content={
               <AutoComplete
-                searchKey={values.q}
+                searchKey={debouncedSearch}
                 hideDropdown={hideDropdown}
                 isShown={shown}
               />
@@ -107,6 +109,7 @@ const BaseSearchBar: React.FC<{
                 value={values.q}
                 onChange={e => {
                   handleChange(e)
+                  setSearch(e.target.value)
                   showDropdown()
                 }}
                 onFocus={showDropdown}

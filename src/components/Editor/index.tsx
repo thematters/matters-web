@@ -25,6 +25,7 @@ import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 import createImageMatcher from './utils/createImageMatcher'
+import { INPUT_DEBOUNCE } from '~/common/enums'
 
 interface Props {
   onSave: (input: {
@@ -65,7 +66,7 @@ class Editor extends React.Component<Props, State> {
       mentionInstance: null
     }
 
-    this.saveDraft = _debounce(this.saveDraft.bind(this), 300)
+    this.saveDraft = _debounce(this.saveDraft.bind(this), INPUT_DEBOUNCE)
   }
 
   componentDidMount() {

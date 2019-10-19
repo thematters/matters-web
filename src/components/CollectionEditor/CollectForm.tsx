@@ -1,6 +1,7 @@
 import _debounce from 'lodash/debounce'
 import { useContext, useRef, useState } from 'react'
 import { useQuery } from 'react-apollo'
+import { useDebounce } from 'use-debounce'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
 import {
@@ -11,6 +12,7 @@ import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 import { LanguageContext } from '~/components/Language'
 import { Dropdown, PopperInstance } from '~/components/Popper'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -19,18 +21,17 @@ interface Props {
   onAdd: (article: SearchArticles_search_edges_node_Article) => void
 }
 
-const debouncedSetSearch = _debounce((value, setSearch) => {
-  setSearch(value)
-}, 300)
-
 const CollectForm: React.FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
+
+  // query
   const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
-    variables: { search },
-    skip: !search
+    variables: { search: debouncedSearch },
+    skip: !debouncedSearch
   })
   const articles = ((data && data.search.edges) || [])
     .filter(({ node }) => node.__typename === 'Article')
@@ -86,7 +87,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           })}
           onChange={event => {
             const value = event.target.value
-            debouncedSetSearch(value, setSearch)
+            setSearch(value)
           }}
           onFocus={() => {
             if (isShowDropdown) {

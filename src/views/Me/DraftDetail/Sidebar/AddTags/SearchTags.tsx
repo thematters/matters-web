@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
-import _debounce from 'lodash/debounce'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { useQuery } from 'react-apollo'
+import { useDebounce } from 'use-debounce/lib'
 
 import {
   Dropdown,
@@ -13,6 +13,7 @@ import {
   Translate
 } from '~/components'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 
 import {
@@ -106,14 +107,10 @@ const DropdownContent = ({
     </>
   )
 
-const debouncedSetQuerySearch = _debounce((value, setQuerySearch) => {
-  setQuerySearch(value)
-}, 300)
-
 const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
-  const [querySearch, setQuerySearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (instance) {
@@ -127,8 +124,8 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   }
 
   const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
-    variables: { search: querySearch },
-    skip: !querySearch
+    variables: { search: debouncedSearch },
+    skip: !debouncedSearch
   })
 
   return (
@@ -157,7 +154,6 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
           onChange={e => {
             const value = e.target.value
             setSearch(value)
-            debouncedSetQuerySearch(value, setQuerySearch)
             if (value) {
               showDropdown()
             } else {
