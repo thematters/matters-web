@@ -16,6 +16,7 @@ import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageConsumer } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { initAudioPlayers, translate, trimLineBreaks } from '~/common/utils'
@@ -25,7 +26,6 @@ import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 import createImageMatcher from './utils/createImageMatcher'
-import { INPUT_DEBOUNCE } from '~/common/enums'
 
 interface Props {
   onSave: (input: {
