@@ -10,7 +10,8 @@
         "apollo-cache",
         "svg-sprite-loader",
         "@testing-library/react",
-        "@apollo/react-testing"
+        "@apollo/react-testing",
+        "@apollo/react-hooks"
       ]
     ],
     "no-bitwise": false,
