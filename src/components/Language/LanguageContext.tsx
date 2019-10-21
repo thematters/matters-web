@@ -37,7 +37,7 @@ export const LanguageProvider = ({
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
-  const viewerLanguage = viewer.settings.language
+  const viewerLanguage = viewer && viewer.settings && viewer.settings.language
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (
