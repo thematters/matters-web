@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "1.14.1",
+  "version": "2.0.1",
   "description": "codebase of Matters' website",
   "author": "",
   "engines": {
@@ -14,7 +14,7 @@
     "test": "jest",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
-    "build": "npm run gen:type && npm run build:next && npm run build:server",
+    "build": "npm run gen:clean && npm run gen:type && npm run build:next && npm run build:server",
     "start": "NODE_ENV=production node build/production-server/server.js",
     "export": "npm run build && next export -o static-site-build",
     "format": "prettier --write \"{,!(build|static-site-build|node_modules|coverage)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
@@ -25,8 +25,8 @@
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "gen:type": "npm run gen:clean && apollo client:codegen __generated__ --target=typescript --config apollo.config.js",
-    "gen:watch": "npm run gen:type -- --watch",
+    "gen:type": "apollo client:codegen __generated__ --target=typescript --config apollo.config.js",
+    "gen:watch": "npm run gen:clean && npm run gen:type -- --watch",
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js"
   },
