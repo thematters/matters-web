@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-apollo'
 
 import { Avatar } from '~/components/Avatar'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
@@ -13,6 +14,7 @@ import {
 } from '~/common/enums'
 import ICON_CAMERA from '~/static/icons/camera-white.svg?sprite'
 
+import { UpdateUserInfoAvatar } from './__generated__/UpdateUserInfoAvatar'
 import styles from './styles.css'
 
 /**
@@ -39,8 +41,8 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
-  const [update] = useMutation(UPDATE_USER_INFO)
-  const [upload] = useMutation(UPLOAD_FILE)
+  const [update] = useMutation<UpdateUserInfoAvatar>(UPDATE_USER_INFO)
+  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const [error, setError] = useState<'size' | undefined>(undefined)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -64,19 +66,17 @@ export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
         input: { file, type: 'avatar', entityType: 'user' }
       }
     })
-      .then(({ data }: any) => {
-        const {
-          singleFileUpload: { id }
-        } = data
+      .then(({ data }) => {
+        const id = data && data.singleFileUpload.id
 
         if (update) {
           return update({ variables: { input: { avatar: id } } })
         }
       })
-      .then((result: any) => {
+      .then(() => {
         setError(undefined)
       })
-      .catch((result: any) => {
+      .catch(() => {
         // TODO: Handler error
       })
   }

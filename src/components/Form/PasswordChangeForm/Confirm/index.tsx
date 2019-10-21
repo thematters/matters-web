@@ -13,6 +13,7 @@ import { Modal } from '~/components/Modal'
 import { TEXT } from '~/common/enums'
 import { isValidPassword, translate } from '~/common/utils'
 
+import { ResetPassword } from './__generated__/ResetPassword'
 import styles from './styles.css'
 
 interface FormProps {
@@ -36,7 +37,7 @@ export const RESET_PASSWORD = gql`
 `
 
 export const PasswordChangeConfirmForm: React.FC<FormProps> = formProps => {
-  const [reset] = useMutation(RESET_PASSWORD)
+  const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
   const { lang } = useContext(LanguageContext)
   const {
     codeId,
@@ -187,9 +188,11 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = formProps => {
       const { password } = values
 
       try {
-        const {
-          data: { resetPassword }
-        } = await reset({ variables: { input: { password, codeId } } })
+        const { data } = await reset({
+          variables: { input: { password, codeId } }
+        })
+        const resetPassword = data && data.resetPassword
+
         if (submitCallback && resetPassword) {
           submitCallback()
         }

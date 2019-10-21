@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import { useState } from 'react'
 

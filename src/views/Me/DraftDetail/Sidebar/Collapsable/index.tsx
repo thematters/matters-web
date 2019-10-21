@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { ReactNode, useState } from 'react'
 
 import { Icon, TextIcon } from '~/components'

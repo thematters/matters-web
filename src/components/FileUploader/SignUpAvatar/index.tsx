@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-apollo'
 
 import { Avatar } from '~/components/Avatar'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 
@@ -39,7 +40,7 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   lang,
   uploadCallback
 }) => {
-  const [upload] = useMutation(UPLOAD_FILE)
+  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const [avatar, setAvatar] = useState<string>()
   const [error, setError] = useState<'size'>()
 
@@ -78,10 +79,10 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
     upload({
       variables: { input: { file, type: 'avatar', entityType: 'user' } }
     })
-      .then(({ data }: any) => {
-        const {
-          singleFileUpload: { id, path }
-        } = data
+      .then(({ data }) => {
+        const id = data && data.singleFileUpload.id
+        const path = data && data.singleFileUpload.path
+
         setAvatar(path)
         setError(undefined)
 

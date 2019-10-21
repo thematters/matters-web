@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/browser'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import React from 'react'
 
 import { ViewerUser } from './__generated__/ViewerUser'
@@ -45,8 +44,8 @@ type Viewer = ViewerUser & {
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
   const isAuthed = !!viewer.id
-  const state = _get(viewer, 'status.state')
-  const role = _get(viewer, 'status.role')
+  const state = viewer && viewer.status && viewer.status.state
+  const role = viewer && viewer.status && viewer.status.role
   const isActive = state === 'active'
   const isFrozen = state === 'frozen'
   const isBanned = state === 'banned'
@@ -60,7 +59,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     scope.setUser({
       id: viewer.id,
       role,
-      language: _get(viewer, 'settings.language')
+      language: viewer.settings.language
     })
     scope.setTag('source', 'web')
   })

@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { useContext } from 'react'
 
 import { Button, PageHeader, Translate } from '~/components'
@@ -89,7 +88,7 @@ export default () => {
               zh_hans={TEXT.zh_hans.email}
             />
           </span>
-          <span>{_get(viewer, 'info.email')}</span>
+          <span>{viewer.info.email}</span>
         </div>
         <EditButton modalId="emailModal" />
       </section>

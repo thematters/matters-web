@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import CommentContent from '~/components/CommentDigest/Content'
 
@@ -12,7 +11,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     return null
   }
 
-  const parentId = _get(comment, 'parentComment.id')
+  const parentId = comment && comment.parentComment && comment.parentComment.id
   const path = toPath({
     page: 'articleDetail',
     userName: comment.article.author.userName || '',

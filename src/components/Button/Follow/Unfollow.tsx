@@ -11,6 +11,7 @@ import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { UnfollowUser } from './__generated__/UnfollowUser'
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
@@ -30,7 +31,7 @@ const Unfollow = ({
   size?: 'small' | 'default'
 }) => {
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation(UNFOLLOW_USER, {
+  const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse: {
       unfollowUser: {

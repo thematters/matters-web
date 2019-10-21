@@ -7,6 +7,7 @@ import { useMutation } from 'react-apollo'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes } from '~/components/GQL'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -14,6 +15,7 @@ import { Modal } from '~/components/Modal'
 import { TEXT } from '~/common/enums'
 import { isValidEmail, translate } from '~/common/utils'
 
+import { ChangeEmail } from './__generated__/ChangeEmail'
 import styles from './styles.css'
 
 interface FormProps {
@@ -108,8 +110,8 @@ const InnerForm = ({
 }
 
 export const EmailChangeConfirmForm: React.FC<FormProps> = formProps => {
-  const [confirmCode] = useMutation(CONFIRM_CODE)
-  const [changeEmail] = useMutation(CHANGE_EMAIL)
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
   const { oldData, submitCallback } = formProps
 
@@ -168,11 +170,10 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = formProps => {
       const { email, code } = values
 
       try {
-        const {
-          data: { confirmVerificationCode }
-        } = await confirmCode({
+        const { data } = await confirmCode({
           variables: { input: { email, type: 'email_reset_confirm', code } }
         })
+        const confirmVerificationCode = data && data.confirmVerificationCode
         const params = {
           variables: {
             input: {

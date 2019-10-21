@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 import { useMutation } from 'react-apollo'
@@ -21,6 +20,7 @@ import ICON_EDIT from '~/static/icons/collection-edit.svg?sprite'
 import ICON_SAVE from '~/static/icons/pen.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { EditorSetCollection } from './__generated__/EditorSetCollection'
 import styles from './styles.css'
 
 /**
@@ -62,7 +62,9 @@ const EditButton = ({
   setEditing: any
   editingArticles: string[]
 }) => {
-  const [setCollection, { loading }] = useMutation(EDITOR_SET_COLLECTION)
+  const [setCollection, { loading }] = useMutation<EditorSetCollection>(
+    EDITOR_SET_COLLECTION
+  )
   const { lang } = useContext(LanguageContext)
   const editButtonClass = classNames({
     'edit-button': true

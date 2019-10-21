@@ -43,7 +43,7 @@ const WriteIcon = ({ loading }: { loading: boolean }) => {
 
 const WriteButton = ({ allowed, CustomButton }: Props) => {
   const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation(CREATE_DRAFT, {
+  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
       title: translate({
         zh_hans: TEXT.zh_hans.untitle,
@@ -75,11 +75,13 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
   }
 
   const onClick = () => {
-    putDraft().then((result: any) => {
-      const { data } = result as { data: CreateDraft }
-      const { slug, id } = data.putDraft
-      const path = toPath({ page: 'draftDetail', slug, id })
-      Router.push(path.as)
+    putDraft().then(({ data }) => {
+      const { slug, id } = (data && data.putDraft) || {}
+
+      if (slug && id) {
+        const path = toPath({ page: 'draftDetail', slug, id })
+        Router.push(path.as)
+      }
     })
   }
 

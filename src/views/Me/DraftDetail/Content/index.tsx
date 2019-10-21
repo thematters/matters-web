@@ -5,6 +5,7 @@ import { useMutation } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
@@ -13,6 +14,7 @@ import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
+import { UpdateDraft } from './__generated__/UpdateDraft'
 import styles from './styles.css'
 
 const Editor = dynamic(() => import('~/components/Editor'), {
@@ -55,8 +57,8 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     return null
   }
 
-  const [updateDraft] = useMutation(UPDATE_DRAFT)
-  const [singleFileUpload] = useMutation(UPLOAD_FILE)
+  const [updateDraft] = useMutation<UpdateDraft>(UPDATE_DRAFT)
+  const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const { lang } = useContext(LanguageContext)
   const { updateHeaderState } = useContext(HeaderContext)
   const [title, setTitle] = useState(draft.title)
@@ -99,7 +101,7 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
 
       <Editor
         upload={async input => {
-          const result = await singleFileUpload({
+          const { data } = await singleFileUpload({
             variables: {
               input: {
                 type: 'embed',
@@ -109,12 +111,9 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
               }
             }
           })
-          if (result) {
-            const {
-              data: {
-                singleFileUpload: { id, path }
-              }
-            } = result
+          const { id, path } = (data && data.singleFileUpload) || {}
+
+          if (id && path) {
             return { id, path }
           } else {
             throw new Error('upload not successful')

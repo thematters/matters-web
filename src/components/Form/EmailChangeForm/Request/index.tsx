@@ -6,6 +6,7 @@ import { useMutation } from 'react-apollo'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes } from '~/components/GQL'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -94,7 +95,7 @@ const InnerForm = ({
 }
 
 export const EmailChangeRequestForm: React.FC<FormProps> = formProps => {
-  const [confirmCode] = useMutation(CONFIRM_CODE)
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
   const { defaultEmail = '', submitCallback } = formProps
 
@@ -152,11 +153,10 @@ export const EmailChangeRequestForm: React.FC<FormProps> = formProps => {
       const { email, code } = values
 
       try {
-        const {
-          data: { confirmVerificationCode }
-        } = await confirmCode({
+        const { data } = await confirmCode({
           variables: { input: { email, type: 'email_reset', code } }
         })
+        const confirmVerificationCode = data && data.confirmVerificationCode
 
         if (submitCallback && confirmVerificationCode) {
           submitCallback({ codeId: confirmVerificationCode })

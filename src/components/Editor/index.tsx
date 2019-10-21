@@ -1,7 +1,6 @@
 import { QueryLazyOptions } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
-import _get from 'lodash/get'
 import _includes from 'lodash/includes'
 import React, { useContext } from 'react'
 import { QueryResult, useLazyQuery } from 'react-apollo'

@@ -10,6 +10,7 @@ import { Translate } from '~/components/Language'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import { SendVerificationCode } from './__generated__/SendVerificationCode'
 import styles from './styles.css'
 
 /**
@@ -43,7 +44,7 @@ export const SEND_CODE = gql`
 `
 
 const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
-  const [send] = useMutation(SEND_CODE)
+  const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0
@@ -59,11 +60,11 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
     send({
       variables: { input: { email, type } }
     })
-      .then((result: any) => {
+      .then(result => {
         setCountdown({ timeLeft: 1000 * 60 })
         setSent(true)
       })
-      .catch((error: any) => {
+      .catch(error => {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = (
           <Translate

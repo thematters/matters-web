@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'

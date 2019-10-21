@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { useEffect } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
@@ -11,6 +10,7 @@ import {
   Translate
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
@@ -22,9 +22,12 @@ import { mergeConnections } from '~/common/utils'
 import styles from './styles.css'
 
 const Notifications = () => {
-  const [markAllNoticesAsRead] = useMutation(MARK_ALL_NOTICES_AS_READ, {
-    update: updateViewerUnreadNoticeCount
-  })
+  const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
+    MARK_ALL_NOTICES_AS_READ,
+    {
+      update: updateViewerUnreadNoticeCount
+    }
+  )
   const { data, loading, fetchMore } = useQuery<
     MeNotifications,
     { first: number; after?: number }

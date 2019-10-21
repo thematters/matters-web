@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon } from '~/components'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
@@ -47,7 +48,7 @@ const DownvoteButton = ({
   comment: DownvoteComment
   disabled?: boolean
 }) => {
-  const [unvote] = useMutation(UNVOTE_COMMENT, {
+  const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
       unvoteComment: {
@@ -59,7 +60,7 @@ const DownvoteButton = ({
       }
     }
   })
-  const [downvote] = useMutation(VOTE_COMMENT, {
+  const [downvote] = useMutation<VoteComment>(VOTE_COMMENT, {
     variables: { id: comment.id, vote: 'down' },
     optimisticResponse: {
       voteComment: {
@@ -67,7 +68,7 @@ const DownvoteButton = ({
         upvotes:
           comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
         downvotes: comment.downvotes + 1,
-        myVote: 'down',
+        myVote: 'down' as any,
         __typename: 'Comment'
       }
     }

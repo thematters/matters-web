@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
 
 import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'

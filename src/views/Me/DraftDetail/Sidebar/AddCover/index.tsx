@@ -9,6 +9,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Collapsable from '../Collapsable'
 import { AddCoverDraft } from './__generated__/AddCoverDraft'
+import { UpdateDraftCover } from './__generated__/UpdateDraftCover'
 import styles from './styles.css'
 
 const fragments = {
@@ -77,7 +78,7 @@ const CoverList = ({
 }
 
 const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
-  const [update] = useMutation(UPDATE_COVER)
+  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER)
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
   const imageAssets = assets.filter(

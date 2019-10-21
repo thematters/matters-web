@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
@@ -52,7 +51,7 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = numAbbr(_get(tag, 'articles.totalCount', 0))
+  const tagCount = numAbbr(tag.articles.totalCount || 0)
 
   return (
     <Link {...path}>

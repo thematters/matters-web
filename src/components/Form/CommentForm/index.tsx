@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
@@ -17,6 +16,7 @@ import { dom, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
+import { PutComment } from './__generated__/PutComment'
 import styles from './styles.css'
 
 const CommentEditor = dynamic(
@@ -87,7 +87,7 @@ const CommentForm = ({
       id: commentDraftId
     }
   })
-  const [putComment] = useMutation(PUT_COMMENT, {
+  const [putComment] = useMutation<PutComment>(PUT_COMMENT, {
     refetchQueries
   })
   const draftContent = (data && data.commentDraft.content) || ''

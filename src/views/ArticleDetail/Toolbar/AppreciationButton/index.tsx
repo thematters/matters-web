@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { forwardRef, useContext, useState } from 'react'
 import { useMutation } from 'react-apollo'
 import { useDebouncedCallback } from 'use-debounce'
@@ -14,6 +13,7 @@ import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
 import styles from './styles.css'
 
@@ -127,7 +127,7 @@ const AppreciationButtonContainer = ({
 
   // bundle appreciations
   const [amount, setAmount] = useState(0)
-  const [sendAppreciation] = useMutation(APPRECIATE_ARTICLE)
+  const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const {
     appreciateLimit,
     appreciateLeft,

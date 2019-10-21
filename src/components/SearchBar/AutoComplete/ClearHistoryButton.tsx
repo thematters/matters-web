@@ -5,6 +5,7 @@ import { Translate } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
 
+import { ClearHistory } from './__generated__/ClearHistory'
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
 import styles from './styles.css'
 
@@ -45,7 +46,7 @@ const VIEWER_RECENT_SEARCHES = gql`
 `
 
 const ClearHistoryButton = () => {
-  const [clear] = useMutation(CLEAR_HISTORY, {
+  const [clear] = useMutation<ClearHistory>(CLEAR_HISTORY, {
     update: cache => {
       try {
         const data = cache.readQuery<ViewerRecentSearches>({

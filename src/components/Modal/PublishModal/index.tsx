@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useMutation } from 'react-apollo'
 import { DraftDetailQuery_node_Draft } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
+import { PublishArticle } from './__generated__/PublishArticle'
 import PublishSlide from './PublishSlide'
 import styles from './styles.css'
 
@@ -43,12 +43,12 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
   const isUnpublished = draft.publishState === 'unpublished'
   const publishable = draftId && isUnpublished && hasContent && hasTitle
 
-  const [publish] = useMutation(PUBLISH_ARTICLE, {
+  const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE, {
     optimisticResponse: {
       publishArticle: {
         id: draftId,
         scheduledAt: new Date(Date.now() + 1000).toISOString(),
-        publishState: 'pending',
+        publishState: 'pending' as any,
         __typename: 'Draft'
       }
     }
@@ -69,11 +69,8 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
           disabled={!publishable}
           onClick={async () => {
             const { data } = await publish({ variables: { draftId } })
-            const state = _get(
-              data,
-              'publishArticle.publishState',
-              'unpublished'
-            )
+            const state =
+              (data && data.publishArticle.publishState) || 'unpublished'
 
             if (state === 'pending') {
               close()

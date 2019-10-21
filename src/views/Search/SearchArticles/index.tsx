@@ -56,7 +56,7 @@ const SearchArticles = ({ q }: { q: string }) => {
     }
   )
 
-  if (loading && !_get(data, 'search')) {
+  if (loading && !(data && data.search)) {
     return <Placeholder.ArticleDigestList />
   }
 

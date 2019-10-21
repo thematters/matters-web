@@ -5,6 +5,8 @@ import { Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
+import { RetryPublish } from './__generated__/RetryPublish'
+
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
     retryPublish: publishArticle(input: { id: $id }) {
@@ -16,13 +18,13 @@ const RETRY_PUBLISH = gql`
 `
 
 const RetryButton = ({ id }: { id: string }) => {
-  const [retry] = useMutation(RETRY_PUBLISH, {
+  const [retry] = useMutation<RetryPublish>(RETRY_PUBLISH, {
     variables: { id },
     optimisticResponse: {
       retryPublish: {
         id,
         scheduledAt: new Date(Date.now() + 1000).toISOString(),
-        publishState: 'pending',
+        publishState: 'pending' as any,
         __typename: 'Draft'
       }
     }

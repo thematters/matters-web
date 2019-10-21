@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useMutation, useQuery } from 'react-apollo'
 
 import { Head, PageHeader, Translate } from '~/components'
@@ -7,6 +6,7 @@ import { Switch } from '~/components/Switch'
 
 import { TEXT } from '~/common/enums'
 
+import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import styles from './styles.css'
 
@@ -125,13 +125,21 @@ const settingsMap = {
 }
 
 const SettingsNotification = () => {
-  const [updateNotification] = useMutation(UPDATE_VIEWER_NOTIFICATION)
+  const [updateNotification] = useMutation<UpdateViewerNotification>(
+    UPDATE_VIEWER_NOTIFICATION
+  )
   const { data } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
   )
-  const settings = _get(data, 'viewer.settings.notification', {})
+  const settings: any =
+    (data && data.viewer && data.viewer.settings.notification) || {}
+  const id = data && data.viewer && data.viewer.id
 
-  const onChange = (type: string) =>
+  const onChange = (type: string) => {
+    if (!id) {
+      return
+    }
+
     updateNotification({
       variables: {
         type,
@@ -139,9 +147,10 @@ const SettingsNotification = () => {
       },
       optimisticResponse: {
         updateNotificationSetting: {
-          id: data && data.viewer && data.viewer.id,
+          id,
           settings: {
             notification: {
+              ...settings,
               [type]: !settings[type],
               __typename: 'NotificationSetting'
             },
@@ -151,6 +160,7 @@ const SettingsNotification = () => {
         }
       }
     })
+  }
 
   return (
     <>

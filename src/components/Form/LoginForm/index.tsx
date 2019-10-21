@@ -28,6 +28,7 @@ import {
   translate
 } from '~/common/utils'
 
+import { UserLogin } from './__generated__/UserLogin'
 import styles from './styles.css'
 
 /**
@@ -125,7 +126,7 @@ const SignUpRedirection = () => (
 )
 
 const LoginForm: React.FC<FormProps> = formProps => {
-  const [login] = useMutation(USER_LOGIN)
+  const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
   const { extraClass = [], purpose, submitCallback, scrollLock } = formProps
   const isInModal = purpose === 'modal'

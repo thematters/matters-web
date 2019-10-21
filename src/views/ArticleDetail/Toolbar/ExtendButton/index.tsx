@@ -34,7 +34,7 @@ const fragments = {
 const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const [extend] = useMutation(EXTEND_ARTICLE, {
+  const [extend] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
     variables: {
       title: translate({
         zh_hans: TEXT.zh_hans.untitle,
@@ -59,11 +59,13 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
         type="button"
         aria-label="關聯當前作品"
         onClick={async () => {
-          const result = await extend()
-          const { data } = result as { data: ExtendArticle }
-          const { slug, id } = data.putDraft
-          const path = toPath({ page: 'draftDetail', slug, id })
-          Router.push(path.as)
+          const { data } = await extend()
+          const { slug, id } = (data && data.putDraft) || {}
+
+          if (slug && id) {
+            const path = toPath({ page: 'draftDetail', slug, id })
+            Router.push(path.as)
+          }
         }}
       >
         <Icon

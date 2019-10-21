@@ -13,6 +13,7 @@ import { Modal } from '~/components/Modal'
 import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
 
+import {UpdateUserInfoProfileInit} from './__generated__/UpdateUserInfoProfileInit'
 import styles from './styles.css'
 
 /**
@@ -68,7 +69,7 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 }
 
 export const SignUpProfileForm: React.FC<FormProps> = formProps => {
-  const [update] = useMutation(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const { extraClass = [], submitCallback, scrollLock } = formProps
 

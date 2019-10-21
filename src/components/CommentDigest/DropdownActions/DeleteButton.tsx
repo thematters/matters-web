@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
@@ -7,6 +6,7 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 
+import { DeleteComment } from './__generated__/DeleteComment'
 import styles from './styles.css'
 
 const DELETE_COMMENT = gql`
@@ -22,12 +22,12 @@ const DeleteButton: React.FC<{
   commentId: string
   hideDropdown: () => void
 }> = ({ commentId, hideDropdown }) => {
-  const [deleteComment] = useMutation(DELETE_COMMENT, {
+  const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
       deleteComment: {
         id: commentId,
-        state: 'archived',
+        state: 'archived' as any,
         __typename: 'Comment'
       }
     }

@@ -1,9 +1,9 @@
-import _get from 'lodash/get'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { useMutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
@@ -23,7 +23,7 @@ import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
-  const [logout] = useMutation(USER_LOGOUT)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({

@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
@@ -13,6 +12,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
+import { SetDraftCollection } from './__generated__/SetDraftCollection'
 import styles from './styles.css'
 
 const CollectionEditor = dynamic(
@@ -107,7 +107,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     }
   }
 
-  const [setCollection] = useMutation(SET_DRAFT_COLLECTION)
+  const [setCollection] = useMutation<SetDraftCollection>(SET_DRAFT_COLLECTION)
   const { data, loading } = useQuery<DraftCollectionQuery>(DRAFT_COLLECTION, {
     variables: { id: draftId }
   })

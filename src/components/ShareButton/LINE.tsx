@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'

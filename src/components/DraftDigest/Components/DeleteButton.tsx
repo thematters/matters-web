@@ -5,6 +5,7 @@ import { Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
+import { DeleteDraft } from './__generated__/DeleteDraft'
 import { ViewerDrafts } from './__generated__/ViewerDrafts'
 
 const DELETE_DRAFT = gql`
@@ -29,7 +30,7 @@ const ME_DRADTS = gql`
 `
 
 const DeleteButton = ({ id }: { id: string }) => {
-  const [deleteDraft] = useMutation(DELETE_DRAFT, {
+  const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id },
     update: cache => {
       try {

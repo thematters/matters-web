@@ -7,6 +7,7 @@ import ICON_BOOKMARK_REGULAR_INACTIVE from '~/static/icons/bookmark-regular-inac
 import ICON_BOOKMARK_SM_INACTIVE from '~/static/icons/bookmark-small-inactive.svg?sprite'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
+import { SubscribeArticle } from './__generated__/SubscribeArticle'
 
 const SUBSCRIBE_ARTICLE = gql`
   mutation SubscribeArticle($id: ID!) {
@@ -26,7 +27,7 @@ const Subscribe = ({
   size: 'xsmall' | 'small' | 'default'
   disabled?: boolean
 }) => {
-  const [subscribe] = useMutation(SUBSCRIBE_ARTICLE, {
+  const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
     variables: { id: article.id },
     optimisticResponse: {
       subscribeArticle: {

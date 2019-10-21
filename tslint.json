@@ -29,15 +29,14 @@
         "import-sources-order": "case-insensitive",
         "named-imports-order": "case-insensitive",
         "grouped-imports": true,
-        "groups": [
-          {
+        "groups": [{
             "name": "local",
             "match": "^[.]",
             "order": 20
           },
           {
             "name": "internal:others",
-            "match": "^~/(common|static|page|definitions)",
+            "match": "^~/(common|static|page|definitions|__generated__)",
             "order": 15
           },
           {

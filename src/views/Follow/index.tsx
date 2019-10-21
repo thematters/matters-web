@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
@@ -8,6 +7,7 @@ import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadF
 import { ViewerContext } from '~/components/Viewer'
 
 import { MeFollow } from './__generated__/MeFollow'
+import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
 import FollowFeed from './FollowFeed'
 import PickAuthors from './PickAuthors'
 
@@ -29,9 +29,12 @@ const ME_FOLLOW = gql`
 
 const Follow = () => {
   const viewer = useContext(ViewerContext)
-  const [readFolloweeArticles] = useMutation(READ_FOLLOWEE_ARTICLES, {
-    update: viewerUnreadFolloweeArticles
-  })
+  const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
+    READ_FOLLOWEE_ARTICLES,
+    {
+      update: viewerUnreadFolloweeArticles
+    }
+  )
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
 
   useEffect(() => {

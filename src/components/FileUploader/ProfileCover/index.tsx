@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 import { useMutation } from 'react-apollo'
 
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
@@ -13,6 +14,7 @@ import {
 } from '~/common/enums'
 import ICON_CAMERA from '~/static/icons/camera-white.svg?sprite'
 
+import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 import styles from './styles.css'
 
 /**
@@ -41,8 +43,8 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
-  const [update] = useMutation(UPDATE_USER_INFO)
-  const [upload] = useMutation(UPLOAD_FILE)
+  const [update] = useMutation<UpdateUserInfoCover>(UPDATE_USER_INFO)
+  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const [error, setError] = useState<'size' | undefined>(undefined)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -66,19 +68,17 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
         input: { file, type: 'profileCover', entityType: 'user' }
       }
     })
-      .then(({ data }: any) => {
-        const {
-          singleFileUpload: { id }
-        } = data
+      .then(({ data }) => {
+        const id = data && data.singleFileUpload.id
 
         if (update) {
           return update({ variables: { input: { profileCover: id } } })
         }
       })
-      .then((result: any) => {
+      .then(result => {
         setError(undefined)
       })
-      .catch((result: any) => {
+      .catch(result => {
         // TODO: error handler
       })
   }

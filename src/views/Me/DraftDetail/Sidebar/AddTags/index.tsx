@@ -9,6 +9,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Collapsable from '../Collapsable'
 import { AddTagsDraft } from './__generated__/AddTagsDraft'
+import { UpdateDraftTags } from './__generated__/UpdateDraftTags'
 import SearchTags from './SearchTags'
 import styles from './styles.css'
 import Tag from './Tag'
@@ -34,7 +35,7 @@ const UPDATE_TAGS = gql`
 `
 
 const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
-  const [updateTags] = useMutation(UPDATE_TAGS)
+  const [updateTags] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
   const { updateHeaderState } = useContext(HeaderContext)
   const draftId = draft.id
   const tags = draft.tags || []

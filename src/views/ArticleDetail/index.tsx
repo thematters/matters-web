@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
-import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -125,9 +124,9 @@ const ArticleDetail = ({
   })
 
   const shouldShowWall = !viewer.isAuthed && wall
-  const article = _get(data, 'article')
-  const authorId = _get(data, 'article.author.id')
-  const collectionCount = _get(data, 'article.collection.totalCount')
+  const article = data && data.article
+  const authorId = article && article.author.id
+  const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
   const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
     if (shouldShowWall) {

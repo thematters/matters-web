@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
 
@@ -105,7 +104,7 @@ const WalletSetting = () => {
 
 export default () => {
   const viewer = useContext(ViewerContext)
-  const likerId = _get(viewer, 'likerId')
+  const likerId = viewer.likerId
 
   return (
     <section className="section-container">

@@ -153,9 +153,9 @@ const BaseUserProfile = () => {
     page: 'userFollowees',
     userName: user.userName
   })
-  const badges = _get(user, 'info.badges', [])
+  const badges = user.info.badges || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
-  const profileCover = _get(user, 'info.profileCover', '')
+  const profileCover = user.info.profileCover || ''
 
   return (
     <section className={containerClass}>

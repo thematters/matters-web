@@ -11,6 +11,7 @@ import { analytics } from '~/common/utils'
 import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { FollowUser } from './__generated__/FollowUser'
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
@@ -29,7 +30,7 @@ const Follow = ({
   user: FollowButtonUser
   size?: 'small' | 'default'
 }) => {
-  const [follow] = useMutation(FOLLOW_USER, {
+  const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse: {
       followUser: {

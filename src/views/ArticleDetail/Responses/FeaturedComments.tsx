@@ -1,7 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import _has from 'lodash/has'
-import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 

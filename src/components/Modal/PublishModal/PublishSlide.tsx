@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { useContext } from 'react'
 
 import { LanguageContext } from '~/components/Language'

@@ -19,6 +19,7 @@ import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 import styles from './styles.css'
 
 interface FormProps {
@@ -44,7 +45,7 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const UserProfileEditor: React.FC<FormProps> = formProps => {
-  const [update] = useMutation(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const { user, setEditing } = formProps

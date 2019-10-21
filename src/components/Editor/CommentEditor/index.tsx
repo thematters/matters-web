@@ -1,6 +1,5 @@
 import { QueryLazyOptions } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import React, { useContext } from 'react'
 import { QueryResult, useLazyQuery } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'

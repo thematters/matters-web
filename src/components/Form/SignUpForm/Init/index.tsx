@@ -9,6 +9,7 @@ import { useMutation } from 'react-apollo'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes } from '~/components/GQL'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -24,6 +25,7 @@ import {
   translate
 } from '~/common/utils'
 
+import { UserRegister } from './__generated__/UserRegister'
 import styles from './styles.css'
 
 /**
@@ -86,8 +88,8 @@ const LoginRedirection = () => (
 )
 
 export const SignUpInitForm: React.FC<FormProps> = formProps => {
-  const [confirm] = useMutation(CONFIRM_CODE)
-  const [register] = useMutation(USER_REGISTER)
+  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
   const {
     defaultEmail = '',
@@ -361,11 +363,10 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
       const { email, code, userName, password } = values
 
       try {
-        const {
-          data: { confirmVerificationCode: codeId }
-        } = await confirm({
+        const { data } = await confirm({
           variables: { input: { email, code, type: 'register' } }
         })
+        const codeId = data && data.confirmVerificationCode
 
         await register({
           variables: {

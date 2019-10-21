@@ -8,6 +8,8 @@ import { ViewerContext } from '~/components/Viewer'
 import { DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
+import { UpdateLanguage } from './__generated__/UpdateLanguage'
+
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateLanguage($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -33,9 +35,9 @@ export const LanguageProvider = ({
   children: React.ReactNode
   defaultLang?: Language
 }) => {
-  const [updateLanguage] = useMutation(UPDATE_VIEWER_LANGUAGE)
+  const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
-  const viewerLanguage = _get(viewer, 'settings.language')
+  const viewerLanguage = viewer.settings.language
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (
@@ -51,7 +53,7 @@ export const LanguageProvider = ({
                   updateUserInfo: {
                     id: viewer.id,
                     settings: {
-                      language: targetLang,
+                      language: targetLang as any,
                       __typename: 'UserSettings'
                     },
                     __typename: 'User'

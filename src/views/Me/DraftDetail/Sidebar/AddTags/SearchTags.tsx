@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce/lib'
@@ -137,10 +136,11 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
           <DropdownContent
             loading={loading}
             search={search}
-            tags={_get(data, 'search.edges', []).map(
-              ({ node }: { node: SearchTagsQuery_search_edges_node_Tag }) =>
-                node
-            )}
+            tags={
+              ((data && data.search.edges) || []).map(
+                ({ node }) => node
+              ) as SearchTagsQuery_search_edges_node_Tag[]
+            }
             addTag={(tag: string) => {
               addTag(tag)
               setSearch('')

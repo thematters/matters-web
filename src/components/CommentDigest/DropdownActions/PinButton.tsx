@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
@@ -9,6 +8,8 @@ import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNPIN from '~/static/icons/unpin.svg?sprite'
 
 import { PinButtonComment } from './__generated__/PinButtonComment'
+import { PinComment } from './__generated__/PinComment'
+import { UnpinComment } from './__generated__/UnpinComment'
 import styles from './styles.css'
 
 const PIN_COMMENT = gql`
@@ -86,22 +87,28 @@ const PinButton = ({
   hideDropdown: () => void
 }) => {
   const canPin = comment.article.pinCommentLeft > 0
-  const [unpinComment] = useMutation(UNPIN_COMMENT, {
+  const [unpinComment] = useMutation<UnpinComment>(UNPIN_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
       unpinComment: {
         id: comment.id,
         pinned: false,
+        article: {
+          ...comment.article
+        },
         __typename: 'Comment'
       }
     }
   })
-  const [pinComment] = useMutation(PIN_COMMENT, {
+  const [pinComment] = useMutation<PinComment>(PIN_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
       pinComment: {
         id: comment.id,
         pinned: true,
+        article: {
+          ...comment.article
+        },
         __typename: 'Comment'
       }
     }

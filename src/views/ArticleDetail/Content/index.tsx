@@ -8,6 +8,7 @@ import styles from '~/common/styles/utils/content.article.css'
 import { analytics, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
+import { ReadArticle } from './__generated__/ReadArticle'
 
 const READ_ARTICLE = gql`
   mutation ReadArticle($id: ID!) {
@@ -27,7 +28,7 @@ const fragments = {
 }
 
 const Content = ({ article }: { article: ContentArticle }) => {
-  const [read] = useMutation(READ_ARTICLE)
+  const [read] = useMutation<ReadArticle>(READ_ARTICLE)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [trackedRead, setTrackedRead] = useState(false)
   const { id } = article

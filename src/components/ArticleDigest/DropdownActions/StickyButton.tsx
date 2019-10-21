@@ -8,6 +8,7 @@ import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
 import ICON_UNSTICKY from '~/static/icons/unsticky.svg?sprite'
 
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
+import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
 import styles from './styles.css'
 
 const UPDATE_ARTICLE_INFO = gql`
@@ -69,7 +70,7 @@ const StickyButton = ({
   article: StickyButtonArticle
   hideDropdown: () => void
 }) => {
-  const [update] = useMutation(UPDATE_ARTICLE_INFO, {
+  const [update] = useMutation<UpdateArticleInfo>(UPDATE_ARTICLE_INFO, {
     variables: { id: article.id, sticky: !article.sticky },
     optimisticResponse: {
       updateArticleInfo: {

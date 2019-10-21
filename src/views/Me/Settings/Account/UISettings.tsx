@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { PageHeader, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'

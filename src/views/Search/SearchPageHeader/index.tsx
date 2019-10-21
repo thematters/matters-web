@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import Link from 'next/link'
 
 import { Icon, TextIcon, Translate } from '~/components'

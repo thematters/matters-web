@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'

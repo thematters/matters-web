@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
 

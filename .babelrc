@@ -14,6 +14,7 @@
       "module-resolver",
       {
         "alias": {
+          "~/__generated__": "./__generated__",
           "~/static": "./public/static",
           "~": "./src"
         }

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
-import _get from 'lodash/get'
 import { MouseEventHandler } from 'react'
 
 import { Icon, TextIcon } from '~/components'
@@ -71,7 +70,7 @@ const ResponseButton = ({
           type: 'article-detail'
         })
       }}
-      text={numAbbr(_get(article, 'responseCount', 0))}
+      text={numAbbr(article.responseCount || 0)}
       textPlacement={textPlacement}
     />
   )

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useEffect } from 'react'
 import { useMutation } from 'react-apollo'
 
@@ -9,6 +8,7 @@ import { Spinner } from '~/components/Spinner'
 
 import { TEXT } from '~/common/enums'
 
+import { GenerateLikerId } from './__generated__/GenerateLikerId'
 import styles from './styles.css'
 
 interface Props {
@@ -30,11 +30,12 @@ const GENERATE_LIKER_ID = gql`
 `
 
 const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
-  const [generate, { error }] = useMutation(GENERATE_LIKER_ID)
+  const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID)
 
   useEffect(() => {
     generate().then(result => {
-      const likerId = _get(result, 'data.generateLikerId.likerId')
+      const likerId =
+        result && result.data && result.data.generateLikerId.likerId
 
       if (likerId) {
         nextStep()

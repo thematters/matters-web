@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
-import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
@@ -152,7 +151,9 @@ const FooterActions: React.FC<FooterActionsProps> & {
           <CommentForm
             articleId={comment.article.id}
             replyToId={comment.id}
-            parentId={_get(comment, 'parentComment.id') || comment.id}
+            parentId={
+              (comment.parentComment && comment.parentComment.id) || comment.id
+            }
             refetch={refetch}
             submitCallback={commentFormCallback}
           />

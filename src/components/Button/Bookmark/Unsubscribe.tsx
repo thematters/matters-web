@@ -7,6 +7,7 @@ import ICON_BOOKMARK_REGULAR_ACTIVE from '~/static/icons/bookmark-regular-active
 import ICON_BOOKMARK_SM_ACTIVE from '~/static/icons/bookmark-small-active.svg?sprite'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
+import { UnsubscribeArticle } from './__generated__/UnsubscribeArticle'
 
 const UNSUBSCRIBE_ARTICLE = gql`
   mutation UnsubscribeArticle($id: ID!) {
@@ -26,7 +27,7 @@ const Unsubscribe = ({
   size: 'xsmall' | 'small' | 'default'
   disabled?: boolean
 }) => {
-  const [unsubscribe] = useMutation(UNSUBSCRIBE_ARTICLE, {
+  const [unsubscribe] = useMutation<UnsubscribeArticle>(UNSUBSCRIBE_ARTICLE, {
     variables: { id: article.id },
     optimisticResponse: {
       unsubscribeArticle: {

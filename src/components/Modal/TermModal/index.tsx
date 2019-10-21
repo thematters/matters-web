@@ -4,6 +4,7 @@ import Router from 'next/router'
 import { useContext } from 'react'
 import { useMutation } from 'react-apollo'
 
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext } from '~/components/Language'
@@ -13,6 +14,7 @@ import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { Modal } from '..'
+import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 import styles from './styles.css'
 
 /**
@@ -39,8 +41,8 @@ const UPDATE_AGREE_ON = gql`
 `
 
 const TermModal: React.FC<FormProps> = formProps => {
-  const [logout] = useMutation(USER_LOGOUT)
-  const [update] = useMutation(UPDATE_AGREE_ON)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
+  const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
   const { lang } = useContext(LanguageContext)
 
   const InnerForm = ({

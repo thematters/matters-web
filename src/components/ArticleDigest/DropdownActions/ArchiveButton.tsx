@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
+import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
@@ -30,12 +31,12 @@ const ArchiveButton = ({
   article: ArchiveButtonArticle
   hideDropdown: () => void
 }) => {
-  const [archiveArticle] = useMutation(ARCHIVE_ARTICLE, {
+  const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
     variables: { id: article.id },
     optimisticResponse: {
       archiveArticle: {
         id: article.id,
-        state: 'archived',
+        state: 'archived' as any,
         sticky: false,
         __typename: 'Article'
       }

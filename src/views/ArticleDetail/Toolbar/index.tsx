@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/ShareButton'

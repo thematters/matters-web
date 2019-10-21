@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 
@@ -23,14 +22,13 @@ import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import styles from './styles.css'
 
 const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
-  const { articleCount: articles, totalWordCount: words } = _get(
-    data,
-    'user.status',
-    {
-      articleCount: 0,
-      totalWordCount: 0
-    }
-  )
+  const { articleCount: articles, totalWordCount: words } = (data &&
+    data.user &&
+    data.user.status) || {
+    articleCount: 0,
+    totalWordCount: 0
+  }
+
   return (
     <div className="info">
       <Translate zh_hant="創作了" zh_hans="创作了" />

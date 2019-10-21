@@ -13,6 +13,7 @@ import { Modal } from '~/components/Modal'
 import { TEXT } from '~/common/enums'
 import { isValidUserName, translate } from '~/common/utils'
 
+import {UpdateUserInfoUserName} from './__generated__/UpdateUserInfoUserName'
 import styles from './styles.css'
 
 interface FormProps {
@@ -35,7 +36,7 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
-  const [update] = useMutation(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const { extraClass = [], submitCallback } = formProps
 

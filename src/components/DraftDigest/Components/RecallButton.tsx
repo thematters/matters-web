@@ -5,6 +5,8 @@ import { Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
+import { RecallPublish } from './__generated__/RecallPublish'
+
 const RECALL_PUBLISH = gql`
   mutation RecallPublish($id: ID!) {
     recallPublish(input: { id: $id }) {
@@ -16,13 +18,13 @@ const RECALL_PUBLISH = gql`
 `
 
 const RecallButton = ({ id, text }: { id: string; text?: React.ReactNode }) => {
-  const [recall] = useMutation(RECALL_PUBLISH, {
+  const [recall] = useMutation<RecallPublish>(RECALL_PUBLISH, {
     variables: { id },
     optimisticResponse: {
       recallPublish: {
         id,
         scheduledAt: null,
-        publishState: 'unpublished',
+        publishState: 'unpublished' as any,
         __typename: 'Draft'
       }
     }

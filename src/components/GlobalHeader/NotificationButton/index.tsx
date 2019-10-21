@@ -1,10 +1,10 @@
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
@@ -98,9 +98,12 @@ export default () => {
       notifyOnNetworkStatusChange: true
     }
   )
-  const [markAllNoticesAsRead] = useMutation(MARK_ALL_NOTICES_AS_READ, {
-    update: updateViewerUnreadNoticeCount
-  })
+  const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
+    MARK_ALL_NOTICES_AS_READ,
+    {
+      update: updateViewerUnreadNoticeCount
+    }
+  )
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
@@ -114,7 +117,11 @@ export default () => {
       error={error}
       refetch={refetch}
       hasUnreadNotices={
-        _get(unreadCountData, 'viewer.status.unreadNoticeCount', 0) >= 1
+        ((unreadCountData &&
+          unreadCountData.viewer &&
+          unreadCountData.viewer.status &&
+          unreadCountData.viewer.status.unreadNoticeCount) ||
+          0) >= 1
       }
       markAllNoticesAsRead={markAllNoticesAsRead}
     />
