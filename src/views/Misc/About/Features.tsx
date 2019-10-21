@@ -1,8 +1,8 @@
 import { Translate } from '~/components/Language'
 
-import IMAGE_3_1 from '~/static/images/about-3-1.png'
-import IMAGE_3_2 from '~/static/images/about-3-2.png'
-import IMAGE_3_3 from '~/static/images/about-3-3.png'
+import IMAGE_3_1 from '~/static/images/about-3-1.jpg'
+import IMAGE_3_2 from '~/static/images/about-3-2.jpg'
+import IMAGE_3_3 from '~/static/images/about-3-3.jpg'
 
 import styles from './styles.css'
 
@@ -25,18 +25,18 @@ const Features = () => (
           <Translate zh_hant="公共記憶永久儲存" zh_hans="公共记忆永久储存" />
           <br />
           <Translate
-            zh_hant="當事人對社會運動的完整記錄"
-            zh_hans="当事人对社会运动的完整记录"
+            zh_hant="參與者對社會進程的完整記錄"
+            zh_hans="参与者对社会进程的完整记录"
           />
         </h3>
         <p>
           <a
             target="_blank"
-            href="https://matters.news/@jidongjie1984/对谈精华整理-弦子-麦烧-不让任何看似庄严的存在摧毁自己-zdpuAviGvLYewPr3AYmGJ5jPTPjikEnYHWKBMmbxjwfMzAKmv"
+            href="https://matters.news/@maishaoshao/%E5%BC%A6%E5%AD%90-%E9%BA%A6%E7%83%A7-me-too%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9B%B8%E4%BF%A1-%E6%9F%94%E8%BD%AF%E5%8F%AF%E4%BB%A5%E6%94%B9%E5%8F%98%E4%B8%96%E7%95%8C-zdpuAy2E1vCLxj74FopkHN5QyQ3TX77tkxB3j59KLFKkuJxZs"
           >
             <Translate
-              zh_hant="【對談精華整理】弦子、麥燒：不讓任何看似莊嚴的存在摧毀自己"
-              zh_hans="【对谈精华整理】弦子、麦烧：不让任何看似庄严的存在摧毁自己"
+              zh_hant="弦子、麥燒：MeToo 讓我們相信，柔軟可以改變世界"
+              zh_hans="弦子、麦烧：MeToo 让我们相信，柔软可以改变世界"
             />
           </a>
         </p>
@@ -56,18 +56,18 @@ const Features = () => (
           />
           <br />
           <Translate
-            zh_hant="2 小時內近 30 萬的閱讀人數"
-            zh_hans="2 小时内近 30 万的阅读人数"
+            zh_hant="38 篇文章，200 萬的閱讀量"
+            zh_hans="38 篇文章，200 万的阅读量"
           />
         </h3>
         <p>
           <a
             target="_blank"
-            href="https://matters.news/@hi176/%E5%9C%A8%E7%BA%BF%E9%97%AE%E7%AD%94-%E9%93%81%E5%B9%95%E9%99%8D%E4%B8%B4-%E4%B8%AD%E7%BE%8E%E5%85%B3%E7%B3%BB%E5%B0%86%E8%B5%B0%E5%90%91%E4%BD%95%E6%96%B9-5-000%E5%AD%97%E9%87%8D%E7%A3%85%E5%AF%B9%E8%B0%88%E7%B2%BE%E5%8D%8E-%E6%8A%A2%E5%85%88%E9%87%8A%E5%87%BA-zdpuB3MQ6KdwVCXnGSvLRXYdQ9mk1yFh9eer9MLdrEgJxYLgt"
+            href="https://matters.news/@leungkaichihk/香港第一課-簡介及目錄-zdpuB2J818r8yUSDeZ4vDARrnQ4ut3S2UYjALXHJ16jp25w4P"
           >
             <Translate
-              zh_hant="在線問答｜鐵幕降臨，中美關係將走向何方？（5,000 字重磅對談精華，搶先釋出！）"
-              zh_hans="在线问答｜铁幕降临，中美关系将走向何方？（5,000 字重磅对谈精华，抢先释出！）"
+              zh_hant="《香港第一課》簡介及目錄"
+              zh_hans="《香港第一课》简介及目录"
             />
           </a>
         </p>
@@ -81,21 +81,21 @@ const Features = () => (
     <section className="feature-section l-row">
       <div className="intro l-col-4 l-col-sm-4 l-col-md-4 l-col-lg-4">
         <h3>
-          <Translate zh_hant="跨時代跨學科交流" zh_hans="跨时代跨学科交流" />
+          <Translate zh_hant="引入創作金流機制" zh_hans="引入创作金流机制" />
           <br />
           <Translate
-            zh_hant="跨世代對人生選擇的誠懇對話"
-            zh_hans="跨世代对人生选择的诚恳对话"
+            zh_hant="給創作者以更多回饋"
+            zh_hans="给创作者以更多回馈"
           />
         </h3>
         <p>
           <a
             target="_blank"
-            href="https://matters.news/@wancat/%E5%9C%A8%E7%B7%9A%E5%95%8F%E7%AD%94-15%E6%AD%B2%E7%9A%84%E7%94%9F%E6%B6%AF%E9%81%B8%E6%93%87-%E6%88%91%E7%82%BA%E4%BD%95%E6%8B%92%E8%AE%80%E9%AB%98%E4%B8%AD-zdpuAydyYM9LWpBNsdx5VqnH6M5LYDsttLJDKMi1yXAchEV3y"
+            href="https://matters.news/@septentrium/%E6%88%91%E4%B9%B0%E4%BA%86%E4%B8%80%E7%AC%94-likecoin-%E6%88%90%E4%B8%BA%E4%BA%86-matters-%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E7%9A%84%E6%8A%95%E8%B5%84%E4%BA%BA-zdpuAmUucoEtJj19Wtf3Vee96dYydZZ6rSwWX7Eb3wvpHZ8Pu"
           >
             <Translate
-              zh_hant="在線問答 | 15 歲的生涯選擇，我為何拒讀高中？"
-              zh_hans="在线问答 | 15 岁的生涯选择，我为何拒读高中？"
+              zh_hant="我買了一筆 LikeCoin，成為了 Matters 所有用戶投資人"
+              zh_hans="我买了一笔 LikeCoin，成为了 Matters 所有用户投资人"
             />
           </a>
         </p>
