@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
+import { useQuery } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Spinner } from '~/components/Spinner'

@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
+import { useQuery } from '~/components/GQL'
 
 import {
   filterComments,

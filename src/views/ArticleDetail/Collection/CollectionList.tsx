@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
-import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { useQuery } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'

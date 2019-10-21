@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
+import { useQuery } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 

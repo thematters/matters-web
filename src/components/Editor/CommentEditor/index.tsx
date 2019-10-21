@@ -1,11 +1,12 @@
 import { QueryLazyOptions } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import React, { useContext } from 'react'
-import { QueryResult, useLazyQuery } from 'react-apollo'
+import { QueryResult } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 import { useDebouncedCallback } from 'use-debounce/lib'
 
 import UserList from '~/components/Dropdown/UserList'
+import { useLazyQuery } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User

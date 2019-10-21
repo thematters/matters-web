@@ -1,11 +1,10 @@
 import { FormikProps, withFormik } from 'formik'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { getErrorCodes } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Label, Spinner, Tag, Translate } from '~/components'
+import { useQuery } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'

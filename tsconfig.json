@@ -18,7 +18,6 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "~/__generated__/*": ["./__generated__"],
       "~/static/*": ["./public/static"],
       "~/*": ["./src/*"]
     },

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -11,6 +10,7 @@ import {
   Placeholder
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import { useQuery } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

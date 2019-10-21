@@ -2,7 +2,6 @@ import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import {
@@ -10,6 +9,7 @@ import {
   ProfileCoverUploader
 } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
+import { useMutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -10,6 +9,7 @@ import {
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { useQuery } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

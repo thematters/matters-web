@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Translate } from '~/components/Language'

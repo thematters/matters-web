@@ -1,6 +1,5 @@
-import { useQuery } from 'react-apollo'
-
 import { Icon, TextIcon, Translate } from '~/components'
+import { useQuery } from '~/components/GQL'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'

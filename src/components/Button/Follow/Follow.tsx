@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useMutation } from 'react-apollo'
 
 import { Button, Icon, Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 

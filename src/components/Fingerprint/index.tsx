@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
+import { useQuery } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'

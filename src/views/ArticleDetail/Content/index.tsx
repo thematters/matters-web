@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
-import { useMutation } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
+
+import { useMutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'

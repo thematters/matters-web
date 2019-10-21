@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useMutation } from 'react-apollo'
 
 import { Icon } from '~/components'
+import { useMutation } from '~/components/GQL'
 
 import ICON_BOOKMARK_REGULAR_ACTIVE from '~/static/icons/bookmark-regular-active.svg?sprite'
 import ICON_BOOKMARK_SM_ACTIVE from '~/static/icons/bookmark-small-active.svg?sprite'

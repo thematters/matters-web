@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -9,6 +8,7 @@ import {
   Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { useQuery } from '~/components/GQL'
 import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'

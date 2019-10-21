@@ -1,7 +1,6 @@
-import { useQuery } from 'react-apollo'
-
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
+import { useQuery } from '~/components/GQL'
 import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
 import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
 

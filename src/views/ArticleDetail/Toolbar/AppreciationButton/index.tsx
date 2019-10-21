@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { forwardRef, useContext, useState } from 'react'
-import { useMutation } from 'react-apollo'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { Icon, Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'

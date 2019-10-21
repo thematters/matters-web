@@ -3,17 +3,16 @@ import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Form } from '~/components/Form'
-import { getErrorCodes } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { isValidUserName, translate } from '~/common/utils'
 
-import {UpdateUserInfoUserName} from './__generated__/UpdateUserInfoUserName'
+import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 import styles from './styles.css'
 
 interface FormProps {

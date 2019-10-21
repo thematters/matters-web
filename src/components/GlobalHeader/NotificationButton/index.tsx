@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
-import { useMutation, useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { useMutation, useQuery } from '~/components/GQL'
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'

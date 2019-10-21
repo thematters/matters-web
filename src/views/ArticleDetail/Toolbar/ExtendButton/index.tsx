@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Icon, LanguageContext, Tooltip, Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'

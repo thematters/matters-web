@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useMutation } from 'react-apollo'
 import { DraftDetailQuery_node_Draft } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 
+import { useMutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 

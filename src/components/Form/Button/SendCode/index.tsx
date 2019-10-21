@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { getErrorCodes } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
 

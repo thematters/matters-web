@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { AddTagsDraft } from './__generated__/AddTagsDraft'

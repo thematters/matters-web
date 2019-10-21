@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import { Button, Icon, LanguageContext, Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { TEXT } from '~/common/enums'

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
+import { useQuery } from '~/components/GQL'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 

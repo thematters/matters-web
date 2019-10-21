@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon, Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'

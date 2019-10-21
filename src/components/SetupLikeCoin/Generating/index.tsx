@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
-import { useMutation } from 'react-apollo'
 
+import { useMutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Spinner } from '~/components/Spinner'

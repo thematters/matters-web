@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import AuthorPicker from '~/components/Follow/AuthorPicker'
+import { useQuery } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 

@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { LoadMore, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
+import { useQuery } from '~/components/GQL'
 import commentFragments from '~/components/GQL/fragments/comment'
 
 import { TEXT } from '~/common/enums'

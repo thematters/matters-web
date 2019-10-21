@@ -9,9 +9,8 @@
         "dotenv",
         "apollo-cache",
         "svg-sprite-loader",
-        "@testing-library/react",
-        "@apollo/react-testing",
-        "@apollo/react-hooks"
+        "@testing-library",
+        "@apollo"
       ]
     ],
     "no-bitwise": false,
@@ -36,7 +35,7 @@
           },
           {
             "name": "internal:others",
-            "match": "^~/(common|static|page|definitions|__generated__)",
+            "match": "^~/(common|static|page|definitions)",
             "order": 15
           },
           {

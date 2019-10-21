@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { useLazyQuery } from 'react-apollo'
 
 import { Empty, Icon, Menu, Translate } from '~/components'
+import { useLazyQuery } from '~/components/GQL'
 import { Spinner } from '~/components/Spinner'
 
 import { TEXT } from '~/common/enums'

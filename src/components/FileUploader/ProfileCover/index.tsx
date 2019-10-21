@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useMutation } from 'react-apollo'
 
+import { useMutation } from '~/components/GQL'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'

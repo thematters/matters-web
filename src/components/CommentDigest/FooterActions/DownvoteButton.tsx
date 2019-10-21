@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useMutation } from 'react-apollo'
 
 import { Icon, TextIcon } from '~/components'
+import { useMutation } from '~/components/GQL'
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {

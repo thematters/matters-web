@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
-import { useMutation } from 'react-apollo'
 
 import {
   Button,
@@ -11,6 +10,7 @@ import {
   TextIcon,
   Translate
 } from '~/components'
+import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 import IconSpinner from '~/components/Icon/Spinner'
 

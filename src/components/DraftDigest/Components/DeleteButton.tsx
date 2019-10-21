@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useMutation } from 'react-apollo'
 
 import { Translate } from '~/components'
+import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 

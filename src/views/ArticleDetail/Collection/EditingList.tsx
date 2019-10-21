@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 import _uniqBy from 'lodash/uniqBy'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Spinner } from '~/components'
+import { useQuery } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
