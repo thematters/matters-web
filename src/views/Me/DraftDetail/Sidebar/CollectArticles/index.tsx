@@ -8,7 +8,7 @@ import { useQuery } from 'react-apollo'
 import { ArticleDigest, Spinner, Translate } from '~/components'
 import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { useMutation } from '~/components/GQL'
+import { QueryError, useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
@@ -109,9 +109,12 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
   }
 
   const [setCollection] = useMutation<SetDraftCollection>(SET_DRAFT_COLLECTION)
-  const { data, loading } = useQuery<DraftCollectionQuery>(DRAFT_COLLECTION, {
-    variables: { id: draftId }
-  })
+  const { data, loading, error } = useQuery<DraftCollectionQuery>(
+    DRAFT_COLLECTION,
+    {
+      variables: { id: draftId }
+    }
+  )
   const edges =
     data &&
     data.node &&
@@ -133,12 +136,13 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
 
       <section className={containerClasses}>
         {loading && <Spinner />}
-        {edges && (
-          <CollectionEditor
-            articles={edges.map(({ node }) => node)}
-            onEdit={handleCollectionChange()}
-          />
-        )}
+
+        {error && <QueryError error={error} />}
+
+        <CollectionEditor
+          articles={(edges && edges.map(({ node }) => node)) || []}
+          onEdit={handleCollectionChange()}
+        />
       </section>
 
       <style jsx>{styles}</style>

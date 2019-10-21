@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
 import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
+import { QueryError } from '~/components/GQL'
 import FullDesc from '~/components/UserDigest/FullDesc'
 
 import { numFormat } from '~/common/utils'
@@ -45,9 +46,12 @@ const AuthorPicker = ({
     'small-size-header': titleIs === 'span'
   })
 
-  const { loading, data, refetch } = useQuery<AuthorPickerType>(AUTHOR_PICKER, {
-    notifyOnNetworkStatusChange: true
-  })
+  const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
+    AUTHOR_PICKER,
+    {
+      notifyOnNetworkStatusChange: true
+    }
+  )
   const edges =
     (data && data.viewer && data.viewer.recommendation.authors.edges) || []
   const followeeCount = viewer.followees.totalCount || 0
@@ -67,7 +71,9 @@ const AuthorPicker = ({
 
       {loading && <Spinner />}
 
-      {!loading && (
+      {error && <QueryError error={error} />}
+
+      {edges.length && (
         <ul>
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>

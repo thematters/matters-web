@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
 import { Label, Spinner, Tag, Translate } from '~/components'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -30,8 +31,12 @@ const SIDEBAR_TAGS = gql`
 `
 
 export default () => {
-  const { data, loading } = useQuery<SidebarTags>(SIDEBAR_TAGS)
+  const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
   const edges = data && data.viewer && data.viewer.recommendation.tags.edges
+
+  if (error) {
+    return <QueryError error={error} />
+  }
 
   if (!edges || edges.length <= 0) {
     return null

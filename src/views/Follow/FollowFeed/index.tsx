@@ -10,6 +10,7 @@ import {
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -46,10 +47,14 @@ const FOLLOW_FEED = gql`
 `
 
 export default () => {
-  const { data, loading, fetchMore } = useQuery<FollowFeed>(FOLLOW_FEED)
+  const { data, loading, error, fetchMore } = useQuery<FollowFeed>(FOLLOW_FEED)
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.recommendation.followeeArticles'

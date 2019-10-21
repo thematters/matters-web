@@ -9,6 +9,7 @@ import { Waypoint } from 'react-waypoint'
 import { DateTime, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { Fingerprint } from '~/components/Fingerprint'
+import { QueryError } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
@@ -117,7 +118,7 @@ const ArticleDetail = ({
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'medium-up' })
-  const { data, loading, subscribeToMore, client } = useQuery<
+  const { data, loading, error, subscribeToMore, client } = useQuery<
     ArticleDetailType
   >(ARTICLE_DETAIL, {
     variables: { mediaHash }
@@ -161,6 +162,14 @@ const ArticleDetail = ({
     return (
       <Block>
         <Placeholder.ArticleDetail />
+      </Block>
+    )
+  }
+
+  if (error) {
+    return (
+      <Block>
+        <QueryError error={error} />
       </Block>
     )
   }

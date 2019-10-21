@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
+import { QueryError } from '~/components/GQL'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 
@@ -48,7 +49,7 @@ const ARTICLE_APPRECIATORS = gql`
 const AppreciatorsModal = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data, loading, fetchMore } = useQuery<AllArticleAppreciators>(
+  const { data, loading, error, fetchMore } = useQuery<AllArticleAppreciators>(
     ARTICLE_APPRECIATORS,
     { variables: { mediaHash } }
   )
@@ -60,6 +61,10 @@ const AppreciatorsModal = () => {
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo || !article) {

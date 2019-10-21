@@ -2,8 +2,10 @@ import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
+import { Error } from '~/components/Error'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
+import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -32,11 +34,19 @@ const ROOT_QUERY = gql`
 `
 
 export const Layout: React.FC = ({ children }) => {
-  const { loading, data } = useQuery<RootQuery>(ROOT_QUERY)
+  const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data && data.viewer
 
-  if (loading || !viewer) {
+  if (loading) {
     return null
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!viewer) {
+    return <Error />
   }
 
   return (

@@ -10,6 +10,7 @@ import {
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { QueryError } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useResponsive } from '~/components/Hook'
@@ -81,12 +82,11 @@ type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isMediumUp = useResponsive({ type: 'medium-up' })
-  const { data, loading, fetchMore } = useQuery<HottestFeed | NewestFeed>(
-    queries[sortBy],
-    {
-      notifyOnNetworkStatusChange: true
-    }
-  )
+  const { data, error, loading, fetchMore } = useQuery<
+    HottestFeed | NewestFeed
+  >(queries[sortBy], {
+    notifyOnNetworkStatusChange: true
+  })
 
   const connectionPath = 'viewer.recommendation.feed'
   const result = data && data.viewer && data.viewer.recommendation.feed
@@ -94,6 +94,10 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 
   if (loading && !result) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {

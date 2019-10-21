@@ -9,6 +9,7 @@ import {
   Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { QueryError } from '~/components/GQL'
 import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
@@ -58,13 +59,17 @@ const UserArticles = () => {
     return <Throw404 />
   }
 
-  const { data, loading, fetchMore } = useQuery<UserArticlesTypes>(
+  const { data, loading, error, fetchMore } = useQuery<UserArticlesTypes>(
     USER_ARTICLES,
     { variables: { userName } }
   )
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!data || !data.user) {

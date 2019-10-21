@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
+import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -36,12 +37,16 @@ const ME_BOOKMARK_FEED = gql`
 `
 
 export default () => {
-  const { data, loading, fetchMore } = useQuery<MeBookmarkFeed>(
+  const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
     ME_BOOKMARK_FEED
   )
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.subscriptions'

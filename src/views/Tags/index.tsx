@@ -11,6 +11,7 @@ import {
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -43,13 +44,17 @@ const ALL_TAGSS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
+  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
 
   if (loading) {
     return <Spinner />
   }
 
-  const connectionPath = 'viewer.recommendation.tags'
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'viewer.recoemmendation.tags'
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.tags) || {}
 

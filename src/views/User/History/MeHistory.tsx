@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -41,10 +42,16 @@ const ME_HISTORY_FEED = gql`
 `
 
 export default () => {
-  const { data, loading, fetchMore } = useQuery<MeHistoryFeed>(ME_HISTORY_FEED)
+  const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
+    ME_HISTORY_FEED
+  )
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.activity.history'

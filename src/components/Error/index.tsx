@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import getConfig from 'next/config'
 
 import { Translate } from '~/components'
@@ -44,13 +45,18 @@ export const Error: React.FC<ErrorProps> = ({
   error,
   type = 'network'
 }) => {
+  const errorCodeClass = classNames({
+    'error-code': true,
+    small: typeof statusCode === 'string' && statusCode.length > 3
+  })
+
   return (
     <section className="container">
       <section className="image">
         <img src={IMAGE_ILLUSTRATION_EMPTY} />
       </section>
 
-      {statusCode && <h3 className="error-code">{statusCode}</h3>}
+      {statusCode && <h3 className={errorCodeClass}>{statusCode}</h3>}
 
       <p className="error-message">
         {type === 'not_found' ? (

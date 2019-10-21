@@ -5,6 +5,7 @@ import { useQuery } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
@@ -49,10 +50,11 @@ const DraftDetail = () => {
     variables: { id }
   })
 
-  if (
-    !loading &&
-    (error || !data || !data.node || data.node.__typename !== 'Draft')
-  ) {
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!loading && (!data || !data.node || data.node.__typename !== 'Draft')) {
     return <Throw404 />
   }
 

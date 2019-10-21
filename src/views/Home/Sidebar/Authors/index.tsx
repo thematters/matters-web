@@ -8,6 +8,7 @@ import {
   Translate,
   UserDigest
 } from '~/components'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -38,10 +39,17 @@ const SIDEBAR_AUTHORS = gql`
 `
 
 export default () => {
-  const { data, loading, refetch } = useQuery<SidebarAuthors>(SIDEBAR_AUTHORS, {
-    notifyOnNetworkStatusChange: true
-  })
+  const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
+    SIDEBAR_AUTHORS,
+    {
+      notifyOnNetworkStatusChange: true
+    }
+  )
   const edges = data && data.viewer && data.viewer.recommendation.authors.edges
+
+  if (error) {
+    return <QueryError error={error} />
+  }
 
   if (!edges || edges.length <= 0) {
     return null

@@ -5,6 +5,7 @@ import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import AuthorPicker from '~/components/Follow/AuthorPicker'
+import { QueryError } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 
@@ -50,7 +51,7 @@ export const SignUpFollowForm: React.FC<Props> = ({
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { loading, data } = useQuery<SignUpMeFollow>(ME_FOLLOW)
+  const { loading, data, error } = useQuery<SignUpMeFollow>(ME_FOLLOW)
 
   const containerStyle = classNames(
     purpose === 'modal' ? 'modal-container' : 'page-container'
@@ -68,6 +69,10 @@ export const SignUpFollowForm: React.FC<Props> = ({
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!data || !data.viewer) {

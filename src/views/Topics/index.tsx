@@ -11,6 +11,7 @@ import {
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -47,10 +48,14 @@ const ALL_TOPICSS = gql`
 `
 
 const Topics = () => {
-  const { data, loading, fetchMore } = useQuery<AllTopics>(ALL_TOPICSS)
+  const { data, loading, error, fetchMore } = useQuery<AllTopics>(ALL_TOPICSS)
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.recommendation.topics'

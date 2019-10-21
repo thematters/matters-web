@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
+import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -32,10 +33,16 @@ const ME_DRAFTS_FEED = gql`
 `
 
 export default () => {
-  const { data, loading, fetchMore } = useQuery<MeDraftFeed>(ME_DRAFTS_FEED)
+  const { data, loading, error, fetchMore } = useQuery<MeDraftFeed>(
+    ME_DRAFTS_FEED
+  )
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.drafts'

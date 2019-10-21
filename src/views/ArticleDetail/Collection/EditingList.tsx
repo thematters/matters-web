@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useQuery } from 'react-apollo'
 
 import { Spinner } from '~/components'
+import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
@@ -42,9 +43,12 @@ const EditingList = ({
     articles: EditorCollection_article_collection_edges_node[]
   ) => void
 }) => {
-  const { data, loading } = useQuery<EditorCollection>(EDITOR_COLLECTION, {
-    variables: { mediaHash: article.mediaHash, first: null }
-  })
+  const { data, loading, error } = useQuery<EditorCollection>(
+    EDITOR_COLLECTION,
+    {
+      variables: { mediaHash: article.mediaHash, first: null }
+    }
+  )
   const edges = (data && data.article && data.article.collection.edges) || []
 
   // init `editingArticles` when network collection is received
@@ -55,6 +59,10 @@ const EditingList = ({
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   return (

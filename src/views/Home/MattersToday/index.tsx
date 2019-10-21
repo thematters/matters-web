@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import { Error, Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -35,7 +36,7 @@ export default () => {
   }
 
   if (error) {
-    return <Error />
+    return <QueryError error={error} />
   }
 
   const article = data && data.viewer && data.viewer.recommendation.today

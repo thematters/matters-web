@@ -6,14 +6,14 @@ import {
   useMutation as baseUseMutation
 } from 'react-apollo'
 
-import { checkError } from './error'
+import { mutationOnError } from './error'
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
   mutation: DocumentNode,
   options?: MutationHookOptions<TData, TVariables>
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {
-    onError: error => checkError(error),
+    onError: error => mutationOnError(error),
     ...options
   })
 

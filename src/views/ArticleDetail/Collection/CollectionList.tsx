@@ -4,6 +4,7 @@ import _uniq from 'lodash/uniq'
 import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
@@ -41,7 +42,7 @@ const CollectionList = ({
   setEditing: (editing: boolean) => void
   canEdit?: boolean
 }) => {
-  const { data, loading, fetchMore } = useQuery<CollectionListTypes>(
+  const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     {
       variables: { mediaHash: article.mediaHash, first: 10 }
@@ -54,6 +55,10 @@ const CollectionList = ({
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo || !totalCount) {

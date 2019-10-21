@@ -11,6 +11,7 @@ import {
   UserDigest
 } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -43,10 +44,14 @@ const ALL_AUTHORSS = gql`
 `
 
 const Authors = () => {
-  const { data, loading, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
+  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'viewer.recommendation.authors'

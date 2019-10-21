@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import { Label, Placeholder, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -36,11 +37,15 @@ export const SIDEBAR_TOPICS = gql`
 `
 
 export default () => {
-  const { data, loading } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
+  const { data, loading, error } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
   const edges = data && data.viewer && data.viewer.recommendation.topics.edges
 
   if (loading) {
     return <Placeholder.Sidebar />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!edges || edges.length <= 0) {

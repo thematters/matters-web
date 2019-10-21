@@ -11,6 +11,7 @@ import { LoadMore, Spinner, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
+import { QueryError } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
@@ -82,9 +83,14 @@ const LatestResponses = () => {
     descendantId = fragment.split('-')[1]
   }
 
-  const { data, loading, fetchMore, subscribeToMore, refetch } = useQuery<
-    ArticleResponsesType
-  >(ARTICLE_RESPONSES, {
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    subscribeToMore,
+    refetch
+  } = useQuery<ArticleResponsesType>(ARTICLE_RESPONSES, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -144,6 +150,10 @@ const LatestResponses = () => {
 
   if (loading) {
     return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {

@@ -4,6 +4,7 @@ import { useQuery } from 'react-apollo'
 
 import { Head, InfiniteScroll, Placeholder, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
+import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -37,7 +38,7 @@ const USER_FOLLOWERS_FEED = gql`
 const UserFollowers = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
-  const { data, loading, fetchMore } = useQuery<UserFollowerFeed>(
+  const { data, loading, error, fetchMore } = useQuery<UserFollowerFeed>(
     USER_FOLLOWERS_FEED,
     {
       variables: { userName }
@@ -46,6 +47,10 @@ const UserFollowers = () => {
 
   if (loading || !data || !data.user) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const user = data.user

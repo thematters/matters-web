@@ -6,6 +6,7 @@ import { useQuery } from 'react-apollo'
 import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
+import { QueryError } from '~/components/GQL'
 
 import {
   filterComments,
@@ -78,12 +79,16 @@ const UserCommentsWrap = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  const { data, loading } = useQuery<UserIdUser>(USER_ID, {
+  const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName }
   })
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   if (!data || !data.user) {
@@ -110,7 +115,7 @@ const UserComments = ({ user }: UserIdUser) => {
     return null
   }
 
-  const { data, loading, fetchMore } = useQuery<UserCommentFeed>(
+  const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
     USER_COMMENT_FEED,
     {
       variables: { id: user.id }
@@ -119,6 +124,10 @@ const UserComments = ({ user }: UserIdUser) => {
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   const connectionPath = 'node.commentedArticles'
