@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { Icon, PageHeader, TextIcon, Translate } from '~/components'
-import { useQuery } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 

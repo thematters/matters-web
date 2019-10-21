@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
-import { useQuery } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

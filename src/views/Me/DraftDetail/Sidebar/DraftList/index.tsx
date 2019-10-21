@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
-import { useQuery } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -9,7 +10,6 @@ import {
   Placeholder,
   Translate
 } from '~/components'
-import { useQuery } from '~/components/GQL'
 import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'

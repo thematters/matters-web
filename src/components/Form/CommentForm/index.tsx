@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { useMutation, useQuery } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'

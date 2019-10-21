@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { Footer, Spinner } from '~/components'
-import { useMutation, useQuery } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 import { ViewerContext } from '~/components/Viewer'
 

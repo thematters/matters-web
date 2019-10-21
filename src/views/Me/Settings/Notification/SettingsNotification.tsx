@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { Head, PageHeader, Translate } from '~/components'
-import { useMutation, useQuery } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { Switch } from '~/components/Switch'
 
 import { TEXT } from '~/common/enums'

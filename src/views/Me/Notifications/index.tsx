@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useQuery } from 'react-apollo'
 
 import {
   Footer,
@@ -9,7 +10,7 @@ import {
   Translate
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { useMutation, useQuery } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'

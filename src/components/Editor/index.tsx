@@ -3,12 +3,11 @@ import classNames from 'classnames'
 import _debounce from 'lodash/debounce'
 import _includes from 'lodash/includes'
 import React, { useContext } from 'react'
-import { QueryResult } from 'react-apollo'
+import { QueryResult, useLazyQuery } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
 import { useDebouncedCallback } from 'use-debounce/lib'
 
 import UserList from '~/components/Dropdown/UserList'
-import { useLazyQuery } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User

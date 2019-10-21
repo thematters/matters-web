@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
-import { useQuery } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'

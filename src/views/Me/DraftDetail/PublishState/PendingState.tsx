@@ -1,5 +1,6 @@
+import { useQuery } from 'react-apollo'
+
 import { Translate } from '~/components'
-import { useQuery } from '~/components/GQL'
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'

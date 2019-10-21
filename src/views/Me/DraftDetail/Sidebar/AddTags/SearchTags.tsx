@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
+import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce/lib'
 
 import {
@@ -10,7 +11,6 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import { useQuery } from '~/components/GQL'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'

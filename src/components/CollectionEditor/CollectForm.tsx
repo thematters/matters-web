@@ -1,9 +1,9 @@
 import _debounce from 'lodash/debounce'
 import { useContext, useRef, useState } from 'react'
+import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
-import { useQuery } from '~/components/GQL'
 import {
   SearchArticles,
   SearchArticles_search_edges_node_Article

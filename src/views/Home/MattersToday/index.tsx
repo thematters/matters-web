@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
-import { Placeholder } from '~/components'
+import { Error, Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
-import { useQuery } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -28,16 +28,20 @@ export const HOME_TODAY = gql`
 `
 
 export default () => {
-  const { data, loading } = useQuery<HomeToday>(HOME_TODAY)
+  const { data, loading, error } = useQuery<HomeToday>(HOME_TODAY)
 
-  if (loading || !data || !data.viewer) {
+  if (loading) {
     return <Placeholder.MattersToday />
   }
 
-  const article = data.viewer.recommendation.today
+  if (error) {
+    return <Error />
+  }
+
+  const article = data && data.viewer && data.viewer.recommendation.today
 
   if (!article) {
-    return <Placeholder.MattersToday />
+    return <Error type="not_found" />
   }
 
   return (

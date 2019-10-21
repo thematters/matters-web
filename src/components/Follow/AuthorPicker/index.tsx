@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
-import { useQuery } from '~/components/GQL'
 import FullDesc from '~/components/UserDigest/FullDesc'
 
 import { numFormat } from '~/common/utils'

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import {
   InfiniteScroll,
@@ -9,7 +10,6 @@ import {
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
-import { useQuery } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useResponsive } from '~/components/Hook'

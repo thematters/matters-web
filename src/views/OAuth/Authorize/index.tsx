@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { LanguageContext, Modal, Spinner, Translate } from '~/components'
-import { useQuery } from '~/components/GQL'
 import OAuth from '~/components/OAuth'
 import Throw404 from '~/components/Throw404'
 

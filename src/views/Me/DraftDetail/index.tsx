@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { useQuery } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
