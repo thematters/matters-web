@@ -43,7 +43,7 @@ const Notifications = () => (
               fetchMore({
                 variables: {
                   first: 20,
-                  cursor: pageInfo.endCursor
+                  after: pageInfo.endCursor
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) =>
                   mergeConnections({
