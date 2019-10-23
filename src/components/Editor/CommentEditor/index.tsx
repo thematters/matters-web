@@ -1,21 +1,20 @@
+import { QueryLazyOptions } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import _debounce from 'lodash/debounce'
-import _get from 'lodash/get'
-import React from 'react'
-import { QueryResult } from 'react-apollo'
+import React, { useContext } from 'react'
+import { QueryResult, useLazyQuery } from 'react-apollo'
 import ReactQuill, { Quill } from 'react-quill'
+import { useDebouncedCallback } from 'use-debounce/lib'
 
 import UserList from '~/components/Dropdown/UserList'
-import { Query } from '~/components/GQL'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
 } from '~/components/GQL/queries/__generated__/SearchUsers'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { LanguageConsumer } from '~/components/Language'
+import { LanguageContext } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 
-import { TEXT } from '~/common/enums'
+import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
 import contentStyles from '~/common/styles/utils/content.comment.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
@@ -29,6 +28,10 @@ interface Props {
   handleChange: (props: any) => any
   handleBlur?: (props: any) => any
   lang: Language
+  searchUsers: {
+    query: (options?: QueryLazyOptions<Record<string, any>> | undefined) => void
+    result: QueryResult<SearchUsers, Record<string, any>>
+  }
 }
 
 interface State {
@@ -93,7 +96,17 @@ class CommentEditor extends React.Component<Props, State> {
   }
 
   onMentionChange = (search: string) => {
-    this.setState({ search })
+    const { searchUsers } = this.props
+    const prevSearch = this.state.search
+
+    this.setState({ search }, () => {
+      // toggle search users for mention
+      if (prevSearch !== search) {
+        searchUsers.query({
+          variables: { search }
+        })
+      }
+    })
   }
 
   onMentionModuleInit = (instance: any) => {
@@ -101,8 +114,8 @@ class CommentEditor extends React.Component<Props, State> {
   }
 
   render() {
-    const { focus, search, mentionInstance } = this.state
-    const { content, expand, handleChange, lang } = this.props
+    const { content, expand, handleChange, lang, searchUsers } = this.props
+    const { focus, mentionInstance } = this.state
     const containerClasses = classNames({
       container: true,
       focus
@@ -113,6 +126,11 @@ class CommentEditor extends React.Component<Props, State> {
       lang
     })
 
+    const { data, loading } = searchUsers.result
+    const users = ((data && data.search.edges) || []).map(
+      ({ node }) => node
+    ) as SearchUsers_search_edges_node_User[]
+
     if (!expand) {
       return (
         <>
@@ -121,81 +139,80 @@ class CommentEditor extends React.Component<Props, State> {
             placeholder={placeholder}
             aria-label={placeholder}
           />
+
           <style jsx>{styles}</style>
         </>
       )
     }
 
     return (
-      <Query query={SEARCH_USERS} variables={{ search }} skip={!search}>
-        {({ data, loading }: QueryResult & { data: SearchUsers }) => {
-          const users = _get(data, 'search.edges', []).map(
-            ({ node }: { node: SearchUsers_search_edges_node_User }) => node
-          )
+      <div className={containerClasses} id="comment-editor">
+        <ReactQuill
+          theme="bubble"
+          modules={{
+            ...config.modules,
+            mention: {
+              mentionContainer:
+                this.mentionContainerRef && this.mentionContainerRef.current,
+              onMentionChange: this.onMentionChange,
+              onInit: this.onMentionModuleInit
+            }
+          }}
+          formats={config.foramts}
+          ref={this.reactQuillRef}
+          value={content}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onFocus={() => this.setState({ focus: true })}
+          onBlur={() => this.setState({ focus: false })}
+          bounds="#comment-editor"
+        />
 
-          return (
-            <>
-              <div className={containerClasses} id="comment-editor">
-                <ReactQuill
-                  theme="bubble"
-                  modules={{
-                    ...config.modules,
-                    mention: {
-                      mentionContainer:
-                        this.mentionContainerRef &&
-                        this.mentionContainerRef.current,
-                      onMentionChange: this.onMentionChange,
-                      onInit: this.onMentionModuleInit
-                    }
-                  }}
-                  formats={config.foramts}
-                  ref={this.reactQuillRef}
-                  value={content}
-                  placeholder={placeholder}
-                  onChange={handleChange}
-                  onFocus={() => this.setState({ focus: true })}
-                  onBlur={() => this.setState({ focus: false })}
-                  bounds="#comment-editor"
-                />
+        <section
+          className="mention-container"
+          ref={this.mentionContainerRef}
+          hidden={users.length <= 0 && !loading}
+        >
+          {loading && <Spinner />}
+          {!loading && (
+            <UserList
+              users={users}
+              onClick={(user: SearchUsers_search_edges_node_User) => {
+                mentionInstance.insertMention({
+                  id: user.id,
+                  displayName: user.displayName,
+                  userName: user.userName
+                })
+              }}
+            />
+          )}
+        </section>
 
-                <section
-                  className="mention-container"
-                  ref={this.mentionContainerRef}
-                  hidden={users.length <= 0}
-                >
-                  {loading && <Spinner />}
-                  {!loading && (
-                    <UserList
-                      users={users}
-                      onClick={(user: SearchUsers_search_edges_node_User) => {
-                        mentionInstance.insertMention({
-                          id: user.id,
-                          displayName: user.displayName,
-                          userName: user.userName
-                        })
-                      }}
-                    />
-                  )}
-                </section>
-              </div>
-
-              <style jsx>{styles}</style>
-              <style jsx global>
-                {bubbleStyles}
-              </style>
-              <style jsx global>
-                {contentStyles}
-              </style>
-            </>
-          )
-        }}
-      </Query>
+        <style jsx>{styles}</style>
+        <style jsx global>
+          {bubbleStyles}
+        </style>
+        <style jsx global>
+          {contentStyles}
+        </style>
+      </div>
     )
   }
 }
 
-export default (props: Omit<Props, 'lang'>) => (
-  <LanguageConsumer>
-    {({ lang }) => <CommentEditor lang={lang} {...props} />}
-  </LanguageConsumer>
-)
+export default (props: Omit<Props, 'lang' | 'searchUsers'>) => {
+  const { lang } = useContext(LanguageContext)
+  const [search, result] = useLazyQuery<SearchUsers>(SEARCH_USERS)
+  const [debouncedSearch] = useDebouncedCallback(search, INPUT_DEBOUNCE)
+
+  return (
+    <CommentEditor
+      lang={lang}
+      searchUsers={{
+        query: debouncedSearch,
+        result
+      }}
+      {...props}
+    />
+  )
+}

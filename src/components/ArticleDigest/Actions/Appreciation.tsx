@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { Icon, TextIcon } from '~/components'
 
@@ -27,7 +26,7 @@ const Appreciation = ({
     icon={<Icon size={size} id={ICON_LIKE.id} viewBox={ICON_LIKE.viewBox} />}
     color="grey"
     weight="medium"
-    text={numAbbr(_get(article, 'appreciationsReceivedTotal', 0))}
+    text={numAbbr((article && article.appreciationsReceivedTotal) || 0)}
     size={size === 'small' ? 'sm' : 'xs'}
     spacing="xtight"
   />

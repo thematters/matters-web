@@ -154,9 +154,11 @@ const Actions = ({
           </span>
         )}
       </div>
+
       {hasDateTime && 'createdAt' in article && isResponseMode && (
         <DateTime date={article.createdAt} />
       )}
+
       <style jsx>{styles}</style>
     </footer>
   )

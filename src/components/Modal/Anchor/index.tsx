@@ -101,7 +101,9 @@ const Anchor = () => {
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
+
       {shouldShowLikeCoinModal && <OpenedModal modalId="likeCoinTermModal" />}
+
       <style jsx>{styles}</style>
     </>
   )

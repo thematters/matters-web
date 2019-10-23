@@ -11,16 +11,21 @@ export default () => (
     <section>
       <Icymi />
     </section>
+
     <section>
       <Topics />
     </section>
+
     <section>
       <Authors />
     </section>
+
     <section>
       <Tags />
     </section>
+
     <Footer />
+
     <style jsx>{styles}</style>
   </>
 )

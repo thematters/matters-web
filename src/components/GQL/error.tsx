@@ -1,24 +1,22 @@
 import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
-import _get from 'lodash/get'
+
+import { Error } from '~/components/Error'
 
 import { ADD_TOAST, ERROR_CODES, TEXT } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ModalSwitch } from '../ModalManager'
 
-export const checkFor = (code: string, errors: ApolloError['graphQLErrors']) =>
-  errors && errors.find(e => _get(e, 'extensions.code') === code)
-
-export const getErrorCodes = (error: any) => {
+export const getErrorCodes = (error: ApolloError) => {
   const errorCodes: string[] = []
 
   if (!error || !error.graphQLErrors) {
     return errorCodes
   }
 
-  error.graphQLErrors.forEach((e: any) => {
-    const code = _get(e, 'extensions.code')
+  error.graphQLErrors.forEach(e => {
+    const code = e.extensions && e.extensions.code
     if (code) {
       errorCodes.push(code)
     }
@@ -27,7 +25,10 @@ export const getErrorCodes = (error: any) => {
   return errorCodes
 }
 
-export const checkError = (error: ApolloError) => {
+/**
+ * Check mutation on error to throw a `<Toast>`
+ */
+export const mutationOnError = (error: ApolloError) => {
   // Add info to Sentry
   Sentry.captureException(error)
 
@@ -118,8 +119,7 @@ export const checkError = (error: ApolloError) => {
     ERROR_CODES.DRAFT_NOT_FOUND,
     ERROR_CODES.TAG_NOT_FOUND,
     ERROR_CODES.NOTICE_NOT_FOUND,
-    ERROR_CODES.NOT_ENOUGH_MAT,
-    ERROR_CODES.USER_FOLLOW_FAILED
+    ERROR_CODES.NOT_ENOUGH_MAT
   ]
   CATCH_CODES.forEach(code => {
     if (errorMap[code]) {
@@ -147,4 +147,17 @@ export const checkError = (error: ApolloError) => {
    * Throw error
    */
   throw error
+}
+
+/**
+ * Pass an `useQuery` or `useLazyQuery` error and return `<Error>`
+ */
+
+export const QueryError = ({ error }: { error: ApolloError }) => {
+  // Add info to Sentry
+  Sentry.captureException(error)
+
+  const errorCodes = getErrorCodes(error)
+
+  return <Error statusCode={errorCodes[0]} type="network" error={error} />
 }

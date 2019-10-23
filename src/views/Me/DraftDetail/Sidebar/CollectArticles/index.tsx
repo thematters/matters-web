@@ -1,18 +1,19 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation, Query } from '~/components/GQL'
+import { QueryError, useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
+import { SetDraftCollection } from './__generated__/SetDraftCollection'
 import styles from './styles.css'
 
 const CollectionEditor = dynamic(
@@ -78,9 +79,8 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     container: true,
     'u-area-disable': isPending || isPublished
   })
-
-  const handleCollectionChange = (setCollection: any) => async (
-    articles: any[]
+  const handleCollectionChange = () => async (
+    articles: DropdownDigestArticle[]
   ) => {
     updateHeaderState({
       type: 'draft',
@@ -108,6 +108,20 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     }
   }
 
+  const [setCollection] = useMutation<SetDraftCollection>(SET_DRAFT_COLLECTION)
+  const { data, loading, error } = useQuery<DraftCollectionQuery>(
+    DRAFT_COLLECTION,
+    {
+      variables: { id: draftId }
+    }
+  )
+  const edges =
+    data &&
+    data.node &&
+    data.node.__typename === 'Draft' &&
+    data.node.collection &&
+    data.node.collection.edges
+
   return (
     <Collapsable
       title={<Translate zh_hant="關聯" zh_hans="关联" />}
@@ -121,29 +135,14 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
       </p>
 
       <section className={containerClasses}>
-        <Query query={DRAFT_COLLECTION} variables={{ id: draftId }}>
-          {({
-            data,
-            loading
-          }: QueryResult & { data: DraftCollectionQuery }) => {
-            const edges = _get(data, 'node.collection.edges')
+        {loading && <Spinner />}
 
-            if (loading || !edges) {
-              return <Spinner />
-            }
+        {error && <QueryError error={error} />}
 
-            return (
-              <Mutation mutation={SET_DRAFT_COLLECTION}>
-                {(setCollection: any) => (
-                  <CollectionEditor
-                    articles={edges.map(({ node }: { node: any }) => node)}
-                    onEdit={handleCollectionChange(setCollection)}
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+        <CollectionEditor
+          articles={(edges && edges.map(({ node }) => node)) || []}
+          onEdit={handleCollectionChange()}
+        />
       </section>
 
       <style jsx>{styles}</style>

@@ -69,6 +69,7 @@ const SideToolbar = ({
           upload={upload}
         />
       </div>
+
       <style jsx>{styles}</style>
     </aside>
   )

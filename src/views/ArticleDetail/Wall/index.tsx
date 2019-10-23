@@ -62,6 +62,7 @@ const Wall = ({ show, client }: any) => {
           </section>
         </section>
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

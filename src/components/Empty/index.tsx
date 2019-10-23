@@ -34,6 +34,7 @@ export const Empty: React.FC<EmptyProps> = ({
       {icon && <section className="icon">{icon}</section>}
       {description && <section className="description">{description}</section>}
       {children && <section className="children">{children}</section>}
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -13,6 +13,7 @@ const Item: React.FC<MenuItemProps> = ({ title, children }) => {
         <span className="title">{title}</span>
         {children}
       </header>
+
       <style jsx>{styles}</style>
     </li>
   )

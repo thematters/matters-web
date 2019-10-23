@@ -32,6 +32,7 @@ const EditButton = ({
       >
         <Translate zh_hant={TEXT.zh_hant.edit} zh_hans={TEXT.zh_hans.edit} />
       </TextIcon>
+
       <style jsx>{styles}</style>
     </button>
   )

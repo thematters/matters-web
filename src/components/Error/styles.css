@@ -14,6 +14,10 @@
   font-size: 3rem;
   font-weight: var(--font-weight-normal);
   line-height: 1.16666667;
+
+  &.small {
+    font-size: var(--font-size-xl);
+  }
 }
 
 .error-message {

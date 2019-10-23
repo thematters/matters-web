@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import { createContext, useState } from 'react'
 
 export interface DefaultHeader {

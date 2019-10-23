@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import { useState } from 'react'
 
@@ -27,6 +26,7 @@ const Collection: React.FC<{
 }> = ({ article, collectionCount, canEdit }) => {
   const [editing, setEditing] = useState<boolean>(false)
   const [editingArticles, setEditingArticles] = useState<any[]>([])
+
   return (
     <section className="collection">
       <header>

@@ -33,6 +33,7 @@ const DesktopNav: React.FC<{ unread: boolean }> = ({ unread }) => {
           />
         </a>
       </Link>
+
       <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
           <span className={followTextClass}>
@@ -43,6 +44,7 @@ const DesktopNav: React.FC<{ unread: boolean }> = ({ unread }) => {
           </span>
         </a>
       </Link>
+
       <style jsx>{styles}</style>
     </>
   )

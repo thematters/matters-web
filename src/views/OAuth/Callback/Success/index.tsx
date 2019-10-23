@@ -40,6 +40,7 @@ const OAuthCallbackSuccess = () => {
           </p>
         </section>
       </OAuth.Box>
+
       <style jsx>{styles}</style>
     </main>
   )

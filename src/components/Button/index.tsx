@@ -169,57 +169,53 @@ export const Button: React.FC<ButtonProps> = ({
   // anchor
   if (is === 'anchor') {
     return (
-      <>
-        <a href={href} className={buttonClasses} {...restProps}>
-          {icon}
-          {children && <span>{children}</span>}
-        </a>
+      <a href={href} className={buttonClasses} {...restProps}>
+        {icon}
+        {children && <span>{children}</span>}
+
         <style jsx>{styles}</style>
-      </>
+      </a>
     )
   }
 
   // link
   if (is === 'link') {
     return (
-      <>
-        <Link href={href} as={as}>
-          <a className={buttonClasses} {...restProps}>
-            {icon}
-            {children && <span>{children}</span>}
-          </a>
-        </Link>
-        <style jsx>{styles}</style>
-      </>
+      <Link href={href} as={as}>
+        <a className={buttonClasses} {...restProps}>
+          {icon}
+          {children && <span>{children}</span>}
+
+          <style jsx>{styles}</style>
+        </a>
+      </Link>
     )
   }
 
   // span
   if (is === 'span') {
     return (
-      <>
-        <span className={buttonClasses} {...restProps}>
-          {icon}
-          {children && <span>{children}</span>}
-        </span>
+      <span className={buttonClasses} {...restProps}>
+        {icon}
+        {children && <span>{children}</span>}
+
         <style jsx>{styles}</style>
-      </>
+      </span>
     )
   }
 
   // button
   return (
-    <>
-      <button
-        className={buttonClasses}
-        type={htmlType}
-        disabled={disabled}
-        {...restProps}
-      >
-        {icon}
-        {children && <span>{children}</span>}
-      </button>
+    <button
+      className={buttonClasses}
+      type={htmlType}
+      disabled={disabled}
+      {...restProps}
+    >
+      {icon}
+      {children && <span>{children}</span>}
+
       <style jsx>{styles}</style>
-    </>
+    </button>
   )
 }

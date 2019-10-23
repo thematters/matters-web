@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
 import { Icon, TextIcon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
+import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
@@ -30,51 +31,49 @@ const ArchiveButton = ({
   article: ArchiveButtonArticle
   hideDropdown: () => void
 }) => {
+  const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
+    variables: { id: article.id },
+    optimisticResponse: {
+      archiveArticle: {
+        id: article.id,
+        state: 'archived' as any,
+        sticky: false,
+        __typename: 'Article'
+      }
+    },
+    update: cache => {
+      updateUserArticles({
+        cache,
+        articleId: article.id,
+        userName: article.author.userName,
+        type: 'archive'
+      })
+    }
+  })
+
   return (
-    <Mutation
-      mutation={ARCHIVE_ARTICLE}
-      variables={{ id: article.id }}
-      optimisticResponse={{
-        archiveArticle: {
-          id: article.id,
-          state: 'archived',
-          sticky: false,
-          __typename: 'Article'
-        }
-      }}
-      update={(cache: any) => {
-        updateUserArticles({
-          cache,
-          articleId: article.id,
-          userName: article.author.userName,
-          type: 'archive'
-        })
+    <button
+      type="button"
+      onClick={() => {
+        archiveArticle()
+        hideDropdown()
       }}
     >
-      {(archiveArticle: any) => (
-        <button
-          type="button"
-          onClick={() => {
-            archiveArticle()
-            hideDropdown()
-          }}
-        >
-          <TextIcon
-            icon={
-              <Icon
-                id={ICON_ARCHIVE.id}
-                viewBox={ICON_ARCHIVE.viewBox}
-                size="small"
-              />
-            }
-            spacing="tight"
-          >
-            <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
-          </TextIcon>
-          <style jsx>{styles}</style>
-        </button>
-      )}
-    </Mutation>
+      <TextIcon
+        icon={
+          <Icon
+            id={ICON_ARCHIVE.id}
+            viewBox={ICON_ARCHIVE.viewBox}
+            size="small"
+          />
+        }
+        spacing="tight"
+      >
+        <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
+      </TextIcon>
+
+      <style jsx>{styles}</style>
+    </button>
   )
 }
 

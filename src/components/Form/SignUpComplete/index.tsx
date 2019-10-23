@@ -65,6 +65,7 @@ const SignUpComplete = ({
         <Translate zh_hant="進入社區" zh_hans="进入社区" />
       </Modal.FooterButton>
     </div>
+
     <style jsx>{styles}</style>
   </div>
 )

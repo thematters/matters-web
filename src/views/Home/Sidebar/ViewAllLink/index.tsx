@@ -40,6 +40,7 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
           })}
           textPlacement="left"
         />
+
         <style jsx>{styles}</style>
       </a>
     </Link>

@@ -1,7 +1,7 @@
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import {
@@ -9,7 +9,7 @@ import {
   ProfileCoverUploader
 } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
@@ -19,11 +19,17 @@ import { TEXT } from '~/common/enums'
 import { isValidDisplayName, translate } from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 import styles from './styles.css'
 
-interface Props {
+interface FormProps {
   user: { [key: string]: any }
   setEditing: (value: boolean) => void
+}
+
+interface FormValues {
+  displayName: string
+  description: string
 }
 
 const UPDATE_USER_INFO = gql`
@@ -38,12 +44,14 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
+export const UserProfileEditor: React.FC<FormProps> = formProps => {
+  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
+  const { user, setEditing } = formProps
 
-  const validateDisplayName = (value: string, language: string) => {
-    let result: any
+  const validateDisplayName = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -56,12 +64,12 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const validateDescription = (value: string, language: Language) => {
-    let result: any
+  const validateDescription = (value: string) => {
+    let result
     if (value && value.length > 200) {
       result = {
         zh_hant: `已超過 200 字，目前 ${value.length} 字`,
@@ -69,11 +77,11 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const BaseForm = ({
+  const InnerForm = ({
     values,
     errors,
     touched,
@@ -81,9 +89,7 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
     handleBlur,
     handleChange,
     handleSubmit
-  }: {
-    [key: string]: any
-  }) => {
+  }: FormikProps<FormValues>) => {
     const displayNamePlaceholder = translate({
       zh_hant: '輸入姓名',
       zh_hans: '输入姓名',
@@ -111,77 +117,76 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
     })
 
     return (
-      <>
-        <form className="form" onSubmit={handleSubmit}>
-          <Form.Input
-            type="text"
-            field="displayName"
-            className={['name']}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder={displayNamePlaceholder}
-            hint={displayNameHint}
-          />
-          <Form.Textarea
-            field="description"
-            placeholder={descriptionPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            hint={descriptionHint}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            style={{ height: '7rem', resize: 'none' }}
-          />
-          <div className="buttons">
-            <Button
-              type="submit"
-              bgColor="green"
-              style={{ minWidth: '5rem' }}
-              disabled={!_isEmpty(errors) || isSubmitting}
-              icon={
-                isSubmitting ? (
-                  <IconSpinner />
-                ) : (
-                  <Icon id={ICON_SAVE.id} viewBox={ICON_SAVE.viewBox} />
-                )
-              }
-            >
-              {save}
-            </Button>
-            <Button
-              type="button"
-              bgColor="transparent"
-              textColor="grey"
-              textWeight="normal"
-              spacing="default"
-              disabled={isSubmitting}
-              onClick={() => setEditing(false)}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.cancel}
-                zh_hans={TEXT.zh_hans.cancel}
-              />
-            </Button>
-          </div>
-        </form>
+      <form className="form" onSubmit={handleSubmit}>
+        <Form.Input
+          type="text"
+          field="displayName"
+          className={['name']}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          placeholder={displayNamePlaceholder}
+          hint={displayNameHint}
+        />
+        <Form.Textarea
+          field="description"
+          placeholder={descriptionPlaceholder}
+          values={values}
+          errors={errors}
+          touched={touched}
+          hint={descriptionHint}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          style={{ height: '7rem', resize: 'none' }}
+        />
+        <div className="buttons">
+          <Button
+            type="submit"
+            bgColor="green"
+            style={{ minWidth: '5rem' }}
+            disabled={!_isEmpty(errors) || isSubmitting}
+            icon={
+              isSubmitting ? (
+                <IconSpinner />
+              ) : (
+                <Icon id={ICON_SAVE.id} viewBox={ICON_SAVE.viewBox} />
+              )
+            }
+          >
+            {save}
+          </Button>
+          <Button
+            type="button"
+            bgColor="transparent"
+            textColor="grey"
+            textWeight="normal"
+            spacing="default"
+            disabled={isSubmitting}
+            onClick={() => setEditing(false)}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.cancel}
+              zh_hans={TEXT.zh_hans.cancel}
+            />
+          </Button>
+        </div>
+
         <style jsx>{styles}</style>
-      </>
+      </form>
     )
   }
 
-  const MainForm: any = withFormik({
+  const MainForm = withFormik<FormProps, FormValues>({
     mapPropsToValues: () => ({
       displayName: user.displayName,
       description: user.info.description
     }),
 
     validate: ({ displayName, description }) => {
-      const inInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isInvalidDescription = validateDescription(description, lang)
+      const inInvalidDisplayName = validateDisplayName(displayName)
+      const isInvalidDescription = validateDescription(description)
       const errors = {
         ...(inInvalidDisplayName ? { displayName: inInvalidDisplayName } : {}),
         ...(isInvalidDescription ? { description: isInvalidDescription } : {})
@@ -189,27 +194,22 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
       return errors
     },
 
-    handleSubmit: (values, { props, setSubmitting }: any) => {
+    handleSubmit: async (values, { setSubmitting }) => {
       const { displayName, description } = values
-      const { submitAction } = props
-      if (!submitAction) {
-        return
+
+      try {
+        await update({ variables: { input: { displayName, description } } })
+
+        if (setEditing) {
+          setEditing(false)
+        }
+      } catch (error) {
+        // TODO: Handle error
       }
 
-      submitAction({ variables: { input: { displayName, description } } })
-        .then(({ data }: any) => {
-          if (setEditing) {
-            setEditing(false)
-          }
-        })
-        .catch((result: any) => {
-          // TODO: Handle error
-        })
-        .finally(() => {
-          setSubmitting(false)
-        })
+      setSubmitting(false)
     }
-  })(BaseForm)
+  })(InnerForm)
 
   return (
     <>
@@ -218,18 +218,18 @@ export const UserProfileEditor: FC<Props> = ({ user, setEditing }) => {
           <ProfileCoverUploader user={user} />
         </section>
       </div>
+
       <div className="content-container l-row">
         <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <section className="content">
             <ProfileAvatarUploader user={user} />
             <section className="info">
-              <Mutation mutation={UPDATE_USER_INFO}>
-                {(update: any) => <MainForm submitAction={update} />}
-              </Mutation>
+              <MainForm user={user} setEditing={setEditing} />
             </section>
           </section>
         </section>
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

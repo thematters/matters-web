@@ -3,7 +3,7 @@ import Router from 'next/router'
 import { useContext } from 'react'
 
 import { Icon, LanguageContext, Tooltip, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
@@ -34,12 +34,16 @@ const fragments = {
 const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const placeholder = translate({
-    zh_hans: TEXT.zh_hans.untitle,
-    zh_hant: TEXT.zh_hant.untitle,
-    lang
+  const [extend] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
+    variables: {
+      title: translate({
+        zh_hans: TEXT.zh_hans.untitle,
+        zh_hant: TEXT.zh_hant.untitle,
+        lang
+      }),
+      collection: [article.id]
+    }
   })
-
   const canExtend = viewer.isActive
 
   if (!canExtend) {
@@ -47,35 +51,30 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   }
 
   return (
-    <Mutation
-      mutation={EXTEND_ARTICLE}
-      variables={{ title: placeholder, collection: [article.id] }}
+    <Tooltip
+      content={<Translate zh_hant="關聯當前作品" zh_hans="关联当前作品" />}
+      placement="top"
     >
-      {(extend: any) => (
-        <Tooltip
-          content={<Translate zh_hant="關聯當前作品" zh_hans="关联当前作品" />}
-          placement="top"
-        >
-          <button
-            type="button"
-            aria-label="關聯當前作品"
-            onClick={async () => {
-              const result = await extend()
-              const { data } = result as { data: ExtendArticle }
-              const { slug, id } = data.putDraft
-              const path = toPath({ page: 'draftDetail', slug, id })
-              Router.push(path.as)
-            }}
-          >
-            <Icon
-              size="default"
-              id={ICON_EXTEND.id}
-              viewBox={ICON_EXTEND.viewBox}
-            />
-          </button>
-        </Tooltip>
-      )}
-    </Mutation>
+      <button
+        type="button"
+        aria-label="關聯當前作品"
+        onClick={async () => {
+          const { data } = await extend()
+          const { slug, id } = (data && data.putDraft) || {}
+
+          if (slug && id) {
+            const path = toPath({ page: 'draftDetail', slug, id })
+            Router.push(path.as)
+          }
+        }}
+      >
+        <Icon
+          size="default"
+          id={ICON_EXTEND.id}
+          viewBox={ICON_EXTEND.viewBox}
+        />
+      </button>
+    </Tooltip>
   )
 }
 

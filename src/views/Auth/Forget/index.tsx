@@ -63,69 +63,68 @@ const Forget = () => {
   }
 
   return (
-    <>
-      <main className="l-row">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.forgetPassword,
-            zh_hans: TEXT.zh_hans.forgetPassword
-          }}
-        />
+    <main className="l-row">
+      <Head
+        title={{
+          zh_hant: TEXT.zh_hant.forgetPassword,
+          zh_hans: TEXT.zh_hans.forgetPassword
+        }}
+      />
 
-        <article className={containerClass}>
-          {step === 'request' && (
-            <PasswordChangeRequestForm
-              defaultEmail={data.request.email}
-              purpose="forget"
-              container="page"
-              submitCallback={requestCodeCallback}
-              scrollLock={false}
-            />
-          )}
-          {step === 'reset' && (
-            <PasswordChangeConfirmForm
-              codeId={data.request.codeId}
-              container="page"
-              backPreviousStep={backPreviousStep}
-              submitCallback={() => setStep('complete')}
-              scrollLock={false}
-            />
-          )}
-          {step === 'complete' && (
-            <div className="complete">
-              <Modal.Content>
-                <Title is="h3" type="modal-headline">
-                  <Translate
-                    zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                    zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                  />
-                </Title>
-
-                <p className="hint">
-                  <Translate
-                    zh_hant={TEXT.zh_hant.useNewPassword}
-                    zh_hans={TEXT.zh_hans.useNewPassword}
-                  />
-                  。
-                </p>
-              </Modal.Content>
-
-              <Modal.FooterButton
-                is="link"
-                {...appendTarget(PATHS.AUTH_LOGIN)}
-                width="full"
-              >
+      <article className={containerClass}>
+        {step === 'request' && (
+          <PasswordChangeRequestForm
+            defaultEmail={data.request.email}
+            purpose="forget"
+            container="page"
+            submitCallback={requestCodeCallback}
+            scrollLock={false}
+          />
+        )}
+        {step === 'reset' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            container="page"
+            backPreviousStep={backPreviousStep}
+            submitCallback={() => setStep('complete')}
+            scrollLock={false}
+          />
+        )}
+        {step === 'complete' && (
+          <div className="complete">
+            <Modal.Content>
+              <Title is="h3" type="modal-headline">
                 <Translate
-                  zh_hant={TEXT.zh_hant.login}
-                  zh_hans={TEXT.zh_hans.login}
+                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
                 />
-              </Modal.FooterButton>
-            </div>
-          )}
-        </article>
-      </main>
+              </Title>
+
+              <p className="hint">
+                <Translate
+                  zh_hant={TEXT.zh_hant.useNewPassword}
+                  zh_hans={TEXT.zh_hans.useNewPassword}
+                />
+                。
+              </p>
+            </Modal.Content>
+
+            <Modal.FooterButton
+              is="link"
+              {...appendTarget(PATHS.AUTH_LOGIN)}
+              width="full"
+            >
+              <Translate
+                zh_hant={TEXT.zh_hant.login}
+                zh_hans={TEXT.zh_hans.login}
+              />
+            </Modal.FooterButton>
+          </div>
+        )}
+      </article>
+
       <style jsx>{styles}</style>
-    </>
+    </main>
   )
 }
 

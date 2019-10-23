@@ -18,7 +18,9 @@ export const Switch = ({
   return (
     <label className={switchClassNames}>
       <input type="checkbox" onChange={onChange} checked={checked} />
+
       <span />
+
       <style jsx>{styles}</style>
     </label>
   )

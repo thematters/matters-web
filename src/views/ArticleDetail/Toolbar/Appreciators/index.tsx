@@ -36,7 +36,7 @@ const fragments = {
 }
 
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
-  const edges = _get(article, 'appreciationsReceived.edges')
+  const edges = article.appreciationsReceived.edges
 
   if (!edges || edges.length <= 0) {
     return null
@@ -54,17 +54,21 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           <section className="avatar-list">
             {edges
               .slice(0, 5)
-              .map(({ node, cursor }: { node: any; cursor: any }) => (
-                <Avatar user={node.sender} size="xsmall" key={cursor} />
-              ))}
+              .map(
+                ({ node, cursor }) =>
+                  node.sender && (
+                    <Avatar user={node.sender} size="xsmall" key={cursor} />
+                  )
+              )}
           </section>
           <section className="name-list">
             <p>
               {edges
                 .slice(0, 3)
-                .map(({ node }: { node: any }) => node.sender.displayName)
+                .map(({ node }) => node.sender && node.sender.displayName)
                 .join('、')}
             </p>
+
             <p className="highlight">
               <Translate
                 zh_hant={({ count }) => `等 ${count} 人贊賞了作品`}
@@ -75,6 +79,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
               />
             </p>
           </section>
+
           <style jsx>{styles}</style>
         </button>
       )}

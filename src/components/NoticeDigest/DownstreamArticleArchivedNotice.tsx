@@ -35,6 +35,7 @@ const DownstreamArticleArchivedNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

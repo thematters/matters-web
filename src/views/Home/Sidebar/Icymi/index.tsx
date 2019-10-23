@@ -1,10 +1,8 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Label, Placeholder, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
-import { Query } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -35,46 +33,41 @@ export const SIDEBAR_ICYMI = gql`
   ${ArticleDigest.Sidebar.fragments.article}
 `
 
-export default () => (
-  <Query query={SIDEBAR_ICYMI}>
-    {({ data, loading, error }: QueryResult & { data: SidebarIcymi }) => {
-      if (loading) {
-        return <Placeholder.Sidebar />
-      }
+export default () => {
+  const { data, loading } = useQuery<SidebarIcymi>(SIDEBAR_ICYMI)
+  const edges = data && data.viewer && data.viewer.recommendation.icymi.edges
 
-      const edges = _get(data, 'viewer.recommendation.icymi.edges', [])
+  if (loading) {
+    return <Placeholder.Sidebar />
+  }
 
-      if (!edges || edges.length <= 0) {
-        return null
-      }
+  if (!edges || edges.length <= 0) {
+    return null
+  }
 
-      return (
-        <>
-          <header>
-            <Label>
-              <Translate zh_hant="不要錯過" zh_hans="不要错过" />
-            </Label>
-          </header>
+  return (
+    <>
+      <header>
+        <Label>
+          <Translate zh_hant="不要錯過" zh_hans="不要错过" />
+        </Label>
+      </header>
 
-          <ul>
-            {edges.map(
-              ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.ICYMI,
-                      location: i
-                    })
-                  }
-                >
-                  <ArticleDigest.Sidebar article={node} hasCover />
-                </li>
-              )
-            )}
-          </ul>
-        </>
-      )
-    }}
-  </Query>
-)
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.ICYMI,
+                location: i
+              })
+            }
+          >
+            <ArticleDigest.Sidebar article={node} hasCover />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}

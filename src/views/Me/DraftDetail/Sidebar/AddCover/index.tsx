@@ -5,10 +5,11 @@ import { useContext } from 'react'
 
 import { Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import { AddCoverDraft } from './__generated__/AddCoverDraft'
+import { UpdateDraftCover } from './__generated__/UpdateDraftCover'
 import styles from './styles.css'
 
 const fragments = {
@@ -77,6 +78,7 @@ const CoverList = ({
 }
 
 const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
+  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER)
   const { updateHeaderState } = useContext(HeaderContext)
   const { id: draftId, cover, assets } = draft
   const imageAssets = assets.filter(
@@ -101,19 +103,17 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
           zh_hans="选择一張圖片作為封面"
         />
       </p>
+
       <section className={containerStyle}>
-        <Mutation mutation={UPDATE_COVER}>
-          {(update: any) => (
-            <CoverList
-              draftId={draftId}
-              updateHeaderState={updateHeaderState}
-              update={update}
-              cover={cover}
-              assets={imageAssets}
-            />
-          )}
-        </Mutation>
+        <CoverList
+          draftId={draftId}
+          updateHeaderState={updateHeaderState}
+          update={update}
+          cover={cover}
+          assets={imageAssets}
+        />
       </section>
+
       <style jsx>{styles}</style>
     </Collapsable>
   )

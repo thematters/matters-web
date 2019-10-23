@@ -5,11 +5,12 @@
       true,
       [
         "~",
-        "@testing-library/react",
         "tippy.js",
         "dotenv",
         "apollo-cache",
-        "svg-sprite-loader"
+        "svg-sprite-loader",
+        "@testing-library",
+        "@apollo"
       ]
     ],
     "no-bitwise": false,

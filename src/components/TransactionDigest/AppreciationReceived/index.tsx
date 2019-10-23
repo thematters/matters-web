@@ -77,6 +77,7 @@ const AppreciationReceived = ({
 
         <DateTime date={createdAt} type="standard" />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

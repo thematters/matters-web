@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
@@ -52,31 +51,30 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = numAbbr(_get(tag, 'articles.totalCount', 0))
+  const tagCount = numAbbr(tag.articles.totalCount || 0)
 
   return (
-    <>
-      <Link {...path}>
-        <a className={tagClasses}>
-          <TextIcon
-            icon={
-              <Icon
-                size={isSmall ? 'xsmall' : 'small'}
-                id={ICON_HASHTAG.id}
-                viewBox={ICON_HASHTAG.viewBox}
-              />
-            }
-            text={tag.content}
-            weight="medium"
-            size={isSmall ? 'sm' : 'md'}
-            spacing={isSmall ? 'xtight' : 'tight'}
-          />
+    <Link {...path}>
+      <a className={tagClasses}>
+        <TextIcon
+          icon={
+            <Icon
+              size={isSmall ? 'xsmall' : 'small'}
+              id={ICON_HASHTAG.id}
+              viewBox={ICON_HASHTAG.viewBox}
+            />
+          }
+          text={tag.content}
+          weight="medium"
+          size={isSmall ? 'sm' : 'md'}
+          spacing={isSmall ? 'xtight' : 'tight'}
+        />
 
-          {!!tagCount && <span className="count">{tagCount}</span>}
-        </a>
-      </Link>
-      <style jsx>{styles}</style>
-    </>
+        {!!tagCount && <span className="count">{tagCount}</span>}
+
+        <style jsx>{styles}</style>
+      </a>
+    </Link>
   )
 }
 
