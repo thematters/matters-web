@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
@@ -22,7 +22,10 @@ import { translate } from '~/common/utils'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
-const SignUpModal: FC<ModalInstanceProps> = ({ closeable, setCloseable }) => {
+const SignUpModal: React.FC<ModalInstanceProps> = ({
+  closeable,
+  setCloseable
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')

@@ -56,6 +56,7 @@ const FooterButton: React.FC<ButtonProps> = ({
             {children}
           </a>
         </Link>
+
         <style jsx>{styles}</style>
       </>
     )
@@ -68,6 +69,7 @@ const FooterButton: React.FC<ButtonProps> = ({
         {loading && <IconSpinner />}
         {!loading && children}
       </button>
+
       <style jsx>{styles}</style>
     </>
   )

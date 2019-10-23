@@ -40,7 +40,9 @@ const State = ({ article }: { article: StateArticle }) => {
   return (
     <section className="container">
       {isBanned && <Toast color="grey" header={<BannedHeader />} />}
+
       {isArchived && <Toast color="grey" header={<ArchivedHeader />} />}
+
       <style jsx>{styles}</style>
     </section>
   )

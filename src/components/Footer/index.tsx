@@ -21,6 +21,7 @@ const BaseLink = ({
     <Link href={href} as={as}>
       <a className="item">{text}</a>
     </Link>
+
     <style jsx>{styles}</style>
   </>
 )
@@ -31,11 +32,6 @@ export const Footer = () => {
 
   return (
     <footer className="footer">
-      {/* <BaseLink
-        href={'/'}
-        as={'/'}
-        text={translate({ zh_hant: '意見反饋', zh_hans: '意见反馈', lang })}
-      /> */}
       <BaseLink
         href={PATHS.MISC_ABOUT.href}
         as={PATHS.MISC_ABOUT.as}
@@ -45,6 +41,7 @@ export const Footer = () => {
           lang
         })}
       />
+
       <BaseLink
         href={PATHS.MISC_FAQ.href}
         as={PATHS.MISC_FAQ.as}
@@ -54,6 +51,7 @@ export const Footer = () => {
           lang
         })}
       />
+
       <BaseLink
         href={PATHS.MISC_GUIDE.href}
         as={PATHS.MISC_GUIDE.as}
@@ -63,6 +61,7 @@ export const Footer = () => {
           lang
         })}
       />
+
       <BaseLink
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
@@ -72,12 +71,9 @@ export const Footer = () => {
           lang
         })}
       />
-      {/* <BaseLink
-        href={'/'}
-        as={'/'}
-        text={translate({ zh_hant: '下載 App', zh_hans: '下载 App', lang })}
-      /> */}
+
       <p className="item">© {year} Matters</p>
+
       <style jsx>{styles}</style>
     </footer>
   )

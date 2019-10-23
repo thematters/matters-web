@@ -1,7 +1,5 @@
-import _get from 'lodash/get'
-
 import { Head, Translate } from '~/components'
-import { AuthorPicker } from '~/components/Follow'
+import AuthorPicker from '~/components/Follow/AuthorPicker'
 
 import { TEXT } from '~/common/enums'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
@@ -23,6 +21,7 @@ const PickIntroHeader = () => {
             zh_hans="欢迎加入 Matters，一个自由、自主、永续的创作与公共讨论空间。"
           />
         </p>
+
         <p className="sub">
           <Translate zh_hant="請追蹤至少 " zh_hans="请追踪至少 " />
           <span className="hightlight">5</span>
@@ -32,6 +31,7 @@ const PickIntroHeader = () => {
           />
         </p>
       </section>
+
       <style jsx>{styles}</style>
     </header>
   )
@@ -55,6 +55,7 @@ const PickAuthors = ({ viewer }: { [key: string]: any }) => (
         />
       }
     />
+
     <style jsx>{styles}</style>
   </>
 )

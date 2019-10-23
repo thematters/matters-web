@@ -2,11 +2,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { createContext, useContext, useState } from 'react'
 
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { ViewerContext } from '~/components/Viewer'
 
 import { DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'
+
+import { UpdateLanguage } from './__generated__/UpdateLanguage'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateLanguage($input: UpdateUserInfoInput!) {
@@ -33,51 +35,48 @@ export const LanguageProvider = ({
   children: React.ReactNode
   defaultLang?: Language
 }) => {
+  const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
-  const viewerLanguage = _get(viewer, 'settings.language')
+  const viewerLanguage = viewer && viewer.settings && viewer.settings.language
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (
-    <Mutation mutation={UPDATE_VIEWER_LANGUAGE}>
-      {(updateLanguage: any) => (
-        <LanguageContext.Provider
-          value={{
-            lang: viewerLanguage || lang,
-            setLang: targetLang => {
-              if (viewer.isAuthed) {
-                try {
-                  updateLanguage({
-                    variables: { input: { language: targetLang } },
-                    optimisticResponse: {
-                      updateUserInfo: {
-                        id: viewer.id,
-                        settings: {
-                          language: targetLang,
-                          __typename: 'UserSettings'
-                        },
-                        __typename: 'User'
-                      }
-                    }
-                  })
-                } catch (e) {
-                  //
+    <LanguageContext.Provider
+      value={{
+        lang: viewerLanguage || lang,
+        setLang: targetLang => {
+          if (viewer.isAuthed) {
+            try {
+              updateLanguage({
+                variables: { input: { language: targetLang } },
+                optimisticResponse: {
+                  updateUserInfo: {
+                    id: viewer.id,
+                    settings: {
+                      language: targetLang as any,
+                      __typename: 'UserSettings'
+                    },
+                    __typename: 'User'
+                  }
                 }
-              }
-
-              setLang(targetLang)
-
-              if (process.browser) {
-                document.documentElement.setAttribute(
-                  'lang',
-                  langConvert.sys2html(targetLang)
-                )
-              }
+              })
+            } catch (e) {
+              //
             }
-          }}
-        >
-          {children}
-        </LanguageContext.Provider>
-      )}
-    </Mutation>
+          }
+
+          setLang(targetLang)
+
+          if (process.browser) {
+            document.documentElement.setAttribute(
+              'lang',
+              langConvert.sys2html(targetLang)
+            )
+          }
+        }
+      }}
+    >
+      {children}
+    </LanguageContext.Provider>
   )
 }

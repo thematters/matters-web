@@ -1,6 +1,6 @@
 // External modules
 import classNames from 'classnames'
-import { FC, useContext, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 
 import { LanguageContext } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
@@ -20,7 +20,7 @@ export interface ContainerProps {
   layout?: 'default' | 'small'
 }
 
-const Container: FC<ContainerProps> = ({
+const Container: React.FC<ContainerProps> = ({
   children,
   close,
   defaultCloseable = true,
@@ -100,6 +100,7 @@ const Container: FC<ContainerProps> = ({
           </div>
         </div>
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )

@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { Icon, TextIcon, Translate } from '~/components'
 
 import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'

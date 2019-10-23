@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 
 import { Button, Icon, LanguageContext, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { TEXT } from '~/common/enums'
@@ -15,7 +15,9 @@ import { CreateDraft } from './__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
-  CustomButton?: FC<{ onClick: (event: React.MouseEvent<HTMLElement>) => void }>
+  CustomButton?: React.FC<{
+    onClick: (event: React.MouseEvent<HTMLElement>) => void
+  }>
 }
 
 export const CREATE_DRAFT = gql`
@@ -27,13 +29,28 @@ export const CREATE_DRAFT = gql`
   }
 `
 
+const WriteIcon = ({ loading }: { loading: boolean }) => {
+  const icon = loading ? ICON_SPINNER : ICON_WRITE
+
+  return (
+    <Icon
+      id={icon.id}
+      viewBox={icon.viewBox}
+      className={loading && 'u-motion-spin'}
+    />
+  )
+}
+
 const WriteButton = ({ allowed, CustomButton }: Props) => {
   const { lang } = useContext(LanguageContext)
-
-  const placeholder = translate({
-    zh_hans: TEXT.zh_hans.untitle,
-    zh_hant: TEXT.zh_hant.untitle,
-    lang
+  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
+    variables: {
+      title: translate({
+        zh_hans: TEXT.zh_hans.untitle,
+        zh_hant: TEXT.zh_hant.untitle,
+        lang
+      })
+    }
   })
 
   if (!allowed) {
@@ -57,55 +74,43 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
     )
   }
 
+  const onClick = () => {
+    putDraft().then(({ data }) => {
+      const { slug, id } = (data && data.putDraft) || {}
+
+      if (slug && id) {
+        const path = toPath({ page: 'draftDetail', slug, id })
+        Router.push(path.as)
+      }
+    })
+  }
+
+  if (CustomButton) {
+    return <CustomButton onClick={onClick} />
+  }
+
   return (
-    <Mutation mutation={CREATE_DRAFT} variables={{ title: placeholder }}>
-      {(putDraft: any, { loading }: any) => {
-        const WriteIcon = () => {
-          const icon = loading ? ICON_SPINNER : ICON_WRITE
-          return (
-            <Icon
-              id={icon.id}
-              viewBox={icon.viewBox}
-              className={loading && 'u-motion-spin'}
-            />
-          )
-        }
-        const onClick = () => {
-          putDraft().then((result: any) => {
-            const { data } = result as { data: CreateDraft }
-            const { slug, id } = data.putDraft
-            const path = toPath({ page: 'draftDetail', slug, id })
-            Router.push(path.as)
-          })
-        }
+    <>
+      <Button
+        className="u-sm-down-hide"
+        size="large"
+        bgColor="gold"
+        aria-label="創作"
+        icon={<WriteIcon loading={loading} />}
+        onClick={onClick}
+      >
+        <Translate zh_hant="創作" zh_hans="创作" />
+      </Button>
 
-        return CustomButton ? (
-          <CustomButton onClick={onClick} />
-        ) : (
-          <>
-            <Button
-              className="u-sm-down-hide"
-              size="large"
-              bgColor="gold"
-              aria-label="創作"
-              icon={<WriteIcon />}
-              onClick={onClick}
-            >
-              <Translate zh_hant="創作" zh_hans="创作" />
-            </Button>
-
-            <Button
-              className="u-sm-up-hide"
-              bgColor="gold"
-              shape="circle"
-              aria-label="創作"
-              icon={<WriteIcon />}
-              onClick={onClick}
-            />
-          </>
-        )
-      }}
-    </Mutation>
+      <Button
+        className="u-sm-up-hide"
+        bgColor="gold"
+        shape="circle"
+        aria-label="創作"
+        icon={<WriteIcon loading={loading} />}
+        onClick={onClick}
+      />
+    </>
   )
 }
 

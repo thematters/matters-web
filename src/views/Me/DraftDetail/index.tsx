@@ -1,17 +1,16 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
-import EmptyDraft from '~/components/Empty/EmptyDraft'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
-import { Translate } from '~/components/Language'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
 import { Placeholder } from '~/components/Placeholder'
+import Throw404 from '~/components/Throw404'
 
 import { getQuery } from '~/common/utils'
 
@@ -40,57 +39,58 @@ const DRAFT_DETAIL = gql`
 const DraftDetail = () => {
   const router = useRouter()
   const id = getQuery({ router, key: 'id' })
-
-  if (!id) {
-    return null
-  }
-
   const { updateHeaderState } = useContext(HeaderContext)
 
   useEffect(() => {
     updateHeaderState({ type: 'draft', state: '', draftId: id })
-
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
+  const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
+    variables: { id }
+  })
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!loading && (!data || !data.node || data.node.__typename !== 'Draft')) {
+    return <Throw404 />
+  }
+
+  const draft =
+    data && data.node && data.node.__typename === 'Draft' && data.node
+
   return (
-    <Query query={DRAFT_DETAIL} variables={{ id }}>
-      {({ data, loading, error }: QueryResult & { data: DraftDetailQuery }) => (
-        <main className="l-row">
-          <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
+    <main className="l-row">
+      <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
 
-          <article className="l-col-4 l-col-md-5 l-col-lg-8">
-            {loading && <Placeholder.ArticleDetail />}
-            {!loading && data && data.node && (
-              <>
-                <PublishState draft={data.node} />
-                <DraftContent draft={data.node} />
-              </>
-            )}
-            {!loading && (error || (data && !data.node)) && (
-              <EmptyDraft
-                description={
-                  <Translate zh_hant="草稿不存在" zh_hans="草稿不存在" />
-                }
-              />
-            )}
-          </article>
+      <article className="l-col-4 l-col-md-5 l-col-lg-8">
+        {loading && <Placeholder.ArticleDetail />}
 
-          <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-            {loading && <Placeholder.Sidebar />}
-            {data && data.node && <Sidebar draft={data.node} />}
-          </aside>
+        {!loading && draft && (
+          <>
+            <PublishState draft={draft} />
+            <DraftContent draft={draft} />
+          </>
+        )}
+      </article>
 
-          <ModalInstance modalId="publishModal" title="publishNote">
-            {(props: ModalInstanceProps) => (
-              <PublishModal draft={data.node} {...props} />
-            )}
-          </ModalInstance>
+      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+        {loading && <Placeholder.Sidebar />}
+        {draft && <Sidebar draft={draft} />}
+      </aside>
 
-          <style jsx>{styles}</style>
-        </main>
+      {draft && (
+        <ModalInstance modalId="publishModal" title="publishNote">
+          {(props: ModalInstanceProps) => (
+            <PublishModal draft={draft} {...props} />
+          )}
+        </ModalInstance>
       )}
-    </Query>
+
+      <style jsx>{styles}</style>
+    </main>
   )
 }
 

@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   EmailChangeConfirmForm,
@@ -23,7 +23,7 @@ import { TEXT } from '~/common/enums'
 
 type Step = 'request' | 'confirm' | 'complete'
 
-const EmailModal: FC<ModalInstanceProps> = ({ close }) => {
+const EmailModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState<Step>('request')
   const [data, setData] = useState<{ [key: string]: any }>({

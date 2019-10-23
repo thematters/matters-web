@@ -2,13 +2,22 @@ import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
 import { analytics, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
+import { ReadArticle } from './__generated__/ReadArticle'
+
+const READ_ARTICLE = gql`
+  mutation ReadArticle($id: ID!) {
+    readArticle(input: { id: $id }) {
+      id
+    }
+  }
+`
 
 const fragments = {
   article: gql`
@@ -20,6 +29,9 @@ const fragments = {
 }
 
 const Content = ({ article }: { article: ContentArticle }) => {
+  const [read] = useMutation<ReadArticle>(READ_ARTICLE)
+  const [trackedFinish, setTrackedFinish] = useState(false)
+  const [trackedRead, setTrackedRead] = useState(false)
   const { id } = article
 
   useEffect(() => {
@@ -56,9 +68,6 @@ const Content = ({ article }: { article: ContentArticle }) => {
     initAudioPlayers()
   })
 
-  const [trackedFinish, setTrackedFinish] = useState(false)
-  const [trackedRead, setTrackedRead] = useState(false)
-
   const FireOnMount = ({ fn }: { fn: () => void }) => {
     useEffect(() => {
       fn()
@@ -67,43 +76,34 @@ const Content = ({ article }: { article: ContentArticle }) => {
   }
 
   return (
-    <Mutation
-      mutation={gql`
-        mutation ReadArticle($id: ID!) {
-          readArticle(input: { id: $id }) {
-            id
+    <>
+      <FireOnMount
+        fn={() => {
+          if (!trackedRead) {
+            read({ variables: { id } })
+            setTrackedRead(true)
           }
-        }
-      `}
-    >
-      {(read: any) => (
-        <>
-          <FireOnMount
-            fn={() => {
-              if (!trackedRead) {
-                read({ variables: { id } })
-                setTrackedRead(true)
-              }
-            }}
-          />
-          <div
-            className="u-content"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
-          <Waypoint
-            onEnter={() => {
-              if (!trackedFinish) {
-                analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-                  entrance: id
-                })
-                setTrackedFinish(true)
-              }
-            }}
-          />
-          <style jsx>{styles}</style>
-        </>
-      )}
-    </Mutation>
+        }}
+      />
+
+      <div
+        className="u-content"
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      />
+
+      <Waypoint
+        onEnter={() => {
+          if (!trackedFinish) {
+            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
+              entrance: id
+            })
+            setTrackedFinish(true)
+          }
+        }}
+      />
+
+      <style jsx>{styles}</style>
+    </>
   )
 }
 

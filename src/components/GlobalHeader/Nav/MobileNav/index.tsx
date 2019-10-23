@@ -34,6 +34,7 @@ export default ({ unread }: { unread: boolean }) => {
           viewBox={ICON_MENU.viewBox}
           style={{ width: 20, height: 16 }}
         />
+
         <style jsx>{styles}</style>
       </button>
     </Dropdown>

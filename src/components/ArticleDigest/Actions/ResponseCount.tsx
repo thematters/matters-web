@@ -67,7 +67,7 @@ const ResponseCount = ({
           }
           color="grey"
           weight="medium"
-          text={numAbbr(_get(article, 'responseCount', 0))}
+          text={numAbbr(article.responseCount || 0)}
           size={size === 'small' ? 'sm' : 'xs'}
           spacing="xxtight"
         />

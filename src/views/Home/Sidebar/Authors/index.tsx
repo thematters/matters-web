@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import {
   Label,
@@ -9,7 +8,7 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -39,66 +38,62 @@ const SIDEBAR_AUTHORS = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-export default () => (
-  <>
-    <Query query={SIDEBAR_AUTHORS} notifyOnNetworkStatusChange>
-      {({
-        data,
-        loading,
-        error,
-        refetch
-      }: QueryResult & { data: SidebarAuthors }) => {
-        const edges = _get(data, 'viewer.recommendation.authors.edges', [])
+export default () => {
+  const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
+    SIDEBAR_AUTHORS,
+    {
+      notifyOnNetworkStatusChange: true
+    }
+  )
+  const edges = data && data.viewer && data.viewer.recommendation.authors.edges
 
-        if (!edges || edges.length <= 0) {
-          return null
-        }
+  if (error) {
+    return <QueryError error={error} />
+  }
 
-        return (
-          <>
-            <header>
-              <Label>
-                <Translate zh_hant="活躍作者" zh_hans="活跃作者" />
-              </Label>
+  if (!edges || edges.length <= 0) {
+    return null
+  }
 
-              <div>
-                <ShuffleButton
-                  onClick={() => {
-                    refetch()
-                    analytics.trackEvent(ANALYTICS_EVENTS.SHUFFLE_AUTHOR, {
-                      type: FEED_TYPE.AUTHORS
-                    })
-                  }}
-                />
-                <ViewAllLink type="authors" />
-              </div>
-            </header>
+  return (
+    <>
+      <header>
+        <Label>
+          <Translate zh_hant="活躍作者" zh_hans="活跃作者" />
+        </Label>
 
-            {loading && <Spinner />}
+        <div>
+          <ShuffleButton
+            onClick={() => {
+              refetch()
+              analytics.trackEvent(ANALYTICS_EVENTS.SHUFFLE_AUTHOR, {
+                type: FEED_TYPE.AUTHORS
+              })
+            }}
+          />
+          <ViewAllLink type="authors" />
+        </div>
+      </header>
 
-            {!loading && (
-              <ul>
-                {edges.map(
-                  ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                    <li
-                      key={cursor}
-                      onClick={() =>
-                        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                          type: FEED_TYPE.AUTHORS,
-                          location: i
-                        })
-                      }
-                    >
-                      <UserDigest.FullDesc user={node} nameSize="small" />
-                    </li>
-                  )
-                )}
-              </ul>
-            )}
-          </>
-        )
-      }}
-    </Query>
-    <style jsx>{styles}</style>
-  </>
-)
+      {loading && <Spinner />}
+
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.AUTHORS,
+                location: i
+              })
+            }
+          >
+            <UserDigest.FullDesc user={node} nameSize="small" />
+          </li>
+        ))}
+      </ul>
+
+      <style jsx>{styles}</style>
+    </>
+  )
+}

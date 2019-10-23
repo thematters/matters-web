@@ -15,7 +15,9 @@ const ModalComplete = ({
       <Title is="h3" type="modal-headline">
         {message}
       </Title>
+
       <p className="hint">{hint}</p>
+
       <style jsx>{styles}</style>
     </div>
   </Modal.Content>

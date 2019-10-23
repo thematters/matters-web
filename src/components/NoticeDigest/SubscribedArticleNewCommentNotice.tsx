@@ -67,6 +67,7 @@ const SubscribedArticleNewCommentNotice = ({
 
         <NoticeDate notice={notice} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

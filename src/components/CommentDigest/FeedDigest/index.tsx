@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'
 import {
   FeedDigestComment,
-  FeedDigestComment_comments_edges_node
+  FeedDigestComment_comments_edges_node,
+  FeedDigestComment_comments_edges_node_replyTo_author
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
@@ -28,11 +28,18 @@ const fragments = {
   comment: commentFragments.feed
 }
 
-const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
+const ReplyTo = ({
+  user,
+  inArticle
+}: {
+  user: FeedDigestComment_comments_edges_node_replyTo_author
+  inArticle: boolean
+}) => (
   <section className="reply-to">
     <span className="wording">
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
+
     <UserDigest.Mini
       user={user}
       avatarSize="xxxsmall"
@@ -40,6 +47,7 @@ const ReplyTo = ({ user, inArticle }: { user: any; inArticle: boolean }) => (
       spacing="xxtight"
       hasUserName={inArticle}
     />
+
     <style jsx>{styles}</style>
   </section>
 )
@@ -52,6 +60,7 @@ const PinnedLabel = () => (
         zh_hans={TEXT.zh_hant.authorRecommend}
       />
     </Label>
+
     <style jsx>{styles}</style>
   </span>
 )
@@ -59,6 +68,7 @@ const PinnedLabel = () => (
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <button className="cancel-button" type="button" onClick={() => onClick()}>
     <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
+
     <style jsx>{styles}</style>
   </button>
 )
@@ -149,8 +159,8 @@ const FeedDigest = ({
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
-  const descendantComments = _get(comment, 'comments.edges', []).filter(
-    ({ node }: { node: any }) => node.state === 'active'
+  const descendantComments = (comment.comments.edges || []).filter(
+    ({ node }) => node.state === 'active'
   )
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
@@ -211,7 +221,7 @@ const FeedDigest = ({
           <ul className="descendant-comments">
             {descendantComments
               .slice(0, expand ? undefined : COLLAPSE_DESCENDANT_COUNT)
-              .map(({ node, cursor }: { node: any; cursor: any }) => (
+              .map(({ node, cursor }) => (
                 <li key={cursor}>
                   <DescendantComment
                     comment={node}

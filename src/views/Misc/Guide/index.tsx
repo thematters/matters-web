@@ -41,6 +41,7 @@ export default () => {
             className="u-content"
           />
         </div>
+
         <style jsx>{styles}</style>
       </section>
     </main>

@@ -51,7 +51,9 @@ export const TextIcon: React.FC<TextIconProps> = ({
     return (
       <span className={textIconClasses} style={style}>
         <span className="text">{text || children}</span>
+
         {icon}
+
         <style jsx>{styles}</style>
       </span>
     )
@@ -60,7 +62,9 @@ export const TextIcon: React.FC<TextIconProps> = ({
   return (
     <span className={textIconClasses} style={style}>
       {icon}
+
       <span className="text">{text === undefined ? children : text}</span>
+
       <style jsx>{styles}</style>
     </span>
   )

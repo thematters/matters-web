@@ -162,10 +162,6 @@ export const TEXT = {
       USER_USERNAME_EXISTS: '該 Matters ID 已被其他使用者使用',
       USER_DISPLAYNAME_INVALID: '姓名不正確',
       USER_FOLLOW_FAILED: '追蹤用戶失敗，請稍候重試',
-      // USER_INVITE_FAILED: '',
-      // USER_INVITE_STATE_INVALID: '',
-      // USER_INVITE_EMAIL_REGISTERED: '',
-      // USER_INVITE_EMAIL_INVITED: '',
       CODE_INVALID: '驗證碼不正確',
       CODE_EXPIRED: '驗證碼已過期'
     } as { [key: string]: string }
@@ -334,10 +330,6 @@ export const TEXT = {
       USER_USERNAME_EXISTS: '该 Matters ID 已被其他用户使用',
       USER_DISPLAYNAME_INVALID: '姓名不正确',
       USER_FOLLOW_FAILED: '追踪用户失败，请稍候重试',
-      // USER_INVITE_FAILED: '',
-      // USER_INVITE_STATE_INVALID: '',
-      // USER_INVITE_EMAIL_REGISTERED: '',
-      // USER_INVITE_EMAIL_INVITED: '',
       CODE_INVALID: '验证码不正确',
       CODE_EXPIRED: '验证码已过期'
     } as { [key: string]: string }

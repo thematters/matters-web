@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
@@ -65,7 +64,7 @@ const CommentCount = ({
           }
           color="grey"
           weight="medium"
-          text={numAbbr(_get(article, 'commentCount', 0))}
+          text={numAbbr(article.commentCount || 0)}
           size={size === 'default' ? 'sm' : 'xs'}
           spacing="xxtight"
         />

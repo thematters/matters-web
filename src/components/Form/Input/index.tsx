@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { FC } from 'react'
 
 import styles from './styles.css'
 
@@ -45,7 +44,7 @@ interface Props {
   [key: string]: any
 }
 
-const Input: FC<Props> = ({
+const Input: React.FC<Props> = ({
   className = [],
   type,
   field,
@@ -94,6 +93,7 @@ const Input: FC<Props> = ({
           {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
         </div>
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

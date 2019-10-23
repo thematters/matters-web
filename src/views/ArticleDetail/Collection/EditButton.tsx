@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
@@ -11,7 +10,7 @@ import {
   TextIcon,
   Translate
 } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 import IconSpinner from '~/components/Icon/Spinner'
 
@@ -21,6 +20,7 @@ import ICON_EDIT from '~/static/icons/collection-edit.svg?sprite'
 import ICON_SAVE from '~/static/icons/pen.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { EditorSetCollection } from './__generated__/EditorSetCollection'
 import styles from './styles.css'
 
 /**
@@ -62,6 +62,9 @@ const EditButton = ({
   setEditing: any
   editingArticles: string[]
 }) => {
+  const [setCollection, { loading }] = useMutation<EditorSetCollection>(
+    EDITOR_SET_COLLECTION
+  )
   const { lang } = useContext(LanguageContext)
   const editButtonClass = classNames({
     'edit-button': true
@@ -75,88 +78,80 @@ const EditButton = ({
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
         </button>
+
         <style jsx>{styles}</style>
       </span>
     )
   }
 
   return (
-    <Mutation mutation={EDITOR_SET_COLLECTION} variables={{ first: null }}>
-      {(setCollection: any, { loading }: any) => (
-        <span className={editButtonClass}>
-          <Button
-            type="button"
-            bgColor="transparent"
-            textColor="grey"
-            spacing="tight"
-            size="small"
-            onClick={() => setEditing(false)}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.cancel}
-              zh_hans={TEXT.zh_hans.cancel}
-            />
-          </Button>
+    <span className={editButtonClass}>
+      <Button
+        type="button"
+        bgColor="transparent"
+        textColor="grey"
+        spacing="tight"
+        size="small"
+        onClick={() => setEditing(false)}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.cancel}
+          zh_hans={TEXT.zh_hans.cancel}
+        />
+      </Button>
 
-          <Button
-            icon={loading ? <IconSpinner /> : <IconBox icon={ICON_SAVE} />}
-            size="small"
-            disabled={!!loading}
-            onClick={async () => {
-              try {
-                await setCollection({
-                  variables: {
-                    id: article.id,
-                    collection: _uniq(
-                      editingArticles.map((item: any) => item.id)
-                    ),
-                    first: null
-                  }
-                })
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: translate({
-                        zh_hant: '關聯已更新',
-                        zh_hans: '关联已更新',
-                        lang
-                      }),
-                      closeButton: true,
-                      duration: 2000
-                    }
-                  })
-                )
-              } catch (error) {
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'red',
-                      content: translate({
-                        zh_hant: '關聯失敗',
-                        zh_hans: '关联失敗',
-                        lang
-                      }),
-                      clostButton: true,
-                      duration: 2000
-                    }
-                  })
-                )
+      <Button
+        icon={loading ? <IconSpinner /> : <IconBox icon={ICON_SAVE} />}
+        size="small"
+        disabled={!!loading}
+        onClick={async () => {
+          try {
+            await setCollection({
+              variables: {
+                id: article.id,
+                collection: _uniq(editingArticles.map((item: any) => item.id)),
+                first: null
               }
-              setEditing(false)
-            }}
-            outlineColor="green"
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.done}
-              zh_hans={TEXT.zh_hans.done}
-            />
-          </Button>
+            })
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'green',
+                  content: translate({
+                    zh_hant: '關聯已更新',
+                    zh_hans: '关联已更新',
+                    lang
+                  }),
+                  closeButton: true,
+                  duration: 2000
+                }
+              })
+            )
+          } catch (error) {
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'red',
+                  content: translate({
+                    zh_hant: '關聯失敗',
+                    zh_hans: '关联失敗',
+                    lang
+                  }),
+                  clostButton: true,
+                  duration: 2000
+                }
+              })
+            )
+          }
+          setEditing(false)
+        }}
+        outlineColor="green"
+      >
+        <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+      </Button>
 
-          <style jsx>{styles}</style>
-        </span>
-      )}
-    </Mutation>
+      <style jsx>{styles}</style>
+    </span>
   )
 }
 

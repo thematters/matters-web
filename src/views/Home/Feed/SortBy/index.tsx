@@ -42,6 +42,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
           {!isHottest && <Translate zh_hant="熱門排序" zh_hans="热门排序" />}
         </TextIcon>
       </button>
+
       <style jsx>{styles}</style>
     </>
   )

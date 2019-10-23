@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/ShareButton'
@@ -67,6 +66,7 @@ const Toolbar = ({
         <AppreciationButton article={article} />
         <Appreciators article={article} />
       </section>
+
       <section className="right">
         <ResponseButton article={article} />
         <ExtendButton article={article} />
@@ -74,6 +74,7 @@ const Toolbar = ({
         <ShareButton />
         <MoreButton article={article} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

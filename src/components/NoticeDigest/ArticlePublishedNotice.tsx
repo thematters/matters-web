@@ -29,6 +29,7 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
 
         <NoticeDate notice={notice} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
-import _debounce from 'lodash/debounce'
-import _get from 'lodash/get'
 import { useContext, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
+import { useDebounce } from 'use-debounce/lib'
 
 import {
   Dropdown,
@@ -12,8 +11,8 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import { Query } from '~/components/GQL'
 
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 
 import {
@@ -83,7 +82,9 @@ const DropdownContent = ({
             </button>
           </Menu.Item>
         ))}
+
         {tags && tags.length > 0 && <Menu.Divider />}
+
         <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
           <button
             className="search-tag-item create"
@@ -100,18 +101,15 @@ const DropdownContent = ({
           </button>
         </Menu.Item>
       </Menu>
+
       <style jsx>{styles}</style>
     </>
   )
 
-const debouncedSetQuerySearch = _debounce((value, setQuerySearch) => {
-  setQuerySearch(value)
-}, 300)
-
 const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
-  const [querySearch, setQuerySearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (instance) {
@@ -120,68 +118,59 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   }
   const showDropdown = () => {
     if (instance) {
-      setTimeout(() => {
-        instance.show()
-      }, 100) // unknown bug, needs set a timeout
+      instance.show()
     }
   }
 
+  const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
+    variables: { search: debouncedSearch },
+    skip: !debouncedSearch
+  })
+
   return (
     <>
-      <Query
-        query={SEARCH_TAGS}
-        variables={{ search: querySearch }}
-        skip={!querySearch}
+      <Dropdown
+        trigger="manual"
+        onCreate={setInstance}
+        content={
+          <DropdownContent
+            loading={loading}
+            search={search}
+            tags={
+              ((data && data.search.edges) || []).map(
+                ({ node }) => node
+              ) as SearchTagsQuery_search_edges_node_Tag[]
+            }
+            addTag={(tag: string) => {
+              addTag(tag)
+              setSearch('')
+            }}
+            hideDropdown={hideDropdown}
+          />
+        }
       >
-        {({ data, loading }: QueryResult & { data: SearchTagsQuery }) => {
-          return (
-            <Dropdown
-              trigger="manual"
-              onCreate={setInstance}
-              content={
-                <DropdownContent
-                  loading={loading}
-                  search={search}
-                  tags={_get(data, 'search.edges', []).map(
-                    ({
-                      node
-                    }: {
-                      node: SearchTagsQuery_search_edges_node_Tag
-                    }) => node
-                  )}
-                  addTag={(tag: string) => {
-                    addTag(tag)
-                    setSearch('')
-                  }}
-                  hideDropdown={hideDropdown}
-                />
-              }
-            >
-              <input
-                className="search-tag-input"
-                onChange={e => {
-                  const value = e.target.value
-                  setSearch(value)
-                  debouncedSetQuerySearch(value, setQuerySearch)
-                  if (value) {
-                    showDropdown()
-                  } else {
-                    hideDropdown()
-                  }
-                }}
-                onFocus={() => search && showDropdown()}
-                onClick={() => search && showDropdown()}
-                value={search}
-                placeholder={translate({
-                  zh_hant: '增加標籤…',
-                  zh_hans: '增加标签…',
-                  lang
-                })}
-              />
-            </Dropdown>
-          )
-        }}
-      </Query>
+        <input
+          className="search-tag-input"
+          onChange={e => {
+            const value = e.target.value
+            setSearch(value)
+            if (value) {
+              showDropdown()
+            } else {
+              hideDropdown()
+            }
+          }}
+          onFocus={() => search && showDropdown()}
+          onClick={() => search && showDropdown()}
+          value={search}
+          placeholder={translate({
+            zh_hant: '增加標籤…',
+            zh_hans: '增加标签…',
+            lang
+          })}
+        />
+      </Dropdown>
+
       <style jsx>{styles}</style>
     </>
   )

@@ -1,9 +1,12 @@
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
+
+import { DeleteDraft } from './__generated__/DeleteDraft'
+import { ViewerDrafts } from './__generated__/ViewerDrafts'
 
 const DELETE_DRAFT = gql`
   mutation DeleteDraft($id: ID!) {
@@ -27,53 +30,47 @@ const ME_DRADTS = gql`
 `
 
 const DeleteButton = ({ id }: { id: string }) => {
-  return (
-    <Mutation
-      mutation={DELETE_DRAFT}
-      variables={{ id }}
-      update={(cache: any) => {
-        try {
-          const data = cache.readQuery({ query: ME_DRADTS })
+  const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
+    variables: { id },
+    update: cache => {
+      try {
+        const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
 
-          if (
-            !data ||
-            !data.viewer ||
-            !data.viewer.drafts ||
-            !data.viewer.drafts.edges
-          ) {
-            return
-          }
+        if (
+          !data ||
+          !data.viewer ||
+          !data.viewer.drafts ||
+          !data.viewer.drafts.edges
+        ) {
+          return
+        }
 
-          const edges = data.viewer.drafts.edges.filter(
-            ({ node }: { node: any }) => node.id !== id
-          )
+        const edges = data.viewer.drafts.edges.filter(
+          ({ node }) => node.id !== id
+        )
 
-          cache.writeQuery({
-            query: ME_DRADTS,
-            data: {
-              viewer: {
-                ...data.viewer,
-                drafts: {
-                  ...data.viewer.drafts,
-                  edges
-                }
+        cache.writeQuery({
+          query: ME_DRADTS,
+          data: {
+            viewer: {
+              ...data.viewer,
+              drafts: {
+                ...data.viewer.drafts,
+                edges
               }
             }
-          })
-        } catch (e) {
-          console.error(e)
-        }
-      }}
-    >
-      {(deleteDraft: any) => (
-        <button type="button" onClick={() => deleteDraft()}>
-          <Translate
-            zh_hant={TEXT.zh_hant.delete}
-            zh_hans={TEXT.zh_hant.delete}
-          />
-        </button>
-      )}
-    </Mutation>
+          }
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  })
+
+  return (
+    <button type="button" onClick={() => deleteDraft()}>
+      <Translate zh_hant={TEXT.zh_hant.delete} zh_hans={TEXT.zh_hant.delete} />
+    </button>
   )
 }
 

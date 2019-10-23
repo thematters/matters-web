@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import Router, { NextRouter } from 'next/router'
 import queryString from 'query-string'
 

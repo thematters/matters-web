@@ -8,6 +8,7 @@ export const ProfileCover = ({ cover }: { cover: string | null }) => (
       className="profile-cover"
       style={{ backgroundImage: `url(${cover || IMAGE_COVER})` }}
     />
+
     <style jsx>{styles}</style>
   </>
 )

@@ -33,6 +33,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
     {({ lang }) => (
       <time dateTime={new Date(date).toISOString()}>
         {datetimeFormat[type](date, lang)}
+
         <style jsx>{styles}</style>
       </time>
     )}
