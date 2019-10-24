@@ -178,7 +178,9 @@ const BaseUserProfile = () => {
               {!isMe && (
                 <section className="buttons">
                   <FollowButton user={user} size="default" />
+
                   <span className="u-sm-up-hide">
+                    <DropdownActions user={user} />
                     <ShareButton />
                   </span>
                 </section>
@@ -229,9 +231,8 @@ const BaseUserProfile = () => {
                     <EditProfileButton setEditing={setEditing} />
                   )}
 
-                  {!isMe && <DropdownActions user={user} />}
-
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
+                    {!isMe && <DropdownActions user={user} />}
                     <ShareButton />
                   </span>
                 </section>

@@ -114,7 +114,7 @@
     right: initial;
   }
 
-  & > :global(*) + :global(*) {
+  & :global(button) {
     margin-left: var(--spacing-tight);
   }
 }
