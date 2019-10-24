@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
@@ -19,6 +20,7 @@ const fragments = {
       state
       author {
         id
+        ...BlockButtonUser
       }
       parentComment {
         id
@@ -33,6 +35,7 @@ const fragments = {
       ...PinButtonComment
     }
     ${PinButton.fragments.comment}
+    ${BlockUserButton.fragments.user}
   `
 }
 
@@ -43,13 +46,15 @@ const DropdownContent: React.FC<{
   isShowPinButton: boolean
   isShowEditButton: boolean
   isShowDeleteButton: boolean
+  isShowBlockUserButton: boolean
 }> = ({
   comment,
   editComment,
   hideDropdown,
   isShowPinButton,
   isShowEditButton,
-  isShowDeleteButton
+  isShowDeleteButton,
+  isShowBlockUserButton
 }) => {
   return (
     <Menu>
@@ -71,6 +76,11 @@ const DropdownContent: React.FC<{
       {isShowDeleteButton && (
         <Menu.Item>
           <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
+      {isShowBlockUserButton && (
+        <Menu.Item>
+          <BlockUserButton user={comment.author} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
     </Menu>
@@ -100,12 +110,17 @@ const DropdownActions = ({
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
   const isDescendantComment = comment.parentComment
+
   const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
   const isShowEditButton = isCommentAuthor && !!editComment && isActive
   const isShowDeleteButton = isCommentAuthor && isActive
+  const isShowBlockUserButton = !isCommentAuthor
 
   if (
-    (!isShowPinButton && !isShowEditButton && !isShowDeleteButton) ||
+    (!isShowPinButton &&
+      !isShowEditButton &&
+      !isShowDeleteButton &&
+      !isShowBlockUserButton) ||
     viewer.isInactive
   ) {
     return null
@@ -121,6 +136,7 @@ const DropdownActions = ({
           isShowPinButton={isShowPinButton}
           isShowEditButton={isShowEditButton}
           isShowDeleteButton={isShowDeleteButton}
+          isShowBlockUserButton={isShowBlockUserButton}
         />
       }
       trigger="click"

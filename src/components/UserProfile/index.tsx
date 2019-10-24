@@ -9,9 +9,10 @@ import { useQuery } from 'react-apollo'
 
 import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
+import ShareButton from '~/components/Button/Share'
+import ShareModal from '~/components/Button/Share/ShareModal'
 import { Icon } from '~/components/Icon'
-import ShareButton from '~/components/ShareButton'
-import ShareModal from '~/components/ShareButton/ShareModal'
+import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -19,11 +20,11 @@ import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
-import Throw404 from '../Throw404'
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
 import Description from './Description'
+import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -51,9 +52,11 @@ const fragments = {
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
+      ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
+    ${DropdownActions.fragments.user}
   `
 }
 
@@ -220,6 +223,7 @@ const BaseUserProfile = () => {
                   {isMe && !viewer.isInactive && (
                     <EditProfileButton setEditing={setEditing} />
                   )}
+                  {!isMe && <DropdownActions user={user} />}
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     <ShareButton />
                   </span>
