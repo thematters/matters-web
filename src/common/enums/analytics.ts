@@ -63,6 +63,7 @@ export const FEED_TYPE = {
   FOLLOWER: 'follower',
   APPRECIATOR: 'appreciator',
   SEARCH_USER: 'search-user',
+  BLOCK_LIST: 'block-list',
   // tags
   TAGS: 'tags',
   ALL_TAGS: 'all-tags',

@@ -174,6 +174,7 @@ const BaseUserProfile = () => {
                 size="xlarge"
                 user={!isMe && viewer.isInactive ? undefined : user}
               />
+              
               {!isMe && (
                 <section className="buttons">
                   <FollowButton user={user} size="default" />
@@ -194,6 +195,7 @@ const BaseUserProfile = () => {
                       {!isMe && <FollowButton.State user={user} />}
                     </span>
                   )}
+
                   {viewer.isArchived && (
                     <span>
                       <Translate
@@ -202,6 +204,7 @@ const BaseUserProfile = () => {
                       />
                     </span>
                   )}
+
                   {viewer.isFrozen && (
                     <span>
                       <Translate
@@ -210,6 +213,7 @@ const BaseUserProfile = () => {
                       />
                     </span>
                   )}
+
                   {viewer.isBanned && (
                     <span>
                       <Translate
@@ -219,11 +223,14 @@ const BaseUserProfile = () => {
                     </span>
                   )}
                 </section>
+
                 <section className="buttons">
                   {isMe && !viewer.isInactive && (
                     <EditProfileButton setEditing={setEditing} />
                   )}
+
                   {!isMe && <DropdownActions user={user} />}
+
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     <ShareButton />
                   </span>
@@ -233,6 +240,7 @@ const BaseUserProfile = () => {
               {!viewer.isInactive && (
                 <Description description={user.info.description} />
               )}
+
               <section className="info-follow">
                 <Link {...userFollowersPath}>
                   <a className="followers">
@@ -245,6 +253,7 @@ const BaseUserProfile = () => {
                     />
                   </a>
                 </Link>
+
                 <Link {...userFolloweesPath}>
                   <a className="followees">
                     <span className="count">
