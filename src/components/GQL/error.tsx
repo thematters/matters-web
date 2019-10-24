@@ -119,7 +119,8 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.DRAFT_NOT_FOUND,
     ERROR_CODES.TAG_NOT_FOUND,
     ERROR_CODES.NOTICE_NOT_FOUND,
-    ERROR_CODES.NOT_ENOUGH_MAT
+    ERROR_CODES.NOT_ENOUGH_MAT,
+    ERROR_CODES.ACTION_FAILED
   ]
   CATCH_CODES.forEach(code => {
     if (errorMap[code]) {
