@@ -20,7 +20,7 @@ const fragments = {
       state
       author {
         id
-        ...BlockButtonUser
+        ...BlockUser
       }
       parentComment {
         id
@@ -39,54 +39,6 @@ const fragments = {
   `
 }
 
-const DropdownContent: React.FC<{
-  comment: DropdownActionsComment
-  hideDropdown: () => void
-  editComment?: () => void
-  isShowPinButton: boolean
-  isShowEditButton: boolean
-  isShowDeleteButton: boolean
-  isShowBlockUserButton: boolean
-}> = ({
-  comment,
-  editComment,
-  hideDropdown,
-  isShowPinButton,
-  isShowEditButton,
-  isShowDeleteButton,
-  isShowBlockUserButton
-}) => {
-  return (
-    <Menu>
-      {isShowPinButton && (
-        <Menu.Item>
-          <PinButton comment={comment} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-      {isShowEditButton && editComment && (
-        <Menu.Item>
-          <EditButton hideDropdown={hideDropdown} editComment={editComment} />
-        </Menu.Item>
-      )}
-      {/* {!isCommentAuthor && isActive && (
-        <Menu.Item>
-          <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )} */}
-      {isShowDeleteButton && (
-        <Menu.Item>
-          <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-      {isShowBlockUserButton && (
-        <Menu.Item>
-          <BlockUserButton user={comment.author} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-    </Menu>
-  )
-}
-
 const DropdownActions = ({
   comment,
   editComment
@@ -94,6 +46,7 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
+  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -129,18 +82,47 @@ const DropdownActions = ({
   return (
     <Dropdown
       content={
-        <DropdownContent
-          comment={comment}
-          hideDropdown={hideDropdown}
-          editComment={editComment}
-          isShowPinButton={isShowPinButton}
-          isShowEditButton={isShowEditButton}
-          isShowDeleteButton={isShowDeleteButton}
-          isShowBlockUserButton={isShowBlockUserButton}
-        />
+        <Menu>
+          {isShowPinButton && (
+            <Menu.Item>
+              <PinButton comment={comment} hideDropdown={hideDropdown} />
+            </Menu.Item>
+          )}
+          {isShowEditButton && editComment && (
+            <Menu.Item>
+              <EditButton
+                hideDropdown={hideDropdown}
+                editComment={editComment}
+              />
+            </Menu.Item>
+          )}
+          {/* {!isCommentAuthor && isActive && (
+            <Menu.Item>
+              <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
+            </Menu.Item>
+          )} */}
+          {isShowDeleteButton && (
+            <Menu.Item>
+              <DeleteButton
+                commentId={comment.id}
+                hideDropdown={hideDropdown}
+              />
+            </Menu.Item>
+          )}
+          {isShowBlockUserButton && (
+            <Menu.Item>
+              <BlockUserButton
+                user={comment.author}
+                isShown={shown}
+                hideDropdown={hideDropdown}
+              />
+            </Menu.Item>
+          )}
+        </Menu>
       }
       trigger="click"
       onCreate={setInstance}
+      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >

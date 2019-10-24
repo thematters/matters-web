@@ -50,8 +50,8 @@ const Unblock = ({
       bgColor="green"
     >
       <Translate
-        zh_hant={TEXT.zh_hant.unblock}
-        zh_hans={TEXT.zh_hans.unblock}
+        zh_hant={TEXT.zh_hant.unblockUser}
+        zh_hans={TEXT.zh_hans.unblockUser}
       />
     </Button>
   )

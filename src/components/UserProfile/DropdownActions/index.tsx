@@ -12,26 +12,14 @@ const fragments = {
   user: gql`
     fragment DropdownActionsUser on User {
       id
-      ...BlockButtonUser
+      ...BlockUser
     }
     ${BlockUserButton.fragments.user}
   `
 }
 
-const DropdownContent: React.FC<{
-  user: DropdownActionsUser
-  hideDropdown: () => void
-}> = ({ user, hideDropdown }) => {
-  return (
-    <Menu>
-      <Menu.Item>
-        <BlockUserButton user={user} hideDropdown={hideDropdown} />
-      </Menu.Item>
-    </Menu>
-  )
-}
-
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
+  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -42,9 +30,20 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
 
   return (
     <Dropdown
-      content={<DropdownContent user={user} hideDropdown={hideDropdown} />}
+      content={
+        <Menu>
+          <Menu.Item>
+            <BlockUserButton
+              user={user}
+              isShown={shown}
+              hideDropdown={hideDropdown}
+            />
+          </Menu.Item>
+        </Menu>
+      }
       trigger="click"
       onCreate={setInstance}
+      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >

@@ -175,7 +175,7 @@ const ArticleDetail = ({
   }
 
   if (!article) {
-    return <Throw404 />
+    return null
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
@@ -217,6 +217,7 @@ const ArticleDetail = ({
 
         <section className="content">
           <Content article={article} />
+
           {(collectionCount > 0 || canEditCollection) && (
             <Collection
               article={article}
@@ -239,6 +240,7 @@ const ArticleDetail = ({
           )}
 
           <TagList article={article} />
+
           <Toolbar placement="left" article={article} />
         </section>
 
@@ -257,6 +259,7 @@ const ArticleDetail = ({
         {!shouldShowWall && (
           <>
             <Responses articleId={article.id} mediaHash={mediaHash} />
+
             <Waypoint
               onEnter={() => {
                 if (!trackedFinish) {
@@ -269,7 +272,9 @@ const ArticleDetail = ({
             />
           </>
         )}
+
         <AppreciatorsModal />
+
         <ShareModal />
       </Block>
 

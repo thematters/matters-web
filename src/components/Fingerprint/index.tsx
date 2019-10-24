@@ -29,13 +29,7 @@ const GATEWAYS = gql`
   }
 `
 
-const FingerprintContent = ({
-  shown,
-  dataHash
-}: {
-  shown: boolean
-  dataHash: string
-}) => {
+const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
   const [gatewaysExpand, setGatewaysExpand] = useState(false)
   const [helpExpand, setHelpExpand] = useState(false)
 
@@ -202,16 +196,11 @@ const Fingerprint = ({
   color?: 'grey' | 'green'
   size?: 'xs' | 'sm'
 }) => {
-  const [shown, setShown] = useState(false)
-
   return (
     <Popover
       offset="100,0"
       trigger="click"
-      onShown={() => setShown(true)}
-      content={
-        <FingerprintContent shown={shown} dataHash={article.dataHash || ''} />
-      }
+      content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
       <button type="button">
         <TextIcon

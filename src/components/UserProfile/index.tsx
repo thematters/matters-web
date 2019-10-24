@@ -174,7 +174,7 @@ const BaseUserProfile = () => {
                 size="xlarge"
                 user={!isMe && viewer.isInactive ? undefined : user}
               />
-              
+
               {!isMe && (
                 <section className="buttons">
                   <FollowButton user={user} size="default" />

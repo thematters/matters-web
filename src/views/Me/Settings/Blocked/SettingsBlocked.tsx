@@ -1,12 +1,18 @@
 import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
-import { InfiniteScroll, Spinner, Translate } from '~/components'
+import {
+  Head,
+  InfiniteScroll,
+  PageHeader,
+  Spinner,
+  Translate
+} from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { ViewerBlockList } from './__generated__/ViewerBlockList'
@@ -101,4 +107,25 @@ const SettingsBlocked = () => {
   )
 }
 
-export default SettingsBlocked
+export default () => (
+  <>
+    <Head
+      title={{
+        zh_hant: TEXT.zh_hant.blockedSetting,
+        zh_hans: TEXT.zh_hans.blockedSetting
+      }}
+    />
+
+    <PageHeader
+      pageTitle={
+        <Translate
+          zh_hant={TEXT.zh_hant.blockedSetting}
+          zh_hans={TEXT.zh_hans.blockedSetting}
+        />
+      }
+      is="h2"
+    />
+
+    <SettingsBlocked />
+  </>
+)
