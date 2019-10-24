@@ -149,12 +149,10 @@ const ArticleDetail = ({
   })
 
   useEffect(() => {
-    if (process.browser && shouldShowWall) {
-      if (window.location.hash) {
-        jump('#comments', { offset: -10 })
-      }
+    if (shouldShowWall && window.location.hash && article) {
+      jump('#comments', { offset: -10 })
     }
-  }, [])
+  }, [article])
 
   useImmersiveMode('article > .content')
 
@@ -254,6 +252,8 @@ const ArticleDetail = ({
       {shouldShowWall && <Wall show={fixedWall} client={client} />}
 
       <Block type="section">
+        {shouldShowWall && <section id="comments" />}
+
         {!shouldShowWall && (
           <>
             <Responses articleId={article.id} mediaHash={mediaHash} />

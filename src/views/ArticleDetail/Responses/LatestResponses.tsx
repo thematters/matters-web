@@ -63,10 +63,6 @@ const LatestResponses = () => {
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const [storedCursor, setStoredCursor] = useState<string | null>(null)
 
-  if (!mediaHash) {
-    return <EmptyResponse articleOnlyMode={articleOnlyMode} />
-  }
-
   /**
    * Fragment Patterns
    * 0. ``
@@ -99,74 +95,17 @@ const LatestResponses = () => {
     notifyOnNetworkStatusChange: true
   })
   const connectionPath = 'article.responses'
-  const { edges, pageInfo } =
-    (data && data.article && data.article.responses) || {}
-
-  // real time update with websocket
-  useEffect(() => {
-    if (data && data.article && edges) {
-      subscribeToMore<ArticleCommentAdded>({
-        document: SUBSCRIBE_RESPONSES,
-        variables: {
-          id: data.article.id,
-          first: edges.length,
-          articleOnly: articleOnlyMode
-        },
-        updateQuery: (prev, { subscriptionData }) =>
-          _merge(prev, {
-            article: subscriptionData.data.nodeEdited
-          })
-      })
-    }
-  })
-
-  // scroll to comment
-  useEffect(() => {
-    if (!fragment) {
-      return
-    }
-
-    const jumpToFragment = () => {
-      jump(`#${fragment}`, {
-        offset: fragment === UrlFragments.COMMENTS ? -10 : -64
-      })
-    }
-    const element = dom.$(`#${fragment}`)
-
-    if (!element) {
-      loadMore({ before: parentId }).then(jumpToFragment)
-    } else {
-      jumpToFragment()
-    }
-  }, [])
-
-  useEventListener(REFETCH_RESPONSES, refetch)
-
-  useEffect(() => {
-    if (pageInfo && pageInfo.startCursor) {
-      setStoredCursor(pageInfo.startCursor)
-    }
-  }, [pageInfo && pageInfo.startCursor])
-
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
-  }
+  const article = data && data.article
+  const { edges, pageInfo } = (article && article.responses) || {}
+  const articleId = article && article.id
 
   const loadMore = (params?: { before: string }) => {
     const loadBefore = (params && params.before) || null
-    const noLimit = loadBefore && pageInfo.endCursor
+    const noLimit = loadBefore && pageInfo && pageInfo.endCursor
 
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo && pageInfo.endCursor,
         before: loadBefore,
         first: noLimit ? null : RESPONSES_COUNT,
         includeBefore: !!loadBefore,
@@ -227,6 +166,64 @@ const LatestResponses = () => {
   }
 
   const responses = filterResponses((edges || []).map(({ node }) => node))
+
+  // real time update with websocket
+  useEffect(() => {
+    if (article && edges) {
+      subscribeToMore<ArticleCommentAdded>({
+        document: SUBSCRIBE_RESPONSES,
+        variables: {
+          id: article.id,
+          first: edges.length,
+          articleOnly: articleOnlyMode
+        },
+        updateQuery: (prev, { subscriptionData }) =>
+          _merge(prev, {
+            article: subscriptionData.data.nodeEdited
+          })
+      })
+    }
+  }, [articleId])
+
+  // scroll to comment
+  useEffect(() => {
+    if (!fragment || !articleId) {
+      return
+    }
+
+    const jumpToFragment = () => {
+      jump(`#${fragment}`, {
+        offset: fragment === UrlFragments.COMMENTS ? -10 : -64
+      })
+    }
+    const element = dom.$(`#${fragment}`)
+
+    if (!element) {
+      loadMore({ before: parentId }).then(jumpToFragment)
+    } else {
+      jumpToFragment()
+    }
+  }, [articleId])
+
+  useEventListener(REFETCH_RESPONSES, refetch)
+
+  useEffect(() => {
+    if (pageInfo && pageInfo.startCursor) {
+      setStoredCursor(pageInfo.startCursor)
+    }
+  }, [pageInfo && pageInfo.startCursor])
+
+  if (loading && !data) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return null
+  }
 
   return (
     <section className="latest-responses" id="latest-responses">

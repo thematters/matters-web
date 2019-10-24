@@ -73,7 +73,7 @@ const AuthorPicker = ({
 
       {error && <QueryError error={error} />}
 
-      {edges.length && (
+      {!loading && (
         <ul>
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>
