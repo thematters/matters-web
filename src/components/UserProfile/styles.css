@@ -84,6 +84,14 @@
     line-height: 1.25;
   }
 
+  & .username {
+    margin-left: var(--spacing-x-tight);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-grey);
+  }
+
   & > span {
     display: inline-flex;
     align-items: center;

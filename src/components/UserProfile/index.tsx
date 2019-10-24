@@ -193,6 +193,7 @@ const BaseUserProfile = () => {
                   {!viewer.isInactive && (
                     <span>
                       {user.displayName}
+                      <span className="username">@{user.userName}</span>
                       {hasSeedBadge && <SeedBadge />}
                       {!isMe && <FollowButton.State user={user} />}
                     </span>
