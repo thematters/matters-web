@@ -177,7 +177,12 @@ const BaseUserProfile = () => {
 
               {!isMe && (
                 <section className="buttons">
-                  <FollowButton user={user} size="default" />
+                  <span className="follows">
+                    <FollowButton user={user} size="default" />
+                    <span className="u-sm-down-hide follow-state">
+                      {!isMe && <FollowButton.State user={user} />}
+                    </span>
+                  </span>
 
                   <span className="u-sm-up-hide">
                     <DropdownActions user={user} />
@@ -189,14 +194,16 @@ const BaseUserProfile = () => {
 
             <section className="info">
               <header className="header">
-                <section className="name">
+                <section className="basic">
                   {!viewer.isInactive && (
-                    <span>
-                      {user.displayName}
+                    <>
+                      <span className="name">{user.displayName}</span>
                       <span className="username">@{user.userName}</span>
                       {hasSeedBadge && <SeedBadge />}
-                      {!isMe && <FollowButton.State user={user} />}
-                    </span>
+                      <span className="u-sm-up-hide">
+                        {!isMe && <FollowButton.State user={user} />}
+                      </span>
+                    </>
                   )}
 
                   {viewer.isArchived && (
