@@ -35,6 +35,10 @@ export default {
   feed: gql`
     fragment FeedDigestComment on Comment {
       ...BaseDigestComment
+      author {
+        id
+        isBlocking
+      }
       comments(input: { sort: oldest, first: null })
         @include(if: $hasDescendantComments) {
         edges {

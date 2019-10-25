@@ -1,3 +1,4 @@
+import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
@@ -7,6 +8,7 @@ import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCoun
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
+import { ResponsesArticle } from './__generated__/ResponsesArticle'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import styles from './styles.css'
@@ -26,13 +28,7 @@ const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
   )
 }
 
-const Responses = ({
-  articleId,
-  mediaHash
-}: {
-  articleId: string
-  mediaHash: string
-}) => {
+const Responses = ({ article }: { article: ResponsesArticle }) => {
   const refetchResponses = () => {
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
@@ -45,13 +41,14 @@ const Responses = ({
             zh_hant={TEXT.zh_hant.response}
             zh_hans={TEXT.zh_hans.response}
           />
-          <ResponseCount mediaHash={mediaHash} />
+          <ResponseCount mediaHash={article.mediaHash || ''} />
         </h2>
 
         <section>
           <CommentForm
-            articleId={articleId}
+            articleId={article.id}
             submitCallback={refetchResponses}
+            blocked={article.author.isBlocking}
           />
         </section>
       </header>
@@ -62,6 +59,19 @@ const Responses = ({
       <style jsx>{styles}</style>
     </section>
   )
+}
+
+Responses.fragments = {
+  article: gql`
+    fragment ResponsesArticle on Article {
+      id
+      mediaHash
+      author {
+        id
+        isBlocking
+      }
+    }
+  `
 }
 
 export default Responses

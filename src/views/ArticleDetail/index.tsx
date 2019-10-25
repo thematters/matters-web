@@ -54,6 +54,7 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
+        isBlocking
         ...UserDigestFullDescUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
@@ -66,6 +67,7 @@ const ARTICLE_DETAIL = gql`
       ...RelatedArticles
       ...StateArticle
       ...FingerprintArticle
+      ...ResponsesArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -76,6 +78,7 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${Fingerprint.fragments.article}
+  ${Responses.fragments.article}
 `
 
 const ARTICLE_EDITED = gql`
@@ -258,7 +261,7 @@ const ArticleDetail = ({
 
         {!shouldShowWall && (
           <>
-            <Responses articleId={article.id} mediaHash={mediaHash} />
+            <Responses article={article} />
 
             <Waypoint
               onEnter={() => {

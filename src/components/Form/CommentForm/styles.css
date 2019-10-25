@@ -13,3 +13,12 @@
     display: block;
   }
 }
+
+.blocked {
+  padding: var(--spacing-x-tight);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  background: var(--color-grey-lighter);
+}

@@ -37,7 +37,9 @@ const fragments = {
         slug
         mediaHash
         author {
+          id
           userName
+          isBlocking
         }
       }
       parentComment {
@@ -72,6 +74,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
+  const isBlockedByAuthor = author.isBlocking
   const fragment =
     parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
   const commentPath =
@@ -115,7 +118,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                 onClick={() => {
                   setShowForm(!showForm)
                 }}
-                disabled={!isActive || viewer.isInactive}
+                disabled={!isActive || viewer.isInactive || isBlockedByAuthor}
               >
                 <Icon
                   id={ICON_COMMENT_SMALL.id}
@@ -156,6 +159,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
             }
             refetch={refetch}
             submitCallback={commentFormCallback}
+            blocked={isBlockedByAuthor}
           />
         </section>
       )}
