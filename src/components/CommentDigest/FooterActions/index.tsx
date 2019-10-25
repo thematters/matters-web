@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
+import { ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
@@ -112,20 +113,31 @@ const FooterActions: React.FC<FooterActionsProps> & {
           {hasForm && (
             <>
               <IconDotDivider />
-              <button
-                type="button"
-                className={showForm ? 'active' : ''}
-                onClick={() => {
-                  setShowForm(!showForm)
-                }}
-                disabled={!isActive || viewer.isInactive || isBlockedByAuthor}
-              >
-                <Icon
-                  id={ICON_COMMENT_SMALL.id}
-                  viewBox={ICON_COMMENT_SMALL.viewBox}
-                  size="small"
-                />
-              </button>
+
+              <ModalSwitch modalId="likeCoinTermModal">
+                {(open: any) => (
+                  <button
+                    type="button"
+                    className={showForm ? 'active' : ''}
+                    onClick={() => {
+                      if (viewer.isOnboarding || !viewer.likerId) {
+                        open()
+                      } else {
+                        setShowForm(!showForm)
+                      }
+                    }}
+                    disabled={
+                      !isActive || viewer.isInactive || isBlockedByAuthor
+                    }
+                  >
+                    <Icon
+                      id={ICON_COMMENT_SMALL.id}
+                      viewBox={ICON_COMMENT_SMALL.viewBox}
+                      size="small"
+                    />
+                  </button>
+                )}
+              </ModalSwitch>
             </>
           )}
         </div>

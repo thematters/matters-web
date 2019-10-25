@@ -9,6 +9,7 @@ import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { Translate } from '~/components/Language'
+import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -193,6 +194,25 @@ const CommentForm = ({
 }
 
 export default (props: CommentFormProps) => {
+  const viewer = useContext(ViewerContext)
+
+  if (viewer.isOnboarding || !viewer.likerId) {
+    return (
+      <ModalSwitch modalId="likeCoinTermModal">
+        {(open: any) => (
+          <button className="blocked" onClick={open}>
+            <Translate
+              zh_hant="設置 Liker ID 後即可參與精彩討論"
+              zh_hans="设置 Liker ID 后即可参与精彩讨论"
+            />
+
+            <style jsx>{styles}</style>
+          </button>
+        )}
+      </ModalSwitch>
+    )
+  }
+
   if (props.blocked) {
     return (
       <section className="blocked">
