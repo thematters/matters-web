@@ -75,13 +75,18 @@
   @mixin flex-start-space-between;
 }
 
-.name {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+.basic {
+  @mixin flex-center-all;
+  margin-left: var(--spacing-x-tight);
 
-  @media (--sm-up) {
-    font-size: var(--font-size-xl);
-    line-height: 1.25;
+  & .name {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+
+    @media (--sm-up) {
+      font-size: var(--font-size-xl);
+      line-height: 1.25;
+    }
   }
 
   & .username {
@@ -92,22 +97,13 @@
     color: var(--color-grey);
   }
 
-  & > span {
-    display: inline-flex;
-    align-items: center;
+  & :first-child {
+    margin-left: 0;
+  }
+
+  & :global(> * + *) {
+    font-size: 0;
     margin-left: var(--spacing-x-tight);
-
-    & :first-child {
-      margin-left: 0;
-    }
-
-    & :global(> *) {
-      margin-left: var(--spacing-x-tight);
-    }
-
-    & :gloabl(> .btn) {
-      margin-top: 1px;
-    }
   }
 }
 
@@ -116,14 +112,26 @@
   top: -12px; /* position hack in small device */
   right: 0;
 
+  & :global(button) {
+    margin-left: var(--spacing-tight);
+  }
+
+  & .follows {
+    & :global(button) {
+      margin: 0;
+    }
+
+    & .follow-state {
+      display: inline-block;
+      margin-top: var(--spacing-tight);
+      line-height: 1;
+    }
+  }
+
   @media (--sm-up) {
     position: initial;
     top: initial;
     right: initial;
-  }
-
-  & > :global(*) + :global(*) {
-    margin-left: var(--spacing-tight);
   }
 }
 

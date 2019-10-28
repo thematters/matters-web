@@ -9,6 +9,7 @@ import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
 import { Translate } from '~/components/Language'
+import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -47,7 +48,6 @@ const COMMENT_DRAFT = gql`
 `
 
 interface CommentFormProps {
-  defaultContent?: string | null
   articleId: string
   commentId?: string
   replyToId?: string
@@ -55,20 +55,23 @@ interface CommentFormProps {
   submitCallback?: () => void
   refetch?: boolean
   extraButton?: React.ReactNode
+  blocked?: boolean
   defaultExpand?: boolean
+  defaultContent?: string | null
 }
 
 // TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
-  defaultContent,
   commentId,
   parentId,
   replyToId,
   articleId,
   submitCallback,
   refetch,
+  blocked,
   extraButton,
-  defaultExpand
+  defaultExpand,
+  defaultContent
 }: CommentFormProps) => {
   const commentDraftId = `${articleId}:${commentId || '0'}:${parentId ||
     '0'}:${replyToId || '0'}`
@@ -190,4 +193,38 @@ const CommentForm = ({
   )
 }
 
-export default CommentForm
+export default (props: CommentFormProps) => {
+  const viewer = useContext(ViewerContext)
+
+  if (viewer.isOnboarding || !viewer.likerId) {
+    return (
+      <ModalSwitch modalId="likeCoinTermModal">
+        {(open: any) => (
+          <button className="blocked" onClick={open}>
+            <Translate
+              zh_hant="設置 Liker ID 後即可參與精彩討論"
+              zh_hans="设置 Liker ID 后即可参与精彩讨论"
+            />
+
+            <style jsx>{styles}</style>
+          </button>
+        )}
+      </ModalSwitch>
+    )
+  }
+
+  if (props.blocked) {
+    return (
+      <section className="blocked">
+        <Translate
+          zh_hant="因爲作者設置，你無法參與該作品下的討論。"
+          zh_hans="因为作者设置，你无法参与该作品下的讨论。"
+        />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  return <CommentForm {...props} />
+}

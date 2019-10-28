@@ -2,7 +2,7 @@ import { Empty, Icon } from '~/components'
 
 import ICON_EMPTY_WARNING from '~/static/icons/empty-warning.svg?sprite'
 
-const EmptyFollowee = ({ description }: { description: React.ReactNode }) => (
+const EmptyWarning = ({ description }: { description: React.ReactNode }) => (
   <Empty
     icon={
       <Icon
@@ -15,4 +15,4 @@ const EmptyFollowee = ({ description }: { description: React.ReactNode }) => (
   />
 )
 
-export default EmptyFollowee
+export default EmptyWarning

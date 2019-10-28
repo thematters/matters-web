@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
 import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
@@ -19,6 +20,7 @@ const fragments = {
       state
       author {
         id
+        ...BlockUser
       }
       parentComment {
         id
@@ -33,48 +35,8 @@ const fragments = {
       ...PinButtonComment
     }
     ${PinButton.fragments.comment}
+    ${BlockUserButton.fragments.user}
   `
-}
-
-const DropdownContent: React.FC<{
-  comment: DropdownActionsComment
-  hideDropdown: () => void
-  editComment?: () => void
-  isShowPinButton: boolean
-  isShowEditButton: boolean
-  isShowDeleteButton: boolean
-}> = ({
-  comment,
-  editComment,
-  hideDropdown,
-  isShowPinButton,
-  isShowEditButton,
-  isShowDeleteButton
-}) => {
-  return (
-    <Menu>
-      {isShowPinButton && (
-        <Menu.Item>
-          <PinButton comment={comment} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-      {isShowEditButton && editComment && (
-        <Menu.Item>
-          <EditButton hideDropdown={hideDropdown} editComment={editComment} />
-        </Menu.Item>
-      )}
-      {/* {!isCommentAuthor && isActive && (
-        <Menu.Item>
-          <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )} */}
-      {isShowDeleteButton && (
-        <Menu.Item>
-          <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-    </Menu>
-  )
 }
 
 const DropdownActions = ({
@@ -84,6 +46,7 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
+  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -100,12 +63,17 @@ const DropdownActions = ({
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
   const isDescendantComment = comment.parentComment
+
   const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
   const isShowEditButton = isCommentAuthor && !!editComment && isActive
   const isShowDeleteButton = isCommentAuthor && isActive
+  const isShowBlockUserButton = !isCommentAuthor
 
   if (
-    (!isShowPinButton && !isShowEditButton && !isShowDeleteButton) ||
+    (!isShowPinButton &&
+      !isShowEditButton &&
+      !isShowDeleteButton &&
+      !isShowBlockUserButton) ||
     viewer.isInactive
   ) {
     return null
@@ -114,17 +82,47 @@ const DropdownActions = ({
   return (
     <Dropdown
       content={
-        <DropdownContent
-          comment={comment}
-          hideDropdown={hideDropdown}
-          editComment={editComment}
-          isShowPinButton={isShowPinButton}
-          isShowEditButton={isShowEditButton}
-          isShowDeleteButton={isShowDeleteButton}
-        />
+        <Menu>
+          {isShowPinButton && (
+            <Menu.Item>
+              <PinButton comment={comment} hideDropdown={hideDropdown} />
+            </Menu.Item>
+          )}
+          {isShowEditButton && editComment && (
+            <Menu.Item>
+              <EditButton
+                hideDropdown={hideDropdown}
+                editComment={editComment}
+              />
+            </Menu.Item>
+          )}
+          {/* {!isCommentAuthor && isActive && (
+            <Menu.Item>
+              <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
+            </Menu.Item>
+          )} */}
+          {isShowDeleteButton && (
+            <Menu.Item>
+              <DeleteButton
+                commentId={comment.id}
+                hideDropdown={hideDropdown}
+              />
+            </Menu.Item>
+          )}
+          {isShowBlockUserButton && (
+            <Menu.Item>
+              <BlockUserButton
+                user={comment.author}
+                isShown={shown}
+                hideDropdown={hideDropdown}
+              />
+            </Menu.Item>
+          )}
+        </Menu>
       }
       trigger="click"
       onCreate={setInstance}
+      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >

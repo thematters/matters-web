@@ -9,9 +9,10 @@ import { useQuery } from 'react-apollo'
 
 import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
+import ShareButton from '~/components/Button/Share'
+import ShareModal from '~/components/Button/Share/ShareModal'
 import { Icon } from '~/components/Icon'
-import ShareButton from '~/components/ShareButton'
-import ShareModal from '~/components/ShareButton/ShareModal'
+import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -19,11 +20,11 @@ import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
-import Throw404 from '../Throw404'
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
 import Description from './Description'
+import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -51,9 +52,11 @@ const fragments = {
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
+      ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
+    ${DropdownActions.fragments.user}
   `
 }
 
@@ -171,10 +174,18 @@ const BaseUserProfile = () => {
                 size="xlarge"
                 user={!isMe && viewer.isInactive ? undefined : user}
               />
+
               {!isMe && (
                 <section className="buttons">
-                  <FollowButton user={user} size="default" />
+                  <span className="follows">
+                    <FollowButton user={user} size="default" />
+                    <span className="u-sm-down-hide follow-state">
+                      {!isMe && <FollowButton.State user={user} />}
+                    </span>
+                  </span>
+
                   <span className="u-sm-up-hide">
+                    <DropdownActions user={user} />
                     <ShareButton />
                   </span>
                 </section>
@@ -183,15 +194,18 @@ const BaseUserProfile = () => {
 
             <section className="info">
               <header className="header">
-                <section className="name">
+                <section className="basic">
                   {!viewer.isInactive && (
-                    <span>
-                      {user.displayName}
+                    <>
+                      <span className="name">{user.displayName}</span>
                       <span className="username">@{user.userName}</span>
                       {hasSeedBadge && <SeedBadge />}
-                      {!isMe && <FollowButton.State user={user} />}
-                    </span>
+                      <span className="u-sm-up-hide">
+                        {!isMe && <FollowButton.State user={user} />}
+                      </span>
+                    </>
                   )}
+
                   {viewer.isArchived && (
                     <span>
                       <Translate
@@ -200,6 +214,7 @@ const BaseUserProfile = () => {
                       />
                     </span>
                   )}
+
                   {viewer.isFrozen && (
                     <span>
                       <Translate
@@ -208,6 +223,7 @@ const BaseUserProfile = () => {
                       />
                     </span>
                   )}
+
                   {viewer.isBanned && (
                     <span>
                       <Translate
@@ -217,11 +233,14 @@ const BaseUserProfile = () => {
                     </span>
                   )}
                 </section>
+
                 <section className="buttons">
                   {isMe && !viewer.isInactive && (
                     <EditProfileButton setEditing={setEditing} />
                   )}
+
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
+                    {!isMe && <DropdownActions user={user} />}
                     <ShareButton />
                   </span>
                 </section>
@@ -230,6 +249,7 @@ const BaseUserProfile = () => {
               {!viewer.isInactive && (
                 <Description description={user.info.description} />
               )}
+
               <section className="info-follow">
                 <Link {...userFollowersPath}>
                   <a className="followers">
@@ -242,6 +262,7 @@ const BaseUserProfile = () => {
                     />
                   </a>
                 </Link>
+
                 <Link {...userFolloweesPath}>
                   <a className="followees">
                     <span className="count">

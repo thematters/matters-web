@@ -121,10 +121,11 @@ const DescendantComment = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+            blocked={comment.article.author.isBlocking}
             defaultExpand={edit}
+            defaultContent={comment.content}
           />
         )}
         {!edit && (
@@ -202,9 +203,10 @@ const FeedDigest = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
-            defaultContent={comment.content}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+            blocked={comment.article.author.isBlocking}
+            defaultContent={comment.content}
             defaultExpand={edit}
           />
         )}

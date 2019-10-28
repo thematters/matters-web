@@ -8,13 +8,13 @@ import { Waypoint } from 'react-waypoint'
 
 import { DateTime, Footer, Head, Placeholder, Title } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
+import ShareModal from '~/components/Button/Share/ShareModal'
 import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
 import IconLive from '~/components/Icon/Live'
-import ShareModal from '~/components/ShareButton/ShareModal'
 import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
@@ -54,6 +54,7 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
+        isBlocking
         ...UserDigestFullDescUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
@@ -66,6 +67,7 @@ const ARTICLE_DETAIL = gql`
       ...RelatedArticles
       ...StateArticle
       ...FingerprintArticle
+      ...ResponsesArticle
     }
   }
   ${UserDigest.FullDesc.fragments.user}
@@ -76,6 +78,7 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${Fingerprint.fragments.article}
+  ${Responses.fragments.article}
 `
 
 const ARTICLE_EDITED = gql`
@@ -173,7 +176,7 @@ const ArticleDetail = ({
   }
 
   if (!article) {
-    return <Throw404 />
+    return null
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
@@ -215,6 +218,7 @@ const ArticleDetail = ({
 
         <section className="content">
           <Content article={article} />
+
           {(collectionCount > 0 || canEditCollection) && (
             <Collection
               article={article}
@@ -237,6 +241,7 @@ const ArticleDetail = ({
           )}
 
           <TagList article={article} />
+
           <Toolbar placement="left" article={article} />
         </section>
 
@@ -256,7 +261,8 @@ const ArticleDetail = ({
 
         {!shouldShowWall && (
           <>
-            <Responses articleId={article.id} mediaHash={mediaHash} />
+            <Responses article={article} />
+
             <Waypoint
               onEnter={() => {
                 if (!trackedFinish) {
@@ -269,7 +275,9 @@ const ArticleDetail = ({
             />
           </>
         )}
+
         <AppreciatorsModal />
+
         <ShareModal />
       </Block>
 

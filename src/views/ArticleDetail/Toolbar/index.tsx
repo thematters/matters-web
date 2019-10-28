@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareButton from '~/components/ShareButton'
+import ShareButton from '~/components/Button/Share'
 
 import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import AppreciationButton from './AppreciationButton'

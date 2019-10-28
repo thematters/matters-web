@@ -32,6 +32,7 @@ type ROUTE_KEY =
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS_ACCOUNT'
   | 'ME_SETTINGS_NOTIFICATION'
+  | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
   // | 'EDITOR'
   | 'AUTH_LOGIN'
@@ -209,6 +210,11 @@ export const ROUTES: Array<{
     key: 'ME_SETTINGS_NOTIFICATION',
     href: '/MeSettingsNotification',
     as: '/me/settings/notification'
+  },
+  {
+    key: 'ME_SETTINGS_BLOCKED',
+    href: '/MeSettingsBlocked',
+    as: '/me/settings/blocked'
   },
 
   // Draft
