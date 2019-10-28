@@ -196,7 +196,7 @@ const CommentForm = ({
 export default (props: CommentFormProps) => {
   const viewer = useContext(ViewerContext)
 
-  if (viewer.isOnboarding || !viewer.likerId) {
+  if (viewer.shouldSetupLikerID) {
     return (
       <ModalSwitch modalId="likeCoinTermModal">
         {(open: any) => (

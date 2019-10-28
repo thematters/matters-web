@@ -61,10 +61,10 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 {isMediumUp ? <SearchBar /> : <SearchButton />}
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                {isDraft && (viewer.isActive || viewer.shouldSetupLikerID) && (
                   <PublishButton allowed={viewer.isActive} />
                 )}
-                {!isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                {!isDraft && (viewer.isActive || viewer.shouldSetupLikerID) && (
                   <WriteButton allowed={viewer.isActive} />
                 )}
               </>

@@ -14,6 +14,9 @@ import ICON_LIKE_ACTIVE from '~/static/icons/like-active.svg?sprite'
 import ICON_LIKE_INACTIVE from '~/static/icons/like-inactive.svg?sprite'
 
 import { UpvoteComment } from './__generated__/UpvoteComment'
+import { ModalSwitch } from '~/components/ModalManager'
+import { useContext } from 'react'
+import { ViewerContext } from '~/components/Viewer'
 
 const fragments = {
   comment: gql`
@@ -48,6 +51,7 @@ const UpvoteButton = ({
   comment: UpvoteComment
   disabled?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -76,30 +80,58 @@ const UpvoteButton = ({
 
   if (comment.myVote === 'up') {
     return (
-      <button type="button" onClick={() => unvote()} disabled={disabled}>
-        <TextIcon
-          icon={<IconLikeActive />}
-          color="grey"
-          weight="medium"
-          text={numAbbr(comment.upvotes)}
-          size="sm"
-          spacing="xxxtight"
-        />
-      </button>
+      <ModalSwitch modalId="likeCoinTermModal">
+        {(open: any) => (
+          <button
+            type="button"
+            onClick={() => {
+              if (viewer.shouldSetupLikerID) {
+                open()
+              } else {
+                unvote()
+              }
+            }}
+            disabled={disabled}
+          >
+            <TextIcon
+              icon={<IconLikeActive />}
+              color="grey"
+              weight="medium"
+              text={numAbbr(comment.upvotes)}
+              size="sm"
+              spacing="xxxtight"
+            />
+          </button>
+        )}
+      </ModalSwitch>
     )
   }
 
   return (
-    <button type="button" onClick={() => upvote()} disabled={disabled}>
-      <TextIcon
-        icon={<IconLikeInactive />}
-        color="grey"
-        weight="medium"
-        text={numAbbr(comment.upvotes)}
-        size="sm"
-        spacing="xxxtight"
-      />
-    </button>
+    <ModalSwitch modalId="likeCoinTermModal">
+      {(open: any) => (
+        <button
+          type="button"
+          onClick={() => {
+            if (viewer.shouldSetupLikerID) {
+              open()
+            } else {
+              upvote()
+            }
+          }}
+          disabled={disabled}
+        >
+          <TextIcon
+            icon={<IconLikeInactive />}
+            color="grey"
+            weight="medium"
+            text={numAbbr(comment.upvotes)}
+            size="sm"
+            spacing="xxxtight"
+          />
+        </button>
+      )}
+    </ModalSwitch>
   )
 }
 

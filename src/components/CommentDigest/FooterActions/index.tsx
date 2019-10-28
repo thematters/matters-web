@@ -120,7 +120,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                     type="button"
                     className={showForm ? 'active' : ''}
                     onClick={() => {
-                      if (viewer.isOnboarding || !viewer.likerId) {
+                      if (viewer.shouldSetupLikerID) {
                         open()
                       } else {
                         setShowForm(!showForm)
