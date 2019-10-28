@@ -15,7 +15,7 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { FollowFeed } from './__generated__/FollowFeed'
+import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 
 const FOLLOW_FEED = gql`
   query FollowFeed(
@@ -46,8 +46,10 @@ const FOLLOW_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => {
-  const { data, loading, error, fetchMore } = useQuery<FollowFeed>(FOLLOW_FEED)
+const FollowFeed = () => {
+  const { data, loading, error, fetchMore } = useQuery<FollowFeedType>(
+    FOLLOW_FEED
+  )
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
@@ -84,40 +86,44 @@ export default () => {
   }
 
   return (
-    <>
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.follow,
-          zh_hans: TEXT.zh_hans.follow
-        }}
-      />
-
-      <PageHeader
-        pageTitle={
-          <Translate
-            zh_hant={TEXT.zh_hant.follow}
-            zh_hans={TEXT.zh_hans.follow}
-          />
-        }
-      />
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
-          {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.FOLLOW,
-                  location: i
-                })
-              }
-            >
-              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-            </li>
-          ))}
-        </ul>
-      </InfiniteScroll>
-    </>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.FOLLOW,
+                location: i
+              })
+            }
+          >
+            <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+          </li>
+        ))}
+      </ul>
+    </InfiniteScroll>
   )
 }
+
+export default () => (
+  <>
+    <Head
+      title={{
+        zh_hant: TEXT.zh_hant.follow,
+        zh_hans: TEXT.zh_hans.follow
+      }}
+    />
+
+    <PageHeader
+      pageTitle={
+        <Translate
+          zh_hant={TEXT.zh_hant.follow}
+          zh_hans={TEXT.zh_hans.follow}
+        />
+      }
+    />
+
+    <FollowFeed />
+  </>
+)

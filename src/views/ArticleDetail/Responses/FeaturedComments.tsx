@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-apollo'
 
-import { LoadMore, Translate } from '~/components'
+import { LoadMore, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import commentFragments from '~/components/GQL/fragments/comment'
 
@@ -55,6 +55,10 @@ const FeaturedComments = () => {
   const { edges, pageInfo } =
     (data && data.article && data.article.featuredComments) || {}
   const comments = filterComments((edges || []).map(({ node }) => node))
+
+  if (loading) {
+    return <Spinner />
+  }
 
   if (!edges || edges.length <= 0 || !pageInfo || comments.length <= 0) {
     return null

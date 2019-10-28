@@ -61,7 +61,7 @@ const CollectionList = ({
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo || !totalCount) {
+  if (!edges || !pageInfo) {
     return null
   }
 
@@ -80,7 +80,7 @@ const CollectionList = ({
         })
     })
 
-  if (totalCount <= 0 && canEdit) {
+  if ((totalCount || 0) <= 0 && canEdit) {
     return (
       <button type="button" onClick={() => setEditing(true)}>
         <TextIcon

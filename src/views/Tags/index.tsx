@@ -54,7 +54,7 @@ const Tags = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recoemmendation.tags'
+  const connectionPath = 'viewer.recommendation.tags'
   const { edges, pageInfo } =
     (data && data.viewer && data.viewer.recommendation.tags) || {}
 
