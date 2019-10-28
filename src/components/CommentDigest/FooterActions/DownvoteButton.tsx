@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -8,15 +9,14 @@ import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
 } from '~/components/GQL/mutations/voteComment'
+import { ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
 import ICON_DISLIKE_INACTIVE from '~/static/icons/dislike-inactive.svg?sprite'
 
 import { DownvoteComment } from './__generated__/DownvoteComment'
-import { ModalSwitch } from '~/components/ModalManager'
-import { useContext } from 'react'
-import { ViewerContext } from '~/components/Viewer'
 
 const fragments = {
   comment: gql`
