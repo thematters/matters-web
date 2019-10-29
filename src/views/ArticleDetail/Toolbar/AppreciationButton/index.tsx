@@ -175,7 +175,7 @@ const AppreciationButtonContainer = ({
     isAuthed: viewer.isAuthed
   }
 
-  if (viewer.isOnboarding) {
+  if (viewer.shouldSetupLikerID) {
     return (
       <section className="container">
         <OnboardingAppreciateButton />

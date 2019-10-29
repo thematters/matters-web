@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -8,6 +9,8 @@ import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
 } from '~/components/GQL/mutations/voteComment'
+import { ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
@@ -48,6 +51,7 @@ const DownvoteButton = ({
   comment: DownvoteComment
   disabled?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -76,30 +80,58 @@ const DownvoteButton = ({
 
   if (comment.myVote === 'down') {
     return (
-      <button type="button" onClick={() => unvote()} disabled={disabled}>
-        <TextIcon
-          icon={<IconDislikeActive />}
-          color="grey"
-          weight="medium"
-          text={numAbbr(comment.downvotes)}
-          size="sm"
-          spacing="xxxtight"
-        />
-      </button>
+      <ModalSwitch modalId="likeCoinTermModal">
+        {(open: any) => (
+          <button
+            type="button"
+            onClick={() => {
+              if (viewer.shouldSetupLikerID) {
+                open()
+              } else {
+                unvote()
+              }
+            }}
+            disabled={disabled}
+          >
+            <TextIcon
+              icon={<IconDislikeActive />}
+              color="grey"
+              weight="medium"
+              text={numAbbr(comment.downvotes)}
+              size="sm"
+              spacing="xxxtight"
+            />
+          </button>
+        )}
+      </ModalSwitch>
     )
   }
 
   return (
-    <button type="button" onClick={() => downvote()} disabled={disabled}>
-      <TextIcon
-        icon={<IconDislikeInactive />}
-        color="grey"
-        weight="medium"
-        text={numAbbr(comment.downvotes)}
-        size="sm"
-        spacing="xxxtight"
-      />
-    </button>
+    <ModalSwitch modalId="likeCoinTermModal">
+      {(open: any) => (
+        <button
+          type="button"
+          onClick={() => {
+            if (viewer.shouldSetupLikerID) {
+              open()
+            } else {
+              downvote()
+            }
+          }}
+          disabled={disabled}
+        >
+          <TextIcon
+            icon={<IconDislikeInactive />}
+            color="grey"
+            weight="medium"
+            text={numAbbr(comment.downvotes)}
+            size="sm"
+            spacing="xxxtight"
+          />
+        </button>
+      )}
+    </ModalSwitch>
   )
 }
 

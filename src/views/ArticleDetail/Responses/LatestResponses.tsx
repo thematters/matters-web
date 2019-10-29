@@ -221,10 +221,6 @@ const LatestResponses = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
-  }
-
   return (
     <section className="latest-responses" id="latest-responses">
       <header>
@@ -278,7 +274,7 @@ const LatestResponses = () => {
         ))}
       </ul>
 
-      {pageInfo.hasNextPage && (
+      {pageInfo && pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />
       )}
 

@@ -51,12 +51,12 @@ const BlocKUserModal: React.FC<ModalInstanceProps & Props> = ({
         <>
           <Modal.Content>
             <Translate
-              zh_hant={`屏蔽之後，${user.displayName} 將無法評論你的作品。`}
+              zh_hant={`封鎖之後，${user.displayName} 將無法評論你的作品。`}
               zh_hans={`屏蔽之后，${user.displayName} 将无法评论你的作品。`}
             />
             <br />
             <Translate
-              zh_hant="你可以在設置裏管理你的屏蔽用戶列表。"
+              zh_hant="你可以在設置裏管理你的封鎖用戶列表。"
               zh_hans="你可以在设置里管理你的屏蔽用户列表。"
             />
           </Modal.Content>

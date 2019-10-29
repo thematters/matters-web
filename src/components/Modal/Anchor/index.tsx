@@ -53,7 +53,7 @@ const Anchor = () => {
     viewer.isAuthed &&
     !isLikeCoinClosed &&
     isLikeCoinAllowPaths &&
-    (viewer.isOnboarding || !viewer.likerId)
+    viewer.shouldSetupLikerID
   const closeLikeCoinModal = () => {
     setIsLikeCoinClosed(true)
   }
