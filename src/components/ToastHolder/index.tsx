@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 import { useEventListener } from '~/components'
 
+import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
+
 import FixedToast from './FixedToast'
 import styles from './styles.css'
 
@@ -45,8 +47,8 @@ export const ToastHolder: React.FC<Props> = ({
     setToasts(prev => _filter(prev, toast => toast.id !== id))
   }
 
-  useEventListener('addToast', add)
-  useEventListener('removeToast', remove)
+  useEventListener(ADD_TOAST, add)
+  useEventListener(REMOVE_TOAST, remove)
 
   return (
     <div className="toast-holder">
