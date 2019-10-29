@@ -120,7 +120,7 @@ const ArticleDetail = ({
   const [fixedToolbar, setFixedToolbar] = useState(true)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
-  const isMediumUp = useResponsive({ type: 'medium-up' })
+  const isMediumUp = useResponsive({ type: 'medium-up' })()
   const { data, loading, error, subscribeToMore, client } = useQuery<
     ArticleDetailType
   >(ARTICLE_DETAIL, {
@@ -289,11 +289,6 @@ const ArticleDetail = ({
 const ArticleDetailContainer = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-
-  if (!mediaHash) {
-    return null
-  }
-
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })

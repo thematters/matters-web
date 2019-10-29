@@ -32,7 +32,7 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
-export default () => {
+const MeDrafts = () => {
   const { data, loading, error, fetchMore } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED
   )
@@ -77,3 +77,5 @@ export default () => {
     </InfiniteScroll>
   )
 }
+
+export default MeDrafts

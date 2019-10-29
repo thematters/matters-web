@@ -82,7 +82,7 @@ const NoticeButton = ({
   )
 }
 
-export default () => {
+const NotificationButton = () => {
   const { data: unreadCountData, startPolling } = useQuery<UnreadNoticeCount>(
     UNREAD_NOTICE_COUNT,
     {
@@ -128,3 +128,5 @@ export default () => {
     />
   )
 }
+
+export default NotificationButton

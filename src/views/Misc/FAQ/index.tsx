@@ -10,7 +10,7 @@ import { translate } from '~/common/utils'
 import MiscTab from '../MiscTab'
 import content from './content'
 
-export default () => {
+const FAQ = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -50,3 +50,5 @@ export default () => {
     </main>
   )
 }
+
+export default FAQ

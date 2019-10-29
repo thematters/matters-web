@@ -8,6 +8,12 @@ import { redirectToLogin } from '~/common/utils'
 export const Protected: React.FC = ({ children }) => {
   const viewer = useContext(ViewerContext)
 
+  useEffect(() => {
+    if (!viewer.isAuthed && process.browser) {
+      redirectToLogin()
+    }
+  }, [])
+
   if (viewer.isAuthed) {
     return <>{children}</>
   }
@@ -15,10 +21,6 @@ export const Protected: React.FC = ({ children }) => {
   if (!process.browser) {
     return <Spinner />
   }
-
-  useEffect(() => {
-    redirectToLogin()
-  }, [])
 
   return <Spinner />
 }

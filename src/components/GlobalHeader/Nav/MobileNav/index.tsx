@@ -8,7 +8,7 @@ import ICON_MENU from '~/static/icons/menu.svg?sprite'
 import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
-export default ({ unread }: { unread: boolean }) => {
+const MobileNav = ({ unread }: { unread: boolean }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -40,3 +40,5 @@ export default ({ unread }: { unread: boolean }) => {
     </Dropdown>
   )
 }
+
+export default MobileNav

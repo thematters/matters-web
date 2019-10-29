@@ -30,7 +30,7 @@ const SIDEBAR_TAGS = gql`
   ${Tag.fragments.tag}
 `
 
-export default () => {
+const Tags = () => {
   const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
   const edges = data && data.viewer && data.viewer.recommendation.tags.edges
 
@@ -73,3 +73,5 @@ export default () => {
     </>
   )
 }
+
+export default Tags

@@ -50,7 +50,7 @@ const ChangePasswrodButton = () => (
   </ModalSwitch>
 )
 
-export default () => {
+const AccountSettings = () => {
   const viewer = useContext(ViewerContext)
 
   return (
@@ -121,3 +121,5 @@ export default () => {
     </section>
   )
 }
+
+export default AccountSettings

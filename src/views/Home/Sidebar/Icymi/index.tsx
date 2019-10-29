@@ -33,7 +33,7 @@ export const SIDEBAR_ICYMI = gql`
   ${ArticleDigest.Sidebar.fragments.article}
 `
 
-export default () => {
+const ICYMI = () => {
   const { data, loading } = useQuery<SidebarIcymi>(SIDEBAR_ICYMI)
   const edges = data && data.viewer && data.viewer.recommendation.icymi.edges
 
@@ -71,3 +71,5 @@ export default () => {
     </>
   )
 }
+
+export default ICYMI

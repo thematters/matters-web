@@ -102,7 +102,7 @@ const WalletSetting = () => {
   )
 }
 
-export default () => {
+const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.likerId
 
@@ -132,3 +132,5 @@ export default () => {
     </section>
   )
 }
+
+export default WalletSettings

@@ -9,7 +9,7 @@ import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
 import styles from './styles.css'
 
-export default () => {
+const SearchButton = () => {
   const { headerState } = useContext(HeaderContext)
   const isDraft = headerState.type === 'draft'
 
@@ -23,3 +23,5 @@ export default () => {
     </Link>
   )
 }
+
+export default SearchButton

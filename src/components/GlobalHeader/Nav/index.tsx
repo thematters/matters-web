@@ -11,7 +11,7 @@ import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import styles from './styles.css'
 
-export default () => {
+const Nav = () => {
   const { data, startPolling } = useQuery<UnreadFolloweeArticles>(
     UNREAD_FOLLOWEE_ARTICLES,
     {
@@ -41,3 +41,5 @@ export default () => {
     </nav>
   )
 }
+
+export default Nav

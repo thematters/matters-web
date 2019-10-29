@@ -53,10 +53,6 @@ const fragments = {
 const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   fragments: typeof fragments
 } = ({ draft }) => {
-  if (!process.browser) {
-    return null
-  }
-
   const [updateDraft] = useMutation<UpdateDraft>(UPDATE_DRAFT)
   const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const { lang } = useContext(LanguageContext)
@@ -69,6 +65,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   useEffect(() => {
     setTitle(draft.title)
   }, [draft.title])
+
+  if (!process.browser) {
+    return null
+  }
 
   return (
     <>

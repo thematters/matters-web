@@ -55,14 +55,14 @@ const UserArticles = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  if (!userName) {
-    return <Throw404 />
-  }
-
   const { data, loading, error, fetchMore } = useQuery<UserArticlesTypes>(
     USER_ARTICLES,
     { variables: { userName } }
   )
+
+  if (!userName) {
+    return <Throw404 />
+  }
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
