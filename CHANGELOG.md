@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2019-10-29
+
+### Added
+
+- Block User #481
+
+### Changed
+
+- Apollo with React Hooks! #450
+- Show userName in profile area #479
+- Error Codes: remove `USER_FOLLOW_FAILED`, add `ACTION_FAILED` #480
+
 ## [2.0.1] - 2019-10-21
 
 ### Changed
