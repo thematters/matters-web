@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { Head } from '~/components'
 
 import { TEXT } from '~/common/enums'

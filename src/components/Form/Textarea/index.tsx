@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { FC } from 'react'
 
 import styles from './styles.css'
 
@@ -41,7 +40,7 @@ interface Props {
   [key: string]: any
 }
 
-const Textarea: FC<Props> = ({
+const Textarea: React.FC<Props> = ({
   className = [],
   field,
   placeholder,
@@ -72,10 +71,12 @@ const Textarea: FC<Props> = ({
           style={style}
         />
       </div>
+
       <div className="info">
         {error && isTouched && <div className="error">{error}</div>}
         {!error && hint && <div className="hint">{hint}</div>}
       </div>
+
       <style jsx>{styles}</style>
     </>
   )

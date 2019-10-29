@@ -65,6 +65,7 @@ export const Title: React.FC<TitleProps> = ({
           {children}
         </span>
       )}
+
       <style jsx>{styles}</style>
     </>
   )

@@ -1,48 +1,43 @@
-import _get from 'lodash/get'
 import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, dom } from '~/common/utils'
-import ICON_SHARE_DOUBAN from '~/static/icons/share-douban.svg?sprite'
+import { analytics } from '~/common/utils'
+import ICON_SHARE_WHATSAPP from '~/static/icons/share-whatsapp.svg?sprite'
 
-const Douban = () => (
+const Whatsapp = () => (
   <button
     type="button"
     onClick={() => {
       const url = window.location.href
       const text = window.document.title
-      const description = dom
-        .$('meta[name="description"]')
-        .getAttribute('content')
       const shareUrl =
-        'http://www.douban.com/share/service?' +
+        'https://api.whatsapp.com/send?' +
         queryString.stringify({
-          href: url,
-          name: text,
-          text: description
+          text: text ? text + ' ' + url : url
         })
+
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
-        type: SHARE_TYPE.DOUBAN,
+        type: SHARE_TYPE.WHATSAPP,
         url
       })
-      return window.open(shareUrl)
+      return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >
     <TextIcon
       icon={
         <Icon
-          id={ICON_SHARE_DOUBAN.id}
-          viewBox={ICON_SHARE_DOUBAN.viewBox}
+          id={ICON_SHARE_WHATSAPP.id}
+          viewBox={ICON_SHARE_WHATSAPP.viewBox}
           size="small"
         />
       }
       spacing="tight"
-      text="豆瓣"
+      text="WhatsApp"
     />
   </button>
 )
 
-export default Douban
+export default Whatsapp

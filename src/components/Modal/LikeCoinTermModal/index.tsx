@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -15,7 +15,7 @@ interface Props {
   submitCallback: () => void
 }
 
-const LikeCoinTermModal: FC<ModalInstanceProps & Props> = ({
+const LikeCoinTermModal: React.FC<ModalInstanceProps & Props> = ({
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)

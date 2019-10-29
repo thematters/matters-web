@@ -1,17 +1,18 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { get, some } from 'lodash'
+import _get from 'lodash/get'
+import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
-import { Query } from '~/components/GQL'
+import ShareButton from '~/components/Button/Share'
+import ShareModal from '~/components/Button/Share/ShareModal'
 import { Icon } from '~/components/Icon'
-import ShareButton from '~/components/ShareButton'
-import ShareModal from '~/components/ShareButton/ShareModal'
+import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -19,10 +20,11 @@ import { TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
-import Throw404 from '../Throw404'
+import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
 import Description from './Description'
+import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -50,9 +52,11 @@ const fragments = {
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
+      ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
+    ${DropdownActions.fragments.user}
   `
 }
 
@@ -86,16 +90,13 @@ const SeedBadge = () => (
   </Tooltip>
 )
 
-const CoverContainer = ({ children }: any) => (
-  <>
-    <div className="cover-container l-row">
-      <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
-    </div>
-    <style jsx>{styles}</style>
-  </>
-)
+const CoverContainer: React.FC = ({ children }) => (
+  <div className="cover-container l-row">
+    <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
 
-type UserProfileResultType = QueryResult & { data: UserProfileUser }
+    <style jsx>{styles}</style>
+  </div>
+)
 
 const BaseUserProfile = () => {
   const router = useRouter()
@@ -110,154 +111,183 @@ const BaseUserProfile = () => {
     inactive: isMe && viewer.isInactive
   })
 
+  const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
+    isMe ? ME_PROFILE : USER_PROFILE,
+    {
+      variables: isMe ? {} : { userName }
+    }
+  )
+  const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
+
+  if (loading) {
+    return (
+      <section className={containerClass}>
+        <CoverContainer>
+          <Placeholder.UserProfile />
+        </CoverContainer>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  if (isMe && editing) {
+    return (
+      <section className={containerClass}>
+        <UserProfileEditor
+          user={_get(data, 'viewer')}
+          setEditing={setEditing}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  if (!user) {
+    return <Throw404 />
+  }
+
+  const userFollowersPath = toPath({
+    page: 'userFollowers',
+    userName: user.userName
+  })
+  const userFolloweesPath = toPath({
+    page: 'userFollowees',
+    userName: user.userName
+  })
+  const badges = user.info.badges || []
+  const hasSeedBadge = _some(badges, { type: 'seed' })
+  const profileCover = user.info.profileCover || ''
+
   return (
     <section className={containerClass}>
-      <Query
-        query={isMe ? ME_PROFILE : USER_PROFILE}
-        variables={isMe ? {} : { userName }}
-      >
-        {({ data, loading, error }: UserProfileResultType) => {
-          if (loading) {
-            return (
-              <CoverContainer>
-                <Placeholder.UserProfile />
-              </CoverContainer>
-            )
-          }
+      <CoverContainer>
+        <Cover cover={profileCover} />
+      </CoverContainer>
 
-          if (isMe && editing) {
-            return (
-              <UserProfileEditor user={data.viewer} setEditing={setEditing} />
-            )
-          }
+      <div className="content-container l-row">
+        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+          <section className="content">
+            <div className="avatar-container">
+              <Avatar
+                size="xlarge"
+                user={!isMe && viewer.isInactive ? undefined : user}
+              />
 
-          const user = isMe ? data.viewer : data.user
+              {!isMe && (
+                <section className="buttons">
+                  <span className="follows">
+                    <FollowButton user={user} size="default" />
+                    <span className="u-sm-down-hide follow-state">
+                      {!isMe && <FollowButton.State user={user} />}
+                    </span>
+                  </span>
 
-          if (!user) {
-            return <Throw404 />
-          }
-
-          const userFollowersPath = toPath({
-            page: 'userFollowers',
-            userName: user.userName
-          })
-          const userFolloweesPath = toPath({
-            page: 'userFollowees',
-            userName: user.userName
-          })
-          const badges = get(user, 'info.badges', [])
-          const hasSeedBadge = some(badges, { type: 'seed' })
-          const profileCover = get(user, 'info.profileCover', '')
-
-          return (
-            <>
-              <CoverContainer>
-                <Cover cover={profileCover} />
-              </CoverContainer>
-              <div className="content-container l-row">
-                <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-                  <section className="content">
-                    <div className="avatar-container">
-                      <Avatar
-                        size="xlarge"
-                        user={!isMe && viewer.isInactive ? undefined : user}
-                      />
-                      {!isMe && (
-                        <section className="buttons">
-                          <FollowButton user={user} size="default" />
-                          <span className="u-sm-up-hide">
-                            <ShareButton />
-                          </span>
-                        </section>
-                      )}
-                    </div>
-
-                    <section className="info">
-                      <header className="header">
-                        <section className="name">
-                          {!viewer.isInactive && (
-                            <span>
-                              {user.displayName}
-                              {hasSeedBadge && <SeedBadge />}
-                              {!isMe && <FollowButton.State user={user} />}
-                            </span>
-                          )}
-                          {viewer.isArchived && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountArchived}
-                                zh_hans={TEXT.zh_hans.accountArchived}
-                              />
-                            </span>
-                          )}
-                          {viewer.isFrozen && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountFrozen}
-                                zh_hans={TEXT.zh_hans.accountFrozen}
-                              />
-                            </span>
-                          )}
-                          {viewer.isBanned && (
-                            <span>
-                              <Translate
-                                zh_hant={TEXT.zh_hant.accountBanned}
-                                zh_hans={TEXT.zh_hans.accountBanned}
-                              />
-                            </span>
-                          )}
-                        </section>
-                        <section className="buttons">
-                          {isMe && !viewer.isInactive && (
-                            <EditProfileButton setEditing={setEditing} />
-                          )}
-                          <span className={!isMe ? 'u-sm-down-hide' : ''}>
-                            <ShareButton />
-                          </span>
-                        </section>
-                      </header>
-
-                      {!viewer.isInactive && (
-                        <Description description={user.info.description} />
-                      )}
-                      <section className="info-follow">
-                        <Link {...userFollowersPath}>
-                          <a className="followers">
-                            <span className="count">
-                              {numAbbr(user.followers.totalCount)}
-                            </span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.follower}
-                              zh_hans={TEXT.zh_hans.follower}
-                            />
-                          </a>
-                        </Link>
-                        <Link {...userFolloweesPath}>
-                          <a className="followees">
-                            <span className="count">
-                              {numAbbr(user.followees.totalCount)}
-                            </span>
-                            <Translate
-                              zh_hant={TEXT.zh_hant.following}
-                              zh_hans={TEXT.zh_hans.following}
-                            />
-                          </a>
-                        </Link>
-                      </section>
-                    </section>
-                  </section>
+                  <span className="u-sm-up-hide">
+                    <DropdownActions user={user} />
+                    <ShareButton />
+                  </span>
                 </section>
-              </div>
-            </>
-          )
-        }}
-      </Query>
+              )}
+            </div>
 
-      <ShareModal />
+            <section className="info">
+              <header className="header">
+                <section className="basic">
+                  {!viewer.isInactive && (
+                    <>
+                      <span className="name">{user.displayName}</span>
+                      <span className="username">@{user.userName}</span>
+                      {hasSeedBadge && <SeedBadge />}
+                      <span className="u-sm-up-hide">
+                        {!isMe && <FollowButton.State user={user} />}
+                      </span>
+                    </>
+                  )}
+
+                  {viewer.isArchived && (
+                    <span>
+                      <Translate
+                        zh_hant={TEXT.zh_hant.accountArchived}
+                        zh_hans={TEXT.zh_hans.accountArchived}
+                      />
+                    </span>
+                  )}
+
+                  {viewer.isFrozen && (
+                    <span>
+                      <Translate
+                        zh_hant={TEXT.zh_hant.accountFrozen}
+                        zh_hans={TEXT.zh_hans.accountFrozen}
+                      />
+                    </span>
+                  )}
+
+                  {viewer.isBanned && (
+                    <span>
+                      <Translate
+                        zh_hant={TEXT.zh_hant.accountBanned}
+                        zh_hans={TEXT.zh_hans.accountBanned}
+                      />
+                    </span>
+                  )}
+                </section>
+
+                <section className="buttons">
+                  {isMe && !viewer.isInactive && (
+                    <EditProfileButton setEditing={setEditing} />
+                  )}
+
+                  <span className={!isMe ? 'u-sm-down-hide' : ''}>
+                    {!isMe && <DropdownActions user={user} />}
+                    <ShareButton />
+                  </span>
+                </section>
+              </header>
+
+              {!viewer.isInactive && (
+                <Description description={user.info.description} />
+              )}
+
+              <section className="info-follow">
+                <Link {...userFollowersPath}>
+                  <a className="followers">
+                    <span className="count">
+                      {numAbbr(user.followers.totalCount)}
+                    </span>
+                    <Translate
+                      zh_hant={TEXT.zh_hant.follower}
+                      zh_hans={TEXT.zh_hans.follower}
+                    />
+                  </a>
+                </Link>
+
+                <Link {...userFolloweesPath}>
+                  <a className="followees">
+                    <span className="count">
+                      {numAbbr(user.followees.totalCount)}
+                    </span>
+                    <Translate
+                      zh_hant={TEXT.zh_hant.following}
+                      zh_hans={TEXT.zh_hans.following}
+                    />
+                  </a>
+                </Link>
+              </section>
+            </section>
+          </section>
+        </section>
+      </div>
 
       <style jsx>{styles}</style>
     </section>
   )
 }
 
-export const UserProfile = BaseUserProfile
+export const UserProfile = () => (
+  <>
+    <BaseUserProfile />
+    <ShareModal />
+  </>
+)

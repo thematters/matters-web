@@ -1,8 +1,11 @@
 import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
+import { Error } from '~/components/Error'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
+import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -14,42 +17,46 @@ import {
   ViewerUserFragment
 } from '~/components/Viewer'
 
-import { LayoutUser } from './__generated__/LayoutUser'
+import { RootQuery } from './__generated__/RootQuery'
 
-interface LayoutProps {
-  loading: boolean
-  user: LayoutUser
-  error?: Error
-}
-
-const fragments = {
-  user: gql`
-    fragment LayoutUser on User {
+const ROOT_QUERY = gql`
+  query RootQuery {
+    viewer {
+      id
       ...ViewerUser
       ...GlobalHeaderUser
       ...AnalyticsUser
     }
-    ${ViewerUserFragment.user}
-    ${GlobalHeader.fragments.user}
-    ${AnalyticsListener.fragments.user}
-  `
-}
+  }
+  ${ViewerUserFragment.user}
+  ${GlobalHeader.fragments.user}
+  ${AnalyticsListener.fragments.user}
+`
 
-export const Layout: React.FC<LayoutProps> & {
-  fragments: typeof fragments
-} = ({ children, loading, user, error }: any) => {
+export const Layout: React.FC = ({ children }) => {
+  const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
+  const viewer = data && data.viewer
+
   if (loading) {
     return null
   }
 
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!viewer) {
+    return <Error />
+  }
+
   return (
-    <ViewerContext.Provider value={processViewer({ ...(user || {}) })}>
+    <ViewerContext.Provider value={processViewer(viewer)}>
       <LanguageProvider>
         <HeaderContextProvider>
-          <AnalyticsListener user={user || {}} />
+          <AnalyticsListener user={viewer || {}} />
           <Head />
 
-          <GlobalHeader user={user} />
+          <GlobalHeader user={viewer} />
 
           {children}
 
@@ -61,5 +68,3 @@ export const Layout: React.FC<LayoutProps> & {
     </ViewerContext.Provider>
   )
 }
-
-Layout.fragments = fragments

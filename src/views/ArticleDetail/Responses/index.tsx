@@ -1,39 +1,34 @@
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import gql from 'graphql-tag'
+import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
-import { Query } from '~/components/GQL'
 import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
 import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
+import { ResponsesArticle } from './__generated__/ResponsesArticle'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import styles from './styles.css'
 
-const ResponseCount = ({ mediaHash }: { mediaHash: string }) => (
-  <Query query={ARTICLE_RESPONSE_COUNT} variables={{ mediaHash }}>
-    {({ data }: QueryResult & { data: ArticleResponseCount }) => {
-      const count = _get(data, 'article.responseCount', 0)
-      return (
-        <>
-          <span className="count">{count}</span>
-          <style jsx>{styles}</style>
-        </>
-      )
-    }}
-  </Query>
-)
+const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
+  const { data } = useQuery<ArticleResponseCount>(ARTICLE_RESPONSE_COUNT, {
+    variables: { mediaHash }
+  })
+  const count = (data && data.article && data.article.responseCount) || 0
 
-const Responses = ({
-  articleId,
-  mediaHash
-}: {
-  articleId: string
-  mediaHash: string
-}) => {
+  return (
+    <span className="count">
+      {count}
+
+      <style jsx>{styles}</style>
+    </span>
+  )
+}
+
+const Responses = ({ article }: { article: ResponsesArticle }) => {
   const refetchResponses = () => {
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
@@ -46,13 +41,14 @@ const Responses = ({
             zh_hant={TEXT.zh_hant.response}
             zh_hans={TEXT.zh_hans.response}
           />
-          <ResponseCount mediaHash={mediaHash} />
+          <ResponseCount mediaHash={article.mediaHash || ''} />
         </h2>
 
         <section>
           <CommentForm
-            articleId={articleId}
+            articleId={article.id}
             submitCallback={refetchResponses}
+            blocked={article.author.isBlocking}
           />
         </section>
       </header>
@@ -63,6 +59,19 @@ const Responses = ({
       <style jsx>{styles}</style>
     </section>
   )
+}
+
+Responses.fragments = {
+  article: gql`
+    fragment ResponsesArticle on Article {
+      id
+      mediaHash
+      author {
+        id
+        isBlocking
+      }
+    }
+  `
 }
 
 export default Responses

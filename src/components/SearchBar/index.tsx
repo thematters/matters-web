@@ -1,10 +1,11 @@
 import { Formik } from 'formik'
 import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
+import { useDebounce } from 'use-debounce'
 
 import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
@@ -21,9 +22,10 @@ const BaseSearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
-
-  // translations
+  const q = getQuery({ router, key: 'q' }) || ''
   const { lang } = useContext(LanguageContext)
+  const [search, setSearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const textAriaLabel = translate({
     zh_hant: TEXT.zh_hant.search,
     zh_hans: TEXT.zh_hans.search,
@@ -37,6 +39,7 @@ const BaseSearchBar: React.FC<{
 
   // dropdown
   const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const [shown, setShown] = useState(false)
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
@@ -44,18 +47,13 @@ const BaseSearchBar: React.FC<{
   }
   const showDropdown = () => {
     if (instance) {
-      setTimeout(() => {
-        instance.show()
-      }, 100) // unknown bug, needs set a timeout
+      instance.show()
     }
   }
 
-  // parse query
-  const routerQ = getQuery({ router, key: 'q' })
-
   return (
     <Formik
-      initialValues={{ q: routerQ || '' }}
+      initialValues={{ q }}
       enableReinitialize
       onSubmit={values => {
         const path = toPath({
@@ -63,6 +61,7 @@ const BaseSearchBar: React.FC<{
           q: values.q
         })
         Router.push(path.href, path.as)
+        hideDropdown()
       }}
       render={({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {
@@ -78,7 +77,9 @@ const BaseSearchBar: React.FC<{
                 onChange={handleChange}
                 value={values.q}
               />
+
               <SearchButton />
+
               <style jsx>{styles}</style>
             </form>
           )
@@ -87,10 +88,15 @@ const BaseSearchBar: React.FC<{
         return (
           <Dropdown
             content={
-              <AutoComplete searchKey={values.q} hideDropdown={hideDropdown} />
+              <AutoComplete
+                searchKey={debouncedSearch}
+                hideDropdown={hideDropdown}
+                isShown={shown}
+              />
             }
             trigger="manual"
             onCreate={setInstance}
+            onShown={() => setShown(true)}
             theme="dropdown shadow-light"
           >
             <form onSubmit={handleSubmit}>
@@ -103,13 +109,16 @@ const BaseSearchBar: React.FC<{
                 value={values.q}
                 onChange={e => {
                   handleChange(e)
+                  setSearch(e.target.value)
                   showDropdown()
                 }}
-                onFocus={() => !values.q && showDropdown()}
-                onClick={() => !values.q && showDropdown()}
+                onFocus={showDropdown}
+                onClick={showDropdown}
                 onBlur={hideDropdown}
               />
+
               <SearchButton />
+
               <style jsx>{styles}</style>
             </form>
           </Dropdown>

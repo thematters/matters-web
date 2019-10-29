@@ -21,6 +21,7 @@ const CommentContent = ({
             __html: content || ''
           }}
         />
+
         <style jsx>{styles}</style>
         <style jsx>{contentCommentStyles}</style>
       </>
@@ -34,6 +35,7 @@ const CommentContent = ({
           zh_hant="此評論因違反用戶協定而被隱藏"
           zh_hans="此评论因违反用户协定而被隐藏"
         />
+
         <style jsx>{styles}</style>
       </p>
     )
@@ -46,6 +48,7 @@ const CommentContent = ({
           zh_hant={TEXT.zh_hant.commentDeleted}
           zh_hans={TEXT.zh_hans.commentDeleted}
         />
+
         <style jsx>{styles}</style>
       </p>
     )

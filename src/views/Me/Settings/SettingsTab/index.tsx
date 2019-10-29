@@ -20,6 +20,7 @@ const SettingsTabs = () => {
           </a>
         </Link>
       </Tabs.Tab>
+
       <Tabs.Tab
         selected={router.pathname === PATHS.ME_SETTINGS_NOTIFICATION.href}
       >
@@ -28,6 +29,17 @@ const SettingsTabs = () => {
             <Translate
               zh_hant={TEXT.zh_hant.notificationSetting}
               zh_hans={TEXT.zh_hans.notificationSetting}
+            />
+          </a>
+        </Link>
+      </Tabs.Tab>
+
+      <Tabs.Tab selected={router.pathname === PATHS.ME_SETTINGS_BLOCKED.href}>
+        <Link {...PATHS.ME_SETTINGS_BLOCKED}>
+          <a>
+            <Translate
+              zh_hant={TEXT.zh_hant.blockedSetting}
+              zh_hans={TEXT.zh_hans.blockedSetting}
             />
           </a>
         </Link>

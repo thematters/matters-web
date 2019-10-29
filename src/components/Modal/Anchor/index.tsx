@@ -53,7 +53,7 @@ const Anchor = () => {
     viewer.isAuthed &&
     !isLikeCoinClosed &&
     isLikeCoinAllowPaths &&
-    (viewer.isOnboarding || !viewer.likerId)
+    viewer.shouldSetupLikerID
   const closeLikeCoinModal = () => {
     setIsLikeCoinClosed(true)
   }
@@ -101,7 +101,9 @@ const Anchor = () => {
       </ModalInstance>
 
       {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
+
       {shouldShowLikeCoinModal && <OpenedModal modalId="likeCoinTermModal" />}
+
       <style jsx>{styles}</style>
     </>
   )

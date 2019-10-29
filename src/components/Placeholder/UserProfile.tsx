@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-import { Responsive } from '~/components'
+import { useResponsive } from '~/components/Hook'
 
 import { LoaderProps } from './utils'
 
@@ -35,24 +35,29 @@ const LG = () => (
   </ContentLoader>
 )
 
-const UserProfile = () => (
-  <>
-    <Responsive.XSmall>
-      <XS />
-    </Responsive.XSmall>
+const UserProfile = () => {
+  const isXSmall = useResponsive({ type: 'xsmall' })()
+  const isSmall = useResponsive({ type: 'small' })()
+  const isMedium = useResponsive({ type: 'medium' })()
+  const isLargeUp = useResponsive({ type: 'large-up' })()
 
-    <Responsive.Small>
-      <SM />
-    </Responsive.Small>
+  if (isXSmall) {
+    return <XS />
+  }
 
-    <Responsive.Medium>
-      <MD />
-    </Responsive.Medium>
+  if (isSmall) {
+    return <SM />
+  }
 
-    <Responsive.LargeUp>
-      <LG />
-    </Responsive.LargeUp>
-  </>
-)
+  if (isMedium) {
+    return <MD />
+  }
+
+  if (isLargeUp) {
+    return <LG />
+  }
+
+  return null
+}
 
 export default UserProfile

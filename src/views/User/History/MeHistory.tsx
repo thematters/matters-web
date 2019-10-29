@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -42,71 +41,68 @@ const ME_HISTORY_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => {
+const MeHistory = () => {
+  const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
+    ME_HISTORY_FEED
+  )
+
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'viewer.activity.history'
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.activity.history) || {}
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyHistory />
+  }
+
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.READ_HISTORY,
+      location: edges.length
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
   return (
-    <Query query={ME_HISTORY_FEED}>
-      {({
-        data,
-        loading,
-        fetchMore
-      }: QueryResult & { data: MeHistoryFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
-
-        const connectionPath = 'viewer.activity.history'
-        const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () => {
-          analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-            type: FEED_TYPE.READ_HISTORY,
-            location: edges.length
-          })
-          return fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.READ_HISTORY,
+                location: i
               })
-          })
-        }
-
-        if (!edges || edges.length <= 0) {
-          return <EmptyHistory />
-        }
-
-        return (
-          <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
-            loadMore={loadMore}
+            }
           >
-            <ul>
-              {edges.map(
-                ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                  <li
-                    key={cursor}
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: FEED_TYPE.READ_HISTORY,
-                        location: i
-                      })
-                    }
-                  >
-                    <ArticleDigest.Feed
-                      article={node.article}
-                      hasBookmark
-                      hasDateTime
-                    />
-                  </li>
-                )
-              )}
-            </ul>
-          </InfiniteScroll>
-        )
-      }}
-    </Query>
+            <ArticleDigest.Feed
+              article={node.article}
+              hasBookmark
+              hasDateTime
+            />
+          </li>
+        ))}
+      </ul>
+    </InfiniteScroll>
   )
 }
+
+export default MeHistory

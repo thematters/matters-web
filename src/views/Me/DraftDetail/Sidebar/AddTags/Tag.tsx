@@ -12,6 +12,7 @@ interface TagProps {
 const Tag = ({ tag, deleteTag }: TagProps) => (
   <span className="tag">
     <span>{tag}</span>
+
     <button type="button" onClick={() => deleteTag(tag)}>
       <Icon
         id={ICON_FAIL.id}
@@ -19,6 +20,7 @@ const Tag = ({ tag, deleteTag }: TagProps) => (
         style={{ width: 14, height: 14 }}
       />
     </button>
+
     <style jsx>{styles}</style>
   </span>
 )

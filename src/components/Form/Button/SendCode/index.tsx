@@ -1,14 +1,15 @@
 import gql from 'graphql-tag'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from '~/components/Button'
-import { getErrorCodes, Mutation } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import { SendVerificationCode } from './__generated__/SendVerificationCode'
 import styles from './styles.css'
 
 /**
@@ -41,28 +42,28 @@ export const SEND_CODE = gql`
   }
 `
 
-const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
+const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
+  const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0
   })
 
-  const sendCode = (params: any) => {
-    const { event, send } = params
+  const sendCode = (event: any) => {
     event.stopPropagation()
 
-    if (!send || !params.email || countdown.timeLeft !== 0) {
+    if (!send || !email || countdown.timeLeft !== 0) {
       return
     }
 
     send({
-      variables: { input: { email: params.email, type } }
+      variables: { input: { email, type } }
     })
-      .then((result: any) => {
+      .then(result => {
         setCountdown({ timeLeft: 1000 * 60 })
         setSent(true)
       })
-      .catch((error: any) => {
+      .catch(error => {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = (
           <Translate
@@ -83,36 +84,31 @@ const SendCodeButton: FC<Props> = ({ email, lang, type }) => {
   }
 
   return (
-    <>
-      <Mutation mutation={SEND_CODE}>
-        {(send: any) => (
-          <Button
-            is="button"
-            bgColor="transparent"
-            className="u-link-green"
-            spacing="none"
-            disabled={countdown.timeLeft !== 0}
-            onClick={(event: any) => sendCode({ event, email, send })}
-          >
-            {sent
-              ? translate({
-                  zh_hant: TEXT.zh_hant.resend,
-                  zh_hans: TEXT.zh_hans.resend,
-                  lang
-                })
-              : translate({
-                  zh_hant: TEXT.zh_hant.sendVerificationCode,
-                  zh_hans: TEXT.zh_hans.sendVerificationCode,
-                  lang
-                })}
-            {sent && countdown.timeLeft !== 0 && (
-              <span className="timer">{formattedTimeLeft.ss}</span>
-            )}
-          </Button>
-        )}
-      </Mutation>
+    <Button
+      is="button"
+      bgColor="transparent"
+      className="u-link-green"
+      spacing="none"
+      disabled={countdown.timeLeft !== 0}
+      onClick={(event: any) => sendCode({ event })}
+    >
+      {sent
+        ? translate({
+            zh_hant: TEXT.zh_hant.resend,
+            zh_hans: TEXT.zh_hans.resend,
+            lang
+          })
+        : translate({
+            zh_hant: TEXT.zh_hant.sendVerificationCode,
+            zh_hans: TEXT.zh_hans.sendVerificationCode,
+            lang
+          })}
+      {sent && countdown.timeLeft !== 0 && (
+        <span className="timer">{formattedTimeLeft.ss}</span>
+      )}
+
       <style jsx>{styles}</style>
-    </>
+    </Button>
   )
 }
 

@@ -1,13 +1,12 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
 import {
   filterComments,
@@ -80,117 +79,133 @@ const UserCommentsWrap = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  return (
-    <Query query={USER_ID} variables={{ userName }}>
-      {({ data, loading, error }: any) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+  const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
+    variables: { userName }
+  })
 
-        return (
-          <>
-            <Head
-              title={{
-                zh_hant: `${data.user.displayName}發表的評論`,
-                zh_hans: `${data.user.displayName}发表的评论`
-              }}
-              description={data.user.info.description}
-              image={IMAGE_LOGO_192}
-            />
-            <UserComments user={data.user} />
-          </>
-        )
-      }}
-    </Query>
-  )
-}
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
 
-const UserComments = ({ user }: UserIdUser) => {
-  if (!user || !user.id) {
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!data || !data.user) {
     return null
   }
 
   return (
-    <Query query={USER_COMMENT_FEED} variables={{ id: user.id }}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: UserCommentFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
+    <>
+      <Head
+        title={{
+          zh_hant: `${data.user.displayName}發表的評論`,
+          zh_hans: `${data.user.displayName}发表的评论`
+        }}
+        description={data.user.info.description}
+        image={IMAGE_LOGO_192}
+      />
+      <UserComments user={data.user} />
+    </>
+  )
+}
 
-        const connectionPath = 'node.commentedArticles'
-        const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () =>
-          fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
+const UserComments = ({ user }: UserIdUser) => {
+  const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
+    USER_COMMENT_FEED,
+    {
+      variables: { id: user && user.id }
+    }
+  )
+
+  if (!user || !user.id) {
+    return null
+  }
+
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'node.commentedArticles'
+  const { edges, pageInfo } =
+    (data &&
+      data.node &&
+      data.node.__typename === 'User' &&
+      data.node.commentedArticles &&
+      data.node.commentedArticles) ||
+    {}
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyComment />
+  }
+
+  const loadMore = () =>
+    fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+
+  return (
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <ul className="article-list">
+        {edges.map(articleEdge => {
+          const commentEdges = articleEdge.node.comments.edges
+
+          if (!commentEdges) {
+            return null
+          }
+
+          const articlePath = toPath({
+            page: 'articleDetail',
+            userName: articleEdge.node.author.userName || '',
+            slug: articleEdge.node.slug,
+            mediaHash: articleEdge.node.mediaHash || ''
           })
+          const filteredComments = filterComments(
+            (commentEdges || []).map(({ node }) => node)
+          )
 
-        if (!edges || edges.length <= 0) {
-          return <EmptyComment />
-        }
+          return (
+            <li key={articleEdge.cursor} className="article-item">
+              <Link {...articlePath}>
+                <a>
+                  <h3>
+                    {articleEdge.node.title}
+                    <Icon
+                      id={ICON_CHEVRON_RIGHT.id}
+                      viewBox={ICON_CHEVRON_RIGHT.viewBox}
+                      style={{ width: 12, height: 12 }}
+                    />
+                  </h3>
+                </a>
+              </Link>
 
-        return (
-          <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
-            loadMore={loadMore}
-          >
-            <ul className="article-list">
-              {edges.map((articleEdge: { node: any; cursor: any }) => {
-                const commentEdges = _get(articleEdge, 'node.comments.edges')
-                const articlePath = toPath({
-                  page: 'articleDetail',
-                  userName: articleEdge.node.author.userName,
-                  slug: articleEdge.node.slug,
-                  mediaHash: articleEdge.node.mediaHash
-                })
-                const filteredComments = filterComments(
-                  (commentEdges || []).map(({ node }: { node: any }) => node)
-                )
+              <ul className="comment-list">
+                {filteredComments &&
+                  filteredComments.map(comment => (
+                    <li key={comment.id}>
+                      <CommentDigest.Feed comment={comment} hasLink />
+                    </li>
+                  ))}
+              </ul>
+            </li>
+          )
+        })}
 
-                return (
-                  <li key={articleEdge.cursor} className="article-item">
-                    <Link {...articlePath}>
-                      <a>
-                        <h3>
-                          {articleEdge.node.title}
-                          <Icon
-                            id={ICON_CHEVRON_RIGHT.id}
-                            viewBox={ICON_CHEVRON_RIGHT.viewBox}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        </h3>
-                      </a>
-                    </Link>
-
-                    <ul className="comment-list">
-                      {filteredComments &&
-                        filteredComments.map(comment => (
-                          <li key={comment.id}>
-                            <CommentDigest.Feed comment={comment} hasLink />
-                          </li>
-                        ))}
-                    </ul>
-                  </li>
-                )
-              })}
-              <style jsx>{styles}</style>
-            </ul>
-          </InfiniteScroll>
-        )
-      }}
-    </Query>
+        <style jsx>{styles}</style>
+      </ul>
+    </InfiniteScroll>
   )
 }
 

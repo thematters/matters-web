@@ -1,17 +1,19 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { forwardRef, useContext, useRef, useState } from 'react'
+import { forwardRef, useContext, useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 
 import { Icon, Translate } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
+import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
 import styles from './styles.css'
 
@@ -41,42 +43,40 @@ const APPRECIATE_ARTICLE = gql`
   }
 `
 
+const IconAppreciate = () => (
+  <Icon
+    id={ICON_LIKE.id}
+    viewBox={ICON_LIKE.viewBox}
+    style={{ width: 22, height: 22 }}
+  />
+)
+
 const AppreciatedCount = ({ num, limit }: { num: number; limit: number }) => {
   const classes = classNames({
     'appreciated-count': true,
     'appreciated-reach-limit': num === limit
   })
   return (
-    <>
-      <span className={classes}>{num}</span>
+    <span className={classes}>
+      {num}
+
       <style jsx>{styles}</style>
-    </>
+    </span>
   )
 }
 
-const OnboardingAppreciateButton = ({
-  article
-}: {
-  article: AppreciationArticleDetail
-}) => {
-  const buttonClasses = classNames({
-    'appreciate-button': true
-  })
-
+const OnboardingAppreciateButton = () => {
   return (
     <ModalSwitch modalId="likeCoinTermModal">
       {(open: any) => (
         <button
-          className={buttonClasses}
+          className="appreciate-button"
           type="button"
           onClick={open}
           aria-label="讚賞作品"
         >
-          <Icon
-            id={ICON_LIKE.id}
-            viewBox={ICON_LIKE.viewBox}
-            style={{ width: 22, height: 22 }}
-          />
+          <IconAppreciate />
+
           <style jsx>{styles}</style>
         </button>
       )}
@@ -91,39 +91,32 @@ const AppreciateButton = forwardRef<
     canAppreciate: boolean
     isAuthed: boolean
     appreciatedCount: number
-    appreciateLimit: number
+    limit: number
   }
->(
-  (
-    { appreciate, canAppreciate, isAuthed, appreciatedCount, appreciateLimit },
-    ref
-  ) => {
-    const buttonClasses = classNames({
-      'appreciate-button': true
-    })
+>(({ appreciate, canAppreciate, isAuthed, appreciatedCount, limit }, ref) => {
+  const buttonClasses = classNames({
+    'appreciate-button': true
+  })
 
-    return (
-      <button
-        className={buttonClasses}
-        type="button"
-        ref={ref}
-        aria-disabled={!canAppreciate}
-        onClick={() => canAppreciate && appreciate()}
-        aria-label="讚賞作品"
-      >
-        <Icon
-          id={ICON_LIKE.id}
-          viewBox={ICON_LIKE.viewBox}
-          style={{ width: 22, height: 22 }}
-        />
-        {isAuthed && appreciatedCount > 0 && (
-          <AppreciatedCount num={appreciatedCount} limit={appreciateLimit} />
-        )}
-        <style jsx>{styles}</style>
-      </button>
-    )
-  }
-)
+  return (
+    <button
+      className={buttonClasses}
+      type="button"
+      ref={ref}
+      aria-disabled={!canAppreciate}
+      onClick={() => canAppreciate && appreciate()}
+      aria-label="讚賞作品"
+    >
+      <IconAppreciate />
+
+      {isAuthed && appreciatedCount > 0 && (
+        <AppreciatedCount num={appreciatedCount} limit={limit} />
+      )}
+
+      <style jsx>{styles}</style>
+    </button>
+  )
+})
 
 const AppreciationButtonContainer = ({
   article
@@ -133,16 +126,38 @@ const AppreciationButtonContainer = ({
   const viewer = useContext(ViewerContext)
 
   // bundle appreciations
-  const [bundling, setBundling] = useState(false)
-  const [appreciationAmount, setAppreciationAmount] = useState(0)
-  const amountRef = useRef(appreciationAmount)
-  amountRef.current = appreciationAmount
+  const [amount, setAmount] = useState(0)
+  const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
+  const {
+    appreciateLimit,
+    appreciateLeft,
+    appreciationsReceivedTotal
+  } = article
+  const limit = appreciateLimit
+  const left = appreciateLeft - amount
+  const appreciatedCount = limit - left
+  const [debouncedSendAppreciation] = useDebouncedCallback(() => {
+    sendAppreciation({
+      variables: { id: article.id, amount },
+      optimisticResponse: {
+        appreciateArticle: {
+          id: article.id,
+          appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
+          hasAppreciate: true,
+          appreciateLeft: left,
+          __typename: 'Article'
+        }
+      }
+    })
+    setAmount(0)
+  }, APPRECIATE_DEBOUNCE)
+  const appreciate = () => {
+    setAmount(amount + 1)
+    debouncedSendAppreciation()
+  }
 
-  const { appreciateLimit } = article
-  const appreciateLeft = article.appreciateLeft - appreciationAmount
-  const appreciatedCount = appreciateLimit - appreciateLeft
-  const isReachLimit = appreciateLeft <= 0
-
+  // UI
+  const isReachLimit = left <= 0
   const isMe = article.author.id === viewer.id
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
@@ -152,103 +167,63 @@ const AppreciationButtonContainer = ({
     inactive: !canAppreciate,
     unlogged: !viewer.isAuthed
   })
+  const appreciateButtonProps = {
+    limit,
+    appreciatedCount,
+    canAppreciate,
+    appreciate,
+    isAuthed: viewer.isAuthed
+  }
 
-  if (viewer.isOnboarding) {
+  if (viewer.shouldSetupLikerID) {
     return (
       <section className="container">
-        <OnboardingAppreciateButton article={article} />
+        <OnboardingAppreciateButton />
+
         <span className="appreciate-count">
           {numAbbr(article.appreciationsReceivedTotal)}
         </span>
+
         <style jsx>{styles}</style>
       </section>
     )
   }
 
   return (
-    <Mutation
-      mutation={APPRECIATE_ARTICLE}
-      variables={{ id: article.id, amount: appreciationAmount }}
-      optimisticResponse={{
-        appreciateArticle: {
-          id: article.id,
-          appreciationsReceivedTotal:
-            article.appreciationsReceivedTotal + appreciationAmount,
-          hasAppreciate: true,
-          appreciateLeft,
-          __typename: 'Article'
-        }
-      }}
-    >
-      {(sendAppreciation: any, { data }: any) => {
-        // bundle appreciations
-        const appreciate = () => {
-          const debounce = 1000
-          setAppreciationAmount(appreciationAmount + 1)
+    <section className={containerClasses}>
+      {canAppreciate && <AppreciateButton {...appreciateButtonProps} />}
 
-          if (!bundling) {
-            setBundling(true)
-            setTimeout(() => {
-              if (amountRef.current) {
-                sendAppreciation({
-                  variables: { id: article.id, amount: amountRef.current }
-                })
-                setAppreciationAmount(0)
-                setBundling(false)
-              }
-            }, debounce)
+      {!canAppreciate && (
+        <Tooltip
+          content={
+            <Translate
+              {...(isReachLimit
+                ? {
+                    zh_hant: '你最多可讚賞 5 次',
+                    zh_hans: '你最多可赞赏 5 次'
+                  }
+                : isMe
+                ? {
+                    zh_hant: '去讚賞其他用戶吧',
+                    zh_hans: '去赞赏其他用户吧'
+                  }
+                : {
+                    zh_hant: '你無法進行讚賞',
+                    zh_hans: '你无法进行赞赏'
+                  })}
+            />
           }
-        }
+        >
+          <AppreciateButton {...appreciateButtonProps} />
+        </Tooltip>
+      )}
 
-        return (
-          <section className={containerClasses}>
-            {canAppreciate && (
-              <AppreciateButton
-                appreciateLimit={appreciateLeft}
-                appreciatedCount={appreciatedCount}
-                canAppreciate={canAppreciate}
-                appreciate={appreciate}
-                isAuthed={viewer.isAuthed}
-              />
-            )}
-            {!canAppreciate && (
-              <Tooltip
-                content={
-                  <Translate
-                    {...(isReachLimit
-                      ? {
-                          zh_hant: '你最多可讚賞 5 次',
-                          zh_hans: '你最多可赞赏 5 次'
-                        }
-                      : isMe
-                      ? {
-                          zh_hant: '去讚賞其他用戶吧',
-                          zh_hans: '去赞赏其他用户吧'
-                        }
-                      : {
-                          zh_hant: '你無法進行讚賞',
-                          zh_hans: '你无法进行赞赏'
-                        })}
-                  />
-                }
-              >
-                <AppreciateButton
-                  appreciateLimit={appreciateLimit}
-                  appreciatedCount={appreciatedCount}
-                  canAppreciate={canAppreciate}
-                  appreciate={appreciate}
-                  isAuthed={viewer.isAuthed}
-                />
-              </Tooltip>
-            )}
-            <span className="appreciate-count">
-              {numAbbr(article.appreciationsReceivedTotal)}
-            </span>
-            <style jsx>{styles}</style>
-          </section>
-        )
-      }}
-    </Mutation>
+      <span className="appreciate-count">
+        {numAbbr(article.appreciationsReceivedTotal)}
+      </span>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

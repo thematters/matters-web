@@ -1,17 +1,17 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { FC, useContext } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useContext } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
-import { AuthorPicker } from '~/components/Follow'
-import { Query } from '~/components/GQL'
+import AuthorPicker from '~/components/Follow/AuthorPicker'
+import { QueryError } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
 
 import { translate } from '~/common/utils'
 
+import { SignUpMeFollow } from './__generated__/SignUpMeFollow'
 import styles from './styles.css'
 
 /**
@@ -45,60 +45,64 @@ interface Props {
   submitCallback?: () => void
 }
 
-export const SignUpFollowForm: FC<Props> = ({
+export const SignUpFollowForm: React.FC<Props> = ({
   extraClass = [],
   purpose,
   submitCallback
 }) => {
   const { lang } = useContext(LanguageContext)
+  const { loading, data, error } = useQuery<SignUpMeFollow>(ME_FOLLOW)
 
   const containerStyle = classNames(
     purpose === 'modal' ? 'modal-container' : 'page-container'
   )
-
   const titleText = translate({
     zh_hant: '請至少選擇 5 位作者',
     zh_hans: '请至少选择 5 位作者',
     lang
   })
-
   const nextText = translate({
     zh_hant: '下一步',
     zh_hans: '下一步',
     lang
   })
 
-  return (
-    <Query query={ME_FOLLOW}>
-      {({ data, loading, error }: QueryResult & { data: any }) => {
-        if (loading) {
-          return <Spinner />
-        }
+  if (loading) {
+    return <Spinner />
+  }
 
-        const followeeCount = _get(data, 'viewer.followees.totalCount', 0)
-        return (
-          <div className={containerStyle}>
-            <AuthorPicker
-              viewer={data.viewer}
-              title={titleText}
-              titleIs="span"
-              readonly
-            />
-            <div className="buttons">
-              <Button
-                type="submit"
-                bgColor="green"
-                style={{ minWidth: '5rem' }}
-                disabled={followeeCount < 5}
-                onClick={submitCallback}
-              >
-                {nextText}
-              </Button>
-            </div>
-            <style jsx>{styles}</style>
-          </div>
-        )
-      }}
-    </Query>
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!data || !data.viewer) {
+    return null
+  }
+
+  const followeeCount = data.viewer.followees.totalCount || 0
+
+  return (
+    <div className={containerStyle}>
+      <AuthorPicker
+        viewer={data.viewer}
+        title={titleText}
+        titleIs="span"
+        readonly
+      />
+
+      <div className="buttons">
+        <Button
+          type="submit"
+          bgColor="green"
+          style={{ minWidth: '5rem' }}
+          disabled={followeeCount < 5}
+          onClick={submitCallback}
+        >
+          {nextText}
+        </Button>
+      </div>
+
+      <style jsx>{styles}</style>
+    </div>
   )
 }

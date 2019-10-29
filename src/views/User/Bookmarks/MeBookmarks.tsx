@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -37,53 +36,51 @@ const ME_BOOKMARK_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => {
+const MeBookmarks = () => {
+  const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
+    ME_BOOKMARK_FEED
+  )
+
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'viewer.subscriptions'
+  const { edges, pageInfo } =
+    (data && data.viewer && data.viewer.subscriptions) || {}
+
+  if (!edges || edges.length <= 0 || !pageInfo || edges.length <= 0) {
+    return <EmptyBookmark />
+  }
+
+  const loadMore = () =>
+    fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+
   return (
-    <Query query={ME_BOOKMARK_FEED}>
-      {({
-        data,
-        loading,
-        error,
-        fetchMore
-      }: QueryResult & { data: MeBookmarkFeed }) => {
-        if (loading) {
-          return <Placeholder.ArticleDigestList />
-        }
-
-        const connectionPath = 'viewer.subscriptions'
-        const { edges, pageInfo } = _get(data, connectionPath, {})
-        const loadMore = () =>
-          fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
-
-        if (edges <= 0) {
-          return <EmptyBookmark />
-        }
-
-        return (
-          <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
-            loadMore={loadMore}
-          >
-            <ul>
-              {edges.map(({ node, cursor }: { node: any; cursor: any }) => (
-                <li key={cursor}>
-                  <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
-                </li>
-              ))}
-            </ul>
-          </InfiniteScroll>
-        )
-      }}
-    </Query>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <ul>
+        {edges.map(({ node, cursor }) => (
+          <li key={cursor}>
+            <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
+          </li>
+        ))}
+      </ul>
+    </InfiniteScroll>
   )
 }
+
+export default MeBookmarks

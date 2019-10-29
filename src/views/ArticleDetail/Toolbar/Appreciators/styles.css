@@ -48,4 +48,11 @@
 .modal-appreciators-list {
   margin-top: var(--spacing-default);
   padding: 0 var(--spacing-tight);
+
+  & li:last-child {
+    & :global(> *) {
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+  }
 }

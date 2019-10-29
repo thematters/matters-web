@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import queryString from 'query-string'
 
 import { Icon } from '~/components/Icon'
@@ -6,40 +5,37 @@ import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_SHARE_TWITTER from '~/static/icons/share-twitter.svg?sprite'
+import ICON_SHARE_FACEBOOK from '~/static/icons/share-facebook.svg?sprite'
 
-const Twitter = () => (
+const Facebook = () => (
   <button
     type="button"
     onClick={() => {
       const url = window.location.href
-      const text = window.document.title
       const shareUrl =
-        'https://twitter.com/share?' +
+        'https://www.facebook.com/sharer/sharer.php?' +
         queryString.stringify({
-          url,
-          text,
-          via: 'matterslab'
+          u: url
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
-        type: SHARE_TYPE.TWITTER,
+        type: SHARE_TYPE.FACEBOOK,
         url
       })
-      return window.open(shareUrl, 'Share to Twitter')
+      return window.open(shareUrl, 'Share to Facebook')
     }}
   >
     <TextIcon
       icon={
         <Icon
-          id={ICON_SHARE_TWITTER.id}
-          viewBox={ICON_SHARE_TWITTER.viewBox}
+          id={ICON_SHARE_FACEBOOK.id}
+          viewBox={ICON_SHARE_FACEBOOK.viewBox}
           size="small"
         />
       }
       spacing="tight"
-      text="Twitter"
+      text="Facebook"
     />
   </button>
 )
 
-export default Twitter
+export default Facebook

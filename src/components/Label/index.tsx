@@ -29,11 +29,10 @@ export const Label: React.FC<LabelProps> = ({
   })
 
   return (
-    <>
-      <span className={labelClasses} style={style}>
-        {children}
-      </span>
+    <span className={labelClasses} style={style}>
+      {children}
+
       <style jsx>{styles}</style>
-    </>
+    </span>
   )
 }

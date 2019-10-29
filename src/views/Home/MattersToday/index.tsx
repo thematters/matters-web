@@ -1,16 +1,14 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
-import { Placeholder } from '~/components'
+import { Error, Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { HomeToday } from './__generated__/HomeToday'
-import styles from './styles.css'
 
 export const HOME_TODAY = gql`
   query HomeToday(
@@ -30,33 +28,38 @@ export const HOME_TODAY = gql`
   ${ArticleDigest.Feature.fragments.article}
 `
 
-export default () => (
-  <>
-    <Query query={HOME_TODAY}>
-      {({ data, loading, error }: QueryResult & { data: HomeToday }) => {
-        const article = _get(data, 'viewer.recommendation.today')
+const MattersToday = () => {
+  const { data, loading, error } = useQuery<HomeToday>(HOME_TODAY)
 
-        if (loading || !article) {
-          return <Placeholder.MattersToday />
+  if (loading) {
+    return <Placeholder.MattersToday />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const article = data && data.viewer && data.viewer.recommendation.today
+
+  if (!article) {
+    return <Error type="not_found" />
+  }
+
+  return (
+    <>
+      <ArticleDigest.Feature
+        article={article}
+        onClick={() =>
+          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+            type: FEED_TYPE.TODAY
+          })
         }
+        hasAuthor
+        hasDateTime
+        hasBookmark
+      />
+    </>
+  )
+}
 
-        return (
-          <>
-            <ArticleDigest.Feature
-              article={data.viewer.recommendation.today}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TODAY
-                })
-              }
-              hasAuthor
-              hasDateTime
-              hasBookmark
-            />
-          </>
-        )
-      }}
-    </Query>
-    <style jsx>{styles}</style>
-  </>
-)
+export default MattersToday

@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
-import { Label, Tag, Translate } from '~/components'
-import { Query } from '~/components/GQL'
+import { Label, Spinner, Tag, Translate } from '~/components'
+import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -31,49 +30,48 @@ const SIDEBAR_TAGS = gql`
   ${Tag.fragments.tag}
 `
 
-export default () => (
-  <>
-    <Query query={SIDEBAR_TAGS}>
-      {({ data, loading, error }: QueryResult & { data: SidebarTags }) => {
-        const edges = _get(data, 'viewer.recommendation.tags.edges', [])
+const Tags = () => {
+  const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
+  const edges = data && data.viewer && data.viewer.recommendation.tags.edges
 
-        if (!edges || edges.length <= 0) {
-          return null
-        }
+  if (error) {
+    return <QueryError error={error} />
+  }
 
-        return (
-          <>
-            <header>
-              <Label>
-                <Translate
-                  zh_hant={TEXT.zh_hant.tag}
-                  zh_hans={TEXT.zh_hans.tag}
-                />
-              </Label>
-              <ViewAllLink type="tags" />
-            </header>
+  if (!edges || edges.length <= 0) {
+    return null
+  }
 
-            <ul>
-              {edges.map(
-                ({ node, cursor }: { node: any; cursor: any }, i: number) => (
-                  <li
-                    key={cursor}
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: FEED_TYPE.TAGS,
-                        location: i
-                      })
-                    }
-                  >
-                    <Tag tag={node} size="small" type="count-fixed" />
-                  </li>
-                )
-              )}
-            </ul>
-          </>
-        )
-      }}
-    </Query>
-    <style jsx>{styles}</style>
-  </>
-)
+  return (
+    <>
+      <header>
+        <Label>
+          <Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />
+        </Label>
+        <ViewAllLink type="tags" />
+      </header>
+
+      {loading && <Spinner />}
+
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.TAGS,
+                location: i
+              })
+            }
+          >
+            <Tag tag={node} size="small" type="count-fixed" />
+          </li>
+        ))}
+      </ul>
+
+      <style jsx>{styles}</style>
+    </>
+  )
+}
+
+export default Tags

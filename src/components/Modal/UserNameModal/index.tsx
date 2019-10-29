@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
 import { Translate } from '~/components/Language'
@@ -20,13 +20,8 @@ import { TEXT } from '~/common/enums'
 
 type Step = 'ask' | 'confirm' | 'complete'
 
-const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
+const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const [step, setStep] = useState<Step>('ask')
-
-  const askCallback = (event: any) => {
-    event.stopPropagation()
-    setStep('confirm')
-  }
 
   const confirmCallback = () => setStep('complete')
 
@@ -47,7 +42,12 @@ const UserNameModal: FC<ModalInstanceProps> = ({ close }) => {
                 zh_hans={TEXT.zh_hans.cancel}
               />
             </Modal.FooterButton>
-            <Modal.FooterButton onClick={askCallback}>
+            <Modal.FooterButton
+              onClick={(event: any) => {
+                event.stopPropagation()
+                setStep('confirm')
+              }}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.confirm}
                 zh_hans={TEXT.zh_hans.confirm}

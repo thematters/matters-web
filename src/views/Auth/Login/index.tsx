@@ -28,18 +28,17 @@ const Login = () => {
   )
 
   return (
-    <>
-      <main className="l-row">
-        <Head
-          title={{ zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login }}
-        />
+    <main className="l-row">
+      <Head
+        title={{ zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login }}
+      />
 
-        <article className={containerClass}>
-          <LoginForm purpose="page" scrollLock={false} />
-        </article>
-      </main>
+      <article className={containerClass}>
+        <LoginForm purpose="page" scrollLock={false} />
+      </article>
+
       <style jsx>{styles}</style>
-    </>
+    </main>
   )
 }
 

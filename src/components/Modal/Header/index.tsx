@@ -39,6 +39,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
             />
           </button>
         )}
+
         <style jsx>{styles}</style>
       </header>
     )}

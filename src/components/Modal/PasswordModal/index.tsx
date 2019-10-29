@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   PasswordChangeConfirmForm,
@@ -23,7 +23,7 @@ import { translate } from '~/common/utils'
  *
  */
 
-const PasswordModal: FC<
+const PasswordModal: React.FC<
   ModalInstanceProps & { purpose: 'forget' | 'change' }
 > = ({ purpose }) => {
   const { lang } = useContext(LanguageContext)
@@ -96,7 +96,7 @@ const PasswordModal: FC<
     setStep('reset')
   }
 
-  const backPreviousStep = (event: any) => {
+  const backPreviousStep = () => {
     setStep('request')
   }
 

@@ -12,8 +12,9 @@ import Reports from './Reports'
 import Slogan from './Slogan'
 import styles from './styles.css'
 
-export default () => {
+const About = () => {
   const { updateHeaderState } = useContext(HeaderContext)
+
   useEffect(() => {
     updateHeaderState({ type: 'about', bgColor: 'transparent' })
     return () => updateHeaderState({ type: 'default' })
@@ -37,3 +38,5 @@ export default () => {
     </main>
   )
 }
+
+export default About

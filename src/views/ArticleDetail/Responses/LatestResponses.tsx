@@ -5,13 +5,13 @@ import _has from 'lodash/has'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { LoadMore, Spinner, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { CommentDigest } from '~/components/CommentDigest'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
-import { Query } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
 import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
@@ -27,6 +27,7 @@ import {
   unshiftConnections
 } from '~/common/utils'
 
+import { ArticleCommentAdded } from './__generated__/ArticleCommentAdded'
 import styles from './styles.css'
 
 const RESPONSES_COUNT = 15
@@ -60,11 +61,7 @@ const LatestResponses = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
-  const [storedCursor, setStoredCursor] = useState(null)
-
-  if (!mediaHash) {
-    return <EmptyResponse articleOnlyMode={articleOnlyMode} />
-  }
+  const [storedCursor, setStoredCursor] = useState<string | null>(null)
 
   /**
    * Fragment Patterns
@@ -82,223 +79,207 @@ const LatestResponses = () => {
     descendantId = fragment.split('-')[1]
   }
 
-  const queryVariables = {
-    mediaHash,
-    first: RESPONSES_COUNT,
-    articleOnly: articleOnlyMode
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    subscribeToMore,
+    refetch
+  } = useQuery<ArticleResponsesType>(ARTICLE_RESPONSES, {
+    variables: {
+      mediaHash,
+      first: RESPONSES_COUNT,
+      articleOnly: articleOnlyMode
+    },
+    notifyOnNetworkStatusChange: true
+  })
+  const connectionPath = 'article.responses'
+  const article = data && data.article
+  const { edges, pageInfo } = (article && article.responses) || {}
+  const articleId = article && article.id
+
+  const loadMore = (params?: { before: string }) => {
+    const loadBefore = (params && params.before) || null
+    const noLimit = loadBefore && pageInfo && pageInfo.endCursor
+
+    return fetchMore({
+      variables: {
+        after: pageInfo && pageInfo.endCursor,
+        before: loadBefore,
+        first: noLimit ? null : RESPONSES_COUNT,
+        includeBefore: !!loadBefore,
+        articleOnly: articleOnlyMode
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
+
+  const commentCallback = () => {
+    return fetchMore({
+      variables: {
+        before: storedCursor,
+        includeBefore: false,
+        articleOnly: articleOnlyMode
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
+        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
+        const oldResponseCount = _get(previousResult, 'article.responseCount')
+
+        // update if response count has changed
+        if (newEdges.length === 0) {
+          if (oldResponseCount !== newResponseCount) {
+            return {
+              ...previousResult,
+              article: {
+                ...previousResult.article,
+                responseCount: newResponseCount
+              }
+            }
+          }
+          return previousResult
+        }
+
+        // update if there are new items in responses.edges
+        const newResult = unshiftConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+        const newStartCursor = _get(
+          newResult,
+          `${connectionPath}.pageInfo.startCursor`,
+          null
+        )
+        if (newStartCursor) {
+          setStoredCursor(newStartCursor)
+        }
+        return newResult
+      }
+    })
+  }
+
+  const responses = filterResponses((edges || []).map(({ node }) => node))
+
+  // real time update with websocket
+  useEffect(() => {
+    if (article && edges) {
+      subscribeToMore<ArticleCommentAdded>({
+        document: SUBSCRIBE_RESPONSES,
+        variables: {
+          id: article.id,
+          first: edges.length,
+          articleOnly: articleOnlyMode
+        },
+        updateQuery: (prev, { subscriptionData }) =>
+          _merge(prev, {
+            article: subscriptionData.data.nodeEdited
+          })
+      })
+    }
+  }, [articleId])
+
+  // scroll to comment
+  useEffect(() => {
+    if (!fragment || !articleId) {
+      return
+    }
+
+    const jumpToFragment = () => {
+      jump(`#${fragment}`, {
+        offset: fragment === UrlFragments.COMMENTS ? -10 : -64
+      })
+    }
+    const element = dom.$(`#${fragment}`)
+
+    if (!element) {
+      loadMore({ before: parentId }).then(jumpToFragment)
+    } else {
+      jumpToFragment()
+    }
+  }, [articleId])
+
+  useEventListener(REFETCH_RESPONSES, refetch)
+
+  useEffect(() => {
+    if (pageInfo && pageInfo.startCursor) {
+      setStoredCursor(pageInfo.startCursor)
+    }
+  }, [pageInfo && pageInfo.startCursor])
+
+  if (loading && !data) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
   }
 
   return (
-    <Query
-      query={ARTICLE_RESPONSES}
-      variables={queryVariables}
-      notifyOnNetworkStatusChange
-    >
-      {({
-        data,
-        loading,
-        fetchMore,
-        subscribeToMore,
-        refetch
-      }: QueryResult & { data: ArticleResponsesType }) => {
-        if (!data || !data.article) {
-          return <Spinner />
-        }
+    <section className="latest-responses" id="latest-responses">
+      <header>
+        <h3>
+          <Translate
+            zh_hant={TEXT.zh_hant.latestResponses}
+            zh_hans={TEXT.zh_hans.latestResponses}
+          />
+        </h3>
 
-        const connectionPath = 'article.responses'
-        const { edges, pageInfo } = _get(data, connectionPath, {
-          edges: {},
-          pageInfo: {}
-        })
+        <div className="switch">
+          <Switch
+            onChange={() => setArticleOnlyMode(!articleOnlyMode)}
+            checked={articleOnlyMode}
+            extraClass="narrow"
+          />
+          <span>
+            <Translate
+              zh_hant={TEXT.zh_hant.collectedOnly}
+              zh_hans={TEXT.zh_hans.collectedOnly}
+            />
+          </span>
+        </div>
+      </header>
 
-        const loadMore = (params?: { before: string }) => {
-          const loadBefore = (params && params.before) || null
-          const noLimit = loadBefore && pageInfo.endCursor
-          return fetchMore({
-            variables: {
-              after: pageInfo.endCursor,
-              before: loadBefore,
-              first: noLimit ? null : RESPONSES_COUNT,
-              includeBefore: !!loadBefore,
-              articleOnly: articleOnlyMode
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-          })
-        }
+      {!responses ||
+        (responses.length <= 0 && (
+          <EmptyResponse articleOnlyMode={articleOnlyMode} />
+        ))}
 
-        const commentCallback = () => {
-          return fetchMore({
-            variables: {
-              before: storedCursor,
-              includeBefore: false,
-              articleOnly: articleOnlyMode
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const newEdges = _get(
-                fetchMoreResult,
-                `${connectionPath}.edges`,
-                []
-              )
-              const newResponseCount = _get(
-                fetchMoreResult,
-                'article.responseCount'
-              )
-              const oldResponseCount = _get(
-                previousResult,
-                'article.responseCount'
-              )
-              // update if response count has changed
-              if (newEdges.length === 0) {
-                if (oldResponseCount !== newResponseCount) {
-                  return {
-                    ...previousResult,
-                    article: {
-                      ...previousResult.article,
-                      responseCount: newResponseCount
-                    }
-                  }
-                }
-                return previousResult
-              }
-
-              // update if there are new items in responses.edges
-              const newResult = unshiftConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath
-              })
-              const newStartCursor = _get(
-                newResult,
-                `${connectionPath}.pageInfo.startCursor`,
-                null
-              )
-              if (newStartCursor) {
-                setStoredCursor(newStartCursor)
-              }
-              return newResult
-            }
-          })
-        }
-
-        const responses = filterResponses(
-          (edges || []).map(({ node }: { node: any }) => node)
-        )
-
-        // real time update with websocket
-        useEffect(() => {
-          if (data.article.live) {
-            subscribeToMore({
-              document: SUBSCRIBE_RESPONSES,
-              variables: {
-                id: data.article.id,
-                first: edges.length,
-                articleOnly: articleOnlyMode
-              },
-              updateQuery: (prev, { subscriptionData }) =>
-                _merge(prev, {
-                  article: subscriptionData.data.nodeEdited
-                })
-            })
-          }
-        })
-
-        // scroll to comment
-        useEffect(() => {
-          if (!fragment) {
-            return
-          }
-
-          const jumpToFragment = () => {
-            jump(`#${fragment}`, {
-              offset: fragment === UrlFragments.COMMENTS ? -10 : -64
-            })
-          }
-          const element = dom.$(`#${fragment}`)
-
-          if (!element) {
-            loadMore({ before: parentId }).then(jumpToFragment)
-          } else {
-            jumpToFragment()
-          }
-        }, [])
-
-        useEventListener(REFETCH_RESPONSES, refetch)
-
-        useEffect(() => {
-          if (pageInfo.startCursor) {
-            setStoredCursor(pageInfo.startCursor)
-          }
-        }, [pageInfo.startCursor])
-
-        return (
-          <section className="latest-responses" id="latest-responses">
-            <header>
-              <h3>
-                <Translate
-                  zh_hant={TEXT.zh_hant.latestResponses}
-                  zh_hans={TEXT.zh_hans.latestResponses}
-                />
-              </h3>
-
-              <div className="switch">
-                <Switch
-                  onChange={() => setArticleOnlyMode(!articleOnlyMode)}
-                  checked={articleOnlyMode}
-                  extraClass="narrow"
-                />
-                <span>
-                  <Translate
-                    zh_hant={TEXT.zh_hant.collectedOnly}
-                    zh_hans={TEXT.zh_hans.collectedOnly}
-                  />
-                </span>
-              </div>
-            </header>
-
-            {!responses ||
-              (responses.length <= 0 && (
-                <EmptyResponse articleOnlyMode={articleOnlyMode} />
-              ))}
-
-            <ul>
-              {responses.map(response => (
-                <li key={response.id}>
-                  {_has(response, 'title') ? (
-                    <ArticleDigest.Response
-                      article={response}
-                      hasAuthor
-                      hasBookmark
-                    />
-                  ) : (
-                    <CommentDigest.Feed
-                      comment={response}
-                      hasForm
-                      hasLink
-                      inArticle
-                      expandDescendants={
-                        response.id === parentId && !!descendantId
-                      }
-                      commentCallback={commentCallback}
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            {pageInfo.hasNextPage && (
-              <LoadMore onClick={loadMore} loading={loading} />
+      <ul>
+        {responses.map(response => (
+          <li key={response.id}>
+            {_has(response, 'title') ? (
+              <ArticleDigest.Response
+                article={response}
+                hasAuthor
+                hasBookmark
+              />
+            ) : (
+              <CommentDigest.Feed
+                comment={response}
+                hasForm
+                hasLink
+                inArticle
+                expandDescendants={response.id === parentId && !!descendantId}
+                commentCallback={commentCallback}
+              />
             )}
+          </li>
+        ))}
+      </ul>
 
-            <style jsx>{styles}</style>
-          </section>
-        )
-      }}
-    </Query>
+      {pageInfo && pageInfo.hasNextPage && (
+        <LoadMore onClick={loadMore} loading={loading} />
+      )}
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

@@ -1,12 +1,14 @@
 import classNames from 'classnames'
-import _get from 'lodash/get'
-import { useContext, useState } from 'react'
-import { Query, QueryResult } from 'react-apollo'
+import { useContext, useEffect, useState } from 'react'
+import { useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
+import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 import {
   ME_NOTIFICATIONS,
   UNREAD_NOTICE_COUNT
@@ -27,7 +29,7 @@ const NoticeButton = ({
   refetch,
   markAllNoticesAsRead
 }: {
-  data: any
+  data?: MeNotifications
   loading: boolean
   error: any
   hasUnreadNotices: any
@@ -73,48 +75,58 @@ const NoticeButton = ({
     >
       <button type="button" aria-label="通知" className={buttonClasses}>
         <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
+
         <style jsx>{styles}</style>
       </button>
     </Dropdown>
   )
 }
 
-export default () => (
-  <Query
-    query={UNREAD_NOTICE_COUNT}
-    pollInterval={POLL_INTERVAL}
-    errorPolicy="none"
-    fetchPolicy="network-only"
-    skip={!process.browser}
-  >
-    {({ data: unreadCountData }: QueryResult) => (
-      <Query
-        query={ME_NOTIFICATIONS}
-        variables={{ first: 5 }}
-        errorPolicy="none"
-        notifyOnNetworkStatusChange
-      >
-        {({ data, loading, error, refetch }: QueryResult) => (
-          <Mutation
-            mutation={MARK_ALL_NOTICES_AS_READ}
-            update={updateViewerUnreadNoticeCount}
-          >
-            {(markAllNoticesAsRead: any) => (
-              <NoticeButton
-                data={data}
-                loading={loading}
-                error={error}
-                refetch={refetch}
-                hasUnreadNotices={
-                  _get(unreadCountData, 'viewer.status.unreadNoticeCount', 0) >=
-                  1
-                }
-                markAllNoticesAsRead={markAllNoticesAsRead}
-              />
-            )}
-          </Mutation>
-        )}
-      </Query>
-    )}
-  </Query>
-)
+const NotificationButton = () => {
+  const { data: unreadCountData, startPolling } = useQuery<UnreadNoticeCount>(
+    UNREAD_NOTICE_COUNT,
+    {
+      errorPolicy: 'ignore',
+      fetchPolicy: 'network-only',
+      skip: !process.browser
+    }
+  )
+  const { data, loading, error, refetch } = useQuery<MeNotifications>(
+    ME_NOTIFICATIONS,
+    {
+      variables: { first: 5 },
+      errorPolicy: 'ignore',
+      notifyOnNetworkStatusChange: true
+    }
+  )
+  const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
+    MARK_ALL_NOTICES_AS_READ,
+    {
+      update: updateViewerUnreadNoticeCount
+    }
+  )
+
+  // FIXME: https://github.com/apollographql/apollo-client/issues/3775
+  useEffect(() => {
+    startPolling(POLL_INTERVAL)
+  }, [])
+
+  return (
+    <NoticeButton
+      data={data}
+      loading={loading}
+      error={error}
+      refetch={refetch}
+      hasUnreadNotices={
+        ((unreadCountData &&
+          unreadCountData.viewer &&
+          unreadCountData.viewer.status &&
+          unreadCountData.viewer.status.unreadNoticeCount) ||
+          0) >= 1
+      }
+      markAllNoticesAsRead={markAllNoticesAsRead}
+    />
+  )
+}
+
+export default NotificationButton

@@ -18,6 +18,7 @@ export const ShuffleButton = ({ onClick }: { onClick: () => void }) => (
     >
       <Translate zh_hant="換一批" zh_hans="换一批" />
     </TextIcon>
+
     <style jsx>{styles}</style>
   </button>
 )

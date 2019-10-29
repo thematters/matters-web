@@ -1,12 +1,12 @@
 import classNames from 'classnames'
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 
 import { Button } from '~/components/Button'
 import { Form } from '~/components/Form'
-import { getErrorCodes, Mutation } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -27,6 +27,7 @@ import {
   translate
 } from '~/common/utils'
 
+import { UserLogin } from './__generated__/UserLogin'
 import styles from './styles.css'
 
 /**
@@ -43,11 +44,16 @@ import styles from './styles.css'
  * ```
  *
  */
-interface Props {
+interface FormProps {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: () => void
   scrollLock?: boolean
+}
+
+interface FormValues {
+  email: string
+  password: ''
 }
 
 export const USER_LOGIN = gql`
@@ -73,6 +79,7 @@ const PasswordResetRedirectButton = () => (
       />
       ？
     </Button>
+
     <style jsx>{styles}</style>
   </>
 )
@@ -117,18 +124,15 @@ const SignUpRedirection = () => (
   </Modal.FooterButton>
 )
 
-const LoginForm: FC<Props> = ({
-  extraClass = [],
-  purpose,
-  submitCallback,
-  scrollLock
-}) => {
+const LoginForm: React.FC<FormProps> = formProps => {
+  const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
+  const { extraClass = [], purpose, submitCallback, scrollLock } = formProps
   const isInModal = purpose === 'modal'
   const isInPage = purpose === 'page'
 
-  const validateEmail = (value: string, language: string) => {
-    let result: any
+  const validateEmail = (value: string) => {
+    let result
 
     if (!value) {
       result = {
@@ -142,12 +146,11 @@ const LoginForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
-
-  const validatePassword = (value: string, language: string) => {
-    let result: any
+  const validatePassword = (value: string) => {
+    let result
 
     if (!value) {
       result = {
@@ -155,12 +158,13 @@ const LoginForm: FC<Props> = ({
         zh_hans: TEXT.zh_hans.required
       }
     }
+
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const BaseForm = ({
+  const InnerForm = ({
     values,
     errors,
     touched,
@@ -168,85 +172,76 @@ const LoginForm: FC<Props> = ({
     handleBlur,
     handleChange,
     handleSubmit
-  }: {
-    [key: string]: any
-  }) => {
+  }: FormikProps<FormValues>) => {
     const formClass = classNames('form', ...extraClass)
-
     const emailPlaceholder = translate({
       zh_hant: TEXT.zh_hant.enterEmail,
       zh_hans: TEXT.zh_hans.enterEmail,
       lang
     })
-
     const passwordPlaceholder = translate({
       zh_hant: TEXT.zh_hant.enterPassword,
       zh_hans: TEXT.zh_hans.enterPassword,
       lang
     })
 
-    const loginText = translate({
-      zh_hant: TEXT.zh_hant.login,
-      zh_hans: TEXT.zh_hans.login,
-      lang
-    })
-
     return (
-      <>
-        <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content scrollLock={scrollLock}>
-            <Form.Input
-              type="email"
-              field="email"
-              placeholder={emailPlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
+      <form className={formClass} onSubmit={handleSubmit}>
+        <Modal.Content scrollLock={scrollLock}>
+          <Form.Input
+            type="email"
+            field="email"
+            placeholder={emailPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
+            type="password"
+            field="password"
+            placeholder={passwordPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          {isInModal && <PasswordResetModalSwitch />}
+          {isInPage && <PasswordResetRedirectButton />}
+        </Modal.Content>
+
+        <div className="buttons">
+          {isInModal && <SignUpModalSwitch />}
+          {isInPage && <SignUpRedirection />}
+
+          <Modal.FooterButton
+            htmlType="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.login}
+              zh_hans={TEXT.zh_hans.login}
             />
-            <Form.Input
-              type="password"
-              field="password"
-              placeholder={passwordPlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
+          </Modal.FooterButton>
+        </div>
 
-            {isInModal && <PasswordResetModalSwitch />}
-            {isInPage && <PasswordResetRedirectButton />}
-          </Modal.Content>
-
-          <div className="buttons">
-            {isInModal && <SignUpModalSwitch />}
-            {isInPage && <SignUpRedirection />}
-
-            <Modal.FooterButton
-              htmlType="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-            >
-              {loginText}
-            </Modal.FooterButton>
-          </div>
-        </form>
         <style jsx>{styles}</style>
-      </>
+      </form>
     )
   }
 
-  const MainForm: any = withFormik({
+  const MainForm = withFormik<FormProps, FormValues>({
     mapPropsToValues: () => ({
       email: '',
       password: ''
     }),
 
     validate: ({ email, password }) => {
-      const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidPassword = validatePassword(password, lang)
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidPassword = validatePassword(password)
       const errors = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {})
@@ -254,88 +249,77 @@ const LoginForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: (values, { props, setErrors, setSubmitting }: any) => {
+    handleSubmit: async (values, { setErrors, setSubmitting }) => {
       const { email, password } = values
-      const { submitAction } = props
-      if (!submitAction) {
-        return
+
+      try {
+        await login({ variables: { input: { email, password } } })
+
+        if (submitCallback) {
+          submitCallback()
+        }
+
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: (
+                <Translate
+                  zh_hant={TEXT.zh_hant.loginSuccess}
+                  zh_hans={TEXT.zh_hans.loginSuccess}
+                />
+              )
+            }
+          })
+        )
+        analytics.identifyUser()
+        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
+
+        // await clearPersistCache()
+
+        redirectToTarget({
+          fallback: !!isInPage ? 'homepage' : 'current'
+        })
+      } catch (error) {
+        const errorCodes = getErrorCodes(error)
+
+        if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
+          setErrors({
+            email: translate({
+              zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
+              zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
+              lang
+            })
+          })
+        } else if (errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0) {
+          setErrors({
+            password: translate({
+              zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
+              zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
+              lang
+            })
+          })
+        } else {
+          setErrors({
+            email: translate({
+              zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
+              zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
+              lang
+            })
+          })
+        }
+
+        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
+          email,
+          error
+        })
       }
-      submitAction({ variables: { input: { email, password } } })
-        .then(async (result: any) => {
-          if (submitCallback) {
-            submitCallback()
-          }
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <Translate
-                    zh_hant={TEXT.zh_hant.loginSuccess}
-                    zh_hans={TEXT.zh_hans.loginSuccess}
-                  />
-                )
-              }
-            })
-          )
-          analytics.identifyUser()
-          analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
 
-          // await clearPersistCache()
-          redirectToTarget({
-            fallback: !!isInPage ? 'homepage' : 'current'
-          })
-        })
-        .catch((error: any) => {
-          const errorCodes = getErrorCodes(error)
-
-          if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
-            setErrors({
-              email: translate({
-                zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
-                zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
-                lang
-              })
-            })
-          } else if (
-            errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0
-          ) {
-            setErrors({
-              password: translate({
-                zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
-                zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
-                lang
-              })
-            })
-          } else {
-            setErrors({
-              email: translate({
-                zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
-                zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
-                lang
-              })
-            })
-          }
-
-          analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
-            email,
-            error
-          })
-        })
-        .finally(() => {
-          setSubmitting(false)
-        })
+      setSubmitting(false)
     }
-  })(BaseForm)
+  })(InnerForm)
 
-  return (
-    <>
-      <Mutation mutation={USER_LOGIN}>
-        {(login: any) => <MainForm submitAction={login} />}
-      </Mutation>
-      <style jsx>{styles}</style>
-    </>
-  )
+  return <MainForm {...formProps} />
 }
 
 export default LoginForm

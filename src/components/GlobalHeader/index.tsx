@@ -3,8 +3,9 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-import { Responsive, SearchBar } from '~/components'
+import { SearchBar } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
+import { useResponsive } from '~/components/Hook'
 
 import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 
@@ -26,6 +27,7 @@ import WriteButton from './WriteButton'
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
+  const isMediumUp = useResponsive({ type: 'medium-up' })()
   const { type: headerType } = headerState
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
@@ -56,17 +58,13 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           <section className={rightClass}>
             {!isAbout && viewer.isAuthed && user && (
               <>
-                <Responsive.MediumUp>
-                  {(match: boolean) =>
-                    match ? <SearchBar /> : <SearchButton />
-                  }
-                </Responsive.MediumUp>
+                {isMediumUp ? <SearchBar /> : <SearchButton />}
                 <NotificationButton />
                 <MeDigest user={user} />
-                {isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                {isDraft && (viewer.isActive || viewer.shouldSetupLikerID) && (
                   <PublishButton allowed={viewer.isActive} />
                 )}
-                {!isDraft && (viewer.isActive || viewer.isOnboarding) && (
+                {!isDraft && (viewer.isActive || viewer.shouldSetupLikerID) && (
                   <WriteButton allowed={viewer.isActive} />
                 )}
               </>

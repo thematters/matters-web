@@ -75,6 +75,7 @@ const DropdownActions = ({ article }: { article: DropdownActionsArticle }) => {
           />
         </button>
       </Dropdown>
+
       <style jsx>{styles}</style>
     </>
   )

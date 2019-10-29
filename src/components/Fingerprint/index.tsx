@@ -1,9 +1,7 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useState } from 'react'
-import { QueryResult } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
-import { Query } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Popover } from '~/components/Popper'
@@ -20,6 +18,7 @@ import ICON_HELP from '~/static/icons/help.svg?sprite'
 import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
+import { Gateways } from './__generated__/Gateways'
 import styles from './styles.css'
 
 const GATEWAYS = gql`
@@ -30,15 +29,12 @@ const GATEWAYS = gql`
   }
 `
 
-const FingerprintContent = ({
-  shown,
-  dataHash
-}: {
-  shown: boolean
-  dataHash: string
-}) => {
+const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
   const [gatewaysExpand, setGatewaysExpand] = useState(false)
   const [helpExpand, setHelpExpand] = useState(false)
+
+  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const gateways = (data && data.official.gatewayUrls) || []
 
   return (
     <div className="dropdown-container">
@@ -129,44 +125,32 @@ const FingerprintContent = ({
           </button>
         </section>
 
-        <Query query={GATEWAYS} skip={!shown}>
-          {({ data, loading, error }: QueryResult & { data: any }) => {
-            if (loading) {
-              return <Spinner />
-            }
+        {loading && <Spinner />}
 
-            const gateways: string[] = _get(data, 'official.gatewayUrls', [])
-
+        <ul className="gateway-container">
+          {gateways.slice(0, gatewaysExpand ? undefined : 2).map((url, i) => {
+            const gatewayUrl = `${url}${dataHash}`
             return (
-              <ul className="gateway-container">
-                {gateways
-                  .slice(0, gatewaysExpand ? undefined : 2)
-                  .map((url, i) => {
-                    const gatewayUrl = `${url}${dataHash}`
-                    return (
-                      <li key={i}>
-                        <Icon
-                          id={ICON_SHARE_LINK.id}
-                          viewBox={ICON_SHARE_LINK.viewBox}
-                          size="small"
-                        />
+              <li key={i}>
+                <Icon
+                  id={ICON_SHARE_LINK.id}
+                  viewBox={ICON_SHARE_LINK.viewBox}
+                  size="small"
+                />
 
-                        <span className="gateway-url">{gatewayUrl}</span>
+                <span className="gateway-url">{gatewayUrl}</span>
 
-                        <a href={gatewayUrl} target="_blank">
-                          <Icon
-                            id={ICON_ARROW_CIRCLE.id}
-                            viewBox={ICON_ARROW_CIRCLE.viewBox}
-                            size="small"
-                          />
-                        </a>
-                      </li>
-                    )
-                  })}
-              </ul>
+                <a href={gatewayUrl} target="_blank">
+                  <Icon
+                    id={ICON_ARROW_CIRCLE.id}
+                    viewBox={ICON_ARROW_CIRCLE.viewBox}
+                    size="small"
+                  />
+                </a>
+              </li>
             )
-          }}
-        </Query>
+          })}
+        </ul>
       </div>
 
       {/* help */}
@@ -197,6 +181,7 @@ const FingerprintContent = ({
           </p>
         )}
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )
@@ -211,16 +196,11 @@ const Fingerprint = ({
   color?: 'grey' | 'green'
   size?: 'xs' | 'sm'
 }) => {
-  const [shown, setShown] = useState(false)
-
   return (
     <Popover
       offset="100,0"
       trigger="click"
-      onShown={() => setShown(true)}
-      content={
-        <FingerprintContent shown={shown} dataHash={article.dataHash || ''} />
-      }
+      content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
       <button type="button">
         <TextIcon
@@ -237,6 +217,7 @@ const Fingerprint = ({
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>
+
         <style jsx>{styles}</style>
       </button>
     </Popover>

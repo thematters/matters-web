@@ -14,8 +14,11 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   return (
     <section className="container">
       {isPending && <PendingState draft={draft} />}
+
       {isError && <ErrorState draft={draft} />}
+
       {isPublished && <PublishedState />}
+
       <style jsx>{styles}</style>
     </section>
   )

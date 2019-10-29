@@ -30,6 +30,7 @@ const Item: React.FC<MenuItemProps> = ({
   return (
     <li className={itemClasses} style={style} role="menuitem">
       {children}
+
       <style jsx>{styles}</style>
     </li>
   )

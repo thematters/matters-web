@@ -1,13 +1,14 @@
 import classNames from 'classnames'
-import { withFormik } from 'formik'
+import { FormikProps, withFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
-import { getErrorCodes, Mutation } from '~/components/GQL'
+import { getErrorCodes, useMutation } from '~/components/GQL'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -23,6 +24,7 @@ import {
   translate
 } from '~/common/utils'
 
+import { UserRegister } from './__generated__/UserRegister'
 import styles from './styles.css'
 
 /**
@@ -40,12 +42,20 @@ import styles from './styles.css'
  * ```
  *
  */
-interface Props {
+interface FormProps {
   defaultEmail?: string
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: (params: any) => void
   scrollLock?: boolean
+}
+
+interface FormValues {
+  email: string
+  code: string
+  userName: string
+  password: string
+  tos: boolean
 }
 
 const USER_REGISTER = gql`
@@ -76,19 +86,22 @@ const LoginRedirection = () => (
   </Modal.FooterButton>
 )
 
-export const SignUpInitForm: FC<Props> = ({
-  defaultEmail = '',
-  extraClass = [],
-  purpose,
-  submitCallback,
-  scrollLock
-}) => {
+export const SignUpInitForm: React.FC<FormProps> = formProps => {
+  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
+  const {
+    defaultEmail = '',
+    extraClass = [],
+    purpose,
+    submitCallback,
+    scrollLock
+  } = formProps
   const isInModal = purpose === 'modal'
   const isInPage = purpose === 'page'
 
-  const validateEmail = (value: string, language: string) => {
-    let result: any
+  const validateEmail = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -101,12 +114,11 @@ export const SignUpInitForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
-
-  const validateCode = (value: string, language: string) => {
-    let result: any
+  const validateCode = (value: string) => {
+    let result
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -114,12 +126,12 @@ export const SignUpInitForm: FC<Props> = ({
       }
     }
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
+  const validateUserName = (value: string) => {
+    let result
 
-  const validateUserName = (value: string, language: string) => {
-    let result: any
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -131,13 +143,14 @@ export const SignUpInitForm: FC<Props> = ({
         zh_hans: TEXT.zh_hans.userNameHint
       }
     }
+
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
+  const validatePassword = (value: string) => {
+    let result
 
-  const validatePassword = (value: string, language: string) => {
-    let result: any
     if (!value) {
       result = {
         zh_hant: TEXT.zh_hant.required,
@@ -149,22 +162,24 @@ export const SignUpInitForm: FC<Props> = ({
         zh_hans: TEXT.zh_hans.passwordHint
       }
     }
+
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
+  const validateToS = (value: boolean) => {
+    let result
 
-  const validateToS = (value: boolean, language: string) => {
-    let result: any
     if (value === false) {
       result = { zh_hant: '請勾選', zh_hans: '请勾选' }
     }
+
     if (result) {
-      return translate({ ...result, lang: language })
+      return translate({ ...result, lang })
     }
   }
 
-  const BaseForm = ({
+  const InnerForm = ({
     values,
     errors,
     touched,
@@ -174,9 +189,7 @@ export const SignUpInitForm: FC<Props> = ({
     handleSubmit,
     setFieldValue,
     setFieldError
-  }: {
-    [key: string]: any
-  }) => {
+  }: FormikProps<FormValues>) => {
     const formClass = classNames('form', ...extraClass)
 
     const emailPlaceholder = translate({
@@ -216,112 +229,111 @@ export const SignUpInitForm: FC<Props> = ({
     })
 
     return (
-      <>
-        <form className={formClass} onSubmit={handleSubmit}>
-          <Modal.Content scrollLock={scrollLock}>
-            <Form.Input
-              type="email"
-              field="email"
-              placeholder={emailPlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Input
-              type="text"
-              field="code"
-              autoComplete="off"
-              placeholder={codePlaceholder}
-              floatElement={
-                <SendCodeButton
-                  email={values.email}
-                  lang={lang}
-                  type="register"
-                />
-              }
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-            />
-            <Form.Input
-              type="text"
-              field="userName"
-              autoComplete="off"
-              placeholder={userNamePlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              hint={translate({
-                zh_hant: TEXT.zh_hant.userNameHint,
-                zh_hans: TEXT.zh_hans.userNameHint,
-                lang
-              })}
-            />
-            <Form.Input
-              type="password"
-              field="password"
-              autoComplete="off"
-              placeholder={passwordPlaceholder}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              hint={translate({
-                zh_hant: TEXT.zh_hant.passwordHint,
-                zh_hans: TEXT.zh_hans.passwordHint,
-                lang
-              })}
-            />
-            <div className="tos">
-              <Form.CheckBox
-                field="tos"
-                values={values}
-                errors={errors}
-                handleChange={handleChange}
-                setFieldValue={setFieldValue}
-              >
-                <span>
-                  {agreeText}
-                  <Link {...PATHS.MISC_TOS}>
-                    <a className="u-link-green" target="_blank">
-                      {' '}
-                      {tosText}
-                    </a>
-                  </Link>
-                </span>
-              </Form.CheckBox>
-            </div>
-          </Modal.Content>
-
-          <div className="buttons">
-            {isInModal && <LoginModalSwitch />}
-            {isInPage && <LoginRedirection />}
-
-            <Modal.FooterButton
-              htmlType="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.nextStep}
-                zh_hans={TEXT.zh_hans.nextStep}
+      <form className={formClass} onSubmit={handleSubmit}>
+        <Modal.Content scrollLock={scrollLock}>
+          <Form.Input
+            type="email"
+            field="email"
+            placeholder={emailPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
+            type="text"
+            field="code"
+            autoComplete="off"
+            placeholder={codePlaceholder}
+            floatElement={
+              <SendCodeButton
+                email={values.email}
+                lang={lang}
+                type="register"
               />
-            </Modal.FooterButton>
+            }
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+          />
+          <Form.Input
+            type="text"
+            field="userName"
+            autoComplete="off"
+            placeholder={userNamePlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            hint={translate({
+              zh_hant: TEXT.zh_hant.userNameHint,
+              zh_hans: TEXT.zh_hans.userNameHint,
+              lang
+            })}
+          />
+          <Form.Input
+            type="password"
+            field="password"
+            autoComplete="off"
+            placeholder={passwordPlaceholder}
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            hint={translate({
+              zh_hant: TEXT.zh_hant.passwordHint,
+              zh_hans: TEXT.zh_hans.passwordHint,
+              lang
+            })}
+          />
+          <div className="tos">
+            <Form.CheckBox
+              field="tos"
+              values={values}
+              errors={errors}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            >
+              <span>
+                {agreeText}
+                <Link {...PATHS.MISC_TOS}>
+                  <a className="u-link-green" target="_blank">
+                    {' '}
+                    {tosText}
+                  </a>
+                </Link>
+              </span>
+            </Form.CheckBox>
           </div>
-        </form>
+        </Modal.Content>
+
+        <div className="buttons">
+          {isInModal && <LoginModalSwitch />}
+          {isInPage && <LoginRedirection />}
+
+          <Modal.FooterButton
+            htmlType="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.nextStep}
+              zh_hans={TEXT.zh_hans.nextStep}
+            />
+          </Modal.FooterButton>
+        </div>
+
         <style jsx>{styles}</style>
-      </>
+      </form>
     )
   }
 
-  const MainForm: any = withFormik({
+  const MainForm = withFormik<FormProps, FormValues>({
     mapPropsToValues: () => ({
       email: defaultEmail,
       code: '',
@@ -331,11 +343,11 @@ export const SignUpInitForm: FC<Props> = ({
     }),
 
     validate: ({ email, code, userName, password, tos }) => {
-      const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidToS = validateToS(tos, lang)
+      const isInvalidEmail = validateEmail(email)
+      const isInvalidCodeId = validateCode(code)
+      const isInvalidPassword = validatePassword(password)
+      const isInvalidUserName = validateUserName(userName)
+      const isInvalidToS = validateToS(tos)
       const errors: { [key: string]: any } = {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
@@ -346,24 +358,16 @@ export const SignUpInitForm: FC<Props> = ({
       return errors
     },
 
-    handleSubmit: async (
-      values,
-      { props, setFieldError, setSubmitting }: any
-    ) => {
+    handleSubmit: async (values, { setFieldError, setSubmitting }) => {
       const { email, code, userName, password } = values
-      const { preSubmitAction, submitAction } = props
-      if (!preSubmitAction || !submitAction) {
-        return
-      }
 
       try {
-        const {
-          data: { confirmVerificationCode: codeId }
-        } = await preSubmitAction({
+        const { data } = await confirm({
           variables: { input: { email, code, type: 'register' } }
         })
+        const codeId = data && data.confirmVerificationCode
 
-        await submitAction({
+        await register({
           variables: {
             input: { email, codeId, userName, displayName: userName, password }
           }
@@ -386,17 +390,7 @@ export const SignUpInitForm: FC<Props> = ({
       analytics.identifyUser()
       analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
     }
-  })(BaseForm)
+  })(InnerForm)
 
-  return (
-    <Mutation mutation={CONFIRM_CODE}>
-      {(confirm: any) => (
-        <Mutation mutation={USER_REGISTER}>
-          {(register: any) => (
-            <MainForm preSubmitAction={confirm} submitAction={register} />
-          )}
-        </Mutation>
-      )}
-    </Mutation>
-  )
+  return <MainForm {...formProps} />
 }

@@ -1,12 +1,16 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import { useContext } from 'react'
 
 import { Icon, TextIcon } from '~/components'
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
 } from '~/components/GQL/mutations/voteComment'
+import { ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { numAbbr } from '~/common/utils'
 import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
@@ -47,23 +51,48 @@ const DownvoteButton = ({
   comment: DownvoteComment
   disabled?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
+  const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
+    variables: { id: comment.id },
+    optimisticResponse: {
+      unvoteComment: {
+        id: comment.id,
+        upvotes: comment.upvotes,
+        downvotes: comment.downvotes - 1,
+        myVote: null,
+        __typename: 'Comment'
+      }
+    }
+  })
+  const [downvote] = useMutation<VoteComment>(VOTE_COMMENT, {
+    variables: { id: comment.id, vote: 'down' },
+    optimisticResponse: {
+      voteComment: {
+        id: comment.id,
+        upvotes:
+          comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
+        downvotes: comment.downvotes + 1,
+        myVote: 'down' as any,
+        __typename: 'Comment'
+      }
+    }
+  })
+
   if (comment.myVote === 'down') {
     return (
-      <Mutation
-        mutation={UNVOTE_COMMENT}
-        variables={{ id: comment.id }}
-        optimisticResponse={{
-          unvoteComment: {
-            id: comment.id,
-            upvotes: comment.upvotes,
-            downvotes: comment.downvotes - 1,
-            myVote: null,
-            __typename: 'Comment'
-          }
-        }}
-      >
-        {(unvote: any, { data }: any) => (
-          <button type="button" onClick={() => unvote()} disabled={disabled}>
+      <ModalSwitch modalId="likeCoinTermModal">
+        {(open: any) => (
+          <button
+            type="button"
+            onClick={() => {
+              if (viewer.shouldSetupLikerID) {
+                open()
+              } else {
+                unvote()
+              }
+            }}
+            disabled={disabled}
+          >
             <TextIcon
               icon={<IconDislikeActive />}
               color="grey"
@@ -74,27 +103,24 @@ const DownvoteButton = ({
             />
           </button>
         )}
-      </Mutation>
+      </ModalSwitch>
     )
   }
 
   return (
-    <Mutation
-      mutation={VOTE_COMMENT}
-      variables={{ id: comment.id, vote: 'down' }}
-      optimisticResponse={{
-        voteComment: {
-          id: comment.id,
-          upvotes:
-            comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
-          downvotes: comment.downvotes + 1,
-          myVote: 'down',
-          __typename: 'Comment'
-        }
-      }}
-    >
-      {(downvote: any, { data }: any) => (
-        <button type="button" onClick={() => downvote()} disabled={disabled}>
+    <ModalSwitch modalId="likeCoinTermModal">
+      {(open: any) => (
+        <button
+          type="button"
+          onClick={() => {
+            if (viewer.shouldSetupLikerID) {
+              open()
+            } else {
+              downvote()
+            }
+          }}
+          disabled={disabled}
+        >
           <TextIcon
             icon={<IconDislikeInactive />}
             color="grey"
@@ -105,7 +131,7 @@ const DownvoteButton = ({
           />
         </button>
       )}
-    </Mutation>
+    </ModalSwitch>
   )
 }
 

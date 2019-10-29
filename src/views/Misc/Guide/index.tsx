@@ -9,7 +9,7 @@ import { translate } from '~/common/utils'
 import MiscTab from '../MiscTab'
 import content from './content'
 
-export default () => {
+const Guide = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -41,8 +41,11 @@ export default () => {
             className="u-content"
           />
         </div>
+
         <style jsx>{styles}</style>
       </section>
     </main>
   )
 }
+
+export default Guide

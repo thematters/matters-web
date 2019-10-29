@@ -68,6 +68,7 @@ const Mini = ({
           </a>
         </Link>
       </section>
+
       <style jsx>{styles}</style>
     </>
   )

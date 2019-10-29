@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-import { Responsive } from '~/components'
+import { useResponsive } from '~/components/Hook'
 
 import { LoaderProps } from './utils'
 
@@ -23,28 +23,30 @@ const LG = () => (
   </ContentLoader>
 )
 
-const ArticleDetail = () => (
-  <>
-    <Responsive.XSmall>
-      <XS />
-    </Responsive.XSmall>
+const ArticleDetail = () => {
+  const isXSmall = useResponsive({ type: 'xsmall' })()
+  const isSmall = useResponsive({ type: 'small' })()
+  const isMedium = useResponsive({ type: 'medium' })()
+  const isLarge = useResponsive({ type: 'large' })()
+  const isXLarge = useResponsive({ type: 'xlarge' })()
 
-    <Responsive.Small>
-      <LG />
-    </Responsive.Small>
+  if (isXSmall) {
+    return <XS />
+  }
 
-    <Responsive.Medium>
-      <MD />
-    </Responsive.Medium>
+  if (isSmall) {
+    return <LG />
+  }
 
-    <Responsive.Large>
-      <LG />
-    </Responsive.Large>
+  if (isMedium) {
+    return <MD />
+  }
 
-    <Responsive.XLarge>
-      <LG />
-    </Responsive.XLarge>
-  </>
-)
+  if (isLarge || isXLarge) {
+    return <LG />
+  }
+
+  return null
+}
 
 export default ArticleDetail

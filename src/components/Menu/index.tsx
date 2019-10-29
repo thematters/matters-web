@@ -36,12 +36,11 @@ export class Menu extends React.PureComponent<MenuProps> {
     })
 
     return (
-      <>
-        <ul className={menuClasses} style={style} role="menu">
-          {children}
-        </ul>
+      <ul className={menuClasses} style={style} role="menu">
+        {children}
+
         <style jsx>{styles}</style>
-      </>
+      </ul>
     )
   }
 }

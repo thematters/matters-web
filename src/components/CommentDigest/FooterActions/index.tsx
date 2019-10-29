@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
-import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import { DateTime, Icon } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
+import { ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
@@ -38,7 +38,9 @@ const fragments = {
         slug
         mediaHash
         author {
+          id
           userName
+          isBlocking
         }
       }
       parentComment {
@@ -73,6 +75,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
+  const isBlockedByAuthor = author.isBlocking
   const fragment =
     parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
   const commentPath =
@@ -110,20 +113,31 @@ const FooterActions: React.FC<FooterActionsProps> & {
           {hasForm && (
             <>
               <IconDotDivider />
-              <button
-                type="button"
-                className={showForm ? 'active' : ''}
-                onClick={() => {
-                  setShowForm(!showForm)
-                }}
-                disabled={!isActive || viewer.isInactive}
-              >
-                <Icon
-                  id={ICON_COMMENT_SMALL.id}
-                  viewBox={ICON_COMMENT_SMALL.viewBox}
-                  size="small"
-                />
-              </button>
+
+              <ModalSwitch modalId="likeCoinTermModal">
+                {(open: any) => (
+                  <button
+                    type="button"
+                    className={showForm ? 'active' : ''}
+                    onClick={() => {
+                      if (viewer.shouldSetupLikerID) {
+                        open()
+                      } else {
+                        setShowForm(!showForm)
+                      }
+                    }}
+                    disabled={
+                      !isActive || viewer.isInactive || isBlockedByAuthor
+                    }
+                  >
+                    <Icon
+                      id={ICON_COMMENT_SMALL.id}
+                      viewBox={ICON_COMMENT_SMALL.viewBox}
+                      size="small"
+                    />
+                  </button>
+                )}
+              </ModalSwitch>
             </>
           )}
         </div>
@@ -152,9 +166,12 @@ const FooterActions: React.FC<FooterActionsProps> & {
           <CommentForm
             articleId={comment.article.id}
             replyToId={comment.id}
-            parentId={_get(comment, 'parentComment.id') || comment.id}
+            parentId={
+              (comment.parentComment && comment.parentComment.id) || comment.id
+            }
             refetch={refetch}
             submitCallback={commentFormCallback}
+            blocked={isBlockedByAuthor}
           />
         </section>
       )}

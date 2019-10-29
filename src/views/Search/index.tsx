@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 
-import { Footer, Head, Responsive, SearchBar } from '~/components'
+import { Footer, Head, SearchBar } from '~/components'
+import { useResponsive } from '~/components/Hook'
 
 import { getQuery } from '~/common/utils'
 
@@ -30,6 +31,7 @@ const EmptySeachPage = () => {
 }
 
 const Search = () => {
+  const isMedium = useResponsive({ type: 'medium' })()
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
@@ -46,11 +48,11 @@ const Search = () => {
     <main>
       <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
 
-      <Responsive.MediumDown>
+      {isMedium && (
         <header className="l-row mobile-search-bar">
           <SearchBar autoComplete={false} />
         </header>
-      </Responsive.MediumDown>
+      )}
 
       <SearchPageHeader q={q} isAggregate={isAggregate} />
 
@@ -67,6 +69,7 @@ const Search = () => {
           <Footer />
         </aside>
       </section>
+
       <style jsx>{styles}</style>
     </main>
   )

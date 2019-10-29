@@ -1,15 +1,21 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-react-hooks"
+  ],
   "rules": {
     "no-implicit-dependencies": [
       true,
       [
         "~",
-        "@testing-library/react",
         "tippy.js",
         "dotenv",
         "apollo-cache",
-        "svg-sprite-loader"
+        "svg-sprite-loader",
+        "@testing-library",
+        "@apollo"
       ]
     ],
     "no-bitwise": false,
@@ -27,8 +33,7 @@
         "import-sources-order": "case-insensitive",
         "named-imports-order": "case-insensitive",
         "grouped-imports": true,
-        "groups": [
-          {
+        "groups": [{
             "name": "local",
             "match": "^[.]",
             "order": 20
@@ -50,6 +55,7 @@
           }
         ]
       }
-    ]
+    ],
+    "react-hooks-nesting": "error"
   }
 }

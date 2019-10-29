@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { Icon, TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
 
 import { numAbbr, toPath } from '~/common/utils'
@@ -49,12 +50,14 @@ const FullDesc = ({
   user,
   nameSize = 'default',
   readonly,
-  appreciations
+  appreciations,
+  showUnblock
 }: {
   user: UserDigestFullDescUser
   nameSize?: 'default' | 'small'
   readonly?: boolean
   appreciations?: number
+  showUnblock?: boolean
 }) => {
   const showAppreciations = appreciations && appreciations > 0
   const nameSizeClasses = classNames({
@@ -87,11 +90,12 @@ const FullDesc = ({
                 </a>
               </Link>
               {showAppreciations && <Appreciation sum={appreciations} />}
-              <FollowButton.State user={user} />
+              {!showUnblock && <FollowButton.State user={user} />}
             </div>
 
             <div className="header-right">
-              <FollowButton user={user} />
+              {showUnblock && <UnblockButton user={user} />}
+              {!showUnblock && <FollowButton user={user} />}
             </div>
           </header>
 
@@ -102,6 +106,7 @@ const FullDesc = ({
           </Link>
         </section>
       </section>
+
       <style jsx>{styles}</style>
     </>
   )
@@ -119,10 +124,12 @@ FullDesc.fragments = {
       ...AvatarUser
       ...FollowStateUser
       ...FollowButtonUser
+      ...UnblockButtonUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.State.fragments.user}
     ${FollowButton.fragments.user}
+    ${UnblockButton.fragments.user}
   `
 }
 

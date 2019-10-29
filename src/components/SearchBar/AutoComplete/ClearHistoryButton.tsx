@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
 
-import { Mutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
 
+import { ClearHistory } from './__generated__/ClearHistory'
+import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
 import styles from './styles.css'
 
 const fragments = {
@@ -43,12 +45,11 @@ const VIEWER_RECENT_SEARCHES = gql`
   ${fragments.user}
 `
 
-const ClearHistoryButton = () => (
-  <Mutation
-    mutation={CLEAR_HISTORY}
-    update={(cache: any) => {
+const ClearHistoryButton = () => {
+  const [clear] = useMutation<ClearHistory>(CLEAR_HISTORY, {
+    update: cache => {
       try {
-        const data = cache.readQuery({
+        const data = cache.readQuery<ViewerRecentSearches>({
           query: VIEWER_RECENT_SEARCHES
         })
 
@@ -79,35 +80,34 @@ const ClearHistoryButton = () => (
       } catch (e) {
         console.error(e)
       }
-    }}
-  >
-    {(clear: any) => (
-      <button
-        type="button"
-        className="clear-history-btn"
-        onClick={async () => {
-          await clear()
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <Translate
-                    zh_hant="已清空搜尋紀錄"
-                    zh_hans="已清空搜索纪录"
-                  />
-                )
-              }
-            })
-          )
-        }}
-      >
-        <Translate zh_hant="清空" zh_hans="清空" />
-        <style jsx>{styles}</style>
-      </button>
-    )}
-  </Mutation>
-)
+    }
+  })
+
+  return (
+    <button
+      type="button"
+      className="clear-history-btn"
+      onClick={async () => {
+        await clear()
+
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: (
+                <Translate zh_hant="已清空搜尋紀錄" zh_hans="已清空搜索纪录" />
+              )
+            }
+          })
+        )
+      }}
+    >
+      <Translate zh_hant="清空" zh_hans="清空" />
+
+      <style jsx>{styles}</style>
+    </button>
+  )
+}
 
 ClearHistoryButton.fragments = fragments
 
