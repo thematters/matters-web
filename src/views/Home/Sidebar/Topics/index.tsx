@@ -36,7 +36,7 @@ export const SIDEBAR_TOPICS = gql`
   ${ArticleDigest.Sidebar.fragments.article}
 `
 
-export default () => {
+const Topics = () => {
   const { data, loading, error } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
   const edges = data && data.viewer && data.viewer.recommendation.topics.edges
 
@@ -86,3 +86,5 @@ export default () => {
     </>
   )
 }
+
+export default Topics

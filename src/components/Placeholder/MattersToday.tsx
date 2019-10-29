@@ -24,11 +24,11 @@ const LG = () => (
 )
 
 const MattersToday = () => {
-  const isXSmall = useResponsive({ type: 'xsmall' })
-  const isSmall = useResponsive({ type: 'small' })
-  const isMedium = useResponsive({ type: 'medium' })
-  const isLarge = useResponsive({ type: 'large' })
-  const isXLarge = useResponsive({ type: 'xlarge' })
+  const isXSmall = useResponsive({ type: 'xsmall' })()
+  const isSmall = useResponsive({ type: 'small' })()
+  const isMedium = useResponsive({ type: 'medium' })()
+  const isLarge = useResponsive({ type: 'large' })()
+  const isXLarge = useResponsive({ type: 'xlarge' })()
 
   if (isXSmall) {
     return <XS />

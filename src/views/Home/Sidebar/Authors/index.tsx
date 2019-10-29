@@ -38,7 +38,7 @@ const SIDEBAR_AUTHORS = gql`
   ${UserDigest.FullDesc.fragments.user}
 `
 
-export default () => {
+const Authors = () => {
   const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
     SIDEBAR_AUTHORS,
     {
@@ -99,3 +99,5 @@ export default () => {
     </>
   )
 }
+
+export default Authors

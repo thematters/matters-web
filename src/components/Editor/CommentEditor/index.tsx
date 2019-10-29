@@ -200,7 +200,7 @@ class CommentEditor extends React.Component<Props, State> {
   }
 }
 
-export default (props: Omit<Props, 'lang' | 'searchUsers'>) => {
+const CommentEditorWrap = (props: Omit<Props, 'lang' | 'searchUsers'>) => {
   const { lang } = useContext(LanguageContext)
   const [search, result] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const [debouncedSearch] = useDebouncedCallback(search, INPUT_DEBOUNCE)
@@ -216,3 +216,5 @@ export default (props: Omit<Props, 'lang' | 'searchUsers'>) => {
     />
   )
 }
+
+export default CommentEditorWrap

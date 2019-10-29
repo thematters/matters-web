@@ -15,36 +15,50 @@ interface Props {
     | 'xlarge'
 }
 
+const useSmallDown = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
+const useSmallUp = () => useMediaQuery({ minWidth: BREAKPOINTS.SM })
+const useMediaUp = () => useMediaQuery({ minWidth: BREAKPOINTS.MD })
+const useLargeUp = () => useMediaQuery({ minWidth: BREAKPOINTS.LG })
+const useXSmall = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
+const useSmall = () =>
+  useMediaQuery({
+    minWidth: BREAKPOINTS.SM,
+    maxWidth: BREAKPOINTS.MD - 1
+  })
+const useMedium = () =>
+  useMediaQuery({
+    minWidth: BREAKPOINTS.MD,
+    maxWidth: BREAKPOINTS.LG - 1
+  })
+const useLarge = () =>
+  useMediaQuery({
+    minWidth: BREAKPOINTS.LG,
+    maxWidth: BREAKPOINTS.XL - 1
+  })
+const useXLarge = () =>
+  useMediaQuery({
+    minWidth: BREAKPOINTS.XL
+  })
+
 export const useResponsive = ({ type }: Props) => {
   switch (type) {
     case 'small-down':
-      return useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
+      return useSmallDown
     case 'small-up':
-      return useMediaQuery({ minWidth: BREAKPOINTS.SM })
+      return useSmallUp
     case 'medium-up':
-      return useMediaQuery({ minWidth: BREAKPOINTS.MD })
+      return useMediaUp
     case 'large-up':
-      return useMediaQuery({ minWidth: BREAKPOINTS.LG })
+      return useLargeUp
     case 'xsmall':
-      return useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
+      return useXSmall
     case 'small':
-      return useMediaQuery({
-        minWidth: BREAKPOINTS.SM,
-        maxWidth: BREAKPOINTS.MD - 1
-      })
+      return useSmall
     case 'medium':
-      return useMediaQuery({
-        minWidth: BREAKPOINTS.MD,
-        maxWidth: BREAKPOINTS.LG - 1
-      })
+      return useMedium
     case 'large':
-      return useMediaQuery({
-        minWidth: BREAKPOINTS.LG,
-        maxWidth: BREAKPOINTS.XL - 1
-      })
+      return useLarge
     case 'xlarge':
-      return useMediaQuery({
-        minWidth: BREAKPOINTS.XL
-      })
+      return useXLarge
   }
 }

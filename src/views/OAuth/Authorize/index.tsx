@@ -44,13 +44,14 @@ const OAuthAuthorize = () => {
   const scope = getQuery({ router, key: 'scope' })
   const redirectUri = getQuery({ router, key: 'redirect_uri' })
 
+  const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
+    variables: { id: clientId }
+  })
+
   if (!clientId) {
     return <Throw404 />
   }
 
-  const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
-    variables: { id: clientId }
-  })
   if (loading) {
     return (
       <main className="l-row">

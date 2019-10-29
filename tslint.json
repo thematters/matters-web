@@ -1,5 +1,10 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-react-hooks"
+  ],
   "rules": {
     "no-implicit-dependencies": [
       true,
@@ -28,8 +33,7 @@
         "import-sources-order": "case-insensitive",
         "named-imports-order": "case-insensitive",
         "grouped-imports": true,
-        "groups": [
-          {
+        "groups": [{
             "name": "local",
             "match": "^[.]",
             "order": 20
@@ -51,6 +55,7 @@
           }
         ]
       }
-    ]
+    ],
+    "react-hooks-nesting": "error"
   }
 }

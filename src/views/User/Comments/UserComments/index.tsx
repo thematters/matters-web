@@ -111,16 +111,16 @@ const UserCommentsWrap = () => {
 }
 
 const UserComments = ({ user }: UserIdUser) => {
-  if (!user || !user.id) {
-    return null
-  }
-
   const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
     USER_COMMENT_FEED,
     {
-      variables: { id: user.id }
+      variables: { id: user && user.id }
     }
   )
+
+  if (!user || !user.id) {
+    return null
+  }
 
   if (loading) {
     return <Placeholder.ArticleDigestList />

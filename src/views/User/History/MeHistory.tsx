@@ -41,7 +41,7 @@ const ME_HISTORY_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => {
+const MeHistory = () => {
   const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
   )
@@ -104,3 +104,5 @@ export default () => {
     </InfiniteScroll>
   )
 }
+
+export default MeHistory

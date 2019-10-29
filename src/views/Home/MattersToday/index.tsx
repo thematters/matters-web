@@ -28,7 +28,7 @@ export const HOME_TODAY = gql`
   ${ArticleDigest.Feature.fragments.article}
 `
 
-export default () => {
+const MattersToday = () => {
   const { data, loading, error } = useQuery<HomeToday>(HOME_TODAY)
 
   if (loading) {
@@ -61,3 +61,5 @@ export default () => {
     </>
   )
 }
+
+export default MattersToday

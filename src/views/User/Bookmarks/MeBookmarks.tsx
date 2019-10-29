@@ -36,7 +36,7 @@ const ME_BOOKMARK_FEED = gql`
   ${ArticleDigest.Feed.fragments.article}
 `
 
-export default () => {
+const MeBookmarks = () => {
   const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
     ME_BOOKMARK_FEED
   )
@@ -82,3 +82,5 @@ export default () => {
     </InfiniteScroll>
   )
 }
+
+export default MeBookmarks

@@ -193,7 +193,7 @@ const CommentForm = ({
   )
 }
 
-export default (props: CommentFormProps) => {
+const CommentFormWrap = (props: CommentFormProps) => {
   const viewer = useContext(ViewerContext)
 
   if (viewer.shouldSetupLikerID) {
@@ -228,3 +228,5 @@ export default (props: CommentFormProps) => {
 
   return <CommentForm {...props} />
 }
+
+export default CommentFormWrap

@@ -9,7 +9,7 @@ import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small
 
 import styles from './styles.css'
 
-export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
+const ViewAllLink = ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
   const { lang } = useContext(LanguageContext)
   const pathMap = {
     topics: PATHS.TOPICS,
@@ -46,3 +46,5 @@ export default ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
     </Link>
   )
 }
+
+export default ViewAllLink
