@@ -33,7 +33,8 @@
         "import-sources-order": "case-insensitive",
         "named-imports-order": "case-insensitive",
         "grouped-imports": true,
-        "groups": [{
+        "groups": [
+          {
             "name": "local",
             "match": "^[.]",
             "order": 20

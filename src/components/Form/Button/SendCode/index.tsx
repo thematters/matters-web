@@ -90,7 +90,7 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
       className="u-link-green"
       spacing="none"
       disabled={countdown.timeLeft !== 0}
-      onClick={(event: any) => sendCode({ event })}
+      onClick={(event: any) => sendCode(event)}
     >
       {sent
         ? translate({

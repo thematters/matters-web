@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FormikProps, withFormik } from 'formik'
+import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
@@ -74,100 +74,33 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
     }
   }
 
-  const InnerForm = ({
+  const {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
-    handleSubmit
-  }: FormikProps<FormValues>) => {
-    const formClass = classNames('form', ...extraClass)
-    const userNameHint = translate({
-      zh_hant: TEXT.zh_hant.userNameHint,
-      zh_hans: TEXT.zh_hans.userNameHint,
-      lang
-    })
-    const userNamePlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterUserName,
-      zh_hans: TEXT.zh_hans.enterUserName,
-      lang
-    })
-    const comparedUserNamePlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterUserNameAgign,
-      zh_hans: TEXT.zh_hans.enterUserNameAgign,
-      lang
-    })
-
-    return (
-      <form className={formClass} onSubmit={handleSubmit}>
-        <Modal.Content>
-          <Form.Input
-            type="text"
-            field="userName"
-            placeholder={userNamePlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hint={userNameHint}
-          />
-          <Form.Input
-            type="text"
-            field="comparedUserName"
-            placeholder={comparedUserNamePlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-        </Modal.Content>
-        <div className="buttons">
-          <Modal.FooterButton
-            htmlType="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-            width="full"
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.done}
-              zh_hans={TEXT.zh_hans.done}
-            />
-          </Modal.FooterButton>
-        </div>
-
-        <style jsx>{styles}</style>
-      </form>
-    )
-  }
-
-  const MainForm = withFormik<FormProps, FormValues>({
-    mapPropsToValues: () => ({
+    handleSubmit,
+    isSubmitting
+  } = useFormik<FormValues>({
+    initialValues: {
       userName: '',
       comparedUserName: ''
-    }),
-
+    },
     validate: ({ userName, comparedUserName }) => {
       const isInvalidUserName = validateUserName(userName)
       const isInvalidComparedUserName = validateComparedUserName(
         userName,
         comparedUserName
       )
-      const errors = {
+      return {
         ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
         ...(isInvalidComparedUserName
           ? { comparedUserName: isInvalidComparedUserName }
           : {})
       }
-      return errors
     },
-
-    handleSubmit: async (values, { setFieldError, setSubmitting }) => {
-      const { userName } = values
-
+    onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {
       try {
         await update({ variables: { input: { userName } } })
 
@@ -186,7 +119,59 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
 
       setSubmitting(false)
     }
-  })(InnerForm)
+  })
 
-  return <MainForm {...formProps} />
+  const formClass = classNames('form', ...extraClass)
+
+  return (
+    <form className={formClass} onSubmit={handleSubmit}>
+      <Modal.Content>
+        <Form.Input
+          type="text"
+          field="userName"
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterUserName,
+            zh_hans: TEXT.zh_hans.enterUserName,
+            lang
+          })}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+          hint={translate({
+            zh_hant: TEXT.zh_hant.userNameHint,
+            zh_hans: TEXT.zh_hans.userNameHint,
+            lang
+          })}
+        />
+        <Form.Input
+          type="text"
+          field="comparedUserName"
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterUserNameAgign,
+            zh_hans: TEXT.zh_hans.enterUserNameAgign,
+            lang
+          })}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+      </Modal.Content>
+      <div className="buttons">
+        <Modal.FooterButton
+          htmlType="submit"
+          disabled={!_isEmpty(errors) || isSubmitting}
+          loading={isSubmitting}
+          width="full"
+        >
+          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+        </Modal.FooterButton>
+      </div>
+
+      <style jsx>{styles}</style>
+    </form>
+  )
 }

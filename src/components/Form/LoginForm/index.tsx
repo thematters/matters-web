@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FormikProps, withFormik } from 'formik'
+import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
@@ -64,6 +64,39 @@ export const USER_LOGIN = gql`
   }
 `
 
+const validateEmail = (value: string, lang: Language) => {
+  let result
+
+  if (!value) {
+    result = {
+      zh_hant: TEXT.zh_hant.required,
+      zh_hans: TEXT.zh_hans.required
+    }
+  } else if (!isValidEmail(value)) {
+    result = {
+      zh_hant: TEXT.zh_hant.invalidEmail,
+      zh_hans: TEXT.zh_hans.invalidEmail
+    }
+  }
+  if (result) {
+    return translate({ ...result, lang })
+  }
+}
+const validatePassword = (value: string, lang: Language) => {
+  let result
+
+  if (!value) {
+    result = {
+      zh_hant: TEXT.zh_hant.required,
+      zh_hans: TEXT.zh_hans.required
+    }
+  }
+
+  if (result) {
+    return translate({ ...result, lang })
+  }
+}
+
 const PasswordResetRedirectButton = () => (
   <>
     <Button
@@ -124,134 +157,36 @@ const SignUpRedirection = () => (
   </Modal.FooterButton>
 )
 
-const LoginForm: React.FC<FormProps> = formProps => {
+const LoginForm: React.FC<FormProps> = ({
+  extraClass = [],
+  purpose,
+  submitCallback,
+  scrollLock
+}) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
-  const { extraClass = [], purpose, submitCallback, scrollLock } = formProps
-  const isInModal = purpose === 'modal'
-  const isInPage = purpose === 'page'
-
-  const validateEmail = (value: string) => {
-    let result
-
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidEmail(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.invalidEmail,
-        zh_hans: TEXT.zh_hans.invalidEmail
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-  const validatePassword = (value: string) => {
-    let result
-
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    }
-
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-
-  const InnerForm = ({
+  const {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
-    handleSubmit
-  }: FormikProps<FormValues>) => {
-    const formClass = classNames('form', ...extraClass)
-    const emailPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterEmail,
-      zh_hans: TEXT.zh_hans.enterEmail,
-      lang
-    })
-    const passwordPlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterPassword,
-      zh_hans: TEXT.zh_hans.enterPassword,
-      lang
-    })
-
-    return (
-      <form className={formClass} onSubmit={handleSubmit}>
-        <Modal.Content scrollLock={scrollLock}>
-          <Form.Input
-            type="email"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="password"
-            field="password"
-            placeholder={passwordPlaceholder}
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          {isInModal && <PasswordResetModalSwitch />}
-          {isInPage && <PasswordResetRedirectButton />}
-        </Modal.Content>
-
-        <div className="buttons">
-          {isInModal && <SignUpModalSwitch />}
-          {isInPage && <SignUpRedirection />}
-
-          <Modal.FooterButton
-            htmlType="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          </Modal.FooterButton>
-        </div>
-
-        <style jsx>{styles}</style>
-      </form>
-    )
-  }
-
-  const MainForm = withFormik<FormProps, FormValues>({
-    mapPropsToValues: () => ({
+    handleSubmit,
+    isSubmitting
+  } = useFormik<FormValues>({
+    initialValues: {
       email: '',
       password: ''
-    }),
-
+    },
     validate: ({ email, password }) => {
-      const isInvalidEmail = validateEmail(email)
-      const isInvalidPassword = validatePassword(password)
-      const errors = {
+      const isInvalidEmail = validateEmail(email, lang)
+      const isInvalidPassword = validatePassword(password, lang)
+      return {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidPassword ? { password: isInvalidPassword } : {})
       }
-      return errors
     },
-
-    handleSubmit: async (values, { setErrors, setSubmitting }) => {
-      const { email, password } = values
-
+    onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {
       try {
         await login({ variables: { input: { email, password } } })
 
@@ -317,9 +252,66 @@ const LoginForm: React.FC<FormProps> = formProps => {
 
       setSubmitting(false)
     }
-  })(InnerForm)
+  })
 
-  return <MainForm {...formProps} />
+  const formClass = classNames('form', ...extraClass)
+  const isInModal = purpose === 'modal'
+  const isInPage = purpose === 'page'
+
+  return (
+    <form className={formClass} onSubmit={handleSubmit}>
+      <Modal.Content scrollLock={scrollLock}>
+        <Form.Input
+          type="email"
+          field="email"
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterEmail,
+            zh_hans: TEXT.zh_hans.enterEmail,
+            lang
+          })}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+        <Form.Input
+          type="password"
+          field="password"
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterPassword,
+            zh_hans: TEXT.zh_hans.enterPassword,
+            lang
+          })}
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+        {isInModal && <PasswordResetModalSwitch />}
+        {isInPage && <PasswordResetRedirectButton />}
+      </Modal.Content>
+
+      <div className="buttons">
+        {isInModal && <SignUpModalSwitch />}
+        {isInPage && <SignUpRedirection />}
+
+        <Modal.FooterButton
+          htmlType="submit"
+          disabled={!_isEmpty(errors) || isSubmitting}
+          loading={isSubmitting}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.login}
+            zh_hans={TEXT.zh_hans.login}
+          />
+        </Modal.FooterButton>
+      </div>
+
+      <style jsx>{styles}</style>
+    </form>
+  )
 }
 
 export default LoginForm

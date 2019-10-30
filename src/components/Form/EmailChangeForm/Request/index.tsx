@@ -1,4 +1,4 @@
-import { FormikProps, withFormik } from 'formik'
+import { useFormik } from 'formik'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
@@ -25,20 +25,89 @@ interface FormValues {
   code: string
 }
 
-const InnerForm = ({
-  values,
-  errors,
-  touched,
-  isSubmitting,
-  handleBlur,
-  handleChange,
-  handleSubmit
-}: FormikProps<FormValues>) => {
+const validateEmail = (value: string, lang: Language) => {
+  let result
+
+  if (!value) {
+    result = {
+      zh_hant: TEXT.zh_hant.required,
+      zh_hans: TEXT.zh_hans.required
+    }
+  } else if (!isValidEmail(value)) {
+    result = {
+      zh_hant: TEXT.zh_hant.invalidEmail,
+      zh_hans: TEXT.zh_hans.invalidEmail
+    }
+  }
+
+  if (result) {
+    return translate({ ...result, lang })
+  }
+}
+const validateCode = (value: string, lang: Language) => {
+  let result
+
+  if (!value) {
+    result = {
+      zh_hant: TEXT.zh_hant.required,
+      zh_hans: TEXT.zh_hans.required
+    }
+  }
+
+  if (result) {
+    return translate({ ...result, lang })
+  }
+}
+
+export const EmailChangeRequestForm: React.FC<FormProps> = ({
+  defaultEmail = '',
+  submitCallback
+}) => {
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
-  const codePlaceholder = translate({
-    zh_hant: TEXT.zh_hant.enterVerificationCode,
-    zh_hans: TEXT.zh_hans.enterVerificationCode,
-    lang
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    isSubmitting
+  } = useFormik<FormValues>({
+    initialValues: {
+      email: defaultEmail,
+      code: ''
+    },
+    validate: ({ email, code }) => {
+      const isInvalidEmail = validateEmail(email, lang)
+      const isInvalidCode = validateCode(code, lang)
+      return {
+        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
+        ...(isInvalidCode ? { code: isInvalidCode } : {})
+      }
+    },
+    onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
+      try {
+        const { data } = await confirmCode({
+          variables: { input: { email, type: 'email_reset', code } }
+        })
+        const confirmVerificationCode = data && data.confirmVerificationCode
+
+        if (submitCallback && confirmVerificationCode) {
+          submitCallback({ codeId: confirmVerificationCode })
+        }
+      } catch (error) {
+        const errorCode = getErrorCodes(error)[0]
+        const errorMessage = translate({
+          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          lang
+        })
+        setFieldError('code', errorMessage)
+      }
+
+      setSubmitting(false)
+    }
   })
 
   return (
@@ -58,7 +127,11 @@ const InnerForm = ({
           type="text"
           field="code"
           autoComplete="off"
-          placeholder={codePlaceholder}
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterVerificationCode,
+            zh_hans: TEXT.zh_hans.enterVerificationCode,
+            lang
+          })}
           floatElement={
             <SendCodeButton
               email={values.email}
@@ -91,88 +164,4 @@ const InnerForm = ({
       <style jsx>{styles}</style>
     </form>
   )
-}
-
-export const EmailChangeRequestForm: React.FC<FormProps> = formProps => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', submitCallback } = formProps
-
-  const validateEmail = (value: string) => {
-    let result
-
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidEmail(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.invalidEmail,
-        zh_hans: TEXT.zh_hans.invalidEmail
-      }
-    }
-
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-  const validateCode = (value: string) => {
-    let result
-
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    }
-
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-
-  const MainForm = withFormik<FormProps, FormValues>({
-    mapPropsToValues: () => ({
-      email: defaultEmail,
-      code: ''
-    }),
-
-    validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email)
-      const isInvalidCode = validateCode(code)
-      const errors = {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
-      }
-      return errors
-    },
-
-    handleSubmit: async (values, { setFieldError, setSubmitting }) => {
-      const { email, code } = values
-
-      try {
-        const { data } = await confirmCode({
-          variables: { input: { email, type: 'email_reset', code } }
-        })
-        const confirmVerificationCode = data && data.confirmVerificationCode
-
-        if (submitCallback && confirmVerificationCode) {
-          submitCallback({ codeId: confirmVerificationCode })
-        }
-      } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('code', errorMessage)
-      }
-
-      setSubmitting(false)
-    }
-  })(InnerForm)
-
-  return <MainForm {...formProps} />
 }
