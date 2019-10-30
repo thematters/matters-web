@@ -11,7 +11,12 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidDisplayName, translate } from '~/common/utils'
+import {
+  translate,
+  validateAvatar,
+  validateDescription,
+  validateDisplayName
+} from '~/common/utils'
 
 import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
 import styles from './styles.css'
@@ -55,50 +60,6 @@ const UPDATE_USER_INFO = gql`
     }
   }
 `
-
-const validateAvatar = (value: string | null, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-
-const validateDisplayName = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidDisplayName(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.displayNameHint,
-      zh_hans: TEXT.zh_hans.displayNameHint
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-
-const validateDescription = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
 
 const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
   const error = errors[field]

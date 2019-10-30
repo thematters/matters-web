@@ -16,7 +16,11 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
-import { isValidDisplayName, translate } from '~/common/utils'
+import {
+  translate,
+  validateDescription,
+  validateDisplayName
+} from '~/common/utils'
 import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
@@ -43,41 +47,6 @@ const UPDATE_USER_INFO = gql`
     }
   }
 `
-
-const validateDisplayName = (
-  value: string,
-  lang: Language,
-  isAdmin: boolean
-) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidDisplayName(value) && !isAdmin) {
-    result = {
-      zh_hant: TEXT.zh_hant.displayNameHint,
-      zh_hans: TEXT.zh_hans.displayNameHint
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-
-const validateDescription = (value: string, lang: Language) => {
-  let result
-  if (value && value.length > 200) {
-    result = {
-      zh_hant: `已超過 200 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 200 字，目前 ${value.length} 字`
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
 
 export const UserProfileEditor: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)

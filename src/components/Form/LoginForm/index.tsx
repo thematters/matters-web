@@ -22,9 +22,10 @@ import {
   analytics,
   // clearPersistCache,
   appendTarget,
-  isValidEmail,
   redirectToTarget,
-  translate
+  translate,
+  validateEmail,
+  validatePassword
 } from '~/common/utils'
 
 import { UserLogin } from './__generated__/UserLogin'
@@ -63,39 +64,6 @@ export const USER_LOGIN = gql`
     }
   }
 `
-
-const validateEmail = (value: string, lang: Language) => {
-  let result
-
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidEmail(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.invalidEmail,
-      zh_hans: TEXT.zh_hans.invalidEmail
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-const validatePassword = (value: string, lang: Language) => {
-  let result
-
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
 
 const PasswordResetRedirectButton = () => (
   <>

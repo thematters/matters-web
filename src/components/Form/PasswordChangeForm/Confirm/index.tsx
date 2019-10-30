@@ -10,7 +10,11 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidPassword, translate } from '~/common/utils'
+import {
+  translate,
+  validateComparedPassword,
+  validatePassword
+} from '~/common/utils'
 
 import { ResetPassword } from './__generated__/ResetPassword'
 import styles from './styles.css'
@@ -34,50 +38,6 @@ export const RESET_PASSWORD = gql`
     resetPassword(input: $input)
   }
 `
-
-const validatePassword = (value: string, lang: Language) => {
-  let result
-
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidPassword(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-
-const validateComparedPassword = (
-  value: string,
-  comparedValue: string,
-  lang: Language
-) => {
-  let result
-
-  if (!comparedValue) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (comparedValue !== value) {
-    result = {
-      zh_hant: TEXT.zh_hant.passwordNotMatch,
-      zh_hans: TEXT.zh_hans.passwordNotMatch
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
 
 export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   codeId,

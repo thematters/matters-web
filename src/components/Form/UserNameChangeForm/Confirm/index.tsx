@@ -10,7 +10,11 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidUserName, translate } from '~/common/utils'
+import {
+  translate,
+  validateComparedUserName,
+  validateUserName
+} from '~/common/utils'
 
 import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 import styles from './styles.css'
@@ -39,41 +43,6 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
   const { lang } = useContext(LanguageContext)
   const { extraClass = [], submitCallback } = formProps
 
-  const validateUserName = (value: string) => {
-    let result
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidUserName(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.userNameHint,
-        zh_hans: TEXT.zh_hans.userNameHint
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-  const validateComparedUserName = (value: string, comparedValue: string) => {
-    let result
-    if (!comparedValue) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (comparedValue !== value) {
-      result = {
-        zh_hant: TEXT.zh_hant.invalidUserName,
-        zh_hans: TEXT.zh_hans.invalidUserName
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-
   const {
     values,
     errors,
@@ -88,10 +57,11 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
       comparedUserName: ''
     },
     validate: ({ userName, comparedUserName }) => {
-      const isInvalidUserName = validateUserName(userName)
+      const isInvalidUserName = validateUserName(userName, lang)
       const isInvalidComparedUserName = validateComparedUserName(
         userName,
-        comparedUserName
+        comparedUserName,
+        lang
       )
       return {
         ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),

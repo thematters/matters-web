@@ -18,10 +18,12 @@ import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
   analytics,
   appendTarget,
-  isValidEmail,
-  isValidPassword,
-  isValidUserName,
-  translate
+  translate,
+  validateCode,
+  validateEmail,
+  validatePassword,
+  validateToS,
+  validateUserName
 } from '~/common/utils'
 
 import { UserRegister } from './__generated__/UserRegister'
@@ -65,85 +67,6 @@ const USER_REGISTER = gql`
     }
   }
 `
-
-const validateEmail = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidEmail(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.invalidEmail,
-      zh_hans: TEXT.zh_hans.invalidEmail
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-const validateCode = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-const validateUserName = (value: string, lang: Language) => {
-  let result
-
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidUserName(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.userNameHint,
-      zh_hans: TEXT.zh_hans.userNameHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-const validatePassword = (value: string, lang: Language) => {
-  let result
-
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidPassword(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-const validateToS = (value: boolean, lang: Language) => {
-  let result
-
-  if (value === false) {
-    result = { zh_hant: '請勾選', zh_hans: '请勾选' }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
 
 const LoginModalSwitch = () => (
   <ModalSwitch modalId="loginModal">

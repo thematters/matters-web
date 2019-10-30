@@ -12,7 +12,7 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidEmail, translate } from '~/common/utils'
+import { translate, validateCode, validateEmail } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -28,37 +28,6 @@ interface FormProps {
 interface FormValues {
   email: string
   code: string
-}
-
-const validateEmail = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  } else if (!isValidEmail(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.invalidEmail,
-      zh_hans: TEXT.zh_hans.invalidEmail
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
-}
-
-const validateCode = (value: string, lang: Language) => {
-  let result
-  if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-  if (result) {
-    return translate({ ...result, lang })
-  }
 }
 
 export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
