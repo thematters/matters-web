@@ -56,7 +56,7 @@ const SearchArticles = ({ q }: { q: string }) => {
       notifyOnNetworkStatusChange: true
     }
   )
-  const isNewLoading = networkStatus === NetworkStatus.loading
+  const isNewLoading = networkStatus === NetworkStatus.setVariables
 
   if (loading && (!(data && data.search) || isNewLoading)) {
     return <Placeholder.ArticleDigestList />
