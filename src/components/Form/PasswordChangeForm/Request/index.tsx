@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FormikProps, withFormik } from 'formik'
+import { useFormik } from 'formik'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
@@ -12,7 +12,7 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
-import { isValidEmail, translate } from '~/common/utils'
+import { translate, validateCode, validateEmail } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -41,140 +41,28 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
     scrollLock
   } = formProps
 
-  const validateEmail = (value: string) => {
-    let result
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    } else if (!isValidEmail(value)) {
-      result = {
-        zh_hant: TEXT.zh_hant.invalidEmail,
-        zh_hans: TEXT.zh_hans.invalidEmail
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-
-  const validateCode = (value: string) => {
-    let result
-    if (!value) {
-      result = {
-        zh_hant: TEXT.zh_hant.required,
-        zh_hans: TEXT.zh_hans.required
-      }
-    }
-    if (result) {
-      return translate({ ...result, lang })
-    }
-  }
-
-  const InnerForm = ({
+  const {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldError
-  }: FormikProps<FormValues>) => {
-    const formClass = classNames('form', ...extraClass)
-
-    const emailPlaceholder =
-      purpose === 'forget'
-        ? translate({
-            zh_hant: TEXT.zh_hant.enterRegisteredEmail,
-            zh_hans: TEXT.zh_hans.enterRegisteredEmail,
-            lang
-          })
-        : translate({
-            zh_hant: TEXT.zh_hant.enterEmail,
-            zh_hans: TEXT.zh_hans.enterEmail,
-            lang
-          })
-
-    const codePlaceholder = translate({
-      zh_hant: TEXT.zh_hant.enterVerificationCode,
-      zh_hans: TEXT.zh_hans.enterVerificationCode,
-      lang
-    })
-
-    return (
-      <form className={formClass} onSubmit={handleSubmit}>
-        <Modal.Content scrollLock={scrollLock}>
-          <Form.Input
-            type="email"
-            field="email"
-            placeholder={emailPlaceholder}
-            values={values}
-            errors={errors}
-            disabled={!!defaultEmail}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-          <Form.Input
-            type="text"
-            field="code"
-            autoComplete="off"
-            placeholder={codePlaceholder}
-            floatElement={
-              <SendCodeButton
-                email={values.email}
-                lang={lang}
-                type="password_reset"
-              />
-            }
-            values={values}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-          />
-        </Modal.Content>
-
-        <div className="buttons">
-          <Modal.FooterButton
-            width="full"
-            htmlType="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.nextStep}
-              zh_hans={TEXT.zh_hans.nextStep}
-            />
-          </Modal.FooterButton>
-        </div>
-
-        <style jsx>{styles}</style>
-      </form>
-    )
-  }
-
-  const MainForm = withFormik<FormProps, FormValues>({
-    mapPropsToValues: () => ({
+    isSubmitting
+  } = useFormik<FormValues>({
+    initialValues: {
       email: defaultEmail,
       code: ''
-    }),
-
+    },
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email)
-      const isInvalidCode = validateCode(code)
-      const errors = {
+      const isInvalidEmail = validateEmail(email, lang)
+      const isInvalidCode = validateCode(code, lang)
+      return {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
         ...(isInvalidCode ? { code: isInvalidCode } : {})
       }
-      return errors
     },
-
-    handleSubmit: async (values, { setFieldError, setSubmitting }) => {
-      const { email, code } = values
-
+    onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
           variables: { input: { email, type: 'password_reset', code } }
@@ -196,7 +84,75 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
 
       setSubmitting(false)
     }
-  })(InnerForm)
+  })
 
-  return <MainForm {...formProps} />
+  const formClass = classNames('form', ...extraClass)
+
+  return (
+    <form className={formClass} onSubmit={handleSubmit}>
+      <Modal.Content scrollLock={scrollLock}>
+        <Form.Input
+          type="email"
+          field="email"
+          placeholder={
+            purpose === 'forget'
+              ? translate({
+                  zh_hant: TEXT.zh_hant.enterRegisteredEmail,
+                  zh_hans: TEXT.zh_hans.enterRegisteredEmail,
+                  lang
+                })
+              : translate({
+                  zh_hant: TEXT.zh_hant.enterEmail,
+                  zh_hans: TEXT.zh_hans.enterEmail,
+                  lang
+                })
+          }
+          values={values}
+          errors={errors}
+          disabled={!!defaultEmail}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+        <Form.Input
+          type="text"
+          field="code"
+          autoComplete="off"
+          placeholder={translate({
+            zh_hant: TEXT.zh_hant.enterVerificationCode,
+            zh_hans: TEXT.zh_hans.enterVerificationCode,
+            lang
+          })}
+          floatElement={
+            <SendCodeButton
+              email={values.email}
+              lang={lang}
+              type="password_reset"
+            />
+          }
+          values={values}
+          errors={errors}
+          touched={touched}
+          handleBlur={handleBlur}
+          handleChange={handleChange}
+        />
+      </Modal.Content>
+
+      <div className="buttons">
+        <Modal.FooterButton
+          width="full"
+          htmlType="submit"
+          disabled={!_isEmpty(errors) || isSubmitting}
+          loading={isSubmitting}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.nextStep}
+            zh_hans={TEXT.zh_hans.nextStep}
+          />
+        </Modal.FooterButton>
+      </div>
+
+      <style jsx>{styles}</style>
+    </form>
+  )
 }

@@ -1,4 +1,4 @@
-import { FormikProps, FormikValues, withFormik } from 'formik'
+import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
@@ -44,11 +44,20 @@ const TermModal: React.FC<FormProps> = formProps => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
   const { lang } = useContext(LanguageContext)
+  const { handleSubmit, isSubmitting } = useFormik({
+    initialValues: {},
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await update({ variables: { input: { agreeOn: true } } })
+        formProps.close()
+      } catch (error) {
+        // TODO: Handle error
+      }
+      setSubmitting(false)
+    }
+  })
 
-  const InnerForm = ({
-    isSubmitting,
-    handleSubmit
-  }: FormikProps<FormikValues>) => (
+  return (
     <form onSubmit={handleSubmit}>
       <div className="term">
         <span className="hint">
@@ -104,21 +113,6 @@ const TermModal: React.FC<FormProps> = formProps => {
       <style jsx>{styles}</style>
     </form>
   )
-
-  const MainForm = withFormik<FormProps, {}>({
-    handleSubmit: async (values, { props, setSubmitting }) => {
-      try {
-        await update({ variables: { input: { agreeOn: true } } })
-        props.close()
-      } catch (error) {
-        // TODO: Handle error
-      }
-
-      setSubmitting(false)
-    }
-  })(InnerForm)
-
-  return <MainForm {...formProps} />
 }
 
 export default TermModal

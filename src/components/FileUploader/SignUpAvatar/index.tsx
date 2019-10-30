@@ -32,7 +32,11 @@ import styles from './styles.css'
 interface Props {
   field: string
   lang: Language
-  uploadCallback: (field: string, value: any) => void
+  uploadCallback: (
+    field: any,
+    value: any,
+    shouldValidate?: boolean | undefined
+  ) => void
 }
 
 export const SignUpAvatarUploader: React.FC<Props> = ({

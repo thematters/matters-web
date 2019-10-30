@@ -1,3 +1,4 @@
+import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
@@ -82,7 +83,7 @@ type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isMediumUp = useResponsive({ type: 'medium-up' })()
-  const { data, error, loading, fetchMore } = useQuery<
+  const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
     notifyOnNetworkStatusChange: true
@@ -91,8 +92,9 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const connectionPath = 'viewer.recommendation.feed'
   const result = data && data.viewer && data.viewer.recommendation.feed
   const { edges, pageInfo } = result || {}
+  const isNewLoading = networkStatus === NetworkStatus.loading
 
-  if (loading && !result) {
+  if (loading && (!result || isNewLoading)) {
     return <Placeholder.ArticleDigestList />
   }
 
