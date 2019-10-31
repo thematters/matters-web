@@ -6,7 +6,16 @@ import { useContext, useEffect, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
 
-import { DateTime, Footer, Head, Placeholder, Title } from '~/components'
+import {
+  DateTime,
+  Error,
+  Footer,
+  Head,
+  Placeholder,
+  Title,
+  Translate
+} from '~/components'
+import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareModal from '~/components/Button/Share/ShareModal'
 import { Fingerprint } from '~/components/Fingerprint'
@@ -176,11 +185,25 @@ const ArticleDetail = ({
   }
 
   if (!article) {
-    return null
+    return <Throw404 />
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
-    return <Throw404 />
+    return (
+      <Block>
+        <Error
+          statusCode={404}
+          message={
+            <Translate
+              zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+              zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+            />
+          }
+        >
+          <BackToHomeButton />
+        </Error>
+      </Block>
+    )
   }
 
   return (
