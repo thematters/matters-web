@@ -10,17 +10,31 @@
 
 .name {
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-  color: var(--color-black);
-  font-size: var(--font-size-sm);
   padding-left: var(--spacing-x-tight);
+
+  & .displayName {
+    color: var(--color-black);
+    font-size: var(--font-size-sm);
+  }
+
+  & .userName {
+    margin-top: var(--spacing-xx-tight);
+
+    color: var(--color-grey);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+  }
 }
 
-.description {
+/* .description {
   @mixin truncate;
   min-width: 0;
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
   padding-left: var(--spacing-x-tight);
-}
+} */
