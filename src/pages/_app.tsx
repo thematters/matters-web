@@ -30,19 +30,19 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <ErrorBoundary>
-        <LanguageProvider>
-          <AnalyticsProvider>
-            <ModalProvider>
-              <ApolloProvider client={apollo}>
+        <ApolloProvider client={apollo}>
+          <LanguageProvider>
+            <AnalyticsProvider>
+              <ModalProvider>
                 <GlobalStyles />
 
                 <Layout>
                   <Component {...pageProps} />
                 </Layout>
-              </ApolloProvider>
-            </ModalProvider>
-          </AnalyticsProvider>
-        </LanguageProvider>
+              </ModalProvider>
+            </AnalyticsProvider>
+          </LanguageProvider>
+        </ApolloProvider>
       </ErrorBoundary>
     )
   }
