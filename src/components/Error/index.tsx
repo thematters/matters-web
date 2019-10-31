@@ -16,6 +16,7 @@ interface ErrorProps {
   statusCode?: number | string | null
   error?: any
   type?: 'network' | 'server' | 'not_found'
+  message?: string | React.ReactNode
 }
 
 const ServerError = () => (
@@ -43,7 +44,8 @@ export const Error: React.FC<ErrorProps> = ({
   statusCode,
   children,
   error,
-  type = 'network'
+  type = 'network',
+  message
 }) => {
   const errorCodeClass = classNames({
     'error-code': true,
@@ -59,7 +61,9 @@ export const Error: React.FC<ErrorProps> = ({
       {statusCode && <h3 className={errorCodeClass}>{statusCode}</h3>}
 
       <p className="error-message">
-        {type === 'not_found' ? (
+        {message ? (
+          message
+        ) : type === 'not_found' ? (
           <NotFound />
         ) : type === 'network' ? (
           <NetworkError />
