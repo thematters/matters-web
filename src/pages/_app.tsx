@@ -29,8 +29,8 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <LanguageProvider>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <LanguageProvider>
           <AnalyticsProvider>
             <ModalProvider>
               <ApolloProvider client={apollo}>
@@ -42,8 +42,8 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
               </ApolloProvider>
             </ModalProvider>
           </AnalyticsProvider>
-        </ErrorBoundary>
-      </LanguageProvider>
+        </LanguageProvider>
+      </ErrorBoundary>
     )
   }
 }
