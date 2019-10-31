@@ -48,7 +48,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
   const [error, setError] = useState<'size' | undefined>(undefined)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -63,27 +63,26 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
       return
     }
 
-    upload({
-      variables: {
-        input: { file, type: 'profileCover', entityType: 'user' }
-      }
-    })
-      .then(({ data }) => {
-        const id = data && data.singleFileUpload.id
-
-        if (update) {
-          return update({ variables: { input: { profileCover: id } } })
+    try {
+      const { data } = await upload({
+        variables: {
+          input: { file, type: 'profileCover', entityType: 'user' }
         }
       })
-      .then(result => {
-        setError(undefined)
-      })
-      .catch(result => {
-        // TODO: error handler
-      })
+
+      const id = data && data.singleFileUpload.id
+
+      if (update) {
+        return update({ variables: { input: { profileCover: id } } })
+      }
+
+      setError(undefined)
+    } catch (e) {
+      // TODO
+    }
   }
 
-  const removeCover = (
+  const removeCover = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.stopPropagation()
@@ -92,13 +91,12 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
       return
     }
 
-    update({ variables: { input: { profileCover: null } } })
-      .then((result: any) => {
-        setError(undefined)
-      })
-      .catch((result: any) => {
-        // TODO: error handler
-      })
+    try {
+      await update({ variables: { input: { profileCover: null } } })
+      setError(undefined)
+    } catch (e) {
+      // TODO
+    }
   }
 
   return (
