@@ -7,6 +7,7 @@ import { Tooltip } from '~/components/Popper'
 
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
+  ADD_TOAST,
   UPLOAD_AUDIO_SIZE_LIMIT
 } from '~/common/enums'
 import ICON_EDITOR_AUDIO from '~/static/icons/editor-audio.svg?sprite'
@@ -66,7 +67,7 @@ const UploadAudioButton = ({
 
     if (file && file.size > UPLOAD_AUDIO_SIZE_LIMIT) {
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: (
@@ -88,7 +89,7 @@ const UploadAudioButton = ({
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             content: <Translate zh_hant="音頻上傳成功" zh_hans="音频上传成功" />
@@ -99,7 +100,7 @@ const UploadAudioButton = ({
       setExpanded(false)
       setUploading(false)
       window.dispatchEvent(
-        new CustomEvent('addToast', {
+        new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
             content: <Translate zh_hant="音頻上傳失敗" zh_hans="音频上传失败" />

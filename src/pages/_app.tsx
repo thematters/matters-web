@@ -9,6 +9,7 @@ import { ApolloProvider } from 'react-apollo'
 import {
   AnalyticsProvider,
   GlobalStyles,
+  LanguageProvider,
   Layout,
   ModalProvider
 } from '~/components'
@@ -29,17 +30,19 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
     return (
       <ErrorBoundary>
-        <AnalyticsProvider>
-          <ModalProvider>
-            <ApolloProvider client={apollo}>
-              <GlobalStyles />
+        <LanguageProvider>
+          <AnalyticsProvider>
+            <ModalProvider>
+              <ApolloProvider client={apollo}>
+                <GlobalStyles />
 
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ApolloProvider>
-          </ModalProvider>
-        </AnalyticsProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </ApolloProvider>
+            </ModalProvider>
+          </AnalyticsProvider>
+        </LanguageProvider>
       </ErrorBoundary>
     )
   }

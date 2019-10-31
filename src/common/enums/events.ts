@@ -1,4 +1,5 @@
 export const ANALYTICS = 'analytics'
 export const OPEN_MODAL = 'openModal'
 export const ADD_TOAST = 'addToast'
+export const REMOVE_TOAST = 'removeToast'
 export const REFETCH_RESPONSES = 'refetchResponses'
