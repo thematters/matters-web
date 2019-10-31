@@ -1,3 +1,4 @@
+import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useQuery } from 'react-apollo'
@@ -48,15 +49,16 @@ const SEARCH_ARTICLES = gql`
 
 const SearchArticles = ({ q }: { q: string }) => {
   const isMediumUp = useResponsive({ type: 'medium-up' })()
-  const { data, loading, fetchMore } = useQuery<SeachArticles>(
+  const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {
       variables: { key: q, first: 10 },
       notifyOnNetworkStatusChange: true
     }
   )
+  const isNewLoading = networkStatus === NetworkStatus.setVariables
 
-  if (loading && !(data && data.search)) {
+  if (loading && (!(data && data.search) || isNewLoading)) {
     return <Placeholder.ArticleDigestList />
   }
 

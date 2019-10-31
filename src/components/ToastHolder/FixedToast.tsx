@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 
 import { Toast, ToastProps } from '~/components/Toast'
 
+import { REMOVE_TOAST } from '~/common/enums'
+
 /**
  * Toast is a component for presenting pop-up message. Don't manually
  * mount component, use event instead.
@@ -38,7 +40,7 @@ const FixedToast: React.FC<FixedToast> = ({
   ...toastProps
 }) => {
   const removeToast = () => {
-    window.dispatchEvent(new CustomEvent('removeToast', { detail: { id } }))
+    window.dispatchEvent(new CustomEvent(REMOVE_TOAST, { detail: { id } }))
   }
 
   useEffect(() => {

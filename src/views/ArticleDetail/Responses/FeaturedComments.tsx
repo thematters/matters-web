@@ -56,7 +56,7 @@ const FeaturedComments = () => {
     (data && data.article && data.article.featuredComments) || {}
   const comments = filterComments((edges || []).map(({ node }) => node))
 
-  if (loading) {
+  if (loading && !data) {
     return <Spinner />
   }
 

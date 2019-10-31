@@ -48,39 +48,34 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0
   })
+  const disabled = !send || !email || countdown.timeLeft !== 0
 
-  const sendCode = (event: any) => {
+  const sendCode = async (event: any) => {
     event.stopPropagation()
 
-    if (!send || !email || countdown.timeLeft !== 0) {
-      return
+    try {
+      await send({
+        variables: { input: { email, type } }
+      })
+      setCountdown({ timeLeft: 1000 * 60 })
+      setSent(true)
+    } catch (error) {
+      const errorCode = getErrorCodes(error)[0]
+      const errorMessage = (
+        <Translate
+          zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
+          zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
+        />
+      )
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: errorMessage
+          }
+        })
+      )
     }
-
-    send({
-      variables: { input: { email, type } }
-    })
-      .then(result => {
-        setCountdown({ timeLeft: 1000 * 60 })
-        setSent(true)
-      })
-      .catch(error => {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = (
-          <Translate
-            zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
-            zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
-          />
-        )
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'red',
-              content: errorMessage
-            }
-          })
-        )
-      })
   }
 
   return (
@@ -89,8 +84,8 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
       bgColor="transparent"
       className="u-link-green"
       spacing="none"
-      disabled={countdown.timeLeft !== 0}
-      onClick={(event: any) => sendCode({ event })}
+      disabled={disabled}
+      onClick={(event: any) => sendCode(event)}
     >
       {sent
         ? translate({

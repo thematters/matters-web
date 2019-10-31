@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import Router from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
 
@@ -9,8 +9,6 @@ const {
 } = getConfig()
 
 export const AnalyticsProvider: React.FC = ({ children }) => {
-  const [sessionStarted, setSessionStarted] = useState(false)
-
   useEffect(() => {
     // injects analytics var into global scope
     // ref: https://github.com/segmentio/analytics-react#%EF%B8%8F-step-1-copy-the-snippet
@@ -82,11 +80,8 @@ export const AnalyticsProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     // initial
-    if (!sessionStarted) {
-      analytics.identifyUser()
-      analytics.trackPage({ path: window.location.pathname })
-      setSessionStarted(true)
-    }
+    analytics.identifyUser()
+    analytics.trackPage({ path: window.location.pathname })
     Router.events.on('routeChangeComplete', (path: string) => {
       analytics.trackPage({ path })
     })
