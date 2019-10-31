@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2019-10-31
+
+### Changed
+
+- Fix form bugs with `useFormik` #487
+- Update pageview & prevent likebutton insertion #486 #489
+- Show userName in search user popper #490
+
 ## [2.1.0] - 2019-10-29
 
 ### Added
