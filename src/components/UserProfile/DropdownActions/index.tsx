@@ -52,6 +52,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
           size="small"
           id={ICON_MORE_SMALL.id}
           viewBox={ICON_MORE_SMALL.viewBox}
+          color="black"
         />
       </button>
     </Dropdown>

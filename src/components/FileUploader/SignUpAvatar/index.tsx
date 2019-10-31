@@ -65,7 +65,7 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   })
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
 
     if (!upload || !event.target || !event.target.files) {
@@ -80,23 +80,22 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
       return
     }
 
-    upload({
-      variables: { input: { file, type: 'avatar', entityType: 'user' } }
-    })
-      .then(({ data }) => {
-        const id = data && data.singleFileUpload.id
-        const path = data && data.singleFileUpload.path
-
-        setAvatar(path)
-        setError(undefined)
-
-        if (uploadCallback) {
-          uploadCallback(field, id)
-        }
+    try {
+      const { data } = await upload({
+        variables: { input: { file, type: 'avatar', entityType: 'user' } }
       })
-      .catch((result: any) => {
-        // TODO: Handler error
-      })
+      const id = data && data.singleFileUpload.id
+      const path = data && data.singleFileUpload.path
+
+      setAvatar(path)
+      setError(undefined)
+
+      if (uploadCallback) {
+        uploadCallback(field, id)
+      }
+    } catch (e) {
+      // TODO
+    }
   }
 
   return (

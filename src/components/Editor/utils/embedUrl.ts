@@ -18,8 +18,8 @@ export const code = (value: string) => {
         detail: {
           color: 'green',
           translations: {
-            zh_hant: '請使用文章頁面中讚賞按鈕',
-            zh_hans: '请使用文章页面中赞赏按钮'
+            zh_hant: '作品頁面中的讚賞按鈕已嵌入 LikeButton，你無需手動添加',
+            zh_hans: '作品页面中的赞赏按钮已嵌入 LikeButton，你无需手动添加'
           }
         }
       })

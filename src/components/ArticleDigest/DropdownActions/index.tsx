@@ -72,6 +72,7 @@ const DropdownActions = ({ article }: { article: DropdownActionsArticle }) => {
             size="small"
             id={ICON_MORE_SMALL.id}
             viewBox={ICON_MORE_SMALL.viewBox}
+            color="grey"
           />
         </button>
       </Dropdown>

@@ -43,9 +43,12 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
       <Link {...path}>
         <a>
           <section className="container">
-            <Avatar size="xsmall" user={user} />
-            <span className="name">{user.displayName}</span>
-            <span className="description">{user.info.description}</span>
+            <Avatar size="small" user={user} />
+            <section className="name">
+              <span className="displayName">{user.displayName}</span>
+              <span className="userName">@{user.userName}</span>
+            </section>
+            {/* <span className="description">{user.info.description}</span> */}
           </section>
         </a>
       </Link>

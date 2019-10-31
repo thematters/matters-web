@@ -101,7 +101,7 @@ const CommentForm = ({
   const [content, setContent] = useState(draftContent || defaultContent || '')
   const viewer = useContext(ViewerContext)
   const isValid = !!trimLineBreaks(content)
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const input = {
       id: commentId,
@@ -117,36 +117,26 @@ const CommentForm = ({
     event.preventDefault()
     setSubmitting(true)
 
-    putComment({ variables: { input } })
-      .then(() => {
-        if (submitCallback) {
-          submitCallback()
-        }
-        setContent('')
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-            }
-          })
-        )
-      })
-      .catch((result: any) => {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'red',
-              content: (
-                <Translate zh_hant="評論送出失敗" zh_hans="评论失败送出" />
-              )
-            }
-          })
-        )
-      })
-      .finally(() => {
-        setSubmitting(false)
-      })
+    try {
+      await putComment({ variables: { input } })
+
+      if (submitCallback) {
+        submitCallback()
+      }
+      setContent('')
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+          }
+        })
+      )
+    } catch (e) {
+      // TODO
+    }
+
+    setSubmitting(false)
   }
 
   return (
