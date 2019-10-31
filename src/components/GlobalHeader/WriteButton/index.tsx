@@ -74,15 +74,18 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
     )
   }
 
-  const onClick = () => {
-    putDraft().then(({ data }) => {
+  const onClick = async () => {
+    try {
+      const { data } = await putDraft()
       const { slug, id } = (data && data.putDraft) || {}
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })
         Router.push(path.as)
       }
-    })
+    } catch (e) {
+      // TODO
+    }
   }
 
   if (CustomButton) {

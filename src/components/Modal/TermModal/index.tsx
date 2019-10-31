@@ -76,15 +76,14 @@ const TermModal: React.FC<FormProps> = formProps => {
       </div>
       <div className="buttons">
         <Modal.FooterButton
-          onClick={() => {
-            logout()
-              .then(() => {
-                formProps.close()
-                Router.replace('/')
-              })
-              .catch(() => {
-                // TODO: Handle error
-              })
+          onClick={async () => {
+            try {
+              await logout()
+              formProps.close()
+              Router.replace('/')
+            } catch (e) {
+              // TODO
+            }
           }}
           bgColor="white"
         >
