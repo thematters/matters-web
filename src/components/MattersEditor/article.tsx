@@ -15,12 +15,14 @@ import { LanguageContext } from '~/components/Language'
 import { ADD_TOAST } from '~/common/enums'
 import styles from '~/common/styles/utils/editor.css'
 
+import { EditorDraft } from './__generated__/EditorDraft'
+
 const {
   publicRuntimeConfig: { ASSET_DOMAIN }
 } = getConfig()
 
 interface Props {
-  draft: any
+  draft: EditorDraft
   search: (options?: QueryLazyOptions<Record<string, any>> | undefined) => void
   searchResult: QueryResult<SearchUsers, Record<string, any>>
   update: (draft: {
@@ -68,7 +70,7 @@ const ArticleEditor: FC<Props> = ({
     <>
       <div id="editor-article-container">
         <MattersArticleEditor
-          editorContent={content}
+          editorContent={content || ''}
           editorContentId={id}
           editorUpdate={update}
           editorUpload={upload}
@@ -81,7 +83,7 @@ const ArticleEditor: FC<Props> = ({
           readOnly={readyOnly}
           siteDomain="matters.news"
           theme="bubble"
-          titleDefaultValue={title}
+          titleDefaultValue={title || ''}
           uploadAssetDomain={ASSET_DOMAIN}
         />
       </div>
