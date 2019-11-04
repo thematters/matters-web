@@ -69,7 +69,12 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
           zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
           lang
         })
-        setFieldError('code', errorMessage)
+
+        if (errorCode.indexOf('CODE_') >= 0) {
+          setFieldError('code', errorMessage)
+        } else {
+          setFieldError('email', errorMessage)
+        }
       }
 
       setSubmitting(false)
