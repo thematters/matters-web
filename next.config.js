@@ -35,7 +35,9 @@ const nextConfig = {
     OAUTH_URL: process.env.OAUTH_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY,
     FB_APP_ID: process.env.FB_APP_ID,
-    SENTRY_DSN: process.env.SENTRY_DSN
+    SENTRY_DSN: process.env.SENTRY_DSN,
+    FIREBASE_CONFIG: JSON.parse(process.env.FIREBASE_CONFIG || '{}'),
+    FCM_VAPID_KEY: process.env.FCM_VAPID_KEY
   },
 
   /**
@@ -48,7 +50,10 @@ const nextConfig = {
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, { defaultLoaders, isServer }) {
+  webpack(config, {
+    defaultLoaders,
+    isServer
+  }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -82,7 +87,7 @@ const nextConfig = {
 
     return config
   },
-  exportPathMap: async function(defaultPathMap) {
+  exportPathMap: async function (defaultPathMap) {
     return {
       '/': {
         page: '/_error'
@@ -101,11 +106,9 @@ module.exports = withPlugins(
         optimizeImagesInDev: true,
         inlineImageLimit: 1024,
         svgo: {
-          plugins: [
-            {
-              removeViewBox: true
-            }
-          ]
+          plugins: [{
+            removeViewBox: true
+          }]
         },
         svgSpriteLoader: {}
       }
@@ -137,8 +140,7 @@ module.exports = withPlugins(
       withOffline,
       {
         workboxOpts: {
-          runtimeCaching: [
-            {
+          runtimeCaching: [{
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {
