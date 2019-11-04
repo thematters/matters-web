@@ -22,7 +22,7 @@ import { PutComment } from './__generated__/PutComment'
 import styles from './styles.css'
 
 const CommentEditor = dynamic(
-  () => import('~/components/Editor/CommentEditor'),
+  () => import('~/components/MattersEditor/comment'),
   {
     ssr: false,
     loading: () => <Spinner />
@@ -97,8 +97,10 @@ const CommentForm = ({
   const draftContent = (data && data.commentDraft.content) || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
-  const [expand, setExpand] = useState(defaultExpand || false)
-  const [content, setContent] = useState(draftContent || defaultContent || '')
+  const [expand, setExpand] = useState<boolean>(defaultExpand || false)
+  const [content, setContent] = useState<string>(
+    draftContent || defaultContent || ''
+  )
   const viewer = useContext(ViewerContext)
   const isValid = !!trimLineBreaks(content)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -156,7 +158,7 @@ const CommentForm = ({
       <CommentEditor
         content={content}
         expand={expand}
-        handleChange={value => setContent(value)}
+        update={(params: { content: string }) => setContent(params.content)}
       />
       <div className="buttons">
         {extraButton && extraButton}

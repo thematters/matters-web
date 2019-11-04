@@ -375,7 +375,7 @@
     width: 100%;
     padding: 0 var(--spacing-tight);
 
-    color: var(--color-gold);
+    color: var(--color-matters-gold);
     font-size: var(--font-size-sm);
     line-height: 2;
 
@@ -435,14 +435,14 @@
   /* Link
    ========================================================================== */
   & :global(a) {
-    color: var(--color-green);
+    color: var(--color-matters-green);
     border-bottom: 1px solid currentcolor;
     padding-bottom: 2px;
 
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-green-hover);
+      color: var(--color-matters-green-hover);
     }
   }
   /* fix frequent misuse of links */

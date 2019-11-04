@@ -1,6 +1,5 @@
 import { QueryLazyOptions } from '@apollo/react-hooks'
-import { MattersArticleEditor } from '@matters/matters-editor'
-import getConfig from 'next/config'
+import { MattersCommentEditor } from '@matters/matters-editor'
 import { FC, useContext, useState } from 'react'
 import { QueryResult, useLazyQuery } from 'react-apollo'
 
@@ -12,43 +11,29 @@ import {
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageContext } from '~/components/Language'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import styles from '~/common/styles/utils/editor.css'
-
-const {
-  publicRuntimeConfig: { ASSET_DOMAIN }
-} = getConfig()
+import themeStyles from '~/common/styles/vendors/quill.bubble.css'
+import { translate } from '~/common/utils'
 
 interface Props {
-  draft: any
+  content: string
+  expand?: boolean
   search: (options?: QueryLazyOptions<Record<string, any>> | undefined) => void
   searchResult: QueryResult<SearchUsers, Record<string, any>>
-  update: (draft: {
-    title?: string | null
-    content?: string | null
-    coverAssetId?: string | null
-  }) => Promise<void>
-  upload: DraftAssetUpload
+  update: (params: { content: string }) => void
 }
 
-const ArticleEditor: FC<Props> = ({
-  draft,
+const CommentEditor: FC<Props> = ({
+  content,
+  expand,
   search,
   searchResult,
-  update,
-  upload
+  update
 }) => {
   const { lang } = useContext(LanguageContext)
 
   const [mentionKeyword, setMentionKeyword] = useState<string>('')
-
-  const { id, content, publishState, title } = draft
-
-  const isPending = publishState === 'pending'
-
-  const isPublished = publishState === 'published'
-
-  const readyOnly = isPending || isPublished
 
   const { data, loading } = searchResult
 
@@ -64,38 +49,53 @@ const ArticleEditor: FC<Props> = ({
     setMentionKeyword(keyword)
   }
 
+  const placeholder = translate({
+    zh_hant: TEXT.zh_hant.commentPlaceholder,
+    zh_hans: TEXT.zh_hans.commentPlaceholder,
+    lang
+  })
+
+  if (!expand) {
+    return (
+      <>
+        <input
+          className="editor-collapsed-input"
+          placeholder={placeholder}
+          aria-label={placeholder}
+        />
+        <style jsx>{styles}</style>
+      </>
+    )
+  }
+
   return (
     <>
-      <div id="editor-article-container">
-        <MattersArticleEditor
+      <div id="editor-comment-editor">
+        <MattersCommentEditor
           editorContent={content}
-          editorContentId={id}
           editorUpdate={update}
-          editorUpload={upload}
           eventName={ADD_TOAST}
           language={lang.toUpperCase()}
           mentionLoading={loading}
           mentionKeywordChange={mentionKeywordChange}
           mentionUsers={mentionUsers}
           mentionListComponent={MentionUserList}
-          readOnly={readyOnly}
-          siteDomain="matters.news"
+          readOnly={false}
           theme="bubble"
-          titleDefaultValue={title}
-          uploadAssetDomain={ASSET_DOMAIN}
         />
       </div>
+      <style jsx>{themeStyles}</style>
       <style jsx>{styles}</style>
     </>
   )
 }
 
-const ArticleEditorWrap: FC<Omit<Props, 'search' | 'searchResult'>> = props => {
+const CommentEditorWrap: FC<Omit<Props, 'search' | 'searchResult'>> = props => {
   const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
 
   return (
-    <ArticleEditor search={search} searchResult={searchResult} {...props} />
+    <CommentEditor search={search} searchResult={searchResult} {...props} />
   )
 }
 
-export default ArticleEditorWrap
+export default CommentEditorWrap

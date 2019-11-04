@@ -21,7 +21,6 @@ import contentStyles from '~/common/styles/utils/content.article.css'
 import bubbleStyles from '~/common/styles/vendors/quill.bubble.css'
 import { initAudioPlayers, translate, trimLineBreaks } from '~/common/utils'
 
-import { EditorDraft } from './__generated__/EditorDraft'
 import * as config from './configs/default'
 import SideToolbar from './SideToolbar'
 import styles from './styles.css'
@@ -33,7 +32,7 @@ interface Props {
     content?: string | null
     coverAssetId?: string | null
   }) => Promise<void>
-  draft: EditorDraft
+  draft: any
   lang: Language
   upload: DraftAssetUpload
   searchUsers: {
