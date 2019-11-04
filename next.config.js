@@ -50,10 +50,7 @@ const nextConfig = {
   useFileSystemPublicRoutes: false,
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, {
-    defaultLoaders,
-    isServer
-  }) {
+  webpack(config, { defaultLoaders, isServer }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -87,7 +84,7 @@ const nextConfig = {
 
     return config
   },
-  exportPathMap: async function (defaultPathMap) {
+  exportPathMap: async function(defaultPathMap) {
     return {
       '/': {
         page: '/_error'
@@ -106,9 +103,11 @@ module.exports = withPlugins(
         optimizeImagesInDev: true,
         inlineImageLimit: 1024,
         svgo: {
-          plugins: [{
-            removeViewBox: true
-          }]
+          plugins: [
+            {
+              removeViewBox: true
+            }
+          ]
         },
         svgSpriteLoader: {}
       }
@@ -140,7 +139,8 @@ module.exports = withPlugins(
       withOffline,
       {
         workboxOpts: {
-          runtimeCaching: [{
+          runtimeCaching: [
+            {
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {
