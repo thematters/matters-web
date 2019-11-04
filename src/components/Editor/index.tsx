@@ -26,6 +26,11 @@ import SideToolbar from './SideToolbar'
 import styles from './styles.css'
 import createImageMatcher from './utils/createImageMatcher'
 
+/**
+ * This will be deprecated.
+ *
+ */
+
 interface Props {
   onSave: (input: {
     title?: string | null

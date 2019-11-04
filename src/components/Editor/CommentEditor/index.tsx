@@ -22,6 +22,11 @@ import { translate } from '~/common/utils'
 import * as config from '../configs/comment'
 import styles from './styles.css'
 
+/**
+ * This will e deprecated.
+ *
+ */
+
 interface Props {
   content?: string
   expand?: boolean

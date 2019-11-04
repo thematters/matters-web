@@ -97,10 +97,8 @@ const CommentForm = ({
   const draftContent = (data && data.commentDraft.content) || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
-  const [expand, setExpand] = useState<boolean>(defaultExpand || false)
-  const [content, setContent] = useState<string>(
-    draftContent || defaultContent || ''
-  )
+  const [expand, setExpand] = useState(defaultExpand || false)
+  const [content, setContent] = useState(draftContent || defaultContent || '')
   const viewer = useContext(ViewerContext)
   const isValid = !!trimLineBreaks(content)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
