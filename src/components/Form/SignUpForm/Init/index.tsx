@@ -159,7 +159,16 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
           zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
           lang
         })
-        setFieldError('code', errorMessage)
+
+        if (errorCode.indexOf('CODE_') >= 0) {
+          setFieldError('code', errorMessage)
+        } else if (errorCode.indexOf('USER_EMAIL_') >= 0) {
+          setFieldError('email', errorMessage)
+        } else if (errorCode.indexOf('USER_PASSWORD_') >= 0) {
+          setFieldError('password', errorMessage)
+        } else {
+          setFieldError('userName', errorMessage)
+        }
       }
 
       setSubmitting(false)
