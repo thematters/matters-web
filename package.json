@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@matters/apollo-upload-client": "^11.1.0",
+    "@matters/matters-editor": "^0.1.4",
     "@sentry/browser": "^5.7.1",
     "@tippy.js/react": "^3.1.0",
     "@types/jump.js": "^1.0.2",
