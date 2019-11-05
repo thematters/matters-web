@@ -1,8 +1,0 @@
-.search-user-item {
-  display: inline-block;
-  width: 100%;
-
-  & :global(a) {
-    pointer-events: none;
-  }
-}

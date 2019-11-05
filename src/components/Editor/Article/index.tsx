@@ -4,7 +4,6 @@ import getConfig from 'next/config'
 import { FC, useContext, useState } from 'react'
 import { QueryResult, useLazyQuery } from 'react-apollo'
 
-import MentionUserList from '~/components/Dropdown/MentionUserList'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User
@@ -13,9 +12,12 @@ import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
-import styles from '~/common/styles/utils/editor.css'
+import editorStyles from '~/common/styles/utils/content.article.css'
+import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 
-import { EditorDraft } from './__generated__/EditorDraft'
+import { EditorDraft } from '../__generated__/EditorDraft'
+import MentionUserList from '../MentionUserList'
+import styles from './styles.css'
 
 const {
   publicRuntimeConfig: { ASSET_DOMAIN }
@@ -68,7 +70,7 @@ const ArticleEditor: FC<Props> = ({
 
   return (
     <>
-      <div id="editor-article-container">
+      <div className="container">
         <MattersArticleEditor
           editorContent={content || ''}
           editorContentId={id}
@@ -87,6 +89,8 @@ const ArticleEditor: FC<Props> = ({
           uploadAssetDomain={ASSET_DOMAIN}
         />
       </div>
+      <style jsx>{themeStyles}</style>
+      <style jsx>{editorStyles}</style>
       <style jsx>{styles}</style>
     </>
   )

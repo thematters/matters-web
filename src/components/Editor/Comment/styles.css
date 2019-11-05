@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+
+  & :global(.ql-editor) {
+    min-height: 4rem;
+  }
+}
+
+.collapsed-input {
+  @mixin text-input;
+  height: 2.5rem;
+}

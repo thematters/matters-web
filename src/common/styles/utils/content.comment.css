@@ -1,9 +1,7 @@
-/* This will be deprecated */
-
 /* @styled-jsx=global */
 
 .u-content-comment,
-#comment-editor .ql-editor {
+#editor-comment-editor .ql-editor {
   white-space: pre-wrap;
   line-height: 1.6;
 
@@ -136,4 +134,23 @@
     border-top: 1px solid var(--color-line-grey-dark);
     border-bottom: 1px solid var(--color-line-grey-dark);
   }
+}
+
+#editor-comment-container {
+  @mixin text-input;
+  position: relative;
+}
+
+.mention-container {
+  position: absolute;
+
+  width: var(--sizing-menu-md);
+  visibility: hidden;
+
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-dark);
+  border: 1px solid var(--color-line-grey-light);
+  z-index: 1;
 }

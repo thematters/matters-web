@@ -1,0 +1,7 @@
+.container {
+  position: relative;
+
+  & :global(.ql-editor) {
+    min-height: 50vh;
+  }
+}
