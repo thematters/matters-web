@@ -31,7 +31,7 @@ Sentry.init({ dsn: SENTRY_DSN || '' })
 
 // Firebase
 // FIXME: https://github.com/zeit/next.js/issues/1999
-if (!firebase.apps.length) {
+if (!firebase.apps.length && process.browser) {
   firebase.initializeApp(FIREBASE_CONFIG)
   const messaging = firebase.messaging()
   messaging.usePublicVapidKey(FCM_VAPID_KEY)
