@@ -5,11 +5,6 @@ import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__gen
 
 import styles from './styles.css'
 
-/**
- * This will be deprecated.
- *
- */
-
 const DropdownUserList = ({
   users,
   onClick,
