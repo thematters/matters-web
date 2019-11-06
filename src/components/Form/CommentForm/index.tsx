@@ -21,13 +21,10 @@ import { CommentDraft } from './__generated__/CommentDraft'
 import { PutComment } from './__generated__/PutComment'
 import styles from './styles.css'
 
-const CommentEditor = dynamic(
-  () => import('~/components/Editor/CommentEditor'),
-  {
-    ssr: false,
-    loading: () => <Spinner />
-  }
-)
+const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
+  ssr: false,
+  loading: () => <Spinner />
+})
 
 export const PUT_COMMENT = gql`
   mutation PutComment($input: PutCommentInput!) {
@@ -156,7 +153,7 @@ const CommentForm = ({
       <CommentEditor
         content={content}
         expand={expand}
-        handleChange={value => setContent(value)}
+        update={(params: { content: string }) => setContent(params.content)}
       />
       <div className="buttons">
         {extraButton && extraButton}

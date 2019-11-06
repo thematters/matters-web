@@ -1,8 +1,30 @@
 /* @styled-jsx=global */
 
+:root {
+  --side-toolbar-button-size: 2rem;
+}
+
+.editor-title {
+  & input {
+    @mixin border-bottom-grey;
+    margin-bottom: var(--spacing-default);
+    padding-bottom: var(--spacing-tight);
+
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xl);
+    line-height: 1.33333333;
+
+    &::placeholder {
+      color: var(--color-grey);
+      opacity: 1; /* Firefox */
+    }
+  }
+}
+
 .u-content,
-#article-editor .ql-editor {
+#editor-article-container .ql-editor {
   line-height: var(--line-height-article-base);
+  outline: none;
 
   & :global(> * + *) {
     margin: var(--spacing-default) 0;
@@ -275,7 +297,11 @@
   }
 }
 
-#article-editor .ql-editor {
+#editor-article-container {
+  position: relative;
+}
+
+#editor-article-container .ql-editor {
   & input.embed-clipboard {
     line-height: 1.875;
   }
@@ -291,4 +317,100 @@
       overflow: hidden;
     }
   }
+}
+
+#editor-article-container .spinner {
+  stroke: var(--color-grey-light);
+}
+
+.toolbar-container {
+  @mixin all-transition;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+
+  transform: translateY(calc(var(--spacing-x-tight) * -1));
+  opacity: 0;
+
+  &.toolbar-visible {
+    opacity: 1;
+  }
+  &.toolbar-expanded {
+    & .toolbar-items {
+      display: inline-flex;
+      opacity: 1;
+    }
+  }
+
+  @media (--sm-up) {
+    right: auto;
+    left: calc((var(--side-toolbar-button-size) + var(--spacing-tight)) * -1);
+  }
+}
+
+.toolbar-items {
+  @mixin all-transition;
+
+  display: none;
+  margin-left: var(--spacing-tight);
+
+  opacity: 0;
+
+  & > :global(* + *) {
+    cursor: pointer;
+    margin-left: var(--spacing-tight);
+  }
+
+  & :global(button) {
+    background: transparent;
+  }
+
+  & :global(svg) {
+    background: var(--color-white);
+    border-radius: 50%;
+    cursor: pointer;
+    stroke: var(--color-black);
+  }
+}
+
+.toolbar-expanded {
+  & .toolbar-toggle-button {
+    transform: rotate(45deg);
+  }
+}
+
+.toolbar-toggle-button {
+  @mixin all-transition;
+  background: transparent;
+  stroke: var(--color-black);
+}
+
+.toolbar-upload-container {
+  display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
+
+  & input {
+    font-size: 0;
+    position: absolute;
+    left: -99999px;
+  }
+}
+
+.mention-container {
+  position: absolute;
+
+  width: var(--sizing-menu-md);
+  visibility: hidden;
+
+  color: var(--color-black);
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-dark);
+  border: 1px solid var(--color-line-grey-light);
+  z-index: 1;
 }
