@@ -19,6 +19,7 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
         language
         notification {
           enable
+          push
           email
           mention
           follow
@@ -46,8 +47,10 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
       id
       settings {
         notification {
-          mention
+          enable
+          push
           email
+          mention
           follow
           comment
           appreciation
@@ -64,7 +67,34 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
   }
 `
 
-const settingsMap = {
+type SettingItemKey =
+  | 'enable'
+  | 'push'
+  | 'email'
+  | 'mention'
+  | 'follow'
+  | 'comment'
+  | 'appreciation'
+  | 'articleSubscription'
+  | 'commentSubscribed'
+  | 'downstream'
+  | 'commentPinned'
+  | 'commentVoted'
+  | 'officialNotice'
+  | 'reportFeedback'
+
+interface SettingItem {
+  key: SettingItemKey
+  title: React.ReactNode
+  description?: React.ReactNode
+}
+
+const settingsMap: {
+  me: SettingItem[]
+  article: SettingItem[]
+  comment: SettingItem[]
+  others: SettingItem[]
+} = {
   me: [
     {
       key: 'mention',
@@ -84,10 +114,6 @@ const settingsMap = {
       key: 'articleSubscription',
       title: <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />
     },
-    // {
-    //   key: 'downstream',
-    //   title: <Translate zh_hant="作品上游变更" zh_hans="作品上游变更" />
-    // },
     {
       key: 'commentSubscribed',
       title: (
@@ -111,8 +137,24 @@ const settingsMap = {
   ],
   others: [
     {
+      key: 'push',
+      title: <Translate zh_hant="推送通知" zh_hans="推送通知" />,
+      description: (
+        <Translate
+          zh_hant="實時收到你關心的站內動態"
+          zh_hans="实时收到你关心的站内动态"
+        />
+      )
+    },
+    {
       key: 'email',
-      title: <Translate zh_hant="電子信箱通知" zh_hans="邮箱通知" />
+      title: <Translate zh_hant="電子信箱通知" zh_hans="邮箱通知" />,
+      description: (
+        <Translate
+          zh_hant="精選過去 24 小時與你有關的消息"
+          zh_hans="精选过去 24 小时与你有关的消息"
+        />
+      )
     },
     {
       key: 'officialNotice',
@@ -132,15 +174,14 @@ const SettingsNotification = () => {
   const { data } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
   )
-  const settings: any =
-    (data && data.viewer && data.viewer.settings.notification) || {}
+  const settings = data && data.viewer && data.viewer.settings.notification
   const id = data && data.viewer && data.viewer.id
 
-  const onChange = (type: string) => {
-    if (!id) {
-      return
-    }
+  if (!id || !settings) {
+    return null
+  }
 
+  const handleOnChange = (type: SettingItemKey) => {
     updateNotification({
       variables: {
         type,
@@ -163,6 +204,33 @@ const SettingsNotification = () => {
     })
   }
 
+  const Setting = ({ setting }: { setting: SettingItem }) => {
+    const enabled = settings[setting.key]
+    const isTogglePush = setting.key === 'push'
+
+    return (
+      <section className="setting-item">
+        <section className="left">
+          <p className="title">{setting.title}</p>
+          <p className="description">{setting.description}</p>
+        </section>
+
+        <Switch
+          checked={enabled}
+          onChange={() => {
+            if (isTogglePush && !enabled) {
+              // TODO: request perrmission
+            }
+
+            handleOnChange(setting.key)
+          }}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <>
       <Head
@@ -180,13 +248,7 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.me.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <Setting key={setting.key} setting={setting} />
           ))}
         </section>
 
@@ -197,13 +259,7 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.others.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <Setting key={setting.key} setting={setting} />
           ))}
         </section>
       </div>
@@ -216,13 +272,7 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.article.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <Setting key={setting.key} setting={setting} />
           ))}
         </section>
 
@@ -233,13 +283,7 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.comment.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <Setting key={setting.key} setting={setting} />
           ))}
         </section>
       </div>
