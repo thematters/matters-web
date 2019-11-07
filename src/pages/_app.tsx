@@ -13,6 +13,7 @@ import {
   Layout,
   ModalProvider
 } from '~/components'
+import ClientPreferenceInitializer from '~/components/ClientPreferenceInitializer'
 import ErrorBoundary from '~/components/ErrorBoundary'
 
 import { initializeFirebase } from '~/common/utils'
@@ -42,6 +43,7 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
             <AnalyticsProvider>
               <ModalProvider>
                 <GlobalStyles />
+                <ClientPreferenceInitializer />
 
                 <Layout>
                   <Component {...pageProps} />

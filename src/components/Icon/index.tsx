@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type IconSize =
+export type IconSize =
   | 'xsmall'
   | 'msmall'
   | 'small'

@@ -312,9 +312,7 @@ const ArticleDetail = ({
 const ArticleDetailContainer = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
-  })
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
   const { wall } = (data && data.clientPreference) || { wall: true }
 
   return (
