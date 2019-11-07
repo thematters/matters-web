@@ -219,7 +219,8 @@ const FeedDigest = ({
   const isClickable = !edit && inFolloweeFeed
   let path
   if (isClickable) {
-    const parentId = comment && comment.parentComment && comment.parentComment.id
+    const parentId =
+      comment && comment.parentComment && comment.parentComment.id
     path = toPath({
       page: 'articleDetail',
       userName: comment.article.author.userName || '',
@@ -244,9 +245,11 @@ const FeedDigest = ({
             {pinned && <PinnedLabel />}
           </section>
 
-          {replyTo && (!parentComment || replyTo.id !== parentComment.id) && !inFolloweeFeed && (
-            <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
-          )}
+          {replyTo &&
+            (!parentComment || replyTo.id !== parentComment.id) &&
+            !inFolloweeFeed && (
+              <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
+            )}
         </div>
         {hasDropdownActions && (
           <DropdownActions
