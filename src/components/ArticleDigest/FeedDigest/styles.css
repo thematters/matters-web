@@ -94,3 +94,12 @@
 .sticky {
   margin-bottom: var(--spacing-tight)
 }
+
+.published-description {
+  flex-shrink: 0;
+  margin: 0 var(--spacing-x-tight);
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}

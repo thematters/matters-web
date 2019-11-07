@@ -9,6 +9,7 @@ import updateUserArticles from '~/components/GQL/updates/userArticles'
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
 import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
+import { FolloweeArchiveButtonArticle } from './__generated__/FolloweeArchiveButtonArticle'
 import styles from './styles.css'
 
 const fragments = {
@@ -21,6 +22,16 @@ const fragments = {
         userName
       }
     }
+  `,
+  followee: gql`
+    fragment FolloweeArchiveButtonArticle on Article {
+      id
+      articleState: state
+      author {
+        id
+        userName
+      }
+    }
   `
 }
 
@@ -28,7 +39,7 @@ const ArchiveButton = ({
   article,
   hideDropdown
 }: {
-  article: ArchiveButtonArticle
+  article: ArchiveButtonArticle | FolloweeArchiveButtonArticle
   hideDropdown: () => void
 }) => {
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {

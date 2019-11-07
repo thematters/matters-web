@@ -7,6 +7,7 @@ import { ViewerContext } from '~/components/Viewer'
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
+import { FolloweeDropdownActionsArticle } from './__generated__/FolloweeDropdownActionsArticle'
 import ArchiveButton from './ArchiveButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
@@ -20,11 +21,30 @@ const fragments = {
     }
     ${StickyButton.fragments.article}
     ${ArchiveButton.fragments.article}
+  `,
+  followee: gql`
+    fragment FolloweeDropdownActionsArticle on Article {
+      id
+      ...FolloweeArchiveButtonArticle
+      ...StickyButtonArticle
+    }
+    ${StickyButton.fragments.article}
+    ${ArchiveButton.fragments.followee}
   `
 }
 
+const isActive = (article: any): boolean => {
+  if (article.hasOwnProperty('state')) {
+    return article.state === 'active'
+  }
+  if (article.hasOwnProperty('articleState')) {
+    return article.articleState === 'active'
+  }
+  return false
+}
+
 const DropdownContent: React.FC<{
-  article: DropdownActionsArticle
+  article: DropdownActionsArticle | FolloweeDropdownActionsArticle
   hideDropdown: () => void
 }> = ({ article, hideDropdown }) => {
   return (
@@ -39,7 +59,11 @@ const DropdownContent: React.FC<{
   )
 }
 
-const DropdownActions = ({ article }: { article: DropdownActionsArticle }) => {
+const DropdownActions = ({
+  article
+}: {
+  article: DropdownActionsArticle | FolloweeDropdownActionsArticle
+}) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -50,9 +74,8 @@ const DropdownActions = ({ article }: { article: DropdownActionsArticle }) => {
 
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
-  const isActive = article.state === 'active'
 
-  if (!isArticleAuthor || !isActive || viewer.isInactive) {
+  if (!isArticleAuthor || !isActive(article) || viewer.isInactive) {
     return null
   }
 

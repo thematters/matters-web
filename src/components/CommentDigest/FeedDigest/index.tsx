@@ -1,4 +1,6 @@
 import classNames from 'classnames'
+import _get from 'lodash/get'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'
@@ -7,6 +9,7 @@ import {
   FeedDigestComment_comments_edges_node,
   FeedDigestComment_comments_edges_node_replyTo_author
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
+import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
 import { Label } from '~/components/Label'
@@ -15,6 +18,7 @@ import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import CommentContent from '../Content'
@@ -64,6 +68,38 @@ const PinnedLabel = () => (
     <style jsx>{styles}</style>
   </span>
 )
+
+const CommentToArticle = ({
+  comment
+}: {
+  comment: FeedDigestComment | FolloweeFeedDigestComment
+}) => {
+  if (!comment.article) {
+    return null
+  }
+
+  const path = toPath({
+    page: 'articleDetail',
+    userName: comment.article.author.userName || '',
+    slug: comment.article.slug || '',
+    mediaHash: comment.article.mediaHash || ''
+  })
+  const title = _get(comment, 'article.title')
+  return (
+    <>
+      <span className="published-description">
+        <Translate
+          zh_hant={TEXT.zh_hant.commentPublishedDescription}
+          zh_hans={TEXT.zh_hans.commentPublishedDescription}
+        />
+      </span>
+      <Link {...path}>
+        <a className="article-title">{title}</a>
+      </Link>
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <button className="cancel-button" type="button" onClick={() => onClick()}>
@@ -151,12 +187,16 @@ const FeedDigest = ({
   inArticle,
   expandDescendants,
   commentCallback,
+  hasDropdownActions = true,
+  inFolloweeFeed,
   ...actionControls
 }: {
-  comment: FeedDigestComment
+  comment: FeedDigestComment | FolloweeFeedDigestComment
   inArticle?: boolean
   expandDescendants?: boolean
   commentCallback?: () => void
+  hasDropdownActions?: boolean
+  inFolloweeFeed?: boolean
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const { state, content, author, replyTo, parentComment, pinned } = comment
@@ -176,6 +216,18 @@ const FeedDigest = ({
   const id = comment.parentComment
     ? `${comment.parentComment.id}-${comment.id}`
     : comment.id
+  const isClickable = !edit && inFolloweeFeed
+  let path
+  if (isClickable) {
+    const parentId = comment && comment.parentComment && comment.parentComment.id
+    path = toPath({
+      page: 'articleDetail',
+      userName: comment.article.author.userName || '',
+      slug: comment.article.slug || '',
+      mediaHash: comment.article.mediaHash || '',
+      fragment: parentId ? `${parentId}-${comment.id}` : comment.id
+    })
+  }
 
   return (
     <section className={containerClass} id={actionControls.hasLink ? id : ''}>
@@ -184,18 +236,24 @@ const FeedDigest = ({
           <section className="author-row">
             <UserDigest.Mini
               user={author}
-              avatarSize="small"
+              avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
               textWeight="medium"
               hasUserName={inArticle}
             />
+            {inFolloweeFeed && <CommentToArticle comment={comment} />}
             {pinned && <PinnedLabel />}
           </section>
 
-          {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
+          {replyTo && (!parentComment || replyTo.id !== parentComment.id) && !inFolloweeFeed && (
             <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
         </div>
-        <DropdownActions comment={comment} editComment={() => setEdit(true)} />
+        {hasDropdownActions && (
+          <DropdownActions
+            comment={comment}
+            editComment={() => setEdit(true)}
+          />
+        )}
       </header>
 
       <div className="content-wrap">
@@ -210,7 +268,14 @@ const FeedDigest = ({
             defaultExpand={edit}
           />
         )}
-        {!edit && <CommentContent state={state} content={content} />}
+        {isClickable && path && (
+          <Link {...path}>
+            <a>
+              <CommentContent state={state} content={content} />
+            </a>
+          </Link>
+        )}
+        {!isClickable && <CommentContent state={state} content={content} />}
         {!edit && (
           <FooterActions
             comment={comment}
