@@ -163,6 +163,8 @@ export const subscribePush = async ({
     )
     throw new Error('Failed to subscribe push')
   }
+
+  console.log('[Push] Subscribed')
 }
 
 export const unsubscribePush = async ({
@@ -218,4 +220,6 @@ export const unsubscribePush = async ({
       variables: { id: token }
     })
   }
+
+  console.log('[Push] Unsubscribed')
 }
