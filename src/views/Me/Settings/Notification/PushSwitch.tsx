@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useApolloClient, useQuery } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -11,10 +11,9 @@ import SettingItem from './SettingItem'
 
 const PushSwitch = () => {
   const [loading, setLoading] = useState(false)
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
+  const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
-  const client = useApolloClient()
   const push =
     clientPreferenceData && clientPreferenceData.clientPreference.push
 
