@@ -31,7 +31,7 @@ const FOLLOW_FEED = gql`
     viewer {
       id
       recommendation {
-        followeeArticles(input: { first: 10, after: $after }) {
+        followeeWorks(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -70,9 +70,9 @@ const FollowFeed = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recommendation.followeeArticles'
+  const connectionPath = 'viewer.recommendation.followeeWorks'
   const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.recommendation.followeeArticles) || {}
+    (data && data.viewer && data.viewer.recommendation.followeeWorks) || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyArticle />
