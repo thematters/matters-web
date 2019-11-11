@@ -14,7 +14,8 @@ import {
   // clearPersistCache,
   redirectToTarget,
   toPath,
-  translate
+  translate,
+  unsubscribePush
 } from '~/common/utils'
 import ICON_LIKE from '~/static/icons/like.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
@@ -127,10 +128,18 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           onClick={async () => {
             try {
               await logout()
+
               analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
                 id: viewer.id
               })
-              // await clearPersistCache()
+
+              try {
+                await unsubscribePush()
+                // await clearPersistCache()
+              } catch (e) {
+                console.error('Failed to unsubscribePush after logged out')
+              }
+
               redirectToTarget()
             } catch (e) {
               window.dispatchEvent(

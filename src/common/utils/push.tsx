@@ -8,8 +8,11 @@ import { SubscribePush } from '~/components/GQL/mutations/__generated__/Subscrib
 import { UnsubscribePush } from '~/components/GQL/mutations/__generated__/UnsubscribePush'
 import SUBSCRIBE_PUSH from '~/components/GQL/mutations/subscribePush'
 import UNSUBSCRIBE_PUSH from '~/components/GQL/mutations/unsubscribePush'
+import { Viewer } from '~/components/Viewer'
 
-import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
+
+const STORE_KEY_PUSH = '__PUSH'
 
 const {
   publicRuntimeConfig: { ENV, FIREBASE_CONFIG, FCM_VAPID_KEY }
@@ -20,7 +23,20 @@ const URL_SW =
     ? '/firebase-messaging-sw-production.js'
     : '/firebase-messaging-sw-develop.js'
 
-export const initializeFirebase = async () => {
+let cachedClient: ApolloClient<any> | null = null
+
+export const initializePush = async ({
+  client,
+  viewer
+}: {
+  client: ApolloClient<any>
+  viewer: Viewer
+}) => {
+  cachedClient = client
+
+  /**
+   * Init Firebase
+   */
   // FIXME: https://github.com/zeit/next.js/issues/1999
   if (firebase.apps.length || !process.browser) {
     return
@@ -41,19 +57,146 @@ export const initializeFirebase = async () => {
   const registration = await window.navigator.serviceWorker.register(URL_SW)
   messaging.useServiceWorker(registration)
 
-  // Handle incoming messages. Called when:
-  // - a message is received while the app has focus
-  // - the user clicks on an app notification created by a service worker
-  //   `messaging.setBackgroundMessageHandler` handler.
-  // messaging.onMessage((payload) => {
-  //   console.log('Message received. ', payload);
-  //   // ...
-  // });
-
   // Callback fired if Instance ID token is updated.
   messaging.onTokenRefresh(async () => {
     await unsubscribePush()
+    await subscribePush()
   })
+
+  /**
+   * Init push setting in local
+   */
+  const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
+  const isViewerPush = viewer.id === push.userId
+
+  if (!isViewerPush) {
+    await unsubscribePushLocally()
+  }
+
+  client.writeData({
+    id: 'ClientPreference:local',
+    data: {
+      push: {
+        supported: firebase.messaging.isSupported(),
+        enabled: (isViewerPush && push.enabled) || false,
+        __typename: 'Push'
+      }
+    }
+  })
+}
+
+export const subscribePush = async () => {
+  // Request token
+  await requestPermission()
+  const token = await getToken()
+
+  try {
+    if (!cachedClient) {
+      throw new Error('[Push] `cachedClient` is required')
+    }
+
+    // Send to server
+    const { data } = await cachedClient.mutate<SubscribePush>({
+      mutation: SUBSCRIBE_PUSH,
+      variables: { id: token }
+    })
+
+    // Update local state
+    cachedClient.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        push: {
+          enabled: true,
+          __typename: 'Push'
+        }
+      }
+    })
+    localStorage.setItem(
+      STORE_KEY_PUSH,
+      JSON.stringify({
+        userId: data && data.subscribePush && data.subscribePush.id,
+        enabled: true,
+        token
+      })
+    )
+  } catch (e) {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: (
+            <Translate
+              zh_hant="開啓失敗，請稍候重試"
+              zh_hans="开启失败，请稍候重试"
+            />
+          )
+        }
+      })
+    )
+    throw new Error('[Push] Failed to subscribe push')
+  }
+
+  console.log('[Push] Subscribed')
+}
+
+export const unsubscribePush = async () => {
+  // Delete token in local
+  try {
+    await unsubscribePushLocally()
+  } catch (e) {
+    console.error('[Push] Failed to deleteToken in local')
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: (
+            <Translate
+              zh_hant="關閉失敗，請稍候重試"
+              zh_hans="关闭失败，请稍候重试"
+            />
+          )
+        }
+      })
+    )
+    throw new Error('[Push] Failed to unsubscribe push')
+  }
+
+  // Update local state
+  if (cachedClient) {
+    cachedClient.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        push: {
+          enabled: false,
+          __typename: 'Push'
+        }
+      }
+    })
+  }
+
+  // Delete token from server
+  if (cachedClient) {
+    const token = await getToken()
+    await cachedClient.mutate<UnsubscribePush>({
+      mutation: UNSUBSCRIBE_PUSH,
+      variables: { id: token }
+    })
+  }
+
+  console.log('[Push] Unsubscribed')
+}
+
+const unsubscribePushLocally = async () => {
+  const messaging = firebase.messaging()
+  const token = await getToken()
+
+  if (token) {
+    await messaging.deleteToken(token)
+  }
+
+  localStorage.removeItem(STORE_KEY_PUSH)
+
+  return token
 }
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
@@ -110,116 +253,6 @@ const requestPermission = async () => {
         }
       })
     )
-    throw new Error('Need to grant permission')
+    throw new Error('[Push] Need to grant permission')
   }
-}
-
-export const subscribePush = async ({
-  client
-}: {
-  client: ApolloClient<any>
-}) => {
-  // Request token
-  await requestPermission()
-  const token = await getToken()
-
-  try {
-    // Send to server
-    await client.mutate<SubscribePush>({
-      mutation: SUBSCRIBE_PUSH,
-      variables: { id: token }
-    })
-
-    // Update local state
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        push: {
-          enabled: true,
-          __typename: 'Push'
-        }
-      }
-    })
-    localStorage.setItem(
-      STORE_KEY_PUSH,
-      JSON.stringify({
-        enabled: true,
-        token
-      })
-    )
-  } catch (e) {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="開啓失敗，請稍候重試"
-              zh_hans="开启失败，请稍候重试"
-            />
-          )
-        }
-      })
-    )
-    throw new Error('Failed to subscribe push')
-  }
-
-  console.log('[Push] Subscribed')
-}
-
-export const unsubscribePush = async ({
-  client
-}: {
-  client?: ApolloClient<any>
-} = {}) => {
-  const messaging = firebase.messaging()
-
-  const token = await getToken()
-
-  // Delete token in local
-  try {
-    if (token) {
-      await messaging.deleteToken(token)
-    }
-    localStorage.removeItem(STORE_KEY_PUSH)
-  } catch (e) {
-    console.error('[Push] Failed to deleteToken in local')
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="關閉失敗，請稍候重試"
-              zh_hans="关闭失败，请稍候重试"
-            />
-          )
-        }
-      })
-    )
-    throw new Error('Failed to unsubscribe push')
-  }
-
-  // Update local state
-  if (client) {
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        push: {
-          enabled: false,
-          __typename: 'Push'
-        }
-      }
-    })
-  }
-
-  // Delete token from server
-  if (client) {
-    await client.mutate<UnsubscribePush>({
-      mutation: UNSUBSCRIBE_PUSH,
-      variables: { id: token }
-    })
-  }
-
-  console.log('[Push] Unsubscribed')
 }

@@ -11,7 +11,7 @@ import SettingItem from './SettingItem'
 
 const PushSwitch = () => {
   const [loading, setLoading] = useState(false)
-  const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
+  const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
   const push =
@@ -24,9 +24,9 @@ const PushSwitch = () => {
   const onClick = async () => {
     setLoading(true)
     if (push.enabled) {
-      await unsubscribePush({ client })
+      await unsubscribePush()
     } else {
-      await subscribePush({ client })
+      await subscribePush()
     }
     setLoading(false)
   }

@@ -13,10 +13,9 @@ import {
   Layout,
   ModalProvider
 } from '~/components'
-import ClientPreferenceInitializer from '~/components/ClientPreferenceInitializer'
 import ErrorBoundary from '~/components/ErrorBoundary'
+import PushInitializer from '~/components/PushInitializer'
 
-import { initializeFirebase } from '~/common/utils'
 import withApollo from '~/common/utils/withApollo'
 
 /**
@@ -29,9 +28,6 @@ const {
 // Sentry
 Sentry.init({ dsn: SENTRY_DSN || '' })
 
-// Firebase
-initializeFirebase()
-
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
   render() {
     const { Component, pageProps, apollo } = this.props
@@ -43,7 +39,7 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
             <AnalyticsProvider>
               <ModalProvider>
                 <GlobalStyles />
-                <ClientPreferenceInitializer />
+                <PushInitializer client={apollo} />
 
                 <Layout>
                   <Component {...pageProps} />

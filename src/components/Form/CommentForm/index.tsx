@@ -147,7 +147,7 @@ const CommentForm = ({
               />
             ),
             customButton: (
-              <button type="button" onClick={() => subscribePush({ client })}>
+              <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
                   zh_hans={TEXT.zh_hans.confirmPush}
