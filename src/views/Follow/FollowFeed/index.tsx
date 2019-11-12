@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
+  CommentDigest,
   Head,
   InfiniteScroll,
   PageHeader,
@@ -11,11 +12,13 @@ import {
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
+import CommentFragments from '~/components/GQL/fragments/comment'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
+import styles from './styles.css'
 
 const FOLLOW_FEED = gql`
   query FollowFeed(
@@ -23,11 +26,12 @@ const FOLLOW_FEED = gql`
     $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
+    $hasDescendantComments: Boolean = false
   ) {
     viewer {
       id
       recommendation {
-        followeeArticles(input: { first: 10, after: $after }) {
+        followeeWorks(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -36,14 +40,21 @@ const FOLLOW_FEED = gql`
           edges {
             cursor
             node {
-              ...FeedDigestArticle
+              __typename
+              ... on Article {
+                ...FolloweeFeedDigestArticle
+              }
+              ... on Comment {
+                ...FolloweeFeedDigestComment
+              }
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigest.Feed.fragments.followee}
+  ${CommentFragments.followee}
 `
 
 const FollowFeed = () => {
@@ -59,9 +70,9 @@ const FollowFeed = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recommendation.followeeArticles'
+  const connectionPath = 'viewer.recommendation.followeeWorks'
   const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.recommendation.followeeArticles) || {}
+    (data && data.viewer && data.viewer.recommendation.followeeWorks) || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyArticle />
@@ -97,11 +108,28 @@ const FollowFeed = () => {
                 location: i
               })
             }
+            className={node.__typename === 'Article' ? 'article' : 'comment'}
           >
-            <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+            {node.__typename === 'Article' && (
+              <ArticleDigest.Feed
+                article={node}
+                hasDateTime
+                hasBookmark
+                inFolloweeFeed
+              />
+            )}
+            {node.__typename === 'Comment' && (
+              <CommentDigest.Feed
+                comment={node}
+                hasLink
+                hasDropdownActions={false}
+                inFolloweeFeed
+              />
+            )}
           </li>
         ))}
       </ul>
+      <style jsx>{styles}</style>
     </InfiniteScroll>
   )
 }

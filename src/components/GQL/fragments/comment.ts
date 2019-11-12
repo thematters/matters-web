@@ -50,5 +50,27 @@ export default {
       }
     }
     ${base}
+  `,
+  followee: gql`
+    fragment FolloweeFeedDigestComment on Comment {
+      ...BaseDigestComment
+      author {
+        id
+        isBlocking
+      }
+      article {
+        title
+      }
+      comments(input: { sort: oldest, first: null })
+        @include(if: $hasDescendantComments) {
+        edges {
+          cursor
+          node {
+            ...BaseDigestComment
+          }
+        }
+      }
+    }
+    ${base}
   `
 }
