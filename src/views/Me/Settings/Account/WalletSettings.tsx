@@ -38,7 +38,7 @@ const SetupLikerIdButton = () => (
 
 const WalletSetting = () => {
   const viewer = useContext(ViewerContext)
-  const likerId = viewer.likerId
+  const likerId = viewer.liker.id
   const { data, loading, error } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none'
   })
@@ -104,7 +104,7 @@ const WalletSetting = () => {
 
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
-  const likerId = viewer.likerId
+  const likerId = viewer.liker.id
 
   return (
     <section className="section-container">

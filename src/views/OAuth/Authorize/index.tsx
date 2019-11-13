@@ -142,7 +142,7 @@ const OAuthAuthorize = () => {
           </section>
 
           <footer>
-            {name === 'LikeCoin' && !viewer.likerId ? (
+            {name === 'LikeCoin' && !viewer.liker.id ? (
               <Modal.FooterButton
                 width="full"
                 is="link"
