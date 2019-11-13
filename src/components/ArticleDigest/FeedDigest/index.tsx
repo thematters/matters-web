@@ -10,13 +10,14 @@ import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
-import { UrlFragments } from '~/common/enums'
+import { TEXT, UrlFragments } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
 import ICON_STICKY from '~/static/icons/sticky.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
 import DropdownActions from '../DropdownActions'
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
+import { FolloweeFeedDigestArticle } from './__generated__/FolloweeFeedDigestArticle'
 import styles from './styles.css'
 
 const fragments = {
@@ -42,6 +43,29 @@ const fragments = {
     ${Actions.fragments.article}
     ${Fingerprint.fragments.article}
     ${DropdownActions.fragments.article}
+  `,
+  followee: gql`
+    fragment FolloweeFeedDigestArticle on Article {
+      id
+      title
+      slug
+      cover
+      summary
+      mediaHash
+      live
+      author {
+        id
+        userName
+        ...UserDigestMiniUser
+      }
+      ...ResponseDigestActionsArticle
+      ...FingerprintArticle
+      ...FolloweeDropdownActionsArticle
+    }
+    ${UserDigest.Mini.fragments.user}
+    ${Actions.fragments.response}
+    ${Fingerprint.fragments.article}
+    ${DropdownActions.fragments.followee}
   `
 }
 
@@ -50,11 +74,13 @@ const FeedDigest = ({
   hasFingerprint,
   hasMoreButton,
   hasSticky,
+  inFolloweeFeed,
   ...actionControls
-}: { article: FeedDigestArticle } & {
+}: { article: FeedDigestArticle | FolloweeFeedDigestArticle } & {
   hasFingerprint?: boolean
   hasMoreButton?: boolean
   hasSticky?: boolean
+  inFolloweeFeed?: boolean
 } & ActionsControls) => {
   const {
     cover,
@@ -105,7 +131,19 @@ const FeedDigest = ({
         </div>
       )}
       <div className="header">
-        <UserDigest.Mini user={author} />
+        <div className="info">
+          <UserDigest.Mini user={author} />
+          {inFolloweeFeed && (
+            <>
+              <span className="published-description">
+                <Translate
+                  zh_hant={TEXT.zh_hant.publishedDescription}
+                  zh_hans={TEXT.zh_hans.publishedDescription}
+                />
+              </span>
+            </>
+          )}
+        </div>
         <div>
           {!hasFingerprint && live && <IconLive />}
           {hasFingerprint && <Fingerprint article={article} />}
