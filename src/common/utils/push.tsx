@@ -1,16 +1,15 @@
 import ApolloClient from 'apollo-client'
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
+import gql from 'graphql-tag'
 import getConfig from 'next/config'
 
 import { Translate } from '~/components'
-import { SubscribePush } from '~/components/GQL/mutations/__generated__/SubscribePush'
-import { UnsubscribePush } from '~/components/GQL/mutations/__generated__/UnsubscribePush'
-import SUBSCRIBE_PUSH from '~/components/GQL/mutations/subscribePush'
-import UNSUBSCRIBE_PUSH from '~/components/GQL/mutations/unsubscribePush'
 import { Viewer } from '~/components/Viewer'
 
 import { ADD_TOAST } from '~/common/enums'
+
+import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
 const STORE_KEY_PUSH = '__PUSH'
 
@@ -22,6 +21,14 @@ const URL_SW =
   ENV === 'production'
     ? '/firebase-messaging-sw-production.js'
     : '/firebase-messaging-sw-develop.js'
+
+const TOGGLE_SUBSCRIBE_PUSH = gql`
+  mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
+    toggleSubscribePush(input: { id: $id, enabled: $enabled }) {
+      id
+    }
+  }
+`
 
 let cachedClient: ApolloClient<any> | null = null
 
@@ -105,9 +112,9 @@ export const subscribePush = async () => {
     }
 
     // Send to server
-    const { data } = await cachedClient.mutate<SubscribePush>({
-      mutation: SUBSCRIBE_PUSH,
-      variables: { id: token }
+    const { data } = await cachedClient.mutate<ToggleSubscribePush>({
+      mutation: TOGGLE_SUBSCRIBE_PUSH,
+      variables: { id: token, enabled: true }
     })
 
     // Update local state
@@ -123,7 +130,7 @@ export const subscribePush = async () => {
     localStorage.setItem(
       STORE_KEY_PUSH,
       JSON.stringify({
-        userId: data && data.subscribePush && data.subscribePush.id,
+        userId: data && data.toggleSubscribePush && data.toggleSubscribePush.id,
         enabled: true,
         token
       })
@@ -186,9 +193,9 @@ export const unsubscribePush = async () => {
   // Delete token from server
   if (cachedClient) {
     const token = await getToken()
-    await cachedClient.mutate<UnsubscribePush>({
-      mutation: UNSUBSCRIBE_PUSH,
-      variables: { id: token }
+    await cachedClient.mutate<ToggleSubscribePush>({
+      mutation: TOGGLE_SUBSCRIBE_PUSH,
+      variables: { id: token, enabled: false }
     })
   }
 
