@@ -84,9 +84,10 @@ export const initializePush = async ({
    */
   const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
   const isViewerPush = viewer.id === push.userId
+  const token = await getToken()
 
   if (!isViewerPush) {
-    await unsubscribePushLocally()
+    await unsubscribePushLocally(token)
   }
 
   client.writeData({
@@ -156,9 +157,11 @@ export const subscribePush = async () => {
 }
 
 export const unsubscribePush = async () => {
+  const token = await getToken()
+
   // Delete token in local
   try {
-    await unsubscribePushLocally()
+    await unsubscribePushLocally(token)
   } catch (e) {
     console.error('[Push] Failed to deleteToken in local')
     window.dispatchEvent(
@@ -192,7 +195,6 @@ export const unsubscribePush = async () => {
 
   // Delete token from server
   if (cachedClient) {
-    const token = await getToken()
     await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
       variables: { id: token, enabled: false }
@@ -202,9 +204,8 @@ export const unsubscribePush = async () => {
   console.log('[Push] Unsubscribed')
 }
 
-const unsubscribePushLocally = async () => {
+const unsubscribePushLocally = async (token?: string) => {
   const messaging = firebase.messaging()
-  const token = await getToken()
 
   if (token) {
     await messaging.deleteToken(token)
