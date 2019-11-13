@@ -259,3 +259,19 @@
     }
   }
 }
+
+.badge-civic-liker {
+  display: inline-block;
+  height: 16px;
+  padding: 0 6px;
+
+  color: var(--color-white);
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+
+  background: var(--color-matters-green);
+  border-radius: 20px;
+}

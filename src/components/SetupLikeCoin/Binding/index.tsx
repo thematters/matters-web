@@ -23,7 +23,7 @@ const VIEWER_LIKER_ID = gql`
     viewer {
       id
       liker {
-        id
+        likerId
       }
     }
   }
@@ -42,7 +42,7 @@ const Binding: React.FC<Props> = ({
     fetchPolicy: 'network-only',
     skip: !process.browser
   })
-  const likerId = data && data.viewer && data.viewer.liker.id
+  const likerId = data && data.viewer && data.viewer.liker.likerId
 
   if (likerId) {
     nextStep()

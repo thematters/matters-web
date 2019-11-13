@@ -34,6 +34,9 @@ const fragments = {
       id
       userName
       displayName
+      liker {
+        civicLiker
+      }
       info {
         badges {
           type
@@ -88,6 +91,13 @@ const SeedBadge = () => (
       />
     </span>
   </Tooltip>
+)
+
+const CivicLikerBadge = () => (
+  <>
+    <span className="badge-civic-liker">Civic Liker</span>
+    <style jsx>{styles}</style>
+  </>
 )
 
 const CoverContainer: React.FC = ({ children }) => (
@@ -159,6 +169,7 @@ const BaseUserProfile = () => {
   const badges = user.info.badges || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
+  const isCivicLiker = user.liker.civicLiker
 
   return (
     <section className={containerClass}>
@@ -200,6 +211,7 @@ const BaseUserProfile = () => {
                       <span className="name">{user.displayName}</span>
                       <span className="username">@{user.userName}</span>
                       {hasSeedBadge && <SeedBadge />}
+                      {isCivicLiker && <CivicLikerBadge />}
                       <span className="u-sm-up-hide">
                         {!isMe && <FollowButton.State user={user} />}
                       </span>
