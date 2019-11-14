@@ -47,28 +47,30 @@ const APPRECIATE_ARTICLE = gql`
 `
 
 interface AppreciateButtonProps {
-  appreciate: () => any
-  canAppreciate: boolean
-  isAuthed: boolean
-  appreciatedCount: number
+  disabled?: boolean
+  onClick?: () => void
+  count?: number | 'MAX'
 }
 
 const AppreciateButton = forwardRef<HTMLButtonElement, AppreciateButtonProps>(
-  ({ appreciate, canAppreciate, isAuthed, appreciatedCount }, ref) => {
+  ({ disabled, onClick, count }, ref) => {
+    const countClass = classNames({
+      'appreciated-count': true,
+      max: count === 'MAX'
+    })
+
     return (
       <button
         className="appreciate-button"
         type="button"
         ref={ref}
-        aria-disabled={!canAppreciate}
-        onClick={() => canAppreciate && appreciate()}
+        aria-disabled={disabled}
+        onClick={onClick}
         aria-label="讚賞作品"
       >
         <IconAppreciate />
 
-        {isAuthed && appreciatedCount > 0 && (
-          <span className="appreciated-count">{appreciatedCount}</span>
-        )}
+        {count && <span className={countClass}>{count}</span>}
 
         <style jsx>{styles}</style>
       </button>
@@ -79,23 +81,13 @@ const AppreciateButton = forwardRef<HTMLButtonElement, AppreciateButtonProps>(
 const CivicLikerButton = ({ onClick }: { onClick: () => void }) => (
   <ModalSwitch modalId="civicLikerModal">
     {(open: any) => (
-      <>
-        <button
-          className="appreciate-button"
-          type="button"
-          onClick={() => {
-            open()
-            onClick()
-          }}
-          aria-label="讚賞作品"
-        >
-          <IconAppreciate />
-
-          <span className="appreciated-count max">MAX</span>
-
-          <style jsx>{styles}</style>
-        </button>
-      </>
+      <AppreciateButton
+        onClick={() => {
+          open()
+          onClick()
+        }}
+        count="MAX"
+      />
     )}
   </ModalSwitch>
 )
@@ -109,9 +101,8 @@ const AppreciationButtonContainer = ({
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  // const readCivicLikerModal =
-  //   viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
-  const readCivicLikerModal = data && data.clientPreference.readCivicLikerModal
+  const readCivicLikerModal =
+    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
 
   // bundle appreciations
   const [amount, setAmount] = useState(0)
@@ -140,6 +131,9 @@ const AppreciationButtonContainer = ({
     setAmount(0)
   }, APPRECIATE_DEBOUNCE)
   const appreciate = () => {
+    if (left <= 0) {
+      return
+    }
     setAmount(amount + 1)
     debouncedSendAppreciation()
   }
@@ -155,14 +149,6 @@ const AppreciationButtonContainer = ({
     inactive: !canAppreciate && readCivicLikerModal,
     unlogged: !viewer.isAuthed
   })
-  const appreciateButtonProps = {
-    limit,
-    appreciatedCount,
-    canAppreciate,
-    isReachLimit,
-    appreciate,
-    isAuthed: viewer.isAuthed
-  }
 
   if (viewer.shouldSetupLikerID) {
     return (
@@ -180,7 +166,16 @@ const AppreciationButtonContainer = ({
 
   return (
     <section className={containerClasses}>
-      {canAppreciate && <AppreciateButton {...appreciateButtonProps} />}
+      {canAppreciate && (
+        <AppreciateButton
+          onClick={() => appreciate()}
+          count={
+            viewer.isAuthed && appreciatedCount > 0
+              ? appreciatedCount
+              : undefined
+          }
+        />
+      )}
 
       {!canAppreciate && !readCivicLikerModal && isReachLimit && (
         <CivicLikerButton
@@ -215,7 +210,14 @@ const AppreciationButtonContainer = ({
             />
           }
         >
-          <AppreciateButton {...appreciateButtonProps} />
+          <AppreciateButton
+            disabled
+            count={
+              viewer.isAuthed && appreciatedCount > 0
+                ? appreciatedCount
+                : undefined
+            }
+          />
         </Tooltip>
       )}
 

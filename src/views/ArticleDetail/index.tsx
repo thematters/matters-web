@@ -127,7 +127,7 @@ const ArticleDetail = ({
   wall: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [fixedToolbar, setFixedToolbar] = useState(false)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'medium-up' })()

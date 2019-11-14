@@ -68,8 +68,9 @@ const Toolbar = ({
       </section>
 
       <section className="right">
+        {fixed && <AppreciationButton article={article} />}
         <ResponseButton article={article} />
-        <ExtendButton article={article} />
+        {!fixed && <ExtendButton article={article} />}
         <BookmarkButton article={article} size="default" />
         <ShareButton />
         <MoreButton article={article} />
