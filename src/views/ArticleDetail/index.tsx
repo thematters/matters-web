@@ -41,6 +41,7 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
@@ -299,8 +300,9 @@ const ArticleDetail = ({
           </>
         )}
 
+        {/* Modals */}
         <AppreciatorsModal />
-
+        <CivicLikerModal />
         <ShareModal />
       </Block>
 
@@ -315,7 +317,7 @@ const ArticleDetailContainer = () => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const { wall } = (data && data.clientPreference) || { wall: true }
+  const wall = (data && data.clientPreference.wall) || true
 
   return (
     <main className="l-row">

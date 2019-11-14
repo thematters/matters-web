@@ -16,7 +16,7 @@ import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
-import { TEXT } from '~/common/enums'
+import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
@@ -95,7 +95,9 @@ const SeedBadge = () => (
 
 const CivicLikerBadge = () => (
   <>
-    <span className="badge-civic-liker">Civic Liker</span>
+    <a href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT} target="_blank">
+      <span className="badge-civic-liker">Civic Liker</span>
+    </a>
     <style jsx>{styles}</style>
   </>
 )

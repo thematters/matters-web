@@ -12,8 +12,6 @@
   "emmet.syntaxProfiles": {
     "postcss": "css"
   },
-
-  "prettier.singleQuote": true,
   "prettier.requireConfig": true,
 
   "javascript.updateImportsOnFileMove.enabled": "never",

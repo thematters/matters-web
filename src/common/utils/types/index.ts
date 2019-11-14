@@ -22,6 +22,7 @@ export default gql`
   type ClientPreference {
     id: ID!
     feedSortType: FeedSortType
+    readCivicLikerModal: Boolean!
     wall: Boolean!
   }
 
