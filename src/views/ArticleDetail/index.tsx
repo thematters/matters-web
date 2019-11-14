@@ -269,7 +269,12 @@ const ArticleDetail = ({
           <Toolbar placement="left" article={article} />
         </section>
 
-        <Toolbar placement="bottom" article={article} fixed={fixedToolbar} />
+        <Toolbar
+          placement="bottom"
+          article={article}
+          fixed={fixedToolbar}
+          mobile={!isMediumUp}
+        />
       </Block>
 
       <Waypoint onPositionChange={handleWall}>

@@ -4,10 +4,11 @@ import { forwardRef, useContext, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { ModalSwitch, Translate } from '~/components'
+import { ModalSwitch, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import IconLike from '~/components/Icon/Like'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -16,8 +17,6 @@ import { analytics, numAbbr } from '~/common/utils'
 
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
-import IconAppreciate from './IconAppreciate'
-import OnboardingAppreciateButton from './OnboardingAppreciateButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -50,35 +49,88 @@ interface AppreciateButtonProps {
   disabled?: boolean
   onClick?: () => void
   count?: number | 'MAX'
+  total: number
+  inFixedToolbar?: boolean
 }
 
 const AppreciateButton = forwardRef<HTMLButtonElement, AppreciateButtonProps>(
-  ({ disabled, onClick, count }, ref) => {
+  ({ disabled, onClick, count, total, inFixedToolbar }, ref) => {
+    const buttonClass = classNames({
+      'appreciate-button': !inFixedToolbar
+    })
     const countClass = classNames({
       'appreciated-count': true,
       max: count === 'MAX'
     })
 
     return (
-      <button
-        className="appreciate-button"
-        type="button"
-        ref={ref}
-        aria-disabled={disabled}
-        onClick={onClick}
-        aria-label="讚賞作品"
-      >
-        <IconAppreciate />
+      <>
+        <button
+          className={buttonClass}
+          type="button"
+          ref={ref}
+          aria-disabled={disabled}
+          onClick={onClick}
+          aria-label="讚賞作品"
+        >
+          {inFixedToolbar ? (
+            <TextIcon
+              icon={<IconLike style={{ width: 20, height: 20 }} />}
+              color="green"
+              weight="medium"
+              text={count}
+              size="xs"
+              spacing="xxtight"
+            />
+          ) : (
+            <>
+              <IconLike style={{ width: 22, height: 22 }} />
+              {count && <span className={countClass}>{count}</span>}
+            </>
+          )}
+        </button>
 
-        {count && <span className={countClass}>{count}</span>}
+        {!inFixedToolbar && (
+          <span className="appreciate-count">{numAbbr(total)}</span>
+        )}
 
         <style jsx>{styles}</style>
-      </button>
+      </>
     )
   }
 )
 
-const CivicLikerButton = ({ onClick }: { onClick: () => void }) => (
+const OnboardingAppreciateButton = ({
+  total,
+  inFixedToolbar
+}: {
+  total: number
+  inFixedToolbar?: boolean
+}) => {
+  return (
+    <ModalSwitch modalId="likeCoinTermModal">
+      {(open: any) => (
+        <AppreciateButton
+          onClick={() => {
+            open()
+          }}
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+      )}
+    </ModalSwitch>
+  )
+}
+
+const CivicLikerButton = ({
+  onClick,
+  total,
+  inFixedToolbar
+}: {
+  onClick: () => void
+  total: number
+  inFixedToolbar?: boolean
+}) => (
   <ModalSwitch modalId="civicLikerModal">
     {(open: any) => (
       <AppreciateButton
@@ -87,15 +139,19 @@ const CivicLikerButton = ({ onClick }: { onClick: () => void }) => (
           onClick()
         }}
         count="MAX"
+        total={total}
+        inFixedToolbar={inFixedToolbar}
       />
     )}
   </ModalSwitch>
 )
 
 const AppreciationButtonContainer = ({
-  article
+  article,
+  inFixedToolbar
 }: {
   article: AppreciationArticleDetail
+  inFixedToolbar?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -153,12 +209,10 @@ const AppreciationButtonContainer = ({
   if (viewer.shouldSetupLikerID) {
     return (
       <section className="container">
-        <OnboardingAppreciateButton />
-
-        <span className="appreciate-count">
-          {numAbbr(article.appreciationsReceivedTotal)}
-        </span>
-
+        <OnboardingAppreciateButton
+          total={article.appreciationsReceivedTotal}
+          inFixedToolbar={inFixedToolbar}
+        />
         <style jsx>{styles}</style>
       </section>
     )
@@ -174,6 +228,8 @@ const AppreciationButtonContainer = ({
               ? appreciatedCount
               : undefined
           }
+          total={article.appreciationsReceivedTotal}
+          inFixedToolbar={inFixedToolbar}
         />
       )}
 
@@ -186,6 +242,8 @@ const AppreciationButtonContainer = ({
             })
             analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
           }}
+          total={article.appreciationsReceivedTotal}
+          inFixedToolbar={inFixedToolbar}
         />
       )}
 
@@ -217,13 +275,11 @@ const AppreciationButtonContainer = ({
                 ? appreciatedCount
                 : undefined
             }
+            total={article.appreciationsReceivedTotal}
+            inFixedToolbar={inFixedToolbar}
           />
         </Tooltip>
       )}
-
-      <span className="appreciate-count">
-        {numAbbr(article.appreciationsReceivedTotal)}
-      </span>
 
       <style jsx>{styles}</style>
     </section>
