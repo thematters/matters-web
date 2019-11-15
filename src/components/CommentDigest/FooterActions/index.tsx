@@ -142,7 +142,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
           )}
         </div>
 
-        {/* We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
+        {/* FIXME: We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
         {hasLink ? (
           <a
             href={commentPath.as}
