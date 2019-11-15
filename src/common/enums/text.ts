@@ -351,7 +351,7 @@ export const TEXT = {
       CODE_INVALID: '验证码不正确',
       CODE_EXPIRED: '验证码已过期',
       UNABLE_TO_UPLOAD_FROM_URL:
-        '档案上传失败，请确认档案链接是否有效，或手动下载後再上传'
+        '文件上传失败，请确认文件链接是否有效，或手动下载后再上传'
     } as { [key: string]: string }
   }
 }
