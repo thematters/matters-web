@@ -58,7 +58,8 @@ const AppreciationButton = ({
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const readCivicLikerModal = data && data.clientPreference.readCivicLikerModal
+  const readCivicLikerModal =
+    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
 
   // bundle appreciations
   const [amount, setAmount] = useState(0)
