@@ -172,7 +172,8 @@ export const TEXT = {
       ACTION_FAILED: '操作失敗，請稍候重試',
       CODE_INVALID: '驗證碼不正確',
       CODE_EXPIRED: '驗證碼已過期',
-      UNABLE_TO_UPLOAD_FROM_URL: '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳'
+      UNABLE_TO_UPLOAD_FROM_URL:
+        '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳'
     } as { [key: string]: string }
   },
 
@@ -349,7 +350,8 @@ export const TEXT = {
       ACTION_FAILED: '操作失败，请稍候重试',
       CODE_INVALID: '验证码不正确',
       CODE_EXPIRED: '验证码已过期',
-      UNABLE_TO_UPLOAD_FROM_URL: '档案上传失败，请确认档案链接是否有效，或手动下载後再上传',
+      UNABLE_TO_UPLOAD_FROM_URL:
+        '档案上传失败，请确认档案链接是否有效，或手动下载後再上传'
     } as { [key: string]: string }
   }
 }
