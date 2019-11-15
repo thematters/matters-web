@@ -169,12 +169,13 @@ const LatestResponses = () => {
 
   // real time update with websocket
   useEffect(() => {
-    if (article && edges) {
+    if (article && article.live && edges && pageInfo) {
       subscribeToMore<ArticleCommentAdded>({
         document: SUBSCRIBE_RESPONSES,
         variables: {
           id: article.id,
-          first: edges.length,
+          before: pageInfo.endCursor,
+          includeBefore: true,
           articleOnly: articleOnlyMode
         },
         updateQuery: (prev, { subscriptionData }) =>
