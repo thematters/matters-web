@@ -56,10 +56,9 @@
   color: var(--color-white);
   font-size: calc(var(--font-size-xs) - 1px);
   font-weight: var(--font-weight-bold);
-  line-height: 0.65rem;
+  line-height: 1rem;
 
   background: var(--color-matters-green);
-  border: 1.5px solid var(--color-matters-green);
   border-radius: 50%;
 
   &.max {
