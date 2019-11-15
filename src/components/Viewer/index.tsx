@@ -11,7 +11,10 @@ export const ViewerUserFragment = {
       userName
       displayName
       avatar
-      likerId
+      liker {
+        likerId
+        civicLiker
+      }
       status {
         state
         role
@@ -40,6 +43,7 @@ type Viewer = ViewerUser & {
   isOnboarding: boolean
   isInactive: boolean
   isAdmin: boolean
+  isCivicLiker: boolean
   shouldSetupLikerID: boolean
 }
 
@@ -54,7 +58,8 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isOnboarding = state === 'onboarding'
   const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
   const isAdmin = role === 'admin'
-  const shouldSetupLikerID = isOnboarding || !viewer.likerId
+  const isCivicLiker = viewer.liker.civicLiker
+  const shouldSetupLikerID = isOnboarding || !viewer.liker.likerId
 
   // Add user info for Sentry
   Sentry.configureScope((scope: any) => {
@@ -76,6 +81,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isOnboarding,
     isInactive,
     isAdmin,
+    isCivicLiker,
     shouldSetupLikerID
   }
 }

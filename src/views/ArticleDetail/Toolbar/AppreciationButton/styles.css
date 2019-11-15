@@ -50,19 +50,18 @@
   position: absolute;
   right: -0.15rem;
   bottom: -0.15rem;
-
-  background: var(--color-matters-green);
-  border: 1.5px solid var(--color-matters-green);
-  border-radius: 50%;
-  color: var(--color-white);
-  font-size: 0.65rem;
-  font-weight: bold;
-  line-height: 0.65rem;
   width: 1rem;
   height: 1rem;
-}
 
-.appreciated-reach-limit {
-  background: var(--color-white);
-  color: var(--color-matters-green);
+  color: var(--color-white);
+  font-size: calc(var(--font-size-xs) - 1px);
+  font-weight: var(--font-weight-bold);
+  line-height: 1rem;
+
+  background: var(--color-matters-green);
+  border-radius: 50%;
+
+  &.max {
+    font-size: 6px;
+  }
 }

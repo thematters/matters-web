@@ -19,12 +19,17 @@ type LinkButtonProps = {
   as: string
 } & BaseButtonProps
 
+type AnchorButtonProps = {
+  is: 'anchor'
+  href: string
+} & BaseButtonProps
+
 type NativeButtonProps = {
   is?: 'button'
   htmlType?: 'button' | 'submit'
 } & BaseButtonProps
 
-type ButtonProps = LinkButtonProps | NativeButtonProps
+type ButtonProps = LinkButtonProps | NativeButtonProps | AnchorButtonProps
 
 const FooterButton: React.FC<ButtonProps> = ({
   width = 'half',
@@ -59,6 +64,17 @@ const FooterButton: React.FC<ButtonProps> = ({
 
         <style jsx>{styles}</style>
       </>
+    )
+  }
+
+  // anchor
+  if (is === 'anchor') {
+    return (
+      <a href={href} className={buttonClasses} {...restProps}>
+        {children}
+
+        <style jsx>{styles}</style>
+      </a>
     )
   }
 

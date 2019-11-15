@@ -19,6 +19,10 @@ section {
   padding: 0;
 }
 
+.small {
+  padding: var(--spacing-default);
+}
+
 .default {
   padding: 3.5rem var(--spacing-tight);
 
