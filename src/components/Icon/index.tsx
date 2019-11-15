@@ -11,6 +11,8 @@ export type IconSize =
   | 'xlarge'
   | 'xxlarge'
 
+export type IconColor = 'white' | 'black' | 'grey-dark' | 'grey'
+
 interface IconBaseProps {
   size?: IconSize
   [key: string]: any
@@ -18,7 +20,7 @@ interface IconBaseProps {
 
 type SVGIconProps = {
   id: string
-  color?: 'white' | 'black' | 'grey-dark' | 'grey'
+  color?: IconColor
   viewBox: string
 } & IconBaseProps
 
@@ -26,7 +28,7 @@ type ImgIconProps = {
   src: string
 } & IconBaseProps
 
-type IconProps = SVGIconProps | ImgIconProps
+export type IconProps = SVGIconProps | ImgIconProps
 
 /**
  * `<Icon>` component that render as `<svg>` or `<img>`

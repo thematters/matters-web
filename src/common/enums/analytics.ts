@@ -25,7 +25,9 @@ export const ANALYTICS_EVENTS = {
   SIGNUP_START: 'signup-start',
   SIGNUP_SUCCESS: 'signup-success',
   FOLLOW_USER: 'follow-user',
-  UNFOLLOW_USER: 'unfollow-user'
+  UNFOLLOW_USER: 'unfollow-user',
+  OPEN_CIVIC_LIKER_MODAL: 'open-civic-liker-modal',
+  CLOSE_CIVIC_LIKER_MODAL: 'close-civic-liker-modal'
 }
 
 export const SHARE_TYPE = {

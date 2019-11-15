@@ -16,7 +16,7 @@ import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
-import { TEXT } from '~/common/enums'
+import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
@@ -34,6 +34,9 @@ const fragments = {
       id
       userName
       displayName
+      liker {
+        civicLiker
+      }
       info {
         badges {
           type
@@ -88,6 +91,15 @@ const SeedBadge = () => (
       />
     </span>
   </Tooltip>
+)
+
+const CivicLikerBadge = () => (
+  <>
+    <a href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT} target="_blank">
+      <span className="badge-civic-liker">Civic Liker</span>
+    </a>
+    <style jsx>{styles}</style>
+  </>
 )
 
 const CoverContainer: React.FC = ({ children }) => (
@@ -159,6 +171,7 @@ const BaseUserProfile = () => {
   const badges = user.info.badges || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
+  const isCivicLiker = user.liker.civicLiker
 
   return (
     <section className={containerClass}>
@@ -200,6 +213,7 @@ const BaseUserProfile = () => {
                       <span className="name">{user.displayName}</span>
                       <span className="username">@{user.userName}</span>
                       {hasSeedBadge && <SeedBadge />}
+                      {isCivicLiker && <CivicLikerBadge />}
                       <span className="u-sm-up-hide">
                         {!isMe && <FollowButton.State user={user} />}
                       </span>

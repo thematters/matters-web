@@ -35,11 +35,13 @@ const fragments = {
 const Toolbar = ({
   article,
   placement,
-  fixed
+  fixed,
+  mobile
 }: {
   article: ToolbarArticle
   placement: 'bottom' | 'left'
   fixed?: boolean
+  mobile?: boolean
 }) => {
   if (placement === 'left') {
     return (
@@ -68,8 +70,11 @@ const Toolbar = ({
       </section>
 
       <section className="right">
+        {mobile && fixed && (
+          <AppreciationButton article={article} inFixedToolbar />
+        )}
         <ResponseButton article={article} />
-        <ExtendButton article={article} />
+        {!mobile && fixed && <ExtendButton article={article} />}
         <BookmarkButton article={article} size="default" />
         <ShareButton />
         <MoreButton article={article} />

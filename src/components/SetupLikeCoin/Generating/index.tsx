@@ -21,7 +21,9 @@ const GENERATE_LIKER_ID = gql`
   mutation GenerateLikerId {
     generateLikerId {
       id
-      likerId
+      liker {
+        likerId
+      }
       status {
         state
       }
@@ -35,7 +37,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
   useEffect(() => {
     generate().then(result => {
       const likerId =
-        result && result.data && result.data.generateLikerId.likerId
+        result && result.data && result.data.generateLikerId.liker.likerId
 
       if (likerId) {
         nextStep()

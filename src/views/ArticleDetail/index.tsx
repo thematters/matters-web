@@ -41,6 +41,7 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
@@ -126,7 +127,7 @@ const ArticleDetail = ({
   wall: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [fixedToolbar, setFixedToolbar] = useState(false)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'medium-up' })()
@@ -268,7 +269,12 @@ const ArticleDetail = ({
           <Toolbar placement="left" article={article} />
         </section>
 
-        <Toolbar placement="bottom" article={article} fixed={fixedToolbar} />
+        <Toolbar
+          placement="bottom"
+          article={article}
+          fixed={fixedToolbar}
+          mobile={!isMediumUp}
+        />
       </Block>
 
       <Waypoint onPositionChange={handleWall}>
@@ -299,8 +305,9 @@ const ArticleDetail = ({
           </>
         )}
 
+        {/* Modals */}
         <AppreciatorsModal />
-
+        <CivicLikerModal />
         <ShareModal />
       </Block>
 
@@ -312,8 +319,10 @@ const ArticleDetail = ({
 const ArticleDetailContainer = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
-  const { wall } = (data && data.clientPreference) || { wall: true }
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const wall = (data && data.clientPreference.wall) || true
 
   return (
     <main className="l-row">

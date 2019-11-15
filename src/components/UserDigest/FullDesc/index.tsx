@@ -2,13 +2,13 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
+import IconLike from '~/components/Icon/Like'
 
 import { numAbbr, toPath } from '~/common/utils'
-import ICON_LIKE from '~/static/icons/like.svg?sprite'
 
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
@@ -22,10 +22,6 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
-const LikeIcon = () => (
-  <Icon size="small" id={ICON_LIKE.id} viewBox={ICON_LIKE.viewBox} />
-)
-
 const appreciationIconStyle = { marginRight: '0.5rem' }
 
 const Appreciation = ({ sum }: { sum?: number }) => {
@@ -35,7 +31,7 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   const abbrSum = numAbbr(sum)
   return (
     <TextIcon
-      icon={<LikeIcon />}
+      icon={<IconLike size="small" />}
       color="green"
       weight="medium"
       text={abbrSum}
