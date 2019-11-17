@@ -12,7 +12,7 @@ import { translate } from '~/common/utils'
 import styles from './styles.css'
 
 export interface ContainerProps {
-  children: any
+  children: (props: any) => React.ReactElement
   close: () => void
   defaultCloseable?: boolean
   prevModalId?: string

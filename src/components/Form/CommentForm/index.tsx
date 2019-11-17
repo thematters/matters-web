@@ -5,6 +5,8 @@ import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { useMutation } from '~/components/GQL'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { Icon } from '~/components/Icon'
 import IconSpinner from '~/components/Icon/Spinner'
@@ -13,8 +15,8 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST } from '~/common/enums'
-import { dom, trimLineBreaks } from '~/common/utils'
+import { ADD_TOAST, TEXT } from '~/common/enums'
+import { dom, subscribePush, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
@@ -88,9 +90,15 @@ const CommentForm = ({
       id: commentDraftId
     }
   })
+  const { data: clientPreferenceData } = useQuery<ClientPreference>(
+    CLIENT_PREFERENCE
+  )
   const [putComment] = useMutation<PutComment>(PUT_COMMENT, {
     refetchQueries
   })
+
+  const push =
+    clientPreferenceData && clientPreferenceData.clientPreference.push
   const draftContent = (data && data.commentDraft.content) || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
@@ -120,12 +128,32 @@ const CommentForm = ({
       if (submitCallback) {
         submitCallback()
       }
+
       setContent('')
+
+      if (!push || !push.supported || push.enabled) {
+        return
+      }
+
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+            header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
+            content: (
+              <Translate
+                zh_hant={TEXT.zh_hant.pushDescription}
+                zh_hans={TEXT.zh_hans.pushDescription}
+              />
+            ),
+            customButton: (
+              <button type="button" onClick={() => subscribePush()}>
+                <Translate
+                  zh_hant={TEXT.zh_hant.confirmPush}
+                  zh_hans={TEXT.zh_hans.confirmPush}
+                />
+              </button>
+            )
           }
         })
       )

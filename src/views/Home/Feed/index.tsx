@@ -155,9 +155,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 }
 
 const HomeFeed = () => {
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
-  })
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
   const { feedSortType } = (data && data.clientPreference) || {
     feedSortType: 'hottest'
   }

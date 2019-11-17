@@ -1,7 +1,6 @@
 import classNames from 'classnames'
-import { useContext } from 'react'
 
-import { Icon, LanguageContext } from '~/components'
+import { Icon } from '~/components'
 
 import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
@@ -21,11 +20,6 @@ export interface ToastProps {
   color: 'green' | 'grey' | 'red' | 'white'
   header?: string | React.ReactNode
   content?: string | React.ReactNode
-  translations?: {
-    zh_hant: string
-    zh_hans?: string
-    en?: string
-  }
 
   closeButton?: boolean
   onCloseButtonClick?: () => any
@@ -37,24 +31,17 @@ export const Toast: React.FC<ToastProps> = ({
   color,
   header,
   content,
-  translations,
   closeButton,
   onCloseButtonClick,
   customButton,
   buttonPlacement = 'top'
 }) => {
-  const { lang } = useContext(LanguageContext)
   const mainClass = classNames({
     toast: true,
     [color]: !!color,
     [buttonPlacement]: buttonPlacement
   })
   const isWhite = color === 'white'
-
-  // overide content when translations provided
-  if (translations) {
-    content = translations[lang]
-  }
 
   return (
     <section className={mainClass}>

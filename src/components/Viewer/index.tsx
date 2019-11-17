@@ -34,7 +34,7 @@ export const ViewerUserFragment = {
   `
 }
 
-type Viewer = ViewerUser & {
+export type Viewer = ViewerUser & {
   isAuthed: boolean
   isActive: boolean
   isArchived: boolean

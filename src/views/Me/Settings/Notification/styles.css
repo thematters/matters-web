@@ -4,14 +4,19 @@
   font-size: var(--font-size-sm);
 }
 
-.setting-section {
+.setting-item {
   @mixin flex-center-space-between;
   padding-bottom: var(--spacing-default);
 
-  & + .setting-section {
+  & + .setting-item {
     @mixin border-top-grey;
-
     padding: var(--spacing-default) 0;
+  }
+
+  & .description {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
   }
 }
 

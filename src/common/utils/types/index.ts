@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export default gql`
   extend type Query {
     commentDraft(input: CommentDraftInput!): CommentDraft!
-    clientPreference(input: ClientPreferenceInput!): ClientPreference!
+    clientPreference: ClientPreference!
   }
 
   extend type Official {
@@ -24,10 +24,12 @@ export default gql`
     feedSortType: FeedSortType
     readCivicLikerModal: Boolean!
     wall: Boolean!
+    push: Push!
   }
 
-  input ClientPreferenceInput {
-    id: ID!
+  type Push {
+    enabled: Boolean!
+    supported: Boolean!
   }
 
   enum FeedSortType {

@@ -35,7 +35,9 @@ const nextConfig = {
     OAUTH_URL: process.env.OAUTH_URL,
     SEGMENT_KEY: process.env.SEGMENT_KEY,
     FB_APP_ID: process.env.FB_APP_ID,
-    SENTRY_DSN: process.env.SENTRY_DSN
+    SENTRY_DSN: process.env.SENTRY_DSN,
+    FIREBASE_CONFIG: JSON.parse(process.env.FIREBASE_CONFIG || '{}'),
+    FCM_VAPID_KEY: process.env.FCM_VAPID_KEY
   },
 
   /**

@@ -3,12 +3,13 @@ import { useQuery } from 'react-apollo'
 
 import { Head, PageHeader, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { Switch } from '~/components/Switch'
 
 import { TEXT } from '~/common/enums'
 
 import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
+import PushSwitch from './PushSwitch'
+import SettingItem from './SettingItem'
 import styles from './styles.css'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
@@ -46,8 +47,9 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
       id
       settings {
         notification {
-          mention
+          enable
           email
+          mention
           follow
           comment
           appreciation
@@ -64,7 +66,34 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
   }
 `
 
-const settingsMap = {
+type SettingItemKey =
+  | 'enable'
+  | 'email'
+  | 'mention'
+  | 'follow'
+  | 'comment'
+  | 'appreciation'
+  | 'articleSubscription'
+  | 'commentSubscribed'
+  | 'downstream'
+  | 'commentPinned'
+  | 'commentVoted'
+  | 'officialNotice'
+  | 'reportFeedback'
+
+interface SettingItem {
+  key: SettingItemKey
+  title: React.ReactNode
+  description?: React.ReactNode
+}
+
+const settingsMap: {
+  me: SettingItem[]
+  article: SettingItem[]
+  comment: SettingItem[]
+  preference: SettingItem[]
+  others: SettingItem[]
+} = {
   me: [
     {
       key: 'mention',
@@ -84,10 +113,6 @@ const settingsMap = {
       key: 'articleSubscription',
       title: <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />
     },
-    // {
-    //   key: 'downstream',
-    //   title: <Translate zh_hant="作品上游变更" zh_hans="作品上游变更" />
-    // },
     {
       key: 'commentSubscribed',
       title: (
@@ -109,11 +134,19 @@ const settingsMap = {
       title: <Translate zh_hant="評論被頂踩" zh_hans="评论被顶踩" />
     }
   ],
-  others: [
+  preference: [
     {
       key: 'email',
-      title: <Translate zh_hant="電子信箱通知" zh_hans="邮箱通知" />
-    },
+      title: <Translate zh_hant="電子信箱通知" zh_hans="邮箱通知" />,
+      description: (
+        <Translate
+          zh_hant="精選過去 24 小時與你有關的消息"
+          zh_hans="精选过去 24 小时与你有关的消息"
+        />
+      )
+    }
+  ],
+  others: [
     {
       key: 'officialNotice',
       title: <Translate zh_hant="官方公告" zh_hans="官方公告" />
@@ -132,15 +165,14 @@ const SettingsNotification = () => {
   const { data } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
   )
-  const settings: any =
-    (data && data.viewer && data.viewer.settings.notification) || {}
+  const settings = data && data.viewer && data.viewer.settings.notification
   const id = data && data.viewer && data.viewer.id
 
-  const onChange = (type: string) => {
-    if (!id) {
-      return
-    }
+  if (!id || !settings) {
+    return null
+  }
 
+  const handleOnChange = (type: SettingItemKey) => {
     updateNotification({
       variables: {
         type,
@@ -175,35 +207,37 @@ const SettingsNotification = () => {
       <div className="l-row first">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
+            pageTitle={<Translate zh_hant="偏好" zh_hans="偏好" />}
             is="h2"
           />
 
-          {settingsMap.me.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+          <PushSwitch />
+
+          {settingsMap.preference.map(setting => (
+            <SettingItem
+              key={setting.key}
+              enabled={settings[setting.key]}
+              title={setting.title}
+              description={setting.description}
+              onChange={() => handleOnChange(setting.key)}
+            />
           ))}
         </section>
 
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
+            pageTitle={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
             is="h2"
           />
 
-          {settingsMap.others.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+          {settingsMap.me.map(setting => (
+            <SettingItem
+              key={setting.key}
+              enabled={settings[setting.key]}
+              title={setting.title}
+              description={setting.description}
+              onChange={() => handleOnChange(setting.key)}
+            />
           ))}
         </section>
       </div>
@@ -216,13 +250,13 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.article.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <SettingItem
+              key={setting.key}
+              enabled={settings[setting.key]}
+              title={setting.title}
+              description={setting.description}
+              onChange={() => handleOnChange(setting.key)}
+            />
           ))}
         </section>
 
@@ -233,13 +267,32 @@ const SettingsNotification = () => {
           />
 
           {settingsMap.comment.map(setting => (
-            <section className="setting-section" key={setting.key}>
-              <span className="title">{setting.title}</span>
-              <Switch
-                checked={settings[setting.key]}
-                onChange={() => onChange(setting.key)}
-              />
-            </section>
+            <SettingItem
+              key={setting.key}
+              enabled={settings[setting.key]}
+              title={setting.title}
+              description={setting.description}
+              onChange={() => handleOnChange(setting.key)}
+            />
+          ))}
+        </section>
+      </div>
+
+      <div className="l-row">
+        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+          <PageHeader
+            pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
+            is="h2"
+          />
+
+          {settingsMap.others.map(setting => (
+            <SettingItem
+              key={setting.key}
+              enabled={settings[setting.key]}
+              title={setting.title}
+              description={setting.description}
+              onChange={() => handleOnChange(setting.key)}
+            />
           ))}
         </section>
       </div>
