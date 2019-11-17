@@ -25,16 +25,15 @@
       left: calc(var(--followee-comment-avatar-size) / 2);
       bottom: var(--spacing-default);
       height: 0;
-      height: calc(
-        100% - var(--spacing-loose) - var(--spacing-tight) * 3
-      );
+      height: calc(100% - var(--spacing-loose) - var(--spacing-tight) * 3);
       width: 1px;
       background-color: var(--color-line-grey-light);
     }
   }
 
   & :global(div.content-wrap) {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--spacing-tight);
+    padding-left: var(--spacing-loose);
   }
 
   & :global(footer.actions) {
@@ -51,9 +50,7 @@ li:first-child {
     padding-top: 0;
 
     &::before {
-      height: calc(
-        100% - var(--spacing-default) - var(--spacing-tight) * 2
-      );
+      height: calc(100% - var(--spacing-default) - var(--spacing-tight) * 2);
     }
   }
 }
