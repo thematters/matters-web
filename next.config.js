@@ -15,6 +15,10 @@ const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
 
+const FIREBASE_CONFIG = JSON.parse(
+  Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString()
+)
+
 const nextConfig = {
   /**
    * Runtime configs
@@ -36,7 +40,7 @@ const nextConfig = {
     SEGMENT_KEY: process.env.SEGMENT_KEY,
     FB_APP_ID: process.env.FB_APP_ID,
     SENTRY_DSN: process.env.SENTRY_DSN,
-    FIREBASE_CONFIG: JSON.parse(process.env.FIREBASE_CONFIG || '{}'),
+    FIREBASE_CONFIG,
     FCM_VAPID_KEY: process.env.FCM_VAPID_KEY
   },
 
