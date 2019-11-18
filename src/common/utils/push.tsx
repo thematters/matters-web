@@ -14,13 +14,8 @@ import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 const STORE_KEY_PUSH = '__PUSH'
 
 const {
-  publicRuntimeConfig: { ENV, FIREBASE_CONFIG, FCM_VAPID_KEY }
+  publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY }
 } = getConfig()
-
-const URL_SW =
-  ENV === 'production'
-    ? '/firebase-messaging-sw-production.js'
-    : '/firebase-messaging-sw-develop.js'
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
@@ -61,7 +56,10 @@ export const initializePush = async ({
   messaging.usePublicVapidKey(FCM_VAPID_KEY)
 
   // Register our custom path service worker
-  const registration = await window.navigator.serviceWorker.register(URL_SW)
+  const registration = await window.navigator.serviceWorker.register(
+    '/service-worker.js'
+  )
+  console.log('[Push] SW registered: ', registration)
   messaging.useServiceWorker(registration)
 
   // Handle incoming messages. Called when:
@@ -105,7 +103,25 @@ export const initializePush = async ({
 export const subscribePush = async () => {
   // Request token
   await requestPermission()
-  const token = await getToken()
+
+  let token
+  try {
+    token = await getToken()
+  } catch (e) {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: (
+            <Translate
+              zh_hant="操作失敗，請檢查網路連線"
+              zh_hans="操作失败，请检查网路连线"
+            />
+          )
+        }
+      })
+    )
+  }
 
   try {
     if (!cachedClient) {
@@ -233,19 +249,6 @@ const getToken = async () => {
     }
   } catch (e) {
     console.error('[Push] An error occurred while retrieving token. ', e)
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="操作失敗，請檢查網路連線"
-              zh_hans="操作失败，请检查网路连线"
-            />
-          )
-        }
-      })
-    )
     throw e
   }
 }
