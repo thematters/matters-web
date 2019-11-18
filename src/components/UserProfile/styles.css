@@ -94,6 +94,7 @@
 
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
+    line-height: 1;
     color: var(--color-grey);
   }
 
