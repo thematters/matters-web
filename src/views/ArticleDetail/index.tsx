@@ -322,7 +322,7 @@ const ArticleDetailContainer = () => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const wall = (data && data.clientPreference.wall) || true
+  const { wall } = (data && data.clientPreference) || { wall: true }
 
   return (
     <main className="l-row">

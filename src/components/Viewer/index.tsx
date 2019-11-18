@@ -59,7 +59,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
   const isAdmin = role === 'admin'
   const isCivicLiker = viewer.liker.civicLiker
-  const shouldSetupLikerID = isOnboarding || !viewer.liker.likerId
+  const shouldSetupLikerID = isAuthed && (isOnboarding || !viewer.liker.likerId)
 
   // Add user info for Sentry
   Sentry.configureScope((scope: any) => {
