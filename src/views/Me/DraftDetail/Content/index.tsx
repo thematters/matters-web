@@ -89,6 +89,10 @@ const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
     coverAssetId?: string | null
   }) => {
     try {
+      if (draft && draft.publishState === 'published') {
+        return
+      }
+
       updateHeaderState({ type: 'draft', state: 'saving', draftId })
       await updateDraft({ variables: { id: draft.id, ...newDraft } })
       updateHeaderState({ type: 'draft', state: 'saved', draftId })
