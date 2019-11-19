@@ -89,9 +89,6 @@ const AppreciationButton = ({
     })
   }, APPRECIATE_DEBOUNCE)
   const appreciate = () => {
-    if (left <= 0) {
-      return
-    }
     setAmount(amount + 1)
     debouncedSendAppreciation()
   }
