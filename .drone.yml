@@ -26,13 +26,17 @@ steps:
       - npm run test
       - codecov
 
-  - name: build
+  # === CI tasks for `develop` branch ===
+  - name: develop:build
     image: node:11.14.0
     commands:
-      - cp .env.example .env
       - npm run build
+    environment:
+      ENV: development
+    when:
+      branch:
+        - develop
 
-  # === CI tasks for `develop` branch ===
   - name: develop:upload
     image: plugins/s3
     settings:
@@ -48,7 +52,6 @@ steps:
     when:
       branch:
         - develop
-        - feature/dotenv
       event:
         - push
 
@@ -72,6 +75,16 @@ steps:
         - push
 
   # === CI tasks for `master` branch ===
+  - name: prod:build
+    image: node:11.14.0
+    commands:
+      - npm run build
+    environment:
+      ENV: production
+    when:
+      branch:
+        - master
+
   - name: prod:upload
     image: plugins/s3
     settings:
@@ -87,7 +100,6 @@ steps:
     when:
       branch:
         - master
-        - feature/master
       event:
         - push
 
@@ -106,7 +118,6 @@ steps:
       - bash ./bin/eb-deploy.sh prod
     when:
       branch:
-        - feature/master
         - master
       event:
         - push
