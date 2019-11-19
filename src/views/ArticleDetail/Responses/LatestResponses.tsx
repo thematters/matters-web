@@ -28,7 +28,10 @@ import {
   unshiftConnections
 } from '~/common/utils'
 
-import { ArticleCommentAdded, ArticleCommentAdded_nodeEdited_Article } from './__generated__/ArticleCommentAdded'
+import {
+  ArticleCommentAdded,
+  ArticleCommentAdded_nodeEdited_Article
+} from './__generated__/ArticleCommentAdded'
 import styles from './styles.css'
 
 const RESPONSES_COUNT = 15
@@ -184,8 +187,13 @@ const LatestResponses = () => {
             return prev
           }
           const oldData = prev.article
-          const newData = subscriptionData.data.nodeEdited as ArticleCommentAdded_nodeEdited_Article
-          const diff = _differenceBy(newData.responses.edges, oldData.responses.edges || [], 'node.id')
+          const newData = subscriptionData.data
+            .nodeEdited as ArticleCommentAdded_nodeEdited_Article
+          const diff = _differenceBy(
+            newData.responses.edges,
+            oldData.responses.edges || [],
+            'node.id'
+          )
           return {
             article: {
               ...oldData,
