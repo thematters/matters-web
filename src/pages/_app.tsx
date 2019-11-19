@@ -39,10 +39,11 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
             <AnalyticsProvider>
               <ModalProvider>
                 <GlobalStyles />
-                <PushInitializer client={apollo} />
 
                 <Layout>
                   <Component {...pageProps} />
+
+                  <PushInitializer client={apollo} />
                 </Layout>
               </ModalProvider>
             </AnalyticsProvider>

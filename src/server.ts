@@ -23,7 +23,7 @@ try {
   console.log('error loading .env file', err)
 }
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.ENV === 'production'
 const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()

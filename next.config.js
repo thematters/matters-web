@@ -15,9 +15,13 @@ const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
 
+const isProd = process.env.ENV === 'production'
 const FIREBASE_CONFIG = JSON.parse(
   Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString()
 )
+const URL_PUSH_SW = isProd
+  ? './firebase-messaging-sw-production.js'
+  : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
   /**
@@ -142,7 +146,11 @@ module.exports = withPlugins(
     [
       withOffline,
       {
+        // FIXME: https://github.com/hanford/next-offline/issues/195
+        generateInDevMode: true,
         workboxOpts: {
+          // https://github.com/hanford/next-offline/issues/35
+          importScripts: [URL_PUSH_SW],
           runtimeCaching: [
             {
               urlPattern: '/',
