@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
+import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 import _merge from 'lodash/merge'
@@ -27,7 +28,10 @@ import {
   unshiftConnections
 } from '~/common/utils'
 
-import { ArticleCommentAdded } from './__generated__/ArticleCommentAdded'
+import {
+  ArticleCommentAdded,
+  ArticleCommentAdded_nodeEdited_Article
+} from './__generated__/ArticleCommentAdded'
 import styles from './styles.css'
 
 const RESPONSES_COUNT = 15
@@ -37,7 +41,7 @@ const SUBSCRIBE_RESPONSES = gql`
     $id: ID!
     $before: String
     $after: String
-    $first: Int!
+    $first: Int
     $includeAfter: Boolean
     $includeBefore: Boolean
     $hasDescendantComments: Boolean = true
@@ -178,10 +182,32 @@ const LatestResponses = () => {
           includeBefore: true,
           articleOnly: articleOnlyMode
         },
-        updateQuery: (prev, { subscriptionData }) =>
-          _merge(prev, {
-            article: subscriptionData.data.nodeEdited
-          })
+        updateQuery: (prev, { subscriptionData }) => {
+          if (!prev.article) {
+            return prev
+          }
+          const oldData = prev.article
+          const newData = subscriptionData.data
+            .nodeEdited as ArticleCommentAdded_nodeEdited_Article
+          const diff = _differenceBy(
+            newData.responses.edges,
+            oldData.responses.edges || [],
+            'node.id'
+          )
+          return {
+            article: {
+              ...oldData,
+              responses: {
+                ...oldData.responses,
+                edges: [...diff, ...(oldData.responses.edges || [])],
+                pageInfo: {
+                  ...newData.responses.pageInfo,
+                  endCursor: oldData.responses.pageInfo.endCursor
+                }
+              }
+            }
+          }
+        }
       })
     }
   }, [articleId])
