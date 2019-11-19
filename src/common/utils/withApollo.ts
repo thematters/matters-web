@@ -34,7 +34,7 @@ const isProd = ENV === 'production'
 
 // toggle http for local dev
 const agent =
-  API_URL.split(':')[0] === 'http'
+  (API_URL || '').split(':')[0] === 'http'
     ? new http.Agent()
     : new https.Agent({
         rejectUnauthorized: isProd // allow access to https:...matters.news in localhost

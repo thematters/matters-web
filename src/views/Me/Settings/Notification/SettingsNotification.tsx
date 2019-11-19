@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
-import { Head, PageHeader, Translate } from '~/components'
+import { Head, PageHeader, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -162,11 +162,15 @@ const SettingsNotification = () => {
   const [updateNotification] = useMutation<UpdateViewerNotification>(
     UPDATE_VIEWER_NOTIFICATION
   )
-  const { data } = useQuery<ViewerNotificationSettings>(
+  const { data, loading } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
   )
   const settings = data && data.viewer && data.viewer.settings.notification
   const id = data && data.viewer && data.viewer.id
+
+  if (loading) {
+    return <Spinner />
+  }
 
   if (!id || !settings) {
     return null

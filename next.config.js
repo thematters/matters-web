@@ -16,9 +16,10 @@ const withOffline = require('next-offline')
 const packageJson = require('./package.json')
 
 const isProd = process.env.ENV === 'production'
-const FIREBASE_CONFIG = JSON.parse(
-  Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString()
-)
+const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG
+  ? JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString())
+  : {}
+
 const URL_PUSH_SW = isProd
   ? './firebase-messaging-sw-production.js'
   : './firebase-messaging-sw-develop.js'
