@@ -1,13 +1,12 @@
 import classNames from 'classnames'
-import _debounce from 'lodash/debounce'
 import { useRef } from 'react'
 
 import { TextIcon } from '~/components'
 import IconLike from '~/components/Icon/Like'
 
 import { numAbbr } from '~/common/utils'
-import ICON_LIKE_EXPLODE from '~/static/icons/like-explode.svg?include'
 
+import * as clap from './clap'
 import clapStyles from './styles.clap.css'
 import styles from './styles.css'
 
@@ -27,6 +26,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   inFixedToolbar
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null)
+  const $clapButton = btnRef.current
   const buttonClass = classNames({
     'appreciate-button': true,
     clap: true,
@@ -36,35 +36,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     count: true,
     max: count === 'MAX'
   })
-  const $clapButton = btnRef.current
-
-  const handZoomOut = () => {
-    if (!$clapButton) {
-      return
-    }
-    $clapButton.classList.remove('clap-hand-zoom-in')
-  }
-  const handZoomIn = _debounce(() => {
-    if (!$clapButton) {
-      return
-    }
-    $clapButton.classList.add('clap-hand-zoom-in')
-  }, 1000 / 60)
-  const clap = () => {
-    if (!$clapButton) {
-      return
-    }
-
-    // hand zoom in
-    handZoomOut()
-    handZoomIn()
-
-    // explode
-    const $likeExplode = document.createElement('span')
-    $likeExplode.className = 'clap-explode'
-    $likeExplode.innerHTML = ICON_LIKE_EXPLODE
-    $clapButton.appendChild($likeExplode)
-  }
 
   return (
     <>
@@ -75,7 +46,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         disabled={disabled}
         aria-disabled={disabled}
         onClick={() => {
-          clap()
+          if ($clapButton) {
+            clap.clap($clapButton)
+          }
 
           if (onClick) {
             onClick()
@@ -83,8 +56,8 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         }}
         aria-label="讚賞作品"
         onTransitionEnd={e => {
-          if (e.propertyName === 'transform') {
-            handZoomOut()
+          if (e.propertyName === 'transform' && $clapButton) {
+            clap.handZoomOut($clapButton)
           }
         }}
       >
