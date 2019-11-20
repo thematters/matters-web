@@ -26,7 +26,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   inFixedToolbar
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null)
-  const $clapButton = btnRef.current
   const buttonClass = classNames({
     'appreciate-button': true,
     clap: true,
@@ -46,8 +45,8 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         disabled={disabled}
         aria-disabled={disabled}
         onClick={() => {
-          if ($clapButton) {
-            clap.clap($clapButton)
+          if (btnRef.current) {
+            clap.clap(btnRef.current)
           }
 
           if (onClick) {
@@ -56,8 +55,8 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         }}
         aria-label="讚賞作品"
         onTransitionEnd={e => {
-          if (e.propertyName === 'transform' && $clapButton) {
-            clap.handZoomOut($clapButton)
+          if (e.propertyName === 'transform' && btnRef.current) {
+            clap.handZoomOut(btnRef.current)
           }
         }}
       >
