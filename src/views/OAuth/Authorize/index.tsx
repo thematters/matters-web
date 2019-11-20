@@ -9,6 +9,7 @@ import { useQuery } from 'react-apollo'
 import { LanguageContext, Modal, Spinner, Translate } from '~/components'
 import OAuth from '~/components/OAuth'
 import Throw404 from '~/components/Throw404'
+import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
@@ -35,6 +36,7 @@ const OAUTH_CLIENT_INFO = gql`
 
 const OAuthAuthorize = () => {
   const router = useRouter()
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
     router.query
@@ -140,12 +142,25 @@ const OAuthAuthorize = () => {
           </section>
 
           <footer>
-            <Modal.FooterButton htmlType="submit" width="full">
-              <Translate
-                zh_hant={TEXT.zh_hant.agree}
-                zh_hans={TEXT.zh_hans.agree}
-              />
-            </Modal.FooterButton>
+            {name === 'LikeCoin' && !viewer.liker.likerId ? (
+              <Modal.FooterButton
+                width="full"
+                is="link"
+                {...PATHS.ME_SETTINGS_ACCOUNT}
+              >
+                <Translate
+                  zh_hant="請先設置 Liker ID"
+                  zh_hans="请先设置 Liker ID"
+                />
+              </Modal.FooterButton>
+            ) : (
+              <Modal.FooterButton htmlType="submit" width="full">
+                <Translate
+                  zh_hant={TEXT.zh_hant.agree}
+                  zh_hans={TEXT.zh_hans.agree}
+                />
+              </Modal.FooterButton>
+            )}
           </footer>
         </form>
       </OAuth.Box>

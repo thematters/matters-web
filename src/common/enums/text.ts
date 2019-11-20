@@ -12,6 +12,9 @@ export const TEXT = {
     refuse: '拒絕',
     close: '關閉',
     confirm: '確認',
+    confirmPush: '確認開啟',
+    pushDescription: '不想錯過精彩討論和最新消息，開啟推送吧！',
+    understood: '我知道了',
     email: '電子信箱',
     yourEmail: '你的電子信箱',
     enterEmail: '請輸入電子信箱',
@@ -64,6 +67,7 @@ export const TEXT = {
     waitingForPublish: '正在等待發佈',
     publishFailed: '發佈失敗',
     publishNote: '發佈須知',
+    publishedDescription: '發佈了作品',
     articleArchived: '該作品已從站內隱藏',
     commentDeleted: '評論已被原作者刪除',
     back: '返回',
@@ -84,6 +88,7 @@ export const TEXT = {
     allAuthors: '全部作者',
     comment: '評論',
     commentPlaceholder: '發表你的評論…',
+    commentPublishedDescription: '評論了',
     response: '回應',
     latestResponses: '最新回應',
     featuredComments: '社區精選',
@@ -138,6 +143,7 @@ export const TEXT = {
     unblockSuccess: '已取消封鎖。該用戶現在可以評論你的作品。',
     pin: '喜歡回應',
     unpin: '取消精選',
+    joinCivicLiker: '成為讚賞公民，直接贊助創作者',
     emptySearchResults: '沒有找到你搜索的內容',
     uploadImageSuccess: '圖片上傳成功',
     uploadImageFailed: '圖片上傳失敗',
@@ -169,7 +175,9 @@ export const TEXT = {
       USER_DISPLAYNAME_INVALID: '姓名不正確',
       ACTION_FAILED: '操作失敗，請稍候重試',
       CODE_INVALID: '驗證碼不正確',
-      CODE_EXPIRED: '驗證碼已過期'
+      CODE_EXPIRED: '驗證碼已過期',
+      UNABLE_TO_UPLOAD_FROM_URL:
+        '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳'
     } as { [key: string]: string }
   },
 
@@ -186,6 +194,9 @@ export const TEXT = {
     refuse: '拒绝',
     close: '关闭',
     confirm: '确认',
+    confirmPush: '确认开启',
+    pushDescription: '不想错过精彩讨论和最新消息，开启推送吧！',
+    understood: '我知道了',
     email: '邮箱',
     yourEmail: '你的邮箱',
     enterEmail: '请输入邮箱',
@@ -235,6 +246,7 @@ export const TEXT = {
     publish: '发布作品',
     published: '作品已发布',
     publishing: '正在发布',
+    publishedDescription: '发布了作品',
     waitingForPublish: '正在等待发布',
     publishNote: '发布须知',
     publishFailed: '发布失败',
@@ -258,6 +270,7 @@ export const TEXT = {
     allAuthors: '全部作者',
     comment: '评论',
     commentPlaceholder: '发表你的评论…',
+    commentPublishedDescription: '评论了',
     response: '回应',
     latestResponses: '最新回应',
     featuredComments: '社区精选',
@@ -312,6 +325,7 @@ export const TEXT = {
     unblockSuccess: '已取消屏蔽。该用户现在可以评论你的作品。',
     pin: '喜欢回应',
     unpin: '取消精选',
+    joinCivicLiker: '成为赞赏公民，直接赞助创作者',
     emptySearchResults: '没有找到你搜寻的内容',
     uploadImageSuccess: '图片上传成功',
     uploadImageFailed: '图片上传失败',
@@ -343,7 +357,9 @@ export const TEXT = {
       USER_DISPLAYNAME_INVALID: '姓名不正确',
       ACTION_FAILED: '操作失败，请稍候重试',
       CODE_INVALID: '验证码不正确',
-      CODE_EXPIRED: '验证码已过期'
+      CODE_EXPIRED: '验证码已过期',
+      UNABLE_TO_UPLOAD_FROM_URL:
+        '文件上传失败，请确认文件链接是否有效，或手动下载后再上传'
     } as { [key: string]: string }
   }
 }

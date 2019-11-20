@@ -26,15 +26,15 @@ import typeDefs from './types'
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 })
-const isProd = process.env.NODE_ENV === 'production'
 
 const {
-  publicRuntimeConfig: { API_URL, WS_URL }
+  publicRuntimeConfig: { ENV, API_URL, WS_URL }
 } = getConfig()
+const isProd = ENV === 'production'
 
 // toggle http for local dev
 const agent =
-  API_URL.split(':')[0] === 'http'
+  (API_URL || '').split(':')[0] === 'http'
     ? new http.Agent()
     : new https.Agent({
         rejectUnauthorized: isProd // allow access to https:...matters.news in localhost

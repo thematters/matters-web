@@ -5,6 +5,7 @@ import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
+import IconLike from '~/components/Icon/Like'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -14,9 +15,9 @@ import {
   // clearPersistCache,
   redirectToTarget,
   toPath,
-  translate
+  translate,
+  unsubscribePush
 } from '~/common/utils'
-import ICON_LIKE from '~/static/icons/like.svg?sprite'
 import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
 import ICON_ME from '~/static/icons/me.svg?sprite'
 import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
@@ -58,13 +59,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...PATHS.ME_APPRECIATIONS_SENT}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={
-                <Icon
-                  id={ICON_LIKE.id}
-                  viewBox={ICON_LIKE.viewBox}
-                  size="small"
-                />
-              }
+              icon={<IconLike size="small" />}
               text={translate({
                 zh_hant: TEXT.zh_hant.myAppreciations,
                 zh_hans: TEXT.zh_hans.myAppreciations,
@@ -127,10 +122,18 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           onClick={async () => {
             try {
               await logout()
+
               analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
                 id: viewer.id
               })
-              // await clearPersistCache()
+
+              try {
+                await unsubscribePush()
+                // await clearPersistCache()
+              } catch (e) {
+                console.error('Failed to unsubscribePush after logged out')
+              }
+
               redirectToTarget()
             } catch (e) {
               window.dispatchEvent(

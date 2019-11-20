@@ -30,7 +30,9 @@ const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
 
 const Responses = ({ article }: { article: ResponsesArticle }) => {
   const refetchResponses = () => {
-    window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
+    if (!article.live) {
+      window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
+    }
   }
 
   return (
@@ -65,6 +67,7 @@ Responses.fragments = {
   article: gql`
     fragment ResponsesArticle on Article {
       id
+      live
       mediaHash
       author {
         id

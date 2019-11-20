@@ -11,7 +11,7 @@ import { LanguageContext } from '~/components/Language'
 import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { translate, unsubscribePush } from '~/common/utils'
 
 import { Modal } from '..'
 import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
@@ -79,7 +79,16 @@ const TermModal: React.FC<FormProps> = formProps => {
           onClick={async () => {
             try {
               await logout()
+
+              try {
+                await unsubscribePush()
+                // await clearPersistCache()
+              } catch (e) {
+                console.error('Failed to unsubscribePush after logged out')
+              }
+
               formProps.close()
+
               Router.replace('/')
             } catch (e) {
               // TODO

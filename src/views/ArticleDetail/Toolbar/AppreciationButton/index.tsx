@@ -1,20 +1,24 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { forwardRef, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
+import { useQuery } from 'react-apollo'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ModalSwitch } from '~/components/ModalManager'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
-import { APPRECIATE_DEBOUNCE } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
-import ICON_LIKE from '~/static/icons/like.svg?sprite'
+import { ANALYTICS_EVENTS, APPRECIATE_DEBOUNCE } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
+import AppreciateButton from './AppreciateButton'
+import CivicLikerButton from './CivicLikerButton'
+import OnboardingAppreciateButton from './OnboardingAppreciateButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -43,87 +47,19 @@ const APPRECIATE_ARTICLE = gql`
   }
 `
 
-const IconAppreciate = () => (
-  <Icon
-    id={ICON_LIKE.id}
-    viewBox={ICON_LIKE.viewBox}
-    style={{ width: 22, height: 22 }}
-  />
-)
-
-const AppreciatedCount = ({ num, limit }: { num: number; limit: number }) => {
-  const classes = classNames({
-    'appreciated-count': true,
-    'appreciated-reach-limit': num === limit
-  })
-  return (
-    <span className={classes}>
-      {num}
-
-      <style jsx>{styles}</style>
-    </span>
-  )
-}
-
-const OnboardingAppreciateButton = () => {
-  return (
-    <ModalSwitch modalId="likeCoinTermModal">
-      {(open: any) => (
-        <button
-          className="appreciate-button"
-          type="button"
-          onClick={open}
-          aria-label="讚賞作品"
-        >
-          <IconAppreciate />
-
-          <style jsx>{styles}</style>
-        </button>
-      )}
-    </ModalSwitch>
-  )
-}
-
-const AppreciateButton = forwardRef<
-  HTMLButtonElement,
-  {
-    appreciate: () => any
-    canAppreciate: boolean
-    isAuthed: boolean
-    appreciatedCount: number
-    limit: number
-  }
->(({ appreciate, canAppreciate, isAuthed, appreciatedCount, limit }, ref) => {
-  const buttonClasses = classNames({
-    'appreciate-button': true
-  })
-
-  return (
-    <button
-      className={buttonClasses}
-      type="button"
-      ref={ref}
-      aria-disabled={!canAppreciate}
-      onClick={() => canAppreciate && appreciate()}
-      aria-label="讚賞作品"
-    >
-      <IconAppreciate />
-
-      {isAuthed && appreciatedCount > 0 && (
-        <AppreciatedCount num={appreciatedCount} limit={limit} />
-      )}
-
-      <style jsx>{styles}</style>
-    </button>
-  )
-})
-
-const AppreciationButtonContainer = ({
-  article
+const AppreciationButton = ({
+  article,
+  inFixedToolbar
 }: {
   article: AppreciationArticleDetail
+  inFixedToolbar?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const readCivicLikerModal =
+    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
 
   // bundle appreciations
   const [amount, setAmount] = useState(0)
@@ -135,8 +71,10 @@ const AppreciationButtonContainer = ({
   } = article
   const limit = appreciateLimit
   const left = appreciateLeft - amount
+  const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const [debouncedSendAppreciation] = useDebouncedCallback(() => {
+    setAmount(0)
     sendAppreciation({
       variables: { id: article.id, amount },
       optimisticResponse: {
@@ -149,7 +87,6 @@ const AppreciationButtonContainer = ({
         }
       }
     })
-    setAmount(0)
   }, APPRECIATE_DEBOUNCE)
   const appreciate = () => {
     setAmount(amount + 1)
@@ -164,26 +101,17 @@ const AppreciationButtonContainer = ({
   const containerClasses = classNames({
     container: true,
     active: article.hasAppreciate,
-    inactive: !canAppreciate,
+    inactive: !canAppreciate && readCivicLikerModal,
     unlogged: !viewer.isAuthed
   })
-  const appreciateButtonProps = {
-    limit,
-    appreciatedCount,
-    canAppreciate,
-    appreciate,
-    isAuthed: viewer.isAuthed
-  }
 
   if (viewer.shouldSetupLikerID) {
     return (
       <section className="container">
-        <OnboardingAppreciateButton />
-
-        <span className="appreciate-count">
-          {numAbbr(article.appreciationsReceivedTotal)}
-        </span>
-
+        <OnboardingAppreciateButton
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
         <style jsx>{styles}</style>
       </section>
     )
@@ -191,9 +119,39 @@ const AppreciationButtonContainer = ({
 
   return (
     <section className={containerClasses}>
-      {canAppreciate && <AppreciateButton {...appreciateButtonProps} />}
+      {canAppreciate && (
+        <AppreciateButton
+          onClick={() => appreciate()}
+          count={
+            viewer.isAuthed && appreciatedCount > 0
+              ? appreciatedCount
+              : undefined
+          }
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+      )}
 
-      {!canAppreciate && (
+      {!canAppreciate && !readCivicLikerModal && isReachLimit && (
+        <CivicLikerButton
+          onClick={() => {
+            client.writeData({
+              id: 'ClientPreference:local',
+              data: { readCivicLikerModal: true }
+            })
+            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
+          }}
+          count={
+            viewer.isAuthed && appreciatedCount > 0
+              ? appreciatedCount
+              : undefined
+          }
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+      )}
+
+      {!canAppreciate && readCivicLikerModal && (
         <Tooltip
           content={
             <Translate
@@ -214,19 +172,26 @@ const AppreciationButtonContainer = ({
             />
           }
         >
-          <AppreciateButton {...appreciateButtonProps} />
+          <AppreciateButton
+            disabled
+            count={
+              viewer.isAuthed && appreciatedCount > 0
+                ? isReachLimit
+                  ? 'MAX'
+                  : appreciatedCount
+                : undefined
+            }
+            total={total}
+            inFixedToolbar={inFixedToolbar}
+          />
         </Tooltip>
       )}
-
-      <span className="appreciate-count">
-        {numAbbr(article.appreciationsReceivedTotal)}
-      </span>
 
       <style jsx>{styles}</style>
     </section>
   )
 }
 
-AppreciationButtonContainer.fragments = fragments
+AppreciationButton.fragments = fragments
 
-export default AppreciationButtonContainer
+export default AppreciationButton

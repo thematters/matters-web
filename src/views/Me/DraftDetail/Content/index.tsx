@@ -1,23 +1,19 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { LanguageContext } from '~/components/Language'
 import { Placeholder } from '~/components/Placeholder'
-
-import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
 import { UpdateDraft } from './__generated__/UpdateDraft'
 import styles from './styles.css'
 
-const Editor = dynamic(() => import('~/components/Editor'), {
+const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
   loading: () => <Placeholder.ArticleDetail />
 })
@@ -53,102 +49,61 @@ const fragments = {
 const DraftContent: React.FC<{ draft: DraftDetailQuery_node_Draft }> & {
   fragments: typeof fragments
 } = ({ draft }) => {
-  const [updateDraft] = useMutation<UpdateDraft>(UPDATE_DRAFT)
-  const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const { lang } = useContext(LanguageContext)
   const { updateHeaderState } = useContext(HeaderContext)
-  const [title, setTitle] = useState(draft.title)
-  const draftId = draft.id
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
 
-  useEffect(() => {
-    setTitle(draft.title)
-  }, [draft.title])
+  const [updateDraft] = useMutation<UpdateDraft>(UPDATE_DRAFT)
+
+  const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+
+  const draftId = draft.id
 
   if (!process.browser) {
     return null
   }
 
+  const upload = async (input: { [key: string]: any }) => {
+    const result = await singleFileUpload({
+      variables: {
+        input: {
+          type: 'embed',
+          entityType: 'draft',
+          entityId: draft.id,
+          ...input
+        }
+      }
+    })
+
+    const { id, path } =
+      (result && result.data && result.data.singleFileUpload) || {}
+
+    if (id && path) {
+      return { id, path }
+    } else {
+      throw new Error('upload not successful')
+    }
+  }
+
+  const update = async (newDraft: {
+    title?: string | null
+    content?: string | null
+    coverAssetId?: string | null
+  }) => {
+    try {
+      if (draft && draft.publishState === 'published') {
+        return
+      }
+
+      updateHeaderState({ type: 'draft', state: 'saving', draftId })
+      await updateDraft({ variables: { id: draft.id, ...newDraft } })
+      updateHeaderState({ type: 'draft', state: 'saved', draftId })
+    } catch (error) {
+      updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
+    }
+  }
+
   return (
     <>
-      <header className={isPending || isPublished ? 'u-area-disable' : ''}>
-        <input
-          placeholder={translate({
-            zh_hant: '請輸入標題…',
-            zh_hans: '请输入标题…',
-            lang
-          })}
-          aria-label="請輸入標題…"
-          type="text"
-          value={
-            title &&
-            title !==
-              translate({
-                zh_hant: TEXT.zh_hant.untitle,
-                zh_hans: TEXT.zh_hans.untitle,
-                lang
-              })
-              ? title
-              : ''
-          }
-          onChange={e => {
-            setTitle(e.target.value)
-          }}
-          onBlur={() => updateDraft({ variables: { id: draft.id, title } })}
-        />
-      </header>
-
-      <Editor
-        upload={async input => {
-          const { data } = await singleFileUpload({
-            variables: {
-              input: {
-                type: 'embed',
-                entityType: 'draft',
-                entityId: draft.id,
-                ...input
-              }
-            }
-          })
-          const { id, path } = (data && data.singleFileUpload) || {}
-
-          if (id && path) {
-            return { id, path }
-          } else {
-            throw new Error('upload not successful')
-          }
-        }}
-        draft={draft}
-        onSave={async (newDraft: {
-          title?: string | null
-          content?: string | null
-          coverAssetId?: string | null
-        }) => {
-          updateHeaderState({
-            type: 'draft',
-            state: 'saving',
-            draftId
-          })
-          try {
-            await updateDraft({
-              variables: { id: draft.id, ...newDraft }
-            })
-            updateHeaderState({
-              type: 'draft',
-              state: 'saved',
-              draftId
-            })
-          } catch (e) {
-            updateHeaderState({
-              type: 'draft',
-              state: 'saveFailed',
-              draftId
-            })
-          }
-        }}
-      />
-
+      <Editor draft={draft} update={update} upload={upload} />
       <style jsx>{styles}</style>
     </>
   )

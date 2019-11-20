@@ -101,3 +101,17 @@
 .more-button {
   padding-left: var(--spacing-loose);
 }
+
+.published-description {
+  flex-shrink: 0;
+  margin: 0 var(--spacing-x-tight);
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}
+
+.article-title {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+}

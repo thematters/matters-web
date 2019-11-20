@@ -14,14 +14,18 @@ import {
   ModalProvider
 } from '~/components'
 import ErrorBoundary from '~/components/ErrorBoundary'
+import PushInitializer from '~/components/PushInitializer'
 
 import withApollo from '~/common/utils/withApollo'
 
-// start Sentry
+/**
+ * Initialize
+ */
 const {
   publicRuntimeConfig: { SENTRY_DSN }
 } = getConfig()
 
+// Sentry
 Sentry.init({ dsn: SENTRY_DSN || '' })
 
 class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
@@ -38,6 +42,8 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
 
                 <Layout>
                   <Component {...pageProps} />
+
+                  <PushInitializer client={apollo} />
                 </Layout>
               </ModalProvider>
             </AnalyticsProvider>

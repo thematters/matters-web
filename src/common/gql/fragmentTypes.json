@@ -7,9 +7,9 @@
         "possibleTypes": [
           { "name": "Article" },
           { "name": "User" },
+          { "name": "Comment" },
           { "name": "Tag" },
-          { "name": "Draft" },
-          { "name": "Comment" }
+          { "name": "Draft" }
         ]
       },
       {
@@ -17,20 +17,24 @@
         "name": "Connection",
         "possibleTypes": [
           { "name": "ArticleConnection" },
+          { "name": "ResponseConnection" },
+          { "name": "CommentConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
           { "name": "DraftConnection" },
-          { "name": "AudiodraftConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
           { "name": "TransactionConnection" },
           { "name": "NoticeConnection" },
-          { "name": "CommentConnection" },
-          { "name": "ResponseConnection" },
           { "name": "SearchResultConnection" },
           { "name": "ReportConnection" },
           { "name": "OAuthClientConnection" }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Response",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       },
       {
         "kind": "INTERFACE",
@@ -53,11 +57,6 @@
           { "name": "CommentMentionedYouNotice" },
           { "name": "OfficialAnnouncementNotice" }
         ]
-      },
-      {
-        "kind": "UNION",
-        "name": "Response",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       }
     ]
   }

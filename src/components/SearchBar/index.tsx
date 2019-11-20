@@ -63,7 +63,8 @@ const BaseSearchBar: React.FC<{
         Router.push(path.href, path.as)
         hideDropdown()
       }}
-      render={({ values, handleSubmit, handleChange }) => {
+    >
+      {({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {
           return (
             <form onSubmit={handleSubmit}>
@@ -124,7 +125,7 @@ const BaseSearchBar: React.FC<{
           </Dropdown>
         )
       }}
-    />
+    </Formik>
   )
 }
 

@@ -41,6 +41,7 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
@@ -126,7 +127,7 @@ const ArticleDetail = ({
   wall: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [fixedToolbar, setFixedToolbar] = useState(true)
+  const [fixedToolbar, setFixedToolbar] = useState(false)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'medium-up' })()
@@ -194,10 +195,17 @@ const ArticleDetail = ({
         <Error
           statusCode={404}
           message={
-            <Translate
-              zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-              zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-            />
+            article.state === 'archived' ? (
+              <Translate
+                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+              />
+            ) : (
+              <Translate
+                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
+                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+              />
+            )
           }
         >
           <BackToHomeButton />
@@ -268,7 +276,12 @@ const ArticleDetail = ({
           <Toolbar placement="left" article={article} />
         </section>
 
-        <Toolbar placement="bottom" article={article} fixed={fixedToolbar} />
+        <Toolbar
+          placement="bottom"
+          article={article}
+          fixed={fixedToolbar}
+          mobile={!isMediumUp}
+        />
       </Block>
 
       <Waypoint onPositionChange={handleWall}>
@@ -299,8 +312,9 @@ const ArticleDetail = ({
           </>
         )}
 
+        {/* Modals */}
         <AppreciatorsModal />
-
+        <CivicLikerModal />
         <ShareModal />
       </Block>
 
