@@ -99,10 +99,7 @@ const AppreciationButton = ({
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
   const containerClasses = classNames({
-    container: true,
-    active: article.hasAppreciate,
-    inactive: !canAppreciate && readCivicLikerModal,
-    unlogged: !viewer.isAuthed
+    container: true
   })
 
   if (viewer.shouldSetupLikerID) {
@@ -153,6 +150,7 @@ const AppreciationButton = ({
 
       {!canAppreciate && readCivicLikerModal && (
         <Tooltip
+          offset="-10, 0"
           content={
             <Translate
               {...(isReachLimit
@@ -172,18 +170,20 @@ const AppreciationButton = ({
             />
           }
         >
-          <AppreciateButton
-            disabled
-            count={
-              viewer.isAuthed && appreciatedCount > 0
-                ? isReachLimit
-                  ? 'MAX'
-                  : appreciatedCount
-                : undefined
-            }
-            total={total}
-            inFixedToolbar={inFixedToolbar}
-          />
+          <div>
+            <AppreciateButton
+              disabled
+              count={
+                viewer.isAuthed && appreciatedCount > 0
+                  ? isReachLimit
+                    ? 'MAX'
+                    : appreciatedCount
+                  : undefined
+              }
+              total={total}
+              inFixedToolbar={inFixedToolbar}
+            />
+          </div>
         </Tooltip>
       )}
 

@@ -8,48 +8,36 @@
   text-align: center;
 }
 
-.active {
-  & .appreciate-button {
-    background: var(--color-white);
-  }
-}
-
-.inactive {
-  & .appreciate-button {
-    cursor: not-allowed;
-  }
-}
-
-.unlogged {
-  & .appreciate-button:active {
-    background: var(--color-white);
-    color: var(--color-matters-green);
-  }
-}
-
 .appreciate-button {
   position: relative;
 
-  width: 3rem;
-  height: 3rem;
+  &.circle {
+    width: 3rem;
+    height: 3rem;
 
-  border-radius: 50%;
-  border: 2px solid var(--color-matters-green);
-  background: var(--color-white);
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08), 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    border: 1.5px solid var(--color-matters-green);
+    background: var(--color-white);
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08),
+      0 4px 12px 0 rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      background: var(--color-bg-green);
+    }
+  }
 }
 
-.appreciate-count {
+.total {
   display: block;
   margin-top: var(--spacing-xx-tight);
 }
 
-.appreciated-count {
+.count {
   @mixin flex-center-all;
 
   position: absolute;
-  right: -0.15rem;
-  bottom: -0.15rem;
+  top: -0.25rem;
+  right: -0.25rem;
   width: 1rem;
   height: 1rem;
 
