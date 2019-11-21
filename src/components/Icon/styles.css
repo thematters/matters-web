@@ -48,3 +48,7 @@
 .grey {
   color: var(--color-grey);
 }
+
+.green {
+  color: var(--color-green);
+}

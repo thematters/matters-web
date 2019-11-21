@@ -27,11 +27,6 @@
   }
 }
 
-.total {
-  display: block;
-  margin-top: var(--spacing-xx-tight);
-}
-
 .count {
   @mixin flex-center-all;
 
@@ -51,5 +46,20 @@
 
   &.max {
     font-size: 6px;
+  }
+}
+
+.total {
+  display: block;
+  margin-top: var(--spacing-xx-tight);
+
+  &.inFixedToolbar {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: var(--spacing-x-tight);
+
+    font-weight: var(--font-weight-medium);
+    vertical-align: middle;
+    line-height: 1;
   }
 }

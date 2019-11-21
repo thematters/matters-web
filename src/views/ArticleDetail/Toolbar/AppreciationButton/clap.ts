@@ -7,7 +7,9 @@ export const getRandomFloat = (
   max: number,
   digits: number = 1
 ) => {
-  return parseFloat((Math.random() * (max - min + 1) + min).toFixed(digits))
+  return parseFloat(
+    (Math.random() * (max - min + 1 / 10 ** digits) + min).toFixed(digits)
+  )
 }
 
 export const handZoomOut = ($clapButton: HTMLButtonElement) => {
@@ -17,7 +19,10 @@ export const handZoomIn = _debounce(($clapButton: HTMLButtonElement) => {
   $clapButton.classList.add('clap-hand-zoom-in')
 }, 1000 / 60)
 
-export const explode = ($clapButton: HTMLButtonElement) => {
+export const explode = (
+  $clapButton: HTMLButtonElement,
+  inFixedToolbar: boolean
+) => {
   const $explode = document.createElement('span')
 
   // icon
@@ -25,25 +30,41 @@ export const explode = ($clapButton: HTMLButtonElement) => {
 
   // style
   const $style = document.createElement('style')
-  const randomRotationAngle = getRandomFloat(-180, 180, 0)
-  const randomScale = getRandomFloat(3, 4) * (randomRotationAngle > 0 ? -1 : 1)
-  const animationName = `explode-${randomRotationAngle}`
-  $style.innerHTML = `
-    .${animationName} svg {
-      animation-name: ${animationName};
-    }
+  const id = `explode-${Date.now()}`
+  const { rangeRotate, rangeScale, iconDefaultSize } = inFixedToolbar
+    ? {
+        rangeRotate: [-180, 100],
+        rangeScale: [1.6, 2],
+        iconDefaultSize: 20
+      }
+    : {
+        rangeRotate: [-45, 15],
+        rangeScale: [2.8, 3.6],
+        iconDefaultSize: 22
+      }
+  const rotate = getRandomFloat(rangeRotate[0], rangeRotate[1], 0)
+  const scale = getRandomFloat(rangeScale[0], rangeScale[1])
+  const flip = rotate > 0 ? -1 : 1
+  const size = iconDefaultSize * scale
 
-    @keyframes ${animationName} {
+  $style.innerHTML = `
+    .clap-explode.${id} svg {
+      width: ${size}px;
+      height: ${size}px;
+      margin: -${size / 2}px 0 0 -${size / 2}px;
+      animation-name: ${id};
+    }
+    @keyframes ${id} {
       0% {
-        transform: scale(1) rotate(${randomRotationAngle}deg);
+        transform: scale(${(1 / scale) * flip}) rotate(${rotate}deg);
         opacity: 1;
       }
       30% {
-        transform: scale(${randomScale}) rotate(${randomRotationAngle}deg);
+        transform: scale(${flip}) rotate(${rotate}deg);
         opacity: 1;
       }
       100% {
-        transform: scale(${randomScale}) rotate(${randomRotationAngle}deg);
+        transform: scale(${flip}) rotate(${rotate}deg);
         opacity: 0;
       }
     }
@@ -51,15 +72,18 @@ export const explode = ($clapButton: HTMLButtonElement) => {
   $explode.appendChild($style)
 
   // append to button
-  $explode.className = `clap-explode ${animationName}`
+  $explode.className = `clap-explode ${id}`
   $clapButton.appendChild($explode)
 }
 
-export const clap = ($clapButton: HTMLButtonElement) => {
+export const clap = (
+  $clapButton: HTMLButtonElement,
+  inFixedToolbar: boolean
+) => {
   // hand zoom in
   handZoomOut($clapButton)
   handZoomIn($clapButton)
 
   // explode
-  explode($clapButton)
+  explode($clapButton, inFixedToolbar)
 }

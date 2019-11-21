@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import { TextIcon } from '~/components'
 import IconLike from '~/components/Icon/Like'
 
 import { numAbbr } from '~/common/utils'
@@ -35,6 +34,10 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     count: true,
     max: count === 'MAX'
   })
+  const totalClass = classNames({
+    total: true,
+    inFixedToolbar
+  })
 
   return (
     <>
@@ -46,7 +49,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         aria-disabled={disabled}
         onClick={() => {
           if (btnRef.current) {
-            clap.clap(btnRef.current)
+            clap.clap(btnRef.current, !!inFixedToolbar)
           }
 
           if (onClick) {
@@ -61,18 +64,10 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         }}
       >
         {inFixedToolbar ? (
-          <TextIcon
-            icon={
-              <IconLike
-                className="icon-like"
-                style={{ width: 20, height: 20 }}
-              />
-            }
+          <IconLike
+            className="icon-like"
             color="green"
-            weight="medium"
-            text={total}
-            size="xs"
-            spacing="xtight"
+            style={{ width: 20, height: 20 }}
           />
         ) : (
           <>
@@ -82,7 +77,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         )}
       </button>
 
-      {!inFixedToolbar && <span className="total">{numAbbr(total)}</span>}
+      <span className={totalClass}>{numAbbr(total)}</span>
 
       <style jsx>{styles}</style>
       <style jsx global>

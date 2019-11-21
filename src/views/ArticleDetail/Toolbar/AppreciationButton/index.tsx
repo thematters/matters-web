@@ -194,18 +194,20 @@ const AppreciationButton = ({
           />
         }
       >
-        <AppreciateButton
-          disabled
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? isReachLimit
-                ? 'MAX'
-                : appreciatedCount
-              : undefined
-          }
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
+        <div>
+          <AppreciateButton
+            disabled
+            count={
+              viewer.isAuthed && appreciatedCount > 0
+                ? isReachLimit
+                  ? 'MAX'
+                  : appreciatedCount
+                : undefined
+            }
+            total={total}
+            inFixedToolbar={inFixedToolbar}
+          />
+        </div>
       </Tooltip>
 
       <style jsx>{styles}</style>
