@@ -196,7 +196,7 @@ const AppreciationButton = ({
       >
         <div>
           <AppreciateButton
-            disabled
+            disabled={!isReachLimit}
             count={
               viewer.isAuthed && appreciatedCount > 0
                 ? isReachLimit
