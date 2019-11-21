@@ -23,14 +23,24 @@ export const explode = (
   $clapButton: HTMLButtonElement,
   inFixedToolbar: boolean
 ) => {
+  const id = `explode-${Date.now()}`
   const $explode = document.createElement('span')
 
   // icon
   $explode.innerHTML = ICON_LIKE_EXPLODE
 
+  // remove when animation end
+  const $icon = $explode.querySelector('svg')
+  if ($icon) {
+    $icon.addEventListener('animationend', event => {
+      if (event.animationName === id) {
+        $explode.remove()
+      }
+    })
+  }
+
   // style
   const $style = document.createElement('style')
-  const id = `explode-${Date.now()}`
   const { rangeRotate, rangeScale, iconDefaultSize } = inFixedToolbar
     ? {
         rangeRotate: [-180, 100],
