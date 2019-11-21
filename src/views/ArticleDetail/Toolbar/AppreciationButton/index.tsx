@@ -58,8 +58,6 @@ const AppreciationButton = ({
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const readCivicLikerModal =
-    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
 
   // bundle appreciations
   const [amount, setAmount] = useState(0)
@@ -96,6 +94,8 @@ const AppreciationButton = ({
   // UI
   const isReachLimit = left <= 0
   const isMe = article.author.id === viewer.id
+  const readCivicLikerModal =
+    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
   const containerClasses = classNames({
@@ -105,21 +105,28 @@ const AppreciationButton = ({
     unlogged: !viewer.isAuthed
   })
 
+  /**
+   * Onboarding Button
+   */
   if (viewer.shouldSetupLikerID) {
     return (
-      <section className="container">
+      <section className={containerClasses}>
         <OnboardingAppreciateButton
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
+
         <style jsx>{styles}</style>
       </section>
     )
   }
 
-  return (
-    <section className={containerClasses}>
-      {canAppreciate && (
+  /**
+   * Appreciate Button
+   */
+  if (canAppreciate) {
+    return (
+      <section className={containerClasses}>
         <AppreciateButton
           onClick={() => appreciate()}
           count={
@@ -130,9 +137,18 @@ const AppreciationButton = ({
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
-      )}
 
-      {!canAppreciate && !readCivicLikerModal && isReachLimit ? (
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  /**
+   * Civic Liker Button
+   */
+  if (!canAppreciate && !readCivicLikerModal && isReachLimit) {
+    return (
+      <section className={containerClasses}>
         <CivicLikerButton
           onClick={() => {
             client.writeData({
@@ -149,41 +165,50 @@ const AppreciationButton = ({
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
-      ) : (
-        <Tooltip
-          content={
-            <Translate
-              {...(isReachLimit
-                ? {
-                    zh_hant: '你最多可讚賞 5 次',
-                    zh_hans: '你最多可赞赏 5 次'
-                  }
-                : isMe
-                ? {
-                    zh_hant: '去讚賞其他用戶吧',
-                    zh_hans: '去赞赏其他用户吧'
-                  }
-                : {
-                    zh_hant: '你無法進行讚賞',
-                    zh_hans: '你无法进行赞赏'
-                  })}
-            />
-          }
-        >
-          <AppreciateButton
-            disabled
-            count={
-              viewer.isAuthed && appreciatedCount > 0
-                ? isReachLimit
-                  ? 'MAX'
-                  : appreciatedCount
-                : undefined
-            }
-            total={total}
-            inFixedToolbar={inFixedToolbar}
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  /**
+   * Disabled Button
+   */
+  return (
+    <section className={containerClasses}>
+      <Tooltip
+        content={
+          <Translate
+            {...(isReachLimit
+              ? {
+                  zh_hant: '你最多可讚賞 5 次',
+                  zh_hans: '你最多可赞赏 5 次'
+                }
+              : isMe
+              ? {
+                  zh_hant: '去讚賞其他用戶吧',
+                  zh_hans: '去赞赏其他用户吧'
+                }
+              : {
+                  zh_hant: '你無法進行讚賞',
+                  zh_hans: '你无法进行赞赏'
+                })}
           />
-        </Tooltip>
-      )}
+        }
+      >
+        <AppreciateButton
+          disabled
+          count={
+            viewer.isAuthed && appreciatedCount > 0
+              ? isReachLimit
+                ? 'MAX'
+                : appreciatedCount
+              : undefined
+          }
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+      </Tooltip>
 
       <style jsx>{styles}</style>
     </section>
