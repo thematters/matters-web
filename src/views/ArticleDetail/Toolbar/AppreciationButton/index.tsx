@@ -132,7 +132,7 @@ const AppreciationButton = ({
         />
       )}
 
-      {!canAppreciate && !readCivicLikerModal && isReachLimit && (
+      {!canAppreciate && !readCivicLikerModal && isReachLimit ? (
         <CivicLikerButton
           onClick={() => {
             client.writeData({
@@ -149,9 +149,7 @@ const AppreciationButton = ({
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
-      )}
-
-      {!canAppreciate && readCivicLikerModal && (
+      ) : (
         <Tooltip
           content={
             <Translate
