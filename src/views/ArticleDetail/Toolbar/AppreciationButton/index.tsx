@@ -169,6 +169,23 @@ const AppreciationButton = ({
   }
 
   /**
+   * MAX Button
+   */
+  if (!canAppreciate && isReachLimit) {
+    return (
+      <section className={containerClasses}>
+        <AppreciateButton
+          count="MAX"
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  /**
    * Disabled Button
    */
   return (
@@ -177,12 +194,7 @@ const AppreciationButton = ({
         offset="-10, 0"
         content={
           <Translate
-            {...(isReachLimit
-              ? {
-                  zh_hant: '你最多可讚賞 5 次',
-                  zh_hans: '你最多可赞赏 5 次'
-                }
-              : isMe
+            {...(isMe
               ? {
                   zh_hant: '去讚賞其他用戶吧',
                   zh_hans: '去赞赏其他用户吧'
@@ -196,12 +208,10 @@ const AppreciationButton = ({
       >
         <div>
           <AppreciateButton
-            disabled={!isReachLimit}
+            disabled
             count={
               viewer.isAuthed && appreciatedCount > 0
-                ? isReachLimit
-                  ? 'MAX'
-                  : appreciatedCount
+                ? appreciatedCount
                 : undefined
             }
             total={total}

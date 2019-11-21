@@ -46,6 +46,7 @@
 
   &.max {
     font-size: 6px;
+    font-weight: var(--font-weight-bolder);
   }
 }
 
