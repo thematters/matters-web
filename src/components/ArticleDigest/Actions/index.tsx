@@ -120,8 +120,6 @@ const Actions = ({
     space: isResponseMode
   })
 
-  console.log(article.author)
-
   return (
     <footer className={footerClassNames}>
       <div className="left">
