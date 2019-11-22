@@ -126,9 +126,11 @@ const FeedDigest = ({
             />
           )}
         </header>
-        <Link {...path}>
-          <a className="article-title">{article.title}</a>
-        </Link>
+        {inFolloweeFeed && (
+          <Link {...path}>
+            <a className="article-title">{article.title}</a>
+          </Link>
+        )}
       </div>
 
       <div className="content-wrap">

@@ -14,7 +14,7 @@
   position: relative;
 
   & .left {
-    padding-right: var(--spacing-default);
+    width: 100%;
 
     & :global(.actions > *) {
       margin-top: var(--spacing-x-tight);

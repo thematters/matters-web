@@ -8,7 +8,7 @@
 
   & button {
     position: absolute;
-    right: var(--spacing-x-tight);
+    right: var(--spacing-tight);
     bottom: 0;
     line-height: calc(var(--font-size-sm) * var(--line-height-base));
     z-index: 999;
