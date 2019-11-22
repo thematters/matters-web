@@ -1,11 +1,12 @@
 import classNames from 'classnames'
-import { forwardRef } from 'react'
+import { useRef } from 'react'
 
-import { TextIcon } from '~/components'
 import IconLike from '~/components/Icon/Like'
 
 import { numAbbr } from '~/common/utils'
 
+import * as clap from './clap'
+import clapStyles from './styles.clap.css'
 import styles from './styles.css'
 
 interface AppreciateButtonProps {
@@ -16,51 +17,74 @@ interface AppreciateButtonProps {
   inFixedToolbar?: boolean
 }
 
-const AppreciateButton = forwardRef<HTMLButtonElement, AppreciateButtonProps>(
-  ({ disabled, onClick, count, total, inFixedToolbar }, ref) => {
-    const buttonClass = classNames({
-      'appreciate-button': !inFixedToolbar
-    })
-    const countClass = classNames({
-      'appreciated-count': true,
-      max: count === 'MAX'
-    })
+const AppreciateButton: React.FC<AppreciateButtonProps> = ({
+  disabled,
+  onClick,
+  count,
+  total,
+  inFixedToolbar
+}) => {
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const buttonClass = classNames({
+    'appreciate-button': true,
+    clap: true,
+    circle: !inFixedToolbar
+  })
+  const countClass = classNames({
+    count: true,
+    max: count === 'MAX'
+  })
+  const totalClass = classNames({
+    total: true,
+    inFixedToolbar
+  })
 
-    return (
-      <>
-        <button
-          className={buttonClass}
-          type="button"
-          ref={ref}
-          aria-disabled={disabled}
-          onClick={onClick}
-          aria-label="讚賞作品"
-        >
-          {inFixedToolbar ? (
-            <TextIcon
-              icon={<IconLike style={{ width: 20, height: 20 }} />}
-              color="green"
-              weight="medium"
-              text={total}
-              size="xs"
-              spacing="xtight"
-            />
-          ) : (
-            <>
-              <IconLike style={{ width: 22, height: 22 }} />
-              {count && <span className={countClass}>{count}</span>}
-            </>
-          )}
-        </button>
+  return (
+    <>
+      <button
+        className={buttonClass}
+        type="button"
+        ref={btnRef}
+        disabled={disabled}
+        aria-disabled={disabled}
+        onClick={() => {
+          if (btnRef.current) {
+            clap.clap(btnRef.current, !!inFixedToolbar)
+          }
 
-        {!inFixedToolbar && (
-          <span className="appreciate-count">{numAbbr(total)}</span>
+          if (onClick) {
+            onClick()
+          }
+        }}
+        aria-label="讚賞作品"
+        onTransitionEnd={e => {
+          if (e.propertyName === 'transform' && btnRef.current) {
+            clap.handZoomOut(btnRef.current)
+          }
+        }}
+      >
+        {inFixedToolbar ? (
+          <IconLike
+            className="icon-like"
+            color="green"
+            style={{ width: 20, height: 20 }}
+          />
+        ) : (
+          <>
+            <IconLike className="icon-like" style={{ width: 22, height: 22 }} />
+            {count && <span className={countClass}>{count}</span>}
+          </>
         )}
+      </button>
 
-        <style jsx>{styles}</style>
-      </>
-    )
-  }
-)
+      <span className={totalClass}>{numAbbr(total)}</span>
+
+      <style jsx>{styles}</style>
+      <style jsx global>
+        {clapStyles}
+      </style>
+    </>
+  )
+}
 
 export default AppreciateButton

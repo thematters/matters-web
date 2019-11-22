@@ -15,6 +15,10 @@ declare module '*.svg?sprite' {
   const value: any
   export = value
 }
+declare module '*.svg?include' {
+  const value: any
+  export = value
+}
 declare module '*.svg?url' {
   const value: any
   export = value
