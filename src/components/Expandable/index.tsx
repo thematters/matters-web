@@ -8,9 +8,10 @@ import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 
 import styles from './styles.css'
 
-export const Expandable: React.FC<{ limit?: number }> = ({
+export const Expandable: React.FC<{ limit?: number; buffer?: number }> = ({
   children,
-  limit = 3
+  limit = 3,
+  buffer = 0
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
@@ -23,8 +24,8 @@ export const Expandable: React.FC<{ limit?: number }> = ({
         .getComputedStyle(node.current, null)
         .getPropertyValue('line-height')
       const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
-      console.log({ lines, limit, lineHeight, height })
-      if (lines > limit) {
+
+      if (lines > limit + buffer) {
         setExpandable(true)
         setExpand(false)
       }
@@ -35,21 +36,14 @@ export const Expandable: React.FC<{ limit?: number }> = ({
     <section
       className="expandable"
       style={{
-        WebkitLineClamp: expand ? 'unset' : limit,
-        display: '-webkit-box',
-        WebkitBoxOrient: 'vertical',
-        position: 'relative'
+        WebkitLineClamp: expand ? 'unset' : limit
       }}
     >
       <div ref={node} style={{ overflow: 'hidden' }}>
         {children}
       </div>
       {expandable && !expand && (
-        <button
-          type="button"
-          onClick={() => setExpand(true)}
-          style={{ position: 'absolute', right: 0, bottom: 0 }}
-        >
+        <button type="button" onClick={() => setExpand(true)}>
           <TextIcon
             icon={
               <Icon

@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
 import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
@@ -142,16 +143,21 @@ const FeedDigest = ({
             defaultExpand={edit}
           />
         )}
-        {!edit && inFolloweeFeed && path && (
-          <Link {...path}>
-            <a>
-              <CommentContent state={state} content={content} />
-            </a>
-          </Link>
+
+        {!edit && inFolloweeFeed && (
+          <Expandable limit={5} buffer={2}>
+            <Link {...path}>
+              <a>
+                <CommentContent state={state} content={content} />
+              </a>
+            </Link>
+          </Expandable>
         )}
+
         {!edit && !inFolloweeFeed && (
           <CommentContent state={state} content={content} />
         )}
+
         {!edit && (
           <FooterActions
             comment={comment}

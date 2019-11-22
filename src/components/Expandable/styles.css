@@ -8,10 +8,10 @@
 
   & button {
     position: absolute;
-    right: 0;
+    right: var(--spacing-x-tight);
     bottom: 0;
     line-height: calc(var(--font-size-sm) * var(--line-height-base));
-    z-index: 1;
+    z-index: 999;
 
     & :gloabl(.text) {
       font-size: var(--font-size-sm);
