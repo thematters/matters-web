@@ -112,6 +112,12 @@
 }
 
 .article-title {
+  padding-left: var(--spacing-loose);
   flex-shrink: 0;
   font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }

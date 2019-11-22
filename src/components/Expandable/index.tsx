@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { Translate } from '~/components'
 import { Icon } from '~/components/Icon'
@@ -8,9 +8,12 @@ import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 
 import styles from './styles.css'
 
-const Description = ({ description }: { description: string }) => {
+export const Expandable: React.FC<{ limit?: number }> = ({
+  children,
+  limit = 3
+}) => {
   const [expandable, setExpandable] = useState(false)
-  const [expand, setExpand] = useState(false)
+  const [expand, setExpand] = useState(true)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
 
   useEffect(() => {
@@ -19,19 +22,34 @@ const Description = ({ description }: { description: string }) => {
       const lineHeight = window
         .getComputedStyle(node.current, null)
         .getPropertyValue('line-height')
-      const lines = Math.max(Math.floor(height / parseInt(lineHeight, 10)), 0)
-
-      if (lines >= 3) {
+      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+      console.log({ lines, limit, lineHeight, height })
+      if (lines > limit) {
         setExpandable(true)
+        setExpand(false)
       }
     }
   }, [])
 
   return (
-    <section className={`description ${expand ? 'expand' : ''}`}>
-      <p ref={node}>{description}</p>
+    <section
+      className="expandable"
+      style={{
+        WebkitLineClamp: expand ? 'unset' : limit,
+        display: '-webkit-box',
+        WebkitBoxOrient: 'vertical',
+        position: 'relative'
+      }}
+    >
+      <div ref={node} style={{ overflow: 'hidden' }}>
+        {children}
+      </div>
       {expandable && !expand && (
-        <button type="button" onClick={() => setExpand(true)}>
+        <button
+          type="button"
+          onClick={() => setExpand(true)}
+          style={{ position: 'absolute', right: 0, bottom: 0 }}
+        >
           <TextIcon
             icon={
               <Icon
@@ -48,10 +66,7 @@ const Description = ({ description }: { description: string }) => {
           </TextIcon>
         </button>
       )}
-
       <style jsx>{styles}</style>
     </section>
   )
 }
-
-export default Description

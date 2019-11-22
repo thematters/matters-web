@@ -7,7 +7,13 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useQuery } from 'react-apollo'
 
-import { Avatar, Placeholder, Tooltip, Translate } from '~/components'
+import {
+  Avatar,
+  Expandable,
+  Placeholder,
+  Tooltip,
+  Translate
+} from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import ShareButton from '~/components/Button/Share'
 import ShareModal from '~/components/Button/Share/ShareModal'
@@ -23,7 +29,6 @@ import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
-import Description from './Description'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
@@ -261,7 +266,9 @@ const BaseUserProfile = () => {
               </header>
 
               {!viewer.isInactive && (
-                <Description description={user.info.description} />
+                <Expandable>
+                  <p className="description">{user.info.description}</p>
+                </Expandable>
               )}
 
               <section className="info-follow">

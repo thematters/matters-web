@@ -83,51 +83,52 @@ const FeedDigest = ({
     (!parentComment || replyTo.id !== parentComment.id) &&
     !inFolloweeFeed
 
-  const isClickable = inFolloweeFeed
-  let path
-  if (isClickable) {
-    const parentId = comment && parentComment && parentComment.id
-    path = toPath({
-      page: 'articleDetail',
-      userName: article.author.userName || '',
-      slug: article.slug || '',
-      mediaHash: article.mediaHash || '',
-      fragment: parentId ? `${parentId}-${comment.id}` : id
-    })
-  }
+  const parentId = comment && parentComment && parentComment.id
+  const path = toPath({
+    page: 'articleDetail',
+    userName: article.author.userName || '',
+    slug: article.slug || '',
+    mediaHash: article.mediaHash || '',
+    fragment: parentId ? `${parentId}-${comment.id}` : id
+  })
 
   return (
     <section
       className={containerClass}
       id={actionControls.hasLink ? domNodeId : ''}
     >
-      <header className="header">
-        <div>
-          <section className="author-row">
-            <UserDigest.Mini
-              user={author}
-              avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
-              textWeight="medium"
-              hasUserName={inArticle}
+      <div>
+        <header className="header">
+          <div>
+            <section className="author-row">
+              <UserDigest.Mini
+                user={author}
+                avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
+                textWeight="medium"
+                hasUserName={inArticle}
+              />
+
+              {inFolloweeFeed && <CommentToArticle comment={comment} />}
+
+              {!!inFolloweeFeed && pinned && <PinnedLabel />}
+            </section>
+
+            {hasReplyTo && replyTo && (
+              <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
+            )}
+          </div>
+
+          {hasDropdownActions && (
+            <DropdownActions
+              comment={comment}
+              editComment={() => setEdit(true)}
             />
-
-            {inFolloweeFeed && <CommentToArticle comment={comment} />}
-
-            {pinned && <PinnedLabel />}
-          </section>
-
-          {hasReplyTo && replyTo && (
-            <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
-        </div>
-
-        {hasDropdownActions && (
-          <DropdownActions
-            comment={comment}
-            editComment={() => setEdit(true)}
-          />
-        )}
-      </header>
+        </header>
+        <Link {...path}>
+          <a className="article-title">{article.title}</a>
+        </Link>
+      </div>
 
       <div className="content-wrap">
         {edit && (
@@ -141,14 +142,14 @@ const FeedDigest = ({
             defaultExpand={edit}
           />
         )}
-        {!edit && isClickable && path && (
+        {!edit && inFolloweeFeed && path && (
           <Link {...path}>
             <a>
               <CommentContent state={state} content={content} />
             </a>
           </Link>
         )}
-        {!edit && !isClickable && (
+        {!edit && !inFolloweeFeed && (
           <CommentContent state={state} content={content} />
         )}
         {!edit && (
