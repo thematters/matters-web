@@ -8,10 +8,10 @@
 
   & button {
     position: absolute;
-    right: var(--spacing-tight);
+    right: var(--spacing-xxx-tight);
     bottom: 0;
     line-height: calc(var(--font-size-sm) * var(--line-height-base));
-    z-index: 999;
+    z-index: 1;
 
     & :gloabl(.text) {
       font-size: var(--font-size-sm);
@@ -21,7 +21,7 @@
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
+      right: calc(var(--spacing-xxx-tight) * -1);
       bottom: 0;
       width: 7rem;
       background-image: linear-gradient(
@@ -31,16 +31,6 @@
         rgba(255, 255, 255, 0)
       );
       z-index: -1;
-    }
-  }
-
-  @media (--sm-up) {
-    & button {
-      line-height: calc(var(--font-size-md) * var(--line-height-base));
-
-      & :gloabl(.text) {
-        font-size: var(--font-size-md);
-      }
     }
   }
 }

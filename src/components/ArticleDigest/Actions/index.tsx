@@ -122,7 +122,7 @@ const Actions = ({
 
   return (
     <footer className={footerClassNames}>
-      <span className="left">
+      <div className="left">
         {hasAuthor && 'author' in article && (
           <span className="space-right">
             <UserDigest.Mini user={article.author} />
@@ -153,7 +153,7 @@ const Actions = ({
             <DateTime date={article.createdAt} />
           </span>
         )}
-      </span>
+      </div>
 
       {hasDateTime && 'createdAt' in article && isResponseMode && (
         <DateTime date={article.createdAt} />

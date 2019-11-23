@@ -43,7 +43,11 @@ export const Expandable: React.FC<{ limit?: number; buffer?: number }> = ({
         {children}
       </div>
       {expandable && !expand && (
-        <button type="button" onClick={() => setExpand(true)}>
+        <button
+          type="button"
+          className="expand-button"
+          onClick={() => setExpand(true)}
+        >
           <TextIcon
             icon={
               <Icon

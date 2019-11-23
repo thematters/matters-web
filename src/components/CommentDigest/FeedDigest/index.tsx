@@ -100,7 +100,7 @@ const FeedDigest = ({
     >
       <div>
         <header className="header">
-          <div>
+          <div className="author-reply-container">
             <section className="author-row">
               <UserDigest.Mini
                 user={author}
@@ -109,11 +109,10 @@ const FeedDigest = ({
                 hasUserName={inArticle}
               />
 
-              {inFolloweeFeed && <CommentToArticle comment={comment} />}
-
               {!!inFolloweeFeed && pinned && <PinnedLabel />}
             </section>
 
+            {inFolloweeFeed && <CommentToArticle comment={comment} />}
             {hasReplyTo && replyTo && (
               <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
             )}
@@ -126,11 +125,6 @@ const FeedDigest = ({
             />
           )}
         </header>
-        {inFolloweeFeed && (
-          <Link {...path}>
-            <a className="article-title">{article.title}</a>
-          </Link>
-        )}
       </div>
 
       <div className="content-wrap">
