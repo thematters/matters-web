@@ -28,7 +28,7 @@ const CommentToArticle = ({
   const title = _get(comment, 'article.title')
 
   return (
-    <>
+    <section className="comment-to-article">
       <span className="published-description">
         <Translate
           zh_hant={TEXT.zh_hant.commentPublishedDescription}
@@ -41,7 +41,7 @@ const CommentToArticle = ({
       </Link>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

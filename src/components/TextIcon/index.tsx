@@ -37,6 +37,8 @@ export const TextIcon: React.FC<TextIconProps> = ({
   style,
   className
 }) => {
+  const textStyle = style && style.fontSize ? { fontSize: style.fontSize } : {}
+
   const textIconClasses = classNames({
     'text-icon': true,
     [color || '']: !!color,
@@ -50,7 +52,9 @@ export const TextIcon: React.FC<TextIconProps> = ({
   if (textPlacement === 'left') {
     return (
       <span className={textIconClasses} style={style}>
-        <span className="text">{text || children}</span>
+        <span className="text" style={textStyle}>
+          {text || children}
+        </span>
 
         {icon}
 
@@ -63,7 +67,9 @@ export const TextIcon: React.FC<TextIconProps> = ({
     <span className={textIconClasses} style={style}>
       {icon}
 
-      <span className="text">{text === undefined ? children : text}</span>
+      <span className="text" style={textStyle}>
+        {text === undefined ? children : text}
+      </span>
 
       <style jsx>{styles}</style>
     </span>

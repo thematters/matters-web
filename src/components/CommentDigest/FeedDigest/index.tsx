@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
 import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
@@ -83,18 +84,14 @@ const FeedDigest = ({
     (!parentComment || replyTo.id !== parentComment.id) &&
     !inFolloweeFeed
 
-  const isClickable = inFolloweeFeed
-  let path
-  if (isClickable) {
-    const parentId = comment && parentComment && parentComment.id
-    path = toPath({
-      page: 'articleDetail',
-      userName: article.author.userName || '',
-      slug: article.slug || '',
-      mediaHash: article.mediaHash || '',
-      fragment: parentId ? `${parentId}-${comment.id}` : id
-    })
-  }
+  const parentId = comment && parentComment && parentComment.id
+  const path = toPath({
+    page: 'articleDetail',
+    userName: article.author.userName || '',
+    slug: article.slug || '',
+    mediaHash: article.mediaHash || '',
+    fragment: parentId ? `${parentId}-${comment.id}` : id
+  })
 
   return (
     <section
@@ -102,7 +99,7 @@ const FeedDigest = ({
       id={actionControls.hasLink ? domNodeId : ''}
     >
       <header className="header">
-        <div>
+        <div className="author-reply-container">
           <section className="author-row">
             <UserDigest.Mini
               user={author}
@@ -111,11 +108,10 @@ const FeedDigest = ({
               hasUserName={inArticle}
             />
 
-            {inFolloweeFeed && <CommentToArticle comment={comment} />}
-
-            {pinned && <PinnedLabel />}
+            {!!inFolloweeFeed && pinned && <PinnedLabel />}
           </section>
 
+          {inFolloweeFeed && <CommentToArticle comment={comment} />}
           {hasReplyTo && replyTo && (
             <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
@@ -141,16 +137,21 @@ const FeedDigest = ({
             defaultExpand={edit}
           />
         )}
-        {!edit && isClickable && path && (
-          <Link {...path}>
-            <a>
-              <CommentContent state={state} content={content} />
-            </a>
-          </Link>
+
+        {!edit && inFolloweeFeed && (
+          <Expandable limit={5} buffer={2}>
+            <Link {...path}>
+              <a>
+                <CommentContent state={state} content={content} />
+              </a>
+            </Link>
+          </Expandable>
         )}
-        {!edit && !isClickable && (
+
+        {!edit && !inFolloweeFeed && (
           <CommentContent state={state} content={content} />
         )}
+
         {!edit && (
           <FooterActions
             comment={comment}

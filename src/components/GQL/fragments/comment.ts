@@ -35,6 +35,9 @@ export default {
   feed: gql`
     fragment FeedDigestComment on Comment {
       ...BaseDigestComment
+      article {
+        title
+      }
       author {
         id
         isBlocking
