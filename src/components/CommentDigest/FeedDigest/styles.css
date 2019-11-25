@@ -11,7 +11,8 @@
 }
 
 .author-reply-container {
-  width: -webkit-fill-available;
+  width: 100%;
+  width: fill-available;
 }
 
 @keyframes bgFadeOut {

@@ -9,13 +9,9 @@
   & button {
     position: absolute;
     right: var(--spacing-xxx-tight);
-    bottom: 0;
+    bottom: var(--spacing-xxx-tight);
     line-height: calc(var(--font-size-sm) * var(--line-height-base));
     z-index: 1;
-
-    & :gloabl(.text) {
-      font-size: var(--font-size-sm);
-    }
 
     &::before {
       content: '';

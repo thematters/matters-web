@@ -98,34 +98,32 @@ const FeedDigest = ({
       className={containerClass}
       id={actionControls.hasLink ? domNodeId : ''}
     >
-      <div>
-        <header className="header">
-          <div className="author-reply-container">
-            <section className="author-row">
-              <UserDigest.Mini
-                user={author}
-                avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
-                textWeight="medium"
-                hasUserName={inArticle}
-              />
-
-              {!!inFolloweeFeed && pinned && <PinnedLabel />}
-            </section>
-
-            {inFolloweeFeed && <CommentToArticle comment={comment} />}
-            {hasReplyTo && replyTo && (
-              <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
-            )}
-          </div>
-
-          {hasDropdownActions && (
-            <DropdownActions
-              comment={comment}
-              editComment={() => setEdit(true)}
+      <header className="header">
+        <div className="author-reply-container">
+          <section className="author-row">
+            <UserDigest.Mini
+              user={author}
+              avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
+              textWeight="medium"
+              hasUserName={inArticle}
             />
+
+            {!!inFolloweeFeed && pinned && <PinnedLabel />}
+          </section>
+
+          {inFolloweeFeed && <CommentToArticle comment={comment} />}
+          {hasReplyTo && replyTo && (
+            <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
-        </header>
-      </div>
+        </div>
+
+        {hasDropdownActions && (
+          <DropdownActions
+            comment={comment}
+            editComment={() => setEdit(true)}
+          />
+        )}
+      </header>
 
       <div className="content-wrap">
         {edit && (
