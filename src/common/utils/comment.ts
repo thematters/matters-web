@@ -1,21 +1,19 @@
 import _get from 'lodash/get'
 
-export const filterComments = (
-  comments: any[],
-  { inactive = true, pinned }: { inactive?: boolean; pinned?: boolean } = {}
-) =>
+/**
+ * Filter out comment that banned/archived and hasn't descendants
+ *
+ * @param comments
+ */
+export const filterComments = (comments: any[]) =>
   comments.filter(comment => {
+    const isBanned = comment.state === 'banned'
+    const isArchived = comment.state === 'archived'
+    const hasDescendantComments = _get(comment, 'comments.edges.length', 0) > 0
+
     let exclude = false
 
-    if (pinned && comment.pinned) {
-      exclude = true
-    }
-
-    if (
-      inactive &&
-      comment.state !== 'active' &&
-      _get(comment, 'comments.edges.length', 0) <= 0
-    ) {
+    if ((isBanned || isArchived) && !hasDescendantComments) {
       exclude = true
     }
 

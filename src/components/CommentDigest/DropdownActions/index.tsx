@@ -8,6 +8,7 @@ import { ViewerContext } from '~/components/Viewer'
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
+import CollapseButton from './CollapseButton'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
@@ -68,12 +69,14 @@ const DropdownActions = ({
   const isShowEditButton = isCommentAuthor && !!editComment && isActive
   const isShowDeleteButton = isCommentAuthor && isActive
   const isShowBlockUserButton = !isCommentAuthor
+  const isShowCollapseButton = isArticleAuthor && !isCommentAuthor && isActive
 
   if (
     (!isShowPinButton &&
       !isShowEditButton &&
       !isShowDeleteButton &&
-      !isShowBlockUserButton) ||
+      !isShowBlockUserButton &&
+      !isShowCollapseButton) ||
     viewer.isInactive
   ) {
     return null
@@ -114,6 +117,14 @@ const DropdownActions = ({
               <BlockUserButton
                 user={comment.author}
                 isShown={shown}
+                hideDropdown={hideDropdown}
+              />
+            </Menu.Item>
+          )}
+          {isShowCollapseButton && (
+            <Menu.Item>
+              <CollapseButton
+                commentId={comment.id}
                 hideDropdown={hideDropdown}
               />
             </Menu.Item>

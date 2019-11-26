@@ -108,7 +108,7 @@ const FeedDigest = ({
               hasUserName={inArticle}
             />
 
-            {!!inFolloweeFeed && pinned && <PinnedLabel />}
+            {!inFolloweeFeed && pinned && <PinnedLabel />}
           </section>
 
           {inFolloweeFeed && <CommentToArticle comment={comment} />}
@@ -142,14 +142,22 @@ const FeedDigest = ({
           <Expandable limit={5} buffer={2}>
             <Link {...path}>
               <a>
-                <CommentContent state={state} content={content} />
+                <CommentContent
+                  state={state}
+                  content={content}
+                  blocked={author.isBlocked}
+                />
               </a>
             </Link>
           </Expandable>
         )}
 
         {!edit && !inFolloweeFeed && (
-          <CommentContent state={state} content={content} />
+          <CommentContent
+            state={state}
+            content={content}
+            blocked={author.isBlocked}
+          />
         )}
 
         {!edit && (
