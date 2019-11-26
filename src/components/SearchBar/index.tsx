@@ -1,4 +1,5 @@
 import { Formik } from 'formik'
+import _ from 'lodash'
 import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebounce } from 'use-debounce'
@@ -58,7 +59,10 @@ const BaseSearchBar: React.FC<{
       onSubmit={values => {
         const path = toPath({
           page: 'search',
-          q: values.q
+          q: _.truncate(values.q, {
+            length: 100,
+            omission: ''
+          })
         })
         Router.push(path.href, path.as)
         hideDropdown()
