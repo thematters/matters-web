@@ -62,10 +62,7 @@ const FeedDigest = ({
   } = comment
 
   // descendant
-  const descendantComments = (
-    (comment.comments && comments.edges) ||
-    []
-  ).filter(({ node }) => node.state === 'active')
+  const descendantComments = (comment.comments && comments.edges) || []
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(

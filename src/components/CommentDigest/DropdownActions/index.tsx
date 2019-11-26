@@ -49,7 +49,6 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
-  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -120,7 +119,6 @@ const DropdownActions = ({
             <Menu.Item>
               <BlockUserButton
                 user={comment.author}
-                isShown={shown}
                 hideDropdown={hideDropdown}
               />
             </Menu.Item>
@@ -134,7 +132,6 @@ const DropdownActions = ({
       }
       trigger="click"
       onCreate={setInstance}
-      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >
