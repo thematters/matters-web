@@ -8,11 +8,19 @@ import { CommentDigest } from '~/components/CommentDigest'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
-import { getQuery, mergeConnections, toPath } from '~/common/utils'
+import {
+  filterComments,
+  getQuery,
+  mergeConnections,
+  toPath
+} from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 import ICON_CHEVRON_RIGHT from '~/static/icons/chevron-right.svg?sprite'
 
-import { UserCommentFeed } from './__generated__/UserCommentFeed'
+import {
+  UserCommentFeed,
+  UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
+} from './__generated__/UserCommentFeed'
 import { UserIdUser } from './__generated__/UserIdUser'
 import styles from './styles.css'
 
@@ -167,6 +175,9 @@ const UserComments = ({ user }: UserIdUser) => {
             slug: articleEdge.node.slug,
             mediaHash: articleEdge.node.mediaHash || ''
           })
+          const filteredComments = filterComments(
+            (commentEdges || []).map(({ node }) => node)
+          ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[]
 
           return (
             <li key={articleEdge.cursor} className="article-item">
@@ -184,13 +195,11 @@ const UserComments = ({ user }: UserIdUser) => {
               </Link>
 
               <ul className="comment-list">
-                {(commentEdges || [])
-                  .map(({ node }) => node)
-                  .map(comment => (
-                    <li key={comment.id}>
-                      <CommentDigest.Feed comment={comment} hasLink />
-                    </li>
-                  ))}
+                {filteredComments.map(comment => (
+                  <li key={comment.id}>
+                    <CommentDigest.Feed comment={comment} hasLink />
+                  </li>
+                ))}
               </ul>
             </li>
           )
