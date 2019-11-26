@@ -1,17 +1,13 @@
-import { useContext } from 'react'
-
 import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import userFragments from '~/components/GQL/fragments/user'
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
-import { LanguageContext } from '~/components/Language'
 import BlocKUserModal from '~/components/Modal/BlockUserModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 import ICON_BLOCK from '~/static/icons/block.svg?sprite'
 import ICON_UNBLOCK from '~/static/icons/unblock.svg?sprite'
 
@@ -53,7 +49,6 @@ const BlockUserButton = ({
   isShown: boolean
   hideDropdown: () => void
 }) => {
-  const { lang } = useContext(LanguageContext)
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
     optimisticResponse: {
@@ -76,11 +71,12 @@ const BlockUserButton = ({
               new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'green',
-                  content: translate({
-                    zh_hant: TEXT.zh_hant.unblockSuccess,
-                    zh_hans: TEXT.zh_hans.unblockSuccess,
-                    lang
-                  })
+                  content: (
+                    <Translate
+                      zh_hant={TEXT.zh_hant.unblockSuccess}
+                      zh_hans={TEXT.zh_hans.unblockSuccess}
+                    />
+                  )
                 }
               })
             )

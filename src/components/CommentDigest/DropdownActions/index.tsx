@@ -34,9 +34,11 @@ const fragments = {
         }
       }
       ...PinButtonComment
+      ...CollapseButtonComment
     }
     ${PinButton.fragments.comment}
     ${BlockUserButton.fragments.user}
+    ${CollapseButton.fragments.comment}
   `
 }
 
@@ -63,13 +65,15 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isCollapsed = comment.state === 'collapsed'
   const isDescendantComment = comment.parentComment
 
   const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
   const isShowEditButton = isCommentAuthor && !!editComment && isActive
   const isShowDeleteButton = isCommentAuthor && isActive
   const isShowBlockUserButton = !isCommentAuthor
-  const isShowCollapseButton = isArticleAuthor && !isCommentAuthor && isActive
+  const isShowCollapseButton =
+    isArticleAuthor && !isCommentAuthor && (isActive || isCollapsed)
 
   if (
     (!isShowPinButton &&
@@ -123,10 +127,7 @@ const DropdownActions = ({
           )}
           {isShowCollapseButton && (
             <Menu.Item>
-              <CollapseButton
-                commentId={comment.id}
-                hideDropdown={hideDropdown}
-              />
+              <CollapseButton comment={comment} hideDropdown={hideDropdown} />
             </Menu.Item>
           )}
         </Menu>
