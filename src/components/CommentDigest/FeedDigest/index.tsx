@@ -5,10 +5,11 @@ import { useState } from 'react'
 
 import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
-import { FeedDigestComment, FeedDigestComment_comments_edges_node } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import {
-  FolloweeFeedDigestComment
-} from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
+  FeedDigestComment,
+  FeedDigestComment_comments_edges_node
+} from '~/components/GQL/fragments/__generated__/FeedDigestComment'
+import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
