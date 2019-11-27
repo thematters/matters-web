@@ -1,6 +1,8 @@
 import _get from 'lodash/get'
 import _has from 'lodash/has'
 
+import { filterComment } from './comment'
+
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
@@ -14,15 +16,5 @@ export const filterResponses = (responses: any[]) =>
     }
 
     // comment
-    const isBanned = response.state === 'banned'
-    const isArchived = response.state === 'archived'
-    const hasDescendantComments = _get(response, 'comments.edges.length', 0) > 0
-
-    let exclude = false
-
-    if ((isBanned || isArchived) && !hasDescendantComments) {
-      exclude = true
-    }
-
-    return !exclude
+    return filterComment(response)
   })
