@@ -39,6 +39,7 @@
   flex-grow: 1;
 
   & h4 {
+    margin-bottom: var(--spacing-xx-tight);
     color: var(--color-grey);
     font-weight: var(--font-weight-normal);
 
@@ -47,10 +48,10 @@
       font-weight: var(--font-weight-medium);
     }
   }
-  & :global(> * + *) {
-    display: block;
-    margin-top: var(--spacing-xx-tight);
-  }
+}
+
+.date {
+  margin-top: var(--spacing-xx-tight);
 }
 
 .highlight {

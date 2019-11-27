@@ -5,7 +5,10 @@ import { useState } from 'react'
 
 import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
-import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
+import {
+  FeedDigestComment,
+  FeedDigestComment_comments_edges_node
+} from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
@@ -13,7 +16,7 @@ import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath } from '~/common/utils'
+import { filterComments, toPath } from '~/common/utils'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import CommentContent from '../Content'
@@ -62,10 +65,9 @@ const FeedDigest = ({
   } = comment
 
   // descendant
-  const descendantComments = (
-    (comment.comments && comments.edges) ||
-    []
-  ).filter(({ node }) => node.state === 'active')
+  const descendantComments = filterComments(
+    ((comment.comments && comments.edges) || []).map(({ node }) => node)
+  ) as FeedDigestComment_comments_edges_node[]
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(
@@ -108,7 +110,7 @@ const FeedDigest = ({
               hasUserName={inArticle}
             />
 
-            {!!inFolloweeFeed && pinned && <PinnedLabel />}
+            {!inFolloweeFeed && pinned && <PinnedLabel />}
           </section>
 
           {inFolloweeFeed && <CommentToArticle comment={comment} />}
@@ -142,14 +144,22 @@ const FeedDigest = ({
           <Expandable limit={5} buffer={2}>
             <Link {...path}>
               <a>
-                <CommentContent state={state} content={content} />
+                <CommentContent
+                  state={state}
+                  content={content}
+                  blocked={author.isBlocked}
+                />
               </a>
             </Link>
           </Expandable>
         )}
 
         {!edit && !inFolloweeFeed && (
-          <CommentContent state={state} content={content} />
+          <CommentContent
+            state={state}
+            content={content}
+            blocked={author.isBlocked}
+          />
         )}
 
         {!edit && (
@@ -165,10 +175,10 @@ const FeedDigest = ({
           <ul className="descendant-comments">
             {descendantComments
               .slice(0, expand ? undefined : COLLAPSE_DESCENDANT_COUNT)
-              .map(({ node, cursor }) => (
-                <li key={cursor}>
+              .map(c => (
+                <li key={c.id}>
                   <DescendantComment
-                    comment={node}
+                    comment={c}
                     inArticle={inArticle}
                     commentCallback={commentCallback}
                     {...actionControls}

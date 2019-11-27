@@ -100,6 +100,7 @@ const CommentForm = ({
   const push =
     clientPreferenceData && clientPreferenceData.clientPreference.push
   const draftContent = (data && data.commentDraft.content) || ''
+  const canPush = !push || !push.supported || push.enabled
 
   const [isSubmitting, setSubmitting] = useState(false)
   const [expand, setExpand] = useState(defaultExpand || false)
@@ -131,10 +132,6 @@ const CommentForm = ({
 
       setContent('')
 
-      if (!push || !push.supported || push.enabled) {
-        return
-      }
-
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
@@ -146,7 +143,7 @@ const CommentForm = ({
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: (
+            customButton: canPush && (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
@@ -158,7 +155,7 @@ const CommentForm = ({
         })
       )
     } catch (e) {
-      // TODO
+      console.error(e)
     }
 
     setSubmitting(false)
