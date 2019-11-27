@@ -9,7 +9,10 @@ import commentFragments from '~/components/GQL/fragments/comment'
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
-import { ArticleFeaturedComments } from './__generated__/ArticleFeaturedComments'
+import {
+  ArticleFeaturedComments,
+  ArticleFeaturedComments_article_featuredComments_edges_node
+} from './__generated__/ArticleFeaturedComments'
 import styles from './styles.css'
 
 const FEATURED_COMMENTS = gql`
@@ -54,7 +57,9 @@ const FeaturedComments = () => {
   const connectionPath = 'article.featuredComments'
   const { edges, pageInfo } =
     (data && data.article && data.article.featuredComments) || {}
-  const comments = filterComments((edges || []).map(({ node }) => node))
+  const comments = filterComments(
+    (edges || []).map(({ node }) => node)
+  ) as ArticleFeaturedComments_article_featuredComments_edges_node[]
 
   if (loading && !data) {
     return <Spinner />

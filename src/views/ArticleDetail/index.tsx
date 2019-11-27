@@ -64,7 +64,6 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
-        isBlocking
         ...UserDigestFullDescUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {

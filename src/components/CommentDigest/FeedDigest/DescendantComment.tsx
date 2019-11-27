@@ -70,7 +70,11 @@ const DescendantComment = ({
           />
         )}
         {!edit && (
-          <CommentContent state={comment.state} content={comment.content} />
+          <CommentContent
+            state={comment.state}
+            content={comment.content}
+            blocked={comment.author.isBlocked}
+          />
         )}
         {!edit && (
           <FooterActions

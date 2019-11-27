@@ -19,7 +19,6 @@ const fragments = {
 }
 
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
-  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -33,17 +32,12 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
       content={
         <Menu>
           <Menu.Item>
-            <BlockUserButton
-              user={user}
-              isShown={shown}
-              hideDropdown={hideDropdown}
-            />
+            <BlockUserButton user={user} hideDropdown={hideDropdown} />
           </Menu.Item>
         </Menu>
       }
       trigger="click"
       onCreate={setInstance}
-      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >
