@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Style fixes and related article avatar #515
 - Use `.length` instead of `countWordsLength` to count description #514
 - Close publish modal if it's been published #512
+- Add option to disable `+` sign in `isValidateEmail` #519
 
 ## [2.2.0] - 2019-11-20
 
