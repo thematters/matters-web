@@ -58,7 +58,7 @@ const BaseSearchBar: React.FC<{
       onSubmit={values => {
         const path = toPath({
           page: 'search',
-          q: values.q
+          q: values.q.slice(0, 100)
         })
         Router.push(path.href, path.as)
         hideDropdown()
