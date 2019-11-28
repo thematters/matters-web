@@ -72,7 +72,6 @@ const ResponseDigest = ({
           type="collection"
           article={remadeArticle}
           extraContainerClass="no-padding"
-          hasAuthor={false}
           {...actionControls}
         />
       </div>
