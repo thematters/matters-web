@@ -33,7 +33,7 @@
 
   & :global(div.content-wrap) {
     margin-top: var(--spacing-tight);
-    padding-left: var(--spacing-loose);
+    padding-left: calc((var(--spacing-default) + var(--spacing-loose)) / 2);
   }
 
   & :global(footer.actions) {

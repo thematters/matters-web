@@ -71,7 +71,7 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
 
   return (
     <Collapsable
-      title={<Translate zh_hans="增加标签" zh_hant="增加標籤" />}
+      title={<Translate zh_hant="標籤" zh_hans="标签" />}
       defaultCollapsed={!hasTags}
     >
       <p className="tags-intro">

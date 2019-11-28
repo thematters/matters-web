@@ -48,7 +48,7 @@ import Wall from './Wall'
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
     $mediaHash: String
-    $hasArticleDigestActionAuthor: Boolean = false
+    $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
@@ -64,7 +64,6 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
-        isBlocking
         ...UserDigestFullDescUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {

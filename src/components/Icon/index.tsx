@@ -11,7 +11,7 @@ export type IconSize =
   | 'xlarge'
   | 'xxlarge'
 
-export type IconColor = 'white' | 'black' | 'grey-dark' | 'grey'
+export type IconColor = 'white' | 'black' | 'grey-dark' | 'grey' | 'green'
 
 interface IconBaseProps {
   size?: IconSize

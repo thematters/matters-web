@@ -72,6 +72,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
   const viewer = useContext(ViewerContext)
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
+  const isCollapsed = comment.state === 'collapsed'
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
@@ -101,13 +102,13 @@ const FooterActions: React.FC<FooterActionsProps> & {
         <div className="left">
           <UpvoteButton
             comment={comment}
-            disabled={!isActive || viewer.isInactive}
+            disabled={(!isActive && !isCollapsed) || viewer.isInactive}
           />
 
           <IconDotDivider />
           <DownvoteButton
             comment={comment}
-            disabled={!isActive || viewer.isInactive}
+            disabled={(!isActive && !isCollapsed) || viewer.isInactive}
           />
 
           {hasForm && (
@@ -127,7 +128,9 @@ const FooterActions: React.FC<FooterActionsProps> & {
                       }
                     }}
                     disabled={
-                      !isActive || viewer.isInactive || isBlockedByAuthor
+                      (!isActive && !isCollapsed) ||
+                      viewer.isInactive ||
+                      isBlockedByAuthor
                     }
                   >
                     <Icon

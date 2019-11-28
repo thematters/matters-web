@@ -3,8 +3,12 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
-import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
+import {
+  FeedDigestComment,
+  FeedDigestComment_comments_edges_node
+} from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
 import { Icon } from '~/components/Icon'
@@ -12,7 +16,7 @@ import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath } from '~/common/utils'
+import { filterComments, toPath } from '~/common/utils'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import CommentContent from '../Content'
@@ -61,10 +65,9 @@ const FeedDigest = ({
   } = comment
 
   // descendant
-  const descendantComments = (
-    (comment.comments && comments.edges) ||
-    []
-  ).filter(({ node }) => node.state === 'active')
+  const descendantComments = filterComments(
+    ((comment.comments && comments.edges) || []).map(({ node }) => node)
+  ) as FeedDigestComment_comments_edges_node[]
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(
@@ -83,18 +86,14 @@ const FeedDigest = ({
     (!parentComment || replyTo.id !== parentComment.id) &&
     !inFolloweeFeed
 
-  const isClickable = inFolloweeFeed
-  let path
-  if (isClickable) {
-    const parentId = comment && parentComment && parentComment.id
-    path = toPath({
-      page: 'articleDetail',
-      userName: article.author.userName || '',
-      slug: article.slug || '',
-      mediaHash: article.mediaHash || '',
-      fragment: parentId ? `${parentId}-${comment.id}` : id
-    })
-  }
+  const parentId = comment && parentComment && parentComment.id
+  const path = toPath({
+    page: 'articleDetail',
+    userName: article.author.userName || '',
+    slug: article.slug || '',
+    mediaHash: article.mediaHash || '',
+    fragment: parentId ? `${parentId}-${comment.id}` : id
+  })
 
   return (
     <section
@@ -102,7 +101,7 @@ const FeedDigest = ({
       id={actionControls.hasLink ? domNodeId : ''}
     >
       <header className="header">
-        <div>
+        <div className="author-reply-container">
           <section className="author-row">
             <UserDigest.Mini
               user={author}
@@ -111,11 +110,10 @@ const FeedDigest = ({
               hasUserName={inArticle}
             />
 
-            {inFolloweeFeed && <CommentToArticle comment={comment} />}
-
-            {pinned && <PinnedLabel />}
+            {!inFolloweeFeed && pinned && <PinnedLabel />}
           </section>
 
+          {inFolloweeFeed && <CommentToArticle comment={comment} />}
           {hasReplyTo && replyTo && (
             <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
           )}
@@ -141,16 +139,29 @@ const FeedDigest = ({
             defaultExpand={edit}
           />
         )}
-        {!edit && isClickable && path && (
-          <Link {...path}>
-            <a>
-              <CommentContent state={state} content={content} />
-            </a>
-          </Link>
+
+        {!edit && inFolloweeFeed && (
+          <Expandable limit={5} buffer={2}>
+            <Link {...path}>
+              <a>
+                <CommentContent
+                  state={state}
+                  content={content}
+                  blocked={author.isBlocked}
+                />
+              </a>
+            </Link>
+          </Expandable>
         )}
-        {!edit && !isClickable && (
-          <CommentContent state={state} content={content} />
+
+        {!edit && !inFolloweeFeed && (
+          <CommentContent
+            state={state}
+            content={content}
+            blocked={author.isBlocked}
+          />
         )}
+
         {!edit && (
           <FooterActions
             comment={comment}
@@ -164,10 +175,10 @@ const FeedDigest = ({
           <ul className="descendant-comments">
             {descendantComments
               .slice(0, expand ? undefined : COLLAPSE_DESCENDANT_COUNT)
-              .map(({ node, cursor }) => (
-                <li key={cursor}>
+              .map(c => (
+                <li key={c.id}>
                   <DescendantComment
-                    comment={node}
+                    comment={c}
                     inArticle={inArticle}
                     commentCallback={commentCallback}
                     {...actionControls}

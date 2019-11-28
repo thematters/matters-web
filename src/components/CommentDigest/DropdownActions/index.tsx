@@ -8,6 +8,7 @@ import { ViewerContext } from '~/components/Viewer'
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
+import CollapseButton from './CollapseButton'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
@@ -33,9 +34,11 @@ const fragments = {
         }
       }
       ...PinButtonComment
+      ...CollapseButtonComment
     }
     ${PinButton.fragments.comment}
     ${BlockUserButton.fragments.user}
+    ${CollapseButton.fragments.comment}
   `
 }
 
@@ -46,7 +49,6 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
-  const [shown, setShown] = useState(false)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -62,18 +64,22 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isCollapsed = comment.state === 'collapsed'
   const isDescendantComment = comment.parentComment
 
   const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
   const isShowEditButton = isCommentAuthor && !!editComment && isActive
   const isShowDeleteButton = isCommentAuthor && isActive
   const isShowBlockUserButton = !isCommentAuthor
+  const isShowCollapseButton =
+    isArticleAuthor && !isCommentAuthor && (isActive || isCollapsed)
 
   if (
     (!isShowPinButton &&
       !isShowEditButton &&
       !isShowDeleteButton &&
-      !isShowBlockUserButton) ||
+      !isShowBlockUserButton &&
+      !isShowCollapseButton) ||
     viewer.isInactive
   ) {
     return null
@@ -113,16 +119,19 @@ const DropdownActions = ({
             <Menu.Item>
               <BlockUserButton
                 user={comment.author}
-                isShown={shown}
                 hideDropdown={hideDropdown}
               />
+            </Menu.Item>
+          )}
+          {isShowCollapseButton && (
+            <Menu.Item>
+              <CollapseButton comment={comment} hideDropdown={hideDropdown} />
             </Menu.Item>
           )}
         </Menu>
       }
       trigger="click"
       onCreate={setInstance}
-      onShown={() => setShown(true)}
       placement="bottom-end"
       zIndex={301}
     >

@@ -5,7 +5,21 @@ import { INVALID_NAMES } from '~/common/enums'
 /**
  * Validate email address.
  */
-export const isValidEmail = isEmail
+export interface ValidEmailOptions {
+  allowPlusSign: boolean
+}
+export const isValidEmail = (str: string, options: ValidEmailOptions) => {
+  const { allowPlusSign } = options
+
+  // check "+" sign
+  if (!allowPlusSign && str.indexOf('+') >= 0) {
+    return false
+  }
+
+  return isEmail(str, {
+    allow_utf8_local_part: false
+  })
+}
 
 /**
  * Validate user raw pass word. It only accepts any ASCII character.

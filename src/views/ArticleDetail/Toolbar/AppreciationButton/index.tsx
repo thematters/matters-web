@@ -99,10 +99,7 @@ const AppreciationButton = ({
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
   const containerClasses = classNames({
-    container: true,
-    active: article.hasAppreciate,
-    inactive: !canAppreciate && readCivicLikerModal,
-    unlogged: !viewer.isAuthed
+    container: true
   })
 
   /**
@@ -172,19 +169,32 @@ const AppreciationButton = ({
   }
 
   /**
+   * MAX Button
+   */
+  if (!canAppreciate && isReachLimit) {
+    return (
+      <section className={containerClasses}>
+        <AppreciateButton
+          count="MAX"
+          total={total}
+          inFixedToolbar={inFixedToolbar}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  /**
    * Disabled Button
    */
   return (
     <section className={containerClasses}>
       <Tooltip
+        offset="-10, 0"
         content={
           <Translate
-            {...(isReachLimit
-              ? {
-                  zh_hant: '你最多可讚賞 5 次',
-                  zh_hans: '你最多可赞赏 5 次'
-                }
-              : isMe
+            {...(isMe
               ? {
                   zh_hant: '去讚賞其他用戶吧',
                   zh_hans: '去赞赏其他用户吧'
@@ -196,18 +206,18 @@ const AppreciationButton = ({
           />
         }
       >
-        <AppreciateButton
-          disabled
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? isReachLimit
-                ? 'MAX'
-                : appreciatedCount
-              : undefined
-          }
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
+        <div>
+          <AppreciateButton
+            disabled
+            count={
+              viewer.isAuthed && appreciatedCount > 0
+                ? appreciatedCount
+                : undefined
+            }
+            total={total}
+            inFixedToolbar={inFixedToolbar}
+          />
+        </div>
       </Tooltip>
 
       <style jsx>{styles}</style>

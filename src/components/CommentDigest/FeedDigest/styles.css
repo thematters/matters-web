@@ -10,6 +10,11 @@
   }
 }
 
+.author-reply-container {
+  width: 100%;
+  width: fill-available;
+}
+
 @keyframes bgFadeOut {
   50% {
     background: var(--color-bg-green);
@@ -50,6 +55,15 @@
     margin-right: var(--spacing-x-tight);
   }
 }
+
+.comment-to-article {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: var(--spacing-xxx-tight) 0 var(--spacing-xx-tight)
+    calc((var(--spacing-default) + var(--spacing-tight)) / 2);
+}
+
 .container:not(.in-article) .reply-to {
   margin-left: 2.5rem;
 }
@@ -112,6 +126,10 @@
 }
 
 .article-title {
-  flex-shrink: 0;
+  flex-shrink: 2;
   font-size: var(--font-size-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }

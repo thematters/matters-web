@@ -12,6 +12,8 @@ const base = gql`
     pinned
     author {
       ...UserDigestMiniUser
+      isBlocking
+      isBlocked
     }
     parentComment {
       id
@@ -35,9 +37,8 @@ export default {
   feed: gql`
     fragment FeedDigestComment on Comment {
       ...BaseDigestComment
-      author {
-        id
-        isBlocking
+      article {
+        title
       }
       comments(input: { sort: oldest, first: null })
         @include(if: $hasDescendantComments) {
@@ -54,10 +55,6 @@ export default {
   followee: gql`
     fragment FolloweeFeedDigestComment on Comment {
       ...BaseDigestComment
-      author {
-        id
-        isBlocking
-      }
       article {
         title
       }

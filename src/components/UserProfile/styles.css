@@ -147,48 +147,6 @@
     font-size: var(--font-size-md);
   }
 
-  & p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    /* autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  & button {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    line-height: calc(var(--font-size-sm) * var(--line-height-base));
-    z-index: 1;
-
-    & :gloabl(.text) {
-      font-size: var(--font-size-sm);
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 7rem;
-      background-image: linear-gradient(
-        to left,
-        var(--color-white),
-        var(--color-white) 53%,
-        rgba(255, 255, 255, 0)
-      );
-      z-index: -1;
-    }
-  }
-
-  &.expand {
-    & p {
-      -webkit-line-clamp: unset;
-    }
-  }
-
   @media (--sm-up) {
     & button {
       line-height: calc(var(--font-size-md) * var(--line-height-base));

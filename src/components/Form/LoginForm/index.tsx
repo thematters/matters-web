@@ -24,8 +24,7 @@ import {
   appendTarget,
   redirectToTarget,
   translate,
-  validateEmail,
-  validatePassword
+  validateEmail
 } from '~/common/utils'
 
 import { UserLogin } from './__generated__/UserLogin'
@@ -146,12 +145,11 @@ const LoginForm: React.FC<FormProps> = ({
       email: '',
       password: ''
     },
-    validate: ({ email, password }) => {
-      const isInvalidEmail = validateEmail(email, lang)
-      const isInvalidPassword = validatePassword(password, lang)
+    validate: ({ email }) => {
+      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
+
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {})
+        ...(isInvalidEmail ? { email: isInvalidEmail } : {})
       }
     },
     onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {

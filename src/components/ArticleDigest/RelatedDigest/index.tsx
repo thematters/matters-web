@@ -45,7 +45,6 @@ const RelatedDigest = ({
   article: RelatedDigestArticle
 } & ActionsControls) => {
   const { cover, author, slug, summary, mediaHash, title, live } = article
-
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
   }

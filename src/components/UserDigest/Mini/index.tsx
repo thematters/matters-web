@@ -63,8 +63,12 @@ const Mini = ({
         <Link {...path}>
           <a className={containerClasses}>
             <Avatar size={avatarSize} user={user} />
-            <span className="name">{user.displayName}</span>
-            {hasUserName && <span className="username">@{user.userName}</span>}
+            <span className="name-container">
+              <span className="name">{user.displayName}</span>
+              {hasUserName && (
+                <span className="username">@{user.userName}</span>
+              )}
+            </span>
           </a>
         </Link>
       </section>

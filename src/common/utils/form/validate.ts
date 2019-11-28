@@ -1,14 +1,18 @@
 import { TEXT } from '~/common/enums'
 import {
-  countWordsLength,
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
   isValidUserName,
-  translate
+  translate,
+  ValidEmailOptions
 } from '~/common/utils'
 
-export const validateEmail = (value: string, lang: Language) => {
+export const validateEmail = (
+  value: string,
+  lang: Language,
+  options: ValidEmailOptions
+) => {
   let result
 
   if (!value) {
@@ -16,7 +20,7 @@ export const validateEmail = (value: string, lang: Language) => {
       zh_hant: TEXT.zh_hant.required,
       zh_hans: TEXT.zh_hans.required
     }
-  } else if (!isValidEmail(value)) {
+  } else if (!isValidEmail(value, options)) {
     result = {
       zh_hant: TEXT.zh_hant.invalidEmail,
       zh_hans: TEXT.zh_hans.invalidEmail
@@ -163,7 +167,7 @@ export const validateDescription = (value: string, lang: Language) => {
       zh_hant: TEXT.zh_hant.required,
       zh_hans: TEXT.zh_hans.required
     }
-  } else if (countWordsLength(value) > 200) {
+  } else if (value.length > 200) {
     result = {
       zh_hant: `已超過 200 字，目前 ${value.length} 字`,
       zh_hans: `已超过 200 字，目前 ${value.length} 字`

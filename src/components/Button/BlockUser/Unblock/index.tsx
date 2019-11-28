@@ -7,8 +7,8 @@ import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUse
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 import { LanguageContext } from '~/components/Language'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
-import { analytics, translate } from '~/common/utils'
+import { ADD_TOAST, TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { UnblockButtonUser } from './__generated__/UnblockButtonUser'
 
@@ -58,9 +58,6 @@ const Unblock = ({
             }
           })
         )
-        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
-          id: user.id
-        })
       }}
       bgColor="green"
     >

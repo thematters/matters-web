@@ -72,7 +72,7 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
             const state =
               (data && data.publishArticle.publishState) || 'unpublished'
 
-            if (state === 'pending') {
+            if (state === 'pending' || state === 'published') {
               close()
             }
           }}
