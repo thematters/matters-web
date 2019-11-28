@@ -126,7 +126,7 @@ const FeedDigest = ({
             color="grey"
             weight="medium"
           >
-            <Translate zh_hant="置頂文章" zh_hans="置顶文章" />
+            <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
           </TextIcon>
         </div>
       )}

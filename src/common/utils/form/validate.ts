@@ -4,10 +4,15 @@ import {
   isValidEmail,
   isValidPassword,
   isValidUserName,
-  translate
+  translate,
+  ValidEmailOptions
 } from '~/common/utils'
 
-export const validateEmail = (value: string, lang: Language) => {
+export const validateEmail = (
+  value: string,
+  lang: Language,
+  options: ValidEmailOptions
+) => {
   let result
 
   if (!value) {
@@ -15,7 +20,7 @@ export const validateEmail = (value: string, lang: Language) => {
       zh_hant: TEXT.zh_hant.required,
       zh_hans: TEXT.zh_hans.required
     }
-  } else if (!isValidEmail(value)) {
+  } else if (!isValidEmail(value, options)) {
     result = {
       zh_hant: TEXT.zh_hant.invalidEmail,
       zh_hans: TEXT.zh_hans.invalidEmail

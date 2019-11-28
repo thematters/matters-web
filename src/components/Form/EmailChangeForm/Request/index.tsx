@@ -45,7 +45,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang)
+      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
       const isInvalidCode = validateCode(code, lang)
       return {
         ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
