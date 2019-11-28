@@ -46,7 +46,6 @@ const SidebarDigest = ({
   hasCover,
   disabled,
   extraContainerClass,
-  hasAuthor = true,
   ...actionControls
 }: SidebarDigestProps) => {
   const { author, slug, mediaHash, title, live, state } = article
@@ -88,12 +87,7 @@ const SidebarDigest = ({
               </Title>
             </a>
           </Link>
-          <Actions
-            hasAuthor={hasAuthor}
-            article={article}
-            type="sidebar"
-            {...actionControls}
-          />
+          <Actions article={article} type="sidebar" {...actionControls} />
         </div>
 
         {hasCover && cover && (
