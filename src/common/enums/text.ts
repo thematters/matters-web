@@ -181,7 +181,10 @@ export const TEXT = {
       CODE_INVALID: '驗證碼不正確',
       CODE_EXPIRED: '驗證碼已過期',
       UNABLE_TO_UPLOAD_FROM_URL:
-        '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳'
+        '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳',
+      LIKER_NOT_FOUND: 'Liker ID 不存在',
+      LIKER_EMAIL_EXISTS: 'Liker ID 電子信箱已被其他人使用',
+      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用'
     } as { [key: string]: string }
   },
 
@@ -367,7 +370,10 @@ export const TEXT = {
       CODE_INVALID: '验证码不正确',
       CODE_EXPIRED: '验证码已过期',
       UNABLE_TO_UPLOAD_FROM_URL:
-        '文件上传失败，请确认文件链接是否有效，或手动下载后再上传'
+        '文件上传失败，请确认文件链接是否有效，或手动下载后再上传',
+      LIKER_NOT_FOUND: 'Liker ID 不存在',
+      LIKER_EMAIL_EXISTS: 'Liker ID 邮箱已被其他人使用',
+      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用'
     } as { [key: string]: string }
   }
 }
