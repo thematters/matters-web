@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -54,10 +54,9 @@ const AppreciatorsModal = () => {
     { variables: { mediaHash } }
   )
 
-  const article = data && data.article
+  const article = data?.article
   const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } =
-    (data && data.article && data.article.appreciationsReceived) || {}
+  const { edges, pageInfo } = data?.article?.appreciationsReceived || {}
 
   if (loading) {
     return <Spinner />
@@ -90,7 +89,7 @@ const AppreciatorsModal = () => {
     })
   }
   const totalCount = numFormat(
-    (data && data.article && data.article.appreciationsReceived.totalCount) || 0
+    data?.article?.appreciationsReceived.totalCount || 0
   )
 
   return (

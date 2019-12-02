@@ -147,7 +147,7 @@ export const subscribePush = async () => {
     localStorage.setItem(
       STORE_KEY_PUSH,
       JSON.stringify({
-        userId: data && data.toggleSubscribePush && data.toggleSubscribePush.id,
+        userId: data?.toggleSubscribePush?.id,
         enabled: true,
         token
       })

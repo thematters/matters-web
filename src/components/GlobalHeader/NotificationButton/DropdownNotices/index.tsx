@@ -110,7 +110,7 @@ const DropdownNotices = ({
     )
   }
 
-  const edges = data && data.viewer && data.viewer.notices.edges
+  const edges = data?.viewer?.notices.edges
 
   return (
     <section className="container" onClick={hideDropdown}>

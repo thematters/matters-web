@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -52,8 +52,7 @@ const AuthorPicker = ({
       notifyOnNetworkStatusChange: true
     }
   )
-  const edges =
-    (data && data.viewer && data.viewer.recommendation.authors.edges) || []
+  const edges = data?.viewer?.recommendation.authors.edges || []
   const followeeCount = viewer.followees.totalCount || 0
 
   return (

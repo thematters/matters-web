@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   InfiniteScroll,
@@ -90,7 +90,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   })
 
   const connectionPath = 'viewer.recommendation.feed'
-  const result = data && data.viewer && data.viewer.recommendation.feed
+  const result = data?.viewer?.recommendation.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
@@ -156,7 +156,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 
 const HomeFeed = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
-  const { feedSortType } = (data && data.clientPreference) || {
+  const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest'
   }
   const setSortBy = (type: SortBy) => {

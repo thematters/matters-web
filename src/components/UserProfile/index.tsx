@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
@@ -5,7 +6,6 @@ import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import {
   Avatar,

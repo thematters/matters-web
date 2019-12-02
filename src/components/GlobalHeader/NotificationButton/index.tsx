@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'

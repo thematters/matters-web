@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
@@ -17,7 +17,7 @@ const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
   const { data } = useQuery<ArticleResponseCount>(ARTICLE_RESPONSE_COUNT, {
     variables: { mediaHash }
   })
-  const count = (data && data.article && data.article.responseCount) || 0
+  const count = data?.article?.responseCount || 0
 
   return (
     <span className="count">

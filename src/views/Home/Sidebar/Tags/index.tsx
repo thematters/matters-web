@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Label, Spinner, Tag, Translate } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -32,7 +32,7 @@ const SIDEBAR_TAGS = gql`
 
 const Tags = () => {
   const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
-  const edges = data && data.viewer && data.viewer.recommendation.tags.edges
+  const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {
     return <QueryError error={error} />

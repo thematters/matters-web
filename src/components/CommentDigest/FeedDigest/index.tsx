@@ -86,7 +86,7 @@ const FeedDigest = ({
     (!parentComment || replyTo.id !== parentComment.id) &&
     !inFolloweeFeed
 
-  const parentId = comment && parentComment && parentComment.id
+  const parentId = comment && parentComment?.id
   const path = toPath({
     page: 'articleDetail',
     userName: article.author.userName || '',

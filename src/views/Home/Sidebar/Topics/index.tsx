@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Label, Placeholder, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -38,7 +38,7 @@ export const SIDEBAR_TOPICS = gql`
 
 const Topics = () => {
   const { data, loading, error } = useQuery<SidebarTopics>(SIDEBAR_TOPICS)
-  const edges = data && data.viewer && data.viewer.recommendation.topics.edges
+  const edges = data?.viewer?.recommendation.topics.edges
 
   if (loading) {
     return <Placeholder.Sidebar />

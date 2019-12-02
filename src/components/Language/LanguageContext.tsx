@@ -21,10 +21,12 @@ const UPDATE_VIEWER_LANGUAGE = gql`
   }
 `
 
-export const LanguageContext = createContext({} as {
-  lang: Language
-  setLang: (lang: Language) => void
-})
+export const LanguageContext = createContext(
+  {} as {
+    lang: Language
+    setLang: (lang: Language) => void
+  }
+)
 
 export const LanguageConsumer = LanguageContext.Consumer
 
@@ -37,7 +39,7 @@ export const LanguageProvider = ({
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
-  const viewerLanguage = viewer && viewer.settings && viewer.settings.language
+  const viewerLanguage = viewer?.settings?.language
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (

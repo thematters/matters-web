@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useEffect } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'

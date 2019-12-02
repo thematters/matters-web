@@ -77,7 +77,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
   const onClick = async () => {
     try {
       const { data } = await putDraft()
-      const { slug, id } = (data && data.putDraft) || {}
+      const { slug, id } = data?.putDraft || {}
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })

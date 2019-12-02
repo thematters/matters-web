@@ -1,4 +1,4 @@
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'

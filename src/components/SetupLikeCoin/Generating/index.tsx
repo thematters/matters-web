@@ -36,8 +36,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
 
   useEffect(() => {
     generate().then(result => {
-      const likerId =
-        result && result.data && result.data.generateLikerId.liker.likerId
+      const likerId = result?.data?.generateLikerId.liker.likerId
 
       if (likerId) {
         nextStep()

@@ -143,7 +143,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         const { data } = await confirm({
           variables: { input: { email, code, type: 'register' } }
         })
-        const codeId = data && data.confirmVerificationCode
+        const codeId = data?.confirmVerificationCode
 
         await register({
           variables: {

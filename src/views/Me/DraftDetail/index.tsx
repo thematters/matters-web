@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
@@ -58,8 +58,7 @@ const DraftDetail = () => {
     return <Throw404 />
   }
 
-  const draft =
-    data && data.node && data.node.__typename === 'Draft' && data.node
+  const draft = data?.node?.__typename === 'Draft' && data.node
 
   return (
     <main className="l-row">

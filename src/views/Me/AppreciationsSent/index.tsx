@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Footer, Head, InfiniteScroll, Spinner } from '~/components'
 import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'

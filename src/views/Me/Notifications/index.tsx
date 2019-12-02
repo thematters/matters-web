@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
-import { useQuery } from 'react-apollo'
 
 import {
   Footer,
@@ -43,7 +43,7 @@ const Notifications = () => {
   }, [])
 
   const connectionPath = 'viewer.notices'
-  const { edges, pageInfo } = (data && data.viewer && data.viewer.notices) || {}
+  const { edges, pageInfo } = data?.viewer?.notices || {}
 
   if (loading) {
     return <Spinner />

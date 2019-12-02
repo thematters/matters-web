@@ -73,7 +73,7 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
         const { data } = await confirmCode({
           variables: { input: { email, type: 'email_reset_confirm', code } }
         })
-        const confirmVerificationCode = data && data.confirmVerificationCode
+        const confirmVerificationCode = data?.confirmVerificationCode
         const params = {
           variables: {
             input: {

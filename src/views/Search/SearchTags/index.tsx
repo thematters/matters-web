@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   InfiniteScroll,
@@ -79,7 +79,7 @@ const SearchTag = ({ q, isAggregate }: { q: string; isAggregate: boolean }) => {
   }
 
   const connectionPath = 'search'
-  const { edges, pageInfo } = (data && data.search) || {}
+  const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null
