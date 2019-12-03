@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce/lib'
@@ -11,33 +10,16 @@ import {
   Spinner,
   Translate
 } from '~/components'
+import {
+  SearchTagsQuery,
+  SearchTagsQuery_search_edges_node_Tag
+} from '~/components/GQL/queries/__generated__/SearchTagsQuery'
+import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 
-import {
-  SearchTagsQuery,
-  SearchTagsQuery_search_edges_node_Tag
-} from './__generated__/SearchTagsQuery'
 import styles from './styles.css'
-
-const SEARCH_TAGS = gql`
-  query SearchTagsQuery($search: String!) {
-    search(input: { key: $search, type: Tag, first: 5 }) {
-      edges {
-        node {
-          ... on Tag {
-            id
-            content
-            articles(input: { first: 0 }) {
-              totalCount
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 const DropdownContent = ({
   tags,

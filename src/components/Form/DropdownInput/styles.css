@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+
+  & + :global(.container) {
+    margin-top: var(--spacing-x-tight);
+  }
+
+  &.has-float {
+    & .input {
+      padding-right: 6rem;
+    }
+  }
+}
+
+.input {
+  @mixin text-input;
+  height: 2.5rem;
+
+  &:disabled {
+    color: var(--color-grey-darker);
+  }
+}
+
+.float-right {
+  @mixin flex-center-all;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 2.5rem;
+  padding: var(--spacing-x-tight);
+}
+
+.info {
+  font-size: var(--font-size-xs);
+  min-height: calc(var(--font-size-xs) * var(--line-height-base));
+  margin-top: 0.4rem;
+  padding-left: var(--spacing-x-tight);
+
+  & > .error {
+    color: var(--color-red);
+  }
+
+  & > .hint {
+    color: var(--color-grey-dark);
+  }
+}
