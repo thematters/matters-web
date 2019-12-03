@@ -63,7 +63,7 @@ export const LanguageProvider = ({
                 }
               })
             } catch (e) {
-              //
+              console.log(e)
             }
           }
 
