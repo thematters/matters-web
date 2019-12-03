@@ -1,22 +1,32 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
   Footer,
   Head,
+  Icon,
   InfiniteScroll,
   PageHeader,
-  Placeholder
+  Placeholder,
+  TextIcon,
+  Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
+import AddIcon from '~/components/Icon/Add'
+import TagModal from '~/components/Modal/TagModal'
+import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
+import ICON_EDIT from '~/static/icons/tag-edit.svg?sprite'
 
 import { TagDetailArticles } from './__generated__/TagDetailArticles'
+import styles from './styles.css'
 
 const TAG_DETAIL = gql`
   query TagDetailArticles(
@@ -30,6 +40,7 @@ const TAG_DETAIL = gql`
       ... on Tag {
         id
         content
+        description
         articles(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
@@ -48,6 +59,73 @@ const TAG_DETAIL = gql`
   }
   ${ArticleDigest.Feed.fragments.article}
 `
+
+const AddArticleTagButton = () => {
+  return (
+    <ModalSwitch modalId="addArticleTagModal">
+      {(open: any) => (
+        <button type="button" onClick={e => open()}>
+          <TextIcon
+            icon={<AddIcon color="green" size="xsmall" />}
+            spacing="xxxtight"
+            size="sm"
+            color="green"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.addArticleTag}
+              zh_hans={TEXT.zh_hans.addArticleTag}
+            />
+          </TextIcon>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
+
+const EditTagButton = () => {
+  return (
+    <ModalSwitch modalId="editTagModal">
+      {(open: any) => (
+        <button type="button" onClick={e => open()} className="edit-tag">
+          <TextIcon
+            icon={
+              <Icon
+                id={ICON_EDIT.id}
+                viewBox={ICON_EDIT.viewBox}
+                color="green"
+                size="xsmall"
+              />
+            }
+            spacing="xxxtight"
+            size="sm"
+            color="green"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.editTag}
+              zh_hans={TEXT.zh_hans.editTag}
+            />
+          </TextIcon>
+          <style jsx>{styles}</style>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
+
+const ActionButtons = () => {
+  const viewer = useContext(ViewerContext)
+
+  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
+    return null
+  }
+
+  return (
+    <div>
+      <AddArticleTagButton />
+      <EditTagButton />
+    </div>
+  )
+}
 
 const TagDetail = () => {
   const router = useRouter()
@@ -79,6 +157,14 @@ const TagDetail = () => {
     return <EmptyTag />
   }
 
+  const tag = data.node
+    ? {
+        id: data.node.id,
+        content: data.node.content,
+        description: data.node.description || undefined
+      }
+    : undefined
+
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAG_DETAIL,
@@ -102,7 +188,9 @@ const TagDetail = () => {
     <>
       <Head title={`#${data.node.content}`} />
 
-      <PageHeader pageTitle={data.node.content} />
+      <PageHeader pageTitle={data.node.content}>
+        <ActionButtons />
+      </PageHeader>
 
       <section>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -124,6 +212,16 @@ const TagDetail = () => {
           </ul>
         </InfiniteScroll>
       </section>
+
+      {/*
+      <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
+        {(props: ModalInstanceProps) => <TagAdddModal {...props} />}
+      </ModalInstance>
+      */}
+
+      <ModalInstance modalId="editTagModal" title="editTag">
+        {(props: ModalInstanceProps) => <TagModal tag={tag} {...props} />}
+      </ModalInstance>
     </>
   )
 }

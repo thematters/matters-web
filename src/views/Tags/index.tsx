@@ -15,7 +15,7 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
-import TagCreateModal from '~/components/Modal/TagCreateModal'
+import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -196,7 +196,7 @@ export default () => {
       </aside>
 
       <ModalInstance modalId="createTagModal" title="createTag">
-        {(props: ModalInstanceProps) => <TagCreateModal {...props} />}
+        {(props: ModalInstanceProps) => <TagModal {...props} />}
       </ModalInstance>
 
       <style jsx>{styles}</style>

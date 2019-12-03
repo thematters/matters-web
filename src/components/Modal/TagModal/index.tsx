@@ -17,8 +17,8 @@ import { PutTag } from './__generated__/PutTag'
 import styles from './styles.css'
 
 const PUT_TAG = gql`
-  mutation PutTag($content: String, $description: String) {
-    putTag(input: { content: $content, description: $description }) {
+  mutation PutTag($id: ID, $content: String, $description: String) {
+    putTag(input: { id: $id, content: $content, description: $description }) {
       id
       content
       description
@@ -88,12 +88,21 @@ const DropdownContent = ({
   )
 }
 
+interface ModalProps extends ModalInstanceProps {
+  tag?: {
+    id: string
+    content: string
+    description?: string
+  }
+}
+
 interface FormValues {
   content: string
   description: string
 }
 
-const TagCreateModal: React.FC<ModalInstanceProps> = ({ close }) => {
+const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
+  const id = tag ? tag.id : undefined
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
   const {
@@ -106,8 +115,8 @@ const TagCreateModal: React.FC<ModalInstanceProps> = ({ close }) => {
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
-      content: '',
-      description: ''
+      content: tag ? tag.content : '',
+      description: tag ? tag.description || '' : ''
     },
     validate: ({ content, description }) => {
       return {
@@ -127,15 +136,17 @@ const TagCreateModal: React.FC<ModalInstanceProps> = ({ close }) => {
       { setFieldError, setSubmitting }
     ) => {
       try {
-        await update({ variables: { content, description } })
+        await update({
+          variables: { id, content, description }
+        })
         setSubmitting(false)
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
               content: translate({
-                zh_hant: TEXT.zh_hant.tagCreated,
-                zh_hans: TEXT.zh_hans.tagCreated,
+                zh_hant: id ? TEXT.zh_hant.tagEdited : TEXT.zh_hant.tagCreated,
+                zh_hans: id ? TEXT.zh_hans.tagEdited : TEXT.zh_hans.tagCreated,
                 lang
               }),
               closeButton: true,
@@ -230,4 +241,4 @@ const TagCreateModal: React.FC<ModalInstanceProps> = ({ close }) => {
   )
 }
 
-export default TagCreateModal
+export default TagModal
