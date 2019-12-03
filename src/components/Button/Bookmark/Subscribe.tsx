@@ -52,10 +52,18 @@ const Subscribe = ({
   const onClick = async () => {
     await subscribe()
 
+    // skip
     if (!push || !push.supported || push.enabled) {
       return
     }
 
+    // auto re-subscribe push
+    if (Notification.permission === 'granted') {
+      subscribePush({ silent: true })
+      return
+    }
+
+    // show toast to subscribe push
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {

@@ -100,7 +100,7 @@ const CommentForm = ({
   const push =
     clientPreferenceData && clientPreferenceData.clientPreference.push
   const draftContent = (data && data.commentDraft.content) || ''
-  const canPush = !push || !push.supported || push.enabled
+  const shouldShowPush = !push || !push.supported || push.enabled
 
   const [isSubmitting, setSubmitting] = useState(false)
   const [expand, setExpand] = useState(defaultExpand || false)
@@ -125,25 +125,30 @@ const CommentForm = ({
 
     try {
       await putComment({ variables: { input } })
+      setContent('')
 
       if (submitCallback) {
         submitCallback()
       }
 
-      setContent('')
+      // auto re-subscribe push
+      if (!shouldShowPush && Notification.permission === 'granted') {
+        subscribePush({ silent: true })
+        return
+      }
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
-            content: (
+            content: shouldShowPush && (
               <Translate
                 zh_hant={TEXT.zh_hant.pushDescription}
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: canPush && (
+            customButton: shouldShowPush && (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
