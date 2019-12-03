@@ -7,6 +7,7 @@ import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
+import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import ProgressBar from '~/components/ProgressBar'
 import { ToastHolder } from '~/components/ToastHolder'
@@ -50,18 +51,20 @@ export const Layout: React.FC = ({ children }) => {
 
   return (
     <ViewerContext.Provider value={processViewer(viewer)}>
-      <HeaderContextProvider>
-        <AnalyticsListener user={viewer || {}} />
-        <Head />
+      <LanguageProvider>
+        <HeaderContextProvider>
+          <AnalyticsListener user={viewer || {}} />
+          <Head />
 
-        <GlobalHeader user={viewer} />
+          <GlobalHeader user={viewer} />
 
-        {children}
+          {children}
 
-        <Modal.Anchor />
-        <ToastHolder />
-        <ProgressBar />
-      </HeaderContextProvider>
+          <Modal.Anchor />
+          <ToastHolder />
+          <ProgressBar />
+        </HeaderContextProvider>
+      </LanguageProvider>
     </ViewerContext.Provider>
   )
 }
