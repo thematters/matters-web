@@ -24,7 +24,8 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
     pollInterval: 1000 * 5,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser || !isPublishing
+    skip: !isPublishing,
+    ssr: false
   })
 
   if (
