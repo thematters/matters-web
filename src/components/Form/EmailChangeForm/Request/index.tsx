@@ -57,7 +57,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
         const { data } = await confirmCode({
           variables: { input: { email, type: 'email_reset', code } }
         })
-        const confirmVerificationCode = data && data.confirmVerificationCode
+        const confirmVerificationCode = data?.confirmVerificationCode
 
         if (submitCallback && confirmVerificationCode) {
           submitCallback({ codeId: confirmVerificationCode })

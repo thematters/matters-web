@@ -1,9 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
 import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'

@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -40,9 +40,9 @@ const Binding: React.FC<Props> = ({
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser
+    ssr: false
   })
-  const likerId = data && data.viewer && data.viewer.liker.likerId
+  const likerId = data?.viewer?.liker.likerId
 
   if (likerId) {
     nextStep()

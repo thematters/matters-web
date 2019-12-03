@@ -1,7 +1,7 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { useLazyQuery } from 'react-apollo'
 
 import { Empty, Icon, Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
@@ -55,9 +55,8 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
     }
   }, [searchKey, isShown])
 
-  const frequentSearch = (data && data.frequentSearch) || []
-  const recentSearches =
-    (data && data.viewer && data.viewer.activity.recentSearches.edges) || []
+  const frequentSearch = data?.frequentSearch || []
+  const recentSearches = data?.viewer?.activity.recentSearches.edges || []
   const showFrequentSearch = frequentSearch.length > 0
   const showSearchHistory = !searchKey
 

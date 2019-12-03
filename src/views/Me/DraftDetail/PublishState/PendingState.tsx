@@ -1,4 +1,4 @@
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 
 import { Translate } from '~/components'
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
@@ -22,7 +22,8 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
     pollInterval: 1000 * 2,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser || !isPublishing
+    skip: !isPublishing,
+    ssr: false
   })
 
   return (

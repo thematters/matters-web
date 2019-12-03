@@ -77,8 +77,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
   const isBlockedByAuthor = author.isBlocking
-  const fragment =
-    parentComment && parentComment.id ? `${parentComment.id}-${id}` : id
+  const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
   const commentPath =
     author.userName && mediaHash
       ? toPath({
@@ -169,9 +168,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
           <CommentForm
             articleId={comment.article.id}
             replyToId={comment.id}
-            parentId={
-              (comment.parentComment && comment.parentComment.id) || comment.id
-            }
+            parentId={comment.parentComment?.id || comment.id}
             refetch={refetch}
             submitCallback={commentFormCallback}
             blocked={isBlockedByAuthor}

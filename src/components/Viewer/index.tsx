@@ -49,8 +49,8 @@ export type Viewer = ViewerUser & {
 
 export const processViewer = (viewer: ViewerUser): Viewer => {
   const isAuthed = !!viewer.id
-  const state = viewer && viewer.status && viewer.status.state
-  const role = viewer && viewer.status && viewer.status.role
+  const state = viewer?.status?.state
+  const role = viewer?.status?.role
   const isActive = state === 'active'
   const isFrozen = state === 'frozen'
   const isBanned = state === 'banned'

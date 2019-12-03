@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   Head,
@@ -53,8 +53,7 @@ const SettingsBlocked = () => {
   }
 
   const connectionPath = 'viewer.blockList'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.blockList) || {}
+  const { edges, pageInfo } = data?.viewer?.blockList || {}
 
   const filteredUsers = (edges || []).filter(({ node }) => node.isBlocked)
 

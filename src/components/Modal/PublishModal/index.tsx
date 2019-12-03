@@ -69,8 +69,7 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
           disabled={!publishable}
           onClick={async () => {
             const { data } = await publish({ variables: { draftId } })
-            const state =
-              (data && data.publishArticle.publishState) || 'unpublished'
+            const state = data?.publishArticle.publishState || 'unpublished'
 
             if (state === 'pending' || state === 'published') {
               close()

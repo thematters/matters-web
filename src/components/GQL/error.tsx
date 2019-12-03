@@ -16,7 +16,7 @@ export const getErrorCodes = (error: ApolloError) => {
   }
 
   error.graphQLErrors.forEach(e => {
-    const code = e.extensions && e.extensions.code
+    const code = e.extensions?.code
     if (code) {
       errorCodes.push(code)
     }

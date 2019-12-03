@@ -1,10 +1,10 @@
+import { ApolloProvider } from '@apollo/react-hooks'
 import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import App from 'next/app'
 import getConfig from 'next/config'
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
 
 import {
   AnalyticsProvider,

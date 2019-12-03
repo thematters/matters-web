@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { Error } from '~/components/Error'
@@ -35,7 +35,7 @@ const ROOT_QUERY = gql`
 
 export const Layout: React.FC = ({ children }) => {
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
-  const viewer = data && data.viewer
+  const viewer = data?.viewer
 
   if (loading) {
     return null

@@ -11,7 +11,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     return null
   }
 
-  const parentId = comment && comment.parentComment && comment.parentComment.id
+  const parentId = comment?.parentComment?.id
   const path = toPath({
     page: 'articleDetail',
     userName: comment.article.author.userName || '',

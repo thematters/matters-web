@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import AuthorPicker from '~/components/Follow/AuthorPicker'

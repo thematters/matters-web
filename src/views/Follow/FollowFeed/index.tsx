@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -71,8 +71,7 @@ const FollowFeed = () => {
   }
 
   const connectionPath = 'viewer.recommendation.followeeWorks'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.recommendation.followeeWorks) || {}
+  const { edges, pageInfo } = data?.viewer?.recommendation.followeeWorks || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyArticle />

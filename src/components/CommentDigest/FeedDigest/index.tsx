@@ -66,7 +66,7 @@ const FeedDigest = ({
 
   // descendant
   const descendantComments = filterComments(
-    ((comment.comments && comments.edges) || []).map(({ node }) => node)
+    (comments.edges || []).map(({ node }) => node)
   ) as FeedDigestComment_comments_edges_node[]
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
@@ -79,20 +79,20 @@ const FeedDigest = ({
     container: true,
     'in-article': inArticle
   })
-  const domNodeId = parentComment ? `${parentComment.id}-${comment.id}` : id
+  const domNodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const hasReplyTo =
     replyTo &&
     (!parentComment || replyTo.id !== parentComment.id) &&
     !inFolloweeFeed
 
-  const parentId = comment && parentComment && parentComment.id
+  const parentId = comment && parentComment?.id
   const path = toPath({
     page: 'articleDetail',
     userName: article.author.userName || '',
     slug: article.slug || '',
     mediaHash: article.mediaHash || '',
-    fragment: parentId ? `${parentId}-${comment.id}` : id
+    fragment: parentId ? `${parentId}-${id}` : id
   })
 
   return (
@@ -130,12 +130,12 @@ const FeedDigest = ({
       <div className="content-wrap">
         {edit && (
           <CommentForm
-            commentId={comment.id}
-            articleId={comment.article.id}
+            commentId={id}
+            articleId={article.id}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
-            blocked={comment.article.author.isBlocking}
-            defaultContent={comment.content}
+            blocked={article.author.isBlocking}
+            defaultContent={content}
             defaultExpand={edit}
           />
         )}

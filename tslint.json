@@ -14,8 +14,7 @@
         "dotenv",
         "apollo-cache",
         "svg-sprite-loader",
-        "@testing-library",
-        "@apollo"
+        "@testing-library"
       ]
     ],
     "no-bitwise": false,

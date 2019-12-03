@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Error, Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -39,7 +39,7 @@ const MattersToday = () => {
     return <QueryError error={error} />
   }
 
-  const article = data && data.viewer && data.viewer.recommendation.today
+  const article = data?.viewer?.recommendation.today
 
   if (!article) {
     return <Error type="not_found" />

@@ -41,7 +41,8 @@ export const REGEXP_DISPLAY_NAME = /^[A-Za-z0-9\u4E00-\u9FFF\u3400-\u4DFF\uF900-
 export const isValidDisplayName = (name: string): boolean => {
   if (
     !name ||
-    (name.length < 2 || name.length > 20) ||
+    name.length < 2 ||
+    name.length > 20 ||
     INVALID_NAMES.includes(name.toLowerCase())
   ) {
     return false
@@ -57,7 +58,8 @@ export const isValidDisplayName = (name: string): boolean => {
 export const isValidUserName = (name: string): boolean => {
   if (
     !name ||
-    (name.length < 4 || name.length > 15) ||
+    name.length < 4 ||
+    name.length > 15 ||
     INVALID_NAMES.includes(name.toLowerCase())
   ) {
     return false

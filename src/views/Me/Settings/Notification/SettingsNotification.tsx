@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Head, PageHeader, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -165,8 +165,8 @@ const SettingsNotification = () => {
   const { data, loading } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
   )
-  const settings = data && data.viewer && data.viewer.settings.notification
-  const id = data && data.viewer && data.viewer.id
+  const settings = data?.viewer?.settings.notification
+  const id = data?.viewer?.id
 
   if (loading) {
     return <Spinner />

@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { useMutation } from '~/components/GQL'
@@ -97,9 +97,8 @@ const CommentForm = ({
     refetchQueries
   })
 
-  const push =
-    clientPreferenceData && clientPreferenceData.clientPreference.push
-  const draftContent = (data && data.commentDraft.content) || ''
+  const push = clientPreferenceData?.clientPreference.push
+  const draftContent = data?.commentDraft.content || ''
   const shouldShowPush = !push || !push.supported || push.enabled
 
   const [isSubmitting, setSubmitting] = useState(false)

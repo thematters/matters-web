@@ -20,12 +20,14 @@ export interface AboutHeader {
 }
 type HeaderState = DefaultHeader | AuthHeader | DraftHeader | AboutHeader
 
-export const HeaderContext = createContext({} as {
-  headerState: HeaderState
-  updateHeaderState: (
-    state: DefaultHeader | AuthHeader | DraftHeader | AboutHeader
-  ) => void
-})
+export const HeaderContext = createContext(
+  {} as {
+    headerState: HeaderState
+    updateHeaderState: (
+      state: DefaultHeader | AuthHeader | DraftHeader | AboutHeader
+    ) => void
+  }
+)
 
 export const HeaderContextConsumer = HeaderContext.Consumer
 
