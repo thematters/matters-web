@@ -1,20 +1,27 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
 
 import {
   Footer,
   Head,
+  Icon,
   InfiniteScroll,
   PageHeader,
   Spinner,
   Tag,
+  TextIcon,
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
+import TagCreateModal from '~/components/Modal/TagCreateModal'
+import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
+import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
@@ -42,6 +49,43 @@ const ALL_TAGSS = gql`
   }
   ${Tag.fragments.tag}
 `
+
+const AddIcon = () => (
+  <Icon
+    id={ICON_ADD.id}
+    viewBox={ICON_ADD.viewBox}
+    color="green"
+    size="xsmall"
+  />
+)
+
+const CreateTagButton = () => {
+  const viewer = useContext(ViewerContext)
+  // temporarily safety check
+  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
+    return null
+  }
+
+  return (
+    <ModalSwitch modalId="createTagModal">
+      {(open: any) => (
+        <button type="button" onClick={e => open()}>
+          <TextIcon
+            icon={<AddIcon />}
+            spacing="xxxtight"
+            size="sm"
+            color="green"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.createTag}
+              zh_hans={TEXT.zh_hans.createTag}
+            />
+          </TextIcon>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
 
 const Tags = () => {
   const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
@@ -138,7 +182,9 @@ export default () => {
               zh_hans={TEXT.zh_hans.allTags}
             />
           }
-        />
+        >
+          <CreateTagButton />
+        </PageHeader>
 
         <section>
           <Tags />
@@ -148,6 +194,10 @@ export default () => {
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Footer />
       </aside>
+
+      <ModalInstance modalId="createTagModal" title="createTag">
+        {(props: ModalInstanceProps) => <TagCreateModal {...props} />}
+      </ModalInstance>
 
       <style jsx>{styles}</style>
     </main>
