@@ -16,12 +16,12 @@ import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 import ICON_DELETE_BLACK_CIRCLE from '~/static/icons/delete-black-circle.svg?sprite'
 
-import { AddArticlesTags } from './__generated__/AddArticlesTags'
+import { AddArticleTags } from './__generated__/AddArticleTags'
 import styles from './styles.css'
 
-const ADD_ARTICLES_TAGS = gql`
-  mutation AddArticlesTags($id: ID!, $articles: [ID!]) {
-    addArticlesTags(input: { id: $id, articles: $articles }) {
+const ADD_ARTICLE_TAGS = gql`
+  mutation AddArticleTags($id: ID!, $articles: [ID!]) {
+    addArticleTags(input: { id: $id, articles: $articles }) {
       id
       content
     }
@@ -65,7 +65,7 @@ interface FormValues {
 
 const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
-  const [update] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const [update] = useMutation<AddArticleTags>(ADD_ARTICLE_TAGS)
   const { lang } = useContext(LanguageContext)
 
   const {
