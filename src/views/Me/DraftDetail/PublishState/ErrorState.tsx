@@ -3,9 +3,11 @@ import RetryButton from '~/components/DraftDigest/Components/RetryButton'
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { Toast } from '~/components/Toast'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 const ErrorState = ({ draft }: { draft: PublishStateDraft }) => {
+  analytics.trackEvent(ANALYTICS_EVENTS.PUBLISH_ERROR, { entrance: draft.id })
   return (
     <Toast
       color="red"

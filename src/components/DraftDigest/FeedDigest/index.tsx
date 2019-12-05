@@ -4,8 +4,9 @@ import Link from 'next/link'
 
 import { DateTime, Icon, TextIcon, Title, Translate } from '~/components'
 
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { TEXT } from '~/common/enums/text'
-import { stripHtml, toPath } from '~/common/utils'
+import { analytics, stripHtml, toPath } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 import ICON_HELP from '~/static/icons/help.svg?sprite'
 
@@ -64,6 +65,11 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
   })
   const cleanedSummary = stripHtml(summary)
 
+  const onClick = () =>
+    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, {
+      entrance: id
+    })
+
   return (
     <section className={containerClasses}>
       {(isPending || isError) && (
@@ -77,7 +83,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
       <div className="content">
         <div className="title">
           <Link {...path}>
-            <a>
+            <a onClick={onClick}>
               <Title type="feed" is="h2">
                 {title || (
                   <Translate
@@ -92,7 +98,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
 
         <div className="description">
           <Link {...path}>
-            <a>
+            <a onClick={onClick}>
               <p>{cleanedSummary}</p>
             </a>
           </Link>
