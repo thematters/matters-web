@@ -27,7 +27,12 @@ export const ANALYTICS_EVENTS = {
   FOLLOW_USER: 'follow-user',
   UNFOLLOW_USER: 'unfollow-user',
   OPEN_CIVIC_LIKER_MODAL: 'open-civic-liker-modal',
-  CLOSE_CIVIC_LIKER_MODAL: 'close-civic-liker-modal'
+  CLOSE_CIVIC_LIKER_MODAL: 'close-civic-liker-modal',
+  CLOSE_SIGNUP_MODAL: 'close-signup-modal',
+  SIGNUP_STEP_FINISH: 'signup-step-finish',
+  LIKECOIN_STEP_CHANGE: 'likecoin-step-change',
+  LIKECOIN_STEP_RETRY: 'likecoin-step-retry',
+  CLICK_ENTER_AFTER_SIGNUP: 'click-enter-after-signup'
 }
 
 export const SHARE_TYPE = {
