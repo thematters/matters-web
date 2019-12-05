@@ -14,6 +14,8 @@ export const ANALYTICS_EVENTS = {
   CLICK_PUBLISH_IN_MODAL: 'click-publish-in-modal',
   CLICK_FEED: 'click-feed',
   CLICK_DRAFT: 'click-draft',
+  CLICK_FREQUENT_SEARCH: 'click-frequent-search',
+  CLICK_SEARCH_HISTORY: 'click-search-history',
   PUBLISH_ERROR: 'publish-error',
   LOAD_MORE: 'load-more',
   DISPLAY_ALL: 'display-all',
