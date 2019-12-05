@@ -8,6 +8,8 @@ import ArticleNewCommentNotice from './ArticleNewCommentNotice'
 import ArticleNewDownstreamNotice from './ArticleNewDownstreamNotice'
 import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
 import ArticlePublishedNotice from './ArticlePublishedNotice'
+import ArticleTagHasBeenAddedNotice from './ArticleTagHasBeenAddedNotice'
+import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentNewReplyNotice from './CommentNewReplyNotice'
 import CommentNewUpvoteNotice from './CommentNewUpvoteNotice'
@@ -69,6 +71,12 @@ const fragments = {
       ... on OfficialAnnouncementNotice {
         ...OfficialAnnouncementNotice
       }
+      ... on ArticleTagHasBeenAddedNotice {
+        ...ArticleTagHasBeenAddedNotice
+      }
+      ... on ArticleTagHasBeenRemovedNotice {
+        ...ArticleTagHasBeenRemovedNotice
+      }
     }
     ${ArticleNewAppreciationNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
@@ -86,6 +94,8 @@ const fragments = {
     ${SubscribedArticleNewCommentNotice.fragments.notice}
     ${UpstreamArticleArchivedNotice.fragments.notice}
     ${UserNewFollowerNotice.fragments.notice}
+    ${ArticleTagHasBeenAddedNotice.fragments.notice}
+    ${ArticleTagHasBeenRemovedNotice.fragments.notice}
   `
 }
 
@@ -123,6 +133,10 @@ const FeedDigest = ({ notice }: { notice: DigestNotice }) => {
       return <UpstreamArticleArchivedNotice notice={notice} />
     case 'UserNewFollowerNotice':
       return <UserNewFollowerNotice notice={notice} />
+    case 'ArticleTagHasBeenAddedNotice':
+      return <ArticleTagHasBeenAddedNotice notice={notice} />
+    case 'ArticleTagHasBeenRemovedNotice':
+      return <ArticleTagHasBeenRemovedNotice notice={notice} />
   }
 }
 

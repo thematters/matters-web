@@ -15,6 +15,7 @@ import {
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
+import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
 import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
@@ -156,11 +157,8 @@ const TagDetail = () => {
 
   const id = data.node.id
   const connectionPath = 'node.articles'
-  const { edges, pageInfo } = data.node.articles || {}
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTag />
-  }
+  const { edges, pageInfo } = data.node.articles
+  const hasArticles = edges && edges.length > 0 && pageInfo
 
   const tag = data.node
     ? {
@@ -173,7 +171,7 @@ const TagDetail = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAG_DETAIL,
-      location: edges.length,
+      location: edges ? edges.length : 0,
       entrance: id
     })
     return fetchMore({
@@ -200,30 +198,36 @@ const TagDetail = () => {
       />
 
       <section>
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <ul>
-            {edges.map(({ node, cursor }, i) => (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.TAG_DETAIL,
-                    location: i,
-                    entrance: id
-                  })
-                }
-              >
-                <ArticleDigest.Feed
-                  article={node}
-                  hasDateTime
-                  hasBookmark
-                  hasMoreButton
-                  inTagDetail
-                />
-              </li>
-            ))}
-          </ul>
-        </InfiniteScroll>
+        {hasArticles && (
+          <InfiniteScroll
+            hasNextPage={pageInfo.hasNextPage}
+            loadMore={loadMore}
+          >
+            <ul>
+              {(edges || []).map(({ node, cursor }, i) => (
+                <li
+                  key={cursor}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.TAG_DETAIL,
+                      location: i,
+                      entrance: id
+                    })
+                  }
+                >
+                  <ArticleDigest.Feed
+                    article={node}
+                    hasDateTime
+                    hasBookmark
+                    hasMoreButton
+                    inTagDetail
+                  />
+                </li>
+              ))}
+            </ul>
+          </InfiniteScroll>
+        )}
+        {!hasArticles && <EmptyTagArticles />}
       </section>
 
       <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
