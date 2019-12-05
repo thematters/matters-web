@@ -169,7 +169,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
   })
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form id="tag-modal" className="form" onSubmit={handleSubmit}>
       <Modal.Content spacing="small" layout="full-width">
         <p className="field">
           {translate({
@@ -191,6 +191,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           touched={touched}
           handleBlur={handleBlur}
           handleChange={handleChange}
+          dropdownAppendTo="tag-modal"
           dropdownAutoSizing={true}
           DropdownContent={DropdownContent}
           dropdownZIndex={201}
@@ -218,7 +219,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           style={{ height: '5rem' }}
         />
       </Modal.Content>
-      <div className="buttons">
+      <section className="buttons">
         <Modal.FooterButton onClick={close} bgColor="white">
           <Translate
             zh_hant={TEXT.zh_hant.cancel}
@@ -235,7 +236,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
             zh_hans={TEXT.zh_hans.confirm}
           />
         </Modal.FooterButton>
-      </div>
+      </section>
       <style jsx>{styles}</style>
     </form>
   )

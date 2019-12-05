@@ -5,7 +5,6 @@ import { useQuery } from 'react-apollo'
 import {
   Footer,
   Head,
-  Icon,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -15,13 +14,13 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
+import AddIcon from '~/components/Icon/Add'
 import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
-import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
@@ -50,15 +49,6 @@ const ALL_TAGSS = gql`
   ${Tag.fragments.tag}
 `
 
-const AddIcon = () => (
-  <Icon
-    id={ICON_ADD.id}
-    viewBox={ICON_ADD.viewBox}
-    color="green"
-    size="xsmall"
-  />
-)
-
 const CreateTagButton = () => {
   const viewer = useContext(ViewerContext)
   // temporarily safety check
@@ -71,7 +61,7 @@ const CreateTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()}>
           <TextIcon
-            icon={<AddIcon />}
+            icon={<AddIcon color="green" size="xsmall" />}
             spacing="xxxtight"
             size="sm"
             color="green"
@@ -176,15 +166,14 @@ export default () => {
         />
 
         <PageHeader
+          buttons={<CreateTagButton />}
           pageTitle={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
               zh_hans={TEXT.zh_hans.allTags}
             />
           }
-        >
-          <CreateTagButton />
-        </PageHeader>
+        />
 
         <section>
           <Tags />

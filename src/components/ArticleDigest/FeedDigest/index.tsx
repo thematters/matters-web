@@ -75,12 +75,14 @@ const FeedDigest = ({
   hasMoreButton,
   hasSticky,
   inFolloweeFeed,
+  inTagDetail = false,
   ...actionControls
 }: { article: FeedDigestArticle | FolloweeFeedDigestArticle } & {
   hasFingerprint?: boolean
   hasMoreButton?: boolean
   hasSticky?: boolean
   inFolloweeFeed?: boolean
+  inTagDetail?: boolean
 } & ActionsControls) => {
   const {
     cover,
@@ -147,7 +149,7 @@ const FeedDigest = ({
         <div>
           {!hasFingerprint && live && <IconLive />}
           {hasFingerprint && <Fingerprint article={article} />}
-          {hasMoreButton && <DropdownActions article={article} />}
+          {hasMoreButton && <DropdownActions article={article} inTagDetail={inTagDetail} />}
         </div>
       </div>
 

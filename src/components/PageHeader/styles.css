@@ -5,3 +5,24 @@ header {
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-default);
 }
+
+.hasButtons {
+  flex-direction: column;
+
+  & .title {
+    @mixin flex-center-space-between;
+    width: 100%;
+  }
+}
+
+.hasDescription {
+  flex-direction: column;
+  padding-bottom: var(--spacing-loose);
+
+  & .description {
+    color: var(--color-grey-darker);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-tight);
+    width: 100%;
+  }
+}

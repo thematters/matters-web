@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 interface Props {
   className?: string[]
-  type: 'text'
+  type: 'text' | 'search'
   field: string
   placeholder?: string
   floatElement?: any
@@ -24,6 +24,7 @@ interface Props {
   handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 
+  dropdownAppendTo?: string
   dropdownAutoSizing?: boolean
   DropdownContent: any
   dropdownCallback?: (params: any) => void
@@ -48,6 +49,7 @@ const DropdownInput: React.FC<Props> = ({
   handleBlur,
   handleChange,
 
+  dropdownAppendTo = '',
   dropdownAutoSizing = false,
   DropdownContent,
   dropdownCallback,
@@ -85,10 +87,10 @@ const DropdownInput: React.FC<Props> = ({
   }
 
   const dropdownContentCallback = (params: any) => {
+    setSearch('')
     if (dropdownCallback) {
       dropdownCallback(params)
     }
-    setSearch('')
   }
 
   const getDropdownSize = () => {
@@ -121,12 +123,11 @@ const DropdownInput: React.FC<Props> = ({
       <div id="dropdown-container" className={containerClass}>
         <Dropdown
           trigger="manual"
+          placement="bottom-start"
           onCreate={setInstance}
           content={<DropdownContent {...dropdownContentProps} />}
           zIndex={dropdownZIndex || 101}
-          appendTo={
-            document.getElementById('dropdown-container') || document.body
-          }
+          appendTo={document.getElementById(dropdownAppendTo) || document.body}
         >
           <input
             id={inputId}

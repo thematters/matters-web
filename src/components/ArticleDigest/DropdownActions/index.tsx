@@ -9,6 +9,7 @@ import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 import { FolloweeDropdownActionsArticle } from './__generated__/FolloweeDropdownActionsArticle'
 import ArchiveButton from './ArchiveButton'
+import RemoveTagButton from './RemoveTagButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
 
@@ -45,24 +46,36 @@ const isActive = (article: any): boolean => {
 
 const DropdownContent: React.FC<{
   article: DropdownActionsArticle | FolloweeDropdownActionsArticle
+  instance?: PopperInstance | null
   hideDropdown: () => void
-}> = ({ article, hideDropdown }) => {
+  inTagDetail?: boolean
+}> = ({ article, instance, hideDropdown, inTagDetail }) => {
   return (
     <Menu>
-      <Menu.Item>
-        <StickyButton article={article} hideDropdown={hideDropdown} />
-      </Menu.Item>
-      <Menu.Item>
-        <ArchiveButton article={article} hideDropdown={hideDropdown} />
-      </Menu.Item>
+      {inTagDetail ? (
+        <Menu.Item>
+          <RemoveTagButton article={article} hideDropdown={hideDropdown} instance={instance}/>
+        </Menu.Item>
+      ) : (
+        <>
+          <Menu.Item>
+            <StickyButton article={article} hideDropdown={hideDropdown} />
+          </Menu.Item>
+          <Menu.Item>
+            <ArchiveButton article={article} hideDropdown={hideDropdown} />
+          </Menu.Item>
+        </>
+      )}
     </Menu>
   )
 }
 
 const DropdownActions = ({
-  article
+  article,
+  inTagDetail = false
 }: {
   article: DropdownActionsArticle | FolloweeDropdownActionsArticle
+  inTagDetail?: boolean
 }) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -74,8 +87,12 @@ const DropdownActions = ({
 
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
+  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
 
-  if (!isArticleAuthor || !isActive(article) || viewer.isInactive) {
+  if (
+    (inTagDetail && !isMattyUser) ||
+    (!inTagDetail && (!isArticleAuthor || !isActive(article) || viewer.isInactive))
+  ) {
     return null
   }
 
@@ -83,7 +100,12 @@ const DropdownActions = ({
     <>
       <Dropdown
         content={
-          <DropdownContent article={article} hideDropdown={hideDropdown} />
+          <DropdownContent
+            article={article}
+            instance={instance}
+            hideDropdown={hideDropdown}
+            inTagDetail={inTagDetail}
+          />
         }
         trigger="click"
         onCreate={setInstance}

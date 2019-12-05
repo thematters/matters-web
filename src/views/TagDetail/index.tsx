@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { useQuery } from 'react-apollo'
@@ -16,49 +16,20 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
+import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
+import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
+import { useEventListener } from '~/components/Hook'
 import AddIcon from '~/components/Icon/Add'
+import TagArticleModal from '~/components/Modal/TagArticleModal'
 import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import ICON_EDIT from '~/static/icons/tag-edit.svg?sprite'
 
-import { TagDetailArticles } from './__generated__/TagDetailArticles'
 import styles from './styles.css'
-
-const TAG_DETAIL = gql`
-  query TagDetailArticles(
-    $id: ID!
-    $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
-    node(input: { id: $id }) {
-      ... on Tag {
-        id
-        content
-        description
-        articles(input: { first: 10, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...FeedDigestArticle
-            }
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigest.Feed.fragments.article}
-`
 
 const AddArticleTagButton = () => {
   return (
@@ -130,12 +101,42 @@ const ActionButtons = () => {
 const TagDetail = () => {
   const router = useRouter()
 
-  const { data, loading, error, fetchMore } = useQuery<TagDetailArticles>(
+  const variables = { id: router.query.id }
+
+  const { data, loading, error, fetchMore, refetch } = useQuery<TagDetailArticles>(
     TAG_DETAIL,
-    {
-      variables: { id: router.query.id }
-    }
+    { variables }
   )
+
+  const sync = ({
+    event,
+    differences = 0
+  }: {
+    event: 'add' | 'delete'
+    differences?: number
+  }) => {
+    const { edges: items } = _get(data, 'node.articles', { edges: []})
+    switch (event) {
+      case 'add':
+        refetch({
+          variables: {
+            ...variables,
+            first: items.length + differences
+          }
+        })
+        break
+      case 'delete': {
+        refetch({
+          variables: {
+            ...variables,
+            first: Math.max(items.length - 1, 0)
+          }
+        })
+      }
+    }
+  }
+
+  useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
 
   if (loading) {
     return <Placeholder.ArticleDigestList />
@@ -188,9 +189,11 @@ const TagDetail = () => {
     <>
       <Head title={`#${data.node.content}`} />
 
-      <PageHeader pageTitle={data.node.content}>
-        <ActionButtons />
-      </PageHeader>
+      <PageHeader
+        pageTitle={data.node.content}
+        buttons={<ActionButtons />}
+        description={data.node.description || ''}
+      />
 
       <section>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -206,18 +209,24 @@ const TagDetail = () => {
                   })
                 }
               >
-                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+                <ArticleDigest.Feed
+                  article={node}
+                  hasDateTime
+                  hasBookmark
+                  hasMoreButton
+                  inTagDetail
+                />
               </li>
             ))}
           </ul>
         </InfiniteScroll>
       </section>
 
-      {/*
       <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
-        {(props: ModalInstanceProps) => <TagAdddModal {...props} />}
+        {(props: ModalInstanceProps) => (
+          <TagArticleModal tagId={tag ? tag.id : undefined} {...props} />
+        )}
       </ModalInstance>
-      */}
 
       <ModalInstance modalId="editTagModal" title="editTag">
         {(props: ModalInstanceProps) => <TagModal tag={tag} {...props} />}
