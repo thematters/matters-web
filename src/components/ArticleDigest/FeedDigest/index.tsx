@@ -149,7 +149,9 @@ const FeedDigest = ({
         <div>
           {!hasFingerprint && live && <IconLive />}
           {hasFingerprint && <Fingerprint article={article} />}
-          {hasMoreButton && <DropdownActions article={article} inTagDetail={inTagDetail} />}
+          {hasMoreButton && (
+            <DropdownActions article={article} inTagDetail={inTagDetail} />
+          )}
         </div>
       </div>
 

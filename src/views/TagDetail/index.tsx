@@ -25,7 +25,12 @@ import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
+import {
+  ANALYTICS_EVENTS,
+  FEED_TYPE,
+  REFETCH_TAG_DETAIL_ARTICLES,
+  TEXT
+} from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import ICON_EDIT from '~/static/icons/tag-edit.svg?sprite'
 
@@ -103,10 +108,9 @@ const TagDetail = () => {
 
   const variables = { id: router.query.id }
 
-  const { data, loading, error, fetchMore, refetch } = useQuery<TagDetailArticles>(
-    TAG_DETAIL,
-    { variables }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    TagDetailArticles
+  >(TAG_DETAIL, { variables })
 
   const sync = ({
     event,
@@ -115,7 +119,7 @@ const TagDetail = () => {
     event: 'add' | 'delete'
     differences?: number
   }) => {
-    const { edges: items } = _get(data, 'node.articles', { edges: []})
+    const { edges: items } = _get(data, 'node.articles', { edges: [] })
     switch (event) {
       case 'add':
         refetch({

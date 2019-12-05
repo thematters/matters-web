@@ -54,7 +54,11 @@ const DropdownContent: React.FC<{
     <Menu>
       {inTagDetail ? (
         <Menu.Item>
-          <RemoveTagButton article={article} hideDropdown={hideDropdown} instance={instance}/>
+          <RemoveTagButton
+            article={article}
+            hideDropdown={hideDropdown}
+            instance={instance}
+          />
         </Menu.Item>
       ) : (
         <>
@@ -91,7 +95,8 @@ const DropdownActions = ({
 
   if (
     (inTagDetail && !isMattyUser) ||
-    (!inTagDetail && (!isArticleAuthor || !isActive(article) || viewer.isInactive))
+    (!inTagDetail &&
+      (!isArticleAuthor || !isActive(article) || viewer.isInactive))
   ) {
     return null
   }

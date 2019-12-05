@@ -101,7 +101,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           return
         }
 
-        await update({variables: { id: tagId, articles }})
+        await update({ variables: { id: tagId, articles } })
         setSubmitting(false)
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {

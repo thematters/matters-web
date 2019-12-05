@@ -49,10 +49,13 @@ const RemoveTagButton = ({
   hideDropdown: () => void
 }) => {
   const router = useRouter()
-  const { query: { id } } = router
+  const {
+    query: { id }
+  } = router
   const tagId = _isArray(id) ? id[0] : id
 
-  const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(DELETE_ARTICLES_TAGS,
+  const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
+    DELETE_ARTICLES_TAGS,
     { variables: { id: tagId, articles: [article.id] } }
   )
 
