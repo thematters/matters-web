@@ -100,6 +100,12 @@ const Content = ({ article }: { article: ContentArticle }) => {
             setTrackedFinish(true)
           }
         }}
+        onPositionChange={({ currentPosition: to, previousPosition: from }) => {
+          analytics.trackEvent(ANALYTICS_EVENTS.ARTICLE_BOTTOM_CROSS, {
+            from,
+            to
+          })
+        }}
       />
 
       <style jsx>{styles}</style>

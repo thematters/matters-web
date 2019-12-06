@@ -148,7 +148,10 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   }
 
   const onDelete = (article: any) => {
-    setFieldValue('articles', values.articles.filter(id => id !== article.id))
+    setFieldValue(
+      'articles',
+      values.articles.filter(id => id !== article.id)
+    )
     setSelectedArticles(
       selectedArticles.filter(({ id }: any) => id !== article.id)
     )

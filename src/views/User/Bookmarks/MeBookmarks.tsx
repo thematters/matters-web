@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
@@ -50,8 +50,7 @@ const MeBookmarks = () => {
   }
 
   const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.subscriptions) || {}
+  const { edges, pageInfo } = data?.viewer?.subscriptions || {}
 
   if (!edges || edges.length <= 0 || !pageInfo || edges.length <= 0) {
     return <EmptyBookmark />

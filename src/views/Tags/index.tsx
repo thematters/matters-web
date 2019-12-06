@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import {
   Footer,
@@ -89,8 +89,7 @@ const Tags = () => {
   }
 
   const connectionPath = 'viewer.recommendation.tags'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.recommendation.tags) || {}
+  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyTag />

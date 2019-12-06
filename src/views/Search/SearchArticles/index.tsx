@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,
@@ -58,12 +58,12 @@ const SearchArticles = ({ q }: { q: string }) => {
   )
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
-  if (loading && (!(data && data.search) || isNewLoading)) {
+  if (loading && (!data?.search || isNewLoading)) {
     return <Placeholder.ArticleDigestList />
   }
 
   const connectionPath = 'search'
-  const { edges, pageInfo } = (data && data.search) || {}
+  const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (

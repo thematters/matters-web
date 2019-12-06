@@ -1,13 +1,13 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { useLazyQuery } from 'react-apollo'
 
 import { Empty, Icon, Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
-import { TEXT } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics, toPath } from '~/common/utils'
 import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
 import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
@@ -55,9 +55,8 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
     }
   }, [searchKey, isShown])
 
-  const frequentSearch = (data && data.frequentSearch) || []
-  const recentSearches =
-    (data && data.viewer && data.viewer.activity.recentSearches.edges) || []
+  const frequentSearch = data?.frequentSearch || []
+  const recentSearches = data?.viewer?.activity.recentSearches.edges || []
   const showFrequentSearch = frequentSearch.length > 0
   const showSearchHistory = !searchKey
 
@@ -77,7 +76,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
             title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
           />
 
-          {frequentSearch.map(key => (
+          {frequentSearch.map((key, i) => (
             <Menu.Item
               spacing={['xtight', 'tight']}
               hoverBgColor="green"
@@ -89,7 +88,19 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                   q: key
                 })}
               >
-                <a onClick={hideDropdown} className="frequent-item">
+                <a
+                  onClick={() => {
+                    analytics.trackEvent(
+                      ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH,
+                      {
+                        location: i,
+                        entrance: key
+                      }
+                    )
+                    hideDropdown()
+                  }}
+                  className="frequent-item"
+                >
                   {key}
                 </a>
               </Link>
@@ -113,7 +124,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
             {recentSearches.length > 0 && <ClearHistoryButton />}
           </Menu.Header>
 
-          {recentSearches.map(({ node }) => {
+          {recentSearches.map(({ node }, i) => {
             const path = toPath({
               page: 'search',
               q: node
@@ -125,7 +136,19 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                 key={node}
               >
                 <Link {...path}>
-                  <a onClick={hideDropdown} className="history-item">
+                  <a
+                    onClick={() => {
+                      analytics.trackEvent(
+                        ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
+                        {
+                          location: i,
+                          entrance: node
+                        }
+                      )
+                      hideDropdown()
+                    }}
+                    className="history-item"
+                  >
                     {node}
                   </a>
                 </Link>

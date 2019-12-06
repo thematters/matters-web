@@ -1,9 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
 
 import {
@@ -137,7 +137,7 @@ const ArticleDetail = ({
   })
 
   const shouldShowWall = !viewer.isAuthed && wall
-  const article = data && data.article
+  const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
@@ -328,7 +328,7 @@ const ArticleDetailContainer = () => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const { wall } = (data && data.clientPreference) || { wall: true }
+  const { wall } = data?.clientPreference || { wall: true }
 
   return (
     <main className="l-row">

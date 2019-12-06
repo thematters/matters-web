@@ -65,7 +65,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
             <p>
               {edges
                 .slice(0, 3)
-                .map(({ node }) => node.sender && node.sender.displayName)
+                .map(({ node }) => node.sender?.displayName)
                 .join('、')}
             </p>
 

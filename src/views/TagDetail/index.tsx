@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import {
   ArticleDigest,

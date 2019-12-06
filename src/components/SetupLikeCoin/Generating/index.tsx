@@ -6,7 +6,8 @@ import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Spinner } from '~/components/Spinner'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
 import styles from './styles.css'
@@ -36,8 +37,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
 
   useEffect(() => {
     generate().then(result => {
-      const likerId =
-        result && result.data && result.data.generateLikerId.liker.likerId
+      const likerId = result?.data?.generateLikerId.liker.likerId
 
       if (likerId) {
         nextStep()
@@ -73,7 +73,14 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
       </Modal.Content>
 
       <footer>
-        <Modal.FooterButton onClick={prevStep} width="full" disabled={!error}>
+        <Modal.FooterButton
+          onClick={() => {
+            prevStep()
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+          }}
+          width="full"
+          disabled={!error}
+        >
           <Translate
             zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
             zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}

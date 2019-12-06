@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { LoadMore, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
@@ -55,8 +55,7 @@ const FeaturedComments = () => {
   )
 
   const connectionPath = 'article.featuredComments'
-  const { edges, pageInfo } =
-    (data && data.article && data.article.featuredComments) || {}
+  const { edges, pageInfo } = data?.article?.featuredComments || {}
   const comments = filterComments(
     (edges || []).map(({ node }) => node)
   ) as ArticleFeaturedComments_article_featuredComments_edges_node[]

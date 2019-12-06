@@ -37,7 +37,7 @@ export const initAudioPlayers = () => {
     }
 
     const $audio = $audioFigure.querySelector('audio') as HTMLAudioElement
-    const $player = $audioFigure.querySelector('.player') as HTMLElement
+    // const $player = $audioFigure.querySelector('.player') as HTMLElement
     const $play = $audioFigure.querySelector('.play') as HTMLElement
     const $current = $audioFigure.querySelector('.time .current') as HTMLElement
     const $duration = $audioFigure.querySelector(
@@ -54,10 +54,9 @@ export const initAudioPlayers = () => {
       return
     }
 
-    if ($audio.readyState <= 3) {
-      loading()
-      $player.classList.add('u-area-disable')
-    } else {
+    $audio.setAttribute('preload', 'metadata')
+
+    if ($audio.readyState > 3) {
       timeUpdate()
     }
     $play.setAttribute('role', 'button')
@@ -68,9 +67,9 @@ export const initAudioPlayers = () => {
      */
     $audio.addEventListener('canplay', () => {
       loaded()
-      $player.classList.remove('u-area-disable')
     })
     $audio.addEventListener('loadedmetadata', () => {
+      loaded()
       timeUpdate()
     })
     $audio.addEventListener('durationchange	', () => {
@@ -85,9 +84,7 @@ export const initAudioPlayers = () => {
     $audio.addEventListener('seeking', () => {
       loading()
     })
-    $audio.addEventListener('waiting', () => {
-      loading()
-    })
+
     $progressBar.addEventListener('click', e => {
       const position = e.pageX - $progressBar.getBoundingClientRect().left
       const percent = position / $progressBar.offsetWidth

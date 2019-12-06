@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import _debounce from 'lodash/debounce'
 import { useContext, useRef, useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
@@ -33,7 +33,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     variables: { search: debouncedSearch },
     skip: !debouncedSearch
   })
-  const articles = ((data && data.search.edges) || [])
+  const articles = (data?.search.edges || [])
     .filter(({ node }) => node.__typename === 'Article')
     .map(({ node }) => node) as SearchArticles_search_edges_node_Article[]
 

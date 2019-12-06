@@ -1,15 +1,14 @@
+import { ApolloProvider } from '@apollo/react-hooks'
 import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import App from 'next/app'
 import getConfig from 'next/config'
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
 
 import {
   AnalyticsProvider,
   GlobalStyles,
-  LanguageProvider,
   Layout,
   ModalProvider
 } from '~/components'
@@ -35,19 +34,17 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
     return (
       <ErrorBoundary>
         <ApolloProvider client={apollo}>
-          <LanguageProvider>
-            <AnalyticsProvider>
-              <ModalProvider>
-                <GlobalStyles />
+          <AnalyticsProvider>
+            <ModalProvider>
+              <GlobalStyles />
 
-                <Layout>
-                  <Component {...pageProps} />
+              <Layout>
+                <Component {...pageProps} />
 
-                  <PushInitializer client={apollo} />
-                </Layout>
-              </ModalProvider>
-            </AnalyticsProvider>
-          </LanguageProvider>
+                <PushInitializer client={apollo} />
+              </Layout>
+            </ModalProvider>
+          </AnalyticsProvider>
         </ApolloProvider>
       </ErrorBoundary>
     )

@@ -1,12 +1,13 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Spinner } from '~/components/Spinner'
 
-import { TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 import styles from './styles.css'
@@ -40,9 +41,9 @@ const Binding: React.FC<Props> = ({
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser
+    ssr: false
   })
-  const likerId = data && data.viewer && data.viewer.liker.likerId
+  const likerId = data?.viewer?.liker.likerId
 
   if (likerId) {
     nextStep()
@@ -87,7 +88,13 @@ const Binding: React.FC<Props> = ({
       </Modal.Content>
 
       <footer>
-        <Modal.FooterButton onClick={prevStep} width="full">
+        <Modal.FooterButton
+          onClick={() => {
+            prevStep()
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+          }}
+          width="full"
+        >
           <Translate
             zh_hant={TEXT.zh_hant.retry}
             zh_hans={TEXT.zh_hans.retry}

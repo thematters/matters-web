@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce/lib'
 
 import {
@@ -119,7 +119,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
             loading={loading}
             search={search}
             tags={
-              ((data && data.search.edges) || []).map(
+              (data?.search.edges || []).map(
                 ({ node }) => node
               ) as SearchTagsQuery_search_edges_node_Tag[]
             }

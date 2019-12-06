@@ -7,7 +7,18 @@ export const ANALYTIC_TYPES = {
 }
 
 export const ANALYTICS_EVENTS = {
+  CLICK_WRITE_BUTTON: 'click-write-button',
+  CLICK_ENTER_AFTER_SIGNUP: 'click-enter-after-signup',
+  CLICK_PUBLISH_BUTTON: 'click-publish-button',
+  CLICK_SAVE_DRAFT_IN_MODAL: 'click-save-draft-in-modal',
+  CLICK_PUBLISH_IN_MODAL: 'click-publish-in-modal',
   CLICK_FEED: 'click-feed',
+  CLICK_DRAFT: 'click-draft',
+  CLICK_FREQUENT_SEARCH: 'click-frequent-search',
+  CLICK_SEARCH_HISTORY: 'click-search-history',
+  COMMENT_EDITOR_CHANGE: 'comment-editor-change',
+  ARTICLE_BOTTOM_CROSS: 'article-bottom-cross',
+  PUBLISH_ERROR: 'publish-error',
   LOAD_MORE: 'load-more',
   DISPLAY_ALL: 'display-all',
   SHUFFLE_AUTHOR: 'shuffle-author',
@@ -27,7 +38,11 @@ export const ANALYTICS_EVENTS = {
   FOLLOW_USER: 'follow-user',
   UNFOLLOW_USER: 'unfollow-user',
   OPEN_CIVIC_LIKER_MODAL: 'open-civic-liker-modal',
-  CLOSE_CIVIC_LIKER_MODAL: 'close-civic-liker-modal'
+  CLOSE_CIVIC_LIKER_MODAL: 'close-civic-liker-modal',
+  CLOSE_SIGNUP_MODAL: 'close-signup-modal',
+  SIGNUP_STEP_FINISH: 'signup-step-finish',
+  LIKECOIN_STEP_CHANGE: 'likecoin-step-change',
+  LIKECOIN_STEP_RETRY: 'likecoin-step-retry'
 }
 
 export const SHARE_TYPE = {

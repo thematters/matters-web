@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Button } from '~/components/Button'
 import { useMutation } from '~/components/GQL'
@@ -15,8 +15,8 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
-import { dom, subscribePush, trimLineBreaks } from '~/common/utils'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
@@ -97,10 +97,9 @@ const CommentForm = ({
     refetchQueries
   })
 
-  const push =
-    clientPreferenceData && clientPreferenceData.clientPreference.push
-  const draftContent = (data && data.commentDraft.content) || ''
-  const canPush = !push || !push.supported || push.enabled
+  const push = clientPreferenceData?.clientPreference.push
+  const draftContent = data?.commentDraft.content || ''
+  const shouldShowPush = !push || !push.supported || push.enabled
 
   const [isSubmitting, setSubmitting] = useState(false)
   const [expand, setExpand] = useState(defaultExpand || false)
@@ -125,25 +124,30 @@ const CommentForm = ({
 
     try {
       await putComment({ variables: { input } })
+      setContent('')
 
       if (submitCallback) {
         submitCallback()
       }
 
-      setContent('')
+      // auto re-subscribe push
+      if (!shouldShowPush && Notification.permission === 'granted') {
+        subscribePush({ silent: true })
+        return
+      }
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
-            content: (
+            content: shouldShowPush && (
               <Translate
                 zh_hant={TEXT.zh_hant.pushDescription}
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: canPush && (
+            customButton: shouldShowPush && (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
@@ -165,8 +169,20 @@ const CommentForm = ({
     <form
       onSubmit={handleSubmit}
       className={expand ? 'expand' : ''}
-      onFocus={() => setExpand(true)}
+      onFocus={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+          state: 'focus',
+          level: parentId ? 2 : 1,
+          operation: commentId ? 'edit' : 'create'
+        })
+        setExpand(true)
+      }}
       onBlur={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+          state: 'blur',
+          level: parentId ? 2 : 1,
+          operation: commentId ? 'update' : 'create'
+        })
         client.writeData({
           id: `CommentDraft:${commentDraftId}`,
           data: {

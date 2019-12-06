@@ -1,4 +1,4 @@
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
@@ -24,7 +24,8 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
     pollInterval: 1000 * 5,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser || !isPublishing
+    skip: !isPublishing,
+    ssr: false
   })
 
   if (

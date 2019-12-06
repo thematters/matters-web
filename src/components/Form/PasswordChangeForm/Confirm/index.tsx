@@ -81,7 +81,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         const { data } = await reset({
           variables: { input: { password, codeId } }
         })
-        const resetPassword = data && data.resetPassword
+        const resetPassword = data?.resetPassword
 
         if (submitCallback && resetPassword) {
           submitCallback()

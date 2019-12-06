@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Translate } from '~/components'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'

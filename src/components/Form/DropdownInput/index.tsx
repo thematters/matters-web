@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { useDebounce } from 'use-debounce/lib'
 
 import { Dropdown, PopperInstance } from '~/components'

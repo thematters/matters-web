@@ -2,7 +2,8 @@ import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Title } from '~/components/Title'
 
-import { redirectToTarget } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics, redirectToTarget } from '~/common/utils'
 import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
 
 import styles from './styles.css'
@@ -56,11 +57,12 @@ const SignUpComplete = ({
     <div className="buttons">
       <Modal.FooterButton
         width="full"
-        onClick={() =>
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
           redirectToTarget({
             fallback: purpose === 'page' ? 'homepage' : 'current'
           })
-        }
+        }}
       >
         <Translate zh_hant="進入社區" zh_hans="进入社区" />
       </Modal.FooterButton>

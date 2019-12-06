@@ -19,7 +19,7 @@ export const Expandable: React.FC<{
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
 
   useEffect(() => {
-    if (node && node.current) {
+    if (node?.current) {
       const height = node.current.clientHeight
       const lineHeight = window
         .getComputedStyle(node.current, null)

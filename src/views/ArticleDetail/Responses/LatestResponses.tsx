@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
@@ -6,7 +7,6 @@ import _has from 'lodash/has'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { LoadMore, Spinner, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -99,7 +99,7 @@ const LatestResponses = () => {
     notifyOnNetworkStatusChange: true
   })
   const connectionPath = 'article.responses'
-  const article = data && data.article
+  const article = data?.article
   const { edges, pageInfo } = (article && article.responses) || {}
   const articleId = article && article.id
 

@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   Footer,
@@ -55,8 +55,7 @@ const Authors = () => {
   }
 
   const connectionPath = 'viewer.recommendation.authors'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.recommendation.authors) || {}
+  const { edges, pageInfo } = data?.viewer?.recommendation.authors || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
