@@ -10,8 +10,14 @@ header {
   flex-direction: column;
 
   & .title {
-    @mixin flex-center-space-between;
+    flex-direction: column;
     width: 100%;
+
+    @media (--sm-up) {
+      @mixin flex-center-space-between;
+      align-items: flex-start;
+      flex-direction: row;
+    }
   }
 }
 

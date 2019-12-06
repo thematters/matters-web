@@ -26,20 +26,46 @@ const PUT_TAG = gql`
   }
 `
 
-const DropdownContent = ({
+const DropdownDefaultItem = ({
   hideDropdown,
-  items,
-  loading,
-  search,
-  width
+  search
 }: {
+  hideDropdown: () => void
+  search: string
+}) => {
+  return (
+    <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
+      <button
+        className="search-tag-item create"
+        type="button"
+        onClick={() => hideDropdown()}
+      >
+        <span className="hint">
+          <Translate zh_hant="創建" zh_hans="创建" />
+        </span>
+        <span className="keyword">{search}</span>
+      </button>
+    </Menu.Item>
+  )
+}
+
+interface DropdownListBaseProps {
   hideDropdown: () => void
   items: any[]
   loading: boolean
   search: string
   width?: number
-}) => {
-  const menuStyle = width ? { width } : {}
+}
+
+const DropdownList = ({
+  hideDropdown,
+  items,
+  loading,
+  search,
+  width,
+  children
+}: DropdownListBaseProps & { children?: any }) => {
+  const menuStyle = width ? { width: `${Math.min(width, 350)}px` } : {}
   if (loading) {
     return (
       <Menu style={menuStyle}>
@@ -49,6 +75,11 @@ const DropdownContent = ({
       </Menu>
     )
   }
+
+  if ((!items || items.length === 0) && !children) {
+    return null
+  }
+
   return (
     <>
       <Menu style={menuStyle}>
@@ -66,25 +97,22 @@ const DropdownContent = ({
             </button>
           </Menu.Item>
         ))}
-
         {items && items.length > 0 && <Menu.Divider />}
-
-        <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
-          <button
-            className="search-tag-item create"
-            type="button"
-            onClick={() => hideDropdown()}
-          >
-            <span className="hint">
-              <Translate zh_hant="創建" zh_hans="创建" />
-            </span>
-            <span className="keyword">{search}</span>
-          </button>
-        </Menu.Item>
+        {children}
       </Menu>
-
       <style jsx>{styles}</style>
     </>
+  )
+}
+
+const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
+  return (
+    <DropdownList {...props}>
+      <DropdownDefaultItem
+        hideDropdown={props.hideDropdown}
+        search={props.search}
+      />
+    </DropdownList>
   )
 }
 
@@ -158,8 +186,8 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          zh_hant: TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
+          zh_hans: TEXT.zh_hans.error[errorCode] || TEXT.zh_hans.error.UNKNOWN_ERROR,
           lang
         })
         setFieldError('content', errorMessage)
@@ -167,6 +195,8 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
       }
     }
   })
+
+  const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
   return (
     <form id="tag-modal" className="form" onSubmit={handleSubmit}>
@@ -182,8 +212,8 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           type="text"
           field="content"
           placeholder={translate({
-            zh_hant: TEXT.zh_hant.searchTag,
-            zh_hans: TEXT.zh_hans.searchTag,
+            zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
+            zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
             lang
           })}
           values={values}

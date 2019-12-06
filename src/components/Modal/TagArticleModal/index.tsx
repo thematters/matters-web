@@ -129,8 +129,8 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          zh_hant: TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
+          zh_hans: TEXT.zh_hans.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
           lang
         })
         setFieldError('name', errorMessage)

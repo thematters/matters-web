@@ -100,9 +100,10 @@ const ActionButtons = () => {
   }
 
   return (
-    <section>
+    <section className="buttons">
       <AddArticleTagButton />
       <EditTagButton />
+      <style jsx>{styles}</style>
     </section>
   )
 }

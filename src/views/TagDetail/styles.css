@@ -6,3 +6,8 @@
     stroke: var(--color-green);
   }
 }
+
+.buttons {
+  flex-shrink: 0;
+  margin-left: var(--spacing-tight);
+}
