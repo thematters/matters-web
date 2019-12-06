@@ -13,8 +13,8 @@ export default ({ children, extraStyle, type }: any) => (
         bgColor="green"
         style={extraStyle}
         onClick={() => {
-          open()
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, { type })
+          open()
         }}
       >
         {children}
