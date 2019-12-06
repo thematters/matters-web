@@ -11,14 +11,17 @@ import {
   InfiniteScroll,
   PageHeader,
   Placeholder,
+  Spinner,
   TextIcon,
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
+import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
 import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
+import TAG_DETAIL_ARTICLES from '~/components/GQL/queries/tagDetailArticles'
 import { useEventListener } from '~/components/Hook'
 import AddIcon from '~/components/Icon/Add'
 import TagArticleModal from '~/components/Modal/TagArticleModal'
@@ -97,21 +100,17 @@ const ActionButtons = () => {
   }
 
   return (
-    <div>
+    <section>
       <AddArticleTagButton />
       <EditTagButton />
-    </div>
+    </section>
   )
 }
 
-const TagDetail = () => {
-  const router = useRouter()
-
-  const variables = { id: router.query.id }
-
+const TagDetailArticleList = ({ id }: { id: string }) => {
   const { data, loading, error, fetchMore, refetch } = useQuery<
     TagDetailArticles
-  >(TAG_DETAIL, { variables })
+  >(TAG_DETAIL_ARTICLES, { variables: { id } })
 
   const sync = ({
     event,
@@ -125,26 +124,26 @@ const TagDetail = () => {
       case 'add':
         refetch({
           variables: {
-            ...variables,
+            id,
             first: items.length + differences
           }
         })
         break
-      case 'delete': {
+      case 'delete':
         refetch({
           variables: {
-            ...variables,
+            id,
             first: Math.max(items.length - 1, 0)
           }
         })
-      }
+        break
     }
   }
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -152,21 +151,12 @@ const TagDetail = () => {
   }
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTag />
+    return <EmptyTagArticles />
   }
 
-  const id = data.node.id
   const connectionPath = 'node.articles'
   const { edges, pageInfo } = data.node.articles
   const hasArticles = edges && edges.length > 0 && pageInfo
-
-  const tag = data.node
-    ? {
-        id: data.node.id,
-        content: data.node.content,
-        description: data.node.description || undefined
-      }
-    : undefined
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
@@ -189,14 +179,6 @@ const TagDetail = () => {
 
   return (
     <>
-      <Head title={`#${data.node.content}`} />
-
-      <PageHeader
-        pageTitle={data.node.content}
-        buttons={<ActionButtons />}
-        description={data.node.description || ''}
-      />
-
       <section>
         {hasArticles && (
           <InfiniteScroll
@@ -229,6 +211,50 @@ const TagDetail = () => {
         )}
         {!hasArticles && <EmptyTagArticles />}
       </section>
+    </>
+  )
+}
+
+const TagDetailContainer = () => {
+  const router = useRouter()
+
+  const variables = { id: router.query.id }
+
+  const { data, loading, error } = useQuery<TagDetail>(TAG_DETAIL, {
+    variables
+  })
+
+  if (loading) {
+    return <Placeholder.ArticleDigestList />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!data || !data.node || data.node.__typename !== 'Tag') {
+    return <EmptyTag />
+  }
+
+  const tag = data.node
+    ? {
+        id: data.node.id,
+        content: data.node.content,
+        description: data.node.description || undefined
+      }
+    : undefined
+
+  return (
+    <>
+      <Head title={`#${data.node.content}`} />
+
+      <PageHeader
+        pageTitle={data.node.content}
+        buttons={<ActionButtons />}
+        description={data.node.description || ''}
+      />
+
+      <TagDetailArticleList id={data.node.id} />
 
       <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
         {(props: ModalInstanceProps) => (
@@ -247,7 +273,7 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <TagDetail />
+        <TagDetailContainer />
       </article>
 
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
