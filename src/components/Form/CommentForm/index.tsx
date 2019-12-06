@@ -15,8 +15,8 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
-import { dom, subscribePush, trimLineBreaks } from '~/common/utils'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
@@ -169,8 +169,20 @@ const CommentForm = ({
     <form
       onSubmit={handleSubmit}
       className={expand ? 'expand' : ''}
-      onFocus={() => setExpand(true)}
+      onFocus={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+          state: 'focus',
+          level: parentId ? 2 : 1,
+          operation: commentId ? 'edit' : 'create'
+        })
+        setExpand(true)
+      }}
       onBlur={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+          state: 'blur',
+          level: parentId ? 2 : 1,
+          operation: commentId ? 'update' : 'create'
+        })
         client.writeData({
           id: `CommentDraft:${commentDraftId}`,
           data: {

@@ -6,8 +6,8 @@ import { LanguageContext } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 
-import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics, translate } from '~/common/utils'
 
 /**
  * This component is for sign up modal.
@@ -24,8 +24,14 @@ type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUpModal: React.FC<ModalInstanceProps> = ({
   closeable,
-  setCloseable
+  setCloseable,
+  close
 }) => {
+  const closeModal = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
+    close()
+  }
+
   const { lang } = useContext(LanguageContext)
 
   const [step, setStep] = useState<Step>('signUp')
@@ -62,7 +68,11 @@ const SignUpModal: React.FC<ModalInstanceProps> = ({
 
   return (
     <>
-      <Modal.Header title={data[step].title} closeable={closeable} />
+      <Modal.Header
+        title={data[step].title}
+        closeable={closeable}
+        close={closeModal}
+      />
 
       {step === 'signUp' && (
         <SignUpInitForm
@@ -70,19 +80,24 @@ const SignUpModal: React.FC<ModalInstanceProps> = ({
           submitCallback={() => {
             setCloseable(false)
             setStep('profile')
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
         />
       )}
       {step === 'profile' && (
         <SignUpProfileForm
           purpose="modal"
-          submitCallback={() => setStep('setupLikeCoin')}
+          submitCallback={() => {
+            setStep('setupLikeCoin')
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
+          }}
         />
       )}
       {step === 'setupLikeCoin' && (
         <SetupLikeCoin
           submitCallback={() => {
             setStep('complete')
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
         />
       )}
