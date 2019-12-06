@@ -181,7 +181,7 @@ const CommentForm = ({
         analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
           state: 'blur',
           level: parentId ? 2 : 1,
-          operation: commentId ? 'edit' : 'create'
+          operation: commentId ? 'update' : 'create'
         })
         client.writeData({
           id: `CommentDraft:${commentDraftId}`,
