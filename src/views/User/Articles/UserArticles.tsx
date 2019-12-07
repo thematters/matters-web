@@ -129,8 +129,12 @@ const UserArticles = () => {
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <ul>
           {edges.map(({ node, cursor }, i) => {
-            if (node.state !== 'active' && viewer.isAdmin) {
-              return <span />
+            if (
+              node.state !== 'active' &&
+              viewer.id !== node.author.id &&
+              viewer.isAdmin
+            ) {
+              return null
             }
 
             return (
