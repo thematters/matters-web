@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
+import Router from 'next/router'
 import { useContext } from 'react'
 
 import { Menu, Spinner } from '~/components'
@@ -11,7 +12,7 @@ import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr, toPath, translate } from '~/common/utils'
 
 import { PutTag } from './__generated__/PutTag'
 import styles from './styles.css'
@@ -185,7 +186,8 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
         const returnedTagId = result?.data?.putTag?.id
         if (!id) {
           // if created, then redirect to tag detail page
-          window.location.href = `${window.location.href}/${returnedTagId}`
+          const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
+          Router.push(path.as)
         } else {
           close()
         }
