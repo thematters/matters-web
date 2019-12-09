@@ -108,6 +108,17 @@ export const TEXT = {
     user: '用戶',
     tag: '標籤',
     allTags: '全部標籤',
+    createTag: '新增標籤',
+    tagName: '標籤名稱',
+    tagDescription: '標籤描述',
+    tagDescriptionPlaceholder: '輸入一段標籤描述…',
+    tagCreated: '標籤已創建',
+    tagEdited: '標籤已更新',
+    searchTag: '搜尋你想創建的標籤…',
+    addArticleTag: '添加作品',
+    addedArticleTag: '作品已添加標籤',
+    editTag: '編輯標籤',
+    deleteArticleTag: '作品已移除標籤',
     topic: '話題',
     allTopics: '全部話題',
     hotTopics: '熱議話題',
@@ -184,7 +195,8 @@ export const TEXT = {
         '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳',
       LIKER_NOT_FOUND: 'Liker ID 不存在',
       LIKER_EMAIL_EXISTS: 'Liker ID 電子信箱已被其他人使用',
-      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用'
+      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用',
+      DUPLICATE_TAG: '標籤名稱已被使用'
     } as { [key: string]: string }
   },
 
@@ -297,6 +309,17 @@ export const TEXT = {
     user: '用户',
     tag: '标签',
     allTags: '全部标签',
+    createTag: '新建标签',
+    tagName: '标签名称',
+    tagDescription: '标签描述',
+    tagDescriptionPlaceholder: '输入一段话题描述…',
+    tagCreated: '标签已创建',
+    tagEdited: '标签已更新',
+    searchTag: '搜索你想创建的标签…',
+    addArticleTag: '添加作品',
+    addedArticleTag: '作品已添加标签',
+    editTag: '编辑标签',
+    deleteArticleTag: '作品已移除标签',
     topic: '话题',
     allTopics: '全部话题',
     hotTopics: '热议话题',
@@ -373,7 +396,8 @@ export const TEXT = {
         '文件上传失败，请确认文件链接是否有效，或手动下载后再上传',
       LIKER_NOT_FOUND: 'Liker ID 不存在',
       LIKER_EMAIL_EXISTS: 'Liker ID 邮箱已被其他人使用',
-      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用'
+      LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用',
+      DUPLICATE_TAG: '标签名称已被使用'
     } as { [key: string]: string }
   }
 }

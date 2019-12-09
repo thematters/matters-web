@@ -55,7 +55,9 @@
           { "name": "CommentNewReplyNotice" },
           { "name": "CommentNewUpvoteNotice" },
           { "name": "CommentMentionedYouNotice" },
-          { "name": "OfficialAnnouncementNotice" }
+          { "name": "OfficialAnnouncementNotice" },
+          { "name": "ArticleTagHasBeenAddedNotice" },
+          { "name": "ArticleTagHasBeenRemovedNotice" }
         ]
       }
     ]

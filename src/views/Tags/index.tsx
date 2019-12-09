@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Footer,
@@ -8,10 +9,15 @@ import {
   PageHeader,
   Spinner,
   Tag,
+  TextIcon,
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
+import AddIcon from '~/components/Icon/Add'
+import TagModal from '~/components/Modal/TagModal'
+import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -42,6 +48,34 @@ const ALL_TAGSS = gql`
   }
   ${Tag.fragments.tag}
 `
+
+const CreateTagButton = () => {
+  const viewer = useContext(ViewerContext)
+  // temporarily safety check
+  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
+    return null
+  }
+
+  return (
+    <ModalSwitch modalId="createTagModal">
+      {(open: any) => (
+        <button type="button" onClick={e => open()}>
+          <TextIcon
+            icon={<AddIcon color="green" size="xsmall" />}
+            spacing="xxxtight"
+            size="sm"
+            color="green"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.createTag}
+              zh_hans={TEXT.zh_hans.createTag}
+            />
+          </TextIcon>
+        </button>
+      )}
+    </ModalSwitch>
+  )
+}
 
 const Tags = () => {
   const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
@@ -131,6 +165,7 @@ export default () => {
         />
 
         <PageHeader
+          buttons={<CreateTagButton />}
           pageTitle={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
@@ -147,6 +182,10 @@ export default () => {
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Footer />
       </aside>
+
+      <ModalInstance modalId="createTagModal" title="createTag">
+        {(props: ModalInstanceProps) => <TagModal {...props} />}
+      </ModalInstance>
 
       <style jsx>{styles}</style>
     </main>

@@ -5,3 +5,30 @@ header {
   padding-bottom: var(--spacing-tight);
   margin-bottom: var(--spacing-default);
 }
+
+.hasButtons {
+  flex-direction: column;
+
+  & .title {
+    flex-direction: column;
+    width: 100%;
+
+    @media (--sm-up) {
+      @mixin flex-center-space-between;
+      align-items: flex-start;
+      flex-direction: row;
+    }
+  }
+}
+
+.hasDescription {
+  flex-direction: column;
+  padding-bottom: var(--spacing-loose);
+
+  & .description {
+    color: var(--color-grey-darker);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-tight);
+    width: 100%;
+  }
+}
