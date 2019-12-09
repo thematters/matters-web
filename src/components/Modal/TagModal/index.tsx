@@ -164,7 +164,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
       { setFieldError, setSubmitting }
     ) => {
       try {
-        await update({
+        const result = await update({
           variables: { id, content, description }
         })
         setSubmitting(false)
@@ -182,7 +182,13 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
             }
           })
         )
-        close()
+        const returnedTagId = result?.data?.putTag?.id
+        if (!id) {
+          // if created, then redirect to tag detail page
+          window.location.href = `${window.location.href}/${returnedTagId}`
+        } else {
+          close()
+        }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
