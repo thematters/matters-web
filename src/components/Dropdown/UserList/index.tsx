@@ -39,6 +39,7 @@ const DropdownUserList = ({
               onClick={() => {
                 onClick(user)
               }}
+              disabled={user?.status?.state === 'archived'}
             >
               <UserDigest.BriefDesc user={user} />
             </button>

@@ -3,10 +3,8 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Title } from '~/components'
-import { Translate } from '~/components/Language'
-import { Tooltip } from '~/components/Popper'
 
-import { TEXT, UrlFragments } from '~/common/enums'
+import { UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -109,33 +107,6 @@ const SidebarDigest = ({
   )
 }
 
-const SidebarDigestWrapper = ({
-  hasArchivedTooltip,
-  article,
-  ...props
-}: { hasArchivedTooltip?: boolean } & SidebarDigestProps) => {
-  const isInactive = article.state !== 'active'
-  if (hasArchivedTooltip && isInactive) {
-    return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant={TEXT.zh_hant.articleArchived}
-            zh_hans={TEXT.zh_hans.articleArchived}
-          />
-        }
-        placement="left"
-      >
-        <div>
-          <SidebarDigest article={article} {...props} />
-        </div>
-      </Tooltip>
-    )
-  }
+SidebarDigest.fragments = fragments
 
-  return <SidebarDigest article={article} {...props} />
-}
-
-SidebarDigestWrapper.fragments = fragments
-
-export default SidebarDigestWrapper
+export default SidebarDigest

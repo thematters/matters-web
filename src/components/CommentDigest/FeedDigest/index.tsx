@@ -66,7 +66,7 @@ const FeedDigest = ({
 
   // descendant
   const descendantComments = filterComments(
-    (comments.edges || []).map(({ node }) => node)
+    (comments?.edges || []).map(({ node }) => node)
   ) as FeedDigestComment_comments_edges_node[]
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT

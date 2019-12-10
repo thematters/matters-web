@@ -5,11 +5,8 @@ import { MouseEventHandler } from 'react'
 
 import { Title } from '~/components'
 import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
-import { Tooltip } from '~/components/Popper'
 import { UserDigest } from '~/components/UserDigest'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_ARROW_UP_RIGHT from '~/static/icons/arrow-up-right.svg?sprite'
 
@@ -103,37 +100,6 @@ const DropdownDigest = ({
   )
 }
 
-const DropdownDigestWrapper = ({
-  hasArchivedTooltip,
-  article,
-  onClick,
-  ...props
-}: {
-  hasArchivedTooltip?: boolean
-  onClick?: MouseEventHandler
-} & DropdownDigestProps) => {
-  const isInactive = article.state !== 'active'
+DropdownDigest.fragments = fragments
 
-  if (hasArchivedTooltip && isInactive) {
-    return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant={TEXT.zh_hant.articleArchived}
-            zh_hans={TEXT.zh_hans.articleArchived}
-          />
-        }
-      >
-        <div>
-          <DropdownDigest article={article} {...props} />
-        </div>
-      </Tooltip>
-    )
-  }
-
-  return <DropdownDigest article={article} onClick={onClick} {...props} />
-}
-
-DropdownDigestWrapper.fragments = fragments
-
-export default DropdownDigestWrapper
+export default DropdownDigest

@@ -112,7 +112,6 @@ const CollectionList = ({
             <ArticleDigest.Sidebar
               type="collection"
               article={node}
-              hasArchivedTooltip
               hasCover
               hasAuthor
             />

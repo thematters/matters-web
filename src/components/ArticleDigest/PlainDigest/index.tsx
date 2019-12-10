@@ -2,10 +2,6 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Translate } from '~/components/Language'
-import { Tooltip } from '~/components/Popper'
-
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { PlainDigestArticle } from './__generated__/PlainDigestArticle'
@@ -66,34 +62,6 @@ const PlainDigest = ({ article, disabled }: PlainDigestProps) => {
   )
 }
 
-const PlainDigestWrapper = ({
-  hasArchivedTooltip,
-  article,
-  ...props
-}: { hasArchivedTooltip?: boolean } & PlainDigestProps) => {
-  const isInactive = article.state !== 'active'
+PlainDigest.fragments = fragments
 
-  if (hasArchivedTooltip && isInactive) {
-    return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant={TEXT.zh_hant.articleArchived}
-            zh_hans={TEXT.zh_hans.articleArchived}
-          />
-        }
-        placement="left"
-      >
-        <div>
-          <PlainDigest article={article} {...props} />
-        </div>
-      </Tooltip>
-    )
-  }
-
-  return <PlainDigest article={article} {...props} />
-}
-
-PlainDigestWrapper.fragments = fragments
-
-export default PlainDigestWrapper
+export default PlainDigest
