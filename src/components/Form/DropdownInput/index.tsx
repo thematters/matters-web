@@ -140,14 +140,15 @@ const DropdownInput: React.FC<Props> = ({
             onFocus={() => search && showDropdown()}
             onChange={e => {
               handleChange(e)
-              setSearch(e.target.value)
-              if (e.target.value) {
+              const trimedValue = e.target.value.trim()
+              setSearch(trimedValue)
+              if (trimedValue) {
                 showDropdown()
               } else {
                 hideDropdown()
               }
             }}
-            value={value}
+            value={value.trim()}
             style={style}
             {...restProps}
           />
