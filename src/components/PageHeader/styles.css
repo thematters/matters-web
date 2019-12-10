@@ -30,5 +30,6 @@ header {
     font-size: var(--font-size-sm);
     margin-top: var(--spacing-tight);
     width: 100%;
+    white-space: pre-wrap;
   }
 }
