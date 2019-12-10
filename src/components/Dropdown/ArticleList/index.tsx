@@ -38,6 +38,7 @@ const DropdownArticleList = ({
             onClick={() => {
               onClick(article)
             }}
+            disabled={article.state !== 'active'}
           >
             <ArticleDigest.Dropdown article={article} hasArrow disabled />
 
