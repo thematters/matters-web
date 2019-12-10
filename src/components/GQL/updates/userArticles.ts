@@ -25,7 +25,7 @@ const update = ({
   userName: string | null
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
-  // TODO: circular dependencies
+  // FIXME: circular dependencies
   const USER_ARTICLES = require('~/components/GQL/queries/userArticles').default
 
   if (!userName) {
@@ -66,7 +66,6 @@ const update = ({
         edges = sortEdgesByCreatedAtDesc(edges)
         break
       case 'archive':
-        edges = sortEdgesByCreatedAtDesc(edges)
         articleCount = articleCount - 1
         totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
         break

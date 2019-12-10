@@ -50,7 +50,6 @@
 
 .description {
   margin-top: var(--spacing-xx-tight);
-  padding-left: var(--spacing-loose);
   padding-right: 0;
 
   color: var(--color-grey-darker);

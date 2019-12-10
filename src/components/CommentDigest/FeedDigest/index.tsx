@@ -16,6 +16,7 @@ import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
 import { filterComments, toPath } from '~/common/utils'
 import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
@@ -77,7 +78,8 @@ const FeedDigest = ({
   // UI
   const containerClass = classNames({
     container: true,
-    'in-article': inArticle
+    'in-article': inArticle,
+    'in-followee-feed': inFolloweeFeed
   })
   const domNodeId = parentComment ? `${parentComment.id}-${id}` : id
 
@@ -111,6 +113,15 @@ const FeedDigest = ({
             />
 
             {!inFolloweeFeed && pinned && <PinnedLabel />}
+
+            {inFolloweeFeed && (
+              <span className="published-description">
+                <Translate
+                  zh_hant={TEXT.zh_hant.commentPublishedDescription}
+                  zh_hans={TEXT.zh_hans.commentPublishedDescription}
+                />
+              </span>
+            )}
           </section>
 
           {inFolloweeFeed && <CommentToArticle comment={comment} />}
