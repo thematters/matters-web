@@ -17,7 +17,7 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
-import { QueryError } from '~/components/GQL'
+import { getErrorCodes, QueryError } from '~/components/GQL'
 import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
 import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
@@ -27,10 +27,12 @@ import AddIcon from '~/components/Icon/Add'
 import TagArticleModal from '~/components/Modal/TagArticleModal'
 import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
 import {
   ANALYTICS_EVENTS,
+  ERROR_CODES,
   FEED_TYPE,
   REFETCH_TAG_DETAIL_ARTICLES,
   TEXT
@@ -230,6 +232,10 @@ const TagDetailContainer = () => {
   }
 
   if (error) {
+    const errorCodes = getErrorCodes(error)
+    if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
+      return <Throw404 />
+    }
     return <QueryError error={error} />
   }
 
