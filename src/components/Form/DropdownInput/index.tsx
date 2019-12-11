@@ -148,7 +148,7 @@ const DropdownInput: React.FC<Props> = ({
                 hideDropdown()
               }
             }}
-            value={value.trim()}
+            value={value}
             style={style}
             {...restProps}
           />

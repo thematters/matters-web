@@ -22,6 +22,22 @@ ul {
       pointer-events: none;
     }
 
+    & :global(section.container) {
+      padding-right: 2.8rem;
+
+      & :global(a.arrow) {
+        @mixin flex-center-all;
+
+        display: none;
+        position: absolute;
+        right: var(--spacing-default);
+        top: 0;
+        height: 100%;
+
+        pointer-events: initial;
+      }
+    }
+
     & .delete-handler {
       @mixin flex-center-all;
       @mixin all-transition;
