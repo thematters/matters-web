@@ -141,7 +141,8 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
       content: tag ? tag.content : '',
@@ -229,7 +230,10 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           values={values}
           errors={errors}
           touched={touched}
-          handleBlur={handleBlur}
+          handleBlur={(e: any) => {
+            setFieldValue('content', e.target.value.trim())
+            handleBlur(e)
+          }}
           handleChange={handleChange}
           dropdownAppendTo="tag-modal"
           dropdownAutoSizing={true}
