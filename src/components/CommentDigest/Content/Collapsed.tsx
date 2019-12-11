@@ -42,7 +42,10 @@ const Collapsed = ({
         <button
           className="expand-button"
           type="button"
-          onClick={() => setCollapsed(false)}
+          onClick={e => {
+            setCollapsed(false)
+            e.stopPropagation()
+          }}
         >
           <TextIcon
             icon={
