@@ -6,8 +6,8 @@ import { Button, Icon, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { TEXT } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
 import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
 import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
@@ -76,8 +76,9 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
 
   const onClick = async () => {
     try {
+      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
       const { data } = await putDraft()
-      const { slug, id } = (data && data.putDraft) || {}
+      const { slug, id } = data?.putDraft || {}
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })

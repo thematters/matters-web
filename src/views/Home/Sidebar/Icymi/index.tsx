@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { Label, Placeholder, Translate } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -35,7 +35,7 @@ export const SIDEBAR_ICYMI = gql`
 
 const ICYMI = () => {
   const { data, loading } = useQuery<SidebarIcymi>(SIDEBAR_ICYMI)
-  const edges = data && data.viewer && data.viewer.recommendation.icymi.edges
+  const edges = data?.viewer?.recommendation.icymi.edges
 
   if (loading) {
     return <Placeholder.Sidebar />

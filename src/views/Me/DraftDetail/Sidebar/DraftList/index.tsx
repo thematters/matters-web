@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
 
@@ -30,7 +30,7 @@ const ME_DRAFTS_SIDEBAR = gql`
 
 const DraftList = ({ currentId }: { currentId: string }) => {
   const { data, loading } = useQuery<MeDraftsSidebar>(ME_DRAFTS_SIDEBAR)
-  const edges = data && data.viewer && data.viewer.drafts.edges
+  const edges = data?.viewer?.drafts.edges
 
   return (
     <Collapsable

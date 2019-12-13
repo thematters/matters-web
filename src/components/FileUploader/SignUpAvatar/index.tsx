@@ -75,7 +75,7 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
+    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
       return
     }
@@ -84,8 +84,8 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
       const { data } = await upload({
         variables: { input: { file, type: 'avatar', entityType: 'user' } }
       })
-      const id = data && data.singleFileUpload.id
-      const path = data && data.singleFileUpload.path
+      const id = data?.singleFileUpload.id
+      const path = data?.singleFileUpload.path
 
       setAvatar(path)
       setError(undefined)

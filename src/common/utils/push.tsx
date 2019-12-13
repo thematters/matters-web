@@ -74,7 +74,7 @@ export const initializePush = async ({
   // Callback fired if Instance ID token is updated.
   messaging.onTokenRefresh(async () => {
     await unsubscribePush()
-    await subscribePush()
+    await subscribePush({ silent: true })
   })
 
   /**
@@ -100,27 +100,33 @@ export const initializePush = async ({
   })
 }
 
-export const subscribePush = async () => {
+export const subscribePush = async (options?: { silent?: boolean }) => {
+  const { silent } = options || { silent: false }
+
   // Request token
-  await requestPermission()
+  if (!silent) {
+    await requestPermission()
+  }
 
   let token
   try {
     token = await getToken()
   } catch (e) {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="操作失敗，請檢查網路連線"
-              zh_hans="操作失败，请检查网路连线"
-            />
-          )
-        }
-      })
-    )
+    if (!silent) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant="操作失敗，請檢查網路連線"
+                zh_hans="操作失败，请检查网路连线"
+              />
+            )
+          }
+        })
+      )
+    }
   }
 
   try {
@@ -147,25 +153,38 @@ export const subscribePush = async () => {
     localStorage.setItem(
       STORE_KEY_PUSH,
       JSON.stringify({
-        userId: data && data.toggleSubscribePush && data.toggleSubscribePush.id,
+        userId: data?.toggleSubscribePush?.id,
         enabled: true,
         token
       })
     )
+
+    if (!silent) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: <Translate zh_hant="推送已開啓" zh_hans="推送已开启" />
+          }
+        })
+      )
+    }
   } catch (e) {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="開啓失敗，請稍候重試"
-              zh_hans="开启失败，请稍候重试"
-            />
-          )
-        }
-      })
-    )
+    if (!silent) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant="開啓失敗，請稍候重試"
+                zh_hans="开启失败，请稍候重试"
+              />
+            )
+          }
+        })
+      )
+    }
     throw new Error('[Push] Failed to subscribe push')
   }
 

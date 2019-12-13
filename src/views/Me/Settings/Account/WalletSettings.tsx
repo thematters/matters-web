@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Icon, PageHeader, TextIcon, Translate } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -42,8 +42,7 @@ const WalletSetting = () => {
   const { data, loading, error } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none'
   })
-  const LIKE =
-    data && data.viewer && data.viewer.status && data.viewer.status.LIKE
+  const LIKE = data?.viewer?.status && data.viewer.status.LIKE
 
   if (loading || error || !LIKE) {
     return null

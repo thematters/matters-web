@@ -3,9 +3,7 @@ import Link from 'next/link'
 
 import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
-import { Translate } from '~/components/Language'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -29,13 +27,6 @@ const CommentToArticle = ({
 
   return (
     <section className="comment-to-article">
-      <span className="published-description">
-        <Translate
-          zh_hant={TEXT.zh_hant.commentPublishedDescription}
-          zh_hans={TEXT.zh_hans.commentPublishedDescription}
-        />
-      </span>
-
       <Link {...path}>
         <a className="article-title">{title}</a>
       </Link>

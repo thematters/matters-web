@@ -1,5 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
+import { useContext } from 'react'
 
 import {
   ArticleDigest,
@@ -14,6 +15,7 @@ import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__ge
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
 import Throw404 from '~/components/Throw404'
+import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
@@ -52,6 +54,7 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
 }
 
 const UserArticles = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
@@ -80,8 +83,25 @@ const UserArticles = () => {
   const connectionPath = 'user.articles'
   const { edges, pageInfo } = data.user.articles
 
+  const CustomHead = () => (
+    <Head
+      title={{
+        zh_hant: `${user.displayName}的創作空間站`,
+        zh_hans: `${user.displayName}的创作空间站`
+      }}
+      description={user.info.description || ''}
+      image={user.info.profileCover || IMAGE_LOGO_192}
+    />
+  )
+
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return (
+      <>
+        <CustomHead />
+        <ArticleSummaryInfo data={data} />
+        <EmptyArticle />
+      </>
+    )
   }
 
   const loadMore = () => {
@@ -102,54 +122,43 @@ const UserArticles = () => {
     })
   }
 
-  const CustomHead = () => (
-    <Head
-      title={{
-        zh_hant: `${user.displayName}的創作空間站`,
-        zh_hans: `${user.displayName}的创作空间站`
-      }}
-      description={user.info.description || ''}
-      image={user.info.profileCover || IMAGE_LOGO_192}
-    />
-  )
-
-  if (!edges || edges.length <= 0) {
-    return (
-      <>
-        <CustomHead />
-        <ArticleSummaryInfo data={data} />
-        <EmptyArticle />
-      </>
-    )
-  }
-
   return (
     <>
       <CustomHead />
       <ArticleSummaryInfo data={data} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <ul>
-          {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.USER_ARTICLE,
-                  location: i
-                })
-              }
-            >
-              <ArticleDigest.Feed
-                article={node}
-                hasBookmark
-                hasDateTime
-                hasFingerprint
-                hasMoreButton
-                hasState
-                hasSticky
-              />
-            </li>
-          ))}
+          {edges.map(({ node, cursor }, i) => {
+            if (
+              node.state !== 'active' &&
+              viewer.id !== node.author.id &&
+              viewer.isAdmin
+            ) {
+              return null
+            }
+
+            return (
+              <li
+                key={cursor}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.USER_ARTICLE,
+                    location: i
+                  })
+                }
+              >
+                <ArticleDigest.Feed
+                  article={node}
+                  hasBookmark
+                  hasDateTime
+                  hasFingerprint
+                  hasMoreButton
+                  hasState
+                  hasSticky
+                />
+              </li>
+            )
+          })}
         </ul>
       </InfiniteScroll>
     </>

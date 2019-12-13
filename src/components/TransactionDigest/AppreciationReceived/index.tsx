@@ -50,9 +50,7 @@ const AppreciationReceived = ({
           </header>
         )}
         {isUseContent && content && <h4 className="content">{content}</h4>}
-        {!isUseContent && target && (
-          <ArticleDigest.Plain article={target} hasArchivedTooltip />
-        )}
+        {!isUseContent && target && <ArticleDigest.Plain article={target} />}
       </section>
 
       <section className="right">

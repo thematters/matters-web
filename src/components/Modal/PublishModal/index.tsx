@@ -5,6 +5,9 @@ import { useMutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
+import { ANALYTICS_EVENTS } from '~/common/enums'
+import { analytics } from '~/common/utils'
+
 import { PublishArticle } from './__generated__/PublishArticle'
 import PublishSlide from './PublishSlide'
 import styles from './styles.css'
@@ -61,16 +64,22 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
       </Modal.Content>
 
       <div className="buttons">
-        <Modal.FooterButton onClick={close} bgColor="white">
+        <Modal.FooterButton
+          onClick={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SAVE_DRAFT_IN_MODAL)
+            close()
+          }}
+          bgColor="white"
+        >
           <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
         </Modal.FooterButton>
 
         <Modal.FooterButton
           disabled={!publishable}
           onClick={async () => {
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
             const { data } = await publish({ variables: { draftId } })
-            const state =
-              (data && data.publishArticle.publishState) || 'unpublished'
+            const state = data?.publishArticle.publishState || 'unpublished'
 
             if (state === 'pending' || state === 'published') {
               close()

@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
@@ -117,7 +117,7 @@ const UserComments = ({ user }: UserIdUser) => {
   const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
     USER_COMMENT_FEED,
     {
-      variables: { id: user && user.id }
+      variables: { id: user?.id }
     }
   )
 

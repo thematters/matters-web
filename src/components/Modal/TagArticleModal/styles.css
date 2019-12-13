@@ -1,0 +1,78 @@
+.container {
+  margin: 0rem var(--spacing-tight) var(--spacing-default);
+}
+
+.form {
+  width: 100%;
+}
+
+ul {
+  & li {
+    position: relative;
+
+    padding: var(--spacing-x-tight);
+    margin: var(--spacing-tight) 0 0 0;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    background: var(--color-white);
+    box-shadow: var(--shadow-light);
+
+    & :global(a) {
+      pointer-events: none;
+    }
+
+    & :global(section.container) {
+      padding-right: 2.8rem;
+
+      & :global(a.arrow) {
+        @mixin flex-center-all;
+
+        display: none;
+        position: absolute;
+        right: var(--spacing-default);
+        top: 0;
+        height: 100%;
+
+        pointer-events: initial;
+      }
+    }
+
+    & .delete-handler {
+      @mixin flex-center-all;
+      @mixin all-transition;
+
+      position: absolute;
+      top: 0;
+      right: 0%;
+      height: 100%;
+
+      padding-right: var(--spacing-x-tight);
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-matters-green);
+      background: var(--color-bg-green);
+    }
+
+    @media (--lg-up) {
+      margin-right: 0;
+      margin-left: 0;
+
+      & .delete-handler {
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-matters-green);
+        background: var(--color-bg-green);
+
+        & .delete-handler {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

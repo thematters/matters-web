@@ -32,7 +32,6 @@
 
 .description {
   margin-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-loose);
   padding-right: 0;
 
   color: var(--color-grey-darker);
@@ -92,7 +91,7 @@
 }
 
 .sticky {
-  margin-bottom: var(--spacing-tight)
+  margin-bottom: var(--spacing-tight);
 }
 
 .published-description {

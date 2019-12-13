@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -52,10 +52,18 @@ const Subscribe = ({
   const onClick = async () => {
     await subscribe()
 
+    // skip
     if (!push || !push.supported || push.enabled) {
       return
     }
 
+    // auto re-subscribe push
+    if (Notification.permission === 'granted') {
+      subscribePush({ silent: true })
+      return
+    }
+
+    // show toast to subscribe push
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {

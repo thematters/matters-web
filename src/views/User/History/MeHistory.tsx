@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
@@ -55,8 +55,7 @@ const MeHistory = () => {
   }
 
   const connectionPath = 'viewer.activity.history'
-  const { edges, pageInfo } =
-    (data && data.viewer && data.viewer.activity.history) || {}
+  const { edges, pageInfo } = data?.viewer?.activity.history || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyHistory />

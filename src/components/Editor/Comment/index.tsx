@@ -1,7 +1,7 @@
-import { QueryLazyOptions } from '@apollo/react-hooks'
+import { QueryResult } from '@apollo/react-common'
+import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { FC, useContext, useState } from 'react'
-import { QueryResult, useLazyQuery } from 'react-apollo'
 
 import {
   SearchUsers,
@@ -39,7 +39,7 @@ const CommentEditor: FC<Props> = ({
 
   const { data, loading } = searchResult
 
-  const mentionUsers = ((data && data.search.edges) || []).map(
+  const mentionUsers = (data?.search.edges || []).map(
     ({ node }: any) => node
   ) as SearchUsers_search_edges_node_User[]
 

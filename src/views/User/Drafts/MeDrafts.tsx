@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
@@ -46,7 +46,7 @@ const MeDrafts = () => {
   }
 
   const connectionPath = 'viewer.drafts'
-  const { edges, pageInfo } = (data && data.viewer && data.viewer.drafts) || {}
+  const { edges, pageInfo } = data?.viewer?.drafts || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyDraft />

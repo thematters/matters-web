@@ -56,7 +56,7 @@ export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
     const file = event.target.files[0]
     event.target.value = ''
 
-    if (file && file.size > UPLOAD_IMAGE_SIZE_LIMIT) {
+    if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       setError('size')
       return
     }
@@ -67,7 +67,7 @@ export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
           input: { file, type: 'avatar', entityType: 'user' }
         }
       })
-      const id = data && data.singleFileUpload.id
+      const id = data?.singleFileUpload.id
 
       if (update) {
         return update({ variables: { input: { avatar: id } } })

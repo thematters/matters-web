@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
@@ -34,7 +34,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
   const [helpExpand, setHelpExpand] = useState(false)
 
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
-  const gateways = (data && data.official.gatewayUrls) || []
+  const gateways = data?.official.gatewayUrls || []
 
   return (
     <div className="dropdown-container">

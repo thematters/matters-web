@@ -60,7 +60,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
         aria-label="關聯當前作品"
         onClick={async () => {
           const { data } = await extend()
-          const { slug, id } = (data && data.putDraft) || {}
+          const { slug, id } = data?.putDraft || {}
 
           if (slug && id) {
             const path = toPath({ page: 'draftDetail', slug, id })

@@ -32,7 +32,7 @@ export const Avatar = ({
   user?: AvatarUser
   src?: string
 }) => {
-  const source = src || (user && user.avatar) || ICON_AVATAR_DEFAULT
+  const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     avatar: true,
     [size]: true

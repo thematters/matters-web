@@ -67,7 +67,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
         const { data } = await confirmCode({
           variables: { input: { email, type: 'password_reset', code } }
         })
-        const confirmVerificationCode = data && data.confirmVerificationCode
+        const confirmVerificationCode = data?.confirmVerificationCode
 
         if (submitCallback && confirmVerificationCode) {
           submitCallback({ email, codeId: confirmVerificationCode })

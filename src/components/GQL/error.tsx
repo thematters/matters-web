@@ -16,7 +16,7 @@ export const getErrorCodes = (error: ApolloError) => {
   }
 
   error.graphQLErrors.forEach(e => {
-    const code = e.extensions && e.extensions.code
+    const code = e.extensions?.code
     if (code) {
       errorCodes.push(code)
     }
@@ -121,7 +121,10 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.NOTICE_NOT_FOUND,
     ERROR_CODES.NOT_ENOUGH_MAT,
     ERROR_CODES.ACTION_FAILED,
-    ERROR_CODES.UNABLE_TO_UPLOAD_FROM_URL
+    ERROR_CODES.UNABLE_TO_UPLOAD_FROM_URL,
+    ERROR_CODES.LIKER_NOT_FOUND,
+    ERROR_CODES.LIKER_USER_ID_EXISTS,
+    ERROR_CODES.LIKER_EMAIL_EXISTS
   ]
   CATCH_CODES.forEach(code => {
     if (errorMap[code]) {

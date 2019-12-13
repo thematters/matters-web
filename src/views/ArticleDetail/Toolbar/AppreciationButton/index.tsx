@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { Translate } from '~/components'
@@ -95,7 +95,7 @@ const AppreciationButton = ({
   const isReachLimit = left <= 0
   const isMe = article.author.id === viewer.id
   const readCivicLikerModal =
-    viewer.isCivicLiker || (data && data.clientPreference.readCivicLikerModal)
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerModal
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
   const containerClasses = classNames({

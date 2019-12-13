@@ -1,9 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { Waypoint } from 'react-waypoint'
 
 import {
@@ -137,7 +137,7 @@ const ArticleDetail = ({
   })
 
   const shouldShowWall = !viewer.isAuthed && wall
-  const article = data && data.article
+  const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
@@ -199,12 +199,12 @@ const ArticleDetail = ({
                 zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
                 zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
               />
-            ) : (
+            ) : article.state === 'banned' ? (
               <Translate
                 zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
                 zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
               />
-            )
+            ) : null
           }
         >
           <BackToHomeButton />
@@ -328,7 +328,7 @@ const ArticleDetailContainer = () => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
-  const { wall } = (data && data.clientPreference) || { wall: true }
+  const { wall } = data?.clientPreference || { wall: true }
 
   return (
     <main className="l-row">

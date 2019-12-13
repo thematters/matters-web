@@ -137,7 +137,7 @@
           }
           &.loading:not(:hover, :focus) {
             background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+ICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICA8cGF0aCBkPSJNMCAwaDMydjMySDB6Ii8+ICAgIDxwYXRoIHN0cm9rZT0iI0RERCIgc3Ryb2tlLXdpZHRoPSIzIiBkPSJNMiAxNkExNCAxNCAwIDEgMCAxNiAyIi8+ICA8L2c+PC9zdmc+);
-            animation: spinning 1s infinite linear;
+            animation: play-spinning 1s infinite linear;
           }
         }
       }
@@ -413,4 +413,13 @@
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--color-line-grey-light);
   z-index: 1;
+}
+
+@keyframes play-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -26,6 +26,9 @@ const fragments = {
       info {
         description
       }
+      status {
+        state
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}

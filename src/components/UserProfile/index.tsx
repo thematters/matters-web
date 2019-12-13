@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
@@ -5,7 +6,6 @@ import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import {
   Avatar,
@@ -124,8 +124,7 @@ const BaseUserProfile = () => {
 
   const containerClass = classNames({
     container: true,
-    editing,
-    inactive: isMe && viewer.isInactive
+    editing
   })
 
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
@@ -177,6 +176,10 @@ const BaseUserProfile = () => {
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
   const isCivicLiker = user.liker.civicLiker
+  const isUserArchived = user.status.state === 'archived'
+  const isUserBanned = user.status.state === 'banned'
+  const isUserFrozen = user.status.state === 'frozen'
+  const isUserInactive = isUserArchived || isUserBanned || isUserFrozen
 
   return (
     <section className={containerClass}>
@@ -190,7 +193,7 @@ const BaseUserProfile = () => {
             <div className="avatar-container">
               <Avatar
                 size="xlarge"
-                user={!isMe && viewer.isInactive ? undefined : user}
+                user={!isMe && isUserInactive ? undefined : user}
               />
 
               {!isMe && (
@@ -213,7 +216,7 @@ const BaseUserProfile = () => {
             <section className="info">
               <header className="header">
                 <section className="basic">
-                  {!viewer.isInactive && (
+                  {!isUserInactive && (
                     <>
                       <span className="name">{user.displayName}</span>
                       <span className="username">@{user.userName}</span>
@@ -225,7 +228,7 @@ const BaseUserProfile = () => {
                     </>
                   )}
 
-                  {viewer.isArchived && (
+                  {isUserArchived && (
                     <span>
                       <Translate
                         zh_hant={TEXT.zh_hant.accountArchived}
@@ -234,7 +237,7 @@ const BaseUserProfile = () => {
                     </span>
                   )}
 
-                  {viewer.isFrozen && (
+                  {isUserFrozen && (
                     <span>
                       <Translate
                         zh_hant={TEXT.zh_hant.accountFrozen}
@@ -243,7 +246,7 @@ const BaseUserProfile = () => {
                     </span>
                   )}
 
-                  {viewer.isBanned && (
+                  {isUserBanned && (
                     <span>
                       <Translate
                         zh_hant={TEXT.zh_hant.accountBanned}
@@ -254,7 +257,7 @@ const BaseUserProfile = () => {
                 </section>
 
                 <section className="buttons">
-                  {isMe && !viewer.isInactive && (
+                  {isMe && !isUserInactive && (
                     <EditProfileButton setEditing={setEditing} />
                   )}
 
@@ -265,7 +268,7 @@ const BaseUserProfile = () => {
                 </section>
               </header>
 
-              {!viewer.isInactive && (
+              {!isUserInactive && (
                 <Expandable>
                   <p className="description">{user.info.description}</p>
                 </Expandable>

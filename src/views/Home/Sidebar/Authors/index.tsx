@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import {
   Label,
@@ -45,7 +45,7 @@ const Authors = () => {
       notifyOnNetworkStatusChange: true
     }
   )
-  const edges = data && data.viewer && data.viewer.recommendation.authors.edges
+  const edges = data?.viewer?.recommendation.authors.edges
 
   if (error) {
     return <QueryError error={error} />

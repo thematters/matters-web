@@ -1,8 +1,8 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniqBy from 'lodash/uniqBy'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -16,7 +16,7 @@ import {
 import styles from './styles.css'
 
 const EDITOR_COLLECTION = gql`
-  query EditorCollection($mediaHash: String, $after: String, $first: Int) {
+  query EditorCollection($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       ...EditorCollection
     }
@@ -46,10 +46,10 @@ const EditingList = ({
   const { data, loading, error } = useQuery<EditorCollection>(
     EDITOR_COLLECTION,
     {
-      variables: { mediaHash: article.mediaHash, first: null }
+      variables: { mediaHash: article.mediaHash }
     }
   )
-  const edges = (data && data.article && data.article.collection.edges) || []
+  const edges = data?.article?.collection.edges || []
 
   // init `editingArticles` when network collection is received
   const edgesKeys = edges.map(({ node }) => node.id).join(',') || ''

@@ -1,7 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
-import { useQuery } from 'react-apollo'
 
 import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -50,8 +50,7 @@ const CollectionList = ({
   )
 
   const connectionPath = 'article.collection'
-  const { edges, pageInfo, totalCount } =
-    (data && data.article && data.article.collection) || {}
+  const { edges, pageInfo, totalCount } = data?.article?.collection || {}
 
   if (loading) {
     return <Spinner />
@@ -113,7 +112,6 @@ const CollectionList = ({
             <ArticleDigest.Sidebar
               type="collection"
               article={node}
-              hasArchivedTooltip
               hasCover
               hasAuthor
             />

@@ -1,10 +1,10 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
-import { useQuery } from 'react-apollo'
 
 import { LanguageContext, Modal, Spinner, Translate } from '~/components'
 import OAuth from '~/components/OAuth'

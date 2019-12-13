@@ -1,6 +1,6 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-apollo'
 
 import { Head, InfiniteScroll, Placeholder, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'

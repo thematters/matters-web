@@ -1,10 +1,10 @@
 import { OperationVariables } from '@apollo/react-common'
-import { DocumentNode } from 'graphql'
 import {
   MutationHookOptions,
   MutationTuple,
   useMutation as baseUseMutation
-} from 'react-apollo'
+} from '@apollo/react-hooks'
+import { DocumentNode } from 'graphql'
 
 import { mutationOnError } from './error'
 

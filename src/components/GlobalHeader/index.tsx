@@ -70,24 +70,22 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             )}
 
-            {!isAbout &&
-              (!viewer.isAuthed || !user) &&
-              (!isLogin && !isSignUp) && (
-                <>
-                  {!isLogin && <LoginButton />}
-                  {!isSignUp && (
-                    <SignUpButton
-                      extraStyle={{ minWidth: '5rem' }}
-                      type={SIGNUP_TYPE.GENERAL}
-                    >
-                      <Translate
-                        zh_hant={TEXT.zh_hant.register}
-                        zh_hans={TEXT.zh_hans.register}
-                      />
-                    </SignUpButton>
-                  )}
-                </>
-              )}
+            {!isAbout && (!viewer.isAuthed || !user) && !isLogin && !isSignUp && (
+              <>
+                {!isLogin && <LoginButton />}
+                {!isSignUp && (
+                  <SignUpButton
+                    extraStyle={{ minWidth: '5rem' }}
+                    type={SIGNUP_TYPE.GENERAL}
+                  >
+                    <Translate
+                      zh_hant={TEXT.zh_hant.register}
+                      zh_hans={TEXT.zh_hans.register}
+                    />
+                  </SignUpButton>
+                )}
+              </>
+            )}
 
             {isAbout && (
               <Link {...PATHS.HOME}>

@@ -35,7 +35,7 @@ const Anchor = () => {
   const viewer = useContext(ViewerContext)
 
   // ToS Modal
-  const disagreedToS = !!viewer.info && viewer.info.agreeOn === null
+  const disagreedToS = !!viewer.info?.agreeOn === null
 
   // LikeCoin Modal
   const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)

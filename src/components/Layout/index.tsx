@@ -1,5 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useQuery } from 'react-apollo'
 
 import { AnalyticsListener } from '~/components/Analytics'
 import { Error } from '~/components/Error'
@@ -7,6 +7,7 @@ import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
+import { LanguageProvider } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import ProgressBar from '~/components/ProgressBar'
 import { ToastHolder } from '~/components/ToastHolder'
@@ -34,7 +35,7 @@ const ROOT_QUERY = gql`
 
 export const Layout: React.FC = ({ children }) => {
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
-  const viewer = data && data.viewer
+  const viewer = data?.viewer
 
   if (loading) {
     return null
@@ -50,18 +51,20 @@ export const Layout: React.FC = ({ children }) => {
 
   return (
     <ViewerContext.Provider value={processViewer(viewer)}>
-      <HeaderContextProvider>
-        <AnalyticsListener user={viewer || {}} />
-        <Head />
+      <LanguageProvider>
+        <HeaderContextProvider>
+          <AnalyticsListener user={viewer || {}} />
+          <Head />
 
-        <GlobalHeader user={viewer} />
+          <GlobalHeader user={viewer} />
 
-        {children}
+          {children}
 
-        <Modal.Anchor />
-        <ToastHolder />
-        <ProgressBar />
-      </HeaderContextProvider>
+          <Modal.Anchor />
+          <ToastHolder />
+          <ProgressBar />
+        </HeaderContextProvider>
+      </LanguageProvider>
     </ViewerContext.Provider>
   )
 }
