@@ -20,7 +20,7 @@ Then('the Matters Today description should visible', () => {
   return client.assert.visible('div.description')
 })
 
-When('I click the Matters Today\'s cover', () => {
+When("I click the Matters Today's cover", () => {
   return client
     .moveToElement('div.cover-container', 0, 0)
     .click('div.cover-container')

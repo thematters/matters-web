@@ -1,5 +1,10 @@
 const { setDefaultTimeout, AfterAll, BeforeAll } = require('cucumber')
-const { createSession, closeSession, startWebDriver, stopWebDriver } = require('nightwatch-api')
+const {
+  createSession,
+  closeSession,
+  startWebDriver,
+  stopWebDriver
+} = require('nightwatch-api')
 
 const env = process.env.BDD_ENV
 

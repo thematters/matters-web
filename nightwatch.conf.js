@@ -10,7 +10,6 @@ module.exports = {
   src_folders: ['bdd/steps'],
 
   test_settings: {
-
     // chrome
     default: {
       ...base,
