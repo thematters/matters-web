@@ -98,7 +98,7 @@ const DropdownList = ({
             </button>
           </Menu.Item>
         ))}
-        {items && items.length > 0 && <Menu.Divider />}
+        {items && items.length > 0 && children && <Menu.Divider />}
         {children}
       </Menu>
       <style jsx>{styles}</style>

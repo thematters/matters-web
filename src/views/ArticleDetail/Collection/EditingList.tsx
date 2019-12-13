@@ -16,7 +16,7 @@ import {
 import styles from './styles.css'
 
 const EDITOR_COLLECTION = gql`
-  query EditorCollection($mediaHash: String, $after: String, $first: Int) {
+  query EditorCollection($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       ...EditorCollection
     }
@@ -46,7 +46,7 @@ const EditingList = ({
   const { data, loading, error } = useQuery<EditorCollection>(
     EDITOR_COLLECTION,
     {
-      variables: { mediaHash: article.mediaHash, first: null }
+      variables: { mediaHash: article.mediaHash }
     }
   )
   const edges = data?.article?.collection.edges || []
