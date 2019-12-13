@@ -1,17 +1,42 @@
-module.exports = {
-  src_folders: ['bdd/tests'],
+const base = {
+  launch: 'http://localhost:3000'
+}
 
-  webdriver: {
-    start_process: true,
-    port: 4444,
-    server_path: require('geckodriver').path
-  },
+const baseDriver = {
+  start_process: true
+}
+
+module.exports = {
+  src_folders: ['bdd/steps'],
 
   test_settings: {
+
+    // chrome
     default: {
-      launch_url: 'http://0.0.0.0:3000',
+      ...base,
+      webdriver: {
+        ...baseDriver,
+        server_path: 'node_modules/.bin/chromedriver',
+        port: 9000,
+        cli_args: ['--port=9000']
+      },
       desiredCapabilities: {
-        browserName: 'firefox'
+        browserName: 'chrome'
+      }
+    },
+
+    // firefox
+    firefox: {
+      ...base,
+      webdriver: {
+        ...baseDriver,
+        server_path: 'node_modules/.bin/geckodriver',
+        port: 9001,
+        cli_args: ['--port=9001']
+      },
+      desiredCapabilities: {
+        browserName: 'firefox',
+        elementScrollBehavior: 1
       }
     }
   }

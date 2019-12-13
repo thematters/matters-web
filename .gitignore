@@ -102,3 +102,6 @@ yarn.lock
 sources.list
 *.rdb
 .ebextensions/http-basic-auth.config
+
+# bdd output
+tests_output
