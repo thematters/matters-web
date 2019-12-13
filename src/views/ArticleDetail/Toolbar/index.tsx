@@ -74,7 +74,7 @@ const Toolbar = ({
           <AppreciationButton article={article} inFixedToolbar />
         )}
         <ResponseButton article={article} />
-        {!mobile && fixed && <ExtendButton article={article} />}
+        {!fixed && <ExtendButton article={article} />}
         <BookmarkButton article={article} size="default" />
         <ShareButton />
         <MoreButton article={article} />

@@ -6,8 +6,7 @@ export default {
   editorCollection: gql`
     fragment EditorCollection on Article {
       id
-      collection(input: { after: $after, first: $first })
-        @connection(key: "editorCollection") {
+      collection(input: { first: null }) @connection(key: "articleCollection") {
         pageInfo {
           startCursor
           endCursor
