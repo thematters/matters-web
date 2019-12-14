@@ -41,7 +41,7 @@ const Binding: React.FC<Props> = ({
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    ssr: false
+    skip: !process.browser
   })
   const likerId = data?.viewer?.liker.likerId
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
@@ -85,14 +85,12 @@ const NoticeButton = ({
 
 const NotificationButton = () => {
   const viewer = useContext(ViewerContext)
-  const { data: unreadCountData } = useQuery<UnreadNoticeCount>(
+  const { data: unreadCountData, startPolling } = useQuery<UnreadNoticeCount>(
     UNREAD_NOTICE_COUNT,
     {
       errorPolicy: 'ignore',
       fetchPolicy: 'network-only',
-      pollInterval: POLL_INTERVAL,
-      skip: !viewer.isAuthed,
-      ssr: false
+      skip: !viewer.isAuthed || !process.browser
     }
   )
   const { data, loading, error, refetch } = useQuery<MeNotifications>(
@@ -109,6 +107,11 @@ const NotificationButton = () => {
       update: updateViewerUnreadNoticeCount
     }
   )
+
+  // FIXME: https://github.com/apollographql/apollo-client/issues/3775
+  useEffect(() => {
+    startPolling(POLL_INTERVAL)
+  }, [])
 
   return (
     <NoticeButton
