@@ -18,7 +18,7 @@ import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
-import OnboardingAppreciateButton from './OnboardingAppreciateButton'
+import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import styles from './styles.css'
 
 const fragments = {
@@ -97,18 +97,19 @@ const AppreciationButton = ({
   const readCivicLikerModal =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerModal
   const canAppreciate =
-    (!isReachLimit && !isMe && !viewer.isInactive) || !viewer.isAuthed
+    (!isReachLimit && !isMe && !viewer.isInactive && !viewer.isOnboarding) ||
+    !viewer.isAuthed
   const containerClasses = classNames({
     container: true
   })
 
   /**
-   * Onboarding Button
+   * Setup Liker Id Button
    */
   if (viewer.shouldSetupLikerID) {
     return (
       <section className={containerClasses}>
-        <OnboardingAppreciateButton
+        <SetupLikerIdAppreciateButton
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
@@ -200,8 +201,8 @@ const AppreciationButton = ({
                   zh_hans: '去赞赏其他用户吧'
                 }
               : {
-                  zh_hant: '你無法進行讚賞',
-                  zh_hans: '你无法进行赞赏'
+                  zh_hant: '你還沒有讚賞權限',
+                  zh_hans: '你还没有赞赏权限'
                 })}
           />
         }

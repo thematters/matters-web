@@ -167,6 +167,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
         <section className="comment-form">
           <CommentForm
             articleId={comment.article.id}
+            articleAuthorId={comment.article.author.id}
             replyToId={comment.id}
             parentId={comment.parentComment?.id || comment.id}
             refetch={refetch}

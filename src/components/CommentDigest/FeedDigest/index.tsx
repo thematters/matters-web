@@ -143,6 +143,7 @@ const FeedDigest = ({
           <CommentForm
             commentId={id}
             articleId={article.id}
+            articleAuthorId={article.author.id}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
             blocked={article.author.isBlocking}
