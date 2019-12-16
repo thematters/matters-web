@@ -28,6 +28,7 @@ steps:
 
   - name: bdd-chrome
     image: node:11.14.0
+    privileged: true
     commands:
       - sh bdd/shells/chrome.sh
       - sh bdd/shells/init.sh
