@@ -22,7 +22,7 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-          args: ['no-sandbox']
+          args: ['headless', 'no-sandbox']
         }
       }
     },
