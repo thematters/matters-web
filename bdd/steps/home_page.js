@@ -29,6 +29,7 @@ When("I click the Matters Today's cover", () => {
 
 Then('the Article page should be visible', () => {
   return client
+    .pause(TIME.LONG)
     .waitForElementVisible('body')
     .waitForElementVisible('h1.article')
 })
