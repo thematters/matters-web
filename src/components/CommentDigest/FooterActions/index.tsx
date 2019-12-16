@@ -73,6 +73,10 @@ const FooterActions: React.FC<FooterActionsProps> & {
   const [showForm, setShowForm] = useState(false)
   const isActive = comment.state === 'active'
   const isCollapsed = comment.state === 'collapsed'
+  const isDisabled =
+    (!isActive && !isCollapsed) ||
+    viewer.isInactive ||
+    (viewer.isOnboarding && comment.article.author.id !== viewer.id)
 
   const { parentComment, id } = comment
   const { slug, mediaHash, author } = comment.article
@@ -98,24 +102,26 @@ const FooterActions: React.FC<FooterActionsProps> & {
   return (
     <>
       <footer className="actions">
-        <div className="left">
-          <UpvoteButton
-            comment={comment}
-            disabled={(!isActive && !isCollapsed) || viewer.isInactive}
-          />
+        <ModalSwitch modalId="likeCoinTermModal">
+          {(open: any) => (
+            <div className="left">
+              <UpvoteButton
+                comment={comment}
+                onClick={viewer.shouldSetupLikerID && open}
+                disabled={isDisabled}
+              />
 
-          <IconDotDivider />
-          <DownvoteButton
-            comment={comment}
-            disabled={(!isActive && !isCollapsed) || viewer.isInactive}
-          />
-
-          {hasForm && (
-            <>
               <IconDotDivider />
+              <DownvoteButton
+                comment={comment}
+                onClick={viewer.shouldSetupLikerID && open}
+                disabled={isDisabled}
+              />
 
-              <ModalSwitch modalId="likeCoinTermModal">
-                {(open: any) => (
+              {hasForm && (
+                <>
+                  <IconDotDivider />
+
                   <button
                     type="button"
                     className={showForm ? 'active' : ''}
@@ -126,11 +132,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                         setShowForm(!showForm)
                       }
                     }}
-                    disabled={
-                      (!isActive && !isCollapsed) ||
-                      viewer.isInactive ||
-                      isBlockedByAuthor
-                    }
+                    disabled={isDisabled}
                   >
                     <Icon
                       id={ICON_COMMENT_SMALL.id}
@@ -138,11 +140,11 @@ const FooterActions: React.FC<FooterActionsProps> & {
                       size="small"
                     />
                   </button>
-                )}
-              </ModalSwitch>
-            </>
+                </>
+              )}
+            </div>
           )}
-        </div>
+        </ModalSwitch>
 
         {/* FIXME: We cannot use <Link>: https://github.com/ReactTraining/history/issues/503 */}
         {hasLink ? (
