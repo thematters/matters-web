@@ -26,6 +26,12 @@ steps:
       - npm run test
       - codecov
 
+  - name: bdd-chrome
+    image: node:11.14.0
+    commands:
+      - sh bdd/shells/chrome.sh
+      - sh bdd/shells/init.sh
+
   # === CI tasks for `develop` branch ===
   - name: develop:build
     image: node:11.14.0
