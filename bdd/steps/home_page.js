@@ -6,7 +6,7 @@ const TIME = require('../common/enums/time')
 
 Given('I visit matters.news home page', () => {
   return client
-    .url(PATH.HOME)
+    .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
     .waitForElementVisible('body')
     .waitForElementVisible('header')
     .waitForElementVisible('main')
