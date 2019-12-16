@@ -40,7 +40,7 @@ module.exports = {
         browserName: 'firefox',
         elementScrollBehavior: 1,
         alwaysMatch: {
-          "moz:firefoxOptions": {
+          'moz:firefoxOptions': {
             args: ['--headless']
           }
         }
