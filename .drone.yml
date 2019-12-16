@@ -31,6 +31,7 @@ steps:
     commands:
       - sh bdd/shells/chrome.sh
       - sh bdd/shells/init.sh
+      - npm run bdd
 
   # === CI tasks for `develop` branch ===
   - name: develop:build
