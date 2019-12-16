@@ -11,13 +11,9 @@
 .error-code {
   color: var(--color-grey);
   font-family: var(--font-mono);
-  font-size: 3rem;
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-normal);
   line-height: 1.16666667;
-
-  &.small {
-    font-size: var(--font-size-xl);
-  }
 }
 
 .error-message {
