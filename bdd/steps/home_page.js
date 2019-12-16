@@ -8,7 +8,7 @@ Given('I visit matters.news home page', () => {
   return client
     .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
     .waitForElementVisible('body')
-    .waitForElementVisible('header')
+    .waitForElementVisible('header', 10 * TIME.SECOND)
     .waitForElementVisible('main')
 })
 
@@ -24,7 +24,7 @@ When("I click the Matters Today's cover", () => {
   return client
     .moveToElement('div.cover-container', 0, 0)
     .click('div.cover-container')
-    .pause(TIME.SECOND)
+    .pause(10 * TIME.SECOND)
 })
 
 Then('the Article page should be visible', () => {
