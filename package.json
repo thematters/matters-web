@@ -29,9 +29,7 @@
     "gen:watch": "npm run gen:clean && npm run gen:type -- --watch",
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
-    "bdd:pre": "wait-on http://localhost:3000",
-    "bdd:run": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r bdd/steps/*.js --format node_modules/cucumber-pretty",
-    "bdd": "npm run bdd:pre && npm run bdd:run"
+    "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r bdd/steps/*.js --format node_modules/cucumber-pretty"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",

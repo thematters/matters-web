@@ -36,6 +36,7 @@ steps:
     commands:
       - sh bdd/shells/init.sh
       - npm run bdd
+      - BDD_DRIVER=firefox npm run bdd
 
   # === CI tasks for `develop` branch ===
   - name: develop:build

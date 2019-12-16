@@ -7,4 +7,5 @@ apt install -y build-essential
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install -y ./google-chrome-stable_current_amd64.deb
 
-# TODO: firefox
+# firefox
+apt install -y firefox-esr
