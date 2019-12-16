@@ -34,8 +34,8 @@ steps:
       BDD_PASSWD:
         from_secret: BDD_PASSWD
     commands:
-      - sh bdd/shells/browser.sh
       - sh bdd/shells/init.sh
+      - sh bdd/shells/browser.sh
       - npm run bdd
 
   # === CI tasks for `develop` branch ===
