@@ -29,6 +29,11 @@ steps:
   - name: bdd-chrome
     image: node:11.14.0
     privileged: true
+    environment:
+      - BDD_USER:
+          from_secret: BDD_USER
+      - BDD_PASSWD:
+          from_secret: BDD_PASSWD
     commands:
       - sh bdd/shells/chrome.sh
       - sh bdd/shells/init.sh

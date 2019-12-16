@@ -1,3 +1,3 @@
 module.exports = {
-  HOME: 'http://localhost:3000'
+  HOME: `http://${process.env.BDD_USER}:${process.env.BDD_PASSWD}@web-develop.matters.news`
 }
