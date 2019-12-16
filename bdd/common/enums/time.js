@@ -1,5 +1,5 @@
 module.exports = {
-  SHORT: 500,
-  DEFAULT: 1000,
-  LONG: 10000
+  HALF_SECOND: 500,
+  SECOND: 1000,
+  ONE_MINUTE: 60000
 }

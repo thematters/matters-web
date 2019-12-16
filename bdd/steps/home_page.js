@@ -24,12 +24,11 @@ When("I click the Matters Today's cover", () => {
   return client
     .moveToElement('div.cover-container', 0, 0)
     .click('div.cover-container')
-    .pause(TIME.LONG)
+    .pause(TIME.SECOND)
 })
 
 Then('the Article page should be visible', () => {
   return client
-    .pause(TIME.LONG)
     .waitForElementVisible('body')
-    .waitForElementVisible('h1.article')
+    .waitForElementVisible('h1.article', TIME.ONE_MINUTE)
 })
