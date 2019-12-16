@@ -1,3 +1,3 @@
 module.exports = {
-  PATH_HOME: 'http://localhost:3000'
+  HOME: 'http://localhost:3000'
 }

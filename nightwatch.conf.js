@@ -20,7 +20,10 @@ module.exports = {
         cli_args: ['--port=9000']
       },
       desiredCapabilities: {
-        browserName: 'chrome'
+        browserName: 'chrome',
+        chromeOptions: {
+          args: ['headless']
+        }
       }
     },
 
@@ -35,7 +38,12 @@ module.exports = {
       },
       desiredCapabilities: {
         browserName: 'firefox',
-        elementScrollBehavior: 1
+        elementScrollBehavior: 1,
+        alwaysMatch: {
+          "moz:firefoxOptions": {
+            args: ['--headless']
+          }
+        }
       }
     }
   }

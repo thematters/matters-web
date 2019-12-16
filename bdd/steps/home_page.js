@@ -1,12 +1,12 @@
 const { client } = require('nightwatch-api')
 const { Given, Then, When } = require('cucumber')
 
-const { PATH_HOME } = require('../common/enums/path')
-const { WAIT_DEFAULT } = require('../common/enums/wait')
+const PATH = require('../common/enums/path')
+const TIME = require('../common/enums/time')
 
 Given('I visit matters.news home page', () => {
   return client
-    .url(PATH_HOME)
+    .url(PATH.HOME)
     .waitForElementVisible('body')
     .waitForElementVisible('header')
     .waitForElementVisible('main')
@@ -24,7 +24,7 @@ When("I click the Matters Today's cover", () => {
   return client
     .moveToElement('div.cover-container', 0, 0)
     .click('div.cover-container')
-    .pause(WAIT_DEFAULT)
+    .pause(TIME.LONG)
 })
 
 Then('the Article page should be visible', () => {

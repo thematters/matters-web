@@ -6,13 +6,13 @@ const {
   stopWebDriver
 } = require('nightwatch-api')
 
-const env = process.env.BDD_ENV
+const driver = process.env.BDD_DRIVER
 
-setDefaultTimeout(50000)
+setDefaultTimeout(5000)
 
 BeforeAll(async () => {
-  await startWebDriver({ env })
-  await createSession({ env })
+  await startWebDriver({ env: driver })
+  await createSession({ env: driver })
 })
 
 AfterAll(async () => {
