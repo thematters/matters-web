@@ -5,6 +5,8 @@ const PATH = require('../common/enums/path')
 const TIME = require('../common/enums/time')
 
 Given('I visit matters.news home page', () => {
+  console.log(process.env.BDD_USER ? 'y' : 'n')
+  console.log(process.env.BDD_PASSWD ? 'y' : 'n')
   return client
     .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
     .waitForElementVisible('body')
