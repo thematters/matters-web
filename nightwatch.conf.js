@@ -39,6 +39,8 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'firefox',
         elementScrollBehavior: 1,
+        javascriptEnabled: true,
+        acceptSslCerts: true,
         alwaysMatch: {
           'moz:firefoxOptions': {
             args: ['--headless']
