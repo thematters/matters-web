@@ -26,18 +26,6 @@ steps:
       - npm run test
       - codecov
 
-  - name: bdd
-    image: node:11.14.0
-    failure: ignore
-    environment:
-      BDD_USER:
-        from_secret: BDD_USER
-      BDD_PASSWD:
-        from_secret: BDD_PASSWD
-    commands:
-      - sh bdd/shells/init.sh
-      - BDD_DRIVER=default npm run bdd
-
   # === CI tasks for `develop` branch ===
   - name: develop:build
     image: node:11.14.0
@@ -80,6 +68,23 @@ steps:
       - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
       - aws configure set aws_default_region $AWS_DEFAULT_REGION
       - bash ./bin/eb-deploy.sh develop
+    when:
+      branch:
+        - develop
+      event:
+        - push
+
+  - name: develop:bdd
+    image: node:11.14.0
+    failure: ignore
+    environment:
+      BDD_USER:
+        from_secret: BDD_USER
+      BDD_PASSWD:
+        from_secret: BDD_PASSWD
+    commands:
+      - sh bdd/shells/init.sh
+      - BDD_DRIVER=default npm run bdd
     when:
       branch:
         - develop
