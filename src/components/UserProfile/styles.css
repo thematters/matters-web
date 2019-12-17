@@ -73,6 +73,8 @@
 
 .header {
   @mixin flex-start-space-between;
+
+  margin-bottom: var(--spacing-x-tight);
 }
 
 .basic {
@@ -138,7 +140,6 @@
 
 .description {
   position: relative;
-  margin-top: var(--spacing-x-tight);
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
   white-space: pre-wrap;
