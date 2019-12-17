@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import getConfig from 'next/config'
 
 import { Translate } from '~/components'
@@ -47,10 +46,8 @@ export const Error: React.FC<ErrorProps> = ({
   type = 'network',
   message
 }) => {
-  const errorCodeClass = classNames({
-    'error-code': true,
-    small: typeof statusCode === 'string' && statusCode.length > 3
-  })
+  const shouldShowStatusCode =
+    typeof statusCode === 'string' && statusCode.length > 3
 
   return (
     <section className="container">
@@ -58,7 +55,7 @@ export const Error: React.FC<ErrorProps> = ({
         <img src={IMAGE_ILLUSTRATION_EMPTY} />
       </section>
 
-      {statusCode && <h3 className={errorCodeClass}>{statusCode}</h3>}
+      {shouldShowStatusCode && <h3 className="error-code">{statusCode}</h3>}
 
       <p className="error-message">
         {message ? (
