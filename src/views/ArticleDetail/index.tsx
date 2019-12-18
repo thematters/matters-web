@@ -48,7 +48,6 @@ import Wall from './Wall'
 const ARTICLE_DETAIL = gql`
   query ArticleDetail(
     $mediaHash: String
-    $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {

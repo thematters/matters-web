@@ -45,7 +45,6 @@ const SUBSCRIBE_RESPONSES = gql`
     $includeAfter: Boolean
     $includeBefore: Boolean
     $hasDescendantComments: Boolean = true
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
     $articleOnly: Boolean

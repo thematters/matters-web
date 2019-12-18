@@ -21,7 +21,6 @@ export const COLLECTION_LIST = gql`
     $mediaHash: String
     $after: String
     $first: Int
-    $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestCover: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false

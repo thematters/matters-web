@@ -24,7 +24,6 @@ const SEARCH_ARTICLES = gql`
     $key: String!
     $first: Int!
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {

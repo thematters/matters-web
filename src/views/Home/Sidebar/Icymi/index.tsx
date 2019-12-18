@@ -11,7 +11,6 @@ import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
 export const SIDEBAR_ICYMI = gql`
   query SidebarIcymi(
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestCover: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false

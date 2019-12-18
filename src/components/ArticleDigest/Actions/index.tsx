@@ -32,7 +32,7 @@ const fragments = {
   article: gql`
     fragment DigestActionsArticle on Article {
       author {
-        ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
+        ...UserDigestMiniUser
       }
       createdAt
       ...AppreciationArticle
@@ -51,7 +51,7 @@ const fragments = {
   response: gql`
     fragment ResponseDigestActionsArticle on Article {
       author {
-        ...UserDigestMiniUser @include(if: $hasArticleDigestActionAuthor)
+        ...UserDigestMiniUser
       }
       createdAt
       ...AppreciationArticle
@@ -123,7 +123,7 @@ const Actions = ({
   return (
     <footer className={footerClassNames}>
       <div className="left">
-        {hasAuthor && 'author' in article && (
+        {hasAuthor && (
           <span className="space-right">
             <UserDigest.Mini user={article.author} />
           </span>

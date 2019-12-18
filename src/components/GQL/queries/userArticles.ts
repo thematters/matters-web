@@ -6,7 +6,6 @@ export default gql`
   query UserArticles(
     $userName: String!
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
