@@ -40,6 +40,20 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
     page: 'userProfile',
     userName: user.userName || ''
   })
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <section className="container">
+        <Avatar size="small" />
+        <section className="name">
+          <span className="displayName">{user.displayName}</span>
+        </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
     <>

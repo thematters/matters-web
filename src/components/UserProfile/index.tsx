@@ -160,7 +160,7 @@ const BaseUserProfile = () => {
     )
   }
 
-  if (!user) {
+  if (!user || user?.status?.state === 'archived') {
     return <Throw404 />
   }
 

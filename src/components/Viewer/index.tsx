@@ -27,9 +27,6 @@ export const ViewerUserFragment = {
       settings {
         language
       }
-      status {
-        state
-      }
     }
   `
 }
