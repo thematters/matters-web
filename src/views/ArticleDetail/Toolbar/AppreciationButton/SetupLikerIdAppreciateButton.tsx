@@ -2,7 +2,7 @@ import { ModalSwitch } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
-const OnboardingAppreciateButton = ({
+const SetupLikerIdAppreciateButton = ({
   total,
   inFixedToolbar
 }: {
@@ -24,4 +24,4 @@ const OnboardingAppreciateButton = ({
   )
 }
 
-export default OnboardingAppreciateButton
+export default SetupLikerIdAppreciateButton

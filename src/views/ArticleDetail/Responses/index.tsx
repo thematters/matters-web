@@ -49,6 +49,7 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
         <section>
           <CommentForm
             articleId={article.id}
+            articleAuthorId={article.author.id}
             submitCallback={refetchResponses}
             blocked={article.author.isBlocking}
           />

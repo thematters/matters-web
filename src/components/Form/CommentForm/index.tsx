@@ -51,6 +51,7 @@ interface CommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
+  articleAuthorId: string
   submitCallback?: () => void
   refetch?: boolean
   extraButton?: React.ReactNode
@@ -238,6 +239,16 @@ const CommentFormWrap = (props: CommentFormProps) => {
           </button>
         )}
       </ModalSwitch>
+    )
+  }
+
+  if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
+    return (
+      <section className="blocked">
+        <Translate zh_hant="你還不能參與討論" zh_hans="你还不能参与讨论" />
+
+        <style jsx>{styles}</style>
+      </section>
     )
   }
 
