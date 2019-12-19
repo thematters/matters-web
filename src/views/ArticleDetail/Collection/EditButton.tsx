@@ -35,7 +35,6 @@ const EDITOR_SET_COLLECTION = gql`
     $after: String
     $first: Int
     $collection: [ID!]!
-    $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestCover: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false

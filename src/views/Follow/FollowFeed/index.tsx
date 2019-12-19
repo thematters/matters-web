@@ -23,7 +23,6 @@ import styles from './styles.css'
 const FOLLOW_FEED = gql`
   query FollowFeed(
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
     $hasDescendantComments: Boolean = false

@@ -22,6 +22,30 @@ import styles from './styles.css'
  *   <UserDigest.FullDesc user={user} />
  */
 
+const fragments = {
+  user: gql`
+    fragment UserDigestFullDescUser on User {
+      id
+      userName
+      displayName
+      info {
+        description
+      }
+      status {
+        state
+      }
+      ...AvatarUser
+      ...FollowStateUser
+      ...FollowButtonUser
+      ...UnblockButtonUser
+    }
+    ${Avatar.fragments.user}
+    ${FollowButton.State.fragments.user}
+    ${FollowButton.fragments.user}
+    ${UnblockButton.fragments.user}
+  `
+}
+
 const appreciationIconStyle = { marginRight: '0.5rem' }
 
 const Appreciation = ({ sum }: { sum?: number }) => {
@@ -67,66 +91,64 @@ const FullDesc = ({
         page: 'userProfile',
         userName: user.userName || ''
       })
+  const isArchived = user?.status?.state === 'archived'
 
-  return (
-    <>
+  if (isArchived) {
+    return (
       <section className="container">
-        <Link {...path}>
-          <a>
-            <Avatar size="default" user={user} />
-          </a>
-        </Link>
+        <Avatar size="default" />
 
         <section className="content">
           <header className="header-container">
             <div className="header-left">
-              <Link {...path}>
-                <a>
-                  <span className={nameSizeClasses}>{user.displayName}</span>
-                </a>
-              </Link>
-              {showAppreciations && <Appreciation sum={appreciations} />}
-              {!showUnblock && <FollowButton.State user={user} />}
-            </div>
-
-            <div className="header-right">
-              {showUnblock && <UnblockButton user={user} />}
-              {!showUnblock && <FollowButton user={user} />}
+              <span className={nameSizeClasses}>{user.displayName}</span>
             </div>
           </header>
-
-          <Link {...path}>
-            <a>
-              <p className="description">{user.info.description}</p>
-            </a>
-          </Link>
         </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  return (
+    <section className="container">
+      <Link {...path}>
+        <a>
+          <Avatar size="default" user={user} />
+        </a>
+      </Link>
+
+      <section className="content">
+        <header className="header-container">
+          <div className="header-left">
+            <Link {...path}>
+              <a>
+                <span className={nameSizeClasses}>{user.displayName}</span>
+              </a>
+            </Link>
+            {showAppreciations && <Appreciation sum={appreciations} />}
+            {!showUnblock && <FollowButton.State user={user} />}
+          </div>
+
+          <div className="header-right">
+            {showUnblock && <UnblockButton user={user} />}
+            {!showUnblock && <FollowButton user={user} />}
+          </div>
+        </header>
+
+        <Link {...path}>
+          <a>
+            <p className="description">{user.info.description}</p>
+          </a>
+        </Link>
       </section>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 
-FullDesc.fragments = {
-  user: gql`
-    fragment UserDigestFullDescUser on User {
-      id
-      userName
-      displayName
-      info {
-        description
-      }
-      ...AvatarUser
-      ...FollowStateUser
-      ...FollowButtonUser
-      ...UnblockButtonUser
-    }
-    ${Avatar.fragments.user}
-    ${FollowButton.State.fragments.user}
-    ${FollowButton.fragments.user}
-    ${UnblockButton.fragments.user}
-  `
-}
+FullDesc.fragments = fragments
 
 export default FullDesc

@@ -32,6 +32,9 @@ const fragments = {
       id
       userName
       displayName
+      status {
+        state
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}
@@ -56,25 +59,37 @@ const Mini = ({
     [`spacing-${spacing}`]: true,
     [`text-${textSize}`]: true
   })
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <section>
+        <span className={containerClasses}>
+          <Avatar size={avatarSize} />
+          <span className="name-container">
+            <span className="name">{user.displayName}</span>
+          </span>
+        </span>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
-    <>
-      <section>
-        <Link {...path}>
-          <a className={containerClasses}>
-            <Avatar size={avatarSize} user={user} />
-            <span className="name-container">
-              <span className="name">{user.displayName}</span>
-              {hasUserName && (
-                <span className="username">@{user.userName}</span>
-              )}
-            </span>
-          </a>
-        </Link>
-      </section>
+    <section>
+      <Link {...path}>
+        <a className={containerClasses}>
+          <Avatar size={avatarSize} user={user} />
+          <span className="name-container">
+            <span className="name">{user.displayName}</span>
+            {hasUserName && <span className="username">@{user.userName}</span>}
+          </span>
+        </a>
+      </Link>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 
