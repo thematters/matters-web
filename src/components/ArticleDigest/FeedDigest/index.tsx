@@ -109,6 +109,12 @@ const FeedDigest = ({
   ) : (
     article.title
   )
+  const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const contentClasses = classNames({
+    content: true,
+    'no-cover': !cover
+  })
+
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span>{children}</span>
@@ -117,11 +123,6 @@ const FeedDigest = ({
         <a>{children}</a>
       </Link>
     )
-  const contentClasses = classNames({
-    content: true,
-    'no-cover': !cover
-  })
-  const cleanedSummary = stripHtml(summary)
 
   return (
     <section className="container">

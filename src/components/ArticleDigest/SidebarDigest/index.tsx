@@ -75,6 +75,14 @@ const SidebarDigest = ({
   ) : (
     article.title
   )
+  const contentClasses = classNames({
+    content: true,
+    'no-cover': !cover,
+    'type-collection': type === 'collection',
+    inactive: state !== 'active',
+    disabled
+  })
+
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span>{children}</span>
@@ -83,14 +91,6 @@ const SidebarDigest = ({
         <a>{children}</a>
       </Link>
     )
-
-  const contentClasses = classNames({
-    content: true,
-    'no-cover': !cover,
-    'type-collection': type === 'collection',
-    inactive: state !== 'active',
-    disabled
-  })
 
   return (
     <section className={containerClasses}>

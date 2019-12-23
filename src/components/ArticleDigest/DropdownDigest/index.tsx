@@ -69,6 +69,12 @@ const DropdownDigest = ({
   ) : (
     article.title
   )
+  const contentClass = classNames({
+    content: true,
+    inactive: state !== 'active',
+    disabled
+  })
+
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span>{children}</span>
@@ -77,12 +83,6 @@ const DropdownDigest = ({
         <a>{children}</a>
       </Link>
     )
-
-  const contentClass = classNames({
-    content: true,
-    inactive: state !== 'active',
-    disabled
-  })
 
   return (
     <section className={conatinerClass}>

@@ -71,6 +71,11 @@ const RelatedDigest = ({
   const cleanedSummary = isBanned
     ? ''
     : makeSummary(summary, countWordsLength(article.title) > 40 ? 60 : 80)
+  const contentClasses = classNames({
+    content: true,
+    'has-cover': !!cover
+  })
+
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span>{children}</span>
@@ -79,11 +84,6 @@ const RelatedDigest = ({
         <a>{children}</a>
       </Link>
     )
-
-  const contentClasses = classNames({
-    content: true,
-    'has-cover': !!cover
-  })
 
   return (
     <section className="container">
