@@ -16,6 +16,7 @@ const fragments = {
     fragment ResponseCountArticle on Article {
       id
       slug
+      state
       mediaHash
       responseCount
       author {
@@ -32,7 +33,7 @@ const ResponseCount = ({
   article: ResponseCountArticle
   size?: 'small' | 'xsmall'
 }) => {
-  const { slug, mediaHash, author } = article
+  const { slug, mediaHash, author, state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -46,35 +47,44 @@ const ResponseCount = ({
     fragment: UrlFragments.COMMENTS
   })
 
-  return (
-    <Link {...path}>
-      <a
-        className="response-count"
-        onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-            entrance: article.id,
-            type: 'article-digest'
-          })
-        }}
-      >
-        <TextIcon
-          icon={
-            <Icon
-              size={size}
-              id={ICON_COMMENT_SM.id}
-              viewBox={ICON_COMMENT_SM.viewBox}
-            />
-          }
-          color="grey"
-          weight="medium"
-          text={numAbbr(article.responseCount || 0)}
-          size={size === 'small' ? 'sm' : 'xs'}
-          spacing="xxtight"
-        />
+  const isBanned = state === 'banned'
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a
+          onClick={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+              entrance: article.id,
+              type: 'article-digest'
+            })
+          }}
+        >
+          {children}
+        </a>
+      </Link>
+    )
 
-        <style jsx>{styles}</style>
-      </a>
-    </Link>
+  return (
+    <LinkWrapper>
+      <TextIcon
+        icon={
+          <Icon
+            size={size}
+            id={ICON_COMMENT_SM.id}
+            viewBox={ICON_COMMENT_SM.viewBox}
+          />
+        }
+        color="grey"
+        weight="medium"
+        text={numAbbr(article.responseCount || 0)}
+        size={size === 'small' ? 'sm' : 'xs'}
+        spacing="xxtight"
+      />
+
+      <style jsx>{styles}</style>
+    </LinkWrapper>
   )
 }
 

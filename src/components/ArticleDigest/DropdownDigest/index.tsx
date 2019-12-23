@@ -99,7 +99,7 @@ const DropdownDigest = ({
           textSize="xsmall"
         />
 
-        {hasArrow && (
+        {!isBanned && hasArrow && (
           <Link {...path}>
             <a className="arrow" target="_blank">
               <Icon

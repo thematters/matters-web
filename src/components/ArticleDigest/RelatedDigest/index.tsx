@@ -95,20 +95,16 @@ const RelatedDigest = ({
 
       <div className={contentClasses}>
         <div className="title">
-          <Link {...path}>
-            <a>
-              <Title type="sidebar" is="h3">
-                {title}
-              </Title>
-            </a>
-          </Link>
+          <LinkWrapper>
+            <Title type="sidebar" is="h3">
+              {title}
+            </Title>
+          </LinkWrapper>
         </div>
 
         {!cover && (
           <div className="summary">
-            <Link {...path}>
-              <a>{cleanedSummary}</a>
-            </Link>
+            <LinkWrapper>{cleanedSummary}</LinkWrapper>
           </div>
         )}
 
