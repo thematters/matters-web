@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Title } from '~/components'
+import { Title, Translate } from '~/components'
 
-import { UrlFragments } from '~/common/enums'
+import { TEXT, UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -46,8 +46,7 @@ const SidebarDigest = ({
   extraContainerClass,
   ...actionControls
 }: SidebarDigestProps) => {
-  const { author, slug, mediaHash, title, live, state } = article
-  const cover = 'cover' in article ? article.cover : null
+  const { author, slug, mediaHash, live, state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -66,6 +65,16 @@ const SidebarDigest = ({
       ? { [extraContainerClass]: extraContainerClass }
       : {})
   })
+  const isBanned = state === 'banned'
+  const cover = 'cover' in article && !isBanned ? article.cover : null
+  const title = isBanned ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.articleBanned}
+      zh_hans={TEXT.zh_hans.articleBanned}
+    />
+  ) : (
+    article.title
+  )
   const contentClasses = classNames({
     content: true,
     'no-cover': !cover,
@@ -74,31 +83,36 @@ const SidebarDigest = ({
     disabled
   })
 
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a>{children}</a>
+      </Link>
+    )
+
   return (
     <section className={containerClasses}>
       <div className={contentClasses}>
         <div className="left">
-          <Link {...path}>
-            <a>
-              <Title type="sidebar" is="h2">
-                {title}
-              </Title>
-            </a>
-          </Link>
+          <LinkWrapper>
+            <Title type="sidebar" is="h2">
+              {title}
+            </Title>
+          </LinkWrapper>
           <Actions article={article} type="sidebar" {...actionControls} />
         </div>
 
         {hasCover && cover && (
-          <Link {...path}>
-            <a>
-              <div
-                className="cover"
-                style={{
-                  backgroundImage: `url(${cover})`
-                }}
-              />
-            </a>
-          </Link>
+          <LinkWrapper>
+            <div
+              className="cover"
+              style={{
+                backgroundImage: `url(${cover})`
+              }}
+            />
+          </LinkWrapper>
         )}
       </div>
 

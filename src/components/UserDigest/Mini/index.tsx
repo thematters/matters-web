@@ -2,8 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
@@ -67,7 +69,12 @@ const Mini = ({
         <span className={containerClasses}>
           <Avatar size={avatarSize} />
           <span className="name-container">
-            <span className="name">{user.displayName}</span>
+            <span className="name">
+              <Translate
+                zh_hant={TEXT.zh_hant.accountBanned}
+                zh_hans={TEXT.zh_hans.accountBanned}
+              />
+            </span>
           </span>
         </span>
 

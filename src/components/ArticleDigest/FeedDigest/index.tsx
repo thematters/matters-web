@@ -25,6 +25,7 @@ const fragments = {
     fragment FeedDigestArticle on Article {
       id
       title
+      state
       slug
       cover
       summary
@@ -48,6 +49,7 @@ const fragments = {
     fragment FolloweeFeedDigestArticle on Article {
       id
       title
+      state
       slug
       cover
       summary
@@ -84,16 +86,7 @@ const FeedDigest = ({
   inFolloweeFeed?: boolean
   inTagDetail?: boolean
 } & ActionsControls) => {
-  const {
-    cover,
-    author,
-    slug,
-    mediaHash,
-    title,
-    summary,
-    live,
-    sticky
-  } = article
+  const { author, slug, mediaHash, summary, live, sticky, state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -106,11 +99,30 @@ const FeedDigest = ({
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
+  const isBanned = state === 'banned'
+  const cover = !isBanned ? article.cover : null
+  const title = isBanned ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.articleBanned}
+      zh_hans={TEXT.zh_hans.articleBanned}
+    />
+  ) : (
+    article.title
+  )
+  const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const contentClasses = classNames({
     content: true,
     'no-cover': !cover
   })
-  const cleanedSummary = stripHtml(summary)
+
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a>{children}</a>
+      </Link>
+    )
 
   return (
     <section className="container">
@@ -157,35 +169,29 @@ const FeedDigest = ({
 
       <div className={contentClasses}>
         <div className="title">
-          <Link {...path}>
-            <a>
-              <Title type="feed" is="h2">
-                {title}
-              </Title>
-            </a>
-          </Link>
+          <LinkWrapper>
+            <Title type="feed" is="h2">
+              {title}
+            </Title>
+          </LinkWrapper>
         </div>
         <div className="description">
-          <Link {...path}>
-            <a>
-              <p>{cleanedSummary}</p>
-            </a>
-          </Link>
+          <LinkWrapper>
+            <p>{cleanedSummary}</p>
+          </LinkWrapper>
 
           <Actions article={article} type="feed" {...actionControls} />
         </div>
 
         {cover && (
-          <Link {...path}>
-            <a>
-              <div
-                className="cover"
-                style={{
-                  backgroundImage: `url(${cover})`
-                }}
-              />
-            </a>
-          </Link>
+          <LinkWrapper>
+            <div
+              className="cover"
+              style={{
+                backgroundImage: `url(${cover})`
+              }}
+            />
+          </LinkWrapper>
         )}
       </div>
 

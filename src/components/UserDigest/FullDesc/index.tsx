@@ -2,12 +2,13 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { TextIcon } from '~/components'
+import { TextIcon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
 import IconLike from '~/components/Icon/Like'
 
+import { TEXT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 
 import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
@@ -101,7 +102,12 @@ const FullDesc = ({
         <section className="content">
           <header className="header-container">
             <div className="header-left">
-              <span className={nameSizeClasses}>{user.displayName}</span>
+              <span className={nameSizeClasses}>
+                <Translate
+                  zh_hant={TEXT.zh_hant.accountBanned}
+                  zh_hans={TEXT.zh_hans.accountBanned}
+                />
+              </span>
             </div>
           </header>
         </section>
