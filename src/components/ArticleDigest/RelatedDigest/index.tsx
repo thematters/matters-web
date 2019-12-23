@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Title } from '~/components'
+import { Title, Translate } from '~/components'
 
-import { UrlFragments } from '~/common/enums'
+import { TEXT, UrlFragments } from '~/common/enums'
 import {
   countWordsLength,
   makeSummary,
@@ -21,6 +21,7 @@ const fragments = {
     fragment RelatedDigestArticle on Article {
       id
       title
+      state
       slug
       cover
       summary
@@ -44,7 +45,7 @@ const RelatedDigest = ({
 }: {
   article: RelatedDigestArticle
 } & ActionsControls) => {
-  const { cover, author, slug, summary, mediaHash, title, live } = article
+  const { author, slug, summary, mediaHash, live, state } = article
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
   }
@@ -57,11 +58,27 @@ const RelatedDigest = ({
     fragment: live ? UrlFragments.COMMENTS : ''
   })
 
-  const cleanedTitle = makeTitle(title, 70)
-  const cleanedSummary = makeSummary(
-    summary,
-    countWordsLength(title) > 40 ? 60 : 80
+  const isBanned = state === 'banned'
+  const cover = !isBanned ? article.cover : null
+  const title = isBanned ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.articleBanned}
+      zh_hans={TEXT.zh_hans.articleBanned}
+    />
+  ) : (
+    makeTitle(article.title, 70)
   )
+  const cleanedSummary = isBanned
+    ? ''
+    : makeSummary(summary, countWordsLength(article.title) > 40 ? 60 : 80)
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a>{children}</a>
+      </Link>
+    )
 
   const contentClasses = classNames({
     content: true,
@@ -71,14 +88,9 @@ const RelatedDigest = ({
   return (
     <section className="container">
       {cover && (
-        <Link {...path}>
-          <a>
-            <div
-              className="cover"
-              style={{ backgroundImage: `url(${cover})` }}
-            />
-          </a>
-        </Link>
+        <LinkWrapper>
+          <div className="cover" style={{ backgroundImage: `url(${cover})` }} />
+        </LinkWrapper>
       )}
 
       <div className={contentClasses}>
@@ -86,7 +98,7 @@ const RelatedDigest = ({
           <Link {...path}>
             <a>
               <Title type="sidebar" is="h3">
-                {cleanedTitle}
+                {title}
               </Title>
             </a>
           </Link>

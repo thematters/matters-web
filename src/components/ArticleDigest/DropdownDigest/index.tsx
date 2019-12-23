@@ -3,10 +3,11 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { MouseEventHandler } from 'react'
 
-import { Title } from '~/components'
+import { Title, Translate } from '~/components'
 import { Icon } from '~/components/Icon'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import ICON_ARROW_UP_RIGHT from '~/static/icons/arrow-up-right.svg?sprite'
 
@@ -43,7 +44,7 @@ const DropdownDigest = ({
   disabled,
   onClick
 }: DropdownDigestProps & { onClick?: MouseEventHandler }) => {
-  const { author, slug, mediaHash, title, state } = article
+  const { author, slug, mediaHash, state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -59,6 +60,24 @@ const DropdownDigest = ({
     container: true,
     'has-arrow': hasArrow
   })
+  const isBanned = state === 'banned'
+  const title = isBanned ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.articleBanned}
+      zh_hans={TEXT.zh_hans.articleBanned}
+    />
+  ) : (
+    article.title
+  )
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a>{children}</a>
+      </Link>
+    )
+
   const contentClass = classNames({
     content: true,
     inactive: state !== 'active',
@@ -68,13 +87,11 @@ const DropdownDigest = ({
   return (
     <section className={conatinerClass}>
       <div className={contentClass} onClick={onClick}>
-        <Link {...path}>
-          <a>
-            <Title type="sidebar" is="h2">
-              {title}
-            </Title>
-          </a>
-        </Link>
+        <LinkWrapper>
+          <Title type="sidebar" is="h2">
+            {title}
+          </Title>
+        </LinkWrapper>
 
         <UserDigest.Mini
           user={author}

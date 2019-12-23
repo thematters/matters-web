@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
@@ -47,7 +49,12 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
       <section className="container">
         <Avatar size="small" />
         <section className="name">
-          <span className="displayName">{user.displayName}</span>
+          <span className="displayName">
+            <Translate
+              zh_hant={TEXT.zh_hant.accountBanned}
+              zh_hans={TEXT.zh_hans.accountBanned}
+            />
+          </span>
         </section>
 
         <style jsx>{styles}</style>
