@@ -8,11 +8,15 @@ import { INVALID_NAMES } from '~/common/enums'
 export interface ValidEmailOptions {
   allowPlusSign: boolean
 }
+
+const EMAIL_DOMAIN_WHITELIST = ['matters.news']
+
 export const isValidEmail = (str: string, options: ValidEmailOptions) => {
   const { allowPlusSign } = options
+  const isInWhitelist = EMAIL_DOMAIN_WHITELIST.indexOf(str.split('@')[1]) >= 0
 
   // check "+" sign
-  if (!allowPlusSign && str.indexOf('+') >= 0) {
+  if (!allowPlusSign && !isInWhitelist && str.indexOf('+') >= 0) {
     return false
   }
 
