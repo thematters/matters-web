@@ -104,8 +104,8 @@ const FullDesc = ({
             <div className="header-left">
               <span className={nameSizeClasses}>
                 <Translate
-                  zh_hant={TEXT.zh_hant.accountBanned}
-                  zh_hans={TEXT.zh_hans.accountBanned}
+                  zh_hant={TEXT.zh_hant.accountArchived}
+                  zh_hans={TEXT.zh_hans.accountArchived}
                 />
               </span>
             </div>
