@@ -5,6 +5,7 @@ import { DateTime, Icon } from '~/components'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 
+import { responseStateIs } from '~/common/utils'
 import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
@@ -62,7 +63,7 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${Appreciation.fragments.article}
-    ${ResponseCount.fragments.article}
+    ${ResponseCount.fragments.response}
     ${BookmarkButton.fragments.article}
     ${TopicScore.fragments.article}
     ${State.fragments.response}
@@ -76,16 +77,6 @@ const IconDotDivider = () => (
     style={{ width: 18, height: 18 }}
   />
 )
-
-const isNotActive = (article: any): boolean => {
-  if (article.hasOwnProperty('state')) {
-    return article.state !== 'active'
-  }
-  if (article.hasOwnProperty('articleState')) {
-    return article.articleState !== 'active'
-  }
-  return true
-}
 
 const Actions = ({
   article,
@@ -101,7 +92,8 @@ const Actions = ({
     ['feature', 'feed', 'response'].indexOf(type) >= 0 ? 'small' : 'xsmall'
 
   // used in user article feed
-  if (hasState && isNotActive(article)) {
+  const isNotActive = !responseStateIs(article, 'active')
+  if (hasState && isNotActive) {
     return (
       <footer className="actions">
         <State article={article} />
