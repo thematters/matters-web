@@ -100,7 +100,6 @@ const CommentForm = ({
 
   const push = clientPreferenceData?.clientPreference.push
   const draftContent = data?.commentDraft.content || ''
-  const shouldShowPush = !push || !push.supported || push.enabled
 
   const [isSubmitting, setSubmitting] = useState(false)
   const [expand, setExpand] = useState(defaultExpand || false)
@@ -131,8 +130,13 @@ const CommentForm = ({
         submitCallback()
       }
 
+      // skip
+      if (!push || !push.supported || push.enabled) {
+        return
+      }
+
       // auto re-subscribe push
-      if (!shouldShowPush && Notification.permission === 'granted') {
+      if (Notification.permission === 'granted') {
         subscribePush({ silent: true })
         return
       }
@@ -142,13 +146,13 @@ const CommentForm = ({
           detail: {
             color: 'green',
             header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
-            content: shouldShowPush && (
+            content: (
               <Translate
                 zh_hant={TEXT.zh_hant.pushDescription}
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: shouldShowPush && (
+            customButton: (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
