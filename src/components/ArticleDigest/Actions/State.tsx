@@ -4,6 +4,7 @@ import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 
+import { responseStateIs } from '~/common/utils'
 import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
 
 import { ResponseStateActionsArticle } from './__generated__/ResponseStateActionsArticle'
@@ -23,22 +24,12 @@ const fragments = {
   `
 }
 
-const isActive = (article: any): boolean => {
-  if (article.hasOwnProperty('state')) {
-    return article.state === 'active'
-  }
-  if (article.hasOwnProperty('articleState')) {
-    return article.articleState === 'active'
-  }
-  return false
-}
-
 const State = ({
   article
 }: {
   article: StateActionsArticle | ResponseStateActionsArticle
 }) => {
-  if (isActive(article)) {
+  if (responseStateIs(article, 'active')) {
     return null
   }
 

@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
+import { responseStateIs } from '~/common/utils'
 import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
@@ -32,16 +33,6 @@ const fragments = {
     ${StickyButton.fragments.article}
     ${ArchiveButton.fragments.followee}
   `
-}
-
-const isActive = (article: any): boolean => {
-  if (article.hasOwnProperty('state')) {
-    return article.state === 'active'
-  }
-  if (article.hasOwnProperty('articleState')) {
-    return article.articleState === 'active'
-  }
-  return false
 }
 
 const DropdownContent: React.FC<{
@@ -92,11 +83,11 @@ const DropdownActions = ({
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const isActive = responseStateIs(article, 'active')
 
   if (
     (inTagDetail && !isMattyUser) ||
-    (!inTagDetail &&
-      (!isArticleAuthor || !isActive(article) || viewer.isInactive))
+    (!inTagDetail && (!isArticleAuthor || !isActive || viewer.isInactive))
   ) {
     return null
   }
