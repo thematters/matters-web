@@ -51,8 +51,8 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
         <section className="name">
           <span className="displayName">
             <Translate
-              zh_hant={TEXT.zh_hant.accountBanned}
-              zh_hans={TEXT.zh_hans.accountBanned}
+              zh_hant={TEXT.zh_hant.accountArchived}
+              zh_hans={TEXT.zh_hans.accountArchived}
             />
           </span>
         </section>
