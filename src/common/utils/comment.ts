@@ -8,13 +8,16 @@ import { BaseDigestComment } from '~/components/GQL/fragments/__generated__/Base
  * @param comments
  */
 export const filterComment = (comment: BaseDigestComment) => {
-  const isBanned = comment.state === 'banned'
-  const isArchived = comment.state === 'archived'
+  const isActive = comment.state === 'active'
   const isDescendant = comment.parentComment && comment.parentComment.id
-  const hasDescendantComments = _get(comment, 'comments.edges.length', 0) > 0
+  const descendants = _get(comment, 'comments.edges', [])
+  const hasActiveDescendants =
+    descendants.filter(
+      ({ node }: { node: BaseDigestComment }) => node.state === 'active'
+    ).length > 0
 
-  // skip if comment's state isn't banned or archived
-  if (!isBanned && !isArchived) {
+  // skip if comment's state is active
+  if (isActive) {
     return true
   }
 
@@ -24,7 +27,7 @@ export const filterComment = (comment: BaseDigestComment) => {
   }
 
   // skip if it isn't a descendant comment and has descendant comments
-  if (!isDescendant && hasDescendantComments) {
+  if (!isDescendant && hasActiveDescendants) {
     return true
   }
 

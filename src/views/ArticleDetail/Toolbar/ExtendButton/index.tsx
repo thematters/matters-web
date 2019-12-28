@@ -44,7 +44,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
       collection: [article.id]
     }
   })
-  const canExtend = viewer.isActive
+  const canExtend = !viewer.isInactive
 
   if (!canExtend) {
     return null

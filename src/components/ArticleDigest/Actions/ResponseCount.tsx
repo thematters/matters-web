@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
-import { analytics, numAbbr, toPath } from '~/common/utils'
+import { analytics, numAbbr, responseStateIs, toPath } from '~/common/utils'
 import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
@@ -16,6 +16,19 @@ const fragments = {
     fragment ResponseCountArticle on Article {
       id
       slug
+      state
+      mediaHash
+      responseCount
+      author {
+        userName
+      }
+    }
+  `,
+  response: gql`
+    fragment ResponseCountArticle on Article {
+      id
+      slug
+      articleState: state
       mediaHash
       responseCount
       author {
@@ -45,36 +58,44 @@ const ResponseCount = ({
     mediaHash,
     fragment: UrlFragments.COMMENTS
   })
+  const isBanned = responseStateIs(article, 'banned')
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a
+          onClick={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+              entrance: article.id,
+              type: 'article-digest'
+            })
+          }}
+        >
+          {children}
+        </a>
+      </Link>
+    )
 
   return (
-    <Link {...path}>
-      <a
-        className="response-count"
-        onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-            entrance: article.id,
-            type: 'article-digest'
-          })
-        }}
-      >
-        <TextIcon
-          icon={
-            <Icon
-              size={size}
-              id={ICON_COMMENT_SM.id}
-              viewBox={ICON_COMMENT_SM.viewBox}
-            />
-          }
-          color="grey"
-          weight="medium"
-          text={numAbbr(article.responseCount || 0)}
-          size={size === 'small' ? 'sm' : 'xs'}
-          spacing="xxtight"
-        />
+    <LinkWrapper>
+      <TextIcon
+        icon={
+          <Icon
+            size={size}
+            id={ICON_COMMENT_SM.id}
+            viewBox={ICON_COMMENT_SM.viewBox}
+          />
+        }
+        color="grey"
+        weight="medium"
+        text={numAbbr(article.responseCount || 0)}
+        size={size === 'small' ? 'sm' : 'xs'}
+        spacing="xxtight"
+      />
 
-        <style jsx>{styles}</style>
-      </a>
-    </Link>
+      <style jsx>{styles}</style>
+    </LinkWrapper>
   )
 }
 

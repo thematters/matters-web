@@ -6,7 +6,6 @@ export default gql`
   query TagDetailArticles(
     $id: ID!
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {

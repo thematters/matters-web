@@ -12,7 +12,6 @@ import { HomeToday } from './__generated__/HomeToday'
 
 export const HOME_TODAY = gql`
   query HomeToday(
-    $hasArticleDigestActionAuthor: Boolean = true
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {

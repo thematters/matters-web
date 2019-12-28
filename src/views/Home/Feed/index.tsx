@@ -44,7 +44,6 @@ export const queries = {
   hottest: gql`
     query HottestFeed(
       $after: String
-      $hasArticleDigestActionAuthor: Boolean = false
       $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
     ) {
@@ -62,7 +61,6 @@ export const queries = {
   newest: gql`
     query NewestFeed(
       $after: String
-      $hasArticleDigestActionAuthor: Boolean = false
       $hasArticleDigestActionBookmark: Boolean = true
       $hasArticleDigestActionTopicScore: Boolean = false
     ) {

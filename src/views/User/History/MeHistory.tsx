@@ -13,7 +13,6 @@ import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed(
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {

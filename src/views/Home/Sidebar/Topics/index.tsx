@@ -14,7 +14,6 @@ import styles from './styles.css'
 
 export const SIDEBAR_TOPICS = gql`
   query SidebarTopics(
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = false
     $hasArticleDigestCover: Boolean = false
     $hasArticleDigestActionTopicScore: Boolean = true

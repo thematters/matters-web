@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
@@ -40,6 +42,25 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
     page: 'userProfile',
     userName: user.userName || ''
   })
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <section className="container">
+        <Avatar size="small" />
+        <section className="name">
+          <span className="displayName">
+            <Translate
+              zh_hant={TEXT.zh_hant.accountArchived}
+              zh_hans={TEXT.zh_hans.accountArchived}
+            />
+          </span>
+        </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
     <>

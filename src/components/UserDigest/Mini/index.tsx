@@ -2,8 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
@@ -32,6 +34,9 @@ const fragments = {
       id
       userName
       displayName
+      status {
+        state
+      }
       ...AvatarUser
     }
     ${Avatar.fragments.user}
@@ -56,25 +61,42 @@ const Mini = ({
     [`spacing-${spacing}`]: true,
     [`text-${textSize}`]: true
   })
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <section>
+        <span className={containerClasses}>
+          <Avatar size={avatarSize} />
+          <span className="name-container">
+            <span className="name">
+              <Translate
+                zh_hant={TEXT.zh_hant.accountArchived}
+                zh_hans={TEXT.zh_hans.accountArchived}
+              />
+            </span>
+          </span>
+        </span>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
-    <>
-      <section>
-        <Link {...path}>
-          <a className={containerClasses}>
-            <Avatar size={avatarSize} user={user} />
-            <span className="name-container">
-              <span className="name">{user.displayName}</span>
-              {hasUserName && (
-                <span className="username">@{user.userName}</span>
-              )}
-            </span>
-          </a>
-        </Link>
-      </section>
+    <section>
+      <Link {...path}>
+        <a className={containerClasses}>
+          <Avatar size={avatarSize} user={user} />
+          <span className="name-container">
+            <span className="name">{user.displayName}</span>
+            {hasUserName && <span className="username">@{user.userName}</span>}
+          </span>
+        </a>
+      </Link>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

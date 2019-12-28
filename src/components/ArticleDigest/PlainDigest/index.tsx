@@ -2,6 +2,9 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { Translate } from '~/components'
+
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { PlainDigestArticle } from './__generated__/PlainDigestArticle'
@@ -29,7 +32,7 @@ const fragments = {
 }
 
 const PlainDigest = ({ article, disabled }: PlainDigestProps) => {
-  const { author, mediaHash, slug, title, state } = article
+  const { author, mediaHash, slug, state } = article
 
   if (!author || !author.userName || !mediaHash) {
     return null
@@ -41,6 +44,24 @@ const PlainDigest = ({ article, disabled }: PlainDigestProps) => {
     slug,
     mediaHash
   })
+  const isBanned = state === 'banned'
+  const title = isBanned ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.articleBanned}
+      zh_hans={TEXT.zh_hans.articleBanned}
+    />
+  ) : (
+    article.title
+  )
+  const LinkWrapper: React.FC = ({ children }) =>
+    isBanned ? (
+      <span>{children}</span>
+    ) : (
+      <Link {...path}>
+        <a>{children}</a>
+      </Link>
+    )
+
   const contentClasses = classNames({
     content: true,
     inactive: state !== 'active',
@@ -50,11 +71,9 @@ const PlainDigest = ({ article, disabled }: PlainDigestProps) => {
   return (
     <section className="container">
       <div className={contentClasses}>
-        <Link {...path}>
-          <a>
-            <h2>{title}</h2>
-          </a>
-        </Link>
+        <LinkWrapper>
+          <h2>{title}</h2>
+        </LinkWrapper>
       </div>
 
       <style jsx>{styles}</style>

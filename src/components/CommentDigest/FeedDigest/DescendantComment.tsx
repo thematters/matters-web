@@ -62,6 +62,7 @@ const DescendantComment = ({
           <CommentForm
             commentId={comment.id}
             articleId={comment.article.id}
+            articleAuthorId={comment.article.author.id}
             submitCallback={() => setEdit(false)}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
             blocked={comment.article.author.isBlocking}

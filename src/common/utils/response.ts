@@ -18,3 +18,20 @@ export const filterResponses = (responses: any[]) =>
     // comment
     return filterComment(response)
   })
+
+export const responseStateIs = (
+  response: any,
+  state: 'active' | 'archived' | 'banned' | 'collapsed'
+): boolean => {
+  // comment
+  if (response.hasOwnProperty('state')) {
+    return response.state === state
+  }
+
+  // article
+  if (response.hasOwnProperty('articleState')) {
+    return response.articleState === state
+  }
+
+  return true
+}

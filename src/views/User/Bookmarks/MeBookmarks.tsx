@@ -12,7 +12,6 @@ import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed(
     $after: String
-    $hasArticleDigestActionAuthor: Boolean = false
     $hasArticleDigestActionBookmark: Boolean = true
     $hasArticleDigestActionTopicScore: Boolean = false
   ) {
