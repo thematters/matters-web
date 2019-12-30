@@ -45,8 +45,8 @@ const SignUpComplete = ({
 
         <p>
           <Translate
-            zh_hant="我們也為你準備好了 Liker ID，登入 "
-            zh_hans="我们也为你准备好了 Liker ID，登陆 "
+            zh_hant="你的專屬 Liker ID 已就位，登入 "
+            zh_hans="你的专属 Liker ID 已就位，登陆 "
           />
           <a className="u-link-green" href="https://like.co" target="_blank">
             like.co

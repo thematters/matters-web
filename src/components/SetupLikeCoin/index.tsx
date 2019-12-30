@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
+import SignUpComplete from '~/components/Form/SignUpComplete'
+
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import Binding from './Binding'
-import Complete from './Complete'
 import Generating from './Generating'
 import Select from './Select'
 
@@ -66,7 +67,7 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
           scrollLock={scrollLock}
         />
       )}
-      {step === 'complete' && <Complete scrollLock={scrollLock} />}
+      {step === 'complete' && <SignUpComplete scrollLock={scrollLock} />}
     </>
   )
 }
