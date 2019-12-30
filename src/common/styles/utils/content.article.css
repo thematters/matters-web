@@ -10,9 +10,9 @@
     margin-bottom: var(--spacing-loose);
     padding-bottom: var(--spacing-base);
 
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-xl);
-    line-height: 1.33333333;
+    font-size: var(--font-size-article-title);
+    line-height: var(--line-height-article-title);
+    font-weight: var(--font-weight-article-title);
 
     &::placeholder {
       color: var(--color-grey);

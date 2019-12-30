@@ -5,9 +5,9 @@
 }
 
 .article {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  line-height: 1.33333333;
+  font-size: var(--font-size-article-title);
+  line-height: var(--line-height-article-title);
+  font-weight: var(--font-weight-article-title);
 }
 
 .page {
@@ -19,9 +19,9 @@
 }
 
 .feed {
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-xm);
-  line-height: 1.38888889;
+  font-size: var(--font-size-feed-title);
+  line-height: var(--line-height-feed-title);
+  font-weight: var(--font-weight-feed-title);
 }
 
 .modal {
