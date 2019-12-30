@@ -126,9 +126,9 @@ export default {
 
 <details class="u-content u-details">
   <summary>
-    <h3>註冊社區會員享有全部功能</h3>
+    <h3>註冊用戶權限</h3>
   </summary>
-  <p>在未登錄狀態下，你可免費閱讀與分享 Matters 站上作品。但如需創作或參與社區互動，請註冊登錄享有全部功能，包括創作、讚賞、評論、關聯、分享、收藏、點踩評論，追蹤他人等。</p>
+  <p>在未登錄狀態下，你可免費閱讀與分享 Matters 站上作品。如需創作，只要註冊後即可發佈你的作品。當你的作品累積滿 30 個讚，便可解鎖評論、讚賞他人作品的功能。</p>
 </details>
 
 <details class="u-content u-details">
@@ -140,6 +140,15 @@ export default {
   <p>社區自治具體實行方法，請點擊<a class="u-link-green" href="https://matters.news/@hi176/matters-%E7%A4%BE%E5%8C%BA%E8%87%AA%E6%B2%BB%E5%AE%9E%E9%AA%8C%E5%90%AF%E5%8A%A8-zdpuAtuu2Y33zg5L7WLDonpa9RRsYNXHu7B9kYkZPhfXQSMmQ" target="_blank">這裡</a>查看（自治規則會根據運行情況隨時更新）。</p>
 </details>
 
+<details class="u-content u-details">
+  <summary>
+    <h3>懲罰相關</h3>
+  </summary>
+  <p>在社區訴訟中被裁定為進行懲罰的用戶，以及違反已有社區約章的用戶，將面臨禁言、凍結和註銷三種處罰。</p>
+  <p>一旦被禁言和凍結，用戶將無法發佈新的文章和評論，被禁言的用戶依然可以頂踩他人的評論、刪除自己的作品與評論，而被凍結用戶將無法使用所有與發佈和互動相關的功能。被禁言和凍結的用戶依然可以登錄網站，其文章、評論和個人主頁依然保留。</p>
+  <p>針對嚴重違反社區約章的用戶，站方將註銷帳號。一旦帳號被註銷，將無法再登陸使用且無法被恢復。被註銷帳號發佈的文章、評論和個人主頁將被隱藏。之前經由 Matters 發佈至IPFS的作品仍永久保存至分佈式網絡，可以通過其餘分佈式入口訪問已發佈至 IPFS 的作品。</p>
+  <p>被註銷用戶仍然可以登錄 LikeCoin，進行錢包相關操作。</p>
+</details>
 
 <details class="u-content u-details">
   <summary>
@@ -275,9 +284,9 @@ export default {
 
 <details class="u-content u-details">
   <summary>
-    <h3>注册社区会员享有全部功能</h3>
+    <h3>注册用户权限</h3>
   </summary>
-  <p>在未登录状态下，你可免费阅读与分享 Matters 站上作品。但如需创作或参与社区互动，请注册登录享有全部功能，包括创作、赞赏、评论、关联、分享、收藏、点踩评论，追踪他人等。</p>
+  <p>在未登录状态下，你可免费阅读与分享 Matters 站上作品。如需创作，只要注册后即可发布你的作品。当你的作品累积满 30 个赞，便可解锁评论、赞赏他人作品的功能。</p>
 </details>
 
 <details class="u-content u-details">
@@ -289,6 +298,15 @@ export default {
   <p>社区自治具体实行方法，请点击<a class="u-link-green" href="https://matters.news/@hi176/matters-%E7%A4%BE%E5%8C%BA%E8%87%AA%E6%B2%BB%E5%AE%9E%E9%AA%8C%E5%90%AF%E5%8A%A8-zdpuAtuu2Y33zg5L7WLDonpa9RRsYNXHu7B9kYkZPhfXQSMmQ" target="_blank">这里</a>查看（自治规则会根据运行情况随时更新）。</p>
 </details>
 
+<details class="u-content u-details">
+  <summary>
+    <h3>惩罚相关</h3>
+  </summary>
+  <p>在社区诉讼中被裁定为进行惩罚的用户，以及违反已有社区约章的用户，将面临禁言、冻结和注销三种处罚。</p>
+  <p>一旦被禁言和冻结，用户将无法发布新的文章和评论，被禁言的用户依然可以顶踩他人的评论、删除自己的作品与评论，而被冻结用户将无法使用所有与发布和互动相关的功能。被禁言和冻结的用户依然可以登录网站，其文章、评论和个人主页依然保留。</p>
+  <p>针对严重违反社区约章的用户，站方将注销帐号。一旦帐号被注销，将无法再登陆使用且无法被恢复。被注销帐号发布的文章、评论和个人主页将被隐藏。之前经由 Matters 发布至IPFS的作品仍永久保存至分布式网络，可以通过其余分布式入口访问已发布至 IPFS 的作品。</p>
+  <p>被注销用户仍然可以登录 LikeCoin，进行钱包相关操作。</p>
+</details>
 
 <details class="u-content u-details">
   <summary>
