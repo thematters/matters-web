@@ -1,5 +1,5 @@
 .container {
-  margin: 0rem var(--spacing-tight) var(--spacing-default);
+  margin: 0rem var(--spacing-base) var(--spacing-loose);
 }
 
 .form {
@@ -11,7 +11,7 @@ ul {
     position: relative;
 
     padding: var(--spacing-x-tight);
-    margin: var(--spacing-tight) 0 0 0;
+    margin: var(--spacing-base) 0 0 0;
 
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 2px;
@@ -30,7 +30,7 @@ ul {
 
         display: none;
         position: absolute;
-        right: var(--spacing-default);
+        right: var(--spacing-loose);
         top: 0;
         height: 100%;
 
@@ -53,7 +53,7 @@ ul {
     &:hover,
     &:focus {
       border-color: var(--color-matters-green);
-      background: var(--color-bg-green);
+      background: var(--color-green-lighter);
     }
 
     @media (--lg-up) {
@@ -67,7 +67,7 @@ ul {
       &:hover,
       &:focus {
         border-color: var(--color-matters-green);
-        background: var(--color-bg-green);
+        background: var(--color-green-lighter);
 
         & .delete-handler {
           opacity: 1;

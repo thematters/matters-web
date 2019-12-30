@@ -1,7 +1,7 @@
 .responses {
   & h2 {
     @mixin font-serif;
-    padding: var(--spacing-xx-loose) 0 var(--spacing-default);
+    padding: var(--spacing-xxx-loose) 0 var(--spacing-loose);
     font-size: var(--font-size-lg);
   }
 
@@ -35,7 +35,7 @@
     font-size: var(--font-size-xm);
   }
 
-  margin-top: var(--spacing-loose);
+  margin-top: var(--spacing-x-loose);
 
   & ul {
     & li + li {

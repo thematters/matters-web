@@ -15,7 +15,7 @@
 }
 
 header {
-  padding: 0 var(--spacing-loose);
+  padding: 0 var(--spacing-x-loose);
   margin-top: calc(var(--box-avatar-size) / 2 * -1);
 
   & :global(.avatar) {
@@ -24,7 +24,7 @@ header {
   }
 
   & h1 {
-    margin-top: var(--spacing-default);
+    margin-top: var(--spacing-loose);
 
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-md);
@@ -38,7 +38,7 @@ header {
   }
 
   @media (--md-up) {
-    padding: 0 var(--spacing-xx-loose);
+    padding: 0 var(--spacing-xxx-loose);
 
     & :global(.avatar) {
       width: var(--box-avatar-size);

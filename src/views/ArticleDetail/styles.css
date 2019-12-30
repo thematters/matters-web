@@ -1,7 +1,7 @@
 .title {
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--spacing-tight);
+  padding-bottom: var(--spacing-base);
 }
 
 .subtitle {
@@ -16,20 +16,20 @@
 }
 
 .author {
-  margin-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-base);
 }
 
 .content {
   @mixin border-bottom-grey;
 
   position: relative;
-  padding: var(--spacing-default) 0 0 0;
-  margin-bottom: var(--spacing-default);
+  padding: var(--spacing-loose) 0 0 0;
+  margin-bottom: var(--spacing-loose);
 
   line-height: var(--line-height-article-base);
 
   @media (--sm-up) {
-    padding-left: var(--spacing-tight);
-    padding-right: var(--spacing-tight);
+    padding-left: var(--spacing-base);
+    padding-right: var(--spacing-base);
   }
 }

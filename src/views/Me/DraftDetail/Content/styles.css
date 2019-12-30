@@ -1,7 +1,7 @@
 header input {
   @mixin border-bottom-grey;
-  margin-bottom: var(--spacing-default);
-  padding-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-loose);
+  padding-bottom: var(--spacing-base);
 
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-xl);

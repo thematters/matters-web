@@ -1,11 +1,11 @@
 article {
-  margin-bottom: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-xx-loose);
 }
 
 aside :global(> section + section) {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--spacing-xx-loose);
 }
 
 .mobile-search-bar {
-  margin-bottom: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-xx-loose);
 }

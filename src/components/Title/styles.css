@@ -44,7 +44,6 @@
 
 .sidebar {
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-sm); /* fallback */
-  font-size: calc(var(--font-size-sm) + 1px);
+  font-size: var(--font-size-md-s);
   line-height: 1.6;
 }

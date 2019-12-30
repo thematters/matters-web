@@ -6,7 +6,7 @@
   margin-left: 0;
 
   @media (--lg-up) {
-    margin-left: calc(var(--spacing-loose) * -1);
+    margin-left: calc(var(--spacing-x-loose) * -1);
   }
   @media (--xl-up) {
     margin-left: -8.75rem;
@@ -19,27 +19,27 @@
 
 .content-container {
   position: relative;
-  margin: -7.5rem 0 var(--spacing-x-loose) 0;
+  margin: -7.5rem 0 var(--spacing-xx-loose) 0;
   padding: 0;
   background: var(--color-white);
 
   @media (--sm-up) {
-    padding-left: var(--spacing-tight);
-    padding-right: var(--spacing-tight);
+    padding-left: var(--spacing-base);
+    padding-right: var(--spacing-base);
   }
   @media (--lg-up) {
     margin-top: -5.5rem;
-    margin-left: calc(var(--spacing-loose) * -1);
-    padding-left: var(--spacing-loose);
-    padding-right: var(--spacing-loose);
+    margin-left: calc(var(--spacing-x-loose) * -1);
+    padding-left: var(--spacing-x-loose);
+    padding-right: var(--spacing-x-loose);
   }
   @media (--xl-up) {
-    margin-left: calc(var(--spacing-loose) * -1);
+    margin-left: calc(var(--spacing-x-loose) * -1);
   }
 }
 .content {
   position: relative;
-  padding-top: var(--spacing-default);
+  padding-top: var(--spacing-loose);
 
   & :global(.label) {
     position: absolute;
@@ -57,6 +57,6 @@
   line-height: 1.71428571;
 
   & :global(.actions > *) {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--spacing-base);
   }
 }

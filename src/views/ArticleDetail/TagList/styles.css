@@ -1,6 +1,6 @@
 .tag-list {
   & :global(.tag) {
-    padding-right: var(--spacing-default);
-    padding-bottom: var(--spacing-default);
+    padding-right: var(--spacing-loose);
+    padding-bottom: var(--spacing-loose);
   }
 }

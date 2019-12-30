@@ -4,8 +4,8 @@
 }
 
 .spacing-vertical-default {
-  padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-loose);
+  padding-top: var(--spacing-x-loose);
+  padding-bottom: var(--spacing-x-loose);
 }
 .spacing-vertical-0 {
   padding-top: 0;
@@ -13,8 +13,8 @@
 }
 
 .spacing-horizontal-default {
-  padding-left: var(--spacing-default);
-  padding-right: var(--spacing-default);
+  padding-left: var(--spacing-loose);
+  padding-right: var(--spacing-loose);
 }
 .spacing-horizontal-0 {
   padding-left: 0;
@@ -22,7 +22,7 @@
 }
 
 .description {
-  margin-top: var(--spacing-default);
+  margin-top: var(--spacing-loose);
   font-size: var(--font-size-md);
   color: var(--color-grey);
 }
@@ -35,7 +35,7 @@
 }
 
 .children {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--spacing-x-loose);
   text-align: center;
 
   & :global(> *) {

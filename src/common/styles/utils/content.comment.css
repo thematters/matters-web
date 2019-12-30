@@ -6,10 +6,10 @@
   line-height: 1.6;
 
   & :global(> * + *) {
-    margin: var(--spacing-tight) 0;
+    margin: var(--spacing-base) 0;
   }
   & :global(> *:last-child) {
-    margin-bottom: var(--spacing-tight);
+    margin-bottom: var(--spacing-base);
   }
 
   /* Media
@@ -27,10 +27,9 @@
 
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
-      padding: 0 var(--spacing-tight);
+      padding: 0 var(--spacing-base);
 
-      font-size: var(--font-size-sm); /* fallback */
-      font-size: calc(var(--font-size-sm) - 1px);
+      font-size: var(--font-size-sm-s);
       color: var(--color-grey);
 
       @media (--sm-up) {
@@ -43,14 +42,14 @@
    ========================================================================== */
   & :global(blockquote) {
     width: 100%;
-    padding: 0 var(--spacing-tight);
+    padding: 0 var(--spacing-base);
 
     color: var(--color-matters-gold);
     font-size: var(--font-size-sm);
     line-height: 2;
 
     @media (--sm-up) {
-      padding: 0 var(--spacing-default);
+      padding: 0 var(--spacing-loose);
     }
   }
 
@@ -58,7 +57,7 @@
    ========================================================================== */
   & :global(ul),
   & :global(ol) {
-    padding-left: var(--spacing-default);
+    padding-left: var(--spacing-loose);
   }
   & :global(li) {
     padding-left: var(--spacing-x-tight);
@@ -98,7 +97,7 @@
   & :global(h4),
   & :global(h5),
   & :global(h6) {
-    margin-top: var(--spacing-default);
+    margin-top: var(--spacing-loose);
     line-height: var(--line-height-article-heading);
   }
 
@@ -128,7 +127,7 @@
 
     width: 10rem;
     height: 0.125rem;
-    margin: var(--spacing-default) auto;
+    margin: var(--spacing-loose) auto;
 
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);

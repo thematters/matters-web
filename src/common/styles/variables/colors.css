@@ -4,10 +4,6 @@
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
 
-  --color-bg-green: #f2faf7;
-  --color-bg-yellow: #faf7f0;
-  --color-bg-red: #f9eeec;
-
   --color-black: #333333;
   --color-grey-darker: #808080;
   --color-grey-dark: #999c9d;
@@ -16,8 +12,13 @@
   --color-grey-lighter: #f6f6f6;
   --color-white: #ffffff;
 
-  --color-red: #c85c41;
+  --color-green-lighter: #f2faf7;
+
   --color-yellow: #bfa267;
+  --color-yellow-lighter: #faf7f0;
+
+  --color-red: #c85c41;
+  --color-red-lighter: #f9eeec;
 
   /* hover */
   --color-matters-gold-hover: color(var(--color-matters-gold) shade(5%));

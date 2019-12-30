@@ -1,5 +1,5 @@
 .content {
-  padding: var(--spacing-xx-loose);
+  padding: var(--spacing-xxx-loose);
   text-align: center;
 
   & h2 {
@@ -14,6 +14,6 @@
   }
 
   @media (--md-up) {
-    padding: 5rem var(--spacing-xx-loose) 9rem;
+    padding: 5rem var(--spacing-xxx-loose) 9rem;
   }
 }

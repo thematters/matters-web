@@ -4,7 +4,7 @@ ol {
 
 li {
   position: relative;
-  padding-left: var(--spacing-x-loose);
+  padding-left: var(--spacing-xx-loose);
 
   &::before {
     counter-increment: topics-counter;

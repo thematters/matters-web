@@ -2,7 +2,7 @@
   text-align: center;
 
   & :global(h3) {
-    margin: var(--spacing-default) 0;
+    margin: var(--spacing-loose) 0;
     color: var(--color-black);
   }
 

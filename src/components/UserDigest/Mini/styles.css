@@ -46,7 +46,7 @@
 }
 
 .text-msmall {
-  font-size: calc(var(--font-size-sm) - 1px);
+  font-size: var(--font-size-sm-s);
 }
 
 .text-xsmall {

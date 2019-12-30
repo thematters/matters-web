@@ -4,7 +4,7 @@
 }
 
 .container {
-  padding-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
 }
 
 .content {
@@ -14,7 +14,7 @@
   position: relative;
 
   & .left {
-    padding-right: var(--spacing-default);
+    padding-right: var(--spacing-loose);
 
     & :global(.actions > *) {
       margin-top: var(--spacing-x-tight);
@@ -37,7 +37,7 @@
     }
   }
   &.type-collection {
-    padding: var(--spacing-tight);
+    padding: var(--spacing-base);
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -48,11 +48,11 @@
 
     @media (--sm-up) {
       padding-right: calc(
-        var(--spacing-tight) + var(--type-collection-cover-width)
+        var(--spacing-base) + var(--type-collection-cover-width)
       );
 
       &.no-cover {
-        padding-right: var(--spacing-tight);
+        padding-right: var(--spacing-base);
       }
       & .cover {
         display: block;

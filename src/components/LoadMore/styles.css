@@ -1,5 +1,5 @@
 .container {
-  margin-top: var(--spacing-default);
-  margin-bottom: var(--spacing-x-loose);
+  margin-top: var(--spacing-loose);
+  margin-bottom: var(--spacing-xx-loose);
   text-align: center;
 }

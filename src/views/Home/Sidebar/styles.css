@@ -2,7 +2,7 @@ section {
   & :global(> header) {
     @mixin flex-center-space-between;
 
-    margin-bottom: var(--spacing-default);
+    margin-bottom: var(--spacing-loose);
 
     & :global(*) {
       line-height: 1;
@@ -11,5 +11,5 @@ section {
 }
 
 section + section {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--spacing-xx-loose);
 }

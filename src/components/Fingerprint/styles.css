@@ -1,11 +1,11 @@
 .fingerprint-content {
   padding: var(--spacing-x-tight);
-  margin-bottom: var(--spacing-default);
+  margin-bottom: var(--spacing-loose);
 
   color: var(--color-yellow);
   font-size: var(--font-size-md);
   font-family: var(--font-mono);
-  background: var(--color-bg-yellow);
+  background: var(--color-yellow-lighter);
 }
 
 .dropdown-container {
@@ -13,12 +13,12 @@
 }
 
 .top-container {
-  padding: var(--spacing-tight) var(--spacing-default) var(--spacing-default);
+  padding: var(--spacing-base) var(--spacing-loose) var(--spacing-loose);
 }
 
 .section-title {
   @mixin flex-center-space-between;
-  margin-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-base);
 
   & h4 {
     font-size: var(--font-size-md);
@@ -27,17 +27,17 @@
 }
 
 .help-container {
-  padding: var(--spacing-tight) var(--spacing-default);
+  padding: var(--spacing-base) var(--spacing-loose);
 
   background: var(--color-grey-lighter);
   text-align: left;
 
   &.expand {
-    background: var(--color-bg-green);
+    background: var(--color-green-lighter);
   }
 
   & p {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--spacing-base);
     margin-bottom: var(--spacing-x-tight);
 
     font-size: var(--font-size-sm);

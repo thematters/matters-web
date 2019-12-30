@@ -20,13 +20,13 @@ section {
 }
 
 .small {
-  padding: var(--spacing-default);
+  padding: var(--spacing-loose);
 }
 
 .default {
-  padding: 3.5rem var(--spacing-tight);
+  padding: 3.5rem var(--spacing-base);
 
   @media (--sm-down) {
-    padding: var(--spacing-default) var(--spacing-tight);
+    padding: var(--spacing-loose) var(--spacing-base);
   }
 }

@@ -1,8 +1,8 @@
 section {
   @mixin border-bottom-grey;
 
-  margin-bottom: var(--spacing-default);
-  padding-bottom: var(--spacing-default);
+  margin-bottom: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
 
   color: var(--color-grey);
 
