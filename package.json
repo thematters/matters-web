@@ -54,7 +54,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.8.1",
     "express": "^4.17.1",
-    "firebase": "^7.5.0",
+    "firebase": "^7.6.1",
     "formik": "^2.0.6",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
