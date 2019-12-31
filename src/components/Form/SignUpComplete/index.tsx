@@ -37,8 +37,8 @@ const SignUpComplete = ({
 
         <p>
           <Translate
-            zh_hant="當你的作品累計獲得 30 個讚賞，你才可以激活讚賞權限為他人拍手，並能參與精彩討論。"
-            zh_hans="当你的作品累计获得 30 个赞赏，你才可以激活赞赏权限为他人鼓掌，并能参与精彩讨论。"
+            zh_hant="當你的作品累計獲得 30 個讚賞，你就可以激活讚賞權限為他人拍手，並能參與精彩討論。"
+            zh_hans="当你的作品累计获得 30 个赞赏，你就可以激活赞赏权限为他人鼓掌，并能参与精彩讨论。"
           />
         </p>
         <br />
@@ -46,7 +46,7 @@ const SignUpComplete = ({
         <p>
           <Translate
             zh_hant="你的專屬 Liker ID 已就位，登入 "
-            zh_hans="你的专属 Liker ID 已就位，登陆 "
+            zh_hans="你的专属 Liker ID 已就位，登录 "
           />
           <a className="u-link-green" href="https://like.co" target="_blank">
             like.co
