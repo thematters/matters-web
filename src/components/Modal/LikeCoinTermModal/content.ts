@@ -13,7 +13,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
   zh_hans: /* html */ `
   <p><strong>亲爱的 Matty，</strong></p>
 
-  <p>为了打造更优质的创作平台，Matters 与 LikeCoin 合作啦！欢迎登入升级后的空间站。</p>
+  <p>为了打造更优质的创作平台，Matters 与 LikeCoin 合作啦！欢迎登录升级后的空间站。</p>
 
   <p>本次合作的变动如下：你目前持有的 MAT 将变成 LikeCoin，会以 <b>1 MAT = 10 LikeCoin</b> 的汇率转换，进入钱包即可查看详情。你可以绑定已有的 LikeCoin 帐户或允许 Matters 为你创建新的 LikeCoin 帐户，并透过这个帐户将 LikeCoin 变现、管理自己的创作收益。</p>
 
