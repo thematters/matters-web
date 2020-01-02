@@ -11,7 +11,7 @@ import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT, UrlFragments } from '~/common/enums'
-import { stripHtml, toPath } from '~/common/utils'
+import { responseStateIs, stripHtml, toPath } from '~/common/utils'
 import ICON_STICKY from '~/static/icons/sticky.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
@@ -49,7 +49,7 @@ const fragments = {
     fragment FolloweeFeedDigestArticle on Article {
       id
       title
-      state
+      articleState: state
       slug
       cover
       summary
@@ -86,7 +86,7 @@ const FeedDigest = ({
   inFolloweeFeed?: boolean
   inTagDetail?: boolean
 } & ActionsControls) => {
-  const { author, slug, mediaHash, summary, live, sticky, state } = article
+  const { author, slug, mediaHash, summary, live, sticky } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -99,7 +99,7 @@ const FeedDigest = ({
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
-  const isBanned = state === 'banned'
+  const isBanned = responseStateIs(article, 'banned')
   const cover = !isBanned ? article.cover : null
   const title = isBanned ? (
     <Translate

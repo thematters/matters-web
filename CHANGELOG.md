@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.1] - 2019-12-31
+
+### Changed
+
+- Reuse <SignUpComplete> in setup LikeCoin flow #563
+- Update onboarding and punish sections of FAQ #563
+
+## [2.5.0] - 2019-12-27
+
+### Added
+
+- BDD #537
+
+### Changed
+
+- Onboarding User Restrictions #545
+- Tiny style fix for expandable user description #547
+- Hide status code #546
+- Bug fixes of user deletion #548 #549
+- Update editor's version. #550
+- Allow "@matters.news" to use "+" sign #551
+
 ## [2.4.0] - 2019-12-13
 
 ### Added
