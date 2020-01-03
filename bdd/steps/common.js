@@ -12,7 +12,6 @@ const waitPageToBeVisible = (client, query) => {
 
 Given('I visit home page', () => {
   return client
-    .fullscreenWindow()
     .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
     .waitForElementVisible('body')
     .waitForElementVisible('header')

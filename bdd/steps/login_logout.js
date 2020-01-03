@@ -10,6 +10,12 @@ Then('the header should be logged status', () => {
   return client.assert.visible('header section.me div.avatar')
 })
 
+Then('the header should be unlogged status', () => {
+  return client.expect
+    .elements('header > div > div > section.right > button')
+    .count.to.equal(2)
+})
+
 /*----- Login -----*/
 
 When('I click the login button in the header', () => {
@@ -42,23 +48,19 @@ When('I click the login button', () => {
 /*----- Logout -----*/
 
 When('I move mouse to the user avatar in the header', () => {
-  return client.moveToElement('header section.me > button:nth-child(3)', 10, 10)
+  return client.moveToElement('header section.me div.avatar', 10, 10)
 })
 
 Then('the user drop down should be visible', () => {
   return client
-    .click('header section.me > button:nth-child(3)')
+    .moveToElement('header section.me div.avatar', 10, 10)
     .waitForElementVisible('div.tippy-popper')
+    .expect.elements('div.tippy-popper div.tippy-content ul.menu li')
+    .count.not.equal(0)
 })
 
 When('I click the logout button in drop down menu', () => {
-  return client.click('div.tippy-popper > div > div > div > ul > li:last-child')
-})
-
-Then('the header should be unlogged status', () => {
-  const query = 'header > div > div > section:nth-child(2) > button'
   return client
-    .waitForElementVisible(query)
-    .expect.elements(query)
-    .count.to.equal(2)
+    .click('div.tippy-popper div.tippy-content ul.menu li:last-child')
+    .pause(2 * TIME.SECOND)
 })

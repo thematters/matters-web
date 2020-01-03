@@ -39,8 +39,21 @@ Then(
   }
 )
 
-When('I scroll down the page', () => {
-  return client.execute(SCRIPT.SCROLL_DOWN).pause(2 * TIME.SECOND)
+When('I scroll down to the end of the hottest list', () => {
+  const query = 'main > article > div:last-child > button'
+  return client.execute(
+    `document.querySelector('${query}').scrollIntoView({ block: 'center' })`
+  )
+})
+
+Then('the load more button should be visible', () => {
+  return client.assert.visible('main > article > div:last-child > button')
+})
+
+When('I click the load more button', () => {
+  return client
+    .click('main > article > div:last-child > button')
+    .pause(2 * TIME.SECOND)
 })
 
 Then('more hottest articles are loaded', () => {

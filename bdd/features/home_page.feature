@@ -12,7 +12,9 @@ Feature: Home Page Feed
     Given I visit home page
     Then the hottest list should be visible
     Then the article title and description in hottest list should be visible
-    When I scroll down the page
+    When I scroll down to the end of the hottest list
+    Then the load more button should be visible
+    When I click the load more button
     Then more hottest articles are loaded
 
   Scenario: Load ICYMI Feed
