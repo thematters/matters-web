@@ -78,7 +78,8 @@ const Authors = () => {
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
+          dedupe: true
         })
     })
   }

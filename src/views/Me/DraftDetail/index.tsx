@@ -47,7 +47,8 @@ const DraftDetail = () => {
   }, [])
 
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
-    variables: { id }
+    variables: { id },
+    fetchPolicy: 'no-cache'
   })
 
   if (error) {
