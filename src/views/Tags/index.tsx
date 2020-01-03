@@ -108,7 +108,8 @@ const Tags = () => {
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
+          dedupe: true
         })
     })
   }
