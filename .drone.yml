@@ -82,6 +82,10 @@ steps:
         from_secret: BDD_USER
       BDD_PASSWD:
         from_secret: BDD_PASSWD
+      BDD_TEST_USER_EMAIL:
+        from_secret: BDD_TEST_USER_EMAIL
+      BDD_TEST_USER_PASSWD:
+        from_secret: BDD_TEST_USER_PASSWD
     commands:
       - sh bdd/shells/init.sh
       - BDD_DRIVER=default npm run bdd
