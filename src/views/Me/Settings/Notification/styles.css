@@ -1,16 +1,16 @@
 .section-container {
-  margin-top: var(--spacing-default);
+  margin-top: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
 }
 
 .setting-item {
   @mixin flex-center-space-between;
-  padding-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
 
   & + .setting-item {
     @mixin border-top-grey;
-    padding: var(--spacing-default) 0;
+    padding: var(--spacing-loose) 0;
   }
 
   & .description {

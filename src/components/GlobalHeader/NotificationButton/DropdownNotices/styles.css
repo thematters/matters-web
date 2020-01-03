@@ -8,7 +8,7 @@ header {
   @mixin flex-center-space-between;
   @mixin border-bottom-grey;
 
-  padding: var(--spacing-tight);
+  padding: var(--spacing-base);
 
   font-size: 0;
 
@@ -20,7 +20,7 @@ header {
 
 .content {
   @mixin max-height-scroll;
-  padding: var(--spacing-tight) var(--spacing-x-tight);
+  padding: var(--spacing-base) var(--spacing-x-tight);
 
   & ul {
     & li {
@@ -28,14 +28,14 @@ header {
     }
     & li + li {
       @mixin border-top-grey;
-      padding-top: var(--spacing-tight);
-      margin-top: var(--spacing-tight);
+      padding-top: var(--spacing-base);
+      margin-top: var(--spacing-base);
     }
   }
 }
 
 footer {
   @mixin border-top-grey;
-  padding: var(--spacing-tight);
+  padding: var(--spacing-base);
   text-align: center;
 }

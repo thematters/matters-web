@@ -22,7 +22,7 @@
       0 4px 12px 0 rgba(0, 0, 0, 0.08);
 
     &:hover {
-      background: var(--color-bg-green);
+      background: var(--color-green-lighter);
     }
   }
 }
@@ -37,7 +37,7 @@
   height: 1rem;
 
   color: var(--color-white);
-  font-size: calc(var(--font-size-xs) - 1px);
+  font-size: var(--font-size-sm-s);
   font-weight: var(--font-weight-bold);
   line-height: 1rem;
 

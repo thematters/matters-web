@@ -4,9 +4,12 @@
   --spacing-xxx-tight: 0.125rem; /* 2px */
   --spacing-xx-tight: 0.25rem; /* 4px */
   --spacing-x-tight: 0.5rem; /* 8px */
-  --spacing-tight: 1rem; /* 16px */
-  --spacing-default: 1.5rem; /* 24px */
-  --spacing-loose: 2rem; /* 32px */
-  --spacing-x-loose: 2.5rem; /* 40px */
-  --spacing-xx-loose: 4rem; /* 64px */
+  --spacing-tight: 0.75rem; /* 12px */
+
+  --spacing-base: 1rem; /* 16px */
+
+  --spacing-loose: 1.5rem; /* 24px */
+  --spacing-x-loose: 2rem; /* 32px */
+  --spacing-xx-loose: 2.5rem; /* 40px */
+  --spacing-xxx-loose: 4rem; /* 64px */
 }

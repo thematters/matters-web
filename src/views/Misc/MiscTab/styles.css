@@ -3,6 +3,6 @@ section {
 
   & :global(nav) {
     position: sticky;
-    top: calc(var(--global-header-height) + var(--spacing-x-loose));
+    top: calc(var(--global-header-height) + var(--spacing-xx-loose));
   }
 }

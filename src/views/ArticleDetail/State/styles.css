@@ -5,8 +5,8 @@
     var(--global-header-height) + 1px
   ); /* global header's height + 1px border */
 
-  margin-top: calc(var(--spacing-x-loose) * -1);
-  margin-bottom: var(--spacing-x-loose);
+  margin-top: calc(var(--spacing-xx-loose) * -1);
+  margin-bottom: var(--spacing-xx-loose);
 
   z-index: 10;
 }

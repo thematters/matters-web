@@ -28,12 +28,12 @@
   @mixin flex-center-all;
 
   position: absolute;
-  right: var(--spacing-tight);
-  bottom: var(--spacing-tight);
+  right: var(--spacing-base);
+  bottom: var(--spacing-base);
 
   @media (--sm-up) {
-    right: var(--spacing-default);
-    bottom: var(--spacing-default);
+    right: var(--spacing-loose);
+    bottom: var(--spacing-loose);
   }
 }
 
@@ -65,10 +65,10 @@
   }
 
   & + .remove {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
 
     @media (--sm-up) {
-      margin-left: var(--spacing-default);
+      margin-left: var(--spacing-loose);
     }
   }
 }

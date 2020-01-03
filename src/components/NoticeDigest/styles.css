@@ -9,7 +9,7 @@
 .avatar-wrap {
   flex-shrink: 0;
 
-  margin-right: var(--spacing-tight);
+  margin-right: var(--spacing-base);
   width: 2.5rem;
 
   &.multi {

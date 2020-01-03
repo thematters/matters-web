@@ -1,8 +1,8 @@
 .container {
   @mixin flex-start-space-between;
   @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-default);
-  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
 }
@@ -21,7 +21,7 @@
 
 .right {
   flex-shrink: 0;
-  margin-left: var(--spacing-tight);
+  margin-left: var(--spacing-base);
   text-align: right;
 
   & .appreciate-count {

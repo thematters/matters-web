@@ -26,15 +26,15 @@ body {
   padding-top: calc(
     var(--global-header-height) + 1px
   ); /* global header's height + 1px border */
-  padding-bottom: var(--spacing-x-loose);
+  padding-bottom: var(--spacing-xx-loose);
   overflow-x: hidden;
 }
 
 main {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--spacing-x-loose);
 
   @media (--sm-up) {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--spacing-xx-loose);
   }
 }
 

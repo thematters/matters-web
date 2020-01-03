@@ -2,8 +2,8 @@ header {
   @mixin flex-center-space-between;
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--spacing-tight);
-  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 }
 
 .hasButtons {
@@ -23,12 +23,12 @@ header {
 
 .hasDescription {
   flex-direction: column;
-  padding-bottom: var(--spacing-loose);
+  padding-bottom: var(--spacing-x-loose);
 
   & .description {
     color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
-    margin-top: var(--spacing-tight);
+    margin-top: var(--spacing-base);
     width: 100%;
     white-space: pre-wrap;
   }

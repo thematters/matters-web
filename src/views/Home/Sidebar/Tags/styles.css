@@ -3,11 +3,11 @@ ul {
 
   & li {
     display: inline-block;
-    width: calc(50% - var(--spacing-default) / 2);
+    width: calc(50% - var(--spacing-loose) / 2);
 
     & :global(.tag) {
-      padding-bottom: var(--spacing-tight);
-      margin-bottom: var(--spacing-tight);
+      padding-bottom: var(--spacing-base);
+      margin-bottom: var(--spacing-base);
     }
   }
   & li:nth-child(1),
@@ -15,9 +15,9 @@ ul {
     padding-top: 0;
   }
   & li:nth-child(2n) {
-    margin-left: calc(var(--spacing-default) / 2);
+    margin-left: calc(var(--spacing-loose) / 2);
   }
   & li:nth-child(2n - 1) {
-    margin-right: calc(var(--spacing-default) / 2);
+    margin-right: calc(var(--spacing-loose) / 2);
   }
 }

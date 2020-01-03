@@ -1,5 +1,5 @@
 .intro {
-  margin: var(--spacing-tight) 0;
+  margin: var(--spacing-base) 0;
 
   color: var(--color-grey);
   font-size: var(--font-size-xs);

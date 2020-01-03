@@ -128,7 +128,7 @@
 
 /* theme:tooltip */
 .tippy-tooltip.tooltip-theme {
-  padding: var(--spacing-xx-tight) var(--spacing-tight);
+  padding: var(--spacing-xx-tight) var(--spacing-base);
 
   color: var(--color-white);
   font-size: var(--font-size-sm);

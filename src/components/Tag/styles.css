@@ -8,8 +8,8 @@
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-bottom: var(--spacing-default);
-  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
 
   overflow: hidden;
   white-space: nowrap;

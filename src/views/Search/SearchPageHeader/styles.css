@@ -1,5 +1,5 @@
 header {
-  margin-bottom: var(--spacing-default);
+  margin-bottom: var(--spacing-loose);
   font-size: var(--font-size-lg);
 
   & .keyword {

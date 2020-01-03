@@ -1,5 +1,5 @@
 .container {
-  margin: 0rem var(--spacing-tight) var(--spacing-default);
+  margin: 0rem var(--spacing-base) var(--spacing-loose);
 }
 
 .form {

@@ -1,8 +1,8 @@
 .container {
   @mixin flex-start-space-between;
   @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-default);
-  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
 }
@@ -23,14 +23,13 @@
     align-items: center;
     justify-content: left;
     color: var(--color-grey-dark);
-    font-size: var(--font-size-xs); /* fallback */
-    font-size: calc(var(--font-size-sm) - 1px);
+    font-size: var(--font-size-sm-s);
   }
 }
 
 .right {
   flex-shrink: 0;
-  margin-left: var(--spacing-tight);
+  margin-left: var(--spacing-base);
   text-align: right;
 
   & .appreciate-count {

@@ -1,11 +1,11 @@
 .toolbar-left {
   position: absolute;
   top: 0;
-  right: calc(100% + var(--spacing-default));
+  right: calc(100% + var(--spacing-loose));
   bottom: 0;
 
   @media (--lg-up) {
-    right: calc(100% + var(--spacing-x-loose));
+    right: calc(100% + var(--spacing-xx-loose));
   }
 
   & .container {
@@ -13,14 +13,14 @@
     flex-direction: column;
 
     position: sticky;
-    top: calc(var(--global-header-height) + var(--spacing-x-loose));
+    top: calc(var(--global-header-height) + var(--spacing-xx-loose));
 
     @media (--md-up) {
       display: flex;
     }
 
     & :global(> * + *) {
-      margin-top: var(--spacing-default);
+      margin-top: var(--spacing-loose);
     }
   }
 }
@@ -42,12 +42,12 @@
   }
 
   & .right {
-    margin-bottom: var(--spacing-default);
+    margin-bottom: var(--spacing-loose);
     order: -1;
     text-align: right;
 
     & :global(> * + *) {
-      margin-left: var(--spacing-default);
+      margin-left: var(--spacing-loose);
     }
 
     @media (--sm-up) {
@@ -63,7 +63,7 @@
       right: 0;
       bottom: 0;
       margin: 0;
-      padding: var(--spacing-tight);
+      padding: var(--spacing-base);
 
       background: var(--color-white);
       box-shadow: -8px 0px 24px rgba(0, 0, 0, 0.08);

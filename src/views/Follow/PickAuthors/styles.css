@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-x-loose);
 
   @media (--sm-up) {
     align-items: center;
@@ -11,7 +11,7 @@ header {
   & .avatar {
     width: 3rem;
     height: 3rem;
-    margin-right: var(--spacing-default);
+    margin-right: var(--spacing-loose);
 
     border-radius: 50%;
 

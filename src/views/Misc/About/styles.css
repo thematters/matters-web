@@ -1,5 +1,5 @@
 main {
-  margin-bottom: calc(-1 * var(--spacing-x-loose));
+  margin-bottom: calc(-1 * var(--spacing-xx-loose));
 }
 
 h2 {
@@ -18,13 +18,13 @@ h2 {
 
   position: relative;
   padding-top: 8.125rem;
-  margin-top: calc((var(--spacing-loose) + var(--global-header-height)) * -1);
+  margin-top: calc((var(--spacing-x-loose) + var(--global-header-height)) * -1);
   margin-top: calc(
-    (var(--spacing-loose) + var(--global-header-height) + 1px) * -1
+    (var(--spacing-x-loose) + var(--global-header-height) + 1px) * -1
   );
   height: 100vh;
 
-  background-color: var(--color-bg-green);
+  background-color: var(--color-green-lighter);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
@@ -34,10 +34,10 @@ h2 {
     align-items: center;
     padding-top: 0;
     margin-top: calc(
-      (var(--spacing-x-loose) + var(--global-header-height)) * -1
+      (var(--spacing-xx-loose) + var(--global-header-height)) * -1
     );
     margin-top: calc(
-      (var(--spacing-x-loose) + var(--global-header-height) + 1px) * -1
+      (var(--spacing-xx-loose) + var(--global-header-height) + 1px) * -1
     );
     height: 50rem;
     background-position: right center;
@@ -52,12 +52,12 @@ h2 {
   }
 
   & .buttons {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--spacing-xx-loose);
   }
 }
 
 .goal {
-  padding: var(--spacing-xx-loose) 0;
+  padding: var(--spacing-xxx-loose) 0;
 
   & img {
     display: block;
@@ -66,12 +66,12 @@ h2 {
   }
 
   & h2 {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--spacing-xx-loose);
     text-align: center;
   }
 
   & p {
-    margin-top: var(--spacing-default);
+    margin-top: var(--spacing-loose);
   }
 
   @media (--sm-up) {
@@ -86,7 +86,7 @@ h2 {
 
 .features {
   margin-top: 2.375rem;
-  background-color: var(--color-bg-yellow);
+  background-color: var(--color-yellow-lighter);
 
   & .title {
     position: relative;
@@ -102,10 +102,10 @@ h2 {
   }
 
   & .feature-section {
-    padding-top: var(--spacing-xx-loose);
+    padding-top: var(--spacing-xxx-loose);
 
     &:last-child {
-      padding-bottom: var(--spacing-xx-loose);
+      padding-bottom: var(--spacing-xxx-loose);
     }
 
     & .intro {
@@ -116,8 +116,8 @@ h2 {
         font-weight: var(--font-weight-light);
       }
       & p {
-        margin-top: var(--spacing-tight);
-        margin-bottom: var(--spacing-loose);
+        margin-top: var(--spacing-base);
+        margin-bottom: var(--spacing-x-loose);
         color: var(--color-matters-gold);
         font-size: var(--font-size-sm);
       }
@@ -133,7 +133,7 @@ h2 {
     margin-top: 3.5rem;
     background: linear-gradient(
         90deg,
-        var(--color-bg-yellow) 50%,
+        var(--color-yellow-lighter) 50%,
         transparent 50%
       )
       no-repeat;
@@ -170,26 +170,26 @@ h2 {
 
 .reports {
   margin-top: 5rem;
-  margin-bottom: var(--spacing-xx-loose);
+  margin-bottom: var(--spacing-xxx-loose);
 
   & h2 {
-    margin-bottom: var(--spacing-x-loose);
+    margin-bottom: var(--spacing-xx-loose);
     text-align: center;
   }
 
   & .item {
-    margin-bottom: var(--spacing-tight);
+    margin-bottom: var(--spacing-base);
 
     & a {
       @mixin all-transition;
       position: relative;
       display: block;
-      padding: var(--spacing-tight);
+      padding: var(--spacing-base);
       background: var(--color-grey-lighter);
 
       &:hover,
       &:focus {
-        background: var(--color-bg-green);
+        background: var(--color-green-lighter);
 
         & h3 {
           color: var(--color-matters-green);
@@ -217,9 +217,9 @@ h2 {
 
         & cite {
           position: absolute;
-          bottom: var(--spacing-tight);
-          left: var(--spacing-tight);
-          right: var(--spacing-tight);
+          bottom: var(--spacing-base);
+          left: var(--spacing-base);
+          right: var(--spacing-base);
           color: var(--color-grey-darker);
           font-style: normal;
           font-weight: var(--font-weight-medium);
@@ -236,24 +236,24 @@ h2 {
   text-align: center;
 
   & .footer-section {
-    margin-bottom: var(--spacing-xx-loose);
+    margin-bottom: var(--spacing-xxx-loose);
   }
 
   & h2 {
     font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-default);
+    margin-bottom: var(--spacing-loose);
   }
   & p {
     @mixin font-serif;
 
     & + p {
-      margin-top: var(--spacing-default);
+      margin-top: var(--spacing-loose);
     }
   }
   & .socials {
     & :global(> *) {
       display: inline-block;
-      margin: 0 calc(var(--spacing-default) / 2);
+      margin: 0 calc(var(--spacing-loose) / 2);
     }
   }
 
@@ -263,7 +263,7 @@ h2 {
     & input {
       display: inline-block;
       padding: var(--spacing-x-tight);
-      margin-right: var(--spacing-tight);
+      margin-right: var(--spacing-base);
       height: 2.5rem;
 
       background: var(--color-white);
@@ -285,7 +285,7 @@ h2 {
     & .socials {
       & :global(> *) {
         margin-left: 0;
-        margin-right: var(--spacing-default);
+        margin-right: var(--spacing-loose);
         margin-bottom: var(--spacing-x-tight);
       }
     }

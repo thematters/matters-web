@@ -11,8 +11,8 @@
   & :global(button) {
     display: block;
 
-    padding-left: var(--spacing-default);
-    padding-right: var(--spacing-default);
+    padding-left: var(--spacing-loose);
+    padding-right: var(--spacing-loose);
 
     width: 100%;
     height: 2.5rem;
@@ -31,7 +31,7 @@
 .link-container {
   @mixin flex-center-space-between;
   @mixin border-top-grey;
-  padding: var(--spacing-tight) var(--spacing-default);
+  padding: var(--spacing-base) var(--spacing-loose);
 
   & :global(.text-icon) {
     flex-shrink: 0;

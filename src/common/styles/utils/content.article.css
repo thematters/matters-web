@@ -7,12 +7,12 @@
 .editor-title {
   & input {
     @mixin border-bottom-grey;
-    margin-bottom: var(--spacing-default);
-    padding-bottom: var(--spacing-tight);
+    margin-bottom: var(--spacing-loose);
+    padding-bottom: var(--spacing-base);
 
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-xl);
-    line-height: 1.33333333;
+    font-size: var(--font-size-article-title);
+    line-height: var(--line-height-article-title);
+    font-weight: var(--font-weight-article-title);
 
     &::placeholder {
       color: var(--color-grey);
@@ -27,13 +27,13 @@
   outline: none;
 
   & :global(> * + *) {
-    margin: var(--spacing-default) 0;
+    margin: var(--spacing-loose) 0;
   }
   & :global(> *:first-child) {
     margin-top: 0;
   }
   & :global(> *:last-child) {
-    margin-bottom: var(--spacing-default);
+    margin-bottom: var(--spacing-loose);
   }
 
   /* Media
@@ -48,7 +48,7 @@
   /* Figure
    ========================================================================== */
   & :global(figure) {
-    margin: var(--spacing-loose) calc(var(--spacing-tight) * -1);
+    margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
     text-align: center;
 
     @media (--sm-up) {
@@ -58,10 +58,9 @@
 
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
-      padding: 0 var(--spacing-tight);
+      padding: 0 var(--spacing-base);
 
-      font-size: var(--font-size-sm); /* fallback */
-      font-size: calc(var(--font-size-sm) - 1px);
+      font-size: var(--font-size-sm-s);
       color: var(--color-grey);
       white-space: pre-wrap;
 
@@ -83,7 +82,7 @@
 
     & .player {
       position: relative;
-      padding: var(--spacing-tight);
+      padding: var(--spacing-base);
 
       background: var(--color-white);
       border: 1px solid rgba(0, 0, 0, 0.08);
@@ -127,7 +126,7 @@
           align-self: center;
           width: 2.25rem;
           height: 2.25rem;
-          margin-left: var(--spacing-tight);
+          margin-left: var(--spacing-base);
 
           background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA0MCI+ICA8cGF0aCBmaWxsPSIjMEQ2NzYzIiBkPSJNMjAgMzkuNWExOS41IDE5LjUgMCAxIDEgMC0zOSAxOS41IDE5LjUgMCAwIDEgMCAzOXptMC0xLjVhMTggMTggMCAxIDAgMC0zNiAxOCAxOCAwIDAgMCAwIDM2em02Ljk0LTE4YzAgLjMzLS4zMy41Ny0uMzMuNTdsLTkuNTIgNS45Yy0uNjkuNDUtMS4yNi4xMS0xLjI2LS43NVYxNC4yOGMwLS44Ni41Ny0xLjIgMS4yNi0uNzRsOS41MiA1Ljg5cy4zMy4yNC4zMy41N3oiLz48L3N2Zz4=);
           cursor: pointer;
@@ -203,15 +202,15 @@
    ========================================================================== */
   & :global(blockquote) {
     width: 100%;
-    padding: 0 var(--spacing-default);
-    margin: var(--spacing-loose) 0;
+    padding: 0 var(--spacing-loose);
+    margin: var(--spacing-x-loose) 0;
 
     color: var(--color-matters-gold);
     font-size: var(--font-size-md);
     line-height: 2;
 
     @media (--sm-up) {
-      padding: 0 var(--spacing-x-loose);
+      padding: 0 var(--spacing-xx-loose);
     }
   }
 
@@ -219,11 +218,11 @@
    ========================================================================== */
   & :global(ul),
   & :global(ol) {
-    padding-left: var(--spacing-loose);
+    padding-left: var(--spacing-x-loose);
   }
   & :global(li) {
     padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-tight) 0;
+    margin: var(--spacing-base) 0;
   }
   & :global(ul) {
     list-style-type: disc;
@@ -259,7 +258,7 @@
   & :global(h4),
   & :global(h5),
   & :global(h6) {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--spacing-x-loose);
     line-height: var(--line-height-article-heading);
   }
 
@@ -289,7 +288,7 @@
 
     width: 10rem;
     height: 0.25rem;
-    margin: var(--spacing-loose) auto;
+    margin: var(--spacing-x-loose) auto;
 
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);
@@ -310,8 +309,7 @@
     font-size: 0;
 
     & textarea {
-      font-size: var(--font-size-sm); /* fallback */
-      font-size: calc(var(--font-size-sm) - 1px);
+      font-size: var(--font-size-sm-s);
       text-align: center;
       resize: none;
       overflow: hidden;
@@ -348,7 +346,7 @@
 
   @media (--sm-up) {
     right: auto;
-    left: calc((var(--side-toolbar-button-size) + var(--spacing-tight)) * -1);
+    left: calc((var(--side-toolbar-button-size) + var(--spacing-base)) * -1);
   }
 }
 
@@ -356,13 +354,13 @@
   @mixin all-transition;
 
   display: none;
-  margin-left: var(--spacing-tight);
+  margin-left: var(--spacing-base);
 
   opacity: 0;
 
   & > :global(* + *) {
     cursor: pointer;
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
   }
 
   & :global(button) {

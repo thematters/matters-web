@@ -1,5 +1,8 @@
 /* @styled-jsx=global */
 
+/**
+ * Layouts
+ */
 @define-mixin flex-center-all {
   display: flex;
   align-items: center;
@@ -30,6 +33,9 @@
   justify-content: space-between;
 }
 
+/**
+ * Fonts
+ */
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
@@ -46,6 +52,9 @@
   }
 }
 
+/**
+ * Borders
+ */
 @define-mixin border-grey {
   border: 1px solid var(--color-line-grey-light);
 }
@@ -58,6 +67,9 @@
   border-top: 1px solid var(--color-line-grey-light);
 }
 
+/**
+ * Misc
+ */
 @define-mixin cover {
   position: absolute;
   top: 0;
@@ -115,17 +127,16 @@
 
   &::after {
     top: -0.25rem;
-    right: calc((var(--spacing-x-tight) + 0.25rem) * -1);
+    right: calc(var(--spacing-tight) * -1);
   }
 }
 
 @define-mixin text-input {
   @mixin all-transition;
 
-  padding: var(--spacing-x-tight) var(--spacing-tight);
+  padding: var(--spacing-x-tight) var(--spacing-base);
 
-  font-size: var(--font-size-sm); /* fallback */
-  font-size: calc(var(--font-size-sm) + 1px);
+  font-size: var(--font-size-md-s);
   line-height: 1.5rem;
 
   background-color: var(--color-grey-lighter);
@@ -135,7 +146,7 @@
 
   &:focus,
   &.focus {
-    background-color: var(--color-bg-green);
+    background-color: var(--color-green-lighter);
     border-bottom-color: var(--color-matters-green);
   }
 

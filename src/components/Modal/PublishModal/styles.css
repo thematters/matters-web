@@ -1,6 +1,6 @@
 .slide {
   & :global(h3) {
-    margin: var(--spacing-default) 0 var(--spacing-tight);
+    margin: var(--spacing-loose) 0 var(--spacing-base);
   }
 }
 
@@ -18,7 +18,7 @@
 }
 
 .title-container {
-  padding: 0 var(--spacing-xx-loose) 1rem;
+  padding: 0 var(--spacing-xxx-loose) 1rem;
 }
 
 .subTitle {
@@ -27,17 +27,17 @@
 
 .descriptions {
   position: relative;
-  margin-bottom: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-xx-loose);
 
   color: var(--color-grey-darker);
 
   & .description {
     position: relative;
     font-size: var(--font-size-sm);
-    padding: 0 var(--spacing-xx-loose);
+    padding: 0 var(--spacing-xxx-loose);
 
     & + .description {
-      margin-top: var(--spacing-tight);
+      margin-top: var(--spacing-base);
     }
 
     &::before {

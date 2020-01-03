@@ -1,7 +1,7 @@
 .container {
   display: inline-block;
   padding-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-tight);
+  padding-left: var(--spacing-base);
 
   line-height: inherit;
   text-align: left;
@@ -46,8 +46,8 @@
 }
 
 .modal-appreciators-list {
-  margin-top: var(--spacing-default);
-  padding: 0 var(--spacing-tight);
+  margin-top: var(--spacing-loose);
+  padding: 0 var(--spacing-base);
 
   & li:last-child {
     & :global(> *) {
