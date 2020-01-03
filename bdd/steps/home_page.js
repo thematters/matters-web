@@ -5,23 +5,6 @@ const PATH = require('../common/enums/path')
 const SCRIPT = require('../common/enums/script')
 const TIME = require('../common/enums/time')
 
-/*----- Common Steps -----*/
-
-Given('I visit home page', () => {
-  return client
-    .fullscreenWindow()
-    .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
-    .waitForElementVisible('body')
-    .waitForElementVisible('header')
-    .waitForElementVisible('main')
-})
-
-Then('the Article page should be visible', () => {
-  return client
-    .waitForElementVisible('body')
-    .waitForElementVisible('h1.article', 10 * TIME.SECOND)
-})
-
 /*----- Matters Today -----*/
 
 Then('the Matters Today title should be visible', () => {
@@ -57,7 +40,7 @@ Then(
 )
 
 When('I scroll down the page', () => {
-  return client.execute(SCRIPT.SCROLL_BOTTOM).pause(2 * TIME.SECOND)
+  return client.execute(SCRIPT.SCROLL_DOWN).pause(2 * TIME.SECOND)
 })
 
 Then('more hottest articles are loaded', () => {
@@ -78,7 +61,7 @@ Then('the ICYMI list should be visible', () => {
 
 Then('the article title in ICYMI list should be visible', () => {
   return client.assert.visible(
-    'main > aside > section:first-child > ul > li:first-child > section > div > div > a > h2.sidebar'
+    'main > aside > section:first-child > ul > li:first-child > section h2.sidebar'
   )
 })
 
@@ -103,7 +86,7 @@ Then('the topics list should be visible', () => {
 
 Then('the article title in topics list should be visible', () => {
   return client.assert.visible(
-    'main > aside > section:nth-child(2) > ol > li > section > div > div > a > h2.sidebar'
+    'main > aside > section:nth-child(2) > ol > li > section h2.sidebar'
   )
 })
 
@@ -140,15 +123,6 @@ When('I click the authors name', () => {
     .pause(2 * TIME.SECOND)
 })
 
-Then('the User page should be visible', () => {
-  return client
-    .waitForElementVisible('body')
-    .waitForElementVisible(
-      'main > section > div:nth-child(2)',
-      10 * TIME.SECOND
-    )
-})
-
 /*----- Tags Feed -----*/
 
 Then('the tags list should be visible', () => {
@@ -169,13 +143,4 @@ When('I click the tags name', () => {
   return client
     .click('main > aside > section:nth-child(4) > ul > li:first-child > a')
     .pause(2 * TIME.SECOND)
-})
-
-Then('the Tag page should be visible', () => {
-  return client
-    .waitForElementVisible('body')
-    .waitForElementVisible(
-      'main > article > header > section.title',
-      10 * TIME.SECOND
-    )
 })
