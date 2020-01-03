@@ -117,7 +117,8 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
+          dedupe: true
         })
     })
   }
