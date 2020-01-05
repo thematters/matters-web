@@ -74,6 +74,21 @@ const nextConfig = {
       ]
     })
 
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            memo: true
+          }
+        },
+        {
+          loader: 'url-loader'
+        }
+      ]
+    })
+
     /***
      * Import files as URL
      */
@@ -108,17 +123,9 @@ module.exports = withPlugins(
     [
       optimizedImages,
       {
-        handleImages: ['jpeg', 'png', 'svg'],
+        handleImages: ['jpeg', 'png'],
         optimizeImagesInDev: true,
-        inlineImageLimit: 1024,
-        svgo: {
-          plugins: [
-            {
-              removeViewBox: true
-            }
-          ]
-        },
-        svgSpriteLoader: {}
+        inlineImageLimit: 1024
       }
     ],
 

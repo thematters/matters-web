@@ -4,7 +4,7 @@ import { LanguageContext } from '~/components/Language'
 import { Title } from '~/components/Title'
 
 import { translate } from '~/common/utils'
-import PUBLISH_IMAGE from '~/static/images/publish-1.svg?url'
+import PUBLISH_IMAGE from '~/static/images/publish-1.svg'
 
 import styles from './styles.css'
 
