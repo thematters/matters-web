@@ -35,8 +35,7 @@ steps:
     commands:
       - cp .env.example .env
       - npm run build
-      - npm run start &
-      - npm run bdd:wait
+      - npm run start
 
   - name: bdd
     image: node:11.14.0
@@ -54,7 +53,7 @@ steps:
       BDD_WEB_SERVER: prebdd
     commands:
       - sh bdd/shells/init.sh
-      - npm run bdd:ci
+      - WEB_SERVER=${BDD_WEB_SERVER} npm run bdd:ci
 
   # === CI tasks for `develop` branch ===
   - name: develop:build

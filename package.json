@@ -30,8 +30,7 @@
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
     "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r \"bdd/steps/*.js\" --format node_modules/cucumber-pretty",
-    "bdd:wait": "wait-on http://localhost:3000",
-    "bdd:ci": "npm run bdd"
+    "bdd:ci": "wait-on http://$WEB_SERVER:3000; npm run bdd"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",
