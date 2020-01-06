@@ -1,18 +1,12 @@
 import { useContext } from 'react'
 
+import { Icon } from '~/components'
 import { Button } from '~/components/Button'
-import { Icon } from '~/components/Icon'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_FACEBOOK from '~/static/icons/footer-facebook.svg?sprite'
-import ICON_INSTAGRAM from '~/static/icons/footer-instagram.svg?sprite'
-import ICON_MEDIUM from '~/static/icons/footer-medium.svg?sprite'
-import ICON_TELEGRAM from '~/static/icons/footer-telegram.svg?sprite'
-import ICON_TWITTER from '~/static/icons/footer-twitter.svg?sprite'
-import ICON_WECHAT from '~/static/icons/footer-wechat.svg?sprite'
 
 import styles from './styles.css'
 
@@ -56,27 +50,27 @@ const Footer = () => {
 
           <div className="socials">
             <a href="https://twitter.com/MattersLab" target="_blank">
-              <Icon id={ICON_TWITTER.id} viewBox={ICON_TWITTER.viewBox} />
+              <Icon.FooterTwitter />
             </a>
             <a href="https://www.facebook.com/MattersLab2018/" target="_blank">
-              <Icon id={ICON_FACEBOOK.id} viewBox={ICON_FACEBOOK.viewBox} />
+              <Icon.FooterFacebook />
             </a>
             <a href="https://medium.com/matters-lab" target="_blank">
-              <Icon id={ICON_MEDIUM.id} viewBox={ICON_MEDIUM.viewBox} />
+              <Icon.FooterMedium />
             </a>
             <a href="https://www.instagram.com/matterslab2018/" target="_blank">
-              <Icon id={ICON_INSTAGRAM.id} viewBox={ICON_INSTAGRAM.viewBox} />
+              <Icon.FooterInstagram />
             </a>
             <Tooltip content="MattersLab">
               <span>
-                <Icon id={ICON_WECHAT.id} viewBox={ICON_WECHAT.viewBox} />
+                <Icon.FooterWeChat />
               </span>
             </Tooltip>
             <a
               href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
               target="_blank"
             >
-              <Icon id={ICON_TELEGRAM.id} viewBox={ICON_TELEGRAM.viewBox} />
+              <Icon.FooterTelegram />
             </a>
           </div>
         </section>

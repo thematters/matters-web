@@ -9,8 +9,6 @@ import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
-import ICON_ADD from '~/static/icons/add.svg?sprite'
-import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
@@ -82,9 +80,7 @@ const CollectionList = ({
     return (
       <button type="button" onClick={() => setEditing(true)}>
         <TextIcon
-          icon={
-            <Icon id={ICON_ADD.id} viewBox={ICON_ADD.viewBox} size="xsmall" />
-          }
+          icon={<Icon.Add size="xxs" />}
           spacing="xtight"
           color="green"
           size="sm"
@@ -122,13 +118,7 @@ const CollectionList = ({
         <section className="load-more">
           <button type="button" onClick={loadRest}>
             <TextIcon
-              icon={
-                <Icon
-                  id={ICON_MORE_CONTENT.id}
-                  viewBox={ICON_MORE_CONTENT.viewBox}
-                  size="small"
-                />
-              }
+              icon={<Icon.MoreContent size="sm" />}
               color="green"
               size="sm"
               textPlacement="left"

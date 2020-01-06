@@ -1,11 +1,8 @@
 import { useState } from 'react'
 
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
-import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
 
 import styles from './styles.css'
 
@@ -48,13 +45,7 @@ const Collapsed = ({
           }}
         >
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_EXPAND.id}
-                viewBox={ICON_EXPAND.viewBox}
-                style={{ width: 6, height: 10 }}
-              />
-            }
+            icon={<Icon.Expand style={{ width: 6, height: 10 }} />}
             size="sm"
             spacing="xxtight"
             textPlacement="left"

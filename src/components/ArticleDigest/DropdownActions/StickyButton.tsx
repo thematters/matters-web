@@ -4,9 +4,6 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
-import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
-import ICON_UNSTICKY from '~/static/icons/unsticky.svg?sprite'
-
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
 import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
 import styles from './styles.css'
@@ -34,31 +31,13 @@ const fragments = {
 }
 
 const TextIconUnsticky = () => (
-  <TextIcon
-    icon={
-      <Icon
-        id={ICON_UNSTICKY.id}
-        viewBox={ICON_UNSTICKY.viewBox}
-        size="small"
-      />
-    }
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.UnSticky size="sm" />} spacing="tight">
     <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
   </TextIcon>
 )
 
 const TextIconSticky = () => (
-  <TextIcon
-    icon={
-      <Icon
-        id={ICON_PIN_TO_TOP.id}
-        viewBox={ICON_PIN_TO_TOP.viewBox}
-        size="small"
-      />
-    }
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.PinToTop size="sm" />} spacing="tight">
     <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
   </TextIcon>
 )

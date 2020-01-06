@@ -7,14 +7,13 @@ import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
-import ICON_SEARCH from '~/static/icons/search.svg?sprite'
 
 import AutoComplete from './AutoComplete'
 import styles from './styles.css'
 
 const SearchButton = () => (
   <button type="submit" aria-label="搜尋">
-    <Icon id={ICON_SEARCH.id} viewBox={ICON_SEARCH.viewBox} />
+    <Icon.Search />
   </button>
 )
 

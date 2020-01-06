@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Translate } from '~/components'
-import { Icon } from '~/components/Icon'
-import { TextIcon } from '~/components/TextIcon'
-
-import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -54,13 +50,7 @@ export const Expandable: React.FC<{
           onClick={() => setExpand(true)}
         >
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_EXPAND.id}
-                viewBox={ICON_EXPAND.viewBox}
-                size="xsmall"
-              />
-            }
+            icon={<Icon.Expand size="xs" />}
             size="sm"
             weight="normal"
             color="green"

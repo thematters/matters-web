@@ -6,7 +6,6 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import { UserDigest } from '~/components/UserDigest'
 
 import { responseStateIs } from '~/common/utils'
-import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
 import { ResponseDigestActionsArticle } from './__generated__/ResponseDigestActionsArticle'
@@ -70,14 +69,6 @@ const fragments = {
   `
 }
 
-const IconDotDivider = () => (
-  <Icon
-    id={ICON_DOT_DIVIDER.id}
-    viewBox={ICON_DOT_DIVIDER.viewBox}
-    style={{ width: 18, height: 18 }}
-  />
-)
-
 const Actions = ({
   article,
   type,
@@ -88,8 +79,7 @@ const Actions = ({
   hasState
 }: ActionsProps) => {
   const isResponseMode = type === 'response'
-  const size =
-    ['feature', 'feed', 'response'].indexOf(type) >= 0 ? 'small' : 'xsmall'
+  const size = ['feature', 'feed', 'response'].indexOf(type) >= 0 ? 'sm' : 'xs'
 
   // used in user article feed
   const isNotActive = !responseStateIs(article, 'active')
@@ -123,19 +113,19 @@ const Actions = ({
 
         <Appreciation article={article} size={size} />
 
-        <IconDotDivider />
+        <Icon.DotDivider />
         <ResponseCount article={article} size={size} />
 
         {hasBookmark && 'subscribed' in article && (
           <>
-            <IconDotDivider />
+            <Icon.DotDivider />
             <BookmarkButton article={article} size={size} />
           </>
         )}
 
         {hasTopicScore && 'topicScore' in article && (
           <>
-            <IconDotDivider />
+            <Icon.DotDivider />
             <TopicScore article={article} hasArrowIcon={type === 'sidebar'} />
           </>
         )}

@@ -6,7 +6,6 @@ import { Icon, PopperInstance, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 
 import { DeleteArticleTags } from './__generated__/DeleteArticleTags'
 import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
@@ -29,12 +28,7 @@ const fragments = {
 }
 
 const TextIconRemoveTag = () => (
-  <TextIcon
-    icon={
-      <Icon id={ICON_REMOVE.id} viewBox={ICON_REMOVE.viewBox} size="small" />
-    }
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.Remove size="sm" />} spacing="tight">
     <Translate zh_hant="取消標籤" zh_hans="取消标签" />
   </TextIcon>
 )

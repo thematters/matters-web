@@ -2,17 +2,14 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Title } from '~/components'
+import { Icon, Title } from '~/components'
 import { Fingerprint } from '~/components/Fingerprint'
-import { Icon } from '~/components/Icon'
-import IconLive from '~/components/Icon/Live'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT, UrlFragments } from '~/common/enums'
 import { responseStateIs, stripHtml, toPath } from '~/common/utils'
-import ICON_STICKY from '~/static/icons/sticky.svg?sprite'
 
 import Actions, { ActionsControls } from '../Actions'
 import DropdownActions from '../DropdownActions'
@@ -129,13 +126,7 @@ const FeedDigest = ({
       {hasSticky && sticky && (
         <div className="sticky">
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_STICKY.id}
-                viewBox={ICON_STICKY.viewBox}
-                size="small"
-              />
-            }
+            icon={<Icon.Sticky size="sm" />}
             size="sm"
             color="grey"
             weight="medium"
@@ -159,7 +150,7 @@ const FeedDigest = ({
           )}
         </div>
         <div>
-          {!hasFingerprint && live && <IconLive />}
+          {!hasFingerprint && live && <Icon.Live />}
           {hasFingerprint && <Fingerprint article={article} />}
           {hasMoreButton && (
             <DropdownActions article={article} inTagDetail={inTagDetail} />

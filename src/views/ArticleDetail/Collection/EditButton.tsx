@@ -12,12 +12,9 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
-import IconSpinner from '~/components/Icon/Spinner'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_EDIT from '~/static/icons/collection-edit.svg?sprite'
-import ICON_SAVE from '~/static/icons/pen.svg?sprite'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorSetCollection } from './__generated__/EditorSetCollection'
@@ -46,10 +43,6 @@ const EDITOR_SET_COLLECTION = gql`
   ${articleFragments.articleCollection}
 `
 
-const IconBox = ({ icon }: { icon: any }) => (
-  <Icon id={icon.id} viewBox={icon.viewBox} size="small" />
-)
-
 const EditButton = ({
   article,
   editing,
@@ -73,7 +66,7 @@ const EditButton = ({
     return (
       <span className={editButtonClass}>
         <button onClick={() => setEditing(true)}>
-          <TextIcon color="grey" icon={<IconBox icon={ICON_EDIT} />}>
+          <TextIcon color="grey" icon={<Icon.CollectionEdit size="sm" />}>
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
         </button>
@@ -100,7 +93,7 @@ const EditButton = ({
       </Button>
 
       <Button
-        icon={loading ? <IconSpinner /> : <IconBox icon={ICON_SAVE} />}
+        icon={loading ? <Icon.Spinner /> : <Icon.Pen size="sm" />}
         size="small"
         disabled={!!loading}
         onClick={async () => {

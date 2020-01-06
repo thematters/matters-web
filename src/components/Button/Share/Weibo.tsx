@@ -1,11 +1,8 @@
 import queryString from 'query-string'
 
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import { dom } from '~/common/utils'
-import ICON_SHARE_WEIBO from '~/static/icons/share-weibo.svg?sprite'
 
 const Weibo = () => (
   <button
@@ -24,16 +21,7 @@ const Weibo = () => (
       return window.open(shareUrl, '分享到微博')
     }}
   >
-    <TextIcon
-      icon={
-        <Icon
-          id={ICON_SHARE_WEIBO.id}
-          viewBox={ICON_SHARE_WEIBO.viewBox}
-          size="small"
-        />
-      }
-      spacing="tight"
-    >
+    <TextIcon icon={<Icon.ShareWeibo size="sm" />} spacing="tight">
       <Translate zh_hant="微博" zh_hans="微博" />
     </TextIcon>
   </button>

@@ -10,8 +10,6 @@ import {
 } from '~/components/GQL/mutations/voteComment'
 
 import { numAbbr } from '~/common/utils'
-import ICON_DISLIKE_ACTIVE from '~/static/icons/dislike-active.svg?sprite'
-import ICON_DISLIKE_INACTIVE from '~/static/icons/dislike-inactive.svg?sprite'
 
 import { DownvoteComment } from './__generated__/DownvoteComment'
 
@@ -25,21 +23,6 @@ const fragments = {
     }
   `
 }
-
-const IconDislikeInactive = () => (
-  <Icon
-    id={ICON_DISLIKE_INACTIVE.id}
-    viewBox={ICON_DISLIKE_INACTIVE.viewBox}
-    size="small"
-  />
-)
-const IconDislikeActive = () => (
-  <Icon
-    id={ICON_DISLIKE_ACTIVE.id}
-    viewBox={ICON_DISLIKE_ACTIVE.viewBox}
-    size="small"
-  />
-)
 
 const DownvoteButton = ({
   comment,
@@ -86,7 +69,7 @@ const DownvoteButton = ({
         disabled={disabled}
       >
         <TextIcon
-          icon={<IconDislikeActive />}
+          icon={<Icon.DislikeActive size="sm" />}
           color="grey"
           weight="medium"
           text={numAbbr(comment.downvotes)}
@@ -106,7 +89,7 @@ const DownvoteButton = ({
       disabled={disabled}
     >
       <TextIcon
-        icon={<IconDislikeInactive />}
+        icon={<Icon.DislikeInactive size="sm" />}
         color="grey"
         weight="medium"
         text={numAbbr(comment.downvotes)}

@@ -80,7 +80,8 @@ const nextConfig = {
         {
           loader: '@svgr/webpack',
           options: {
-            memo: true
+            memo: true,
+            dimensions: false
           }
         },
         {

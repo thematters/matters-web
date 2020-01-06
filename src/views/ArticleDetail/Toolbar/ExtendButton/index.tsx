@@ -8,7 +8,6 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { toPath, translate } from '~/common/utils'
-import ICON_EXTEND from '~/static/icons/extend.svg?sprite'
 
 import { ExtendArticle } from './__generated__/ExtendArticle'
 import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
@@ -68,11 +67,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
           }
         }}
       >
-        <Icon
-          size="default"
-          id={ICON_EXTEND.id}
-          viewBox={ICON_EXTEND.viewBox}
-        />
+        <Icon.Extend />
       </button>
     </Tooltip>
   )

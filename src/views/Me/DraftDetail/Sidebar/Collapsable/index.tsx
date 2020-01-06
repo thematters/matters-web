@@ -2,8 +2,6 @@ import { ReactNode, useState } from 'react'
 
 import { Icon, TextIcon } from '~/components'
 
-import ICON_COLLAPSE_BRANCH from '~/static/icons/collapse-branch.svg?sprite'
-
 import styles from './styles.css'
 
 const Collapsable: React.FC<{
@@ -23,9 +21,7 @@ const Collapsable: React.FC<{
         >
           <TextIcon
             icon={
-              <Icon
-                id={ICON_COLLAPSE_BRANCH.id}
-                viewBox={ICON_COLLAPSE_BRANCH.viewBox}
+              <Icon.CollapseBranch
                 style={{
                   width: 14,
                   height: 14,

@@ -4,7 +4,6 @@ import { Modal } from '~/components/Modal'
 
 import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_EXTERNAL from '~/static/icons/external.svg?sprite'
 
 const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const closeModal = () => {
@@ -52,9 +51,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
           onClick={closeModal}
         >
           <TextIcon
-            icon={
-              <Icon id={ICON_EXTERNAL.id} viewBox={ICON_EXTERNAL.viewBox} />
-            }
+            icon={<Icon.External />}
             spacing="xxxtight"
             color="green"
             textPlacement="left"

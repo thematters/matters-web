@@ -2,11 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { TextIcon, Translate } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
-import IconLike from '~/components/Icon/Like'
 
 import { TEXT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
@@ -56,7 +55,7 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   const abbrSum = numAbbr(sum)
   return (
     <TextIcon
-      icon={<IconLike size="small" />}
+      icon={<Icon.Like size="sm" />}
       color="green"
       weight="medium"
       text={abbrSum}

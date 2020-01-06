@@ -8,7 +8,6 @@ import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCo
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { FollowUser } from './__generated__/FollowUser'
@@ -51,9 +50,7 @@ const Follow = ({
     <Button
       size={size}
       icon={
-        <Icon
-          id={ICON_ADD.id}
-          viewBox={ICON_ADD.viewBox}
+        <Icon.Add
           style={
             size === 'small'
               ? { width: 10, height: 10 }

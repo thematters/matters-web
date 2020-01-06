@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { TextIcon } from '~/components'
-import IconLike from '~/components/Icon/Like'
+import { Icon, TextIcon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -17,17 +16,17 @@ const fragments = {
 
 const Appreciation = ({
   article,
-  size = 'small'
+  size = 'sm'
 }: {
   article: AppreciationArticle
-  size?: 'small' | 'xsmall'
+  size?: 'sm' | 'xs'
 }) => (
   <TextIcon
-    icon={<IconLike size={size} />}
+    icon={<Icon.Like size={size} />}
     color="grey"
     weight="medium"
     text={numAbbr((article && article.appreciationsReceivedTotal) || 0)}
-    size={size === 'small' ? 'sm' : 'xs'}
+    size={size}
     spacing="xtight"
   />
 )

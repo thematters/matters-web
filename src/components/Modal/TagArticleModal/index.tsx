@@ -3,18 +3,15 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { ArticleDigest, Icon, LanguageContext, Translate } from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
-import { Icon } from '~/components/Icon'
-import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_DELETE_BLACK_CIRCLE from '~/static/icons/delete-black-circle.svg?sprite'
 
 import { AddArticleTags } from './__generated__/AddArticleTags'
 import styles from './styles.css'
@@ -190,11 +187,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
                 aria-label="刪除"
                 onClick={() => onDelete(article)}
               >
-                <Icon
-                  id={ICON_DELETE_BLACK_CIRCLE.id}
-                  viewBox={ICON_DELETE_BLACK_CIRCLE.viewBox}
-                  size="small"
-                />
+                <Icon.DeleteBlackCircle size="sm" />
               </button>
             </li>
           ))}

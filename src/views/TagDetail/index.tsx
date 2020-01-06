@@ -23,7 +23,6 @@ import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDet
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
 import TAG_DETAIL_ARTICLES from '~/components/GQL/queries/tagDetailArticles'
 import { useEventListener } from '~/components/Hook'
-import AddIcon from '~/components/Icon/Add'
 import TagArticleModal from '~/components/Modal/TagArticleModal'
 import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
@@ -38,7 +37,6 @@ import {
   TEXT
 } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
-import ICON_EDIT from '~/static/icons/tag-edit.svg?sprite'
 
 import styles from './styles.css'
 
@@ -48,7 +46,7 @@ const AddArticleTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()}>
           <TextIcon
-            icon={<AddIcon color="green" size="xsmall" />}
+            icon={<Icon.Add color="green" size="xxs" />}
             spacing="xxxtight"
             size="sm"
             color="green"
@@ -70,14 +68,7 @@ const EditTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()} className="edit-tag">
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_EDIT.id}
-                viewBox={ICON_EDIT.viewBox}
-                color="green"
-                size="xsmall"
-              />
-            }
+            icon={<Icon.TagEdit color="green" size="xxs" />}
             spacing="xxxtight"
             size="sm"
             color="green"

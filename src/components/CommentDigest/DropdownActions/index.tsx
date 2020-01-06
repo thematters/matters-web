@@ -5,8 +5,6 @@ import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
-import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
-
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 import CollapseButton from './CollapseButton'
 import DeleteButton from './DeleteButton'
@@ -136,12 +134,7 @@ const DropdownActions = ({
       zIndex={301}
     >
       <button type="button" aria-label="更多操作">
-        <Icon
-          size="small"
-          id={ICON_MORE_SMALL.id}
-          viewBox={ICON_MORE_SMALL.viewBox}
-          color="grey"
-        />
+        <Icon.MoreSmall size="sm" color="grey" />
       </button>
     </Dropdown>
   )

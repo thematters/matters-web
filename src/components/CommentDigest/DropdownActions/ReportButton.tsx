@@ -1,7 +1,6 @@
 import { Icon, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import ICON_FLAG from '~/static/icons/flag.svg?sprite'
 
 import styles from './styles.css'
 
@@ -20,12 +19,7 @@ const EditButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon
-        icon={
-          <Icon id={ICON_FLAG.id} viewBox={ICON_FLAG.viewBox} size="small" />
-        }
-        spacing="tight"
-      >
+      <TextIcon icon={<Icon.Flag size="sm" />} spacing="tight">
         <Translate
           zh_hant={TEXT.zh_hant.report}
           zh_hans={TEXT.zh_hans.report}

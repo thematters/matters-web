@@ -4,8 +4,6 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import ICON_COLLAPSE from '~/static/icons/collapse.svg?sprite'
-import ICON_UNCOLLAPSE from '~/static/icons/uncollapse.svg?sprite'
 
 import { CollapseButtonComment } from './__generated__/CollapseButtonComment'
 import { CollapseComment } from './__generated__/CollapseComment'
@@ -70,16 +68,7 @@ const CollapseButton = ({
           hideDropdown()
         }}
       >
-        <TextIcon
-          icon={
-            <Icon
-              id={ICON_UNCOLLAPSE.id}
-              viewBox={ICON_UNCOLLAPSE.viewBox}
-              size="small"
-            />
-          }
-          spacing="tight"
-        >
+        <TextIcon icon={<Icon.UnCollapse size="sm" />} spacing="tight">
           <Translate
             zh_hant={TEXT.zh_hant.uncollapseComment}
             zh_hans={TEXT.zh_hant.uncollapseComment}
@@ -112,16 +101,7 @@ const CollapseButton = ({
         )
       }}
     >
-      <TextIcon
-        icon={
-          <Icon
-            id={ICON_COLLAPSE.id}
-            viewBox={ICON_COLLAPSE.viewBox}
-            size="small"
-          />
-        }
-        spacing="tight"
-      >
+      <TextIcon icon={<Icon.Collapse size="sm" />} spacing="tight">
         <Translate
           zh_hant={TEXT.zh_hant.collapseComment}
           zh_hans={TEXT.zh_hant.collapseComment}

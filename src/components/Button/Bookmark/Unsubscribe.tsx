@@ -3,9 +3,6 @@ import gql from 'graphql-tag'
 import { Icon } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import ICON_BOOKMARK_REGULAR_ACTIVE from '~/static/icons/bookmark-regular-active.svg?sprite'
-import ICON_BOOKMARK_SM_ACTIVE from '~/static/icons/bookmark-small-active.svg?sprite'
-
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import { UnsubscribeArticle } from './__generated__/UnsubscribeArticle'
 
@@ -24,7 +21,7 @@ const Unsubscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xsmall' | 'small' | 'default'
+  size: 'xs' | 'sm' | 'default'
   disabled?: boolean
 }) => {
   const [unsubscribe] = useMutation<UnsubscribeArticle>(UNSUBSCRIBE_ARTICLE, {
@@ -45,19 +42,11 @@ const Unsubscribe = ({
       onClick={() => unsubscribe()}
       disabled={disabled}
     >
-      <Icon
-        size={size}
-        id={
-          size === 'default'
-            ? ICON_BOOKMARK_REGULAR_ACTIVE.id
-            : ICON_BOOKMARK_SM_ACTIVE.id
-        }
-        viewBox={
-          size === 'default'
-            ? ICON_BOOKMARK_REGULAR_ACTIVE.viewBox
-            : ICON_BOOKMARK_SM_ACTIVE.viewBox
-        }
-      />
+      {size === 'default' ? (
+        <Icon.BookmarkRegularActive size={size} />
+      ) : (
+        <Icon.BookmarkSmallActive size={size} />
+      )}
     </button>
   )
 }

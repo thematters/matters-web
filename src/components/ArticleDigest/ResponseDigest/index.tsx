@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components'
-import IconLive from '~/components/Icon/Live'
+import { ArticleDigest, Icon } from '~/components'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -64,7 +63,7 @@ const ResponseDigest = ({
             />
           </span>
         </div>
-        {live && <IconLive />}
+        {live && <Icon.Live />}
       </div>
 
       <div className="digest-wrap">

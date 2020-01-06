@@ -11,6 +11,7 @@ import {
   Error,
   Footer,
   Head,
+  Icon,
   Placeholder,
   Title,
   Translate
@@ -23,7 +24,6 @@ import { QueryError } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
-import IconLive from '~/components/Icon/Live'
 import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
@@ -239,7 +239,7 @@ const ArticleDetail = ({
               <DateTime date={article.createdAt} />
             </p>
             <span className="right-items">
-              {article.live && <IconLive />}
+              {article.live && <Icon.Live />}
               <Fingerprint article={article} color="grey" size="xs" />
             </span>
           </span>

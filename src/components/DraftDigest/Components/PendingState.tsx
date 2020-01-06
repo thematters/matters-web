@@ -6,8 +6,6 @@ import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
-import ICON_LOADING from '~/static/icons/loading.svg?sprite'
 
 import { FeedDigestDraft } from '../FeedDigest/__generated__/FeedDigestDraft'
 
@@ -52,13 +50,11 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
   return (
     <TextIcon
       icon={
-        <Icon
-          id={isPublishing ? ICON_LOADING.id : ICON_ARROW_CIRCLE.id}
-          viewBox={
-            isPublishing ? ICON_LOADING.viewBox : ICON_ARROW_CIRCLE.viewBox
-          }
-          size="small"
-        />
+        isPublishing ? (
+          <Icon.Loading size="sm" />
+        ) : (
+          <Icon.ArrowRightGreenCircle size="sm" />
+        )
       }
       size="sm"
       color="green"

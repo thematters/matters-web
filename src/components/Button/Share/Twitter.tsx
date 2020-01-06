@@ -1,11 +1,9 @@
 import queryString from 'query-string'
 
-import { Icon } from '~/components/Icon'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_SHARE_TWITTER from '~/static/icons/share-twitter.svg?sprite'
 
 const Twitter = () => (
   <button
@@ -28,13 +26,7 @@ const Twitter = () => (
     }}
   >
     <TextIcon
-      icon={
-        <Icon
-          id={ICON_SHARE_TWITTER.id}
-          viewBox={ICON_SHARE_TWITTER.viewBox}
-          size="small"
-        />
-      }
+      icon={<Icon.ShareTwitter size="sm" />}
       spacing="tight"
       text="Twitter"
     />

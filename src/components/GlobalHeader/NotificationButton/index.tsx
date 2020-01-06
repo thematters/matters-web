@@ -17,7 +17,6 @@ import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnread
 import { ViewerContext } from '~/components/Viewer'
 
 import { POLL_INTERVAL } from '~/common/enums'
-import ICON_NOTIFICATION from '~/static/icons/notification.svg?sprite'
 
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
@@ -75,7 +74,7 @@ const NoticeButton = ({
       }}
     >
       <button type="button" aria-label="通知" className={buttonClasses}>
-        <Icon id={ICON_NOTIFICATION.id} viewBox={ICON_NOTIFICATION.viewBox} />
+        <Icon.Notification />
 
         <style jsx>{styles}</style>
       </button>

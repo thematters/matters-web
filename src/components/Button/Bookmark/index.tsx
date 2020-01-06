@@ -18,10 +18,10 @@ const fragments = {
 
 export const BookmarkButton = ({
   article,
-  size = 'small'
+  size = 'sm'
 }: {
   article: BookmarkArticle
-  size?: 'xsmall' | 'small' | 'default'
+  size?: 'xs' | 'sm' | 'default'
 }) => {
   const viewer = useContext(ViewerContext)
 

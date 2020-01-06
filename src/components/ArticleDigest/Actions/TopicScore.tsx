@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { Icon, TextIcon, Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
-import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
 
 import { TopicScoreArticle } from './__generated__/TopicScoreArticle'
 
@@ -26,15 +25,7 @@ const TopicScore = ({
 
   return (
     <TextIcon
-      icon={
-        hasArrowIcon && (
-          <Icon
-            id={ICON_ARROW_RIGHT_GREEN.id}
-            viewBox={ICON_ARROW_RIGHT_GREEN.viewBox}
-            style={{ width: 12, height: 6 }}
-          />
-        )
-      }
+      icon={hasArrowIcon && <Icon.ArrowRightGreen />}
       color="green"
       textPlacement="left"
       size="xs"

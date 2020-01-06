@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import IconSpinner from '~/components/Icon/Spinner'
+import { Icon } from '~/components'
 
 import styles from './styles.css'
 
@@ -27,7 +27,7 @@ export const Switch = ({
 
       {loading && (
         <span className="loading">
-          <IconSpinner size="small" />
+          <Icon.Spinner size="sm" />
         </span>
       )}
 

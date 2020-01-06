@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
-import { DateTime } from '~/components/DateTime'
-import IconLike from '~/components/Icon/Like'
-import { Translate } from '~/components/Language'
-import { TextIcon } from '~/components/TextIcon'
-import { UserDigest } from '~/components/UserDigest'
+import {
+  ArticleDigest,
+  DateTime,
+  Icon,
+  TextIcon,
+  Translate,
+  UserDigest
+} from '~/components'
 
 import { AppreciationReceivedTransaction } from './__generated__/AppreciationReceivedTransaction'
 import styles from './styles.css'
@@ -56,7 +58,7 @@ const AppreciationReceived = ({
       <section className="right">
         <div className="appreciate-count">
           <TextIcon
-            icon={<IconLike size="small" />}
+            icon={<Icon.Like size="sm" />}
             spacing="xtight"
             weight="medium"
             size="sm"

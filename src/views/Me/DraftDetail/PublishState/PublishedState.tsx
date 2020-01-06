@@ -6,7 +6,6 @@ import { Toast } from '~/components/Toast'
 import { ViewerContext } from '~/components/Viewer'
 
 import { toPath } from '~/common/utils'
-import ICON_ARROW from '~/static/icons/arrow-right-white.svg?sprite'
 
 const PublishedState = () => {
   const viewer = useContext(ViewerContext)
@@ -23,13 +22,7 @@ const PublishedState = () => {
         <Link {...path}>
           <a>
             <TextIcon
-              icon={
-                <Icon
-                  style={{ width: 16, hieght: 10 }}
-                  id={ICON_ARROW.id}
-                  viewBox={ICON_ARROW.viewBox}
-                />
-              }
+              icon={<Icon.ArrowRightWhite style={{ width: 16, hieght: 10 }} />}
               size="sm"
               textPlacement="left"
             >

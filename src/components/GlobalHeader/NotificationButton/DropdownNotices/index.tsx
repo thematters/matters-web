@@ -6,8 +6,6 @@ import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifi
 import NoticeDigest from '~/components/NoticeDigest'
 
 import { PATHS, TEXT } from '~/common/enums'
-import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
-import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 import styles from './styles.css'
 
@@ -25,16 +23,7 @@ const Header = () => (
     </h4>
     <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
       <a>
-        <TextIcon
-          icon={
-            <Icon
-              id={ICON_SETTINGS.id}
-              viewBox={ICON_SETTINGS.viewBox}
-              size="small"
-            />
-          }
-          color="grey-dark"
-        >
+        <TextIcon icon={<Icon.Settings size="sm" />} color="grey-dark">
           <Translate
             zh_hant={TEXT.zh_hant.setting}
             zh_hans={TEXT.zh_hans.setting}
@@ -52,13 +41,7 @@ const Footer = () => (
     <Link {...PATHS.ME_NOTIFICATIONS}>
       <a>
         <TextIcon
-          icon={
-            <Icon
-              id={ICON_ARROW_RIGHT_GREEN.id}
-              viewBox={ICON_ARROW_RIGHT_GREEN.viewBox}
-              style={{ width: 12, height: 6 }}
-            />
-          }
+          icon={<Icon.ArrowRightGreen />}
           color="green"
           textPlacement="left"
           weight="medium"

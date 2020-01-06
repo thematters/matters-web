@@ -2,8 +2,6 @@ import classNames from 'classnames'
 
 import { Icon } from '~/components'
 
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
-
 import styles from './styles.css'
 
 /**
@@ -52,11 +50,7 @@ export const Toast: React.FC<ToastProps> = ({
 
       {closeButton && (
         <button type="button" onClick={onCloseButtonClick}>
-          <Icon
-            id={ICON_CLOSE.id}
-            viewBox={ICON_CLOSE.viewBox}
-            color={isWhite ? 'white' : 'black'}
-          />
+          <Icon.Close color={isWhite ? 'white' : 'black'} />
         </button>
       )}
 

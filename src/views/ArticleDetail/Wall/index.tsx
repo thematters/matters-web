@@ -4,7 +4,6 @@ import { Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { SIGNUP_TYPE } from '~/common/enums'
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 import IMG_AD from '~/static/images/ad.svg'
 
 import styles from './styles.css'
@@ -50,12 +49,7 @@ const Wall = ({ show, client }: any) => {
               </div>
               <div className="close">
                 <button onClick={close}>
-                  <Icon
-                    id={ICON_CLOSE.id}
-                    viewBox={ICON_CLOSE.viewBox}
-                    size="small"
-                    color="grey-dark"
-                  />
+                  <Icon.Close size="sm" color="grey-dark" />
                 </button>
               </div>
             </section>
