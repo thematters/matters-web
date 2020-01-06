@@ -8,8 +8,6 @@ const {
 
 const driver = process.env.BDD_DRIVER
 
-setDefaultTimeout(10000)
-
 BeforeAll(async () => {
   await startWebDriver({ env: driver })
   await createSession({ env: driver })
