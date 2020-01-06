@@ -125,12 +125,7 @@ const FeedDigest = ({
     <section className="container">
       {hasSticky && sticky && (
         <div className="sticky">
-          <TextIcon
-            icon={<Icon.Sticky size="sm" />}
-            size="sm"
-            color="grey"
-            weight="medium"
-          >
+          <TextIcon icon={<Icon.Sticky />} color="grey" weight="medium">
             <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
           </TextIcon>
         </div>

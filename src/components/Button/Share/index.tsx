@@ -32,7 +32,7 @@ const ShareButton = () => (
             }
           }}
         >
-          <Icon.Share />
+          <Icon.Share size="md" />
         </button>
       )}
     </ModalSwitch>

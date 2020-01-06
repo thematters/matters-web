@@ -46,9 +46,8 @@ const AddArticleTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()}>
           <TextIcon
-            icon={<Icon.Add color="green" size="xxs" />}
+            icon={<Icon.Add color="green" size="xs" />}
             spacing="xxxtight"
-            size="sm"
             color="green"
           >
             <Translate
@@ -68,9 +67,8 @@ const EditTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()} className="edit-tag">
           <TextIcon
-            icon={<Icon.TagEdit color="green" size="xxs" />}
+            icon={<Icon.TagEdit color="green" size="xs" />}
             spacing="xxxtight"
-            size="sm"
             color="green"
           >
             <Translate

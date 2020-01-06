@@ -23,7 +23,6 @@ const PublishedState = () => {
           <a>
             <TextIcon
               icon={<Icon.ArrowRightWhite style={{ width: 16, hieght: 10 }} />}
-              size="sm"
               textPlacement="left"
             >
               <Translate zh_hant="查看我的作品" zh_hans="查看我的作品" />

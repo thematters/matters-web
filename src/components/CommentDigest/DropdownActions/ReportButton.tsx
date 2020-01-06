@@ -19,7 +19,7 @@ const EditButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.Flag size="sm" />} spacing="tight">
+      <TextIcon icon={<Icon.Flag />} spacing="tight">
         <Translate
           zh_hant={TEXT.zh_hant.report}
           zh_hans={TEXT.zh_hans.report}

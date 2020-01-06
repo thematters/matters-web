@@ -79,12 +79,7 @@ const CollectionList = ({
   if ((totalCount || 0) <= 0 && canEdit) {
     return (
       <button type="button" onClick={() => setEditing(true)}>
-        <TextIcon
-          icon={<Icon.Add size="xxs" />}
-          spacing="xtight"
-          color="green"
-          size="sm"
-        >
+        <TextIcon icon={<Icon.Add size="xs" />} spacing="xtight" color="green">
           <Translate zh_hant="關聯一篇作品" zh_hans="关联一篇作品" />
         </TextIcon>
       </button>
@@ -118,9 +113,8 @@ const CollectionList = ({
         <section className="load-more">
           <button type="button" onClick={loadRest}>
             <TextIcon
-              icon={<Icon.MoreContent size="sm" />}
+              icon={<Icon.MoreContent />}
               color="green"
-              size="sm"
               textPlacement="left"
               spacing="xxtight"
             >

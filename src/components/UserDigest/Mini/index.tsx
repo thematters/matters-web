@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
+import { Avatar, AvatarSize } from '~/components/Avatar'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -21,7 +21,7 @@ import styles from './styles.css'
 
 interface MiniProps {
   user: UserDigestMiniUser
-  avatarSize?: 'xxxsmall' | 'xxsmall' | 'xsmall' | 'small'
+  avatarSize?: AvatarSize
   textSize?: 'small' | 'msmall' | 'xsmall'
   textWeight?: 'normal' | 'medium'
   spacing?: 'xxtight' | 'xtight'
@@ -45,7 +45,7 @@ const fragments = {
 
 const Mini = ({
   user,
-  avatarSize = 'xxsmall',
+  avatarSize = 'sm',
   textSize = 'small',
   textWeight = 'normal',
   spacing = 'xtight',

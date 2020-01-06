@@ -55,7 +55,7 @@ const ShareModal = () => {
 
             <div className="link-container">
               <button onClick={copy} type="button">
-                <Icon.ShareLink size="xxs" />
+                <Icon.ShareLink size="xs" />
               </button>
 
               <input

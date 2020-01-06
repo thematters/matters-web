@@ -29,10 +29,10 @@ export const CREATE_DRAFT = gql`
 
 const WriteIcon = ({ loading }: { loading: boolean }) => {
   if (loading) {
-    return <Icon.Spinner className="u-motion-spin" />
+    return <Icon.Spinner size="md" className="u-motion-spin" />
   }
 
-  return <Icon.Write />
+  return <Icon.Write size="md" />
 }
 
 const WriteButton = ({ allowed, CustomButton }: Props) => {
@@ -55,7 +55,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
             className="u-sm-down-hide"
             size="large"
             bgColor="gold"
-            icon={<Icon.Write />}
+            icon={<Icon.Write size="md" />}
             onClick={open}
           >
             <Translate

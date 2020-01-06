@@ -84,7 +84,7 @@ const ResponseCount = ({
   return (
     <LinkWrapper>
       <TextIcon
-        icon={<Icon.CommentSmall size={size === 'xs' ? 'xxs' : size} />}
+        icon={<Icon.CommentSmall size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
         weight="medium"
         text={numAbbr(article.responseCount || 0)}

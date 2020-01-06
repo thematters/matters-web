@@ -22,7 +22,7 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className={avatarWrapClasses}>
-        <NoticeActorAvatar user={notice.actor} size={'default'} />
+        <NoticeActorAvatar user={notice.actor} />
       </section>
 
       <section className="content-wrap">

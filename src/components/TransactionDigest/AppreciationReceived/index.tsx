@@ -44,7 +44,7 @@ const AppreciationReceived = ({
       <section className="left">
         {sender && !isUseContent && (
           <header>
-            <UserDigest.Mini user={sender} avatarSize="xsmall" />
+            <UserDigest.Mini user={sender} avatarSize="md" />
             <span>
               &nbsp;
               <Translate zh_hant="讚賞了" zh_hans="赞赏了" />
@@ -58,10 +58,9 @@ const AppreciationReceived = ({
       <section className="right">
         <div className="appreciate-count">
           <TextIcon
-            icon={<Icon.Like size="sm" />}
+            icon={<Icon.Like />}
             spacing="xtight"
             weight="medium"
-            size="sm"
             color="green"
             text={amount}
           />

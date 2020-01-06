@@ -31,13 +31,13 @@ const fragments = {
 }
 
 const TextIconUnsticky = () => (
-  <TextIcon icon={<Icon.UnSticky size="sm" />} spacing="tight">
+  <TextIcon icon={<Icon.UnSticky />} spacing="tight">
     <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
   </TextIcon>
 )
 
 const TextIconSticky = () => (
-  <TextIcon icon={<Icon.PinToTop size="sm" />} spacing="tight">
+  <TextIcon icon={<Icon.PinToTop />} spacing="tight">
     <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
   </TextIcon>
 )

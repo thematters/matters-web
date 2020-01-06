@@ -55,11 +55,10 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   const abbrSum = numAbbr(sum)
   return (
     <TextIcon
-      icon={<Icon.Like size="sm" />}
+      icon={<Icon.Like />}
       color="green"
       weight="medium"
       text={abbrSum}
-      size="sm"
       spacing="xtight"
       style={appreciationIconStyle}
     />
@@ -96,7 +95,7 @@ const FullDesc = ({
   if (isArchived) {
     return (
       <section className="container">
-        <Avatar size="default" />
+        <Avatar />
 
         <section className="content">
           <header className="header-container">
@@ -120,7 +119,7 @@ const FullDesc = ({
     <section className="container">
       <Link {...path}>
         <a>
-          <Avatar size="default" user={user} />
+          <Avatar user={user} />
         </a>
       </Link>
 

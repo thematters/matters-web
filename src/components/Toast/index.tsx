@@ -50,7 +50,7 @@ export const Toast: React.FC<ToastProps> = ({
 
       {closeButton && (
         <button type="button" onClick={onCloseButtonClick}>
-          <Icon.Close color={isWhite ? 'white' : 'black'} />
+          <Icon.Close size="md" color={isWhite ? 'white' : 'black'} />
         </button>
       )}
 

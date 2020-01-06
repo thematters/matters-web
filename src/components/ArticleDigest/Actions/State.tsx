@@ -34,7 +34,7 @@ const State = ({
 
   return (
     <span className="state">
-      <TextIcon icon={<Icon.Archive size="sm" />} size="xs">
+      <TextIcon icon={<Icon.Archive />} size="xs">
         <Translate zh_hant="已站內隱藏" zh_hans="已站内隐藏" />
       </TextIcon>
 

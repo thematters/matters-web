@@ -39,11 +39,11 @@ const CheckBox: React.FC<Props> = ({
       <div className="container">
         <label className="check" onClick={click}>
           {value === true ? (
-            <Icon.CheckActive size="sm" />
+            <Icon.CheckActive size="md" />
           ) : error ? (
-            <Icon.CheckError size="sm" />
+            <Icon.CheckError size="md" />
           ) : (
-            <Icon.CheckInactive size="sm" />
+            <Icon.CheckInactive size="md" />
           )}
           <input
             className={inputClass}

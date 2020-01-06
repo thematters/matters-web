@@ -21,7 +21,7 @@ const Collection: React.FC<{
     <section className="collection">
       <header>
         <TextIcon
-          icon={<Icon.Collection size="sm" />}
+          icon={<Icon.Collection />}
           spacing="xxtight"
           size="md"
           weight="medium"

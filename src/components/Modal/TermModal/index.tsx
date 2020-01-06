@@ -107,7 +107,7 @@ const TermModal: React.FC<FormProps> = formProps => {
           disabled={isSubmitting}
           loading={isSubmitting}
         >
-          {isSubmitting && <Icon.Spinner />}
+          {isSubmitting && <Icon.Spinner size="md" />}
           {!isSubmitting &&
             translate({
               zh_hant: TEXT.zh_hant.agreeAndContinue,

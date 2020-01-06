@@ -57,7 +57,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             }}
           >
             <TextIcon
-              icon={<Icon.Copy size="sm" />}
+              icon={<Icon.Copy />}
               color="green"
               weight="medium"
               size="xs"
@@ -89,7 +89,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             }}
           >
             <TextIcon
-              icon={<Icon.Expand size="xxs" />}
+              icon={<Icon.Expand size="xs" />}
               size="xs"
               weight="medium"
               color="grey"
@@ -110,12 +110,12 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             const gatewayUrl = `${url}${dataHash}`
             return (
               <li key={i}>
-                <Icon.ShareLink size="sm" />
+                <Icon.ShareLink />
 
                 <span className="gateway-url">{gatewayUrl}</span>
 
                 <a href={gatewayUrl} target="_blank">
-                  <Icon.ArrowRightGreenCircle size="sm" />
+                  <Icon.ArrowRightGreenCircle />
                 </a>
               </li>
             )
@@ -127,7 +127,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
       <div className={`help-container ${helpExpand ? 'expand' : ''}`}>
         <button type="button" onClick={() => setHelpExpand(!helpExpand)}>
           <TextIcon
-            icon={<Icon.Help size="xxs" />}
+            icon={<Icon.Help size="xs" />}
             weight="medium"
             size="xs"
             color={helpExpand ? 'green' : 'grey'}
@@ -168,7 +168,7 @@ const Fingerprint = ({
     >
       <button type="button">
         <TextIcon
-          icon={<Icon.Box size={size === 'xs' ? 'xxs' : size} />}
+          icon={<Icon.Box size={size === 'xs' ? 'xs' : undefined} />}
           size={size}
           color={color}
           weight="medium"

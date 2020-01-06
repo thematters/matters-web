@@ -49,14 +49,7 @@ const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {
 
   return (
     <TextIcon
-      icon={
-        isPublishing ? (
-          <Icon.Loading size="sm" />
-        ) : (
-          <Icon.ArrowRightGreenCircle size="sm" />
-        )
-      }
-      size="sm"
+      icon={isPublishing ? <Icon.Loading /> : <Icon.ArrowRightGreenCircle />}
       color="green"
       weight="medium"
     >

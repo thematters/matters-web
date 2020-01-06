@@ -6,14 +6,13 @@ import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
 import { AvatarUser } from './__generated__/AvatarUser'
 import styles from './styles.css'
 
-type AvatarSize =
-  | 'xxxsmall'
-  | 'xxsmall'
-  | 'xsmall'
-  | 'small'
-  | 'default'
-  | 'large'
-  | 'xlarge'
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+
+interface AvatarProps {
+  user?: AvatarUser
+  size?: AvatarSize
+  src?: string
+}
 
 const fragments = {
   user: gql`
@@ -23,19 +22,12 @@ const fragments = {
   `
 }
 
-export const Avatar = ({
-  user,
-  size = 'default',
-  src
-}: {
-  size?: AvatarSize
-  user?: AvatarUser
-  src?: string
-}) => {
+export const Avatar = (props: AvatarProps) => {
+  const { user, size = '', src } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     avatar: true,
-    [size]: true
+    [size]: !!size
   })
 
   return (

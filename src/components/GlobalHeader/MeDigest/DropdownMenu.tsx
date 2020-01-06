@@ -37,7 +37,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...userPath}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon.Me size="sm" />}
+              icon={<Icon.Me />}
               text={translate({
                 zh_hant: TEXT.zh_hant.myProfile,
                 zh_hans: TEXT.zh_hans.myProfile,
@@ -52,7 +52,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...PATHS.ME_APPRECIATIONS_SENT}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon.Like size="sm" />}
+              icon={<Icon.Like />}
               text={translate({
                 zh_hant: TEXT.zh_hant.myAppreciations,
                 zh_hans: TEXT.zh_hans.myAppreciations,
@@ -67,7 +67,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         <Link {...userHistoryPath}>
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon.ReadingHistory size="sm" />}
+              icon={<Icon.ReadingHistory />}
               text={translate({
                 zh_hant: TEXT.zh_hant.readHistory,
                 zh_hans: TEXT.zh_hans.readHistory,
@@ -86,7 +86,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         >
           <a onClick={hideDropdown}>
             <TextIcon
-              icon={<Icon.Settings size="sm" />}
+              icon={<Icon.Settings />}
               text={translate({
                 zh_hant: TEXT.zh_hant.setting,
                 zh_hans: TEXT.zh_hans.setting,
@@ -134,7 +134,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           }}
         >
           <TextIcon
-            icon={<Icon.LogOut size="sm" />}
+            icon={<Icon.LogOut />}
             text={translate({
               zh_hant: TEXT.zh_hant.logout,
               zh_hans: TEXT.zh_hans.logout,

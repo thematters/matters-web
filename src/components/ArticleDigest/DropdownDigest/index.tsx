@@ -91,16 +91,12 @@ const DropdownDigest = ({
           </Title>
         </LinkWrapper>
 
-        <UserDigest.Mini
-          user={author}
-          avatarSize="xxxsmall"
-          textSize="xsmall"
-        />
+        <UserDigest.Mini user={author} avatarSize="xs" textSize="xsmall" />
 
         {!isBanned && hasArrow && (
           <Link {...path}>
             <a className="arrow" target="_blank">
-              <Icon.ArrowUpRight size="sm" />
+              <Icon.ArrowUpRight />
             </a>
           </Link>
         )}

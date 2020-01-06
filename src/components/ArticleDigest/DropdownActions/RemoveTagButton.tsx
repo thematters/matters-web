@@ -28,7 +28,7 @@ const fragments = {
 }
 
 const TextIconRemoveTag = () => (
-  <TextIcon icon={<Icon.Remove size="sm" />} spacing="tight">
+  <TextIcon icon={<Icon.Remove />} spacing="tight">
     <Translate zh_hant="取消標籤" zh_hans="取消标签" />
   </TextIcon>
 )

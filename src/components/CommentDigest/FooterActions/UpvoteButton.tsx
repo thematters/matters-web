@@ -69,11 +69,10 @@ const UpvoteButton = ({
         disabled={disabled}
       >
         <TextIcon
-          icon={<Icon.LikeActive size="sm" />}
+          icon={<Icon.LikeActive />}
           color="grey"
           weight="medium"
           text={numAbbr(comment.upvotes)}
-          size="sm"
           spacing="xxxtight"
         />
       </button>
@@ -89,11 +88,10 @@ const UpvoteButton = ({
       disabled={disabled}
     >
       <TextIcon
-        icon={<Icon.LikeInactive size="sm" />}
+        icon={<Icon.LikeInactive />}
         color="grey"
         weight="medium"
         text={numAbbr(comment.upvotes)}
-        size="sm"
         spacing="xxxtight"
       />
     </button>

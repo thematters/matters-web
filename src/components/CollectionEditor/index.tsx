@@ -108,7 +108,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon.Drag size="sm" />
+                          <Icon.Drag />
                         </span>
 
                         <ArticleDigest.Dropdown
@@ -123,7 +123,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           aria-label="刪除"
                           onClick={() => this.onDelete(article)}
                         >
-                          <Icon.DeleteBlackCircle size="sm" />
+                          <Icon.DeleteBlackCircle />
                         </button>
                       </li>
                     )}

@@ -61,9 +61,8 @@ const CreateTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()}>
           <TextIcon
-            icon={<Icon.Add color="green" size="xxs" />}
+            icon={<Icon.Add color="green" size="xs" />}
             spacing="xxxtight"
-            size="sm"
             color="green"
           >
             <Translate

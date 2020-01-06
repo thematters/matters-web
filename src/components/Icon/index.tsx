@@ -99,7 +99,8 @@ import { ReactComponent as Write } from '~/static/icons/write.svg'
 
 import Live from './Live'
 import styles from './styles.css'
-export type IconSize = 'xxs' | 'xs' | 'sm' | 'default' | 'lg' | 'xl' | 'xxl'
+
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export type IconColor = 'white' | 'black' | 'grey-dark' | 'grey' | 'green'
 
@@ -112,17 +113,17 @@ export interface IconProps {
 const withIcon = (
   WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>
 ) => (props: IconProps) => {
-  const { size = 'default', color = '', className, ...restProps } = props
+  const { size = '', color = '', className, ...restProps } = props
   const iconClass = classNames({
     icon: true,
-    [size]: true,
+    [size]: !!size,
     [color]: !!color,
     [className]: !!className
   })
 
   return (
     <>
-      <WrappedIcon className={iconClass} {...restProps} />
+      <WrappedIcon className={iconClass} aria-hidden="true" {...restProps} />
 
       <style jsx global>
         {styles}

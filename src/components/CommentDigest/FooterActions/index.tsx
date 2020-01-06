@@ -124,7 +124,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                     }}
                     disabled={isDisabled}
                   >
-                    <Icon.CommentSmall size="sm" />
+                    <Icon.CommentSmall />
                   </button>
                 </>
               )}

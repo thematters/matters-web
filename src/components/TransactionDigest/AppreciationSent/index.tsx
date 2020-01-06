@@ -46,10 +46,9 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
       <section className="right">
         <div className="appreciate-count">
           <TextIcon
-            icon={<Icon.Like size="sm" />}
+            icon={<Icon.Like />}
             spacing="xtight"
             weight="medium"
-            size="sm"
             color="green"
             text={amount}
           />

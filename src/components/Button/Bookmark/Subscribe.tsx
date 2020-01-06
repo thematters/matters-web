@@ -28,7 +28,7 @@ const Subscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xs' | 'sm' | 'default'
+  size: 'xs' | 'sm' | 'md'
   disabled?: boolean
 }) => {
   const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
@@ -93,10 +93,10 @@ const Subscribe = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {size === 'default' ? (
-        <Icon.BookmarkRegularInactive size={size} />
+      {size === 'md' ? (
+        <Icon.BookmarkRegularInactive size="md" />
       ) : (
-        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xxs' : size} />
+        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xs' : undefined} />
       )}
     </button>
   )

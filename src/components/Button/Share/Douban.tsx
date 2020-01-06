@@ -29,11 +29,7 @@ const Douban = () => (
       return window.open(shareUrl)
     }}
   >
-    <TextIcon
-      icon={<Icon.ShareDouban size="sm" />}
-      spacing="tight"
-      text="豆瓣"
-    />
+    <TextIcon icon={<Icon.ShareDouban />} spacing="tight" text="豆瓣" />
   </button>
 )
 

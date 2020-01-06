@@ -24,11 +24,7 @@ const Whatsapp = () => (
       return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >
-    <TextIcon
-      icon={<Icon.ShareWhatsApp size="sm" />}
-      spacing="tight"
-      text="WhatsApp"
-    />
+    <TextIcon icon={<Icon.ShareWhatsApp />} spacing="tight" text="WhatsApp" />
   </button>
 )
 

@@ -78,11 +78,11 @@ export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
 
   return (
     <section className="container">
-      <Avatar size="xlarge" user={user} />
+      <Avatar size="xxl" user={user} />
 
       <div className="uploader">
         <div className="button">
-          <Icon.Camera />
+          <Icon.Camera size="md" />
           <span className="hint">
             <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
           </span>

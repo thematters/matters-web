@@ -54,13 +54,13 @@ const fragments = {
 }
 
 const TextIconUnpin = () => (
-  <TextIcon icon={<Icon.UnPin size="sm" />} spacing="tight">
+  <TextIcon icon={<Icon.UnPin />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.unpin} zh_hans={TEXT.zh_hans.unpin} />
   </TextIcon>
 )
 
 const TextIconPin = () => (
-  <TextIcon icon={<Icon.PinToTop size="sm" />} spacing="tight">
+  <TextIcon icon={<Icon.PinToTop />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
   </TextIcon>
 )

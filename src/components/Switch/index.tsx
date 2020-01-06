@@ -27,7 +27,7 @@ export const Switch = ({
 
       {loading && (
         <span className="loading">
-          <Icon.Spinner size="sm" />
+          <Icon.Spinner size="md" />
         </span>
       )}
 

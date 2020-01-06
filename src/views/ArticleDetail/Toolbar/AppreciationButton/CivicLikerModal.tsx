@@ -51,7 +51,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
           onClick={closeModal}
         >
           <TextIcon
-            icon={<Icon.External />}
+            icon={<Icon.External size="md" />}
             spacing="xxxtight"
             color="green"
             textPlacement="left"

@@ -40,7 +40,7 @@ const DescendantComment = ({
           <section className="author-row">
             <UserDigest.Mini
               user={comment.author}
-              avatarSize="xsmall"
+              avatarSize="md"
               textWeight="medium"
               textSize="msmall"
               hasUserName={inArticle}

@@ -24,11 +24,7 @@ const Telegram = () => (
       return window.open(shareUrl, 'Share to Telegram')
     }}
   >
-    <TextIcon
-      icon={<Icon.ShareTelegram size="sm" />}
-      spacing="tight"
-      text="Telegram"
-    />
+    <TextIcon icon={<Icon.ShareTelegram />} spacing="tight" text="Telegram" />
   </button>
 )
 

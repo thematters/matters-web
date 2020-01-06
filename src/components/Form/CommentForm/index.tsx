@@ -206,7 +206,9 @@ const CommentForm = ({
           disabled={
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
-          icon={isSubmitting ? <Icon.Spinner /> : <Icon.Post />}
+          icon={
+            isSubmitting ? <Icon.Spinner size="md" /> : <Icon.Post size="md" />
+          }
         >
           <Translate zh_hant="送出" zh_hans="送出" />
         </Button>

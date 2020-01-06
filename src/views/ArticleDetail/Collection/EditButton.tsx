@@ -66,7 +66,7 @@ const EditButton = ({
     return (
       <span className={editButtonClass}>
         <button onClick={() => setEditing(true)}>
-          <TextIcon color="grey" icon={<Icon.CollectionEdit size="sm" />}>
+          <TextIcon color="grey" icon={<Icon.CollectionEdit />}>
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
         </button>
@@ -93,7 +93,7 @@ const EditButton = ({
       </Button>
 
       <Button
-        icon={loading ? <Icon.Spinner /> : <Icon.Pen size="sm" />}
+        icon={loading ? <Icon.Spinner size="md" /> : <Icon.Pen size="md" />}
         size="small"
         disabled={!!loading}
         onClick={async () => {

@@ -25,7 +25,7 @@ const TopicScore = ({
 
   return (
     <TextIcon
-      icon={hasArrowIcon && <Icon.ArrowRightGreen />}
+      icon={hasArrowIcon && <Icon.ArrowRightGreen size="md" />}
       color="green"
       textPlacement="left"
       size="xs"

@@ -15,7 +15,7 @@ const SearchButton = () => {
   return (
     <Link {...PATHS.SEARCH}>
       <a aria-label="搜尋" hidden={isDraft}>
-        <Icon.Search />
+        <Icon.Search size="md" />
 
         <style jsx>{styles}</style>
       </a>

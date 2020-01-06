@@ -82,7 +82,7 @@ const FooterButton: React.FC<ButtonProps> = ({
   return (
     <>
       <button type={htmlType} className={buttonClasses} {...restProps}>
-        {loading && <Icon.Spinner />}
+        {loading && <Icon.Spinner size="md" />}
         {!loading && children}
       </button>
 

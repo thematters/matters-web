@@ -104,7 +104,7 @@ const FeedDigest = ({
           <section className="author-row">
             <UserDigest.Mini
               user={author}
-              avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
+              avatarSize={inFolloweeFeed ? 'sm' : 'lg'}
               textWeight="medium"
               hasUserName={inArticle}
             />
@@ -201,9 +201,8 @@ const FeedDigest = ({
                 onClick={() => setExpand(true)}
               >
                 <TextIcon
-                  icon={<Icon.MoreContent size="sm" />}
+                  icon={<Icon.MoreContent />}
                   color="green"
-                  size="sm"
                   textPlacement="left"
                   spacing="xxtight"
                 >

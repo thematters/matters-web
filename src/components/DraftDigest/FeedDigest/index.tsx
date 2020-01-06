@@ -99,7 +99,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
       {isPending && (
         <footer className="extra">
           <p>
-            <TextIcon icon={<Icon.Help />}>
+            <TextIcon icon={<Icon.Help size="md" />}>
               <Translate
                 zh_hant="上鏈後不可修改和刪除"
                 zh_hans="上链后不可修改和删除"
@@ -121,7 +121,7 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
       {isError && (
         <footer className="extra">
           <p>
-            <TextIcon icon={<Icon.Help />}>
+            <TextIcon icon={<Icon.Help size="md" />}>
               <Translate
                 zh_hant="作品已存至草稿箱，請檢查網絡後重試。"
                 zh_hans="作品已存至草稿箱，请检查网络后重试。"

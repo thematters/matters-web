@@ -49,7 +49,7 @@ const Toolbar = ({
         <div className="container">
           <AppreciationButton article={article} />
           <ResponseButton article={article} textPlacement="bottom" />
-          <BookmarkButton article={article} size="default" />
+          <BookmarkButton article={article} size="md" />
           <ShareButton />
         </div>
         <style jsx>{styles}</style>
@@ -75,7 +75,7 @@ const Toolbar = ({
         )}
         <ResponseButton article={article} />
         {!fixed && <ExtendButton article={article} />}
-        <BookmarkButton article={article} size="default" />
+        <BookmarkButton article={article} size="md" />
         <ShareButton />
         <MoreButton article={article} />
       </section>

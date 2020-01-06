@@ -56,7 +56,7 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
     <Link {...path}>
       <a className={tagClasses}>
         <TextIcon
-          icon={<Icon.HashTag size={isSmall ? 'xxs' : 'sm'} />}
+          icon={<Icon.HashTag size={isSmall ? 'xs' : undefined} />}
           text={tag.content}
           weight="medium"
           size={isSmall ? 'sm' : 'md'}

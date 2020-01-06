@@ -151,7 +151,13 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     bgColor="green"
                     style={{ minWidth: '5rem' }}
                     disabled={!_isEmpty(errors) || isSubmitting}
-                    icon={isSubmitting ? <Icon.Spinner /> : <Icon.Write />}
+                    icon={
+                      isSubmitting ? (
+                        <Icon.Spinner size="md" />
+                      ) : (
+                        <Icon.Write size="md" />
+                      )
+                    }
                   >
                     <Translate
                       zh_hant={TEXT.zh_hant.save}

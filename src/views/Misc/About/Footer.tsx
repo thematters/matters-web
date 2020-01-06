@@ -50,27 +50,27 @@ const Footer = () => {
 
           <div className="socials">
             <a href="https://twitter.com/MattersLab" target="_blank">
-              <Icon.FooterTwitter />
+              <Icon.FooterTwitter size="md" />
             </a>
             <a href="https://www.facebook.com/MattersLab2018/" target="_blank">
-              <Icon.FooterFacebook />
+              <Icon.FooterFacebook size="md" />
             </a>
             <a href="https://medium.com/matters-lab" target="_blank">
-              <Icon.FooterMedium />
+              <Icon.FooterMedium size="md" />
             </a>
             <a href="https://www.instagram.com/matterslab2018/" target="_blank">
-              <Icon.FooterInstagram />
+              <Icon.FooterInstagram size="md" />
             </a>
             <Tooltip content="MattersLab">
               <span>
-                <Icon.FooterWeChat />
+                <Icon.FooterWeChat size="md" />
               </span>
             </Tooltip>
             <a
               href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
               target="_blank"
             >
-              <Icon.FooterTelegram />
+              <Icon.FooterTelegram size="md" />
             </a>
           </div>
         </section>

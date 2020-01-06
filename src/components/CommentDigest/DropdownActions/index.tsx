@@ -134,7 +134,7 @@ const DropdownActions = ({
       zIndex={301}
     >
       <button type="button" aria-label="更多操作">
-        <Icon.MoreSmall size="sm" color="grey" />
+        <Icon.MoreSmall color="grey" />
       </button>
     </Dropdown>
   )

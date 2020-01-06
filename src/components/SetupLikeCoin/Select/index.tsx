@@ -38,7 +38,6 @@ const Description = () => (
     <section>
       <TextIcon
         icon={<Icon.Help size="xs" />}
-        size="sm"
         color="green"
         spacing="xtight"
         weight="medium"
@@ -96,8 +95,8 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
                   </p>
                 </section>
 
-                {isGenerate && <Icon.CheckActive />}
-                {!isGenerate && <Icon.UnCheck />}
+                {isGenerate && <Icon.CheckActive size="md" />}
+                {!isGenerate && <Icon.UnCheck size="md" />}
               </div>
             </label>
 
@@ -125,8 +124,8 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
                   </p>
                 </section>
 
-                {!isGenerate && <Icon.CheckActive />}
-                {isGenerate && <Icon.UnCheck />}
+                {!isGenerate && <Icon.CheckActive size="md" />}
+                {isGenerate && <Icon.UnCheck size="md" />}
               </div>
             </label>
           </section>

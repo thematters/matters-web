@@ -21,7 +21,7 @@ const Unsubscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xs' | 'sm' | 'default'
+  size: 'xs' | 'sm' | 'md'
   disabled?: boolean
 }) => {
   const [unsubscribe] = useMutation<UnsubscribeArticle>(UNSUBSCRIBE_ARTICLE, {
@@ -42,10 +42,10 @@ const Unsubscribe = ({
       onClick={() => unsubscribe()}
       disabled={disabled}
     >
-      {size === 'default' ? (
-        <Icon.BookmarkRegularActive size={size} />
+      {size === 'md' ? (
+        <Icon.BookmarkRegularActive size="md" />
       ) : (
-        <Icon.BookmarkSmallActive size={size === 'xs' ? 'xxs' : size} />
+        <Icon.BookmarkSmallActive size={size === 'xs' ? 'xs' : undefined} />
       )}
     </button>
   )

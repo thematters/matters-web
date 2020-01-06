@@ -14,7 +14,7 @@ export default ({ allowed }: Props) => (
       <Button
         size="large"
         bgColor="green"
-        icon={<Icon.Write />}
+        icon={<Icon.Write size="md" />}
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
           open()

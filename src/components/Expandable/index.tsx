@@ -51,7 +51,6 @@ export const Expandable: React.FC<{
         >
           <TextIcon
             icon={<Icon.Expand size="xs" />}
-            size="sm"
             weight="normal"
             color="green"
             style={{ fontSize }}

@@ -88,7 +88,7 @@ const ME_PROFILE = gql`
 const SeedBadge = () => (
   <Tooltip content={<Translate zh_hant="種子用戶" zh_hans="种子用户" />}>
     <span>
-      <Icon.SeedBadge size="sm" />
+      <Icon.SeedBadge />
     </span>
   </Tooltip>
 )
@@ -187,7 +187,7 @@ const BaseUserProfile = () => {
           <section className="content">
             <div className="avatar-container">
               <Avatar
-                size="xlarge"
+                size="xxl"
                 user={!isMe && isUserInactive ? undefined : user}
               />
 

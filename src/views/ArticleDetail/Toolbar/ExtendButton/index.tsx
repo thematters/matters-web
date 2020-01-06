@@ -67,7 +67,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
           }
         }}
       >
-        <Icon.Extend />
+        <Icon.Extend size="md" />
       </button>
     </Tooltip>
   )
