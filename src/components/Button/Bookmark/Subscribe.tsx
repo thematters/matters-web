@@ -96,7 +96,7 @@ const Subscribe = ({
       {size === 'default' ? (
         <Icon.BookmarkRegularInactive size={size} />
       ) : (
-        <Icon.BookmarkSmallInactive size={size} />
+        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xxs' : size} />
       )}
     </button>
   )

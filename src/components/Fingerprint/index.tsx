@@ -168,7 +168,7 @@ const Fingerprint = ({
     >
       <button type="button">
         <TextIcon
-          icon={<Icon.Box size={size} />}
+          icon={<Icon.Box size={size === 'xs' ? 'xxs' : size} />}
           size={size}
           color={color}
           weight="medium"

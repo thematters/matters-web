@@ -22,7 +22,7 @@ const Appreciation = ({
   size?: 'sm' | 'xs'
 }) => (
   <TextIcon
-    icon={<Icon.Like size={size} />}
+    icon={<Icon.Like size={size === 'xs' ? 'xxs' : size} />}
     color="grey"
     weight="medium"
     text={numAbbr((article && article.appreciationsReceivedTotal) || 0)}

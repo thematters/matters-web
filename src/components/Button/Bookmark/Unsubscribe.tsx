@@ -45,7 +45,7 @@ const Unsubscribe = ({
       {size === 'default' ? (
         <Icon.BookmarkRegularActive size={size} />
       ) : (
-        <Icon.BookmarkSmallActive size={size} />
+        <Icon.BookmarkSmallActive size={size === 'xs' ? 'xxs' : size} />
       )}
     </button>
   )

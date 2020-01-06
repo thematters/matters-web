@@ -60,10 +60,14 @@ const ResponseCount = ({
   const isBanned = responseStateIs(article, 'banned')
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
-      <span>{children}</span>
+      <span className="response-count">
+        {children}
+        <style jsx>{styles}</style>
+      </span>
     ) : (
       <Link {...path}>
         <a
+          className="response-count"
           onClick={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
               entrance: article.id,
@@ -72,6 +76,7 @@ const ResponseCount = ({
           }}
         >
           {children}
+          <style jsx>{styles}</style>
         </a>
       </Link>
     )
@@ -79,7 +84,7 @@ const ResponseCount = ({
   return (
     <LinkWrapper>
       <TextIcon
-        icon={<Icon.CommentSmall size={size} />}
+        icon={<Icon.CommentSmall size={size === 'xs' ? 'xxs' : size} />}
         color="grey"
         weight="medium"
         text={numAbbr(article.responseCount || 0)}
