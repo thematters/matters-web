@@ -24,7 +24,7 @@ const Collection: React.FC<{
           icon={<Icon.Collection />}
           spacing="xxtight"
           size="md"
-          weight="medium"
+          weight="md"
         >
           {!collectionCount || collectionCount <= 0 ? (
             <Translate zh_hant="沒有關聯作品" zh_hans="没有关联作品" />

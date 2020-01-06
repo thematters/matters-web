@@ -13,7 +13,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <>
-      <Modal.Content layout="full-width" spacing="small">
+      <Modal.Content layout="full-width" spacing="sm">
         <p>
           <Translate
             zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"

@@ -12,7 +12,7 @@ export default ({ allowed }: Props) => (
   <ModalSwitch modalId={allowed ? 'publishModal' : 'likeCoinTermModal'}>
     {(open: any) => (
       <Button
-        size="large"
+        size="lg"
         bgColor="green"
         icon={<Icon.Write size="md" />}
         onClick={() => {

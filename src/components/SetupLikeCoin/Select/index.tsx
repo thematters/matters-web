@@ -41,7 +41,7 @@ const Description = () => (
         size="sm"
         color="green"
         spacing="xtight"
-        weight="medium"
+        weight="md"
       >
         <Translate zh_hant="什麼是 Liker ID？" zh_hans="什么是 Liker ID？" />
       </TextIcon>

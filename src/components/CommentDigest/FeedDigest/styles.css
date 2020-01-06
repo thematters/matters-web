@@ -124,7 +124,7 @@
   flex-shrink: 2;
   display: block;
 
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   font-size: var(--font-size-md);
   white-space: nowrap;
   overflow: hidden;

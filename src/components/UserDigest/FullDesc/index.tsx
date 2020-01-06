@@ -57,7 +57,7 @@ const Appreciation = ({ sum }: { sum?: number }) => {
     <TextIcon
       icon={<Icon.Like />}
       color="green"
-      weight="medium"
+      weight="md"
       text={abbrSum}
       spacing="xtight"
       style={appreciationIconStyle}
@@ -65,23 +65,18 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   )
 }
 
-const FullDesc = ({
-  user,
-  nameSize = 'default',
-  readonly,
-  appreciations,
-  showUnblock
-}: {
+const FullDesc = (props: {
   user: UserDigestFullDescUser
-  nameSize?: 'default' | 'small'
+  nameSize?: 'sm'
   readonly?: boolean
   appreciations?: number
   showUnblock?: boolean
 }) => {
+  const { user, nameSize = '', readonly, appreciations, showUnblock } = props
   const showAppreciations = appreciations && appreciations > 0
   const nameSizeClasses = classNames({
     name: true,
-    [nameSize]: true,
+    [nameSize]: !!nameSize,
     'name-shrink': showAppreciations
   })
   const path = readonly

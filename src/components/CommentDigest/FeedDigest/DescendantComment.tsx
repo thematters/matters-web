@@ -41,8 +41,8 @@ const DescendantComment = ({
             <UserDigest.Mini
               user={comment.author}
               avatarSize="md"
-              textWeight="medium"
-              textSize="msmall"
+              textWeight="md"
+              textSize="sm-s"
               hasUserName={inArticle}
             />
             {comment.pinned && <PinnedLabel />}

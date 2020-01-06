@@ -31,7 +31,7 @@ const EmptySeachPage = () => {
 }
 
 const Search = () => {
-  const isMedium = useResponsive({ type: 'medium' })()
+  const isMedium = useResponsive({ type: 'md' })()
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })

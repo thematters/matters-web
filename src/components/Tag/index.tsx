@@ -9,7 +9,7 @@ import { numAbbr, toPath } from '~/common/utils'
 import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
 
-type TagSize = 'small' | 'default'
+type TagSize = 'sm' | 'default'
 
 interface TagProps {
   size?: TagSize
@@ -22,7 +22,7 @@ interface TagProps {
  * Usage:
  *
  * ```tsx
- * <Tag size="small" tag={tag} />
+ * <Tag size="sm" tag={tag} />
  * ```
  */
 
@@ -58,7 +58,7 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
         <TextIcon
           icon={<Icon.HashTag size={isSmall ? 'xs' : undefined} />}
           text={tag.content}
-          weight="medium"
+          weight="md"
           size={isSmall ? 'sm' : 'md'}
           spacing={isSmall ? 'xtight' : 'tight'}
         />

@@ -22,8 +22,8 @@ import styles from './styles.css'
 interface MiniProps {
   user: UserDigestMiniUser
   avatarSize?: AvatarSize
-  textSize?: 'small' | 'msmall' | 'xsmall'
-  textWeight?: 'normal' | 'medium'
+  textSize?: 'xs' | 'sm' | 'sm-s'
+  textWeight?: 'normal' | 'md'
   spacing?: 'xxtight' | 'xtight'
   hasUserName?: boolean
 }
@@ -46,7 +46,7 @@ const fragments = {
 const Mini = ({
   user,
   avatarSize = 'sm',
-  textSize = 'small',
+  textSize = 'sm',
   textWeight = 'normal',
   spacing = 'xtight',
   hasUserName

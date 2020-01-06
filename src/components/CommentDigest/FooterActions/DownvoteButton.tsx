@@ -71,7 +71,7 @@ const DownvoteButton = ({
         <TextIcon
           icon={<Icon.DislikeActive />}
           color="grey"
-          weight="medium"
+          weight="md"
           text={numAbbr(comment.downvotes)}
           spacing="xxxtight"
         />
@@ -90,7 +90,7 @@ const DownvoteButton = ({
       <TextIcon
         icon={<Icon.DislikeInactive />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={numAbbr(comment.downvotes)}
         spacing="xxxtight"
       />

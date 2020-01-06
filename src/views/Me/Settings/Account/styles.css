@@ -27,7 +27,7 @@
     margin-right: var(--spacing-loose);
     width: 6rem;
 
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-md);
 
     @media (--sm-up) {
       margin-right: 8rem;

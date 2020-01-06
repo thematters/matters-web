@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import styles from './styles.css'
 
-type ButtonSize = 'small' | 'default' | 'large' | 'xlarge'
+type ButtonSize = 'sm' | 'default' | 'lg' | 'xl'
 type ButtonSpacing = 'none' | 'xtight' | 'tight' | 'default' | 'loose'
 type ButtonHTMLType = 'submit' | 'reset' | 'button'
 type ButtonShape = 'circle'
@@ -67,9 +67,9 @@ type ButtonProps =
  *
  * ```jsx
  *
- * // size:small
+ * // size:sm
  * <Button
- *   size="small"
+ *   size="sm"
  *   outlineColor="green"
  *   style={{ width: 64 }}
  *   icon={
@@ -84,12 +84,12 @@ type ButtonProps =
  * </Button>
  *
  * // fixed width
- * <Button size="small" bgColor="red" style={{ width: 64 }}>
+ * <Button size="sm" bgColor="red" style={{ width: 64 }}>
  *   取消追蹤
  * </Button>
  *
  * // is:span
- * <Button is="span" size="small" outlineColor="grey">
+ * <Button is="span" size="sm" outlineColor="grey">
  *   追蹤了你
  * </Button>
  *

@@ -10,7 +10,7 @@
   border-radius: 50%;
   color: var(--color-white);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
 }
 
 .button {

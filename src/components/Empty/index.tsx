@@ -7,7 +7,7 @@ type EmptySpacing = '0' | 'default'
 interface EmptyProps {
   icon?: React.ReactNode
   description?: string | React.ReactNode
-  size?: 'default' | 'small'
+  size?: 'default' | 'sm'
   spacing?: [EmptySpacing, EmptySpacing]
 }
 

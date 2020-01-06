@@ -33,7 +33,7 @@ const ButtonWithEffect = ({
       <TextIcon
         icon={<Icon.CommentRegular size="md" />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={text}
         textPlacement={textPlacement}
         size="xs"

@@ -55,7 +55,7 @@ const Footer = () => {
             <a href="https://www.facebook.com/MattersLab2018/" target="_blank">
               <Icon.FooterFacebook size="md" />
             </a>
-            <a href="https://medium.com/matters-lab" target="_blank">
+            <a href="https://md.com/matters-lab" target="_blank">
               <Icon.FooterMedium size="md" />
             </a>
             <a href="https://www.instagram.com/matterslab2018/" target="_blank">
@@ -105,7 +105,7 @@ const Footer = () => {
                 name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
                 defaultValue=""
               />
-              <Button type="submit" bgColor="green" size="xlarge">
+              <Button type="submit" bgColor="green" size="xl">
                 <Translate zh_hant="訂閱" zh_hans="订阅" />
               </Button>
             </form>

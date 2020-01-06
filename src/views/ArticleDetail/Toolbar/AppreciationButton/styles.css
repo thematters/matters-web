@@ -3,7 +3,7 @@
 
   color: var(--color-matters-green);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   line-height: 1.16666667;
   text-align: center;
 }
@@ -61,7 +61,7 @@
     margin-top: 0;
     margin-left: var(--spacing-x-tight);
 
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-md);
     vertical-align: middle;
     line-height: 1;
   }

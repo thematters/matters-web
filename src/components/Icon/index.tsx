@@ -48,7 +48,7 @@ import { ReactComponent as Fail } from '~/static/icons/fail.svg'
 import { ReactComponent as Flag } from '~/static/icons/flag.svg'
 import { ReactComponent as FooterFacebook } from '~/static/icons/footer-facebook.svg'
 import { ReactComponent as FooterInstagram } from '~/static/icons/footer-instagram.svg'
-import { ReactComponent as FooterMedium } from '~/static/icons/footer-medium.svg'
+import { ReactComponent as FooterMedium } from '~/static/icons/footer-md.svg'
 import { ReactComponent as FooterTelegram } from '~/static/icons/footer-telegram.svg'
 import { ReactComponent as FooterTwitter } from '~/static/icons/footer-twitter.svg'
 import { ReactComponent as FooterWeChat } from '~/static/icons/footer-wechat.svg'
@@ -141,7 +141,7 @@ const withIcon = (
  * import { Icon } from '~/components'
  *
  * // with "size"
- * <Icon.Add size="small" />
+ * <Icon.Add size="sm" />
  *
  * // with "color"
  * <Icon.Add color="green" />

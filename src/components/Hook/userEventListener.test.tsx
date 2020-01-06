@@ -14,7 +14,6 @@ const EffecfulComponent = () => {
 
 test('can listen to events', () => {
   render(<EffecfulComponent />)
-  // expect(span.textContent).toBe('extra-small')
   window.dispatchEvent(new CustomEvent(event))
 
   expect(spy.mock.calls.length).toBe(1)

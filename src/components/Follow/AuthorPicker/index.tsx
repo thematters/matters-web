@@ -43,7 +43,7 @@ const AuthorPicker = ({
   readonly?: boolean
 }) => {
   const containerStyle = classNames({
-    'small-size-header': titleIs === 'span'
+    'sm-size-header': titleIs === 'span'
   })
 
   const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
@@ -76,7 +76,7 @@ const AuthorPicker = ({
         <ul>
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>
-              <FullDesc user={node} nameSize="small" readonly={readonly} />
+              <FullDesc user={node} nameSize="sm" readonly={readonly} />
             </li>
           ))}
         </ul>

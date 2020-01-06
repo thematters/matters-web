@@ -60,7 +60,7 @@ const AppreciationReceived = ({
           <TextIcon
             icon={<Icon.Like />}
             spacing="xtight"
-            weight="medium"
+            weight="md"
             color="green"
             text={amount}
           />

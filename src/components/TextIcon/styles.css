@@ -130,8 +130,8 @@
 .weight-normal {
   font-weight: var(--font-weight-normal);
 }
-.weight-medium {
-  font-weight: var(--font-weight-medium);
+.weight-md {
+  font-weight: var(--font-weight-md);
 }
 .weight-semibold {
   font-weight: var(--font-weight-semibold);

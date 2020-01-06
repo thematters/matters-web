@@ -6,7 +6,7 @@
 .btn {
   @mixin inline-flex-center-all;
 
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   text-align: center;
   white-space: nowrap;
 
@@ -17,7 +17,7 @@
 }
 
 /* size */
-.size-small {
+.size-sm {
   padding: 0 var(--spacing-x-tight);
 
   height: 1.5rem;
@@ -43,7 +43,7 @@
     height: var(--font-size-sm);
   }
 }
-.size-large {
+.size-lg {
   padding: 0 var(--spacing-base);
 
   height: 2.25rem;
@@ -56,7 +56,7 @@
     height: var(--font-size-sm);
   }
 }
-.size-xlarge {
+.size-xl {
   padding: 0 var(--spacing-loose);
 
   height: 2.5rem;
@@ -205,13 +205,13 @@
   padding: 0;
   border-radius: 50%;
 
-  &.size-small {
+  &.size-sm {
     width: 1.5rem;
   }
   &.size-default {
     width: 2rem;
   }
-  &.size-large {
+  &.size-lg {
     width: 2.25rem;
   }
 }

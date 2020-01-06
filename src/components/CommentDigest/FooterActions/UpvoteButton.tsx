@@ -71,7 +71,7 @@ const UpvoteButton = ({
         <TextIcon
           icon={<Icon.LikeActive />}
           color="grey"
-          weight="medium"
+          weight="md"
           text={numAbbr(comment.upvotes)}
           spacing="xxxtight"
         />
@@ -90,7 +90,7 @@ const UpvoteButton = ({
       <TextIcon
         icon={<Icon.LikeInactive />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={numAbbr(comment.upvotes)}
         spacing="xxxtight"
       />

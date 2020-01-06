@@ -56,12 +56,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
               )
             }}
           >
-            <TextIcon
-              icon={<Icon.Copy />}
-              color="green"
-              weight="medium"
-              size="xs"
-            >
+            <TextIcon icon={<Icon.Copy />} color="green" weight="md" size="xs">
               <Translate
                 zh_hant={TEXT.zh_hant.copy}
                 zh_hans={TEXT.zh_hans.copy}
@@ -91,7 +86,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             <TextIcon
               icon={<Icon.Expand size="xs" />}
               size="xs"
-              weight="medium"
+              weight="md"
               color="grey"
               textPlacement="left"
             >
@@ -128,7 +123,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
         <button type="button" onClick={() => setHelpExpand(!helpExpand)}>
           <TextIcon
             icon={<Icon.Help size="xs" />}
-            weight="medium"
+            weight="md"
             size="xs"
             color={helpExpand ? 'green' : 'grey'}
           >
@@ -171,7 +166,7 @@ const Fingerprint = ({
           icon={<Icon.Box size={size === 'xs' ? 'xs' : undefined} />}
           size={size}
           color={color}
-          weight="medium"
+          weight="md"
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>

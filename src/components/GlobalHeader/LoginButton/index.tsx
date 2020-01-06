@@ -9,7 +9,7 @@ export default () => (
     {(open: any) => (
       <Button
         is="button"
-        size="large"
+        size="lg"
         bgColor="transparent"
         spacing="default"
         className="u-link-green"

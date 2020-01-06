@@ -156,7 +156,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
 
   return (
     <form id="tag-article-modal" className="form" onSubmit={handleSubmit}>
-      <Modal.Content spacing="small" layout="full-width">
+      <Modal.Content spacing="sm" layout="full-width">
         <Form.DropdownInput
           type="search"
           field="name"

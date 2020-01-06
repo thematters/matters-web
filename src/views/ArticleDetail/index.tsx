@@ -128,7 +128,7 @@ const ArticleDetail = ({
   const [fixedToolbar, setFixedToolbar] = useState(false)
   const [trackedFinish, setTrackedFinish] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
-  const isMediumUp = useResponsive({ type: 'medium-up' })()
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, loading, error, subscribeToMore, client } = useQuery<
     ArticleDetailType
   >(ARTICLE_DETAIL, {

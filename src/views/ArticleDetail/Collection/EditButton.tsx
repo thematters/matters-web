@@ -83,7 +83,7 @@ const EditButton = ({
         bgColor="transparent"
         textColor="grey"
         spacing="tight"
-        size="small"
+        size="sm"
         onClick={() => setEditing(false)}
       >
         <Translate
@@ -94,7 +94,7 @@ const EditButton = ({
 
       <Button
         icon={loading ? <Icon.Spinner size="md" /> : <Icon.Pen size="md" />}
-        size="small"
+        size="sm"
         disabled={!!loading}
         onClick={async () => {
           try {

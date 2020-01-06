@@ -34,7 +34,7 @@ const EmptyAutoComplete = () => (
   <Empty
     icon={<Icon.Search size="xl" />}
     description={<Translate zh_hant="暫無搜尋歷史" zh_hans="暂无搜索历史" />}
-    size="small"
+    size="sm"
   />
 )
 

@@ -36,10 +36,10 @@ const LG = () => (
 )
 
 const UserProfile = () => {
-  const isXSmall = useResponsive({ type: 'xsmall' })()
-  const isSmall = useResponsive({ type: 'small' })()
-  const isMedium = useResponsive({ type: 'medium' })()
-  const isLargeUp = useResponsive({ type: 'large-up' })()
+  const isXSmall = useResponsive({ type: 'xs' })()
+  const isSmall = useResponsive({ type: 'sm' })()
+  const isMedium = useResponsive({ type: 'md' })()
+  const isLargeUp = useResponsive({ type: 'lg-up' })()
 
   if (isXSmall) {
     return <XS />

@@ -211,7 +211,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
 
   return (
     <form id="tag-modal" className="form" onSubmit={handleSubmit}>
-      <Modal.Content spacing="small" layout="full-width">
+      <Modal.Content spacing="sm" layout="full-width">
         <p className="field">
           {translate({
             zh_hant: TEXT.zh_hant.tagName,

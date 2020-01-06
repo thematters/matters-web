@@ -48,7 +48,7 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
           <TextIcon
             icon={<Icon.Like />}
             spacing="xtight"
-            weight="medium"
+            weight="md"
             color="green"
             text={amount}
           />

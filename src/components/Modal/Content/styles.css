@@ -19,7 +19,7 @@ section {
   padding: 0;
 }
 
-.small {
+.sm {
   padding: var(--spacing-loose);
 }
 

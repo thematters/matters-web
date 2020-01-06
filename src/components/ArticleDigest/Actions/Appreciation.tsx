@@ -24,7 +24,7 @@ const Appreciation = ({
   <TextIcon
     icon={<Icon.Like size={size === 'xs' ? 'xs' : undefined} />}
     color="grey"
-    weight="medium"
+    weight="md"
     text={numAbbr((article && article.appreciationsReceivedTotal) || 0)}
     size={size}
     spacing="xtight"

@@ -23,7 +23,7 @@
 
   color: var(--color-matters-green);
   cursor: pointer;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   position: relative;
 
   & > .input {

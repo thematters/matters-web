@@ -45,7 +45,7 @@
 
     & :global(a) {
       color: var(--color-black);
-      font-weight: var(--font-weight-medium);
+      font-weight: var(--font-weight-md);
     }
   }
 }

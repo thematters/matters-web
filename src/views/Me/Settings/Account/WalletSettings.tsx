@@ -82,7 +82,7 @@ const WalletSetting = () => {
           <TextIcon
             icon={<Icon.ArrowRightGreen />}
             textPlacement="left"
-            weight="medium"
+            weight="md"
           >
             <Translate zh_hant="去 like.co 查看" zh_hans="去 like.co 查看" />
           </TextIcon>

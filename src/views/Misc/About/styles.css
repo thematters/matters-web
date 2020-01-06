@@ -222,7 +222,7 @@ h2 {
           right: var(--spacing-base);
           color: var(--color-grey-darker);
           font-style: normal;
-          font-weight: var(--font-weight-medium);
+          font-weight: var(--font-weight-md);
         }
       }
     }

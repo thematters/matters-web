@@ -30,7 +30,7 @@ const Collapsable: React.FC<{
               />
             }
             size="md"
-            weight="medium"
+            weight="md"
             spacing="xtight"
             textPlacement="left"
           >

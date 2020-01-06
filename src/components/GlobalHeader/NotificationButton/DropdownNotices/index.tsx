@@ -44,7 +44,7 @@ const Footer = () => (
           icon={<Icon.ArrowRightGreen />}
           color="green"
           textPlacement="left"
-          weight="medium"
+          weight="md"
         >
           <Translate zh_hant="全部通知" zh_hans="全部通知" />
         </TextIcon>

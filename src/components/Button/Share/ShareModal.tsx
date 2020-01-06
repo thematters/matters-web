@@ -33,7 +33,7 @@ const ShareModal = () => {
   }
 
   return (
-    <ModalInstance modalId="shareModal" layout="small">
+    <ModalInstance modalId="shareModal" layout="sm">
       {(props: ModalInstanceProps) => (
         <Modal.Content spacing="none" layout="full-width">
           <>

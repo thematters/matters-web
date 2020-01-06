@@ -107,7 +107,7 @@ const UserFollowers = () => {
                 })
               }
             >
-              <UserDigest.FullDesc user={node} nameSize="small" />
+              <UserDigest.FullDesc user={node} nameSize="sm" />
             </li>
           ))}
         </ul>

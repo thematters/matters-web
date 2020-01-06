@@ -20,7 +20,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   color: var(--color-white);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   border-radius: 0 0 var(--spacing-xx-tight) var(--spacing-xx-tight);
 }
 

@@ -11,7 +11,7 @@ const EmptySearch = ({
     <Empty
       icon={!inSidebar && <Icon.Search size="xxl" />}
       description={description}
-      size={inSidebar ? 'small' : 'default'}
+      size={inSidebar ? 'sm' : 'default'}
       spacing={['default', '0']}
     >
       {!inSidebar && <SearchBar autoComplete={false} />}

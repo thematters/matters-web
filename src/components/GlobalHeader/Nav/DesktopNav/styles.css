@@ -8,7 +8,7 @@
 
   &:hover,
   &:focus {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-md);
     color: var(--color-black);
   }
 
@@ -17,7 +17,7 @@
   }
 
   &.active {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-md);
     color: var(--color-black);
     border-bottom: 2px solid currentcolor;
   }

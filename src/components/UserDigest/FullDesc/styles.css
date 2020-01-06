@@ -24,10 +24,10 @@
 
   color: var(--color-black);
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
   line-height: 1.25;
 
-  &.small {
+  &.sm {
     font-size: var(--font-size-md-s);
     line-height: 1.33333333;
   }
@@ -42,7 +42,7 @@
 
   color: var(--color-grey);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-md);
 
   display: -webkit-box;
   -webkit-line-clamp: 1;

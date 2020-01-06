@@ -53,7 +53,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
         {(open: any) => (
           <Button
             className="u-sm-down-hide"
-            size="large"
+            size="lg"
             bgColor="gold"
             icon={<Icon.Write size="md" />}
             onClick={open}
@@ -91,7 +91,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
     <>
       <Button
         className="u-sm-down-hide"
-        size="large"
+        size="lg"
         bgColor="gold"
         aria-label="創作"
         icon={<WriteIcon loading={loading} />}

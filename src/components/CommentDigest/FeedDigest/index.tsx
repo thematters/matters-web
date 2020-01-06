@@ -105,7 +105,7 @@ const FeedDigest = ({
             <UserDigest.Mini
               user={author}
               avatarSize={inFolloweeFeed ? 'sm' : 'lg'}
-              textWeight="medium"
+              textWeight="md"
               hasUserName={inArticle}
             />
 

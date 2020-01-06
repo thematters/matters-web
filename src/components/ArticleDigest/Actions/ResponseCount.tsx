@@ -86,7 +86,7 @@ const ResponseCount = ({
       <TextIcon
         icon={<Icon.CommentSmall size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={numAbbr(article.responseCount || 0)}
         size={size}
         spacing="xxtight"
