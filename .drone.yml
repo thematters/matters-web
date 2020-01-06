@@ -26,6 +26,18 @@ steps:
       - npm run test
       - codecov
 
+  - name: prebdd
+    image: node:11.14.0
+    privileged: true
+    detach: true
+    ports:
+      - 3000
+    commands:
+      - cp .env.example .env
+      - npm run build
+      - npm run start &
+      - npm run bdd:wait
+
   - name: bdd
     image: node:11.14.0
     privileged: true
@@ -39,11 +51,9 @@ steps:
         from_secret: BDD_TEST_USER_EMAIL
       BDD_TEST_USER_PASSWD:
         from_secret: BDD_TEST_USER_PASSWD
+      BDD_WEB_SERVER: prebdd
     commands:
       - sh bdd/shells/init.sh
-      - cp .env.example .env
-      - npm run build
-      - npm run start &
       - npm run bdd:ci
 
   # === CI tasks for `develop` branch ===

@@ -12,7 +12,7 @@ const waitPageToBeVisible = (client, query) => {
 
 Given('I visit home page', () => {
   return client
-    .url(PATH.HOME(`${process.env.BDD_USER}:${process.env.BDD_PASSWD}@`))
+    .url(`${process.env.BDD_WEB_SERVER}:3000`)
     .waitForElementVisible('body')
     .waitForElementVisible('header')
     .waitForElementVisible('main')
