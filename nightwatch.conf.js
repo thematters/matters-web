@@ -1,8 +1,5 @@
 const base = {
-  launch: 'http://localhost:3000',
-  globals: {
-    "waitForConditionTimeout": 10000
-  }
+  launch: 'http://localhost:3000'
 }
 
 const baseDriver = {
