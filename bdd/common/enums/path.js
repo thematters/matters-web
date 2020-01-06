@@ -1,5 +1,5 @@
 module.exports = {
   HOME: prefix => {
-    return `https://${prefix}web-develop.matters.news`
+    return 'http://localhost:3000'
   }
 }

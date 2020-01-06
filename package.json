@@ -29,7 +29,8 @@
     "gen:watch": "npm run gen:clean && npm run gen:type -- --watch",
     "gen:clean": "find . | grep -E '__generated__' | xargs rm -rf",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
-    "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r \"bdd/steps/*.js\" --format node_modules/cucumber-pretty"
+    "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r \"bdd/steps/*.js\" --format node_modules/cucumber-pretty",
+    "bdd:ci": "wait-on http://localhost:3000; npm run bdd"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",
@@ -138,7 +139,8 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.1.0",
     "tslint-react-hooks": "^2.2.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "wait-on": "^3.3.0"
   },
   "_moduleAliases": {
     "~": "./build/production-server"
