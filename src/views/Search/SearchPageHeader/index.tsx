@@ -15,7 +15,7 @@ const BackToAggregate = ({ q }: { q: string }) => {
   return (
     <Link {...viewAllPath}>
       <a>
-        <TextIcon icon={<Icon.ArrowRightGreen size="md" />} color="green">
+        <TextIcon icon={<Icon.ArrowRightGreen />} color="green">
           <Translate zh_hant="全部結果" zh_hans="全部结果" />
         </TextIcon>
       </a>

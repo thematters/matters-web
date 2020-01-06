@@ -28,7 +28,7 @@ const ViewAll = ({
         }}
       >
         <TextIcon
-          icon={<Icon.ArrowRightGreen size="md" />}
+          icon={<Icon.ArrowRightGreen />}
           textPlacement="left"
           color="green"
         >

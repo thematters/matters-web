@@ -68,6 +68,7 @@ const EditTagButton = () => {
         <button type="button" onClick={e => open()} className="edit-tag">
           <TextIcon
             icon={<Icon.TagEdit color="green" size="xs" />}
+            size="sm"
             spacing="xxxtight"
             color="green"
           >

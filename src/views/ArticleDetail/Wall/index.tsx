@@ -49,7 +49,7 @@ const Wall = ({ show, client }: any) => {
               </div>
               <div className="close">
                 <button onClick={close}>
-                  <Icon.Close size="md" color="grey-dark" />
+                  <Icon.Close color="grey-dark" />
                 </button>
               </div>
             </section>

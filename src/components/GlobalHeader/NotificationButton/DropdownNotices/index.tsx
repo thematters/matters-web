@@ -41,7 +41,7 @@ const Footer = () => (
     <Link {...PATHS.ME_NOTIFICATIONS}>
       <a>
         <TextIcon
-          icon={<Icon.ArrowRightGreen size="md" />}
+          icon={<Icon.ArrowRightGreen />}
           color="green"
           textPlacement="left"
           weight="medium"

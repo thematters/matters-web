@@ -66,7 +66,7 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
       placement="bottom-end"
     >
       <button type="button" aria-label="更多操作">
-        <Icon.MoreRegular />
+        <Icon.MoreRegular size="md" />
       </button>
     </Dropdown>
   )

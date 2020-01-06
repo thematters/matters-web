@@ -80,7 +80,7 @@ const WalletSetting = () => {
       {likerId && (
         <a href="https://like.co/in" className="u-link-green" target="_blank">
           <TextIcon
-            icon={<Icon.ArrowRightGreen size="md" />}
+            icon={<Icon.ArrowRightGreen />}
             textPlacement="left"
             weight="medium"
           >

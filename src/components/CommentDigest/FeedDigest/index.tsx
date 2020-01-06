@@ -202,6 +202,7 @@ const FeedDigest = ({
               >
                 <TextIcon
                   icon={<Icon.MoreContent />}
+                  size="sm"
                   color="green"
                   textPlacement="left"
                   spacing="xxtight"
