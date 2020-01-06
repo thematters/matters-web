@@ -28,6 +28,7 @@ steps:
 
   - name: bdd
     image: node:11.14.0
+    privileged: true
     failure: ignore
     environment:
       BDD_USER:
