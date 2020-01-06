@@ -82,7 +82,7 @@ const EditButton = ({
         type="button"
         bgColor="transparent"
         textColor="grey"
-        spacing="tight"
+        spacing="base"
         size="sm"
         onClick={() => setEditing(false)}
       >

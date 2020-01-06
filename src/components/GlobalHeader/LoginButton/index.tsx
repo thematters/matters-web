@@ -11,7 +11,7 @@ export default () => (
         is="button"
         size="lg"
         bgColor="transparent"
-        spacing="default"
+        spacing="loose"
         className="u-link-green"
         onClick={() => open()}
       >

@@ -25,7 +25,7 @@
 }
 
 .modal {
-  font-weight: var(--font-weight-md);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-xm);
   line-height: 1.77777778;
 }
@@ -43,7 +43,7 @@
 }
 
 .sidebar {
-  font-weight: var(--font-weight-md);
+  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-md-s);
   line-height: 1.6;
 }

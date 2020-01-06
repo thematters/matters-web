@@ -19,7 +19,7 @@ export const LoadMore = ({
       <Button
         bgColor="green-lighter"
         outlineColor="green"
-        spacing="loose"
+        spacing="x-loose"
         onClick={onClick}
       >
         {text ? text : <Translate zh_hans="查看更多" zh_hant="查看更多" />}

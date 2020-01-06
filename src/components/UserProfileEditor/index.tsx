@@ -169,7 +169,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     bgColor="transparent"
                     textColor="grey"
                     textWeight="normal"
-                    spacing="default"
+                    spacing="loose"
                     disabled={isSubmitting}
                     onClick={() => setEditing(false)}
                   >

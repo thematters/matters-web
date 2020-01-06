@@ -27,7 +27,7 @@
 
   --font-weight-light: 300;
   --font-weight-normal: 400;
-  --font-weight-md: 500;
+  --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-bolder: 900;
@@ -45,7 +45,7 @@
   /* Feed Title */
   --font-size-feed-title: var(--font-size-xm);
   --line-height-feed-title: 1.33333333; /* 24/18 */
-  --font-weight-feed-title: var(--font-weight-md);
+  --font-weight-feed-title: var(--font-weight-medium);
 
   /* Header Title */
   --font-size-header-title: var(--font-size-lg);
@@ -55,7 +55,7 @@
   /* Card Title */
   --font-size-card-title: var(--font-size-sm);
   --line-height-card-title: 1.7142857143; /* 24/14 */
-  --font-weight-card-title: var(--font-weight-md);
+  --font-weight-card-title: var(--font-weight-medium);
 
   /* Card Text */
   --font-size-card-text: var(--font-size-sm-s);

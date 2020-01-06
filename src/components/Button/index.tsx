@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './styles.css'
 
 type ButtonSize = 'sm' | 'default' | 'lg' | 'xl'
-type ButtonSpacing = 'none' | 'xtight' | 'tight' | 'default' | 'loose'
+type ButtonSpacing = 'none' | 'xtight' | 'base' | 'loose' | 'x-loose'
 type ButtonHTMLType = 'submit' | 'reset' | 'button'
 type ButtonShape = 'circle'
 type ButtonBgColor =
@@ -115,7 +115,7 @@ type ButtonProps =
  * />
  *
  * // spacing
- * <Button spacing="loose" bgColor="green-lighter" outlineColor="green">
+ * <Button spacing="x-loose" bgColor="green-lighter" outlineColor="green">
  *   2 條新評論
  * </Button>
  *

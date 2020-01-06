@@ -6,7 +6,7 @@
 .btn {
   @mixin inline-flex-center-all;
 
-  font-weight: var(--font-weight-md);
+  font-weight: var(--font-weight-medium);
   text-align: center;
   white-space: nowrap;
 
@@ -80,13 +80,13 @@
 .spacing-xtight {
   padding: 0 var(--spacing-x-tight);
 }
-.spacing-tight {
+.spacing-base {
   padding: 0 var(--spacing-base);
 }
-.spacing-default {
+.spacing-loose {
   padding: 0 var(--spacing-loose);
 }
-.spacing-loose {
+.spacing-x-loose {
   padding: 0 var(--spacing-x-loose);
 }
 

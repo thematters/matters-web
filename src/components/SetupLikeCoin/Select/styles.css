@@ -18,7 +18,7 @@ header {
     border-radius: 4px;
 
     & h4 {
-      font-weight: var(--font-weight-md);
+      font-weight: var(--font-weight-medium);
     }
 
     & p {

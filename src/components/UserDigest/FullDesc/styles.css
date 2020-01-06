@@ -24,7 +24,7 @@
 
   color: var(--color-black);
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-md);
+  font-weight: var(--font-weight-medium);
   line-height: 1.25;
 
   &.sm {
@@ -42,7 +42,7 @@
 
   color: var(--color-grey);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-md);
+  font-weight: var(--font-weight-medium);
 
   display: -webkit-box;
   -webkit-line-clamp: 1;
