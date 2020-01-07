@@ -52,8 +52,9 @@ steps:
         from_secret: BDD_TEST_USER_PASSWD
       BDD_WEB_SERVER: prebdd
     commands:
+      - echo prebdd; echo $BDD_WEB_SERVER
       - sh bdd/shells/init.sh
-      - WEB_SERVER=${BDD_WEB_SERVER} npm run bdd:ci
+      - WEB_SERVER=prebdd npm run bdd:ci
 
   # === CI tasks for `develop` branch ===
   - name: develop:build
