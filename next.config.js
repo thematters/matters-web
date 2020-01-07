@@ -85,7 +85,12 @@ const nextConfig = {
           }
         },
         {
-          loader: 'url-loader'
+          loader: 'url-loader',
+          options: {
+            limit: 1024,
+            publicPath: '/_next/static/',
+            outputPath: `${isServer ? '../' : ''}static/`
+          }
         }
       ]
     })
