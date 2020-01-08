@@ -74,10 +74,9 @@ const Container: React.FC<ContainerProps> = ({
                   close={close}
                   closeable={closeable}
                   title={
-                    // @ts-ignore
                     <Translate
-                      zh_hant={TEXT.zh_hant[title]}
-                      zh_hans={TEXT.zh_hans[title]}
+                      zh_hant={TEXT.zh_hant[title] as string}
+                      zh_hans={TEXT.zh_hans[title] as string}
                     />
                   }
                 />

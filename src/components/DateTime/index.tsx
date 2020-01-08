@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 
@@ -27,17 +27,16 @@ interface DateTimeProps {
  * ```
  */
 
-export const DateTime: React.FC<DateTimeProps> = ({
-  date,
-  type = 'absolute'
-}) => {
-  const { lang } = useContext(LanguageContext)
+export const DateTime = React.memo(
+  ({ date, type = 'absolute' }: DateTimeProps) => {
+    const { lang } = useContext(LanguageContext)
 
-  return (
-    <time dateTime={new Date(date).toISOString()}>
-      {datetimeFormat[type](date, lang)}
+    return (
+      <time dateTime={new Date(date).toISOString()}>
+        {datetimeFormat[type](date, lang)}
 
-      <style jsx>{styles}</style>
-    </time>
-  )
-}
+        <style jsx>{styles}</style>
+      </time>
+    )
+  }
+)
