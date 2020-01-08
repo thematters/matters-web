@@ -4,7 +4,7 @@ import React from 'react'
 
 import { ViewerUser } from './__generated__/ViewerUser'
 
-export const ViewerUserFragment = {
+export const ViewerFragments = {
   user: gql`
     fragment ViewerUser on User {
       id
@@ -84,3 +84,19 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
 }
 
 export const ViewerContext = React.createContext({} as Viewer)
+
+export const ViewerConsumer = ViewerContext.Consumer
+
+export const ViewerProvider = ({
+  children,
+  viewer
+}: {
+  children: React.ReactNode
+  viewer: ViewerUser
+}) => {
+  return (
+    <ViewerContext.Provider value={processViewer(viewer)}>
+      {children}
+    </ViewerContext.Provider>
+  )
+}
