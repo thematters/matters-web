@@ -3,21 +3,18 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
+import { Icon, Translate } from '~/components'
 import { Button } from '~/components/Button'
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
-import { Icon } from '~/components/Icon'
-import IconSpinner from '~/components/Icon/Spinner'
-import { Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
-import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
 import { PutComment } from './__generated__/PutComment'
@@ -210,11 +207,7 @@ const CommentForm = ({
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
           icon={
-            isSubmitting ? (
-              <IconSpinner />
-            ) : (
-              <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
-            )
+            isSubmitting ? <Icon.Spinner size="md" /> : <Icon.Post size="md" />
           }
         >
           <Translate zh_hant="送出" zh_hans="送出" />

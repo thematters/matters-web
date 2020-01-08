@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components'
-import IconLive from '~/components/Icon/Live'
+import { ArticleDigest, Icon } from '~/components'
 import { Translate } from '~/components/Language'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -52,11 +51,7 @@ const ResponseDigest = ({
     <section className="container">
       <div className="header">
         <div className="avatar">
-          <UserDigest.Mini
-            user={author}
-            avatarSize="small"
-            textWeight="medium"
-          />
+          <UserDigest.Mini user={author} avatarSize="lg" textWeight="md" />
           <span className="collected">
             <Translate
               zh_hant={TEXT.zh_hant.collected}
@@ -64,7 +59,7 @@ const ResponseDigest = ({
             />
           </span>
         </div>
-        {live && <IconLive />}
+        {live && <Icon.Live />}
       </div>
 
       <div className="digest-wrap">

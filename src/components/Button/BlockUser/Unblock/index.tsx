@@ -23,10 +23,10 @@ const fragments = {
 
 const Unblock = ({
   user,
-  size = 'small'
+  size = 'sm'
 }: {
   user: UnblockButtonUser
-  size?: 'small' | 'default'
+  size?: 'sm' | 'default'
 }) => {
   const { lang } = useContext(LanguageContext)
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
@@ -43,7 +43,7 @@ const Unblock = ({
   return (
     <Button
       size={size}
-      style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
+      style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
       onClick={async () => {
         await unblockUser()
         window.dispatchEvent(

@@ -10,7 +10,7 @@ interface TextIconProps {
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
-  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
+  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   className?: string
 }

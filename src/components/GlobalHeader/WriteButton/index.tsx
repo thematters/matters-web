@@ -8,8 +8,6 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
-import ICON_SPINNER from '~/static/icons/spinner.svg?sprite'
-import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
 import { CreateDraft } from './__generated__/CreateDraft'
 
@@ -30,15 +28,11 @@ export const CREATE_DRAFT = gql`
 `
 
 const WriteIcon = ({ loading }: { loading: boolean }) => {
-  const icon = loading ? ICON_SPINNER : ICON_WRITE
+  if (loading) {
+    return <Icon.Spinner size="md" className="u-motion-spin" />
+  }
 
-  return (
-    <Icon
-      id={icon.id}
-      viewBox={icon.viewBox}
-      className={loading && 'u-motion-spin'}
-    />
-  )
+  return <Icon.Write size="md" />
 }
 
 const WriteButton = ({ allowed, CustomButton }: Props) => {
@@ -59,9 +53,9 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
         {(open: any) => (
           <Button
             className="u-sm-down-hide"
-            size="large"
+            size="lg"
             bgColor="gold"
-            icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
+            icon={<Icon.Write size="md" />}
             onClick={open}
           >
             <Translate
@@ -97,7 +91,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
     <>
       <Button
         className="u-sm-down-hide"
-        size="large"
+        size="lg"
         bgColor="gold"
         aria-label="創作"
         icon={<WriteIcon loading={loading} />}

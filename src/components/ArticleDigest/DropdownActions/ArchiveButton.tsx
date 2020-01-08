@@ -6,8 +6,6 @@ import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/Archive
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
-import ICON_ARCHIVE from '~/static/icons/archive.svg?sprite'
-
 import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
 import { FolloweeArchiveButtonArticle } from './__generated__/FolloweeArchiveButtonArticle'
 import styles from './styles.css'
@@ -70,16 +68,7 @@ const ArchiveButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon
-        icon={
-          <Icon
-            id={ICON_ARCHIVE.id}
-            viewBox={ICON_ARCHIVE.viewBox}
-            size="small"
-          />
-        }
-        spacing="tight"
-      >
+      <TextIcon icon={<Icon.Archive />} spacing="tight">
         <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
       </TextIcon>
 

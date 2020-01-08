@@ -8,7 +8,6 @@ import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCo
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_ADD from '~/static/icons/add.svg?sprite'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { FollowUser } from './__generated__/FollowUser'
@@ -25,10 +24,10 @@ const FOLLOW_USER = gql`
 
 const Follow = ({
   user,
-  size = 'small'
+  size = 'sm'
 }: {
   user: FollowButtonUser
-  size?: 'small' | 'default'
+  size?: 'sm' | 'default'
 }) => {
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
@@ -51,17 +50,15 @@ const Follow = ({
     <Button
       size={size}
       icon={
-        <Icon
-          id={ICON_ADD.id}
-          viewBox={ICON_ADD.viewBox}
+        <Icon.Add
           style={
-            size === 'small'
+            size === 'sm'
               ? { width: 10, height: 10 }
               : { width: 12, height: 12 }
           }
         />
       }
-      style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
+      style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
       onClick={() => {
         follow()
         analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })

@@ -4,8 +4,6 @@ import { useState } from 'react'
 import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 
-import ICON_MORE_SMALL from '~/static/icons/more-small.svg?sprite'
-
 import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
 
 const fragments = {
@@ -42,12 +40,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
       zIndex={301}
     >
       <button type="button" aria-label="更多操作">
-        <Icon
-          size="small"
-          id={ICON_MORE_SMALL.id}
-          viewBox={ICON_MORE_SMALL.viewBox}
-          color="black"
-        />
+        <Icon.MoreSmall color="black" />
       </button>
     </Dropdown>
   )

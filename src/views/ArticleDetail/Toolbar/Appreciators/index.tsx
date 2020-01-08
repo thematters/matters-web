@@ -57,7 +57,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
               .map(
                 ({ node, cursor }) =>
                   node.sender && (
-                    <Avatar user={node.sender} size="xsmall" key={cursor} />
+                    <Avatar user={node.sender} size="md" key={cursor} />
                   )
               )}
           </section>

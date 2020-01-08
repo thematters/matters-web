@@ -10,8 +10,6 @@ import {
 } from '~/components/GQL/mutations/voteComment'
 
 import { numAbbr } from '~/common/utils'
-import ICON_LIKE_ACTIVE from '~/static/icons/like-active.svg?sprite'
-import ICON_LIKE_INACTIVE from '~/static/icons/like-inactive.svg?sprite'
 
 import { UpvoteComment } from './__generated__/UpvoteComment'
 
@@ -25,21 +23,6 @@ const fragments = {
     }
   `
 }
-
-const IconLikeInactive = () => (
-  <Icon
-    id={ICON_LIKE_INACTIVE.id}
-    viewBox={ICON_LIKE_INACTIVE.viewBox}
-    size="small"
-  />
-)
-const IconLikeActive = () => (
-  <Icon
-    id={ICON_LIKE_ACTIVE.id}
-    viewBox={ICON_LIKE_ACTIVE.viewBox}
-    size="small"
-  />
-)
 
 const UpvoteButton = ({
   comment,
@@ -86,11 +69,10 @@ const UpvoteButton = ({
         disabled={disabled}
       >
         <TextIcon
-          icon={<IconLikeActive />}
+          icon={<Icon.LikeActive />}
           color="grey"
-          weight="medium"
+          weight="md"
           text={numAbbr(comment.upvotes)}
-          size="sm"
           spacing="xxxtight"
         />
       </button>
@@ -106,11 +88,10 @@ const UpvoteButton = ({
       disabled={disabled}
     >
       <TextIcon
-        icon={<IconLikeInactive />}
+        icon={<Icon.LikeInactive />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={numAbbr(comment.upvotes)}
-        size="sm"
         spacing="xxxtight"
       />
     </button>

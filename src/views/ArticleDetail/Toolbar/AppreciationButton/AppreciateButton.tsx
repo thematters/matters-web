@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import IconLike from '~/components/Icon/Like'
+import { Icon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -64,14 +64,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         }}
       >
         {inFixedToolbar ? (
-          <IconLike
+          <Icon.Like
             className="icon-like"
             color="green"
             style={{ width: 20, height: 20 }}
           />
         ) : (
           <>
-            <IconLike className="icon-like" style={{ width: 22, height: 22 }} />
+            <Icon.Like
+              className="icon-like"
+              style={{ width: 22, height: 22 }}
+            />
             {count && <span className={countClass}>{count}</span>}
           </>
         )}

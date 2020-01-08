@@ -27,7 +27,7 @@
   color: var(--color-grey);
 }
 
-.small {
+.sm {
   & .description {
     margin-top: var(--spacing-x-tight);
     font-size: var(--font-size-sm);

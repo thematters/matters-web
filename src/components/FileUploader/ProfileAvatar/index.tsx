@@ -1,18 +1,16 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { Icon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import ICON_CAMERA from '~/static/icons/camera-white.svg?sprite'
 
 import { UpdateUserInfoAvatar } from './__generated__/UpdateUserInfoAvatar'
 import styles from './styles.css'
@@ -80,11 +78,11 @@ export const ProfileAvatarUploader: React.FC<Props> = ({ user }) => {
 
   return (
     <section className="container">
-      <Avatar size="xlarge" user={user} />
+      <Avatar size="xxl" user={user} />
 
       <div className="uploader">
         <div className="button">
-          <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
+          <Icon.Camera size="md" />
           <span className="hint">
             <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
           </span>

@@ -3,13 +3,11 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { MouseEventHandler } from 'react'
 
-import { Title, Translate } from '~/components'
-import { Icon } from '~/components/Icon'
+import { Icon, Title, Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import ICON_ARROW_UP_RIGHT from '~/static/icons/arrow-up-right.svg?sprite'
 
 import { DropdownDigestArticle } from './__generated__/DropdownDigestArticle'
 import styles from './styles.css'
@@ -93,20 +91,12 @@ const DropdownDigest = ({
           </Title>
         </LinkWrapper>
 
-        <UserDigest.Mini
-          user={author}
-          avatarSize="xxxsmall"
-          textSize="xsmall"
-        />
+        <UserDigest.Mini user={author} avatarSize="xs" textSize="xs" />
 
         {!isBanned && hasArrow && (
           <Link {...path}>
             <a className="arrow" target="_blank">
-              <Icon
-                id={ICON_ARROW_UP_RIGHT.id}
-                viewBox={ICON_ARROW_UP_RIGHT.viewBox}
-                size="small"
-              />
+              <Icon.ArrowUpRight />
             </a>
           </Link>
         )}

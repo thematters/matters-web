@@ -5,7 +5,6 @@ import { Icon, LanguageContext, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'
-import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
 
 import styles from './styles.css'
 
@@ -25,13 +24,7 @@ const ViewAllLink = ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
         }
       >
         <TextIcon
-          icon={
-            <Icon
-              id={ICON_ARROW_RIGHT_GREEN_SMALL.id}
-              viewBox={ICON_ARROW_RIGHT_GREEN_SMALL.viewBox}
-              style={{ width: 6, height: 8 }}
-            />
-          }
+          icon={<Icon.ArrowRightGreenSmall style={{ width: 6, height: 8 }} />}
           color="green"
           text={translate({
             zh_hant: TEXT.zh_hant.viewAll,

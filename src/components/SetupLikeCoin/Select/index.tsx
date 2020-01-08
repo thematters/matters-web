@@ -1,15 +1,12 @@
 import getConfig from 'next/config'
 import { FormEvent, useState } from 'react'
 
-import { Icon } from '~/components/Icon'
+import { Icon } from '~/components'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { TextIcon } from '~/components/TextIcon'
 
 import { TEXT } from '~/common/enums'
-import ICON_CHECK_ACTIVE from '~/static/icons/checkbox-check-active.svg?sprite'
-import ICON_UNCHECK from '~/static/icons/checkbox-uncheck.svg?sprite'
-import ICON_HELP from '~/static/icons/help.svg?sprite'
 
 import styles from './styles.css'
 
@@ -40,13 +37,11 @@ const Description = () => (
   <section className="desc">
     <section>
       <TextIcon
-        icon={
-          <Icon id={ICON_HELP.id} viewBox={ICON_HELP.viewBox} size="msmall" />
-        }
+        icon={<Icon.Help size="sm" />}
         size="sm"
         color="green"
         spacing="xtight"
-        weight="medium"
+        weight="md"
       >
         <Translate zh_hant="什麼是 Liker ID？" zh_hans="什么是 Liker ID？" />
       </TextIcon>
@@ -64,14 +59,6 @@ const Description = () => (
 
     <style jsx>{styles}</style>
   </section>
-)
-
-const IconChecked = () => (
-  <Icon id={ICON_CHECK_ACTIVE.id} viewBox={ICON_CHECK_ACTIVE.viewBox} />
-)
-
-const IconUnchecked = () => (
-  <Icon id={ICON_UNCHECK.id} viewBox={ICON_UNCHECK.viewBox} />
 )
 
 const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
@@ -109,8 +96,8 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
                   </p>
                 </section>
 
-                {isGenerate && <IconChecked />}
-                {!isGenerate && <IconUnchecked />}
+                {isGenerate && <Icon.CheckActive size="md" />}
+                {!isGenerate && <Icon.UnCheck size="md" />}
               </div>
             </label>
 
@@ -138,8 +125,8 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
                   </p>
                 </section>
 
-                {!isGenerate && <IconChecked />}
-                {isGenerate && <IconUnchecked />}
+                {!isGenerate && <Icon.CheckActive size="md" />}
+                {isGenerate && <Icon.UnCheck size="md" />}
               </div>
             </label>
           </section>

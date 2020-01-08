@@ -1,7 +1,5 @@
 import { Empty, Icon, SearchBar } from '~/components'
 
-import ICON_SEARCH from '~/static/icons/search.svg?sprite'
-
 const EmptySearch = ({
   inSidebar = false,
   description
@@ -11,17 +9,9 @@ const EmptySearch = ({
 }) => (
   <>
     <Empty
-      icon={
-        !inSidebar && (
-          <Icon
-            id={ICON_SEARCH.id}
-            viewBox={ICON_SEARCH.viewBox}
-            size={'xxlarge'}
-          />
-        )
-      }
+      icon={!inSidebar && <Icon.Search size="xxl" />}
       description={description}
-      size={inSidebar ? 'small' : 'default'}
+      size={inSidebar ? 'sm' : 'default'}
       spacing={['default', '0']}
     >
       {!inSidebar && <SearchBar autoComplete={false} />}

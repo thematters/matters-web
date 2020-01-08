@@ -80,7 +80,7 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isMediumUp = useResponsive({ type: 'medium-up' })()
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {

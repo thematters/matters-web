@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type LabelSize = 'small' | 'default'
+type LabelSize = 'sm' | 'default'
 
 interface LabelProps {
   size?: LabelSize
@@ -14,7 +14,7 @@ interface LabelProps {
  * Usage:
  *
  * ```tsx *
- * <Label size="small">作者推薦</Label>
+ * <Label size="sm">作者推薦</Label>
  * ```
  */
 

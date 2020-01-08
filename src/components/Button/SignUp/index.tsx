@@ -9,7 +9,7 @@ export default ({ children, extraStyle, type }: any) => (
     {(open: any) => (
       <Button
         is="button"
-        size="large"
+        size="lg"
         bgColor="green"
         style={extraStyle}
         onClick={() => {

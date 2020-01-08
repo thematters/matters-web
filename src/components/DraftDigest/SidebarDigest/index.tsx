@@ -5,7 +5,6 @@ import { DateTime, Icon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { numFormat, toPath } from '~/common/utils'
-import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import DeleteButton from '../Components/DeleteButton'
 import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
@@ -25,14 +24,6 @@ const fragments = {
     }
   `
 }
-
-const IconDotDivider = () => (
-  <Icon
-    id={ICON_DOT_DIVIDER.id}
-    viewBox={ICON_DOT_DIVIDER.viewBox}
-    style={{ width: 18, height: 18 }}
-  />
-)
 
 const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
   const { id, title, publishState, updatedAt, slug, wordCount } = draft
@@ -60,14 +51,14 @@ const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
         <div>
           <footer className="actions">
             <DateTime date={updatedAt} type="relative" />
-            <IconDotDivider />
+            <Icon.DotDivider />
             <Translate
               zh_hans={`${numFormat(wordCount)} 字`}
               zh_hant={`${numFormat(wordCount)} 字`}
             />
             {isUnpublished && (
               <>
-                <IconDotDivider />
+                <Icon.DotDivider />
                 <DeleteButton id={id} />
               </>
             )}

@@ -4,7 +4,7 @@ import { Title } from '~/components/Title'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
-import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
+import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg'
 
 import styles from './styles.css'
 

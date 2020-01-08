@@ -121,7 +121,7 @@ export const ModalInstance = ({
   defaultCloseable?: boolean
   modalId: string
   title?: string
-  layout?: 'default' | 'small'
+  layout?: 'default' | 'sm'
   onClose?: () => void
 }) => {
   const [node, setNode] = useState<Element | null>(null)

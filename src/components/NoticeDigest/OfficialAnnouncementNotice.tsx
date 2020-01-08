@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { Avatar } from '~/components/Avatar'
 
-import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg?url'
+import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
 
 import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
 import NoticeDate from './NoticeDate'

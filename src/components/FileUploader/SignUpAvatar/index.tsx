@@ -1,17 +1,16 @@
 import { useState } from 'react'
 
+import { Icon } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { Icon } from '~/components/Icon'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 import { translate } from '~/common/utils'
-import ICON_CAMERA from '~/static/icons/camera-green.svg?sprite'
 
 import styles from './styles.css'
 
@@ -101,13 +100,11 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   return (
     <section className="container">
       <div className="avatar">
-        <Avatar size="large" src={avatar} />
+        <Avatar size="xl" src={avatar} />
       </div>
       <div className="upload">
         <div className="wrapper">
-          <Icon
-            id={ICON_CAMERA.id}
-            viewBox={ICON_CAMERA.viewBox}
+          <Icon.CameraGreen
             style={{ width: 24, height: 24, marginRight: '0.25rem' }}
           />
           {avatarText}

@@ -47,7 +47,8 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
   if (isArchived) {
     return (
       <section className="container">
-        <Avatar size="small" />
+        <Avatar size="lg" />
+
         <section className="name">
           <span className="displayName">
             <Translate
@@ -67,7 +68,7 @@ const BriefDesc = ({ user }: { user: UserDigestBriefDescUser }) => {
       <Link {...path}>
         <a>
           <section className="container">
-            <Avatar size="small" user={user} />
+            <Avatar size="lg" user={user} />
             <section className="name">
               <span className="displayName">{user.displayName}</span>
               <span className="userName">@{user.userName}</span>

@@ -1,16 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { Icon } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { subscribePush } from '~/common/utils'
-import ICON_BOOKMARK_REGULAR_INACTIVE from '~/static/icons/bookmark-regular-inactive.svg?sprite'
-import ICON_BOOKMARK_SM_INACTIVE from '~/static/icons/bookmark-small-inactive.svg?sprite'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import { SubscribeArticle } from './__generated__/SubscribeArticle'
@@ -30,7 +28,7 @@ const Subscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xsmall' | 'small' | 'default'
+  size: 'xs' | 'sm' | 'md'
   disabled?: boolean
 }) => {
   const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
@@ -95,19 +93,11 @@ const Subscribe = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <Icon
-        size={size}
-        id={
-          size === 'default'
-            ? ICON_BOOKMARK_REGULAR_INACTIVE.id
-            : ICON_BOOKMARK_SM_INACTIVE.id
-        }
-        viewBox={
-          size === 'default'
-            ? ICON_BOOKMARK_REGULAR_INACTIVE.viewBox
-            : ICON_BOOKMARK_SM_INACTIVE.viewBox
-        }
-      />
+      {size === 'md' ? (
+        <Icon.BookmarkRegularInactive size="md" />
+      ) : (
+        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xs' : undefined} />
+      )}
     </button>
   )
 }

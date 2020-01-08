@@ -27,7 +27,7 @@
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
 
-  &.small {
+  &.sm {
     font-size: var(--font-size-md-s);
     line-height: 1.33333333;
   }

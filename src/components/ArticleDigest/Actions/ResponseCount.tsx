@@ -6,7 +6,6 @@ import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr, responseStateIs, toPath } from '~/common/utils'
-import ICON_COMMENT_SM from '~/static/icons/comment-small.svg?sprite'
 
 import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
 import styles from './styles.css'
@@ -40,10 +39,10 @@ const fragments = {
 
 const ResponseCount = ({
   article,
-  size = 'small'
+  size = 'sm'
 }: {
   article: ResponseCountArticle
-  size?: 'small' | 'xsmall'
+  size?: 'sm' | 'xs'
 }) => {
   const { slug, mediaHash, author } = article
 
@@ -61,10 +60,14 @@ const ResponseCount = ({
   const isBanned = responseStateIs(article, 'banned')
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
-      <span>{children}</span>
+      <span className="response-count">
+        {children}
+        <style jsx>{styles}</style>
+      </span>
     ) : (
       <Link {...path}>
         <a
+          className="response-count"
           onClick={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
               entrance: article.id,
@@ -73,6 +76,7 @@ const ResponseCount = ({
           }}
         >
           {children}
+          <style jsx>{styles}</style>
         </a>
       </Link>
     )
@@ -80,17 +84,11 @@ const ResponseCount = ({
   return (
     <LinkWrapper>
       <TextIcon
-        icon={
-          <Icon
-            size={size}
-            id={ICON_COMMENT_SM.id}
-            viewBox={ICON_COMMENT_SM.viewBox}
-          />
-        }
+        icon={<Icon.CommentSmall size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={numAbbr(article.responseCount || 0)}
-        size={size === 'small' ? 'sm' : 'xs'}
+        size={size}
         spacing="xxtight"
       />
 

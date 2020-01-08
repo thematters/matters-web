@@ -3,11 +3,10 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
 
+import { Icon, LanguageContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import IconSpinner from '~/components/Icon/Spinner'
-import { LanguageContext } from '~/components/Language'
 import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
@@ -108,7 +107,7 @@ const TermModal: React.FC<FormProps> = formProps => {
           disabled={isSubmitting}
           loading={isSubmitting}
         >
-          {isSubmitting && <IconSpinner />}
+          {isSubmitting && <Icon.Spinner size="md" />}
           {!isSubmitting &&
             translate({
               zh_hant: TEXT.zh_hant.agreeAndContinue,
