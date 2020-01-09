@@ -13,11 +13,7 @@ import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
 
 export const SIDEBAR_TOPICS = gql`
-  query SidebarTopics(
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = false
-    $hasArticleDigestActionTopicScore: Boolean = true
-  ) {
+  query SidebarTopics {
     viewer {
       id
       recommendation {

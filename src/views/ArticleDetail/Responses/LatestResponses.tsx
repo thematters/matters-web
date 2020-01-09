@@ -44,9 +44,7 @@ const SUBSCRIBE_RESPONSES = gql`
     $first: Int
     $includeAfter: Boolean
     $includeBefore: Boolean
-    $hasDescendantComments: Boolean = true
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
+    $hasDescendants: Boolean = true
     $articleOnly: Boolean
   ) {
     nodeEdited(input: { id: $id }) {

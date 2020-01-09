@@ -10,11 +10,7 @@ import { mergeConnections } from '~/common/utils'
 import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 
 const ME_BOOKMARK_FEED = gql`
-  query MeBookmarkFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query MeBookmarkFeed($after: String) {
     viewer {
       id
       subscriptions(input: { first: 10, after: $after }) {

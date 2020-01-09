@@ -11,10 +11,7 @@ import { analytics } from '~/common/utils'
 import { HomeToday } from './__generated__/HomeToday'
 
 export const HOME_TODAY = gql`
-  query HomeToday(
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query HomeToday() {
     viewer {
       id
       recommendation {

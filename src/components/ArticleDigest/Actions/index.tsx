@@ -37,8 +37,8 @@ const fragments = {
       createdAt
       ...AppreciationArticle
       ...ResponseCountArticle
-      ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
-      ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
+      ...BookmarkArticle
+      ...TopicScoreArticle
       ...StateActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
@@ -56,8 +56,8 @@ const fragments = {
       createdAt
       ...AppreciationArticle
       ...ResponseCountArticle
-      ...BookmarkArticle @include(if: $hasArticleDigestActionBookmark)
-      ...TopicScoreArticle @include(if: $hasArticleDigestActionTopicScore)
+      ...BookmarkArticle
+      ...TopicScoreArticle
       ...ResponseStateActionsArticle
     }
     ${UserDigest.Mini.fragments.user}

@@ -41,7 +41,7 @@ export default {
         title
       }
       comments(input: { sort: oldest, first: null })
-        @include(if: $hasDescendantComments) {
+        @include(if: $hasDescendants) {
         edges {
           cursor
           node {
@@ -59,7 +59,7 @@ export default {
         title
       }
       comments(input: { sort: oldest, first: null })
-        @include(if: $hasDescendantComments) {
+        @include(if: $hasDescendants) {
         edges {
           cursor
           node {

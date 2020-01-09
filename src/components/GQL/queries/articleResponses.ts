@@ -10,9 +10,7 @@ export default gql`
     $first: Int = 8
     $includeAfter: Boolean
     $includeBefore: Boolean
-    $hasDescendantComments: Boolean = true
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
+    $hasDescendants: Boolean = true
     $articleOnly: Boolean
   ) {
     article(input: { mediaHash: $mediaHash }) {

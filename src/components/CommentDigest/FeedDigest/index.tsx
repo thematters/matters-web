@@ -11,7 +11,7 @@ import {
   FeedDigestComment_comments_edges_node
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
-import commentFragments from '~/components/GQL/fragments/comment'
+import CommentFragments from '~/components/GQL/fragments/comment'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
@@ -30,7 +30,7 @@ import styles from './styles.css'
 const COLLAPSE_DESCENDANT_COUNT = 2
 
 const fragments = {
-  comment: commentFragments.feed
+  comment: CommentFragments.feed
 }
 
 const FeedDigest = ({

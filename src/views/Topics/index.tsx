@@ -19,11 +19,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICSS = gql`
-  query AllTopics(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = true
-  ) {
+  query AllTopics($after: String) {
     viewer {
       id
       recommendation {

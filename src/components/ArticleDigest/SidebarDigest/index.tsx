@@ -26,7 +26,7 @@ const fragments = {
       title
       slug
       live
-      cover @include(if: $hasArticleDigestCover)
+      cover
       author {
         id
         userName

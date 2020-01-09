@@ -20,13 +20,7 @@ import EmptySearch from '../EmptySearch'
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`
-  query SeachArticles(
-    $key: String!
-    $first: Int!
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query SeachArticles($key: String!, $first: Int!, $after: String) {
     search(input: { key: $key, type: Article, first: $first, after: $after }) {
       pageInfo {
         startCursor

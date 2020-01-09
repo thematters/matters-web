@@ -46,11 +46,7 @@ import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
 const ARTICLE_DETAIL = gql`
-  query ArticleDetail(
-    $mediaHash: String
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query ArticleDetail($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title

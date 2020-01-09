@@ -15,14 +15,7 @@ import { CollectionList as CollectionListTypes } from './__generated__/Collectio
 import styles from './styles.css'
 
 export const COLLECTION_LIST = gql`
-  query CollectionList(
-    $mediaHash: String
-    $after: String
-    $first: Int
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
       ...ArticleCollection
     }

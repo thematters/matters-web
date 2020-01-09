@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 
-import commentFragments from '~/components/GQL/fragments/comment'
+import CommentFragments from '~/components/GQL/fragments/comment'
 
 export default gql`
-  query CommentComments($id: ID!, $hasDescendantComments: Boolean = true) {
+  query CommentComments($id: ID!, $hasDescendants: Boolean = true) {
     node(input: { id: $id }) {
       ... on Comment {
         id
         comments(input: { sort: oldest, first: null })
-          @include(if: $hasDescendantComments) {
+          @include(if: $hasDescendants) {
           edges {
             cursor
             node {
@@ -19,5 +19,5 @@ export default gql`
       }
     }
   }
-  ${commentFragments.base}
+  ${CommentFragments.base}
 `

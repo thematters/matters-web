@@ -32,9 +32,6 @@ const EDITOR_SET_COLLECTION = gql`
     $after: String
     $first: Int
     $collection: [ID!]!
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     setCollection(input: { id: $id, collection: $collection }) {
       ...ArticleCollection

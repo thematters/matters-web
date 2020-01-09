@@ -11,11 +11,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 
 const ME_HISTORY_FEED = gql`
-  query MeHistoryFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query MeHistoryFeed($after: String) {
     viewer {
       id
       activity {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { LoadMore, Spinner, Translate } from '~/components'
 import { CommentDigest } from '~/components/CommentDigest'
-import commentFragments from '~/components/GQL/fragments/comment'
+import CommentFragments from '~/components/GQL/fragments/comment'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
@@ -20,7 +20,7 @@ const FEATURED_COMMENTS = gql`
     $mediaHash: String
     $after: String
     $first: Int = 10
-    $hasDescendantComments: Boolean = true
+    $hasDescendants: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
@@ -40,7 +40,7 @@ const FEATURED_COMMENTS = gql`
       }
     }
   }
-  ${commentFragments.feed}
+  ${CommentFragments.feed}
 `
 
 const FeaturedComments = () => {

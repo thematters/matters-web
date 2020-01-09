@@ -21,12 +21,7 @@ import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 import styles from './styles.css'
 
 const FOLLOW_FEED = gql`
-  query FollowFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-    $hasDescendantComments: Boolean = false
-  ) {
+  query FollowFeed($after: String, $hasDescendants: Boolean = false) {
     viewer {
       id
       recommendation {

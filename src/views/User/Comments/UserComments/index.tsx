@@ -38,7 +38,7 @@ const USER_COMMENT_FEED = gql`
   query UserCommentFeed(
     $id: ID!
     $after: String
-    $hasDescendantComments: Boolean = false
+    $hasDescendants: Boolean = false
   ) {
     node(input: { id: $id }) {
       ... on User {

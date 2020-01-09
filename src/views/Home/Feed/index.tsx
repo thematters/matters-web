@@ -42,11 +42,7 @@ const feedFragment = gql`
 
 export const queries = {
   hottest: gql`
-    query HottestFeed(
-      $after: String
-      $hasArticleDigestActionBookmark: Boolean = true
-      $hasArticleDigestActionTopicScore: Boolean = false
-    ) {
+    query HottestFeed($after: String) {
       viewer {
         id
         recommendation {
@@ -59,11 +55,7 @@ export const queries = {
     ${feedFragment}
   `,
   newest: gql`
-    query NewestFeed(
-      $after: String
-      $hasArticleDigestActionBookmark: Boolean = true
-      $hasArticleDigestActionTopicScore: Boolean = false
-    ) {
+    query NewestFeed($after: String) {
       viewer {
         id
         recommendation {
