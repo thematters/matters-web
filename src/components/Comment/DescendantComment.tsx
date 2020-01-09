@@ -3,13 +3,13 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import CommentForm from '~/components/Form/CommentForm'
-import { FeedDigestComment_comments_edges_node } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { UserDigest } from '~/components/UserDigest'
 
-import CommentContent from '../Content'
-import DropdownActions from '../DropdownActions'
-import FooterActions, { FooterActionsControls } from '../FooterActions'
+import { DescendantsIncludedComment_comments_edges_node } from './__generated__/DescendantsIncludedComment'
 import CancelEditButton from './CancelEditButton'
+import CommentContent from './Content'
+import DropdownActions from './DropdownActions'
+import FooterActions, { FooterActionsControls } from './FooterActions'
 import PinnedLabel from './PinnedLabel'
 import ReplyTo from './ReplyTo'
 import styles from './styles.css'
@@ -20,7 +20,7 @@ const DescendantComment = ({
   commentCallback,
   ...actionControls
 }: {
-  comment: FeedDigestComment_comments_edges_node
+  comment: DescendantsIncludedComment_comments_edges_node
   inArticle?: boolean
   commentCallback?: () => void
 } & FooterActionsControls) => {

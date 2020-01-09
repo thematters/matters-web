@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
-
-import commentFragments from './comment'
+import { ArticleDigest, Comment } from '~/components'
 
 export const ArticleDetailResponses = gql`
   fragment ArticleDetailResponses on Article {
@@ -30,12 +28,12 @@ export const ArticleDetailResponses = gql`
             ...ResponseDigestArticle
           }
           ... on Comment {
-            ...FeedDigestComment
+            ...DescendantsIncludedComment
           }
         }
       }
     }
   }
   ${ArticleDigest.Response.fragments.response}
-  ${commentFragments.feed}
+  ${Comment.fragments.descendantsIncluded}
 `

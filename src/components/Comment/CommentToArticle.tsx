@@ -1,17 +1,16 @@
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import { FeedDigestComment } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
-import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
-
 import { toPath } from '~/common/utils'
 
+import { Comment } from './__generated__/Comment'
+import { DescendantsIncludedComment } from './__generated__/DescendantsIncludedComment'
 import styles from './styles.css'
 
 const CommentToArticle = ({
   comment
 }: {
-  comment: FeedDigestComment | FolloweeFeedDigestComment
+  comment: Comment | DescendantsIncludedComment
 }) => {
   if (!comment.article) {
     return null

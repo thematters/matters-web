@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   ArticleDigest,
-  CommentDigest,
+  Comment,
   Head,
   InfiniteScroll,
   PageHeader,
@@ -12,7 +12,6 @@ import {
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import CommentFragments from '~/components/GQL/fragments/comment'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -21,7 +20,7 @@ import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 import styles from './styles.css'
 
 const FOLLOW_FEED = gql`
-  query FollowFeed($after: String, $hasDescendants: Boolean = false) {
+  query FollowFeed($after: String) {
     viewer {
       id
       recommendation {
@@ -39,7 +38,7 @@ const FOLLOW_FEED = gql`
                 ...FolloweeFeedDigestArticle
               }
               ... on Comment {
-                ...FolloweeFeedDigestComment
+                ...DescendantsIncludedComment
               }
             }
           }
@@ -48,7 +47,7 @@ const FOLLOW_FEED = gql`
     }
   }
   ${ArticleDigest.Feed.fragments.followee}
-  ${CommentFragments.followee}
+  ${Comment.fragments.descendantsIncluded}
 `
 
 const FollowFeed = () => {
@@ -112,7 +111,7 @@ const FollowFeed = () => {
               />
             )}
             {node.__typename === 'Comment' && (
-              <CommentDigest.Feed
+              <Comment
                 comment={node}
                 hasLink
                 hasDropdownActions={false}

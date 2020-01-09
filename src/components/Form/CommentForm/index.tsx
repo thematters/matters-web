@@ -5,10 +5,10 @@ import { useContext, useState } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { Button } from '~/components/Button'
+import CommentFragments from '~/components/Comment/fragments'
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
@@ -41,6 +41,18 @@ const COMMENT_DRAFT = gql`
       content
     }
   }
+`
+
+const COMMENT_WITH_DESCENDANTS = gql`
+  query CommentWithDescendants($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Comment {
+        id
+        ...DescendantsIncludedComment
+      }
+    }
+  }
+  ${CommentFragments.descendantsIncluded}
 `
 
 interface CommentFormProps {
@@ -77,7 +89,7 @@ const CommentForm = ({
     : parentId
     ? [
         {
-          query: COMMENT_COMMENTS,
+          query: COMMENT_WITH_DESCENDANTS,
           variables: { id: parentId }
         }
       ]

@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
-import { CommentDigest } from '~/components/CommentDigest'
+import { Comment, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
@@ -35,11 +34,7 @@ const USER_ID = gql`
   }
 `
 const USER_COMMENT_FEED = gql`
-  query UserCommentFeed(
-    $id: ID!
-    $after: String
-    $hasDescendants: Boolean = false
-  ) {
+  query UserCommentFeed($id: ID!, $after: String) {
     node(input: { id: $id }) {
       ... on User {
         id
@@ -64,7 +59,7 @@ const USER_COMMENT_FEED = gql`
                 edges {
                   cursor
                   node {
-                    ...FeedDigestComment
+                    ...Comment
                   }
                 }
               }
@@ -74,7 +69,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${CommentDigest.Feed.fragments.comment}
+  ${Comment.fragments.comment}
 `
 
 const UserCommentsWrap = () => {
@@ -191,7 +186,7 @@ const UserComments = ({ user }: UserIdUser) => {
               <ul className="comment-list">
                 {filteredComments.map(comment => (
                   <li key={comment.id}>
-                    <CommentDigest.Feed comment={comment} hasLink />
+                    <Comment comment={comment} hasLink />
                   </li>
                 ))}
               </ul>

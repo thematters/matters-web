@@ -2,9 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { LoadMore, Spinner, Translate } from '~/components'
-import { CommentDigest } from '~/components/CommentDigest'
-import CommentFragments from '~/components/GQL/fragments/comment'
+import { Comment, LoadMore, Spinner, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
@@ -20,7 +18,6 @@ const FEATURED_COMMENTS = gql`
     $mediaHash: String
     $after: String
     $first: Int = 10
-    $hasDescendants: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
@@ -34,13 +31,13 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...FeedDigestComment
+            ...DescendantsIncludedComment
           }
         }
       }
     }
   }
-  ${CommentFragments.feed}
+  ${Comment.fragments.descendantsIncluded}
 `
 
 const FeaturedComments = () => {
@@ -96,7 +93,7 @@ const FeaturedComments = () => {
       <ul>
         {comments.map(comment => (
           <li key={comment.id}>
-            <CommentDigest.Feed comment={comment} inArticle hasForm />
+            <Comment comment={comment} inArticle hasForm />
           </li>
         ))}
       </ul>

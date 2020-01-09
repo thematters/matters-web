@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import CommentContent from '~/components/CommentDigest/Content'
+import CommentContent from '~/components/Comment/Content'
 
 import { makeSummary, toPath } from '~/common/utils'
 

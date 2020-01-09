@@ -6,34 +6,27 @@ import { useState } from 'react'
 import { Icon, TextIcon, Translate } from '~/components'
 import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
-import {
-  FeedDigestComment,
-  FeedDigestComment_comments_edges_node
-} from '~/components/GQL/fragments/__generated__/FeedDigestComment'
-import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
-import CommentFragments from '~/components/GQL/fragments/comment'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, toPath } from '~/common/utils'
 
-import CommentContent from '../Content'
-import DropdownActions from '../DropdownActions'
-import FooterActions, { FooterActionsControls } from '../FooterActions'
+import { Comment as CommentType } from './__generated__/Comment'
+import { DescendantsIncludedComment } from './__generated__/DescendantsIncludedComment'
 import CancelEditButton from './CancelEditButton'
 import CommentToArticle from './CommentToArticle'
+import CommentContent from './Content'
 import DescendantComment from './DescendantComment'
+import DropdownActions from './DropdownActions'
+import FooterActions, { FooterActionsControls } from './FooterActions'
+import fragments from './fragments'
 import PinnedLabel from './PinnedLabel'
 import ReplyTo from './ReplyTo'
 import styles from './styles.css'
 
 const COLLAPSE_DESCENDANT_COUNT = 2
 
-const fragments = {
-  comment: CommentFragments.feed
-}
-
-const FeedDigest = ({
+export const Comment = ({
   comment,
   inArticle,
   expandDescendants,
@@ -42,7 +35,7 @@ const FeedDigest = ({
   inFolloweeFeed,
   ...actionControls
 }: {
-  comment: FeedDigestComment | FolloweeFeedDigestComment
+  comment: CommentType | DescendantsIncludedComment
   inArticle?: boolean
   expandDescendants?: boolean
   commentCallback?: () => void
@@ -58,14 +51,14 @@ const FeedDigest = ({
     author,
     replyTo,
     parentComment,
-    pinned,
-    comments
+    pinned
   } = comment
+  const comments = 'comments' in comment ? comment.comments : undefined
 
   // descendant
   const descendantComments = filterComments(
     (comments?.edges || []).map(({ node }) => node)
-  ) as FeedDigestComment_comments_edges_node[]
+  ) as DescendantsIncludedComment[]
   const restDescendantCommentCount =
     descendantComments.length - COLLAPSE_DESCENDANT_COUNT
   const [expand, setExpand] = useState(
@@ -223,6 +216,4 @@ const FeedDigest = ({
   )
 }
 
-FeedDigest.fragments = fragments
-
-export default FeedDigest
+Comment.fragments = fragments

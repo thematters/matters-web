@@ -8,9 +8,13 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { LoadMore, Spinner, Translate } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
-import { CommentDigest } from '~/components/CommentDigest'
+import {
+  ArticleDigest,
+  Comment,
+  LoadMore,
+  Spinner,
+  Translate
+} from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
@@ -44,7 +48,6 @@ const SUBSCRIBE_RESPONSES = gql`
     $first: Int
     $includeAfter: Boolean
     $includeBefore: Boolean
-    $hasDescendants: Boolean = true
     $articleOnly: Boolean
   ) {
     nodeEdited(input: { id: $id }) {
@@ -281,7 +284,7 @@ const LatestResponses = () => {
             {_has(response, 'title') ? (
               <ArticleDigest.Response article={response} hasBookmark />
             ) : (
-              <CommentDigest.Feed
+              <Comment
                 comment={response}
                 hasForm
                 hasLink
