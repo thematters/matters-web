@@ -18,7 +18,6 @@ import { FeedCommentComment } from './__generated__/FeedCommentComment'
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
   hasUserName?: boolean
-  hasDropdownActions?: boolean
 } & FooterActionsControls
 
 export type CommentProps = {
@@ -60,7 +59,6 @@ export const FeedComment = ({
   refetch,
   avatarSize = 'lg',
   hasUserName,
-  hasDropdownActions = true,
   ...actionControls
 }: CommentProps) => {
   const [edit, setEdit] = useState(false)
@@ -80,12 +78,10 @@ export const FeedComment = ({
         <section className="right">
           <PinnedLabel comment={comment} />
 
-          {hasDropdownActions && (
-            <DropdownActions
-              comment={comment}
-              editComment={() => setEdit(true)}
-            />
-          )}
+          <DropdownActions
+            comment={comment}
+            editComment={() => setEdit(true)}
+          />
         </section>
       </header>
 

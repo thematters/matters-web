@@ -9,11 +9,11 @@ import { analytics, numAbbr, responseStateIs, toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
+import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
 
 const fragments = {
   article: gql`
-    fragment ResponseCountArticle on Article {
+    fragment ActionsResponseCountArticle on Article {
       id
       slug
       state
@@ -25,7 +25,7 @@ const fragments = {
     }
   `,
   response: gql`
-    fragment ResponseCountArticle on Article {
+    fragment ActionsResponseCountArticle on Article {
       id
       slug
       articleState: state
@@ -42,7 +42,7 @@ const ResponseCount = ({
   article,
   size = 'sm'
 }: {
-  article: ResponseCountArticle
+  article: ActionsResponseCountArticle
   size?: 'sm' | 'xs'
 }) => {
   const { slug, mediaHash, author } = article

@@ -37,7 +37,7 @@ const fragments = {
       }
       createdAt
       ...AppreciationArticle
-      ...ResponseCountArticle
+      ...ActionsResponseCountArticle
       ...BookmarkArticle
       ...TopicScoreArticle
       ...StateActionsArticle
@@ -56,7 +56,7 @@ const fragments = {
       }
       createdAt
       ...AppreciationArticle
-      ...ResponseCountArticle
+      ...ActionsResponseCountArticle
       ...BookmarkArticle
       ...TopicScoreArticle
       ...ResponseStateActionsArticle

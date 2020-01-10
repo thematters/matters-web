@@ -8,17 +8,9 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import {
-  ArticleDigest,
-  Comment,
-  LoadMore,
-  Spinner,
-  Translate
-} from '~/components'
+import { ArticleDigest, LoadMore, Spinner, Translate } from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
-import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
-import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
 import { useEventListener } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
@@ -31,18 +23,75 @@ import {
   // unshiftConnections
 } from '~/common/utils'
 
+import DescendantsIncludedComment from './DescendantsIncludedComment'
 import styles from './styles.css'
 
-import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
+import { LatestResponses as LatestResponsesType } from './__generated__/LatestResponses'
 import {
-  ArticleCommentAdded,
-  ArticleCommentAdded_nodeEdited_Article
-} from './__generated__/ArticleCommentAdded'
+  ResponseAdded,
+  ResponseAdded_nodeEdited_Article
+} from './__generated__/ResponseAdded'
 
 const RESPONSES_COUNT = 15
 
-const SUBSCRIBE_RESPONSES = gql`
-  subscription ArticleCommentAdded(
+const LatestResponsesArticle = gql`
+  fragment LatestResponsesArticle on Article {
+    id
+    responseCount
+    responses(
+      input: {
+        after: $after
+        before: $before
+        first: $first
+        includeAfter: $includeAfter
+        includeBefore: $includeBefore
+        articleOnly: $articleOnly
+      }
+    ) {
+      totalCount
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          ... on Article {
+            ...ResponseDigestArticle
+          }
+          ... on Comment {
+            ...DescendantsIncludedCommentComment
+          }
+        }
+      }
+    }
+  }
+  ${ArticleDigest.Response.fragments.response}
+  ${DescendantsIncludedComment.fragments.comment}
+`
+
+const LATEST_RESPONSES = gql`
+  query LatestResponses(
+    $mediaHash: String
+    $before: String
+    $after: String
+    $first: Int = 8
+    $includeAfter: Boolean
+    $includeBefore: Boolean
+    $articleOnly: Boolean
+  ) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      mediaHash
+      live
+      ...LatestResponsesArticle
+    }
+  }
+  ${LatestResponsesArticle}
+`
+
+const SUBSCRIBE_RESPONSE_ADDED = gql`
+  subscription ResponseAdded(
     $id: ID!
     $before: String
     $after: String
@@ -55,11 +104,11 @@ const SUBSCRIBE_RESPONSES = gql`
       id
       ... on Article {
         id
-        ...ArticleDetailResponses
+        ...LatestResponsesArticle
       }
     }
   }
-  ${ArticleDetailResponses}
+  ${LatestResponsesArticle}
 `
 
 const LatestResponses = () => {
@@ -91,7 +140,7 @@ const LatestResponses = () => {
     fetchMore,
     subscribeToMore,
     refetch
-  } = useQuery<ArticleResponsesType>(ARTICLE_RESPONSES, {
+  } = useQuery<LatestResponsesType>(LATEST_RESPONSES, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -177,8 +226,8 @@ const LatestResponses = () => {
   // real time update with websocket
   useEffect(() => {
     if (article && article.live && edges && pageInfo) {
-      subscribeToMore<ArticleCommentAdded>({
-        document: SUBSCRIBE_RESPONSES,
+      subscribeToMore<ResponseAdded>({
+        document: SUBSCRIBE_RESPONSE_ADDED,
         variables: {
           id: article.id,
           before: pageInfo.endCursor,
@@ -191,7 +240,7 @@ const LatestResponses = () => {
           }
           const oldData = prev.article
           const newData = subscriptionData.data
-            .nodeEdited as ArticleCommentAdded_nodeEdited_Article
+            .nodeEdited as ResponseAdded_nodeEdited_Article
           const diff = _differenceBy(
             newData.responses.edges,
             oldData.responses.edges || [],
@@ -287,12 +336,10 @@ const LatestResponses = () => {
             {_has(response, 'title') ? (
               <ArticleDigest.Response article={response} hasBookmark />
             ) : (
-              <Comment
+              <DescendantsIncludedComment
                 comment={response}
-                hasReply
+                defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
-                inArticle
-                expandDescendants={response.id === parentId && !!descendantId}
               />
             )}
           </li>

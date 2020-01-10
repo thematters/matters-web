@@ -2,11 +2,12 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Comment, LoadMore, Spinner, Translate } from '~/components'
+import { LoadMore, Spinner, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
+import DescendantsIncludedComment from './DescendantsIncludedComment'
 import styles from './styles.css'
 
 import {
@@ -32,13 +33,13 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...DescendantsIncludedComment
+            ...DescendantsIncludedCommentComment
           }
         }
       }
     }
   }
-  ${Comment.fragments.descendantsIncluded}
+  ${DescendantsIncludedComment.fragments.comment}
 `
 
 const FeaturedComments = () => {
@@ -94,7 +95,7 @@ const FeaturedComments = () => {
       <ul>
         {comments.map(comment => (
           <li key={comment.id}>
-            <Comment comment={comment} inArticle hasReply />
+            <DescendantsIncludedComment comment={comment} />
           </li>
         ))}
       </ul>

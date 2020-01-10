@@ -1,0 +1,38 @@
+:root {
+  --descendant-avatar-size: 1.5rem;
+}
+
+.container {
+}
+
+.descendants {
+  & .container {
+    padding: var(--spacing-base) 0;
+  }
+
+  & li:first-child .container {
+    margin-top: var(--spacing-xx-tight);
+    padding-top: var(--spacing-base);
+  }
+
+  & .content-wrap {
+    position: relative;
+    margin-top: var(--spacing-x-tight);
+    padding-left: var(--spacing-x-loose);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(var(--descendant-avatar-size) / 2);
+      top: 0;
+      height: 0;
+      height: calc(100% - var(--spacing-base) * 2);
+      width: 1px;
+      background-color: var(--color-line-grey-light);
+    }
+  }
+}
+
+.expand-button {
+  padding-left: var(--spacing-x-loose);
+}

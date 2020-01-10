@@ -4,14 +4,6 @@
     padding: var(--spacing-xxx-loose) 0 var(--spacing-loose);
     font-size: var(--font-size-lg);
   }
-
-  & .count {
-    @mixin font-sans;
-    position: relative;
-    top: -0.7rem;
-    right: -0.25rem;
-    font-size: var(--font-size-xs);
-  }
 }
 
 .switch {
