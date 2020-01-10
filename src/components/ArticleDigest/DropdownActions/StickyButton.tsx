@@ -4,9 +4,10 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
+import styles from './styles.css'
+
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
 import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
-import styles from './styles.css'
 
 const UPDATE_ARTICLE_INFO = gql`
   mutation UpdateArticleInfo($id: ID!, $sticky: Boolean!) {

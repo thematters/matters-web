@@ -16,8 +16,9 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 import styles from './styles.css'
+
+import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 
 const FOLLOW_FEED = gql`
   query FollowFeed($after: String) {

@@ -7,13 +7,14 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { responseStateIs } from '~/common/utils'
 
-import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
-import { ResponseDigestActionsArticle } from './__generated__/ResponseDigestActionsArticle'
 import Appreciation from './Appreciation'
 import ResponseCount from './ResponseCount'
 import State from './State'
 import styles from './styles.css'
 import TopicScore from './TopicScore'
+
+import { DigestActionsArticle } from './__generated__/DigestActionsArticle'
+import { ResponseDigestActionsArticle } from './__generated__/ResponseDigestActionsArticle'
 
 type ActionsType = 'feature' | 'feed' | 'sidebar' | 'related' | 'response'
 export interface ActionsControls {

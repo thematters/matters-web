@@ -14,11 +14,12 @@ import Throw404 from '~/components/Throw404'
 
 import { getQuery } from '~/common/utils'
 
-import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
 import DraftContent from './Content'
 import PublishState from './PublishState'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
+
+import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
 
 const DRAFT_DETAIL = gql`
   query DraftDetailQuery($id: ID!) {

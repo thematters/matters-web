@@ -11,18 +11,19 @@ import { UserDigest } from '~/components/UserDigest'
 import { TEXT } from '~/common/enums'
 import { filterComments, toPath } from '~/common/utils'
 
-import { Comment as CommentType } from './__generated__/Comment'
-import { DescendantsIncludedComment } from './__generated__/DescendantsIncludedComment'
 import CancelEditButton from './CancelEditButton'
 import CommentToArticle from './CommentToArticle'
 import CommentContent from './Content'
 import DescendantComment from './DescendantComment'
 import DropdownActions from './DropdownActions'
+import ReplyTo from './FeedComment/ReplyTo'
 import FooterActions, { FooterActionsControls } from './FooterActions'
 import fragments from './fragments'
 import PinnedLabel from './PinnedLabel'
-import ReplyTo from './ReplyTo'
 import styles from './styles.css'
+
+import { Comment as CommentType } from './__generated__/Comment'
+import { DescendantsIncludedComment } from './__generated__/DescendantsIncludedComment'
 
 const COLLAPSE_DESCENDANT_COUNT = 2
 
@@ -30,7 +31,6 @@ export const Comment = ({
   comment,
   inArticle,
   expandDescendants,
-  commentCallback,
   hasDropdownActions = true,
   inFolloweeFeed,
   ...actionControls
@@ -38,7 +38,6 @@ export const Comment = ({
   comment: CommentType | DescendantsIncludedComment
   inArticle?: boolean
   expandDescendants?: boolean
-  commentCallback?: () => void
   hasDropdownActions?: boolean
   inFolloweeFeed?: boolean
 } & FooterActionsControls) => {
@@ -46,7 +45,6 @@ export const Comment = ({
   const {
     id,
     article,
-    state,
     content,
     author,
     replyTo,
@@ -102,7 +100,7 @@ export const Comment = ({
               hasUserName={inArticle}
             />
 
-            {!inFolloweeFeed && pinned && <PinnedLabel />}
+            {!inFolloweeFeed && pinned && <PinnedLabel comment={comment} />}
 
             {inFolloweeFeed && (
               <span className="published-description">
@@ -115,9 +113,7 @@ export const Comment = ({
           </section>
 
           {inFolloweeFeed && <CommentToArticle comment={comment} />}
-          {hasReplyTo && replyTo && (
-            <ReplyTo user={replyTo.author} inArticle={!!inArticle} />
-          )}
+          {hasReplyTo && replyTo && <ReplyTo user={replyTo.author} />}
         </div>
 
         {hasDropdownActions && (
@@ -146,29 +142,18 @@ export const Comment = ({
           <Expandable limit={5} buffer={2}>
             <Link {...path}>
               <a>
-                <CommentContent
-                  state={state}
-                  content={content}
-                  blocked={author.isBlocked}
-                />
+                <CommentContent comment={comment} />
               </a>
             </Link>
           </Expandable>
         )}
 
-        {!edit && !inFolloweeFeed && (
-          <CommentContent
-            state={state}
-            content={content}
-            blocked={author.isBlocked}
-          />
-        )}
+        {!edit && !inFolloweeFeed && <CommentContent comment={comment} />}
 
         {!edit && (
           <FooterActions
             comment={comment}
             refetch={inArticle}
-            commentCallback={commentCallback}
             {...actionControls}
           />
         )}
@@ -182,7 +167,6 @@ export const Comment = ({
                   <DescendantComment
                     comment={c}
                     inArticle={inArticle}
-                    commentCallback={commentCallback}
                     {...actionControls}
                   />
                 </li>

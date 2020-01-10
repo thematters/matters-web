@@ -4,9 +4,10 @@ import { Avatar } from '~/components/Avatar'
 
 import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
 
-import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
 
 const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
   const Message = () => <p>{notice.message}</p>

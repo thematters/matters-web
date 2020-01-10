@@ -7,11 +7,12 @@ import { Comment, LoadMore, Spinner, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
+import styles from './styles.css'
+
 import {
   ArticleFeaturedComments,
   ArticleFeaturedComments_article_featuredComments_edges_node
 } from './__generated__/ArticleFeaturedComments'
-import styles from './styles.css'
 
 const FEATURED_COMMENTS = gql`
   query ArticleFeaturedComments(
@@ -93,7 +94,7 @@ const FeaturedComments = () => {
       <ul>
         {comments.map(comment => (
           <li key={comment.id}>
-            <Comment comment={comment} inArticle hasForm />
+            <Comment comment={comment} inArticle hasReply />
           </li>
         ))}
       </ul>

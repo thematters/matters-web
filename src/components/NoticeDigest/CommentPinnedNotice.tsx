@@ -2,12 +2,13 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import { CommentPinnedNotice as NoticeType } from './__generated__/CommentPinnedNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeComment from './NoticeComment'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { CommentPinnedNotice as NoticeType } from './__generated__/CommentPinnedNotice'
 
 const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
   return (

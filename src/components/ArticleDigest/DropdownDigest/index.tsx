@@ -9,8 +9,9 @@ import { UserDigest } from '~/components/UserDigest'
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import { DropdownDigestArticle } from './__generated__/DropdownDigestArticle'
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from './__generated__/DropdownDigestArticle'
 
 interface DropdownDigestProps {
   article: DropdownDigestArticle

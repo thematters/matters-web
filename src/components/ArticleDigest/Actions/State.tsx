@@ -6,9 +6,10 @@ import { TextIcon } from '~/components/TextIcon'
 
 import { responseStateIs } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { ResponseStateActionsArticle } from './__generated__/ResponseStateActionsArticle'
 import { StateActionsArticle } from './__generated__/StateActionsArticle'
-import styles from './styles.css'
 
 const fragments = {
   article: gql`

@@ -3,10 +3,6 @@ import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { FC, useContext, useState } from 'react'
 
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User
-} from '~/components/GQL/queries/__generated__/SearchUsers'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageContext } from '~/components/Language'
 
@@ -17,6 +13,11 @@ import { translate } from '~/common/utils'
 
 import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
+
+import {
+  SearchUsers,
+  SearchUsers_search_edges_node_User
+} from '~/components/GQL/queries/__generated__/SearchUsers'
 
 interface Props {
   content: string

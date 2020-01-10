@@ -5,8 +5,9 @@ import { ArticleDigest } from '~/components'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 import styles from './styles.css'
+
+import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 
 const fragments = {
   article: gql`

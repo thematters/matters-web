@@ -9,10 +9,11 @@ import {
 } from 'react-beautiful-dnd'
 
 import { ArticleDigest, Icon } from '~/components'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 interface State {
   articles: DropdownDigestArticle[]

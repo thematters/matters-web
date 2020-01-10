@@ -8,8 +8,9 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import ViewAllLink from '../ViewAllLink'
-import { SidebarTags } from './__generated__/SidebarTags'
 import styles from './styles.css'
+
+import { SidebarTags } from './__generated__/SidebarTags'
 
 const SIDEBAR_TAGS = gql`
   query SidebarTags {

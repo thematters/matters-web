@@ -25,12 +25,13 @@ import { ViewerContext } from '~/components/Viewer'
 import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
-import { MeProfileUser } from './__generated__/MeProfileUser'
-import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
+
+import { MeProfileUser } from './__generated__/MeProfileUser'
+import { UserProfileUser } from './__generated__/UserProfileUser'
 
 const fragments = {
   user: gql`

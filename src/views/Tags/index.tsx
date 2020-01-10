@@ -22,8 +22,9 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
+
+import { AllTags } from './__generated__/AllTags'
 
 const ALL_TAGSS = gql`
   query AllTags($after: String) {

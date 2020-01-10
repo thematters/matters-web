@@ -9,9 +9,10 @@ import { Spinner } from '~/components/Spinner'
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
-import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 import ClearHistoryButton from './ClearHistoryButton'
 import styles from './styles.css'
+
+import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 
 interface Props {
   hideDropdown: () => void

@@ -16,8 +16,9 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { AllAuthors } from './__generated__/AllAuthors'
 import styles from './styles.css'
+
+import { AllAuthors } from './__generated__/AllAuthors'
 
 const ALL_AUTHORSS = gql`
   query AllAuthors($after: String) {

@@ -4,13 +4,14 @@ import gql from 'graphql-tag'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/Button/Share'
 
-import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'
 import ExtendButton from './ExtendButton'
 import MoreButton from './MoreButton'
 import ResponseButton from './ResponseButton'
 import styles from './styles.css'
+
+import { ToolbarArticle } from './__generated__/ToolbarArticle'
 
 const fragments = {
   article: gql`

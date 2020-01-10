@@ -8,8 +8,9 @@ import {
   UserDigest
 } from '~/components'
 
-import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction'
 import styles from './styles.css'
+
+import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction'
 
 const fragments = {
   transaction: gql`

@@ -9,8 +9,9 @@ import {
   UserDigest
 } from '~/components'
 
-import { AppreciationReceivedTransaction } from './__generated__/AppreciationReceivedTransaction'
 import styles from './styles.css'
+
+import { AppreciationReceivedTransaction } from './__generated__/AppreciationReceivedTransaction'
 
 const fragments = {
   transaction: gql`

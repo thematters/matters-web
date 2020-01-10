@@ -6,12 +6,13 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 
 const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {

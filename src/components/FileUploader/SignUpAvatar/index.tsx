@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Icon } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -13,6 +12,8 @@ import {
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
 /**
  * This component is for uploading avatar during sign up process.

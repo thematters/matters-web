@@ -5,9 +5,10 @@ import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { CollapseButtonComment } from './__generated__/CollapseButtonComment'
 import { CollapseComment } from './__generated__/CollapseComment'
-import styles from './styles.css'
 
 const COLLAPSE_COMMENT = gql`
   mutation CollapseComment($id: ID!, $state: CommentState!) {

@@ -14,8 +14,9 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
-import { SeachUsers } from './__generated__/SeachUsers'
 import styles from './styles.css'
+
+import { SeachUsers } from './__generated__/SeachUsers'
 
 const SEARCH_USERS = gql`
   query SeachUsers($first: Int!, $key: String!, $after: String) {

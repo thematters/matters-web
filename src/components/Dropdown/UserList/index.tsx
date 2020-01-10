@@ -1,9 +1,10 @@
 import { Menu } from '~/components/Menu'
 import { Spinner } from '~/components/Spinner'
 import { UserDigest } from '~/components/UserDigest'
-import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
 
 import styles from './styles.css'
+
+import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
 
 const DropdownUserList = ({
   users,

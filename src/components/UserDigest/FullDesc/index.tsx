@@ -10,8 +10,9 @@ import { FollowButton } from '~/components/Button/Follow'
 import { TEXT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 
-import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 import styles from './styles.css'
+
+import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
 
 /**
  * UeserDigest.FullDesc is a component for presenting user's avatar, display

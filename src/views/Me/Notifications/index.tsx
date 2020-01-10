@@ -11,9 +11,7 @@ import {
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { useMutation } from '~/components/GQL'
-import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import NoticeDigest from '~/components/NoticeDigest'
@@ -21,6 +19,9 @@ import NoticeDigest from '~/components/NoticeDigest'
 import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 const Notifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(

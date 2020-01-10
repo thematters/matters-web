@@ -27,6 +27,11 @@
         "grouped-imports": true,
         "groups": [
           {
+            "name": "types",
+            "match": "__generated__",
+            "order": 25
+          },
+          {
             "name": "local",
             "match": "^[.]",
             "order": 20

@@ -16,8 +16,9 @@ import {
   validatePassword
 } from '~/common/utils'
 
-import { ResetPassword } from './__generated__/ResetPassword'
 import styles from './styles.css'
+
+import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
   codeId: string

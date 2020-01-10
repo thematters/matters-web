@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import { DigestNotice } from './__generated__/DigestNotice'
 import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
 import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
 import ArticleNewCollectedNotice from './ArticleNewCollectedNotice'
@@ -19,6 +18,8 @@ import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
 import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
 import UserNewFollowerNotice from './UserNewFollowerNotice'
+
+import { DigestNotice } from './__generated__/DigestNotice'
 
 const fragments = {
   notice: gql`

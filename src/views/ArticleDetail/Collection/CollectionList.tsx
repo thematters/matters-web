@@ -10,9 +10,10 @@ import articleFragments from '~/components/GQL/fragments/article'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
-import styles from './styles.css'
 
 export const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {

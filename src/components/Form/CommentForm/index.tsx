@@ -7,7 +7,6 @@ import { Icon, Translate } from '~/components'
 import { Button } from '~/components/Button'
 import CommentFragments from '~/components/Comment/fragments'
 import { useMutation } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
@@ -16,9 +15,11 @@ import { ViewerContext } from '~/components/Viewer'
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 
+import styles from './styles.css'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { CommentDraft } from './__generated__/CommentDraft'
 import { PutComment } from './__generated__/PutComment'
-import styles from './styles.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,

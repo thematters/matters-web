@@ -2,16 +2,17 @@ import Link from 'next/link'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import userFragments from '~/components/GQL/fragments/user'
-import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
-import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import BLOCK_USER from '~/components/GQL/mutations/blockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
 import { ADD_TOAST, PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
+
+import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
+import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
+import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 
 const fragments = {
   user: userFragments.block

@@ -15,8 +15,9 @@ import {
   numFormat
 } from '~/common/utils'
 
-import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 import styles from './styles.css'
+
+import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
 
 const ARTICLE_APPRECIATORS = gql`
   query AllArticleAppreciators($mediaHash: String, $after: String) {

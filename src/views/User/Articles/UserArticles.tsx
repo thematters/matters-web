@@ -11,7 +11,6 @@ import {
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
 import Throw404 from '~/components/Throw404'
@@ -22,6 +21,8 @@ import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
 import styles from './styles.css'
+
+import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 
 const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
   const { articleCount: articles, totalWordCount: words } = (data &&

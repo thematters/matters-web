@@ -6,7 +6,6 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
@@ -14,12 +13,14 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS, APPRECIATE_DEBOUNCE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import styles from './styles.css'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
+import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
 
 const fragments = {
   article: gql`

@@ -1,0 +1,16 @@
+.container {
+  font-size: var(--font-size-sm-s);
+  line-height: 1;
+}
+
+.name {
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+}
+
+.username {
+  margin-left: var(--spacing-xx-tight);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-grey);
+}

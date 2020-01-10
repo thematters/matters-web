@@ -1,4 +1,5 @@
 import UserList from '~/components/Dropdown/UserList'
+
 import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
 
 const MentionUserList = ({

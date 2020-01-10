@@ -8,8 +8,9 @@ import { TEXT, UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
-import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 import styles from './styles.css'
+
+import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 
 type SidebarDigestProps = {
   type?: 'collection'

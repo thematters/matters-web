@@ -7,8 +7,9 @@ import { Avatar } from '~/components/Avatar'
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
 import styles from './styles.css'
+
+import { UserDigestBriefDescUser } from './__generated__/UserDigestBriefDescUser'
 
 /**
  * UserDigest.BriefDesc is a component for presenting user's avatar, display name and

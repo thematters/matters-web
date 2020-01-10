@@ -7,8 +7,9 @@ import { UserDigest } from '~/components/UserDigest'
 import { TEXT } from '~/common/enums'
 
 import Actions, { ActionsControls } from '../Actions'
-import { ResponseDigestArticle } from './__generated__/ResponseDigestArticle'
 import styles from './styles.css'
+
+import { ResponseDigestArticle } from './__generated__/ResponseDigestArticle'
 
 const fragments = {
   response: gql`

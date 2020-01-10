@@ -12,16 +12,17 @@ import {
 import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import SortBy from './SortBy'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { HottestFeed } from './__generated__/HottestFeed'
 import { NewestFeed } from './__generated__/NewestFeed'
-import SortBy from './SortBy'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {

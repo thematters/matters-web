@@ -18,7 +18,6 @@ import {
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
 import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
-import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
 import { useEventListener } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
@@ -28,15 +27,17 @@ import {
   dom,
   filterResponses,
   getQuery,
-  mergeConnections,
-  unshiftConnections
+  mergeConnections
+  // unshiftConnections
 } from '~/common/utils'
 
+import styles from './styles.css'
+
+import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
 import {
   ArticleCommentAdded,
   ArticleCommentAdded_nodeEdited_Article
 } from './__generated__/ArticleCommentAdded'
-import styles from './styles.css'
 
 const RESPONSES_COUNT = 15
 
@@ -124,50 +125,52 @@ const LatestResponses = () => {
     })
   }
 
-  const commentCallback = () => {
-    return fetchMore({
-      variables: {
-        before: storedCursor,
-        includeBefore: false,
-        articleOnly: articleOnlyMode
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
-        const oldResponseCount = _get(previousResult, 'article.responseCount')
+  console.log(storedCursor)
 
-        // update if response count has changed
-        if (newEdges.length === 0) {
-          if (oldResponseCount !== newResponseCount) {
-            return {
-              ...previousResult,
-              article: {
-                ...previousResult.article,
-                responseCount: newResponseCount
-              }
-            }
-          }
-          return previousResult
-        }
+  // const commentCallback = () => {
+  //   return fetchMore({
+  //     variables: {
+  //       before: storedCursor,
+  //       includeBefore: false,
+  //       articleOnly: articleOnlyMode
+  //     },
+  //     updateQuery: (previousResult, { fetchMoreResult }) => {
+  //       const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
+  //       const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
+  //       const oldResponseCount = _get(previousResult, 'article.responseCount')
 
-        // update if there are new items in responses.edges
-        const newResult = unshiftConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-        const newStartCursor = _get(
-          newResult,
-          `${connectionPath}.pageInfo.startCursor`,
-          null
-        )
-        if (newStartCursor) {
-          setStoredCursor(newStartCursor)
-        }
-        return newResult
-      }
-    })
-  }
+  //       // update if response count has changed
+  //       if (newEdges.length === 0) {
+  //         if (oldResponseCount !== newResponseCount) {
+  //           return {
+  //             ...previousResult,
+  //             article: {
+  //               ...previousResult.article,
+  //               responseCount: newResponseCount
+  //             }
+  //           }
+  //         }
+  //         return previousResult
+  //       }
+
+  //       // update if there are new items in responses.edges
+  //       const newResult = unshiftConnections({
+  //         oldData: previousResult,
+  //         newData: fetchMoreResult,
+  //         path: connectionPath
+  //       })
+  //       const newStartCursor = _get(
+  //         newResult,
+  //         `${connectionPath}.pageInfo.startCursor`,
+  //         null
+  //       )
+  //       if (newStartCursor) {
+  //         setStoredCursor(newStartCursor)
+  //       }
+  //       return newResult
+  //     }
+  //   })
+  // }
 
   const responses = filterResponses((edges || []).map(({ node }) => node))
 
@@ -286,11 +289,10 @@ const LatestResponses = () => {
             ) : (
               <Comment
                 comment={response}
-                hasForm
+                hasReply
                 hasLink
                 inArticle
                 expandDescendants={response.id === parentId && !!descendantId}
-                commentCallback={commentCallback}
               />
             )}
           </li>

@@ -5,10 +5,11 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { PinButtonComment } from './__generated__/PinButtonComment'
 import { PinComment } from './__generated__/PinComment'
 import { UnpinComment } from './__generated__/UnpinComment'
-import styles from './styles.css'
 
 const PIN_COMMENT = gql`
   mutation PinComment($id: ID!) {

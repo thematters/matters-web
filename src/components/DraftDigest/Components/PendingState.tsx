@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import { Icon, TextIcon, Translate } from '~/components'
-import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 import { useCountdown } from '~/components/Hook'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
 import { FeedDigestDraft } from '../FeedDigest/__generated__/FeedDigestDraft'
 
 const PendingState = ({ draft }: { draft: FeedDigestDraft }) => {

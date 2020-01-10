@@ -3,15 +3,16 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 import CommentForm from '~/components/Form/CommentForm'
-import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
 import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
-import { ResponsesArticle } from './__generated__/ResponsesArticle'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import styles from './styles.css'
+
+import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
+import { ResponsesArticle } from './__generated__/ResponsesArticle'
 
 const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
   const { data } = useQuery<ArticleResponseCount>(ARTICLE_RESPONSE_COUNT, {

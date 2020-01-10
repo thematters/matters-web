@@ -5,11 +5,12 @@ import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
-import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 import CollapseButton from './CollapseButton'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
+
+import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 // import ReportButton from './ReportButton'
 
 const fragments = {

@@ -5,8 +5,9 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
-import { DeleteComment } from './__generated__/DeleteComment'
 import styles from './styles.css'
+
+import { DeleteComment } from './__generated__/DeleteComment'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {

@@ -2,12 +2,13 @@ import Link from 'next/link'
 
 import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import NoticeDigest from '~/components/NoticeDigest'
 
 import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
+
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 interface DropdownNoticesProps {
   hideDropdown: () => void

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Icon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -12,8 +11,10 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
-import { UpdateUserInfoAvatar } from './__generated__/UpdateUserInfoAvatar'
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { UpdateUserInfoAvatar } from './__generated__/UpdateUserInfoAvatar'
 
 /**
  * This component is for uploading avatar in profile editor.

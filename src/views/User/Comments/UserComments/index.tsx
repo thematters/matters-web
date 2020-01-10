@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Comment, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
+import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
+import FeedComment from '~/components/Comment/FeedComment'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
@@ -15,12 +16,13 @@ import {
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
+import styles from './styles.css'
+
 import {
   UserCommentFeed,
   UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
 } from './__generated__/UserCommentFeed'
 import { UserIdUser } from './__generated__/UserIdUser'
-import styles from './styles.css'
 
 const USER_ID = gql`
   query UserIdUser($userName: String!) {
@@ -59,7 +61,7 @@ const USER_COMMENT_FEED = gql`
                 edges {
                   cursor
                   node {
-                    ...Comment
+                    ...FeedCommentComment
                   }
                 }
               }
@@ -69,7 +71,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${Comment.fragments.comment}
+  ${FeedComment.fragments.comment}
 `
 
 const UserCommentsWrap = () => {
@@ -186,7 +188,7 @@ const UserComments = ({ user }: UserIdUser) => {
               <ul className="comment-list">
                 {filteredComments.map(comment => (
                   <li key={comment.id}>
-                    <Comment comment={comment} hasLink />
+                    <FeedComment comment={comment} avatarSize="md" hasLink />
                   </li>
                 ))}
               </ul>

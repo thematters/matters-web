@@ -3,11 +3,12 @@ import { useState } from 'react'
 
 import { Icon, TextIcon, Translate } from '~/components'
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import CollectionList from './CollectionList'
 import EditButton from './EditButton'
 import EditingList from './EditingList'
 import styles from './styles.css'
+
+import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 
 const Collection: React.FC<{
   article: ArticleDetail_article

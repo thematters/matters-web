@@ -5,10 +5,11 @@ import { Avatar } from '~/components/Avatar'
 
 import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
 
-import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice'
 import NoticeArticle from './NoticeArticle'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice'
 
 const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
   return (

@@ -2,13 +2,14 @@ import gql from 'graphql-tag'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
+import styles from './styles.css'
+
+import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
 import { FolloweeArchiveButtonArticle } from './__generated__/FolloweeArchiveButtonArticle'
-import styles from './styles.css'
 
 const fragments = {
   article: gql`

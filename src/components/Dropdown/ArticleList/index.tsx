@@ -1,9 +1,10 @@
 import { ArticleDigest } from '~/components/ArticleDigest'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { Menu } from '~/components/Menu'
 import { Spinner } from '~/components/Spinner'
 
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 const DropdownArticleList = ({
   articles,

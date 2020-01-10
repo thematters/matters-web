@@ -13,8 +13,9 @@ import { Modal } from '~/components/Modal'
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import { AddArticleTags } from './__generated__/AddArticleTags'
 import styles from './styles.css'
+
+import { AddArticleTags } from './__generated__/AddArticleTags'
 
 const ADD_ARTICLE_TAGS = gql`
   mutation AddArticleTags($id: ID!, $articles: [ID!]) {

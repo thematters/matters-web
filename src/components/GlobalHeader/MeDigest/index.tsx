@@ -10,9 +10,10 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums/text'
 
-import { MeDigestUser } from './__generated__/MeDigestUser'
 import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
+
+import { MeDigestUser } from './__generated__/MeDigestUser'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
   const viewer = useContext(ViewerContext)

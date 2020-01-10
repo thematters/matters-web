@@ -5,13 +5,14 @@ import { useContext } from 'react'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Placeholder } from '~/components/Placeholder'
 
+import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import { DraftDetailQuery_node_Draft } from '../__generated__/DraftDetailQuery'
 import { UpdateDraft } from './__generated__/UpdateDraft'
-import styles from './styles.css'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,

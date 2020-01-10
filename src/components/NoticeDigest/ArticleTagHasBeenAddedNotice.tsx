@@ -5,12 +5,13 @@ import { Avatar } from '~/components/Avatar'
 
 import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
 
-import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeDate from './NoticeDate'
 import NoticeTag from './NoticeTag'
 import styles from './styles.css'
+
+import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
 
 const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actor) {

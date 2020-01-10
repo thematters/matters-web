@@ -6,13 +6,14 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeComment from './NoticeComment'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
 
 const SubscribedArticleNewCommentNotice = ({
   notice

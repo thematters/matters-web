@@ -6,8 +6,9 @@ import { Icon, TextIcon } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
-import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
+
+import { DigestTag } from './__generated__/DigestTag'
 
 type TagSize = 'sm' | 'default'
 

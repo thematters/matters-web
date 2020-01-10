@@ -11,21 +11,13 @@ footer {
     align-items: center;
 
     & > :global(* + *) {
+      margin-left: var(--spacing-loose);
+
       line-height: 1;
     }
   }
-  & .space-left {
-    margin-left: var(--spacing-base);
-  }
-  & .space-right {
-    margin-right: var(--spacing-base);
-  }
-
-  & :global(button.active) {
-    color: var(--color-black);
-  }
 }
 
-.comment-form {
+.reply-form {
   margin-top: var(--spacing-base);
 }

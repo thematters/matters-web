@@ -16,9 +16,10 @@ import articleFragments from '~/components/GQL/fragments/article'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorSetCollection } from './__generated__/EditorSetCollection'
-import styles from './styles.css'
 
 /**
  * Note:

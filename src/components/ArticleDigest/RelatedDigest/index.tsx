@@ -13,8 +13,9 @@ import {
 } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
-import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
 import styles from './styles.css'
+
+import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
 
 const fragments = {
   article: gql`

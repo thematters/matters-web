@@ -8,8 +8,9 @@ import { Avatar, AvatarSize } from '~/components/Avatar'
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import styles from './styles.css'
+
+import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 
 /**
  * UserDigest.Mini is a component for presenting user's avatar and display name.

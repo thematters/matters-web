@@ -9,8 +9,9 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import ViewAllLink from '../ViewAllLink'
-import { SidebarTopics } from './__generated__/SidebarTopics'
 import styles from './styles.css'
+
+import { SidebarTopics } from './__generated__/SidebarTopics'
 
 export const SIDEBAR_TOPICS = gql`
   query SidebarTopics {

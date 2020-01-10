@@ -2,8 +2,6 @@ import gql from 'graphql-tag'
 
 import { Icon, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT
@@ -11,11 +9,13 @@ import {
 
 import { numAbbr } from '~/common/utils'
 
-import { DownvoteComment } from './__generated__/DownvoteComment'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
+import { UpvoteComment } from './__generated__/UpvoteComment'
 
 const fragments = {
   comment: gql`
-    fragment DownvoteComment on Comment {
+    fragment UpvoteComment on Comment {
       id
       upvotes
       downvotes
@@ -24,12 +24,12 @@ const fragments = {
   `
 }
 
-const DownvoteButton = ({
+const UpvoteButton = ({
   comment,
   onClick,
   disabled
 }: {
-  comment: DownvoteComment
+  comment: UpvoteComment
   onClick?: () => any
   disabled?: boolean
 }) => {
@@ -38,28 +38,28 @@ const DownvoteButton = ({
     optimisticResponse: {
       unvoteComment: {
         id: comment.id,
-        upvotes: comment.upvotes,
-        downvotes: comment.downvotes - 1,
+        upvotes: comment.upvotes - 1,
+        downvotes: comment.downvotes,
         myVote: null,
         __typename: 'Comment'
       }
     }
   })
-  const [downvote] = useMutation<VoteComment>(VOTE_COMMENT, {
-    variables: { id: comment.id, vote: 'down' },
+  const [upvote] = useMutation<VoteComment>(VOTE_COMMENT, {
+    variables: { id: comment.id, vote: 'up' },
     optimisticResponse: {
       voteComment: {
         id: comment.id,
-        upvotes:
-          comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
-        downvotes: comment.downvotes + 1,
-        myVote: 'down' as any,
+        upvotes: comment.upvotes + 1,
+        downvotes:
+          comment.myVote === 'down' ? comment.downvotes - 1 : comment.downvotes,
+        myVote: 'up' as any,
         __typename: 'Comment'
       }
     }
   })
 
-  if (comment.myVote === 'down') {
+  if (comment.myVote === 'up') {
     return (
       <button
         type="button"
@@ -69,10 +69,10 @@ const DownvoteButton = ({
         disabled={disabled}
       >
         <TextIcon
-          icon={<Icon.DislikeActive />}
+          icon={<Icon.LikeActive />}
           color="grey"
           weight="md"
-          text={numAbbr(comment.downvotes)}
+          text={numAbbr(comment.upvotes)}
           spacing="xxxtight"
         />
       </button>
@@ -83,21 +83,21 @@ const DownvoteButton = ({
     <button
       type="button"
       onClick={() => {
-        onClick ? onClick() : downvote()
+        onClick ? onClick() : upvote()
       }}
       disabled={disabled}
     >
       <TextIcon
-        icon={<Icon.DislikeInactive />}
+        icon={<Icon.LikeInactive />}
         color="grey"
         weight="md"
-        text={numAbbr(comment.downvotes)}
+        text={numAbbr(comment.upvotes)}
         spacing="xxxtight"
       />
     </button>
   )
 }
 
-DownvoteButton.fragments = fragments
+UpvoteButton.fragments = fragments
 
-export default DownvoteButton
+export default UpvoteButton

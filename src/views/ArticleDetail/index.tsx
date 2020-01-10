@@ -21,7 +21,6 @@ import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareModal from '~/components/Button/Share/ShareModal'
 import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
 import Throw404 from '~/components/Throw404'
@@ -31,8 +30,6 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import { ArticleEdited } from './__generated__/ArticleEdited'
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
@@ -44,6 +41,10 @@ import Toolbar from './Toolbar'
 import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import { ArticleEdited } from './__generated__/ArticleEdited'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String) {

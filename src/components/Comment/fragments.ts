@@ -28,7 +28,7 @@ const comment = gql`
     article {
       title
     }
-    ...DigestActionsComment
+    ...FooterActionsComment
     ...DropdownActionsComment
   }
   ${UserDigest.Mini.fragments.user}

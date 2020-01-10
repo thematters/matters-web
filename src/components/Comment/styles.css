@@ -33,18 +33,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  & .label {
-    margin-left: var(--spacing-x-tight);
-    font-size: 0;
-  }
 }
 
 .reply-to {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight) var(--spacing-x-loose);
+  margin: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
+    var(--spacing-x-loose);
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm-s);
@@ -98,13 +94,6 @@
       background-color: var(--color-line-grey-light);
     }
   }
-}
-
-.cancel-button {
-  padding: 0 var(--spacing-base);
-
-  font-size: var(--font-size-sm);
-  color: var(--color-matters-green);
 }
 
 .more-button {

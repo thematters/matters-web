@@ -7,9 +7,10 @@ import { Icon, Popover, Spinner, TextIcon, Translate } from '~/components'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import { Gateways } from './__generated__/Gateways'
-import styles from './styles.css'
 
 const GATEWAYS = gql`
   query Gateways {

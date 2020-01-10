@@ -6,12 +6,13 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { responseStateIs } from '~/common/utils'
 
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
-import { FolloweeDropdownActionsArticle } from './__generated__/FolloweeDropdownActionsArticle'
 import ArchiveButton from './ArchiveButton'
 import RemoveTagButton from './RemoveTagButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
+
+import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
+import { FolloweeDropdownActionsArticle } from './__generated__/FolloweeDropdownActionsArticle'
 
 const fragments = {
   article: gql`

@@ -13,8 +13,9 @@ import ErrorState from '../Components/ErrorState'
 import PendingState from '../Components/PendingState'
 import RecallButton from '../Components/RecallButton'
 import RetryButton from '../Components/RetryButton'
-import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
 import styles from './styles.css'
+
+import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
 
 const fragments = {
   draft: gql`

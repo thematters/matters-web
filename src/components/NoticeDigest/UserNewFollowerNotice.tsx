@@ -7,11 +7,12 @@ import { Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
-import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
 
 const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {

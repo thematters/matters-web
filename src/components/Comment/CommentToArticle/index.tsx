@@ -3,9 +3,10 @@ import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 
-import { Comment } from './__generated__/Comment'
-import { DescendantsIncludedComment } from './__generated__/DescendantsIncludedComment'
 import styles from './styles.css'
+
+import { Comment } from '../__generated__/Comment'
+import { DescendantsIncludedComment } from '../__generated__/DescendantsIncludedComment'
 
 const CommentToArticle = ({
   comment

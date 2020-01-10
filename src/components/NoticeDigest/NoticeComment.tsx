@@ -1,10 +1,36 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
-import CommentContent from '~/components/Comment/Content'
+import Content from '~/components/Comment/Content'
 
 import { makeSummary, toPath } from '~/common/utils'
 
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
+
+const fragments = {
+  comment: gql`
+    fragment NoticeComment on Comment {
+      id
+      state
+      article {
+        id
+        title
+        slug
+        mediaHash
+        author {
+          id
+          userName
+        }
+      }
+      parentComment {
+        id
+      }
+      ...ContentComment
+    }
+
+    ${Content.fragments.comment}
+  `
+}
 
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   if (!comment) {
@@ -23,36 +49,17 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
   if (comment.state === 'active') {
     return (
-      <a href={path.as}>
-        <CommentContent content={content} state={comment.state} />
-      </a>
+      <Link {...path}>
+        <a>
+          <Content comment={{ ...comment, content }} />
+        </a>
+      </Link>
     )
   }
 
-  return <CommentContent content={content} state={comment.state} />
+  return <Content comment={{ ...comment, content }} />
 }
 
-NoticeComment.fragments = {
-  comment: gql`
-    fragment NoticeComment on Comment {
-      id
-      content
-      state
-      article {
-        id
-        title
-        slug
-        mediaHash
-        author {
-          id
-          userName
-        }
-      }
-      parentComment {
-        id
-      }
-    }
-  `
-}
+NoticeComment.fragments = fragments
 
 export default NoticeComment

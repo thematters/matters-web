@@ -7,8 +7,9 @@ import { Icon, TextIcon } from '~/components'
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr, responseStateIs, toPath } from '~/common/utils'
 
-import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
 import styles from './styles.css'
+
+import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
 
 const fragments = {
   article: gql`

@@ -8,9 +8,10 @@ import FullDesc from '~/components/UserDigest/FullDesc'
 
 import { numFormat } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
 import { FolloweeCountUser } from './__generated__/FolloweeCountUser'
-import styles from './styles.css'
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker {

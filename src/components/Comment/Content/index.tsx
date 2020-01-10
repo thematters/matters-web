@@ -1,3 +1,5 @@
+import gql from 'graphql-tag'
+
 import { Translate } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
@@ -6,21 +8,35 @@ import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import Collapsed from './Collapsed'
 import styles from './styles.css'
 
-const CommentContent = ({
-  content,
-  state,
-  blocked
-}: {
-  content: string | null
-  state: string
-  blocked?: boolean
-}) => {
-  if (state === 'collapsed' || blocked) {
+import { ContentComment } from './__generated__/ContentComment'
+
+const fragments = {
+  comment: gql`
+    fragment ContentComment on Comment {
+      id
+      content
+      state
+      author {
+        id
+        isBlocked
+      }
+    }
+  `
+}
+
+const Content = ({ comment }: { comment: ContentComment }) => {
+  const {
+    content,
+    state,
+    author: { isBlocked }
+  } = comment
+
+  if (state === 'collapsed' || isBlocked) {
     return (
       <Collapsed
         content={content}
         collapsedContent={
-          blocked ? (
+          isBlocked ? (
             <Translate
               zh_hant={TEXT.zh_hant.commentBlocked}
               zh_hans={TEXT.zh_hans.commentBlocked}
@@ -39,7 +55,7 @@ const CommentContent = ({
   if (state === 'active') {
     return (
       <>
-        <div
+        <section
           className="u-content-comment"
           dangerouslySetInnerHTML={{
             __html: content || ''
@@ -81,4 +97,6 @@ const CommentContent = ({
   return null
 }
 
-export default CommentContent
+Content.fragments = fragments
+
+export default Content

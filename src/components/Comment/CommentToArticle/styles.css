@@ -1,0 +1,6 @@
+.comment-to-article {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: var(--spacing-x-tight) 0 var(--spacing-base);
+}

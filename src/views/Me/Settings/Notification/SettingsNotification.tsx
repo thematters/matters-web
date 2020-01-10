@@ -6,11 +6,12 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
-import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
-import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import PushSwitch from './PushSwitch'
 import SettingItem from './SettingItem'
 import styles from './styles.css'
+
+import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
+import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
   query ViewerNotificationSettings {

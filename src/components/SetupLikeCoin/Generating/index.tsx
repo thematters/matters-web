@@ -9,8 +9,9 @@ import { Spinner } from '~/components/Spinner'
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { GenerateLikerId } from './__generated__/GenerateLikerId'
 import styles from './styles.css'
+
+import { GenerateLikerId } from './__generated__/GenerateLikerId'
 
 interface Props {
   prevStep: () => void

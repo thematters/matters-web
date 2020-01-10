@@ -3,13 +3,13 @@ import gql from 'graphql-tag'
 
 import { Icon } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { subscribePush } from '~/common/utils'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import { SubscribeArticle } from './__generated__/SubscribeArticle'
 

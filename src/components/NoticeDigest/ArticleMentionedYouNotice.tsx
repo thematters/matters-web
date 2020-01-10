@@ -2,12 +2,13 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import { ArticleMentionedYouNotice as NoticeType } from './__generated__/ArticleMentionedYouNotice'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeDate from './NoticeDate'
 import styles from './styles.css'
+
+import { ArticleMentionedYouNotice as NoticeType } from './__generated__/ArticleMentionedYouNotice'
 
 const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
   return (

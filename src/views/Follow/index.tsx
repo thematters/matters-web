@@ -7,10 +7,11 @@ import { useMutation } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 import { ViewerContext } from '~/components/Viewer'
 
-import { MeFollow } from './__generated__/MeFollow'
-import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
 import FollowFeed from './FollowFeed'
 import PickAuthors from './PickAuthors'
+
+import { MeFollow } from './__generated__/MeFollow'
+import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
 
 const READ_FOLLOWEE_ARTICLES = gql`
   mutation ReadFolloweeArticles {

@@ -17,6 +17,7 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
+
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`

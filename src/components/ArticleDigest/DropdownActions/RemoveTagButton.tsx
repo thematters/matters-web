@@ -7,9 +7,10 @@ import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { DeleteArticleTags } from './__generated__/DeleteArticleTags'
 import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
-import styles from './styles.css'
 
 const DELETE_ARTICLE_TAGS = gql`
   mutation DeleteArticleTags($id: ID!, $articles: [ID!]) {

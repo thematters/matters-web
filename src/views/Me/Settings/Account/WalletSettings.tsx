@@ -8,8 +8,9 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 
-import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 import styles from './styles.css'
+
+import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {

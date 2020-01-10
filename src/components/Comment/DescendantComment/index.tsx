@@ -5,24 +5,23 @@ import { useState } from 'react'
 import CommentForm from '~/components/Form/CommentForm'
 import { UserDigest } from '~/components/UserDigest'
 
-import { DescendantsIncludedComment_comments_edges_node } from './__generated__/DescendantsIncludedComment'
-import CancelEditButton from './CancelEditButton'
-import CommentContent from './Content'
-import DropdownActions from './DropdownActions'
-import FooterActions, { FooterActionsControls } from './FooterActions'
-import PinnedLabel from './PinnedLabel'
-import ReplyTo from './ReplyTo'
-import styles from './styles.css'
+import CancelEditButton from '../CancelEditButton'
+import CommentContent from '../Content'
+import DropdownActions from '../DropdownActions'
+import ReplyTo from '../FeedComment/ReplyTo'
+import FooterActions, { FooterActionsControls } from '../FooterActions'
+import PinnedLabel from '../PinnedLabel'
+import styles from '../styles.css'
+
+import { DescendantsIncludedComment_comments_edges_node } from '../__generated__/DescendantsIncludedComment'
 
 const DescendantComment = ({
   comment,
   inArticle,
-  commentCallback,
   ...actionControls
 }: {
   comment: DescendantsIncludedComment_comments_edges_node
   inArticle?: boolean
-  commentCallback?: () => void
 } & FooterActionsControls) => {
   const [edit, setEdit] = useState(false)
   const containerClass = classNames({
@@ -45,13 +44,13 @@ const DescendantComment = ({
               textSize="sm-s"
               hasUserName={inArticle}
             />
-            {comment.pinned && <PinnedLabel />}
+            {comment.pinned && <PinnedLabel comment={comment} />}
           </section>
 
           {comment.replyTo &&
             (!comment.parentComment ||
               comment.replyTo.id !== comment.parentComment.id) && (
-              <ReplyTo user={comment.replyTo.author} inArticle={!!inArticle} />
+              <ReplyTo user={comment.replyTo.author} />
             )}
         </div>
         <DropdownActions comment={comment} editComment={() => setEdit(true)} />
@@ -70,18 +69,11 @@ const DescendantComment = ({
             defaultContent={comment.content}
           />
         )}
-        {!edit && (
-          <CommentContent
-            state={comment.state}
-            content={comment.content}
-            blocked={comment.author.isBlocked}
-          />
-        )}
+        {!edit && <CommentContent comment={comment} />}
         {!edit && (
           <FooterActions
             comment={comment}
             refetch={inArticle}
-            commentCallback={commentCallback}
             {...actionControls}
           />
         )}

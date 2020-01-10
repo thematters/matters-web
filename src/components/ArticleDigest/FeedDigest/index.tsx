@@ -13,9 +13,10 @@ import { responseStateIs, stripHtml, toPath } from '~/common/utils'
 
 import Actions, { ActionsControls } from '../Actions'
 import DropdownActions from '../DropdownActions'
+import styles from './styles.css'
+
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 import { FolloweeFeedDigestArticle } from './__generated__/FolloweeFeedDigestArticle'
-import styles from './styles.css'
 
 const fragments = {
   article: gql`

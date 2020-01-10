@@ -8,8 +8,9 @@ import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
 import Actions, { ActionsControls } from '../Actions'
-import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 import styles from './styles.css'
+
+import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 
 const fragments = {
   article: gql`

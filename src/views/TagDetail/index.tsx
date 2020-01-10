@@ -18,8 +18,6 @@ import {
 import EmptyTag from '~/components/Empty/EmptyTag'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
-import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
 import TAG_DETAIL_ARTICLES from '~/components/GQL/queries/tagDetailArticles'
 import { useEventListener } from '~/components/Hook'
@@ -39,6 +37,9 @@ import {
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
+import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
 
 const AddArticleTagButton = () => {
   return (

@@ -6,8 +6,9 @@ import { Tabs, Translate } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
-import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
 import styles from './styles.css'
+
+import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
 
 interface AppreciationTabsProps {
   activity: AppreciationTabsUserActivity

@@ -7,8 +7,9 @@ import { TEXT } from '~/common/enums'
 import { numFormat, toPath } from '~/common/utils'
 
 import DeleteButton from '../Components/DeleteButton'
-import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
 import styles from './styles.css'
+
+import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
 
 const fragments = {
   draft: gql`

@@ -9,8 +9,9 @@ import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
-import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived'
 import styles from './styles.css'
+
+import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived'
 
 const ME_APPRECIATED_RECEIVED = gql`
   query MeAppreciationsReceived($after: String) {

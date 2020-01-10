@@ -14,8 +14,9 @@ import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import ViewAllLink from '../ViewAllLink'
-import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import styles from './styles.css'
+
+import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
 const SIDEBAR_AUTHORS = gql`
   query SidebarAuthors {

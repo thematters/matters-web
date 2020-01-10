@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 
-import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft'
 import AddCover from './AddCover'
 import AddTags from './AddTags'
 import CollectArticles from './CollectArticles'
 import DraftList from './DraftList'
+
+import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft'
 
 const Sidebar = ({ draft }: { draft: DraftSidebarDraft }) => (
   <>

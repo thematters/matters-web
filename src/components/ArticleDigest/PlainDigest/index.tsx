@@ -7,8 +7,9 @@ import { Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import { PlainDigestArticle } from './__generated__/PlainDigestArticle'
 import styles from './styles.css'
+
+import { PlainDigestArticle } from './__generated__/PlainDigestArticle'
 
 interface PlainDigestProps {
   article: PlainDigestArticle

@@ -1,12 +1,17 @@
 import _get from 'lodash/get'
 
-import { Comment } from '~/components/Comment/__generated__/Comment'
-
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
  * @param comments
  */
+interface Comment {
+  state: string
+  parentComment: {
+    id: string
+  } | null
+}
+
 export const filterComment = (comment: Comment) => {
   const isActive = comment.state === 'active'
   const isDescendant = comment.parentComment && comment.parentComment.id

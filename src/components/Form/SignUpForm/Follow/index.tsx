@@ -11,8 +11,9 @@ import { Spinner } from '~/components/Spinner'
 
 import { translate } from '~/common/utils'
 
-import { SignUpMeFollow } from './__generated__/SignUpMeFollow'
 import styles from './styles.css'
+
+import { SignUpMeFollow } from './__generated__/SignUpMeFollow'
 
 /**
  * This component is designed for sign up form with builtin mutation.
