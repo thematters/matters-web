@@ -71,6 +71,7 @@ export const FeedComment = ({
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
+          textSize="md-s"
           textWeight="md"
           hasUserName={hasUserName}
         />

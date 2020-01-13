@@ -18,6 +18,8 @@
 
 .latest-responses,
 .featured-comments {
+  margin-top: var(--spacing-x-loose);
+
   & header {
     @mixin flex-center-space-between;
   }
@@ -27,11 +29,13 @@
     font-size: var(--font-size-xm);
   }
 
-  margin-top: var(--spacing-x-loose);
-
   & ul {
-    & li + li {
-      @mixin border-top-grey;
+    & li {
+      padding: var(--spacing-base) 0;
+
+      & + li {
+        @mixin border-top-grey;
+      }
     }
   }
 }

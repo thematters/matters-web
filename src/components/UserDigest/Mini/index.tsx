@@ -23,7 +23,7 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 interface MiniProps {
   user: UserDigestMiniUser
   avatarSize?: AvatarSize
-  textSize?: 'xs' | 'sm' | 'sm-s'
+  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s'
   textWeight?: 'normal' | 'md'
   spacing?: 'xxtight' | 'xtight'
   hasUserName?: boolean
@@ -58,9 +58,9 @@ const Mini = ({
   })
   const containerClasses = classNames({
     container: true,
-    [`text-${textWeight}`]: true,
-    [`spacing-${spacing}`]: true,
-    [`text-${textSize}`]: true
+    [`text-size-${textSize}`]: true,
+    [`text-weight-${textWeight}`]: true,
+    [`spacing-${spacing}`]: true
   })
   const isArchived = user?.status?.state === 'archived'
 

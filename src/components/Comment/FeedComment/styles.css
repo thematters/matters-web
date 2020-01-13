@@ -3,8 +3,6 @@
 }
 
 article {
-  padding: var(--spacing-loose) 0;
-
   &:target {
     animation: commentBackgroundFadeOut 2s ease 1s;
   }

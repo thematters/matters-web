@@ -12,12 +12,10 @@
   color: var(--color-black);
   line-height: 1;
 }
-
 .name-container {
   display: flex;
   flex-wrap: wrap;
 }
-
 .username {
   margin-left: var(--spacing-xx-tight);
   font-size: var(--font-size-sm);
@@ -30,25 +28,25 @@
     padding-left: var(--spacing-x-tight);
   }
 }
-
 .spacing-xxtight {
   & .name {
     padding-left: var(--spacing-xx-tight);
   }
 }
 
-.text-md {
-  font-weight: var(--font-weight-medium);
+.text-size-xs {
+  font-size: var(--font-size-xs);
 }
-
-.text-sm {
-  font-size: var(--font-size-sm);
-}
-
-.text-sm-s {
+.text-size-sm-s {
   font-size: var(--font-size-sm-s);
 }
+.text-size-sm {
+  font-size: var(--font-size-sm);
+}
+.text-size-md-s {
+  font-size: var(--font-size-md-s);
+}
 
-.text-xs {
-  font-size: var(--font-size-xs);
+.text-weight-md {
+  font-weight: var(--font-weight-medium);
 }

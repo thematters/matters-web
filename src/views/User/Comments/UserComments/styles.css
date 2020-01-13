@@ -15,3 +15,9 @@
     }
   }
 }
+
+.comment-list {
+  & li {
+    margin: var(--spacing-loose) 0;
+  }
+}

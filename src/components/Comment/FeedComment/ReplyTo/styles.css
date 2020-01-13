@@ -4,7 +4,7 @@
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm-s);
-  line-height: 1;
+  line-height: 1.23; /* 16px */
 }
 
 .reply-to {
