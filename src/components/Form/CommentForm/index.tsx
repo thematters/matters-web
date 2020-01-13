@@ -95,7 +95,6 @@ const CommentForm = ({
     refetchQueries
   })
 
-  const push = clientPreferenceData?.clientPreference.push
   const draftContent = data?.commentDraft.content || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
@@ -116,6 +115,13 @@ const CommentForm = ({
       }
     }
 
+    const push = clientPreferenceData?.clientPreference.push
+    const skipPushButton =
+      !push ||
+      !push.supported ||
+      push.enabled ||
+      Notification.permission === 'granted'
+
     event.preventDefault()
     setSubmitting(true)
 
@@ -127,31 +133,24 @@ const CommentForm = ({
         submitCallback()
       }
 
-      // skip
-      if (!push || !push.supported || push.enabled) {
-        setSubmitting(false)
-        return
-      }
-
-      // auto re-subscribe push
-      if (Notification.permission === 'granted') {
-        subscribePush({ silent: true })
-        setSubmitting(false)
-        return
-      }
+      const CommentSent = (
+        <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+      )
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
-            content: (
+            header: !skipPushButton && CommentSent,
+            content: skipPushButton ? (
+              CommentSent
+            ) : (
               <Translate
                 zh_hant={TEXT.zh_hant.pushDescription}
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: (
+            customButton: !skipPushButton && (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
