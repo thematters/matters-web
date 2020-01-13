@@ -3,7 +3,7 @@
   color: var(--color-grey-light);
 }
 
-.spacing-vertical-default {
+.spacing-vertical-loose {
   padding-top: var(--spacing-x-loose);
   padding-bottom: var(--spacing-x-loose);
 }
@@ -11,8 +11,7 @@
   padding-top: 0;
   padding-bottom: 0;
 }
-
-.spacing-horizontal-default {
+.spacing-horizontal-loose {
   padding-left: var(--spacing-loose);
   padding-right: var(--spacing-loose);
 }
@@ -27,7 +26,7 @@
   color: var(--color-grey);
 }
 
-.sm {
+.size-sm {
   & .description {
     margin-top: var(--spacing-x-tight);
     font-size: var(--font-size-sm);

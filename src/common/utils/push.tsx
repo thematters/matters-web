@@ -98,6 +98,11 @@ export const initializePush = async ({
       }
     }
   })
+
+  // auto re-subscribe push
+  if (Notification.permission === 'granted') {
+    subscribePush({ silent: true })
+  }
 }
 
 export const subscribePush = async (options?: { silent?: boolean }) => {
