@@ -39,7 +39,7 @@ const AuthorPicker = ({
   readonly
 }: {
   viewer: FolloweeCountUser
-  title: any
+  title: React.ReactNode
   titleIs?: string
   readonly?: boolean
 }) => {

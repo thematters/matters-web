@@ -7,7 +7,6 @@ import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -88,17 +87,18 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
       disabled={disabled}
       onClick={(event: any) => sendCode(event)}
     >
-      {sent
-        ? translate({
-            zh_hant: TEXT.zh_hant.resend,
-            zh_hans: TEXT.zh_hans.resend,
-            lang
-          })
-        : translate({
-            zh_hant: TEXT.zh_hant.sendVerificationCode,
-            zh_hans: TEXT.zh_hans.sendVerificationCode,
-            lang
-          })}
+      {sent ? (
+        <Translate
+          zh_hant={TEXT.zh_hant.resend}
+          zh_hans={TEXT.zh_hans.resend}
+        />
+      ) : (
+        <Translate
+          zh_hant={TEXT.zh_hant.sendVerificationCode}
+          zh_hans={TEXT.zh_hans.sendVerificationCode}
+        />
+      )}
+
       {sent && countdown.timeLeft !== 0 && (
         <span className="timer">{formattedTimeLeft.ss}</span>
       )}

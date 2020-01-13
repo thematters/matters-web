@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Icon } from '~/components'
+import { Icon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
@@ -9,7 +9,6 @@ import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -48,21 +47,6 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   const [avatar, setAvatar] = useState<string>()
   const [error, setError] = useState<'size'>()
 
-  const avatarText = translate({
-    zh_hant: '選擇圖片',
-    zh_hans: '选择图片',
-    lang
-  })
-  const avatarHint = translate({
-    zh_hant: '上傳圖片作為大頭照 (5 MB 內)',
-    zh_hans: '上传图片作为头像 (5 MB 內)',
-    lang
-  })
-  const sizeError = translate({
-    zh_hant: '上傳檔案超過 5 MB',
-    zh_hans: '上传文件超过 5 MB',
-    lang
-  })
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,7 +92,7 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
           <Icon.CameraGreen
             style={{ width: 24, height: 24, marginRight: '0.25rem' }}
           />
-          {avatarText}
+          <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
           <input
             className="input"
             type="file"
@@ -118,8 +102,20 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
             onChange={event => handleChange(event)}
           />
         </div>
-        <div className="hint">{avatarHint}</div>
-        <div className="error">{error === 'size' && sizeError}</div>
+        <div className="hint">
+          <Translate
+            zh_hant="上傳圖片作為大頭照 (5 MB 內)"
+            zh_hans="上传图片作为头像 (5 MB 內)"
+          />
+        </div>
+        <div className="error">
+          {error === 'size' && (
+            <Translate
+              zh_hant="上傳檔案超過 5 MB"
+              zh_hans="上传文件超过 5 MB"
+            />
+          )}
+        </div>
       </div>
 
       <style jsx>{styles}</style>

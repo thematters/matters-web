@@ -1,15 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
 
-import { Button } from '~/components/Button'
+import { Button, Translate } from '~/components'
 import AuthorPicker from '~/components/Follow/AuthorPicker'
 import { QueryError } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
 import { Spinner } from '~/components/Spinner'
-
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -51,22 +47,11 @@ export const SignUpFollowForm: React.FC<Props> = ({
   purpose,
   submitCallback
 }) => {
-  const { lang } = useContext(LanguageContext)
   const { loading, data, error } = useQuery<SignUpMeFollow>(ME_FOLLOW)
 
   const containerStyle = classNames(
     purpose === 'modal' ? 'modal-container' : 'page-container'
   )
-  const titleText = translate({
-    zh_hant: '請至少選擇 5 位作者',
-    zh_hans: '请至少选择 5 位作者',
-    lang
-  })
-  const nextText = translate({
-    zh_hant: '下一步',
-    zh_hans: '下一步',
-    lang
-  })
 
   if (loading) {
     return <Spinner />
@@ -86,7 +71,12 @@ export const SignUpFollowForm: React.FC<Props> = ({
     <div className={containerStyle}>
       <AuthorPicker
         viewer={data.viewer}
-        title={titleText}
+        title={
+          <Translate
+            zh_hant="請至少選擇 5 作者"
+            zh_hans="请至少选择 5 位作者"
+          />
+        }
         titleIs="span"
         readonly
       />
@@ -99,7 +89,7 @@ export const SignUpFollowForm: React.FC<Props> = ({
           disabled={followeeCount < 5}
           onClick={submitCallback}
         >
-          {nextText}
+          <Translate zh_hant="下一步" zh_hans="下一步" />
         </Button>
       </div>
 

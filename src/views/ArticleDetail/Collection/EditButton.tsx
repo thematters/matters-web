@@ -1,20 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
 
-import {
-  Button,
-  Icon,
-  LanguageContext,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -55,7 +47,6 @@ const EditButton = ({
   const [setCollection, { loading }] = useMutation<EditorSetCollection>(
     EDITOR_SET_COLLECTION
   )
-  const { lang } = useContext(LanguageContext)
   const editButtonClass = classNames({
     'edit-button': true
   })
@@ -107,11 +98,9 @@ const EditButton = ({
               new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'green',
-                  content: translate({
-                    zh_hant: '關聯已更新',
-                    zh_hans: '关联已更新',
-                    lang
-                  }),
+                  content: (
+                    <Translate zh_hant="關聯已更新" zh_hans="关联已更新" />
+                  ),
                   closeButton: true,
                   duration: 2000
                 }
@@ -122,11 +111,7 @@ const EditButton = ({
               new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'red',
-                  content: translate({
-                    zh_hant: '關聯失敗',
-                    zh_hans: '关联失敗',
-                    lang
-                  }),
+                  content: <Translate zh_hant="關聯失敗" zh_hans="关联失敗" />,
                   clostButton: true,
                   duration: 2000
                 }
