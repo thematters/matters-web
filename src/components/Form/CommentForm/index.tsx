@@ -129,12 +129,14 @@ const CommentForm = ({
 
       // skip
       if (!push || !push.supported || push.enabled) {
+        setSubmitting(false)
         return
       }
 
       // auto re-subscribe push
       if (Notification.permission === 'granted') {
         subscribePush({ silent: true })
+        setSubmitting(false)
         return
       }
 
