@@ -1,13 +1,12 @@
 // External modules
 import classNames from 'classnames'
-import { useContext, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-import { LanguageContext } from '~/components'
+import { Translate } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
 import { Modal } from '~/components/Modal'
 
 import { KEYCODES, TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -16,7 +15,7 @@ export interface ContainerProps {
   close: () => void
   defaultCloseable?: boolean
   prevModalId?: string
-  title?: string
+  title?: keyof typeof TEXT.zh_hant
   layout?: 'default' | 'sm'
 }
 
@@ -41,19 +40,8 @@ const Container: React.FC<ContainerProps> = ({
   })
 
   const node = useRef(null)
-  const { lang } = useContext(LanguageContext)
   const [closeable, setCloseable] = useState(defaultCloseable)
   const [modalClass, setModalClass] = useState<string>(modalBaseClass)
-
-  const interpret = (text: string) => {
-    return translate({
-      // @ts-ignore
-      zh_hant: TEXT.zh_hant[text],
-      // @ts-ignore
-      zh_hans: TEXT.zh_hans[text],
-      lang
-    })
-  }
 
   const handleOnEsc = (event: any) => {
     if (!closeable) {
@@ -85,12 +73,16 @@ const Container: React.FC<ContainerProps> = ({
                 <Modal.Header
                   close={close}
                   closeable={closeable}
-                  title={interpret(title)}
+                  title={
+                    <Translate
+                      zh_hant={TEXT.zh_hant[title] as string}
+                      zh_hans={TEXT.zh_hans[title] as string}
+                    />
+                  }
                 />
               )}
               {children({
                 close,
-                interpret,
                 closeable,
                 setCloseable,
                 setModalClass

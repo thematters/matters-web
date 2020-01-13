@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import { Modal, useEventListener } from '~/components'
 
-import { OPEN_MODAL } from '~/common/enums'
+import { OPEN_MODAL, TEXT } from '~/common/enums'
 
 const emptyModalId = ''
 
@@ -102,7 +102,7 @@ export const ModalSwitch = ({
  *
  * ```jsx
  *  <ModalInstance modalId="loginModal" title="title">
- *    {({ close, interpret }) => <LoginModal />}
+ *    {({ close }) => <LoginModal />}
  *  </ModalInstance>
  * ```
  *
@@ -120,7 +120,7 @@ export const ModalInstance = ({
   children: any
   defaultCloseable?: boolean
   modalId: string
-  title?: string
+  title?: keyof typeof TEXT.zh_hant
   layout?: 'default' | 'sm'
   onClose?: () => void
 }) => {

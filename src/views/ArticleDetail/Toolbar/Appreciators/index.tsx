@@ -37,6 +37,7 @@ const fragments = {
 
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   const edges = article.appreciationsReceived.edges
+  const count = numAbbr(article.appreciationsReceived.totalCount)
 
   if (!edges || edges.length <= 0) {
     return null
@@ -71,11 +72,8 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
 
             <p className="highlight">
               <Translate
-                zh_hant={({ count }) => `等 ${count} 人贊賞了作品`}
-                zh_hans={({ count }) => `等 ${count} 人赞赏了作品`}
-                data={{
-                  count: numAbbr(article.appreciationsReceived.totalCount)
-                }}
+                zh_hant={`等 ${count} 人贊賞了作品`}
+                zh_hans={`等 ${count} 人赞赏了作品`}
               />
             </p>
           </section>

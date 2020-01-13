@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 interface TextIconProps {
-  text?: string | number
+  text?: string | number | React.ReactNode
   textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
   style?: React.CSSProperties
@@ -68,7 +68,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
       {icon}
 
       <span className="text" style={textStyle}>
-        {text === undefined ? children : text}
+        {text || children}
       </span>
 
       <style jsx>{styles}</style>
