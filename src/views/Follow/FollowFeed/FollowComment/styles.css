@@ -21,11 +21,3 @@ header {
     font-weight: var(--font-weight-medium);
   }
 }
-
-.comment-content {
-  padding: var(--spacing-x-tight) var(--spacing-base);
-
-  font-size: var(--font-size-md-s);
-  background: var(--color-grey-lighter);
-  border-radius: 0.25rem;
-}

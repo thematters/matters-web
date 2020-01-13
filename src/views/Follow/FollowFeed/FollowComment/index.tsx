@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import Link from 'next/link'
 
-import { Comment, Translate, UserDigest } from '~/components'
+import { Card, Comment, Translate, UserDigest } from '~/components'
 
 import { toCommentPath, toPath } from '~/common/utils'
 
@@ -64,11 +64,14 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
       </section>
 
       <section className="comment-content">
-        <Link {...commentPath}>
-          <a>
-            <Comment.Content comment={comment} />
-          </a>
-        </Link>
+        <Card
+          {...commentPath}
+          bgColor="grey-lighter"
+          spacing={['xtight', 'base']}
+          fontSize="md-s"
+        >
+          <Comment.Content comment={comment} />
+        </Card>
       </section>
 
       <Comment.FooterActions comment={comment} />

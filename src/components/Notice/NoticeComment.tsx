@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
+import { Card } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 
 import { makeSummary, toPath } from '~/common/utils'
@@ -52,11 +52,14 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   if (comment.state === 'active') {
     return (
       <section className="comment-content">
-        <Link {...path}>
-          <a>
-            <CommentContent comment={{ ...comment, content }} />
-          </a>
-        </Link>
+        <Card
+          {...path}
+          bgColor="grey-lighter"
+          spacing={['xtight', 'base']}
+          fontSize="md-s"
+        >
+          <CommentContent comment={{ ...comment, content }} />
+        </Card>
 
         <style jsx>{styles}</style>
       </section>
