@@ -53,7 +53,7 @@ const DescendantsIncludedComment = ({
 
   return (
     <section className="container">
-      <FeedComment comment={comment} hasReply hasLink={hasLink} />
+      <FeedComment comment={comment} hasReply hasUserName hasLink={hasLink} />
 
       {descendants.length > 0 && (
         <ul className="descendants">
@@ -63,7 +63,9 @@ const DescendantsIncludedComment = ({
               <li key={descendantComment.id}>
                 <FeedComment
                   comment={descendantComment}
+                  avatarSize="md"
                   hasReply
+                  hasUserName
                   hasLink={hasLink}
                 />
               </li>

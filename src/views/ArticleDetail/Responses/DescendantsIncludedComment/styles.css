@@ -2,20 +2,18 @@
   --descendant-avatar-size: 1.5rem;
 }
 
-.container {
-}
-
 .descendants {
-  & .container {
+  padding-left: 2.5rem;
+
+  & :global(article) {
     padding: var(--spacing-base) 0;
   }
 
-  & li:first-child .container {
-    margin-top: var(--spacing-xx-tight);
-    padding-top: var(--spacing-base);
+  & li:first-child :global(article) {
+    margin-top: calc(var(--spacing-loose) * -1);
   }
 
-  & .content-wrap {
+  & :global(.content-container) {
     position: relative;
     margin-top: var(--spacing-x-tight);
     padding-left: var(--spacing-x-loose);
