@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
-import FeedComment from '~/components/Comment/FeedComment'
+import { Comment, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
@@ -61,7 +60,7 @@ const USER_COMMENT_FEED = gql`
                 edges {
                   cursor
                   node {
-                    ...FeedCommentComment
+                    ...FeedComment
                   }
                 }
               }
@@ -71,7 +70,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${FeedComment.fragments.comment}
+  ${Comment.Feed.fragments.comment}
 `
 
 const UserCommentsWrap = () => {
@@ -188,7 +187,12 @@ const UserComments = ({ user }: UserIdUser) => {
               <ul className="comment-list">
                 {filteredComments.map(comment => (
                   <li key={comment.id}>
-                    <FeedComment comment={comment} avatarSize="md" hasLink />
+                    <Comment.Feed
+                      comment={comment}
+                      avatarSize="md"
+                      hasCreatedAt
+                      hasLink
+                    />
                   </li>
                 ))}
               </ul>

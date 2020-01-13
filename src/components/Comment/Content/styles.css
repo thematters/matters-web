@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: var(--spacing-xx-tight);
 
   color: var(--color-grey);
   font-size: var(--font-size-sm);

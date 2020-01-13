@@ -137,10 +137,7 @@ const FeedDigest = ({
           {inFolloweeFeed && (
             <>
               <span className="published-description">
-                <Translate
-                  zh_hant={TEXT.zh_hant.publishedDescription}
-                  zh_hans={TEXT.zh_hans.publishedDescription}
-                />
+                <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
               </span>
             </>
           )}

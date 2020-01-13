@@ -1,19 +1,21 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { AvatarSize, UserDigest } from '~/components'
-import CommentForm from '~/components/Form/CommentForm'
 
 import CancelEditButton from '../CancelEditButton'
 import Content from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
+import CommentForm from '../Form'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from './ReplyTo'
 import styles from './styles.css'
 
-import { FeedCommentComment } from './__generated__/FeedCommentComment'
+import { FeedComment } from './__generated__/FeedComment'
+import { RefetchComment } from './__generated__/RefetchComment'
 
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
@@ -21,12 +23,12 @@ export type CommentControls = {
 } & FooterActionsControls
 
 export type CommentProps = {
-  comment: FeedCommentComment
+  comment: FeedComment
 } & CommentControls
 
 const fragments = {
   comment: gql`
-    fragment FeedCommentComment on Comment {
+    fragment FeedComment on Comment {
       id
       author {
         id
@@ -54,16 +56,50 @@ const fragments = {
   `
 }
 
-export const FeedComment = ({
+const REFETCH_COMMENT = gql`
+  query RefetchComment($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Comment {
+        id
+        ...FeedComment
+        comments(input: { sort: oldest, first: null }) {
+          edges {
+            cursor
+            node {
+              ...FeedComment
+            }
+          }
+        }
+      }
+    }
+  }
+  ${fragments.comment}
+`
+
+export const Feed = ({
   comment,
-  refetch,
   avatarSize = 'lg',
   hasUserName,
+  commentCallback,
   ...actionControls
 }: CommentProps) => {
   const [edit, setEdit] = useState(false)
+  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
+
   const { id, article, replyTo, content, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
+  const submitCallback = () => {
+    setEdit(false)
+  }
+  const footerCommentCallback = () => {
+    if (commentCallback) {
+      commentCallback()
+    }
+
+    refetchComment({
+      variables: { id: parentComment?.id || id }
+    })
+  }
 
   return (
     <article id={actionControls.hasLink ? nodeId : ''}>
@@ -91,22 +127,27 @@ export const FeedComment = ({
       )}
 
       <section className="content-container">
+        {!edit && <Content comment={comment} />}
+        {!edit && (
+          <FooterActions
+            comment={comment}
+            commentCallback={footerCommentCallback}
+            {...actionControls}
+          />
+        )}
+
         {edit && (
           <CommentForm
             commentId={id}
             articleId={article.id}
             articleAuthorId={article.author.id}
-            submitCallback={() => setEdit(false)}
+            submitCallback={submitCallback}
             extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
             blocked={article.author.isBlocking}
             defaultContent={content}
             defaultExpand={edit}
           />
         )}
-
-        {!edit && <Content comment={comment} />}
-
-        {!edit && <FooterActions comment={comment} {...actionControls} />}
       </section>
 
       <style jsx>{styles}</style>
@@ -114,6 +155,6 @@ export const FeedComment = ({
   )
 }
 
-FeedComment.fragments = fragments
+Feed.fragments = fragments
 
-export default FeedComment
+export default Feed

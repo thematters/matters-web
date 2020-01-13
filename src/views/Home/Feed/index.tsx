@@ -122,7 +122,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         hasNextPage={isMediumUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <ul>
+        <ul className="u-list-border-gap">
           {edges.map(({ node, cursor }, i) => (
             <li
               key={cursor}

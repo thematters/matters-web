@@ -1,0 +1,20 @@
+/* @styled-jsx=global */
+
+.u-list-border-gap {
+  & > li {
+    padding: var(--spacing-base) 0;
+
+    & + li {
+      @mixin border-top-grey;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    /* FIXME: Based on Figma, we need to remove this on Matters 3.0 */
+    @media (--sm-up) {
+      padding: var(--spacing-loose) 0;
+    }
+  }
+}

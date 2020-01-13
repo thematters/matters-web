@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
-import NoticeDigest from '~/components/NoticeDigest'
+import { Notice } from '~/components/Notice'
 
 import { PATHS, TEXT } from '~/common/enums'
 
@@ -101,11 +101,11 @@ const DropdownNotices = ({
       <Header />
 
       <section className="content">
-        <ul>
+        <ul className="u-list-border-gap">
           {edges && edges.length > 0 ? (
             edges.map(({ node, cursor }) => (
               <li key={cursor}>
-                <NoticeDigest notice={node} key={cursor} />
+                <Notice notice={node} key={cursor} />
               </li>
             ))
           ) : (

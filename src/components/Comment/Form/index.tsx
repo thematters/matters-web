@@ -5,7 +5,6 @@ import { useContext, useState } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { Button } from '~/components/Button'
-import CommentFragments from '~/components/Comment/fragments'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -44,18 +43,6 @@ const COMMENT_DRAFT = gql`
   }
 `
 
-const COMMENT_WITH_DESCENDANTS = gql`
-  query CommentWithDescendants($id: ID!) {
-    node(input: { id: $id }) {
-      ... on Comment {
-        id
-        ...DescendantsIncludedComment
-      }
-    }
-  }
-  ${CommentFragments.descendantsIncluded}
-`
-
 interface CommentFormProps {
   articleId: string
   commentId?: string
@@ -63,38 +50,24 @@ interface CommentFormProps {
   parentId?: string
   articleAuthorId: string
   submitCallback?: () => void
-  refetch?: boolean
   extraButton?: React.ReactNode
   blocked?: boolean
   defaultExpand?: boolean
   defaultContent?: string | null
 }
 
-// TODO: remove refetchQueries, use refetch in submitCallback instead
 const CommentForm = ({
   commentId,
   parentId,
   replyToId,
   articleId,
   submitCallback,
-  refetch,
-  blocked,
   extraButton,
   defaultExpand,
   defaultContent
 }: CommentFormProps) => {
   const commentDraftId = `${articleId}:${commentId || '0'}:${parentId ||
     '0'}:${replyToId || '0'}`
-  const refetchQueries = !refetch
-    ? []
-    : parentId
-    ? [
-        {
-          query: COMMENT_WITH_DESCENDANTS,
-          variables: { id: parentId }
-        }
-      ]
-    : []
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: {
@@ -104,9 +77,7 @@ const CommentForm = ({
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
-  const [putComment] = useMutation<PutComment>(PUT_COMMENT, {
-    refetchQueries
-  })
+  const [putComment] = useMutation<PutComment>(PUT_COMMENT)
 
   const push = clientPreferenceData?.clientPreference.push
   const draftContent = data?.commentDraft.content || ''

@@ -100,7 +100,7 @@ const fragments = {
   `
 }
 
-const FeedDigest = ({ notice }: { notice: DigestNotice }) => {
+export const Notice = ({ notice }: { notice: DigestNotice }) => {
   switch (notice.__typename) {
     case 'ArticleNewAppreciationNotice':
       return <ArticleNewAppreciationNotice notice={notice} />
@@ -141,6 +141,4 @@ const FeedDigest = ({ notice }: { notice: DigestNotice }) => {
   }
 }
 
-FeedDigest.fragments = fragments
-
-export default FeedDigest
+Notice.fragments = fragments

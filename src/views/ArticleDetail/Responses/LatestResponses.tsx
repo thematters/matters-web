@@ -19,11 +19,11 @@ import {
   dom,
   filterResponses,
   getQuery,
-  mergeConnections
-  // unshiftConnections
+  mergeConnections,
+  unshiftConnections
 } from '~/common/utils'
 
-import DescendantsIncludedComment from './DescendantsIncludedComment'
+import ArticleComment from './ArticleComment'
 import styles from './styles.css'
 
 import { LatestResponses as LatestResponsesType } from './__generated__/LatestResponses'
@@ -60,14 +60,14 @@ const LatestResponsesArticle = gql`
             ...ResponseDigestArticle
           }
           ... on Comment {
-            ...DescendantsIncludedCommentComment
+            ...ArticleCommentComment
           }
         }
       }
     }
   }
   ${ArticleDigest.Response.fragments.response}
-  ${DescendantsIncludedComment.fragments.comment}
+  ${ArticleComment.fragments.comment}
 `
 
 const LATEST_RESPONSES = gql`
@@ -174,52 +174,50 @@ const LatestResponses = () => {
     })
   }
 
-  console.log(storedCursor)
+  const commentCallback = () => {
+    return fetchMore({
+      variables: {
+        before: storedCursor,
+        includeBefore: false,
+        articleOnly: articleOnlyMode
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
+        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
+        const oldResponseCount = _get(previousResult, 'article.responseCount')
 
-  // const commentCallback = () => {
-  //   return fetchMore({
-  //     variables: {
-  //       before: storedCursor,
-  //       includeBefore: false,
-  //       articleOnly: articleOnlyMode
-  //     },
-  //     updateQuery: (previousResult, { fetchMoreResult }) => {
-  //       const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-  //       const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
-  //       const oldResponseCount = _get(previousResult, 'article.responseCount')
+        // update if response count has changed
+        if (newEdges.length === 0) {
+          if (oldResponseCount !== newResponseCount) {
+            return {
+              ...previousResult,
+              article: {
+                ...previousResult.article,
+                responseCount: newResponseCount
+              }
+            }
+          }
+          return previousResult
+        }
 
-  //       // update if response count has changed
-  //       if (newEdges.length === 0) {
-  //         if (oldResponseCount !== newResponseCount) {
-  //           return {
-  //             ...previousResult,
-  //             article: {
-  //               ...previousResult.article,
-  //               responseCount: newResponseCount
-  //             }
-  //           }
-  //         }
-  //         return previousResult
-  //       }
-
-  //       // update if there are new items in responses.edges
-  //       const newResult = unshiftConnections({
-  //         oldData: previousResult,
-  //         newData: fetchMoreResult,
-  //         path: connectionPath
-  //       })
-  //       const newStartCursor = _get(
-  //         newResult,
-  //         `${connectionPath}.pageInfo.startCursor`,
-  //         null
-  //       )
-  //       if (newStartCursor) {
-  //         setStoredCursor(newStartCursor)
-  //       }
-  //       return newResult
-  //     }
-  //   })
-  // }
+        // update if there are new items in responses.edges
+        const newResult = unshiftConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+        const newStartCursor = _get(
+          newResult,
+          `${connectionPath}.pageInfo.startCursor`,
+          null
+        )
+        if (newStartCursor) {
+          setStoredCursor(newStartCursor)
+        }
+        return newResult
+      }
+    })
+  }
 
   const responses = filterResponses((edges || []).map(({ node }) => node))
 
@@ -330,16 +328,17 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <ul>
+      <ul className="u-list-border-gap">
         {responses.map(response => (
           <li key={response.id}>
             {_has(response, 'title') ? (
               <ArticleDigest.Response article={response} hasBookmark />
             ) : (
-              <DescendantsIncludedComment
+              <ArticleComment
                 comment={response}
                 defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
+                commentCallback={commentCallback}
               />
             )}
           </li>

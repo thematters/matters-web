@@ -7,7 +7,7 @@ import { LoadMore, Spinner, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
-import DescendantsIncludedComment from './DescendantsIncludedComment'
+import ArticleComment from './ArticleComment'
 import styles from './styles.css'
 
 import {
@@ -33,13 +33,13 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...DescendantsIncludedCommentComment
+            ...ArticleCommentComment
           }
         }
       }
     }
   }
-  ${DescendantsIncludedComment.fragments.comment}
+  ${ArticleComment.fragments.comment}
 `
 
 const FeaturedComments = () => {
@@ -92,10 +92,10 @@ const FeaturedComments = () => {
         </h3>
       </header>
 
-      <ul>
+      <ul className="u-list-border-gap">
         {comments.map(comment => (
           <li key={comment.id}>
-            <DescendantsIncludedComment comment={comment} />
+            <ArticleComment comment={comment} />
           </li>
         ))}
       </ul>

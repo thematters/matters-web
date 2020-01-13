@@ -1,0 +1,31 @@
+header {
+  @mixin flex-center-space-between;
+
+  & .left {
+    @mixin inline-flex-center-all;
+
+    color: var(--color-grey);
+    font-size: var(--font-size-sm);
+
+    & .reply-to {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+}
+
+.article-title {
+  margin: var(--spacing-x-tight) 0;
+
+  & :global(a) {
+    color: var(--color-black);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.comment-content {
+  padding: var(--spacing-x-tight) var(--spacing-base);
+
+  font-size: var(--font-size-md-s);
+  background: var(--color-grey-lighter);
+  border-radius: 0.25rem;
+}

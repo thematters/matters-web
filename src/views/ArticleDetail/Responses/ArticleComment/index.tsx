@@ -1,59 +1,68 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import FeedComment from '~/components/Comment/FeedComment'
+import { Comment } from '~/components'
 
 import { filterComments } from '~/common/utils'
 
 import ExpandButton from './ExpandButton'
 import styles from './styles.css'
 
-import { DescendantsIncludedCommentComment } from './__generated__/DescendantsIncludedCommentComment'
+import { ArticleCommentComment } from './__generated__/ArticleCommentComment'
 
 const COLLAPSE_COUNT = 2
 
-interface DescendantsIncludedCommentControls {
+interface ArticleCommentControls {
   defaultExpand?: boolean
   hasLink?: boolean
+  commentCallback?: () => void
 }
 
-type DescendantsIncludedCommentProps = {
-  comment: DescendantsIncludedCommentComment
-} & DescendantsIncludedCommentControls
+type ArticleCommentProps = {
+  comment: ArticleCommentComment
+} & ArticleCommentControls
 
 const fragments = {
   comment: gql`
-    fragment DescendantsIncludedCommentComment on Comment {
+    fragment ArticleCommentComment on Comment {
       id
-      ...FeedCommentComment
+      ...FeedComment
       comments(input: { sort: oldest, first: null }) {
         edges {
           cursor
           node {
-            ...FeedCommentComment
+            ...FeedComment
           }
         }
       }
     }
 
-    ${FeedComment.fragments.comment}
+    ${Comment.Feed.fragments.comment}
   `
 }
 
-const DescendantsIncludedComment = ({
+const ArticleComment = ({
   comment,
   defaultExpand,
-  hasLink
-}: DescendantsIncludedCommentProps) => {
+  hasLink,
+  commentCallback
+}: ArticleCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as DescendantsIncludedCommentComment[]
+  ) as ArticleCommentComment[]
   const restCount = descendants.length - COLLAPSE_COUNT
   const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
 
   return (
     <section className="container">
-      <FeedComment comment={comment} hasReply hasUserName hasLink={hasLink} />
+      <Comment.Feed
+        comment={comment}
+        hasReply
+        hasUserName
+        hasCreatedAt
+        hasLink={hasLink}
+        commentCallback={commentCallback}
+      />
 
       {descendants.length > 0 && (
         <ul className="descendants">
@@ -61,12 +70,14 @@ const DescendantsIncludedComment = ({
             .slice(0, expand ? undefined : COLLAPSE_COUNT)
             .map(descendantComment => (
               <li key={descendantComment.id}>
-                <FeedComment
+                <Comment.Feed
                   comment={descendantComment}
                   avatarSize="md"
                   hasReply
                   hasUserName
+                  hasCreatedAt
                   hasLink={hasLink}
+                  commentCallback={commentCallback}
                 />
               </li>
             ))}
@@ -85,6 +96,6 @@ const DescendantsIncludedComment = ({
   )
 }
 
-DescendantsIncludedComment.fragments = fragments
+ArticleComment.fragments = fragments
 
-export default DescendantsIncludedComment
+export default ArticleComment

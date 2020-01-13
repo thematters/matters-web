@@ -1,8 +1,4 @@
 .container {
-  @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
-
   &.pending,
   &.error {
     padding-top: var(--spacing-loose);

@@ -22,20 +22,11 @@
 
   & header {
     @mixin flex-center-space-between;
+    margin-bottom: var(--spacing-loose);
   }
 
   & h3 {
     @mixin font-serif;
     font-size: var(--font-size-xm);
-  }
-
-  & ul {
-    & li {
-      padding: var(--spacing-base) 0;
-
-      & + li {
-        @mixin border-top-grey;
-      }
-    }
   }
 }

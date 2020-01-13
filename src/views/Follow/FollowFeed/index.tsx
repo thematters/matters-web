@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 
 import {
   ArticleDigest,
-  Comment,
   Head,
   InfiniteScroll,
   PageHeader,
@@ -16,6 +15,7 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import FollowComment from './FollowComment'
 import styles from './styles.css'
 
 import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
@@ -39,7 +39,7 @@ const FOLLOW_FEED = gql`
                 ...FolloweeFeedDigestArticle
               }
               ... on Comment {
-                ...DescendantsIncludedComment
+                ...FollowComment
               }
             }
           }
@@ -48,7 +48,7 @@ const FOLLOW_FEED = gql`
     }
   }
   ${ArticleDigest.Feed.fragments.followee}
-  ${Comment.fragments.descendantsIncluded}
+  ${FollowComment.fragments.comment}
 `
 
 const FollowFeed = () => {
@@ -91,7 +91,7 @@ const FollowFeed = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <ul className="u-list-border-gap">
         {edges.map(({ node, cursor }, i) => (
           <li
             key={cursor}
@@ -111,14 +111,7 @@ const FollowFeed = () => {
                 inFolloweeFeed
               />
             )}
-            {node.__typename === 'Comment' && (
-              <Comment
-                comment={node}
-                hasLink
-                hasDropdownActions={false}
-                inFolloweeFeed
-              />
-            )}
+            {node.__typename === 'Comment' && <FollowComment comment={node} />}
           </li>
         ))}
       </ul>

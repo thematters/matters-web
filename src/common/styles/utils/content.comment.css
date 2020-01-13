@@ -5,11 +5,16 @@
   white-space: pre-wrap;
   line-height: 1.6;
 
+  & :global(> *) {
+    margin: 0;
+  }
+
   & :global(> * + *) {
     margin: var(--spacing-base) 0;
   }
+
   & :global(> *:last-child) {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: 0;
   }
 
   /* Media

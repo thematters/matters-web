@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import Content from '~/components/Comment/Content'
+import CommentContent from '~/components/Comment/Content'
 
 import { makeSummary, toPath } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
 
@@ -28,7 +30,7 @@ const fragments = {
       ...ContentComment
     }
 
-    ${Content.fragments.comment}
+    ${CommentContent.fragments.comment}
   `
 }
 
@@ -49,15 +51,25 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
   if (comment.state === 'active') {
     return (
-      <Link {...path}>
-        <a>
-          <Content comment={{ ...comment, content }} />
-        </a>
-      </Link>
+      <section className="comment-content">
+        <Link {...path}>
+          <a>
+            <CommentContent comment={{ ...comment, content }} />
+          </a>
+        </Link>
+
+        <style jsx>{styles}</style>
+      </section>
     )
   }
 
-  return <Content comment={{ ...comment, content }} />
+  return (
+    <section className="comment-content">
+      <CommentContent comment={{ ...comment, content }} />
+
+      <style jsx>{styles}</style>
+    </section>
+  )
 }
 
 NoticeComment.fragments = fragments

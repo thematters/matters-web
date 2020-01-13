@@ -5,12 +5,6 @@
   --digest-feed-cover-height-sm: 70px;
 }
 
-.container {
-  @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
-}
-
 .header {
   @mixin flex-center-space-between;
   margin-bottom: var(--spacing-x-tight);

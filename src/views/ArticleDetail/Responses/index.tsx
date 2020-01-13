@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-import CommentForm from '~/components/Form/CommentForm'
+import { Comment, Translate } from '~/components'
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
@@ -31,7 +30,7 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
         </h2>
 
         <section>
-          <CommentForm
+          <Comment.Form
             articleId={article.id}
             articleAuthorId={article.author.id}
             submitCallback={refetchResponses}

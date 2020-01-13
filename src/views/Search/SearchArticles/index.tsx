@@ -106,7 +106,7 @@ const SearchArticles = ({ q }: { q: string }) => {
           />
         }
       />
-      <ul>
+      <ul className="u-list-border-gap">
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (

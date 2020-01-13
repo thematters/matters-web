@@ -50,6 +50,15 @@
   }
 }
 
+.comment-content {
+  margin-top: var(--spacing-tight);
+  padding: var(--spacing-x-tight) var(--spacing-base);
+
+  font-size: var(--font-size-md-s);
+  background: var(--color-grey-lighter);
+  border-radius: 0.25rem;
+}
+
 .date {
   margin-top: var(--spacing-xx-tight);
 }

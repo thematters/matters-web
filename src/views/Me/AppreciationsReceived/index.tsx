@@ -9,7 +9,6 @@ import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
-import styles from './styles.css'
 
 import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived'
 
@@ -86,7 +85,7 @@ const AppreciationsReceived = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <ul className="u-list-border-gap">
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>
               <Transaction.AppreciationReceived tx={node} />
@@ -114,7 +113,5 @@ export default () => (
     <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
       <Footer />
     </section>
-
-    <style jsx>{styles}</style>
   </main>
 )

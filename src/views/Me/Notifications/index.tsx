@@ -14,11 +14,9 @@ import { useMutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-import NoticeDigest from '~/components/NoticeDigest'
+import { Notice } from '~/components/Notice'
 
 import { mergeConnections } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
@@ -70,14 +68,12 @@ const Notifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <ul className="u-list-border-gap">
         {edges.map(({ node, cursor }) => (
           <li key={cursor}>
-            <NoticeDigest notice={node} key={cursor} />
+            <Notice notice={node} key={cursor} />
           </li>
         ))}
-
-        <style jsx>{styles}</style>
       </ul>
     </InfiniteScroll>
   )
@@ -100,7 +96,5 @@ export default () => (
     <aside className="l-col-4 l-col-md-3 l-col-lg-4">
       <Footer />
     </aside>
-
-    <style jsx>{styles}</style>
   </main>
 )

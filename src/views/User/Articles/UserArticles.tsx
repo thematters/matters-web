@@ -123,7 +123,7 @@ const UserArticles = () => {
       <CustomHead />
       <ArticleSummaryInfo data={data} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <ul className="u-list-border-gap">
           {edges.map(({ node, cursor }, i) => {
             if (
               node.state !== 'active' &&

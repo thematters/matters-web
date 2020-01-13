@@ -80,7 +80,7 @@ const Topics = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <ul className="u-list-border-gap">
         {edges.map(({ node, cursor }, i) => (
           <li
             key={cursor}

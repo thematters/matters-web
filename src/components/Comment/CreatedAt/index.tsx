@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { DateTime } from '~/components'
 
 import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { toCommentPath } from '~/common/utils'
 
 import { CreatedAtComment } from './__generated__/CreatedAtComment'
 
@@ -41,18 +41,8 @@ const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
   const router = useRouter()
 
   const { parentComment, id } = comment
-  const { slug, mediaHash, author } = comment.article
   const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
-  const commentPath =
-    author.userName && mediaHash
-      ? toPath({
-          page: 'articleDetail',
-          userName: author.userName,
-          slug,
-          mediaHash,
-          fragment
-        })
-      : { href: '', as: '' }
+  const commentPath = toCommentPath({ comment })
 
   /**
    * FIXME: https://github.com/ReactTraining/history/issues/503
