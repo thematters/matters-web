@@ -103,7 +103,7 @@
     "apollo": "^2.21.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-dynamic-import-node": "^2.3.0",
-    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
     "chromedriver": "^79.0.0",
     "cucumber": "^6.0.5",
