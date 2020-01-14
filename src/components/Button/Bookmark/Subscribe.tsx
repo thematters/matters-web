@@ -51,13 +51,12 @@ const Subscribe = ({
     await subscribe()
 
     // skip
-    if (!push || !push.supported || push.enabled) {
-      return
-    }
-
-    // auto re-subscribe push
-    if (Notification.permission === 'granted') {
-      subscribePush({ silent: true })
+    if (
+      !push ||
+      !push.supported ||
+      push.enabled ||
+      Notification.permission === 'granted'
+    ) {
       return
     }
 
