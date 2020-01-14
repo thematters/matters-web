@@ -45,8 +45,8 @@ export const Card: React.FC<CardProps> = ({
     <section
       className={cardClass}
       tabIndex={0}
-      onKeyPress={event => {
-        if (event.keyCode !== KEYCODES.enter) {
+      onKeyDown={event => {
+        if (event.keyCode === KEYCODES.enter) {
           openLink({ newTab: event.metaKey })
         }
       }}
