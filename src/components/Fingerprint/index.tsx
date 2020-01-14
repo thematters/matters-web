@@ -162,7 +162,7 @@ const Fingerprint = ({
       trigger="click"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
-      <button type="button">
+      <button type="button" aria-haspopup="true">
         <TextIcon
           icon={<Icon.Box size={size === 'xs' ? 'xs' : undefined} />}
           size={size}

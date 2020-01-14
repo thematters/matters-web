@@ -28,7 +28,7 @@ const Item: React.FC<MenuItemProps> = ({
   })
 
   return (
-    <li className={itemClasses} style={style} role="menuitem">
+    <li className={itemClasses} style={style} role="menuitem" tabIndex={0}>
       {children}
 
       <style jsx>{styles}</style>

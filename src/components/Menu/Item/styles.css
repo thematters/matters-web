@@ -42,12 +42,14 @@
 }
 
 .bg-hover-grey {
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-grey-lighter);
   }
 }
 .bg-hover-green {
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-green-lighter);
   }
 }

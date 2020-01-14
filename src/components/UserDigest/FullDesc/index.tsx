@@ -137,11 +137,13 @@ const FullDesc = (props: {
           </div>
         </header>
 
-        <Link {...path}>
-          <a>
-            <p className="description">{user.info.description}</p>
-          </a>
-        </Link>
+        {user.info.description && (
+          <Link {...path}>
+            <a>
+              <p className="description">{user.info.description}</p>
+            </a>
+          </Link>
+        )}
       </section>
 
       <style jsx>{styles}</style>

@@ -31,6 +31,7 @@ Dropdown.defaultProps = {
   arrow: false,
   trigger: 'mouseenter focus click',
   interactive: true,
+  aria: 'describedby',
   distance: 4,
   placement: 'bottom',
   // https://github.com/atomiks/tippyjs/blob/master/MIGRATION_GUIDE.md#if-you-were-using-interactive-true

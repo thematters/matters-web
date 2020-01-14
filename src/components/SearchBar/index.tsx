@@ -66,7 +66,11 @@ const BaseSearchBar: React.FC<{
       {({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {
           return (
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={handleSubmit}
+              aria-label={textPlaceholder}
+              role="search"
+            >
               <input
                 type="search"
                 name="q"

@@ -177,6 +177,7 @@ const CommentForm = ({
           }
         })
       }}
+      aria-label="發表評論"
     >
       <CommentEditor
         content={content}

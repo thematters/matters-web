@@ -65,7 +65,7 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
       onCreate={setInstance}
       placement="bottom-end"
     >
-      <button type="button" aria-label="更多操作">
+      <button type="button" aria-label="更多操作" aria-haspopup="true">
         <Icon.MoreRegular size="md" />
       </button>
     </Dropdown>

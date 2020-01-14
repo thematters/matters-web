@@ -74,7 +74,12 @@ const NoticeButton = ({
         }
       }}
     >
-      <button type="button" aria-label="通知" className={buttonClasses}>
+      <button
+        className={buttonClasses}
+        type="button"
+        aria-label="通知"
+        aria-haspopup="true"
+      >
         <Icon.Notification size="md" />
 
         <style jsx>{styles}</style>
