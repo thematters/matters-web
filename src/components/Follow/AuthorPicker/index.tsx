@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 
 import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
 import { QueryError } from '~/components/GQL'
-import FullDesc from '~/components/UserDigest/FullDesc'
+import Rich from '~/components/UserDigest/Rich'
 
 import { numFormat } from '~/common/utils'
 
@@ -22,14 +22,14 @@ const AUTHOR_PICKER = gql`
           edges {
             cursor
             node {
-              ...UserDigestFullDescUser
+              ...UserDigestRichUser
             }
           }
         }
       }
     }
   }
-  ${FullDesc.fragments.user}
+  ${Rich.fragments.user}
 `
 
 const AuthorPicker = ({
@@ -77,7 +77,7 @@ const AuthorPicker = ({
         <ul>
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>
-              <FullDesc user={node} nameSize="sm" readonly={readonly} />
+              <Rich user={node} nameSize="sm" readonly={readonly} />
             </li>
           ))}
         </ul>

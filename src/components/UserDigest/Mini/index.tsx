@@ -13,7 +13,11 @@ import styles from './styles.css'
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 
 /**
- * UserDigest.Mini is a component for presenting user's avatar and display name.
+ * UserDigest.Mini is a component for presenting user's:
+ *
+ * - avatar
+ * - userName
+ * - displayName
  *
  * Usage:
  *
@@ -22,10 +26,14 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 
 interface MiniProps {
   user: UserDigestMiniUser
-  avatarSize?: AvatarSize
-  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s'
-  textWeight?: 'normal' | 'md'
-  spacing?: 'xxtight' | 'xtight'
+
+  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
+  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
+  textWeight?: 'md'
+  direction?: 'row' | 'column'
+
+  hasAvatar?: boolean
+  hasDisplayName?: boolean
   hasUserName?: boolean
 }
 
@@ -46,58 +54,68 @@ const fragments = {
 
 const Mini = ({
   user,
-  avatarSize = 'sm',
+
+  avatarSize,
   textSize = 'sm',
-  textWeight = 'normal',
-  spacing = 'xtight',
+  textWeight,
+  direction = 'row',
+
+  hasAvatar,
+  hasDisplayName,
   hasUserName
 }: MiniProps) => {
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''
   })
-  const containerClasses = classNames({
+  const containerClass = classNames({
     container: true,
-    [`text-size-${textSize}`]: true,
-    [`text-weight-${textWeight}`]: true,
-    [`spacing-${spacing}`]: true
+    [`text-size-${textSize}`]: !!textSize,
+    [`text-weight-${textWeight}`]: !!textWeight,
+    hasAvatar
+  })
+  const nameClass = classNames({
+    name: true,
+    [`direction-${direction}`]: !!direction
   })
   const isArchived = user?.status?.state === 'archived'
 
   if (isArchived) {
     return (
-      <section>
-        <span className={containerClasses}>
-          <Avatar size={avatarSize} />
-          <span className="name-container">
-            <span className="name">
+      <span className={containerClass}>
+        {hasAvatar && <Avatar size={avatarSize} />}
+
+        <span className={nameClass}>
+          {hasDisplayName && (
+            <span className="displayname">
               <Translate
                 zh_hant={TEXT.zh_hant.accountArchived}
                 zh_hans={TEXT.zh_hans.accountArchived}
               />
             </span>
-          </span>
+          )}
         </span>
 
         <style jsx>{styles}</style>
-      </section>
+      </span>
     )
   }
 
   return (
-    <section>
-      <Link {...path}>
-        <a className={containerClasses}>
-          <Avatar size={avatarSize} user={user} />
-          <span className="name-container">
-            <span className="name">{user.displayName}</span>
-            {hasUserName && <span className="username">@{user.userName}</span>}
-          </span>
-        </a>
-      </Link>
+    <Link {...path}>
+      <a className={containerClass}>
+        {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
-      <style jsx>{styles}</style>
-    </section>
+        <span className={nameClass}>
+          {hasDisplayName && (
+            <span className="displayname">{user.displayName}</span>
+          )}
+          {hasUserName && <span className="username">@{user.userName}</span>}
+        </span>
+
+        <style jsx>{styles}</style>
+      </a>
+    </Link>
   )
 }
 

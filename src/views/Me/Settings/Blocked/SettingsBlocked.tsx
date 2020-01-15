@@ -30,13 +30,13 @@ const VIEWER_BLOCK_LIST = gql`
         edges {
           cursor
           node {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const SettingsBlocked = () => {
@@ -98,7 +98,7 @@ const SettingsBlocked = () => {
               })
             }
           >
-            <UserDigest.FullDesc user={node} showUnblock />
+            <UserDigest.Rich user={node} showUnblock />
           </li>
         ))}
       </ul>

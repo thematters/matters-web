@@ -12,20 +12,20 @@ import { numAbbr, toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { UserDigestFullDescUser } from './__generated__/UserDigestFullDescUser'
+import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
 
 /**
- * UeserDigest.FullDesc is a component for presenting user's avatar, display
+ * UeserDigest.Rich is a component for presenting user's avatar, display
  * name, description and follower/followee state.
  *
  * Usage:
  *
- *   <UserDigest.FullDesc user={user} />
+ *   <UserDigest.Rich user={user} />
  */
 
 const fragments = {
   user: gql`
-    fragment UserDigestFullDescUser on User {
+    fragment UserDigestRichUser on User {
       id
       userName
       displayName
@@ -66,8 +66,8 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   )
 }
 
-const FullDesc = (props: {
-  user: UserDigestFullDescUser
+const Rich = (props: {
+  user: UserDigestRichUser
   nameSize?: 'sm'
   readonly?: boolean
   appreciations?: number
@@ -151,6 +151,6 @@ const FullDesc = (props: {
   )
 }
 
-FullDesc.fragments = fragments
+Rich.fragments = fragments
 
-export default FullDesc
+export default Rich

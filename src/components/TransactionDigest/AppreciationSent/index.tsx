@@ -41,7 +41,14 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
       <section className="left">
         {isUseContent && content && <h4 className="content">{content}</h4>}
         {!isUseContent && target && <ArticleDigest.Plain article={target} />}
-        {recipient && !isUseContent && <UserDigest.Mini user={recipient} />}
+        {recipient && !isUseContent && (
+          <UserDigest.Mini
+            user={recipient}
+            avatarSize="sm"
+            hasAvatar
+            hasDisplayName
+          />
+        )}
       </section>
 
       <section className="right">

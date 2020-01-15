@@ -1,5 +1,9 @@
 .avatar {
+  /* may under a flex layout, keep it unshrinkable */
+  flex-shrink: 0;
   display: inline-block;
+
+  /* 40px */
   width: 2.5rem;
   height: 2.5rem;
 
@@ -31,14 +35,14 @@
   height: 2rem;
 }
 
-/* 70px */
+/* 48px */
 .xl {
-  width: 4.375rem;
-  height: 4.375rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-/* 140px */
+/* 72px */
 .xxl {
-  width: 8.75rem;
-  height: 8.75rem;
+  width: 4.5rem;
+  height: 4.5rem;
 }

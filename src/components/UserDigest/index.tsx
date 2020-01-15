@@ -1,11 +1,7 @@
-import BriefDesc from './BriefDesc'
-import FullDesc from './FullDesc'
 import Mini from './Mini'
-import Plain from './Plain'
+import Rich from './Rich'
 
 export const UserDigest = {
-  BriefDesc,
-  FullDesc,
   Mini,
-  Plain
+  Rich
 }

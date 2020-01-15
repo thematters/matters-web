@@ -30,13 +30,13 @@ const SEARCH_USERS = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
@@ -128,7 +128,7 @@ const SearchUser = ({
                     })
                   }
                 >
-                  <UserDigest.FullDesc user={node} />
+                  <UserDigest.Rich user={node} />
                 </li>
               )
           )}

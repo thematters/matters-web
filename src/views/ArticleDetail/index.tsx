@@ -60,7 +60,7 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
-        ...UserDigestFullDescUser
+        ...UserDigestRichUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -75,7 +75,7 @@ const ARTICLE_DETAIL = gql`
       ...ResponsesArticle
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
   ${BookmarkButton.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
@@ -226,7 +226,7 @@ const ArticleDetail = ({
         <State article={article} />
 
         <section className="author">
-          <UserDigest.FullDesc user={article.author} />
+          <UserDigest.Rich user={article.author} />
         </section>
 
         <section className="title">

@@ -52,7 +52,15 @@ const ResponseDigest = ({
     <section className="container">
       <div className="header">
         <div className="avatar">
-          <UserDigest.Mini user={author} avatarSize="lg" textWeight="md" />
+          <UserDigest.Mini
+            user={author}
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
+            hasAvatar
+            hasDisplayName
+          />
+
           <span className="collected">
             <Translate
               zh_hant={TEXT.zh_hant.collected}

@@ -56,7 +56,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
           {...path}
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
-          fontSize="md-s"
+          textSize="md-s"
         >
           <CommentContent comment={{ ...comment, content }} />
         </Card>

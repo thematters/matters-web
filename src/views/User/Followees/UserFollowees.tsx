@@ -26,13 +26,13 @@ const USER_FOLLOWEES_FEED = gql`
         edges {
           cursor
           node {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const UserFollowees = () => {
@@ -107,7 +107,7 @@ const UserFollowees = () => {
                 })
               }
             >
-              <UserDigest.FullDesc user={node} nameSize="sm" />
+              <UserDigest.Rich user={node} nameSize="sm" />
             </li>
           ))}
         </ul>

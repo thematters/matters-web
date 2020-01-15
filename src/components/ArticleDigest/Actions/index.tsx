@@ -108,7 +108,12 @@ const Actions = ({
       <div className="left">
         {hasAuthor && (
           <span className="space-right">
-            <UserDigest.Mini user={article.author} />
+            <UserDigest.Mini
+              user={article.author}
+              avatarSize="sm"
+              hasAvatar
+              hasDisplayName
+            />
           </span>
         )}
 

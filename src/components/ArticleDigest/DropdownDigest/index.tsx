@@ -92,7 +92,14 @@ const DropdownDigest = ({
           </Title>
         </LinkWrapper>
 
-        <UserDigest.Mini user={author} avatarSize="xs" textSize="xs" />
+        <UserDigest.Mini
+          user={author}
+          avatarSize="xs"
+          textSize="sm-s"
+          hasAvatar
+          hasDisplayName
+          hasUserName
+        />
 
         {!isBanned && hasArrow && (
           <Link {...path}>

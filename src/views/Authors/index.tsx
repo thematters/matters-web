@@ -34,14 +34,14 @@ const ALL_AUTHORSS = gql`
           edges {
             cursor
             node {
-              ...UserDigestFullDescUser
+              ...UserDigestRichUser
             }
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const Authors = () => {
@@ -98,7 +98,7 @@ const Authors = () => {
               })
             }
           >
-            <UserDigest.FullDesc user={node} />
+            <UserDigest.Rich user={node} />
           </li>
         ))}
       </ul>

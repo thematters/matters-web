@@ -48,7 +48,12 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
     <article>
       <header>
         <section className="left">
-          <UserDigest.Mini user={author} avatarSize="sm" />
+          <UserDigest.Mini
+            user={author}
+            avatarSize="sm"
+            hasAvatar
+            hasDisplayName
+          />
           <span className="reply-to">
             <Translate zh_hant="評論了作品" zh_hans="评论了作品" />
           </span>
@@ -68,7 +73,7 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
           {...commentPath}
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
-          fontSize="md-s"
+          textSize="md-s"
         >
           <Comment.Content comment={comment} />
         </Card>

@@ -3,7 +3,6 @@
 }
 
 .container {
-  margin: var(--spacing-loose) 0;
 }
 
 .header {
@@ -19,7 +18,7 @@
     margin: 0 var(--spacing-xx-tight);
 
     color: var(--color-grey-dark);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-sm-s);
     line-height: 1;
   }
 }

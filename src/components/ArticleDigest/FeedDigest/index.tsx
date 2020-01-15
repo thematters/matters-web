@@ -133,7 +133,13 @@ const FeedDigest = ({
       )}
       <div className="header">
         <div className="info">
-          <UserDigest.Mini user={author} />
+          <UserDigest.Mini
+            user={author}
+            avatarSize="sm"
+            hasAvatar
+            hasDisplayName
+          />
+
           {inFolloweeFeed && (
             <>
               <span className="published-description">

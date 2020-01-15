@@ -8,11 +8,11 @@ export default gql`
       edges {
         node {
           ... on User {
-            ...UserDigestBriefDescUser
+            ...UserDigestMiniUser
           }
         }
       }
     }
   }
-  ${UserDigest.BriefDesc.fragments.user}
+  ${UserDigest.Mini.fragments.user}
 `

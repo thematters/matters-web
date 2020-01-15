@@ -36,7 +36,7 @@ const ARTICLE_APPRECIATORS = gql`
             ... on Transaction {
               amount
               sender {
-                ...UserDigestFullDescUser
+                ...UserDigestRichUser
               }
             }
           }
@@ -44,7 +44,7 @@ const ARTICLE_APPRECIATORS = gql`
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const AppreciatorsModal = () => {
@@ -119,7 +119,7 @@ const AppreciatorsModal = () => {
                       })
                     }
                   >
-                    <UserDigest.FullDesc
+                    <UserDigest.Rich
                       user={node.sender}
                       appreciations={node.amount}
                     />

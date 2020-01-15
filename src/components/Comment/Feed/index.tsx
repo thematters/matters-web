@@ -109,6 +109,8 @@ export const Feed = ({
           avatarSize={avatarSize}
           textSize="md-s"
           textWeight="md"
+          hasAvatar
+          hasDisplayName
           hasUserName={hasUserName}
         />
 

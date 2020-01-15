@@ -4,8 +4,15 @@
 }
 
 .bg-grey-lighter {
+  @mixin all-transition;
+
   background: var(--color-grey-lighter);
   border-radius: 0.25rem;
+
+  &:hover,
+  &:focus {
+    background: var(--color-grey-lighter-hover);
+  }
 }
 
 .spacing-vertical-xtight {
@@ -34,6 +41,6 @@
   padding-right: var(--spacing-base);
 }
 
-.font-size-md-s {
+.text-size-md-s {
   font-size: var(--font-size-md-s);
 }

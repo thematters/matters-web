@@ -10,7 +10,7 @@ type CardSpacing = 'xtight' | 'tight' | 'base'
 interface CardProps {
   bgColor?: 'grey-lighter'
   spacing?: [CardSpacing, CardSpacing]
-  fontSize?: 'md-s'
+  textSize?: 'md-s'
 
   href: string
   as?: string
@@ -19,7 +19,7 @@ interface CardProps {
 export const Card: React.FC<CardProps> = ({
   bgColor,
   spacing = [0, 0],
-  fontSize,
+  textSize,
 
   href,
   as,
@@ -31,7 +31,7 @@ export const Card: React.FC<CardProps> = ({
     [`bg-${bgColor}`]: !!bgColor,
     [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
     [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
-    [`font-size-${fontSize}`]: !!fontSize
+    [`text-size-${textSize}`]: !!textSize
   })
   const openLink = ({ newTab }: { newTab: boolean }) => {
     if (newTab) {

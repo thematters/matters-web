@@ -29,14 +29,14 @@ const SIDEBAR_AUTHORS = gql`
           edges {
             cursor
             node {
-              ...UserDigestFullDescUser
+              ...UserDigestRichUser
             }
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const Authors = () => {
@@ -90,7 +90,7 @@ const Authors = () => {
                 })
               }
             >
-              <UserDigest.FullDesc user={node} nameSize="sm" />
+              <UserDigest.Rich user={node} nameSize="sm" />
             </li>
           ))}
         </ul>

@@ -17,10 +17,10 @@ const fragments = {
   user: gql`
     fragment ReplyToUser on User {
       id
-      ...UserDigestPlainUser
+      ...UserDigestMiniUser
     }
 
-    ${UserDigest.Plain.fragments.user}
+    ${UserDigest.Mini.fragments.user}
   `
 }
 const ReplyTo = ({ user }: ReplyToProps) => (
@@ -29,7 +29,13 @@ const ReplyTo = ({ user }: ReplyToProps) => (
       <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
     </span>
 
-    <UserDigest.Plain user={user} hasUserName />
+    <UserDigest.Mini
+      user={user}
+      textSize="sm-s"
+      textWeight="md"
+      hasDisplayName
+      hasUserName
+    />
 
     <style jsx>{styles}</style>
   </section>

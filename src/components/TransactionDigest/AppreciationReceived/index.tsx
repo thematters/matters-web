@@ -45,7 +45,12 @@ const AppreciationReceived = ({
       <section className="left">
         {sender && !isUseContent && (
           <header>
-            <UserDigest.Mini user={sender} avatarSize="md" />
+            <UserDigest.Mini
+              user={sender}
+              avatarSize="md"
+              hasAvatar
+              hasDisplayName
+            />
             <span>
               &nbsp;
               <Translate zh_hant="讚賞了" zh_hans="赞赏了" />
