@@ -85,7 +85,7 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   return (
     <section className="container">
       <div className="avatar">
-        <Avatar size="xl" src={avatar} />
+        <Avatar size="xxl" src={avatar} />
       </div>
       <div className="upload">
         <div className="wrapper">
