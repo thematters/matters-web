@@ -165,6 +165,7 @@ export const TEXT = {
     uploadImageFailed: '圖片上傳失敗',
     collected: '關聯了本作品',
     collectedOnly: '只看衍生作品',
+    migration: '將創作搬到 Matters',
     error: {
       UNKNOWN_ERROR: '不知道哪裏出錯了，過幾分鐘看看',
       NETWORK_ERROR: '網路錯誤，請用力刷新',
@@ -367,6 +368,7 @@ export const TEXT = {
     uploadImageFailed: '图片上传失败',
     collected: '关联了本作品',
     collectedOnly: '只看衍生作品',
+    migration: '将创作搬到 Matters',
     error: {
       UNKNOWN_ERROR: '不知道哪里出错了，过几分钟看看',
       NETWORK_ERROR: '网络不给力，请用力刷新',

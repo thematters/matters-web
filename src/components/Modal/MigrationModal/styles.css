@@ -1,0 +1,19 @@
+.container {
+  padding: var(--spacing-loose) var(--spacing-loose) 3.5rem;
+}
+
+.sources {
+  margin-top: var(--spacing-loose);
+
+  & li {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    padding-left: var(--spacing-x-tight);
+
+    & span {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+}

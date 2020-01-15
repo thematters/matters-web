@@ -45,6 +45,7 @@ type ROUTE_KEY =
   | 'MISC_FAQ'
   | 'MISC_TOS'
   | 'MISC_GUIDE'
+  | 'MIGRATION'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -283,6 +284,11 @@ export const ROUTES: Array<{
     key: 'MISC_GUIDE',
     href: '/MiscGuide',
     as: '/guide'
+  },
+  {
+    key: 'MIGRATION',
+    href: '/Migration',
+    as: '/migration'
   }
 ]
 
