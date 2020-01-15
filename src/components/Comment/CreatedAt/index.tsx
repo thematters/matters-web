@@ -1,10 +1,8 @@
 import gql from 'graphql-tag'
-import jump from 'jump.js'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { DateTime } from '~/components'
 
-import { PATHS } from '~/common/enums'
 import { toCommentPath } from '~/common/utils'
 
 import { CreatedAtComment } from './__generated__/CreatedAtComment'
@@ -38,29 +36,15 @@ const fragments = {
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const router = useRouter()
-
-  const { parentComment, id } = comment
-  const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
   const commentPath = toCommentPath({ comment })
 
-  /**
-   * FIXME: https://github.com/ReactTraining/history/issues/503
-   */
   if (hasLink) {
     return (
-      <a
-        href={commentPath.as}
-        onClick={() => {
-          if (router.pathname === PATHS.ARTICLE_DETAIL.href) {
-            jump(`#${fragment}`, {
-              offset: -64
-            })
-          }
-        }}
-      >
-        <DateTime date={comment.createdAt} />
-      </a>
+      <Link {...commentPath}>
+        <a>
+          <DateTime date={comment.createdAt} />
+        </a>
+      </Link>
     )
   }
 

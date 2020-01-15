@@ -48,10 +48,12 @@ export const Card: React.FC<CardProps> = ({
       onKeyDown={event => {
         if (event.keyCode === KEYCODES.enter) {
           openLink({ newTab: event.metaKey })
+          event.stopPropagation()
         }
       }}
       onClick={event => {
         openLink({ newTab: event.metaKey })
+        event.stopPropagation()
       }}
     >
       {children}

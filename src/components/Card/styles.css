@@ -1,5 +1,6 @@
 .card {
   cursor: pointer;
+  outline: none;
 }
 
 .bg-grey-lighter {
