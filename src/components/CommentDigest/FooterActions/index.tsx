@@ -10,8 +10,6 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import ICON_COMMENT_SMALL from '~/static/icons/comment-small.svg?sprite'
-import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import { DigestActionsComment } from './__generated__/DigestActionsComment'
 import DownvoteButton from './DownvoteButton'
@@ -56,14 +54,6 @@ const fragments = {
     ${DownvoteButton.fragments.comment}
   `
 }
-
-const IconDotDivider = () => (
-  <Icon
-    id={ICON_DOT_DIVIDER.id}
-    viewBox={ICON_DOT_DIVIDER.viewBox}
-    style={{ width: 18, height: 18 }}
-  />
-)
 
 const FooterActions: React.FC<FooterActionsProps> & {
   fragments: typeof fragments
@@ -111,7 +101,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                 disabled={isDisabled}
               />
 
-              <IconDotDivider />
+              <Icon.DotDivider />
               <DownvoteButton
                 comment={comment}
                 onClick={viewer.shouldSetupLikerID && open}
@@ -120,7 +110,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
 
               {hasForm && (
                 <>
-                  <IconDotDivider />
+                  <Icon.DotDivider />
 
                   <button
                     type="button"
@@ -134,11 +124,7 @@ const FooterActions: React.FC<FooterActionsProps> & {
                     }}
                     disabled={isDisabled}
                   >
-                    <Icon
-                      id={ICON_COMMENT_SMALL.id}
-                      viewBox={ICON_COMMENT_SMALL.viewBox}
-                      size="small"
-                    />
+                    <Icon.CommentSmall />
                   </button>
                 </>
               )}

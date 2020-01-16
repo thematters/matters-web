@@ -5,8 +5,6 @@ import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import ArchiveButton from '~/components/ArticleDigest/DropdownActions/ArchiveButton'
 import { ViewerContext } from '~/components/Viewer'
 
-import ICON_MORE_REGULAR from '~/static/icons/more-regular.svg?sprite'
-
 import { MoreButtonArticle } from './__generated__/MoreButtonArticle'
 
 const fragments = {
@@ -68,11 +66,7 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
       placement="bottom-end"
     >
       <button type="button" aria-label="更多操作">
-        <Icon
-          size="default"
-          id={ICON_MORE_REGULAR.id}
-          viewBox={ICON_MORE_REGULAR.viewBox}
-        />
+        <Icon.MoreRegular size="md" />
       </button>
     </Dropdown>
   )

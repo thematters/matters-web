@@ -15,7 +15,6 @@ import {
   toPath
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
-import ICON_CHEVRON_RIGHT from '~/static/icons/chevron-right.svg?sprite'
 
 import {
   UserCommentFeed,
@@ -184,11 +183,7 @@ const UserComments = ({ user }: UserIdUser) => {
                 <a>
                   <h3>
                     {articleEdge.node.title}
-                    <Icon
-                      id={ICON_CHEVRON_RIGHT.id}
-                      viewBox={ICON_CHEVRON_RIGHT.viewBox}
-                      style={{ width: 12, height: 12 }}
-                    />
+                    <Icon.ChevronRight style={{ width: 12, height: 12 }} />
                   </h3>
                 </a>
               </Link>

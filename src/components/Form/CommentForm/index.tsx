@@ -3,21 +3,18 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
+import { Icon, Translate } from '~/components'
 import { Button } from '~/components/Button'
 import { useMutation } from '~/components/GQL'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_COMMENTS from '~/components/GQL/queries/commentComments'
-import { Icon } from '~/components/Icon'
-import IconSpinner from '~/components/Icon/Spinner'
-import { Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
-import ICON_POST from '~/static/icons/post.svg?sprite'
 
 import { CommentDraft } from './__generated__/CommentDraft'
 import { PutComment } from './__generated__/PutComment'
@@ -98,7 +95,6 @@ const CommentForm = ({
     refetchQueries
   })
 
-  const push = clientPreferenceData?.clientPreference.push
   const draftContent = data?.commentDraft.content || ''
 
   const [isSubmitting, setSubmitting] = useState(false)
@@ -119,6 +115,13 @@ const CommentForm = ({
       }
     }
 
+    const push = clientPreferenceData?.clientPreference.push
+    const skipPushButton =
+      !push ||
+      !push.supported ||
+      push.enabled ||
+      Notification.permission === 'granted'
+
     event.preventDefault()
     setSubmitting(true)
 
@@ -130,29 +133,24 @@ const CommentForm = ({
         submitCallback()
       }
 
-      // skip
-      if (!push || !push.supported || push.enabled) {
-        return
-      }
-
-      // auto re-subscribe push
-      if (Notification.permission === 'granted') {
-        subscribePush({ silent: true })
-        return
-      }
+      const CommentSent = (
+        <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+      )
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            header: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
-            content: (
+            header: !skipPushButton && CommentSent,
+            content: skipPushButton ? (
+              CommentSent
+            ) : (
               <Translate
                 zh_hant={TEXT.zh_hant.pushDescription}
                 zh_hans={TEXT.zh_hans.pushDescription}
               />
             ),
-            customButton: (
+            customButton: !skipPushButton && (
               <button type="button" onClick={() => subscribePush()}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
@@ -210,11 +208,7 @@ const CommentForm = ({
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
           icon={
-            isSubmitting ? (
-              <IconSpinner />
-            ) : (
-              <Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />
-            )
+            isSubmitting ? <Icon.Spinner size="md" /> : <Icon.Post size="md" />
           }
         >
           <Translate zh_hant="送出" zh_hans="送出" />
@@ -249,8 +243,10 @@ const CommentFormWrap = (props: CommentFormProps) => {
   if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
     return (
       <section className="blocked">
-        <Translate zh_hant="你還不能參與討論" zh_hans="你还不能参与讨论" />
-
+        <Translate
+          zh_hant="新手小貼士：發佈作品收穫讚賞及瀏覽他人作品都能幫你開啓評論權限喔！"
+          zh_hans="新手小贴士：发布作品收获赞赏及浏览他人作品都能帮你开启评论权限喔！"
+        />
         <style jsx>{styles}</style>
       </section>
     )

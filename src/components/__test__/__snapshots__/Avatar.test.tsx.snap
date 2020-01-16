@@ -3,6 +3,6 @@
 exports[`Avatar default style match snapshot 1`] = `
 <div
   aria-hidden="true"
-  class="jsx-undefined avatar default"
+  class="jsx-undefined avatar"
 />
 `;

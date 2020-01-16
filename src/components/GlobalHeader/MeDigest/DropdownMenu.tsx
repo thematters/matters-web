@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext, Menu, TextIcon } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import IconLike from '~/components/Icon/Like'
-import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
@@ -15,17 +13,11 @@ import {
   // clearPersistCache,
   redirectToTarget,
   toPath,
-  translate,
   unsubscribePush
 } from '~/common/utils'
-import ICON_LOGOUT from '~/static/icons/logout.svg?sprite'
-import ICON_ME from '~/static/icons/me.svg?sprite'
-import ICON_READING_HISTORY from '~/static/icons/reading-history.svg?sprite'
-import ICON_SETTINGS from '~/static/icons/settings.svg?sprite'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({
     page: 'userProfile',
@@ -35,62 +27,80 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
     page: 'userHistory',
     userName: viewer.userName || ''
   })
+  const onClickLogout = async () => {
+    try {
+      await logout()
+
+      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
+        id: viewer.id
+      })
+
+      try {
+        await unsubscribePush()
+        // await clearPersistCache()
+      } catch (e) {
+        console.error('Failed to unsubscribePush after logged out')
+      }
+
+      redirectToTarget()
+    } catch (e) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant={TEXT.zh_hant.logoutFailed}
+                zh_hans={TEXT.zh_hans.logoutFailed}
+              />
+            )
+          }
+        })
+      )
+    }
+  }
 
   return (
     <Menu>
       <Menu.Item>
         <Link {...userPath}>
           <a onClick={hideDropdown}>
-            <TextIcon
-              icon={
-                <Icon id={ICON_ME.id} viewBox={ICON_ME.viewBox} size="small" />
-              }
-              text={translate({
-                zh_hant: TEXT.zh_hant.myProfile,
-                zh_hans: TEXT.zh_hans.myProfile,
-                lang
-              })}
-              spacing="xtight"
-            />
+            <TextIcon icon={<Icon.Me />} spacing="xtight">
+              <Translate
+                zh_hant={TEXT.zh_hant.myProfile}
+                zh_hans={TEXT.zh_hans.myProfile}
+              />
+            </TextIcon>
           </a>
         </Link>
       </Menu.Item>
+
       <Menu.Item>
         <Link {...PATHS.ME_APPRECIATIONS_SENT}>
           <a onClick={hideDropdown}>
-            <TextIcon
-              icon={<IconLike size="small" />}
-              text={translate({
-                zh_hant: TEXT.zh_hant.myAppreciations,
-                zh_hans: TEXT.zh_hans.myAppreciations,
-                lang
-              })}
-              spacing="xtight"
-            />
+            <TextIcon icon={<Icon.Like />} spacing="xtight">
+              <Translate
+                zh_hant={TEXT.zh_hant.myAppreciations}
+                zh_hans={TEXT.zh_hans.myAppreciations}
+              />
+            </TextIcon>
           </a>
         </Link>
       </Menu.Item>
+
       <Menu.Item>
         <Link {...userHistoryPath}>
           <a onClick={hideDropdown}>
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_READING_HISTORY.id}
-                  viewBox={ICON_READING_HISTORY.viewBox}
-                  size="small"
-                />
-              }
-              text={translate({
-                zh_hant: TEXT.zh_hant.readHistory,
-                zh_hans: TEXT.zh_hans.readHistory,
-                lang
-              })}
-              spacing="xtight"
-            />
+            <TextIcon icon={<Icon.ReadingHistory />} spacing="xtight">
+              <Translate
+                zh_hant={TEXT.zh_hant.readHistory}
+                zh_hans={TEXT.zh_hans.readHistory}
+              />
+            </TextIcon>
           </a>
         </Link>
       </Menu.Item>
+
       <Menu.Divider />
       <Menu.Item>
         <Link
@@ -98,75 +108,24 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           as={PATHS.ME_SETTINGS_ACCOUNT.as}
         >
           <a onClick={hideDropdown}>
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_SETTINGS.id}
-                  viewBox={ICON_SETTINGS.viewBox}
-                  size="small"
-                />
-              }
-              text={translate({
-                zh_hant: TEXT.zh_hant.setting,
-                zh_hans: TEXT.zh_hans.setting,
-                lang
-              })}
-              spacing="xtight"
-            />
+            <TextIcon icon={<Icon.Settings />} spacing="xtight">
+              <Translate
+                zh_hant={TEXT.zh_hant.setting}
+                zh_hans={TEXT.zh_hans.setting}
+              />
+            </TextIcon>
           </a>
         </Link>
       </Menu.Item>
+
       <Menu.Item>
-        <button
-          type="button"
-          onClick={async () => {
-            try {
-              await logout()
-
-              analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
-                id: viewer.id
-              })
-
-              try {
-                await unsubscribePush()
-                // await clearPersistCache()
-              } catch (e) {
-                console.error('Failed to unsubscribePush after logged out')
-              }
-
-              redirectToTarget()
-            } catch (e) {
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'red',
-                    content: (
-                      <Translate
-                        zh_hant={TEXT.zh_hant.logoutFailed}
-                        zh_hans={TEXT.zh_hans.logoutFailed}
-                      />
-                    )
-                  }
-                })
-              )
-            }
-          }}
-        >
-          <TextIcon
-            icon={
-              <Icon
-                id={ICON_LOGOUT.id}
-                viewBox={ICON_LOGOUT.viewBox}
-                size="small"
-              />
-            }
-            text={translate({
-              zh_hant: TEXT.zh_hant.logout,
-              zh_hans: TEXT.zh_hans.logout,
-              lang
-            })}
-            spacing="xtight"
-          />
+        <button type="button" onClick={onClickLogout}>
+          <TextIcon icon={<Icon.LogOut />} spacing="xtight">
+            <Translate
+              zh_hant={TEXT.zh_hant.logout}
+              zh_hans={TEXT.zh_hans.logout}
+            />
+          </TextIcon>
         </button>
       </Menu.Item>
     </Menu>

@@ -39,7 +39,7 @@
   user-select: none;
 }
 
-.small {
+.sm {
   font-size: var(--font-size-sm);
 
   & .count {

@@ -64,7 +64,7 @@ const Tags = () => {
               })
             }
           >
-            <Tag tag={node} size="small" type="count-fixed" />
+            <Tag tag={node} size="sm" type="count-fixed" />
           </li>
         ))}
       </ul>

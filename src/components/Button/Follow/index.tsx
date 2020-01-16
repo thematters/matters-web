@@ -20,10 +20,10 @@ const fragments = {
 
 export const FollowButton = ({
   user,
-  size = 'small'
+  size = 'sm'
 }: {
   user: FollowButtonUser
-  size?: 'small' | 'default'
+  size?: 'sm' | 'default'
 }) => {
   const viewer = useContext(ViewerContext)
 

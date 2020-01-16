@@ -9,9 +9,9 @@ export default () => (
     {(open: any) => (
       <Button
         is="button"
-        size="large"
+        size="lg"
         bgColor="transparent"
-        spacing="default"
+        spacing="loose"
         className="u-link-green"
         onClick={() => open()}
       >

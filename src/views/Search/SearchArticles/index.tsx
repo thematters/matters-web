@@ -47,7 +47,7 @@ const SEARCH_ARTICLES = gql`
 `
 
 const SearchArticles = ({ q }: { q: string }) => {
-  const isMediumUp = useResponsive({ type: 'medium-up' })()
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {

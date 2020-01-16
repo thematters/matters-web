@@ -3,7 +3,6 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_WRITE from '~/static/icons/write.svg?sprite'
 
 interface Props {
   allowed: boolean
@@ -13,9 +12,9 @@ export default ({ allowed }: Props) => (
   <ModalSwitch modalId={allowed ? 'publishModal' : 'likeCoinTermModal'}>
     {(open: any) => (
       <Button
-        size="large"
+        size="lg"
         bgColor="green"
-        icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
+        icon={<Icon.Write size="md" />}
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
           open()

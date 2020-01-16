@@ -1,8 +1,6 @@
-import { Icon } from '~/components/Icon'
+import { Icon } from '~/components'
 import { ModalContext } from '~/components/ModalManager'
 import { Title } from '~/components/Title'
-
-import ICON_CLOSE from '~/static/icons/close.svg?sprite'
 
 import styles from './styles.css'
 
@@ -32,11 +30,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
               }
             }}
           >
-            <Icon
-              id={ICON_CLOSE.id}
-              viewBox={ICON_CLOSE.viewBox}
-              color="black"
-            />
+            <Icon.Close size="md" color="black" />
           </button>
         )}
 

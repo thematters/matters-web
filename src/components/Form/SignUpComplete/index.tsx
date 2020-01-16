@@ -4,7 +4,7 @@ import { Title } from '~/components/Title'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
-import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg?url'
+import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg'
 
 import styles from './styles.css'
 
@@ -29,16 +29,16 @@ const SignUpComplete = ({
 
         <p>
           <Translate
-            zh_hant="你已註冊完成，可以開始在 Matters 發佈作品了。"
-            zh_hans="你已注册完成，可以开始在 Matters 发布作品了。"
+            zh_hant="你已完成註冊，現在可以在 Matters 發佈作品並讚賞他人啦。"
+            zh_hans="你已完成注册，现在可以在 Matters 发布作品并赞赏他人啦。"
           />
         </p>
         <br />
 
         <p>
           <Translate
-            zh_hant="當你的作品累計獲得 30 個讚賞，你就可以激活讚賞權限為他人拍手，並能參與精彩討論。"
-            zh_hans="当你的作品累计获得 30 个赞赏，你就可以激活赞赏权限为他人鼓掌，并能参与精彩讨论。"
+            zh_hant="只要你收穫的讚賞數與閱讀的文章數累積達到一定標準，就能啟動評論功能，參與精彩討論。"
+            zh_hans="只要你获得的赞赏数与阅读的文章数达到一定标准，就能启动评论功能，参与精彩讨论。"
           />
         </p>
         <br />

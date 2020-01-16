@@ -1,8 +1,5 @@
 import { Icon, TextIcon, Translate } from '~/components'
 
-import ICON_READING_HISTORY_GREEN from '~/static/icons/reading-history-green.svg?sprite'
-import ICON_TRENDS from '~/static/icons/trends.svg?sprite'
-
 import styles from './styles.css'
 
 interface SortByProps {
@@ -23,19 +20,9 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
         }}
       >
         <TextIcon
-          icon={
-            <Icon
-              id={isHottest ? ICON_READING_HISTORY_GREEN.id : ICON_TRENDS.id}
-              viewBox={
-                isHottest
-                  ? ICON_READING_HISTORY_GREEN.viewBox
-                  : ICON_TRENDS.viewBox
-              }
-              size="small"
-            />
-          }
-          spacing="xtight"
+          icon={isHottest ? <Icon.Trends /> : <Icon.ReadingHistoryGreen />}
           size="sm"
+          spacing="xtight"
           color="green"
         >
           {isHottest && <Translate zh_hant="最新排序" zh_hans="最新排序" />}

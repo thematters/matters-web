@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg?url'
+import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
 
 import { ArticleTagHasBeenRemovedNotice as NoticeType } from './__generated__/ArticleTagHasBeenRemovedNotice'
 import NoticeActorName from './NoticeActorName'

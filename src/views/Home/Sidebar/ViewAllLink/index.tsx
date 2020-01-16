@@ -1,16 +1,13 @@
 import Link from 'next/link'
-import { useContext } from 'react'
 
-import { Icon, LanguageContext, TextIcon } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
-import { analytics, translate } from '~/common/utils'
-import ICON_ARROW_RIGHT_GREEN_SMALL from '~/static/icons/arrow-right-green-small.svg?sprite'
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
 const ViewAllLink = ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
-  const { lang } = useContext(LanguageContext)
   const pathMap = {
     topics: PATHS.TOPICS,
     authors: PATHS.AUTHORS,
@@ -25,21 +22,15 @@ const ViewAllLink = ({ type }: { type: 'authors' | 'tags' | 'topics' }) => {
         }
       >
         <TextIcon
-          icon={
-            <Icon
-              id={ICON_ARROW_RIGHT_GREEN_SMALL.id}
-              viewBox={ICON_ARROW_RIGHT_GREEN_SMALL.viewBox}
-              style={{ width: 6, height: 8 }}
-            />
-          }
+          icon={<Icon.ArrowRightGreenSmall style={{ width: 6, height: 8 }} />}
           color="green"
-          text={translate({
-            zh_hant: TEXT.zh_hant.viewAll,
-            zh_hans: TEXT.zh_hans.viewAll,
-            lang
-          })}
           textPlacement="left"
-        />
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.viewAll}
+            zh_hans={TEXT.zh_hans.viewAll}
+          />
+        </TextIcon>
 
         <style jsx>{styles}</style>
       </a>

@@ -4,8 +4,6 @@ import { useContext, useState } from 'react'
 import { Dropdown, Icon, Menu, PopperInstance, TextIcon } from '~/components'
 import { LanguageConsumer, LanguageContext } from '~/components/Language'
 
-import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
-
 import styles from './styles.css'
 
 const textMap = {
@@ -32,13 +30,7 @@ export const LanguageSwitch = () => {
     >
       <button type="button" className="sort-button">
         <TextIcon
-          icon={
-            <Icon
-              id={ICON_EXPAND.id}
-              viewBox={ICON_EXPAND.viewBox}
-              style={{ width: 6, height: 10 }}
-            />
-          }
+          icon={<Icon.Expand style={{ width: 6, height: 10 }} />}
           spacing="xtight"
           text={textMap[lang]}
           textPlacement="left"

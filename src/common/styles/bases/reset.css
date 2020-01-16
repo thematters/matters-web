@@ -135,6 +135,7 @@ button {
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
+  touch-action: manipulation;
 
   & > * {
     vertical-align: middle;

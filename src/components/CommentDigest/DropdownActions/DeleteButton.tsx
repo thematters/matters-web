@@ -4,7 +4,6 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
-import ICON_REMOVE from '~/static/icons/remove.svg?sprite'
 
 import { DeleteComment } from './__generated__/DeleteComment'
 import styles from './styles.css'
@@ -41,16 +40,7 @@ const DeleteButton: React.FC<{
         hideDropdown()
       }}
     >
-      <TextIcon
-        icon={
-          <Icon
-            id={ICON_REMOVE.id}
-            viewBox={ICON_REMOVE.viewBox}
-            size="small"
-          />
-        }
-        spacing="tight"
-      >
+      <TextIcon icon={<Icon.Remove />} spacing="tight">
         <Translate
           zh_hant={TEXT.zh_hant.delete}
           zh_hans={TEXT.zh_hant.delete}

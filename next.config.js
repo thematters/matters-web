@@ -74,6 +74,27 @@ const nextConfig = {
       ]
     })
 
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            memo: true,
+            dimensions: false
+          }
+        },
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 1024,
+            publicPath: '/_next/static/',
+            outputPath: `${isServer ? '../' : ''}static/`
+          }
+        }
+      ]
+    })
+
     /***
      * Import files as URL
      */
@@ -108,17 +129,9 @@ module.exports = withPlugins(
     [
       optimizedImages,
       {
-        handleImages: ['jpeg', 'png', 'svg'],
+        handleImages: ['jpeg', 'png'],
         optimizeImagesInDev: true,
-        inlineImageLimit: 1024,
-        svgo: {
-          plugins: [
-            {
-              removeViewBox: true
-            }
-          ]
-        },
-        svgSpriteLoader: {}
+        inlineImageLimit: 1024
       }
     ],
 

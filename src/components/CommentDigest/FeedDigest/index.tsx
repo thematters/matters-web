@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import { Icon, TextIcon, Translate } from '~/components'
 import { Expandable } from '~/components/Expandable'
 import CommentForm from '~/components/Form/CommentForm'
 import {
@@ -11,14 +12,10 @@ import {
 } from '~/components/GQL/fragments/__generated__/FeedDigestComment'
 import { FolloweeFeedDigestComment } from '~/components/GQL/fragments/__generated__/FolloweeFeedDigestComment'
 import commentFragments from '~/components/GQL/fragments/comment'
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
-import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, toPath } from '~/common/utils'
-import ICON_MORE_CONTENT from '~/static/icons/more-content.svg?sprite'
 
 import CommentContent from '../Content'
 import DropdownActions from '../DropdownActions'
@@ -107,8 +104,8 @@ const FeedDigest = ({
           <section className="author-row">
             <UserDigest.Mini
               user={author}
-              avatarSize={inFolloweeFeed ? 'xxsmall' : 'small'}
-              textWeight="medium"
+              avatarSize={inFolloweeFeed ? 'sm' : 'lg'}
+              textWeight="md"
               hasUserName={inArticle}
             />
 
@@ -204,15 +201,9 @@ const FeedDigest = ({
                 onClick={() => setExpand(true)}
               >
                 <TextIcon
-                  icon={
-                    <Icon
-                      id={ICON_MORE_CONTENT.id}
-                      viewBox={ICON_MORE_CONTENT.viewBox}
-                      size="small"
-                    />
-                  }
-                  color="green"
+                  icon={<Icon.MoreContent />}
                   size="sm"
+                  color="green"
                   textPlacement="left"
                   spacing="xxtight"
                 >

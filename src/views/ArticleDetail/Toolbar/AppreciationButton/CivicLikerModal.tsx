@@ -4,7 +4,6 @@ import { Modal } from '~/components/Modal'
 
 import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_EXTERNAL from '~/static/icons/external.svg?sprite'
 
 const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
   const closeModal = () => {
@@ -14,7 +13,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <>
-      <Modal.Content layout="full-width" spacing="small">
+      <Modal.Content layout="full-width" spacing="sm">
         <p>
           <Translate
             zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
@@ -52,9 +51,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
           onClick={closeModal}
         >
           <TextIcon
-            icon={
-              <Icon id={ICON_EXTERNAL.id} viewBox={ICON_EXTERNAL.viewBox} />
-            }
+            icon={<Icon.External size="md" />}
             spacing="xxxtight"
             color="green"
             textPlacement="left"

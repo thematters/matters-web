@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
+import { Icon } from '~/components'
 import { Button } from '~/components/Button'
 import {
   ProfileAvatarUploader,
@@ -10,8 +11,6 @@ import {
 } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { useMutation } from '~/components/GQL'
-import { Icon } from '~/components/Icon'
-import IconSpinner from '~/components/Icon/Spinner'
 import { LanguageContext, Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -21,7 +20,6 @@ import {
   validateDescription,
   validateDisplayName
 } from '~/common/utils'
-import ICON_SAVE from '~/static/icons/write.svg?sprite'
 
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 import styles from './styles.css'
@@ -155,9 +153,9 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     disabled={!_isEmpty(errors) || isSubmitting}
                     icon={
                       isSubmitting ? (
-                        <IconSpinner />
+                        <Icon.Spinner size="md" />
                       ) : (
-                        <Icon id={ICON_SAVE.id} viewBox={ICON_SAVE.viewBox} />
+                        <Icon.Write size="md" />
                       )
                     }
                   >
@@ -171,7 +169,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     bgColor="transparent"
                     textColor="grey"
                     textWeight="normal"
-                    spacing="default"
+                    spacing="loose"
                     disabled={isSubmitting}
                     onClick={() => setEditing(false)}
                   >

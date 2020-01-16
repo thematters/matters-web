@@ -3,8 +3,6 @@ import { useState } from 'react'
 
 import { Dropdown, Icon, PopperInstance } from '~/components'
 
-import ICON_MENU from '~/static/icons/menu.svg?sprite'
-
 import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
@@ -29,11 +27,7 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
       onCreate={setInstance}
     >
       <button type="button" aria-label="菜單" className={navButtonClass}>
-        <Icon
-          id={ICON_MENU.id}
-          viewBox={ICON_MENU.viewBox}
-          style={{ width: 20, height: 16 }}
-        />
+        <Icon.Menu style={{ width: 20, height: 16 }} />
 
         <style jsx>{styles}</style>
       </button>

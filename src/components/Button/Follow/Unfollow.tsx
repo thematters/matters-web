@@ -25,10 +25,10 @@ const UNFOLLOW_USER = gql`
 
 const Unfollow = ({
   user,
-  size = 'small'
+  size = 'sm'
 }: {
   user: FollowButtonUser
-  size?: 'small' | 'default'
+  size?: 'sm' | 'default'
 }) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
@@ -51,7 +51,7 @@ const Unfollow = ({
   return (
     <Button
       size={size}
-      style={size === 'small' ? { width: '4rem' } : { width: '5.5rem' }}
+      style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
       onClick={() => {
         unfollow()
         analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {

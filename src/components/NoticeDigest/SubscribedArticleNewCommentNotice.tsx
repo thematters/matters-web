@@ -37,7 +37,7 @@ const SubscribedArticleNewCommentNotice = ({
           <NoticeActorAvatar
             user={actor}
             key={index}
-            size={isMultiActors ? 'xsmall' : 'default'}
+            size={isMultiActors ? 'md' : undefined}
           />
         ))}
       </section>

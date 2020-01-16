@@ -13,7 +13,7 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
 
   return (
     <Button
-      size="small"
+      size="sm"
       is="span"
       bgColor="transparent"
       outlineColor="grey"
