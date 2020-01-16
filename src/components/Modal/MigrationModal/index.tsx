@@ -31,8 +31,8 @@ const VIEWER_OAUTH_PROVIDERS = gql`
 `
 
 const MIGRATION = gql`
-  mutation Migration($provider: OAuthProvider!) {
-    migration(input: { provider: $provider })
+  mutation Migration($input: MigrationInput!) {
+    migration(input: $input)
   }
 `
 
@@ -188,14 +188,22 @@ const ImportStep = ({
   setStep: (step: Step) => void
   provider: Provider
 }) => {
+  const [execute, setExecute] = useState<boolean>(false)
   const [migration] = useMutation<Migration>(MIGRATION)
 
   const executeMigration = async (event: any) => {
     event.stopPropagation()
 
+    if (execute) {
+      return
+    }
+    setExecute(true)
+
     try {
-      await migration({ variables: { input: { provider } } })
-      setStep('complete')
+      const result = await migration({ variables: { input: { provider: 'medium' } } })
+      if (result) {
+        setStep('complete')
+      }
     } catch (error) {
       const errorCode = getErrorCodes(error)[0]
       const errorMessage = (
@@ -212,6 +220,8 @@ const ImportStep = ({
           }
         })
       )
+    } finally {
+      setExecute(false)
     }
   }
 
