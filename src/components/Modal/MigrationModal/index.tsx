@@ -3,21 +3,21 @@ import gql from 'graphql-tag'
 import getConfig from 'next/config'
 import { useState } from 'react'
 
+import { getErrorCodes, useMutation } from '~/components/GQL'
 import { Icon } from '~/components/Icon'
 import { Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { Spinner } from '~/components/Spinner'
 
-import { TEXT } from '~/common/enums'
-import ICON_CHECK_ACTIVE from '~/static/icons/checkbox-check-active.svg?sprite'
-import ICON_CHECK_INACTIVE from '~/static/icons/checkbox-check-inactive.svg?sprite'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import { Migration } from './__generated__/Migration'
 import { ViewerOAuthProviders } from './__generated__/ViewerOAuthProviders'
 import styles from './styles.css'
 
-type Source = 'medium'
+type Provider = 'medium'
 
-type Step = 'source' | 'authentication' | 'import' | 'complete'
+type Step = 'provider' | 'authentication' | 'import' | 'complete'
 
 const VIEWER_OAUTH_PROVIDERS = gql`
   query ViewerOAuthProviders {
@@ -30,6 +30,12 @@ const VIEWER_OAUTH_PROVIDERS = gql`
   }
 `
 
+const MIGRATION = gql`
+  mutation Migration($provider: OAuthProvider!) {
+    migration(input: { provider: $provider })
+  }
+`
+
 const {
   publicRuntimeConfig: { OAUTH_URL }
 } = getConfig()
@@ -37,16 +43,20 @@ const {
 const SourceStep = ({
   setWindowRef,
   setStep,
-  setSource,
-  source
+  setProvider,
+  provider
 }: {
   setWindowRef: (windowRef: Window) => void
   setStep: (step: Step) => void
-  setSource: (source: Source) => void
-  source: Source
+  setProvider: (provider: Provider) => void
+  provider: Provider
 }) => {
   const mediumCheckIcon =
-    source === 'medium' ? ICON_CHECK_ACTIVE : ICON_CHECK_INACTIVE
+    provider === 'medium' ? (
+      <Icon.CheckActive size="sm" />
+    ) : (
+      <Icon.CheckInactive size="sm" />
+    )
 
   return (
     <>
@@ -57,12 +67,8 @@ const SourceStep = ({
             zh_hans="点击你想要一键搬家的网站："
           />
           <ul className="sources">
-            <li onClick={() => setSource('medium')}>
-              <Icon
-                id={mediumCheckIcon.id}
-                viewBox={mediumCheckIcon.viewBox}
-                size="small"
-              />
+            <li onClick={() => setProvider('medium')}>
+              {mediumCheckIcon}
               <span>Medium</span>
             </li>
           </ul>
@@ -94,10 +100,12 @@ const SourceStep = ({
 
 const AuthenticationStep = ({
   windowRef,
-  setStep
+  setStep,
+  provider
 }: {
   windowRef?: Window
   setStep: (step: Step) => void
+  provider: Provider
 }) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerOAuthProviders>(
@@ -110,7 +118,7 @@ const AuthenticationStep = ({
     }
   )
   const oauthProviders: string[] = data?.viewer?.settings?.oauthProviders || []
-  const hasMediumOAuth = oauthProviders.includes('medium')
+  const hasMediumOAuth = oauthProviders.includes(provider)
 
   if (hasMediumOAuth) {
     setStep('import')
@@ -159,7 +167,7 @@ const AuthenticationStep = ({
             if (windowRef) {
               windowRef.close()
             }
-            setStep('source')
+            setStep('provider')
           }}
         >
           <Translate
@@ -173,7 +181,40 @@ const AuthenticationStep = ({
   )
 }
 
-const ImportStep = ({ setStep }: { setStep: (step: Step) => void }) => {
+const ImportStep = ({
+  setStep,
+  provider
+}: {
+  setStep: (step: Step) => void
+  provider: Provider
+}) => {
+  const [migration] = useMutation<Migration>(MIGRATION)
+
+  const executeMigration = async (event: any) => {
+    event.stopPropagation()
+
+    try {
+      await migration({ variables: { input: { provider } } })
+      setStep('complete')
+    } catch (error) {
+      const errorCode = getErrorCodes(error)[0]
+      const errorMessage = (
+        <Translate
+          zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
+          zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
+        />
+      )
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: errorMessage
+          }
+        })
+      )
+    }
+  }
+
   return (
     <>
       <Modal.Content>
@@ -183,12 +224,7 @@ const ImportStep = ({ setStep }: { setStep: (step: Step) => void }) => {
         />
       </Modal.Content>
       <footer>
-        <Modal.FooterButton
-          width="full"
-          onClick={() => {
-            setStep('complete')
-          }}
-        >
+        <Modal.FooterButton width="full" onClick={executeMigration}>
           <Translate zh_hant="匯入作品" zh_hans="导入作品" />
         </Modal.FooterButton>
       </footer>
@@ -219,24 +255,30 @@ const Complete = ({ close }: { close: () => void }) => {
 }
 
 const MigrationModal: React.FC<ModalInstanceProps> = ({ close, closeable }) => {
-  const [step, setStep] = useState<Step>('source')
-  const [source, setSource] = useState<Source>('medium')
+  const [step, setStep] = useState<Step>('provider')
+  const [provider, setProvider] = useState<Provider>('medium')
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   return (
     <>
-      {step === 'source' && (
+      {step === 'provider' && (
         <SourceStep
           setWindowRef={setWindowRef}
           setStep={setStep}
-          setSource={setSource}
-          source={source}
+          setProvider={setProvider}
+          provider={provider}
         />
       )}
       {step === 'authentication' && (
-        <AuthenticationStep windowRef={windowRef} setStep={setStep} />
+        <AuthenticationStep
+          windowRef={windowRef}
+          setStep={setStep}
+          provider={provider}
+        />
       )}
-      {step === 'import' && <ImportStep setStep={setStep} />}
+      {step === 'import' && (
+        <ImportStep setStep={setStep} provider={provider} />
+      )}
       {step === 'complete' && <Complete close={close} />}
     </>
   )
