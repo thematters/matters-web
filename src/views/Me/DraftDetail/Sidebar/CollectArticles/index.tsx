@@ -12,7 +12,7 @@ import { QueryError, useMutation } from '~/components/GQL'
 import Collapsable from '../Collapsable'
 import styles from './styles.css'
 
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
+import { DropdownDigestArticle } from '~/components/ArticleDigest/Dropdown/__generated__/DropdownDigestArticle'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'

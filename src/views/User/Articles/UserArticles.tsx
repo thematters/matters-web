@@ -126,7 +126,7 @@ const UserArticles = () => {
         <ul className="u-list-border-gap">
           {edges.map(({ node, cursor }, i) => {
             if (
-              node.state !== 'active' &&
+              node.articleState !== 'active' &&
               viewer.id !== node.author.id &&
               viewer.isAdmin
             ) {
@@ -145,11 +145,8 @@ const UserArticles = () => {
               >
                 <ArticleDigest.Feed
                   article={node}
-                  hasBookmark
-                  hasDateTime
                   hasFingerprint
                   hasMoreButton
-                  hasState
                   hasSticky
                 />
               </li>

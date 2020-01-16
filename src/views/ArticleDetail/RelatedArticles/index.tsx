@@ -48,7 +48,7 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
               })
             }
           >
-            <ArticleDigest.Related article={node} hasAuthor hasBookmark />
+            <ArticleDigest.Related article={node} />
           </div>
         ))}
       </div>

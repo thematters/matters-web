@@ -87,11 +87,7 @@ const MeHistory = () => {
               })
             }
           >
-            <ArticleDigest.Feed
-              article={node.article}
-              hasBookmark
-              hasDateTime
-            />
+            <ArticleDigest.Feed article={node.article} />
           </li>
         ))}
       </ul>

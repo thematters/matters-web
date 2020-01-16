@@ -133,7 +133,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
                 })
               }
             >
-              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+              <ArticleDigest.Feed article={node} />
             </li>
           ))}
         </ul>

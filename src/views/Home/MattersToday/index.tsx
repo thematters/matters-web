@@ -50,9 +50,6 @@ const MattersToday = () => {
             type: FEED_TYPE.TODAY
           })
         }
-        hasAuthor
-        hasDateTime
-        hasBookmark
       />
     </>
   )

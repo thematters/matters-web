@@ -6,7 +6,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'
 
-import Actions, { ActionsControls } from '../Actions'
+import FooterActions from '../FooterActions'
 import styles from './styles.css'
 
 import { ResponseDigestArticle } from './__generated__/ResponseDigestArticle'
@@ -26,20 +26,14 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...ResponseDigestActionsArticle
+      ...FooterActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.response}
+    ${FooterActions.fragments.article}
   `
 }
 
-const ResponseDigest = ({
-  article,
-  hasFingerprint,
-  ...actionControls
-}: { article: ResponseDigestArticle } & {
-  hasFingerprint?: boolean
-} & ActionsControls) => {
+const ResponseDigest = ({ article }: { article: ResponseDigestArticle }) => {
   const { author, slug, mediaHash, live } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -76,7 +70,6 @@ const ResponseDigest = ({
           type="collection"
           article={remadeArticle}
           extraContainerClass="no-padding"
-          {...actionControls}
         />
       </div>
 

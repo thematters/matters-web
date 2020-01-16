@@ -15,9 +15,4 @@ header {
 
 .article-title {
   margin: var(--spacing-x-tight) 0;
-
-  & :global(a) {
-    color: var(--color-black);
-    font-weight: var(--font-weight-medium);
-  }
 }

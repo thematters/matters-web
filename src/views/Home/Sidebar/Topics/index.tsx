@@ -73,7 +73,7 @@ const Topics = () => {
                 })
               }
             >
-              <ArticleDigest.Sidebar article={node} hasTopicScore />
+              <ArticleDigest.Sidebar article={node} />
             </li>
           ))}
       </ol>

@@ -193,8 +193,6 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
                 >
                   <ArticleDigest.Feed
                     article={node}
-                    hasDateTime
-                    hasBookmark
                     hasMoreButton
                     inTagDetail
                   />

@@ -24,11 +24,11 @@ const fragments = {
         ...UserDigestMiniUser
       }
       target {
-        ...PlainDigestArticle
+        ...TitleArticle
       }
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigest.Plain.fragments.article}
+    ${ArticleDigest.Title.fragments.article}
   `
 }
 
@@ -58,7 +58,7 @@ const AppreciationReceived = ({
           </header>
         )}
         {isUseContent && content && <h4 className="content">{content}</h4>}
-        {!isUseContent && target && <ArticleDigest.Plain article={target} />}
+        {!isUseContent && target && <ArticleDigest.Title article={target} />}
       </section>
 
       <section className="right">

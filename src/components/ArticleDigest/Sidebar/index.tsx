@@ -7,18 +7,18 @@ import { Title, Translate } from '~/components'
 import { TEXT, UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import Actions, { ActionsControls } from '../Actions'
+import FooterActions from '../FooterActions'
 import styles from './styles.css'
 
 import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 
-type SidebarDigestProps = {
+interface SidebarDigestProps {
   type?: 'collection'
   article: SidebarDigestArticle
   hasCover?: boolean
   disabled?: boolean
   extraContainerClass?: string
-} & ActionsControls
+}
 
 const fragments = {
   article: gql`
@@ -33,9 +33,9 @@ const fragments = {
         userName
       }
       mediaHash
-      ...DigestActionsArticle
+      ...FooterActionsArticle
     }
-    ${Actions.fragments.article}
+    ${FooterActions.fragments.article}
   `
 }
 
@@ -44,10 +44,9 @@ const SidebarDigest = ({
   article,
   hasCover,
   disabled,
-  extraContainerClass,
-  ...actionControls
+  extraContainerClass
 }: SidebarDigestProps) => {
-  const { author, slug, mediaHash, live, state } = article
+  const { author, slug, mediaHash, live, articleState: state } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -102,7 +101,7 @@ const SidebarDigest = ({
               {title}
             </Title>
           </LinkWrapper>
-          <Actions article={article} type="sidebar" {...actionControls} />
+          <FooterActions article={article} />
         </div>
 
         {hasCover && cover && (

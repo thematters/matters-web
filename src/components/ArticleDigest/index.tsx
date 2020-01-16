@@ -1,17 +1,19 @@
-import DropdownDigest from './DropdownDigest'
-import FeatureDigest from './FeatureDigest'
-import FeedDigest from './FeedDigest'
-import PlainDigest from './PlainDigest'
-import RelatedDigest from './RelatedDigest'
-import ResponseDigest from './ResponseDigest'
-import SidebarDigest from './SidebarDigest'
+import Dropdown from './Dropdown'
+import Feature from './Feature'
+import Feed from './Feed'
+import Related from './Related'
+import Response from './Response'
+import Sidebar from './Sidebar'
+import Title from './Title'
 
 export const ArticleDigest = {
-  Dropdown: DropdownDigest,
-  Feature: FeatureDigest,
-  Feed: FeedDigest,
-  Related: RelatedDigest,
-  Response: ResponseDigest,
-  Sidebar: SidebarDigest,
-  Plain: PlainDigest
+  Title,
+  Feed,
+  Related,
+  Dropdown,
+
+  /* TODO: legacy */
+  Feature,
+  Response,
+  Sidebar
 }

@@ -120,7 +120,7 @@ const SearchArticles = ({ q }: { q: string }) => {
                   })
                 }
               >
-                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+                <ArticleDigest.Feed article={node} />
               </li>
             )
         )}

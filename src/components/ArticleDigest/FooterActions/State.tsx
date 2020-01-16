@@ -4,32 +4,20 @@ import { Icon } from '~/components'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 
-import { responseStateIs } from '~/common/utils'
-
 import styles from './styles.css'
 
-import { ResponseStateActionsArticle } from './__generated__/ResponseStateActionsArticle'
 import { StateActionsArticle } from './__generated__/StateActionsArticle'
 
 const fragments = {
   article: gql`
     fragment StateActionsArticle on Article {
-      state
-    }
-  `,
-  response: gql`
-    fragment ResponseStateActionsArticle on Article {
       articleState: state
     }
   `
 }
 
-const State = ({
-  article
-}: {
-  article: StateActionsArticle | ResponseStateActionsArticle
-}) => {
-  if (responseStateIs(article, 'active')) {
+const State = ({ article }: { article: StateActionsArticle }) => {
+  if (article.articleState === 'active') {
     return null
   }
 

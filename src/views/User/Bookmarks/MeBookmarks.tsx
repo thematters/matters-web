@@ -69,7 +69,7 @@ const MeBookmarks = () => {
       <ul className="u-list-border-gap">
         {edges.map(({ node, cursor }) => (
           <li key={cursor}>
-            <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
+            <ArticleDigest.Feed article={node} />
           </li>
         ))}
       </ul>

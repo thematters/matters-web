@@ -7,7 +7,7 @@ import { Label, Title } from '~/components'
 import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
-import Actions, { ActionsControls } from '../Actions'
+import FooterActions from '../FooterActions'
 import styles from './styles.css'
 
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
@@ -25,9 +25,9 @@ const fragments = {
         id
         userName
       }
-      ...DigestActionsArticle
+      ...FooterActionsArticle
     }
-    ${Actions.fragments.article}
+    ${FooterActions.fragments.article}
   `
 }
 
@@ -38,7 +38,7 @@ const FeatureDigest = ({
 }: {
   article: TodayDigestArticle
   onClick?: MouseEventHandler
-} & ActionsControls) => {
+}) => {
   const { cover, author, slug, mediaHash, title, summary } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -86,7 +86,7 @@ const FeatureDigest = ({
               </a>
             </Link>
 
-            <Actions article={article} type="feature" {...actionControls} />
+            <FooterActions article={article} />
           </div>
         </div>
       </div>

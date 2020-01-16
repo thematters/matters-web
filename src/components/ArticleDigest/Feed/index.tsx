@@ -9,42 +9,17 @@ import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT, UrlFragments } from '~/common/enums'
-import { responseStateIs, stripHtml, toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 
-import Actions, { ActionsControls } from '../Actions'
 import DropdownActions from '../DropdownActions'
+import FooterActions from '../FooterActions'
 import styles from './styles.css'
 
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
-import { FolloweeFeedDigestArticle } from './__generated__/FolloweeFeedDigestArticle'
 
 const fragments = {
   article: gql`
     fragment FeedDigestArticle on Article {
-      id
-      title
-      state
-      slug
-      cover
-      summary
-      mediaHash
-      live
-      author {
-        id
-        userName
-        ...UserDigestMiniUser
-      }
-      ...DigestActionsArticle
-      ...FingerprintArticle
-      ...DropdownActionsArticle
-    }
-    ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.article}
-    ${Fingerprint.fragments.article}
-    ${DropdownActions.fragments.article}
-  `,
-  followee: gql`
-    fragment FolloweeFeedDigestArticle on Article {
       id
       title
       articleState: state
@@ -58,14 +33,14 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...ResponseDigestActionsArticle
+      ...FooterActionsArticle
       ...FingerprintArticle
-      ...FolloweeDropdownActionsArticle
+      ...DropdownActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${Actions.fragments.response}
+    ${FooterActions.fragments.article}
     ${Fingerprint.fragments.article}
-    ${DropdownActions.fragments.followee}
+    ${DropdownActions.fragments.article}
   `
 }
 
@@ -75,15 +50,14 @@ const FeedDigest = ({
   hasMoreButton,
   hasSticky,
   inFolloweeFeed,
-  inTagDetail = false,
-  ...actionControls
-}: { article: FeedDigestArticle | FolloweeFeedDigestArticle } & {
+  inTagDetail = false
+}: { article: FeedDigestArticle } & {
   hasFingerprint?: boolean
   hasMoreButton?: boolean
   hasSticky?: boolean
   inFolloweeFeed?: boolean
   inTagDetail?: boolean
-} & ActionsControls) => {
+}) => {
   const { author, slug, mediaHash, summary, live, sticky } = article
 
   if (!author || !author.userName || !slug || !mediaHash) {
@@ -97,7 +71,7 @@ const FeedDigest = ({
     mediaHash,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
-  const isBanned = responseStateIs(article, 'banned')
+  const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const title = isBanned ? (
     <Translate
@@ -170,7 +144,7 @@ const FeedDigest = ({
             <p>{cleanedSummary}</p>
           </LinkWrapper>
 
-          <Actions article={article} type="feed" {...actionControls} />
+          <FooterActions article={article} />
         </div>
 
         {cover && (

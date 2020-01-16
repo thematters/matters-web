@@ -36,7 +36,7 @@ const FOLLOW_FEED = gql`
             node {
               __typename
               ... on Article {
-                ...FolloweeFeedDigestArticle
+                ...FeedDigestArticle
               }
               ... on Comment {
                 ...FollowComment
@@ -47,7 +47,7 @@ const FOLLOW_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.followee}
+  ${ArticleDigest.Feed.fragments.article}
   ${FollowComment.fragments.comment}
 `
 
@@ -104,12 +104,7 @@ const FollowFeed = () => {
             className={node.__typename === 'Article' ? 'article' : 'comment'}
           >
             {node.__typename === 'Article' && (
-              <ArticleDigest.Feed
-                article={node}
-                hasDateTime
-                hasBookmark
-                inFolloweeFeed
-              />
+              <ArticleDigest.Feed article={node} inFolloweeFeed />
             )}
             {node.__typename === 'Comment' && <FollowComment comment={node} />}
           </li>

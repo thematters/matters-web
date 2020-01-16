@@ -23,7 +23,7 @@ const DropdownContent: React.FC<{
   editComment?: () => void
 }> = ({ article, hideDropdown }) => {
   const viewer = useContext(ViewerContext)
-  const isArchived = article.state === 'archived'
+  const isArchived = article.articleState === 'archived'
   const isArticleAuthor = viewer.id === article.author.id
 
   return (
@@ -50,7 +50,7 @@ const MoreButton = ({ article }: { article: MoreButtonArticle }) => {
    * REMOVE this after implement report article
    */
   const viewer = useContext(ViewerContext)
-  const isArchived = article.state === 'archived'
+  const isArchived = article.articleState === 'archived'
   const isArticleAuthor = viewer.id === article.author.id
   if (isArchived || !isArticleAuthor) {
     return null

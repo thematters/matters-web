@@ -1,10 +1,15 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import Link from 'next/link'
 
-import { Card, Comment, Translate, UserDigest } from '~/components'
+import {
+  ArticleDigest,
+  Card,
+  Comment,
+  Translate,
+  UserDigest
+} from '~/components'
 
-import { toCommentPath, toPath } from '~/common/utils'
+import { toCommentPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -20,7 +25,7 @@ const fragments = {
       }
       article {
         id
-        title
+        ...TitleArticle
       }
       ...CreatedAtComment
       ...ContentComment
@@ -28,6 +33,7 @@ const fragments = {
     }
 
     ${UserDigest.Mini.fragments.user}
+    ${ArticleDigest.Title.fragments.article}
     ${Comment.CreatedAt.fragments.comment}
     ${Comment.Content.fragments.comment}
     ${Comment.FooterActions.fragments.comment}
@@ -36,12 +42,6 @@ const fragments = {
 const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
   const { article, author } = comment
 
-  const articlePath = toPath({
-    page: 'articleDetail',
-    userName: article.author.userName || '',
-    slug: article.slug || '',
-    mediaHash: article.mediaHash || ''
-  })
   const commentPath = toCommentPath({ comment })
 
   return (
@@ -63,9 +63,7 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
       </header>
 
       <section className="article-title">
-        <Link {...articlePath}>
-          <a>{article.title}</a>
-        </Link>
+        <ArticleDigest.Title article={article} />
       </section>
 
       <section className="comment-content">

@@ -332,7 +332,7 @@ const LatestResponses = () => {
         {responses.map(response => (
           <li key={response.id}>
             {_has(response, 'title') ? (
-              <ArticleDigest.Response article={response} hasBookmark />
+              <ArticleDigest.Response article={response} />
             ) : (
               <ArticleComment
                 comment={response}

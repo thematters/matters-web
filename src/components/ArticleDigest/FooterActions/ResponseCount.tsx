@@ -5,28 +5,15 @@ import Link from 'next/link'
 import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
-import { analytics, numAbbr, responseStateIs, toPath } from '~/common/utils'
+import { analytics, numAbbr, toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
-import { ResponseActionsResponseCountArticle } from './__generated__/ResponseActionsResponseCountArticle'
 
 const fragments = {
   article: gql`
     fragment ActionsResponseCountArticle on Article {
-      id
-      slug
-      state
-      mediaHash
-      responseCount
-      author {
-        userName
-      }
-    }
-  `,
-  response: gql`
-    fragment ResponseActionsResponseCountArticle on Article {
       id
       slug
       articleState: state
@@ -43,7 +30,7 @@ const ResponseCount = ({
   article,
   size = 'sm'
 }: {
-  article: ActionsResponseCountArticle | ResponseActionsResponseCountArticle
+  article: ActionsResponseCountArticle
   size?: 'sm' | 'xs'
 }) => {
   const { slug, mediaHash, author } = article
@@ -59,7 +46,7 @@ const ResponseCount = ({
     mediaHash,
     fragment: UrlFragments.COMMENTS
   })
-  const isBanned = responseStateIs(article, 'banned')
+  const isBanned = article.articleState === 'banned'
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span className="response-count">

@@ -98,12 +98,7 @@ const CollectionList = ({
               })
             }
           >
-            <ArticleDigest.Sidebar
-              type="collection"
-              article={node}
-              hasCover
-              hasAuthor
-            />
+            <ArticleDigest.Sidebar type="collection" article={node} hasCover />
           </li>
         ))}
       </ul>

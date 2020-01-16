@@ -12,7 +12,7 @@ import {
   toPath
 } from '~/common/utils'
 
-import Actions, { ActionsControls } from '../Actions'
+import FooterActions from '../FooterActions'
 import styles from './styles.css'
 
 import { RelatedDigestArticle } from './__generated__/RelatedDigestArticle'
@@ -34,9 +34,9 @@ const fragments = {
         displayName
       }
       subscribed
-      ...DigestActionsArticle
+      ...FooterActionsArticle
     }
-    ${Actions.fragments.article}
+    ${FooterActions.fragments.article}
   `
 }
 
@@ -45,7 +45,7 @@ const RelatedDigest = ({
   ...actionControls
 }: {
   article: RelatedDigestArticle
-} & ActionsControls) => {
+}) => {
   const { author, slug, summary, mediaHash, live, state } = article
   if (!author || !author.userName || !slug || !mediaHash) {
     return null
@@ -110,7 +110,7 @@ const RelatedDigest = ({
         )}
 
         <div className="actions">
-          <Actions article={article} type="related" {...actionControls} />
+          <FooterActions article={article} />
         </div>
       </div>
 

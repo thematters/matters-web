@@ -91,12 +91,7 @@ const Topics = () => {
               })
             }
           >
-            <ArticleDigest.Feed
-              article={node}
-              hasDateTime
-              hasBookmark
-              hasTopicScore
-            />
+            <ArticleDigest.Feed article={node} />
           </li>
         ))}
       </ul>
