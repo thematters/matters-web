@@ -200,7 +200,9 @@ const ImportStep = ({
     setExecute(true)
 
     try {
-      const result = await migration({ variables: { input: { provider: 'medium' } } })
+      const result = await migration({
+        variables: { input: { provider } }
+      })
       if (result) {
         setStep('complete')
       }
