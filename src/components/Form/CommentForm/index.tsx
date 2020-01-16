@@ -243,8 +243,10 @@ const CommentFormWrap = (props: CommentFormProps) => {
   if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
     return (
       <section className="blocked">
-        <Translate zh_hant="你還不能參與討論" zh_hans="你还不能参与讨论" />
-
+        <Translate
+          zh_hant="新手小貼士：發佈作品收穫讚賞及瀏覽他人作品都能幫你開啓評論權限喔！"
+          zh_hans="新手小贴士：发布作品收获赞赏及浏览他人作品都能帮你开启评论权限喔！"
+        />
         <style jsx>{styles}</style>
       </section>
     )
