@@ -1,52 +1,89 @@
 .container {
-  @mixin border-bottom-grey;
-  @mixin flex-start-space-between;
-  padding-bottom: var(--spacing-base);
-  margin-bottom: var(--spacing-base);
-  font-size: 0;
-}
-
-.content {
-  flex-grow: 1;
-  margin-left: var(--spacing-base);
-}
-
-.header-container {
-  @mixin flex-start-space-between;
-}
-.header-left {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
+
+  position: relative;
 }
 
-.name {
-  padding-right: var(--spacing-base);
+.avatar {
+  position: relative;
+  margin-right: var(--spacing-x-tight);
 
-  color: var(--color-black);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.25;
+  font-size: 0;
 
-  &.sm {
-    font-size: var(--font-size-md-s);
-    line-height: 1.33333333;
+  & .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }
 
-.name-shrink {
-  padding-right: 0.56rem;
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  & :global(* + *) {
+    margin-left: var(--spacing-xx-tight);
+  }
+}
+
+.name {
+  font-weight: var(--font-weight-medium);
 }
 
 .description {
-  padding-top: var(--spacing-xxx-tight);
-
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm-s);
 
   display: -webkit-box;
   -webkit-line-clamp: 1;
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.extra-button {
+  display: flex;
+  align-items: flex-start;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.size-sm {
+  & .content {
+    height: 2rem;
+    padding-right: 4rem; /* width of extra button */
+  }
+
+  & .name,
+  & .description {
+    line-height: 1rem; /* 16px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-sm);
+  }
+
+  & .extra-button {
+    align-items: middle;
+  }
+}
+.size-lg {
+  & .content {
+    height: 3rem;
+  }
+
+  & .name,
+  & .description {
+    line-height: 1.5rem; /* 24px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-md-s);
+  }
 }

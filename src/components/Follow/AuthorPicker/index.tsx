@@ -2,9 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { PageHeader, ShuffleButton, Spinner, Translate } from '~/components'
+import {
+  PageHeader,
+  ShuffleButton,
+  Spinner,
+  Translate,
+  UserDigest
+} from '~/components'
 import { QueryError } from '~/components/GQL'
-import Rich from '~/components/UserDigest/Rich'
 
 import { numFormat } from '~/common/utils'
 
@@ -29,7 +34,7 @@ const AUTHOR_PICKER = gql`
       }
     }
   }
-  ${Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const AuthorPicker = ({
@@ -74,10 +79,10 @@ const AuthorPicker = ({
       {error && <QueryError error={error} />}
 
       {!loading && (
-        <ul>
+        <ul className="u-list-gap">
           {edges.map(({ node, cursor }) => (
             <li key={cursor}>
-              <Rich user={node} nameSize="sm" readonly={readonly} />
+              <UserDigest.Rich user={node} hasFollow />
             </li>
           ))}
         </ul>

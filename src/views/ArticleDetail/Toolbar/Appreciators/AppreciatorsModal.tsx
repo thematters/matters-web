@@ -105,7 +105,7 @@ const AppreciatorsModal = () => {
       />
       <Modal.Content spacing="none" layout="full-width">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <ul className="modal-appreciators-list">
+          <ul className="modal-appreciators-list u-list-gap">
             {edges.map(
               ({ node, cursor }, i) =>
                 node.sender && (
@@ -121,7 +121,12 @@ const AppreciatorsModal = () => {
                   >
                     <UserDigest.Rich
                       user={node.sender}
-                      appreciations={node.amount}
+                      avatarBadge={
+                        <span className="appreciation-amount">
+                          {node.amount}
+                        </span>
+                      }
+                      hasFollow
                     />
                   </li>
                 )

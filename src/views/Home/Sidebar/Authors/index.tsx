@@ -79,7 +79,7 @@ const Authors = () => {
       {loading && <Spinner />}
 
       {!loading && (
-        <ul>
+        <ul className="u-list-gap">
           {edges.map(({ node, cursor }, i) => (
             <li
               key={cursor}
@@ -90,7 +90,7 @@ const Authors = () => {
                 })
               }
             >
-              <UserDigest.Rich user={node} nameSize="sm" />
+              <UserDigest.Rich user={node} hasFollow />
             </li>
           ))}
         </ul>

@@ -95,7 +95,7 @@ const UserFollowers = () => {
         }}
       />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <ul className="u-list-gap">
           {edges.map(({ node, cursor }, i) => (
             <li
               key={cursor}
@@ -107,7 +107,7 @@ const UserFollowers = () => {
                 })
               }
             >
-              <UserDigest.Rich user={node} nameSize="sm" />
+              <UserDigest.Rich user={node} hasFollow />
             </li>
           ))}
         </ul>

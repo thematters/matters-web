@@ -2,13 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, TextIcon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
 
-import { TEXT } from '~/common/enums'
-import { numAbbr, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -22,6 +20,16 @@ import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
  *
  *   <UserDigest.Rich user={user} />
  */
+
+interface RichProps {
+  user: UserDigestRichUser
+
+  size?: 'sm' | 'lg'
+  avatarBadge?: React.ReactNode
+
+  hasFollow?: boolean
+  hasUnblock?: boolean
+}
 
 const fragments = {
   user: gql`
@@ -47,103 +55,48 @@ const fragments = {
   `
 }
 
-const appreciationIconStyle = { marginRight: '0.5rem' }
+const Rich = ({
+  user,
 
-const Appreciation = ({ sum }: { sum?: number }) => {
-  if (!sum) {
-    return null
-  }
-  const abbrSum = numAbbr(sum)
-  return (
-    <TextIcon
-      icon={<Icon.Like />}
-      color="green"
-      weight="md"
-      text={abbrSum}
-      spacing="xtight"
-      style={appreciationIconStyle}
-    />
-  )
-}
+  size = 'lg',
+  avatarBadge,
 
-const Rich = (props: {
-  user: UserDigestRichUser
-  nameSize?: 'sm'
-  readonly?: boolean
-  appreciations?: number
-  showUnblock?: boolean
-}) => {
-  const { user, nameSize = '', readonly, appreciations, showUnblock } = props
-  const showAppreciations = appreciations && appreciations > 0
-  const nameSizeClasses = classNames({
-    name: true,
-    [nameSize]: !!nameSize,
-    'name-shrink': showAppreciations
+  hasFollow,
+  hasUnblock
+}: RichProps) => {
+  const path = toPath({
+    page: 'userProfile',
+    userName: user.userName || ''
   })
-  const path = readonly
-    ? { href: '' }
-    : toPath({
-        page: 'userProfile',
-        userName: user.userName || ''
-      })
-  const isArchived = user?.status?.state === 'archived'
-
-  if (isArchived) {
-    return (
-      <section className="container">
-        <Avatar />
-
-        <section className="content">
-          <header className="header-container">
-            <div className="header-left">
-              <span className={nameSizeClasses}>
-                <Translate
-                  zh_hant={TEXT.zh_hant.accountArchived}
-                  zh_hans={TEXT.zh_hans.accountArchived}
-                />
-              </span>
-            </div>
-          </header>
-        </section>
-
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
+  const containerClass = classNames({
+    container: true,
+    [`size-${size}`]: !!size
+  })
+  // const isArchived = user?.status?.state === 'archived'
 
   return (
-    <section className="container">
+    <section className={containerClass}>
       <Link {...path}>
-        <a>
-          <Avatar user={user} />
+        <a className="avatar">
+          <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+          {avatarBadge && <span className="badge">{avatarBadge}</span>}
         </a>
       </Link>
 
       <section className="content">
-        <header className="header-container">
-          <div className="header-left">
-            <Link {...path}>
-              <a>
-                <span className={nameSizeClasses}>{user.displayName}</span>
-              </a>
-            </Link>
-            {showAppreciations && <Appreciation sum={appreciations} />}
-            {!showUnblock && <FollowButton.State user={user} />}
-          </div>
-
-          <div className="header-right">
-            {showUnblock && <UnblockButton user={user} />}
-            {!showUnblock && <FollowButton user={user} />}
-          </div>
+        <header>
+          <Link {...path}>
+            <a className="name">{user.displayName}</a>
+          </Link>
+          <FollowButton.State user={user} />
         </header>
 
-        {user.info.description && (
-          <Link {...path}>
-            <a>
-              <p className="description">{user.info.description}</p>
-            </a>
-          </Link>
-        )}
+        <p className="description">{user.info.description}</p>
+      </section>
+
+      <section className="extra-button">
+        {hasUnblock && <UnblockButton user={user} />}
+        {hasFollow && <FollowButton user={user} />}
       </section>
 
       <style jsx>{styles}</style>

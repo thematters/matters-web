@@ -87,7 +87,7 @@ const SettingsBlocked = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <ul className="u-list-gap">
         {filteredUsers.map(({ node, cursor }, i) => (
           <li
             key={cursor}
@@ -98,7 +98,7 @@ const SettingsBlocked = () => {
               })
             }
           >
-            <UserDigest.Rich user={node} showUnblock />
+            <UserDigest.Rich user={node} hasUnblock />
           </li>
         ))}
       </ul>

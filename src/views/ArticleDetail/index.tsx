@@ -226,7 +226,7 @@ const ArticleDetail = ({
         <State article={article} />
 
         <section className="author">
-          <UserDigest.Rich user={article.author} />
+          <UserDigest.Rich user={article.author} hasFollow />
         </section>
 
         <section className="title">

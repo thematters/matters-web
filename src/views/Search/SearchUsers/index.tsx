@@ -114,7 +114,7 @@ const SearchUser = ({
         loadMore={loadMore}
       >
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
-        <ul>
+        <ul className="u-list-gap">
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'User' && (
@@ -128,7 +128,7 @@ const SearchUser = ({
                     })
                   }
                 >
-                  <UserDigest.Rich user={node} />
+                  <UserDigest.Rich user={node} hasFollow />
                 </li>
               )
           )}

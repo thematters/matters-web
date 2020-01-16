@@ -18,3 +18,13 @@
     }
   }
 }
+
+.u-list-gap {
+  & > li {
+    margin: var(--spacing-loose) 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
