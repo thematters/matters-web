@@ -33,20 +33,13 @@ const ResponseCount = ({
   article: ActionsResponseCountArticle
   size?: 'sm' | 'xs'
 }) => {
-  const { slug, mediaHash, author } = article
-
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
-
+  const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
+    article,
     fragment: UrlFragments.COMMENTS
   })
-  const isBanned = article.articleState === 'banned'
+  const isBanned = state === 'banned'
   const LinkWrapper: React.FC = ({ children }) =>
     isBanned ? (
       <span className="response-count">

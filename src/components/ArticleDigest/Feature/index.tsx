@@ -33,23 +33,15 @@ const fragments = {
 
 const FeatureDigest = ({
   article,
-  onClick,
-  ...actionControls
+  onClick
 }: {
   article: TodayDigestArticle
   onClick?: MouseEventHandler
 }) => {
-  const { cover, author, slug, mediaHash, title, summary } = article
-
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
-
+  const { cover, title, summary } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash
+    article
   })
 
   return (

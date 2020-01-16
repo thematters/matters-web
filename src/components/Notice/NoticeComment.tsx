@@ -39,13 +39,9 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     return null
   }
 
-  const parentId = comment?.parentComment?.id
   const path = toPath({
-    page: 'articleDetail',
-    userName: comment.article.author.userName || '',
-    slug: comment.article.slug || '',
-    mediaHash: comment.article.mediaHash || '',
-    fragment: parentId ? `${parentId}-${comment.id}` : comment.id
+    page: 'commentDetail',
+    comment
   })
   const content = makeSummary(comment.content || '', 70)
 

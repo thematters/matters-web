@@ -12,9 +12,7 @@ const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
 
   const path = toPath({
     page: 'articleDetail',
-    userName: article.author.userName || '',
-    slug: article.slug || '',
-    mediaHash: article.mediaHash || ''
+    article
   })
 
   return (

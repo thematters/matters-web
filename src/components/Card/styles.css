@@ -1,11 +1,15 @@
 .card {
+  @mixin all-transition;
   cursor: pointer;
   outline: none;
+
+  &:hover,
+  &:focus {
+    background: var(--color-green-lighter);
+  }
 }
 
 .bg-grey-lighter {
-  @mixin all-transition;
-
   background: var(--color-grey-lighter);
   border-radius: 0.25rem;
 

@@ -159,11 +159,9 @@ const UserComments = ({ user }: UserIdUser) => {
       <ul className="article-list">
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
-          const articlePath = toPath({
+          const path = toPath({
             page: 'articleDetail',
-            userName: articleEdge.node.author.userName || '',
-            slug: articleEdge.node.slug,
-            mediaHash: articleEdge.node.mediaHash || ''
+            article: articleEdge.node
           })
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
@@ -175,7 +173,7 @@ const UserComments = ({ user }: UserIdUser) => {
 
           return (
             <li key={articleEdge.cursor} className="article-item">
-              <Link {...articlePath}>
+              <Link {...path}>
                 <a>
                   <h3>
                     {articleEdge.node.title}

@@ -43,17 +43,11 @@ const DropdownDigest = ({
   disabled,
   onClick
 }: DropdownDigestProps & { onClick?: MouseEventHandler }) => {
-  const { author, slug, mediaHash, state } = article
-
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
+  const { author, state } = article
 
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash
+    article
   })
   const conatinerClass = classNames({
     container: true,

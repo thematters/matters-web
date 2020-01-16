@@ -1,15 +1,17 @@
 import gql from 'graphql-tag'
 
 import { Icon } from '~/components'
+import { Card } from '~/components/Card'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'
 
-import { stripHtml } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
 import ArticleDigestTitle from '../Title'
+import CreatedAt from './CreatedAt'
 import styles from './styles.css'
 
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
@@ -26,19 +28,25 @@ const fragments = {
   article: gql`
     fragment FeedDigestArticle on Article {
       id
+      title
+      slug
+      mediaHash
       articleState: state
       cover
       summary
       live
       author {
         id
+        userName
         ...UserDigestMiniUser
       }
+      ...CreatedAtArticle
       ...TitleArticle
       ...FooterActionsArticle
       ...DropdownActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
+    ${CreatedAt.fragments.article}
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
@@ -56,9 +64,13 @@ const FeedDigest = ({
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const path = toPath({
+    page: 'articleDetail',
+    article
+  })
 
   return (
-    <article>
+    <Card {...path}>
       {hasSticky && sticky && (
         <section className="sticky">
           <TextIcon icon={<Icon.Sticky />} size="sm" color="grey" weight="md">
@@ -79,7 +91,7 @@ const FeedDigest = ({
 
         <section className="right">
           {live && <Icon.Live />}
-          <DropdownActions article={article} inTagDetail={inTagDetail} />
+          <CreatedAt article={article} />
         </section>
       </header>
 
@@ -101,7 +113,7 @@ const FeedDigest = ({
       <FooterActions article={article} />
 
       <style jsx>{styles}</style>
-    </article>
+    </Card>
   )
 }
 

@@ -41,13 +41,10 @@ const Title = ({
   textWeight = 'md',
   is = 'h2'
 }: TitleProps) => {
-  const { author, mediaHash, slug, articleState: state } = article
-
+  const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName || '',
-    slug: slug || '',
-    mediaHash: mediaHash || ''
+    article
   })
   const isBanned = state === 'banned'
   const title = isBanned ? (

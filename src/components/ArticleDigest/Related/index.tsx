@@ -40,22 +40,11 @@ const fragments = {
   `
 }
 
-const RelatedDigest = ({
-  article,
-  ...actionControls
-}: {
-  article: RelatedDigestArticle
-}) => {
-  const { author, slug, summary, mediaHash, live, state } = article
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
-
+const RelatedDigest = ({ article }: { article: RelatedDigestArticle }) => {
+  const { summary, state, live } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
+    article,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
 

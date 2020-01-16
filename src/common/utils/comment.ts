@@ -1,7 +1,5 @@
 import _get from 'lodash/get'
 
-import { toPath } from './route'
-
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
@@ -42,35 +40,3 @@ export const filterComment = (comment: Comment) => {
 
 export const filterComments = (comments: Comment[]) =>
   comments.filter(filterComment)
-
-export const toCommentPath = ({
-  comment
-}: {
-  comment: {
-    id: string
-    article: {
-      slug: string
-      mediaHash: string | null
-      author: {
-        userName: string | null
-      }
-    }
-    parentComment: {
-      id: string
-    } | null
-  }
-}) => {
-  const { parentComment, id } = comment
-  const { slug, mediaHash, author } = comment.article
-  const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
-
-  return author.userName && mediaHash
-    ? toPath({
-        page: 'articleDetail',
-        userName: author.userName,
-        slug,
-        mediaHash,
-        fragment
-      })
-    : { href: '', as: '' }
-}

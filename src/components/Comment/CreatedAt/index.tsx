@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { DateTime } from '~/components'
 
-import { toCommentPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import { CreatedAtComment } from './__generated__/CreatedAtComment'
 
@@ -36,11 +36,11 @@ const fragments = {
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const commentPath = toCommentPath({ comment })
+  const path = toPath({ page: 'commentDetail', comment })
 
   if (hasLink) {
     return (
-      <Link {...commentPath}>
+      <Link {...path}>
         <a>
           <DateTime date={comment.createdAt} />
         </a>

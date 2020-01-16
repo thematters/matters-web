@@ -9,7 +9,7 @@ import {
   UserDigest
 } from '~/components'
 
-import { toCommentPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -41,8 +41,7 @@ const fragments = {
 }
 const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
   const { article, author } = comment
-
-  const commentPath = toCommentPath({ comment })
+  const path = toPath({ page: 'commentDetail', comment })
 
   return (
     <article>
@@ -68,7 +67,7 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
 
       <section className="comment-content">
         <Card
-          {...commentPath}
+          {...path}
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
           textSize="md-s"

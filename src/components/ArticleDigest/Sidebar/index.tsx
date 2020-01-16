@@ -46,17 +46,10 @@ const SidebarDigest = ({
   disabled,
   extraContainerClass
 }: SidebarDigestProps) => {
-  const { author, slug, mediaHash, live, articleState: state } = article
-
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
-
+  const { articleState: state, live } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
+    article,
     fragment: live ? UrlFragments.COMMENTS : ''
   })
   const containerClasses = classNames({

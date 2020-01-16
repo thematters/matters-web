@@ -13,7 +13,7 @@ interface CardProps {
   textSize?: 'md-s'
 
   href: string
-  as?: string
+  as: string
 }
 
 export const Card: React.FC<CardProps> = ({

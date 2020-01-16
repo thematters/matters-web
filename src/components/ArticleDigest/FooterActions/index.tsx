@@ -37,12 +37,10 @@ const fragments = {
 }
 
 const FooterActions = ({ article }: FooterActionsProps) => {
-  const { title, author, slug, mediaHash } = article
+  const { title } = article
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName || '',
-    slug: slug || '',
-    mediaHash: mediaHash || ''
+    article
   })
 
   return (
