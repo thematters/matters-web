@@ -18,7 +18,6 @@ import {
 } from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareModal from '~/components/Button/Share/ShareModal'
 import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -310,7 +309,6 @@ const ArticleDetail = ({
         {/* Modals */}
         <AppreciatorsModal />
         <CivicLikerModal />
-        <ShareModal />
       </Block>
 
       <style jsx>{styles}</style>

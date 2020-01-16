@@ -1,98 +1,38 @@
-:root {
-  --digest-feed-cover-width: 140px;
-  --digest-feed-cover-height: 77px;
-  --digest-feed-cover-width-sm: 100px;
-  --digest-feed-cover-height-sm: 70px;
-}
-
-.header {
+header {
   @mixin flex-center-space-between;
-  margin-bottom: var(--spacing-x-tight);
+
+  font-size: 0;
 }
 
-.content {
-  position: relative;
-}
-
-.title {
-  padding-right: calc(var(--digest-feed-cover-width-sm) + 1rem);
-  min-height: var(--digest-feed-cover-height-sm);
-
-  @media (--sm-up) {
-    padding-right: calc(var(--digest-feed-cover-width) + 3rem);
-    min-height: auto;
-  }
+.title,
+.cover {
+  margin: var(--spacing-x-tight) 0;
 }
 
 .description {
-  margin-top: var(--spacing-x-tight);
-  padding-right: 0;
+  margin: var(--spacing-x-tight) 0 var(--spacing-base);
 
   color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
-  line-height: 1.71428571;
-
-  @media (--sm-up) {
-    padding-right: calc(var(--digest-feed-cover-width) + 3rem);
-  }
-
-  & :global(.actions > *) {
-    margin-top: var(--spacing-base);
-  }
+  font-size: var(--font-size-md-s);
 }
 
 .cover {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  width: var(--digest-feed-cover-width-sm);
   background-color: var(--color-grey-lighter);
+  border-radius: 4px;
 
   &::after {
     content: '';
     display: block;
-    padding-bottom: 70%;
+    padding-bottom: 55.98%; /* 192/343 */
   }
 
   @media (--sm-up) {
-    width: var(--digest-feed-cover-width);
-
     &::after {
-      padding-bottom: 55%;
+      padding-bottom: 48.78%; /* 320/656 */
     }
-  }
-}
-
-/* no cover */
-.content.no-cover {
-  & .title,
-  & .description {
-    padding-right: 0;
-
-    @media (--sm-up) {
-      padding-right: 5.875rem;
-    }
-  }
-
-  & .title {
-    min-height: auto;
-  }
-
-  & .description {
-    margin-top: var(--spacing-x-tight);
   }
 }
 
 .sticky {
   margin-bottom: var(--spacing-base);
-}
-
-.published-description {
-  flex-shrink: 0;
-  margin: 0 var(--spacing-x-tight);
-
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  line-height: 1;
 }

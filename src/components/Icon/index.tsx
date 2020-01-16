@@ -81,6 +81,7 @@ import { ReactComponent as ShareEmail } from '~/static/icons/share-email.svg'
 import { ReactComponent as ShareFacebook } from '~/static/icons/share-facebook.svg'
 import { ReactComponent as ShareLine } from '~/static/icons/share-line.svg'
 import { ReactComponent as ShareLink } from '~/static/icons/share-link.svg'
+import { ReactComponent as ShareSmall } from '~/static/icons/share-small.svg'
 import { ReactComponent as ShareTelegram } from '~/static/icons/share-telegram.svg'
 import { ReactComponent as ShareTwitter } from '~/static/icons/share-twitter.svg'
 import { ReactComponent as ShareWeChat } from '~/static/icons/share-wechat.svg'
@@ -236,6 +237,7 @@ export const Icon = {
   SeedBadge: withIcon(SeedBadge),
   Settings: withIcon(Settings),
   Share: withIcon(Share),
+  ShareSmall: withIcon(ShareSmall),
   ShareDouban: withIcon(ShareDouban),
   ShareEmail: withIcon(ShareEmail),
   ShareFacebook: withIcon(ShareFacebook),

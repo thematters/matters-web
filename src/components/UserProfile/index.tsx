@@ -17,7 +17,6 @@ import {
 } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import ShareButton from '~/components/Button/Share'
-import ShareModal from '~/components/Button/Share/ShareModal'
 import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
@@ -203,7 +202,7 @@ const BaseUserProfile = () => {
 
                   <span className="u-sm-up-hide">
                     <DropdownActions user={user} />
-                    <ShareButton />
+                    <ShareButton size="md" />
                   </span>
                 </section>
               )}
@@ -259,7 +258,7 @@ const BaseUserProfile = () => {
 
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     {!isMe && <DropdownActions user={user} />}
-                    <ShareButton />
+                    <ShareButton size="md" />
                   </span>
                 </section>
               </header>
@@ -308,6 +307,5 @@ const BaseUserProfile = () => {
 export const UserProfile = () => (
   <>
     <BaseUserProfile />
-    <ShareModal />
   </>
 )

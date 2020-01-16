@@ -51,7 +51,7 @@ const Toolbar = ({
           <AppreciationButton article={article} />
           <ResponseButton article={article} textPlacement="bottom" />
           <BookmarkButton article={article} size="md" />
-          <ShareButton />
+          <ShareButton size="md" />
         </div>
         <style jsx>{styles}</style>
       </section>
@@ -77,7 +77,7 @@ const Toolbar = ({
         <ResponseButton article={article} />
         {!fixed && <ExtendButton article={article} />}
         <BookmarkButton article={article} size="md" />
-        <ShareButton />
+        <ShareButton size="md" />
         <MoreButton article={article} />
       </section>
 

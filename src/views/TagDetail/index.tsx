@@ -191,11 +191,7 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  <ArticleDigest.Feed
-                    article={node}
-                    hasMoreButton
-                    inTagDetail
-                  />
+                  <ArticleDigest.Feed article={node} inTagDetail />
                 </li>
               ))}
             </ul>

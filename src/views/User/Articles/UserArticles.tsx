@@ -143,12 +143,7 @@ const UserArticles = () => {
                   })
                 }
               >
-                <ArticleDigest.Feed
-                  article={node}
-                  hasFingerprint
-                  hasMoreButton
-                  hasSticky
-                />
+                <ArticleDigest.Feed article={node} hasSticky />
               </li>
             )
           })}

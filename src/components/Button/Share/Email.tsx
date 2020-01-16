@@ -5,24 +5,22 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
 
-const Email = () => (
+const Email = ({ title, link }: { title: string; link: string }) => (
   <button
     type="button"
     onClick={() => {
-      const url = window.location.href
-      const text = window.document.title
       const description = dom
         .$('meta[name="description"]')
         .getAttribute('content')
       const shareUrl =
         'mailto:?' +
         queryString.stringify({
-          subject: text,
-          body: `${description}\n\n${url}`
+          subject: title,
+          body: `${description}\n\n${link}`
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.EMAIL,
-        url
+        url: link
       })
       return (window.location.href = shareUrl)
     }}

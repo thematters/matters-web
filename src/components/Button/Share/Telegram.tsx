@@ -5,21 +5,19 @@ import { Icon, TextIcon } from '~/components'
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-const Telegram = () => (
+const Telegram = ({ title, link }: { title: string; link: string }) => (
   <button
     type="button"
     onClick={() => {
-      const url = window.location.href
-      const text = window.document.title
       const shareUrl =
         'https://telegram.me/share?' +
         queryString.stringify({
-          url,
-          text
+          url: link,
+          text: title
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.TELEGRAM,
-        url
+        url: link
       })
       return window.open(shareUrl, 'Share to Telegram')
     }}

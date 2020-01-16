@@ -104,7 +104,7 @@ const FollowFeed = () => {
             className={node.__typename === 'Article' ? 'article' : 'comment'}
           >
             {node.__typename === 'Article' && (
-              <ArticleDigest.Feed article={node} inFolloweeFeed />
+              <ArticleDigest.Feed article={node} />
             )}
             {node.__typename === 'Comment' && <FollowComment comment={node} />}
           </li>
