@@ -5,7 +5,9 @@ import Link from 'next/link'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
+import { Translate } from '~/components/Language'
 
+import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -72,7 +74,30 @@ const Rich = ({
     container: true,
     [`size-${size}`]: !!size
   })
-  // const isArchived = user?.status?.state === 'archived'
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <section className={containerClass}>
+        <span className="avatar">
+          <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+        </span>
+
+        <section className="content">
+          <header>
+            <span className="name">
+              <Translate
+                zh_hant={TEXT.zh_hant.accountArchived}
+                zh_hans={TEXT.zh_hans.accountArchived}
+              />
+            </span>
+          </header>
+        </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
 
   return (
     <section className={containerClass}>
