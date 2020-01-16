@@ -23,10 +23,11 @@ const ME_FOLLOW = gql`
   query MeFollow {
     viewer {
       id
-      ...FolloweeCountUser
+      followees(input: { first: 0 }) {
+        totalCount
+      }
     }
   }
-  ${PickAuthors.fragments.user}
 `
 
 const Follow = () => {
@@ -56,7 +57,7 @@ const Follow = () => {
   const followeeCount = data?.viewer?.followees.totalCount || 0
 
   if (followeeCount < 5) {
-    return <PickAuthors viewer={data.viewer} />
+    return <PickAuthors />
   } else {
     return <FollowFeed />
   }

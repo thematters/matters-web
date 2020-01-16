@@ -56,7 +56,7 @@ const fragments = {
       }
       createdAt
       ...AppreciationArticle
-      ...ActionsResponseCountArticle
+      ...ResponseActionsResponseCountArticle
       ...BookmarkArticle
       ...TopicScoreArticle
       ...ResponseStateActionsArticle

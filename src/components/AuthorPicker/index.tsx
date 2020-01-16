@@ -16,12 +16,14 @@ import { numFormat } from '~/common/utils'
 import styles from './styles.css'
 
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
-import { FolloweeCountUser } from './__generated__/FolloweeCountUser'
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker {
     viewer {
       id
+      followees(input: { first: 0 }) {
+        totalCount
+      }
       recommendation {
         authors(input: { first: 5, filter: { random: true } }) {
           edges {
@@ -37,16 +39,12 @@ const AUTHOR_PICKER = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-const AuthorPicker = ({
-  viewer,
+export const AuthorPicker = ({
   title,
-  titleIs,
-  readonly
+  titleIs
 }: {
-  viewer: FolloweeCountUser
   title: React.ReactNode
   titleIs?: string
-  readonly?: boolean
 }) => {
   const containerStyle = classNames({
     'sm-size-header': titleIs === 'span'
@@ -59,7 +57,7 @@ const AuthorPicker = ({
     }
   )
   const edges = data?.viewer?.recommendation.authors.edges || []
-  const followeeCount = viewer.followees.totalCount || 0
+  const followeeCount = data?.viewer?.followees.totalCount || 0
 
   return (
     <div className={containerStyle}>
@@ -92,15 +90,3 @@ const AuthorPicker = ({
     </div>
   )
 }
-
-AuthorPicker.fragments = {
-  user: gql`
-    fragment FolloweeCountUser on User {
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  `
-}
-
-export default AuthorPicker
