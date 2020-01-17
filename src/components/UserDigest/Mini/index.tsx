@@ -103,7 +103,7 @@ const Mini = ({
 
   return (
     <Link {...path}>
-      <a className={containerClass}>
+      <a className={containerClass} onClick={e => e.stopPropagation()}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
         <span className={nameClass}>

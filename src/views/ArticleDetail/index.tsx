@@ -279,7 +279,7 @@ const ArticleDetail = ({
       </Block>
 
       <Waypoint onPositionChange={handleWall}>
-        <section className="l-col-4 l-col-md-8 l-col-lg-12">
+        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <RelatedArticles article={article} />
         </section>
       </Waypoint>

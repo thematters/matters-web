@@ -6,10 +6,10 @@
 .card:not(.disable) {
   cursor: pointer;
 
-  &:hover,
+  /* &:hover,
   &:focus {
     background: var(--color-green-lighter);
-  }
+  } */
 }
 
 .bg-grey-lighter:not(.disable) {

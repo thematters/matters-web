@@ -30,6 +30,11 @@
 .displayname {
   color: var(--color-black);
   line-height: 1;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 .username {
   margin-left: var(--spacing-xx-tight);
