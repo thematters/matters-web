@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Label, Placeholder, Translate } from '~/components'
+import { Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import SidebarHeader from '../SidebarHeader'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -41,12 +43,8 @@ const ICYMI = () => {
   }
 
   return (
-    <>
-      <header>
-        <Label>
-          <Translate zh_hant="不要錯過" zh_hans="不要错过" />
-        </Label>
-      </header>
+    <section>
+      <SidebarHeader type="icymi" />
 
       <ul>
         {edges.map(({ node, cursor }, i) => (
@@ -63,7 +61,7 @@ const ICYMI = () => {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   )
 }
 

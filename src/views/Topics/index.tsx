@@ -83,16 +83,16 @@ const Topics = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.ALL_TOPICS,
-                location: i
-              })
-            }
-            key={cursor}
-          >
-            <ArticleDigest.Feed article={node} />
+          <List.Item key={cursor}>
+            <ArticleDigest.Feed
+              article={node}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_TOPICS,
+                  location: i
+                })
+              }
+            />
           </List.Item>
         ))}
       </List>

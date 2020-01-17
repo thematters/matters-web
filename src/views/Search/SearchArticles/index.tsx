@@ -111,17 +111,17 @@ const SearchArticles = ({ q }: { q: string }) => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
-              <List.Item
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.SEARCH_ARTICLE,
-                    location: i,
-                    entrance: q
-                  })
-                }
-                key={cursor}
-              >
-                <ArticleDigest.Feed article={node} />
+              <List.Item key={cursor}>
+                <ArticleDigest.Feed
+                  article={node}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.SEARCH_ARTICLE,
+                      location: i,
+                      entrance: q
+                    })
+                  }
+                />
               </List.Item>
             )
         )}

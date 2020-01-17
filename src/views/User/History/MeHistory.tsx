@@ -78,16 +78,16 @@ const MeHistory = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.READ_HISTORY,
-                location: i
-              })
-            }
-            key={cursor}
-          >
-            <ArticleDigest.Feed article={node.article} />
+          <List.Item key={cursor}>
+            <ArticleDigest.Feed
+              article={node.article}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.READ_HISTORY,
+                  location: i
+                })
+              }
+            />
           </List.Item>
         ))}
       </List>

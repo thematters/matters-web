@@ -71,7 +71,7 @@ const Notifications = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
+          <List.Item spacing={['base', 0]} key={cursor}>
             <Notice notice={node} />
           </List.Item>
         ))}

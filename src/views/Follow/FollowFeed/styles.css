@@ -1,6 +1,0 @@
-.article {
-  & :global(div.info) {
-    display: inline-flex;
-    align-items: center;
-  }
-}

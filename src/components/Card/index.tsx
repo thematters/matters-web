@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import Router from 'next/router'
+import { useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
 
@@ -12,8 +13,10 @@ interface CardProps {
   spacing?: [CardSpacing, CardSpacing]
   textSize?: 'md-s'
 
-  href: string
-  as: string
+  href?: string
+  as?: string
+
+  onClick?: () => any
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -24,8 +27,11 @@ export const Card: React.FC<CardProps> = ({
   href,
   as,
 
+  onClick,
+
   children
 }) => {
+  const node: React.RefObject<HTMLElement> = useRef(null)
   const cardClass = classNames({
     card: true,
     [`bg-${bgColor}`]: !!bgColor,
@@ -34,10 +40,20 @@ export const Card: React.FC<CardProps> = ({
     [`text-size-${textSize}`]: !!textSize
   })
   const openLink = ({ newTab }: { newTab: boolean }) => {
-    if (newTab) {
-      window.open(as, '_blank')
-    } else {
-      Router.push(href, as)
+    if (as && href) {
+      if (newTab) {
+        window.open(as, '_blank')
+      } else {
+        Router.push(href, as)
+      }
+    }
+
+    if (onClick) {
+      onClick()
+    }
+
+    if (node && node.current) {
+      node.current.blur()
     }
   }
 
@@ -45,6 +61,7 @@ export const Card: React.FC<CardProps> = ({
     <section
       className={cardClass}
       tabIndex={0}
+      ref={node}
       onKeyDown={event => {
         if (event.keyCode === KEYCODES.enter) {
           openLink({ newTab: event.metaKey })

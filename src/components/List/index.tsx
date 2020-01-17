@@ -35,12 +35,15 @@ const ListItem: React.FC<ListItemProps> = ({
 
   children,
 
+  className,
   ...restProps
 }) => {
   const listItemClass = classNames({
+    'list-item': true,
     [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
     [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
-    border: !noBorder
+    'no-border': !!noBorder,
+    [className]: !!className
   })
 
   return (

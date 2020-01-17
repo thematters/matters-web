@@ -31,6 +31,8 @@ interface RichProps {
 
   hasFollow?: boolean
   hasUnblock?: boolean
+
+  onClick?: () => any
 }
 
 const fragments = {
@@ -64,7 +66,9 @@ const Rich = ({
   avatarBadge,
 
   hasFollow,
-  hasUnblock
+  hasUnblock,
+
+  onClick
 }: RichProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -100,7 +104,7 @@ const Rich = ({
   }
 
   return (
-    <Card {...path}>
+    <Card {...path} spacing={['tight', 0]} onClick={onClick}>
       <section className={containerClass}>
         <Link {...path}>
           <a className="avatar">

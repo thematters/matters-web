@@ -119,18 +119,18 @@ const SearchUser = ({
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'User' && (
-                <List.Item
-                  noBorder
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_USER,
-                      location: i,
-                      entrance: q
-                    })
-                  }
-                  key={cursor}
-                >
-                  <UserDigest.Rich user={node} hasFollow />
+                <List.Item noBorder key={cursor}>
+                  <UserDigest.Rich
+                    user={node}
+                    hasFollow
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: FEED_TYPE.SEARCH_USER,
+                        location: i,
+                        entrance: q
+                      })
+                    }
+                  />
                 </List.Item>
               )
           )}

@@ -135,16 +135,17 @@ const UserArticles = () => {
             }
 
             return (
-              <List.Item
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.USER_ARTICLE,
-                    location: i
-                  })
-                }
-                key={cursor}
-              >
-                <ArticleDigest.Feed article={node} hasSticky />
+              <List.Item key={cursor}>
+                <ArticleDigest.Feed
+                  article={node}
+                  hasSticky
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.USER_ARTICLE,
+                      location: i
+                    })
+                  }
+                />
               </List.Item>
             )
           })}

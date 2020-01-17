@@ -125,16 +125,16 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
       >
         <List>
           {edges.map(({ node, cursor }, i) => (
-            <List.Item
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: sortBy,
-                  location: i
-                })
-              }
-              key={cursor}
-            >
-              <ArticleDigest.Feed article={node} />
+            <List.Item key={cursor}>
+              <ArticleDigest.Feed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: sortBy,
+                    location: i
+                  })
+                }
+              />
             </List.Item>
           ))}
         </List>

@@ -1,5 +1,9 @@
-.border {
+.list-item {
   @mixin border-bottom-grey;
+
+  &.no-border {
+    border: none;
+  }
 }
 
 .spacing-vertical-base {

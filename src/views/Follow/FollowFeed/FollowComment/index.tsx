@@ -39,13 +39,19 @@ const fragments = {
     ${Comment.FooterActions.fragments.comment}
   `
 }
-const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
+const FollowComment = ({
+  comment,
+  onClick
+}: {
+  comment: FollowCommentType
+  onClick?: () => any
+}) => {
   const { article, author } = comment
   const articlePath = toPath({ page: 'articleDetail', article })
   const path = toPath({ page: 'commentDetail', comment })
 
   return (
-    <Card {...articlePath}>
+    <Card {...articlePath} onClick={onClick}>
       <header>
         <section className="left">
           <UserDigest.Mini

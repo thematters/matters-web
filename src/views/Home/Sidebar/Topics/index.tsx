@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Label, Placeholder, Translate } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { Placeholder } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import ViewAllLink from '../ViewAllLink'
-import styles from './styles.css'
+import SidebarHeader from '../SidebarHeader'
+import TopicSidebarArticleDigest from './TopicSidebarArticleDigest'
 
 import { SidebarTopics } from './__generated__/SidebarTopics'
 
@@ -22,14 +21,14 @@ export const SIDEBAR_TOPICS = gql`
           edges {
             cursor
             node {
-              ...SidebarDigestArticle
+              ...TopicSidebarArticleDigestArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.article}
+  ${TopicSidebarArticleDigest.fragments.article}
 `
 
 const Topics = () => {
@@ -49,16 +48,8 @@ const Topics = () => {
   }
 
   return (
-    <>
-      <header>
-        <Label>
-          <Translate
-            zh_hant={TEXT.zh_hant.hotTopics}
-            zh_hans={TEXT.zh_hans.hotTopics}
-          />
-        </Label>
-        <ViewAllLink type="topics" />
-      </header>
+    <section>
+      <SidebarHeader type="topics" />
 
       <ol>
         {edges
@@ -73,13 +64,11 @@ const Topics = () => {
                 })
               }
             >
-              <ArticleDigest.Sidebar article={node} />
+              <TopicSidebarArticleDigest article={node} />
             </li>
           ))}
       </ol>
-
-      <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

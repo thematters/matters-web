@@ -104,7 +104,7 @@ const DropdownNotices = ({
         <List>
           {edges && edges.length > 0 ? (
             edges.map(({ node, cursor }) => (
-              <List.Item key={cursor}>
+              <List.Item spacing={['base', 0]} key={cursor}>
                 <Notice notice={node} />
               </List.Item>
             ))

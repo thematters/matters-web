@@ -182,17 +182,18 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
           >
             <List>
               {(edges || []).map(({ node, cursor }, i) => (
-                <List.Item
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAG_DETAIL,
-                      location: i,
-                      entrance: id
-                    })
-                  }
-                  key={cursor}
-                >
-                  <ArticleDigest.Feed article={node} inTagDetail />
+                <List.Item key={cursor}>
+                  <ArticleDigest.Feed
+                    article={node}
+                    inTagDetail
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: FEED_TYPE.TAG_DETAIL,
+                        location: i,
+                        entrance: id
+                      })
+                    }
+                  />
                 </List.Item>
               ))}
             </List>

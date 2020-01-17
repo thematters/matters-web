@@ -21,6 +21,8 @@ interface FeedDigestProps {
 
   hasSticky?: boolean
   inTagDetail?: boolean
+
+  onClick?: () => any
 }
 
 const fragments = {
@@ -56,7 +58,9 @@ const FeedDigest = ({
   article,
 
   hasSticky,
-  inTagDetail = false
+  inTagDetail = false,
+
+  onClick
 }: FeedDigestProps) => {
   const { author, summary, live, sticky } = article
   const isBanned = article.articleState === 'banned'
@@ -68,7 +72,7 @@ const FeedDigest = ({
   })
 
   return (
-    <Card {...path}>
+    <Card {...path} onClick={onClick}>
       {hasSticky && sticky && (
         <section className="sticky">
           <TextIcon icon={<Icon.Sticky />} size="sm" color="grey" weight="md">

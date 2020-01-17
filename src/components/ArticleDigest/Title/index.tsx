@@ -14,7 +14,7 @@ import { TitleArticle } from './__generated__/TitleArticle'
 interface TitleProps {
   article: TitleArticle
 
-  textSize?: 'md-s' | 'md' | 'xm'
+  textSize?: 'sm' | 'md-s' | 'md' | 'xm'
   textWeight?: 'normal' | 'md'
   is?: 'h2' | 'h3' | 'h4'
 }

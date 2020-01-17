@@ -17,7 +17,6 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import FollowComment from './FollowComment'
-import styles from './styles.css'
 
 import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
 
@@ -94,25 +93,32 @@ const FollowFeed = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item
-            className={node.__typename === 'Article' ? 'article' : 'comment'}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.FOLLOW,
-                location: i
-              })
-            }
-            key={cursor}
-          >
+          <List.Item key={cursor}>
             {node.__typename === 'Article' && (
-              <ArticleDigest.Feed article={node} />
+              <ArticleDigest.Feed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOW,
+                    location: i
+                  })
+                }
+              />
             )}
-            {node.__typename === 'Comment' && <FollowComment comment={node} />}
+            {node.__typename === 'Comment' && (
+              <FollowComment
+                comment={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOW,
+                    location: i
+                  })
+                }
+              />
+            )}
           </List.Item>
         ))}
       </List>
-
-      <style jsx>{styles}</style>
     </InfiniteScroll>
   )
 }

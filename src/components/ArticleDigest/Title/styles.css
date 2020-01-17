@@ -1,6 +1,9 @@
 .title {
 }
 
+.text-size-sm {
+  font-size: var(--font-size-sm);
+}
 .text-size-md-s {
   font-size: var(--font-size-md-s);
 }

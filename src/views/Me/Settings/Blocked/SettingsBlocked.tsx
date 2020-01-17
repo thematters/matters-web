@@ -90,17 +90,17 @@ const SettingsBlocked = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {filteredUsers.map(({ node, cursor }, i) => (
-          <List.Item
-            noBorder
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.ALL_AUTHORS,
-                location: i
-              })
-            }
-            key={cursor}
-          >
-            <UserDigest.Rich user={node} hasUnblock />
+          <List.Item noBorder key={cursor}>
+            <UserDigest.Rich
+              user={node}
+              hasUnblock
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_AUTHORS,
+                  location: i
+                })
+              }
+            />
           </List.Item>
         ))}
       </List>

@@ -3,9 +3,9 @@ import classNames from 'classnames'
 import { ReactComponent as Add } from '~/static/icons/add.svg'
 import { ReactComponent as Archive } from '~/static/icons/archive.svg'
 import { ReactComponent as ArrowRightGreenCircle } from '~/static/icons/arrow-right-green-circle.svg'
-import { ReactComponent as ArrowRightGreenSmall } from '~/static/icons/arrow-right-green-small.svg'
 import { ReactComponent as ArrowRightGreen } from '~/static/icons/arrow-right-green.svg'
 import { ReactComponent as ArrowRightWhite } from '~/static/icons/arrow-right-white.svg'
+import { ReactComponent as ArrowRight } from '~/static/icons/arrow-right.svg'
 import { ReactComponent as ArrowUpRight } from '~/static/icons/arrow-up-right.svg'
 import { ReactComponent as Block } from '~/static/icons/block.svg'
 import { ReactComponent as BookmarkRegularActive } from '~/static/icons/bookmark-regular-active.svg'
@@ -160,7 +160,7 @@ export const Icon = {
     <ArrowRightGreen style={{ width: 12, height: 6 }} {...props} />
   )),
   ArrowRightGreenCircle: withIcon(ArrowRightGreenCircle),
-  ArrowRightGreenSmall: withIcon(ArrowRightGreenSmall),
+  ArrowRight: withIcon(ArrowRight),
   ArrowRightWhite: withIcon(ArrowRightWhite),
   ArrowUpRight: withIcon(ArrowUpRight),
   Block: withIcon(Block),

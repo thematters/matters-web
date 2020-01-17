@@ -94,7 +94,7 @@ const FeaturedComments = () => {
 
       <List>
         {comments.map(comment => (
-          <List.Item key={comment.id}>
+          <List.Item spacing={['base', 0]} key={comment.id}>
             <ArticleComment comment={comment} />
           </List.Item>
         ))}

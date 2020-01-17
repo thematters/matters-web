@@ -47,3 +47,9 @@
   font-size: var(--font-size-md-s);
   line-height: 1.6;
 }
+
+.nav {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+}

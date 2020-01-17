@@ -330,7 +330,7 @@ const LatestResponses = () => {
 
       <List>
         {responses.map(response => (
-          <List.Item key={response.id}>
+          <List.Item spacing={['base', 0]} key={response.id}>
             {_has(response, 'title') ? (
               <ArticleDigest.Response article={response} />
             ) : (
