@@ -8,7 +8,14 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { ArticleDigest, List, LoadMore, Spinner, Translate } from '~/components'
+import {
+  ArticleDigest,
+  List,
+  LoadMore,
+  Spinner,
+  Title,
+  Translate
+} from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
 import { useEventListener } from '~/components/Hook'
@@ -301,18 +308,18 @@ const LatestResponses = () => {
   return (
     <section className="latest-responses" id="latest-responses">
       <header>
-        <h3>
+        <Title type="feed" is="h3">
           <Translate
             zh_hant={TEXT.zh_hant.latestResponses}
             zh_hans={TEXT.zh_hans.latestResponses}
           />
-        </h3>
+        </Title>
 
-        <div className="switch">
+        <div className="latest-responses-switch">
           <Switch
             onChange={() => setArticleOnlyMode(!articleOnlyMode)}
             checked={articleOnlyMode}
-            extraClass="narrow"
+            loading={loading}
           />
           <span>
             <Translate

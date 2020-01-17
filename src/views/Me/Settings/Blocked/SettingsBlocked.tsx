@@ -9,6 +9,8 @@ import { UserDigest } from '~/components/UserDigest'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { ViewerBlockList } from './__generated__/ViewerBlockList'
 
 const VIEWER_BLOCK_LIST = gql`
@@ -80,24 +82,28 @@ const SettingsBlocked = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
-        {filteredUsers.map(({ node, cursor }, i) => (
-          <List.Item noBorder key={cursor}>
-            <UserDigest.Rich
-              user={node}
-              hasUnblock
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_AUTHORS,
-                  location: i
-                })
-              }
-            />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <section className="container">
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List>
+          {filteredUsers.map(({ node, cursor }, i) => (
+            <List.Item noBorder key={cursor}>
+              <UserDigest.Rich
+                user={node}
+                hasUnblock
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.ALL_AUTHORS,
+                    location: i
+                  })
+                }
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

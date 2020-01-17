@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { List, LoadMore, Spinner, Translate } from '~/components'
+import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
@@ -84,12 +84,12 @@ const FeaturedComments = () => {
   return (
     <section className="featured-comments" id="featured-comments">
       <header>
-        <h3>
+        <Title type="feed" is="h3">
           <Translate
             zh_hant={TEXT.zh_hant.featuredComments}
             zh_hans={TEXT.zh_hans.featuredComments}
           />
-        </h3>
+        </Title>
       </header>
 
       <List>

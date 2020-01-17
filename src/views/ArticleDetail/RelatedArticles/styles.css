@@ -1,5 +1,5 @@
 .related-articles {
-  padding-top: 2rem;
+  padding-top: var(--spacing-xx-loose);
 }
 
 ul {

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Comment, Translate } from '~/components'
+import { Comment, Title, Translate } from '~/components'
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
@@ -21,23 +21,21 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
   return (
     <section className="responses" id="comments">
       <header>
-        <h2>
+        <Title type="nav" is="h2">
           <Translate
             zh_hant={TEXT.zh_hant.response}
             zh_hans={TEXT.zh_hans.response}
           />
           <ResponseCount article={article} />
-        </h2>
-
-        <section>
-          <Comment.Form
-            articleId={article.id}
-            articleAuthorId={article.author.id}
-            submitCallback={refetchResponses}
-            blocked={article.author.isBlocking}
-          />
-        </section>
+        </Title>
       </header>
+
+      <Comment.Form
+        articleId={article.id}
+        articleAuthorId={article.author.id}
+        submitCallback={refetchResponses}
+        blocked={article.author.isBlocking}
+      />
 
       <FeatureComments />
       <LatestResponses />
