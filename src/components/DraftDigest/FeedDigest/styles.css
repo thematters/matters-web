@@ -36,7 +36,6 @@
 
 .description {
   margin-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-x-loose);
   padding-right: 0;
 
   color: var(--color-grey-darker);

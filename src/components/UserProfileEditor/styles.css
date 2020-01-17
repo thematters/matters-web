@@ -55,13 +55,6 @@
 
 .content-container {
   padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-x-loose);
-
-  @media (--sm-up) {
-    padding-bottom: var(--spacing-xx-loose);
-  }
-  @media (--lg-up) {
-  }
 }
 
 .info {

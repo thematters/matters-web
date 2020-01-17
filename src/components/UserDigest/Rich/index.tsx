@@ -82,24 +82,26 @@ const Rich = ({
 
   if (isArchived) {
     return (
-      <section className={containerClass}>
-        <span className="avatar">
-          <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
-        </span>
+      <Card spacing={['tight', 0]} onClick={onClick}>
+        <section className={containerClass}>
+          <span className="avatar">
+            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+          </span>
 
-        <section className="content">
-          <header>
-            <span className="name">
-              <Translate
-                zh_hant={TEXT.zh_hant.accountArchived}
-                zh_hans={TEXT.zh_hans.accountArchived}
-              />
-            </span>
-          </header>
+          <section className="content">
+            <header>
+              <span className="name">
+                <Translate
+                  zh_hant={TEXT.zh_hant.accountArchived}
+                  zh_hans={TEXT.zh_hans.accountArchived}
+                />
+              </span>
+            </header>
+          </section>
+
+          <style jsx>{styles}</style>
         </section>
-
-        <style jsx>{styles}</style>
-      </section>
+      </Card>
     )
   }
 

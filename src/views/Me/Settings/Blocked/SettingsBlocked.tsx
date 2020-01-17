@@ -1,14 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  Head,
-  InfiniteScroll,
-  List,
-  PageHeader,
-  Spinner,
-  Translate
-} from '~/components'
+import { Head, InfiniteScroll, List, Spinner, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -115,16 +108,6 @@ export default () => (
         zh_hant: TEXT.zh_hant.blockedSetting,
         zh_hans: TEXT.zh_hans.blockedSetting
       }}
-    />
-
-    <PageHeader
-      pageTitle={
-        <Translate
-          zh_hant={TEXT.zh_hant.blockedSetting}
-          zh_hans={TEXT.zh_hans.blockedSetting}
-        />
-      }
-      is="h2"
     />
 
     <SettingsBlocked />

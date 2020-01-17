@@ -1,8 +1,7 @@
 .info {
-  @mixin border-bottom-grey;
   display: flex;
   align-items: center;
-  padding-bottom: var(--spacing-base);
+  padding: var(--spacing-loose) 0 0;
 
   color: var(--color-grey);
 

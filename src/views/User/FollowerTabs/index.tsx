@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
@@ -29,49 +28,42 @@ const MeTabs = () => {
 
   return (
     <Tabs>
-      <Tabs.Tab>
-        <Link {...userPath}>
-          <a>
-            <Translate
-              zh_hant={TEXT.zh_hant.back}
-              zh_hans={TEXT.zh_hant.back}
-            />
-          </a>
-        </Link>
+      <Tabs.Tab {...userPath}>
+        <Translate zh_hant={TEXT.zh_hant.back} zh_hans={TEXT.zh_hant.back} />
       </Tabs.Tab>
-      <Tabs.Tab selected={router.pathname === PATHS.USER_FOLLOWERS.href}>
-        <Link {...userFollowersPath}>
-          <a>
-            <Translate
-              {...(isMe
-                ? {
-                    zh_hant: TEXT.zh_hant.followingMe,
-                    zh_hans: TEXT.zh_hans.followingMe
-                  }
-                : {
-                    zh_hant: TEXT.zh_hant.follower,
-                    zh_hans: TEXT.zh_hans.follower
-                  })}
-            />
-          </a>
-        </Link>
+
+      <Tabs.Tab
+        {...userFollowersPath}
+        selected={router.pathname === PATHS.USER_FOLLOWERS.href}
+      >
+        <Translate
+          {...(isMe
+            ? {
+                zh_hant: TEXT.zh_hant.followingMe,
+                zh_hans: TEXT.zh_hans.followingMe
+              }
+            : {
+                zh_hant: TEXT.zh_hant.follower,
+                zh_hans: TEXT.zh_hans.follower
+              })}
+        />
       </Tabs.Tab>
-      <Tabs.Tab selected={router.pathname === PATHS.USER_FOLLOWEES.href}>
-        <Link {...userFolloweesPath}>
-          <a>
-            <Translate
-              {...(isMe
-                ? {
-                    zh_hant: TEXT.zh_hant.myFollowees,
-                    zh_hans: TEXT.zh_hans.myFollowees
-                  }
-                : {
-                    zh_hant: TEXT.zh_hant.following,
-                    zh_hans: TEXT.zh_hans.following
-                  })}
-            />
-          </a>
-        </Link>
+
+      <Tabs.Tab
+        {...userFolloweesPath}
+        selected={router.pathname === PATHS.USER_FOLLOWEES.href}
+      >
+        <Translate
+          {...(isMe
+            ? {
+                zh_hant: TEXT.zh_hant.myFollowees,
+                zh_hans: TEXT.zh_hans.myFollowees
+              }
+            : {
+                zh_hant: TEXT.zh_hant.following,
+                zh_hans: TEXT.zh_hans.following
+              })}
+        />
       </Tabs.Tab>
     </Tabs>
   )

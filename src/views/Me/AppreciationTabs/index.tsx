@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
@@ -30,31 +29,27 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
 
   return (
     <>
-      <Tabs layout="horizontal">
+      <Tabs>
         <Tabs.Tab
+          {...PATHS.ME_APPRECIATIONS_SENT}
           selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
         >
-          <Link {...PATHS.ME_APPRECIATIONS_SENT}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.appreciationsSent}
-                zh_hans={TEXT.zh_hans.appreciationsSent}
-              />
-            </a>
-          </Link>
+          <Translate
+            zh_hant={TEXT.zh_hant.appreciationsSent}
+            zh_hans={TEXT.zh_hans.appreciationsSent}
+          />
+
           <sup className="count">{activity.appreciationsSentTotal}</sup>
         </Tabs.Tab>
+
         <Tabs.Tab
+          {...PATHS.ME_APPRECIATIONS_RECEIVED}
           selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
         >
-          <Link {...PATHS.ME_APPRECIATIONS_RECEIVED}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.appreciationsReceived}
-                zh_hans={TEXT.zh_hans.appreciationsReceived}
-              />
-            </a>
-          </Link>
+          <Translate
+            zh_hant={TEXT.zh_hant.appreciationsReceived}
+            zh_hans={TEXT.zh_hans.appreciationsReceived}
+          />
           <sup className="count">{activity.appreciationsReceivedTotal}</sup>
         </Tabs.Tab>
       </Tabs>
