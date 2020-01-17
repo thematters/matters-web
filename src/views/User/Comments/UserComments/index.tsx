@@ -1,9 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Comment, Head, Icon, InfiniteScroll, Placeholder } from '~/components'
+import {
+  ArticleDigest,
+  Card,
+  Comment,
+  Head,
+  InfiniteScroll,
+  List,
+  Placeholder
+} from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
@@ -49,13 +56,7 @@ const USER_COMMENT_FEED = gql`
             cursor
             node {
               id
-              title
-              slug
-              author {
-                id
-                userName
-              }
-              mediaHash
+              ...TitleArticle
               comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor
@@ -70,6 +71,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
+  ${ArticleDigest.Title.fragments.article}
   ${Comment.Feed.fragments.comment}
 `
 
@@ -156,13 +158,9 @@ const UserComments = ({ user }: UserIdUser) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="article-list">
+      <List>
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
-          const path = toPath({
-            page: 'articleDetail',
-            article: articleEdge.node
-          })
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
           ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[]
@@ -172,34 +170,34 @@ const UserComments = ({ user }: UserIdUser) => {
           }
 
           return (
-            <li key={articleEdge.cursor} className="article-item">
-              <Link {...path}>
-                <a>
-                  <h3>
-                    {articleEdge.node.title}
-                    <Icon.ChevronRight style={{ width: 12, height: 12 }} />
-                  </h3>
-                </a>
-              </Link>
+            <List.Item spacing={['base', 0]} key={articleEdge.cursor}>
+              <section className="article-title">
+                <ArticleDigest.Title article={articleEdge.node} is="h3" />
+              </section>
 
-              <ul className="comment-list">
+              <List>
                 {filteredComments.map(comment => (
-                  <li key={comment.id}>
-                    <Comment.Feed
-                      comment={comment}
-                      avatarSize="md"
-                      hasCreatedAt
-                      hasLink
-                    />
-                  </li>
+                  <List.Item noBorder key={comment.id}>
+                    <Card
+                      spacing={['tight', 0]}
+                      {...toPath({ page: 'commentDetail', comment })}
+                    >
+                      <Comment.Feed
+                        comment={comment}
+                        avatarSize="md"
+                        hasCreatedAt
+                        hasLink
+                      />
+                    </Card>
+                  </List.Item>
                 ))}
-              </ul>
-            </li>
+              </List>
+            </List.Item>
           )
         })}
 
         <style jsx>{styles}</style>
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

@@ -6,6 +6,10 @@
   }
 }
 
+.spacing-vertical-tight {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+}
 .spacing-vertical-base {
   padding-top: var(--spacing-base);
   padding-bottom: var(--spacing-base);
@@ -15,6 +19,10 @@
   padding-bottom: var(--spacing-loose);
 }
 
+.spacing-horizontal-tight {
+  padding-left: var(--spacing-tight);
+  padding-right: var(--spacing-tight);
+}
 .spacing-horizontal-base {
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);

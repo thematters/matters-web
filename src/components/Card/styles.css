@@ -1,7 +1,10 @@
 .card {
   @mixin all-transition;
-  cursor: pointer;
   outline: none;
+}
+
+.card:not(.disable) {
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -9,7 +12,7 @@
   }
 }
 
-.bg-grey-lighter {
+.bg-grey-lighter:not(.disable) {
   background: var(--color-grey-lighter);
   border-radius: 0.25rem;
 

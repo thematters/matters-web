@@ -31,13 +31,15 @@ export const Card: React.FC<CardProps> = ({
 
   children
 }) => {
+  const disable = !as || !href
   const node: React.RefObject<HTMLElement> = useRef(null)
   const cardClass = classNames({
     card: true,
     [`bg-${bgColor}`]: !!bgColor,
     [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
     [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
-    [`text-size-${textSize}`]: !!textSize
+    [`text-size-${textSize}`]: !!textSize,
+    disable
   })
   const openLink = ({ newTab }: { newTab: boolean }) => {
     if (as && href) {
@@ -60,7 +62,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <section
       className={cardClass}
-      tabIndex={0}
+      tabIndex={disable ? undefined : 0}
       ref={node}
       onKeyDown={event => {
         if (event.keyCode === KEYCODES.enter) {

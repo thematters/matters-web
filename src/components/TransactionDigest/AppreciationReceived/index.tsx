@@ -65,7 +65,11 @@ const AppreciationReceived = ({
             </header>
           )}
           {isUseContent && content && <h4 className="content">{content}</h4>}
-          {!isUseContent && target && <ArticleDigest.Title article={target} />}
+          {!isUseContent && target && (
+            <section>
+              <ArticleDigest.Title article={target} />
+            </section>
+          )}
         </section>
 
         <section className="right">
