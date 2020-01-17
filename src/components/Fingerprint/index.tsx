@@ -2,20 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
-import { Popover } from '~/components/Popper'
-import { Spinner } from '~/components/Spinner'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, Popover, Spinner, TextIcon, Translate } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
-import ICON_ARROW_CIRCLE from '~/static/icons/arrow-right-green-circle.svg?sprite'
-import ICON_BOX from '~/static/icons/box.svg?sprite'
-import ICON_COPY from '~/static/icons/copy.svg?sprite'
-import ICON_EXPAND from '~/static/icons/expand.svg?sprite'
-import ICON_HELP from '~/static/icons/help.svg?sprite'
-import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import { Gateways } from './__generated__/Gateways'
@@ -66,18 +56,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
               )
             }}
           >
-            <TextIcon
-              icon={
-                <Icon
-                  id={ICON_COPY.id}
-                  viewBox={ICON_COPY.viewBox}
-                  size="small"
-                />
-              }
-              color="green"
-              weight="medium"
-              size="xs"
-            >
+            <TextIcon icon={<Icon.Copy />} color="green" weight="md" size="xs">
               <Translate
                 zh_hant={TEXT.zh_hant.copy}
                 zh_hans={TEXT.zh_hans.copy}
@@ -105,15 +84,9 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             }}
           >
             <TextIcon
-              icon={
-                <Icon
-                  id={ICON_EXPAND.id}
-                  viewBox={ICON_EXPAND.viewBox}
-                  size="xsmall"
-                />
-              }
+              icon={<Icon.Expand size="xs" />}
               size="xs"
-              weight="medium"
+              weight="md"
               color="grey"
               textPlacement="left"
             >
@@ -132,20 +105,12 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             const gatewayUrl = `${url}${dataHash}`
             return (
               <li key={i}>
-                <Icon
-                  id={ICON_SHARE_LINK.id}
-                  viewBox={ICON_SHARE_LINK.viewBox}
-                  size="small"
-                />
+                <Icon.ShareLink />
 
                 <span className="gateway-url">{gatewayUrl}</span>
 
                 <a href={gatewayUrl} target="_blank">
-                  <Icon
-                    id={ICON_ARROW_CIRCLE.id}
-                    viewBox={ICON_ARROW_CIRCLE.viewBox}
-                    size="small"
-                  />
+                  <Icon.ArrowRightGreenCircle />
                 </a>
               </li>
             )
@@ -157,14 +122,8 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
       <div className={`help-container ${helpExpand ? 'expand' : ''}`}>
         <button type="button" onClick={() => setHelpExpand(!helpExpand)}>
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_HELP.id}
-                viewBox={ICON_HELP.viewBox}
-                size="xsmall"
-              />
-            }
-            weight="medium"
+            icon={<Icon.Help size="xs" />}
+            weight="md"
             size="xs"
             color={helpExpand ? 'green' : 'grey'}
           >
@@ -204,16 +163,10 @@ const Fingerprint = ({
     >
       <button type="button">
         <TextIcon
-          icon={
-            <Icon
-              id={ICON_BOX.id}
-              viewBox={ICON_BOX.viewBox}
-              size={size === 'sm' ? 'small' : 'xsmall'}
-            />
-          }
+          icon={<Icon.Box size={size === 'xs' ? 'xs' : undefined} />}
           size={size}
           color={color}
-          weight="medium"
+          weight="md"
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>

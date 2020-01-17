@@ -54,11 +54,11 @@
 }
 
 .content-container {
-  padding-top: var(--spacing-default);
-  padding-bottom: var(--spacing-loose);
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-x-loose);
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-x-loose);
+    padding-bottom: var(--spacing-xx-loose);
   }
   @media (--lg-up) {
   }
@@ -68,7 +68,7 @@
   flex-grow: 1;
   width: 100%;
 
-  margin-top: var(--spacing-tight);
+  margin-top: var(--spacing-base);
   margin-left: 0;
 
   @media (--sm-up) {
@@ -91,16 +91,16 @@
     vertical-align: middle;
   }
   & :global(> * + *) {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
   }
 }
 
 .form {
   & :global(textarea) {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--spacing-base);
   }
 }
 
 .buttons {
-  margin-top: var(--spacing-default);
+  margin-top: var(--spacing-loose);
 }

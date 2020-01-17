@@ -1,6 +1,5 @@
-.small-size-header {
+.sm-size-header {
   & :global(> header) {
-
     & :global(> h1) {
       color: var(--color-grey-darker);
       font-size: var(--font-size-sm);

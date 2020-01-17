@@ -15,30 +15,18 @@ import { LanguageConsumer } from './LanguageContext'
  *
  * // given language
  * <Translate zh_hant='排序' zh_hans='排序' en='Sort By' lang="en" />
- *
- * // dynamic data
- * <Translate
- *    zh_hant={({ date }) => `現在時間 ${date.toTimeString()}`}
- *    zh_hans={({ date }) => `现在时间 ${date.toTimeString()}`}
- *    data={{ date: new Date() }}
- *  />
  * ```
  */
+export const Translate = React.memo((props: TranslateArgs) => {
+  const { lang } = props
 
-export class Translate<D> extends React.PureComponent<TranslateArgs<D>> {
-  public render() {
-    const { lang } = this.props
-
-    if (lang) {
-      return translate<D>({ lang, ...this.props })
-    }
-
-    return (
-      <LanguageConsumer>
-        {({ lang: currentLang }) =>
-          translate<D>({ lang: currentLang, ...this.props })
-        }
-      </LanguageConsumer>
-    )
+  if (lang) {
+    return <>{translate({ lang, ...props })}</>
   }
-}
+
+  return (
+    <LanguageConsumer>
+      {({ lang: currentLang }) => translate({ lang: currentLang, ...props })}
+    </LanguageConsumer>
+  )
+})

@@ -15,9 +15,11 @@
   --font-mono: Menlo, 'SFMono-Regular', Consolas, monaco, monospace;
 
   /* Type Scale */
-  --font-size-xxs: 0.625rem; /* 10px */
+  --font-size-xs-s: 0.6875rem; /* 11px */
   --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm-s: 0.8125rem; /* 13px */
   --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md-s: 0.9375rem; /* 15px */
   --font-size-md: 1rem; /* 16px */
   --font-size-xm: 1.125rem; /* 18px */
   --font-size-lg: 1.25rem; /* 20px */
@@ -32,18 +34,55 @@
   --font-weight-bolder: 900;
 
   /* Base */
+  --font-size-base: var(--font-size-md);
   --font-weight-base: var(--font-weight-normal);
   --line-height-base: 1.5;
+
+  /* Nav Title */
+  --font-size-nav-title: var(--font-size-lg);
+  --line-height-nav-title: 2; /* 32/20 */
+  --font-weight-nav-title: var(--font-weight-semibold);
+
+  /* Feed Title */
+  --font-size-feed-title: var(--font-size-xm);
+  --line-height-feed-title: 1.33333333; /* 24/18 */
+  --font-weight-feed-title: var(--font-weight-medium);
+
+  /* Header Title */
+  --font-size-header-title: var(--font-size-lg);
+  --line-height-header-title: 1.2; /* 24/20 */
+  --font-weight-header-title: var(--font-weight-semibold);
+
+  /* Card Title */
+  --font-size-card-title: var(--font-size-sm);
+  --line-height-card-title: 1.7142857143; /* 24/14 */
+  --font-weight-card-title: var(--font-weight-medium);
+
+  /* Card Text */
+  --font-size-card-text: var(--font-size-sm-s);
+  --line-height-card-text: 1.8461538462; /* 24/13 */
+  --font-weight-card-text: var(--font-weight-normal);
+
+  /* Timestamp */
+  --font-size-timestamp: var(--font-size-xs);
+  --line-height-timestamp: 1.33333333; /* 16/12 */
+  --font-weight-timestamp: var(--font-weight-normal);
+
+  /* Article Title */
+  --font-size-article-title: var(--font-size-xl);
+  --line-height-article-title: 1.5; /* 36/24 */
+  --font-weight-article-title: var(--font-weight-semibold);
 
   /* Article Body */
   --font-size-article-base: 1rem; /* 16px; */
   --line-height-article-base: 1.875; /* 30/16 */
 
+  /* Articke Heading */
   --font-size-article-h1: 1.375; /* 22px */
   --font-size-article-h2: var(--font-size-lg); /* 20px */
   --font-size-article-h3: var(--font-size-xm); /* 18px */
   --font-size-article-h4: var(--font-size-md); /* 16px */
   --font-size-article-h5: var(--font-size-sm); /* 14px */
   --font-size-article-h6: var(--font-size-xs); /* 12px */
-  --line-height-article-heading: 1.4;
+  --line-height-article-heading: var(--line-height-base);
 }

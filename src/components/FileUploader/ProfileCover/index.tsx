@@ -1,18 +1,16 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { Icon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
 import Cover from '~/components/UserProfile/Cover'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import ICON_CAMERA from '~/static/icons/camera-white.svg?sprite'
 
 import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 import styles from './styles.css'
@@ -106,7 +104,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
         <div className="buttons">
           <button type="button" className="button">
             <label>
-              <Icon id={ICON_CAMERA.id} viewBox={ICON_CAMERA.viewBox} />
+              <Icon.Camera size="md" />
               <span className="upload">
                 <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
               </span>

@@ -20,12 +20,12 @@
   padding-bottom: var(--spacing-x-tight);
 }
 .spacing-vertical-tight {
-  padding-top: var(--spacing-tight);
-  padding-bottom: var(--spacing-tight);
+  padding-top: var(--spacing-base);
+  padding-bottom: var(--spacing-base);
 }
 .spacing-vertical-default {
-  padding-top: var(--spacing-default);
-  padding-bottom: var(--spacing-default);
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
 }
 
 .spacing-horizontal-xtight {
@@ -33,12 +33,12 @@
   padding-right: var(--spacing-x-tight);
 }
 .spacing-horizontal-tight {
-  padding-left: var(--spacing-tight);
-  padding-right: var(--spacing-tight);
+  padding-left: var(--spacing-base);
+  padding-right: var(--spacing-base);
 }
 .spacing-horizontal-default {
-  padding-left: var(--spacing-default);
-  padding-right: var(--spacing-default);
+  padding-left: var(--spacing-loose);
+  padding-right: var(--spacing-loose);
 }
 
 .bg-hover-grey {
@@ -48,6 +48,6 @@
 }
 .bg-hover-green {
   &:hover {
-    background: var(--color-bg-green);
+    background: var(--color-green-lighter);
   }
 }

@@ -1,16 +1,8 @@
 import { Empty, Icon, Translate } from '~/components'
 
-import ICON_EMPTY_BOOKMARK from '~/static/icons/empty-bookmark.svg?sprite'
-
 const EmptyBookmark = ({ description }: { description?: React.ReactNode }) => (
   <Empty
-    icon={
-      <Icon
-        id={ICON_EMPTY_BOOKMARK.id}
-        viewBox={ICON_EMPTY_BOOKMARK.viewBox}
-        size={'xxlarge'}
-      />
-    }
+    icon={<Icon.EmptyBookmark size="xxl" />}
     description={
       description || (
         <>

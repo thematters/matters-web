@@ -4,8 +4,6 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
-import ICON_PIN_TO_TOP from '~/static/icons/pin-to-top.svg?sprite'
-import ICON_UNPIN from '~/static/icons/unpin.svg?sprite'
 
 import { PinButtonComment } from './__generated__/PinButtonComment'
 import { PinComment } from './__generated__/PinComment'
@@ -56,25 +54,13 @@ const fragments = {
 }
 
 const TextIconUnpin = () => (
-  <TextIcon
-    icon={<Icon id={ICON_UNPIN.id} viewBox={ICON_UNPIN.viewBox} size="small" />}
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.UnPin />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.unpin} zh_hans={TEXT.zh_hans.unpin} />
   </TextIcon>
 )
 
 const TextIconPin = () => (
-  <TextIcon
-    icon={
-      <Icon
-        id={ICON_PIN_TO_TOP.id}
-        viewBox={ICON_PIN_TO_TOP.viewBox}
-        size="small"
-      />
-    }
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.PinToTop />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
   </TextIcon>
 )

@@ -1,14 +1,17 @@
 import _get from 'lodash/get'
 import _set from 'lodash/set'
+import _uniqBy from 'lodash/uniqBy'
 
 export const mergeConnections = ({
   oldData,
   newData,
-  path
+  path,
+  dedupe = false
 }: {
   oldData: any
   newData: any
   path: string
+  dedupe?: boolean
 }) => {
   const { edges: oldEdges, pageInfo: oldPageInfo, ...rest } = _get(
     oldData,
@@ -20,10 +23,15 @@ export const mergeConnections = ({
 
   if (newPageInfo.endCursor !== oldPageInfo.endCursor) {
     const copy = JSON.parse(JSON.stringify(result))
+
+    const edges = dedupe
+      ? _uniqBy([...oldEdges, ...newEdges], edge => edge.node.id)
+      : [...oldEdges, ...newEdges]
+
     return _set(copy, path, {
       ...rest,
       pageInfo: newPageInfo,
-      edges: [...oldEdges, ...newEdges]
+      edges
     })
   }
 

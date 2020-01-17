@@ -37,7 +37,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       onCreate={setInstance}
     >
       <button type="button" className={containerClasses}>
-        <Avatar size="small" user={viewer.isInactive ? undefined : user} />
+        <Avatar size="lg" user={viewer.isInactive ? undefined : user} />
 
         <section className="info">
           {(viewer.isActive || viewer.isOnboarding) && (

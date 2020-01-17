@@ -3,14 +3,14 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 interface TextIconProps {
-  text?: string | number
+  text?: string | number | React.ReactNode
   textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
   style?: React.CSSProperties
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
-  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
-  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
+  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   className?: string
 }
@@ -68,7 +68,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
       {icon}
 
       <span className="text" style={textStyle}>
-        {text === undefined ? children : text}
+        {text || children}
       </span>
 
       <style jsx>{styles}</style>

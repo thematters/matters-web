@@ -30,7 +30,7 @@
   flex-direction: column;
 
   position: relative;
-  padding: var(--spacing-tight) 0;
+  padding: var(--spacing-base) 0;
 
   & .slogan {
     @mixin font-serif;
@@ -73,7 +73,7 @@
     }
 
     & .signup {
-      padding-right: var(--spacing-x-loose);
+      padding-right: var(--spacing-xx-loose);
     }
   }
 }

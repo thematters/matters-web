@@ -97,7 +97,7 @@ const AppreciationButton = ({
   const readCivicLikerModal =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerModal
   const canAppreciate =
-    (!isReachLimit && !isMe && !viewer.isInactive && !viewer.isOnboarding) ||
+    (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
     !viewer.isAuthed
   const containerClasses = classNames({
     container: true

@@ -1,13 +1,13 @@
 .section-container {
   & + .section-container {
-    padding-top: var(--spacing-default);
-    margin-top: var(--spacing-default);
+    padding-top: var(--spacing-loose);
+    margin-top: var(--spacing-loose);
   }
 
   & section + section {
     @mixin border-top-grey;
-    padding-top: var(--spacing-default);
-    margin-top: var(--spacing-default);
+    padding-top: var(--spacing-loose);
+    margin-top: var(--spacing-loose);
   }
 }
 
@@ -18,13 +18,13 @@
 
   & .left {
     @mixin flex-center-space-between;
-    margin-right: var(--spacing-default);
+    margin-right: var(--spacing-loose);
   }
 
   & .title {
     flex-shrink: 0;
     display: inline-block;
-    margin-right: var(--spacing-default);
+    margin-right: var(--spacing-loose);
     width: 6rem;
 
     font-weight: var(--font-weight-medium);

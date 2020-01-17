@@ -2,11 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { TextIcon, Translate } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
-import IconLike from '~/components/Icon/Like'
 
 import { TEXT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
@@ -56,34 +55,28 @@ const Appreciation = ({ sum }: { sum?: number }) => {
   const abbrSum = numAbbr(sum)
   return (
     <TextIcon
-      icon={<IconLike size="small" />}
+      icon={<Icon.Like />}
       color="green"
-      weight="medium"
+      weight="md"
       text={abbrSum}
-      size="sm"
       spacing="xtight"
       style={appreciationIconStyle}
     />
   )
 }
 
-const FullDesc = ({
-  user,
-  nameSize = 'default',
-  readonly,
-  appreciations,
-  showUnblock
-}: {
+const FullDesc = (props: {
   user: UserDigestFullDescUser
-  nameSize?: 'default' | 'small'
+  nameSize?: 'sm'
   readonly?: boolean
   appreciations?: number
   showUnblock?: boolean
 }) => {
+  const { user, nameSize = '', readonly, appreciations, showUnblock } = props
   const showAppreciations = appreciations && appreciations > 0
   const nameSizeClasses = classNames({
     name: true,
-    [nameSize]: true,
+    [nameSize]: !!nameSize,
     'name-shrink': showAppreciations
   })
   const path = readonly
@@ -97,7 +90,7 @@ const FullDesc = ({
   if (isArchived) {
     return (
       <section className="container">
-        <Avatar size="default" />
+        <Avatar />
 
         <section className="content">
           <header className="header-container">
@@ -121,7 +114,7 @@ const FullDesc = ({
     <section className="container">
       <Link {...path}>
         <a>
-          <Avatar size="default" user={user} />
+          <Avatar user={user} />
         </a>
       </Link>
 

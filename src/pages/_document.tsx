@@ -6,20 +6,17 @@ import Document, {
   NextScript
 } from 'next/document'
 import React from 'react'
-import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 import { GA_TRACKING_ID } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 interface MattersDocumentProps {
-  spriteContent: string
   lang: HTMLLanguage
 }
 
 class MattersDocument extends Document<MattersDocumentProps> {
   public static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
-    const spriteContent = sprite.stringify()
     const heads = initialProps.head as any[]
 
     let lang: HTMLLanguage = 'zh-Hant'
@@ -37,7 +34,6 @@ class MattersDocument extends Document<MattersDocumentProps> {
 
     return {
       lang,
-      spriteContent,
       ...initialProps
     }
   }
@@ -64,7 +60,6 @@ class MattersDocument extends Document<MattersDocumentProps> {
         </Head>
 
         <body>
-          <div dangerouslySetInnerHTML={{ __html: this.props.spriteContent }} />
           <Main />
           <NextScript />
         </body>

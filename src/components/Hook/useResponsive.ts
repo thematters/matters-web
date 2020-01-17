@@ -4,20 +4,20 @@ import { BREAKPOINTS } from '~/common/enums'
 
 interface Props {
   type:
-    | 'small-down'
-    | 'small-up'
-    | 'medium-up'
-    | 'large-up'
-    | 'small'
-    | 'xsmall'
-    | 'medium'
-    | 'large'
-    | 'xlarge'
+    | 'sm-down'
+    | 'sm-up'
+    | 'md-up'
+    | 'lg-up'
+    | 'sm'
+    | 'xs'
+    | 'md'
+    | 'lg'
+    | 'xl'
 }
 
 const useSmallDown = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
 const useSmallUp = () => useMediaQuery({ minWidth: BREAKPOINTS.SM })
-const useMediaUp = () => useMediaQuery({ minWidth: BREAKPOINTS.MD })
+const useMediumUp = () => useMediaQuery({ minWidth: BREAKPOINTS.MD })
 const useLargeUp = () => useMediaQuery({ minWidth: BREAKPOINTS.LG })
 const useXSmall = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
 const useSmall = () =>
@@ -42,23 +42,23 @@ const useXLarge = () =>
 
 export const useResponsive = ({ type }: Props) => {
   switch (type) {
-    case 'small-down':
+    case 'sm-down':
       return useSmallDown
-    case 'small-up':
+    case 'sm-up':
       return useSmallUp
-    case 'medium-up':
-      return useMediaUp
-    case 'large-up':
+    case 'md-up':
+      return useMediumUp
+    case 'lg-up':
       return useLargeUp
-    case 'xsmall':
+    case 'xs':
       return useXSmall
-    case 'small':
+    case 'sm':
       return useSmall
-    case 'medium':
+    case 'md':
       return useMedium
-    case 'large':
+    case 'lg':
       return useLarge
-    case 'xlarge':
+    case 'xl':
       return useXLarge
   }
 }

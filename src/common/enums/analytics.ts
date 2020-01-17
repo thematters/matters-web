@@ -54,7 +54,8 @@ export const SHARE_TYPE = {
   EMAIL: 'email',
   FACEBOOK: 'facebook',
   WEIBO: 'weibo',
-  DOUBAN: 'douban'
+  DOUBAN: 'douban',
+  ROOT: 'root'
 }
 
 export const FEED_TYPE = {

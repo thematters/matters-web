@@ -20,7 +20,6 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
-import ICON_DOT_DIVIDER from '~/static/icons/dot-divider.svg?sprite'
 
 import styles from './styles.css'
 
@@ -38,11 +37,7 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
       <span className="num">&nbsp;{articles}&nbsp;</span>
       <Translate zh_hant="篇作品" zh_hans="篇作品" />
 
-      <Icon
-        id={ICON_DOT_DIVIDER.id}
-        viewBox={ICON_DOT_DIVIDER.viewBox}
-        style={{ width: 18, height: 18 }}
-      />
+      <Icon.DotDivider style={{ width: 18, height: 18 }} />
 
       <Translate zh_hant="累積創作" zh_hans="累积创作" />
       <span className="num">&nbsp;{words}&nbsp;</span>

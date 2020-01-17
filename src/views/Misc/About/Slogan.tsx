@@ -50,7 +50,7 @@ const Slogan = () => {
 
             <div className="buttons">
               <Button
-                size="large"
+                size="lg"
                 bgColor="green"
                 is="link"
                 as={PATHS.HOME.as}

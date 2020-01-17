@@ -39,7 +39,7 @@
 
   @media (--lg-down) {
     & div:not(:first-child) {
-      padding-left: var(--spacing-tight);
+      padding-left: var(--spacing-base);
     }
   }
 }

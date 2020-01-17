@@ -226,7 +226,7 @@
 
 /* Toolbar - Formats */
 .ql-bubble .ql-toolbar .ql-formats {
-  margin: var(--spacing-x-tight) var(--spacing-tight);
+  margin: var(--spacing-x-tight) var(--spacing-base);
 
   & + .ql-formats {
     margin-left: 0;
@@ -291,7 +291,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      padding: var(--spacing-x-tight) var(--spacing-tight);
+      padding: var(--spacing-x-tight) var(--spacing-base);
 
       color: var(--text-color);
       font-size: var(--font-size-sm);

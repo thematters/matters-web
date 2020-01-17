@@ -10,8 +10,6 @@ import BLOCK_USER from '~/components/GQL/mutations/blockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
 import { ADD_TOAST, PATHS, TEXT } from '~/common/enums'
-import ICON_BLOCK from '~/static/icons/block.svg?sprite'
-import ICON_UNBLOCK from '~/static/icons/unblock.svg?sprite'
 
 import styles from './styles.css'
 
@@ -20,21 +18,13 @@ const fragments = {
 }
 
 const TextIconBlock = () => (
-  <TextIcon
-    icon={<Icon id={ICON_BLOCK.id} viewBox={ICON_BLOCK.viewBox} size="small" />}
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.Block />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.blockUser} zh_hans={TEXT.zh_hans.block} />
   </TextIcon>
 )
 
 const TextIconUnblock = () => (
-  <TextIcon
-    icon={
-      <Icon id={ICON_UNBLOCK.id} viewBox={ICON_UNBLOCK.viewBox} size="small" />
-    }
-    spacing="tight"
-  >
+  <TextIcon icon={<Icon.Unblock />} spacing="tight">
     <Translate
       zh_hant={TEXT.zh_hant.unblockUser}
       zh_hans={TEXT.zh_hans.unblockUser}

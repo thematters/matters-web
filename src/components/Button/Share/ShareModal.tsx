@@ -1,11 +1,9 @@
-import { Icon } from '~/components/Icon'
-import { Translate } from '~/components/Language'
+import { Icon, Translate } from '~/components'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
 
 import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
-import ICON_SHARE_LINK from '~/static/icons/share-link.svg?sprite'
 
 import Douban from './Douban'
 import Email from './Email'
@@ -35,7 +33,7 @@ const ShareModal = () => {
   }
 
   return (
-    <ModalInstance modalId="shareModal" layout="small">
+    <ModalInstance modalId="shareModal" layout="sm">
       {(props: ModalInstanceProps) => (
         <Modal.Content spacing="none" layout="full-width">
           <>
@@ -57,11 +55,7 @@ const ShareModal = () => {
 
             <div className="link-container">
               <button onClick={copy} type="button">
-                <Icon
-                  id={ICON_SHARE_LINK.id}
-                  viewBox={ICON_SHARE_LINK.viewBox}
-                  size="xsmall"
-                />
+                <Icon.ShareLink size="xs" />
               </button>
 
               <input

@@ -26,8 +26,8 @@ ul {
 li {
   display: inline-block;
 
-  margin-right: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
+  margin-right: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-x-loose);
 
   color: var(--color-grey);
   font-size: var(--font-size-md);
@@ -42,7 +42,7 @@ li {
   }
 
   &[aria-selected='true'] {
-    margin-bottom: calc(var(--spacing-loose) + 2px);
+    margin-bottom: calc(var(--spacing-x-loose) + 2px);
 
     & :global(> *) {
       padding-bottom: var(--spacing-xx-tight);

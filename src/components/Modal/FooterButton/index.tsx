@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import IconSpinner from '~/components/Icon/Spinner'
+import { Icon } from '~/components'
 
 import styles from './styles.css'
 
@@ -82,7 +82,7 @@ const FooterButton: React.FC<ButtonProps> = ({
   return (
     <>
       <button type={htmlType} className={buttonClasses} {...restProps}>
-        {loading && <IconSpinner />}
+        {loading && <Icon.Spinner size="md" />}
         {!loading && children}
       </button>
 

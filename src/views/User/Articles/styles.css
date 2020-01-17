@@ -2,8 +2,8 @@
   @mixin border-bottom-grey;
   display: flex;
   align-items: center;
-  padding-bottom: var(--spacing-default);
-  margin-bottom: var(--spacing-default);
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
 
   color: var(--color-grey);
 

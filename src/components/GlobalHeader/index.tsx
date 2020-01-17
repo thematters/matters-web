@@ -27,7 +27,7 @@ import WriteButton from './WriteButton'
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
-  const isMediumUp = useResponsive({ type: 'medium-up' })()
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { type: headerType } = headerState
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'

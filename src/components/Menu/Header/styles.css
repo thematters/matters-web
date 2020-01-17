@@ -2,10 +2,9 @@ header {
   @mixin flex-center-space-between;
 
   margin: 0.75rem 0 var(--spacing-xx-tight);
-  padding-left: var(--spacing-tight);
-  padding-right: var(--spacing-tight);
+  padding-left: var(--spacing-base);
+  padding-right: var(--spacing-base);
 
-  font-size: var(--font-size-xs); /* fallback */
-  font-size: calc(var(--font-size-sm) - 1px);
+  font-size: var(--font-size-sm-s);
   font-weight: var(--font-weight-medium);
 }

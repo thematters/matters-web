@@ -20,8 +20,8 @@ const ReplyTo = ({
 
     <UserDigest.Mini
       user={user}
-      avatarSize="xxxsmall"
-      textWeight="medium"
+      avatarSize="xs"
+      textWeight="md"
       spacing="xxtight"
       hasUserName={inArticle}
     />

@@ -1,7 +1,5 @@
 import { Empty, Icon, Translate } from '~/components'
 
-import ICON_EMPTY_RESPONSE from '~/static/icons/empty-comment.svg?sprite'
-
 const EmptyResponse = ({
   description,
   articleOnlyMode
@@ -11,13 +9,7 @@ const EmptyResponse = ({
 }) => {
   return (
     <Empty
-      icon={
-        <Icon
-          id={ICON_EMPTY_RESPONSE.id}
-          viewBox={ICON_EMPTY_RESPONSE.viewBox}
-          size={'xxlarge'}
-        />
-      }
+      icon={<Icon.EmptyComment size="xxl" />}
       description={
         description ||
         (articleOnlyMode ? (

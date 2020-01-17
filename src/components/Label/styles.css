@@ -5,7 +5,7 @@
   user-select: none;
 }
 
-.small {
+.sm {
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
 
   font-size: var(--font-size-xs);
@@ -16,7 +16,7 @@
 .default {
   @mixin font-serif;
 
-  padding: var(--spacing-xx-tight) var(--spacing-tight);
+  padding: var(--spacing-xx-tight) var(--spacing-base);
 
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);

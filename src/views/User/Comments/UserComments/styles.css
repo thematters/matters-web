@@ -3,7 +3,7 @@
     @mixin border-bottom-grey;
 
     & + .article-item {
-      margin-top: var(--spacing-default);
+      margin-top: var(--spacing-loose);
     }
 
     & h3 {

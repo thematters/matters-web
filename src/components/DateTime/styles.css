@@ -1,4 +1,7 @@
 time {
-  font-size: var(--font-size-xs);
   color: var(--color-grey);
+
+  font-size: var(--font-size-timestamp);
+  line-height: var(--line-height-timestamp);
+  font-weight: var(--font-weight-timestamp);
 }

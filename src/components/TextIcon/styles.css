@@ -22,11 +22,6 @@
 }
 
 /* size */
-.size-xxs {
-  & .text {
-    font-size: var(--font-size-xxs);
-  }
-}
 .size-xs {
   & .text {
     font-size: var(--font-size-xs);
@@ -118,13 +113,13 @@
 }
 .spacing-tight {
   &.text-right .text {
-    padding-left: var(--spacing-tight);
+    padding-left: var(--spacing-base);
   }
   &.text-left .text {
-    padding-right: var(--spacing-tight);
+    padding-right: var(--spacing-base);
   }
   &.text-bottom .text {
-    padding-top: var(--spacing-tight);
+    padding-top: var(--spacing-base);
   }
 }
 
@@ -135,7 +130,7 @@
 .weight-normal {
   font-weight: var(--font-weight-normal);
 }
-.weight-medium {
+.weight-md {
   font-weight: var(--font-weight-medium);
 }
 .weight-semibold {

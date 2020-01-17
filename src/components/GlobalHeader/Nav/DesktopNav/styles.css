@@ -13,7 +13,7 @@
   }
 
   & :global(+ a) {
-    margin-left: var(--spacing-default);
+    margin-left: var(--spacing-loose);
   }
 
   &.active {

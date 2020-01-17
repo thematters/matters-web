@@ -7,7 +7,7 @@ import styles from './styles.css'
 
 const PinnedLabel = () => (
   <span className="label">
-    <Label size="small">
+    <Label size="sm">
       <Translate
         zh_hant={TEXT.zh_hant.authorRecommend}
         zh_hans={TEXT.zh_hant.authorRecommend}

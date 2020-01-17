@@ -7,7 +7,6 @@ import { ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
-import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 import styles from './styles.css'
@@ -81,15 +80,9 @@ const WalletSetting = () => {
       {likerId && (
         <a href="https://like.co/in" className="u-link-green" target="_blank">
           <TextIcon
-            icon={
-              <Icon
-                id={ICON_ARROW_RIGHT_GREEN.id}
-                viewBox={ICON_ARROW_RIGHT_GREEN.viewbox}
-                size="small"
-              />
-            }
+            icon={<Icon.ArrowRightGreen />}
             textPlacement="left"
-            weight="medium"
+            weight="md"
           >
             <Translate zh_hant="去 like.co 查看" zh_hans="去 like.co 查看" />
           </TextIcon>

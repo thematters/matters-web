@@ -1,10 +1,10 @@
 .buttons {
   display: none;
-  margin-top: var(--spacing-tight);
+  margin-top: var(--spacing-base);
   text-align: right;
 
   & :global(> * + *) {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
   }
 }
 

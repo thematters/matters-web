@@ -37,18 +37,18 @@
   }
 }
 
-.text-medium {
+.text-md {
   font-weight: var(--font-weight-medium);
 }
 
-.text-small {
+.text-sm {
   font-size: var(--font-size-sm);
 }
 
-.text-msmall {
-  font-size: calc(var(--font-size-sm) - 1px);
+.text-sm-s {
+  font-size: var(--font-size-sm-s);
 }
 
-.text-xsmall {
+.text-xs {
   font-size: var(--font-size-xs);
 }

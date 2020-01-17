@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import styles from './styles.css'
 
 interface ContentProps {
-  spacing?: 'none' | 'small' | 'default'
+  spacing?: 'none' | 'sm' | 'default'
   layout?: 'full-width' | 'default'
   scrollLock?: boolean
 }

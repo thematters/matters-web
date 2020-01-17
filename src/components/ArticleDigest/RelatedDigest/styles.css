@@ -29,7 +29,7 @@
   width: 100%;
   height: 13.4rem;
   max-height: 13.4rem;
-  padding: var(--spacing-default) var(--spacing-tight) var(--spacing-tight);
+  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-base);
 
   & .title {
     min-height: 1.5rem;
@@ -56,7 +56,7 @@
 .has-cover {
   border-top: 0;
   border-radius: 0 0 0.25rem 0.25rem;
-  padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-tight);
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-base);
 
   & .title {
     height: 3rem;

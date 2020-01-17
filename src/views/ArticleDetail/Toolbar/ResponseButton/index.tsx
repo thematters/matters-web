@@ -6,7 +6,6 @@ import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, dom, numAbbr } from '~/common/utils'
-import ICON_COMMENT_REGULAR from '~/static/icons/comment-regular.svg?sprite'
 
 import { ResponseButtonArticle } from './__generated__/ResponseButtonArticle'
 
@@ -32,15 +31,9 @@ const ButtonWithEffect = ({
   return (
     <button type="button" aria-label="查看回應" onClick={onClick}>
       <TextIcon
-        icon={
-          <Icon
-            size="default"
-            id={ICON_COMMENT_REGULAR.id}
-            viewBox={ICON_COMMENT_REGULAR.viewBox}
-          />
-        }
+        icon={<Icon.CommentRegular size="md" />}
         color="grey"
-        weight="medium"
+        weight="md"
         text={text}
         textPlacement={textPlacement}
         size="xs"

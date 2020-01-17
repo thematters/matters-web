@@ -174,11 +174,16 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: translate({
-                zh_hant: id ? TEXT.zh_hant.tagEdited : TEXT.zh_hant.tagCreated,
-                zh_hans: id ? TEXT.zh_hans.tagEdited : TEXT.zh_hans.tagCreated,
-                lang
-              }),
+              content: (
+                <Translate
+                  zh_hant={
+                    id ? TEXT.zh_hant.tagEdited : TEXT.zh_hant.tagCreated
+                  }
+                  zh_hans={
+                    id ? TEXT.zh_hans.tagEdited : TEXT.zh_hans.tagCreated
+                  }
+                />
+              ),
               closeButton: true,
               duration: 2000
             }
@@ -211,13 +216,12 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
 
   return (
     <form id="tag-modal" className="form" onSubmit={handleSubmit}>
-      <Modal.Content spacing="small" layout="full-width">
+      <Modal.Content spacing="sm" layout="full-width">
         <p className="field">
-          {translate({
-            zh_hant: TEXT.zh_hant.tagName,
-            zh_hans: TEXT.zh_hans.tagName,
-            lang
-          })}
+          <Translate
+            zh_hant={TEXT.zh_hant.tagName}
+            zh_hans={TEXT.zh_hans.tagName}
+          />
         </p>
         <Form.DropdownInput
           type="text"
@@ -242,11 +246,10 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           query={SEARCH_TAGS}
         />
         <p className="field">
-          {translate({
-            zh_hant: TEXT.zh_hant.tagDescription,
-            zh_hans: TEXT.zh_hans.tagDescription,
-            lang
-          })}
+          <Translate
+            zh_hant={TEXT.zh_hant.tagDescription}
+            zh_hans={TEXT.zh_hans.tagDescription}
+          />
         </p>
         <Form.Textarea
           field="description"

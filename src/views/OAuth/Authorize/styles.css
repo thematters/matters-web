@@ -1,9 +1,9 @@
 .content {
-  padding: var(--spacing-tight) var(--spacing-xx-loose) var(--spacing-xx-loose);
+  padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-xxx-loose);
   text-align: left;
 
   & ul {
-    padding: 0 var(--spacing-x-tight) var(--spacing-loose);
+    padding: 0 var(--spacing-x-tight) var(--spacing-x-loose);
 
     color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
@@ -26,7 +26,7 @@
   }
 
   & .switch-account {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--spacing-x-loose);
 
     color: var(--color-grey-dark);
     text-align: center;

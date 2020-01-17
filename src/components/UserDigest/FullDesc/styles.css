@@ -1,14 +1,14 @@
 .container {
   @mixin border-bottom-grey;
   @mixin flex-start-space-between;
-  padding-bottom: var(--spacing-tight);
-  margin-bottom: var(--spacing-tight);
+  padding-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
   font-size: 0;
 }
 
 .content {
   flex-grow: 1;
-  margin-left: var(--spacing-tight);
+  margin-left: var(--spacing-base);
 }
 
 .header-container {
@@ -20,16 +20,15 @@
 }
 
 .name {
-  padding-right: var(--spacing-tight);
+  padding-right: var(--spacing-base);
 
   color: var(--color-black);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
 
-  &.small {
-    font-size: var(--font-size-sm); /* fallback */
-    font-size: calc(var(--font-size-sm) + 1px);
+  &.sm {
+    font-size: var(--font-size-md-s);
     line-height: 1.33333333;
   }
 }

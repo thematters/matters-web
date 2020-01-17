@@ -1,6 +1,6 @@
 .container {
-  padding: var(--spacing-default) var(--spacing-default) var(--spacing-x-loose)
-    var(--spacing-default);
+  padding: var(--spacing-loose) var(--spacing-loose) var(--spacing-xx-loose)
+    var(--spacing-loose);
 }
 
 header {
@@ -8,12 +8,12 @@ header {
 }
 
 .radios {
-  margin: var(--spacing-default) 0;
+  margin: var(--spacing-loose) 0;
 
   & .content {
     @mixin flex-center-space-between;
     @mixin all-transition;
-    padding: var(--spacing-tight) var(--spacing-default);
+    padding: var(--spacing-base) var(--spacing-loose);
     border: 1.5px solid var(--color-grey-light);
     border-radius: 4px;
 
@@ -35,7 +35,7 @@ header {
 
   & label + label {
     display: block;
-    margin-top: var(--spacing-tight);
+    margin-top: var(--spacing-base);
   }
 
   & input:checked + .content {

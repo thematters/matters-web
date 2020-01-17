@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Icon, TextIcon, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
-import ICON_ARROW_RIGHT_GREEN from '~/static/icons/arrow-right-green.svg?sprite'
 
 import styles from './styles.css'
 
@@ -16,16 +15,7 @@ const BackToAggregate = ({ q }: { q: string }) => {
   return (
     <Link {...viewAllPath}>
       <a>
-        <TextIcon
-          icon={
-            <Icon
-              id={ICON_ARROW_RIGHT_GREEN.id}
-              viewBox={ICON_ARROW_RIGHT_GREEN.viewBox}
-              style={{ width: 12, height: 6 }}
-            />
-          }
-          color="green"
-        >
+        <TextIcon icon={<Icon.ArrowRightGreen />} color="green">
           <Translate zh_hant="全部結果" zh_hans="全部结果" />
         </TextIcon>
       </a>

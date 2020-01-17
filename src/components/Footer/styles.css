@@ -4,12 +4,12 @@
   align-items: flex-start;
   justify-content: flex-start;
 
-  padding: var(--spacing-loose) 0px;
+  padding: var(--spacing-x-loose) 0px;
 }
 
 .item {
   padding-bottom: var(--spacing-x-tight);
-  padding-right: var(--spacing-default);
+  padding-right: var(--spacing-loose);
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);

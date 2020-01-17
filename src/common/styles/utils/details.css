@@ -4,7 +4,7 @@
   & summary {
     position: relative;
     display: block;
-    padding-left: var(--spacing-default);
+    padding-left: var(--spacing-loose);
 
     cursor: pointer;
     user-select: none;
@@ -23,10 +23,10 @@
   }
 
   & details {
-    padding-left: var(--spacing-default);
+    padding-left: var(--spacing-loose);
 
     & summary {
-      padding-left: var(--spacing-tight);
+      padding-left: var(--spacing-base);
 
       &::-webkit-details-marker {
         top: 0.4rem;

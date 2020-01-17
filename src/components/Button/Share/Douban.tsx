@@ -1,11 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon } from '~/components/Icon'
+import { Icon } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
-import ICON_SHARE_DOUBAN from '~/static/icons/share-douban.svg?sprite'
 
 const Douban = () => (
   <button
@@ -30,17 +29,7 @@ const Douban = () => (
       return window.open(shareUrl)
     }}
   >
-    <TextIcon
-      icon={
-        <Icon
-          id={ICON_SHARE_DOUBAN.id}
-          viewBox={ICON_SHARE_DOUBAN.viewBox}
-          size="small"
-        />
-      }
-      spacing="tight"
-      text="豆瓣"
-    />
+    <TextIcon icon={<Icon.ShareDouban />} spacing="tight" text="豆瓣" />
   </button>
 )
 

@@ -8,12 +8,8 @@ import {
   DropResult
 } from 'react-beautiful-dnd'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { ArticleDigest, Icon } from '~/components'
 import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
-import { Icon } from '~/components/Icon'
-
-import ICON_DELETE_BLACK_CIRCLE from '~/static/icons/delete-black-circle.svg?sprite'
-import ICON_DRAG from '~/static/icons/drag.svg?sprite'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
@@ -112,11 +108,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon
-                            id={ICON_DRAG.id}
-                            viewBox={ICON_DRAG.viewBox}
-                            size="small"
-                          />
+                          <Icon.Drag />
                         </span>
 
                         <ArticleDigest.Dropdown
@@ -131,11 +123,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           aria-label="刪除"
                           onClick={() => this.onDelete(article)}
                         >
-                          <Icon
-                            id={ICON_DELETE_BLACK_CIRCLE.id}
-                            viewBox={ICON_DELETE_BLACK_CIRCLE.viewBox}
-                            size="small"
-                          />
+                          <Icon.DeleteBlackCircle />
                         </button>
                       </li>
                     )}

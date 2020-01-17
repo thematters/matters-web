@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import {
   Footer,
   Head,
+  Icon,
   InfiniteScroll,
   PageHeader,
   Spinner,
@@ -14,7 +15,6 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
-import AddIcon from '~/components/Icon/Add'
 import TagModal from '~/components/Modal/TagModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
@@ -61,9 +61,8 @@ const CreateTagButton = () => {
       {(open: any) => (
         <button type="button" onClick={e => open()}>
           <TextIcon
-            icon={<AddIcon color="green" size="xsmall" />}
+            icon={<Icon.Add color="green" size="xs" />}
             spacing="xxxtight"
-            size="sm"
             color="green"
           >
             <Translate
@@ -108,7 +107,8 @@ const Tags = () => {
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
+          dedupe: true
         })
     })
   }

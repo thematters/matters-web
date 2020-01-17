@@ -1,11 +1,9 @@
 import queryString from 'query-string'
 
-import { Icon } from '~/components/Icon'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import ICON_SHARE_FACEBOOK from '~/static/icons/share-facebook.svg?sprite'
 
 const Facebook = () => (
   <button
@@ -24,17 +22,7 @@ const Facebook = () => (
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    <TextIcon
-      icon={
-        <Icon
-          id={ICON_SHARE_FACEBOOK.id}
-          viewBox={ICON_SHARE_FACEBOOK.viewBox}
-          size="small"
-        />
-      }
-      spacing="tight"
-      text="Facebook"
-    />
+    <TextIcon icon={<Icon.ShareFacebook />} spacing="tight" text="Facebook" />
   </button>
 )
 

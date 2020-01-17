@@ -1,9 +1,9 @@
 .container {
   margin-bottom: 3rem;
-  margin-top: calc(var(--spacing-loose) * -1);
+  margin-top: calc(var(--spacing-x-loose) * -1);
 
   @media (--sm-up) {
-    margin-top: calc(var(--spacing-x-loose) * -1);
+    margin-top: calc(var(--spacing-xx-loose) * -1);
   }
   @media (--lg-up) {
     background: initial !important;
@@ -11,11 +11,11 @@
 }
 
 .content-container {
-  padding-top: var(--spacing-default);
-  padding-bottom: var(--spacing-loose);
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-x-loose);
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-x-loose);
+    padding-bottom: var(--spacing-xx-loose);
   }
 }
 
@@ -62,7 +62,7 @@
   flex-grow: 1;
   width: 100%;
 
-  margin-top: var(--spacing-tight);
+  margin-top: var(--spacing-base);
   margin-left: 0;
 
   @media (--sm-up) {
@@ -116,7 +116,7 @@
   right: 0;
 
   & :global(button) {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
   }
 
   & .follows {
@@ -126,7 +126,7 @@
 
     & .follow-state {
       display: inline-block;
-      margin-top: var(--spacing-tight);
+      margin-top: var(--spacing-base);
       line-height: 1;
     }
   }
@@ -162,12 +162,11 @@
 .info-follow {
   @mixin border-top-grey;
 
-  margin-top: var(--spacing-tight);
-  padding-top: var(--spacing-tight);
+  margin-top: var(--spacing-base);
+  padding-top: var(--spacing-base);
 
   color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  font-size: calc(var(--font-size-sm) - 1px);
+  font-size: var(--font-size-sm-s);
 
   & .followers,
   & .followees {

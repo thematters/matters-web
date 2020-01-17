@@ -15,10 +15,10 @@ footer {
     flex-wrap: wrap;
   }
   & .space-left {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-base);
   }
   & .space-right {
-    margin-right: var(--spacing-tight);
+    margin-right: var(--spacing-base);
   }
 }
 

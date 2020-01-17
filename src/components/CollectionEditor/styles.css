@@ -7,7 +7,7 @@ ul {
     position: relative;
 
     padding: var(--spacing-x-tight);
-    margin: var(--spacing-tight) var(--spacing-tight) 0 var(--spacing-tight);
+    margin: var(--spacing-base) var(--spacing-base) 0 var(--spacing-base);
 
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 2px;
@@ -41,7 +41,7 @@ ul {
     &:focus,
     &.dragging {
       border-color: var(--color-matters-green);
-      background: var(--color-bg-green);
+      background: var(--color-green-lighter);
     }
 
     @media (--lg-up) {
@@ -56,7 +56,7 @@ ul {
       &:hover,
       &:focus {
         border-color: var(--color-matters-green);
-        background: var(--color-bg-green);
+        background: var(--color-green-lighter);
 
         & .drag-handler,
         & .delete-handler {

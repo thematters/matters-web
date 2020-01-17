@@ -3,21 +3,11 @@ import { useState } from 'react'
 
 import { Icon, TextIcon, Translate } from '~/components'
 
-import ICON_COLLECTION from '~/static/icons/collection.svg?sprite'
-
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import CollectionList from './CollectionList'
 import EditButton from './EditButton'
 import EditingList from './EditingList'
 import styles from './styles.css'
-
-const IconCollection = () => (
-  <Icon
-    id={ICON_COLLECTION.id}
-    viewBox={ICON_COLLECTION.viewBox}
-    size="small"
-  />
-)
 
 const Collection: React.FC<{
   article: ArticleDetail_article
@@ -31,10 +21,10 @@ const Collection: React.FC<{
     <section className="collection">
       <header>
         <TextIcon
-          icon={<IconCollection />}
+          icon={<Icon.Collection />}
           spacing="xxtight"
           size="md"
-          weight="medium"
+          weight="md"
         >
           {!collectionCount || collectionCount <= 0 ? (
             <Translate zh_hant="沒有關聯作品" zh_hans="没有关联作品" />

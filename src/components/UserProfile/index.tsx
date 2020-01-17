@@ -10,6 +10,7 @@ import { useContext, useState } from 'react'
 import {
   Avatar,
   Expandable,
+  Icon,
   Placeholder,
   Tooltip,
   Translate
@@ -17,14 +18,12 @@ import {
 import { FollowButton } from '~/components/Button/Follow'
 import ShareButton from '~/components/Button/Share'
 import ShareModal from '~/components/Button/Share/ShareModal'
-import { Icon } from '~/components/Icon'
 import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
 
 import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
-import ICON_SEED_BADGE from '~/static/icons/early-user-badge.svg?sprite'
 
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
@@ -89,11 +88,7 @@ const ME_PROFILE = gql`
 const SeedBadge = () => (
   <Tooltip content={<Translate zh_hant="種子用戶" zh_hans="种子用户" />}>
     <span>
-      <Icon
-        id={ICON_SEED_BADGE.id}
-        viewBox={ICON_SEED_BADGE.viewBox}
-        style={{ width: 16, height: 16 }}
-      />
+      <Icon.SeedBadge />
     </span>
   </Tooltip>
 )
@@ -192,7 +187,7 @@ const BaseUserProfile = () => {
           <section className="content">
             <div className="avatar-container">
               <Avatar
-                size="xlarge"
+                size="xxl"
                 user={!isMe && isUserInactive ? undefined : user}
               />
 

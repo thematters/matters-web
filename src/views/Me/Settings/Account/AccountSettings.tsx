@@ -23,7 +23,7 @@ const EditButton = ({
       <Button
         outlineColor="green"
         bgColor="transparent"
-        size="small"
+        size="sm"
         style={{ width: '3rem' }}
         onClick={open}
         disabled={disabled}

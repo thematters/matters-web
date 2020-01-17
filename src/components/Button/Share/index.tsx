@@ -1,8 +1,8 @@
 import { Icon } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
 
-import { isMobile } from '~/common/utils'
-import ICON_SHARE from '~/static/icons/share.svg?sprite'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { analytics, isMobile } from '~/common/utils'
 
 const ShareButton = () => (
   <>
@@ -12,12 +12,17 @@ const ShareButton = () => (
           type="button"
           aria-label="分享"
           onClick={async () => {
+            const url = window.location.href
+            analytics.trackEvent(ANALYTICS_EVENTS, {
+              type: SHARE_TYPE.ROOT,
+              url
+            })
             const navigator = window.navigator as any
             if (navigator.share && isMobile()) {
               try {
                 await navigator.share({
                   title: window.document.title,
-                  url: window.location.href
+                  url
                 })
               } catch (e) {
                 console.error(e)
@@ -27,11 +32,7 @@ const ShareButton = () => (
             }
           }}
         >
-          <Icon
-            size="default"
-            id={ICON_SHARE.id}
-            viewBox={ICON_SHARE.viewBox}
-          />
+          <Icon.Share size="md" />
         </button>
       )}
     </ModalSwitch>
