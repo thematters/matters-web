@@ -5,16 +5,17 @@ import { Title } from '~/components'
 import styles from './styles.css'
 
 interface PageHeaderProps {
+  title: string | React.ReactNode
   buttons?: React.ReactNode
   description?: string
-  pageTitle: string | React.ReactNode
+
   is?: 'h1' | 'h2' | 'h3'
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
   buttons,
   description,
-  pageTitle,
+  title,
   children,
   is = 'h1'
 }) => {
@@ -27,13 +28,17 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     return (
       <header className={headerClasses}>
         <section className="title">
-          <Title is={is} type="page">
-            {pageTitle}
+          <Title type="nav" is={is}>
+            {title}
           </Title>
+
           {buttons}
         </section>
+
         <section className="description">{description}</section>
+
         {children}
+
         <style jsx>{styles}</style>
       </header>
     )
@@ -41,8 +46,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
   return (
     <header>
-      <Title is={is} type="page">
-        {pageTitle}
+      <Title type="nav" is={is}>
+        {title}
       </Title>
 
       {children}

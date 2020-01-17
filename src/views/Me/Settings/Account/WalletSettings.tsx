@@ -102,7 +102,7 @@ const WalletSettings = () => {
   return (
     <section className="section-container">
       <PageHeader
-        pageTitle={
+        title={
           <Translate
             zh_hant={TEXT.zh_hant.walletSetting}
             zh_hans={TEXT.zh_hans.walletSetting}

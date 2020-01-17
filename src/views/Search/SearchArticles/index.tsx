@@ -9,7 +9,7 @@ import {
   List,
   LoadMore,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import { useResponsive } from '~/components/Hook'
@@ -54,7 +54,7 @@ const SearchArticles = ({ q }: { q: string }) => {
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
   if (loading && (!data?.search || isNewLoading)) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   const connectionPath = 'search'
@@ -100,7 +100,7 @@ const SearchArticles = ({ q }: { q: string }) => {
     >
       <PageHeader
         is="h2"
-        pageTitle={
+        title={
           <Translate
             zh_hant={TEXT.zh_hant.article}
             zh_hans={TEXT.zh_hans.article}

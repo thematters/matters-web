@@ -1,7 +1,6 @@
 .info {
   display: flex;
   align-items: center;
-  padding: var(--spacing-loose) 0 0;
 
   color: var(--color-grey);
 

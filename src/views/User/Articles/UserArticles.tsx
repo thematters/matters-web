@@ -8,7 +8,7 @@ import {
   Icon,
   InfiniteScroll,
   List,
-  Placeholder
+  Spinner
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
@@ -65,7 +65,7 @@ const UserArticles = () => {
   }
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

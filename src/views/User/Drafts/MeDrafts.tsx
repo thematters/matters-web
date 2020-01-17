@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DraftDigest, InfiniteScroll, List, Placeholder } from '~/components'
+import { DraftDigest, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
 import { QueryError } from '~/components/GQL'
 
@@ -38,7 +38,7 @@ const MeDrafts = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

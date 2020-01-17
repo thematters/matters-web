@@ -10,14 +10,6 @@
   font-weight: var(--font-weight-article-title);
 }
 
-.page {
-  @mixin font-serif;
-
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
-  line-height: 1.5;
-}
-
 .feed {
   font-size: var(--font-size-feed-title);
   line-height: var(--line-height-feed-title);

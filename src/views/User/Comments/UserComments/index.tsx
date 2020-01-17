@@ -9,7 +9,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  Placeholder
+  Spinner
 } from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
@@ -84,7 +84,7 @@ const UserCommentsWrap = () => {
   })
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -123,7 +123,7 @@ const UserComments = ({ user }: UserIdUser) => {
   }
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

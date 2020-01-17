@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
@@ -47,7 +47,7 @@ const Topics = () => {
   const { data, loading, error, fetchMore } = useQuery<AllTopics>(ALL_TOPICSS)
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -112,7 +112,7 @@ export default () => {
         />
 
         <PageHeader
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allTopics}
               zh_hans={TEXT.zh_hans.allTopics}

@@ -2,13 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import {
-  Head,
-  InfiniteScroll,
-  List,
-  Placeholder,
-  Translate
-} from '~/components'
+import { Head, InfiniteScroll, List, Spinner, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -52,7 +46,7 @@ const UserFollowees = () => {
   )
 
   if (loading || !data || !data.user) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

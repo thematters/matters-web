@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, List, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 import { QueryError } from '~/components/GQL'
 
@@ -37,7 +37,7 @@ const MeBookmarks = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

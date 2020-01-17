@@ -2,6 +2,10 @@
   margin-top: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
+
+  & :global(> header) {
+    margin-bottom: 0;
+  }
 }
 
 .setting-item {

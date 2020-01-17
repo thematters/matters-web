@@ -43,7 +43,7 @@ const SEARCH_USERS = gql`
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
   <PageHeader
     is="h2"
-    pageTitle={
+    title={
       <Translate zh_hant={TEXT.zh_hant.user} zh_hans={TEXT.zh_hans.user} />
     }
   >

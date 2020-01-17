@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, List, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
 import { QueryError } from '~/components/GQL'
 
@@ -42,7 +42,7 @@ const MeHistory = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {

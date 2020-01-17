@@ -45,9 +45,7 @@ const SEARCH_TAGS = gql`
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
   <PageHeader
     is="h2"
-    pageTitle={
-      <Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />
-    }
+    title={<Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />}
   >
     {viewAll && q && <ViewAll q={q} type="tag" />}
   </PageHeader>

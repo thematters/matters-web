@@ -62,7 +62,7 @@ export const AuthorPicker = ({
 
   return (
     <div className={containerStyle}>
-      <PageHeader pageTitle={title}>
+      <PageHeader title={title}>
         <div className="follow-info">
           <ShuffleButton onClick={() => refetch()} />
           <span>

@@ -6,7 +6,6 @@ import styles from './styles.css'
 type TitleType =
   | 'feature'
   | 'article'
-  | 'page'
   | 'feed'
   | 'modal'
   | 'modal-headline'

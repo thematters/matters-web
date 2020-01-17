@@ -8,7 +8,7 @@ const SettingsTabs = () => {
   const router = useRouter()
 
   return (
-    <Tabs spacingBottom="xxloose">
+    <Tabs>
       <Tabs.Tab
         {...PATHS.ME_SETTINGS_ACCOUNT}
         selected={router.pathname === PATHS.ME_SETTINGS_ACCOUNT.href}

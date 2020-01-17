@@ -7,7 +7,7 @@ import {
   InfiniteScroll,
   List,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
@@ -57,7 +57,7 @@ const FollowFeed = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -133,7 +133,7 @@ export default () => (
     />
 
     <PageHeader
-      pageTitle={
+      title={
         <Translate
           zh_hant={TEXT.zh_hant.follow}
           zh_hans={TEXT.zh_hans.follow}

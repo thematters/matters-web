@@ -2,7 +2,8 @@ header {
   @mixin flex-center-space-between;
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--spacing-base);
+  padding-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-base);
 }
 
 .hasButtons {

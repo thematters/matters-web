@@ -7,7 +7,7 @@ import {
   List,
   LoadMore,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
@@ -87,7 +87,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   if (loading && (!result || isNewLoading)) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -164,7 +164,7 @@ const HomeFeed = () => {
   return (
     <>
       <PageHeader
-        pageTitle={
+        title={
           feedSortType === 'hottest' ? (
             <Translate zh_hant="熱門作品" zh_hans="热门作品" />
           ) : (

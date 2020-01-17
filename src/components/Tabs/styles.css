@@ -21,6 +21,9 @@ nav {
     );
   }
 
+  &.spacing-bottom-base {
+    margin-bottom: var(--spacing-base);
+  }
   &.spacing-bottom-loose {
     margin-bottom: var(--spacing-loose);
   }

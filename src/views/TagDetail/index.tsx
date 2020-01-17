@@ -11,7 +11,6 @@ import {
   InfiniteScroll,
   List,
   PageHeader,
-  Placeholder,
   Spinner,
   TextIcon,
   Translate
@@ -215,7 +214,7 @@ const TagDetailContainer = () => {
   })
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -243,7 +242,7 @@ const TagDetailContainer = () => {
       <Head title={`#${data.node.content}`} />
 
       <PageHeader
-        pageTitle={data.node.content}
+        title={data.node.content}
         buttons={<ActionButtons />}
         description={data.node.description || ''}
       />

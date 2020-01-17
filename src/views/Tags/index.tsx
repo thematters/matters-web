@@ -167,7 +167,7 @@ export default () => {
 
         <PageHeader
           buttons={<CreateTagButton />}
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
               zh_hans={TEXT.zh_hans.allTags}

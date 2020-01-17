@@ -9,7 +9,7 @@ const MiscTabs = () => {
 
   return (
     <>
-      <Tabs spacingBottom="loose">
+      <Tabs>
         <Tabs.Tab
           {...PATHS.MISC_FAQ}
           selected={router.asPath === PATHS.MISC_FAQ.as}

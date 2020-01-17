@@ -13,10 +13,6 @@ const MeTabs = () => {
   const userName = getQuery({ router, key: 'userName' }) || ''
   const isMe = !userName || viewer.userName === userName
 
-  const userPath = toPath({
-    page: 'userProfile',
-    userName
-  })
   const userFollowersPath = toPath({
     page: 'userFollowers',
     userName
@@ -28,10 +24,6 @@ const MeTabs = () => {
 
   return (
     <Tabs>
-      <Tabs.Tab {...userPath}>
-        <Translate zh_hant={TEXT.zh_hant.back} zh_hans={TEXT.zh_hant.back} />
-      </Tabs.Tab>
-
       <Tabs.Tab
         {...userFollowersPath}
         selected={router.pathname === PATHS.USER_FOLLOWERS.href}

@@ -120,7 +120,7 @@ export default () => {
         />
 
         <PageHeader
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allAuthors}
               zh_hans={TEXT.zh_hans.allAuthors}

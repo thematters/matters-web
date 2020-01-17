@@ -56,7 +56,7 @@ const AccountSettings = () => {
   return (
     <section className="section-container">
       <PageHeader
-        pageTitle={
+        title={
           <Translate
             zh_hant={TEXT.zh_hant.accountSetting}
             zh_hans={TEXT.zh_hans.accountSetting}
