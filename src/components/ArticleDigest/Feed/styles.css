@@ -2,6 +2,16 @@ header {
   @mixin flex-center-space-between;
 
   font-size: 0;
+
+  & .left,
+  & .right {
+    display: flex;
+    align-items: center;
+
+    & :global(> * + *) {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
 }
 
 .title,

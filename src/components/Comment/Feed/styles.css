@@ -12,7 +12,7 @@ header {
   @mixin flex-start-space-between;
 
   & .right {
-    & :global(* + *) {
+    & :global(> * + *) {
       margin-left: var(--spacing-x-tight);
     }
   }

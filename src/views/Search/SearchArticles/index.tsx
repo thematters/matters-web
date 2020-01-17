@@ -6,6 +6,7 @@ import _get from 'lodash/get'
 import {
   ArticleDigest,
   InfiniteScroll,
+  List,
   LoadMore,
   PageHeader,
   Placeholder,
@@ -106,12 +107,11 @@ const SearchArticles = ({ q }: { q: string }) => {
           />
         }
       />
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
-              <li
-                key={cursor}
+              <List.Item
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.SEARCH_ARTICLE,
@@ -119,12 +119,13 @@ const SearchArticles = ({ q }: { q: string }) => {
                     entrance: q
                   })
                 }
+                key={cursor}
               >
                 <ArticleDigest.Feed article={node} />
-              </li>
+              </List.Item>
             )
         )}
-      </ul>
+      </List>
 
       {!isMediumUp && pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

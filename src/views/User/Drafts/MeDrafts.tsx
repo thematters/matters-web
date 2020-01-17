@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DraftDigest, InfiniteScroll, Placeholder } from '~/components'
+import { DraftDigest, InfiniteScroll, List, Placeholder } from '~/components'
 import EmptyDraft from '~/components/Empty/EmptyDraft'
 import { QueryError } from '~/components/GQL'
 
@@ -67,13 +67,13 @@ const MeDrafts = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }) => (
-          <li key={cursor}>
+          <List.Item key={cursor}>
             <DraftDigest.Feed draft={node} />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Avatar } from '~/components/Avatar'
+import { Avatar, Card } from '~/components'
 import UnblockButton from '~/components/Button/BlockUser/Unblock'
 import { FollowButton } from '~/components/Button/Follow'
 import { Translate } from '~/components/Language'
@@ -100,32 +100,34 @@ const Rich = ({
   }
 
   return (
-    <section className={containerClass}>
-      <Link {...path}>
-        <a className="avatar">
-          <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
-          {avatarBadge && <span className="badge">{avatarBadge}</span>}
-        </a>
-      </Link>
+    <Card {...path}>
+      <section className={containerClass}>
+        <Link {...path}>
+          <a className="avatar">
+            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+            {avatarBadge && <span className="badge">{avatarBadge}</span>}
+          </a>
+        </Link>
 
-      <section className="content">
-        <header>
-          <Link {...path}>
-            <a className="name">{user.displayName}</a>
-          </Link>
-          <FollowButton.State user={user} />
-        </header>
+        <section className="content">
+          <header>
+            <Link {...path}>
+              <a className="name">{user.displayName}</a>
+            </Link>
+            <FollowButton.State user={user} />
+          </header>
 
-        <p className="description">{user.info.description}</p>
+          <p className="description">{user.info.description}</p>
+        </section>
+
+        <section className="extra-button">
+          {hasUnblock && <UnblockButton user={user} />}
+          {hasFollow && <FollowButton user={user} />}
+        </section>
+
+        <style jsx>{styles}</style>
       </section>
-
-      <section className="extra-button">
-        {hasUnblock && <UnblockButton user={user} />}
-        {hasFollow && <FollowButton user={user} />}
-      </section>
-
-      <style jsx>{styles}</style>
-    </section>
+    </Card>
   )
 }
 

@@ -5,6 +5,7 @@ import {
   ArticleDigest,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
   Placeholder,
   Translate
@@ -91,25 +92,26 @@ const FollowFeed = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
+          <List.Item
+            className={node.__typename === 'Article' ? 'article' : 'comment'}
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.FOLLOW,
                 location: i
               })
             }
-            className={node.__typename === 'Article' ? 'article' : 'comment'}
+            key={cursor}
           >
             {node.__typename === 'Article' && (
               <ArticleDigest.Feed article={node} />
             )}
             {node.__typename === 'Comment' && <FollowComment comment={node} />}
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
+
       <style jsx>{styles}</style>
     </InfiniteScroll>
   )

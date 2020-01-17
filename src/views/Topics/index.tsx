@@ -6,6 +6,7 @@ import {
   Footer,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
   Placeholder,
   Translate
@@ -80,21 +81,21 @@ const Topics = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
+          <List.Item
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.ALL_TOPICS,
                 location: i
               })
             }
+            key={cursor}
           >
             <ArticleDigest.Feed article={node} />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

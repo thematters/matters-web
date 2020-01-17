@@ -41,10 +41,11 @@ const fragments = {
 }
 const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
   const { article, author } = comment
+  const articlePath = toPath({ page: 'articleDetail', article })
   const path = toPath({ page: 'commentDetail', comment })
 
   return (
-    <article>
+    <Card {...articlePath}>
       <header>
         <section className="left">
           <UserDigest.Mini
@@ -79,7 +80,7 @@ const FollowComment = ({ comment }: { comment: FollowCommentType }) => {
       <Comment.FooterActions comment={comment} />
 
       <style jsx>{styles}</style>
-    </article>
+    </Card>
   )
 }
 

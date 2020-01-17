@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Footer, Head, InfiniteScroll, Spinner } from '~/components'
+import { Footer, Head, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'
 import { Transaction } from '~/components/TransactionDigest'
 
@@ -85,13 +85,13 @@ const AppreciationsSent = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul className="u-list-border-gap">
+        <List>
           {edges.map(({ node, cursor }) => (
-            <li key={cursor}>
+            <List.Item key={cursor}>
               <Transaction.AppreciationSent tx={node} />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )

@@ -2,7 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Head, InfiniteScroll, Placeholder, Translate } from '~/components'
+import {
+  Head,
+  InfiniteScroll,
+  List,
+  Placeholder,
+  Translate
+} from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -95,10 +101,10 @@ const UserFollowees = () => {
         }}
       />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul className="u-list-gap">
+        <List>
           {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
+            <List.Item
+              noBorder
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.FOLLOWEE,
@@ -106,11 +112,12 @@ const UserFollowees = () => {
                   entrance: user.id
                 })
               }
+              key={cursor}
             >
               <UserDigest.Rich user={node} hasFollow />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )

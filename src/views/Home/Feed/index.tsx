@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 
 import {
   InfiniteScroll,
+  List,
   LoadMore,
   PageHeader,
   Placeholder,
@@ -122,21 +123,21 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         hasNextPage={isMediumUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <ul className="u-list-border-gap">
+        <List>
           {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
+            <List.Item
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: sortBy,
                   location: i
                 })
               }
+              key={cursor}
             >
               <ArticleDigest.Feed article={node} />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
 
       {!isMediumUp && pageInfo.hasNextPage && (

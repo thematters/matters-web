@@ -20,7 +20,6 @@ interface FeedDigestProps {
   article: FeedDigestArticle
 
   hasSticky?: boolean
-
   inTagDetail?: boolean
 }
 
@@ -57,7 +56,6 @@ const FeedDigest = ({
   article,
 
   hasSticky,
-
   inTagDetail = false
 }: FeedDigestProps) => {
   const { author, summary, live, sticky } = article

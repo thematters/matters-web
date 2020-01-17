@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { Error, Icon, List, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { Notice } from '~/components/Notice'
 
@@ -101,17 +101,17 @@ const DropdownNotices = ({
       <Header />
 
       <section className="content">
-        <ul className="u-list-border-gap">
+        <List>
           {edges && edges.length > 0 ? (
             edges.map(({ node, cursor }) => (
-              <li key={cursor}>
-                <Notice notice={node} key={cursor} />
-              </li>
+              <List.Item key={cursor}>
+                <Notice notice={node} />
+              </List.Item>
             ))
           ) : (
             <EmptyNotice />
           )}
-        </ul>
+        </List>
       </section>
 
       <Footer />

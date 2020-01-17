@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   InfiniteScroll,
+  List,
   PageHeader,
   Spinner,
   Translate,
@@ -114,12 +115,12 @@ const SearchUser = ({
         loadMore={loadMore}
       >
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
-        <ul className="u-list-gap">
+        <List>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'User' && (
-                <li
-                  key={cursor}
+                <List.Item
+                  noBorder
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_USER,
@@ -127,12 +128,13 @@ const SearchUser = ({
                       entrance: q
                     })
                   }
+                  key={cursor}
                 >
                   <UserDigest.Rich user={node} hasFollow />
-                </li>
+                </List.Item>
               )
           )}
-        </ul>
+        </List>
       </InfiniteScroll>
 
       <style jsx>{styles}</style>

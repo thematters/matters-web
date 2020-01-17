@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Placeholder } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
 import { QueryError } from '~/components/GQL'
 
@@ -76,21 +76,21 @@ const MeHistory = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
+          <List.Item
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.READ_HISTORY,
                 location: i
               })
             }
+            key={cursor}
           >
             <ArticleDigest.Feed article={node.article} />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

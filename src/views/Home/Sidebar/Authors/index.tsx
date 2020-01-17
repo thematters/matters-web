@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   Label,
+  List,
   ShuffleButton,
   Spinner,
   Translate,
@@ -79,21 +80,22 @@ const Authors = () => {
       {loading && <Spinner />}
 
       {!loading && (
-        <ul className="u-list-gap">
+        <List>
           {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
+            <List.Item
+              noBorder
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.AUTHORS,
                   location: i
                 })
               }
+              key={cursor}
             >
               <UserDigest.Rich user={node} hasFollow />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       )}
 
       <style jsx>{styles}</style>

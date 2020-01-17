@@ -5,7 +5,7 @@ import { KEYCODES } from '~/common/enums'
 
 import styles from './styles.css'
 
-type CardSpacing = 'xtight' | 'tight' | 'base'
+type CardSpacing = 0 | '0' | 'xtight' | 'tight' | 'base'
 
 interface CardProps {
   bgColor?: 'grey-lighter'
@@ -18,7 +18,7 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({
   bgColor,
-  spacing = [0, 0],
+  spacing = ['base', 0],
   textSize,
 
   href,

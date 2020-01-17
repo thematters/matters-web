@@ -9,6 +9,7 @@ import {
   Head,
   Icon,
   InfiniteScroll,
+  List,
   PageHeader,
   Placeholder,
   Spinner,
@@ -179,10 +180,9 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
           >
-            <ul className="u-list-border-gap">
+            <List>
               {(edges || []).map(({ node, cursor }, i) => (
-                <li
-                  key={cursor}
+                <List.Item
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.TAG_DETAIL,
@@ -190,11 +190,12 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
                       entrance: id
                     })
                   }
+                  key={cursor}
                 >
                   <ArticleDigest.Feed article={node} inTagDetail />
-                </li>
+                </List.Item>
               ))}
-            </ul>
+            </List>
           </InfiniteScroll>
         )}
         {!hasArticles && <EmptyTagArticles />}

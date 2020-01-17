@@ -5,6 +5,7 @@ import {
   Footer,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
   Spinner,
   Translate,
@@ -87,21 +88,22 @@ const Authors = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-gap">
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
+          <List.Item
+            noBorder
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.ALL_AUTHORS,
                 location: i
               })
             }
+            key={cursor}
           >
             <UserDigest.Rich user={node} hasFollow />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

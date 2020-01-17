@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { LoadMore, Spinner, Translate } from '~/components'
+import { List, LoadMore, Spinner, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
@@ -92,13 +92,13 @@ const FeaturedComments = () => {
         </h3>
       </header>
 
-      <ul className="u-list-border-gap">
+      <List>
         {comments.map(comment => (
-          <li key={comment.id}>
+          <List.Item key={comment.id}>
             <ArticleComment comment={comment} />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Placeholder } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 import { QueryError } from '~/components/GQL'
 
@@ -66,13 +66,13 @@ const MeBookmarks = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }) => (
-          <li key={cursor}>
+          <List.Item key={cursor}>
             <ArticleDigest.Feed article={node} />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

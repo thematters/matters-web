@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import {
+  List,
   PageHeader,
   ShuffleButton,
   Spinner,
@@ -77,13 +78,13 @@ export const AuthorPicker = ({
       {error && <QueryError error={error} />}
 
       {!loading && (
-        <ul className="u-list-gap">
+        <List>
           {edges.map(({ node, cursor }) => (
-            <li key={cursor}>
+            <List.Item noBorder key={cursor}>
               <UserDigest.Rich user={node} hasFollow />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       )}
 
       <style jsx>{styles}</style>

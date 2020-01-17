@@ -8,7 +8,7 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { ArticleDigest, LoadMore, Spinner, Translate } from '~/components'
+import { ArticleDigest, List, LoadMore, Spinner, Translate } from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
 import { useEventListener } from '~/components/Hook'
@@ -328,9 +328,9 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <ul className="u-list-border-gap">
+      <List>
         {responses.map(response => (
-          <li key={response.id}>
+          <List.Item key={response.id}>
             {_has(response, 'title') ? (
               <ArticleDigest.Response article={response} />
             ) : (
@@ -341,9 +341,9 @@ const LatestResponses = () => {
                 commentCallback={commentCallback}
               />
             )}
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo && pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

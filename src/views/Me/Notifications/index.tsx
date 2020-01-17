@@ -5,6 +5,7 @@ import {
   Footer,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
   Spinner,
   Translate
@@ -68,13 +69,13 @@ const Notifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="u-list-border-gap">
+      <List>
         {edges.map(({ node, cursor }) => (
-          <li key={cursor}>
-            <Notice notice={node} key={cursor} />
-          </li>
+          <List.Item key={cursor}>
+            <Notice notice={node} />
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

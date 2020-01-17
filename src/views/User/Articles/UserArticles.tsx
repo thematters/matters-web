@@ -7,6 +7,7 @@ import {
   Head,
   Icon,
   InfiniteScroll,
+  List,
   Placeholder
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
@@ -123,7 +124,7 @@ const UserArticles = () => {
       <CustomHead />
       <ArticleSummaryInfo data={data} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul className="u-list-border-gap">
+        <List>
           {edges.map(({ node, cursor }, i) => {
             if (
               node.articleState !== 'active' &&
@@ -134,20 +135,20 @@ const UserArticles = () => {
             }
 
             return (
-              <li
-                key={cursor}
+              <List.Item
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.USER_ARTICLE,
                     location: i
                   })
                 }
+                key={cursor}
               >
                 <ArticleDigest.Feed article={node} hasSticky />
-              </li>
+              </List.Item>
             )
           })}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )
