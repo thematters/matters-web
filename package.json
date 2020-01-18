@@ -110,7 +110,7 @@
     "cucumber-pretty": "^6.0.0",
     "dotenv": "^8.2.0",
     "geckodriver": "^1.19.1",
-    "husky": "^3.1.0",
+    "husky": "^4.0.10",
     "identity-obj-proxy": "^3.0.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^7.1.0",
