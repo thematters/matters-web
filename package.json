@@ -87,7 +87,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.2",
     "@types/helmet": "0.0.45",
-    "@types/jest": "^24.0.25",
+    "@types/jest": "^24.9.0",
     "@types/lodash": "^4.14.149",
     "@types/next-server": "^9.0.0",
     "@types/nprogress": "0.2.0",
