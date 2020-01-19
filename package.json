@@ -132,7 +132,7 @@
     "prettier": "^1.19.1",
     "styled-jsx-plugin-postcss": "^2.0.1",
     "ts-jest": "^24.3.0",
-    "ts-node": "^8.5.4",
+    "ts-node": "^8.6.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.1.0",
