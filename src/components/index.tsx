@@ -1,7 +1,6 @@
 export * from './Head'
 export * from './GlobalHeader'
 export * from './GlobalStyles'
-export * from './Placeholder'
 export * from './Spinner'
 export * from './DateTime'
 export * from './Icon'

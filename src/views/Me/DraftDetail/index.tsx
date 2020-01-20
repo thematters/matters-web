@@ -3,13 +3,13 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
+import { Spinner } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError } from '~/components/GQL'
 import { Head } from '~/components/Head'
 import { PublishModal } from '~/components/Modal/PublishModal'
 import { ModalInstance } from '~/components/ModalManager'
-import { Placeholder } from '~/components/Placeholder'
 import Throw404 from '~/components/Throw404'
 
 import { getQuery } from '~/common/utils'
@@ -67,7 +67,7 @@ const DraftDetail = () => {
       <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
 
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        {loading && <Placeholder.ArticleDetail />}
+        {loading && <Spinner />}
 
         {!loading && draft && (
           <>
@@ -78,7 +78,7 @@ const DraftDetail = () => {
       </article>
 
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        {loading && <Placeholder.Sidebar />}
+        {loading && <Spinner />}
         {draft && <Sidebar draft={draft} />}
       </aside>
 

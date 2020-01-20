@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Error, Placeholder } from '~/components'
+import { Error, Spinner } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import { QueryError } from '~/components/GQL'
 
@@ -28,7 +28,7 @@ const MattersToday = () => {
   const { data, loading, error } = useQuery<HomeToday>(HOME_TODAY)
 
   if (loading) {
-    return <Placeholder.MattersToday />
+    return <Spinner />
   }
 
   if (error) {

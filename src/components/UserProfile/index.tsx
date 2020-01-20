@@ -11,7 +11,7 @@ import {
   Avatar,
   Expandable,
   Icon,
-  Placeholder,
+  Spinner,
   Tooltip,
   Translate
 } from '~/components'
@@ -134,7 +134,7 @@ export const UserProfile = () => {
     return (
       <section className={containerClass}>
         <CoverContainer>
-          <Placeholder.UserProfile />
+          <Spinner />
         </CoverContainer>
 
         <style jsx>{styles}</style>

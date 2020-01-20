@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { List, Placeholder } from '~/components'
+import { List, Spinner } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -35,7 +35,7 @@ const ICYMI = () => {
   const edges = data?.viewer?.recommendation.icymi.edges
 
   if (loading) {
-    return <Placeholder.Sidebar />
+    return <Spinner />
   }
 
   if (!edges || edges.length <= 0) {

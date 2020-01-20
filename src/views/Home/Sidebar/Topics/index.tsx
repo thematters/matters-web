@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Placeholder } from '~/components'
+import { Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -36,7 +36,7 @@ const Topics = () => {
   const edges = data?.viewer?.recommendation.topics.edges
 
   if (loading) {
-    return <Placeholder.Sidebar />
+    return <Spinner />
   }
 
   if (error) {

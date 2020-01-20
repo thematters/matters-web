@@ -12,7 +12,7 @@ import {
   Footer,
   Head,
   Icon,
-  Placeholder,
+  Spinner,
   Title,
   Translate
 } from '~/components'
@@ -166,7 +166,7 @@ const ArticleDetail = ({
   if (loading) {
     return (
       <Block>
-        <Placeholder.ArticleDetail />
+        <Spinner />
       </Block>
     )
   }
