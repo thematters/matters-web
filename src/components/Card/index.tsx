@@ -12,6 +12,8 @@ interface CardProps {
   bgColor?: 'grey-lighter'
   spacing?: [CardSpacing, CardSpacing]
   textSize?: 'md-s'
+  border?: 'grey-lighter'
+  borderRadius?: 'xtight' | 'xxtight'
 
   href?: string
   as?: string
@@ -23,6 +25,8 @@ export const Card: React.FC<CardProps> = ({
   bgColor,
   spacing = ['base', 0],
   textSize,
+  border,
+  borderRadius,
 
   href,
   as,
@@ -39,6 +43,9 @@ export const Card: React.FC<CardProps> = ({
     [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
     [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
     [`text-size-${textSize}`]: !!textSize,
+    hasBorder: !!border || !!borderRadius,
+    [`border-${border}`]: !!border,
+    [`border-radius-${borderRadius}`]: !!borderRadius,
     disable
   })
   const openLink = ({ newTab }: { newTab: boolean }) => {

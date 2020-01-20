@@ -62,7 +62,13 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
   })
 
   return (
-    <Card {...path} spacing={[0, 0]} onClick={onClick}>
+    <Card
+      {...path}
+      spacing={[0, 0]}
+      border={cover ? undefined : 'grey-lighter'}
+      borderRadius="xtight"
+      onClick={onClick}
+    >
       <section
         className={containerClass}
         style={

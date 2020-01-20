@@ -8,9 +8,6 @@
   padding: var(--spacing-tight) var(--spacing-base);
 
   color: var(--color-black);
-  background-color: var(--color-white);
-  border-radius: 8px;
-  border: 1px solid var(--color-line-grey-light);
 }
 
 header {
@@ -43,7 +40,6 @@ footer {
   justify-content: flex-end;
 
   color: var(--color-white);
-  border: none;
 
   & footer {
     & :global(.displayname) {

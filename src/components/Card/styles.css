@@ -6,12 +6,13 @@
 .card:not(.disable) {
   cursor: pointer;
 
-  /* &:hover,
+  &:hover,
   &:focus {
     background: var(--color-green-lighter);
-  } */
+  }
 }
 
+/* Background */
 .bg-grey-lighter:not(.disable) {
   background: var(--color-grey-lighter);
   border-radius: 0.25rem;
@@ -22,6 +23,7 @@
   }
 }
 
+/* Spacing */
 .spacing-vertical-xtight {
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
@@ -48,6 +50,23 @@
   padding-right: var(--spacing-base);
 }
 
+/* Text */
 .text-size-md-s {
   font-size: var(--font-size-md-s);
+}
+
+/* Border */
+.hasBorder {
+  overflow: hidden;
+}
+
+.border-grey-lighter {
+  border: 1px solid var(--color-grey-lighter);
+}
+
+.border-radius-xtight {
+  border-radius: var(--spacing-x-tight);
+}
+.border-radius-xxtight {
+  border-radius: var(--spacing-xx-tight);
 }
