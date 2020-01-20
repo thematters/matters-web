@@ -9,19 +9,23 @@ import { toPath } from '~/common/utils'
 import LinkWrapper from './LinkWrapper'
 import styles from './styles.css'
 
-import { TitleArticle } from './__generated__/TitleArticle'
+import { TitleDigestArticle } from './__generated__/TitleDigestArticle'
 
-interface TitleProps {
-  article: TitleArticle
+export type TitleDigestTextSize = 'sm' | 'md-s' | 'md' | 'xm'
+export type TitleDigestTextWeight = 'normal' | 'md'
+export type TitleDigestIs = 'h2' | 'h3' | 'h4'
 
-  textSize?: 'sm' | 'md-s' | 'md' | 'xm'
-  textWeight?: 'normal' | 'md'
-  is?: 'h2' | 'h3' | 'h4'
+interface TitleDigestProps {
+  article: TitleDigestArticle
+
+  textSize?: TitleDigestTextSize
+  textWeight?: TitleDigestTextWeight
+  is?: TitleDigestIs
 }
 
 const fragments = {
   article: gql`
-    fragment TitleArticle on Article {
+    fragment TitleDigestArticle on Article {
       id
       title
       articleState: state
@@ -35,12 +39,13 @@ const fragments = {
   `
 }
 
-const Title = ({
+const TitleDigest = ({
   article,
+
   textSize = 'md',
   textWeight = 'md',
   is = 'h2'
-}: TitleProps) => {
+}: TitleDigestProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -78,6 +83,6 @@ const Title = ({
   )
 }
 
-Title.fragments = fragments
+TitleDigest.fragments = fragments
 
-export default Title
+export default TitleDigest

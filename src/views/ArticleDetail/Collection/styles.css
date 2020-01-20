@@ -31,15 +31,6 @@
   }
 }
 
-.collection-list {
-  & li > :global(.container) {
-    padding-bottom: var(--spacing-base);
-  }
-  & li:last-child > :global(.container) {
-    padding-bottom: 0;
-  }
-}
-
 .load-more {
   padding: var(--spacing-base) 0 0;
 }

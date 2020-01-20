@@ -26,7 +26,7 @@ const fragments = {
         ...UserDigestMiniUser
       }
       target {
-        ...TitleArticle
+        ...TitleDigestArticle
       }
     }
     ${UserDigest.Mini.fragments.user}

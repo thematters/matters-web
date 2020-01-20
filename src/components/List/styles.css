@@ -6,6 +6,10 @@
   }
 }
 
+.spacing-vertical-xtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
+}
 .spacing-vertical-tight {
   padding-top: var(--spacing-tight);
   padding-bottom: var(--spacing-tight);
@@ -19,6 +23,10 @@
   padding-bottom: var(--spacing-loose);
 }
 
+.spacing-horizontal-xtight {
+  padding-left: var(--spacing-x-tight);
+  padding-right: var(--spacing-x-tight);
+}
 .spacing-horizontal-tight {
   padding-left: var(--spacing-tight);
   padding-right: var(--spacing-tight);

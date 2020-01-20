@@ -4,7 +4,7 @@ import { Spinner } from '~/components/Spinner'
 
 import styles from './styles.css'
 
-import { DropdownDigestArticle } from '~/components/ArticleDigest/Dropdown/__generated__/DropdownDigestArticle'
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 const DropdownArticleList = ({
   articles,

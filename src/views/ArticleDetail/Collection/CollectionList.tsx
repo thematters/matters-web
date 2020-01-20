@@ -3,7 +3,15 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
-import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import {
+  ArticleDigest,
+  Icon,
+  List,
+  Spinner,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
@@ -33,6 +41,7 @@ const CollectionList = ({
   setEditing: (editing: boolean) => void
   canEdit?: boolean
 }) => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     {
@@ -85,23 +94,26 @@ const CollectionList = ({
     )
   }
 
+  console.log({ isMediumUp })
   return (
     <>
-      <ul className="collection-list">
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.COLLECTION,
-                location: i
-              })
-            }
-          >
-            <ArticleDigest.Sidebar type="collection" article={node} hasCover />
-          </li>
+          <List.Item spacing={['xtight', 0]} noBorder key={cursor}>
+            <ArticleDigest.Sidebar
+              article={node}
+              hasCover={!!isMediumUp}
+              hasBackground
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.COLLECTION,
+                  location: i
+                })
+              }
+            />
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo.hasNextPage && (
         <section className="load-more">

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type ListItemSpacing = 0 | '0' | 'tight' | 'base' | 'loose'
+type ListItemSpacing = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
 
 interface ListItemProps {
   spacing?: [ListItemSpacing, ListItemSpacing]

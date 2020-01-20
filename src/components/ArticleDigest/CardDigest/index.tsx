@@ -11,7 +11,7 @@ import {
   toPath
 } from '~/common/utils'
 
-import ArticleDigestTitle from '../Title'
+import ArticleTitleDigest from '../TitleDigest'
 import styles from './styles.css'
 
 import { CardDigestArticle } from './__generated__/CardDigestArticle'
@@ -37,10 +37,10 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...TitleArticle
+      ...TitleDigestArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigestTitle.fragments.article}
+    ${ArticleTitleDigest.fragments.article}
   `
 }
 
@@ -78,7 +78,7 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
         }
       >
         <header>
-          <ArticleDigestTitle article={{ ...article, title }} is="h3" />
+          <ArticleTitleDigest article={{ ...article, title }} is="h3" />
 
           {!cover && <p className="summary">{cleanedSummary}</p>}
         </header>
@@ -87,6 +87,7 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
           <UserDigest.Mini
             user={article.author}
             avatarSize="xs"
+            nameColor={cover ? 'white' : undefined}
             hasAvatar
             hasDisplayName
           />

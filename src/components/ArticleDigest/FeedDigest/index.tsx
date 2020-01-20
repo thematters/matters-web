@@ -10,7 +10,7 @@ import { stripHtml, toPath } from '~/common/utils'
 
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
-import ArticleDigestTitle from '../Title'
+import ArticleTitleDigest from '../TitleDigest'
 import CreatedAt from './CreatedAt'
 import styles from './styles.css'
 
@@ -42,13 +42,13 @@ const fragments = {
         ...UserDigestMiniUser
       }
       ...CreatedAtArticle
-      ...TitleArticle
+      ...TitleDigestArticle
       ...FooterActionsArticle
       ...DropdownActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${CreatedAt.fragments.article}
-    ${ArticleDigestTitle.fragments.article}
+    ${ArticleTitleDigest.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
   `
@@ -98,7 +98,7 @@ const FeedDigest = ({
       </header>
 
       <section className="title">
-        <ArticleDigestTitle article={article} />
+        <ArticleTitleDigest article={article} />
       </section>
 
       {cover && (

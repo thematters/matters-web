@@ -64,7 +64,7 @@ const LatestResponsesArticle = gql`
       edges {
         node {
           ... on Article {
-            ...ResponseDigestArticle
+            ...SidebarDigestArticle
           }
           ... on Comment {
             ...ArticleCommentComment
@@ -73,7 +73,7 @@ const LatestResponsesArticle = gql`
       }
     }
   }
-  ${ArticleDigest.Response.fragments.response}
+  ${ArticleDigest.Sidebar.fragments.article}
   ${ArticleComment.fragments.comment}
 `
 
@@ -339,7 +339,11 @@ const LatestResponses = () => {
         {responses.map(response => (
           <List.Item spacing={['base', 0]} key={response.id}>
             {_has(response, 'title') ? (
-              <ArticleDigest.Response article={response} />
+              <ArticleDigest.Sidebar
+                article={response}
+                hasCover
+                hasBackground
+              />
             ) : (
               <ArticleComment
                 comment={response}

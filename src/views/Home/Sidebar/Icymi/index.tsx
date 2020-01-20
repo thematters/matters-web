@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Placeholder } from '~/components'
+import { List, Placeholder } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -46,21 +46,23 @@ const ICYMI = () => {
     <section>
       <SidebarHeader type="icymi" />
 
-      <ul>
+      <List>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.ICYMI,
-                location: i
-              })
-            }
-          >
-            <ArticleDigest.Sidebar article={node} hasCover />
-          </li>
+          <List.Item spacing={['tight', 0]} noBorder key={cursor}>
+            <ArticleDigest.Sidebar
+              article={node}
+              titleTextSize="sm"
+              hasCover
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ICYMI,
+                  location: i
+                })
+              }
+            />
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </section>
   )
 }

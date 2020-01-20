@@ -1,19 +1,17 @@
-import Card from './Card'
-import Dropdown from './Dropdown'
-import Feature from './Feature'
-import Feed from './Feed'
-import Response from './Response'
-import Sidebar from './Sidebar'
-import Title from './Title'
+import CardDigest from './CardDigest'
+import DropdownDigest from './DropdownDigest'
+import FeatureDigest from './FeatureDigest'
+import FeedDigest from './FeedDigest'
+import SidebarDigest from './SidebarDigest'
+import TitleDigest from './TitleDigest'
 
 export const ArticleDigest = {
-  Title,
-  Feed,
-  Card,
-  Dropdown,
+  Title: TitleDigest,
+  Feed: FeedDigest,
+  Card: CardDigest,
+  Dropdown: DropdownDigest,
 
   /* TODO: legacy */
-  Feature,
-  Response,
-  Sidebar
+  Feature: FeatureDigest,
+  Sidebar: SidebarDigest
 }

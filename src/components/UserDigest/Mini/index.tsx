@@ -30,6 +30,7 @@ interface MiniProps {
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
   textWeight?: 'md'
+  nameColor?: 'black' | 'white' | 'grey-darker'
   direction?: 'row' | 'column'
 
   hasAvatar?: boolean
@@ -58,6 +59,7 @@ const Mini = ({
   avatarSize,
   textSize = 'sm',
   textWeight,
+  nameColor = 'black',
   direction = 'row',
 
   hasAvatar,
@@ -72,6 +74,7 @@ const Mini = ({
     container: true,
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
+    [`name-color-${nameColor}`]: !!nameColor,
     hasAvatar
   })
   const nameClass = classNames({

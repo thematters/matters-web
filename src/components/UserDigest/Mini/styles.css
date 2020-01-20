@@ -28,7 +28,6 @@
   margin-left: var(--spacing-x-tight);
 }
 .displayname {
-  color: var(--color-black);
   line-height: 1;
 
   &:hover,
@@ -61,4 +60,20 @@
 }
 .text-weight-md {
   font-weight: var(--font-weight-medium);
+}
+
+.name-color-black {
+  & .displayname {
+    color: var(--color-black);
+  }
+}
+.name-color-white {
+  & .displayname {
+    color: var(--color-white);
+  }
+}
+.name-color-grey-darker {
+  & .displayname {
+    color: var(--color-grey-darker);
+  }
 }

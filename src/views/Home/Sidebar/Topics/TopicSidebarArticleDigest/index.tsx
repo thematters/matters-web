@@ -14,7 +14,7 @@ const fragments = {
     fragment TopicSidebarArticleDigestArticle on Article {
       id
       topicScore
-      ...TitleArticle
+      ...TitleDigestArticle
     }
 
     ${ArticleDigest.Title.fragments.article}

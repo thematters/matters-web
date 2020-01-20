@@ -56,7 +56,7 @@ const USER_COMMENT_FEED = gql`
             cursor
             node {
               id
-              ...TitleArticle
+              ...TitleDigestArticle
               comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor

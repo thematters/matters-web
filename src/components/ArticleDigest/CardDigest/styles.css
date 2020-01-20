@@ -40,10 +40,4 @@ footer {
   justify-content: flex-end;
 
   color: var(--color-white);
-
-  & footer {
-    & :global(.displayname) {
-      color: var(--color-white);
-    }
-  }
 }

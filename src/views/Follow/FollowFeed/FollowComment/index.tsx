@@ -25,7 +25,7 @@ const fragments = {
       }
       article {
         id
-        ...TitleArticle
+        ...TitleDigestArticle
       }
       ...CreatedAtComment
       ...ContentComment
