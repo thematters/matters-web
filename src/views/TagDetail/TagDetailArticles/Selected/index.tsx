@@ -121,10 +121,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
 
   return (
     <section>
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <ul>
           {(edges || []).map(({ node, cursor }, i) => (
             <li
