@@ -115,41 +115,40 @@ const LatestArticles = ({ id }: { id: string }) => {
     })
   }
 
+  if (!hasArticles) {
+    return <EmptyTagArticles />
+  }
+
   return (
-    <>
-      <section>
-        {hasArticles && (
-          <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
-            loadMore={loadMore}
-          >
-            <ul>
-              {(edges || []).map(({ node, cursor }, i) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAG_DETAIL,
-                      location: i,
-                      entrance: id
-                    })
-                  }
-                >
-                  <ArticleDigest.Feed
-                    article={node}
-                    hasDateTime
-                    hasBookmark
-                    hasMoreButton
-                    inTagDetail
-                  />
-                </li>
-              ))}
-            </ul>
-          </InfiniteScroll>
-        )}
-        {!hasArticles && <EmptyTagArticles />}
-      </section>
-    </>
+    <section>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+      >
+        <ul>
+          {(edges || []).map(({ node, cursor }, i) => (
+            <li
+              key={cursor}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.TAG_DETAIL,
+                  location: i,
+                  entrance: id
+                })
+              }
+            >
+              <ArticleDigest.Feed
+                article={node}
+                hasDateTime
+                hasBookmark
+                hasMoreButton
+                inTagDetail
+              />
+            </li>
+          ))}
+        </ul>
+      </InfiniteScroll>
+    </section>
   )
 }
 
