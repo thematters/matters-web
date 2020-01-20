@@ -1,0 +1,15 @@
+header {
+  @mixin inline-flex-center-all;
+  margin-bottom: var(--spacing-x-tight);
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+
+  & .collected {
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
+.article-digest {
+  margin-left: var(--spacing-xx-loose);
+}

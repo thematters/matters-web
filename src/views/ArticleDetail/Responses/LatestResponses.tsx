@@ -3,22 +3,14 @@ import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import _has from 'lodash/has'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import {
-  ArticleDigest,
-  List,
-  LoadMore,
-  Spinner,
-  Title,
-  Translate
-} from '~/components'
+import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
-import { useEventListener } from '~/components/Hook'
+import { useEventListener, useResponsive } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
 import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
@@ -30,10 +22,14 @@ import {
   unshiftConnections
 } from '~/common/utils'
 
-import ArticleComment from './ArticleComment'
+import ResponseArticle from './ResponseArticle'
+import ResponseComment from './ResponseComment'
 import styles from './styles.css'
 
-import { LatestResponses as LatestResponsesType } from './__generated__/LatestResponses'
+import {
+  LatestResponses as LatestResponsesType,
+  LatestResponses_article_responses_edges_node
+} from './__generated__/LatestResponses'
 import {
   ResponseAdded,
   ResponseAdded_nodeEdited_Article
@@ -64,17 +60,17 @@ const LatestResponsesArticle = gql`
       edges {
         node {
           ... on Article {
-            ...SidebarDigestArticle
+            ...ResponseArticleArticle
           }
           ... on Comment {
-            ...ArticleCommentComment
+            ...ResponseCommentComment
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.article}
-  ${ArticleComment.fragments.comment}
+  ${ResponseArticle.fragments.article}
+  ${ResponseComment.fragments.comment}
 `
 
 const LATEST_RESPONSES = gql`
@@ -119,6 +115,7 @@ const SUBSCRIBE_RESPONSE_ADDED = gql`
 `
 
 const LatestResponses = () => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
@@ -226,7 +223,9 @@ const LatestResponses = () => {
     })
   }
 
-  const responses = filterResponses((edges || []).map(({ node }) => node))
+  const responses = filterResponses(
+    (edges || []).map(({ node }) => node)
+  ) as LatestResponses_article_responses_edges_node[]
 
   // real time update with websocket
   useEffect(() => {
@@ -338,14 +337,10 @@ const LatestResponses = () => {
       <List spacing={['xloose', 0]} hasBorder>
         {responses.map(response => (
           <List.Item key={response.id}>
-            {_has(response, 'title') ? (
-              <ArticleDigest.Sidebar
-                article={response}
-                hasCover
-                hasBackground
-              />
+            {response.__typename === 'Article' ? (
+              <ResponseArticle article={response} hasCover={isMediumUp} />
             ) : (
-              <ArticleComment
+              <ResponseComment
                 comment={response}
                 defaultExpand={response.id === parentId && !!descendantId}
                 hasLink

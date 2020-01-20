@@ -7,7 +7,7 @@ header {
 }
 
 .topics {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--spacing-xx-loose);
   margin-bottom: var(--spacing-base);
 }
 

@@ -1,7 +1,7 @@
 import _uniq from 'lodash/uniq'
 import { useState } from 'react'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Title, Translate } from '~/components'
 
 import CollectionList from './CollectionList'
 import EditButton from './EditButton'
@@ -21,23 +21,13 @@ const Collection: React.FC<{
   return (
     <section className="collection">
       <header>
-        <TextIcon
-          icon={<Icon.Collection />}
-          spacing="xxtight"
-          size="md"
-          weight="md"
-        >
-          {!collectionCount || collectionCount <= 0 ? (
-            <Translate zh_hant="沒有關聯作品" zh_hans="没有关联作品" />
-          ) : (
-            <>
-              <span className="highlight">{collectionCount}&nbsp;</span>
-              <span>
-                <Translate zh_hant="篇關聯作品" zh_hans="篇关联作品" />
-              </span>
-            </>
-          )}
-        </TextIcon>
+        <Title type="nav" is="h2">
+          <Translate zh_hant="關聯作品" zh_hans="关联作品" />
+
+          <span className="count" aira-label={`${collectionCount} 篇關聯作品`}>
+            {collectionCount}
+          </span>
+        </Title>
 
         {canEdit && (
           <EditButton

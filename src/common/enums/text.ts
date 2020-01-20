@@ -157,7 +157,6 @@ export const TEXT = {
     emptySearchResults: '不好意思，什麼都沒搜到',
     uploadImageSuccess: '圖片上傳成功',
     uploadImageFailed: '圖片上傳失敗',
-    collected: '關聯了本作品',
     collectedOnly: '只看衍生作品',
     error: {
       UNKNOWN_ERROR: '不知道哪裏出錯了，過幾分鐘看看',
@@ -353,7 +352,6 @@ export const TEXT = {
     emptySearchResults: '不好意思，什么都没搜到',
     uploadImageSuccess: '图片上传成功',
     uploadImageFailed: '图片上传失败',
-    collected: '关联了本作品',
     collectedOnly: '只看衍生作品',
     error: {
       UNKNOWN_ERROR: '不知道哪里出错了，过几分钟看看',

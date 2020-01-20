@@ -17,7 +17,7 @@ const ResponseCount = ({ article }: { article: ResponseCountArticle }) => {
   const count = article?.responseCount || 0
 
   return (
-    <span className="count">
+    <span className="count" aira-label={`${count} 條回應`}>
       {count}
 
       <style jsx>{styles}</style>

@@ -8,23 +8,23 @@ import { filterComments } from '~/common/utils'
 import ExpandButton from './ExpandButton'
 import styles from './styles.css'
 
-import { ArticleCommentComment } from './__generated__/ArticleCommentComment'
+import { ResponseCommentComment } from './__generated__/ResponseCommentComment'
 
 const COLLAPSE_COUNT = 2
 
-interface ArticleCommentControls {
+interface ResponseCommentControls {
   defaultExpand?: boolean
   hasLink?: boolean
   commentCallback?: () => void
 }
 
-type ArticleCommentProps = {
-  comment: ArticleCommentComment
-} & ArticleCommentControls
+type ResponseCommentProps = {
+  comment: ResponseCommentComment
+} & ResponseCommentControls
 
 const fragments = {
   comment: gql`
-    fragment ArticleCommentComment on Comment {
+    fragment ResponseCommentComment on Comment {
       id
       ...FeedComment
       comments(input: { sort: oldest, first: null }) {
@@ -41,15 +41,15 @@ const fragments = {
   `
 }
 
-const ArticleComment = ({
+const ResponseComment = ({
   comment,
   defaultExpand,
   hasLink,
   commentCallback
-}: ArticleCommentProps) => {
+}: ResponseCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as ArticleCommentComment[]
+  ) as ResponseCommentComment[]
   const restCount = descendants.length - COLLAPSE_COUNT
   const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
 
@@ -96,6 +96,6 @@ const ArticleComment = ({
   )
 }
 
-ArticleComment.fragments = fragments
+ResponseComment.fragments = fragments
 
-export default ArticleComment
+export default ResponseComment

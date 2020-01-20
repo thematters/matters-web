@@ -7,7 +7,7 @@ import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
-import ArticleComment from './ArticleComment'
+import ResponseComment from './ResponseComment'
 import styles from './styles.css'
 
 import {
@@ -33,13 +33,13 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...ArticleCommentComment
+            ...ResponseCommentComment
           }
         }
       }
     }
   }
-  ${ArticleComment.fragments.comment}
+  ${ResponseComment.fragments.comment}
 `
 
 const FeaturedComments = () => {
@@ -95,7 +95,7 @@ const FeaturedComments = () => {
       <List spacing={['xloose', 0]} hasBorder>
         {comments.map(comment => (
           <List.Item key={comment.id}>
-            <ArticleComment comment={comment} />
+            <ResponseComment comment={comment} />
           </List.Item>
         ))}
       </List>

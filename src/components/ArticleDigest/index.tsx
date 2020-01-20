@@ -10,8 +10,8 @@ export const ArticleDigest = {
   Feed: FeedDigest,
   Card: CardDigest,
   Dropdown: DropdownDigest,
+  Sidebar: SidebarDigest,
 
   /* TODO: legacy */
-  Feature: FeatureDigest,
-  Sidebar: SidebarDigest
+  Feature: FeatureDigest
 }
