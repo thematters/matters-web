@@ -7,13 +7,13 @@ import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 
-import { DeleteArticleTags } from './__generated__/DeleteArticleTags'
+import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
 import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
 import styles from './styles.css'
 
-const DELETE_ARTICLE_TAGS = gql`
-  mutation DeleteArticleTags($id: ID!, $articles: [ID!]) {
-    deleteArticleTags(input: { id: $id, articles: $articles }) {
+const DELETE_ARTICLES_TAGS = gql`
+  mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
+    deleteArticlesTags(input: { id: $id, articles: $articles }) {
       id
     }
   }
@@ -48,8 +48,8 @@ const RemoveTagButton = ({
   } = router
   const tagId = _isArray(id) ? id[0] : id
 
-  const [deleteArticlesTags] = useMutation<DeleteArticleTags>(
-    DELETE_ARTICLE_TAGS,
+  const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
+    DELETE_ARTICLES_TAGS,
     { variables: { id: tagId, articles: [article.id] } }
   )
 
