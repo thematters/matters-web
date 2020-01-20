@@ -3,12 +3,7 @@ import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import {
-  Footer,
-  Head,
-  PageHeader,
-  Placeholder,
-} from '~/components'
+import { Footer, Head, PageHeader, Placeholder } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
@@ -19,9 +14,7 @@ import { ModalInstance } from '~/components/ModalManager'
 import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
-import {
-  ERROR_CODES,
-} from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums'
 
 import styles from './styles.css'
 import { TagDetailArticles } from './TagDetailArticles'

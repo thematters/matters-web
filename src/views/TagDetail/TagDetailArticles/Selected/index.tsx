@@ -46,9 +46,9 @@ const SELECTED_ARTICLES = gql`
 `
 
 const SelectedArticles = ({ id }: { id: string }) => {
-  const {
-    data, loading, error, fetchMore, refetch
-  } = useQuery<TagDetailSelectedArticles>(SELECTED_ARTICLES, { variables: { id } })
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    TagDetailSelectedArticles
+  >(SELECTED_ARTICLES, { variables: { id } })
 
   const sync = ({
     event,
