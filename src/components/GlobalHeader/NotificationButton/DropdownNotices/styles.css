@@ -20,7 +20,7 @@ header {
 
 .content {
   @mixin max-height-scroll;
-  padding: 0 var(--spacing-x-tight);
+  padding: var(--spacing-base) var(--spacing-x-tight);
 }
 
 footer {

@@ -123,7 +123,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         hasNextPage={isMediumUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <List>
+        <List hasBorder>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <ArticleDigest.Feed
@@ -171,6 +171,7 @@ const HomeFeed = () => {
             <Translate zh_hant="最新作品" zh_hans="最新作品" />
           )
         }
+        is="h2"
       >
         <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
       </PageHeader>

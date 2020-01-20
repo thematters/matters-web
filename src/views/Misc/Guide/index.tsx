@@ -3,11 +3,12 @@ import { useContext } from 'react'
 import { Head, LanguageContext } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import styles from '~/common/styles/utils/content.article.css'
+import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
 import content from './content'
+import styles from './styles.css'
 
 const Guide = () => {
   const { lang } = useContext(LanguageContext)
@@ -34,6 +35,7 @@ const Guide = () => {
         </div>
 
         <style jsx>{styles}</style>
+        <style jsx>{contentStyles}</style>
       </section>
     </main>
   )

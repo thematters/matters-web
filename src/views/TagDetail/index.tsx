@@ -179,7 +179,7 @@ const TagDetailArticleList = ({ id }: { id: string }) => {
             hasNextPage={pageInfo.hasNextPage}
             loadMore={loadMore}
           >
-            <List>
+            <List hasBorder>
               {(edges || []).map(({ node, cursor }, i) => (
                 <List.Item key={cursor}>
                   <ArticleDigest.Feed

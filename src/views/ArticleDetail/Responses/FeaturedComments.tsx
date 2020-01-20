@@ -92,9 +92,9 @@ const FeaturedComments = () => {
         </Title>
       </header>
 
-      <List>
+      <List spacing={['xloose', 0]} hasBorder>
         {comments.map(comment => (
-          <List.Item spacing={['base', 0]} key={comment.id}>
+          <List.Item key={comment.id}>
             <ArticleComment comment={comment} />
           </List.Item>
         ))}

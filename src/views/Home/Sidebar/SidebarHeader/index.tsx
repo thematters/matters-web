@@ -55,7 +55,9 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
   return (
     <header className={headerClass}>
       <LinkWrapper>
-        <Title type="nav">{titleMap[type]}</Title>
+        <Title type="nav" is="h2">
+          {titleMap[type]}
+        </Title>
       </LinkWrapper>
 
       <LinkWrapper>

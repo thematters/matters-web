@@ -8,7 +8,7 @@ header {
 
 .topics {
   margin-top: var(--spacing-x-loose);
-  margin-bottom: var(--spacing-tight);
+  margin-bottom: var(--spacing-base);
 }
 
 .authors {
@@ -18,5 +18,5 @@ header {
 
 .tags {
   margin-top: var(--spacing-x-loose);
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 }

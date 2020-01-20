@@ -2,12 +2,15 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type ListItemSpacing = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
+type ListSpacing = 0 | '0' | 'base' | 'loose' | 'xloose'
 
 interface ListItemProps {
-  spacing?: [ListItemSpacing, ListItemSpacing]
-  noBorder?: boolean
+  [key: string]: any
+}
 
+interface ListProps {
+  spacing?: [ListSpacing, ListSpacing]
+  hasBorder?: boolean
   [key: string]: any
 }
 
@@ -30,9 +33,6 @@ interface ListItemProps {
  *
  */
 const ListItem: React.FC<ListItemProps> = ({
-  spacing = [0, 0],
-  noBorder,
-
   children,
 
   className,
@@ -40,9 +40,6 @@ const ListItem: React.FC<ListItemProps> = ({
 }) => {
   const listItemClass = classNames({
     'list-item': true,
-    [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
-    [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
-    'no-border': !!noBorder,
     [className]: !!className
   })
 
@@ -54,10 +51,31 @@ const ListItem: React.FC<ListItemProps> = ({
   )
 }
 
-export const List: React.FC & {
+export const List: React.FC<ListProps> & {
   Item: typeof ListItem
-} = ({ children }) => {
-  return <section role="list">{children}</section>
+} = ({
+  spacing = [0, 0],
+  hasBorder,
+
+  children,
+
+  className,
+  ...restProps
+}) => {
+  const listClass = classNames({
+    list: true,
+    [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
+    [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
+    'has-border': !!hasBorder,
+    [className]: !!className
+  })
+
+  return (
+    <section className={listClass} role="list" {...restProps}>
+      {children}
+      <style jsx>{styles}</style>
+    </section>
+  )
 }
 
 List.Item = ListItem

@@ -107,7 +107,7 @@ const SearchArticles = ({ q }: { q: string }) => {
           />
         }
       />
-      <List>
+      <List hasBorder>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (

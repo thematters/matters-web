@@ -46,9 +46,9 @@ const ICYMI = () => {
     <section>
       <SidebarHeader type="icymi" />
 
-      <List>
+      <List spacing={['loose', 0]}>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item spacing={['tight', 0]} noBorder key={cursor}>
+          <List.Item key={cursor}>
             <ArticleDigest.Sidebar
               article={node}
               titleTextSize="sm"

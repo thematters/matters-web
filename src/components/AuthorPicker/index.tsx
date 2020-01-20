@@ -80,7 +80,7 @@ export const AuthorPicker = ({
       {!loading && (
         <List>
           {edges.map(({ node, cursor }) => (
-            <List.Item noBorder key={cursor}>
+            <List.Item key={cursor}>
               <UserDigest.Rich user={node} hasFollow />
             </List.Item>
           ))}

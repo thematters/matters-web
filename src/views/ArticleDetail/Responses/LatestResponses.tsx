@@ -335,9 +335,9 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <List>
+      <List spacing={['xloose', 0]} hasBorder>
         {responses.map(response => (
-          <List.Item spacing={['base', 0]} key={response.id}>
+          <List.Item key={response.id}>
             {_has(response, 'title') ? (
               <ArticleDigest.Sidebar
                 article={response}

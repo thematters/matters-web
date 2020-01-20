@@ -101,10 +101,10 @@ const DropdownNotices = ({
       <Header />
 
       <section className="content">
-        <List>
+        <List spacing={['xloose', 0]} hasBorder>
           {edges && edges.length > 0 ? (
             edges.map(({ node, cursor }) => (
-              <List.Item spacing={['base', 0]} key={cursor}>
+              <List.Item key={cursor}>
                 <Notice notice={node} />
               </List.Item>
             ))

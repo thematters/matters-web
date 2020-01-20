@@ -94,12 +94,11 @@ const CollectionList = ({
     )
   }
 
-  console.log({ isMediumUp })
   return (
     <>
-      <List>
+      <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item spacing={['xtight', 0]} noBorder key={cursor}>
+          <List.Item key={cursor}>
             <ArticleDigest.Sidebar
               article={node}
               hasCover={!!isMediumUp}

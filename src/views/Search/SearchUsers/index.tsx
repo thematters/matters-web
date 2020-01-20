@@ -119,7 +119,7 @@ const SearchUser = ({
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'User' && (
-                <List.Item noBorder key={cursor}>
+                <List.Item key={cursor}>
                   <UserDigest.Rich
                     user={node}
                     hasFollow
