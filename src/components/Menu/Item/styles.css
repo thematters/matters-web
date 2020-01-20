@@ -4,6 +4,7 @@
   width: 100%;
   text-align: left;
   overflow: hidden;
+  cursor: pointer;
 
   & :global(> *:before) {
     content: '';

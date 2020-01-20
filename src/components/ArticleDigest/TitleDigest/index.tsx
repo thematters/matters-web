@@ -1,12 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
+import { LinkWrapper, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import LinkWrapper from './LinkWrapper'
 import styles from './styles.css'
 
 import { TitleDigestArticle } from './__generated__/TitleDigestArticle'
@@ -21,6 +20,7 @@ interface TitleDigestProps {
   textSize?: TitleDigestTextSize
   textWeight?: TitleDigestTextWeight
   is?: TitleDigestIs
+  disabled?: boolean
 }
 
 const fragments = {
@@ -44,7 +44,8 @@ const TitleDigest = ({
 
   textSize = 'md',
   textWeight = 'md',
-  is = 'h2'
+  is = 'h2',
+  disabled
 }: TitleDigestProps) => {
   const { articleState: state } = article
   const path = toPath({
@@ -67,7 +68,7 @@ const TitleDigest = ({
   })
 
   return (
-    <LinkWrapper {...path} isBanned={isBanned}>
+    <LinkWrapper {...path} disabled={disabled || isBanned}>
       <>
         {is === 'h2' ? (
           <h2 className={titleClasses}>{title}</h2>

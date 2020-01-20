@@ -49,7 +49,7 @@ const CardDigest = ({
   hasCover,
   onClick
 }: CardDigestProps) => {
-  const { title, articleState: state } = article
+  const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
   const containerClass = classNames({
@@ -73,7 +73,7 @@ const CardDigest = ({
       <section className={containerClass}>
         <header>
           <ArticleTitleDigest
-            article={{ ...article, title }}
+            article={article}
             textSize={titleTextSize}
             is="h3"
           />

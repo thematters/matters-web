@@ -1,21 +1,20 @@
 .card {
   @mixin all-transition;
   outline: none;
-}
 
-.card:not(.disable) {
-  cursor: pointer;
+  &:not(.disable) {
+    cursor: pointer;
 
-  /* &:hover,
+    /* &:hover,
   &:focus {
     background: var(--color-green-lighter);
   } */
+  }
 }
 
 /* Background */
-.bg-grey-lighter:not(.disable) {
+.bg-grey-lighter {
   background: var(--color-grey-lighter);
-  border-radius: 0.25rem;
 
   &:hover,
   &:focus {

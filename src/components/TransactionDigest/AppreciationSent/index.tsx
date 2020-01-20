@@ -50,9 +50,10 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
           {recipient && !isUseContent && (
             <UserDigest.Mini
               user={recipient}
-              avatarSize="sm"
+              avatarSize="xs"
               hasAvatar
               hasDisplayName
+              hasUserName
             />
           )}
         </section>

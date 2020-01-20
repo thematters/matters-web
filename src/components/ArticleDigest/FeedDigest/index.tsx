@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
-import { Card } from '~/components/Card'
+import { Card, Icon } from '~/components'
 import { Translate } from '~/components/Language'
 import { TextIcon } from '~/components/TextIcon'
 import { UserDigest } from '~/components/UserDigest'

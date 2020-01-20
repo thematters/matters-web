@@ -181,7 +181,15 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
         <ul>
           {selectedArticles.map((article, index) => (
             <li key={index}>
-              <ArticleDigest.Dropdown article={article} hasArrow disabled />
+              <ArticleDigest.Dropdown
+                article={article}
+                titleTextSize="md-s"
+                disabled
+                extraButton={
+                  <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+                }
+              />
+
               <button
                 type="button"
                 className="delete-handler"

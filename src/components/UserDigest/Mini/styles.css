@@ -2,6 +2,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+
+  &.hasAvatar .name {
+    margin-left: var(--spacing-x-tight);
+  }
+  &:not(.disabled) .displayname {
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 
 .name {
@@ -24,16 +34,9 @@
     }
   }
 }
-.hasAvatar .name {
-  margin-left: var(--spacing-x-tight);
-}
+
 .displayname {
   line-height: 1;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
 }
 .username {
   margin-left: var(--spacing-xx-tight);

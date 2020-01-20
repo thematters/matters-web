@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { Translate } from '~/components'
+import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarSize } from '~/components/Avatar'
 
 import { TEXT } from '~/common/enums'
@@ -36,6 +35,7 @@ interface MiniProps {
   hasAvatar?: boolean
   hasDisplayName?: boolean
   hasUserName?: boolean
+  disabled?: boolean
 }
 
 const fragments = {
@@ -64,8 +64,10 @@ const Mini = ({
 
   hasAvatar,
   hasDisplayName,
-  hasUserName
+  hasUserName,
+  disabled
 }: MiniProps) => {
+  const isArchived = user?.status?.state === 'archived'
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''
@@ -75,13 +77,13 @@ const Mini = ({
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
     [`name-color-${nameColor}`]: !!nameColor,
-    hasAvatar
+    hasAvatar,
+    disabled: disabled || isArchived
   })
   const nameClass = classNames({
     name: true,
     [`direction-${direction}`]: !!direction
   })
-  const isArchived = user?.status?.state === 'archived'
 
   if (isArchived) {
     return (
@@ -105,8 +107,8 @@ const Mini = ({
   }
 
   return (
-    <Link {...path}>
-      <a className={containerClass} onClick={e => e.stopPropagation()}>
+    <LinkWrapper {...path} disabled={disabled}>
+      <section className={containerClass}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
         <span className={nameClass}>
@@ -117,8 +119,8 @@ const Mini = ({
         </span>
 
         <style jsx>{styles}</style>
-      </a>
-    </Link>
+      </section>
+    </LinkWrapper>
   )
 }
 

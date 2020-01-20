@@ -11,7 +11,7 @@ export type CardSpacing = 0 | '0' | 'xtight' | 'tight' | 'base'
 export type CardBorderColor = 'grey-lighter'
 export type CardBorderRadius = 'xtight' | 'xxtight'
 
-interface CardProps {
+export interface CardProps {
   bgColor?: CardBgColor
   spacing?: [CardSpacing, CardSpacing]
   textSize?: 'md-s'

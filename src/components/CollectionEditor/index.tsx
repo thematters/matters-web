@@ -114,8 +114,16 @@ class CollectionEditor extends React.PureComponent<Props, State> {
 
                         <ArticleDigest.Dropdown
                           article={article}
-                          hasArrow
+                          titleTextSize="md-s"
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                           disabled
+                          extraButton={
+                            <ArticleDigest.Dropdown.OpenExternalLink
+                              article={article}
+                            />
+                          }
                         />
 
                         <button
