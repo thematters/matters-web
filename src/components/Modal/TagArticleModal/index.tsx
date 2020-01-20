@@ -15,11 +15,11 @@ import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { AddArticleTags } from './__generated__/AddArticleTags'
+import { PutArticlesTags } from './__generated__/PutArticlesTags'
 
-const ADD_ARTICLE_TAGS = gql`
-  mutation AddArticleTags($id: ID!, $articles: [ID!]) {
-    addArticleTags(input: { id: $id, articles: $articles }) {
+const PUT_ARTICLES_TAGS = gql`
+  mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
+    putArticlesTags(input: { id: $id, articles: $articles }) {
       id
       content
     }
@@ -63,7 +63,7 @@ interface FormValues {
 
 const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
-  const [update] = useMutation<AddArticleTags>(ADD_ARTICLE_TAGS)
+  const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
 
   const {
