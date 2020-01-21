@@ -22,7 +22,8 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
         height: 16,
         width: 52,
         fontSize: 9,
-        fontWeight: 600
+        fontWeight: 600,
+        lineHeight: 1
       }}
     >
       {user.isFollowee ? (

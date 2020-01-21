@@ -195,9 +195,9 @@ export const UserProfile = () => {
                 <section className="buttons">
                   <span className="follows">
                     <FollowButton user={user} size="default" />
-                    <span className="u-sm-down-hide follow-state">
+                    <section className="u-sm-down-hide follow-state">
                       {!isMe && <FollowButton.State user={user} />}
-                    </span>
+                    </section>
                   </span>
 
                   <span className="u-sm-up-hide">

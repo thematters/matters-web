@@ -120,9 +120,7 @@
     }
 
     & .follow-state {
-      display: inline-block;
-      margin-top: var(--spacing-base);
-      line-height: 1;
+      margin-top: var(--spacing-x-tight);
     }
   }
 
