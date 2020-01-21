@@ -10,8 +10,8 @@ import styles from './styles.css'
 
 import { TitleDigestArticle } from './__generated__/TitleDigestArticle'
 
-export type TitleDigestTextSize = 'sm' | 'md-s' | 'md' | 'xm'
-export type TitleDigestTextWeight = 'normal' | 'md'
+export type TitleDigestTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
+export type TitleDigestTextWeight = 'normal' | 'md' | 'semibold'
 export type TitleDigestIs = 'h2' | 'h3' | 'h4'
 
 interface TitleDigestProps {

@@ -1,9 +1,3 @@
-.feature {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  line-height: 1.5;
-}
-
 .article {
   font-size: var(--font-size-article-title);
   line-height: var(--line-height-article-title);

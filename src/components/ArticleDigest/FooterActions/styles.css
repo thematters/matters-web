@@ -18,17 +18,3 @@ footer {
     }
   }
 }
-
-.state {
-  display: inline-block;
-  padding: var(--spacing-xxx-tight) var(--spacing-xx-tight);
-
-  color: var(--color-white);
-  background: var(--color-grey);
-  border-radius: 2px;
-  line-height: 1;
-}
-
-.response-count {
-  font-size: 0;
-}

@@ -1,7 +1,6 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 
-import { Icon, TextIcon, Title, Translate } from '~/components'
+import { Icon, LinkWrapper, TextIcon, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -29,6 +28,9 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
   const headerClass = classNames({
     [type]: type
   })
+  const onClick = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, { type })
+  }
 
   if (!path || typeof path === 'boolean') {
     return (
@@ -40,27 +42,15 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
     )
   }
 
-  const LinkWrapper: React.FC = ({ children }) => (
-    <Link {...path}>
-      <a
-        onClick={() =>
-          analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, { type })
-        }
-      >
-        {children}
-      </a>
-    </Link>
-  )
-
   return (
     <header className={headerClass}>
-      <LinkWrapper>
+      <LinkWrapper {...path} onClick={onClick}>
         <Title type="nav" is="h2">
           {titleMap[type]}
         </Title>
       </LinkWrapper>
 
-      <LinkWrapper>
+      <LinkWrapper {...path} onClick={onClick}>
         <TextIcon
           icon={<Icon.ArrowRight style={{ width: 8, height: 8 }} />}
           color="grey-dark"

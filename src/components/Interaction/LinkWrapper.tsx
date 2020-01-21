@@ -5,6 +5,7 @@ interface LinkWrapperProps {
   as: string
 
   disabled?: boolean
+  onClick?: () => any
 }
 
 export const LinkWrapper: React.FC<LinkWrapperProps> = ({
@@ -12,6 +13,7 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   as,
 
   disabled,
+  onClick,
 
   children
 }) =>
@@ -19,6 +21,16 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
     <>{children}</>
   ) : (
     <Link href={href} as={as}>
-      <a onClick={e => e.stopPropagation()}>{children}</a>
+      <a
+        onClick={e => {
+          e.stopPropagation()
+
+          if (onClick) {
+            onClick()
+          }
+        }}
+      >
+        {children}
+      </a>
     </Link>
   )

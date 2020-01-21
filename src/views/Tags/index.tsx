@@ -118,7 +118,7 @@ const Tags = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <div className="l-row">
+      <section className="l-row">
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
           {leftEdges.map(({ node, cursor }, i) => (
             <li
@@ -149,7 +149,9 @@ const Tags = () => {
             </li>
           ))}
         </ul>
-      </div>
+
+        <style jsx>{styles}</style>
+      </section>
     </InfiniteScroll>
   )
 }
@@ -175,7 +177,7 @@ export default () => {
           }
         />
 
-        <section>
+        <section className="container">
           <Tags />
         </section>
       </article>

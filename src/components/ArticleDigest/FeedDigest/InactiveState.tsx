@@ -6,23 +6,24 @@ import { TextIcon } from '~/components/TextIcon'
 
 import styles from './styles.css'
 
-import { StateActionsArticle } from './__generated__/StateActionsArticle'
+import { InactiveStateArticle } from './__generated__/InactiveStateArticle'
 
 const fragments = {
   article: gql`
-    fragment StateActionsArticle on Article {
+    fragment InactiveStateArticle on Article {
+      id
       articleState: state
     }
   `
 }
 
-const State = ({ article }: { article: StateActionsArticle }) => {
+const InactiveState = ({ article }: { article: InactiveStateArticle }) => {
   if (article.articleState === 'active') {
     return null
   }
 
   return (
-    <span className="state">
+    <span className="inactive-state">
       <TextIcon icon={<Icon.Archive />} size="xs">
         <Translate zh_hant="已站內隱藏" zh_hans="已站内隐藏" />
       </TextIcon>
@@ -32,6 +33,6 @@ const State = ({ article }: { article: StateActionsArticle }) => {
   )
 }
 
-State.fragments = fragments
+InactiveState.fragments = fragments
 
-export default State
+export default InactiveState

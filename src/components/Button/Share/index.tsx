@@ -32,13 +32,8 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     : ''
   const shareTitle = process.browser ? title || window.document.title : ''
 
-  const onClick = async ({ open }: { open: () => any }) => {
+  const openShareModal = async ({ open }: { open: () => any }) => {
     setShow(true)
-
-    analytics.trackEvent(ANALYTICS_EVENTS, {
-      type: SHARE_TYPE.ROOT,
-      url: shareLink
-    })
 
     const navigator = window.navigator as any
     if (navigator.share && isMobile()) {
@@ -65,7 +60,16 @@ const ShareButton: React.FC<ShareButtonProps> = ({
           <button
             type="button"
             aria-label={`分享《${title}》`}
-            onClick={() => onClick({ open })}
+            onClick={e => {
+              openShareModal({ open })
+
+              analytics.trackEvent(ANALYTICS_EVENTS, {
+                type: SHARE_TYPE.ROOT,
+                url: shareLink
+              })
+
+              e.stopPropagation()
+            }}
           >
             {size === 'md' ? (
               <Icon.Share size={size} color={color} />

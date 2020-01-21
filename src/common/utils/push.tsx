@@ -189,8 +189,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
           }
         })
       )
+      console.error('[Push] Failed to subscribe push')
     }
-    throw new Error('[Push] Failed to subscribe push')
   }
 
   console.log('[Push] Subscribed')

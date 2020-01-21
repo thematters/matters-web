@@ -4,13 +4,13 @@ import React from 'react'
 import styles from './styles.css'
 
 type TitleType =
-  | 'feature'
   | 'article'
   | 'feed'
   | 'modal'
   | 'modal-headline'
   | 'sidebar'
   | 'nav'
+
 type TitleIs = 'h1' | 'h2' | 'h3'
 
 interface TitleProps {

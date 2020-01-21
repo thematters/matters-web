@@ -73,7 +73,13 @@ const Subscribe = ({
             />
           ),
           customButton: (
-            <button type="button" onClick={() => subscribePush()}>
+            <button
+              type="button"
+              onClick={e => {
+                subscribePush()
+                e.stopPropagation()
+              }}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.confirmPush}
                 zh_hans={TEXT.zh_hans.confirmPush}

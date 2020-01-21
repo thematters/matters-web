@@ -5,15 +5,18 @@ import ShareButton from '~/components/Button/Share'
 
 import { toPath } from '~/common/utils'
 
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import Appreciation from './Appreciation'
 import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
 import { FooterActionsArticle } from './__generated__/FooterActionsArticle'
 
-interface FooterActionsProps {
+export type FooterActionsControls = DropdownActionsControls
+
+type FooterActionsProps = {
   article: FooterActionsArticle
-}
+} & FooterActionsControls
 
 const fragments = {
   article: gql`
@@ -29,10 +32,12 @@ const fragments = {
       ...AppreciationArticle
       ...ActionsResponseCountArticle
       ...BookmarkArticle
+      ...DropdownActionsArticle
     }
     ${Appreciation.fragments.article}
     ${ResponseCount.fragments.article}
     ${BookmarkButton.fragments.article}
+    ${DropdownActions.fragments.article}
   `
 }
 
@@ -51,7 +56,7 @@ const FooterActions = ({ article }: FooterActionsProps) => {
       </section>
 
       <section className="right">
-        {/* <DropdownActions article={article} /> */}
+        <DropdownActions article={article} />
         <BookmarkButton article={article} size="sm" />
         <ShareButton title={title} path={path.as} color="grey" />
       </section>

@@ -14,10 +14,16 @@
 .text-size-xm {
   font-size: var(--font-size-xm);
 }
+.text-size-xl {
+  font-size: var(--font-size-xl);
+}
 
 .text-weight-normal {
   font-weight: var(--font-weight-normal);
 }
 .text-weight-md {
   font-weight: var(--font-weight-medium);
+}
+.text-weight-semibold {
+  font-weight: var(--font-weight-semibold);
 }

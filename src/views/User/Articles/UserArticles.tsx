@@ -138,7 +138,7 @@ const UserArticles = () => {
               <List.Item key={cursor}>
                 <ArticleDigest.Feed
                   article={node}
-                  hasSticky
+                  inUserArticles
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.USER_ARTICLE,

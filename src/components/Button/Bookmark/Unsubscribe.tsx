@@ -39,7 +39,10 @@ const Unsubscribe = ({
     <button
       type="button"
       aria-label="收藏"
-      onClick={() => unsubscribe()}
+      onClick={e => {
+        unsubscribe()
+        e.stopPropagation()
+      }}
       disabled={disabled}
     >
       {size === 'md' ? (

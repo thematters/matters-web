@@ -1,13 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import Link from 'next/link'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon, LinkWrapper, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr, toPath } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
 
@@ -40,31 +37,18 @@ const ResponseCount = ({
     fragment: UrlFragments.COMMENTS
   })
   const isBanned = state === 'banned'
-  const LinkWrapper: React.FC = ({ children }) =>
-    isBanned ? (
-      <span className="response-count">
-        {children}
-        <style jsx>{styles}</style>
-      </span>
-    ) : (
-      <Link {...path}>
-        <a
-          className="response-count"
-          onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-              entrance: article.id,
-              type: 'article-digest'
-            })
-          }}
-        >
-          {children}
-          <style jsx>{styles}</style>
-        </a>
-      </Link>
-    )
 
   return (
-    <LinkWrapper>
+    <LinkWrapper
+      {...path}
+      disabled={isBanned}
+      onClick={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+          entrance: article.id,
+          type: 'article-digest'
+        })
+      }}
+    >
       <TextIcon
         icon={<Icon.CommentSmall size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
@@ -73,8 +57,6 @@ const ResponseCount = ({
         size={size}
         spacing="xxtight"
       />
-
-      <style jsx>{styles}</style>
     </LinkWrapper>
   )
 }

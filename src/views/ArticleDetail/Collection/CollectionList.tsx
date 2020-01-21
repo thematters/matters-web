@@ -101,7 +101,7 @@ const CollectionList = ({
           <List.Item key={cursor}>
             <ArticleDigest.Sidebar
               article={node}
-              hasCover={!!isMediumUp}
+              hasCover={isMediumUp}
               hasBackground
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

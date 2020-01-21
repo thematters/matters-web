@@ -1,13 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/Button/Share'
 
 import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'
-import ExtendButton from './ExtendButton'
-import MoreButton from './MoreButton'
 import ResponseButton from './ResponseButton'
 import styles from './styles.css'
 
@@ -21,15 +20,13 @@ const fragments = {
       ...AppreciatorsArticle
       ...BookmarkArticle
       ...ResponseButtonArticle
-      ...MoreButtonArticle
-      ...ExtendButtonArticle
+      ...DropdownActionsArticle
     }
     ${AppreciationButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
     ${ResponseButton.fragments.article}
-    ${MoreButton.fragments.article}
-    ${ExtendButton.fragments.article}
+    ${DropdownActions.fragments.article}
   `
 }
 
@@ -75,10 +72,9 @@ const Toolbar = ({
           <AppreciationButton article={article} inFixedToolbar />
         )}
         <ResponseButton article={article} />
-        {!fixed && <ExtendButton article={article} />}
         <BookmarkButton article={article} size="md" />
         <ShareButton size="md" />
-        <MoreButton article={article} />
+        {!fixed && <DropdownActions article={article} color="black" />}
       </section>
 
       <style jsx>{styles}</style>
