@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
 
-interface CardDigestProps {
+interface SidebarDigestProps {
   article: SidebarDigestArticle
 
   titleTextSize?: TitleDigestTextSize
@@ -41,14 +41,14 @@ const fragments = {
   `
 }
 
-const CardDigest = ({
+const SidebarDigest = ({
   article,
 
   titleTextSize = 'md-s',
   hasBackground,
   hasCover,
   onClick
-}: CardDigestProps) => {
+}: SidebarDigestProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
@@ -103,6 +103,6 @@ const CardDigest = ({
   )
 }
 
-CardDigest.fragments = fragments
+SidebarDigest.fragments = fragments
 
-export default CardDigest
+export default SidebarDigest

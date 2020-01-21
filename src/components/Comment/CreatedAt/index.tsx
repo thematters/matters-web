@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { DateTime } from '~/components'
+import { DateTime, LinkWrapper } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -38,17 +37,11 @@ const fragments = {
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
   const path = toPath({ page: 'commentDetail', comment })
 
-  if (hasLink) {
-    return (
-      <Link {...path}>
-        <a>
-          <DateTime date={comment.createdAt} />
-        </a>
-      </Link>
-    )
-  }
-
-  return <DateTime date={comment.createdAt} />
+  return (
+    <LinkWrapper {...path} disabled={!hasLink}>
+      <DateTime date={comment.createdAt} />
+    </LinkWrapper>
+  )
 }
 
 CreatedAt.fragments = fragments
