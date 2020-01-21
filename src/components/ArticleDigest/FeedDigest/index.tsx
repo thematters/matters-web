@@ -11,9 +11,9 @@ import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import ArticleTitleDigest from '../TitleDigest'
 import CreatedAt from './CreatedAt'
+import InactiveState from './InactiveState'
 import Live from './Live'
 import styles from './styles.css'
-import InactiveState from './InactiveState'
 
 import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 
