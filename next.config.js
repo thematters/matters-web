@@ -161,7 +161,7 @@ module.exports = withPlugins(
       withOffline,
       {
         // FIXME: https://github.com/hanford/next-offline/issues/195
-        generateInDevMode: true,
+        generateInDevMode: false,
         workboxOpts: {
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
