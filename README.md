@@ -69,6 +69,8 @@ See [next.js docs](https://github.com/zeit/next.js#routing) for more details.
 
 [Matters Design System](https://paper.dropbox.com/doc/Matters-Design-System--AXX9x2tuPldQFCWTN0Mt~_itAQ-klFuV5yv3ZlqpqHL0w0kU)
 
+[Matters 3.0: Design System](https://paper.dropbox.com/doc/Matters-3.0-Design-System--AqXF9GXfYqC18yjAQzN5l02BAg-Sp6ANp5EXAdnzSK3adqNS)
+
 ### Naming
 
 #### React Component/Page
@@ -100,24 +102,21 @@ See `.vscode/settings.json`
 
 ##### Recommdation
 
-```bash
-code --install-extension blanu.vscode-styled-jsx
-code --install-extension EditorConfig.EditorConfig
-code --install-extension esbenp.prettier-vscode
-code --install-extension mikestead.dotenv
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension Prisma.vscode-graphql
-code --install-extension ricard.postcss
-```
+- [blanu.vscode-styled-jsx](https://marketplace.visualstudio.com/items?itemName=blanu.vscode-styled-jsx)
+- [attilabuti.vscode-mjml](https://marketplace.visualstudio.com/items?itemName=attilabuti.vscode-mjml)
+- [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [mikestead.dotenv](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
+- [ms-vscode.vscode-typescript-tslint-plugin]()
+- [Prisma.vscode-graphql](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql)
+- [ricard.postcss](https://marketplace.visualstudio.com/items?itemName=ricard.PostCSS)
 
 ##### Optional
 
-```bash
-code --install-extension cssho.vscode-svgviewer
-code --install-extension wix.vscode-import-cost
-code --install-extension oderwat.indent-rainbow
-code --install-extension naumovs.color-highlight
-```
+- [EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [wix.vscode-import-cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
+- [oderwat.indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
+- [CoenraadS.bracket-pair-colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
+- [naumovs.color-highlight]()
 
 ## Release a new version
 
