@@ -32,7 +32,8 @@
     margin-left: var(--spacing-x-tight);
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-grey-lighter);
   }
 }
@@ -41,7 +42,8 @@
   color: var(--color-white);
   background: var(--color-matters-green);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-matters-green-hover);
   }
 }

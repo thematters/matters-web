@@ -4,10 +4,6 @@ import { MattersArticleEditor } from '@matters/matters-editor'
 import getConfig from 'next/config'
 import { FC, useContext, useState } from 'react'
 
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User
-} from '~/components/GQL/queries/__generated__/SearchUsers'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { LanguageContext } from '~/components/Language'
 
@@ -15,9 +11,14 @@ import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 
-import { EditorDraft } from '../__generated__/EditorDraft'
 import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
+
+import {
+  SearchUsers,
+  SearchUsers_search_edges_node_User
+} from '~/components/GQL/queries/__generated__/SearchUsers'
+import { EditorDraft } from '../__generated__/EditorDraft'
 
 const {
   publicRuntimeConfig: { ASSET_DOMAIN }

@@ -2,15 +2,18 @@
   margin-top: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
+
+  & :global(> header) {
+    margin-bottom: 0;
+  }
 }
 
 .setting-item {
   @mixin flex-center-space-between;
-  padding-bottom: var(--spacing-loose);
+  padding: var(--spacing-loose) 0;
 
   & + .setting-item {
     @mixin border-top-grey;
-    padding: var(--spacing-loose) 0;
   }
 
   & .description {

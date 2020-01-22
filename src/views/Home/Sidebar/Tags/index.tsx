@@ -1,15 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Label, Spinner, Tag, Translate } from '~/components'
+import { Spinner, Tag } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import ViewAllLink from '../ViewAllLink'
-import { SidebarTags } from './__generated__/SidebarTags'
+import SidebarHeader from '../SidebarHeader'
 import styles from './styles.css'
+
+import { SidebarTags } from './__generated__/SidebarTags'
 
 const SIDEBAR_TAGS = gql`
   query SidebarTags {
@@ -43,13 +44,8 @@ const Tags = () => {
   }
 
   return (
-    <>
-      <header>
-        <Label>
-          <Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />
-        </Label>
-        <ViewAllLink type="tags" />
-      </header>
+    <section>
+      <SidebarHeader type="tags" />
 
       {loading && <Spinner />}
 
@@ -70,7 +66,7 @@ const Tags = () => {
       </ul>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

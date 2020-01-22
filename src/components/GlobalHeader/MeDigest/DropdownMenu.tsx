@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -15,6 +14,8 @@ import {
   toPath,
   unsubscribePush
 } from '~/common/utils'
+
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)

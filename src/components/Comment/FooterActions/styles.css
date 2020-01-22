@@ -1,0 +1,23 @@
+footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-base);
+
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+
+  & .left {
+    display: flex;
+    align-items: center;
+
+    & > :global(* + *) {
+      margin-left: var(--spacing-loose);
+
+      line-height: 1;
+    }
+  }
+}
+
+.reply-form {
+  margin-top: var(--spacing-base);
+}

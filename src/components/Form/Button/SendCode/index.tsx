@@ -8,8 +8,9 @@ import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
-import { SendVerificationCode } from './__generated__/SendVerificationCode'
 import styles from './styles.css'
+
+import { SendVerificationCode } from './__generated__/SendVerificationCode'
 
 /**
  * This component is for sending verificatio code to user with builtin mutation.

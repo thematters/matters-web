@@ -8,7 +8,6 @@ import { useContext } from 'react'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -26,8 +25,10 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import { UserRegister } from './__generated__/UserRegister'
 import styles from './styles.css'
+
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { UserRegister } from './__generated__/UserRegister'
 
 /**
  * This component is designed for sign up form with builtin mutation.

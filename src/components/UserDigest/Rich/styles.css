@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  position: relative;
+}
+
+.avatar {
+  position: relative;
+  margin-right: var(--spacing-x-tight);
+
+  font-size: 0;
+
+  & .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  & :global(* + *) {
+    margin-left: var(--spacing-xx-tight);
+  }
+}
+
+.name {
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm-s);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.extra-button {
+  display: flex;
+  align-items: flex-start;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.size-sm {
+  & .content {
+    height: 2rem;
+    padding-right: 4rem; /* width of extra button */
+  }
+
+  & .name,
+  & .description {
+    line-height: 1rem; /* 16px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-sm);
+  }
+
+  & .extra-button {
+    align-items: middle;
+  }
+}
+.size-lg {
+  & .content {
+    height: 3rem;
+  }
+
+  & .name,
+  & .description {
+    line-height: 1.5rem; /* 24px, half of the avatar height */
+  }
+
+  & .name {
+    font-size: var(--font-size-md-s);
+  }
+}

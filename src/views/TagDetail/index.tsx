@@ -3,10 +3,9 @@ import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { Footer, Head, PageHeader, Placeholder } from '~/components'
+import { Footer, Head, PageHeader, Spinner } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
 import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
 import TagArticleModal from '~/components/Modal/TagArticleModal'
 import TagModal from '~/components/Modal/TagModal'
@@ -19,6 +18,8 @@ import { ERROR_CODES } from '~/common/enums'
 import styles from './styles.css'
 import { TagDetailArticles } from './TagDetailArticles'
 import { TagDetailButtons } from './TagDetailButtons'
+
+import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
 
 const ActionButtons = () => {
   const viewer = useContext(ViewerContext)
@@ -46,7 +47,7 @@ const TagDetailContainer = () => {
   })
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -74,7 +75,7 @@ const TagDetailContainer = () => {
       <Head title={`#${data.node.content}`} />
 
       <PageHeader
-        pageTitle={data.node.content}
+        title={data.node.content}
         buttons={<ActionButtons />}
         description={data.node.description || ''}
       />

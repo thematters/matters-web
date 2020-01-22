@@ -17,12 +17,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { TagDetailSelectedArticles } from './__generated__/TagDetailSelectedArticles'
 
 const SELECTED_ARTICLES = gql`
-  query TagDetailSelectedArticles(
-    $id: ID!
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query TagDetailSelectedArticles($id: ID!, $after: String) {
     node(input: { id: $id }) {
       ... on Tag {
         id
@@ -134,13 +129,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
                 })
               }
             >
-              <ArticleDigest.Feed
-                article={node}
-                hasDateTime
-                hasBookmark
-                hasMoreButton
-                inTagDetail
-              />
+              <ArticleDigest.Feed article={node} inTagDetail />
             </li>
           ))}
         </ul>

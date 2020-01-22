@@ -6,8 +6,9 @@ import {
   Footer,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
@@ -19,11 +20,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { AllTopics } from './__generated__/AllTopics'
 
 const ALL_TOPICSS = gql`
-  query AllTopics(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = true
-  ) {
+  query AllTopics($after: String) {
     viewer {
       id
       recommendation {
@@ -50,7 +47,7 @@ const Topics = () => {
   const { data, loading, error, fetchMore } = useQuery<AllTopics>(ALL_TOPICSS)
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -84,26 +81,21 @@ const Topics = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.ALL_TOPICS,
-                location: i
-              })
-            }
-          >
+          <List.Item key={cursor}>
             <ArticleDigest.Feed
               article={node}
-              hasDateTime
-              hasBookmark
-              hasTopicScore
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.ALL_TOPICS,
+                  location: i
+                })
+              }
             />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }
@@ -120,7 +112,7 @@ export default () => {
         />
 
         <PageHeader
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allTopics}
               zh_hans={TEXT.zh_hans.allTopics}

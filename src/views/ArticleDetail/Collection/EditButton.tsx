@@ -8,9 +8,10 @@ import articleFragments from '~/components/GQL/fragments/article'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorSetCollection } from './__generated__/EditorSetCollection'
-import styles from './styles.css'
 
 /**
  * Note:
@@ -24,9 +25,6 @@ const EDITOR_SET_COLLECTION = gql`
     $after: String
     $first: Int
     $collection: [ID!]!
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
   ) {
     setCollection(input: { id: $id, collection: $collection }) {
       ...ArticleCollection

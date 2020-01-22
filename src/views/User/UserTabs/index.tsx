@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
@@ -30,63 +29,48 @@ const MeTabs = () => {
     page: 'userBookmarks',
     userName
   })
-  const userHistoryPath = toPath({
-    page: 'userHistory',
-    userName
-  })
 
   if (isMe) {
     return (
       <Tabs>
-        <Tabs.Tab selected={router.pathname === PATHS.USER_ARTICLES.href}>
-          <Link {...userArticlePath}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.myArticles}
-                zh_hans={TEXT.zh_hans.myArticles}
-              />
-            </a>
-          </Link>
+        <Tabs.Tab
+          {...userArticlePath}
+          selected={router.pathname === PATHS.USER_ARTICLES.href}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.article}
+            zh_hans={TEXT.zh_hans.article}
+          />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.pathname === PATHS.USER_DRAFTS.href}>
-          <Link {...userDraftsPath}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.myDrafts}
-                zh_hans={TEXT.zh_hans.myDrafts}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...userDraftsPath}
+          selected={router.pathname === PATHS.USER_DRAFTS.href}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.draft}
+            zh_hans={TEXT.zh_hans.draft}
+          />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.pathname === PATHS.USER_COMMENTS.href}>
-          <Link {...userCommentsPath}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.myComments}
-                zh_hans={TEXT.zh_hans.myComments}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...userCommentsPath}
+          selected={router.pathname === PATHS.USER_COMMENTS.href}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.comment}
+            zh_hans={TEXT.zh_hans.comment}
+          />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.pathname === PATHS.USER_BOOKMARKS.href}>
-          <Link {...userBookmarksPath}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.myBookmarks}
-                zh_hans={TEXT.zh_hans.myBookmarks}
-              />
-            </a>
-          </Link>
-        </Tabs.Tab>
-        <Tabs.Tab selected={router.pathname === PATHS.USER_HISTORY.href}>
-          <Link {...userHistoryPath}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.readHistory}
-                zh_hans={TEXT.zh_hans.readHistory}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...userBookmarksPath}
+          selected={router.pathname === PATHS.USER_BOOKMARKS.href}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.bookmark}
+            zh_hans={TEXT.zh_hans.bookmark}
+          />
         </Tabs.Tab>
       </Tabs>
     )
@@ -94,25 +78,24 @@ const MeTabs = () => {
 
   return (
     <Tabs>
-      <Tabs.Tab selected={router.pathname === PATHS.USER_ARTICLES.href}>
-        <Link {...userArticlePath}>
-          <a>
-            <Translate
-              zh_hant={TEXT.zh_hant.article}
-              zh_hans={TEXT.zh_hans.article}
-            />
-          </a>
-        </Link>
+      <Tabs.Tab
+        {...userArticlePath}
+        selected={router.pathname === PATHS.USER_ARTICLES.href}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.article}
+          zh_hans={TEXT.zh_hans.article}
+        />
       </Tabs.Tab>
-      <Tabs.Tab selected={router.pathname === PATHS.USER_COMMENTS.href}>
-        <Link {...userCommentsPath}>
-          <a>
-            <Translate
-              zh_hant={TEXT.zh_hant.comment}
-              zh_hans={TEXT.zh_hans.comment}
-            />
-          </a>
-        </Link>
+
+      <Tabs.Tab
+        {...userCommentsPath}
+        selected={router.pathname === PATHS.USER_COMMENTS.href}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.comment}
+          zh_hans={TEXT.zh_hans.comment}
+        />
       </Tabs.Tab>
     </Tabs>
   )

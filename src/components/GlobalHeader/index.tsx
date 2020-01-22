@@ -11,7 +11,6 @@ import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
-import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 import { HeaderContext } from './Context'
 import Hint from './Hint'
 import LoginButton from './LoginButton'
@@ -23,6 +22,8 @@ import PublishButton from './PublishButton'
 import SearchButton from './SearchButton'
 import styles from './styles.css'
 import WriteButton from './WriteButton'
+
+import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)

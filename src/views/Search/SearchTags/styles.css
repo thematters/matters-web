@@ -1,3 +1,5 @@
 ul {
+  margin-top: var(--spacing-loose);
+
   font-size: 0; /* remove space between <li> */
 }

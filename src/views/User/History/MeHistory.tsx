@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyHistory from '~/components/Empty/EmptyHistory'
 import { QueryError } from '~/components/GQL'
 
@@ -11,11 +11,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 
 const ME_HISTORY_FEED = gql`
-  query MeHistoryFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query MeHistoryFeed($after: String) {
     viewer {
       id
       activity {
@@ -46,7 +42,7 @@ const MeHistory = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -80,25 +76,21 @@ const MeHistory = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.READ_HISTORY,
-                location: i
-              })
-            }
-          >
+          <List.Item key={cursor}>
             <ArticleDigest.Feed
               article={node.article}
-              hasBookmark
-              hasDateTime
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.READ_HISTORY,
+                  location: i
+                })
+              }
             />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

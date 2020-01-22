@@ -1,17 +1,37 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import { Dropdown, Icon, IconColor, Menu, PopperInstance } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
-import { responseStateIs } from '~/common/utils'
-
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
-import { FolloweeDropdownActionsArticle } from './__generated__/FolloweeDropdownActionsArticle'
 import ArchiveButton from './ArchiveButton'
+import ExtendButton from './ExtendButton'
 import RemoveTagButton from './RemoveTagButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
+
+import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
+
+export interface DropdownActionsControls {
+  color?: IconColor
+  inTagDetail?: boolean
+  inUserArticles?: boolean
+}
+
+type DropdownActionsProps = {
+  article: DropdownActionsArticle
+} & DropdownActionsControls
+
+interface DropdownContentProps {
+  article: DropdownActionsArticle
+
+  instance?: PopperInstance | null
+  hideDropdown: () => void
+
+  hasStickyButton?: boolean
+  hasArchiveButton?: boolean
+  hasRemoveTagButton?: boolean
+}
 
 const fragments = {
   article: gql`
@@ -19,30 +39,43 @@ const fragments = {
       id
       ...ArchiveButtonArticle
       ...StickyButtonArticle
+      ...ExtendButtonArticle
     }
     ${StickyButton.fragments.article}
     ${ArchiveButton.fragments.article}
-  `,
-  followee: gql`
-    fragment FolloweeDropdownActionsArticle on Article {
-      id
-      ...FolloweeArchiveButtonArticle
-      ...StickyButtonArticle
-    }
-    ${StickyButton.fragments.article}
-    ${ArchiveButton.fragments.followee}
+    ${ExtendButton.fragments.article}
   `
 }
 
-const DropdownContent: React.FC<{
-  article: DropdownActionsArticle | FolloweeDropdownActionsArticle
-  instance?: PopperInstance | null
-  hideDropdown: () => void
-  inTagDetail?: boolean
-}> = ({ article, instance, hideDropdown, inTagDetail }) => {
+const DropdownContent = ({
+  article,
+
+  instance,
+  hideDropdown,
+
+  hasStickyButton,
+  hasArchiveButton,
+  hasRemoveTagButton
+}: DropdownContentProps) => {
   return (
     <Menu>
-      {inTagDetail ? (
+      {/* public */}
+      <Menu.Item>
+        <ExtendButton article={article} hideDropdown={hideDropdown} />
+      </Menu.Item>
+
+      {/* private */}
+      {hasStickyButton && (
+        <Menu.Item>
+          <StickyButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
+      {hasArchiveButton && (
+        <Menu.Item>
+          <ArchiveButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
+      {hasRemoveTagButton && (
         <Menu.Item>
           <RemoveTagButton
             article={article}
@@ -50,15 +83,6 @@ const DropdownContent: React.FC<{
             instance={instance}
           />
         </Menu.Item>
-      ) : (
-        <>
-          <Menu.Item>
-            <StickyButton article={article} hideDropdown={hideDropdown} />
-          </Menu.Item>
-          <Menu.Item>
-            <ArchiveButton article={article} hideDropdown={hideDropdown} />
-          </Menu.Item>
-        </>
       )}
     </Menu>
   )
@@ -66,11 +90,11 @@ const DropdownContent: React.FC<{
 
 const DropdownActions = ({
   article,
-  inTagDetail = false
-}: {
-  article: DropdownActionsArticle | FolloweeDropdownActionsArticle
-  inTagDetail?: boolean
-}) => {
+
+  color = 'grey',
+  inTagDetail,
+  inUserArticles
+}: DropdownActionsProps) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
     if (!instance) {
@@ -82,14 +106,11 @@ const DropdownActions = ({
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
-  const isActive = responseStateIs(article, 'active')
-
-  if (
-    (inTagDetail && !isMattyUser) ||
-    (!inTagDetail && (!isArticleAuthor || !isActive || viewer.isInactive))
-  ) {
-    return null
-  }
+  const isActive = article.articleState === 'active'
+  const hasRemoveTagButton = inTagDetail && isMattyUser
+  const hasStickyButton =
+    inUserArticles && isArticleAuthor && isActive && !viewer.isInactive
+  const hasArchiveButton = isArticleAuthor && isActive && !viewer.isInactive
 
   return (
     <>
@@ -99,7 +120,9 @@ const DropdownActions = ({
             article={article}
             instance={instance}
             hideDropdown={hideDropdown}
-            inTagDetail={inTagDetail}
+            hasStickyButton={hasStickyButton}
+            hasArchiveButton={hasArchiveButton}
+            hasRemoveTagButton={hasRemoveTagButton}
           />
         }
         trigger="click"
@@ -107,8 +130,13 @@ const DropdownActions = ({
         placement="bottom-end"
         zIndex={301}
       >
-        <button type="button" aria-label="更多操作">
-          <Icon.MoreSmall color="grey" />
+        <button
+          type="button"
+          aria-label="更多操作"
+          aria-haspopup="true"
+          onClick={e => e.stopPropagation()}
+        >
+          <Icon.MoreSmall color={color} />
         </button>
       </Dropdown>
 

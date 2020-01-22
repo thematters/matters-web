@@ -1,0 +1,4 @@
+.label {
+  margin-left: var(--spacing-x-tight);
+  font-size: 0;
+}

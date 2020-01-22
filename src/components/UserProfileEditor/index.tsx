@@ -21,8 +21,9 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 import styles from './styles.css'
+
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
 interface FormProps {
   user: { [key: string]: any }

@@ -9,10 +9,11 @@ import {
 } from 'react-beautiful-dnd'
 
 import { ArticleDigest, Icon } from '~/components'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 interface State {
   articles: DropdownDigestArticle[]
@@ -113,8 +114,16 @@ class CollectionEditor extends React.PureComponent<Props, State> {
 
                         <ArticleDigest.Dropdown
                           article={article}
-                          hasArrow
+                          titleTextSize="md-s"
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                           disabled
+                          extraButton={
+                            <ArticleDigest.Dropdown.OpenExternalLink
+                              article={article}
+                            />
+                          }
                         />
 
                         <button

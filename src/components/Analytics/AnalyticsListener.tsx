@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
 
 import { useEventListener } from '../Hook'
+
 import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
 declare global {

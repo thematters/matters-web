@@ -1,0 +1,48 @@
+:root {
+  --descendant-item-spacing: var(--spacing-base);
+  --descendant-avatar-size: 1.5rem;
+}
+
+.descendants {
+  padding-left: 2.5rem;
+
+  & li {
+    margin: var(--descendant-item-spacing) 0;
+
+    & + li {
+      padding-top: var(--spacing-xx-tight);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:not(:last-child) :global(article) {
+      position: relative;
+      padding: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: calc(var(--descendant-avatar-size) / 2);
+        top: calc(var(--descendant-avatar-size) + var(--spacing-x-tight));
+        height: 0;
+        height: calc(
+          100% - var(--descendant-item-spacing) - var(--spacing-x-tight) +
+            var(--spacing-xx-tight)
+        );
+        width: 1px;
+        background-color: var(--color-line-grey-light);
+      }
+    }
+  }
+
+  & :global(.content-container) {
+    margin-top: var(--spacing-x-tight);
+    padding-left: var(--spacing-x-loose);
+  }
+}
+
+.expand-button {
+  padding-left: var(--spacing-x-loose);
+}

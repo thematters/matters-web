@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import Cover from '~/components/UserProfile/Cover'
 
@@ -12,8 +11,10 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
-import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 
 /**
  * This component is for uploading profile cover.

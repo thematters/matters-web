@@ -1,19 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  Head,
-  InfiniteScroll,
-  PageHeader,
-  Spinner,
-  Translate
-} from '~/components'
+import { Head, InfiniteScroll, List, Spinner, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { ViewerBlockList } from './__generated__/ViewerBlockList'
 
@@ -30,13 +26,13 @@ const VIEWER_BLOCK_LIST = gql`
         edges {
           cursor
           node {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const SettingsBlocked = () => {
@@ -86,23 +82,28 @@ const SettingsBlocked = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
-        {filteredUsers.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.ALL_AUTHORS,
-                location: i
-              })
-            }
-          >
-            <UserDigest.FullDesc user={node} showUnblock />
-          </li>
-        ))}
-      </ul>
-    </InfiniteScroll>
+    <section className="container">
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List>
+          {filteredUsers.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <UserDigest.Rich
+                user={node}
+                hasUnblock
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.ALL_AUTHORS,
+                    location: i
+                  })
+                }
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
@@ -113,16 +114,6 @@ export default () => (
         zh_hant: TEXT.zh_hant.blockedSetting,
         zh_hans: TEXT.zh_hans.blockedSetting
       }}
-    />
-
-    <PageHeader
-      pageTitle={
-        <Translate
-          zh_hant={TEXT.zh_hant.blockedSetting}
-          zh_hans={TEXT.zh_hans.blockedSetting}
-        />
-      }
-      is="h2"
     />
 
     <SettingsBlocked />

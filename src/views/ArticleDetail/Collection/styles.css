@@ -11,11 +11,17 @@
   & header {
     @mixin flex-center-space-between;
     padding-bottom: var(--spacing-base);
-
-    & .highlight {
-      color: var(--color-matters-green);
-    }
   }
+}
+
+.count {
+  position: relative;
+  top: -0.7rem;
+  right: -0.25rem;
+
+  color: var(--color-matters-green);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
 }
 
 .edit-button {
@@ -28,15 +34,6 @@
 
   @media (--lg-up) {
     padding: 0 var(--spacing-loose);
-  }
-}
-
-.collection-list {
-  & li > :global(.container) {
-    padding-bottom: var(--spacing-base);
-  }
-  & li:last-child > :global(.container) {
-    padding-bottom: 0;
   }
 }
 

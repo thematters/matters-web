@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components'
+import { ArticleDigest, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 import styles from './styles.css'
+
+import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 
 const fragments = {
   article: gql`
@@ -16,12 +17,12 @@ const fragments = {
         edges {
           cursor
           node {
-            ...RelatedDigestArticle
+            ...CardDigestArticle
           }
         }
       }
     }
-    ${ArticleDigest.Related.fragments.article}
+    ${ArticleDigest.Card.fragments.article}
   `
 }
 
@@ -34,23 +35,26 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
 
   return (
     <section className="related-articles">
-      <div className="divider" />
-      <div className="container">
+      <Title type="nav" is="h2">
+        <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />
+      </Title>
+
+      <ul>
         {edges.map(({ node, cursor }, i) => (
-          <div
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.RELATED_ARTICLE,
-                location: i,
-                entrance: article.id
-              })
-            }
-          >
-            <ArticleDigest.Related article={node} hasAuthor hasBookmark />
-          </div>
+          <li key={cursor}>
+            <ArticleDigest.Card
+              article={node}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.RELATED_ARTICLE,
+                  location: i,
+                  entrance: article.id
+                })
+              }
+            />
+          </li>
         ))}
-      </div>
+      </ul>
 
       <style jsx>{styles}</style>
     </section>

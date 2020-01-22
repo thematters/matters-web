@@ -2,11 +2,11 @@ import gql from 'graphql-tag'
 
 import { Button, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import { UnblockButtonUser } from './__generated__/UnblockButtonUser'
 
 const fragments = {

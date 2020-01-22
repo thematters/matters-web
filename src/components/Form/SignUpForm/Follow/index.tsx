@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Button, Translate } from '~/components'
-import AuthorPicker from '~/components/Follow/AuthorPicker'
+import { AuthorPicker, Button, Translate } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { Spinner } from '~/components/Spinner'
 
-import { SignUpMeFollow } from './__generated__/SignUpMeFollow'
 import styles from './styles.css'
+
+import { SignUpMeFollow } from './__generated__/SignUpMeFollow'
 
 /**
  * This component is designed for sign up form with builtin mutation.
@@ -29,10 +29,11 @@ const ME_FOLLOW = gql`
   query SignUpMeFollow {
     viewer {
       id
-      ...FolloweeCountUser
+      followees(input: { first: 0 }) {
+        totalCount
+      }
     }
   }
-  ${AuthorPicker.fragments.user}
 `
 
 interface Props {
@@ -69,7 +70,6 @@ export const SignUpFollowForm: React.FC<Props> = ({
   return (
     <div className={containerStyle}>
       <AuthorPicker
-        viewer={data.viewer}
         title={
           <Translate
             zh_hant="請至少選擇 5 作者"
@@ -77,7 +77,6 @@ export const SignUpFollowForm: React.FC<Props> = ({
           />
         }
         titleIs="span"
-        readonly
       />
 
       <div className="buttons">

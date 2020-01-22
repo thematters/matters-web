@@ -3,30 +3,25 @@ import gql from 'graphql-tag'
 
 import {
   ArticleDigest,
-  CommentDigest,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import CommentFragments from '~/components/GQL/fragments/comment'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import FollowComment from './FollowComment'
+
 import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
-import styles from './styles.css'
 
 const FOLLOW_FEED = gql`
-  query FollowFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-    $hasDescendantComments: Boolean = false
-  ) {
+  query FollowFeed($after: String) {
     viewer {
       id
       recommendation {
@@ -41,10 +36,10 @@ const FOLLOW_FEED = gql`
             node {
               __typename
               ... on Article {
-                ...FolloweeFeedDigestArticle
+                ...FeedDigestArticle
               }
               ... on Comment {
-                ...FolloweeFeedDigestComment
+                ...FollowComment
               }
             }
           }
@@ -52,8 +47,8 @@ const FOLLOW_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.followee}
-  ${CommentFragments.followee}
+  ${ArticleDigest.Feed.fragments.article}
+  ${FollowComment.fragments.comment}
 `
 
 const FollowFeed = () => {
@@ -62,7 +57,7 @@ const FollowFeed = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -96,38 +91,34 @@ const FollowFeed = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.FOLLOW,
-                location: i
-              })
-            }
-            className={node.__typename === 'Article' ? 'article' : 'comment'}
-          >
+          <List.Item key={cursor}>
             {node.__typename === 'Article' && (
               <ArticleDigest.Feed
                 article={node}
-                hasDateTime
-                hasBookmark
-                inFolloweeFeed
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOW,
+                    location: i
+                  })
+                }
               />
             )}
             {node.__typename === 'Comment' && (
-              <CommentDigest.Feed
+              <FollowComment
                 comment={node}
-                hasLink
-                hasDropdownActions={false}
-                inFolloweeFeed
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOW,
+                    location: i
+                  })
+                }
               />
             )}
-          </li>
+          </List.Item>
         ))}
-      </ul>
-      <style jsx>{styles}</style>
+      </List>
     </InfiniteScroll>
   )
 }
@@ -142,7 +133,7 @@ export default () => (
     />
 
     <PageHeader
-      pageTitle={
+      title={
         <Translate
           zh_hant={TEXT.zh_hant.follow}
           zh_hans={TEXT.zh_hans.follow}

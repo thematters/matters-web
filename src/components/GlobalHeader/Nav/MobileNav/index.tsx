@@ -26,7 +26,12 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
       theme="dropdown shadow-default"
       onCreate={setInstance}
     >
-      <button type="button" aria-label="菜單" className={navButtonClass}>
+      <button
+        className={navButtonClass}
+        type="button"
+        aria-label="菜單"
+        aria-haspopup="true"
+      >
         <Icon.Menu style={{ width: 20, height: 16 }} />
 
         <style jsx>{styles}</style>

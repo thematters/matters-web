@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 
 import { Tag } from '~/components'
 
-import { TagListArticle } from './__generated__/TagListArticle'
 import styles from './styles.css'
+
+import { TagListArticle } from './__generated__/TagListArticle'
 
 const fragments = {
   article: gql`

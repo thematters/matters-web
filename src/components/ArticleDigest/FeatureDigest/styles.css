@@ -46,6 +46,9 @@
     top: -15px;
     left: 0;
   }
+  & :global(h2) {
+    line-height: 1.5;
+  }
 }
 
 .description {

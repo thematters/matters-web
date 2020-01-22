@@ -16,8 +16,9 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 import styles from './styles.css'
+
+import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 
 interface FormProps {
   extraClass?: string[]

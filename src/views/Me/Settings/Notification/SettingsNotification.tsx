@@ -6,11 +6,12 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 
-import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
-import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import PushSwitch from './PushSwitch'
 import SettingItem from './SettingItem'
 import styles from './styles.css'
+
+import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
+import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
   query ViewerNotificationSettings {
@@ -211,7 +212,7 @@ const SettingsNotification = () => {
       <div className="l-row first">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="偏好" zh_hans="偏好" />}
+            title={<Translate zh_hant="偏好" zh_hans="偏好" />}
             is="h2"
           />
 
@@ -230,7 +231,7 @@ const SettingsNotification = () => {
 
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
+            title={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
             is="h2"
           />
 
@@ -249,7 +250,7 @@ const SettingsNotification = () => {
       <div className="l-row">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="作品" zh_hans="作品" />}
+            title={<Translate zh_hant="作品" zh_hans="作品" />}
             is="h2"
           />
 
@@ -266,7 +267,7 @@ const SettingsNotification = () => {
 
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="評論" zh_hans="评论" />}
+            title={<Translate zh_hant="評論" zh_hans="评论" />}
             is="h2"
           />
 
@@ -285,7 +286,7 @@ const SettingsNotification = () => {
       <div className="l-row">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
-            pageTitle={<Translate zh_hant="其他" zh_hans="其他" />}
+            title={<Translate zh_hant="其他" zh_hans="其他" />}
             is="h2"
           />
 

@@ -3,26 +3,28 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
-import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import {
+  ArticleDigest,
+  Icon,
+  List,
+  Spinner,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
-import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
 import styles from './styles.css'
 
+import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
+
 export const COLLECTION_LIST = gql`
-  query CollectionList(
-    $mediaHash: String
-    $after: String
-    $first: Int
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
       ...ArticleCollection
     }
@@ -39,6 +41,7 @@ const CollectionList = ({
   setEditing: (editing: boolean) => void
   canEdit?: boolean
 }) => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     {
@@ -93,26 +96,23 @@ const CollectionList = ({
 
   return (
     <>
-      <ul className="collection-list">
+      <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.COLLECTION,
-                location: i
-              })
-            }
-          >
+          <List.Item key={cursor}>
             <ArticleDigest.Sidebar
-              type="collection"
               article={node}
-              hasCover
-              hasAuthor
+              hasCover={isMediumUp}
+              hasBackground
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.COLLECTION,
+                  location: i
+                })
+              }
             />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo.hasNextPage && (
         <section className="load-more">

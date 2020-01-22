@@ -7,10 +7,11 @@ import { useMutation } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 import { ViewerContext } from '~/components/Viewer'
 
-import { MeFollow } from './__generated__/MeFollow'
-import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
 import FollowFeed from './FollowFeed'
 import PickAuthors from './PickAuthors'
+
+import { MeFollow } from './__generated__/MeFollow'
+import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
 
 const READ_FOLLOWEE_ARTICLES = gql`
   mutation ReadFolloweeArticles {
@@ -22,10 +23,11 @@ const ME_FOLLOW = gql`
   query MeFollow {
     viewer {
       id
-      ...FolloweeCountUser
+      followees(input: { first: 0 }) {
+        totalCount
+      }
     }
   }
-  ${PickAuthors.fragments.user}
 `
 
 const Follow = () => {
@@ -55,7 +57,7 @@ const Follow = () => {
   const followeeCount = data?.viewer?.followees.totalCount || 0
 
   if (followeeCount < 5) {
-    return <PickAuthors viewer={data.viewer} />
+    return <PickAuthors />
   } else {
     return <FollowFeed />
   }

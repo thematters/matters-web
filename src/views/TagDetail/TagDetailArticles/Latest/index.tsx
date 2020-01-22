@@ -17,12 +17,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import { TagDetailLatestArticles } from './__generated__/TagDetailLatestArticles'
 
 const LATEST_ARTICLES = gql`
-  query TagDetailLatestArticles(
-    $id: ID!
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query TagDetailLatestArticles($id: ID!, $after: String) {
     node(input: { id: $id }) {
       ... on Tag {
         id
@@ -134,13 +129,7 @@ const LatestArticles = ({ id }: { id: string }) => {
                 })
               }
             >
-              <ArticleDigest.Feed
-                article={node}
-                hasDateTime
-                hasBookmark
-                hasMoreButton
-                inTagDetail
-              />
+              <ArticleDigest.Feed article={node} inTagDetail />
             </li>
           ))}
         </ul>

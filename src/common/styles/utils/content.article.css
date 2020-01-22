@@ -409,7 +409,6 @@
   border-radius: 2px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  border: 1px solid var(--color-line-grey-light);
   z-index: 1;
 }
 

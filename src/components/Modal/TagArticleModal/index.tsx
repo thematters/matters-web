@@ -13,8 +13,9 @@ import { Modal } from '~/components/Modal'
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import { PutArticlesTags } from './__generated__/PutArticlesTags'
 import styles from './styles.css'
+
+import { PutArticlesTags } from './__generated__/PutArticlesTags'
 
 const PUT_ARTICLES_TAGS = gql`
   mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
@@ -180,7 +181,18 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
         <ul>
           {selectedArticles.map((article, index) => (
             <li key={index}>
-              <ArticleDigest.Dropdown article={article} hasArrow disabled />
+              <ArticleDigest.Dropdown
+                article={article}
+                titleTextSize="md-s"
+                borderRadius="xtight"
+                bgColor="grey-lighter"
+                spacing={['tight', 'tight']}
+                disabled
+                extraButton={
+                  <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+                }
+              />
+
               <button
                 type="button"
                 className="delete-handler"

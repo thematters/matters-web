@@ -1,5 +1,4 @@
-import { Head, Translate } from '~/components'
-import AuthorPicker from '~/components/Follow/AuthorPicker'
+import { AuthorPicker, Head, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
@@ -37,7 +36,7 @@ const PickIntroHeader = () => {
   )
 }
 
-const PickAuthors = ({ viewer }: { [key: string]: any }) => (
+const PickAuthors = () => (
   <>
     <Head
       title={{
@@ -45,9 +44,10 @@ const PickAuthors = ({ viewer }: { [key: string]: any }) => (
         zh_hans: TEXT.zh_hans.followAuthor
       }}
     />
+
     <PickIntroHeader />
+
     <AuthorPicker
-      viewer={viewer}
       title={
         <Translate
           zh_hant={TEXT.zh_hant.followAuthor}
@@ -59,7 +59,5 @@ const PickAuthors = ({ viewer }: { [key: string]: any }) => (
     <style jsx>{styles}</style>
   </>
 )
-
-PickAuthors.fragments = AuthorPicker.fragments
 
 export default PickAuthors

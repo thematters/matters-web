@@ -27,8 +27,9 @@ import {
   validateEmail
 } from '~/common/utils'
 
-import { UserLogin } from './__generated__/UserLogin'
 import styles from './styles.css'
+
+import { UserLogin } from './__generated__/UserLogin'
 
 /**
  * This component is designed for Login form with builtin mutation.

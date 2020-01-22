@@ -10,9 +10,10 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums/text'
 
-import { MeDigestUser } from './__generated__/MeDigestUser'
 import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
+
+import { MeDigestUser } from './__generated__/MeDigestUser'
 
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
   const viewer = useContext(ViewerContext)
@@ -36,7 +37,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       content={<DropdownMenu hideDropdown={hideDropdown} />}
       onCreate={setInstance}
     >
-      <button type="button" className={containerClasses}>
+      <button type="button" className={containerClasses} aria-haspopup="true">
         <Avatar size="lg" user={viewer.isInactive ? undefined : user} />
 
         <section className="info">

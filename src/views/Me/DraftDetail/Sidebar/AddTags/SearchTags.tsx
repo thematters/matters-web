@@ -10,16 +10,17 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import {
-  SearchTagsQuery,
-  SearchTagsQuery_search_edges_node_Tag
-} from '~/components/GQL/queries/__generated__/SearchTagsQuery'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 
 import styles from './styles.css'
+
+import {
+  SearchTagsQuery,
+  SearchTagsQuery_search_edges_node_Tag
+} from '~/components/GQL/queries/__generated__/SearchTagsQuery'
 
 const DropdownContent = ({
   tags,

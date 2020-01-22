@@ -1,6 +1,6 @@
 .container {
-  margin-bottom: 3rem;
   margin-top: calc(var(--spacing-x-loose) * -1);
+  margin-bottom: 2rem;
 
   @media (--sm-up) {
     margin-top: calc(var(--spacing-xx-loose) * -1);
@@ -12,11 +12,6 @@
 
 .content-container {
   padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-x-loose);
-
-  @media (--sm-up) {
-    padding-bottom: var(--spacing-xx-loose);
-  }
 }
 
 .content {
@@ -125,9 +120,7 @@
     }
 
     & .follow-state {
-      display: inline-block;
-      margin-top: var(--spacing-base);
-      line-height: 1;
+      margin-top: var(--spacing-x-tight);
     }
   }
 
@@ -160,10 +153,7 @@
 }
 
 .info-follow {
-  @mixin border-top-grey;
-
   margin-top: var(--spacing-base);
-  padding-top: var(--spacing-base);
 
   color: var(--color-grey);
   font-size: var(--font-size-sm-s);

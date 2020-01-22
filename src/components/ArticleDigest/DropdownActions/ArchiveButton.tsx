@@ -2,27 +2,17 @@ import gql from 'graphql-tag'
 
 import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
-import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
-import { FolloweeArchiveButtonArticle } from './__generated__/FolloweeArchiveButtonArticle'
 import styles from './styles.css'
+
+import { ArchiveArticle } from '~/components/GQL/mutations/__generated__/ArchiveArticle'
+import { ArchiveButtonArticle } from './__generated__/ArchiveButtonArticle'
 
 const fragments = {
   article: gql`
     fragment ArchiveButtonArticle on Article {
-      id
-      state
-      author {
-        id
-        userName
-      }
-    }
-  `,
-  followee: gql`
-    fragment FolloweeArchiveButtonArticle on Article {
       id
       articleState: state
       author {
@@ -37,7 +27,7 @@ const ArchiveButton = ({
   article,
   hideDropdown
 }: {
-  article: ArchiveButtonArticle | FolloweeArchiveButtonArticle
+  article: ArchiveButtonArticle
   hideDropdown: () => void
 }) => {
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
@@ -45,7 +35,7 @@ const ArchiveButton = ({
     optimisticResponse: {
       archiveArticle: {
         id: article.id,
-        state: 'archived' as any,
+        articleState: 'archived' as any,
         sticky: false,
         __typename: 'Article'
       }
