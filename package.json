@@ -135,7 +135,7 @@
     "ts-node": "^8.6.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.1.0",
+    "tslint-react": "^4.2.0",
     "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.7.5"
   },
