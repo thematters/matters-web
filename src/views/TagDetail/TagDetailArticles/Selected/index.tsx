@@ -21,7 +21,7 @@ const SELECTED_ARTICLES = gql`
     node(input: { id: $id }) {
       ... on Tag {
         id
-        articles(input: { first: 10, after: $after }) {
+        articles(input: { first: 10, after: $after, selected: true }) {
           pageInfo {
             startCursor
             endCursor
@@ -129,7 +129,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
                 })
               }
             >
-              <ArticleDigest.Feed article={node} inTagDetail />
+              <ArticleDigest.Feed article={node} inTagDetailSelected />
             </li>
           ))}
         </ul>

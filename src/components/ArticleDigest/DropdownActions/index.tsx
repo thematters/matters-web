@@ -7,14 +7,17 @@ import { ViewerContext } from '~/components/Viewer'
 import ArchiveButton from './ArchiveButton'
 import ExtendButton from './ExtendButton'
 import RemoveTagButton from './RemoveTagButton'
+import SetTagSelectedButton from './SetTagSelectedButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
+import UnsetTagSelectedButton from './UnsetTagSelectedButton'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
   color?: IconColor
-  inTagDetail?: boolean
+  inTagDetailLatest?: boolean
+  inTagDetailSelected?: boolean
   inUserArticles?: boolean
 }
 
@@ -28,9 +31,12 @@ interface DropdownContentProps {
   instance?: PopperInstance | null
   hideDropdown: () => void
 
+  hasExtendButton?: boolean
   hasStickyButton?: boolean
   hasArchiveButton?: boolean
   hasRemoveTagButton?: boolean
+  hasSetTagSelectedButton?: boolean
+  hasUnsetTagSelectedButton?: boolean
 }
 
 const fragments = {
@@ -53,16 +59,21 @@ const DropdownContent = ({
   instance,
   hideDropdown,
 
+  hasExtendButton,
   hasStickyButton,
   hasArchiveButton,
-  hasRemoveTagButton
+  hasRemoveTagButton,
+  hasSetTagSelectedButton,
+  hasUnsetTagSelectedButton
 }: DropdownContentProps) => {
   return (
     <Menu>
       {/* public */}
-      <Menu.Item>
-        <ExtendButton article={article} hideDropdown={hideDropdown} />
-      </Menu.Item>
+      {hasExtendButton && (
+        <Menu.Item>
+          <ExtendButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
 
       {/* private */}
       {hasStickyButton && (
@@ -73,6 +84,19 @@ const DropdownContent = ({
       {hasArchiveButton && (
         <Menu.Item>
           <ArchiveButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
+      {hasSetTagSelectedButton && (
+        <Menu.Item>
+          <SetTagSelectedButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
+      {hasUnsetTagSelectedButton && (
+        <Menu.Item>
+          <UnsetTagSelectedButton
+            article={article}
+            hideDropdown={hideDropdown}
+          />
         </Menu.Item>
       )}
       {hasRemoveTagButton && (
@@ -92,7 +116,8 @@ const DropdownActions = ({
   article,
 
   color = 'grey',
-  inTagDetail,
+  inTagDetailLatest,
+  inTagDetailSelected,
   inUserArticles
 }: DropdownActionsProps) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
@@ -107,10 +132,17 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
-  const hasRemoveTagButton = inTagDetail && isMattyUser
+  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+  const hasRemoveTagButton = isInTagDetail && isMattyUser
   const hasStickyButton =
-    inUserArticles && isArticleAuthor && isActive && !viewer.isInactive
-  const hasArchiveButton = isArticleAuthor && isActive && !viewer.isInactive
+    inUserArticles &&
+    !isInTagDetail &&
+    isArticleAuthor &&
+    isActive &&
+    !viewer.isInactive
+  const hasArchiveButton =
+    isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
+  const hasExtendButton = !isInTagDetail
 
   return (
     <>
@@ -120,9 +152,12 @@ const DropdownActions = ({
             article={article}
             instance={instance}
             hideDropdown={hideDropdown}
+            hasExtendButton={hasExtendButton}
             hasStickyButton={hasStickyButton}
             hasArchiveButton={hasArchiveButton}
             hasRemoveTagButton={hasRemoveTagButton}
+            hasSetTagSelectedButton={inTagDetailLatest}
+            hasUnsetTagSelectedButton={inTagDetailSelected}
           />
         }
         trigger="click"

@@ -129,7 +129,7 @@ const LatestArticles = ({ id }: { id: string }) => {
                 })
               }
             >
-              <ArticleDigest.Feed article={node} inTagDetail />
+              <ArticleDigest.Feed article={node} inTagDetailLatest />
             </li>
           ))}
         </ul>

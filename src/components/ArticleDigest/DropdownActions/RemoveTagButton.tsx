@@ -67,7 +67,8 @@ const RemoveTagButton = ({
   return (
     <button
       type="button"
-      onClick={async () => {
+      onClick={async event => {
+        event.stopPropagation()
         await deleteArticlesTags()
         if (instance) {
           instance.props.onHidden = sync

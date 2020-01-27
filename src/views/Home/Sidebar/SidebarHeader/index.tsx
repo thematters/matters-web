@@ -22,7 +22,12 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
     icymi: <Translate zh_hant="不要錯過" zh_hans="不要错过" />,
     topics: <Translate zh_hant="熱議話題" zh_hans="热议话题" />,
     authors: <Translate zh_hant="活躍作者" zh_hans="活跃作者" />,
-    tags: <Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />
+    tags: (
+      <Translate
+        zh_hant={TEXT.zh_hant.findTag}
+        zh_hans={TEXT.zh_hans.findTag}
+      />
+    )
   }
   const path = pathMap[type]
   const headerClass = classNames({

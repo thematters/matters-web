@@ -4,8 +4,8 @@ import Link from 'next/link'
 import styles from './styles.css'
 
 interface TabProps {
-  href: string
-  as: string
+  href?: string
+  as?: string
 
   disable?: boolean
   selected?: boolean
@@ -26,10 +26,13 @@ const Tab: React.FC<TabProps> = ({
 }) => {
   return (
     <li role="tab" aria-disabled={disable} aria-selected={selected}>
-      <Link href={href} as={as}>
-        <a>{children}</a>
-      </Link>
-
+      {href && as ? (
+        <Link href={href} as={as}>
+          <a>{children}</a>
+        </Link>
+      ) : (
+        <>{children}</>
+      )}
       <style jsx>{styles}</style>
     </li>
   )
