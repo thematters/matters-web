@@ -12,7 +12,7 @@ const Tag = ({ tag, deleteTag }: TagProps) => (
     <span>{tag}</span>
 
     <button type="button" onClick={() => deleteTag(tag)}>
-      <Icon.Fail style={{ width: 14, height: 14 }} />
+      <Icon.Clear size="sm" />
     </button>
 
     <style jsx>{styles}</style>

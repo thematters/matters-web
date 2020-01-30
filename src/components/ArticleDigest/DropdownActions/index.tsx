@@ -1,7 +1,14 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, IconColor, Menu, PopperInstance } from '~/components'
+import {
+  Dropdown,
+  Icon,
+  IconColor,
+  IconSize,
+  Menu,
+  PopperInstance
+} from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
 import ArchiveButton from './ArchiveButton'
@@ -14,6 +21,7 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
   color?: IconColor
+  size?: IconSize
   inTagDetail?: boolean
   inUserArticles?: boolean
 }
@@ -28,6 +36,7 @@ interface DropdownContentProps {
   instance?: PopperInstance | null
   hideDropdown: () => void
 
+  hasExtendButton?: boolean
   hasStickyButton?: boolean
   hasArchiveButton?: boolean
   hasRemoveTagButton?: boolean
@@ -53,6 +62,7 @@ const DropdownContent = ({
   instance,
   hideDropdown,
 
+  hasExtendButton,
   hasStickyButton,
   hasArchiveButton,
   hasRemoveTagButton
@@ -60,9 +70,11 @@ const DropdownContent = ({
   return (
     <Menu>
       {/* public */}
-      <Menu.Item>
-        <ExtendButton article={article} hideDropdown={hideDropdown} />
-      </Menu.Item>
+      {hasExtendButton && (
+        <Menu.Item>
+          <ExtendButton article={article} hideDropdown={hideDropdown} />
+        </Menu.Item>
+      )}
 
       {/* private */}
       {hasStickyButton && (
@@ -92,6 +104,8 @@ const DropdownActions = ({
   article,
 
   color = 'grey',
+  size,
+
   inTagDetail,
   inUserArticles
 }: DropdownActionsProps) => {
@@ -107,10 +121,20 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
+  const hasExtendButton = isActive
   const hasRemoveTagButton = inTagDetail && isMattyUser
   const hasStickyButton =
     inUserArticles && isArticleAuthor && isActive && !viewer.isInactive
   const hasArchiveButton = isArticleAuthor && isActive && !viewer.isInactive
+
+  if (
+    !hasExtendButton &&
+    !hasRemoveTagButton &&
+    !hasStickyButton &&
+    !hasArchiveButton
+  ) {
+    return null
+  }
 
   return (
     <>
@@ -120,6 +144,7 @@ const DropdownActions = ({
             article={article}
             instance={instance}
             hideDropdown={hideDropdown}
+            hasExtendButton={hasExtendButton}
             hasStickyButton={hasStickyButton}
             hasArchiveButton={hasArchiveButton}
             hasRemoveTagButton={hasRemoveTagButton}
@@ -136,7 +161,7 @@ const DropdownActions = ({
           aria-haspopup="true"
           onClick={e => e.stopPropagation()}
         >
-          <Icon.MoreSmall color={color} />
+          <Icon.More color={color} size={size} />
         </button>
       </Dropdown>
 

@@ -71,11 +71,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
               e.stopPropagation()
             }}
           >
-            {size === 'md' ? (
-              <Icon.Share size={size} color={color} />
-            ) : (
-              <Icon.ShareSmall size={size} color={color} />
-            )}
+            <Icon.Share size={size} color={color} />
           </button>
         )}
       </ModalSwitch>

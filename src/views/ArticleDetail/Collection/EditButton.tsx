@@ -55,7 +55,7 @@ const EditButton = ({
     return (
       <span className={editButtonClass}>
         <button onClick={() => setEditing(true)}>
-          <TextIcon color="grey" icon={<Icon.CollectionEdit />}>
+          <TextIcon color="grey" icon={<Icon.Edit />}>
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
         </button>

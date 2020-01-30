@@ -31,7 +31,7 @@ const ButtonWithEffect = ({
   return (
     <button type="button" aria-label="查看評論" onClick={onClick}>
       <TextIcon
-        icon={<Icon.CommentRegular size="md" />}
+        icon={<Icon.Comment size="md" />}
         color="grey"
         weight="md"
         text={text}

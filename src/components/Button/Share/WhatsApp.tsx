@@ -1,9 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareWhatsApp } from '~/static/icons/share-whatsapp.svg'
 
 const Whatsapp = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -22,7 +23,11 @@ const Whatsapp = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >
-    <TextIcon icon={<Icon.ShareWhatsApp />} spacing="tight" text="WhatsApp" />
+    <TextIcon
+      icon={withIcon(IconShareWhatsApp)({})}
+      spacing="tight"
+      text="WhatsApp"
+    />
   </button>
 )
 

@@ -1,7 +1,8 @@
-import { Icon, Translate } from '~/components'
+import { Translate, withIcon } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
+import { ReactComponent as IconShareLink } from '~/static/icons/share-link.svg'
 
 import styles from './styles.css'
 
@@ -25,7 +26,7 @@ const Copy = ({ link }: { link: string }) => {
   return (
     <section className="copy">
       <button onClick={copy} type="button" aria-label="複製連結">
-        <Icon.ShareLink size="xs" />
+        {withIcon(IconShareLink)({ size: 'xs' })}
       </button>
 
       <input

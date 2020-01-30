@@ -19,13 +19,13 @@ const fragments = {
 }
 
 const TextIconBlock = () => (
-  <TextIcon icon={<Icon.Block />} spacing="tight">
+  <TextIcon icon={<Icon.MuteMedium />} spacing="tight">
     <Translate zh_hant={TEXT.zh_hant.blockUser} zh_hans={TEXT.zh_hans.block} />
   </TextIcon>
 )
 
 const TextIconUnblock = () => (
-  <TextIcon icon={<Icon.Unblock />} spacing="tight">
+  <TextIcon icon={<Icon.UnMuteMedium />} spacing="tight">
     <Translate
       zh_hant={TEXT.zh_hant.unblockUser}
       zh_hans={TEXT.zh_hans.unblockUser}

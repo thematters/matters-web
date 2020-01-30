@@ -80,7 +80,7 @@ const NoticeButton = ({
         aria-label="通知"
         aria-haspopup="true"
       >
-        <Icon.Notification size="md" />
+        <Icon.NotificationLarge size="md" />
 
         <style jsx>{styles}</style>
       </button>

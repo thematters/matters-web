@@ -24,7 +24,7 @@ const Header = () => (
     </h4>
     <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
       <a>
-        <TextIcon icon={<Icon.Settings />} color="grey-dark">
+        <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
           <Translate
             zh_hant={TEXT.zh_hant.setting}
             zh_hans={TEXT.zh_hans.setting}
@@ -42,7 +42,7 @@ const Footer = () => (
     <Link {...PATHS.ME_NOTIFICATIONS}>
       <a>
         <TextIcon
-          icon={<Icon.ArrowRightGreen />}
+          icon={<Icon.Right />}
           color="green"
           textPlacement="left"
           weight="md"

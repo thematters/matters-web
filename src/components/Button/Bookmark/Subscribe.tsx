@@ -98,11 +98,7 @@ const Subscribe = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {size === 'md' ? (
-        <Icon.BookmarkRegularInactive size="md" />
-      ) : (
-        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xs' : undefined} />
-      )}
+      <Icon.Bookmark size={size === 'sm' ? undefined : size} />
     </button>
   )
 }

@@ -1,9 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareLINE } from '~/static/icons/share-line.svg'
 
 const LINE = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -23,7 +24,7 @@ const LINE = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Line')
     }}
   >
-    <TextIcon icon={<Icon.ShareLine />} spacing="tight" text="LINE" />
+    <TextIcon icon={withIcon(IconShareLINE)({})} spacing="tight" text="LINE" />
   </button>
 )
 

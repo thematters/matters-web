@@ -50,7 +50,7 @@ const ResponseCount = ({
       }}
     >
       <TextIcon
-        icon={<Icon.CommentSmall size={size === 'xs' ? 'xs' : undefined} />}
+        icon={<Icon.Comment size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
         weight="md"
         text={numAbbr(article.responseCount || 0)}

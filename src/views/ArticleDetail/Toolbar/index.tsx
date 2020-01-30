@@ -74,7 +74,9 @@ const Toolbar = ({
         <ResponseButton article={article} />
         <BookmarkButton article={article} size="md" />
         <ShareButton size="md" />
-        {!fixed && <DropdownActions article={article} color="black" />}
+        {!fixed && (
+          <DropdownActions article={article} color="black" size="md" />
+        )}
       </section>
 
       <style jsx>{styles}</style>

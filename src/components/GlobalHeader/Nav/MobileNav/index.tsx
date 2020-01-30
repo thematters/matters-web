@@ -32,7 +32,7 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
         aria-label="菜單"
         aria-haspopup="true"
       >
-        <Icon.Menu style={{ width: 20, height: 16 }} />
+        <Icon.More color="black" />
 
         <style jsx>{styles}</style>
       </button>

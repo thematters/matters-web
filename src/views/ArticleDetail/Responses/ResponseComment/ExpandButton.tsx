@@ -11,7 +11,7 @@ const ExpandButton = ({
 }) => (
   <button className="expand-button" type="button" onClick={onClick}>
     <TextIcon
-      icon={<Icon.MoreContent />}
+      icon={<Icon.Down />}
       size="sm"
       color="green"
       textPlacement="left"

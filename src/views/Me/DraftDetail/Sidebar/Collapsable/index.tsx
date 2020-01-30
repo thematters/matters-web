@@ -21,10 +21,8 @@ const Collapsable: React.FC<{
         >
           <TextIcon
             icon={
-              <Icon.CollapseBranch
+              <Icon.Up
                 style={{
-                  width: 14,
-                  height: 14,
                   transform: `rotate(${collapsed ? 180 : 0}deg)`
                 }}
               />

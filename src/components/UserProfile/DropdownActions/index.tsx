@@ -40,7 +40,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
       zIndex={301}
     >
       <button type="button" aria-label="更多操作" aria-haspopup="true">
-        <Icon.MoreSmall color="black" />
+        <Icon.More color="black" />
       </button>
     </Dropdown>
   )

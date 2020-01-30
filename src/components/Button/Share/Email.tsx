@@ -1,9 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { TextIcon, Translate, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
+import { ReactComponent as IconShareEmail } from '~/static/icons/share-email.svg'
 
 const Email = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -25,7 +26,7 @@ const Email = ({ title, link }: { title: string; link: string }) => (
       return (window.location.href = shareUrl)
     }}
   >
-    <TextIcon icon={<Icon.ShareEmail />} spacing="tight">
+    <TextIcon icon={withIcon(IconShareEmail)({})} spacing="tight">
       <Translate zh_hant="郵件" zh_hans="邮件" />
     </TextIcon>
   </button>

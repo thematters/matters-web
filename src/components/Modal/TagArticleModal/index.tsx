@@ -199,7 +199,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
                 aria-label="刪除"
                 onClick={() => onDelete(article)}
               >
-                <Icon.DeleteBlackCircle />
+                <Icon.Clear color="black" />
               </button>
             </li>
           ))}

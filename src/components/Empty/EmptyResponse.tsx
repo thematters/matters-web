@@ -9,7 +9,7 @@ const EmptyResponse = ({
 }) => {
   return (
     <Empty
-      icon={<Icon.EmptyComment size="xxl" />}
+      icon={<Icon.Comment color="grey-lighter" size="xxl" />}
       description={
         description ||
         (articleOnlyMode ? (

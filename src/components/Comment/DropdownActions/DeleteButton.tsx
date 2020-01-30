@@ -41,7 +41,7 @@ const DeleteButton: React.FC<{
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.Remove />} spacing="tight">
+      <TextIcon icon={<Icon.Clear />} spacing="tight">
         <Translate
           zh_hant={TEXT.zh_hant.delete}
           zh_hans={TEXT.zh_hant.delete}

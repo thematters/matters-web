@@ -43,6 +43,9 @@
   &.grey {
     color: var(--color-grey);
   }
+  &.grey-lighter {
+    color: var(--color-grey-lighter);
+  }
   &.green {
     color: var(--color-green);
   }
