@@ -109,7 +109,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon.Sort />
+                          <Icon.Sort color="grey" />
                         </span>
 
                         <ArticleDigest.Dropdown

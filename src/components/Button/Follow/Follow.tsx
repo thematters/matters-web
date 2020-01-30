@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Button, Icon, Translate } from '~/components'
+import { Button, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -49,19 +49,11 @@ const Follow = ({
   return (
     <Button
       size={size}
-      icon={
-        <Icon.Add
-          style={
-            size === 'sm'
-              ? { width: 10, height: 10 }
-              : { width: 12, height: 12 }
-          }
-        />
-      }
       style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
-      onClick={() => {
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
         follow()
         analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
+        e.stopPropagation()
       }}
       bgColor="transparent"
       outlineColor="green"

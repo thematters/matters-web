@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import styles from './styles.css'
+
 interface LinkWrapperProps {
   href: string
   as: string
@@ -31,6 +33,8 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
         }}
       >
         {children}
+
+        <style jsx>{styles}</style>
       </a>
     </Link>
   )

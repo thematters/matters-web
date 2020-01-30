@@ -27,7 +27,11 @@ const ViewAll = ({
           })
         }}
       >
-        <TextIcon icon={<Icon.Right />} textPlacement="left" color="green">
+        <TextIcon
+          icon={<Icon.Right size="xs" />}
+          textPlacement="left"
+          color="green"
+        >
           <Translate
             zh_hant={TEXT.zh_hant.viewAll}
             zh_hans={TEXT.zh_hans.viewAll}

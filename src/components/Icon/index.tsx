@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 
 import { ReactComponent as CheckActive } from '~/static/icons/checkbox-check-active.svg'
-import { ReactComponent as CheckError } from '~/static/icons/checkbox-check-error.svg'
 import { ReactComponent as CheckInactive } from '~/static/icons/checkbox-check-inactive.svg'
 import { ReactComponent as UnCheck } from '~/static/icons/checkbox-uncheck.svg'
 import { ReactComponent as DotDivider } from '~/static/icons/dot-divider.svg'
@@ -10,6 +9,7 @@ import { ReactComponent as EmptyWarning } from '~/static/icons/empty-warning.svg
 import { ReactComponent as External } from '~/static/icons/external.svg'
 import { ReactComponent as Loading } from '~/static/icons/loading.svg'
 import { ReactComponent as Logo } from '~/static/icons/logo.svg'
+import { ReactComponent as Menu } from '~/static/icons/menu.svg'
 import { ReactComponent as Reload } from '~/static/icons/reload.svg'
 import { ReactComponent as Spinner } from '~/static/icons/spinner.svg'
 import { ReactComponent as Trends } from '~/static/icons/trends.svg'
@@ -37,7 +37,6 @@ import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
 import { ReactComponent as Left } from './icons/left.svg'
-import { ReactComponent as LikeMedium } from './icons/like-md.svg'
 import { ReactComponent as Like } from './icons/like.svg'
 import { ReactComponent as Link } from './icons/link.svg'
 import { ReactComponent as LogoutMedium } from './icons/logout-md.svg'
@@ -148,7 +147,6 @@ export const Icon = {
   IPFSMedium: withIcon(IPFSMedium),
   Left: withIcon(Left),
   Like: withIcon(Like),
-  LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),
@@ -174,7 +172,6 @@ export const Icon = {
 
   // legacy
   CheckActive: withIcon(CheckActive),
-  CheckError: withIcon(CheckError),
   CheckInactive: withIcon(CheckInactive),
   DotDivider: withIcon(props => (
     <DotDivider style={{ width: 18, height: 18 }} {...props} />
@@ -184,6 +181,7 @@ export const Icon = {
   Live,
   Loading: withIcon(Loading),
   Logo: withIcon(Logo),
+  Menu: withIcon(Menu),
   Reload: withIcon(Reload),
   SeedBadge: withIcon(SeedBadge),
   Spinner: withIcon(({ className, ...restProps }) => (

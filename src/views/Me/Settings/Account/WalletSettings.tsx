@@ -80,7 +80,11 @@ const WalletSetting = () => {
 
       {likerId && (
         <a href="https://like.co/in" className="u-link-green" target="_blank">
-          <TextIcon icon={<Icon.Right />} textPlacement="left" weight="md">
+          <TextIcon
+            icon={<Icon.Right size="xs" />}
+            textPlacement="left"
+            weight="md"
+          >
             <Translate zh_hant="去 like.co 查看" zh_hans="去 like.co 查看" />
           </TextIcon>
         </a>

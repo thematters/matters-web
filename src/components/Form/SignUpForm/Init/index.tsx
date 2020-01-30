@@ -265,8 +265,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             handleChange={handleChange}
             setFieldValue={setFieldValue}
           >
-            <span>
+            <>
               <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+
               <Link {...PATHS.MISC_TOS}>
                 <a className="u-link-green" target="_blank">
                   {' '}
@@ -276,7 +277,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
                   />
                 </a>
               </Link>
-            </span>
+            </>
           </Form.CheckBox>
         </div>
       </Modal.Content>

@@ -5,6 +5,7 @@ import {
   ArticleDigest,
   Card,
   Comment,
+  Expandable,
   Translate,
   UserDigest
 } from '~/components'
@@ -79,7 +80,9 @@ const FollowComment = ({
           spacing={['xtight', 'base']}
           textSize="md-s"
         >
-          <Comment.Content comment={comment} />
+          <Expandable limit={5} buffer={2}>
+            <Comment.Content comment={comment} />
+          </Expandable>
         </Card>
       </section>
 

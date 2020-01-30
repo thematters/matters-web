@@ -118,7 +118,7 @@ const CollectionList = ({
         <section className="load-more">
           <button type="button" onClick={loadRest}>
             <TextIcon
-              icon={<Icon.Down />}
+              icon={<Icon.Down size="xs" />}
               color="green"
               textPlacement="left"
               spacing="xxtight"

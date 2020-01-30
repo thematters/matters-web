@@ -30,7 +30,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
               }
             }}
           >
-            <Icon.Clear size="md" color="black" />
+            <Icon.Clear size="md" color="grey-dark" />
           </button>
         )}
 

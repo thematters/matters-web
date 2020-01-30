@@ -21,7 +21,10 @@ const PublishedState = () => {
       customButton={
         <Link {...path}>
           <a>
-            <TextIcon icon={<Icon.Right color="white" />} textPlacement="left">
+            <TextIcon
+              icon={<Icon.Right size="xs" color="white" />}
+              textPlacement="left"
+            >
               <Translate zh_hant="查看我的作品" zh_hans="查看我的作品" />
             </TextIcon>
           </a>

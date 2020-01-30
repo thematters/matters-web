@@ -13,7 +13,7 @@ import styles from './styles.css'
 
 const SearchButton = () => (
   <button type="submit" aria-label="搜尋">
-    <Icon.Search size="md" />
+    <Icon.SearchLarge size="md" />
   </button>
 )
 

@@ -30,7 +30,7 @@ export const LanguageSwitch = () => {
     >
       <button type="button" className="sort-button" aria-haspopup="true">
         <TextIcon
-          icon={<Icon.Expand style={{ width: 6, height: 10 }} />}
+          icon={<Icon.Expand size="xs" />}
           spacing="xtight"
           textPlacement="left"
         >
