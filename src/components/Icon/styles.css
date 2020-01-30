@@ -13,6 +13,10 @@
     width: 0.875rem;
     height: 0.875rem;
   }
+  &.md-s {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
   &.md {
     width: 1.5rem;
     height: 1.5rem;
@@ -47,6 +51,9 @@
     color: var(--color-grey-lighter);
   }
   &.green {
-    color: var(--color-green);
+    color: var(--color-matters-green);
+  }
+  &.gold {
+    color: var(--color-matters-gold);
   }
 }

@@ -69,12 +69,13 @@ const UpvoteButton = ({
         disabled={disabled}
       >
         <TextIcon
-          icon={<Icon.UpVote color="black" />}
-          color="grey"
+          icon={<Icon.UpVoteActive />}
+          color="green"
           weight="md"
-          text={numAbbr(comment.upvotes)}
-          spacing="xxxtight"
-        />
+          spacing="xxtight"
+        >
+          {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
+        </TextIcon>
       </button>
     )
   }
@@ -91,9 +92,10 @@ const UpvoteButton = ({
         icon={<Icon.UpVote color="grey" />}
         color="grey"
         weight="md"
-        text={numAbbr(comment.upvotes)}
-        spacing="xxxtight"
-      />
+        spacing="xxtight"
+      >
+        {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
+      </TextIcon>
     </button>
   )
 }

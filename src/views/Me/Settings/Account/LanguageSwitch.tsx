@@ -32,9 +32,10 @@ export const LanguageSwitch = () => {
         <TextIcon
           icon={<Icon.Expand style={{ width: 6, height: 10 }} />}
           spacing="xtight"
-          text={textMap[lang]}
           textPlacement="left"
-        />
+        >
+          {textMap[lang]}
+        </TextIcon>
       </button>
     </Dropdown>
   )

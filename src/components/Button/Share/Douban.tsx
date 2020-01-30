@@ -1,7 +1,6 @@
 import queryString from 'query-string'
 
-import { withIcon } from '~/components'
-import { TextIcon } from '~/components/TextIcon'
+import { TextIcon, Translate, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
@@ -28,11 +27,9 @@ const Douban = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl)
     }}
   >
-    <TextIcon
-      icon={withIcon(IconShareDouban)({})}
-      spacing="tight"
-      text="豆瓣"
-    />
+    <TextIcon icon={withIcon(IconShareDouban)({})} spacing="tight">
+      <Translate zh_hant="豆瓣" zh_hans="豆瓣" />
+    </TextIcon>
   </button>
 )
 

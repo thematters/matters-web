@@ -31,14 +31,15 @@ const ButtonWithEffect = ({
   return (
     <button type="button" aria-label="查看回應" onClick={onClick}>
       <TextIcon
-        icon={<Icon.Comment size="md" />}
+        icon={<Icon.Comment color="black" size="md-s" />}
         color="grey"
         weight="md"
-        text={text}
         textPlacement={textPlacement}
         size="xs"
         spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}
-      />
+      >
+        {text}
+      </TextIcon>
     </button>
   )
 }

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
+import { Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
@@ -21,7 +21,7 @@ const Unsubscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xs' | 'sm' | 'md'
+  size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
 }) => {
   const [unsubscribe] = useMutation<UnsubscribeArticle>(UNSUBSCRIBE_ARTICLE, {
@@ -38,14 +38,14 @@ const Unsubscribe = ({
   return (
     <button
       type="button"
-      aria-label="收藏"
+      aria-label="取消收藏"
       onClick={e => {
         unsubscribe()
         e.stopPropagation()
       }}
       disabled={disabled}
     >
-      <Icon.Bookmark color="black" size={size === 'sm' ? undefined : size} />
+      <Icon.BookmarkActive color="black" size={size} />
     </button>
   )
 }

@@ -12,7 +12,7 @@ interface ShareButtonProps {
   title?: string
   path?: string
 
-  size?: Extract<IconSize, 'md'>
+  size?: Extract<IconSize, 'md-s'>
   color?: Extract<IconColor, 'grey' | 'black'>
 }
 

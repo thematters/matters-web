@@ -57,7 +57,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
 
       <section className="right">
         <DropdownActions article={article} {...controls} />
-        <BookmarkButton article={article} size="sm" />
+        <BookmarkButton article={article} />
         <ShareButton title={title} path={path.as} color="grey" />
       </section>
 

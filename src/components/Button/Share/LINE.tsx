@@ -24,7 +24,9 @@ const LINE = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Line')
     }}
   >
-    <TextIcon icon={withIcon(IconShareLINE)({})} spacing="tight" text="LINE" />
+    <TextIcon icon={withIcon(IconShareLINE)({})} spacing="tight">
+      LINE
+    </TextIcon>
   </button>
 )
 

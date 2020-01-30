@@ -17,6 +17,7 @@ import { ReactComponent as Trends } from '~/static/icons/trends.svg'
 import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
+import { ReactComponent as BookmarkActive } from './icons/bookmark-active.svg'
 import { ReactComponent as BookmarkMedium } from './icons/bookmark-md.svg'
 import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
@@ -26,6 +27,7 @@ import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
 import { ReactComponent as Down } from './icons/down.svg'
+import { ReactComponent as DownVoteActive } from './icons/downvote-active.svg'
 import { ReactComponent as DownVote } from './icons/downvote.svg'
 import { ReactComponent as DraftMedium } from './icons/draft-md.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
@@ -57,11 +59,12 @@ import { ReactComponent as Sort } from './icons/sort.svg'
 import { ReactComponent as UnMuteMedium } from './icons/unmute-md.svg'
 import { ReactComponent as UnPinMedium } from './icons/unpin-md.svg'
 import { ReactComponent as Up } from './icons/up.svg'
+import { ReactComponent as UpVoteActive } from './icons/upvote-active.svg'
 import { ReactComponent as UpVote } from './icons/upvote.svg'
 import Live from './Live'
 import styles from './styles.css'
 
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type IconSize = 'xs' | 'sm' | 'md-s' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export type IconColor =
   | 'white'
@@ -70,6 +73,7 @@ export type IconColor =
   | 'grey'
   | 'grey-lighter'
   | 'green'
+  | 'gold'
 
 export interface IconProps {
   size?: IconSize
@@ -120,60 +124,63 @@ export const withIcon = (
  */
 
 export const Icon = {
-  UpVote: withIcon(UpVote),
-  DownVote: withIcon(DownVote),
-  Camera: withIcon(Camera),
-  Search: withIcon(Search),
-  Clear: withIcon(Clear),
-  CollectionMedium: withIcon(CollectionMedium),
-  Like: withIcon(Like),
-  Bookmark: withIcon(Bookmark),
-  More: withIcon(More),
-  Share: withIcon(Share),
-  Comment: withIcon(Comment),
-  ArchiveMedium: withIcon(ArchiveMedium),
-  AddMedium: withIcon(AddMedium),
   Add: withIcon(Add),
+  AddMedium: withIcon(AddMedium),
+  ArchiveMedium: withIcon(ArchiveMedium),
+  Bookmark: withIcon(Bookmark),
+  BookmarkActive: withIcon(BookmarkActive),
   BookmarkMedium: withIcon(BookmarkMedium),
+  Camera: withIcon(Camera),
   CameraMedium: withIcon(CameraMedium),
+  Clear: withIcon(Clear),
   Collapse: withIcon(Collapse),
+  CollectionMedium: withIcon(CollectionMedium),
+  Comment: withIcon(Comment),
   Down: withIcon(Down),
+  DownVote: withIcon(DownVote),
+  DownVoteActive: withIcon(DownVoteActive),
   DraftMedium: withIcon(DraftMedium),
   Edit: withIcon(Edit),
   Expand: withIcon(Expand),
-  HelpMedium: withIcon(HelpMedium),
   HashTag: withIcon(HashTag),
+  HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
-  Left: withIcon(Left),
   IPFSMedium: withIcon(IPFSMedium),
+  Left: withIcon(Left),
+  Like: withIcon(Like),
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),
   Min: withIcon(Min),
-  NotificationLarge: withIcon(NotificationLarge),
-  UnPinMedium: withIcon(UnPinMedium),
+  More: withIcon(More),
   MuteMedium: withIcon(MuteMedium),
-  UnMuteMedium: withIcon(UnMuteMedium),
+  NotificationLarge: withIcon(NotificationLarge),
   Pen: withIcon(Pen),
   PinMedium: withIcon(PinMedium),
   ProfileMedium: withIcon(ProfileMedium),
   RemoveMedium: withIcon(RemoveMedium),
-  SettingsMedium: withIcon(SettingsMedium),
-  SearchLarge: withIcon(SearchLarge),
   Right: withIcon(Right),
+  Search: withIcon(Search),
+  SearchLarge: withIcon(SearchLarge),
+  SettingsMedium: withIcon(SettingsMedium),
+  Share: withIcon(Share),
   Sort: withIcon(Sort),
+  UnMuteMedium: withIcon(UnMuteMedium),
+  UnPinMedium: withIcon(UnPinMedium),
   Up: withIcon(Up),
+  UpVote: withIcon(UpVote),
+  UpVoteActive: withIcon(UpVoteActive),
 
-  //
+  // legacy
   CheckActive: withIcon(CheckActive),
   CheckError: withIcon(CheckError),
   CheckInactive: withIcon(CheckInactive),
   DotDivider: withIcon(props => (
     <DotDivider style={{ width: 18, height: 18 }} {...props} />
   )),
-  External: withIcon(External),
   EmptyWarning: withIcon(EmptyWarning),
+  External: withIcon(External),
   Live,
   Loading: withIcon(Loading),
   Logo: withIcon(Logo),

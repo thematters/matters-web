@@ -18,21 +18,6 @@ const fragments = {
   user: userFragments.block
 }
 
-const TextIconBlock = () => (
-  <TextIcon icon={<Icon.MuteMedium />} spacing="tight">
-    <Translate zh_hant={TEXT.zh_hant.blockUser} zh_hans={TEXT.zh_hans.block} />
-  </TextIcon>
-)
-
-const TextIconUnblock = () => (
-  <TextIcon icon={<Icon.UnMuteMedium />} spacing="tight">
-    <Translate
-      zh_hant={TEXT.zh_hant.unblockUser}
-      zh_hans={TEXT.zh_hans.unblockUser}
-    />
-  </TextIcon>
-)
-
 const BlockUserButton = ({
   user,
   hideDropdown
@@ -60,30 +45,57 @@ const BlockUserButton = ({
       }
     }
   })
+  const onUnblock = async () => {
+    hideDropdown()
+    await unblockUser()
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant={TEXT.zh_hant.unblockSuccess}
+              zh_hans={TEXT.zh_hans.unblockSuccess}
+            />
+          )
+        }
+      })
+    )
+  }
+  const onBlock = async () => {
+    hideDropdown()
+    await blockUser()
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant={TEXT.zh_hant.blockSuccess}
+              zh_hans={TEXT.zh_hans.blockSuccess}
+            />
+          ),
+          customButton: (
+            <Link {...PATHS.ME_SETTINGS_BLOCKED}>
+              <a>
+                <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
+              </a>
+            </Link>
+          )
+        }
+      })
+    )
+  }
 
   if (user.isBlocked) {
     return (
-      <button
-        type="button"
-        onClick={async () => {
-          hideDropdown()
-          await unblockUser()
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <Translate
-                    zh_hant={TEXT.zh_hant.unblockSuccess}
-                    zh_hans={TEXT.zh_hans.unblockSuccess}
-                  />
-                )
-              }
-            })
-          )
-        }}
-      >
-        <TextIconUnblock />
+      <button type="button" onClick={onUnblock}>
+        <TextIcon icon={<Icon.UnMuteMedium />} spacing="tight">
+          <Translate
+            zh_hant={TEXT.zh_hant.unblockUser}
+            zh_hans={TEXT.zh_hans.unblockUser}
+          />
+        </TextIcon>
 
         <style jsx>{styles}</style>
       </button>
@@ -91,34 +103,13 @@ const BlockUserButton = ({
   }
 
   return (
-    <button
-      type="button"
-      onClick={async () => {
-        hideDropdown()
-        await blockUser()
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.blockSuccess}
-                  zh_hans={TEXT.zh_hans.blockSuccess}
-                />
-              ),
-              customButton: (
-                <Link {...PATHS.ME_SETTINGS_BLOCKED}>
-                  <a>
-                    <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
-                  </a>
-                </Link>
-              )
-            }
-          })
-        )
-      }}
-    >
-      <TextIconBlock />
+    <button type="button" onClick={onBlock}>
+      <TextIcon icon={<Icon.MuteMedium />} spacing="tight">
+        <Translate
+          zh_hant={TEXT.zh_hant.blockUser}
+          zh_hans={TEXT.zh_hans.block}
+        />
+      </TextIcon>
 
       <style jsx>{styles}</style>
     </button>

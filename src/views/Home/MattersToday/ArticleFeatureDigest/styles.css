@@ -25,13 +25,11 @@
 
   @media (--sm-up) {
     padding-left: var(--spacing-base);
-    padding-right: var(--spacing-base);
   }
   @media (--lg-up) {
     margin-top: -5.5rem;
     margin-left: calc(var(--spacing-x-loose) * -1);
     padding-left: var(--spacing-x-loose);
-    padding-right: var(--spacing-x-loose);
   }
   @media (--xl-up) {
     margin-left: calc(var(--spacing-x-loose) * -1);

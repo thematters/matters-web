@@ -78,7 +78,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
       <section className="gateways">
         <header>
           <h4>
-            <Translate zh_hans="通过公共节点查看" zh_hant="通過公共節點查看" />
+            <Translate zh_hans="公共节点" zh_hant="公共節點" />
           </h4>
 
           <button
@@ -137,7 +137,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
 
         <p>
           <b>
-            <Translate zh_hant="指紋" zh_hans="指纹" />
+            <Translate zh_hant="作品指紋" zh_hans="作品指纹" />
           </b>
           <Translate
             zh_hans={` 是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。`}

@@ -24,11 +24,9 @@ const Twitter = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Twitter')
     }}
   >
-    <TextIcon
-      icon={withIcon(IconShareTwitter)({})}
-      spacing="tight"
-      text="Twitter"
-    />
+    <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="tight">
+      Twitter
+    </TextIcon>
   </button>
 )
 

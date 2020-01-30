@@ -1,17 +1,16 @@
 import gql from 'graphql-tag'
 
-import { Card, Label } from '~/components'
+import { ArticleDigest, Card, Label } from '~/components'
+import FooterActions from '~/components/ArticleDigest/FooterActions'
 
 import { toPath } from '~/common/utils'
 import IMAGE_COVER_FALLBACK from '~/static/images/cover-fallback.jpg?url'
 
-import FooterActions from '../FooterActions'
-import ArticleTitleDigest from '../TitleDigest'
 import styles from './styles.css'
 
 import { TodayDigestArticle } from './__generated__/TodayDigestArticle'
 
-interface FeatureDigestProps {
+interface ArticleFeatureDigestProps {
   article: TodayDigestArticle
 
   onClick?: () => any
@@ -34,16 +33,16 @@ const fragments = {
       ...FooterActionsArticle
     }
 
-    ${ArticleTitleDigest.fragments.article}
+    ${ArticleDigest.Title.fragments.article}
     ${FooterActions.fragments.article}
   `
 }
 
-const FeatureDigest = ({
+const ArticleFeatureDigest = ({
   article,
 
   onClick
-}: FeatureDigestProps) => {
+}: ArticleFeatureDigestProps) => {
   const { cover, summary } = article
   const path = toPath({
     page: 'articleDetail',
@@ -66,7 +65,7 @@ const FeatureDigest = ({
           <div className="content">
             <Label>Matters Today</Label>
 
-            <ArticleTitleDigest
+            <ArticleDigest.Title
               article={article}
               textSize="xl"
               textWeight="semibold"
@@ -87,6 +86,6 @@ const FeatureDigest = ({
   )
 }
 
-FeatureDigest.fragments = fragments
+ArticleFeatureDigest.fragments = fragments
 
-export default FeatureDigest
+export default ArticleFeatureDigest

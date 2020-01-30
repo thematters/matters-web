@@ -25,10 +25,11 @@ const Appreciation = ({
     icon={<Icon.Like size={size === 'xs' ? 'xs' : undefined} />}
     color="grey"
     weight="md"
-    text={numAbbr((article && article.appreciationsReceivedTotal) || 0)}
     size={size}
     spacing="xtight"
-  />
+  >
+    {numAbbr((article && article.appreciationsReceivedTotal) || 0)}
+  </TextIcon>
 )
 
 Appreciation.fragments = fragments

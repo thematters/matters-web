@@ -2,11 +2,12 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import { Error, Spinner } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import ArticleFeatureDigest from './ArticleFeatureDigest'
 
 import { HomeToday } from './__generated__/HomeToday'
 
@@ -21,7 +22,7 @@ export const HOME_TODAY = gql`
       }
     }
   }
-  ${ArticleDigest.Feature.fragments.article}
+  ${ArticleFeatureDigest.fragments.article}
 `
 
 const MattersToday = () => {
@@ -43,7 +44,7 @@ const MattersToday = () => {
 
   return (
     <>
-      <ArticleDigest.Feature
+      <ArticleFeatureDigest
         article={article}
         onClick={() =>
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

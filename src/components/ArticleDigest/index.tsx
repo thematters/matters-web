@@ -1,6 +1,5 @@
 import CardDigest from './CardDigest'
 import DropdownDigest from './DropdownDigest'
-import FeatureDigest from './FeatureDigest'
 import FeedDigest from './FeedDigest'
 import SidebarDigest from './SidebarDigest'
 import TitleDigest from './TitleDigest'
@@ -10,8 +9,5 @@ export const ArticleDigest = {
   Feed: FeedDigest,
   Card: CardDigest,
   Dropdown: DropdownDigest,
-  Sidebar: SidebarDigest,
-
-  /* TODO: legacy */
-  Feature: FeatureDigest
+  Sidebar: SidebarDigest
 }

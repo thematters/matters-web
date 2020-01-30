@@ -34,11 +34,12 @@ const ButtonWithEffect = ({
         icon={<Icon.Comment size="md" />}
         color="grey"
         weight="md"
-        text={text}
         textPlacement={textPlacement}
         size="xs"
         spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}
-      />
+      >
+        {text}
+      </TextIcon>
     </button>
   )
 }

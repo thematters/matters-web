@@ -58,11 +58,12 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
       <a className={tagClasses}>
         <TextIcon
           icon={<Icon.HashTag size={isSmall ? 'xs' : undefined} />}
-          text={tag.content}
           weight="md"
           size={isSmall ? 'sm' : 'md'}
           spacing={isSmall ? 'xtight' : 'tight'}
-        />
+        >
+          {tag.content}
+        </TextIcon>
 
         {!!tagCount && <span className="count">{tagCount}</span>}
 

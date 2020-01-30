@@ -22,11 +22,9 @@ const Facebook = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    <TextIcon
-      icon={withIcon(IconShareFacebook)({})}
-      spacing="tight"
-      text="Facebook"
-    />
+    <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="tight">
+      Facebook
+    </TextIcon>
   </button>
 )
 
