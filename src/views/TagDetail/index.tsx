@@ -35,7 +35,7 @@ const TAG_DETAIL = gql`
         id
         content
         description
-        articles(input: { first: 10, selected: true }) {
+        articles(input: { first: 0, selected: true }) {
           totalCount
         }
       }
@@ -59,27 +59,29 @@ const Buttons = () => {
   )
 }
 
-type Feed = 'latest' | 'selected'
+type TagFeed = 'latest' | 'selected'
 
 const TagDetailContainer = ({ data }: { data: TagDetail }) => {
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
-  const [feed, setFeed] = useState<Feed>(hasSelected ? 'selected' : 'latest')
+  const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return <EmptyTag />
   }
 
+  if (hasSelected === 0 && feed === 'selected') {
+    setFeed('latest')
+  }
+
   return (
     <>
       <Head title={`#${data.node.content}`} />
-
       <PageHeader
         title={data.node.content}
         buttons={<Buttons />}
         description={data.node.description || ''}
         hasNoBottomBorder
       />
-
       <Tabs spacingBottom="base">
         {hasSelected > 0 && (
           <Tabs.Tab selected={feed === 'selected'}>

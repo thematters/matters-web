@@ -43,7 +43,7 @@ const LATEST_ARTICLES = gql`
 const LatestArticles = ({ id }: { id: string }) => {
   const { data, loading, error, fetchMore, refetch } = useQuery<
     TagDetailLatestArticles
-  >(LATEST_ARTICLES, { variables: { id } })
+  >(LATEST_ARTICLES, { variables: { id }, fetchPolicy: 'no-cache' })
 
   const sync = ({
     event,

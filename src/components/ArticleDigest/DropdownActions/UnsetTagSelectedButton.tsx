@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -15,6 +15,9 @@ const UNSET_TAG_SELECTED = gql`
   mutation UnsetTagSelected($id: ID!, $articles: [ID!]) {
     putArticlesTags(input: { id: $id, articles: $articles, selected: false }) {
       id
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `
@@ -54,6 +57,13 @@ const UnsetTagSelectedButton = ({
               ),
               closeButton: true,
               duration: 2000
+            }
+          })
+        )
+        window.dispatchEvent(
+          new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+            detail: {
+              event: 'delete'
             }
           })
         )

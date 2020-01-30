@@ -15,6 +15,9 @@ const SET_TAG_SELECTED = gql`
   mutation SetTagSelected($id: ID!, $articles: [ID!]) {
     putArticlesTags(input: { id: $id, articles: $articles, selected: true }) {
       id
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `
