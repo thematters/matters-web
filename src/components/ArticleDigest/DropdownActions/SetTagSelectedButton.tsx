@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, PopperInstance, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -32,9 +32,11 @@ const fragments = {
 
 const SetTagSelectedButton = ({
   article,
+  instance,
   hideDropdown
 }: {
   article: SetTagSelectedButtonArticle
+  instance?: PopperInstance | null
   hideDropdown: () => void
 }) => {
   const router = useRouter()
@@ -42,28 +44,30 @@ const SetTagSelectedButton = ({
     variables: { id: router.query.id, articles: [article.id] }
   })
 
+  const sync = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate zh_hant="文章已添加至精選" zh_hans="文章已添加至精选" />
+          ),
+          closeButton: true,
+          duration: 2000
+        }
+      })
+    )
+  }
+
   return (
     <button
       type="button"
       onClick={async event => {
         event.stopPropagation()
-
         await update()
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant="文章已添加至精選"
-                  zh_hans="文章已添加至精选"
-                />
-              ),
-              closeButton: true,
-              duration: 2000
-            }
-          })
-        )
+        if (instance) {
+          instance.props.onHidden = sync
+        }
         hideDropdown()
       }}
     >

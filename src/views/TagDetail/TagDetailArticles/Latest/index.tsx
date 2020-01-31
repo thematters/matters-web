@@ -19,7 +19,7 @@ import { TagArticles } from '~/components/GQL/queries/__generated__/TagArticles'
 const LatestArticles = ({ id }: { id: string }) => {
   const { data, loading, error, fetchMore, refetch } = useQuery<TagArticles>(
     TAG_ARTICLES,
-    { variables: { id }, fetchPolicy: 'no-cache' }
+    { variables: { id }, fetchPolicy: 'cache-and-network' }
   )
 
   const sync = ({

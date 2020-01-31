@@ -15,9 +15,9 @@ import ArchiveButton from './ArchiveButton'
 import ExtendButton from './ExtendButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
+import SetTagUnselectedButton from './SetTagUnselectedButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
-import UnsetTagSelectedButton from './UnsetTagSelectedButton'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
@@ -44,7 +44,7 @@ interface DropdownContentProps {
   hasArchiveButton?: boolean
   hasRemoveTagButton?: boolean
   hasSetTagSelectedButton?: boolean
-  hasUnsetTagSelectedButton?: boolean
+  hasSetTagUnselectedButton?: boolean
 }
 
 const fragments = {
@@ -72,7 +72,7 @@ const DropdownContent = ({
   hasArchiveButton,
   hasRemoveTagButton,
   hasSetTagSelectedButton,
-  hasUnsetTagSelectedButton
+  hasSetTagUnselectedButton
 }: DropdownContentProps) => {
   return (
     <Menu>
@@ -96,12 +96,16 @@ const DropdownContent = ({
       )}
       {hasSetTagSelectedButton && (
         <Menu.Item>
-          <SetTagSelectedButton article={article} hideDropdown={hideDropdown} />
+          <SetTagSelectedButton
+            article={article}
+            hideDropdown={hideDropdown}
+            instance={instance}
+          />
         </Menu.Item>
       )}
-      {hasUnsetTagSelectedButton && (
+      {hasSetTagUnselectedButton && (
         <Menu.Item>
-          <UnsetTagSelectedButton
+          <SetTagUnselectedButton
             article={article}
             hideDropdown={hideDropdown}
           />
@@ -175,7 +179,7 @@ const DropdownActions = ({
             hasArchiveButton={hasArchiveButton}
             hasRemoveTagButton={hasRemoveTagButton}
             hasSetTagSelectedButton={inTagDetailLatest}
-            hasUnsetTagSelectedButton={inTagDetailSelected}
+            hasSetTagUnselectedButton={inTagDetailSelected}
           />
         }
         trigger="click"
