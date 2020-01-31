@@ -10,8 +10,6 @@ import styles from './styles.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
-const signUpButtonStyle = { minWidth: '6rem' }
-
 const Wall = ({ show, client }: any) => {
   const outerClasses = classNames({ outer: true, show })
 
@@ -40,10 +38,7 @@ const Wall = ({ show, client }: any) => {
                 />
               </p>
               <div className="signup">
-                <SignUpButton
-                  extraStyle={signUpButtonStyle}
-                  type={SIGNUP_TYPE.AD_WALL}
-                >
+                <SignUpButton trackType={SIGNUP_TYPE.AD_WALL}>
                   <Translate zh_hant="註冊帳號" zh_hans="注册账号" />
                 </SignUpButton>
               </div>

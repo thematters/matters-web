@@ -3,11 +3,11 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 interface TextIconProps {
-  icon: React.ReactNode
+  icon?: React.ReactNode
 
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xs' | 'sm' | 'md' | 'lg'
-  spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
+  spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   textPlacement?: 'bottom' | 'left' | 'right'
@@ -55,7 +55,8 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
-    [className || '']: !!className
+    [className || '']: !!className,
+    hasIcon: !!icon
   })
 
   if (textPlacement === 'left') {

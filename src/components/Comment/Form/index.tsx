@@ -9,6 +9,7 @@ import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ModalSwitch } from '~/components/ModalManager'
 import { Spinner } from '~/components/Spinner'
+import { TextIcon } from '~/components/TextIcon'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
@@ -187,16 +188,21 @@ const CommentForm = ({
       <div className="buttons">
         {extraButton && extraButton}
         <Button
-          type="submit"
+          size={[null, '2rem']}
+          spacing={[0, 'base']}
           bgColor="green"
+          type="submit"
           disabled={
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
-          icon={
-            isSubmitting ? <Icon.Spinner size="md" /> : <Icon.Edit size="md" />
-          }
         >
-          <Translate zh_hant="送出" zh_hans="送出" />
+          <TextIcon
+            color="white"
+            weight="md"
+            icon={isSubmitting ? <Icon.Spinner size="sm" /> : <Icon.Edit />}
+          >
+            <Translate zh_hant="送出" zh_hans="送出" />
+          </TextIcon>
         </Button>
       </div>
 

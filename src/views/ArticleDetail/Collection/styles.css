@@ -26,6 +26,10 @@
 
 .edit-button {
   line-height: 1;
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-tight);
+  }
 }
 
 .editing-list {

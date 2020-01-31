@@ -3,218 +3,138 @@ import Link from 'next/link'
 
 import styles from './styles.css'
 
-type ButtonSize = 'sm' | 'default' | 'lg' | 'xl'
-type ButtonSpacing = 'none' | 'xtight' | 'base' | 'loose' | 'x-loose'
-type ButtonHTMLType = 'submit' | 'reset' | 'button'
-type ButtonShape = 'circle'
-type ButtonBgColor =
-  | 'green'
+type ButtonWidth = 'full' | '2rem' | '4rem' | '6rem' | undefined | null
+
+type ButtonHeight =
+  | '1rem'
+  | '1.25rem'
+  | '1.5rem'
+  | '2rem'
+  | '2.25rem'
+  | '3rem'
+  | undefined
+  | null
+
+type ButtonSpacing =
+  | 0
+  | '0'
+  | 'xxxtight'
+  | 'xxtight'
+  | 'xtight'
+  | 'tight'
+  | 'base'
+  | 'loose'
+
+type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
+
+type ButtonColor =
+  | 'grey'
+  | 'grey-lighter'
   | 'green-lighter'
+  | 'green'
   | 'gold'
   | 'red'
-  | 'white'
-  | 'black'
-  | 'transparent'
-type ButtonOutlineColor = 'green' | 'black' | 'grey'
-type ButtonTextColor = 'white' | 'black' | 'grey'
-type ButtonTextWeight = 'light' | 'normal'
 
-interface BaseButtonProps {
-  icon?: React.ReactNode
+interface ButtonProps {
+  size?: [ButtonWidth, ButtonHeight]
+  spacing?: [ButtonSpacing, ButtonSpacing]
 
-  size?: ButtonSize
-  spacing?: ButtonSpacing
-  shape?: ButtonShape
-  disabled?: boolean
-  block?: boolean
-
-  bgColor?: ButtonBgColor
-  outlineColor?: ButtonOutlineColor
   textColor?: ButtonTextColor
-  textWeight?: ButtonTextWeight
+  textHoverColor?: ButtonTextColor
 
+  bgColor?: ButtonColor
+  bgHoverColor?: ButtonColor
+
+  borderColor?: ButtonColor
+  borderWidth?: 'sm'
+
+  style?: React.CSSProperties
+
+  href?: string
+  as?: string
+
+  htmlType?: 'button' | 'submit'
   [key: string]: any
 }
 
-type AnchorButtonProps = {
-  is: 'anchor'
-  href: string
-} & BaseButtonProps
-
-type LinkButtonProps = {
-  is: 'link'
-  href: string
-  as: string
-} & BaseButtonProps
-
-type NativeButtonProps = {
-  is?: 'button'
-  htmlType?: ButtonHTMLType
-} & BaseButtonProps
-
-type SpanButtonProps = {
-  is: 'span'
-} & BaseButtonProps
-
-type ButtonProps =
-  | AnchorButtonProps
-  | LinkButtonProps
-  | NativeButtonProps
-  | SpanButtonProps
-
-/**
- * Usage:
- *
- * ```jsx
- *
- * // size:sm
- * <Button
- *   size="sm"
- *   outlineColor="green"
- *   style={{ width: 64 }}
- *   icon={
- *     <Icon
- *       id={ICON_ADD.id}
- *       viewBox={ICON_ADD.viewBox}
- *       style={{ width: 10, height: 11 }}
- *     />
- *   }
- * >
- *   追蹤
- * </Button>
- *
- * // fixed width
- * <Button size="sm" bgColor="red" style={{ width: 64 }}>
- *   取消追蹤
- * </Button>
- *
- * // is:span
- * <Button is="span" size="sm" outlineColor="grey">
- *   追蹤了你
- * </Button>
- *
- * // outline
- * <Button
- *   outlineColor="black"
- *   icon={
- *     <Icon
- *       id={ICON_NEW_BRANCH.id}
- *       viewBox={ICON_NEW_BRANCH.viewBox}
- *       style={{ width: 16, height: 16 }}
- *     />
- *   }
- * >
- *   引伸
- * </Button>
- *
- * // circle
- * <Button
- *   shape="circle"
- *   bgColor="gold"
- *   icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
- * />
- *
- * // spacing
- * <Button spacing="x-loose" bgColor="green-lighter" outlineColor="green">
- *   2 條新評論
- * </Button>
- *
- * // disabled
- * <Button
- *   bgColor="green"
- *   disabled
- *   icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
- * >
- *   送出
- * </Button>
- * ```
- *
- */
-
 export const Button: React.FC<ButtonProps> = ({
-  icon,
-  size = 'default',
-  spacing,
-  shape,
-  disabled = false,
-  block = false,
-  bgColor = 'white',
-  outlineColor,
-  textColor,
-  textWeight,
-  className,
+  spacing = [0, 0],
+  size = [null, null],
 
-  is = 'button',
+  textColor,
+  textHoverColor,
+
+  bgColor,
+  bgHoverColor,
+
+  borderColor,
+  borderWidth,
+
   href,
   as,
-  htmlType = 'button',
 
+  style,
+  className,
+  htmlType = 'button',
   children,
   ...restProps
 }) => {
-  const buttonClasses = classNames({
-    btn: true,
-    [`size-${size}`]: true,
-    [spacing ? `spacing-${spacing}` : '']: !!spacing,
-    [shape ? `shape-${shape}` : '']: !!shape,
-    block: !!block,
-    [`bg-${bgColor}`]: !!bgColor,
-    outline: !!outlineColor,
-    [`outline-${outlineColor}`]: !!outlineColor,
-    [`text-${textColor}`]: !!textColor,
-    [`text-weight-${textWeight}`]: !!textWeight,
+  const containerClass = classNames({
+    container: true,
+    [`text-hover-${textHoverColor}`]: !!textHoverColor,
+    [`bg-hover-${bgHoverColor}`]: !!bgHoverColor,
     [className]: !!className
   })
 
-  // anchor
-  if (is === 'anchor') {
-    return (
-      <a href={href} className={buttonClasses} {...restProps}>
-        {icon}
-        {children && <span>{children}</span>}
+  const contentClass = classNames({
+    content: true,
+    [`width-${size[0]}`]: size[0] === 'full',
+    [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
+    [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
+    [`text-${textColor}`]: !!textColor,
+    [`bg-${bgColor}`]: !!bgColor,
+    [`border-${borderColor}`]: !!borderColor,
+    [`border-${borderWidth}`]: !!borderWidth
+  })
 
+  const contentStyle = {
+    ...style,
+    ...(!!size[0] ? { width: size[0] } : {}),
+    ...(!!size[1] ? { height: size[1] } : {})
+  }
+
+  // anchor
+  if (href && !as) {
+    return (
+      <a href={href} className={containerClass} {...restProps}>
+        <div className={contentClass} style={contentStyle}>
+          {children}
+        </div>
         <style jsx>{styles}</style>
       </a>
     )
   }
 
   // link
-  if (is === 'link') {
+  if (href && as) {
     return (
       <Link href={href} as={as}>
-        <a className={buttonClasses} {...restProps}>
-          {icon}
-          {children && <span>{children}</span>}
-
+        <a className={containerClass} {...restProps}>
+          <div className={contentClass} style={contentStyle}>
+            {children}
+          </div>
           <style jsx>{styles}</style>
         </a>
       </Link>
     )
   }
 
-  // span
-  if (is === 'span') {
-    return (
-      <span className={buttonClasses} {...restProps}>
-        {icon}
-        {children && <span>{children}</span>}
-
-        <style jsx>{styles}</style>
-      </span>
-    )
-  }
-
   // button
   return (
-    <button
-      className={buttonClasses}
-      type={htmlType}
-      disabled={disabled}
-      {...restProps}
-    >
-      {icon}
-      {children && <span>{children}</span>}
-
+    <button type={htmlType} className={containerClass} {...restProps}>
+      <div className={contentClass} style={contentStyle}>
+        {children}
+      </div>
       <style jsx>{styles}</style>
     </button>
   )

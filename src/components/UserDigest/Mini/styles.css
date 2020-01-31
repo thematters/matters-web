@@ -6,10 +6,12 @@
   &.hasAvatar .name {
     margin-left: var(--spacing-x-tight);
   }
-  &:not(.disabled) .displayname {
+  &:not(.disabled) {
     &:hover,
     &:focus {
-      text-decoration: underline;
+      & .displayname {
+        text-decoration: underline;
+      }
     }
   }
 }

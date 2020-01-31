@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -13,30 +13,25 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
 
   return (
     <Button
-      size="sm"
-      is="span"
-      bgColor="transparent"
-      outlineColor="grey"
-      style={{
-        borderWidth: 1,
-        height: 16,
-        width: 52,
-        fontSize: 9,
-        fontWeight: 600,
-        lineHeight: 1
-      }}
+      spacing={[0, 'xtight']}
+      size={[null, '1rem']}
+      disabled
+      borderWidth="sm"
+      borderColor="grey"
     >
-      {user.isFollowee ? (
-        <Translate
-          zh_hant={TEXT.zh_hant.mutualFollowing}
-          zh_hans={TEXT.zh_hans.mutualFollowing}
-        />
-      ) : (
-        <Translate
-          zh_hant={TEXT.zh_hant.followingYou}
-          zh_hans={TEXT.zh_hans.followingYou}
-        />
-      )}
+      <TextIcon size="xs" color="grey" weight="md">
+        {user.isFollowee ? (
+          <Translate
+            zh_hant={TEXT.zh_hant.mutualFollowing}
+            zh_hans={TEXT.zh_hans.mutualFollowing}
+          />
+        ) : (
+          <Translate
+            zh_hant={TEXT.zh_hant.followingYou}
+            zh_hans={TEXT.zh_hans.followingYou}
+          />
+        )}
+      </TextIcon>
     </Button>
   )
 }

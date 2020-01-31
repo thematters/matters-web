@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Button, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -24,10 +24,10 @@ const FOLLOW_USER = gql`
 
 const Follow = ({
   user,
-  size = 'sm'
+  isLarge
 }: {
   user: FollowButtonUser
-  size?: 'sm' | 'default'
+  isLarge?: boolean
 }) => {
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
@@ -48,17 +48,23 @@ const Follow = ({
 
   return (
     <Button
-      size={size}
-      style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+      size={isLarge ? ['6rem', '2rem'] : ['4rem', '1.5rem']}
+      textColor="green"
+      textHoverColor="white"
+      bgHoverColor="green"
+      borderColor="green"
+      onClick={(e: React.MouseEvent) => {
         follow()
         analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
         e.stopPropagation()
       }}
-      bgColor="transparent"
-      outlineColor="green"
     >
-      <Translate zh_hant={TEXT.zh_hant.follow} zh_hans={TEXT.zh_hans.follow} />
+      <TextIcon weight="md" size={isLarge ? 'sm' : 'xs'}>
+        <Translate
+          zh_hant={TEXT.zh_hant.follow}
+          zh_hans={TEXT.zh_hans.follow}
+        />
+      </TextIcon>
     </Button>
   )
 }

@@ -2,7 +2,13 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
 
-import { Button, Icon, LanguageContext, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  LanguageContext,
+  TextIcon,
+  Translate
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 
@@ -13,9 +19,6 @@ import { CreateDraft } from './__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
-  CustomButton?: React.FC<{
-    onClick: (event: React.MouseEvent<HTMLElement>) => void
-  }>
 }
 
 export const CREATE_DRAFT = gql`
@@ -27,15 +30,35 @@ export const CREATE_DRAFT = gql`
   }
 `
 
-const WriteIcon = ({ loading }: { loading: boolean }) => {
+const WriteIcon = ({ loading }: { loading?: boolean }) => {
   if (loading) {
-    return <Icon.Spinner size="md" className="u-motion-spin" />
+    return <Icon.Spinner size="sm" color="white" />
   }
 
-  return <Icon.Pen size="md" />
+  return <Icon.Pen size="sm" color="white" />
 }
 
-const WriteButton = ({ allowed, CustomButton }: Props) => {
+const WriteButton = ({
+  loading,
+  onClick
+}: {
+  loading?: boolean
+  onClick: () => any
+}) => (
+  <Button
+    spacing={[0, 'base']}
+    size={[null, '2.25rem']}
+    bgColor="gold"
+    onClick={onClick}
+    className="u-sm-down-hide"
+  >
+    <TextIcon icon={<WriteIcon loading={loading} />} weight="md" color="white">
+      <Translate zh_hant={TEXT.zh_hant.write} zh_hans={TEXT.zh_hans.write} />
+    </TextIcon>
+  </Button>
+)
+
+const WriteButtonWithEffect = ({ allowed }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
@@ -50,20 +73,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
   if (!allowed) {
     return (
       <ModalSwitch modalId="likeCoinTermModal">
-        {(open: any) => (
-          <Button
-            className="u-sm-down-hide"
-            size="lg"
-            bgColor="gold"
-            icon={<Icon.Pen size="md" />}
-            onClick={open}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.write}
-              zh_hans={TEXT.zh_hans.write}
-            />
-          </Button>
-        )}
+        {(open: any) => <WriteButton onClick={open} />}
       </ModalSwitch>
     )
   }
@@ -83,33 +93,21 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
     }
   }
 
-  if (CustomButton) {
-    return <CustomButton onClick={onClick} />
-  }
-
   return (
     <>
-      <Button
-        className="u-sm-down-hide"
-        size="lg"
-        bgColor="gold"
-        aria-label="創作"
-        icon={<WriteIcon loading={loading} />}
-        onClick={onClick}
-      >
-        <Translate zh_hant="創作" zh_hans="创作" />
-      </Button>
+      <WriteButton loading={loading} onClick={onClick} />
 
       <Button
-        className="u-sm-up-hide"
+        size={['2rem', '2rem']}
         bgColor="gold"
-        shape="circle"
         aria-label="創作"
-        icon={<WriteIcon loading={loading} />}
         onClick={onClick}
-      />
+        className="u-sm-up-hide"
+      >
+        <WriteIcon loading={loading} />
+      </Button>
     </>
   )
 }
 
-export default WriteButton
+export default WriteButtonWithEffect
