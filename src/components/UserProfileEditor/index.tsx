@@ -156,7 +156,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                       isSubmitting ? (
                         <Icon.Spinner size="md" />
                       ) : (
-                        <Icon.Write size="md" />
+                        <Icon.Pen size="md" />
                       )
                     }
                   >

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
+import { Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Translate } from '~/components/Language'
@@ -28,7 +28,7 @@ const Subscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xs' | 'sm' | 'md'
+  size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
 }) => {
   const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
@@ -98,11 +98,7 @@ const Subscribe = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {size === 'md' ? (
-        <Icon.BookmarkRegularInactive size="md" />
-      ) : (
-        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xs' : undefined} />
-      )}
+      <Icon.Bookmark size={size} />
     </button>
   )
 }

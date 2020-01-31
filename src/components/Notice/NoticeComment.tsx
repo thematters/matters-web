@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Card } from '~/components'
+import { Card, Expandable } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 
-import { makeSummary, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -39,32 +39,26 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     return null
   }
 
-  const path = toPath({
-    page: 'commentDetail',
-    comment
-  })
-  const content = makeSummary(comment.content || '', 70)
-
-  if (comment.state === 'active') {
-    return (
-      <section className="comment-content">
-        <Card
-          {...path}
-          bgColor="grey-lighter"
-          spacing={['xtight', 'base']}
-          textSize="md-s"
-        >
-          <CommentContent comment={{ ...comment, content }} />
-        </Card>
-
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
+  const path =
+    comment.state !== 'active'
+      ? toPath({
+          page: 'commentDetail',
+          comment
+        })
+      : {}
 
   return (
     <section className="comment-content">
-      <CommentContent comment={{ ...comment, content }} />
+      <Card
+        {...path}
+        bgColor="grey-lighter"
+        spacing={['xtight', 'base']}
+        textSize="md-s"
+      >
+        <Expandable>
+          <CommentContent comment={comment} />
+        </Expandable>
+      </Card>
 
       <style jsx>{styles}</style>
     </section>

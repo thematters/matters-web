@@ -1,8 +1,9 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { TextIcon, Translate, withIcon } from '~/components'
 
 import { dom } from '~/common/utils'
+import { ReactComponent as IconShareWeibo } from '~/static/icons/share-weibo.svg'
 
 const Weibo = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -19,7 +20,7 @@ const Weibo = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, '分享到微博')
     }}
   >
-    <TextIcon icon={<Icon.ShareWeibo />} spacing="tight">
+    <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="tight">
       <Translate zh_hant="微博" zh_hans="微博" />
     </TextIcon>
   </button>

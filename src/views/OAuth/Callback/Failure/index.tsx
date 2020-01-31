@@ -5,7 +5,7 @@ import OAuth from '~/components/OAuth'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/oauth/likecoin.svg'
+import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
 
 import styles from './styles.css'
 

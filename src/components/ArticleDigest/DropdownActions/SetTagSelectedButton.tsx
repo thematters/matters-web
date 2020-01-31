@@ -67,7 +67,7 @@ const SetTagSelectedButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.PinToTop />} spacing="tight">
+      <TextIcon icon={<Icon.PinMedium />} spacing="tight">
         <Translate zh_hant="添加精選" zh_hans="添加精选" />
       </TextIcon>
       <style jsx>{styles}</style>

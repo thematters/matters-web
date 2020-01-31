@@ -1,13 +1,23 @@
+import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
-export const Expandable: React.FC<{
+interface ExpandableProps {
   limit?: number
   buffer?: number
-}> = ({ children, limit = 3, buffer = 0 }) => {
+
+  bgColor?: 'white' | 'green-lighter'
+}
+
+export const Expandable: React.FC<ExpandableProps> = ({
+  children,
+  limit = 3,
+  buffer = 0,
+  bgColor = 'green-lighter'
+}) => {
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
   const [fontSize, setFontSize] = useState('15px')
@@ -35,27 +45,37 @@ export const Expandable: React.FC<{
     }
   }, [])
 
+  const expandableClass = classNames({
+    expandable: true,
+    [`bg-${bgColor}`]: !!bgColor
+  })
+
   return (
     <section
-      className="expandable"
+      className={expandableClass}
       style={{
         WebkitLineClamp: expand ? 'unset' : limit
       }}
     >
       <div ref={node}>{children}</div>
+
       {expandable && !expand && (
         <button
           type="button"
           className="expand-button"
-          onClick={() => setExpand(true)}
+          onClick={e => {
+            setExpand(true)
+            e.stopPropagation()
+          }}
         >
           <TextIcon
             icon={<Icon.Expand size="xs" />}
             weight="normal"
             color="green"
-            style={{ fontSize }}
           >
-            <Translate zh_hant="展開" zh_hans="展开" />
+            <span style={{ fontSize }}>
+              <Translate zh_hant="展開" zh_hans="展开" />
+            </span>
           </TextIcon>
         </button>
       )}

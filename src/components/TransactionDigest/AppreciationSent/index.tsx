@@ -65,8 +65,9 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
               spacing="xtight"
               weight="md"
               color="green"
-              text={amount}
-            />
+            >
+              {amount}
+            </TextIcon>
           </div>
 
           <DateTime date={createdAt} type="standard" />

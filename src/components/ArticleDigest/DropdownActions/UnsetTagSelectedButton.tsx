@@ -70,7 +70,7 @@ const UnsetTagSelectedButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.UnSticky />} spacing="tight">
+      <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
         <Translate zh_hant="取消精選" zh_hans="取消精选" />
       </TextIcon>
       <style jsx>{styles}</style>

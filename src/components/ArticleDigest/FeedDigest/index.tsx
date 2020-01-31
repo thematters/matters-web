@@ -80,7 +80,12 @@ const FeedDigest = ({
     <Card {...path} onClick={onClick}>
       {inUserArticles && sticky && (
         <section className="sticky">
-          <TextIcon icon={<Icon.Sticky />} size="sm" color="grey" weight="md">
+          <TextIcon
+            icon={<Icon.PinMedium />}
+            size="sm"
+            color="grey"
+            weight="md"
+          >
             <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
           </TextIcon>
         </section>
@@ -97,8 +102,8 @@ const FeedDigest = ({
         </section>
 
         <section className="right">
-          <InactiveState article={article} />
           <Live article={article} />
+          <InactiveState article={article} />
           <CreatedAt article={article} />
         </section>
       </header>

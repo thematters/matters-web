@@ -52,11 +52,12 @@ const Unfollow = ({
     <Button
       size={size}
       style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
-      onClick={() => {
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
         unfollow()
         analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
           id: user.id
         })
+        e.stopPropagation()
       }}
       bgColor={hover ? 'red' : 'green'}
       onMouseEnter={() => setHover(true)}

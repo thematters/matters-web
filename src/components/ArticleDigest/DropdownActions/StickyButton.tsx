@@ -66,11 +66,11 @@ const StickyButton = ({
       }}
     >
       {article.sticky ? (
-        <TextIcon icon={<Icon.UnSticky />} spacing="tight">
+        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
           <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
         </TextIcon>
       ) : (
-        <TextIcon icon={<Icon.PinToTop />} spacing="tight">
+        <TextIcon icon={<Icon.PinMedium />} spacing="tight">
           <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
         </TextIcon>
       )}

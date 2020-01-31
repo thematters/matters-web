@@ -41,11 +41,7 @@ const fragments = {
   `
 }
 
-const FooterActions = ({
-  article,
-  inTagDetailLatest,
-  inTagDetailSelected
-}: FooterActionsProps) => {
+const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
   const { title } = article
   const path = toPath({
     page: 'articleDetail',
@@ -60,12 +56,8 @@ const FooterActions = ({
       </section>
 
       <section className="right">
-        <DropdownActions
-          article={article}
-          inTagDetailLatest={inTagDetailLatest}
-          inTagDetailSelected={inTagDetailSelected}
-        />
-        <BookmarkButton article={article} size="sm" />
+        <DropdownActions article={article} {...controls} />
+        <BookmarkButton article={article} />
         <ShareButton title={title} path={path.as} color="grey" />
       </section>
 

@@ -105,7 +105,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
         <div className="buttons">
           <button type="button" className="button">
             <label>
-              <Icon.Camera size="md" />
+              <Icon.Camera color="white" />
               <span className="upload">
                 <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
               </span>

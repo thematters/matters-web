@@ -57,7 +57,7 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
 
       <LinkWrapper {...path} onClick={onClick}>
         <TextIcon
-          icon={<Icon.ArrowRight style={{ width: 8, height: 8 }} />}
+          icon={<Icon.Right size="xs" />}
           color="grey-dark"
           spacing="xxtight"
           size="xs"

@@ -1,7 +1,14 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, IconColor, Menu, PopperInstance } from '~/components'
+import {
+  Dropdown,
+  Icon,
+  IconColor,
+  IconSize,
+  Menu,
+  PopperInstance
+} from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
 import ArchiveButton from './ArchiveButton'
@@ -16,9 +23,10 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
   color?: IconColor
+  size?: IconSize
+  inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
-  inUserArticles?: boolean
 }
 
 type DropdownActionsProps = {
@@ -116,9 +124,10 @@ const DropdownActions = ({
   article,
 
   color = 'grey',
+  size,
+  inUserArticles,
   inTagDetailLatest,
-  inTagDetailSelected,
-  inUserArticles
+  inTagDetailSelected
 }: DropdownActionsProps) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -133,6 +142,7 @@ const DropdownActions = ({
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
   const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+  const hasExtendButton = isActive && !isInTagDetail
   const hasRemoveTagButton = isInTagDetail && isMattyUser
   const hasStickyButton =
     inUserArticles &&
@@ -142,7 +152,15 @@ const DropdownActions = ({
     !viewer.isInactive
   const hasArchiveButton =
     isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
-  const hasExtendButton = !isInTagDetail
+
+  if (
+    !hasExtendButton &&
+    !hasRemoveTagButton &&
+    !hasStickyButton &&
+    !hasArchiveButton
+  ) {
+    return null
+  }
 
   return (
     <>
@@ -171,7 +189,7 @@ const DropdownActions = ({
           aria-haspopup="true"
           onClick={e => e.stopPropagation()}
         >
-          <Icon.MoreSmall color={color} />
+          <Icon.More color={color} size={size} />
         </button>
       </Dropdown>
 
