@@ -138,6 +138,8 @@ export const Notice = ({ notice }: { notice: DigestNotice }) => {
       return <ArticleTagHasBeenAddedNotice notice={notice} />
     case 'ArticleTagHasBeenRemovedNotice':
       return <ArticleTagHasBeenRemovedNotice notice={notice} />
+    default:
+      return null
   }
 }
 
