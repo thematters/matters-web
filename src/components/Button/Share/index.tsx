@@ -12,7 +12,7 @@ interface ShareButtonProps {
   title?: string
   path?: string
 
-  size?: Extract<IconSize, 'md'>
+  size?: Extract<IconSize, 'md-s'>
   color?: Extract<IconColor, 'grey' | 'black'>
 }
 
@@ -71,11 +71,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
               e.stopPropagation()
             }}
           >
-            {size === 'md' ? (
-              <Icon.Share size={size} color={color} />
-            ) : (
-              <Icon.ShareSmall size={size} color={color} />
-            )}
+            <Icon.Share size={size} color={color} />
           </button>
         )}
       </ModalSwitch>

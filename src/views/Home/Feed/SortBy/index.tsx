@@ -20,7 +20,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
         }}
       >
         <TextIcon
-          icon={isHottest ? <Icon.Trends /> : <Icon.ReadingHistoryGreen />}
+          icon={isHottest ? <Icon.Trends /> : <Icon.HistoryMedium />}
           size="sm"
           spacing="xtight"
           color="green"

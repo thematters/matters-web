@@ -39,7 +39,7 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
       <span className="num">&nbsp;{articles}&nbsp;</span>
       <Translate zh_hant="篇作品" zh_hans="篇作品" />
 
-      <Icon.DotDivider style={{ width: 18, height: 18 }} />
+      <Icon.DotDivider />
 
       <Translate zh_hant="累積創作" zh_hans="累积创作" />
       <span className="num">&nbsp;{words}&nbsp;</span>

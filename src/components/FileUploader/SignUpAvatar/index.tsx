@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
@@ -89,10 +89,8 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
       </div>
       <div className="upload">
         <div className="wrapper">
-          <Icon.CameraGreen
-            style={{ width: 24, height: 24, marginRight: '0.25rem' }}
-          />
           <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
+
           <input
             className="input"
             type="file"

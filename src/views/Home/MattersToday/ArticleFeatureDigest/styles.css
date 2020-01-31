@@ -1,0 +1,63 @@
+:root {
+  --digest-cover-height: 330px;
+}
+
+.cover-container {
+  margin-left: 0;
+
+  @media (--lg-up) {
+    margin-left: calc(var(--spacing-x-loose) * -1);
+  }
+  @media (--xl-up) {
+    margin-left: -8.75rem;
+  }
+}
+.cover {
+  width: 100%;
+  height: var(--digest-cover-height);
+}
+
+.content-container {
+  position: relative;
+  margin: -7.5rem 0 var(--spacing-xx-loose) 0;
+  padding: 0;
+  background: var(--color-white);
+
+  @media (--sm-up) {
+    padding-left: var(--spacing-base);
+  }
+  @media (--lg-up) {
+    margin-top: -5.5rem;
+    margin-left: calc(var(--spacing-x-loose) * -1);
+    padding-left: var(--spacing-x-loose);
+  }
+  @media (--xl-up) {
+    margin-left: calc(var(--spacing-x-loose) * -1);
+  }
+}
+.content {
+  position: relative;
+  padding-top: var(--spacing-loose);
+
+  & :global(.label) {
+    position: absolute;
+    top: -15px;
+    left: 0;
+  }
+  & :global(h2) {
+    line-height: 1.5;
+  }
+}
+
+.description {
+  margin-top: var(--spacing-xx-tight);
+  padding-right: 0;
+
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  line-height: 1.71428571;
+
+  & :global(.actions > *) {
+    margin-top: var(--spacing-base);
+  }
+}

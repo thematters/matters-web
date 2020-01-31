@@ -37,7 +37,7 @@ const Description = () => (
   <section className="desc">
     <section>
       <TextIcon
-        icon={<Icon.Help size="sm" />}
+        icon={<Icon.HelpMedium size="sm" />}
         size="sm"
         color="green"
         spacing="xtight"

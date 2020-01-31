@@ -3,15 +3,16 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 interface TextIconProps {
-  text?: string | number | React.ReactNode
-  textPlacement?: 'bottom' | 'left' | 'right'
   icon: React.ReactNode
-  style?: React.CSSProperties
+
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xs' | 'sm' | 'md' | 'lg'
   spacing?: '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
+  textPlacement?: 'bottom' | 'left' | 'right'
+
+  style?: React.CSSProperties
   className?: string
 }
 
@@ -21,21 +22,29 @@ interface TextIconProps {
  * Usage:
  *
  * ```jsx
- * <TextIcon text="134" icon={<Icon id={ICON_MAT_GOLD.id} viewBox={ICON_MAT_GOLD.viewBox} />} />
+ * <TextIcon
+ *   icon={<Icon id={ICON_MAT_GOLD.id}
+ *   viewBox={ICON_MAT_GOLD.viewBox}
+ * >
+ *  123
+ * </TextIcon>} />
  * ```
  */
 
 export const TextIcon: React.FC<TextIconProps> = ({
-  text,
-  textPlacement = 'right',
   icon,
-  children,
+
   color,
   size = 'sm',
   spacing = 'xxtight',
   weight,
+
+  textPlacement = 'right',
+
   style,
-  className
+  className,
+
+  children
 }) => {
   const textStyle = style && style.fontSize ? { fontSize: style.fontSize } : {}
 
@@ -52,9 +61,11 @@ export const TextIcon: React.FC<TextIconProps> = ({
   if (textPlacement === 'left') {
     return (
       <span className={textIconClasses} style={style}>
-        <span className="text" style={textStyle}>
-          {text || children}
-        </span>
+        {children && (
+          <span className="text" style={textStyle}>
+            {children}
+          </span>
+        )}
 
         {icon}
 
@@ -67,9 +78,11 @@ export const TextIcon: React.FC<TextIconProps> = ({
     <span className={textIconClasses} style={style}>
       {icon}
 
-      <span className="text" style={textStyle}>
-        {text || children}
-      </span>
+      {children && (
+        <span className="text" style={textStyle}>
+          {children}
+        </span>
+      )}
 
       <style jsx>{styles}</style>
     </span>

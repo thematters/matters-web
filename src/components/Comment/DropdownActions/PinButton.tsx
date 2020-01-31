@@ -54,18 +54,6 @@ const fragments = {
   `
 }
 
-const TextIconUnpin = () => (
-  <TextIcon icon={<Icon.UnPin />} spacing="tight">
-    <Translate zh_hant={TEXT.zh_hant.unpin} zh_hans={TEXT.zh_hans.unpin} />
-  </TextIcon>
-)
-
-const TextIconPin = () => (
-  <TextIcon icon={<Icon.PinToTop />} spacing="tight">
-    <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
-  </TextIcon>
-)
-
 const PinButton = ({
   comment,
   hideDropdown
@@ -110,7 +98,12 @@ const PinButton = ({
           hideDropdown()
         }}
       >
-        <TextIconUnpin />
+        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
+          <Translate
+            zh_hant={TEXT.zh_hant.unpin}
+            zh_hans={TEXT.zh_hans.unpin}
+          />
+        </TextIcon>
 
         <style jsx>{styles}</style>
       </button>
@@ -126,7 +119,9 @@ const PinButton = ({
       }}
       disabled={!canPin}
     >
-      <TextIconPin />
+      <TextIcon icon={<Icon.PinMedium />} spacing="tight">
+        <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
+      </TextIcon>
 
       <style jsx>{styles}</style>
     </button>

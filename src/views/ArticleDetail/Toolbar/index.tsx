@@ -47,8 +47,8 @@ const Toolbar = ({
         <div className="container">
           <AppreciationButton article={article} />
           <ResponseButton article={article} textPlacement="bottom" />
-          <BookmarkButton article={article} size="md" />
-          <ShareButton size="md" />
+          <BookmarkButton article={article} size="md-s" />
+          <ShareButton size="md-s" />
         </div>
         <style jsx>{styles}</style>
       </section>
@@ -72,9 +72,11 @@ const Toolbar = ({
           <AppreciationButton article={article} inFixedToolbar />
         )}
         <ResponseButton article={article} />
-        <BookmarkButton article={article} size="md" />
-        <ShareButton size="md" />
-        {!fixed && <DropdownActions article={article} color="black" />}
+        <BookmarkButton article={article} size="md-s" />
+        <ShareButton size="md-s" />
+        {!fixed && (
+          <DropdownActions article={article} color="black" size="md-s" />
+        )}
       </section>
 
       <style jsx>{styles}</style>

@@ -65,7 +65,7 @@ const ExtendButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.Extend />} spacing="tight">
+      <TextIcon icon={<Icon.CollectionMedium />} spacing="tight">
         <Translate zh_hant="關聯作品" zh_hans="关联作品" />
       </TextIcon>
 

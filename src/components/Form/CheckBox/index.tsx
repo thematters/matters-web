@@ -30,28 +30,27 @@ const CheckBox: React.FC<Props> = ({
   setFieldValue
 }) => {
   const value = values[field]
-  const error = errors[field]
   const inputClass = classNames('input', ...className)
-  const click = () => setFieldValue(field, !value)
 
   return (
     <>
       <div className="container">
-        <label className="check" onClick={click}>
+        <label className="check">
           {value === true ? (
             <Icon.CheckActive size="sm" />
-          ) : error ? (
-            <Icon.CheckError size="sm" />
           ) : (
             <Icon.CheckInactive size="sm" />
           )}
+
           <input
             className={inputClass}
             type="checkbox"
             name={field}
-            value={value}
+            onChange={e => setFieldValue(field, e.target.checked)}
+            {...(value ? { checked: true } : {})}
           />
         </label>
+
         <div className="description">{children}</div>
       </div>
 

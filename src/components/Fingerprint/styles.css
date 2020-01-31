@@ -1,79 +1,68 @@
-.fingerprint-content {
-  padding: var(--spacing-x-tight);
-  margin-bottom: var(--spacing-loose);
+.container {
+  padding: var(--spacing-base);
 
-  color: var(--color-yellow);
-  font-size: var(--font-size-md);
-  font-family: var(--font-mono);
-  background: var(--color-yellow-lighter);
+  text-align: left;
 }
 
-.dropdown-container {
-  width: var(--sizing-menu-width);
-}
-
-.top-container {
-  padding: var(--spacing-base) var(--spacing-loose) var(--spacing-loose);
-}
-
-.section-title {
+header {
   @mixin flex-center-space-between;
   margin-bottom: var(--spacing-base);
 
   & h4 {
     font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
   }
 }
 
-.help-container {
-  padding: var(--spacing-base) var(--spacing-loose);
+.hash {
+  margin-bottom: var(--spacing-loose);
 
-  background: var(--color-grey-lighter);
-  text-align: left;
+  & input {
+    padding: var(--spacing-x-tight) var(--spacing-base);
 
-  &.expand {
-    background: var(--color-green-lighter);
+    color: var(--color-yellow);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-mono);
+    background: var(--color-yellow-lighter);
   }
+}
 
+.gateways {
+  margin-bottom: var(--spacing-base);
+
+  & ul {
+    @mixin border-top-grey;
+    @mixin border-bottom-grey;
+    padding: var(--spacing-x-tight) 0;
+
+    & li {
+      @mixin flex-center-space-between;
+
+      & :global(:not(.gateway-url)) {
+        flex-shrink: 0;
+      }
+
+      & .gateway-url {
+        @mixin truncate;
+        margin-right: var(--spacing-x-tight);
+
+        font-size: var(--font-size-md);
+        line-height: 2.5rem;
+      }
+    }
+  }
+}
+
+.help {
   & p {
     margin-top: var(--spacing-base);
-    margin-bottom: var(--spacing-x-tight);
 
     font-size: var(--font-size-sm);
-    color: var(--color-grey);
-    white-space: pre-line;
-  }
+    color: var(--color-grey-darker);
 
-  & :global(svg) {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-}
-
-.gateway-container {
-  & li {
-    @mixin flex-center-space-between;
-
-    & + li {
-      margin-top: var(--spacing-x-tight);
-    }
-
-    & :global(:not(.gateway-url)) {
-      flex-shrink: 0;
-    }
-
-    & .gateway-url {
-      @mixin truncate;
-      font-size: var(--font-size-sm);
-      color: var(--color-grey);
-      margin-left: var(--spacing-x-tight);
-      margin-right: var(--spacing-xx-tight);
-      text-align: left;
-    }
-
-    & a {
-      font-size: 0;
+    & b {
+      color: var(--color-black);
+      font-weight: var(--font-weight-medium);
     }
   }
 }

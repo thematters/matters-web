@@ -32,7 +32,7 @@ const WriteIcon = ({ loading }: { loading: boolean }) => {
     return <Icon.Spinner size="md" className="u-motion-spin" />
   }
 
-  return <Icon.Write size="md" />
+  return <Icon.Pen size="md" />
 }
 
 const WriteButton = ({ allowed, CustomButton }: Props) => {
@@ -55,7 +55,7 @@ const WriteButton = ({ allowed, CustomButton }: Props) => {
             className="u-sm-down-hide"
             size="lg"
             bgColor="gold"
-            icon={<Icon.Write size="md" />}
+            icon={<Icon.Pen size="md" />}
             onClick={open}
           >
             <Translate

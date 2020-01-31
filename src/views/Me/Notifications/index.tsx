@@ -19,6 +19,8 @@ import { Notice } from '~/components/Notice'
 
 import { mergeConnections } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
@@ -68,15 +70,19 @@ const Notifications = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 0]} hasBorder>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
-            <Notice notice={node} />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <section className="container">
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List spacing={['xloose', 0]} hasBorder>
+          {edges.map(({ node, cursor }) => (
+            <List.Item key={cursor}>
+              <Notice notice={node} />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

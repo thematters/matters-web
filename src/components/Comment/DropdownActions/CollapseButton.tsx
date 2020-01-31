@@ -69,7 +69,7 @@ const CollapseButton = ({
           hideDropdown()
         }}
       >
-        <TextIcon icon={<Icon.UnCollapse />} spacing="tight">
+        <TextIcon icon={<Icon.Expand />} spacing="tight">
           <Translate
             zh_hant={TEXT.zh_hant.uncollapseComment}
             zh_hans={TEXT.zh_hant.uncollapseComment}

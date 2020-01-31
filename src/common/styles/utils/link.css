@@ -1,25 +1,5 @@
 /* @styled-jsx=global */
 
-.u-link-color {
-  color: inherit;
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: var(--color-matters-green);
-  }
-}
-
-.u-link-grey-black {
-  color: var(--color-matters-grey);
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: var(--color-matters-black);
-  }
-}
-
 .u-link-green {
   color: var(--color-matters-green);
 

@@ -58,7 +58,7 @@ const ArchiveButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.Archive />} spacing="tight">
+      <TextIcon icon={<Icon.ArchiveMedium />} spacing="tight">
         <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
       </TextIcon>
 

@@ -1,9 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareFacebook } from '~/static/icons/share-facebook.svg'
 
 const Facebook = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -21,7 +22,9 @@ const Facebook = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    <TextIcon icon={<Icon.ShareFacebook />} spacing="tight" text="Facebook" />
+    <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="tight">
+      Facebook
+    </TextIcon>
   </button>
 )
 

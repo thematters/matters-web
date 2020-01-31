@@ -24,7 +24,7 @@ const InactiveState = ({ article }: { article: InactiveStateArticle }) => {
 
   return (
     <span className="inactive-state">
-      <TextIcon icon={<Icon.Archive />} size="xs">
+      <TextIcon icon={<Icon.ArchiveMedium />} size="xs">
         <Translate zh_hant="已站內隱藏" zh_hans="已站内隐藏" />
       </TextIcon>
 

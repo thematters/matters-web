@@ -25,7 +25,7 @@ const Copy = ({ link }: { link: string }) => {
   return (
     <section className="copy">
       <button onClick={copy} type="button" aria-label="複製連結">
-        <Icon.ShareLink size="xs" />
+        <Icon.Link color="black" />
       </button>
 
       <input

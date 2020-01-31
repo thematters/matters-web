@@ -1,9 +1,10 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareTelegram } from '~/static/icons/share-telegram.svg'
 
 const Telegram = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -22,7 +23,9 @@ const Telegram = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Telegram')
     }}
   >
-    <TextIcon icon={<Icon.ShareTelegram />} spacing="tight" text="Telegram" />
+    <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="tight">
+      Telegram
+    </TextIcon>
   </button>
 )
 

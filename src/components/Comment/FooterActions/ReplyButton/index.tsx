@@ -17,7 +17,7 @@ const ReplyButton = ({
     onClick={onClick}
     disabled={disabled}
   >
-    <Icon.CommentSmall />
+    <Icon.Comment />
 
     <style jsx>{styles}</style>
   </button>
