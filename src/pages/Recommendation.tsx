@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
-import { InfiniteScroll, Placeholder } from '~/components'
+import { InfiniteScroll, Spinner } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
@@ -12,11 +12,7 @@ import { mergeConnections } from '~/common/utils'
 import { RecommendationArticles } from './__generated__/RecommendationArticles'
 
 const query = gql`
-  query RecommendationArticles(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query RecommendationArticles($after: String) {
     viewer {
       id
       recommendation {
@@ -53,7 +49,7 @@ const Feed = () => {
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   if (loading && (!result || isNewLoading)) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -85,7 +81,7 @@ const Feed = () => {
         <ul>
           {edges.map(({ node, cursor }, i) => (
             <li key={cursor}>
-              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
+              <ArticleDigest.Feed article={node} />
             </li>
           ))}
         </ul>
