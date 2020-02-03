@@ -1,11 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
+import { NetworkStatus } from 'apollo-client'
 import _get from 'lodash/get'
 
-import { ArticleDigest, InfiniteScroll, Spinner } from '~/components'
+import {
+  ArticleDigest,
+  InfiniteScroll,
+  List,
+  LoadMore,
+  Spinner
+} from '~/components'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
-import { useEventListener } from '~/components/Hook'
+import { useEventListener, useResponsive } from '~/components/Hook'
 
 import {
   ANALYTICS_EVENTS,
@@ -14,14 +21,45 @@ import {
 } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { TagArticles } from '~/components/GQL/queries/__generated__/TagArticles'
+import {
+  TagArticles,
+  TagArticles_node_Tag_articles
+} from '~/components/GQL/queries/__generated__/TagArticles'
 
 const SelectedArticles = ({ id }: { id: string }) => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<TagArticles>(
-    TAG_ARTICLES,
-    { variables: { id, selected: true }, fetchPolicy: 'cache-and-network' }
-  )
+  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
+    TagArticles
+  >(TAG_ARTICLES, {
+    variables: { id, selected: true },
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true
+  })
 
+  const connectionPath = 'node.articles'
+  const articles = _get(data, connectionPath) as TagArticles_node_Tag_articles
+  const { edges, pageInfo } = articles || { edges: [], pageInfo: {} }
+  const isNewLoading = networkStatus === NetworkStatus.loading
+  const hasArticles = edges && edges.length > 0 && pageInfo
+
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.TAG_DETAIL,
+      location: edges ? edges.length : 0,
+      entrance: id
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
   const sync = ({
     event,
     differences = 0
@@ -52,7 +90,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
 
-  if (loading) {
+  if (loading && (!articles || isNewLoading)) {
     return <Spinner />
   }
 
@@ -64,53 +102,38 @@ const SelectedArticles = ({ id }: { id: string }) => {
     return <EmptyTagArticles />
   }
 
-  const connectionPath = 'node.articles'
-  const { edges, pageInfo } = data.node.articles
-  const hasArticles = edges && edges.length > 0 && pageInfo
-
-  const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAG_DETAIL,
-      location: edges ? edges.length : 0,
-      entrance: id
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-    })
-  }
-
   if (!hasArticles) {
     return <EmptyTagArticles />
   }
 
   return (
     <section>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+      <InfiniteScroll
+        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        loadMore={loadMore}
+      >
+        <List hasBorder>
           {(edges || []).map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TAG_DETAIL,
-                  location: i,
-                  entrance: id
-                })
-              }
-            >
-              <ArticleDigest.Feed article={node} inTagDetailSelected />
-            </li>
+            <List.Item key={cursor}>
+              <ArticleDigest.Feed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.TAG_DETAIL,
+                    location: i,
+                    entrance: id
+                  })
+                }
+                inTagDetailSelected
+              />
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
+
+      {!isMediumUp && pageInfo.hasNextPage && (
+        <LoadMore onClick={loadMore} loading={loading} />
+      )}
     </section>
   )
 }
