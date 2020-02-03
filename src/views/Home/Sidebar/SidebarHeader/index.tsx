@@ -32,39 +32,34 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
     analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, { type })
   }
 
-  if (!path || typeof path === 'boolean') {
-    return (
-      <header className={headerClass}>
-        <Title type="nav">{titleMap[type]}</Title>
-
-        <style jsx>{styles}</style>
-      </header>
-    )
-  }
-
   return (
     <header className={headerClass}>
-      <Button {...path} onClick={onClick}>
-        <Title type="nav" is="h2">
-          {titleMap[type]}
-        </Title>
-      </Button>
+      <Title type="nav" is="h2">
+        {titleMap[type]}
+      </Title>
 
-      <Button {...path} onClick={onClick}>
-        <TextIcon
-          icon={<Icon.Right size="xs" />}
-          color="grey-dark"
-          spacing="xxtight"
-          size="xs"
-          weight="md"
-          textPlacement="left"
+      {path && (
+        <Button
+          size={[null, '1.25rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="grey-lighter"
+          {...path}
+          onClick={onClick}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.viewAll}
-            zh_hans={TEXT.zh_hans.viewAll}
-          />
-        </TextIcon>
-      </Button>
+          <TextIcon
+            icon={<Icon.Right size="xs" />}
+            color="grey-dark"
+            size="xs"
+            weight="md"
+            textPlacement="left"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.viewAll}
+              zh_hans={TEXT.zh_hans.viewAll}
+            />
+          </TextIcon>
+        </Button>
+      )}
 
       <style jsx>{styles}</style>
     </header>

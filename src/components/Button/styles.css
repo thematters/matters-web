@@ -2,6 +2,9 @@ a,
 span {
   font-size: 0;
 }
+span {
+  cursor: initial;
+}
 
 .content {
   @mixin inline-flex-center-all;

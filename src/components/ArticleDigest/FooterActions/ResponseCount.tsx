@@ -58,7 +58,7 @@ const ResponseCount = ({
         size={size}
         spacing="xxtight"
       >
-        {numAbbr(article.responseCount || 0)}
+        {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
     </Button>
   )

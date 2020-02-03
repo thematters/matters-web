@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import {
+  Button,
   Footer,
   Head,
   PageHeader,
@@ -54,6 +55,7 @@ const Buttons = () => {
     <section className="buttons">
       <TagDetailButtons.AddArticleButton />
       <TagDetailButtons.EditTagButton />
+
       <style jsx>{styles}</style>
     </section>
   )
@@ -76,32 +78,39 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
   return (
     <>
       <Head title={`#${data.node.content}`} />
+
       <PageHeader
         title={data.node.content}
-        buttons={<Buttons />}
         description={data.node.description || ''}
-        hasNoBottomBorder
-      />
-      <Tabs spacingBottom="base">
-        {hasSelected > 0 && (
-          <Tabs.Tab selected={feed === 'selected'}>
-            <span className="tab-button" onClick={() => setFeed('selected')}>
-              <Translate zh_hant="精選" zh_hans="精選" />
-            </span>
+        hasNoBorder
+      >
+        <Buttons />
+      </PageHeader>
+
+      <section className="tabs">
+        <Tabs spacingBottom="base">
+          {hasSelected > 0 && (
+            <Tabs.Tab selected={feed === 'selected'}>
+              <Button onClick={() => setFeed('selected')}>
+                <Translate zh_hant="精選" zh_hans="精选" />
+              </Button>
+            </Tabs.Tab>
+          )}
+
+          <Tabs.Tab selected={feed === 'latest'}>
+            <Button onClick={() => setFeed('latest')}>
+              <Translate zh_hant="最新" zh_hans="最新" />
+            </Button>
           </Tabs.Tab>
-        )}
-        <Tabs.Tab selected={feed === 'latest'}>
-          <span className="tab-button" onClick={() => setFeed('latest')}>
-            <Translate zh_hant="最新" zh_hans="最新" />
-          </span>
-        </Tabs.Tab>
-      </Tabs>
+        </Tabs>
+      </section>
 
       {feed === 'selected' ? (
         <TagDetailArticles.Selected id={data.node.id} />
       ) : (
         <TagDetailArticles.Latest id={data.node.id} />
       )}
+
       <style jsx>{styles}</style>
     </>
   )

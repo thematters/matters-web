@@ -120,7 +120,7 @@ const Tags = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <section className="l-row">
+      <section className="l-row full">
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
           {leftEdges.map(({ node, cursor }, i) => (
             <li
@@ -170,14 +170,15 @@ export default () => {
         />
 
         <PageHeader
-          buttons={<CreateTagButton />}
           title={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
               zh_hans={TEXT.zh_hans.allTags}
             />
           }
-        />
+        >
+          <CreateTagButton />
+        </PageHeader>
 
         <section className="container">
           <Tags />

@@ -26,6 +26,11 @@
       lost-center: 1080px;
     }
   }
+
+  &.full {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /*

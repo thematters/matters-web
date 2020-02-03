@@ -1,12 +1,9 @@
 .buttons {
-  flex-shrink: 0;
-
-  @media (--sm-up) {
-    margin-left: var(--spacing-base);
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-tight);
   }
 }
 
-.tab-button {
-  font-size: var(--font-size-xm);
-  cursor: pointer;
+.tabs {
+  margin-top: var(--spacing-loose);
 }

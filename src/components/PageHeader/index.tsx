@@ -6,54 +6,34 @@ import styles from './styles.css'
 
 interface PageHeaderProps {
   title: string | React.ReactNode
-  buttons?: React.ReactNode
-  description?: string
+  description?: string | React.ReactNode
 
   is?: 'h1' | 'h2' | 'h3'
-  hasNoBottomBorder?: boolean
+  hasNoBorder?: boolean
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
-  buttons,
-  description,
   title,
+  description,
   children,
   is = 'h1',
-  hasNoBottomBorder = false
+  hasNoBorder = false
 }) => {
-  if (buttons || description) {
-    const headerClasses = classNames({
-      hasButtons: !!buttons,
-      hasDescription: !!description,
-      hasNoBottomBorder
-    })
-
-    return (
-      <header className={headerClasses}>
-        <section className="title">
-          <Title type="nav" is={is}>
-            {title}
-          </Title>
-
-          {buttons}
-        </section>
-
-        <section className="description">{description}</section>
-
-        {children}
-
-        <style jsx>{styles}</style>
-      </header>
-    )
-  }
+  const headerClass = classNames({
+    hasNoBorder: !!hasNoBorder
+  })
 
   return (
-    <header>
-      <Title type="nav" is={is}>
-        {title}
-      </Title>
+    <header className={headerClass}>
+      <section className="title">
+        <Title type="nav" is={is}>
+          {title}
+        </Title>
 
-      {children}
+        {children}
+      </section>
+
+      {description && <p className="description">{description}</p>}
 
       <style jsx>{styles}</style>
     </header>
