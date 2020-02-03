@@ -20,7 +20,6 @@ const ExpandButton = ({
       size="sm"
       color="green"
       textPlacement="left"
-      spacing="xxtight"
     >
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}

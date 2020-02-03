@@ -47,7 +47,6 @@ const Collapsed = ({
         >
           <TextIcon
             icon={<Icon.Expand size="xs" />}
-            spacing="xxtight"
             textPlacement="left"
             weight="normal"
             color="grey"

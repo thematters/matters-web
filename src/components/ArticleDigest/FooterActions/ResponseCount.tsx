@@ -56,7 +56,6 @@ const ResponseCount = ({
         color="grey"
         weight="md"
         size={size}
-        spacing="xxtight"
       >
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
