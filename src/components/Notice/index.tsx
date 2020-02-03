@@ -145,6 +145,8 @@ export const Notice = ({ notice }: { notice: DigestNotice }) => {
       return <ArticleTagHasBeenRemovedNotice notice={notice} />
     case 'ArticleTagHasBeenUnselectedNotice':
       return <ArticleTagHasBeenUnselectedNotice notice={notice} />
+    default:
+      return null
   }
 }
 
