@@ -11,7 +11,7 @@ const SignUpButton: React.FC<{ trackType: string }> = ({
   <ModalSwitch modalId="signUpModal">
     {(open: any) => (
       <Button
-        size={[null, '2rem']}
+        size={[null, '2.25rem']}
         spacing={[0, 'loose']}
         bgColor="green"
         onClick={() => {

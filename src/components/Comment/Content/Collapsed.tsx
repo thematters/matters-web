@@ -41,9 +41,8 @@ const Collapsed = ({
           spacing={[0, 'xtight']}
           bgHoverColor="grey-lighter"
           className="expand-button"
-          onClick={(e: React.MouseEvent) => {
+          onClick={() => {
             setCollapsed(false)
-            e.stopPropagation()
           }}
         >
           <TextIcon

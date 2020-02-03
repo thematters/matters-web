@@ -40,10 +40,7 @@ const Unsubscribe = ({
       spacing={['xtight', 'xtight']}
       bgHoverColor="grey-lighter"
       aria-label="取消收藏"
-      onClick={(e: React.MouseEvent) => {
-        unsubscribe()
-        e.stopPropagation()
-      }}
+      onClick={unsubscribe}
       disabled={disabled}
     >
       <Icon.BookmarkActive color="black" size={size} />

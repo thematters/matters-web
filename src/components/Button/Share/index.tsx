@@ -61,15 +61,13 @@ const ShareButton: React.FC<ShareButtonProps> = ({
             spacing={['xtight', 'xtight']}
             bgHoverColor="grey-lighter"
             aria-label={`分享《${title}》`}
-            onClick={(e: React.MouseEvent) => {
+            onClick={() => {
               openShareModal({ open })
 
               analytics.trackEvent(ANALYTICS_EVENTS, {
                 type: SHARE_TYPE.ROOT,
                 url: shareLink
               })
-
-              e.stopPropagation()
             }}
           >
             <Icon.Share size={size} color={color} />

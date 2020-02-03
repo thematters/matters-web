@@ -90,9 +90,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
     }
   }
 
-  const removeCover = async (event: React.MouseEvent) => {
-    event.stopPropagation()
-
+  const removeCover = async () => {
     if (!update || !user.info.profileCover) {
       return
     }
@@ -135,7 +133,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
               spacing={isMediumUp ? [0, 'base'] : [0, 'tight']}
               borderColor="white"
               borderWidth="sm"
-              onClick={(event: React.MouseEvent) => removeCover(event)}
+              onClick={() => removeCover()}
             >
               <Translate zh_hant="刪除" zh_hans="删除" />
             </Button>

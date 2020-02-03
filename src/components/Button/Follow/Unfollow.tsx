@@ -54,12 +54,11 @@ const Unfollow = ({
       textColor="white"
       bgColor="green"
       bgHoverColor="red"
-      onClick={(e: React.MouseEvent) => {
+      onClick={() => {
         unfollow()
         analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
           id: user.id
         })
-        e.stopPropagation()
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}

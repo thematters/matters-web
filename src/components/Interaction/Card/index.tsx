@@ -51,7 +51,19 @@ export const Card: React.FC<CardProps> = ({
     [`border-radius-${borderRadius}`]: !!borderRadius,
     disable
   })
-  const openLink = ({ newTab }: { newTab: boolean }) => {
+  const openLink = ({
+    newTab,
+    target
+  }: {
+    newTab: boolean
+    target: HTMLElement
+  }) => {
+    // disable if the inside `<Button>` is clicked
+    if (target?.closest && target.closest('[data-clickable]')) {
+      return
+    }
+
+    // determine if it opens on a new tab
     if (as && href) {
       if (newTab) {
         window.open(as, '_blank')
@@ -75,13 +87,17 @@ export const Card: React.FC<CardProps> = ({
       tabIndex={disable ? undefined : 0}
       ref={node}
       onKeyDown={event => {
-        if (event.keyCode === KEYCODES.enter) {
-          openLink({ newTab: event.metaKey })
-          event.stopPropagation()
+        if (event.keyCode !== KEYCODES.enter) {
+          return
         }
+        openLink({
+          newTab: event.metaKey,
+          target: event.target as HTMLElement
+        })
+        event.stopPropagation()
       }}
       onClick={event => {
-        openLink({ newTab: event.metaKey })
+        openLink({ newTab: event.metaKey, target: event.target as HTMLElement })
         event.stopPropagation()
       }}
     >

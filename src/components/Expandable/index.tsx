@@ -48,9 +48,8 @@ export const Expandable: React.FC<ExpandableProps> = ({
           spacing={['xxtight', 'xtight']}
           bgColor="green-lighter"
           textColor="green"
-          onClick={(e: React.MouseEvent) => {
+          onClick={() => {
             setExpand(true)
-            e.stopPropagation()
           }}
         >
           <TextIcon icon={<Icon.Expand size="xs" />}>

@@ -53,10 +53,9 @@ const Follow = ({
       textHoverColor="white"
       bgHoverColor="green"
       borderColor="green"
-      onClick={(e: React.MouseEvent) => {
+      onClick={() => {
         follow()
         analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
-        e.stopPropagation()
       }}
     >
       <TextIcon weight="md" size={isLarge ? 'sm' : 'xs'}>

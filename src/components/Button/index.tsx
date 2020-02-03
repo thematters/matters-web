@@ -109,11 +109,16 @@ export const Button: React.FC<ButtonProps> = ({
     ...(!!size[1] ? { height: size[1] } : {}),
     ...(!!borderRadius ? { borderRadius } : {})
   }
+  const containerProps = {
+    ...restProps,
+    className: containerClass,
+    'data-clickable': true
+  }
 
   // span
   if (is === 'span') {
     return (
-      <span className={containerClass} {...restProps}>
+      <span {...containerProps}>
         <div className={contentClass} style={contentStyle}>
           {children}
         </div>
@@ -125,7 +130,7 @@ export const Button: React.FC<ButtonProps> = ({
   // anchor
   if (href && !as) {
     return (
-      <a href={href} className={containerClass} {...restProps}>
+      <a href={href} {...containerProps}>
         <div className={contentClass} style={contentStyle}>
           {children}
         </div>
@@ -138,7 +143,7 @@ export const Button: React.FC<ButtonProps> = ({
   if (href && as) {
     return (
       <Link href={href} as={as}>
-        <a className={containerClass} {...restProps}>
+        <a {...containerProps}>
           <div className={contentClass} style={contentStyle}>
             {children}
           </div>
@@ -150,7 +155,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   // button
   return (
-    <button className={containerClass} {...restProps}>
+    <button {...containerProps}>
       <div className={contentClass} style={contentStyle}>
         {children}
       </div>

@@ -7,8 +7,13 @@ import { TEXT } from '~/common/enums'
 export default () => (
   <ModalSwitch modalId="loginModal">
     {(open: any) => (
-      <Button spacing={['xtight', 'base']} onClick={() => open()}>
-        <TextIcon color="green">
+      <Button
+        size={[null, '2.25rem']}
+        spacing={[0, 'loose']}
+        bgHoverColor="green-lighter"
+        onClick={() => open()}
+      >
+        <TextIcon color="green" weight="md">
           <Translate
             zh_hant={TEXT.zh_hant.login}
             zh_hans={TEXT.zh_hans.login}

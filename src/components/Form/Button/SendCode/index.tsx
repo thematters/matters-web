@@ -51,9 +51,7 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
   })
   const disabled = !send || !email || countdown.timeLeft !== 0
 
-  const sendCode = async (event: any) => {
-    event.stopPropagation()
-
+  const sendCode = async () => {
     try {
       await send({
         variables: { input: { email, type } }
@@ -83,7 +81,7 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
     <Button
       spacing={['xtight', 'xtight']}
       disabled={disabled}
-      onClick={(event: React.MouseEvent) => sendCode(event)}
+      onClick={() => sendCode()}
     >
       <TextIcon color="green" weight="md">
         {sent ? (
