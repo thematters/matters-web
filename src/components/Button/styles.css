@@ -107,7 +107,7 @@ span {
   &:hover,
   &:focus {
     & .content {
-      color: var(--color-green);
+      color: var(--color-matters-green);
     }
   }
 }

@@ -30,13 +30,6 @@ header {
   }
 }
 
-.holder {
-  height: var(--global-header-height); /* fallback */
-  height: calc(
-    var(--global-header-height) + 1px
-  ); /* global header's height + 1px border */
-}
-
 .container {
   @mixin flex-center-space-between;
 
@@ -62,7 +55,7 @@ header {
     margin-left: var(--spacing-base);
 
     @media (--sm-up) {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--spacing-loose);
     }
   }
 }

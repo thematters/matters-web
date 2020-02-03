@@ -60,7 +60,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
           <Button
             spacing={['xtight', 'xtight']}
             bgHoverColor="grey-lighter"
-            aria-label={`分享《${title}》`}
+            aria-label={`分享《${title || ''}》`}
             onClick={() => {
               openShareModal({ open })
 

@@ -185,23 +185,21 @@ const Fingerprint = ({
       trigger="click"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
-      <span>
-        <Button
-          size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
-          bgHoverColor="grey-lighter"
-          aria-haspopup="true"
+      <Button
+        size={[null, '1.25rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="grey-lighter"
+        aria-haspopup="true"
+      >
+        <TextIcon
+          icon={<Icon.IPFSMedium size={size === 'xs' ? 'xs' : undefined} />}
+          size={size}
+          color={color}
+          weight="md"
         >
-          <TextIcon
-            icon={<Icon.IPFSMedium size={size === 'xs' ? 'xs' : undefined} />}
-            size={size}
-            color={color}
-            weight="md"
-          >
-            <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
-          </TextIcon>
-        </Button>
-      </span>
+          <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
+        </TextIcon>
+      </Button>
     </Popover>
   )
 }

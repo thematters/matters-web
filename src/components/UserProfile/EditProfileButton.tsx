@@ -10,7 +10,7 @@ const EditProfileButton = ({
     bgHoverColor="grey-lighter"
     onClick={() => setEditing(true)}
   >
-    <TextIcon icon={<Icon.SettingsMedium />} color="grey">
+    <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
       <Translate zh_hant="編輯資料" zh_hans="编辑资料" />
     </TextIcon>
   </Button>

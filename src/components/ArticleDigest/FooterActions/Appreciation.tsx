@@ -27,7 +27,7 @@ const Appreciation = ({
       color="grey"
       weight="md"
       size={size}
-      spacing="xtight"
+      spacing="xxtight"
     >
       {article.appreciationsReceivedTotal > 0
         ? numAbbr(article.appreciationsReceivedTotal)

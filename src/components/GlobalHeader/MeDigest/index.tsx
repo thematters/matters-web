@@ -37,7 +37,12 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       content={<DropdownMenu hideDropdown={hideDropdown} />}
       onCreate={setInstance}
     >
-      <button type="button" className={containerClasses} aria-haspopup="true">
+      <button
+        type="button"
+        className={containerClasses}
+        aria-label="我的"
+        aria-haspopup="true"
+      >
         <Avatar size="lg" user={viewer.isInactive ? undefined : user} />
 
         <section className="info">

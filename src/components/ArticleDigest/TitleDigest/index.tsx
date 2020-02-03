@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Button, Translate } from '~/components'
+import { LinkWrapper, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -66,9 +66,14 @@ const TitleDigest = ({
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight
   })
+  const isClickable = !disabled && !isBanned
 
   return (
-    <Button {...path} is={disabled || isBanned ? 'span' : undefined}>
+    <LinkWrapper
+      {...path}
+      textHoverColor={isClickable ? 'green' : undefined}
+      disabled={!isClickable}
+    >
       <>
         {is === 'h2' ? (
           <h2 className={titleClasses}>{title}</h2>
@@ -80,7 +85,7 @@ const TitleDigest = ({
 
         <style jsx>{styles}</style>
       </>
-    </Button>
+    </LinkWrapper>
   )
 }
 
