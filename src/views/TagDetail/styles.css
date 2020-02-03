@@ -1,6 +1,9 @@
 .buttons {
   flex-shrink: 0;
-  margin-left: var(--spacing-base);
+
+  @media (--sm-up) {
+    margin-left: var(--spacing-base);
+  }
 }
 
 .tab-button {
