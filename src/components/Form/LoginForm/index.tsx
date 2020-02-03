@@ -254,7 +254,7 @@ const LoginForm: React.FC<FormProps> = ({
         {isInPage && <SignUpRedirection />}
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

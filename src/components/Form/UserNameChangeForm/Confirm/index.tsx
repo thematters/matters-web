@@ -133,7 +133,7 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
       </Modal.Content>
       <div className="buttons">
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
           width="full"

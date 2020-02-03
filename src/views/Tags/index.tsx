@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
   Footer,
   Head,
   Icon,
@@ -60,18 +61,19 @@ const CreateTagButton = () => {
   return (
     <ModalSwitch modalId="createTagModal">
       {(open: any) => (
-        <button type="button" onClick={e => open()}>
-          <TextIcon
-            icon={<Icon.Add color="green" size="xs" />}
-            spacing="xxxtight"
-            color="green"
-          >
+        <Button
+          size={[null, '1.5rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="green-lighter"
+          onClick={open}
+        >
+          <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
             <Translate
               zh_hant={TEXT.zh_hant.createTag}
               zh_hans={TEXT.zh_hans.createTag}
             />
           </TextIcon>
-        </button>
+        </Button>
       )}
     </ModalSwitch>
   )

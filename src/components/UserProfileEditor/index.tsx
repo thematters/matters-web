@@ -152,7 +152,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     size={[null, '2rem']}
                     spacing={[0, 'base']}
                     bgColor="green"
-                    htmlType="submit"
+                    type="submit"
                     disabled={!_isEmpty(errors) || isSubmitting}
                   >
                     <TextIcon

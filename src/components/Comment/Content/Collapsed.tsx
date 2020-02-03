@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
@@ -36,10 +36,12 @@ const Collapsed = ({
       {collapsedContent}
 
       {collapsed && (
-        <button
+        <Button
+          size={[null, '1.25rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="grey-lighter"
           className="expand-button"
-          type="button"
-          onClick={e => {
+          onClick={(e: React.MouseEvent) => {
             setCollapsed(false)
             e.stopPropagation()
           }}
@@ -53,7 +55,7 @@ const Collapsed = ({
           >
             <Translate zh_hant="打開" zh_hans="展开" />
           </TextIcon>
-        </button>
+        </Button>
       )}
 
       <style jsx>{styles}</style>

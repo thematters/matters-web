@@ -1,4 +1,6 @@
-.container {
+a,
+span {
+  font-size: 0;
 }
 
 .content {
@@ -6,7 +8,6 @@
   @mixin all-transition;
 
   background: transparent;
-  border-radius: 5rem;
 
   text-align: center;
   white-space: nowrap;
@@ -192,6 +193,9 @@
 }
 
 /* Border */
+.border-white {
+  border: 1.5px solid var(--color-white);
+}
 .border-grey {
   border: 1.5px solid var(--color-grey);
 }

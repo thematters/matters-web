@@ -8,7 +8,7 @@ import {
   DropResult
 } from 'react-beautiful-dnd'
 
-import { ArticleDigest, Icon } from '~/components'
+import { ArticleDigest, Button, Icon } from '~/components'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
@@ -126,14 +126,15 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           }
                         />
 
-                        <button
-                          type="button"
-                          className="delete-handler"
-                          aria-label="刪除"
-                          onClick={() => this.onDelete(article)}
-                        >
-                          <Icon.Clear color="black" />
-                        </button>
+                        <span className="delete-handler">
+                          <Button
+                            spacing={['base', 0]}
+                            aria-label="刪除"
+                            onClick={() => this.onDelete(article)}
+                          >
+                            <Icon.Clear color="black" />
+                          </Button>
+                        </span>
                       </li>
                     )}
                   </Draggable>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
+import { Button, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -31,9 +31,9 @@ const RetryButton = ({ id }: { id: string }) => {
   })
 
   return (
-    <button type="button" onClick={() => retry()}>
+    <Button onClick={() => retry()}>
       <Translate zh_hant={TEXT.zh_hant.retry} zh_hans={TEXT.zh_hans.retry} />
-    </button>
+    </Button>
   )
 }
 

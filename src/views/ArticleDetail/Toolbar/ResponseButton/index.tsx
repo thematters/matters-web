@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 
-import { Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, dom, numAbbr } from '~/common/utils'
@@ -38,7 +38,12 @@ const ResponseButton = ({
   }
 
   return (
-    <button type="button" aria-label="查看回應" onClick={onClick}>
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
+      aria-label="查看回應"
+      onClick={onClick}
+    >
       <TextIcon
         icon={<Icon.Comment color="black" size="md-s" />}
         color="grey"
@@ -49,7 +54,7 @@ const ResponseButton = ({
       >
         {numAbbr(article.responseCount || 0)}
       </TextIcon>
-    </button>
+    </Button>
   )
 }
 

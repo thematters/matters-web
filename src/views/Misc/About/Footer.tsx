@@ -111,7 +111,7 @@ const Footer = () => {
               <Button
                 size={[null, '2.25rem']}
                 spacing={[0, 'base']}
-                htmlType="submit"
+                type="submit"
                 bgColor="green"
               >
                 <TextIcon color="white" weight="md">

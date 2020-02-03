@@ -1,15 +1,19 @@
-import { Translate } from '~/components/Language'
+import { Button, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
-import styles from './styles.css'
-
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
-  <button className="cancel-button" type="button" onClick={onClick}>
-    <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
-
-    <style jsx>{styles}</style>
-  </button>
+  <Button
+    size={[null, '2rem']}
+    spacing={[0, 'base']}
+    bgColor="grey-lighter"
+    className="cancel-button"
+    onClick={onClick}
+  >
+    <TextIcon color="grey" weight="md">
+      <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
+    </TextIcon>
+  </Button>
 )
 
 export default CancelEditButton

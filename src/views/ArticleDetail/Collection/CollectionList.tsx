@@ -5,8 +5,10 @@ import _uniq from 'lodash/uniq'
 
 import {
   ArticleDigest,
+  Button,
   Icon,
   List,
+  LoadMore,
   Spinner,
   TextIcon,
   Translate,
@@ -15,7 +17,7 @@ import {
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -81,16 +83,21 @@ const CollectionList = ({
 
   if ((totalCount || 0) <= 0 && canEdit) {
     return (
-      <button type="button" onClick={() => setEditing(true)}>
+      <Button
+        size={[null, '1.5rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="green-lighter"
+        onClick={() => setEditing(true)}
+      >
         <TextIcon
           icon={<Icon.Add size="xs" />}
           size="sm"
-          spacing="xtight"
+          weight="md"
           color="green"
         >
           <Translate zh_hant="關聯一篇作品" zh_hans="关联一篇作品" />
         </TextIcon>
-      </button>
+      </Button>
     )
   }
 
@@ -114,23 +121,7 @@ const CollectionList = ({
         ))}
       </List>
 
-      {pageInfo.hasNextPage && (
-        <section className="load-more">
-          <button type="button" onClick={loadRest}>
-            <TextIcon
-              icon={<Icon.Down size="xs" />}
-              color="green"
-              textPlacement="left"
-              spacing="xxtight"
-            >
-              <Translate
-                zh_hans={TEXT.zh_hant.viewAll}
-                zh_hant={TEXT.zh_hans.viewAll}
-              />
-            </TextIcon>
-          </button>
-        </section>
-      )}
+      {pageInfo.hasNextPage && <LoadMore onClick={loadRest} />}
 
       <style jsx>{styles}</style>
     </>

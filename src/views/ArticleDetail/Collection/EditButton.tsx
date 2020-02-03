@@ -87,11 +87,20 @@ const EditButton = ({
   if (!editing) {
     return (
       <span className={editButtonClass}>
-        <button onClick={() => setEditing(true)}>
-          <TextIcon color="grey" icon={<Icon.Edit />}>
+        <Button
+          size={['4rem', '1.5rem']}
+          bgHoverColor="grey-lighter"
+          onClick={() => setEditing(true)}
+        >
+          <TextIcon
+            color="grey"
+            size="xs"
+            weight="md"
+            icon={<Icon.Edit size="sm" />}
+          >
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
-        </button>
+        </Button>
 
         <style jsx>{styles}</style>
       </span>

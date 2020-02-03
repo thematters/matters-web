@@ -28,6 +28,7 @@ type ButtonSpacing =
 type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
 
 type ButtonColor =
+  | 'white'
   | 'grey'
   | 'grey-lighter'
   | 'green-lighter'
@@ -47,13 +48,15 @@ interface ButtonProps {
 
   borderColor?: ButtonColor
   borderWidth?: 'sm'
+  borderRadius?: 0 | '0' | '5rem'
 
   style?: React.CSSProperties
 
   href?: string
   as?: string
 
-  htmlType?: 'button' | 'submit'
+  is?: 'span'
+
   [key: string]: any
 }
 
@@ -69,26 +72,30 @@ export const Button: React.FC<ButtonProps> = ({
 
   borderColor,
   borderWidth,
+  borderRadius = '5rem',
 
   href,
   as,
 
+  is,
+
   style,
   className,
-  htmlType = 'button',
   children,
   ...restProps
 }) => {
+  const isFullWidth = size[0] === 'full'
+  const isClickable = is !== 'span' && !restProps.disabled
   const containerClass = classNames({
     container: true,
-    [`text-hover-${textHoverColor}`]: !!textHoverColor,
-    [`bg-hover-${bgHoverColor}`]: !!bgHoverColor,
+    [`width-${size[0]}`]: isFullWidth,
+    [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
+    [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
     [className]: !!className
   })
-
   const contentClass = classNames({
     content: true,
-    [`width-${size[0]}`]: size[0] === 'full',
+    [`width-${size[0]}`]: isFullWidth,
     [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
     [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
     [`text-${textColor}`]: !!textColor,
@@ -96,11 +103,23 @@ export const Button: React.FC<ButtonProps> = ({
     [`border-${borderColor}`]: !!borderColor,
     [`border-${borderWidth}`]: !!borderWidth
   })
-
   const contentStyle = {
     ...style,
-    ...(!!size[0] ? { width: size[0] } : {}),
-    ...(!!size[1] ? { height: size[1] } : {})
+    ...(!!size[0] && !isFullWidth ? { width: size[0] } : {}),
+    ...(!!size[1] ? { height: size[1] } : {}),
+    ...(!!borderRadius ? { borderRadius } : {})
+  }
+
+  // span
+  if (is === 'span') {
+    return (
+      <span className={containerClass} {...restProps}>
+        <div className={contentClass} style={contentStyle}>
+          {children}
+        </div>
+        <style jsx>{styles}</style>
+      </span>
+    )
   }
 
   // anchor
@@ -131,7 +150,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   // button
   return (
-    <button type={htmlType} className={containerClass} {...restProps}>
+    <button className={containerClass} {...restProps}>
       <div className={contentClass} style={contentStyle}>
         {children}
       </div>

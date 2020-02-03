@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Icon, Translate } from '~/components'
+import { Button, Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { SIGNUP_TYPE } from '~/common/enums'
@@ -43,9 +43,9 @@ const Wall = ({ show, client }: any) => {
                 </SignUpButton>
               </div>
               <div className="close">
-                <button onClick={close}>
+                <Button onClick={close}>
                   <Icon.Clear color="grey" />
-                </button>
+                </Button>
               </div>
             </section>
           </section>

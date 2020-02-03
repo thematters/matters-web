@@ -1,14 +1,5 @@
 /* @styled-jsx=global */
 
-.u-motion-icon-hover {
-  @mixin all-transition;
-
-  &:hover,
-  &:focus {
-    transform: scale(0.9);
-  }
-}
-
 .u-motion-spin {
   animation: spinning 1s infinite linear;
 }
@@ -19,15 +10,5 @@
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-button:not([disabled], [aria-disabled='true']) > svg,
-button:not([disabled], [aria-disabled='true']) > .text-icon > svg {
-  transition: transform 0.2s ease-in-out;
-
-  &:hover,
-  &:focus {
-    transform: scale(0.9);
   }
 }

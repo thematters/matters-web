@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { LinkWrapper, Translate } from '~/components'
+import { Button, Translate } from '~/components'
 import { Avatar, AvatarSize } from '~/components/Avatar'
 
 import { TEXT } from '~/common/enums'
@@ -107,7 +107,7 @@ const Mini = ({
   }
 
   return (
-    <LinkWrapper {...path} disabled={disabled}>
+    <Button {...path} is={disabled ? 'span' : undefined}>
       <section className={containerClass}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
@@ -120,7 +120,7 @@ const Mini = ({
 
         <style jsx>{styles}</style>
       </section>
-    </LinkWrapper>
+    </Button>
   )
 }
 

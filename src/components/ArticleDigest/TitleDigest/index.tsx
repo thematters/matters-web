@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { LinkWrapper, Translate } from '~/components'
+import { Button, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -68,7 +68,7 @@ const TitleDigest = ({
   })
 
   return (
-    <LinkWrapper {...path} disabled={disabled || isBanned}>
+    <Button {...path} is={disabled || isBanned ? 'span' : undefined}>
       <>
         {is === 'h2' ? (
           <h2 className={titleClasses}>{title}</h2>
@@ -80,7 +80,7 @@ const TitleDigest = ({
 
         <style jsx>{styles}</style>
       </>
-    </LinkWrapper>
+    </Button>
   )
 }
 

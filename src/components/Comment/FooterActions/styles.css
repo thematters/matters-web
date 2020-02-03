@@ -11,9 +11,7 @@ footer {
     align-items: center;
 
     & > :global(* + *) {
-      margin-left: var(--spacing-loose);
-
-      line-height: 1;
+      padding-left: var(--spacing-x-tight);
     }
   }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Icon, IconColor, IconSize } from '~/components'
+import { Button, Icon, IconColor, IconSize } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
@@ -57,10 +57,11 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     <>
       <ModalSwitch modalId="shareModal">
         {(open: () => any) => (
-          <button
-            type="button"
+          <Button
+            spacing={['xtight', 'xtight']}
+            bgHoverColor="grey-lighter"
             aria-label={`分享《${title}》`}
-            onClick={e => {
+            onClick={(e: React.MouseEvent) => {
               openShareModal({ open })
 
               analytics.trackEvent(ANALYTICS_EVENTS, {
@@ -72,7 +73,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
             }}
           >
             <Icon.Share size={size} color={color} />
-          </button>
+          </Button>
         )}
       </ModalSwitch>
 

@@ -1,4 +1,4 @@
-import { Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -9,7 +9,12 @@ const ExpandButton = ({
   onClick: () => any
   restCount: number
 }) => (
-  <button className="expand-button" type="button" onClick={onClick}>
+  <Button
+    size={[null, '1.5rem']}
+    spacing={[0, 'base']}
+    bgHoverColor="green-lighter"
+    onClick={onClick}
+  >
     <TextIcon
       icon={<Icon.Down size="xs" />}
       size="sm"
@@ -24,6 +29,6 @@ const ExpandButton = ({
     </TextIcon>
 
     <style jsx>{styles}</style>
-  </button>
+  </Button>
 )
 export default ExpandButton

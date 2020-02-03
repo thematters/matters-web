@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Icon, LinkWrapper, TextIcon, Title, Translate } from '~/components'
+import { Button, Icon, TextIcon, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -44,13 +44,13 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
 
   return (
     <header className={headerClass}>
-      <LinkWrapper {...path} onClick={onClick}>
+      <Button {...path} onClick={onClick}>
         <Title type="nav" is="h2">
           {titleMap[type]}
         </Title>
-      </LinkWrapper>
+      </Button>
 
-      <LinkWrapper {...path} onClick={onClick}>
+      <Button {...path} onClick={onClick}>
         <TextIcon
           icon={<Icon.Right size="xs" />}
           color="grey-dark"
@@ -64,7 +64,7 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
             zh_hans={TEXT.zh_hans.viewAll}
           />
         </TextIcon>
-      </LinkWrapper>
+      </Button>
 
       <style jsx>{styles}</style>
     </header>

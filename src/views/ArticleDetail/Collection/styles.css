@@ -40,7 +40,3 @@
     padding: 0 var(--spacing-loose);
   }
 }
-
-.load-more {
-  padding: var(--spacing-base) 0 0;
-}

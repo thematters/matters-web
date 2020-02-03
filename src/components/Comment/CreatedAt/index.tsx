@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { DateTime, LinkWrapper } from '~/components'
+import { Button, DateTime } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -38,9 +38,9 @@ const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
   const path = toPath({ page: 'commentDetail', comment })
 
   return (
-    <LinkWrapper {...path} disabled={!hasLink}>
+    <Button {...path} is={!hasLink ? 'span' : undefined}>
       <DateTime date={comment.createdAt} />
-    </LinkWrapper>
+    </Button>
   )
 }
 

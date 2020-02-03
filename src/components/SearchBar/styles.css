@@ -41,8 +41,5 @@ form {
     position: absolute;
     top: 0;
     right: 0;
-    width: var(--search-bar-button-width);
-    height: var(--search-bar-height);
-    color: var(--color-black);
   }
 }

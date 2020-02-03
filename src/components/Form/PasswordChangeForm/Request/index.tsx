@@ -147,7 +147,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
       <div className="buttons">
         <Modal.FooterButton
           width="full"
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

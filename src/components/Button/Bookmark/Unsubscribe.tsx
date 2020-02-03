@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, IconSize } from '~/components'
+import { Button, Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
@@ -36,17 +36,18 @@ const Unsubscribe = ({
   })
 
   return (
-    <button
-      type="button"
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
       aria-label="取消收藏"
-      onClick={e => {
+      onClick={(e: React.MouseEvent) => {
         unsubscribe()
         e.stopPropagation()
       }}
       disabled={disabled}
     >
       <Icon.BookmarkActive color="black" size={size} />
-    </button>
+    </Button>
   )
 }
 

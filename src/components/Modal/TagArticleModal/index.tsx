@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
-import { ArticleDigest, Icon, LanguageContext, Translate } from '~/components'
+import {
+  ArticleDigest,
+  Button,
+  Icon,
+  LanguageContext,
+  Translate
+} from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
@@ -193,14 +199,15 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
                 }
               />
 
-              <button
-                type="button"
-                className="delete-handler"
-                aria-label="刪除"
-                onClick={() => onDelete(article)}
-              >
-                <Icon.Clear color="black" />
-              </button>
+              <span className="delete-handler">
+                <Button
+                  spacing={['base', 0]}
+                  aria-label="刪除"
+                  onClick={() => onDelete(article)}
+                >
+                  <Icon.Clear color="black" />
+                </Button>
+              </span>
             </li>
           ))}
         </ul>
@@ -213,7 +220,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           />
         </Modal.FooterButton>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >
