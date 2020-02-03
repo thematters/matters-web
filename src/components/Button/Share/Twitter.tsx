@@ -1,31 +1,32 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareTwitter } from '~/static/icons/share-twitter.svg'
 
-const Twitter = () => (
+const Twitter = ({ title, link }: { title: string; link: string }) => (
   <button
     type="button"
     onClick={() => {
-      const url = window.location.href
-      const text = window.document.title
       const shareUrl =
         'https://twitter.com/share?' +
         queryString.stringify({
-          url,
-          text,
+          url: link,
+          text: title,
           via: 'matterslab'
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.TWITTER,
-        url
+        url: link
       })
       return window.open(shareUrl, 'Share to Twitter')
     }}
   >
-    <TextIcon icon={<Icon.ShareTwitter />} spacing="tight" text="Twitter" />
+    <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="tight">
+      Twitter
+    </TextIcon>
   </button>
 )
 

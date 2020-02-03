@@ -6,9 +6,10 @@ import _get from 'lodash/get'
 import {
   ArticleDigest,
   InfiniteScroll,
+  List,
   LoadMore,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import { useResponsive } from '~/components/Hook'
@@ -17,16 +18,11 @@ import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
+
 import { SeachArticles } from './__generated__/SeachArticles'
 
 const SEARCH_ARTICLES = gql`
-  query SeachArticles(
-    $key: String!
-    $first: Int!
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query SeachArticles($key: String!, $first: Int!, $after: String) {
     search(input: { key: $key, type: Article, first: $first, after: $after }) {
       pageInfo {
         startCursor
@@ -58,7 +54,7 @@ const SearchArticles = ({ q }: { q: string }) => {
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
   if (loading && (!data?.search || isNewLoading)) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   const connectionPath = 'search'
@@ -104,32 +100,32 @@ const SearchArticles = ({ q }: { q: string }) => {
     >
       <PageHeader
         is="h2"
-        pageTitle={
+        title={
           <Translate
             zh_hant={TEXT.zh_hant.article}
             zh_hans={TEXT.zh_hans.article}
           />
         }
       />
-      <ul>
+      <List hasBorder>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.SEARCH_ARTICLE,
-                    location: i,
-                    entrance: q
-                  })
-                }
-              >
-                <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-              </li>
+              <List.Item key={cursor}>
+                <ArticleDigest.Feed
+                  article={node}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.SEARCH_ARTICLE,
+                      location: i,
+                      entrance: q
+                    })
+                  }
+                />
+              </List.Item>
             )
         )}
-      </ul>
+      </List>
 
       {!isMediumUp && pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

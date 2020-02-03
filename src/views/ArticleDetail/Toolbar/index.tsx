@@ -1,16 +1,16 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 import { BookmarkButton } from '~/components/Button/Bookmark'
 import ShareButton from '~/components/Button/Share'
 
-import { ToolbarArticle } from './__generated__/ToolbarArticle'
 import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'
-import ExtendButton from './ExtendButton'
-import MoreButton from './MoreButton'
 import ResponseButton from './ResponseButton'
 import styles from './styles.css'
+
+import { ToolbarArticle } from './__generated__/ToolbarArticle'
 
 const fragments = {
   article: gql`
@@ -20,15 +20,13 @@ const fragments = {
       ...AppreciatorsArticle
       ...BookmarkArticle
       ...ResponseButtonArticle
-      ...MoreButtonArticle
-      ...ExtendButtonArticle
+      ...DropdownActionsArticle
     }
     ${AppreciationButton.fragments.article}
     ${Appreciators.fragments.article}
     ${BookmarkButton.fragments.article}
     ${ResponseButton.fragments.article}
-    ${MoreButton.fragments.article}
-    ${ExtendButton.fragments.article}
+    ${DropdownActions.fragments.article}
   `
 }
 
@@ -49,8 +47,8 @@ const Toolbar = ({
         <div className="container">
           <AppreciationButton article={article} />
           <ResponseButton article={article} textPlacement="bottom" />
-          <BookmarkButton article={article} size="md" />
-          <ShareButton />
+          <BookmarkButton article={article} size="md-s" />
+          <ShareButton size="md-s" />
         </div>
         <style jsx>{styles}</style>
       </section>
@@ -74,10 +72,11 @@ const Toolbar = ({
           <AppreciationButton article={article} inFixedToolbar />
         )}
         <ResponseButton article={article} />
-        {!fixed && <ExtendButton article={article} />}
-        <BookmarkButton article={article} size="md" />
-        <ShareButton />
-        <MoreButton article={article} />
+        <BookmarkButton article={article} size="md-s" />
+        <ShareButton size="md-s" />
+        {!fixed && (
+          <DropdownActions article={article} color="black" size="md-s" />
+        )}
       </section>
 
       <style jsx>{styles}</style>

@@ -21,17 +21,6 @@ header {
 .content {
   @mixin max-height-scroll;
   padding: var(--spacing-base) var(--spacing-x-tight);
-
-  & ul {
-    & li {
-      padding: 0 var(--spacing-x-tight);
-    }
-    & li + li {
-      @mixin border-top-grey;
-      padding-top: var(--spacing-base);
-      margin-top: var(--spacing-base);
-    }
-  }
 }
 
 footer {

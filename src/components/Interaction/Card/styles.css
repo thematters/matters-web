@@ -1,0 +1,71 @@
+.card {
+  @mixin all-transition;
+  outline: none;
+
+  &:not(.disable) {
+    cursor: pointer;
+
+    /* &:hover,
+  &:focus {
+    background: var(--color-green-lighter);
+  } */
+  }
+}
+
+/* Background */
+.bg-grey-lighter {
+  background: var(--color-grey-lighter);
+
+  &:hover,
+  &:focus {
+    background: var(--color-grey-lighter-hover);
+  }
+}
+
+/* Spacing */
+.spacing-vertical-xtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
+}
+.spacing-vertical-tight {
+  padding-top: var(--spacing-tight);
+  padding-bottom: var(--spacing-tight);
+}
+.spacing-vertical-base {
+  padding-top: var(--spacing-base);
+  padding-bottom: var(--spacing-base);
+}
+
+.spacing-horizontal-xtight {
+  padding-left: var(--spacing-x-tight);
+  padding-right: var(--spacing-x-tight);
+}
+.spacing-horizontal-tight {
+  padding-left: var(--spacing-tight);
+  padding-right: var(--spacing-tight);
+}
+.spacing-horizontal-base {
+  padding-left: var(--spacing-base);
+  padding-right: var(--spacing-base);
+}
+
+/* Text */
+.text-size-md-s {
+  font-size: var(--font-size-md-s);
+}
+
+/* Border */
+.hasBorder {
+  overflow: hidden;
+}
+
+.border-grey-lighter {
+  border: 1px solid var(--color-grey-lighter);
+}
+
+.border-radius-xtight {
+  border-radius: var(--spacing-x-tight);
+}
+.border-radius-xxtight {
+  border-radius: var(--spacing-xx-tight);
+}

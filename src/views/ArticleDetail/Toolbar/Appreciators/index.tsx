@@ -7,8 +7,9 @@ import { ModalSwitch } from '~/components/ModalManager'
 
 import { numAbbr } from '~/common/utils'
 
-import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 import styles from './styles.css'
+
+import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 
 const fragments = {
   article: gql`

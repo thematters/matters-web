@@ -34,15 +34,15 @@ const WriteButton = ({
   const WriteIcon = loading ? (
     <Icon.Spinner size="md" className="u-motion-spin" />
   ) : (
-    <Icon.Write size="md" />
+    <Icon.Pen size="md" />
   )
 
   return (
     <>
       <Button
         className="u-sm-down-hide"
-        size="lg"
         bgColor="gold"
+        size="lg"
         aria-label="創作"
         icon={WriteIcon}
         onClick={onClick}

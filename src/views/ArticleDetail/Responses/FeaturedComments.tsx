@@ -2,25 +2,24 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { LoadMore, Spinner, Translate } from '~/components'
-import { CommentDigest } from '~/components/CommentDigest'
-import commentFragments from '~/components/GQL/fragments/comment'
+import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+
+import ResponseComment from './ResponseComment'
+import styles from './styles.css'
 
 import {
   ArticleFeaturedComments,
   ArticleFeaturedComments_article_featuredComments_edges_node
 } from './__generated__/ArticleFeaturedComments'
-import styles from './styles.css'
 
 const FEATURED_COMMENTS = gql`
   query ArticleFeaturedComments(
     $mediaHash: String
     $after: String
     $first: Int = 10
-    $hasDescendantComments: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
@@ -34,13 +33,13 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...FeedDigestComment
+            ...ResponseCommentComment
           }
         }
       }
     }
   }
-  ${commentFragments.feed}
+  ${ResponseComment.fragments.comment}
 `
 
 const FeaturedComments = () => {
@@ -85,21 +84,21 @@ const FeaturedComments = () => {
   return (
     <section className="featured-comments" id="featured-comments">
       <header>
-        <h3>
+        <Title type="feed" is="h3">
           <Translate
             zh_hant={TEXT.zh_hant.featuredComments}
             zh_hans={TEXT.zh_hans.featuredComments}
           />
-        </h3>
+        </Title>
       </header>
 
-      <ul>
+      <List spacing={['xloose', 0]} hasBorder>
         {comments.map(comment => (
-          <li key={comment.id}>
-            <CommentDigest.Feed comment={comment} inArticle hasForm />
-          </li>
+          <List.Item key={comment.id}>
+            <ResponseComment comment={comment} />
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

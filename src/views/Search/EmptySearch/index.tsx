@@ -9,7 +9,7 @@ const EmptySearch = ({
 }) => (
   <>
     <Empty
-      icon={!inSidebar && <Icon.Search size="xxl" />}
+      icon={!inSidebar && <Icon.Search size="xxl" color="grey-lighter" />}
       description={description}
       size={inSidebar ? 'sm' : undefined}
       spacing={['loose', '0']}

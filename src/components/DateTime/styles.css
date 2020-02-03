@@ -1,7 +1,6 @@
 time {
-  color: var(--color-grey);
-
+  color: var(--color-grey-light);
   font-size: var(--font-size-timestamp);
-  line-height: var(--line-height-timestamp);
   font-weight: var(--font-weight-timestamp);
+  line-height: var(--line-height-timestamp);
 }

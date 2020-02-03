@@ -1,46 +1,40 @@
+:root {
+  --extra-button-width: 1rem;
+}
+
 .container {
   position: relative;
   text-align: left;
 
-  &.has-arrow {
-    padding-right: calc(1rem + var(--spacing-xx-tight));
+  &.has-extra-button {
+    padding-right: calc(var(--extra-button-width) + var(--spacing-xx-tight));
 
     &:hover,
     &:focus {
-      & .arrow {
-        display: flex;
+      & .extra-button {
+        display: block;
       }
     }
   }
 
-  & :global(h2) {
+  & :global(h3) {
     @mixin truncate;
     min-width: 0;
-    margin-bottom: var(--spacing-xx-tight);
 
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    line-height: 1;
   }
 
-  & .arrow {
-    @mixin flex-center-all;
-
+  & .extra-button {
     display: none;
     position: absolute;
     right: 0;
     top: 0;
+    width: var(--extra-button-width);
     height: 100%;
-
-    pointer-events: initial;
   }
 }
 
-.content {
-  &.inactive {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  &.disabled {
-    pointer-events: none;
-  }
+footer {
+  margin-top: var(--spacing-x-tight);
+  font-size: 0;
 }

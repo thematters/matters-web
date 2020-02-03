@@ -1,0 +1,6 @@
+.cancel-button {
+  padding: 0 var(--spacing-base);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-matters-green);
+}

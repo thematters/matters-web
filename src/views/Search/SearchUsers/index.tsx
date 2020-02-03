@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   InfiniteScroll,
+  List,
   PageHeader,
   Spinner,
   Translate,
@@ -14,8 +15,9 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
-import { SeachUsers } from './__generated__/SeachUsers'
 import styles from './styles.css'
+
+import { SeachUsers } from './__generated__/SeachUsers'
 
 const SEARCH_USERS = gql`
   query SeachUsers($first: Int!, $key: String!, $after: String) {
@@ -29,19 +31,19 @@ const SEARCH_USERS = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
   <PageHeader
     is="h2"
-    pageTitle={
+    title={
       <Translate zh_hant={TEXT.zh_hant.user} zh_hans={TEXT.zh_hans.user} />
     }
   >
@@ -113,25 +115,26 @@ const SearchUser = ({
         loadMore={loadMore}
       >
         <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
-        <ul>
+        <List>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'User' && (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_USER,
-                      location: i,
-                      entrance: q
-                    })
-                  }
-                >
-                  <UserDigest.FullDesc user={node} />
-                </li>
+                <List.Item key={cursor}>
+                  <UserDigest.Rich
+                    user={node}
+                    hasFollow
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: FEED_TYPE.SEARCH_USER,
+                        location: i,
+                        entrance: q
+                      })
+                    }
+                  />
+                </List.Item>
               )
           )}
-        </ul>
+        </List>
       </InfiniteScroll>
 
       <style jsx>{styles}</style>

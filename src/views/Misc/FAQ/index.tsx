@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Head, LanguageContext, PageHeader, Translate } from '~/components'
+import { Head, LanguageContext } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import contentStyles from '~/common/styles/utils/content.article.css'
@@ -18,18 +18,9 @@ const FAQ = () => {
       <Head title={{ zh_hant: TEXT.zh_hant.faq, zh_hans: TEXT.zh_hans.faq }} />
 
       <section className="l-row">
-        <div className="l-col-4 l-col-md-1 l-col-lg-2">
+        <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <MiscTab />
-        </div>
-        <div className="l-col-4 l-col-md-6 l-col-lg-8">
-          <PageHeader
-            pageTitle={
-              <Translate
-                zh_hant={TEXT.zh_hant.faq}
-                zh_hans={TEXT.zh_hans.faq}
-              />
-            }
-          />
+
           <article
             dangerouslySetInnerHTML={{
               __html: translate({

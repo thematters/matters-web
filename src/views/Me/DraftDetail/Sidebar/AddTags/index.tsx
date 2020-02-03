@@ -8,11 +8,12 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
-import { AddTagsDraft } from './__generated__/AddTagsDraft'
-import { UpdateDraftTags } from './__generated__/UpdateDraftTags'
 import SearchTags from './SearchTags'
 import styles from './styles.css'
 import Tag from './Tag'
+
+import { AddTagsDraft } from './__generated__/AddTagsDraft'
+import { UpdateDraftTags } from './__generated__/UpdateDraftTags'
 
 const fragments = {
   draft: gql`

@@ -17,7 +17,14 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
       is="span"
       bgColor="transparent"
       outlineColor="grey"
-      style={{ borderWidth: 1, width: '4rem', height: 20 }}
+      style={{
+        borderWidth: 1,
+        height: 16,
+        width: 52,
+        fontSize: 9,
+        fontWeight: 600,
+        lineHeight: 1
+      }}
     >
       {user.isFollowee ? (
         <Translate
@@ -38,7 +45,6 @@ FollowState.fragments = {
   user: gql`
     fragment FollowStateUser on User {
       id
-      userName
       isFollower
       isFollowee
     }

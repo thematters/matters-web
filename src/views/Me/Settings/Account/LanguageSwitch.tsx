@@ -28,13 +28,14 @@ export const LanguageSwitch = () => {
       trigger="click"
       onCreate={setInstance}
     >
-      <button type="button" className="sort-button">
+      <button type="button" className="sort-button" aria-haspopup="true">
         <TextIcon
-          icon={<Icon.Expand style={{ width: 6, height: 10 }} />}
+          icon={<Icon.Expand size="xs" />}
           spacing="xtight"
-          text={textMap[lang]}
           textPlacement="left"
-        />
+        >
+          {textMap[lang]}
+        </TextIcon>
       </button>
     </Dropdown>
   )

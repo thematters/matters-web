@@ -22,10 +22,11 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
-const ALL_TAGSS = gql`
+import { AllTags } from './__generated__/AllTags'
+
+const ALL_TAGS = gql`
   query AllTags($after: String) {
     viewer {
       id
@@ -77,7 +78,7 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
+  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
 
   if (loading) {
     return <Spinner />
@@ -117,7 +118,7 @@ const Tags = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <div className="l-row">
+      <section className="l-row">
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
           {leftEdges.map(({ node, cursor }, i) => (
             <li
@@ -148,7 +149,9 @@ const Tags = () => {
             </li>
           ))}
         </ul>
-      </div>
+
+        <style jsx>{styles}</style>
+      </section>
     </InfiniteScroll>
   )
 }
@@ -166,7 +169,7 @@ export default () => {
 
         <PageHeader
           buttons={<CreateTagButton />}
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
               zh_hans={TEXT.zh_hans.allTags}
@@ -174,7 +177,7 @@ export default () => {
           }
         />
 
-        <section>
+        <section className="container">
           <Tags />
         </section>
       </article>

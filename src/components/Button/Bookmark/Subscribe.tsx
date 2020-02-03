@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
+import { Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Translate } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { subscribePush } from '~/common/utils'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import { SubscribeArticle } from './__generated__/SubscribeArticle'
 
@@ -28,7 +28,7 @@ const Subscribe = ({
   disabled
 }: {
   article: BookmarkArticle
-  size: 'xs' | 'sm' | 'md'
+  size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
 }) => {
   const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
@@ -73,7 +73,13 @@ const Subscribe = ({
             />
           ),
           customButton: (
-            <button type="button" onClick={() => subscribePush()}>
+            <button
+              type="button"
+              onClick={e => {
+                subscribePush()
+                e.stopPropagation()
+              }}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.confirmPush}
                 zh_hans={TEXT.zh_hans.confirmPush}
@@ -92,11 +98,7 @@ const Subscribe = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {size === 'md' ? (
-        <Icon.BookmarkRegularInactive size="md" />
-      ) : (
-        <Icon.BookmarkSmallInactive size={size === 'xs' ? 'xs' : undefined} />
-      )}
+      <Icon.Bookmark size={size} />
     </button>
   )
 }

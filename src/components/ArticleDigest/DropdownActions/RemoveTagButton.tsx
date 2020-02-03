@@ -7,14 +7,18 @@ import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 
-import { DeleteArticleTags } from './__generated__/DeleteArticleTags'
-import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
 import styles from './styles.css'
 
-const DELETE_ARTICLE_TAGS = gql`
-  mutation DeleteArticleTags($id: ID!, $articles: [ID!]) {
-    deleteArticleTags(input: { id: $id, articles: $articles }) {
+import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
+import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
+
+const DELETE_ARTICLES_TAGS = gql`
+  mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
+    deleteArticlesTags(input: { id: $id, articles: $articles }) {
       id
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `
@@ -28,7 +32,7 @@ const fragments = {
 }
 
 const TextIconRemoveTag = () => (
-  <TextIcon icon={<Icon.Remove />} spacing="tight">
+  <TextIcon icon={<Icon.RemoveMedium />} spacing="tight">
     <Translate zh_hant="取消標籤" zh_hans="取消标签" />
   </TextIcon>
 )
@@ -48,8 +52,8 @@ const RemoveTagButton = ({
   } = router
   const tagId = _isArray(id) ? id[0] : id
 
-  const [deleteArticlesTags] = useMutation<DeleteArticleTags>(
-    DELETE_ARTICLE_TAGS,
+  const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
+    DELETE_ARTICLES_TAGS,
     { variables: { id: tagId, articles: [article.id] } }
   )
 
@@ -66,7 +70,8 @@ const RemoveTagButton = ({
   return (
     <button
       type="button"
-      onClick={async () => {
+      onClick={async event => {
+        event.stopPropagation()
         await deleteArticlesTags()
         if (instance) {
           instance.props.onHidden = sync

@@ -21,8 +21,9 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 import styles from './styles.css'
+
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
 interface FormProps {
   user: { [key: string]: any }
@@ -155,7 +156,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                       isSubmitting ? (
                         <Icon.Spinner size="md" />
                       ) : (
-                        <Icon.Write size="md" />
+                        <Icon.Pen size="md" />
                       )
                     }
                   >

@@ -9,18 +9,16 @@ export default () => (
   <main>
     <Head
       title={{
-        zh_hant: TEXT.zh_hant.myDrafts,
-        zh_hans: TEXT.zh_hans.myDrafts
+        zh_hant: TEXT.zh_hant.draft,
+        zh_hans: TEXT.zh_hans.draft
       }}
     />
 
     <UserProfile />
 
     <section className="l-row">
-      <div className="l-col-4 l-col-md-1 l-col-lg-2">
+      <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
         <UserTabs />
-      </div>
-      <div className="l-col-4 l-col-md-6 l-col-lg-8">
         <MeDrafts />
       </div>
     </section>

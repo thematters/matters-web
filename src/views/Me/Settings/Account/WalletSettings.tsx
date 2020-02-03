@@ -8,8 +8,9 @@ import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 
-import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 import styles from './styles.css'
+
+import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
@@ -80,7 +81,7 @@ const WalletSetting = () => {
       {likerId && (
         <a href="https://like.co/in" className="u-link-green" target="_blank">
           <TextIcon
-            icon={<Icon.ArrowRightGreen />}
+            icon={<Icon.Right size="xs" />}
             textPlacement="left"
             weight="md"
           >
@@ -101,7 +102,7 @@ const WalletSettings = () => {
   return (
     <section className="section-container">
       <PageHeader
-        pageTitle={
+        title={
           <Translate
             zh_hant={TEXT.zh_hant.walletSetting}
             zh_hans={TEXT.zh_hans.walletSetting}

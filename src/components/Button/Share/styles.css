@@ -28,7 +28,7 @@
   }
 }
 
-.link-container {
+.copy {
   @mixin flex-center-space-between;
   @mixin border-top-grey;
   padding: var(--spacing-base) var(--spacing-loose);

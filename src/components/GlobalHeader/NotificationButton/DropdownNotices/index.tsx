@@ -1,13 +1,14 @@
 import Link from 'next/link'
 
-import { Error, Icon, Spinner, TextIcon, Translate } from '~/components'
+import { Error, Icon, List, Spinner, TextIcon, Translate } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
-import NoticeDigest from '~/components/NoticeDigest'
+import { Notice } from '~/components/Notice'
 
 import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
+
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 interface DropdownNoticesProps {
   hideDropdown: () => void
@@ -23,7 +24,7 @@ const Header = () => (
     </h4>
     <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
       <a>
-        <TextIcon icon={<Icon.Settings />} color="grey-dark">
+        <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
           <Translate
             zh_hant={TEXT.zh_hant.setting}
             zh_hans={TEXT.zh_hans.setting}
@@ -41,7 +42,7 @@ const Footer = () => (
     <Link {...PATHS.ME_NOTIFICATIONS}>
       <a>
         <TextIcon
-          icon={<Icon.ArrowRightGreen />}
+          icon={<Icon.Right size="xs" />}
           color="green"
           textPlacement="left"
           weight="md"
@@ -100,17 +101,17 @@ const DropdownNotices = ({
       <Header />
 
       <section className="content">
-        <ul>
+        <List spacing={['xloose', 0]} hasBorder>
           {edges && edges.length > 0 ? (
             edges.map(({ node, cursor }) => (
-              <li key={cursor}>
-                <NoticeDigest notice={node} key={cursor} />
-              </li>
+              <List.Item key={cursor}>
+                <Notice notice={node} />
+              </List.Item>
             ))
           ) : (
             <EmptyNotice />
           )}
-        </ul>
+        </List>
       </section>
 
       <Footer />

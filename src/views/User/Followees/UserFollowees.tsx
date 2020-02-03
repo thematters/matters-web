@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Head, InfiniteScroll, Placeholder, Translate } from '~/components'
+import { Head, InfiniteScroll, List, Spinner, Translate } from '~/components'
 import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -26,13 +26,13 @@ const USER_FOLLOWEES_FEED = gql`
         edges {
           cursor
           node {
-            ...UserDigestFullDescUser
+            ...UserDigestRichUser
           }
         }
       }
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
 `
 
 const UserFollowees = () => {
@@ -46,7 +46,7 @@ const UserFollowees = () => {
   )
 
   if (loading || !data || !data.user) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -95,22 +95,23 @@ const UserFollowees = () => {
         }}
       />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <List>
           {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.FOLLOWEE,
-                  location: i,
-                  entrance: user.id
-                })
-              }
-            >
-              <UserDigest.FullDesc user={node} nameSize="sm" />
-            </li>
+            <List.Item key={cursor}>
+              <UserDigest.Rich
+                user={node}
+                hasFollow
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.FOLLOWEE,
+                    location: i,
+                    entrance: user.id
+                  })
+                }
+              />
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )

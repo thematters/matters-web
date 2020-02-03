@@ -9,9 +9,10 @@ import { Spinner } from '~/components/Spinner'
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
-import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 import ClearHistoryButton from './ClearHistoryButton'
 import styles from './styles.css'
+
+import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 
 interface Props {
   hideDropdown: () => void
@@ -32,7 +33,7 @@ const SEARCH_AUTOCOMPLETE = gql`
 
 const EmptyAutoComplete = () => (
   <Empty
-    icon={<Icon.Search size="xl" />}
+    icon={<Icon.Search color="grey" size="xl" />}
     description={<Translate zh_hant="暫無搜尋歷史" zh_hans="暂无搜索历史" />}
     size="sm"
   />

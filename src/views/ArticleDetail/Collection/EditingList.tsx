@@ -8,12 +8,13 @@ import { Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
+import styles from './styles.css'
+
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import {
   EditorCollection,
   EditorCollection_article_collection_edges_node
 } from './__generated__/EditorCollection'
-import styles from './styles.css'
 
 const EDITOR_COLLECTION = gql`
   query EditorCollection($mediaHash: String) {

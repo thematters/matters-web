@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 import { Icon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import Cover from '~/components/UserProfile/Cover'
 
@@ -12,8 +11,10 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
-import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 
 /**
  * This component is for uploading profile cover.
@@ -104,7 +105,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
         <div className="buttons">
           <button type="button" className="button">
             <label>
-              <Icon.Camera size="md" />
+              <Icon.Camera color="white" />
               <span className="upload">
                 <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
               </span>

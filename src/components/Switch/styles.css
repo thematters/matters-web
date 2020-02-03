@@ -1,14 +1,17 @@
 :root {
-  --switch-width: 2.5rem;
-  --switch-height: 1.5rem;
+  --switch-width: 2.25rem;
+  --switch-height: 1.25rem;
   --switch-border-radius: 0.75rem;
-  --switch-border-width: 0.125rem;
+  --switch-spacing: 0.125rem;
+  --switch-background: #f7f7f7;
 }
 
 .switch {
   display: inline-block;
   position: relative;
 
+  font-size: 0;
+  line-height: 1;
   user-select: none;
   tap-highlight-color: transparent;
 }
@@ -26,21 +29,18 @@
   width: var(--switch-width);
   height: var(--switch-height);
 
-  background: var(--color-white);
-  box-shadow: inset 0 0 0 var(--switch-border-width) #e5e5e5;
+  background: var(--switch-background);
   border-radius: var(--switch-border-radius);
   line-height: 1;
 }
 
 .switch input + span:after {
-  @mixin border-grey;
-
   content: '';
   display: block;
 
   border-radius: var(--switch-border-radius);
   background: var(--color-white);
-  box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.06), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 4px var(--color-line-grey);
 }
 
 .switch input + span:after,
@@ -48,30 +48,26 @@
   @mixin all-transition;
 
   position: absolute;
-  top: var(--switch-border-width);
-  left: var(--switch-border-width);
-  width: calc(var(--switch-height) - var(--switch-border-width) * 2);
-  height: calc(var(--switch-height) - var(--switch-border-width) * 2);
+  top: var(--switch-spacing);
+  left: var(--switch-spacing);
+  width: calc(var(--switch-height) - var(--switch-spacing) * 2);
+  height: calc(var(--switch-height) - var(--switch-spacing) * 2);
 }
 
 .switch input:checked {
   & + span {
-    box-shadow: inset 0 0 0 var(--switch-height) var(--color-matters-gold);
+    box-shadow: inset 0 0 0 var(--switch-height) var(--color-matters-green);
   }
 }
 .switch input:checked + span:after,
 .switch input:checked + span + .loading :global(svg) {
-  left: calc(var(--switch-width) / 2 - var(--switch-border-width));
+  left: auto;
+  right: var(--switch-spacing);
 }
 
-.switch:hover {
-  & input + span {
-    &:after {
-      border-color: var(--color-line-grey);
-    }
+.switch:hover,
+.switch:focus {
+  & input + span:after {
+    box-shadow: 0px 2px 4px var(--color-line-grey-dark);
   }
-}
-
-.narrow {
-  line-height: 1;
 }

@@ -11,13 +11,12 @@ import {
   Avatar,
   Expandable,
   Icon,
-  Placeholder,
+  Spinner,
   Tooltip,
   Translate
 } from '~/components'
 import { FollowButton } from '~/components/Button/Follow'
 import ShareButton from '~/components/Button/Share'
-import ShareModal from '~/components/Button/Share/ShareModal'
 import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
 import { ViewerContext } from '~/components/Viewer'
@@ -25,12 +24,13 @@ import { ViewerContext } from '~/components/Viewer'
 import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
-import { MeProfileUser } from './__generated__/MeProfileUser'
-import { UserProfileUser } from './__generated__/UserProfileUser'
 import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
+
+import { MeProfileUser } from './__generated__/MeProfileUser'
+import { UserProfileUser } from './__generated__/UserProfileUser'
 
 const fragments = {
   user: gql`
@@ -110,7 +110,7 @@ const CoverContainer: React.FC = ({ children }) => (
   </div>
 )
 
-const BaseUserProfile = () => {
+export const UserProfile = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
@@ -134,7 +134,7 @@ const BaseUserProfile = () => {
     return (
       <section className={containerClass}>
         <CoverContainer>
-          <Placeholder.UserProfile />
+          <Spinner />
         </CoverContainer>
 
         <style jsx>{styles}</style>
@@ -195,14 +195,14 @@ const BaseUserProfile = () => {
                 <section className="buttons">
                   <span className="follows">
                     <FollowButton user={user} size="default" />
-                    <span className="u-sm-down-hide follow-state">
+                    <section className="u-sm-down-hide follow-state">
                       {!isMe && <FollowButton.State user={user} />}
-                    </span>
+                    </section>
                   </span>
 
                   <span className="u-sm-up-hide">
                     <DropdownActions user={user} />
-                    <ShareButton />
+                    <ShareButton size="md-s" />
                   </span>
                 </section>
               )}
@@ -258,7 +258,7 @@ const BaseUserProfile = () => {
 
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     {!isMe && <DropdownActions user={user} />}
-                    <ShareButton />
+                    <ShareButton size="md-s" />
                   </span>
                 </section>
               </header>
@@ -303,10 +303,3 @@ const BaseUserProfile = () => {
     </section>
   )
 }
-
-export const UserProfile = () => (
-  <>
-    <BaseUserProfile />
-    <ShareModal />
-  </>
-)

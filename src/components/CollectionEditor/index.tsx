@@ -9,10 +9,11 @@ import {
 } from 'react-beautiful-dnd'
 
 import { ArticleDigest, Icon } from '~/components'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 interface State {
   articles: DropdownDigestArticle[]
@@ -108,13 +109,21 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon.Drag />
+                          <Icon.Sort color="grey" />
                         </span>
 
                         <ArticleDigest.Dropdown
                           article={article}
-                          hasArrow
+                          titleTextSize="md-s"
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                           disabled
+                          extraButton={
+                            <ArticleDigest.Dropdown.OpenExternalLink
+                              article={article}
+                            />
+                          }
                         />
 
                         <button
@@ -123,7 +132,7 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                           aria-label="刪除"
                           onClick={() => this.onDelete(article)}
                         >
-                          <Icon.DeleteBlackCircle />
+                          <Icon.Clear color="black" />
                         </button>
                       </li>
                     )}

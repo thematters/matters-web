@@ -1,78 +1,44 @@
 :root {
-  --digest-sidebar-cover-size: 72px;
-  --type-collection-cover-width: 10rem;
+  --article-digest-sidebar-cover-width: 4.5rem;
+  --article-digest-sidebar-cover-width-lg: 10.5rem;
+  --article-digest-sidebar-card-spacing: var(--spacing-tight);
 }
 
-.container {
-  padding-bottom: var(--spacing-loose);
+footer {
+  margin-top: var(--spacing-tight);
+
+  font-size: 0;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-
+.container.has-cover {
   position: relative;
+  min-height: var(--article-digest-sidebar-cover-width);
+  padding-right: calc(
+    var(--article-digest-sidebar-cover-width) + var(--spacing-x-tight)
+  );
 
-  & .left {
-    padding-right: var(--spacing-loose);
+  & .cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--article-digest-sidebar-cover-width);
+    height: var(--article-digest-sidebar-cover-width);
 
-    & :global(.actions > *) {
-      margin-top: var(--spacing-x-tight);
-    }
+    border-radius: var(--spacing-xx-tight);
   }
-}
 
-.cover {
-  flex-shrink: 0;
-  width: var(--digest-sidebar-cover-size);
-  height: var(--digest-sidebar-cover-size);
-}
-
-.content {
-  &.no-cover {
-    display: block;
-
-    & .left {
-      padding-right: none;
-    }
-  }
-  &.type-collection {
-    padding: var(--spacing-base);
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    overflow: hidden;
+  &.has-background {
+    min-height: auto;
+    padding-right: calc(
+      var(--article-digest-sidebar-cover-width-lg) + var(--spacing-base)
+    );
 
     & .cover {
-      display: none;
-    }
+      margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
+      width: var(--article-digest-sidebar-cover-width-lg);
+      height: calc(100% + var(--article-digest-sidebar-card-spacing) * 2);
 
-    @media (--sm-up) {
-      padding-right: calc(
-        var(--spacing-base) + var(--type-collection-cover-width)
-      );
-
-      &.no-cover {
-        padding-right: var(--spacing-base);
-      }
-      & .cover {
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: var(--type-collection-cover-width);
-      }
+      border-radius: 0;
     }
   }
-  &.inactive {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  &.disabled {
-    pointer-events: none;
-  }
-}
-
-.no-padding {
-  padding: 0;
 }

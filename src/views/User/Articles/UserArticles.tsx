@@ -7,11 +7,11 @@ import {
   Head,
   Icon,
   InfiniteScroll,
-  Placeholder
+  List,
+  Spinner
 } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 import { Translate } from '~/components/Language'
 import Throw404 from '~/components/Throw404'
@@ -22,6 +22,8 @@ import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
 import styles from './styles.css'
+
+import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
 
 const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
   const { articleCount: articles, totalWordCount: words } = (data &&
@@ -37,7 +39,7 @@ const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
       <span className="num">&nbsp;{articles}&nbsp;</span>
       <Translate zh_hant="篇作品" zh_hans="篇作品" />
 
-      <Icon.DotDivider style={{ width: 18, height: 18 }} />
+      <Icon.DotDivider />
 
       <Translate zh_hant="累積創作" zh_hans="累积创作" />
       <span className="num">&nbsp;{words}&nbsp;</span>
@@ -63,7 +65,7 @@ const UserArticles = () => {
   }
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -122,10 +124,10 @@ const UserArticles = () => {
       <CustomHead />
       <ArticleSummaryInfo data={data} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <List hasBorder>
           {edges.map(({ node, cursor }, i) => {
             if (
-              node.state !== 'active' &&
+              node.articleState !== 'active' &&
               viewer.id !== node.author.id &&
               viewer.isAdmin
             ) {
@@ -133,28 +135,21 @@ const UserArticles = () => {
             }
 
             return (
-              <li
-                key={cursor}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.USER_ARTICLE,
-                    location: i
-                  })
-                }
-              >
+              <List.Item key={cursor}>
                 <ArticleDigest.Feed
                   article={node}
-                  hasBookmark
-                  hasDateTime
-                  hasFingerprint
-                  hasMoreButton
-                  hasState
-                  hasSticky
+                  inUserArticles
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.USER_ARTICLE,
+                      location: i
+                    })
+                  }
                 />
-              </li>
+              </List.Item>
             )
           })}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )

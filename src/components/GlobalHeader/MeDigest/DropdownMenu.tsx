@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -15,6 +14,8 @@ import {
   toPath,
   unsubscribePush
 } from '~/common/utils'
+
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
 const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
@@ -65,7 +66,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
       <Menu.Item>
         <Link {...userPath}>
           <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.Me />} spacing="xtight">
+            <TextIcon icon={<Icon.ProfileMedium />} spacing="xtight">
               <Translate
                 zh_hant={TEXT.zh_hant.myProfile}
                 zh_hans={TEXT.zh_hans.myProfile}
@@ -91,7 +92,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
       <Menu.Item>
         <Link {...userHistoryPath}>
           <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.ReadingHistory />} spacing="xtight">
+            <TextIcon icon={<Icon.HistoryMedium />} spacing="xtight">
               <Translate
                 zh_hant={TEXT.zh_hant.readHistory}
                 zh_hans={TEXT.zh_hans.readHistory}
@@ -108,7 +109,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
           as={PATHS.ME_SETTINGS_ACCOUNT.as}
         >
           <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.Settings />} spacing="xtight">
+            <TextIcon icon={<Icon.SettingsMedium />} spacing="xtight">
               <Translate
                 zh_hant={TEXT.zh_hant.setting}
                 zh_hans={TEXT.zh_hans.setting}
@@ -120,7 +121,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
 
       <Menu.Item>
         <button type="button" onClick={onClickLogout}>
-          <TextIcon icon={<Icon.LogOut />} spacing="xtight">
+          <TextIcon icon={<Icon.LogoutMedium />} spacing="xtight">
             <Translate
               zh_hant={TEXT.zh_hant.logout}
               zh_hans={TEXT.zh_hans.logout}

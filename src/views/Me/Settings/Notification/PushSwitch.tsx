@@ -2,12 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 
 import { Translate } from '~/components'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { subscribePush, unsubscribePush } from '~/common/utils'
 
 import SettingItem from './SettingItem'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 const PushSwitch = () => {
   const [loading, setLoading] = useState(false)

@@ -4,10 +4,12 @@
     margin-top: var(--spacing-loose);
   }
 
+  & section {
+    margin-top: var(--spacing-loose);
+  }
   & section + section {
     @mixin border-top-grey;
     padding-top: var(--spacing-loose);
-    margin-top: var(--spacing-loose);
   }
 }
 

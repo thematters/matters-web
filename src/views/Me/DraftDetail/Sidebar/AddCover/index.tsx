@@ -8,9 +8,10 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
+import styles from './styles.css'
+
 import { AddCoverDraft } from './__generated__/AddCoverDraft'
 import { UpdateDraftCover } from './__generated__/UpdateDraftCover'
-import styles from './styles.css'
 
 const fragments = {
   draft: gql`

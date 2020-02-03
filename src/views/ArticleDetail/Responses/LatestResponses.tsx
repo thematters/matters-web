@@ -3,20 +3,14 @@ import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import _has from 'lodash/has'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { LoadMore, Spinner, Translate } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
-import { CommentDigest } from '~/components/CommentDigest'
+import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 import EmptyResponse from '~/components/Empty/EmptyResponse'
 import { QueryError } from '~/components/GQL'
-import { ArticleDetailResponses } from '~/components/GQL/fragments/response'
-import { ArticleResponses as ArticleResponsesType } from '~/components/GQL/queries/__generated__/ArticleResponses'
-import ARTICLE_RESPONSES from '~/components/GQL/queries/articleResponses'
-import { useEventListener } from '~/components/Hook'
+import { useEventListener, useResponsive } from '~/components/Hook'
 import { Switch } from '~/components/Switch'
 
 import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
@@ -28,39 +22,100 @@ import {
   unshiftConnections
 } from '~/common/utils'
 
-import {
-  ArticleCommentAdded,
-  ArticleCommentAdded_nodeEdited_Article
-} from './__generated__/ArticleCommentAdded'
+import ResponseArticle from './ResponseArticle'
+import ResponseComment from './ResponseComment'
 import styles from './styles.css'
+
+import {
+  LatestResponses as LatestResponsesType,
+  LatestResponses_article_responses_edges_node
+} from './__generated__/LatestResponses'
+import {
+  ResponseAdded,
+  ResponseAdded_nodeEdited_Article
+} from './__generated__/ResponseAdded'
 
 const RESPONSES_COUNT = 15
 
-const SUBSCRIBE_RESPONSES = gql`
-  subscription ArticleCommentAdded(
+const LatestResponsesArticle = gql`
+  fragment LatestResponsesArticle on Article {
+    id
+    responseCount
+    responses(
+      input: {
+        after: $after
+        before: $before
+        first: $first
+        includeAfter: $includeAfter
+        includeBefore: $includeBefore
+        articleOnly: $articleOnly
+      }
+    ) {
+      totalCount
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          ... on Article {
+            ...ResponseArticleArticle
+          }
+          ... on Comment {
+            ...ResponseCommentComment
+          }
+        }
+      }
+    }
+  }
+  ${ResponseArticle.fragments.article}
+  ${ResponseComment.fragments.comment}
+`
+
+const LATEST_RESPONSES = gql`
+  query LatestResponses(
+    $mediaHash: String
+    $before: String
+    $after: String
+    $first: Int = 8
+    $includeAfter: Boolean
+    $includeBefore: Boolean
+    $articleOnly: Boolean
+  ) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      mediaHash
+      live
+      ...LatestResponsesArticle
+    }
+  }
+  ${LatestResponsesArticle}
+`
+
+const SUBSCRIBE_RESPONSE_ADDED = gql`
+  subscription ResponseAdded(
     $id: ID!
     $before: String
     $after: String
     $first: Int
     $includeAfter: Boolean
     $includeBefore: Boolean
-    $hasDescendantComments: Boolean = true
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
     $articleOnly: Boolean
   ) {
     nodeEdited(input: { id: $id }) {
       id
       ... on Article {
         id
-        ...ArticleDetailResponses
+        ...LatestResponsesArticle
       }
     }
   }
-  ${ArticleDetailResponses}
+  ${LatestResponsesArticle}
 `
 
 const LatestResponses = () => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
@@ -89,7 +144,7 @@ const LatestResponses = () => {
     fetchMore,
     subscribeToMore,
     refetch
-  } = useQuery<ArticleResponsesType>(ARTICLE_RESPONSES, {
+  } = useQuery<LatestResponsesType>(LATEST_RESPONSES, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -168,13 +223,15 @@ const LatestResponses = () => {
     })
   }
 
-  const responses = filterResponses((edges || []).map(({ node }) => node))
+  const responses = filterResponses(
+    (edges || []).map(({ node }) => node)
+  ) as LatestResponses_article_responses_edges_node[]
 
   // real time update with websocket
   useEffect(() => {
     if (article && article.live && edges && pageInfo) {
-      subscribeToMore<ArticleCommentAdded>({
-        document: SUBSCRIBE_RESPONSES,
+      subscribeToMore<ResponseAdded>({
+        document: SUBSCRIBE_RESPONSE_ADDED,
         variables: {
           id: article.id,
           before: pageInfo.endCursor,
@@ -187,7 +244,7 @@ const LatestResponses = () => {
           }
           const oldData = prev.article
           const newData = subscriptionData.data
-            .nodeEdited as ArticleCommentAdded_nodeEdited_Article
+            .nodeEdited as ResponseAdded_nodeEdited_Article
           const diff = _differenceBy(
             newData.responses.edges,
             oldData.responses.edges || [],
@@ -250,18 +307,18 @@ const LatestResponses = () => {
   return (
     <section className="latest-responses" id="latest-responses">
       <header>
-        <h3>
+        <Title type="feed" is="h3">
           <Translate
             zh_hant={TEXT.zh_hant.latestResponses}
             zh_hans={TEXT.zh_hans.latestResponses}
           />
-        </h3>
+        </Title>
 
-        <div className="switch">
+        <div className="latest-responses-switch">
           <Switch
             onChange={() => setArticleOnlyMode(!articleOnlyMode)}
             checked={articleOnlyMode}
-            extraClass="narrow"
+            loading={loading}
           />
           <span>
             <Translate
@@ -277,24 +334,22 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <ul>
+      <List spacing={['xloose', 0]} hasBorder>
         {responses.map(response => (
-          <li key={response.id}>
-            {_has(response, 'title') ? (
-              <ArticleDigest.Response article={response} hasBookmark />
+          <List.Item key={response.id}>
+            {response.__typename === 'Article' ? (
+              <ResponseArticle article={response} hasCover={isMediumUp} />
             ) : (
-              <CommentDigest.Feed
+              <ResponseComment
                 comment={response}
-                hasForm
+                defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
-                inArticle
-                expandDescendants={response.id === parentId && !!descendantId}
                 commentCallback={commentCallback}
               />
             )}
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
       {pageInfo && pageInfo.hasNextPage && (
         <LoadMore onClick={loadMore} loading={loading} />

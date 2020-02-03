@@ -3,10 +3,11 @@ import { useContext } from 'react'
 
 import { ViewerContext } from '~/components/Viewer'
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
+
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
 
 const fragments = {
   user: gql`

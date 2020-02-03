@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, Placeholder } from '~/components'
+import { ArticleDigest, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 import { QueryError } from '~/components/GQL'
 
@@ -10,11 +10,7 @@ import { mergeConnections } from '~/common/utils'
 import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
 
 const ME_BOOKMARK_FEED = gql`
-  query MeBookmarkFeed(
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query MeBookmarkFeed($after: String) {
     viewer {
       id
       subscriptions(input: { first: 10, after: $after }) {
@@ -41,7 +37,7 @@ const MeBookmarks = () => {
   )
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -70,13 +66,13 @@ const MeBookmarks = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
+      <List hasBorder>
         {edges.map(({ node, cursor }) => (
-          <li key={cursor}>
-            <ArticleDigest.Feed article={node} hasBookmark hasDateTime />
-          </li>
+          <List.Item key={cursor}>
+            <ArticleDigest.Feed article={node} />
+          </List.Item>
         ))}
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

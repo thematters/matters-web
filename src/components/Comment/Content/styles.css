@@ -1,0 +1,12 @@
+.inactive-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+
+  & .expand-button {
+    margin-left: var(--spacing-x-tight);
+  }
+}

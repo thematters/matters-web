@@ -22,7 +22,7 @@ const PublishedState = () => {
         <Link {...path}>
           <a>
             <TextIcon
-              icon={<Icon.ArrowRightWhite style={{ width: 16, hieght: 10 }} />}
+              icon={<Icon.Right size="xs" color="white" />}
               textPlacement="left"
             >
               <Translate zh_hant="查看我的作品" zh_hans="查看我的作品" />

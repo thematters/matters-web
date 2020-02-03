@@ -1,21 +1,7 @@
-.feature {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xl);
-  line-height: 1.5;
-}
-
 .article {
   font-size: var(--font-size-article-title);
   line-height: var(--line-height-article-title);
   font-weight: var(--font-weight-article-title);
-}
-
-.page {
-  @mixin font-serif;
-
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
-  line-height: 1.5;
 }
 
 .feed {
@@ -45,5 +31,11 @@
 .sidebar {
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-md-s);
+  line-height: 1.6;
+}
+
+.nav {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
   line-height: 1.6;
 }

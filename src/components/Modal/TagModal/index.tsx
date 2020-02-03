@@ -14,8 +14,9 @@ import { Modal } from '~/components/Modal'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
 
-import { PutTag } from './__generated__/PutTag'
 import styles from './styles.css'
+
+import { PutTag } from './__generated__/PutTag'
 
 const PUT_TAG = gql`
   mutation PutTag($id: ID, $content: String, $description: String) {

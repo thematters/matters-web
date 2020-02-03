@@ -1,10 +1,11 @@
 import { Translate } from '~/components'
 import RetryButton from '~/components/DraftDigest/Components/RetryButton'
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { Toast } from '~/components/Toast'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 const ErrorState = ({ draft }: { draft: PublishStateDraft }) => {
   analytics.trackEvent(ANALYTICS_EVENTS.PUBLISH_ERROR, { entrance: draft.id })

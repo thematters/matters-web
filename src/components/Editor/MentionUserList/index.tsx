@@ -1,5 +1,6 @@
 import UserList from '~/components/Dropdown/UserList'
-import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
+
+import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 const MentionUserList = ({
   mentionLoading,
@@ -7,8 +8,8 @@ const MentionUserList = ({
   mentionUsers
 }: {
   mentionLoading?: boolean
-  mentionSelection: (user: UserDigestBriefDescUser) => void
-  mentionUsers: UserDigestBriefDescUser[]
+  mentionSelection: (user: UserDigestMiniUser) => void
+  mentionUsers: UserDigestMiniUser[]
 }) => (
   <UserList
     loading={mentionLoading}

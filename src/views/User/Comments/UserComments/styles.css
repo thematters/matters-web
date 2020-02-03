@@ -1,17 +1,3 @@
-.article-list {
-  & .article-item {
-    @mixin border-bottom-grey;
-
-    & + .article-item {
-      margin-top: var(--spacing-loose);
-    }
-
-    & h3 {
-      font-size: var(--font-size-md);
-
-      & :global(svg) {
-        margin-left: var(--spacing-xx-tight);
-      }
-    }
-  }
+.article-title {
+  margin-bottom: var(--spacing-x-tight);
 }

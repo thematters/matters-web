@@ -5,10 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Dropdown, Icon, PopperInstance } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
-import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
-import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 import {
   ME_NOTIFICATIONS,
   UNREAD_NOTICE_COUNT
@@ -20,6 +17,10 @@ import { POLL_INTERVAL } from '~/common/enums'
 
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
+
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
+import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
 const NoticeButton = ({
   data,
@@ -73,8 +74,13 @@ const NoticeButton = ({
         }
       }}
     >
-      <button type="button" aria-label="通知" className={buttonClasses}>
-        <Icon.Notification size="md" />
+      <button
+        className={buttonClasses}
+        type="button"
+        aria-label="通知"
+        aria-haspopup="true"
+      >
+        <Icon.NotificationLarge size="md" />
 
         <style jsx>{styles}</style>
       </button>

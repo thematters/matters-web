@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { IconSize } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
-import { BookmarkArticle } from './__generated__/BookmarkArticle'
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
+
+import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
 const fragments = {
   article: gql`
@@ -18,10 +20,10 @@ const fragments = {
 
 export const BookmarkButton = ({
   article,
-  size = 'sm'
+  size
 }: {
   article: BookmarkArticle
-  size?: 'xs' | 'sm' | 'md'
+  size?: Extract<IconSize, 'md-s'>
 }) => {
   const viewer = useContext(ViewerContext)
 
