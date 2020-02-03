@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import { ArticleDigest, InfiniteScroll, Spinner } from '~/components'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
+import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
 import { useEventListener } from '~/components/Hook'
 
 import {
@@ -14,36 +14,13 @@ import {
 } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { TagDetailLatestArticles } from './__generated__/TagDetailLatestArticles'
-
-const LATEST_ARTICLES = gql`
-  query TagDetailLatestArticles($id: ID!, $after: String) {
-    node(input: { id: $id }) {
-      ... on Tag {
-        id
-        articles(input: { first: 10, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...FeedDigestArticle
-            }
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigest.Feed.fragments.article}
-`
+import { TagArticles } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    TagDetailLatestArticles
-  >(LATEST_ARTICLES, { variables: { id } })
+  const { data, loading, error, fetchMore, refetch } = useQuery<TagArticles>(
+    TAG_ARTICLES,
+    { variables: { id }, fetchPolicy: 'cache-and-network' }
+  )
 
   const sync = ({
     event,
@@ -129,7 +106,7 @@ const LatestArticles = ({ id }: { id: string }) => {
                 })
               }
             >
-              <ArticleDigest.Feed article={node} inTagDetail />
+              <ArticleDigest.Feed article={node} inTagDetailLatest />
             </li>
           ))}
         </ul>

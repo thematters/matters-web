@@ -2,3 +2,8 @@
   flex-shrink: 0;
   margin-left: var(--spacing-base);
 }
+
+.tab-button {
+  font-size: var(--font-size-xm);
+  cursor: pointer;
+}

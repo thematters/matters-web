@@ -57,7 +57,8 @@
           { "name": "CommentMentionedYouNotice" },
           { "name": "OfficialAnnouncementNotice" },
           { "name": "ArticleTagHasBeenAddedNotice" },
-          { "name": "ArticleTagHasBeenRemovedNotice" }
+          { "name": "ArticleTagHasBeenRemovedNotice" },
+          { "name": "ArticleTagHasBeenUnselectedNotice" }
         ]
       }
     ]

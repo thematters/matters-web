@@ -17,7 +17,7 @@ const SIDEBAR_TAGS = gql`
     viewer {
       id
       recommendation {
-        tags(input: { first: 8 }) {
+        tags(input: { first: 5 }) {
           edges {
             cursor
             node {

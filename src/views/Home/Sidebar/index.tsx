@@ -8,9 +8,9 @@ import Topics from './Topics'
 export default () => (
   <>
     <Icymi />
+    <Tags />
     <Topics />
     <Authors />
-    <Tags />
     <Footer />
   </>
 )

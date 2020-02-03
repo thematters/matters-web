@@ -21,7 +21,9 @@ const PUT_ARTICLES_TAGS = gql`
   mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
     putArticlesTags(input: { id: $id, articles: $articles }) {
       id
-      content
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `

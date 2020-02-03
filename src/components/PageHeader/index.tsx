@@ -10,6 +10,7 @@ interface PageHeaderProps {
   description?: string
 
   is?: 'h1' | 'h2' | 'h3'
+  hasNoBottomBorder?: boolean
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -17,12 +18,14 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   description,
   title,
   children,
-  is = 'h1'
+  is = 'h1',
+  hasNoBottomBorder = false
 }) => {
   if (buttons || description) {
     const headerClasses = classNames({
       hasButtons: !!buttons,
-      hasDescription: !!description
+      hasDescription: !!description,
+      hasNoBottomBorder
     })
 
     return (
