@@ -16,6 +16,9 @@ const DELETE_ARTICLES_TAGS = gql`
   mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
     deleteArticlesTags(input: { id: $id, articles: $articles }) {
       id
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `
@@ -67,7 +70,8 @@ const RemoveTagButton = ({
   return (
     <button
       type="button"
-      onClick={async () => {
+      onClick={async event => {
+        event.stopPropagation()
         await deleteArticlesTags()
         if (instance) {
           instance.props.onHidden = sync

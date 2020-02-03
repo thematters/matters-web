@@ -15,6 +15,8 @@ import { ViewerContext } from '~/components/Viewer'
 import ArchiveButton from './ArchiveButton'
 import ExtendButton from './ExtendButton'
 import RemoveTagButton from './RemoveTagButton'
+import SetTagSelectedButton from './SetTagSelectedButton'
+import SetTagUnselectedButton from './SetTagUnselectedButton'
 import StickyButton from './StickyButton'
 import styles from './styles.css'
 
@@ -23,8 +25,9 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
-  inTagDetail?: boolean
   inUserArticles?: boolean
+  inTagDetailLatest?: boolean
+  inTagDetailSelected?: boolean
 }
 
 type DropdownActionsProps = {
@@ -41,6 +44,8 @@ interface DropdownContentProps {
   hasStickyButton?: boolean
   hasArchiveButton?: boolean
   hasRemoveTagButton?: boolean
+  hasSetTagSelectedButton?: boolean
+  hasSetTagUnselectedButton?: boolean
 }
 
 const fragments = {
@@ -66,7 +71,9 @@ const DropdownContent = ({
   hasExtendButton,
   hasStickyButton,
   hasArchiveButton,
-  hasRemoveTagButton
+  hasRemoveTagButton,
+  hasSetTagSelectedButton,
+  hasSetTagUnselectedButton
 }: DropdownContentProps) => {
   return (
     <Menu>
@@ -88,6 +95,23 @@ const DropdownContent = ({
           <ArchiveButton article={article} hideDropdown={hideDropdown} />
         </Menu.Item>
       )}
+      {hasSetTagSelectedButton && (
+        <Menu.Item>
+          <SetTagSelectedButton
+            article={article}
+            hideDropdown={hideDropdown}
+            instance={instance}
+          />
+        </Menu.Item>
+      )}
+      {hasSetTagUnselectedButton && (
+        <Menu.Item>
+          <SetTagUnselectedButton
+            article={article}
+            hideDropdown={hideDropdown}
+          />
+        </Menu.Item>
+      )}
       {hasRemoveTagButton && (
         <Menu.Item>
           <RemoveTagButton
@@ -106,9 +130,9 @@ const DropdownActions = ({
 
   color = 'grey',
   size,
-
-  inTagDetail,
-  inUserArticles
+  inUserArticles,
+  inTagDetailLatest,
+  inTagDetailSelected
 }: DropdownActionsProps) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const hideDropdown = () => {
@@ -122,11 +146,17 @@ const DropdownActions = ({
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
-  const hasExtendButton = isActive
-  const hasRemoveTagButton = inTagDetail && isMattyUser
+  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+  const hasExtendButton = isActive && !isInTagDetail
+  const hasRemoveTagButton = isInTagDetail && isMattyUser
   const hasStickyButton =
-    inUserArticles && isArticleAuthor && isActive && !viewer.isInactive
-  const hasArchiveButton = isArticleAuthor && isActive && !viewer.isInactive
+    inUserArticles &&
+    !isInTagDetail &&
+    isArticleAuthor &&
+    isActive &&
+    !viewer.isInactive
+  const hasArchiveButton =
+    isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
 
   if (
     !hasExtendButton &&
@@ -149,6 +179,8 @@ const DropdownActions = ({
             hasStickyButton={hasStickyButton}
             hasArchiveButton={hasArchiveButton}
             hasRemoveTagButton={hasRemoveTagButton}
+            hasSetTagSelectedButton={inTagDetailLatest}
+            hasSetTagUnselectedButton={inTagDetailSelected}
           />
         }
         trigger="click"

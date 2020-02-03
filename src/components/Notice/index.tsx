@@ -9,6 +9,7 @@ import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
 import ArticlePublishedNotice from './ArticlePublishedNotice'
 import ArticleTagHasBeenAddedNotice from './ArticleTagHasBeenAddedNotice'
 import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice'
+import ArticleTagHasBeenUnselectedNotice from './ArticleTagHasBeenUnselectedNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentNewReplyNotice from './CommentNewReplyNotice'
 import CommentNewUpvoteNotice from './CommentNewUpvoteNotice'
@@ -78,6 +79,9 @@ const fragments = {
       ... on ArticleTagHasBeenRemovedNotice {
         ...ArticleTagHasBeenRemovedNotice
       }
+      ... on ArticleTagHasBeenUnselectedNotice {
+        ...ArticleTagHasBeenUnselectedNotice
+      }
     }
     ${ArticleNewAppreciationNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
@@ -97,6 +101,7 @@ const fragments = {
     ${UserNewFollowerNotice.fragments.notice}
     ${ArticleTagHasBeenAddedNotice.fragments.notice}
     ${ArticleTagHasBeenRemovedNotice.fragments.notice}
+    ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
   `
 }
 
@@ -138,6 +143,8 @@ export const Notice = ({ notice }: { notice: DigestNotice }) => {
       return <ArticleTagHasBeenAddedNotice notice={notice} />
     case 'ArticleTagHasBeenRemovedNotice':
       return <ArticleTagHasBeenRemovedNotice notice={notice} />
+    case 'ArticleTagHasBeenUnselectedNotice':
+      return <ArticleTagHasBeenUnselectedNotice notice={notice} />
     default:
       return null
   }

@@ -27,7 +27,7 @@ import styles from './styles.css'
 
 import { AllTags } from './__generated__/AllTags'
 
-const ALL_TAGSS = gql`
+const ALL_TAGS = gql`
   query AllTags($after: String) {
     viewer {
       id
@@ -80,7 +80,7 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
+  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
 
   if (loading) {
     return <Spinner />

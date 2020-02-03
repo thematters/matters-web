@@ -11,9 +11,13 @@ import NoticeDate from './NoticeDate'
 import NoticeTag from './NoticeTag'
 import styles from './styles.css'
 
-import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
+import { ArticleTagHasBeenUnselectedNotice as NoticeType } from './__generated__/ArticleTagHasBeenUnselectedNotice'
 
-const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleTagHasBeenUnselectedNotice = ({
+  notice
+}: {
+  notice: NoticeType
+}) => {
   if (!notice || !notice.actor) {
     return null
   }
@@ -30,9 +34,9 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
           <NoticeArticle article={notice.target} />
           <Translate zh_hant=" 已經被 " zh_hans=" 已經被 " />
           <NoticeActorName user={notice.actor} />
-          <Translate zh_hant="  加入 " zh_hans=" 加入 " />
+          <Translate zh_hant=" 從 " zh_hans=" 從 " />
           <NoticeTag tag={notice.tag} />
-          <Translate zh_hant="  的精選文集了" zh_hans=" 的精选文集了" />
+          <Translate zh_hant=" 的精選文集移除了" zh_hans=" 的精选文集移除了" />
         </h4>
 
         <NoticeDate notice={notice} />
@@ -43,9 +47,9 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleTagHasBeenAddedNotice.fragments = {
+ArticleTagHasBeenUnselectedNotice.fragments = {
   notice: gql`
-    fragment ArticleTagHasBeenAddedNotice on ArticleTagHasBeenAddedNotice {
+    fragment ArticleTagHasBeenUnselectedNotice on ArticleTagHasBeenUnselectedNotice {
       id
       unread
       __typename
@@ -67,4 +71,4 @@ ArticleTagHasBeenAddedNotice.fragments = {
   `
 }
 
-export default ArticleTagHasBeenAddedNotice
+export default ArticleTagHasBeenUnselectedNotice

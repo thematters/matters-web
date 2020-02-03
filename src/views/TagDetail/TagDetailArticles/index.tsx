@@ -1,7 +1,7 @@
 import Latest from './Latest'
-// import Selected from './Selected'
+import Selected from './Selected'
 
 export const TagDetailArticles = {
-  Latest
-  // Selected
+  Latest,
+  Selected
 }

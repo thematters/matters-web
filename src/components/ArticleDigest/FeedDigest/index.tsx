@@ -61,7 +61,8 @@ const fragments = {
 const FeedDigest = ({
   article,
 
-  inTagDetail,
+  inTagDetailLatest,
+  inTagDetailSelected,
   inUserArticles,
 
   onClick
@@ -124,7 +125,8 @@ const FeedDigest = ({
 
       <FooterActions
         article={article}
-        inTagDetail={inTagDetail}
+        inTagDetailLatest={inTagDetailLatest}
+        inTagDetailSelected={inTagDetailSelected}
         inUserArticles={inUserArticles}
       />
 

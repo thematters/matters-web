@@ -1,11 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { NetworkStatus } from 'apollo-client'
 import _get from 'lodash/get'
 
-import { ArticleDigest, InfiniteScroll, Spinner } from '~/components'
+import {
+  ArticleDigest,
+  InfiniteScroll,
+  List,
+  LoadMore,
+  Spinner
+} from '~/components'
 import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
-import { useEventListener } from '~/components/Hook'
+import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
+import { useEventListener, useResponsive } from '~/components/Hook'
 
 import {
   ANALYTICS_EVENTS,
@@ -14,36 +21,45 @@ import {
 } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { TagDetailLatestArticles } from './__generated__/TagDetailLatestArticles'
-
-const LATEST_ARTICLES = gql`
-  query TagDetailLatestArticles($id: ID!, $after: String) {
-    node(input: { id: $id }) {
-      ... on Tag {
-        id
-        articles(input: { first: 10, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...FeedDigestArticle
-            }
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigest.Feed.fragments.article}
-`
+import {
+  TagArticles,
+  TagArticles_node_Tag_articles
+} from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    TagDetailLatestArticles
-  >(LATEST_ARTICLES, { variables: { id } })
+  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
+    TagArticles
+  >(TAG_ARTICLES, {
+    variables: { id },
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true
+  })
+
+  const connectionPath = 'node.articles'
+  const articles = _get(data, connectionPath) as TagArticles_node_Tag_articles
+  const { edges, pageInfo } = articles || { edges: [], pageInfo: {} }
+  const isNewLoading = networkStatus === NetworkStatus.loading
+  const hasArticles = edges && edges.length > 0 && pageInfo
+
+  const loadMore = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+      type: FEED_TYPE.TAG_DETAIL,
+      location: edges ? edges.length : 0,
+      entrance: id
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath
+        })
+    })
+  }
 
   const sync = ({
     event,
@@ -52,7 +68,7 @@ const LatestArticles = ({ id }: { id: string }) => {
     event: 'add' | 'delete'
     differences?: number
   }) => {
-    const { edges: items } = _get(data, 'node.articles', { edges: [] })
+    const { edges: items } = _get(data, connectionPath, { edges: [] })
     switch (event) {
       case 'add':
         refetch({
@@ -75,7 +91,7 @@ const LatestArticles = ({ id }: { id: string }) => {
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
 
-  if (loading) {
+  if (loading && (!articles || isNewLoading)) {
     return <Spinner />
   }
 
@@ -87,53 +103,38 @@ const LatestArticles = ({ id }: { id: string }) => {
     return <EmptyTagArticles />
   }
 
-  const connectionPath = 'node.articles'
-  const { edges, pageInfo } = data.node.articles
-  const hasArticles = edges && edges.length > 0 && pageInfo
-
-  const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAG_DETAIL,
-      location: edges ? edges.length : 0,
-      entrance: id
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-    })
-  }
-
   if (!hasArticles) {
     return <EmptyTagArticles />
   }
 
   return (
     <section>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+      <InfiniteScroll
+        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        loadMore={loadMore}
+      >
+        <List hasBorder>
           {(edges || []).map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TAG_DETAIL,
-                  location: i,
-                  entrance: id
-                })
-              }
-            >
-              <ArticleDigest.Feed article={node} inTagDetail />
-            </li>
+            <List.Item key={cursor}>
+              <ArticleDigest.Feed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.TAG_DETAIL,
+                    location: i,
+                    entrance: id
+                  })
+                }
+                inTagDetailLatest
+              />
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
+
+      {!isMediumUp && pageInfo.hasNextPage && (
+        <LoadMore onClick={loadMore} loading={loading} />
+      )}
     </section>
   )
 }
