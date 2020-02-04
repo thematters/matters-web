@@ -17,7 +17,7 @@
 
 .author {
   @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-base);
+  padding-bottom: var(--spacing-xx-tight);
   margin-bottom: var(--spacing-base);
 }
 

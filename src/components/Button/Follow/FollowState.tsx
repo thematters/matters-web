@@ -15,9 +15,9 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
     <Button
       spacing={[0, 'xtight']}
       size={[null, '1rem']}
-      disabled
       borderWidth="sm"
       borderColor="grey"
+      is="span"
     >
       <TextIcon size="xs" color="grey" weight="md">
         {user.isFollowee ? (

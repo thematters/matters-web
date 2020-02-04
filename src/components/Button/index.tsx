@@ -53,6 +53,38 @@ interface ButtonProps {
   [key: string]: any
 }
 
+/**
+ * `<Button>` is an inline-block element with centered children.
+ *
+ * Usage:
+ *
+ * ```jsx
+ *  // with custom spacing
+ *  <Button
+ *    spacing={['xtight', 'xtight']}
+ *    onClick={onClick}
+ *  >
+ *    <Icon.BookmarkActive />
+ *  </Button>
+ *
+ *  // with custom size, border, hover text & background
+ *  <Button
+ *    size={['4rem', '1.5rem']}
+ *    textColor="green"
+ *    textHoverColor="white"
+ *    bgHoverColor="green"
+ *    borderColor="green"
+ *    onClick={onClick}
+ *  >
+ *    <TextIcon weight="md" size="xs">
+ *      <Translate
+ *        zh_hant={TEXT.zh_hant.follow}
+ *        zh_hans={TEXT.zh_hans.follow}
+ *      />
+ *    </TextIcon>
+ *  </Button>
+ * ```
+ */
 export const Button: React.FC<ButtonProps> = forwardRef(
   (
     {
