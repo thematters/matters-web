@@ -11,7 +11,7 @@ const SearchButton = () => {
 
   return (
     <Button
-      spacing={['xxtight', 'xxtight']}
+      size={['2rem', '2rem']}
       bgHoverColor="grey-lighter"
       {...PATHS.SEARCH}
       aria-label="搜尋"

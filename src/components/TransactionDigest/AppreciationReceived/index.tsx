@@ -54,7 +54,7 @@ const AppreciationReceived = ({
             <header>
               <UserDigest.Mini
                 user={sender}
-                avatarSize="md"
+                avatarSize="xs"
                 hasAvatar
                 hasDisplayName
               />
@@ -64,12 +64,15 @@ const AppreciationReceived = ({
               </span>
             </header>
           )}
-          {isUseContent && content && <h4 className="content">{content}</h4>}
-          {!isUseContent && target && (
-            <section>
-              <ArticleDigest.Title article={target} />
-            </section>
-          )}
+
+          <footer>
+            {isUseContent && content && <h4 className="content">{content}</h4>}
+            {!isUseContent && target && (
+              <section>
+                <ArticleDigest.Title article={target} />
+              </section>
+            )}
+          </footer>
         </section>
 
         <section className="right">

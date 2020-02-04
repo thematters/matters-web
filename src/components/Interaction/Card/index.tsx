@@ -43,8 +43,8 @@ export const Card: React.FC<CardProps> = ({
   const cardClass = classNames({
     card: true,
     [`bg-${bgColor}`]: !!bgColor,
-    [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
-    [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
+    [`spacing-y-${spacing[0]}`]: !!spacing[0],
+    [`spacing-x-${spacing[1]}`]: !!spacing[1],
     [`text-size-${textSize}`]: !!textSize,
     hasBorder: !!border || !!borderRadius,
     [`border-${border}`]: !!border,

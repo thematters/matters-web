@@ -7,11 +7,8 @@ footer {
   color: var(--color-grey);
 
   & .left {
-    display: flex;
-    align-items: center;
-
-    & > :global(* + *) {
-      padding-left: var(--spacing-x-tight);
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
     }
   }
 }

@@ -13,7 +13,6 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
       size={[null, '1.5rem']}
       spacing={[0, 'xtight']}
       bgHoverColor="green-lighter"
-      className="sort-button"
       onClick={() => {
         setSortBy(isHottest ? 'newest' : 'hottest')
       }}

@@ -9,7 +9,7 @@
   border: 1px solid transparent;
   font-size: var(--font-size-sm);
 
-  & > :global(*) {
+  & :global(> *) {
     vertical-align: middle;
   }
 

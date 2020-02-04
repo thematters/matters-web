@@ -218,7 +218,6 @@ const CommentFormWrap = (props: CommentFormProps) => {
       <ModalSwitch modalId="likeCoinTermModal">
         {(open: any) => (
           <Button
-            size={['full', null]}
             spacing={['xtight', 'xtight']}
             bgColor="grey-lighter"
             borderRadius={0}
@@ -239,7 +238,6 @@ const CommentFormWrap = (props: CommentFormProps) => {
   if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
     return (
       <Button
-        size={['full', null]}
         spacing={['xtight', 'xtight']}
         bgColor="grey-lighter"
         borderRadius={0}
@@ -258,7 +256,6 @@ const CommentFormWrap = (props: CommentFormProps) => {
   if (props.blocked) {
     return (
       <Button
-        size={['full', null]}
         spacing={['xtight', 'xtight']}
         bgColor="grey-lighter"
         borderRadius={0}

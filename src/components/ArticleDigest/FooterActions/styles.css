@@ -8,11 +8,8 @@ footer {
 
   & .left,
   & .right {
-    display: flex;
-    align-items: center;
-
-    & > :global(* + *) {
-      padding-left: var(--spacing-x-tight);
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
     }
   }
 }

@@ -178,7 +178,7 @@
       background: var(--color-grey-lighter);
 
       & iframe {
-        @mixin cover;
+        @mixin expand-to-container;
         width: 100%;
         height: 100%;
       }
@@ -360,7 +360,7 @@
 
   opacity: 0;
 
-  & > :global(* + *) {
+  & :global(> * + *) {
     cursor: pointer;
     margin-left: var(--spacing-base);
   }

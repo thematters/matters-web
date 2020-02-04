@@ -1,4 +1,16 @@
 a {
   line-height: 1;
   font-size: 0;
+
+  & :global(svg) {
+    width: 97px;
+    height: 20px;
+  }
+
+  @media (max-width: 320px) {
+    & :global(svg) {
+      width: 72.75px;
+      height: 15px;
+    }
+  }
 }

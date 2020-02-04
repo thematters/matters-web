@@ -80,7 +80,7 @@ const NoticeButton = ({
       }}
     >
       <Button
-        spacing={['xxtight', 'xxtight']}
+        size={['2rem', '2rem']}
         bgHoverColor="grey-lighter"
         aria-label="通知"
         aria-haspopup="true"

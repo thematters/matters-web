@@ -13,7 +13,7 @@ header {
 
   & .right {
     & :global(> * + *) {
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--spacing-tight);
     }
   }
 }

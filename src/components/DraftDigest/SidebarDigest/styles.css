@@ -15,7 +15,7 @@
   font-size: var(--font-size-xs);
   color: var(--color-grey-dark);
 
-  & > :global(*) {
+  & :global(> *) {
     margin-right: var(--spacing-tight);
 
     color: var(--color-grey-dark);

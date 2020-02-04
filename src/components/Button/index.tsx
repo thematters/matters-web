@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 
 import styles from './styles.css'
 
-type ButtonWidth = 'full' | '2rem' | '4rem' | '6rem' | undefined | null
+type ButtonWidth = '2rem' | '4rem' | '6rem' | undefined | null
 
 type ButtonHeight =
   | '1rem'
@@ -16,15 +16,9 @@ type ButtonHeight =
   | undefined
   | null
 
-type ButtonSpacing =
-  | 0
-  | '0'
-  | 'xxxtight'
-  | 'xxtight'
-  | 'xtight'
-  | 'tight'
-  | 'base'
-  | 'loose'
+type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
+
+type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
 
 type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
 
@@ -39,7 +33,7 @@ type ButtonColor =
 
 interface ButtonProps {
   size?: [ButtonWidth, ButtonHeight]
-  spacing?: [ButtonSpacing, ButtonSpacing]
+  spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
   textHoverColor?: ButtonTextColor
@@ -50,8 +44,6 @@ interface ButtonProps {
   borderColor?: ButtonColor
   borderWidth?: 'sm'
   borderRadius?: 0 | '0' | '5rem'
-
-  style?: React.CSSProperties
 
   href?: string
   as?: string
@@ -82,38 +74,33 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
       is,
 
-      style,
       className,
       children,
       ...restProps
     },
     ref
   ) => {
-    const isFullWidth = size[0] === 'full'
     const isClickable = is !== 'span' && !restProps.disabled
+    const isTransparent = !bgColor && !borderColor
+    const [width, height] = size
+    const [spacingY, spacingX] = spacing
+
+    // container
     const containerClass = classNames({
       container: true,
-      [`width-${size[0]}`]: isFullWidth,
-      [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
+      isTransparent,
+      'centering-x': width && isTransparent,
+      'centering-y': height && isTransparent,
+      [`spacing-y-${spacingY}`]: !!spacingY,
+      [`spacing-x-${spacingX}`]: !!spacingX,
+      [`bg-${bgColor}`]: !!bgColor,
       [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
+      [`border-${borderColor}`]: !!borderColor,
+      [`border-${borderWidth}`]: !!borderWidth,
+      [`text-${textColor}`]: !!textColor,
+      [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
       [className]: !!className
     })
-    const contentClass = classNames({
-      content: true,
-      [`width-${size[0]}`]: isFullWidth,
-      [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
-      [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
-      [`text-${textColor}`]: !!textColor,
-      [`bg-${bgColor}`]: !!bgColor,
-      [`border-${borderColor}`]: !!borderColor,
-      [`border-${borderWidth}`]: !!borderWidth
-    })
-    const contentStyle = {
-      ...style,
-      ...(!!size[0] && !isFullWidth ? { width: size[0] } : {}),
-      ...(!!size[1] ? { height: size[1] } : {}),
-      ...(!!borderRadius ? { borderRadius } : {})
-    }
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
@@ -121,11 +108,25 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       'data-clickable': isClickable
     }
 
+    // content
+    const contentStyle = {
+      width: (!isTransparent && width) || undefined,
+      height: (!isTransparent && height) || undefined
+    }
+
+    // hotarea
+    const hotAreaStyle = {
+      width: width || undefined,
+      height: height || undefined,
+      borderRadius
+    }
+
     // span
     if (is === 'span') {
       return (
         <span {...containerProps}>
-          <div className={contentClass} style={contentStyle}>
+          <div className="content" style={contentStyle}>
+            <div className="hotarea" style={hotAreaStyle} />
             {children}
           </div>
           <style jsx>{styles}</style>
@@ -137,7 +138,8 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     if (href && !as) {
       return (
         <a href={href} {...containerProps}>
-          <div className={contentClass} style={contentStyle}>
+          <div className="content" style={contentStyle}>
+            <div className="hotarea" style={hotAreaStyle} />
             {children}
           </div>
           <style jsx>{styles}</style>
@@ -150,7 +152,8 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       return (
         <Link href={href} as={as}>
           <a {...containerProps}>
-            <div className={contentClass} style={contentStyle}>
+            <div className="content" style={contentStyle}>
+              <div className="hotarea" style={hotAreaStyle} />
               {children}
             </div>
             <style jsx>{styles}</style>
@@ -162,7 +165,8 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     // button
     return (
       <button {...containerProps}>
-        <div className={contentClass} style={contentStyle}>
+        <div className="content" style={contentStyle}>
+          <div className="hotarea" style={hotAreaStyle} />
           {children}
         </div>
         <style jsx>{styles}</style>

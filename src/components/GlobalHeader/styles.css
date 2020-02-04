@@ -48,11 +48,11 @@ header {
 }
 
 .right.me {
-  & > :global(> *) {
+  & :global(> *) {
     display: inline-block;
   }
-  & > :global(* + *:not(.tippy-popper)) {
-    margin-left: var(--spacing-base);
+  & :global(> * + *) {
+    margin-left: var(--spacing-tight);
 
     @media (--sm-up) {
       margin-left: var(--spacing-loose);

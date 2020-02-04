@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useState } from 'react'
 
-import { Dropdown, Icon, PopperInstance } from '~/components'
+import { Button, Dropdown, Icon, PopperInstance } from '~/components'
 
 import DropdownContent from './DropdownContent'
 import styles from './styles.css'
@@ -26,16 +26,18 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
       theme="dropdown shadow-default"
       onCreate={setInstance}
     >
-      <button
-        className={navButtonClass}
-        type="button"
+      <Button
+        size={['2rem', '2rem']}
+        bgHoverColor="grey-lighter"
         aria-label="菜單"
         aria-haspopup="true"
       >
-        <Icon.Menu color="black" />
+        <span className={navButtonClass}>
+          <Icon.Menu color="black" />
+        </span>
 
         <style jsx>{styles}</style>
-      </button>
+      </Button>
     </Dropdown>
   )
 }

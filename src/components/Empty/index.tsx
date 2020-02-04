@@ -24,8 +24,8 @@ export const Empty: React.FC<EmptyProps> = ({
   const containerClasses = classNames({
     container: true,
     [`size-${size}`]: true,
-    [`spacing-vertical-${spacing[0]}`]: true,
-    [`spacing-horizontal-${spacing[1]}`]: true,
+    [`spacing-y-${spacing[0]}`]: true,
+    [`spacing-x-${spacing[1]}`]: true,
     'icon-only': icon && !description && !children,
     'description-only': !icon && description && !children,
     'children-included': children

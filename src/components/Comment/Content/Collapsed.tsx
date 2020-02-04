@@ -33,14 +33,12 @@ const Collapsed = ({
 
   return (
     <p className="inactive-content">
-      {collapsedContent}
+      <span>{collapsedContent}</span>
 
       {collapsed && (
         <Button
-          size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
+          spacing={['xxtight', 'xtight']}
           bgHoverColor="grey-lighter"
-          className="expand-button"
           onClick={() => {
             setCollapsed(false)
           }}

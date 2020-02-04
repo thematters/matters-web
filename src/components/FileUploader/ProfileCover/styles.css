@@ -15,7 +15,7 @@
 }
 
 .uploader {
-  @mixin cover;
+  @mixin expand-to-container;
 
   background-color: rgba(0, 0, 0, 0.7);
   color: var(--color-white);

@@ -5,11 +5,8 @@ header {
 
   & .left,
   & .right {
-    display: flex;
-    align-items: center;
-
     & :global(> * + *) {
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--spacing-tight);
     }
   }
 }

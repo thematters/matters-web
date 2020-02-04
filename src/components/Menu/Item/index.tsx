@@ -22,8 +22,8 @@ const Item: React.FC<MenuItemProps> = ({
 }) => {
   const itemClasses = classNames({
     item: true,
-    [`spacing-vertical-${spacing[0]}`]: true,
-    [`spacing-horizontal-${spacing[1]}`]: true,
+    [`spacing-y-${spacing[0]}`]: true,
+    [`spacing-x-${spacing[1]}`]: true,
     [`bg-hover-${hoverBgColor}`]: true
   })
 

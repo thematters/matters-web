@@ -1,6 +1,6 @@
 .buttons {
   & :global(> * + *) {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--spacing-base);
   }
 }
 

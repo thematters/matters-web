@@ -9,8 +9,8 @@
   padding-top: var(--spacing-x-tight);
 
   & .right-items {
-    & > :global(*) + :global(*) {
-      margin-left: var(--spacing-x-tight);
+    & :global(> * + *) {
+      margin-left: var(--spacing-tight);
     }
   }
 }
