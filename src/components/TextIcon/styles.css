@@ -37,6 +37,11 @@
     font-size: var(--font-size-md);
   }
 }
+.size-xm {
+  & .text {
+    font-size: var(--font-size-xm);
+  }
+}
 .size-lg {
   & .text {
     font-size: var(--font-size-lg);

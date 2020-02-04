@@ -11,6 +11,7 @@ import {
   PageHeader,
   Spinner,
   Tabs,
+  TextIcon,
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
@@ -92,14 +93,18 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
           {hasSelected > 0 && (
             <Tabs.Tab selected={feed === 'selected'}>
               <Button onClick={() => setFeed('selected')}>
-                <Translate zh_hant="精選" zh_hans="精选" />
+                <TextIcon size="xm">
+                  <Translate zh_hant="精選" zh_hans="精选" />
+                </TextIcon>
               </Button>
             </Tabs.Tab>
           )}
 
           <Tabs.Tab selected={feed === 'latest'}>
             <Button onClick={() => setFeed('latest')}>
-              <Translate zh_hant="最新" zh_hans="最新" />
+              <TextIcon size="xm">
+                <Translate zh_hant="最新" zh_hans="最新" />
+              </TextIcon>
             </Button>
           </Tabs.Tab>
         </Tabs>
