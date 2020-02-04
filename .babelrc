@@ -7,6 +7,12 @@
           "plugins": ["styled-jsx-plugin-postcss"]
         }
       }
+    ],
+    [
+      "env",
+      {
+        "modules": false
+      }
     ]
   ],
   "plugins": [
