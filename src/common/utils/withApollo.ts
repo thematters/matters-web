@@ -1,5 +1,5 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
-import * as Sentry from '@sentry/browser'
+import { configureScope as SentryConfigureScope } from '@sentry/browser'
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
@@ -109,7 +109,7 @@ const authLink = setContext((_, { headers }) => {
 const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
   const actionId = genSentryActionId()
-  Sentry.configureScope((scope: any) => {
+  SentryConfigureScope((scope: any) => {
     scope.setTag('action-id', actionId)
   })
 

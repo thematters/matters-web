@@ -1,5 +1,5 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
-import * as Sentry from '@sentry/browser'
+import { init as SentryInit } from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
@@ -52,7 +52,7 @@ const {
 } = getConfig()
 
 // Sentry
-Sentry.init({ dsn: SENTRY_DSN || '' })
+SentryInit({ dsn: SENTRY_DSN || '' })
 
 /**
  * `<Root>` contains components that depend on viewer

@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/browser'
+import { captureException as SentryCaptureException } from '@sentry/browser'
 import React from 'react'
 
 import { Error as ErrorComponent } from '~/components/Error'
@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   componentDidCatch(error: Error, info: any): void {
     // Add info to Sentry
-    Sentry.captureException(error)
+    SentryCaptureException(error)
 
     const { onError } = this.props
 
