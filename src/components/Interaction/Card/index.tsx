@@ -59,7 +59,7 @@ export const Card: React.FC<CardProps> = ({
     target: HTMLElement
   }) => {
     // disable if the inside `<Button>` is clicked
-    if (target?.closest && target.closest('[data-clickable]')) {
+    if (target?.closest && target.closest('[data-clickable], a, button')) {
       return
     }
 

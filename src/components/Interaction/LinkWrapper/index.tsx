@@ -36,14 +36,11 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
     <Link href={href} as={as}>
       <a
         className={linkClass}
-        onClick={e => {
-          e.stopPropagation()
-
+        onClick={() => {
           if (onClick) {
             onClick()
           }
         }}
-        data-clickable
       >
         {children}
 

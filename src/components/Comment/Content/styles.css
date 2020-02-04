@@ -4,7 +4,6 @@
   align-items: center;
 
   color: var(--color-grey);
-  line-height: 1;
   font-size: var(--font-size-sm);
 
   & :global(button) {
