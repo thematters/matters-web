@@ -188,17 +188,15 @@ const DropdownActions = ({
         placement="bottom-end"
         zIndex={301}
       >
-        <span>
-          <Button
-            spacing={['xtight', 'xtight']}
-            bgHoverColor="grey-lighter"
-            aria-label="更多操作"
-            aria-haspopup="true"
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          >
-            <Icon.More color={color} size={size} />
-          </Button>
-        </span>
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          aria-label="更多操作"
+          aria-haspopup="true"
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        >
+          <Icon.More color={color} size={size} />
+        </Button>
       </Dropdown>
 
       <style jsx>{styles}</style>
