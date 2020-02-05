@@ -55,9 +55,9 @@ export const ToastInstance = ({
           <Icon.Clear size="md" color={iconColor} />
         </button>
       )}
-      {!hasCloseButton && customButton &&
-        (<section className="custom-button">{customButton}</section>)
-      }
+      {!hasCloseButton && customButton && (
+        <section className="custom-button">{customButton}</section>
+      )}
       <style jsx>{styles}</style>
     </section>
   )
