@@ -4,6 +4,7 @@
   width: 100%;
 
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   border-radius: 0.5rem;
   box-shadow: var(--shadow-default);
   animation: toastFadeIn 0.25s ease;
@@ -20,14 +21,16 @@
   }
 }
 
-.header {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-}
-
-.header + .content {
+.sub-description {
+  font-weight: var(--font-weight-normal);
   margin-top: var(--spacing-xx-tight);
   opacity: 0.7;
+}
+
+.custom-button {
+  & :global(a.container) {
+    vertical-align: middle;
+  }
 }
 
 .green {

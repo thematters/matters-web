@@ -28,7 +28,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
   return (
     <Toast.Instance
       color="green"
-      header={
+      content={
         isPublishing ? (
           <Translate
             zh_hant={TEXT.zh_hant.publishing}
@@ -41,13 +41,12 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
           />
         )
       }
-      content={
+      subDescription={
         <Translate
           zh_hant="上鏈後，作品不可刪改，永久保存"
           zh_hans="上链后，作品不可删改，永久保存"
         />
       }
-      buttonPlacement="bottom"
     />
   )
 }

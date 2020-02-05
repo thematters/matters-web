@@ -13,14 +13,14 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- * <ToastInstance color="green" header="header" content="content" />
+ * <ToastInstance color="green" content="content" />
  * ```
  */
 
 interface ToastProps {
   color: 'green' | 'grey' | 'red'
-  header?: string | React.ReactNode
   content?: string | React.ReactNode
+  subDescription?: string | React.ReactNode
 
   buttonPlacement?: 'top' | 'bottom' | 'center'
   customButton?: React.ReactNode
@@ -30,8 +30,8 @@ interface ToastProps {
 
 export const ToastInstance = ({
   color,
-  header,
   content,
+  subDescription,
   buttonPlacement = 'top',
   customButton,
   hasCloseButton,
@@ -47,15 +47,17 @@ export const ToastInstance = ({
   return (
     <section className={mainClass}>
       <section>
-        {header && <h4 className="header">{header}</h4>}
         {content && <p className="content">{content}</p>}
+        {subDescription && <p className="sub-description">{subDescription}</p>}
       </section>
       {hasCloseButton && (
         <button type="button" onClick={onClose}>
           <Icon.Clear size="md" color={iconColor} />
         </button>
       )}
-      {!hasCloseButton && customButton && customButton}
+      {!hasCloseButton && customButton &&
+        (<section className="custom-button">{customButton}</section>)
+      }
       <style jsx>{styles}</style>
     </section>
   )
