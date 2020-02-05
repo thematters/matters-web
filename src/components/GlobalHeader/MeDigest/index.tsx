@@ -8,6 +8,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
+import { Z_INDEX } from '~/common/enums'
 import { TEXT } from '~/common/enums/text'
 
 import DropdownMenu from './DropdownMenu'
@@ -36,6 +37,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
     <Dropdown
       content={<DropdownMenu hideDropdown={hideDropdown} />}
       onCreate={setInstance}
+      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <button
         type="button"

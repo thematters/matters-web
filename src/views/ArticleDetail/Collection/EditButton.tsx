@@ -61,7 +61,6 @@ const EditButton = ({
           detail: {
             color: 'green',
             content: <Translate zh_hant="關聯已更新" zh_hans="关联已更新" />,
-            closeButton: true,
             duration: 2000
           }
         })

@@ -48,6 +48,7 @@ const DropdownUserList = ({
                 hasAvatar
                 hasDisplayName
                 hasUserName
+                disabled
               />
             </button>
           </Menu.Item>

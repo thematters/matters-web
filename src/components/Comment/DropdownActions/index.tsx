@@ -132,7 +132,6 @@ const DropdownActions = ({
       trigger="click"
       onCreate={setInstance}
       placement="bottom-end"
-      zIndex={301}
     >
       <Button
         spacing={['xtight', 'xtight']}
