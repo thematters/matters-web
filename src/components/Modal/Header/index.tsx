@@ -1,4 +1,4 @@
-import { Icon } from '~/components'
+import { Button, Icon } from '~/components'
 import { ModalContext } from '~/components/ModalManager'
 import { Title } from '~/components/Title'
 
@@ -21,7 +21,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
       <header>
         <Title type="modal">{title || children}</Title>
         {closeable && (
-          <button
+          <Button
             onClick={() => {
               if (close) {
                 close()
@@ -31,7 +31,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
             }}
           >
             <Icon.Clear size="md" color="grey-dark" />
-          </button>
+          </Button>
         )}
 
         <style jsx>{styles}</style>

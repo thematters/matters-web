@@ -5,7 +5,7 @@
 
 .uploader {
   @mixin flex-center-all;
-  @mixin cover;
+  @mixin expand-to-container;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   color: var(--color-white);
@@ -28,7 +28,7 @@
 
 .input {
   @mixin flex-center-all;
-  @mixin cover;
+  @mixin expand-to-container;
 
   cursor: pointer;
   opacity: 0;

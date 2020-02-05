@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { Icon, Translate } from '~/components'
-import { Button } from '~/components/Button'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ModalSwitch } from '~/components/ModalManager'
@@ -185,18 +184,24 @@ const CommentForm = ({
         update={(params: { content: string }) => setContent(params.content)}
       />
       <div className="buttons">
-        {extraButton && extraButton}
+        {extraButton}
+
         <Button
-          type="submit"
+          size={[null, '2rem']}
+          spacing={[0, 'base']}
           bgColor="green"
+          type="submit"
           disabled={
             isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
           }
-          icon={
-            isSubmitting ? <Icon.Spinner size="md" /> : <Icon.Edit size="md" />
-          }
         >
-          <Translate zh_hant="送出" zh_hans="送出" />
+          <TextIcon
+            color="white"
+            weight="md"
+            icon={isSubmitting ? <Icon.Spinner size="sm" /> : <Icon.Edit />}
+          >
+            <Translate zh_hant="送出" zh_hans="送出" />
+          </TextIcon>
         </Button>
       </div>
 
@@ -212,12 +217,11 @@ const CommentFormWrap = (props: CommentFormProps) => {
     return (
       <ModalSwitch modalId="likeCoinTermModal">
         {(open: any) => (
-          <button className="blocked" onClick={open}>
+          <button className="blocked" type="button" onClick={open}>
             <Translate
               zh_hant="設置 Liker ID 後即可參與精彩討論"
               zh_hans="设置 Liker ID 后即可参与精彩讨论"
             />
-
             <style jsx>{styles}</style>
           </button>
         )}
@@ -227,26 +231,25 @@ const CommentFormWrap = (props: CommentFormProps) => {
 
   if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
     return (
-      <section className="blocked">
+      <p className="blocked">
         <Translate
           zh_hant="新手小貼士：發佈作品收穫讚賞及瀏覽他人作品都能幫你開啓評論權限喔！"
           zh_hans="新手小贴士：发布作品收获赞赏及浏览他人作品都能帮你开启评论权限喔！"
         />
         <style jsx>{styles}</style>
-      </section>
+      </p>
     )
   }
 
   if (props.blocked) {
     return (
-      <section className="blocked">
+      <p className="blocked">
         <Translate
           zh_hant="因爲作者設置，你無法參與該作品下的討論。"
           zh_hans="因为作者设置，你无法参与该作品下的讨论。"
         />
-
         <style jsx>{styles}</style>
-      </section>
+      </p>
     )
   }
 

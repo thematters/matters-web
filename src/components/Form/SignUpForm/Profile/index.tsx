@@ -179,7 +179,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
 
       <div className="buttons">
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
           width="full"

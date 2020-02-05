@@ -15,7 +15,7 @@
 }
 
 .uploader {
-  @mixin cover;
+  @mixin expand-to-container;
 
   background-color: rgba(0, 0, 0, 0.7);
   color: var(--color-white);
@@ -35,62 +35,18 @@
     right: var(--spacing-loose);
     bottom: var(--spacing-loose);
   }
-}
-
-.button {
-  @mixin flex-center-all;
-
-  position: relative;
-
-  border-radius: 2.25rem;
-  border: 1px solid var(--color-white);
-  height: 2rem;
-  padding: 0 var(--spacing-x-tight);
-
-  @media (--sm-up) {
-    padding: 0 1.25rem;
-  }
 
   & label {
-    @mixin flex-center-all;
-
-    & > .upload {
-      display: none;
-      margin-left: var(--spacing-xx-tight);
-
-      @media (--sm-up) {
-        display: inline-block;
-      }
-    }
+    padding: 0 var(--spacing-base);
+    font-size: 0;
+  }
+  & input[type='file'] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
   }
 
-  & + .remove {
+  & :global(> * + *) {
     margin-left: var(--spacing-base);
-
-    @media (--sm-up) {
-      margin-left: var(--spacing-loose);
-    }
-  }
-}
-
-.input {
-  @mixin cover;
-
-  font-size: 0;
-  opacity: 0;
-}
-
-.error {
-  position: absolute;
-  left: 0;
-  bottom: -1.5rem;
-
-  color: var(--color-red);
-  font-size: var(--font-size-xs);
-
-  @media (--sm-down) {
-    left: 0;
-    bottom: -1.3rem;
-    width: 8rem;
   }
 }

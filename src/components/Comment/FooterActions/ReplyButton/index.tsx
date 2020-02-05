@@ -1,6 +1,4 @@
-import { Icon } from '~/components'
-
-import styles from './styles.css'
+import { Button, Icon } from '~/components'
 
 const ReplyButton = ({
   onClick,
@@ -11,16 +9,14 @@ const ReplyButton = ({
   active: boolean
   disabled: boolean
 }) => (
-  <button
-    type="button"
-    className={active ? 'active' : ''}
+  <Button
+    spacing={['xtight', 'xtight']}
+    bgHoverColor="grey-lighter"
     onClick={onClick}
     disabled={disabled}
   >
-    <Icon.Comment />
-
-    <style jsx>{styles}</style>
-  </button>
+    <Icon.Comment color={active ? 'green' : undefined} />
+  </Button>
 )
 
 export default ReplyButton

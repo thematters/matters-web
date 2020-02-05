@@ -47,6 +47,39 @@ const EditButton = ({
   const [setCollection, { loading }] = useMutation<EditorSetCollection>(
     EDITOR_SET_COLLECTION
   )
+  const onSave = async () => {
+    try {
+      await setCollection({
+        variables: {
+          id: article.id,
+          collection: _uniq(editingArticles.map((item: any) => item.id)),
+          first: null
+        }
+      })
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: <Translate zh_hant="關聯已更新" zh_hans="关联已更新" />,
+            closeButton: true,
+            duration: 2000
+          }
+        })
+      )
+    } catch (error) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate zh_hant="關聯失敗" zh_hans="关联失敗" />,
+            clostButton: true,
+            duration: 2000
+          }
+        })
+      )
+    }
+    setEditing(false)
+  }
   const editButtonClass = classNames({
     'edit-button': true
   })
@@ -54,11 +87,20 @@ const EditButton = ({
   if (!editing) {
     return (
       <span className={editButtonClass}>
-        <button onClick={() => setEditing(true)}>
-          <TextIcon color="grey" icon={<Icon.Edit />}>
+        <Button
+          size={['4rem', '1.5rem']}
+          bgHoverColor="grey-lighter"
+          onClick={() => setEditing(true)}
+        >
+          <TextIcon
+            color="grey"
+            size="xs"
+            weight="md"
+            icon={<Icon.Edit size="sm" />}
+          >
             <Translate zh_hant="修訂" zh_hans="修订" />
           </TextIcon>
-        </button>
+        </Button>
 
         <style jsx>{styles}</style>
       </span>
@@ -68,61 +110,34 @@ const EditButton = ({
   return (
     <span className={editButtonClass}>
       <Button
-        type="button"
-        bgColor="transparent"
-        textColor="grey"
-        spacing="base"
-        size="sm"
+        size={['4rem', '1.5rem']}
+        bgColor="grey-lighter"
         onClick={() => setEditing(false)}
       >
-        <Translate
-          zh_hant={TEXT.zh_hant.cancel}
-          zh_hans={TEXT.zh_hans.cancel}
-        />
+        <TextIcon color="grey" size="xs" weight="md">
+          <Translate
+            zh_hant={TEXT.zh_hant.cancel}
+            zh_hans={TEXT.zh_hans.cancel}
+          />
+        </TextIcon>
       </Button>
 
       <Button
-        icon={loading ? <Icon.Spinner size="md" /> : <Icon.Pen size="md" />}
-        size="sm"
+        size={['4rem', '1.5rem']}
+        textColor="green"
+        textHoverColor="white"
+        bgHoverColor="green"
+        borderColor="green"
         disabled={!!loading}
-        onClick={async () => {
-          try {
-            await setCollection({
-              variables: {
-                id: article.id,
-                collection: _uniq(editingArticles.map((item: any) => item.id)),
-                first: null
-              }
-            })
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate zh_hant="關聯已更新" zh_hans="关联已更新" />
-                  ),
-                  closeButton: true,
-                  duration: 2000
-                }
-              })
-            )
-          } catch (error) {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'red',
-                  content: <Translate zh_hant="關聯失敗" zh_hans="关联失敗" />,
-                  clostButton: true,
-                  duration: 2000
-                }
-              })
-            )
-          }
-          setEditing(false)
-        }}
-        outlineColor="green"
+        onClick={onSave}
       >
-        <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+        <TextIcon
+          size="xs"
+          weight="md"
+          icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
+        >
+          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+        </TextIcon>
       </Button>
 
       <style jsx>{styles}</style>

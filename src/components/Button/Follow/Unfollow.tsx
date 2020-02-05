@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Button, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -25,10 +25,10 @@ const UNFOLLOW_USER = gql`
 
 const Unfollow = ({
   user,
-  size = 'sm'
+  isLarge
 }: {
   user: FollowButtonUser
-  size?: 'sm' | 'default'
+  isLarge?: boolean
 }) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
@@ -50,30 +50,32 @@ const Unfollow = ({
 
   return (
     <Button
-      size={size}
-      style={size === 'sm' ? { width: '4rem' } : { width: '5.5rem' }}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+      size={isLarge ? ['6rem', '2rem'] : ['4rem', '1.5rem']}
+      textColor="white"
+      bgColor="green"
+      bgHoverColor="red"
+      onClick={() => {
         unfollow()
         analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
           id: user.id
         })
-        e.stopPropagation()
       }}
-      bgColor={hover ? 'red' : 'green'}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {hover ? (
-        <Translate
-          zh_hant={TEXT.zh_hant.unfollow}
-          zh_hans={TEXT.zh_hans.unfollow}
-        />
-      ) : (
-        <Translate
-          zh_hant={TEXT.zh_hant.followed}
-          zh_hans={TEXT.zh_hans.followed}
-        />
-      )}
+      <TextIcon weight="md" size={isLarge ? 'sm' : 'xs'}>
+        {hover ? (
+          <Translate
+            zh_hant={TEXT.zh_hant.unfollow}
+            zh_hans={TEXT.zh_hans.unfollow}
+          />
+        ) : (
+          <Translate
+            zh_hant={TEXT.zh_hant.followed}
+            zh_hans={TEXT.zh_hans.followed}
+          />
+        )}
+      </TextIcon>
     </Button>
   )
 }

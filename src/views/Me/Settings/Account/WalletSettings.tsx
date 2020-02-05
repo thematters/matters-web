@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Icon, PageHeader, TextIcon, Translate } from '~/components'
+import { Button, Icon, PageHeader, TextIcon, Translate } from '~/components'
 import { ModalSwitch } from '~/components/ModalManager'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -29,9 +29,9 @@ const VIEWER_LIKE_INFO = gql`
 const SetupLikerIdButton = () => (
   <ModalSwitch modalId="setupLikerIdModal">
     {(open: any) => (
-      <button type="button" className="u-link-green" onClick={open}>
+      <Button className="u-link-green" onClick={open}>
         <Translate zh_hant={TEXT.zh_hant.setup} zh_hans={TEXT.zh_hans.setup} />
-      </button>
+      </Button>
     )}
   </ModalSwitch>
 )

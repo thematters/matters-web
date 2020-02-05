@@ -63,9 +63,10 @@ export const AuthorPicker = ({
   return (
     <div className={containerStyle}>
       <PageHeader title={title}>
-        <div className="follow-info">
+        <div>
           <ShuffleButton onClick={() => refetch()} />
-          <span>
+
+          <span className="follow-info">
             <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
             <span className="hightlight">{numFormat(followeeCount)}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" />

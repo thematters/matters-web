@@ -97,7 +97,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                     )
                     hideDropdown()
                   }}
-                  className="frequent-item"
+                  className="u-link-green"
                 >
                   {key}
                 </a>

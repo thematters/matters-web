@@ -98,7 +98,7 @@ const TermModal: React.FC<FormProps> = formProps => {
         </Modal.FooterButton>
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={isSubmitting}
           loading={isSubmitting}
         >

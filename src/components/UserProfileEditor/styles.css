@@ -96,4 +96,8 @@
 
 .buttons {
   margin-top: var(--spacing-loose);
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-tight);
+  }
 }

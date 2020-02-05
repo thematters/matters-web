@@ -124,7 +124,9 @@ const Rich = ({
             <FollowButton.State user={user} />
           </header>
 
-          <p className="description">{user.info.description}</p>
+          {user.info.description && (
+            <p className="description">{user.info.description}</p>
+          )}
         </section>
 
         <section className="extra-button">

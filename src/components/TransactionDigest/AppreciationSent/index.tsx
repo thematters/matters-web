@@ -45,17 +45,24 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
     <Card {...path}>
       <section className="container">
         <section className="left">
-          {isUseContent && content && <h4 className="content">{content}</h4>}
-          {!isUseContent && target && <ArticleDigest.Title article={target} />}
-          {recipient && !isUseContent && (
-            <UserDigest.Mini
-              user={recipient}
-              avatarSize="xs"
-              hasAvatar
-              hasDisplayName
-              hasUserName
-            />
-          )}
+          <header>
+            {isUseContent && content && <h4 className="content">{content}</h4>}
+            {!isUseContent && target && (
+              <ArticleDigest.Title article={target} />
+            )}
+          </header>
+
+          <footer>
+            {recipient && !isUseContent && (
+              <UserDigest.Mini
+                user={recipient}
+                avatarSize="xs"
+                hasAvatar
+                hasDisplayName
+                hasUserName
+              />
+            )}
+          </footer>
         </section>
 
         <section className="right">

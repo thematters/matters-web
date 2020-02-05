@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import jump from 'jump.js'
-import { MouseEventHandler } from 'react'
 
-import { Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, dom, numAbbr } from '~/common/utils'
@@ -19,17 +18,32 @@ const fragments = {
   `
 }
 
-const ButtonWithEffect = ({
-  onClick,
-  text,
-  textPlacement
+const ResponseButton = ({
+  article,
+  textPlacement = 'right'
 }: {
-  onClick: MouseEventHandler
-  text: string
+  article: ResponseButtonArticle
   textPlacement?: 'bottom' | 'right'
 }) => {
+  const onClick = () => {
+    const element = dom.$('#comments')
+    if (element) {
+      jump('#comments', { offset: -10 })
+    }
+
+    analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
+      entrance: article.id,
+      type: 'article-detail'
+    })
+  }
+
   return (
-    <button type="button" aria-label="查看回應" onClick={onClick}>
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
+      aria-label="查看回應"
+      onClick={onClick}
+    >
       <TextIcon
         icon={<Icon.Comment color="black" size="md-s" />}
         color="grey"
@@ -38,35 +52,9 @@ const ButtonWithEffect = ({
         size="xs"
         spacing={textPlacement === 'bottom' ? 'xxxtight' : 'xxtight'}
       >
-        {text}
+        {numAbbr(article.responseCount || 0)}
       </TextIcon>
-    </button>
-  )
-}
-
-const ResponseButton = ({
-  article,
-  textPlacement = 'right'
-}: {
-  article: ResponseButtonArticle
-  textPlacement?: 'bottom' | 'right'
-}) => {
-  return (
-    <ButtonWithEffect
-      onClick={() => {
-        const element = dom.$('#comments')
-        if (element) {
-          jump('#comments', { offset: -10 })
-        }
-
-        analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-          entrance: article.id,
-          type: 'article-detail'
-        })
-      }}
-      text={numAbbr(article.responseCount || 0)}
-      textPlacement={textPlacement}
-    />
+    </Button>
   )
 }
 

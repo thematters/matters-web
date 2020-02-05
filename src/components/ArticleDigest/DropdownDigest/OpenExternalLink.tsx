@@ -11,7 +11,7 @@ const OpenExternalLink = ({ article }: { article: DropdownDigestArticle }) => {
   })
 
   return (
-    <a href={path.as} target="_blank" onClick={e => e.stopPropagation()}>
+    <a href={path.as} target="_blank">
       <Icon.External color="green" />
     </a>
   )

@@ -16,7 +16,7 @@ interface Props {
   placeholder?: string
   floatElement?: any
   hint?: string
-  style?: { [key: string]: any }
+  style?: React.CSSProperties
 
   values: any
   errors: any

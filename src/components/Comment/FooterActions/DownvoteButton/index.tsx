@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
 import {
   UNVOTE_COMMENT,
@@ -61,42 +61,34 @@ const DownvoteButton = ({
 
   if (comment.myVote === 'down') {
     return (
-      <button
-        type="button"
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgHoverColor="grey-lighter"
         onClick={() => {
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
       >
-        <TextIcon
-          icon={<Icon.DownVoteActive />}
-          color="green"
-          weight="md"
-          spacing="xxtight"
-        >
+        <TextIcon icon={<Icon.DownVoteActive />} color="green" weight="md">
           {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
         </TextIcon>
-      </button>
+      </Button>
     )
   }
 
   return (
-    <button
-      type="button"
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
       onClick={() => {
         onClick ? onClick() : downvote()
       }}
       disabled={disabled}
     >
-      <TextIcon
-        icon={<Icon.DownVote color="grey" />}
-        color="grey"
-        weight="md"
-        spacing="xxtight"
-      >
+      <TextIcon icon={<Icon.DownVote color="grey" />} color="grey" weight="md">
         {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
       </TextIcon>
-    </button>
+    </Button>
   )
 }
 

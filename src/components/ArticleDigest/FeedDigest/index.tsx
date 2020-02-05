@@ -19,6 +19,8 @@ import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
 
 export type FeedDigestControls = {
   onClick?: () => any
+
+  inFollowFeed?: boolean
 } & FooterActionsControls
 
 type FeedDigestProps = {
@@ -64,6 +66,7 @@ const FeedDigest = ({
   inTagDetailLatest,
   inTagDetailSelected,
   inUserArticles,
+  inFollowFeed,
 
   onClick
 }: FeedDigestProps) => {
@@ -99,6 +102,11 @@ const FeedDigest = ({
             hasAvatar
             hasDisplayName
           />
+          {inFollowFeed && (
+            <span className="published-article">
+              <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
+            </span>
+          )}
         </section>
 
         <section className="right">
@@ -109,7 +117,7 @@ const FeedDigest = ({
       </header>
 
       <section className="title">
-        <ArticleTitleDigest article={article} />
+        <ArticleTitleDigest article={article} textSize="xm" />
       </section>
 
       {cover && (

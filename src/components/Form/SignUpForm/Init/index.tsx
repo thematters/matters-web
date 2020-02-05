@@ -152,6 +152,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
           }
         })
 
+        analytics.identifyUser()
+        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
+
         if (submitCallback) {
           submitCallback({ email, codeId, password })
         }
@@ -172,11 +175,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         } else {
           setFieldError('userName', errorMessage)
         }
+        setSubmitting(false)
       }
-
-      setSubmitting(false)
-      analytics.identifyUser()
-      analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
     }
   })
 
@@ -287,7 +287,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         {isInPage && <LoginRedirection />}
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

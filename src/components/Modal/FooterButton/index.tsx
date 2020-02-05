@@ -26,7 +26,7 @@ type AnchorButtonProps = {
 
 type NativeButtonProps = {
   is?: 'button'
-  htmlType?: 'button' | 'submit'
+  type?: 'button' | 'submit'
 } & BaseButtonProps
 
 type ButtonProps = LinkButtonProps | NativeButtonProps | AnchorButtonProps
@@ -39,7 +39,7 @@ const FooterButton: React.FC<ButtonProps> = ({
   is = 'button',
   href,
   as,
-  htmlType = 'button',
+  type = 'button',
 
   children,
   className,
@@ -81,7 +81,7 @@ const FooterButton: React.FC<ButtonProps> = ({
   // button
   return (
     <>
-      <button type={htmlType} className={buttonClasses} {...restProps}>
+      <button type={type} className={buttonClasses} {...restProps}>
         {loading && <Icon.Spinner size="md" />}
         {!loading && children}
       </button>

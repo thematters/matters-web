@@ -1,7 +1,14 @@
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance, TextIcon } from '~/components'
+import {
+  Button,
+  Dropdown,
+  Icon,
+  Menu,
+  PopperInstance,
+  TextIcon
+} from '~/components'
 import { LanguageConsumer, LanguageContext } from '~/components/Language'
 
 import styles from './styles.css'
@@ -28,15 +35,16 @@ export const LanguageSwitch = () => {
       trigger="click"
       onCreate={setInstance}
     >
-      <button type="button" className="sort-button" aria-haspopup="true">
-        <TextIcon
-          icon={<Icon.Expand size="xs" />}
-          spacing="xtight"
-          textPlacement="left"
-        >
+      <Button
+        size={[null, '1.5rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="green-lighter"
+        aria-haspopup="true"
+      >
+        <TextIcon icon={<Icon.Expand size="xs" />} textPlacement="left">
           {textMap[lang]}
         </TextIcon>
-      </button>
+      </Button>
     </Dropdown>
   )
 }

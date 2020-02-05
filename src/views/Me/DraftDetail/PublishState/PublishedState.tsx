@@ -16,7 +16,7 @@ const PublishedState = () => {
   return (
     <Toast.Instance
       color="green"
-      header={<Translate zh_hant="作品已發布" zh_hans="作品已发布" />}
+      header={<Translate zh_hant="作品已發佈" zh_hans="作品已发布" />}
       customButton={
         <Link {...path}>
           <a>

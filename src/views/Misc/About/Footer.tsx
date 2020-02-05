@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
-import { withIcon } from '~/components'
-import { Button } from '~/components/Button'
+import { Button, TextIcon, withIcon } from '~/components'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 
@@ -109,8 +108,15 @@ const Footer = () => {
                 name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
                 defaultValue=""
               />
-              <Button type="submit" bgColor="green" size="xl">
-                <Translate zh_hant="訂閱" zh_hans="订阅" />
+              <Button
+                size={[null, '2.25rem']}
+                spacing={[0, 'base']}
+                type="submit"
+                bgColor="green"
+              >
+                <TextIcon color="white" weight="md">
+                  <Translate zh_hant="訂閱" zh_hans="订阅" />
+                </TextIcon>
               </Button>
             </form>
           </div>

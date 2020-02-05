@@ -1,4 +1,4 @@
-import { Icon, Translate } from '~/components'
+import { Button, Icon, Translate } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
@@ -24,9 +24,9 @@ const Copy = ({ link }: { link: string }) => {
 
   return (
     <section className="copy">
-      <button onClick={copy} type="button" aria-label="複製連結">
+      <Button aria-label="複製連結" onClick={copy}>
         <Icon.Link color="black" />
-      </button>
+      </Button>
 
       <input
         id="shareLinkInput"

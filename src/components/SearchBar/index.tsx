@@ -3,7 +3,13 @@ import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
+import {
+  Button,
+  Dropdown,
+  Icon,
+  LanguageContext,
+  PopperInstance
+} from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
@@ -12,9 +18,14 @@ import AutoComplete from './AutoComplete'
 import styles from './styles.css'
 
 const SearchButton = () => (
-  <button type="submit" aria-label="搜尋">
-    <Icon.SearchLarge size="md" />
-  </button>
+  <Button
+    size={[null, '2.25rem']}
+    spacing={[0, 'xtight']}
+    type="submit"
+    aria-label="搜尋"
+  >
+    <Icon.SearchLarge size="md" color="black" />
+  </Button>
 )
 
 const BaseSearchBar: React.FC<{

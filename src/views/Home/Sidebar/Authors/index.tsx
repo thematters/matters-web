@@ -8,7 +8,6 @@ import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SidebarHeader from '../SidebarHeader'
-import styles from './styles.css'
 
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
@@ -71,8 +70,6 @@ const Authors = () => {
           ))}
         </List>
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

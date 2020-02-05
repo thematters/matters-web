@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import Link from 'next/link'
 
 import styles from './styles.css'
@@ -5,6 +6,8 @@ import styles from './styles.css'
 interface LinkWrapperProps {
   href: string
   as: string
+
+  textHoverColor?: 'green'
 
   disabled?: boolean
   onClick?: () => any
@@ -14,19 +17,26 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   href,
   as,
 
+  textHoverColor,
+
   disabled,
   onClick,
 
   children
-}) =>
-  disabled ? (
-    <>{children}</>
-  ) : (
+}) => {
+  if (disabled) {
+    return <>{children}</>
+  }
+
+  const linkClass = classNames({
+    [`text-hover-${textHoverColor}`]: !!textHoverColor
+  })
+
+  return (
     <Link href={href} as={as}>
       <a
-        onClick={e => {
-          e.stopPropagation()
-
+        className={linkClass}
+        onClick={() => {
           if (onClick) {
             onClick()
           }
@@ -38,3 +48,4 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
       </a>
     </Link>
   )
+}

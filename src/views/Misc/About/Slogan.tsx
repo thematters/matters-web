@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Button } from '~/components/Button'
+import { Button, TextIcon } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Translate } from '~/components/Language'
 
@@ -50,13 +50,15 @@ const Slogan = () => {
 
             <div className="buttons">
               <Button
-                size="lg"
+                size={[null, '2.25rem']}
+                spacing={[0, 'base']}
                 bgColor="green"
-                is="link"
                 as={PATHS.HOME.as}
                 href={PATHS.HOME.href}
               >
-                <Translate zh_hant="開始創作" zh_hans="开始创作" />
+                <TextIcon color="white" weight="md">
+                  <Translate zh_hant="開始創作" zh_hans="开始创作" />
+                </TextIcon>
               </Button>
             </div>
           </div>

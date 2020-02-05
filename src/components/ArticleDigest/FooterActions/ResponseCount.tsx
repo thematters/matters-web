@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Icon, LinkWrapper, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
 import { analytics, numAbbr, toPath } from '~/common/utils'
@@ -39,7 +39,9 @@ const ResponseCount = ({
   const isBanned = state === 'banned'
 
   return (
-    <LinkWrapper
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
       {...path}
       disabled={isBanned}
       onClick={() => {
@@ -54,11 +56,10 @@ const ResponseCount = ({
         color="grey"
         weight="md"
         size={size}
-        spacing="xxtight"
       >
-        {numAbbr(article.responseCount || 0)}
+        {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
-    </LinkWrapper>
+    </Button>
   )
 }
 

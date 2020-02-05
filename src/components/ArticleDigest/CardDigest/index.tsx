@@ -78,7 +78,11 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
         }
       >
         <header>
-          <ArticleTitleDigest article={{ ...article, title }} is="h3" />
+          <ArticleTitleDigest
+            article={{ ...article, title }}
+            is="h3"
+            textSize="md-s"
+          />
 
           {!cover && <p className="summary">{cleanedSummary}</p>}
         </header>

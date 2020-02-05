@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Icon, Translate } from '~/components'
+import { Button, Icon, Translate } from '~/components'
 import SignUpButton from '~/components/Button/SignUp'
 
 import { SIGNUP_TYPE } from '~/common/enums'
@@ -9,8 +9,6 @@ import IMG_AD from '~/static/images/ad.svg'
 import styles from './styles.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
-
-const signUpButtonStyle = { minWidth: '6rem' }
 
 const Wall = ({ show, client }: any) => {
   const outerClasses = classNames({ outer: true, show })
@@ -40,17 +38,14 @@ const Wall = ({ show, client }: any) => {
                 />
               </p>
               <div className="signup">
-                <SignUpButton
-                  extraStyle={signUpButtonStyle}
-                  type={SIGNUP_TYPE.AD_WALL}
-                >
+                <SignUpButton trackType={SIGNUP_TYPE.AD_WALL}>
                   <Translate zh_hant="註冊帳號" zh_hans="注册账号" />
                 </SignUpButton>
               </div>
               <div className="close">
-                <button onClick={close}>
+                <Button onClick={close}>
                   <Icon.Clear color="grey" />
-                </button>
+                </Button>
               </div>
             </section>
           </section>

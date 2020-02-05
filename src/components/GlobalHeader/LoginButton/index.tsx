@@ -1,4 +1,4 @@
-import { Button } from '~/components'
+import { Button, TextIcon } from '~/components'
 import { Translate } from '~/components/Language'
 import { ModalSwitch } from '~/components/ModalManager'
 
@@ -8,14 +8,17 @@ export default () => (
   <ModalSwitch modalId="loginModal">
     {(open: any) => (
       <Button
-        is="button"
-        size="lg"
-        bgColor="transparent"
-        spacing="loose"
-        className="u-link-green"
+        size={[null, '2.25rem']}
+        spacing={[0, 'loose']}
+        bgHoverColor="green-lighter"
         onClick={() => open()}
       >
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+        <TextIcon color="green" weight="md">
+          <Translate
+            zh_hant={TEXT.zh_hant.login}
+            zh_hans={TEXT.zh_hans.login}
+          />
+        </TextIcon>
       </Button>
     )}
   </ModalSwitch>

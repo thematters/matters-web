@@ -122,7 +122,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
       <div className="buttons">
         <Modal.FooterButton
           width="full"
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >
