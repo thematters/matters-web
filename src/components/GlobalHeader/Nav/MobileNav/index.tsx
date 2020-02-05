@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Button, Dropdown, Icon, PopperInstance } from '~/components'
 
-import { Z_INDEX_OVER_GLOBAL_HEADER } from '~/common/enums'
+import { Z_INDEX } from '~/common/enums'
 
 import DropdownContent from './DropdownContent'
 import styles from './styles.css'
@@ -27,7 +27,7 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
       distance={8}
       theme="dropdown shadow-default"
       onCreate={setInstance}
-      zIndex={Z_INDEX_OVER_GLOBAL_HEADER}
+      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <Button
         size={['2rem', '2rem']}

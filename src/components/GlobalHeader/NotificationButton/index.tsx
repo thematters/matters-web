@@ -18,7 +18,7 @@ import {
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 import { ViewerContext } from '~/components/Viewer'
 
-import { POLL_INTERVAL, Z_INDEX_OVER_GLOBAL_HEADER } from '~/common/enums'
+import { POLL_INTERVAL, Z_INDEX } from '~/common/enums'
 
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
@@ -78,7 +78,7 @@ const NoticeButton = ({
           refetch()
         }
       }}
-      zIndex={Z_INDEX_OVER_GLOBAL_HEADER}
+      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <Button
         size={['2rem', '2rem']}

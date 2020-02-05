@@ -13,6 +13,10 @@ export * from './events'
 export * from './time'
 export * from './oauth'
 
-export const Z_INDEX_GLOBAL_HEADER = 100
-export const Z_INDEX_OVER_GLOBAL_HEADER = Z_INDEX_GLOBAL_HEADER + 1
-export const Z_INDEX_UNDER_GLOBAL_HEADER = Z_INDEX_GLOBAL_HEADER - 1
+export const Z_INDEX = {
+  GLOBAL_HEADER: 100,
+  OVER_GLOBAL_HEADER: 101,
+  UNDER_GLOBAL_HEADER: 99,
+  MODAL: 200,
+  OVER_MODAL: 201
+}
