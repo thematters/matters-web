@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components/Language'
@@ -9,6 +10,12 @@ import Collapsed from './Collapsed'
 import styles from './styles.css'
 
 import { ContentComment } from './__generated__/ContentComment'
+
+interface ContentProps {
+  comment: ContentComment
+
+  size?: 'sm' | 'md-s'
+}
 
 const fragments = {
   comment: gql`
@@ -24,12 +31,17 @@ const fragments = {
   `
 }
 
-const Content = ({ comment }: { comment: ContentComment }) => {
+const Content = ({ comment, size }: ContentProps) => {
   const {
     content,
     state,
     author: { isBlocked }
   } = comment
+
+  const contentClass = classNames({
+    content: true,
+    [`size-${size}`]: !!size
+  })
 
   if (state === 'collapsed' || isBlocked) {
     return (
@@ -48,6 +60,7 @@ const Content = ({ comment }: { comment: ContentComment }) => {
             />
           )
         }
+        className={contentClass}
       />
     )
   }
@@ -56,7 +69,7 @@ const Content = ({ comment }: { comment: ContentComment }) => {
     return (
       <>
         <section
-          className="u-content-comment"
+          className={`${contentClass} u-content-comment`}
           dangerouslySetInnerHTML={{
             __html: content || ''
           }}
@@ -70,7 +83,7 @@ const Content = ({ comment }: { comment: ContentComment }) => {
 
   if (state === 'banned') {
     return (
-      <p className="inactive-content">
+      <p className={`${contentClass} inactive`}>
         <Translate
           zh_hant="此評論因違反用戶協定而被隱藏"
           zh_hans="此评论因违反用户协定而被隐藏"
@@ -83,7 +96,7 @@ const Content = ({ comment }: { comment: ContentComment }) => {
 
   if (state === 'archived') {
     return (
-      <p className="inactive-content">
+      <p className={`${contentClass} inactive`}>
         <Translate
           zh_hant={TEXT.zh_hant.commentDeleted}
           zh_hans={TEXT.zh_hans.commentDeleted}

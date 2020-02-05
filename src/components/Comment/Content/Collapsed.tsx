@@ -6,20 +6,24 @@ import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
 import styles from './styles.css'
 
-const Collapsed = ({
-  content,
-  collapsedContent
-}: {
+interface CollapsedProps {
   content: string | null
   collapsedContent: React.ReactNode | string
-}) => {
+  className: string
+}
+
+const Collapsed = ({
+  content,
+  collapsedContent,
+  className
+}: CollapsedProps) => {
   const [collapsed, setCollapsed] = useState(true)
 
   if (!collapsed) {
     return (
       <>
         <div
-          className="u-content-comment"
+          className={`${className} u-content-comment `}
           dangerouslySetInnerHTML={{
             __html: content || ''
           }}
@@ -32,7 +36,7 @@ const Collapsed = ({
   }
 
   return (
-    <p className="inactive-content">
+    <p className={`${className} inactive`}>
       <span>{collapsedContent}</span>
 
       {collapsed && (

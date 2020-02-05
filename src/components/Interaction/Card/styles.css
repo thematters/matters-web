@@ -2,13 +2,8 @@
   @mixin all-transition;
   outline: none;
 
-  &:not(.disable) {
+  &:not(.disabled) {
     cursor: pointer;
-
-    /* &:hover,
-  &:focus {
-    background: var(--color-green-lighter);
-  } */
   }
 }
 
@@ -16,9 +11,20 @@
 .bg-grey-lighter {
   background: var(--color-grey-lighter);
 
-  &:hover,
-  &:focus {
-    background: var(--color-grey-lighter-hover);
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter-hover);
+    }
+  }
+}
+
+.bg-hover-grey-lighter {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter);
+    }
   }
 }
 
@@ -47,11 +53,6 @@
 .spacing-x-base {
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
-}
-
-/* Text */
-.text-size-md-s {
-  font-size: var(--font-size-md-s);
 }
 
 /* Border */
