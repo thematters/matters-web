@@ -100,7 +100,7 @@
    * Calculated by RGB_background rgb(255, 255, 255) and RGBA_color rgba(0, 0, 0, 0.08)
    * https://marcodiiga.github.io/rgba-to-rgb-conversion
    */
-  --popper-border-color: #ebebeb;
+  --popper-border-color: rgba(0, 0, 0, 0.04);
 }
 
 .tippy-tooltip {
@@ -120,7 +120,7 @@
 /* theme:dropdown */
 .tippy-tooltip.dropdown-theme {
   color: var(--color-black);
-  border-radius: 2px;
+  border-radius: 8px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--popper-border-color);

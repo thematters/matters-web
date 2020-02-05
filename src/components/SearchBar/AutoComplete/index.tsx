@@ -67,7 +67,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
   }
 
   return (
-    <Menu width="full">
+    <Menu width="md">
       {showFrequentSearch && (
         <>
           <Menu.Header
@@ -75,11 +75,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
           />
 
           {frequentSearch.map((key, i) => (
-            <Menu.Item
-              spacing={['xtight', 'tight']}
-              hoverBgColor="green"
-              key={key}
-            >
+            <Menu.Item key={key}>
               <Link
                 {...toPath({
                   page: 'search',
@@ -128,11 +124,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
               q: node
             })
             return (
-              <Menu.Item
-                spacing={['xtight', 'tight']}
-                hoverBgColor="green"
-                key={node}
-              >
+              <Menu.Item key={node}>
                 <Link {...path}>
                   <a
                     onClick={() => {

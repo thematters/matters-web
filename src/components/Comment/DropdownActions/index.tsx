@@ -87,7 +87,7 @@ const DropdownActions = ({
   return (
     <Dropdown
       content={
-        <Menu>
+        <Menu width="sm">
           {isShowPinButton && (
             <Menu.Item>
               <PinButton comment={comment} hideDropdown={hideDropdown} />

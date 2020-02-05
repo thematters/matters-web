@@ -28,7 +28,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
   return (
     <Dropdown
       content={
-        <Menu>
+        <Menu width="sm">
           <Menu.Item>
             <BlockUserButton user={user} hideDropdown={hideDropdown} />
           </Menu.Item>

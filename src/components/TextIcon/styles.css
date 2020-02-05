@@ -116,6 +116,17 @@
     padding-top: var(--spacing-tight);
   }
 }
+.spacing-base.hasIcon {
+  &.text-right .text {
+    padding-left: var(--spacing-base);
+  }
+  &.text-left .text {
+    padding-right: var(--spacing-base);
+  }
+  &.text-bottom .text {
+    padding-top: var(--spacing-base);
+  }
+}
 
 /* weight */
 .weight-light {

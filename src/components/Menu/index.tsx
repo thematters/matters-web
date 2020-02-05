@@ -7,40 +7,29 @@ import Item from './Item'
 import styles from './styles.css'
 
 interface MenuProps {
-  width?: 'sm' | 'full' | 'md'
-  spacing?: '0' | 'xxxtight' | 'xxtight'
-
-  style?: React.CSSProperties
-  className?: string
+  width?: 'sm' | 'md'
+  spacingY?: 'xtight' | 0 | '0'
 }
 
-export class Menu extends React.PureComponent<MenuProps> {
-  public static Item = Item
-  public static Divider = Divider
-  public static Header = Header
+export const Menu: React.FC<MenuProps> & {
+  Item: typeof Item
+  Divider: typeof Divider
+  Header: typeof Header
+} = ({ width, spacingY = 'xtight', children }) => {
+  const menuClass = classNames({
+    menu: true,
+    [`width-${width}`]: !!width,
+    [`spacing-y-${spacingY}`]: !!spacingY
+  })
 
-  public render() {
-    const {
-      width = 'sm',
-      spacing = 'xxtight',
-      className,
-      style,
-      children
-    } = this.props
-
-    const menuClasses = classNames({
-      menu: true,
-      [`width-${width}`]: true,
-      [`spacing-${spacing}`]: true,
-      [className || '']: !!className
-    })
-
-    return (
-      <ul className={menuClasses} style={style} role="menu">
-        {children}
-
-        <style jsx>{styles}</style>
-      </ul>
-    )
-  }
+  return (
+    <ul className={menuClass} role="menu">
+      {children}
+      <style jsx>{styles}</style>
+    </ul>
+  )
 }
+
+Menu.Item = Item
+Menu.Divider = Divider
+Menu.Header = Header

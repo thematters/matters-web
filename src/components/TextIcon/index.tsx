@@ -7,7 +7,7 @@ interface TextIconProps {
 
   color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
   size?: 'xs' | 'sm' | 'md' | 'xm' | 'lg'
-  spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight'
+  spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   textPlacement?: 'bottom' | 'left' | 'right'

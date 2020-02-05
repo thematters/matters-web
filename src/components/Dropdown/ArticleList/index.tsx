@@ -26,11 +26,7 @@ const DropdownArticleList = ({
   return (
     <Menu width="md">
       {articles.map(article => (
-        <Menu.Item
-          spacing={['xtight', 'tight']}
-          hoverBgColor="green"
-          key={article.id}
-        >
+        <Menu.Item key={article.id}>
           <ArticleDigest.Dropdown
             article={article}
             titleTextSize="sm"

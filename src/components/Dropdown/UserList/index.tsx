@@ -26,36 +26,30 @@ const DropdownUserList = ({
   }
 
   return (
-    <>
-      <Menu width="md">
-        {users.map(user => (
-          <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
-            key={user.id}
+    <Menu width="md">
+      {users.map(user => (
+        <Menu.Item key={user.id}>
+          <button
+            className="search-user-item"
+            type="button"
+            onClick={() => {
+              onClick(user)
+            }}
+            disabled={user?.status?.state === 'archived'}
           >
-            <button
-              className="search-user-item"
-              type="button"
-              onClick={() => {
-                onClick(user)
-              }}
-              disabled={user?.status?.state === 'archived'}
-            >
-              <UserDigest.Mini
-                user={user}
-                direction="column"
-                hasAvatar
-                hasDisplayName
-                hasUserName
-              />
-            </button>
-          </Menu.Item>
-        ))}
-      </Menu>
+            <UserDigest.Mini
+              user={user}
+              direction="column"
+              hasAvatar
+              hasDisplayName
+              hasUserName
+            />
 
-      <style jsx>{styles}</style>
-    </>
+            <style jsx>{styles}</style>
+          </button>
+        </Menu.Item>
+      ))}
+    </Menu>
   )
 }
 

@@ -64,7 +64,7 @@ const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
       })
 
       return (
-        <Menu>
+        <Menu width="sm">
           <Menu.Item>
             <button
               type="button"

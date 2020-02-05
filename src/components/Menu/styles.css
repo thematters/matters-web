@@ -1,15 +1,7 @@
 .menu {
-  font-size: var(--font-size-sm);
-}
+  width: 100%;
 
-.spacing-0 {
-  padding: 0;
-}
-.spacing-xxxtight {
-  padding: var(--spacing-xxx-tight) 0;
-}
-.spacing-xxtight {
-  padding: var(--spacing-xx-tight) 0;
+  text-align: left;
 }
 
 .width-sm {
@@ -18,6 +10,8 @@
 .width-md {
   width: var(--sizing-menu-md);
 }
-.width-full {
-  width: 100%;
+
+.spacing-y-xtight {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-x-tight);
 }

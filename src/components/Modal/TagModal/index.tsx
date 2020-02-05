@@ -36,7 +36,7 @@ const DropdownDefaultItem = ({
   search: string
 }) => {
   return (
-    <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
+    <Menu.Item>
       <button
         className="search-tag-item create"
         type="button"
@@ -56,7 +56,6 @@ interface DropdownListBaseProps {
   items: any[]
   loading: boolean
   search: string
-  width?: number
 }
 
 const DropdownList = ({
@@ -64,13 +63,11 @@ const DropdownList = ({
   items,
   loading,
   search,
-  width,
   children
 }: DropdownListBaseProps & { children?: any }) => {
-  const menuStyle = width ? { width: `${Math.min(width, 350)}px` } : {}
   if (loading) {
     return (
-      <Menu style={menuStyle}>
+      <Menu width="sm">
         <Menu.Item>
           <Spinner />
         </Menu.Item>
@@ -84,13 +81,9 @@ const DropdownList = ({
 
   return (
     <>
-      <Menu style={menuStyle}>
+      <Menu width="sm">
         {items.map(item => (
-          <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
-            key={item.content}
-          >
+          <Menu.Item key={item.content}>
             <button className="search-tag-item" type="button">
               <span>{item.content}</span>
               <span className="search-tag-count">

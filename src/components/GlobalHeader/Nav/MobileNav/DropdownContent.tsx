@@ -25,7 +25,7 @@ const DropdownContent: React.FC<{
 
   return (
     <>
-      <Menu>
+      <Menu width="sm">
         <Menu.Item>
           <Link {...PATHS.HOME}>
             <a onClick={hideDropdown} className={homeClasses}>

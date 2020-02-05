@@ -36,20 +36,16 @@ const DropdownContent = ({
   loading: boolean
 }) =>
   loading ? (
-    <Menu>
+    <Menu width="sm">
       <Menu.Item>
         <Spinner />
       </Menu.Item>
     </Menu>
   ) : (
     <>
-      <Menu>
+      <Menu width="sm">
         {tags.map(tag => (
-          <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
-            key={tag.content}
-          >
+          <Menu.Item key={tag.content}>
             <button
               className="search-tag-item"
               type="button"
@@ -68,7 +64,7 @@ const DropdownContent = ({
 
         {tags && tags.length > 0 && <Menu.Divider />}
 
-        <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
+        <Menu.Item>
           <button
             className="search-tag-item create"
             type="button"

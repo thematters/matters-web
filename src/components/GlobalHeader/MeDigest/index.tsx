@@ -32,11 +32,10 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
     'u-sm-down-hide': isDraft
   })
 
+  console.log(hideDropdown)
+
   return (
-    <Dropdown
-      content={<DropdownMenu hideDropdown={hideDropdown} />}
-      onCreate={setInstance}
-    >
+    <Dropdown content={<DropdownMenu />} onCreate={setInstance}>
       <button
         type="button"
         className={containerClasses}

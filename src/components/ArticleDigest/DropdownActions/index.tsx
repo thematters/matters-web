@@ -76,7 +76,7 @@ const DropdownContent = ({
   hasSetTagUnselectedButton
 }: DropdownContentProps) => {
   return (
-    <Menu>
+    <Menu width="sm">
       {/* public */}
       {hasExtendButton && (
         <Menu.Item>
