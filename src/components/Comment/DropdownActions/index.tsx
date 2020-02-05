@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import { Button, Dropdown, Icon, Menu, PopperInstance } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -134,9 +134,15 @@ const DropdownActions = ({
       placement="bottom-end"
       zIndex={301}
     >
-      <button type="button" aria-label="更多操作" aria-haspopup="true">
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgHoverColor="grey-lighter"
+        compensation="right"
+        aria-label="更多操作"
+        aria-haspopup="true"
+      >
         <Icon.More color="grey" />
-      </button>
+      </Button>
     </Dropdown>
   )
 }

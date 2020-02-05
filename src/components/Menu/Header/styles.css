@@ -5,6 +5,6 @@ header {
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
 
-  font-size: var(--font-size-sm-s);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-semibold);
 }

@@ -1,15 +1,19 @@
 header {
   @mixin flex-center-space-between;
 
-  font-size: 0;
-
   & .left,
   & .right {
-    display: flex;
-    align-items: center;
+    @mixin inline-flex-center-all;
+
+    & .published-article {
+      margin-left: var(--spacing-x-tight);
+
+      color: var(--color-grey);
+      font-size: var(--font-size-sm);
+    }
 
     & :global(> * + *) {
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--spacing-tight);
     }
   }
 }

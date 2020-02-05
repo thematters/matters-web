@@ -50,7 +50,7 @@ const ArticleFeatureDigest = ({
   })
 
   return (
-    <Card {...path}>
+    <Card spacing={[0, 0]} {...path}>
       <section className="container" onClick={onClick}>
         <div className="cover-container">
           <div

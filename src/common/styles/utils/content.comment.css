@@ -46,15 +46,18 @@
   /* Blockquote
    ========================================================================== */
   & :global(blockquote) {
-    width: 100%;
+    position: relative;
     padding: 0 var(--spacing-base);
 
-    color: var(--color-matters-gold);
-    font-size: var(--font-size-sm);
-    line-height: 2;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
 
-    @media (--sm-up) {
-      padding: 0 var(--spacing-loose);
+      width: 4px;
+      height: 100%;
+      background: var(--color-matters-gold);
     }
   }
 

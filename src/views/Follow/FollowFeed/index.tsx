@@ -103,6 +103,7 @@ const FollowFeed = () => {
                     location: i
                   })
                 }
+                inFollowFeed
               />
             )}
             {node.__typename === 'Comment' && (

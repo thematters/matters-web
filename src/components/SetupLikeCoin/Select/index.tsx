@@ -137,7 +137,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
 
       <footer>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           onClick={(e: FormEvent) => {
             e.preventDefault()
 

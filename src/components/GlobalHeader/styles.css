@@ -30,13 +30,6 @@ header {
   }
 }
 
-.holder {
-  height: var(--global-header-height); /* fallback */
-  height: calc(
-    var(--global-header-height) + 1px
-  ); /* global header's height + 1px border */
-}
-
 .container {
   @mixin flex-center-space-between;
 
@@ -55,14 +48,14 @@ header {
 }
 
 .right.me {
-  & > :global(> *) {
+  & :global(> *) {
     display: inline-block;
   }
-  & > :global(* + *:not(.tippy-popper)) {
-    margin-left: var(--spacing-base);
+  & :global(> * + *) {
+    margin-left: var(--spacing-tight);
 
     @media (--sm-up) {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--spacing-loose);
     }
   }
 }

@@ -17,14 +17,13 @@
   background: var(--color-matters-green);
   white-space: nowrap;
 
-  & button {
-    margin-left: var(--spacing-x-tight);
-    font-size: 0;
-  }
   & :global(> *) {
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
+  }
+  & :global(> * + *) {
+    margin-left: var(--spacing-xx-tight);
   }
 }
 

@@ -24,7 +24,7 @@ header {
   justify-content: flex-start;
   align-items: center;
 
-  & :global(* + *) {
+  & :global(> * + *) {
     margin-left: var(--spacing-xx-tight);
   }
 }

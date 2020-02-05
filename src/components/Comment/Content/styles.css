@@ -6,7 +6,7 @@
   color: var(--color-grey);
   font-size: var(--font-size-sm);
 
-  & .expand-button {
-    margin-left: var(--spacing-x-tight);
+  & :global(button) {
+    margin-left: var(--spacing-tight);
   }
 }

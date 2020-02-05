@@ -287,7 +287,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         {isInPage && <LoginRedirection />}
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

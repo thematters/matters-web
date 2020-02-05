@@ -17,8 +17,6 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { AllAuthors } from './__generated__/AllAuthors'
 
 const ALL_AUTHORSS = gql`
@@ -136,8 +134,6 @@ export default () => {
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Footer />
       </aside>
-
-      <style jsx>{styles}</style>
     </main>
   )
 }

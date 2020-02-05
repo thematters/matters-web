@@ -1,8 +1,0 @@
-.edit-tag {
-  margin: 0rem 0rem 0rem var(--spacing-loose);
-
-  & :global(svg) {
-    fill: var(--color-green);
-    stroke: var(--color-green);
-  }
-}

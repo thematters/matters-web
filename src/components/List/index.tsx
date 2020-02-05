@@ -64,8 +64,8 @@ export const List: React.FC<ListProps> & {
 }) => {
   const listClass = classNames({
     list: true,
-    [`spacing-vertical-${spacing[0]}`]: !!spacing[0],
-    [`spacing-horizontal-${spacing[1]}`]: !!spacing[1],
+    [`spacing-y-${spacing[0]}`]: !!spacing[0],
+    [`spacing-x-${spacing[1]}`]: !!spacing[1],
     'has-border': !!hasBorder,
     [className]: !!className
   })

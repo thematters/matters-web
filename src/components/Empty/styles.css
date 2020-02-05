@@ -3,19 +3,19 @@
   color: var(--color-grey-light);
 }
 
-.spacing-vertical-loose {
+.spacing-y-loose {
   padding-top: var(--spacing-x-loose);
   padding-bottom: var(--spacing-x-loose);
 }
-.spacing-vertical-0 {
+.spacing-y-0 {
   padding-top: 0;
   padding-bottom: 0;
 }
-.spacing-horizontal-loose {
+.spacing-x-loose {
   padding-left: var(--spacing-loose);
   padding-right: var(--spacing-loose);
 }
-.spacing-horizontal-0 {
+.spacing-x-0 {
   padding-left: 0;
   padding-right: 0;
 }

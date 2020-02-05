@@ -70,7 +70,7 @@
 /**
  * Misc
  */
-@define-mixin cover {
+@define-mixin expand-to-container {
   position: absolute;
   top: 0;
   left: 0;

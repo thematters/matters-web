@@ -8,13 +8,8 @@ footer {
 
   & .left,
   & .right {
-    display: flex;
-    align-items: center;
-
-    & > :global(* + *) {
-      margin-left: var(--spacing-loose);
-
-      line-height: 1;
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
     }
   }
 }

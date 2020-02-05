@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
 import {
+  Button,
   Dropdown,
   Icon,
   IconColor,
@@ -187,14 +188,15 @@ const DropdownActions = ({
         placement="bottom-end"
         zIndex={301}
       >
-        <button
-          type="button"
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
           aria-label="更多操作"
           aria-haspopup="true"
-          onClick={e => e.stopPropagation()}
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
         >
           <Icon.More color={color} size={size} />
-        </button>
+        </Button>
       </Dropdown>
 
       <style jsx>{styles}</style>

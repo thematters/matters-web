@@ -155,7 +155,7 @@ const OAuthAuthorize = () => {
                 />
               </Modal.FooterButton>
             ) : (
-              <Modal.FooterButton htmlType="submit" width="full">
+              <Modal.FooterButton type="submit" width="full">
                 <Translate
                   zh_hant={TEXT.zh_hant.agree}
                   zh_hans={TEXT.zh_hans.agree}

@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Icon, Popover, Spinner, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  Popover,
+  Spinner,
+  TextIcon,
+  Translate
+} from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
@@ -53,15 +60,14 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
               zh_hans={TEXT.zh_hans.articleFingerprint}
             />
           </h4>
-          <button
-            type="button"
+          <Button
             onClick={() => {
               copy(dataHash)
             }}
             aira-label="複製"
           >
             <Icon.Link color="grey" />
-          </button>
+          </Button>
         </header>
 
         <section>
@@ -81,7 +87,10 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
             <Translate zh_hans="公共节点" zh_hant="公共節點" />
           </h4>
 
-          <button
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgHoverColor="grey-lighter"
             onClick={() => {
               setGatewaysExpand(!gatewaysExpand)
             }}
@@ -98,7 +107,7 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
                 zh_hans={gatewaysExpand ? '收起全部' : '展开全部'}
               />
             </TextIcon>
-          </button>
+          </Button>
         </header>
 
         {loading && <Spinner />}
@@ -118,9 +127,9 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
                   {hostname}
                 </a>
 
-                <button onClick={() => copy(gatewayUrl)} aira-label="複製">
+                <Button onClick={() => copy(gatewayUrl)} aira-label="複製">
                   <Icon.Link color="grey" />
-                </button>
+                </Button>
               </li>
             )
           })}
@@ -176,7 +185,12 @@ const Fingerprint = ({
       trigger="click"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
-      <button type="button" aria-haspopup="true">
+      <Button
+        size={[null, '1.25rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="grey-lighter"
+        aria-haspopup="true"
+      >
         <TextIcon
           icon={<Icon.IPFSMedium size={size === 'xs' ? 'xs' : undefined} />}
           size={size}
@@ -185,9 +199,7 @@ const Fingerprint = ({
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Button>
     </Popover>
   )
 }

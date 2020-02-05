@@ -275,7 +275,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           />
         </Modal.FooterButton>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

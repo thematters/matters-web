@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Button, PageHeader, Translate } from '~/components'
+import { Button, PageHeader, TextIcon, Translate } from '~/components'
 import EmailModal from '~/components/Modal/EmailModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import UserNameModal from '~/components/Modal/UserNameModal'
@@ -21,17 +21,20 @@ const EditButton = ({
   <ModalSwitch modalId={modalId}>
     {(open: any) => (
       <Button
-        outlineColor="green"
-        bgColor="transparent"
-        size="sm"
-        style={{ width: '3rem' }}
+        size={['4rem', '1.5rem']}
+        textColor="green"
+        textHoverColor="white"
+        bgHoverColor="green"
+        borderColor="green"
         onClick={open}
         disabled={disabled}
       >
-        <Translate
-          zh_hant={TEXT.zh_hant.change}
-          zh_hans={TEXT.zh_hans.change}
-        />
+        <TextIcon weight="md" size="xs">
+          <Translate
+            zh_hant={TEXT.zh_hant.change}
+            zh_hans={TEXT.zh_hans.change}
+          />
+        </TextIcon>
       </Button>
     )}
   </ModalSwitch>

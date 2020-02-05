@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 
+import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { Translate } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { ClearHistory } from './__generated__/ClearHistory'
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
@@ -85,12 +83,12 @@ const ClearHistoryButton = () => {
   })
 
   return (
-    <button
-      type="button"
-      className="clear-history-btn"
+    <Button
+      size={[null, '1.25rem']}
+      spacing={[0, 'xtight']}
+      bgHoverColor="grey-lighter"
       onClick={async () => {
         await clear()
-
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -103,10 +101,10 @@ const ClearHistoryButton = () => {
         )
       }}
     >
-      <Translate zh_hant="清空" zh_hans="清空" />
-
-      <style jsx>{styles}</style>
-    </button>
+      <TextIcon size="xs" weight="normal" color="grey-dark">
+        <Translate zh_hant="清空" zh_hans="清空" />
+      </TextIcon>
+    </Button>
   )
 }
 

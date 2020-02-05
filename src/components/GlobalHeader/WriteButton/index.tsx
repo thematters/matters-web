@@ -2,7 +2,13 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
 
-import { Button, Icon, LanguageContext, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  LanguageContext,
+  TextIcon,
+  Translate
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import { ModalSwitch } from '~/components/ModalManager'
 
@@ -32,32 +38,38 @@ const WriteButton = ({
   loading?: boolean
 }) => {
   const WriteIcon = loading ? (
-    <Icon.Spinner size="md" className="u-motion-spin" />
+    <Icon.Spinner size="sm" color="white" />
   ) : (
-    <Icon.Pen size="md" />
+    <Icon.Pen size="sm" color="white" />
   )
 
   return (
     <>
       <Button
-        className="u-sm-down-hide"
+        spacing={[0, 'base']}
+        size={[null, '2.25rem']}
         bgColor="gold"
-        size="lg"
-        aria-label="創作"
-        icon={WriteIcon}
         onClick={onClick}
+        className="u-sm-down-hide"
+        aria-label="創作"
       >
-        <Translate zh_hant={TEXT.zh_hant.write} zh_hans={TEXT.zh_hans.write} />
+        <TextIcon icon={WriteIcon} weight="md" color="white">
+          <Translate
+            zh_hant={TEXT.zh_hant.write}
+            zh_hans={TEXT.zh_hans.write}
+          />
+        </TextIcon>
       </Button>
 
       <Button
         className="u-sm-up-hide"
+        size={['2rem', '2rem']}
         bgColor="gold"
-        shape="circle"
         aria-label="創作"
-        icon={WriteIcon}
         onClick={onClick}
-      />
+      >
+        {WriteIcon}
+      </Button>
     </>
   )
 }

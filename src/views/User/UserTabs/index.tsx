@@ -29,6 +29,10 @@ const MeTabs = () => {
     page: 'userBookmarks',
     userName
   })
+  const userHistoryPath = toPath({
+    page: 'userHistory',
+    userName
+  })
 
   if (isMe) {
     return (
@@ -70,6 +74,16 @@ const MeTabs = () => {
           <Translate
             zh_hant={TEXT.zh_hant.bookmark}
             zh_hans={TEXT.zh_hans.bookmark}
+          />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          {...userHistoryPath}
+          selected={router.pathname === PATHS.USER_HISTORY.href}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.history}
+            zh_hans={TEXT.zh_hans.history}
           />
         </Tabs.Tab>
       </Tabs>

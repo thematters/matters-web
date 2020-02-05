@@ -1,18 +1,19 @@
-import { Button, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
 export default () => (
   <Button
+    size={['6rem', '2.25rem']}
     bgColor="green"
-    size="lg"
-    is="link"
     href={PATHS.HOME.href}
     as={PATHS.HOME.as}
   >
-    <Translate
-      zh_hant={TEXT.zh_hant.backToDiscover}
-      zh_hans={TEXT.zh_hans.backToDiscover}
-    />
+    <TextIcon color="white" weight="md">
+      <Translate
+        zh_hant={TEXT.zh_hant.backToDiscover}
+        zh_hans={TEXT.zh_hans.backToDiscover}
+      />
+    </TextIcon>
   </Button>
 )

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
@@ -33,27 +33,25 @@ const Collapsed = ({
 
   return (
     <p className="inactive-content">
-      {collapsedContent}
+      <span>{collapsedContent}</span>
 
       {collapsed && (
-        <button
-          className="expand-button"
-          type="button"
-          onClick={e => {
+        <Button
+          spacing={['xxtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          onClick={() => {
             setCollapsed(false)
-            e.stopPropagation()
           }}
         >
           <TextIcon
             icon={<Icon.Expand size="xs" />}
-            spacing="xxtight"
             textPlacement="left"
             weight="normal"
             color="grey"
           >
             <Translate zh_hant="打開" zh_hans="展开" />
           </TextIcon>
-        </button>
+        </Button>
       )}
 
       <style jsx>{styles}</style>

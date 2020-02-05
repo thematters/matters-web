@@ -66,9 +66,14 @@ const TitleDigest = ({
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight
   })
+  const isClickable = !disabled && !isBanned
 
   return (
-    <LinkWrapper {...path} disabled={disabled || isBanned}>
+    <LinkWrapper
+      {...path}
+      textHoverColor={isClickable ? 'green' : undefined}
+      disabled={!isClickable}
+    >
       <>
         {is === 'h2' ? (
           <h2 className={titleClasses}>{title}</h2>

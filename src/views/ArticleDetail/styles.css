@@ -9,15 +9,15 @@
   padding-top: var(--spacing-x-tight);
 
   & .right-items {
-    & > :global(*) + :global(*) {
-      margin-left: var(--spacing-x-tight);
+    & :global(> * + *) {
+      margin-left: var(--spacing-tight);
     }
   }
 }
 
 .author {
   @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-base);
+  padding-bottom: var(--spacing-xx-tight);
   margin-bottom: var(--spacing-base);
 }
 

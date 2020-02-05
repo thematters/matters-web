@@ -1,6 +1,14 @@
 import Link from 'next/link'
 
-import { Error, Icon, List, Spinner, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Error,
+  Icon,
+  List,
+  Spinner,
+  TextIcon,
+  Translate
+} from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { Notice } from '~/components/Notice'
 
@@ -22,16 +30,19 @@ const Header = () => (
     <h4>
       <Translate zh_hant="通知" zh_hans="通知" />
     </h4>
-    <Link {...PATHS.ME_SETTINGS_NOTIFICATION}>
-      <a>
-        <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
-          <Translate
-            zh_hant={TEXT.zh_hant.setting}
-            zh_hans={TEXT.zh_hans.setting}
-          />
-        </TextIcon>
-      </a>
-    </Link>
+
+    <Button
+      spacing={['xxtight', 'xtight']}
+      bgHoverColor="grey-lighter"
+      {...PATHS.ME_SETTINGS_NOTIFICATION}
+    >
+      <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
+        <Translate
+          zh_hant={TEXT.zh_hant.setting}
+          zh_hans={TEXT.zh_hans.setting}
+        />
+      </TextIcon>
+    </Button>
 
     <style jsx>{styles}</style>
   </header>

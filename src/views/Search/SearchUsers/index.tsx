@@ -15,7 +15,6 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 import ViewAll from '../ViewAll'
-import styles from './styles.css'
 
 import { SeachUsers } from './__generated__/SeachUsers'
 
@@ -136,8 +135,6 @@ const SearchUser = ({
           )}
         </List>
       </InfiniteScroll>
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Icon, IconSize } from '~/components'
+import { Button, Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Translate } from '~/components/Language'
@@ -73,13 +73,7 @@ const Subscribe = ({
             />
           ),
           customButton: (
-            <button
-              type="button"
-              onClick={e => {
-                subscribePush()
-                e.stopPropagation()
-              }}
-            >
+            <button type="button" onClick={() => subscribePush()}>
               <Translate
                 zh_hant={TEXT.zh_hant.confirmPush}
                 zh_hans={TEXT.zh_hans.confirmPush}
@@ -92,14 +86,15 @@ const Subscribe = ({
   }
 
   return (
-    <button
-      type="button"
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
       aria-label="收藏"
       onClick={onClick}
       disabled={disabled}
     >
       <Icon.Bookmark size={size} />
-    </button>
+    </Button>
   )
 }
 

@@ -1,15 +1,19 @@
-import { Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 const EditProfileButton = ({
   setEditing
 }: {
   setEditing: (value: boolean) => void
 }) => (
-  <button type="button" onClick={() => setEditing(true)}>
-    <TextIcon icon={<Icon.SettingsMedium />} color="grey">
+  <Button
+    spacing={['xxtight', 'xtight']}
+    bgHoverColor="grey-lighter"
+    onClick={() => setEditing(true)}
+  >
+    <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
       <Translate zh_hant="編輯資料" zh_hans="编辑资料" />
     </TextIcon>
-  </button>
+  </Button>
 )
 
 export default EditProfileButton

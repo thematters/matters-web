@@ -70,6 +70,7 @@ export type IconColor =
   | 'black'
   | 'grey-dark'
   | 'grey'
+  | 'grey-light'
   | 'grey-lighter'
   | 'green'
   | 'gold'
