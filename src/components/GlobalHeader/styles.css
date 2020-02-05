@@ -46,16 +46,18 @@ header {
 
   height: var(--global-header-height);
 }
-
-.right.me {
-  & :global(> *) {
-    display: inline-block;
-  }
+.right {
   & :global(> * + *) {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--spacing-x-loose);
+  }
 
-    @media (--sm-up) {
-      margin-left: var(--spacing-loose);
+  &.me {
+    & :global(> * + *) {
+      margin-left: var(--spacing-tight);
+
+      @media (--sm-up) {
+        margin-left: var(--spacing-loose);
+      }
     }
   }
 }

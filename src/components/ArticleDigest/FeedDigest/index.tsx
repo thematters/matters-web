@@ -117,7 +117,7 @@ const FeedDigest = ({
       </header>
 
       <section className="title">
-        <ArticleTitleDigest article={article} />
+        <ArticleTitleDigest article={article} textSize="xm" />
       </section>
 
       {cover && (
