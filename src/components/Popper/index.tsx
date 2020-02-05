@@ -1,6 +1,8 @@
 import Tippy, { TippyProps } from '@tippy.js/react'
 import { Instance } from 'tippy.js'
 
+import { Z_INDEX } from '~/common/enums'
+
 export type PopperInstance = Instance
 
 /**
@@ -39,7 +41,7 @@ Dropdown.defaultProps = {
   animation: 'shift-away',
   theme: 'dropdown',
   boundary: 'window',
-  zIndex: 101 // zIndex of GlobalHeader is 100
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
 export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -51,7 +53,7 @@ Tooltip.defaultProps = {
   animation: 'shift-away',
   theme: 'tooltip',
   boundary: 'window',
-  zIndex: 101 // zIndex of GlobalHeader is 100
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
 export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -63,5 +65,5 @@ Popover.defaultProps = {
   animation: 'shift-away',
   theme: 'popover',
   boundary: 'window',
-  zIndex: 101 // zIndex of GlobalHeader is 100
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }

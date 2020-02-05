@@ -52,7 +52,6 @@ const SetTagSelectedButton = ({
           content: (
             <Translate zh_hant="文章已添加至精選" zh_hans="文章已添加至精选" />
           ),
-          closeButton: true,
           duration: 2000
         }
       })

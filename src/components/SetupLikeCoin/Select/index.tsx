@@ -62,7 +62,7 @@ const Description = () => (
 )
 
 const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
-  const [bindType, setBindType] = useState<'generate' | 'bind'>('generate')
+  const [bindType, setBindType] = useState<'generate' | 'bind'>('bind')
   const isGenerate = bindType === 'generate'
 
   return (

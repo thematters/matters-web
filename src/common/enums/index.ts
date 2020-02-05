@@ -12,3 +12,11 @@ export * from './externalLinks'
 export * from './events'
 export * from './time'
 export * from './oauth'
+
+export const Z_INDEX = {
+  GLOBAL_HEADER: 100,
+  OVER_GLOBAL_HEADER: 101,
+  UNDER_GLOBAL_HEADER: 99,
+  MODAL: 200,
+  OVER_MODAL: 201
+}
