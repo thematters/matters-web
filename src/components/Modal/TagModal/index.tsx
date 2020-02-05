@@ -185,7 +185,6 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
                   }
                 />
               ),
-              closeButton: true,
               duration: 2000
             }
           })
@@ -243,7 +242,6 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           dropdownAppendTo="tag-modal"
           dropdownAutoSizing={true}
           DropdownContent={DropdownContent}
-          dropdownZIndex={201}
           query={SEARCH_TAGS}
         />
         <p className="field">

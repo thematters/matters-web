@@ -18,7 +18,6 @@ import { REMOVE_TOAST } from '~/common/enums'
  *       color: 'green',
  *       header: 'header description',
  *       content: 'content description',
- *       closeButton: true,
  *       fixed: false,
  *       duration: 3000
  *     }
@@ -49,7 +48,7 @@ const FixedToast: React.FC<FixedToast> = ({
     }
   }, [])
 
-  return <Toast {...toastProps} onCloseButtonClick={removeToast} />
+  return <Toast {...toastProps} />
 }
 
 export default FixedToast

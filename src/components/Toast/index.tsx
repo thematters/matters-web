@@ -1,7 +1,5 @@
 import classNames from 'classnames'
 
-import { Icon } from '~/components'
-
 import styles from './styles.css'
 
 /**
@@ -19,8 +17,6 @@ export interface ToastProps {
   header?: string | React.ReactNode
   content?: string | React.ReactNode
 
-  closeButton?: boolean
-  onCloseButtonClick?: () => any
   customButton?: React.ReactNode
   buttonPlacement?: 'top' | 'bottom' | 'center'
 }
@@ -29,8 +25,6 @@ export const Toast: React.FC<ToastProps> = ({
   color,
   header,
   content,
-  closeButton,
-  onCloseButtonClick,
   customButton,
   buttonPlacement = 'top'
 }) => {
@@ -39,7 +33,6 @@ export const Toast: React.FC<ToastProps> = ({
     [color]: !!color,
     [buttonPlacement]: buttonPlacement
   })
-  const isWhite = color === 'white'
 
   return (
     <section className={mainClass}>
@@ -48,13 +41,7 @@ export const Toast: React.FC<ToastProps> = ({
         {content && <p className="content">{content}</p>}
       </div>
 
-      {closeButton && (
-        <button type="button" onClick={onCloseButtonClick}>
-          <Icon.Clear size="md" color={isWhite ? 'black' : 'white'} />
-        </button>
-      )}
-
-      {!closeButton && customButton && customButton}
+      {customButton}
 
       <style jsx>{styles}</style>
     </section>

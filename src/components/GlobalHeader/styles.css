@@ -14,7 +14,7 @@ header {
 
   box-sizing: content-box;
   overflow: hidden;
-  z-index: 100;
+  z-index: var(--z-index-global-header);
 
   &.transparent {
     background: transparent;

@@ -126,7 +126,7 @@ const DropdownInput: React.FC<Props> = ({
           placement="bottom-start"
           onCreate={setInstance}
           content={<DropdownContent {...dropdownContentProps} />}
-          zIndex={dropdownZIndex || 101}
+          zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
         >
           <input

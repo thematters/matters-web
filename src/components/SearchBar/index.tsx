@@ -11,7 +11,11 @@ import {
   PopperInstance
 } from '~/components'
 
-import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
+import {
+  INPUT_DEBOUNCE,
+  TEXT,
+  Z_INDEX_OVER_GLOBAL_HEADER
+} from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 
 import AutoComplete from './AutoComplete'
@@ -113,6 +117,7 @@ const BaseSearchBar: React.FC<{
             onCreate={setInstance}
             onShown={() => setShown(true)}
             theme="dropdown shadow-light"
+            zIndex={Z_INDEX_OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>
               <input
