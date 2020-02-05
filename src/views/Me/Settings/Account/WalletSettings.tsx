@@ -30,7 +30,12 @@ const SetupLikerIdButton = () => (
   <ModalSwitch modalId="setupLikerIdModal">
     {(open: any) => (
       <Button className="u-link-green" onClick={open}>
-        <Translate zh_hant={TEXT.zh_hant.setup} zh_hans={TEXT.zh_hans.setup} />
+        <TextIcon>
+          <Translate
+            zh_hant={TEXT.zh_hant.setup}
+            zh_hans={TEXT.zh_hans.setup}
+          />
+        </TextIcon>
       </Button>
     )}
   </ModalSwitch>
