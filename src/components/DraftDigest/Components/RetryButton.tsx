@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -31,8 +31,19 @@ const RetryButton = ({ id }: { id: string }) => {
   })
 
   return (
-    <Button onClick={() => retry()}>
-      <Translate zh_hant={TEXT.zh_hant.retry} zh_hans={TEXT.zh_hans.retry} />
+    <Button
+      size={[null, '1.25rem']}
+      spacing={[0, 'xtight']}
+      bgHoverColor="red"
+      onClick={() => retry()}
+    >
+      <TextIcon
+        color="white"
+        icon={<Icon.Right size="xs" />}
+        textPlacement="left"
+      >
+        <Translate zh_hant={TEXT.zh_hant.retry} zh_hans={TEXT.zh_hans.retry} />
+      </TextIcon>
     </Button>
   )
 }
