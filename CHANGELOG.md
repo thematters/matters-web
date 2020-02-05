@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2020-02-06
+
+### Added
+
+- Recommendation test page #625
+- Add selected feed under tag page #650 #654 #659
+
+### Changed
+
+- Refactor: `<Comment>`, `<UserDigest>`, `<ArticleDigest>` #609 #658 #661
+- Refactor: `<Button>` #651
+- Refactor: New Icons #647
+- Change tag detail API names and params. #617
+- Restructure of tag detail page #616
+- Remove close button of Toast #663
+- Change the default value of setup Liker ID form to "bind" #665
+- Disable `generateInDevMode` to boost in local development #612
+- Fix potential memory leak after calling register API. #655
+
 ## [2.6.0] - 2020-01-13
 
 ### Changed
