@@ -37,8 +37,8 @@
   }
 
   & label {
+    display: inline-flex;
     padding: 0 var(--spacing-base);
-    font-size: 0;
   }
   & input[type='file'] {
     position: absolute;

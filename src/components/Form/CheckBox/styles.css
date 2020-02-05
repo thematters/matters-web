@@ -1,13 +1,11 @@
 .container {
   & > * {
-    display: inline;
+    display: inline-flex;
     vertical-align: middle;
   }
 }
 
 .check {
-  line-height: 1;
-  font-size: 0;
   cursor: pointer;
 
   & :global(svg) {

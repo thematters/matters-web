@@ -1,5 +1,5 @@
 .nav-button {
-  font-size: 0;
+  display: inline-flex;
 }
 
 .nav-link {

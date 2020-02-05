@@ -1,6 +1,5 @@
 a {
-  line-height: 1;
-  font-size: 0;
+  display: inline-flex;
 
   & :global(svg) {
     width: 97px;

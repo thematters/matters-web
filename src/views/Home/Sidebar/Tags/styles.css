@@ -1,6 +1,4 @@
 ul {
-  font-size: 0; /* remove space between <li> */
-
   & li {
     display: inline-block;
     width: 100%;

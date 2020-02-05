@@ -7,10 +7,9 @@
 }
 
 .avatar {
+  display: inline-flex;
   position: relative;
   margin-right: var(--spacing-x-tight);
-
-  font-size: 0;
 
   & .badge {
     position: absolute;

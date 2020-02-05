@@ -1,5 +1,7 @@
 .tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
 
   font-size: var(--font-size-md);
 
