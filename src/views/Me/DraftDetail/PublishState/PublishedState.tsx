@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Icon, TextIcon, Translate } from '~/components'
-import { Toast } from '~/components/Toast'
+import { Icon, TextIcon, Toast, Translate } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
 import { toPath } from '~/common/utils'
@@ -15,7 +14,7 @@ const PublishedState = () => {
   })
 
   return (
-    <Toast
+    <Toast.Instance
       color="green"
       header={<Translate zh_hant="作品已發布" zh_hans="作品已发布" />}
       customButton={

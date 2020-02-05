@@ -15,7 +15,7 @@ import {
   LanguageProvider,
   Modal,
   ModalProvider,
-  ToastHolder
+  Toast
 } from '~/components'
 import { Error } from '~/components/Error'
 import ErrorBoundary from '~/components/ErrorBoundary'
@@ -93,7 +93,7 @@ const Root = ({
             <AnalyticsListener user={viewer || {}} />
             <PushInitializer client={client} />
             <Modal.Anchor />
-            <ToastHolder />
+            <Toast.Container />
             <ProgressBar />
           </HeaderContextProvider>
         </ModalProvider>
