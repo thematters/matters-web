@@ -40,7 +40,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   }
 
   const path =
-    comment.state !== 'active'
+    comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
           comment
@@ -49,14 +49,9 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
   return (
     <section className="comment-content">
-      <Card
-        {...path}
-        bgColor="grey-lighter"
-        spacing={['xtight', 'base']}
-        textSize="md-s"
-      >
+      <Card {...path} bgColor="grey-lighter" spacing={['xtight', 'base']}>
         <Expandable>
-          <CommentContent comment={comment} />
+          <CommentContent comment={comment} size="sm" />
         </Expandable>
       </Card>
 

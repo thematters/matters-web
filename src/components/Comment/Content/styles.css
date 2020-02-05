@@ -1,12 +1,20 @@
-.inactive-content {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.content {
+  &.inactive {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
+    color: var(--color-grey);
 
-  & :global(button) {
-    margin-left: var(--spacing-tight);
+    & :global(button) {
+      margin-left: var(--spacing-tight);
+    }
   }
+}
+
+.size-sm {
+  font-size: var(--font-size-sm);
+}
+.size-md-s {
+  font-size: var(--font-size-md-s);
 }

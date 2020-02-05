@@ -12,10 +12,12 @@ export type CardBorderColor = 'grey-lighter'
 export type CardBorderRadius = 'xtight' | 'xxtight'
 
 export interface CardProps {
-  bgColor?: CardBgColor
   spacing?: [CardSpacing, CardSpacing]
-  textSize?: 'md-s'
-  border?: CardBorderColor
+
+  bgColor?: CardBgColor
+  bgHoverColor?: CardBgColor
+
+  borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
 
   href?: string
@@ -25,10 +27,12 @@ export interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({
-  bgColor,
   spacing = ['base', 0],
-  textSize,
-  border,
+
+  bgColor,
+  bgHoverColor,
+
+  borderColor,
   borderRadius,
 
   href,
@@ -38,18 +42,19 @@ export const Card: React.FC<CardProps> = ({
 
   children
 }) => {
-  const disable = !as || !href
+  const disabled = !as || !href
   const node: React.RefObject<HTMLElement> = useRef(null)
   const cardClass = classNames({
     card: true,
-    [`bg-${bgColor}`]: !!bgColor,
     [`spacing-y-${spacing[0]}`]: !!spacing[0],
     [`spacing-x-${spacing[1]}`]: !!spacing[1],
-    [`text-size-${textSize}`]: !!textSize,
-    hasBorder: !!border || !!borderRadius,
-    [`border-${border}`]: !!border,
+    [`bg-${bgColor}`]: !!bgColor,
+    [`bg-hover-${bgHoverColor}`]: !!bgHoverColor,
+    [`border-${borderColor}`]: !!borderColor,
     [`border-radius-${borderRadius}`]: !!borderRadius,
-    disable
+
+    hasBorder: !!borderColor || !!borderRadius,
+    disabled
   })
   const openLink = ({
     newTab,
@@ -84,7 +89,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <section
       className={cardClass}
-      tabIndex={disable ? undefined : 0}
+      tabIndex={disabled ? undefined : 0}
       ref={node}
       onKeyDown={event => {
         if (event.keyCode !== KEYCODES.enter) {

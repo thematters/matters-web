@@ -129,7 +129,7 @@ export const Feed = ({
       )}
 
       <section className="content-container">
-        {!edit && <Content comment={comment} />}
+        {!edit && <Content comment={comment} size="md-s" />}
         {!edit && (
           <FooterActions
             comment={comment}

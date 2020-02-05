@@ -49,7 +49,13 @@ const FollowComment = ({
 }) => {
   const { article, author } = comment
   const articlePath = toPath({ page: 'articleDetail', article })
-  const path = toPath({ page: 'commentDetail', comment })
+  const path =
+    comment.state === 'active'
+      ? toPath({
+          page: 'commentDetail',
+          comment
+        })
+      : {}
 
   return (
     <Card {...articlePath} onClick={onClick}>
@@ -74,14 +80,9 @@ const FollowComment = ({
       </section>
 
       <section className="comment-content">
-        <Card
-          {...path}
-          bgColor="grey-lighter"
-          spacing={['xtight', 'base']}
-          textSize="md-s"
-        >
+        <Card {...path} bgColor="grey-lighter" spacing={['xtight', 'base']}>
           <Expandable limit={5} buffer={2}>
-            <Comment.Content comment={comment} />
+            <Comment.Content comment={comment} size="md-s" />
           </Expandable>
         </Card>
       </section>

@@ -21,8 +21,6 @@ header {
 .content-container {
   margin-top: var(--spacing-xx-tight);
   padding-left: var(--spacing-xx-loose);
-
-  font-size: var(--font-size-md-s);
 }
 
 @keyframes commentBackgroundFadeOut {
