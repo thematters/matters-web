@@ -61,8 +61,14 @@
 .grey {
   color: var(--color-grey);
 }
+.grey-light {
+  color: var(--color-grey-light);
+}
 .grey-dark {
   color: var(--color-grey-dark);
+}
+.grey-darker {
+  color: var(--color-grey-darker);
 }
 .white {
   color: var(--color-white);

@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Menu, Translate } from '~/components'
@@ -26,25 +25,21 @@ const DropdownContent: React.FC<{
   return (
     <>
       <Menu width="sm">
-        <Menu.Item>
-          <Link {...PATHS.HOME}>
-            <a onClick={hideDropdown} className={homeClasses}>
-              <Translate
-                zh_hant={TEXT.zh_hant.discover}
-                zh_hans={TEXT.zh_hans.discover}
-              />
-            </a>
-          </Link>
+        <Menu.Item onClick={hideDropdown} {...PATHS.HOME}>
+          <span className={homeClasses}>
+            <Translate
+              zh_hant={TEXT.zh_hant.discover}
+              zh_hans={TEXT.zh_hans.discover}
+            />
+          </span>
         </Menu.Item>
-        <Menu.Item>
-          <Link {...PATHS.FOLLOW}>
-            <a onClick={hideDropdown} className={followClasses}>
-              <Translate
-                zh_hant={TEXT.zh_hant.follow}
-                zh_hans={TEXT.zh_hans.follow}
-              />
-            </a>
-          </Link>
+        <Menu.Item onClick={hideDropdown} {...PATHS.FOLLOW}>
+          <span className={followClasses}>
+            <Translate
+              zh_hant={TEXT.zh_hant.follow}
+              zh_hans={TEXT.zh_hans.follow}
+            />
+          </span>
         </Menu.Item>
       </Menu>
       <style jsx>{styles}</style>

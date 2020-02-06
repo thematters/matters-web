@@ -190,13 +190,13 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
               <ArticleDigest.Dropdown
                 article={article}
                 titleTextSize="md-s"
-                borderRadius="xtight"
-                bgColor="grey-lighter"
-                spacing={['tight', 'tight']}
                 disabled
                 extraButton={
                   <ArticleDigest.Dropdown.OpenExternalLink article={article} />
                 }
+                borderRadius="xtight"
+                bgColor="grey-lighter"
+                spacing={['tight', 'tight']}
               />
 
               <span className="delete-handler">

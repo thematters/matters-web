@@ -36,17 +36,13 @@ const DropdownDefaultItem = ({
   search: string
 }) => {
   return (
-    <Menu.Item>
-      <button
-        className="search-tag-item create"
-        type="button"
-        onClick={() => hideDropdown()}
-      >
+    <Menu.Item onClick={() => hideDropdown()}>
+      <span className="search-tag-item create">
         <span className="hint">
           <Translate zh_hant="創建" zh_hans="创建" />
         </span>
         <span className="keyword">{search}</span>
-      </button>
+      </span>
     </Menu.Item>
   )
 }
@@ -84,12 +80,12 @@ const DropdownList = ({
       <Menu width="sm">
         {items.map(item => (
           <Menu.Item key={item.content}>
-            <button className="search-tag-item" type="button">
+            <span className="search-tag-item">
               <span>{item.content}</span>
               <span className="search-tag-count">
                 {numAbbr(item.articles.totalCount)}
               </span>
-            </button>
+            </span>
           </Menu.Item>
         ))}
         {items && items.length > 0 && children && <Menu.Divider />}

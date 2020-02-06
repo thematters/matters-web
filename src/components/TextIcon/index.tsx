@@ -2,10 +2,21 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
+type TextIconColor =
+  | 'black'
+  | 'green'
+  | 'gold'
+  | 'grey'
+  | 'grey-light'
+  | 'grey-darker'
+  | 'grey-dark'
+  | 'white'
+  | 'red'
+
 interface TextIconProps {
   icon?: React.ReactNode
 
-  color?: 'black' | 'green' | 'gold' | 'grey' | 'grey-dark' | 'white' | 'red'
+  color?: TextIconColor
   size?: 'xs' | 'sm' | 'md' | 'xm' | 'lg'
   spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'

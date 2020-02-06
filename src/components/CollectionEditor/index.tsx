@@ -32,7 +32,7 @@ const reorder = (list: any[], startIndex: number, endIndex: number) => {
   return result
 }
 
-class CollectionEditor extends React.PureComponent<Props, State> {
+class CollectionEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
@@ -42,11 +42,8 @@ class CollectionEditor extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate() {
-    const { articles } = this.state
-    const prevArticleIds = articles.map(({ id }) => id)
-    const articleIds = this.props.articles.map(({ id }) => id)
-
-    if (_isEqual(prevArticleIds, articleIds)) {
+    // only update state from prop only if added or deleted
+    if (this.state.articles.length === this.props.articles.length) {
       return
     }
 
@@ -115,15 +112,15 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         <ArticleDigest.Dropdown
                           article={article}
                           titleTextSize="md-s"
-                          borderRadius="xtight"
-                          bgColor="grey-lighter"
-                          spacing={['tight', 'tight']}
                           disabled
                           extraButton={
                             <ArticleDigest.Dropdown.OpenExternalLink
                               article={article}
                             />
                           }
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                         />
 
                         <span className="delete-handler">

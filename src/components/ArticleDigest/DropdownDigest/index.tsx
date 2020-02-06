@@ -18,7 +18,10 @@ type DropdownDigestProps = {
   titleTextSize?: TitleDigestTextSize
   disabled?: boolean
   extraButton?: React.ReactNode
-} & Pick<CardProps, 'bgColor' | 'spacing' | 'borderRadius' | 'onClick'>
+} & Pick<
+  CardProps,
+  'spacing' | 'bgColor' | 'bgHoverColor' | 'borderRadius' | 'onClick'
+>
 
 const fragments = {
   article: gql`
@@ -48,8 +51,10 @@ const DropdownDigest = ({
   disabled,
   extraButton,
 
+  // Card Props
   spacing,
   bgColor,
+  bgHoverColor,
   borderRadius,
   onClick
 }: DropdownDigestProps) => {
@@ -72,6 +77,7 @@ const DropdownDigest = ({
       spacing={spacing}
       borderRadius={borderRadius}
       bgColor={bgColor}
+      bgHoverColor={bgHoverColor}
       onClick={onClick}
     >
       <section className={containerClass}>

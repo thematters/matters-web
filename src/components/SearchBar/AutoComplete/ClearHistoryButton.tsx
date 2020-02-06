@@ -12,7 +12,7 @@ const fragments = {
   user: gql`
     fragment RecentSearchesUser on User {
       activity {
-        recentSearches(input: { first: 3 }) {
+        recentSearches(input: { first: 5 }) {
           pageInfo {
             startCursor
             endCursor
@@ -86,7 +86,8 @@ const ClearHistoryButton = () => {
     <Button
       size={[null, '1.25rem']}
       spacing={[0, 'xtight']}
-      bgHoverColor="grey-lighter"
+      borderColor="grey-light"
+      borderWidth="sm"
       onClick={async () => {
         await clear()
         window.dispatchEvent(
@@ -101,7 +102,7 @@ const ClearHistoryButton = () => {
         )
       }}
     >
-      <TextIcon size="xs" weight="normal" color="grey-dark">
+      <TextIcon size="xs" weight="normal" color="grey-light">
         <Translate zh_hant="清空" zh_hans="清空" />
       </TextIcon>
     </Button>
