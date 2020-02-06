@@ -5,8 +5,6 @@ import { Translate } from '~/components/Language'
 
 import { TEXT } from '~/common/enums'
 
-import styles from './styles.css'
-
 import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
 
 const fragments = {
@@ -23,16 +21,12 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
   }
 
   return (
-    <span className="label">
-      <Label size="sm">
-        <Translate
-          zh_hant={TEXT.zh_hant.authorRecommend}
-          zh_hans={TEXT.zh_hant.authorRecommend}
-        />
-      </Label>
-
-      <style jsx>{styles}</style>
-    </span>
+    <Label size="sm">
+      <Translate
+        zh_hant={TEXT.zh_hant.authorRecommend}
+        zh_hans={TEXT.zh_hant.authorRecommend}
+      />
+    </Label>
   )
 }
 

@@ -1,4 +1,3 @@
 .unread {
   @mixin unread-dot;
-  font-size: 0;
 }

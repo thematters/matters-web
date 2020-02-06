@@ -8,8 +8,6 @@
 }
 
 .avatar-list {
-  font-size: 0;
-
   & :global(.avatar) {
     position: relative;
     border: 1.5px solid var(--color-white);

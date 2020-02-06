@@ -390,8 +390,7 @@
 }
 
 .toolbar-upload-container {
-  display: inline-block;
-  font-size: 0;
+  display: inline-flex;
   vertical-align: middle;
 
   & input {

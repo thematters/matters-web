@@ -1,8 +1,7 @@
 /* Container
    ========================================================================== */
 .container {
-  display: inline-block;
-  font-size: 0;
+  display: inline-flex;
 }
 span.container {
   cursor: initial;

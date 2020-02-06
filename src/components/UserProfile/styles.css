@@ -74,7 +74,6 @@
 
 .basic {
   @mixin flex-center-all;
-  margin-left: var(--spacing-x-tight);
 
   & .name {
     font-size: var(--font-size-lg);
@@ -95,13 +94,12 @@
     color: var(--color-grey);
   }
 
-  & :first-child {
-    margin-left: 0;
-  }
+  & :global(> *) {
+    display: inline-flex;
 
-  & :global(> * + *) {
-    font-size: 0;
-    margin-left: var(--spacing-x-tight);
+    & :global(+ *) {
+      margin-left: var(--spacing-x-tight);
+    }
   }
 }
 
