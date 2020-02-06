@@ -19,6 +19,16 @@
   &.center {
     @mixin flex-center-space-between;
   }
+  &.center-x {
+    & section {
+      width: 100%;
+      & p.content,
+      & p.sub-description {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
 }
 
 .sub-description {
