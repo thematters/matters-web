@@ -33,14 +33,9 @@ header {
 }
 
 .description {
+  @mixin line-clamp;
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm-s);
-
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  /* autoprefixer: ignore next */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .extra-button {

@@ -39,10 +39,8 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
   )
 
   useEffect(() => {
-    if (isShown) {
-      getAutoComplete()
-    }
-  }, [searchKey, isShown])
+    getAutoComplete()
+  }, [searchKey])
 
   const frequentSearch = data?.frequentSearch || []
   const recentSearches = data?.viewer?.activity.recentSearches.edges || []
@@ -106,27 +104,36 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
             title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
           />
 
-          {frequentSearch.map((key, i) => (
-            <>
-              <Menu.Divider />
-              <Menu.Item
-                {...toPath({
-                  page: 'search',
-                  q: key
-                })}
-                onClick={() => {
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
-                    location: i,
-                    entrance: key
-                  })
-                  hideDropdown()
-                }}
-                key={key}
-              >
-                <TextIcon color="green">{key}</TextIcon>
-              </Menu.Item>
-            </>
-          ))}
+          <section className="frequent-searches">
+            {frequentSearch.map((key, i) => (
+              <>
+                <Menu.Divider />
+                <Menu.Item
+                  {...toPath({
+                    page: 'search',
+                    q: key
+                  })}
+                  onClick={() => {
+                    analytics.trackEvent(
+                      ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH,
+                      {
+                        location: i,
+                        entrance: key
+                      }
+                    )
+                    hideDropdown()
+                  }}
+                  key={key}
+                >
+                  <TextIcon color="green">
+                    <span className="key">{key}</span>
+                  </TextIcon>
+                </Menu.Item>
+              </>
+            ))}
+
+            <style jsx>{styles}</style>
+          </section>
         </>
       )}
     </Menu>

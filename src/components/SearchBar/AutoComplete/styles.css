@@ -12,3 +12,9 @@
     margin-bottom: var(--spacing-tight);
   }
 }
+
+.frequent-searches {
+  & .key {
+    @mixin line-clamp;
+  }
+}

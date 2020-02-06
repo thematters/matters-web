@@ -13,24 +13,9 @@
 }
 
 .search-tag-item {
-  white-space: pre-wrap;
-  text-align: left;
-  line-height: 1.4;
-
-  &.create {
-    line-height: 2;
-
-    & .hint {
-      flex-shrink: 0;
-    }
-    & .keyword {
-      margin-left: var(--spacing-xx-tight);
-      color: var(--color-grey);
-    }
+  & .keyword,
+  & .count {
+    margin-left: var(--spacing-xx-tight);
+    color: var(--color-grey);
   }
-}
-
-.search-tag-count {
-  margin-left: var(--spacing-xx-tight);
-  color: var(--color-grey);
 }

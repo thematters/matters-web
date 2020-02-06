@@ -45,39 +45,32 @@ const DropdownContent = ({
     <>
       <Menu width="sm">
         {tags.map(tag => (
-          <Menu.Item key={tag.content}>
-            <button
-              className="search-tag-item"
-              type="button"
-              onClick={() => {
-                addTag(tag.content)
-                hideDropdown()
-              }}
-            >
+          <Menu.Item
+            onClick={() => {
+              addTag(tag.content)
+              hideDropdown()
+            }}
+            key={tag.content}
+          >
+            <span className="search-tag-item">
               <span>{tag.content}</span>
-              <span className="search-tag-count">
-                {numAbbr(tag.articles.totalCount)}
-              </span>
-            </button>
+              <span className="count">{numAbbr(tag.articles.totalCount)}</span>
+            </span>
           </Menu.Item>
         ))}
 
         {tags && tags.length > 0 && <Menu.Divider />}
 
-        <Menu.Item>
-          <button
-            className="search-tag-item create"
-            type="button"
-            onClick={() => {
-              addTag(search)
-              hideDropdown()
-            }}
-          >
-            <span className="hint">
-              <Translate zh_hant="創建" zh_hans="创建" />
-            </span>
+        <Menu.Item
+          onClick={() => {
+            addTag(search)
+            hideDropdown()
+          }}
+        >
+          <span className="search-tag-item">
+            <Translate zh_hant="創建" zh_hans="创建" />
             <span className="keyword">{search}</span>
-          </button>
+          </span>
         </Menu.Item>
       </Menu>
 

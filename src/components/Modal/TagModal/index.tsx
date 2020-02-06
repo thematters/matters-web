@@ -37,11 +37,10 @@ const DropdownDefaultItem = ({
 }) => {
   return (
     <Menu.Item onClick={() => hideDropdown()}>
-      <span className="search-tag-item create">
-        <span className="hint">
-          <Translate zh_hant="創建" zh_hans="创建" />
-        </span>
+      <span className="search-tag-item">
+        <Translate zh_hant="創建" zh_hans="创建" />
         <span className="keyword">{search}</span>
+        <style jsx>{styles}</style>
       </span>
     </Menu.Item>
   )
@@ -82,9 +81,7 @@ const DropdownList = ({
           <Menu.Item key={item.content}>
             <span className="search-tag-item">
               <span>{item.content}</span>
-              <span className="search-tag-count">
-                {numAbbr(item.articles.totalCount)}
-              </span>
+              <span className="count">{numAbbr(item.articles.totalCount)}</span>
             </span>
           </Menu.Item>
         ))}

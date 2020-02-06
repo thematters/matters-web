@@ -29,9 +29,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
     <Dropdown
       content={
         <Menu width="sm">
-          <Menu.Item>
-            <BlockUserButton user={user} hideDropdown={hideDropdown} />
-          </Menu.Item>
+          <BlockUserButton user={user} hideDropdown={hideDropdown} />
         </Menu>
       }
       trigger="click"

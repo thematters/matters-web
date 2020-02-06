@@ -65,30 +65,22 @@ const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
 
       return (
         <Menu width="sm">
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHantClasses}
-              onClick={() => {
-                setLang('zh_hant')
-                hideDropdown()
-              }}
-            >
-              {textMap.zh_hant}
-            </button>
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hant')
+              hideDropdown()
+            }}
+          >
+            <span className={zhHantClasses}>{textMap.zh_hant}</span>
           </Menu.Item>
 
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHansClasses}
-              onClick={() => {
-                setLang('zh_hans')
-                hideDropdown()
-              }}
-            >
-              {textMap.zh_hans}
-            </button>
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hans')
+              hideDropdown()
+            }}
+          >
+            <span className={zhHansClasses}>{textMap.zh_hans}</span>
           </Menu.Item>
 
           <style jsx>{styles}</style>
