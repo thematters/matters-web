@@ -7,11 +7,9 @@
 }
 
 .switch {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
 
-  font-size: 0;
-  line-height: 1;
   user-select: none;
   tap-highlight-color: transparent;
 }

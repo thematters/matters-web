@@ -18,9 +18,7 @@
     }
     & :global(> *) {
       position: relative;
-      display: inline-block;
-
-      font-size: 0;
+      display: inline-flex;
 
       & + :global(*) {
         margin-left: calc(var(--spacing-x-tight) * -1);
