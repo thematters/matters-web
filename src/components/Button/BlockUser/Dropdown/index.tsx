@@ -1,4 +1,3 @@
-
 import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import userFragments from '~/components/GQL/fragments/user'
@@ -78,15 +77,20 @@ const BlockUserButton = ({
             />
           ),
           customButton: (
-            <Button href={PATHS.ME_SETTINGS_BLOCKED.as} size={[null, '1.25rem']} spacing={[0, 0]}>
+            <Button
+              href={PATHS.ME_SETTINGS_BLOCKED.as}
+              size={[null, '1.25rem']}
+              spacing={[0, 0]}
+            >
               <TextIcon
                 icon={<Icon.Right size="xs" color="green" />}
                 textPlacement="left"
               >
-                {isMediumUp
-                  ? <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
-                  : <Translate zh_hant="查看" zh_hans="查看" />
-                }
+                {isMediumUp ? (
+                  <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
+                ) : (
+                  <Translate zh_hant="查看" zh_hans="查看" />
+                )}
               </TextIcon>
             </Button>
           )
