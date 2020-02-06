@@ -1,6 +1,6 @@
-.toast-holder {
+.toast-container {
   position: fixed;
-  top: var(--global-header-height);
+  top: calc(var(--global-header-height) + var(--spacing-x-tight));
   left: 0;
   right: 0;
 
