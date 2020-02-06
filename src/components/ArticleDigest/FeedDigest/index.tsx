@@ -9,7 +9,7 @@ import { stripHtml, toPath } from '~/common/utils'
 
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
-import ArticleTitleDigest from '../TitleDigest'
+import { TitleDigest } from '../TitleDigest'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
 import Live from './Live'
@@ -54,13 +54,13 @@ const fragments = {
     ${CreatedAt.fragments.article}
     ${Live.fragments.article}
     ${InactiveState.fragments.article}
-    ${ArticleTitleDigest.fragments.article}
+    ${TitleDigest.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
   `
 }
 
-const FeedDigest = ({
+export const FeedDigest = ({
   article,
 
   inTagDetailLatest,
@@ -117,7 +117,7 @@ const FeedDigest = ({
       </header>
 
       <section className="title">
-        <ArticleTitleDigest article={article} textSize="xm" />
+        <TitleDigest article={article} textSize="xm" />
       </section>
 
       {cover && (
@@ -144,5 +144,3 @@ const FeedDigest = ({
 }
 
 FeedDigest.fragments = fragments
-
-export default FeedDigest

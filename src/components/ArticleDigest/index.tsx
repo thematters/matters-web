@@ -1,13 +1,5 @@
-import CardDigest from './CardDigest'
-import DropdownDigest from './DropdownDigest'
-import FeedDigest from './FeedDigest'
-import SidebarDigest from './SidebarDigest'
-import TitleDigest from './TitleDigest'
-
-export const ArticleDigest = {
-  Title: TitleDigest,
-  Feed: FeedDigest,
-  Card: CardDigest,
-  Dropdown: DropdownDigest,
-  Sidebar: SidebarDigest
-}
+export * from './CardDigest'
+export * from './DropdownDigest'
+export * from './FeedDigest'
+export * from './SidebarDigest'
+export * from './TitleDigest'

@@ -6,7 +6,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import ArticleTitleDigest, { TitleDigestTextSize } from '../TitleDigest'
+import { TitleDigest, TitleDigestTextSize } from '../TitleDigest'
 import styles from './styles.css'
 
 import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
@@ -37,11 +37,11 @@ const fragments = {
       ...TitleDigestArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleTitleDigest.fragments.article}
+    ${TitleDigest.fragments.article}
   `
 }
 
-const SidebarDigest = ({
+export const SidebarDigest = ({
   article,
 
   titleTextSize = 'md-s',
@@ -72,11 +72,7 @@ const SidebarDigest = ({
     >
       <section className={containerClass}>
         <header>
-          <ArticleTitleDigest
-            article={article}
-            textSize={titleTextSize}
-            is="h3"
-          />
+          <TitleDigest article={article} textSize={titleTextSize} is="h3" />
         </header>
 
         {cover && (
@@ -104,5 +100,3 @@ const SidebarDigest = ({
 }
 
 SidebarDigest.fragments = fragments
-
-export default SidebarDigest

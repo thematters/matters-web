@@ -5,7 +5,7 @@ import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
-import { ArticleDigest, Spinner, Translate } from '~/components'
+import { DropdownDigest, Spinner, Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError, useMutation } from '~/components/GQL'
 
@@ -52,7 +52,7 @@ const DRAFT_COLLECTION = gql`
       }
     }
   }
-  ${ArticleDigest.Dropdown.fragments.article}
+  ${DropdownDigest.fragments.article}
 `
 
 const SET_DRAFT_COLLECTION = gql`
@@ -68,7 +68,7 @@ const SET_DRAFT_COLLECTION = gql`
       }
     }
   }
-  ${ArticleDigest.Dropdown.fragments.article}
+  ${DropdownDigest.fragments.article}
 `
 
 const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {

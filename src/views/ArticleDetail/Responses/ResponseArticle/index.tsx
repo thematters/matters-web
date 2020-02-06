@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest, Translate, UserDigest } from '~/components'
+import { SidebarDigest, Translate, UserDigest } from '~/components'
 
 import styles from './styles.css'
 
@@ -26,7 +26,7 @@ const fragments = {
     }
 
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigest.Sidebar.fragments.article}
+    ${SidebarDigest.fragments.article}
   `
 }
 
@@ -49,11 +49,7 @@ const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
       </header>
 
       <section className="article-digest">
-        <ArticleDigest.Sidebar
-          article={article}
-          hasCover={hasCover}
-          hasBackground
-        />
+        <SidebarDigest article={article} hasCover={hasCover} hasBackground />
       </section>
 
       <style jsx>{styles}</style>

@@ -3,13 +3,13 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
 import {
-  ArticleDigest,
   Card,
   Comment,
   Head,
   InfiniteScroll,
   List,
-  Spinner
+  Spinner,
+  TitleDigest
 } from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
@@ -71,7 +71,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Title.fragments.article}
+  ${TitleDigest.fragments.article}
   ${Comment.Feed.fragments.comment}
 `
 
@@ -172,7 +172,7 @@ const UserComments = ({ user }: UserIdUser) => {
           return (
             <List.Item key={articleEdge.cursor}>
               <section className="article-title">
-                <ArticleDigest.Title article={articleEdge.node} is="h3" />
+                <TitleDigest article={articleEdge.node} is="h3" />
               </section>
 
               <List>

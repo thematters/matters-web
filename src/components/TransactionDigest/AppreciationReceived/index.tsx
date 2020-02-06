@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
   Card,
   DateTime,
   Icon,
   TextIcon,
+  TitleDigest,
   Translate,
   UserDigest
 } from '~/components'
@@ -31,7 +31,7 @@ const fragments = {
       }
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigest.Title.fragments.article}
+    ${TitleDigest.fragments.article}
   `
 }
 
@@ -69,7 +69,7 @@ const AppreciationReceived = ({
             {isUseContent && content && <h4 className="content">{content}</h4>}
             {!isUseContent && target && (
               <section>
-                <ArticleDigest.Title article={target} />
+                <TitleDigest article={target} />
               </section>
             )}
           </footer>

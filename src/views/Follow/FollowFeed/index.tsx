@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  FeedDigest,
   Head,
   InfiniteScroll,
   List,
@@ -47,7 +47,7 @@ const FOLLOW_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${FeedDigest.fragments.article}
   ${FollowComment.fragments.comment}
 `
 
@@ -95,7 +95,7 @@ const FollowFeed = () => {
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             {node.__typename === 'Article' && (
-              <ArticleDigest.Feed
+              <FeedDigest
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { DropdownDigest } from '~/components'
 
 export default gql`
   query SearchArticles($search: String!) {
@@ -14,5 +14,5 @@ export default gql`
       }
     }
   }
-  ${ArticleDigest.Dropdown.fragments.article}
+  ${DropdownDigest.fragments.article}
 `

@@ -1,5 +1,4 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
-import { init as SentryInit } from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
@@ -44,15 +43,16 @@ const ROOT_QUERY = gql`
   ${AnalyticsListener.fragments.user}
 `
 
-/**
- * Initialize
- */
-const {
-  publicRuntimeConfig: { SENTRY_DSN }
-} = getConfig()
-
 // Sentry
-SentryInit({ dsn: SENTRY_DSN || '' })
+import('@sentry/browser').then(Sentry => {
+  /**
+   * Initialize
+   */
+  const {
+    publicRuntimeConfig: { SENTRY_DSN }
+  } = getConfig()
+  Sentry.init({ dsn: SENTRY_DSN || '' })
+})
 
 /**
  * `<Root>` contains components that depend on viewer

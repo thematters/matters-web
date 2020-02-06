@@ -6,7 +6,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import ArticleTitleDigest, { TitleDigestTextSize } from '../TitleDigest'
+import { TitleDigest, TitleDigestTextSize } from '../TitleDigest'
 import OpenExternalLink from './OpenExternalLink'
 import styles from './styles.css'
 
@@ -40,11 +40,11 @@ const fragments = {
     }
 
     ${UserDigest.Mini.fragments.user}
-    ${ArticleTitleDigest.fragments.article}
+    ${TitleDigest.fragments.article}
   `
 }
 
-const DropdownDigest = ({
+export const DropdownDigest = ({
   article,
 
   titleTextSize,
@@ -82,7 +82,7 @@ const DropdownDigest = ({
     >
       <section className={containerClass}>
         <header>
-          <ArticleTitleDigest
+          <TitleDigest
             article={article}
             textSize={titleTextSize}
             disabled={cardDisabled}
@@ -112,5 +112,3 @@ const DropdownDigest = ({
 
 DropdownDigest.fragments = fragments
 DropdownDigest.OpenExternalLink = OpenExternalLink
-
-export default DropdownDigest

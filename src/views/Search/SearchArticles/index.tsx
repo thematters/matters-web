@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigest,
+  FeedDigest,
   InfiniteScroll,
   List,
   LoadMore,
@@ -39,7 +39,7 @@ const SEARCH_ARTICLES = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${FeedDigest.fragments.article}
 `
 
 const SearchArticles = ({ q }: { q: string }) => {
@@ -112,7 +112,7 @@ const SearchArticles = ({ q }: { q: string }) => {
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
               <List.Item key={cursor}>
-                <ArticleDigest.Feed
+                <FeedDigest
                   article={node}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

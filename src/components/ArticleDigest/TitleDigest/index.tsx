@@ -39,7 +39,7 @@ const fragments = {
   `
 }
 
-const TitleDigest = ({
+export const TitleDigest = ({
   article,
 
   textSize = 'md',
@@ -90,5 +90,3 @@ const TitleDigest = ({
 }
 
 TitleDigest.fragments = fragments
-
-export default TitleDigest

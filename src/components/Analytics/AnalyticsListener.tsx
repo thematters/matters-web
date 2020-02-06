@@ -13,6 +13,17 @@ declare global {
   }
 }
 
+export const deferTry = (fn: () => any, timesLeft = 10, defer = 2000) => {
+  if (timesLeft > 0) {
+    try {
+      fn()
+    } catch (err) {
+      setTimeout(() => deferTry(fn, timesLeft - 1, defer), defer)
+    }
+  }
+  return
+}
+
 const handleAnalytics = ({
   detail,
   user
@@ -20,12 +31,6 @@ const handleAnalytics = ({
   detail: CustomEvent['detail']
   user: AnalyticsUser | {}
 }) => {
-  // time out and try again
-  if (!window.analytics || !window.gtag) {
-    setTimeout(() => handleAnalytics({ detail, user }), 2000)
-    return
-  }
-
   // get the information out of the tracked event
   const { type, args } = detail
 
@@ -65,7 +70,7 @@ const handleAnalytics = ({
 
 export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
   useEventListener(ANALYTICS, (detail: CustomEvent['detail']) => {
-    handleAnalytics({ detail, user })
+    deferTry(() => handleAnalytics({ detail, user }))
   })
   return null
 }

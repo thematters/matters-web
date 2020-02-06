@@ -3,13 +3,7 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
-import {
-  ArticleDigest,
-  Button,
-  Icon,
-  LanguageContext,
-  Translate
-} from '~/components'
+import { DropdownDigest, Icon, LanguageContext, Translate } from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
@@ -184,12 +178,12 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
         <ul>
           {selectedArticles.map((article, index) => (
             <li key={index}>
-              <ArticleDigest.Dropdown
+              <DropdownDigest
                 article={article}
                 titleTextSize="md-s"
                 disabled
                 extraButton={
-                  <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+                  <DropdownDigest.OpenExternalLink article={article} />
                 }
                 borderRadius="xtight"
                 bgColor="grey-lighter"

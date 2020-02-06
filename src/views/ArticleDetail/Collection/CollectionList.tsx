@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
 import {
-  ArticleDigest,
+SidebarDigest,
   Button,
   Icon,
   List,
@@ -106,7 +106,7 @@ const CollectionList = ({
       <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Sidebar
+            <SidebarDigest
               article={node}
               hasCover={isMediumUp}
               hasBackground

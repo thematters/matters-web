@@ -1,4 +1,3 @@
-import { configureScope as SentryConfigureScope } from '@sentry/browser'
 import gql from 'graphql-tag'
 import React from 'react'
 
@@ -59,13 +58,15 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
   // Add user info for Sentry
-  SentryConfigureScope((scope: any) => {
-    scope.setUser({
-      id: viewer.id,
-      role,
-      language: viewer.settings.language
+  import('@sentry/browser').then(Sentry => {
+    Sentry.configureScope((scope: any) => {
+      scope.setUser({
+        id: viewer.id,
+        role,
+        language: viewer.settings.language
+      })
+      scope.setTag('source', 'web')
     })
-    scope.setTag('source', 'web')
   })
 
   return {

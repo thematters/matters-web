@@ -8,7 +8,7 @@ import {
   DropResult
 } from 'react-beautiful-dnd'
 
-import { ArticleDigest, Button, Icon } from '~/components'
+import { Button, DropdownDigest, Icon } from '~/components'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
@@ -109,12 +109,12 @@ class CollectionEditor extends React.Component<Props, State> {
                           <Icon.Sort color="grey" />
                         </span>
 
-                        <ArticleDigest.Dropdown
+                        <DropdownDigest
                           article={article}
                           titleTextSize="md-s"
                           disabled
                           extraButton={
-                            <ArticleDigest.Dropdown.OpenExternalLink
+                            <DropdownDigest.OpenExternalLink
                               article={article}
                             />
                           }

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { FeedDigest } from '~/components'
 
 export default gql`
   query UserArticles($userName: String!, $after: String) {
@@ -34,5 +34,5 @@ export default gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${FeedDigest.fragments.article}
 `

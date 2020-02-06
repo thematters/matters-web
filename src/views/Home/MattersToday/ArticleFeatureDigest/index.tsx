@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest, Card, Label } from '~/components'
+import { Card, Label, TitleDigest } from '~/components'
 import FooterActions from '~/components/ArticleDigest/FooterActions'
 
 import { toPath } from '~/common/utils'
@@ -33,7 +33,7 @@ const fragments = {
       ...FooterActionsArticle
     }
 
-    ${ArticleDigest.Title.fragments.article}
+    ${TitleDigest.fragments.article}
     ${FooterActions.fragments.article}
   `
 }
@@ -65,7 +65,7 @@ const ArticleFeatureDigest = ({
           <div className="content">
             <Label>Matters Today</Label>
 
-            <ArticleDigest.Title
+            <TitleDigest
               article={article}
               textSize="xl"
               textWeight="semibold"

@@ -1,4 +1,4 @@
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { DropdownDigest } from '~/components'
 import { Menu } from '~/components/Menu'
 import { Spinner } from '~/components/Spinner'
 
@@ -27,13 +27,11 @@ const DropdownArticleList = ({
     <Menu width="md">
       {articles.map(article => (
         <Menu.Item spacing={[0, 0]} key={article.id}>
-          <ArticleDigest.Dropdown
+          <DropdownDigest
             article={article}
             titleTextSize="sm"
             disabled
-            extraButton={
-              <ArticleDigest.Dropdown.OpenExternalLink article={article} />
-            }
+            extraButton={<DropdownDigest.OpenExternalLink article={article} />}
             bgHoverColor="grey-lighter"
             spacing={['tight', 'base']}
             onClick={() => onClick(article)}
