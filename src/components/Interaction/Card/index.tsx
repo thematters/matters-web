@@ -42,7 +42,7 @@ export const Card: React.FC<CardProps> = ({
 
   children
 }) => {
-  const disabled = !as || !href
+  const disabled = !as && !href && !onClick
   const node: React.RefObject<HTMLElement> = useRef(null)
   const cardClass = classNames({
     card: true,
