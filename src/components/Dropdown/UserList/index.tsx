@@ -43,6 +43,7 @@ const DropdownUserList = ({
               hasAvatar
               hasDisplayName
               hasUserName
+              disabled
             />
 
             <style jsx>{styles}</style>

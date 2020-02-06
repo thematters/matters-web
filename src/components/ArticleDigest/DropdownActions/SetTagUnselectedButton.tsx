@@ -90,7 +90,6 @@ const SetTagUnselectedButton = ({
           content: (
             <Translate zh_hant="文章已取消精選" zh_hans="文章已取消精选" />
           ),
-          closeButton: true,
           duration: 2000
         }
       })

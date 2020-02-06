@@ -118,7 +118,6 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
                 zh_hans: TEXT.zh_hans.addedArticleTag,
                 lang
               }),
-              closeButton: true,
               duration: 2000
             }
           })
@@ -183,7 +182,6 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           dropdownAutoSizing={true}
           dropdownCallback={onClickMenuItem}
           DropdownContent={DropdownContent}
-          dropdownZIndex={201}
           query={SEARCH_ARTICLES}
         />
         <ul>

@@ -1,7 +1,3 @@
-a {
-  font-size: 0;
-}
-
 .text-hover-green {
   &:hover,
   &:focus {

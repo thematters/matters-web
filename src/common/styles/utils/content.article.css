@@ -411,7 +411,7 @@
   border-radius: 2px;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  z-index: 1;
+  z-index: var(--z-index-under-global-header);
 }
 
 @keyframes play-spinning {
