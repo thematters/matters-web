@@ -28,6 +28,10 @@
 }
 
 .custom-button {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-normal);
+  margin-left: var(--spacing-x-tight);
+
   & :global(a.container) {
     vertical-align: middle;
   }
