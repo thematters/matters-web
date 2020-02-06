@@ -42,11 +42,8 @@ class CollectionEditor extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate() {
-    const { articles } = this.state
-    const prevArticleIds = articles.map(({ id }) => id)
-    const articleIds = this.props.articles.map(({ id }) => id)
-
-    if (_isEqual(prevArticleIds, articleIds)) {
+    // only update state from prop only if added or deleted
+    if (this.state.articles.length === this.props.articles.length) {
       return
     }
 
