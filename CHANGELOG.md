@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Refactor: `<Comment>`, `<UserDigest>`, `<ArticleDigest>` #609 #658 #661
 - Refactor: `<Button>` #651
+- Refactor: `Toast` #667
 - Refactor: New Icons #647
 - Change tag detail API names and params. #617
 - Restructure of tag detail page #616
@@ -23,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change the default value of setup Liker ID form to "bind" #665
 - Disable `generateInDevMode` to boost in local development #612
 - Fix potential memory leak after calling register API. #655
+- Remove extra spaces with `display: inline-flex` #668
+- Enhance DnD experience of `<CollectionEditor>`; #676
 
 ## [2.6.0] - 2020-01-13
 
