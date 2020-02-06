@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Dropdown, PopperInstance } from '~/components'
+import { Dropdown } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { Translate } from '~/components/Language'
@@ -19,13 +19,6 @@ import { MeDigestUser } from './__generated__/MeDigestUser'
 const MeDigest = ({ user }: { user: MeDigestUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
   const isDraft = headerState.type === 'draft'
   const containerClasses = classNames({
     container: true,
@@ -35,8 +28,8 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
 
   return (
     <Dropdown
-      content={<DropdownMenu hideDropdown={hideDropdown} />}
-      onCreate={setInstance}
+      trigger="mouseenter focus click"
+      content={<DropdownMenu />}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <button

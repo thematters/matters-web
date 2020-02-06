@@ -16,6 +16,7 @@ const Content: React.FC<ContentProps> = ({
   layout = 'default',
   scrollLock = true
 }) => {
+  const node: React.RefObject<HTMLElement> | null = useRef(null)
   const containerClasses = classNames({
     [spacing]: true
   })
@@ -25,14 +26,13 @@ const Content: React.FC<ContentProps> = ({
     'l-col-4 l-col-sm-8 l-col-lg-12': layout === 'full-width'
   })
 
-  const node: React.RefObject<HTMLElement> | null = useRef(null)
-
   useEffect(() => {
-    if (node && node.current && scrollLock) {
+    if (node?.current && scrollLock) {
       disableBodyScroll(node.current)
     }
+
     return () => {
-      if (node && node.current && scrollLock) {
+      if (node?.current && scrollLock) {
         enableBodyScroll(node.current)
       }
     }

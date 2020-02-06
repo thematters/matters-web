@@ -33,12 +33,10 @@ const fragments = {
 
 const RemoveTagButton = ({
   article,
-  instance,
-  hideDropdown
+  instance
 }: {
   article: RemoveTagButtonArticle
   instance?: PopperInstance | null
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const {
@@ -68,7 +66,6 @@ const RemoveTagButton = ({
         if (instance) {
           instance.props.onHidden = sync
         }
-        hideDropdown()
       }}
     >
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">

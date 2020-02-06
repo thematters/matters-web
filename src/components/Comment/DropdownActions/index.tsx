@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Button, Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import { Button, Dropdown, Icon, Menu } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -11,7 +11,6 @@ import EditButton from './EditButton'
 import PinButton from './PinButton'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
-// import ReportButton from './ReportButton'
 
 const fragments = {
   comment: gql`
@@ -48,17 +47,6 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
-
-  /**
-   * REMOVE this after implement report comment
-   */
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
@@ -88,31 +76,15 @@ const DropdownActions = ({
     <Dropdown
       content={
         <Menu width="sm">
-          {isShowPinButton && (
-            <PinButton comment={comment} hideDropdown={hideDropdown} />
-          )}
+          {isShowPinButton && <PinButton comment={comment} />}
           {isShowEditButton && editComment && (
-            <EditButton hideDropdown={hideDropdown} editComment={editComment} />
+            <EditButton editComment={editComment} />
           )}
-          {/* {!isCommentAuthor && isActive && (
-              <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-          )} */}
-          {isShowDeleteButton && (
-            <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
-          )}
-          {isShowBlockUserButton && (
-            <BlockUserButton
-              user={comment.author}
-              hideDropdown={hideDropdown}
-            />
-          )}
-          {isShowCollapseButton && (
-            <CollapseButton comment={comment} hideDropdown={hideDropdown} />
-          )}
+          {isShowDeleteButton && <DeleteButton commentId={comment.id} />}
+          {isShowBlockUserButton && <BlockUserButton user={comment.author} />}
+          {isShowCollapseButton && <CollapseButton comment={comment} />}
         </Menu>
       }
-      trigger="click"
-      onCreate={setInstance}
       placement="bottom-end"
     >
       <Button

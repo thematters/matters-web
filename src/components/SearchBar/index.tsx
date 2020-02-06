@@ -1,11 +1,12 @@
 import { Formik } from 'formik'
 import Router, { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
   Button,
   Dropdown,
+  hidePopperOnClickButton,
   Icon,
   LanguageContext,
   PopperInstance
@@ -48,17 +49,12 @@ const BaseSearchBar: React.FC<{
   })
 
   // dropdown
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const [shown, setShown] = useState(false)
+  const instanceRef = useRef<PopperInstance>()
   const hideDropdown = () => {
-    if (instance) {
-      instance.hide()
-    }
+    instanceRef.current?.hide()
   }
   const showDropdown = () => {
-    if (instance) {
-      instance.show()
-    }
+    instanceRef.current?.show()
   }
 
   return (
@@ -106,12 +102,13 @@ const BaseSearchBar: React.FC<{
               <AutoComplete
                 searchKey={debouncedSearch}
                 hideDropdown={hideDropdown}
-                isShown={shown}
               />
             }
             trigger="manual"
-            onCreate={setInstance}
-            onShown={() => setShown(true)}
+            onShown={instance => {
+              hidePopperOnClickButton(instance)
+            }}
+            onCreate={instance => (instanceRef.current = instance)}
             theme="dropdown shadow-light"
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >

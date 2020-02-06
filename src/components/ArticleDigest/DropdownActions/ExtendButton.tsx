@@ -31,13 +31,7 @@ const fragments = {
   `
 }
 
-const ExtendButton = ({
-  article,
-  hideDropdown
-}: {
-  article: ExtendButtonArticle
-  hideDropdown: () => void
-}) => {
+const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   const { lang } = useContext(LanguageContext)
   const [extendArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
     variables: {
@@ -60,8 +54,6 @@ const ExtendButton = ({
           const path = toPath({ page: 'draftDetail', slug, id })
           Router.push(path.as)
         }
-
-        hideDropdown()
       }}
     >
       <TextIcon

@@ -37,11 +37,9 @@ const fragments = {
 }
 
 const SetTagUnselectedButton = ({
-  article,
-  hideDropdown
+  article
 }: {
   article: SetTagUnselectedButtonArticle
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {

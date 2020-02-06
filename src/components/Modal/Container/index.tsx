@@ -1,6 +1,6 @@
 // External modules
 import classNames from 'classnames'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Translate } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
@@ -39,7 +39,8 @@ const Container: React.FC<ContainerProps> = ({
     'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': layout === 'sm'
   })
 
-  const node = useRef(null)
+  const node: React.RefObject<any> | null = useRef(null)
+  const containerNode: React.RefObject<any> | null = useRef(null)
   const [closeable, setCloseable] = useState(defaultCloseable)
   const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
@@ -63,12 +64,22 @@ const Container: React.FC<ContainerProps> = ({
   useNativeEventListener('keydown', handleOnEsc)
   useOutsideClick(node, handleOnOutsideClick)
 
+  useEffect(() => {
+    // accessibility
+    if (containerNode.current) {
+      const cachedNode = containerNode.current
+      setTimeout(() => {
+        cachedNode.focus()
+      }, 100)
+    }
+  }, [])
+
   return (
     <div className={overlayClass}>
       <div style={{ width: '100%' }}>
         <div className="l-row">
           <div ref={node} className={modalClass}>
-            <div className="container">
+            <div ref={containerNode} className="container" tabIndex={-1}>
               {title && (
                 <Modal.Header
                   close={close}

@@ -5,6 +5,7 @@
 .recent-searches {
   display: flex;
   flex-wrap: wrap;
+  margin-top: var(--spacing-xx-tight);
   padding: 0 var(--spacing-base);
 
   & :global(> *) {

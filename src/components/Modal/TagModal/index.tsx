@@ -28,15 +28,9 @@ const PUT_TAG = gql`
   }
 `
 
-const DropdownDefaultItem = ({
-  hideDropdown,
-  search
-}: {
-  hideDropdown: () => void
-  search: string
-}) => {
+const DropdownDefaultItem = ({ search }: { search: string }) => {
   return (
-    <Menu.Item onClick={() => hideDropdown()}>
+    <Menu.Item>
       <span className="search-tag-item">
         <Translate zh_hant="創建" zh_hans="创建" />
         <span className="keyword">{search}</span>
@@ -96,10 +90,7 @@ const DropdownList = ({
 const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   return (
     <DropdownList {...props}>
-      <DropdownDefaultItem
-        hideDropdown={props.hideDropdown}
-        search={props.search}
-      />
+      <DropdownDefaultItem search={props.search} />
     </DropdownList>
   )
 }

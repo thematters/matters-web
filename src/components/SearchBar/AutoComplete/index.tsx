@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 
 import { Button, Menu, TextIcon, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
@@ -15,7 +15,6 @@ import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 
 interface Props {
   hideDropdown: () => void
-  isShown: boolean
   searchKey?: string
 }
 
@@ -30,7 +29,7 @@ const SEARCH_AUTOCOMPLETE = gql`
   ${ClearHistoryButton.fragments.user}
 `
 
-const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
+const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
   const [getAutoComplete, { data, loading }] = useLazyQuery<SearchAutoComplete>(
     SEARCH_AUTOCOMPLETE,
     {
@@ -85,7 +84,6 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                     location: i,
                     entrance: node
                   })
-                  hideDropdown()
                 }}
                 key={node}
               >
@@ -106,7 +104,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
 
           <section className="frequent-searches">
             {frequentSearch.map((key, i) => (
-              <>
+              <Fragment key={key}>
                 <Menu.Divider />
                 <Menu.Item
                   {...toPath({
@@ -121,7 +119,6 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                         entrance: key
                       }
                     )
-                    hideDropdown()
                   }}
                   key={key}
                 >
@@ -129,7 +126,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
                     <span className="key">{key}</span>
                   </TextIcon>
                 </Menu.Item>
-              </>
+              </Fragment>
             ))}
 
             <style jsx>{styles}</style>

@@ -26,13 +26,11 @@ const DropdownContent = ({
   tags,
   search,
   addTag,
-  hideDropdown,
   loading
 }: {
   tags: SearchTagsQuery_search_edges_node_Tag[]
   search: string
   addTag: (tag: string) => void
-  hideDropdown: () => void
   loading: boolean
 }) =>
   loading ? (
@@ -48,7 +46,6 @@ const DropdownContent = ({
           <Menu.Item
             onClick={() => {
               addTag(tag.content)
-              hideDropdown()
             }}
             key={tag.content}
           >
@@ -64,7 +61,6 @@ const DropdownContent = ({
         <Menu.Item
           onClick={() => {
             addTag(search)
-            hideDropdown()
           }}
         >
           <span className="search-tag-item">
@@ -117,7 +113,6 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
               addTag(tag)
               setSearch('')
             }}
-            hideDropdown={hideDropdown}
           />
         }
       >

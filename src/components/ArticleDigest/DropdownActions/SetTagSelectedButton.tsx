@@ -32,12 +32,10 @@ const fragments = {
 
 const SetTagSelectedButton = ({
   article,
-  instance,
-  hideDropdown
+  instance
 }: {
   article: SetTagSelectedButtonArticle
   instance?: PopperInstance | null
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
@@ -65,7 +63,6 @@ const SetTagSelectedButton = ({
         if (instance) {
           instance.props.onHidden = sync
         }
-        hideDropdown()
       }}
     >
       <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">

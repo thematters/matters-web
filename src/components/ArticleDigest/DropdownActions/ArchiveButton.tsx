@@ -23,13 +23,7 @@ const fragments = {
   `
 }
 
-const ArchiveButton = ({
-  article,
-  hideDropdown
-}: {
-  article: ArchiveButtonArticle
-  hideDropdown: () => void
-}) => {
+const ArchiveButton = ({ article }: { article: ArchiveButtonArticle }) => {
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
     variables: { id: article.id },
     optimisticResponse: {
@@ -54,7 +48,6 @@ const ArchiveButton = ({
     <Menu.Item
       onClick={() => {
         archiveArticle()
-        hideDropdown()
       }}
     >
       <TextIcon

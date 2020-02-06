@@ -148,8 +148,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
-      className: containerClass,
-      'data-clickable': isClickable
+      className: containerClass
     }
 
     // content

@@ -52,13 +52,7 @@ const fragments = {
   `
 }
 
-const PinButton = ({
-  comment,
-  hideDropdown
-}: {
-  comment: PinButtonComment
-  hideDropdown: () => void
-}) => {
+const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   const canPin = comment.article.pinCommentLeft > 0
   const [unpinComment] = useMutation<UnpinComment>(UNPIN_COMMENT, {
     variables: { id: comment.id },
@@ -86,18 +80,10 @@ const PinButton = ({
       }
     }
   })
-  const onPin = () => {
-    pinComment()
-    hideDropdown()
-  }
-  const onUnPin = () => {
-    unpinComment()
-    hideDropdown()
-  }
 
   if (comment.pinned) {
     return (
-      <Menu.Item onClick={onUnPin}>
+      <Menu.Item onClick={unpinComment}>
         <TextIcon
           icon={<Icon.UnPinMedium size="md" />}
           size="md"
@@ -113,7 +99,7 @@ const PinButton = ({
   }
 
   return (
-    <Menu.Item onClick={canPin ? onPin : undefined}>
+    <Menu.Item onClick={canPin ? pinComment : undefined}>
       <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
       </TextIcon>

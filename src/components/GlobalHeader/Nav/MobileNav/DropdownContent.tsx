@@ -8,9 +8,8 @@ import { PATHS, TEXT } from '~/common/enums'
 import styles from './styles.css'
 
 const DropdownContent: React.FC<{
-  hideDropdown: () => void
   unread: boolean
-}> = ({ hideDropdown, unread }) => {
+}> = ({ unread }) => {
   const router = useRouter()
   const homeClasses = classNames({
     'nav-link': true,
@@ -25,7 +24,7 @@ const DropdownContent: React.FC<{
   return (
     <>
       <Menu width="sm">
-        <Menu.Item onClick={hideDropdown} {...PATHS.HOME}>
+        <Menu.Item {...PATHS.HOME}>
           <span className={homeClasses}>
             <Translate
               zh_hant={TEXT.zh_hant.discover}
@@ -33,7 +32,7 @@ const DropdownContent: React.FC<{
             />
           </span>
         </Menu.Item>
-        <Menu.Item onClick={hideDropdown} {...PATHS.FOLLOW}>
+        <Menu.Item {...PATHS.FOLLOW}>
           <span className={followClasses}>
             <Translate
               zh_hant={TEXT.zh_hant.follow}

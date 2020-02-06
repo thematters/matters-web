@@ -26,13 +26,7 @@ const fragments = {
   `
 }
 
-const CollapseButton = ({
-  comment,
-  hideDropdown
-}: {
-  comment: CollapseButtonComment
-  hideDropdown: () => void
-}) => {
+const CollapseButton = ({ comment }: { comment: CollapseButtonComment }) => {
   const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
     variables: { id: comment.id, state: 'collapsed' },
     optimisticResponse: {
@@ -60,12 +54,7 @@ const CollapseButton = ({
 
   if (comment.state === 'collapsed') {
     return (
-      <Menu.Item
-        onClick={() => {
-          uncollapseComment()
-          hideDropdown()
-        }}
-      >
+      <Menu.Item onClick={uncollapseComment}>
         <TextIcon icon={<Icon.Expand size="md" />} size="md" spacing="base">
           <Translate
             zh_hant={TEXT.zh_hant.uncollapseComment}
@@ -80,7 +69,6 @@ const CollapseButton = ({
     <Menu.Item
       onClick={() => {
         collapseComment()
-        hideDropdown()
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {

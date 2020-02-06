@@ -18,8 +18,7 @@ const DELETE_COMMENT = gql`
 
 const DeleteButton: React.FC<{
   commentId: string
-  hideDropdown: () => void
-}> = ({ commentId, hideDropdown }) => {
+}> = ({ commentId }) => {
   const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
@@ -32,12 +31,7 @@ const DeleteButton: React.FC<{
   })
 
   return (
-    <Menu.Item
-      onClick={() => {
-        deleteComment()
-        hideDropdown()
-      }}
-    >
+    <Menu.Item onClick={deleteComment}>
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
         <Translate
           zh_hant={TEXT.zh_hant.delete}

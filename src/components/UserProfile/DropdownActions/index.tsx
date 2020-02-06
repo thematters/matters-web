@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Button, Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import { Button, Dropdown, Icon, Menu } from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 
 import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
@@ -17,23 +16,13 @@ const fragments = {
 }
 
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
-
   return (
     <Dropdown
       content={
         <Menu width="sm">
-          <BlockUserButton user={user} hideDropdown={hideDropdown} />
+          <BlockUserButton user={user} />
         </Menu>
       }
-      trigger="click"
-      onCreate={setInstance}
       placement="bottom-end"
     >
       <Button

@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({
   children
 }) => {
   const disabled = !as && !href && !onClick
-  const node: React.RefObject<HTMLElement> = useRef(null)
+  const node = useRef<HTMLElement>(null)
   const cardClass = classNames({
     card: true,
     [`spacing-y-${spacing[0]}`]: !!spacing[0],
@@ -58,13 +58,15 @@ export const Card: React.FC<CardProps> = ({
   })
   const openLink = ({
     newTab,
-    target
+    event
   }: {
     newTab: boolean
-    target: HTMLElement
+    event: React.MouseEvent | React.KeyboardEvent
   }) => {
-    // disable if the inside `<Button>` is clicked
-    if (target?.closest && target.closest('[data-clickable], a, button')) {
+    const target = event.target as HTMLElement
+
+    // skip if the inside <button> or <a> was clicked
+    if (target.closest('a, button')) {
       return
     }
 
@@ -81,7 +83,12 @@ export const Card: React.FC<CardProps> = ({
       onClick()
     }
 
-    if (node && node.current) {
+    // stop bubbling if it's nested to another `<Card>`
+    if (node.current && node.current.parentElement?.closest('.card')) {
+      event.stopPropagation()
+    }
+
+    if (node.current) {
       node.current.blur()
     }
   }
@@ -91,19 +98,18 @@ export const Card: React.FC<CardProps> = ({
       className={cardClass}
       tabIndex={disabled ? undefined : 0}
       ref={node}
+      data-clickable
       onKeyDown={event => {
         if (event.keyCode !== KEYCODES.enter) {
           return
         }
         openLink({
           newTab: event.metaKey,
-          target: event.target as HTMLElement
+          event
         })
-        event.stopPropagation()
       }}
       onClick={event => {
-        openLink({ newTab: event.metaKey, target: event.target as HTMLElement })
-        event.stopPropagation()
+        openLink({ newTab: event.metaKey, event })
       }}
     >
       {children}

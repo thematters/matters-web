@@ -18,7 +18,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   })
 
   return (
-    <li className={menuItemClass} role="menuitem" tabIndex={0}>
+    <li className={menuItemClass} role="menuitem">
       <Card spacing={spacing} bgHoverColor={bgHoverColor} {...restProps}>
         {children}
       </Card>

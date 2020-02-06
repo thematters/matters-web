@@ -182,7 +182,6 @@ const Fingerprint = ({
   return (
     <Popover
       offset="100,0"
-      trigger="click"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
       <Button

@@ -16,13 +16,7 @@ const fragments = {
   user: userFragments.block
 }
 
-const BlockUserButton = ({
-  user,
-  hideDropdown
-}: {
-  user: BlockUser
-  hideDropdown: () => void
-}) => {
+const BlockUserButton = ({ user }: { user: BlockUser }) => {
   const [blockUser] = useMutation<BlockUserMutate>(BLOCK_USER, {
     variables: { id: user.id },
     optimisticResponse: {
@@ -44,7 +38,6 @@ const BlockUserButton = ({
     }
   })
   const onUnblock = async () => {
-    hideDropdown()
     await unblockUser()
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -61,7 +54,6 @@ const BlockUserButton = ({
     )
   }
   const onBlock = async () => {
-    hideDropdown()
     await blockUser()
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {

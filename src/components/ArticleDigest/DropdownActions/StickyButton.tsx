@@ -31,13 +31,7 @@ const fragments = {
   `
 }
 
-const StickyButton = ({
-  article,
-  hideDropdown
-}: {
-  article: StickyButtonArticle
-  hideDropdown: () => void
-}) => {
+const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
   const [update] = useMutation<UpdateArticleInfo>(UPDATE_ARTICLE_INFO, {
     variables: { id: article.id, sticky: !article.sticky },
     optimisticResponse: {
@@ -61,7 +55,6 @@ const StickyButton = ({
     <Menu.Item
       onClick={() => {
         update()
-        hideDropdown()
       }}
     >
       {article.sticky ? (
