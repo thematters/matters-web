@@ -1,8 +1,6 @@
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
-import { Icon } from '~/components'
-
 import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
 
 import styles from './styles.css'
@@ -34,7 +32,6 @@ export const ToastInstance = ({
   subDescription,
   buttonPlacement = 'top',
   customButton,
-  hasCloseButton,
   onClose
 }: ToastProps) => {
   const mainClass = classNames({
@@ -42,7 +39,6 @@ export const ToastInstance = ({
     [buttonPlacement]: buttonPlacement,
     [color]: !!color
   })
-  const iconColor = color === 'green' ? 'green' : 'white'
 
   return (
     <section className={mainClass}>
@@ -50,12 +46,7 @@ export const ToastInstance = ({
         {content && <p className="content">{content}</p>}
         {subDescription && <p className="sub-description">{subDescription}</p>}
       </section>
-      {hasCloseButton && (
-        <button type="button" onClick={onClose}>
-          <Icon.Clear size="md" color={iconColor} />
-        </button>
-      )}
-      {!hasCloseButton && customButton && (
+      {customButton && (
         <section className="custom-button">{customButton}</section>
       )}
       <style jsx>{styles}</style>
@@ -75,9 +66,7 @@ export const ToastInstance = ({
  *   {
  *     detail: {
  *       color: 'green',
- *       header: '',
  *       content: 'some text',
- *       hasCloseButton: true,
  *       fixed: false,
  *       duration: 3000
  *     }

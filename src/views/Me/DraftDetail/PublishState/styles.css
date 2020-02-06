@@ -2,11 +2,11 @@
   position: sticky;
   top: var(--global-header-height); /* fallback */
   top: calc(
-    var(--global-header-height) + var(--spacing-x-tight)
-  ); /* global header's height + x-tight spacing */
+    var(--global-header-height) + var(--spacing-base)
+  ); /* global header's height + base spacing */
 
   margin-top: calc(var(--spacing-xx-loose) * -1);
-  margin-bottom: var(--spacing-xx-loose);
+  margin-bottom: var(--spacing-loose);
 
   z-index: 10;
 }
