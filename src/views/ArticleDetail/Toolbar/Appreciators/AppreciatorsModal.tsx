@@ -105,7 +105,7 @@ const AppreciatorsModal = () => {
       />
       <Modal.Content spacing="none" layout="full-width">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <ul className="modal-appreciators-list u-list-gap">
+          <ul className="modal-appreciators-list">
             {edges.map(
               ({ node, cursor }, i) =>
                 node.sender && (

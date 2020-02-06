@@ -44,8 +44,7 @@
 }
 
 .modal-appreciators-list {
-  margin-top: var(--spacing-loose);
-  padding: 0 var(--spacing-base);
+  padding: var(--spacing-tight) var(--spacing-base);
 
   & .appreciation-amount {
     display: inline-block; /* fallback */
