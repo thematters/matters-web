@@ -1,11 +1,12 @@
 .toast {
   margin-bottom: var(--spacing-base);
-  padding: var(--spacing-base);
+  padding: var(--spacing-x-tight) var(--spacing-base);
   width: 100%;
 
   font-size: var(--font-size-sm);
-  border-radius: 0 0 0.25rem 0.25rem;
-  box-shadow: var(--shadow-light);
+  font-weight: var(--font-weight-medium);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-default);
   animation: toastFadeIn 0.25s ease;
   visibility: visible;
 
@@ -20,19 +21,21 @@
   }
 }
 
-.header {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-}
-
-.header + .content {
+.sub-description {
+  font-weight: var(--font-weight-normal);
   margin-top: var(--spacing-xx-tight);
   opacity: 0.7;
 }
 
+.custom-button {
+  & :global(a.container) {
+    vertical-align: middle;
+  }
+}
+
 .green {
-  color: var(--color-white);
-  background: var(--color-matters-green);
+  color: var(--color-matters-green);
+  background: var(--color-green-lighter);
 }
 
 .grey {
@@ -43,11 +46,6 @@
 .red {
   color: var(--color-white);
   background: var(--color-red);
-}
-
-.white {
-  color: var(--color-black);
-  background: var(--color-white);
 }
 
 @keyframes toastFadeIn {

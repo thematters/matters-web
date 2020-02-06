@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
-import { Toast } from '~/components/Toast'
+import { Button, Icon, TextIcon, Toast, Translate } from '~/components'
 import { ViewerContext } from '~/components/Viewer'
 
 import { toPath } from '~/common/utils'
@@ -14,20 +13,20 @@ const PublishedState = () => {
   })
 
   return (
-    <Toast
+    <Toast.Instance
       color="green"
-      buttonPlacement="center"
-      header={<Translate zh_hant="作品已發佈" zh_hans="作品已发布" />}
+      content={<Translate zh_hant="作品已發佈" zh_hans="作品已发布" />}
       customButton={
-        <Button href={path.as} size={[null, '1.25rem']} spacing={[0, 'xtight']}>
+        <Button href={path.as} size={[null, '1.25rem']} spacing={[0, 0]}>
           <TextIcon
-            icon={<Icon.Right size="xs" color="white" />}
+            icon={<Icon.Right size="xs" color="green" />}
             textPlacement="left"
           >
             <Translate zh_hant="查看我的作品" zh_hans="查看我的作品" />
           </TextIcon>
         </Button>
       }
+      buttonPlacement="top"
     />
   )
 }
