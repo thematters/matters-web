@@ -22,7 +22,6 @@ interface ToastProps {
 
   buttonPlacement?: 'top' | 'bottom' | 'center'
   customButton?: React.ReactNode
-  hasCloseButton?: boolean
   onClose?: () => any
 }
 
