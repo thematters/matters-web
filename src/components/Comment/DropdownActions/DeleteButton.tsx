@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, TextIcon, Menu, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { DeleteComment } from './__generated__/DeleteComment'
 
@@ -34,22 +32,19 @@ const DeleteButton: React.FC<{
   })
 
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={() => {
         deleteComment()
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.RemoveMedium />} spacing="tight">
+      <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
         <Translate
           zh_hant={TEXT.zh_hant.delete}
           zh_hans={TEXT.zh_hant.delete}
         />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

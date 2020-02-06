@@ -79,47 +79,32 @@ const DropdownContent = ({
     <Menu width="sm">
       {/* public */}
       {hasExtendButton && (
-        <Menu.Item>
-          <ExtendButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
+        <ExtendButton article={article} hideDropdown={hideDropdown} />
       )}
 
       {/* private */}
       {hasStickyButton && (
-        <Menu.Item>
-          <StickyButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
+        <StickyButton article={article} hideDropdown={hideDropdown} />
       )}
       {hasArchiveButton && (
-        <Menu.Item>
-          <ArchiveButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
+        <ArchiveButton article={article} hideDropdown={hideDropdown} />
       )}
       {hasSetTagSelectedButton && (
-        <Menu.Item>
-          <SetTagSelectedButton
-            article={article}
-            hideDropdown={hideDropdown}
-            instance={instance}
-          />
-        </Menu.Item>
+        <SetTagSelectedButton
+          article={article}
+          hideDropdown={hideDropdown}
+          instance={instance}
+        />
       )}
       {hasSetTagUnselectedButton && (
-        <Menu.Item>
-          <SetTagUnselectedButton
-            article={article}
-            hideDropdown={hideDropdown}
-          />
-        </Menu.Item>
+        <SetTagUnselectedButton article={article} hideDropdown={hideDropdown} />
       )}
       {hasRemoveTagButton && (
-        <Menu.Item>
-          <RemoveTagButton
-            article={article}
-            hideDropdown={hideDropdown}
-            instance={instance}
-          />
-        </Menu.Item>
+        <RemoveTagButton
+          article={article}
+          hideDropdown={hideDropdown}
+          instance={instance}
+        />
       )}
     </Menu>
   )

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext, TextIcon, Translate } from '~/components'
+import { Icon, LanguageContext, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -51,8 +51,7 @@ const ExtendButton = ({
   })
 
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={async () => {
         const { data } = await extendArticle()
         const { slug, id } = data?.putDraft || {}
@@ -65,12 +64,16 @@ const ExtendButton = ({
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.CollectionMedium />} spacing="tight">
+      <TextIcon
+        icon={<Icon.CollectionMedium size="md" />}
+        size="md"
+        spacing="base"
+      >
         <Translate zh_hant="關聯作品" zh_hans="关联作品" />
       </TextIcon>
 
       <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

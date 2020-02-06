@@ -16,7 +16,7 @@ import {
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({

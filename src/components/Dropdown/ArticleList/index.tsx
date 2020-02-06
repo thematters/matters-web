@@ -26,13 +26,12 @@ const DropdownArticleList = ({
   return (
     <Menu width="md">
       {articles.map(article => (
-        <Menu.Item key={article.id}>
+        <Menu.Item onClick={() => onClick(article)} key={article.id}>
           <ArticleDigest.Dropdown
             article={article}
             titleTextSize="sm"
             spacing={[0, 0]}
             disabled
-            onClick={() => onClick(article)}
             extraButton={
               <ArticleDigest.Dropdown.OpenExternalLink article={article} />
             }

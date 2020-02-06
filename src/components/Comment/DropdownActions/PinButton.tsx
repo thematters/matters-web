@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { PinButtonComment } from './__generated__/PinButtonComment'
 import { PinComment } from './__generated__/PinComment'
@@ -88,43 +86,38 @@ const PinButton = ({
       }
     }
   })
+  const onPin = () => {
+    pinComment()
+    hideDropdown()
+  }
+  const onUnPin = () => {
+    unpinComment()
+    hideDropdown()
+  }
 
   if (comment.pinned) {
     return (
-      <button
-        type="button"
-        onClick={() => {
-          unpinComment()
-          hideDropdown()
-        }}
-      >
-        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
+      <Menu.Item onClick={onUnPin}>
+        <TextIcon
+          icon={<Icon.UnPinMedium size="md" />}
+          size="md"
+          spacing="base"
+        >
           <Translate
             zh_hant={TEXT.zh_hant.unpin}
             zh_hans={TEXT.zh_hans.unpin}
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Menu.Item>
     )
   }
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        pinComment()
-        hideDropdown()
-      }}
-      disabled={!canPin}
-    >
-      <TextIcon icon={<Icon.PinMedium />} spacing="tight">
+    <Menu.Item onClick={canPin ? onPin : undefined}>
+      <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

@@ -1,14 +1,12 @@
 import Link from 'next/link'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import userFragments from '~/components/GQL/fragments/user'
 import BLOCK_USER from '~/components/GQL/mutations/blockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
 import { ADD_TOAST, PATHS, TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
@@ -89,30 +87,30 @@ const BlockUserButton = ({
 
   if (user.isBlocked) {
     return (
-      <button type="button" onClick={onUnblock}>
-        <TextIcon icon={<Icon.UnMuteMedium />} spacing="tight">
+      <Menu.Item onClick={onUnblock}>
+        <TextIcon
+          icon={<Icon.UnMuteMedium size="md" />}
+          size="md"
+          spacing="base"
+        >
           <Translate
             zh_hant={TEXT.zh_hant.unblockUser}
             zh_hans={TEXT.zh_hans.unblockUser}
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Menu.Item>
     )
   }
 
   return (
-    <button type="button" onClick={onBlock}>
-      <TextIcon icon={<Icon.MuteMedium />} spacing="tight">
+    <Menu.Item onClick={onBlock}>
+      <TextIcon icon={<Icon.MuteMedium size="md" />} size="md" spacing="base">
         <Translate
           zh_hant={TEXT.zh_hant.blockUser}
           zh_hans={TEXT.zh_hans.block}
         />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

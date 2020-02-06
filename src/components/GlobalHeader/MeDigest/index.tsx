@@ -33,11 +33,9 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
     'u-sm-down-hide': isDraft
   })
 
-  console.log(hideDropdown)
-
   return (
     <Dropdown
-      content={<DropdownMenu />}
+      content={<DropdownMenu hideDropdown={hideDropdown} />}
       onCreate={setInstance}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >

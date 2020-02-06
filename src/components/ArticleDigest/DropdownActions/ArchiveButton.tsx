@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import ARCHIVE_ARTICLE from '~/components/GQL/mutations/archiveArticle'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
@@ -51,19 +51,22 @@ const ArchiveButton = ({
   })
 
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={() => {
         archiveArticle()
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.ArchiveMedium />} spacing="tight">
+      <TextIcon
+        icon={<Icon.ArchiveMedium size="md" />}
+        size="md"
+        spacing="base"
+      >
         <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
       </TextIcon>
 
       <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

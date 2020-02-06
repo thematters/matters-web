@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
@@ -58,25 +58,28 @@ const StickyButton = ({
   })
 
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={() => {
         update()
         hideDropdown()
       }}
     >
       {article.sticky ? (
-        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
+        <TextIcon
+          icon={<Icon.UnPinMedium size="md" />}
+          size="md"
+          spacing="base"
+        >
           <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
         </TextIcon>
       ) : (
-        <TextIcon icon={<Icon.PinMedium />} spacing="tight">
+        <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
           <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
         </TextIcon>
       )}
 
       <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

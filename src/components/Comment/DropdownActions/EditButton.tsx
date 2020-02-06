@@ -1,8 +1,6 @@
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 const EditButton = ({
   hideDropdown,
@@ -12,19 +10,16 @@ const EditButton = ({
   editComment: () => void
 }) => {
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={() => {
         editComment()
         hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.Edit />} spacing="tight">
+      <TextIcon icon={<Icon.Edit size="md" />} size="md" spacing="base">
         <Translate zh_hant={TEXT.zh_hant.edit} zh_hans={TEXT.zh_hans.edit} />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

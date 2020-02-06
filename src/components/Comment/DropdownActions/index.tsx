@@ -89,43 +89,25 @@ const DropdownActions = ({
       content={
         <Menu width="sm">
           {isShowPinButton && (
-            <Menu.Item>
-              <PinButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
+            <PinButton comment={comment} hideDropdown={hideDropdown} />
           )}
           {isShowEditButton && editComment && (
-            <Menu.Item>
-              <EditButton
-                hideDropdown={hideDropdown}
-                editComment={editComment}
-              />
-            </Menu.Item>
+            <EditButton hideDropdown={hideDropdown} editComment={editComment} />
           )}
           {/* {!isCommentAuthor && isActive && (
-            <Menu.Item>
               <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-            </Menu.Item>
           )} */}
           {isShowDeleteButton && (
-            <Menu.Item>
-              <DeleteButton
-                commentId={comment.id}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
+            <DeleteButton commentId={comment.id} hideDropdown={hideDropdown} />
           )}
           {isShowBlockUserButton && (
-            <Menu.Item>
-              <BlockUserButton
-                user={comment.author}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
+            <BlockUserButton
+              user={comment.author}
+              hideDropdown={hideDropdown}
+            />
           )}
           {isShowCollapseButton && (
-            <Menu.Item>
-              <CollapseButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
+            <CollapseButton comment={comment} hideDropdown={hideDropdown} />
           )}
         </Menu>
       }

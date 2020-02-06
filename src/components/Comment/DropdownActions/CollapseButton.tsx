@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { CollapseButtonComment } from './__generated__/CollapseButtonComment'
 import { CollapseComment } from './__generated__/CollapseComment'
@@ -62,28 +60,24 @@ const CollapseButton = ({
 
   if (comment.state === 'collapsed') {
     return (
-      <button
-        type="button"
+      <Menu.Item
         onClick={() => {
           uncollapseComment()
           hideDropdown()
         }}
       >
-        <TextIcon icon={<Icon.Expand />} spacing="tight">
+        <TextIcon icon={<Icon.Expand size="md" />} size="md" spacing="base">
           <Translate
             zh_hant={TEXT.zh_hant.uncollapseComment}
             zh_hans={TEXT.zh_hant.uncollapseComment}
           />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Menu.Item>
     )
   }
 
   return (
-    <button
-      type="button"
+    <Menu.Item
       onClick={() => {
         collapseComment()
         hideDropdown()
@@ -102,15 +96,13 @@ const CollapseButton = ({
         )
       }}
     >
-      <TextIcon icon={<Icon.Collapse />} spacing="tight">
+      <TextIcon icon={<Icon.Collapse size="md" />} size="md" spacing="base">
         <Translate
           zh_hant={TEXT.zh_hant.collapseComment}
           zh_hans={TEXT.zh_hant.collapseComment}
         />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 
