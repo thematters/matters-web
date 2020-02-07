@@ -80,7 +80,12 @@ const FollowComment = ({
       </section>
 
       <section className="comment-content">
-        <Card {...path} bgColor="grey-lighter" spacing={['xtight', 'base']}>
+        <Card
+          {...path}
+          bgColor="grey-lighter"
+          spacing={['xtight', 'base']}
+          borderRadius="xxtight"
+        >
           <Expandable limit={5} buffer={2}>
             <Comment.Content comment={comment} size="md-s" />
           </Expandable>
