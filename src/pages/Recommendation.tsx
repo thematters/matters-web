@@ -42,7 +42,7 @@ const Feed = () => {
     notifyOnNetworkStatusChange: true
   })
 
-  const connectionPath = 'viewer.recommendation.feed'
+  const connectionPath = 'viewer.recommendation.recommendArticles'
   const result = data?.viewer?.recommendation.recommendArticles
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
@@ -72,7 +72,8 @@ const Feed = () => {
               mergeConnections({
                 oldData: previousResult,
                 newData: fetchMoreResult,
-                path: connectionPath
+                path: connectionPath,
+                dedupe: true
               })
           })
         }
