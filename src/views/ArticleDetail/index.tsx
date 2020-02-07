@@ -92,9 +92,7 @@ const Block = ({
   )
 }
 
-const DynamicResponse = dynamic(() => import('./Responses'), {
-  ssr: false
-})
+const DynamicResponse = dynamic(() => import('./Responses'))
 
 const ArticleDetail = ({
   mediaHash,
