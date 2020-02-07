@@ -70,7 +70,12 @@ const Container: React.FC<ContainerProps> = ({
         <div className="l-row">
           <div ref={node} className={modalClass}>
             <FocusLock>
-              <div role="dialog" className="container" tabIndex={-1}>
+              <div
+                role="dialog"
+                aria-label={title ? (TEXT.zh_hant[title] as string) : undefined}
+                className="container"
+                tabIndex={-1}
+              >
                 {title && (
                   <Modal.Header
                     close={close}
