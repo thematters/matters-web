@@ -12,6 +12,7 @@
   margin-right: var(--spacing-x-tight);
 
   & .badge {
+    display: inline-flex;
     position: absolute;
     top: 0;
     right: 0;
