@@ -1,10 +1,9 @@
-import Link from 'next/link'
-
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Button, Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import userFragments from '~/components/GQL/fragments/user'
 import BLOCK_USER from '~/components/GQL/mutations/blockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
+import { useResponsive } from '~/components/Hook'
 
 import { ADD_TOAST, PATHS, TEXT } from '~/common/enums'
 
@@ -17,6 +16,8 @@ const fragments = {
 }
 
 const BlockUserButton = ({ user }: { user: BlockUser }) => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
+
   const [blockUser] = useMutation<BlockUserMutate>(BLOCK_USER, {
     variables: { id: user.id },
     optimisticResponse: {
@@ -66,11 +67,22 @@ const BlockUserButton = ({ user }: { user: BlockUser }) => {
             />
           ),
           customButton: (
-            <Link {...PATHS.ME_SETTINGS_BLOCKED}>
-              <a>
-                <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
-              </a>
-            </Link>
+            <Button
+              href={PATHS.ME_SETTINGS_BLOCKED.as}
+              size={[null, '1.25rem']}
+              spacing={[0, 0]}
+            >
+              <TextIcon
+                icon={<Icon.Right size="xs" color="green" />}
+                textPlacement="left"
+              >
+                {isMediumUp ? (
+                  <Translate zh_hant="管理封鎖" zh_hans="管理屏蔽" />
+                ) : (
+                  <Translate zh_hant="查看" zh_hans="查看" />
+                )}
+              </TextIcon>
+            </Button>
           )
         }
       })

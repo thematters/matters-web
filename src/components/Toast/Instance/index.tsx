@@ -36,7 +36,8 @@ export const ToastInstance = ({
   const mainClass = classNames({
     toast: true,
     [buttonPlacement]: buttonPlacement,
-    [color]: !!color
+    [color]: !!color,
+    'center-x': !customButton
   })
 
   return (
