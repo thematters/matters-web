@@ -93,6 +93,10 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
     'u-area-disable': isPending || isPublished
   })
 
+  if (imageAssets.length <= 0) {
+    return null
+  }
+
   return (
     <Collapsable
       title={<Translate zh_hans="封面" zh_hant="封面" />}
@@ -101,7 +105,7 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
       <p className="cover-intro">
         <Translate
           zh_hant="選擇一張圖片作為封面"
-          zh_hans="选择一張圖片作為封面"
+          zh_hans="选择一张图片作为封面"
         />
       </p>
 
