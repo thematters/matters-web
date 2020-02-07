@@ -1,6 +1,7 @@
 // External modules
 import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import { Translate } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
@@ -40,7 +41,6 @@ const Container: React.FC<ContainerProps> = ({
   })
 
   const node: React.RefObject<any> | null = useRef(null)
-  const containerNode: React.RefObject<any> | null = useRef(null)
   const [closeable, setCloseable] = useState(defaultCloseable)
   const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
@@ -64,41 +64,33 @@ const Container: React.FC<ContainerProps> = ({
   useNativeEventListener('keydown', handleOnEsc)
   useOutsideClick(node, handleOnOutsideClick)
 
-  useEffect(() => {
-    // accessibility
-    if (containerNode.current) {
-      const cachedNode = containerNode.current
-      setTimeout(() => {
-        cachedNode.focus()
-      }, 100)
-    }
-  }, [])
-
   return (
     <div className={overlayClass}>
       <div style={{ width: '100%' }}>
         <div className="l-row">
           <div ref={node} className={modalClass}>
-            <div ref={containerNode} className="container" tabIndex={-1}>
-              {title && (
-                <Modal.Header
-                  close={close}
-                  closeable={closeable}
-                  title={
-                    <Translate
-                      zh_hant={TEXT.zh_hant[title] as string}
-                      zh_hans={TEXT.zh_hans[title] as string}
-                    />
-                  }
-                />
-              )}
-              {children({
-                close,
-                closeable,
-                setCloseable,
-                setModalClass
-              })}
-            </div>
+            <FocusLock>
+              <div role="dialog" className="container" tabIndex={-1}>
+                {title && (
+                  <Modal.Header
+                    close={close}
+                    closeable={closeable}
+                    title={
+                      <Translate
+                        zh_hant={TEXT.zh_hant[title] as string}
+                        zh_hans={TEXT.zh_hans[title] as string}
+                      />
+                    }
+                  />
+                )}
+                {children({
+                  close,
+                  closeable,
+                  setCloseable,
+                  setModalClass
+                })}
+              </div>
+            </FocusLock>
           </div>
         </div>
       </div>
