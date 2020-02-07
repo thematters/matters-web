@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { List, Spinner, SidebarDigest } from '~/components'
+import { List, SidebarDigest, Spinner } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'

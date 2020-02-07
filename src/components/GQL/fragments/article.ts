@@ -37,7 +37,7 @@ export default {
         edges {
           cursor
           node {
-            ...SidebarDigestArticle
+            ...DropdownDigestArticle
           }
         }
       }

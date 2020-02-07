@@ -256,4 +256,16 @@ const CommentFormWrap = (props: CommentFormProps) => {
   return <CommentForm {...props} />
 }
 
+CommentFormWrap.fragment = {
+  article: gql`
+    fragment CommentForm on Article {
+      id
+      author {
+        id
+        isBlocking
+      }
+    }
+  `
+}
+
 export default CommentFormWrap

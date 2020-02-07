@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _merge from 'lodash/merge'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
@@ -17,7 +18,6 @@ import {
   Translate
 } from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
-import { BookmarkButton } from '~/components/Button/Bookmark'
 import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -26,13 +26,11 @@ import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
-import Responses from './Responses'
 import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
@@ -43,7 +41,7 @@ import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import { ArticleEdited } from './__generated__/ArticleEdited'
+// import { ArticleEdited } from './__generated__/ArticleEdited'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String) {
@@ -64,39 +62,33 @@ const ARTICLE_DETAIL = gql`
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
       }
-      ...BookmarkArticle
       ...ContentArticle
       ...TagListArticle
-      ...ToolbarArticle
       ...RelatedArticles
       ...StateArticle
       ...FingerprintArticle
-      ...ResponsesArticle
     }
   }
   ${UserDigest.Rich.fragments.user}
-  ${BookmarkButton.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
-  ${Toolbar.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${Fingerprint.fragments.article}
-  ${Responses.fragments.article}
 `
 
-const ARTICLE_EDITED = gql`
-  subscription ArticleEdited($id: ID!) {
-    nodeEdited(input: { id: $id }) {
-      id
-      ... on Article {
-        id
-        ...ToolbarArticle
-      }
-    }
-  }
-  ${Toolbar.fragments.article}
-`
+// const ARTICLE_EDITED = gql`
+//   subscription ArticleEdited($id: ID!) {
+//     nodeEdited(input: { id: $id }) {
+//       id
+//       ... on Article {
+//         id
+//         ...ToolbarArticle
+//       }
+//     }
+//   }
+//   ${Toolbar.fragments.article}
+// `
 
 const Block = ({
   type = 'article',
@@ -113,6 +105,10 @@ const Block = ({
   )
 }
 
+const DynamicResponse = dynamic(() => import('./Responses'), {
+  ssr: false
+})
+
 const ArticleDetail = ({
   mediaHash,
   wall
@@ -122,14 +118,16 @@ const ArticleDetail = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const [fixedToolbar, setFixedToolbar] = useState(false)
-  const [trackedFinish, setTrackedFinish] = useState(false)
+
   const [fixedWall, setFixedWall] = useState(false)
   const isMediumUp = useResponsive({ type: 'md-up' })()
-  const { data, loading, error, subscribeToMore, client } = useQuery<
-    ArticleDetailType
-  >(ARTICLE_DETAIL, {
-    variables: { mediaHash }
-  })
+  const { data, loading, error, client } = useQuery<ArticleDetailType>(
+    ARTICLE_DETAIL,
+    {
+      variables: { mediaHash }
+    }
+  )
+  // subscribeToMore,
 
   const shouldShowWall = !viewer.isAuthed && wall
   const article = data?.article
@@ -142,18 +140,18 @@ const ArticleDetail = ({
     }
   }
 
-  useEffect(() => {
-    if (article && article.live) {
-      subscribeToMore<ArticleEdited>({
-        document: ARTICLE_EDITED,
-        variables: { id: article.id },
-        updateQuery: (prev, { subscriptionData }) =>
-          _merge(prev, {
-            article: subscriptionData.data.nodeEdited
-          })
-      })
-    }
-  })
+  // useEffect(() => {
+  //   if (article && article.live) {
+  //     subscribeToMore<ArticleEdited>({
+  //       document: ARTICLE_EDITED,
+  //       variables: { id: article.id },
+  //       updateQuery: (prev, { subscriptionData }) =>
+  //         _merge(prev, {
+  //           article: subscriptionData.data.nodeEdited
+  //         })
+  //     })
+  //   }
+  // })
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -267,12 +265,12 @@ const ArticleDetail = ({
 
           <TagList article={article} />
 
-          <Toolbar placement="left" article={article} />
+          <Toolbar placement="left" mediaHash={mediaHash} />
         </section>
 
         <Toolbar
           placement="bottom"
-          article={article}
+          mediaHash={mediaHash}
           fixed={fixedToolbar}
           mobile={!isMediumUp}
         />
@@ -289,22 +287,7 @@ const ArticleDetail = ({
       <Block type="section">
         {shouldShowWall && <section id="comments" />}
 
-        {!shouldShowWall && (
-          <>
-            <Responses article={article} />
-
-            <Waypoint
-              onEnter={() => {
-                if (!trackedFinish) {
-                  analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
-                    entrance: article.id
-                  })
-                  setTrackedFinish(true)
-                }
-              }}
-            />
-          </>
-        )}
+        {!shouldShowWall && <DynamicResponse />}
 
         {/* Modals */}
         <AppreciatorsModal />

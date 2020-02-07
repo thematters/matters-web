@@ -15,7 +15,6 @@ SidebarDigest,
   useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -28,10 +27,25 @@ import { CollectionList as CollectionListTypes } from './__generated__/Collectio
 export const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
-      ...ArticleCollection
+      id
+      collection(input: { after: $after, first: $first }) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+            ...SidebarDigestArticle
+          }
+        }
+      }
     }
   }
-  ${articleFragments.articleCollection}
+  ${SidebarDigest.fragments.article}
 `
 
 const CollectionList = ({

@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 
 import { Button, Icon, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -9,38 +8,33 @@ import { Translate } from '~/components/Language'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { subscribePush } from '~/common/utils'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { BookmarkArticle } from './__generated__/BookmarkArticle'
-import { SubscribeArticle } from './__generated__/SubscribeArticle'
+import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
-const SUBSCRIBE_ARTICLE = gql`
-  mutation SubscribeArticle($id: ID!) {
-    subscribeArticle(input: { id: $id }) {
-      id
-      subscribed
-    }
-  }
-`
+import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 const Subscribe = ({
-  article,
+  articleId,
   size,
   disabled
 }: {
-  article: BookmarkArticle
+  articleId: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
 }) => {
-  const [subscribe] = useMutation<SubscribeArticle>(SUBSCRIBE_ARTICLE, {
-    variables: { id: article.id },
-    optimisticResponse: {
-      subscribeArticle: {
-        id: article.id,
-        subscribed: true,
-        __typename: 'Article'
+  const [subscribe] = useMutation<ToggleSubscribeArticle>(
+    TOGGLE_SUBSCRIBE_ARTICLE,
+    {
+      variables: { id: articleId },
+      optimisticResponse: {
+        toggleSubscribeArticle: {
+          id: articleId,
+          subscribed: true,
+          __typename: 'Article'
+        }
       }
     }
-  })
+  )
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
