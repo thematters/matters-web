@@ -49,7 +49,12 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
   return (
     <section className="comment-content">
-      <Card {...path} bgColor="grey-lighter" spacing={['xtight', 'base']}>
+      <Card
+        {...path}
+        bgColor="grey-lighter"
+        spacing={['xtight', 'base']}
+        borderRadius="xxtight"
+      >
         <Expandable>
           <CommentContent comment={comment} size="sm" />
         </Expandable>

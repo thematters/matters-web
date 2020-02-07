@@ -9,7 +9,7 @@ export interface ValidEmailOptions {
   allowPlusSign: boolean
 }
 
-const EMAIL_DOMAIN_WHITELIST = ['matters.news']
+const EMAIL_DOMAIN_WHITELIST = ['matters.news', 'like.co']
 
 export const isValidEmail = (str: string, options: ValidEmailOptions) => {
   const { allowPlusSign } = options
