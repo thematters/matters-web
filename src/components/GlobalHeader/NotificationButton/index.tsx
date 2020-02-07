@@ -5,7 +5,7 @@ import {
   Button,
   Dropdown,
   focusPopper,
-  hidePopperOnClickButton,
+  hidePopperOnClick,
   Icon,
   useResponsive
 } from '~/components'
@@ -58,7 +58,7 @@ const NoticeButton = ({
       theme="dropdown shadow-light"
       onShown={instance => {
         focusPopper(instance)
-        hidePopperOnClickButton(instance)
+        hidePopperOnClick(instance)
 
         if (hasUnreadNotices) {
           markAllNoticesAsRead()

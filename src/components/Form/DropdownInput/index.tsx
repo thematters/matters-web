@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce/lib'
 
-import { Dropdown, PopperInstance } from '~/components'
+import { Dropdown, hidePopperOnClick, PopperInstance } from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 
@@ -128,6 +128,9 @@ const DropdownInput: React.FC<Props> = ({
           content={<DropdownContent {...dropdownContentProps} />}
           zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
+          onShown={i => {
+            hidePopperOnClick(i)
+          }}
         >
           <input
             id={inputId}

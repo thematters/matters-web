@@ -1,12 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import _debounce from 'lodash/debounce'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
+import {
+  Dropdown,
+  hidePopperOnClick,
+  LanguageContext,
+  PopperInstance
+} from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
-import { LanguageContext } from '~/components/Language'
-import { Dropdown, PopperInstance } from '~/components/Popper'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -39,7 +43,6 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     .map(({ node }) => node) as SearchArticles_search_edges_node_Article[]
 
   // dropdown
-  const isShowDropdown = (articles && articles.length) || loading
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
@@ -50,17 +53,23 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
       instance.show()
     }
   }
+  const isShowDropdown = (articles && articles.length) || loading
 
-  if (isShowDropdown) {
-    showDropdown()
-  } else {
-    hideDropdown()
-  }
+  useEffect(() => {
+    if (isShowDropdown) {
+      showDropdown()
+    } else {
+      hideDropdown()
+    }
+  })
 
   return (
     <>
       <Dropdown
         trigger="manual"
+        onShown={i => {
+          hidePopperOnClick(i)
+        }}
         placement="bottom-start"
         onCreate={setInstance}
         content={
@@ -70,7 +79,6 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
             onClick={article => {
               onAdd(article)
               setSearch('')
-              hideDropdown()
               if (inputNode && inputNode.current) {
                 inputNode.current.value = ''
               }

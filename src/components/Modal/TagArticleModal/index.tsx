@@ -36,12 +36,10 @@ const PUT_ARTICLES_TAGS = gql`
 
 const DropdownContent = ({
   callback,
-  hideDropdown,
   items,
   loading
 }: {
   callback: (params: any) => void
-  hideDropdown: () => void
   items: any
   loading: boolean
 }) => {
@@ -54,7 +52,6 @@ const DropdownContent = ({
       loading={loading}
       onClick={article => {
         callback(article)
-        hideDropdown()
       }}
     />
   )

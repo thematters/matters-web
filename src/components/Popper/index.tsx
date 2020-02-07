@@ -1,9 +1,9 @@
 import Tippy, { TippyProps } from '@tippy.js/react'
-import { Instance } from 'tippy.js'
+import { Instance, Props } from 'tippy.js'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = Instance
+export type PopperInstance = Instance<Props>
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -37,11 +37,7 @@ Dropdown.defaultProps = {
   animation: 'shift-away',
   theme: 'dropdown',
   boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-  onShown: instance => {
-    focusPopper(instance)
-    hidePopperOnClickButton(instance)
-  }
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
 export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
@@ -66,21 +62,26 @@ Popover.defaultProps = {
   animation: 'shift-away',
   theme: 'popover',
   boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-  onShown: instance => {
-    focusPopper(instance)
-  }
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
+/**
+ * Focus popper for a11y
+ * @param instance
+ */
 export const focusPopper = (instance: PopperInstance) => {
   instance.popperChildren.tooltip.focus()
 }
 
-export const hidePopperOnClickButton = (instance: PopperInstance) => {
+/**
+ * Hide popper when inside button was clicked
+ * @param instance
+ */
+export const hidePopperOnClick = (instance: PopperInstance) => {
   const popper = instance.popperChildren.tooltip
 
-  popper.addEventListener('click', e => {
-    const target = e.target as HTMLElement
+  popper.addEventListener('click', event => {
+    const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       instance.hide()

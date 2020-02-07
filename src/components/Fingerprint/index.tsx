@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import {
   Button,
+  focusPopper,
   Icon,
   Popover,
   Spinner,
@@ -183,6 +184,9 @@ const Fingerprint = ({
     <Popover
       offset="100,0"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
+      onShown={instance => {
+        focusPopper(instance)
+      }}
     >
       <Button
         size={[null, '1.25rem']}

@@ -1,6 +1,13 @@
 import gql from 'graphql-tag'
 
-import { Button, Dropdown, Icon, Menu } from '~/components'
+import {
+  Button,
+  Dropdown,
+  focusPopper,
+  hidePopperOnClick,
+  Icon,
+  Menu
+} from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 
 import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
@@ -24,6 +31,10 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
         </Menu>
       }
       placement="bottom-end"
+      onShown={instance => {
+        focusPopper(instance)
+        hidePopperOnClick(instance)
+      }}
     >
       <Button
         spacing={['xtight', 'xtight']}

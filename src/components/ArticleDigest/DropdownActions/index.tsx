@@ -4,6 +4,8 @@ import { useContext, useState } from 'react'
 import {
   Button,
   Dropdown,
+  focusPopper,
+  hidePopperOnClick,
   Icon,
   IconColor,
   IconSize,
@@ -145,8 +147,12 @@ const DropdownActions = ({
             hasSetTagUnselectedButton={inTagDetailSelected}
           />
         }
-        onCreate={setInstance}
         placement="bottom-end"
+        onCreate={setInstance}
+        onShown={i => {
+          focusPopper(i)
+          hidePopperOnClick(i)
+        }}
       >
         <Button
           spacing={['xtight', 'xtight']}

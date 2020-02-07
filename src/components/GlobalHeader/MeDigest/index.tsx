@@ -2,10 +2,14 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Dropdown } from '~/components'
+import {
+  Dropdown,
+  focusPopper,
+  hidePopperOnClick,
+  Translate
+} from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Translate } from '~/components/Language'
 import { ViewerContext } from '~/components/Viewer'
 
 import { Z_INDEX } from '~/common/enums'
@@ -31,6 +35,10 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       trigger="mouseenter focus click"
       content={<DropdownMenu />}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      onShown={instance => {
+        focusPopper(instance)
+        hidePopperOnClick(instance)
+      }}
     >
       <button
         type="button"

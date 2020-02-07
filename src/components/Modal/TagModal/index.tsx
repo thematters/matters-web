@@ -41,14 +41,12 @@ const DropdownDefaultItem = ({ search }: { search: string }) => {
 }
 
 interface DropdownListBaseProps {
-  hideDropdown: () => void
   items: any[]
   loading: boolean
   search: string
 }
 
 const DropdownList = ({
-  hideDropdown,
   items,
   loading,
   search,

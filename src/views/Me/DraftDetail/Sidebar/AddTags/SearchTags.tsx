@@ -4,6 +4,7 @@ import { useDebounce } from 'use-debounce/lib'
 
 import {
   Dropdown,
+  hidePopperOnClick,
   LanguageContext,
   Menu,
   PopperInstance,
@@ -100,6 +101,9 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
       <Dropdown
         trigger="manual"
         onCreate={setInstance}
+        onShown={i => {
+          hidePopperOnClick(i)
+        }}
         content={
           <DropdownContent
             loading={loading}

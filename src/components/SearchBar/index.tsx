@@ -6,7 +6,7 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
-  hidePopperOnClickButton,
+  hidePopperOnClick,
   Icon,
   LanguageContext,
   PopperInstance
@@ -106,7 +106,7 @@ const BaseSearchBar: React.FC<{
             }
             trigger="manual"
             onShown={instance => {
-              hidePopperOnClickButton(instance)
+              hidePopperOnClick(instance)
             }}
             onCreate={instance => (instanceRef.current = instance)}
             theme="dropdown shadow-light"
