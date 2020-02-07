@@ -1,0 +1,11 @@
+.toast-container {
+  position: fixed;
+  top: calc(var(--global-header-height) + var(--spacing-x-tight));
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 0rem;
+  max-height: 0rem;
+  z-index: var(--z-index-over-modal);
+}

@@ -8,7 +8,6 @@ import { useContext } from 'react'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -26,8 +25,10 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import { UserRegister } from './__generated__/UserRegister'
 import styles from './styles.css'
+
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { UserRegister } from './__generated__/UserRegister'
 
 /**
  * This component is designed for sign up form with builtin mutation.
@@ -151,6 +152,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
           }
         })
 
+        analytics.identifyUser()
+        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
+
         if (submitCallback) {
           submitCallback({ email, codeId, password })
         }
@@ -171,11 +175,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         } else {
           setFieldError('userName', errorMessage)
         }
+        setSubmitting(false)
       }
-
-      setSubmitting(false)
-      analytics.identifyUser()
-      analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
     }
   })
 
@@ -264,8 +265,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             handleChange={handleChange}
             setFieldValue={setFieldValue}
           >
-            <span>
+            <>
               <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+
               <Link {...PATHS.MISC_TOS}>
                 <a className="u-link-green" target="_blank">
                   {' '}
@@ -275,7 +277,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
                   />
                 </a>
               </Link>
-            </span>
+            </>
           </Form.CheckBox>
         </div>
       </Modal.Content>
@@ -285,7 +287,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
         {isInPage && <LoginRedirection />}
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

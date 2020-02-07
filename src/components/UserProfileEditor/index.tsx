@@ -21,8 +21,10 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
+import { TextIcon } from '../TextIcon'
 import styles from './styles.css'
+
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
 interface FormProps {
   user: { [key: string]: any }
@@ -147,36 +149,43 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                 />
                 <div className="buttons">
                   <Button
-                    type="submit"
+                    size={[null, '2rem']}
+                    spacing={[0, 'base']}
                     bgColor="green"
-                    style={{ minWidth: '5rem' }}
+                    type="submit"
                     disabled={!_isEmpty(errors) || isSubmitting}
-                    icon={
-                      isSubmitting ? (
-                        <Icon.Spinner size="md" />
-                      ) : (
-                        <Icon.Write size="md" />
-                      )
-                    }
                   >
-                    <Translate
-                      zh_hant={TEXT.zh_hant.save}
-                      zh_hans={TEXT.zh_hans.save}
-                    />
+                    <TextIcon
+                      color="white"
+                      weight="md"
+                      icon={
+                        isSubmitting ? (
+                          <Icon.Spinner size="sm" />
+                        ) : (
+                          <Icon.Pen size="sm" />
+                        )
+                      }
+                    >
+                      <Translate
+                        zh_hant={TEXT.zh_hant.save}
+                        zh_hans={TEXT.zh_hans.save}
+                      />
+                    </TextIcon>
                   </Button>
+
                   <Button
-                    type="button"
-                    bgColor="transparent"
-                    textColor="grey"
-                    textWeight="normal"
-                    spacing="loose"
+                    size={[null, '2rem']}
+                    spacing={[0, 'base']}
+                    bgColor="grey-lighter"
                     disabled={isSubmitting}
                     onClick={() => setEditing(false)}
                   >
-                    <Translate
-                      zh_hant={TEXT.zh_hant.cancel}
-                      zh_hans={TEXT.zh_hans.cancel}
-                    />
+                    <TextIcon color="grey" weight="md">
+                      <Translate
+                        zh_hant={TEXT.zh_hant.cancel}
+                        zh_hans={TEXT.zh_hans.cancel}
+                      />
+                    </TextIcon>
                   </Button>
                 </div>
               </form>

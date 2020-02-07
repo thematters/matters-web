@@ -1,6 +1,6 @@
 .container {
-  margin-bottom: 3rem;
   margin-top: calc(var(--spacing-x-loose) * -1);
+  margin-bottom: 2rem;
 
   @media (--sm-up) {
     margin-top: calc(var(--spacing-xx-loose) * -1);
@@ -12,11 +12,6 @@
 
 .content-container {
   padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-x-loose);
-
-  @media (--sm-up) {
-    padding-bottom: var(--spacing-xx-loose);
-  }
 }
 
 .content {
@@ -79,7 +74,6 @@
 
 .basic {
   @mixin flex-center-all;
-  margin-left: var(--spacing-x-tight);
 
   & .name {
     font-size: var(--font-size-lg);
@@ -100,13 +94,12 @@
     color: var(--color-grey);
   }
 
-  & :first-child {
-    margin-left: 0;
-  }
+  & :global(> *) {
+    display: inline-flex;
 
-  & :global(> * + *) {
-    font-size: 0;
-    margin-left: var(--spacing-x-tight);
+    & :global(+ *) {
+      margin-left: var(--spacing-x-tight);
+    }
   }
 }
 
@@ -125,9 +118,7 @@
     }
 
     & .follow-state {
-      display: inline-block;
-      margin-top: var(--spacing-base);
-      line-height: 1;
+      margin-top: var(--spacing-x-tight);
     }
   }
 
@@ -160,10 +151,7 @@
 }
 
 .info-follow {
-  @mixin border-top-grey;
-
   margin-top: var(--spacing-base);
-  padding-top: var(--spacing-base);
 
   color: var(--color-grey);
   font-size: var(--font-size-sm-s);

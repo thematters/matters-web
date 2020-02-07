@@ -12,16 +12,14 @@ import {
   Footer,
   Head,
   Icon,
-  Placeholder,
+  Spinner,
   Title,
   Translate
 } from '~/components'
 import BackToHomeButton from '~/components/Button/BackToHome'
 import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareModal from '~/components/Button/Share/ShareModal'
 import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useImmersiveMode, useResponsive } from '~/components/Hook'
 import Throw404 from '~/components/Throw404'
@@ -31,8 +29,6 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import { ArticleEdited } from './__generated__/ArticleEdited'
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
@@ -45,12 +41,12 @@ import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
 import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import { ArticleEdited } from './__generated__/ArticleEdited'
+
 const ARTICLE_DETAIL = gql`
-  query ArticleDetail(
-    $mediaHash: String
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query ArticleDetail($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -63,7 +59,7 @@ const ARTICLE_DETAIL = gql`
       summary
       createdAt
       author {
-        ...UserDigestFullDescUser
+        ...UserDigestRichUser
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -78,7 +74,7 @@ const ARTICLE_DETAIL = gql`
       ...ResponsesArticle
     }
   }
-  ${UserDigest.FullDesc.fragments.user}
+  ${UserDigest.Rich.fragments.user}
   ${BookmarkButton.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
@@ -170,7 +166,7 @@ const ArticleDetail = ({
   if (loading) {
     return (
       <Block>
-        <Placeholder.ArticleDetail />
+        <Spinner />
       </Block>
     )
   }
@@ -229,7 +225,7 @@ const ArticleDetail = ({
         <State article={article} />
 
         <section className="author">
-          <UserDigest.FullDesc user={article.author} />
+          <UserDigest.Rich user={article.author} hasFollow />
         </section>
 
         <section className="title">
@@ -283,7 +279,7 @@ const ArticleDetail = ({
       </Block>
 
       <Waypoint onPositionChange={handleWall}>
-        <section className="l-col-4 l-col-md-8 l-col-lg-12">
+        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <RelatedArticles article={article} />
         </section>
       </Waypoint>
@@ -313,7 +309,6 @@ const ArticleDetail = ({
         {/* Modals */}
         <AppreciatorsModal />
         <CivicLikerModal />
-        <ShareModal />
       </Block>
 
       <style jsx>{styles}</style>

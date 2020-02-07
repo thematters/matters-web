@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Footer, Head, InfiniteScroll, Spinner } from '~/components'
+import { Footer, Head, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'
 import { Transaction } from '~/components/TransactionDigest'
 
@@ -9,8 +9,8 @@ import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
+
 import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
-import styles from './styles.css'
 
 const ME_APPRECIATIONS_SENT = gql`
   query MeAppreciationsSent($after: String) {
@@ -85,13 +85,13 @@ const AppreciationsSent = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <ul>
+        <List hasBorder>
           {edges.map(({ node, cursor }) => (
-            <li key={cursor}>
+            <List.Item key={cursor}>
               <Transaction.AppreciationSent tx={node} />
-            </li>
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
     </>
   )
@@ -113,7 +113,5 @@ export default () => (
     <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
       <Footer />
     </section>
-
-    <style jsx>{styles}</style>
   </main>
 )

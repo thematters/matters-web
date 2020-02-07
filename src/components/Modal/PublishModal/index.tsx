@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { DraftDetailQuery_node_Draft } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 
 import { useMutation } from '~/components/GQL'
 import { Translate } from '~/components/Language'
@@ -8,9 +7,11 @@ import { Modal } from '~/components/Modal'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { PublishArticle } from './__generated__/PublishArticle'
 import PublishSlide from './PublishSlide'
 import styles from './styles.css'
+
+import { DraftDetailQuery_node_Draft } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
+import { PublishArticle } from './__generated__/PublishArticle'
 
 /**
  * This component is for publishing modal.

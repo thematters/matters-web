@@ -1,14 +1,15 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { DateTime, Icon, Translate } from '~/components'
+import { DateTime, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import { numFormat, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import DeleteButton from '../Components/DeleteButton'
-import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
 import styles from './styles.css'
+
+import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
 
 const fragments = {
   draft: gql`
@@ -17,7 +18,6 @@ const fragments = {
       title
       summary
       slug
-      wordCount
       scheduledAt
       updatedAt
       publishState
@@ -26,7 +26,7 @@ const fragments = {
 }
 
 const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
-  const { id, title, publishState, updatedAt, slug, wordCount } = draft
+  const { id, title, publishState, updatedAt, slug } = draft
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
     page: 'draftDetail',
@@ -51,17 +51,8 @@ const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
         <div>
           <footer className="actions">
             <DateTime date={updatedAt} type="relative" />
-            <Icon.DotDivider />
-            <Translate
-              zh_hans={`${numFormat(wordCount)} 字`}
-              zh_hant={`${numFormat(wordCount)} 字`}
-            />
-            {isUnpublished && (
-              <>
-                <Icon.DotDivider />
-                <DeleteButton id={id} />
-              </>
-            )}
+
+            {isUnpublished && <DeleteButton id={id} />}
           </footer>
         </div>
       </div>

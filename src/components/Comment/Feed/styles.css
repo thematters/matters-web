@@ -1,0 +1,35 @@
+:root {
+  --descendant-avatar-size: 1.5rem;
+}
+
+article {
+  &:target {
+    animation: commentBackgroundFadeOut 2s ease 1s;
+  }
+}
+
+header {
+  @mixin flex-start-space-between;
+
+  & .right {
+    & :global(> * + *) {
+      margin-left: var(--spacing-tight);
+    }
+  }
+}
+
+.content-container {
+  margin-top: var(--spacing-xx-tight);
+  padding-left: var(--spacing-xx-loose);
+}
+
+@keyframes commentBackgroundFadeOut {
+  50% {
+    background: var(--color-green-lighter);
+  }
+
+  0,
+  100% {
+    background: none;
+  }
+}

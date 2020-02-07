@@ -18,8 +18,9 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
 import styles from './styles.css'
+
+import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
 
 /**
  * This component is designed for sign up form with builtin mutation.
@@ -178,7 +179,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
 
       <div className="buttons">
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
           width="full"

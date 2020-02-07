@@ -37,7 +37,7 @@ const Description = () => (
   <section className="desc">
     <section>
       <TextIcon
-        icon={<Icon.Help size="sm" />}
+        icon={<Icon.HelpMedium size="sm" />}
         size="sm"
         color="green"
         spacing="xtight"
@@ -62,7 +62,7 @@ const Description = () => (
 )
 
 const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
-  const [bindType, setBindType] = useState<'generate' | 'bind'>('generate')
+  const [bindType, setBindType] = useState<'generate' | 'bind'>('bind')
   const isGenerate = bindType === 'generate'
 
   return (
@@ -137,7 +137,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
 
       <footer>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           onClick={(e: FormEvent) => {
             e.preventDefault()
 

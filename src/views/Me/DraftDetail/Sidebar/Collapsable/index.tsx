@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 
-import { Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -13,18 +13,15 @@ const Collapsable: React.FC<{
   return (
     <section className={collapsed ? 'collapsed' : 'expanded'}>
       <div>
-        <button
-          type="button"
+        <Button
           onClick={() => {
             toggleCollapse(!collapsed)
           }}
         >
           <TextIcon
             icon={
-              <Icon.CollapseBranch
+              <Icon.Up
                 style={{
-                  width: 14,
-                  height: 14,
                   transform: `rotate(${collapsed ? 180 : 0}deg)`
                 }}
               />
@@ -36,7 +33,7 @@ const Collapsable: React.FC<{
           >
             {title}
           </TextIcon>
-        </button>
+        </Button>
       </div>
 
       {!collapsed && children}

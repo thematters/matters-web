@@ -1,123 +1,105 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { Title, Translate } from '~/components'
+import { Card } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
-import { TEXT, UrlFragments } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import Actions, { ActionsControls } from '../Actions'
-import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
+import ArticleTitleDigest, { TitleDigestTextSize } from '../TitleDigest'
 import styles from './styles.css'
 
-type SidebarDigestProps = {
-  type?: 'collection'
+import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
+
+interface SidebarDigestProps {
   article: SidebarDigestArticle
+
+  titleTextSize?: TitleDigestTextSize
+  hasBackground?: boolean
   hasCover?: boolean
-  disabled?: boolean
-  extraContainerClass?: string
-} & ActionsControls
+  onClick?: () => any
+}
 
 const fragments = {
   article: gql`
     fragment SidebarDigestArticle on Article {
       id
+      articleState: state
       title
       slug
-      live
-      cover @include(if: $hasArticleDigestCover)
+      mediaHash
+      cover
       author {
         id
         userName
+        ...UserDigestMiniUser
       }
-      mediaHash
-      ...DigestActionsArticle
+      ...TitleDigestArticle
     }
-    ${Actions.fragments.article}
+    ${UserDigest.Mini.fragments.user}
+    ${ArticleTitleDigest.fragments.article}
   `
 }
 
 const SidebarDigest = ({
-  type,
   article,
+
+  titleTextSize = 'md-s',
+  hasBackground,
   hasCover,
-  disabled,
-  extraContainerClass,
-  ...actionControls
+  onClick
 }: SidebarDigestProps) => {
-  const { author, slug, mediaHash, live, state } = article
-
-  if (!author || !author.userName || !slug || !mediaHash) {
-    return null
-  }
-
+  const { articleState: state } = article
+  const isBanned = state === 'banned'
+  const cover = !isBanned && hasCover ? article.cover : null
+  const containerClass = classNames({
+    container: true,
+    'has-cover': !!cover,
+    'has-background': !!hasBackground
+  })
   const path = toPath({
     page: 'articleDetail',
-    userName: author.userName,
-    slug,
-    mediaHash,
-    fragment: live ? UrlFragments.COMMENTS : ''
+    article
   })
-  const containerClasses = classNames({
-    container: true,
-    ...(extraContainerClass
-      ? { [extraContainerClass]: extraContainerClass }
-      : {})
-  })
-  const isBanned = state === 'banned'
-  const cover = 'cover' in article && !isBanned ? article.cover : null
-  const title = isBanned ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.articleBanned}
-      zh_hans={TEXT.zh_hans.articleBanned}
-    />
-  ) : (
-    article.title
-  )
-  const contentClasses = classNames({
-    content: true,
-    'no-cover': !cover,
-    'type-collection': type === 'collection',
-    inactive: state !== 'active',
-    disabled
-  })
-
-  const LinkWrapper: React.FC = ({ children }) =>
-    isBanned ? (
-      <span>{children}</span>
-    ) : (
-      <Link {...path}>
-        <a>{children}</a>
-      </Link>
-    )
 
   return (
-    <section className={containerClasses}>
-      <div className={contentClasses}>
-        <div className="left">
-          <LinkWrapper>
-            <Title type="sidebar" is="h2">
-              {title}
-            </Title>
-          </LinkWrapper>
-          <Actions article={article} type="sidebar" {...actionControls} />
-        </div>
+    <Card
+      {...path}
+      spacing={hasBackground ? ['tight', 'tight'] : [0, 0]}
+      borderRadius={hasBackground ? 'xtight' : undefined}
+      bgColor={hasBackground ? 'grey-lighter' : undefined}
+      onClick={onClick}
+    >
+      <section className={containerClass}>
+        <header>
+          <ArticleTitleDigest
+            article={article}
+            textSize={titleTextSize}
+            is="h3"
+          />
+        </header>
 
-        {hasCover && cover && (
-          <LinkWrapper>
-            <div
-              className="cover"
-              style={{
-                backgroundImage: `url(${cover})`
-              }}
-            />
-          </LinkWrapper>
+        {cover && (
+          <aside
+            className="cover"
+            style={{ backgroundImage: `url("${cover}")` }}
+          />
         )}
-      </div>
 
-      <style jsx>{styles}</style>
-    </section>
+        <footer>
+          <UserDigest.Mini
+            user={article.author}
+            avatarSize="xs"
+            textSize="sm-s"
+            nameColor="grey-darker"
+            hasAvatar
+            hasDisplayName
+          />
+        </footer>
+
+        <style jsx>{styles}</style>
+      </section>
+    </Card>
   )
 }
 

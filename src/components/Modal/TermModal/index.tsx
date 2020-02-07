@@ -4,7 +4,6 @@ import Router from 'next/router'
 
 import { Icon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Term } from '~/components/Term'
 
@@ -12,8 +11,10 @@ import { TEXT } from '~/common/enums'
 import { unsubscribePush } from '~/common/utils'
 
 import { Modal } from '..'
-import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 import styles from './styles.css'
+
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
+import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 
 /**
  * This component is for term of use modal.
@@ -97,7 +98,7 @@ const TermModal: React.FC<FormProps> = formProps => {
         </Modal.FooterButton>
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={isSubmitting}
           loading={isSubmitting}
         >

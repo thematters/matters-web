@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -12,6 +11,8 @@ import {
 } from '~/common/enums'
 
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
 /**
  * This component is for uploading avatar during sign up process.
@@ -84,14 +85,12 @@ export const SignUpAvatarUploader: React.FC<Props> = ({
   return (
     <section className="container">
       <div className="avatar">
-        <Avatar size="xl" src={avatar} />
+        <Avatar size="xxl" src={avatar} />
       </div>
       <div className="upload">
         <div className="wrapper">
-          <Icon.CameraGreen
-            style={{ width: 24, height: 24, marginRight: '0.25rem' }}
-          />
           <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
+
           <input
             className="input"
             type="file"

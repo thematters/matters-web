@@ -1,17 +1,18 @@
 import { Menu } from '~/components/Menu'
 import { Spinner } from '~/components/Spinner'
 import { UserDigest } from '~/components/UserDigest'
-import { UserDigestBriefDescUser } from '~/components/UserDigest/BriefDesc/__generated__/UserDigestBriefDescUser'
 
 import styles from './styles.css'
+
+import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 const DropdownUserList = ({
   users,
   onClick,
   loading
 }: {
-  users: UserDigestBriefDescUser[]
-  onClick: (user: UserDigestBriefDescUser) => void
+  users: UserDigestMiniUser[]
+  onClick: (user: UserDigestMiniUser) => void
   loading?: boolean
 }) => {
   if (loading) {
@@ -41,7 +42,14 @@ const DropdownUserList = ({
               }}
               disabled={user?.status?.state === 'archived'}
             >
-              <UserDigest.BriefDesc user={user} />
+              <UserDigest.Mini
+                user={user}
+                direction="column"
+                hasAvatar
+                hasDisplayName
+                hasUserName
+                disabled
+              />
             </button>
           </Menu.Item>
         ))}

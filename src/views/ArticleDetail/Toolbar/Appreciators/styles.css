@@ -8,8 +8,6 @@
 }
 
 .avatar-list {
-  font-size: 0;
-
   & :global(.avatar) {
     position: relative;
     border: 1.5px solid var(--color-white);
@@ -46,13 +44,23 @@
 }
 
 .modal-appreciators-list {
-  margin-top: var(--spacing-loose);
-  padding: 0 var(--spacing-base);
+  padding: var(--spacing-tight) var(--spacing-base);
 
-  & li:last-child {
-    & :global(> *) {
-      margin-bottom: 0;
-      border-bottom: 0;
-    }
+  & .appreciation-amount {
+    display: inline-block; /* fallback */
+    @mixin inline-flex-center-all;
+    margin-top: -2px;
+    margin-right: -2px;
+    height: 1rem;
+    min-width: 1rem;
+
+    color: var(--color-white);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    border-radius: 1rem;
+    border: 2px solid var(--color-white);
+    box-sizing: content-box;
+    background: var(--color-matters-green);
   }
 }

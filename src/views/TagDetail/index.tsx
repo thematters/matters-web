@@ -1,90 +1,51 @@
 import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import {
-  ArticleDigest,
+  Button,
   Footer,
   Head,
-  Icon,
-  InfiniteScroll,
   PageHeader,
-  Placeholder,
   Spinner,
+  Tabs,
   TextIcon,
   Translate
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
-import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import { TagDetail } from '~/components/GQL/queries/__generated__/TagDetail'
-import { TagDetailArticles } from '~/components/GQL/queries/__generated__/TagDetailArticles'
-import TAG_DETAIL from '~/components/GQL/queries/tagDetail'
-import TAG_DETAIL_ARTICLES from '~/components/GQL/queries/tagDetailArticles'
-import { useEventListener } from '~/components/Hook'
 import TagArticleModal from '~/components/Modal/TagArticleModal'
 import TagModal from '~/components/Modal/TagModal'
-import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import { ModalInstance } from '~/components/ModalManager'
 import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
-import {
-  ANALYTICS_EVENTS,
-  ERROR_CODES,
-  FEED_TYPE,
-  REFETCH_TAG_DETAIL_ARTICLES,
-  TEXT
-} from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ERROR_CODES } from '~/common/enums'
 
 import styles from './styles.css'
+import { TagDetailArticles } from './TagDetailArticles'
+import { TagDetailButtons } from './TagDetailButtons'
 
-const AddArticleTagButton = () => {
-  return (
-    <ModalSwitch modalId="addArticleTagModal">
-      {(open: any) => (
-        <button type="button" onClick={e => open()}>
-          <TextIcon
-            icon={<Icon.Add color="green" size="xs" />}
-            spacing="xxxtight"
-            color="green"
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.addArticleTag}
-              zh_hans={TEXT.zh_hans.addArticleTag}
-            />
-          </TextIcon>
-        </button>
-      )}
-    </ModalSwitch>
-  )
-}
+import { TagDetail } from './__generated__/TagDetail'
 
-const EditTagButton = () => {
-  return (
-    <ModalSwitch modalId="editTagModal">
-      {(open: any) => (
-        <button type="button" onClick={e => open()} className="edit-tag">
-          <TextIcon
-            icon={<Icon.TagEdit color="green" size="xs" />}
-            size="sm"
-            spacing="xxxtight"
-            color="green"
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.editTag}
-              zh_hans={TEXT.zh_hans.editTag}
-            />
-          </TextIcon>
-          <style jsx>{styles}</style>
-        </button>
-      )}
-    </ModalSwitch>
-  )
-}
+const TAG_DETAIL = gql`
+  query TagDetail($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Tag {
+        id
+        content
+        description
+        articles(input: { first: 0, selected: true }) {
+          totalCount
+        }
+      }
+    }
+  }
+`
 
-const ActionButtons = () => {
+const Buttons = () => {
   const viewer = useContext(ViewerContext)
 
   if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
@@ -93,132 +54,82 @@ const ActionButtons = () => {
 
   return (
     <section className="buttons">
-      <AddArticleTagButton />
-      <EditTagButton />
+      <TagDetailButtons.AddArticleButton />
+      <TagDetailButtons.EditTagButton />
+
       <style jsx>{styles}</style>
     </section>
   )
 }
 
-const TagDetailArticleList = ({ id }: { id: string }) => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    TagDetailArticles
-  >(TAG_DETAIL_ARTICLES, { variables: { id } })
+type TagFeed = 'latest' | 'selected'
 
-  const sync = ({
-    event,
-    differences = 0
-  }: {
-    event: 'add' | 'delete'
-    differences?: number
-  }) => {
-    const { edges: items } = _get(data, 'node.articles', { edges: [] })
-    switch (event) {
-      case 'add':
-        refetch({
-          variables: {
-            id,
-            first: items.length + differences
-          }
-        })
-        break
-      case 'delete':
-        refetch({
-          variables: {
-            id,
-            first: Math.max(items.length - 1, 0)
-          }
-        })
-        break
-    }
-  }
-
-  useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
-
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
+const TagDetailContainer = ({ data }: { data: TagDetail }) => {
+  const hasSelected = _get(data, 'node.articles.totalCount', 0)
+  const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTagArticles />
+    return <EmptyTag />
   }
 
-  const connectionPath = 'node.articles'
-  const { edges, pageInfo } = data.node.articles
-  const hasArticles = edges && edges.length > 0 && pageInfo
-
-  const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAG_DETAIL,
-      location: edges ? edges.length : 0,
-      entrance: id
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath
-        })
-    })
+  if (hasSelected === 0 && feed === 'selected') {
+    setFeed('latest')
   }
 
   return (
     <>
-      <section>
-        {hasArticles && (
-          <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
-            loadMore={loadMore}
-          >
-            <ul>
-              {(edges || []).map(({ node, cursor }, i) => (
-                <li
-                  key={cursor}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAG_DETAIL,
-                      location: i,
-                      entrance: id
-                    })
-                  }
-                >
-                  <ArticleDigest.Feed
-                    article={node}
-                    hasDateTime
-                    hasBookmark
-                    hasMoreButton
-                    inTagDetail
-                  />
-                </li>
-              ))}
-            </ul>
-          </InfiniteScroll>
-        )}
-        {!hasArticles && <EmptyTagArticles />}
+      <Head title={`#${data.node.content}`} />
+
+      <PageHeader
+        title={data.node.content}
+        description={data.node.description || ''}
+        hasNoBorder
+      >
+        <Buttons />
+      </PageHeader>
+
+      <section className="tabs">
+        <Tabs spacingBottom="base">
+          {hasSelected > 0 && (
+            <Tabs.Tab selected={feed === 'selected'}>
+              <Button onClick={() => setFeed('selected')}>
+                <TextIcon size="xm">
+                  <Translate zh_hant="精選" zh_hans="精选" />
+                </TextIcon>
+              </Button>
+            </Tabs.Tab>
+          )}
+
+          <Tabs.Tab selected={feed === 'latest'}>
+            <Button onClick={() => setFeed('latest')}>
+              <TextIcon size="xm">
+                <Translate zh_hant="最新" zh_hans="最新" />
+              </TextIcon>
+            </Button>
+          </Tabs.Tab>
+        </Tabs>
       </section>
+
+      {feed === 'selected' ? (
+        <TagDetailArticles.Selected id={data.node.id} />
+      ) : (
+        <TagDetailArticles.Latest id={data.node.id} />
+      )}
+
+      <style jsx>{styles}</style>
     </>
   )
 }
 
-const TagDetailContainer = () => {
+const TagDetailDataContainer = () => {
   const router = useRouter()
 
-  const variables = { id: router.query.id }
-
   const { data, loading, error } = useQuery<TagDetail>(TAG_DETAIL, {
-    variables
+    variables: { id: router.query.id }
   })
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -243,16 +154,7 @@ const TagDetailContainer = () => {
 
   return (
     <>
-      <Head title={`#${data.node.content}`} />
-
-      <PageHeader
-        pageTitle={data.node.content}
-        buttons={<ActionButtons />}
-        description={data.node.description || ''}
-      />
-
-      <TagDetailArticleList id={data.node.id} />
-
+      <TagDetailContainer data={data} />
       <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
         {(props: ModalInstanceProps) => (
           <TagArticleModal tagId={tag ? tag.id : undefined} {...props} />
@@ -270,7 +172,7 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <TagDetailContainer />
+        <TagDetailDataContainer />
       </article>
 
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">

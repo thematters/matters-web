@@ -1,0 +1,18 @@
+header {
+  @mixin flex-center-space-between;
+
+  & .left {
+    @mixin inline-flex-center-all;
+
+    & .reply-to {
+      margin-left: var(--spacing-x-tight);
+
+      color: var(--color-grey);
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+.article-title {
+  margin: var(--spacing-x-tight) 0;
+}

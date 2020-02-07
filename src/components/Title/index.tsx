@@ -4,14 +4,14 @@ import React from 'react'
 import styles from './styles.css'
 
 type TitleType =
-  | 'feature'
   | 'article'
-  | 'page'
   | 'feed'
   | 'modal'
   | 'modal-headline'
   | 'sidebar'
-type TitleIs = 'h1' | 'h2' | 'h3' | 'p' | 'span'
+  | 'nav'
+
+type TitleIs = 'h1' | 'h2' | 'h3'
 
 interface TitleProps {
   type: TitleType
@@ -52,18 +52,10 @@ export const Title: React.FC<TitleProps> = ({
         <h2 className={titleClasses} style={style}>
           {children}
         </h2>
-      ) : is === 'h3' ? (
+      ) : (
         <h3 className={titleClasses} style={style}>
           {children}
         </h3>
-      ) : is === 'p' ? (
-        <p className={titleClasses} style={style}>
-          {children}
-        </p>
-      ) : (
-        <span className={titleClasses} style={style}>
-          {children}
-        </span>
       )}
 
       <style jsx>{styles}</style>

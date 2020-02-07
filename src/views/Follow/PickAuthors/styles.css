@@ -56,7 +56,3 @@ header {
     vertical-align: middle;
   }
 }
-
-ul {
-  font-size: 0; /* remove space between <li> */
-}

@@ -3,8 +3,9 @@ import gql from 'graphql-tag'
 
 import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
 
-import { AvatarUser } from './__generated__/AvatarUser'
 import styles from './styles.css'
+
+import { AvatarUser } from './__generated__/AvatarUser'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 

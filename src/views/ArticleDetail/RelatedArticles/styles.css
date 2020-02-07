@@ -1,45 +1,18 @@
 .related-articles {
-  padding-top: 3rem;
-
-  @media (--md-down) {
-    padding-top: 2rem;
-  }
+  padding-top: var(--spacing-xx-loose);
 }
 
-.divider {
-  border: 0px;
-  padding: 0px;
+ul {
+  display: flex;
 
-  @media (--md-down) {
-    @mixin border-bottom-grey;
-    height: 0px;
-    padding-bottom: 2.5rem;
-  }
-}
-
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  padding: 2px 2px 0.75rem 2px;
   overflow-x: scroll;
-  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 
-  & div:nth-child(2) {
-    display: flex;
-    justify-content: center;
-  }
+  & li {
+    margin: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
 
-  & div:last-child {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 1px;
-  }
-
-  @media (--lg-down) {
-    & div:not(:first-child) {
-      padding-left: var(--spacing-base);
+    &:last-child {
+      margin-right: 0;
     }
   }
 }

@@ -1,0 +1,21 @@
+.sm-size-header {
+  & :global(> header) {
+    & :global(> h1) {
+      color: var(--color-grey-darker);
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+.follow-info {
+  margin-left: var(--spacing-xx-tight);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-grey);
+  line-height: 1;
+  vertical-align: middle;
+
+  & .hightlight {
+    color: var(--color-matters-green);
+  }
+}

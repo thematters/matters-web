@@ -8,11 +8,12 @@ import {
   DropResult
 } from 'react-beautiful-dnd'
 
-import { ArticleDigest, Icon } from '~/components'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
+import { ArticleDigest, Button, Icon } from '~/components'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 
 interface State {
   articles: DropdownDigestArticle[]
@@ -41,11 +42,8 @@ class CollectionEditor extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate() {
-    const { articles } = this.state
-    const prevArticleIds = articles.map(({ id }) => id)
-    const articleIds = this.props.articles.map(({ id }) => id)
-
-    if (_isEqual(prevArticleIds, articleIds)) {
+    // only update state from prop only if added or deleted
+    if (this.state.articles.length === this.props.articles.length) {
       return
     }
 
@@ -108,23 +106,32 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon.Drag />
+                          <Icon.Sort color="grey" />
                         </span>
 
                         <ArticleDigest.Dropdown
                           article={article}
-                          hasArrow
+                          titleTextSize="md-s"
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                           disabled
+                          extraButton={
+                            <ArticleDigest.Dropdown.OpenExternalLink
+                              article={article}
+                            />
+                          }
                         />
 
-                        <button
-                          type="button"
-                          className="delete-handler"
-                          aria-label="刪除"
-                          onClick={() => this.onDelete(article)}
-                        >
-                          <Icon.DeleteBlackCircle />
-                        </button>
+                        <span className="delete-handler">
+                          <Button
+                            spacing={['base', 0]}
+                            aria-label="刪除"
+                            onClick={() => this.onDelete(article)}
+                          >
+                            <Icon.Clear color="black" />
+                          </Button>
+                        </span>
                       </li>
                     )}
                   </Draggable>

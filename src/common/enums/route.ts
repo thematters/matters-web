@@ -34,6 +34,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
+  | 'RECOMMENDATION'
   // | 'EDITOR'
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
@@ -76,6 +77,12 @@ export const ROUTES: Array<{
     key: 'SEARCH',
     href: '/Search',
     as: '/search'
+  },
+  // experient page for recommendation engine testing
+  {
+    key: 'RECOMMENDATION',
+    href: '/Recommendation',
+    as: '/recommendation'
   },
 
   // Tag

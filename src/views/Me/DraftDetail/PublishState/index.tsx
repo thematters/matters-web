@@ -1,10 +1,11 @@
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import draftFragments from '~/components/GQL/fragments/draft'
 
 import ErrorState from './ErrorState'
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
+
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   const isPending = draft.publishState === 'pending'

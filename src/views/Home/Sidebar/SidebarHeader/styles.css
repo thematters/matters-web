@@ -1,0 +1,22 @@
+header {
+  @mixin flex-center-space-between;
+}
+
+.icymi {
+  margin-bottom: var(--spacing-base);
+}
+
+.topics {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-base);
+}
+
+.authors {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-tight);
+}
+
+.tags {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-loose);
+}

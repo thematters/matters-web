@@ -3,26 +3,30 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
-import { ArticleDigest, Icon, Spinner, TextIcon, Translate } from '~/components'
+import {
+  ArticleDigest,
+  Button,
+  Icon,
+  List,
+  LoadMore,
+  Spinner,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
-import styles from './styles.css'
 
 export const COLLECTION_LIST = gql`
-  query CollectionList(
-    $mediaHash: String
-    $after: String
-    $first: Int
-    $hasArticleDigestActionBookmark: Boolean = false
-    $hasArticleDigestCover: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
       ...ArticleCollection
     }
@@ -39,6 +43,7 @@ const CollectionList = ({
   setEditing: (editing: boolean) => void
   canEdit?: boolean
 }) => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     {
@@ -78,59 +83,45 @@ const CollectionList = ({
 
   if ((totalCount || 0) <= 0 && canEdit) {
     return (
-      <button type="button" onClick={() => setEditing(true)}>
+      <Button
+        size={[null, '1.5rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="green-lighter"
+        onClick={() => setEditing(true)}
+      >
         <TextIcon
           icon={<Icon.Add size="xs" />}
           size="sm"
-          spacing="xtight"
+          weight="md"
           color="green"
         >
           <Translate zh_hant="關聯一篇作品" zh_hans="关联一篇作品" />
         </TextIcon>
-      </button>
+      </Button>
     )
   }
 
   return (
     <>
-      <ul className="collection-list">
+      <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.COLLECTION,
-                location: i
-              })
-            }
-          >
+          <List.Item key={cursor}>
             <ArticleDigest.Sidebar
-              type="collection"
               article={node}
-              hasCover
-              hasAuthor
+              hasCover={isMediumUp}
+              hasBackground
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.COLLECTION,
+                  location: i
+                })
+              }
             />
-          </li>
+          </List.Item>
         ))}
-      </ul>
+      </List>
 
-      {pageInfo.hasNextPage && (
-        <section className="load-more">
-          <button type="button" onClick={loadRest}>
-            <TextIcon
-              icon={<Icon.MoreContent />}
-              color="green"
-              textPlacement="left"
-              spacing="xxtight"
-            >
-              <Translate
-                zh_hans={TEXT.zh_hant.viewAll}
-                zh_hant={TEXT.zh_hans.viewAll}
-              />
-            </TextIcon>
-          </button>
-        </section>
-      )}
+      {pageInfo.hasNextPage && <LoadMore onClick={loadRest} />}
 
       <style jsx>{styles}</style>
     </>

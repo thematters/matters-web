@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
@@ -15,6 +14,8 @@ import { TEXT } from '~/common/enums'
 import { translate, validateCode, validateEmail } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
 interface FormProps {
   defaultEmail: string
@@ -146,7 +147,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
       <div className="buttons">
         <Modal.FooterButton
           width="full"
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

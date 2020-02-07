@@ -4,10 +4,6 @@ import { useContext, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import ArticleList from '~/components/Dropdown/ArticleList'
-import {
-  SearchArticles,
-  SearchArticles_search_edges_node_Article
-} from '~/components/GQL/queries/__generated__/SearchArticles'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 import { LanguageContext } from '~/components/Language'
 import { Dropdown, PopperInstance } from '~/components/Popper'
@@ -16,6 +12,11 @@ import { INPUT_DEBOUNCE } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
+
+import {
+  SearchArticles,
+  SearchArticles_search_edges_node_Article
+} from '~/components/GQL/queries/__generated__/SearchArticles'
 
 interface Props {
   onAdd: (article: SearchArticles_search_edges_node_Article) => void

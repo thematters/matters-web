@@ -1,3 +1,3 @@
-ul {
-  font-size: 0; /* remove space between <li> */
+.container {
+  margin-top: var(--spacing-loose);
 }

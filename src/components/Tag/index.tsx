@@ -6,14 +6,15 @@ import { Icon, TextIcon } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
-import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
 
-type TagSize = 'sm' | 'default'
+import { DigestTag } from './__generated__/DigestTag'
+
+type TagSize = 'sm'
 
 interface TagProps {
   size?: TagSize
-  type?: 'count-fixed' | 'default'
+  type?: 'count-fixed'
   tag: DigestTag
 }
 
@@ -38,14 +39,13 @@ const fragments = {
   `
 }
 
-export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
+export const Tag = ({ size, type, tag }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
-    [size]: true,
-    'count-fixed': type === 'count-fixed',
-    'u-link-color': true
+    [`size-${size}`]: !!size,
+    'count-fixed': type === 'count-fixed'
   })
-  const isSmall = size !== 'default'
+  const isSmall = size === 'sm'
   const path = toPath({
     page: 'tagDetail',
     id: tag.id
@@ -56,12 +56,15 @@ export const Tag = ({ size = 'default', type = 'default', tag }: TagProps) => {
     <Link {...path}>
       <a className={tagClasses}>
         <TextIcon
-          icon={<Icon.HashTag size={isSmall ? 'xs' : undefined} />}
-          text={tag.content}
+          icon={
+            <Icon.HashTag color="grey" size={isSmall ? undefined : 'md-s'} />
+          }
           weight="md"
           size={isSmall ? 'sm' : 'md'}
           spacing={isSmall ? 'xtight' : 'tight'}
-        />
+        >
+          {tag.content}
+        </TextIcon>
 
         {!!tagCount && <span className="count">{tagCount}</span>}
 

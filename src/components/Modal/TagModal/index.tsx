@@ -14,8 +14,9 @@ import { Modal } from '~/components/Modal'
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
 
-import { PutTag } from './__generated__/PutTag'
 import styles from './styles.css'
+
+import { PutTag } from './__generated__/PutTag'
 
 const PUT_TAG = gql`
   mutation PutTag($id: ID, $content: String, $description: String) {
@@ -184,7 +185,6 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
                   }
                 />
               ),
-              closeButton: true,
               duration: 2000
             }
           })
@@ -242,7 +242,6 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           dropdownAppendTo="tag-modal"
           dropdownAutoSizing={true}
           DropdownContent={DropdownContent}
-          dropdownZIndex={201}
           query={SEARCH_TAGS}
         />
         <p className="field">
@@ -274,7 +273,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           />
         </Modal.FooterButton>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

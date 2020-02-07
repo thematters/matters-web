@@ -3,18 +3,29 @@ import Router, { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { Dropdown, Icon, LanguageContext, PopperInstance } from '~/components'
+import {
+  Button,
+  Dropdown,
+  Icon,
+  LanguageContext,
+  PopperInstance
+} from '~/components'
 
-import { INPUT_DEBOUNCE, TEXT } from '~/common/enums'
+import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 
 import AutoComplete from './AutoComplete'
 import styles from './styles.css'
 
 const SearchButton = () => (
-  <button type="submit" aria-label="搜尋">
-    <Icon.Search size="md" />
-  </button>
+  <Button
+    size={[null, '2.25rem']}
+    spacing={[0, 'xtight']}
+    type="submit"
+    aria-label="搜尋"
+  >
+    <Icon.SearchLarge size="md" color="black" />
+  </Button>
 )
 
 const BaseSearchBar: React.FC<{
@@ -66,7 +77,11 @@ const BaseSearchBar: React.FC<{
       {({ values, handleSubmit, handleChange }) => {
         if (!autoComplete) {
           return (
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={handleSubmit}
+              aria-label={textPlaceholder}
+              role="search"
+            >
               <input
                 type="search"
                 name="q"
@@ -98,6 +113,7 @@ const BaseSearchBar: React.FC<{
             onCreate={setInstance}
             onShown={() => setShown(true)}
             theme="dropdown shadow-light"
+            zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>
               <input

@@ -1,19 +1,20 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Icon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import Cover from '~/components/UserProfile/Cover'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
-import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 import styles from './styles.css'
+
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 
 /**
  * This component is for uploading profile cover.
@@ -41,9 +42,9 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
+  const isMediumUp = useResponsive({ type: 'md-up' })()
   const [update] = useMutation<UpdateUserInfoCover>(UPDATE_USER_INFO)
   const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const [error, setError] = useState<'size' | undefined>(undefined)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +58,19 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
     event.target.value = ''
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
-      setError('size')
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant="上傳檔案超過 5 MB"
+                zh_hans="上传文件超过 5 MB"
+              />
+            )
+          }
+        })
+      )
       return
     }
 
@@ -67,31 +80,23 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
           input: { file, type: 'profileCover', entityType: 'user' }
         }
       })
-
       const id = data?.singleFileUpload.id
 
       if (update) {
         return update({ variables: { input: { profileCover: id } } })
       }
-
-      setError(undefined)
     } catch (e) {
       // TODO
     }
   }
 
-  const removeCover = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    event.stopPropagation()
-
+  const removeCover = async () => {
     if (!update || !user.info.profileCover) {
       return
     }
 
     try {
       await update({ variables: { input: { profileCover: null } } })
-      setError(undefined)
     } catch (e) {
       // TODO
     }
@@ -100,14 +105,17 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
   return (
     <section className="container">
       <Cover cover={user.info.profileCover} />
+
       <div className="uploader">
         <div className="buttons">
-          <button type="button" className="button">
+          <Button size={[null, '2rem']} borderColor="white" borderWidth="sm">
             <label>
-              <Icon.Camera size="md" />
-              <span className="upload">
-                <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
-              </span>
+              <TextIcon icon={<Icon.Camera color="white" />}>
+                {isMediumUp && (
+                  <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
+                )}
+              </TextIcon>
+
               <input
                 className="input"
                 type="file"
@@ -117,24 +125,19 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
                 onChange={event => handleChange(event)}
               />
             </label>
-          </button>
+          </Button>
+
           {user.info.profileCover && (
-            <button
-              type="button"
-              className="button remove"
-              onClick={event => removeCover(event)}
+            <Button
+              size={[null, '2rem']}
+              spacing={isMediumUp ? [0, 'base'] : [0, 'tight']}
+              borderColor="white"
+              borderWidth="sm"
+              onClick={() => removeCover()}
             >
               <Translate zh_hant="刪除" zh_hans="删除" />
-            </button>
+            </Button>
           )}
-          <div className="error">
-            {error === 'size' && (
-              <Translate
-                zh_hant="上傳檔案超過 5 MB"
-                zh_hans="上传文件超过 5 MB"
-              />
-            )}
-          </div>
         </div>
       </div>
 

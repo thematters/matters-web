@@ -2,14 +2,22 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Icon, Popover, Spinner, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  Popover,
+  Spinner,
+  TextIcon,
+  Translate
+} from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 import { Gateways } from './__generated__/Gateways'
-import styles from './styles.css'
 
 const GATEWAYS = gql`
   query Gateways {
@@ -21,64 +29,68 @@ const GATEWAYS = gql`
 
 const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
   const [gatewaysExpand, setGatewaysExpand] = useState(false)
-  const [helpExpand, setHelpExpand] = useState(false)
-
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
+
   const gateways = data?.official.gatewayUrls || []
+  const copy = (link: string) => {
+    dom.copyToClipboard(link)
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant={TEXT.zh_hant.copySuccess}
+              zh_hans={TEXT.zh_hans.copySuccess}
+            />
+          )
+        }
+      })
+    )
+  }
 
   return (
-    <div className="dropdown-container">
-      <div className="top-container">
-        {/* hash */}
-        <section className="section-title">
+    <section className="container">
+      {/* hash */}
+      <section className="hash">
+        <header>
           <h4>
             <Translate
               zh_hant={TEXT.zh_hant.articleFingerprint}
               zh_hans={TEXT.zh_hans.articleFingerprint}
             />
           </h4>
-          <button
-            type="button"
+          <Button
             onClick={() => {
-              dom.copyToClipboard(dataHash)
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'green',
-                    content: (
-                      <Translate
-                        zh_hant={TEXT.zh_hant.copySuccess}
-                        zh_hans={TEXT.zh_hans.copySuccess}
-                      />
-                    )
-                  }
-                })
-              )
+              copy(dataHash)
             }}
+            aira-label="複製"
           >
-            <TextIcon icon={<Icon.Copy />} color="green" weight="md" size="xs">
-              <Translate
-                zh_hant={TEXT.zh_hant.copy}
-                zh_hans={TEXT.zh_hans.copy}
-              />
-            </TextIcon>
-          </button>
-        </section>
-        <input
-          className="fingerprint-content"
-          type="text"
-          value={dataHash}
-          readOnly
-          onClick={event => event.currentTarget.select()}
-        />
+            <Icon.Link color="grey" />
+          </Button>
+        </header>
 
-        {/* gateways */}
-        <section className="section-title">
+        <section>
+          <input
+            type="text"
+            value={dataHash}
+            readOnly
+            onClick={event => event.currentTarget.select()}
+          />
+        </section>
+      </section>
+
+      {/* gateways */}
+      <section className="gateways">
+        <header>
           <h4>
-            <Translate zh_hans="通过公共节点查看" zh_hant="通過公共節點查看" />
+            <Translate zh_hans="公共节点" zh_hant="公共節點" />
           </h4>
 
-          <button
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgHoverColor="grey-lighter"
             onClick={() => {
               setGatewaysExpand(!gatewaysExpand)
             }}
@@ -95,54 +107,66 @@ const FingerprintContent = ({ dataHash }: { dataHash: string }) => {
                 zh_hans={gatewaysExpand ? '收起全部' : '展开全部'}
               />
             </TextIcon>
-          </button>
-        </section>
+          </Button>
+        </header>
 
         {loading && <Spinner />}
 
-        <ul className="gateway-container">
-          {gateways.slice(0, gatewaysExpand ? undefined : 2).map((url, i) => {
+        <ul>
+          {gateways.slice(0, gatewaysExpand ? undefined : 4).map((url, i) => {
             const gatewayUrl = `${url}${dataHash}`
+            const hostname = url.replace(/(https:\/\/|\/ipfs\/)/g, '')
+
             return (
               <li key={i}>
-                <Icon.ShareLink />
-
-                <span className="gateway-url">{gatewayUrl}</span>
-
-                <a href={gatewayUrl} target="_blank">
-                  <Icon.ArrowRightGreenCircle />
+                <a
+                  href={gatewayUrl}
+                  target="_blank"
+                  className="gateway-url u-link-green"
+                >
+                  {hostname}
                 </a>
+
+                <Button onClick={() => copy(gatewayUrl)} aira-label="複製">
+                  <Icon.Link color="grey" />
+                </Button>
               </li>
             )
           })}
         </ul>
-      </div>
+      </section>
 
       {/* help */}
-      <div className={`help-container ${helpExpand ? 'expand' : ''}`}>
-        <button type="button" onClick={() => setHelpExpand(!helpExpand)}>
-          <TextIcon
-            icon={<Icon.Help size="xs" />}
-            weight="md"
-            size="xs"
-            color={helpExpand ? 'green' : 'grey'}
-          >
+      <section className="help">
+        <header>
+          <h4>
             <Translate zh_hans="这是什么？" zh_hant="這是什麼？" />
-          </TextIcon>
-        </button>
+          </h4>
+        </header>
 
-        {helpExpand && (
-          <p>
-            <Translate
-              zh_hans={`「指纹」是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。\n\n「公共节点」是一篇作品在 IPFS 网络的存储地点，你可以使用任意公共节点地址对作品进行传播。`}
-              zh_hant={`「指紋」是一篇作品上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取作品內容。\n\n「公共節點」是一篇作品在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對作品進行傳播。`}
-            />
-          </p>
-        )}
-      </div>
+        <p>
+          <b>
+            <Translate zh_hant="作品指紋" zh_hans="作品指纹" />
+          </b>
+          <Translate
+            zh_hans={` 是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。`}
+            zh_hant={` 是一篇作品上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取作品內容。`}
+          />
+        </p>
+
+        <p>
+          <b>
+            <Translate zh_hant="公共節點" zh_hans="公共节点" />
+          </b>
+          <Translate
+            zh_hant=" 是一篇作品在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對作品進行傳播。"
+            zh_hans=" 是一篇作品在 IPFS 网络的存储地点，你可以使用任意公共节点地址对作品进行传播。"
+          />
+        </p>
+      </section>
 
       <style jsx>{styles}</style>
-    </div>
+    </section>
   )
 }
 
@@ -161,18 +185,21 @@ const Fingerprint = ({
       trigger="click"
       content={<FingerprintContent dataHash={article.dataHash || ''} />}
     >
-      <button type="button">
+      <Button
+        size={[null, '1.25rem']}
+        spacing={[0, 'xtight']}
+        bgHoverColor="grey-lighter"
+        aria-haspopup="true"
+      >
         <TextIcon
-          icon={<Icon.Box size={size === 'xs' ? 'xs' : undefined} />}
+          icon={<Icon.IPFSMedium size={size === 'xs' ? 'xs' : undefined} />}
           size={size}
           color={color}
           weight="md"
         >
           <Translate zh_hans="分布式入口" zh_hant="分佈式入口" />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Button>
     </Popover>
   )
 }

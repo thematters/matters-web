@@ -1,25 +1,38 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 
 import styles from './styles.css'
 
 interface TabProps {
+  href?: string
+  as?: string
+
   disable?: boolean
   selected?: boolean
 }
 
 interface TabsProps {
-  layout?: 'horizontal' | 'auto'
+  spacingBottom?: 0 | '0' | 'base' | 'loose' | 'xxloose'
 }
 
 const Tab: React.FC<TabProps> = ({
-  children,
-  disable = false,
-  selected = false
+  href,
+  as,
+
+  disable,
+  selected,
+
+  children
 }) => {
   return (
     <li role="tab" aria-disabled={disable} aria-selected={selected}>
-      {children}
-
+      {href && as ? (
+        <Link href={href} as={as}>
+          <a>{children}</a>
+        </Link>
+      ) : (
+        <>{children}</>
+      )}
       <style jsx>{styles}</style>
     </li>
   )
@@ -27,9 +40,9 @@ const Tab: React.FC<TabProps> = ({
 
 export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
-} = ({ children, layout = 'auto' }) => {
+} = ({ spacingBottom = 'base', children }) => {
   const navClass = classNames({
-    [layout]: !!layout
+    [`spacing-bottom-${spacingBottom}`]: !!spacingBottom
   })
 
   return (

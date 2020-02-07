@@ -6,6 +6,7 @@ import { DraftDigest, Spinner, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 
 import Collapsable from '../Collapsable'
+
 import {
   MeDraftsSidebar,
   MeDraftsSidebar_viewer_drafts_edges

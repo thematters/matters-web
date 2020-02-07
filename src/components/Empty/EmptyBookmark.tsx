@@ -2,7 +2,7 @@ import { Empty, Icon, Translate } from '~/components'
 
 const EmptyBookmark = ({ description }: { description?: React.ReactNode }) => (
   <Empty
-    icon={<Icon.EmptyBookmark size="xxl" />}
+    icon={<Icon.BookmarkMedium color="grey-lighter" size="xxl" />}
     description={
       description || (
         <>

@@ -10,6 +10,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Modal } from '~/components/Modal'
 import { ModalSwitch } from '~/components/ModalManager'
+import { TextIcon } from '~/components/TextIcon'
 
 import {
   ADD_TOAST,
@@ -27,8 +28,9 @@ import {
   validateEmail
 } from '~/common/utils'
 
-import { UserLogin } from './__generated__/UserLogin'
 import styles from './styles.css'
+
+import { UserLogin } from './__generated__/UserLogin'
 
 /**
  * This component is designed for Login form with builtin mutation.
@@ -65,40 +67,28 @@ export const USER_LOGIN = gql`
 `
 
 const PasswordResetRedirectButton = () => (
-  <>
-    <Button
-      is="link"
-      bgColor="transparent"
-      className="u-link-green"
-      spacing="none"
-      {...appendTarget(PATHS.AUTH_FORGET)}
-    >
+  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
+    <TextIcon color="green">
       <Translate
         zh_hant={TEXT.zh_hant.forgetPassword}
         zh_hans={TEXT.zh_hans.forgetPassword}
       />
       ？
-    </Button>
-
-    <style jsx>{styles}</style>
-  </>
+    </TextIcon>
+  </Button>
 )
 
 const PasswordResetModalSwitch = () => (
   <ModalSwitch modalId="passwordResetModal">
     {(open: any) => (
-      <Button
-        is="button"
-        bgColor="transparent"
-        className="u-link-green"
-        spacing="none"
-        onClick={open}
-      >
-        <Translate
-          zh_hant={TEXT.zh_hant.forgetPassword}
-          zh_hans={TEXT.zh_hans.forgetPassword}
-        />
-        ？
+      <Button spacing={['xtight', 0]} onClick={open}>
+        <TextIcon color="green">
+          <Translate
+            zh_hant={TEXT.zh_hant.forgetPassword}
+            zh_hans={TEXT.zh_hans.forgetPassword}
+          />
+          ？
+        </TextIcon>
       </Button>
     )}
   </ModalSwitch>
@@ -264,7 +254,7 @@ const LoginForm: React.FC<FormProps> = ({
         {isInPage && <SignUpRedirection />}
 
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

@@ -1,32 +1,15 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-import CommentForm from '~/components/Form/CommentForm'
-import { ArticleResponseCount } from '~/components/GQL/queries/__generated__/ArticleResponseCount'
-import ARTICLE_RESPONSE_COUNT from '~/components/GQL/queries/articleResponseCount'
+import { Comment, Title, Translate } from '~/components'
 
 import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
 
-import { ResponsesArticle } from './__generated__/ResponsesArticle'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
+import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
-const ResponseCount = ({ mediaHash }: { mediaHash: string }) => {
-  const { data } = useQuery<ArticleResponseCount>(ARTICLE_RESPONSE_COUNT, {
-    variables: { mediaHash }
-  })
-  const count = data?.article?.responseCount || 0
-
-  return (
-    <span className="count">
-      {count}
-
-      <style jsx>{styles}</style>
-    </span>
-  )
-}
+import { ResponsesArticle } from './__generated__/ResponsesArticle'
 
 const Responses = ({ article }: { article: ResponsesArticle }) => {
   const refetchResponses = () => {
@@ -38,23 +21,21 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
   return (
     <section className="responses" id="comments">
       <header>
-        <h2>
+        <Title type="nav" is="h2">
           <Translate
             zh_hant={TEXT.zh_hant.response}
             zh_hans={TEXT.zh_hans.response}
           />
-          <ResponseCount mediaHash={article.mediaHash || ''} />
-        </h2>
-
-        <section>
-          <CommentForm
-            articleId={article.id}
-            articleAuthorId={article.author.id}
-            submitCallback={refetchResponses}
-            blocked={article.author.isBlocking}
-          />
-        </section>
+          <ResponseCount article={article} />
+        </Title>
       </header>
+
+      <Comment.Form
+        articleId={article.id}
+        articleAuthorId={article.author.id}
+        submitCallback={refetchResponses}
+        blocked={article.author.isBlocking}
+      />
 
       <FeatureComments />
       <LatestResponses />
@@ -69,12 +50,13 @@ Responses.fragments = {
     fragment ResponsesArticle on Article {
       id
       live
-      mediaHash
       author {
         id
         isBlocking
       }
+      ...ResponseCountArticle
     }
+    ${ResponseCount.fragments.article}
   `
 }
 

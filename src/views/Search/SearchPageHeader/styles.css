@@ -10,8 +10,4 @@ header {
 
 .container {
   @mixin flex-center-space-between;
-
-  & :global(svg) {
-    transform: rotate(180deg);
-  }
 }

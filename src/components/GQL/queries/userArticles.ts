@@ -3,12 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigest } from '~/components/ArticleDigest'
 
 export default gql`
-  query UserArticles(
-    $userName: String!
-    $after: String
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query UserArticles($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
       displayName

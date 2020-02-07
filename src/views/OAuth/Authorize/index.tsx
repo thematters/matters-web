@@ -14,8 +14,9 @@ import { ViewerContext } from '~/components/Viewer'
 import { PATHS, TEXT } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
 
-import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 import styles from './styles.css'
+
+import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 
 const {
   publicRuntimeConfig: { OAUTH_URL }
@@ -154,7 +155,7 @@ const OAuthAuthorize = () => {
                 />
               </Modal.FooterButton>
             ) : (
-              <Modal.FooterButton htmlType="submit" width="full">
+              <Modal.FooterButton type="submit" width="full">
                 <Translate
                   zh_hant={TEXT.zh_hant.agree}
                   zh_hans={TEXT.zh_hans.agree}

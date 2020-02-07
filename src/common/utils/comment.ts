@@ -1,20 +1,24 @@
 import _get from 'lodash/get'
 
-import { BaseDigestComment } from '~/components/GQL/fragments/__generated__/BaseDigestComment'
-
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
  * @param comments
  */
-export const filterComment = (comment: BaseDigestComment) => {
+interface Comment {
+  state: string
+  parentComment: {
+    id: string
+  } | null
+}
+
+export const filterComment = (comment: Comment) => {
   const isActive = comment.state === 'active'
   const isDescendant = comment.parentComment && comment.parentComment.id
   const descendants = _get(comment, 'comments.edges', [])
   const hasActiveDescendants =
-    descendants.filter(
-      ({ node }: { node: BaseDigestComment }) => node.state === 'active'
-    ).length > 0
+    descendants.filter(({ node }: { node: Comment }) => node.state === 'active')
+      .length > 0
 
   // skip if comment's state is active
   if (isActive) {
@@ -34,5 +38,5 @@ export const filterComment = (comment: BaseDigestComment) => {
   return false
 }
 
-export const filterComments = (comments: BaseDigestComment[]) =>
+export const filterComments = (comments: Comment[]) =>
   comments.filter(filterComment)

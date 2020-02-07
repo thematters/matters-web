@@ -4,6 +4,7 @@
   width: 100%;
   text-align: left;
   overflow: hidden;
+  cursor: pointer;
 
   & :global(> *:before) {
     content: '';
@@ -15,39 +16,41 @@
   }
 }
 
-.spacing-vertical-xtight {
+.spacing-y-xtight {
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
 }
-.spacing-vertical-tight {
+.spacing-y-tight {
   padding-top: var(--spacing-base);
   padding-bottom: var(--spacing-base);
 }
-.spacing-vertical-default {
+.spacing-y-default {
   padding-top: var(--spacing-loose);
   padding-bottom: var(--spacing-loose);
 }
 
-.spacing-horizontal-xtight {
+.spacing-x-xtight {
   padding-left: var(--spacing-x-tight);
   padding-right: var(--spacing-x-tight);
 }
-.spacing-horizontal-tight {
+.spacing-x-tight {
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
 }
-.spacing-horizontal-default {
+.spacing-x-default {
   padding-left: var(--spacing-loose);
   padding-right: var(--spacing-loose);
 }
 
 .bg-hover-grey {
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-grey-lighter);
   }
 }
 .bg-hover-green {
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-green-lighter);
   }
 }

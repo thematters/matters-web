@@ -3,8 +3,9 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components/Language'
 import { Toast } from '~/components/Toast'
 
-import { StateArticle } from './__generated__/StateArticle'
 import styles from './styles.css'
+
+import { StateArticle } from './__generated__/StateArticle'
 
 const fragments = {
   article: gql`
@@ -39,10 +40,10 @@ const State = ({ article }: { article: StateArticle }) => {
 
   return (
     <section className="container">
-      {isBanned && <Toast color="grey" header={<BannedHeader />} />}
-
-      {isArchived && <Toast color="grey" header={<ArchivedHeader />} />}
-
+      {isBanned && <Toast.Instance color="grey" content={<BannedHeader />} />}
+      {isArchived && (
+        <Toast.Instance color="grey" content={<ArchivedHeader />} />
+      )}
       <style jsx>{styles}</style>
     </section>
   )

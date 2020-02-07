@@ -3,13 +3,31 @@ import queryString from 'query-string'
 
 import { PATHS } from '~/common/enums'
 
+interface ArticleArgs {
+  slug: string
+  mediaHash: string | null
+  author: {
+    userName: string | null
+  }
+}
+
+interface CommentArgs {
+  id: string
+  article: ArticleArgs
+  parentComment: {
+    id: string
+  } | null
+}
+
 type ToPathArgs =
   | {
       page: 'articleDetail'
-      userName: string
-      slug: string
-      mediaHash: string
+      article: ArticleArgs
       fragment?: string
+    }
+  | {
+      page: 'commentDetail'
+      comment: CommentArgs
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -57,63 +75,90 @@ type ToPathArgs =
  */
 export const toPath = (args: ToPathArgs): { href: string; as: string } => {
   switch (args.page) {
-    case 'articleDetail':
-      const asUrl = `/@${args.userName}/${args.slug}-${args.mediaHash}`
+    case 'articleDetail': {
+      const {
+        slug,
+        mediaHash,
+        author: { userName }
+      } = args.article
+      const asUrl = `/@${userName}/${slug}-${mediaHash}`
+
       return {
-        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${args.userName}&slug=${args.slug}&mediaHash=${args.mediaHash}`,
+        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl
       }
-    case 'draftDetail':
+    }
+    case 'commentDetail': {
+      const { parentComment, id, article } = args.comment
+      const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
+
+      return toPath({
+        page: 'articleDetail',
+        article,
+        fragment
+      })
+    }
+    case 'draftDetail': {
       return {
         href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}&slug=${args.slug}`,
         as: `/me/drafts/${args.slug}-${args.id}`
       }
-    case 'tagDetail':
+    }
+    case 'tagDetail': {
       return {
         href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
         as: `/tags/${args.id}`
       }
-    case 'userProfile':
+    }
+    case 'userProfile': {
       return {
         href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
         as: `/@${args.userName}`
       }
-    case 'userComments':
+    }
+    case 'userComments': {
       return {
         href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/comments`
       }
-    case 'userDrafts':
+    }
+    case 'userDrafts': {
       return {
         href: `${PATHS.USER_DRAFTS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/drafts`
       }
-    case 'userBookmarks':
+    }
+    case 'userBookmarks': {
       return {
         href: `${PATHS.USER_BOOKMARKS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/bookmarks`
       }
-    case 'userHistory':
+    }
+    case 'userHistory': {
       return {
         href: `${PATHS.USER_HISTORY.href}?userName=${args.userName}`,
         as: `/@${args.userName}/history`
       }
-    case 'userFollowers':
+    }
+    case 'userFollowers': {
       return {
         href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/followers`
       }
-    case 'userFollowees':
+    }
+    case 'userFollowees': {
       return {
         href: `${PATHS.USER_FOLLOWEES.href}?userName=${args.userName}`,
         as: `/@${args.userName}/followees`
       }
-    case 'search':
+    }
+    case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
         href: `${PATHS.SEARCH.href}?q=${args.q || ''}${typeStr}`,
         as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`
       }
+    }
   }
 }
 

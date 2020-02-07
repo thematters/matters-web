@@ -4,7 +4,7 @@ export default gql`
   mutation ArchiveArticle($id: ID!) {
     archiveArticle(input: { id: $id }) {
       id
-      state
+      articleState: state
       sticky
     }
   }

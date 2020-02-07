@@ -2,14 +2,6 @@
   margin-top: var(--spacing-base);
 }
 
-.content {
-  position: relative;
-
-  @media (--sm-up) {
-    padding-right: 5.875rem;
-  }
-}
-
 .title {
   font-size: var(--font-size-sm);
 }
@@ -23,12 +15,10 @@
   font-size: var(--font-size-xs);
   color: var(--color-grey-dark);
 
-  & > :global(*) {
+  & :global(> *) {
+    margin-right: var(--spacing-tight);
+
     color: var(--color-grey-dark);
     line-height: 1;
-    vertical-align: middle;
-  }
-  & > :global(button) {
-    color: var(--color-grey);
   }
 }

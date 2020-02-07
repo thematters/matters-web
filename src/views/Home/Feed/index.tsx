@@ -4,24 +4,26 @@ import gql from 'graphql-tag'
 
 import {
   InfiniteScroll,
+  List,
   LoadMore,
   PageHeader,
-  Placeholder,
+  Spinner,
   Translate
 } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import SortBy from './SortBy'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { HottestFeed } from './__generated__/HottestFeed'
 import { NewestFeed } from './__generated__/NewestFeed'
-import SortBy from './SortBy'
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -42,11 +44,7 @@ const feedFragment = gql`
 
 export const queries = {
   hottest: gql`
-    query HottestFeed(
-      $after: String
-      $hasArticleDigestActionBookmark: Boolean = true
-      $hasArticleDigestActionTopicScore: Boolean = false
-    ) {
+    query HottestFeed($after: String) {
       viewer {
         id
         recommendation {
@@ -59,11 +57,7 @@ export const queries = {
     ${feedFragment}
   `,
   newest: gql`
-    query NewestFeed(
-      $after: String
-      $hasArticleDigestActionBookmark: Boolean = true
-      $hasArticleDigestActionTopicScore: Boolean = false
-    ) {
+    query NewestFeed($after: String) {
       viewer {
         id
         recommendation {
@@ -93,7 +87,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   if (loading && (!result || isNewLoading)) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -129,21 +123,21 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         hasNextPage={isMediumUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <ul>
+        <List hasBorder>
           {edges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: sortBy,
-                  location: i
-                })
-              }
-            >
-              <ArticleDigest.Feed article={node} hasDateTime hasBookmark />
-            </li>
+            <List.Item key={cursor}>
+              <ArticleDigest.Feed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: sortBy,
+                    location: i
+                  })
+                }
+              />
+            </List.Item>
           ))}
-        </ul>
+        </List>
       </InfiniteScroll>
 
       {!isMediumUp && pageInfo.hasNextPage && (
@@ -170,13 +164,14 @@ const HomeFeed = () => {
   return (
     <>
       <PageHeader
-        pageTitle={
+        title={
           feedSortType === 'hottest' ? (
             <Translate zh_hant="熱門作品" zh_hans="热门作品" />
           ) : (
             <Translate zh_hant="最新作品" zh_hans="最新作品" />
           )
         }
+        is="h2"
       >
         <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
       </PageHeader>

@@ -4,9 +4,10 @@ import { Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
+import styles from './styles.css'
+
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
 import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
-import styles from './styles.css'
 
 const UPDATE_ARTICLE_INFO = gql`
   mutation UpdateArticleInfo($id: ID!, $sticky: Boolean!) {
@@ -29,18 +30,6 @@ const fragments = {
     }
   `
 }
-
-const TextIconUnsticky = () => (
-  <TextIcon icon={<Icon.UnSticky />} spacing="tight">
-    <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
-  </TextIcon>
-)
-
-const TextIconSticky = () => (
-  <TextIcon icon={<Icon.PinToTop />} spacing="tight">
-    <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
-  </TextIcon>
-)
 
 const StickyButton = ({
   article,
@@ -76,7 +65,15 @@ const StickyButton = ({
         hideDropdown()
       }}
     >
-      {article.sticky ? <TextIconUnsticky /> : <TextIconSticky />}
+      {article.sticky ? (
+        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
+          <Translate zh_hant="取消置頂" zh_hans="取消置顶" />
+        </TextIcon>
+      ) : (
+        <TextIcon icon={<Icon.PinMedium />} spacing="tight">
+          <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
+        </TextIcon>
+      )}
 
       <style jsx>{styles}</style>
     </button>

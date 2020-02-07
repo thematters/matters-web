@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
-import { ArticleDigest, Icon, LanguageContext, Translate } from '~/components'
+import {
+  ArticleDigest,
+  Button,
+  Icon,
+  LanguageContext,
+  Translate
+} from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
@@ -13,14 +19,17 @@ import { Modal } from '~/components/Modal'
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import { AddArticleTags } from './__generated__/AddArticleTags'
 import styles from './styles.css'
 
-const ADD_ARTICLE_TAGS = gql`
-  mutation AddArticleTags($id: ID!, $articles: [ID!]) {
-    addArticleTags(input: { id: $id, articles: $articles }) {
+import { PutArticlesTags } from './__generated__/PutArticlesTags'
+
+const PUT_ARTICLES_TAGS = gql`
+  mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
+    putArticlesTags(input: { id: $id, articles: $articles }) {
       id
-      content
+      articles(input: { first: 0, selected: true }) {
+        totalCount
+      }
     }
   }
 `
@@ -62,7 +71,7 @@ interface FormValues {
 
 const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
-  const [update] = useMutation<AddArticleTags>(ADD_ARTICLE_TAGS)
+  const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
 
   const {
@@ -109,7 +118,6 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
                 zh_hans: TEXT.zh_hans.addedArticleTag,
                 lang
               }),
-              closeButton: true,
               duration: 2000
             }
           })
@@ -174,21 +182,32 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           dropdownAutoSizing={true}
           dropdownCallback={onClickMenuItem}
           DropdownContent={DropdownContent}
-          dropdownZIndex={201}
           query={SEARCH_ARTICLES}
         />
         <ul>
           {selectedArticles.map((article, index) => (
             <li key={index}>
-              <ArticleDigest.Dropdown article={article} hasArrow disabled />
-              <button
-                type="button"
-                className="delete-handler"
-                aria-label="刪除"
-                onClick={() => onDelete(article)}
-              >
-                <Icon.DeleteBlackCircle />
-              </button>
+              <ArticleDigest.Dropdown
+                article={article}
+                titleTextSize="md-s"
+                borderRadius="xtight"
+                bgColor="grey-lighter"
+                spacing={['tight', 'tight']}
+                disabled
+                extraButton={
+                  <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+                }
+              />
+
+              <span className="delete-handler">
+                <Button
+                  spacing={['base', 0]}
+                  aria-label="刪除"
+                  onClick={() => onDelete(article)}
+                >
+                  <Icon.Clear color="black" />
+                </Button>
+              </span>
             </li>
           ))}
         </ul>
@@ -201,7 +220,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           />
         </Modal.FooterButton>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

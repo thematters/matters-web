@@ -6,27 +6,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  & button {
+  & :global(> button) {
     position: absolute;
-    right: var(--spacing-xxx-tight);
-    bottom: var(--spacing-xxx-tight);
-    line-height: calc(var(--font-size-sm) * var(--line-height-base));
-    z-index: 1;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: calc(var(--spacing-xxx-tight) * -1);
-      bottom: 0;
-      width: 7rem;
-      background-image: linear-gradient(
-        to left,
-        var(--color-white),
-        var(--color-white) 53%,
-        rgba(255, 255, 255, 0)
-      );
-      z-index: -1;
-    }
+    right: 0;
+    bottom: 0;
   }
 }

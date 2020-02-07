@@ -1,28 +1,30 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareFacebook } from '~/static/icons/share-facebook.svg'
 
-const Facebook = () => (
+const Facebook = ({ title, link }: { title: string; link: string }) => (
   <button
     type="button"
     onClick={() => {
-      const url = window.location.href
       const shareUrl =
         'https://www.facebook.com/sharer/sharer.php?' +
         queryString.stringify({
-          u: url
+          u: link
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.FACEBOOK,
-        url
+        url: link
       })
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    <TextIcon icon={<Icon.ShareFacebook />} spacing="tight" text="Facebook" />
+    <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="tight">
+      Facebook
+    </TextIcon>
   </button>
 )
 

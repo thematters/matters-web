@@ -5,22 +5,24 @@ import {
   Footer,
   Head,
   InfiniteScroll,
+  List,
   PageHeader,
   Spinner,
   Translate
 } from '~/components'
 import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { useMutation } from '~/components/GQL'
-import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-import NoticeDigest from '~/components/NoticeDigest'
+import { Notice } from '~/components/Notice'
 
 import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
+import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 const Notifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
@@ -68,17 +70,19 @@ const Notifications = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul>
-        {edges.map(({ node, cursor }) => (
-          <li key={cursor}>
-            <NoticeDigest notice={node} key={cursor} />
-          </li>
-        ))}
+    <section className="container">
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List spacing={['xloose', 0]} hasBorder>
+          {edges.map(({ node, cursor }) => (
+            <List.Item key={cursor}>
+              <Notice notice={node} />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
 
-        <style jsx>{styles}</style>
-      </ul>
-    </InfiniteScroll>
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
@@ -87,9 +91,7 @@ export default () => (
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
       <Head title={{ zh_hant: '全部通知', zh_hans: '全部通知' }} />
 
-      <PageHeader
-        pageTitle={<Translate zh_hant="全部通知" zh_hans="全部通知" />}
-      />
+      <PageHeader title={<Translate zh_hant="全部通知" zh_hans="全部通知" />} />
 
       <section>
         <Notifications />
@@ -99,7 +101,5 @@ export default () => (
     <aside className="l-col-4 l-col-md-3 l-col-lg-4">
       <Footer />
     </aside>
-
-    <style jsx>{styles}</style>
   </main>
 )

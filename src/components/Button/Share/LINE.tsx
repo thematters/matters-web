@@ -1,31 +1,32 @@
 import queryString from 'query-string'
 
-import { Icon, TextIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
+import { ReactComponent as IconShareLINE } from '~/static/icons/share-line.svg'
 
-const LINE = () => (
+const LINE = ({ title, link }: { title: string; link: string }) => (
   <button
     type="button"
     onClick={() => {
-      const url = window.location.href
-      const text = window.document.title
       const shareUrl =
         'https://social-plugins.line.me/lineit/share?' +
         queryString.stringify({
-          url,
-          text
+          url: link,
+          text: title
         })
 
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.LINE,
-        url
+        url: link
       })
       return window.open(shareUrl, 'Share to Line')
     }}
   >
-    <TextIcon icon={<Icon.ShareLine />} spacing="tight" text="LINE" />
+    <TextIcon icon={withIcon(IconShareLINE)({})} spacing="tight">
+      LINE
+    </TextIcon>
   </button>
 )
 

@@ -1,12 +1,17 @@
 import { useContext } from 'react'
 
-import { Icon } from '~/components'
-import { Button } from '~/components/Button'
+import { Button, TextIcon, withIcon } from '~/components'
 import { LanguageContext, Translate } from '~/components/Language'
 import { Tooltip } from '~/components/Popper'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg'
+import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg'
+import { ReactComponent as IconFooterMedium } from '~/static/icons/footer-medium.svg'
+import { ReactComponent as IconFooterTelegram } from '~/static/icons/footer-telegram.svg'
+import { ReactComponent as IconFooterTwitter } from '~/static/icons/footer-twitter.svg'
+import { ReactComponent as IconFooterWeChat } from '~/static/icons/footer-wechat.svg'
 
 import styles from './styles.css'
 
@@ -50,27 +55,25 @@ const Footer = () => {
 
           <div className="socials">
             <a href="https://twitter.com/MattersLab" target="_blank">
-              <Icon.FooterTwitter size="md" />
+              {withIcon(IconFooterTwitter)({ size: 'md' })}
             </a>
             <a href="https://www.facebook.com/MattersLab2018/" target="_blank">
-              <Icon.FooterFacebook size="md" />
+              {withIcon(IconFooterFacebook)({ size: 'md' })}
             </a>
             <a href="https://md.com/matters-lab" target="_blank">
-              <Icon.FooterMedium size="md" />
+              {withIcon(IconFooterMedium)({ size: 'md' })}
             </a>
             <a href="https://www.instagram.com/matterslab2018/" target="_blank">
-              <Icon.FooterInstagram size="md" />
+              {withIcon(IconFooterInstagram)({ size: 'md' })}
             </a>
             <Tooltip content="MattersLab">
-              <span>
-                <Icon.FooterWeChat size="md" />
-              </span>
+              <span>{withIcon(IconFooterWeChat)({ size: 'md' })}</span>
             </Tooltip>
             <a
               href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
               target="_blank"
             >
-              <Icon.FooterTelegram size="md" />
+              {withIcon(IconFooterTelegram)({ size: 'md' })}
             </a>
           </div>
         </section>
@@ -105,8 +108,15 @@ const Footer = () => {
                 name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
                 defaultValue=""
               />
-              <Button type="submit" bgColor="green" size="xl">
-                <Translate zh_hant="訂閱" zh_hans="订阅" />
+              <Button
+                size={[null, '2.25rem']}
+                spacing={[0, 'base']}
+                type="submit"
+                bgColor="green"
+              >
+                <TextIcon color="white" weight="md">
+                  <Translate zh_hant="訂閱" zh_hans="订阅" />
+                </TextIcon>
               </Button>
             </form>
           </div>

@@ -1,5 +1,25 @@
 .tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+
+  font-size: var(--font-size-md);
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+
+  & .count {
+    @mixin font-serif;
+    margin-left: var(--spacing-x-tight);
+
+    color: var(--color-matters-green);
+    vertical-align: middle;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-md);
+    user-select: none;
+  }
 }
 
 .tag.count-fixed {
@@ -29,29 +49,11 @@
   }
 }
 
-.count {
-  @mixin font-serif;
-
-  color: var(--color-matters-green);
-
-  vertical-align: middle;
-  font-weight: var(--font-weight-bold);
-  user-select: none;
-}
-
-.sm {
+.size-sm {
   font-size: var(--font-size-sm);
 
   & .count {
     margin-left: var(--spacing-xx-tight);
     font-size: var(--font-size-sm);
-  }
-}
-.default {
-  font-size: var(--font-size-md);
-
-  & .count {
-    margin-left: var(--spacing-x-tight);
-    font-size: var(--font-size-md);
   }
 }

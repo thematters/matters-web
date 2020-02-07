@@ -3,10 +3,11 @@ import { useContext } from 'react'
 
 import { ViewerContext } from '~/components/Viewer'
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
+
+import { FollowButtonUser } from './__generated__/FollowButtonUser'
 
 const fragments = {
   user: gql`
@@ -20,10 +21,10 @@ const fragments = {
 
 export const FollowButton = ({
   user,
-  size = 'sm'
+  isLarge
 }: {
   user: FollowButtonUser
-  size?: 'sm' | 'default'
+  isLarge?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -32,9 +33,9 @@ export const FollowButton = ({
   }
 
   if (user.isFollowee) {
-    return <Unfollow user={user} size={size} />
+    return <Unfollow user={user} isLarge={isLarge} />
   } else {
-    return <Follow user={user} size={size} />
+    return <Follow user={user} isLarge={isLarge} />
   }
 }
 

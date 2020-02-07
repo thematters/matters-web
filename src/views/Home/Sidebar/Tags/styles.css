@@ -1,23 +1,14 @@
 ul {
-  font-size: 0; /* remove space between <li> */
-
   & li {
     display: inline-block;
-    width: calc(50% - var(--spacing-loose) / 2);
+    width: 100%;
 
     & :global(.tag) {
       padding-bottom: var(--spacing-base);
       margin-bottom: var(--spacing-base);
     }
   }
-  & li:nth-child(1),
-  & li:nth-child(2) {
+  & li:nth-child(1) {
     padding-top: 0;
-  }
-  & li:nth-child(2n) {
-    margin-left: calc(var(--spacing-loose) / 2);
-  }
-  & li:nth-child(2n - 1) {
-    margin-right: calc(var(--spacing-loose) / 2);
   }
 }

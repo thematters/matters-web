@@ -4,7 +4,7 @@ import styles from './styles.css'
 
 export const Spinner = () => (
   <div className="spinner" aria-label="loading">
-    <Icon.Spinner size="lg" />
+    <Icon.Spinner color="grey-light" size="lg" />
 
     <style jsx>{styles}</style>
   </div>

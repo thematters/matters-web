@@ -6,15 +6,16 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
 import { ArticleDigest, Spinner, Translate } from '~/components'
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError, useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
+import styles from './styles.css'
+
+import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
-import styles from './styles.css'
 
 const CollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),

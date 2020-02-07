@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import NoticeDigest from '~/components/NoticeDigest'
+import { Notice } from '~/components/Notice'
 
 export const ME_NOTIFICATIONS = gql`
   query MeNotifications($first: Int, $after: String) {
@@ -21,7 +21,7 @@ export const ME_NOTIFICATIONS = gql`
       }
     }
   }
-  ${NoticeDigest.fragments.notice}
+  ${Notice.fragments.notice}
 `
 
 export const UNREAD_NOTICE_COUNT = gql`

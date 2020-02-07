@@ -1,0 +1,10 @@
+/* @styled-jsx=global */
+
+:root {
+  --z-index-global-header: 100;
+  --z-index-over-global-header: 101;
+  --z-index-under-global-header: 99;
+
+  --z-index-modal: 200;
+  --z-index-over-modal: 201;
+}

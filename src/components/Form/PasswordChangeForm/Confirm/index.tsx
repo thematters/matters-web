@@ -16,8 +16,9 @@ import {
   validatePassword
 } from '~/common/utils'
 
-import { ResetPassword } from './__generated__/ResetPassword'
 import styles from './styles.css'
+
+import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
   codeId: string
@@ -148,7 +149,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           />
         </Modal.FooterButton>
         <Modal.FooterButton
-          htmlType="submit"
+          type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >

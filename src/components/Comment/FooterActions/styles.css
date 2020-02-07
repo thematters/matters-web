@@ -1,0 +1,18 @@
+footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-base);
+
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+
+  & .left {
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
+    }
+  }
+}
+
+.reply-form {
+  margin-top: var(--spacing-base);
+}

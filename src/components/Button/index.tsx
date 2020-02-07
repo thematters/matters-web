@@ -1,221 +1,208 @@
 import classNames from 'classnames'
 import Link from 'next/link'
+import { forwardRef } from 'react'
 
 import styles from './styles.css'
 
-type ButtonSize = 'sm' | 'default' | 'lg' | 'xl'
-type ButtonSpacing = 'none' | 'xtight' | 'base' | 'loose' | 'x-loose'
-type ButtonHTMLType = 'submit' | 'reset' | 'button'
-type ButtonShape = 'circle'
-type ButtonBgColor =
-  | 'green'
+type ButtonWidth = '2rem' | '4rem' | '6rem' | undefined | null
+
+type ButtonHeight =
+  | '1rem'
+  | '1.25rem'
+  | '1.5rem'
+  | '2rem'
+  | '2.25rem'
+  | '3rem'
+  | undefined
+  | null
+
+type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
+
+type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
+
+type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
+
+type ButtonColor =
+  | 'white'
+  | 'grey'
+  | 'grey-lighter'
   | 'green-lighter'
+  | 'green'
   | 'gold'
   | 'red'
-  | 'white'
-  | 'black'
-  | 'transparent'
-type ButtonOutlineColor = 'green' | 'black' | 'grey'
-type ButtonTextColor = 'white' | 'black' | 'grey'
-type ButtonTextWeight = 'light' | 'normal'
 
-interface BaseButtonProps {
-  icon?: React.ReactNode
+interface ButtonProps {
+  size?: [ButtonWidth, ButtonHeight]
+  spacing?: [ButtonSpacingY, ButtonSpacingX]
 
-  size?: ButtonSize
-  spacing?: ButtonSpacing
-  shape?: ButtonShape
-  disabled?: boolean
-  block?: boolean
-
-  bgColor?: ButtonBgColor
-  outlineColor?: ButtonOutlineColor
   textColor?: ButtonTextColor
-  textWeight?: ButtonTextWeight
+  textHoverColor?: ButtonTextColor
+
+  bgColor?: ButtonColor
+  bgHoverColor?: ButtonColor
+
+  borderColor?: ButtonColor
+  borderWidth?: 'sm'
+  borderRadius?: 0 | '0' | '5rem'
+
+  href?: string
+  as?: string
+
+  is?: 'span'
 
   [key: string]: any
 }
 
-type AnchorButtonProps = {
-  is: 'anchor'
-  href: string
-} & BaseButtonProps
-
-type LinkButtonProps = {
-  is: 'link'
-  href: string
-  as: string
-} & BaseButtonProps
-
-type NativeButtonProps = {
-  is?: 'button'
-  htmlType?: ButtonHTMLType
-} & BaseButtonProps
-
-type SpanButtonProps = {
-  is: 'span'
-} & BaseButtonProps
-
-type ButtonProps =
-  | AnchorButtonProps
-  | LinkButtonProps
-  | NativeButtonProps
-  | SpanButtonProps
-
 /**
+ * `<Button>` is an inline-block element with centered children.
+ *
  * Usage:
  *
  * ```jsx
+ *  // with custom spacing
+ *  <Button
+ *    spacing={['xtight', 'xtight']}
+ *    onClick={onClick}
+ *  >
+ *    <Icon.BookmarkActive />
+ *  </Button>
  *
- * // size:sm
- * <Button
- *   size="sm"
- *   outlineColor="green"
- *   style={{ width: 64 }}
- *   icon={
- *     <Icon
- *       id={ICON_ADD.id}
- *       viewBox={ICON_ADD.viewBox}
- *       style={{ width: 10, height: 11 }}
- *     />
- *   }
- * >
- *   追蹤
- * </Button>
- *
- * // fixed width
- * <Button size="sm" bgColor="red" style={{ width: 64 }}>
- *   取消追蹤
- * </Button>
- *
- * // is:span
- * <Button is="span" size="sm" outlineColor="grey">
- *   追蹤了你
- * </Button>
- *
- * // outline
- * <Button
- *   outlineColor="black"
- *   icon={
- *     <Icon
- *       id={ICON_NEW_BRANCH.id}
- *       viewBox={ICON_NEW_BRANCH.viewBox}
- *       style={{ width: 16, height: 16 }}
- *     />
- *   }
- * >
- *   引伸
- * </Button>
- *
- * // circle
- * <Button
- *   shape="circle"
- *   bgColor="gold"
- *   icon={<Icon id={ICON_WRITE.id} viewBox={ICON_WRITE.viewBox} />}
- * />
- *
- * // spacing
- * <Button spacing="x-loose" bgColor="green-lighter" outlineColor="green">
- *   2 條新評論
- * </Button>
- *
- * // disabled
- * <Button
- *   bgColor="green"
- *   disabled
- *   icon={<Icon id={ICON_POST.id} viewBox={ICON_POST.viewBox} />}
- * >
- *   送出
- * </Button>
+ *  // with custom size, border, hover text & background
+ *  <Button
+ *    size={['4rem', '1.5rem']}
+ *    textColor="green"
+ *    textHoverColor="white"
+ *    bgHoverColor="green"
+ *    borderColor="green"
+ *    onClick={onClick}
+ *  >
+ *    <TextIcon weight="md" size="xs">
+ *      <Translate
+ *        zh_hant={TEXT.zh_hant.follow}
+ *        zh_hans={TEXT.zh_hans.follow}
+ *      />
+ *    </TextIcon>
+ *  </Button>
  * ```
- *
  */
+export const Button: React.FC<ButtonProps> = forwardRef(
+  (
+    {
+      spacing = [0, 0],
+      size = [null, null],
 
-export const Button: React.FC<ButtonProps> = ({
-  icon,
-  size = 'default',
-  spacing,
-  shape,
-  disabled = false,
-  block = false,
-  bgColor = 'white',
-  outlineColor,
-  textColor,
-  textWeight,
-  className,
+      textColor,
+      textHoverColor,
 
-  is = 'button',
-  href,
-  as,
-  htmlType = 'button',
+      bgColor,
+      bgHoverColor,
 
-  children,
-  ...restProps
-}) => {
-  const buttonClasses = classNames({
-    btn: true,
-    [`size-${size}`]: true,
-    [spacing ? `spacing-${spacing}` : '']: !!spacing,
-    [shape ? `shape-${shape}` : '']: !!shape,
-    block: !!block,
-    [`bg-${bgColor}`]: !!bgColor,
-    outline: !!outlineColor,
-    [`outline-${outlineColor}`]: !!outlineColor,
-    [`text-${textColor}`]: !!textColor,
-    [`text-weight-${textWeight}`]: !!textWeight,
-    [className]: !!className
-  })
+      borderColor,
+      borderWidth,
+      borderRadius = '5rem',
 
-  // anchor
-  if (is === 'anchor') {
-    return (
-      <a href={href} className={buttonClasses} {...restProps}>
-        {icon}
-        {children && <span>{children}</span>}
+      href,
+      as,
 
-        <style jsx>{styles}</style>
-      </a>
-    )
-  }
+      is,
 
-  // link
-  if (is === 'link') {
-    return (
-      <Link href={href} as={as}>
-        <a className={buttonClasses} {...restProps}>
-          {icon}
-          {children && <span>{children}</span>}
+      className,
+      children,
+      ...restProps
+    },
+    ref
+  ) => {
+    const isClickable = is !== 'span' && !restProps.disabled
+    const isTransparent = !bgColor && !borderColor
+    const [width, height] = size
+    const [spacingY, spacingX] = spacing
 
+    // container
+    const containerClass = classNames({
+      container: true,
+      isTransparent,
+      'centering-x': width && isTransparent,
+      'centering-y': height && isTransparent,
+      [`spacing-y-${spacingY}`]: !!spacingY,
+      [`spacing-x-${spacingX}`]: !!spacingX,
+      [`bg-${bgColor}`]: !!bgColor,
+      [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
+      [`border-${borderColor}`]: !!borderColor,
+      [`border-${borderWidth}`]: !!borderWidth,
+      [`text-${textColor}`]: !!textColor,
+      [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
+      [className]: !!className
+    })
+    const containerProps = {
+      ...restProps,
+      ref: ref as React.RefObject<any>,
+      className: containerClass,
+      'data-clickable': isClickable
+    }
+
+    // content
+    const contentStyle = {
+      width: (!isTransparent && width) || undefined,
+      height: (!isTransparent && height) || undefined
+    }
+
+    // hotarea
+    const hotAreaStyle = {
+      width: width || undefined,
+      height: height || undefined,
+      borderRadius
+    }
+
+    // span
+    if (is === 'span') {
+      return (
+        <span {...containerProps}>
+          <div className="content" style={contentStyle}>
+            <div className="hotarea" style={hotAreaStyle} />
+            {children}
+          </div>
+          <style jsx>{styles}</style>
+        </span>
+      )
+    }
+
+    // anchor
+    if (href && !as) {
+      return (
+        <a href={href} {...containerProps}>
+          <div className="content" style={contentStyle}>
+            <div className="hotarea" style={hotAreaStyle} />
+            {children}
+          </div>
           <style jsx>{styles}</style>
         </a>
-      </Link>
-    )
-  }
+      )
+    }
 
-  // span
-  if (is === 'span') {
+    // link
+    if (href && as) {
+      return (
+        <Link href={href} as={as}>
+          <a {...containerProps}>
+            <div className="content" style={contentStyle}>
+              <div className="hotarea" style={hotAreaStyle} />
+              {children}
+            </div>
+            <style jsx>{styles}</style>
+          </a>
+        </Link>
+      )
+    }
+
+    // button
     return (
-      <span className={buttonClasses} {...restProps}>
-        {icon}
-        {children && <span>{children}</span>}
-
+      <button {...containerProps}>
+        <div className="content" style={contentStyle}>
+          <div className="hotarea" style={hotAreaStyle} />
+          {children}
+        </div>
         <style jsx>{styles}</style>
-      </span>
+      </button>
     )
   }
-
-  // button
-  return (
-    <button
-      className={buttonClasses}
-      type={htmlType}
-      disabled={disabled}
-      {...restProps}
-    >
-      {icon}
-      {children && <span>{children}</span>}
-
-      <style jsx>{styles}</style>
-    </button>
-  )
-}
+)

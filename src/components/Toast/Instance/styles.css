@@ -1,0 +1,74 @@
+.toast {
+  margin-bottom: var(--spacing-base);
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  width: 100%;
+
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-default);
+  animation: toastFadeIn 0.25s ease;
+  visibility: visible;
+
+  &.top {
+    @mixin flex-start-space-between;
+  }
+  &.bottom {
+    @mixin flex-end-space-between;
+  }
+  &.center {
+    @mixin flex-center-space-between;
+  }
+  &.center-x {
+    & section {
+      width: 100%;
+      & p.content,
+      & p.sub-description {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.sub-description {
+  font-weight: var(--font-weight-normal);
+  margin-top: var(--spacing-xx-tight);
+  opacity: 0.7;
+}
+
+.custom-button {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-normal);
+  margin-left: var(--spacing-x-tight);
+
+  & :global(a.container) {
+    vertical-align: middle;
+  }
+}
+
+.green {
+  color: var(--color-matters-green);
+  background: var(--color-green-lighter);
+}
+
+.grey {
+  color: var(--color-white);
+  background: var(--color-grey-dark);
+}
+
+.red {
+  color: var(--color-white);
+  background: var(--color-red);
+}
+
+@keyframes toastFadeIn {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -1,20 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Error, Placeholder } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { Error, Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
+import ArticleFeatureDigest from './ArticleFeatureDigest'
+
 import { HomeToday } from './__generated__/HomeToday'
 
 export const HOME_TODAY = gql`
-  query HomeToday(
-    $hasArticleDigestActionBookmark: Boolean = true
-    $hasArticleDigestActionTopicScore: Boolean = false
-  ) {
+  query HomeToday {
     viewer {
       id
       recommendation {
@@ -24,14 +22,14 @@ export const HOME_TODAY = gql`
       }
     }
   }
-  ${ArticleDigest.Feature.fragments.article}
+  ${ArticleFeatureDigest.fragments.article}
 `
 
 const MattersToday = () => {
   const { data, loading, error } = useQuery<HomeToday>(HOME_TODAY)
 
   if (loading) {
-    return <Placeholder.MattersToday />
+    return <Spinner />
   }
 
   if (error) {
@@ -46,16 +44,13 @@ const MattersToday = () => {
 
   return (
     <>
-      <ArticleDigest.Feature
+      <ArticleFeatureDigest
         article={article}
         onClick={() =>
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
             type: FEED_TYPE.TODAY
           })
         }
-        hasAuthor
-        hasDateTime
-        hasBookmark
       />
     </>
   )

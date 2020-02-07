@@ -1,10 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Head, Icon, InfiniteScroll, Placeholder } from '~/components'
-import { CommentDigest } from '~/components/CommentDigest'
+import {
+  ArticleDigest,
+  Card,
+  Comment,
+  Head,
+  InfiniteScroll,
+  List,
+  Spinner
+} from '~/components'
 import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
@@ -16,12 +22,13 @@ import {
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
+import styles from './styles.css'
+
 import {
   UserCommentFeed,
   UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
 } from './__generated__/UserCommentFeed'
 import { UserIdUser } from './__generated__/UserIdUser'
-import styles from './styles.css'
 
 const USER_ID = gql`
   query UserIdUser($userName: String!) {
@@ -35,11 +42,7 @@ const USER_ID = gql`
   }
 `
 const USER_COMMENT_FEED = gql`
-  query UserCommentFeed(
-    $id: ID!
-    $after: String
-    $hasDescendantComments: Boolean = false
-  ) {
+  query UserCommentFeed($id: ID!, $after: String) {
     node(input: { id: $id }) {
       ... on User {
         id
@@ -53,18 +56,12 @@ const USER_COMMENT_FEED = gql`
             cursor
             node {
               id
-              title
-              slug
-              author {
-                id
-                userName
-              }
-              mediaHash
+              ...TitleDigestArticle
               comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor
                   node {
-                    ...FeedDigestComment
+                    ...FeedComment
                   }
                 }
               }
@@ -74,7 +71,8 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${CommentDigest.Feed.fragments.comment}
+  ${ArticleDigest.Title.fragments.article}
+  ${Comment.Feed.fragments.comment}
 `
 
 const UserCommentsWrap = () => {
@@ -86,7 +84,7 @@ const UserCommentsWrap = () => {
   })
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -125,7 +123,7 @@ const UserComments = ({ user }: UserIdUser) => {
   }
 
   if (loading) {
-    return <Placeholder.ArticleDigestList />
+    return <Spinner />
   }
 
   if (error) {
@@ -160,15 +158,9 @@ const UserComments = ({ user }: UserIdUser) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <ul className="article-list">
+      <List spacing={['xloose', 0]} hasBorder>
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
-          const articlePath = toPath({
-            page: 'articleDetail',
-            userName: articleEdge.node.author.userName || '',
-            slug: articleEdge.node.slug,
-            mediaHash: articleEdge.node.mediaHash || ''
-          })
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
           ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[]
@@ -178,29 +170,34 @@ const UserComments = ({ user }: UserIdUser) => {
           }
 
           return (
-            <li key={articleEdge.cursor} className="article-item">
-              <Link {...articlePath}>
-                <a>
-                  <h3>
-                    {articleEdge.node.title}
-                    <Icon.ChevronRight style={{ width: 12, height: 12 }} />
-                  </h3>
-                </a>
-              </Link>
+            <List.Item key={articleEdge.cursor}>
+              <section className="article-title">
+                <ArticleDigest.Title article={articleEdge.node} is="h3" />
+              </section>
 
-              <ul className="comment-list">
+              <List>
                 {filteredComments.map(comment => (
-                  <li key={comment.id}>
-                    <CommentDigest.Feed comment={comment} hasLink />
-                  </li>
+                  <List.Item key={comment.id}>
+                    <Card
+                      spacing={['tight', 0]}
+                      {...toPath({ page: 'commentDetail', comment })}
+                    >
+                      <Comment.Feed
+                        comment={comment}
+                        avatarSize="md"
+                        hasCreatedAt
+                        hasLink
+                      />
+                    </Card>
+                  </List.Item>
                 ))}
-              </ul>
-            </li>
+              </List>
+            </List.Item>
           )
         })}
 
         <style jsx>{styles}</style>
-      </ul>
+      </List>
     </InfiniteScroll>
   )
 }

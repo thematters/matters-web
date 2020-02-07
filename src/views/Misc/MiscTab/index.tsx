@@ -1,62 +1,50 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
-import styles from './styles.css'
-
 const MiscTabs = () => {
   const router = useRouter()
 
   return (
-    <section>
+    <>
       <Tabs>
-        <Tabs.Tab selected={router.asPath === PATHS.MISC_FAQ.as}>
-          <Link {...PATHS.MISC_FAQ}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.faq}
-                zh_hans={TEXT.zh_hans.faq}
-              />
-            </a>
-          </Link>
+        <Tabs.Tab
+          {...PATHS.MISC_FAQ}
+          selected={router.asPath === PATHS.MISC_FAQ.as}
+        >
+          <Translate zh_hant={TEXT.zh_hant.faq} zh_hans={TEXT.zh_hans.faq} />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.asPath === PATHS.MISC_GUIDE.as}>
-          <Link {...PATHS.MISC_GUIDE}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.guide}
-                zh_hans={TEXT.zh_hans.guide}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...PATHS.MISC_GUIDE}
+          selected={router.asPath === PATHS.MISC_GUIDE.as}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.guide}
+            zh_hans={TEXT.zh_hans.guide}
+          />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.asPath === PATHS.MISC_TOS.as}>
-          <Link {...PATHS.MISC_TOS}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.term}
-                zh_hans={TEXT.zh_hans.term}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...PATHS.MISC_TOS}
+          selected={router.asPath === PATHS.MISC_TOS.as}
+        >
+          <Translate zh_hant={TEXT.zh_hant.term} zh_hans={TEXT.zh_hans.term} />
         </Tabs.Tab>
-        <Tabs.Tab selected={router.asPath === PATHS.MISC_ABOUT.as}>
-          <Link {...PATHS.MISC_ABOUT}>
-            <a>
-              <Translate
-                zh_hant={TEXT.zh_hant.about}
-                zh_hans={TEXT.zh_hans.about}
-              />
-            </a>
-          </Link>
+
+        <Tabs.Tab
+          {...PATHS.MISC_ABOUT}
+          selected={router.asPath === PATHS.MISC_ABOUT.as}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.about}
+            zh_hans={TEXT.zh_hans.about}
+          />
         </Tabs.Tab>
       </Tabs>
-
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 

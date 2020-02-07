@@ -1,7 +1,3 @@
-ul {
-  & li + li {
-    @mixin border-top-grey;
-    padding-top: var(--spacing-base);
-    margin-top: var(--spacing-base);
-  }
+.container {
+  margin-top: var(--spacing-base);
 }

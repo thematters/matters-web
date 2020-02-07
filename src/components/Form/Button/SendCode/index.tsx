@@ -5,11 +5,13 @@ import { Button } from '~/components/Button'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import { useCountdown } from '~/components/Hook'
 import { Translate } from '~/components/Language'
+import { TextIcon } from '~/components/TextIcon'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
-import { SendVerificationCode } from './__generated__/SendVerificationCode'
 import styles from './styles.css'
+
+import { SendVerificationCode } from './__generated__/SendVerificationCode'
 
 /**
  * This component is for sending verificatio code to user with builtin mutation.
@@ -49,9 +51,7 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
   })
   const disabled = !send || !email || countdown.timeLeft !== 0
 
-  const sendCode = async (event: any) => {
-    event.stopPropagation()
-
+  const sendCode = async () => {
     try {
       await send({
         variables: { input: { email, type } }
@@ -79,30 +79,31 @@ const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
 
   return (
     <Button
-      is="button"
-      bgColor="transparent"
-      className="u-link-green"
-      spacing="none"
+      spacing={['xtight', 'xtight']}
       disabled={disabled}
-      onClick={(event: any) => sendCode(event)}
+      onClick={() => sendCode()}
     >
-      {sent ? (
-        <Translate
-          zh_hant={TEXT.zh_hant.resend}
-          zh_hans={TEXT.zh_hans.resend}
-        />
-      ) : (
-        <Translate
-          zh_hant={TEXT.zh_hant.sendVerificationCode}
-          zh_hans={TEXT.zh_hans.sendVerificationCode}
-        />
-      )}
+      <TextIcon color="green" weight="md">
+        {sent ? (
+          <Translate
+            zh_hant={TEXT.zh_hant.resend}
+            zh_hans={TEXT.zh_hans.resend}
+          />
+        ) : (
+          <Translate
+            zh_hant={TEXT.zh_hant.sendVerificationCode}
+            zh_hans={TEXT.zh_hans.sendVerificationCode}
+          />
+        )}
 
-      {sent && countdown.timeLeft !== 0 && (
-        <span className="timer">{formattedTimeLeft.ss}</span>
-      )}
+        {sent && countdown.timeLeft !== 0 && (
+          <span className="timer">
+            {formattedTimeLeft.ss}
 
-      <style jsx>{styles}</style>
+            <style jsx>{styles}</style>
+          </span>
+        )}
+      </TextIcon>
     </Button>
   )
 }

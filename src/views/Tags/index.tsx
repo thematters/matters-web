@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
   Footer,
   Head,
   Icon,
@@ -22,10 +23,11 @@ import { ViewerContext } from '~/components/Viewer'
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { AllTags } from './__generated__/AllTags'
 import styles from './styles.css'
 
-const ALL_TAGSS = gql`
+import { AllTags } from './__generated__/AllTags'
+
+const ALL_TAGS = gql`
   query AllTags($after: String) {
     viewer {
       id
@@ -59,25 +61,26 @@ const CreateTagButton = () => {
   return (
     <ModalSwitch modalId="createTagModal">
       {(open: any) => (
-        <button type="button" onClick={e => open()}>
-          <TextIcon
-            icon={<Icon.Add color="green" size="xs" />}
-            spacing="xxxtight"
-            color="green"
-          >
+        <Button
+          size={[null, '1.5rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="green-lighter"
+          onClick={open}
+        >
+          <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
             <Translate
               zh_hant={TEXT.zh_hant.createTag}
               zh_hans={TEXT.zh_hans.createTag}
             />
           </TextIcon>
-        </button>
+        </Button>
       )}
     </ModalSwitch>
   )
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGSS)
+  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
 
   if (loading) {
     return <Spinner />
@@ -117,7 +120,7 @@ const Tags = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <div className="l-row">
+      <section className="l-row full">
         <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
           {leftEdges.map(({ node, cursor }, i) => (
             <li
@@ -148,7 +151,9 @@ const Tags = () => {
             </li>
           ))}
         </ul>
-      </div>
+
+        <style jsx>{styles}</style>
+      </section>
     </InfiniteScroll>
   )
 }
@@ -165,16 +170,17 @@ export default () => {
         />
 
         <PageHeader
-          buttons={<CreateTagButton />}
-          pageTitle={
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.allTags}
               zh_hans={TEXT.zh_hans.allTags}
             />
           }
-        />
+        >
+          <CreateTagButton />
+        </PageHeader>
 
-        <section>
+        <section className="container">
           <Tags />
         </section>
       </article>

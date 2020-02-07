@@ -1,8 +1,5 @@
 .container {
   @mixin flex-start-space-between;
-  @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
 
   font-size: var(--font-size-sm);
 }
