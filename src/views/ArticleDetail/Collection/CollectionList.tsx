@@ -4,11 +4,11 @@ import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
 import {
-SidebarDigest,
   Button,
   Icon,
   List,
   LoadMore,
+  SidebarDigest,
   Spinner,
   TextIcon,
   Translate,

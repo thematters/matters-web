@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
-import { DropdownDigest, Icon, LanguageContext, Translate } from '~/components'
+import {
+  Button,
+  DropdownDigest,
+  Icon,
+  LanguageContext,
+  Translate
+} from '~/components'
 import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
