@@ -14,7 +14,7 @@ import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
-import { ArticleReponses } from './__generated__/ArticleReponses'
+import { ArticleResponse } from './__generated__/ArticleResponse'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -22,6 +22,7 @@ const ARTICLE_RESPONSE = gql`
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
+      live
       author {
         id
         isBlocking
@@ -37,7 +38,7 @@ const Responses = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
 
-  const { data, loading } = useQuery<ArticleReponses>(ARTICLE_RESPONSE, {
+  const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
     variables: { mediaHash }
   })
 

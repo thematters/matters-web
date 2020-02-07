@@ -77,19 +77,6 @@ const ARTICLE_DETAIL = gql`
   ${Fingerprint.fragments.article}
 `
 
-// const ARTICLE_EDITED = gql`
-//   subscription ArticleEdited($id: ID!) {
-//     nodeEdited(input: { id: $id }) {
-//       id
-//       ... on Article {
-//         id
-//         ...ToolbarArticle
-//       }
-//     }
-//   }
-//   ${Toolbar.fragments.article}
-// `
-
 const Block = ({
   type = 'article',
   children
