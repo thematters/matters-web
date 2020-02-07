@@ -111,7 +111,7 @@ const Rich = ({
       <section className={containerClass}>
         <Link {...path}>
           <a className="avatar">
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+            <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
             {avatarBadge && <span className="badge">{avatarBadge}</span>}
           </a>
         </Link>
