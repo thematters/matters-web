@@ -58,7 +58,10 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
   // Add user info for Sentry
-  import('@sentry/browser').then(Sentry => {
+  import(
+    /* webpackMode: "lazy-once" */
+    '@sentry/browser'
+  ).then(Sentry => {
     Sentry.configureScope((scope: any) => {
       scope.setUser({
         id: viewer.id,

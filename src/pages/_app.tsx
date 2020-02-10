@@ -44,7 +44,10 @@ const ROOT_QUERY = gql`
 `
 
 // Sentry
-import('@sentry/browser').then(Sentry => {
+import(
+  /* webpackMode: "lazy-once" */
+  '@sentry/browser'
+).then(Sentry => {
   /**
    * Initialize
    */

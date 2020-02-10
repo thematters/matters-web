@@ -109,7 +109,10 @@ const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
   const actionId = genSentryActionId()
 
-  import('@sentry/browser').then(Sentry => {
+  import(
+    /* webpackMode: "lazy-once" */
+    '@sentry/browser'
+  ).then(Sentry => {
     Sentry.configureScope((scope: any) => {
       scope.setTag('action-id', actionId)
     })

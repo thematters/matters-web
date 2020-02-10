@@ -29,7 +29,10 @@ export const getErrorCodes = (error: ApolloError) => {
  */
 export const mutationOnError = (error: ApolloError) => {
   // Add info to Sentry
-  import('@sentry/browser').then(Sentry => {
+  import(
+    /* webpackMode: "lazy-once" */
+    '@sentry/browser'
+  ).then(Sentry => {
     Sentry.captureException(error)
   })
 
@@ -161,7 +164,10 @@ export const mutationOnError = (error: ApolloError) => {
 
 export const QueryError = ({ error }: { error: ApolloError }) => {
   // Add info to Sentry
-  import('@sentry/browser').then(Sentry => {
+  import(
+    /* webpackMode: "lazy-once" */
+    '@sentry/browser'
+  ).then(Sentry => {
     Sentry.captureException(error)
   })
 
