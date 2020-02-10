@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
-import { FeedDigest, InfiniteScroll, Spinner } from '~/components'
+import { ArticleDigestFeed, InfiniteScroll, Spinner } from '~/components'
 import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
@@ -25,14 +25,14 @@ const query = gql`
             cursor
             node {
               id
-              ...FeedDigestArticle
+              ...ArticleDigestFeedArticle
             }
           }
         }
       }
     }
   }
-  ${FeedDigest.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const Feed = () => {
@@ -81,7 +81,7 @@ const Feed = () => {
         <ul>
           {edges.map(({ node, cursor }, i) => (
             <li key={cursor}>
-              <FeedDigest article={node} />
+              <ArticleDigestFeed article={node} />
             </li>
           ))}
         </ul>

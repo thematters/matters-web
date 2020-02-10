@@ -23,7 +23,7 @@ const ME_DRAFTS_FEED = gql`
         edges {
           cursor
           node {
-            ...FeedDigestDraft
+            ...DraftDigestFeedDraft
           }
         }
       }

@@ -25,10 +25,7 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   componentDidCatch(error: Error, info: any): void {
     // Add info to Sentry
-    import(
-      /* webpackMode: "lazy-once" */
-      '@sentry/browser'
-    ).then(Sentry => {
+    import('@sentry/browser').then(Sentry => {
       Sentry.captureException(error)
     })
 

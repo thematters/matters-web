@@ -5,14 +5,14 @@ import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
-import { DropdownDigest, Spinner, Translate } from '~/components'
+import { ArticleDigestDropdown, Spinner, Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError, useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
 import styles from './styles.css'
 
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
@@ -45,14 +45,14 @@ const DRAFT_COLLECTION = gql`
         collection(input: { first: null }) {
           edges {
             node {
-              ...DropdownDigestArticle
+              ...ArticleDigestDropdownArticle
             }
           }
         }
       }
     }
   }
-  ${DropdownDigest.fragments.article}
+  ${ArticleDigestDropdown.fragments.article}
 `
 
 const SET_DRAFT_COLLECTION = gql`
@@ -62,13 +62,13 @@ const SET_DRAFT_COLLECTION = gql`
       collection(input: { first: null }) {
         edges {
           node {
-            ...DropdownDigestArticle
+            ...ArticleDigestDropdownArticle
           }
         }
       }
     }
   }
-  ${DropdownDigest.fragments.article}
+  ${ArticleDigestDropdown.fragments.article}
 `
 
 const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
@@ -81,7 +81,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
     'u-area-disable': isPending || isPublished
   })
   const handleCollectionChange = () => async (
-    articles: DropdownDigestArticle[]
+    articles: ArticleDigestDropdownArticle[]
   ) => {
     updateHeaderState({
       type: 'draft',

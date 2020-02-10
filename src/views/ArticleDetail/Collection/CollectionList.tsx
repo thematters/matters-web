@@ -4,11 +4,11 @@ import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
 import {
+  ArticleDigestSidebar,
   Button,
   Icon,
   List,
   LoadMore,
-  SidebarDigest,
   Spinner,
   TextIcon,
   Translate,
@@ -39,13 +39,13 @@ export const COLLECTION_LIST = gql`
           cursor
           node {
             id
-            ...SidebarDigestArticle
+            ...ArticleDigestSidebarArticle
           }
         }
       }
     }
   }
-  ${SidebarDigest.fragments.article}
+  ${ArticleDigestSidebar.fragments.article}
 `
 
 const CollectionList = ({
@@ -120,7 +120,7 @@ const CollectionList = ({
       <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <SidebarDigest
+            <ArticleDigestSidebar
               article={node}
               hasCover={isMediumUp}
               hasBackground
