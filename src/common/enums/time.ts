@@ -1,4 +1,4 @@
-export const POLL_INTERVAL = 1000 * 10
+export const POLL_INTERVAL = 1000 * 20
 
 export const INPUT_DEBOUNCE = 300
 
