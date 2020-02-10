@@ -9,7 +9,7 @@ main {
 
 .container {
   border: 1px solid var(--color-line-grey-light);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: var(--color-white);
   overflow: hidden;
 }

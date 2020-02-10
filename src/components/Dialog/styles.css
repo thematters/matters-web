@@ -1,0 +1,4 @@
+.container {
+  background: var(--color-white);
+  border-radius: 0.5rem;
+}

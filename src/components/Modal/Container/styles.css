@@ -19,7 +19,7 @@
 
 .container {
   background-color: var(--color-white);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   overflow: hidden;
   outline: none;
 }

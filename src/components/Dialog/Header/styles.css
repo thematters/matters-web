@@ -1,0 +1,19 @@
+header {
+  @mixin flex-center-space-between;
+  @mixin border-bottom-grey;
+  position: relative;
+  padding: var(--spacing-tight) var(--spacing-base);
+
+  & h1 {
+    @mixin flex-center-all;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    font-size: var(--font-size-xm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+  }
+}

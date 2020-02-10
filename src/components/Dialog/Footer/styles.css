@@ -1,0 +1,13 @@
+footer {
+  @mixin flex-center-space-between;
+  padding: 0 var(--spacing-base);
+  margin: var(--spacing-loose) 0 var(--spacing-base);
+
+  & :global(> *) {
+    flex: 1;
+  }
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}

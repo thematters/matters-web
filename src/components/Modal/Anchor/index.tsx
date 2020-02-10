@@ -5,7 +5,6 @@ import LoginForm from '~/components/Form/LoginForm'
 import LikeCoinTermModal from '~/components/Modal/LikeCoinTermModal'
 import PasswordModal from '~/components/Modal/PasswordModal'
 import SignUpModal from '~/components/Modal/SignUpModal'
-import TermModal from '~/components/Modal/TermModal'
 import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 import { ViewerContext } from '~/components/Viewer'
@@ -33,9 +32,6 @@ const OpenedModal = ({ modalId }: { modalId: string }) => (
 const Anchor = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-
-  // ToS Modal
-  const disagreedToS = !!viewer.info?.agreeOn === null
 
   // LikeCoin Modal
   const [isLikeCoinClosed, setIsLikeCoinClosed] = useState(false)
@@ -79,14 +75,6 @@ const Anchor = () => {
       </ModalInstance>
 
       <ModalInstance
-        modalId="termModal"
-        title="termAndPrivacy"
-        defaultCloseable={false}
-      >
-        {(props: ModalInstanceProps) => <TermModal {...props} />}
-      </ModalInstance>
-
-      <ModalInstance
         modalId="likeCoinTermModal"
         title="likeCoinTerm"
         onClose={closeLikeCoinModal}
@@ -99,8 +87,6 @@ const Anchor = () => {
       <ModalInstance modalId="setupLikerIdModal" title="setupLikeCoin">
         {(props: ModalInstanceProps) => <SetupLikeCoin />}
       </ModalInstance>
-
-      {viewer.isAuthed && disagreedToS && <OpenedModal modalId="termModal" />}
 
       {shouldShowLikeCoinModal && <OpenedModal modalId="likeCoinTermModal" />}
 

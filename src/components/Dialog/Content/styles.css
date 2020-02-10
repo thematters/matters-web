@@ -1,0 +1,8 @@
+.content {
+  max-height: 70vh;
+  padding: 0 var(--spacing-base);
+  margin: var(--spacing-base) 0 var(--spacing-x-loose);
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

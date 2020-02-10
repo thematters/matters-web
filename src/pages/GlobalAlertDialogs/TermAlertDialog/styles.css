@@ -1,0 +1,47 @@
+.hint {
+  color: var(--color-grey-darker);
+}
+
+.context {
+  max-height: 15rem;
+  margin-top: var(--spacing-base);
+  padding: var(--spacing-x-tight);
+
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-grey-light);
+  border-radius: 0.125rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  &::-webkit-scrollbar {
+    width: 0.9rem;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 0.25rem solid rgba(0, 0, 0, 0);
+    border-radius: 0.75rem;
+    background-clip: padding-box;
+    box-shadow: none;
+    height: 3rem;
+    min-height: 3rem;
+  }
+
+  @media (--sm-up) {
+    max-height: 27rem;
+  }
+  @media (--xs-down) {
+    max-height: 10rem;
+  }
+
+  & :global(h3) {
+    margin-top: var(--spacing-x-tight);
+    margin-bottom: var(--spacing-x-tight);
+
+    font-size: var(--font-size-md);
+  }
+}

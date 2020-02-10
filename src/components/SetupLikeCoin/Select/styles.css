@@ -15,7 +15,7 @@ header {
     @mixin all-transition;
     padding: var(--spacing-base) var(--spacing-loose);
     border: 1.5px solid var(--color-grey-light);
-    border-radius: 4px;
+    border-radius: 0.25rem;
 
     & h4 {
       font-weight: var(--font-weight-medium);

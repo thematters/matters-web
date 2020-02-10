@@ -7,7 +7,7 @@
   margin-top: 5rem;
 
   background: var(--color-white);
-  border-radius: 4px;
+  border-radius: 0.25rem;
 
   @media (--md-up) {
     margin-top: 10rem;

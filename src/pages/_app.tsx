@@ -13,7 +13,6 @@ import {
   GlobalHeader,
   GlobalStyles,
   LanguageProvider,
-  Modal,
   ModalProvider,
   Toast
 } from '~/components'
@@ -27,6 +26,8 @@ import PushInitializer from '~/components/PushInitializer'
 import { ViewerFragments, ViewerProvider } from '~/components/Viewer'
 
 import withApollo from '~/common/utils/withApollo'
+
+import GlobalAlertDialogs from './GlobalAlertDialogs'
 
 import { RootQuery } from './__generated__/RootQuery'
 
@@ -90,11 +91,12 @@ const Root = ({
 
             {children}
 
-            <AnalyticsListener user={viewer || {}} />
-            <PushInitializer client={client} />
-            <Modal.Anchor />
+            <GlobalAlertDialogs />
             <Toast.Container />
             <ProgressBar />
+
+            <AnalyticsListener user={viewer || {}} />
+            <PushInitializer client={client} />
           </HeaderContextProvider>
         </ModalProvider>
       </LanguageProvider>

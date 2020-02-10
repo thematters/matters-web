@@ -6,7 +6,7 @@ a {
     height: 20px;
   }
 
-  @media (max-width: 320px) {
+  @media (--xs-down) {
     & :global(svg) {
       width: 72.75px;
       height: 15px;

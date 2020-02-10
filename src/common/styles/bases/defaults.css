@@ -20,21 +20,15 @@ html {
   text-rendering: optimizeSpeed;
 }
 
-body {
-  min-height: 100%;
-  padding-top: var(--global-header-height); /* fallback */
-  padding-top: calc(
-    var(--global-header-height) + 1px
-  ); /* global header's height + 1px border */
-  padding-bottom: var(--spacing-xx-loose);
-  overflow-x: hidden;
-}
-
 main {
-  margin-top: var(--spacing-x-loose);
+  min-height: 100%;
+  margin-top: calc(var(--spacing-x-loose) + var(--global-header-height) + 1px);
+  margin-bottom: var(--spacing-xx-loose);
 
   @media (--sm-up) {
-    margin-top: var(--spacing-xx-loose);
+    margin-top: calc(
+      var(--spacing-xx-loose) + var(--global-header-height) + 1px
+    );
   }
 }
 
