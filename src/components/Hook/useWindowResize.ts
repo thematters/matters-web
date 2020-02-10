@@ -1,4 +1,7 @@
+import _debounce from 'lodash/debounce'
 import { useEffect, useState } from 'react'
+
+import { WINDOW_RESIZE_DEBOUNCE } from '~/common/enums'
 
 /**
  * This hook is for subscribing window resize event, and get the
@@ -23,7 +26,7 @@ export const useWindowResize = () => {
     if (!window) {
       return
     }
-    const resize = () => setSize(getSize())
+    const resize = _debounce(() => setSize(getSize()), WINDOW_RESIZE_DEBOUNCE)
     window.addEventListener('resize', resize)
     return () => window.removeEventListener('resize', resize)
   }, [])
