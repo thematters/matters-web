@@ -1,0 +1,39 @@
+:root {
+  --extra-button-width: 1rem;
+}
+
+.container {
+  position: relative;
+  text-align: left;
+
+  &.has-extra-button {
+    padding-right: calc(var(--extra-button-width) + var(--spacing-xx-tight));
+
+    &:hover,
+    &:focus {
+      & .extra-button {
+        display: block;
+      }
+    }
+  }
+
+  & :global(h3) {
+    @mixin truncate;
+    min-width: 0;
+
+    line-height: 1;
+  }
+
+  & .extra-button {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--extra-button-width);
+    height: 100%;
+  }
+}
+
+footer {
+  margin-top: var(--spacing-x-tight);
+}

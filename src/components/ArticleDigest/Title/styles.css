@@ -1,0 +1,29 @@
+.title {
+  line-height: 1.5rem;
+}
+
+.text-size-sm {
+  font-size: var(--font-size-sm);
+}
+.text-size-md-s {
+  font-size: var(--font-size-md-s);
+}
+.text-size-md {
+  font-size: var(--font-size-md);
+}
+.text-size-xm {
+  font-size: var(--font-size-xm);
+}
+.text-size-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+.text-weight-md {
+  font-weight: var(--font-weight-medium);
+}
+.text-weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
