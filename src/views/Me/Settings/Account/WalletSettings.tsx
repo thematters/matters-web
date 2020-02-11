@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { Button, Icon, PageHeader, TextIcon, Translate } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
+import SetupLikeCoinDialog from '~/components/SetupLikeCoinDialog'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
@@ -26,9 +26,12 @@ const VIEWER_LIKE_INFO = gql`
   }
 `
 
-const SetupLikerIdButton = () => (
-  <ModalSwitch modalId="setupLikerIdModal">
-    {(open: any) => (
+const SetupLikerIdButton = () => {
+  const [show, setShow] = useState(false)
+  const open = () => setShow(true)
+
+  return (
+    <>
       <Button className="u-link-green" onClick={open}>
         <TextIcon>
           <Translate
@@ -37,9 +40,11 @@ const SetupLikerIdButton = () => (
           />
         </TextIcon>
       </Button>
-    )}
-  </ModalSwitch>
-)
+
+      {show && <SetupLikeCoinDialog />}
+    </>
+  )
+}
 
 const WalletSetting = () => {
   const viewer = useContext(ViewerContext)

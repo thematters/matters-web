@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
+import { Head, PageHeader, Translate } from '~/components'
 import LoginForm from '~/components/Form/LoginForm'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Head } from '~/components/Head'
 
 import { TEXT } from '~/common/enums'
 
@@ -16,16 +16,10 @@ const Login = () => {
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
-  const containerClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-offset-sm-1',
-    'l-col-md-4',
-    'l-offset-md-2',
-    'l-col-lg-6',
-    'l-offset-lg-3',
-    'container'
-  )
+  const containerClass = classNames({
+    container: true,
+    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': true
+  })
 
   return (
     <main className="l-row">
@@ -34,7 +28,19 @@ const Login = () => {
       />
 
       <article className={containerClass}>
-        <LoginForm purpose="page" scrollLock={false} />
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.login}
+              zh_hans={TEXT.zh_hans.login}
+            />
+          }
+          hasNoBorder
+        />
+
+        <section className="content">
+          <LoginForm purpose="page" />
+        </section>
       </article>
 
       <style jsx>{styles}</style>

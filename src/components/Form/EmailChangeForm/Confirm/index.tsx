@@ -3,12 +3,11 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
+import { Dialog, LanguageContext, Translate } from '~/components'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import { translate, validateCode, validateEmail } from '~/common/utils'
@@ -112,7 +111,7 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Modal.Content>
+      <Dialog.Content>
         <Form.Input
           type="email"
           field="email"
@@ -149,17 +148,17 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
           handleBlur={handleBlur}
           handleChange={handleChange}
         />
-      </Modal.Content>
-      <div className="buttons">
-        <Modal.FooterButton
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
-          width="full"
         >
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </form>

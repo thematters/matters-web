@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
+import { Dialog, Translate } from '~/components'
 import { UserNameChangeConfirmForm } from '~/components/Form/UserNameChangeForm'
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 import ModalComplete from '~/components/Modal/Complete'
 
 import { TEXT } from '~/common/enums'
@@ -29,20 +28,24 @@ const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
     <>
       {step === 'ask' && (
         <>
-          <Modal.Content>
+          <Dialog.Content>
             <Translate
               zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
               zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
             />
-          </Modal.Content>
-          <div className="buttons">
-            <Modal.FooterButton bgColor="white" onClick={close}>
+          </Dialog.Content>
+          <Dialog.Footer>
+            <Dialog.Button
+              bgColor="grey-lighter"
+              textColor="black"
+              onClick={close}
+            >
               <Translate
                 zh_hant={TEXT.zh_hant.cancel}
                 zh_hans={TEXT.zh_hans.cancel}
               />
-            </Modal.FooterButton>
-            <Modal.FooterButton
+            </Dialog.Button>
+            <Dialog.Button
               onClick={(event: any) => {
                 event.stopPropagation()
                 setStep('confirm')
@@ -52,10 +55,11 @@ const UserNameModal: React.FC<ModalInstanceProps> = ({ close }) => {
                 zh_hant={TEXT.zh_hant.confirm}
                 zh_hans={TEXT.zh_hans.confirm}
               />
-            </Modal.FooterButton>
-          </div>
+            </Dialog.Button>
+          </Dialog.Footer>
         </>
       )}
+
       {step !== 'ask' && (
         <>
           {step === 'confirm' && (

@@ -1,40 +1,19 @@
 import { useContext, useState } from 'react'
 
+import { Dialog, DialogOverlayProps, LanguageContext } from '~/components'
 import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
-import { LanguageContext } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'
 
-/**
- * This component is for sign up modal.
- *
- * Usage:
- *
- * ```jsx
- *   <SignUpModal close={close} />
- * ```
- *
- */
-
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
-const SignUpModal: React.FC<ModalInstanceProps> = ({
-  closeable,
-  setCloseable,
-  close
-}) => {
-  const closeModal = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
-    close()
-  }
-
+const SignUpDialog: React.FC<DialogOverlayProps> = ({ isOpen, onDismiss }) => {
   const { lang } = useContext(LanguageContext)
-
   const [step, setStep] = useState<Step>('signUp')
+
   const data = {
     signUp: {
       title: translate({
@@ -66,19 +45,17 @@ const SignUpModal: React.FC<ModalInstanceProps> = ({
     }
   }
 
-  return (
-    <>
-      <Modal.Header
-        title={data[step].title}
-        closeable={closeable}
-        close={closeModal}
-      />
+  const close = () => {
+    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
+    onDismiss()
+  }
 
+  return (
+    <Dialog title={data[step].title} isOpen={isOpen} onDismiss={close}>
       {step === 'signUp' && (
         <SignUpInitForm
           purpose="modal"
           submitCallback={() => {
-            setCloseable(false)
             setStep('profile')
             analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
@@ -102,8 +79,8 @@ const SignUpModal: React.FC<ModalInstanceProps> = ({
         />
       )}
       {step === 'complete' && <SignUpComplete />}
-    </>
+    </Dialog>
   )
 }
 
-export default SignUpModal
+export default SignUpDialog

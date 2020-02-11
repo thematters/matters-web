@@ -6,6 +6,7 @@ import { useContext, useState } from 'react'
 import {
   ArticleDigest,
   Button,
+  Dialog,
   Icon,
   LanguageContext,
   Translate
@@ -14,7 +15,6 @@ import ArticleList from '~/components/Dropdown/ArticleList'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
-import { Modal } from '~/components/Modal'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -161,7 +161,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
 
   return (
     <form id="tag-article-modal" className="form" onSubmit={handleSubmit}>
-      <Modal.Content spacing="sm" layout="full-width">
+      <Dialog.Content>
         <Form.DropdownInput
           type="search"
           field="name"
@@ -208,15 +208,17 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
             </li>
           ))}
         </ul>
-      </Modal.Content>
-      <section className="buttons">
-        <Modal.FooterButton onClick={close} bgColor="white">
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Button onClick={close} bgColor="grey-lighter" textColor="black">
           <Translate
             zh_hant={TEXT.zh_hant.cancel}
             zh_hans={TEXT.zh_hans.cancel}
           />
-        </Modal.FooterButton>
-        <Modal.FooterButton
+        </Dialog.Button>
+
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -225,8 +227,9 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
             zh_hant={TEXT.zh_hant.confirm}
             zh_hans={TEXT.zh_hans.confirm}
           />
-        </Modal.FooterButton>
-      </section>
+        </Dialog.Button>
+      </Dialog.Footer>
+
       <style jsx>{styles}</style>
     </form>
   )

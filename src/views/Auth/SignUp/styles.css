@@ -1,15 +1,7 @@
-main {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  @media (--sm-up) {
-    margin-top: 7rem;
-  }
-}
-
-.container {
+.content {
+  @mixin flex-center-all;
   border: 1px solid var(--color-line-grey-light);
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: var(--color-white);
   overflow: hidden;
 }

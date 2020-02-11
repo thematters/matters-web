@@ -1,16 +1,9 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
-import {
-  Button,
-  Dialog,
-  DialogInstanceProps,
-  Icon,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { Term } from '~/components/Term'
@@ -24,6 +17,10 @@ import styles from './styles.css'
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 
+interface TermContentProps {
+  close: () => void
+}
+
 const UPDATE_AGREE_ON = gql`
   mutation UpdateUserInfoAgreeOn($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -35,7 +32,7 @@ const UPDATE_AGREE_ON = gql`
   }
 `
 
-const TermContent: React.FC<DialogInstanceProps> = ({ close }) => {
+const TermContent: React.FC<TermContentProps> = ({ close }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
   const { handleSubmit, isSubmitting } = useFormik({
@@ -85,37 +82,27 @@ const TermContent: React.FC<DialogInstanceProps> = ({ close }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Button
+        <Dialog.Button
           bgColor="grey-lighter"
-          size={['100%', '3rem']}
+          textColor="black"
           onClick={onLogout}
         >
-          <TextIcon color="black">
-            <Translate
-              zh_hant={TEXT.zh_hant.disagree}
-              zh_hans={TEXT.zh_hans.disagree}
-            />
-          </TextIcon>
-        </Button>
+          <Translate
+            zh_hant={TEXT.zh_hant.disagree}
+            zh_hans={TEXT.zh_hans.disagree}
+          />
+        </Dialog.Button>
 
-        <Button
+        <Dialog.Button
           type="submit"
-          bgColor="green"
-          size={['100%', '3rem']}
           disabled={isSubmitting}
+          loading={isSubmitting}
         >
-          <TextIcon
-            color="white"
-            icon={isSubmitting && <Icon.Spinner size="md" />}
-          >
-            {!isSubmitting && (
-              <Translate
-                zh_hant={TEXT.zh_hant.agreeAndContinue}
-                zh_hans={TEXT.zh_hans.agreeAndContinue}
-              />
-            )}
-          </TextIcon>
-        </Button>
+          <Translate
+            zh_hant={TEXT.zh_hant.agreeAndContinue}
+            zh_hans={TEXT.zh_hans.agreeAndContinue}
+          />
+        </Dialog.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
@@ -125,14 +112,23 @@ const TermContent: React.FC<DialogInstanceProps> = ({ close }) => {
 
 const TermAlertDialog = () => {
   const viewer = useContext(ViewerContext)
-  const disagreedToS = viewer.info?.agreeOn === null
+  const disagreedToS = viewer.info.agreeOn === null
+
+  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(disagreedToS)
 
   return (
     <Dialog
-      title={TEXT.zh_hant.termAndPrivacy}
-      defaultShowDialog={disagreedToS}
+      title={
+        <Translate
+          zh_hant={TEXT.zh_hant.termAndPrivacy}
+          zh_hans={TEXT.zh_hans.termAndPrivacy}
+        />
+      }
+      isOpen={showDialog}
+      onDismiss={close}
     >
-      {({ close }: DialogInstanceProps) => <TermContent close={close} />}
+      <TermContent close={close} />
     </Dialog>
   )
 }

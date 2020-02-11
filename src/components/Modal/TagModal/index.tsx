@@ -4,12 +4,10 @@ import _isEmpty from 'lodash/isEmpty'
 import Router from 'next/router'
 import { useContext } from 'react'
 
-import { Menu, Spinner } from '~/components'
+import { Dialog, LanguageContext, Menu, Spinner, Translate } from '~/components'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
@@ -191,7 +189,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
 
   return (
     <form id="tag-modal" className="form" onSubmit={handleSubmit}>
-      <Modal.Content spacing="sm" layout="full-width">
+      <Dialog.Content>
         <p className="field">
           <Translate
             zh_hant={TEXT.zh_hant.tagName}
@@ -239,15 +237,17 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           handleChange={handleChange}
           style={{ height: '5rem' }}
         />
-      </Modal.Content>
-      <section className="buttons">
-        <Modal.FooterButton onClick={close} bgColor="white">
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Button onClick={close} bgColor="grey-lighter" textColor="black">
           <Translate
             zh_hant={TEXT.zh_hant.cancel}
             zh_hans={TEXT.zh_hans.cancel}
           />
-        </Modal.FooterButton>
-        <Modal.FooterButton
+        </Dialog.Button>
+
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -256,8 +256,9 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
             zh_hant={TEXT.zh_hant.confirm}
             zh_hans={TEXT.zh_hans.confirm}
           />
-        </Modal.FooterButton>
-      </section>
+        </Dialog.Button>
+      </Dialog.Footer>
+
       <style jsx>{styles}</style>
     </form>
   )

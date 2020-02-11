@@ -2,7 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { InfiniteScroll, Spinner, Translate, UserDigest } from '~/components'
+import {
+  Dialog,
+  InfiniteScroll,
+  Spinner,
+  Translate,
+  UserDigest
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
@@ -103,7 +109,8 @@ const AppreciatorsModal = () => {
           />
         }
       />
-      <Modal.Content spacing="none" layout="full-width">
+
+      <Dialog.Content>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <ul className="modal-appreciators-list">
             {edges.map(
@@ -135,7 +142,7 @@ const AppreciatorsModal = () => {
             <style jsx>{styles}</style>
           </ul>
         </InfiniteScroll>
-      </Modal.Content>
+      </Dialog.Content>
     </>
   )
 }

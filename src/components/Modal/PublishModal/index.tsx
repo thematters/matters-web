@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
+import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -60,22 +59,23 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
 
   return (
     <section>
-      <Modal.Content layout="full-width" spacing="none">
+      <Dialog.Content>
         <PublishSlide />
-      </Modal.Content>
+      </Dialog.Content>
 
-      <div className="buttons">
-        <Modal.FooterButton
+      <Dialog.Footer>
+        <Dialog.Button
           onClick={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SAVE_DRAFT_IN_MODAL)
             close()
           }}
-          bgColor="white"
+          bgColor="grey-lighter"
+          textColor="black"
         >
           <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
-        </Modal.FooterButton>
+        </Dialog.Button>
 
-        <Modal.FooterButton
+        <Dialog.Button
           disabled={!publishable}
           onClick={async () => {
             analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
@@ -88,8 +88,8 @@ export const PublishModal: React.FC<Props> = ({ close, draft }) => {
           }}
         >
           <Translate zh_hant="發佈作品" zh_hans="发布作品" />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </section>

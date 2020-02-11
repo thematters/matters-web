@@ -4,10 +4,9 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
+import { Dialog, LanguageContext, Translate } from '~/components'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import {
@@ -96,7 +95,7 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
 
   return (
     <form className={formClass} onSubmit={handleSubmit}>
-      <Modal.Content>
+      <Dialog.Content>
         <Form.Input
           type="text"
           field="userName"
@@ -130,17 +129,17 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
           handleBlur={handleBlur}
           handleChange={handleChange}
         />
-      </Modal.Content>
-      <div className="buttons">
-        <Modal.FooterButton
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
-          width="full"
         >
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </form>

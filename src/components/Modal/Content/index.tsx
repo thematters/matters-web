@@ -7,14 +7,12 @@ import styles from './styles.css'
 interface ContentProps {
   spacing?: 'none' | 'sm' | 'default'
   layout?: 'full-width' | 'default'
-  scrollLock?: boolean
 }
 
 const Content: React.FC<ContentProps> = ({
   children,
   spacing = 'default',
-  layout = 'default',
-  scrollLock = true
+  layout = 'default'
 }) => {
   const node: React.RefObject<HTMLElement> | null = useRef(null)
   const containerClasses = classNames({
@@ -27,12 +25,12 @@ const Content: React.FC<ContentProps> = ({
   })
 
   useEffect(() => {
-    if (node?.current && scrollLock) {
+    if (node?.current) {
       disableBodyScroll(node.current)
     }
 
     return () => {
-      if (node?.current && scrollLock) {
+      if (node?.current) {
         enableBodyScroll(node.current)
       }
     }

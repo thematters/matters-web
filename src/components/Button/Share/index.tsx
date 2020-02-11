@@ -1,12 +1,11 @@
 import { useState } from 'react'
 
 import { Button, Icon, IconColor, IconSize } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
 
-import ShareModal from './ShareModal'
+import ShareDialog from './ShareDialog'
 
 interface ShareButtonProps {
   title?: string
@@ -23,7 +22,9 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   size,
   color = 'black'
 }) => {
-  const [show, setShow] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => setShowDialog(true)
+  const close = () => setShowDialog(false)
 
   const shareLink = process.browser
     ? path
@@ -32,8 +33,8 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     : ''
   const shareTitle = process.browser ? title || window.document.title : ''
 
-  const openShareModal = async ({ open }: { open: () => any }) => {
-    setShow(true)
+  const openShareModal = async () => {
+    open()
 
     const navigator = window.navigator as any
     if (navigator.share && isMobile()) {
@@ -49,35 +50,31 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       open()
     }
   }
-  const onClose = () => {
-    setShow(false)
-  }
 
   return (
     <>
-      <ModalSwitch modalId="shareModal">
-        {(open: () => any) => (
-          <Button
-            spacing={['xtight', 'xtight']}
-            bgHoverColor="grey-lighter"
-            aria-label={`分享《${title || ''}》`}
-            onClick={() => {
-              openShareModal({ open })
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgHoverColor="grey-lighter"
+        aria-label={`分享《${title || ''}》`}
+        onClick={() => {
+          openShareModal()
 
-              analytics.trackEvent(ANALYTICS_EVENTS, {
-                type: SHARE_TYPE.ROOT,
-                url: shareLink
-              })
-            }}
-          >
-            <Icon.Share size={size} color={color} />
-          </Button>
-        )}
-      </ModalSwitch>
+          analytics.trackEvent(ANALYTICS_EVENTS, {
+            type: SHARE_TYPE.ROOT,
+            url: shareLink
+          })
+        }}
+      >
+        <Icon.Share size={size} color={color} />
+      </Button>
 
-      {show && (
-        <ShareModal title={shareTitle} link={shareLink} onClose={onClose} />
-      )}
+      <ShareDialog
+        title={shareTitle}
+        link={shareLink}
+        isOpen={showDialog}
+        onDismiss={close}
+      />
     </>
   )
 }

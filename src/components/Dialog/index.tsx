@@ -2,35 +2,38 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
+import Button from './Button'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
 
-interface DialogProps {
-  title: string
-  defaultShowDialog?: boolean
+export interface DialogOverlayProps {
+  isOpen: boolean | undefined
+  onDismiss: () => void
+}
+
+export type DialogProps = {
+  title: string | React.ReactNode
   size?: 'sm' | 'lg'
+} & DialogOverlayProps
 
-  children: (props: DialogInstanceProps) => React.ReactNode
-}
-
-export interface DialogInstanceProps {
-  close: () => void
-}
-
-export const Dialog = ({
+export const Dialog: React.FC<DialogProps> & {
+  Header: typeof Header
+  Content: typeof Content
+  Footer: typeof Footer
+  Button: typeof Button
+} = ({
   title,
-  defaultShowDialog = true,
   size = 'lg',
 
+  isOpen,
+  onDismiss,
+
   children
-}: DialogProps) => {
+}) => {
   const [mounted, setMounted] = useState(false)
-  const [showDialog, setShowDialog] = useState(defaultShowDialog)
-  // const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
 
   const containerClass = classNames({
     container: true,
@@ -48,16 +51,14 @@ export const Dialog = ({
   }
 
   return (
-    <div style={{ '--reach-dialog': 1 } as React.CSSProperties}>
-      <DialogOverlay isOpen={showDialog} onDismiss={close}>
-        <DialogContent aria-label={title}>
+    <>
+      <DialogOverlay isOpen={isOpen} onDismiss={onDismiss}>
+        <DialogContent aria-labelledby="dialog-title">
           <div className="l-row">
             <div className={containerClass}>
-              <Header close={close}>{title}</Header>
+              <Header close={onDismiss}>{title}</Header>
 
-              {children({
-                close
-              })}
+              {children}
             </div>
           </div>
         </DialogContent>
@@ -67,10 +68,11 @@ export const Dialog = ({
         {globalStyles}
       </style>
       <style jsx>{styles}</style>
-    </div>
+    </>
   )
 }
 
 Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
+Dialog.Button = Button

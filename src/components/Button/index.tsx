@@ -43,7 +43,7 @@ type ButtonBgHoverColor = Extract<
   'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
 >
 
-interface ButtonProps {
+export interface ButtonProps {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 

@@ -1,6 +1,4 @@
-import { Icon, ModalInstance, TextIcon } from '~/components'
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
+import { Dialog, ModalInstance, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -13,7 +11,7 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
 
   return (
     <>
-      <Modal.Content layout="full-width" spacing="sm">
+      <Dialog.Content>
         <p>
           <Translate
             zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
@@ -33,34 +31,30 @@ const CivicLikerModal: React.FC<ModalInstanceProps> = ({ close }) => {
             <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" />
           </a>
         </p>
-      </Modal.Content>
+      </Dialog.Content>
 
-      <div className="buttons">
-        <Modal.FooterButton bgColor="white" onClick={closeModal}>
+      <Dialog.Footer>
+        <Dialog.Button
+          bgColor="grey-lighter"
+          textColor="black"
+          onClick={closeModal}
+        >
           <Translate
             zh_hant={TEXT.zh_hant.understood}
             zh_hans={TEXT.zh_hans.understood}
           />
-        </Modal.FooterButton>
+        </Dialog.Button>
 
-        <Modal.FooterButton
-          bgColor="white"
-          is="anchor"
+        <Dialog.Button
+          bgColor="grey-lighter"
+          textColor="black"
           href={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
           target="_blank"
           onClick={closeModal}
         >
-          <TextIcon
-            icon={<Icon.External color="green" />}
-            spacing="xxxtight"
-            color="green"
-            textPlacement="left"
-            size="md"
-          >
-            <Translate zh_hant="立即登記" zh_hans="立即登记" />
-          </TextIcon>
-        </Modal.FooterButton>
-      </div>
+          <Translate zh_hant="立即登記" zh_hans="立即登记" />
+        </Dialog.Button>
+      </Dialog.Footer>
     </>
   )
 }

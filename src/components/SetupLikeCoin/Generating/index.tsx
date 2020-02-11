@@ -1,10 +1,8 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
+import { Dialog, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -16,7 +14,6 @@ import { GenerateLikerId } from './__generated__/GenerateLikerId'
 interface Props {
   prevStep: () => void
   nextStep: () => void
-  scrollLock?: boolean
 }
 
 const GENERATE_LIKER_ID = gql`
@@ -33,7 +30,7 @@ const GENERATE_LIKER_ID = gql`
   }
 `
 
-const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
+const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID)
 
   useEffect(() => {
@@ -49,7 +46,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
 
   return (
     <>
-      <Modal.Content scrollLock={scrollLock}>
+      <Dialog.Content>
         <section className="container">
           {!error && (
             <>
@@ -71,23 +68,22 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep, scrollLock }) => {
             </p>
           )}
         </section>
-      </Modal.Content>
+      </Dialog.Content>
 
-      <footer>
-        <Modal.FooterButton
+      <Dialog.Footer>
+        <Dialog.Button
+          disabled={!error}
           onClick={() => {
             prevStep()
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
-          width="full"
-          disabled={!error}
         >
           <Translate
             zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
             zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
           />
-        </Modal.FooterButton>
-      </footer>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </>

@@ -1,9 +1,11 @@
-import TermAlertDialog from './TermAlertDialog'
+import LikeCoinTermAlertDialog from './LikeCoinTermAlertDialog'
+// import TermAlertDialog from './TermAlertDialog'
 
 const GlobalAlertDialogs = () => {
   return (
     <>
-      <TermAlertDialog />
+      {/* <TermAlertDialog /> */}
+      <LikeCoinTermAlertDialog />
     </>
   )
 }

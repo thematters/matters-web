@@ -2,9 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { Spinner } from '~/components/Spinner'
+import { Dialog, Spinner, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -17,7 +15,6 @@ interface Props {
   prevStep: () => void
   nextStep: () => void
   windowRef?: Window
-  scrollLock?: boolean
 }
 
 const VIEWER_LIKER_ID = gql`
@@ -31,12 +28,7 @@ const VIEWER_LIKER_ID = gql`
   }
 `
 
-const Binding: React.FC<Props> = ({
-  prevStep,
-  nextStep,
-  windowRef,
-  scrollLock
-}) => {
+const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerLikerId>(VIEWER_LIKER_ID, {
     pollInterval: polling ? 1000 : undefined,
@@ -64,7 +56,7 @@ const Binding: React.FC<Props> = ({
 
   return (
     <>
-      <Modal.Content scrollLock={scrollLock}>
+      <Dialog.Content>
         <section className="container">
           {!error && (
             <>
@@ -86,22 +78,22 @@ const Binding: React.FC<Props> = ({
             </p>
           )}
         </section>
-      </Modal.Content>
+      </Dialog.Content>
 
-      <footer>
-        <Modal.FooterButton
+      <Dialog.Footer>
+        <Dialog.Button
+          disabled={!error}
           onClick={() => {
             prevStep()
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
-          width="full"
         >
           <Translate
             zh_hant={TEXT.zh_hant.retry}
             zh_hans={TEXT.zh_hans.retry}
           />
-        </Modal.FooterButton>
-      </footer>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </>

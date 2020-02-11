@@ -1,17 +1,22 @@
-import { Button, TextIcon } from '~/components'
-import { Translate } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
+import { useState } from 'react'
+
+import { Button, Dialog, TextIcon, Translate } from '~/components'
+import LoginForm from '~/components/Form/LoginForm'
 
 import { TEXT } from '~/common/enums'
 
-export default () => (
-  <ModalSwitch modalId="loginModal">
-    {(open: any) => (
+const LoginButton = () => {
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => setShowDialog(true)
+  const close = () => setShowDialog(false)
+
+  return (
+    <>
       <Button
         size={[null, '2.25rem']}
         spacing={[0, 'loose']}
         bgHoverColor="green-lighter"
-        onClick={() => open()}
+        onClick={open}
       >
         <TextIcon color="green" weight="md">
           <Translate
@@ -20,6 +25,22 @@ export default () => (
           />
         </TextIcon>
       </Button>
-    )}
-  </ModalSwitch>
-)
+
+      <Dialog
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.login}
+            zh_hans={TEXT.zh_hans.login}
+          />
+        }
+        size="sm"
+        isOpen={showDialog}
+        onDismiss={close}
+      >
+        <LoginForm purpose="dialog" submitCallback={close} />
+      </Dialog>
+    </>
+  )
+}
+
+export default LoginButton

@@ -1,6 +1,4 @@
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { Title } from '~/components/Title'
+import { Dialog, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
@@ -8,15 +6,9 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg'
 
 import styles from './styles.css'
 
-const SignUpComplete = ({
-  purpose,
-  scrollLock
-}: {
-  purpose?: 'modal' | 'page'
-  scrollLock?: boolean
-}) => (
+const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
   <div className="complete">
-    <Modal.Content scrollLock={scrollLock}>
+    <Dialog.Content>
       <img src={ICON_AVATAR_GREEN} />
 
       <div className="content">
@@ -65,11 +57,10 @@ const SignUpComplete = ({
           />
         </p>
       </div>
-    </Modal.Content>
+    </Dialog.Content>
 
-    <div className="buttons">
-      <Modal.FooterButton
-        width="full"
+    <Dialog.Footer>
+      <Dialog.Button
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
           redirectToTarget({
@@ -78,8 +69,8 @@ const SignUpComplete = ({
         }}
       >
         <Translate zh_hant="進入社區" zh_hans="进入社区" />
-      </Modal.FooterButton>
-    </div>
+      </Dialog.Button>
+    </Dialog.Footer>
 
     <style jsx>{styles}</style>
   </div>

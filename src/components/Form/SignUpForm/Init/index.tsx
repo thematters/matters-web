@@ -5,13 +5,11 @@ import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { Dialog, LanguageContext, Translate } from '~/components'
 import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
@@ -50,7 +48,6 @@ interface FormProps {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: (params: any) => void
-  scrollLock?: boolean
 }
 
 interface FormValues {
@@ -70,23 +67,19 @@ const USER_REGISTER = gql`
 `
 
 const LoginModalSwitch = () => (
-  <ModalSwitch modalId="loginModal">
-    {(open: any) => (
-      <Modal.FooterButton onClick={open} bgColor="white">
-        <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-      </Modal.FooterButton>
-    )}
-  </ModalSwitch>
+  <Dialog.Button onClick={open} bgColor="grey-lighter" textColor="black">
+    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+  </Dialog.Button>
 )
 
 const LoginRedirection = () => (
-  <Modal.FooterButton
-    is="link"
+  <Dialog.Button
     {...appendTarget(PATHS.AUTH_LOGIN)}
-    bgColor="white"
+    bgColor="grey-lighter"
+    textColor="black"
   >
     <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Modal.FooterButton>
+  </Dialog.Button>
 )
 
 export const SignUpInitForm: React.FC<FormProps> = formProps => {
@@ -97,8 +90,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     defaultEmail = '',
     extraClass = [],
     purpose,
-    submitCallback,
-    scrollLock
+    submitCallback
   } = formProps
   const isInModal = purpose === 'modal'
   const isInPage = purpose === 'page'
@@ -184,7 +176,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
 
   return (
     <form className={formClass} onSubmit={handleSubmit}>
-      <Modal.Content scrollLock={scrollLock}>
+      <Dialog.Content>
         <Form.Input
           type="email"
           field="email"
@@ -280,13 +272,13 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             </>
           </Form.CheckBox>
         </div>
-      </Modal.Content>
+      </Dialog.Content>
 
-      <div className="buttons">
+      <Dialog.Footer>
         {isInModal && <LoginModalSwitch />}
         {isInPage && <LoginRedirection />}
 
-        <Modal.FooterButton
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -295,8 +287,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             zh_hant={TEXT.zh_hant.nextStep}
             zh_hans={TEXT.zh_hans.nextStep}
           />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </form>

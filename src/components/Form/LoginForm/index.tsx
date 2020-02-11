@@ -1,16 +1,17 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import { Button } from '~/components/Button'
+import {
+  Button,
+  Dialog,
+  LanguageContext,
+  TextIcon,
+  Translate
+} from '~/components'
 import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { ModalSwitch } from '~/components/ModalManager'
-import { TextIcon } from '~/components/TextIcon'
 
 import {
   ADD_TOAST,
@@ -28,6 +29,8 @@ import {
   validateEmail
 } from '~/common/utils'
 
+import PasswordResetDialogButton from './PasswordResetDialogButton'
+import SignUpDialogButton from './SignUpDialogButton'
 import styles from './styles.css'
 
 import { UserLogin } from './__generated__/UserLogin'
@@ -39,18 +42,15 @@ import { UserLogin } from './__generated__/UserLogin'
  *
  * ```jsx
  *   <LoginForm
- *     extraClass={[]}
- *     purpose="modal"
+ *     purpose="dialog"
  *     submitCallback={()=> {}}
  *   />
  * ```
  *
  */
 interface FormProps {
-  extraClass?: string[]
-  purpose: 'modal' | 'page'
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  scrollLock?: boolean
 }
 
 interface FormValues {
@@ -78,48 +78,17 @@ const PasswordResetRedirectButton = () => (
   </Button>
 )
 
-const PasswordResetModalSwitch = () => (
-  <ModalSwitch modalId="passwordResetModal">
-    {(open: any) => (
-      <Button spacing={['xtight', 0]} onClick={open}>
-        <TextIcon color="green">
-          <Translate
-            zh_hant={TEXT.zh_hant.forgetPassword}
-            zh_hans={TEXT.zh_hans.forgetPassword}
-          />
-          ？
-        </TextIcon>
-      </Button>
-    )}
-  </ModalSwitch>
-)
-
-const SignUpModalSwitch = () => (
-  <ModalSwitch modalId="signUpModal">
-    {(open: any) => (
-      <Modal.FooterButton onClick={open} bgColor="white">
-        <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-      </Modal.FooterButton>
-    )}
-  </ModalSwitch>
-)
-
-const SignUpRedirection = () => (
-  <Modal.FooterButton
-    is="link"
+const SignUpRedirectionButton = () => (
+  <Dialog.Button
     {...appendTarget(PATHS.AUTH_SIGNUP)}
-    bgColor="white"
+    bgColor="grey-lighter"
+    textColor="black"
   >
     <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Modal.FooterButton>
+  </Dialog.Button>
 )
 
-const LoginForm: React.FC<FormProps> = ({
-  extraClass = [],
-  purpose,
-  submitCallback,
-  scrollLock
-}) => {
+const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
   const {
@@ -210,13 +179,12 @@ const LoginForm: React.FC<FormProps> = ({
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-  const isInModal = purpose === 'modal'
+  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
-      <Modal.Content scrollLock={scrollLock}>
+    <form onSubmit={handleSubmit}>
+      <Dialog.Content>
         <Form.Input
           type="email"
           field="email"
@@ -245,15 +213,15 @@ const LoginForm: React.FC<FormProps> = ({
           handleBlur={handleBlur}
           handleChange={handleChange}
         />
-        {isInModal && <PasswordResetModalSwitch />}
+        {isInDialog && <PasswordResetDialogButton />}
         {isInPage && <PasswordResetRedirectButton />}
-      </Modal.Content>
+      </Dialog.Content>
 
-      <div className="buttons">
-        {isInModal && <SignUpModalSwitch />}
-        {isInPage && <SignUpRedirection />}
+      <Dialog.Footer>
+        {isInDialog && <SignUpDialogButton />}
+        {isInPage && <SignUpRedirectionButton />}
 
-        <Modal.FooterButton
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -262,8 +230,8 @@ const LoginForm: React.FC<FormProps> = ({
             zh_hant={TEXT.zh_hant.login}
             zh_hans={TEXT.zh_hans.login}
           />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </form>

@@ -4,11 +4,10 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
+import { Dialog, LanguageContext, Translate } from '~/components'
 import { SignUpAvatarUploader } from '~/components/FileUploader'
 import { Form } from '~/components/Form'
 import { useMutation } from '~/components/GQL'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
 
 import { TEXT } from '~/common/enums'
 import {
@@ -41,7 +40,6 @@ interface FormProps {
   extraClass?: string[]
   purpose: 'modal' | 'page'
   submitCallback?: () => void
-  scrollLock?: boolean
 }
 
 interface FormValues {
@@ -77,7 +75,7 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 export const SignUpProfileForm: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const { extraClass = [], submitCallback, scrollLock } = formProps
+  const { extraClass = [], submitCallback } = formProps
 
   const {
     values,
@@ -135,7 +133,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
 
   return (
     <form className={formClass} onSubmit={handleSubmit}>
-      <Modal.Content scrollLock={scrollLock}>
+      <Dialog.Content>
         <SignUpAvatarUploader
           field="avatar"
           lang={lang}
@@ -175,21 +173,20 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
             lang
           })}
         />
-      </Modal.Content>
+      </Dialog.Content>
 
-      <div className="buttons">
-        <Modal.FooterButton
+      <Dialog.Footer>
+        <Dialog.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
-          width="full"
         >
           <Translate
             zh_hant={TEXT.zh_hant.nextStep}
             zh_hans={TEXT.zh_hans.nextStep}
           />
-        </Modal.FooterButton>
-      </div>
+        </Dialog.Button>
+      </Dialog.Footer>
 
       <style jsx>{styles}</style>
     </form>
