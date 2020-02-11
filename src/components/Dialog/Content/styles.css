@@ -10,11 +10,19 @@
 }
 
 .spacing-x-base {
-  padding-left: var(--spacing-base);
-  padding-right: var(--spacing-base);
+  margin-left: var(--spacing-base);
+  margin-right: var(--spacing-base);
+}
+.spacing-x-xloose {
+  margin-left: var(--spacing-x-loose);
+  margin-right: var(--spacing-x-loose);
 }
 
 .spacing-y-base {
-  padding-top: var(--spacing-base);
-  padding-bottom: var(--spacing-base);
+  margin-top: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+}
+.spacing-y-xloose {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-x-loose);
 }

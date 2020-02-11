@@ -10,8 +10,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { Tooltip } from '~/components/Popper'
 import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, APPRECIATE_DEBOUNCE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
@@ -154,7 +153,6 @@ const AppreciationButton = ({
               id: 'ClientPreference:local',
               data: { readCivicLikerModal: true }
             })
-            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
           }}
           count={
             viewer.isAuthed && appreciatedCount > 0

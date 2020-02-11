@@ -2,24 +2,11 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import {
-  Dialog,
-  InfiniteScroll,
-  Spinner,
-  Translate,
-  UserDigest
-} from '~/components'
+import { Dialog, InfiniteScroll, Spinner, UserDigest } from '~/components'
 import { QueryError } from '~/components/GQL'
-import { Modal } from '~/components/Modal'
-import { ModalInstance } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import {
-  analytics,
-  getQuery,
-  mergeConnections,
-  numFormat
-} from '~/common/utils'
+import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -30,7 +17,6 @@ const ARTICLE_APPRECIATORS = gql`
     article(input: { mediaHash: $mediaHash }) {
       id
       appreciationsReceived(input: { first: 10, after: $after }) {
-        totalCount
         pageInfo {
           startCursor
           endCursor
@@ -53,7 +39,7 @@ const ARTICLE_APPRECIATORS = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-const AppreciatorsModal = () => {
+const AppreciatorsDialogContent = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const { data, loading, error, fetchMore } = useQuery<AllArticleAppreciators>(
@@ -95,24 +81,12 @@ const AppreciatorsModal = () => {
         })
     })
   }
-  const totalCount = numFormat(
-    data?.article?.appreciationsReceived.totalCount || 0
-  )
 
   return (
     <>
-      <Modal.Header
-        title={
-          <Translate
-            zh_hant={`${totalCount} 人讚賞了作品`}
-            zh_hans={`${totalCount} 人赞赏了作品`}
-          />
-        }
-      />
-
-      <Dialog.Content>
+      <Dialog.Content spacing={[0, 0]}>
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <ul className="modal-appreciators-list">
+          <ul className="dialog-appreciators-list">
             {edges.map(
               ({ node, cursor }, i) =>
                 node.sender && (
@@ -147,8 +121,4 @@ const AppreciatorsModal = () => {
   )
 }
 
-export default () => (
-  <ModalInstance modalId="appreciatorsModal">
-    {(props: ModalInstanceProps) => <AppreciatorsModal />}
-  </ModalInstance>
-)
+export default AppreciatorsDialogContent

@@ -1,6 +1,6 @@
 footer {
   @mixin flex-center-space-between;
-  padding: var(--spacing-base);
+  margin: var(--spacing-base);
 
   & :global(> *) {
     flex: 1;

@@ -43,7 +43,7 @@
   }
 }
 
-.modal-appreciators-list {
+.dialog-appreciators-list {
   padding: var(--spacing-tight) var(--spacing-base);
 
   & .appreciation-amount {

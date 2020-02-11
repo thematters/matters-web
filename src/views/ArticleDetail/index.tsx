@@ -37,8 +37,6 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
-import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
-import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -305,10 +303,6 @@ const ArticleDetail = ({
             />
           </>
         )}
-
-        {/* Modals */}
-        <AppreciatorsModal />
-        <CivicLikerModal />
       </Block>
 
       <style jsx>{styles}</style>

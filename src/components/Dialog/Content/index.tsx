@@ -2,8 +2,8 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type SpacingX = 0 | '0' | 'base'
-type SpacingY = 0 | '0' | 'base'
+type SpacingX = 0 | '0' | 'base' | 'xloose'
+type SpacingY = 0 | '0' | 'base' | 'xloose'
 
 interface DialogContentProps {
   spacing?: [SpacingX, SpacingY]
