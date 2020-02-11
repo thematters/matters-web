@@ -57,8 +57,9 @@ const DropdownContent = ({
   )
 }
 
-interface ModalProps extends ModalInstanceProps {
-  tagId?: string
+interface TagArticleDialogContentProps {
+  id?: string
+  close: () => void
 }
 
 interface FormValues {
@@ -66,7 +67,10 @@ interface FormValues {
   articles: string[]
 }
 
-const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
+const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
+  close,
+  id
+}) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
   const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
@@ -100,12 +104,14 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
     },
     onSubmit: async ({ name, articles }, { setFieldError, setSubmitting }) => {
       try {
-        if (!tagId) {
+        if (!id) {
           return
         }
 
-        await update({ variables: { id: tagId, articles } })
+        await update({ variables: { id, articles } })
+
         setSubmitting(false)
+
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -119,6 +125,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
             }
           })
         )
+
         window.dispatchEvent(
           new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
             detail: {
@@ -127,6 +134,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
             }
           })
         )
+
         close()
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
@@ -160,7 +168,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   }
 
   return (
-    <form id="tag-article-modal" className="form" onSubmit={handleSubmit}>
+    <form id="tag-article-dialog" className="form" onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.DropdownInput
           type="search"
@@ -175,7 +183,7 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
           touched={touched}
           handleBlur={handleBlur}
           handleChange={handleChange}
-          dropdownAppendTo="tag-article-modal"
+          dropdownAppendTo="tag-article-dialog"
           dropdownAutoSizing={true}
           dropdownCallback={onClickMenuItem}
           DropdownContent={DropdownContent}
@@ -235,4 +243,4 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
   )
 }
 
-export default TagArticleModal
+export default TagArticleDialogContent

@@ -16,8 +16,7 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
-import TagModal from '~/components/Modal/TagModal'
-import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import TagDialog from '~/components/TagDialog'
 import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
@@ -53,14 +52,17 @@ const ALL_TAGS = gql`
 
 const CreateTagButton = () => {
   const viewer = useContext(ViewerContext)
+
   // temporarily safety check
-  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
+  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+
+  if (!canEdit) {
     return null
   }
 
   return (
-    <ModalSwitch modalId="createTagModal">
-      {(open: any) => (
+    <TagDialog>
+      {({ open }) => (
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
@@ -75,7 +77,7 @@ const CreateTagButton = () => {
           </TextIcon>
         </Button>
       )}
-    </ModalSwitch>
+    </TagDialog>
   )
 }
 
@@ -188,10 +190,6 @@ export default () => {
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Footer />
       </aside>
-
-      <ModalInstance modalId="createTagModal" title="createTag">
-        {(props: ModalInstanceProps) => <TagModal {...props} />}
-      </ModalInstance>
 
       <style jsx>{styles}</style>
     </main>

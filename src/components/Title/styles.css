@@ -10,13 +10,13 @@
   font-weight: var(--font-weight-feed-title);
 }
 
-.modal {
+.dialog {
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-xm);
   line-height: 1.77777778;
 }
 
-.modal-headline {
+.dialog-headline {
   @mixin font-serif;
 
   font-size: var(--font-size-lg);

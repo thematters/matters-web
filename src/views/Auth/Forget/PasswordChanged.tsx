@@ -8,7 +8,7 @@ import styles from './styles.css'
 const PasswordChanged = () => (
   <section className="complete">
     <Dialog.Content>
-      <Title is="h3" type="modal-headline">
+      <Title is="h3" type="dialog-headline">
         <Translate
           zh_hant={TEXT.zh_hant.resetPasswordSuccess}
           zh_hans={TEXT.zh_hans.resetPasswordSuccess}

@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
@@ -21,8 +20,6 @@ import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
   codeId: string
-  extraClass?: string[]
-  container: 'modal' | 'page'
   backPreviousStep: (event: any) => void
   submitCallback?: () => void
 }
@@ -40,7 +37,6 @@ export const RESET_PASSWORD = gql`
 
 export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   codeId,
-  extraClass = [],
   backPreviousStep,
   submitCallback
 }) => {
@@ -98,10 +94,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.Input
           type="password"

@@ -91,21 +91,24 @@ const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   )
 }
 
-interface ModalProps extends ModalInstanceProps {
-  tag?: {
-    id: string
-    content: string
-    description?: string
-  }
+interface TagDialogContentProps {
+  id?: string
+  content?: string
+  description?: string
+  close: () => void
 }
 
 interface FormValues {
-  content: string
-  description: string
+  newContent: string
+  newDescription: string
 }
 
-const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
-  const id = tag ? tag.id : undefined
+const TagDialogContent: React.FC<TagDialogContentProps> = ({
+  id,
+  content,
+  description,
+  close
+}) => {
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
   const {
@@ -119,31 +122,34 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
-      content: tag ? tag.content : '',
-      description: tag ? tag.description || '' : ''
+      newContent: content || '',
+      newDescription: description || ''
     },
-    validate: ({ content, description }) => {
-      return {
-        ...(!content
-          ? {
-              content: translate({
-                zh_hant: '請輸入標籤名稱',
-                zh_hans: '請输入标签名称',
-                lang
-              })
-            }
-          : {})
+    validate: ({ newContent }) => {
+      console.log(newContent)
+      if (!newContent) {
+        return {
+          newContent: translate({
+            zh_hant: '請輸入標籤名稱',
+            zh_hans: '請输入标签名称',
+            lang
+          })
+        }
       }
+
+      return {}
     },
     onSubmit: async (
-      { content, description },
+      { newContent, newDescription },
       { setFieldError, setSubmitting }
     ) => {
       try {
         const result = await update({
-          variables: { id, content, description }
+          variables: { id, content: newContent, description: newDescription }
         })
+
         setSubmitting(false)
+
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -162,7 +168,9 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
             }
           })
         )
+
         const returnedTagId = result?.data?.putTag?.id
+
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
@@ -187,8 +195,10 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
+  console.log({ errors, values })
+
   return (
-    <form id="tag-modal" className="form" onSubmit={handleSubmit}>
+    <form id="tag-dialog" className="form" onSubmit={handleSubmit}>
       <Dialog.Content>
         <p className="field">
           <Translate
@@ -198,7 +208,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
         </p>
         <Form.DropdownInput
           type="text"
-          field="content"
+          field="newContent"
           placeholder={translate({
             zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
             zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
@@ -212,7 +222,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
             handleBlur(e)
           }}
           handleChange={handleChange}
-          dropdownAppendTo="tag-modal"
+          dropdownAppendTo="tag-dialog"
           dropdownAutoSizing={true}
           DropdownContent={DropdownContent}
           query={SEARCH_TAGS}
@@ -224,7 +234,7 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
           />
         </p>
         <Form.Textarea
-          field="description"
+          field="newDescription"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
             zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
@@ -264,4 +274,4 @@ const TagModal: React.FC<ModalProps> = ({ close, tag }) => {
   )
 }
 
-export default TagModal
+export default TagDialogContent

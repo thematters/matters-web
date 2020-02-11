@@ -6,13 +6,13 @@ import ICON_AVATAR_GREEN from '~/static/images/illustration-avatar.svg'
 
 import styles from './styles.css'
 
-const SignUpComplete = ({ purpose }: { purpose?: 'modal' | 'page' }) => (
+const SignUpComplete = ({ purpose }: { purpose?: 'dialog' | 'page' }) => (
   <div className="complete">
     <Dialog.Content>
       <img src={ICON_AVATAR_GREEN} />
 
       <div className="content">
-        <Title is="h3" type="modal-headline">
+        <Title is="h3" type="dialog-headline">
           <Translate
             zh_hant="歡迎加入 Matters！"
             zh_hans="欢迎加入 Matters！"

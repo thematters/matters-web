@@ -63,7 +63,7 @@ const SignUpDialog = ({ children }: SignUpDialogProps) => {
       <Dialog title={data[step].title} isOpen={showDialog} onDismiss={close}>
         {step === 'signUp' && (
           <SignUpInitForm
-            purpose="modal"
+            purpose="dialog"
             submitCallback={() => {
               setStep('profile')
               analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
@@ -74,7 +74,6 @@ const SignUpDialog = ({ children }: SignUpDialogProps) => {
         )}
         {step === 'profile' && (
           <SignUpProfileForm
-            purpose="modal"
             submitCallback={() => {
               setStep('setupLikeCoin')
               analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {

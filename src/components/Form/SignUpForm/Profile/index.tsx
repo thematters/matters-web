@@ -29,7 +29,6 @@ import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfile
  * ```jsx
  *   <SignUpProfileForm
  *     extraClass={[]}
- *     purpose="modal"
  *     submitCallback={()=> {}}
  *   />
  * ```
@@ -38,7 +37,6 @@ import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfile
 
 interface FormProps {
   extraClass?: string[]
-  purpose: 'modal' | 'page'
   submitCallback?: () => void
 }
 

@@ -2,7 +2,7 @@ export default (_: any) => {
   return {
     id: 'local',
     feedSortType: 'hottest',
-    readCivicLikerModal: false,
+    readCivicLikerDialog: false,
     wall: true,
     push: {
       enabled: false,

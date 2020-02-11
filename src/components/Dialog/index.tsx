@@ -6,6 +6,7 @@ import Button from './Button'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
+import Message from './Message'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
 
@@ -24,6 +25,7 @@ export const Dialog: React.FC<DialogProps> & {
   Content: typeof Content
   Footer: typeof Footer
   Button: typeof Button
+  Message: typeof Message
 } = ({
   title,
   size = 'lg',
@@ -76,3 +78,4 @@ Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
 Dialog.Button = Button
+Dialog.Message = Message

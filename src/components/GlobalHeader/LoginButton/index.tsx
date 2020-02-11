@@ -1,17 +1,11 @@
-import { useState } from 'react'
-
-import { Button, Dialog, TextIcon, Translate } from '~/components'
-import LoginForm from '~/components/Form/LoginForm'
+import { Button, TextIcon, Translate } from '~/components'
+import LoginDialog from '~/components/LoginDialog'
 
 import { TEXT } from '~/common/enums'
 
-const LoginButton = () => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-
-  return (
-    <>
+const LoginButton = () => (
+  <LoginDialog>
+    {({ open }) => (
       <Button
         size={[null, '2.25rem']}
         spacing={[0, 'loose']}
@@ -25,22 +19,8 @@ const LoginButton = () => {
           />
         </TextIcon>
       </Button>
-
-      <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.login}
-            zh_hans={TEXT.zh_hans.login}
-          />
-        }
-        size="sm"
-        isOpen={showDialog}
-        onDismiss={close}
-      >
-        <LoginForm purpose="dialog" submitCallback={close} />
-      </Dialog>
-    </>
-  )
-}
+    )}
+  </LoginDialog>
+)
 
 export default LoginButton

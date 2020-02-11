@@ -1,12 +1,10 @@
 import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
 
-import { Error } from '~/components/Error'
+import { Error, Translate } from '~/components'
+import LoginDialog from '~/components/LoginDialog'
 
 import { ADD_TOAST, ERROR_CODES, TEXT } from '~/common/enums'
-
-import { Translate } from '../Language'
-import { ModalSwitch } from '../ModalManager'
 
 export const getErrorCodes = (error: ApolloError) => {
   const errorCodes: string[] = []
@@ -86,16 +84,16 @@ export const mutationOnError = (error: ApolloError) => {
           content: errorMessage,
           buttonPlacement: 'center',
           customButton: (
-            <ModalSwitch modalId="loginModal">
-              {(open: any) => (
-                <button type="button" onClick={() => open()}>
+            <LoginDialog>
+              {({ open }) => (
+                <button type="button" onClick={open}>
                   <Translate
                     zh_hant={TEXT.zh_hant.login}
                     zh_hans={TEXT.zh_hans.login}
                   />
                 </button>
               )}
-            </ModalSwitch>
+            </LoginDialog>
           )
         }
       })

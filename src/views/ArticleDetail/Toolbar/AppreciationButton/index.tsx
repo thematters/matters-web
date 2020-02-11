@@ -94,8 +94,8 @@ const AppreciationButton = ({
   // UI
   const isReachLimit = left <= 0
   const isMe = article.author.id === viewer.id
-  const readCivicLikerModal =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerModal
+  const readCivicLikerDialog =
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
     !viewer.isAuthed
@@ -144,14 +144,14 @@ const AppreciationButton = ({
   /**
    * Civic Liker Button
    */
-  if (!canAppreciate && !readCivicLikerModal && isReachLimit) {
+  if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
     return (
       <section className={containerClasses}>
         <CivicLikerButton
           onClick={() => {
             client.writeData({
               id: 'ClientPreference:local',
-              data: { readCivicLikerModal: true }
+              data: { readCivicLikerDialog: true }
             })
           }}
           count={

@@ -1,36 +1,27 @@
 import { useContext, useState } from 'react'
 
+import { Dialog, LanguageContext, Translate } from '~/components'
 import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
 } from '~/components/Form/PasswordChangeForm'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import ModalComplete from '~/components/Modal/Complete'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-/**
- * This component is for password reset modal.
- *
- * Usage:
- *
- * ```jsx
- *   <PasswordModal purpose={'forget'} close={close} />
- * ```
- *
- */
-
-const PasswordModal: React.FC<ModalInstanceProps & {
+interface PasswordDialogProps {
   purpose: 'forget' | 'change'
-}> = ({ purpose }) => {
+  children: ({ open }: { open: () => void }) => React.ReactNode
+}
+
+const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
-
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => setShowDialog(true)
+  const close = () => setShowDialog(false)
   const [step, setStep] = useState('request')
-
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       title:
@@ -102,53 +93,55 @@ const PasswordModal: React.FC<ModalInstanceProps & {
 
   return (
     <>
-      <Modal.Header title={data[step].title} />
+      {children({ open })}
 
-      {step === 'request' && (
-        <PasswordChangeRequestForm
-          defaultEmail={data.request.email}
-          purpose={purpose}
-          container="modal"
-          submitCallback={requestCodeCallback}
-        />
-      )}
-      {step === 'reset' && (
-        <PasswordChangeConfirmForm
-          codeId={data.request.codeId}
-          container="modal"
-          backPreviousStep={backPreviousStep}
-          submitCallback={() => setStep('complete')}
-        />
-      )}
-      {step === 'complete' && (
-        <ModalComplete
-          message={
-            purpose === 'forget' ? (
-              <Translate
-                zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-              />
-            ) : (
-              <Translate
-                zh_hant={TEXT.zh_hant.changePasswordSuccess}
-                zh_hans={TEXT.zh_hans.changePasswordSuccess}
-              />
-            )
-          }
-          hint={
-            purpose === 'forget' ? (
-              <Translate
-                zh_hant={TEXT.zh_hant.useNewPassword}
-                zh_hans={TEXT.zh_hans.useNewPassword}
-              />
-            ) : (
-              ''
-            )
-          }
-        />
-      )}
+      <Dialog title={data[step].title} isOpen={showDialog} onDismiss={close}>
+        {step === 'request' && (
+          <PasswordChangeRequestForm
+            defaultEmail={data.request.email}
+            purpose={purpose}
+            submitCallback={requestCodeCallback}
+          />
+        )}
+
+        {step === 'reset' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            backPreviousStep={backPreviousStep}
+            submitCallback={() => setStep('complete')}
+          />
+        )}
+
+        {step === 'complete' && (
+          <Dialog.Message
+            message={
+              purpose === 'forget' ? (
+                <Translate
+                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                />
+              ) : (
+                <Translate
+                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
+                />
+              )
+            }
+            hint={
+              purpose === 'forget' ? (
+                <Translate
+                  zh_hant={TEXT.zh_hant.useNewPassword}
+                  zh_hans={TEXT.zh_hans.useNewPassword}
+                />
+              ) : (
+                ''
+              )
+            }
+          />
+        )}
+      </Dialog>
     </>
   )
 }
 
-export default PasswordModal
+export default PasswordDialog

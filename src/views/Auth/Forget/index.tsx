@@ -79,7 +79,6 @@ const Forget = () => {
             <PasswordChangeRequestForm
               defaultEmail={data.request.email}
               purpose="forget"
-              container="page"
               submitCallback={requestCodeCallback}
             />
           )}
@@ -87,7 +86,6 @@ const Forget = () => {
           {step === 'reset' && (
             <PasswordChangeConfirmForm
               codeId={data.request.codeId}
-              container="page"
               backPreviousStep={backPreviousStep}
               submitCallback={() => setStep('complete')}
             />

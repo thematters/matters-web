@@ -10,6 +10,7 @@ import { Form } from '~/components/Form'
 import SendCodeButton from '~/components/Form/Button/SendCode'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import LoginDialog from '~/components/LoginDialog'
 
 import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {
@@ -37,7 +38,6 @@ import { UserRegister } from './__generated__/UserRegister'
  *   <SignUpInitForm
  *     defaultEmail={''}
  *     extraClass={[]}
- *     purpose="modal"
  *     submitCallback={()=> {}}
  *   />
  * ```
@@ -46,7 +46,7 @@ import { UserRegister } from './__generated__/UserRegister'
 interface FormProps {
   defaultEmail?: string
   extraClass?: string[]
-  purpose: 'modal' | 'page'
+  purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
 }
 
@@ -66,13 +66,17 @@ const USER_REGISTER = gql`
   }
 `
 
-const LoginModalSwitch = () => (
-  <Dialog.Button onClick={open} bgColor="grey-lighter" textColor="black">
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Button>
+const LoginDialogButton = () => (
+  <LoginDialog>
+    {({ open }) => (
+      <Dialog.Button onClick={open} bgColor="grey-lighter" textColor="black">
+        <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+      </Dialog.Button>
+    )}
+  </LoginDialog>
 )
 
-const LoginRedirection = () => (
+const LoginRedirectionButton = () => (
   <Dialog.Button
     {...appendTarget(PATHS.AUTH_LOGIN)}
     bgColor="grey-lighter"
@@ -92,7 +96,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     purpose,
     submitCallback
   } = formProps
-  const isInModal = purpose === 'modal'
+  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
   const {
@@ -275,8 +279,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        {isInModal && <LoginModalSwitch />}
-        {isInPage && <LoginRedirection />}
+        {isInDialog && <LoginDialogButton />}
+        {isInPage && <LoginRedirectionButton />}
 
         <Dialog.Button
           type="submit"

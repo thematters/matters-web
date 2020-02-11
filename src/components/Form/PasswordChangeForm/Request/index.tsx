@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
@@ -18,8 +17,6 @@ import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated_
 
 interface FormProps {
   defaultEmail: string
-  extraClass?: string[]
-  container: 'modal' | 'page'
   purpose: 'forget' | 'change'
   submitCallback?: (params: any) => void
 }
@@ -32,12 +29,7 @@ interface FormValues {
 export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
-  const {
-    defaultEmail = '',
-    extraClass = [],
-    purpose,
-    submitCallback
-  } = formProps
+  const { defaultEmail = '', purpose, submitCallback } = formProps
 
   const {
     values,
@@ -89,10 +81,8 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.Input
           type="email"

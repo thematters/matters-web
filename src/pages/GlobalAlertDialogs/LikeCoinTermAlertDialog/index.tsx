@@ -20,10 +20,10 @@ const LikeCoinTermAlertDialog = () => {
   ]
   const isPathAllowed =
     router.pathname && allowPaths.indexOf(router.pathname) >= 0
-  const showLikeCoinModal =
+  const showDialog =
     viewer.isAuthed && isPathAllowed && viewer.shouldSetupLikerID
 
-  if (!showLikeCoinModal) {
+  if (!showDialog) {
     return null
   }
 

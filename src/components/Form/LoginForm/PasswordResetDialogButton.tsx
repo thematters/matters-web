@@ -1,11 +1,11 @@
 import { Button, TextIcon, Translate } from '~/components'
-import SignUpDialog from '~/components/SignUpDialog'
+import PasswordDialog from '~/components/PasswordDialog'
 
 import { TEXT } from '~/common/enums'
 
 const PasswordResetDialogButton = () => {
   return (
-    <SignUpDialog>
+    <PasswordDialog purpose="forget">
       {({ open }) => (
         <Button spacing={['xtight', 0]} onClick={open}>
           <TextIcon color="green">
@@ -17,7 +17,7 @@ const PasswordResetDialogButton = () => {
           </TextIcon>
         </Button>
       )}
-    </SignUpDialog>
+    </PasswordDialog>
   )
 }
 

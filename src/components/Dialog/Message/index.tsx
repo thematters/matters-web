@@ -2,7 +2,7 @@ import { Dialog, Title } from '~/components'
 
 import styles from './styles.css'
 
-const ModalComplete = ({
+const DialogMessage = ({
   message,
   hint
 }: {
@@ -10,16 +10,15 @@ const ModalComplete = ({
   hint?: React.ReactNode | string
 }) => (
   <Dialog.Content>
-    <div className="complete">
-      <Title is="h3" type="modal-headline">
-        {message}
-      </Title>
+    <Title is="h3" type="dialog-headline">
+      {message}
+    </Title>
 
-      <p className="hint">{hint}</p>
-
+    <p className="hint">
+      {hint}
       <style jsx>{styles}</style>
-    </div>
+    </p>
   </Dialog.Content>
 )
 
-export default ModalComplete
+export default DialogMessage

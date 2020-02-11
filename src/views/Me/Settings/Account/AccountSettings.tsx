@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 
 import { Button, PageHeader, TextIcon, Translate } from '~/components'
-import EmailModal from '~/components/Modal/EmailModal'
-import PasswordModal from '~/components/Modal/PasswordModal'
-import UserNameModal from '~/components/Modal/UserNameModal'
-import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
+import ChangeEmailDialog from '~/components/ChangeEmailDialog'
+import PasswordDialog from '~/components/PasswordDialog'
+import UserNameDialog from '~/components/UserNameDialog'
 import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
@@ -12,37 +11,42 @@ import { TEXT } from '~/common/enums'
 import styles from './styles.css'
 
 const EditButton = ({
-  modalId,
+  open,
   disabled
 }: {
-  modalId: string
+  open: () => void
   disabled?: boolean
 }) => (
-  <ModalSwitch modalId={modalId}>
-    {(open: any) => (
-      <Button
-        size={['4rem', '1.5rem']}
-        textColor="green"
-        textHoverColor="white"
-        bgHoverColor="green"
-        borderColor="green"
-        onClick={open}
-        disabled={disabled}
-      >
-        <TextIcon weight="md" size="xs">
-          <Translate
-            zh_hant={TEXT.zh_hant.change}
-            zh_hans={TEXT.zh_hans.change}
-          />
-        </TextIcon>
-      </Button>
-    )}
-  </ModalSwitch>
+  <Button
+    size={['4rem', '1.5rem']}
+    textColor="green"
+    textHoverColor="white"
+    bgHoverColor="green"
+    borderColor="green"
+    onClick={open}
+    disabled={disabled}
+  >
+    <TextIcon weight="md" size="xs">
+      <Translate zh_hant={TEXT.zh_hant.change} zh_hans={TEXT.zh_hans.change} />
+    </TextIcon>
+  </Button>
+)
+
+const ChangeEmailButton = () => (
+  <ChangeEmailDialog>
+    {({ open }) => <EditButton open={open} />}
+  </ChangeEmailDialog>
+)
+
+const ChangeUserNameButton = ({ disabled }: { disabled: boolean }) => (
+  <UserNameDialog>
+    {({ open }) => <EditButton open={open} disabled={disabled} />}
+  </UserNameDialog>
 )
 
 const ChangePasswrodButton = () => (
-  <ModalSwitch modalId="passwordChangeModal">
-    {(open: any) => (
+  <PasswordDialog purpose="change">
+    {({ open }) => (
       <button type="button" className="u-link-green" onClick={open}>
         <Translate
           zh_hant={TEXT.zh_hant.changePassword}
@@ -50,7 +54,7 @@ const ChangePasswrodButton = () => (
         />
       </button>
     )}
-  </ModalSwitch>
+  </PasswordDialog>
 )
 
 const AccountSettings = () => {
@@ -93,7 +97,7 @@ const AccountSettings = () => {
           </span>
           <span>{viewer.info.email}</span>
         </div>
-        <EditButton modalId="emailModal" />
+        <ChangeEmailButton />
       </section>
 
       {/* username */}
@@ -102,24 +106,8 @@ const AccountSettings = () => {
           <span className="title">Matters ID</span>
           <span>{viewer.userName}</span>
         </div>
-        <EditButton
-          modalId="userNameModal"
-          disabled={!viewer.info.userNameEditable}
-        />
+        <ChangeUserNameButton disabled={!viewer.info.userNameEditable} />
       </section>
-
-      <ModalInstance modalId="passwordChangeModal">
-        {(props: ModalInstanceProps) => (
-          <PasswordModal purpose="change" {...props} />
-        )}
-      </ModalInstance>
-      <ModalInstance modalId="userNameModal" title="changeUserName">
-        {(props: ModalInstanceProps) => <UserNameModal {...props} />}
-      </ModalInstance>
-      <ModalInstance modalId="emailModal" title="changeEmail">
-        {(props: ModalInstanceProps) => <EmailModal {...props} />}
-      </ModalInstance>
-
       <style jsx>{styles}</style>
     </section>
   )

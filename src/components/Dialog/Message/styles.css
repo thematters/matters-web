@@ -1,0 +1,7 @@
+.hint {
+  margin: var(--spacing-base) 0rem;
+
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+  text-align: center;
+}

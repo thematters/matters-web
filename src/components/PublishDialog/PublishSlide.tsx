@@ -68,7 +68,7 @@ const PublishSlide = () => {
         </div>
 
         <div className="title-container">
-          <Title is="h3" type="modal-headline" style={{ textAlign: 'left' }}>
+          <Title is="h3" type="dialog-headline" style={{ textAlign: 'left' }}>
             {title}
           </Title>
           <span className="subTitle">{subTitle}</span>

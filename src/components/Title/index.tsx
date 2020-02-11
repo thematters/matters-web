@@ -6,8 +6,8 @@ import styles from './styles.css'
 type TitleType =
   | 'article'
   | 'feed'
-  | 'modal'
-  | 'modal-headline'
+  | 'dialog'
+  | 'dialog-headline'
   | 'sidebar'
   | 'nav'
 

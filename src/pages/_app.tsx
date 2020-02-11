@@ -13,7 +13,6 @@ import {
   GlobalHeader,
   GlobalStyles,
   LanguageProvider,
-  ModalProvider,
   Toast
 } from '~/components'
 import { Error } from '~/components/Error'
@@ -84,21 +83,19 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        <ModalProvider>
-          <HeaderContextProvider>
-            <Head />
-            <GlobalHeader user={viewer} />
+        <HeaderContextProvider>
+          <Head />
+          <GlobalHeader user={viewer} />
 
-            {children}
+          {children}
 
-            <GlobalAlertDialogs />
-            <Toast.Container />
-            <ProgressBar />
+          <GlobalAlertDialogs />
+          <Toast.Container />
+          <ProgressBar />
 
-            <AnalyticsListener user={viewer || {}} />
-            <PushInitializer client={client} />
-          </HeaderContextProvider>
-        </ModalProvider>
+          <AnalyticsListener user={viewer || {}} />
+          <PushInitializer client={client} />
+        </HeaderContextProvider>
       </LanguageProvider>
     </ViewerProvider>
   )

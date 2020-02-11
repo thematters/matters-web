@@ -57,7 +57,6 @@ const SignUp = () => {
           )}
           {step === 'profile' && (
             <SignUpProfileForm
-              purpose="page"
               submitCallback={() => {
                 setStep('setupLikeCoin')
               }}

@@ -16,9 +16,6 @@ import {
 } from '~/components'
 import EmptyTag from '~/components/Empty/EmptyTag'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import TagArticleModal from '~/components/Modal/TagArticleModal'
-import TagModal from '~/components/Modal/TagModal'
-import { ModalInstance } from '~/components/ModalManager'
 import Throw404 from '~/components/Throw404'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -45,28 +42,13 @@ const TAG_DETAIL = gql`
   }
 `
 
-const Buttons = () => {
-  const viewer = useContext(ViewerContext)
-
-  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
-    return null
-  }
-
-  return (
-    <section className="buttons">
-      <TagDetailButtons.AddArticleButton />
-      <TagDetailButtons.EditTagButton />
-
-      <style jsx>{styles}</style>
-    </section>
-  )
-}
-
 type TagFeed = 'latest' | 'selected'
 
 const TagDetailContainer = ({ data }: { data: TagDetail }) => {
+  const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
+  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return <EmptyTag />
@@ -85,7 +67,16 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
         description={data.node.description || ''}
         hasNoBorder
       >
-        <Buttons />
+        {canEdit && (
+          <section className="buttons">
+            <TagDetailButtons.AddArticleButton id={data.node.id} />
+            <TagDetailButtons.EditTagButton
+              id={data.node.id}
+              content={data.node.content}
+              description={data.node.description || undefined}
+            />
+          </section>
+        )}
       </PageHeader>
 
       <section className="tabs">
@@ -134,9 +125,11 @@ const TagDetailDataContainer = () => {
 
   if (error) {
     const errorCodes = getErrorCodes(error)
+
     if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
       return <Throw404 />
     }
+
     return <QueryError error={error} />
   }
 
@@ -144,40 +137,17 @@ const TagDetailDataContainer = () => {
     return <EmptyTag />
   }
 
-  const tag = data.node
-    ? {
-        id: data.node.id,
-        content: data.node.content,
-        description: data.node.description || undefined
-      }
-    : undefined
-
-  return (
-    <>
-      <TagDetailContainer data={data} />
-      <ModalInstance modalId="addArticleTagModal" title="addArticleTag">
-        {(props: ModalInstanceProps) => (
-          <TagArticleModal tagId={tag ? tag.id : undefined} {...props} />
-        )}
-      </ModalInstance>
-
-      <ModalInstance modalId="editTagModal" title="editTag">
-        {(props: ModalInstanceProps) => <TagModal tag={tag} {...props} />}
-      </ModalInstance>
-    </>
-  )
+  return <TagDetailContainer data={data} />
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <TagDetailDataContainer />
-      </article>
+export default () => (
+  <main className="l-row">
+    <article className="l-col-4 l-col-md-5 l-col-lg-8">
+      <TagDetailDataContainer />
+    </article>
 
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-    </main>
-  )
-}
+    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
+      <Footer />
+    </aside>
+  </main>
+)
