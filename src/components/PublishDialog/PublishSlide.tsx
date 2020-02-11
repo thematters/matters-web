@@ -73,6 +73,7 @@ const PublishSlide = () => {
           </Title>
           <span className="subTitle">{subTitle}</span>
         </div>
+
         <Descriptions data={descriptions} />
       </div>
 

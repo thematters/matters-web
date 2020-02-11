@@ -7,19 +7,26 @@ import { TEXT } from '~/common/enums'
 
 import LikeCoinTerm from './LikeCoinTerm'
 
-interface SetupLikeCoinDialogProps {
+interface LikeCoinDialogProps {
   defaultStep?: Step
+  defaultShowDialog?: boolean
+  children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 type Step = 'term' | 'setup'
 
-const SetupLikeCoinDialog: React.FC<SetupLikeCoinDialogProps> = ({
-  defaultStep = 'setup'
+const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
+  defaultStep = 'term',
+  defaultShowDialog = false,
+
+  children
 }) => {
-  const [showDialog, setShowDialog] = useState(true)
+  const [showDialog, setShowDialog] = useState(defaultShowDialog)
+  const open = () => setShowDialog(true)
+  const close = () => setShowDialog(false)
+
   const [step, setStep] = useState<Step>(defaultStep)
   const nextStep = () => setStep('setup')
-  const close = () => setShowDialog(false)
 
   const title =
     step === 'term' ? (
@@ -35,13 +42,15 @@ const SetupLikeCoinDialog: React.FC<SetupLikeCoinDialogProps> = ({
     )
 
   return (
-    <Dialog title={title} isOpen={showDialog} onDismiss={close}>
-      <>
+    <>
+      {children && children({ open })}
+
+      <Dialog title={title} isOpen={showDialog} onDismiss={close}>
         {step === 'term' && <LikeCoinTerm nextStep={nextStep} />}
         {step === 'setup' && <SetupLikeCoin submitCallback={close} />}
-      </>
-    </Dialog>
+      </Dialog>
+    </>
   )
 }
 
-export default SetupLikeCoinDialog
+export default LikeCoinDialog

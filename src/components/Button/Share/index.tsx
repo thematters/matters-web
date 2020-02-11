@@ -1,11 +1,8 @@
-import { useState } from 'react'
-
 import { Button, Icon, IconColor, IconSize } from '~/components'
+import ShareDialog from '~/components/ShareDialog'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
-
-import ShareDialog from './ShareDialog'
 
 interface ShareButtonProps {
   title?: string
@@ -22,10 +19,6 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   size,
   color = 'black'
 }) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-
   const shareLink = process.browser
     ? path
       ? `${window.location.origin}/${path}`
@@ -33,49 +26,40 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     : ''
   const shareTitle = process.browser ? title || window.document.title : ''
 
-  const openShareModal = async () => {
-    open()
-
-    const navigator = window.navigator as any
-    if (navigator.share && isMobile()) {
-      try {
-        await navigator.share({
-          title: shareTitle,
-          url: shareLink
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    } else {
-      open()
-    }
-  }
-
   return (
-    <>
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgHoverColor="grey-lighter"
-        aria-label={`分享《${title || ''}》`}
-        onClick={() => {
-          openShareModal()
+    <ShareDialog title={shareTitle} link={shareLink}>
+      {({ open }) => (
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          aria-label={`分享《${title || ''}》`}
+          onClick={async () => {
+            open()
 
-          analytics.trackEvent(ANALYTICS_EVENTS, {
-            type: SHARE_TYPE.ROOT,
-            url: shareLink
-          })
-        }}
-      >
-        <Icon.Share size={size} color={color} />
-      </Button>
+            const navigator = window.navigator as any
+            if (navigator.share && isMobile()) {
+              try {
+                await navigator.share({
+                  title: shareTitle,
+                  url: shareLink
+                })
+              } catch (e) {
+                console.error(e)
+              }
+            } else {
+              open()
+            }
 
-      <ShareDialog
-        title={shareTitle}
-        link={shareLink}
-        isOpen={showDialog}
-        onDismiss={close}
-      />
-    </>
+            analytics.trackEvent(ANALYTICS_EVENTS, {
+              type: SHARE_TYPE.ROOT,
+              url: shareLink
+            })
+          }}
+        >
+          <Icon.Share size={size} color={color} />
+        </Button>
+      )}
+    </ShareDialog>
   )
 }
 

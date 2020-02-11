@@ -6,7 +6,7 @@ import { useContext, useState } from 'react'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { ModalSwitch } from '~/components/ModalManager'
+import LikeCoinDialog from '~/components/LikeCoinDialog'
 import { Spinner } from '~/components/Spinner'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -215,8 +215,8 @@ const CommentFormWrap = (props: CommentFormProps) => {
 
   if (viewer.shouldSetupLikerID) {
     return (
-      <ModalSwitch modalId="likeCoinTermModal">
-        {(open: any) => (
+      <LikeCoinDialog>
+        {({ open }) => (
           <button className="blocked" type="button" onClick={open}>
             <Translate
               zh_hant="設置 Liker ID 後即可參與精彩討論"
@@ -225,7 +225,7 @@ const CommentFormWrap = (props: CommentFormProps) => {
             <style jsx>{styles}</style>
           </button>
         )}
-      </ModalSwitch>
+      </LikeCoinDialog>
     )
   }
 

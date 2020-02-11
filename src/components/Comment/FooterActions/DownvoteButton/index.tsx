@@ -30,7 +30,7 @@ const DownvoteButton = ({
   disabled
 }: {
   comment: DownvoteComment
-  onClick?: () => any
+  onClick?: () => void
   disabled?: boolean
 }) => {
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {

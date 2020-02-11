@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 
-import { Dialog, DialogOverlayProps, LanguageContext } from '~/components'
+import { Dialog, LanguageContext } from '~/components'
 import SignUpComplete from '~/components/Form/SignUpComplete'
 import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
@@ -10,7 +10,18 @@ import { analytics, translate } from '~/common/utils'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
-const SignUpDialog: React.FC<DialogOverlayProps> = ({ isOpen, onDismiss }) => {
+interface SignUpDialogProps {
+  children: ({ open }: { open: () => void }) => React.ReactNode
+}
+
+const SignUpDialog = ({ children }: SignUpDialogProps) => {
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => setShowDialog(true)
+  const close = () => {
+    setShowDialog(false)
+    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
+  }
+
   const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState<Step>('signUp')
 
@@ -45,41 +56,46 @@ const SignUpDialog: React.FC<DialogOverlayProps> = ({ isOpen, onDismiss }) => {
     }
   }
 
-  const close = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
-    onDismiss()
-  }
-
   return (
-    <Dialog title={data[step].title} isOpen={isOpen} onDismiss={close}>
-      {step === 'signUp' && (
-        <SignUpInitForm
-          purpose="modal"
-          submitCallback={() => {
-            setStep('profile')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
-          }}
-        />
-      )}
-      {step === 'profile' && (
-        <SignUpProfileForm
-          purpose="modal"
-          submitCallback={() => {
-            setStep('setupLikeCoin')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
-          }}
-        />
-      )}
-      {step === 'setupLikeCoin' && (
-        <SetupLikeCoin
-          submitCallback={() => {
-            setStep('complete')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
-          }}
-        />
-      )}
-      {step === 'complete' && <SignUpComplete />}
-    </Dialog>
+    <>
+      {children({ open })}
+
+      <Dialog title={data[step].title} isOpen={showDialog} onDismiss={close}>
+        {step === 'signUp' && (
+          <SignUpInitForm
+            purpose="modal"
+            submitCallback={() => {
+              setStep('profile')
+              analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
+                step
+              })
+            }}
+          />
+        )}
+        {step === 'profile' && (
+          <SignUpProfileForm
+            purpose="modal"
+            submitCallback={() => {
+              setStep('setupLikeCoin')
+              analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
+                step
+              })
+            }}
+          />
+        )}
+        {step === 'setupLikeCoin' && (
+          <SetupLikeCoin
+            submitCallback={() => {
+              setStep('complete')
+              analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
+                step
+              })
+            }}
+          />
+        )}
+        {step === 'complete' && <SignUpComplete />}
+      </Dialog>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import SetupLikeCoinDialog from '~/components/SetupLikeCoinDialog'
+import LikeCoinDialog from '~/components/LikeCoinDialog'
 import { ViewerContext } from '~/components/Viewer'
 
 import { PATHS } from '~/common/enums'
@@ -27,7 +27,7 @@ const LikeCoinTermAlertDialog = () => {
     return null
   }
 
-  return <SetupLikeCoinDialog defaultStep="term" />
+  return <LikeCoinDialog defaultShowDialog />
 }
 
 export default LikeCoinTermAlertDialog
