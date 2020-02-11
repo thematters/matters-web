@@ -1,9 +1,9 @@
 import Tippy, { TippyProps } from '@tippy.js/react'
-import { Instance } from 'tippy.js'
+import { Instance, Props } from 'tippy.js'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = Instance
+export type PopperInstance = Instance<Props>
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -17,12 +17,8 @@ export type PopperInstance = Instance
  * <Dropdown>
  *
  * <Tooltip content="你最多可讚賞 5 次">
- *   <button type="button">讚賞</button>
+ *   <AppreciationButton />
  * <Tooltip>
- *
- * <Popover content={<Menu><Menu.Item>發現</Menu.Item></Menu>}>
- *   <button type="button">menu</button>
- * <Popover>
  * ```
  *
  * @see {@url https://github.com/atomiks/tippy.js-react}
@@ -31,7 +27,7 @@ export type PopperInstance = Instance
 export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
 Dropdown.defaultProps = {
   arrow: false,
-  trigger: 'mouseenter focus click',
+  trigger: 'click',
   interactive: true,
   aria: 'describedby',
   distance: 4,
@@ -59,6 +55,7 @@ Tooltip.defaultProps = {
 export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
 Popover.defaultProps = {
   arrow: true,
+  trigger: 'click',
   interactive: true,
   distance: 16,
   placement: 'right',
@@ -66,4 +63,28 @@ Popover.defaultProps = {
   theme: 'popover',
   boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
+}
+
+/**
+ * Focus popper for a11y
+ * @param instance
+ */
+export const focusPopper = (instance: PopperInstance) => {
+  instance.popperChildren.tooltip.focus()
+}
+
+/**
+ * Hide popper when inside button was clicked
+ * @param instance
+ */
+export const hidePopperOnClick = (instance: PopperInstance) => {
+  const popper = instance.popperChildren.tooltip
+
+  popper.addEventListener('click', event => {
+    const target = event.target as HTMLElement
+
+    if (target?.closest && target.closest('[data-clickable], a, button')) {
+      instance.hide()
+    }
+  })
 }

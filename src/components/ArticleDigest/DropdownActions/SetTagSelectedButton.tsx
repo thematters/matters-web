@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Icon, PopperInstance, TextIcon, Translate } from '~/components'
+import { Icon, Menu, PopperInstance, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -32,12 +32,10 @@ const fragments = {
 
 const SetTagSelectedButton = ({
   article,
-  instance,
-  hideDropdown
+  instance
 }: {
   article: SetTagSelectedButtonArticle
   instance?: PopperInstance | null
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
@@ -59,22 +57,19 @@ const SetTagSelectedButton = ({
   }
 
   return (
-    <button
-      type="button"
-      onClick={async event => {
-        event.stopPropagation()
+    <Menu.Item
+      onClick={async () => {
         await update()
         if (instance) {
           instance.props.onHidden = sync
         }
-        hideDropdown()
       }}
     >
-      <TextIcon icon={<Icon.PinMedium />} spacing="tight">
+      <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="添加精選" zh_hans="添加精选" />
       </TextIcon>
       <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

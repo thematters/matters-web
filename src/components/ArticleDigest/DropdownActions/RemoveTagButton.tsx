@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 import { useRouter } from 'next/router'
 
-import { Icon, PopperInstance, TextIcon, Translate } from '~/components'
+import { Icon, Menu, PopperInstance, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
@@ -31,20 +31,12 @@ const fragments = {
   `
 }
 
-const TextIconRemoveTag = () => (
-  <TextIcon icon={<Icon.RemoveMedium />} spacing="tight">
-    <Translate zh_hant="取消標籤" zh_hans="取消标签" />
-  </TextIcon>
-)
-
 const RemoveTagButton = ({
   article,
-  instance,
-  hideDropdown
+  instance
 }: {
   article: RemoveTagButtonArticle
   instance?: PopperInstance | null
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const {
@@ -68,20 +60,20 @@ const RemoveTagButton = ({
   }
 
   return (
-    <button
-      type="button"
-      onClick={async event => {
-        event.stopPropagation()
+    <Menu.Item
+      onClick={async () => {
         await deleteArticlesTags()
         if (instance) {
           instance.props.onHidden = sync
         }
-        hideDropdown()
       }}
     >
-      <TextIconRemoveTag />
+      <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
+        <Translate zh_hant="取消標籤" zh_hans="取消标签" />
+      </TextIcon>
+
       <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

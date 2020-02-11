@@ -4,6 +4,8 @@ import { useContext, useState } from 'react'
 import {
   Button,
   Dropdown,
+  focusPopper,
+  hidePopperOnClick,
   Icon,
   IconColor,
   IconSize,
@@ -38,7 +40,6 @@ interface DropdownContentProps {
   article: DropdownActionsArticle
 
   instance?: PopperInstance | null
-  hideDropdown: () => void
 
   hasExtendButton?: boolean
   hasStickyButton?: boolean
@@ -66,7 +67,6 @@ const DropdownContent = ({
   article,
 
   instance,
-  hideDropdown,
 
   hasExtendButton,
   hasStickyButton,
@@ -76,50 +76,21 @@ const DropdownContent = ({
   hasSetTagUnselectedButton
 }: DropdownContentProps) => {
   return (
-    <Menu>
+    <Menu width="sm">
       {/* public */}
-      {hasExtendButton && (
-        <Menu.Item>
-          <ExtendButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
+      {hasExtendButton && <ExtendButton article={article} />}
 
       {/* private */}
-      {hasStickyButton && (
-        <Menu.Item>
-          <StickyButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
-      {hasArchiveButton && (
-        <Menu.Item>
-          <ArchiveButton article={article} hideDropdown={hideDropdown} />
-        </Menu.Item>
-      )}
+      {hasStickyButton && <StickyButton article={article} />}
+      {hasArchiveButton && <ArchiveButton article={article} />}
       {hasSetTagSelectedButton && (
-        <Menu.Item>
-          <SetTagSelectedButton
-            article={article}
-            hideDropdown={hideDropdown}
-            instance={instance}
-          />
-        </Menu.Item>
+        <SetTagSelectedButton article={article} instance={instance} />
       )}
       {hasSetTagUnselectedButton && (
-        <Menu.Item>
-          <SetTagUnselectedButton
-            article={article}
-            hideDropdown={hideDropdown}
-          />
-        </Menu.Item>
+        <SetTagUnselectedButton article={article} />
       )}
       {hasRemoveTagButton && (
-        <Menu.Item>
-          <RemoveTagButton
-            article={article}
-            hideDropdown={hideDropdown}
-            instance={instance}
-          />
-        </Menu.Item>
+        <RemoveTagButton article={article} instance={instance} />
       )}
     </Menu>
   )
@@ -135,12 +106,6 @@ const DropdownActions = ({
   inTagDetailSelected
 }: DropdownActionsProps) => {
   const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
 
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
@@ -174,7 +139,6 @@ const DropdownActions = ({
           <DropdownContent
             article={article}
             instance={instance}
-            hideDropdown={hideDropdown}
             hasExtendButton={hasExtendButton}
             hasStickyButton={hasStickyButton}
             hasArchiveButton={hasArchiveButton}
@@ -183,9 +147,12 @@ const DropdownActions = ({
             hasSetTagUnselectedButton={inTagDetailSelected}
           />
         }
-        trigger="click"
-        onCreate={setInstance}
         placement="bottom-end"
+        onCreate={setInstance}
+        onShown={i => {
+          focusPopper(i)
+          hidePopperOnClick(i)
+        }}
       >
         <Button
           spacing={['xtight', 'xtight']}

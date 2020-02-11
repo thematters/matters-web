@@ -1,7 +1,6 @@
 import classNames from 'classnames'
-import { useState } from 'react'
 
-import { Button, Dropdown, Icon, PopperInstance } from '~/components'
+import { Button, Dropdown, Icon } from '~/components'
 
 import { Z_INDEX } from '~/common/enums'
 
@@ -9,13 +8,6 @@ import DropdownContent from './DropdownContent'
 import styles from './styles.css'
 
 const MobileNav = ({ unread }: { unread: boolean }) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
   const navButtonClass = classNames({
     'nav-button': true,
     unread
@@ -23,10 +15,9 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
 
   return (
     <Dropdown
-      content={<DropdownContent hideDropdown={hideDropdown} unread={unread} />}
+      content={<DropdownContent unread={unread} />}
       distance={8}
       theme="dropdown shadow-default"
-      onCreate={setInstance}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <Button

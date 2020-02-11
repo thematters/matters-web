@@ -89,6 +89,14 @@
   word-wrap: normal;
 }
 
+@define-mixin line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @define-mixin max-height-scroll {
   max-height: 50vh;
   overflow-y: auto;

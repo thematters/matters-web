@@ -1,7 +1,14 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Button, Dropdown, Icon, Menu, PopperInstance } from '~/components'
+import {
+  Button,
+  Dropdown,
+  focusPopper,
+  hidePopperOnClick,
+  Icon,
+  Menu
+} from '~/components'
 import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 import { ViewerContext } from '~/components/Viewer'
 
@@ -11,7 +18,6 @@ import EditButton from './EditButton'
 import PinButton from './PinButton'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
-// import ReportButton from './ReportButton'
 
 const fragments = {
   comment: gql`
@@ -48,17 +54,6 @@ const DropdownActions = ({
   comment: DropdownActionsComment
   editComment?: () => void
 }) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
-
-  /**
-   * REMOVE this after implement report comment
-   */
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
@@ -87,51 +82,21 @@ const DropdownActions = ({
   return (
     <Dropdown
       content={
-        <Menu>
-          {isShowPinButton && (
-            <Menu.Item>
-              <PinButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
-          )}
+        <Menu width="sm">
+          {isShowPinButton && <PinButton comment={comment} />}
           {isShowEditButton && editComment && (
-            <Menu.Item>
-              <EditButton
-                hideDropdown={hideDropdown}
-                editComment={editComment}
-              />
-            </Menu.Item>
+            <EditButton editComment={editComment} />
           )}
-          {/* {!isCommentAuthor && isActive && (
-            <Menu.Item>
-              <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-            </Menu.Item>
-          )} */}
-          {isShowDeleteButton && (
-            <Menu.Item>
-              <DeleteButton
-                commentId={comment.id}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
-          )}
-          {isShowBlockUserButton && (
-            <Menu.Item>
-              <BlockUserButton
-                user={comment.author}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
-          )}
-          {isShowCollapseButton && (
-            <Menu.Item>
-              <CollapseButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
-          )}
+          {isShowDeleteButton && <DeleteButton commentId={comment.id} />}
+          {isShowBlockUserButton && <BlockUserButton user={comment.author} />}
+          {isShowCollapseButton && <CollapseButton comment={comment} />}
         </Menu>
       }
-      trigger="click"
-      onCreate={setInstance}
       placement="bottom-end"
+      onShown={instance => {
+        focusPopper(instance)
+        hidePopperOnClick(instance)
+      }}
     >
       <Button
         spacing={['xtight', 'xtight']}

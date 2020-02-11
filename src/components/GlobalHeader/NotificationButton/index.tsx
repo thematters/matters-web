@@ -1,11 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Button,
   Dropdown,
+  focusPopper,
+  hidePopperOnClick,
   Icon,
-  PopperInstance,
   useResponsive
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
@@ -43,14 +44,6 @@ const NoticeButton = ({
   markAllNoticesAsRead: any
 }) => {
   const isSmallDown = useResponsive({ type: 'sm-down' })()
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
-
   const { headerState } = useContext(HeaderContext)
   const isDraft = headerState.type === 'draft'
 
@@ -60,19 +53,13 @@ const NoticeButton = ({
 
   return (
     <Dropdown
-      content={
-        <DropdownNotices
-          hideDropdown={hideDropdown}
-          data={data}
-          loading={loading}
-          error={error}
-        />
-      }
+      content={<DropdownNotices data={data} loading={loading} error={error} />}
       distance={12}
-      trigger="click"
-      onCreate={setInstance}
       theme="dropdown shadow-light"
-      onShown={() => {
+      onShown={instance => {
+        focusPopper(instance)
+        hidePopperOnClick(instance)
+
         if (hasUnreadNotices) {
           markAllNoticesAsRead()
           refetch()

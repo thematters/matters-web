@@ -1,9 +1,8 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import Link from 'next/link'
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 
-import { Empty, Icon, Menu, Translate } from '~/components'
+import { Button, Menu, TextIcon, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
@@ -16,7 +15,6 @@ import { SearchAutoComplete } from './__generated__/SearchAutoComplete'
 
 interface Props {
   hideDropdown: () => void
-  isShown: boolean
   searchKey?: string
 }
 
@@ -31,15 +29,7 @@ const SEARCH_AUTOCOMPLETE = gql`
   ${ClearHistoryButton.fragments.user}
 `
 
-const EmptyAutoComplete = () => (
-  <Empty
-    icon={<Icon.Search color="grey" size="xl" />}
-    description={<Translate zh_hant="暫無搜尋歷史" zh_hans="暂无搜索历史" />}
-    size="sm"
-  />
-)
-
-const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
+const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
   const [getAutoComplete, { data, loading }] = useLazyQuery<SearchAutoComplete>(
     SEARCH_AUTOCOMPLETE,
     {
@@ -48,69 +38,27 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
   )
 
   useEffect(() => {
-    if (isShown) {
-      getAutoComplete()
-    }
-  }, [searchKey, isShown])
+    getAutoComplete()
+  }, [searchKey])
 
   const frequentSearch = data?.frequentSearch || []
   const recentSearches = data?.viewer?.activity.recentSearches.edges || []
   const showFrequentSearch = frequentSearch.length > 0
-  const showSearchHistory = !searchKey
+  const showSearchHistory = !searchKey && recentSearches.length > 0
 
   if (loading) {
     return <Spinner />
   }
 
   if (!showFrequentSearch && !showSearchHistory) {
+    hideDropdown()
     return null
   }
 
   return (
-    <Menu width="full">
-      {showFrequentSearch && (
-        <>
-          <Menu.Header
-            title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
-          />
-
-          {frequentSearch.map((key, i) => (
-            <Menu.Item
-              spacing={['xtight', 'tight']}
-              hoverBgColor="green"
-              key={key}
-            >
-              <Link
-                {...toPath({
-                  page: 'search',
-                  q: key
-                })}
-              >
-                <a
-                  onClick={() => {
-                    analytics.trackEvent(
-                      ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH,
-                      {
-                        location: i,
-                        entrance: key
-                      }
-                    )
-                    hideDropdown()
-                  }}
-                  className="u-link-green"
-                >
-                  {key}
-                </a>
-              </Link>
-            </Menu.Item>
-          ))}
-        </>
-      )}
-
+    <Menu width="md">
       {showSearchHistory && (
         <>
-          <Menu.Divider />
-
           <Menu.Header
             title={
               <Translate
@@ -119,42 +67,70 @@ const AutoComplete = ({ hideDropdown, searchKey = '', isShown }: Props) => {
               />
             }
           >
-            {recentSearches.length > 0 && <ClearHistoryButton />}
+            <ClearHistoryButton />
           </Menu.Header>
 
-          {recentSearches.map(({ node }, i) => {
-            const path = toPath({
-              page: 'search',
-              q: node
-            })
-            return (
-              <Menu.Item
-                spacing={['xtight', 'tight']}
-                hoverBgColor="green"
+          <section className="recent-searches">
+            {recentSearches.map(({ node }, i) => (
+              <Button
+                spacing={['xxtight', 'xtight']}
+                bgColor="grey-lighter"
+                {...toPath({
+                  page: 'search',
+                  q: node
+                })}
+                onClick={() => {
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY, {
+                    location: i,
+                    entrance: node
+                  })
+                }}
                 key={node}
               >
-                <Link {...path}>
-                  <a
-                    onClick={() => {
-                      analytics.trackEvent(
-                        ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
-                        {
-                          location: i,
-                          entrance: node
-                        }
-                      )
-                      hideDropdown()
-                    }}
-                    className="history-item"
-                  >
-                    {node}
-                  </a>
-                </Link>
-              </Menu.Item>
-            )
-          })}
+                <TextIcon color="grey-darker">{node}</TextIcon>
+              </Button>
+            ))}
 
-          {recentSearches.length <= 0 && <EmptyAutoComplete />}
+            <style jsx>{styles}</style>
+          </section>
+        </>
+      )}
+
+      {showFrequentSearch && (
+        <>
+          <Menu.Header
+            title={<Translate zh_hant="熱門搜尋" zh_hans="热门搜索" />}
+          />
+
+          <section className="frequent-searches">
+            {frequentSearch.map((key, i) => (
+              <Fragment key={key}>
+                <Menu.Divider />
+                <Menu.Item
+                  {...toPath({
+                    page: 'search',
+                    q: key
+                  })}
+                  onClick={() => {
+                    analytics.trackEvent(
+                      ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH,
+                      {
+                        location: i,
+                        entrance: key
+                      }
+                    )
+                  }}
+                  key={key}
+                >
+                  <TextIcon color="green">
+                    <span className="key">{key}</span>
+                  </TextIcon>
+                </Menu.Item>
+              </Fragment>
+            ))}
+
+            <style jsx>{styles}</style>
+          </section>
         </>
       )}
     </Menu>

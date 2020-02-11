@@ -72,7 +72,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
           <Header />
 
           <section className="radios">
-            <label>
+            <label htmlFor="generate">
               <input
                 id="generate"
                 name="bindType"
@@ -101,7 +101,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind, scrollLock }) => {
               </div>
             </label>
 
-            <label>
+            <label htmlFor="bind">
               <input
                 id="bind"
                 name="bindType"

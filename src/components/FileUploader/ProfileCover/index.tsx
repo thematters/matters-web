@@ -109,7 +109,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
       <div className="uploader">
         <div className="buttons">
           <Button size={[null, '2rem']} borderColor="white" borderWidth="sm">
-            <label>
+            <label htmlFor="upload-input">
               <TextIcon icon={<Icon.Camera color="white" />}>
                 {isMediumUp && (
                   <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
@@ -117,6 +117,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
               </TextIcon>
 
               <input
+                id="upload-input"
                 className="input"
                 type="file"
                 name="file"

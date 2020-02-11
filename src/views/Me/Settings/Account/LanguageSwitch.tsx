@@ -1,14 +1,7 @@
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import {
-  Button,
-  Dropdown,
-  Icon,
-  Menu,
-  PopperInstance,
-  TextIcon
-} from '~/components'
+import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
 import { LanguageConsumer, LanguageContext } from '~/components/Language'
 
 import styles from './styles.css'
@@ -21,20 +14,9 @@ const textMap = {
 
 export const LanguageSwitch = () => {
   const { lang } = useContext(LanguageContext)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
 
   return (
-    <Dropdown
-      content={<DropdownContent hideDropdown={hideDropdown} />}
-      trigger="click"
-      onCreate={setInstance}
-    >
+    <Dropdown content={<DropdownContent />}>
       <Button
         size={[null, '1.5rem']}
         spacing={[0, 'xtight']}
@@ -49,9 +31,7 @@ export const LanguageSwitch = () => {
   )
 }
 
-const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
-  hideDropdown
-}) => (
+const DropdownContent: React.FC = () => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
       const zhHantClasses = classNames({
@@ -64,31 +44,21 @@ const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
       })
 
       return (
-        <Menu>
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHantClasses}
-              onClick={() => {
-                setLang('zh_hant')
-                hideDropdown()
-              }}
-            >
-              {textMap.zh_hant}
-            </button>
+        <Menu width="sm">
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hant')
+            }}
+          >
+            <span className={zhHantClasses}>{textMap.zh_hant}</span>
           </Menu.Item>
 
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHansClasses}
-              onClick={() => {
-                setLang('zh_hans')
-                hideDropdown()
-              }}
-            >
-              {textMap.zh_hans}
-            </button>
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hans')
+            }}
+          >
+            <span className={zhHansClasses}>{textMap.zh_hans}</span>
           </Menu.Item>
 
           <style jsx>{styles}</style>

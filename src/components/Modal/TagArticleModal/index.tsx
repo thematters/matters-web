@@ -36,12 +36,10 @@ const PUT_ARTICLES_TAGS = gql`
 
 const DropdownContent = ({
   callback,
-  hideDropdown,
   items,
   loading
 }: {
   callback: (params: any) => void
-  hideDropdown: () => void
   items: any
   loading: boolean
 }) => {
@@ -54,7 +52,6 @@ const DropdownContent = ({
       loading={loading}
       onClick={article => {
         callback(article)
-        hideDropdown()
       }}
     />
   )
@@ -190,13 +187,13 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
               <ArticleDigest.Dropdown
                 article={article}
                 titleTextSize="md-s"
-                borderRadius="xtight"
-                bgColor="grey-lighter"
-                spacing={['tight', 'tight']}
                 disabled
                 extraButton={
                   <ArticleDigest.Dropdown.OpenExternalLink article={article} />
                 }
+                borderRadius="xtight"
+                bgColor="grey-lighter"
+                spacing={['tight', 'tight']}
               />
 
               <span className="delete-handler">

@@ -12,8 +12,13 @@ export const Switch = ({
   loading?: boolean
 }) => {
   return (
-    <label className="switch">
-      <input type="checkbox" onChange={onChange} checked={checked} />
+    <label className="switch" htmlFor="switch-checkbox">
+      <input
+        type="checkbox"
+        id="switch-checkbox"
+        onChange={onChange}
+        checked={checked}
+      />
 
       <span />
 

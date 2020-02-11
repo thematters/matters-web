@@ -276,6 +276,11 @@ span.container {
     border: 1.5px solid var(--color-grey);
   }
 }
+.border-grey-light {
+  & .hotarea {
+    border: 1.5px solid var(--color-grey-light);
+  }
+}
 .border-grey-lighter {
   & .hotarea {
     border: 1.5px solid var(--color-grey-lighter);

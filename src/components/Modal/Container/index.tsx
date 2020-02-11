@@ -1,6 +1,7 @@
 // External modules
 import classNames from 'classnames'
 import { useRef, useState } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import { Translate } from '~/components'
 import { useNativeEventListener, useOutsideClick } from '~/components/Hook'
@@ -39,7 +40,7 @@ const Container: React.FC<ContainerProps> = ({
     'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': layout === 'sm'
   })
 
-  const node = useRef(null)
+  const node: React.RefObject<any> | null = useRef(null)
   const [closeable, setCloseable] = useState(defaultCloseable)
   const [modalClass, setModalClass] = useState<string>(modalBaseClass)
 
@@ -68,26 +69,33 @@ const Container: React.FC<ContainerProps> = ({
       <div style={{ width: '100%' }}>
         <div className="l-row">
           <div ref={node} className={modalClass}>
-            <div className="container">
-              {title && (
-                <Modal.Header
-                  close={close}
-                  closeable={closeable}
-                  title={
-                    <Translate
-                      zh_hant={TEXT.zh_hant[title] as string}
-                      zh_hans={TEXT.zh_hans[title] as string}
-                    />
-                  }
-                />
-              )}
-              {children({
-                close,
-                closeable,
-                setCloseable,
-                setModalClass
-              })}
-            </div>
+            <FocusLock>
+              <div
+                role="dialog"
+                aria-label={title ? (TEXT.zh_hant[title] as string) : undefined}
+                className="container"
+                tabIndex={-1}
+              >
+                {title && (
+                  <Modal.Header
+                    close={close}
+                    closeable={closeable}
+                    title={
+                      <Translate
+                        zh_hant={TEXT.zh_hant[title] as string}
+                        zh_hans={TEXT.zh_hans[title] as string}
+                      />
+                    }
+                  />
+                )}
+                {children({
+                  close,
+                  closeable,
+                  setCloseable,
+                  setModalClass
+                })}
+              </div>
+            </FocusLock>
           </div>
         </div>
       </div>

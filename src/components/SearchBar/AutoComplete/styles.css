@@ -2,7 +2,20 @@
   width: var(--sizing-menu-md);
 }
 
-.history-item,
-.frequent-item {
-  font-size: var(--font-size-sm);
+.recent-searches {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xx-tight);
+  padding: 0 var(--spacing-base);
+
+  & :global(> *) {
+    margin-right: var(--spacing-tight);
+    margin-bottom: var(--spacing-tight);
+  }
+}
+
+.frequent-searches {
+  & .key {
+    @mixin line-clamp;
+  }
 }

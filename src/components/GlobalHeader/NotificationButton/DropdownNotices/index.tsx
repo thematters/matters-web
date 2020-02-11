@@ -19,7 +19,6 @@ import styles from './styles.css'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 interface DropdownNoticesProps {
-  hideDropdown: () => void
   data?: MeNotifications
   loading: boolean
   error: any
@@ -67,15 +66,10 @@ const Footer = () => (
   </footer>
 )
 
-const DropdownNotices = ({
-  hideDropdown,
-  data,
-  loading,
-  error
-}: DropdownNoticesProps) => {
+const DropdownNotices = ({ data, loading, error }: DropdownNoticesProps) => {
   if (loading) {
     return (
-      <section className="container" onClick={hideDropdown}>
+      <section className="container">
         <Header />
 
         <section className="content">
@@ -91,7 +85,7 @@ const DropdownNotices = ({
 
   if (error) {
     return (
-      <section className="container" onClick={hideDropdown}>
+      <section className="container">
         <Header />
 
         <section className="content">
@@ -108,7 +102,7 @@ const DropdownNotices = ({
   const edges = data?.viewer?.notices.edges
 
   return (
-    <section className="container" onClick={hideDropdown}>
+    <section className="container">
       <Header />
 
       <section className="content">

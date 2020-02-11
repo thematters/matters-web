@@ -28,49 +28,33 @@ const PUT_TAG = gql`
   }
 `
 
-const DropdownDefaultItem = ({
-  hideDropdown,
-  search
-}: {
-  hideDropdown: () => void
-  search: string
-}) => {
+const DropdownDefaultItem = ({ search }: { search: string }) => {
   return (
-    <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
-      <button
-        className="search-tag-item create"
-        type="button"
-        onClick={() => hideDropdown()}
-      >
-        <span className="hint">
-          <Translate zh_hant="創建" zh_hans="创建" />
-        </span>
+    <Menu.Item>
+      <span className="search-tag-item">
+        <Translate zh_hant="創建" zh_hans="创建" />
         <span className="keyword">{search}</span>
-      </button>
+        <style jsx>{styles}</style>
+      </span>
     </Menu.Item>
   )
 }
 
 interface DropdownListBaseProps {
-  hideDropdown: () => void
   items: any[]
   loading: boolean
   search: string
-  width?: number
 }
 
 const DropdownList = ({
-  hideDropdown,
   items,
   loading,
   search,
-  width,
   children
 }: DropdownListBaseProps & { children?: any }) => {
-  const menuStyle = width ? { width: `${Math.min(width, 350)}px` } : {}
   if (loading) {
     return (
-      <Menu style={menuStyle}>
+      <Menu width="sm">
         <Menu.Item>
           <Spinner />
         </Menu.Item>
@@ -84,19 +68,13 @@ const DropdownList = ({
 
   return (
     <>
-      <Menu style={menuStyle}>
+      <Menu width="sm">
         {items.map(item => (
-          <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
-            key={item.content}
-          >
-            <button className="search-tag-item" type="button">
+          <Menu.Item key={item.content}>
+            <span className="search-tag-item">
               <span>{item.content}</span>
-              <span className="search-tag-count">
-                {numAbbr(item.articles.totalCount)}
-              </span>
-            </button>
+              <span className="count">{numAbbr(item.articles.totalCount)}</span>
+            </span>
           </Menu.Item>
         ))}
         {items && items.length > 0 && children && <Menu.Divider />}
@@ -110,10 +88,7 @@ const DropdownList = ({
 const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   return (
     <DropdownList {...props}>
-      <DropdownDefaultItem
-        hideDropdown={props.hideDropdown}
-        search={props.search}
-      />
+      <DropdownDefaultItem search={props.search} />
     </DropdownList>
   )
 }

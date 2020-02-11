@@ -32,7 +32,7 @@ const reorder = (list: any[], startIndex: number, endIndex: number) => {
   return result
 }
 
-class CollectionEditor extends React.PureComponent<Props, State> {
+class CollectionEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
@@ -112,15 +112,15 @@ class CollectionEditor extends React.PureComponent<Props, State> {
                         <ArticleDigest.Dropdown
                           article={article}
                           titleTextSize="md-s"
-                          borderRadius="xtight"
-                          bgColor="grey-lighter"
-                          spacing={['tight', 'tight']}
                           disabled
                           extraButton={
                             <ArticleDigest.Dropdown.OpenExternalLink
                               article={article}
                             />
                           }
+                          borderRadius="xtight"
+                          bgColor="grey-lighter"
+                          spacing={['tight', 'tight']}
                         />
 
                         <span className="delete-handler">

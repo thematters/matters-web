@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Menu, Translate } from '~/components'
@@ -9,9 +8,8 @@ import { PATHS, TEXT } from '~/common/enums'
 import styles from './styles.css'
 
 const DropdownContent: React.FC<{
-  hideDropdown: () => void
   unread: boolean
-}> = ({ hideDropdown, unread }) => {
+}> = ({ unread }) => {
   const router = useRouter()
   const homeClasses = classNames({
     'nav-link': true,
@@ -25,26 +23,22 @@ const DropdownContent: React.FC<{
 
   return (
     <>
-      <Menu>
-        <Menu.Item>
-          <Link {...PATHS.HOME}>
-            <a onClick={hideDropdown} className={homeClasses}>
-              <Translate
-                zh_hant={TEXT.zh_hant.discover}
-                zh_hans={TEXT.zh_hans.discover}
-              />
-            </a>
-          </Link>
+      <Menu width="sm">
+        <Menu.Item {...PATHS.HOME}>
+          <span className={homeClasses}>
+            <Translate
+              zh_hant={TEXT.zh_hant.discover}
+              zh_hans={TEXT.zh_hans.discover}
+            />
+          </span>
         </Menu.Item>
-        <Menu.Item>
-          <Link {...PATHS.FOLLOW}>
-            <a onClick={hideDropdown} className={followClasses}>
-              <Translate
-                zh_hant={TEXT.zh_hant.follow}
-                zh_hans={TEXT.zh_hans.follow}
-              />
-            </a>
-          </Link>
+        <Menu.Item {...PATHS.FOLLOW}>
+          <span className={followClasses}>
+            <Translate
+              zh_hant={TEXT.zh_hant.follow}
+              zh_hans={TEXT.zh_hans.follow}
+            />
+          </span>
         </Menu.Item>
       </Menu>
       <style jsx>{styles}</style>

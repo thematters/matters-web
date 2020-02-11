@@ -20,16 +20,28 @@ type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
 
 type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
 
-type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
-
 type ButtonColor =
   | 'white'
+  | 'black'
   | 'grey'
+  | 'grey-light'
   | 'grey-lighter'
   | 'green-lighter'
   | 'green'
   | 'gold'
   | 'red'
+
+type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
+
+type ButtonBgColor = Extract<
+  ButtonColor,
+  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold'
+>
+
+type ButtonBgHoverColor = Extract<
+  ButtonColor,
+  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+>
 
 interface ButtonProps {
   size?: [ButtonWidth, ButtonHeight]
@@ -38,8 +50,8 @@ interface ButtonProps {
   textColor?: ButtonTextColor
   textHoverColor?: ButtonTextColor
 
-  bgColor?: ButtonColor
-  bgHoverColor?: ButtonColor
+  bgColor?: ButtonBgColor
+  bgHoverColor?: ButtonBgHoverColor
 
   borderColor?: ButtonColor
   borderWidth?: 'sm'
@@ -136,8 +148,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
-      className: containerClass,
-      'data-clickable': isClickable
+      className: containerClass
     }
 
     // content

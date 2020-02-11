@@ -26,20 +26,17 @@ const DropdownArticleList = ({
   return (
     <Menu width="md">
       {articles.map(article => (
-        <Menu.Item
-          spacing={['xtight', 'tight']}
-          hoverBgColor="green"
-          key={article.id}
-        >
+        <Menu.Item spacing={[0, 0]} key={article.id}>
           <ArticleDigest.Dropdown
             article={article}
             titleTextSize="sm"
-            spacing={[0, 0]}
             disabled
-            onClick={() => onClick(article)}
             extraButton={
               <ArticleDigest.Dropdown.OpenExternalLink article={article} />
             }
+            bgHoverColor="grey-lighter"
+            spacing={['tight', 'base']}
+            onClick={() => onClick(article)}
           />
         </Menu.Item>
       ))}

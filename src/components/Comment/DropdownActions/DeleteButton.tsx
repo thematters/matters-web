@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { DeleteComment } from './__generated__/DeleteComment'
 
@@ -20,8 +18,7 @@ const DELETE_COMMENT = gql`
 
 const DeleteButton: React.FC<{
   commentId: string
-  hideDropdown: () => void
-}> = ({ commentId, hideDropdown }) => {
+}> = ({ commentId }) => {
   const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
     optimisticResponse: {
@@ -34,22 +31,14 @@ const DeleteButton: React.FC<{
   })
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        deleteComment()
-        hideDropdown()
-      }}
-    >
-      <TextIcon icon={<Icon.RemoveMedium />} spacing="tight">
+    <Menu.Item onClick={deleteComment}>
+      <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
         <Translate
           zh_hant={TEXT.zh_hant.delete}
           zh_hans={TEXT.zh_hant.delete}
         />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

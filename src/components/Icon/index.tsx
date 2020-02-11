@@ -37,6 +37,7 @@ import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
 import { ReactComponent as Left } from './icons/left.svg'
+import { ReactComponent as LikeMedium } from './icons/like-md.svg'
 import { ReactComponent as Like } from './icons/like.svg'
 import { ReactComponent as Link } from './icons/link.svg'
 import { ReactComponent as LogoutMedium } from './icons/logout-md.svg'
@@ -148,6 +149,7 @@ export const Icon = {
   IPFSMedium: withIcon(IPFSMedium),
   Left: withIcon(Left),
   Like: withIcon(Like),
+  LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),

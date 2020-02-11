@@ -8,14 +8,12 @@ interface MenuItemProps {
 
 const Item: React.FC<MenuItemProps> = ({ title, children }) => {
   return (
-    <li>
-      <header>
-        <span className="title">{title}</span>
-        {children}
-      </header>
+    <header>
+      <h4>{title}</h4>
+      {children}
 
       <style jsx>{styles}</style>
-    </li>
+    </header>
   )
 }
 

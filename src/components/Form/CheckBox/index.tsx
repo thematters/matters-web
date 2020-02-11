@@ -35,7 +35,7 @@ const CheckBox: React.FC<Props> = ({
   return (
     <>
       <div className="container">
-        <label className="check">
+        <label className="check" htmlFor="checkbox-input">
           {value === true ? (
             <Icon.CheckActive size="sm" />
           ) : (
@@ -45,6 +45,7 @@ const CheckBox: React.FC<Props> = ({
           <input
             className={inputClass}
             type="checkbox"
+            id="upload-input"
             name={field}
             onChange={e => setFieldValue(field, e.target.checked)}
             {...(value ? { checked: true } : {})}
