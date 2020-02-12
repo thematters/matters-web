@@ -132,7 +132,6 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       newDescription: description || ''
     },
     validate: ({ newContent }) => {
-      console.log(newContent)
       if (!newContent) {
         return {
           newContent: translate({
@@ -200,8 +199,6 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   })
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
-
-  console.log({ errors, values })
 
   return (
     <form id="tag-dialog" className="form" onSubmit={handleSubmit}>

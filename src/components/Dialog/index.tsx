@@ -46,7 +46,8 @@ export const Dialog: React.FC<DialogProps> & {
   const transitions = useTransition(isOpen, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    leave: { opacity: 0 },
+    config: { tension: 270 }
   })
 
   useOutsideClick(node, onDismiss)
