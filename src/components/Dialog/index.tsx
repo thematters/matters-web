@@ -1,6 +1,7 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
+import { animated, useTransition } from 'react-spring'
 
 import { useOutsideClick } from '~/components'
 
@@ -40,6 +41,14 @@ export const Dialog: React.FC<DialogProps> & {
   const [mounted, setMounted] = useState(false)
   const node: React.RefObject<any> | null = useRef(null)
 
+  const AnimatedDialogOverlay = animated(DialogOverlay)
+  const AnimatedDialogContent = animated(DialogContent)
+  const transitions = useTransition(isOpen, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  })
+
   useOutsideClick(node, onDismiss)
 
   // Prevent SSR
@@ -60,17 +69,22 @@ export const Dialog: React.FC<DialogProps> & {
 
   return (
     <>
-      <DialogOverlay isOpen={isOpen} onDismiss={onDismiss}>
-        <DialogContent aria-labelledby="dialog-title">
-          <div className="l-row">
-            <div ref={node} className={containerClass}>
-              <Header close={onDismiss}>{title}</Header>
+      {transitions.map(
+        ({ item, key, props }) =>
+          item && (
+            <AnimatedDialogOverlay style={{ opacity: props.opacity }}>
+              <AnimatedDialogContent aria-labelledby="dialog-title">
+                <div className="l-row">
+                  <div ref={node} className={containerClass}>
+                    <Header close={onDismiss}>{title}</Header>
 
-              {children}
-            </div>
-          </div>
-        </DialogContent>
-      </DialogOverlay>
+                    {children}
+                  </div>
+                </div>
+              </AnimatedDialogContent>
+            </AnimatedDialogOverlay>
+          )
+      )}
 
       <style jsx global>
         {globalStyles}

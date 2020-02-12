@@ -72,6 +72,7 @@
     "react-content-loader": "^5.0.1",
     "react-dom": "^16.12.0",
     "react-responsive": "^8.0.3",
+    "react-spring": "^8.0.27",
     "react-waypoint": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
     "use-debounce": "^3.3.0",
