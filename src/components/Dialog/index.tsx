@@ -1,6 +1,8 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+import { useOutsideClick } from '~/components'
 
 import Button from './Button'
 import Content from './Content'
@@ -35,9 +37,12 @@ export const Dialog: React.FC<DialogProps> & {
 
   children
 }) => {
-  // Prevent SSR
   const [mounted, setMounted] = useState(false)
+  const node: React.RefObject<any> | null = useRef(null)
 
+  useOutsideClick(node, onDismiss)
+
+  // Prevent SSR
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -58,7 +63,7 @@ export const Dialog: React.FC<DialogProps> & {
       <DialogOverlay isOpen={isOpen} onDismiss={onDismiss}>
         <DialogContent aria-labelledby="dialog-title">
           <div className="l-row">
-            <div className={containerClass}>
+            <div ref={node} className={containerClass}>
               <Header close={onDismiss}>{title}</Header>
 
               {children}

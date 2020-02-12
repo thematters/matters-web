@@ -32,7 +32,7 @@ interface HeadProps {
   image?: string
 }
 
-const BaseHead: React.FC<HeadProps> = props => {
+export const Head: React.FC<HeadProps> = props => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const title =
@@ -228,5 +228,3 @@ const BaseHead: React.FC<HeadProps> = props => {
     </NextHead>
   )
 }
-
-export const Head = BaseHead

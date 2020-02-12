@@ -19,7 +19,7 @@ const fragments = {
   `
 }
 
-const BaseFollowButton = ({
+export const FollowButton = ({
   user,
   isLarge
 }: {
@@ -39,7 +39,5 @@ const BaseFollowButton = ({
   }
 }
 
-BaseFollowButton.fragments = fragments
-BaseFollowButton.State = FollowState
-
-export const FollowButton = BaseFollowButton
+FollowButton.fragments = fragments
+FollowButton.State = FollowState
