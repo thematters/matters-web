@@ -5,11 +5,11 @@ import { useDebounce } from 'use-debounce'
 
 import {
   Dropdown,
+  DropdownArticleList,
   hidePopperOnClick,
   LanguageContext,
   PopperInstance
 } from '~/components'
-import ArticleList from '~/components/Dropdown/ArticleList'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
@@ -73,7 +73,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
         placement="bottom-start"
         onCreate={setInstance}
         content={
-          <ArticleList
+          <DropdownArticleList
             articles={articles}
             loading={loading}
             onClick={article => {

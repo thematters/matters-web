@@ -1,9 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Footer, Head, InfiniteScroll, List, Spinner } from '~/components'
-import EmptyAppreciation from '~/components/Empty/EmptyAppreciation'
-import { Transaction } from '~/components/TransactionDigest'
+import {
+  EmptyAppreciation,
+  Footer,
+  Head,
+  InfiniteScroll,
+  List,
+  Spinner,
+  Transaction
+} from '~/components'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import {
   Button,
+  EmptyTag,
   Footer,
   Head,
   Icon,
@@ -11,13 +12,12 @@ import {
   PageHeader,
   Spinner,
   Tag,
+  TagDialog,
   TextIcon,
-  Translate
+  Translate,
+  ViewerContext
 } from '~/components'
-import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
-import TagDialog from '~/components/TagDialog'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

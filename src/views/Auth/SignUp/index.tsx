@@ -1,9 +1,14 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { Head, PageHeader, Translate } from '~/components'
-import SignUpComplete from '~/components/Form/SignUpComplete'
-import { SignUpInitForm, SignUpProfileForm } from '~/components/Form/SignUpForm'
+import {
+  Head,
+  PageHeader,
+  SignUpComplete,
+  SignUpInitForm,
+  SignUpProfileForm,
+  Translate
+} from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 

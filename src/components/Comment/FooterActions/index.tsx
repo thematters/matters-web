@@ -1,9 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Comment } from '~/components'
-import LikeCoinDialog from '~/components/LikeCoinDialog'
-import { ViewerContext } from '~/components/Viewer'
+import { Comment, LikeCoinDialog, ViewerContext } from '~/components'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'

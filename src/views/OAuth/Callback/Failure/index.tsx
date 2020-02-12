@@ -1,7 +1,6 @@
 import Router, { useRouter } from 'next/router'
 
-import { Translate } from '~/components'
-import OAuth from '~/components/OAuth'
+import { OAuth, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'

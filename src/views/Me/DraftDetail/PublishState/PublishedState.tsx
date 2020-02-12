@@ -1,7 +1,13 @@
 import { useContext } from 'react'
 
-import { Button, Icon, TextIcon, Toast, Translate } from '~/components'
-import { ViewerContext } from '~/components/Viewer'
+import {
+  Button,
+  Icon,
+  TextIcon,
+  Toast,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import { toPath } from '~/common/utils'
 

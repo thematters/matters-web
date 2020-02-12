@@ -1,7 +1,11 @@
-import { Button, Icon, Translate } from '~/components'
-import LikeCoinDialog from '~/components/LikeCoinDialog'
-import PublishDialog from '~/components/PublishDialog'
-import { TextIcon } from '~/components/TextIcon'
+import {
+  Button,
+  Icon,
+  LikeCoinDialog,
+  PublishDialog,
+  TextIcon,
+  Translate
+} from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'

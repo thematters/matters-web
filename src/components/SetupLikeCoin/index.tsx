@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import SignUpComplete from '~/components/Form/SignUpComplete'
+import { SignUpComplete } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'

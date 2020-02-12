@@ -1,11 +1,13 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { Head, PageHeader, Translate } from '~/components'
 import {
+  Head,
+  PageHeader,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm
-} from '~/components/Form/PasswordChangeForm'
+  PasswordChangeRequestForm,
+  Translate
+} from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'

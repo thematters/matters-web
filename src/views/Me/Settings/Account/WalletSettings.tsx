@@ -2,9 +2,15 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Button, Icon, PageHeader, TextIcon, Translate } from '~/components'
-import LikeCoinDialog from '~/components/LikeCoinDialog'
-import { ViewerContext } from '~/components/Viewer'
+import {
+  Button,
+  Icon,
+  LikeCoinDialog,
+  PageHeader,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import { TEXT } from '~/common/enums'
 

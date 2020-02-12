@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { createContext, useContext, useState } from 'react'
 
+import { ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ViewerContext } from '~/components/Viewer'
 
 import { DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'

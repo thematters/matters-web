@@ -10,9 +10,9 @@ import {
   IconColor,
   IconSize,
   Menu,
-  PopperInstance
+  PopperInstance,
+  ViewerContext
 } from '~/components'
-import { ViewerContext } from '~/components/Viewer'
 
 import ArchiveButton from './ArchiveButton'
 import ExtendButton from './ExtendButton'

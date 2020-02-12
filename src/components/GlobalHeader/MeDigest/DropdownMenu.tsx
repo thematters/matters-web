@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
 import {

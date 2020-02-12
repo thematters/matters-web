@@ -2,15 +2,15 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  BlockUserButton,
   Button,
   Dropdown,
   focusPopper,
   hidePopperOnClick,
   Icon,
-  Menu
+  Menu,
+  ViewerContext
 } from '~/components'
-import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
-import { ViewerContext } from '~/components/Viewer'
 
 import CollapseButton from './CollapseButton'
 import DeleteButton from './DeleteButton'

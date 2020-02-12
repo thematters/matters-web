@@ -1,5 +1,4 @@
-import { Button, TextIcon, Translate } from '~/components'
-import LoginDialog from '~/components/LoginDialog'
+import { Button, LoginDialog, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 

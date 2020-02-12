@@ -1,8 +1,7 @@
 import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
 
-import { Error, Translate } from '~/components'
-import LoginDialog from '~/components/LoginDialog'
+import { Error, LoginDialog, Translate } from '~/components'
 
 import { ADD_TOAST, ERROR_CODES, TEXT } from '~/common/enums'
 

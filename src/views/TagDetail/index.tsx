@@ -6,18 +6,18 @@ import { useContext, useState } from 'react'
 
 import {
   Button,
+  EmptyTag,
   Footer,
   Head,
   PageHeader,
   Spinner,
   Tabs,
   TextIcon,
-  Translate
+  Throw404,
+  Translate,
+  ViewerContext
 } from '~/components'
-import EmptyTag from '~/components/Empty/EmptyTag'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import Throw404 from '~/components/Throw404'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ERROR_CODES } from '~/common/enums'
 

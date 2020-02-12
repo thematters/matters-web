@@ -2,9 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
-import { InfiniteScroll, Spinner } from '~/components'
+import { EmptyArticle, InfiniteScroll, Spinner } from '~/components'
 import { ArticleDigest } from '~/components/ArticleDigest'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'

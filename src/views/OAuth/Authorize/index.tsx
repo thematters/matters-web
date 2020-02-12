@@ -6,10 +6,15 @@ import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
 
-import { Dialog, LanguageContext, Spinner, Translate } from '~/components'
-import OAuth from '~/components/OAuth'
-import Throw404 from '~/components/Throw404'
-import { ViewerContext } from '~/components/Viewer'
+import {
+  Dialog,
+  LanguageContext,
+  OAuth,
+  Spinner,
+  Throw404,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'

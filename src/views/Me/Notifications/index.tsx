@@ -2,20 +2,20 @@ import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
 
 import {
+  EmptyNotice,
   Footer,
   Head,
   InfiniteScroll,
   List,
+  Notice,
   PageHeader,
   Spinner,
   Translate
 } from '~/components'
-import EmptyNotice from '~/components/Empty/EmptyNotice'
 import { useMutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
 import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-import { Notice } from '~/components/Notice'
 
 import { mergeConnections } from '~/common/utils'
 

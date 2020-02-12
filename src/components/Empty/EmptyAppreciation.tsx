@@ -1,6 +1,6 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyAppreciation = ({
+export const EmptyAppreciation = ({
   description
 }: {
   description?: React.ReactNode
@@ -14,4 +14,3 @@ const EmptyAppreciation = ({
     }
   />
 )
-export default EmptyAppreciation

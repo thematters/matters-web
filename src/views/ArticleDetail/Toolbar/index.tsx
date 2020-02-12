@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { BookmarkButton, ShareButton } from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
-import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareButton from '~/components/Button/Share'
 
 import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'

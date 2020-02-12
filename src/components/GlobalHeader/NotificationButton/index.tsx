@@ -7,7 +7,8 @@ import {
   focusPopper,
   hidePopperOnClick,
   Icon,
-  useResponsive
+  useResponsive,
+  ViewerContext
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
@@ -17,7 +18,6 @@ import {
   UNREAD_NOTICE_COUNT
 } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-import { ViewerContext } from '~/components/Viewer'
 
 import { POLL_INTERVAL, Z_INDEX } from '~/common/enums'
 

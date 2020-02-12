@@ -10,23 +10,23 @@ import React from 'react'
 import {
   AnalyticsListener,
   AnalyticsProvider,
-  GlobalHeader,
-  GlobalStyles,
+  Error,
+  ErrorBoundary,
+  Head,
   LanguageProvider,
-  Toast
+  Toast,
+  ViewerFragments,
+  ViewerProvider
 } from '~/components'
-import { Error } from '~/components/Error'
-import ErrorBoundary from '~/components/ErrorBoundary'
+import { GlobalAlertDialogs } from '~/components/GlobalAlertDialogs'
+import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
+import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
-import { Head } from '~/components/Head'
-import ProgressBar from '~/components/ProgressBar'
+import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
-import { ViewerFragments, ViewerProvider } from '~/components/Viewer'
 
 import withApollo from '~/common/utils/withApollo'
-
-import GlobalAlertDialogs from './GlobalAlertDialogs'
 
 import { RootQuery } from './__generated__/RootQuery'
 

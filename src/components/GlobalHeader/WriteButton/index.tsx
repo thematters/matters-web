@@ -6,11 +6,11 @@ import {
   Button,
   Icon,
   LanguageContext,
+  LikeCoinDialog,
   TextIcon,
   Translate
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import LikeCoinDialog from '~/components/LikeCoinDialog'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'

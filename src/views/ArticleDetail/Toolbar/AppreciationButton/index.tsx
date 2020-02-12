@@ -4,11 +4,9 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { Translate } from '~/components'
+import { Tooltip, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { Tooltip } from '~/components/Popper'
-import { ViewerContext } from '~/components/Viewer'
 
 import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 

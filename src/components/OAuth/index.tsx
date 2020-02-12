@@ -1,5 +1,5 @@
 import { Box } from './Box'
 
-export default {
+export const OAuth = {
   Box
 }

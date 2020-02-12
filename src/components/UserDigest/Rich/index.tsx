@@ -2,11 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Card } from '~/components'
+import { Card, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import UnblockButton from '~/components/Button/BlockUser/Unblock'
-import { FollowButton } from '~/components/Button/Follow'
-import { Translate } from '~/components/Language'
+import { UnblockUserButton } from '~/components/Buttons/BlockUser'
+import { FollowButton } from '~/components/Buttons/Follow'
 
 import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -51,12 +50,12 @@ const fragments = {
       ...AvatarUser
       ...FollowStateUser
       ...FollowButtonUser
-      ...UnblockButtonUser
+      ...UnblockUserButtonUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.State.fragments.user}
     ${FollowButton.fragments.user}
-    ${UnblockButton.fragments.user}
+    ${UnblockUserButton.fragments.user}
   `
 }
 
@@ -130,7 +129,7 @@ const Rich = ({
         </section>
 
         <section className="extra-button">
-          {hasUnblock && <UnblockButton user={user} />}
+          {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowButton user={user} />}
         </section>
 

@@ -1,6 +1,6 @@
 import MeAppreciationsSent from '~/views/Me/AppreciationsSent'
 
-import { Protected } from '~/components/Protected'
+import { Protected } from '~/components'
 
 export default () => (
   <Protected>

@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 
-import { Button, Icon, Translate } from '~/components'
-import SignUpButton from '~/components/Button/SignUp'
+import { Button, Icon, SignUpButton, Translate } from '~/components'
 
 import { SIGNUP_TYPE } from '~/common/enums'
 import IMG_AD from '~/static/images/ad.svg'

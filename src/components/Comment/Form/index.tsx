@@ -3,12 +3,17 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  LikeCoinDialog,
+  Spinner,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import LikeCoinDialog from '~/components/LikeCoinDialog'
-import { Spinner } from '~/components/Spinner'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'

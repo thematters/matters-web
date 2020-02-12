@@ -7,12 +7,12 @@ import {
   ArticleDigest,
   Button,
   Dialog,
+  DropdownArticleList,
+  Form,
   Icon,
   LanguageContext,
   Translate
 } from '~/components'
-import ArticleList from '~/components/Dropdown/ArticleList'
-import { Form } from '~/components/Form'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
@@ -47,7 +47,7 @@ const DropdownContent = ({
     (node: any) => node.__typename === 'Article'
   )
   return (
-    <ArticleList
+    <DropdownArticleList
       articles={articles}
       loading={loading}
       onClick={article => {
@@ -160,10 +160,10 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   const onDelete = (article: any) => {
     setFieldValue(
       'articles',
-      values.articles.filter(id => id !== article.id)
+      values.articles.filter(articleId => articleId !== article.id)
     )
     setSelectedArticles(
-      selectedArticles.filter(({ id }: any) => id !== article.id)
+      selectedArticles.filter(({ articleId }: any) => articleId !== article.id)
     )
   }
 

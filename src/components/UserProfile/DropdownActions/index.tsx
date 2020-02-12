@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import {
+  BlockUserButton,
   Button,
   Dropdown,
   focusPopper,
@@ -8,7 +9,6 @@ import {
   Icon,
   Menu
 } from '~/components'
-import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
 
 import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
 

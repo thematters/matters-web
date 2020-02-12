@@ -7,24 +7,25 @@ import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import {
+  BackToHomeButton,
+  BookmarkButton,
   DateTime,
   Error,
+  Fingerprint,
   Footer,
   Head,
   Icon,
   Spinner,
+  Throw404,
   Title,
-  Translate
+  Translate,
+  useImmersiveMode,
+  useResponsive,
+  ViewerContext
 } from '~/components'
-import BackToHomeButton from '~/components/Button/BackToHome'
-import { BookmarkButton } from '~/components/Button/Bookmark'
-import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { useImmersiveMode, useResponsive } from '~/components/Hook'
-import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'

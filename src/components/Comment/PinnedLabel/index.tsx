@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Label } from '~/components/Label'
-import { Translate } from '~/components/Language'
+import { Label, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 

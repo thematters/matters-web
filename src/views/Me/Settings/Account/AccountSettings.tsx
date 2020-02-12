@@ -1,10 +1,15 @@
 import { useContext } from 'react'
 
-import { Button, PageHeader, TextIcon, Translate } from '~/components'
-import ChangeEmailDialog from '~/components/ChangeEmailDialog'
-import PasswordDialog from '~/components/PasswordDialog'
-import UserNameDialog from '~/components/UserNameDialog'
-import { ViewerContext } from '~/components/Viewer'
+import {
+  Button,
+  ChangeEmailDialog,
+  PageHeader,
+  PasswordDialog,
+  TextIcon,
+  Translate,
+  UserNameDialog,
+  ViewerContext
+} from '~/components'
 
 import { TEXT } from '~/common/enums'
 

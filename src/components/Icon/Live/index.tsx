@@ -1,5 +1,4 @@
-import { Translate } from '~/components/Language'
-import { Tooltip } from '~/components/Popper'
+import { Tooltip, Translate } from '~/components'
 
 import { ReactComponent as IconLive } from '~/static/icons/label-live.svg'
 

@@ -1,8 +1,13 @@
 import { useContext } from 'react'
 
-import { Button, TextIcon, withIcon } from '~/components'
-import { LanguageContext, Translate } from '~/components/Language'
-import { Tooltip } from '~/components/Popper'
+import {
+  Button,
+  LanguageContext,
+  TextIcon,
+  Tooltip,
+  Translate,
+  withIcon
+} from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
+import { Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Translate } from '~/components/Language'
 
 import styles from './styles.css'
 

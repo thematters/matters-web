@@ -1,4 +1,4 @@
-import LikeCoinDialog from '~/components/LikeCoinDialog'
+import { LikeCoinDialog } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 

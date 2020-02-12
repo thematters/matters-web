@@ -4,15 +4,16 @@ import _get from 'lodash/get'
 
 import {
   ArticleDigest,
+  EmptyTagArticles,
   InfiniteScroll,
   List,
   LoadMore,
-  Spinner
+  Spinner,
+  useEventListener,
+  useResponsive
 } from '~/components'
-import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
-import { useEventListener, useResponsive } from '~/components/Hook'
 
 import {
   ANALYTICS_EVENTS,

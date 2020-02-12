@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { TEXT } from '~/common/enums'

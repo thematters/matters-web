@@ -6,11 +6,11 @@ import {
   Dropdown,
   focusPopper,
   hidePopperOnClick,
-  Translate
+  Translate,
+  ViewerContext
 } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { ViewerContext } from '~/components/Viewer'
 
 import { Z_INDEX } from '~/common/enums'
 import { TEXT } from '~/common/enums/text'

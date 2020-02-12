@@ -6,12 +6,12 @@ import {
   ArticleDigest,
   Card,
   Comment,
+  EmptyComment,
   Head,
   InfiniteScroll,
   List,
   Spinner
 } from '~/components'
-import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
 import {

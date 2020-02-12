@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Head, PageHeader, Translate } from '~/components'
-import LoginForm from '~/components/Form/LoginForm'
+import { Head, LoginForm, PageHeader, Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'

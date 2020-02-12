@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser'
 import React from 'react'
 
-import { Error as ErrorComponent } from '~/components/Error'
+import { Error as ErrorComponent } from '~/components'
 
 export interface FallbackProps {
   error?: Error | null
@@ -18,7 +18,7 @@ interface State {
   info: any | null
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, State> {
   state: State = {
     error: null,
     info: null
@@ -52,5 +52,3 @@ class ErrorBoundary extends React.Component<Props, State> {
     return children
   }
 }
-
-export default ErrorBoundary

@@ -1,6 +1,10 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyHistory = ({ description }: { description?: React.ReactNode }) => (
+export const EmptyHistory = ({
+  description
+}: {
+  description?: React.ReactNode
+}) => (
   <Empty
     icon={<Icon.HistoryMedium color="grey-lighter" size="xxl" />}
     description={
@@ -10,4 +14,3 @@ const EmptyHistory = ({ description }: { description?: React.ReactNode }) => (
     }
   />
 )
-export default EmptyHistory

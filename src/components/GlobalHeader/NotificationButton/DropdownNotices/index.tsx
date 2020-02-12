@@ -2,15 +2,15 @@ import Link from 'next/link'
 
 import {
   Button,
+  EmptyNotice,
   Error,
   Icon,
   List,
+  Notice,
   Spinner,
   TextIcon,
   Translate
 } from '~/components'
-import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { Notice } from '~/components/Notice'
 
 import { PATHS, TEXT } from '~/common/enums'
 

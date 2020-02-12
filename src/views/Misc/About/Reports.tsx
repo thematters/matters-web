@@ -1,4 +1,4 @@
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 

@@ -1,8 +1,15 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
-import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
-import { LanguageConsumer, LanguageContext } from '~/components/Language'
+import {
+  Button,
+  Dropdown,
+  Icon,
+  LanguageConsumer,
+  LanguageContext,
+  Menu,
+  TextIcon
+} from '~/components'
 
 import styles from './styles.css'
 
