@@ -27,7 +27,9 @@ const Nav = () => {
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
-    startPolling(POLL_INTERVAL)
+    if (viewer.isAuthed) {
+      startPolling(POLL_INTERVAL)
+    }
   }, [])
 
   return (

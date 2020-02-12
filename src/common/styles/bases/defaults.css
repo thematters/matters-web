@@ -103,3 +103,13 @@ samp,
 pre {
   background: var(--color-grey-lighter);
 }
+
+code,
+kbd,
+samp {
+  padding: var(--spacing-xx-tight);
+}
+
+pre {
+  padding: var(--spacing-x-tight) var(--spacing-base);
+}
