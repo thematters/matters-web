@@ -1,5 +1,11 @@
 .container {
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
+
   text-align: left;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base);
+  }
 }
 
 header {
@@ -40,9 +46,10 @@ header {
   & ul {
     @mixin border-top-grey;
     @mixin border-bottom-grey;
-    padding: var(--spacing-x-tight) 0;
+    margin: 0 calc(var(--spacing-base) * -1);
+    padding: var(--spacing-x-tight) var(--spacing-base) 0;
     max-height: 11rem;
-    overflow: scroll;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 
     & li {

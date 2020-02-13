@@ -235,7 +235,7 @@ const ArticleDetail = ({
             </p>
             <span className="right-items">
               {article.live && <Icon.Live />}
-              <Fingerprint article={article} color="grey" size="xs" />
+              <Fingerprint article={article} />
             </span>
           </span>
         </section>

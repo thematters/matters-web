@@ -24,10 +24,7 @@ const GATEWAYS = gql`
   }
 `
 
-const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
-  const { loading, data } = useQuery<Gateways>(GATEWAYS)
-
-  const gateways = data?.official.gatewayUrls || []
+const CopyButton = ({ text }: { text: string }) => {
   const copy = (link: string) => {
     dom.copyToClipboard(link)
     window.dispatchEvent(
@@ -46,6 +43,23 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
   }
 
   return (
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgHoverColor="grey-lighter"
+      onClick={() => copy(text)}
+      aira-label="複製"
+    >
+      <Icon.Link color="grey" />
+    </Button>
+  )
+}
+
+const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
+  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+
+  const gateways = data?.official.gatewayUrls || []
+
+  return (
     <section className="container">
       {/* hash */}
       <section className="hash">
@@ -56,14 +70,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
               zh_hans={TEXT.zh_hans.articleFingerprint}
             />
           </h4>
-          <Button
-            onClick={() => {
-              copy(dataHash)
-            }}
-            aira-label="複製"
-          >
-            <Icon.Link color="grey" />
-          </Button>
+          <CopyButton text={dataHash} />
         </header>
 
         <section>
@@ -106,9 +113,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
                   {hostname}
                 </a>
 
-                <Button onClick={() => copy(gatewayUrl)} aira-label="複製">
-                  <Icon.Link color="grey" />
-                </Button>
+                <CopyButton text={gatewayUrl} />
               </li>
             )
           })}
@@ -166,7 +171,7 @@ const FingerprintDialog = ({
         isOpen={showDialog}
         onDismiss={close}
       >
-        <Dialog.Content>
+        <Dialog.Content spacing={[0, 0]}>
           <FingerprintDialogContent {...restProps} />
         </Dialog.Content>
       </Dialog>

@@ -6,15 +6,7 @@ import FingerprintDialog from './FingerprintDialog'
 
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 
-const Fingerprint = ({
-  article,
-  color = 'green',
-  size = 'sm'
-}: {
-  article: FingerprintArticle
-  color?: 'grey' | 'green'
-  size?: 'xs' | 'sm'
-}) => {
+const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
   if (!article.dataHash) {
     return null
   }
@@ -30,9 +22,9 @@ const Fingerprint = ({
           onClick={open}
         >
           <TextIcon
-            icon={<Icon.IPFSMedium size={size === 'xs' ? 'xs' : undefined} />}
-            size={size}
-            color={color}
+            icon={<Icon.IPFSMedium size="xs" />}
+            size="xs"
+            color="grey"
             weight="md"
           >
             <Translate zh_hant="分佈式入口" zh_hans="分布式入口" />
