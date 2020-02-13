@@ -79,13 +79,13 @@ const PasswordResetRedirectButton = () => (
 )
 
 const SignUpRedirectionButton = () => (
-  <Dialog.Button
+  <Dialog.Footer.Button
     {...appendTarget(PATHS.AUTH_SIGNUP)}
     bgColor="grey-lighter"
     textColor="black"
   >
     <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Dialog.Button>
+  </Dialog.Footer.Button>
 )
 
 export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
@@ -218,10 +218,7 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        {isInDialog && <SignUpDialogButton />}
-        {isInPage && <SignUpRedirectionButton />}
-
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -230,7 +227,10 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
             zh_hant={TEXT.zh_hant.login}
             zh_hans={TEXT.zh_hans.login}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
+
+        {isInDialog && <SignUpDialogButton />}
+        {isInPage && <SignUpRedirectionButton />}
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

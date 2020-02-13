@@ -1,12 +1,21 @@
 footer {
   @mixin flex-center-space-between;
-  margin: var(--spacing-base);
+  flex-shrink: 0;
+  flex-direction: column;
+  margin: 0 var(--spacing-base) var(--spacing-xx-loose);
 
   & :global(> *) {
+    width: 100%;
     flex: 1;
+    margin-top: var(--spacing-base);
   }
 
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
+  @media (--sm-up) {
+    flex-direction: row;
+    margin: var(--spacing-base);
+
+    & :global(> * + *) {
+      margin-left: var(--spacing-base);
+    }
   }
 }

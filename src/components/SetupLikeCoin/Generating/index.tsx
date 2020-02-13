@@ -71,7 +71,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
+        <Dialog.Footer.Button
           disabled={!error}
           onClick={() => {
             prevStep()
@@ -82,7 +82,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
             zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
             zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

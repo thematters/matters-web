@@ -31,12 +31,12 @@ const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({ nextStep }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button onClick={nextStep}>
+        <Dialog.Footer.Button onClick={nextStep}>
           <Translate
             zh_hant={TEXT.zh_hant.agreeAndContinue}
             zh_hans={TEXT.zh_hans.agreeAndContinue}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

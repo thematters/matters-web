@@ -123,7 +123,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -132,7 +132,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
             zh_hant={TEXT.zh_hant.nextStep}
             zh_hans={TEXT.zh_hans.nextStep}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

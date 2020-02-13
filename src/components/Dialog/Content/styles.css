@@ -1,12 +1,8 @@
 .content {
-  max-height: 50vh;
+  flex-shrink: 1;
 
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-
-  @media (--sm-up) {
-    max-height: 70vh;
-  }
 }
 
 .spacing-x-base {

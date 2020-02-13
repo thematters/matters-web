@@ -155,13 +155,13 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
         >
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

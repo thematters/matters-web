@@ -55,12 +55,12 @@ const Select: React.FC<Props> = ({ startGenerate, startBind }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button type="submit">
+        <Dialog.Footer.Button type="submit">
           <Translate
             zh_hant={TEXT.zh_hant.continue}
             zh_hans={TEXT.zh_hans.continue}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

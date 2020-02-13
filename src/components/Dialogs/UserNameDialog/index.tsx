@@ -42,18 +42,7 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
             </Dialog.Content>
 
             <Dialog.Footer>
-              <Dialog.Button
-                bgColor="grey-lighter"
-                textColor="black"
-                onClick={close}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.cancel}
-                  zh_hans={TEXT.zh_hans.cancel}
-                />
-              </Dialog.Button>
-
-              <Dialog.Button
+              <Dialog.Footer.Button
                 onClick={() => {
                   setStep('confirm')
                 }}
@@ -62,7 +51,18 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
                   zh_hant={TEXT.zh_hant.confirm}
                   zh_hans={TEXT.zh_hans.confirm}
                 />
-              </Dialog.Button>
+              </Dialog.Footer.Button>
+
+              <Dialog.Footer.Button
+                bgColor="grey-lighter"
+                textColor="black"
+                onClick={close}
+              >
+                <Translate
+                  zh_hant={TEXT.zh_hant.cancel}
+                  zh_hans={TEXT.zh_hans.cancel}
+                />
+              </Dialog.Footer.Button>
             </Dialog.Footer>
           </>
         )}

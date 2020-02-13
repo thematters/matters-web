@@ -1,15 +1,10 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
-import {
-  // useEffect,
-  useRef
-  // useState
-} from 'react'
+import { useRef } from 'react'
 import { animated, useTransition } from 'react-spring'
 
 import { useOutsideClick, useResponsive } from '~/components'
 
-import Button from './Button'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
@@ -43,7 +38,6 @@ export const Dialog: React.FC<DialogProps> & {
   Header: typeof Header
   Content: typeof Content
   Footer: typeof Footer
-  Button: typeof Button
   Message: typeof Message
 } = ({
   title,
@@ -73,25 +67,16 @@ export const Dialog: React.FC<DialogProps> & {
   const values = {
     from: {
       opacity: 0,
-      transform: isSmallUp ? 'translateY(0%)' : 'translateY(100%)'
+      transform: isSmallUp ? 'translate3d(0,0%,0)' : 'translate3d(0,100%,0)'
     },
-    enter: { opacity: 1, transform: 'translateY(0%)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0%,0)' },
     leave: {
       opacity: 0,
-      transform: isSmallUp ? 'translateY(0%)' : 'translateY(100%)'
+      transform: isSmallUp ? 'translate3d(0,0%,0)' : 'translate3d(0,100%,0)'
     },
-    config: { tension: 270 }
+    config: { tension: 270, friction: isSmallUp ? undefined : 30 }
   }
   const transitions = useTransition(isOpen, null, values)
-
-  // // Prevent SSR
-  // useEffect(() => {
-  //   setMounted(true)
-  // }, [])
-
-  // if (!mounted) {
-  //   return null
-  // }
 
   return (
     <>
@@ -135,5 +120,4 @@ export const Dialog: React.FC<DialogProps> & {
 Dialog.Header = Header
 Dialog.Content = Content
 Dialog.Footer = Footer
-Dialog.Button = Button
 Dialog.Message = Message

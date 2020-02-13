@@ -64,7 +64,7 @@ export const SignUpComplete = ({
     </Dialog.Content>
 
     <Dialog.Footer>
-      <Dialog.Button
+      <Dialog.Footer.Button
         onClick={() => {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
           redirectToTarget({
@@ -73,7 +73,7 @@ export const SignUpComplete = ({
         }}
       >
         <Translate zh_hant="進入社區" zh_hans="进入社区" />
-      </Dialog.Button>
+      </Dialog.Footer.Button>
     </Dialog.Footer>
 
     <style jsx>{styles}</style>

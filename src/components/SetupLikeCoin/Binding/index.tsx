@@ -81,7 +81,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
+        <Dialog.Footer.Button
           disabled={!error}
           onClick={() => {
             prevStep()
@@ -92,7 +92,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             zh_hant={TEXT.zh_hant.retry}
             zh_hans={TEXT.zh_hans.retry}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

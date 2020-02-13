@@ -253,14 +253,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button onClick={close} bgColor="grey-lighter" textColor="black">
-          <Translate
-            zh_hant={TEXT.zh_hant.cancel}
-            zh_hans={TEXT.zh_hans.cancel}
-          />
-        </Dialog.Button>
-
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -269,7 +262,18 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             zh_hant={TEXT.zh_hant.confirm}
             zh_hans={TEXT.zh_hans.confirm}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
+
+        <Dialog.Footer.Button
+          onClick={close}
+          bgColor="grey-lighter"
+          textColor="black"
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.cancel}
+            zh_hans={TEXT.zh_hans.cancel}
+          />
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

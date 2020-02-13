@@ -86,18 +86,7 @@ const PublishContent: React.FC<PublishContentProps> = ({ close }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
-          onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SAVE_DRAFT_IN_MODAL)
-            close()
-          }}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
-        </Dialog.Button>
-
-        <Dialog.Button
+        <Dialog.Footer.Button
           disabled={!publishable}
           onClick={async () => {
             const { data: publishData } = await publish({ variables: { id } })
@@ -115,7 +104,18 @@ const PublishContent: React.FC<PublishContentProps> = ({ close }) => {
             zh_hant={TEXT.zh_hant.publish}
             zh_hans={TEXT.zh_hans.publish}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
+
+        <Dialog.Footer.Button
+          onClick={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SAVE_DRAFT_IN_MODAL)
+            close()
+          }}
+          bgColor="grey-lighter"
+          textColor="black"
+        >
+          <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
+        </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
   )

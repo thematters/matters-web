@@ -64,7 +64,7 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
         </Dialog.Content>
 
         <Dialog.Footer>
-          <Dialog.Button
+          <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
             onClick={close}
@@ -73,7 +73,7 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
               zh_hant={TEXT.zh_hant.close}
               zh_hans={TEXT.zh_hans.close}
             />
-          </Dialog.Button>
+          </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
     </>

@@ -73,21 +73,25 @@ const USER_REGISTER = gql`
 const LoginDialogButton = () => (
   <LoginDialog>
     {({ open }) => (
-      <Dialog.Button onClick={open} bgColor="grey-lighter" textColor="black">
+      <Dialog.Footer.Button
+        onClick={open}
+        bgColor="grey-lighter"
+        textColor="black"
+      >
         <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-      </Dialog.Button>
+      </Dialog.Footer.Button>
     )}
   </LoginDialog>
 )
 
 const LoginRedirectionButton = () => (
-  <Dialog.Button
+  <Dialog.Footer.Button
     {...appendTarget(PATHS.AUTH_LOGIN)}
     bgColor="grey-lighter"
     textColor="black"
   >
     <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Button>
+  </Dialog.Footer.Button>
 )
 
 export const SignUpInitForm: React.FC<FormProps> = formProps => {
@@ -283,10 +287,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        {isInDialog && <LoginDialogButton />}
-        {isInPage && <LoginRedirectionButton />}
-
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
           loading={isSubmitting}
@@ -295,7 +296,10 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             zh_hant={TEXT.zh_hant.nextStep}
             zh_hans={TEXT.zh_hans.nextStep}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
+
+        {isInDialog && <LoginDialogButton />}
+        {isInPage && <LoginRedirectionButton />}
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

@@ -132,7 +132,15 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
+        <Dialog.Footer.Button
+          type="submit"
+          disabled={!_isEmpty(errors) || isSubmitting}
+          loading={isSubmitting}
+        >
+          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+        </Dialog.Footer.Button>
+
+        <Dialog.Footer.Button
           onClick={backPreviousStep}
           bgColor="grey-lighter"
           textColor="black"
@@ -141,14 +149,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
             zh_hant={TEXT.zh_hant.previousStep}
             zh_hans={TEXT.zh_hans.previousStep}
           />
-        </Dialog.Button>
-        <Dialog.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

@@ -57,7 +57,15 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
         </Dialog.Content>
 
         <Dialog.Footer>
-          <Dialog.Button
+          <Dialog.Footer.Button
+            href={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
+            target="_blank"
+            onClick={close}
+          >
+            <Translate zh_hant="立即登記" zh_hans="立即登记" />
+          </Dialog.Footer.Button>
+
+          <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
             onClick={close}
@@ -66,15 +74,7 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
               zh_hant={TEXT.zh_hant.understood}
               zh_hans={TEXT.zh_hans.understood}
             />
-          </Dialog.Button>
-
-          <Dialog.Button
-            href={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
-            target="_blank"
-            onClick={close}
-          >
-            <Translate zh_hant="立即登記" zh_hans="立即登记" />
-          </Dialog.Button>
+          </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
     </>

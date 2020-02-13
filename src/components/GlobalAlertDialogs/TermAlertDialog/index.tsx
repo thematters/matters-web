@@ -81,18 +81,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Button
-          bgColor="grey-lighter"
-          textColor="black"
-          onClick={onLogout}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.disagree}
-            zh_hans={TEXT.zh_hans.disagree}
-          />
-        </Dialog.Button>
-
-        <Dialog.Button
+        <Dialog.Footer.Button
           type="submit"
           disabled={isSubmitting}
           loading={isSubmitting}
@@ -101,7 +90,18 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
             zh_hant={TEXT.zh_hant.agreeAndContinue}
             zh_hans={TEXT.zh_hans.agreeAndContinue}
           />
-        </Dialog.Button>
+        </Dialog.Footer.Button>
+
+        <Dialog.Footer.Button
+          bgColor="grey-lighter"
+          textColor="black"
+          onClick={onLogout}
+        >
+          <Translate
+            zh_hant={TEXT.zh_hant.disagree}
+            zh_hans={TEXT.zh_hans.disagree}
+          />
+        </Dialog.Footer.Button>
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

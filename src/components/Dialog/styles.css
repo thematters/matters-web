@@ -6,6 +6,11 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  max-height: calc(var(--vh) * 90);
+
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
 

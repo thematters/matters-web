@@ -25,9 +25,9 @@ const PasswordChanged = () => (
     </Dialog.Content>
 
     <Dialog.Footer>
-      <Dialog.Button {...appendTarget(PATHS.AUTH_LOGIN)}>
+      <Dialog.Footer.Button {...appendTarget(PATHS.AUTH_LOGIN)}>
         <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      </Dialog.Button>
+      </Dialog.Footer.Button>
     </Dialog.Footer>
 
     <style jsx>{styles}</style>
