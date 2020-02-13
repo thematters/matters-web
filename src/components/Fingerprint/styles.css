@@ -1,6 +1,4 @@
 .container {
-  padding: var(--spacing-base);
-
   text-align: left;
 }
 
@@ -30,10 +28,22 @@ header {
 .gateways {
   margin-bottom: var(--spacing-base);
 
+  & .count {
+    font-size: var(--font-size-sm);
+    color: var(--color-grey-dark);
+
+    & .highlight {
+      color: var(--color-matters-green);
+    }
+  }
+
   & ul {
     @mixin border-top-grey;
     @mixin border-bottom-grey;
     padding: var(--spacing-x-tight) 0;
+    max-height: 11rem;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 
     & li {
       @mixin flex-center-space-between;
