@@ -2,7 +2,7 @@ header {
   @mixin flex-center-space-between;
   @mixin border-bottom-grey;
   position: relative;
-  padding: var(--spacing-tight) var(--spacing-base);
+  padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-x-tight);
 
   & h1 {
     @mixin flex-center-all;
@@ -11,9 +11,18 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
+    padding: var(--spacing-x-loose) 0 var(--spacing-x-tight);
 
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);
     line-height: 1.5rem;
+  }
+
+  @media (--sm-up) {
+    padding: var(--spacing-tight) var(--spacing-base);
+
+    & h1 {
+      padding: 0;
+    }
   }
 }

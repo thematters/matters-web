@@ -1,9 +1,13 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import {
+  // useEffect,
+  useRef
+  // useState
+} from 'react'
 import { animated, useTransition } from 'react-spring'
 
-import { useOutsideClick } from '~/components'
+import { useOutsideClick, useResponsive } from '~/components'
 
 import Button from './Button'
 import Content from './Content'
@@ -23,6 +27,18 @@ export type DialogProps = {
   size?: 'sm' | 'lg'
 } & DialogOverlayProps
 
+const Overlay = (props: { style: React.CSSProperties }) => (
+  <div aria-hidden className="overlay" {...props}>
+    <style jsx>{styles}</style>
+  </div>
+)
+
+const Handle = () => (
+  <div className="handle">
+    <style jsx>{styles}</style>
+  </div>
+)
+
 export const Dialog: React.FC<DialogProps> & {
   Header: typeof Header
   Content: typeof Content
@@ -38,28 +54,10 @@ export const Dialog: React.FC<DialogProps> & {
 
   children
 }) => {
-  const [mounted, setMounted] = useState(false)
+  // const [mounted, setMounted] = useState(false)
   const node: React.RefObject<any> | null = useRef(null)
 
-  const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedDialogContent = animated(DialogContent)
-  const transitions = useTransition(isOpen, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { tension: 270 }
-  })
-
   useOutsideClick(node, onDismiss)
-
-  // Prevent SSR
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
 
   const containerClass = classNames({
     container: true,
@@ -68,24 +66,63 @@ export const Dialog: React.FC<DialogProps> & {
     'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
   })
 
+  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const AnimatedDialogOverlay = animated(DialogOverlay)
+  const AnimatedDialogContent = animated(DialogContent)
+  const AnimatedOverlay = animated(Overlay)
+  const values = {
+    from: {
+      opacity: 0,
+      transform: isSmallUp ? 'translateY(0%)' : 'translateY(100%)'
+    },
+    enter: { opacity: 1, transform: 'translateY(0%)' },
+    leave: {
+      opacity: 0,
+      transform: isSmallUp ? 'translateY(0%)' : 'translateY(100%)'
+    },
+    config: { tension: 270 }
+  }
+  const transitions = useTransition(isOpen, null, values)
+
+  // // Prevent SSR
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
+
+  // if (!mounted) {
+  //   return null
+  // }
+
   return (
     <>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <AnimatedDialogOverlay style={{ opacity: props.opacity }}>
-              <AnimatedDialogContent aria-labelledby="dialog-title">
-                <div className="l-row">
-                  <div ref={node} className={containerClass}>
-                    <Header close={onDismiss}>{title}</Header>
+      {transitions.map(({ item, key, props: { opacity, transform } }) => {
+        if (!item) {
+          return
+        }
 
-                    {children}
-                  </div>
+        return (
+          <AnimatedDialogOverlay key={key}>
+            <AnimatedOverlay style={{ opacity }} />
+            <AnimatedDialogContent
+              aria-labelledby="dialog-title"
+              style={{
+                transform,
+                opacity: isSmallUp ? opacity : 1
+              }}
+            >
+              <div className="l-row full">
+                <div ref={node} className={containerClass}>
+                  {!isSmallUp && <Handle />}
+
+                  <Header close={onDismiss}>{title}</Header>
+
+                  {children}
                 </div>
-              </AnimatedDialogContent>
-            </AnimatedDialogOverlay>
-          )
-      )}
+              </div>
+            </AnimatedDialogContent>
+          </AnimatedDialogOverlay>
+        )
+      })}
 
       <style jsx global>
         {globalStyles}
