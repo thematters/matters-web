@@ -42,8 +42,7 @@ export const Dialog: React.FC<DialogProps> & {
 }) => {
   // const [mounted, setMounted] = useState(false)
   const node: React.RefObject<any> | null = useRef(null)
-
-  useOutsideClick(node, onDismiss)
+  const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
   const isSmallUp = useResponsive({ type: 'sm-up' })()
   const AnimatedDialogOverlay = animated(DialogOverlay)
@@ -71,6 +70,8 @@ export const Dialog: React.FC<DialogProps> & {
     'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
   })
 
+  useOutsideClick(node, onDismiss)
+
   return (
     <>
       {transitions.map(({ item, key, props: { opacity, transform } }) => {
@@ -79,7 +80,7 @@ export const Dialog: React.FC<DialogProps> & {
         }
 
         return (
-          <AnimatedDialogOverlay key={key}>
+          <AnimatedDialogOverlay initialFocusRef={closeButtonRef} key={key}>
             <AnimatedOverlay style={{ opacity }} />
             <AnimatedDialogContent
               aria-labelledby="dialog-title"
@@ -92,7 +93,11 @@ export const Dialog: React.FC<DialogProps> & {
                 <div ref={node} className={containerClass}>
                   {!isSmallUp && <Handle />}
 
-                  <Header close={onDismiss} showHeader={showHeader}>
+                  <Header
+                    close={onDismiss}
+                    showHeader={showHeader}
+                    ref={closeButtonRef}
+                  >
                     {title}
                   </Header>
 
