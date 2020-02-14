@@ -7,6 +7,7 @@ import {
   DialogOverlayProps,
   DialogProps,
   Dropdown,
+  PopperInstance,
   PopperProps,
   Translate,
   useResponsive
@@ -24,7 +25,6 @@ import { KEYCODES, TEXT } from '~/common/enums'
  *   <DropdownDialog
  *     dropdown={{
  *       content: <DropdownContent />,
- *       trigger: 'mouseenter focus click',
  *       ...
  *     }}
  *     dialog={{
@@ -78,9 +78,21 @@ export const DropdownDialog = ({
   children
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const [
+    dropdownInstance,
+    setDropdownInstance
+  ] = useState<PopperInstance | null>(null)
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const close = () => {
+    // dialog
+    setShowDialog(false)
+
+    // dropdown
+    if (dropdownInstance) {
+      dropdownInstance.hide()
+    }
+  }
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
 
@@ -91,7 +103,7 @@ export const DropdownDialog = ({
 
   const Content: React.FC = ({ children: contentChildren }) => {
     return (
-      <FocusLock>
+      <FocusLock autoFocus={false}>
         <section
           onKeyDown={event => {
             if (event.keyCode !== KEYCODES.enter) {
@@ -125,7 +137,7 @@ export const DropdownDialog = ({
       <Dropdown
         {...dropdown}
         content={<Content>{dropdown.content}</Content>}
-        visible={showDialog}
+        onCreate={setDropdownInstance}
       >
         <ForwardChildren open={open} close={close} children={children} />
       </Dropdown>

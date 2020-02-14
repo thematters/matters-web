@@ -14,12 +14,10 @@ const DialogContent: React.FC<DialogContentProps> = ({
   spacing = ['base', 'base'],
   children
 }) => {
-  const spacingX = spacing[0]
-  const spacingY = spacing[1]
   const contentClass = classNames({
     content: true,
-    [`spacing-x-${spacingX}`]: !!spacingX,
-    [`spacing-y-${spacingY}`]: !!spacingY
+    [`spacing-x-${spacing[0]}`]: true,
+    [`spacing-y-${spacing[1]}`]: true
   })
 
   return (
