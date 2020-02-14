@@ -37,12 +37,6 @@
   }
 }
 
-.language-switch-button {
-  &.active {
-    font-weight: var(--font-weight-bold);
-  }
-}
-
 .usd-price {
   color: var(--color-grey);
 }

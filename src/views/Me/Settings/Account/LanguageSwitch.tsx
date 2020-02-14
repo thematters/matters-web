@@ -1,17 +1,15 @@
-import classNames from 'classnames'
 import { useContext } from 'react'
 
 import {
   Button,
-  Dropdown,
+  DropdownDialog,
   Icon,
   LanguageConsumer,
   LanguageContext,
   Menu,
-  TextIcon
+  TextIcon,
+  Translate
 } from '~/components'
-
-import styles from './styles.css'
 
 const textMap = {
   zh_hant: '繁體中文',
@@ -19,45 +17,31 @@ const textMap = {
   en: 'English'
 }
 
-export const LanguageSwitch = () => {
-  const { lang } = useContext(LanguageContext)
-
-  return (
-    <Dropdown content={<DropdownContent />}>
-      <Button
-        size={[null, '1.5rem']}
-        spacing={[0, 'xtight']}
-        bgHoverColor="green-lighter"
-        aria-haspopup="true"
-      >
-        <TextIcon icon={<Icon.Expand size="xs" />} textPlacement="left">
-          {textMap[lang]}
-        </TextIcon>
-      </Button>
-    </Dropdown>
-  )
+interface ContentProps {
+  type: 'dialog' | 'dropdown'
 }
 
-const DropdownContent: React.FC = () => (
+const Content = ({ type }: ContentProps) => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
-      const zhHantClasses = classNames({
-        'language-switch-button': true,
-        active: lang === 'zh_hant'
-      })
-      const zhHansClasses = classNames({
-        'language-switch-button': true,
-        active: lang === 'zh_hans'
-      })
+      const isZhHantActive = lang === 'zh_hant'
+      const isZhHansActive = lang === 'zh_hans'
+      const isDropdown = type === 'dropdown'
 
       return (
-        <Menu width="sm">
+        <Menu width={isDropdown ? 'sm' : undefined}>
           <Menu.Item
             onClick={() => {
               setLang('zh_hant')
             }}
           >
-            <span className={zhHantClasses}>{textMap.zh_hant}</span>
+            <TextIcon
+              spacing="base"
+              size="md"
+              weight={isZhHantActive ? 'bold' : undefined}
+            >
+              {textMap.zh_hant}
+            </TextIcon>
           </Menu.Item>
 
           <Menu.Item
@@ -65,12 +49,48 @@ const DropdownContent: React.FC = () => (
               setLang('zh_hans')
             }}
           >
-            <span className={zhHansClasses}>{textMap.zh_hans}</span>
+            <TextIcon
+              spacing="base"
+              size="md"
+              weight={isZhHansActive ? 'bold' : undefined}
+            >
+              {textMap.zh_hans}
+            </TextIcon>
           </Menu.Item>
-
-          <style jsx>{styles}</style>
         </Menu>
       )
     }}
   </LanguageConsumer>
 )
+
+export const LanguageSwitch = () => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <DropdownDialog
+      dropdown={{
+        content: <Content type="dropdown" />
+      }}
+      dialog={{
+        content: <Content type="dialog" />,
+        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />,
+        showHeader: false
+      }}
+    >
+      {({ open, ref }) => (
+        <Button
+          size={[null, '1.5rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="green-lighter"
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <TextIcon icon={<Icon.Expand size="xs" />} textPlacement="left">
+            {textMap[lang]}
+          </TextIcon>
+        </Button>
+      )}
+    </DropdownDialog>
+  )
+}

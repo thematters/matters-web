@@ -44,6 +44,7 @@ export * from './Buttons'
 export * from './Forms'
 export * from './Dialogs'
 export * from './Dropdowns'
+export * from './DropdownDialog'
 
 export * from './ArticleDigest'
 export * from './UserDigest'

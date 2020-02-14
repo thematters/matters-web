@@ -25,6 +25,28 @@ export type DialogProps = {
   showHeader?: boolean
 } & DialogOverlayProps
 
+/**
+ * This is a responsive component which will show
+ * Modal for desktop and Drawer for mobile
+ *
+ * @see {@url https://reacttraining.com/reach-ui/dialog}
+ *
+ * Usage:
+ *
+ * ```tsx
+ * <Dialog>
+ *   <Dialog.Content isOpen={showDialog} onDismiss={close}>
+ *      ...
+ *   </Dialog.Content>
+ *
+ *   <Dialog.Footer>
+ *     <Dialog.Footer.Button />
+ *     <Dialog.Footer.Button />
+ *   </Dialog.Footer>
+ * </Dialog>
+ * ```
+ */
+
 export const Dialog: React.FC<DialogProps> & {
   Header: typeof Header
   Content: typeof Content

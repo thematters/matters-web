@@ -10,7 +10,7 @@ import styles from './styles.css'
 interface HeaderProps {
   close: () => void
   showHeader?: boolean
-  rightButton?: React.ReactNode
+  rightButton?: React.ReactNode | string
   children: React.ReactNode
 }
 

@@ -10,12 +10,6 @@
   font-weight: var(--font-weight-feed-title);
 }
 
-.dialog {
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-xm);
-  line-height: 1.77777778;
-}
-
 .dialog-headline {
   @mixin font-serif;
 

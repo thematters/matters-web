@@ -9,7 +9,7 @@ footer {
     flex: 1;
   }
 
-  & :global (> * + *) {
+  & :global(> * + *) {
     margin-top: var(--spacing-base);
   }
 

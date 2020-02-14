@@ -2,13 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import {
-  Dropdown,
-  focusPopper,
-  hidePopperOnClick,
-  Translate,
-  ViewerContext
-} from '~/components'
+import { DropdownDialog, Translate, ViewerContext } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
@@ -31,50 +25,57 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
   })
 
   return (
-    <Dropdown
-      trigger="mouseenter focus click"
-      content={<DropdownMenu />}
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-      onShown={instance => {
-        focusPopper(instance)
-        hidePopperOnClick(instance)
+    <DropdownDialog
+      dropdown={{
+        content: <DropdownMenu type="dropdown" />,
+        trigger: 'mouseenter focus click',
+        zIndex: Z_INDEX.OVER_GLOBAL_HEADER
+      }}
+      dialog={{
+        content: <DropdownMenu type="dialog" />,
+        title: '我的',
+        showHeader: false
       }}
     >
-      <button
-        type="button"
-        className={containerClasses}
-        aria-label="我的"
-        aria-haspopup="true"
-      >
-        <Avatar size="lg" user={viewer.isInactive ? undefined : user} />
+      {({ open, ref }) => (
+        <button
+          type="button"
+          className={containerClasses}
+          aria-label="我的"
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <Avatar size="lg" user={viewer.isInactive ? undefined : user} />
 
-        <section className="info">
-          {(viewer.isActive || viewer.isOnboarding) && (
-            <span className="username">{user.displayName}</span>
-          )}
-          {viewer.isFrozen && (
-            <Translate
-              zh_hant={TEXT.zh_hant.accountFrozen}
-              zh_hans={TEXT.zh_hans.accountFrozen}
-            />
-          )}
-          {viewer.isArchived && (
-            <Translate
-              zh_hant={TEXT.zh_hant.accountArchived}
-              zh_hans={TEXT.zh_hans.accountArchived}
-            />
-          )}
-          {viewer.isBanned && (
-            <Translate
-              zh_hant={TEXT.zh_hant.accountBanned}
-              zh_hans={TEXT.zh_hans.accountBanned}
-            />
-          )}
-        </section>
+          <section className="info">
+            {(viewer.isActive || viewer.isOnboarding) && (
+              <span className="username">{user.displayName}</span>
+            )}
+            {viewer.isFrozen && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountFrozen}
+                zh_hans={TEXT.zh_hans.accountFrozen}
+              />
+            )}
+            {viewer.isArchived && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountArchived}
+                zh_hans={TEXT.zh_hans.accountArchived}
+              />
+            )}
+            {viewer.isBanned && (
+              <Translate
+                zh_hant={TEXT.zh_hant.accountBanned}
+                zh_hans={TEXT.zh_hans.accountBanned}
+              />
+            )}
+          </section>
 
-        <style jsx>{styles}</style>
-      </button>
-    </Dropdown>
+          <style jsx>{styles}</style>
+        </button>
+      )}
+    </DropdownDialog>
   )
 }
 

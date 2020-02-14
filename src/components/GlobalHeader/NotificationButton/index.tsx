@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useEffect } from 'react'
+import classNames from 'classnames'
+import { forwardRef, useContext, useEffect } from 'react'
 
 import {
   Button,
+  ButtonProps,
   Dropdown,
-  focusPopper,
   hidePopperOnClick,
   Icon,
   useResponsive,
@@ -19,7 +20,7 @@ import {
 } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 
-import { POLL_INTERVAL, Z_INDEX } from '~/common/enums'
+import { PATHS, POLL_INTERVAL, Z_INDEX } from '~/common/enums'
 
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
@@ -28,60 +29,32 @@ import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/M
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
-const NoticeButton = ({
-  data,
-  loading,
-  error,
-  hasUnreadNotices,
-  refetch,
-  markAllNoticesAsRead
-}: {
-  data?: MeNotifications
-  loading: boolean
-  error: any
-  hasUnreadNotices: boolean
-  refetch: any
-  markAllNoticesAsRead: any
-}) => {
-  const isSmallDown = useResponsive({ type: 'sm-down' })()
-  const { headerState } = useContext(HeaderContext)
-  const isDraft = headerState.type === 'draft'
+type NoticeButtonProps = { unread?: boolean } & ButtonProps
 
-  if (isSmallDown && isDraft) {
-    return null
-  }
+const NoticeButton = forwardRef(
+  ({ unread, ...restProps }: NoticeButtonProps, ref) => {
+    const buttonContentClass = classNames({
+      'notice-button-content': true,
+      unread
+    })
 
-  return (
-    <Dropdown
-      content={<DropdownNotices data={data} loading={loading} error={error} />}
-      distance={12}
-      theme="dropdown shadow-light"
-      onShown={instance => {
-        focusPopper(instance)
-        hidePopperOnClick(instance)
-
-        if (hasUnreadNotices) {
-          markAllNoticesAsRead()
-          refetch()
-        }
-      }}
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-    >
+    return (
       <Button
         size={['2rem', '2rem']}
         bgHoverColor="grey-lighter"
         aria-label="通知"
-        aria-haspopup="true"
+        ref={ref}
+        {...restProps}
       >
-        <span className={hasUnreadNotices ? 'unread' : undefined}>
+        <span className={buttonContentClass}>
           <Icon.NotificationLarge size="md" />
 
           <style jsx>{styles}</style>
         </span>
       </Button>
-    </Dropdown>
-  )
-}
+    )
+  }
+)
 
 const NotificationButton = () => {
   const viewer = useContext(ViewerContext)
@@ -115,21 +88,41 @@ const NotificationButton = () => {
     }
   }, [])
 
+  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const { headerState } = useContext(HeaderContext)
+  const isDraft = headerState.type === 'draft'
+  const unread =
+    ((unreadCountData &&
+      unreadCountData.viewer &&
+      unreadCountData.viewer.status &&
+      unreadCountData.viewer.status.unreadNoticeCount) ||
+      0) >= 1
+
+  if (!isSmallUp && isDraft) {
+    return null
+  }
+
+  if (!isSmallUp) {
+    return <NoticeButton unread={unread} {...PATHS.ME_NOTIFICATIONS} />
+  }
+
   return (
-    <NoticeButton
-      data={data}
-      loading={loading}
-      error={error}
-      refetch={refetch}
-      hasUnreadNotices={
-        ((unreadCountData &&
-          unreadCountData.viewer &&
-          unreadCountData.viewer.status &&
-          unreadCountData.viewer.status.unreadNoticeCount) ||
-          0) >= 1
-      }
-      markAllNoticesAsRead={markAllNoticesAsRead}
-    />
+    <Dropdown
+      content={<DropdownNotices data={data} loading={loading} error={error} />}
+      distance={12}
+      theme="dropdown shadow-light"
+      onShown={instance => {
+        hidePopperOnClick(instance)
+
+        if (unread) {
+          markAllNoticesAsRead()
+          refetch()
+        }
+      }}
+      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+    >
+      <NoticeButton unread={unread} aria-haspopup="true" />
+    </Dropdown>
   )
 }
 

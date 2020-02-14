@@ -15,7 +15,7 @@ import {
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({
@@ -67,9 +67,10 @@ const DropdownMenu = () => {
       )
     }
   }
+  const isDropdown = type === 'dropdown'
 
   return (
-    <Menu width="sm">
+    <Menu width={isDropdown ? 'sm' : undefined}>
       <Menu.Item {...userPath}>
         <TextIcon
           icon={<Icon.ProfileMedium size="md" />}

@@ -3,16 +3,17 @@ import { useContext, useState } from 'react'
 
 import {
   Button,
-  Dropdown,
-  focusPopper,
-  hidePopperOnClick,
+  DropdownDialog,
   Icon,
   IconColor,
   IconSize,
   Menu,
   PopperInstance,
+  Translate,
   ViewerContext
 } from '~/components'
+
+import { TEXT } from '~/common/enums'
 
 import ArchiveButton from './ArchiveButton'
 import ExtendButton from './ExtendButton'
@@ -20,7 +21,6 @@ import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import StickyButton from './StickyButton'
-import styles from './styles.css'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
@@ -36,19 +36,6 @@ type DropdownActionsProps = {
   article: DropdownActionsArticle
 } & DropdownActionsControls
 
-interface DropdownContentProps {
-  article: DropdownActionsArticle
-
-  instance?: PopperInstance | null
-
-  hasExtendButton?: boolean
-  hasStickyButton?: boolean
-  hasArchiveButton?: boolean
-  hasRemoveTagButton?: boolean
-  hasSetTagSelectedButton?: boolean
-  hasSetTagUnselectedButton?: boolean
-}
-
 const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
@@ -61,39 +48,6 @@ const fragments = {
     ${ArchiveButton.fragments.article}
     ${ExtendButton.fragments.article}
   `
-}
-
-const DropdownContent = ({
-  article,
-
-  instance,
-
-  hasExtendButton,
-  hasStickyButton,
-  hasArchiveButton,
-  hasRemoveTagButton,
-  hasSetTagSelectedButton,
-  hasSetTagUnselectedButton
-}: DropdownContentProps) => {
-  return (
-    <Menu width="sm">
-      {/* public */}
-      {hasExtendButton && <ExtendButton article={article} />}
-
-      {/* private */}
-      {hasStickyButton && <StickyButton article={article} />}
-      {hasArchiveButton && <ArchiveButton article={article} />}
-      {hasSetTagSelectedButton && (
-        <SetTagSelectedButton article={article} instance={instance} />
-      )}
-      {hasSetTagUnselectedButton && (
-        <SetTagUnselectedButton article={article} />
-      )}
-      {hasRemoveTagButton && (
-        <RemoveTagButton article={article} instance={instance} />
-      )}
-    </Menu>
-  )
 }
 
 const DropdownActions = ({
@@ -132,41 +86,59 @@ const DropdownActions = ({
     return null
   }
 
+  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
+    const isDropdown = type === 'dropdown'
+
+    return (
+      <Menu width={isDropdown ? 'sm' : undefined}>
+        {/* public */}
+        {hasExtendButton && <ExtendButton article={article} />}
+
+        {/* private */}
+        {hasStickyButton && <StickyButton article={article} />}
+        {hasArchiveButton && <ArchiveButton article={article} />}
+        {inTagDetailLatest && (
+          <SetTagSelectedButton article={article} instance={instance} />
+        )}
+        {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
+        {hasRemoveTagButton && (
+          <RemoveTagButton article={article} instance={instance} />
+        )}
+      </Menu>
+    )
+  }
+
   return (
-    <>
-      <Dropdown
-        content={
-          <DropdownContent
-            article={article}
-            instance={instance}
-            hasExtendButton={hasExtendButton}
-            hasStickyButton={hasStickyButton}
-            hasArchiveButton={hasArchiveButton}
-            hasRemoveTagButton={hasRemoveTagButton}
-            hasSetTagSelectedButton={inTagDetailLatest}
-            hasSetTagUnselectedButton={inTagDetailSelected}
+    <DropdownDialog
+      dropdown={{
+        content: <Content type="dropdown" />,
+        placement: 'bottom-end',
+        onCreate: setInstance
+      }}
+      dialog={{
+        content: <Content type="dialog" />,
+        title: (
+          <Translate
+            zh_hant={TEXT.zh_hant.moreActions}
+            zh_hans={TEXT.zh_hans.moreActions}
           />
-        }
-        placement="bottom-end"
-        onCreate={setInstance}
-        onShown={i => {
-          focusPopper(i)
-          hidePopperOnClick(i)
-        }}
-      >
+        ),
+        showHeader: false
+      }}
+    >
+      {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgHoverColor="grey-lighter"
-          aria-label="更多操作"
+          aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
-          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          onClick={open}
+          ref={ref}
         >
           <Icon.More color={color} size={size} />
         </Button>
-      </Dropdown>
-
-      <style jsx>{styles}</style>
-    </>
+      )}
+    </DropdownDialog>
   )
 }
 

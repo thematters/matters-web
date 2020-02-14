@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { createContext, useContext, useState } from 'react'
 
-import { ViewerContext } from '~/components'
+import { Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { DEFAULT_LANG } from '~/common/enums'
+import { ADD_TOAST, DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
@@ -46,10 +46,10 @@ export const LanguageProvider = ({
     <LanguageContext.Provider
       value={{
         lang: viewerLanguage || lang,
-        setLang: targetLang => {
+        setLang: async targetLang => {
           if (viewer.isAuthed) {
             try {
-              updateLanguage({
+              await updateLanguage({
                 variables: { input: { language: targetLang } },
                 optimisticResponse: {
                   updateUserInfo: {
@@ -62,8 +62,34 @@ export const LanguageProvider = ({
                   }
                 }
               })
+
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'green',
+                    content: (
+                      <Translate
+                        zh_hant="介面語言已修改"
+                        zh_hans="界面语言已修改"
+                      />
+                    )
+                  }
+                })
+              )
             } catch (e) {
-              console.log(e)
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'red',
+                    content: (
+                      <Translate
+                        zh_hant="修改失敗，請稍候重試"
+                        zh_hans="修改失败，请稍候重试"
+                      />
+                    )
+                  }
+                })
+              )
             }
           }
 

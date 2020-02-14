@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   Button,
   EmptyNotice,
@@ -49,18 +47,20 @@ const Header = () => (
 
 const Footer = () => (
   <footer>
-    <Link {...PATHS.ME_NOTIFICATIONS}>
-      <a>
-        <TextIcon
-          icon={<Icon.Right size="xs" />}
-          color="green"
-          textPlacement="left"
-          weight="md"
-        >
-          <Translate zh_hant="全部通知" zh_hans="全部通知" />
-        </TextIcon>
-      </a>
-    </Link>
+    <Button
+      spacing={['xxtight', 'xtight']}
+      bgHoverColor="green-lighter"
+      {...PATHS.ME_NOTIFICATIONS}
+    >
+      <TextIcon
+        icon={<Icon.Right size="xs" />}
+        color="green"
+        textPlacement="left"
+        weight="md"
+      >
+        <Translate zh_hant="全部通知" zh_hans="全部通知" />
+      </TextIcon>
+    </Button>
 
     <style jsx>{styles}</style>
   </footer>
