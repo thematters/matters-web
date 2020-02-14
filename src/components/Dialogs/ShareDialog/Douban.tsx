@@ -27,7 +27,7 @@ const Douban = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl)
     }}
   >
-    <TextIcon icon={withIcon(IconShareDouban)({})} spacing="tight">
+    <TextIcon icon={withIcon(IconShareDouban)({})} spacing="base">
       <Translate zh_hant="豆瓣" zh_hans="豆瓣" />
     </TextIcon>
   </button>

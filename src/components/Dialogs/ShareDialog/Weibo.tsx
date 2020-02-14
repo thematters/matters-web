@@ -20,7 +20,7 @@ const Weibo = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, '分享到微博')
     }}
   >
-    <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="tight">
+    <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
       <Translate zh_hant="微博" zh_hans="微博" />
     </TextIcon>
   </button>

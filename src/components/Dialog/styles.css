@@ -14,8 +14,16 @@
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
 
+  &.no-header {
+    padding-top: var(--spacing-x-loose);
+  }
+
   @media (--sm-up) {
     border-radius: 0.5rem;
+
+    &.no-header {
+      padding-top: 0;
+    }
   }
 }
 

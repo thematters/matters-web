@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import {
   Button,
   Icon,
@@ -11,14 +13,24 @@ import styles from './styles.css'
 
 interface HeaderProps {
   close: () => void
+  showHeader?: boolean
   rightButton?: React.ReactNode
 }
 
-const Header: React.FC<HeaderProps> = ({ close, rightButton, children }) => {
+const Header: React.FC<HeaderProps> = ({
+  close,
+  showHeader,
+  rightButton,
+
+  children
+}) => {
   const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const headerClass = classNames({
+    'u-visually-hidden': !showHeader
+  })
 
   return (
-    <header>
+    <header className={headerClass}>
       <section className="left">
         <Button onClick={close} aria-label="關閉">
           {/* {!isSmallUp && (
@@ -33,8 +45,8 @@ const Header: React.FC<HeaderProps> = ({ close, rightButton, children }) => {
         </Button>
       </section>
 
-      <h1 id="dialog-title">
-        <span>{children}</span>
+      <h1>
+        <span id="dialog-title">{children}</span>
       </h1>
 
       {rightButton && <section className="right">{rightButton}</section>}

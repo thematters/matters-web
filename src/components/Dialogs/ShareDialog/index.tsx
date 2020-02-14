@@ -38,6 +38,7 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
           />
         }
         size="sm"
+        showHeader={false}
         isOpen={showDialog}
         onDismiss={close}
       >

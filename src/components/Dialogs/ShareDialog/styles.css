@@ -1,6 +1,5 @@
 .socials-container {
-  padding-top: var(--spacing-xx-tight);
-  padding-bottom: var(--spacing-xx-tight);
+  padding-top: var(--spacing-x-tight);
 }
 
 .left,
@@ -10,20 +9,17 @@
 
   & :global(button) {
     display: block;
-
+    width: 100%;
+    height: 3rem;
     padding-left: var(--spacing-loose);
     padding-right: var(--spacing-loose);
 
-    width: 100%;
-    height: 3rem;
-
+    font-weight: var(--font-weight-medium);
     text-align: left;
 
-    &:not(:disabled) {
-      &:hover,
-      &:focus {
-        background: var(--color-grey-lighter);
-      }
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter);
     }
   }
 }

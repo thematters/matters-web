@@ -7,8 +7,10 @@ import { useOutsideClick, useResponsive } from '~/components'
 
 import Content from './Content'
 import Footer from './Footer'
+import Handle from './Handle'
 import Header from './Header'
 import Message from './Message'
+import Overlay from './Overlay'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
 
@@ -20,19 +22,8 @@ export interface DialogOverlayProps {
 export type DialogProps = {
   title: string | React.ReactNode
   size?: 'sm' | 'lg'
+  showHeader?: boolean
 } & DialogOverlayProps
-
-const Overlay = (props: { style: React.CSSProperties }) => (
-  <div aria-hidden className="overlay" {...props}>
-    <style jsx>{styles}</style>
-  </div>
-)
-
-const Handle = () => (
-  <div className="handle">
-    <style jsx>{styles}</style>
-  </div>
-)
 
 export const Dialog: React.FC<DialogProps> & {
   Header: typeof Header
@@ -42,6 +33,7 @@ export const Dialog: React.FC<DialogProps> & {
 } = ({
   title,
   size = 'lg',
+  showHeader = true,
 
   isOpen,
   onDismiss,
@@ -52,13 +44,6 @@ export const Dialog: React.FC<DialogProps> & {
   const node: React.RefObject<any> | null = useRef(null)
 
   useOutsideClick(node, onDismiss)
-
-  const containerClass = classNames({
-    container: true,
-    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
-      size === 'lg',
-    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
-  })
 
   const isSmallUp = useResponsive({ type: 'sm-up' })()
   const AnimatedDialogOverlay = animated(DialogOverlay)
@@ -77,6 +62,14 @@ export const Dialog: React.FC<DialogProps> & {
     config: { tension: 270, friction: isSmallUp ? undefined : 30 }
   }
   const transitions = useTransition(isOpen, null, values)
+
+  const containerClass = classNames({
+    container: true,
+    'no-header': !showHeader,
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
+      size === 'lg',
+    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
+  })
 
   return (
     <>
@@ -99,7 +92,9 @@ export const Dialog: React.FC<DialogProps> & {
                 <div ref={node} className={containerClass}>
                   {!isSmallUp && <Handle />}
 
-                  <Header close={onDismiss}>{title}</Header>
+                  <Header close={onDismiss} showHeader={showHeader}>
+                    {title}
+                  </Header>
 
                   {children}
                 </div>

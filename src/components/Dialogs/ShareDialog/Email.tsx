@@ -26,7 +26,7 @@ const Email = ({ title, link }: { title: string; link: string }) => (
       return (window.location.href = shareUrl)
     }}
   >
-    <TextIcon icon={withIcon(IconShareEmail)({})} spacing="tight">
+    <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
       <Translate zh_hant="郵件" zh_hans="邮件" />
     </TextIcon>
   </button>
