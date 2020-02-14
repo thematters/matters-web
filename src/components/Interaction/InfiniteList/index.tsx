@@ -26,6 +26,7 @@ interface Props {
   totalCount: number
 
   defaultListHeight?: number
+  defaultRowHeight?: number
   threshold?: number
 }
 
@@ -38,6 +39,7 @@ export const InfiniteList = ({
   totalCount,
 
   defaultListHeight = 10,
+  defaultRowHeight,
   threshold = 1
 }: Props) => {
   const cache: CellMeasurerCache = new CellMeasurerCache({
@@ -45,9 +47,11 @@ export const InfiniteList = ({
     defaultHeight: defaultListHeight
   })
 
-  const [listHeight, setListHeight] = useState<number>(defaultListHeight)
+  const [listHeight, setListHeight] = useState(
+    defaultRowHeight ? defaultRowHeight * data.length : defaultListHeight
+  )
 
-  const [maxHeight] = useState<number>(window?.innerHeight || defaultListHeight)
+  const [maxHeight] = useState(window?.innerHeight || defaultListHeight)
 
   const isRowLoaded = ({ index }: Index) => !!data[index]
 

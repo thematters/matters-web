@@ -141,6 +141,7 @@ const AppreciatorsModal = () => {
         <div className="modal-appreciators-list">
           <InfiniteList
             data={edges}
+            defaultRowHeight={70}
             loader={<Spinner />}
             loadMore={loadMore}
             parentProps={{ articleId: article.id }}
