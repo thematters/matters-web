@@ -57,28 +57,26 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
   const { node, cursor } = datum
   const { articleId } = parentProps
   return (
-    <>
-      <div
-        className="appreciator-item"
-        key={cursor}
-        onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-            type: FEED_TYPE.APPRECIATOR,
-            location: index,
-            entrance: articleId
-          })
-        }}
-      >
-        <UserDigest.Rich
-          user={node.sender}
-          avatarBadge={
-            <span className="appreciation-amount">{node.amount}</span>
-          }
-          hasFollow
-        />
-        <style jsx>{styles}</style>
-      </div>
-    </>
+    <div
+      className="appreciator-item"
+      key={cursor}
+      onClick={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+          type: FEED_TYPE.APPRECIATOR,
+          location: index,
+          entrance: articleId
+        })
+      }}
+    >
+      <UserDigest.Rich
+        user={node.sender}
+        avatarBadge={
+          <span className="appreciation-amount">{node.amount}</span>
+        }
+        hasFollow
+      />
+      <style jsx>{styles}</style>
+    </div>
   )
 }
 
