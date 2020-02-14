@@ -53,7 +53,6 @@ export * from './Comment'
 export * from './Notice'
 export * from './Transaction'
 
-export * from './OAuth'
 export * from './SearchBar'
 export * from './UserProfile'
 export * from './AuthorPicker'

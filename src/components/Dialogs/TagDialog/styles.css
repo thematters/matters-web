@@ -2,10 +2,6 @@
   margin: 0rem var(--spacing-base) var(--spacing-loose);
 }
 
-.form {
-  width: 100%;
-}
-
 .field {
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);

@@ -1,28 +1,3 @@
-ol {
-  list-style: decimal;
-  margin-left: 1rem;
-
-  & > li {
-    line-height: 1.9;
-  }
-}
-
-.complete {
-  text-align: center;
-
-  & :global(h3) {
-    margin: var(--spacing-loose) 0;
-    color: var(--color-black);
-  }
-
-  & img {
-    width: 5rem;
-    height: 5rem;
-  }
-}
-
 .content {
-  color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
   text-align: left;
 }

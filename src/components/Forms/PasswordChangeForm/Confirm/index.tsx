@@ -13,8 +13,6 @@ import {
   validatePassword
 } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
@@ -95,7 +93,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Dialog.Content>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
           type="password"
           field="password"
@@ -133,14 +131,6 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
 
       <Dialog.Footer>
         <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
           onClick={backPreviousStep}
           bgColor="grey-lighter"
           textColor="black"
@@ -150,9 +140,15 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
             zh_hans={TEXT.zh_hans.previousStep}
           />
         </Dialog.Footer.Button>
-      </Dialog.Footer>
 
-      <style jsx>{styles}</style>
+        <Dialog.Footer.Button
+          type="submit"
+          disabled={!_isEmpty(errors) || isSubmitting}
+          loading={isSubmitting}
+        >
+          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
     </form>
   )
 }

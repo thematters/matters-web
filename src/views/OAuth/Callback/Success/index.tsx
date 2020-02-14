@@ -1,11 +1,12 @@
 import Router, { useRouter } from 'next/router'
 
-import { OAuth, Translate } from '~/components'
+import { Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
 
+import { Box } from '../../Box'
 import styles from './styles.css'
 
 const OAuthCallbackSuccess = () => {
@@ -25,7 +26,7 @@ const OAuthCallbackSuccess = () => {
 
   return (
     <main className="l-row">
-      <OAuth.Box avatar={avatar[provider]} title={title[provider]}>
+      <Box avatar={avatar[provider]} title={title[provider]}>
         <section className="content">
           <h2>
             <Translate zh_hant="綁定成功！" zh_hans="綁定成功！" />
@@ -38,7 +39,7 @@ const OAuthCallbackSuccess = () => {
             />
           </p>
         </section>
-      </OAuth.Box>
+      </Box>
 
       <style jsx>{styles}</style>
     </main>

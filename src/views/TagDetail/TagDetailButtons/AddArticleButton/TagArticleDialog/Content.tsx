@@ -168,7 +168,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   }
 
   return (
-    <form id="tag-article-dialog" className="form" onSubmit={handleSubmit}>
+    <form id="tag-article-dialog" onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.DropdownInput
           type="search"

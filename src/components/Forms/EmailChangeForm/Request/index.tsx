@@ -15,8 +15,6 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { TEXT } from '~/common/enums'
 import { translate, validateCode, validateEmail } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
 interface FormProps {
@@ -87,7 +85,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Dialog.Content>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
           type="email"
           field="email"
@@ -134,8 +132,6 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

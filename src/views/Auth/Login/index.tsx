@@ -17,7 +17,7 @@ const Login = () => {
 
   const containerClass = classNames({
     container: true,
-    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': true
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3': true
   })
 
   return (

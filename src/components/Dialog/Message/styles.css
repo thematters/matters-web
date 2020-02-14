@@ -1,5 +1,5 @@
 .hint {
-  margin: var(--spacing-base) 0rem;
+  margin: var(--spacing-loose) 0 0;
 
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);

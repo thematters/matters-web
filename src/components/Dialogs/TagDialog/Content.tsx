@@ -201,7 +201,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
   return (
-    <form id="tag-dialog" className="form" onSubmit={handleSubmit}>
+    <form id="tag-dialog" onSubmit={handleSubmit}>
       <Dialog.Content>
         <p className="field">
           <Translate

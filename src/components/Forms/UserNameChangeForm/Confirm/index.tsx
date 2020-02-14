@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
@@ -14,12 +13,9 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 
 interface FormProps {
-  extraClass?: string[]
   submitCallback: () => void
 }
 
@@ -40,7 +36,7 @@ const UPDATE_USER_INFO = gql`
 export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const { extraClass = [], submitCallback } = formProps
+  const { submitCallback } = formProps
 
   const {
     values,
@@ -90,11 +86,9 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
-      <Dialog.Content>
+    <form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
           type="text"
           field="userName"
@@ -139,8 +133,6 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }

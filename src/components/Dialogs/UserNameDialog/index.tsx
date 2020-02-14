@@ -34,12 +34,12 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
       >
         {step === 'ask' && (
           <>
-            <Dialog.Content>
+            <Dialog.Message>
               <Translate
                 zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
                 zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
               />
-            </Dialog.Content>
+            </Dialog.Message>
 
             <Dialog.Footer>
               <Dialog.Footer.Button

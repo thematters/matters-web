@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
@@ -41,7 +40,6 @@ import { UserRegister } from './__generated__/UserRegister'
  * ```jsx
  *   <SignUpInitForm
  *     defaultEmail={''}
- *     extraClass={[]}
  *     submitCallback={()=> {}}
  *   />
  * ```
@@ -49,7 +47,6 @@ import { UserRegister } from './__generated__/UserRegister'
  */
 interface FormProps {
   defaultEmail?: string
-  extraClass?: string[]
   purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
 }
@@ -98,12 +95,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
-  const {
-    defaultEmail = '',
-    extraClass = [],
-    purpose,
-    submitCallback
-  } = formProps
+  const { defaultEmail = '', purpose, submitCallback } = formProps
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
@@ -184,11 +176,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
-      <Dialog.Content>
+    <form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
           type="email"
           field="email"
@@ -287,6 +277,9 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
       </Dialog.Content>
 
       <Dialog.Footer>
+        {isInDialog && <LoginDialogButton />}
+        {isInPage && <LoginRedirectionButton />}
+
         <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
@@ -297,9 +290,6 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             zh_hans={TEXT.zh_hans.nextStep}
           />
         </Dialog.Footer.Button>
-
-        {isInDialog && <LoginDialogButton />}
-        {isInPage && <LoginRedirectionButton />}
       </Dialog.Footer>
 
       <style jsx>{styles}</style>

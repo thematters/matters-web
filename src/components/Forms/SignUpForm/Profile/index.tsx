@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
@@ -32,7 +31,6 @@ import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfile
  *
  * ```jsx
  *   <SignUpProfileForm
- *     extraClass={[]}
  *     submitCallback={()=> {}}
  *   />
  * ```
@@ -40,7 +38,6 @@ import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfile
  */
 
 interface FormProps {
-  extraClass?: string[]
   submitCallback?: () => void
 }
 
@@ -77,7 +74,7 @@ const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
 export const SignUpProfileForm: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const { extraClass = [], submitCallback } = formProps
+  const { submitCallback } = formProps
 
   const {
     values,
@@ -131,11 +128,9 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
     }
   })
 
-  const formClass = classNames('form', ...extraClass)
-
   return (
-    <form className={formClass} onSubmit={handleSubmit}>
-      <Dialog.Content>
+    <form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <SignUpAvatarUploader
           field="avatar"
           lang={lang}

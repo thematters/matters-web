@@ -9,7 +9,6 @@ import { useContext } from 'react'
 import {
   Dialog,
   LanguageContext,
-  OAuth,
   Spinner,
   Throw404,
   Translate,
@@ -19,6 +18,7 @@ import {
 import { PATHS, TEXT } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
 
+import { Box } from '../Box'
 import styles from './styles.css'
 
 import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
@@ -63,9 +63,9 @@ const OAuthAuthorize = () => {
   if (loading) {
     return (
       <main className="l-row">
-        <OAuth.Box>
+        <Box>
           <Spinner />
-        </OAuth.Box>
+        </Box>
       </main>
     )
   }
@@ -78,7 +78,7 @@ const OAuthAuthorize = () => {
 
   return (
     <main className="l-row">
-      <OAuth.Box
+      <Box
         avatar={avatar}
         title={
           <>
@@ -165,7 +165,7 @@ const OAuthAuthorize = () => {
             )}
           </Dialog.Footer>
         </form>
-      </OAuth.Box>
+      </Box>
 
       <style jsx>{styles}</style>
     </main>

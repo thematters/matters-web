@@ -31,7 +31,6 @@ import {
 
 import PasswordResetDialogButton from './PasswordResetDialogButton'
 import SignUpDialogButton from './SignUpDialogButton'
-import styles from './styles.css'
 
 import { UserLogin } from './__generated__/UserLogin'
 
@@ -184,7 +183,7 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Dialog.Content>
+      <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
           type="email"
           field="email"
@@ -218,6 +217,9 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
       </Dialog.Content>
 
       <Dialog.Footer>
+        {isInDialog && <SignUpDialogButton />}
+        {isInPage && <SignUpRedirectionButton />}
+
         <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
@@ -228,12 +230,7 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
             zh_hans={TEXT.zh_hans.login}
           />
         </Dialog.Footer.Button>
-
-        {isInDialog && <SignUpDialogButton />}
-        {isInPage && <SignUpRedirectionButton />}
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </form>
   )
 }
