@@ -2,7 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { InfiniteList, RowRendererProps, Spinner, Translate, UserDigest } from '~/components'
+import {
+  InfiniteList,
+  RowRendererProps,
+  Spinner,
+  Translate,
+  UserDigest
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import { Modal } from '~/components/Modal'
 import { ModalInstance } from '~/components/ModalManager'
@@ -66,9 +72,7 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
         <UserDigest.Rich
           user={node.sender}
           avatarBadge={
-            <span className="appreciation-amount">
-              {node.amount}
-            </span>
+            <span className="appreciation-amount">{node.amount}</span>
           }
           hasFollow
         />
@@ -141,7 +145,7 @@ const AppreciatorsModal = () => {
         <div className="modal-appreciators-list">
           <InfiniteList
             data={edges}
-            loader={<Spinner/>}
+            loader={<Spinner />}
             loadMore={loadMore}
             parentProps={{ articleId: article.id }}
             renderer={ListRow}

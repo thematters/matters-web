@@ -1,5 +1,5 @@
 import _debounce from 'lodash/debounce'
-import { ReactNode, useState} from 'react'
+import { ReactNode, useState } from 'react'
 import {
   AutoSizer,
   CellMeasurer,
@@ -51,7 +51,8 @@ export const InfiniteList = ({
 
   const isRowLoaded = ({ index }: Index) => !!data[index]
 
-  const loadMoreRows = ({ startIndex }: IndexRange) => loadMore(() => cache.clear(startIndex, 0))
+  const loadMoreRows = ({ startIndex }: IndexRange) =>
+    loadMore(() => cache.clear(startIndex, 0))
 
   const rowRenderer = ({ index, key, parent, style }: ListRowProps) => {
     const datum = data[index]
@@ -66,8 +67,10 @@ export const InfiniteList = ({
   }
 
   const calculate = () =>
-    ([...Array(data.length).keys()])
-      .reduce((sum, index) => (sum + cache.getHeight(index, 0)), 0)
+    [...Array(data.length).keys()].reduce(
+      (sum, index) => sum + cache.getHeight(index, 0),
+      0
+    )
 
   const onRowsHaveRendered = () => {
     if (listHeight < maxHeight) {
@@ -82,7 +85,7 @@ export const InfiniteList = ({
 
   const rowCount = (totalCount || 0) > count ? count + 1 : count
 
-  const listStyle = { height: `${listHeight}px`}
+  const listStyle = { height: `${listHeight}px` }
 
   return (
     <div className="infinite-list" style={listStyle}>
