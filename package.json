@@ -66,7 +66,7 @@
     "next": "^9.2.1",
     "next-with-apollo": "^4.3.0",
     "nprogress": "^0.2.0",
-    "query-string": "^6.10.1",
+    "query-string": "^6.11.0",
     "react": "^16.12.0",
     "react-beautiful-dnd": "^12.2.0",
     "react-content-loader": "^5.0.1",
