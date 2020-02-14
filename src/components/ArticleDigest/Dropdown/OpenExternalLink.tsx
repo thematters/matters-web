@@ -2,9 +2,13 @@ import { Icon } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import { DropdownDigestArticle } from './__generated__/DropdownDigestArticle'
+import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
 
-const OpenExternalLink = ({ article }: { article: DropdownDigestArticle }) => {
+const OpenExternalLink = ({
+  article
+}: {
+  article: ArticleDigestDropdownArticle
+}) => {
   const path = toPath({
     page: 'articleDetail',
     article

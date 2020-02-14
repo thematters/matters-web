@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { List, Spinner } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { ArticleDigestSidebar, List, Spinner } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -20,14 +19,14 @@ export const SIDEBAR_ICYMI = gql`
           edges {
             cursor
             node {
-              ...SidebarDigestArticle
+              ...ArticleDigestSidebarArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Sidebar.fragments.article}
+  ${ArticleDigestSidebar.fragments.article}
 `
 
 const ICYMI = () => {
@@ -49,7 +48,7 @@ const ICYMI = () => {
       <List spacing={['loose', 0]}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Sidebar
+            <ArticleDigestSidebar
               article={node}
               titleTextSize="sm"
               hasCover

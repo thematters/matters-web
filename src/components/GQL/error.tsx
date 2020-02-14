@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/browser'
 import { ApolloError } from 'apollo-client'
 
 import { Error } from '~/components/Error'
@@ -30,7 +29,9 @@ export const getErrorCodes = (error: ApolloError) => {
  */
 export const mutationOnError = (error: ApolloError) => {
   // Add info to Sentry
-  Sentry.captureException(error)
+  import('@sentry/browser').then(Sentry => {
+    Sentry.captureException(error)
+  })
 
   if (!process.browser) {
     throw error
@@ -160,7 +161,9 @@ export const mutationOnError = (error: ApolloError) => {
 
 export const QueryError = ({ error }: { error: ApolloError }) => {
   // Add info to Sentry
-  Sentry.captureException(error)
+  import('@sentry/browser').then(Sentry => {
+    Sentry.captureException(error)
+  })
 
   const errorCodes = getErrorCodes(error)
 

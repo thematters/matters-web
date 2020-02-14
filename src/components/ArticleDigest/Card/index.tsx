@@ -11,20 +11,20 @@ import {
   toPath
 } from '~/common/utils'
 
-import ArticleTitleDigest from '../TitleDigest'
+import { ArticleDigestTitle } from '../Title'
 import styles from './styles.css'
 
-import { CardDigestArticle } from './__generated__/CardDigestArticle'
+import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
 
-interface CardDigestProps {
-  article: CardDigestArticle
+interface ArticleDigestCardProps {
+  article: ArticleDigestCardArticle
 
   onClick?: () => any
 }
 
 const fragments = {
   article: gql`
-    fragment CardDigestArticle on Article {
+    fragment ArticleDigestCardArticle on Article {
       id
       state
       title
@@ -37,14 +37,17 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...TitleDigestArticle
+      ...ArticleDigestTitleArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleTitleDigest.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 
-const CardDigest = ({ article, onClick }: CardDigestProps) => {
+export const ArticleDigestCard = ({
+  article,
+  onClick
+}: ArticleDigestCardProps) => {
   const { summary, state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned ? article.cover : null
@@ -78,7 +81,7 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
         }
       >
         <header>
-          <ArticleTitleDigest
+          <ArticleDigestTitle
             article={{ ...article, title }}
             is="h3"
             textSize="md-s"
@@ -103,6 +106,4 @@ const CardDigest = ({ article, onClick }: CardDigestProps) => {
   )
 }
 
-CardDigest.fragments = fragments
-
-export default CardDigest
+ArticleDigestCard.fragments = fragments

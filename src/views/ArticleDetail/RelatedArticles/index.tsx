@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest, Title, Translate } from '~/components'
+import { ArticleDigestCard, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -17,12 +17,12 @@ const fragments = {
         edges {
           cursor
           node {
-            ...CardDigestArticle
+            ...ArticleDigestCardArticle
           }
         }
       }
     }
-    ${ArticleDigest.Card.fragments.article}
+    ${ArticleDigestCard.fragments.article}
   `
 }
 
@@ -42,7 +42,7 @@ const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
       <ul>
         {edges.map(({ node, cursor }, i) => (
           <li key={cursor}>
-            <ArticleDigest.Card
+            <ArticleDigestCard
               article={node}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

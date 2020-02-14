@@ -4,7 +4,7 @@ import _isEmpty from 'lodash/isEmpty'
 import { useContext, useState } from 'react'
 
 import {
-  ArticleDigest,
+  ArticleDigestDropdown,
   Button,
   Icon,
   LanguageContext,
@@ -184,12 +184,12 @@ const TagArticleModal: React.FC<ModalProps> = ({ close, tagId }) => {
         <ul>
           {selectedArticles.map((article, index) => (
             <li key={index}>
-              <ArticleDigest.Dropdown
+              <ArticleDigestDropdown
                 article={article}
                 titleTextSize="md-s"
                 disabled
                 extraButton={
-                  <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+                  <ArticleDigestDropdown.OpenExternalLink article={article} />
                 }
                 borderRadius="xtight"
                 bgColor="grey-lighter"

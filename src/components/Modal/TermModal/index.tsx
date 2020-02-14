@@ -2,10 +2,9 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
 
-import { Icon, Translate } from '~/components'
+import { Icon, Term, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
 import { unsubscribePush } from '~/common/utils'

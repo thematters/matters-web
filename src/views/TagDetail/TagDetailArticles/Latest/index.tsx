@@ -3,7 +3,7 @@ import { NetworkStatus } from 'apollo-client'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
   InfiniteScroll,
   List,
   LoadMore,
@@ -116,7 +116,7 @@ const LatestArticles = ({ id }: { id: string }) => {
         <List hasBorder>
           {(edges || []).map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigest.Feed
+              <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

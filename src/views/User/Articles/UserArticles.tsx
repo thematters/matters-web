@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
   Head,
   Icon,
   InfiniteScroll,
@@ -136,7 +136,7 @@ const UserArticles = () => {
 
             return (
               <List.Item key={cursor}>
-                <ArticleDigest.Feed
+                <ArticleDigestFeed
                   article={node}
                   inUserArticles
                   onClick={() =>

@@ -30,7 +30,7 @@ export const BookmarkButton = ({
   if (article.subscribed) {
     return (
       <Unsubscribe
-        article={article}
+        articleId={article.id}
         size={size}
         disabled={viewer.isArchived || viewer.isFrozen}
       />
@@ -38,7 +38,7 @@ export const BookmarkButton = ({
   } else {
     return (
       <Subscribe
-        article={article}
+        articleId={article.id}
         size={size}
         disabled={viewer.isArchived || viewer.isFrozen}
       />

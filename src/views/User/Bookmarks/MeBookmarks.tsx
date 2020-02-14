@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigest, InfiniteScroll, List, Spinner } from '~/components'
+import { ArticleDigestFeed, InfiniteScroll, List, Spinner } from '~/components'
 import EmptyBookmark from '~/components/Empty/EmptyBookmark'
 import { QueryError } from '~/components/GQL'
 
@@ -22,13 +22,13 @@ const ME_BOOKMARK_FEED = gql`
         edges {
           cursor
           node {
-            ...FeedDigestArticle
+            ...ArticleDigestFeedArticle
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const MeBookmarks = () => {
@@ -69,7 +69,7 @@ const MeBookmarks = () => {
       <List hasBorder>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Feed article={node} />
+            <ArticleDigestFeed article={node} />
           </List.Item>
         ))}
       </List>

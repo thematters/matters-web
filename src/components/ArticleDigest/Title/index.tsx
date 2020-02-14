@@ -8,24 +8,24 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { TitleDigestArticle } from './__generated__/TitleDigestArticle'
+import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle'
 
-export type TitleDigestTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
-export type TitleDigestTextWeight = 'normal' | 'md' | 'semibold'
-export type TitleDigestIs = 'h2' | 'h3' | 'h4'
+export type ArticleDigestTitleTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
+export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
+export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4'
 
-interface TitleDigestProps {
-  article: TitleDigestArticle
+interface ArticleDigestTitleProps {
+  article: ArticleDigestTitleArticle
 
-  textSize?: TitleDigestTextSize
-  textWeight?: TitleDigestTextWeight
-  is?: TitleDigestIs
+  textSize?: ArticleDigestTitleTextSize
+  textWeight?: ArticleDigestTitleTextWeight
+  is?: ArticleDigestTitleIs
   disabled?: boolean
 }
 
 const fragments = {
   article: gql`
-    fragment TitleDigestArticle on Article {
+    fragment ArticleDigestTitleArticle on Article {
       id
       title
       articleState: state
@@ -39,14 +39,14 @@ const fragments = {
   `
 }
 
-const TitleDigest = ({
+export const ArticleDigestTitle = ({
   article,
 
   textSize = 'md',
   textWeight = 'md',
   is = 'h2',
   disabled
-}: TitleDigestProps) => {
+}: ArticleDigestTitleProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -89,6 +89,4 @@ const TitleDigest = ({
   )
 }
 
-TitleDigest.fragments = fragments
-
-export default TitleDigest
+ArticleDigestTitle.fragments = fragments
