@@ -24,7 +24,6 @@ export const LoginDialog = ({ children }: LoginDialogProps) => {
             zh_hans={TEXT.zh_hans.login}
           />
         }
-        size="sm"
         isOpen={showDialog}
         onDismiss={close}
       >

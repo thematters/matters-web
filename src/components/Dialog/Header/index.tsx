@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef } from 'react'
 
 import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
@@ -15,17 +15,11 @@ interface HeaderProps {
 }
 
 const Header = forwardRef(
-  (
-    { close, showHeader, rightButton, children }: HeaderProps,
-    closeButtonRef
-  ) => {
+  ({ close, rightButton, children }: HeaderProps, closeButtonRef) => {
     const isSmallUp = useResponsive({ type: 'sm-up' })()
-    const headerClass = classNames({
-      'u-visually-hidden': !showHeader
-    })
 
     return (
-      <header className={headerClass}>
+      <header>
         <section className="left">
           <Button onClick={close} aria-label="關閉" ref={closeButtonRef}>
             {!isSmallUp && (
@@ -52,4 +46,14 @@ const Header = forwardRef(
   }
 )
 
-export default Header
+export default forwardRef(({ showHeader, ...restProps }: HeaderProps, ref) => {
+  if (showHeader) {
+    return <Header {...restProps} ref={ref} />
+  }
+
+  return (
+    <VisuallyHidden>
+      <Header {...restProps} ref={ref} />
+    </VisuallyHidden>
+  )
+})

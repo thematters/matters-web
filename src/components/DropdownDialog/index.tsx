@@ -122,7 +122,11 @@ export const DropdownDialog = ({
    */
   if (isSmallUp) {
     return (
-      <Dropdown {...dropdown} content={<Content>{dropdown.content}</Content>}>
+      <Dropdown
+        {...dropdown}
+        content={<Content>{dropdown.content}</Content>}
+        visible={showDialog}
+      >
         <ForwardChildren open={open} close={close} children={children} />
       </Dropdown>
     )
