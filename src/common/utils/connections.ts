@@ -13,7 +13,6 @@ export const mergeConnections = ({
   path: string
   dedupe?: boolean
 }) => {
-  console.log({ newData, oldData })
   const { edges: oldEdges, pageInfo: oldPageInfo, ...rest } = _get(
     oldData,
     path
