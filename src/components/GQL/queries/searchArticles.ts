@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { ArticleDigestDropdown } from '~/components'
 
 export default gql`
   query SearchArticles($search: String!) {
@@ -8,11 +8,11 @@ export default gql`
       edges {
         node {
           ... on Article {
-            ...DropdownDigestArticle
+            ...ArticleDigestDropdownArticle
           }
         }
       }
     }
   }
-  ${ArticleDigest.Dropdown.fragments.article}
+  ${ArticleDigestDropdown.fragments.article}
 `

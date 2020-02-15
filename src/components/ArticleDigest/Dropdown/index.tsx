@@ -6,16 +6,16 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import ArticleTitleDigest, { TitleDigestTextSize } from '../TitleDigest'
+import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import OpenExternalLink from './OpenExternalLink'
 import styles from './styles.css'
 
-import { DropdownDigestArticle } from './__generated__/DropdownDigestArticle'
+import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
 
-type DropdownDigestProps = {
-  article: DropdownDigestArticle
+type ArticleDigestDropdownProps = {
+  article: ArticleDigestDropdownArticle
 
-  titleTextSize?: TitleDigestTextSize
+  titleTextSize?: ArticleDigestTitleTextSize
   disabled?: boolean
   extraButton?: React.ReactNode
 } & Pick<
@@ -25,7 +25,7 @@ type DropdownDigestProps = {
 
 const fragments = {
   article: gql`
-    fragment DropdownDigestArticle on Article {
+    fragment ArticleDigestDropdownArticle on Article {
       id
       title
       articleState: state
@@ -36,15 +36,15 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...TitleDigestArticle
+      ...ArticleDigestTitleArticle
     }
 
     ${UserDigest.Mini.fragments.user}
-    ${ArticleTitleDigest.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 
-const DropdownDigest = ({
+export const ArticleDigestDropdown = ({
   article,
 
   titleTextSize,
@@ -57,7 +57,7 @@ const DropdownDigest = ({
   bgHoverColor,
   borderRadius,
   onClick
-}: DropdownDigestProps) => {
+}: ArticleDigestDropdownProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const containerClass = classNames({
@@ -82,7 +82,7 @@ const DropdownDigest = ({
     >
       <section className={containerClass}>
         <header>
-          <ArticleTitleDigest
+          <ArticleDigestTitle
             article={article}
             textSize={titleTextSize}
             disabled={cardDisabled}
@@ -110,7 +110,5 @@ const DropdownDigest = ({
   )
 }
 
-DropdownDigest.fragments = fragments
-DropdownDigest.OpenExternalLink = OpenExternalLink
-
-export default DropdownDigest
+ArticleDigestDropdown.fragments = fragments
+ArticleDigestDropdown.OpenExternalLink = OpenExternalLink

@@ -3,10 +3,9 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext, useState } from 'react'
 
-import { Dialog, Translate, ViewerContext } from '~/components'
+import { Dialog, Term, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import { Term } from '~/components/Term'
 
 import { TEXT } from '~/common/enums'
 import { unsubscribePush } from '~/common/utils'

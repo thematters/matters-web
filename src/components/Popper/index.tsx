@@ -1,10 +1,18 @@
-import Tippy, { TippyProps } from '@tippy.js/react'
-import { Instance, Props } from 'tippy.js'
+import dynamic from 'next/dynamic'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = Instance<Props>
-export type PopperProps = TippyProps
+export type PopperInstance = import('tippy.js').Instance
+export type PopperProps = import('@tippy.js/react').TippyProps
+
+const DynamicTippy = dynamic(
+  () =>
+    import(
+      /* webpackPrefetch: true */
+      '@tippy.js/react'
+    ),
+  { ssr: false }
+)
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -25,7 +33,9 @@ export type PopperProps = TippyProps
  * @see {@url https://github.com/atomiks/tippy.js-react}
  */
 
-export const Dropdown: React.FC<PopperProps> = props => <Tippy {...props} />
+export const Dropdown: React.FC<PopperProps> = props => (
+  <DynamicTippy {...props} />
+)
 Dropdown.defaultProps = {
   arrow: false,
   trigger: 'click',
@@ -41,7 +51,9 @@ Dropdown.defaultProps = {
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
-export const Tooltip: React.FC<PopperProps> = props => <Tippy {...props} />
+export const Tooltip: React.FC<PopperProps> = props => (
+  <DynamicTippy {...props} />
+)
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,

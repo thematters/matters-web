@@ -9,11 +9,11 @@ import { toPath } from '~/common/utils'
 import DeleteButton from '../Components/DeleteButton'
 import styles from './styles.css'
 
-import { SidebarDigestDraft } from './__generated__/SidebarDigestDraft'
+import { DraftDigestSidebarDraft } from './__generated__/DraftDigestSidebarDraft'
 
 const fragments = {
   draft: gql`
-    fragment SidebarDigestDraft on Draft {
+    fragment DraftDigestSidebarDraft on Draft {
       id
       title
       summary
@@ -25,7 +25,7 @@ const fragments = {
   `
 }
 
-const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
+const DraftDigestSidebar = ({ draft }: { draft: DraftDigestSidebarDraft }) => {
   const { id, title, publishState, updatedAt, slug } = draft
   const isUnpublished = publishState === 'unpublished'
   const path = toPath({
@@ -62,6 +62,6 @@ const SidebarDigest = ({ draft }: { draft: SidebarDigestDraft }) => {
   )
 }
 
-SidebarDigest.fragments = fragments
+DraftDigestSidebar.fragments = fragments
 
-export default SidebarDigest
+export default DraftDigestSidebar

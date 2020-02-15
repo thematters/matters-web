@@ -7,27 +7,27 @@ import { stripHtml, toPath } from '~/common/utils'
 
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
-import ArticleTitleDigest from '../TitleDigest'
+import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
 import Live from './Live'
 import styles from './styles.css'
 
-import { FeedDigestArticle } from './__generated__/FeedDigestArticle'
+import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle'
 
-export type FeedDigestControls = {
+export type ArticleDigestFeedControls = {
   onClick?: () => any
 
   inFollowFeed?: boolean
 } & FooterActionsControls
 
-type FeedDigestProps = {
-  article: FeedDigestArticle
-} & FeedDigestControls
+type ArticleDigestFeedProps = {
+  article: ArticleDigestFeedArticle
+} & ArticleDigestFeedControls
 
 const fragments = {
   article: gql`
-    fragment FeedDigestArticle on Article {
+    fragment ArticleDigestFeedArticle on Article {
       id
       title
       slug
@@ -44,7 +44,7 @@ const fragments = {
       ...CreatedAtArticle
       ...LiveArticle
       ...InactiveStateArticle
-      ...TitleDigestArticle
+      ...ArticleDigestTitleArticle
       ...FooterActionsArticle
       ...DropdownActionsArticle
     }
@@ -52,13 +52,13 @@ const fragments = {
     ${CreatedAt.fragments.article}
     ${Live.fragments.article}
     ${InactiveState.fragments.article}
-    ${ArticleTitleDigest.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
   `
 }
 
-const FeedDigest = ({
+export const ArticleDigestFeed = ({
   article,
 
   inTagDetailLatest,
@@ -67,7 +67,7 @@ const FeedDigest = ({
   inFollowFeed,
 
   onClick
-}: FeedDigestProps) => {
+}: ArticleDigestFeedProps) => {
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
@@ -115,7 +115,7 @@ const FeedDigest = ({
       </header>
 
       <section className="title">
-        <ArticleTitleDigest article={article} textSize="xm" />
+        <ArticleDigestTitle article={article} textSize="xm" />
       </section>
 
       {cover && (
@@ -141,6 +141,4 @@ const FeedDigest = ({
   )
 }
 
-FeedDigest.fragments = fragments
-
-export default FeedDigest
+ArticleDigestFeed.fragments = fragments

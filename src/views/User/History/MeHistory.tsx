@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
   EmptyHistory,
   InfiniteScroll,
   List,
@@ -30,7 +30,7 @@ const ME_HISTORY_FEED = gql`
             cursor
             node {
               article {
-                ...FeedDigestArticle
+                ...ArticleDigestFeedArticle
               }
             }
           }
@@ -38,7 +38,7 @@ const ME_HISTORY_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const MeHistory = () => {
@@ -84,7 +84,7 @@ const MeHistory = () => {
       <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Feed
+            <ArticleDigestFeed
               article={node.article}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

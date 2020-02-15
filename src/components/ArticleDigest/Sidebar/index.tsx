@@ -6,15 +6,15 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import ArticleTitleDigest, { TitleDigestTextSize } from '../TitleDigest'
+import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import styles from './styles.css'
 
-import { SidebarDigestArticle } from './__generated__/SidebarDigestArticle'
+import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
 
-interface SidebarDigestProps {
-  article: SidebarDigestArticle
+interface ArticleDigestSidebarProps {
+  article: ArticleDigestSidebarArticle
 
-  titleTextSize?: TitleDigestTextSize
+  titleTextSize?: ArticleDigestTitleTextSize
   hasBackground?: boolean
   hasCover?: boolean
   onClick?: () => any
@@ -22,7 +22,7 @@ interface SidebarDigestProps {
 
 const fragments = {
   article: gql`
-    fragment SidebarDigestArticle on Article {
+    fragment ArticleDigestSidebarArticle on Article {
       id
       articleState: state
       title
@@ -34,21 +34,21 @@ const fragments = {
         userName
         ...UserDigestMiniUser
       }
-      ...TitleDigestArticle
+      ...ArticleDigestTitleArticle
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleTitleDigest.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 
-const SidebarDigest = ({
+export const ArticleDigestSidebar = ({
   article,
 
   titleTextSize = 'md-s',
   hasBackground,
   hasCover,
   onClick
-}: SidebarDigestProps) => {
+}: ArticleDigestSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
@@ -72,7 +72,7 @@ const SidebarDigest = ({
     >
       <section className={containerClass}>
         <header>
-          <ArticleTitleDigest
+          <ArticleDigestTitle
             article={article}
             textSize={titleTextSize}
             is="h3"
@@ -103,6 +103,4 @@ const SidebarDigest = ({
   )
 }
 
-SidebarDigest.fragments = fragments
-
-export default SidebarDigest
+ArticleDigestSidebar.fragments = fragments

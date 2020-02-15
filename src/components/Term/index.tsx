@@ -4,9 +4,10 @@ import { LanguageContext } from '~/components'
 
 import termStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'
-import Privacy from '~/common/texts/privacy'
-import ToS from '~/common/texts/tos'
 import { translate } from '~/common/utils'
+
+import Privacy from './privacy'
+import ToS from './tos'
 
 export const Term = () => {
   const { lang } = useContext(LanguageContext)

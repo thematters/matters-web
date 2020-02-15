@@ -11,11 +11,11 @@ import { analytics, stripHtml, toPath } from '~/common/utils'
 import DeleteButton from '../Components/DeleteButton'
 import styles from './styles.css'
 
-import { FeedDigestDraft } from './__generated__/FeedDigestDraft'
+import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
 
 const fragments = {
   draft: gql`
-    fragment FeedDigestDraft on Draft {
+    fragment DraftDigestFeedDraft on Draft {
       id
       title
       summary
@@ -27,7 +27,7 @@ const fragments = {
   `
 }
 
-const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
+const DraftDigestFeed = ({ draft }: { draft: DraftDigestFeedDraft }) => {
   const { id, title, summary, publishState, updatedAt, slug } = draft
   const path = toPath({
     page: 'draftDetail',
@@ -83,6 +83,6 @@ const FeedDigest = ({ draft }: { draft: FeedDigestDraft }) => {
   )
 }
 
-FeedDigest.fragments = fragments
+DraftDigestFeed.fragments = fragments
 
-export default FeedDigest
+export default DraftDigestFeed

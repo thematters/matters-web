@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  ArticleDigestTitle,
   Card,
   DateTime,
   Icon,
@@ -27,11 +27,11 @@ const fragments = {
         ...UserDigestMiniUser
       }
       target {
-        ...TitleDigestArticle
+        ...ArticleDigestTitleArticle
       }
     }
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigest.Title.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 
@@ -69,7 +69,7 @@ const AppreciationReceived = ({
             {isUseContent && content && <h4 className="content">{content}</h4>}
             {!isUseContent && target && (
               <section>
-                <ArticleDigest.Title article={target} />
+                <ArticleDigestTitle article={target} />
               </section>
             )}
           </footer>

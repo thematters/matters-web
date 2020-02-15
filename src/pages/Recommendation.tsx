@@ -2,8 +2,12 @@ import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
-import { EmptyArticle, InfiniteScroll, Spinner } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
+import {
+  ArticleDigestFeed,
+  EmptyArticle,
+  InfiniteScroll,
+  Spinner
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
@@ -25,14 +29,14 @@ const query = gql`
             cursor
             node {
               id
-              ...FeedDigestArticle
+              ...ArticleDigestFeedArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const Feed = () => {
@@ -42,7 +46,7 @@ const Feed = () => {
     notifyOnNetworkStatusChange: true
   })
 
-  const connectionPath = 'viewer.recommendation.feed'
+  const connectionPath = 'viewer.recommendation.recommendArticles'
   const result = data?.viewer?.recommendation.recommendArticles
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
@@ -72,7 +76,8 @@ const Feed = () => {
               mergeConnections({
                 oldData: previousResult,
                 newData: fetchMoreResult,
-                path: connectionPath
+                path: connectionPath,
+                dedupe: true
               })
           })
         }
@@ -80,7 +85,7 @@ const Feed = () => {
         <ul>
           {edges.map(({ node, cursor }, i) => (
             <li key={cursor}>
-              <ArticleDigest.Feed article={node} />
+              <ArticleDigestFeed article={node} />
             </li>
           ))}
         </ul>

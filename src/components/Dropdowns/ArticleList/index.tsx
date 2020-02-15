@@ -1,14 +1,14 @@
-import { ArticleDigest, Menu, Spinner } from '~/components'
+import { ArticleDigestDropdown, Menu, Spinner } from '~/components'
 
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
 export const DropdownArticleList = ({
   articles,
   onClick,
   loading
 }: {
-  articles: DropdownDigestArticle[]
-  onClick: (article: DropdownDigestArticle) => void
+  articles: ArticleDigestDropdownArticle[]
+  onClick: (article: ArticleDigestDropdownArticle) => void
   loading?: boolean
 }) => {
   if (loading) {
@@ -25,12 +25,12 @@ export const DropdownArticleList = ({
     <Menu width="md">
       {articles.map(article => (
         <Menu.Item spacing={[0, 0]} key={article.id}>
-          <ArticleDigest.Dropdown
+          <ArticleDigestDropdown
             article={article}
             titleTextSize="sm"
             disabled
             extraButton={
-              <ArticleDigest.Dropdown.OpenExternalLink article={article} />
+              <ArticleDigestDropdown.OpenExternalLink article={article} />
             }
             bgHoverColor="grey-lighter"
             spacing={['tight', 'base']}

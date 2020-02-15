@@ -2,6 +2,7 @@
   "name": "matters-web",
   "version": "2.7.0",
   "description": "codebase of Matters' website",
+  "sideEffects": false,
   "author": "",
   "engines": {
     "node": ">=10.15.0",
