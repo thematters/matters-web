@@ -16,7 +16,10 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import {
   ADD_TOAST,
   ANALYTICS_EVENTS,
+  CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
+  OPEN_RESET_PASSWORD_DIALOG,
+  OPEN_SIGNUP_DIALOG,
   PATHS,
   TEXT
 } from '~/common/enums'
@@ -28,9 +31,6 @@ import {
   translate,
   validateEmail
 } from '~/common/utils'
-
-import PasswordResetDialogButton from './PasswordResetDialogButton'
-import SignUpDialogButton from './SignUpDialogButton'
 
 import { UserLogin } from './__generated__/UserLogin'
 
@@ -65,6 +65,24 @@ export const USER_LOGIN = gql`
   }
 `
 
+const PasswordResetDialogButton = () => (
+  <Button
+    spacing={['xtight', 0]}
+    onClick={() => {
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_RESET_PASSWORD_DIALOG))
+    }}
+  >
+    <TextIcon color="green">
+      <Translate
+        zh_hant={TEXT.zh_hant.forgetPassword}
+        zh_hans={TEXT.zh_hans.forgetPassword}
+      />
+      ？
+    </TextIcon>
+  </Button>
+)
+
 const PasswordResetRedirectButton = () => (
   <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
     <TextIcon color="green">
@@ -75,6 +93,19 @@ const PasswordResetRedirectButton = () => (
       ？
     </TextIcon>
   </Button>
+)
+
+const SignUpDialogButton = () => (
+  <Dialog.Footer.Button
+    onClick={() => {
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
+    }}
+    bgColor="grey-lighter"
+    textColor="black"
+  >
+    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
+  </Dialog.Footer.Button>
 )
 
 const SignUpRedirectionButton = () => (

@@ -8,14 +8,19 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  LoginDialog,
   SendCodeButton,
   Translate
 } from '~/components'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
+import {
+  ANALYTICS_EVENTS,
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LOGIN_DIALOG,
+  PATHS,
+  TEXT
+} from '~/common/enums'
 import {
   analytics,
   appendTarget,
@@ -68,17 +73,16 @@ const USER_REGISTER = gql`
 `
 
 const LoginDialogButton = () => (
-  <LoginDialog>
-    {({ open }) => (
-      <Dialog.Footer.Button
-        onClick={open}
-        bgColor="grey-lighter"
-        textColor="black"
-      >
-        <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-      </Dialog.Footer.Button>
-    )}
-  </LoginDialog>
+  <Dialog.Footer.Button
+    onClick={() => {
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+    }}
+    bgColor="grey-lighter"
+    textColor="black"
+  >
+    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
+  </Dialog.Footer.Button>
 )
 
 const LoginRedirectionButton = () => (

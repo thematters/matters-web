@@ -10,12 +10,13 @@ import {
 
 import { TEXT } from '~/common/enums'
 
-interface PasswordDialogProps {
-  purpose: 'forget' | 'change'
+interface ChangePasswordDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
+export const ChangePasswordDialog = ({
+  children
+}: ChangePasswordDialogProps) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
@@ -55,22 +56,16 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
     setStep('request')
   }
   const showHeader = step !== 'complete'
-  const Title =
-    purpose === 'forget' ? (
-      <Translate
-        zh_hant={TEXT.zh_hant.resetPassword}
-        zh_hans={TEXT.zh_hans.resetPassword}
-      />
-    ) : (
-      <Translate
-        zh_hant={TEXT.zh_hant.changePassword}
-        zh_hans={TEXT.zh_hans.changePassword}
-      />
-    )
+  const Title = (
+    <Translate
+      zh_hant={TEXT.zh_hant.changePassword}
+      zh_hans={TEXT.zh_hans.changePassword}
+    />
+  )
 
   return (
     <>
-      {children({ open })}
+      {children && children({ open })}
 
       <Dialog
         title={Title}
@@ -82,7 +77,7 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            purpose={purpose}
+            purpose="change"
             submitCallback={requestCodeCallback}
           />
         )}
@@ -100,17 +95,10 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
             <Dialog.Message
               headline={Title}
               description={
-                purpose === 'forget' ? (
-                  <Translate
-                    zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                    zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                  />
-                ) : (
-                  <Translate
-                    zh_hant={TEXT.zh_hant.changePasswordSuccess}
-                    zh_hans={TEXT.zh_hans.changePasswordSuccess}
-                  />
-                )
+                <Translate
+                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
+                />
               }
             />
             <Dialog.Footer>
@@ -131,5 +119,3 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
     </>
   )
 }
-
-export default PasswordDialog

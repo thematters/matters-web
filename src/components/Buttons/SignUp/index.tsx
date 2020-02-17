@@ -1,6 +1,10 @@
-import { Button, SignUpDialog, TextIcon } from '~/components'
+import { Button, TextIcon } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import {
+  ANALYTICS_EVENTS,
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_SIGNUP_DIALOG
+} from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 export const SignUpButton: React.FC<{ trackType: string }> = ({
@@ -8,24 +12,21 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
   trackType
 }) => {
   return (
-    <SignUpDialog>
-      {({ open }) => (
-        <Button
-          size={[null, '2.25rem']}
-          spacing={[0, 'loose']}
-          bgColor="green"
-          onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
-              type: trackType
-            })
-            open()
-          }}
-        >
-          <TextIcon color="white" weight="md">
-            {children}
-          </TextIcon>
-        </Button>
-      )}
-    </SignUpDialog>
+    <Button
+      size={[null, '2.25rem']}
+      spacing={[0, 'loose']}
+      bgColor="green"
+      onClick={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
+          type: trackType
+        })
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
+      }}
+    >
+      <TextIcon color="white" weight="md">
+        {children}
+      </TextIcon>
+    </Button>
   )
 }
