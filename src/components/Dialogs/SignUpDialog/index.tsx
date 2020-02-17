@@ -3,11 +3,11 @@ import { useContext, useState } from 'react'
 import {
   Dialog,
   LanguageContext,
+  SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
   SignUpProfileForm
 } from '~/components'
-import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, translate } from '~/common/utils'

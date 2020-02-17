@@ -5,14 +5,7 @@ import { Z_INDEX } from '~/common/enums'
 export type PopperInstance = import('tippy.js').Instance
 export type PopperProps = import('@tippy.js/react').TippyProps
 
-const DynamicTippy = dynamic(
-  () =>
-    import(
-      /* webpackPrefetch: true */
-      '@tippy.js/react'
-    ),
-  { ssr: false }
-)
+const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
 
 /**
  * Wrappers of <Tippy> with customize themes

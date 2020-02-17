@@ -4,13 +4,13 @@ import { useContext, useEffect, useState } from 'react'
 import {
   Head,
   PageHeader,
+  SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
   SignUpProfileForm,
   Translate
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import { TEXT } from '~/common/enums'
 

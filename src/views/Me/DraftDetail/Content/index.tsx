@@ -16,7 +16,7 @@ import { UpdateDraft } from './__generated__/UpdateDraft'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
-  loading: () => <Spinner />
+  loading: Spinner
 })
 
 export const UPDATE_DRAFT = gql`

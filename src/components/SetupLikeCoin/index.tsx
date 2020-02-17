@@ -15,7 +15,7 @@ interface Props {
   submitCallback?: () => void
 }
 
-const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
+export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -64,5 +64,3 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
     </>
   )
 }
-
-export default SetupLikeCoin

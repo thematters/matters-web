@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-import SetupLikeCoin from '~/components/SetupLikeCoin'
+import { Dialog, SetupLikeCoin, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
