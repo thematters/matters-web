@@ -2,7 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Dialog, InfiniteScroll, Spinner, UserDigest } from '~/components'
+import {
+  Dialog,
+  InfiniteList,
+  RowRendererProps,
+  Spinner,
+  UserDigest
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -17,6 +23,7 @@ const ARTICLE_APPRECIATORS = gql`
     article(input: { mediaHash: $mediaHash }) {
       id
       appreciationsReceived(input: { first: 10, after: $after }) {
+        totalCount
         pageInfo {
           startCursor
           endCursor
@@ -38,6 +45,31 @@ const ARTICLE_APPRECIATORS = gql`
   }
   ${UserDigest.Rich.fragments.user}
 `
+
+const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
+  const { node, cursor } = datum
+  const { articleId } = parentProps
+  return (
+    <div
+      className="appreciator-item"
+      key={cursor}
+      onClick={() => {
+        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+          type: FEED_TYPE.APPRECIATOR,
+          location: index,
+          entrance: articleId
+        })
+      }}
+    >
+      <UserDigest.Rich
+        user={node.sender}
+        avatarBadge={<span className="appreciation-amount">{node.amount}</span>}
+        hasFollow
+      />
+      <style jsx>{styles}</style>
+    </div>
+  )
+}
 
 const AppreciatorsDialogContent = () => {
   const router = useRouter()
@@ -63,7 +95,7 @@ const AppreciatorsDialogContent = () => {
     return null
   }
 
-  const loadMore = () => {
+  const loadMore = (callback: () => void) => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.APPRECIATOR,
       location: edges.length,
@@ -73,51 +105,34 @@ const AppreciatorsDialogContent = () => {
       variables: {
         after: pageInfo.endCursor
       },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        callback()
+        return mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath
         })
+      }
     })
   }
 
-  return (
-    <>
-      <Dialog.Content spacing={[0, 0]}>
-        <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-          <ul className="dialog-appreciators-list">
-            {edges.map(
-              ({ node, cursor }, i) =>
-                node.sender && (
-                  <li
-                    key={cursor}
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: FEED_TYPE.APPRECIATOR,
-                        location: i,
-                        entrance: article.id
-                      })
-                    }
-                  >
-                    <UserDigest.Rich
-                      user={node.sender}
-                      avatarBadge={
-                        <span className="appreciation-amount">
-                          {node.amount}
-                        </span>
-                      }
-                      hasFollow
-                    />
-                  </li>
-                )
-            )}
+  const totalCount = data?.article?.appreciationsReceived.totalCount || 0
 
-            <style jsx>{styles}</style>
-          </ul>
-        </InfiniteScroll>
-      </Dialog.Content>
-    </>
+  return (
+    <Dialog.Content spacing={[0, 0]}>
+      <div className="dialog-appreciators-list">
+        <InfiniteList
+          data={edges}
+          defaultRowHeight={70}
+          loader={<Spinner />}
+          loadMore={loadMore}
+          parentProps={{ articleId: article.id }}
+          renderer={ListRow}
+          totalCount={totalCount}
+        />
+      </div>
+      <style jsx>{styles}</style>
+    </Dialog.Content>
   )
 }
 

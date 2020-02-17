@@ -31,6 +31,7 @@ export const useWindowResize = () => {
   const resize = _debounce(() => setSize(getSize()), WINDOW_RESIZE_DEBOUNCE)
 
   useEffect(() => {
+    resize()
     window.addEventListener('resize', resize)
     return () => window.removeEventListener('resize', resize)
   }, [])

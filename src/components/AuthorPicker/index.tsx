@@ -12,8 +12,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { numFormat } from '~/common/utils'
-
 import styles from './styles.css'
 
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
@@ -68,7 +66,7 @@ export const AuthorPicker = ({
 
           <span className="follow-info">
             <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
-            <span className="hightlight">{numFormat(followeeCount)}</span>
+            <span className="hightlight">{followeeCount}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" />
           </span>
         </div>
