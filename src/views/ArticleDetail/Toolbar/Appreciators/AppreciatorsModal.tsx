@@ -127,7 +127,10 @@ const AppreciatorsModal = () => {
 
   const formattedTotalCount = numFormat(totalCount)
 
-  const modalContentMaxHeight = window ? window.innerHeight - (8 + (0.75 * 2)) * 16 : undefined
+  // estimate a safe default height
+  const modalContentMaxHeight = window
+    ? window.innerHeight - (8 + 0.75 * 2) * 16
+    : undefined
 
   return (
     <>

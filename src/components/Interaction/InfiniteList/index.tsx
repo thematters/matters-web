@@ -52,7 +52,9 @@ export const InfiniteList = ({
     defaultRowHeight ? defaultRowHeight * data.length : defaultListHeight
   )
 
-  const [maxHeight] = useState(defaultListMaxHeight || window?.innerHeight || defaultListHeight)
+  const [maxHeight] = useState(
+    defaultListMaxHeight || window?.innerHeight || defaultListHeight
+  )
 
   const isRowLoaded = ({ index }: Index) => !!data[index]
 
