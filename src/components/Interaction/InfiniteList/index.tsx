@@ -11,13 +11,13 @@ import {
 } from 'react-virtualized'
 
 export interface RowRendererProps {
-  datum: any
+  datum: { [key: string]: any }
   index: number
   parentProps: any
 }
 
 interface Props {
-  data: any[]
+  data: Array<{ [key: string]: any }>
   loader: ReactNode
   loadMore: (callback: () => void) => Promise<any>
   parentProps: any
