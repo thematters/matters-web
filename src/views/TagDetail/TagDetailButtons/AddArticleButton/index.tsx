@@ -1,12 +1,17 @@
 import { Button, Icon, TextIcon, Translate } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { TEXT } from '~/common/enums'
 
-export default () => {
+import TagArticleDialog from './TagArticleDialog'
+
+interface AddArticleButtonProps {
+  id?: string
+}
+
+const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
   return (
-    <ModalSwitch modalId="addArticleTagModal">
-      {(open: any) => (
+    <TagArticleDialog id={id}>
+      {({ open }) => (
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
@@ -21,6 +26,8 @@ export default () => {
           </TextIcon>
         </Button>
       )}
-    </ModalSwitch>
+    </TagArticleDialog>
   )
 }
+
+export default AddArticleButton

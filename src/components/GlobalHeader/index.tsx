@@ -3,9 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-import { SearchBar } from '~/components'
-import SignUpButton from '~/components/Button/SignUp'
-import { useResponsive } from '~/components/Hook'
+import { SearchBar, SignUpButton, useResponsive } from '~/components'
 
 import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 

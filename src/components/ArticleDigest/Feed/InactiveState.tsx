@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
-import { Translate } from '~/components/Language'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

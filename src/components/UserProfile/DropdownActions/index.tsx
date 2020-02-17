@@ -1,14 +1,15 @@
 import gql from 'graphql-tag'
 
 import {
+  BlockUserButton,
   Button,
-  Dropdown,
-  focusPopper,
-  hidePopperOnClick,
+  DropdownDialog,
   Icon,
-  Menu
+  Menu,
+  Translate
 } from '~/components'
-import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
+
+import { TEXT } from '~/common/enums'
 
 import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
 
@@ -23,28 +24,46 @@ const fragments = {
 }
 
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
+  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
+    const isDropdown = type === 'dropdown'
+
+    return (
+      <Menu width={isDropdown ? 'sm' : undefined}>
+        <BlockUserButton user={user} />
+      </Menu>
+    )
+  }
+
   return (
-    <Dropdown
-      content={
-        <Menu width="sm">
-          <BlockUserButton user={user} />
-        </Menu>
-      }
-      placement="bottom-end"
-      onShown={instance => {
-        focusPopper(instance)
-        hidePopperOnClick(instance)
+    <DropdownDialog
+      dropdown={{
+        content: <Content type="dropdown" />,
+        placement: 'bottom-end'
+      }}
+      dialog={{
+        content: <Content type="dialog" />,
+        title: (
+          <Translate
+            zh_hant={TEXT.zh_hant.moreActions}
+            zh_hans={TEXT.zh_hans.moreActions}
+          />
+        ),
+        showHeader: false
       }}
     >
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgHoverColor="grey-lighter"
-        aria-label="更多操作"
-        aria-haspopup="true"
-      >
-        <Icon.More color="black" size="md-s" />
-      </Button>
-    </Dropdown>
+      {({ open, ref }) => (
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          aria-label={TEXT.zh_hant.moreActions}
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <Icon.More color="black" size="md-s" />
+        </Button>
+      )}
+    </DropdownDialog>
   )
 }
 

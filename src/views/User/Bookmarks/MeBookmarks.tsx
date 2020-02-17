@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, InfiniteScroll, List, Spinner } from '~/components'
-import EmptyBookmark from '~/components/Empty/EmptyBookmark'
+import {
+  ArticleDigestFeed,
+  EmptyBookmark,
+  InfiniteScroll,
+  List,
+  Spinner
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'

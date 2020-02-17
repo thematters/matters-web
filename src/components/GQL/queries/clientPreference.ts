@@ -5,7 +5,7 @@ export default gql`
     clientPreference @client {
       id
       feedSortType
-      readCivicLikerModal
+      readCivicLikerDialog
       wall
       push {
         enabled

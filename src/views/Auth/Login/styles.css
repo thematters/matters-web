@@ -1,12 +1,6 @@
-main {
-  padding-top: 7rem;
-  padding-bottom: 1rem;
-}
-
-.container {
-  @mixin flex-center-all;
+.content {
   border: 1px solid var(--color-line-grey-light);
-  border-radius: 4px;
+  border-radius: 0.5rem;
   background: var(--color-white);
   overflow: hidden;
 }

@@ -1,8 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, InfiniteScroll, List, Spinner, Translate } from '~/components'
-import EmptyWarning from '~/components/Empty/EmptyWarning'
+import {
+  EmptyWarning,
+  Head,
+  InfiniteScroll,
+  List,
+  Spinner,
+  Translate
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 

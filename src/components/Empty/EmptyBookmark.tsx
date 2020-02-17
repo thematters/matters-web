@@ -1,6 +1,10 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyBookmark = ({ description }: { description?: React.ReactNode }) => (
+export const EmptyBookmark = ({
+  description
+}: {
+  description?: React.ReactNode
+}) => (
   <Empty
     icon={<Icon.BookmarkMedium color="grey-lighter" size="xxl" />}
     description={
@@ -17,5 +21,3 @@ const EmptyBookmark = ({ description }: { description?: React.ReactNode }) => (
     }
   />
 )
-
-export default EmptyBookmark

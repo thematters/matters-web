@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   ArticleDigestFeed,
+  EmptyArticle,
   Footer,
   Head,
   InfiniteScroll,
@@ -11,7 +12,6 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'

@@ -10,9 +10,9 @@ import {
   LoadMore,
   PageHeader,
   Spinner,
-  Translate
+  Translate,
+  useResponsive
 } from '~/components'
-import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

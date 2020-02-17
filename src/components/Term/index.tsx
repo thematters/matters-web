@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components/Language'
+import { LanguageContext } from '~/components'
 
 import termStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'

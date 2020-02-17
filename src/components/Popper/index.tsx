@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { Z_INDEX } from '~/common/enums'
 
 export type PopperInstance = import('tippy.js').Instance
+export type PopperProps = import('@tippy.js/react').TippyProps
 
 const DynamicTippy = dynamic(
   () =>
@@ -32,7 +33,7 @@ const DynamicTippy = dynamic(
  * @see {@url https://github.com/atomiks/tippy.js-react}
  */
 
-export const Dropdown: React.FC<import('@tippy.js/react').TippyProps> = props => (
+export const Dropdown: React.FC<PopperProps> = props => (
   <DynamicTippy {...props} />
 )
 Dropdown.defaultProps = {
@@ -50,7 +51,7 @@ Dropdown.defaultProps = {
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
-export const Tooltip: React.FC<import('@tippy.js/react').TippyProps> = props => (
+export const Tooltip: React.FC<PopperProps> = props => (
   <DynamicTippy {...props} />
 )
 Tooltip.defaultProps = {
@@ -62,29 +63,6 @@ Tooltip.defaultProps = {
   theme: 'tooltip',
   boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
-}
-
-export const Popover: React.FC<import('@tippy.js/react').TippyProps> = props => (
-  <DynamicTippy {...props} />
-)
-Popover.defaultProps = {
-  arrow: true,
-  trigger: 'click',
-  interactive: true,
-  distance: 16,
-  placement: 'right',
-  animation: 'shift-away',
-  theme: 'popover',
-  boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
-}
-
-/**
- * Focus popper for a11y
- * @param instance
- */
-export const focusPopper = (instance: PopperInstance) => {
-  instance.popperChildren.tooltip.focus()
 }
 
 /**

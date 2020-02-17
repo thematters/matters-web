@@ -6,11 +6,11 @@ import {
   Button,
   Icon,
   LanguageContext,
+  LikeCoinDialog,
   TextIcon,
   Translate
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
@@ -88,9 +88,9 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
 
   if (!allowed) {
     return (
-      <ModalSwitch modalId="likeCoinTermModal">
-        {(open: any) => <WriteButton onClick={open} />}
-      </ModalSwitch>
+      <LikeCoinDialog>
+        {({ open }) => <WriteButton onClick={open} />}
+      </LikeCoinDialog>
     )
   }
 

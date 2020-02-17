@@ -9,6 +9,15 @@
   border: 1px solid transparent;
   font-size: var(--font-size-sm);
 
+  &:hover,
+  &:focus {
+    border-color: var(--color-line-grey-light);
+  }
+
+  &.inactive {
+    color: var(--color-grey-dark);
+  }
+
   & :global(> *) {
     vertical-align: middle;
   }
@@ -16,15 +25,6 @@
   @media (--sm-up) {
     padding: var(--spacing-xx-tight) var(--spacing-x-tight)
       var(--spacing-xx-tight) var(--spacing-xx-tight);
-
-    &:hover,
-    &:focus {
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-  }
-
-  &.inactive {
-    color: var(--color-grey-dark);
   }
 }
 

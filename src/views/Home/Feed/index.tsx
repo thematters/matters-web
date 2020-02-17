@@ -4,17 +4,17 @@ import gql from 'graphql-tag'
 
 import {
   ArticleDigestFeed,
+  EmptyArticle,
   InfiniteScroll,
   List,
   LoadMore,
   PageHeader,
   Spinner,
-  Translate
+  Translate,
+  useResponsive
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

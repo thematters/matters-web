@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'

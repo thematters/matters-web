@@ -43,7 +43,7 @@
   }
 }
 
-.modal-appreciators-list {
+.dialog-appreciators-list {
   padding: var(--spacing-tight) 0;
 
   & .appreciator-item {
@@ -51,7 +51,6 @@
   }
 
   & .appreciation-amount {
-    display: inline-block; /* fallback */
     @mixin inline-flex-center-all;
     margin-top: -2px;
     margin-right: -2px;

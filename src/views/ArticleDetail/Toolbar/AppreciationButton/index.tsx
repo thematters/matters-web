@@ -4,14 +4,11 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { Translate } from '~/components'
+import { Tooltip, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { Tooltip } from '~/components/Popper'
-import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, APPRECIATE_DEBOUNCE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
@@ -95,8 +92,8 @@ const AppreciationButton = ({
   // UI
   const isReachLimit = left <= 0
   const isMe = article.author.id === viewer.id
-  const readCivicLikerModal =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerModal
+  const readCivicLikerDialog =
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
     !viewer.isAuthed
@@ -145,16 +142,15 @@ const AppreciationButton = ({
   /**
    * Civic Liker Button
    */
-  if (!canAppreciate && !readCivicLikerModal && isReachLimit) {
+  if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
     return (
       <section className={containerClasses}>
         <CivicLikerButton
           onClick={() => {
             client.writeData({
               id: 'ClientPreference:local',
-              data: { readCivicLikerModal: true }
+              data: { readCivicLikerDialog: true }
             })
-            analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
           }}
           count={
             viewer.isAuthed && appreciatedCount > 0

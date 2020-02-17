@@ -1,4 +1,4 @@
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 
 import IMAGE_GOAL from '~/static/images/about-2.svg'
 

@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from 'apollo-client'
 import { Waypoint } from 'react-waypoint'
 
-import { Spinner } from '~/components/Spinner'
+import { Spinner } from '~/components'
 
 /**
  *  Usage:

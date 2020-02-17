@@ -23,6 +23,7 @@ h2 {
     (var(--spacing-x-loose) + var(--global-header-height) + 1px) * -1
   );
   height: 100vh;
+  height: calc(var(--vh) * 100);
 
   background-color: var(--color-green-lighter);
   background-repeat: no-repeat;

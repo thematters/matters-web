@@ -4,8 +4,8 @@ import { MattersArticleEditor } from '@matters/matters-editor'
 import getConfig from 'next/config'
 import { FC, useContext, useState } from 'react'
 
+import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'

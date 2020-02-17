@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, InfiniteScroll, List, Spinner } from '~/components'
-import EmptyHistory from '~/components/Empty/EmptyHistory'
+import {
+  ArticleDigestFeed,
+  EmptyHistory,
+  InfiniteScroll,
+  List,
+  Spinner
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'

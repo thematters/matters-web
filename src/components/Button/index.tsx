@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 
 import styles from './styles.css'
 
-type ButtonWidth = '2rem' | '4rem' | '6rem' | undefined | null
+type ButtonWidth = '2rem' | '4rem' | '6rem' | '100%' | undefined | null
 
 type ButtonHeight =
   | '1rem'
@@ -43,7 +43,7 @@ type ButtonBgHoverColor = Extract<
   'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
 >
 
-interface ButtonProps {
+export interface ButtonProps {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
@@ -117,6 +117,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       as,
 
       is,
+      type,
 
       className,
       children,
@@ -207,7 +208,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
     // button
     return (
-      <button {...containerProps}>
+      <button {...containerProps} type={type || 'button'}>
         <div className="content" style={contentStyle}>
           <div className="hotarea" style={hotAreaStyle} />
           {children}

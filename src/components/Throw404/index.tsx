@@ -1,8 +1,8 @@
 import Error from 'next/error'
 
-import ErrorPage from '~/components/ErrorPage'
+import { ErrorPage } from '~/components'
 
-export default () => {
+export const Throw404 = () => {
   if (process.browser) {
     return <ErrorPage statusCode={404} />
   }

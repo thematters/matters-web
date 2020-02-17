@@ -1,9 +1,4 @@
-.container {
-  padding: var(--spacing-loose) var(--spacing-loose) var(--spacing-xx-loose)
-    var(--spacing-loose);
-}
-
-header {
+.hint {
   font-size: var(--font-size-sm);
 }
 
@@ -15,7 +10,7 @@ header {
     @mixin all-transition;
     padding: var(--spacing-base) var(--spacing-loose);
     border: 1.5px solid var(--color-grey-light);
-    border-radius: 4px;
+    border-radius: 0.25rem;
 
     & h4 {
       font-weight: var(--font-weight-medium);
@@ -44,10 +39,15 @@ header {
 }
 
 .desc {
-  font-size: var(--font-size-xs);
-  color: var(--color-grey-dark);
+  & h4 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+  }
 
   & p {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--spacing-base);
+
+    font-size: var(--font-size-sm);
+    color: var(--color-grey-darker);
   }
 }

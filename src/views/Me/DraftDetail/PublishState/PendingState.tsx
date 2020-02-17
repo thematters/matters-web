@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { Toast, Translate } from '~/components'
+import { Toast, Translate, useCountdown } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
-import { useCountdown } from '~/components/Hook'
 
 import { TEXT } from '~/common/enums'
 

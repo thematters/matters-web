@@ -1,6 +1,5 @@
-import { ModalSwitch } from '~/components'
-
 import AppreciateButton from './AppreciateButton'
+import CivicLikerDialog from './CivicLikerDialog'
 
 const CivicLikerButton = ({
   onClick,
@@ -13,8 +12,8 @@ const CivicLikerButton = ({
   total: number
   inFixedToolbar?: boolean
 }) => (
-  <ModalSwitch modalId="civicLikerModal">
-    {(open: any) => (
+  <CivicLikerDialog>
+    {({ open }) => (
       <AppreciateButton
         onClick={() => {
           open()
@@ -25,7 +24,7 @@ const CivicLikerButton = ({
         inFixedToolbar={inFixedToolbar}
       />
     )}
-  </ModalSwitch>
+  </CivicLikerDialog>
 )
 
 export default CivicLikerButton

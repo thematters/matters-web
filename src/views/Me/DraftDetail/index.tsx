@@ -3,14 +3,10 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
-import { Spinner } from '~/components'
+import { Head, Spinner, Throw404 } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError } from '~/components/GQL'
-import { Head } from '~/components/Head'
-import { PublishModal } from '~/components/Modal/PublishModal'
-import { ModalInstance } from '~/components/ModalManager'
-import Throw404 from '~/components/Throw404'
 
 import { getQuery } from '~/common/utils'
 
@@ -81,14 +77,6 @@ const DraftDetail = () => {
         {loading && <Spinner />}
         {draft && <Sidebar draft={draft} />}
       </aside>
-
-      {draft && (
-        <ModalInstance modalId="publishModal" title="publishNote">
-          {(props: ModalInstanceProps) => (
-            <PublishModal draft={draft} {...props} />
-          )}
-        </ModalInstance>
-      )}
 
       <style jsx>{styles}</style>
     </main>

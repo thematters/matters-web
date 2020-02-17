@@ -23,6 +23,7 @@ import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
 import { ReactComponent as Camera } from './icons/camera.svg'
 import { ReactComponent as Clear } from './icons/clear.svg'
+import { ReactComponent as CloseGreenMedium } from './icons/close-green-md.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
@@ -134,6 +135,7 @@ export const Icon = {
   Camera: withIcon(Camera),
   CameraMedium: withIcon(CameraMedium),
   Clear: withIcon(Clear),
+  CloseGreenMedium: withIcon(CloseGreenMedium),
   Collapse: withIcon(Collapse),
   CollectionMedium: withIcon(CollectionMedium),
   Comment: withIcon(Comment),

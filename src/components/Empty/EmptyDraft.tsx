@@ -1,6 +1,10 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyDraft = ({ description }: { description?: React.ReactNode }) => (
+export const EmptyDraft = ({
+  description
+}: {
+  description?: React.ReactNode
+}) => (
   <Empty
     icon={<Icon.EmptyWarning size="xxl" />}
     description={
@@ -8,5 +12,3 @@ const EmptyDraft = ({ description }: { description?: React.ReactNode }) => (
     }
   />
 )
-
-export default EmptyDraft

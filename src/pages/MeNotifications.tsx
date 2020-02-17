@@ -1,6 +1,6 @@
 import MeNotifications from '~/views/Me/Notifications'
 
-import { Protected } from '~/components/Protected'
+import { Protected } from '~/components'
 
 export default () => (
   <Protected>

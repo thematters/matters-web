@@ -8,23 +8,24 @@ import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import {
+  BackToHomeButton,
   DateTime,
   Error,
+  Fingerprint,
   Footer,
   Head,
   Icon,
   Spinner,
+  Throw404,
   Title,
-  Translate
+  Translate,
+  useImmersiveMode,
+  useResponsive,
+  ViewerContext
 } from '~/components'
-import BackToHomeButton from '~/components/Button/BackToHome'
-import { Fingerprint } from '~/components/Fingerprint'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { useImmersiveMode, useResponsive } from '~/components/Hook'
-import Throw404 from '~/components/Throw404'
 import { UserDigest } from '~/components/UserDigest'
-import { ViewerContext } from '~/components/Viewer'
 
 import { getQuery } from '~/common/utils'
 
@@ -35,8 +36,6 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
-import CivicLikerModal from './Toolbar/AppreciationButton/CivicLikerModal'
-import AppreciatorsModal from './Toolbar/Appreciators/AppreciatorsModal'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -219,7 +218,7 @@ const ArticleDetail = ({
             </p>
             <span className="right-items">
               {article.live && <Icon.Live />}
-              <Fingerprint article={article} color="grey" size="xs" />
+              <Fingerprint article={article} />
             </span>
           </span>
         </section>
@@ -273,10 +272,6 @@ const ArticleDetail = ({
         {shouldShowWall && <section id="comments" />}
 
         {!shouldShowWall && <DynamicResponse />}
-
-        {/* Modals */}
-        <AppreciatorsModal />
-        <CivicLikerModal />
       </Block>
 
       <style jsx>{styles}</style>

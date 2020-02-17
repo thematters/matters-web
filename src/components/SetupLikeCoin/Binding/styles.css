@@ -1,4 +1,6 @@
 .container {
+  margin: var(--spacing-x-loose) 0 var(--spacing-base);
+
   font-size: var(--font-size-sm);
   text-align: center;
 }

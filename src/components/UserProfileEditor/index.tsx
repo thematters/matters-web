@@ -3,16 +3,17 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import { Icon } from '~/components'
-import { Button } from '~/components/Button'
 import {
+  Button,
+  Form,
+  Icon,
+  LanguageContext,
   ProfileAvatarUploader,
-  ProfileCoverUploader
-} from '~/components/FileUploader'
-import { Form } from '~/components/Form'
+  ProfileCoverUploader,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
-import { LanguageContext, Translate } from '~/components/Language'
-import { ViewerContext } from '~/components/Viewer'
 
 import { TEXT } from '~/common/enums'
 import {

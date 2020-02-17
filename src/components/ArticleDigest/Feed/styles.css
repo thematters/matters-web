@@ -32,7 +32,7 @@ header {
 
 .cover {
   background-color: var(--color-grey-lighter);
-  border-radius: 4px;
+  border-radius: 0.25rem;
 
   &::after {
     content: '';
@@ -57,6 +57,6 @@ header {
 
   color: var(--color-white);
   background: var(--color-grey);
-  border-radius: 2px;
+  border-radius: 0.125rem;
   line-height: 1;
 }

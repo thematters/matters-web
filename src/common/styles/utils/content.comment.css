@@ -155,7 +155,7 @@
   visibility: hidden;
 
   color: var(--color-black);
-  border-radius: 2px;
+  border-radius: 0.125rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   z-index: var(--z-index-under-global-header);
