@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
-  LanguageContext,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
   Translate,
@@ -10,7 +9,6 @@ import {
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 interface PasswordDialogProps {
   purpose: 'forget' | 'change'
@@ -18,61 +16,26 @@ interface PasswordDialogProps {
 }
 
 export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      title:
-        purpose === 'forget'
-          ? translate({
-              zh_hant: TEXT.zh_hant.forgetPassword,
-              zh_hans: TEXT.zh_hans.forgetPassword,
-              lang
-            })
-          : translate({
-              zh_hant: TEXT.zh_hant.changePassword,
-              zh_hans: TEXT.zh_hans.changeEmail,
-              lang
-            }),
       prev: 'login',
       next: 'reset',
       email: viewer.info.email
     },
     reset: {
-      title:
-        purpose === 'forget'
-          ? translate({
-              zh_hant: TEXT.zh_hant.resetPassword,
-              zh_hans: TEXT.zh_hans.resetPassword,
-              lang
-            })
-          : translate({
-              zh_hant: TEXT.zh_hant.changePassword,
-              zh_hans: TEXT.zh_hans.changePassword,
-              lang
-            }),
       prev: 'request',
       next: 'complete'
     },
-    complete: {
-      title:
-        purpose === 'forget'
-          ? translate({
-              zh_hant: TEXT.zh_hant.resetPasswordSuccess,
-              zh_hans: TEXT.zh_hans.resetPasswordSuccess,
-              lang
-            })
-          : translate({
-              zh_hant: TEXT.zh_hant.changePasswordSuccess,
-              zh_hans: TEXT.zh_hans.changePasswordSuccess,
-              lang
-            })
-    }
+    complete: {}
   })
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => {
+    setStep('request')
+    setShowDialog(true)
+  }
+  const close = () => setShowDialog(false)
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
@@ -88,16 +51,34 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
     })
     setStep('reset')
   }
-
   const backPreviousStep = () => {
     setStep('request')
   }
+  const showHeader = step !== 'complete'
+  const Title =
+    purpose === 'forget' ? (
+      <Translate
+        zh_hant={TEXT.zh_hant.resetPassword}
+        zh_hans={TEXT.zh_hans.resetPassword}
+      />
+    ) : (
+      <Translate
+        zh_hant={TEXT.zh_hant.changePassword}
+        zh_hans={TEXT.zh_hans.changePassword}
+      />
+    )
 
   return (
     <>
       {children({ open })}
 
-      <Dialog title={data[step].title} isOpen={showDialog} onDismiss={close}>
+      <Dialog
+        title={Title}
+        showHeader={showHeader}
+        isOpen={showDialog}
+        onDismiss={close}
+        size={showHeader ? 'lg' : 'sm'}
+      >
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
@@ -115,31 +96,36 @@ export const PasswordDialog = ({ purpose, children }: PasswordDialogProps) => {
         )}
 
         {step === 'complete' && (
-          <Dialog.Message
-            message={
-              purpose === 'forget' ? (
+          <>
+            <Dialog.Message
+              headline={Title}
+              description={
+                purpose === 'forget' ? (
+                  <Translate
+                    zh_hant={TEXT.zh_hant.resetPasswordSuccess}
+                    zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                  />
+                ) : (
+                  <Translate
+                    zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                    zh_hans={TEXT.zh_hans.changePasswordSuccess}
+                  />
+                )
+              }
+            />
+            <Dialog.Footer>
+              <Dialog.Footer.Button
+                bgColor="grey-lighter"
+                textColor="black"
+                onClick={close}
+              >
                 <Translate
-                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+                  zh_hant={TEXT.zh_hant.cancel}
+                  zh_hans={TEXT.zh_hans.cancel}
                 />
-              ) : (
-                <Translate
-                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
-                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
-                />
-              )
-            }
-            hint={
-              purpose === 'forget' ? (
-                <Translate
-                  zh_hant={TEXT.zh_hant.useNewPassword}
-                  zh_hans={TEXT.zh_hans.useNewPassword}
-                />
-              ) : (
-                ''
-              )
-            }
-          />
+              </Dialog.Footer.Button>
+            </Dialog.Footer>
+          </>
         )}
       </Dialog>
     </>

@@ -6,13 +6,13 @@ import { appendTarget } from '~/common/utils'
 const PasswordChanged = () => (
   <>
     <Dialog.Message
-      message={
+      headline={
         <Translate
           zh_hant={TEXT.zh_hant.resetPasswordSuccess}
           zh_hans={TEXT.zh_hans.resetPasswordSuccess}
         />
       }
-      hint={
+      description={
         <Translate
           zh_hant={TEXT.zh_hant.useNewPassword}
           zh_hans={TEXT.zh_hans.useNewPassword}

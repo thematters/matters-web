@@ -12,10 +12,10 @@ export const SignUpComplete = ({
 }) => (
   <>
     <Dialog.Message
-      message={
+      headline={
         <Translate zh_hant="歡迎加入 Matters！" zh_hans="欢迎加入 Matters！" />
       }
-      hint={
+      description={
         <section className="content">
           <p>
             <Translate

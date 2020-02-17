@@ -32,7 +32,7 @@ const PublishedState = () => {
           </TextIcon>
         </Button>
       }
-      buttonPlacement="top"
+      buttonPlacement="center"
     />
   )
 }

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { LanguageContext, Title } from '~/components'
+import { LanguageContext } from '~/components'
 
 import { translate } from '~/common/utils'
 import PUBLISH_IMAGE from '~/static/images/publish-1.svg'
@@ -67,9 +67,7 @@ const PublishSlide = () => {
         </div>
 
         <div className="title-container">
-          <Title is="h3" type="dialog-headline" style={{ textAlign: 'left' }}>
-            {title}
-          </Title>
+          <h3>{title}</h3>
           <span className="subTitle">{subTitle}</span>
         </div>
 

@@ -22,7 +22,6 @@ interface ToastProps {
 
   buttonPlacement?: 'top' | 'bottom' | 'center'
   customButton?: React.ReactNode
-  onClose?: () => any
 }
 
 export const ToastInstance = ({
@@ -30,8 +29,7 @@ export const ToastInstance = ({
   content,
   subDescription,
   buttonPlacement = 'top',
-  customButton,
-  onClose
+  customButton
 }: ToastProps) => {
   const mainClass = classNames({
     toast: true,
@@ -94,5 +92,5 @@ export const ToastWithEffect = ({
     }
   }, [])
 
-  return <ToastInstance {...toastProps} onClose={remove} />
+  return <ToastInstance {...toastProps} />
 }

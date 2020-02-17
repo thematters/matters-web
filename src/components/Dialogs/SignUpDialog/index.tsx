@@ -1,16 +1,16 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Dialog,
-  LanguageContext,
   SignUpComplete,
   SignUpInitForm,
-  SignUpProfileForm
+  SignUpProfileForm,
+  Translate
 } from '~/components'
 import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
-import { analytics, translate } from '~/common/utils'
+import { analytics } from '~/common/utils'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
@@ -19,44 +19,50 @@ interface SignUpDialogProps {
 }
 
 export const SignUpDialog = ({ children }: SignUpDialogProps) => {
+  const [step, setStep] = useState<Step>('signUp')
   const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
+  const open = () => {
+    setStep('signUp')
+    setShowDialog(true)
+  }
   const close = () => {
     setShowDialog(false)
     analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_SIGNUP_MODAL)
   }
-
-  const { lang } = useContext(LanguageContext)
-  const [step, setStep] = useState<Step>('signUp')
+  const showHeader = step !== 'complete'
 
   const data = {
     signUp: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.register,
-        zh_hans: TEXT.zh_hans.register,
-        lang
-      })
+      title: (
+        <Translate
+          zh_hant={TEXT.zh_hant.register}
+          zh_hans={TEXT.zh_hans.register}
+        />
+      )
     },
     profile: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.userProfile,
-        zh_hans: TEXT.zh_hans.userProfile,
-        lang
-      })
+      title: (
+        <Translate
+          zh_hant={TEXT.zh_hant.userProfile}
+          zh_hans={TEXT.zh_hans.userProfile}
+        />
+      )
     },
     setupLikeCoin: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.setupLikeCoin,
-        zh_hans: TEXT.zh_hans.setupLikeCoin,
-        lang
-      })
+      title: (
+        <Translate
+          zh_hant={TEXT.zh_hant.setupLikeCoin}
+          zh_hans={TEXT.zh_hans.setupLikeCoin}
+        />
+      )
     },
     complete: {
-      title: translate({
-        zh_hant: TEXT.zh_hant.registerSuccess,
-        zh_hans: TEXT.zh_hans.registerSuccess,
-        lang
-      })
+      title: (
+        <Translate
+          zh_hant={TEXT.zh_hant.registerSuccess}
+          zh_hans={TEXT.zh_hans.registerSuccess}
+        />
+      )
     }
   }
 
@@ -64,7 +70,12 @@ export const SignUpDialog = ({ children }: SignUpDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog title={data[step].title} isOpen={showDialog} onDismiss={close}>
+      <Dialog
+        title={data[step].title}
+        showHeader={showHeader}
+        isOpen={showDialog}
+        onDismiss={close}
+      >
         {step === 'signUp' && (
           <SignUpInitForm
             purpose="dialog"

@@ -18,10 +18,6 @@ type Step = 'request' | 'confirm' | 'complete'
 
 export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-
   const [step, setStep] = useState<Step>('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
@@ -32,6 +28,12 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
       next: 'complete'
     }
   })
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => {
+    setStep('request')
+    setShowDialog(true)
+  }
+  const close = () => setShowDialog(false)
 
   const requestCallback = (params: any) => {
     const { codeId } = params
@@ -48,20 +50,24 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
   }
 
   const confirmCallback = () => setStep('complete')
+  const showHeader = step !== 'complete'
+  const Title = (
+    <Translate
+      zh_hant={TEXT.zh_hant.changeEmail}
+      zh_hans={TEXT.zh_hans.changeEmail}
+    />
+  )
 
   return (
     <>
       {children({ open })}
 
       <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.changeEmail}
-            zh_hans={TEXT.zh_hans.changeEmail}
-          />
-        }
+        title={Title}
+        showHeader={showHeader}
         isOpen={showDialog}
         onDismiss={close}
+        size={showHeader ? 'lg' : 'sm'}
       >
         {step === 'request' && (
           <EmailChangeRequestForm
@@ -78,14 +84,29 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
         )}
 
         {step === 'complete' && (
-          <Dialog.Message
-            message={
-              <Translate
-                zh_hant={TEXT.zh_hant.changeEmailSuccess}
-                zh_hans={TEXT.zh_hans.changeEmailSuccess}
-              />
-            }
-          />
+          <>
+            <Dialog.Message
+              headline={Title}
+              description={
+                <Translate
+                  zh_hant={TEXT.zh_hant.changeEmailSuccess}
+                  zh_hans={TEXT.zh_hans.changeEmailSuccess}
+                />
+              }
+            />
+            <Dialog.Footer>
+              <Dialog.Footer.Button
+                bgColor="grey-lighter"
+                textColor="black"
+                onClick={close}
+              >
+                <Translate
+                  zh_hant={TEXT.zh_hant.cancel}
+                  zh_hans={TEXT.zh_hans.cancel}
+                />
+              </Dialog.Footer.Button>
+            </Dialog.Footer>
+          </>
         )}
       </Dialog>
     </>

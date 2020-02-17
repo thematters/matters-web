@@ -1,29 +1,25 @@
-import { Dialog, Title } from '~/components'
+import { Dialog } from '~/components'
 
 import styles from './styles.css'
 
 interface DialogMessageProps {
-  message?: React.ReactNode | string
-  hint?: React.ReactNode | string
+  headline?: React.ReactNode | string
+  description?: React.ReactNode | string
 }
 
 const DialogMessage: React.FC<DialogMessageProps> = ({
-  message,
-  hint,
+  headline,
+  description,
   children
 }) => (
-  <Dialog.Content spacing={['xxxloose', 'xxxloose']}>
-    <Title is="h3" type="dialog-headline">
-      {message}
-    </Title>
+  <Dialog.Content spacing={['base', 'xloose']}>
+    {headline && <h3 className="headline">{headline}</h3>}
 
-    <section className="hint">
-      {hint}
-
-      <style jsx>{styles}</style>
-    </section>
+    {description && <section className="description">{description}</section>}
 
     {children}
+
+    <style jsx>{styles}</style>
   </Dialog.Content>
 )
 

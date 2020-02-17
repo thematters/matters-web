@@ -10,18 +10,6 @@
   font-weight: var(--font-weight-feed-title);
 }
 
-.dialog-headline {
-  @mixin font-serif;
-
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  text-align: center;
-
-  @media (--sm-up) {
-    font-size: var(--font-size-xl);
-  }
-}
-
 .sidebar {
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-md-s);
