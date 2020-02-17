@@ -26,8 +26,8 @@ import Message from './Message'
  * </Dialog>
  * ```
  */
-export type DialogOverlayProps = import('./Main').DialogOverlayProps
-export type DialogProps = import('./Main').DialogProps
+export type DialogOverlayProps = import('./Dialog').DialogOverlayProps
+export type DialogProps = import('./Dialog').DialogProps
 
 type DynamicDialogProps = React.ComponentType<DialogProps> & {
   Header: typeof Header
@@ -36,11 +36,13 @@ type DynamicDialogProps = React.ComponentType<DialogProps> & {
   Message: typeof Message
 }
 
-export const Dialog = dynamic(() => import('./Main'), {
+const DynamicDialog = dynamic(() => import('./Dialog'), {
   ssr: false
 }) as DynamicDialogProps
 
-Dialog.Header = Header
-Dialog.Content = Content
-Dialog.Footer = Footer
-Dialog.Message = Message
+DynamicDialog.Header = Header
+DynamicDialog.Content = Content
+DynamicDialog.Footer = Footer
+DynamicDialog.Message = Message
+
+export const Dialog = DynamicDialog
