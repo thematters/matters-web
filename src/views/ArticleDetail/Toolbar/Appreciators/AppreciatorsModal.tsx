@@ -127,6 +127,8 @@ const AppreciatorsModal = () => {
 
   const formattedTotalCount = numFormat(totalCount)
 
+  const modalContentMaxHeight = window ? window.innerHeight - (8 + (0.75 * 2)) * 16 : undefined
+
   return (
     <>
       <Modal.Header
@@ -138,9 +140,10 @@ const AppreciatorsModal = () => {
         }
       />
       <Modal.Content spacing="none" layout="full-width">
-        <div className="modal-appreciators-list">
+        <div id="modal-appreciators-list" className="modal-appreciators-list">
           <InfiniteList
             data={edges}
+            defaultListMaxHeight={modalContentMaxHeight}
             defaultRowHeight={70}
             loader={<Spinner />}
             loadMore={loadMore}

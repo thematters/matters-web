@@ -25,6 +25,7 @@ interface Props {
   totalCount: number
 
   defaultListHeight?: number
+  defaultListMaxHeight?: number
   defaultRowHeight?: number
   threshold?: number
 }
@@ -38,6 +39,7 @@ export const InfiniteList = ({
   totalCount,
 
   defaultListHeight = 10,
+  defaultListMaxHeight,
   defaultRowHeight,
   threshold = 1
 }: Props) => {
@@ -50,7 +52,7 @@ export const InfiniteList = ({
     defaultRowHeight ? defaultRowHeight * data.length : defaultListHeight
   )
 
-  const [maxHeight] = useState(window?.innerHeight || defaultListHeight)
+  const [maxHeight] = useState(defaultListMaxHeight || window?.innerHeight || defaultListHeight)
 
   const isRowLoaded = ({ index }: Index) => !!data[index]
 
@@ -79,7 +81,7 @@ export const InfiniteList = ({
     if (listHeight < maxHeight) {
       const current = calculate()
       if (listHeight < current) {
-        setListHeight(current)
+        setListHeight(Math.min(maxHeight, current))
       }
     }
   }
