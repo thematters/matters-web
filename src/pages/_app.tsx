@@ -17,7 +17,7 @@ import {
   ViewerFragments,
   ViewerProvider
 } from '~/components'
-import { GlobalAlertDialogs } from '~/components/GlobalAlertDialogs'
+import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { GlobalStyles } from '~/components/GlobalStyles'
@@ -89,7 +89,7 @@ const Root = ({
 
           {children}
 
-          <GlobalAlertDialogs />
+          <GlobalDialogs />
           <Toast.Container />
           <ProgressBar />
 

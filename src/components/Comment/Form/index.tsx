@@ -129,7 +129,6 @@ const CommentForm = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            header: !skipPushButton && CommentSent,
             content: skipPushButton ? (
               CommentSent
             ) : (
@@ -139,13 +138,14 @@ const CommentForm = ({
               />
             ),
             customButton: !skipPushButton && (
-              <button type="button" onClick={() => subscribePush()}>
+              <Button onClick={subscribePush}>
                 <Translate
                   zh_hant={TEXT.zh_hant.confirmPush}
                   zh_hans={TEXT.zh_hans.confirmPush}
                 />
-              </button>
-            )
+              </Button>
+            ),
+            buttonPlacement: 'center'
           }
         })
       )

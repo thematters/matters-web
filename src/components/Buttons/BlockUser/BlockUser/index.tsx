@@ -89,7 +89,8 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
                 )}
               </TextIcon>
             </Button>
-          )
+          ),
+          buttonPlacement: 'center'
         }
       })
     )

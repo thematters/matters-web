@@ -58,7 +58,6 @@ const Subscribe = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          header: <Translate zh_hant="收藏成功" zh_hans="收藏成功" />,
           content: (
             <Translate
               zh_hant={TEXT.zh_hant.pushDescription}
@@ -66,13 +65,14 @@ const Subscribe = ({
             />
           ),
           customButton: (
-            <button type="button" onClick={() => subscribePush()}>
+            <Button onClick={subscribePush}>
               <Translate
                 zh_hant={TEXT.zh_hant.confirmPush}
                 zh_hans={TEXT.zh_hans.confirmPush}
               />
-            </button>
-          )
+            </Button>
+          ),
+          buttonPlacement: 'center'
         }
       })
     )

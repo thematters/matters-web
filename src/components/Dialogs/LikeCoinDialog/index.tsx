@@ -20,14 +20,16 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
 
   children
 }) => {
-  const [showDialog, setShowDialog] = useState(defaultShowDialog)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-
   const [step, setStep] = useState<Step>(defaultStep)
   const nextStep = () => setStep('setup')
+  const [showDialog, setShowDialog] = useState(defaultShowDialog)
+  const open = () => {
+    setStep('term')
+    setShowDialog(true)
+  }
+  const close = () => setShowDialog(false)
 
-  const title =
+  const Title =
     step === 'term' ? (
       <Translate
         zh_hant="Matters 與 LikeCoin 合作了！"
@@ -44,7 +46,7 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
     <>
       {children && children({ open })}
 
-      <Dialog title={title} isOpen={showDialog} onDismiss={close}>
+      <Dialog title={Title} isOpen={showDialog} onDismiss={close}>
         {step === 'term' && <LikeCoinTerm nextStep={nextStep} />}
         {step === 'setup' && <SetupLikeCoin submitCallback={close} />}
       </Dialog>

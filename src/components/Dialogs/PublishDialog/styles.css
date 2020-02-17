@@ -19,6 +19,12 @@
 
 .title-container {
   padding: 0 var(--spacing-xxx-loose) 1rem;
+
+  & h3 {
+    font-size: var(--font-size-xm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+  }
 }
 
 .subTitle {

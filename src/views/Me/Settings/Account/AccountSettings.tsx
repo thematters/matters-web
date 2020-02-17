@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import {
   Button,
   ChangeEmailDialog,
+  ChangePasswordDialog,
   PageHeader,
-  PasswordDialog,
   TextIcon,
   Translate,
   UserNameDialog,
@@ -50,16 +50,16 @@ const ChangeUserNameButton = ({ disabled }: { disabled: boolean }) => (
 )
 
 const ChangePasswrodButton = () => (
-  <PasswordDialog purpose="change">
+  <ChangePasswordDialog>
     {({ open }) => (
-      <button type="button" className="u-link-green" onClick={open}>
+      <Button className="u-link-green" onClick={open}>
         <Translate
           zh_hant={TEXT.zh_hant.changePassword}
           zh_hans={TEXT.zh_hans.changePassword}
         />
-      </button>
+      </Button>
     )}
-  </PasswordDialog>
+  </ChangePasswordDialog>
 )
 
 const AccountSettings = () => {

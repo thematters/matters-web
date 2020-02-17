@@ -2,31 +2,34 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
-  EmailChangeConfirmForm,
-  EmailChangeRequestForm,
+  PasswordChangeConfirmForm,
+  PasswordChangeRequestForm,
   Translate,
   ViewerContext
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
-interface ChangeEmailDialogProps {
+interface ChangePasswordDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-type Step = 'request' | 'confirm' | 'complete'
-
-export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
+export const ChangePasswordDialog = ({
+  children
+}: ChangePasswordDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const [step, setStep] = useState<Step>('request')
+  const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'confirm',
+      prev: 'login',
+      next: 'reset',
       email: viewer.info.email
     },
-    confirm: {
+    reset: {
+      prev: 'request',
       next: 'complete'
-    }
+    },
+    complete: {}
   })
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
@@ -35,32 +38,34 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
   }
   const close = () => setShowDialog(false)
 
-  const requestCallback = (params: any) => {
-    const { codeId } = params
+  const requestCodeCallback = (params: any) => {
+    const { email, codeId } = params
     setData(prev => {
       return {
         ...prev,
         request: {
           ...prev.request,
+          email,
           codeId
         }
       }
     })
-    setStep('confirm')
+    setStep('reset')
   }
-
-  const confirmCallback = () => setStep('complete')
+  const backPreviousStep = () => {
+    setStep('request')
+  }
   const showHeader = step !== 'complete'
   const Title = (
     <Translate
-      zh_hant={TEXT.zh_hant.changeEmail}
-      zh_hans={TEXT.zh_hans.changeEmail}
+      zh_hant={TEXT.zh_hant.changePassword}
+      zh_hans={TEXT.zh_hans.changePassword}
     />
   )
 
   return (
     <>
-      {children({ open })}
+      {children && children({ open })}
 
       <Dialog
         title={Title}
@@ -70,16 +75,18 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
         size={showHeader ? 'lg' : 'sm'}
       >
         {step === 'request' && (
-          <EmailChangeRequestForm
+          <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            submitCallback={requestCallback}
+            purpose="change"
+            submitCallback={requestCodeCallback}
           />
         )}
 
-        {step === 'confirm' && (
-          <EmailChangeConfirmForm
-            oldData={data.request}
-            submitCallback={confirmCallback}
+        {step === 'reset' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            backPreviousStep={backPreviousStep}
+            submitCallback={() => setStep('complete')}
           />
         )}
 
@@ -89,8 +96,8 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
               headline={Title}
               description={
                 <Translate
-                  zh_hant={TEXT.zh_hant.changeEmailSuccess}
-                  zh_hans={TEXT.zh_hans.changeEmailSuccess}
+                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
+                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
                 />
               }
             />
