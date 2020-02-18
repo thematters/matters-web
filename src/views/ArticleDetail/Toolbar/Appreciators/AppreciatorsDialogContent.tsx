@@ -124,9 +124,9 @@ const AppreciatorsDialogContent = () => {
   const calcContentMaxHeight = () => {
     if (window) {
       const dialogMaxHeight = window.innerHeight * 0.01 * 90
-      const head = isSmallUp ? (2 + 0.5) : 0.75 * 2
+      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
       const spacing = 0.75 * 2
-      return dialogMaxHeight - ((head + spacing + 2) * 16)
+      return dialogMaxHeight - (head + spacing + 1) * 16
     }
     return
   }
