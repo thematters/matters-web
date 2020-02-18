@@ -1,0 +1,40 @@
+.overlay {
+  @mixin expand-to-container;
+  content: '';
+  background: rgba(0, 0, 0, 0.25);
+  will-change: opacity;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  max-height: calc(var(--vh) * 90);
+
+  background: var(--color-white);
+  border-radius: 0.5rem 0.5rem 0 0;
+
+  &.no-header {
+    padding-top: var(--spacing-x-loose);
+  }
+
+  @media (--sm-up) {
+    border-radius: 0.5rem;
+
+    &.no-header {
+      padding-top: 0;
+    }
+  }
+}
+
+.handle {
+  position: absolute;
+  top: var(--spacing-x-tight);
+  left: 50%;
+  width: 3rem;
+  height: 0.375rem;
+
+  background: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+  transform: translateX(-50%);
+}

@@ -1,5 +1,4 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
-import * as Sentry from '@sentry/browser'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
@@ -10,21 +9,21 @@ import React from 'react'
 import {
   AnalyticsListener,
   AnalyticsProvider,
-  GlobalHeader,
-  GlobalStyles,
+  Error,
+  ErrorBoundary,
+  Head,
   LanguageProvider,
-  Modal,
-  ModalProvider,
-  Toast
+  Toast,
+  ViewerFragments,
+  ViewerProvider
 } from '~/components'
-import { Error } from '~/components/Error'
-import ErrorBoundary from '~/components/ErrorBoundary'
+import { GlobalDialogs } from '~/components/GlobalDialogs'
+import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
+import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
-import { Head } from '~/components/Head'
-import ProgressBar from '~/components/ProgressBar'
+import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
-import { ViewerFragments, ViewerProvider } from '~/components/Viewer'
 
 import withApollo from '~/common/utils/withApollo'
 
@@ -44,15 +43,16 @@ const ROOT_QUERY = gql`
   ${AnalyticsListener.fragments.user}
 `
 
-/**
- * Initialize
- */
-const {
-  publicRuntimeConfig: { SENTRY_DSN }
-} = getConfig()
-
 // Sentry
-Sentry.init({ dsn: SENTRY_DSN || '' })
+import('@sentry/browser').then(Sentry => {
+  /**
+   * Initialize
+   */
+  const {
+    publicRuntimeConfig: { SENTRY_DSN }
+  } = getConfig()
+  Sentry.init({ dsn: SENTRY_DSN || '' })
+})
 
 /**
  * `<Root>` contains components that depend on viewer
@@ -83,20 +83,19 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        <ModalProvider>
-          <HeaderContextProvider>
-            <Head />
-            <GlobalHeader user={viewer} />
+        <HeaderContextProvider>
+          <Head />
+          <GlobalHeader user={viewer} />
 
-            {children}
+          {children}
 
-            <AnalyticsListener user={viewer || {}} />
-            <PushInitializer client={client} />
-            <Modal.Anchor />
-            <Toast.Container />
-            <ProgressBar />
-          </HeaderContextProvider>
-        </ModalProvider>
+          <GlobalDialogs />
+          <Toast.Container />
+          <ProgressBar />
+
+          <AnalyticsListener user={viewer || {}} />
+          <PushInitializer client={client} />
+        </HeaderContextProvider>
       </LanguageProvider>
     </ViewerProvider>
   )

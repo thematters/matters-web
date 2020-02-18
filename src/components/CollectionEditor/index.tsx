@@ -8,20 +8,20 @@ import {
   DropResult
 } from 'react-beautiful-dnd'
 
-import { ArticleDigest, Button, Icon } from '~/components'
+import { ArticleDigestDropdown, Button, Icon } from '~/components'
 
 import CollectForm from './CollectForm'
 import styles from './styles.css'
 
-import { DropdownDigestArticle } from '~/components/ArticleDigest/DropdownDigest/__generated__/DropdownDigestArticle'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
 interface State {
-  articles: DropdownDigestArticle[]
+  articles: ArticleDigestDropdownArticle[]
 }
 
 interface Props {
-  articles: DropdownDigestArticle[]
-  onEdit: (articles: DropdownDigestArticle[]) => void
+  articles: ArticleDigestDropdownArticle[]
+  onEdit: (articles: ArticleDigestDropdownArticle[]) => void
 }
 
 const reorder = (list: any[], startIndex: number, endIndex: number) => {
@@ -109,12 +109,12 @@ class CollectionEditor extends React.Component<Props, State> {
                           <Icon.Sort color="grey" />
                         </span>
 
-                        <ArticleDigest.Dropdown
+                        <ArticleDigestDropdown
                           article={article}
                           titleTextSize="md-s"
                           disabled
                           extraButton={
-                            <ArticleDigest.Dropdown.OpenExternalLink
+                            <ArticleDigestDropdown.OpenExternalLink
                               article={article}
                             />
                           }

@@ -1,6 +1,6 @@
 import UserDrafts from '~/views/User/Drafts'
 
-import { Protected } from '~/components/Protected'
+import { Protected } from '~/components'
 
 export default () => (
   <Protected>

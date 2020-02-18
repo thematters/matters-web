@@ -1,0 +1,24 @@
+/* @styled-jsx=global */
+
+[data-reach-dialog-overlay] {
+  @mixin flex-end-space-between;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+
+  z-index: var(--z-index-dialog);
+
+  @media (--sm-up) {
+    @mixin flex-center-all;
+  }
+}
+
+[data-reach-dialog-content] {
+  width: 100%;
+  outline: none;
+
+  will-change: transform;
+}

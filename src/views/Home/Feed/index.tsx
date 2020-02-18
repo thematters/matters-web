@@ -3,18 +3,18 @@ import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
 import {
+  ArticleDigestFeed,
+  EmptyArticle,
   InfiniteScroll,
   List,
   LoadMore,
   PageHeader,
   Spinner,
-  Translate
+  Translate,
+  useResponsive
 } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -35,11 +35,11 @@ const feedFragment = gql`
     edges {
       cursor
       node {
-        ...FeedDigestArticle
+        ...ArticleDigestFeedArticle
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 export const queries = {
@@ -126,7 +126,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         <List hasBorder>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigest.Feed
+              <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import SignUpComplete from '~/components/Form/SignUpComplete'
+import { SignUpComplete } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -13,10 +13,9 @@ type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 interface Props {
   submitCallback?: () => void
-  scrollLock?: boolean
 }
 
-const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
+const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -49,25 +48,19 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
               setBindingWindowRef(windowRef)
             }
           }}
-          scrollLock={scrollLock}
         />
       )}
       {step === 'generating' && (
-        <Generating
-          prevStep={backToSelect}
-          nextStep={complete}
-          scrollLock={scrollLock}
-        />
+        <Generating prevStep={backToSelect} nextStep={complete} />
       )}
       {step === 'binding' && (
         <Binding
           prevStep={backToSelect}
           nextStep={complete}
           windowRef={bindingWindowRef}
-          scrollLock={scrollLock}
         />
       )}
-      {step === 'complete' && <SignUpComplete scrollLock={scrollLock} />}
+      {step === 'complete' && <SignUpComplete />}
     </>
   )
 }

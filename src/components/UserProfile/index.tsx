@@ -10,16 +10,16 @@ import { useContext, useState } from 'react'
 import {
   Avatar,
   Expandable,
+  FollowButton,
   Icon,
+  ShareButton,
   Spinner,
+  Throw404,
   Tooltip,
-  Translate
+  Translate,
+  ViewerContext
 } from '~/components'
-import { FollowButton } from '~/components/Button/Follow'
-import ShareButton from '~/components/Button/Share'
-import Throw404 from '~/components/Throw404'
 import { UserProfileEditor } from '~/components/UserProfileEditor'
-import { ViewerContext } from '~/components/Viewer'
 
 import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'

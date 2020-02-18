@@ -1,18 +1,18 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { Modal, Title } from '~/components'
 import {
+  Head,
+  PageHeader,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm
-} from '~/components/Form/PasswordChangeForm'
+  PasswordChangeRequestForm,
+  Translate
+} from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Head } from '~/components/Head'
-import { Translate } from '~/components/Language'
 
-import { PATHS, TEXT } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+import { TEXT } from '~/common/enums'
 
+import PasswordChanged from './PasswordChanged'
 import styles from './styles.css'
 
 const Forget = () => {
@@ -33,16 +33,10 @@ const Forget = () => {
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
-  const containerClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-offset-sm-1',
-    'l-col-md-4',
-    'l-offset-md-2',
-    'l-col-lg-6',
-    'l-offset-lg-3',
-    'container'
-  )
+  const containerClass = classNames({
+    container: true,
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3': true
+  })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
@@ -72,55 +66,35 @@ const Forget = () => {
       />
 
       <article className={containerClass}>
-        {step === 'request' && (
-          <PasswordChangeRequestForm
-            defaultEmail={data.request.email}
-            purpose="forget"
-            container="page"
-            submitCallback={requestCodeCallback}
-            scrollLock={false}
-          />
-        )}
-        {step === 'reset' && (
-          <PasswordChangeConfirmForm
-            codeId={data.request.codeId}
-            container="page"
-            backPreviousStep={backPreviousStep}
-            submitCallback={() => setStep('complete')}
-            scrollLock={false}
-          />
-        )}
-        {step === 'complete' && (
-          <div className="complete">
-            <Modal.Content>
-              <Title is="h3" type="modal-headline">
-                <Translate
-                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                />
-              </Title>
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.forgetPassword}
+              zh_hans={TEXT.zh_hans.forgetPassword}
+            />
+          }
+          hasNoBorder
+        />
 
-              <p className="hint">
-                <Translate
-                  zh_hant={TEXT.zh_hant.useNewPassword}
-                  zh_hans={TEXT.zh_hans.useNewPassword}
-                />
-                。
-              </p>
-            </Modal.Content>
+        <section className="content">
+          {step === 'request' && (
+            <PasswordChangeRequestForm
+              defaultEmail={data.request.email}
+              purpose="forget"
+              submitCallback={requestCodeCallback}
+            />
+          )}
 
-            <Modal.FooterButton
-              is="link"
-              {...appendTarget(PATHS.AUTH_LOGIN)}
-              width="full"
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.login}
-                zh_hans={TEXT.zh_hans.login}
-              />
-            </Modal.FooterButton>
-          </div>
-        )}
+          {step === 'reset' && (
+            <PasswordChangeConfirmForm
+              codeId={data.request.codeId}
+              backPreviousStep={backPreviousStep}
+              submitCallback={() => setStep('complete')}
+            />
+          )}
+
+          {step === 'complete' && <PasswordChanged />}
+        </section>
       </article>
 
       <style jsx>{styles}</style>

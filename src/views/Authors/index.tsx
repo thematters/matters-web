@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  EmptyWarning,
   Footer,
   Head,
   InfiniteScroll,
@@ -11,7 +12,6 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'

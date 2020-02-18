@@ -3,6 +3,7 @@
   align-items: center;
 
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .cover-intro {

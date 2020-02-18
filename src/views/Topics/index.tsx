@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
+  EmptyArticle,
   Footer,
   Head,
   InfiniteScroll,
@@ -11,7 +12,6 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
@@ -33,14 +33,14 @@ const ALL_TOPICSS = gql`
           edges {
             cursor
             node {
-              ...FeedDigestArticle
+              ...ArticleDigestFeedArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const Topics = () => {
@@ -84,7 +84,7 @@ const Topics = () => {
       <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Feed
+            <ArticleDigestFeed
               article={node}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

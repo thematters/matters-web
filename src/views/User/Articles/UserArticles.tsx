@@ -3,19 +3,19 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
+  EmptyArticle,
   Head,
   Icon,
   InfiniteScroll,
   List,
-  Spinner
+  Spinner,
+  Throw404,
+  Translate,
+  ViewerContext
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
-import { Translate } from '~/components/Language'
-import Throw404 from '~/components/Throw404'
-import { ViewerContext } from '~/components/Viewer'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
@@ -136,7 +136,7 @@ const UserArticles = () => {
 
             return (
               <List.Item key={cursor}>
-                <ArticleDigest.Feed
+                <ArticleDigestFeed
                   article={node}
                   inUserArticles
                   onClick={() =>

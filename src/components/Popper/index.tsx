@@ -1,9 +1,18 @@
-import Tippy, { TippyProps } from '@tippy.js/react'
-import { Instance, Props } from 'tippy.js'
+import dynamic from 'next/dynamic'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = Instance<Props>
+export type PopperInstance = import('tippy.js').Instance
+export type PopperProps = import('@tippy.js/react').TippyProps
+
+const DynamicTippy = dynamic(
+  () =>
+    import(
+      /* webpackPrefetch: true */
+      '@tippy.js/react'
+    ),
+  { ssr: false }
+)
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -24,7 +33,9 @@ export type PopperInstance = Instance<Props>
  * @see {@url https://github.com/atomiks/tippy.js-react}
  */
 
-export const Dropdown: React.FC<TippyProps> = props => <Tippy {...props} />
+export const Dropdown: React.FC<PopperProps> = props => (
+  <DynamicTippy {...props} />
+)
 Dropdown.defaultProps = {
   arrow: false,
   trigger: 'click',
@@ -40,7 +51,9 @@ Dropdown.defaultProps = {
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
 }
 
-export const Tooltip: React.FC<TippyProps> = props => <Tippy {...props} />
+export const Tooltip: React.FC<PopperProps> = props => (
+  <DynamicTippy {...props} />
+)
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
@@ -50,27 +63,6 @@ Tooltip.defaultProps = {
   theme: 'tooltip',
   boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
-}
-
-export const Popover: React.FC<TippyProps> = props => <Tippy {...props} />
-Popover.defaultProps = {
-  arrow: true,
-  trigger: 'click',
-  interactive: true,
-  distance: 16,
-  placement: 'right',
-  animation: 'shift-away',
-  theme: 'popover',
-  boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
-}
-
-/**
- * Focus popper for a11y
- * @param instance
- */
-export const focusPopper = (instance: PopperInstance) => {
-  instance.popperChildren.tooltip.focus()
 }
 
 /**

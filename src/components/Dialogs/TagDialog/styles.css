@@ -1,0 +1,17 @@
+.container {
+  margin: 0rem var(--spacing-base) var(--spacing-loose);
+}
+
+.field {
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  margin: 0rem 0rem 0.5rem;
+}
+
+.search-tag-item {
+  & .keyword,
+  & .count {
+    margin-left: var(--spacing-xx-tight);
+    color: var(--color-grey);
+  }
+}

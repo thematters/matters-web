@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 287px;
+  height: 170px;
+  padding: var(--spacing-tight) var(--spacing-base);
+
+  color: var(--color-black);
+}
+
+header {
+  & :global(h3) {
+    @mixin line-clamp;
+    -webkit-line-clamp: 2;
+  }
+}
+
+.summary,
+footer {
+  margin-top: var(--spacing-tight);
+}
+
+.summary {
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  @mixin line-clamp;
+  -webkit-line-clamp: 3;
+}
+
+.container.has-cover {
+  justify-content: flex-end;
+
+  color: var(--color-white);
+}

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigest } from '~/components/ArticleDigest'
+import { ArticleDigestFeed } from '~/components'
 
 export default gql`
   query TagArticles($id: ID!, $after: String, $selected: Boolean) {
@@ -16,12 +16,12 @@ export default gql`
           edges {
             cursor
             node {
-              ...FeedDigestArticle
+              ...ArticleDigestFeedArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `

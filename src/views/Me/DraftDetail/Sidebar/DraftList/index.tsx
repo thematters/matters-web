@@ -20,7 +20,7 @@ const ME_DRAFTS_SIDEBAR = gql`
         edges {
           node {
             id
-            ...SidebarDigestDraft
+            ...DraftDigestSidebarDraft
           }
         }
       }

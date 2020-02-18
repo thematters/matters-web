@@ -1,6 +1,6 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyArticle: React.FC<{ description?: React.ReactNode }> = ({
+export const EmptyArticle: React.FC<{ description?: React.ReactNode }> = ({
   description,
   children
 }) => (
@@ -13,5 +13,3 @@ const EmptyArticle: React.FC<{ description?: React.ReactNode }> = ({
     {children}
   </Empty>
 )
-
-export default EmptyArticle

@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { Tabs, Translate } from '~/components'
-import { ViewerContext } from '~/components/Viewer'
+import { Tabs, Translate, ViewerContext } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'

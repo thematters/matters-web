@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import _uniq from 'lodash/uniq'
 
 import {
-  ArticleDigest,
+  ArticleDigestSidebar,
   Button,
   Icon,
   List,
@@ -15,7 +15,6 @@ import {
   useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -28,10 +27,25 @@ import { CollectionList as CollectionListTypes } from './__generated__/Collectio
 export const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
-      ...ArticleCollection
+      id
+      collection(input: { after: $after, first: $first }) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+            ...ArticleDigestSidebarArticle
+          }
+        }
+      }
     }
   }
-  ${articleFragments.articleCollection}
+  ${ArticleDigestSidebar.fragments.article}
 `
 
 const CollectionList = ({
@@ -106,7 +120,7 @@ const CollectionList = ({
       <List spacing={['base', 0]}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Sidebar
+            <ArticleDigestSidebar
               article={node}
               hasCover={isMediumUp}
               hasBackground

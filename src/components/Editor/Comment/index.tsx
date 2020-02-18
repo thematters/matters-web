@@ -3,8 +3,8 @@ import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { FC, useContext, useState } from 'react'
 
+import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'

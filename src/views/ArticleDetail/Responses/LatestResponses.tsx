@@ -7,11 +7,18 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { List, LoadMore, Spinner, Title, Translate } from '~/components'
-import EmptyResponse from '~/components/Empty/EmptyResponse'
+import {
+  EmptyResponse,
+  List,
+  LoadMore,
+  Spinner,
+  Switch,
+  Title,
+  Translate,
+  useEventListener,
+  useResponsive
+} from '~/components'
 import { QueryError } from '~/components/GQL'
-import { useEventListener, useResponsive } from '~/components/Hook'
-import { Switch } from '~/components/Switch'
 
 import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
 import {

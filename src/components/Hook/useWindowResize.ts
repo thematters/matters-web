@@ -14,19 +14,24 @@ import { WINDOW_RESIZE_DEBOUNCE } from '~/common/enums'
  * ```
  */
 
-const getSize = () => [
-  window?.innerWidth || undefined,
-  window?.innerHeight || undefined
-]
+type Width = number | undefined
+type Height = number | undefined
+type Size = [Width, Height]
+
+const getSize = (): Size => {
+  if (typeof window === undefined) {
+    return [undefined, undefined]
+  }
+
+  return [window.innerWidth, window.innerHeight]
+}
 
 export const useWindowResize = () => {
-  const [size, setSize] = useState(getSize())
+  const [size, setSize] = useState<Size>([undefined, undefined])
+  const resize = _debounce(() => setSize(getSize()), WINDOW_RESIZE_DEBOUNCE)
 
   useEffect(() => {
-    if (!window) {
-      return
-    }
-    const resize = _debounce(() => setSize(getSize()), WINDOW_RESIZE_DEBOUNCE)
+    resize()
     window.addEventListener('resize', resize)
     return () => window.removeEventListener('resize', resize)
   }, [])

@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Button, TextIcon } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Translate } from '~/components/Language'
 
 import { PATHS } from '~/common/enums'
 import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg'

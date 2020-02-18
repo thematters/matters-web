@@ -1,5 +1,4 @@
-import { Head } from '~/components'
-import { Term } from '~/components/Term'
+import { Head, Term } from '~/components'
 
 import { TEXT } from '~/common/enums'
 

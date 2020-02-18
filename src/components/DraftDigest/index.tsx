@@ -1,5 +1,5 @@
-import Feed from './FeedDigest'
-import Sidebar from './SidebarDigest'
+import Feed from './Feed'
+import Sidebar from './Sidebar'
 
 export const DraftDigest = {
   Feed,

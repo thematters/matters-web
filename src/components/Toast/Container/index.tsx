@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useEventListener } from '~/components/Hook'
+import { useEventListener } from '~/components'
 
 import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
 

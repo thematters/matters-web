@@ -82,7 +82,7 @@ export const InfiniteList = ({
   const onRowsHaveRendered = () => {
     if (listHeight < maxHeight) {
       const current = calculate()
-      if (listHeight < current) {
+      if (listHeight !== maxHeight && listHeight < current) {
         setListHeight(Math.min(maxHeight, current))
       }
     }
@@ -92,7 +92,7 @@ export const InfiniteList = ({
 
   const rowCount = (totalCount || 0) > count ? count + 1 : count
 
-  const listStyle = { height: `${listHeight}px` }
+  const listStyle = { height: `${Math.min(maxHeight, listHeight)}px` }
 
   return (
     <div className="infinite-list" style={listStyle}>

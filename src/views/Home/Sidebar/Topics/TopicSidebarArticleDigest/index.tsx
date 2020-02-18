@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { ArticleDigest, Card } from '~/components'
+import { ArticleDigestTitle, Card } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
@@ -14,10 +14,10 @@ const fragments = {
     fragment TopicSidebarArticleDigestArticle on Article {
       id
       topicScore
-      ...TitleDigestArticle
+      ...ArticleDigestTitleArticle
     }
 
-    ${ArticleDigest.Title.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 const TopicSidebarArticleDigest = ({
@@ -30,7 +30,7 @@ const TopicSidebarArticleDigest = ({
   return (
     <Card {...path} spacing={['xtight', 0]}>
       <section className="container">
-        <ArticleDigest.Title article={article} textSize="sm" is="h3" />
+        <ArticleDigestTitle article={article} textSize="sm" is="h3" />
 
         {article.topicScore && (
           <span className="score">{numAbbr(article.topicScore)}</span>

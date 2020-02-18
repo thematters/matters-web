@@ -1,5 +1,5 @@
 section {
-  margin-left: var(--spacing-tight);
+  margin-left: var(--spacing-base);
 
   @media (--sm-up) {
     margin-left: var(--spacing-x-loose);

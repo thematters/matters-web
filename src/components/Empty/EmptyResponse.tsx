@@ -1,6 +1,6 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyResponse = ({
+export const EmptyResponse = ({
   description,
   articleOnlyMode
 }: {
@@ -21,5 +21,3 @@ const EmptyResponse = ({
     />
   )
 }
-
-export default EmptyResponse

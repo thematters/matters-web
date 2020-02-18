@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareButton from '~/components/Button/Share'
+import { BookmarkButton } from '~/components/Buttons/Bookmark'
+import { ShareButton } from '~/components/Buttons/Share'
 
 import { toPath } from '~/common/utils'
 

@@ -1,9 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Comment } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
-import { ViewerContext } from '~/components/Viewer'
+import { Comment, LikeCoinDialog, ViewerContext } from '~/components'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
@@ -84,8 +82,8 @@ const FooterActions = ({
   return (
     <>
       <footer>
-        <ModalSwitch modalId="likeCoinTermModal">
-          {(open: any) => (
+        <LikeCoinDialog>
+          {({ open }) => (
             <section className="left">
               {hasReply && (
                 <ReplyButton
@@ -97,18 +95,18 @@ const FooterActions = ({
 
               <UpvoteButton
                 comment={comment}
-                onClick={viewer.shouldSetupLikerID && open}
+                onClick={viewer.shouldSetupLikerID ? open : undefined}
                 disabled={isDisabled}
               />
 
               <DownvoteButton
                 comment={comment}
-                onClick={viewer.shouldSetupLikerID && open}
+                onClick={viewer.shouldSetupLikerID ? open : undefined}
                 disabled={isDisabled}
               />
             </section>
           )}
-        </ModalSwitch>
+        </LikeCoinDialog>
 
         {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
       </footer>

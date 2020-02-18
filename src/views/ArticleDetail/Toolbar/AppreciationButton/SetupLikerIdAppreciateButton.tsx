@@ -1,4 +1,4 @@
-import { ModalSwitch } from '~/components'
+import { LikeCoinDialog } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -10,17 +10,15 @@ const SetupLikerIdAppreciateButton = ({
   inFixedToolbar?: boolean
 }) => {
   return (
-    <ModalSwitch modalId="likeCoinTermModal">
-      {(open: any) => (
+    <LikeCoinDialog>
+      {({ open }) => (
         <AppreciateButton
-          onClick={() => {
-            open()
-          }}
+          onClick={open}
           total={total}
           inFixedToolbar={inFixedToolbar}
         />
       )}
-    </ModalSwitch>
+    </LikeCoinDialog>
   )
 }
 

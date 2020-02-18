@@ -1,25 +1,21 @@
-import { Button, TextIcon } from '~/components'
-import { Translate } from '~/components/Language'
-import { ModalSwitch } from '~/components/ModalManager'
+import { Button, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, TEXT } from '~/common/enums'
 
-export default () => (
-  <ModalSwitch modalId="loginModal">
-    {(open: any) => (
-      <Button
-        size={[null, '2.25rem']}
-        spacing={[0, 'loose']}
-        bgHoverColor="green-lighter"
-        onClick={() => open()}
-      >
-        <TextIcon color="green" weight="md">
-          <Translate
-            zh_hant={TEXT.zh_hant.login}
-            zh_hans={TEXT.zh_hans.login}
-          />
-        </TextIcon>
-      </Button>
-    )}
-  </ModalSwitch>
+const LoginButton = () => (
+  <Button
+    size={[null, '2.25rem']}
+    spacing={[0, 'loose']}
+    bgHoverColor="green-lighter"
+    onClick={() => {
+      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+    }}
+  >
+    <TextIcon color="green" weight="md">
+      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+    </TextIcon>
+  </Button>
 )
+
+export default LoginButton

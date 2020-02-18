@@ -4,8 +4,7 @@ import 'firebase/messaging'
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 
-import { Translate } from '~/components'
-import { Viewer } from '~/components/Viewer'
+import { Translate, Viewer } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
