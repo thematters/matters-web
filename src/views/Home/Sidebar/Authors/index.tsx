@@ -1,7 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { List, Spinner, UserDigest } from '~/components'
+import {
+  Button,
+  Icon,
+  List,
+  Spinner,
+  TextIcon,
+  Translate,
+  UserDigest
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -33,9 +41,12 @@ const SIDEBAR_AUTHORS = gql`
 `
 
 const Authors = () => {
-  const { data, loading, error } = useQuery<SidebarAuthors>(SIDEBAR_AUTHORS, {
-    notifyOnNetworkStatusChange: true
-  })
+  const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
+    SIDEBAR_AUTHORS,
+    {
+      notifyOnNetworkStatusChange: true
+    }
+  )
   const edges = data?.viewer?.recommendation.authors.edges
 
   if (error) {
@@ -48,7 +59,26 @@ const Authors = () => {
 
   return (
     <section>
-      <SidebarHeader type="authors" />
+      <SidebarHeader
+        type="authors"
+        rightButton={
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgHoverColor="grey-lighter"
+            onClick={() => refetch()}
+          >
+            <TextIcon
+              icon={<Icon.Reload size="xs" />}
+              color="grey-dark"
+              size="xs"
+              weight="md"
+            >
+              <Translate zh_hant="換一批" zh_hans="换一批" />
+            </TextIcon>
+          </Button>
+        }
+      />
 
       {loading && <Spinner />}
 

@@ -42,17 +42,3 @@ header {
     }
   }
 }
-
-.follow-info {
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
-
-  & .hightlight {
-    color: var(--color-matters-green);
-  }
-
-  & :global(> *) {
-    line-height: 1;
-    vertical-align: middle;
-  }
-}

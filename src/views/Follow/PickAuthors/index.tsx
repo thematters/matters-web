@@ -1,8 +1,9 @@
-import { AuthorPicker, Head, Translate } from '~/components'
+import { Head, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
+import { AuthorPicker } from './AuthorPicker'
 import styles from './styles.css'
 
 const PickIntroHeader = () => {

@@ -55,7 +55,6 @@ export * from './Transaction'
 
 export * from './SearchBar'
 export * from './UserProfile'
-export * from './AuthorPicker'
 export * from './FileUploader'
 export * from './Fingerprint'
 export * from './Term'

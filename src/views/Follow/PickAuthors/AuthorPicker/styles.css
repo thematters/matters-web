@@ -7,8 +7,12 @@
   }
 }
 
+.header-buttons {
+  @mixin flex-center-all;
+}
+
 .follow-info {
-  margin-left: var(--spacing-xx-tight);
+  margin-left: var(--spacing-tight);
 
   font-size: var(--font-size-sm);
   color: var(--color-grey);

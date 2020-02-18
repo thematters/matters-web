@@ -3,10 +3,12 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import {
+  Button,
+  Icon,
   List,
   PageHeader,
-  ShuffleButton,
   Spinner,
+  TextIcon,
   Translate,
   UserDigest
 } from '~/components'
@@ -59,17 +61,26 @@ export const AuthorPicker = ({
   const followeeCount = data?.viewer?.followees.totalCount || 0
 
   return (
-    <div className={containerStyle}>
+    <section className={containerStyle}>
       <PageHeader title={title}>
-        <div>
-          <ShuffleButton onClick={() => refetch()} />
+        <section className="header-buttons">
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgHoverColor="grey-lighter"
+            onClick={() => refetch()}
+          >
+            <TextIcon icon={<Icon.Reload size="sm" />} color="grey">
+              <Translate zh_hant="換一批" zh_hans="换一批" />
+            </TextIcon>
+          </Button>
 
           <span className="follow-info">
             <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
             <span className="hightlight">{followeeCount}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" />
           </span>
-        </div>
+        </section>
       </PageHeader>
 
       {loading && <Spinner />}
@@ -87,6 +98,6 @@ export const AuthorPicker = ({
       )}
 
       <style jsx>{styles}</style>
-    </div>
+    </section>
   )
 }
