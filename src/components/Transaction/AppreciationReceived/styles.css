@@ -19,8 +19,17 @@
     display: flex;
     align-items: center;
     justify-content: left;
+
     color: var(--color-grey-dark);
-    font-size: var(--font-size-sm-s);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+  }
+
+  & footer {
+    & :global(h2) {
+      @mixin line-clamp;
+      -webkit-line-clamp: 1;
+    }
   }
 }
 
