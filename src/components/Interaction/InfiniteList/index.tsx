@@ -82,7 +82,7 @@ export const InfiniteList = ({
   const onRowsHaveRendered = () => {
     if (listHeight < maxHeight) {
       const current = calculate()
-      if (listHeight !== maxHeight && listHeight < current) {
+      if (listHeight < current) {
         setListHeight(Math.min(maxHeight, current))
       }
     }
