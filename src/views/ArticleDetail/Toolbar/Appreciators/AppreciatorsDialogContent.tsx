@@ -7,7 +7,8 @@ import {
   InfiniteList,
   RowRendererProps,
   Spinner,
-  UserDigest
+  UserDigest,
+  useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -72,6 +73,7 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
 }
 
 const AppreciatorsDialogContent = () => {
+  const isSmallUp = useResponsive({ type: 'sm-up' })()
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const { data, loading, error, fetchMore } = useQuery<AllArticleAppreciators>(
@@ -119,16 +121,24 @@ const AppreciatorsDialogContent = () => {
   const totalCount = data?.article?.appreciationsReceived.totalCount || 0
 
   // estimate a safe default height
-  const modalContentMaxHeight = window
-    ? window.innerHeight * (80 / 100)
-    : undefined
+  const calcContentMaxHeight = () => {
+    if (window) {
+      const dialogMaxHeight = window.innerHeight * 0.01 * 90
+      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
+      const spacing = 0.75 * 2
+      return dialogMaxHeight - (head + spacing + 1) * 16
+    }
+    return
+  }
+
+  const defaultListMaxHeight = calcContentMaxHeight()
 
   return (
     <Dialog.Content spacing={[0, 0]}>
       <div className="dialog-appreciators-list">
         <InfiniteList
           data={edges}
-          defaultListMaxHeight={modalContentMaxHeight}
+          defaultListMaxHeight={defaultListMaxHeight}
           defaultRowHeight={70}
           loader={<Spinner />}
           loadMore={loadMore}
