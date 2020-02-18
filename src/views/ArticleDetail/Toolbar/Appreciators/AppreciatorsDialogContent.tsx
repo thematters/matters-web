@@ -120,7 +120,7 @@ const AppreciatorsDialogContent = () => {
 
   // estimate a safe default height
   const modalContentMaxHeight = window
-    ? (window.innerHeight * (80/100))
+    ? window.innerHeight * (80 / 100)
     : undefined
 
   return (
