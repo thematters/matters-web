@@ -26,7 +26,7 @@ import { PutComment } from './__generated__/PutComment'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />
+  loading: Spinner
 })
 
 export const PUT_COMMENT = gql`

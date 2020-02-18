@@ -29,7 +29,7 @@ const CollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),
   {
     ssr: false,
-    loading: () => <Spinner />
+    loading: Spinner
   }
 )
 

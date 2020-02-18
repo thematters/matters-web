@@ -1,6 +1,4 @@
 import ApolloClient from 'apollo-client'
-import * as firebase from 'firebase/app'
-import 'firebase/messaging'
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 
@@ -33,6 +31,9 @@ export const initializePush = async ({
   client: ApolloClient<any>
   viewer: Viewer
 }) => {
+  const firebase = await import('firebase/app')
+  await import('firebase/messaging')
+
   cachedClient = client
 
   /**
@@ -99,7 +100,7 @@ export const initializePush = async ({
   })
 
   // auto re-subscribe push
-  if (Notification.permission === 'granted') {
+  if (viewer.id && Notification.permission === 'granted') {
     subscribePush({ silent: true })
   }
 }
@@ -244,6 +245,7 @@ export const unsubscribePush = async () => {
 }
 
 const unsubscribePushLocally = async (token?: string) => {
+  const firebase = await import('firebase/app')
   const messaging = firebase.messaging()
 
   if (token) {
@@ -258,6 +260,7 @@ const unsubscribePushLocally = async (token?: string) => {
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 const getToken = async () => {
+  const firebase = await import('firebase/app')
   const messaging = firebase.messaging()
 
   try {

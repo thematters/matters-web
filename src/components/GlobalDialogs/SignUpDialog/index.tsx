@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import {
   Dialog,
+  SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
   SignUpProfileForm,
   Translate,
   useEventListener
 } from '~/components'
-import SetupLikeCoin from '~/components/SetupLikeCoin'
 
 import {
   ANALYTICS_EVENTS,
