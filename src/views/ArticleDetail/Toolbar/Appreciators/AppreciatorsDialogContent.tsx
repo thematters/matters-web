@@ -118,11 +118,17 @@ const AppreciatorsDialogContent = () => {
 
   const totalCount = data?.article?.appreciationsReceived.totalCount || 0
 
+  // estimate a safe default height
+  const modalContentMaxHeight = window
+    ? window.innerHeight * (80 / 100)
+    : undefined
+
   return (
     <Dialog.Content spacing={[0, 0]}>
       <div className="dialog-appreciators-list">
         <InfiniteList
           data={edges}
+          defaultListMaxHeight={modalContentMaxHeight}
           defaultRowHeight={70}
           loader={<Spinner />}
           loadMore={loadMore}
