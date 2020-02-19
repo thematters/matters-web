@@ -33,9 +33,8 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           bgHoverColor="grey-lighter"
           aria-label={`分享《${title || ''}》`}
           onClick={async () => {
-            open()
-
             const navigator = window.navigator as any
+
             if (navigator.share && isMobile()) {
               try {
                 await navigator.share({
