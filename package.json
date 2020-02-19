@@ -127,7 +127,7 @@
     "nightwatch-api": "^3.0.1",
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
-    "postcss-calc": "^7.0.1",
+    "postcss-calc": "^7.0.2",
     "postcss-color-function": "^4.1.0",
     "postcss-conditionals": "^2.1.0",
     "postcss-each": "^0.10.0",
