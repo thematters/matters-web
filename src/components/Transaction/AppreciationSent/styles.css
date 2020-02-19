@@ -4,19 +4,26 @@
   font-size: var(--font-size-sm);
 }
 
-.content {
-  color: var(--color-matters-gold);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-normal);
+header {
+  & :global(h2) {
+    @mixin line-clamp;
+    -webkit-line-clamp: 1;
+  }
+
+  & .content {
+    color: var(--color-matters-gold);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+  }
 }
 
-.left {
+& .left {
   & :global(> * + *) {
     margin-top: var(--spacing-x-tight);
   }
 }
 
-.right {
+& .right {
   flex-shrink: 0;
   margin-left: var(--spacing-base);
   text-align: right;

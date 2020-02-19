@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestTitle,
   Card,
-  DateTime,
   Icon,
   TextIcon,
   Translate,
@@ -22,7 +21,6 @@ const fragments = {
       amount
       purpose
       content
-      createdAt
       sender {
         ...UserDigestMiniUser
       }
@@ -40,7 +38,7 @@ const AppreciationReceived = ({
 }: {
   tx: AppreciationReceivedTransaction
 }) => {
-  const { amount, content, purpose, createdAt, sender, target } = tx
+  const { amount, content, purpose, sender, target } = tx
   const isUseContent = purpose !== 'appreciate'
   const path = target
     ? toPath({ page: 'articleDetail', article: target })
@@ -86,8 +84,6 @@ const AppreciationReceived = ({
               {amount}
             </TextIcon>
           </div>
-
-          <DateTime date={createdAt} type="standard" />
         </section>
 
         <style jsx>{styles}</style>

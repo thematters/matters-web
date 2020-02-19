@@ -5,8 +5,6 @@ import { Tabs, Translate } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
-import styles from './styles.css'
-
 import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
 
 interface AppreciationTabsProps {
@@ -28,34 +26,29 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
   const router = useRouter()
 
   return (
-    <>
-      <Tabs>
-        <Tabs.Tab
-          {...PATHS.ME_APPRECIATIONS_SENT}
-          selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.appreciationsSent}
-            zh_hans={TEXT.zh_hans.appreciationsSent}
-          />
+    <Tabs>
+      <Tabs.Tab
+        {...PATHS.ME_APPRECIATIONS_SENT}
+        selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
+        sup={activity.appreciationsSentTotal}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.appreciationsSent}
+          zh_hans={TEXT.zh_hans.appreciationsSent}
+        />
+      </Tabs.Tab>
 
-          <sup className="count">{activity.appreciationsSentTotal}</sup>
-        </Tabs.Tab>
-
-        <Tabs.Tab
-          {...PATHS.ME_APPRECIATIONS_RECEIVED}
-          selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.appreciationsReceived}
-            zh_hans={TEXT.zh_hans.appreciationsReceived}
-          />
-          <sup className="count">{activity.appreciationsReceivedTotal}</sup>
-        </Tabs.Tab>
-      </Tabs>
-
-      <style jsx>{styles}</style>
-    </>
+      <Tabs.Tab
+        {...PATHS.ME_APPRECIATIONS_RECEIVED}
+        selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
+        sup={activity.appreciationsReceivedTotal}
+      >
+        <Translate
+          zh_hant={TEXT.zh_hant.appreciationsReceived}
+          zh_hans={TEXT.zh_hans.appreciationsReceived}
+        />
+      </Tabs.Tab>
+    </Tabs>
   )
 }
 
