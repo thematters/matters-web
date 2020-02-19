@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { useWindowResize } from '~/components'
 
 import defaultsStyles from '~/common/styles/bases/defaults.css'
@@ -19,6 +21,10 @@ export const GlobalStyles = () => {
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`)
   }
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--reach-dialog', '1')
+  }, [])
 
   return (
     <>

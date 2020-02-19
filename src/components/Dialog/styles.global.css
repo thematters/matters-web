@@ -1,7 +1,6 @@
 /* @styled-jsx=global */
 
 [data-reach-dialog-overlay] {
-  @mixin flex-end-space-between;
   position: fixed;
   top: 0;
   right: 0;
@@ -17,8 +16,20 @@
 }
 
 [data-reach-dialog-content] {
-  width: 100%;
-  outline: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
+  outline: none;
   will-change: transform;
+
+  @media (--sm-up) {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    will-change: initial;
+  }
 }

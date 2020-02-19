@@ -36,22 +36,40 @@ const Dialog: React.FC<DialogProps> = ({
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
   const isSmallUp = useResponsive({ type: 'sm-up' })()
-  const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedDialogContent = animated(DialogContent)
-  const AnimatedOverlay = animated(Overlay)
-  const values = {
+  const transitions = useTransition(isOpen, null, {
     from: {
       opacity: 0,
-      transform: isSmallUp ? 'translate3d(0,0%,0)' : 'translate3d(0,100%,0)'
+      transform: `translateY(100%)`
     },
-    enter: { opacity: 1, transform: 'translate3d(0,0%,0)' },
+    enter: { opacity: 1, transform: `translateY(0%)` },
     leave: {
       opacity: 0,
-      transform: isSmallUp ? 'translate3d(0,0%,0)' : 'translate3d(0,100%,0)'
+      transform: `translateY(100%)`
     },
     config: { tension: 270, friction: isSmallUp ? undefined : 30 }
-  }
-  const transitions = useTransition(isOpen, null, values)
+  })
+
+  useOutsideClick(node, onDismiss)
+
+  const InnerContent: React.FC<{ style?: React.CSSProperties }> = ({
+    ...props
+  }) => (
+    <div ref={node} className={containerClass} {...props}>
+      {!isSmallUp && <Handle />}
+
+      <Header close={onDismiss} showHeader={showHeader} ref={closeButtonRef}>
+        {title}
+      </Header>
+
+      {children}
+
+      <style jsx>{styles}</style>
+    </div>
+  )
+
+  const AnimatedDialogOverlay = animated(DialogOverlay)
+  const AnimatedInnerContent = animated(InnerContent)
+  const AnimatedOverlay = animated(Overlay)
 
   const containerClass = classNames({
     container: true,
@@ -60,8 +78,6 @@ const Dialog: React.FC<DialogProps> = ({
       size === 'lg',
     'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
   })
-
-  useOutsideClick(node, onDismiss)
 
   return (
     <>
@@ -73,29 +89,18 @@ const Dialog: React.FC<DialogProps> = ({
         return (
           <AnimatedDialogOverlay initialFocusRef={closeButtonRef} key={key}>
             <AnimatedOverlay style={{ opacity }} />
-            <AnimatedDialogContent
+
+            <DialogContent
+              className="l-row full"
               aria-labelledby="dialog-title"
-              style={{
-                transform,
-                opacity: isSmallUp ? opacity : 1
-              }}
             >
-              <div className="l-row full">
-                <div ref={node} className={containerClass}>
-                  {!isSmallUp && <Handle />}
-
-                  <Header
-                    close={onDismiss}
-                    showHeader={showHeader}
-                    ref={closeButtonRef}
-                  >
-                    {title}
-                  </Header>
-
-                  {children}
-                </div>
-              </div>
-            </AnimatedDialogContent>
+              <AnimatedInnerContent
+                style={{
+                  transform: !isSmallUp && transform ? transform : undefined,
+                  opacity: isSmallUp ? opacity : undefined
+                }}
+              />
+            </DialogContent>
           </AnimatedDialogOverlay>
         )
       })}
@@ -103,7 +108,6 @@ const Dialog: React.FC<DialogProps> = ({
       <style jsx global>
         {globalStyles}
       </style>
-      <style jsx>{styles}</style>
     </>
   )
 }
