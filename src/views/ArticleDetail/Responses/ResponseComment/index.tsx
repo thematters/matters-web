@@ -90,7 +90,6 @@ const ResponseComment = ({
           )}
         </ul>
       )}
-
       <style jsx>{styles}</style>
     </section>
   )
