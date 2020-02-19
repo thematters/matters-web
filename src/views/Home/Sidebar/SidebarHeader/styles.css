@@ -20,3 +20,11 @@ header {
   margin-top: var(--spacing-x-loose);
   margin-bottom: var(--spacing-loose);
 }
+
+.right {
+  @mixin flex-center-all;
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}
