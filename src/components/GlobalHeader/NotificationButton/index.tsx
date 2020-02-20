@@ -110,7 +110,6 @@ const NotificationButton = () => {
     <Dropdown
       content={<DropdownNotices data={data} loading={loading} error={error} />}
       distance={12}
-      theme="dropdown shadow-light"
       onShown={instance => {
         hidePopperOnClick(instance)
 

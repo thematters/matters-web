@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Button, Dropdown, Icon } from '~/components'
+import { Button, DropdownDialog, Icon, Translate } from '~/components'
 
 import { Z_INDEX } from '~/common/enums'
 
@@ -14,25 +14,35 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
   })
 
   return (
-    <Dropdown
-      content={<DropdownContent unread={unread} />}
-      distance={8}
-      theme="dropdown shadow-default"
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+    <DropdownDialog
+      dropdown={{
+        content: <DropdownContent type="dropdown" unread={unread} />,
+        theme: 'dropdown shadow-default',
+        zIndex: Z_INDEX.OVER_GLOBAL_HEADER
+      }}
+      dialog={{
+        content: <DropdownContent type="dialog" unread={unread} />,
+        title: <Translate zh_hant="菜單" zh_hans="菜单" />,
+        showHeader: false
+      }}
     >
-      <Button
-        size={['2rem', '2rem']}
-        bgHoverColor="grey-lighter"
-        aria-label="菜單"
-        aria-haspopup="true"
-      >
-        <span className={navButtonClass}>
-          <Icon.Menu color="black" />
-        </span>
+      {({ open, ref }) => (
+        <Button
+          size={['2rem', '2rem']}
+          bgHoverColor="grey-lighter"
+          aria-label="菜單"
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <span className={navButtonClass}>
+            <Icon.Menu color="black" />
+          </span>
 
-        <style jsx>{styles}</style>
-      </Button>
-    </Dropdown>
+          <style jsx>{styles}</style>
+        </Button>
+      )}
+    </DropdownDialog>
   )
 }
 

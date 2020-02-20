@@ -71,7 +71,8 @@
   @mixin border-top-grey;
   @mixin border-bottom-grey;
 
-  padding: var(--spacing-base);
+  height: 3rem;
+  padding: var(--spacing-base) 0;
 
   font-size: var(--font-size-md);
   background-color: var(--color-white);

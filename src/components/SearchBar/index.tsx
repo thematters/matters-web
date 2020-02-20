@@ -109,7 +109,6 @@ const BaseSearchBar: React.FC<{
               hidePopperOnClick(instance)
             }}
             onCreate={instance => (instanceRef.current = instance)}
-            theme="dropdown shadow-light"
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>

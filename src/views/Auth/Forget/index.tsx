@@ -12,8 +12,8 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'
 
-import PasswordChanged from './PasswordChanged'
 import styles from '../styles.css'
+import PasswordChanged from './PasswordChanged'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
