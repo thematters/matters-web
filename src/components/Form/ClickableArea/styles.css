@@ -1,11 +1,14 @@
 .container {
   @mixin flex-center-space-between;
-  @mixin border-top-grey;
   @mixin border-bottom-grey;
   padding: var(--spacing-base);
 
   line-height: 1;
   background: var(--color-white);
+
+  &:not(.collapse-top) {
+    @mixin border-top-grey;
+  }
 
   @media (--sm-up) {
     background: var(--color-grey-lighter);
@@ -20,6 +23,8 @@
   }
 
   & p {
+    margin-top: var(--spacing-xx-tight);
+
     color: var(--color-grey);
     font-size: var(--font-size-sm-s);
     line-height: 1rem;

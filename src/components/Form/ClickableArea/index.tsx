@@ -6,17 +6,23 @@ type ClickableAreaProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
   rightText?: string | React.ReactNode
+  collapseTop?: boolean
 } & CardProps
 
 const ClickableArea: React.FC<ClickableAreaProps> = ({
   title,
   subtitle,
   rightText,
+  collapseTop,
 
   ...cardProps
 }) => (
-  <Card {...cardProps} spacing={cardProps.spacing || [0, 0]}>
-    <section className="container">
+  <Card
+    {...cardProps}
+    bgHoverColor="grey-lighter"
+    spacing={cardProps.spacing || [0, 0]}
+  >
+    <section className={`container ${collapseTop ? 'collapse-top' : ''}`}>
       <section className="left">
         <h5>{title}</h5>
         <p>{subtitle}</p>

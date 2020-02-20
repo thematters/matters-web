@@ -2,8 +2,8 @@ import { Translate } from '~/components'
 
 import styles from './styles.css'
 
-const Description = () => (
-  <section className="desc">
+const Intro = () => (
+  <section className="intro">
     <h4>
       <Translate zh_hant="什麼是 Liker ID？" zh_hans="什么是 Liker ID？" />
     </h4>
@@ -22,4 +22,4 @@ const Description = () => (
   </section>
 )
 
-export default Description
+export default Intro

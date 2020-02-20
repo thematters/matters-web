@@ -1,15 +1,12 @@
 import getConfig from 'next/config'
-import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Form, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
-import Description from './Description'
-import Radios from './Radios'
+import Hint from './Hint'
+import Intro from './Intro'
 import styles from './styles.css'
 
-interface Props {
+interface SelectProps {
   startGenerate: () => void
   startBind: (windowRef: Window) => void
 }
@@ -18,53 +15,47 @@ const {
   publicRuntimeConfig: { OAUTH_URL }
 } = getConfig()
 
-const Select: React.FC<Props> = ({ startGenerate, startBind }) => {
-  const [bindType, setBindType] = useState<'generate' | 'bind'>('bind')
-  const isGenerate = bindType === 'generate'
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (isGenerate) {
-      startGenerate()
-    } else {
-      const url = `${OAUTH_URL}/likecoin`
-      const windowRef = window.open(url, '_blank')
-
-      if (windowRef) {
-        startBind(windowRef)
-      }
-    }
-  }
-
+const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <Dialog.Content spacing={['xloose', 'base']}>
-        <section>
-          <p className="hint">
+    <Form>
+      <Dialog.Content spacing={[0, 0]}>
+        <Hint />
+
+        <Form.ClickableArea
+          title={<Translate zh_hant="生成 Liker ID" zh_hans="生成 Liker ID" />}
+          subtitle={
             <Translate
-              zh_hant="接下來我們會幫你生成 Liker ID，如果你已經有 Liker ID 也可以進行綁定。"
-              zh_hans="接下来我们会帮你生成 Liker ID，如果你已经有 Liker ID 也可以进行绑定。"
+              zh_hant="同意 Matters 帮我创建 Liker ID"
+              zh_hans="同意 Matters 帮我创建 Liker ID"
             />
-          </p>
-        </section>
+          }
+          onClick={startGenerate}
+        />
 
-        <Radios isGenerate={isGenerate} setBindType={setBindType} />
+        <Form.ClickableArea
+          title={<Translate zh_hant="綁定 Liker ID" zh_hans="綁定 Liker ID" />}
+          subtitle={
+            <Translate
+              zh_hant="跳轉到 like.co 驗證已有 Liker ID"
+              zh_hans="跳转到 like.co 验证已有 Liker ID"
+            />
+          }
+          collapseTop
+          onClick={() => {
+            const url = `${OAUTH_URL}/likecoin`
+            const windowRef = window.open(url, '_blank')
 
-        <Description />
+            if (windowRef) {
+              startBind(windowRef)
+            }
+          }}
+        />
+
+        <Intro />
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button type="submit">
-          <Translate
-            zh_hant={TEXT.zh_hant.continue}
-            zh_hans={TEXT.zh_hans.continue}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
       <style jsx>{styles}</style>
-    </form>
+    </Form>
   )
 }
 
