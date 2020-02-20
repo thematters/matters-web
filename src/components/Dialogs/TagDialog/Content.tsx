@@ -203,52 +203,49 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <form id="tag-dialog" onSubmit={handleSubmit}>
       <Dialog.Content>
-        <p className="field">
-          <Translate
-            zh_hant={TEXT.zh_hant.tagName}
-            zh_hans={TEXT.zh_hans.tagName}
-          />
-        </p>
         <Form.DropdownInput
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.tagName}
+              zh_hans={TEXT.zh_hans.tagName}
+            />
+          }
           type="text"
-          field="newContent"
+          name="newContent"
           placeholder={translate({
             zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
             zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={(e: any) => {
+          value={values.newContent}
+          error={touched && errors.newContent}
+          onBlur={e => {
             setFieldValue('content', e.target.value.trim())
             handleBlur(e)
           }}
-          handleChange={handleChange}
+          onChange={handleChange}
           dropdownAppendTo="tag-dialog"
           dropdownAutoSizing={true}
           DropdownContent={DropdownContent}
           query={SEARCH_TAGS}
         />
-        <p className="field">
-          <Translate
-            zh_hant={TEXT.zh_hant.tagDescription}
-            zh_hans={TEXT.zh_hans.tagDescription}
-          />
-        </p>
         <Form.Textarea
-          field="newDescription"
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.tagDescription}
+              zh_hans={TEXT.zh_hans.tagDescription}
+            />
+          }
+          name="newDescription"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
             zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          style={{ height: '5rem' }}
+          value={values.newDescription}
+          error={touched && errors.newDescription}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </Dialog.Content>
 

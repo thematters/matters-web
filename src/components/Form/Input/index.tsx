@@ -1,101 +1,64 @@
-import classNames from 'classnames'
-
 import styles from './styles.css'
 
 /**
- * This component is for rendering text input for <Formik>.
+ * Pure UI component for <input> element
  *
  * Usage:
  *
  * ```jsx
  *   <Form.Input
- *     className={[]}
  *     type="email"
- *     field="email"
- *     placeholder="email"
- *     floatElement={<>}
- *     hint="hint"
- *     style={{}}
- *     values={{}},
- *     errors={{}},
- *     touched={{}},
- *     handleBlur={()=>{}},
- *     handleChange={()=>{}}
+ *     error="xxx"
+ *     hint="xxx"
+ *     ...other input props...
  *   />
  * ```
  *
  */
 
-interface Props {
-  className?: string[]
+type InputProps = {
   type: 'text' | 'password' | 'email'
-  field: string
-  placeholder?: string
-  floatElement?: any
-  hint?: string
-  style?: React.CSSProperties
+  name: string
+  label?: string | React.ReactNode
 
-  values: any
-  errors: any
-  touched: any
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  error?: string | React.ReactNode
+  hint?: string | React.ReactNode
 
-  [key: string]: any
-}
+  extraButton?: React.ReactNode
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>
 
-const Input: React.FC<Props> = ({
-  className = [],
+const Input: React.FC<InputProps> = ({
   type,
-  field,
-  placeholder,
-  floatElement,
+  name,
+  label,
+
+  error,
   hint,
-  style,
 
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange,
+  extraButton,
 
-  ...restProps
+  ...inputProps
 }) => {
-  const inputClass = classNames('input', ...className)
-  const containerClass = classNames({
-    container: true,
-    'has-float': floatElement
-  })
-
-  const value = values[field]
-  const error = errors[field]
-  const isTouched = touched[field]
-
   return (
-    <>
-      <div className={containerClass}>
-        <input
-          className={inputClass}
-          type={type}
-          name={field}
-          placeholder={placeholder}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={value}
-          style={style}
-          {...restProps}
-        />
-        {floatElement && <div className="float-right">{floatElement}</div>}
+    <section className="container">
+      <header>
+        <label htmlFor={name}>{label}</label>
 
-        <div className="info">
-          {error && isTouched && <div className="error">{error}</div>}
-          {/* {error && <div className="error">{error}</div>} */}
-          {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
-        </div>
-      </div>
+        {extraButton}
+      </header>
+
+      <input {...inputProps} id={name} name={name} type={type} />
+
+      <footer>
+        {error && !hint && <div className="error">{error}</div>}
+        {hint && !error && <div className="hint">{hint}</div>}
+      </footer>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

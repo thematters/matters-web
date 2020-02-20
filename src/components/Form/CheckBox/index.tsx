@@ -1,62 +1,45 @@
-import classNames from 'classnames'
-
 import { Icon } from '~/components'
 
 import styles from './styles.css'
 
-interface Props {
-  children?: any
-  className?: string[]
-  field: string
+type CheckBoxProps = {
+  name: string
 
-  values: any
-  errors: any
-  handleBlur?: () => {}
-  handleChange(e: React.ChangeEvent<any>): void
-  setFieldValue(field: string, value: any): void
+  error?: string | React.ReactNode
+  hint?: string | React.ReactNode
 
-  [key: string]: any
-}
+  extraButton?: React.ReactNode
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>
 
-const CheckBox: React.FC<Props> = ({
-  children,
-  className = [],
-  field,
+const CheckBox: React.FC<CheckBoxProps> = ({
+  name,
 
-  values,
-  errors,
-  handleBlur,
-  handleChange,
-  setFieldValue
+  error,
+  hint,
+
+  ...inputProps
 }) => {
-  const value = values[field]
-  const inputClass = classNames('input', ...className)
-
   return (
-    <>
-      <div className="container">
-        <label className="check" htmlFor="checkbox-input">
-          {value === true ? (
-            <Icon.CheckActive size="sm" />
-          ) : (
-            <Icon.CheckInactive size="sm" />
-          )}
+    <section className="container">
+      <label className="check" htmlFor="checkbox">
+        {inputProps.checked ? (
+          <Icon.CheckActive size="sm" />
+        ) : (
+          <Icon.CheckInactive size="sm" />
+        )}
 
-          <input
-            className={inputClass}
-            type="checkbox"
-            id="upload-input"
-            name={field}
-            onChange={e => setFieldValue(field, e.target.checked)}
-            {...(value ? { checked: true } : {})}
-          />
-        </label>
+        <input id="checkbox" type="checkbox" name={name} {...inputProps} />
 
-        <div className="description">{children}</div>
-      </div>
+        <div className="hint">{hint}</div>
+      </label>
+
+      <footer>{error && !hint && <div className="error">{error}</div>}</footer>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

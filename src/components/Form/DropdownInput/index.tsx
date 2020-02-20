@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce/lib'
 
@@ -9,45 +8,38 @@ import { INPUT_DEBOUNCE } from '~/common/enums'
 
 import styles from './styles.css'
 
-interface Props {
-  className?: string[]
-  type: 'text' | 'search'
-  field: string
-  placeholder?: string
-  floatElement?: any
-  hint?: string
-  style?: React.CSSProperties
-
-  values: any
-  errors: any
-  touched: any
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-
+interface DropdownProps {
   dropdownAppendTo?: string
   dropdownAutoSizing?: boolean
   DropdownContent: any
   dropdownCallback?: (params: any) => void
   dropdownZIndex?: number
   query: any
-
-  [key: string]: any
 }
 
-const DropdownInput: React.FC<Props> = ({
-  className = [],
-  type,
-  field,
-  placeholder,
-  floatElement,
-  hint,
-  style,
+type InputProps = {
+  type: 'text' | 'password' | 'email' | 'search'
+  name: string
+  label?: string | React.ReactNode
 
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange,
+  error?: string | React.ReactNode
+  hint?: string | React.ReactNode
+
+  extraButton?: React.ReactNode
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>
+
+type DropdownInputProps = InputProps & DropdownProps
+
+const DropdownInput: React.FC<DropdownInputProps> = ({
+  type,
+  name,
+  label,
+
+  error,
+  hint,
 
   dropdownAppendTo = '',
   dropdownAutoSizing = false,
@@ -56,36 +48,22 @@ const DropdownInput: React.FC<Props> = ({
   dropdownZIndex,
   query,
 
-  ...restProps
+  ...inputProps
 }) => {
-  const value = values[field]
-  const error = errors[field]
-  const isTouched = touched[field]
-
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-
-  const inputId = `form-dropdown-input-${field}`
-
-  const inputClass = classNames('input', ...className)
-  const containerClass = classNames({
-    container: true,
-    'has-float': floatElement
-  })
 
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
     }
   }
-
   const showDropdown = () => {
     if (instance) {
       instance.show()
     }
   }
-
   const dropdownContentCallback = (params: any) => {
     setSearch('')
     if (dropdownCallback) {
@@ -95,7 +73,7 @@ const DropdownInput: React.FC<Props> = ({
 
   const getDropdownSize = () => {
     if (dropdownAutoSizing) {
-      const element = document.getElementById(inputId)
+      const element = document.getElementById(name)
       if (element) {
         return element.getBoundingClientRect().width
       }
@@ -119,52 +97,70 @@ const DropdownInput: React.FC<Props> = ({
   }
 
   return (
-    <>
-      <div id="dropdown-container" className={containerClass}>
-        <Dropdown
-          trigger="manual"
-          placement="bottom-start"
-          onCreate={setInstance}
-          content={<DropdownContent {...dropdownContentProps} />}
-          zIndex={dropdownZIndex}
-          appendTo={document.getElementById(dropdownAppendTo) || document.body}
-          onShown={i => {
-            hidePopperOnClick(i)
-          }}
-        >
-          <input
-            id={inputId}
-            className={inputClass}
-            type={type}
-            name={field}
-            placeholder={placeholder}
-            onBlur={handleBlur}
-            onClick={() => search && showDropdown()}
-            onFocus={() => search && showDropdown()}
-            onChange={e => {
-              handleChange(e)
-              const trimedValue = e.target.value.trim()
-              setSearch(trimedValue)
-              if (trimedValue) {
-                showDropdown()
-              } else {
-                hideDropdown()
-              }
-            }}
-            value={value}
-            style={style}
-            {...restProps}
-          />
-        </Dropdown>
+    <section id="dropdown-container" className="container">
+      <header>
+        <label htmlFor={name}>{label}</label>
+      </header>
 
-        <div className="info">
-          {error && isTouched && <div className="error">{error}</div>}
-          {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
-        </div>
-      </div>
+      <Dropdown
+        trigger="manual"
+        placement="bottom-start"
+        onCreate={setInstance}
+        content={<DropdownContent {...dropdownContentProps} />}
+        zIndex={dropdownZIndex}
+        appendTo={document.getElementById(dropdownAppendTo) || document.body}
+        onShown={i => {
+          hidePopperOnClick(i)
+        }}
+      >
+        <input
+          {...inputProps}
+          id={name}
+          name={name}
+          type={type}
+          onClick={e => {
+            if (inputProps.onClick) {
+              inputProps.onClick(e)
+            }
+
+            if (search) {
+              showDropdown()
+            }
+          }}
+          onFocus={e => {
+            if (inputProps.onFocus) {
+              inputProps.onFocus(e)
+            }
+
+            if (search) {
+              showDropdown()
+            }
+          }}
+          onChange={e => {
+            if (inputProps.onChange) {
+              inputProps.onChange(e)
+            }
+
+            const trimedValue = e.target.value.trim()
+
+            setSearch(trimedValue)
+
+            if (trimedValue) {
+              showDropdown()
+            } else {
+              hideDropdown()
+            }
+          }}
+        />
+      </Dropdown>
+
+      <footer>
+        {error && !hint && <div className="error">{error}</div>}
+        {hint && !error && <div className="hint">{hint}</div>}
+      </footer>
 
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

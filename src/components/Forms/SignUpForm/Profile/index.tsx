@@ -136,39 +136,43 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
           lang={lang}
           uploadCallback={setFieldValue}
         />
-        <AvatarError field="avatar" errors={errors} touched={touched} />
+        <AvatarError name="avatar" error={touched && errors.avatar} />
         <Form.Input
           type="text"
-          field="displayName"
+          name="displayName"
           placeholder={translate({
             zh_hant: '姓名',
             zh_hans: '姓名',
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.displayName}
+          error={touched && errors.displayName}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Textarea
-          field="description"
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.userProfile}
+              zh_hans={TEXT.zh_hans.userProfile}
+            />
+          }
+          name="description"
           placeholder={translate({
             zh_hant: '介紹你自己，獲得更多社區關注',
             zh_hans: '介绍你自己，获得更多社区关注',
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          style={{ height: '5rem' }}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.descriptionHint,
-            zh_hans: TEXT.zh_hans.descriptionHint,
-            lang
-          })}
+          value={values.description}
+          error={touched && errors.description}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          hint={
+            <Translate
+              zh_hant={TEXT.zh_hant.descriptionHint}
+              zh_hans={TEXT.zh_hans.descriptionHint}
+            />
+          }
         />
       </Dialog.Content>
 

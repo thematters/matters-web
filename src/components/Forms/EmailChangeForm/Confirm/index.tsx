@@ -115,40 +115,50 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.email}
+              zh_hans={TEXT.zh_hans.email}
+            />
+          }
           type="email"
-          field="email"
+          name="email"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterNewEmail,
             zh_hans: TEXT.zh_hans.enterNewEmail,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.verificationCode}
+              zh_hans={TEXT.zh_hans.verificationCode}
+            />
+          }
           type="text"
-          field="code"
+          name="code"
           autoComplete="off"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterVerificationCode,
             zh_hans: TEXT.zh_hans.enterVerificationCode,
             lang
           })}
-          floatElement={
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
             <SendCodeButton
               email={values.email}
               lang={lang}
               type="email_reset_confirm"
             />
           }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
         />
       </Dialog.Content>
 

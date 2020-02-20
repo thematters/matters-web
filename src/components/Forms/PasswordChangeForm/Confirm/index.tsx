@@ -95,37 +95,48 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.password}
+              zh_hans={TEXT.zh_hans.password}
+            />
+          }
           type="password"
-          field="password"
+          name="password"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterPassword,
             zh_hans: TEXT.zh_hans.enterPassword,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.passwordHint,
-            zh_hans: TEXT.zh_hans.passwordHint,
-            lang
-          })}
+          value={values.password}
+          error={touched && errors.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.newPassword}
+              zh_hans={TEXT.zh_hans.newPassword}
+            />
+          }
           type="password"
-          field="comparedPassword"
+          name="comparedPassword"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterPasswordAgain,
             zh_hans: TEXT.zh_hans.enterPasswordAgain,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.comparedPassword}
+          error={touched && errors.comparedPassword}
+          hint={
+            <Translate
+              zh_hant={TEXT.zh_hant.passwordHint}
+              zh_hans={TEXT.zh_hans.passwordHint}
+            />
+          }
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </Dialog.Content>
 

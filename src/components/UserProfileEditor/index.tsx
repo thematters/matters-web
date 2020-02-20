@@ -110,42 +110,53 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
             <section className="info">
               <form className="form" onSubmit={handleSubmit}>
                 <Form.Input
+                  label={
+                    <Translate
+                      zh_hant={TEXT.zh_hant.displayName}
+                      zh_hans={TEXT.zh_hans.displayName}
+                    />
+                  }
                   type="text"
-                  field="displayName"
-                  className={['name']}
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
+                  name="displayName"
+                  value={values.displayName}
+                  error={touched && errors.displayName}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                   placeholder={translate({
                     zh_hant: '輸入姓名',
                     zh_hans: '输入姓名',
                     lang
                   })}
-                  hint={translate({
-                    zh_hant: TEXT.zh_hant.displayNameHint,
-                    zh_hans: TEXT.zh_hans.displayNameHint,
-                    lang
-                  })}
+                  hint={
+                    <Translate
+                      zh_hant={TEXT.zh_hant.displayNameHint}
+                      zh_hans={TEXT.zh_hans.displayNameHint}
+                    />
+                  }
                 />
                 <Form.Textarea
-                  field="description"
+                  label={
+                    <Translate
+                      zh_hant={TEXT.zh_hant.userProfile}
+                      zh_hans={TEXT.zh_hans.userProfile}
+                    />
+                  }
+                  name="description"
                   placeholder={translate({
                     zh_hant: '輸入個人簡介',
                     zh_hans: '输入个人简介',
                     lang
                   })}
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  hint={translate({
-                    zh_hant: TEXT.zh_hant.descriptionHint,
-                    zh_hans: TEXT.zh_hans.descriptionHint,
-                    lang
-                  })}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
+                  value={values.description}
+                  error={touched && errors.description}
+                  hint={
+                    <Translate
+                      zh_hant={TEXT.zh_hant.descriptionHint}
+                      zh_hans={TEXT.zh_hans.descriptionHint}
+                    />
+                  }
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                   style={{ height: '7rem', resize: 'none' }}
                 />
                 <div className="buttons">

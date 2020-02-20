@@ -90,37 +90,37 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label="Matters ID"
           type="text"
-          field="userName"
+          name="userName"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterUserName,
             zh_hans: TEXT.zh_hans.enterUserName,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.userNameHint,
-            zh_hans: TEXT.zh_hans.userNameHint,
-            lang
-          })}
+          value={values.userName}
+          error={touched && errors.userName}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          hint={
+            <Translate
+              zh_hant={TEXT.zh_hant.userNameHint}
+              zh_hans={TEXT.zh_hans.userNameHint}
+            />
+          }
         />
         <Form.Input
           type="text"
-          field="comparedUserName"
+          name="comparedUserName"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterUserNameAgign,
             zh_hans: TEXT.zh_hans.enterUserNameAgign,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.comparedUserName}
+          error={touched && errors.comparedUserName}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </Dialog.Content>
 

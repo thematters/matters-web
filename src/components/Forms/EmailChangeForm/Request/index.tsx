@@ -87,36 +87,46 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.email}
+              zh_hans={TEXT.zh_hans.email}
+            />
+          }
           type="email"
-          field="email"
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          name="email"
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
           disabled
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.verificationCode}
+              zh_hans={TEXT.zh_hans.verificationCode}
+            />
+          }
           type="text"
-          field="code"
+          name="code"
           autoComplete="off"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterVerificationCode,
             zh_hans: TEXT.zh_hans.enterVerificationCode,
             lang
           })}
-          floatElement={
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
             <SendCodeButton
               email={values.email}
               lang={lang}
               type="email_reset"
             />
           }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
         />
       </Dialog.Content>
 

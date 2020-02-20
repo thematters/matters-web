@@ -110,7 +110,6 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
@@ -184,51 +183,56 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.email}
+              zh_hans={TEXT.zh_hans.email}
+            />
+          }
           type="email"
-          field="email"
+          name="email"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.email,
             zh_hans: TEXT.zh_hans.email,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.verificationCode}
+              zh_hans={TEXT.zh_hans.verificationCode}
+            />
+          }
           type="text"
-          field="code"
+          name="code"
           autoComplete="off"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.verificationCode,
             zh_hans: TEXT.zh_hans.verificationCode,
             lang
           })}
-          floatElement={
+          value={values.code}
+          error={touched && errors.code}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
             <SendCodeButton email={values.email} lang={lang} type="register" />
           }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
         />
         <Form.Input
+          label="Matters ID"
           type="text"
-          field="userName"
+          name="userName"
           autoComplete="off"
-          placeholder={translate({
-            zh_hant: 'Matters ID',
-            zh_hans: 'Matters ID',
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.userName}
+          error={touched && errors.userName}
+          onBlur={handleBlur}
+          onChange={handleChange}
           hint={translate({
             zh_hant: TEXT.zh_hant.userNameHint,
             zh_hans: TEXT.zh_hans.userNameHint,
@@ -236,47 +240,53 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
           })}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.password}
+              zh_hans={TEXT.zh_hans.password}
+            />
+          }
           type="password"
-          field="password"
+          name="password"
           autoComplete="off"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.password,
             zh_hans: TEXT.zh_hans.password,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.passwordHint,
-            zh_hans: TEXT.zh_hans.passwordHint,
-            lang
-          })}
+          value={values.password}
+          error={touched && errors.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          hint={
+            <Translate
+              zh_hant={TEXT.zh_hant.passwordHint}
+              zh_hans={TEXT.zh_hans.passwordHint}
+            />
+          }
         />
         <div className="tos">
           <Form.CheckBox
-            field="tos"
-            values={values}
-            errors={errors}
-            handleChange={handleChange}
-            setFieldValue={setFieldValue}
-          >
-            <>
-              <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+            name="tos"
+            checked={values.tos}
+            error={touched && errors.tos}
+            onChange={handleChange}
+            hint={
+              <>
+                <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-              <Link {...PATHS.MISC_TOS}>
-                <a className="u-link-green" target="_blank">
-                  {' '}
-                  <Translate
-                    zh_hant="Matters 用戶協議和隱私政策"
-                    zh_hans="Matters 用户协议和隐私政策"
-                  />
-                </a>
-              </Link>
-            </>
-          </Form.CheckBox>
+                <Link {...PATHS.MISC_TOS}>
+                  <a className="u-link-green" target="_blank">
+                    {' '}
+                    <Translate
+                      zh_hant="Matters 用戶協議和隱私政策"
+                      zh_hans="Matters 用户协议和隐私政策"
+                    />
+                  </a>
+                </Link>
+              </>
+            }
+          />
         </div>
       </Dialog.Content>
 

@@ -3,34 +3,24 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import {
-  Button,
-  Dialog,
-  Form,
-  LanguageContext,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 
-import {
-  ADD_TOAST,
-  ANALYTICS_EVENTS,
-  CLOSE_ACTIVE_DIALOG,
-  ERROR_CODES,
-  OPEN_RESET_PASSWORD_DIALOG,
-  OPEN_SIGNUP_DIALOG,
-  PATHS,
-  TEXT
-} from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, ERROR_CODES, TEXT } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
-  appendTarget,
   redirectToTarget,
   translate,
   validateEmail
 } from '~/common/utils'
+
+import {
+  PasswordResetDialogButton,
+  PasswordResetRedirectButton,
+  SignUpDialogButton,
+  SignUpRedirectionButton
+} from './Buttons'
 
 import { UserLogin } from './__generated__/UserLogin'
 
@@ -64,59 +54,6 @@ export const USER_LOGIN = gql`
     }
   }
 `
-
-const PasswordResetDialogButton = () => (
-  <Button
-    spacing={['xtight', 0]}
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_RESET_PASSWORD_DIALOG))
-    }}
-  >
-    <TextIcon color="green">
-      <Translate
-        zh_hant={TEXT.zh_hant.forgetPassword}
-        zh_hans={TEXT.zh_hans.forgetPassword}
-      />
-      ？
-    </TextIcon>
-  </Button>
-)
-
-const PasswordResetRedirectButton = () => (
-  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
-    <TextIcon color="green">
-      <Translate
-        zh_hant={TEXT.zh_hant.forgetPassword}
-        zh_hans={TEXT.zh_hans.forgetPassword}
-      />
-      ？
-    </TextIcon>
-  </Button>
-)
-
-const SignUpDialogButton = () => (
-  <Dialog.Footer.Button
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
-    }}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Dialog.Footer.Button>
-)
-
-const SignUpRedirectionButton = () => (
-  <Dialog.Footer.Button
-    {...appendTarget(PATHS.AUTH_SIGNUP)}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Dialog.Footer.Button>
-)
 
 export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
@@ -216,33 +153,44 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.email}
+              zh_hans={TEXT.zh_hans.email}
+            />
+          }
           type="email"
-          field="email"
+          name="email"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterEmail,
             zh_hans: TEXT.zh_hans.enterEmail,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.email}
+          error={touched && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.password}
+              zh_hans={TEXT.zh_hans.password}
+            />
+          }
           type="password"
-          field="password"
+          name="password"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterPassword,
             zh_hans: TEXT.zh_hans.enterPassword,
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.password}
+          error={touched && errors.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
+
         {isInDialog && <PasswordResetDialogButton />}
         {isInPage && <PasswordResetRedirectButton />}
       </Dialog.Content>

@@ -13,6 +13,8 @@ export const TEXT = {
     allTags: '全部標籤',
     allTopics: '全部話題',
     appreciationsReceived: '讚賞我的',
+    displayName: '姓名',
+
     appreciationsSent: '我讚賞的',
     article: '作品',
     articleArchived: '該作品已從站內隱藏',
@@ -97,6 +99,7 @@ export const TEXT = {
     nextStep: '下一步',
     notificationSetting: '通知設定',
     password: '密碼',
+    newPassword: '新密碼',
     passwordHint: '至少 8 個字元，支持英文大小寫字母、數字和特殊符號',
     passwordNotMatch: '密碼不一致',
     pin: '喜歡回應',
@@ -208,6 +211,8 @@ export const TEXT = {
     allTags: '全部标签',
     allTopics: '全部话题',
     appreciationsReceived: '赞赏我的',
+    displayName: '姓名',
+
     appreciationsSent: '我赞赏的',
     article: '作品',
     articleArchived: '该作品已从站内隐藏',
@@ -292,6 +297,7 @@ export const TEXT = {
     nextStep: '下一步',
     notificationSetting: '通知设定',
     password: '密码',
+    newPassword: '新密码',
     passwordHint: '至少 8 位，支持英文大小写字母、数字和特殊符号',
     passwordNotMatch: '密码不一致',
     pin: '喜欢回应',

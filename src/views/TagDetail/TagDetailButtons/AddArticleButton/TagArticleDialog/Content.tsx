@@ -172,17 +172,16 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       <Dialog.Content>
         <Form.DropdownInput
           type="search"
-          field="name"
+          name="name"
           placeholder={translate({
             zh_hant: '搜尋作品標題…',
             zh_hans: '搜索作品标题…',
             lang
           })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          value={values.name}
+          error={touched && errors.name}
+          onBlur={handleBlur}
+          onChange={handleChange}
           dropdownAppendTo="tag-article-dialog"
           dropdownAutoSizing={true}
           dropdownCallback={onClickMenuItem}

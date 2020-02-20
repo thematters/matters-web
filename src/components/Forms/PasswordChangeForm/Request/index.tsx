@@ -87,8 +87,14 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
     <form onSubmit={handleSubmit}>
       <Dialog.Content spacing={['xxxloose', 'xloose']}>
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.email}
+              zh_hans={TEXT.zh_hans.email}
+            />
+          }
           type="email"
-          field="email"
+          name="email"
           placeholder={
             purpose === 'forget'
               ? translate({
@@ -102,34 +108,38 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
                   lang
                 })
           }
-          values={values}
-          errors={errors}
+          value={values.email}
+          error={touched && errors.email}
           disabled={!!defaultEmail}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.verificationCode}
+              zh_hans={TEXT.zh_hans.verificationCode}
+            />
+          }
           type="text"
-          field="code"
+          name="code"
           autoComplete="off"
           placeholder={translate({
             zh_hant: TEXT.zh_hant.enterVerificationCode,
             zh_hans: TEXT.zh_hans.enterVerificationCode,
             lang
           })}
-          floatElement={
+          value={values.code}
+          error={touched && errors.code}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
             <SendCodeButton
               email={values.email}
               lang={lang}
               type="password_reset"
             />
           }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
         />
       </Dialog.Content>
 

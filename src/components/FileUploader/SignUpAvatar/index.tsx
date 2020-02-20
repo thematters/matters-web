@@ -21,7 +21,7 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  *
  * ```jsx
  *   <SignUpAvatarUploader
- *     field=""
+ *     name=""
  *     lang={lang}
  *     uploadCallback={callback}
  *   />
