@@ -8,8 +8,7 @@ import {
   Form,
   Icon,
   LanguageContext,
-  ProfileAvatarUploader,
-  ProfileCoverUploader,
+  TextIcon,
   Translate,
   ViewerContext
 } from '~/components'
@@ -22,13 +21,21 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import { TextIcon } from '../TextIcon'
+import ProfileAvatarUploader from './ProfileAvatarUploader'
+import ProfileCoverUploader from './ProfileCoverUploader'
 import styles from './styles.css'
 
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
 interface FormProps {
-  user: { [key: string]: any }
+  user: {
+    __typename: 'User'
+    avatar: any | null
+    displayName: string
+    info: {
+      description: string
+    }
+  }
   setEditing: (value: boolean) => void
 }
 
@@ -49,7 +56,7 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const UserProfileEditor: React.FC<FormProps> = formProps => {
+const UserProfileEditor: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
@@ -107,6 +114,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
         <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
           <section className="content">
             <ProfileAvatarUploader user={user} />
+
             <section className="info">
               <Form className="form" onSubmit={handleSubmit}>
                 <Form.Input
@@ -210,3 +218,5 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
     </>
   )
 }
+
+export default UserProfileEditor

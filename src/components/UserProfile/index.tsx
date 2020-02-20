@@ -19,7 +19,6 @@ import {
   Translate,
   ViewerContext
 } from '~/components'
-import { UserProfileEditor } from '~/components/UserProfileEditor'
 
 import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
@@ -28,6 +27,7 @@ import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
+import UserProfileEditor from './UserProfileEditor'
 
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'

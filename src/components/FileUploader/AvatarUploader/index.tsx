@@ -1,7 +1,7 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useState } from 'react'
 
-import { Avatar, Translate } from '~/components'
+import { Avatar, AvatarProps, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
@@ -17,31 +17,16 @@ import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
-/**
- * This component is for uploading avatar during sign up process.
- *
- * Usage:
- *
- * ```jsx
- *   <AvatarUploader
- *     name=""
- *     lang={lang}
- *     uploadCallback={callback}
- *   />
- * ```
- */
-
-export interface AvatarUploaderProps {
-  defaultAvatar?: string
+export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
-}
+} & AvatarProps
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
-  defaultAvatar,
-  onUpload
+  onUpload,
+  ...avatarProps
 }) => {
   const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const [avatar, setAvatar] = useState<string | undefined>(defaultAvatar)
+  const [avatar, setAvatar] = useState<string>()
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -104,7 +89,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label>
-      <Avatar size="xxl" src={avatar} />
+      <Avatar size="xxl" {...avatarProps} src={avatarProps.src || avatar} />
 
       <div className="mask">
         <Icon.CameraMedium size="lg" color="white" />
