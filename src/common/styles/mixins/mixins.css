@@ -71,8 +71,7 @@
   @mixin border-top-grey;
   @mixin border-bottom-grey;
 
-  height: 3rem;
-  padding: var(--spacing-base) 0;
+  padding: var(--spacing-base);
 
   font-size: var(--font-size-md);
   background-color: var(--color-white);
@@ -110,6 +109,11 @@
     color: var(--color-grey);
     opacity: 1; /* Firefox */
   }
+}
+
+@define-mixin fomr-input-label {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
 }
 
 @define-mixin form-input-error {

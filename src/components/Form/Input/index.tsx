@@ -43,11 +43,13 @@ const Input: React.FC<InputProps> = ({
   ...inputProps
 }) => (
   <section className="container">
-    <header>
-      <label htmlFor={name}>{label}</label>
+    {(label || extraButton) && (
+      <header>
+        <label htmlFor={name}>{label}</label>
 
-      {extraButton}
-    </header>
+        {extraButton}
+      </header>
+    )}
 
     <input {...inputProps} id={name} name={name} type={type} />
 

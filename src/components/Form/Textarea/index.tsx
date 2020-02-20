@@ -1,7 +1,7 @@
 import styles from './styles.css'
 
 /**
- * Pure UI component for <input> element
+ * Pure UI component for <textarea> element
  *
  * Usage:
  *

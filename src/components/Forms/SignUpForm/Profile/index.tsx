@@ -3,13 +3,7 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  SignUpAvatarUploader,
-  Translate
-} from '~/components'
+import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -20,7 +14,7 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import styles from './styles.css'
+import AvatarUploadField from './AvatarUploadField'
 
 import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
 
@@ -59,18 +53,6 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-const AvatarError = ({ field, errors, touched }: { [key: string]: any }) => {
-  const error = errors[field]
-  const isTouched = touched[field]
-  return (
-    <div className="info">
-      {error && isTouched && <div className="error">{error}</div>}
-
-      <style jsx>{styles}</style>
-    </div>
-  )
-}
-
 export const SignUpProfileForm: React.FC<FormProps> = formProps => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
@@ -95,6 +77,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
       const isValidAvatar = validateAvatar(avatar, lang)
       const isInvalidDisplayName = validateDisplayName(displayName, lang)
       const isValidDescription = validateDescription(description, lang)
+
       return {
         ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
         ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
@@ -129,20 +112,26 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
   })
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xloose', 'xxxloose']}>
-        <SignUpAvatarUploader
-          field="avatar"
-          lang={lang}
-          uploadCallback={setFieldValue}
+    <Dialog.Content spacing={[0, 0]}>
+      <Form onSubmit={handleSubmit}>
+        <AvatarUploadField
+          onUpload={assetId => {
+            setFieldValue('avatar', assetId)
+          }}
         />
-        <AvatarError name="avatar" error={touched.avatar && errors.avatar} />
+
         <Form.Input
+          label={
+            <Translate
+              zh_hant={TEXT.zh_hant.displayName}
+              zh_hans={TEXT.zh_hans.displayName}
+            />
+          }
           type="text"
           name="displayName"
           placeholder={translate({
-            zh_hant: '姓名',
-            zh_hans: '姓名',
+            zh_hant: TEXT.zh_hant.enterDisplayName,
+            zh_hans: TEXT.zh_hans.enterDisplayName,
             lang
           })}
           value={values.displayName}
@@ -150,6 +139,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
           onBlur={handleBlur}
           onChange={handleChange}
         />
+
         <Form.Textarea
           label={
             <Translate
@@ -174,22 +164,20 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
             />
           }
         />
-      </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.nextStep}
-            zh_hans={TEXT.zh_hans.nextStep}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
-      <style jsx>{styles}</style>
-    </Form>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            type="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.nextStep}
+              zh_hans={TEXT.zh_hans.nextStep}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </Form>
+    </Dialog.Content>
   )
 }

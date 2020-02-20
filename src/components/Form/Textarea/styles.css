@@ -1,23 +1,34 @@
 .container {
-  position: relative;
+  margin: var(--spacing-loose) 0;
 }
 
-.textarea {
-  @mixin form-input-grey;
-  min-height: 2.5rem;
+header {
+  @mixin flex-center-space-between;
+  margin: 0 var(--spacing-base) var(--spacing-x-tight);
+
+  & label {
+    @mixin fomr-input-label;
+  }
 }
 
-.info {
-  font-size: var(--font-size-xs);
-  min-height: 1rem;
-  margin-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-x-tight);
+textarea {
+  @mixin form-input;
 
-  & > .error {
-    color: var(--color-red);
+  min-height: 5rem;
+
+  @media (--sm-up) {
+    @mixin form-input-grey;
+  }
+}
+
+footer {
+  margin: var(--spacing-x-tight) var(--spacing-base) 0;
+
+  & .error {
+    @mixin form-input-error;
   }
 
-  & > .hint {
-    color: var(--color-grey-dark);
+  & .hint {
+    @mixin form-input-hint;
   }
 }

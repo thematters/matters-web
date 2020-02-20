@@ -1,0 +1,13 @@
+label {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+}
+
+.mask {
+  @mixin expand-to-container;
+  @mixin flex-center-all;
+
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}

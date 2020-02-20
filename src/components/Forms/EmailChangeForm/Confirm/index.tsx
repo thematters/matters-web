@@ -112,8 +112,8 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
   })
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xloose', 'xxxloose']}>
+    <Dialog.Content spacing={[0, 0]}>
+      <Form onSubmit={handleSubmit}>
         <Form.Input
           label={
             <Translate
@@ -160,17 +160,20 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
             />
           }
         />
-      </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </Form>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            type="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.done}
+              zh_hans={TEXT.zh_hans.done}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </Form>
+    </Dialog.Content>
   )
 }

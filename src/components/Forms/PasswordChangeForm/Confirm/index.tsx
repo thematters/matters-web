@@ -92,8 +92,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   })
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xloose', 'xxxloose']}>
+    <Dialog.Content spacing={[0, 0]}>
+      <Form onSubmit={handleSubmit}>
         <Form.Input
           label={
             <Translate
@@ -138,28 +138,31 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           onBlur={handleBlur}
           onChange={handleChange}
         />
-      </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={backPreviousStep}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.previousStep}
-            zh_hans={TEXT.zh_hans.previousStep}
-          />
-        </Dialog.Footer.Button>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            onClick={backPreviousStep}
+            bgColor="grey-lighter"
+            textColor="black"
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.previousStep}
+              zh_hans={TEXT.zh_hans.previousStep}
+            />
+          </Dialog.Footer.Button>
 
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </Form>
+          <Dialog.Footer.Button
+            type="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.done}
+              zh_hans={TEXT.zh_hans.done}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </Form>
+    </Dialog.Content>
   )
 }

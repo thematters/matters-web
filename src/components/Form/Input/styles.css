@@ -7,8 +7,7 @@ header {
   margin: 0 var(--spacing-base) var(--spacing-x-tight);
 
   & label {
-    color: var(--color-grey-dark);
-    font-size: var(--font-size-sm);
+    @mixin fomr-input-label;
   }
 }
 
