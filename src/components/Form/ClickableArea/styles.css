@@ -1,0 +1,30 @@
+.container {
+  @mixin flex-center-space-between;
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+  padding: var(--spacing-base);
+
+  line-height: 1;
+  background: var(--color-white);
+
+  @media (--sm-up) {
+    background: var(--color-grey-lighter);
+  }
+}
+
+.left {
+  & h5 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: 1rem;
+  }
+
+  & p {
+    color: var(--color-grey);
+    font-size: var(--font-size-sm-s);
+    line-height: 1rem;
+  }
+}
+
+.right {
+}

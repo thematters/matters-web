@@ -6,7 +6,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'
 
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const Login = () => {
   const { updateHeaderState } = useContext(HeaderContext)
@@ -21,7 +21,7 @@ const Login = () => {
   })
 
   return (
-    <main className="l-row">
+    <main className="l-row full">
       <Head
         title={{ zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login }}
       />
@@ -37,9 +37,7 @@ const Login = () => {
           hasNoBorder
         />
 
-        <section className="content">
-          <LoginForm purpose="page" />
-        </section>
+        <LoginForm purpose="page" />
       </article>
 
       <style jsx>{styles}</style>

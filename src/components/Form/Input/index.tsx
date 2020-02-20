@@ -41,25 +41,23 @@ const Input: React.FC<InputProps> = ({
   extraButton,
 
   ...inputProps
-}) => {
-  return (
-    <section className="container">
-      <header>
-        <label htmlFor={name}>{label}</label>
+}) => (
+  <section className="container">
+    <header>
+      <label htmlFor={name}>{label}</label>
 
-        {extraButton}
-      </header>
+      {extraButton}
+    </header>
 
-      <input {...inputProps} id={name} name={name} type={type} />
+    <input {...inputProps} id={name} name={name} type={type} />
 
-      <footer>
-        {error && !hint && <div className="error">{error}</div>}
-        {hint && !error && <div className="hint">{hint}</div>}
-      </footer>
+    <footer>
+      {error && <div className="error">{error}</div>}
+      {hint && !error && <div className="hint">{hint}</div>}
+    </footer>
 
-      <style jsx>{styles}</style>
-    </section>
-  )
-}
+    <style jsx>{styles}</style>
+  </section>
+)
 
 export default Input

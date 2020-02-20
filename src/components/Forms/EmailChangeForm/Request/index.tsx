@@ -84,8 +84,8 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xloose', 'xxxloose']}>
         <Form.Input
           label={
             <Translate
@@ -96,7 +96,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
           type="email"
           name="email"
           value={values.email}
-          error={touched && errors.email}
+          error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
           disabled
@@ -117,7 +117,7 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
             lang
           })}
           value={values.email}
-          error={touched && errors.email}
+          error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
           extraButton={
@@ -142,6 +142,6 @@ export const EmailChangeRequestForm: React.FC<FormProps> = ({
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-    </form>
+    </Form>
   )
 }

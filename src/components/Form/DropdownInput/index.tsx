@@ -155,7 +155,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
       </Dropdown>
 
       <footer>
-        {error && !hint && <div className="error">{error}</div>}
+        {error && <div className="error">{error}</div>}
         {hint && !error && <div className="hint">{hint}</div>}
       </footer>
 

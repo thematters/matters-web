@@ -3,7 +3,7 @@
 }
 
 .textarea {
-  @mixin text-input;
+  @mixin form-input-grey;
   min-height: 2.5rem;
 }
 

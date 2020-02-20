@@ -1,4 +1,7 @@
+import VisuallyHidden from '@reach/visually-hidden'
+
 import { Icon } from '~/components'
+import { TextIcon } from '~/components/TextIcon'
 
 import styles from './styles.css'
 
@@ -21,26 +24,32 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   hint,
 
   ...inputProps
-}) => {
-  return (
-    <section className="container">
-      <label className="check" htmlFor="checkbox">
-        {inputProps.checked ? (
-          <Icon.CheckActive size="sm" />
-        ) : (
-          <Icon.CheckInactive size="sm" />
-        )}
+}) => (
+  <section className="container">
+    <label htmlFor="checkbox">
+      <TextIcon
+        icon={
+          inputProps.checked ? (
+            <Icon.CheckActive size="md-s" />
+          ) : (
+            <Icon.CheckInactive size="md-s" />
+          )
+        }
+        color="grey-dark"
+        spacing="xtight"
+      >
+        {hint}
+      </TextIcon>
 
+      <VisuallyHidden>
         <input id="checkbox" type="checkbox" name={name} {...inputProps} />
+      </VisuallyHidden>
+    </label>
 
-        <div className="hint">{hint}</div>
-      </label>
+    <footer>{error && <div className="error">{error}</div>}</footer>
 
-      <footer>{error && !hint && <div className="error">{error}</div>}</footer>
-
-      <style jsx>{styles}</style>
-    </section>
-  )
-}
+    <style jsx>{styles}</style>
+  </section>
+)
 
 export default CheckBox

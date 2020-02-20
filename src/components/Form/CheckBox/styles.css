@@ -1,20 +1,15 @@
 .container {
-  & > * {
-    display: inline-flex;
-    vertical-align: middle;
-  }
+  margin: var(--spacing-base);
 }
 
-.check {
-  cursor: pointer;
-
-  & :global(svg) {
-    margin-right: var(--spacing-x-tight);
-  }
+label {
+  display: block;
 }
 
-.input {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
+footer {
+  margin: var(--spacing-x-tight) 0 0;
+
+  & .error {
+    @mixin form-input-error;
+  }
 }

@@ -129,14 +129,14 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xloose', 'xxxloose']}>
         <SignUpAvatarUploader
           field="avatar"
           lang={lang}
           uploadCallback={setFieldValue}
         />
-        <AvatarError name="avatar" error={touched && errors.avatar} />
+        <AvatarError name="avatar" error={touched.avatar && errors.avatar} />
         <Form.Input
           type="text"
           name="displayName"
@@ -146,7 +146,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.displayName}
-          error={touched && errors.displayName}
+          error={touched.displayName && errors.displayName}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -164,7 +164,7 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.description}
-          error={touched && errors.description}
+          error={touched.description && errors.description}
           onBlur={handleBlur}
           onChange={handleChange}
           hint={
@@ -190,6 +190,6 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
-    </form>
+    </Form>
   )
 }

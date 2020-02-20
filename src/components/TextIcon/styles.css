@@ -1,12 +1,9 @@
 .text-icon {
-  user-select: none;
-  font-size: 0;
-  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
 
-  & :global(*) {
-    display: inline-block;
-    vertical-align: middle;
-  }
+  user-select: none;
 }
 
 .text {

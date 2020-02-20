@@ -119,6 +119,8 @@ const sentryLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       'x-sentry-action-id': actionId
+      // 'x-access-token':
+      //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWQ2Yzk1MTEtNzEzYy00YzExLWJiY2EtODJhMTEwYWJkM2E4IiwiaWF0IjoxNTgxOTExNzYyLCJleHAiOjE1ODk2ODc3NjJ9.fepWUngg3R1qQq62i3dQSBvSQ2-BpP4ugCjxHK1M1D4'
     }
   }
 })

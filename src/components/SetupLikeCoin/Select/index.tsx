@@ -39,7 +39,7 @@ const Select: React.FC<Props> = ({ startGenerate, startBind }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Dialog.Content spacing={['base', 'xloose']}>
+      <Dialog.Content spacing={['xloose', 'base']}>
         <section>
           <p className="hint">
             <Translate

@@ -92,8 +92,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xloose', 'xxxloose']}>
         <Form.Input
           label={
             <Translate
@@ -109,7 +109,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
             lang
           })}
           value={values.password}
-          error={touched && errors.password}
+          error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -128,7 +128,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
             lang
           })}
           value={values.comparedPassword}
-          error={touched && errors.comparedPassword}
+          error={touched.comparedPassword && errors.comparedPassword}
           hint={
             <Translate
               zh_hant={TEXT.zh_hant.passwordHint}
@@ -160,6 +160,6 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-    </form>
+    </Form>
   )
 }

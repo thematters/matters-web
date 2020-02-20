@@ -32,8 +32,6 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { UserRegister } from './__generated__/UserRegister'
 
@@ -73,26 +71,22 @@ const USER_REGISTER = gql`
 `
 
 const LoginDialogButton = () => (
-  <Dialog.Footer.Button
+  <Form.ClickableArea
+    title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+    spacing={['base', 0]}
     onClick={() => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
       window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
     }}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Footer.Button>
+  />
 )
 
 const LoginRedirectionButton = () => (
-  <Dialog.Footer.Button
+  <Form.ClickableArea
+    spacing={['base', 0]}
+    title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
     {...appendTarget(PATHS.AUTH_LOGIN)}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Footer.Button>
+  />
 )
 
 export const SignUpInitForm: React.FC<FormProps> = formProps => {
@@ -180,8 +174,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Dialog.Content spacing={[0, 0]}>
+      <Form onSubmit={handleSubmit}>
         <Form.Input
           label={
             <Translate
@@ -197,10 +191,11 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.email}
-          error={touched && errors.email}
+          error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
         />
+
         <Form.Input
           label={
             <Translate
@@ -217,20 +212,21 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.code}
-          error={touched && errors.code}
+          error={touched.code && errors.code}
           onBlur={handleBlur}
           onChange={handleChange}
           extraButton={
             <SendCodeButton email={values.email} lang={lang} type="register" />
           }
         />
+
         <Form.Input
           label="Matters ID"
           type="text"
           name="userName"
           autoComplete="off"
           value={values.userName}
-          error={touched && errors.userName}
+          error={touched.userName && errors.userName}
           onBlur={handleBlur}
           onChange={handleChange}
           hint={translate({
@@ -239,6 +235,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             lang
           })}
         />
+
         <Form.Input
           label={
             <Translate
@@ -255,7 +252,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.password}
-          error={touched && errors.password}
+          error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
           hint={
@@ -265,48 +262,46 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             />
           }
         />
-        <div className="tos">
-          <Form.CheckBox
-            name="tos"
-            checked={values.tos}
-            error={touched && errors.tos}
-            onChange={handleChange}
-            hint={
-              <>
-                <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-                <Link {...PATHS.MISC_TOS}>
-                  <a className="u-link-green" target="_blank">
-                    {' '}
-                    <Translate
-                      zh_hant="Matters 用戶協議和隱私政策"
-                      zh_hans="Matters 用户协议和隐私政策"
-                    />
-                  </a>
-                </Link>
-              </>
-            }
-          />
-        </div>
-      </Dialog.Content>
+        <Form.CheckBox
+          name="tos"
+          checked={values.tos}
+          error={touched.tos && errors.tos}
+          onChange={handleChange}
+          hint={
+            <>
+              <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-      <Dialog.Footer>
+              <Link {...PATHS.MISC_TOS}>
+                <a className="u-link-green" target="_blank">
+                  &nbsp;
+                  <Translate
+                    zh_hant="Matters 用戶協議和隱私政策"
+                    zh_hans="Matters 用户协议和隐私政策"
+                  />
+                </a>
+              </Link>
+            </>
+          }
+        />
+
         {isInDialog && <LoginDialogButton />}
         {isInPage && <LoginRedirectionButton />}
 
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.nextStep}
-            zh_hans={TEXT.zh_hans.nextStep}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
-      <style jsx>{styles}</style>
-    </form>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            type="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+            onClick={handleSubmit}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.nextStep}
+              zh_hans={TEXT.zh_hans.nextStep}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </Form>
+    </Dialog.Content>
   )
 }

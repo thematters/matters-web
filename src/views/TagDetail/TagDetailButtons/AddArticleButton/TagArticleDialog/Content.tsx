@@ -168,7 +168,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   }
 
   return (
-    <form id="tag-article-dialog" onSubmit={handleSubmit}>
+    <Form id="tag-article-dialog" onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.DropdownInput
           type="search"
@@ -179,7 +179,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             lang
           })}
           value={values.name}
-          error={touched && errors.name}
+          error={touched.name && errors.name}
           onBlur={handleBlur}
           onChange={handleChange}
           dropdownAppendTo="tag-article-dialog"
@@ -242,7 +242,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
-    </form>
+    </Form>
   )
 }
 

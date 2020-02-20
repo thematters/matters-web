@@ -21,7 +21,7 @@ html {
 }
 
 main {
-  min-height: 100%;
+  min-height: 100vh;
   margin-top: calc(var(--spacing-x-loose) + var(--global-header-height) + 1px);
   margin-bottom: var(--spacing-xx-loose);
 

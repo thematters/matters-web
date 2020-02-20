@@ -14,7 +14,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'
 
-import styles from './styles.css'
+import styles from '../styles.css'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
@@ -32,7 +32,7 @@ const SignUp = () => {
   })
 
   return (
-    <main className="l-row row">
+    <main className="l-row full">
       <Head
         title={{
           zh_hant: TEXT.zh_hant.register,
@@ -51,31 +51,32 @@ const SignUp = () => {
           hasNoBorder
         />
 
-        <section className="content">
-          {step === 'signUp' && (
-            <SignUpInitForm
-              purpose="page"
-              submitCallback={() => {
-                setStep('profile')
-              }}
-            />
-          )}
-          {step === 'profile' && (
-            <SignUpProfileForm
-              submitCallback={() => {
-                setStep('setupLikeCoin')
-              }}
-            />
-          )}
-          {step === 'setupLikeCoin' && (
-            <SetupLikeCoin
-              submitCallback={() => {
-                setStep('complete')
-              }}
-            />
-          )}
-          {step === 'complete' && <SignUpComplete purpose="page" />}
-        </section>
+        {step === 'signUp' && (
+          <SignUpInitForm
+            purpose="page"
+            submitCallback={() => {
+              setStep('profile')
+            }}
+          />
+        )}
+
+        {step === 'profile' && (
+          <SignUpProfileForm
+            submitCallback={() => {
+              setStep('setupLikeCoin')
+            }}
+          />
+        )}
+
+        {step === 'setupLikeCoin' && (
+          <SetupLikeCoin
+            submitCallback={() => {
+              setStep('complete')
+            }}
+          />
+        )}
+
+        {step === 'complete' && <SignUpComplete purpose="page" />}
       </article>
 
       <style jsx>{styles}</style>

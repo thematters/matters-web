@@ -144,7 +144,7 @@
 }
 
 #editor-comment-container {
-  @mixin text-input;
+  @mixin form-input-grey;
   position: relative;
 }
 

@@ -13,7 +13,7 @@ import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { TEXT } from '~/common/enums'
 
 import PasswordChanged from './PasswordChanged'
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
@@ -57,7 +57,7 @@ const Forget = () => {
   }
 
   return (
-    <main className="l-row">
+    <main className="l-row full">
       <Head
         title={{
           zh_hant: TEXT.zh_hant.forgetPassword,
@@ -76,25 +76,23 @@ const Forget = () => {
           hasNoBorder
         />
 
-        <section className="content">
-          {step === 'request' && (
-            <PasswordChangeRequestForm
-              defaultEmail={data.request.email}
-              purpose="forget"
-              submitCallback={requestCodeCallback}
-            />
-          )}
+        {step === 'request' && (
+          <PasswordChangeRequestForm
+            defaultEmail={data.request.email}
+            purpose="forget"
+            submitCallback={requestCodeCallback}
+          />
+        )}
 
-          {step === 'reset' && (
-            <PasswordChangeConfirmForm
-              codeId={data.request.codeId}
-              backPreviousStep={backPreviousStep}
-              submitCallback={() => setStep('complete')}
-            />
-          )}
+        {step === 'reset' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            backPreviousStep={backPreviousStep}
+            submitCallback={() => setStep('complete')}
+          />
+        )}
 
-          {step === 'complete' && <PasswordChanged />}
-        </section>
+        {step === 'complete' && <PasswordChanged />}
       </article>
 
       <style jsx>{styles}</style>

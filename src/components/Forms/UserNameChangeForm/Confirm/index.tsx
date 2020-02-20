@@ -87,8 +87,8 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xloose', 'xxxloose']}>
         <Form.Input
           label="Matters ID"
           type="text"
@@ -99,7 +99,7 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.userName}
-          error={touched && errors.userName}
+          error={touched.userName && errors.userName}
           onBlur={handleBlur}
           onChange={handleChange}
           hint={
@@ -118,7 +118,7 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.comparedUserName}
-          error={touched && errors.comparedUserName}
+          error={touched.comparedUserName && errors.comparedUserName}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -133,6 +133,6 @@ export const UserNameChangeConfirmForm: React.FC<FormProps> = formProps => {
           <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-    </form>
+    </Form>
   )
 }

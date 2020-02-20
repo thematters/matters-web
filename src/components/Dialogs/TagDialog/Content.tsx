@@ -201,7 +201,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
   return (
-    <form id="tag-dialog" onSubmit={handleSubmit}>
+    <Form id="tag-dialog" onSubmit={handleSubmit}>
       <Dialog.Content>
         <Form.DropdownInput
           label={
@@ -218,7 +218,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             lang
           })}
           value={values.newContent}
-          error={touched && errors.newContent}
+          error={touched.newContent && errors.newContent}
           onBlur={e => {
             setFieldValue('content', e.target.value.trim())
             handleBlur(e)
@@ -243,7 +243,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             lang
           })}
           value={values.newDescription}
-          error={touched && errors.newDescription}
+          error={touched.newDescription && errors.newDescription}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -274,7 +274,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
-    </form>
+    </Form>
   )
 }
 

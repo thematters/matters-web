@@ -108,7 +108,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
           <section className="content">
             <ProfileAvatarUploader user={user} />
             <section className="info">
-              <form className="form" onSubmit={handleSubmit}>
+              <Form className="form" onSubmit={handleSubmit}>
                 <Form.Input
                   label={
                     <Translate
@@ -119,7 +119,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                   type="text"
                   name="displayName"
                   value={values.displayName}
-                  error={touched && errors.displayName}
+                  error={touched.displayName && errors.displayName}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder={translate({
@@ -148,7 +148,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     lang
                   })}
                   value={values.description}
-                  error={touched && errors.description}
+                  error={touched.description && errors.description}
                   hint={
                     <Translate
                       zh_hant={TEXT.zh_hant.descriptionHint}
@@ -200,7 +200,7 @@ export const UserProfileEditor: React.FC<FormProps> = formProps => {
                     </TextIcon>
                   </Button>
                 </div>
-              </form>
+              </Form>
             </section>
           </section>
         </section>

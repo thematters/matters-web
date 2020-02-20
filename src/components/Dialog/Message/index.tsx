@@ -12,7 +12,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
   description,
   children
 }) => (
-  <Dialog.Content spacing={['base', 'xloose']}>
+  <Dialog.Content spacing={['xloose', 'base']}>
     {headline && <h3 className="headline">{headline}</h3>}
 
     {description && <section className="description">{description}</section>}

@@ -12,7 +12,8 @@ import {
   // clearPersistCache,
   redirectToTarget,
   translate,
-  validateEmail
+  validateEmail,
+  validatePassword
 } from '~/common/utils'
 
 import {
@@ -71,11 +72,10 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
       email: '',
       password: ''
     },
-    validate: ({ email }) => {
-      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
-
+    validate: ({ email, password }) => {
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {})
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        password: validatePassword(password, lang)
       }
     },
     onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {
@@ -150,8 +150,8 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
   const isInPage = purpose === 'page'
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={[0, 0]}>
         <Form.Input
           label={
             <Translate
@@ -166,11 +166,13 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
             zh_hans: TEXT.zh_hans.enterEmail,
             lang
           })}
+          required
           value={values.email}
-          error={touched && errors.email}
+          error={touched.email && errors.email}
           onBlur={handleBlur}
           onChange={handleChange}
         />
+
         <Form.Input
           label={
             <Translate
@@ -185,20 +187,24 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
             zh_hans: TEXT.zh_hans.enterPassword,
             lang
           })}
+          required
           value={values.password}
-          error={touched && errors.password}
+          error={touched.password && errors.password}
           onBlur={handleBlur}
           onChange={handleChange}
+          extraButton={
+            <>
+              {isInDialog && <PasswordResetDialogButton />}
+              {isInPage && <PasswordResetRedirectButton />}
+            </>
+          }
         />
 
-        {isInDialog && <PasswordResetDialogButton />}
-        {isInPage && <PasswordResetRedirectButton />}
+        {isInDialog && <SignUpDialogButton />}
+        {isInPage && <SignUpRedirectionButton />}
       </Dialog.Content>
 
       <Dialog.Footer>
-        {isInDialog && <SignUpDialogButton />}
-        {isInPage && <SignUpRedirectionButton />}
-
         <Dialog.Footer.Button
           type="submit"
           disabled={!_isEmpty(errors) || isSubmitting}
@@ -210,6 +216,6 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-    </form>
+    </Form>
   )
 }

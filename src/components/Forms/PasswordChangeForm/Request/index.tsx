@@ -84,8 +84,8 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
   })
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
+    <Form onSubmit={handleSubmit}>
+      <Dialog.Content spacing={['xloose', 'xxxloose']}>
         <Form.Input
           label={
             <Translate
@@ -109,7 +109,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
                 })
           }
           value={values.email}
-          error={touched && errors.email}
+          error={touched.email && errors.email}
           disabled={!!defaultEmail}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -130,7 +130,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
             lang
           })}
           value={values.code}
-          error={touched && errors.code}
+          error={touched.code && errors.code}
           onBlur={handleBlur}
           onChange={handleChange}
           extraButton={
@@ -155,6 +155,6 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-    </form>
+    </Form>
   )
 }

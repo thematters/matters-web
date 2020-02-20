@@ -1,0 +1,29 @@
+main {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: calc(var(--spacing-loose) + var(--global-header-height) + 1px);
+  padding-bottom: var(--spacing-xx-loose);
+
+  background: var(--color-grey-lighter);
+
+  @media (--sm-up) {
+    background: none;
+  }
+}
+
+article {
+  & :global(> header) {
+    padding: 0 var(--spacing-base);
+
+    @media (--sm-up) {
+      padding: var(--spacing-base) var(--spacing-base) 0;
+    }
+  }
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-loose);
+
+    border: 1px solid var(--color-line-grey-light);
+    border-radius: 0.5rem;
+  }
+}
