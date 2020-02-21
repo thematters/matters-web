@@ -1,3 +1,6 @@
+import autosize from 'autosize'
+import { useEffect, useRef } from 'react'
+
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -34,12 +37,20 @@ const Textarea: React.FC<TextareaProps> = ({
 
   ...textareaProps
 }) => {
+  const node: React.RefObject<any> | null = useRef(null)
+
+  useEffect(() => {
+    if (node && node.current) {
+      autosize(node.current)
+    }
+  }, [])
+
   return (
     <Field>
       <Field.Header label={label} htmlFor={name} extraButton={extraButton} />
 
       <Field.Content>
-        <textarea {...textareaProps} id={name} name={name} />
+        <textarea ref={node} {...textareaProps} id={name} name={name} />
       </Field.Content>
 
       <Field.Footer hint={hint} error={error} />

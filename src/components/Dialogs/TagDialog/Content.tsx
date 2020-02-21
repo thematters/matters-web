@@ -201,8 +201,8 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
   return (
-    <Form id="tag-dialog" onSubmit={handleSubmit}>
-      <Dialog.Content>
+    <Dialog.Content spacing={[0, 0]}>
+      <Form id="tag-dialog" onSubmit={handleSubmit}>
         <Form.DropdownInput
           label={
             <Translate
@@ -247,34 +247,21 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           onBlur={handleBlur}
           onChange={handleChange}
         />
-      </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.confirm}
-            zh_hans={TEXT.zh_hans.confirm}
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          onClick={close}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.cancel}
-            zh_hans={TEXT.zh_hans.cancel}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
-      <style jsx>{styles}</style>
-    </Form>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            type="submit"
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant.confirm}
+              zh_hans={TEXT.zh_hans.confirm}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </Form>
+    </Dialog.Content>
   )
 }
 

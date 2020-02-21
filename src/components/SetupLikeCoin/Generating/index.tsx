@@ -45,8 +45,8 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   }, [])
 
   return (
-    <Form>
-      <Dialog.Content>
+    <Dialog.Content>
+      <Form>
         <section className="container">
           {!error && (
             <>
@@ -68,25 +68,25 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
             </p>
           )}
         </section>
-      </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!error}
-          onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-          }}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
-            zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            disabled={!error}
+            onClick={() => {
+              prevStep()
+              analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+            }}
+          >
+            <Translate
+              zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
+              zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
+            />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
 
-      <style jsx>{styles}</style>
-    </Form>
+        <style jsx>{styles}</style>
+      </Form>
+    </Dialog.Content>
   )
 }
 

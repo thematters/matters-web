@@ -23,8 +23,8 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
       <Dialog
         title={
           <Translate
-            zh_hant={TEXT.zh_hant.changeEmail}
-            zh_hans={TEXT.zh_hans.changeEmail}
+            zh_hant={TEXT.zh_hant.addArticleTag}
+            zh_hans={TEXT.zh_hans.addArticleTag}
           />
         }
         isOpen={showDialog}

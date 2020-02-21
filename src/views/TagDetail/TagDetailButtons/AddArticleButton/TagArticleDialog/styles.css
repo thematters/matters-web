@@ -1,8 +1,6 @@
-.container {
-  margin: 0rem var(--spacing-base) var(--spacing-loose);
-}
-
 ul {
+  padding: 0 var(--spacing-base);
+
   & li {
     position: relative;
     margin-bottom: var(--spacing-base);

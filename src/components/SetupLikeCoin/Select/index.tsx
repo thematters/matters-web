@@ -4,7 +4,6 @@ import { Dialog, Form, Translate } from '~/components'
 
 import Hint from './Hint'
 import Intro from './Intro'
-import styles from './styles.css'
 
 interface SelectProps {
   startGenerate: () => void
@@ -17,8 +16,8 @@ const {
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
-    <Form>
-      <Dialog.Content spacing={[0, 0]}>
+    <Dialog.Content spacing={[0, 0]}>
+      <Form>
         <Hint />
 
         <Form.ClickableArea
@@ -52,10 +51,8 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
         />
 
         <Intro />
-      </Dialog.Content>
-
-      <style jsx>{styles}</style>
-    </Form>
+      </Form>
+    </Dialog.Content>
   )
 }
 
