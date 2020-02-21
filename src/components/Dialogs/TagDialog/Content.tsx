@@ -101,7 +101,7 @@ interface TagDialogContentProps {
   id?: string
   content?: string
   description?: string
-  close: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -113,10 +113,13 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   id,
   content,
   description,
-  close
+  closeDialog
 }) => {
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
+
+  const formId = 'tag-edit-form'
+
   const {
     values,
     errors,
@@ -181,7 +184,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
           Router.push(path.as)
         } else {
-          close()
+          closeDialog()
         }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
@@ -209,11 +212,25 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             zh_hans={content ? TEXT.zh_hans.editTag : TEXT.zh_hans.createTag}
           />
         }
-        close={close}
+        close={closeDialog}
+        rightButton={
+          <Dialog.Header.RightButton
+            text={
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
+              />
+            }
+            type="submit"
+            form={formId}
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          />
+        }
       />
 
       <Dialog.Content spacing={[0, 0]}>
-        <Form id="tag-dialog" onSubmit={handleSubmit}>
+        <Form id={formId} onSubmit={handleSubmit}>
           <Form.DropdownInput
             label={
               <Translate
@@ -235,7 +252,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
               handleBlur(e)
             }}
             onChange={handleChange}
-            dropdownAppendTo="tag-dialog"
+            dropdownAppendTo={formId}
             dropdownAutoSizing={true}
             DropdownContent={DropdownContent}
             query={SEARCH_TAGS}
@@ -259,19 +276,6 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             onBlur={handleBlur}
             onChange={handleChange}
           />
-
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
         </Form>
       </Dialog.Content>
     </>

@@ -20,7 +20,7 @@ import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated_
 interface FormProps {
   defaultEmail: string
   submitCallback?: (codeId: string) => void
-  close: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -31,7 +31,7 @@ interface FormValues {
 const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
-  close
+  closeDialog
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
@@ -88,7 +88,7 @@ const Request: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit} id={formId}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={
           <Translate
@@ -140,7 +140,7 @@ const Request: React.FC<FormProps> = ({
             zh_hans={TEXT.zh_hans.changeEmail}
           />
         }
-        close={close}
+        close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
             type="submit"

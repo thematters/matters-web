@@ -25,7 +25,7 @@ export const TagDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Content close={close} content={content} {...restProps} />
+        <Content closeDialog={close} content={content} {...restProps} />
       </Dialog>
     </>
   )

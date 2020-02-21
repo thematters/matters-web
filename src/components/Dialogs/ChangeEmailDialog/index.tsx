@@ -57,7 +57,7 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
           <Request
             defaultEmail={data.request.email}
             submitCallback={requestCallback}
-            close={close}
+            closeDialog={close}
           />
         )}
 
@@ -65,11 +65,11 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
           <Confirm
             oldData={data.request}
             submitCallback={() => setStep('complete')}
-            close={close}
+            closeDialog={close}
           />
         )}
 
-        {step === 'complete' && <Complete close={close} />}
+        {step === 'complete' && <Complete closeDialog={close} />}
       </Dialog>
     </>
   )

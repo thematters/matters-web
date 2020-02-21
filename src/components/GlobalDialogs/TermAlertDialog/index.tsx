@@ -16,7 +16,7 @@ import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 
 interface TermContentProps {
-  close: () => void
+  closeDialog: () => void
 }
 
 const UPDATE_AGREE_ON = gql`
@@ -30,7 +30,7 @@ const UPDATE_AGREE_ON = gql`
   }
 `
 
-const TermContent: React.FC<TermContentProps> = ({ close }) => {
+const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
   const { handleSubmit, isSubmitting } = useFormik({
@@ -38,7 +38,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         await update({ variables: { input: { agreeOn: true } } })
-        close()
+        closeDialog()
       } catch (error) {
         // TODO: Handle error
       }
@@ -56,7 +56,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
         console.error('Failed to unsubscribePush after logged out')
       }
 
-      close()
+      closeDialog()
 
       Router.replace('/')
     } catch (e) {
@@ -73,7 +73,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
             zh_hans={TEXT.zh_hans.termAndPrivacy}
           />
         }
-        close={close}
+        close={closeDialog}
       />
 
       <Dialog.Content>
@@ -127,7 +127,7 @@ const TermAlertDialog = () => {
 
   return (
     <Dialog isOpen={showDialog} onDismiss={close}>
-      <TermContent close={close} />
+      <TermContent closeDialog={close} />
     </Dialog>
   )
 }

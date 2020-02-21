@@ -2,13 +2,11 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-  Translate,
   ViewerContext
 } from '~/components'
-
-import { TEXT } from '~/common/enums'
 
 interface ChangePasswordDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -22,10 +20,10 @@ export const ChangePasswordDialog = ({
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       prev: 'login',
-      next: 'reset',
+      next: 'confirm',
       email: viewer.info.email
     },
-    reset: {
+    confirm: {
       prev: 'request',
       next: 'complete'
     },
@@ -50,16 +48,10 @@ export const ChangePasswordDialog = ({
         }
       }
     })
-    setStep('reset')
+    setStep('confirm')
   }
 
   const headerHidden = step === 'complete'
-  const title = (
-    <Translate
-      zh_hant={TEXT.zh_hant.changePassword}
-      zh_hans={TEXT.zh_hans.changePassword}
-    />
-  )
 
   return (
     <>
@@ -73,49 +65,29 @@ export const ChangePasswordDialog = ({
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            type="reset"
+            type="change"
             purpose="dialog"
             submitCallback={requestCodeCallback}
-            close={close}
+            closeDialog={close}
           />
         )}
 
-        {step === 'reset' && (
+        {step === 'confirm' && (
           <PasswordChangeConfirmForm
             codeId={data.request.codeId}
-            type="reset"
+            type="change"
             purpose="dialog"
             submitCallback={() => setStep('complete')}
-            close={close}
+            closeDialog={close}
           />
         )}
 
         {step === 'complete' && (
-          <>
-            <Dialog.Header title={title} close={close} headerHidden />
-
-            <Dialog.Message
-              headline={title}
-              description={
-                <Translate
-                  zh_hant={TEXT.zh_hant.changePasswordSuccess}
-                  zh_hans={TEXT.zh_hans.changePasswordSuccess}
-                />
-              }
-            />
-            <Dialog.Footer>
-              <Dialog.Footer.Button
-                bgColor="grey-lighter"
-                textColor="black"
-                onClick={close}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.close}
-                  zh_hans={TEXT.zh_hans.close}
-                />
-              </Dialog.Footer.Button>
-            </Dialog.Footer>
-          </>
+          <PasswordChangeComplete
+            type="change"
+            purpose="dialog"
+            closeDialog={close}
+          />
         )}
       </Dialog>
     </>

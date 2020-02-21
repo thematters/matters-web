@@ -18,7 +18,7 @@
 }
 
 .title-container {
-  padding: 0 var(--spacing-xxx-loose) 1rem;
+  padding: 0 var(--spacing-loose) 1rem;
 
   & h3 {
     font-size: var(--font-size-xm);
@@ -40,7 +40,7 @@
   & .description {
     position: relative;
     font-size: var(--font-size-sm);
-    padding: 0 var(--spacing-xxx-loose);
+    padding: 0 var(--spacing-xx-loose);
 
     & + .description {
       margin-top: var(--spacing-base);
@@ -50,7 +50,7 @@
       content: attr(data-content);
       position: absolute;
       top: 0;
-      left: 2.5rem;
+      left: 1.5rem;
 
       color: var(--color-matters-green);
       font-weight: var(--font-weight-bold);

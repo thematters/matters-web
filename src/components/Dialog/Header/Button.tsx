@@ -10,20 +10,30 @@ interface CloseButtonProps {
   ref: React.Ref<any>
 }
 
-export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => (
-  <Button
-    onClick={close}
-    aria-label="關閉"
-    ref={ref}
-    bgColor="green-lighter"
-    size={['2rem', '2rem']}
-  >
-    <TextIcon className="u-sm-up-hide" color="green" size="md">
-      <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
-    </TextIcon>
-    <Icon.CloseGreenMedium size="lg" className="u-sm-down-hide" />
-  </Button>
-))
+export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
+  const isSmallUp = useResponsive({ type: 'sm-up' })()
+
+  return (
+    <Button
+      onClick={close}
+      aria-label="關閉"
+      ref={ref}
+      bgColor={isSmallUp ? 'grey-lighter' : undefined}
+      bgHoverColor={isSmallUp ? 'green-lighter' : undefined}
+      size={isSmallUp ? ['2rem', '2rem'] : undefined}
+    >
+      {!isSmallUp && (
+        <TextIcon color="green" size="md">
+          <Translate
+            zh_hant={TEXT.zh_hant.cancel}
+            zh_hans={TEXT.zh_hans.cancel}
+          />
+        </TextIcon>
+      )}
+      {isSmallUp && <Icon.CloseGreenMedium size="lg" />}
+    </Button>
+  )
+})
 
 type RightButtonProps = {
   text: string | React.ReactNode

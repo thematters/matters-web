@@ -14,7 +14,7 @@ import { DraftPublishDialog } from './__generated__/DraftPublishDialog'
 import { PublishArticle } from './__generated__/PublishArticle'
 
 interface PublishContentProps {
-  close: () => void
+  closeDialog: () => void
 }
 
 const PUBLISH_ARTICLE = gql`
@@ -40,7 +40,7 @@ const DRAFT_PUBLISH_DIALOG = gql`
   }
 `
 
-const PublishContent: React.FC<PublishContentProps> = ({ close }) => {
+const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const router = useRouter()
   const id = getQuery({ router, key: 'id' })
   const { data, error, loading } = useQuery<DraftPublishDialog>(
@@ -88,45 +88,35 @@ const PublishContent: React.FC<PublishContentProps> = ({ close }) => {
             zh_hans={TEXT.zh_hans.publish}
           />
         }
-        close={close}
+        close={closeDialog}
+        rightButton={
+          <Dialog.Header.RightButton
+            text={
+              <Translate
+                zh_hant={TEXT.zh_hant.publish}
+                zh_hans={TEXT.zh_hans.publish}
+              />
+            }
+            disabled={!publishable}
+            onClick={async () => {
+              const { data: publishData } = await publish({ variables: { id } })
+
+              const state =
+                publishData?.publishArticle.publishState || 'unpublished'
+
+              if (state === 'pending' || state === 'published') {
+                closeDialog()
+              }
+
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
+            }}
+          />
+        }
       />
 
       <Dialog.Content spacing={[0, 0]}>
         <PublishSlide />
       </Dialog.Content>
-
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!publishable}
-          onClick={async () => {
-            const { data: publishData } = await publish({ variables: { id } })
-            const state =
-              publishData?.publishArticle.publishState || 'unpublished'
-
-            if (state === 'pending' || state === 'published') {
-              close()
-            }
-
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
-          }}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.publish}
-            zh_hans={TEXT.zh_hans.publish}
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_SAVE_DRAFT_IN_MODAL)
-            close()
-          }}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate zh_hant="暫存作品" zh_hans="暫存作品" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
     </>
   )
 }

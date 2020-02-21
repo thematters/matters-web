@@ -45,7 +45,7 @@ const SignUpDialog = () => {
               step
             })
           }}
-          close={close}
+          closeDialog={close}
         />
       )}
       {step === 'profile' && (
@@ -57,7 +57,7 @@ const SignUpDialog = () => {
               step
             })
           }}
-          close={close}
+          closeDialog={close}
         />
       )}
       {step === 'setupLikeCoin' && (
@@ -69,10 +69,10 @@ const SignUpDialog = () => {
               step
             })
           }}
-          close={close}
+          closeDialog={close}
         />
       )}
-      {step === 'complete' && <SignUpComplete close={close} />}
+      {step === 'complete' && <SignUpComplete closeDialog={close} />}
     </Dialog>
   )
 }

@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  PageHeader,
+  Translate
+} from '~/components'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, ERROR_CODES, TEXT } from '~/common/enums'
@@ -28,7 +34,7 @@ import { UserLogin } from './__generated__/UserLogin'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  close?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -47,13 +53,14 @@ export const USER_LOGIN = gql`
 export const LoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  close
+  closeDialog
 }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
 
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
+  const formId = 'login-form'
 
   const {
     values,
@@ -143,7 +150,7 @@ export const LoginForm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={
           <Translate
@@ -197,13 +204,44 @@ export const LoginForm: React.FC<FormProps> = ({
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.confirm}
+          zh_hans={TEXT.zh_hans.confirm}
+        />
+      }
+      loading={isSubmitting}
+    />
+  )
+
   if (isInPage) {
-    return InnerForm
+    return (
+      <>
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.login}
+              zh_hans={TEXT.zh_hans.login}
+            />
+          }
+          hasNoBorder
+        >
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
   }
 
   return (
     <>
-      {close && (
+      {closeDialog && (
         <Dialog.Header
           title={
             <Translate
@@ -211,21 +249,8 @@ export const LoginForm: React.FC<FormProps> = ({
               zh_hans={TEXT.zh_hans.login}
             />
           }
-          close={close}
-          rightButton={
-            <Dialog.Header.RightButton
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              onClick={handleSubmit}
-              text={
-                <Translate
-                  zh_hant={TEXT.zh_hant.confirm}
-                  zh_hans={TEXT.zh_hans.confirm}
-                />
-              }
-              loading={isSubmitting}
-            />
-          }
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
       )}
 

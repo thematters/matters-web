@@ -12,10 +12,7 @@
 
 /* placement */
 .text-bottom {
-  & :global(*) {
-    margin: 0 auto;
-    display: block;
-  }
+  flex-direction: column;
 }
 
 /* size */

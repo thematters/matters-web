@@ -2,18 +2,14 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-  Translate,
   useEventListener,
   ViewerContext
 } from '~/components'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_RESET_PASSWORD_DIALOG,
-  TEXT
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
 
 const ResetPasswordDialog = () => {
   const viewer = useContext(ViewerContext)
@@ -48,13 +44,6 @@ const ResetPasswordDialog = () => {
 
   const headerHidden = step === 'complete'
 
-  const title = (
-    <Translate
-      zh_hant={TEXT.zh_hant.resetPassword}
-      zh_hans={TEXT.zh_hans.resetPassword}
-    />
-  )
-
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setStep('request')
@@ -77,7 +66,7 @@ const ResetPasswordDialog = () => {
           type="forget"
           purpose="dialog"
           submitCallback={requestCodeCallback}
-          close={close}
+          closeDialog={close}
         />
       )}
 
@@ -87,36 +76,16 @@ const ResetPasswordDialog = () => {
           submitCallback={() => setStep('complete')}
           type="forget"
           purpose="dialog"
-          close={close}
+          closeDialog={close}
         />
       )}
 
       {step === 'complete' && (
-        <>
-          <Dialog.Header title={title} close={close} headerHidden />
-
-          <Dialog.Message
-            headline={title}
-            description={
-              <Translate
-                zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-              />
-            }
-          />
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={close}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.close}
-                zh_hans={TEXT.zh_hans.close}
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
-        </>
+        <PasswordChangeComplete
+          type="forget"
+          purpose="dialog"
+          closeDialog={close}
+        />
       )}
     </Dialog>
   )

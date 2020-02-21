@@ -73,7 +73,11 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
   )
 }
 
-const AppreciatorsDialogContent = ({ close }: { close: () => void }) => {
+const AppreciatorsDialogContent = ({
+  closeDialog
+}: {
+  closeDialog: () => void
+}) => {
   const isSmallUp = useResponsive({ type: 'sm-up' })()
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -143,7 +147,7 @@ const AppreciatorsDialogContent = ({ close }: { close: () => void }) => {
             zh_hans={`${totalCount} 人赞赏了作品`}
           />
         }
-        close={close}
+        close={closeDialog}
       />
 
       <Dialog.Content spacing={[0, 0]}>

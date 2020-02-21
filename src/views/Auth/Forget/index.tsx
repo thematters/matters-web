@@ -3,25 +3,23 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
-  PageHeader,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm,
-  Translate
+  PasswordChangeRequestForm
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'
 
 import styles from '../styles.css'
-import PasswordChanged from './PasswordChanged'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'reset'
+      next: 'confirm'
     },
-    reset: {
+    confirm: {
       prev: 'request',
       next: 'complete'
     }
@@ -50,7 +48,7 @@ const Forget = () => {
         }
       }
     })
-    setStep('reset')
+    setStep('confirm')
   }
 
   return (
@@ -63,16 +61,6 @@ const Forget = () => {
       />
 
       <article className={containerClass}>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.forgetPassword}
-              zh_hans={TEXT.zh_hans.forgetPassword}
-            />
-          }
-          hasNoBorder
-        />
-
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
@@ -82,7 +70,7 @@ const Forget = () => {
           />
         )}
 
-        {step === 'reset' && (
+        {step === 'confirm' && (
           <PasswordChangeConfirmForm
             codeId={data.request.codeId}
             type="forget"
@@ -91,7 +79,9 @@ const Forget = () => {
           />
         )}
 
-        {step === 'complete' && <PasswordChanged />}
+        {step === 'complete' && (
+          <PasswordChangeComplete type="forget" purpose="page" />
+        )}
       </article>
 
       <style jsx>{styles}</style>

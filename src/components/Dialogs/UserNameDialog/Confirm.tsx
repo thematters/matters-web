@@ -17,6 +17,7 @@ import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 
 interface FormProps {
   submitCallback: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -33,9 +34,11 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({ submitCallback }) => {
+const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
+
+  const formId = 'username-change-confirm-form'
 
   const {
     values,
@@ -86,7 +89,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback }) => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label="Matters ID"
         type="text"
@@ -133,13 +136,18 @@ const Confirm: React.FC<FormProps> = ({ submitCallback }) => {
   return (
     <>
       <Dialog.Header
-        title=""
-        close={close}
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.changeUserName}
+            zh_hans={TEXT.zh_hans.changeUserName}
+          />
+        }
+        close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
             type="submit"
+            form={formId}
             disabled={!_isEmpty(errors) || isSubmitting}
-            onClick={handleSubmit}
             text={
               <Translate
                 zh_hant={TEXT.zh_hant.nextStep}

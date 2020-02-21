@@ -19,7 +19,7 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Content close={close} id={id} />
+        <Content closeDialog={close} id={id} />
       </Dialog>
     </>
   )

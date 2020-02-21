@@ -3,12 +3,10 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
-  PageHeader,
   SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
-  SignUpProfileForm,
-  Translate
+  SignUpProfileForm
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
@@ -43,16 +41,6 @@ const SignUp = () => {
       />
 
       <article className={containerClass}>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
-          hasNoBorder
-        />
-
         {step === 'signUp' && (
           <SignUpInitForm
             purpose="page"

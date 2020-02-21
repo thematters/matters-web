@@ -7,16 +7,16 @@ import styles from './styles.css'
 
 export const SignUpComplete = ({
   purpose,
-  close
+  closeDialog
 }: {
   purpose?: 'dialog' | 'page'
-  close?: () => void
+  closeDialog?: () => void
 }) => {
   const isInPage = purpose === 'page'
 
   return (
     <>
-      {close && (
+      {closeDialog && (
         <Dialog.Header
           title={
             <Translate
@@ -24,7 +24,7 @@ export const SignUpComplete = ({
               zh_hans={TEXT.zh_hans.registerSuccess}
             />
           }
-          close={close}
+          close={closeDialog}
         />
       )}
 

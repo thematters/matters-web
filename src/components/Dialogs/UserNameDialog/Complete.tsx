@@ -3,14 +3,29 @@ import { Dialog, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 
 interface CompleteProps {
-  title: React.ReactNode
-  close: () => void
+  closeDialog: () => void
 }
 
-const Complete = ({ title, close }: CompleteProps) => (
+const Complete = ({ closeDialog }: CompleteProps) => (
   <>
+    <Dialog.Header
+      title={
+        <Translate
+          zh_hant={TEXT.zh_hant.changeUserName}
+          zh_hans={TEXT.zh_hans.changeUserName}
+        />
+      }
+      close={closeDialog}
+      headerHidden
+    />
+
     <Dialog.Message
-      headline={title}
+      headline={
+        <Translate
+          zh_hant={TEXT.zh_hant.changeUserName}
+          zh_hans={TEXT.zh_hans.changeUserName}
+        />
+      }
       description={
         <Translate
           zh_hant={TEXT.zh_hant.changeUserNameSuccess}
@@ -23,7 +38,7 @@ const Complete = ({ title, close }: CompleteProps) => (
       <Dialog.Footer.Button
         bgColor="grey-lighter"
         textColor="black"
-        onClick={close}
+        onClick={closeDialog}
       >
         <Translate zh_hant={TEXT.zh_hant.close} zh_hans={TEXT.zh_hans.close} />
       </Dialog.Footer.Button>

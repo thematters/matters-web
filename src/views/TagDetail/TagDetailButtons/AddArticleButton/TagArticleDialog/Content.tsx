@@ -59,7 +59,7 @@ const DropdownContent = ({
 
 interface TagArticleDialogContentProps {
   id?: string
-  close: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -68,12 +68,14 @@ interface FormValues {
 }
 
 const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
-  close,
+  closeDialog,
   id
 }) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
   const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
+
+  const formId = 'tag-add-article-form'
 
   const {
     values,
@@ -135,7 +137,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           })
         )
 
-        close()
+        closeDialog()
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
@@ -176,11 +178,25 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             zh_hans={TEXT.zh_hans.addArticleTag}
           />
         }
-        close={close}
+        close={closeDialog}
+        rightButton={
+          <Dialog.Header.RightButton
+            text={
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
+              />
+            }
+            type="submit"
+            form={formId}
+            disabled={!_isEmpty(errors) || isSubmitting}
+            loading={isSubmitting}
+          />
+        }
       />
 
       <Dialog.Content spacing={[0, 0]}>
-        <Form id="tag-article-dialog" onSubmit={handleSubmit}>
+        <Form id={formId} onSubmit={handleSubmit}>
           <Form.DropdownInput
             type="search"
             name="name"
@@ -193,7 +209,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             error={touched.name && errors.name}
             onBlur={handleBlur}
             onChange={handleChange}
-            dropdownAppendTo="tag-article-dialog"
+            dropdownAppendTo={formId}
             dropdownAutoSizing={true}
             dropdownCallback={onClickMenuItem}
             DropdownContent={DropdownContent}
@@ -229,19 +245,6 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
 
             <style jsx>{styles}</style>
           </ul>
-
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              loading={isSubmitting}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
         </Form>
       </Dialog.Content>
     </>

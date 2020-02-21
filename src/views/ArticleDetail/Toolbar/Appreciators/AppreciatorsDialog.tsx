@@ -18,7 +18,7 @@ const AppreciatorsDialog = ({ children }: AppreciatorsDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <AppreciatorsDialogContent close={close} />
+        <AppreciatorsDialogContent closeDialog={close} />
       </Dialog>
     </>
   )

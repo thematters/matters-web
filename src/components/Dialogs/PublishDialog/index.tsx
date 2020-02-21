@@ -19,7 +19,7 @@ export const PublishDialog = ({ children }: PublishDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <PublishContent close={close} />
+        <PublishContent closeDialog={close} />
       </Dialog>
 
       <style jsx>{styles}</style>

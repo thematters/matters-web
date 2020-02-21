@@ -154,7 +154,7 @@ export const DropdownDialog = ({
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
         <Content>
-          <Dialog.Header title={dialog.title} headerHidden close={close} />
+          <Dialog.Header title={dialog.title} close={close} headerHidden />
 
           {dialog.content}
 

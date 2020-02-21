@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  PageHeader,
+  Translate
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
@@ -18,23 +24,10 @@ import AvatarUploadField from './AvatarUploadField'
 
 import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
 
-/**
- * This component is designed for sign up form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <SignUpProfileForm
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
-
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  close?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -58,11 +51,12 @@ const UPDATE_USER_INFO = gql`
 export const SignUpProfileForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  close
+  closeDialog
 }) => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
+  const formId = 'signup-profile-form'
 
   const {
     values,
@@ -118,7 +112,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <AvatarUploadField
         onUpload={assetId => {
           setFieldValue('avatar', assetId)
@@ -172,13 +166,44 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     </Form>
   )
 
-  if (isInPage) {
-    return InnerForm
-  }
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      onClick={handleSubmit}
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.nextStep}
+          zh_hans={TEXT.zh_hans.nextStep}
+        />
+      }
+      loading={isSubmitting}
+    />
+  )
 
+  if (isInPage) {
+    return (
+      <>
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.userProfile}
+              zh_hans={TEXT.zh_hans.userProfile}
+            />
+          }
+          hasNoBorder
+        >
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
+  }
   return (
     <>
-      {close && (
+      {closeDialog && (
         <Dialog.Header
           title={
             <Translate
@@ -186,21 +211,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
               zh_hans={TEXT.zh_hans.userProfile}
             />
           }
-          close={close}
-          rightButton={
-            <Dialog.Header.RightButton
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              onClick={handleSubmit}
-              text={
-                <Translate
-                  zh_hant={TEXT.zh_hant.nextStep}
-                  zh_hans={TEXT.zh_hans.nextStep}
-                />
-              }
-              loading={isSubmitting}
-            />
-          }
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
       )}
 

@@ -14,7 +14,7 @@ const LoginDialog = () => {
 
   return (
     <Dialog isOpen={showDialog} onDismiss={close}>
-      <LoginForm purpose="dialog" submitCallback={close} close={close} />
+      <LoginForm purpose="dialog" submitCallback={close} closeDialog={close} />
     </Dialog>
   )
 }

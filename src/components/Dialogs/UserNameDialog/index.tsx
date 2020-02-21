@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-
-import { TEXT } from '~/common/enums'
+import { Dialog } from '~/components'
 
 import Ask from './Ask'
 import Complete from './Complete'
@@ -27,12 +25,6 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
   }
 
   const headerHidden = step === 'ask' || step === 'complete'
-  const title = (
-    <Translate
-      zh_hant={TEXT.zh_hant.changeUserName}
-      zh_hans={TEXT.zh_hans.changeUserName}
-    />
-  )
 
   return (
     <>
@@ -44,18 +36,17 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
         size={headerHidden ? 'sm' : 'lg'}
       >
         {step === 'ask' && (
-          <Ask
-            title={title}
-            nextStep={() => setStep('confirm')}
-            close={close}
-          />
+          <Ask nextStep={() => setStep('confirm')} closeDialog={close} />
         )}
 
         {step === 'confirm' && (
-          <Confirm submitCallback={() => setStep('complete')} />
+          <Confirm
+            submitCallback={() => setStep('complete')}
+            closeDialog={close}
+          />
         )}
 
-        {step === 'complete' && <Complete title={title} close={close} />}
+        {step === 'complete' && <Complete closeDialog={close} />}
       </Dialog>
     </>
   )

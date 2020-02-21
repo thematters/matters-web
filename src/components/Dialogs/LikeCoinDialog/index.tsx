@@ -32,12 +32,14 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
       {children && children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        {step === 'term' && <LikeCoinTerm nextStep={nextStep} close={close} />}
+        {step === 'term' && (
+          <LikeCoinTerm nextStep={nextStep} closeDialog={close} />
+        )}
         {step === 'setup' && (
           <SetupLikeCoin
             purpose="dialog"
             submitCallback={close}
-            close={close}
+            closeDialog={close}
           />
         )}
       </Dialog>

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Head, LoginForm, PageHeader, Translate } from '~/components'
+import { Head, LoginForm } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { TEXT } from '~/common/enums'
@@ -27,16 +27,6 @@ const Login = () => {
       />
 
       <article className={containerClass}>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          }
-          hasNoBorder
-        />
-
         <LoginForm purpose="page" />
       </article>
 

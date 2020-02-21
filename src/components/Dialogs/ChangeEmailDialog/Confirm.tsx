@@ -22,7 +22,7 @@ import { ChangeEmail } from './__generated__/ChangeEmail'
 interface FormProps {
   oldData: { email: string; codeId: string }
   submitCallback: () => void
-  close: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -41,10 +41,17 @@ const CHANGE_EMAIL = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({ oldData, submitCallback, close }) => {
+const Confirm: React.FC<FormProps> = ({
+  oldData,
+  submitCallback,
+  closeDialog
+}) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
+
+  const formId = 'change-email-confirm-form'
+
   const {
     values,
     errors,
@@ -110,7 +117,7 @@ const Confirm: React.FC<FormProps> = ({ oldData, submitCallback, close }) => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={
           <Translate
@@ -169,12 +176,12 @@ const Confirm: React.FC<FormProps> = ({ oldData, submitCallback, close }) => {
             zh_hans={TEXT.zh_hans.changeEmail}
           />
         }
-        close={close}
+        close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
             type="submit"
+            form={formId}
             disabled={!_isEmpty(errors) || isSubmitting}
-            onClick={handleSubmit}
             text={
               <Translate
                 zh_hant={TEXT.zh_hant.confirm}

@@ -8,6 +8,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  PageHeader,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -35,24 +36,11 @@ import {
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { UserRegister } from './__generated__/UserRegister'
 
-/**
- * This component is designed for sign up form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <SignUpInitForm
- *     defaultEmail={''}
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
 interface FormProps {
   defaultEmail?: string
   purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
-  close?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -96,13 +84,18 @@ const LoginRedirectionButton = () => (
   />
 )
 
-export const SignUpInitForm: React.FC<FormProps> = formProps => {
+export const SignUpInitForm: React.FC<FormProps> = ({
+  defaultEmail = '',
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', purpose, submitCallback, close } = formProps
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
+  const formId = 'signup-init-form'
 
   const {
     values,
@@ -181,7 +174,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={
           <Translate
@@ -209,7 +202,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
             zh_hans={TEXT.zh_hans.verificationCode}
           />
         }
-        type="number"
+        type="text"
         name="code"
         autoComplete="off"
         placeholder={translate({
@@ -296,13 +289,44 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.nextStep}
+          zh_hans={TEXT.zh_hans.nextStep}
+        />
+      }
+      loading={isSubmitting}
+    />
+  )
+
   if (isInPage) {
-    return InnerForm
+    return (
+      <>
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.register}
+              zh_hans={TEXT.zh_hans.register}
+            />
+          }
+          hasNoBorder
+        >
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
   }
 
   return (
     <>
-      {close && (
+      {closeDialog && (
         <Dialog.Header
           title={
             <Translate
@@ -310,21 +334,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
               zh_hans={TEXT.zh_hans.register}
             />
           }
-          close={close}
-          rightButton={
-            <Dialog.Header.RightButton
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              onClick={handleSubmit}
-              text={
-                <Translate
-                  zh_hant={TEXT.zh_hant.nextStep}
-                  zh_hans={TEXT.zh_hans.nextStep}
-                />
-              }
-              loading={isSubmitting}
-            />
-          }
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
       )}
 

@@ -6,6 +6,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  PageHeader,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -19,10 +20,10 @@ import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated_
 
 interface FormProps {
   defaultEmail: string
-  type: 'forget' | 'reset'
+  type: 'forget' | 'change'
   purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
-  close?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -30,12 +31,19 @@ interface FormValues {
   code: string
 }
 
-export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
+export const PasswordChangeRequestForm: React.FC<FormProps> = ({
+  defaultEmail = '',
+  type,
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', type, purpose, submitCallback, close } = formProps
+
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
+  const formId = 'password-change-request-form'
 
   const {
     values,
@@ -88,7 +96,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
         label={
           <Translate
@@ -147,42 +155,52 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.nextStep}
+          zh_hans={TEXT.zh_hans.nextStep}
+        />
+      }
+      loading={isSubmitting}
+    />
+  )
+
+  const Title = isForget ? (
+    <Translate
+      zh_hant={TEXT.zh_hant.resetPassword}
+      zh_hans={TEXT.zh_hans.resetPassword}
+    />
+  ) : (
+    <Translate
+      zh_hant={TEXT.zh_hant.changePassword}
+      zh_hans={TEXT.zh_hans.changePassword}
+    />
+  )
+
   if (isInPage) {
-    return InnerForm
+    return (
+      <>
+        <PageHeader title={Title} hasNoBorder>
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
   }
 
   return (
     <>
-      {close && (
+      {closeDialog && (
         <Dialog.Header
-          title={
-            isForget ? (
-              <Translate
-                zh_hant={TEXT.zh_hant.forgetPassword}
-                zh_hans={TEXT.zh_hans.forgetPassword}
-              />
-            ) : (
-              <Translate
-                zh_hant={TEXT.zh_hant.resetPassword}
-                zh_hans={TEXT.zh_hans.resetPassword}
-              />
-            )
-          }
-          close={close}
-          rightButton={
-            <Dialog.Header.RightButton
-              type="submit"
-              disabled={!_isEmpty(errors) || isSubmitting}
-              onClick={handleSubmit}
-              text={
-                <Translate
-                  zh_hant={TEXT.zh_hant.nextStep}
-                  zh_hans={TEXT.zh_hans.nextStep}
-                />
-              }
-              loading={isSubmitting}
-            />
-          }
+          title={Title}
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
       )}
 

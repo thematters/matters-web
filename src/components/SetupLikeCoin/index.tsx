@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, SignUpComplete, Translate } from '~/components'
+import { Dialog, PageHeader, SignUpComplete, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -14,15 +14,17 @@ type Step = 'select' | 'binding' | 'generating' | 'complete'
 interface Props {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  close?: () => void
+  closeDialog?: () => void
 }
 
 export const SetupLikeCoin: React.FC<Props> = ({
   purpose,
   submitCallback,
-  close
+  closeDialog
 }) => {
   const isInDialog = purpose === 'dialog'
+  const isInPage = purpose === 'page'
+
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -46,7 +48,19 @@ export const SetupLikeCoin: React.FC<Props> = ({
 
   return (
     <>
-      {isInDialog && close && (
+      {isInPage && (
+        <PageHeader
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.setupLikeCoin}
+              zh_hans={TEXT.zh_hans.setupLikeCoin}
+            />
+          }
+          hasNoBorder
+        />
+      )}
+
+      {isInDialog && closeDialog && (
         <Dialog.Header
           title={
             <Translate
@@ -54,7 +68,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
               zh_hans={TEXT.zh_hans.setupLikeCoin}
             />
           }
-          close={close}
+          close={closeDialog}
         />
       )}
 
@@ -69,9 +83,11 @@ export const SetupLikeCoin: React.FC<Props> = ({
           }}
         />
       )}
+
       {step === 'generating' && (
         <Generating prevStep={backToSelect} nextStep={complete} />
       )}
+
       {step === 'binding' && (
         <Binding
           prevStep={backToSelect}
@@ -79,6 +95,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
           windowRef={bindingWindowRef}
         />
       )}
+
       {step === 'complete' && <SignUpComplete />}
     </>
   )
