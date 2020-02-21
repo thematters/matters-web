@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-
-import { TEXT } from '~/common/enums'
+import { Dialog } from '~/components'
 
 import Content from './Content'
 
@@ -20,16 +18,7 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.addArticleTag}
-            zh_hans={TEXT.zh_hans.addArticleTag}
-          />
-        }
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <Dialog isOpen={showDialog} onDismiss={close}>
         <Content close={close} id={id} />
       </Dialog>
     </>

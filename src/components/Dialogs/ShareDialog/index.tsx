@@ -30,18 +30,18 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.share}
-            zh_hans={TEXT.zh_hans.share}
-          />
-        }
-        size="sm"
-        showHeader={false}
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+        <Dialog.Header
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.share}
+              zh_hans={TEXT.zh_hans.share}
+            />
+          }
+          close={close}
+          headerHidden
+        />
+
         <Dialog.Content spacing={[0, 0]}>
           <section className="socials-container">
             <section className="left">

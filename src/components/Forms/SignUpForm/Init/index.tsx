@@ -52,6 +52,7 @@ interface FormProps {
   defaultEmail?: string
   purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
+  close?: () => void
 }
 
 interface FormValues {
@@ -73,6 +74,9 @@ const USER_REGISTER = gql`
 const LoginDialogButton = () => (
   <Form.ClickableArea
     title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+    rightText={
+      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+    }
     spacing={['base', 0]}
     onClick={() => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
@@ -83,8 +87,11 @@ const LoginDialogButton = () => (
 
 const LoginRedirectionButton = () => (
   <Form.ClickableArea
-    spacing={['base', 0]}
     title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+    rightText={
+      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+    }
+    spacing={['base', 0]}
     {...appendTarget(PATHS.AUTH_LOGIN)}
   />
 )
@@ -93,7 +100,7 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', purpose, submitCallback } = formProps
+  const { defaultEmail = '', purpose, submitCallback, close } = formProps
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
@@ -173,135 +180,155 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     }
   })
 
+  const InnerForm = (
+    <Form onSubmit={handleSubmit}>
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.email}
+            zh_hans={TEXT.zh_hans.email}
+          />
+        }
+        type="email"
+        name="email"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.email,
+          zh_hans: TEXT.zh_hans.email,
+          lang
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.verificationCode}
+            zh_hans={TEXT.zh_hans.verificationCode}
+          />
+        }
+        type="number"
+        name="code"
+        autoComplete="off"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.verificationCode,
+          zh_hans: TEXT.zh_hans.verificationCode,
+          lang
+        })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <SendCodeButton email={values.email} lang={lang} type="register" />
+        }
+      />
+
+      <Form.Input
+        label="Matters ID"
+        type="text"
+        name="userName"
+        autoComplete="off"
+        value={values.userName}
+        error={touched.userName && errors.userName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        hint={translate({
+          zh_hant: TEXT.zh_hant.userNameHint,
+          zh_hans: TEXT.zh_hans.userNameHint,
+          lang
+        })}
+      />
+
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.password}
+            zh_hans={TEXT.zh_hans.password}
+          />
+        }
+        type="password"
+        name="password"
+        autoComplete="off"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.password,
+          zh_hans: TEXT.zh_hans.password,
+          lang
+        })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        hint={
+          <Translate
+            zh_hant={TEXT.zh_hant.passwordHint}
+            zh_hans={TEXT.zh_hans.passwordHint}
+          />
+        }
+      />
+
+      <Form.CheckBox
+        name="tos"
+        checked={values.tos}
+        error={touched.tos && errors.tos}
+        onChange={handleChange}
+        hint={
+          <>
+            <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+
+            <Link {...PATHS.MISC_TOS}>
+              <a className="u-link-green" target="_blank">
+                &nbsp;
+                <Translate
+                  zh_hant="Matters 用戶協議和隱私政策"
+                  zh_hans="Matters 用户协议和隐私政策"
+                />
+              </a>
+            </Link>
+          </>
+        }
+      />
+
+      {isInDialog && <LoginDialogButton />}
+      {isInPage && <LoginRedirectionButton />}
+    </Form>
+  )
+
+  if (isInPage) {
+    return InnerForm
+  }
+
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          label={
+    <>
+      {close && (
+        <Dialog.Header
+          title={
             <Translate
-              zh_hant={TEXT.zh_hant.email}
-              zh_hans={TEXT.zh_hans.email}
+              zh_hant={TEXT.zh_hant.register}
+              zh_hans={TEXT.zh_hans.register}
             />
           }
-          type="email"
-          name="email"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.email,
-            zh_hans: TEXT.zh_hans.email,
-            lang
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.verificationCode}
-              zh_hans={TEXT.zh_hans.verificationCode}
-            />
-          }
-          type="text"
-          name="code"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.verificationCode,
-            zh_hans: TEXT.zh_hans.verificationCode,
-            lang
-          })}
-          value={values.code}
-          error={touched.code && errors.code}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <SendCodeButton email={values.email} lang={lang} type="register" />
-          }
-        />
-
-        <Form.Input
-          label="Matters ID"
-          type="text"
-          name="userName"
-          autoComplete="off"
-          value={values.userName}
-          error={touched.userName && errors.userName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.userNameHint,
-            zh_hans: TEXT.zh_hans.userNameHint,
-            lang
-          })}
-        />
-
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.password}
-              zh_hans={TEXT.zh_hans.password}
-            />
-          }
-          type="password"
-          name="password"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.password,
-            zh_hans: TEXT.zh_hans.password,
-            lang
-          })}
-          value={values.password}
-          error={touched.password && errors.password}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          hint={
-            <Translate
-              zh_hant={TEXT.zh_hant.passwordHint}
-              zh_hans={TEXT.zh_hans.passwordHint}
+          close={close}
+          rightButton={
+            <Dialog.Header.RightButton
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              onClick={handleSubmit}
+              text={
+                <Translate
+                  zh_hant={TEXT.zh_hant.nextStep}
+                  zh_hans={TEXT.zh_hans.nextStep}
+                />
+              }
+              loading={isSubmitting}
             />
           }
         />
+      )}
 
-        <Form.CheckBox
-          name="tos"
-          checked={values.tos}
-          error={touched.tos && errors.tos}
-          onChange={handleChange}
-          hint={
-            <>
-              <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
-
-              <Link {...PATHS.MISC_TOS}>
-                <a className="u-link-green" target="_blank">
-                  &nbsp;
-                  <Translate
-                    zh_hant="Matters 用戶協議和隱私政策"
-                    zh_hans="Matters 用户协议和隐私政策"
-                  />
-                </a>
-              </Link>
-            </>
-          }
-        />
-
-        {isInDialog && <LoginDialogButton />}
-        {isInPage && <LoginRedirectionButton />}
-
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-            onClick={handleSubmit}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.nextStep}
-              zh_hans={TEXT.zh_hans.nextStep}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+    </>
   )
 }

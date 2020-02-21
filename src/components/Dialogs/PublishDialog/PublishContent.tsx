@@ -81,6 +81,16 @@ const PublishContent: React.FC<PublishContentProps> = ({ close }) => {
 
   return (
     <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.publish}
+            zh_hans={TEXT.zh_hans.publish}
+          />
+        }
+        close={close}
+      />
+
       <Dialog.Content spacing={[0, 0]}>
         <PublishSlide />
       </Dialog.Content>

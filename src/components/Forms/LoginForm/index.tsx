@@ -25,22 +25,10 @@ import {
 
 import { UserLogin } from './__generated__/UserLogin'
 
-/**
- * This component is designed for Login form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <LoginForm
- *     purpose="dialog"
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  close?: () => void
 }
 
 interface FormValues {
@@ -56,9 +44,17 @@ export const USER_LOGIN = gql`
   }
 `
 
-export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
+export const LoginForm: React.FC<FormProps> = ({
+  purpose,
+  submitCallback,
+  close
+}) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
+
+  const isInDialog = purpose === 'dialog'
+  const isInPage = purpose === 'page'
+
   const {
     values,
     errors,
@@ -146,76 +142,94 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
     }
   })
 
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
+  const InnerForm = (
+    <Form onSubmit={handleSubmit}>
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.email}
+            zh_hans={TEXT.zh_hans.email}
+          />
+        }
+        type="email"
+        name="email"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterEmail,
+          zh_hans: TEXT.zh_hans.enterEmail,
+          lang
+        })}
+        required
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.password}
+            zh_hans={TEXT.zh_hans.password}
+          />
+        }
+        type="password"
+        name="password"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterPassword,
+          zh_hans: TEXT.zh_hans.enterPassword,
+          lang
+        })}
+        required
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <>
+            {isInDialog && <PasswordResetDialogButton />}
+            {isInPage && <PasswordResetRedirectButton />}
+          </>
+        }
+      />
+
+      {isInDialog && <SignUpDialogButton />}
+      {isInPage && <SignUpRedirectionButton />}
+    </Form>
+  )
+
+  if (isInPage) {
+    return InnerForm
+  }
 
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.email}
-              zh_hans={TEXT.zh_hans.email}
-            />
-          }
-          type="email"
-          name="email"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterEmail,
-            zh_hans: TEXT.zh_hans.enterEmail,
-            lang
-          })}
-          required
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.password}
-              zh_hans={TEXT.zh_hans.password}
-            />
-          }
-          type="password"
-          name="password"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPassword,
-            zh_hans: TEXT.zh_hans.enterPassword,
-            lang
-          })}
-          required
-          value={values.password}
-          error={touched.password && errors.password}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <>
-              {isInDialog && <PasswordResetDialogButton />}
-              {isInPage && <PasswordResetRedirectButton />}
-            </>
-          }
-        />
-
-        {isInDialog && <SignUpDialogButton />}
-        {isInPage && <SignUpRedirectionButton />}
-
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
+    <>
+      {close && (
+        <Dialog.Header
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.login}
               zh_hans={TEXT.zh_hans.login}
             />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+          }
+          close={close}
+          rightButton={
+            <Dialog.Header.RightButton
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              onClick={handleSubmit}
+              text={
+                <Translate
+                  zh_hant={TEXT.zh_hant.confirm}
+                  zh_hans={TEXT.zh_hans.confirm}
+                />
+              }
+              loading={isSubmitting}
+            />
+          }
+        />
+      )}
+
+      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+    </>
   )
 }

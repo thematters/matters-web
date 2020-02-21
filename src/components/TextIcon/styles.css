@@ -34,6 +34,11 @@
     font-size: var(--font-size-md);
   }
 }
+.size-md-s {
+  & .text {
+    font-size: var(--font-size-md-s);
+  }
+}
 .size-xm {
   & .text {
     font-size: var(--font-size-xm);

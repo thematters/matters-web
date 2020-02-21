@@ -168,71 +168,83 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   }
 
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form id="tag-article-dialog" onSubmit={handleSubmit}>
-        <Form.DropdownInput
-          type="search"
-          name="name"
-          placeholder={translate({
-            zh_hant: '搜尋作品標題…',
-            zh_hans: '搜索作品标题…',
-            lang
-          })}
-          value={values.name}
-          error={touched.name && errors.name}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          dropdownAppendTo="tag-article-dialog"
-          dropdownAutoSizing={true}
-          dropdownCallback={onClickMenuItem}
-          DropdownContent={DropdownContent}
-          query={SEARCH_ARTICLES}
-        />
+    <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.addArticleTag}
+            zh_hans={TEXT.zh_hans.addArticleTag}
+          />
+        }
+        close={close}
+      />
 
-        <ul>
-          {selectedArticles.map((article, index) => (
-            <li key={index}>
-              <ArticleDigestDropdown
-                article={article}
-                titleTextSize="md-s"
-                disabled
-                extraButton={
-                  <ArticleDigestDropdown.OpenExternalLink article={article} />
-                }
-                borderRadius="xtight"
-                bgColor="grey-lighter"
-                spacing={['tight', 'tight']}
+      <Dialog.Content spacing={[0, 0]}>
+        <Form id="tag-article-dialog" onSubmit={handleSubmit}>
+          <Form.DropdownInput
+            type="search"
+            name="name"
+            placeholder={translate({
+              zh_hant: '搜尋作品標題…',
+              zh_hans: '搜索作品标题…',
+              lang
+            })}
+            value={values.name}
+            error={touched.name && errors.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            dropdownAppendTo="tag-article-dialog"
+            dropdownAutoSizing={true}
+            dropdownCallback={onClickMenuItem}
+            DropdownContent={DropdownContent}
+            query={SEARCH_ARTICLES}
+          />
+
+          <ul>
+            {selectedArticles.map((article, index) => (
+              <li key={index}>
+                <ArticleDigestDropdown
+                  article={article}
+                  titleTextSize="md-s"
+                  disabled
+                  extraButton={
+                    <ArticleDigestDropdown.OpenExternalLink article={article} />
+                  }
+                  borderRadius="xtight"
+                  bgColor="grey-lighter"
+                  spacing={['tight', 'tight']}
+                />
+
+                <span className="delete-handler">
+                  <Button
+                    spacing={['base', 0]}
+                    aria-label="刪除"
+                    onClick={() => onDelete(article)}
+                  >
+                    <Icon.Clear color="black" />
+                  </Button>
+                </span>
+              </li>
+            ))}
+
+            <style jsx>{styles}</style>
+          </ul>
+
+          <Dialog.Footer>
+            <Dialog.Footer.Button
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
+            >
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
               />
-
-              <span className="delete-handler">
-                <Button
-                  spacing={['base', 0]}
-                  aria-label="刪除"
-                  onClick={() => onDelete(article)}
-                >
-                  <Icon.Clear color="black" />
-                </Button>
-              </span>
-            </li>
-          ))}
-
-          <style jsx>{styles}</style>
-        </ul>
-
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.confirm}
-              zh_hans={TEXT.zh_hans.confirm}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+            </Dialog.Footer.Button>
+          </Dialog.Footer>
+        </Form>
+      </Dialog.Content>
+    </>
   )
 }
 

@@ -52,11 +52,9 @@ export const ChangePasswordDialog = ({
     })
     setStep('reset')
   }
-  const backPreviousStep = () => {
-    setStep('request')
-  }
-  const showHeader = step !== 'complete'
-  const Title = (
+
+  const headerHidden = step === 'complete'
+  const title = (
     <Translate
       zh_hant={TEXT.zh_hant.changePassword}
       zh_hans={TEXT.zh_hans.changePassword}
@@ -68,32 +66,36 @@ export const ChangePasswordDialog = ({
       {children && children({ open })}
 
       <Dialog
-        title={Title}
-        showHeader={showHeader}
         isOpen={showDialog}
         onDismiss={close}
-        size={showHeader ? 'lg' : 'sm'}
+        size={headerHidden ? 'sm' : 'lg'}
       >
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            purpose="change"
+            type="reset"
+            purpose="dialog"
             submitCallback={requestCodeCallback}
+            close={close}
           />
         )}
 
         {step === 'reset' && (
           <PasswordChangeConfirmForm
             codeId={data.request.codeId}
-            backPreviousStep={backPreviousStep}
+            type="reset"
+            purpose="dialog"
             submitCallback={() => setStep('complete')}
+            close={close}
           />
         )}
 
         {step === 'complete' && (
           <>
+            <Dialog.Header title={title} close={close} headerHidden />
+
             <Dialog.Message
-              headline={Title}
+              headline={title}
               description={
                 <Translate
                   zh_hant={TEXT.zh_hant.changePasswordSuccess}
@@ -108,8 +110,8 @@ export const ChangePasswordDialog = ({
                 onClick={close}
               >
                 <Translate
-                  zh_hant={TEXT.zh_hant.cancel}
-                  zh_hans={TEXT.zh_hans.cancel}
+                  zh_hant={TEXT.zh_hant.close}
+                  zh_hans={TEXT.zh_hans.close}
                 />
               </Dialog.Footer.Button>
             </Dialog.Footer>

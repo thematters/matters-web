@@ -1,14 +1,10 @@
 import { useContext, useState } from 'react'
 
-import {
-  Dialog,
-  EmailChangeConfirmForm,
-  EmailChangeRequestForm,
-  Translate,
-  ViewerContext
-} from '~/components'
+import { Dialog, ViewerContext } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import Complete from './Complete'
+import Confirm from './Confirm'
+import Request from './Request'
 
 interface ChangeEmailDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -28,15 +24,7 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
       next: 'complete'
     }
   })
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => {
-    setStep('request')
-    setShowDialog(true)
-  }
-  const close = () => setShowDialog(false)
-
-  const requestCallback = (params: any) => {
-    const { codeId } = params
+  const requestCallback = (codeId: string) => {
     setData(prev => {
       return {
         ...prev,
@@ -49,65 +37,39 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
     setStep('confirm')
   }
 
-  const confirmCallback = () => setStep('complete')
-  const showHeader = step !== 'complete'
-  const Title = (
-    <Translate
-      zh_hant={TEXT.zh_hant.changeEmail}
-      zh_hans={TEXT.zh_hans.changeEmail}
-    />
-  )
+  const [showDialog, setShowDialog] = useState(false)
+  const open = () => {
+    setStep('request')
+    setShowDialog(true)
+  }
+  const close = () => setShowDialog(false)
 
   return (
     <>
       {children({ open })}
 
       <Dialog
-        title={Title}
-        showHeader={showHeader}
         isOpen={showDialog}
         onDismiss={close}
-        size={showHeader ? 'lg' : 'sm'}
+        size={step === 'complete' ? 'sm' : 'lg'}
       >
         {step === 'request' && (
-          <EmailChangeRequestForm
+          <Request
             defaultEmail={data.request.email}
             submitCallback={requestCallback}
+            close={close}
           />
         )}
 
         {step === 'confirm' && (
-          <EmailChangeConfirmForm
+          <Confirm
             oldData={data.request}
-            submitCallback={confirmCallback}
+            submitCallback={() => setStep('complete')}
+            close={close}
           />
         )}
 
-        {step === 'complete' && (
-          <>
-            <Dialog.Message
-              headline={Title}
-              description={
-                <Translate
-                  zh_hant={TEXT.zh_hant.changeEmailSuccess}
-                  zh_hans={TEXT.zh_hans.changeEmailSuccess}
-                />
-              }
-            />
-            <Dialog.Footer>
-              <Dialog.Footer.Button
-                bgColor="grey-lighter"
-                textColor="black"
-                onClick={close}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.cancel}
-                  zh_hans={TEXT.zh_hans.cancel}
-                />
-              </Dialog.Footer.Button>
-            </Dialog.Footer>
-          </>
-        )}
+        {step === 'complete' && <Complete close={close} />}
       </Dialog>
     </>
   )

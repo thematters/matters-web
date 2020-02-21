@@ -32,7 +32,9 @@ import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfile
  */
 
 interface FormProps {
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  close?: () => void
 }
 
 interface FormValues {
@@ -53,10 +55,14 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const SignUpProfileForm: React.FC<FormProps> = formProps => {
+export const SignUpProfileForm: React.FC<FormProps> = ({
+  purpose,
+  submitCallback,
+  close
+}) => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const { submitCallback } = formProps
+  const isInPage = purpose === 'page'
 
   const {
     values,
@@ -111,73 +117,94 @@ export const SignUpProfileForm: React.FC<FormProps> = formProps => {
     }
   })
 
+  const InnerForm = (
+    <Form onSubmit={handleSubmit}>
+      <AvatarUploadField
+        onUpload={assetId => {
+          setFieldValue('avatar', assetId)
+        }}
+      />
+
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.displayName}
+            zh_hans={TEXT.zh_hans.displayName}
+          />
+        }
+        type="text"
+        name="displayName"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterDisplayName,
+          zh_hans: TEXT.zh_hans.enterDisplayName,
+          lang
+        })}
+        value={values.displayName}
+        error={touched.displayName && errors.displayName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
+      <Form.Textarea
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.userProfile}
+            zh_hans={TEXT.zh_hans.userProfile}
+          />
+        }
+        name="description"
+        placeholder={translate({
+          zh_hant: '介紹你自己，獲得更多社區關注',
+          zh_hans: '介绍你自己，获得更多社区关注',
+          lang
+        })}
+        value={values.description}
+        error={touched.description && errors.description}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        hint={
+          <Translate
+            zh_hant={TEXT.zh_hant.descriptionHint}
+            zh_hans={TEXT.zh_hans.descriptionHint}
+          />
+        }
+      />
+    </Form>
+  )
+
+  if (isInPage) {
+    return InnerForm
+  }
+
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form onSubmit={handleSubmit}>
-        <AvatarUploadField
-          onUpload={assetId => {
-            setFieldValue('avatar', assetId)
-          }}
-        />
-
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.displayName}
-              zh_hans={TEXT.zh_hans.displayName}
-            />
-          }
-          type="text"
-          name="displayName"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterDisplayName,
-            zh_hans: TEXT.zh_hans.enterDisplayName,
-            lang
-          })}
-          value={values.displayName}
-          error={touched.displayName && errors.displayName}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-
-        <Form.Textarea
-          label={
+    <>
+      {close && (
+        <Dialog.Header
+          title={
             <Translate
               zh_hant={TEXT.zh_hant.userProfile}
               zh_hans={TEXT.zh_hans.userProfile}
             />
           }
-          name="description"
-          placeholder={translate({
-            zh_hant: '介紹你自己，獲得更多社區關注',
-            zh_hans: '介绍你自己，获得更多社区关注',
-            lang
-          })}
-          value={values.description}
-          error={touched.description && errors.description}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          hint={
-            <Translate
-              zh_hant={TEXT.zh_hant.descriptionHint}
-              zh_hans={TEXT.zh_hans.descriptionHint}
+          close={close}
+          rightButton={
+            <Dialog.Header.RightButton
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              onClick={handleSubmit}
+              text={
+                <Translate
+                  zh_hant={TEXT.zh_hant.nextStep}
+                  zh_hans={TEXT.zh_hans.nextStep}
+                />
+              }
+              loading={isSubmitting}
             />
           }
         />
+      )}
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.nextStep}
-              zh_hans={TEXT.zh_hans.nextStep}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+    </>
   )
 }

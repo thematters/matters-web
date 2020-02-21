@@ -66,6 +66,16 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.termAndPrivacy}
+            zh_hans={TEXT.zh_hans.termAndPrivacy}
+          />
+        }
+        close={close}
+      />
+
       <Dialog.Content>
         <p className="hint">
           <Translate
@@ -116,16 +126,7 @@ const TermAlertDialog = () => {
   const [showDialog, setShowDialog] = useState(disagreedToS)
 
   return (
-    <Dialog
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.termAndPrivacy}
-          zh_hans={TEXT.zh_hans.termAndPrivacy}
-        />
-      }
-      isOpen={showDialog}
-      onDismiss={close}
-    >
+    <Dialog isOpen={showDialog} onDismiss={close}>
       <TermContent close={close} />
     </Dialog>
   )

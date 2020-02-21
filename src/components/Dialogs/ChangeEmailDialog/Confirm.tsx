@@ -22,6 +22,7 @@ import { ChangeEmail } from './__generated__/ChangeEmail'
 interface FormProps {
   oldData: { email: string; codeId: string }
   submitCallback: () => void
+  close: () => void
 }
 
 interface FormValues {
@@ -40,10 +41,7 @@ const CHANGE_EMAIL = gql`
   }
 `
 
-export const EmailChangeConfirmForm: React.FC<FormProps> = ({
-  oldData,
-  submitCallback
-}) => {
+const Confirm: React.FC<FormProps> = ({ oldData, submitCallback, close }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
@@ -111,69 +109,86 @@ export const EmailChangeConfirmForm: React.FC<FormProps> = ({
     }
   })
 
-  return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.email}
-              zh_hans={TEXT.zh_hans.email}
-            />
-          }
-          type="email"
-          name="email"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterNewEmail,
-            zh_hans: TEXT.zh_hans.enterNewEmail,
-            lang
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.verificationCode}
-              zh_hans={TEXT.zh_hans.verificationCode}
-            />
-          }
-          type="text"
-          name="code"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterVerificationCode,
-            zh_hans: TEXT.zh_hans.enterVerificationCode,
-            lang
-          })}
-          value={values.email}
-          error={touched.email && errors.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          extraButton={
-            <SendCodeButton
-              email={values.email}
-              lang={lang}
-              type="email_reset_confirm"
-            />
-          }
-        />
+  const InnerForm = (
+    <Form onSubmit={handleSubmit}>
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.email}
+            zh_hans={TEXT.zh_hans.email}
+          />
+        }
+        type="email"
+        name="email"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterNewEmail,
+          zh_hans: TEXT.zh_hans.enterNewEmail,
+          lang
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.verificationCode}
+            zh_hans={TEXT.zh_hans.verificationCode}
+          />
+        }
+        type="text"
+        name="code"
+        autoComplete="off"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterVerificationCode,
+          zh_hans: TEXT.zh_hans.enterVerificationCode,
+          lang
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <SendCodeButton
+            email={values.email}
+            lang={lang}
+            type="email_reset_confirm"
+          />
+        }
+      />
+    </Form>
+  )
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
+  return (
+    <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.changeEmail}
+            zh_hans={TEXT.zh_hans.changeEmail}
+          />
+        }
+        close={close}
+        rightButton={
+          <Dialog.Header.RightButton
             type="submit"
             disabled={!_isEmpty(errors) || isSubmitting}
+            onClick={handleSubmit}
+            text={
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
+              />
+            }
             loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.done}
-              zh_hans={TEXT.zh_hans.done}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+          />
+        }
+      />
+
+      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+    </>
   )
 }
+
+export default Confirm

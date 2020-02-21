@@ -18,7 +18,7 @@ import styles from './styles.css'
  */
 
 type InputProps = {
-  type: 'text' | 'password' | 'email'
+  type: 'text' | 'password' | 'email' | 'number'
   name: string
 } & FieldProps &
   React.DetailedHTMLProps<

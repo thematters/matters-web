@@ -4,5 +4,6 @@ form {
 
   @media (--sm-up) {
     background: var(--color-white);
+    overflow: initial;
   }
 }

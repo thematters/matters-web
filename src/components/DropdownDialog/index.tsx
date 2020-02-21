@@ -30,7 +30,7 @@ import { KEYCODES, TEXT } from '~/common/enums'
  *     dialog={{
  *       content: <DialogContent />,
  *       title: ....,
- *       showHeader: false
+ *       headerHidden: false
  *     }}
  *   >
  *     <Button>
@@ -58,6 +58,7 @@ type DropdownDialogProps = {
   dropdown: Omit<PopperProps, 'children'>
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
     content: React.ReactNode
+    title: string | React.ReactNode
   }
 } & DropdownDialogChildren
 
@@ -153,6 +154,8 @@ export const DropdownDialog = ({
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
         <Content>
+          <Dialog.Header title={dialog.title} headerHidden close={close} />
+
           {dialog.content}
 
           <Dialog.Footer>

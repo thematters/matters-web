@@ -20,7 +20,9 @@ type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
+
   const { updateHeaderState } = useContext(HeaderContext)
+
   useEffect(() => {
     updateHeaderState({ type: 'signUp' })
     return () => updateHeaderState({ type: 'default' })
@@ -62,6 +64,7 @@ const SignUp = () => {
 
         {step === 'profile' && (
           <SignUpProfileForm
+            purpose="page"
             submitCallback={() => {
               setStep('setupLikeCoin')
             }}
@@ -70,6 +73,7 @@ const SignUp = () => {
 
         {step === 'setupLikeCoin' && (
           <SetupLikeCoin
+            purpose="page"
             submitCallback={() => {
               setStep('complete')
             }}

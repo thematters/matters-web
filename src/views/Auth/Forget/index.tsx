@@ -52,9 +52,6 @@ const Forget = () => {
     })
     setStep('reset')
   }
-  const backPreviousStep = (event: any) => {
-    setStep('request')
-  }
 
   return (
     <main className="l-row full">
@@ -79,7 +76,8 @@ const Forget = () => {
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            purpose="forget"
+            type="forget"
+            purpose="page"
             submitCallback={requestCodeCallback}
           />
         )}
@@ -87,7 +85,8 @@ const Forget = () => {
         {step === 'reset' && (
           <PasswordChangeConfirmForm
             codeId={data.request.codeId}
-            backPreviousStep={backPreviousStep}
+            type="forget"
+            purpose="page"
             submitCallback={() => setStep('complete')}
           />
         )}

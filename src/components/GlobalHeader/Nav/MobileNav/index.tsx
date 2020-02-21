@@ -22,8 +22,7 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
       }}
       dialog={{
         content: <DropdownContent type="dialog" unread={unread} />,
-        title: <Translate zh_hant="菜單" zh_hans="菜单" />,
-        showHeader: false
+        title: <Translate zh_hant="菜單" zh_hans="菜单" />
       }}
     >
       {({ open, ref }) => (

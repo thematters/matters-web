@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { SignUpComplete } from '~/components'
+import { Dialog, SignUpComplete, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import Binding from './Binding'
@@ -12,10 +12,17 @@ import Select from './Select'
 type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 interface Props {
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  close?: () => void
 }
 
-export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
+export const SetupLikeCoin: React.FC<Props> = ({
+  purpose,
+  submitCallback,
+  close
+}) => {
+  const isInDialog = purpose === 'dialog'
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -39,6 +46,18 @@ export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
 
   return (
     <>
+      {isInDialog && close && (
+        <Dialog.Header
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.setupLikeCoin}
+              zh_hans={TEXT.zh_hans.setupLikeCoin}
+            />
+          }
+          close={close}
+        />
+      )}
+
       {step === 'select' && (
         <Select
           startGenerate={() => setStep('generating')}

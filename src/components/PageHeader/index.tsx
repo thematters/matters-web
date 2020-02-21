@@ -15,9 +15,10 @@ interface PageHeaderProps {
 export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   description,
-  children,
   is = 'h1',
-  hasNoBorder = false
+  hasNoBorder = false,
+
+  children
 }) => {
   const headerClass = classNames({
     hasNoBorder: !!hasNoBorder

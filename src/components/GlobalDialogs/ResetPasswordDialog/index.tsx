@@ -46,13 +46,9 @@ const ResetPasswordDialog = () => {
     setStep('reset')
   }
 
-  const backPreviousStep = () => {
-    setStep('request')
-  }
+  const headerHidden = step === 'complete'
 
-  const showHeader = step !== 'complete'
-
-  const Title = (
+  const title = (
     <Translate
       zh_hant={TEXT.zh_hant.resetPassword}
       zh_hans={TEXT.zh_hans.resetPassword}
@@ -71,32 +67,36 @@ const ResetPasswordDialog = () => {
 
   return (
     <Dialog
-      title={Title}
-      showHeader={showHeader}
       isOpen={showDialog}
       onDismiss={close}
-      size={showHeader ? 'lg' : 'sm'}
+      size={headerHidden ? 'sm' : 'lg'}
     >
       {step === 'request' && (
         <PasswordChangeRequestForm
           defaultEmail={data.request.email}
-          purpose="forget"
+          type="forget"
+          purpose="dialog"
           submitCallback={requestCodeCallback}
+          close={close}
         />
       )}
 
       {step === 'reset' && (
         <PasswordChangeConfirmForm
           codeId={data.request.codeId}
-          backPreviousStep={backPreviousStep}
           submitCallback={() => setStep('complete')}
+          type="forget"
+          purpose="dialog"
+          close={close}
         />
       )}
 
       {step === 'complete' && (
         <>
+          <Dialog.Header title={title} close={close} headerHidden />
+
           <Dialog.Message
-            headline={Title}
+            headline={title}
             description={
               <Translate
                 zh_hant={TEXT.zh_hant.resetPasswordSuccess}
@@ -111,8 +111,8 @@ const ResetPasswordDialog = () => {
               onClick={close}
             >
               <Translate
-                zh_hant={TEXT.zh_hant.cancel}
-                zh_hans={TEXT.zh_hans.cancel}
+                zh_hant={TEXT.zh_hant.close}
+                zh_hans={TEXT.zh_hans.close}
               />
             </Dialog.Footer.Button>
           </Dialog.Footer>

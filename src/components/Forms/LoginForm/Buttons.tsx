@@ -44,6 +44,12 @@ export const PasswordResetRedirectButton = () => (
 export const SignUpDialogButton = () => (
   <Form.ClickableArea
     title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
+    rightText={
+      <Translate
+        zh_hant={TEXT.zh_hant.register}
+        zh_hans={TEXT.zh_hans.register}
+      />
+    }
     spacing={['base', 0]}
     onClick={() => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
@@ -55,6 +61,12 @@ export const SignUpDialogButton = () => (
 export const SignUpRedirectionButton = () => (
   <Form.ClickableArea
     title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
+    rightText={
+      <Translate
+        zh_hant={TEXT.zh_hant.register}
+        zh_hans={TEXT.zh_hans.register}
+      />
+    }
     spacing={['base', 0]}
     {...appendTarget(PATHS.AUTH_SIGNUP)}
   />

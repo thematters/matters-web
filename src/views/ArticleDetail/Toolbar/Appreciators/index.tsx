@@ -45,7 +45,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   }
 
   return (
-    <AppreciatorsDialog count={count}>
+    <AppreciatorsDialog>
       {({ open }) => (
         <button
           type="button"

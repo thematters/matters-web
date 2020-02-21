@@ -24,16 +24,17 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.share}
-            zh_hans={TEXT.zh_hans.share}
-          />
-        }
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <Dialog isOpen={showDialog} onDismiss={close}>
+        <Dialog.Header
+          title={
+            <Translate
+              zh_hant={TEXT.zh_hant.share}
+              zh_hans={TEXT.zh_hans.share}
+            />
+          }
+          close={close}
+        />
+
         <Dialog.Content spacing={['xloose', 'xloose']}>
           <p>
             <Translate

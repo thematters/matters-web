@@ -11,13 +11,24 @@ import styles from './styles.css'
 
 interface LikeCoinTermProps {
   nextStep: () => void
+  close: () => void
 }
 
-const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({ nextStep }) => {
+const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({ nextStep, close }) => {
   const { lang } = useContext(LanguageContext)
 
   return (
     <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant="Matters 與 LikeCoin 合作了！"
+            zh_hans="Matters 与 LikeCoin 合作了！"
+          />
+        }
+        close={close}
+      />
+
       <Dialog.Content>
         <section
           className="container u-content"

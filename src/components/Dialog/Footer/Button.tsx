@@ -1,13 +1,13 @@
 import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
-type DialogButtonProps = {
+type DialogFooterButtonProps = {
   textColor?: 'black' | 'white'
   bgColor?: 'green' | 'grey-lighter'
 
   loading?: boolean
 } & ButtonProps
 
-const DialogButton: React.FC<DialogButtonProps> = ({
+const DialogFooterButton: React.FC<DialogFooterButtonProps> = ({
   loading,
   textColor = 'white',
   bgColor = 'green',
@@ -33,4 +33,4 @@ const DialogButton: React.FC<DialogButtonProps> = ({
   </Button>
 )
 
-export default DialogButton
+export default DialogFooterButton

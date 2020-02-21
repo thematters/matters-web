@@ -33,8 +33,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       }}
       dialog={{
         content: <DropdownMenu type="dialog" />,
-        title: '我的',
-        showHeader: false
+        title: '我的'
       }}
     >
       {({ open, ref }) => (

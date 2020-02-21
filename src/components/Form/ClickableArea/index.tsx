@@ -25,7 +25,7 @@ const ClickableArea: React.FC<ClickableAreaProps> = ({
     <section className={`container ${collapseTop ? 'collapse-top' : ''}`}>
       <section className="left">
         <h5>{title}</h5>
-        <p>{subtitle}</p>
+        {subtitle && <p>{subtitle}</p>}
       </section>
 
       <section className="right">

@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-
-import { TEXT } from '~/common/enums'
+import { Dialog } from '~/components'
 
 import PublishContent from './PublishContent'
 import styles from './styles.css'
@@ -20,16 +18,7 @@ export const PublishDialog = ({ children }: PublishDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.publish}
-            zh_hans={TEXT.zh_hans.publish}
-          />
-        }
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <Dialog isOpen={showDialog} onDismiss={close}>
         <PublishContent close={close} />
       </Dialog>
 

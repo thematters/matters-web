@@ -17,8 +17,10 @@ import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
   codeId: string
-  backPreviousStep: (event: any) => void
+  type: 'forget' | 'reset'
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  close?: () => void
 }
 
 interface FormValues {
@@ -34,11 +36,15 @@ export const RESET_PASSWORD = gql`
 
 export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   codeId,
-  backPreviousStep,
-  submitCallback
+  type,
+  purpose,
+  submitCallback,
+  close
 }) => {
   const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
   const { lang } = useContext(LanguageContext)
+  const isForget = type === 'forget'
+  const isInPage = purpose === 'page'
 
   const {
     values,
@@ -91,78 +97,95 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     }
   })
 
+  const InnerForm = (
+    <Form onSubmit={handleSubmit}>
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.password}
+            zh_hans={TEXT.zh_hans.password}
+          />
+        }
+        type="password"
+        name="password"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterPassword,
+          zh_hans: TEXT.zh_hans.enterPassword,
+          lang
+        })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+      <Form.Input
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.newPassword}
+            zh_hans={TEXT.zh_hans.newPassword}
+          />
+        }
+        type="password"
+        name="comparedPassword"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterPasswordAgain,
+          zh_hans: TEXT.zh_hans.enterPasswordAgain,
+          lang
+        })}
+        value={values.comparedPassword}
+        error={touched.comparedPassword && errors.comparedPassword}
+        hint={
+          <Translate
+            zh_hant={TEXT.zh_hant.passwordHint}
+            zh_hans={TEXT.zh_hans.passwordHint}
+          />
+        }
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
+  )
+
+  if (isInPage) {
+    return InnerForm
+  }
+
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.password}
-              zh_hans={TEXT.zh_hans.password}
+    <>
+      {close && (
+        <Dialog.Header
+          title={
+            isForget ? (
+              <Translate
+                zh_hant={TEXT.zh_hant.forgetPassword}
+                zh_hans={TEXT.zh_hans.forgetPassword}
+              />
+            ) : (
+              <Translate
+                zh_hant={TEXT.zh_hant.resetPassword}
+                zh_hans={TEXT.zh_hans.resetPassword}
+              />
+            )
+          }
+          close={close}
+          rightButton={
+            <Dialog.Header.RightButton
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              onClick={handleSubmit}
+              text={
+                <Translate
+                  zh_hant={TEXT.zh_hant.confirm}
+                  zh_hans={TEXT.zh_hans.confirm}
+                />
+              }
+              loading={isSubmitting}
             />
           }
-          type="password"
-          name="password"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPassword,
-            zh_hans: TEXT.zh_hans.enterPassword,
-            lang
-          })}
-          value={values.password}
-          error={touched.password && errors.password}
-          onBlur={handleBlur}
-          onChange={handleChange}
         />
-        <Form.Input
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.newPassword}
-              zh_hans={TEXT.zh_hans.newPassword}
-            />
-          }
-          type="password"
-          name="comparedPassword"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPasswordAgain,
-            zh_hans: TEXT.zh_hans.enterPasswordAgain,
-            lang
-          })}
-          value={values.comparedPassword}
-          error={touched.comparedPassword && errors.comparedPassword}
-          hint={
-            <Translate
-              zh_hant={TEXT.zh_hant.passwordHint}
-              zh_hans={TEXT.zh_hans.passwordHint}
-            />
-          }
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+      )}
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            onClick={backPreviousStep}
-            bgColor="grey-lighter"
-            textColor="black"
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.previousStep}
-              zh_hans={TEXT.zh_hans.previousStep}
-            />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.done}
-              zh_hans={TEXT.zh_hans.done}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+    </>
   )
 }

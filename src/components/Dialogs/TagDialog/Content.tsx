@@ -201,67 +201,80 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form id="tag-dialog" onSubmit={handleSubmit}>
-        <Form.DropdownInput
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.tagName}
-              zh_hans={TEXT.zh_hans.tagName}
-            />
-          }
-          type="text"
-          name="newContent"
-          placeholder={translate({
-            zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
-            zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
-            lang
-          })}
-          value={values.newContent}
-          error={touched.newContent && errors.newContent}
-          onBlur={e => {
-            setFieldValue('content', e.target.value.trim())
-            handleBlur(e)
-          }}
-          onChange={handleChange}
-          dropdownAppendTo="tag-dialog"
-          dropdownAutoSizing={true}
-          DropdownContent={DropdownContent}
-          query={SEARCH_TAGS}
-        />
-        <Form.Textarea
-          label={
-            <Translate
-              zh_hant={TEXT.zh_hant.tagDescription}
-              zh_hans={TEXT.zh_hans.tagDescription}
-            />
-          }
-          name="newDescription"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
-            zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
-            lang
-          })}
-          value={values.newDescription}
-          error={touched.newDescription && errors.newDescription}
-          onBlur={handleBlur}
-          onChange={handleChange}
-        />
+    <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={content ? TEXT.zh_hant.editTag : TEXT.zh_hant.createTag}
+            zh_hans={content ? TEXT.zh_hans.editTag : TEXT.zh_hans.createTag}
+          />
+        }
+        close={close}
+      />
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            type="submit"
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          >
-            <Translate
-              zh_hant={TEXT.zh_hant.confirm}
-              zh_hans={TEXT.zh_hans.confirm}
-            />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </Form>
-    </Dialog.Content>
+      <Dialog.Content spacing={[0, 0]}>
+        <Form id="tag-dialog" onSubmit={handleSubmit}>
+          <Form.DropdownInput
+            label={
+              <Translate
+                zh_hant={TEXT.zh_hant.tagName}
+                zh_hans={TEXT.zh_hans.tagName}
+              />
+            }
+            type="text"
+            name="newContent"
+            placeholder={translate({
+              zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
+              zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
+              lang
+            })}
+            value={values.newContent}
+            error={touched.newContent && errors.newContent}
+            onBlur={e => {
+              setFieldValue('content', e.target.value.trim())
+              handleBlur(e)
+            }}
+            onChange={handleChange}
+            dropdownAppendTo="tag-dialog"
+            dropdownAutoSizing={true}
+            DropdownContent={DropdownContent}
+            query={SEARCH_TAGS}
+          />
+
+          <Form.Textarea
+            label={
+              <Translate
+                zh_hant={TEXT.zh_hant.tagDescription}
+                zh_hans={TEXT.zh_hans.tagDescription}
+              />
+            }
+            name="newDescription"
+            placeholder={translate({
+              zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
+              zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
+              lang
+            })}
+            value={values.newDescription}
+            error={touched.newDescription && errors.newDescription}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+
+          <Dialog.Footer>
+            <Dialog.Footer.Button
+              type="submit"
+              disabled={!_isEmpty(errors) || isSubmitting}
+              loading={isSubmitting}
+            >
+              <Translate
+                zh_hant={TEXT.zh_hant.confirm}
+                zh_hans={TEXT.zh_hans.confirm}
+              />
+            </Dialog.Footer.Button>
+          </Dialog.Footer>
+        </Form>
+      </Dialog.Content>
+    </>
   )
 }
 

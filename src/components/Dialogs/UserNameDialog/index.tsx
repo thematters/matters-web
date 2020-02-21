@@ -1,8 +1,12 @@
 import { useState } from 'react'
 
-import { Dialog, Translate, UserNameChangeConfirmForm } from '~/components'
+import { Dialog, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
+
+import Ask from './Ask'
+import Complete from './Complete'
+import Confirm from './Confirm'
 
 type Step = 'ask' | 'confirm' | 'complete'
 
@@ -13,6 +17,7 @@ interface UserNameDialogProps {
 export const UserNameDialog = ({ children }: UserNameDialogProps) => {
   const [step, setStep] = useState<Step>('ask')
   const [showDialog, setShowDialog] = useState(false)
+
   const open = () => {
     setStep('ask')
     setShowDialog(true)
@@ -21,9 +26,8 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
     setShowDialog(false)
   }
 
-  const confirmCallback = () => setStep('complete')
-  const showHeader = step !== 'ask' && step !== 'complete'
-  const Title = (
+  const headerHidden = step === 'ask' || step === 'complete'
+  const title = (
     <Translate
       zh_hant={TEXT.zh_hant.changeUserName}
       zh_hans={TEXT.zh_hans.changeUserName}
@@ -35,77 +39,23 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
       {children({ open })}
 
       <Dialog
-        title={Title}
-        showHeader={showHeader}
         isOpen={showDialog}
         onDismiss={close}
-        size={showHeader ? 'lg' : 'sm'}
+        size={headerHidden ? 'sm' : 'lg'}
       >
         {step === 'ask' && (
-          <>
-            <Dialog.Message
-              headline={Title}
-              description={
-                <Translate
-                  zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
-                  zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
-                />
-              }
-            />
-
-            <Dialog.Footer>
-              <Dialog.Footer.Button
-                onClick={() => {
-                  setStep('confirm')
-                }}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.confirm}
-                  zh_hans={TEXT.zh_hans.confirm}
-                />
-              </Dialog.Footer.Button>
-
-              <Dialog.Footer.Button
-                bgColor="grey-lighter"
-                textColor="black"
-                onClick={close}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.cancel}
-                  zh_hans={TEXT.zh_hans.cancel}
-                />
-              </Dialog.Footer.Button>
-            </Dialog.Footer>
-          </>
+          <Ask
+            title={title}
+            nextStep={() => setStep('confirm')}
+            close={close}
+          />
         )}
+
         {step === 'confirm' && (
-          <UserNameChangeConfirmForm submitCallback={confirmCallback} />
+          <Confirm submitCallback={() => setStep('complete')} />
         )}
-        {step === 'complete' && (
-          <>
-            <Dialog.Message
-              headline={Title}
-              description={
-                <Translate
-                  zh_hant={TEXT.zh_hant.changeUserNameSuccess}
-                  zh_hans={TEXT.zh_hans.changeUserNameSuccess}
-                />
-              }
-            />
-            <Dialog.Footer>
-              <Dialog.Footer.Button
-                bgColor="grey-lighter"
-                textColor="black"
-                onClick={close}
-              >
-                <Translate
-                  zh_hant={TEXT.zh_hant.cancel}
-                  zh_hans={TEXT.zh_hans.cancel}
-                />
-              </Dialog.Footer.Button>
-            </Dialog.Footer>
-          </>
-        )}
+
+        {step === 'complete' && <Complete title={title} close={close} />}
       </Dialog>
     </>
   )

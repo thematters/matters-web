@@ -109,8 +109,7 @@ const DropdownActions = ({
             zh_hant={TEXT.zh_hant.moreActions}
             zh_hans={TEXT.zh_hans.moreActions}
           />
-        ),
-        showHeader: false
+        )
       }}
     >
       {({ open, ref }) => (
