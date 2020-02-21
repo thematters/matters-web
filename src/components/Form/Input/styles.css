@@ -1,32 +1,7 @@
-.container {
-  margin: var(--spacing-loose) 0;
-}
-
-header {
-  @mixin flex-center-space-between;
-  margin: 0 var(--spacing-base) var(--spacing-x-tight);
-
-  & label {
-    @mixin fomr-input-label;
-  }
-}
-
 input {
   @mixin form-input;
 
   @media (--sm-up) {
     @mixin form-input-grey;
-  }
-}
-
-footer {
-  margin: var(--spacing-x-tight) var(--spacing-base) 0;
-
-  & .error {
-    @mixin form-input-error;
-  }
-
-  & .hint {
-    @mixin form-input-hint;
   }
 }

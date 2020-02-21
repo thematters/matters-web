@@ -11,6 +11,8 @@
   }
 
   @media (--sm-up) {
+    padding: var(--spacing-base);
+
     background: var(--color-grey-lighter);
   }
 }

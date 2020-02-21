@@ -59,7 +59,7 @@ const SignUpDialog = () => {
 
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
-    setStep('setupLikeCoin')
+    setStep('signUp')
     setShowDialog(true)
   }
   const close = () => {

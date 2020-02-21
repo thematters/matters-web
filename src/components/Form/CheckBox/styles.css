@@ -1,15 +1,3 @@
-.container {
-  margin: var(--spacing-base);
-}
-
 label {
   display: block;
-}
-
-footer {
-  margin: var(--spacing-x-tight) 0 0;
-
-  & .error {
-    @mixin form-input-error;
-  }
 }

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, Form, Spinner, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -55,7 +55,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   }
 
   return (
-    <>
+    <Form>
       <Dialog.Content>
         <section className="container">
           {!error && (
@@ -96,7 +96,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
-    </>
+    </Form>
   )
 }
 

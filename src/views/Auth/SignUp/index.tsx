@@ -19,7 +19,7 @@ import styles from '../styles.css'
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUp = () => {
-  const [step, setStep] = useState<Step>('setupLikeCoin')
+  const [step, setStep] = useState<Step>('signUp')
   const { updateHeaderState } = useContext(HeaderContext)
   useEffect(() => {
     updateHeaderState({ type: 'signUp' })

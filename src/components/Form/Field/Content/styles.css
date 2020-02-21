@@ -1,0 +1,7 @@
+section {
+  margin: 0 calc(var(--spacing-base) * -1);
+
+  @media (--sm-up) {
+    margin: 0;
+  }
+}

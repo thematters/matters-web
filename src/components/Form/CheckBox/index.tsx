@@ -3,29 +3,26 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { Icon } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 type CheckBoxProps = {
   name: string
-
-  error?: string | React.ReactNode
-  hint?: string | React.ReactNode
-
-  extraButton?: React.ReactNode
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+} & FieldProps &
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   name,
 
-  error,
   hint,
+  error,
 
   ...inputProps
 }) => (
-  <section className="container">
+  <Field>
     <label htmlFor="checkbox">
       <TextIcon
         icon={
@@ -46,10 +43,10 @@ const CheckBox: React.FC<CheckBoxProps> = ({
       </VisuallyHidden>
     </label>
 
-    <footer>{error && <div className="error">{error}</div>}</footer>
+    <Field.Footer error={error} />
 
     <style jsx>{styles}</style>
-  </section>
+  </Field>
 )
 
 export default CheckBox

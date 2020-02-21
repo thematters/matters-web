@@ -1,3 +1,4 @@
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 /**
@@ -10,7 +11,7 @@ import styles from './styles.css'
  *     type="email"
  *     error="xxx"
  *     hint="xxx"
- *     ...other input props...
+ *     ...other <input> props...
  *   />
  * ```
  *
@@ -19,47 +20,35 @@ import styles from './styles.css'
 type InputProps = {
   type: 'text' | 'password' | 'email'
   name: string
-  label?: string | React.ReactNode
-
-  error?: string | React.ReactNode
-  hint?: string | React.ReactNode
-
-  extraButton?: React.ReactNode
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+} & FieldProps &
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 
 const Input: React.FC<InputProps> = ({
   type,
+
   name,
   label,
-
-  error,
-  hint,
-
   extraButton,
+
+  hint,
+  error,
 
   ...inputProps
 }) => (
-  <section className="container">
-    {(label || extraButton) && (
-      <header>
-        <label htmlFor={name}>{label}</label>
+  <Field>
+    <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
 
-        {extraButton}
-      </header>
-    )}
+    <Field.Content>
+      <input {...inputProps} id={name} name={name} type={type} />
+    </Field.Content>
 
-    <input {...inputProps} id={name} name={name} type={type} />
-
-    <footer>
-      {error && <div className="error">{error}</div>}
-      {hint && !error && <div className="hint">{hint}</div>}
-    </footer>
+    <Field.Footer hint={hint} error={error} />
 
     <style jsx>{styles}</style>
-  </section>
+  </Field>
 )
 
 export default Input

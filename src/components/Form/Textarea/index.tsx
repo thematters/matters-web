@@ -1,3 +1,4 @@
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 /**
@@ -10,46 +11,41 @@ import styles from './styles.css'
  *     type="email"
  *     error="xxx"
  *     hint="xxx"
- *     ...other input props...
+ *     ...other <textarea> props...
  *   />
  * ```
  *
  */
 type TextareaProps = {
   name: string
-  label?: string | React.ReactNode
-
-  error?: string | React.ReactNode
-  hint?: string | React.ReactNode
-} & React.DetailedHTMLProps<
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  HTMLTextAreaElement
->
+} & FieldProps &
+  React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+  >
 
 const Textarea: React.FC<TextareaProps> = ({
   name,
   label,
+  extraButton,
 
-  error,
   hint,
+  error,
 
   ...textareaProps
 }) => {
   return (
-    <section className="container">
-      <header>
-        <label htmlFor={name}>{label}</label>
-      </header>
+    <Field>
+      <Field.Header label={label} htmlFor={name} extraButton={extraButton} />
 
-      <textarea {...textareaProps} id={name} name={name} />
+      <Field.Content>
+        <textarea {...textareaProps} id={name} name={name} />
+      </Field.Content>
 
-      <footer>
-        {error && <div className="error">{error}</div>}
-        {hint && !error && <div className="hint">{hint}</div>}
-      </footer>
+      <Field.Footer hint={hint} error={error} />
 
       <style jsx>{styles}</style>
-    </section>
+    </Field>
   )
 }
 

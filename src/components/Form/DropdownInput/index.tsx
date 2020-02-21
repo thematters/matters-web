@@ -6,6 +6,7 @@ import { Dropdown, hidePopperOnClick, PopperInstance } from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 interface DropdownProps {
@@ -20,16 +21,11 @@ interface DropdownProps {
 type InputProps = {
   type: 'text' | 'password' | 'email' | 'search'
   name: string
-  label?: string | React.ReactNode
-
-  error?: string | React.ReactNode
-  hint?: string | React.ReactNode
-
-  extraButton?: React.ReactNode
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+} & FieldProps &
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 
 type DropdownInputProps = InputProps & DropdownProps
 
@@ -37,9 +33,10 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   type,
   name,
   label,
+  extraButton,
 
-  error,
   hint,
+  error,
 
   dropdownAppendTo = '',
   dropdownAutoSizing = false,
@@ -97,70 +94,67 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   }
 
   return (
-    <section id="dropdown-container" className="container">
-      <header>
-        <label htmlFor={name}>{label}</label>
-      </header>
+    <Field>
+      <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
 
-      <Dropdown
-        trigger="manual"
-        placement="bottom-start"
-        onCreate={setInstance}
-        content={<DropdownContent {...dropdownContentProps} />}
-        zIndex={dropdownZIndex}
-        appendTo={document.getElementById(dropdownAppendTo) || document.body}
-        onShown={i => {
-          hidePopperOnClick(i)
-        }}
-      >
-        <input
-          {...inputProps}
-          id={name}
-          name={name}
-          type={type}
-          onClick={e => {
-            if (inputProps.onClick) {
-              inputProps.onClick(e)
-            }
-
-            if (search) {
-              showDropdown()
-            }
+      <Field.Content>
+        <Dropdown
+          trigger="manual"
+          placement="bottom-start"
+          onCreate={setInstance}
+          content={<DropdownContent {...dropdownContentProps} />}
+          zIndex={dropdownZIndex}
+          appendTo={document.getElementById(dropdownAppendTo) || document.body}
+          onShown={i => {
+            hidePopperOnClick(i)
           }}
-          onFocus={e => {
-            if (inputProps.onFocus) {
-              inputProps.onFocus(e)
-            }
+        >
+          <input
+            {...inputProps}
+            id={name}
+            name={name}
+            type={type}
+            onClick={e => {
+              if (inputProps.onClick) {
+                inputProps.onClick(e)
+              }
 
-            if (search) {
-              showDropdown()
-            }
-          }}
-          onChange={e => {
-            if (inputProps.onChange) {
-              inputProps.onChange(e)
-            }
+              if (search) {
+                showDropdown()
+              }
+            }}
+            onFocus={e => {
+              if (inputProps.onFocus) {
+                inputProps.onFocus(e)
+              }
 
-            const trimedValue = e.target.value.trim()
+              if (search) {
+                showDropdown()
+              }
+            }}
+            onChange={e => {
+              if (inputProps.onChange) {
+                inputProps.onChange(e)
+              }
 
-            setSearch(trimedValue)
+              const trimedValue = e.target.value.trim()
 
-            if (trimedValue) {
-              showDropdown()
-            } else {
-              hideDropdown()
-            }
-          }}
-        />
-      </Dropdown>
+              setSearch(trimedValue)
 
-      <footer>
-        {error && <div className="error">{error}</div>}
-        {hint && !error && <div className="hint">{hint}</div>}
-      </footer>
+              if (trimedValue) {
+                showDropdown()
+              } else {
+                hideDropdown()
+              }
+            }}
+          />
+        </Dropdown>
+      </Field.Content>
+
+      <Field.Footer hint={hint} error={error} />
 
       <style jsx>{styles}</style>
-    </section>
+    </Field>
   )
 }
 

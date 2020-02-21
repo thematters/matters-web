@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, Form, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
@@ -45,7 +45,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   }, [])
 
   return (
-    <>
+    <Form>
       <Dialog.Content>
         <section className="container">
           {!error && (
@@ -86,7 +86,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
       </Dialog.Footer>
 
       <style jsx>{styles}</style>
-    </>
+    </Form>
   )
 }
 
