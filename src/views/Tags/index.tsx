@@ -19,7 +19,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -70,10 +70,7 @@ const CreateTagButton = () => {
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
-            <Translate
-              zh_hant={TEXT.zh_hant.createTag}
-              zh_hans={TEXT.zh_hans.createTag}
-            />
+            <Translate id="createTag" />
           </TextIcon>
         </Button>
       )}
@@ -164,21 +161,9 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.allTags,
-            zh_hans: TEXT.zh_hans.allTags
-          }}
-        />
+        <Head title={{ id: 'allTags' }} />
 
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.allTags}
-              zh_hans={TEXT.zh_hans.allTags}
-            />
-          }
-        >
+        <PageHeader title={<Translate id="allTags" />}>
           <CreateTagButton />
         </PageHeader>
 

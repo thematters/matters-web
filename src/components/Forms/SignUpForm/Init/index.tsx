@@ -62,9 +62,7 @@ const USER_REGISTER = gql`
 const LoginDialogButton = () => (
   <Form.ClickableArea
     title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-    rightText={
-      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-    }
+    rightText={<Translate id="login" />}
     spacing={['base', 0]}
     onClick={() => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
@@ -76,9 +74,7 @@ const LoginDialogButton = () => (
 const LoginRedirectionButton = () => (
   <Form.ClickableArea
     title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-    rightText={
-      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-    }
+    rightText={<Translate id="login" />}
     spacing={['base', 0]}
     {...appendTarget(PATHS.AUTH_LOGIN)}
   />
@@ -154,8 +150,8 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          zh_hant: TEXT.zh_hant[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans[errorCode] || errorCode,
           lang
         })
 
@@ -176,19 +172,10 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.email}
-            zh_hans={TEXT.zh_hans.email}
-          />
-        }
+        label={<Translate id="email" />}
         type="email"
         name="email"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.email,
-          zh_hans: TEXT.zh_hans.email,
-          lang
-        })}
+        placeholder={translate({ id: 'email', lang })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -196,20 +183,11 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.verificationCode}
-            zh_hans={TEXT.zh_hans.verificationCode}
-          />
-        }
+        label={<Translate id="verificationCode" />}
         type="text"
         name="code"
         autoComplete="off"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.verificationCode,
-          zh_hans: TEXT.zh_hans.verificationCode,
-          lang
-        })}
+        placeholder={translate({ id: 'verificationCode', lang })}
         value={values.code}
         error={touched.code && errors.code}
         onBlur={handleBlur}
@@ -228,38 +206,20 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={translate({
-          zh_hant: TEXT.zh_hant.userNameHint,
-          zh_hans: TEXT.zh_hans.userNameHint,
-          lang
-        })}
+        hint={translate({ id: 'userNameHint', lang })}
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.password}
-            zh_hans={TEXT.zh_hans.password}
-          />
-        }
+        label={<Translate id="password" />}
         type="password"
         name="password"
         autoComplete="off"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.password,
-          zh_hans: TEXT.zh_hans.password,
-          lang
-        })}
+        placeholder={translate({ id: 'password', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.passwordHint}
-            zh_hans={TEXT.zh_hans.passwordHint}
-          />
-        }
+        hint={<Translate id="passwordHint" />}
       />
 
       <Form.CheckBox
@@ -294,12 +254,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!_isEmpty(errors) || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
-      }
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
@@ -307,15 +262,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
-          hasNoBorder
-        >
+        <PageHeader title={<Translate id="register" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -328,12 +275,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
+          title={<Translate id="register" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

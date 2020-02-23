@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -32,39 +32,25 @@ export const Footer = () => {
       <BaseLink
         href={PATHS.MISC_ABOUT.href}
         as={PATHS.MISC_ABOUT.as}
-        text={
-          <Translate
-            zh_hant={TEXT.zh_hant.about}
-            zh_hans={TEXT.zh_hans.about}
-          />
-        }
+        text={<Translate id="about" />}
       />
 
       <BaseLink
         href={PATHS.MISC_FAQ.href}
         as={PATHS.MISC_FAQ.as}
-        text={
-          <Translate zh_hant={TEXT.zh_hant.faq} zh_hans={TEXT.zh_hans.faq} />
-        }
+        text={<Translate id="faq" />}
       />
 
       <BaseLink
         href={PATHS.MISC_GUIDE.href}
         as={PATHS.MISC_GUIDE.as}
-        text={
-          <Translate
-            zh_hant={TEXT.zh_hant.guide}
-            zh_hans={TEXT.zh_hans.guide}
-          />
-        }
+        text={<Translate id="guide" />}
       />
 
       <BaseLink
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
-        text={
-          <Translate zh_hant={TEXT.zh_hant.term} zh_hans={TEXT.zh_hans.term} />
-        }
+        text={<Translate id="term" />}
       />
 
       <p className="item">© {year} Matters</p>

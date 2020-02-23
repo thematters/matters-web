@@ -189,10 +189,8 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant:
-            TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          zh_hans:
-            TEXT.zh_hans.error[errorCode] || TEXT.zh_hans.error.UNKNOWN_ERROR,
+          zh_hant: TEXT.zh_hant[errorCode] || TEXT.zh_hant.UNKNOWN_ERROR,
+          zh_hans: TEXT.zh_hans[errorCode] || TEXT.zh_hans.UNKNOWN_ERROR,
           lang
         })
         setFieldError('content', errorMessage)
@@ -215,12 +213,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            }
+            text={<Translate id="confirm" />}
             type="submit"
             form={formId}
             disabled={!_isEmpty(errors) || isSubmitting}
@@ -232,12 +225,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       <Dialog.Content spacing={[0, 0]}>
         <Form id={formId} onSubmit={handleSubmit}>
           <Form.DropdownInput
-            label={
-              <Translate
-                zh_hant={TEXT.zh_hant.tagName}
-                zh_hans={TEXT.zh_hans.tagName}
-              />
-            }
+            label={<Translate id="tagName" />}
             type="text"
             name="newContent"
             placeholder={translate({
@@ -259,18 +247,9 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           />
 
           <Form.Textarea
-            label={
-              <Translate
-                zh_hant={TEXT.zh_hant.tagDescription}
-                zh_hans={TEXT.zh_hans.tagDescription}
-              />
-            }
+            label={<Translate id="tagDescription" />}
             name="newDescription"
-            placeholder={translate({
-              zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
-              zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
-              lang
-            })}
+            placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
             value={values.newDescription}
             error={touched.newDescription && errors.newDescription}
             onBlur={handleBlur}

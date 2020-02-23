@@ -9,8 +9,6 @@ import {
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
-import { TEXT } from '~/common/enums'
-
 import styles from '../styles.css'
 
 const Forget = () => {
@@ -53,12 +51,7 @@ const Forget = () => {
 
   return (
     <main className="l-row full">
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword
-        }}
-      />
+      <Head title={{ id: 'forgetPassword' }} />
 
       <article className={containerClass}>
         {step === 'request' && (

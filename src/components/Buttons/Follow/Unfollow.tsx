@@ -7,7 +7,7 @@ import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
@@ -64,17 +64,7 @@ const Unfollow = ({
       onMouseLeave={() => setHover(false)}
     >
       <TextIcon weight="md" size={isLarge ? 'sm' : 'xs'}>
-        {hover ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.unfollow}
-            zh_hans={TEXT.zh_hans.unfollow}
-          />
-        ) : (
-          <Translate
-            zh_hant={TEXT.zh_hant.followed}
-            zh_hans={TEXT.zh_hans.followed}
-          />
-        )}
+        {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
       </TextIcon>
     </Button>
   )

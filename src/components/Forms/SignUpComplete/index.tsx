@@ -1,6 +1,6 @@
 import { Dialog, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
 
 import styles from './styles.css'
@@ -18,12 +18,7 @@ export const SignUpComplete = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.registerSuccess}
-              zh_hans={TEXT.zh_hans.registerSuccess}
-            />
-          }
+          title={<Translate id="registerSuccess" />}
           close={closeDialog}
         />
       )}

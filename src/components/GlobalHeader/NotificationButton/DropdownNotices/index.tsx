@@ -10,7 +10,7 @@ import {
   Translate
 } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -34,10 +34,7 @@ const Header = () => (
       {...PATHS.ME_SETTINGS_NOTIFICATION}
     >
       <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
-        <Translate
-          zh_hant={TEXT.zh_hant.setting}
-          zh_hans={TEXT.zh_hans.setting}
-        />
+        <Translate id="setting" />
       </TextIcon>
     </Button>
 

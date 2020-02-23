@@ -4,7 +4,7 @@ import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import { UnblockUserButtonUser } from './__generated__/UnblockUserButtonUser'
@@ -47,22 +47,14 @@ export const UnblockUserButton = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.unblockSuccess}
-                  zh_hans={TEXT.zh_hans.unblockSuccess}
-                />
-              )
+              content: <Translate id="unblockSuccess" />
             }
           })
         )
       }}
     >
       <TextIcon weight="md" size="xs">
-        <Translate
-          zh_hant={TEXT.zh_hant.unblockUser}
-          zh_hans={TEXT.zh_hans.unblockUser}
-        />
+        <Translate id="unblockUser" />
       </TextIcon>
     </Button>
   )

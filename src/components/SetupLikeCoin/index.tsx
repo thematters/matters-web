@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, PageHeader, SignUpComplete, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import Binding from './Binding'
@@ -49,25 +49,12 @@ export const SetupLikeCoin: React.FC<Props> = ({
   return (
     <>
       {isInPage && (
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.setupLikeCoin}
-              zh_hans={TEXT.zh_hans.setupLikeCoin}
-            />
-          }
-          hasNoBorder
-        />
+        <PageHeader title={<Translate id="setupLikeCoin" />} hasNoBorder />
       )}
 
       {isInDialog && closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.setupLikeCoin}
-              zh_hans={TEXT.zh_hans.setupLikeCoin}
-            />
-          }
+          title={<Translate id="setupLikeCoin" />}
           close={closeDialog}
         />
       )}

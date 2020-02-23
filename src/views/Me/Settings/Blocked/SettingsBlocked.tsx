@@ -12,7 +12,7 @@ import {
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -115,12 +115,7 @@ const SettingsBlocked = () => {
 
 export default () => (
   <>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.blockedSetting,
-        zh_hans: TEXT.zh_hans.blockedSetting
-      }}
-    />
+    <Head title={{ id: 'blockedSetting' }} />
 
     <SettingsBlocked />
   </>

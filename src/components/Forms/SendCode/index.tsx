@@ -59,8 +59,8 @@ export const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
       const errorCode = getErrorCodes(error)[0]
       const errorMessage = (
         <Translate
-          zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
-          zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
+          zh_hant={TEXT.zh_hant[errorCode] || errorCode}
+          zh_hans={TEXT.zh_hans[errorCode] || errorCode}
         />
       )
       window.dispatchEvent(
@@ -82,15 +82,9 @@ export const SendCodeButton: React.FC<Props> = ({ email, lang, type }) => {
     >
       <TextIcon color="green" weight="md">
         {sent ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.resend}
-            zh_hans={TEXT.zh_hans.resend}
-          />
+          <Translate id="resend" />
         ) : (
-          <Translate
-            zh_hant={TEXT.zh_hant.sendVerificationCode}
-            zh_hans={TEXT.zh_hans.sendVerificationCode}
-          />
+          <Translate id="sendVerificationCode" />
         )}
 
         {sent && countdown.timeLeft !== 0 && (

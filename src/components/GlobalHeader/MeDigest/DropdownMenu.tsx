@@ -4,7 +4,7 @@ import { Icon, Menu, TextIcon, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
@@ -77,19 +77,13 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
           spacing="base"
           size="md"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.myProfile}
-            zh_hans={TEXT.zh_hans.myProfile}
-          />
+          <Translate id="myProfile" />
         </TextIcon>
       </Menu.Item>
 
       <Menu.Item {...PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon icon={<Icon.LikeMedium size="md" />} spacing="base" size="md">
-          <Translate
-            zh_hant={TEXT.zh_hant.myAppreciations}
-            zh_hans={TEXT.zh_hans.myAppreciations}
-          />
+          <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
 
@@ -99,10 +93,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
           spacing="base"
           size="md"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.readHistory}
-            zh_hans={TEXT.zh_hans.readHistory}
-          />
+          <Translate id="readHistory" />
         </TextIcon>
       </Menu.Item>
 
@@ -114,10 +105,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
           spacing="base"
           size="md"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.setting}
-            zh_hans={TEXT.zh_hans.setting}
-          />
+          <Translate id="setting" />
         </TextIcon>
       </Menu.Item>
 
@@ -127,10 +115,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
           spacing="base"
           size="md"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.logout}
-            zh_hans={TEXT.zh_hans.logout}
-          />
+          <Translate id="logout" />
         </TextIcon>
       </Menu.Item>
     </Menu>

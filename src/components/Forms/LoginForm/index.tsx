@@ -12,7 +12,12 @@ import {
 } from '~/components'
 import { getErrorCodes, useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, ERROR_CODES, TEXT } from '~/common/enums'
+import {
+  ADD_TOAST,
+  ANALYTICS_EVENTS,
+  ERROR_CODES,
+  ErrorCodeKeys
+} from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
@@ -93,12 +98,7 @@ export const LoginForm: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.loginSuccess}
-                  zh_hans={TEXT.zh_hans.loginSuccess}
-                />
-              )
+              content: <Translate id="loginSuccess" />
             }
           })
         )
@@ -113,29 +113,25 @@ export const LoginForm: React.FC<FormProps> = ({
       } catch (error) {
         const errorCodes = getErrorCodes(error)
 
-        if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
+        if (
+          errorCodes.indexOf(
+            ERROR_CODES.USER_EMAIL_NOT_FOUND as ErrorCodeKeys
+          ) >= 0
+        ) {
           setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
-              zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
-              lang
-            })
+            email: translate({ id: 'USER_EMAIL_NOT_FOUND', lang })
           })
-        } else if (errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0) {
+        } else if (
+          errorCodes.indexOf(
+            ERROR_CODES.USER_PASSWORD_INVALID as ErrorCodeKeys
+          ) >= 0
+        ) {
           setErrors({
-            password: translate({
-              zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
-              zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
-              lang
-            })
+            password: translate({ id: 'USER_PASSWORD_INVALID', lang })
           })
         } else {
           setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
-              zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
-              lang
-            })
+            email: translate({ id: 'UNKNOWN_ERROR', lang })
           })
         }
 
@@ -152,19 +148,10 @@ export const LoginForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.email}
-            zh_hans={TEXT.zh_hans.email}
-          />
-        }
+        label={<Translate id="email" />}
         type="email"
         name="email"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterEmail,
-          zh_hans: TEXT.zh_hans.enterEmail,
-          lang
-        })}
+        placeholder={translate({ id: 'enterEmail', lang })}
         required
         value={values.email}
         error={touched.email && errors.email}
@@ -173,19 +160,10 @@ export const LoginForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.password}
-            zh_hans={TEXT.zh_hans.password}
-          />
-        }
+        label={<Translate id="password" />}
         type="password"
         name="password"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterPassword,
-          zh_hans: TEXT.zh_hans.enterPassword,
-          lang
-        })}
+        placeholder={translate({ id: 'enterPassword', lang })}
         required
         value={values.password}
         error={touched.password && errors.password}
@@ -209,12 +187,7 @@ export const LoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!_isEmpty(errors) || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
-      }
+      text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
   )
@@ -222,15 +195,7 @@ export const LoginForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          }
-          hasNoBorder
-        >
+        <PageHeader title={<Translate id="login" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -243,12 +208,7 @@ export const LoginForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          }
+          title={<Translate id="login" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

@@ -7,7 +7,6 @@ import { Avatar } from '~/components/Avatar'
 import { UnblockUserButton } from '~/components/Buttons/BlockUser'
 import { FollowButton } from '~/components/Buttons/Follow'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -91,10 +90,7 @@ const Rich = ({
           <section className="content">
             <header>
               <span className="name">
-                <Translate
-                  zh_hant={TEXT.zh_hant.accountArchived}
-                  zh_hans={TEXT.zh_hans.accountArchived}
-                />
+                <Translate id="accountArchived" />
               </span>
             </header>
           </section>

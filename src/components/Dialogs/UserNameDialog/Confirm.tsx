@@ -77,8 +77,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
+          zh_hant: TEXT.zh_hant[errorCode] || errorCode,
+          zh_hans: TEXT.zh_hans[errorCode] || errorCode,
           lang
         })
         setFieldError('userName', errorMessage)
@@ -94,41 +94,23 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         label="Matters ID"
         type="text"
         name="userName"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserName,
-          zh_hans: TEXT.zh_hans.enterUserName,
-          lang
-        })}
+        placeholder={translate({ id: 'enterUserName', lang })}
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.userNameHint}
-            zh_hans={TEXT.zh_hans.userNameHint}
-          />
-        }
+        hint={<Translate id="userNameHint" />}
       />
 
       <Form.Input
         type="text"
         name="comparedUserName"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserNameAgign,
-          zh_hans: TEXT.zh_hans.enterUserNameAgign,
-          lang
-        })}
+        placeholder={translate({ id: 'enterUserNameAgign', lang })}
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.userNameHint}
-            zh_hans={TEXT.zh_hans.userNameHint}
-          />
-        }
+        hint={<Translate id="userNameHint" />}
       />
     </Form>
   )
@@ -136,24 +118,14 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.changeUserName}
-            zh_hans={TEXT.zh_hans.changeUserName}
-          />
-        }
+        title={<Translate id="changeUserName" />}
         close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
             type="submit"
             form={formId}
             disabled={!_isEmpty(errors) || isSubmitting}
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.nextStep}
-                zh_hans={TEXT.zh_hans.nextStep}
-              />
-            }
+            text={<Translate id="nextStep" />}
             loading={isSubmitting}
           />
         }

@@ -9,7 +9,6 @@ import { Icon } from '~/components/Icon'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
-  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
@@ -75,12 +74,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.uploadImageFailed}
-                zh_hans={TEXT.zh_hans.uploadImageFailed}
-              />
-            )
+            content: <Translate id="uploadImageFailed" />
           }
         })
       )

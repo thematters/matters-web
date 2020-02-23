@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Icon, TextIcon, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
 const ViewAll = ({
@@ -32,10 +32,7 @@ const ViewAll = ({
           textPlacement="left"
           color="green"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.viewAll}
-            zh_hans={TEXT.zh_hans.viewAll}
-          />
+          <Translate id="viewAll" />
         </TextIcon>
       </a>
     </Link>

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { DateTime, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
-import { TEXT } from '~/common/enums/text'
 import { analytics, stripHtml, toPath } from '~/common/utils'
 
 import DeleteButton from '../Components/DeleteButton'
@@ -52,12 +51,7 @@ const DraftDigestFeed = ({ draft }: { draft: DraftDigestFeedDraft }) => {
           <Link {...path}>
             <a onClick={onClick}>
               <Title type="feed" is="h2">
-                {title || (
-                  <Translate
-                    zh_hant={TEXT.zh_hant.untitle}
-                    zh_hans={TEXT.zh_hans.untitle}
-                  />
-                )}
+                {title || <Translate id="untitle" />}
               </Title>
             </a>
           </Link>

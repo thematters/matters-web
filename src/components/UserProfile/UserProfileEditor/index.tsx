@@ -14,7 +14,6 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
   translate,
   validateDescription,
@@ -118,12 +117,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
             <section className="info">
               <Form className="form" onSubmit={handleSubmit}>
                 <Form.Input
-                  label={
-                    <Translate
-                      zh_hant={TEXT.zh_hant.displayName}
-                      zh_hans={TEXT.zh_hans.displayName}
-                    />
-                  }
+                  label={<Translate id="displayName" />}
                   type="text"
                   name="displayName"
                   value={values.displayName}
@@ -135,20 +129,10 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                     zh_hans: '输入姓名',
                     lang
                   })}
-                  hint={
-                    <Translate
-                      zh_hant={TEXT.zh_hant.displayNameHint}
-                      zh_hans={TEXT.zh_hans.displayNameHint}
-                    />
-                  }
+                  hint={<Translate id="displayNameHint" />}
                 />
                 <Form.Textarea
-                  label={
-                    <Translate
-                      zh_hant={TEXT.zh_hant.userProfile}
-                      zh_hans={TEXT.zh_hans.userProfile}
-                    />
-                  }
+                  label={<Translate id="userProfile" />}
                   name="description"
                   placeholder={translate({
                     zh_hant: '輸入個人簡介',
@@ -157,12 +141,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                   })}
                   value={values.description}
                   error={touched.description && errors.description}
-                  hint={
-                    <Translate
-                      zh_hant={TEXT.zh_hant.descriptionHint}
-                      zh_hans={TEXT.zh_hans.descriptionHint}
-                    />
-                  }
+                  hint={<Translate id="descriptionHint" />}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   style={{ height: '7rem', resize: 'none' }}
@@ -186,10 +165,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                         )
                       }
                     >
-                      <Translate
-                        zh_hant={TEXT.zh_hant.save}
-                        zh_hans={TEXT.zh_hans.save}
-                      />
+                      <Translate id="save" />
                     </TextIcon>
                   </Button>
 
@@ -201,10 +177,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                     onClick={() => setEditing(false)}
                   >
                     <TextIcon color="grey" weight="md">
-                      <Translate
-                        zh_hant={TEXT.zh_hant.cancel}
-                        zh_hans={TEXT.zh_hans.cancel}
-                      />
+                      <Translate id="cancel" />
                     </TextIcon>
                   </Button>
                 </div>

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Menu, Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -28,18 +28,12 @@ const DropdownContent: React.FC<{
       <Menu width={isDropdown ? 'sm' : undefined}>
         <Menu.Item {...PATHS.HOME}>
           <span className={homeClasses}>
-            <Translate
-              zh_hant={TEXT.zh_hant.discover}
-              zh_hans={TEXT.zh_hans.discover}
-            />
+            <Translate id="discover" />
           </span>
         </Menu.Item>
         <Menu.Item {...PATHS.FOLLOW}>
           <span className={followClasses}>
-            <Translate
-              zh_hant={TEXT.zh_hant.follow}
-              zh_hans={TEXT.zh_hans.follow}
-            />
+            <Translate id="follow" />
           </span>
         </Menu.Item>
       </Menu>

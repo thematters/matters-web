@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 
 import { SearchBar, SignUpButton, useResponsive } from '~/components'
 
-import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
+import { PATHS, SIGNUP_TYPE } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
@@ -74,10 +74,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 {!isLogin && <LoginButton />}
                 {!isSignUp && (
                   <SignUpButton trackType={SIGNUP_TYPE.GENERAL}>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.register}
-                      zh_hans={TEXT.zh_hans.register}
-                    />
+                    <Translate id="register" />
                   </SignUpButton>
                 )}
               </>
@@ -86,10 +83,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
             {isAbout && (
               <Link {...PATHS.HOME}>
                 <a className="u-link-green">
-                  <Translate
-                    zh_hant={TEXT.zh_hant.backToDiscover}
-                    zh_hans={TEXT.zh_hans.backToDiscover}
-                  />
+                  <Translate id="backToDiscover" />
                 </a>
               </Link>
             )}

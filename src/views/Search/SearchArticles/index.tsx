@@ -14,7 +14,7 @@ import {
   useResponsive
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -64,12 +64,7 @@ const SearchArticles = ({ q }: { q: string }) => {
     return (
       <EmptySearch
         inSidebar={false}
-        description={
-          <Translate
-            zh_hant={TEXT.zh_hant.emptySearchResults}
-            zh_hans={TEXT.zh_hans.emptySearchResults}
-          />
-        }
+        description={<Translate id="emptySearchResults" />}
       />
     )
   }
@@ -98,15 +93,7 @@ const SearchArticles = ({ q }: { q: string }) => {
       hasNextPage={isMediumUp && pageInfo.hasNextPage}
       loadMore={loadMore}
     >
-      <PageHeader
-        is="h2"
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.article}
-            zh_hans={TEXT.zh_hans.article}
-          />
-        }
-      />
+      <PageHeader is="h2" title={<Translate id="article" />} />
       <List hasBorder>
         {edges.map(
           ({ node, cursor }, i) =>

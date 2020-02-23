@@ -5,7 +5,7 @@ import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { langConvert, translate } from '~/common/utils'
+import { langConvert, translate, TranslateArgs } from '~/common/utils'
 import IMAGE_APPLE_TOUCH_ICON from '~/static/apple-touch-icon.png?url'
 import IMAGE_FAVICON_16 from '~/static/favicon-16x16.png?url'
 import IMAGE_FAVICON_32 from '~/static/favicon-32x32.png?url'
@@ -25,7 +25,7 @@ const {
 const isProd = ENV === 'production'
 
 interface HeadProps {
-  title?: string | { zh_hant: string; zh_hans?: string; en?: string }
+  title?: string | TranslateArgs
   description?: string | null
   keywords?: string[]
   path?: string

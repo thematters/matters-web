@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 interface CivicLikerDialogProps {
@@ -25,15 +25,7 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.share}
-              zh_hans={TEXT.zh_hans.share}
-            />
-          }
-          close={close}
-        />
+        <Dialog.Header title={<Translate id="share" />} close={close} />
 
         <Dialog.Content spacing={['xloose', 'xloose']}>
           <p>
@@ -71,10 +63,7 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
             textColor="black"
             onClick={close}
           >
-            <Translate
-              zh_hant={TEXT.zh_hant.understood}
-              zh_hans={TEXT.zh_hans.understood}
-            />
+            <Translate id="understood" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Dialog, Spinner, Throw404, Translate } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
 import PublishSlide from './PublishSlide'
@@ -82,21 +82,11 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.publish}
-            zh_hans={TEXT.zh_hans.publish}
-          />
-        }
+        title={<Translate id="publish" />}
         close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.publish}
-                zh_hans={TEXT.zh_hans.publish}
-              />
-            }
+            text={<Translate id="publish" />}
             disabled={!publishable}
             onClick={async () => {
               const { data: publishData } = await publish({ variables: { id } })

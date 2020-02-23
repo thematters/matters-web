@@ -6,7 +6,7 @@ import { Waypoint } from 'react-waypoint'
 
 import { Comment, Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, REFETCH_RESPONSES, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, REFETCH_RESPONSES } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
 import FeatureComments from './FeaturedComments'
@@ -58,10 +58,7 @@ const Responses = () => {
     <section className="responses" id="comments">
       <header>
         <Title type="nav" is="h2">
-          <Translate
-            zh_hant={TEXT.zh_hant.response}
-            zh_hans={TEXT.zh_hans.response}
-          />
+          <Translate id="response" />
           <ResponseCount article={article} />
         </Title>
       </header>

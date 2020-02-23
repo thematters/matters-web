@@ -118,11 +118,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: translate({
-                zh_hant: TEXT.zh_hant.addedArticleTag,
-                zh_hans: TEXT.zh_hans.addedArticleTag,
-                lang
-              }),
+              content: translate({ id: 'addedArticleTag', lang }),
               duration: 2000
             }
           })
@@ -141,10 +137,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
         const errorMessage = translate({
-          zh_hant:
-            TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          zh_hans:
-            TEXT.zh_hans.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
+          zh_hant: TEXT.zh_hant[errorCode] || TEXT.zh_hant.UNKNOWN_ERROR,
+          zh_hans: TEXT.zh_hans[errorCode] || TEXT.zh_hant.UNKNOWN_ERROR,
           lang
         })
         setFieldError('name', errorMessage)
@@ -172,21 +166,11 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.addArticleTag}
-            zh_hans={TEXT.zh_hans.addArticleTag}
-          />
-        }
+        title={<Translate id="addArticleTag" />}
         close={closeDialog}
         rightButton={
           <Dialog.Header.RightButton
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            }
+            text={<Translate id="confirm" />}
             type="submit"
             form={formId}
             disabled={!_isEmpty(errors) || isSubmitting}

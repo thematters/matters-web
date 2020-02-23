@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 import { DateTime, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import DeleteButton from '../Components/DeleteButton'
@@ -38,14 +37,7 @@ const DraftDigestSidebar = ({ draft }: { draft: DraftDigestSidebarDraft }) => {
     <section className="container">
       <div className="content">
         <Link {...path}>
-          <a className="title">
-            {title || (
-              <Translate
-                zh_hant={TEXT.zh_hant.untitle}
-                zh_hans={TEXT.zh_hans.untitle}
-              />
-            )}
-          </a>
+          <a className="title">{title || <Translate id="untitle" />}</a>
         </Link>
 
         <div>

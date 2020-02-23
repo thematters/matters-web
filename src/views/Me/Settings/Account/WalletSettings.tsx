@@ -12,8 +12,6 @@ import {
   ViewerContext
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import styles from './styles.css'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
@@ -38,10 +36,7 @@ const SetupLikerIdButton = () => {
       {({ open }) => (
         <Button className="u-link-green" onClick={open}>
           <TextIcon>
-            <Translate
-              zh_hant={TEXT.zh_hant.setup}
-              zh_hans={TEXT.zh_hans.setup}
-            />
+            <Translate id="setup" />
           </TextIcon>
         </Button>
       )}
@@ -114,15 +109,7 @@ const WalletSettings = () => {
 
   return (
     <section className="section-container">
-      <PageHeader
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.walletSetting}
-            zh_hans={TEXT.zh_hans.walletSetting}
-          />
-        }
-        is="h2"
-      />
+      <PageHeader title={<Translate id="walletSetting" />} is="h2" />
 
       <section className="setting-section">
         <div className="left">

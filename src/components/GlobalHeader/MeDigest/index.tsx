@@ -7,7 +7,6 @@ import { Avatar } from '~/components/Avatar'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { Z_INDEX } from '~/common/enums'
-import { TEXT } from '~/common/enums/text'
 
 import DropdownMenu from './DropdownMenu'
 import styles from './styles.css'
@@ -51,24 +50,9 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
             {(viewer.isActive || viewer.isOnboarding) && (
               <span className="username">{user.displayName}</span>
             )}
-            {viewer.isFrozen && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountFrozen}
-                zh_hans={TEXT.zh_hans.accountFrozen}
-              />
-            )}
-            {viewer.isArchived && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountArchived}
-                zh_hans={TEXT.zh_hans.accountArchived}
-              />
-            )}
-            {viewer.isBanned && (
-              <Translate
-                zh_hant={TEXT.zh_hant.accountBanned}
-                zh_hans={TEXT.zh_hans.accountBanned}
-              />
-            )}
+            {viewer.isFrozen && <Translate id="accountFrozen" />}
+            {viewer.isArchived && <Translate id="accountArchived" />}
+            {viewer.isBanned && <Translate id="accountBanned" />}
           </section>
 
           <style jsx>{styles}</style>

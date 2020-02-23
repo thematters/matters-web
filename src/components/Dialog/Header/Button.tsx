@@ -3,8 +3,6 @@ import { forwardRef } from 'react'
 import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
 import { useResponsive } from '~/components/Hook'
 
-import { TEXT } from '~/common/enums'
-
 interface CloseButtonProps {
   close: () => void
   ref: React.Ref<any>
@@ -24,10 +22,7 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
     >
       {!isSmallUp && (
         <TextIcon color="green" size="md">
-          <Translate
-            zh_hant={TEXT.zh_hant.cancel}
-            zh_hans={TEXT.zh_hans.cancel}
-          />
+          <Translate id="cancel" />
         </TextIcon>
       )}
       {isSmallUp && <Icon.CloseGreenMedium size="lg" />}

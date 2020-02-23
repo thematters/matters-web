@@ -1,6 +1,6 @@
 import { Button, TextIcon, Translate } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, TEXT } from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG } from '~/common/enums'
 
 const LoginButton = () => (
   <Button
@@ -13,7 +13,7 @@ const LoginButton = () => (
     }}
   >
     <TextIcon color="green" weight="md">
-      <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+      <Translate id="login" />
     </TextIcon>
   </Button>
 )
