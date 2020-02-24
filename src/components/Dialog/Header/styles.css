@@ -36,3 +36,11 @@ header {
     }
   }
 }
+
+.spacing-holder {
+  padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
+  }
+}

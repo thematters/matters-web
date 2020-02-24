@@ -169,6 +169,21 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     )
   }
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.confirm}
+          zh_hans={TEXT.zh_hans.confirm}
+        />
+      }
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -179,20 +194,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           />
         }
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            }
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
       <Dialog.Content spacing={[0, 0]}>

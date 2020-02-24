@@ -133,6 +133,21 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.nextStep}
+          zh_hans={TEXT.zh_hans.nextStep}
+        />
+      }
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -143,20 +158,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
           />
         }
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.nextStep}
-                zh_hans={TEXT.zh_hans.nextStep}
-              />
-            }
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
       <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>

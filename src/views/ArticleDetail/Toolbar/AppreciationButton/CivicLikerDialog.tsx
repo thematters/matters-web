@@ -28,8 +28,8 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
         <Dialog.Header
           title={
             <Translate
-              zh_hant={TEXT.zh_hant.share}
-              zh_hans={TEXT.zh_hans.share}
+              zh_hant={TEXT.zh_hant.joinCivicLiker}
+              zh_hans={TEXT.zh_hans.joinCivicLiker}
             />
           }
           close={close}

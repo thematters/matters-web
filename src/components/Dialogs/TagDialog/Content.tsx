@@ -203,6 +203,21 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      text={
+        <Translate
+          zh_hant={TEXT.zh_hant.confirm}
+          zh_hans={TEXT.zh_hans.confirm}
+        />
+      }
+      type="submit"
+      form={formId}
+      disabled={!_isEmpty(errors) || isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -213,20 +228,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           />
         }
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            text={
-              <Translate
-                zh_hant={TEXT.zh_hant.confirm}
-                zh_hans={TEXT.zh_hans.confirm}
-              />
-            }
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
       <Dialog.Content spacing={[0, 0]}>

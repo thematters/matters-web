@@ -25,6 +25,7 @@ export const SignUpComplete = ({
             />
           }
           close={closeDialog}
+          headerHidden
         />
       )}
 

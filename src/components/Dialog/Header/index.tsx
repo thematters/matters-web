@@ -35,9 +35,15 @@ const Header = forwardRef(({ headerHidden, ...restProps }, ref) => {
   }
 
   return (
-    <VisuallyHidden>
-      <BaseHeader {...restProps} ref={ref} />
-    </VisuallyHidden>
+    <>
+      <div className="spacing-holder" />
+
+      <VisuallyHidden>
+        <BaseHeader {...restProps} ref={ref} />
+      </VisuallyHidden>
+
+      <style jsx>{styles}</style>
+    </>
   )
 }) as React.ForwardRefExoticComponent<
   HeaderProps & React.RefAttributes<unknown>
