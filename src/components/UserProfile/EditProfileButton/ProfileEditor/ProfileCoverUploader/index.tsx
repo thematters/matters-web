@@ -8,7 +8,6 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
-  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
@@ -128,10 +127,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
               onClick={removeCover}
             >
               <TextIcon color="white" size="xs">
-                <Translate
-                  zh_hant={TEXT.zh_hant.delete}
-                  zh_hans={TEXT.zh_hans.delete}
-                />
+                <Translate id="delete" />
               </TextIcon>
             </Button>
           </section>

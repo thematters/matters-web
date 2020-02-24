@@ -63,9 +63,7 @@ const LoginDialogButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-      rightText={
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      }
+      rightText={<Translate id="login" />}
       onClick={() => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
@@ -78,9 +76,7 @@ const LoginRedirectionButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-      rightText={
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      }
+      rightText={<Translate id="login" />}
       {...appendTarget(PATHS.AUTH_LOGIN)}
     />
   </Form.List>

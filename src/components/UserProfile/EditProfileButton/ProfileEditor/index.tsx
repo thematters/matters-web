@@ -11,7 +11,6 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
   hasFormError,
   translate,
@@ -101,26 +100,12 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       </section>
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.displayName}
-            zh_hans={TEXT.zh_hans.displayName}
-          />
-        }
+        label={<Translate id="displayName" />}
         type="text"
         name="displayName"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterDisplayName,
-          zh_hans: TEXT.zh_hans.enterDisplayName,
-          lang
-        })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.displayNameHint}
-            zh_hans={TEXT.zh_hans.displayNameHint}
-          />
-        }
+        placeholder={translate({ id: 'enterDisplayName', lang })}
+        hint={<Translate id="displayNameHint" />}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -128,12 +113,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       />
 
       <Form.Textarea
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.userProfile}
-            zh_hans={TEXT.zh_hans.userProfile}
-          />
-        }
+        label={<Translate id="userProfile" />}
         name="description"
         required
         placeholder={translate({
@@ -141,12 +121,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           zh_hans: '请输入个人简介',
           lang
         })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.descriptionHint}
-            zh_hans={TEXT.zh_hans.descriptionHint}
-          />
-        }
+        hint={<Translate id="descriptionHint" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -162,9 +137,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={!hasFormError(errors) || isSubmitting}
-      text={
-        <Translate zh_hant={TEXT.zh_hant.save} zh_hans={TEXT.zh_hans.save} />
-      }
+      text={<Translate id="save" />}
       loading={isSubmitting}
     />
   )
