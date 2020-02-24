@@ -155,8 +155,8 @@ const Confirm: React.FC<FormProps> = ({
         extraButton={
           <SendCodeButton
             email={values.email}
-            lang={lang}
             type="email_reset_confirm"
+            disabled={!!errors.email}
           />
         }
       />

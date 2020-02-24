@@ -210,7 +210,11 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
-          <SendCodeButton email={values.email} lang={lang} type="register" />
+          <SendCodeButton
+            email={values.email}
+            type="register"
+            disabled={!!errors.email}
+          />
         }
       />
 

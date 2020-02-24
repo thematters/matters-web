@@ -123,7 +123,11 @@ const Request: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
-          <SendCodeButton email={values.email} lang={lang} type="email_reset" />
+          <SendCodeButton
+            email={values.email}
+            type="email_reset"
+            disabled={!!errors.email}
+          />
         }
       />
     </Form>

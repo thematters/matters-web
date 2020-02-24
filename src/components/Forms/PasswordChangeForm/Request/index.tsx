@@ -145,8 +145,8 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         extraButton={
           <SendCodeButton
             email={values.email}
-            lang={lang}
             type="password_reset"
+            disabled={!!errors.email}
           />
         }
       />
