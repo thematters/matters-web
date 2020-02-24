@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import { Button, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -16,7 +16,6 @@ import Cover from '../../../Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
-import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 
 /**
  * This component is for uploading profile cover.
@@ -30,26 +29,12 @@ import { UpdateUserInfoCover } from './__generated__/UpdateUserInfoCover'
 
 interface Props {
   user: any
+  onUpload: (assetId: string | null) => void
 }
 
-const UPDATE_USER_INFO = gql`
-  mutation UpdateUserInfoCover($input: UpdateUserInfoInput!) {
-    updateUserInfo(input: $input) {
-      id
-      info {
-        profileCover
-      }
-    }
-  }
-`
-
-export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
-  const [update, { loading: updateLoading }] = useMutation<UpdateUserInfoCover>(
-    UPDATE_USER_INFO
-  )
-  const [upload, { loading: uploadLoading }] = useMutation<SingleFileUpload>(
-    UPLOAD_FILE
-  )
+export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
+  const [cover, setCover] = useState<string | null>()
+  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,37 +71,42 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
         }
       })
       const id = data?.singleFileUpload.id
+      const path = data?.singleFileUpload.path
 
-      if (update) {
-        return update({ variables: { input: { profileCover: id } } })
+      if (id && path) {
+        setCover(path)
+        onUpload(id)
+      } else {
+        throw new Error()
       }
     } catch (e) {
-      // TODO
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant={TEXT.zh_hant.uploadImageFailed}
+                zh_hans={TEXT.zh_hans.uploadImageFailed}
+              />
+            )
+          }
+        })
+      )
     }
   }
 
-  const removeCover = async () => {
-    if (!update || !user.info.profileCover) {
-      return
-    }
-
-    try {
-      await update({ variables: { input: { profileCover: null } } })
-    } catch (e) {
-      // TODO
-    }
+  const removeCover = () => {
+    setCover(null)
+    onUpload(null)
   }
 
   return (
     <label htmlFor="profile-input">
-      <Cover cover={user.info.profileCover} />
+      <Cover cover={user.info.profileCover || cover} />
 
       <div className="mask">
-        {uploadLoading || updateLoading ? (
-          <Spinner />
-        ) : (
-          <Icon.CameraMedium color="white" size="xl" />
-        )}
+        {loading ? <Spinner /> : <Icon.CameraMedium color="white" size="xl" />}
 
         {user.info.profileCover && (
           <section className="delete">

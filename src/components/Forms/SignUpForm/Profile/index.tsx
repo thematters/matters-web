@@ -110,9 +110,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <AvatarUploadField
-        onUpload={assetId => {
-          setFieldValue('avatar', assetId)
-        }}
+        onUpload={assetId => setFieldValue('avatar', assetId)}
       />
 
       <Form.Input

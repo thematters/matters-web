@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  AvatarUploader,
   Dialog,
   Form,
   LanguageContext,
@@ -19,7 +20,6 @@ import {
   validateDisplayName
 } from '~/common/utils'
 
-import ProfileAvatarUploader from './ProfileAvatarUploader'
 import ProfileCoverUploader from './ProfileCoverUploader'
 import styles from './styles.css'
 
@@ -36,6 +36,8 @@ interface FormProps {
 }
 
 interface FormValues {
+  avatar: string | null
+  profileCover: string | null
   displayName: string
   description: string
 }
@@ -47,6 +49,7 @@ const UPDATE_USER_INFO = gql`
       avatar
       displayName
       info {
+        profileCover
         description
       }
     }
@@ -67,9 +70,12 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
+      avatar: user.avatar,
+      profileCover: user.info.profileCover,
       displayName: user.displayName || '',
       description: user.info.description || ''
     },
@@ -79,9 +85,21 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         description: validateDescription(description, lang)
       }
     },
-    onSubmit: async ({ displayName, description }, { setSubmitting }) => {
+    onSubmit: async (
+      { avatar, profileCover, displayName, description },
+      { setSubmitting }
+    ) => {
       try {
-        await update({ variables: { input: { displayName, description } } })
+        await update({
+          variables: {
+            input: {
+              ...(avatar ? { avatar } : {}),
+              ...(profileCover ? { profileCover } : {}),
+              displayName,
+              description
+            }
+          }
+        })
       } catch (error) {
         // TODO: Handle error
       }
@@ -93,11 +111,18 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">
-        <ProfileCoverUploader user={user} />
+        <ProfileCoverUploader
+          user={user}
+          onUpload={assetId => setFieldValue('avatar', assetId)}
+        />
       </section>
 
       <section className="avatar-field">
-        <ProfileAvatarUploader user={user} />
+        <AvatarUploader
+          user={user}
+          onUpload={assetId => setFieldValue('avatar', assetId)}
+          hasBorder
+        />
       </section>
 
       <Form.Input
