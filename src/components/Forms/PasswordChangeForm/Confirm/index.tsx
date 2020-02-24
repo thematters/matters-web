@@ -68,17 +68,13 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       comparedPassword: ''
     },
     validate: ({ password, comparedPassword }) => {
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
-        lang
-      )
       return {
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
-          : {})
+        password: validatePassword(password, lang),
+        comparedPassword: validateComparedPassword(
+          password,
+          comparedPassword,
+          lang
+        )
       }
     },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {

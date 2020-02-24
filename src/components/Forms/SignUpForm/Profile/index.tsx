@@ -74,14 +74,10 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       description: ''
     },
     validate: ({ avatar, displayName, description }) => {
-      const isValidAvatar = validateAvatar(avatar, lang)
-      const isInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isValidDescription = validateDescription(description, lang)
-
       return {
-        ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
-        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
-        ...(isValidDescription ? { description: isValidDescription } : {})
+        avatar: validateAvatar(avatar, lang),
+        displayName: validateDisplayName(displayName, lang),
+        description: validateDescription(description, lang)
       }
     },
     onSubmit: async (

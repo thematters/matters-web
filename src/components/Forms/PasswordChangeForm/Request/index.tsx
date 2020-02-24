@@ -59,11 +59,9 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
-      const isInvalidCode = validateCode(code, lang)
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        code: validateCode(code, lang)
       }
     },
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {

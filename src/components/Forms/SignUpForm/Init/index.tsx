@@ -116,19 +116,12 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       tos: true
     },
     validate: ({ email, code, userName, password, tos }) => {
-      const isInvalidEmail = validateEmail(email, lang, {
-        allowPlusSign: false
-      })
-      const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidToS = validateToS(tos, lang)
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidToS ? { tos: isInvalidToS } : {})
+        email: validateEmail(email, lang, { allowPlusSign: false }),
+        code: validateCode(code, lang),
+        userName: validatePassword(password, lang),
+        password: validateUserName(userName, lang),
+        tos: validateToS(tos, lang)
       }
     },
     onSubmit: async (

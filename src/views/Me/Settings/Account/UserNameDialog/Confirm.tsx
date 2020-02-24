@@ -54,17 +54,13 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       comparedUserName: ''
     },
     validate: ({ userName, comparedUserName }) => {
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidComparedUserName = validateComparedUserName(
-        userName,
-        comparedUserName,
-        lang
-      )
       return {
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
-        ...(isInvalidComparedUserName
-          ? { comparedUserName: isInvalidComparedUserName }
-          : {})
+        userName: validateUserName(userName, lang),
+        comparedUserName: validateComparedUserName(
+          userName,
+          comparedUserName,
+          lang
+        )
       }
     },
     onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {

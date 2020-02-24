@@ -76,15 +76,9 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
       description: user.info.description
     },
     validate: ({ displayName, description }) => {
-      const inInvalidDisplayName = validateDisplayName(
-        displayName,
-        lang,
-        viewer.isAdmin
-      )
-      const isInvalidDescription = validateDescription(description, lang)
       return {
-        ...(inInvalidDisplayName ? { displayName: inInvalidDisplayName } : {}),
-        ...(isInvalidDescription ? { description: isInvalidDescription } : {})
+        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
+        description: validateDescription(description, lang)
       }
     },
     onSubmit: async ({ displayName, description }, { setSubmitting }) => {

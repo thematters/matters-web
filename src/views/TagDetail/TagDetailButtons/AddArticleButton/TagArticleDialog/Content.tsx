@@ -93,15 +93,14 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     },
     validate: ({ name, articles }) => {
       return {
-        ...(articles && articles.length === 0
-          ? {
-              name: translate({
+        name:
+          articles && articles.length === 0
+            ? translate({
                 zh_hant: '至少添加一篇作品',
                 zh_hans: '至少添加一篇作品',
                 lang
               })
-            }
-          : {})
+            : undefined
       }
     },
     onSubmit: async ({ name, articles }, { setFieldError, setSubmitting }) => {
