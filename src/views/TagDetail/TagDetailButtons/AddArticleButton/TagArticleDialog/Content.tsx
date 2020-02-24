@@ -168,6 +168,59 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     )
   }
 
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.DropdownInput
+        type="search"
+        name="name"
+        placeholder={translate({
+          zh_hant: '搜尋作品標題…',
+          zh_hans: '搜索作品标题…',
+          lang
+        })}
+        value={values.name}
+        error={touched.name && errors.name}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        dropdownAppendTo={formId}
+        dropdownAutoSizing={true}
+        dropdownCallback={onClickMenuItem}
+        DropdownContent={DropdownContent}
+        query={SEARCH_ARTICLES}
+      />
+
+      <ul>
+        {selectedArticles.map((article, index) => (
+          <li key={index}>
+            <ArticleDigestDropdown
+              article={article}
+              titleTextSize="md-s"
+              disabled
+              extraButton={
+                <ArticleDigestDropdown.OpenExternalLink article={article} />
+              }
+              borderRadius="xtight"
+              bgColor="grey-lighter"
+              spacing={['tight', 'tight']}
+            />
+
+            <span className="delete-handler">
+              <Button
+                spacing={['base', 0]}
+                aria-label="刪除"
+                onClick={() => onDelete(article)}
+              >
+                <Icon.Clear color="black" />
+              </Button>
+            </span>
+          </li>
+        ))}
+
+        <style jsx>{styles}</style>
+      </ul>
+    </Form>
+  )
+
   const SubmitButton = (
     <Dialog.Header.RightButton
       text={
@@ -196,57 +249,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>
-        <Form id={formId} onSubmit={handleSubmit}>
-          <Form.DropdownInput
-            type="search"
-            name="name"
-            placeholder={translate({
-              zh_hant: '搜尋作品標題…',
-              zh_hans: '搜索作品标题…',
-              lang
-            })}
-            value={values.name}
-            error={touched.name && errors.name}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            dropdownAppendTo={formId}
-            dropdownAutoSizing={true}
-            dropdownCallback={onClickMenuItem}
-            DropdownContent={DropdownContent}
-            query={SEARCH_ARTICLES}
-          />
-
-          <ul>
-            {selectedArticles.map((article, index) => (
-              <li key={index}>
-                <ArticleDigestDropdown
-                  article={article}
-                  titleTextSize="md-s"
-                  disabled
-                  extraButton={
-                    <ArticleDigestDropdown.OpenExternalLink article={article} />
-                  }
-                  borderRadius="xtight"
-                  bgColor="grey-lighter"
-                  spacing={['tight', 'tight']}
-                />
-
-                <span className="delete-handler">
-                  <Button
-                    spacing={['base', 0]}
-                    aria-label="刪除"
-                    onClick={() => onDelete(article)}
-                  >
-                    <Icon.Clear color="black" />
-                  </Button>
-                </span>
-              </li>
-            ))}
-
-            <style jsx>{styles}</style>
-          </ul>
-        </Form>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
       </Dialog.Content>
     </>
   )

@@ -32,6 +32,7 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
         isOpen={showDialog}
         onDismiss={close}
         size={step === 'ask' || step === 'complete' ? 'sm' : 'lg'}
+        fixedHeight={step === 'confirm'}
       >
         {step === 'ask' && (
           <Ask nextStep={() => setStep('confirm')} closeDialog={close} />

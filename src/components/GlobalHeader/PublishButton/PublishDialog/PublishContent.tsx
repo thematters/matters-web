@@ -116,7 +116,7 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
         <PublishSlide />
       </Dialog.Content>
     </>

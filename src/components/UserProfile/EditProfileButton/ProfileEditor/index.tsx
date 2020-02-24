@@ -7,40 +7,45 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  PageHeader,
-  Translate
+  Translate,
+  ViewerContext
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
   translate,
-  validateAvatar,
   validateDescription,
   validateDisplayName
 } from '~/common/utils'
 
-import AvatarUploadField from './AvatarUploadField'
+import ProfileAvatarUploader from './ProfileAvatarUploader'
+import ProfileCoverUploader from './ProfileCoverUploader'
+import styles from './styles.css'
 
-import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
+import {
+  UpdateUserInfoProfile,
+  UpdateUserInfoProfile_updateUserInfo
+} from './__generated__/UpdateUserInfoProfile'
+
+export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo
 
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  submitCallback?: () => void
-  closeDialog?: () => void
+  user: ProfileEditorUser
+  closeDialog: () => void
 }
 
 interface FormValues {
-  avatar: null | string
   displayName: string
   description: string
 }
 
 const UPDATE_USER_INFO = gql`
-  mutation UpdateUserInfoProfileInit($input: UpdateUserInfoInput!) {
+  mutation UpdateUserInfoProfile($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
       id
       avatar
+      displayName
       info {
         description
       }
@@ -48,15 +53,12 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const SignUpProfileForm: React.FC<FormProps> = ({
-  purpose,
-  submitCallback,
-  closeDialog
-}) => {
-  const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
+const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
+  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
-  const formId = 'signup-profile-form'
+  const viewer = useContext(ViewerContext)
+
+  const formId = 'user-profile-editor'
 
   const {
     values,
@@ -65,42 +67,23 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
-      avatar: null,
-      displayName: '',
-      description: ''
+      displayName: user.displayName || '',
+      description: user.info.description || ''
     },
-    validate: ({ avatar, displayName, description }) => {
+    validate: ({ displayName, description }) => {
       return {
-        avatar: validateAvatar(avatar, lang),
-        displayName: validateDisplayName(displayName, lang),
+        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
         description: validateDescription(description, lang)
       }
     },
-    onSubmit: async (
-      { avatar, displayName, description },
-      { props, setSubmitting }: any
-    ) => {
+    onSubmit: async ({ displayName, description }, { setSubmitting }) => {
       try {
-        await update({
-          variables: {
-            input: {
-              displayName,
-              description,
-              ...(avatar ? { avatar } : {})
-            }
-          }
-        })
-      } catch (e) {
-        // do not block the next step since register is successfully
-        console.error(e)
-      }
-
-      if (submitCallback) {
-        submitCallback()
+        await update({ variables: { input: { displayName, description } } })
+      } catch (error) {
+        // TODO: Handle error
       }
 
       setSubmitting(false)
@@ -109,11 +92,13 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <AvatarUploadField
-        onUpload={assetId => {
-          setFieldValue('avatar', assetId)
-        }}
-      />
+      <section className="cover-field">
+        <ProfileCoverUploader user={user} />
+      </section>
+
+      <section className="avatar-field">
+        <ProfileAvatarUploader user={user} />
+      </section>
 
       <Form.Input
         label={
@@ -130,6 +115,12 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
           zh_hans: TEXT.zh_hans.enterDisplayName,
           lang
         })}
+        hint={
+          <Translate
+            zh_hant={TEXT.zh_hant.displayNameHint}
+            zh_hans={TEXT.zh_hans.displayNameHint}
+          />
+        }
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -146,8 +137,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         name="description"
         required
         placeholder={translate({
-          zh_hant: '介紹你自己，獲得更多社區關注',
-          zh_hans: '介绍你自己，获得更多社区关注',
+          zh_hant: '請輸入個人簡介',
+          zh_hans: '请输入个人简介',
           lang
         })}
         hint={
@@ -161,6 +152,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
+      <style jsx>{styles}</style>
     </Form>
   )
 
@@ -169,50 +162,20 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!_isEmpty(errors) || isSubmitting}
-      onClick={handleSubmit}
       text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
+        <Translate zh_hant={TEXT.zh_hant.save} zh_hans={TEXT.zh_hans.save} />
       }
       loading={isSubmitting}
     />
   )
 
-  if (isInPage) {
-    return (
-      <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.userProfile}
-              zh_hans={TEXT.zh_hans.userProfile}
-            />
-          }
-          hasNoBorder
-        >
-          {SubmitButton}
-        </PageHeader>
-
-        {InnerForm}
-      </>
-    )
-  }
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.userProfile}
-              zh_hans={TEXT.zh_hans.userProfile}
-            />
-          }
-          close={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header
+        title={<Translate zh_hant="編輯資料" zh_hans="编辑资料" />}
+        close={closeDialog}
+        rightButton={SubmitButton}
+      />
 
       <Dialog.Content spacing={[0, 0]} hasGrow>
         {InnerForm}
@@ -220,3 +183,5 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     </>
   )
 }
+
+export default ProfileEditor

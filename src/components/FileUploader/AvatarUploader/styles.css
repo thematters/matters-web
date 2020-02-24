@@ -2,6 +2,11 @@ label {
   position: relative;
   display: inline-block;
   font-size: 0;
+
+  &.has-border {
+    border: 3px solid var(--color-white);
+    border-radius: 50%;
+  }
 }
 
 .mask {

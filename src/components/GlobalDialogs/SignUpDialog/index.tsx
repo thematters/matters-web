@@ -35,7 +35,11 @@ const SignUpDialog = () => {
   useEventListener(OPEN_SIGNUP_DIALOG, open)
 
   return (
-    <Dialog isOpen={showDialog} onDismiss={close}>
+    <Dialog
+      isOpen={showDialog}
+      onDismiss={close}
+      fixedHeight={step !== 'complete'}
+    >
       {step === 'signUp' && (
         <SignUpInitForm
           purpose="dialog"

@@ -12,6 +12,8 @@ main {
 }
 
 article {
+  height: 100%;
+
   & :global(> header) {
     padding: 0 var(--spacing-base);
 

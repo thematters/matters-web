@@ -57,6 +57,7 @@ const ResetPasswordDialog = () => {
       isOpen={showDialog}
       onDismiss={close}
       size={step === 'complete' ? 'sm' : 'lg'}
+      fixedHeight={step !== 'complete'}
     >
       {step === 'request' && (
         <PasswordChangeRequestForm

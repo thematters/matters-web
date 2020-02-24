@@ -13,7 +13,7 @@ const LoginDialog = () => {
   useEventListener(OPEN_LOGIN_DIALOG, open)
 
   return (
-    <Dialog isOpen={showDialog} onDismiss={close}>
+    <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
       <LoginForm purpose="dialog" submitCallback={close} closeDialog={close} />
     </Dialog>
   )

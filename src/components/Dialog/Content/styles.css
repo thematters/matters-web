@@ -5,6 +5,10 @@
 
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+
+  &.has-grow {
+    flex-grow: 1;
+  }
 }
 
 .spacing-x-0 {

@@ -163,7 +163,9 @@ const Request: React.FC<FormProps> = ({
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

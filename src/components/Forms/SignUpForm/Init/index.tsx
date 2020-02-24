@@ -348,7 +348,9 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

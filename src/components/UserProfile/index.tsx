@@ -5,7 +5,7 @@ import _get from 'lodash/get'
 import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Avatar,
@@ -27,7 +27,6 @@ import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
-import UserProfileEditor from './UserProfileEditor'
 
 import { MeProfileUser } from './__generated__/MeProfileUser'
 import { UserProfileUser } from './__generated__/UserProfileUser'
@@ -115,11 +114,9 @@ export const UserProfile = () => {
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
-  const [editing, setEditing] = useState<boolean>(false)
 
   const containerClass = classNames({
-    container: true,
-    editing
+    container: true
   })
 
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
@@ -136,19 +133,6 @@ export const UserProfile = () => {
         <CoverContainer>
           <Spinner />
         </CoverContainer>
-
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
-
-  if (isMe && editing) {
-    return (
-      <section className={containerClass}>
-        <UserProfileEditor
-          user={_get(data, 'viewer')}
-          setEditing={setEditing}
-        />
 
         <style jsx>{styles}</style>
       </section>
@@ -252,9 +236,7 @@ export const UserProfile = () => {
                 </section>
 
                 <section className="buttons">
-                  {isMe && !isUserInactive && (
-                    <EditProfileButton setEditing={setEditing} />
-                  )}
+                  {isMe && !isUserInactive && <EditProfileButton user={user} />}
 
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     {!isMe && <DropdownActions user={user} />}

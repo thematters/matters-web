@@ -159,7 +159,9 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

@@ -35,6 +35,7 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
         {step === 'term' && (
           <LikeCoinTerm nextStep={nextStep} closeDialog={close} />
         )}
+
         {step === 'setup' && (
           <SetupLikeCoin
             purpose="dialog"
