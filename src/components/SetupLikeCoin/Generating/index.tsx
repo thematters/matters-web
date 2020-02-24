@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
-import { Dialog, Form, Spinner, Translate } from '~/components'
+import { Dialog, Icon, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
 
@@ -45,45 +43,51 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   }, [])
 
   return (
-    <Dialog.Content>
-      <Form>
-        <section className="container">
-          {!error && (
-            <>
-              <Spinner />
-              <p>
-                <Translate
-                  zh_hant="正在生成 Liker ID"
-                  zh_hans="正在生成 Liker ID"
-                />
-              </p>
-            </>
-          )}
-          {error && (
-            <p>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-              />
-            </p>
-          )}
-        </section>
+    <>
+      <Dialog.Content>
+        <Dialog.Message
+          description={
+            error ? (
+              <>
+                <Spinner />
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            disabled={!error}
-            onClick={() => {
-              prevStep()
-              analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-            }}
-          >
-            <Translate id={error ? 'retry' : 'continue'} />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+                <p>
+                  <Translate
+                    zh_hant="正在生成 Liker ID"
+                    zh_hans="正在生成 Liker ID"
+                  />
+                </p>
+              </>
+            ) : (
+              <>
+                <div>
+                  <Icon.EmptyWarning color="grey-light" size="xl" />
+                </div>
 
-        <style jsx>{styles}</style>
-      </Form>
-    </Dialog.Content>
+                <p>
+                  <Translate
+                    zh_hant="哎呀，設置失敗了。"
+                    zh_hans="哎呀，设置失败了。"
+                  />
+                </p>
+              </>
+            )
+          }
+        />
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          disabled={!error}
+          onClick={() => {
+            prevStep()
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+          }}
+        >
+          <Translate id={error ? 'retry' : 'continue'} />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
+    </>
   )
 }
 

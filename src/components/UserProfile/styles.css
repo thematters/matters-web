@@ -177,33 +177,10 @@
   }
 }
 
-.editing {
-  background-color: var(--color-white);
-
-  & > .content-container {
-    background-color: var(--color-white);
-    border: 1.5px dashed rgba(13, 103, 99, 0.8);
-  }
-}
-
 .cover-container {
   @media (--sm-down) {
     margin-left: 0;
     margin-right: 0;
-  }
-}
-
-.profile-cover {
-  border-radius: 0 0 var(--spacing-xx-tight) var(--spacing-xx-tight);
-
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: 35%;
-
-    @media (--sm-up) {
-      padding-bottom: 27.777778%;
-    }
   }
 }
 

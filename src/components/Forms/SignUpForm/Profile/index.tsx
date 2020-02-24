@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -13,6 +12,7 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
+  hasFormError,
   translate,
   validateAvatar,
   validateDescription,
@@ -73,14 +73,10 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       description: ''
     },
     validate: ({ avatar, displayName, description }) => {
-      const isValidAvatar = validateAvatar(avatar, lang)
-      const isInvalidDisplayName = validateDisplayName(displayName, lang)
-      const isValidDescription = validateDescription(description, lang)
-
       return {
-        ...(isValidAvatar ? { avatar: isValidAvatar } : {}),
-        ...(isInvalidDisplayName ? { displayName: isInvalidDisplayName } : {}),
-        ...(isValidDescription ? { description: isValidDescription } : {})
+        avatar: validateAvatar(avatar, lang),
+        displayName: validateDisplayName(displayName, lang),
+        description: validateDescription(description, lang)
       }
     },
     onSubmit: async (
@@ -122,7 +118,11 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         label={<Translate id="displayName" />}
         type="text"
         name="displayName"
-        placeholder={translate({ id: 'enterDisplayName', lang })}
+        required
+        placeholder={translate({
+          id: 'enterDisplayName',
+          lang
+        })}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -132,16 +132,17 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       <Form.Textarea
         label={<Translate id="userProfile" />}
         name="description"
+        required
         placeholder={translate({
           zh_hant: '介紹你自己，獲得更多社區關注',
           zh_hans: '介绍你自己，获得更多社区关注',
           lang
         })}
+        hint={<Translate id="descriptionHint" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={<Translate id="descriptionHint" />}
       />
     </Form>
   )
@@ -150,7 +151,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       onClick={handleSubmit}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
@@ -178,7 +179,9 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

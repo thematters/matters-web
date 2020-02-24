@@ -16,11 +16,11 @@ const {
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <Form>
-        <Hint />
+    <Dialog.Content spacing={[0, 0]} hasGrow>
+      <Hint />
 
-        <Form.ClickableArea
+      <Form.List>
+        <Form.List.Item
           title={<Translate zh_hant="生成 Liker ID" zh_hans="生成 Liker ID" />}
           subtitle={
             <Translate
@@ -30,8 +30,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
           }
           onClick={startGenerate}
         />
-
-        <Form.ClickableArea
+        <Form.List.Item
           title={<Translate zh_hant="綁定 Liker ID" zh_hans="綁定 Liker ID" />}
           subtitle={
             <Translate
@@ -39,7 +38,6 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
               zh_hans="跳转到 like.co 验证已有 Liker ID"
             />
           }
-          collapseTop
           onClick={() => {
             const url = `${OAUTH_URL}/likecoin`
             const windowRef = window.open(url, '_blank')
@@ -49,9 +47,9 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
             }
           }}
         />
+      </Form.List>
 
-        <Intro />
-      </Form>
+      <Intro />
     </Dialog.Content>
   )
 }

@@ -21,7 +21,7 @@ import styles from './styles.css'
  */
 type TextareaProps = {
   name: string
-} & FieldProps &
+} & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
@@ -38,6 +38,7 @@ const Textarea: React.FC<TextareaProps> = ({
   ...textareaProps
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
+  const fieldMsgId = `textarea-msg-${name}`
 
   useEffect(() => {
     if (node && node.current) {
@@ -50,10 +51,16 @@ const Textarea: React.FC<TextareaProps> = ({
       <Field.Header label={label} htmlFor={name} extraButton={extraButton} />
 
       <Field.Content>
-        <textarea ref={node} {...textareaProps} id={name} name={name} />
+        <textarea
+          ref={node}
+          {...textareaProps}
+          id={name}
+          name={name}
+          aria-describedby={fieldMsgId}
+        />
       </Field.Content>
 
-      <Field.Footer hint={hint} error={error} />
+      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
       <style jsx>{styles}</style>
     </Field>

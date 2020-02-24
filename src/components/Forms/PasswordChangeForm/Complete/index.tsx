@@ -1,5 +1,3 @@
-import _isEmpty from 'lodash/isEmpty'
-
 import { Dialog, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'

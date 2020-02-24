@@ -1,7 +1,7 @@
 import CheckBox from './CheckBox'
-import ClickableArea from './ClickableArea'
 import DropdownInput from './DropdownInput'
 import Input from './Input'
+import List from './List'
 import styles from './styles.css'
 import Textarea from './Textarea'
 
@@ -15,7 +15,7 @@ export const Form: React.FC<FormProps> & {
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
   DropdownInput: typeof DropdownInput
-  ClickableArea: typeof ClickableArea
+  List: typeof List
 } = ({ children, ...formProps }) => (
   <form {...formProps}>
     {children}
@@ -28,4 +28,4 @@ Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
 Form.DropdownInput = DropdownInput
-Form.ClickableArea = ClickableArea
+Form.List = List

@@ -102,7 +102,7 @@ const ClearHistoryButton = () => {
         )
       }}
     >
-      <TextIcon size="xs" weight="normal" color="grey-light">
+      <TextIcon size="xs" weight="normal" color="grey">
         <Translate zh_hant="清空" zh_hans="清空" />
       </TextIcon>
     </Button>

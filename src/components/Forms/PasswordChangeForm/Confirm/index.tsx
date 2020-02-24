@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -14,6 +13,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  hasFormError,
   translate,
   validateComparedPassword,
   validatePassword
@@ -68,17 +68,13 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       comparedPassword: ''
     },
     validate: ({ password, comparedPassword }) => {
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
-        lang
-      )
       return {
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
-          : {})
+        password: validatePassword(password, lang),
+        comparedPassword: validateComparedPassword(
+          password,
+          comparedPassword,
+          lang
+        )
       }
     },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
@@ -111,16 +107,19 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         label={<Translate id="password" />}
         type="password"
         name="password"
+        required
         placeholder={translate({ id: 'enterPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
       <Form.Input
         label={<Translate id="newPassword" />}
         type="password"
         name="comparedPassword"
+        required
         placeholder={translate({ id: 'enterPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
@@ -135,7 +134,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
@@ -169,7 +168,9 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

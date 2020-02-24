@@ -1,5 +1,3 @@
-import _isEmpty from 'lodash/isEmpty'
-
 import { Button, Form, TextIcon, Translate } from '~/components'
 
 import {
@@ -33,22 +31,24 @@ export const PasswordResetRedirectButton = () => (
 )
 
 export const SignUpDialogButton = () => (
-  <Form.ClickableArea
-    title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
-    rightText={<Translate id="register" />}
-    spacing={['base', 0]}
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
-    }}
-  />
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
+      rightText={<Translate id="register" />}
+      onClick={() => {
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
+      }}
+    />
+  </Form.List>
 )
 
 export const SignUpRedirectionButton = () => (
-  <Form.ClickableArea
-    title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
-    rightText={<Translate id="register" />}
-    spacing={['base', 0]}
-    {...appendTarget(PATHS.AUTH_SIGNUP)}
-  />
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
+      rightText={<Translate id="register" />}
+      {...appendTarget(PATHS.AUTH_SIGNUP)}
+    />
+  </Form.List>
 )

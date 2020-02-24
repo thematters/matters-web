@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -21,6 +20,7 @@ import {
 import {
   analytics,
   // clearPersistCache,
+  hasFormError,
   redirectToTarget,
   translate,
   validateEmail,
@@ -151,8 +151,8 @@ export const LoginForm: React.FC<FormProps> = ({
         label={<Translate id="email" />}
         type="email"
         name="email"
-        placeholder={translate({ id: 'enterEmail', lang })}
         required
+        placeholder={translate({ id: 'enterEmail', lang })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -163,8 +163,8 @@ export const LoginForm: React.FC<FormProps> = ({
         label={<Translate id="password" />}
         type="password"
         name="password"
-        placeholder={translate({ id: 'enterPassword', lang })}
         required
+        placeholder={translate({ id: 'enterPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -186,7 +186,7 @@ export const LoginForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
@@ -214,7 +214,9 @@ export const LoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

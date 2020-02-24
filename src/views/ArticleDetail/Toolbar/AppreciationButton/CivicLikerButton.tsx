@@ -2,23 +2,20 @@ import AppreciateButton from './AppreciateButton'
 import CivicLikerDialog from './CivicLikerDialog'
 
 const CivicLikerButton = ({
-  onClick,
+  onClose,
   count,
   total,
   inFixedToolbar
 }: {
-  onClick: () => void
+  onClose: () => void
   count?: number
   total: number
   inFixedToolbar?: boolean
 }) => (
-  <CivicLikerDialog>
+  <CivicLikerDialog onClose={onClose}>
     {({ open }) => (
       <AppreciateButton
-        onClick={() => {
-          open()
-          onClick()
-        }}
+        onClick={open}
         count={count}
         total={total}
         inFixedToolbar={inFixedToolbar}

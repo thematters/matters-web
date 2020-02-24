@@ -9,6 +9,10 @@
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
   text-align: center;
+
+  &.left {
+    text-align: left;
+  }
 }
 
 .headline + .description {

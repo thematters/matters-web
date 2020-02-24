@@ -1,14 +1,9 @@
-import {
-  Button,
-  Icon,
-  LikeCoinDialog,
-  PublishDialog,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Button, Icon, LikeCoinDialog, TextIcon, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import { PublishDialog } from './PublishDialog'
 
 interface Props {
   allowed: boolean

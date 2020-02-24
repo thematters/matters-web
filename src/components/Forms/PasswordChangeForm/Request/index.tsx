@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -14,7 +13,12 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import { TEXT } from '~/common/enums'
-import { translate, validateCode, validateEmail } from '~/common/utils'
+import {
+  hasFormError,
+  translate,
+  validateCode,
+  validateEmail
+} from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
@@ -59,11 +63,9 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
-      const isInvalidCode = validateCode(code, lang)
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        code: validateCode(code, lang)
       }
     },
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
@@ -101,6 +103,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         label={<Translate id="email" />}
         type="email"
         name="email"
+        required
         placeholder={translate({
           id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
           lang
@@ -111,11 +114,13 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
       <Form.Input
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
         autoComplete="off"
+        required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
         value={values.code}
         error={touched.code && errors.code}
@@ -124,8 +129,8 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         extraButton={
           <SendCodeButton
             email={values.email}
-            lang={lang}
             type="password_reset"
+            disabled={!!errors.email}
           />
         }
       />
@@ -136,7 +141,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
@@ -170,7 +175,9 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

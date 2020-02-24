@@ -2,16 +2,16 @@ import { useContext } from 'react'
 
 import {
   Button,
-  ChangeEmailDialog,
   ChangePasswordDialog,
   PageHeader,
   TextIcon,
   Translate,
-  UserNameDialog,
   ViewerContext
 } from '~/components'
 
+import { ChangeEmailDialog } from './ChangeEmailDialog'
 import styles from './styles.css'
+import { UserNameDialog } from './UserNameDialog'
 
 const EditButton = ({
   open,

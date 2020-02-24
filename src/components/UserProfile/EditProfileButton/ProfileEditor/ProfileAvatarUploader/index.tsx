@@ -32,6 +32,7 @@ export const ProfileAvatarUploader: React.FC<ProfileAvatarUploaderProps> = ({
       onUpload={assetId => {
         update({ variables: { input: { avatar: assetId } } })
       }}
+      hasBorder
     />
   )
 }

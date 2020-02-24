@@ -6,10 +6,11 @@ import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 interface CivicLikerDialogProps {
+  onClose: () => void
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
+const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setShowDialog(true)
@@ -18,6 +19,7 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
   const close = () => {
     setShowDialog(false)
     analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_CIVIC_LIKER_MODAL)
+    onClose()
   }
 
   return (
@@ -25,29 +27,38 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Dialog.Header title={<Translate id="share" />} close={close} />
+        <Dialog.Header
+          title={<Translate id="joinCivicLiker" />}
+          close={close}
+          headerHidden
+        />
 
-        <Dialog.Content spacing={['xloose', 'xloose']}>
-          <p>
-            <Translate
-              zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
-              zh_hans="赞赏公民是一场回馈优秀内容的运动。每月只需付出一杯咖啡的价钱，就能成为赞赏公民，从此每个点赞，都会化成对创作者的实质支持。"
-            />
-          </p>
+        <Dialog.Message
+          headline={<Translate id="joinCivicLiker" />}
+          textAlign="left"
+          description={
+            <>
+              <p>
+                <Translate
+                  zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
+                  zh_hans="赞赏公民是一场回馈优秀内容的运动。每月只需付出一杯咖啡的价钱，就能成为赞赏公民，从此每个点赞，都会化成对创作者的实质支持。"
+                />
+              </p>
+              <br />
 
-          <br />
-
-          <p>
-            <Translate zh_hant="瞭解更多 " zh_hans="了解更多" />
-            <a
-              className="u-link-green"
-              href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
-              target="_blank"
-            >
-              <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" />
-            </a>
-          </p>
-        </Dialog.Content>
+              <p>
+                <Translate zh_hant="瞭解更多 " zh_hans="了解更多" />
+                <a
+                  className="u-link-green"
+                  href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
+                  target="_blank"
+                >
+                  <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" />
+                </a>
+              </p>
+            </>
+          }
+        />
 
         <Dialog.Footer>
           <Dialog.Footer.Button

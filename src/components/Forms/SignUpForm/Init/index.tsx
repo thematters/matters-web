@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -25,6 +24,7 @@ import {
 import {
   analytics,
   appendTarget,
+  hasFormError,
   translate,
   validateCode,
   validateEmail,
@@ -60,24 +60,30 @@ const USER_REGISTER = gql`
 `
 
 const LoginDialogButton = () => (
-  <Form.ClickableArea
-    title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-    rightText={<Translate id="login" />}
-    spacing={['base', 0]}
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-    }}
-  />
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      rightText={
+        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+      }
+      onClick={() => {
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+      }}
+    />
+  </Form.List>
 )
 
 const LoginRedirectionButton = () => (
-  <Form.ClickableArea
-    title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-    rightText={<Translate id="login" />}
-    spacing={['base', 0]}
-    {...appendTarget(PATHS.AUTH_LOGIN)}
-  />
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      rightText={
+        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+      }
+      {...appendTarget(PATHS.AUTH_LOGIN)}
+    />
+  </Form.List>
 )
 
 export const SignUpInitForm: React.FC<FormProps> = ({
@@ -110,19 +116,12 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       tos: true
     },
     validate: ({ email, code, userName, password, tos }) => {
-      const isInvalidEmail = validateEmail(email, lang, {
-        allowPlusSign: false
-      })
-      const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidToS = validateToS(tos, lang)
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidToS ? { tos: isInvalidToS } : {})
+        email: validateEmail(email, lang, { allowPlusSign: false }),
+        code: validateCode(code, lang),
+        userName: validatePassword(password, lang),
+        password: validateUserName(userName, lang),
+        tos: validateToS(tos, lang)
       }
     },
     onSubmit: async (
@@ -175,7 +174,11 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label={<Translate id="email" />}
         type="email"
         name="email"
-        placeholder={translate({ id: 'email', lang })}
+        required
+        placeholder={translate({
+          id: 'enterEmail',
+          lang
+        })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -187,13 +190,21 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="text"
         name="code"
         autoComplete="off"
-        placeholder={translate({ id: 'verificationCode', lang })}
+        required
+        placeholder={translate({
+          id: 'enterVerificationCode',
+          lang
+        })}
         value={values.code}
         error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
-          <SendCodeButton email={values.email} lang={lang} type="register" />
+          <SendCodeButton
+            email={values.email}
+            type="register"
+            disabled={!!errors.email}
+          />
         }
       />
 
@@ -202,11 +213,19 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="text"
         name="userName"
         autoComplete="off"
+        required
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={translate({ id: 'userNameHint', lang })}
+        placeholder={translate({
+          id: 'enterUserName',
+          lang
+        })}
+        hint={translate({
+          id: 'userNameHint',
+          lang
+        })}
       />
 
       <Form.Input
@@ -214,7 +233,11 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="password"
         name="password"
         autoComplete="off"
-        placeholder={translate({ id: 'password', lang })}
+        required
+        placeholder={translate({
+          id: 'enterPassword',
+          lang
+        })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -242,6 +265,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
             </Link>
           </>
         }
+        required
       />
 
       {isInDialog && <LoginDialogButton />}
@@ -253,7 +277,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
@@ -281,7 +305,9 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

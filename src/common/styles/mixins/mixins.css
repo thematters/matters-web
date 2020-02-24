@@ -64,6 +64,14 @@
   border-top: 1px solid var(--color-line-grey-light);
 }
 
+@define-mixin shadow-border-bottom-grey {
+  box-shadow: 0 1px 0 0 var(--color-line-grey-light);
+}
+
+@define-mixin shadow-border-top-grey {
+  box-shadow: 0 -1px 0 0 var(--color-line-grey-light);
+}
+
 /* Form
    ========================================================================== */
 @define-mixin form-input {

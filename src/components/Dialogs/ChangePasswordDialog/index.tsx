@@ -51,8 +51,6 @@ export const ChangePasswordDialog = ({
     setStep('confirm')
   }
 
-  const headerHidden = step === 'complete'
-
   return (
     <>
       {children && children({ open })}
@@ -60,7 +58,8 @@ export const ChangePasswordDialog = ({
       <Dialog
         isOpen={showDialog}
         onDismiss={close}
-        size={headerHidden ? 'sm' : 'lg'}
+        size={step === 'complete' ? 'sm' : 'lg'}
+        fixedHeight={step !== 'complete'}
       >
         {step === 'request' && (
           <PasswordChangeRequestForm

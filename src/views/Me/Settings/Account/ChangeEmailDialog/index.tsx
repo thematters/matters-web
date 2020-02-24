@@ -52,6 +52,7 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
         isOpen={showDialog}
         onDismiss={close}
         size={step === 'complete' ? 'sm' : 'lg'}
+        fixedHeight={step !== 'complete'}
       >
         {step === 'request' && (
           <Request

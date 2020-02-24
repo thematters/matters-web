@@ -2,12 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Dialog, Form, Spinner, Translate } from '~/components'
+import { Dialog, Icon, Spinner, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 
@@ -55,12 +53,13 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   }
 
   return (
-    <Dialog.Content>
-      <Form>
-        <section className="container">
-          {!error && (
+    <>
+      <Dialog.Message
+        description={
+          error ? (
             <>
               <Spinner />
+
               <p>
                 <Translate
                   zh_hant="請在新頁面完成綁定，不要關閉本窗口"
@@ -68,32 +67,35 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
                 />
               </p>
             </>
-          )}
-          {error && (
-            <p>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-              />
-            </p>
-          )}
-        </section>
+          ) : (
+            <>
+              <div>
+                <Icon.EmptyWarning color="grey-light" size="xl" />
+              </div>
 
-        <Dialog.Footer>
-          <Dialog.Footer.Button
-            disabled={!error}
-            onClick={() => {
-              prevStep()
-              analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-            }}
-          >
-            <Translate id="retry" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
+              <p>
+                <Translate
+                  zh_hant="哎呀，設置失敗了。"
+                  zh_hans="哎呀，设置失败了。"
+                />
+              </p>
+            </>
+          )
+        }
+      />
 
-        <style jsx>{styles}</style>
-      </Form>
-    </Dialog.Content>
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          disabled={!error}
+          onClick={() => {
+            prevStep()
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+          }}
+        >
+          <Translate id="retry" />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
+    </>
   )
 }
 

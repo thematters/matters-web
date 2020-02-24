@@ -78,33 +78,35 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const hasTitle = draft.title && draft.title.length > 0
   const isUnpublished = draft.publishState === 'unpublished'
   const publishable = id && isUnpublished && hasContent && hasTitle
+  const onPublish = async () => {
+    const { data: publishData } = await publish({ variables: { id } })
+
+    const state = publishData?.publishArticle.publishState || 'unpublished'
+
+    if (state === 'pending' || state === 'published') {
+      closeDialog()
+    }
+
+    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
+  }
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      text={<Translate id="publish" />}
+      disabled={!publishable}
+      onClick={onPublish}
+    />
+  )
 
   return (
     <>
       <Dialog.Header
         title={<Translate id="publish" />}
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            text={<Translate id="publish" />}
-            disabled={!publishable}
-            onClick={async () => {
-              const { data: publishData } = await publish({ variables: { id } })
-
-              const state =
-                publishData?.publishArticle.publishState || 'unpublished'
-
-              if (state === 'pending' || state === 'published') {
-                closeDialog()
-              }
-
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
-            }}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
         <PublishSlide />
       </Dialog.Content>
     </>

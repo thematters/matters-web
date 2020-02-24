@@ -6,7 +6,7 @@
 
 .image-container {
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+  border-bottom: 1px solid var(--color-line-grey);
 
   & .image {
     &::after {

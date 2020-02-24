@@ -1,4 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
+import classNames from 'classnames'
 import { useState } from 'react'
 
 import { Avatar, AvatarProps, Translate } from '~/components'
@@ -18,10 +19,12 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
 
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
+  hasBorder?: boolean
 } & AvatarProps
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   onUpload,
+  hasBorder,
   ...avatarProps
 }) => {
   const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -81,8 +84,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     }
   }
 
+  const labelClass = classNames({
+    'has-border': hasBorder
+  })
+
   return (
-    <label>
+    <label className={labelClass} htmlFor="avatar-input">
       <Avatar size="xxl" {...avatarProps} src={avatarProps.src || avatar} />
 
       <div className="mask">
@@ -91,7 +98,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       <VisuallyHidden>
         <input
-          className="input"
+          id="avatar-input"
           type="file"
           name="file"
           aria-label="上傳頭像"

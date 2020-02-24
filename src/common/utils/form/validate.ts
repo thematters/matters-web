@@ -1,3 +1,7 @@
+import _identity from 'lodash/identity'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
+
 import {
   isValidDisplayName,
   isValidEmail,
@@ -100,3 +104,6 @@ export const validateAvatar = (value: string | null, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 }
+
+export const hasFormError = (errors: { [key: string]: any }) =>
+  _isEmpty(_pickBy(errors, _identity))

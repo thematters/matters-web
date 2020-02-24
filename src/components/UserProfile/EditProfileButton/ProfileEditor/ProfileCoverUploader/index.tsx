@@ -1,16 +1,18 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 
-import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
+import { Button, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import Cover from '~/components/UserProfile/Cover'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
+  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
 
+import Cover from '../../../Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
@@ -42,9 +44,12 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
-  const [update] = useMutation<UpdateUserInfoCover>(UPDATE_USER_INFO)
-  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [update, { loading: updateLoading }] = useMutation<UpdateUserInfoCover>(
+    UPDATE_USER_INFO
+  )
+  const [upload, { loading: uploadLoading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE
+  )
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,47 +108,50 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
   }
 
   return (
-    <section className="container">
+    <label htmlFor="profile-input">
       <Cover cover={user.info.profileCover} />
 
-      <div className="uploader">
-        <div className="buttons">
-          <Button size={[null, '2rem']} borderColor="white" borderWidth="sm">
-            <label htmlFor="upload-input">
-              <TextIcon icon={<Icon.Camera color="white" />}>
-                {isMediumUp && (
-                  <Translate zh_hant="選擇圖片" zh_hans="选择图片" />
-                )}
-              </TextIcon>
+      <div className="mask">
+        {uploadLoading || updateLoading ? (
+          <Spinner />
+        ) : (
+          <Icon.CameraMedium color="white" size="xl" />
+        )}
 
-              <input
-                id="upload-input"
-                className="input"
-                type="file"
-                name="file"
-                accept={acceptTypes}
-                multiple={false}
-                onChange={event => handleChange(event)}
-              />
-            </label>
-          </Button>
-
-          {user.info.profileCover && (
+        {user.info.profileCover && (
+          <section className="delete">
             <Button
-              size={[null, '2rem']}
-              spacing={isMediumUp ? [0, 'base'] : [0, 'tight']}
+              size={[null, '1.25rem']}
+              spacing={[0, 'xtight']}
               borderColor="white"
               borderWidth="sm"
-              onClick={() => removeCover()}
+              onClick={removeCover}
             >
-              <Translate zh_hant="刪除" zh_hans="删除" />
+              <TextIcon color="white" size="xs">
+                <Translate
+                  zh_hant={TEXT.zh_hant.delete}
+                  zh_hans={TEXT.zh_hans.delete}
+                />
+              </TextIcon>
             </Button>
-          )}
-        </div>
+          </section>
+        )}
       </div>
 
+      <VisuallyHidden>
+        <input
+          id="profile-input"
+          type="file"
+          name="file"
+          aria-label="上傳封面"
+          accept={acceptTypes}
+          multiple={false}
+          onChange={handleChange}
+        />
+      </VisuallyHidden>
+
       <style jsx>{styles}</style>
-    </section>
+    </label>
   )
 }
 

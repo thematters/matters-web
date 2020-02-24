@@ -20,7 +20,7 @@ import styles from './styles.css'
 type InputProps = {
   type: 'text' | 'password' | 'email' | 'number'
   name: string
-} & FieldProps &
+} & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -37,18 +37,28 @@ const Input: React.FC<InputProps> = ({
   error,
 
   ...inputProps
-}) => (
-  <Field>
-    <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
+}) => {
+  const fieldMsgId = `input-msg-${name}`
 
-    <Field.Content>
-      <input {...inputProps} id={name} name={name} type={type} />
-    </Field.Content>
+  return (
+    <Field>
+      <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
 
-    <Field.Footer hint={hint} error={error} />
+      <Field.Content>
+        <input
+          {...inputProps}
+          id={name}
+          name={name}
+          type={type}
+          aria-describedby={fieldMsgId}
+        />
+      </Field.Content>
 
-    <style jsx>{styles}</style>
-  </Field>
-)
+      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+
+      <style jsx>{styles}</style>
+    </Field>
+  )
+}
 
 export default Input

@@ -29,7 +29,7 @@ const SearchButton = () => (
   </Button>
 )
 
-const BaseSearchBar: React.FC<{
+export const SearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
@@ -135,5 +135,3 @@ const BaseSearchBar: React.FC<{
     </Formik>
   )
 }
-
-export const SearchBar = BaseSearchBar

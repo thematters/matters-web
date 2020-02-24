@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Router from 'next/router'
 import { useContext } from 'react'
 
@@ -16,7 +15,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { numAbbr, toPath, translate } from '~/common/utils'
+import { hasFormError, numAbbr, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -201,6 +200,67 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.DropdownInput
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.tagName}
+            zh_hans={TEXT.zh_hans.tagName}
+          />
+        }
+        type="text"
+        name="newContent"
+        placeholder={translate({
+          zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
+          zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
+          lang
+        })}
+        value={values.newContent}
+        error={touched.newContent && errors.newContent}
+        onBlur={e => {
+          setFieldValue('content', e.target.value.trim())
+          handleBlur(e)
+        }}
+        onChange={handleChange}
+        dropdownAppendTo={formId}
+        dropdownAutoSizing={true}
+        DropdownContent={DropdownContent}
+        query={SEARCH_TAGS}
+      />
+
+      <Form.Textarea
+        label={
+          <Translate
+            zh_hant={TEXT.zh_hant.tagDescription}
+            zh_hans={TEXT.zh_hans.tagDescription}
+          />
+        }
+        name="newDescription"
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
+          zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
+          lang
+        })}
+        value={values.newDescription}
+        error={touched.newDescription && errors.newDescription}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        required
+      />
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      text={<Translate id="confirm" />}
+      type="submit"
+      form={formId}
+      disabled={!hasFormError(errors) || isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
@@ -211,51 +271,11 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           />
         }
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            text={<Translate id="confirm" />}
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>
-        <Form id={formId} onSubmit={handleSubmit}>
-          <Form.DropdownInput
-            label={<Translate id="tagName" />}
-            type="text"
-            name="newContent"
-            placeholder={translate({
-              zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
-              zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
-              lang
-            })}
-            value={values.newContent}
-            error={touched.newContent && errors.newContent}
-            onBlur={e => {
-              setFieldValue('content', e.target.value.trim())
-              handleBlur(e)
-            }}
-            onChange={handleChange}
-            dropdownAppendTo={formId}
-            dropdownAutoSizing={true}
-            DropdownContent={DropdownContent}
-            query={SEARCH_TAGS}
-          />
-
-          <Form.Textarea
-            label={<Translate id="tagDescription" />}
-            name="newDescription"
-            placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
-            value={values.newDescription}
-            error={touched.newDescription && errors.newDescription}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-        </Form>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
       </Dialog.Content>
     </>
   )

@@ -81,7 +81,7 @@ const FooterActions = ({
 
   return (
     <>
-      <footer>
+      <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
         <LikeCoinDialog>
           {({ open }) => (
             <section className="left">

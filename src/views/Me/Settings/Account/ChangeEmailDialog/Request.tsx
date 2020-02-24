@@ -1,6 +1,4 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -14,14 +12,18 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import { TEXT } from '~/common/enums'
-import { translate, validateCode, validateEmail } from '~/common/utils'
+import {
+  hasFormError,
+  translate,
+  validateCode,
+  validateEmail
+} from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { ChangeEmail } from './__generated__/ChangeEmail'
 
 interface FormProps {
-  oldData: { email: string; codeId: string }
-  submitCallback: () => void
+  defaultEmail: string
+  submitCallback?: (codeId: string) => void
   closeDialog: () => void
 }
 
@@ -30,27 +32,14 @@ interface FormValues {
   code: string
 }
 
-const CHANGE_EMAIL = gql`
-  mutation ChangeEmail($input: ChangeEmailInput!) {
-    changeEmail(input: $input) {
-      id
-      info {
-        email
-      }
-    }
-  }
-`
-
-const Confirm: React.FC<FormProps> = ({
-  oldData,
+const Request: React.FC<FormProps> = ({
+  defaultEmail = '',
   submitCallback,
   closeDialog
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
-
-  const formId = 'change-email-confirm-form'
+  const formId = 'change-email-request-form'
 
   const {
     values,
@@ -62,40 +51,24 @@ const Confirm: React.FC<FormProps> = ({
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
-      email: '',
+      email: defaultEmail,
       code: ''
     },
     validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang, {
-        allowPlusSign: false
-      })
-      const isInvalidCode = validateCode(code, lang)
       return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        code: validateCode(code, lang)
       }
     },
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'email_reset_confirm', code } }
+          variables: { input: { email, type: 'email_reset', code } }
         })
         const confirmVerificationCode = data?.confirmVerificationCode
-        const params = {
-          variables: {
-            input: {
-              oldEmail: oldData.email,
-              oldEmailCodeId: oldData.codeId,
-              newEmail: email,
-              newEmailCodeId: confirmVerificationCode
-            }
-          }
-        }
 
-        await changeEmail(params)
-
-        if (submitCallback) {
-          submitCallback()
+        if (submitCallback && confirmVerificationCode) {
+          submitCallback(confirmVerificationCode)
         }
       } catch (error) {
         const errorCode = getErrorCodes(error)[0]
@@ -122,31 +95,44 @@ const Confirm: React.FC<FormProps> = ({
         label={<Translate id="email" />}
         type="email"
         name="email"
-        placeholder={translate({ id: 'enterNewEmail', lang })}
+        disabled
+        required
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
       <Form.Input
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
         autoComplete="off"
+        required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
-        value={values.email}
-        error={touched.email && errors.email}
+        value={values.code}
+        error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
           <SendCodeButton
             email={values.email}
-            lang={lang}
-            type="email_reset_confirm"
+            type="email_reset"
+            disabled={!!errors.email}
           />
         }
       />
     </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!hasFormError(errors) || isSubmitting}
+      text={<Translate id="nextStep" />}
+      loading={isSubmitting}
+    />
   )
 
   return (
@@ -154,20 +140,14 @@ const Confirm: React.FC<FormProps> = ({
       <Dialog.Header
         title={<Translate id="changeEmail" />}
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            text={<Translate id="confirm" />}
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }
 
-export default Confirm
+export default Request

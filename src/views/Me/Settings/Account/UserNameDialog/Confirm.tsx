@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import React, { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
@@ -8,6 +7,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  hasFormError,
   translate,
   validateComparedUserName,
   validateUserName
@@ -54,17 +54,13 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       comparedUserName: ''
     },
     validate: ({ userName, comparedUserName }) => {
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidComparedUserName = validateComparedUserName(
-        userName,
-        comparedUserName,
-        lang
-      )
       return {
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
-        ...(isInvalidComparedUserName
-          ? { comparedUserName: isInvalidComparedUserName }
-          : {})
+        userName: validateUserName(userName, lang),
+        comparedUserName: validateComparedUserName(
+          userName,
+          comparedUserName,
+          lang
+        )
       }
     },
     onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {
@@ -94,17 +90,19 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         label="Matters ID"
         type="text"
         name="userName"
+        required
         placeholder={translate({ id: 'enterUserName', lang })}
+        hint={<Translate id="userNameHint" />}
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={<Translate id="userNameHint" />}
       />
 
       <Form.Input
         type="text"
         name="comparedUserName"
+        required
         placeholder={translate({ id: 'enterUserNameAgign', lang })}
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
@@ -115,23 +113,27 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     </Form>
   )
 
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!hasFormError(errors) || isSubmitting}
+      text={<Translate id="nextStep" />}
+      loading={isSubmitting}
+    />
+  )
+
   return (
     <>
       <Dialog.Header
         title={<Translate id="changeUserName" />}
         close={closeDialog}
-        rightButton={
-          <Dialog.Header.RightButton
-            type="submit"
-            form={formId}
-            disabled={!_isEmpty(errors) || isSubmitting}
-            text={<Translate id="nextStep" />}
-            loading={isSubmitting}
-          />
-        }
+        rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]}>{InnerForm}</Dialog.Content>
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }
