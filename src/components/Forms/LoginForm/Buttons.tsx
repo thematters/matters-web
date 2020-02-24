@@ -1,5 +1,3 @@
-import _isEmpty from 'lodash/isEmpty'
-
 import { Button, Form, TextIcon, Translate } from '~/components'
 
 import {

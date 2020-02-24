@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -14,7 +13,12 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import { TEXT } from '~/common/enums'
-import { translate, validateCode, validateEmail } from '~/common/utils'
+import {
+  hasFormError,
+  translate,
+  validateCode,
+  validateEmail
+} from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { ChangeEmail } from './__generated__/ChangeEmail'
@@ -170,7 +174,7 @@ const Confirm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.confirm}

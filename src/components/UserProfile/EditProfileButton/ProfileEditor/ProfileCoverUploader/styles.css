@@ -1,15 +1,3 @@
-.cover {
-  &::after {
-    content: '';
-    display: block;
-    padding-bottom: 35%;
-
-    @media (--sm-up) {
-      padding-bottom: 27.777778%;
-    }
-  }
-}
-
 label {
   position: relative;
   display: block;
@@ -21,4 +9,10 @@ label {
   @mixin flex-center-all;
 
   background: rgba(0, 0, 0, 0.5);
+}
+
+.delete {
+  position: absolute;
+  right: var(--spacing-base);
+  bottom: var(--spacing-base);
 }

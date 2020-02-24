@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Router from 'next/router'
 import { useContext } from 'react'
 
@@ -16,7 +15,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { numAbbr, toPath, translate } from '~/common/utils'
+import { hasFormError, numAbbr, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -264,7 +263,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       }
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       loading={isSubmitting}
     />
   )

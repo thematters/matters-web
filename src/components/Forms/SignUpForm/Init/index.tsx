@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -25,6 +24,7 @@ import {
 import {
   analytics,
   appendTarget,
+  hasFormError,
   translate,
   validateCode,
   validateEmail,
@@ -302,7 +302,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.nextStep}

@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import React, { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
@@ -8,6 +7,7 @@ import { getErrorCodes, useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  hasFormError,
   translate,
   validateComparedUserName,
   validateUserName
@@ -135,7 +135,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.nextStep}

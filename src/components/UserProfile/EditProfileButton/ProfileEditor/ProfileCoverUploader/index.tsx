@@ -1,17 +1,18 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 
-import { Button, Icon, Translate } from '~/components'
+import { Button, Icon, Spinner, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
+  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import IMAGE_COVER from '~/static/images/profile-cover.png'
 
+import Cover from '../../../Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
@@ -43,8 +44,12 @@ const UPDATE_USER_INFO = gql`
 `
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
-  const [update] = useMutation<UpdateUserInfoCover>(UPDATE_USER_INFO)
-  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [update, { loading: updateLoading }] = useMutation<UpdateUserInfoCover>(
+    UPDATE_USER_INFO
+  )
+  const [upload, { loading: uploadLoading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE
+  )
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,26 +109,32 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user }) => {
 
   return (
     <label htmlFor="profile-input">
-      <div
-        className="cover"
-        style={{
-          backgroundImage: `url(${user.info.profileCover || IMAGE_COVER})`
-        }}
-      />
+      <Cover cover={user.info.profileCover} />
 
       <div className="mask">
-        <Icon.CameraMedium color="white" size="xl" />
+        {uploadLoading || updateLoading ? (
+          <Spinner />
+        ) : (
+          <Icon.CameraMedium color="white" size="xl" />
+        )}
 
         {user.info.profileCover && (
-          <Button
-            size={[null, '2rem']}
-            spacing={[0, 'tight']}
-            borderColor="white"
-            borderWidth="sm"
-            onClick={() => removeCover()}
-          >
-            <Translate zh_hant="刪除" zh_hans="删除" />
-          </Button>
+          <section className="delete">
+            <Button
+              size={[null, '1.25rem']}
+              spacing={[0, 'xtight']}
+              borderColor="white"
+              borderWidth="sm"
+              onClick={removeCover}
+            >
+              <TextIcon color="white" size="xs">
+                <Translate
+                  zh_hant={TEXT.zh_hant.delete}
+                  zh_hans={TEXT.zh_hans.delete}
+                />
+              </TextIcon>
+            </Button>
+          </section>
         )}
       </div>
 

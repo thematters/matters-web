@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
@@ -14,6 +13,7 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  hasFormError,
   translate,
   validateAvatar,
   validateDescription,
@@ -168,7 +168,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!_isEmpty(errors) || isSubmitting}
+      disabled={!hasFormError(errors) || isSubmitting}
       onClick={handleSubmit}
       text={
         <Translate
