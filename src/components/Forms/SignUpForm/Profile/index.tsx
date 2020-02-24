@@ -124,6 +124,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         }
         type="text"
         name="displayName"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterDisplayName,
           zh_hans: TEXT.zh_hans.enterDisplayName,
@@ -143,21 +144,22 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
           />
         }
         name="description"
+        required
         placeholder={translate({
           zh_hant: '介紹你自己，獲得更多社區關注',
           zh_hans: '介绍你自己，获得更多社区关注',
           lang
         })}
-        value={values.description}
-        error={touched.description && errors.description}
-        onBlur={handleBlur}
-        onChange={handleChange}
         hint={
           <Translate
             zh_hant={TEXT.zh_hant.descriptionHint}
             zh_hans={TEXT.zh_hans.descriptionHint}
           />
         }
+        value={values.description}
+        error={touched.description && errors.description}
+        onBlur={handleBlur}
+        onChange={handleChange}
       />
     </Form>
   )

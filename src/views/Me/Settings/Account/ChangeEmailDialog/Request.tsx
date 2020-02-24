@@ -96,11 +96,12 @@ const Request: React.FC<FormProps> = ({
         }
         type="email"
         name="email"
+        disabled
+        required
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
-        disabled
       />
 
       <Form.Input
@@ -113,6 +114,7 @@ const Request: React.FC<FormProps> = ({
         type="text"
         name="code"
         autoComplete="off"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterVerificationCode,
           zh_hans: TEXT.zh_hans.enterVerificationCode,

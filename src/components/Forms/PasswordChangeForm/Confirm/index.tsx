@@ -112,6 +112,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         }
         type="password"
         name="password"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterPassword,
           zh_hans: TEXT.zh_hans.enterPassword,
@@ -122,6 +123,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
       <Form.Input
         label={
           <Translate
@@ -131,6 +133,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         }
         type="password"
         name="comparedPassword"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterPasswordAgain,
           zh_hans: TEXT.zh_hans.enterPasswordAgain,

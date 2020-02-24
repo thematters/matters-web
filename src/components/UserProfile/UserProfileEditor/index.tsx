@@ -120,13 +120,10 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                   }
                   type="text"
                   name="displayName"
-                  value={values.displayName}
-                  error={touched.displayName && errors.displayName}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
+                  required
                   placeholder={translate({
-                    zh_hant: '輸入姓名',
-                    zh_hans: '输入姓名',
+                    zh_hant: TEXT.zh_hant.enterDisplayName,
+                    zh_hans: TEXT.zh_hans.enterDisplayName,
                     lang
                   })}
                   hint={
@@ -135,7 +132,12 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                       zh_hans={TEXT.zh_hans.displayNameHint}
                     />
                   }
+                  value={values.displayName}
+                  error={touched.displayName && errors.displayName}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                 />
+
                 <Form.Textarea
                   label={
                     <Translate
@@ -144,23 +146,24 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                     />
                   }
                   name="description"
+                  required
                   placeholder={translate({
-                    zh_hant: '輸入個人簡介',
-                    zh_hans: '输入个人简介',
+                    zh_hant: '請輸入個人簡介',
+                    zh_hans: '请输入个人简介',
                     lang
                   })}
-                  value={values.description}
-                  error={touched.description && errors.description}
                   hint={
                     <Translate
                       zh_hant={TEXT.zh_hant.descriptionHint}
                       zh_hans={TEXT.zh_hans.descriptionHint}
                     />
                   }
+                  value={values.description}
+                  error={touched.description && errors.description}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  style={{ height: '7rem', resize: 'none' }}
                 />
+
                 <div className="buttons">
                   <Button
                     size={[null, '2rem']}

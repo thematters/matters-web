@@ -179,9 +179,10 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         }
         type="email"
         name="email"
+        required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.email,
-          zh_hans: TEXT.zh_hans.email,
+          zh_hant: TEXT.zh_hant.enterEmail,
+          zh_hans: TEXT.zh_hans.enterEmail,
           lang
         })}
         value={values.email}
@@ -200,9 +201,10 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="text"
         name="code"
         autoComplete="off"
+        required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.verificationCode,
-          zh_hans: TEXT.zh_hans.verificationCode,
+          zh_hant: TEXT.zh_hant.enterVerificationCode,
+          zh_hans: TEXT.zh_hans.enterVerificationCode,
           lang
         })}
         value={values.code}
@@ -223,10 +225,16 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="text"
         name="userName"
         autoComplete="off"
+        required
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
+        placeholder={translate({
+          zh_hant: TEXT.zh_hant.enterUserName,
+          zh_hans: TEXT.zh_hans.enterUserName,
+          lang
+        })}
         hint={translate({
           zh_hant: TEXT.zh_hant.userNameHint,
           zh_hans: TEXT.zh_hans.userNameHint,
@@ -244,9 +252,10 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         type="password"
         name="password"
         autoComplete="off"
+        required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.password,
-          zh_hans: TEXT.zh_hans.password,
+          zh_hant: TEXT.zh_hant.enterPassword,
+          zh_hans: TEXT.zh_hans.enterPassword,
           lang
         })}
         value={values.password}
@@ -281,6 +290,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
             </Link>
           </>
         }
+        required
       />
 
       {isInDialog && <LoginDialogButton />}

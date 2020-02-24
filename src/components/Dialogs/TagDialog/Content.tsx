@@ -277,6 +277,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             error={touched.newDescription && errors.newDescription}
             onBlur={handleBlur}
             onChange={handleChange}
+            required
           />
         </Form>
       </Dialog.Content>

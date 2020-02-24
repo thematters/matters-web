@@ -160,12 +160,12 @@ export const LoginForm: React.FC<FormProps> = ({
         }
         type="email"
         name="email"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterEmail,
           zh_hans: TEXT.zh_hans.enterEmail,
           lang
         })}
-        required
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -181,12 +181,12 @@ export const LoginForm: React.FC<FormProps> = ({
         }
         type="password"
         name="password"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterPassword,
           zh_hans: TEXT.zh_hans.enterPassword,
           lang
         })}
-        required
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}

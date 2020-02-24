@@ -104,6 +104,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         }
         type="email"
         name="email"
+        required
         placeholder={
           isForget
             ? translate({
@@ -123,6 +124,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
       />
+
       <Form.Input
         label={
           <Translate
@@ -133,6 +135,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         type="text"
         name="code"
         autoComplete="off"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterVerificationCode,
           zh_hans: TEXT.zh_hans.enterVerificationCode,

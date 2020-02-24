@@ -90,26 +90,28 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         label="Matters ID"
         type="text"
         name="userName"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterUserName,
           zh_hans: TEXT.zh_hans.enterUserName,
           lang
         })}
-        value={values.userName}
-        error={touched.userName && errors.userName}
-        onBlur={handleBlur}
-        onChange={handleChange}
         hint={
           <Translate
             zh_hant={TEXT.zh_hant.userNameHint}
             zh_hans={TEXT.zh_hans.userNameHint}
           />
         }
+        value={values.userName}
+        error={touched.userName && errors.userName}
+        onBlur={handleBlur}
+        onChange={handleChange}
       />
 
       <Form.Input
         type="text"
         name="comparedUserName"
+        required
         placeholder={translate({
           zh_hant: TEXT.zh_hant.enterUserNameAgign,
           zh_hans: TEXT.zh_hans.enterUserNameAgign,
