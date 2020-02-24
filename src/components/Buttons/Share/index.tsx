@@ -1,7 +1,9 @@
-import { Button, Icon, IconColor, IconSize, ShareDialog } from '~/components'
+import { Button, Icon, IconColor, IconSize } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
+
+import { ShareDialog } from './ShareDialog'
 
 interface ShareButtonProps {
   title?: string

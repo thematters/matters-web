@@ -24,8 +24,6 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
     setShowDialog(false)
   }
 
-  const headerHidden = step === 'ask' || step === 'complete'
-
   return (
     <>
       {children({ open })}
@@ -33,7 +31,7 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
       <Dialog
         isOpen={showDialog}
         onDismiss={close}
-        size={headerHidden ? 'sm' : 'lg'}
+        size={step === 'ask' || step === 'complete' ? 'sm' : 'lg'}
       >
         {step === 'ask' && (
           <Ask nextStep={() => setStep('confirm')} closeDialog={close} />

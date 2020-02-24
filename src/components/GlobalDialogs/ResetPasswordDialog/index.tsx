@@ -42,8 +42,6 @@ const ResetPasswordDialog = () => {
     setStep('reset')
   }
 
-  const headerHidden = step === 'complete'
-
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setStep('request')
@@ -58,7 +56,7 @@ const ResetPasswordDialog = () => {
     <Dialog
       isOpen={showDialog}
       onDismiss={close}
-      size={headerHidden ? 'sm' : 'lg'}
+      size={step === 'complete' ? 'sm' : 'lg'}
     >
       {step === 'request' && (
         <PasswordChangeRequestForm

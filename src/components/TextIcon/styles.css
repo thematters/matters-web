@@ -4,6 +4,7 @@
   justify-content: flex-start;
 
   user-select: none;
+  vertical-align: middle;
 }
 
 .text {

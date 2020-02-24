@@ -5,6 +5,21 @@ import styles from './styles.css'
 
 export type FieldProps = FooterProps & HeaderProps
 
+/**
+ * UI component to reuse label, hint, error, etc.
+ *
+ * Usage:
+ *
+ * ```jsx
+ * <Field>
+ *   <Field.Header />
+ *   <Field.Content />
+ *   <Field.Footer />
+ * </Field>
+ * ```
+ *
+ */
+
 const Field: React.FC & {
   Header: typeof Header
   Footer: typeof Footer
