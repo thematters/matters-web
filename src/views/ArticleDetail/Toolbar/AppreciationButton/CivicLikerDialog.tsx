@@ -6,10 +6,11 @@ import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 interface CivicLikerDialogProps {
+  onClose: () => void
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
+const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setShowDialog(true)
@@ -18,6 +19,7 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
   const close = () => {
     setShowDialog(false)
     analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_CIVIC_LIKER_MODAL)
+    onClose()
   }
 
   return (
