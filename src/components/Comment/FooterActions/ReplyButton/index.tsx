@@ -14,6 +14,7 @@ const ReplyButton = ({
     bgHoverColor="grey-lighter"
     onClick={onClick}
     disabled={disabled}
+    aira-label="回覆評論"
   >
     <Icon.Comment color={active ? 'green' : undefined} />
   </Button>

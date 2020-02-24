@@ -21,7 +21,7 @@ interface DropdownProps {
 type InputProps = {
   type: 'text' | 'password' | 'email' | 'search'
   name: string
-} & FieldProps &
+} & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -93,6 +93,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
     width: getDropdownSize()
   }
 
+  const fieldMsgId = `dropdown-input-msg-${name}`
+
   return (
     <Field>
       <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
@@ -114,6 +116,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
             id={name}
             name={name}
             type={type}
+            aria-describedby={fieldMsgId}
             onClick={e => {
               if (inputProps.onClick) {
                 inputProps.onClick(e)
@@ -151,7 +154,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         </Dropdown>
       </Field.Content>
 
-      <Field.Footer hint={hint} error={error} />
+      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
       <style jsx>{styles}</style>
     </Field>

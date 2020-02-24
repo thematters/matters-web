@@ -8,7 +8,7 @@ import styles from './styles.css'
 
 type CheckBoxProps = {
   name: string
-} & FieldProps &
+} & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -21,32 +21,42 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   error,
 
   ...inputProps
-}) => (
-  <Field>
-    <label htmlFor="checkbox">
-      <TextIcon
-        icon={
-          inputProps.checked ? (
-            <Icon.CheckActive size="md-s" />
-          ) : (
-            <Icon.CheckInactive size="md-s" />
-          )
-        }
-        color="grey-dark"
-        spacing="xtight"
-      >
-        {hint}
-      </TextIcon>
+}) => {
+  const fieldMsgId = `checkbox-msg-${name}`
 
-      <VisuallyHidden>
-        <input id="checkbox" type="checkbox" name={name} {...inputProps} />
-      </VisuallyHidden>
-    </label>
+  return (
+    <Field>
+      <label htmlFor="checkbox">
+        <TextIcon
+          icon={
+            inputProps.checked ? (
+              <Icon.CheckActive size="md-s" />
+            ) : (
+              <Icon.CheckInactive size="md-s" />
+            )
+          }
+          color="grey-dark"
+          spacing="xtight"
+        >
+          {hint}
+        </TextIcon>
 
-    <Field.Footer error={error} />
+        <VisuallyHidden>
+          <input
+            id="checkbox"
+            type="checkbox"
+            aria-describedby={fieldMsgId}
+            name={name}
+            {...inputProps}
+          />
+        </VisuallyHidden>
+      </label>
 
-    <style jsx>{styles}</style>
-  </Field>
-)
+      <Field.Footer fieldMsgId={fieldMsgId} error={error} />
+
+      <style jsx>{styles}</style>
+    </Field>
+  )
+}
 
 export default CheckBox

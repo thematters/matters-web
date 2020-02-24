@@ -25,7 +25,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   })
 
   return (
-    <header className={headerClass}>
+    <header className={headerClass} tabIndex={0}>
       <section className="title">
         <Title type="nav" is={is}>
           {title}

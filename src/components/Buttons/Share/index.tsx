@@ -26,14 +26,15 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
       : window.location.href
     : ''
   const shareTitle = process.browser ? title || window.document.title : ''
+  const ariaTitle = `分享 ${shareTitle}`
 
   return (
-    <ShareDialog title={shareTitle} link={shareLink}>
+    <ShareDialog title={ariaTitle} link={shareLink}>
       {({ open }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgHoverColor="grey-lighter"
-          aria-label={`分享《${title || ''}》`}
+          aria-label={ariaTitle}
           onClick={async () => {
             const navigator = window.navigator as any
 
