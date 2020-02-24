@@ -2,7 +2,13 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Button, ButtonHeight, ButtonWidth, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonHeight,
+  ButtonWidth,
+  TextIcon,
+  Translate
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -51,8 +57,8 @@ const Unfollow = ({
   })
 
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
-    'lg': ['6rem', '2rem'],
-    'md': ['4rem', '1.5rem'],
+    lg: ['6rem', '2rem'],
+    md: ['4rem', '1.5rem'],
     'md-s': ['3rem', '1.5rem']
   }
 
