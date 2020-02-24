@@ -116,7 +116,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
             <ProfileAvatarUploader user={user} />
 
             <section className="info">
-              <Form className="form" onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <Form.Input
                   label={
                     <Translate
@@ -208,7 +208,7 @@ const UserProfileEditor: React.FC<FormProps> = formProps => {
                     </TextIcon>
                   </Button>
                 </div>
-              </Form>
+              </form>
             </section>
           </section>
         </section>

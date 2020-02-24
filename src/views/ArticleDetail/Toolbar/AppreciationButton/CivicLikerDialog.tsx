@@ -33,29 +33,40 @@ const CivicLikerDialog = ({ children }: CivicLikerDialogProps) => {
             />
           }
           close={close}
+          headerHidden
         />
 
-        <Dialog.Content spacing={['xloose', 'xloose']}>
-          <p>
+        <Dialog.Message
+          headline={
             <Translate
-              zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
-              zh_hans="赞赏公民是一场回馈优秀内容的运动。每月只需付出一杯咖啡的价钱，就能成为赞赏公民，从此每个点赞，都会化成对创作者的实质支持。"
+              zh_hant={TEXT.zh_hant.joinCivicLiker}
+              zh_hans={TEXT.zh_hans.joinCivicLiker}
             />
-          </p>
+          }
+          textAlign="left"
+          description={
+            <>
+              <p>
+                <Translate
+                  zh_hant="讚賞公民是一場回饋優秀內容的運動。每月只需付出一杯咖啡的價錢，就能成為讚賞公民，從此每個點讚，都會化成對創作者的實質支持。"
+                  zh_hans="赞赏公民是一场回馈优秀内容的运动。每月只需付出一杯咖啡的价钱，就能成为赞赏公民，从此每个点赞，都会化成对创作者的实质支持。"
+                />
+              </p>
+              <br />
 
-          <br />
-
-          <p>
-            <Translate zh_hant="瞭解更多 " zh_hans="了解更多" />
-            <a
-              className="u-link-green"
-              href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
-              target="_blank"
-            >
-              <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" />
-            </a>
-          </p>
-        </Dialog.Content>
+              <p>
+                <Translate zh_hant="瞭解更多 " zh_hans="了解更多" />
+                <a
+                  className="u-link-green"
+                  href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
+                  target="_blank"
+                >
+                  <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" />
+                </a>
+              </p>
+            </>
+          }
+        />
 
         <Dialog.Footer>
           <Dialog.Footer.Button

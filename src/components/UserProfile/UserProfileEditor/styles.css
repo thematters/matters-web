@@ -88,12 +88,6 @@
   }
 }
 
-.form {
-  & :global(textarea) {
-    margin-top: var(--spacing-base);
-  }
-}
-
 .buttons {
   margin-top: var(--spacing-loose);
 

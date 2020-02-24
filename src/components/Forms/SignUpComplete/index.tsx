@@ -3,8 +3,6 @@ import { Dialog, Translate } from '~/components'
 import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
 
-import styles from './styles.css'
-
 export const SignUpComplete = ({
   purpose,
   closeDialog
@@ -36,8 +34,9 @@ export const SignUpComplete = ({
             zh_hans="欢迎加入 Matters！"
           />
         }
+        textAlign="left"
         description={
-          <section className="content">
+          <>
             <p>
               <Translate
                 zh_hant="你已完成註冊，現在可以在 Matters 發佈作品並讚賞他人啦。"
@@ -79,7 +78,7 @@ export const SignUpComplete = ({
                 zh_hans="马上开始你的创作吧！"
               />
             </p>
-          </section>
+          </>
         }
       />
 
@@ -95,8 +94,6 @@ export const SignUpComplete = ({
           <Translate zh_hant="進入社區" zh_hans="进入社区" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

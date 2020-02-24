@@ -48,10 +48,7 @@ const Ask = ({ nextStep, closeDialog }: AskProps) => (
         textColor="black"
         onClick={closeDialog}
       >
-        <Translate
-          zh_hant={TEXT.zh_hant.cancel}
-          zh_hans={TEXT.zh_hans.cancel}
-        />
+        <Translate zh_hant={TEXT.zh_hant.close} zh_hans={TEXT.zh_hans.close} />
       </Dialog.Footer.Button>
     </Dialog.Footer>
   </>
