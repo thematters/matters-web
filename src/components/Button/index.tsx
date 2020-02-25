@@ -4,9 +4,16 @@ import { forwardRef } from 'react'
 
 import styles from './styles.css'
 
-type ButtonWidth = '2rem' | '4rem' | '6rem' | '100%' | undefined | null
+export type ButtonWidth =
+  | '2rem'
+  | '3rem'
+  | '4rem'
+  | '6rem'
+  | '100%'
+  | undefined
+  | null
 
-type ButtonHeight =
+export type ButtonHeight =
   | '1rem'
   | '1.25rem'
   | '1.5rem'
