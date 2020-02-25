@@ -3,11 +3,10 @@ import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
-  hasFormError,
+  parseFormSubmitErrors,
   translate,
   validateComparedUserName,
   validateUserName
@@ -47,7 +46,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       userName: '',
@@ -71,13 +71,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
           submitCallback()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('userName', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('userName', messages[codes[0]])
       }
 
       setSubmitting(false)
@@ -91,8 +86,11 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         type="text"
         name="userName"
         required
-        placeholder={translate({ id: 'enterUserName', lang })}
-        hint={<Translate id="userNameHint" />}
+        placeholder={translate({
+          id: 'enterUserName',
+          lang
+        })}
+        hint={<Translate id="hintUserName" />}
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
@@ -108,7 +106,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={<Translate id="userNameHint" />}
+        hint={<Translate id="hintUserName" />}
       />
     </Form>
   )
@@ -117,7 +115,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />

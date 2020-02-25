@@ -16,7 +16,7 @@ export const SignUpComplete = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="registerSuccess" />}
+          title={<Translate id="successRegister" />}
           close={closeDialog}
           headerHidden
         />

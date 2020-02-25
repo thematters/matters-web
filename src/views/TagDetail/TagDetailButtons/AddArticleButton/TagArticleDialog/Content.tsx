@@ -12,11 +12,11 @@ import {
   LanguageContext,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
-import { hasFormError, translate } from '~/common/utils'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -84,6 +84,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
+    isValid,
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
@@ -133,13 +134,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
 
         closeDialog()
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant[errorCode] || TEXT.zh_hant.UNKNOWN_ERROR,
-          zh_hans: TEXT.zh_hans[errorCode] || TEXT.zh_hant.UNKNOWN_ERROR,
-          lang
-        })
-        setFieldError('name', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('name', messages[codes[0]])
         setSubmitting(false)
       }
     }
@@ -219,7 +215,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       text={<Translate id="confirm" />}
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       loading={isSubmitting}
     />
   )

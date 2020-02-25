@@ -50,7 +50,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="unblockSuccess" />
+          content: <Translate id="successUnblock" />
         }
       })
     )
@@ -61,7 +61,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="blockSuccess" />,
+          content: <Translate id="successBlock" />,
           customButton: (
             <Button
               href={PATHS.ME_SETTINGS_BLOCKED.as}

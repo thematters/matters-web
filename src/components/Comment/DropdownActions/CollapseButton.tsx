@@ -70,7 +70,7 @@ const CollapseButton = ({ comment }: { comment: CollapseButtonComment }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="collapseCommentSuccess" />
+              content: <Translate id="successCollapseComment" />
             }
           })
         )

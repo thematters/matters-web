@@ -56,12 +56,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant="登出失敗，請重試"
-                zh_hans="登出失败，再来一次"
-              />
-            )
+            content: <Translate id="failureLogout" />
           }
         })
       )

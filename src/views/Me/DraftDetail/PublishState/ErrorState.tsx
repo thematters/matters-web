@@ -11,7 +11,7 @@ const ErrorState = ({ draft }: { draft: PublishStateDraft }) => {
   return (
     <Toast.Instance
       color="red"
-      content={<Translate id="publishFailed" />}
+      content={<Translate id="failurePublish" />}
       subDescription={
         <Translate zh_hant="請檢查網絡後重試" zh_hans="请检查网络后重试" />
       }

@@ -33,7 +33,7 @@ export const validatePassword = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
   } else if (!isValidPassword(value)) {
-    return translate({ id: 'passwordHint', lang })
+    return translate({ id: 'hintPassword', lang })
   }
 }
 
@@ -53,7 +53,7 @@ export const validateUserName = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
   } else if (!isValidUserName(value)) {
-    return translate({ id: 'userNameHint', lang })
+    return translate({ id: 'hintUserName', lang })
   }
 }
 
@@ -77,7 +77,7 @@ export const validateDisplayName = (
   if (!value) {
     return translate({ id: 'required', lang })
   } else if (!isValidDisplayName(value) && !isAdmin) {
-    return translate({ id: 'displayNameHint', lang })
+    return translate({ id: 'hintDisplayName', lang })
   }
 }
 
@@ -104,6 +104,3 @@ export const validateAvatar = (value: string | null, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 }
-
-export const hasFormError = (errors: { [key: string]: any }) =>
-  _isEmpty(_pickBy(errors, _identity))

@@ -14,7 +14,7 @@ const Complete = ({ closeDialog }: CompleteProps) => (
 
     <Dialog.Message
       headline={<Translate id="changeUserName" />}
-      description={<Translate id="changeUserNameSuccess" />}
+      description={<Translate id="successChangeUserName" />}
     />
 
     <Dialog.Footer>

@@ -23,9 +23,9 @@ export const PasswordChangeComplete: React.FC<Props> = ({
   )
 
   const Description = isForget ? (
-    <Translate id="resetPasswordSuccess" />
+    <Translate id="successResetPassword" />
   ) : (
-    <Translate id="changePasswordSuccess" />
+    <Translate id="successChangePassword" />
   )
 
   return (

@@ -19,7 +19,7 @@ const OAuthCallbackSuccess = () => {
     likecoin: ICON_LIKECOIN
   }
 
-  if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
+  if (!provider || !OAUTH_PROVIDER.has(provider)) {
     Router.push(PATHS.HOME.as)
     return null
   }

@@ -31,7 +31,7 @@ const CopyButton = ({ text }: { text: string }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="copySuccess" />
+          content: <Translate id="successCopy" />
         }
       })
     )

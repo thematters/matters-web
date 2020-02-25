@@ -9,11 +9,11 @@ import {
   PageHeader,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
-  hasFormError,
+  filterFormErrors,
+  parseFormSubmitErrors,
   translate,
   validateComparedPassword,
   validatePassword
@@ -61,22 +61,22 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
       comparedPassword: ''
     },
-    validate: ({ password, comparedPassword }) => {
-      return {
+    validate: ({ password, comparedPassword }) =>
+      filterFormErrors({
         password: validatePassword(password, lang),
         comparedPassword: validateComparedPassword(
           password,
           comparedPassword,
           lang
         )
-      }
-    },
+      }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await reset({
@@ -88,13 +88,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           submitCallback()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('password', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('password', messages[codes[0]])
       }
 
       setSubmitting(false)
@@ -123,7 +118,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         placeholder={translate({ id: 'enterPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
-        hint={<Translate id="passwordHint" />}
+        hint={<Translate id="hintPassword" />}
         onBlur={handleBlur}
         onChange={handleChange}
       />
@@ -134,7 +129,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={<Translate id="confirm" />}
       loading={isSubmitting}
     />

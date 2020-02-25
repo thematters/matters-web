@@ -86,13 +86,13 @@ export const DropdownDialog = ({
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => {
-    // dialog
-    setShowDialog(false)
-
     // dropdown
     if (dropdownInstance) {
       dropdownInstance.hide()
     }
+
+    // dialog
+    setShowDialog(false)
   }
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
@@ -100,6 +100,8 @@ export const DropdownDialog = ({
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       close()
     }
+
+    event.stopPropagation()
   }
 
   const Content: React.FC = ({ children: contentChildren }) => {

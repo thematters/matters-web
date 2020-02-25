@@ -9,18 +9,14 @@ import {
   PageHeader,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
-import {
-  ADD_TOAST,
-  ANALYTICS_EVENTS,
-  ERROR_CODES,
-  ErrorCodeKeys
-} from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
-  hasFormError,
+  filterFormErrors,
+  parseFormSubmitErrors,
   redirectToTarget,
   translate,
   validateEmail,
@@ -74,19 +70,19 @@ export const LoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
+    isValid,
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: ''
     },
-    validate: ({ email, password }) => {
-      return {
+    validate: ({ email, password }) =>
+      filterFormErrors({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         password: validatePassword(password, lang)
-      }
-    },
-    onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {
+      }),
+    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
         await login({ variables: { input: { email, password } } })
 
@@ -98,7 +94,7 @@ export const LoginForm: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="loginSuccess" />
+              content: <Translate id="successLogin" />
             }
           })
         )
@@ -111,29 +107,16 @@ export const LoginForm: React.FC<FormProps> = ({
           fallback: !!isInPage ? 'homepage' : 'current'
         })
       } catch (error) {
-        const errorCodes = getErrorCodes(error)
-
-        if (
-          errorCodes.indexOf(
-            ERROR_CODES.USER_EMAIL_NOT_FOUND as ErrorCodeKeys
-          ) >= 0
-        ) {
-          setErrors({
-            email: translate({ id: 'USER_EMAIL_NOT_FOUND', lang })
-          })
-        } else if (
-          errorCodes.indexOf(
-            ERROR_CODES.USER_PASSWORD_INVALID as ErrorCodeKeys
-          ) >= 0
-        ) {
-          setErrors({
-            password: translate({ id: 'USER_PASSWORD_INVALID', lang })
-          })
-        } else {
-          setErrors({
-            email: translate({ id: 'UNKNOWN_ERROR', lang })
-          })
-        }
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(code => {
+          if (code.includes('USER_EMAIL_')) {
+            setFieldError('email', messages[code])
+          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
+            setFieldError('password', messages[code])
+          } else {
+            setFieldError('email', messages[code])
+          }
+        })
 
         analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
           email,
@@ -144,6 +127,8 @@ export const LoginForm: React.FC<FormProps> = ({
       setSubmitting(false)
     }
   })
+
+  console.log(touched, errors, isValid)
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -186,7 +171,7 @@ export const LoginForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={<Translate id="confirm" />}
       loading={isSubmitting}
     />

@@ -47,7 +47,7 @@ export const UnblockUserButton = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="unblockSuccess" />
+              content: <Translate id="successUnblock" />
             }
           })
         )

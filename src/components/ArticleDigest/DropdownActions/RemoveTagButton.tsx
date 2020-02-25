@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 import { useRouter } from 'next/router'
 
-import { Icon, Menu, PopperInstance, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
@@ -31,13 +31,7 @@ const fragments = {
   `
 }
 
-const RemoveTagButton = ({
-  article,
-  instance
-}: {
-  article: RemoveTagButtonArticle
-  instance?: PopperInstance | null
-}) => {
+const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
   const router = useRouter()
   const {
     query: { id }
@@ -49,23 +43,18 @@ const RemoveTagButton = ({
     { variables: { id: tagId, articles: [article.id] } }
   )
 
-  const sync = () => {
-    window.dispatchEvent(
-      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
-        detail: {
-          event: 'delete'
-        }
-      })
-    )
-  }
-
   return (
     <Menu.Item
       onClick={async () => {
         await deleteArticlesTags()
-        if (instance) {
-          instance.props.onHidden = sync
-        }
+
+        window.dispatchEvent(
+          new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+            detail: {
+              event: 'delete'
+            }
+          })
+        )
       }}
     >
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">

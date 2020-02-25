@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  AvatarUploader,
   Dialog,
   Form,
   LanguageContext,
@@ -11,14 +12,15 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
-  hasFormError,
+  filterFormErrors,
+  parseFormSubmitErrors,
   translate,
   validateDescription,
   validateDisplayName
 } from '~/common/utils'
 
-import ProfileAvatarUploader from './ProfileAvatarUploader'
 import ProfileCoverUploader from './ProfileCoverUploader'
 import styles from './styles.css'
 
@@ -35,6 +37,8 @@ interface FormProps {
 }
 
 interface FormValues {
+  avatar: string | null
+  profileCover: string | null
   displayName: string
   description: string
 }
@@ -46,11 +50,17 @@ const UPDATE_USER_INFO = gql`
       avatar
       displayName
       info {
+        profileCover
         description
       }
     }
   }
 `
+
+/**
+ * To identify `profileCover` is changed since it may be `null`
+ */
+const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
@@ -66,23 +76,56 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid,
+    setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
+      avatar: UNCHANGED_FIELD,
+      profileCover: UNCHANGED_FIELD,
       displayName: user.displayName || '',
       description: user.info.description || ''
     },
-    validate: ({ displayName, description }) => {
-      return {
+    validate: ({ displayName, description }) =>
+      filterFormErrors({
         displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
         description: validateDescription(description, lang)
-      }
-    },
-    onSubmit: async ({ displayName, description }, { setSubmitting }) => {
+      }),
+    onSubmit: async (
+      { avatar, profileCover, displayName, description },
+      { setSubmitting, setFieldError }
+    ) => {
       try {
-        await update({ variables: { input: { displayName, description } } })
+        await update({
+          variables: {
+            input: {
+              ...(avatar !== UNCHANGED_FIELD ? { avatar } : {}),
+              ...(profileCover !== UNCHANGED_FIELD ? { profileCover } : {}),
+              displayName,
+              description
+            }
+          }
+        })
+
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: <Translate id="successEditUserProfile" />
+            }
+          })
+        )
+
+        closeDialog()
       } catch (error) {
-        // TODO: Handle error
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(code => {
+          if (code.includes('USER_DISPLAYNAME_INVALID')) {
+            setFieldError('displayName', messages[code])
+          } else {
+            setFieldError('description', messages[code])
+          }
+        })
       }
 
       setSubmitting(false)
@@ -92,11 +135,18 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">
-        <ProfileCoverUploader user={user} />
+        <ProfileCoverUploader
+          user={user}
+          onUpload={assetId => setFieldValue('profileCover', assetId)}
+        />
       </section>
 
       <section className="avatar-field">
-        <ProfileAvatarUploader user={user} />
+        <AvatarUploader
+          user={user}
+          onUpload={assetId => setFieldValue('avatar', assetId)}
+          hasBorder
+        />
       </section>
 
       <Form.Input
@@ -104,8 +154,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         type="text"
         name="displayName"
         required
-        placeholder={translate({ id: 'enterDisplayName', lang })}
-        hint={<Translate id="displayNameHint" />}
+        placeholder={translate({
+          id: 'enterDisplayName',
+          lang
+        })}
+        hint={<Translate id="hintDisplayName" />}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -113,15 +166,14 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       />
 
       <Form.Textarea
-        label={<Translate id="userProfile" />}
+        label={<Translate id="userDescription" />}
         name="description"
         required
         placeholder={translate({
-          zh_hant: '請輸入個人簡介',
-          zh_hans: '请输入个人简介',
+          id: 'enterUserDescription',
           lang
         })}
-        hint={<Translate id="descriptionHint" />}
+        hint={<Translate id="hintUserDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -136,7 +188,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={<Translate id="save" />}
       loading={isSubmitting}
     />
@@ -145,7 +197,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate zh_hant="編輯資料" zh_hans="编辑资料" />}
+        title={<Translate id="editUserProfile" />}
         close={closeDialog}
         rightButton={SubmitButton}
       />

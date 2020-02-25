@@ -3,11 +3,18 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext, useState } from 'react'
 
-import { Dialog, Term, Translate, ViewerContext } from '~/components'
+import {
+  Dialog,
+  LanguageContext,
+  Term,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { unsubscribePush } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums'
+import { parseFormSubmitErrors, unsubscribePush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -32,18 +39,29 @@ const UPDATE_AGREE_ON = gql`
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
+  const { lang } = useContext(LanguageContext)
+
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         await update({ variables: { input: { agreeOn: true } } })
         closeDialog()
       } catch (error) {
-        // TODO: Handle error
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'red',
+              content: messages[codes[0]]
+            }
+          })
+        )
       }
       setSubmitting(false)
     }
   })
+
   const onLogout = async () => {
     try {
       await logout()
@@ -59,7 +77,14 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
       Router.replace('/')
     } catch (e) {
-      // TODO
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="failureLogout" />
+          }
+        })
+      )
     }
   }
 

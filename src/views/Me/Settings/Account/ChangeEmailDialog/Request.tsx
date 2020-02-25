@@ -8,12 +8,12 @@ import {
   SendCodeButton,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { TEXT } from '~/common/enums'
 import {
-  hasFormError,
+  filterFormErrors,
+  parseFormSubmitErrors,
   translate,
   validateCode,
   validateEmail
@@ -48,18 +48,18 @@ const Request: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
       code: ''
     },
-    validate: ({ email, code }) => {
-      return {
+    validate: ({ email, code }) =>
+      filterFormErrors({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         code: validateCode(code, lang)
-      }
-    },
+      }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
@@ -71,18 +71,14 @@ const Request: React.FC<FormProps> = ({
           submitCallback(confirmVerificationCode)
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans[errorCode] || errorCode,
-          lang
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(c => {
+          if (c.includes('CODE_')) {
+            setFieldError('code', messages[c])
+          } else {
+            setFieldError('email', messages[c])
+          }
         })
-
-        if (errorCode.indexOf('CODE_') >= 0) {
-          setFieldError('code', errorMessage)
-        } else {
-          setFieldError('email', errorMessage)
-        }
       }
 
       setSubmitting(false)
@@ -129,7 +125,7 @@ const Request: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />

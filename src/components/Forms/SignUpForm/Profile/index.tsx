@@ -12,7 +12,7 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
-  hasFormError,
+  filterFormErrors,
   translate,
   validateAvatar,
   validateDescription,
@@ -65,20 +65,20 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     setFieldValue,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       avatar: null,
       displayName: '',
       description: ''
     },
-    validate: ({ avatar, displayName, description }) => {
-      return {
+    validate: ({ avatar, displayName, description }) =>
+      filterFormErrors({
         avatar: validateAvatar(avatar, lang),
         displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang)
-      }
-    },
+      }),
     onSubmit: async (
       { avatar, displayName, description },
       { props, setSubmitting }: any
@@ -109,9 +109,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <AvatarUploadField
-        onUpload={assetId => {
-          setFieldValue('avatar', assetId)
-        }}
+        onUpload={assetId => setFieldValue('avatar', assetId)}
       />
 
       <Form.Input
@@ -130,7 +128,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       />
 
       <Form.Textarea
-        label={<Translate id="userProfile" />}
+        label={<Translate id="userDescription" />}
         name="description"
         required
         placeholder={translate({
@@ -138,7 +136,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
           zh_hans: '介绍你自己，获得更多社区关注',
           lang
         })}
-        hint={<Translate id="descriptionHint" />}
+        hint={<Translate id="hintUserDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -151,7 +149,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       onClick={handleSubmit}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
@@ -161,7 +159,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader title={<Translate id="userProfile" />} hasNoBorder>
+        <PageHeader title={<Translate id="register" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -173,7 +171,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="userProfile" />}
+          title={<Translate id="register" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

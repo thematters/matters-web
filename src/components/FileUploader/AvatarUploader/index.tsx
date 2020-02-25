@@ -2,7 +2,7 @@ import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useState } from 'react'
 
-import { Avatar, AvatarProps, Translate } from '~/components'
+import { Avatar, AvatarProps, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { Icon } from '~/components/Icon'
@@ -27,8 +27,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   hasBorder,
   ...avatarProps
 }) => {
-  const [upload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const [avatar, setAvatar] = useState<string>()
+  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -77,7 +77,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="uploadImageFailed" />
+            content: <Translate id="failureUploadImage" />
           }
         })
       )
@@ -90,10 +90,10 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label className={labelClass} htmlFor="avatar-input">
-      <Avatar size="xxl" {...avatarProps} src={avatarProps.src || avatar} />
+      <Avatar size="xxl" {...avatarProps} src={avatar} />
 
       <div className="mask">
-        <Icon.CameraMedium size="lg" color="white" />
+        {loading ? <Spinner /> : <Icon.CameraMedium color="white" size="lg" />}
       </div>
 
       <VisuallyHidden>

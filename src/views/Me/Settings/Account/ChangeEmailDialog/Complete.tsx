@@ -8,7 +8,7 @@ const Complete = ({ closeDialog }: CompleteProps) => (
   <>
     <Dialog.Message
       headline={<Translate id="changeEmail" />}
-      description={<Translate id="changeEmailSuccess" />}
+      description={<Translate id="successChangeEmail" />}
     />
 
     <Dialog.Footer>

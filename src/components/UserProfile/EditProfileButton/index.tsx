@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { Button, Dialog, Icon, TextIcon, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
+
 import ProfileEditor, { ProfileEditorUser } from './ProfileEditor'
 
 interface EditProfileButtonProps {
@@ -21,7 +23,10 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         onClick={open}
       >
         <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
-          <Translate zh_hant="編輯資料" zh_hans="编辑资料" />
+          <Translate
+            zh_hant={TEXT.zh_hant.editUserProfile}
+            zh_hans={TEXT.zh_hans.editUserProfile}
+          />
         </TextIcon>
       </Button>
 
