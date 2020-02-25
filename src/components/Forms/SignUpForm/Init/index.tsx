@@ -11,7 +11,7 @@ import {
   SendCodeButton,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -24,7 +24,9 @@ import {
 import {
   analytics,
   appendTarget,
+  filterFormErrors,
   hasFormError,
+  parseFormSubmitErrors,
   translate,
   validateCode,
   validateEmail,
@@ -115,15 +117,14 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       password: '',
       tos: true
     },
-    validate: ({ email, code, userName, password, tos }) => {
-      return {
+    validate: ({ email, code, userName, password, tos }) =>
+      filterFormErrors({
         email: validateEmail(email, lang, { allowPlusSign: false }),
         code: validateCode(code, lang),
         userName: validatePassword(password, lang),
         password: validateUserName(userName, lang),
         tos: validateToS(tos, lang)
-      }
-    },
+      }),
     onSubmit: async (
       { email, code, userName, password },
       { setFieldError, setSubmitting }
@@ -147,22 +148,19 @@ export const SignUpInitForm: React.FC<FormProps> = ({
           submitCallback({ email, codeId, password })
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(c => {
+          if (c.includes('USER_EMAIL_')) {
+            setFieldError('email', messages[c])
+          } else if (c.indexOf('CODE_') >= 0) {
+            setFieldError('code', messages[c])
+          } else if (c.indexOf('USER_PASSWORD_') >= 0) {
+            setFieldError('password', messages[c])
+          } else {
+            setFieldError('userName', messages[c])
+          }
         })
 
-        if (errorCode.indexOf('CODE_') >= 0) {
-          setFieldError('code', errorMessage)
-        } else if (errorCode.indexOf('USER_EMAIL_') >= 0) {
-          setFieldError('email', errorMessage)
-        } else if (errorCode.indexOf('USER_PASSWORD_') >= 0) {
-          setFieldError('password', errorMessage)
-        } else {
-          setFieldError('userName', errorMessage)
-        }
         setSubmitting(false)
       }
     }

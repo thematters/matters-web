@@ -11,11 +11,17 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { hasFormError, numAbbr, toPath, translate } from '~/common/utils'
+import {
+  hasFormError,
+  numAbbr,
+  parseFormSubmitErrors,
+  toPath,
+  translate
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -155,8 +161,6 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           variables: { id, content: newContent, description: newDescription }
         })
 
-        setSubmitting(false)
-
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -186,17 +190,11 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           closeDialog()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant:
-            TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          zh_hans:
-            TEXT.zh_hans.error[errorCode] || TEXT.zh_hans.error.UNKNOWN_ERROR,
-          lang
-        })
-        setFieldError('content', errorMessage)
-        setSubmitting(false)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('newContent', messages[codes[0]])
       }
+
+      setSubmitting(false)
     }
   })
 

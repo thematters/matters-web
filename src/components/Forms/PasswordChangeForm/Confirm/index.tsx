@@ -9,11 +9,13 @@ import {
   PageHeader,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  filterFormErrors,
   hasFormError,
+  parseFormSubmitErrors,
   translate,
   validateComparedPassword,
   validatePassword
@@ -67,16 +69,15 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       password: '',
       comparedPassword: ''
     },
-    validate: ({ password, comparedPassword }) => {
-      return {
+    validate: ({ password, comparedPassword }) =>
+      filterFormErrors({
         password: validatePassword(password, lang),
         comparedPassword: validateComparedPassword(
           password,
           comparedPassword,
           lang
         )
-      }
-    },
+      }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await reset({
@@ -88,13 +89,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           submitCallback()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('password', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('password', messages[codes[0]])
       }
 
       setSubmitting(false)

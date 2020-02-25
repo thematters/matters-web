@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { Button, TextIcon, Translate, useCountdown } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
+import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST, SEND_CODE_COUNTDOWN, TEXT } from '~/common/enums'
+import { parseFormSubmitErrors } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -44,6 +46,7 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   type,
   disabled
 }) => {
+  const { lang } = useContext(LanguageContext)
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
@@ -58,18 +61,12 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
       setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
       setSent(true)
     } catch (error) {
-      const errorCode = getErrorCodes(error)[0]
-      const errorMessage = (
-        <Translate
-          zh_hant={TEXT.zh_hant.error[errorCode] || errorCode}
-          zh_hans={TEXT.zh_hans.error[errorCode] || errorCode}
-        />
-      )
+      const [messages, codes] = parseFormSubmitErrors(error, lang)
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: errorMessage
+            content: messages[codes[0]]
           }
         })
       )

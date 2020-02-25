@@ -1,3 +1,5 @@
+export type ErrorCodeKeys = keyof typeof ERROR_CODES
+
 export const ERROR_CODES = {
   // Common
   UNKNOWN_ERROR: 'UNKNOWN_ERROR',

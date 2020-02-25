@@ -13,6 +13,7 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  filterFormErrors,
   hasFormError,
   translate,
   validateAvatar,
@@ -73,13 +74,12 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       displayName: '',
       description: ''
     },
-    validate: ({ avatar, displayName, description }) => {
-      return {
+    validate: ({ avatar, displayName, description }) =>
+      filterFormErrors({
         avatar: validateAvatar(avatar, lang),
         displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang)
-      }
-    },
+      }),
     onSubmit: async (
       { avatar, displayName, description },
       { props, setSubmitting }: any

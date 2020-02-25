@@ -3,11 +3,12 @@ import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
   hasFormError,
+  parseFormSubmitErrors,
   translate,
   validateComparedUserName,
   validateUserName
@@ -71,13 +72,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
           submitCallback()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('userName', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('userName', messages[codes[0]])
       }
 
       setSubmitting(false)

@@ -29,7 +29,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   ...avatarProps
 }) => {
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const [avatar, setAvatar] = useState<string>()
+  const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -96,7 +96,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label className={labelClass} htmlFor="avatar-input">
-      <Avatar size="xxl" {...avatarProps} src={avatarProps.src || avatar} />
+      <Avatar size="xxl" {...avatarProps} src={avatar} />
 
       <div className="mask">
         {loading ? <Spinner /> : <Icon.CameraMedium color="white" size="lg" />}

@@ -1,7 +1,3 @@
-import _identity from 'lodash/identity'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
-
 import { TEXT } from '~/common/enums'
 import {
   isValidDisplayName,
@@ -209,6 +205,3 @@ export const validateAvatar = (value: string | null, lang: Language) => {
     return translate({ ...result, lang })
   }
 }
-
-export const hasFormError = (errors: { [key: string]: any }) =>
-  _isEmpty(_pickBy(errors, _identity))

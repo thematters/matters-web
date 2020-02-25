@@ -6,12 +6,13 @@ import {
   ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
   ERROR_CODES,
+  ErrorCodeKeys,
   OPEN_LOGIN_DIALOG,
   TEXT
 } from '~/common/enums'
 
-export const getErrorCodes = (error: ApolloError) => {
-  const errorCodes: string[] = []
+export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
+  const errorCodes: ErrorCodeKeys[] = []
 
   if (!error || !error.graphQLErrors) {
     return errorCodes

@@ -9,13 +9,15 @@ import {
   PageHeader,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, ERROR_CODES, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
+  filterFormErrors,
   hasFormError,
+  parseFormSubmitErrors,
   redirectToTarget,
   translate,
   validateEmail,
@@ -75,13 +77,12 @@ export const LoginForm: React.FC<FormProps> = ({
       email: '',
       password: ''
     },
-    validate: ({ email, password }) => {
-      return {
+    validate: ({ email, password }) =>
+      filterFormErrors({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         password: validatePassword(password, lang)
-      }
-    },
-    onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {
+      }),
+    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
         await login({ variables: { input: { email, password } } })
 
@@ -111,33 +112,16 @@ export const LoginForm: React.FC<FormProps> = ({
           fallback: !!isInPage ? 'homepage' : 'current'
         })
       } catch (error) {
-        const errorCodes = getErrorCodes(error)
-
-        if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
-          setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
-              zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
-              lang
-            })
-          })
-        } else if (errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0) {
-          setErrors({
-            password: translate({
-              zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
-              zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
-              lang
-            })
-          })
-        } else {
-          setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
-              zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
-              lang
-            })
-          })
-        }
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(code => {
+          if (code.includes('USER_EMAIL_')) {
+            setFieldError('email', messages[code])
+          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
+            setFieldError('password', messages[code])
+          } else {
+            setFieldError('email', messages[code])
+          }
+        })
 
         analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
           email,

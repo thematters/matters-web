@@ -12,11 +12,11 @@ import {
   LanguageContext,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
-import { hasFormError, translate } from '~/common/utils'
+import { hasFormError, parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -137,15 +137,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
 
         closeDialog()
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant:
-            TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          zh_hans:
-            TEXT.zh_hans.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          lang
-        })
-        setFieldError('name', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('name', messages[codes[0]])
         setSubmitting(false)
       }
     }

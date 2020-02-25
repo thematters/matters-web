@@ -1,6 +1,6 @@
 import { TEXT } from '~/common/enums'
 
-export const OAUTH_PROVIDER = ['likecoin']
+export const OAUTH_PROVIDER = new Set(['likecoin'])
 
 export const OAUTH_SCOPE_TREE = {
   query: {

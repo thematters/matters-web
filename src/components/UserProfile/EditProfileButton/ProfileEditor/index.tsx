@@ -14,6 +14,7 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
+  filterFormErrors,
   hasFormError,
   translate,
   validateDescription,
@@ -56,6 +57,11 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
+/**
+ * To identify `profileCover` is changed since it may be `null`
+ */
+const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
+
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
@@ -74,17 +80,16 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
-      avatar: user.avatar,
-      profileCover: user.info.profileCover,
+      avatar: UNCHANGED_FIELD,
+      profileCover: UNCHANGED_FIELD,
       displayName: user.displayName || '',
       description: user.info.description || ''
     },
-    validate: ({ displayName, description }) => {
-      return {
+    validate: ({ displayName, description }) =>
+      filterFormErrors({
         displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
         description: validateDescription(description, lang)
-      }
-    },
+      }),
     onSubmit: async (
       { avatar, profileCover, displayName, description },
       { setSubmitting }
@@ -93,8 +98,8 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         await update({
           variables: {
             input: {
-              ...(avatar ? { avatar } : {}),
-              ...(profileCover ? { profileCover } : {}),
+              ...(avatar !== UNCHANGED_FIELD ? { avatar } : {}),
+              ...(profileCover !== UNCHANGED_FIELD ? { profileCover } : {}),
               displayName,
               description
             }
@@ -113,7 +118,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <section className="cover-field">
         <ProfileCoverUploader
           user={user}
-          onUpload={assetId => setFieldValue('avatar', assetId)}
+          onUpload={assetId => setFieldValue('profileCover', assetId)}
         />
       </section>
 

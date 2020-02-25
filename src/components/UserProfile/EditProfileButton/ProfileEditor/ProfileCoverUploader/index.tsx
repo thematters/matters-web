@@ -33,7 +33,7 @@ interface Props {
 }
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
-  const [cover, setCover] = useState<string | null>()
+  const [cover, setCover] = useState<string | null>(user.info.profileCover)
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
 
@@ -103,7 +103,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
   return (
     <label htmlFor="profile-input">
-      <Cover cover={user.info.profileCover || cover} />
+      <Cover cover={cover} />
 
       <div className="mask">
         {loading ? <Spinner /> : <Icon.CameraMedium color="white" size="xl" />}

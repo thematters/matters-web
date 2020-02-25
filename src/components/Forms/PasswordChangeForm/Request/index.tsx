@@ -9,12 +9,14 @@ import {
   SendCodeButton,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import { TEXT } from '~/common/enums'
 import {
+  filterFormErrors,
   hasFormError,
+  parseFormSubmitErrors,
   translate,
   validateCode,
   validateEmail
@@ -62,12 +64,11 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       email: defaultEmail,
       code: ''
     },
-    validate: ({ email, code }) => {
-      return {
+    validate: ({ email, code }) =>
+      filterFormErrors({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         code: validateCode(code, lang)
-      }
-    },
+      }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
@@ -79,18 +80,14 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
           submitCallback({ email, codeId: confirmVerificationCode })
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(c => {
+          if (c.includes('CODE_')) {
+            setFieldError('code', messages[c])
+          } else {
+            setFieldError('email', messages[c])
+          }
         })
-
-        if (errorCode.indexOf('CODE_') >= 0) {
-          setFieldError('code', errorMessage)
-        } else {
-          setFieldError('email', errorMessage)
-        }
       }
 
       setSubmitting(false)
