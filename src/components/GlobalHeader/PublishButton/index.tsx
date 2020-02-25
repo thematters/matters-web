@@ -20,7 +20,7 @@ const PublishButton = ({ open }: { open: () => void }) => (
     }}
   >
     <TextIcon color="white" icon={<Icon.Pen />} weight="md">
-      <Translate zh_hant="發佈" zh_hans="发布" />
+      <Translate id="publish" />
     </TextIcon>
   </Button>
 )

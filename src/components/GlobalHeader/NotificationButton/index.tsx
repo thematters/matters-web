@@ -20,7 +20,7 @@ import {
 } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 
-import { PATHS, POLL_INTERVAL, Z_INDEX } from '~/common/enums'
+import { PATHS, POLL_INTERVAL, TEXT, Z_INDEX } from '~/common/enums'
 
 import DropdownNotices from './DropdownNotices'
 import styles from './styles.css'
@@ -42,7 +42,7 @@ const NoticeButton = forwardRef(
       <Button
         size={['2rem', '2rem']}
         bgHoverColor="grey-lighter"
-        aria-label="通知"
+        aria-label={TEXT.zh_hant.notification}
         ref={ref}
         {...restProps}
       >

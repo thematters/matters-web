@@ -159,10 +159,7 @@ const FingerprintDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Dialog.Header
-          title={<Translate zh_hant="分佈式入口" zh_hans="分布式入口" />}
-          close={close}
-        />
+        <Dialog.Header title={<Translate id="IPFSEntrance" />} close={close} />
 
         <Dialog.Content spacing={[0, 0]}>
           <FingerprintDialogContent {...restProps} />

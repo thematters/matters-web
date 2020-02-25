@@ -71,7 +71,7 @@ export const AuthorPicker = ({
             onClick={() => refetch()}
           >
             <TextIcon icon={<Icon.Reload size="sm" />} color="grey">
-              <Translate zh_hant="換一批" zh_hans="换一批" />
+              <Translate id="shuffle" />
             </TextIcon>
           </Button>
 

@@ -85,7 +85,7 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
             <Tabs.Tab selected={feed === 'selected'}>
               <Button onClick={() => setFeed('selected')}>
                 <TextIcon size="xm">
-                  <Translate zh_hant="精選" zh_hans="精选" />
+                  <Translate id="featured" />
                 </TextIcon>
               </Button>
             </Tabs.Tab>
@@ -94,7 +94,7 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
           <Tabs.Tab selected={feed === 'latest'}>
             <Button onClick={() => setFeed('latest')}>
               <TextIcon size="xm">
-                <Translate zh_hant="最新" zh_hans="最新" />
+                <Translate id="latest" />
               </TextIcon>
             </Button>
           </Tabs.Tab>

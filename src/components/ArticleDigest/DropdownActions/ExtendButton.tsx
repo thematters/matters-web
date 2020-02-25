@@ -56,7 +56,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
         size="md"
         spacing="base"
       >
-        <Translate zh_hant="關聯作品" zh_hans="关联作品" />
+        <Translate id="extendArticle" />
       </TextIcon>
 
       <style jsx>{styles}</style>

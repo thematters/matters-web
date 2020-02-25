@@ -25,7 +25,7 @@ interface DropdownNoticesProps {
 const Header = () => (
   <header>
     <h4>
-      <Translate zh_hant="通知" zh_hans="通知" />
+      <Translate id="notification" />
     </h4>
 
     <Button
@@ -55,7 +55,7 @@ const Footer = () => (
         textPlacement="left"
         weight="md"
       >
-        <Translate zh_hant="全部通知" zh_hans="全部通知" />
+        <Translate id="allNotification" />
       </TextIcon>
     </Button>
 
