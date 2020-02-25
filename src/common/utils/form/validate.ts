@@ -57,8 +57,8 @@ export const validatePassword = (value: string, lang: Language) => {
     }
   } else if (!isValidPassword(value)) {
     result = {
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint
+      zh_hant: TEXT.zh_hant.hintPassword,
+      zh_hans: TEXT.zh_hans.hintPassword
     }
   }
 
@@ -101,8 +101,8 @@ export const validateUserName = (value: string, lang: Language) => {
     }
   } else if (!isValidUserName(value)) {
     result = {
-      zh_hant: TEXT.zh_hant.userNameHint,
-      zh_hans: TEXT.zh_hans.userNameHint
+      zh_hant: TEXT.zh_hant.hintUserName,
+      zh_hans: TEXT.zh_hans.hintUserName
     }
   }
 
@@ -149,8 +149,8 @@ export const validateDisplayName = (
     }
   } else if (!isValidDisplayName(value) && !isAdmin) {
     result = {
-      zh_hant: TEXT.zh_hant.displayNameHint,
-      zh_hans: TEXT.zh_hans.displayNameHint
+      zh_hant: TEXT.zh_hant.hintDisplayName,
+      zh_hans: TEXT.zh_hans.hintDisplayName
     }
   }
 

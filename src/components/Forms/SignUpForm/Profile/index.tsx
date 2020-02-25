@@ -137,8 +137,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       <Form.Textarea
         label={
           <Translate
-            zh_hant={TEXT.zh_hant.userProfile}
-            zh_hans={TEXT.zh_hans.userProfile}
+            zh_hant={TEXT.zh_hant.userDescription}
+            zh_hans={TEXT.zh_hans.userDescription}
           />
         }
         name="description"
@@ -150,8 +150,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         })}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.descriptionHint}
-            zh_hans={TEXT.zh_hans.descriptionHint}
+            zh_hant={TEXT.zh_hant.hintUserDescription}
+            zh_hans={TEXT.zh_hans.hintUserDescription}
           />
         }
         value={values.description}
@@ -184,8 +184,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         <PageHeader
           title={
             <Translate
-              zh_hant={TEXT.zh_hant.userProfile}
-              zh_hans={TEXT.zh_hans.userProfile}
+              zh_hant={TEXT.zh_hant.register}
+              zh_hans={TEXT.zh_hans.register}
             />
           }
           hasNoBorder
@@ -203,8 +203,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         <Dialog.Header
           title={
             <Translate
-              zh_hant={TEXT.zh_hant.userProfile}
-              zh_hans={TEXT.zh_hans.userProfile}
+              zh_hant={TEXT.zh_hant.register}
+              zh_hans={TEXT.zh_hans.register}
             />
           }
           close={closeDialog}

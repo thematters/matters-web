@@ -86,8 +86,8 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant={TEXT.zh_hant.uploadImageFailed}
-                zh_hans={TEXT.zh_hans.uploadImageFailed}
+                zh_hant={TEXT.zh_hant.failureUploadImage}
+                zh_hans={TEXT.zh_hans.failureUploadImage}
               />
             )
           }

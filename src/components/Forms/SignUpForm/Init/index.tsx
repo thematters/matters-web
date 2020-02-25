@@ -234,8 +234,8 @@ export const SignUpInitForm: React.FC<FormProps> = ({
           lang
         })}
         hint={translate({
-          zh_hant: TEXT.zh_hant.userNameHint,
-          zh_hans: TEXT.zh_hans.userNameHint,
+          zh_hant: TEXT.zh_hant.hintUserName,
+          zh_hans: TEXT.zh_hans.hintUserName,
           lang
         })}
       />
@@ -262,8 +262,8 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         onChange={handleChange}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.passwordHint}
-            zh_hans={TEXT.zh_hans.passwordHint}
+            zh_hant={TEXT.zh_hant.hintPassword}
+            zh_hans={TEXT.zh_hans.hintPassword}
           />
         }
       />

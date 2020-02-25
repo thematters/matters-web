@@ -75,8 +75,8 @@ const CollapseButton = ({ comment }: { comment: CollapseButtonComment }) => {
               color: 'green',
               content: (
                 <Translate
-                  zh_hant={TEXT.zh_hant.collapseCommentSuccess}
-                  zh_hans={TEXT.zh_hans.collapseCommentSuccess}
+                  zh_hant={TEXT.zh_hant.successCollapseComment}
+                  zh_hans={TEXT.zh_hans.successCollapseComment}
                 />
               )
             }

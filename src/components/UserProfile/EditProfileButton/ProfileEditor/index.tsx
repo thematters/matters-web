@@ -12,9 +12,10 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import {
   filterFormErrors,
+  parseFormSubmitErrors,
   translate,
   validateDescription,
   validateDisplayName
@@ -92,7 +93,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       }),
     onSubmit: async (
       { avatar, profileCover, displayName, description },
-      { setSubmitting }
+      { setSubmitting, setFieldError }
     ) => {
       try {
         await update({
@@ -105,8 +106,31 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
             }
           }
         })
+
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: (
+                <Translate
+                  zh_hant={TEXT.zh_hant.successEditUserProfile}
+                  zh_hans={TEXT.zh_hans.successEditUserProfile}
+                />
+              )
+            }
+          })
+        )
+
+        closeDialog()
       } catch (error) {
-        // TODO: Handle error
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(code => {
+          if (code.includes('USER_DISPLAYNAME_INVALID')) {
+            setFieldError('displayName', messages[code])
+          } else {
+            setFieldError('description', messages[code])
+          }
+        })
       }
 
       setSubmitting(false)
@@ -147,8 +171,8 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         })}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.displayNameHint}
-            zh_hans={TEXT.zh_hans.displayNameHint}
+            zh_hant={TEXT.zh_hant.hintDisplayName}
+            zh_hans={TEXT.zh_hans.hintDisplayName}
           />
         }
         value={values.displayName}
@@ -160,21 +184,21 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <Form.Textarea
         label={
           <Translate
-            zh_hant={TEXT.zh_hant.userProfile}
-            zh_hans={TEXT.zh_hans.userProfile}
+            zh_hant={TEXT.zh_hant.userDescription}
+            zh_hans={TEXT.zh_hans.userDescription}
           />
         }
         name="description"
         required
         placeholder={translate({
-          zh_hant: '請輸入個人簡介',
-          zh_hans: '请输入个人简介',
+          zh_hant: TEXT.zh_hant.enterUserDescription,
+          zh_hans: TEXT.zh_hans.enterUserDescription,
           lang
         })}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.descriptionHint}
-            zh_hans={TEXT.zh_hans.descriptionHint}
+            zh_hant={TEXT.zh_hant.hintUserDescription}
+            zh_hans={TEXT.zh_hans.hintUserDescription}
           />
         }
         value={values.description}
@@ -202,7 +226,12 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate zh_hant="編輯資料" zh_hans="编辑资料" />}
+        title={
+          <Translate
+            zh_hant={TEXT.zh_hant.editUserProfile}
+            zh_hans={TEXT.zh_hans.editUserProfile}
+          />
+        }
         close={closeDialog}
         rightButton={SubmitButton}
       />

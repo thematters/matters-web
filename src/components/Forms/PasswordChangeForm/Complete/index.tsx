@@ -30,13 +30,13 @@ export const PasswordChangeComplete: React.FC<Props> = ({
 
   const Description = isForget ? (
     <Translate
-      zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-      zh_hans={TEXT.zh_hans.resetPasswordSuccess}
+      zh_hant={TEXT.zh_hant.successResetPassword}
+      zh_hans={TEXT.zh_hans.successResetPassword}
     />
   ) : (
     <Translate
-      zh_hant={TEXT.zh_hant.changePasswordSuccess}
-      zh_hans={TEXT.zh_hans.changePasswordSuccess}
+      zh_hant={TEXT.zh_hant.successChangePassword}
+      zh_hans={TEXT.zh_hans.successChangePassword}
     />
   )
 

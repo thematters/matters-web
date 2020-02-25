@@ -33,8 +33,8 @@ const CopyButton = ({ text }: { text: string }) => {
           color: 'green',
           content: (
             <Translate
-              zh_hant={TEXT.zh_hant.copySuccess}
-              zh_hans={TEXT.zh_hans.copySuccess}
+              zh_hant={TEXT.zh_hant.successCopy}
+              zh_hans={TEXT.zh_hans.successCopy}
             />
           )
         }

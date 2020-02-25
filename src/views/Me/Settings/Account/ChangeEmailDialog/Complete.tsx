@@ -17,8 +17,8 @@ const Complete = ({ closeDialog }: CompleteProps) => (
       }
       description={
         <Translate
-          zh_hant={TEXT.zh_hant.changeEmailSuccess}
-          zh_hans={TEXT.zh_hans.changeEmailSuccess}
+          zh_hant={TEXT.zh_hant.successChangeEmail}
+          zh_hans={TEXT.zh_hans.successChangeEmail}
         />
       }
     />

@@ -52,8 +52,8 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
           color: 'green',
           content: (
             <Translate
-              zh_hant={TEXT.zh_hant.unblockSuccess}
-              zh_hans={TEXT.zh_hans.unblockSuccess}
+              zh_hant={TEXT.zh_hant.successUnBlock}
+              zh_hans={TEXT.zh_hans.successUnBlock}
             />
           )
         }
@@ -68,8 +68,8 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
           color: 'green',
           content: (
             <Translate
-              zh_hant={TEXT.zh_hant.blockSuccess}
-              zh_hans={TEXT.zh_hans.blockSuccess}
+              zh_hant={TEXT.zh_hant.successBlock}
+              zh_hans={TEXT.zh_hans.successBlock}
             />
           ),
           customButton: (

@@ -13,8 +13,8 @@ const ErrorState = ({ draft }: { draft: PublishStateDraft }) => {
       color="red"
       content={
         <Translate
-          zh_hant={TEXT.zh_hant.publishFailed}
-          zh_hans={TEXT.zh_hans.publishFailed}
+          zh_hant={TEXT.zh_hant.failurePublish}
+          zh_hans={TEXT.zh_hans.failurePublish}
         />
       }
       subDescription={

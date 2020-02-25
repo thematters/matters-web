@@ -18,8 +18,8 @@ export const SignUpComplete = ({
         <Dialog.Header
           title={
             <Translate
-              zh_hant={TEXT.zh_hant.registerSuccess}
-              zh_hans={TEXT.zh_hans.registerSuccess}
+              zh_hant={TEXT.zh_hant.successRegister}
+              zh_hans={TEXT.zh_hans.successRegister}
             />
           }
           close={closeDialog}

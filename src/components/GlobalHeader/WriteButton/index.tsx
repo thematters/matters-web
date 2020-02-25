@@ -12,8 +12,13 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import {
+  analytics,
+  parseFormSubmitErrors,
+  toPath,
+  translate
+} from '~/common/utils'
 
 import { CreateDraft } from './__generated__/CreateDraft'
 
@@ -106,8 +111,16 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
             const path = toPath({ page: 'draftDetail', slug, id })
             Router.push(path.as)
           }
-        } catch (e) {
-          // TODO
+        } catch (error) {
+          const [messages, codes] = parseFormSubmitErrors(error, lang)
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: messages[codes[0]]
+              }
+            })
+          )
         }
       }}
       loading={loading}

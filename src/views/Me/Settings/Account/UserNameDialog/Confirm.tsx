@@ -94,8 +94,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         })}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.userNameHint}
-            zh_hans={TEXT.zh_hans.userNameHint}
+            zh_hant={TEXT.zh_hant.hintUserName}
+            zh_hans={TEXT.zh_hans.hintUserName}
           />
         }
         value={values.userName}
@@ -119,8 +119,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         onChange={handleChange}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.userNameHint}
-            zh_hans={TEXT.zh_hans.userNameHint}
+            zh_hant={TEXT.zh_hant.hintUserName}
+            zh_hans={TEXT.zh_hans.hintUserName}
           />
         }
       />

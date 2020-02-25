@@ -28,8 +28,8 @@ const Complete = ({ closeDialog }: CompleteProps) => (
       }
       description={
         <Translate
-          zh_hant={TEXT.zh_hant.changeUserNameSuccess}
-          zh_hans={TEXT.zh_hans.changeUserNameSuccess}
+          zh_hant={TEXT.zh_hant.successChangeUserName}
+          zh_hans={TEXT.zh_hans.successChangeUserName}
         />
       }
     />

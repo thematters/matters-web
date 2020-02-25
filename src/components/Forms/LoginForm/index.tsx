@@ -96,8 +96,8 @@ export const LoginForm: React.FC<FormProps> = ({
               color: 'green',
               content: (
                 <Translate
-                  zh_hant={TEXT.zh_hant.loginSuccess}
-                  zh_hans={TEXT.zh_hans.loginSuccess}
+                  zh_hant={TEXT.zh_hant.successLogin}
+                  zh_hans={TEXT.zh_hans.successLogin}
                 />
               )
             }
@@ -132,6 +132,8 @@ export const LoginForm: React.FC<FormProps> = ({
       setSubmitting(false)
     }
   })
+
+  console.log(touched, errors, isValid)
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>

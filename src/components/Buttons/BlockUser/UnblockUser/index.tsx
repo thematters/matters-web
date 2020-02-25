@@ -49,8 +49,8 @@ export const UnblockUserButton = ({
               color: 'green',
               content: (
                 <Translate
-                  zh_hant={TEXT.zh_hant.unblockSuccess}
-                  zh_hans={TEXT.zh_hans.unblockSuccess}
+                  zh_hant={TEXT.zh_hant.successUnBlock}
+                  zh_hans={TEXT.zh_hans.successUnBlock}
                 />
               )
             }

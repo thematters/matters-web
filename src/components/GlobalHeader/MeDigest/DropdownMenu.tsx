@@ -58,8 +58,8 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant="登出失敗，請重試"
-                zh_hans="登出失败，再来一次"
+                zh_hant={TEXT.zh_hant.failureLogout}
+                zh_hans={TEXT.zh_hans.failureLogout}
               />
             )
           }

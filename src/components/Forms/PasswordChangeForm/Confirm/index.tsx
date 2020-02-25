@@ -139,8 +139,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         error={touched.comparedPassword && errors.comparedPassword}
         hint={
           <Translate
-            zh_hant={TEXT.zh_hant.passwordHint}
-            zh_hans={TEXT.zh_hans.passwordHint}
+            zh_hant={TEXT.zh_hant.hintPassword}
+            zh_hans={TEXT.zh_hans.hintPassword}
           />
         }
         onBlur={handleBlur}
