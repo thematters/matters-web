@@ -11,8 +11,6 @@ import { translate } from '~/common/utils'
 export const filterFormErrors = (obj: { [key: string]: any }) =>
   _pickBy(obj, _identity)
 
-export const hasFormError = (errors: { [key: string]: any }) => _isEmpty(errors)
-
 type ErrorMessages = { [key in ErrorCodeKeys]: string }
 
 export const parseFormSubmitErrors = (

@@ -7,7 +7,6 @@ import { useMutation } from '~/components/GQL'
 
 import { TEXT } from '~/common/enums'
 import {
-  hasFormError,
   parseFormSubmitErrors,
   translate,
   validateComparedUserName,
@@ -48,7 +47,8 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       userName: '',
@@ -131,7 +131,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.nextStep}

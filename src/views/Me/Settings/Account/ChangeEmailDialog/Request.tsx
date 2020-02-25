@@ -14,7 +14,6 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import { TEXT } from '~/common/enums'
 import {
   filterFormErrors,
-  hasFormError,
   parseFormSubmitErrors,
   translate,
   validateCode,
@@ -50,7 +49,8 @@ const Request: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
@@ -140,7 +140,7 @@ const Request: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.nextStep}

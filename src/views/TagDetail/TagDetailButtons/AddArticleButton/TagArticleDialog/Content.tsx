@@ -16,7 +16,7 @@ import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
-import { hasFormError, parseFormSubmitErrors, translate } from '~/common/utils'
+import { parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -84,6 +84,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
+    isValid,
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
@@ -223,7 +224,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       }
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       loading={isSubmitting}
     />
   )

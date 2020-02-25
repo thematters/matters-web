@@ -14,7 +14,6 @@ import { useMutation } from '~/components/GQL'
 import { TEXT } from '~/common/enums'
 import {
   filterFormErrors,
-  hasFormError,
   translate,
   validateAvatar,
   validateDescription,
@@ -67,7 +66,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     setFieldValue,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       avatar: null,
@@ -166,7 +166,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       onClick={handleSubmit}
       text={
         <Translate

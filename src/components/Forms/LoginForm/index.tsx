@@ -16,7 +16,6 @@ import {
   analytics,
   // clearPersistCache,
   filterFormErrors,
-  hasFormError,
   parseFormSubmitErrors,
   redirectToTarget,
   translate,
@@ -71,6 +70,7 @@ export const LoginForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
+    isValid,
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
@@ -192,7 +192,7 @@ export const LoginForm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.confirm}

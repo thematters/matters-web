@@ -16,7 +16,6 @@ import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import {
-  hasFormError,
   numAbbr,
   parseFormSubmitErrors,
   toPath,
@@ -133,6 +132,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
+    isValid,
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
@@ -261,7 +261,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       }
       type="submit"
       form={formId}
-      disabled={!hasFormError(errors) || isSubmitting}
+      disabled={!isValid || isSubmitting}
       loading={isSubmitting}
     />
   )
