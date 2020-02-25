@@ -30,6 +30,7 @@ interface RichProps {
   avatarBadge?: React.ReactNode
 
   hasFollow?: boolean
+  hasState?: boolean
   hasUnblock?: boolean
 
   onClick?: () => any
@@ -66,6 +67,7 @@ const Rich = ({
   avatarBadge,
 
   hasFollow,
+  hasState = true,
   hasUnblock,
 
   onClick
@@ -120,7 +122,7 @@ const Rich = ({
             <Link {...path}>
               <a className="name">{user.displayName}</a>
             </Link>
-            <FollowButton.State user={user} />
+            {hasState && <FollowButton.State user={user} />}
           </header>
 
           {user.info.description && (
