@@ -8,7 +8,11 @@ import {
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
-const LoginButton = () => {
+interface LoginButtonProps {
+  isPlain?: boolean
+}
+
+export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
   const isSmallUp = useResponsive({ type: 'sm-up' })()
 
   const clickProps = isSmallUp
@@ -18,15 +22,21 @@ const LoginButton = () => {
           window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
         }
       }
-    : {
-        ...appendTarget(PATHS.AUTH_LOGIN)
-      }
+    : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+
+  if (isPlain) {
+    return (
+      <Button {...clickProps}>
+        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+      </Button>
+    )
+  }
 
   return (
     <Button
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
-      bgHoverColor="green-lighter"
+      bgHoverColor={'green-lighter'}
       {...clickProps}
     >
       <TextIcon color="green" weight="md">
@@ -35,5 +45,3 @@ const LoginButton = () => {
     </Button>
   )
 }
-
-export default LoginButton

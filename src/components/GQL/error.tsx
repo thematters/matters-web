@@ -1,15 +1,8 @@
 import { ApolloError } from 'apollo-client'
 
-import { Button, Error, Translate } from '~/components'
+import { Error, LoginButton, Translate } from '~/components'
 
-import {
-  ADD_TOAST,
-  CLOSE_ACTIVE_DIALOG,
-  ERROR_CODES,
-  ErrorCodeKeys,
-  OPEN_LOGIN_DIALOG,
-  TEXT
-} from '~/common/enums'
+import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys, TEXT } from '~/common/enums'
 
 export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []
@@ -89,19 +82,7 @@ export const mutationOnError = (error: ApolloError) => {
         detail: {
           color: 'red',
           content: errorMessage,
-          customButton: (
-            <Button
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-                window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-              }}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.login}
-                zh_hans={TEXT.zh_hans.login}
-              />
-            </Button>
-          ),
+          customButton: <LoginButton isPlain />,
           buttonPlacement: 'center'
         }
       })

@@ -24,9 +24,7 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
           window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
         }
       }
-    : {
-        ...appendTarget(PATHS.AUTH_SIGNUP)
-      }
+    : appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true })
 
   return (
     <Button

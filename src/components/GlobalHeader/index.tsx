@@ -3,7 +3,12 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-import { SearchBar, SignUpButton, useResponsive } from '~/components'
+import {
+  SearchBar,
+  SignUpButton,
+  LoginButton,
+  useResponsive
+} from '~/components'
 
 import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
 
@@ -11,7 +16,6 @@ import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
 import { HeaderContext } from './Context'
 import Hint from './Hint'
-import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
 import Nav from './Nav'
