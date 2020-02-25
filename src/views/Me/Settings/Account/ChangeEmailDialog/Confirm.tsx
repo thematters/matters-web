@@ -171,14 +171,14 @@ const Confirm: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={(isValid || isSubmitting, isValid)}
+      disabled={!isValid || isSubmitting}
       text={
         <Translate
           zh_hant={TEXT.zh_hant.confirm}
           zh_hans={TEXT.zh_hans.confirm}
         />
       }
-      loading={(isSubmitting, isValid)}
+      loading={isSubmitting}
     />
   )
 
