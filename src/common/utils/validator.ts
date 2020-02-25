@@ -9,11 +9,11 @@ export interface ValidEmailOptions {
   allowPlusSign: boolean
 }
 
-const EMAIL_DOMAIN_WHITELIST = new Set(['matters.news', 'like.co'])
+const EMAIL_DOMAIN_WHITELIST = ['matters.news', 'like.co']
 
 export const isValidEmail = (str: string, options: ValidEmailOptions) => {
   const { allowPlusSign } = options
-  const isInWhitelist = EMAIL_DOMAIN_WHITELIST.has(str.split('@')[1])
+  const isInWhitelist = EMAIL_DOMAIN_WHITELIST.indexOf(str.split('@')[1]) >= 0
 
   // check "+" sign
   if (!allowPlusSign && !isInWhitelist && str.indexOf('+') >= 0) {

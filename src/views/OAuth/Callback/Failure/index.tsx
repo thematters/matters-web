@@ -42,7 +42,7 @@ const OAuthCallbackFailure = () => {
   }
   const errorDetail = ERROR_TEXT[code as any]
 
-  if (!provider || !OAUTH_PROVIDER.has(provider)) {
+  if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
     Router.push(PATHS.HOME.as)
     return null
   }

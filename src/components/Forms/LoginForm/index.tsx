@@ -133,8 +133,6 @@ export const LoginForm: React.FC<FormProps> = ({
     }
   })
 
-  console.log(touched, errors, isValid)
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
