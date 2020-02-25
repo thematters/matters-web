@@ -13,7 +13,7 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
 
   return (
     <section className="follower-content">
-      <UserDigest.Rich user={user} hasState={false} hasFollow/>
+      <UserDigest.Rich user={user} hasState={false} hasFollow />
       <style jsx>{styles}</style>
     </section>
   )
