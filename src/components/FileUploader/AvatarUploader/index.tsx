@@ -12,6 +12,7 @@ import {
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
+import { randomString } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -31,6 +32,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const fieldId = randomString()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -89,7 +91,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   })
 
   return (
-    <label className={labelClass} htmlFor="avatar-input">
+    <label className={labelClass} htmlFor={fieldId}>
       <Avatar size="xxl" {...avatarProps} src={avatar} />
 
       <div className="mask">
@@ -98,7 +100,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       <VisuallyHidden>
         <input
-          id="avatar-input"
+          id={fieldId}
           type="file"
           name="file"
           aria-label="上傳頭像"

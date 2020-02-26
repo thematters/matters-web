@@ -11,6 +11,7 @@ import { appendTarget } from '~/common/utils'
 export const PasswordResetDialogButton = () => (
   <Button
     spacing={['xtight', 0]}
+    aria-haspopup="true"
     onClick={() => {
       window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
       window.dispatchEvent(new CustomEvent(OPEN_RESET_PASSWORD_DIALOG))

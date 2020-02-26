@@ -10,6 +10,7 @@ import {
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
+import { randomString } from '~/common/utils'
 
 import Cover from '../../../Cover'
 import styles from './styles.css'
@@ -34,7 +35,9 @@ interface Props {
 export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
   const [cover, setCover] = useState<string | null>(user.info.profileCover)
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
+  const fieldId = randomString()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -96,7 +99,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
   }
 
   return (
-    <label htmlFor="profile-input">
+    <label htmlFor={fieldId}>
       <Cover cover={cover} />
 
       <div className="mask">
@@ -121,7 +124,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
       <VisuallyHidden>
         <input
-          id="profile-input"
+          id={fieldId}
           type="file"
           name="file"
           aria-label="上傳封面"

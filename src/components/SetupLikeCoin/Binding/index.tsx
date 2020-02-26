@@ -58,17 +58,6 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         description={
           error ? (
             <>
-              <Spinner />
-
-              <p>
-                <Translate
-                  zh_hant="請在新頁面完成綁定，不要關閉本窗口"
-                  zh_hans="请在新页面完成绑定，不要关闭本窗口"
-                />
-              </p>
-            </>
-          ) : (
-            <>
               <div>
                 <Icon.EmptyWarning color="grey-light" size="xl" />
               </div>
@@ -77,6 +66,17 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
                 <Translate
                   zh_hant="哎呀，設置失敗了。"
                   zh_hans="哎呀，设置失败了。"
+                />
+              </p>
+            </>
+          ) : (
+            <>
+              <Spinner />
+
+              <p>
+                <Translate
+                  zh_hant="請在新頁面完成綁定，不要關閉本窗口"
+                  zh_hans="请在新页面完成绑定，不要关闭本窗口"
                 />
               </p>
             </>

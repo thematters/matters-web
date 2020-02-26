@@ -3,6 +3,8 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { Icon } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
+import { randomString } from '~/common/utils'
+
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -22,11 +24,12 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldMsgId = `checkbox-msg-${name}`
+  const fieldId = randomString()
+  const fieldMsgId = randomString()
 
   return (
     <Field>
-      <label htmlFor="checkbox">
+      <label htmlFor={fieldId}>
         <TextIcon
           icon={
             inputProps.checked ? (
@@ -43,7 +46,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
         <VisuallyHidden>
           <input
-            id="checkbox"
+            id={fieldId}
             type="checkbox"
             aria-describedby={fieldMsgId}
             name={name}

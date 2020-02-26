@@ -16,6 +16,7 @@ import { ADD_TOAST } from '~/common/enums'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
+  randomString,
   translate,
   validateDescription,
   validateDisplayName
@@ -67,7 +68,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
-  const formId = 'user-profile-editor'
+  const formId = randomString()
 
   const {
     values,

@@ -16,7 +16,7 @@ import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { genSentryActionId } from '~/common/utils'
+import { randomString } from '~/common/utils'
 
 // import { setupPersistCache } from './cache'
 import resolvers from './resolvers'
@@ -107,7 +107,7 @@ const authLink = setContext((_, { headers }) => {
 
 const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
-  const actionId = genSentryActionId()
+  const actionId = randomString()
 
   import('@sentry/browser').then(Sentry => {
     Sentry.configureScope((scope: any) => {

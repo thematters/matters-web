@@ -51,6 +51,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           type="button"
           className="container"
           aria-label="查看所有讚賞者"
+          aria-haspopup="true"
           onClick={open}
         >
           <section className="avatar-list">

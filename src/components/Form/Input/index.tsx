@@ -1,3 +1,5 @@
+import { randomString } from '~/common/utils'
+
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -38,16 +40,17 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldMsgId = `input-msg-${name}`
+  const fieldId = randomString()
+  const fieldMsgId = randomString()
 
   return (
     <Field>
-      <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
+      <Field.Header htmlFor={fieldId} label={label} extraButton={extraButton} />
 
       <Field.Content>
         <input
           {...inputProps}
-          id={name}
+          id={fieldId}
           name={name}
           type={type}
           aria-describedby={fieldMsgId}

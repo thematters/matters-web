@@ -15,6 +15,7 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
+  randomString,
   translate,
   validateCode,
   validateEmail
@@ -54,7 +55,7 @@ const Confirm: React.FC<FormProps> = ({
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
 
-  const formId = 'change-email-confirm-form'
+  const formId = randomString()
 
   const {
     values,

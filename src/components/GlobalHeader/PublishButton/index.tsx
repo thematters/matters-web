@@ -18,6 +18,7 @@ const PublishButton = ({ open }: { open: () => void }) => (
       analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
       open()
     }}
+    aria-haspopup="true"
   >
     <TextIcon color="white" icon={<Icon.Pen />} weight="md">
       <Translate id="publish" />
