@@ -2,13 +2,21 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Button, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonHeight,
+  ButtonWidth,
+  TextIcon,
+  Translate
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import { FollowButtonSize } from './index'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { UnfollowUser } from './__generated__/UnfollowUser'
@@ -25,10 +33,10 @@ const UNFOLLOW_USER = gql`
 
 const Unfollow = ({
   user,
-  isLarge
+  size
 }: {
   user: FollowButtonUser
-  isLarge?: boolean
+  size: FollowButtonSize
 }) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
@@ -48,9 +56,15 @@ const Unfollow = ({
     }
   })
 
+  const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
+    lg: ['6rem', '2rem'],
+    md: ['4rem', '1.5rem'],
+    'md-s': ['3rem', '1.5rem']
+  }
+
   return (
     <Button
-      size={isLarge ? ['6rem', '2rem'] : ['4rem', '1.5rem']}
+      size={sizes[size]}
       textColor="white"
       bgColor="green"
       bgHoverColor="red"
@@ -63,7 +77,7 @@ const Unfollow = ({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="md" size={isLarge ? 'sm' : 'xs'}>
+      <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
         {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
       </TextIcon>
     </Button>

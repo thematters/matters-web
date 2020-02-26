@@ -178,7 +178,7 @@ export const UserProfile = () => {
               {!isMe && (
                 <section className="buttons">
                   <span className="follows">
-                    <FollowButton user={user} isLarge />
+                    <FollowButton user={user} size="lg" />
                     <section className="u-sm-down-hide follow-state">
                       {!isMe && <FollowButton.State user={user} />}
                     </section>

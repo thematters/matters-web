@@ -19,12 +19,14 @@ const fragments = {
   `
 }
 
+export type FollowButtonSize = 'lg' | 'md' | 'md-s'
+
 export const FollowButton = ({
   user,
-  isLarge
+  size = 'md'
 }: {
   user: FollowButtonUser
-  isLarge?: boolean
+  size?: FollowButtonSize
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -33,9 +35,9 @@ export const FollowButton = ({
   }
 
   if (user.isFollowee) {
-    return <Unfollow user={user} isLarge={isLarge} />
+    return <Unfollow user={user} size={size} />
   } else {
-    return <Follow user={user} isLarge={isLarge} />
+    return <Follow user={user} size={size} />
   }
 }
 
