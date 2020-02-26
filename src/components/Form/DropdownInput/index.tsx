@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce/lib'
 import { Dropdown, hidePopperOnClick, PopperInstance } from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
+import { randomString } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -50,6 +51,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   const [search, setSearch] = useState('')
   const [instance, setInstance] = useState<PopperInstance | null>(null)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
+
+  const fieldId = randomString()
 
   const hideDropdown = () => {
     if (instance) {
@@ -97,7 +100,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
 
   return (
     <Field>
-      <Field.Header htmlFor={name} label={label} extraButton={extraButton} />
+      <Field.Header htmlFor={fieldId} label={label} extraButton={extraButton} />
 
       <Field.Content>
         <Dropdown
@@ -113,7 +116,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         >
           <input
             {...inputProps}
-            id={name}
+            id={fieldId}
             name={name}
             type={type}
             aria-describedby={fieldMsgId}

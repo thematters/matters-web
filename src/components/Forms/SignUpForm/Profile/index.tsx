@@ -16,7 +16,8 @@ import {
   translate,
   validateAvatar,
   validateDescription,
-  validateDisplayName
+  validateDisplayName,
+  randomString
 } from '~/common/utils'
 
 import AvatarUploadField from './AvatarUploadField'
@@ -55,7 +56,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'signup-profile-form'
+  const formId = randomString()
 
   const {
     values,

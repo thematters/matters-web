@@ -15,6 +15,7 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
+  randomString,
   translate,
   validateCode,
   validateEmail
@@ -47,7 +48,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = 'password-change-request-form'
+  const formId = randomString()
 
   const {
     values,
