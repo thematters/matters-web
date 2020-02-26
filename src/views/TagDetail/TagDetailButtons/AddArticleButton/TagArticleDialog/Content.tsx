@@ -15,7 +15,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -117,11 +117,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: translate({
-                zh_hant: TEXT.zh_hant.addedArticleTag,
-                zh_hans: TEXT.zh_hans.addedArticleTag,
-                lang
-              }),
+              content: translate({ id: 'addedArticleTag', lang }),
               duration: 2000
             }
           })
@@ -216,12 +212,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.Header.RightButton
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
-      }
+      text={<Translate id="confirm" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
@@ -232,12 +223,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.addArticleTag}
-            zh_hans={TEXT.zh_hans.addArticleTag}
-          />
-        }
+        title={<Translate id="addArticleTag" />}
         close={closeDialog}
         rightButton={SubmitButton}
       />

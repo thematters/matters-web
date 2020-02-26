@@ -6,7 +6,7 @@ import { Button, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -114,10 +114,7 @@ const EditButton = ({
         onClick={() => setEditing(false)}
       >
         <TextIcon color="grey" size="xs" weight="md">
-          <Translate
-            zh_hant={TEXT.zh_hant.cancel}
-            zh_hans={TEXT.zh_hans.cancel}
-          />
+          <Translate id="cancel" />
         </TextIcon>
       </Button>
 
@@ -135,7 +132,7 @@ const EditButton = ({
           weight="md"
           icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
         >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
+          <Translate id="done" />
         </TextIcon>
       </Button>
 

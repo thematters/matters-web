@@ -11,7 +11,6 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
@@ -100,20 +99,11 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.password}
-            zh_hans={TEXT.zh_hans.password}
-          />
-        }
+        label={<Translate id="password" />}
         type="password"
         name="password"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterPassword,
-          zh_hans: TEXT.zh_hans.enterPassword,
-          lang
-        })}
+        placeholder={translate({ id: 'enterPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -121,28 +111,14 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.newPassword}
-            zh_hans={TEXT.zh_hans.newPassword}
-          />
-        }
+        label={<Translate id="newPassword" />}
         type="password"
         name="comparedPassword"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterPasswordAgain,
-          zh_hans: TEXT.zh_hans.enterPasswordAgain,
-          lang
-        })}
+        placeholder={translate({ id: 'enterPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintPassword}
-            zh_hans={TEXT.zh_hans.hintPassword}
-          />
-        }
+        hint={<Translate id="hintPassword" />}
         onBlur={handleBlur}
         onChange={handleChange}
       />
@@ -154,26 +130,15 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
-      }
+      text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
   )
 
   const Title = isForget ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.resetPassword}
-      zh_hans={TEXT.zh_hans.resetPassword}
-    />
+    <Translate id="resetPassword" />
   ) : (
-    <Translate
-      zh_hant={TEXT.zh_hant.changePassword}
-      zh_hans={TEXT.zh_hans.changePassword}
-    />
+    <Translate id="changePassword" />
   )
 
   if (isInPage) {

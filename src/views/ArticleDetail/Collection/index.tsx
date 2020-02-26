@@ -22,7 +22,7 @@ const Collection: React.FC<{
     <section className="collection">
       <header>
         <Title type="nav" is="h2">
-          <Translate zh_hant="關聯作品" zh_hans="关联作品" />
+          <Translate id="extendArticle" />
 
           <span className="count" aira-label={`${collectionCount} 篇關聯作品`}>
             {collectionCount}

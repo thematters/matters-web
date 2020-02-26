@@ -2,7 +2,6 @@ import { useContext } from 'react'
 
 import { Dialog, LanguageContext, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
@@ -46,10 +45,7 @@ const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
 
       <Dialog.Footer>
         <Dialog.Footer.Button onClick={nextStep}>
-          <Translate
-            zh_hant={TEXT.zh_hant.agreeAndContinue}
-            zh_hans={TEXT.zh_hans.agreeAndContinue}
-          />
+          <Translate id="agreeAndContinue" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
 

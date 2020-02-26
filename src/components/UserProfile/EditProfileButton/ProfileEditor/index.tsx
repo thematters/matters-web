@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
@@ -111,12 +111,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.successEditUserProfile}
-                  zh_hans={TEXT.zh_hans.successEditUserProfile}
-                />
-              )
+              content: <Translate id="successEditUserProfile" />
             }
           })
         )
@@ -155,26 +150,15 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       </section>
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.displayName}
-            zh_hans={TEXT.zh_hans.displayName}
-          />
-        }
+        label={<Translate id="displayName" />}
         type="text"
         name="displayName"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterDisplayName,
-          zh_hans: TEXT.zh_hans.enterDisplayName,
+          id: 'enterDisplayName',
           lang
         })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintDisplayName}
-            zh_hans={TEXT.zh_hans.hintDisplayName}
-          />
-        }
+        hint={<Translate id="hintDisplayName" />}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -182,25 +166,14 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       />
 
       <Form.Textarea
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.userDescription}
-            zh_hans={TEXT.zh_hans.userDescription}
-          />
-        }
+        label={<Translate id="userDescription" />}
         name="description"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserDescription,
-          zh_hans: TEXT.zh_hans.enterUserDescription,
+          id: 'enterUserDescription',
           lang
         })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintUserDescription}
-            zh_hans={TEXT.zh_hans.hintUserDescription}
-          />
-        }
+        hint={<Translate id="hintUserDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -216,9 +189,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate zh_hant={TEXT.zh_hant.save} zh_hans={TEXT.zh_hans.save} />
-      }
+      text={<Translate id="save" />}
       loading={isSubmitting}
     />
   )
@@ -226,12 +197,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.editUserProfile}
-            zh_hans={TEXT.zh_hans.editUserProfile}
-          />
-        }
+        title={<Translate id="editUserProfile" />}
         close={closeDialog}
         rightButton={SubmitButton}
       />

@@ -3,8 +3,6 @@ import { useContext, useEffect } from 'react'
 import { Head } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
-import { TEXT } from '~/common/enums'
-
 import Features from './Features'
 import Footer from './Footer'
 import Goal from './Goal'
@@ -22,9 +20,7 @@ const About = () => {
 
   return (
     <main>
-      <Head
-        title={{ zh_hant: TEXT.zh_hant.about, zh_hans: TEXT.zh_hans.about }}
-      />
+      <Head title={{ id: 'about' }} />
 
       <article>
         <Slogan />

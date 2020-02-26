@@ -1,11 +1,6 @@
 import { Button, TextIcon, Translate, useResponsive } from '~/components'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_DIALOG,
-  PATHS,
-  TEXT
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
 interface LoginButtonProps {
@@ -27,7 +22,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
   if (isPlain) {
     return (
       <Button {...clickProps}>
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+        <Translate id="login" />
       </Button>
     )
   }
@@ -40,7 +35,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
       {...clickProps}
     >
       <TextIcon color="green" weight="md">
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
+        <Translate id="login" />
       </TextIcon>
     </Button>
   )

@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
-
 import { DeleteDraft } from './__generated__/DeleteDraft'
 import { ViewerDrafts } from './__generated__/ViewerDrafts'
 
@@ -70,10 +68,7 @@ const DeleteButton = ({ id }: { id: string }) => {
   return (
     <Button onClick={() => deleteDraft()}>
       <TextIcon size="xs">
-        <Translate
-          zh_hant={TEXT.zh_hant.delete}
-          zh_hans={TEXT.zh_hant.delete}
-        />
+        <Translate id="delete" />
       </TextIcon>
     </Button>
   )

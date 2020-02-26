@@ -14,7 +14,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
@@ -165,16 +165,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={
-                    id ? TEXT.zh_hant.tagEdited : TEXT.zh_hant.tagCreated
-                  }
-                  zh_hans={
-                    id ? TEXT.zh_hans.tagEdited : TEXT.zh_hans.tagCreated
-                  }
-                />
-              ),
+              content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
               duration: 2000
             }
           })
@@ -203,19 +194,10 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.DropdownInput
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.tagName}
-            zh_hans={TEXT.zh_hans.tagName}
-          />
-        }
+        label={<Translate id="tagName" />}
         type="text"
         name="newContent"
-        placeholder={translate({
-          zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
-          zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
-          lang
-        })}
+        placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
         value={values.newContent}
         error={touched.newContent && errors.newContent}
         onBlur={e => {
@@ -230,18 +212,9 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       />
 
       <Form.Textarea
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.tagDescription}
-            zh_hans={TEXT.zh_hans.tagDescription}
-          />
-        }
+        label={<Translate id="tagDescription" />}
         name="newDescription"
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
-          zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
-          lang
-        })}
+        placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
         value={values.newDescription}
         error={touched.newDescription && errors.newDescription}
         onBlur={handleBlur}
@@ -253,12 +226,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.Header.RightButton
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
-      }
+      text={<Translate id="confirm" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
@@ -269,12 +237,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={content ? TEXT.zh_hant.editTag : TEXT.zh_hant.createTag}
-            zh_hans={content ? TEXT.zh_hans.editTag : TEXT.zh_hans.createTag}
-          />
-        }
+        title={<Translate id={content ? 'editTag' : 'createTag'} />}
         close={closeDialog}
         rightButton={SubmitButton}
       />

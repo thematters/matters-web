@@ -13,7 +13,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import { parseFormSubmitErrors, unsubscribePush } from '~/common/utils'
 
 import styles from './styles.css'
@@ -81,12 +81,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.failureLogout}
-                zh_hans={TEXT.zh_hans.failureLogout}
-              />
-            )
+            content: <Translate id="failureLogout" />
           }
         })
       )
@@ -96,12 +91,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.termAndPrivacy}
-            zh_hans={TEXT.zh_hans.termAndPrivacy}
-          />
-        }
+        title={<Translate id="termAndPrivacy" />}
         close={closeDialog}
       />
 
@@ -124,10 +114,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           disabled={isSubmitting}
           loading={isSubmitting}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.agreeAndContinue}
-            zh_hans={TEXT.zh_hans.agreeAndContinue}
-          />
+          <Translate id="agreeAndContinue" />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
@@ -135,10 +122,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           textColor="black"
           onClick={onLogout}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.disagree}
-            zh_hans={TEXT.zh_hans.disagree}
-          />
+          <Translate id="disagree" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
 

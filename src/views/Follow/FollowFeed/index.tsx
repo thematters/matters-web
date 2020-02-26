@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import FollowComment from './FollowComment'
@@ -126,21 +126,9 @@ const FollowFeed = () => {
 
 export default () => (
   <>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.follow,
-        zh_hans: TEXT.zh_hans.follow
-      }}
-    />
+    <Head title={{ id: 'follow' }} />
 
-    <PageHeader
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.follow}
-          zh_hans={TEXT.zh_hans.follow}
-        />
-      }
-    />
+    <PageHeader title={<Translate id="follow" />} />
 
     <FollowFeed />
   </>

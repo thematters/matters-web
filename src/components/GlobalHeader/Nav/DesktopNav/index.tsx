@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -27,20 +27,14 @@ const DesktopNav: React.FC<{ unread: boolean }> = ({ unread }) => {
     <>
       <Link {...PATHS.HOME}>
         <a className={homeClasses}>
-          <Translate
-            zh_hant={TEXT.zh_hant.discover}
-            zh_hans={TEXT.zh_hans.discover}
-          />
+          <Translate id="discover" />
         </a>
       </Link>
 
       <Link {...PATHS.FOLLOW}>
         <a className={followClasses}>
           <span className={followTextClass}>
-            <Translate
-              zh_hant={TEXT.zh_hant.follow}
-              zh_hans={TEXT.zh_hans.follow}
-            />
+            <Translate id="follow" />
           </span>
         </a>
       </Link>

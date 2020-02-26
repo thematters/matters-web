@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
-
 import { PinButtonComment } from './__generated__/PinButtonComment'
 import { PinComment } from './__generated__/PinComment'
 import { UnpinComment } from './__generated__/UnpinComment'
@@ -89,10 +87,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
           size="md"
           spacing="base"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.unpin}
-            zh_hans={TEXT.zh_hans.unpin}
-          />
+          <Translate id="unpin" />
         </TextIcon>
       </Menu.Item>
     )
@@ -101,7 +96,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   return (
     <Menu.Item onClick={canPin ? pinComment : undefined}>
       <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
-        <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
+        <Translate id="pin" />
       </TextIcon>
     </Menu.Item>
   )

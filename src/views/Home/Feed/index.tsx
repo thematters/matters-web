@@ -166,9 +166,9 @@ const HomeFeed = () => {
       <PageHeader
         title={
           feedSortType === 'hottest' ? (
-            <Translate zh_hant="熱門作品" zh_hans="热门作品" />
+            <Translate id="hottestArticles" />
           ) : (
-            <Translate zh_hant="最新作品" zh_hans="最新作品" />
+            <Translate id="latestArticles" />
           )
         }
         is="h2"

@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-client'
 
 import { Error, LoginButton, Translate } from '~/components'
 
-import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys, TEXT } from '~/common/enums'
+import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys } from '~/common/enums'
 
 export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []
@@ -51,30 +51,15 @@ export const mutationOnError = (error: ApolloError) => {
     let errorMessage: React.ReactNode
 
     if (isUnauthenticated) {
-      errorMessage = (
-        <Translate
-          zh_hant={TEXT.zh_hant.error.UNAUTHENTICATED}
-          zh_hans={TEXT.zh_hans.error.UNAUTHENTICATED}
-        />
-      )
+      errorMessage = <Translate id="UNAUTHENTICATED" />
     }
 
     if (isForbidden) {
-      errorMessage = (
-        <Translate
-          zh_hant={TEXT.zh_hant.error.FORBIDDEN}
-          zh_hans={TEXT.zh_hans.error.FORBIDDEN}
-        />
-      )
+      errorMessage = <Translate id="FORBIDDEN" />
     }
 
     if (isTokenInvalid) {
-      errorMessage = (
-        <Translate
-          zh_hant={TEXT.zh_hant.error.TOKEN_INVALID}
-          zh_hans={TEXT.zh_hans.error.TOKEN_INVALID}
-        />
-      )
+      errorMessage = <Translate id="TOKEN_INVALID" />
     }
 
     return window.dispatchEvent(
@@ -112,7 +97,7 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.LIKER_NOT_FOUND,
     ERROR_CODES.LIKER_USER_ID_EXISTS,
     ERROR_CODES.LIKER_EMAIL_EXISTS
-  ]
+  ] as ErrorCodeKeys[]
   CATCH_CODES.forEach(code => {
     if (errorMap[code]) {
       isCatched = true
@@ -120,12 +105,7 @@ export const mutationOnError = (error: ApolloError) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.error[code]}
-                zh_hans={TEXT.zh_hans.error[code]}
-              />
-            )
+            content: <Translate id={code} />
           }
         })
       )

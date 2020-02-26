@@ -29,10 +29,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
       color="green"
       content={
         isPublishing ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.publishing}
-            zh_hans={TEXT.zh_hans.publishing}
-          />
+          <Translate id="publishing" />
         ) : (
           <Translate
             zh_hant={`${TEXT.zh_hant.waitingForPublish} (${formattedTimeLeft.mmss})`}

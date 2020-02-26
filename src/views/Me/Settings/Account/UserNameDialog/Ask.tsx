@@ -1,7 +1,5 @@
 import { Dialog, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 interface AskProps {
   nextStep: () => void
   closeDialog: () => void
@@ -10,23 +8,13 @@ interface AskProps {
 const Ask = ({ nextStep, closeDialog }: AskProps) => (
   <>
     <Dialog.Header
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.changeUserName}
-          zh_hans={TEXT.zh_hans.changeUserName}
-        />
-      }
+      title={<Translate id="changeUserName" />}
       close={closeDialog}
       headerHidden
     />
 
     <Dialog.Message
-      headline={
-        <Translate
-          zh_hant={TEXT.zh_hant.changeUserName}
-          zh_hans={TEXT.zh_hans.changeUserName}
-        />
-      }
+      headline={<Translate id="changeUserName" />}
       description={
         <Translate
           zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
@@ -37,10 +25,7 @@ const Ask = ({ nextStep, closeDialog }: AskProps) => (
 
     <Dialog.Footer>
       <Dialog.Footer.Button onClick={nextStep}>
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
+        <Translate id="confirm" />
       </Dialog.Footer.Button>
 
       <Dialog.Footer.Button
@@ -48,7 +33,7 @@ const Ask = ({ nextStep, closeDialog }: AskProps) => (
         textColor="black"
         onClick={closeDialog}
       >
-        <Translate zh_hant={TEXT.zh_hant.close} zh_hans={TEXT.zh_hans.close} />
+        <Translate id="close" />
       </Dialog.Footer.Button>
     </Dialog.Footer>
   </>

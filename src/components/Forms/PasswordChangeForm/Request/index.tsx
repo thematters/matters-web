@@ -12,7 +12,6 @@ import {
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { TEXT } from '~/common/enums'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
@@ -97,28 +96,14 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.email}
-            zh_hans={TEXT.zh_hans.email}
-          />
-        }
+        label={<Translate id="email" />}
         type="email"
         name="email"
         required
-        placeholder={
-          isForget
-            ? translate({
-                zh_hant: TEXT.zh_hant.enterRegisteredEmail,
-                zh_hans: TEXT.zh_hans.enterRegisteredEmail,
-                lang
-              })
-            : translate({
-                zh_hant: TEXT.zh_hant.enterEmail,
-                zh_hans: TEXT.zh_hans.enterEmail,
-                lang
-              })
-        }
+        placeholder={translate({
+          id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
+          lang
+        })}
         value={values.email}
         error={touched.email && errors.email}
         disabled={!!defaultEmail}
@@ -127,21 +112,12 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.verificationCode}
-            zh_hans={TEXT.zh_hans.verificationCode}
-          />
-        }
+        label={<Translate id="verificationCode" />}
         type="text"
         name="code"
         autoComplete="off"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterVerificationCode,
-          zh_hans: TEXT.zh_hans.enterVerificationCode,
-          lang
-        })}
+        placeholder={translate({ id: 'enterVerificationCode', lang })}
         value={values.code}
         error={touched.code && errors.code}
         onBlur={handleBlur}
@@ -162,26 +138,15 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
-      }
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
 
   const Title = isForget ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.resetPassword}
-      zh_hans={TEXT.zh_hans.resetPassword}
-    />
+    <Translate id="resetPassword" />
   ) : (
-    <Translate
-      zh_hant={TEXT.zh_hant.changePassword}
-      zh_hans={TEXT.zh_hans.changePassword}
-    />
+    <Translate id="changePassword" />
   )
 
   if (isInPage) {

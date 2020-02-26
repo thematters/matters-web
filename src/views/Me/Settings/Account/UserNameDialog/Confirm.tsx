@@ -5,7 +5,6 @@ import React, { useContext } from 'react'
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -88,16 +87,10 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         name="userName"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserName,
-          zh_hans: TEXT.zh_hans.enterUserName,
+          id: 'enterUserName',
           lang
         })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintUserName}
-            zh_hans={TEXT.zh_hans.hintUserName}
-          />
-        }
+        hint={<Translate id="hintUserName" />}
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
@@ -108,21 +101,12 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         type="text"
         name="comparedUserName"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserNameAgign,
-          zh_hans: TEXT.zh_hans.enterUserNameAgign,
-          lang
-        })}
+        placeholder={translate({ id: 'enterUserNameAgign', lang })}
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintUserName}
-            zh_hans={TEXT.zh_hans.hintUserName}
-          />
-        }
+        hint={<Translate id="hintUserName" />}
       />
     </Form>
   )
@@ -132,12 +116,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
-      }
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
@@ -145,12 +124,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.changeUserName}
-            zh_hans={TEXT.zh_hans.changeUserName}
-          />
-        }
+        title={<Translate id="changeUserName" />}
         close={closeDialog}
         rightButton={SubmitButton}
       />

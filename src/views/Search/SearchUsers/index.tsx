@@ -10,7 +10,7 @@ import {
   UserDigest
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -40,12 +40,7 @@ const SEARCH_USERS = gql`
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader
-    is="h2"
-    title={
-      <Translate zh_hant={TEXT.zh_hant.user} zh_hans={TEXT.zh_hans.user} />
-    }
-  >
+  <PageHeader is="h2" title={<Translate id="user" />}>
     {viewAll && q && <ViewAll q={q} type="user" />}
   </PageHeader>
 )
@@ -54,14 +49,7 @@ const EmptySearchResult = () => {
   return (
     <section>
       <Header />
-      <EmptySearch
-        description={
-          <Translate
-            zh_hant={TEXT.zh_hant.emptySearchResults}
-            zh_hans={TEXT.zh_hans.emptySearchResults}
-          />
-        }
-      />
+      <EmptySearch description={<Translate id="emptySearchResults" />} />
     </section>
   )
 }

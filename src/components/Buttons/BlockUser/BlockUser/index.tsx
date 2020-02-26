@@ -11,7 +11,7 @@ import userFragments from '~/components/GQL/fragments/user'
 import BLOCK_USER from '~/components/GQL/mutations/blockUser'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
-import { ADD_TOAST, PATHS, TEXT } from '~/common/enums'
+import { ADD_TOAST, PATHS } from '~/common/enums'
 
 import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
@@ -50,12 +50,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: (
-            <Translate
-              zh_hant={TEXT.zh_hant.successUnBlock}
-              zh_hans={TEXT.zh_hans.successUnBlock}
-            />
-          )
+          content: <Translate id="successUnblock" />
         }
       })
     )
@@ -66,12 +61,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: (
-            <Translate
-              zh_hant={TEXT.zh_hant.successBlock}
-              zh_hans={TEXT.zh_hans.successBlock}
-            />
-          ),
+          content: <Translate id="successBlock" />,
           customButton: (
             <Button
               href={PATHS.ME_SETTINGS_BLOCKED.as}
@@ -104,10 +94,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
           size="md"
           spacing="base"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.unblockUser}
-            zh_hans={TEXT.zh_hans.unblockUser}
-          />
+          <Translate id="unblockUser" />
         </TextIcon>
       </Menu.Item>
     )
@@ -116,10 +103,7 @@ export const BlockUserButton = ({ user }: { user: BlockUser }) => {
   return (
     <Menu.Item onClick={onBlock}>
       <TextIcon icon={<Icon.MuteMedium size="md" />} size="md" spacing="base">
-        <Translate
-          zh_hant={TEXT.zh_hant.blockUser}
-          zh_hans={TEXT.zh_hans.block}
-        />
+        <Translate id="blockUser" />
       </TextIcon>
     </Menu.Item>
   )

@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
@@ -94,12 +94,7 @@ export const LoginForm: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.successLogin}
-                  zh_hans={TEXT.zh_hans.successLogin}
-                />
-              )
+              content: <Translate id="successLogin" />
             }
           })
         )
@@ -136,20 +131,11 @@ export const LoginForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.email}
-            zh_hans={TEXT.zh_hans.email}
-          />
-        }
+        label={<Translate id="email" />}
         type="email"
         name="email"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterEmail,
-          zh_hans: TEXT.zh_hans.enterEmail,
-          lang
-        })}
+        placeholder={translate({ id: 'enterEmail', lang })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -157,20 +143,11 @@ export const LoginForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.password}
-            zh_hans={TEXT.zh_hans.password}
-          />
-        }
+        label={<Translate id="password" />}
         type="password"
         name="password"
         required
-        placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterPassword,
-          zh_hans: TEXT.zh_hans.enterPassword,
-          lang
-        })}
+        placeholder={translate({ id: 'enterPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -193,12 +170,7 @@ export const LoginForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.confirm}
-          zh_hans={TEXT.zh_hans.confirm}
-        />
-      }
+      text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
   )
@@ -206,15 +178,7 @@ export const LoginForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          }
-          hasNoBorder
-        >
+        <PageHeader title={<Translate id="login" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -227,12 +191,7 @@ export const LoginForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
-          }
+          title={<Translate id="login" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

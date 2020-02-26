@@ -1,6 +1,6 @@
 import { Dialog, Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
 interface Props {
@@ -17,27 +17,15 @@ export const PasswordChangeComplete: React.FC<Props> = ({
   const isForget = type === 'forget'
 
   const Title = isForget ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.resetPassword}
-      zh_hans={TEXT.zh_hans.resetPassword}
-    />
+    <Translate id="resetPassword" />
   ) : (
-    <Translate
-      zh_hant={TEXT.zh_hant.changePassword}
-      zh_hans={TEXT.zh_hans.changePassword}
-    />
+    <Translate id="changePassword" />
   )
 
   const Description = isForget ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.successResetPassword}
-      zh_hans={TEXT.zh_hans.successResetPassword}
-    />
+    <Translate id="successResetPassword" />
   ) : (
-    <Translate
-      zh_hant={TEXT.zh_hant.successChangePassword}
-      zh_hans={TEXT.zh_hans.successChangePassword}
-    />
+    <Translate id="successChangePassword" />
   )
 
   return (
@@ -51,10 +39,7 @@ export const PasswordChangeComplete: React.FC<Props> = ({
       <Dialog.Footer>
         {isForget && (
           <Dialog.Footer.Button {...appendTarget(PATHS.AUTH_LOGIN)}>
-            <Translate
-              zh_hant={TEXT.zh_hant.login}
-              zh_hans={TEXT.zh_hans.login}
-            />
+            <Translate id="login" />
           </Dialog.Footer.Button>
         )}
 
@@ -64,10 +49,7 @@ export const PasswordChangeComplete: React.FC<Props> = ({
             textColor="black"
             onClick={closeDialog}
           >
-            <Translate
-              zh_hant={TEXT.zh_hant.close}
-              zh_hans={TEXT.zh_hans.close}
-            />
+            <Translate id="close" />
           </Dialog.Footer.Button>
         )}
       </Dialog.Footer>

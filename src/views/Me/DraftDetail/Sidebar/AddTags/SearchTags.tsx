@@ -65,7 +65,7 @@ const DropdownContent = ({
           }}
         >
           <span className="search-tag-item">
-            <Translate zh_hant="創建" zh_hans="创建" />
+            <Translate id="create" />
             <span className="keyword">{search}</span>
           </span>
         </Menu.Item>

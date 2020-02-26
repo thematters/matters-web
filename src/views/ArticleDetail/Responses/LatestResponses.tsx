@@ -20,7 +20,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
+import { REFETCH_RESPONSES, UrlFragments } from '~/common/enums'
 import {
   dom,
   filterResponses,
@@ -315,10 +315,7 @@ const LatestResponses = () => {
     <section className="latest-responses" id="latest-responses">
       <header>
         <Title type="feed" is="h3">
-          <Translate
-            zh_hant={TEXT.zh_hant.latestResponses}
-            zh_hans={TEXT.zh_hans.latestResponses}
-          />
+          <Translate id="latestResponses" />
         </Title>
 
         <div className="latest-responses-switch">
@@ -328,10 +325,7 @@ const LatestResponses = () => {
             loading={loading}
           />
           <span>
-            <Translate
-              zh_hant={TEXT.zh_hant.collectedOnly}
-              zh_hans={TEXT.zh_hans.collectedOnly}
-            />
+            <Translate id="collectedOnly" />
           </span>
         </div>
       </header>

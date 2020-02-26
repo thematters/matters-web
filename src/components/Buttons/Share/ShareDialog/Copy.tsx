@@ -17,7 +17,7 @@ const Copy = ({ link }: { link: string }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="複製成功" zh_hans="复制成功" />
+          content: <Translate id="successCopy" />
         }
       })
     )

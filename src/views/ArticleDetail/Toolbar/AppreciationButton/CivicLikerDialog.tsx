@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, EXTERNAL_LINKS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 interface CivicLikerDialogProps {
@@ -28,23 +28,13 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
 
       <Dialog isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.joinCivicLiker}
-              zh_hans={TEXT.zh_hans.joinCivicLiker}
-            />
-          }
+          title={<Translate id="joinCivicLiker" />}
           close={close}
           headerHidden
         />
 
         <Dialog.Message
-          headline={
-            <Translate
-              zh_hant={TEXT.zh_hant.joinCivicLiker}
-              zh_hans={TEXT.zh_hans.joinCivicLiker}
-            />
-          }
+          headline={<Translate id="joinCivicLiker" />}
           textAlign="left"
           description={
             <>
@@ -84,10 +74,7 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
             textColor="black"
             onClick={close}
           >
-            <Translate
-              zh_hant={TEXT.zh_hant.understood}
-              zh_hans={TEXT.zh_hans.understood}
-            />
+            <Translate id="understood" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

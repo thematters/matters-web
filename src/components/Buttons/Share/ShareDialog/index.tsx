@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import Copy from './Copy'
 import Douban from './Douban'
 import Email from './Email'
@@ -32,12 +30,7 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.share}
-              zh_hans={TEXT.zh_hans.share}
-            />
-          }
+          title={<Translate id="share" />}
           close={close}
           headerHidden
         />
@@ -70,10 +63,7 @@ export const ShareDialog = ({ title, link, children }: ShareDialogProps) => {
             textColor="black"
             onClick={close}
           >
-            <Translate
-              zh_hant={TEXT.zh_hant.close}
-              zh_hans={TEXT.zh_hans.close}
-            />
+            <Translate id="close" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

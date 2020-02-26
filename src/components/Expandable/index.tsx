@@ -53,7 +53,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           }}
         >
           <TextIcon icon={<Icon.Expand size="xs" />}>
-            <Translate zh_hant="展開" zh_hans="展开" />
+            <Translate id="expand" />
           </TextIcon>
         </Button>
       )}

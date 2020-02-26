@@ -11,7 +11,6 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import {
   filterFormErrors,
   translate,
@@ -114,18 +113,12 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.displayName}
-            zh_hans={TEXT.zh_hans.displayName}
-          />
-        }
+        label={<Translate id="displayName" />}
         type="text"
         name="displayName"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterDisplayName,
-          zh_hans: TEXT.zh_hans.enterDisplayName,
+          id: 'enterDisplayName',
           lang
         })}
         value={values.displayName}
@@ -135,12 +128,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       />
 
       <Form.Textarea
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.userDescription}
-            zh_hans={TEXT.zh_hans.userDescription}
-          />
-        }
+        label={<Translate id="userDescription" />}
         name="description"
         required
         placeholder={translate({
@@ -148,12 +136,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
           zh_hans: '介绍你自己，获得更多社区关注',
           lang
         })}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintUserDescription}
-            zh_hans={TEXT.zh_hans.hintUserDescription}
-          />
-        }
+        hint={<Translate id="hintUserDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}
@@ -168,12 +151,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       form={formId}
       disabled={!isValid || isSubmitting}
       onClick={handleSubmit}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
-      }
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
@@ -181,15 +159,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
-          hasNoBorder
-        >
+        <PageHeader title={<Translate id="register" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -201,12 +171,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
+          title={<Translate id="register" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

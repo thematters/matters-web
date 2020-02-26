@@ -4,8 +4,6 @@ import { useContext, useEffect } from 'react'
 import { Head, LoginForm } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
-import { TEXT } from '~/common/enums'
-
 import styles from '../styles.css'
 
 const Login = () => {
@@ -22,9 +20,7 @@ const Login = () => {
 
   return (
     <main className="l-row full">
-      <Head
-        title={{ zh_hant: TEXT.zh_hant.login, zh_hans: TEXT.zh_hans.login }}
-      />
+      <Head title={{ id: 'login' }} />
 
       <article className={containerClass}>
         <LoginForm purpose="page" />

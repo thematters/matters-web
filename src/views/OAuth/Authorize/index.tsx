@@ -15,7 +15,7 @@ import {
   ViewerContext
 } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
 
 import { Box } from '../Box'
@@ -157,10 +157,7 @@ const OAuthAuthorize = () => {
               </Dialog.Footer.Button>
             ) : (
               <Dialog.Footer.Button type="submit">
-                <Translate
-                  zh_hant={TEXT.zh_hant.agree}
-                  zh_hans={TEXT.zh_hans.agree}
-                />
+                <Translate id="agree" />
               </Dialog.Footer.Button>
             )}
           </Dialog.Footer>

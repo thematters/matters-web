@@ -11,7 +11,7 @@ import {
   Transaction
 } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
@@ -106,12 +106,7 @@ const AppreciationsSent = () => {
 export default () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.appreciationsSent,
-          zh_hans: TEXT.zh_hans.appreciationsSent
-        }}
-      />
+      <Head title={{ id: 'appreciationsSent' }} />
 
       <AppreciationsSent />
     </article>

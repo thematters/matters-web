@@ -10,7 +10,7 @@ import {
   Translate
 } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -25,7 +25,7 @@ interface DropdownNoticesProps {
 const Header = () => (
   <header>
     <h4>
-      <Translate zh_hant="通知" zh_hans="通知" />
+      <Translate id="notification" />
     </h4>
 
     <Button
@@ -34,10 +34,7 @@ const Header = () => (
       {...PATHS.ME_SETTINGS_NOTIFICATION}
     >
       <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
-        <Translate
-          zh_hant={TEXT.zh_hant.setting}
-          zh_hans={TEXT.zh_hans.setting}
-        />
+        <Translate id="setting" />
       </TextIcon>
     </Button>
 
@@ -58,7 +55,7 @@ const Footer = () => (
         textPlacement="left"
         weight="md"
       >
-        <Translate zh_hant="全部通知" zh_hans="全部通知" />
+        <Translate id="allNotification" />
       </TextIcon>
     </Button>
 

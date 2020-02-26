@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Dialog, Icon, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
@@ -84,10 +84,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant[error ? 'retry' : 'continue']}
-            zh_hans={TEXT.zh_hans[error ? 'retry' : 'continue']}
-          />
+          <Translate id={error ? 'retry' : 'continue'} />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

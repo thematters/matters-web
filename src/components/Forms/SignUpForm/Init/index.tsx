@@ -18,8 +18,7 @@ import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
-  PATHS,
-  TEXT
+  PATHS
 } from '~/common/enums'
 import {
   analytics,
@@ -64,9 +63,7 @@ const LoginDialogButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-      rightText={
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      }
+      rightText={<Translate id="login" />}
       onClick={() => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
@@ -79,9 +76,7 @@ const LoginRedirectionButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
-      rightText={
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      }
+      rightText={<Translate id="login" />}
       {...appendTarget(PATHS.AUTH_LOGIN)}
     />
   </Form.List>
@@ -169,18 +164,12 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.email}
-            zh_hans={TEXT.zh_hans.email}
-          />
-        }
+        label={<Translate id="email" />}
         type="email"
         name="email"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterEmail,
-          zh_hans: TEXT.zh_hans.enterEmail,
+          id: 'enterEmail',
           lang
         })}
         value={values.email}
@@ -190,19 +179,13 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.verificationCode}
-            zh_hans={TEXT.zh_hans.verificationCode}
-          />
-        }
+        label={<Translate id="verificationCode" />}
         type="text"
         name="code"
         autoComplete="off"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterVerificationCode,
-          zh_hans: TEXT.zh_hans.enterVerificationCode,
+          id: 'enterVerificationCode',
           lang
         })}
         value={values.code}
@@ -229,43 +212,30 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterUserName,
-          zh_hans: TEXT.zh_hans.enterUserName,
+          id: 'enterUserName',
           lang
         })}
         hint={translate({
-          zh_hant: TEXT.zh_hant.hintUserName,
-          zh_hans: TEXT.zh_hans.hintUserName,
+          id: 'hintUserName',
           lang
         })}
       />
 
       <Form.Input
-        label={
-          <Translate
-            zh_hant={TEXT.zh_hant.password}
-            zh_hans={TEXT.zh_hans.password}
-          />
-        }
+        label={<Translate id="password" />}
         type="password"
         name="password"
         autoComplete="off"
         required
         placeholder={translate({
-          zh_hant: TEXT.zh_hant.enterPassword,
-          zh_hans: TEXT.zh_hans.enterPassword,
+          id: 'enterPassword',
           lang
         })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
-        hint={
-          <Translate
-            zh_hant={TEXT.zh_hant.hintPassword}
-            zh_hans={TEXT.zh_hans.hintPassword}
-          />
-        }
+        hint={<Translate id="hintPassword" />}
       />
 
       <Form.CheckBox
@@ -301,12 +271,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={
-        <Translate
-          zh_hant={TEXT.zh_hant.nextStep}
-          zh_hans={TEXT.zh_hans.nextStep}
-        />
-      }
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
@@ -314,15 +279,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
-          hasNoBorder
-        >
+        <PageHeader title={<Translate id="register" />} hasNoBorder>
           {SubmitButton}
         </PageHeader>
 
@@ -335,12 +292,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.register}
-              zh_hans={TEXT.zh_hans.register}
-            />
-          }
+          title={<Translate id="register" />}
           close={closeDialog}
           rightButton={SubmitButton}
         />

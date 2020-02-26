@@ -20,7 +20,7 @@ import {
   ViewerContext
 } from '~/components'
 
-import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
+import { EXTERNAL_LINKS } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
 import Cover from './Cover'
@@ -209,28 +209,19 @@ export const UserProfile = () => {
 
                   {isUserArchived && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountArchived}
-                        zh_hans={TEXT.zh_hans.accountArchived}
-                      />
+                      <Translate id="accountArchived" />
                     </span>
                   )}
 
                   {isUserFrozen && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountFrozen}
-                        zh_hans={TEXT.zh_hans.accountFrozen}
-                      />
+                      <Translate id="accountFrozen" />
                     </span>
                   )}
 
                   {isUserBanned && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountBanned}
-                        zh_hans={TEXT.zh_hans.accountBanned}
-                      />
+                      <Translate id="accountBanned" />
                     </span>
                   )}
                 </section>
@@ -257,10 +248,7 @@ export const UserProfile = () => {
                     <span className="count">
                       {numAbbr(user.followers.totalCount)}
                     </span>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.follower}
-                      zh_hans={TEXT.zh_hans.follower}
-                    />
+                    <Translate id="follower" />
                   </a>
                 </Link>
 
@@ -269,10 +257,7 @@ export const UserProfile = () => {
                     <span className="count">
                       {numAbbr(user.followees.totalCount)}
                     </span>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.following}
-                      zh_hans={TEXT.zh_hans.following}
-                    />
+                    <Translate id="following" />
                   </a>
                 </Link>
               </section>

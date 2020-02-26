@@ -5,7 +5,7 @@ import { Button, TextIcon, Translate, useCountdown } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
-import { ADD_TOAST, SEND_CODE_COUNTDOWN, TEXT } from '~/common/enums'
+import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
 
 import styles from './styles.css'
@@ -81,15 +81,9 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
     >
       <TextIcon color="green" weight="md" size="sm">
         {sent ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.resend}
-            zh_hans={TEXT.zh_hans.resend}
-          />
+          <Translate id="resend" />
         ) : (
-          <Translate
-            zh_hant={TEXT.zh_hant.sendVerificationCode}
-            zh_hans={TEXT.zh_hans.sendVerificationCode}
-          />
+          <Translate id="sendVerificationCode" />
         )}
 
         {sent && countdown.timeLeft !== 0 && (

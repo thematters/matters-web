@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Dialog, Icon, Spinner, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
@@ -92,10 +92,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.retry}
-            zh_hans={TEXT.zh_hans.retry}
-          />
+          <Translate id="retry" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

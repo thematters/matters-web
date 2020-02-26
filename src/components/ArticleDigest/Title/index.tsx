@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 
 import { LinkWrapper, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -53,14 +52,7 @@ export const ArticleDigestTitle = ({
     article
   })
   const isBanned = state === 'banned'
-  const title = isBanned ? (
-    <Translate
-      zh_hant={TEXT.zh_hant.articleBanned}
-      zh_hans={TEXT.zh_hans.articleBanned}
-    />
-  ) : (
-    article.title
-  )
+  const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
     title: true,
     [`text-size-${textSize}`]: !!textSize,

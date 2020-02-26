@@ -1,7 +1,5 @@
 import { Button, Icon, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import TagArticleDialog from './TagArticleDialog'
 
 interface AddArticleButtonProps {
@@ -19,10 +17,7 @@ const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
-            <Translate
-              zh_hant={TEXT.zh_hant.addArticleTag}
-              zh_hans={TEXT.zh_hans.addArticleTag}
-            />
+            <Translate id="addArticleTag" />
           </TextIcon>
         </Button>
       )}

@@ -96,10 +96,7 @@ export interface ButtonProps {
  *    onClick={onClick}
  *  >
  *    <TextIcon weight="md" size="xs">
- *      <Translate
- *        zh_hant={TEXT.zh_hant.follow}
- *        zh_hans={TEXT.zh_hans.follow}
- *      />
+ *      <Translate id="follow" />
  *    </TextIcon>
  *  </Button>
  * ```

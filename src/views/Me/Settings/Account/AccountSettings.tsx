@@ -9,8 +9,6 @@ import {
   ViewerContext
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import { ChangeEmailDialog } from './ChangeEmailDialog'
 import styles from './styles.css'
 import { UserNameDialog } from './UserNameDialog'
@@ -32,7 +30,7 @@ const EditButton = ({
     disabled={disabled}
   >
     <TextIcon weight="md" size="xs">
-      <Translate zh_hant={TEXT.zh_hant.change} zh_hans={TEXT.zh_hans.change} />
+      <Translate id="change" />
     </TextIcon>
   </Button>
 )
@@ -53,10 +51,7 @@ const ChangePasswrodButton = () => (
   <ChangePasswordDialog>
     {({ open }) => (
       <Button className="u-link-green" onClick={open}>
-        <Translate
-          zh_hant={TEXT.zh_hant.changePassword}
-          zh_hans={TEXT.zh_hans.changePassword}
-        />
+        <Translate id="changePassword" />
       </Button>
     )}
   </ChangePasswordDialog>
@@ -67,24 +62,13 @@ const AccountSettings = () => {
 
   return (
     <section className="section-container">
-      <PageHeader
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.accountSetting}
-            zh_hans={TEXT.zh_hans.accountSetting}
-          />
-        }
-        is="h2"
-      />
+      <PageHeader title={<Translate id="accountSetting" />} is="h2" />
 
       {/* password */}
       <section className="setting-section">
         <div className="left">
           <span className="title">
-            <Translate
-              zh_hant={TEXT.zh_hant.loginPassword}
-              zh_hans={TEXT.zh_hans.loginPassword}
-            />
+            <Translate id="loginPassword" />
           </span>
           <ChangePasswrodButton />
         </div>
@@ -95,10 +79,7 @@ const AccountSettings = () => {
       <section className="setting-section">
         <div className="left">
           <span className="title">
-            <Translate
-              zh_hant={TEXT.zh_hant.email}
-              zh_hans={TEXT.zh_hans.email}
-            />
+            <Translate id="email" />
           </span>
           <span>{viewer.info.email}</span>
         </div>

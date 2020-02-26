@@ -5,7 +5,6 @@ import { useContext } from 'react'
 import { Icon, LanguageContext, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
 import { toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -35,11 +34,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   const { lang } = useContext(LanguageContext)
   const [extendArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
     variables: {
-      title: translate({
-        zh_hans: TEXT.zh_hans.untitle,
-        zh_hant: TEXT.zh_hant.untitle,
-        lang
-      }),
+      title: translate({ id: 'untitle', lang }),
       collection: [article.id]
     }
   })
@@ -61,7 +56,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
         size="md"
         spacing="base"
       >
-        <Translate zh_hant="關聯作品" zh_hans="关联作品" />
+        <Translate id="extendArticle" />
       </TextIcon>
 
       <style jsx>{styles}</style>

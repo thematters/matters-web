@@ -5,7 +5,7 @@ import { Fragment, useEffect } from 'react'
 import { Button, Menu, TextIcon, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
 import ClearHistoryButton from './ClearHistoryButton'
@@ -59,14 +59,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
     <Menu width="md">
       {showSearchHistory && (
         <>
-          <Menu.Header
-            title={
-              <Translate
-                zh_hant={TEXT.zh_hant.searchHistory}
-                zh_hans={TEXT.zh_hans.searchHistory}
-              />
-            }
-          >
+          <Menu.Header title={<Translate id="searchHistory" />}>
             <ClearHistoryButton />
           </Menu.Header>
 
