@@ -16,7 +16,7 @@ import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { parseFormSubmitErrors, translate, randomString } from '~/common/utils'
+import { parseFormSubmitErrors, randomString, translate } from '~/common/utils'
 
 import styles from './styles.css'
 

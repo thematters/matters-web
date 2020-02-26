@@ -15,10 +15,10 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   filterFormErrors,
   parseFormSubmitErrors,
+  randomString,
   translate,
   validateCode,
-  validateEmail,
-  randomString
+  validateEmail
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'

@@ -13,11 +13,11 @@ import { useMutation } from '~/components/GQL'
 
 import {
   filterFormErrors,
+  randomString,
   translate,
   validateAvatar,
   validateDescription,
-  validateDisplayName,
-  randomString
+  validateDisplayName
 } from '~/common/utils'
 
 import AvatarUploadField from './AvatarUploadField'
