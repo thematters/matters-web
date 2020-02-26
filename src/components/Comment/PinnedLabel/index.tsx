@@ -2,8 +2,6 @@ import gql from 'graphql-tag'
 
 import { Label, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
 
 const fragments = {
@@ -21,10 +19,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
 
   return (
     <Label size="sm">
-      <Translate
-        zh_hant={TEXT.zh_hant.authorRecommend}
-        zh_hans={TEXT.zh_hant.authorRecommend}
-      />
+      <Translate id="authorRecommend" />
     </Label>
   )
 }

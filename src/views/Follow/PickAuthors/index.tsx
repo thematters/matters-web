@@ -1,6 +1,5 @@
 import { Head, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
 import { AuthorPicker } from './AuthorPicker'
@@ -39,23 +38,11 @@ const PickIntroHeader = () => {
 
 const PickAuthors = () => (
   <>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.followAuthor,
-        zh_hans: TEXT.zh_hans.followAuthor
-      }}
-    />
+    <Head title={{ id: 'followAuthor' }} />
 
     <PickIntroHeader />
 
-    <AuthorPicker
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.followAuthor}
-          zh_hans={TEXT.zh_hans.followAuthor}
-        />
-      }
-    />
+    <AuthorPicker title={<Translate id="followAuthor" />} />
 
     <style jsx>{styles}</style>
   </>

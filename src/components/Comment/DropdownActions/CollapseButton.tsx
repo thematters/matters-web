@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 
 import { CollapseButtonComment } from './__generated__/CollapseButtonComment'
 import { CollapseComment } from './__generated__/CollapseComment'
@@ -56,10 +56,7 @@ const CollapseButton = ({ comment }: { comment: CollapseButtonComment }) => {
     return (
       <Menu.Item onClick={uncollapseComment}>
         <TextIcon icon={<Icon.Expand size="md" />} size="md" spacing="base">
-          <Translate
-            zh_hant={TEXT.zh_hant.uncollapseComment}
-            zh_hans={TEXT.zh_hant.uncollapseComment}
-          />
+          <Translate id="uncollapseComment" />
         </TextIcon>
       </Menu.Item>
     )
@@ -73,22 +70,14 @@ const CollapseButton = ({ comment }: { comment: CollapseButtonComment }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.collapseCommentSuccess}
-                  zh_hans={TEXT.zh_hans.collapseCommentSuccess}
-                />
-              )
+              content: <Translate id="successCollapseComment" />
             }
           })
         )
       }}
     >
       <TextIcon icon={<Icon.Collapse size="md" />} size="md" spacing="base">
-        <Translate
-          zh_hant={TEXT.zh_hant.collapseComment}
-          zh_hans={TEXT.zh_hant.collapseComment}
-        />
+        <Translate id="collapseComment" />
       </TextIcon>
     </Menu.Item>
   )

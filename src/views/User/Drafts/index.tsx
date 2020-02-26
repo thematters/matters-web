@@ -1,18 +1,11 @@
 import { Head, UserProfile } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import UserTabs from '../UserTabs'
 import MeDrafts from './MeDrafts'
 
 export default () => (
   <main>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.draft,
-        zh_hans: TEXT.zh_hans.draft
-      }}
-    />
+    <Head title={{ id: 'draft' }} />
 
     <UserProfile />
 

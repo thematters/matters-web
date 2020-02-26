@@ -3,12 +3,12 @@
 }
 
 .context {
+  @mixin border-grey;
   max-height: 15rem;
   margin-top: var(--spacing-base);
   padding: var(--spacing-x-tight);
 
   font-size: var(--font-size-sm);
-  border: 1px solid var(--color-grey-light);
   border-radius: 0.125rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;

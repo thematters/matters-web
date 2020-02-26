@@ -1,8 +1,7 @@
 /* @styled-jsx=global */
 
-/**
- * Layouts
- */
+/* Layouts
+   ========================================================================== */
 @define-mixin flex-center-all {
   display: flex;
   align-items: center;
@@ -33,9 +32,8 @@
   justify-content: space-between;
 }
 
-/**
- * Fonts
- */
+/* Fonts
+   ========================================================================== */
 @define-mixin font-serif {
   font-family: var(--font-serif-tc);
 
@@ -52,9 +50,8 @@
   }
 }
 
-/**
- * Borders
- */
+/* Borders
+   ========================================================================== */
 @define-mixin border-grey {
   border: 1px solid var(--color-line-grey-light);
 }
@@ -67,9 +64,62 @@
   border-top: 1px solid var(--color-line-grey-light);
 }
 
-/**
- * Misc
- */
+@define-mixin shadow-border-bottom-grey {
+  box-shadow: 0 1px 0 0 var(--color-line-grey-light);
+}
+
+@define-mixin shadow-border-top-grey {
+  box-shadow: 0 -1px 0 0 var(--color-line-grey-light);
+}
+
+/* Form
+   ========================================================================== */
+@define-mixin form-input {
+  @mixin all-transition;
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+
+  padding: var(--spacing-base);
+
+  font-size: var(--font-size-md);
+  background-color: var(--color-white);
+
+  &:disabled {
+    color: var(--color-grey-darker);
+  }
+
+  &::placeholder {
+    color: var(--color-grey-light);
+    opacity: 1; /* Firefox */
+  }
+}
+
+@define-mixin form-input-grey {
+  @mixin all-transition;
+
+  padding: var(--spacing-base);
+
+  font-size: var(--font-size-md);
+
+  background-color: var(--color-grey-lighter);
+  border-radius: 0.125rem;
+  border-top: none;
+  border-bottom: 1px solid var(--color-grey-light);
+
+  &:focus,
+  &.focus {
+    background-color: var(--color-green-lighter);
+    border-bottom-color: var(--color-matters-green);
+  }
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
+  }
+}
+
+/* Misc
+   ========================================================================== */
 @define-mixin expand-to-container {
   position: absolute;
   top: 0;
@@ -136,30 +186,5 @@
   &::after {
     top: -0.25rem;
     right: calc(var(--spacing-tight) * -1);
-  }
-}
-
-@define-mixin text-input {
-  @mixin all-transition;
-
-  padding: var(--spacing-x-tight) var(--spacing-base);
-
-  font-size: var(--font-size-md-s);
-  line-height: 1.5rem;
-
-  background-color: var(--color-grey-lighter);
-  border-top-right-radius: 0.15rem;
-  border-top-left-radius: 0.15rem;
-  border-bottom: 1px solid var(--color-grey-light);
-
-  &:focus,
-  &.focus {
-    background-color: var(--color-green-lighter);
-    border-bottom-color: var(--color-matters-green);
-  }
-
-  &::placeholder {
-    color: var(--color-grey);
-    opacity: 1; /* Firefox */
   }
 }

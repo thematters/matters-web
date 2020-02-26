@@ -1,55 +1,41 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
-  Button,
   Dialog,
   Form,
   LanguageContext,
-  TextIcon,
+  PageHeader,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 
-import {
-  ADD_TOAST,
-  ANALYTICS_EVENTS,
-  CLOSE_ACTIVE_DIALOG,
-  ERROR_CODES,
-  OPEN_RESET_PASSWORD_DIALOG,
-  OPEN_SIGNUP_DIALOG,
-  PATHS,
-  TEXT
-} from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
-  appendTarget,
+  filterFormErrors,
+  parseFormSubmitErrors,
   redirectToTarget,
   translate,
-  validateEmail
+  validateEmail,
+  validatePassword
 } from '~/common/utils'
+
+import {
+  PasswordResetDialogButton,
+  PasswordResetRedirectButton,
+  SignUpDialogButton,
+  SignUpRedirectionButton
+} from './Buttons'
 
 import { UserLogin } from './__generated__/UserLogin'
 
-/**
- * This component is designed for Login form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <LoginForm
- *     purpose="dialog"
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -65,62 +51,18 @@ export const USER_LOGIN = gql`
   }
 `
 
-const PasswordResetDialogButton = () => (
-  <Button
-    spacing={['xtight', 0]}
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_RESET_PASSWORD_DIALOG))
-    }}
-  >
-    <TextIcon color="green">
-      <Translate
-        zh_hant={TEXT.zh_hant.forgetPassword}
-        zh_hans={TEXT.zh_hans.forgetPassword}
-      />
-      ？
-    </TextIcon>
-  </Button>
-)
-
-const PasswordResetRedirectButton = () => (
-  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
-    <TextIcon color="green">
-      <Translate
-        zh_hant={TEXT.zh_hant.forgetPassword}
-        zh_hans={TEXT.zh_hans.forgetPassword}
-      />
-      ？
-    </TextIcon>
-  </Button>
-)
-
-const SignUpDialogButton = () => (
-  <Dialog.Footer.Button
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
-    }}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Dialog.Footer.Button>
-)
-
-const SignUpRedirectionButton = () => (
-  <Dialog.Footer.Button
-    {...appendTarget(PATHS.AUTH_SIGNUP)}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />
-  </Dialog.Footer.Button>
-)
-
-export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
+export const LoginForm: React.FC<FormProps> = ({
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
+
+  const isInDialog = purpose === 'dialog'
+  const isInPage = purpose === 'page'
+  const formId = 'login-form'
+
   const {
     values,
     errors,
@@ -128,20 +70,19 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
     handleBlur,
     handleChange,
     handleSubmit,
+    isValid,
     isSubmitting
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: ''
     },
-    validate: ({ email }) => {
-      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
-
-      return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {})
-      }
-    },
-    onSubmit: async ({ email, password }, { setErrors, setSubmitting }) => {
+    validate: ({ email, password }) =>
+      filterFormErrors({
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        password: validatePassword(password, lang)
+      }),
+    onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
         await login({ variables: { input: { email, password } } })
 
@@ -153,12 +94,7 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={TEXT.zh_hant.loginSuccess}
-                  zh_hans={TEXT.zh_hans.loginSuccess}
-                />
-              )
+              content: <Translate id="successLogin" />
             }
           })
         )
@@ -171,33 +107,16 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
           fallback: !!isInPage ? 'homepage' : 'current'
         })
       } catch (error) {
-        const errorCodes = getErrorCodes(error)
-
-        if (errorCodes.indexOf(ERROR_CODES.USER_EMAIL_NOT_FOUND) >= 0) {
-          setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.USER_EMAIL_NOT_FOUND,
-              zh_hans: TEXT.zh_hans.error.USER_EMAIL_NOT_FOUND,
-              lang
-            })
-          })
-        } else if (errorCodes.indexOf(ERROR_CODES.USER_PASSWORD_INVALID) >= 0) {
-          setErrors({
-            password: translate({
-              zh_hant: TEXT.zh_hant.error.USER_PASSWORD_INVALID,
-              zh_hans: TEXT.zh_hans.error.USER_PASSWORD_INVALID,
-              lang
-            })
-          })
-        } else {
-          setErrors({
-            email: translate({
-              zh_hant: TEXT.zh_hant.error.UNKNOWN_ERROR,
-              zh_hans: TEXT.zh_hans.error.UNKNOWN_ERROR,
-              lang
-            })
-          })
-        }
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(code => {
+          if (code.includes('USER_EMAIL_')) {
+            setFieldError('email', messages[code])
+          } else if (code.indexOf('USER_PASSWORD_') >= 0) {
+            setFieldError('password', messages[code])
+          } else {
+            setFieldError('email', messages[code])
+          }
+        })
 
         analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
           email,
@@ -209,59 +128,78 @@ export const LoginForm: React.FC<FormProps> = ({ purpose, submitCallback }) => {
     }
   })
 
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={translate({ id: 'enterEmail', lang })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
+      <Form.Input
+        label={<Translate id="password" />}
+        type="password"
+        name="password"
+        required
+        placeholder={translate({ id: 'enterPassword', lang })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <>
+            {isInDialog && <PasswordResetDialogButton />}
+            {isInPage && <PasswordResetRedirectButton />}
+          </>
+        }
+      />
+
+      {isInDialog && <SignUpDialogButton />}
+      {isInPage && <SignUpRedirectionButton />}
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting}
+      text={<Translate id="confirm" />}
+      loading={isSubmitting}
+    />
+  )
+
+  if (isInPage) {
+    return (
+      <>
+        <PageHeader title={<Translate id="login" />} hasNoBorder>
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
-        <Form.Input
-          type="email"
-          field="email"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterEmail,
-            zh_hans: TEXT.zh_hans.enterEmail,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
+    <>
+      {closeDialog && (
+        <Dialog.Header
+          title={<Translate id="login" />}
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
-        <Form.Input
-          type="password"
-          field="password"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPassword,
-            zh_hans: TEXT.zh_hans.enterPassword,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        {isInDialog && <PasswordResetDialogButton />}
-        {isInPage && <PasswordResetRedirectButton />}
+      )}
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
       </Dialog.Content>
-
-      <Dialog.Footer>
-        {isInDialog && <SignUpDialogButton />}
-        {isInPage && <SignUpRedirectionButton />}
-
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.login}
-            zh_hans={TEXT.zh_hans.login}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </form>
+    </>
   )
 }

@@ -2,18 +2,14 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-  Translate,
   useEventListener,
   ViewerContext
 } from '~/components'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_RESET_PASSWORD_DIALOG,
-  TEXT
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
 
 const ResetPasswordDialog = () => {
   const viewer = useContext(ViewerContext)
@@ -46,19 +42,6 @@ const ResetPasswordDialog = () => {
     setStep('reset')
   }
 
-  const backPreviousStep = () => {
-    setStep('request')
-  }
-
-  const showHeader = step !== 'complete'
-
-  const Title = (
-    <Translate
-      zh_hant={TEXT.zh_hant.resetPassword}
-      zh_hans={TEXT.zh_hans.resetPassword}
-    />
-  )
-
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setStep('request')
@@ -71,52 +54,37 @@ const ResetPasswordDialog = () => {
 
   return (
     <Dialog
-      title={Title}
-      showHeader={showHeader}
       isOpen={showDialog}
       onDismiss={close}
-      size={showHeader ? 'lg' : 'sm'}
+      size={step === 'complete' ? 'sm' : 'lg'}
+      fixedHeight={step !== 'complete'}
     >
       {step === 'request' && (
         <PasswordChangeRequestForm
           defaultEmail={data.request.email}
-          purpose="forget"
+          type="forget"
+          purpose="dialog"
           submitCallback={requestCodeCallback}
+          closeDialog={close}
         />
       )}
 
       {step === 'reset' && (
         <PasswordChangeConfirmForm
           codeId={data.request.codeId}
-          backPreviousStep={backPreviousStep}
           submitCallback={() => setStep('complete')}
+          type="forget"
+          purpose="dialog"
+          closeDialog={close}
         />
       )}
 
       {step === 'complete' && (
-        <>
-          <Dialog.Message
-            headline={Title}
-            description={
-              <Translate
-                zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-              />
-            }
-          />
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={close}
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.cancel}
-                zh_hans={TEXT.zh_hans.cancel}
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
-        </>
+        <PasswordChangeComplete
+          type="forget"
+          purpose="dialog"
+          closeDialog={close}
+        />
       )}
     </Dialog>
   )

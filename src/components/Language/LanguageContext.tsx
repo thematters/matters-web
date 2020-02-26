@@ -81,12 +81,7 @@ export const LanguageProvider = ({
                 new CustomEvent(ADD_TOAST, {
                   detail: {
                     color: 'red',
-                    content: (
-                      <Translate
-                        zh_hant="修改失敗，請稍候重試"
-                        zh_hans="修改失败，请稍候重试"
-                      />
-                    )
+                    content: <Translate id="failureChange" />
                   }
                 })
               )

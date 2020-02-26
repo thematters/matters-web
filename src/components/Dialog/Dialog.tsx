@@ -6,7 +6,6 @@ import { animated, useTransition } from 'react-spring'
 import { useOutsideClick, useResponsive } from '~/components'
 
 import Handle from './Handle'
-import Header from './Header'
 import Overlay from './Overlay'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
@@ -17,15 +16,13 @@ export interface DialogOverlayProps {
 }
 
 export type DialogProps = {
-  title: string | React.ReactNode
   size?: 'sm' | 'lg'
-  showHeader?: boolean
+  fixedHeight?: boolean
 } & DialogOverlayProps
 
 const Dialog: React.FC<DialogProps> = ({
-  title,
   size = 'lg',
-  showHeader = true,
+  fixedHeight,
 
   isOpen,
   onDismiss,
@@ -51,33 +48,31 @@ const Dialog: React.FC<DialogProps> = ({
 
   useOutsideClick(node, onDismiss)
 
-  const InnerContent: React.FC<{ style?: React.CSSProperties }> = ({
+  const Container: React.FC<{ style?: React.CSSProperties }> = ({
     ...props
-  }) => (
-    <div ref={node} className={containerClass} {...props}>
-      {!isSmallUp && <Handle />}
+  }) => {
+    const containerClass = classNames({
+      container: true,
+      'fixed-height': !!fixedHeight,
+      'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
+        size === 'lg',
+      'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
+    })
 
-      <Header close={onDismiss} showHeader={showHeader} ref={closeButtonRef}>
-        {title}
-      </Header>
+    return (
+      <div ref={node} className={containerClass} {...props}>
+        {!isSmallUp && <Handle />}
 
-      {children}
+        {children}
 
-      <style jsx>{styles}</style>
-    </div>
-  )
+        <style jsx>{styles}</style>
+      </div>
+    )
+  }
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedInnerContent = animated(InnerContent)
+  const AnimatedContainer = animated(Container)
   const AnimatedOverlay = animated(Overlay)
-
-  const containerClass = classNames({
-    container: true,
-    'no-header': !showHeader,
-    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
-      size === 'lg',
-    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
-  })
 
   return (
     <>
@@ -94,7 +89,7 @@ const Dialog: React.FC<DialogProps> = ({
               className="l-row full"
               aria-labelledby="dialog-title"
             >
-              <AnimatedInnerContent
+              <AnimatedContainer
                 style={{
                   transform: !isSmallUp && transform ? transform : undefined,
                   opacity: isSmallUp ? opacity : undefined

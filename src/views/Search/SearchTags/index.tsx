@@ -9,7 +9,7 @@ import {
   Translate
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -43,10 +43,7 @@ const SEARCH_TAGS = gql`
 `
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader
-    is="h2"
-    title={<Translate zh_hant={TEXT.zh_hant.tag} zh_hans={TEXT.zh_hans.tag} />}
-  >
+  <PageHeader is="h2" title={<Translate id="tag" />}>
     {viewAll && q && <ViewAll q={q} type="tag" />}
   </PageHeader>
 )
@@ -56,14 +53,7 @@ const EmptySearchResult = () => {
     <section>
       <Header />
 
-      <EmptySearch
-        description={
-          <Translate
-            zh_hant={TEXT.zh_hant.emptySearchResults}
-            zh_hans={TEXT.zh_hans.emptySearchResults}
-          />
-        }
-      />
+      <EmptySearch description={<Translate id="emptySearchResults" />} />
     </section>
   )
 }

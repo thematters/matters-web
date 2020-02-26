@@ -2,12 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, Icon, Spinner, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 
@@ -56,11 +54,12 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
-      <Dialog.Content>
-        <section className="container">
-          {!error && (
+      <Dialog.Message
+        description={
+          error ? (
             <>
               <Spinner />
+
               <p>
                 <Translate
                   zh_hant="請在新頁面完成綁定，不要關閉本窗口"
@@ -68,17 +67,22 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
                 />
               </p>
             </>
-          )}
-          {error && (
-            <p>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-              />
-            </p>
-          )}
-        </section>
-      </Dialog.Content>
+          ) : (
+            <>
+              <div>
+                <Icon.EmptyWarning color="grey-light" size="xl" />
+              </div>
+
+              <p>
+                <Translate
+                  zh_hant="哎呀，設置失敗了。"
+                  zh_hans="哎呀，设置失败了。"
+                />
+              </p>
+            </>
+          )
+        }
+      />
 
       <Dialog.Footer>
         <Dialog.Footer.Button
@@ -88,14 +92,9 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.retry}
-            zh_hans={TEXT.zh_hans.retry}
-          />
+          <Translate id="retry" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

@@ -49,7 +49,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
   })
 
   return (
-    <footer>
+    <footer
+      aria-label={`${article.appreciationsReceivedTotal} 個讚賞、${article.responseCount} 條回應`}
+    >
       <section className="left">
         <Appreciation article={article} size="sm" />
         <ResponseCount article={article} size="sm" />

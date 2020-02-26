@@ -146,7 +146,7 @@ const AppreciationButton = ({
     return (
       <section className={containerClasses}>
         <CivicLikerButton
-          onClick={() => {
+          onClose={() => {
             client.writeData({
               id: 'ClientPreference:local',
               data: { readCivicLikerDialog: true }

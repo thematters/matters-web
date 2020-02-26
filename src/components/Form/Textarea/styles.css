@@ -1,23 +1,9 @@
-.container {
-  position: relative;
-}
+textarea {
+  @mixin form-input;
 
-.textarea {
-  @mixin text-input;
-  min-height: 2.5rem;
-}
+  min-height: 5rem;
 
-.info {
-  font-size: var(--font-size-xs);
-  min-height: 1rem;
-  margin-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-x-tight);
-
-  & > .error {
-    color: var(--color-red);
-  }
-
-  & > .hint {
-    color: var(--color-grey-dark);
+  @media (--sm-up) {
+    @mixin form-input-grey;
   }
 }

@@ -4,8 +4,6 @@ import gql from 'graphql-tag'
 import { Head, PageHeader, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
-
 import PushSwitch from './PushSwitch'
 import SettingItem from './SettingItem'
 import styles from './styles.css'
@@ -202,12 +200,7 @@ const SettingsNotification = () => {
 
   return (
     <>
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.notificationSetting,
-          zh_hans: TEXT.zh_hans.notificationSetting
-        }}
-      />
+      <Head title={{ id: 'notificationSetting' }} />
 
       <div className="l-row first">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">

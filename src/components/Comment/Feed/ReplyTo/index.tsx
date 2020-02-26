@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { TEXT } from '~/common/enums'
-
 import styles from './styles.css'
 
 import { ReplyToUser } from './__generated__/ReplyToUser'
@@ -26,7 +24,7 @@ const fragments = {
 const ReplyTo = ({ user }: ReplyToProps) => (
   <section className="container">
     <span className="reply-to">
-      <Translate zh_hant={TEXT.zh_hant.reply} zh_hans={TEXT.zh_hans.reply} />
+      <Translate id="reply" />
     </span>
 
     <UserDigest.Mini

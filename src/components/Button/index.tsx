@@ -61,7 +61,7 @@ export interface ButtonProps {
   bgHoverColor?: ButtonBgHoverColor
 
   borderColor?: ButtonColor
-  borderWidth?: 'sm'
+  borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '0' | '5rem'
 
   href?: string
@@ -96,10 +96,7 @@ export interface ButtonProps {
  *    onClick={onClick}
  *  >
  *    <TextIcon weight="md" size="xs">
- *      <Translate
- *        zh_hant={TEXT.zh_hant.follow}
- *        zh_hans={TEXT.zh_hans.follow}
- *      />
+ *      <Translate id="follow" />
  *    </TextIcon>
  *  </Button>
  * ```
@@ -117,7 +114,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       bgHoverColor,
 
       borderColor,
-      borderWidth,
+      borderWidth = 'md',
       borderRadius = '5rem',
 
       href,
@@ -148,7 +145,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`bg-${bgColor}`]: !!bgColor,
       [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
       [`border-${borderColor}`]: !!borderColor,
-      [`border-${borderWidth}`]: !!borderWidth,
+      [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
       [className]: !!className

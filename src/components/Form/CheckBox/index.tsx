@@ -1,62 +1,61 @@
-import classNames from 'classnames'
+import VisuallyHidden from '@reach/visually-hidden'
 
 import { Icon } from '~/components'
+import { TextIcon } from '~/components/TextIcon'
 
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
-interface Props {
-  children?: any
-  className?: string[]
-  field: string
+type CheckBoxProps = {
+  name: string
+} & Omit<FieldProps, 'fieldMsgId'> &
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 
-  values: any
-  errors: any
-  handleBlur?: () => {}
-  handleChange(e: React.ChangeEvent<any>): void
-  setFieldValue(field: string, value: any): void
+const CheckBox: React.FC<CheckBoxProps> = ({
+  name,
 
-  [key: string]: any
-}
+  hint,
+  error,
 
-const CheckBox: React.FC<Props> = ({
-  children,
-  className = [],
-  field,
-
-  values,
-  errors,
-  handleBlur,
-  handleChange,
-  setFieldValue
+  ...inputProps
 }) => {
-  const value = values[field]
-  const inputClass = classNames('input', ...className)
+  const fieldMsgId = `checkbox-msg-${name}`
 
   return (
-    <>
-      <div className="container">
-        <label className="check" htmlFor="checkbox-input">
-          {value === true ? (
-            <Icon.CheckActive size="sm" />
-          ) : (
-            <Icon.CheckInactive size="sm" />
-          )}
+    <Field>
+      <label htmlFor="checkbox">
+        <TextIcon
+          icon={
+            inputProps.checked ? (
+              <Icon.CheckActive size="md-s" />
+            ) : (
+              <Icon.CheckInactive size="md-s" />
+            )
+          }
+          color="grey-dark"
+          spacing="xtight"
+        >
+          {hint}
+        </TextIcon>
 
+        <VisuallyHidden>
           <input
-            className={inputClass}
+            id="checkbox"
             type="checkbox"
-            id="upload-input"
-            name={field}
-            onChange={e => setFieldValue(field, e.target.checked)}
-            {...(value ? { checked: true } : {})}
+            aria-describedby={fieldMsgId}
+            name={name}
+            {...inputProps}
           />
-        </label>
+        </VisuallyHidden>
+      </label>
 
-        <div className="description">{children}</div>
-      </div>
+      <Field.Footer fieldMsgId={fieldMsgId} error={error} />
 
       <style jsx>{styles}</style>
-    </>
+    </Field>
   )
 }
 

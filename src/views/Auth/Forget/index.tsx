@@ -3,25 +3,21 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
-  PageHeader,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm,
-  Translate
+  PasswordChangeRequestForm
 } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
-import { TEXT } from '~/common/enums'
-
-import PasswordChanged from './PasswordChanged'
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'reset'
+      next: 'confirm'
     },
-    reset: {
+    confirm: {
       prev: 'request',
       next: 'complete'
     }
@@ -50,51 +46,35 @@ const Forget = () => {
         }
       }
     })
-    setStep('reset')
-  }
-  const backPreviousStep = (event: any) => {
-    setStep('request')
+    setStep('confirm')
   }
 
   return (
-    <main className="l-row">
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword
-        }}
-      />
+    <main className="l-row full">
+      <Head title={{ id: 'forgetPassword' }} />
 
       <article className={containerClass}>
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.forgetPassword}
-              zh_hans={TEXT.zh_hans.forgetPassword}
-            />
-          }
-          hasNoBorder
-        />
+        {step === 'request' && (
+          <PasswordChangeRequestForm
+            defaultEmail={data.request.email}
+            type="forget"
+            purpose="page"
+            submitCallback={requestCodeCallback}
+          />
+        )}
 
-        <section className="content">
-          {step === 'request' && (
-            <PasswordChangeRequestForm
-              defaultEmail={data.request.email}
-              purpose="forget"
-              submitCallback={requestCodeCallback}
-            />
-          )}
+        {step === 'confirm' && (
+          <PasswordChangeConfirmForm
+            codeId={data.request.codeId}
+            type="forget"
+            purpose="page"
+            submitCallback={() => setStep('complete')}
+          />
+        )}
 
-          {step === 'reset' && (
-            <PasswordChangeConfirmForm
-              codeId={data.request.codeId}
-              backPreviousStep={backPreviousStep}
-              submitCallback={() => setStep('complete')}
-            />
-          )}
-
-          {step === 'complete' && <PasswordChanged />}
-        </section>
+        {step === 'complete' && (
+          <PasswordChangeComplete type="forget" purpose="page" />
+        )}
       </article>
 
       <style jsx>{styles}</style>

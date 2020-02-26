@@ -6,7 +6,7 @@ import { FC, useContext, useState } from 'react'
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 import { translate } from '~/common/utils'
@@ -52,11 +52,7 @@ const CommentEditor: FC<Props> = ({
     setMentionKeyword(keyword)
   }
 
-  const placeholder = translate({
-    zh_hant: TEXT.zh_hant.commentPlaceholder,
-    zh_hans: TEXT.zh_hans.commentPlaceholder,
-    lang
-  })
+  const placeholder = translate({ id: 'commentPlaceholder', lang })
 
   if (!expand) {
     return (

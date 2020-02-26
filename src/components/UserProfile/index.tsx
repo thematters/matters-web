@@ -5,7 +5,7 @@ import _get from 'lodash/get'
 import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Avatar,
@@ -19,9 +19,8 @@ import {
   Translate,
   ViewerContext
 } from '~/components'
-import { UserProfileEditor } from '~/components/UserProfileEditor'
 
-import { EXTERNAL_LINKS, TEXT } from '~/common/enums'
+import { EXTERNAL_LINKS } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
 import Cover from './Cover'
@@ -115,11 +114,9 @@ export const UserProfile = () => {
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
-  const [editing, setEditing] = useState<boolean>(false)
 
   const containerClass = classNames({
-    container: true,
-    editing
+    container: true
   })
 
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
@@ -136,19 +133,6 @@ export const UserProfile = () => {
         <CoverContainer>
           <Spinner />
         </CoverContainer>
-
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
-
-  if (isMe && editing) {
-    return (
-      <section className={containerClass}>
-        <UserProfileEditor
-          user={_get(data, 'viewer')}
-          setEditing={setEditing}
-        />
 
         <style jsx>{styles}</style>
       </section>
@@ -225,36 +209,25 @@ export const UserProfile = () => {
 
                   {isUserArchived && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountArchived}
-                        zh_hans={TEXT.zh_hans.accountArchived}
-                      />
+                      <Translate id="accountArchived" />
                     </span>
                   )}
 
                   {isUserFrozen && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountFrozen}
-                        zh_hans={TEXT.zh_hans.accountFrozen}
-                      />
+                      <Translate id="accountFrozen" />
                     </span>
                   )}
 
                   {isUserBanned && (
                     <span>
-                      <Translate
-                        zh_hant={TEXT.zh_hant.accountBanned}
-                        zh_hans={TEXT.zh_hans.accountBanned}
-                      />
+                      <Translate id="accountBanned" />
                     </span>
                   )}
                 </section>
 
                 <section className="buttons">
-                  {isMe && !isUserInactive && (
-                    <EditProfileButton setEditing={setEditing} />
-                  )}
+                  {isMe && !isUserInactive && <EditProfileButton user={user} />}
 
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     {!isMe && <DropdownActions user={user} />}
@@ -275,10 +248,7 @@ export const UserProfile = () => {
                     <span className="count">
                       {numAbbr(user.followers.totalCount)}
                     </span>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.follower}
-                      zh_hans={TEXT.zh_hans.follower}
-                    />
+                    <Translate id="follower" />
                   </a>
                 </Link>
 
@@ -287,10 +257,7 @@ export const UserProfile = () => {
                     <span className="count">
                       {numAbbr(user.followees.totalCount)}
                     </span>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.following}
-                      zh_hans={TEXT.zh_hans.following}
-                    />
+                    <Translate id="following" />
                   </a>
                 </Link>
               </section>

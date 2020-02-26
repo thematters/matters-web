@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: var(--spacing-loose) 0;
+  padding: 0 var(--spacing-base);
+}
+
+.hint {
+  margin-left: var(--spacing-base);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+}

@@ -7,17 +7,21 @@ type SpacingY = 0 | '0' | 'base' | 'xloose' | 'xxxloose'
 
 interface DialogContentProps {
   // Note: only apply in "sm-up" if the spacing is large than "base"
-  spacing?: [SpacingX, SpacingY]
+  spacing?: [SpacingY, SpacingX]
+  hasGrow?: boolean
 }
 
 const DialogContent: React.FC<DialogContentProps> = ({
   spacing = ['base', 'base'],
+  hasGrow,
+
   children
 }) => {
   const contentClass = classNames({
     content: true,
-    [`spacing-x-${spacing[0]}`]: true,
-    [`spacing-y-${spacing[1]}`]: true
+    'has-grow': !!hasGrow,
+    [`spacing-y-${spacing[0]}`]: true,
+    [`spacing-x-${spacing[1]}`]: true
   })
 
   return (

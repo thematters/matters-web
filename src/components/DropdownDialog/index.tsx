@@ -30,7 +30,7 @@ import { KEYCODES, TEXT } from '~/common/enums'
  *     dialog={{
  *       content: <DialogContent />,
  *       title: ....,
- *       showHeader: false
+ *       headerHidden: false
  *     }}
  *   >
  *     <Button>
@@ -58,6 +58,7 @@ type DropdownDialogProps = {
   dropdown: Omit<PopperProps, 'children'>
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
     content: React.ReactNode
+    title: string | React.ReactNode
   }
 } & DropdownDialogChildren
 
@@ -85,13 +86,13 @@ export const DropdownDialog = ({
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => {
-    // dialog
-    setShowDialog(false)
-
     // dropdown
     if (dropdownInstance) {
       dropdownInstance.hide()
     }
+
+    // dialog
+    setShowDialog(false)
   }
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
@@ -99,6 +100,8 @@ export const DropdownDialog = ({
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       close()
     }
+
+    event.stopPropagation()
   }
 
   const Content: React.FC = ({ children: contentChildren }) => {
@@ -153,6 +156,8 @@ export const DropdownDialog = ({
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
         <Content>
+          <Dialog.Header title={dialog.title} close={close} headerHidden />
+
           {dialog.content}
 
           <Dialog.Footer>
@@ -161,10 +166,7 @@ export const DropdownDialog = ({
               textColor="black"
               onClick={close}
             >
-              <Translate
-                zh_hant={TEXT.zh_hant.close}
-                zh_hans={TEXT.zh_hans.close}
-              />
+              <Translate id="close" />
             </Dialog.Footer.Button>
           </Dialog.Footer>
         </Content>

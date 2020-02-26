@@ -208,9 +208,6 @@
   &.shadow-light-theme {
     box-shadow: var(--shadow-light);
   }
-  &.shadow-default-theme {
-    box-shadow: var(--shadow-default);
-  }
   &.shadow-dark-theme {
     box-shadow: var(--shadow-dark);
   }
