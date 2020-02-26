@@ -21,7 +21,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
 
   if (isPlain) {
     return (
-      <Button {...clickProps}>
+      <Button aria-haspopup="true" {...clickProps}>
         <Translate id="login" />
       </Button>
     )
@@ -32,6 +32,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
       bgHoverColor={'green-lighter'}
+      aria-haspopup="true"
       {...clickProps}
     >
       <TextIcon color="green" weight="md">

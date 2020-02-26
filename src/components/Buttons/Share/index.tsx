@@ -25,7 +25,8 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
       ? `${window.location.origin}/${path}`
       : window.location.href
     : ''
-  const shareTitle = process.browser ? title || window.document.title : ''
+  const shareTitle =
+    title || (process.browser ? window.document.title || '' : '')
   const ariaTitle = `分享 ${shareTitle}`
 
   return (
@@ -35,6 +36,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           spacing={['xtight', 'xtight']}
           bgHoverColor="grey-lighter"
           aria-label={ariaTitle}
+          aria-haspopup="true"
           onClick={async () => {
             const navigator = window.navigator as any
 

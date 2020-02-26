@@ -21,6 +21,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         spacing={['xxtight', 'xtight']}
         bgHoverColor="grey-lighter"
         onClick={open}
+        aria-haspopup="true"
       >
         <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
           <Translate

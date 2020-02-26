@@ -15,6 +15,7 @@ const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
           spacing={[0, 'xtight']}
           bgHoverColor="green-lighter"
           onClick={open}
+          aria-haspopup="true"
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
             <Translate id="addArticleTag" />

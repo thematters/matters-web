@@ -14,6 +14,7 @@ const EditTagButton = (props: EditTagButtonProps) => (
         spacing={[0, 'xtight']}
         bgHoverColor="green-lighter"
         onClick={open}
+        aria-haspopup="true"
       >
         <TextIcon
           icon={<Icon.Edit color="green" size="xs" />}

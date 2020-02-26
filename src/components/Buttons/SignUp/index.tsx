@@ -31,6 +31,7 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
       bgColor="green"
+      aria-haspopup="true"
       {...clickProps}
     >
       <TextIcon color="white" weight="md">

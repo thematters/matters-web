@@ -28,6 +28,7 @@ const EditButton = ({
     borderColor="green"
     onClick={open}
     disabled={disabled}
+    aria-haspopup="true"
   >
     <TextIcon weight="md" size="xs">
       <Translate id="change" />
@@ -50,7 +51,7 @@ const ChangeUserNameButton = ({ disabled }: { disabled: boolean }) => (
 const ChangePasswrodButton = () => (
   <ChangePasswordDialog>
     {({ open }) => (
-      <Button className="u-link-green" onClick={open}>
+      <Button className="u-link-green" aria-haspopup="true" onClick={open}>
         <Translate id="changePassword" />
       </Button>
     )}
