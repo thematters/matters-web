@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import { Translate } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -26,6 +26,15 @@ const BaseLink = ({
 
 export const Footer = () => {
   const year = new Date().getFullYear()
+
+  const { href: appHref, as: appAs } = toPath({
+    page: 'articleDetail',
+    article: {
+      slug: 'matters-web-app',
+      mediaHash: 'zdpuAugkiUK2uwV2nJPvnJPNE73SM5oaNNX9Z2SdgSmiLTjag',
+      author: { userName: 'denkeni' }
+    }
+  })
 
   return (
     <footer className="footer">
@@ -51,6 +60,18 @@ export const Footer = () => {
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
         text={<Translate id="term" />}
+      />
+
+      <BaseLink
+        href={appHref}
+        as={appAs}
+        text={<Translate zh_hant={'下載App'} zh_hans={'下载App'} />}
+      />
+
+      <BaseLink
+        href={'https://github.com/thematters/developer-resource'}
+        as={'https://github.com/thematters/developer-resource'}
+        text={<Translate zh_hant={'開放社區'} zh_hans={'开放社区'} />}
       />
 
       <p className="item">© {year} Matters</p>
