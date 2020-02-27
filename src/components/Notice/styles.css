@@ -9,8 +9,8 @@
 .avatar-wrap {
   flex-shrink: 0;
 
-  margin-right: var(--spacing-base);
-  width: 2.5rem;
+  margin-right: var(--spacing-x-tight);
+  width: 2rem;
 
   &.multi {
     & :global(.avatar) {
@@ -35,6 +35,7 @@
 
 .content-wrap {
   flex-grow: 1;
+  padding-top: var(--spacing-xx-tight);
 
   & h4 {
     margin-bottom: var(--spacing-xx-tight);
@@ -46,10 +47,57 @@
       font-weight: var(--font-weight-medium);
     }
   }
+
+  & .head-wrap {
+    @mixin flex-start-space-between;
+    margin-bottom: var(--spacing-x-tight);
+
+    & h4 {
+      margin: 0;
+      color: var(--color-grey);
+      font-weight: var(--font-weight-normal);
+
+      & :global(a) {
+        color: var(--color-black);
+        font-weight: var(--font-weight-medium);
+      }
+    }
+
+    & section.date {
+      flex-shrink: 0;
+      margin: 0 0 0 var(--spacing-xx-tight);
+    }
+  }
+}
+
+.multi-actor-avatars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-tight);
+
+  & :global(a) {
+    margin-right: var(--spacing-x-tight);
+  }
+}
+
+.article-block {
+  font-size: var(--font-size-md-s);
+  font-weight: var( --font-weight-medium);
 }
 
 .comment-content {
   margin-top: var(--spacing-tight);
+}
+
+.collection-article {
+  margin-top: var(--spacing-tight);
+}
+
+.follower-content {
+  background: var(--color-yellow-lighter);
+  border-radius: var(--spacing-xx-tight);
+  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
 }
 
 .date {
