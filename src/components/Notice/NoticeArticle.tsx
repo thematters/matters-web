@@ -1,14 +1,27 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticle'
 
-const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
+const NoticeArticle = ({
+  article,
+  isBlock = false
+}: {
+  article: NoticeArticleType | null
+  isBlock?: boolean
+}) => {
   if (!article) {
     return null
   }
+
+  const linkClasses = classNames({
+    'article-block': isBlock
+  })
 
   const path = toPath({
     page: 'articleDetail',
@@ -16,9 +29,12 @@ const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
   })
 
   return (
-    <Link {...path}>
-      <a>{article.title}</a>
-    </Link>
+    <>
+      <Link {...path}>
+        <a className={linkClasses}>{article.title}</a>
+      </Link>
+      <style jsx>{styles}</style>
+    </>
   )
 }
 

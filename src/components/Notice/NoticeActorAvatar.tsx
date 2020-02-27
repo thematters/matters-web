@@ -9,10 +9,10 @@ import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
 
 const NoticeActorAvatar = ({
   user,
-  size
+  size = 'lg'
 }: {
   user: NoticeActorAvatarUser | null
-  size?: 'md'
+  size?: 'md' | 'lg'
 }) => {
   if (!user) {
     return null
