@@ -6,7 +6,6 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
-  hidePopperOnClick,
   Icon,
   LanguageContext,
   PopperInstance
@@ -101,9 +100,6 @@ export const SearchBar: React.FC<{
               />
             }
             trigger="manual"
-            onShown={instance => {
-              hidePopperOnClick(instance)
-            }}
             onCreate={instance => (instanceRef.current = instance)}
             appendTo={document.body}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
