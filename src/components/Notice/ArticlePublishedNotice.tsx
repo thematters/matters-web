@@ -1,12 +1,9 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
-
-import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
+import { Icon, Translate } from '~/components'
 
 import NoticeArticle from './NoticeArticle'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
 import styles from './styles.css'
 
 import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice'
@@ -15,20 +12,18 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Avatar src={ICON_AVATAR_LOGO} />
+        <Icon.AvatarLogo size="lg" />
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead notice={notice}>
           <Translate
             zh_hant="你的作品已發佈到分佈式網絡"
             zh_hans="你的作品已发布到分布式网络"
           />
-        </h4>
+        </NoticeHead>
 
-        <NoticeArticle article={notice.target} />
-
-        <NoticeDate notice={notice} />
+        <NoticeArticle article={notice.target} isBlock />
       </section>
 
       <style jsx>{styles}</style>
@@ -42,13 +37,13 @@ ArticlePublishedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       target {
         ...NoticeArticle
       }
     }
     ${NoticeArticle.fragments.article}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 

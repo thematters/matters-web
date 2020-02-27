@@ -5,7 +5,7 @@ import { Translate } from '~/components'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeComment from './NoticeComment'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
 import styles from './styles.css'
 
 import { CommentPinnedNotice as NoticeType } from './__generated__/CommentPinnedNotice'
@@ -18,14 +18,12 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />
           <Translate zh_hant="置頂了你的評論" zh_hans="置顶了你的评论" />{' '}
-        </h4>
+        </NoticeHead>
 
         <NoticeComment comment={notice.target} />
-
-        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -39,7 +37,7 @@ CommentPinnedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actor {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -51,7 +49,7 @@ CommentPinnedNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeComment.fragments.comment}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 

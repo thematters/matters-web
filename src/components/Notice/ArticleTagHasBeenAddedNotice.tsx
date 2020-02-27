@@ -1,13 +1,10 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
-
-import ICON_AVATAR_LOGO from '~/static/icons/avatar-logo.svg'
+import { Icon, Translate } from '~/components'
 
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
 import NoticeTag from './NoticeTag'
 import styles from './styles.css'
 
@@ -21,11 +18,11 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Avatar src={ICON_AVATAR_LOGO} />
+        <Icon.AvatarLogo size="lg" />
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead notice={notice}>
           <Translate zh_hant="你的作品 " zh_hans="你的作品 " />
           <NoticeArticle article={notice.target} />
           <Translate zh_hant=" 已經被 " zh_hans=" 已經被 " />
@@ -33,9 +30,7 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate zh_hant="  加入 " zh_hans=" 加入 " />
           <NoticeTag tag={notice.tag} />
           <Translate zh_hant="  的精選文集了" zh_hans=" 的精选文集了" />
-        </h4>
-
-        <NoticeDate notice={notice} />
+        </NoticeHead>
       </section>
 
       <style jsx>{styles}</style>
@@ -49,7 +44,7 @@ ArticleTagHasBeenAddedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actor {
         ...NoticeActorNameUser
       }
@@ -62,8 +57,8 @@ ArticleTagHasBeenAddedNotice.fragments = {
     }
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
+    ${NoticeHead.fragments.date}
     ${NoticeTag.fragments.tag}
-    ${NoticeDate.fragments.notice}
   `
 }
 

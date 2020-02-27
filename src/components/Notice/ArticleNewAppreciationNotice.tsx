@@ -1,15 +1,14 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Translate } from '~/components'
+import { Icon, Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
 import styles from './styles.css'
 
 import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
@@ -21,25 +20,19 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = notice.actors && actorsCount > 1
-  const avatarWrapClasses = classNames({
-    'avatar-wrap': true,
-    multi: isMultiActors
-  })
 
   return (
     <section className="container">
-      <section className={avatarWrapClasses}>
-        {notice.actors.slice(0, 2).map((actor, index) => (
-          <NoticeActorAvatar
-            user={actor}
-            key={index}
-            size={isMultiActors ? 'md' : undefined}
-          />
-        ))}
+      <section className="avatar-wrap">
+        {isMultiActors ? (
+          <Icon.Like color="green" style={{ margin: '0.5rem' }} />
+        ) : (
+          <NoticeActorAvatar user={notice.actors[0]} />
+        )}
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead hasDate={!isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -56,11 +49,19 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
             zh_hant="喜歡並讚賞了你的作品"
             zh_hans="喜欢并赞赏了你的作品"
           />
-        </h4>
+        </NoticeHead>
 
-        <NoticeArticle article={notice.target} />
+        <NoticeArticle article={notice.target} isBlock />
 
-        <NoticeDate notice={notice} />
+        {isMultiActors && (
+          <section className="multi-actor-avatars">
+            {notice.actors.map((actor, index) => (
+              <Fragment key={index}>
+                <NoticeActorAvatar user={actor} />
+              </Fragment>
+            ))}
+          </section>
+        )}
       </section>
 
       <style jsx>{styles}</style>
@@ -74,7 +75,7 @@ ArticleNewAppreciationNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       target {
         ...NoticeArticle
       }
@@ -86,7 +87,7 @@ ArticleNewAppreciationNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 
