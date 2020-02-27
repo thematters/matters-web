@@ -196,7 +196,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
   console.log('[Push] Subscribed')
 }
 
-export const unsubscribePush = async () => {
+export const unsubscribePush = async (options?: { silent?: boolean }) => {
+  const { silent } = options || { silent: false }
   const token = await getToken()
 
   // Delete token in local
@@ -204,19 +205,23 @@ export const unsubscribePush = async () => {
     await unsubscribePushLocally(token)
   } catch (e) {
     console.error('[Push] Failed to deleteToken in local')
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="關閉失敗，請稍候重試"
-              zh_hans="关闭失败，请稍候重试"
-            />
-          )
-        }
-      })
-    )
+
+    if (!silent) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant="關閉失敗，請稍候重試"
+                zh_hans="关闭失败，请稍候重试"
+              />
+            )
+          }
+        })
+      )
+    }
+
     throw new Error('[Push] Failed to unsubscribe push')
   }
 

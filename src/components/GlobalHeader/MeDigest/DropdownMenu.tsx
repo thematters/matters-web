@@ -44,7 +44,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
       )
 
       try {
-        await unsubscribePush()
+        await unsubscribePush({ silent: true })
         // await clearPersistCache()
       } catch (e) {
         console.error('Failed to unsubscribePush after logged out')
