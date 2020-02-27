@@ -62,6 +62,8 @@ import { ReactComponent as UnPinMedium } from './icons/unpin-md.svg'
 import { ReactComponent as Up } from './icons/up.svg'
 import { ReactComponent as UpVoteActive } from './icons/upvote-active.svg'
 import { ReactComponent as UpVote } from './icons/upvote.svg'
+import { ReactComponent as User } from './icons/user.svg'
+import { ReactComponent as Volume } from './icons/volume.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -174,6 +176,8 @@ export const Icon = {
   Up: withIcon(Up),
   UpVote: withIcon(UpVote),
   UpVoteActive: withIcon(UpVoteActive),
+  User: withIcon(User),
+  Volume: withIcon(Volume),
 
   // legacy
   CheckActive: withIcon(CheckActive),
