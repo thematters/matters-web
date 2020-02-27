@@ -17,7 +17,7 @@ interface TextIconProps {
   icon?: React.ReactNode
 
   color?: TextIconColor
-  size?: 'xs' | 'sm' | 'md' | 'xm' | 'lg'
+  size?: 'xs' | 'sm' | 'md-s' | 'md' | 'xm' | 'lg'
   spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 

@@ -1,4 +1,7 @@
-import { TEXT } from '~/common/enums'
+import _identity from 'lodash/identity'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
+
 import {
   isValidDisplayName,
   isValidEmail,
@@ -13,57 +16,24 @@ export const validateEmail = (
   lang: Language,
   options: ValidEmailOptions
 ) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (!isValidEmail(value, options)) {
-    result = {
-      zh_hant: TEXT.zh_hant.invalidEmail,
-      zh_hans: TEXT.zh_hans.invalidEmail
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'invalidEmail', lang })
   }
 }
 
 export const validateCode = (value: string, lang: Language) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'required', lang })
   }
 }
 
 export const validatePassword = (value: string, lang: Language) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (!isValidPassword(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.passwordHint,
-      zh_hans: TEXT.zh_hans.passwordHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'hintPassword', lang })
   }
 }
 
@@ -72,42 +42,18 @@ export const validateComparedPassword = (
   comparedValue: string,
   lang: Language
 ) => {
-  let result
-
   if (!comparedValue) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (comparedValue !== value) {
-    result = {
-      zh_hant: TEXT.zh_hant.passwordNotMatch,
-      zh_hans: TEXT.zh_hans.passwordNotMatch
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'passwordNotMatch', lang })
   }
 }
 
 export const validateUserName = (value: string, lang: Language) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (!isValidUserName(value)) {
-    result = {
-      zh_hant: TEXT.zh_hant.userNameHint,
-      zh_hans: TEXT.zh_hans.userNameHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'hintUserName', lang })
   }
 }
 
@@ -116,22 +62,10 @@ export const validateComparedUserName = (
   comparedValue: string,
   lang: Language
 ) => {
-  let result
-
   if (!comparedValue) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (comparedValue !== value) {
-    result = {
-      zh_hant: TEXT.zh_hant.invalidUserName,
-      zh_hans: TEXT.zh_hans.invalidUserName
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'invalidUserName', lang })
   }
 }
 
@@ -140,68 +74,33 @@ export const validateDisplayName = (
   lang: Language,
   isAdmin?: boolean
 ) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (!isValidDisplayName(value) && !isAdmin) {
-    result = {
-      zh_hant: TEXT.zh_hant.displayNameHint,
-      zh_hans: TEXT.zh_hans.displayNameHint
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'hintDisplayName', lang })
   }
 }
 
 export const validateDescription = (value: string, lang: Language) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
+    return translate({ id: 'required', lang })
   } else if (value.length > 200) {
-    result = {
+    return translate({
       zh_hant: `已超過 200 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 200 字，目前 ${value.length} 字`
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+      zh_hans: `已超过 200 字，目前 ${value.length} 字`,
+      lang
+    })
   }
 }
 
 export const validateToS = (value: boolean, lang: Language) => {
-  let result
-
   if (value === false) {
-    result = { zh_hant: '請勾選', zh_hans: '请勾选' }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ zh_hant: '請勾選', zh_hans: '请勾选', lang })
   }
 }
 
 export const validateAvatar = (value: string | null, lang: Language) => {
-  let result
-
   if (!value) {
-    result = {
-      zh_hant: TEXT.zh_hant.required,
-      zh_hans: TEXT.zh_hans.required
-    }
-  }
-
-  if (result) {
-    return translate({ ...result, lang })
+    return translate({ id: 'required', lang })
   }
 }

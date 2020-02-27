@@ -14,7 +14,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTopics } from './__generated__/AllTopics'
@@ -104,21 +104,9 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.allTopics,
-            zh_hans: TEXT.zh_hans.allTopics
-          }}
-        />
+        <Head title={{ id: 'allTopics' }} />
 
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.allTopics}
-              zh_hans={TEXT.zh_hans.allTopics}
-            />
-          }
-        />
+        <PageHeader title={<Translate id="allTopics" />} />
 
         <section>
           <Topics />

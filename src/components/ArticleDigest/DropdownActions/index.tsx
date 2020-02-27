@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -8,7 +8,6 @@ import {
   IconColor,
   IconSize,
   Menu,
-  PopperInstance,
   Translate,
   ViewerContext
 } from '~/components'
@@ -59,14 +58,12 @@ const DropdownActions = ({
   inTagDetailLatest,
   inTagDetailSelected
 }: DropdownActionsProps) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-
   const viewer = useContext(ViewerContext)
   const isArticleAuthor = viewer.id === article.author.id
   const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
   const isInTagDetail = inTagDetailLatest || inTagDetailSelected
-  const hasExtendButton = isActive && !isInTagDetail
+  const hasExtendButton = isActive
   const hasRemoveTagButton = isInTagDetail && isMattyUser
   const hasStickyButton =
     inUserArticles &&
@@ -97,13 +94,9 @@ const DropdownActions = ({
         {/* private */}
         {hasStickyButton && <StickyButton article={article} />}
         {hasArchiveButton && <ArchiveButton article={article} />}
-        {inTagDetailLatest && (
-          <SetTagSelectedButton article={article} instance={instance} />
-        )}
+        {inTagDetailLatest && <SetTagSelectedButton article={article} />}
         {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
-        {hasRemoveTagButton && (
-          <RemoveTagButton article={article} instance={instance} />
-        )}
+        {hasRemoveTagButton && <RemoveTagButton article={article} />}
       </Menu>
     )
   }
@@ -112,18 +105,11 @@ const DropdownActions = ({
     <DropdownDialog
       dropdown={{
         content: <Content type="dropdown" />,
-        placement: 'bottom-end',
-        onCreate: setInstance
+        placement: 'bottom-end'
       }}
       dialog={{
         content: <Content type="dialog" />,
-        title: (
-          <Translate
-            zh_hant={TEXT.zh_hant.moreActions}
-            zh_hans={TEXT.zh_hans.moreActions}
-          />
-        ),
-        showHeader: false
+        title: <Translate id="moreActions" />
       }}
     >
       {({ open, ref }) => (

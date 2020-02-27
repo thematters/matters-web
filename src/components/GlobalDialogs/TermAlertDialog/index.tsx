@@ -3,12 +3,18 @@ import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext, useState } from 'react'
 
-import { Dialog, Term, Translate, ViewerContext } from '~/components'
+import {
+  Dialog,
+  LanguageContext,
+  Term,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { TEXT } from '~/common/enums'
-import { unsubscribePush } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums'
+import { parseFormSubmitErrors, unsubscribePush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -16,7 +22,7 @@ import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 
 interface TermContentProps {
-  close: () => void
+  closeDialog: () => void
 }
 
 const UPDATE_AGREE_ON = gql`
@@ -30,21 +36,32 @@ const UPDATE_AGREE_ON = gql`
   }
 `
 
-const TermContent: React.FC<TermContentProps> = ({ close }) => {
+const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
+  const { lang } = useContext(LanguageContext)
+
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         await update({ variables: { input: { agreeOn: true } } })
-        close()
+        closeDialog()
       } catch (error) {
-        // TODO: Handle error
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'red',
+              content: messages[codes[0]]
+            }
+          })
+        )
       }
       setSubmitting(false)
     }
   })
+
   const onLogout = async () => {
     try {
       await logout()
@@ -56,16 +73,28 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
         console.error('Failed to unsubscribePush after logged out')
       }
 
-      close()
+      closeDialog()
 
       Router.replace('/')
     } catch (e) {
-      // TODO
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="failureLogout" />
+          }
+        })
+      )
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      <Dialog.Header
+        title={<Translate id="termAndPrivacy" />}
+        close={closeDialog}
+      />
+
       <Dialog.Content>
         <p className="hint">
           <Translate
@@ -85,10 +114,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
           disabled={isSubmitting}
           loading={isSubmitting}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.agreeAndContinue}
-            zh_hans={TEXT.zh_hans.agreeAndContinue}
-          />
+          <Translate id="agreeAndContinue" />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
@@ -96,10 +122,7 @@ const TermContent: React.FC<TermContentProps> = ({ close }) => {
           textColor="black"
           onClick={onLogout}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.disagree}
-            zh_hans={TEXT.zh_hans.disagree}
-          />
+          <Translate id="disagree" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
 
@@ -116,17 +139,8 @@ const TermAlertDialog = () => {
   const [showDialog, setShowDialog] = useState(disagreedToS)
 
   return (
-    <Dialog
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.termAndPrivacy}
-          zh_hans={TEXT.zh_hans.termAndPrivacy}
-        />
-      }
-      isOpen={showDialog}
-      onDismiss={close}
-    >
-      <TermContent close={close} />
+    <Dialog isOpen={showDialog} onDismiss={close}>
+      <TermContent closeDialog={close} />
     </Dialog>
   )
 }

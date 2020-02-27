@@ -1,14 +1,9 @@
-import {
-  Button,
-  Icon,
-  LikeCoinDialog,
-  PublishDialog,
-  TextIcon,
-  Translate
-} from '~/components'
+import { Button, Icon, LikeCoinDialog, TextIcon, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import { PublishDialog } from './PublishDialog'
 
 interface Props {
   allowed: boolean
@@ -23,9 +18,10 @@ const PublishButton = ({ open }: { open: () => void }) => (
       analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
       open()
     }}
+    aria-haspopup="true"
   >
     <TextIcon color="white" icon={<Icon.Pen />} weight="md">
-      <Translate zh_hant="發佈" zh_hans="发布" />
+      <Translate id="publish" />
     </TextIcon>
   </Button>
 )

@@ -9,7 +9,6 @@ import {
   withIcon
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg'
@@ -99,11 +98,7 @@ const Footer = () => {
               <input
                 type="email"
                 name="EMAIL"
-                placeholder={translate({
-                  zh_hant: TEXT.zh_hant.yourEmail,
-                  zh_hans: TEXT.zh_hans.yourEmail,
-                  lang
-                })}
+                placeholder={translate({ id: 'yourEmail', lang })}
                 defaultValue=""
               />
               <input

@@ -1,7 +1,5 @@
 import { Button, Icon, TagDialog, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 interface EditTagButtonProps {
   id?: string
   content?: string
@@ -16,16 +14,14 @@ const EditTagButton = (props: EditTagButtonProps) => (
         spacing={[0, 'xtight']}
         bgHoverColor="green-lighter"
         onClick={open}
+        aria-haspopup="true"
       >
         <TextIcon
           icon={<Icon.Edit color="green" size="xs" />}
           size="sm"
           color="green"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.editTag}
-            zh_hans={TEXT.zh_hans.editTag}
-          />
+          <Translate id="editTag" />
         </TextIcon>
       </Button>
     )}

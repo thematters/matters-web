@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -8,22 +7,25 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  PageHeader,
   SendCodeButton,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
-  PATHS,
-  TEXT
+  PATHS
 } from '~/common/enums'
 import {
   analytics,
   appendTarget,
+  filterFormErrors,
+  parseFormSubmitErrors,
+  randomString,
   translate,
   validateCode,
   validateEmail,
@@ -32,28 +34,14 @@ import {
   validateUserName
 } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { UserRegister } from './__generated__/UserRegister'
 
-/**
- * This component is designed for sign up form with builtin mutation.
- *
- * Usage:
- *
- * ```jsx
- *   <SignUpInitForm
- *     defaultEmail={''}
- *     submitCallback={()=> {}}
- *   />
- * ```
- *
- */
 interface FormProps {
   defaultEmail?: string
   purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -73,35 +61,40 @@ const USER_REGISTER = gql`
 `
 
 const LoginDialogButton = () => (
-  <Dialog.Footer.Button
-    onClick={() => {
-      window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-      window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-    }}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Footer.Button>
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      rightText={<Translate id="login" />}
+      onClick={() => {
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+        window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+      }}
+    />
+  </Form.List>
 )
 
 const LoginRedirectionButton = () => (
-  <Dialog.Footer.Button
-    {...appendTarget(PATHS.AUTH_LOGIN)}
-    bgColor="grey-lighter"
-    textColor="black"
-  >
-    <Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />
-  </Dialog.Footer.Button>
+  <Form.List spacing="xloose">
+    <Form.List.Item
+      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      rightText={<Translate id="login" />}
+      {...appendTarget(PATHS.AUTH_LOGIN)}
+    />
+  </Form.List>
 )
 
-export const SignUpInitForm: React.FC<FormProps> = formProps => {
+export const SignUpInitForm: React.FC<FormProps> = ({
+  defaultEmail = '',
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', purpose, submitCallback } = formProps
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
+  const formId = randomString()
 
   const {
     values,
@@ -110,8 +103,8 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
@@ -120,22 +113,14 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
       password: '',
       tos: true
     },
-    validate: ({ email, code, userName, password, tos }) => {
-      const isInvalidEmail = validateEmail(email, lang, {
-        allowPlusSign: false
-      })
-      const isInvalidCodeId = validateCode(code, lang)
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidUserName = validateUserName(userName, lang)
-      const isInvalidToS = validateToS(tos, lang)
-      return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCodeId ? { code: isInvalidCodeId } : {}),
-        ...(isInvalidUserName ? { userName: isInvalidUserName } : {}),
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidToS ? { tos: isInvalidToS } : {})
-      }
-    },
+    validate: ({ email, code, userName, password, tos }) =>
+      filterFormErrors({
+        email: validateEmail(email, lang, { allowPlusSign: false }),
+        code: validateCode(code, lang),
+        userName: validatePassword(password, lang),
+        password: validateUserName(userName, lang),
+        tos: validateToS(tos, lang)
+      }),
     onSubmit: async (
       { email, code, userName, password },
       { setFieldError, setSubmitting }
@@ -159,144 +144,164 @@ export const SignUpInitForm: React.FC<FormProps> = formProps => {
           submitCallback({ email, codeId, password })
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(c => {
+          if (c.includes('USER_EMAIL_')) {
+            setFieldError('email', messages[c])
+          } else if (c.indexOf('CODE_') >= 0) {
+            setFieldError('code', messages[c])
+          } else if (c.indexOf('USER_PASSWORD_') >= 0) {
+            setFieldError('password', messages[c])
+          } else {
+            setFieldError('userName', messages[c])
+          }
         })
 
-        if (errorCode.indexOf('CODE_') >= 0) {
-          setFieldError('code', errorMessage)
-        } else if (errorCode.indexOf('USER_EMAIL_') >= 0) {
-          setFieldError('email', errorMessage)
-        } else if (errorCode.indexOf('USER_PASSWORD_') >= 0) {
-          setFieldError('password', errorMessage)
-        } else {
-          setFieldError('userName', errorMessage)
-        }
         setSubmitting(false)
       }
     }
   })
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
-        <Form.Input
-          type="email"
-          field="email"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.email,
-            zh_hans: TEXT.zh_hans.email,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="text"
-          field="code"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.verificationCode,
-            zh_hans: TEXT.zh_hans.verificationCode,
-            lang
-          })}
-          floatElement={
-            <SendCodeButton email={values.email} lang={lang} type="register" />
-          }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="text"
-          field="userName"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: 'Matters ID',
-            zh_hans: 'Matters ID',
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.userNameHint,
-            zh_hans: TEXT.zh_hans.userNameHint,
-            lang
-          })}
-        />
-        <Form.Input
-          type="password"
-          field="password"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.password,
-            zh_hans: TEXT.zh_hans.password,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.passwordHint,
-            zh_hans: TEXT.zh_hans.passwordHint,
-            lang
-          })}
-        />
-        <div className="tos">
-          <Form.CheckBox
-            field="tos"
-            values={values}
-            errors={errors}
-            handleChange={handleChange}
-            setFieldValue={setFieldValue}
-          >
-            <>
-              <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={translate({
+          id: 'enterEmail',
+          lang
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
 
-              <Link {...PATHS.MISC_TOS}>
-                <a className="u-link-green" target="_blank">
-                  {' '}
-                  <Translate
-                    zh_hant="Matters 用戶協議和隱私政策"
-                    zh_hans="Matters 用户协议和隐私政策"
-                  />
-                </a>
-              </Link>
-            </>
-          </Form.CheckBox>
-        </div>
-      </Dialog.Content>
-
-      <Dialog.Footer>
-        {isInDialog && <LoginDialogButton />}
-        {isInPage && <LoginRedirectionButton />}
-
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.nextStep}
-            zh_hans={TEXT.zh_hans.nextStep}
+      <Form.Input
+        label={<Translate id="verificationCode" />}
+        type="text"
+        name="code"
+        autoComplete="off"
+        required
+        placeholder={translate({
+          id: 'enterVerificationCode',
+          lang
+        })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <SendCodeButton
+            email={values.email}
+            type="register"
+            disabled={!!errors.email}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+        }
+      />
 
-      <style jsx>{styles}</style>
-    </form>
+      <Form.Input
+        label="Matters ID"
+        type="text"
+        name="userName"
+        autoComplete="off"
+        required
+        value={values.userName}
+        error={touched.userName && errors.userName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        placeholder={translate({
+          id: 'enterUserName',
+          lang
+        })}
+        hint={translate({
+          id: 'hintUserName',
+          lang
+        })}
+      />
+
+      <Form.Input
+        label={<Translate id="password" />}
+        type="password"
+        name="password"
+        autoComplete="off"
+        required
+        placeholder={translate({
+          id: 'enterPassword',
+          lang
+        })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        hint={<Translate id="hintPassword" />}
+      />
+
+      <Form.CheckBox
+        name="tos"
+        checked={values.tos}
+        error={touched.tos && errors.tos}
+        onChange={handleChange}
+        hint={
+          <>
+            <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+
+            <Link {...PATHS.MISC_TOS}>
+              <a className="u-link-green" target="_blank">
+                &nbsp;
+                <Translate
+                  zh_hant="Matters 用戶協議和隱私政策"
+                  zh_hans="Matters 用户协议和隐私政策"
+                />
+              </a>
+            </Link>
+          </>
+        }
+        required
+      />
+
+      {isInDialog && <LoginDialogButton />}
+      {isInPage && <LoginRedirectionButton />}
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting}
+      text={<Translate id="nextStep" />}
+      loading={isSubmitting}
+    />
+  )
+
+  if (isInPage) {
+    return (
+      <>
+        <PageHeader title={<Translate id="register" />} hasNoBorder>
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {closeDialog && (
+        <Dialog.Header
+          title={<Translate id="register" />}
+          close={closeDialog}
+          rightButton={SubmitButton}
+        />
+      )}
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
+    </>
   )
 }

@@ -12,7 +12,7 @@ import {
   PopperInstance
 } from '~/components'
 
-import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
+import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 
 import AutoComplete from './AutoComplete'
@@ -29,7 +29,7 @@ const SearchButton = () => (
   </Button>
 )
 
-const BaseSearchBar: React.FC<{
+export const SearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
@@ -37,11 +37,7 @@ const BaseSearchBar: React.FC<{
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({
-    zh_hant: TEXT.zh_hant.search,
-    zh_hans: TEXT.zh_hans.search,
-    lang
-  })
+  const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = translate({
     zh_hant: '搜尋作品、標籤、作者',
     zh_hans: '搜索作品、标签、作者',
@@ -109,7 +105,6 @@ const BaseSearchBar: React.FC<{
               hidePopperOnClick(instance)
             }}
             onCreate={instance => (instanceRef.current = instance)}
-            theme="dropdown shadow-light"
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>
@@ -140,5 +135,3 @@ const BaseSearchBar: React.FC<{
     </Formik>
   )
 }
-
-export const SearchBar = BaseSearchBar

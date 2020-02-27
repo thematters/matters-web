@@ -27,7 +27,7 @@ const Fingerprint = ({ article }: { article: FingerprintArticle }) => {
             color="grey"
             weight="md"
           >
-            <Translate zh_hant="分佈式入口" zh_hans="分布式入口" />
+            <Translate id="IPFSEntrance" />
           </TextIcon>
         </Button>
       )}

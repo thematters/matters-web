@@ -4,7 +4,7 @@ import { Button, Icon, IconSize, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import { subscribePush } from '~/common/utils'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
@@ -58,18 +58,10 @@ const Subscribe = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: (
-            <Translate
-              zh_hant={TEXT.zh_hant.pushDescription}
-              zh_hans={TEXT.zh_hans.pushDescription}
-            />
-          ),
+          content: <Translate id="pushDescription" />,
           customButton: (
             <Button onClick={subscribePush}>
-              <Translate
-                zh_hant={TEXT.zh_hant.confirmPush}
-                zh_hans={TEXT.zh_hans.confirmPush}
-              />
+              <Translate id="confirmPush" />
             </Button>
           ),
           buttonPlacement: 'center'

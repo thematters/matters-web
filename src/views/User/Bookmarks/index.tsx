@@ -1,18 +1,11 @@
 import { Head, UserProfile } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import UserTabs from '../UserTabs'
 import MeBookmarks from './MeBookmarks'
 
 export default () => (
   <main>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.bookmark,
-        zh_hans: TEXT.zh_hans.bookmark
-      }}
-    />
+    <Head title={{ id: 'bookmark' }} />
 
     <UserProfile />
 

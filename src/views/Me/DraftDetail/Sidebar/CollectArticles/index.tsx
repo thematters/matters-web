@@ -125,7 +125,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
 
   return (
     <Collapsable
-      title={<Translate zh_hant="關聯" zh_hans="关联" />}
+      title={<Translate id="extend" />}
       defaultCollapsed={draft.collection.totalCount <= 0}
     >
       <p className="intro">

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Icon, Menu, PopperInstance, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -31,38 +31,34 @@ const fragments = {
 }
 
 const SetTagSelectedButton = ({
-  article,
-  instance
+  article
 }: {
   article: SetTagSelectedButtonArticle
-  instance?: PopperInstance | null
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
     variables: { id: router.query.id, articles: [article.id] }
   })
 
-  const sync = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate zh_hant="文章已添加至精選" zh_hans="文章已添加至精选" />
-          ),
-          duration: 2000
-        }
-      })
-    )
-  }
-
   return (
     <Menu.Item
       onClick={async () => {
         await update()
-        if (instance) {
-          instance.props.onHidden = sync
-        }
+
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: (
+                <Translate
+                  zh_hant="文章已添加至精選"
+                  zh_hans="文章已添加至精选"
+                />
+              ),
+              duration: 2000
+            }
+          })
+        )
       }}
     >
       <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">

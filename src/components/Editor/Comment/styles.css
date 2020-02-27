@@ -7,6 +7,6 @@
 }
 
 .collapsed-input {
-  @mixin text-input;
+  @mixin form-input-grey;
   height: 2.5rem;
 }

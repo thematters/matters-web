@@ -1,22 +1,12 @@
 import { PageHeader, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import { LanguageSwitch } from './LanguageSwitch'
 import styles from './styles.css'
 
 export default () => {
   return (
     <section className="section-container">
-      <PageHeader
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.uiSetting}
-            zh_hans={TEXT.zh_hans.uiSetting}
-          />
-        }
-        is="h2"
-      />
+      <PageHeader title={<Translate id="uiSetting" />} is="h2" />
 
       <section className="setting-section">
         <div className="left">

@@ -46,7 +46,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         type="button"
         ref={btnRef}
         disabled={disabled}
-        aria-disabled={disabled}
         onClick={() => {
           if (btnRef.current) {
             clap.clap(btnRef.current, !!inFixedToolbar)

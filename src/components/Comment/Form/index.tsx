@@ -15,7 +15,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
@@ -132,17 +132,11 @@ const CommentForm = ({
             content: skipPushButton ? (
               CommentSent
             ) : (
-              <Translate
-                zh_hant={TEXT.zh_hant.pushDescription}
-                zh_hans={TEXT.zh_hans.pushDescription}
-              />
+              <Translate id="pushDescription" />
             ),
             customButton: !skipPushButton && (
               <Button onClick={subscribePush}>
-                <Translate
-                  zh_hant={TEXT.zh_hant.confirmPush}
-                  zh_hans={TEXT.zh_hans.confirmPush}
-                />
+                <Translate id="confirmPush" />
               </Button>
             ),
             buttonPlacement: 'center'

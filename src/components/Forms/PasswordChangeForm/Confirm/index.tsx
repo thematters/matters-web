@@ -1,13 +1,20 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
-
-import { TEXT } from '~/common/enums'
 import {
+  Dialog,
+  Form,
+  LanguageContext,
+  PageHeader,
+  Translate
+} from '~/components'
+import { useMutation } from '~/components/GQL'
+
+import {
+  filterFormErrors,
+  parseFormSubmitErrors,
+  randomString,
   translate,
   validateComparedPassword,
   validatePassword
@@ -17,8 +24,10 @@ import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
   codeId: string
-  backPreviousStep: (event: any) => void
+  type: 'forget' | 'change'
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -34,11 +43,17 @@ export const RESET_PASSWORD = gql`
 
 export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   codeId,
-  backPreviousStep,
-  submitCallback
+  type,
+  purpose,
+  submitCallback,
+  closeDialog
 }) => {
   const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
   const { lang } = useContext(LanguageContext)
+
+  const isForget = type === 'forget'
+  const isInPage = purpose === 'page'
+  const formId = randomString()
 
   const {
     values,
@@ -47,26 +62,22 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
       comparedPassword: ''
     },
-    validate: ({ password, comparedPassword }) => {
-      const isInvalidPassword = validatePassword(password, lang)
-      const isInvalidComparedPassword = validateComparedPassword(
-        password,
-        comparedPassword,
-        lang
-      )
-      return {
-        ...(isInvalidPassword ? { password: isInvalidPassword } : {}),
-        ...(isInvalidComparedPassword
-          ? { comparedPassword: isInvalidComparedPassword }
-          : {})
-      }
-    },
+    validate: ({ password, comparedPassword }) =>
+      filterFormErrors({
+        password: validatePassword(password, lang),
+        comparedPassword: validateComparedPassword(
+          password,
+          comparedPassword,
+          lang
+        )
+      }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await reset({
@@ -78,77 +89,84 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           submitCallback()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
-        })
-        setFieldError('password', errorMessage)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('password', messages[codes[0]])
       }
 
       setSubmitting(false)
     }
   })
 
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="password" />}
+        type="password"
+        name="password"
+        required
+        placeholder={translate({ id: 'enterPassword', lang })}
+        value={values.password}
+        error={touched.password && errors.password}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
+      <Form.Input
+        label={<Translate id="newPassword" />}
+        type="password"
+        name="comparedPassword"
+        required
+        placeholder={translate({ id: 'enterPasswordAgain', lang })}
+        value={values.comparedPassword}
+        error={touched.comparedPassword && errors.comparedPassword}
+        hint={<Translate id="hintPassword" />}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting}
+      text={<Translate id="confirm" />}
+      loading={isSubmitting}
+    />
+  )
+
+  const Title = isForget ? (
+    <Translate id="resetPassword" />
+  ) : (
+    <Translate id="changePassword" />
+  )
+
+  if (isInPage) {
+    return (
+      <>
+        <PageHeader title={Title} hasNoBorder>
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
-        <Form.Input
-          type="password"
-          field="password"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPassword,
-            zh_hans: TEXT.zh_hans.enterPassword,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          hint={translate({
-            zh_hant: TEXT.zh_hant.passwordHint,
-            zh_hans: TEXT.zh_hans.passwordHint,
-            lang
-          })}
+    <>
+      {closeDialog && (
+        <Dialog.Header
+          title={Title}
+          close={closeDialog}
+          rightButton={SubmitButton}
         />
-        <Form.Input
-          type="password"
-          field="comparedPassword"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterPasswordAgain,
-            zh_hans: TEXT.zh_hans.enterPasswordAgain,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
+      )}
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
       </Dialog.Content>
-
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          onClick={backPreviousStep}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.previousStep}
-            zh_hans={TEXT.zh_hans.previousStep}
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate zh_hant={TEXT.zh_hant.done} zh_hans={TEXT.zh_hans.done} />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </form>
+    </>
   )
 }

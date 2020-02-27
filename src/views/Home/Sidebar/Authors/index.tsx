@@ -74,7 +74,7 @@ const Authors = () => {
               size="xs"
               weight="md"
             >
-              <Translate zh_hant="換一批" zh_hans="换一批" />
+              <Translate id="shuffle" />
             </TextIcon>
           </Button>
         }

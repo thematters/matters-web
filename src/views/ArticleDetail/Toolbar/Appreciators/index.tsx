@@ -45,12 +45,13 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   }
 
   return (
-    <AppreciatorsDialog count={count}>
+    <AppreciatorsDialog>
       {({ open }) => (
         <button
           type="button"
           className="container"
           aria-label="查看所有讚賞者"
+          aria-haspopup="true"
           onClick={open}
         >
           <section className="avatar-list">

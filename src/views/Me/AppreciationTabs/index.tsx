@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
 
@@ -32,10 +32,7 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
         selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
         sup={activity.appreciationsSentTotal}
       >
-        <Translate
-          zh_hant={TEXT.zh_hant.appreciationsSent}
-          zh_hans={TEXT.zh_hans.appreciationsSent}
-        />
+        <Translate id="appreciationsSent" />
       </Tabs.Tab>
 
       <Tabs.Tab
@@ -43,10 +40,7 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
         selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
         sup={activity.appreciationsReceivedTotal}
       >
-        <Translate
-          zh_hant={TEXT.zh_hant.appreciationsReceived}
-          zh_hans={TEXT.zh_hans.appreciationsReceived}
-        />
+        <Translate id="appreciationsReceived" />
       </Tabs.Tab>
     </Tabs>
   )

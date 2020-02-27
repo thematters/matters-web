@@ -21,14 +21,12 @@ html {
 }
 
 main {
-  min-height: 100%;
-  margin-top: calc(var(--spacing-x-loose) + var(--global-header-height) + 1px);
+  min-height: 100vh;
+  margin-top: calc(var(--spacing-x-loose) + var(--global-header-height));
   margin-bottom: var(--spacing-xx-loose);
 
   @media (--sm-up) {
-    margin-top: calc(
-      var(--spacing-xx-loose) + var(--global-header-height) + 1px
-    );
+    margin-top: calc(var(--spacing-xx-loose) + var(--global-header-height));
   }
 }
 
@@ -80,7 +78,7 @@ video {
 }
 
 hr {
-  @mixin border-top-grey;
+  @mixin shadow-border-top-grey;
 
   display: block;
 
@@ -88,13 +86,7 @@ hr {
   height: 1px;
   margin: 0;
 
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-
-  &.light {
-    border-color: var(--color-line-grey-light);
-  }
+  border: 0;
 }
 
 code,

@@ -2,8 +2,6 @@ import gql from 'graphql-tag'
 
 import { Button, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import { FollowStateUser } from './__generated__/FollowStateUser'
 
 const FollowState = ({ user }: { user: FollowStateUser }) => {
@@ -21,15 +19,9 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
     >
       <TextIcon size="xs" color="grey" weight="md">
         {user.isFollowee ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.mutualFollowing}
-            zh_hans={TEXT.zh_hans.mutualFollowing}
-          />
+          <Translate id="mutualFollowing" />
         ) : (
-          <Translate
-            zh_hant={TEXT.zh_hant.followingYou}
-            zh_hans={TEXT.zh_hans.followingYou}
-          />
+          <Translate id="followingYou" />
         )}
       </TextIcon>
     </Button>

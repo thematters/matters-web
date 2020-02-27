@@ -1,0 +1,32 @@
+ul {
+  overflow: hidden;
+
+  & :global(> li) {
+    @mixin border-top-grey;
+    @mixin border-bottom-grey;
+  }
+
+  & :global(> li + li) {
+    border-top: none;
+  }
+
+  @media (--sm-up) {
+    margin-left: var(--spacing-base);
+    margin-right: var(--spacing-base);
+
+    border-radius: 0.5rem;
+
+    & :global(> li) {
+      border: none;
+    }
+
+    & :global(> li + li) {
+      border-top: 1px solid var(--color-white);
+    }
+  }
+}
+
+.spacing-xloose {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: var(--spacing-x-loose);
+}

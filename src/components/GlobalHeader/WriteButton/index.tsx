@@ -12,8 +12,13 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
+import {
+  analytics,
+  parseFormSubmitErrors,
+  toPath,
+  translate
+} from '~/common/utils'
 
 import { CreateDraft } from './__generated__/CreateDraft'
 
@@ -54,10 +59,7 @@ const WriteButton = ({
         aria-label="創作"
       >
         <TextIcon icon={WriteIcon} weight="md" color="white">
-          <Translate
-            zh_hant={TEXT.zh_hant.write}
-            zh_hans={TEXT.zh_hans.write}
-          />
+          <Translate id="write" />
         </TextIcon>
       </Button>
 
@@ -78,11 +80,7 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
-      title: translate({
-        zh_hans: TEXT.zh_hans.untitle,
-        zh_hant: TEXT.zh_hant.untitle,
-        lang
-      })
+      title: translate({ id: 'untitle', lang })
     }
   })
 
@@ -106,8 +104,16 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
             const path = toPath({ page: 'draftDetail', slug, id })
             Router.push(path.as)
           }
-        } catch (e) {
-          // TODO
+        } catch (error) {
+          const [messages, codes] = parseFormSubmitErrors(error, lang)
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: messages[codes[0]]
+              }
+            })
+          )
         }
       }}
       loading={loading}

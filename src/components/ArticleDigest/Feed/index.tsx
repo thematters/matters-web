@@ -87,7 +87,7 @@ export const ArticleDigestFeed = ({
             color="grey"
             weight="md"
           >
-            <Translate zh_hant="置頂作品" zh_hans="置顶作品" />
+            <Translate id="stickyArticle" />
           </TextIcon>
         </section>
       )}

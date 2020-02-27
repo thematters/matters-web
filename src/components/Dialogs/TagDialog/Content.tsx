@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
 import Router from 'next/router'
 import { useContext } from 'react'
 
@@ -12,11 +11,17 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
-import { numAbbr, toPath, translate } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums'
+import {
+  numAbbr,
+  parseFormSubmitErrors,
+  randomString,
+  toPath,
+  translate
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -101,7 +106,7 @@ interface TagDialogContentProps {
   id?: string
   content?: string
   description?: string
-  close: () => void
+  closeDialog: () => void
 }
 
 interface FormValues {
@@ -113,10 +118,13 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   id,
   content,
   description,
-  close
+  closeDialog
 }) => {
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
+
+  const formId = randomString()
+
   const {
     values,
     errors,
@@ -125,6 +133,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
+    isValid,
     setFieldValue
   } = useFormik<FormValues>({
     initialValues: {
@@ -153,22 +162,11 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           variables: { id, content: newContent, description: newDescription }
         })
 
-        setSubmitting(false)
-
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate
-                  zh_hant={
-                    id ? TEXT.zh_hant.tagEdited : TEXT.zh_hant.tagCreated
-                  }
-                  zh_hans={
-                    id ? TEXT.zh_hans.tagEdited : TEXT.zh_hans.tagCreated
-                  }
-                />
-              ),
+              content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
               duration: 2000
             }
           })
@@ -181,103 +179,74 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
           Router.push(path.as)
         } else {
-          close()
+          closeDialog()
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant:
-            TEXT.zh_hant.error[errorCode] || TEXT.zh_hant.error.UNKNOWN_ERROR,
-          zh_hans:
-            TEXT.zh_hans.error[errorCode] || TEXT.zh_hans.error.UNKNOWN_ERROR,
-          lang
-        })
-        setFieldError('content', errorMessage)
-        setSubmitting(false)
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('newContent', messages[codes[0]])
       }
+
+      setSubmitting(false)
     }
   })
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
 
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.DropdownInput
+        label={<Translate id="tagName" />}
+        type="text"
+        name="newContent"
+        placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
+        value={values.newContent}
+        error={touched.newContent && errors.newContent}
+        onBlur={e => {
+          setFieldValue('content', e.target.value.trim())
+          handleBlur(e)
+        }}
+        onChange={handleChange}
+        dropdownAppendTo={formId}
+        dropdownAutoSizing={true}
+        DropdownContent={DropdownContent}
+        query={SEARCH_TAGS}
+      />
+
+      <Form.Textarea
+        label={<Translate id="tagDescription" />}
+        name="newDescription"
+        placeholder={translate({ id: 'tagDescriptionPlaceholder', lang })}
+        value={values.newDescription}
+        error={touched.newDescription && errors.newDescription}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        required
+      />
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      text={<Translate id="confirm" />}
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting}
+      loading={isSubmitting}
+    />
+  )
+
   return (
-    <form id="tag-dialog" onSubmit={handleSubmit}>
-      <Dialog.Content>
-        <p className="field">
-          <Translate
-            zh_hant={TEXT.zh_hant.tagName}
-            zh_hans={TEXT.zh_hans.tagName}
-          />
-        </p>
-        <Form.DropdownInput
-          type="text"
-          field="newContent"
-          placeholder={translate({
-            zh_hant: id ? TEXT.zh_hant.tagName : TEXT.zh_hant.searchTag,
-            zh_hans: id ? TEXT.zh_hans.tagName : TEXT.zh_hans.searchTag,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={(e: any) => {
-            setFieldValue('content', e.target.value.trim())
-            handleBlur(e)
-          }}
-          handleChange={handleChange}
-          dropdownAppendTo="tag-dialog"
-          dropdownAutoSizing={true}
-          DropdownContent={DropdownContent}
-          query={SEARCH_TAGS}
-        />
-        <p className="field">
-          <Translate
-            zh_hant={TEXT.zh_hant.tagDescription}
-            zh_hans={TEXT.zh_hans.tagDescription}
-          />
-        </p>
-        <Form.Textarea
-          field="newDescription"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.tagDescriptionPlaceholder,
-            zh_hans: TEXT.zh_hans.tagDescriptionPlaceholder,
-            lang
-          })}
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          style={{ height: '5rem' }}
-        />
+    <>
+      <Dialog.Header
+        title={<Translate id={content ? 'editTag' : 'createTag'} />}
+        close={closeDialog}
+        rightButton={SubmitButton}
+      />
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
       </Dialog.Content>
-
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.confirm}
-            zh_hans={TEXT.zh_hans.confirm}
-          />
-        </Dialog.Footer.Button>
-
-        <Dialog.Footer.Button
-          onClick={close}
-          bgColor="grey-lighter"
-          textColor="black"
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.cancel}
-            zh_hans={TEXT.zh_hans.cancel}
-          />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-
-      <style jsx>{styles}</style>
-    </form>
+    </>
   )
 }
 

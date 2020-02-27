@@ -89,9 +89,9 @@ const Notifications = () => {
 export default () => (
   <main className="l-row">
     <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ zh_hant: '全部通知', zh_hans: '全部通知' }} />
+      <Head title={{ id: 'allNotification' }} />
 
-      <PageHeader title={<Translate zh_hant="全部通知" zh_hans="全部通知" />} />
+      <PageHeader title={<Translate id="allNotification" />} />
 
       <section>
         <Notifications />

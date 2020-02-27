@@ -1,84 +1,72 @@
-import classNames from 'classnames'
+import autosize from 'autosize'
+import { useEffect, useRef } from 'react'
 
+import { randomString } from '~/common/utils'
+
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 /**
- * This component is for rendering textarea for <Formik>.
+ * Pure UI component for <textarea> element
  *
  * Usage:
  *
  * ```jsx
  *   <Form.Textarea
- *     className={[]}
- *     field="description"
- *     placeholder="description"
- *     hint="hint"
- *     style={{}}
- *     values={{}},
- *     errors={{}},
- *     touched={{}},
- *     handleBlur={()=>{}},
- *     handleChange={()=>{}}
+ *     type="email"
+ *     error="xxx"
+ *     hint="xxx"
+ *     ...other <textarea> props...
  *   />
  * ```
  *
  */
+type TextareaProps = {
+  name: string
+} & Omit<FieldProps, 'fieldMsgId'> &
+  React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+  >
 
-interface Props {
-  className?: string[]
-  field: string
-  placeholder: string
-  hint?: string
-  style?: React.CSSProperties
+const Textarea: React.FC<TextareaProps> = ({
+  name,
+  label,
+  extraButton,
 
-  values: any
-  errors: any
-  touched: any
-  handleBlur: any
-  handleChange: any
-
-  [key: string]: any
-}
-
-const Textarea: React.FC<Props> = ({
-  className = [],
-  field,
-  placeholder,
   hint,
-  style,
+  error,
 
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange
+  ...textareaProps
 }) => {
-  const textareaClass = classNames('textarea', ...className)
-  const value = values[field]
-  const error = errors[field]
-  const isTouched = touched[field]
+  const node: React.RefObject<any> | null = useRef(null)
+  const fieldId = randomString()
+  const fieldMsgId = randomString()
+
+  useEffect(() => {
+    if (node && node.current) {
+      autosize(node.current)
+    }
+  }, [])
 
   return (
-    <>
-      <div className="container">
-        <textarea
-          className={textareaClass}
-          name={field}
-          placeholder={placeholder}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={value}
-          style={style}
-        />
-      </div>
+    <Field>
+      <Field.Header label={label} htmlFor={fieldId} extraButton={extraButton} />
 
-      <div className="info">
-        {error && isTouched && <div className="error">{error}</div>}
-        {!error && hint && <div className="hint">{hint}</div>}
-      </div>
+      <Field.Content>
+        <textarea
+          ref={node}
+          {...textareaProps}
+          id={fieldId}
+          name={name}
+          aria-describedby={fieldMsgId}
+        />
+      </Field.Content>
+
+      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
       <style jsx>{styles}</style>
-    </>
+    </Field>
   )
 }
 

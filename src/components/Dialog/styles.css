@@ -15,8 +15,9 @@
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
 
-  &.no-header {
-    padding-top: var(--spacing-x-loose);
+  &.fixed-height {
+    height: 80vh;
+    height: calc(var(--vh) * 90);
   }
 
   @media (--sm-up) {
@@ -24,6 +25,10 @@
 
     &.no-header {
       padding-top: 0;
+    }
+
+    &.fixed-height {
+      height: auto;
     }
   }
 }

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Button, Dialog, Icon, Spinner, Translate } from '~/components'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import { dom } from '~/common/utils'
 
 import styles from './styles.css'
@@ -31,12 +31,7 @@ const CopyButton = ({ text }: { text: string }) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: (
-            <Translate
-              zh_hant={TEXT.zh_hant.copySuccess}
-              zh_hans={TEXT.zh_hans.copySuccess}
-            />
-          )
+          content: <Translate id="successCopy" />
         }
       })
     )
@@ -65,10 +60,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
       <section className="hash">
         <header>
           <h4>
-            <Translate
-              zh_hant={TEXT.zh_hant.articleFingerprint}
-              zh_hans={TEXT.zh_hans.articleFingerprint}
-            />
+            <Translate id="articleFingerprint" />
           </h4>
           <CopyButton text={dataHash} />
         </header>
@@ -166,11 +158,9 @@ const FingerprintDialog = ({
     <>
       {children({ open })}
 
-      <Dialog
-        title={<Translate zh_hant="分佈式入口" zh_hans="分布式入口" />}
-        isOpen={showDialog}
-        onDismiss={close}
-      >
+      <Dialog isOpen={showDialog} onDismiss={close}>
+        <Dialog.Header title={<Translate id="IPFSEntrance" />} close={close} />
+
         <Dialog.Content spacing={[0, 0]}>
           <FingerprintDialogContent {...restProps} />
         </Dialog.Content>

@@ -1,0 +1,9 @@
+form {
+  background: var(--color-grey-lighter);
+
+  border-radius: 0 0 0.5rem 0.5rem;
+
+  @media (--sm-up) {
+    background: var(--color-white);
+  }
+}

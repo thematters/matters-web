@@ -3,7 +3,6 @@ import { Fragment } from 'react'
 
 import { Icon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
@@ -42,10 +41,7 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate
-            zh_hant={TEXT.zh_hant.followingYou}
-            zh_hans={TEXT.zh_hans.followingYou}
-          />
+          <Translate id="followingYou" />
         </NoticeHead>
 
         {isMultiActors ? (

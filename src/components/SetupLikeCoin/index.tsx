@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { SignUpComplete } from '~/components'
+import { Dialog, PageHeader, SignUpComplete, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -12,10 +12,19 @@ import Select from './Select'
 type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 interface Props {
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  closeDialog?: () => void
 }
 
-export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
+export const SetupLikeCoin: React.FC<Props> = ({
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
+  const isInDialog = purpose === 'dialog'
+  const isInPage = purpose === 'page'
+
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -39,6 +48,17 @@ export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
 
   return (
     <>
+      {isInPage && (
+        <PageHeader title={<Translate id="setupLikeCoin" />} hasNoBorder />
+      )}
+
+      {isInDialog && closeDialog && (
+        <Dialog.Header
+          title={<Translate id="setupLikeCoin" />}
+          close={closeDialog}
+        />
+      )}
+
       {step === 'select' && (
         <Select
           startGenerate={() => setStep('generating')}
@@ -50,9 +70,11 @@ export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
           }}
         />
       )}
+
       {step === 'generating' && (
         <Generating prevStep={backToSelect} nextStep={complete} />
       )}
+
       {step === 'binding' && (
         <Binding
           prevStep={backToSelect}
@@ -60,6 +82,7 @@ export const SetupLikeCoin: React.FC<Props> = ({ submitCallback }) => {
           windowRef={bindingWindowRef}
         />
       )}
+
       {step === 'complete' && <SignUpComplete />}
     </>
   )

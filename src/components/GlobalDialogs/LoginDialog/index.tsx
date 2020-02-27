@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { Dialog, LoginForm, Translate, useEventListener } from '~/components'
+import { Dialog, LoginForm, useEventListener } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, TEXT } from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG } from '~/common/enums'
 
 const LoginDialog = () => {
   const [showDialog, setShowDialog] = useState(false)
@@ -13,14 +13,8 @@ const LoginDialog = () => {
   useEventListener(OPEN_LOGIN_DIALOG, open)
 
   return (
-    <Dialog
-      title={
-        <Translate zh_hant={TEXT.zh_hant.login} zh_hans={TEXT.zh_hans.login} />
-      }
-      isOpen={showDialog}
-      onDismiss={close}
-    >
-      <LoginForm purpose="dialog" submitCallback={close} />
+    <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <LoginForm purpose="dialog" submitCallback={close} closeDialog={close} />
     </Dialog>
   )
 }

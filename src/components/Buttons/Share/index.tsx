@@ -1,7 +1,9 @@
-import { Button, Icon, IconColor, IconSize, ShareDialog } from '~/components'
+import { Button, Icon, IconColor, IconSize } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
+
+import { ShareDialog } from './ShareDialog'
 
 interface ShareButtonProps {
   title?: string
@@ -23,15 +25,18 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
       ? `${window.location.origin}/${path}`
       : window.location.href
     : ''
-  const shareTitle = process.browser ? title || window.document.title : ''
+  const shareTitle =
+    title || (process.browser ? window.document.title || '' : '')
+  const ariaTitle = `分享 ${shareTitle}`
 
   return (
-    <ShareDialog title={shareTitle} link={shareLink}>
+    <ShareDialog title={ariaTitle} link={shareLink}>
       {({ open }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgHoverColor="grey-lighter"
-          aria-label={`分享《${title || ''}》`}
+          aria-label={ariaTitle}
+          aria-haspopup="true"
           onClick={async () => {
             const navigator = window.navigator as any
 

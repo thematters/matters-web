@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { Button, Icon, TextIcon, Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
@@ -56,10 +56,7 @@ const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
               weight="md"
               textPlacement="left"
             >
-              <Translate
-                zh_hant={TEXT.zh_hant.viewAll}
-                zh_hans={TEXT.zh_hans.viewAll}
-              />
+              <Translate id="viewAll" />
             </TextIcon>
           </Button>
         )}

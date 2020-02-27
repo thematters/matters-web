@@ -7,6 +7,7 @@ import {
   InfiniteList,
   RowRendererProps,
   Spinner,
+  Translate,
   UserDigest,
   useResponsive
 } from '~/components'
@@ -72,7 +73,11 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
   )
 }
 
-const AppreciatorsDialogContent = () => {
+const AppreciatorsDialogContent = ({
+  closeDialog
+}: {
+  closeDialog: () => void
+}) => {
   const isSmallUp = useResponsive({ type: 'sm-up' })()
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -134,21 +139,33 @@ const AppreciatorsDialogContent = () => {
   const defaultListMaxHeight = calcContentMaxHeight()
 
   return (
-    <Dialog.Content spacing={[0, 0]}>
-      <div className="dialog-appreciators-list">
-        <InfiniteList
-          data={edges}
-          defaultListMaxHeight={defaultListMaxHeight}
-          defaultRowHeight={70}
-          loader={<Spinner />}
-          loadMore={loadMore}
-          parentProps={{ articleId: article.id }}
-          renderer={ListRow}
-          totalCount={totalCount}
-        />
-      </div>
-      <style jsx>{styles}</style>
-    </Dialog.Content>
+    <>
+      <Dialog.Header
+        title={
+          <Translate
+            zh_hant={`${totalCount} 人讚賞了作品`}
+            zh_hans={`${totalCount} 人赞赏了作品`}
+          />
+        }
+        close={closeDialog}
+      />
+
+      <Dialog.Content spacing={[0, 0]}>
+        <div className="dialog-appreciators-list">
+          <InfiniteList
+            data={edges}
+            defaultListMaxHeight={defaultListMaxHeight}
+            defaultRowHeight={70}
+            loader={<Spinner />}
+            loadMore={loadMore}
+            parentProps={{ articleId: article.id }}
+            renderer={ListRow}
+            totalCount={totalCount}
+          />
+        </div>
+        <style jsx>{styles}</style>
+      </Dialog.Content>
+    </>
   )
 }
 

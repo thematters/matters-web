@@ -1,6 +1,6 @@
 header {
   @mixin flex-center-space-between;
-  @mixin border-bottom-grey;
+  @mixin shadow-border-bottom-grey;
   flex-shrink: 0;
   position: relative;
   padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-x-tight);
@@ -34,5 +34,13 @@ header {
     & h1 {
       padding: 0;
     }
+  }
+}
+
+.spacing-holder {
+  padding: var(--spacing-base);
+
+  @media (--sm-up) {
+    padding: 0;
   }
 }

@@ -1,101 +1,66 @@
-import classNames from 'classnames'
+import { randomString } from '~/common/utils'
 
+import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
 /**
- * This component is for rendering text input for <Formik>.
+ * Pure UI component for <input> element
  *
  * Usage:
  *
  * ```jsx
  *   <Form.Input
- *     className={[]}
  *     type="email"
- *     field="email"
- *     placeholder="email"
- *     floatElement={<>}
- *     hint="hint"
- *     style={{}}
- *     values={{}},
- *     errors={{}},
- *     touched={{}},
- *     handleBlur={()=>{}},
- *     handleChange={()=>{}}
+ *     error="xxx"
+ *     hint="xxx"
+ *     ...other <input> props...
  *   />
  * ```
  *
  */
 
-interface Props {
-  className?: string[]
-  type: 'text' | 'password' | 'email'
-  field: string
-  placeholder?: string
-  floatElement?: any
-  hint?: string
-  style?: React.CSSProperties
+type InputProps = {
+  type: 'text' | 'password' | 'email' | 'number'
+  name: string
+} & Omit<FieldProps, 'fieldMsgId'> &
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 
-  values: any
-  errors: any
-  touched: any
-  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-
-  [key: string]: any
-}
-
-const Input: React.FC<Props> = ({
-  className = [],
+const Input: React.FC<InputProps> = ({
   type,
-  field,
-  placeholder,
-  floatElement,
+
+  name,
+  label,
+  extraButton,
+
   hint,
-  style,
+  error,
 
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange,
-
-  ...restProps
+  ...inputProps
 }) => {
-  const inputClass = classNames('input', ...className)
-  const containerClass = classNames({
-    container: true,
-    'has-float': floatElement
-  })
-
-  const value = values[field]
-  const error = errors[field]
-  const isTouched = touched[field]
+  const fieldId = randomString()
+  const fieldMsgId = randomString()
 
   return (
-    <>
-      <div className={containerClass}>
-        <input
-          className={inputClass}
-          type={type}
-          name={field}
-          placeholder={placeholder}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={value}
-          style={style}
-          {...restProps}
-        />
-        {floatElement && <div className="float-right">{floatElement}</div>}
+    <Field>
+      <Field.Header htmlFor={fieldId} label={label} extraButton={extraButton} />
 
-        <div className="info">
-          {error && isTouched && <div className="error">{error}</div>}
-          {/* {error && <div className="error">{error}</div>} */}
-          {(!error || !isTouched) && hint && <div className="hint">{hint}</div>}
-        </div>
-      </div>
+      <Field.Content>
+        <input
+          {...inputProps}
+          id={fieldId}
+          name={name}
+          type={type}
+          aria-describedby={fieldMsgId}
+        />
+      </Field.Content>
+
+      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
       <style jsx>{styles}</style>
-    </>
+    </Field>
   )
 }
 

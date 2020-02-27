@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { TEXT } from '~/common/enums'
-
 import { DeleteComment } from './__generated__/DeleteComment'
 
 const DELETE_COMMENT = gql`
@@ -33,10 +31,7 @@ const DeleteButton: React.FC<{
   return (
     <Menu.Item onClick={deleteComment}>
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
-        <Translate
-          zh_hant={TEXT.zh_hant.delete}
-          zh_hans={TEXT.zh_hant.delete}
-        />
+        <Translate id="delete" />
       </TextIcon>
     </Menu.Item>
   )

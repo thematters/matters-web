@@ -73,8 +73,7 @@ export const LanguageSwitch = () => {
       }}
       dialog={{
         content: <Content type="dialog" />,
-        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />,
-        showHeader: false
+        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />
       }}
     >
       {({ open, ref }) => (

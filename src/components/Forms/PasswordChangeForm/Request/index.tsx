@@ -1,26 +1,34 @@
 import { useFormik } from 'formik'
-import _isEmpty from 'lodash/isEmpty'
 import { useContext } from 'react'
 
 import {
   Dialog,
   Form,
   LanguageContext,
+  PageHeader,
   SendCodeButton,
   Translate
 } from '~/components'
-import { getErrorCodes, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { TEXT } from '~/common/enums'
-import { translate, validateCode, validateEmail } from '~/common/utils'
+import {
+  filterFormErrors,
+  parseFormSubmitErrors,
+  randomString,
+  translate,
+  validateCode,
+  validateEmail
+} from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
 interface FormProps {
   defaultEmail: string
-  purpose: 'forget' | 'change'
+  type: 'forget' | 'change'
+  purpose: 'dialog' | 'page'
   submitCallback?: (params: any) => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -28,10 +36,19 @@ interface FormValues {
   code: string
 }
 
-export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
+export const PasswordChangeRequestForm: React.FC<FormProps> = ({
+  defaultEmail = '',
+  type,
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
-  const { defaultEmail = '', purpose, submitCallback } = formProps
+
+  const isForget = type === 'forget'
+  const isInPage = purpose === 'page'
+  const formId = randomString()
 
   const {
     values,
@@ -40,20 +57,18 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
     handleBlur,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    isValid
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
       code: ''
     },
-    validate: ({ email, code }) => {
-      const isInvalidEmail = validateEmail(email, lang, { allowPlusSign: true })
-      const isInvalidCode = validateCode(code, lang)
-      return {
-        ...(isInvalidEmail ? { email: isInvalidEmail } : {}),
-        ...(isInvalidCode ? { code: isInvalidCode } : {})
-      }
-    },
+    validate: ({ email, code }) =>
+      filterFormErrors({
+        email: validateEmail(email, lang, { allowPlusSign: true }),
+        code: validateCode(code, lang)
+      }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
@@ -65,86 +80,101 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = formProps => {
           submitCallback({ email, codeId: confirmVerificationCode })
         }
       } catch (error) {
-        const errorCode = getErrorCodes(error)[0]
-        const errorMessage = translate({
-          zh_hant: TEXT.zh_hant.error[errorCode] || errorCode,
-          zh_hans: TEXT.zh_hans.error[errorCode] || errorCode,
-          lang
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        codes.forEach(c => {
+          if (c.includes('CODE_')) {
+            setFieldError('code', messages[c])
+          } else {
+            setFieldError('email', messages[c])
+          }
         })
-
-        if (errorCode.indexOf('CODE_') >= 0) {
-          setFieldError('code', errorMessage)
-        } else {
-          setFieldError('email', errorMessage)
-        }
       }
 
       setSubmitting(false)
     }
   })
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <Dialog.Content spacing={['xxxloose', 'xloose']}>
-        <Form.Input
-          type="email"
-          field="email"
-          placeholder={
-            purpose === 'forget'
-              ? translate({
-                  zh_hant: TEXT.zh_hant.enterRegisteredEmail,
-                  zh_hans: TEXT.zh_hans.enterRegisteredEmail,
-                  lang
-                })
-              : translate({
-                  zh_hant: TEXT.zh_hant.enterEmail,
-                  zh_hans: TEXT.zh_hans.enterEmail,
-                  lang
-                })
-          }
-          values={values}
-          errors={errors}
-          disabled={!!defaultEmail}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-        <Form.Input
-          type="text"
-          field="code"
-          autoComplete="off"
-          placeholder={translate({
-            zh_hant: TEXT.zh_hant.enterVerificationCode,
-            zh_hans: TEXT.zh_hans.enterVerificationCode,
-            lang
-          })}
-          floatElement={
-            <SendCodeButton
-              email={values.email}
-              lang={lang}
-              type="password_reset"
-            />
-          }
-          values={values}
-          errors={errors}
-          touched={touched}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-        />
-      </Dialog.Content>
+  const InnerForm = (
+    <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="email" />}
+        type="email"
+        name="email"
+        required
+        placeholder={translate({
+          id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
+          lang
+        })}
+        value={values.email}
+        error={touched.email && errors.email}
+        disabled={!!defaultEmail}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          disabled={!_isEmpty(errors) || isSubmitting}
-          loading={isSubmitting}
-        >
-          <Translate
-            zh_hant={TEXT.zh_hant.nextStep}
-            zh_hans={TEXT.zh_hans.nextStep}
+      <Form.Input
+        label={<Translate id="verificationCode" />}
+        type="text"
+        name="code"
+        autoComplete="off"
+        required
+        placeholder={translate({ id: 'enterVerificationCode', lang })}
+        value={values.code}
+        error={touched.code && errors.code}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        extraButton={
+          <SendCodeButton
+            email={values.email}
+            type="password_reset"
+            disabled={!!errors.email}
           />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </form>
+        }
+      />
+    </Form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting}
+      text={<Translate id="nextStep" />}
+      loading={isSubmitting}
+    />
+  )
+
+  const Title = isForget ? (
+    <Translate id="resetPassword" />
+  ) : (
+    <Translate id="changePassword" />
+  )
+
+  if (isInPage) {
+    return (
+      <>
+        <PageHeader title={Title} hasNoBorder>
+          {SubmitButton}
+        </PageHeader>
+
+        {InnerForm}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {closeDialog && (
+        <Dialog.Header
+          title={Title}
+          close={closeDialog}
+          rightButton={SubmitButton}
+        />
+      )}
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
+    </>
   )
 }
