@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Translate } from '~/components'
+
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
@@ -65,7 +66,7 @@ export const Footer = () => {
       <BaseLink
         href={appHref}
         as={appAs}
-        text={<Translate zh_hant={'下載App'} zh_hans={'下载App'} />}
+        text={<Translate zh_hant="下載應用" zh_hans="下载应用" />}
       />
 
       <BaseLink

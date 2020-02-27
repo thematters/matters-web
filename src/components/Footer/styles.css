@@ -10,7 +10,6 @@
 .item {
   padding-bottom: var(--spacing-x-tight);
   padding-right: var(--spacing-loose);
-  min-width: 80px;
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
 }
