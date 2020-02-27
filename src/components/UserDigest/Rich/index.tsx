@@ -132,7 +132,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowButton user={user} />}
+          {hasFollow && <FollowButton user={user} size="md-s" />}
         </section>
 
         <style jsx>{styles}</style>
