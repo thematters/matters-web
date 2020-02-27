@@ -34,11 +34,10 @@ const Subscribe = ({
       }
     }
   )
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
-    CLIENT_PREFERENCE
-  )
-  const push =
-    clientPreferenceData && clientPreferenceData.clientPreference.push
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const push = data?.clientPreference.push
 
   const onClick = async () => {
     await subscribe()

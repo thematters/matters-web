@@ -22,7 +22,7 @@ const fragments = {
 }
 
 export const BlockUserButton = ({ user }: { user: BlockUser }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
 
   const [blockUser] = useMutation<BlockUserMutate>(BLOCK_USER, {
     variables: { id: user.id },

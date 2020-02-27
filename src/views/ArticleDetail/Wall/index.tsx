@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
 import { Button, Icon, SignUpButton, Translate } from '~/components'
@@ -9,11 +10,16 @@ import styles from './styles.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
-const Wall = ({ show, client }: any) => {
+interface WallProps {
+  show: boolean
+}
+
+const Wall = ({ show }: WallProps) => {
+  const client = useApolloClient()
   const outerClasses = classNames({ outer: true, show })
 
   const close = () => {
-    if (client && client.writeData) {
+    if (client?.writeData) {
       client.writeData({
         id: 'ClientPreference:local',
         data: { wall: false }

@@ -57,7 +57,7 @@ const CollectionList = ({
   setEditing: (editing: boolean) => void
   canEdit?: boolean
 }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     {
