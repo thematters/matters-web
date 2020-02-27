@@ -118,6 +118,7 @@ const NotificationButton = () => {
           refetch()
         }
       }}
+      appendTo={document.body}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <NoticeButton unread={unread} aria-haspopup="true" />

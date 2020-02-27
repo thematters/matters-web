@@ -28,6 +28,7 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
       dropdown={{
         content: <DropdownMenu type="dropdown" />,
         trigger: 'mouseenter focus click',
+        appendTo: process.browser ? document.body : undefined,
         zIndex: Z_INDEX.OVER_GLOBAL_HEADER
       }}
       dialog={{

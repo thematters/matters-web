@@ -105,6 +105,7 @@ export const SearchBar: React.FC<{
               hidePopperOnClick(instance)
             }}
             onCreate={instance => (instanceRef.current = instance)}
+            appendTo={document.body}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>
