@@ -1,4 +1,6 @@
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -35,6 +37,19 @@ type DropdownActionsProps = {
   article: DropdownActionsArticle
 } & DropdownActionsControls
 
+interface Controls {
+  hasExtendButton: boolean
+  hasRemoveTagButton: boolean
+  hasStickyButton: boolean
+  hasArchiveButton: boolean
+}
+
+interface DialogProps {
+  openArchiveDialog?: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
+
 const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
@@ -49,55 +64,27 @@ const fragments = {
   `
 }
 
-const DropdownActions = ({
+const BaseDropdownActions = ({
   article,
-
   color = 'grey',
   size,
-  inUserArticles,
+  hasExtendButton,
+  hasStickyButton,
+  hasArchiveButton,
+  hasRemoveTagButton,
   inTagDetailLatest,
-  inTagDetailSelected
-}: DropdownActionsProps) => {
-  const viewer = useContext(ViewerContext)
-  const isArticleAuthor = viewer.id === article.author.id
-  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
-  const isActive = article.articleState === 'active'
-  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
-  const hasExtendButton = isActive
-  const hasRemoveTagButton = isInTagDetail && isMattyUser
-  const hasStickyButton =
-    inUserArticles &&
-    !isInTagDetail &&
-    isArticleAuthor &&
-    isActive &&
-    !viewer.isInactive
-  const hasArchiveButton =
-    isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
-
-  if (
-    !hasExtendButton &&
-    !hasRemoveTagButton &&
-    !hasStickyButton &&
-    !hasArchiveButton
-  ) {
-    return null
-  }
-
-  const Content = ({
-    isInDropdown,
-    showArchiveDialog
-  }: {
-    isInDropdown?: boolean
-    showArchiveDialog: () => void
-  }) => (
+  inTagDetailSelected,
+  openArchiveDialog
+}: BaseDropdownActionsProps) => {
+  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
       {hasExtendButton && <ExtendButton article={article} />}
 
       {/* private */}
       {hasStickyButton && <StickyButton article={article} />}
-      {hasArchiveButton && (
-        <ArchiveArticle.Button showDialog={showArchiveDialog} />
+      {hasArchiveButton && openArchiveDialog && (
+        <ArchiveArticle.Button openDialog={openArchiveDialog} />
       )}
       {inTagDetailLatest && <SetTagSelectedButton article={article} />}
       {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
@@ -106,36 +93,79 @@ const DropdownActions = ({
   )
 
   return (
-    <ArchiveArticle.Dialog article={article}>
-      {({ open: showArchiveDialog }) => (
-        <DropdownDialog
-          dropdown={{
-            content: (
-              <Content isInDropdown showArchiveDialog={showArchiveDialog} />
-            ),
-            placement: 'bottom-end'
-          }}
-          dialog={{
-            content: <Content showArchiveDialog={showArchiveDialog} />,
-            title: <Translate id="moreActions" />
-          }}
+    <DropdownDialog
+      dropdown={{
+        content: <Content isInDropdown />,
+        placement: 'bottom-end'
+      }}
+      dialog={{
+        content: <Content />,
+        title: <Translate id="moreActions" />
+      }}
+    >
+      {({ open, ref }) => (
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          aria-label={TEXT.zh_hant.moreActions}
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
         >
-          {({ open, ref }) => (
-            <Button
-              spacing={['xtight', 'xtight']}
-              bgHoverColor="grey-lighter"
-              aria-label={TEXT.zh_hant.moreActions}
-              aria-haspopup="true"
-              onClick={open}
-              ref={ref}
-            >
-              <Icon.More color={color} size={size} />
-            </Button>
-          )}
-        </DropdownDialog>
+          <Icon.More color={color} size={size} />
+        </Button>
       )}
-    </ArchiveArticle.Dialog>
+    </DropdownDialog>
   )
+}
+
+const DropdownActions = (props: DropdownActionsProps) => {
+  const {
+    article,
+    inUserArticles,
+    inTagDetailLatest,
+    inTagDetailSelected
+  } = props
+  const viewer = useContext(ViewerContext)
+
+  const isArticleAuthor = viewer.id === article.author.id
+  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const isActive = article.articleState === 'active'
+  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+
+  const controls = {
+    hasExtendButton: !!isActive,
+    hasRemoveTagButton: !!(isInTagDetail && isMattyUser),
+    hasStickyButton: !!(
+      inUserArticles &&
+      !isInTagDetail &&
+      isArticleAuthor &&
+      isActive &&
+      !viewer.isInactive
+    ),
+    hasArchiveButton:
+      isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
+  }
+
+  if (_isEmpty(_pickBy(controls))) {
+    return null
+  }
+
+  if (controls.hasArchiveButton) {
+    return (
+      <ArchiveArticle.Dialog article={article}>
+        {({ open: openArchiveDialog }) => (
+          <BaseDropdownActions
+            {...props}
+            {...controls}
+            openArchiveDialog={openArchiveDialog}
+          />
+        )}
+      </ArchiveArticle.Dialog>
+    )
+  }
+
+  return <BaseDropdownActions {...props} {...controls} />
 }
 
 DropdownActions.fragments = fragments

@@ -1,15 +1,9 @@
 import { ApolloError } from 'apollo-client'
-import _identity from 'lodash/identity'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
 
 import { getErrorCodes } from '~/components/GQL'
 
 import { ErrorCodeKeys, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
-
-export const filterFormErrors = (obj: { [key: string]: any }) =>
-  _pickBy(obj, _identity)
 
 type ErrorMessages = { [key in ErrorCodeKeys]: string }
 

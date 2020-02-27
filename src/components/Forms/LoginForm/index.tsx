@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -15,7 +16,6 @@ import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   redirectToTarget,
@@ -79,7 +79,7 @@ export const LoginForm: React.FC<FormProps> = ({
       password: ''
     },
     validate: ({ email, password }) =>
-      filterFormErrors({
+      _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         password: validatePassword(password, lang)
       }),

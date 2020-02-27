@@ -20,12 +20,12 @@ const fragments = {
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
   return (
     <BlockUser.Dialog user={user}>
-      {({ open: showDialog }) => (
+      {({ open: openDialog }) => (
         <DropdownDialog
           dropdown={{
             content: (
               <Menu width={'sm'}>
-                <BlockUser.Button user={user} showDialog={showDialog} />
+                <BlockUser.Button user={user} openDialog={openDialog} />
               </Menu>
             ),
             placement: 'bottom-end'
@@ -33,7 +33,7 @@ const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
           dialog={{
             content: (
               <Menu>
-                <BlockUser.Button user={user} showDialog={showDialog} />
+                <BlockUser.Button user={user} openDialog={openDialog} />
               </Menu>
             ),
             title: <Translate id="moreActions" />

@@ -1,8 +1,8 @@
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 
-const DeleteCommentButton = ({ showDialog }: { showDialog: () => void }) => {
+const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
-    <Menu.Item onClick={showDialog}>
+    <Menu.Item onClick={openDialog}>
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
         <Translate id="delete" />
       </TextIcon>

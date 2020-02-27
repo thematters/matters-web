@@ -9,10 +9,10 @@ import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUse
 
 const BlockUserButton = ({
   user,
-  showDialog
+  openDialog
 }: {
   user: BlockUser
-  showDialog: () => void
+  openDialog: () => void
 }) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
@@ -51,7 +51,7 @@ const BlockUserButton = ({
   }
 
   return (
-    <Menu.Item onClick={showDialog}>
+    <Menu.Item onClick={openDialog}>
       <TextIcon icon={<Icon.MuteMedium size="md" />} size="md" spacing="base">
         <Translate id="blockUser" />
       </TextIcon>

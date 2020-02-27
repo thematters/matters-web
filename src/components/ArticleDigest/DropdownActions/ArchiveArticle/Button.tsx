@@ -1,8 +1,8 @@
 import { Icon, Menu, TextIcon, Translate } from '~/components'
 
-const ArchiveArticleButton = ({ showDialog }: { showDialog: () => void }) => {
+const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
-    <Menu.Item onClick={showDialog}>
+    <Menu.Item onClick={openDialog}>
       <TextIcon
         icon={<Icon.ArchiveMedium size="md" />}
         size="md"
