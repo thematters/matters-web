@@ -20,12 +20,15 @@ const ARCHIVE_ARTICLE = gql`
   }
 `
 
-interface ArchiveArticleDialog {
+interface ArchiveArticleDialogProps {
   article: ArchiveArticleArticle
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const ArchiveArticleDialog = ({ article, children }: ArchiveArticleDialog) => {
+const ArchiveArticleDialog = ({
+  article,
+  children
+}: ArchiveArticleDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -80,8 +83,8 @@ const ArchiveArticleDialog = ({ article, children }: ArchiveArticleDialog) => {
           description={
             <>
               <Translate
-                zh_hant="選擇將作品站內隱藏作品，其他用戶將無法訪問。"
-                zh_hans="选择将作品站内隐藏作品，其他用户将无法访问。"
+                zh_hant="選擇將作品站內隱藏，其他用戶將無法訪問。"
+                zh_hans="选择将作品站内隐藏，其他用户将无法访问。"
               />
 
               <Translate

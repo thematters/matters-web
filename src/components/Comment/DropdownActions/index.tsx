@@ -14,7 +14,7 @@ import { BlockUser } from '~/components/BlockUser'
 import { TEXT } from '~/common/enums'
 
 import CollapseButton from './CollapseButton'
-import DeleteButton from './DeleteButton'
+import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
 
@@ -82,15 +82,19 @@ const DropdownActions = ({
 
   const Content = ({
     isInDropdown,
+    showDeleteCommentDialog,
     showBlockUserDialog
   }: {
     isInDropdown?: boolean
+    showDeleteCommentDialog: () => void
     showBlockUserDialog: () => void
   }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasPinButton && <PinButton comment={comment} />}
       {hasEditButton && editComment && <EditButton editComment={editComment} />}
-      {hasDeleteButton && <DeleteButton commentId={comment.id} />}
+      {hasDeleteButton && (
+        <DeleteComment.Button showDialog={showDeleteCommentDialog} />
+      )}
       {hasBlockUserButton && (
         <BlockUser.Button
           user={comment.author}
@@ -102,36 +106,49 @@ const DropdownActions = ({
   )
 
   return (
-    <BlockUser.Dialog user={comment.author}>
-      {({ open: showBlockUserDialog }) => (
-        <DropdownDialog
-          dropdown={{
-            content: (
-              <Content isInDropdown showBlockUserDialog={showBlockUserDialog} />
-            ),
-            placement: 'bottom-end'
-          }}
-          dialog={{
-            content: <Content showBlockUserDialog={open} />,
-            title: <Translate id="moreActions" />
-          }}
-        >
-          {({ open, ref }) => (
-            <Button
-              spacing={['xtight', 'xtight']}
-              bgHoverColor="grey-lighter"
-              compensation="right"
-              aria-label={TEXT.zh_hant.moreActions}
-              aria-haspopup="true"
-              onClick={open}
-              ref={ref}
+    <DeleteComment.Dialog commentId={comment.id}>
+      {({ open: showDeleteCommentDialog }) => (
+        <BlockUser.Dialog user={comment.author}>
+          {({ open: showBlockUserDialog }) => (
+            <DropdownDialog
+              dropdown={{
+                content: (
+                  <Content
+                    isInDropdown
+                    showDeleteCommentDialog={showDeleteCommentDialog}
+                    showBlockUserDialog={showBlockUserDialog}
+                  />
+                ),
+                placement: 'bottom-end'
+              }}
+              dialog={{
+                content: (
+                  <Content
+                    showDeleteCommentDialog={showDeleteCommentDialog}
+                    showBlockUserDialog={open}
+                  />
+                ),
+                title: <Translate id="moreActions" />
+              }}
             >
-              <Icon.More color="grey" />
-            </Button>
+              {({ open, ref }) => (
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  bgHoverColor="grey-lighter"
+                  compensation="right"
+                  aria-label={TEXT.zh_hant.moreActions}
+                  aria-haspopup="true"
+                  onClick={open}
+                  ref={ref}
+                >
+                  <Icon.More color="grey" />
+                </Button>
+              )}
+            </DropdownDialog>
           )}
-        </DropdownDialog>
+        </BlockUser.Dialog>
       )}
-    </BlockUser.Dialog>
+    </DeleteComment.Dialog>
   )
 }
 
