@@ -14,7 +14,7 @@ import {
 
 import { TEXT } from '~/common/enums'
 
-import ArchiveButton from './ArchiveButton'
+import ArchiveArticle from './ArchiveArticle'
 import ExtendButton from './ExtendButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
@@ -39,12 +39,12 @@ const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
       id
-      ...ArchiveButtonArticle
+      ...ArchiveArticleArticle
       ...StickyButtonArticle
       ...ExtendButtonArticle
     }
     ${StickyButton.fragments.article}
-    ${ArchiveButton.fragments.article}
+    ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
   `
 }
@@ -83,14 +83,22 @@ const DropdownActions = ({
     return null
   }
 
-  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
+  const Content = ({
+    isInDropdown,
+    showArchiveDialog
+  }: {
+    isInDropdown?: boolean
+    showArchiveDialog: () => void
+  }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
       {hasExtendButton && <ExtendButton article={article} />}
 
       {/* private */}
       {hasStickyButton && <StickyButton article={article} />}
-      {hasArchiveButton && <ArchiveButton article={article} />}
+      {hasArchiveButton && (
+        <ArchiveArticle.Button showDialog={showArchiveDialog} />
+      )}
       {inTagDetailLatest && <SetTagSelectedButton article={article} />}
       {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTagButton && <RemoveTagButton article={article} />}
@@ -98,29 +106,35 @@ const DropdownActions = ({
   )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content isInDropdown />,
-        placement: 'bottom-end'
-      }}
-      dialog={{
-        content: <Content />,
-        title: <Translate id="moreActions" />
-      }}
-    >
-      {({ open, ref }) => (
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
-          aria-label={TEXT.zh_hant.moreActions}
-          aria-haspopup="true"
-          onClick={open}
-          ref={ref}
+    <ArchiveArticle.Dialog article={article}>
+      {({ open: showArchiveDialog }) => (
+        <DropdownDialog
+          dropdown={{
+            content: (
+              <Content isInDropdown showArchiveDialog={showArchiveDialog} />
+            ),
+            placement: 'bottom-end'
+          }}
+          dialog={{
+            content: <Content showArchiveDialog={showArchiveDialog} />,
+            title: <Translate id="moreActions" />
+          }}
         >
-          <Icon.More color={color} size={size} />
-        </Button>
+          {({ open, ref }) => (
+            <Button
+              spacing={['xtight', 'xtight']}
+              bgHoverColor="grey-lighter"
+              aria-label={TEXT.zh_hant.moreActions}
+              aria-haspopup="true"
+              onClick={open}
+              ref={ref}
+            >
+              <Icon.More color={color} size={size} />
+            </Button>
+          )}
+        </DropdownDialog>
       )}
-    </DropdownDialog>
+    </ArchiveArticle.Dialog>
   )
 }
 

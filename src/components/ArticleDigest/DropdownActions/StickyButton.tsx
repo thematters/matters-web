@@ -4,8 +4,6 @@ import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
-import styles from './styles.css'
-
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
 import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
 
@@ -70,8 +68,6 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
           <Translate id="stickyArticle" />
         </TextIcon>
       )}
-
-      <style jsx>{styles}</style>
     </Menu.Item>
   )
 }
