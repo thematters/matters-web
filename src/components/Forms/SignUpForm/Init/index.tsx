@@ -213,7 +213,8 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={translate({
-          id: 'enterUserName',
+          zh_hant: '你的站內身份識別，允許修改一次',
+          zh_hans: '你的站内身份识别，允许修改一次',
           lang
         })}
         hint={translate({
