@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
-  BlockUserButton,
   Button,
   DropdownDialog,
   Icon,
@@ -10,6 +9,7 @@ import {
   Translate,
   ViewerContext
 } from '~/components'
+import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
@@ -43,7 +43,7 @@ const fragments = {
       ...CollapseButtonComment
     }
     ${PinButton.fragments.comment}
-    ${BlockUserButton.fragments.user}
+    ${BlockUser.fragments.user}
     ${CollapseButton.fragments.comment}
   `
 }
@@ -80,47 +80,58 @@ const DropdownActions = ({
     return null
   }
 
-  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
-    const isDropdown = type === 'dropdown'
-
-    return (
-      <Menu width={isDropdown ? 'sm' : undefined}>
-        {hasPinButton && <PinButton comment={comment} />}
-        {hasEditButton && editComment && (
-          <EditButton editComment={editComment} />
-        )}
-        {hasDeleteButton && <DeleteButton commentId={comment.id} />}
-        {hasBlockUserButton && <BlockUserButton user={comment.author} />}
-        {hasCollapseButton && <CollapseButton comment={comment} />}
-      </Menu>
-    )
-  }
+  const Content = ({
+    isInDropdown,
+    showBlockUserDialog
+  }: {
+    isInDropdown?: boolean
+    showBlockUserDialog: () => void
+  }) => (
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      {hasPinButton && <PinButton comment={comment} />}
+      {hasEditButton && editComment && <EditButton editComment={editComment} />}
+      {hasDeleteButton && <DeleteButton commentId={comment.id} />}
+      {hasBlockUserButton && (
+        <BlockUser.Button
+          user={comment.author}
+          showDialog={showBlockUserDialog}
+        />
+      )}
+      {hasCollapseButton && <CollapseButton comment={comment} />}
+    </Menu>
+  )
 
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content type="dropdown" />,
-        placement: 'bottom-end'
-      }}
-      dialog={{
-        content: <Content type="dialog" />,
-        title: <Translate id="moreActions" />
-      }}
-    >
-      {({ open, ref }) => (
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
-          compensation="right"
-          aria-label={TEXT.zh_hant.moreActions}
-          aria-haspopup="true"
-          onClick={open}
-          ref={ref}
+    <BlockUser.Dialog user={comment.author}>
+      {({ open: showBlockUserDialog }) => (
+        <DropdownDialog
+          dropdown={{
+            content: (
+              <Content isInDropdown showBlockUserDialog={showBlockUserDialog} />
+            ),
+            placement: 'bottom-end'
+          }}
+          dialog={{
+            content: <Content showBlockUserDialog={open} />,
+            title: <Translate id="moreActions" />
+          }}
         >
-          <Icon.More color="grey" />
-        </Button>
+          {({ open, ref }) => (
+            <Button
+              spacing={['xtight', 'xtight']}
+              bgHoverColor="grey-lighter"
+              compensation="right"
+              aria-label={TEXT.zh_hant.moreActions}
+              aria-haspopup="true"
+              onClick={open}
+              ref={ref}
+            >
+              <Icon.More color="grey" />
+            </Button>
+          )}
+        </DropdownDialog>
       )}
-    </DropdownDialog>
+    </BlockUser.Dialog>
   )
 }
 

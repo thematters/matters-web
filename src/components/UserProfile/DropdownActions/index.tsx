@@ -1,13 +1,7 @@
 import gql from 'graphql-tag'
 
-import {
-  BlockUserButton,
-  Button,
-  DropdownDialog,
-  Icon,
-  Menu,
-  Translate
-} from '~/components'
+import { Button, DropdownDialog, Icon, Menu, Translate } from '~/components'
+import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
@@ -19,45 +13,47 @@ const fragments = {
       id
       ...BlockUser
     }
-    ${BlockUserButton.fragments.user}
+    ${BlockUser.fragments.user}
   `
 }
 
 const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
-  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
-    const isDropdown = type === 'dropdown'
-
-    return (
-      <Menu width={isDropdown ? 'sm' : undefined}>
-        <BlockUserButton user={user} />
-      </Menu>
-    )
-  }
-
   return (
-    <DropdownDialog
-      dropdown={{
-        content: <Content type="dropdown" />,
-        placement: 'bottom-end'
-      }}
-      dialog={{
-        content: <Content type="dialog" />,
-        title: <Translate id="moreActions" />
-      }}
-    >
-      {({ open, ref }) => (
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
-          aria-label={TEXT.zh_hant.moreActions}
-          aria-haspopup="true"
-          onClick={open}
-          ref={ref}
+    <BlockUser.Dialog user={user}>
+      {({ open: showDialog }) => (
+        <DropdownDialog
+          dropdown={{
+            content: (
+              <Menu width={'sm'}>
+                <BlockUser.Button user={user} showDialog={showDialog} />
+              </Menu>
+            ),
+            placement: 'bottom-end'
+          }}
+          dialog={{
+            content: (
+              <Menu>
+                <BlockUser.Button user={user} showDialog={showDialog} />
+              </Menu>
+            ),
+            title: <Translate id="moreActions" />
+          }}
         >
-          <Icon.More color="black" size="md-s" />
-        </Button>
+          {({ open, ref }) => (
+            <Button
+              spacing={['xtight', 'xtight']}
+              bgHoverColor="grey-lighter"
+              aria-label={TEXT.zh_hant.moreActions}
+              aria-haspopup="true"
+              onClick={open}
+              ref={ref}
+            >
+              <Icon.More color="black" size="md-s" />
+            </Button>
+          )}
+        </DropdownDialog>
       )}
-    </DropdownDialog>
+    </BlockUser.Dialog>
   )
 }
 

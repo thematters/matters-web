@@ -2,7 +2,7 @@ import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
   textColor?: 'black' | 'white'
-  bgColor?: 'green' | 'grey-lighter'
+  bgColor?: 'green' | 'grey-lighter' | 'red'
 
   loading?: boolean
 } & ButtonProps

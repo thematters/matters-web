@@ -8,9 +8,9 @@ import { PATHS } from '~/common/enums'
 import styles from './styles.css'
 
 const DropdownContent: React.FC<{
-  type: 'dialog' | 'dropdown'
+  isInDropdown?: boolean
   unread: boolean
-}> = ({ type, unread }) => {
+}> = ({ isInDropdown, unread }) => {
   const router = useRouter()
   const homeClasses = classNames({
     'nav-link': true,
@@ -21,11 +21,10 @@ const DropdownContent: React.FC<{
     unread,
     active: router.pathname === PATHS.FOLLOW.href
   })
-  const isDropdown = type === 'dropdown'
 
   return (
     <>
-      <Menu width={isDropdown ? 'sm' : undefined}>
+      <Menu width={isInDropdown ? 'sm' : undefined}>
         <Menu.Item {...PATHS.HOME}>
           <span className={homeClasses}>
             <Translate id="discover" />

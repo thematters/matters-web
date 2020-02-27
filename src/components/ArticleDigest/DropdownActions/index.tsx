@@ -83,32 +83,28 @@ const DropdownActions = ({
     return null
   }
 
-  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
-    const isDropdown = type === 'dropdown'
+  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      {/* public */}
+      {hasExtendButton && <ExtendButton article={article} />}
 
-    return (
-      <Menu width={isDropdown ? 'sm' : undefined}>
-        {/* public */}
-        {hasExtendButton && <ExtendButton article={article} />}
-
-        {/* private */}
-        {hasStickyButton && <StickyButton article={article} />}
-        {hasArchiveButton && <ArchiveButton article={article} />}
-        {inTagDetailLatest && <SetTagSelectedButton article={article} />}
-        {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
-        {hasRemoveTagButton && <RemoveTagButton article={article} />}
-      </Menu>
-    )
-  }
+      {/* private */}
+      {hasStickyButton && <StickyButton article={article} />}
+      {hasArchiveButton && <ArchiveButton article={article} />}
+      {inTagDetailLatest && <SetTagSelectedButton article={article} />}
+      {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
+      {hasRemoveTagButton && <RemoveTagButton article={article} />}
+    </Menu>
+  )
 
   return (
     <DropdownDialog
       dropdown={{
-        content: <Content type="dropdown" />,
+        content: <Content isInDropdown />,
         placement: 'bottom-end'
       }}
       dialog={{
-        content: <Content type="dialog" />,
+        content: <Content />,
         title: <Translate id="moreActions" />
       }}
     >

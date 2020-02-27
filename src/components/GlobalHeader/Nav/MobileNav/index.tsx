@@ -16,12 +16,12 @@ const MobileNav = ({ unread }: { unread: boolean }) => {
   return (
     <DropdownDialog
       dropdown={{
-        content: <DropdownContent type="dropdown" unread={unread} />,
+        content: <DropdownContent isInDropdown unread={unread} />,
         theme: 'dropdown shadow-default',
         zIndex: Z_INDEX.OVER_GLOBAL_HEADER
       }}
       dialog={{
-        content: <DropdownContent type="dialog" unread={unread} />,
+        content: <DropdownContent unread={unread} />,
         title: <Translate zh_hant="菜單" zh_hans="菜单" />
       }}
     >

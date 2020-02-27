@@ -17,19 +17,14 @@ const textMap = {
   en: 'English'
 }
 
-interface ContentProps {
-  type: 'dialog' | 'dropdown'
-}
-
-const Content = ({ type }: ContentProps) => (
+const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
       const isZhHantActive = lang === 'zh_hant'
       const isZhHansActive = lang === 'zh_hans'
-      const isDropdown = type === 'dropdown'
 
       return (
-        <Menu width={isDropdown ? 'sm' : undefined}>
+        <Menu width={isInDropdown ? 'sm' : undefined}>
           <Menu.Item
             onClick={() => {
               setLang('zh_hant')
@@ -69,10 +64,10 @@ export const LanguageSwitch = () => {
   return (
     <DropdownDialog
       dropdown={{
-        content: <Content type="dropdown" />
+        content: <Content isInDropdown />
       }}
       dialog={{
-        content: <Content type="dialog" />,
+        content: <Content />,
         title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />
       }}
     >
