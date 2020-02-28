@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,6 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -70,7 +70,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       comparedPassword: ''
     },
     validate: ({ password, comparedPassword }) =>
-      filterFormErrors({
+      _pickBy({
         password: validatePassword(password, lang),
         comparedPassword: validateComparedPassword(
           password,
