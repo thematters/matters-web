@@ -17,7 +17,7 @@ export const Form: React.FC<FormProps> & {
   DropdownInput: typeof DropdownInput
   List: typeof List
 } = ({ children, ...formProps }) => (
-  <form {...formProps}>
+  <form autoComplete="off" {...formProps}>
     {children}
 
     <style jsx>{styles}</style>

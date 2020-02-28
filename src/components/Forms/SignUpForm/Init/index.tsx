@@ -183,7 +183,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
-        autoComplete="off"
         required
         placeholder={translate({
           id: 'enterVerificationCode',
@@ -206,14 +205,14 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label="Matters ID"
         type="text"
         name="userName"
-        autoComplete="off"
         required
         value={values.userName}
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={translate({
-          id: 'enterUserName',
+          zh_hant: '你的站內身份識別，允許修改一次',
+          zh_hans: '你的站内身份识别，允许修改一次',
           lang
         })}
         hint={translate({
@@ -226,7 +225,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label={<Translate id="password" />}
         type="password"
         name="password"
-        autoComplete="off"
         required
         placeholder={translate({
           id: 'enterPassword',
