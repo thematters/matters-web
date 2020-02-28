@@ -12,7 +12,7 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
   children,
   trackType
 }) => {
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp
     ? {

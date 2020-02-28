@@ -78,7 +78,7 @@ export const DropdownDialog = ({
   dialog,
   children
 }: DropdownDialogProps) => {
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const [
     dropdownInstance,
     setDropdownInstance

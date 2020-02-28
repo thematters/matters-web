@@ -9,5 +9,8 @@
     "moduleResolution": "node",
     "outDir": "build/production-server"
   },
-  "include": ["./src/server.ts"]
+  "include": [
+    "./src/server.ts",
+    "./src/definitions/**/*.d.ts"
+  ]
 }

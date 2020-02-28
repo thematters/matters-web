@@ -17,7 +17,7 @@ interface MattersDocumentProps {
 class MattersDocument extends Document<MattersDocumentProps> {
   public static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
-    const heads = initialProps.head as any[]
+    const heads = initialProps.head
 
     let lang: HTMLLanguage = 'zh-Hant'
     if (heads) {

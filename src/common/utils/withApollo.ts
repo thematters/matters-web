@@ -124,12 +124,12 @@ const sentryLink = setContext((_, { headers }) => {
 })
 
 export default withApollo(({ ctx, headers, initialState }) => {
-  const inMemoryCache = new InMemoryCache({ fragmentMatcher })
-  inMemoryCache.restore(initialState || {})
+  const cache = new InMemoryCache({ fragmentMatcher })
+  cache.restore(initialState || {})
 
-  // setupPersistCache(inMemoryCache)
+  // setupPersistCache(cache)
 
-  return new ApolloClient({
+  const client = new ApolloClient({
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
@@ -137,8 +137,26 @@ export default withApollo(({ ctx, headers, initialState }) => {
       sentryLink,
       dataLink({ headers })
     ]),
-    cache: inMemoryCache,
-    resolvers,
+    cache,
+    resolvers: {
+      ...resolvers,
+      Query: {
+        ...resolvers.Query,
+        clientInfo: () => {
+          const data = resolvers.Query.clientInfo()
+
+          // @ts-ignore
+          const clientInfo = ctx?.req?.clientInfo || {}
+
+          return {
+            ...data,
+            ...clientInfo
+          }
+        }
+      }
+    },
     typeDefs
   })
+
+  return client
 })

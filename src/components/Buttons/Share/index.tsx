@@ -1,9 +1,14 @@
+import { useQuery } from '@apollo/react-hooks'
+
 import { Button, Icon, IconColor, IconSize } from '~/components'
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics, isMobile } from '~/common/utils'
+import { analytics } from '~/common/utils'
 
 import { ShareDialog } from './ShareDialog'
+
+import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
 interface ShareButtonProps {
   title?: string
@@ -20,6 +25,11 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
   size,
   color = 'black'
 }) => {
+  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
+    variables: { id: 'local' }
+  })
+  const isMobile = data?.clientInfo.isMobile
+
   const shareLink = process.browser
     ? path
       ? `${window.location.origin}/${path}`
@@ -40,7 +50,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           onClick={async () => {
             const navigator = window.navigator as any
 
-            if (navigator.share && isMobile()) {
+            if (navigator.share && isMobile) {
               try {
                 await navigator.share({
                   title: shareTitle,
