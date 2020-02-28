@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,6 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
-  filterFormErrors,
   randomString,
   translate,
   validateAvatar,
@@ -75,7 +75,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       description: ''
     },
     validate: ({ avatar, displayName, description }) =>
-      filterFormErrors({
+      _pickBy({
         avatar: validateAvatar(avatar, lang),
         displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang)
@@ -119,7 +119,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         name="displayName"
         required
         placeholder={translate({
-          id: 'enterDisplayName',
+          zh_hant: '你的站內暱稱，之後可以修改',
+          zh_hans: '你的站内暱称，之后可以修改',
           lang
         })}
         value={values.displayName}
@@ -133,8 +134,8 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         name="description"
         required
         placeholder={translate({
-          zh_hant: '介紹你自己，獲得更多社區關注',
-          zh_hans: '介绍你自己，获得更多社区关注',
+          zh_hant: '幫助大家認識你。認真填寫有助於更快獲得追蹤者',
+          zh_hans: '帮助大家认识你。认真填写有助于更快获得追踪者',
           lang
         })}
         hint={<Translate id="hintUserDescription" />}

@@ -15,7 +15,7 @@ import {
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
-const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
+const DropdownMenu = ({ isInDropdown }: { isInDropdown?: boolean }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({
@@ -44,7 +44,7 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
       )
 
       try {
-        await unsubscribePush()
+        await unsubscribePush({ silent: true })
         // await clearPersistCache()
       } catch (e) {
         console.error('Failed to unsubscribePush after logged out')
@@ -62,10 +62,9 @@ const DropdownMenu = ({ type }: { type: 'dialog' | 'dropdown' }) => {
       )
     }
   }
-  const isDropdown = type === 'dropdown'
 
   return (
-    <Menu width={isDropdown ? 'sm' : undefined}>
+    <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item {...userPath}>
         <TextIcon
           icon={<Icon.ProfileMedium size="md" />}

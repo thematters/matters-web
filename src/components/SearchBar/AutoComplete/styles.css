@@ -17,5 +17,7 @@
 .frequent-searches {
   & .key {
     @mixin line-clamp;
+    color: var(--color-matters-green);
+    font-size: var(--font-size-sm);
   }
 }

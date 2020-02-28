@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -13,7 +14,6 @@ import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -72,7 +72,7 @@ const Confirm: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) =>
-      filterFormErrors({
+      _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: false }),
         code: validateCode(code, lang)
       }),
@@ -131,7 +131,6 @@ const Confirm: React.FC<FormProps> = ({
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
-        autoComplete="off"
         required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
         value={values.email}

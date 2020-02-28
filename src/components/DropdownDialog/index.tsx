@@ -1,6 +1,4 @@
-import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef, useState } from 'react'
-import FocusLock, { AutoFocusInside } from 'react-focus-lock'
 
 import {
   Dialog,
@@ -12,8 +10,6 @@ import {
   Translate,
   useResponsive
 } from '~/components'
-
-import { KEYCODES, TEXT } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -78,7 +74,7 @@ export const DropdownDialog = ({
   dialog,
   children
 }: DropdownDialogProps) => {
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const [
     dropdownInstance,
     setDropdownInstance
@@ -94,43 +90,6 @@ export const DropdownDialog = ({
     // dialog
     setShowDialog(false)
   }
-  const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
-    const target = event.target as HTMLElement
-
-    if (target?.closest && target.closest('[data-clickable], a, button')) {
-      close()
-    }
-
-    event.stopPropagation()
-  }
-
-  const Content: React.FC = ({ children: contentChildren }) => {
-    return (
-      <FocusLock autoFocus={false}>
-        <section
-          onKeyDown={event => {
-            if (event.keyCode !== KEYCODES.enter) {
-              return
-            }
-            closeOnClick(event)
-          }}
-          onClick={closeOnClick}
-        >
-          <VisuallyHidden>
-            <AutoFocusInside>
-              <button
-                type="button"
-                aria-label={TEXT.zh_hant.close}
-                onClick={close}
-              />
-            </AutoFocusInside>
-          </VisuallyHidden>
-
-          {contentChildren}
-        </section>
-      </FocusLock>
-    )
-  }
 
   /**
    * Desktop: <Dropdown>
@@ -139,7 +98,7 @@ export const DropdownDialog = ({
     return (
       <Dropdown
         {...dropdown}
-        content={<Content>{dropdown.content}</Content>}
+        content={dropdown.content}
         onCreate={setDropdownInstance}
       >
         <ForwardChildren open={open} close={close} children={children} />
@@ -155,21 +114,19 @@ export const DropdownDialog = ({
       {children({ open, close })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
-        <Content>
-          <Dialog.Header title={dialog.title} close={close} headerHidden />
+        <Dialog.Header title={dialog.title} close={close} headerHidden />
 
-          {dialog.content}
+        {dialog.content}
 
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={close}
-            >
-              <Translate id="close" />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
-        </Content>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            bgColor="grey-lighter"
+            textColor="black"
+            onClick={close}
+          >
+            <Translate id="close" />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
       </Dialog>
     </>
   )

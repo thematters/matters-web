@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 import { Card, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import { UnblockUserButton } from '~/components/Buttons/BlockUser'
 import { FollowButton } from '~/components/Buttons/Follow'
+import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
 import { toPath } from '~/common/utils'
 

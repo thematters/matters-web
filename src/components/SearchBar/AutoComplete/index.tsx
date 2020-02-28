@@ -115,9 +115,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
                   }}
                   key={key}
                 >
-                  <TextIcon color="green">
-                    <span className="key">{key}</span>
-                  </TextIcon>
+                  <span className="key">{key}</span>
                 </Menu.Item>
               </Fragment>
             ))}

@@ -36,8 +36,6 @@ Dropdown.defaultProps = {
   aria: 'describedby',
   distance: 4,
   placement: 'bottom',
-  // https://github.com/atomiks/tippyjs/blob/master/MIGRATION_GUIDE.md#if-you-were-using-interactive-true
-  appendTo: typeof document !== 'undefined' ? document.body : undefined,
   animation: 'shift-away',
   theme: 'dropdown',
   boundary: 'window',

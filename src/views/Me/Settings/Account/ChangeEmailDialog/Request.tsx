@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,6 @@ import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -57,7 +57,7 @@ const Request: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) =>
-      filterFormErrors({
+      _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         code: validateCode(code, lang)
       }),
@@ -104,7 +104,6 @@ const Request: React.FC<FormProps> = ({
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
-        autoComplete="off"
         required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
         value={values.code}

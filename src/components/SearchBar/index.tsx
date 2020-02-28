@@ -6,7 +6,6 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
-  hidePopperOnClick,
   Icon,
   LanguageContext,
   PopperInstance
@@ -73,13 +72,13 @@ export const SearchBar: React.FC<{
               onSubmit={handleSubmit}
               aria-label={textPlaceholder}
               role="search"
+              autoComplete="off"
             >
               <input
                 type="search"
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 autoCorrect="off"
                 onChange={handleChange}
                 value={values.q}
@@ -101,19 +100,16 @@ export const SearchBar: React.FC<{
               />
             }
             trigger="manual"
-            onShown={instance => {
-              hidePopperOnClick(instance)
-            }}
             onCreate={instance => (instanceRef.current = instance)}
+            appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
               <input
                 type="search"
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 value={values.q}
                 onChange={e => {
                   handleChange(e)

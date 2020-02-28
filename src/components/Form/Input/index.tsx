@@ -50,10 +50,10 @@ const Input: React.FC<InputProps> = ({
       <Field.Content>
         <input
           {...inputProps}
-          id={fieldId}
           name={name}
           type={type}
           aria-describedby={fieldMsgId}
+          autoComplete={fieldId}
         />
       </Field.Content>
 

@@ -88,7 +88,7 @@ const NotificationButton = () => {
     }
   }, [])
 
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const { headerState } = useContext(HeaderContext)
   const isDraft = headerState.type === 'draft'
   const unread =
@@ -118,6 +118,7 @@ const NotificationButton = () => {
           refetch()
         }
       }}
+      appendTo={process.browser ? document.body : undefined}
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <NoticeButton unread={unread} aria-haspopup="true" />

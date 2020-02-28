@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -14,7 +15,6 @@ import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 import {
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -88,7 +88,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       description: user.info.description || ''
     },
     validate: ({ displayName, description }) =>
-      filterFormErrors({
+      _pickBy({
         displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
         description: validateDescription(description, lang)
       }),

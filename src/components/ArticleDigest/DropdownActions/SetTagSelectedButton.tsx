@@ -6,8 +6,6 @@ import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import styles from './styles.css'
-
 import { SetTagSelected } from './__generated__/SetTagSelected'
 import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButtonArticle'
 
@@ -64,7 +62,6 @@ const SetTagSelectedButton = ({
       <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="添加精選" zh_hans="添加精选" />
       </TextIcon>
-      <style jsx>{styles}</style>
     </Menu.Item>
   )
 }

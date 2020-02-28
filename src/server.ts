@@ -6,6 +6,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
+import MobileDetect from 'mobile-detect'
 import 'module-alias/register'
 import next from 'next'
 import path from 'path'
@@ -43,7 +44,24 @@ app
           await handler(req, res, nx)
         }
 
-        return app.render(req, res, href, { ...req.query, ...req.params })
+        const detect = new MobileDetect(req.headers['user-agent'] || '')
+        req.clientInfo = {
+          isPhone: !!detect.phone(),
+          isTablet: !!detect.tablet(),
+          isMobile: !!detect.mobile()
+        }
+
+        console.log(
+          req.headers['user-agent'] || '',
+          detect.phone(),
+          detect.tablet(),
+          detect.mobile()
+        )
+
+        return app.render(req, res, href, {
+          ...req.query,
+          ...req.params
+        })
       })
     })
 

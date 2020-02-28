@@ -92,6 +92,10 @@
     color: var(--color-grey-light);
     opacity: 1; /* Firefox */
   }
+
+  &:-webkit-autofill::first-line {
+    font-size: var(--font-size-md);
+  }
 }
 
 @define-mixin form-input-grey {
@@ -115,6 +119,10 @@
   &::placeholder {
     color: var(--color-grey);
     opacity: 1; /* Firefox */
+  }
+
+  &:-webkit-autofill::first-line {
+    font-size: var(--font-size-md);
   }
 }
 

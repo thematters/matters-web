@@ -4,6 +4,7 @@ export default gql`
   extend type Query {
     commentDraft(input: CommentDraftInput!): CommentDraft!
     clientPreference: ClientPreference!
+    clientInfo: ClientInfo!
   }
 
   extend type Official {
@@ -27,9 +28,22 @@ export default gql`
     push: Push!
   }
 
+  type ClientInfo {
+    id: ID!
+    viewportSize: ViewportSize!
+    isPhone: Boolean!
+    isTablet: Boolean!
+    isMobile: Boolean!
+  }
+
   type Push {
     enabled: Boolean!
     supported: Boolean!
+  }
+
+  type ViewportSize {
+    width: Int
+    height: Int
   }
 
   enum FeedSortType {
