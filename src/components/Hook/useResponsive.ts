@@ -21,11 +21,10 @@ export const useResponsive = (type: Type) => {
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
     variables: { id: 'local' }
   })
-  const isPhone = data?.clientInfo.isPhone
-  const isTablet = data?.clientInfo.isTablet
+  const { isPhone, isTablet, isMobile } = data?.clientInfo || {}
   const defaultWidth = isPhone
     ? BREAKPOINTS.SM
-    : isTablet
+    : isTablet || isMobile
     ? BREAKPOINTS.MD
     : BREAKPOINTS.LG
   const width = data?.clientInfo.viewportSize.width || defaultWidth

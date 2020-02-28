@@ -101,7 +101,7 @@ export const SearchBar: React.FC<{
             }
             trigger="manual"
             onCreate={instance => (instanceRef.current = instance)}
-            appendTo={document.body}
+            appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit}>
