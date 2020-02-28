@@ -25,7 +25,7 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <Icon.User color="green" size="lg" />
+          <Icon.UpVote color="green" style={{ margin: '0.5rem' }}/>
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}

@@ -26,7 +26,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <Icon.User color="green" size="lg" />
+          <Icon.Comment color="green" style={{ margin: '0.5rem' }}/>
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
@@ -51,7 +51,9 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
         <NoticeArticle article={notice?.reply?.article || null} isBlock />
 
-        {isMultiActors ? (
+        <NoticeComment comment={isMultiActors ? notice.target : notice.reply} />
+
+        {isMultiActors && (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <Fragment key={index}>
@@ -59,8 +61,6 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               </Fragment>
             ))}
           </section>
-        ) : (
-          <NoticeComment comment={notice.reply} />
         )}
       </section>
 
