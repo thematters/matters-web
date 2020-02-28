@@ -2,6 +2,7 @@ import { forwardRef } from 'react'
 
 import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
 import { useResponsive } from '~/components/Hook'
+
 import { TEXT } from '~/common/enums'
 
 interface CloseButtonProps {
