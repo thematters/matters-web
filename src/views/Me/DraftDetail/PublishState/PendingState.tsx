@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { Toast, Translate } from '~/components'
+import { Toast, Translate, useCountdown } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
-import { useCountdown } from '~/components/Hook'
 
 import { TEXT } from '~/common/enums'
 
@@ -30,10 +29,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
       color="green"
       content={
         isPublishing ? (
-          <Translate
-            zh_hant={TEXT.zh_hant.publishing}
-            zh_hans={TEXT.zh_hans.publishing}
-          />
+          <Translate id="publishing" />
         ) : (
           <Translate
             zh_hant={`${TEXT.zh_hant.waitingForPublish} (${formattedTimeLeft.mmss})`}

@@ -1,0 +1,41 @@
+li {
+  & :global(> .card) {
+    background: var(--color-white);
+
+    &:hover,
+    &:focus {
+      background: var(--color-grey-light);
+    }
+
+    @media (--sm-up) {
+      background: var(--color-grey-lighter);
+
+      &:hover,
+      &:focus {
+        background: var(--color-grey-lighter-hover);
+      }
+    }
+  }
+}
+
+.container {
+  @mixin flex-center-space-between;
+  padding: var(--spacing-base) var(--spacing-x-tight) var(--spacing-base)
+    var(--spacing-base);
+
+  line-height: 1;
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  line-height: 1rem;
+}
+
+.subtitle {
+  margin-top: var(--spacing-xx-tight);
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm-s);
+  line-height: 1rem;
+}

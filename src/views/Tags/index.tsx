@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import {
   Button,
+  EmptyTag,
   Footer,
   Head,
   Icon,
@@ -11,16 +12,14 @@ import {
   PageHeader,
   Spinner,
   Tag,
+  TagDialog,
   TextIcon,
-  Translate
+  Translate,
+  ViewerContext
 } from '~/components'
-import EmptyTag from '~/components/Empty/EmptyTag'
 import { QueryError } from '~/components/GQL'
-import TagModal from '~/components/Modal/TagModal'
-import { ModalInstance, ModalSwitch } from '~/components/ModalManager'
-import { ViewerContext } from '~/components/Viewer'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -53,14 +52,17 @@ const ALL_TAGS = gql`
 
 const CreateTagButton = () => {
   const viewer = useContext(ViewerContext)
+
   // temporarily safety check
-  if (!viewer.isAdmin || viewer.info.email !== 'hi@matters.news') {
+  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+
+  if (!canEdit) {
     return null
   }
 
   return (
-    <ModalSwitch modalId="createTagModal">
-      {(open: any) => (
+    <TagDialog>
+      {({ open }) => (
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
@@ -68,14 +70,11 @@ const CreateTagButton = () => {
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
-            <Translate
-              zh_hant={TEXT.zh_hant.createTag}
-              zh_hans={TEXT.zh_hans.createTag}
-            />
+            <Translate id="createTag" />
           </TextIcon>
         </Button>
       )}
-    </ModalSwitch>
+    </TagDialog>
   )
 }
 
@@ -162,21 +161,9 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.allTags,
-            zh_hans: TEXT.zh_hans.allTags
-          }}
-        />
+        <Head title={{ id: 'allTags' }} />
 
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.allTags}
-              zh_hans={TEXT.zh_hans.allTags}
-            />
-          }
-        >
+        <PageHeader title={<Translate id="allTags" />}>
           <CreateTagButton />
         </PageHeader>
 
@@ -188,10 +175,6 @@ export default () => {
       <aside className="l-col-4 l-col-md-3 l-col-lg-4">
         <Footer />
       </aside>
-
-      <ModalInstance modalId="createTagModal" title="createTag">
-        {(props: ModalInstanceProps) => <TagModal {...props} />}
-      </ModalInstance>
 
       <style jsx>{styles}</style>
     </main>

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  EmptyWarning,
   Footer,
   Head,
   InfiniteScroll,
@@ -11,10 +12,9 @@ import {
   Translate,
   UserDigest
 } from '~/components'
-import EmptyWarning from '~/components/Empty/EmptyWarning'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllAuthors } from './__generated__/AllAuthors'
@@ -110,21 +110,9 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.allAuthors,
-            zh_hans: TEXT.zh_hans.allAuthors
-          }}
-        />
+        <Head title={{ id: 'allAuthors' }} />
 
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.allAuthors}
-              zh_hans={TEXT.zh_hans.allAuthors}
-            />
-          }
-        />
+        <PageHeader title={<Translate id="allAuthors" />} />
 
         <section>
           <Authors />

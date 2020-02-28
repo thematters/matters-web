@@ -2,16 +2,17 @@ import classNames from 'classnames'
 
 import { Button, Icon, TextIcon, Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
 interface SidebarHeaderProps {
   type: 'icymi' | 'authors' | 'tags' | 'topics'
+  rightButton?: React.ReactNode
 }
 
-const SidebarHeader = ({ type }: SidebarHeaderProps) => {
+const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
   const pathMap = {
     icymi: false,
     topics: PATHS.TOPICS,
@@ -38,28 +39,28 @@ const SidebarHeader = ({ type }: SidebarHeaderProps) => {
         {titleMap[type]}
       </Title>
 
-      {path && (
-        <Button
-          size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
-          bgHoverColor="grey-lighter"
-          {...path}
-          onClick={onClick}
-        >
-          <TextIcon
-            icon={<Icon.Right size="xs" />}
-            color="grey-dark"
-            size="xs"
-            weight="md"
-            textPlacement="left"
+      <section className="right">
+        {rightButton}
+        {path && (
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgHoverColor="grey-lighter"
+            {...path}
+            onClick={onClick}
           >
-            <Translate
-              zh_hant={TEXT.zh_hant.viewAll}
-              zh_hans={TEXT.zh_hans.viewAll}
-            />
-          </TextIcon>
-        </Button>
-      )}
+            <TextIcon
+              icon={<Icon.Right size="xs" />}
+              color="grey-dark"
+              size="xs"
+              weight="md"
+              textPlacement="left"
+            >
+              <Translate id="viewAll" />
+            </TextIcon>
+          </Button>
+        )}
+      </section>
 
       <style jsx>{styles}</style>
     </header>

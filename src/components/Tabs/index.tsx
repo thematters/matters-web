@@ -9,6 +9,8 @@ interface TabProps {
 
   disable?: boolean
   selected?: boolean
+
+  sup?: React.ReactNode | string
 }
 
 interface TabsProps {
@@ -22,17 +24,28 @@ const Tab: React.FC<TabProps> = ({
   disable,
   selected,
 
+  sup,
   children
 }) => {
+  if (href && as) {
+    return (
+      <li role="tab" aria-disabled={disable} aria-selected={selected}>
+        <Link href={href} as={as}>
+          <a>
+            <span className="content">{children}</span>
+            {sup && <sup>{sup}</sup>}
+          </a>
+        </Link>
+        <style jsx>{styles}</style>
+      </li>
+    )
+  }
+
   return (
     <li role="tab" aria-disabled={disable} aria-selected={selected}>
-      {href && as ? (
-        <Link href={href} as={as}>
-          <a>{children}</a>
-        </Link>
-      ) : (
-        <>{children}</>
-      )}
+      <span className="content">{children}</span>
+      {sup && <sup>{sup}</sup>}
+
       <style jsx>{styles}</style>
     </li>
   )

@@ -3,17 +3,19 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import React, { useContext } from 'react'
 
-import { SearchBar } from '~/components'
-import SignUpButton from '~/components/Button/SignUp'
-import { useResponsive } from '~/components/Hook'
+import {
+  LoginButton,
+  SearchBar,
+  SignUpButton,
+  useResponsive
+} from '~/components'
 
-import { PATHS, SIGNUP_TYPE, TEXT } from '~/common/enums'
+import { PATHS, SIGNUP_TYPE } from '~/common/enums'
 
 import { Translate } from '../Language'
 import { ViewerContext } from '../Viewer'
 import { HeaderContext } from './Context'
 import Hint from './Hint'
-import LoginButton from './LoginButton'
 import Logo from './Logo'
 import MeDigest from './MeDigest'
 import Nav from './Nav'
@@ -28,7 +30,7 @@ import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isLargeUp = useResponsive('lg-up')
   const { type: headerType } = headerState
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
@@ -59,7 +61,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           <section className={rightClass}>
             {!isAbout && viewer.isAuthed && user && (
               <>
-                {isMediumUp ? <SearchBar /> : <SearchButton />}
+                {isLargeUp ? <SearchBar /> : <SearchButton />}
                 <NotificationButton />
                 <MeDigest user={user} />
                 {isDraft && !viewer.isInactive && (
@@ -76,10 +78,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 {!isLogin && <LoginButton />}
                 {!isSignUp && (
                   <SignUpButton trackType={SIGNUP_TYPE.GENERAL}>
-                    <Translate
-                      zh_hant={TEXT.zh_hant.register}
-                      zh_hans={TEXT.zh_hans.register}
-                    />
+                    <Translate id="register" />
                   </SignUpButton>
                 )}
               </>
@@ -88,10 +87,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
             {isAbout && (
               <Link {...PATHS.HOME}>
                 <a className="u-link-green">
-                  <Translate
-                    zh_hant={TEXT.zh_hant.backToDiscover}
-                    zh_hans={TEXT.zh_hans.backToDiscover}
-                  />
+                  <Translate id="backToDiscover" />
                 </a>
               </Link>
             )}

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { Tabs, Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 const MiscTabs = () => {
   const router = useRouter()
@@ -14,34 +14,28 @@ const MiscTabs = () => {
           {...PATHS.MISC_FAQ}
           selected={router.asPath === PATHS.MISC_FAQ.as}
         >
-          <Translate zh_hant={TEXT.zh_hant.faq} zh_hans={TEXT.zh_hans.faq} />
+          <Translate id="faq" />
         </Tabs.Tab>
 
         <Tabs.Tab
           {...PATHS.MISC_GUIDE}
           selected={router.asPath === PATHS.MISC_GUIDE.as}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.guide}
-            zh_hans={TEXT.zh_hans.guide}
-          />
+          <Translate id="guide" />
         </Tabs.Tab>
 
         <Tabs.Tab
           {...PATHS.MISC_TOS}
           selected={router.asPath === PATHS.MISC_TOS.as}
         >
-          <Translate zh_hant={TEXT.zh_hant.term} zh_hans={TEXT.zh_hans.term} />
+          <Translate id="term" />
         </Tabs.Tab>
 
         <Tabs.Tab
           {...PATHS.MISC_ABOUT}
           selected={router.asPath === PATHS.MISC_ABOUT.as}
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.about}
-            zh_hans={TEXT.zh_hans.about}
-          />
+          <Translate id="about" />
         </Tabs.Tab>
       </Tabs>
     </>

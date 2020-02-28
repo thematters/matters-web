@@ -1,7 +1,7 @@
+import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import { Button, Icon, Translate } from '~/components'
-import SignUpButton from '~/components/Button/SignUp'
+import { Button, Icon, SignUpButton, Translate } from '~/components'
 
 import { SIGNUP_TYPE } from '~/common/enums'
 import IMG_AD from '~/static/images/ad.svg'
@@ -10,11 +10,16 @@ import styles from './styles.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
-const Wall = ({ show, client }: any) => {
+interface WallProps {
+  show: boolean
+}
+
+const Wall = ({ show }: WallProps) => {
+  const client = useApolloClient()
   const outerClasses = classNames({ outer: true, show })
 
   const close = () => {
-    if (client && client.writeData) {
+    if (client?.writeData) {
       client.writeData({
         id: 'ClientPreference:local',
         data: { wall: false }

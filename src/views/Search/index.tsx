@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { Footer, Head, SearchBar } from '~/components'
-import { useResponsive } from '~/components/Hook'
+import { Footer, Head, SearchBar, useResponsive } from '~/components'
 
 import { getQuery } from '~/common/utils'
 
@@ -31,7 +30,7 @@ const EmptySeachPage = () => {
 }
 
 const Search = () => {
-  const isMedium = useResponsive({ type: 'md' })()
+  const isMedium = useResponsive('md')
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })

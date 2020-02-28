@@ -1,0 +1,35 @@
+/* @styled-jsx=global */
+
+[data-reach-dialog-overlay] {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+
+  z-index: var(--z-index-dialog);
+
+  @media (--sm-up) {
+    @mixin flex-center-all;
+  }
+}
+
+[data-reach-dialog-content] {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  outline: none;
+  will-change: transform;
+
+  @media (--sm-up) {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    will-change: initial;
+  }
+}

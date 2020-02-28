@@ -7,13 +7,20 @@ import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { List, LoadMore, Spinner, Title, Translate } from '~/components'
-import EmptyResponse from '~/components/Empty/EmptyResponse'
+import {
+  EmptyResponse,
+  List,
+  LoadMore,
+  Spinner,
+  Switch,
+  Title,
+  Translate,
+  useEventListener,
+  useResponsive
+} from '~/components'
 import { QueryError } from '~/components/GQL'
-import { useEventListener, useResponsive } from '~/components/Hook'
-import { Switch } from '~/components/Switch'
 
-import { REFETCH_RESPONSES, TEXT, UrlFragments } from '~/common/enums'
+import { REFETCH_RESPONSES, UrlFragments } from '~/common/enums'
 import {
   dom,
   filterResponses,
@@ -115,7 +122,7 @@ const SUBSCRIBE_RESPONSE_ADDED = gql`
 `
 
 const LatestResponses = () => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
@@ -308,10 +315,7 @@ const LatestResponses = () => {
     <section className="latest-responses" id="latest-responses">
       <header>
         <Title type="feed" is="h3">
-          <Translate
-            zh_hant={TEXT.zh_hant.latestResponses}
-            zh_hans={TEXT.zh_hans.latestResponses}
-          />
+          <Translate id="latestResponses" />
         </Title>
 
         <div className="latest-responses-switch">
@@ -321,10 +325,7 @@ const LatestResponses = () => {
             loading={loading}
           />
           <span>
-            <Translate
-              zh_hant={TEXT.zh_hant.collectedOnly}
-              zh_hans={TEXT.zh_hans.collectedOnly}
-            />
+            <Translate id="collectedOnly" />
           </span>
         </div>
       </header>

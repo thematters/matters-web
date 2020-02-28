@@ -1,17 +1,46 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
+import { useContext } from 'react'
 
-import { Button, Dropdown, Icon, Menu, PopperInstance } from '~/components'
-import BlockUserButton from '~/components/Button/BlockUser/Dropdown'
-import { ViewerContext } from '~/components/Viewer'
+import {
+  Button,
+  DropdownDialog,
+  Icon,
+  Menu,
+  Translate,
+  ViewerContext
+} from '~/components'
+import { BlockUser } from '~/components/BlockUser'
+
+import { TEXT } from '~/common/enums'
 
 import CollapseButton from './CollapseButton'
-import DeleteButton from './DeleteButton'
+import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
-// import ReportButton from './ReportButton'
+
+interface DropdownActionsProps {
+  comment: DropdownActionsComment
+  editComment?: () => void
+}
+
+interface Controls {
+  hasPinButton: boolean
+  hasEditButton: boolean
+  hasDeleteButton: boolean
+  hasBlockUserButton: boolean
+  hasCollapseButton: boolean
+}
+
+interface DialogProps {
+  openDeleteCommentDialog?: () => void
+  openBlockUserDialog?: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const fragments = {
   comment: gql`
@@ -36,113 +65,140 @@ const fragments = {
       ...CollapseButtonComment
     }
     ${PinButton.fragments.comment}
-    ${BlockUserButton.fragments.user}
+    ${BlockUser.fragments.user}
     ${CollapseButton.fragments.comment}
   `
 }
 
-const DropdownActions = ({
+const BaseDropdownActions = ({
   comment,
-  editComment
-}: {
-  comment: DropdownActionsComment
-  editComment?: () => void
-}) => {
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
+  editComment,
+  hasPinButton,
+  hasEditButton,
+  hasDeleteButton,
+  hasBlockUserButton,
+  hasCollapseButton,
+  openDeleteCommentDialog,
+  openBlockUserDialog
+}: BaseDropdownActionsProps) => {
+  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      {hasPinButton && <PinButton comment={comment} />}
+      {hasEditButton && editComment && <EditButton editComment={editComment} />}
+      {hasDeleteButton && openDeleteCommentDialog && (
+        <DeleteComment.Button openDialog={openDeleteCommentDialog} />
+      )}
+      {hasBlockUserButton && openBlockUserDialog && (
+        <BlockUser.Button
+          user={comment.author}
+          openDialog={openBlockUserDialog}
+        />
+      )}
+      {hasCollapseButton && <CollapseButton comment={comment} />}
+    </Menu>
+  )
 
-  /**
-   * REMOVE this after implement report comment
-   */
+  return (
+    <DropdownDialog
+      dropdown={{
+        content: <Content isInDropdown />,
+        placement: 'bottom-end'
+      }}
+      dialog={{
+        content: <Content />,
+        title: <Translate id="moreActions" />
+      }}
+    >
+      {({ open, ref }) => (
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgHoverColor="grey-lighter"
+          compensation="right"
+          aria-label={TEXT.zh_hant.moreActions}
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <Icon.More color="grey" />
+        </Button>
+      )}
+    </DropdownDialog>
+  )
+}
+
+const DropdownActions = (props: DropdownActionsProps) => {
+  const { comment, editComment } = props
   const viewer = useContext(ViewerContext)
+
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
   const isCollapsed = comment.state === 'collapsed'
   const isDescendantComment = comment.parentComment
 
-  const isShowPinButton = isArticleAuthor && isActive && !isDescendantComment
-  const isShowEditButton = isCommentAuthor && !!editComment && isActive
-  const isShowDeleteButton = isCommentAuthor && isActive
-  const isShowBlockUserButton = !isCommentAuthor
-  const isShowCollapseButton =
-    isArticleAuthor && !isCommentAuthor && (isActive || isCollapsed)
+  const controls = {
+    hasPinButton: !!(isArticleAuthor && isActive && !isDescendantComment),
+    hasEditButton: !!(isCommentAuthor && !!editComment && isActive),
+    hasDeleteButton: !!(isCommentAuthor && isActive),
+    hasBlockUserButton: !isCommentAuthor,
+    hasCollapseButton: !!(
+      isArticleAuthor &&
+      !isCommentAuthor &&
+      (isActive || isCollapsed)
+    )
+  }
 
-  if (
-    (!isShowPinButton &&
-      !isShowEditButton &&
-      !isShowDeleteButton &&
-      !isShowBlockUserButton &&
-      !isShowCollapseButton) ||
-    viewer.isInactive
-  ) {
+  if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {
     return null
   }
 
+  if (!controls.hasDeleteButton && !controls.hasBlockUserButton) {
+    return <BaseDropdownActions {...props} {...controls} />
+  }
+
+  if (!controls.hasDeleteButton && controls.hasBlockUserButton) {
+    return (
+      <BlockUser.Dialog user={comment.author}>
+        {({ open: openBlockUserDialog }) => (
+          <BaseDropdownActions
+            {...props}
+            {...controls}
+            openBlockUserDialog={openBlockUserDialog}
+          />
+        )}
+      </BlockUser.Dialog>
+    )
+  }
+
+  if (controls.hasDeleteButton && !controls.hasBlockUserButton) {
+    return (
+      <DeleteComment.Dialog commentId={comment.id}>
+        {({ open: openDeleteCommentDialog }) => (
+          <BaseDropdownActions
+            {...props}
+            {...controls}
+            openDeleteCommentDialog={openDeleteCommentDialog}
+          />
+        )}
+      </DeleteComment.Dialog>
+    )
+  }
+
   return (
-    <Dropdown
-      content={
-        <Menu>
-          {isShowPinButton && (
-            <Menu.Item>
-              <PinButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
+    <DeleteComment.Dialog commentId={comment.id}>
+      {({ open: openDeleteCommentDialog }) => (
+        <BlockUser.Dialog user={comment.author}>
+          {({ open: openBlockUserDialog }) => (
+            <BaseDropdownActions
+              {...props}
+              {...controls}
+              openDeleteCommentDialog={openDeleteCommentDialog}
+              openBlockUserDialog={openBlockUserDialog}
+            />
           )}
-          {isShowEditButton && editComment && (
-            <Menu.Item>
-              <EditButton
-                hideDropdown={hideDropdown}
-                editComment={editComment}
-              />
-            </Menu.Item>
-          )}
-          {/* {!isCommentAuthor && isActive && (
-            <Menu.Item>
-              <ReportButton commentId={comment.id} hideDropdown={hideDropdown} />
-            </Menu.Item>
-          )} */}
-          {isShowDeleteButton && (
-            <Menu.Item>
-              <DeleteButton
-                commentId={comment.id}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
-          )}
-          {isShowBlockUserButton && (
-            <Menu.Item>
-              <BlockUserButton
-                user={comment.author}
-                hideDropdown={hideDropdown}
-              />
-            </Menu.Item>
-          )}
-          {isShowCollapseButton && (
-            <Menu.Item>
-              <CollapseButton comment={comment} hideDropdown={hideDropdown} />
-            </Menu.Item>
-          )}
-        </Menu>
-      }
-      trigger="click"
-      onCreate={setInstance}
-      placement="bottom-end"
-    >
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgHoverColor="grey-lighter"
-        compensation="right"
-        aria-label="更多操作"
-        aria-haspopup="true"
-      >
-        <Icon.More color="grey" />
-      </Button>
-    </Dropdown>
+        </BlockUser.Dialog>
+      )}
+    </DeleteComment.Dialog>
   )
 }
 

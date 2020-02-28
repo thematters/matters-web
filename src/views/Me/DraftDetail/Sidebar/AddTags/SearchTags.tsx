@@ -4,6 +4,7 @@ import { useDebounce } from 'use-debounce/lib'
 
 import {
   Dropdown,
+  hidePopperOnClick,
   LanguageContext,
   Menu,
   PopperInstance,
@@ -26,62 +27,47 @@ const DropdownContent = ({
   tags,
   search,
   addTag,
-  hideDropdown,
   loading
 }: {
   tags: SearchTagsQuery_search_edges_node_Tag[]
   search: string
   addTag: (tag: string) => void
-  hideDropdown: () => void
   loading: boolean
 }) =>
   loading ? (
-    <Menu>
+    <Menu width="sm">
       <Menu.Item>
         <Spinner />
       </Menu.Item>
     </Menu>
   ) : (
     <>
-      <Menu>
+      <Menu width="sm">
         {tags.map(tag => (
           <Menu.Item
-            spacing={['xtight', 'tight']}
-            hoverBgColor="green"
+            onClick={() => {
+              addTag(tag.content)
+            }}
             key={tag.content}
           >
-            <button
-              className="search-tag-item"
-              type="button"
-              onClick={() => {
-                addTag(tag.content)
-                hideDropdown()
-              }}
-            >
+            <span className="search-tag-item">
               <span>{tag.content}</span>
-              <span className="search-tag-count">
-                {numAbbr(tag.articles.totalCount)}
-              </span>
-            </button>
+              <span className="count">{numAbbr(tag.articles.totalCount)}</span>
+            </span>
           </Menu.Item>
         ))}
 
         {tags && tags.length > 0 && <Menu.Divider />}
 
-        <Menu.Item spacing={['xtight', 'tight']} hoverBgColor="green">
-          <button
-            className="search-tag-item create"
-            type="button"
-            onClick={() => {
-              addTag(search)
-              hideDropdown()
-            }}
-          >
-            <span className="hint">
-              <Translate zh_hant="創建" zh_hans="创建" />
-            </span>
+        <Menu.Item
+          onClick={() => {
+            addTag(search)
+          }}
+        >
+          <span className="search-tag-item">
+            <Translate id="create" />
             <span className="keyword">{search}</span>
-          </button>
+          </span>
         </Menu.Item>
       </Menu>
 
@@ -115,6 +101,9 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
       <Dropdown
         trigger="manual"
         onCreate={setInstance}
+        onShown={i => {
+          hidePopperOnClick(i)
+        }}
         content={
           <DropdownContent
             loading={loading}
@@ -128,7 +117,6 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
               addTag(tag)
               setSearch('')
             }}
-            hideDropdown={hideDropdown}
           />
         }
       >

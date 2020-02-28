@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
+  EmptyArticle,
   Footer,
   Head,
   InfiniteScroll,
@@ -11,10 +12,9 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllTopics } from './__generated__/AllTopics'
@@ -33,14 +33,14 @@ const ALL_TOPICSS = gql`
           edges {
             cursor
             node {
-              ...FeedDigestArticle
+              ...ArticleDigestFeedArticle
             }
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const Topics = () => {
@@ -84,7 +84,7 @@ const Topics = () => {
       <List hasBorder>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigest.Feed
+            <ArticleDigestFeed
               article={node}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
@@ -104,21 +104,9 @@ export default () => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head
-          title={{
-            zh_hant: TEXT.zh_hant.allTopics,
-            zh_hans: TEXT.zh_hans.allTopics
-          }}
-        />
+        <Head title={{ id: 'allTopics' }} />
 
-        <PageHeader
-          title={
-            <Translate
-              zh_hant={TEXT.zh_hant.allTopics}
-              zh_hans={TEXT.zh_hans.allTopics}
-            />
-          }
-        />
+        <PageHeader title={<Translate id="allTopics" />} />
 
         <section>
           <Topics />

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareButton from '~/components/Button/Share'
+import { BookmarkButton } from '~/components/Buttons/Bookmark'
+import { ShareButton } from '~/components/Buttons/Share'
 
 import { toPath } from '~/common/utils'
 
@@ -49,7 +49,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
   })
 
   return (
-    <footer>
+    <footer
+      aria-label={`${article.appreciationsReceivedTotal} 個讚賞、${article.responseCount} 條回應`}
+    >
       <section className="left">
         <Appreciation article={article} size="sm" />
         <ResponseCount article={article} size="sm" />

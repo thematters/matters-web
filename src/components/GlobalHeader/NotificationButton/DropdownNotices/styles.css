@@ -22,7 +22,7 @@ header {
 }
 
 footer {
+  @mixin flex-center-all;
   @mixin border-top-grey;
   padding: var(--spacing-base);
-  text-align: center;
 }

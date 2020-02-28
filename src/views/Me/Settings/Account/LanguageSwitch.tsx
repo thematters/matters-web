@@ -1,17 +1,15 @@
-import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Button,
-  Dropdown,
+  DropdownDialog,
   Icon,
+  LanguageConsumer,
+  LanguageContext,
   Menu,
-  PopperInstance,
-  TextIcon
+  TextIcon,
+  Translate
 } from '~/components'
-import { LanguageConsumer, LanguageContext } from '~/components/Language'
-
-import styles from './styles.css'
 
 const textMap = {
   zh_hant: '繁體中文',
@@ -19,81 +17,74 @@ const textMap = {
   en: 'English'
 }
 
-export const LanguageSwitch = () => {
-  const { lang } = useContext(LanguageContext)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const hideDropdown = () => {
-    if (!instance) {
-      return
-    }
-    instance.hide()
-  }
-
-  return (
-    <Dropdown
-      content={<DropdownContent hideDropdown={hideDropdown} />}
-      trigger="click"
-      onCreate={setInstance}
-    >
-      <Button
-        size={[null, '1.5rem']}
-        spacing={[0, 'xtight']}
-        bgHoverColor="green-lighter"
-        aria-haspopup="true"
-      >
-        <TextIcon icon={<Icon.Expand size="xs" />} textPlacement="left">
-          {textMap[lang]}
-        </TextIcon>
-      </Button>
-    </Dropdown>
-  )
-}
-
-const DropdownContent: React.FC<{ hideDropdown: () => void }> = ({
-  hideDropdown
-}) => (
+const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
-      const zhHantClasses = classNames({
-        'language-switch-button': true,
-        active: lang === 'zh_hant'
-      })
-      const zhHansClasses = classNames({
-        'language-switch-button': true,
-        active: lang === 'zh_hans'
-      })
+      const isZhHantActive = lang === 'zh_hant'
+      const isZhHansActive = lang === 'zh_hans'
 
       return (
-        <Menu>
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHantClasses}
-              onClick={() => {
-                setLang('zh_hant')
-                hideDropdown()
-              }}
+        <Menu width={isInDropdown ? 'sm' : undefined}>
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hant')
+            }}
+          >
+            <TextIcon
+              spacing="base"
+              size="md"
+              weight={isZhHantActive ? 'bold' : undefined}
             >
               {textMap.zh_hant}
-            </button>
+            </TextIcon>
           </Menu.Item>
 
-          <Menu.Item>
-            <button
-              type="button"
-              className={zhHansClasses}
-              onClick={() => {
-                setLang('zh_hans')
-                hideDropdown()
-              }}
+          <Menu.Item
+            onClick={() => {
+              setLang('zh_hans')
+            }}
+          >
+            <TextIcon
+              spacing="base"
+              size="md"
+              weight={isZhHansActive ? 'bold' : undefined}
             >
               {textMap.zh_hans}
-            </button>
+            </TextIcon>
           </Menu.Item>
-
-          <style jsx>{styles}</style>
         </Menu>
       )
     }}
   </LanguageConsumer>
 )
+
+export const LanguageSwitch = () => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <DropdownDialog
+      dropdown={{
+        content: <Content isInDropdown />
+      }}
+      dialog={{
+        content: <Content />,
+        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />
+      }}
+    >
+      {({ open, ref }) => (
+        <Button
+          size={[null, '1.5rem']}
+          spacing={[0, 'xtight']}
+          bgHoverColor="green-lighter"
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <TextIcon icon={<Icon.Expand size="xs" />} textPlacement="left">
+            {textMap[lang]}
+          </TextIcon>
+        </Button>
+      )}
+    </DropdownDialog>
+  )
+}

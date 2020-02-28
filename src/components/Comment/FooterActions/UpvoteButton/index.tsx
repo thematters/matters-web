@@ -30,7 +30,7 @@ const UpvoteButton = ({
   disabled
 }: {
   comment: UpvoteComment
-  onClick?: () => any
+  onClick?: () => void
   disabled?: boolean
 }) => {
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
@@ -68,6 +68,7 @@ const UpvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
+        aira-label="取消點讚"
       >
         <TextIcon icon={<Icon.UpVoteActive />} color="green" weight="md">
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
@@ -84,6 +85,7 @@ const UpvoteButton = ({
         onClick ? onClick() : upvote()
       }}
       disabled={disabled}
+      aira-label="點讚"
     >
       <TextIcon icon={<Icon.UpVote color="grey" />} color="grey" weight="md">
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}

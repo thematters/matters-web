@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import { List, LoadMore, Spinner, Title, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import ResponseComment from './ResponseComment'
@@ -85,10 +84,7 @@ const FeaturedComments = () => {
     <section className="featured-comments" id="featured-comments">
       <header>
         <Title type="feed" is="h3">
-          <Translate
-            zh_hant={TEXT.zh_hant.featuredComments}
-            zh_hans={TEXT.zh_hans.featuredComments}
-          />
+          <Translate id="featuredComments" />
         </Title>
       </header>
 

@@ -1,20 +1,20 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { BookmarkButton, ShareButton } from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
-import { BookmarkButton } from '~/components/Button/Bookmark'
-import ShareButton from '~/components/Button/Share'
 
 import AppreciationButton from './AppreciationButton'
 import Appreciators from './Appreciators'
 import ResponseButton from './ResponseButton'
 import styles from './styles.css'
 
-import { ToolbarArticle } from './__generated__/ToolbarArticle'
+import { ArticleTool } from './__generated__/ArticleTool'
 
-const fragments = {
-  article: gql`
-    fragment ToolbarArticle on Article {
+const ARTICLE_TOOL = gql`
+  query ArticleTool($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
       id
       ...AppreciationArticleDetail
       ...AppreciatorsArticle
@@ -22,25 +22,35 @@ const fragments = {
       ...ResponseButtonArticle
       ...DropdownActionsArticle
     }
-    ${AppreciationButton.fragments.article}
-    ${Appreciators.fragments.article}
-    ${BookmarkButton.fragments.article}
-    ${ResponseButton.fragments.article}
-    ${DropdownActions.fragments.article}
-  `
-}
+  }
+  ${AppreciationButton.fragments.article}
+  ${Appreciators.fragments.article}
+  ${BookmarkButton.fragments.article}
+  ${ResponseButton.fragments.article}
+  ${DropdownActions.fragments.article}
+`
 
 const Toolbar = ({
-  article,
+  mediaHash,
   placement,
   fixed,
   mobile
 }: {
-  article: ToolbarArticle
+  mediaHash: string
   placement: 'bottom' | 'left'
   fixed?: boolean
   mobile?: boolean
 }) => {
+  const { data, loading } = useQuery<ArticleTool>(ARTICLE_TOOL, {
+    variables: { mediaHash }
+  })
+
+  if (loading || !data || !data.article) {
+    return null
+  }
+
+  const { article } = data
+
   if (placement === 'left') {
     return (
       <section className="toolbar-left">
@@ -83,7 +93,5 @@ const Toolbar = ({
     </section>
   )
 }
-
-Toolbar.fragments = fragments
 
 export default Toolbar

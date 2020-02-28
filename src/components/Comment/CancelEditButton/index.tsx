@@ -1,7 +1,5 @@
 import { Button, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <Button
     size={[null, '2rem']}
@@ -11,7 +9,7 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
     onClick={onClick}
   >
     <TextIcon color="grey" weight="md">
-      <Translate zh_hant={TEXT.zh_hant.cancel} zh_hans={TEXT.zh_hans.cancel} />
+      <Translate id="cancel" />
     </TextIcon>
   </Button>
 )

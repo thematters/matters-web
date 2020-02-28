@@ -1,5 +1,5 @@
 .content {
-  padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-xxx-loose);
+  padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-x-loose);
   text-align: left;
 
   & ul {

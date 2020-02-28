@@ -2,13 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Card } from '~/components'
+import { Card, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import UnblockButton from '~/components/Button/BlockUser/Unblock'
-import { FollowButton } from '~/components/Button/Follow'
-import { Translate } from '~/components/Language'
+import { FollowButton } from '~/components/Buttons/Follow'
+import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -31,6 +29,7 @@ interface RichProps {
   avatarBadge?: React.ReactNode
 
   hasFollow?: boolean
+  hasState?: boolean
   hasUnblock?: boolean
 
   onClick?: () => any
@@ -51,12 +50,12 @@ const fragments = {
       ...AvatarUser
       ...FollowStateUser
       ...FollowButtonUser
-      ...UnblockButtonUser
+      ...UnblockUserButtonUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.State.fragments.user}
     ${FollowButton.fragments.user}
-    ${UnblockButton.fragments.user}
+    ${UnblockUserButton.fragments.user}
   `
 }
 
@@ -67,6 +66,7 @@ const Rich = ({
   avatarBadge,
 
   hasFollow,
+  hasState = true,
   hasUnblock,
 
   onClick
@@ -92,10 +92,7 @@ const Rich = ({
           <section className="content">
             <header>
               <span className="name">
-                <Translate
-                  zh_hant={TEXT.zh_hant.accountArchived}
-                  zh_hans={TEXT.zh_hans.accountArchived}
-                />
+                <Translate id="accountArchived" />
               </span>
             </header>
           </section>
@@ -121,7 +118,7 @@ const Rich = ({
             <Link {...path}>
               <a className="name">{user.displayName}</a>
             </Link>
-            <FollowButton.State user={user} />
+            {hasState && <FollowButton.State user={user} />}
           </header>
 
           {user.info.description && (
@@ -130,7 +127,7 @@ const Rich = ({
         </section>
 
         <section className="extra-button">
-          {hasUnblock && <UnblockButton user={user} />}
+          {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowButton user={user} />}
         </section>
 

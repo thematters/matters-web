@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DraftDigest, InfiniteScroll, List, Spinner } from '~/components'
-import EmptyDraft from '~/components/Empty/EmptyDraft'
+import {
+  DraftDigest,
+  EmptyDraft,
+  InfiniteScroll,
+  List,
+  Spinner
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
@@ -23,7 +28,7 @@ const ME_DRAFTS_FEED = gql`
         edges {
           cursor
           node {
-            ...FeedDigestDraft
+            ...DraftDigestFeedDraft
           }
         }
       }

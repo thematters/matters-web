@@ -23,6 +23,7 @@ import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
 import { ReactComponent as Camera } from './icons/camera.svg'
 import { ReactComponent as Clear } from './icons/clear.svg'
+import { ReactComponent as CloseGreenMedium } from './icons/close-green-md.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
@@ -37,6 +38,7 @@ import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
 import { ReactComponent as Left } from './icons/left.svg'
+import { ReactComponent as LikeMedium } from './icons/like-md.svg'
 import { ReactComponent as Like } from './icons/like.svg'
 import { ReactComponent as Link } from './icons/link.svg'
 import { ReactComponent as LogoutMedium } from './icons/logout-md.svg'
@@ -60,6 +62,8 @@ import { ReactComponent as UnPinMedium } from './icons/unpin-md.svg'
 import { ReactComponent as Up } from './icons/up.svg'
 import { ReactComponent as UpVoteActive } from './icons/upvote-active.svg'
 import { ReactComponent as UpVote } from './icons/upvote.svg'
+import { ReactComponent as User } from './icons/user.svg'
+import { ReactComponent as Volume } from './icons/volume.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -133,6 +137,7 @@ export const Icon = {
   Camera: withIcon(Camera),
   CameraMedium: withIcon(CameraMedium),
   Clear: withIcon(Clear),
+  CloseGreenMedium: withIcon(CloseGreenMedium),
   Collapse: withIcon(Collapse),
   CollectionMedium: withIcon(CollectionMedium),
   Comment: withIcon(Comment),
@@ -148,6 +153,7 @@ export const Icon = {
   IPFSMedium: withIcon(IPFSMedium),
   Left: withIcon(Left),
   Like: withIcon(Like),
+  LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),
@@ -170,6 +176,8 @@ export const Icon = {
   Up: withIcon(Up),
   UpVote: withIcon(UpVote),
   UpVoteActive: withIcon(UpVoteActive),
+  User: withIcon(User),
+  Volume: withIcon(Volume),
 
   // legacy
   CheckActive: withIcon(CheckActive),

@@ -1,53 +1,24 @@
-.container {
-  padding: var(--spacing-loose) var(--spacing-loose) var(--spacing-xx-loose)
-    var(--spacing-loose);
+.hint,
+.intro {
+  margin: var(--spacing-loose) 0 var(--spacing-x-tight);
+  padding: 0 var(--spacing-base);
 }
 
-header {
+.hint {
+  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
 }
 
-.radios {
-  margin: var(--spacing-loose) 0;
+.intro {
+  & h4 {
+    margin-bottom: var(--spacing-x-tight);
 
-  & .content {
-    @mixin flex-center-space-between;
-    @mixin all-transition;
-    padding: var(--spacing-base) var(--spacing-loose);
-    border: 1.5px solid var(--color-grey-light);
-    border-radius: 4px;
-
-    & h4 {
-      font-weight: var(--font-weight-medium);
-    }
-
-    & p {
-      font-size: var(--font-size-xs);
-      color: var(--color-grey);
-    }
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
   }
-
-  & input {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-  }
-
-  & label + label {
-    display: block;
-    margin-top: var(--spacing-base);
-  }
-
-  & input:checked + .content {
-    border-color: var(--color-matters-green);
-  }
-}
-
-.desc {
-  font-size: var(--font-size-xs);
-  color: var(--color-grey-dark);
 
   & p {
-    margin-top: var(--spacing-x-tight);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
   }
 }

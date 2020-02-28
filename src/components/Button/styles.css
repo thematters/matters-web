@@ -213,6 +213,11 @@ span.container {
     }
   }
 }
+.bg-red {
+  & .hotarea {
+    background: var(--color-red);
+  }
+}
 
 /* Background:hover */
 .bg-hover-grey {
@@ -268,42 +273,54 @@ span.container {
 /* Border */
 .border-white {
   & .hotarea {
-    border: 1.5px solid var(--color-white);
+    border-color: var(--color-white);
   }
 }
 .border-grey {
   & .hotarea {
-    border: 1.5px solid var(--color-grey);
+    border-color: var(--color-grey);
+  }
+}
+.border-grey-light {
+  & .hotarea {
+    border-color: var(--color-grey-light);
   }
 }
 .border-grey-lighter {
   & .hotarea {
-    border: 1.5px solid var(--color-grey-lighter);
+    border-color: var(--color-grey-lighter);
   }
 }
 .border-green-lighter {
   & .hotarea {
-    border: 1.5px solid var(--color-green-lighter);
+    border-color: var(--color-green-lighter);
   }
 }
 .border-green {
   & .hotarea {
-    border: 1.5px solid var(--color-matters-green);
+    border-color: var(--color-matters-green);
   }
 }
 .border-gold {
   & .hotarea {
-    border: 1.5px solid var(--color-matters-gold);
+    border-color: var(--color-matters-gold);
   }
 }
 .border-red {
   & .hotarea {
-    border: 1.5px solid var(--color-red);
+    border-color: var(--color-red);
   }
 }
 
+.border-md {
+  & .hotarea {
+    border-width: 1.5px;
+    border-style: solid;
+  }
+}
 .border-sm {
   & .hotarea {
     border-width: 1px;
+    border-style: solid;
   }
 }

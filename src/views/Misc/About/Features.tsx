@@ -1,4 +1,4 @@
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 
 import IMAGE_3_1 from '~/static/images/about-3-1.jpg'
 import IMAGE_3_2 from '~/static/images/about-3-2.jpg'

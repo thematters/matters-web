@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarSize } from '~/components/Avatar'
 
-import { TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -93,10 +92,7 @@ const Mini = ({
         <span className={nameClass}>
           {hasDisplayName && (
             <span className="displayname">
-              <Translate
-                zh_hant={TEXT.zh_hant.accountArchived}
-                zh_hans={TEXT.zh_hans.accountArchived}
-              />
+              <Translate id="accountArchived" />
             </span>
           )}
         </span>

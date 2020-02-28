@@ -2,11 +2,15 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Button, Icon, PageHeader, TextIcon, Translate } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
-import { ViewerContext } from '~/components/Viewer'
-
-import { TEXT } from '~/common/enums'
+import {
+  Button,
+  Icon,
+  LikeCoinDialog,
+  PageHeader,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -26,20 +30,19 @@ const VIEWER_LIKE_INFO = gql`
   }
 `
 
-const SetupLikerIdButton = () => (
-  <ModalSwitch modalId="setupLikerIdModal">
-    {(open: any) => (
-      <Button className="u-link-green" onClick={open}>
-        <TextIcon>
-          <Translate
-            zh_hant={TEXT.zh_hant.setup}
-            zh_hans={TEXT.zh_hans.setup}
-          />
-        </TextIcon>
-      </Button>
-    )}
-  </ModalSwitch>
-)
+const SetupLikerIdButton = () => {
+  return (
+    <LikeCoinDialog defaultStep="setup">
+      {({ open }) => (
+        <Button className="u-link-green" onClick={open}>
+          <TextIcon>
+            <Translate id="setup" />
+          </TextIcon>
+        </Button>
+      )}
+    </LikeCoinDialog>
+  )
+}
 
 const WalletSetting = () => {
   const viewer = useContext(ViewerContext)
@@ -106,15 +109,7 @@ const WalletSettings = () => {
 
   return (
     <section className="section-container">
-      <PageHeader
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.walletSetting}
-            zh_hans={TEXT.zh_hans.walletSetting}
-          />
-        }
-        is="h2"
-      />
+      <PageHeader title={<Translate id="walletSetting" />} is="h2" />
 
       <section className="setting-section">
         <div className="left">

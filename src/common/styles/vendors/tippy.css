@@ -100,7 +100,7 @@
    * Calculated by RGB_background rgb(255, 255, 255) and RGBA_color rgba(0, 0, 0, 0.08)
    * https://marcodiiga.github.io/rgba-to-rgb-conversion
    */
-  --popper-border-color: #ebebeb;
+  --popper-border-color: rgba(0, 0, 0, 0.04);
 }
 
 .tippy-tooltip {
@@ -120,7 +120,7 @@
 /* theme:dropdown */
 .tippy-tooltip.dropdown-theme {
   color: var(--color-black);
-  border-radius: 2px;
+  border-radius: 0.5rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--popper-border-color);
@@ -132,7 +132,7 @@
 
   color: var(--color-white);
   font-size: var(--font-size-sm);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: var(--color-black);
   box-shadow: var(--shadow-dark);
 }
@@ -140,7 +140,7 @@
 /* theme:popover */
 .tippy-tooltip.popover-theme {
   color: var(--color-black);
-  border-radius: 2px;
+  border-radius: 0.125rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   border: 1px solid var(--popper-border-color);
@@ -207,9 +207,6 @@
 .tippy-tooltip {
   &.shadow-light-theme {
     box-shadow: var(--shadow-light);
-  }
-  &.shadow-default-theme {
-    box-shadow: var(--shadow-default);
   }
   &.shadow-dark-theme {
     box-shadow: var(--shadow-dark);

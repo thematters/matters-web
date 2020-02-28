@@ -1,12 +1,10 @@
-import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
@@ -17,7 +15,7 @@ import {
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
-const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
+const DropdownMenu = ({ isInDropdown }: { isInDropdown?: boolean }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const viewer = useContext(ViewerContext)
   const userPath = toPath({
@@ -36,8 +34,17 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         id: viewer.id
       })
 
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: <Translate id="successLogout" />
+          }
+        })
+      )
+
       try {
-        await unsubscribePush()
+        await unsubscribePush({ silent: true })
         // await clearPersistCache()
       } catch (e) {
         console.error('Failed to unsubscribePush after logged out')
@@ -49,12 +56,7 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: (
-              <Translate
-                zh_hant={TEXT.zh_hant.logoutFailed}
-                zh_hans={TEXT.zh_hans.logoutFailed}
-              />
-            )
+            content: <Translate id="failureLogout" />
           }
         })
       )
@@ -62,72 +64,53 @@ const DropdownMenu = ({ hideDropdown }: { hideDropdown: () => void }) => {
   }
 
   return (
-    <Menu>
-      <Menu.Item>
-        <Link {...userPath}>
-          <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.ProfileMedium />} spacing="xtight">
-              <Translate
-                zh_hant={TEXT.zh_hant.myProfile}
-                zh_hans={TEXT.zh_hans.myProfile}
-              />
-            </TextIcon>
-          </a>
-        </Link>
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      <Menu.Item {...userPath}>
+        <TextIcon
+          icon={<Icon.ProfileMedium size="md" />}
+          spacing="base"
+          size="md"
+        >
+          <Translate id="myProfile" />
+        </TextIcon>
       </Menu.Item>
 
-      <Menu.Item>
-        <Link {...PATHS.ME_APPRECIATIONS_SENT}>
-          <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.Like />} spacing="xtight">
-              <Translate
-                zh_hant={TEXT.zh_hant.myAppreciations}
-                zh_hans={TEXT.zh_hans.myAppreciations}
-              />
-            </TextIcon>
-          </a>
-        </Link>
+      <Menu.Item {...PATHS.ME_APPRECIATIONS_SENT}>
+        <TextIcon icon={<Icon.LikeMedium size="md" />} spacing="base" size="md">
+          <Translate id="myAppreciations" />
+        </TextIcon>
       </Menu.Item>
 
-      <Menu.Item>
-        <Link {...userHistoryPath}>
-          <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.HistoryMedium />} spacing="xtight">
-              <Translate
-                zh_hant={TEXT.zh_hant.readHistory}
-                zh_hans={TEXT.zh_hans.readHistory}
-              />
-            </TextIcon>
-          </a>
-        </Link>
+      <Menu.Item {...userHistoryPath}>
+        <TextIcon
+          icon={<Icon.HistoryMedium size="md" />}
+          spacing="base"
+          size="md"
+        >
+          <Translate id="readHistory" />
+        </TextIcon>
       </Menu.Item>
 
       <Menu.Divider />
-      <Menu.Item>
-        <Link
-          href={PATHS.ME_SETTINGS_ACCOUNT.href}
-          as={PATHS.ME_SETTINGS_ACCOUNT.as}
+
+      <Menu.Item {...PATHS.ME_SETTINGS_ACCOUNT}>
+        <TextIcon
+          icon={<Icon.SettingsMedium size="md" />}
+          spacing="base"
+          size="md"
         >
-          <a onClick={hideDropdown}>
-            <TextIcon icon={<Icon.SettingsMedium />} spacing="xtight">
-              <Translate
-                zh_hant={TEXT.zh_hant.setting}
-                zh_hans={TEXT.zh_hans.setting}
-              />
-            </TextIcon>
-          </a>
-        </Link>
+          <Translate id="setting" />
+        </TextIcon>
       </Menu.Item>
 
-      <Menu.Item>
-        <button type="button" onClick={onClickLogout}>
-          <TextIcon icon={<Icon.LogoutMedium />} spacing="xtight">
-            <Translate
-              zh_hant={TEXT.zh_hant.logout}
-              zh_hans={TEXT.zh_hans.logout}
-            />
-          </TextIcon>
-        </button>
+      <Menu.Item onClick={onClickLogout}>
+        <TextIcon
+          icon={<Icon.LogoutMedium size="md" />}
+          spacing="base"
+          size="md"
+        >
+          <Translate id="logout" />
+        </TextIcon>
       </Menu.Item>
     </Menu>
   )

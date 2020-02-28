@@ -1,27 +1,23 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
-import { Modal, Title } from '~/components'
 import {
+  Head,
+  PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
-} from '~/components/Form/PasswordChangeForm'
+} from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
-import { Head } from '~/components/Head'
-import { Translate } from '~/components/Language'
 
-import { PATHS, TEXT } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
-
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'reset'
+      next: 'confirm'
     },
-    reset: {
+    confirm: {
       prev: 'request',
       next: 'complete'
     }
@@ -33,16 +29,10 @@ const Forget = () => {
     return () => updateHeaderState({ type: 'default' })
   }, [])
 
-  const containerClass = classNames(
-    'l-col-4',
-    'l-col-sm-6',
-    'l-offset-sm-1',
-    'l-col-md-4',
-    'l-offset-md-2',
-    'l-col-lg-6',
-    'l-offset-lg-3',
-    'container'
-  )
+  const containerClass = classNames({
+    container: true,
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3': true
+  })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
@@ -56,70 +46,34 @@ const Forget = () => {
         }
       }
     })
-    setStep('reset')
-  }
-  const backPreviousStep = (event: any) => {
-    setStep('request')
+    setStep('confirm')
   }
 
   return (
-    <main className="l-row">
-      <Head
-        title={{
-          zh_hant: TEXT.zh_hant.forgetPassword,
-          zh_hans: TEXT.zh_hans.forgetPassword
-        }}
-      />
+    <main className="l-row full">
+      <Head title={{ id: 'forgetPassword' }} />
 
       <article className={containerClass}>
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
-            purpose="forget"
-            container="page"
+            type="forget"
+            purpose="page"
             submitCallback={requestCodeCallback}
-            scrollLock={false}
           />
         )}
-        {step === 'reset' && (
+
+        {step === 'confirm' && (
           <PasswordChangeConfirmForm
             codeId={data.request.codeId}
-            container="page"
-            backPreviousStep={backPreviousStep}
+            type="forget"
+            purpose="page"
             submitCallback={() => setStep('complete')}
-            scrollLock={false}
           />
         )}
+
         {step === 'complete' && (
-          <div className="complete">
-            <Modal.Content>
-              <Title is="h3" type="modal-headline">
-                <Translate
-                  zh_hant={TEXT.zh_hant.resetPasswordSuccess}
-                  zh_hans={TEXT.zh_hans.resetPasswordSuccess}
-                />
-              </Title>
-
-              <p className="hint">
-                <Translate
-                  zh_hant={TEXT.zh_hant.useNewPassword}
-                  zh_hans={TEXT.zh_hans.useNewPassword}
-                />
-                。
-              </p>
-            </Modal.Content>
-
-            <Modal.FooterButton
-              is="link"
-              {...appendTarget(PATHS.AUTH_LOGIN)}
-              width="full"
-            >
-              <Translate
-                zh_hant={TEXT.zh_hant.login}
-                zh_hans={TEXT.zh_hans.login}
-              />
-            </Modal.FooterButton>
-          </div>
+          <PasswordChangeComplete type="forget" purpose="page" />
         )}
       </article>
 

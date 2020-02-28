@@ -30,7 +30,7 @@ const DownvoteButton = ({
   disabled
 }: {
   comment: DownvoteComment
-  onClick?: () => any
+  onClick?: () => void
   disabled?: boolean
 }) => {
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
@@ -68,6 +68,7 @@ const DownvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
+        aria-label="取消點踩"
       >
         <TextIcon icon={<Icon.DownVoteActive />} color="green" weight="md">
           {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
@@ -84,6 +85,7 @@ const DownvoteButton = ({
         onClick ? onClick() : downvote()
       }}
       disabled={disabled}
+      aria-label="點踩"
     >
       <TextIcon icon={<Icon.DownVote color="grey" />} color="grey" weight="md">
         {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}

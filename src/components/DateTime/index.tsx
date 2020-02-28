@@ -12,7 +12,7 @@ interface DateTimeProps {
 }
 
 /**
- * <DateTime> component will
+ * This component is for DateTime showing
  *
  * Usage:
  *

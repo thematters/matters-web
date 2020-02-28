@@ -12,11 +12,10 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 
 const PushSwitch = () => {
   const [loading, setLoading] = useState(false)
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
-    CLIENT_PREFERENCE
-  )
-  const push =
-    clientPreferenceData && clientPreferenceData.clientPreference.push
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const push = data?.clientPreference.push
 
   if (!push || !push.supported) {
     return null

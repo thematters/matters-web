@@ -1,0 +1,20 @@
+.headline {
+  font-size: var(--font-size-xm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
+  text-align: center;
+
+  &.left {
+    text-align: left;
+  }
+}
+
+.headline + .description {
+  margin-top: var(--spacing-x-tight);
+}

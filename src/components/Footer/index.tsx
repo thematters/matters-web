@@ -2,7 +2,8 @@ import Link from 'next/link'
 
 import { Translate } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -27,44 +28,51 @@ const BaseLink = ({
 export const Footer = () => {
   const year = new Date().getFullYear()
 
+  const { href: appHref, as: appAs } = toPath({
+    page: 'articleDetail',
+    article: {
+      slug: 'matters-web-app',
+      mediaHash: 'zdpuAugkiUK2uwV2nJPvnJPNE73SM5oaNNX9Z2SdgSmiLTjag',
+      author: { userName: 'denkeni' }
+    }
+  })
+
   return (
     <footer className="footer">
       <BaseLink
         href={PATHS.MISC_ABOUT.href}
         as={PATHS.MISC_ABOUT.as}
-        text={
-          <Translate
-            zh_hant={TEXT.zh_hant.about}
-            zh_hans={TEXT.zh_hans.about}
-          />
-        }
+        text={<Translate id="about" />}
       />
 
       <BaseLink
         href={PATHS.MISC_FAQ.href}
         as={PATHS.MISC_FAQ.as}
-        text={
-          <Translate zh_hant={TEXT.zh_hant.faq} zh_hans={TEXT.zh_hans.faq} />
-        }
+        text={<Translate id="faq" />}
       />
 
       <BaseLink
         href={PATHS.MISC_GUIDE.href}
         as={PATHS.MISC_GUIDE.as}
-        text={
-          <Translate
-            zh_hant={TEXT.zh_hant.guide}
-            zh_hans={TEXT.zh_hans.guide}
-          />
-        }
+        text={<Translate id="guide" />}
       />
 
       <BaseLink
         href={PATHS.MISC_TOS.href}
         as={PATHS.MISC_TOS.as}
-        text={
-          <Translate zh_hant={TEXT.zh_hant.term} zh_hans={TEXT.zh_hans.term} />
-        }
+        text={<Translate id="term" />}
+      />
+
+      <BaseLink
+        href={appHref}
+        as={appAs}
+        text={<Translate zh_hant="下載應用" zh_hans="下载应用" />}
+      />
+
+      <BaseLink
+        href={'https://github.com/thematters/developer-resource'}
+        as={'https://github.com/thematters/developer-resource'}
+        text={<Translate zh_hant={'開放社區'} zh_hans={'开放社区'} />}
       />
 
       <p className="item">© {year} Matters</p>

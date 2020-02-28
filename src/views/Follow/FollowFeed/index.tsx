@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
+  EmptyArticle,
   Head,
   InfiniteScroll,
   List,
@@ -10,10 +11,9 @@ import {
   Spinner,
   Translate
 } from '~/components'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import FollowComment from './FollowComment'
@@ -36,7 +36,7 @@ const FOLLOW_FEED = gql`
             node {
               __typename
               ... on Article {
-                ...FeedDigestArticle
+                ...ArticleDigestFeedArticle
               }
               ... on Comment {
                 ...FollowComment
@@ -47,7 +47,7 @@ const FOLLOW_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
   ${FollowComment.fragments.comment}
 `
 
@@ -95,7 +95,7 @@ const FollowFeed = () => {
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             {node.__typename === 'Article' && (
-              <ArticleDigest.Feed
+              <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
@@ -126,21 +126,9 @@ const FollowFeed = () => {
 
 export default () => (
   <>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.follow,
-        zh_hans: TEXT.zh_hans.follow
-      }}
-    />
+    <Head title={{ id: 'follow' }} />
 
-    <PageHeader
-      title={
-        <Translate
-          zh_hant={TEXT.zh_hant.follow}
-          zh_hans={TEXT.zh_hans.follow}
-        />
-      }
-    />
+    <PageHeader title={<Translate id="follow" />} />
 
     <FollowFeed />
   </>

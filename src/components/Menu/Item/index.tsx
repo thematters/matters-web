@@ -1,39 +1,31 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import { Card, CardProps } from '~/components'
+
 import styles from './styles.css'
 
-type MenuItemSpacing = 'xtight' | 'tight' | 'default'
+type MenuItemProps = {} & CardProps
 
-interface MenuItemProps {
-  spacing?: [MenuItemSpacing, MenuItemSpacing]
-  hoverBgColor?: 'green' | 'grey'
-
-  style?: React.CSSProperties
-  className?: string
-}
-
-const Item: React.FC<MenuItemProps> = ({
-  spacing = ['xtight', 'default'],
-  hoverBgColor = 'grey',
-
-  style,
-  children
+const MenuItem: React.FC<MenuItemProps> = ({
+  children,
+  spacing = ['tight', 'base'],
+  bgHoverColor = 'grey-lighter',
+  ...restProps
 }) => {
-  const itemClasses = classNames({
-    item: true,
-    [`spacing-y-${spacing[0]}`]: true,
-    [`spacing-x-${spacing[1]}`]: true,
-    [`bg-hover-${hoverBgColor}`]: true
+  const menuItemClass = classNames({
+    'menu-item': true
   })
 
   return (
-    <li className={itemClasses} style={style} role="menuitem" tabIndex={0}>
-      {children}
+    <li className={menuItemClass} role="menuitem">
+      <Card spacing={spacing} bgHoverColor={bgHoverColor} {...restProps}>
+        {children}
+      </Card>
 
       <style jsx>{styles}</style>
     </li>
   )
 }
 
-export default Item
+export default MenuItem

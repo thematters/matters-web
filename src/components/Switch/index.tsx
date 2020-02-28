@@ -1,5 +1,7 @@
 import { Icon } from '~/components'
 
+import { randomString } from '~/common/utils'
+
 import styles from './styles.css'
 
 export const Switch = ({
@@ -11,9 +13,16 @@ export const Switch = ({
   checked: boolean
   loading?: boolean
 }) => {
+  const fieldId = randomString()
+
   return (
-    <label className="switch">
-      <input type="checkbox" onChange={onChange} checked={checked} />
+    <label className="switch" htmlFor={fieldId}>
+      <input
+        type="checkbox"
+        id={fieldId}
+        onChange={onChange}
+        checked={checked}
+      />
 
       <span />
 

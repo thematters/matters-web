@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 
 import { DraftDigest, Spinner, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import Collapsable from '../Collapsable'
 
 import {
@@ -20,7 +18,7 @@ const ME_DRAFTS_SIDEBAR = gql`
         edges {
           node {
             id
-            ...SidebarDigestDraft
+            ...DraftDigestSidebarDraft
           }
         }
       }
@@ -34,11 +32,7 @@ const DraftList = ({ currentId }: { currentId: string }) => {
   const edges = data?.viewer?.drafts.edges
 
   return (
-    <Collapsable
-      title={
-        <Translate zh_hans={TEXT.zh_hant.draft} zh_hant={TEXT.zh_hans.draft} />
-      }
-    >
+    <Collapsable title={<Translate id="draft" />}>
       {loading && <Spinner />}
       {edges &&
         edges

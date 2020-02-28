@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigest,
+  ArticleDigestTitle,
   Card,
   Comment,
   Expandable,
@@ -26,7 +26,7 @@ const fragments = {
       }
       article {
         id
-        ...TitleDigestArticle
+        ...ArticleDigestTitleArticle
       }
       ...CreatedAtComment
       ...ContentComment
@@ -34,7 +34,7 @@ const fragments = {
     }
 
     ${UserDigest.Mini.fragments.user}
-    ${ArticleDigest.Title.fragments.article}
+    ${ArticleDigestTitle.fragments.article}
     ${Comment.CreatedAt.fragments.comment}
     ${Comment.Content.fragments.comment}
     ${Comment.FooterActions.fragments.comment}
@@ -76,7 +76,7 @@ const FollowComment = ({
       </header>
 
       <section className="article-title">
-        <ArticleDigest.Title article={article} />
+        <ArticleDigestTitle article={article} />
       </section>
 
       <section className="comment-content">

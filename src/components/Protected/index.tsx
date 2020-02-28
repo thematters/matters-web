@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import { Spinner } from '~/components/Spinner'
-import { ViewerContext } from '~/components/Viewer'
+import { Spinner, ViewerContext } from '~/components'
 
 import { redirectToLogin } from '~/common/utils'
 

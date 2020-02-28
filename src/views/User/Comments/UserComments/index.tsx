@@ -3,15 +3,15 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
 import {
-  ArticleDigest,
+  ArticleDigestTitle,
   Card,
   Comment,
+  EmptyComment,
   Head,
   InfiniteScroll,
   List,
   Spinner
 } from '~/components'
-import EmptyComment from '~/components/Empty/EmptyComment'
 import { QueryError } from '~/components/GQL'
 
 import {
@@ -56,7 +56,7 @@ const USER_COMMENT_FEED = gql`
             cursor
             node {
               id
-              ...TitleDigestArticle
+              ...ArticleDigestTitleArticle
               comments(input: { filter: { author: $id }, first: null }) {
                 edges {
                   cursor
@@ -71,7 +71,7 @@ const USER_COMMENT_FEED = gql`
       }
     }
   }
-  ${ArticleDigest.Title.fragments.article}
+  ${ArticleDigestTitle.fragments.article}
   ${Comment.Feed.fragments.comment}
 `
 
@@ -172,7 +172,7 @@ const UserComments = ({ user }: UserIdUser) => {
           return (
             <List.Item key={articleEdge.cursor}>
               <section className="article-title">
-                <ArticleDigest.Title article={articleEdge.node} is="h3" />
+                <ArticleDigestTitle article={articleEdge.node} is="h3" />
               </section>
 
               <List>

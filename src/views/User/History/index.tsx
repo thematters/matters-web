@@ -1,18 +1,11 @@
 import { Head, UserProfile } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import UserTabs from '../UserTabs'
 import MeHistory from './MeHistory'
 
 export default () => (
   <main>
-    <Head
-      title={{
-        zh_hant: TEXT.zh_hant.readHistory,
-        zh_hans: TEXT.zh_hans.readHistory
-      }}
-    />
+    <Head title={{ id: 'readHistory' }} />
 
     <UserProfile />
 

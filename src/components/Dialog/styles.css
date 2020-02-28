@@ -1,0 +1,52 @@
+.overlay {
+  @mixin expand-to-container;
+  content: '';
+  background: rgba(0, 0, 0, 0.25);
+  will-change: opacity;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  max-height: calc(var(--vh) * 90);
+
+  background: var(--color-white);
+  border-radius: 0.5rem 0.5rem 0 0;
+
+  &.fixed-height {
+    height: 80vh;
+    height: calc(var(--vh) * 90);
+  }
+
+  @media (--sm-up) {
+    border-radius: 0.5rem;
+
+    &.no-header {
+      padding-top: 0;
+    }
+
+    &.fixed-height {
+      height: auto;
+    }
+  }
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: var(--spacing-x-tight);
+
+  transform: translateX(-50%);
+
+  & .icon {
+    display: inline-block;
+    width: 3rem;
+    height: 0.375rem;
+
+    border-radius: 0.5rem;
+    background: var(--color-grey-lighter);
+  }
+}

@@ -3,14 +3,19 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Icon,
+  LikeCoinDialog,
+  Spinner,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { ModalSwitch } from '~/components/ModalManager'
-import { Spinner } from '~/components/Spinner'
-import { ViewerContext } from '~/components/Viewer'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
@@ -21,7 +26,7 @@ import { PutComment } from './__generated__/PutComment'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />
+  loading: Spinner
 })
 
 export const PUT_COMMENT = gql`
@@ -124,23 +129,17 @@ const CommentForm = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            header: !skipPushButton && CommentSent,
             content: skipPushButton ? (
               CommentSent
             ) : (
-              <Translate
-                zh_hant={TEXT.zh_hant.pushDescription}
-                zh_hans={TEXT.zh_hans.pushDescription}
-              />
+              <Translate id="pushDescription" />
             ),
             customButton: !skipPushButton && (
-              <button type="button" onClick={() => subscribePush()}>
-                <Translate
-                  zh_hant={TEXT.zh_hant.confirmPush}
-                  zh_hans={TEXT.zh_hans.confirmPush}
-                />
-              </button>
-            )
+              <Button onClick={subscribePush}>
+                <Translate id="confirmPush" />
+              </Button>
+            ),
+            buttonPlacement: 'center'
           }
         })
       )
@@ -215,8 +214,8 @@ const CommentFormWrap = (props: CommentFormProps) => {
 
   if (viewer.shouldSetupLikerID) {
     return (
-      <ModalSwitch modalId="likeCoinTermModal">
-        {(open: any) => (
+      <LikeCoinDialog>
+        {({ open }) => (
           <button className="blocked" type="button" onClick={open}>
             <Translate
               zh_hant="設置 Liker ID 後即可參與精彩討論"
@@ -225,7 +224,7 @@ const CommentFormWrap = (props: CommentFormProps) => {
             <style jsx>{styles}</style>
           </button>
         )}
-      </ModalSwitch>
+      </LikeCoinDialog>
     )
   }
 
@@ -254,6 +253,18 @@ const CommentFormWrap = (props: CommentFormProps) => {
   }
 
   return <CommentForm {...props} />
+}
+
+CommentFormWrap.fragment = {
+  article: gql`
+    fragment CommentForm on Article {
+      id
+      author {
+        id
+        isBlocking
+      }
+    }
+  `
 }
 
 export default CommentFormWrap

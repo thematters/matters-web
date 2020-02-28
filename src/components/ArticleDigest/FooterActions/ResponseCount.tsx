@@ -50,6 +50,7 @@ const ResponseCount = ({
           type: 'article-digest'
         })
       }}
+      aira-label="查看評論"
     >
       <TextIcon
         icon={<Icon.Comment size={size === 'xs' ? 'xs' : undefined} />}

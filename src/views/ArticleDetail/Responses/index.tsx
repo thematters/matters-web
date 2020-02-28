@@ -1,17 +1,53 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { Waypoint } from 'react-waypoint'
 
 import { Comment, Title, Translate } from '~/components'
 
-import { REFETCH_RESPONSES, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, REFETCH_RESPONSES } from '~/common/enums'
+import { analytics, getQuery } from '~/common/utils'
 
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
-import { ResponsesArticle } from './__generated__/ResponsesArticle'
+import { ArticleResponse } from './__generated__/ArticleResponse'
 
-const Responses = ({ article }: { article: ResponsesArticle }) => {
+const ARTICLE_RESPONSE = gql`
+  query ArticleResponse(
+    $mediaHash: String # $after: String # $first: Int = 8
+  ) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      live
+      author {
+        id
+        isBlocking
+      }
+      ...ResponseCountArticle
+    }
+  }
+  ${ResponseCount.fragments.article}
+`
+
+const Responses = () => {
+  const [trackedFinish, setTrackedFinish] = useState(false)
+  const router = useRouter()
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
+
+  const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
+    variables: { mediaHash }
+  })
+
+  if (loading || !data || !data.article) {
+    return null
+  }
+
+  const { article } = data
+
   const refetchResponses = () => {
     if (!article.live) {
       window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
@@ -22,10 +58,7 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
     <section className="responses" id="comments">
       <header>
         <Title type="nav" is="h2">
-          <Translate
-            zh_hant={TEXT.zh_hant.response}
-            zh_hans={TEXT.zh_hans.response}
-          />
+          <Translate id="response" />
           <ResponseCount article={article} />
         </Title>
       </header>
@@ -39,6 +72,17 @@ const Responses = ({ article }: { article: ResponsesArticle }) => {
 
       <FeatureComments />
       <LatestResponses />
+
+      <Waypoint
+        onEnter={() => {
+          if (!trackedFinish) {
+            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
+              entrance: article.id
+            })
+            setTrackedFinish(true)
+          }
+        }}
+      />
 
       <style jsx>{styles}</style>
     </section>

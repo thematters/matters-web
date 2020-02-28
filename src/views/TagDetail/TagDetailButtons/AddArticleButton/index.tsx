@@ -1,26 +1,29 @@
 import { Button, Icon, TextIcon, Translate } from '~/components'
-import { ModalSwitch } from '~/components/ModalManager'
 
-import { TEXT } from '~/common/enums'
+import TagArticleDialog from './TagArticleDialog'
 
-export default () => {
+interface AddArticleButtonProps {
+  id?: string
+}
+
+const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
   return (
-    <ModalSwitch modalId="addArticleTagModal">
-      {(open: any) => (
+    <TagArticleDialog id={id}>
+      {({ open }) => (
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
           bgHoverColor="green-lighter"
           onClick={open}
+          aria-haspopup="true"
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
-            <Translate
-              zh_hant={TEXT.zh_hant.addArticleTag}
-              zh_hans={TEXT.zh_hans.addArticleTag}
-            />
+            <Translate id="addArticleTag" />
           </TextIcon>
         </Button>
       )}
-    </ModalSwitch>
+    </TagArticleDialog>
   )
 }
+
+export default AddArticleButton

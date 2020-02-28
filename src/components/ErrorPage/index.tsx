@@ -1,8 +1,7 @@
 import { NextPage } from 'next'
 import React from 'react'
 
-import { Error } from '~/components'
-import BackToHomeButton from '~/components/Button/BackToHome'
+import { BackToHomeButton, Error } from '~/components'
 
 import styles from './styles.css'
 
@@ -10,7 +9,7 @@ interface ErrorProps {
   statusCode: number | string | null
 }
 
-const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
+export const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
     <main className="l-row">
       <article className="l-col-4 l-col-md-4 l-offset-md-2  l-col-lg-4 l-offset-lg-4">
@@ -40,5 +39,3 @@ ErrorPage.getInitialProps = async ({ res, err }) => {
 
   return { statusCode }
 }
-
-export default ErrorPage

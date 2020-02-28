@@ -1,25 +1,22 @@
-import Link from 'next/link'
-
 import {
   Button,
+  EmptyNotice,
   Error,
   Icon,
   List,
+  Notice,
   Spinner,
   TextIcon,
   Translate
 } from '~/components'
-import EmptyNotice from '~/components/Empty/EmptyNotice'
-import { Notice } from '~/components/Notice'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
 interface DropdownNoticesProps {
-  hideDropdown: () => void
   data?: MeNotifications
   loading: boolean
   error: any
@@ -28,7 +25,7 @@ interface DropdownNoticesProps {
 const Header = () => (
   <header>
     <h4>
-      <Translate zh_hant="通知" zh_hans="通知" />
+      <Translate id="notification" />
     </h4>
 
     <Button
@@ -37,10 +34,7 @@ const Header = () => (
       {...PATHS.ME_SETTINGS_NOTIFICATION}
     >
       <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
-        <Translate
-          zh_hant={TEXT.zh_hant.setting}
-          zh_hans={TEXT.zh_hans.setting}
-        />
+        <Translate id="setting" />
       </TextIcon>
     </Button>
 
@@ -50,32 +44,29 @@ const Header = () => (
 
 const Footer = () => (
   <footer>
-    <Link {...PATHS.ME_NOTIFICATIONS}>
-      <a>
-        <TextIcon
-          icon={<Icon.Right size="xs" />}
-          color="green"
-          textPlacement="left"
-          weight="md"
-        >
-          <Translate zh_hant="全部通知" zh_hans="全部通知" />
-        </TextIcon>
-      </a>
-    </Link>
+    <Button
+      spacing={['xxtight', 'xtight']}
+      bgHoverColor="green-lighter"
+      {...PATHS.ME_NOTIFICATIONS}
+    >
+      <TextIcon
+        icon={<Icon.Right size="xs" />}
+        color="green"
+        textPlacement="left"
+        weight="md"
+      >
+        <Translate id="allNotification" />
+      </TextIcon>
+    </Button>
 
     <style jsx>{styles}</style>
   </footer>
 )
 
-const DropdownNotices = ({
-  hideDropdown,
-  data,
-  loading,
-  error
-}: DropdownNoticesProps) => {
+const DropdownNotices = ({ data, loading, error }: DropdownNoticesProps) => {
   if (loading) {
     return (
-      <section className="container" onClick={hideDropdown}>
+      <section className="container">
         <Header />
 
         <section className="content">
@@ -91,7 +82,7 @@ const DropdownNotices = ({
 
   if (error) {
     return (
-      <section className="container" onClick={hideDropdown}>
+      <section className="container">
         <Header />
 
         <section className="content">
@@ -108,7 +99,7 @@ const DropdownNotices = ({
   const edges = data?.viewer?.notices.edges
 
   return (
-    <section className="container" onClick={hideDropdown}>
+    <section className="container">
       <Header />
 
       <section className="content">

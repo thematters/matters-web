@@ -3,10 +3,10 @@ import _get from 'lodash/get'
 
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import { ModalSwitch } from '~/components/ModalManager'
 
 import { numAbbr } from '~/common/utils'
 
+import AppreciatorsDialog from './AppreciatorsDialog'
 import styles from './styles.css'
 
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
@@ -45,13 +45,14 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   }
 
   return (
-    <ModalSwitch modalId="appreciatorsModal">
-      {(open: any) => (
+    <AppreciatorsDialog>
+      {({ open }) => (
         <button
           type="button"
           className="container"
           aria-label="查看所有讚賞者"
-          onClick={() => open()}
+          aria-haspopup="true"
+          onClick={open}
         >
           <section className="avatar-list">
             {edges
@@ -82,7 +83,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           <style jsx>{styles}</style>
         </button>
       )}
-    </ModalSwitch>
+    </AppreciatorsDialog>
   )
 }
 

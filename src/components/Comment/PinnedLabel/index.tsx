@@ -1,9 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Label } from '~/components/Label'
-import { Translate } from '~/components/Language'
-
-import { TEXT } from '~/common/enums'
+import { Label, Translate } from '~/components'
 
 import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
 
@@ -22,10 +19,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
 
   return (
     <Label size="sm">
-      <Translate
-        zh_hant={TEXT.zh_hant.authorRecommend}
-        zh_hans={TEXT.zh_hant.authorRecommend}
-      />
+      <Translate id="authorRecommend" />
     </Label>
   )
 }

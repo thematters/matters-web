@@ -1,5 +1,6 @@
 /* @styled-jsx=global */
 
+@custom-media --xs-down (max-width: 320px);
 @custom-media --sm-up (min-width: 768px);
 @custom-media --sm-down (max-width: 767px);
 @custom-media --md-up (min-width: 1024px);

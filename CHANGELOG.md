@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.0] - 2020-02-28
+
+### Revamp
+
+- Revamp: `<Dialog>` & `<DropdownDialog>` #689 #712
+- Revamp: Forms #716 #736 #744 #747 #748
+- Revamp: Appreciations #703
+- Refactor: `<Menu>`, `<SearchBar>` #662
+- Refactor: `<Translate>` & `translate` support using `id` #719
+
+### Changed
+
+- Create infinite list using `react-virtualized` #697 #701 #706
+- Enhance Responsive #742
+- Tree shaking and article detail query refactor #678
+- Dynamic Imports: `<Dialog>` and `firebase` #700
+- Revamp FollowButton for sizing. #727
+- Add extra footer #734
+- Add react hook for window resize. #690
+- Add back collapsed comments #710
+- Add back missing refresh button of sidebar authors #704
+- Skip polling if the user hasn't logged in #688
+
 ## [2.7.0] - 2020-02-06
 
 ### Added
@@ -12,12 +35,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Recommendation test page #625
 - Add selected feed under tag page #650 #654 #659
 
-### Changed
+### Revamp
 
 - Refactor: `<Comment>`, `<UserDigest>`, `<ArticleDigest>` #609 #658 #661
 - Refactor: `<Button>` #651
 - Refactor: `Toast` #667
 - Refactor: New Icons #647
+
+### Changed
+
 - Change tag detail API names and params. #617
 - Restructure of tag detail page #616
 - Remove close button of Toast #663
@@ -29,14 +55,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.6.0] - 2020-01-13
 
+### Revamp
+
+- Refactor: Alter CSS variables for Matters 3.0
+- Refactor: Using SVGR #576
+- Refactor: i18n #584
+
 ### Changed
 
 - Add more test cases for home page. #557 #575
 - Feed dedupe #574
 - Allow onboarding user to appreciate articles #592
-- Refactor: Alter CSS variables for Matters 3.0
-- Refactor: Using SVGR #576
-- Refactor: i18n #584
 - Bump deps #559 #558 #567 #568 #569 #582 #580 #578 #587 #581
 
 ## [2.5.1] - 2019-12-31

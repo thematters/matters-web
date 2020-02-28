@@ -1,11 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-
-import { TEXT } from '~/common/enums'
-
-import styles from './styles.css'
 
 import { PinButtonComment } from './__generated__/PinButtonComment'
 import { PinComment } from './__generated__/PinComment'
@@ -54,13 +50,7 @@ const fragments = {
   `
 }
 
-const PinButton = ({
-  comment,
-  hideDropdown
-}: {
-  comment: PinButtonComment
-  hideDropdown: () => void
-}) => {
+const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   const canPin = comment.article.pinCommentLeft > 0
   const [unpinComment] = useMutation<UnpinComment>(UNPIN_COMMENT, {
     variables: { id: comment.id },
@@ -91,40 +81,24 @@ const PinButton = ({
 
   if (comment.pinned) {
     return (
-      <button
-        type="button"
-        onClick={() => {
-          unpinComment()
-          hideDropdown()
-        }}
-      >
-        <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
-          <Translate
-            zh_hant={TEXT.zh_hant.unpin}
-            zh_hans={TEXT.zh_hans.unpin}
-          />
+      <Menu.Item onClick={unpinComment}>
+        <TextIcon
+          icon={<Icon.UnPinMedium size="md" />}
+          size="md"
+          spacing="base"
+        >
+          <Translate id="unpin" />
         </TextIcon>
-
-        <style jsx>{styles}</style>
-      </button>
+      </Menu.Item>
     )
   }
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        pinComment()
-        hideDropdown()
-      }}
-      disabled={!canPin}
-    >
-      <TextIcon icon={<Icon.PinMedium />} spacing="tight">
-        <Translate zh_hant={TEXT.zh_hant.pin} zh_hans={TEXT.zh_hans.pin} />
+    <Menu.Item onClick={canPin ? pinComment : undefined}>
+      <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
+        <Translate id="pin" />
       </TextIcon>
-
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 

@@ -4,17 +4,17 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
   InfiniteScroll,
   List,
   LoadMore,
   PageHeader,
   Spinner,
-  Translate
+  Translate,
+  useResponsive
 } from '~/components'
-import { useResponsive } from '~/components/Hook'
 
-import { ANALYTICS_EVENTS, FEED_TYPE, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -33,17 +33,17 @@ const SEARCH_ARTICLES = gql`
         cursor
         node {
           ... on Article {
-            ...FeedDigestArticle
+            ...ArticleDigestFeedArticle
           }
         }
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 const SearchArticles = ({ q }: { q: string }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {
@@ -64,12 +64,7 @@ const SearchArticles = ({ q }: { q: string }) => {
     return (
       <EmptySearch
         inSidebar={false}
-        description={
-          <Translate
-            zh_hant={TEXT.zh_hant.emptySearchResults}
-            zh_hans={TEXT.zh_hans.emptySearchResults}
-          />
-        }
+        description={<Translate id="emptySearchResults" />}
       />
     )
   }
@@ -98,21 +93,13 @@ const SearchArticles = ({ q }: { q: string }) => {
       hasNextPage={isMediumUp && pageInfo.hasNextPage}
       loadMore={loadMore}
     >
-      <PageHeader
-        is="h2"
-        title={
-          <Translate
-            zh_hant={TEXT.zh_hant.article}
-            zh_hans={TEXT.zh_hans.article}
-          />
-        }
-      />
+      <PageHeader is="h2" title={<Translate id="article" />} />
       <List hasBorder>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
               <List.Item key={cursor}>
-                <ArticleDigest.Feed
+                <ArticleDigestFeed
                   article={node}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

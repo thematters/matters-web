@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { Tabs, Translate } from '~/components'
-import { ViewerContext } from '~/components/Viewer'
+import { Tabs, Translate, ViewerContext } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
 const MeTabs = () => {
@@ -28,34 +27,14 @@ const MeTabs = () => {
         {...userFollowersPath}
         selected={router.pathname === PATHS.USER_FOLLOWERS.href}
       >
-        <Translate
-          {...(isMe
-            ? {
-                zh_hant: TEXT.zh_hant.followingMe,
-                zh_hans: TEXT.zh_hans.followingMe
-              }
-            : {
-                zh_hant: TEXT.zh_hant.follower,
-                zh_hans: TEXT.zh_hans.follower
-              })}
-        />
+        <Translate id={isMe ? 'followingMe' : 'follower'} />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...userFolloweesPath}
         selected={router.pathname === PATHS.USER_FOLLOWEES.href}
       >
-        <Translate
-          {...(isMe
-            ? {
-                zh_hant: TEXT.zh_hant.myFollowees,
-                zh_hans: TEXT.zh_hans.myFollowees
-              }
-            : {
-                zh_hant: TEXT.zh_hant.following,
-                zh_hans: TEXT.zh_hans.following
-              })}
-        />
+        <Translate id={isMe ? 'myFollowees' : 'following'} />
       </Tabs.Tab>
     </Tabs>
   )

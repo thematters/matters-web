@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import SignUpComplete from '~/components/Form/SignUpComplete'
+import { Dialog, PageHeader, SignUpComplete, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -12,11 +12,19 @@ import Select from './Select'
 type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 interface Props {
+  purpose: 'dialog' | 'page'
   submitCallback?: () => void
-  scrollLock?: boolean
+  closeDialog?: () => void
 }
 
-const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
+export const SetupLikeCoin: React.FC<Props> = ({
+  purpose,
+  submitCallback,
+  closeDialog
+}) => {
+  const isInDialog = purpose === 'dialog'
+  const isInPage = purpose === 'page'
+
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
@@ -40,6 +48,17 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
 
   return (
     <>
+      {isInPage && (
+        <PageHeader title={<Translate id="setupLikeCoin" />} hasNoBorder />
+      )}
+
+      {isInDialog && closeDialog && (
+        <Dialog.Header
+          title={<Translate id="setupLikeCoin" />}
+          close={closeDialog}
+        />
+      )}
+
       {step === 'select' && (
         <Select
           startGenerate={() => setStep('generating')}
@@ -49,27 +68,22 @@ const SetupLikeCoin: React.FC<Props> = ({ submitCallback, scrollLock }) => {
               setBindingWindowRef(windowRef)
             }
           }}
-          scrollLock={scrollLock}
         />
       )}
+
       {step === 'generating' && (
-        <Generating
-          prevStep={backToSelect}
-          nextStep={complete}
-          scrollLock={scrollLock}
-        />
+        <Generating prevStep={backToSelect} nextStep={complete} />
       )}
+
       {step === 'binding' && (
         <Binding
           prevStep={backToSelect}
           nextStep={complete}
           windowRef={bindingWindowRef}
-          scrollLock={scrollLock}
         />
       )}
-      {step === 'complete' && <SignUpComplete scrollLock={scrollLock} />}
+
+      {step === 'complete' && <SignUpComplete />}
     </>
   )
 }
-
-export default SetupLikeCoin

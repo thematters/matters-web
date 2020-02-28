@@ -1,11 +1,8 @@
 import ApolloClient from 'apollo-client'
-import * as firebase from 'firebase/app'
-import 'firebase/messaging'
 import gql from 'graphql-tag'
 import getConfig from 'next/config'
 
-import { Translate } from '~/components'
-import { Viewer } from '~/components/Viewer'
+import { Translate, Viewer } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -34,6 +31,9 @@ export const initializePush = async ({
   client: ApolloClient<any>
   viewer: Viewer
 }) => {
+  const firebase = await import('firebase/app')
+  await import('firebase/messaging')
+
   cachedClient = client
 
   /**
@@ -100,7 +100,7 @@ export const initializePush = async ({
   })
 
   // auto re-subscribe push
-  if (Notification.permission === 'granted') {
+  if (viewer.id && Notification.permission === 'granted') {
     subscribePush({ silent: true })
   }
 }
@@ -196,7 +196,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
   console.log('[Push] Subscribed')
 }
 
-export const unsubscribePush = async () => {
+export const unsubscribePush = async (options?: { silent?: boolean }) => {
+  const { silent } = options || { silent: false }
   const token = await getToken()
 
   // Delete token in local
@@ -204,19 +205,23 @@ export const unsubscribePush = async () => {
     await unsubscribePushLocally(token)
   } catch (e) {
     console.error('[Push] Failed to deleteToken in local')
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'red',
-          content: (
-            <Translate
-              zh_hant="關閉失敗，請稍候重試"
-              zh_hans="关闭失败，请稍候重试"
-            />
-          )
-        }
-      })
-    )
+
+    if (!silent) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: (
+              <Translate
+                zh_hant="關閉失敗，請稍候重試"
+                zh_hans="关闭失败，请稍候重试"
+              />
+            )
+          }
+        })
+      )
+    }
+
     throw new Error('[Push] Failed to unsubscribe push')
   }
 
@@ -245,6 +250,7 @@ export const unsubscribePush = async () => {
 }
 
 const unsubscribePushLocally = async (token?: string) => {
+  const firebase = await import('firebase/app')
   const messaging = firebase.messaging()
 
   if (token) {
@@ -259,6 +265,7 @@ const unsubscribePushLocally = async (token?: string) => {
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 const getToken = async () => {
+  const firebase = await import('firebase/app')
   const messaging = firebase.messaging()
 
   try {

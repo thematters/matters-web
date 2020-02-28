@@ -3,18 +3,18 @@ import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 
 import {
+  ArticleDigestFeed,
+  EmptyArticle,
   InfiniteScroll,
   List,
   LoadMore,
   PageHeader,
   Spinner,
-  Translate
+  Translate,
+  useResponsive
 } from '~/components'
-import { ArticleDigest } from '~/components/ArticleDigest'
-import EmptyArticle from '~/components/Empty/EmptyArticle'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { useResponsive } from '~/components/Hook'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -35,11 +35,11 @@ const feedFragment = gql`
     edges {
       cursor
       node {
-        ...FeedDigestArticle
+        ...ArticleDigestFeedArticle
       }
     }
   }
-  ${ArticleDigest.Feed.fragments.article}
+  ${ArticleDigestFeed.fragments.article}
 `
 
 export const queries = {
@@ -74,7 +74,7 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
@@ -126,7 +126,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         <List hasBorder>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigest.Feed
+              <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
@@ -148,7 +148,9 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 }
 
 const HomeFeed = () => {
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest'
   }
@@ -166,9 +168,9 @@ const HomeFeed = () => {
       <PageHeader
         title={
           feedSortType === 'hottest' ? (
-            <Translate zh_hant="熱門作品" zh_hans="热门作品" />
+            <Translate id="hottestArticles" />
           ) : (
-            <Translate zh_hant="最新作品" zh_hans="最新作品" />
+            <Translate id="latestArticles" />
           )
         }
         is="h2"

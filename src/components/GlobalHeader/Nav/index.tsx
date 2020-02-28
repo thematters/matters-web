@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 
+import { ViewerContext } from '~/components'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
-import { ViewerContext } from '~/components/Viewer'
 
 import { POLL_INTERVAL } from '~/common/enums'
 

@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import Router, { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
@@ -11,7 +11,7 @@ import {
   PopperInstance
 } from '~/components'
 
-import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
+import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import { getQuery, toPath, translate } from '~/common/utils'
 
 import AutoComplete from './AutoComplete'
@@ -28,7 +28,7 @@ const SearchButton = () => (
   </Button>
 )
 
-const BaseSearchBar: React.FC<{
+export const SearchBar: React.FC<{
   autoComplete?: boolean
 }> = ({ autoComplete = true }) => {
   const router = useRouter()
@@ -36,11 +36,7 @@ const BaseSearchBar: React.FC<{
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({
-    zh_hant: TEXT.zh_hant.search,
-    zh_hans: TEXT.zh_hans.search,
-    lang
-  })
+  const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = translate({
     zh_hant: '搜尋作品、標籤、作者',
     zh_hans: '搜索作品、标签、作者',
@@ -48,17 +44,12 @@ const BaseSearchBar: React.FC<{
   })
 
   // dropdown
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const [shown, setShown] = useState(false)
+  const instanceRef = useRef<PopperInstance>()
   const hideDropdown = () => {
-    if (instance) {
-      instance.hide()
-    }
+    instanceRef.current?.hide()
   }
   const showDropdown = () => {
-    if (instance) {
-      instance.show()
-    }
+    instanceRef.current?.show()
   }
 
   return (
@@ -81,13 +72,13 @@ const BaseSearchBar: React.FC<{
               onSubmit={handleSubmit}
               aria-label={textPlaceholder}
               role="search"
+              autoComplete="off"
             >
               <input
                 type="search"
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 autoCorrect="off"
                 onChange={handleChange}
                 value={values.q}
@@ -106,22 +97,19 @@ const BaseSearchBar: React.FC<{
               <AutoComplete
                 searchKey={debouncedSearch}
                 hideDropdown={hideDropdown}
-                isShown={shown}
               />
             }
             trigger="manual"
-            onCreate={setInstance}
-            onShown={() => setShown(true)}
-            theme="dropdown shadow-light"
+            onCreate={instance => (instanceRef.current = instance)}
+            appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
               <input
                 type="search"
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 value={values.q}
                 onChange={e => {
                   handleChange(e)
@@ -143,5 +131,3 @@ const BaseSearchBar: React.FC<{
     </Formik>
   )
 }
-
-export const SearchBar = BaseSearchBar

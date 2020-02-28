@@ -1,0 +1,34 @@
+.container {
+  @mixin flex-start-space-between;
+
+  font-size: var(--font-size-sm);
+}
+
+header {
+  & :global(h2) {
+    @mixin line-clamp;
+    -webkit-line-clamp: 1;
+  }
+
+  & .content {
+    color: var(--color-matters-gold);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+& .left {
+  & :global(> * + *) {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+& .right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-base);
+  text-align: right;
+
+  & .appreciate-count {
+    margin-bottom: var(--spacing-x-tight);
+  }
+}

@@ -2,14 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Translate } from '~/components/Language'
-import { Modal } from '~/components/Modal'
-import { Spinner } from '~/components/Spinner'
+import { Dialog, Icon, Spinner, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 
@@ -17,7 +13,6 @@ interface Props {
   prevStep: () => void
   nextStep: () => void
   windowRef?: Window
-  scrollLock?: boolean
 }
 
 const VIEWER_LIKER_ID = gql`
@@ -31,12 +26,7 @@ const VIEWER_LIKER_ID = gql`
   }
 `
 
-const Binding: React.FC<Props> = ({
-  prevStep,
-  nextStep,
-  windowRef,
-  scrollLock
-}) => {
+const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerLikerId>(VIEWER_LIKER_ID, {
     pollInterval: polling ? 1000 : undefined,
@@ -64,11 +54,25 @@ const Binding: React.FC<Props> = ({
 
   return (
     <>
-      <Modal.Content scrollLock={scrollLock}>
-        <section className="container">
-          {!error && (
+      <Dialog.Message
+        description={
+          error ? (
+            <>
+              <div>
+                <Icon.EmptyWarning color="grey-light" size="xl" />
+              </div>
+
+              <p>
+                <Translate
+                  zh_hant="哎呀，設置失敗了。"
+                  zh_hans="哎呀，设置失败了。"
+                />
+              </p>
+            </>
+          ) : (
             <>
               <Spinner />
+
               <p>
                 <Translate
                   zh_hant="請在新頁面完成綁定，不要關閉本窗口"
@@ -76,34 +80,21 @@ const Binding: React.FC<Props> = ({
                 />
               </p>
             </>
-          )}
-          {error && (
-            <p>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-              />
-            </p>
-          )}
-        </section>
-      </Modal.Content>
+          )
+        }
+      />
 
-      <footer>
-        <Modal.FooterButton
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          disabled={!error}
           onClick={() => {
             prevStep()
             analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
           }}
-          width="full"
         >
-          <Translate
-            zh_hant={TEXT.zh_hant.retry}
-            zh_hans={TEXT.zh_hans.retry}
-          />
-        </Modal.FooterButton>
-      </footer>
-
-      <style jsx>{styles}</style>
+          <Translate id="retry" />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
     </>
   )
 }

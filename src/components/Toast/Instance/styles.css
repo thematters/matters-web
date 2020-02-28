@@ -6,7 +6,7 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   border-radius: 0.5rem;
-  box-shadow: var(--shadow-default);
+  box-shadow: var(--shadow-light);
   animation: toastFadeIn 0.25s ease;
   visibility: visible;
 
@@ -39,12 +39,10 @@
 
 .custom-button {
   flex-shrink: 0;
-  font-weight: var(--font-weight-normal);
+  display: inline-flex;
   margin-left: var(--spacing-x-tight);
 
-  & :global(a.container) {
-    vertical-align: middle;
-  }
+  font-weight: var(--font-weight-normal);
 }
 
 .green {

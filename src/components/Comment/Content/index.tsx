@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components/Language'
+import { Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 
 import Collapsed from './Collapsed'
@@ -49,15 +48,9 @@ const Content = ({ comment, size }: ContentProps) => {
         content={content}
         collapsedContent={
           isBlocked ? (
-            <Translate
-              zh_hant={TEXT.zh_hant.commentBlocked}
-              zh_hans={TEXT.zh_hans.commentBlocked}
-            />
+            <Translate id="commentBlocked" />
           ) : (
-            <Translate
-              zh_hant={TEXT.zh_hant.commentCollapsed}
-              zh_hans={TEXT.zh_hans.commentCollapsed}
-            />
+            <Translate id="commentCollapsed" />
           )
         }
         className={contentClass}
@@ -97,10 +90,7 @@ const Content = ({ comment, size }: ContentProps) => {
   if (state === 'archived') {
     return (
       <p className={`${contentClass} inactive`}>
-        <Translate
-          zh_hant={TEXT.zh_hant.commentDeleted}
-          zh_hans={TEXT.zh_hans.commentDeleted}
-        />
+        <Translate id="commentDeleted" />
 
         <style jsx>{styles}</style>
       </p>

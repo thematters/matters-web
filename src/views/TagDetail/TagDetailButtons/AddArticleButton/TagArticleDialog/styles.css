@@ -1,0 +1,31 @@
+ul {
+  padding: 0 var(--spacing-base);
+
+  & li {
+    position: relative;
+    margin-bottom: var(--spacing-base);
+
+    & .delete-handler {
+      @mixin flex-center-all;
+      @mixin all-transition;
+
+      position: absolute;
+      top: 0;
+      right: calc((1rem + var(--spacing-xx-tight)) * -1);
+      height: 100%;
+    }
+
+    @media (--lg-up) {
+      & .delete-handler {
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus {
+        & .delete-handler {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

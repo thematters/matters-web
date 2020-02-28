@@ -3,13 +3,7 @@ import React from 'react'
 
 import styles from './styles.css'
 
-type TitleType =
-  | 'article'
-  | 'feed'
-  | 'modal'
-  | 'modal-headline'
-  | 'sidebar'
-  | 'nav'
+type TitleType = 'article' | 'feed' | 'sidebar' | 'nav'
 
 type TitleIs = 'h1' | 'h2' | 'h3'
 

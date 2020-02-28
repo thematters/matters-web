@@ -3,16 +3,17 @@ import { NetworkStatus } from 'apollo-client'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigest,
+  ArticleDigestFeed,
+  EmptyTagArticles,
   InfiniteScroll,
   List,
   LoadMore,
-  Spinner
+  Spinner,
+  useEventListener,
+  useResponsive
 } from '~/components'
-import EmptyTagArticles from '~/components/Empty/EmptyTagArticles'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
-import { useEventListener, useResponsive } from '~/components/Hook'
 
 import {
   ANALYTICS_EVENTS,
@@ -27,7 +28,7 @@ import {
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
     TagArticles
   >(TAG_ARTICLES, {
@@ -116,7 +117,7 @@ const LatestArticles = ({ id }: { id: string }) => {
         <List hasBorder>
           {(edges || []).map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <ArticleDigest.Feed
+              <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

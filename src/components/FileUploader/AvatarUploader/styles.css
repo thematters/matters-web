@@ -1,0 +1,18 @@
+label {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+
+  &.has-border {
+    box-shadow: 0 0 0 3px var(--color-white);
+    border-radius: 50%;
+  }
+}
+
+.mask {
+  @mixin expand-to-container;
+  @mixin flex-center-all;
+
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}

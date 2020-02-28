@@ -1,5 +1,4 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
-import * as Sentry from '@sentry/browser'
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
@@ -17,7 +16,7 @@ import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { genSentryActionId } from '~/common/utils'
+import { randomString } from '~/common/utils'
 
 // import { setupPersistCache } from './cache'
 import resolvers from './resolvers'
@@ -108,9 +107,12 @@ const authLink = setContext((_, { headers }) => {
 
 const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
-  const actionId = genSentryActionId()
-  Sentry.configureScope((scope: any) => {
-    scope.setTag('action-id', actionId)
+  const actionId = randomString()
+
+  import('@sentry/browser').then(Sentry => {
+    Sentry.configureScope((scope: any) => {
+      scope.setTag('action-id', actionId)
+    })
   })
 
   return {
@@ -122,12 +124,12 @@ const sentryLink = setContext((_, { headers }) => {
 })
 
 export default withApollo(({ ctx, headers, initialState }) => {
-  const inMemoryCache = new InMemoryCache({ fragmentMatcher })
-  inMemoryCache.restore(initialState || {})
+  const cache = new InMemoryCache({ fragmentMatcher })
+  cache.restore(initialState || {})
 
-  // setupPersistCache(inMemoryCache)
+  // setupPersistCache(cache)
 
-  return new ApolloClient({
+  const client = new ApolloClient({
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
@@ -135,8 +137,26 @@ export default withApollo(({ ctx, headers, initialState }) => {
       sentryLink,
       dataLink({ headers })
     ]),
-    cache: inMemoryCache,
-    resolvers,
+    cache,
+    resolvers: {
+      ...resolvers,
+      Query: {
+        ...resolvers.Query,
+        clientInfo: () => {
+          const data = resolvers.Query.clientInfo()
+
+          // @ts-ignore
+          const clientInfo = ctx?.req?.clientInfo || {}
+
+          return {
+            ...data,
+            ...clientInfo
+          }
+        }
+      }
+    },
     typeDefs
   })
+
+  return client
 })

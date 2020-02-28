@@ -9,7 +9,7 @@ import { AvatarUser } from './__generated__/AvatarUser'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
-interface AvatarProps {
+export interface AvatarProps {
   user?: AvatarUser
   size?: AvatarSize
   src?: string

@@ -1,6 +1,10 @@
 import { Empty, Icon, Translate } from '~/components'
 
-const EmptyComment = ({ description }: { description?: React.ReactNode }) => (
+export const EmptyComment = ({
+  description
+}: {
+  description?: React.ReactNode
+}) => (
   <Empty
     icon={<Icon.Comment color="grey-lighter" size="xxl" />}
     description={
@@ -8,5 +12,3 @@ const EmptyComment = ({ description }: { description?: React.ReactNode }) => (
     }
   />
 )
-
-export default EmptyComment

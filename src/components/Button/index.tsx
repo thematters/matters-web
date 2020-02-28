@@ -4,9 +4,16 @@ import { forwardRef } from 'react'
 
 import styles from './styles.css'
 
-type ButtonWidth = '2rem' | '4rem' | '6rem' | undefined | null
+export type ButtonWidth =
+  | '2rem'
+  | '3rem'
+  | '4rem'
+  | '6rem'
+  | '100%'
+  | undefined
+  | null
 
-type ButtonHeight =
+export type ButtonHeight =
   | '1rem'
   | '1.25rem'
   | '1.5rem'
@@ -20,29 +27,41 @@ type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
 
 type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
 
-type ButtonTextColor = 'white' | 'black' | 'green' | 'red'
-
 type ButtonColor =
   | 'white'
+  | 'black'
   | 'grey'
+  | 'grey-light'
   | 'grey-lighter'
   | 'green-lighter'
   | 'green'
   | 'gold'
   | 'red'
 
-interface ButtonProps {
+type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
+
+type ButtonBgColor = Extract<
+  ButtonColor,
+  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+>
+
+type ButtonBgHoverColor = Extract<
+  ButtonColor,
+  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+>
+
+export interface ButtonProps {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
   textHoverColor?: ButtonTextColor
 
-  bgColor?: ButtonColor
-  bgHoverColor?: ButtonColor
+  bgColor?: ButtonBgColor
+  bgHoverColor?: ButtonBgHoverColor
 
   borderColor?: ButtonColor
-  borderWidth?: 'sm'
+  borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '0' | '5rem'
 
   href?: string
@@ -77,10 +96,7 @@ interface ButtonProps {
  *    onClick={onClick}
  *  >
  *    <TextIcon weight="md" size="xs">
- *      <Translate
- *        zh_hant={TEXT.zh_hant.follow}
- *        zh_hans={TEXT.zh_hans.follow}
- *      />
+ *      <Translate id="follow" />
  *    </TextIcon>
  *  </Button>
  * ```
@@ -98,13 +114,14 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       bgHoverColor,
 
       borderColor,
-      borderWidth,
+      borderWidth = 'md',
       borderRadius = '5rem',
 
       href,
       as,
 
       is,
+      type,
 
       className,
       children,
@@ -128,7 +145,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`bg-${bgColor}`]: !!bgColor,
       [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
       [`border-${borderColor}`]: !!borderColor,
-      [`border-${borderWidth}`]: !!borderWidth,
+      [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
       [className]: !!className
@@ -136,8 +153,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
-      className: containerClass,
-      'data-clickable': isClickable
+      className: containerClass
     }
 
     // content
@@ -196,7 +212,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
     // button
     return (
-      <button {...containerProps}>
+      <button {...containerProps} type={type || 'button'}>
         <div className="content" style={contentStyle}>
           <div className="hotarea" style={hotAreaStyle} />
           {children}

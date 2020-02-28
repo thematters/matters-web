@@ -3,12 +3,10 @@ import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
-
-import styles from './styles.css'
 
 import {
   TagArticles,
@@ -37,11 +35,9 @@ const fragments = {
 }
 
 const SetTagUnselectedButton = ({
-  article,
-  hideDropdown
+  article
 }: {
   article: SetTagUnselectedButtonArticle
-  hideDropdown: () => void
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
@@ -97,18 +93,15 @@ const SetTagUnselectedButton = ({
   }
 
   return (
-    <button
-      type="button"
-      onClick={async event => {
-        event.stopPropagation()
+    <Menu.Item
+      onClick={async () => {
         await update()
       }}
     >
-      <TextIcon icon={<Icon.UnPinMedium />} spacing="tight">
+      <TextIcon icon={<Icon.UnPinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消精選" zh_hans="取消精选" />
       </TextIcon>
-      <style jsx>{styles}</style>
-    </button>
+    </Menu.Item>
   )
 }
 
