@@ -61,9 +61,9 @@ const Dialog: React.FC<DialogProps> = ({
 
     return (
       <div ref={node} className={containerClass} {...props}>
-        {!isSmallUp && <Handle />}
-
         {children}
+
+        {!isSmallUp && <Handle close={onDismiss} />}
 
         <style jsx>{styles}</style>
       </div>
