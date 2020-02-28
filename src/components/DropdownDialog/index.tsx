@@ -150,21 +150,19 @@ export const DropdownDialog = ({
       {children({ open, close })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
-        <Content>
-          <Dialog.Header title={dialog.title} close={close} headerHidden />
+        <Dialog.Header title={dialog.title} close={close} headerHidden />
 
-          {dialog.content}
+        <Content>{dialog.content}</Content>
 
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={close}
-            >
-              <Translate id="close" />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
-        </Content>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            bgColor="grey-lighter"
+            textColor="black"
+            onClick={close}
+          >
+            <Translate id="close" />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
       </Dialog>
     </>
   )
