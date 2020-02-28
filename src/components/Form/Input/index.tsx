@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 import { randomString } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
@@ -42,7 +40,6 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
   const fieldId = randomString()
   const fieldMsgId = randomString()
 
@@ -56,14 +53,6 @@ const Input: React.FC<InputProps> = ({
           name={name}
           type={type}
           aria-describedby={fieldMsgId}
-          onFocus={(...props) => {
-            setTimeout(() => node.current.focus())
-
-            if (inputProps.onFocus) {
-              inputProps.onFocus(...props)
-            }
-          }}
-          ref={node}
         />
       </Field.Content>
 
