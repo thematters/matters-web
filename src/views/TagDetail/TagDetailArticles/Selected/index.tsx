@@ -28,7 +28,7 @@ import {
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const SelectedArticles = ({ id }: { id: string }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
     TagArticles
   >(TAG_ARTICLES, {

@@ -8,7 +8,7 @@ interface LoginButtonProps {
 }
 
 export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp
     ? {

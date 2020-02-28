@@ -88,7 +88,7 @@ const NotificationButton = () => {
     }
   }, [])
 
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const { headerState } = useContext(HeaderContext)
   const isDraft = headerState.type === 'draft'
   const unread =

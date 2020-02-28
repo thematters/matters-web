@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
-  BlockUserButton,
   Button,
   DropdownDialog,
   Icon,
@@ -10,15 +11,36 @@ import {
   Translate,
   ViewerContext
 } from '~/components'
+import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
 import CollapseButton from './CollapseButton'
-import DeleteButton from './DeleteButton'
+import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
+
+interface DropdownActionsProps {
+  comment: DropdownActionsComment
+  editComment?: () => void
+}
+
+interface Controls {
+  hasPinButton: boolean
+  hasEditButton: boolean
+  hasDeleteButton: boolean
+  hasBlockUserButton: boolean
+  hasCollapseButton: boolean
+}
+
+interface DialogProps {
+  openDeleteCommentDialog?: () => void
+  openBlockUserDialog?: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const fragments = {
   comment: gql`
@@ -43,67 +65,47 @@ const fragments = {
       ...CollapseButtonComment
     }
     ${PinButton.fragments.comment}
-    ${BlockUserButton.fragments.user}
+    ${BlockUser.fragments.user}
     ${CollapseButton.fragments.comment}
   `
 }
 
-const DropdownActions = ({
+const BaseDropdownActions = ({
   comment,
-  editComment
-}: {
-  comment: DropdownActionsComment
-  editComment?: () => void
-}) => {
-  const viewer = useContext(ViewerContext)
-  const isArticleAuthor = viewer.id === comment.article.author.id
-  const isCommentAuthor = viewer.id === comment.author.id
-  const isActive = comment.state === 'active'
-  const isCollapsed = comment.state === 'collapsed'
-  const isDescendantComment = comment.parentComment
-
-  const hasPinButton = isArticleAuthor && isActive && !isDescendantComment
-  const hasEditButton = isCommentAuthor && !!editComment && isActive
-  const hasDeleteButton = isCommentAuthor && isActive
-  const hasBlockUserButton = !isCommentAuthor
-  const hasCollapseButton =
-    isArticleAuthor && !isCommentAuthor && (isActive || isCollapsed)
-
-  if (
-    (!hasPinButton &&
-      !hasEditButton &&
-      !hasDeleteButton &&
-      !hasBlockUserButton &&
-      !hasCollapseButton) ||
-    viewer.isInactive
-  ) {
-    return null
-  }
-
-  const Content = ({ type }: { type: 'dialog' | 'dropdown' }) => {
-    const isDropdown = type === 'dropdown'
-
-    return (
-      <Menu width={isDropdown ? 'sm' : undefined}>
-        {hasPinButton && <PinButton comment={comment} />}
-        {hasEditButton && editComment && (
-          <EditButton editComment={editComment} />
-        )}
-        {hasDeleteButton && <DeleteButton commentId={comment.id} />}
-        {hasBlockUserButton && <BlockUserButton user={comment.author} />}
-        {hasCollapseButton && <CollapseButton comment={comment} />}
-      </Menu>
-    )
-  }
+  editComment,
+  hasPinButton,
+  hasEditButton,
+  hasDeleteButton,
+  hasBlockUserButton,
+  hasCollapseButton,
+  openDeleteCommentDialog,
+  openBlockUserDialog
+}: BaseDropdownActionsProps) => {
+  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      {hasPinButton && <PinButton comment={comment} />}
+      {hasEditButton && editComment && <EditButton editComment={editComment} />}
+      {hasDeleteButton && openDeleteCommentDialog && (
+        <DeleteComment.Button openDialog={openDeleteCommentDialog} />
+      )}
+      {hasBlockUserButton && openBlockUserDialog && (
+        <BlockUser.Button
+          user={comment.author}
+          openDialog={openBlockUserDialog}
+        />
+      )}
+      {hasCollapseButton && <CollapseButton comment={comment} />}
+    </Menu>
+  )
 
   return (
     <DropdownDialog
       dropdown={{
-        content: <Content type="dropdown" />,
+        content: <Content isInDropdown />,
         placement: 'bottom-end'
       }}
       dialog={{
-        content: <Content type="dialog" />,
+        content: <Content />,
         title: <Translate id="moreActions" />
       }}
     >
@@ -121,6 +123,82 @@ const DropdownActions = ({
         </Button>
       )}
     </DropdownDialog>
+  )
+}
+
+const DropdownActions = (props: DropdownActionsProps) => {
+  const { comment, editComment } = props
+  const viewer = useContext(ViewerContext)
+
+  const isArticleAuthor = viewer.id === comment.article.author.id
+  const isCommentAuthor = viewer.id === comment.author.id
+  const isActive = comment.state === 'active'
+  const isCollapsed = comment.state === 'collapsed'
+  const isDescendantComment = comment.parentComment
+
+  const controls = {
+    hasPinButton: !!(isArticleAuthor && isActive && !isDescendantComment),
+    hasEditButton: !!(isCommentAuthor && !!editComment && isActive),
+    hasDeleteButton: !!(isCommentAuthor && isActive),
+    hasBlockUserButton: !isCommentAuthor,
+    hasCollapseButton: !!(
+      isArticleAuthor &&
+      !isCommentAuthor &&
+      (isActive || isCollapsed)
+    )
+  }
+
+  if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {
+    return null
+  }
+
+  if (!controls.hasDeleteButton && !controls.hasBlockUserButton) {
+    return <BaseDropdownActions {...props} {...controls} />
+  }
+
+  if (!controls.hasDeleteButton && controls.hasBlockUserButton) {
+    return (
+      <BlockUser.Dialog user={comment.author}>
+        {({ open: openBlockUserDialog }) => (
+          <BaseDropdownActions
+            {...props}
+            {...controls}
+            openBlockUserDialog={openBlockUserDialog}
+          />
+        )}
+      </BlockUser.Dialog>
+    )
+  }
+
+  if (controls.hasDeleteButton && !controls.hasBlockUserButton) {
+    return (
+      <DeleteComment.Dialog commentId={comment.id}>
+        {({ open: openDeleteCommentDialog }) => (
+          <BaseDropdownActions
+            {...props}
+            {...controls}
+            openDeleteCommentDialog={openDeleteCommentDialog}
+          />
+        )}
+      </DeleteComment.Dialog>
+    )
+  }
+
+  return (
+    <DeleteComment.Dialog commentId={comment.id}>
+      {({ open: openDeleteCommentDialog }) => (
+        <BlockUser.Dialog user={comment.author}>
+          {({ open: openBlockUserDialog }) => (
+            <BaseDropdownActions
+              {...props}
+              {...controls}
+              openDeleteCommentDialog={openDeleteCommentDialog}
+              openBlockUserDialog={openBlockUserDialog}
+            />
+          )}
+        </BlockUser.Dialog>
+      )}
+    </DeleteComment.Dialog>
   )
 }
 

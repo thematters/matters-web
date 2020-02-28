@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,6 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
-  filterFormErrors,
   randomString,
   translate,
   validateAvatar,
@@ -75,7 +75,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       description: ''
     },
     validate: ({ avatar, displayName, description }) =>
-      filterFormErrors({
+      _pickBy({
         avatar: validateAvatar(avatar, lang),
         displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang)

@@ -107,13 +107,10 @@ const ArticleDetail = ({
   const [fixedToolbar, setFixedToolbar] = useState(false)
 
   const [fixedWall, setFixedWall] = useState(false)
-  const isMediumUp = useResponsive({ type: 'md-up' })()
-  const { data, loading, error, client } = useQuery<ArticleDetailType>(
-    ARTICLE_DETAIL,
-    {
-      variables: { mediaHash }
-    }
-  )
+  const isMediumUp = useResponsive('md-up')
+  const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
+    variables: { mediaHash }
+  })
   // subscribeToMore,
 
   const shouldShowWall = !viewer.isAuthed && wall
@@ -269,7 +266,7 @@ const ArticleDetail = ({
         </section>
       </Waypoint>
 
-      {shouldShowWall && <Wall show={fixedWall} client={client} />}
+      {shouldShowWall && <Wall show={fixedWall} />}
 
       <Block type="section">
         {shouldShowWall && <section id="comments" />}

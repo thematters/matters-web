@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -13,7 +14,6 @@ import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -65,7 +65,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       code: ''
     },
     validate: ({ email, code }) =>
-      filterFormErrors({
+      _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
         code: validateCode(code, lang)
       }),

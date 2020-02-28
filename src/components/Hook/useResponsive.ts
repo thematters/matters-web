@@ -1,64 +1,57 @@
-import { useMediaQuery } from 'react-responsive'
+import { useQuery } from '@apollo/react-hooks'
+
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 import { BREAKPOINTS } from '~/common/enums'
 
-interface Props {
-  type:
-    | 'sm-down'
-    | 'sm-up'
-    | 'md-up'
-    | 'lg-up'
-    | 'sm'
-    | 'xs'
-    | 'md'
-    | 'lg'
-    | 'xl'
-}
+import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
-const useSmallDown = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
-const useSmallUp = () => useMediaQuery({ minWidth: BREAKPOINTS.SM })
-const useMediumUp = () => useMediaQuery({ minWidth: BREAKPOINTS.MD })
-const useLargeUp = () => useMediaQuery({ minWidth: BREAKPOINTS.LG })
-const useXSmall = () => useMediaQuery({ maxWidth: BREAKPOINTS.SM - 1 })
-const useSmall = () =>
-  useMediaQuery({
-    minWidth: BREAKPOINTS.SM,
-    maxWidth: BREAKPOINTS.MD - 1
-  })
-const useMedium = () =>
-  useMediaQuery({
-    minWidth: BREAKPOINTS.MD,
-    maxWidth: BREAKPOINTS.LG - 1
-  })
-const useLarge = () =>
-  useMediaQuery({
-    minWidth: BREAKPOINTS.LG,
-    maxWidth: BREAKPOINTS.XL - 1
-  })
-const useXLarge = () =>
-  useMediaQuery({
-    minWidth: BREAKPOINTS.XL
-  })
+type Type =
+  | 'sm-down'
+  | 'sm-up'
+  | 'md-up'
+  | 'lg-up'
+  | 'sm'
+  | 'xs'
+  | 'md'
+  | 'lg'
+  | 'xl'
 
-export const useResponsive = ({ type }: Props) => {
+export const useResponsive = (type: Type) => {
+  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
+    variables: { id: 'local' }
+  })
+  const isPhone = data?.clientInfo.isPhone
+  const isTablet = data?.clientInfo.isTablet
+  const defaultWidth = isPhone
+    ? BREAKPOINTS.SM
+    : isTablet
+    ? BREAKPOINTS.MD
+    : BREAKPOINTS.LG
+  const width = data?.clientInfo.viewportSize.width || defaultWidth
+
+  if (!width) {
+    return false
+  }
+
   switch (type) {
     case 'sm-down':
-      return useSmallDown
+      return width < BREAKPOINTS.SM - 1
     case 'sm-up':
-      return useSmallUp
+      return width >= BREAKPOINTS.SM
     case 'md-up':
-      return useMediumUp
+      return width >= BREAKPOINTS.MD
     case 'lg-up':
-      return useLargeUp
+      return width >= BREAKPOINTS.LG
     case 'xs':
-      return useXSmall
+      return width < BREAKPOINTS.SM - 1
     case 'sm':
-      return useSmall
+      return width >= BREAKPOINTS.SM && width < BREAKPOINTS.MD - 1
     case 'md':
-      return useMedium
+      return width >= BREAKPOINTS.MD && width < BREAKPOINTS.LG - 1
     case 'lg':
-      return useLarge
+      return width >= BREAKPOINTS.LG && width < BREAKPOINTS.XL - 1
     case 'xl':
-      return useXLarge
+      return width >= BREAKPOINTS.XL
   }
 }

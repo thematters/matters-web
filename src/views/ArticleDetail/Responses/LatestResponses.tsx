@@ -122,7 +122,7 @@ const SUBSCRIBE_RESPONSE_ADDED = gql`
 `
 
 const LatestResponses = () => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)

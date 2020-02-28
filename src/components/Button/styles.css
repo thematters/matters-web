@@ -213,6 +213,11 @@ span.container {
     }
   }
 }
+.bg-red {
+  & .hotarea {
+    background: var(--color-red);
+  }
+}
 
 /* Background:hover */
 .bg-hover-grey {

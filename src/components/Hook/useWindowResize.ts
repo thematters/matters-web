@@ -26,8 +26,8 @@ const getSize = (): Size => {
   return [window.innerWidth, window.innerHeight]
 }
 
-export const useWindowResize = () => {
-  const [size, setSize] = useState<Size>([undefined, undefined])
+export const useWindowResize = (defaultSizes?: Size) => {
+  const [size, setSize] = useState<Size>(defaultSizes || [undefined, undefined])
   const resize = _debounce(() => setSize(getSize()), WINDOW_RESIZE_DEBOUNCE)
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -23,7 +24,6 @@ import {
 import {
   analytics,
   appendTarget,
-  filterFormErrors,
   parseFormSubmitErrors,
   randomString,
   translate,
@@ -114,7 +114,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       tos: true
     },
     validate: ({ email, code, userName, password, tos }) =>
-      filterFormErrors({
+      _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: false }),
         code: validateCode(code, lang),
         userName: validatePassword(password, lang),

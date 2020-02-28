@@ -8,8 +8,6 @@ import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import styles from './styles.css'
-
 import {
   TagArticles,
   TagArticles_node_Tag
@@ -103,7 +101,6 @@ const SetTagUnselectedButton = ({
       <TextIcon icon={<Icon.UnPinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消精選" zh_hans="取消精选" />
       </TextIcon>
-      <style jsx>{styles}</style>
     </Menu.Item>
   )
 }

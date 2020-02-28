@@ -26,13 +26,13 @@ const MeDigest = ({ user }: { user: MeDigestUser }) => {
   return (
     <DropdownDialog
       dropdown={{
-        content: <DropdownMenu type="dropdown" />,
+        content: <DropdownMenu isInDropdown />,
         trigger: 'mouseenter focus click',
         appendTo: process.browser ? document.body : undefined,
         zIndex: Z_INDEX.OVER_GLOBAL_HEADER
       }}
       dialog={{
-        content: <DropdownMenu type="dialog" />,
+        content: <DropdownMenu />,
         title: '我的'
       }}
     >

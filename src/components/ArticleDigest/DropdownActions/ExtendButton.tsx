@@ -7,8 +7,6 @@ import { useMutation } from '~/components/GQL'
 
 import { toPath, translate } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { ExtendArticle } from './__generated__/ExtendArticle'
 import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
 
@@ -58,8 +56,6 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
       >
         <Translate id="extendArticle" />
       </TextIcon>
-
-      <style jsx>{styles}</style>
     </Menu.Item>
   )
 }
