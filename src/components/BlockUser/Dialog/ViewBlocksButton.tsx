@@ -3,7 +3,7 @@ import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
 import { PATHS } from '~/common/enums'
 
 const ViewBlocksButton = () => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
 
   return (
     <Button

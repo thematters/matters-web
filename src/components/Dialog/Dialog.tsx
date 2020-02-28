@@ -32,7 +32,7 @@ const Dialog: React.FC<DialogProps> = ({
   const node: React.RefObject<any> | null = useRef(null)
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const transitions = useTransition(isOpen, null, {
     from: {
       opacity: 0,

@@ -30,7 +30,7 @@ import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const viewer = useContext(ViewerContext)
   const { headerState } = useContext(HeaderContext)
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isLargeUp = useResponsive('lg-up')
   const { type: headerType } = headerState
   const isDraft = headerType === 'draft'
   const isLogin = headerType === 'login'
@@ -61,7 +61,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
           <section className={rightClass}>
             {!isAbout && viewer.isAuthed && user && (
               <>
-                {isMediumUp ? <SearchBar /> : <SearchButton />}
+                {isLargeUp ? <SearchBar /> : <SearchButton />}
                 <NotificationButton />
                 <MeDigest user={user} />
                 {isDraft && !viewer.isInactive && (

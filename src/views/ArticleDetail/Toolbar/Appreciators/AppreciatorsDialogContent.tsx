@@ -78,7 +78,7 @@ const AppreciatorsDialogContent = ({
 }: {
   closeDialog: () => void
 }) => {
-  const isSmallUp = useResponsive({ type: 'sm-up' })()
+  const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const { data, loading, error, fetchMore } = useQuery<AllArticleAppreciators>(

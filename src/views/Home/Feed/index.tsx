@@ -74,7 +74,7 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isMediumUp = useResponsive({ type: 'md-up' })()
+  const isMediumUp = useResponsive('md-up')
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
@@ -148,7 +148,9 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 }
 
 const HomeFeed = () => {
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE)
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest'
   }
