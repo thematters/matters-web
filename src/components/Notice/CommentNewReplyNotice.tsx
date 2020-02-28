@@ -26,7 +26,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <Icon.Comment color="green" style={{ margin: '0.5rem' }}/>
+          <Icon.Comment color="green" style={{ margin: '0.5rem' }} />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
