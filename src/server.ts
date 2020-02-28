@@ -51,13 +51,6 @@ app
           isMobile: !!detect.mobile()
         }
 
-        console.log(
-          req.headers['user-agent'] || '',
-          detect.phone(),
-          detect.tablet(),
-          detect.mobile()
-        )
-
         return app.render(req, res, href, {
           ...req.query,
           ...req.params

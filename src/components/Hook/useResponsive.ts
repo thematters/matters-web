@@ -23,9 +23,9 @@ export const useResponsive = (type: Type) => {
   })
   const { isPhone, isTablet, isMobile } = data?.clientInfo || {}
   const defaultWidth = isPhone
-    ? BREAKPOINTS.SM
+    ? BREAKPOINTS.SM - 1
     : isTablet || isMobile
-    ? BREAKPOINTS.MD
+    ? BREAKPOINTS.MD - 1
     : BREAKPOINTS.LG
   const width = data?.clientInfo.viewportSize.width || defaultWidth
 
