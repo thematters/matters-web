@@ -104,7 +104,6 @@ const Request: React.FC<FormProps> = ({
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
-        autoComplete="off"
         required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
         value={values.code}

@@ -72,13 +72,13 @@ export const SearchBar: React.FC<{
               onSubmit={handleSubmit}
               aria-label={textPlaceholder}
               role="search"
+              autoComplete="off"
             >
               <input
                 type="search"
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 autoCorrect="off"
                 onChange={handleChange}
                 value={values.q}
@@ -110,7 +110,6 @@ export const SearchBar: React.FC<{
                 name="q"
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
-                autoComplete="off"
                 value={values.q}
                 onChange={e => {
                   handleChange(e)

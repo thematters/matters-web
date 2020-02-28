@@ -183,7 +183,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label={<Translate id="verificationCode" />}
         type="text"
         name="code"
-        autoComplete="off"
         required
         placeholder={translate({
           id: 'enterVerificationCode',
@@ -206,7 +205,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label="Matters ID"
         type="text"
         name="userName"
-        autoComplete="off"
         required
         value={values.userName}
         error={touched.userName && errors.userName}
@@ -227,7 +225,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         label={<Translate id="password" />}
         type="password"
         name="password"
-        autoComplete="off"
         required
         placeholder={translate({
           id: 'enterPassword',
