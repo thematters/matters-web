@@ -11,10 +11,6 @@ interface CloseButtonProps {
 export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
   const isSmallUp = useResponsive('sm-up')
 
-  if (!process.browser) {
-    return null
-  }
-
   return (
     <Button
       onClick={close}
@@ -46,9 +42,6 @@ export const RightButton: React.FC<RightButtonProps> = ({
 }) => {
   const isSmallUp = useResponsive('sm-up')
 
-  if (!process.browser) {
-    return null
-  }
 
   return (
     <Button

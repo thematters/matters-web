@@ -1,3 +1,4 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef, useState } from 'react'
 
 import {
@@ -10,6 +11,8 @@ import {
   Translate,
   useResponsive
 } from '~/components'
+
+import { KEYCODES, TEXT } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -90,6 +93,39 @@ export const DropdownDialog = ({
     // dialog
     setShowDialog(false)
   }
+  const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
+    const target = event.target as HTMLElement
+
+    if (target?.closest && target.closest('[data-clickable], a, button')) {
+      close()
+    }
+
+    event.stopPropagation()
+  }
+
+  const Content: React.FC = ({ children: contentChildren }) => {
+    return (
+      <section
+        onKeyDown={event => {
+          if (event.keyCode !== KEYCODES.enter) {
+            return
+          }
+          closeOnClick(event)
+        }}
+        onClick={closeOnClick}
+      >
+        <VisuallyHidden>
+          <button
+            type="button"
+            aria-label={TEXT.zh_hant.close}
+            onClick={close}
+          />
+        </VisuallyHidden>
+
+        {contentChildren}
+      </section>
+    )
+  }
 
   /**
    * Desktop: <Dropdown>
@@ -98,7 +134,7 @@ export const DropdownDialog = ({
     return (
       <Dropdown
         {...dropdown}
-        content={dropdown.content}
+        content={<Content>{dropdown.content}</Content>}
         onCreate={setDropdownInstance}
       >
         <ForwardChildren open={open} close={close} children={children} />
@@ -116,7 +152,7 @@ export const DropdownDialog = ({
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
         <Dialog.Header title={dialog.title} close={close} headerHidden />
 
-        {dialog.content}
+        <Content>{dialog.content}</Content>
 
         <Dialog.Footer>
           <Dialog.Footer.Button

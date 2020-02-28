@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button, Dialog, Icon, Spinner, Translate } from '~/components'
 
@@ -50,9 +50,16 @@ const CopyButton = ({ text }: { text: string }) => {
 }
 
 const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
-  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const [loadGateways, { loading, data }] = useLazyQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
+
+  // FIXME: lazy load to fix wrong behavior of react-spring on Safari
+  useEffect(() => {
+    setTimeout(() => {
+      loadGateways()
+    }, 1000)
+  }, [])
 
   return (
     <section className="container">
@@ -89,7 +96,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
         </header>
 
         <ul>
-          {loading && <Spinner />}
+          {(!data || loading) && <Spinner />}
 
           {gateways.map((url, i) => {
             const gatewayUrl = `${url}${dataHash}`
@@ -158,10 +165,10 @@ const FingerprintDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close}>
+      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header title={<Translate id="IPFSEntrance" />} close={close} />
 
-        <Dialog.Content spacing={[0, 0]}>
+        <Dialog.Content spacing={[0, 0]} hasGrow>
           <FingerprintDialogContent {...restProps} />
         </Dialog.Content>
       </Dialog>
