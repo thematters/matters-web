@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -19,22 +18,26 @@ const NoticeArticle = ({
     return null
   }
 
-  const linkClasses = classNames({
-    'article-block': isBlock
-  })
-
   const path = toPath({
     page: 'articleDetail',
     article
   })
 
-  return (
-    <>
+  if (!isBlock) {
+    return (
       <Link {...path}>
-        <a className={linkClasses}>{article.title}</a>
+        <a>{article.title}</a>
+      </Link>
+    )
+  }
+
+  return (
+    <section className="article-block">
+      <Link {...path}>
+        <a>{article.title}</a>
       </Link>
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 
