@@ -25,7 +25,10 @@ const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate zh_hant="將標籤從你的作品移除" zh_hans="将标签從你的作品移除" />
+          <Translate
+            zh_hant="將標籤從你的作品移除"
+            zh_hans="将标签從你的作品移除"
+          />
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />

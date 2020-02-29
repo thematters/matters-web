@@ -29,7 +29,10 @@ const ArticleTagHasBeenUnselectedNotice = ({
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate zh_hant="將你的作品從標籤精選文集移除" zh_hans="将你的作品從标签精选文集移除" />
+          <Translate
+            zh_hant="將你的作品從標籤精選文集移除"
+            zh_hans="将你的作品從标签精选文集移除"
+          />
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />
