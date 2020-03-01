@@ -142,7 +142,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.2.0",
     "tslint-react-hooks": "^2.2.1",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.3"
   },
   "_moduleAliases": {
     "~": "./build/production-server"
