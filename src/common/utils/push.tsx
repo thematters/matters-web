@@ -44,7 +44,17 @@ export const initializePush = async ({
     return
   }
 
-  if (!firebase.messaging.isSupported()) {
+  if (firebase.messaging.isSupported()) {
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        push: {
+          supported: true,
+          __typename: 'Push'
+        }
+      }
+    })
+  } else {
     return
   }
 
@@ -97,7 +107,6 @@ export const initializePush = async ({
     id: 'ClientPreference:local',
     data: {
       push: {
-        supported: firebase.messaging.isSupported(),
         enabled: (isViewerPush && push.enabled) || false,
         __typename: 'Push'
       }
