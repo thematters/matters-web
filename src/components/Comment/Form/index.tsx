@@ -104,11 +104,7 @@ const CommentForm = ({
     }
 
     const push = clientPreferenceData?.clientPreference.push
-    const skipPushButton =
-      !push ||
-      !push.supported ||
-      push.enabled ||
-      Notification.permission === 'granted'
+    const skipPushButton = !push || !push.supported || push.enabled
 
     event.preventDefault()
     setSubmitting(true)
