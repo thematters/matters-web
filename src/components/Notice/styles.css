@@ -82,11 +82,7 @@
   }
 }
 
-.comment-content {
-  margin-top: var(--spacing-tight);
-}
-
-.collection-article {
+.sub-content {
   margin-top: var(--spacing-tight);
 }
 
@@ -98,7 +94,6 @@
 
 .tag-content {
   position: relative;
-  margin-top: var(--spacing-tight);
 
   & :global(.card) {
 

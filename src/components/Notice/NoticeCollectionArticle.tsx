@@ -16,7 +16,7 @@ const NoticeCollectionArticle = ({
   }
 
   return (
-    <section className="collection-article">
+    <section className="sub-content">
       <ArticleDigestSidebar article={article} hasCover={false} hasBackground />
       <style jsx>{styles}</style>
     </section>

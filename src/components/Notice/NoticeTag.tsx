@@ -19,7 +19,7 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
   })
 
   return (
-    <section className="tag-content">
+    <section className="sub-content tag-content">
       <Card
         {...path}
         bgColor="grey-lighter"
