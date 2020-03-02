@@ -82,9 +82,14 @@ export const initializePush = async ({
    */
   const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
   const isViewerPush = viewer.id === push.userId
-  const token = await getToken()
+  const isNotificationGranted = Notification.permission === 'granted'
+
+  if (!viewer.id || !isNotificationGranted) {
+    return
+  }
 
   if (!isViewerPush) {
+    const token = await getToken()
     await unsubscribePushLocally(token)
   }
 
@@ -98,11 +103,6 @@ export const initializePush = async ({
       }
     }
   })
-
-  // auto re-subscribe push
-  if (viewer.id && Notification.permission === 'granted') {
-    subscribePush({ silent: true })
-  }
 }
 
 export const subscribePush = async (options?: { silent?: boolean }) => {
