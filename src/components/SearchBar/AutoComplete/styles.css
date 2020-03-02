@@ -8,9 +8,26 @@
   margin-top: var(--spacing-xx-tight);
   padding: 0 var(--spacing-base);
 
-  & :global(> *) {
-    margin-right: var(--spacing-tight);
+  & > a {
+    @mixin truncate;
+    display: inline-block;
+    padding: var(--spacing-xx-tight) var(--spacing-x-tight);
     margin-bottom: var(--spacing-tight);
+
+    color: var(--color-grey-darker);
+    font-size: var(--font-size-sm);
+    line-height: 1rem;
+    background: var(--color-grey-lighter);
+    border-radius: 3rem;
+
+    &:not(:last-child) {
+      margin-right: var(--spacing-tight);
+    }
+
+    &:hover,
+    &:focus {
+      background: var(--color-green-lighter);
+    }
   }
 }
 
