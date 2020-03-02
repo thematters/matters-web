@@ -17,13 +17,11 @@ export default {
           cursor
           node {
             ...ArticleDigestDropdownArticle
-            ...ArticleDigestSidebarArticle
           }
         }
       }
     }
     ${ArticleDigestDropdown.fragments.article}
-    ${ArticleDigestSidebar.fragments.article}
   `,
   articleCollection: gql`
     fragment ArticleCollection on Article {
