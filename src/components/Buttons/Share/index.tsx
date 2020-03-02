@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { Button, Icon, IconColor, IconSize } from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, SHARE_TYPE, TEXT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { ShareDialog } from './ShareDialog'
@@ -32,20 +32,19 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
 
   const shareLink = process.browser
     ? path
-      ? `${window.location.origin}/${path}`
+      ? `${window.location.origin}${path}`
       : window.location.href
     : ''
   const shareTitle =
     title || (process.browser ? window.document.title || '' : '')
-  const ariaTitle = `分享 ${shareTitle}`
 
   return (
-    <ShareDialog title={ariaTitle} link={shareLink}>
+    <ShareDialog title={shareTitle} link={shareLink}>
       {({ open }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgHoverColor="grey-lighter"
-          aria-label={ariaTitle}
+          aria-label={TEXT.zh_hant.share}
           aria-haspopup="true"
           onClick={async () => {
             const navigator = window.navigator as any

@@ -12,7 +12,20 @@ const Copy = ({ link }: { link: string }) => {
   const inputRef: React.RefObject<any> | null = useRef(null)
 
   const copy = () => {
-    dom.copyToClipboard(decodeURI(link))
+    const copied = dom.copyToClipboard(decodeURI(link))
+
+    if (!copied) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="failureCopy" />
+          }
+        })
+      )
+      return
+    }
+
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
@@ -44,9 +57,12 @@ const Copy = ({ link }: { link: string }) => {
         readOnly
         onClick={copy}
         onKeyDown={event => {
+          event.stopPropagation()
+
           if (event.keyCode !== KEYCODES.enter) {
             return
           }
+
           copy()
         }}
       />

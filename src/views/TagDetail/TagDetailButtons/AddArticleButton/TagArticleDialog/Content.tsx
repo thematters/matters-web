@@ -15,7 +15,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
 import { parseFormSubmitErrors, randomString, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -92,15 +92,14 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       articles: []
     },
     validate: ({ name, articles }) => {
-      return {
-        name:
-          articles && articles.length === 0
-            ? translate({
-                zh_hant: '至少添加一篇作品',
-                zh_hans: '至少添加一篇作品',
-                lang
-              })
-            : undefined
+      if (articles.length <= 0) {
+        return {
+          name: translate({
+            zh_hant: '至少添加一篇作品',
+            zh_hans: '至少添加一篇作品',
+            lang
+          })
+        }
       }
     },
     onSubmit: async ({ name, articles }, { setFieldError, setSubmitting }) => {
@@ -153,7 +152,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       values.articles.filter(articleId => articleId !== article.id)
     )
     setSelectedArticles(
-      selectedArticles.filter(({ articleId }: any) => articleId !== article.id)
+      selectedArticles.filter(({ id: articleId }) => articleId !== article.id)
     )
   }
 
@@ -196,7 +195,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             <span className="delete-handler">
               <Button
                 spacing={['base', 0]}
-                aria-label="刪除"
+                aria-label={TEXT.zh_hant.delete}
                 onClick={() => onDelete(article)}
               >
                 <Icon.Clear color="black" />
