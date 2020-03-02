@@ -30,21 +30,18 @@ const copyToClipboard = (str: string) => {
   el.style.position = 'absolute'
   el.style.left = '-9999px'
   el.style.fontSize = '12pt'
+  document.body.appendChild(el)
+
   const selection = document.getSelection()
-  let originalRange: Range | null = null
 
   if (!selection) {
     return
   }
 
-  if (selection.rangeCount > 0) {
-    originalRange = selection.getRangeAt(0)
-  }
-
-  document.body.appendChild(el)
-  el.select()
-  el.selectionStart = 0
-  el.selectionEnd = str.length
+  const range = document.createRange()
+  range.selectNode(el)
+  selection.removeAllRanges()
+  selection.addRange(range)
 
   let success = false
   try {
@@ -56,14 +53,8 @@ const copyToClipboard = (str: string) => {
   } catch (err) {
     console.error('This error was caught while copying the text', err)
   } finally {
-    if (originalRange) {
-      selection.removeAllRanges()
-      selection.addRange(originalRange)
-    }
-
-    if (el) {
-      document.body.removeChild(el)
-    }
+    selection.removeAllRanges()
+    document.body.removeChild(el)
   }
 
   return success
