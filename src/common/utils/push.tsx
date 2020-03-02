@@ -44,7 +44,17 @@ export const initializePush = async ({
     return
   }
 
-  if (!firebase.messaging.isSupported()) {
+  if (firebase.messaging.isSupported()) {
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        push: {
+          supported: true,
+          __typename: 'Push'
+        }
+      }
+    })
+  } else {
     return
   }
 
@@ -82,9 +92,14 @@ export const initializePush = async ({
    */
   const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
   const isViewerPush = viewer.id === push.userId
-  const token = await getToken()
+  const isNotificationGranted = Notification.permission === 'granted'
+
+  if (!viewer.id || !isNotificationGranted) {
+    return
+  }
 
   if (!isViewerPush) {
+    const token = await getToken()
     await unsubscribePushLocally(token)
   }
 
@@ -92,17 +107,11 @@ export const initializePush = async ({
     id: 'ClientPreference:local',
     data: {
       push: {
-        supported: firebase.messaging.isSupported(),
         enabled: (isViewerPush && push.enabled) || false,
         __typename: 'Push'
       }
     }
   })
-
-  // auto re-subscribe push
-  if (viewer.id && Notification.permission === 'granted') {
-    subscribePush({ silent: true })
-  }
 }
 
 export const subscribePush = async (options?: { silent?: boolean }) => {

@@ -43,12 +43,7 @@ const Subscribe = ({
     await subscribe()
 
     // skip
-    if (
-      !push ||
-      !push.supported ||
-      push.enabled ||
-      Notification.permission === 'granted'
-    ) {
+    if (!push || !push.supported || push.enabled) {
       return
     }
 

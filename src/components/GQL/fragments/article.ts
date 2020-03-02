@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestDropdown } from '~/components'
+import { ArticleDigestDropdown, ArticleDigestSidebar } from '~/components'
 
 export default {
   editorCollection: gql`
@@ -38,10 +38,12 @@ export default {
           cursor
           node {
             ...ArticleDigestDropdownArticle
+            ...ArticleDigestSidebarArticle
           }
         }
       }
     }
     ${ArticleDigestDropdown.fragments.article}
+    ${ArticleDigestSidebar.fragments.article}
   `
 }

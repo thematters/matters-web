@@ -15,6 +15,7 @@ import {
   useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import articleFragments from '~/components/GQL/fragments/article'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -28,24 +29,10 @@ export const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      collection(input: { after: $after, first: $first }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        totalCount
-        edges {
-          cursor
-          node {
-            id
-            ...ArticleDigestSidebarArticle
-          }
-        }
-      }
+      ...ArticleCollection
     }
   }
-  ${ArticleDigestSidebar.fragments.article}
+  ${articleFragments.articleCollection}
 `
 
 const CollectionList = ({

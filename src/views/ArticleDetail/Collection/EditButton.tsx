@@ -56,6 +56,7 @@ const EditButton = ({
           first: null
         }
       })
+
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {

@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Fragment, useEffect } from 'react'
 
-import { Button, Menu, TextIcon, Translate } from '~/components'
+import { Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -65,9 +65,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
 
           <section className="recent-searches">
             {recentSearches.map(({ node }, i) => (
-              <Button
-                spacing={['xxtight', 'xtight']}
-                bgColor="grey-lighter"
+              <a
                 {...toPath({
                   page: 'search',
                   q: node
@@ -80,8 +78,8 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
                 }}
                 key={node}
               >
-                <TextIcon color="grey-darker">{node}</TextIcon>
-              </Button>
+                {node}
+              </a>
             ))}
 
             <style jsx>{styles}</style>

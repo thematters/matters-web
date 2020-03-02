@@ -10,6 +10,8 @@ import {
 
 import { ArticleDigestDropdown, Button, Icon } from '~/components'
 
+import { TEXT } from '~/common/enums'
+
 import CollectForm from './CollectForm'
 import styles from './styles.css'
 
@@ -126,7 +128,7 @@ class CollectionEditor extends React.Component<Props, State> {
                         <span className="delete-handler">
                           <Button
                             spacing={['base', 0]}
-                            aria-label="刪除"
+                            aria-label={TEXT.zh_hant.delete}
                             onClick={() => this.onDelete(article)}
                           >
                             <Icon.Clear color="black" />
