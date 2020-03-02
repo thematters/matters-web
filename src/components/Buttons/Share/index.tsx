@@ -32,7 +32,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
 
   const shareLink = process.browser
     ? path
-      ? `${window.location.origin}/${path}`
+      ? `${window.location.origin}${path}`
       : window.location.href
     : ''
   const shareTitle =

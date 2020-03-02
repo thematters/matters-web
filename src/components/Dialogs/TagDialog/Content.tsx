@@ -150,8 +150,6 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           })
         }
       }
-
-      return {}
     },
     onSubmit: async (
       { newContent, newDescription },
