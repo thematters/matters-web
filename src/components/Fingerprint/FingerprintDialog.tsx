@@ -26,7 +26,20 @@ const GATEWAYS = gql`
 
 const CopyButton = ({ text }: { text: string }) => {
   const copy = (link: string) => {
-    dom.copyToClipboard(link)
+    const copied = dom.copyToClipboard(link)
+
+    if (!copied) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="failureCopy" />
+          }
+        })
+      )
+      return
+    }
+
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
