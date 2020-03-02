@@ -1,9 +1,3 @@
-.responses {
-  & > header {
-    margin: var(--spacing-xx-loose) 0 var(--spacing-base);
-  }
-}
-
 .latest-responses,
 .featured-comments {
   margin-top: var(--spacing-x-loose);

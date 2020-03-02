@@ -6,7 +6,6 @@ import { useContext, useState } from 'react'
 import {
   Button,
   Icon,
-  LikeCoinDialog,
   Spinner,
   TextIcon,
   Translate,
@@ -47,31 +46,28 @@ const COMMENT_DRAFT = gql`
   }
 `
 
-interface CommentFormProps {
-  articleId: string
+export interface CommentFormProps {
   commentId?: string
+  articleId: string
+  articleAuthorId: string
   replyToId?: string
   parentId?: string
-  articleAuthorId: string
+
   submitCallback?: () => void
-  extraButton?: React.ReactNode
-  blocked?: boolean
-  defaultExpand?: boolean
   defaultContent?: string | null
 }
 
-const CommentForm = ({
+const ComemntForm: React.FC<CommentFormProps> = ({
   commentId,
-  parentId,
-  replyToId,
   articleId,
+  articleAuthorId,
+  replyToId,
+  parentId,
   submitCallback,
-  extraButton,
-  defaultExpand,
   defaultContent
-}: CommentFormProps) => {
-  const commentDraftId = `${articleId}:${commentId || '0'}:${parentId ||
-    '0'}:${replyToId || '0'}`
+}) => {
+  const commentDraftId = `${articleId}:${id || 0}:${parentId ||
+    0}:${replyToId || 0}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: {
@@ -89,11 +85,12 @@ const CommentForm = ({
   const [expand, setExpand] = useState(defaultExpand || false)
   const [content, setContent] = useState(draftContent || defaultContent || '')
   const viewer = useContext(ViewerContext)
+
   const isValid = !!trimLineBreaks(content)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const input = {
-      id: commentId,
+      id,
       comment: {
         content: trimLineBreaks(content),
         replyTo: replyToId,
@@ -117,16 +114,12 @@ const CommentForm = ({
         submitCallback()
       }
 
-      const CommentSent = (
-        <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-      )
-
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
             content: skipPushButton ? (
-              CommentSent
+              <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
             ) : (
               <Translate id="pushDescription" />
             ),
@@ -154,7 +147,7 @@ const CommentForm = ({
         analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
           state: 'focus',
           level: parentId ? 2 : 1,
-          operation: commentId ? 'edit' : 'create'
+          operation: id ? 'edit' : 'create'
         })
         setExpand(true)
       }}
@@ -162,7 +155,7 @@ const CommentForm = ({
         analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
           state: 'blur',
           level: parentId ? 2 : 1,
-          operation: commentId ? 'update' : 'create'
+          operation: id ? 'update' : 'create'
         })
         client.writeData({
           id: `CommentDraft:${commentDraftId}`,
@@ -178,89 +171,28 @@ const CommentForm = ({
         expand={expand}
         update={(params: { content: string }) => setContent(params.content)}
       />
-      <div className="buttons">
-        {extraButton}
 
-        <Button
-          size={[null, '2rem']}
-          spacing={[0, 'base']}
-          bgColor="green"
-          type="submit"
-          disabled={
-            isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
-          }
+      <Button
+        size={[null, '2rem']}
+        spacing={[0, 'base']}
+        bgColor="green"
+        type="submit"
+        disabled={
+          isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
+        }
+      >
+        <TextIcon
+          color="white"
+          weight="md"
+          icon={isSubmitting ? <Icon.Spinner size="sm" /> : <Icon.Edit />}
         >
-          <TextIcon
-            color="white"
-            weight="md"
-            icon={isSubmitting ? <Icon.Spinner size="sm" /> : <Icon.Edit />}
-          >
-            <Translate zh_hant="送出" zh_hans="送出" />
-          </TextIcon>
-        </Button>
-      </div>
+          <Translate zh_hant="送出" zh_hans="送出" />
+        </TextIcon>
+      </Button>
 
       <style jsx>{styles}</style>
     </form>
   )
 }
 
-const CommentFormWrap = (props: CommentFormProps) => {
-  const viewer = useContext(ViewerContext)
-
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <LikeCoinDialog>
-        {({ open }) => (
-          <button className="blocked" type="button" onClick={open}>
-            <Translate
-              zh_hant="設置 Liker ID 後即可參與精彩討論"
-              zh_hans="设置 Liker ID 后即可参与精彩讨论"
-            />
-            <style jsx>{styles}</style>
-          </button>
-        )}
-      </LikeCoinDialog>
-    )
-  }
-
-  if (viewer.isOnboarding && props.articleAuthorId !== viewer.id) {
-    return (
-      <p className="blocked">
-        <Translate
-          zh_hant="新手小貼士：發佈作品收穫讚賞及瀏覽他人作品都能幫你開啓評論權限喔！"
-          zh_hans="新手小贴士：发布作品收获赞赏及浏览他人作品都能帮你开启评论权限喔！"
-        />
-        <style jsx>{styles}</style>
-      </p>
-    )
-  }
-
-  if (props.blocked) {
-    return (
-      <p className="blocked">
-        <Translate
-          zh_hant="因爲作者設置，你無法參與該作品下的討論。"
-          zh_hans="因为作者设置，你无法参与该作品下的讨论。"
-        />
-        <style jsx>{styles}</style>
-      </p>
-    )
-  }
-
-  return <CommentForm {...props} />
-}
-
-CommentFormWrap.fragment = {
-  article: gql`
-    fragment CommentForm on Article {
-      id
-      author {
-        id
-        isBlocking
-      }
-    }
-  `
-}
-
-export default CommentFormWrap
+export default CommentForm

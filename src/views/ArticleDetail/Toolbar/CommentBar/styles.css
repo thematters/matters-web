@@ -1,0 +1,21 @@
+button,
+p {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  padding: 0 var(--spacing-base);
+
+  color: var(--color-grey-darker);
+  font-size: var(--font-size-sm);
+  line-height: 2rem;
+  background: var(--color-grey-lighter);
+  border-radius: 2rem;
+  text-align: left;
+}
+
+button {
+  &:hover,
+  &:focus {
+    background: var(--color-grey-lighter-hover);
+  }
+}

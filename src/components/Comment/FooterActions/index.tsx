@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Comment, LikeCoinDialog, ViewerContext } from '~/components'
+import { LikeCoinDialog, ViewerContext } from '~/components'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
@@ -55,9 +55,8 @@ const FooterActions = ({
   commentCallback
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const [showForm, setShowForm] = useState(false)
 
-  const { id, state, article, parentComment } = comment
+  const { state, article } = comment
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isDisabled =
@@ -69,15 +68,28 @@ const FooterActions = ({
     if (viewer.shouldSetupLikerID) {
       open()
     } else {
-      setShowForm(!showForm)
+      // setShowForm(!showForm)
     }
   }
-  const submitCallback = () => {
-    if (commentCallback) {
-      commentCallback()
-    }
-    setShowForm(false)
-  }
+  // const submitCallback = () => {
+  //   if (commentCallback) {
+  //     commentCallback()
+  //   }
+  //   setShowForm(false)
+  // }
+
+  // {showForm && (
+  //   <section className="reply-form">
+  //     <Comment.Form
+  //       articleId={article.id}
+  //       articleAuthorId={article.author.id}
+  //       replyToId={id}
+  //       parentId={parentComment?.id || id}
+  //       submitCallback={submitCallback}
+  //       blocked={article.author.isBlocking}
+  //     />
+  //   </section>
+  // )}
 
   return (
     <>
@@ -88,7 +100,6 @@ const FooterActions = ({
               {hasReply && (
                 <ReplyButton
                   onClick={onClickReplyButton}
-                  active={showForm}
                   disabled={isDisabled}
                 />
               )}
@@ -110,19 +121,6 @@ const FooterActions = ({
 
         {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
       </footer>
-
-      {showForm && (
-        <section className="reply-form">
-          <Comment.Form
-            articleId={article.id}
-            articleAuthorId={article.author.id}
-            replyToId={id}
-            parentId={parentComment?.id || id}
-            submitCallback={submitCallback}
-            blocked={article.author.isBlocking}
-          />
-        </section>
-      )}
 
       <style jsx>{styles}</style>
     </>

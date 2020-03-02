@@ -20,7 +20,6 @@ import {
   Title,
   Translate,
   useImmersiveMode,
-  useResponsive,
   ViewerContext
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -29,6 +28,7 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { getQuery } from '~/common/utils'
 
+import Appreciations from './Appreciations'
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
@@ -76,21 +76,6 @@ const ARTICLE_DETAIL = gql`
   ${Fingerprint.fragments.article}
 `
 
-const Block = ({
-  type = 'article',
-  children
-}: {
-  type?: 'article' | 'section'
-  children: any
-}) => {
-  const classes = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
-  return type === 'article' ? (
-    <article className={classes}>{children}</article>
-  ) : (
-    <section className={classes}>{children}</section>
-  )
-}
-
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner
@@ -104,10 +89,7 @@ const ArticleDetail = ({
   wall: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [fixedToolbar, setFixedToolbar] = useState(false)
-
   const [fixedWall, setFixedWall] = useState(false)
-  const isMediumUp = useResponsive('md-up')
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash }
   })
@@ -118,11 +100,6 @@ const ArticleDetail = ({
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
-  const handleWall = ({ currentPosition }: Waypoint.CallbackArgs) => {
-    if (shouldShowWall) {
-      setFixedWall(currentPosition === 'inside')
-    }
-  }
 
   // useEffect(() => {
   //   if (article && article.live) {
@@ -146,19 +123,11 @@ const ArticleDetail = ({
   useImmersiveMode('article > .content')
 
   if (loading) {
-    return (
-      <Block>
-        <Spinner />
-      </Block>
-    )
+    return <Spinner />
   }
 
   if (error) {
-    return (
-      <Block>
-        <QueryError error={error} />
-      </Block>
-    )
+    return <QueryError error={error} />
   }
 
   if (!article) {
@@ -167,32 +136,30 @@ const ArticleDetail = ({
 
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
-      <Block>
-        <Error
-          statusCode={404}
-          message={
-            article.state === 'archived' ? (
-              <Translate
-                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-              />
-            ) : article.state === 'banned' ? (
-              <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
-              />
-            ) : null
-          }
-        >
-          <BackToHomeButton />
-        </Error>
-      </Block>
+      <Error
+        statusCode={404}
+        message={
+          article.state === 'archived' ? (
+            <Translate
+              zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+              zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+            />
+          ) : article.state === 'banned' ? (
+            <Translate
+              zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
+              zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+            />
+          ) : null
+        }
+      >
+        <BackToHomeButton />
+      </Error>
     )
   }
 
   return (
     <>
-      <Block>
+      <article>
         <Head
           title={article.title}
           description={article.summary}
@@ -212,67 +179,53 @@ const ArticleDetail = ({
 
         <section className="title">
           <Title type="article">{article.title}</Title>
+
           <span className="subtitle">
             <p className="date">
               <DateTime date={article.createdAt} />
             </p>
-            <span className="right-items">
+            <span className="right">
               {article.live && <Icon.Live />}
               <Fingerprint article={article} />
             </span>
           </span>
         </section>
 
-        <section className="content">
-          <Content article={article} />
+        <Content article={article} />
+      </article>
 
-          {(collectionCount > 0 || canEditCollection) && (
-            <Collection
-              article={article}
-              canEdit={canEditCollection}
-              collectionCount={collectionCount}
-            />
-          )}
-
-          {/* content:end */}
-          {!isMediumUp && (
-            <Waypoint
-              onPositionChange={({ currentPosition }) => {
-                if (currentPosition === 'below') {
-                  setFixedToolbar(true)
-                } else {
-                  setFixedToolbar(false)
-                }
-              }}
-            />
-          )}
+      {(collectionCount > 0 || canEditCollection) && (
+        <section className="block">
+          <Collection
+            article={article}
+            canEdit={canEditCollection}
+            collectionCount={collectionCount}
+          />
 
           <TagList article={article} />
-
-          <Toolbar placement="left" mediaHash={mediaHash} />
         </section>
+      )}
 
-        <Toolbar
-          placement="bottom"
-          mediaHash={mediaHash}
-          fixed={fixedToolbar}
-          mobile={!isMediumUp}
-        />
-      </Block>
+      <section className="block">
+        <Appreciations mediaHash={mediaHash} />
+      </section>
 
-      <Waypoint onPositionChange={handleWall}>
-        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <RelatedArticles article={article} />
-        </section>
-      </Waypoint>
+      <section className="block">
+        <RelatedArticles article={article} />
+      </section>
 
+      <Waypoint
+        onPositionChange={({ currentPosition }) => {
+          if (shouldShowWall) {
+            setFixedWall(currentPosition === 'inside')
+          }
+        }}
+      />
       {shouldShowWall && <Wall show={fixedWall} />}
+      {shouldShowWall && <section id="comments" />}
+      {!shouldShowWall && <DynamicResponse />}
 
-      <Block type="section">
-        {shouldShowWall && <section id="comments" />}
-
-        {!shouldShowWall && <DynamicResponse />}
-      </Block>
+      <Toolbar mediaHash={mediaHash} />
 
       <style jsx>{styles}</style>
     </>
@@ -289,9 +242,9 @@ const ArticleDetailContainer = () => {
 
   return (
     <main className="l-row">
-      <ArticleDetail mediaHash={mediaHash} wall={wall} />
-
       <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
+        <ArticleDetail mediaHash={mediaHash} wall={wall} />
+
         <Footer />
       </section>
     </main>

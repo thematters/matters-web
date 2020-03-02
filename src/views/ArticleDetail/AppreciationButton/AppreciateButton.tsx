@@ -62,13 +62,18 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           }
         }}
       >
-        {inFixedToolbar ? (
-          <Icon.Like
-            className="icon-like"
-            color="green"
-            style={{ width: 20, height: 20 }}
-          />
-        ) : (
+        {inFixedToolbar && (
+          <>
+            <Icon.Like
+              className="icon-like"
+              color="green"
+              style={{ width: 20, height: 20 }}
+            />
+            <span className={totalClass}>{numAbbr(total)}</span>
+          </>
+        )}
+
+        {!inFixedToolbar && (
           <>
             <Icon.Like
               className="icon-like"
@@ -79,7 +84,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         )}
       </button>
 
-      <span className={totalClass}>{numAbbr(total)}</span>
+      {!inFixedToolbar && <span className={totalClass}>{numAbbr(total)}</span>}
 
       <style jsx>{styles}</style>
       <style jsx global>

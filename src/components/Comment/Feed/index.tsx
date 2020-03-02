@@ -1,15 +1,12 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useState } from 'react'
 
 import { AvatarSize, UserDigest } from '~/components'
 
-import CancelEditButton from '../CancelEditButton'
 import Content from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
-import CommentForm from '../Form'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from './ReplyTo'
 import styles from './styles.css'
@@ -83,14 +80,11 @@ export const Feed = ({
   commentCallback,
   ...actionControls
 }: CommentProps) => {
-  const [edit, setEdit] = useState(false)
   const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
 
-  const { id, article, replyTo, content, author, parentComment } = comment
+  const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
-  const submitCallback = () => {
-    setEdit(false)
-  }
+
   const footerCommentCallback = () => {
     if (commentCallback) {
       commentCallback()
@@ -100,6 +94,22 @@ export const Feed = ({
       variables: { id: parentComment?.id || id }
     })
   }
+
+  // const submitCallback = () => {
+  //   setEdit(false)
+  // }
+  // {edit && (
+  //   <CommentForm
+  //     commentId={id}
+  //     articleId={article.id}
+  //     articleAuthorId={article.author.id}
+  //     submitCallback={submitCallback}
+  //     extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
+  //     blocked={article.author.isBlocking}
+  //     defaultContent={content}
+  //     defaultExpand={edit}
+  //   />
+  // )}
 
   return (
     <article id={actionControls.hasLink ? nodeId : ''}>
@@ -119,7 +129,9 @@ export const Feed = ({
 
           <DropdownActions
             comment={comment}
-            editComment={() => setEdit(true)}
+            editComment={() => {
+              // TODO
+            }}
           />
         </section>
       </header>
@@ -129,27 +141,12 @@ export const Feed = ({
       )}
 
       <section className="content-container">
-        {!edit && <Content comment={comment} size="md-s" />}
-        {!edit && (
-          <FooterActions
-            comment={comment}
-            commentCallback={footerCommentCallback}
-            {...actionControls}
-          />
-        )}
-
-        {edit && (
-          <CommentForm
-            commentId={id}
-            articleId={article.id}
-            articleAuthorId={article.author.id}
-            submitCallback={submitCallback}
-            extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
-            blocked={article.author.isBlocking}
-            defaultContent={content}
-            defaultExpand={edit}
-          />
-        )}
+        <Content comment={comment} size="md-s" />}
+        <FooterActions
+          comment={comment}
+          commentCallback={footerCommentCallback}
+          {...actionControls}
+        />
       </section>
 
       <style jsx>{styles}</style>

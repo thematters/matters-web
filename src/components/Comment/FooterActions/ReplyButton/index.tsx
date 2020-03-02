@@ -2,11 +2,9 @@ import { Button, Icon } from '~/components'
 
 const ReplyButton = ({
   onClick,
-  active,
   disabled
 }: {
   onClick: () => any
-  active: boolean
   disabled: boolean
 }) => (
   <Button
@@ -16,7 +14,7 @@ const ReplyButton = ({
     disabled={disabled}
     aira-label="回覆評論"
   >
-    <Icon.Comment color={active ? 'green' : undefined} />
+    <Icon.Comment />
   </Button>
 )
 
