@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -9,6 +9,7 @@ import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeFollower from './NoticeFollower'
 import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
@@ -24,7 +25,7 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Icon.User color="green" size="lg" />
+        <NoticeTypeIcon type="user" />
       </section>
 
       <section className="content-wrap">
@@ -47,9 +48,7 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
         {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <Fragment key={index}>
-                <NoticeActorAvatar user={actor} />
-              </Fragment>
+              <NoticeActorAvatar key={index} user={actor} />
             ))}
           </section>
         ) : (

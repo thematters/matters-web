@@ -67,6 +67,10 @@
   }
 }
 
+.icon-wrap {
+  padding: var(--spacing-x-tight);
+}
+
 .multi-actor-avatars {
   display: flex;
   flex-direction: row;
@@ -75,15 +79,6 @@
 
   & :global(a) {
     margin-right: var(--spacing-x-tight);
-  }
-}
-
-.article-block {
-  font-size: var(--font-size-md-s);
-  font-weight: var( --font-weight-medium);
-
-  & a {
-    display: block;
   }
 }
 

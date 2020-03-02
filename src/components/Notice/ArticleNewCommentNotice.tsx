@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -10,6 +10,7 @@ import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeComment from './NoticeComment'
 import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { ArticleNewCommentNotice as NoticeType } from './__generated__/ArticleNewCommentNotice'
@@ -26,7 +27,7 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <Icon.Comment color="green" style={{ margin: '0.5rem' }} />
+          <NoticeTypeIcon type="comment" hasSpacing />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
@@ -54,9 +55,7 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
         {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <Fragment key={index}>
-                <NoticeActorAvatar user={actor} />
-              </Fragment>
+              <NoticeActorAvatar key={index} user={actor} />
             ))}
           </section>
         ) : (

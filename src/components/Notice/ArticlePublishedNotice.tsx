@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 
-import { Icon, Translate } from '~/components'
+import { Translate } from '~/components'
 
 import NoticeArticle from './NoticeArticle'
 import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice'
@@ -12,7 +13,7 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <Icon.AvatarLogo size="lg" />
+        <NoticeTypeIcon type="logo" />
       </section>
 
       <section className="content-wrap">

@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
+import { ArticleDigestTitle } from '~/components'
 
-import styles from './styles.css'
+import { toPath } from '~/common/utils'
 
 import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticle'
 
@@ -31,28 +31,16 @@ const NoticeArticle = ({
     )
   }
 
-  return (
-    <section className="article-block">
-      <Link {...path}>
-        <a>{article.title}</a>
-      </Link>
-      <style jsx>{styles}</style>
-    </section>
-  )
+  return <ArticleDigestTitle article={article} textSize="md-s" />
 }
 
 NoticeArticle.fragments = {
   article: gql`
     fragment NoticeArticle on Article {
       id
-      title
-      slug
-      mediaHash
-      author {
-        id
-        userName
-      }
+      ...ArticleDigestTitleArticle
     }
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 
