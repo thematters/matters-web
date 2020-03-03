@@ -7,28 +7,10 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-const BaseLink = ({
-  href,
-  as,
-  text
-}: {
-  href: string
-  as: string
-  text: React.ReactNode
-}) => (
-  <Link href={href} as={as}>
-    <a className="item">
-      {text}
-
-      <style jsx>{styles}</style>
-    </a>
-  </Link>
-)
-
 export const Footer = () => {
   const year = new Date().getFullYear()
 
-  const { href: appHref, as: appAs } = toPath({
+  const downloadAppLink = toPath({
     page: 'articleDetail',
     article: {
       slug: 'matters-web-app',
@@ -38,44 +20,49 @@ export const Footer = () => {
   })
 
   return (
-    <footer className="footer">
-      <BaseLink
-        href={PATHS.MISC_ABOUT.href}
-        as={PATHS.MISC_ABOUT.as}
-        text={<Translate id="about" />}
-      />
+    <footer>
+      <Link {...PATHS.MISC_ABOUT}>
+        <a>
+          <Translate id="about" />
+        </a>
+      </Link>
 
-      <BaseLink
-        href={PATHS.MISC_FAQ.href}
-        as={PATHS.MISC_FAQ.as}
-        text={<Translate id="faq" />}
-      />
+      <Link {...PATHS.MISC_FAQ}>
+        <a>
+          <Translate id="faq" />
+        </a>
+      </Link>
 
-      <BaseLink
-        href={PATHS.MISC_GUIDE.href}
-        as={PATHS.MISC_GUIDE.as}
-        text={<Translate id="guide" />}
-      />
+      <Link {...PATHS.MISC_GUIDE}>
+        <a>
+          <Translate id="guide" />
+        </a>
+      </Link>
 
-      <BaseLink
-        href={PATHS.MISC_TOS.href}
-        as={PATHS.MISC_TOS.as}
-        text={<Translate id="term" />}
-      />
+      <Link {...PATHS.MISC_TOS}>
+        <a>
+          <Translate id="term" />
+        </a>
+      </Link>
 
-      <BaseLink
-        href={appHref}
-        as={appAs}
-        text={<Translate zh_hant="下載應用" zh_hans="下载应用" />}
-      />
+      <Link {...downloadAppLink}>
+        <a>
+          <Translate zh_hant="下載應用" zh_hans="下载应用" />
+        </a>
+      </Link>
 
-      <BaseLink
-        href={'https://github.com/thematters/developer-resource'}
-        as={'https://github.com/thematters/developer-resource'}
-        text={<Translate zh_hant={'開放社區'} zh_hans={'开放社区'} />}
-      />
+      <a
+        href="https://github.com/thematters/developer-resource"
+        target="_blank"
+      >
+        <Translate zh_hant="開放社區" zh_hans="开放社区" />
+      </a>
 
-      <p className="item">© {year} Matters</p>
+      <span className="copyright">
+        {'@ '}
+        <span itemProp="copyrightYear">{year}</span>{' '}
+        <span itemProp="copyrightHolder">Matters</span>
+      </span>
 
       <style jsx>{styles}</style>
     </footer>

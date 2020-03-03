@@ -162,8 +162,8 @@ const ArticleDetail = () => {
 
   return (
     <main className="l-row">
-      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-7 l-offset-lg-2">
-        <article>
+      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-7 l-offset-lg-2">
+        <section>
           <Head
             title={article.title}
             description={article.summary}
@@ -193,7 +193,7 @@ const ArticleDetail = () => {
           </section>
 
           <Content article={article} />
-        </article>
+        </section>
 
         {(collectionCount > 0 || canEditCollection) && (
           <section className="block">
@@ -221,15 +221,13 @@ const ArticleDetail = () => {
         {!isLargeUp && <RelatedArticles article={article} />}
 
         <Toolbar mediaHash={mediaHash} />
+      </article>
+
+      <aside className="l-col-lg-3">
+        {isLargeUp && <RelatedArticles article={article} inSidebar />}
 
         <Footer />
-      </section>
-
-      {isLargeUp && (
-        <section className="l-col-lg-3">
-          <RelatedArticles article={article} inSidebar />
-        </section>
-      )}
+      </aside>
 
       <style jsx>{styles}</style>
     </main>
