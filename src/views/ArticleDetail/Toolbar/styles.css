@@ -32,5 +32,9 @@
 
   & :global(> *) {
     margin-left: var(--spacing-loose);
+
+    @media (--xs-down) {
+      margin-left: var(--spacing-base);
+    }
   }
 }
