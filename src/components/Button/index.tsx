@@ -7,6 +7,7 @@ import styles from './styles.css'
 export type ButtonWidth =
   | '2rem'
   | '3rem'
+  | '3.25rem'
   | '4rem'
   | '6rem'
   | '100%'
