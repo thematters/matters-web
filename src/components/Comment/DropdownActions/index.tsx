@@ -28,11 +28,11 @@ interface DropdownActionsProps {
 }
 
 interface Controls {
-  hasPinButton: boolean
-  hasEditButton: boolean
-  hasDeleteButton: boolean
-  hasBlockUserButton: boolean
-  hasCollapseButton: boolean
+  hasPin: boolean
+  hasEdit: boolean
+  hasDelete: boolean
+  hasBlockUser: boolean
+  hasCollapse: boolean
 }
 
 interface DialogProps {
@@ -76,11 +76,11 @@ const fragments = {
 const BaseDropdownActions = ({
   comment,
 
-  hasPinButton,
-  hasEditButton,
-  hasDeleteButton,
-  hasBlockUserButton,
-  hasCollapseButton,
+  hasPin,
+  hasEdit,
+  hasDelete,
+  hasBlockUser,
+  hasCollapse,
 
   openEditCommentDialog,
   openDeleteCommentDialog,
@@ -88,20 +88,18 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {hasPinButton && <PinButton comment={comment} />}
-      {hasEditButton && (
-        <EditButton openEditCommentDialog={openEditCommentDialog} />
-      )}
-      {hasDeleteButton && (
+      {hasPin && <PinButton comment={comment} />}
+      {hasEdit && <EditButton openEditCommentDialog={openEditCommentDialog} />}
+      {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
       )}
-      {hasBlockUserButton && (
+      {hasBlockUser && (
         <BlockUser.Button
           user={comment.author}
           openDialog={openBlockUserDialog}
         />
       )}
-      {hasCollapseButton && <CollapseButton comment={comment} />}
+      {hasCollapse && <CollapseButton comment={comment} />}
     </Menu>
   )
 
@@ -145,15 +143,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasPinButton: !!(isArticleAuthor && isActive && !isDescendantComment),
-    hasEditButton: !!(
-      isCommentAuthor &&
-      !isBlocked &&
-      (isActive || isCollapsed)
-    ),
-    hasDeleteButton: !!(isCommentAuthor && isActive),
-    hasBlockUserButton: !isCommentAuthor,
-    hasCollapseButton: !!(
+    hasPin: !!(isArticleAuthor && isActive && !isDescendantComment),
+    hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),
+    hasDelete: !!(isCommentAuthor && isActive),
+    hasBlockUser: !isCommentAuthor,
+    hasCollapse: !!(
       isArticleAuthor &&
       !isCommentAuthor &&
       (isActive || isCollapsed)

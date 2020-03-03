@@ -1,8 +1,8 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { Button, Dialog, Icon, Spinner, Translate } from '~/components'
+import { Button, Icon, Spinner, Translate } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 import { dom } from '~/common/utils'
@@ -10,11 +10,6 @@ import { dom } from '~/common/utils'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
-
-interface FingerprintDialogProps {
-  dataHash: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
-}
 
 const GATEWAYS = gql`
   query Gateways {
@@ -166,27 +161,4 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
   )
 }
 
-const FingerprintDialog = ({
-  children,
-  ...restProps
-}: FingerprintDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-
-  return (
-    <>
-      {children({ open })}
-
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title={<Translate id="IPFSEntrance" />} close={close} />
-
-        <Dialog.Content spacing={[0, 0]} hasGrow>
-          <FingerprintDialogContent {...restProps} />
-        </Dialog.Content>
-      </Dialog>
-    </>
-  )
-}
-
-export default FingerprintDialog
+export default FingerprintDialogContent

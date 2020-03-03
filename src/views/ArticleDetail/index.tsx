@@ -11,7 +11,6 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
-  Fingerprint,
   Footer,
   Head,
   Icon,
@@ -28,7 +27,6 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { getQuery } from '~/common/utils'
 
-import Appreciations from './Appreciations'
 import Collection from './Collection'
 import Content from './Content'
 import RelatedArticles from './RelatedArticles'
@@ -65,7 +63,6 @@ const ARTICLE_DETAIL = gql`
       ...TagListArticle
       ...RelatedArticles
       ...StateArticle
-      ...FingerprintArticle
     }
   }
   ${UserDigest.Rich.fragments.user}
@@ -73,7 +70,6 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
-  ${Fingerprint.fragments.article}
 `
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -184,10 +180,7 @@ const ArticleDetail = ({
             <p className="date">
               <DateTime date={article.createdAt} />
             </p>
-            <span className="right">
-              {article.live && <Icon.Live />}
-              <Fingerprint article={article} />
-            </span>
+            <span className="right">{article.live && <Icon.Live />}</span>
           </span>
         </section>
 
@@ -205,10 +198,6 @@ const ArticleDetail = ({
           <TagList article={article} />
         </section>
       )}
-
-      <section className="block">
-        <Appreciations mediaHash={mediaHash} />
-      </section>
 
       <section className="block">
         <RelatedArticles article={article} />
