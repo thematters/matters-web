@@ -19,6 +19,7 @@ import {
   Title,
   Translate,
   useImmersiveMode,
+  useResponsive,
   ViewerContext
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -77,18 +78,24 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   loading: Spinner
 })
 
-const ArticleDetail = ({
-  mediaHash,
-  wall
-}: {
-  mediaHash: string
-  wall: boolean
-}) => {
+const ArticleDetail = () => {
+  const isLargeUp = useResponsive('lg-up')
+  const router = useRouter()
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash }
   })
+
+  const { data: clientPreferenceData } = useQuery<ClientPreference>(
+    CLIENT_PREFERENCE,
+    {
+      variables: { id: 'local' }
+    }
+  )
+  const { wall } = clientPreferenceData?.clientPreference || { wall: true }
+
   // subscribeToMore,
 
   const shouldShowWall = !viewer.isAuthed && wall
@@ -154,90 +161,79 @@ const ArticleDetail = ({
   }
 
   return (
-    <>
-      <article>
-        <Head
-          title={article.title}
-          description={article.summary}
-          keywords={
-            article.tags
-              ? article.tags.map(({ content }: { content: any }) => content)
-              : []
-          }
-          image={article.cover}
-        />
-
-        <State article={article} />
-
-        <section className="author">
-          <UserDigest.Rich user={article.author} hasFollow />
-        </section>
-
-        <section className="title">
-          <Title type="article">{article.title}</Title>
-
-          <span className="subtitle">
-            <p className="date">
-              <DateTime date={article.createdAt} />
-            </p>
-            <span className="right">{article.live && <Icon.Live />}</span>
-          </span>
-        </section>
-
-        <Content article={article} />
-      </article>
-
-      {(collectionCount > 0 || canEditCollection) && (
-        <section className="block">
-          <Collection
-            article={article}
-            canEdit={canEditCollection}
-            collectionCount={collectionCount}
+    <main className="l-row">
+      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-7 l-offset-lg-2">
+        <article>
+          <Head
+            title={article.title}
+            description={article.summary}
+            keywords={
+              article.tags
+                ? article.tags.map(({ content }: { content: any }) => content)
+                : []
+            }
+            image={article.cover}
           />
 
-          <TagList article={article} />
-        </section>
-      )}
+          <State article={article} />
 
-      <section className="block">
-        <RelatedArticles article={article} />
-      </section>
+          <section className="author">
+            <UserDigest.Rich user={article.author} hasFollow />
+          </section>
 
-      <Waypoint
-        onPositionChange={({ currentPosition }) => {
-          if (shouldShowWall) {
-            setFixedWall(currentPosition === 'inside')
-          }
-        }}
-      />
-      {shouldShowWall && <Wall show={fixedWall} />}
-      {shouldShowWall && <section id="comments" />}
-      {!shouldShowWall && <DynamicResponse />}
+          <section className="title">
+            <Title type="article">{article.title}</Title>
 
-      <Toolbar mediaHash={mediaHash} />
+            <span className="subtitle">
+              <p className="date">
+                <DateTime date={article.createdAt} />
+              </p>
+              <span className="right">{article.live && <Icon.Live />}</span>
+            </span>
+          </section>
 
-      <style jsx>{styles}</style>
-    </>
-  )
-}
+          <Content article={article} />
+        </article>
 
-const ArticleDetailContainer = () => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
-  })
-  const { wall } = data?.clientPreference || { wall: true }
+        {(collectionCount > 0 || canEditCollection) && (
+          <section className="block">
+            <Collection
+              article={article}
+              canEdit={canEditCollection}
+              collectionCount={collectionCount}
+            />
 
-  return (
-    <main className="l-row">
-      <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <ArticleDetail mediaHash={mediaHash} wall={wall} />
+            <TagList article={article} />
+          </section>
+        )}
+
+        <Waypoint
+          onPositionChange={({ currentPosition }) => {
+            if (shouldShowWall) {
+              setFixedWall(currentPosition === 'inside')
+            }
+          }}
+        />
+        {shouldShowWall && <Wall show={fixedWall} />}
+        {shouldShowWall && <section id="comments" />}
+        {!shouldShowWall && <DynamicResponse />}
+
+        {!isLargeUp && <RelatedArticles article={article} />}
+
+        <Toolbar mediaHash={mediaHash} />
 
         <Footer />
       </section>
+
+      {isLargeUp && (
+        <section className="l-col-lg-3">
+          <RelatedArticles article={article} inSidebar />
+        </section>
+      )}
+
+      <style jsx>{styles}</style>
     </main>
   )
 }
 
-export default ArticleDetailContainer
+export default ArticleDetail

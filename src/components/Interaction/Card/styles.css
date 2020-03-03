@@ -8,6 +8,9 @@
 }
 
 /* Background */
+.bg-white {
+  background: var(--color-white);
+}
 .bg-grey-lighter {
   background: var(--color-grey-lighter);
 

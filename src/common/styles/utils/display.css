@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-@each $device in sm, md, lg, xl {
+@each $device in sm, md, lg {
   @media (--$(device)-up) {
     .u-$(device)-up-hide {
       display: none !important;

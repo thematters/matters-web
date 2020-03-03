@@ -75,9 +75,6 @@ const Slogan = () => {
           @media (--lg-up) {
             background-image: url(${IMAGE_SLOGAN_LG});
           }
-          @media (--xl-up) {
-            background-image: url(${IMAGE_SLOGAN_XL});
-          }
         }
       `}</style>
     </section>

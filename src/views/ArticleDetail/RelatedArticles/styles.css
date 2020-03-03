@@ -1,14 +1,31 @@
-ul {
-  display: flex;
+.related-articles {
+  margin: 0 calc(var(--spacing-base) * -1);
+  padding: var(--spacing-base) 0 0 var(--spacing-base);
+  background: var(--color-grey-lighter);
 
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
+  @media (--sm-up) {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
 
-  & li {
-    margin: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
+  & ul {
+    & li {
+      margin: var(--spacing-loose) 0;
+    }
+  }
 
-    &:last-child {
-      margin-right: 0;
+  &:not(.inSidebar) {
+    & ul {
+      display: flex;
+
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+
+      & li {
+        margin: 0;
+        padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
+      }
     }
   }
 }

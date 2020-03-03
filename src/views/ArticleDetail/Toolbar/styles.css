@@ -4,11 +4,16 @@
   align-items: center;
   position: sticky;
   bottom: 0;
+  margin: 0 calc(var(--spacing-base) * -1);
   padding: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
 
   background: var(--color-white);
   line-height: 1;
   z-index: 1;
+
+  @media (--sm-up) {
+    margin: 0;
+  }
 }
 
 .appreciate-button {
