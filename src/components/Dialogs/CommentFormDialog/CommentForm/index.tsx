@@ -16,6 +16,8 @@ import {
   trimLineBreaks
 } from '~/common/utils'
 
+import styles from './styles.css'
+
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { CommentDraft } from './__generated__/CommentDraft'
 import { PutComment } from './__generated__/PutComment'
@@ -53,6 +55,7 @@ export interface CommentFormProps {
   submitCallback?: () => void
   closeDialog: () => void
   title?: React.ReactNode
+  context?: React.ReactNode
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({
@@ -64,7 +67,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   defaultContent,
   submitCallback,
   closeDialog,
-  title = <Translate id="putComment" />
+  title = <Translate id="putComment" />,
+  context
 }) => {
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||
     0}:${replyToId || 0}`
@@ -104,11 +108,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     try {
       await putComment({ variables: { input } })
-
-      if (submitCallback) {
-        submitCallback()
-      }
-
       setContent('')
       closeDialog()
 
@@ -130,6 +129,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
           }
         })
       )
+
+      if (submitCallback) {
+        submitCallback()
+      }
     } catch (e) {
       console.error(e)
     }
@@ -137,60 +140,58 @@ const CommentForm: React.FC<CommentFormProps> = ({
     setSubmitting(false)
   }
 
-  const InnerForm = (
-    <form
-      id={formId}
-      onSubmit={handleSubmit}
-      onFocus={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
-          state: 'focus',
-          level: parentId ? 2 : 1,
-          operation: commentId ? 'edit' : 'create'
-        })
-      }}
-      onBlur={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
-          state: 'blur',
-          level: parentId ? 2 : 1,
-          operation: commentId ? 'update' : 'create'
-        })
-        client.writeData({
-          id: `CommentDraft:${commentDraftId}`,
-          data: {
-            content
-          }
-        })
-      }}
-      aria-label={TEXT.zh_hant.putComment}
-    >
-      <CommentEditor
-        content={content}
-        update={(params: { content: string }) => setContent(params.content)}
-      />
-    </form>
-  )
-
-  const SubmitButton = (
-    <Dialog.Header.RightButton
-      type="submit"
-      form={formId}
-      disabled={isSubmitting || !isValid}
-      text={<Translate zh_hant="送出" zh_hans="送出" />}
-      loading={isSubmitting}
-    />
-  )
-
   return (
     <>
       <Dialog.Header
         title={title}
         close={closeDialog}
-        rightButton={SubmitButton}
+        rightButton={
+          <Dialog.Header.RightButton
+            type="submit"
+            form={formId}
+            disabled={isSubmitting || !isValid}
+            text={<Translate zh_hant="送出" zh_hans="送出" />}
+            loading={isSubmitting}
+          />
+        }
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
+      <Dialog.Content hasGrow>
+        {context && <section className="context">{context}</section>}
+
+        <form
+          id={formId}
+          onSubmit={handleSubmit}
+          onFocus={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+              state: 'focus',
+              level: parentId ? 2 : 1,
+              operation: commentId ? 'edit' : 'create'
+            })
+          }}
+          onBlur={() => {
+            analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
+              state: 'blur',
+              level: parentId ? 2 : 1,
+              operation: commentId ? 'update' : 'create'
+            })
+            client.writeData({
+              id: `CommentDraft:${commentDraftId}`,
+              data: {
+                content
+              }
+            })
+          }}
+          aria-label={TEXT.zh_hant.putComment}
+        >
+          <CommentEditor
+            content={content}
+            update={(params: { content: string }) => setContent(params.content)}
+          />
+        </form>
       </Dialog.Content>
+
+      <style jsx>{styles}</style>
     </>
   )
 }

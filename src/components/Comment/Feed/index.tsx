@@ -8,7 +8,7 @@ import Content from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
-import ReplyTo from './ReplyTo'
+import ReplyTo from '../ReplyTo'
 import styles from './styles.css'
 
 import { FeedComment } from './__generated__/FeedComment'
@@ -113,7 +113,9 @@ export const Feed = ({
       </header>
 
       {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <ReplyTo user={replyTo.author} />
+        <section className="reply-to-container">
+          <ReplyTo user={replyTo.author} />
+        </section>
       )}
 
       <section className="content-container">

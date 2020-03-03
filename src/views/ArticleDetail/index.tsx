@@ -214,9 +214,19 @@ const ArticleDetail = () => {
             }
           }}
         />
-        {shouldShowWall && <Wall show={fixedWall} />}
-        {shouldShowWall && <section id="comments" />}
-        {!shouldShowWall && <DynamicResponse />}
+
+        {shouldShowWall && (
+          <>
+            <section id="comments" />
+            <Wall show={fixedWall} />
+          </>
+        )}
+
+        {!shouldShowWall && (
+          <section className="block">
+            <DynamicResponse />
+          </section>
+        )}
 
         {!isLargeUp && <RelatedArticles article={article} />}
 

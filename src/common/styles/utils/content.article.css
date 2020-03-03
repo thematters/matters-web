@@ -404,12 +404,14 @@
   position: absolute;
 
   width: var(--sizing-menu-md);
-  visibility: hidden;
+  max-height: calc(4rem * 3);
 
   color: var(--color-black);
-  border-radius: 0.125rem;
+  border-radius: 0.5rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
+  overflow-y: scroll;
+  visibility: hidden;
   z-index: var(--z-index-under-global-header);
 }
 

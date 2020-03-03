@@ -11,7 +11,6 @@ import editorStyles from '~/common/styles/utils/content.comment.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 
 import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
 
 import {
   SearchUsers,
@@ -49,24 +48,21 @@ const CommentEditor: React.FC<Props> = ({
 
   return (
     <>
-      <section className="container">
-        <MattersCommentEditor
-          editorContent={content}
-          editorUpdate={update}
-          eventName={ADD_TOAST}
-          language={lang.toUpperCase()}
-          mentionLoading={loading}
-          mentionKeywordChange={mentionKeywordChange}
-          mentionUsers={mentionUsers}
-          mentionListComponent={MentionUserList}
-          readOnly={false}
-          theme="bubble"
-        />
-      </section>
+      <MattersCommentEditor
+        editorContent={content}
+        editorUpdate={update}
+        eventName={ADD_TOAST}
+        language={lang.toUpperCase()}
+        mentionLoading={loading}
+        mentionKeywordChange={mentionKeywordChange}
+        mentionUsers={mentionUsers}
+        mentionListComponent={MentionUserList}
+        readOnly={false}
+        theme="bubble"
+      />
 
       <style jsx>{themeStyles}</style>
       <style jsx>{editorStyles}</style>
-      <style jsx>{styles}</style>
     </>
   )
 }

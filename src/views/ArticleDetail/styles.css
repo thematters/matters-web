@@ -20,5 +20,7 @@
 }
 
 .block {
+  @mixin border-top-grey;
   margin: var(--spacing-loose) 0 var(--spacing-base);
+  padding-top: var(--spacing-loose);
 }

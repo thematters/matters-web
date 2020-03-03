@@ -19,6 +19,8 @@ import {
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
+import ReplyTo from '../../ReplyTo'
+
 import { ReplyComemnt } from './__generated__/ReplyComemnt'
 
 export interface ReplyButtonProps {
@@ -32,6 +34,10 @@ const fragments = {
     fragment ReplyComemnt on Comment {
       id
       state
+      author {
+        id
+        ...ReplyToUser
+      }
       article {
         id
         author {
@@ -43,6 +49,7 @@ const fragments = {
         id
       }
     }
+    ${ReplyTo.fragments.user}
   `
 }
 
@@ -65,7 +72,7 @@ const ReplyButton = ({
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
-  const { id, parentComment, state, article } = comment
+  const { id, parentComment, author, state, article } = comment
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isOnboarding = viewer.isOnboarding && article.author.id !== viewer.id
@@ -106,6 +113,7 @@ const ReplyButton = ({
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
       title={<Translate id="replyComment" />}
+      context={<ReplyTo user={author} />}
     >
       {({ open: openCommentFormDialog }) => (
         <CommentButton onClick={openCommentFormDialog} />

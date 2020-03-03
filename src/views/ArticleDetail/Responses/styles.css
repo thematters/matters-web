@@ -1,6 +1,6 @@
 .latest-responses,
 .featured-comments {
-  margin: var(--spacing-x-loose) 0;
+  margin: var(--spacing-loose) 0;
 
   & header {
     @mixin flex-center-space-between;
