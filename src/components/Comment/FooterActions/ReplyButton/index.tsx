@@ -6,6 +6,7 @@ import {
   ButtonProps,
   CommentFormDialog,
   Icon,
+  Translate,
   useResponsive,
   ViewerContext
 } from '~/components'
@@ -104,6 +105,7 @@ const ReplyButton = ({
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
+      title={<Translate id="replyComment" />}
     >
       {({ open: openCommentFormDialog }) => (
         <CommentButton onClick={openCommentFormDialog} />

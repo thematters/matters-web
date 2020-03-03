@@ -52,6 +52,7 @@ export interface CommentFormProps {
   defaultContent?: string | null
   submitCallback?: () => void
   closeDialog: () => void
+  title?: React.ReactNode
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({
@@ -62,7 +63,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
   defaultContent,
   submitCallback,
-  closeDialog
+  closeDialog,
+  title = <Translate id="putComment" />
 }) => {
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||
     0}:${replyToId || 0}`
@@ -102,11 +104,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     try {
       await putComment({ variables: { input } })
-      setContent('')
 
       if (submitCallback) {
         submitCallback()
       }
+
+      setContent('')
+      closeDialog()
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -179,7 +183,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="putComment" />}
+        title={title}
         close={closeDialog}
         rightButton={SubmitButton}
       />

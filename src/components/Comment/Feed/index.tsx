@@ -90,26 +90,8 @@ export const Feed = ({
       commentCallback()
     }
 
-    refetchComment({
-      variables: { id: parentComment?.id || id }
-    })
+    refetchComment({ variables: { id: parentComment?.id || id } })
   }
-
-  // const submitCallback = () => {
-  //   setEdit(false)
-  // }
-  // {edit && (
-  //   <CommentForm
-  //     commentId={id}
-  //     articleId={article.id}
-  //     articleAuthorId={article.author.id}
-  //     submitCallback={submitCallback}
-  //     extraButton={<CancelEditButton onClick={() => setEdit(false)} />}
-  //     blocked={article.author.isBlocking}
-  //     defaultContent={content}
-  //     defaultExpand={edit}
-  //   />
-  // )}
 
   return (
     <article id={actionControls.hasLink ? nodeId : ''}>
@@ -126,13 +108,7 @@ export const Feed = ({
 
         <section className="right">
           <PinnedLabel comment={comment} />
-
-          <DropdownActions
-            comment={comment}
-            editComment={() => {
-              // TODO
-            }}
-          />
+          <DropdownActions comment={comment} />
         </section>
       </header>
 
