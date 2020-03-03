@@ -141,7 +141,7 @@ export const Feed = ({
       )}
 
       <section className="content-container">
-        <Content comment={comment} size="md-s" />}
+        <Content comment={comment} size="md-s" />
         <FooterActions
           comment={comment}
           commentCallback={footerCommentCallback}

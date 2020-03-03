@@ -5,7 +5,7 @@ import { LikeCoinDialog, ViewerContext } from '~/components'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
-import ReplyButton from './ReplyButton'
+import ReplyButton, { ReplyButtonProps } from './ReplyButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
 
@@ -14,8 +14,8 @@ import { FooterActionsComment } from './__generated__/FooterActionsComment'
 export type FooterActionsControls = {
   hasReply?: boolean
   hasCreatedAt?: boolean
-  commentCallback?: () => void
-} & CreatedAtControls
+} & CreatedAtControls &
+  Pick<ReplyButtonProps, 'commentCallback'>
 
 export type FooterActionsProps = {
   comment: FooterActionsComment
@@ -26,21 +26,13 @@ const fragments = {
     fragment FooterActionsComment on Comment {
       id
       state
-      article {
-        id
-        author {
-          id
-          isBlocking
-        }
-      }
-      parentComment {
-        id
-      }
+      ...ReplyComemnt
       ...UpvoteComment
       ...DownvoteComment
       ...CreatedAtComment
     }
 
+    ${ReplyButton.fragments.comment}
     ${UpvoteButton.fragments.comment}
     ${DownvoteButton.fragments.comment}
     ${CreatedAt.fragments.comment}
@@ -52,78 +44,51 @@ const FooterActions = ({
   hasReply,
   hasLink,
   hasCreatedAt,
-  commentCallback
+
+  ...replyButtonProps
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
 
-  const { state, article } = comment
+  const { state } = comment
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
-  const isDisabled =
-    (!isActive && !isCollapsed) ||
-    viewer.isInactive ||
-    (viewer.isOnboarding && article.author.id !== viewer.id)
-
-  const onClickReplyButton = () => {
-    if (viewer.shouldSetupLikerID) {
-      open()
-    } else {
-      // setShowForm(!showForm)
-    }
-  }
-  // const submitCallback = () => {
-  //   if (commentCallback) {
-  //     commentCallback()
-  //   }
-  //   setShowForm(false)
-  // }
-
-  // {showForm && (
-  //   <section className="reply-form">
-  //     <Comment.Form
-  //       articleId={article.id}
-  //       articleAuthorId={article.author.id}
-  //       replyToId={id}
-  //       parentId={parentComment?.id || id}
-  //       submitCallback={submitCallback}
-  //       blocked={article.author.isBlocking}
-  //     />
-  //   </section>
-  // )}
+  const isDisabled = !isActive && !isCollapsed
 
   return (
-    <>
-      <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
-        <LikeCoinDialog>
-          {({ open }) => (
-            <section className="left">
-              {hasReply && (
-                <ReplyButton
-                  onClick={onClickReplyButton}
-                  disabled={isDisabled}
-                />
-              )}
-
-              <UpvoteButton
+    <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
+      <LikeCoinDialog>
+        {({ open: openLikeCoinDialog }) => (
+          <section className="left">
+            {hasReply && (
+              <ReplyButton
                 comment={comment}
-                onClick={viewer.shouldSetupLikerID ? open : undefined}
-                disabled={isDisabled}
+                openLikeCoinDialog={openLikeCoinDialog}
+                {...replyButtonProps}
               />
+            )}
 
-              <DownvoteButton
-                comment={comment}
-                onClick={viewer.shouldSetupLikerID ? open : undefined}
-                disabled={isDisabled}
-              />
-            </section>
-          )}
-        </LikeCoinDialog>
+            <UpvoteButton
+              comment={comment}
+              onClick={
+                viewer.shouldSetupLikerID ? openLikeCoinDialog : undefined
+              }
+              disabled={isDisabled}
+            />
 
-        {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
-      </footer>
+            <DownvoteButton
+              comment={comment}
+              onClick={
+                viewer.shouldSetupLikerID ? openLikeCoinDialog : undefined
+              }
+              disabled={isDisabled}
+            />
+          </section>
+        )}
+      </LikeCoinDialog>
 
+      {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
       <style jsx>{styles}</style>
-    </>
+    </footer>
   )
 }
 

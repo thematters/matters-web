@@ -1,12 +1,11 @@
 .container {
   position: relative;
+  padding: var(--spacing-base);
 
   & :global(.ql-editor) {
-    min-height: 4rem;
+    @media (--sm-up) {
+      min-height: 40vh;
+      max-height: 70vh;
+    }
   }
-}
-
-.collapsed-input {
-  @mixin form-input-grey;
-  height: 2.5rem;
 }

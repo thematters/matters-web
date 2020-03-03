@@ -1,12 +1,13 @@
 .container {
   @mixin border-top-grey;
+  display: flex;
+  align-items: center;
   position: sticky;
   bottom: 0;
-
   padding: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
 
-  display: flex;
   background: var(--color-white);
+  line-height: 1;
   z-index: 1;
 }
 

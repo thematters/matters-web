@@ -4,9 +4,9 @@ import { Dialog } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
 
-interface CommentFormDialogProps {
+type CommentFormDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode
-} & CommentFormProps
+} & Omit<CommentFormProps, 'closeDialog'>
 
 export const CommentFormDialog = ({
   children,
@@ -21,7 +21,7 @@ export const CommentFormDialog = ({
       {children && children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <CommentForm {...props} />
+        <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>
   )

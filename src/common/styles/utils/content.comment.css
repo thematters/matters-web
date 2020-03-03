@@ -143,11 +143,6 @@
   }
 }
 
-#editor-comment-container {
-  @mixin form-input-grey;
-  position: relative;
-}
-
 .mention-container {
   position: absolute;
 

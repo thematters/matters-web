@@ -1,23 +1,20 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
-import {
-  Button,
-  Icon,
-  Spinner,
-  TextIcon,
-  Translate,
-  ViewerContext
-} from '~/components'
+import { Button, Dialog, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
-
-import styles from './styles.css'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import {
+  analytics,
+  dom,
+  randomString,
+  subscribePush,
+  trimLineBreaks
+} from '~/common/utils'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { CommentDraft } from './__generated__/CommentDraft'
@@ -49,48 +46,45 @@ const COMMENT_DRAFT = gql`
 export interface CommentFormProps {
   commentId?: string
   articleId: string
-  articleAuthorId: string
   replyToId?: string
   parentId?: string
 
-  submitCallback?: () => void
   defaultContent?: string | null
+  submitCallback?: () => void
+  closeDialog: () => void
 }
 
-const ComemntForm: React.FC<CommentFormProps> = ({
+const CommentForm: React.FC<CommentFormProps> = ({
   commentId,
   articleId,
-  articleAuthorId,
   replyToId,
   parentId,
+
+  defaultContent,
   submitCallback,
-  defaultContent
+  closeDialog
 }) => {
-  const commentDraftId = `${articleId}:${id || 0}:${parentId ||
+  const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||
     0}:${replyToId || 0}`
+  const formId = randomString()
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
-    variables: {
-      id: commentDraftId
-    }
+    variables: { id: commentDraftId }
   })
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
   const [putComment] = useMutation<PutComment>(PUT_COMMENT)
-
-  const draftContent = data?.commentDraft.content || ''
-
   const [isSubmitting, setSubmitting] = useState(false)
-  const [expand, setExpand] = useState(defaultExpand || false)
-  const [content, setContent] = useState(draftContent || defaultContent || '')
-  const viewer = useContext(ViewerContext)
+  const [content, setContent] = useState(
+    data?.commentDraft.content || defaultContent || ''
+  )
 
   const isValid = !!trimLineBreaks(content)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const input = {
-      id,
+      id: commentId,
       comment: {
         content: trimLineBreaks(content),
         replyTo: replyToId,
@@ -139,23 +133,22 @@ const ComemntForm: React.FC<CommentFormProps> = ({
     setSubmitting(false)
   }
 
-  return (
+  const InnerForm = (
     <form
+      id={formId}
       onSubmit={handleSubmit}
-      className={expand ? 'expand' : ''}
       onFocus={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
           state: 'focus',
           level: parentId ? 2 : 1,
-          operation: id ? 'edit' : 'create'
+          operation: commentId ? 'edit' : 'create'
         })
-        setExpand(true)
       }}
       onBlur={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
           state: 'blur',
           level: parentId ? 2 : 1,
-          operation: id ? 'update' : 'create'
+          operation: commentId ? 'update' : 'create'
         })
         client.writeData({
           id: `CommentDraft:${commentDraftId}`,
@@ -164,34 +157,37 @@ const ComemntForm: React.FC<CommentFormProps> = ({
           }
         })
       }}
-      aria-label="發表評論"
+      aria-label={TEXT.zh_hant.putComment}
     >
       <CommentEditor
         content={content}
-        expand={expand}
         update={(params: { content: string }) => setContent(params.content)}
       />
-
-      <Button
-        size={[null, '2rem']}
-        spacing={[0, 'base']}
-        bgColor="green"
-        type="submit"
-        disabled={
-          isSubmitting || !isValid || !viewer.isAuthed || viewer.isInactive
-        }
-      >
-        <TextIcon
-          color="white"
-          weight="md"
-          icon={isSubmitting ? <Icon.Spinner size="sm" /> : <Icon.Edit />}
-        >
-          <Translate zh_hant="送出" zh_hans="送出" />
-        </TextIcon>
-      </Button>
-
-      <style jsx>{styles}</style>
     </form>
+  )
+
+  const SubmitButton = (
+    <Dialog.Header.RightButton
+      type="submit"
+      form={formId}
+      disabled={isSubmitting || !isValid}
+      text={<Translate zh_hant="送出" zh_hans="送出" />}
+      loading={isSubmitting}
+    />
+  )
+
+  return (
+    <>
+      <Dialog.Header
+        title={<Translate id="putComment" />}
+        close={closeDialog}
+        rightButton={SubmitButton}
+      />
+
+      <Dialog.Content spacing={[0, 0]} hasGrow>
+        {InnerForm}
+      </Dialog.Content>
+    </>
   )
 }
 

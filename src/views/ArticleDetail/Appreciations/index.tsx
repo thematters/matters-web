@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
-
 import styles from './styles.css'
+
 import { AppreciationsInfo } from './__generated__/AppreciationsInfo'
 
 const APPRECIATIONS_INFO = gql`
