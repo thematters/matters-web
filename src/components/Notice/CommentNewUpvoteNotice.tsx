@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
@@ -9,7 +8,8 @@ import { numAbbr } from '~/common/utils'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeComment from './NoticeComment'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { CommentNewUpvoteNotice as NoticeType } from './__generated__/CommentNewUpvoteNotice'
@@ -21,25 +21,19 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = notice.actors && actorsCount > 1
-  const avatarWrapClasses = classNames({
-    'avatar-wrap': true,
-    multi: isMultiActors
-  })
 
   return (
     <section className="container">
-      <section className={avatarWrapClasses}>
-        {notice.actors.slice(0, 2).map((actor, index) => (
-          <NoticeActorAvatar
-            user={actor}
-            key={index}
-            size={isMultiActors ? 'md' : undefined}
-          />
-        ))}
+      <section className="avatar-wrap">
+        {isMultiActors ? (
+          <NoticeTypeIcon type="upvote" hasSpacing />
+        ) : (
+          <NoticeActorAvatar user={notice.actors[0]} />
+        )}
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead hasDate={isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -53,11 +47,17 @@ const CommentNewUpvoteNotice = ({ notice }: { notice: NoticeType }) => {
             />
           )}
           <Translate zh_hant="讚了你的評論" zh_hans="赞了你的评论" />{' '}
-        </h4>
+        </NoticeHead>
 
         <NoticeComment comment={notice.target} />
 
-        <NoticeDate notice={notice} />
+        {isMultiActors && (
+          <section className="multi-actor-avatars">
+            {notice.actors.map((actor, index) => (
+              <NoticeActorAvatar key={index} user={actor} />
+            ))}
+          </section>
+        )}
       </section>
 
       <style jsx>{styles}</style>
@@ -83,7 +83,7 @@ CommentNewUpvoteNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeComment.fragments.comment}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 
