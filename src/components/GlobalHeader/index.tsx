@@ -36,10 +36,12 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
   const isLogin = headerType === 'login'
   const isSignUp = headerType === 'signUp'
   const isAbout = headerType === 'about'
+  const isMigration = headerType === 'migration'
+  const isMiscPage = isAbout || isMigration
 
   const headerClass = classNames({
     transparent:
-      isAbout &&
+      isMiscPage &&
       'bgColor' in headerState &&
       headerState.bgColor === 'transparent'
   })
@@ -54,12 +56,12 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
         <div className="container">
           <section className="left">
             <Logo />
-            {!isAbout && isDraft && <Hint />}
-            {!isAbout && !isDraft && <Nav />}
+            {!isMiscPage && isDraft && <Hint />}
+            {!isMiscPage && !isDraft && <Nav />}
           </section>
 
           <section className={rightClass}>
-            {!isAbout && viewer.isAuthed && user && (
+            {!isMiscPage && viewer.isAuthed && user && (
               <>
                 {isLargeUp ? <SearchBar /> : <SearchButton />}
                 <NotificationButton />
@@ -73,7 +75,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             )}
 
-            {!isAbout && (!viewer.isAuthed || !user) && !isLogin && !isSignUp && (
+            {!isMiscPage && (!viewer.isAuthed || !user) && !isLogin && !isSignUp && (
               <>
                 {!isLogin && <LoginButton />}
                 {!isSignUp && (
@@ -84,7 +86,7 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             )}
 
-            {isAbout && (
+            {isMiscPage && (
               <Link {...PATHS.HOME}>
                 <a className="u-link-green">
                   <Translate id="backToDiscover" />

@@ -10,6 +10,7 @@ export type ButtonWidth =
   | '3.25rem'
   | '4rem'
   | '6rem'
+  | '7rem'
   | '100%'
   | undefined
   | null
@@ -20,6 +21,7 @@ export type ButtonHeight =
   | '1.5rem'
   | '2rem'
   | '2.25rem'
+  | '2.5rem'
   | '3rem'
   | undefined
   | null

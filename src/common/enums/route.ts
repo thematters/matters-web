@@ -42,6 +42,7 @@ type ROUTE_KEY =
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
+  | 'MIGRATION'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -268,6 +269,13 @@ export const ROUTES: Array<{
     key: 'OAUTH_CALLBACK_FAILURE',
     href: '/OAuthCallbackFailure',
     as: '/oauth/:provider/failure'
+  },
+
+  // Migration
+  {
+    key: 'MIGRATION',
+    href: '/Migration',
+    as: '/migration'
   },
 
   // Misc
