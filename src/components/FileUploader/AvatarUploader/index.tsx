@@ -12,7 +12,6 @@ import {
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import { randomString } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -32,7 +31,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = randomString()
+  const fieldId = 'avatar-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

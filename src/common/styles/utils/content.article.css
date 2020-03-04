@@ -400,6 +400,11 @@
   }
 }
 
+#editor-comment-container,
+.quill {
+  height: 100%;
+}
+
 .mention-container {
   position: absolute;
 

@@ -8,13 +8,7 @@ import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
-import {
-  analytics,
-  dom,
-  randomString,
-  subscribePush,
-  trimLineBreaks
-} from '~/common/utils'
+import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -72,7 +66,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 }) => {
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||
     0}:${replyToId || 0}`
-  const formId = randomString()
+  const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: { id: commentDraftId }

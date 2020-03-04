@@ -7,11 +7,14 @@
 form {
   flex-grow: 1;
   position: relative;
-  height: 100%;
   overflow-y: auto;
 
-  & :global(.ql-editor, #editor-comment-container, .quill, .ql-editor) {
-    height: inherit;
+  & :global(.ql-editor) {
+    min-height: 50vh;
+
+    @media (--sm-up) {
+      min-height: auto;
+    }
   }
 
   @media (--sm-up) {
