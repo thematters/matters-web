@@ -24,13 +24,23 @@ export interface MigrationHeader {
   bgColor: 'transparent' | 'default'
 }
 
-type HeaderState = DefaultHeader | AuthHeader | DraftHeader | AboutHeader | MigrationHeader
+type HeaderState =
+  | DefaultHeader
+  | AuthHeader
+  | DraftHeader
+  | AboutHeader
+  | MigrationHeader
 
 export const HeaderContext = createContext(
   {} as {
     headerState: HeaderState
     updateHeaderState: (
-      state: DefaultHeader | AuthHeader | DraftHeader | AboutHeader | MigrationHeader
+      state:
+        | DefaultHeader
+        | AuthHeader
+        | DraftHeader
+        | AboutHeader
+        | MigrationHeader
     ) => void
   }
 )

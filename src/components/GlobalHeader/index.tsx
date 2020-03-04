@@ -75,16 +75,19 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
               </>
             )}
 
-            {!isMiscPage && (!viewer.isAuthed || !user) && !isLogin && !isSignUp && (
-              <>
-                {!isLogin && <LoginButton />}
-                {!isSignUp && (
-                  <SignUpButton trackType={SIGNUP_TYPE.GENERAL}>
-                    <Translate id="register" />
-                  </SignUpButton>
-                )}
-              </>
-            )}
+            {!isMiscPage &&
+              (!viewer.isAuthed || !user) &&
+              !isLogin &&
+              !isSignUp && (
+                <>
+                  {!isLogin && <LoginButton />}
+                  {!isSignUp && (
+                    <SignUpButton trackType={SIGNUP_TYPE.GENERAL}>
+                      <Translate id="register" />
+                    </SignUpButton>
+                  )}
+                </>
+              )}
 
             {isMiscPage && (
               <Link {...PATHS.HOME}>
