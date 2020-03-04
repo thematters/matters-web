@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
@@ -8,7 +7,9 @@ import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
-import NoticeDate from './NoticeDate'
+import NoticeFollower from './NoticeFollower'
+import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
@@ -20,25 +21,15 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = notice.actors && actorsCount > 1
-  const avatarWrapClasses = classNames({
-    'avatar-wrap': true,
-    multi: isMultiActors
-  })
 
   return (
     <section className="container">
-      <section className={avatarWrapClasses}>
-        {notice.actors.slice(0, 2).map((actor, index) => (
-          <NoticeActorAvatar
-            user={actor}
-            key={index}
-            size={isMultiActors ? 'md' : undefined}
-          />
-        ))}
+      <section className="avatar-wrap">
+        <NoticeTypeIcon type="user" />
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead hasDate={!isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -52,9 +43,17 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
             />
           )}
           <Translate id="followingYou" />
-        </h4>
+        </NoticeHead>
 
-        <NoticeDate notice={notice} />
+        {isMultiActors ? (
+          <section className="multi-actor-avatars">
+            {notice.actors.map((actor, index) => (
+              <NoticeActorAvatar key={index} user={actor} />
+            ))}
+          </section>
+        ) : (
+          <NoticeFollower user={notice.actors[0]} />
+        )}
       </section>
 
       <style jsx>{styles}</style>
@@ -68,15 +67,17 @@ UserNewFollowerNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
+        ...NoticeFollower
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeDate.fragments.notice}
+    ${NoticeFollower.fragments.follower}
+    ${NoticeHead.fragments.date}
   `
 }
 

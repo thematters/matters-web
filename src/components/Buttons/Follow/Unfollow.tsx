@@ -59,7 +59,7 @@ const Unfollow = ({
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
-    'md-s': ['3rem', '1.5rem']
+    'md-s': ['3.25rem', '1.5rem']
   }
 
   return (
