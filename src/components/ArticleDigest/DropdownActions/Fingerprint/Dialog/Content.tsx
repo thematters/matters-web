@@ -1,6 +1,5 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
 
 import { Button, Icon, Spinner, Translate } from '~/components'
 
@@ -58,16 +57,9 @@ const CopyButton = ({ text }: { text: string }) => {
 }
 
 const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
-  const [loadGateways, { loading, data }] = useLazyQuery<Gateways>(GATEWAYS)
+  const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
-
-  // FIXME: lazy load to fix wrong behavior of react-spring on Safari
-  useEffect(() => {
-    setTimeout(() => {
-      loadGateways()
-    }, 1000)
-  }, [])
 
   return (
     <section className="container">

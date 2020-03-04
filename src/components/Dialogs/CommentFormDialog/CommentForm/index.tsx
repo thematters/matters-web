@@ -74,6 +74,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
+
   const [putComment] = useMutation<PutComment>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
@@ -81,6 +82,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   )
 
   const isValid = !!trimLineBreaks(content)
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const input = {
@@ -134,6 +136,15 @@ const CommentForm: React.FC<CommentFormProps> = ({
     setSubmitting(false)
   }
 
+  const onUpdate = ({ content: newContent }: { content: string }) => {
+    setContent(newContent)
+
+    client.writeData({
+      id: `CommentDraft:${commentDraftId}`,
+      data: { content: newContent }
+    })
+  }
+
   return (
     <>
       <Dialog.Header
@@ -169,19 +180,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
               level: parentId ? 2 : 1,
               operation: commentId ? 'update' : 'create'
             })
-            client.writeData({
-              id: `CommentDraft:${commentDraftId}`,
-              data: {
-                content
-              }
-            })
           }}
           aria-label={TEXT.zh_hant.putComment}
         >
-          <CommentEditor
-            content={content}
-            update={(params: { content: string }) => setContent(params.content)}
-          />
+          <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>
 
