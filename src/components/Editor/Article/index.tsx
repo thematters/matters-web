@@ -1,8 +1,7 @@
-import { QueryResult } from '@apollo/react-common'
-import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersArticleEditor } from '@matters/matters-editor'
 import getConfig from 'next/config'
-import { FC, useContext, useState } from 'react'
+import { FC, useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
@@ -26,8 +25,6 @@ const {
 
 interface Props {
   draft: EditorDraft
-  search: (options?: QueryLazyOptions<Record<string, any>> | undefined) => void
-  searchResult: QueryResult<SearchUsers, Record<string, any>>
   update: (draft: {
     title?: string | null
     content?: string | null
@@ -36,15 +33,9 @@ interface Props {
   upload: DraftAssetUpload
 }
 
-const ArticleEditor: FC<Props> = ({
-  draft,
-  search,
-  searchResult,
-  update,
-  upload
-}) => {
+const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
+  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
-  const [mentionKeyword, setMentionKeyword] = useState<string>('')
 
   const { id, content, publishState, title } = draft
   const isPending = publishState === 'pending'
@@ -57,11 +48,7 @@ const ArticleEditor: FC<Props> = ({
   ) as SearchUsers_search_edges_node_User[]
 
   const mentionKeywordChange = (keyword: string) => {
-    if (mentionKeyword === keyword) {
-      return
-    }
     search({ variables: { search: keyword } })
-    setMentionKeyword(keyword)
   }
 
   return (
@@ -92,12 +79,4 @@ const ArticleEditor: FC<Props> = ({
   )
 }
 
-const ArticleEditorWrap: FC<Omit<Props, 'search' | 'searchResult'>> = props => {
-  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
-
-  return (
-    <ArticleEditor search={search} searchResult={searchResult} {...props} />
-  )
-}
-
-export default ArticleEditorWrap
+export default ArticleEditor

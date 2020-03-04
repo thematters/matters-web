@@ -159,6 +159,5 @@
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
   overflow-y: scroll;
-  visibility: hidden;
   z-index: var(--z-index-under-global-header);
 }

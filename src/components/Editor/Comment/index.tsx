@@ -1,7 +1,6 @@
-import { QueryResult } from '@apollo/react-common'
-import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
@@ -19,31 +18,19 @@ import {
 
 interface Props {
   content: string
-  search: (options?: QueryLazyOptions<Record<string, any>> | undefined) => void
-  searchResult: QueryResult<SearchUsers, Record<string, any>>
   update: (params: { content: string }) => void
 }
 
-const CommentEditor: React.FC<Props> = ({
-  content,
-  search,
-  searchResult,
-  update
-}) => {
+const CommentEditor: React.FC<Props> = ({ content, update }) => {
+  const [search, { data, loading }] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
-  const [mentionKeyword, setMentionKeyword] = useState<string>('')
 
-  const { data, loading } = searchResult
   const mentionUsers = (data?.search.edges || []).map(
     ({ node }: any) => node
   ) as SearchUsers_search_edges_node_User[]
 
   const mentionKeywordChange = (keyword: string) => {
-    if (mentionKeyword === keyword) {
-      return
-    }
     search({ variables: { search: keyword } })
-    setMentionKeyword(keyword)
   }
 
   return (
@@ -67,15 +54,4 @@ const CommentEditor: React.FC<Props> = ({
   )
 }
 
-const CommentEditorWrap: React.FC<Omit<
-  Props,
-  'search' | 'searchResult'
->> = props => {
-  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
-
-  return (
-    <CommentEditor search={search} searchResult={searchResult} {...props} />
-  )
-}
-
-export default CommentEditorWrap
+export default CommentEditor
