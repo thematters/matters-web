@@ -146,7 +146,7 @@ steps:
   - name: slack
     image: plugins/slack
     settings:
-      webhook: https://hooks.slack.com/services/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
+      webhook: https://hooks.slack.com/services/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
       channel: log_github
     username: Drone CI - Matters Web
     when:
