@@ -1,0 +1,11 @@
+ul {
+  padding: var(--spacing-base);
+
+  & li {
+    display: inline-block;
+
+    & + li {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+}

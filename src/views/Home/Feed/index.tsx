@@ -8,9 +8,7 @@ import {
   InfiniteScroll,
   List,
   LoadMore,
-  PageHeader,
   Spinner,
-  Translate,
   useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -165,18 +163,7 @@ const HomeFeed = () => {
 
   return (
     <>
-      <PageHeader
-        title={
-          feedSortType === 'hottest' ? (
-            <Translate id="hottestArticles" />
-          ) : (
-            <Translate id="latestArticles" />
-          )
-        }
-        is="h2"
-      >
-        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
-      </PageHeader>
+      <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
 
       <Feed feedSortType={feedSortType as SortBy} />
     </>

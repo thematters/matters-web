@@ -17,7 +17,10 @@ export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
       <Head />
 
       <main className="l-row full">
-        <nav className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2 u-sm-down-hide">
+        <nav
+          role="navigation"
+          className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2 u-sm-down-hide"
+        >
           <SideNav />
         </nav>
 

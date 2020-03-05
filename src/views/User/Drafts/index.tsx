@@ -1,4 +1,4 @@
-import { Layout, Head, UserProfile } from '~/components'
+import { Head, Layout, UserProfile } from '~/components'
 
 import UserTabs from '../UserTabs'
 import MeDrafts from './MeDrafts'

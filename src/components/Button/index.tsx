@@ -50,7 +50,7 @@ type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
 
 type ButtonBgColor = Extract<
   ButtonColor,
-  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red' | 'white'
 >
 
 type ButtonBgHoverColor = Extract<

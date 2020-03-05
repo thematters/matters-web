@@ -56,8 +56,8 @@ const NavBar = () => {
   const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0
 
   return (
-    <section className="nav-bar">
-      <ol>
+    <section className="nav-bar" role="navigation">
+      <ul>
         <NavListItem
           name={<Translate id="discover" />}
           icon={<Icon.HomeLarge size="lg" />}
@@ -95,7 +95,7 @@ const NavBar = () => {
           active={isInNotification}
           {...PATHS.ME_NOTIFICATIONS}
         />
-      </ol>
+      </ul>
 
       <style jsx>{styles}</style>
     </section>

@@ -81,7 +81,7 @@ const SideNav = () => {
         </Link>
       </section>
 
-      <ol>
+      <ul>
         <NavListItem
           name={<Translate id="discover" />}
           icon={<Icon.HomeLarge size="lg" />}
@@ -129,7 +129,7 @@ const SideNav = () => {
             />
           </li>
         )}
-      </ol>
+      </ul>
 
       <style jsx>{styles}</style>
     </section>
