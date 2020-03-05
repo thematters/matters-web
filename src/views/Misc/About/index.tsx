@@ -2,9 +2,9 @@ import { useContext, useEffect } from 'react'
 
 import { Head } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
+import Footer from '~/components/Standalone/Footer'
 
 import Features from './Features'
-import Footer from './Footer'
 import Goal from './Goal'
 import Reports from './Reports'
 import Slogan from './Slogan'

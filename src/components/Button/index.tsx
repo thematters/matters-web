@@ -11,6 +11,7 @@ export type ButtonWidth =
   | '4rem'
   | '6rem'
   | '7rem'
+  | '8rem'
   | '100%'
   | undefined
   | null
