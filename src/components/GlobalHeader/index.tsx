@@ -66,9 +66,6 @@ export const GlobalHeader = ({ user }: { user: GlobalHeaderUser }) => {
                 {isDraft && !viewer.isInactive && (
                   <PublishButton allowed={!viewer.shouldSetupLikerID} />
                 )}
-                {!isDraft && !viewer.isInactive && (
-                  <WriteButton allowed={!viewer.shouldSetupLikerID} />
-                )}
               </>
             )}
 

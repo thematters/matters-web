@@ -11,7 +11,6 @@ import {
   Translate
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { useResponsive } from '~/components/Hook'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import {
@@ -25,6 +24,7 @@ import { CreateDraft } from './__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
+  isLarge?: boolean
 }
 
 export const CREATE_DRAFT = gql`
@@ -36,14 +36,15 @@ export const CREATE_DRAFT = gql`
   }
 `
 
-const WriteButton = ({
+const BaseWriteButton = ({
   onClick,
-  loading
+  loading,
+  isLarge
 }: {
   onClick: () => any
   loading?: boolean
+  isLarge?: boolean
 }) => {
-  const isMediumUp = useResponsive('md-up')
   const WriteIcon = loading ? (
     <Icon.Spinner size="sm" color="white" />
   ) : (
@@ -53,21 +54,21 @@ const WriteButton = ({
   return (
     <>
       <Button
-        spacing={isMediumUp ? [0, 'base'] : undefined}
-        size={isMediumUp ? [null, '2rem'] : ['2rem', '2rem']}
+        spacing={isLarge ? [0, 'base'] : undefined}
+        size={isLarge ? [null, '2rem'] : ['2rem', '2rem']}
         bgColor="gold"
         onClick={onClick}
         aria-label={TEXT.zh_hant.write}
       >
         <TextIcon icon={WriteIcon} weight="md" color="white">
-          {isMediumUp && <Translate id="write" />}
+          {isLarge && <Translate id="write" />}
         </TextIcon>
       </Button>
     </>
   )
 }
 
-const WriteButtonWithEffect = ({ allowed }: Props) => {
+export const WriteButton = ({ allowed, isLarge }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
@@ -78,13 +79,14 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
   if (!allowed) {
     return (
       <LikeCoinDialog>
-        {({ open }) => <WriteButton onClick={open} />}
+        {({ open }) => <BaseWriteButton onClick={open} isLarge={isLarge} />}
       </LikeCoinDialog>
     )
   }
 
   return (
-    <WriteButton
+    <BaseWriteButton
+      isLarge={isLarge}
       onClick={async () => {
         try {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
@@ -111,5 +113,3 @@ const WriteButtonWithEffect = ({ allowed }: Props) => {
     />
   )
 }
-
-export default WriteButtonWithEffect

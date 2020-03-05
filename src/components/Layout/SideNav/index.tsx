@@ -8,14 +8,14 @@ import {
   TextIcon,
   Translate,
   useResponsive,
-  ViewerContext
+  ViewerContext,
+  WriteButton
 } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
-import WriteButton from './WriteButton'
 
 interface NavListItemProps {
   name: React.ReactNode
@@ -123,7 +123,10 @@ const SideNav = () => {
 
         {!isInDraftDetail && (
           <li>
-            <WriteButton allowed={!viewer.shouldSetupLikerID} />
+            <WriteButton
+              allowed={!viewer.shouldSetupLikerID}
+              isLarge={isMediumUp}
+            />
           </li>
         )}
       </ol>

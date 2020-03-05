@@ -1,5 +1,6 @@
 import { Head, SearchBar, useResponsive } from '~/components'
 
+import NavBar from './NavBar'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import styles from './styles.css'
@@ -9,36 +10,39 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
-  const isSmallUp = useResponsive('sm-up')
   const isLargeUp = useResponsive('lg-up')
 
   return (
-    <main className="l-row">
+    <>
       <Head />
 
-      {isSmallUp && (
-        <nav className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2">
+      <main className="l-row full">
+        <nav className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2 u-sm-down-hide">
           <SideNav />
         </nav>
-      )}
 
-      <article className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-7">
-        {children}
-      </article>
+        <article className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-7">
+          {children}
+        </article>
 
-      {isLargeUp && (
-        <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3">
-          <section>
-            <SearchBar />
-          </section>
+        {isLargeUp && (
+          <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3 u-lg-down-hide">
+            <section>
+              <SearchBar />
+            </section>
 
-          {rightSide}
+            {rightSide}
 
-          <SideFooter />
-        </aside>
-      )}
+            <SideFooter />
+          </aside>
+        )}
+      </main>
+
+      <footer className="u-sm-up-hide">
+        <NavBar />
+      </footer>
 
       <style jsx>{styles}</style>
-    </main>
+    </>
   )
 }
