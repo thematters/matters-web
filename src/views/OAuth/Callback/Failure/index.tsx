@@ -1,6 +1,6 @@
 import Router, { useRouter } from 'next/router'
 
-import { Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
@@ -48,7 +48,7 @@ const OAuthCallbackFailure = () => {
   }
 
   return (
-    <main className="l-row">
+    <Layout>
       <Box avatar={avatar[provider]} title={title[provider]}>
         <section className="content">
           <h2>
@@ -60,11 +60,11 @@ const OAuthCallbackFailure = () => {
               <Translate {...errorDetail} />
             </p>
           )}
+
+          <style jsx>{styles}</style>
         </section>
       </Box>
-
-      <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

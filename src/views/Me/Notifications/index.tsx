@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 
 import {
   EmptyNotice,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
   Notice,
   PageHeader,
@@ -87,19 +87,11 @@ const Notifications = () => {
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ id: 'allNotification' }} />
+  <Layout>
+    <Head title={{ id: 'allNotification' }} />
 
-      <PageHeader title={<Translate id="allNotification" />} />
+    <PageHeader title={<Translate id="allNotification" />} />
 
-      <section>
-        <Notifications />
-      </section>
-    </article>
-
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
+    <Notifications />
+  </Layout>
 )

@@ -1,19 +1,14 @@
-import { Head, UserProfile } from '~/components'
+import { Head, Layout, UserProfile } from '~/components'
 
 import UserTabs from '../UserTabs'
 import MeHistory from './MeHistory'
 
 export default () => (
-  <main>
+  <Layout>
     <Head title={{ id: 'readHistory' }} />
 
     <UserProfile />
-
-    <section className="l-row">
-      <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-        <UserTabs />
-        <MeHistory />
-      </div>
-    </section>
-  </main>
+    <UserTabs />
+    <MeHistory />
+  </Layout>
 )

@@ -7,8 +7,8 @@ import { useContext, useState } from 'react'
 import {
   Button,
   EmptyTag,
-  Footer,
   Head,
+  Layout,
   PageHeader,
   Spinner,
   Tabs,
@@ -141,13 +141,7 @@ const TagDetailDataContainer = () => {
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <TagDetailDataContainer />
-    </article>
-
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
+  <Layout>
+    <TagDetailDataContainer />
+  </Layout>
 )

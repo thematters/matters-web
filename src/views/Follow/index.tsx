@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
-import { Footer, Spinner, ViewerContext } from '~/components'
+import { Layout, Spinner, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 
@@ -63,13 +63,7 @@ const Follow = () => {
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Follow />
-    </article>
-
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
+  <Layout>
+    <Follow />
+  </Layout>
 )

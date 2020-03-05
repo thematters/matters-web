@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
+  Layout,
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm
@@ -50,10 +51,10 @@ const Forget = () => {
   }
 
   return (
-    <main className="l-row full">
+    <Layout>
       <Head title={{ id: 'forgetPassword' }} />
 
-      <article className={containerClass}>
+      <section className={containerClass}>
         {step === 'request' && (
           <PasswordChangeRequestForm
             defaultEmail={data.request.email}
@@ -75,10 +76,10 @@ const Forget = () => {
         {step === 'complete' && (
           <PasswordChangeComplete type="forget" purpose="page" />
         )}
-      </article>
+      </section>
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

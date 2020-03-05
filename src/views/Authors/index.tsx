@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 
 import {
   EmptyWarning,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
   PageHeader,
   Spinner,
@@ -106,22 +106,12 @@ const Authors = () => {
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allAuthors' }} />
+export default () => (
+  <Layout>
+    <Head title={{ id: 'allAuthors' }} />
 
-        <PageHeader title={<Translate id="allAuthors" />} />
+    <PageHeader title={<Translate id="allAuthors" />} />
 
-        <section>
-          <Authors />
-        </section>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-    </main>
-  )
-}
+    <Authors />
+  </Layout>
+)

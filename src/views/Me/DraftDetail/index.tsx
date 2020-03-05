@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
-import { Head, Spinner, Throw404 } from '~/components'
+import { Head, Layout, Spinner, Throw404 } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError } from '~/components/GQL'
@@ -13,7 +13,6 @@ import { getQuery } from '~/common/utils'
 import DraftContent from './Content'
 import PublishState from './PublishState'
 import Sidebar from './Sidebar'
-import styles from './styles.css'
 
 import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
 
@@ -59,27 +58,25 @@ const DraftDetail = () => {
   const draft = data?.node?.__typename === 'Draft' && data.node
 
   return (
-    <main className="l-row">
+    <Layout
+      rightSide={
+        <>
+          {loading && <Spinner />}
+          {draft && <Sidebar draft={draft} />}
+        </>
+      }
+    >
       <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />
 
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        {loading && <Spinner />}
+      {loading && <Spinner />}
 
-        {!loading && draft && (
-          <>
-            <PublishState draft={draft} />
-            <DraftContent draft={draft} />
-          </>
-        )}
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        {loading && <Spinner />}
-        {draft && <Sidebar draft={draft} />}
-      </aside>
-
-      <style jsx>{styles}</style>
-    </main>
+      {!loading && draft && (
+        <>
+          <PublishState draft={draft} />
+          <DraftContent draft={draft} />
+        </>
+      )}
+    </Layout>
   )
 }
 

@@ -20,16 +20,6 @@ html {
   text-rendering: optimizeSpeed;
 }
 
-main {
-  min-height: 100vh;
-  margin-top: calc(var(--spacing-x-loose) + var(--global-header-height));
-  margin-bottom: var(--spacing-xx-loose);
-
-  @media (--sm-up) {
-    margin-top: calc(var(--spacing-xx-loose) + var(--global-header-height));
-  }
-}
-
 *:not(body) {
   background-repeat: no-repeat;
   background-position: 50%;

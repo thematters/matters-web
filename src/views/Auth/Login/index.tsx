@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Head, LoginForm } from '~/components'
+import { Head, Layout, LoginForm } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import styles from '../styles.css'
@@ -19,15 +19,15 @@ const Login = () => {
   })
 
   return (
-    <main className="l-row full">
+    <Layout>
       <Head title={{ id: 'login' }} />
 
-      <article className={containerClass}>
+      <section className={containerClass}>
         <LoginForm purpose="page" />
-      </article>
+      </section>
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

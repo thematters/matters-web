@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Head, LanguageContext } from '~/components'
+import { Head, LanguageContext, Layout } from '~/components'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
@@ -13,28 +13,24 @@ const Guide = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <main>
+    <Layout>
       <Head title={{ id: 'guide' }} />
 
-      <section className="l-row">
-        <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <MiscTab />
+      <MiscTab />
 
-          <article
-            dangerouslySetInnerHTML={{
-              __html: translate({
-                ...content,
-                lang
-              })
-            }}
-            className="u-content"
-          />
-        </div>
+      <section
+        dangerouslySetInnerHTML={{
+          __html: translate({
+            ...content,
+            lang
+          })
+        }}
+        className="u-content"
+      />
 
-        <style jsx>{styles}</style>
-        <style jsx>{contentStyles}</style>
-      </section>
-    </main>
+      <style jsx>{styles}</style>
+      <style jsx>{contentStyles}</style>
+    </Layout>
   )
 }
 

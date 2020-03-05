@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { Footer, Head, SearchBar, useResponsive } from '~/components'
+import { Head, Layout, SearchBar, useResponsive } from '~/components'
 
 import { getQuery } from '~/common/utils'
 
@@ -11,23 +11,13 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
-const EmptySeachPage = () => {
-  return (
-    <main>
-      <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
+const EmptySeachPage = () => (
+  <Layout>
+    <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
 
-      <section className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <EmptySearch inSidebar={false} />
-        </article>
-
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          <Footer />
-        </aside>
-      </section>
-    </main>
-  )
-}
+    <EmptySearch inSidebar={false} />
+  </Layout>
+)
 
 const Search = () => {
   const isMedium = useResponsive('md')
@@ -44,7 +34,14 @@ const Search = () => {
   const isAggregate = !isTagOnly && !isUserOnly
 
   return (
-    <main>
+    <Layout
+      rightSide={
+        <>
+          {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
+          {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}
+        </>
+      }
+    >
       <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
 
       {isMedium && (
@@ -55,22 +52,12 @@ const Search = () => {
 
       <SearchPageHeader q={q} isAggregate={isAggregate} />
 
-      <section className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          {isAggregate && <SearchArticles q={q} />}
-          {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
-        </article>
-
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}
-          <Footer />
-        </aside>
-      </section>
+      {isAggregate && <SearchArticles q={q} />}
+      {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
+      {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

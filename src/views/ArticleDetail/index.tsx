@@ -11,9 +11,9 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
-  Footer,
   Head,
   Icon,
+  Layout,
   Spinner,
   Throw404,
   Title,
@@ -161,86 +161,80 @@ const ArticleDetail = () => {
   }
 
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-7 l-offset-lg-2">
-        <section>
-          <Head
-            title={article.title}
-            description={article.summary}
-            keywords={
-              article.tags
-                ? article.tags.map(({ content }: { content: any }) => content)
-                : []
-            }
-            image={article.cover}
-          />
-
-          <State article={article} />
-
-          <section className="author">
-            <UserDigest.Rich user={article.author} hasFollow />
-          </section>
-
-          <section className="title">
-            <Title type="article">{article.title}</Title>
-
-            <span className="subtitle">
-              <p className="date">
-                <DateTime date={article.createdAt} />
-              </p>
-              <span className="right">{article.live && <Icon.Live />}</span>
-            </span>
-          </section>
-
-          <Content article={article} />
-        </section>
-
-        {(collectionCount > 0 || canEditCollection) && (
-          <section className="block">
-            <Collection
-              article={article}
-              canEdit={canEditCollection}
-              collectionCount={collectionCount}
-            />
-
-            <TagList article={article} />
-          </section>
-        )}
-
-        <Waypoint
-          onPositionChange={({ currentPosition }) => {
-            if (shouldShowWall) {
-              setFixedWall(currentPosition === 'inside')
-            }
-          }}
+    <Layout
+      rightSide={isLargeUp && <RelatedArticles article={article} inSidebar />}
+    >
+      <section>
+        <Head
+          title={article.title}
+          description={article.summary}
+          keywords={
+            article.tags
+              ? article.tags.map(({ content }: { content: any }) => content)
+              : []
+          }
+          image={article.cover}
         />
 
-        {shouldShowWall && (
-          <>
-            <section id="comments" />
-            <Wall show={fixedWall} />
-          </>
-        )}
+        <State article={article} />
 
-        {!shouldShowWall && (
-          <section className="block">
-            <DynamicResponse />
-          </section>
-        )}
+        <section className="author">
+          <UserDigest.Rich user={article.author} hasFollow />
+        </section>
 
-        {!isLargeUp && <RelatedArticles article={article} />}
+        <section className="title">
+          <Title type="article">{article.title}</Title>
 
-        <Toolbar mediaHash={mediaHash} />
-      </article>
+          <span className="subtitle">
+            <p className="date">
+              <DateTime date={article.createdAt} />
+            </p>
+            <span className="right">{article.live && <Icon.Live />}</span>
+          </span>
+        </section>
 
-      <aside className="l-col-lg-3">
-        {isLargeUp && <RelatedArticles article={article} inSidebar />}
+        <Content article={article} />
+      </section>
 
-        <Footer />
-      </aside>
+      {(collectionCount > 0 || canEditCollection) && (
+        <section className="block">
+          <Collection
+            article={article}
+            canEdit={canEditCollection}
+            collectionCount={collectionCount}
+          />
+
+          <TagList article={article} />
+        </section>
+      )}
+
+      <Waypoint
+        onPositionChange={({ currentPosition }) => {
+          if (shouldShowWall) {
+            setFixedWall(currentPosition === 'inside')
+          }
+        }}
+      />
+
+      {shouldShowWall && (
+        <>
+          <section id="comments" />
+          <Wall show={fixedWall} />
+        </>
+      )}
+
+      {!shouldShowWall && (
+        <section className="block">
+          <DynamicResponse />
+        </section>
+      )}
+
+      {!isLargeUp && <RelatedArticles article={article} />}
+
+      <Toolbar mediaHash={mediaHash} />
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

@@ -11,7 +11,6 @@ import {
   AnalyticsProvider,
   Error,
   ErrorBoundary,
-  Head,
   LanguageProvider,
   Toast,
   ViewerFragments,
@@ -19,7 +18,6 @@ import {
 } from '~/components'
 import { ClientInfoUpdater } from '~/components/ClientInfoUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
-import { GlobalHeader } from '~/components/GlobalHeader'
 import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
@@ -35,12 +33,10 @@ const ROOT_QUERY = gql`
     viewer {
       id
       ...ViewerUser
-      ...GlobalHeaderUser
       ...AnalyticsUser
     }
   }
   ${ViewerFragments.user}
-  ${GlobalHeader.fragments.user}
   ${AnalyticsListener.fragments.user}
 `
 
@@ -85,9 +81,6 @@ const Root = ({
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
         <HeaderContextProvider>
-          <Head />
-          <GlobalHeader user={viewer} />
-
           {children}
 
           <GlobalDialogs />

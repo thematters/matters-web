@@ -5,10 +5,10 @@ import { useContext } from 'react'
 import {
   Button,
   EmptyTag,
-  Footer,
   Head,
   Icon,
   InfiniteScroll,
+  Layout,
   PageHeader,
   Spinner,
   Tag,
@@ -157,26 +157,18 @@ const Tags = () => {
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allTags' }} />
+export default () => (
+  <Layout>
+    <Head title={{ id: 'allTags' }} />
 
-        <PageHeader title={<Translate id="allTags" />}>
-          <CreateTagButton />
-        </PageHeader>
+    <PageHeader title={<Translate id="allTags" />}>
+      <CreateTagButton />
+    </PageHeader>
 
-        <section className="container">
-          <Tags />
-        </section>
-      </article>
+    <section className="container">
+      <Tags />
+    </section>
 
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-
-      <style jsx>{styles}</style>
-    </main>
-  )
-}
+    <style jsx>{styles}</style>
+  </Layout>
+)

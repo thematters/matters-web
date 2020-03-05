@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 
-import { Head } from '~/components'
+import { Head, Layout } from '~/components'
 import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import Features from './Features'
@@ -8,7 +8,6 @@ import Footer from './Footer'
 import Goal from './Goal'
 import Reports from './Reports'
 import Slogan from './Slogan'
-import styles from './styles.css'
 
 const About = () => {
   const { updateHeaderState } = useContext(HeaderContext)
@@ -19,19 +18,15 @@ const About = () => {
   }, [])
 
   return (
-    <main>
+    <Layout>
       <Head title={{ id: 'about' }} />
 
-      <article>
-        <Slogan />
-        <Goal />
-        <Features />
-        <Reports />
-        <Footer />
-      </article>
-
-      <style jsx>{styles}</style>
-    </main>
+      <Slogan />
+      <Goal />
+      <Features />
+      <Reports />
+      <Footer />
+    </Layout>
   )
 }
 

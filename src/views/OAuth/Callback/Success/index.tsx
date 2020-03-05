@@ -1,6 +1,6 @@
 import Router, { useRouter } from 'next/router'
 
-import { Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
@@ -25,7 +25,7 @@ const OAuthCallbackSuccess = () => {
   }
 
   return (
-    <main className="l-row">
+    <Layout>
       <Box avatar={avatar[provider]} title={title[provider]}>
         <section className="content">
           <h2>
@@ -39,10 +39,10 @@ const OAuthCallbackSuccess = () => {
             />
           </p>
         </section>
-      </Box>
 
-      <style jsx>{styles}</style>
-    </main>
+        <style jsx>{styles}</style>
+      </Box>
+    </Layout>
   )
 }
 

@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 
 import {
   EmptyAppreciation,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
   Spinner,
   Transaction
@@ -104,15 +104,8 @@ const AppreciationsSent = () => {
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-      <Head title={{ id: 'appreciationsSent' }} />
-
-      <AppreciationsSent />
-    </article>
-
-    <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-      <Footer />
-    </section>
-  </main>
+  <Layout>
+    <Head title={{ id: 'appreciationsSent' }} />
+    <AppreciationsSent />
+  </Layout>
 )

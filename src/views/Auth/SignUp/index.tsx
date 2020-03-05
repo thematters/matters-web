@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
+  Layout,
   SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
@@ -30,10 +31,10 @@ const SignUp = () => {
   })
 
   return (
-    <main className="l-row full">
+    <Layout>
       <Head title={{ id: 'register' }} />
 
-      <article className={containerClass}>
+      <section className={containerClass}>
         {step === 'signUp' && (
           <SignUpInitForm
             purpose="page"
@@ -62,10 +63,10 @@ const SignUp = () => {
         )}
 
         {step === 'complete' && <SignUpComplete purpose="page" />}
-      </article>
+      </section>
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

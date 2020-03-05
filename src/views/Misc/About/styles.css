@@ -1,7 +1,3 @@
-main {
-  margin-bottom: calc(-1 * var(--spacing-xx-loose));
-}
-
 h2 {
   @mixin font-serif;
   font-size: 1.7rem;

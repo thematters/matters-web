@@ -7,7 +7,7 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-export const Footer = () => {
+const SideFooter = () => {
   const year = new Date().getFullYear()
 
   const downloadAppLink = toPath({
@@ -68,3 +68,5 @@ export const Footer = () => {
     </footer>
   )
 }
+
+export default SideFooter
