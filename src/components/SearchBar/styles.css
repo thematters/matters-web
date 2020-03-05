@@ -1,12 +1,11 @@
 :root {
-  --search-bar-width: var(--sizing-menu-md);
   --search-bar-height: 2.25rem;
   --search-bar-button-width: 2.5rem;
 }
 
 form {
   position: relative;
-  width: var(--search-bar-width);
+  width: 100%;
   height: var(--search-bar-height);
   margin-left: auto;
   margin-right: auto;

@@ -1,4 +1,4 @@
-import { Head, useResponsive } from '~/components'
+import { Head, SearchBar, useResponsive } from '~/components'
 
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
@@ -10,6 +10,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
   const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
 
   return (
     <main className="l-row">
@@ -26,7 +27,14 @@ export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
       </article>
 
       <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3">
+        {isLargeUp && (
+          <section>
+            <SearchBar />
+          </section>
+        )}
+
         {rightSide}
+
         <SideFooter />
       </aside>
 

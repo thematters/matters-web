@@ -2,3 +2,9 @@ main {
   min-height: 100vh;
   margin-top: var(--spacing-x-loose);
 }
+
+aside {
+  & :global(> * + *) {
+    margin-top: var(--spacing-xx-loose);
+  }
+}
