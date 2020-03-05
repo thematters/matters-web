@@ -55,7 +55,7 @@ const BaseWriteButton = ({
     <>
       <Button
         spacing={isLarge ? [0, 'base'] : undefined}
-        size={isLarge ? [null, '2rem'] : ['2rem', '2rem']}
+        size={isLarge ? [null, '2.25rem'] : ['2rem', '2rem']}
         bgColor="gold"
         onClick={onClick}
         aria-label={TEXT.zh_hant.write}

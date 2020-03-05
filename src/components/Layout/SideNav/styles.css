@@ -42,3 +42,13 @@ ul {
     margin-top: var(--spacing-x-loose);
   }
 }
+
+.me-avatar {
+  @mixin flex-center-all;
+  width: 2rem;
+  height: 2rem;
+
+  &.active {
+    border: 1.5px solid var(--color-matters-green);
+  }
+}

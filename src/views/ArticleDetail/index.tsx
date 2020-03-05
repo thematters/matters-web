@@ -126,37 +126,51 @@ const ArticleDetail = () => {
   useImmersiveMode('article > .content')
 
   if (loading) {
-    return <Spinner />
+    return (
+      <Layout>
+        <Spinner />
+      </Layout>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <Layout>
+        <QueryError error={error} />
+      </Layout>
+    )
   }
 
   if (!article) {
-    return <Throw404 />
+    return (
+      <Layout>
+        <Throw404 />
+      </Layout>
+    )
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
-      <Error
-        statusCode={404}
-        message={
-          article.state === 'archived' ? (
-            <Translate
-              zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-              zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-            />
-          ) : article.state === 'banned' ? (
-            <Translate
-              zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-              zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
-            />
-          ) : null
-        }
-      >
-        <BackToHomeButton />
-      </Error>
+      <Layout>
+        <Error
+          statusCode={404}
+          message={
+            article.state === 'archived' ? (
+              <Translate
+                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+              />
+            ) : article.state === 'banned' ? (
+              <Translate
+                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
+                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+              />
+            ) : null
+          }
+        >
+          <BackToHomeButton />
+        </Error>
+      </Layout>
     )
   }
 

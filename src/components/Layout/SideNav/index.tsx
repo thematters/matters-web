@@ -3,9 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  Button,
   Icon,
-  TextIcon,
   Translate,
   useResponsive,
   ViewerContext,
@@ -15,49 +13,9 @@ import {
 import { PATHS, TEXT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
+import MeAvatar from './MeAvatar'
+import NavListItem from './NavListItem'
 import styles from './styles.css'
-
-interface NavListItemProps {
-  name: React.ReactNode
-  href: string
-  as: string
-  icon: React.ReactNode
-  activeIcon: React.ReactNode
-  active: boolean
-  isMediumUp: boolean
-}
-
-const NavListItem = ({
-  name,
-  href,
-  as,
-  icon,
-  activeIcon,
-  active,
-  isMediumUp
-}: NavListItemProps) => (
-  <li>
-    <Button
-      href={href}
-      as={as}
-      bgHoverColor="green-lighter"
-      spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
-      size={isMediumUp ? undefined : ['2rem', '2rem']}
-    >
-      <TextIcon
-        icon={active ? activeIcon : icon}
-        size="lg"
-        weight="semibold"
-        spacing="xtight"
-        color={active ? 'green' : 'black'}
-      >
-        {isMediumUp && name}
-      </TextIcon>
-    </Button>
-
-    <style jsx>{styles}</style>
-  </li>
-)
 
 const SideNav = () => {
   const isMediumUp = useResponsive('md-up')
@@ -111,8 +69,8 @@ const SideNav = () => {
 
         <NavListItem
           name={<Translate zh_hant="我的" zh_hans="我的" />}
-          icon={<Icon.HomeLarge size="lg" />}
-          activeIcon={<Icon.HomeActiveLarge size="lg" />}
+          icon={<MeAvatar user={viewer} />}
+          activeIcon={<MeAvatar user={viewer} active />}
           active={isInMe}
           isMediumUp={isMediumUp}
           {...toPath({

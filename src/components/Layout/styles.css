@@ -3,8 +3,6 @@ main {
 }
 
 article {
-  padding-top: var(--spacing-x-loose);
-
   @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;

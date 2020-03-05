@@ -58,7 +58,12 @@ const FollowComment = ({
       : {}
 
   return (
-    <Card {...articlePath} onClick={onClick}>
+    <Card
+      {...articlePath}
+      spacing={['base', 'base']}
+      bgHoverColor="green-lighter"
+      onClick={onClick}
+    >
       <header>
         <section className="left">
           <UserDigest.Mini
