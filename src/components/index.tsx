@@ -21,7 +21,6 @@ export * from './Toast'
 export * from './Tabs'
 export * from './PageHeader'
 export * from './Spinner'
-export * from './LoadMore'
 export * from './Expandable'
 
 /**

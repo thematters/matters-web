@@ -21,7 +21,7 @@ import styles from './styles.css'
 const prefix = 'toast-'
 
 const Container = ({
-  layout = 'l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2'
+  layout = 'l-col-4 l-offset-sm-1 l-col-sm-7 l-offset-md-1 l-col-md-7 l-offset-lg-2 l-col-lg-7'
 }: {
   layout?: string
 }) => {
@@ -34,8 +34,7 @@ const Container = ({
     setToasts(prev => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
   }
 
-  const remove = (payload: { id: string }) => {
-    const { id } = payload
+  const remove = ({ id }: { id: string }) => {
     if (!id || !id.startsWith(prefix)) {
       return
     }
@@ -48,7 +47,7 @@ const Container = ({
   return (
     <>
       <section className="toast-container">
-        <div className="l-row">
+        <div className="l-row full">
           <div className={layout}>
             {toasts.map(toast => (
               <ToastWithEffect key={toast.id} {...toast} />

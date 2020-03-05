@@ -39,7 +39,6 @@ import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-// import { ArticleEdited } from './__generated__/ArticleEdited'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String) {
@@ -96,26 +95,11 @@ const ArticleDetail = () => {
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
 
-  // subscribeToMore,
-
   const shouldShowWall = !viewer.isAuthed && wall
   const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
-
-  // useEffect(() => {
-  //   if (article && article.live) {
-  //     subscribeToMore<ArticleEdited>({
-  //       document: ARTICLE_EDITED,
-  //       variables: { id: article.id },
-  //       updateQuery: (prev, { subscriptionData }) =>
-  //         _merge(prev, {
-  //           article: subscriptionData.data.nodeEdited
-  //         })
-  //     })
-  //   }
-  // })
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -178,72 +162,62 @@ const ArticleDetail = () => {
     <Layout
       rightSide={isLargeUp && <RelatedArticles article={article} inSidebar />}
     >
-      <section>
-        <Head
-          title={article.title}
-          description={article.summary}
-          keywords={
-            article.tags
-              ? article.tags.map(({ content }: { content: any }) => content)
-              : []
-          }
-          image={article.cover}
-        />
-
-        <State article={article} />
-
-        <section className="author">
-          <UserDigest.Rich user={article.author} hasFollow />
-        </section>
-
-        <section className="title">
-          <Title type="article">{article.title}</Title>
-
-          <span className="subtitle">
-            <p className="date">
-              <DateTime date={article.createdAt} />
-            </p>
-            <span className="right">{article.live && <Icon.Live />}</span>
-          </span>
-        </section>
-
-        <Content article={article} />
-      </section>
-
-      {(collectionCount > 0 || canEditCollection) && (
-        <section className="block">
-          <Collection
-            article={article}
-            canEdit={canEditCollection}
-            collectionCount={collectionCount}
-          />
-
-          <TagList article={article} />
-        </section>
-      )}
-
-      <Waypoint
-        onPositionChange={({ currentPosition }) => {
-          if (shouldShowWall) {
-            setFixedWall(currentPosition === 'inside')
-          }
-        }}
+      <Head
+        title={article.title}
+        description={article.summary}
+        keywords={(article.tags || []).map(({ content }) => content)}
+        image={article.cover}
       />
 
-      {shouldShowWall && (
-        <>
-          <section id="comments" />
-          <Wall show={fixedWall} />
-        </>
-      )}
+      <State article={article} />
 
-      {!shouldShowWall && (
-        <section className="block">
-          <DynamicResponse />
-        </section>
-      )}
+      <section className="container">
+        <header>
+          <Title type="article">{article.title}</Title>
 
-      {!isLargeUp && <RelatedArticles article={article} />}
+          <section className="subtitle">
+            <DateTime date={article.createdAt} />
+            <section className="right">{article.live && <Icon.Live />}</section>
+          </section>
+        </header>
+
+        <Content article={article} />
+
+        {(collectionCount > 0 || canEditCollection) && (
+          <section className="block">
+            <Collection
+              article={article}
+              canEdit={canEditCollection}
+              collectionCount={collectionCount}
+            />
+
+            <TagList article={article} />
+          </section>
+        )}
+
+        <Waypoint
+          onPositionChange={({ currentPosition }) => {
+            if (shouldShowWall) {
+              setFixedWall(currentPosition === 'inside')
+            }
+          }}
+        />
+
+        {shouldShowWall && (
+          <>
+            <section id="comments" />
+            <Wall show={fixedWall} />
+          </>
+        )}
+
+        {!shouldShowWall && (
+          <section className="block">
+            <DynamicResponse />
+          </section>
+        )}
+
+        {!isLargeUp && <RelatedArticles article={article} />}
+      </section>
 
       <Toolbar mediaHash={mediaHash} />
 

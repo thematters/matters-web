@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Button, Icon, TextIcon, Title, Translate } from '~/components'
+import { Title, Translate, ViewAllButton } from '~/components'
 
 import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -41,25 +41,7 @@ const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
 
       <section className="right">
         {rightButton}
-        {path && (
-          <Button
-            size={[null, '1.25rem']}
-            spacing={[0, 'xtight']}
-            bgHoverColor="grey-lighter"
-            {...path}
-            onClick={onClick}
-          >
-            <TextIcon
-              icon={<Icon.Right size="xs" />}
-              color="grey-dark"
-              size="xs"
-              weight="md"
-              textPlacement="left"
-            >
-              <Translate id="viewAll" />
-            </TextIcon>
-          </Button>
-        )}
+        {path && <ViewAllButton {...path} onClick={onClick} />}
       </section>
 
       <style jsx>{styles}</style>

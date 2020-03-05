@@ -36,10 +36,12 @@
 }
 
 ul {
-  line-height: 1;
+  & li {
+    dislay: inline-flex;
 
-  & li + li {
-    margin-top: var(--spacing-x-loose);
+    & + li {
+      margin-top: var(--spacing-x-loose);
+    }
   }
 }
 

@@ -18,5 +18,7 @@
 ul {
   @mixin flex-center-space-between;
 
-  line-height: 1;
+  & li {
+    display: inline-flex;
+  }
 }

@@ -7,11 +7,11 @@ import {
   ArticleDigestFeed,
   InfiniteScroll,
   List,
-  LoadMore,
   PageHeader,
   Spinner,
   Translate,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -115,7 +115,7 @@ const SearchArticles = ({ q }: { q: string }) => {
       </List>
 
       {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </InfiniteScroll>
   )

@@ -7,10 +7,10 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
-  LoadMore,
   Spinner,
   useEventListener,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -134,7 +134,7 @@ const LatestArticles = ({ id }: { id: string }) => {
       </InfiniteScroll>
 
       {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </section>
   )

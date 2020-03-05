@@ -7,9 +7,9 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
-  LoadMore,
   Spinner,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -139,7 +139,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
       </InfiniteScroll>
 
       {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </>
   )

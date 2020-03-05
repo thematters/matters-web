@@ -10,13 +10,13 @@ import { useEffect, useState } from 'react'
 import {
   EmptyResponse,
   List,
-  LoadMore,
   Spinner,
   Switch,
   Title,
   Translate,
   useEventListener,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -352,7 +352,7 @@ const LatestResponses = () => {
       </List>
 
       {pageInfo && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
 
       <style jsx>{styles}</style>

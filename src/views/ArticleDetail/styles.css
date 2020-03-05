@@ -1,22 +1,18 @@
-.title {
-  margin-bottom: var(--spacing-base);
+.container {
+  padding: var(--spacing-base);
 }
 
-.subtitle {
-  @mixin flex-center-space-between;
-  padding-top: var(--spacing-x-tight);
+header {
+  margin-bottom: var(--spacing-base);
 
-  & .right {
-    & :global(> * + *) {
+  & .subtitle {
+    @mixin flex-center-space-between;
+    padding-top: var(--spacing-x-tight);
+
+    & .right :global(> * + *) {
       margin-left: var(--spacing-tight);
     }
   }
-}
-
-.author {
-  @mixin border-bottom-grey;
-  padding-bottom: var(--spacing-xx-tight);
-  margin-bottom: var(--spacing-base);
 }
 
 .block {
