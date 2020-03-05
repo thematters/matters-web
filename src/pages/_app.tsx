@@ -4,11 +4,10 @@ import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import App from 'next/app'
 import getConfig from 'next/config'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   AnalyticsListener,
-  AnalyticsProvider,
   Error,
   ErrorBoundary,
   LanguageProvider,
@@ -24,6 +23,7 @@ import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
 
+import { analytics } from '~/common/utils'
 import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
@@ -62,6 +62,10 @@ const Root = ({
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode
 }) => {
+  useEffect(() => {
+    analytics.trackPage({ path: window.location.pathname })
+  })
+
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
 
@@ -104,7 +108,6 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
         <ApolloProvider client={apollo}>
           <GlobalStyles />
           <ClientInfoUpdater />
-          <AnalyticsProvider />
 
           <Root client={apollo}>
             <Component {...pageProps} />
