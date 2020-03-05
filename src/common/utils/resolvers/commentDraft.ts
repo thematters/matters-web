@@ -1,7 +1,7 @@
-export default (_: any, { input: { id } }: { input: { id: string } }) => {
+export default (root: any, { input: { id } }: { input: { id: string } }) => {
   return {
     id,
-    content: '',
+    content: root?.commentDraft?.content || '',
     __typename: 'CommentDraft'
   }
 }

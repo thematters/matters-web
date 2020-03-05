@@ -6,7 +6,7 @@
 }
 
 .collection {
-  margin: var(--spacing-x-loose) 0 var(--spacing-loose);
+  margin: 0 0 var(--spacing-loose);
 
   & header {
     @mixin flex-center-space-between;

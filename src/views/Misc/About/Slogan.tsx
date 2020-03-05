@@ -8,7 +8,6 @@ import { PATHS } from '~/common/enums'
 import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg'
 import IMAGE_SLOGAN_MD from '~/static/images/about-1-md.svg'
 import IMAGE_SLOGAN_SM from '~/static/images/about-1-sm.svg'
-import IMAGE_SLOGAN_XL from '~/static/images/about-1-xl.svg'
 
 import styles from './styles.css'
 
@@ -74,9 +73,6 @@ const Slogan = () => {
           }
           @media (--lg-up) {
             background-image: url(${IMAGE_SLOGAN_LG});
-          }
-          @media (--xl-up) {
-            background-image: url(${IMAGE_SLOGAN_XL});
           }
         }
       `}</style>

@@ -12,7 +12,7 @@ interface ErrorProps {
 export const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
     <main className="l-row">
-      <article className="l-col-4 l-col-md-4 l-offset-md-2  l-col-lg-4 l-offset-lg-4">
+      <article className="l-col-4 l-col-md-4 l-offset-md-2 l-col-lg-4 l-offset-lg-4">
         <Error
           statusCode={statusCode}
           type={

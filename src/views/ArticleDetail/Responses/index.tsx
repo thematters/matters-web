@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Comment, Title, Translate } from '~/components'
+import { Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, REFETCH_RESPONSES } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, getQuery } from '~/common/utils'
 
 import FeatureComments from './FeaturedComments'
@@ -48,12 +48,6 @@ const Responses = () => {
 
   const { article } = data
 
-  const refetchResponses = () => {
-    if (!article.live) {
-      window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
-    }
-  }
-
   return (
     <section className="responses" id="comments">
       <header>
@@ -62,13 +56,6 @@ const Responses = () => {
           <ResponseCount article={article} />
         </Title>
       </header>
-
-      <Comment.Form
-        articleId={article.id}
-        articleAuthorId={article.author.id}
-        submitCallback={refetchResponses}
-        blocked={article.author.isBlocking}
-      />
 
       <FeatureComments />
       <LatestResponses />

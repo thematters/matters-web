@@ -8,6 +8,9 @@
 }
 
 /* Background */
+.bg-white {
+  background: var(--color-white);
+}
 .bg-grey-lighter {
   background: var(--color-grey-lighter);
 
@@ -64,6 +67,9 @@
   border: 1px solid var(--color-grey-lighter);
 }
 
+.border-radius-base {
+  border-radius: var(--spacing-base);
+}
 .border-radius-xtight {
   border-radius: var(--spacing-x-tight);
 }

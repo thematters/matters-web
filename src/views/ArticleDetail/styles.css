@@ -1,14 +1,12 @@
 .title {
-  @mixin border-bottom-grey;
-
-  padding-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 }
 
 .subtitle {
   @mixin flex-center-space-between;
   padding-top: var(--spacing-x-tight);
 
-  & .right-items {
+  & .right {
     & :global(> * + *) {
       margin-left: var(--spacing-tight);
     }
@@ -21,17 +19,8 @@
   margin-bottom: var(--spacing-base);
 }
 
-.content {
-  @mixin border-bottom-grey;
-
-  position: relative;
-  padding: var(--spacing-loose) 0 0 0;
-  margin-bottom: var(--spacing-loose);
-
-  line-height: var(--line-height-article-base);
-
-  @media (--sm-up) {
-    padding-left: var(--spacing-base);
-    padding-right: var(--spacing-base);
-  }
+.block {
+  @mixin border-top-grey;
+  margin: var(--spacing-loose) 0 var(--spacing-base);
+  padding-top: var(--spacing-loose);
 }

@@ -6,10 +6,10 @@ import { KEYCODES } from '~/common/enums'
 
 import styles from './styles.css'
 
-export type CardBgColor = 'grey-lighter'
+export type CardBgColor = 'grey-lighter' | 'white'
 export type CardSpacing = 0 | '0' | 'xtight' | 'tight' | 'base'
 export type CardBorderColor = 'grey-lighter'
-export type CardBorderRadius = 'xtight' | 'xxtight'
+export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
 
 export interface CardProps {
   spacing?: [CardSpacing, CardSpacing]

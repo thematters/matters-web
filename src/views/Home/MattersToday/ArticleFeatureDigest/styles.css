@@ -8,9 +8,6 @@
   @media (--lg-up) {
     margin-left: calc(var(--spacing-x-loose) * -1);
   }
-  @media (--xl-up) {
-    margin-left: -8.75rem;
-  }
 }
 .cover {
   width: 100%;
@@ -30,9 +27,6 @@
     margin-top: -5.5rem;
     margin-left: calc(var(--spacing-x-loose) * -1);
     padding-left: var(--spacing-x-loose);
-  }
-  @media (--xl-up) {
-    margin-left: calc(var(--spacing-x-loose) * -1);
   }
 }
 .content {
