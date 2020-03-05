@@ -78,7 +78,12 @@ export const ArticleDigestFeed = ({
   })
 
   return (
-    <Card {...path} onClick={onClick}>
+    <Card
+      {...path}
+      spacing={['base', 'base']}
+      bgHoverColor="green-lighter"
+      onClick={onClick}
+    >
       {inUserArticles && sticky && (
         <section className="sticky">
           <TextIcon

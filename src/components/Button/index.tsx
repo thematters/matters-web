@@ -26,7 +26,14 @@ export type ButtonHeight =
 
 type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
 
-type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
+type ButtonSpacingX =
+  | 0
+  | '0'
+  | 'xxtight'
+  | 'xtight'
+  | 'tight'
+  | 'base'
+  | 'loose'
 
 type ButtonColor =
   | 'white'

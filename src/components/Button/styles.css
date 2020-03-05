@@ -125,6 +125,16 @@ span.container {
   }
 }
 
+.spacing-x-xxtight {
+  &:not(.isTransparent) {
+    padding-left: var(--spacing-xx-tight);
+    padding-right: var(--spacing-xx-tight);
+  }
+  & .hotarea {
+    margin-left: calc(var(--spacing-xx-tight) * -1);
+    margin-right: calc(var(--spacing-xx-tight) * -1);
+  }
+}
 .spacing-x-xtight {
   &:not(.isTransparent) {
     padding-left: var(--spacing-x-tight);

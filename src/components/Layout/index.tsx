@@ -26,17 +26,17 @@ export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
         {children}
       </article>
 
-      <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3">
-        {isLargeUp && (
+      {isLargeUp && (
+        <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3">
           <section>
             <SearchBar />
           </section>
-        )}
 
-        {rightSide}
+          {rightSide}
 
-        <SideFooter />
-      </aside>
+          <SideFooter />
+        </aside>
+      )}
 
       <style jsx>{styles}</style>
     </main>

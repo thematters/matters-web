@@ -1,9 +1,16 @@
 main {
   min-height: 100vh;
-  margin-top: var(--spacing-x-loose);
+}
+
+article {
+  @mixin border-left-grey;
+  @mixin border-right-grey;
+  padding-top: var(--spacing-x-loose);
 }
 
 aside {
+  padding-top: var(--spacing-x-loose);
+
   & :global(> * + *) {
     margin-top: var(--spacing-xx-loose);
   }

@@ -23,7 +23,6 @@ import NotificationButton from './NotificationButton'
 import PublishButton from './PublishButton'
 import SearchButton from './SearchButton'
 import styles from './styles.css'
-import WriteButton from './WriteButton'
 
 import { GlobalHeaderUser } from './__generated__/GlobalHeaderUser'
 

@@ -7,6 +7,7 @@ import { KEYCODES } from '~/common/enums'
 import styles from './styles.css'
 
 export type CardBgColor = 'grey-lighter' | 'white'
+export type CardBgHoverColor = 'grey-lighter' | 'green-lighter'
 export type CardSpacing = 0 | '0' | 'xtight' | 'tight' | 'base'
 export type CardBorderColor = 'grey-lighter'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
@@ -15,7 +16,7 @@ export interface CardProps {
   spacing?: [CardSpacing, CardSpacing]
 
   bgColor?: CardBgColor
-  bgHoverColor?: CardBgColor
+  bgHoverColor?: CardBgHoverColor
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius

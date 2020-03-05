@@ -11,8 +11,9 @@ import {
   Translate
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import { useResponsive } from '~/components/Hook'
 
-import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -42,6 +43,7 @@ const WriteButton = ({
   onClick: () => any
   loading?: boolean
 }) => {
+  const isMediumUp = useResponsive('md-up')
   const WriteIcon = loading ? (
     <Icon.Spinner size="sm" color="white" />
   ) : (
@@ -51,26 +53,15 @@ const WriteButton = ({
   return (
     <>
       <Button
-        spacing={[0, 'base']}
-        size={[null, '2.25rem']}
+        spacing={isMediumUp ? [0, 'base'] : undefined}
+        size={isMediumUp ? [null, '2rem'] : ['2rem', '2rem']}
         bgColor="gold"
         onClick={onClick}
-        className="u-sm-down-hide"
-        aria-label="創作"
+        aria-label={TEXT.zh_hant.write}
       >
         <TextIcon icon={WriteIcon} weight="md" color="white">
-          <Translate id="write" />
+          {isMediumUp && <Translate id="write" />}
         </TextIcon>
-      </Button>
-
-      <Button
-        className="u-sm-up-hide"
-        size={['2rem', '2rem']}
-        bgColor="gold"
-        aria-label="創作"
-        onClick={onClick}
-      >
-        {WriteIcon}
       </Button>
     </>
   )

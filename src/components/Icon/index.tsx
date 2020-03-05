@@ -8,7 +8,6 @@ import { ReactComponent as SeedBadge } from '~/static/icons/early-user-badge.svg
 import { ReactComponent as EmptyWarning } from '~/static/icons/empty-warning.svg'
 import { ReactComponent as External } from '~/static/icons/external.svg'
 import { ReactComponent as Loading } from '~/static/icons/loading.svg'
-import { ReactComponent as Logo } from '~/static/icons/logo.svg'
 import { ReactComponent as Menu } from '~/static/icons/menu.svg'
 import { ReactComponent as Reload } from '~/static/icons/reload.svg'
 import { ReactComponent as Spinner } from '~/static/icons/spinner.svg'
@@ -34,19 +33,26 @@ import { ReactComponent as DownVote } from './icons/downvote.svg'
 import { ReactComponent as DraftMedium } from './icons/draft-md.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
+import { ReactComponent as FollowActiveLarge } from './icons/follow-active-lg.svg'
+import { ReactComponent as FollowLarge } from './icons/follow-lg.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
 import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
+import { ReactComponent as HomeActiveLarge } from './icons/home-active-lg.svg'
+import { ReactComponent as HomeLarge } from './icons/home-lg.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
 import { ReactComponent as Left } from './icons/left.svg'
 import { ReactComponent as LikeMedium } from './icons/like-md.svg'
 import { ReactComponent as Like } from './icons/like.svg'
 import { ReactComponent as Link } from './icons/link.svg'
+import { ReactComponent as Logo } from './icons/logo.svg'
+import { ReactComponent as LogoGraph } from './icons/logo-graph.svg'
 import { ReactComponent as LogoutMedium } from './icons/logout-md.svg'
 import { ReactComponent as Max } from './icons/max.svg'
 import { ReactComponent as Min } from './icons/min.svg'
 import { ReactComponent as More } from './icons/more.svg'
 import { ReactComponent as MuteMedium } from './icons/mute-md.svg'
+import { ReactComponent as NotificationActiveLarge } from './icons/notification-active-lg.svg'
 import { ReactComponent as NotificationLarge } from './icons/notification-lg.svg'
 import { ReactComponent as Pen } from './icons/pen.svg'
 import { ReactComponent as PinMedium } from './icons/pin-md.svg'
@@ -149,19 +155,26 @@ export const Icon = {
   DraftMedium: withIcon(DraftMedium),
   Edit: withIcon(Edit),
   Expand: withIcon(Expand),
+  FollowActiveLarge: withIcon(FollowActiveLarge),
+  FollowLarge: withIcon(FollowLarge),
   HashTag: withIcon(HashTag),
   HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
+  HomeActiveLarge: withIcon(HomeActiveLarge),
+  HomeLarge: withIcon(HomeLarge),
   IPFSMedium: withIcon(IPFSMedium),
   Left: withIcon(Left),
   Like: withIcon(Like),
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
+  Logo: withIcon(Logo),
+  LogoGraph: withIcon(LogoGraph),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),
   Min: withIcon(Min),
   More: withIcon(More),
   MuteMedium: withIcon(MuteMedium),
+  NotificationActiveLarge: withIcon(NotificationActiveLarge),
   NotificationLarge: withIcon(NotificationLarge),
   Pen: withIcon(Pen),
   PinMedium: withIcon(PinMedium),
@@ -191,7 +204,6 @@ export const Icon = {
   External: withIcon(External),
   Live,
   Loading: withIcon(Loading),
-  Logo: withIcon(Logo),
   Menu: withIcon(Menu),
   Reload: withIcon(Reload),
   SeedBadge: withIcon(SeedBadge),

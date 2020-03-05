@@ -34,24 +34,6 @@
   @media (--sm-up) {
     text-align: center;
   }
-
-  & :global(.avatar) {
-    flex-shrink: 0;
-    margin: -3rem 0 0;
-
-    box-shadow: 0 0 0 3px var(--color-white);
-
-    /* 70px */
-    width: 4.375rem;
-    height: 4.375rem;
-
-    /* 140px */
-    @media (--sm-up) {
-      width: 8.75rem;
-      height: 8.75rem;
-      margin: -4rem 0 1.5rem;
-    }
-  }
 }
 
 .info {

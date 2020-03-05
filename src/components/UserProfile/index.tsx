@@ -166,101 +166,99 @@ export const UserProfile = () => {
         <Cover cover={profileCover} />
       </CoverContainer>
 
-      <div className="content-container l-row">
-        <section className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <section className="content">
-            <div className="avatar-container">
-              <Avatar
-                size="xxl"
-                user={!isMe && isUserInactive ? undefined : user}
-              />
+      <div className="content-container">
+        <section className="content">
+          <div className="avatar-container">
+            <Avatar
+              size="xxl"
+              user={!isMe && isUserInactive ? undefined : user}
+            />
 
-              {!isMe && (
-                <section className="buttons">
-                  <span className="follows">
-                    <FollowButton user={user} size="lg" />
-                    <section className="u-sm-down-hide follow-state">
-                      {!isMe && <FollowButton.State user={user} />}
-                    </section>
-                  </span>
+            {!isMe && (
+              <section className="buttons">
+                <span className="follows">
+                  <FollowButton user={user} size="lg" />
+                  <section className="u-sm-down-hide follow-state">
+                    {!isMe && <FollowButton.State user={user} />}
+                  </section>
+                </span>
 
-                  <span className="u-sm-up-hide">
-                    <DropdownActions user={user} />
-                    <ShareButton size="md-s" />
-                  </span>
-                </section>
-              )}
-            </div>
-
-            <section className="info">
-              <header className="header">
-                <section className="basic">
-                  {!isUserInactive && (
-                    <>
-                      <span className="name">{user.displayName}</span>
-                      <span className="username">@{user.userName}</span>
-                      {hasSeedBadge && <SeedBadge />}
-                      {isCivicLiker && <CivicLikerBadge />}
-                      <span className="u-sm-up-hide">
-                        {!isMe && <FollowButton.State user={user} />}
-                      </span>
-                    </>
-                  )}
-
-                  {isUserArchived && (
-                    <span>
-                      <Translate id="accountArchived" />
-                    </span>
-                  )}
-
-                  {isUserFrozen && (
-                    <span>
-                      <Translate id="accountFrozen" />
-                    </span>
-                  )}
-
-                  {isUserBanned && (
-                    <span>
-                      <Translate id="accountBanned" />
-                    </span>
-                  )}
-                </section>
-
-                <section className="buttons">
-                  {isMe && !isUserInactive && <EditProfileButton user={user} />}
-
-                  <span className={!isMe ? 'u-sm-down-hide' : ''}>
-                    {!isMe && <DropdownActions user={user} />}
-                    <ShareButton size="md-s" />
-                  </span>
-                </section>
-              </header>
-
-              {!isUserInactive && (
-                <Expandable>
-                  <p className="description">{user.info.description}</p>
-                </Expandable>
-              )}
-
-              <section className="info-follow">
-                <Link {...userFollowersPath}>
-                  <a className="followers">
-                    <span className="count">
-                      {numAbbr(user.followers.totalCount)}
-                    </span>
-                    <Translate id="follower" />
-                  </a>
-                </Link>
-
-                <Link {...userFolloweesPath}>
-                  <a className="followees">
-                    <span className="count">
-                      {numAbbr(user.followees.totalCount)}
-                    </span>
-                    <Translate id="following" />
-                  </a>
-                </Link>
+                <span className="u-sm-up-hide">
+                  <DropdownActions user={user} />
+                  <ShareButton size="md-s" />
+                </span>
               </section>
+            )}
+          </div>
+
+          <section className="info">
+            <header className="header">
+              <section className="basic">
+                {!isUserInactive && (
+                  <>
+                    <span className="name">{user.displayName}</span>
+                    <span className="username">@{user.userName}</span>
+                    {hasSeedBadge && <SeedBadge />}
+                    {isCivicLiker && <CivicLikerBadge />}
+                    <span className="u-sm-up-hide">
+                      {!isMe && <FollowButton.State user={user} />}
+                    </span>
+                  </>
+                )}
+
+                {isUserArchived && (
+                  <span>
+                    <Translate id="accountArchived" />
+                  </span>
+                )}
+
+                {isUserFrozen && (
+                  <span>
+                    <Translate id="accountFrozen" />
+                  </span>
+                )}
+
+                {isUserBanned && (
+                  <span>
+                    <Translate id="accountBanned" />
+                  </span>
+                )}
+              </section>
+
+              <section className="buttons">
+                {isMe && !isUserInactive && <EditProfileButton user={user} />}
+
+                <span className={!isMe ? 'u-sm-down-hide' : ''}>
+                  {!isMe && <DropdownActions user={user} />}
+                  <ShareButton size="md-s" />
+                </span>
+              </section>
+            </header>
+
+            {!isUserInactive && (
+              <Expandable>
+                <p className="description">{user.info.description}</p>
+              </Expandable>
+            )}
+
+            <section className="info-follow">
+              <Link {...userFollowersPath}>
+                <a className="followers">
+                  <span className="count">
+                    {numAbbr(user.followers.totalCount)}
+                  </span>
+                  <Translate id="follower" />
+                </a>
+              </Link>
+
+              <Link {...userFolloweesPath}>
+                <a className="followees">
+                  <span className="count">
+                    {numAbbr(user.followees.totalCount)}
+                  </span>
+                  <Translate id="following" />
+                </a>
+              </Link>
             </section>
           </section>
         </section>
