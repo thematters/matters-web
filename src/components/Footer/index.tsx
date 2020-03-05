@@ -12,18 +12,23 @@ const BaseLink = ({
   as,
   text
 }: {
-  href: string
+  href?: string
   as: string
   text: React.ReactNode
-}) => (
-  <Link href={href} as={as}>
-    <a className="item">
+}) =>
+  href ? (
+    <Link href={href} as={as}>
+      <a className="item">
+        {text}
+        <style jsx>{styles}</style>
+      </a>
+    </Link>
+  ) : (
+    <a className="item" href={as}>
       {text}
-
       <style jsx>{styles}</style>
     </a>
-  </Link>
-)
+  )
 
 export const Footer = () => {
   const year = new Date().getFullYear()
@@ -70,7 +75,6 @@ export const Footer = () => {
       />
 
       <BaseLink
-        href={'https://github.com/thematters/developer-resource'}
         as={'https://github.com/thematters/developer-resource'}
         text={<Translate zh_hant={'開放社區'} zh_hans={'开放社区'} />}
       />
