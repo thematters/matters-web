@@ -7,6 +7,7 @@ import detailsStyles from '~/common/styles/utils/details.css'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
+import styles from '../styles.css'
 import content from './content'
 
 const FAQ = () => {
@@ -16,17 +17,20 @@ const FAQ = () => {
     <Layout>
       <Head title={{ id: 'faq' }} />
 
-      <MiscTab />
+      <section className="misc">
+        <MiscTab />
 
-      <section
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...content,
-            lang
-          })
-        }}
-      />
+        <section
+          dangerouslySetInnerHTML={{
+            __html: translate({
+              ...content,
+              lang
+            })
+          }}
+        />
+      </section>
 
+      <style jsx>{styles}</style>
       <style jsx global>
         {contentStyles}
       </style>

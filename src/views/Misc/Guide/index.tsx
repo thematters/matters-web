@@ -6,8 +6,8 @@ import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
+import styles from '../styles.css'
 import content from './content'
-import styles from './styles.css'
 
 const Guide = () => {
   const { lang } = useContext(LanguageContext)
@@ -16,17 +16,19 @@ const Guide = () => {
     <Layout>
       <Head title={{ id: 'guide' }} />
 
-      <MiscTab />
+      <section className="misc">
+        <MiscTab />
 
-      <section
-        dangerouslySetInnerHTML={{
-          __html: translate({
-            ...content,
-            lang
-          })
-        }}
-        className="u-content"
-      />
+        <section
+          dangerouslySetInnerHTML={{
+            __html: translate({
+              ...content,
+              lang
+            })
+          }}
+          className="u-content"
+        />
+      </section>
 
       <style jsx>{styles}</style>
       <style jsx>{contentStyles}</style>
