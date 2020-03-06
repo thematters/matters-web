@@ -8,18 +8,25 @@ import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
 import content from './content'
+import styles from './styles.css'
 
 const FAQ = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
     <Layout>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={<Layout.Header.Title id="faq" />}
+      />
+
       <Head title={{ id: 'faq' }} />
 
-      <Layout.Spacing>
-        <MiscTab />
+      <MiscTab />
 
+      <Layout.Spacing>
         <section
+          className="faq"
           dangerouslySetInnerHTML={{
             __html: translate({
               ...content,
@@ -29,6 +36,7 @@ const FAQ = () => {
         />
       </Layout.Spacing>
 
+      <style jsx>{styles}</style>
       <style jsx global>
         {contentStyles}
       </style>

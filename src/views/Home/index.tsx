@@ -6,7 +6,7 @@ import Icymi from './Icymi'
 import Tags from './Tags'
 import Topics from './Topics'
 
-export default () => (
+const Home = () => (
   <Layout
     rightSide={
       <>
@@ -17,6 +17,13 @@ export default () => (
       </>
     }
   >
+    <Layout.Header
+      left={<Layout.Header.MeButton />}
+      right={<Layout.Header.Title id="discover" />}
+    />
+
     <Feed />
   </Layout>
 )
+
+export default Home

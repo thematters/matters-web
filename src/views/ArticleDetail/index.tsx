@@ -77,6 +77,13 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   loading: Spinner
 })
 
+const EmptyLayout: React.FC = ({ children }) => (
+  <Layout>
+    <Layout.Header left={<Layout.Header.BackButton />} />
+    {children}
+  </Layout>
+)
+
 const ArticleDetail = () => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
@@ -111,31 +118,31 @@ const ArticleDetail = () => {
 
   if (loading) {
     return (
-      <Layout>
+      <EmptyLayout>
         <Spinner />
-      </Layout>
+      </EmptyLayout>
     )
   }
 
   if (error) {
     return (
-      <Layout>
+      <EmptyLayout>
         <QueryError error={error} />
-      </Layout>
+      </EmptyLayout>
     )
   }
 
   if (!article) {
     return (
-      <Layout>
+      <EmptyLayout>
         <Throw404 />
-      </Layout>
+      </EmptyLayout>
     )
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
-      <Layout>
+      <EmptyLayout>
         <Error
           statusCode={404}
           message={
@@ -154,7 +161,7 @@ const ArticleDetail = () => {
         >
           <BackToHomeButton />
         </Error>
-      </Layout>
+      </EmptyLayout>
     )
   }
 
@@ -162,6 +169,20 @@ const ArticleDetail = () => {
     <Layout
       rightSide={isLargeUp && <RelatedArticles article={article} inSidebar />}
     >
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={
+          <UserDigest.Rich
+            user={article.author}
+            size="sm"
+            hasFollow
+            hasState
+            spacing={[0, 0]}
+            bgActiveColor={undefined}
+          />
+        }
+      />
+
       <Head
         title={article.title}
         description={article.summary}

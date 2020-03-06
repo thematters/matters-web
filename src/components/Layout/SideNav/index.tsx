@@ -15,8 +15,8 @@ import {
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
 
+import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
-import MeAvatar from './MeAvatar'
 import NavListItem from './NavListItem'
 import styles from './styles.css'
 

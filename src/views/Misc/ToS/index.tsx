@@ -4,10 +4,16 @@ import MiscTab from '../MiscTab'
 
 export default () => (
   <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="termAndPrivacy" />}
+    />
+
     <Head title={{ id: 'termAndPrivacy' }} />
 
+    <MiscTab />
+
     <Layout.Spacing>
-      <MiscTab />
       <Term />
     </Layout.Spacing>
   </Layout>

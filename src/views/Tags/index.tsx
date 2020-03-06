@@ -9,7 +9,6 @@ import {
   Icon,
   InfiniteScroll,
   Layout,
-  PageHeader,
   Spinner,
   Tag,
   TagDialog,
@@ -157,9 +156,15 @@ export default () => (
   <Layout>
     <Head title={{ id: 'allTags' }} />
 
-    <PageHeader title={<Translate id="allTags" />}>
-      <CreateTagButton />
-    </PageHeader>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={
+        <>
+          <Layout.Header.Title id="allTags" />
+          <CreateTagButton />
+        </>
+      }
+    />
 
     <Layout.Spacing>
       <Tags />

@@ -7,9 +7,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -127,9 +125,6 @@ const FollowFeed = () => {
 export default () => (
   <>
     <Head title={{ id: 'follow' }} />
-
-    <PageHeader title={<Translate id="follow" />} />
-
     <FollowFeed />
   </>
 )

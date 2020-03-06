@@ -1,0 +1,28 @@
+header {
+  @mixin flex-center-space-between;
+  @mixin border-bottom-grey;
+
+  position: sticky;
+  top: 0;
+  height: 4rem;
+  padding: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
+
+  background: var(--color-white);
+  z-index: var(--z-index-global-header);
+}
+
+.left {
+  flex-shrink: 0;
+  margin-right: var(--spacing-x-tight);
+
+  @media (--sm-up) {
+    margin-right: var(--spacing-base);
+  }
+}
+
+.right {
+  @mixin flex-center-space-between;
+  flex-grow: 1;
+  flex-shrink: 1;
+}

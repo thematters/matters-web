@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { Head, Layout, SearchBar, useResponsive } from '~/components'
+import { Head, Layout, SearchBar } from '~/components'
 
 import { getQuery } from '~/common/utils'
 
@@ -11,22 +11,24 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
-const EmptySeachPage = () => (
-  <Layout>
-    <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
-
-    <EmptySearch inSidebar={false} />
-  </Layout>
-)
-
 const Search = () => {
-  const isMedium = useResponsive('md')
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
 
   if (!q) {
-    return <EmptySeachPage />
+    return (
+      <Layout>
+        <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
+
+        <Layout.Header
+          left={<Layout.Header.MeButton />}
+          right={<SearchBar />}
+        />
+
+        <EmptySearch inSidebar={false} />
+      </Layout>
+    )
   }
 
   const isTagOnly = type === 'tag'
@@ -42,13 +44,9 @@ const Search = () => {
         </>
       }
     >
-      <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
+      <Layout.Header left={<Layout.Header.MeButton />} right={<SearchBar />} />
 
-      {isMedium && (
-        <header className="l-row mobile-search-bar">
-          <SearchBar autoComplete={false} />
-        </header>
-      )}
+      <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
 
       <SearchPageHeader q={q} isAggregate={isAggregate} />
 

@@ -7,13 +7,14 @@ import detailsStyles from '~/common/styles/utils/details.css'
 import { translate } from '~/common/utils'
 
 import Privacy from './privacy'
+import styles from './styles.css'
 import ToS from './tos'
 
 export const Term = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <>
+    <section className="term">
       <section
         dangerouslySetInnerHTML={{
           __html: translate({
@@ -50,12 +51,13 @@ export const Term = () => {
         }}
       />
 
+      <style jsx>{styles}</style>
       <style jsx global>
         {termStyles}
       </style>
       <style jsx global>
         {detailsStyles}
       </style>
-    </>
+    </section>
   )
 }

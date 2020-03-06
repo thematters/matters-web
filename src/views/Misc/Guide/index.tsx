@@ -13,11 +13,16 @@ const Guide = () => {
 
   return (
     <Layout>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={<Layout.Header.Title id="guide" />}
+      />
+
       <Head title={{ id: 'guide' }} />
 
-      <Layout.Spacing>
-        <MiscTab />
+      <MiscTab />
 
+      <Layout.Spacing>
         <section
           dangerouslySetInnerHTML={{
             __html: translate({

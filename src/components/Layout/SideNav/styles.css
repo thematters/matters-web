@@ -45,16 +45,6 @@ ul {
   }
 }
 
-.me-avatar {
-  @mixin flex-center-all;
-  width: 2rem;
-  height: 2rem;
-
-  &.active :global(.avatar) {
-    box-shadow: 0 0 0 1.5px var(--color-matters-green);
-  }
-}
-
 .dropdown-menu {
   width: 12rem;
 }

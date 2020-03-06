@@ -10,6 +10,7 @@ import {
   Avatar,
   Expandable,
   FollowButton,
+  Layout,
   Spinner,
   Throw404,
   Translate,
@@ -20,6 +21,7 @@ import { getQuery, numAbbr, toPath } from '~/common/utils'
 
 import { CivicLikerBadge, SeedBadge } from './Badges'
 import Cover from './Cover'
+import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -53,9 +55,11 @@ const fragments = {
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
+      ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
+    ${DropdownActions.fragments.user}
   `
 }
 
@@ -90,12 +94,34 @@ export const UserProfile = () => {
   )
   const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
 
+  const LayoutHeader = () => (
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={
+        <>
+          <Layout.Header.Title id="myProfile" />
+          {user && <DropdownActions user={user} isMe={isMe} />}
+        </>
+      }
+    />
+  )
+
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <LayoutHeader />
+        <Spinner />
+      </>
+    )
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return <Throw404 />
+    return (
+      <>
+        <LayoutHeader />
+        <Throw404 />
+      </>
+    )
   }
 
   const userFollowersPath = toPath({
@@ -120,27 +146,31 @@ export const UserProfile = () => {
    */
   if (isUserInactive) {
     return (
-      <section className="user-profile">
-        <Cover />
+      <>
+        <LayoutHeader />
 
-        <header>
-          <section className="avatar">
-            <Avatar size="xxl" />
-          </section>
-        </header>
+        <section className="user-profile">
+          <Cover />
 
-        <section className="info">
-          <section className="display-name">
-            <h1 className="name">
-              {isUserArchived && <Translate id="accountArchived" />}
-              {isUserFrozen && <Translate id="accountFrozen" />}
-              {isUserBanned && <Translate id="accountBanned" />}
-            </h1>
+          <header>
+            <section className="avatar">
+              <Avatar size="xxl" />
+            </section>
+          </header>
+
+          <section className="info">
+            <section className="display-name">
+              <h1 className="name">
+                {isUserArchived && <Translate id="accountArchived" />}
+                {isUserFrozen && <Translate id="accountFrozen" />}
+                {isUserBanned && <Translate id="accountBanned" />}
+              </h1>
+            </section>
           </section>
+
+          <style jsx>{styles}</style>
         </section>
-
-        <style jsx>{styles}</style>
-      </section>
+      </>
     )
   }
 
@@ -148,55 +178,63 @@ export const UserProfile = () => {
    * Active or Onboarding User
    */
   return (
-    <section className="user-profile">
-      <Cover cover={profileCover} />
+    <>
+      <LayoutHeader />
 
-      <header>
-        <section className="avatar">
-          <Avatar size="xxl" user={!isMe ? undefined : user} />
+      <section className="user-profile">
+        <Cover cover={profileCover} />
+
+        <header>
+          <section className="avatar">
+            <Avatar size="xxl" user={!isMe ? undefined : user} />
+          </section>
+
+          {!isMe ? (
+            <FollowButton user={user} size="lg" />
+          ) : (
+            <EditProfileButton user={user} />
+          )}
+        </header>
+
+        <section className="info">
+          <section className="display-name">
+            <h1 className="name">{user.displayName}</h1>
+            {hasSeedBadge && <SeedBadge />}
+            {isCivicLiker && <CivicLikerBadge />}
+          </section>
+
+          <section className="username">
+            <span className="name">@{user.userName}</span>
+            {!isMe && <FollowButton.State user={user} />}
+          </section>
+
+          <Expandable>
+            <p className="description">{user.info.description}</p>
+          </Expandable>
         </section>
 
-        {!isMe ? (
-          <FollowButton user={user} size="lg" />
-        ) : (
-          <EditProfileButton user={user} />
-        )}
-      </header>
+        <footer>
+          <Link {...userFollowersPath}>
+            <a>
+              <span className="count">
+                {numAbbr(user.followers.totalCount)}
+              </span>
+              <Translate id="follower" />
+            </a>
+          </Link>
 
-      <section className="info">
-        <section className="display-name">
-          <h1 className="name">{user.displayName}</h1>
-          {hasSeedBadge && <SeedBadge />}
-          {isCivicLiker && <CivicLikerBadge />}
-        </section>
+          <Link {...userFolloweesPath}>
+            <a>
+              <span className="count">
+                {numAbbr(user.followees.totalCount)}
+              </span>
+              <Translate id="following" />
+            </a>
+          </Link>
+        </footer>
 
-        <section className="username">
-          <span className="name">@{user.userName}</span>
-          {!isMe && <FollowButton.State user={user} />}
-        </section>
-
-        <Expandable>
-          <p className="description">{user.info.description}</p>
-        </Expandable>
+        <style jsx>{styles}</style>
       </section>
-
-      <footer>
-        <Link {...userFollowersPath}>
-          <a>
-            <span className="count">{numAbbr(user.followers.totalCount)}</span>
-            <Translate id="follower" />
-          </a>
-        </Link>
-
-        <Link {...userFolloweesPath}>
-          <a>
-            <span className="count">{numAbbr(user.followees.totalCount)}</span>
-            <Translate id="following" />
-          </a>
-        </Link>
-      </footer>
-
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }

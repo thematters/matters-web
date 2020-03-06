@@ -1,5 +1,6 @@
 import { Head, SearchBar, useResponsive } from '~/components'
 
+import Header from './Header'
 import NavBar from './NavBar'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
@@ -10,10 +11,10 @@ interface LayoutProps {
   rightSide?: React.ReactNode
 }
 
-export const Layout: React.FC<LayoutProps> & { Spacing: typeof Spacing } = ({
-  rightSide,
-  children
-}) => {
+export const Layout: React.FC<LayoutProps> & {
+  Header: typeof Header
+  Spacing: typeof Spacing
+} = ({ rightSide, children }) => {
   const isLargeUp = useResponsive('lg-up')
 
   return (
@@ -54,4 +55,5 @@ export const Layout: React.FC<LayoutProps> & { Spacing: typeof Spacing } = ({
   )
 }
 
+Layout.Header = Header
 Layout.Spacing = Spacing

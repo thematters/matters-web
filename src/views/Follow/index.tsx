@@ -64,6 +64,11 @@ const Follow = () => {
 
 export default () => (
   <Layout>
+    <Layout.Header
+      left={<Layout.Header.MeButton />}
+      right={<Layout.Header.Title id="follow" />}
+    />
+
     <Follow />
   </Layout>
 )

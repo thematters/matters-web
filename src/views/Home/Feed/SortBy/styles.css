@@ -1,5 +1,6 @@
 ul {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-base);
+  margin-top: var(--spacing-loose);
+  padding: 0 var(--spacing-base) var(--spacing-base);
 
   & li {
     display: inline-block;

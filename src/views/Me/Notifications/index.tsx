@@ -8,9 +8,7 @@ import {
   Layout,
   List,
   Notice,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
@@ -88,9 +86,12 @@ const Notifications = () => {
 
 export default () => (
   <Layout>
-    <Head title={{ id: 'allNotification' }} />
+    <Layout.Header
+      left={<Layout.Header.MeButton />}
+      right={<Layout.Header.Title id="notification" />}
+    />
 
-    <PageHeader title={<Translate id="allNotification" />} />
+    <Head title={{ id: 'notification' }} />
 
     <Notifications />
   </Layout>

@@ -20,8 +20,9 @@ import { LanguageConsumer } from './LanguageContext'
  * <Translate zh_hant='排序' zh_hans='排序' en='Sort By' lang="en" />
  * ```
  */
+export type TranslateProps = TranslateArgs
 
-export const Translate = React.memo((props: TranslateArgs) => {
+export const Translate = React.memo((props: TranslateProps) => {
   const { lang } = props
 
   if (lang) {

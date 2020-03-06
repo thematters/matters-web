@@ -106,7 +106,13 @@ const AppreciationsReceived = () => {
 
 export default () => (
   <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="appreciationsReceived" />}
+    />
+
     <Head title={{ id: 'appreciationsReceived' }} />
+
     <AppreciationsReceived />
   </Layout>
 )

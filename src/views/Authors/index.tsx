@@ -7,7 +7,6 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  PageHeader,
   Spinner,
   Translate,
   UserDigest
@@ -108,9 +107,12 @@ const Authors = () => {
 
 export default () => (
   <Layout>
-    <Head title={{ id: 'allAuthors' }} />
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="allAuthors" />}
+    />
 
-    <PageHeader title={<Translate id="allAuthors" />} />
+    <Head title={{ id: 'allAuthors' }} />
 
     <Authors />
   </Layout>

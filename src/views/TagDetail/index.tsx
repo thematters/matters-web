@@ -9,7 +9,6 @@ import {
   EmptyTag,
   Head,
   Layout,
-  PageHeader,
   Spinner,
   Tabs,
   TextIcon,
@@ -25,7 +24,7 @@ import styles from './styles.css'
 import { TagDetailArticles } from './TagDetailArticles'
 import { TagDetailButtons } from './TagDetailButtons'
 
-import { TagDetail } from './__generated__/TagDetail'
+import { TagDetail as TagDetailType } from './__generated__/TagDetail'
 
 const TAG_DETAIL = gql`
   query TagDetail($id: ID!) {
@@ -44,7 +43,14 @@ const TAG_DETAIL = gql`
 
 type TagFeed = 'latest' | 'selected'
 
-const TagDetailContainer = ({ data }: { data: TagDetail }) => {
+const EmptyLayout: React.FC = ({ children }) => (
+  <Layout>
+    <Layout.Header left={<Layout.Header.BackButton />} />
+    {children}
+  </Layout>
+)
+
+const TagDetail = ({ data }: { data: TagDetailType }) => {
   const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
@@ -59,27 +65,33 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
   }
 
   return (
-    <>
+    <Layout>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={
+          <>
+            <Layout.Header.Title
+              zh_hant={data.node.content}
+              zh_hans={data.node.content}
+            />
+
+            {canEdit && (
+              <section className="buttons">
+                <TagDetailButtons.AddArticleButton id={data.node.id} />
+                <TagDetailButtons.EditTagButton
+                  id={data.node.id}
+                  content={data.node.content}
+                  description={data.node.description || undefined}
+                />
+              </section>
+            )}
+          </>
+        }
+      />
+
       <Head title={`#${data.node.content}`} />
 
-      <Layout.Spacing>
-        <PageHeader
-          title={data.node.content}
-          description={data.node.description || ''}
-          hasNoBorder
-        >
-          {canEdit && (
-            <section className="buttons">
-              <TagDetailButtons.AddArticleButton id={data.node.id} />
-              <TagDetailButtons.EditTagButton
-                id={data.node.id}
-                content={data.node.content}
-                description={data.node.description || undefined}
-              />
-            </section>
-          )}
-        </PageHeader>
-      </Layout.Spacing>
+      <p className="description">{data.node.description}</p>
 
       <Tabs spacingBottom="base">
         {hasSelected > 0 && (
@@ -108,40 +120,51 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
       )}
 
       <style jsx>{styles}</style>
-    </>
+    </Layout>
   )
 }
 
-const TagDetailDataContainer = () => {
+const TagDetailContainer = () => {
   const router = useRouter()
-
-  const { data, loading, error } = useQuery<TagDetail>(TAG_DETAIL, {
+  const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
     variables: { id: router.query.id }
   })
 
   if (loading) {
-    return <Spinner />
+    return (
+      <EmptyLayout>
+        <Spinner />
+      </EmptyLayout>
+    )
   }
 
   if (error) {
     const errorCodes = getErrorCodes(error)
 
     if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
-      return <Throw404 />
+      return (
+        <EmptyLayout>
+          <Throw404 />
+        </EmptyLayout>
+      )
     }
 
-    return <QueryError error={error} />
+    return (
+      <EmptyLayout>
+        <QueryError error={error} />
+      </EmptyLayout>
+    )
   }
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTag />
+    return (
+      <EmptyLayout>
+        <EmptyTag />
+      </EmptyLayout>
+    )
   }
 
-  return <TagDetailContainer data={data} />
+  return <TagDetail data={data} />
 }
 
-export default () => (
-  <Layout>
-    <TagDetailDataContainer />
-  </Layout>
-)
+export default TagDetailContainer
