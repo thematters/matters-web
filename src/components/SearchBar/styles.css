@@ -1,6 +1,6 @@
 :root {
-  --search-bar-height: 2.25rem;
-  --search-bar-button-width: 2.5rem;
+  --search-bar-height: 2rem;
+  --search-bar-button-width: 2rem;
 }
 
 form {
@@ -17,7 +17,7 @@ form {
     @mixin all-transition;
 
     height: 100%;
-    padding: 0 var(--search-bar-button-width) 0 var(--spacing-base);
+    padding: 0 var(--spacing-base) 0 var(--search-bar-button-width);
 
     color: var(--color-black);
     font-size: var(--font-size-sm);
@@ -39,7 +39,7 @@ form {
   & :global(button[type='submit']) {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: var(--search-bar-button-width);
     height: 100%;
   }

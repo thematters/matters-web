@@ -6,7 +6,6 @@ import { getQuery } from '~/common/utils'
 
 import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
-import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
@@ -57,8 +56,6 @@ const Search = () => {
       <SearchHeader />
 
       <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
-
-      <SearchPageHeader q={q} isAggregate={isAggregate} />
 
       {isAggregate && <SearchArticles q={q} />}
       {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}

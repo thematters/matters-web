@@ -64,6 +64,7 @@ import { ReactComponent as ProfileMedium } from './icons/profile-md.svg'
 import { ReactComponent as RemoveMedium } from './icons/remove-md.svg'
 import { ReactComponent as Right } from './icons/right.svg'
 import { ReactComponent as SearchLarge } from './icons/search-lg.svg'
+import { ReactComponent as SearchMedium } from './icons/search-md.svg'
 import { ReactComponent as Search } from './icons/search.svg'
 import { ReactComponent as SettingsMedium } from './icons/settings-md.svg'
 import { ReactComponent as Share } from './icons/share.svg'
@@ -191,6 +192,7 @@ export const Icon = {
   Right: withIcon(Right),
   Search: withIcon(Search),
   SearchLarge: withIcon(SearchLarge),
+  SearchMedium: withIcon(SearchMedium),
   SettingsMedium: withIcon(SettingsMedium),
   Share: withIcon(Share),
   Sort: withIcon(Sort),
