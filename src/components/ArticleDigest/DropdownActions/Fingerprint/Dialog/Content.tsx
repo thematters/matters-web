@@ -99,8 +99,8 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
           {(!data || loading) && <Spinner />}
 
           {gateways.map((url, i) => {
-            const gatewayUrl = `${url}${dataHash}`
-            const hostname = url.replace(/(https:\/\/|\/ipfs\/)/g, '')
+            const gatewayUrl = url.replace(':hash', dataHash)
+            const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
 
             return (
               <li key={i}>

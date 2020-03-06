@@ -34,7 +34,7 @@ const Dialog: React.FC<DialogProps> = ({
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
   // drag animation
-  const [{ top }, setContainerGoal] = useSpring(() => ({
+  const [{ top }, setDragGoal] = useSpring(() => ({
     top: 0
   }))
 
@@ -49,7 +49,10 @@ const Dialog: React.FC<DialogProps> = ({
       opacity: 0,
       transform: `translateY(100%)`
     },
-    config: { tension: 270, friction: isSmallUp ? undefined : 30 }
+    config: { tension: 270, friction: isSmallUp ? undefined : 30 },
+    onDestroyed: () => {
+      setDragGoal({ top: 0 })
+    }
   })
 
   useOutsideClick(node, onDismiss)
@@ -69,7 +72,7 @@ const Dialog: React.FC<DialogProps> = ({
       if (!down && my > 30) {
         onDismiss()
       } else {
-        setContainerGoal({ top: down ? Math.max(my, -30) : 0 })
+        setDragGoal({ top: down ? Math.max(my, -30) : 0 })
       }
     })
 
