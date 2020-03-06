@@ -13,7 +13,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
 
   const buttonProps = {
     size: ['6rem', '2rem'],
-    bgHoverColor: 'green-lighter'
+    bgActiveColor: 'green-lighter'
   } as ButtonProps
 
   return (

@@ -25,7 +25,7 @@ const NavListItem = ({
     <Button
       href={href}
       as={as}
-      bgHoverColor="green-lighter"
+      bgActiveColor="green-lighter"
       spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
       size={isMediumUp ? undefined : ['2rem', '2rem']}
     >

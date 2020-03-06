@@ -56,7 +56,7 @@ const fragments = {
 const CommentButton: React.FC<ButtonProps> = props => (
   <Button
     spacing={['xtight', 'xtight']}
-    bgHoverColor="grey-lighter"
+    bgActiveColor="grey-lighter"
     aira-label={TEXT.zh_hant.replyComment}
     {...props}
   >

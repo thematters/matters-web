@@ -171,7 +171,7 @@ const ArticleDetail = () => {
 
       <State article={article} />
 
-      <section className="container">
+      <Layout.Spacing>
         <header>
           <Title type="article">{article.title}</Title>
 
@@ -217,7 +217,7 @@ const ArticleDetail = () => {
         )}
 
         {!isLargeUp && <RelatedArticles article={article} />}
-      </section>
+      </Layout.Spacing>
 
       <Toolbar mediaHash={mediaHash} />
 

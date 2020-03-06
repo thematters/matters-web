@@ -31,7 +31,7 @@ const Unsubscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor="grey-lighter"
       aria-label="取消收藏"
       onClick={unsubscribe}
       disabled={disabled}

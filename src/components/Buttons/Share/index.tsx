@@ -43,7 +43,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
       {({ open }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
+          bgActiveColor="grey-lighter"
           aria-label={TEXT.zh_hant.share}
           aria-haspopup="true"
           onClick={async () => {

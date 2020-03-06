@@ -67,7 +67,7 @@ export const AuthorPicker = ({
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgHoverColor="grey-lighter"
+            bgActiveColor="grey-lighter"
             onClick={() => refetch()}
           >
             <TextIcon icon={<Icon.Reload size="sm" />} color="grey">

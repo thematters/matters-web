@@ -12,7 +12,7 @@ li {
 
       &:hover,
       &:focus {
-        background: var(--color-grey-lighter-hover);
+        background: var(--color-grey-lighter-active);
       }
     }
   }

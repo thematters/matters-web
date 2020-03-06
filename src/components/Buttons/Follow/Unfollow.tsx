@@ -67,7 +67,7 @@ const Unfollow = ({
       size={sizes[size]}
       textColor="white"
       bgColor="green"
-      bgHoverColor="red"
+      bgActiveColor="red"
       onClick={() => {
         unfollow()
         analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {

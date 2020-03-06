@@ -62,44 +62,46 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
     <>
       <Head title={`#${data.node.content}`} />
 
-      <PageHeader
-        title={data.node.content}
-        description={data.node.description || ''}
-        hasNoBorder
-      >
-        {canEdit && (
-          <section className="buttons">
-            <TagDetailButtons.AddArticleButton id={data.node.id} />
-            <TagDetailButtons.EditTagButton
-              id={data.node.id}
-              content={data.node.content}
-              description={data.node.description || undefined}
-            />
-          </section>
-        )}
-      </PageHeader>
+      <Layout.Spacing>
+        <PageHeader
+          title={data.node.content}
+          description={data.node.description || ''}
+          hasNoBorder
+        >
+          {canEdit && (
+            <section className="buttons">
+              <TagDetailButtons.AddArticleButton id={data.node.id} />
+              <TagDetailButtons.EditTagButton
+                id={data.node.id}
+                content={data.node.content}
+                description={data.node.description || undefined}
+              />
+            </section>
+          )}
+        </PageHeader>
 
-      <section className="tabs">
-        <Tabs spacingBottom="base">
-          {hasSelected > 0 && (
-            <Tabs.Tab selected={feed === 'selected'}>
-              <Button onClick={() => setFeed('selected')}>
+        <section className="tabs">
+          <Tabs spacingBottom="base">
+            {hasSelected > 0 && (
+              <Tabs.Tab selected={feed === 'selected'}>
+                <Button onClick={() => setFeed('selected')}>
+                  <TextIcon size="xm">
+                    <Translate id="featured" />
+                  </TextIcon>
+                </Button>
+              </Tabs.Tab>
+            )}
+
+            <Tabs.Tab selected={feed === 'latest'}>
+              <Button onClick={() => setFeed('latest')}>
                 <TextIcon size="xm">
-                  <Translate id="featured" />
+                  <Translate id="latest" />
                 </TextIcon>
               </Button>
             </Tabs.Tab>
-          )}
-
-          <Tabs.Tab selected={feed === 'latest'}>
-            <Button onClick={() => setFeed('latest')}>
-              <TextIcon size="xm">
-                <Translate id="latest" />
-              </TextIcon>
-            </Button>
-          </Tabs.Tab>
-        </Tabs>
-      </section>
+          </Tabs>
+        </section>
+      </Layout.Spacing>
 
       {feed === 'selected' ? (
         <TagDetailArticles.Selected id={data.node.id} />

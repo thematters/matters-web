@@ -34,7 +34,7 @@ const NavListItem = ({
     <Button
       href={href}
       as={as}
-      bgHoverColor="green-lighter"
+      bgActiveColor="green-lighter"
       size={['2rem', '2rem']}
       aira-label={name}
     >

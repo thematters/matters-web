@@ -61,7 +61,7 @@ const FollowComment = ({
     <Card
       {...articlePath}
       spacing={['base', 'base']}
-      bgHoverColor="green-lighter"
+      bgActiveColor="green-lighter"
       onClick={onClick}
     >
       <header>

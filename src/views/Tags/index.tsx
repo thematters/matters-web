@@ -22,8 +22,6 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { AllTags } from './__generated__/AllTags'
 
 const ALL_TAGS = gql`
@@ -66,7 +64,7 @@ const CreateTagButton = () => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgHoverColor="green-lighter"
+          bgActiveColor="green-lighter"
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
@@ -150,8 +148,6 @@ const Tags = () => {
             </li>
           ))}
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     </InfiniteScroll>
   )
@@ -165,10 +161,8 @@ export default () => (
       <CreateTagButton />
     </PageHeader>
 
-    <section className="container">
+    <Layout.Spacing>
       <Tags />
-    </section>
-
-    <style jsx>{styles}</style>
+    </Layout.Spacing>
   </Layout>
 )

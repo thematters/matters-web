@@ -67,7 +67,7 @@ const Subscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor="grey-lighter"
       aria-label="收藏"
       onClick={onClick}
       disabled={disabled}

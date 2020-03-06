@@ -65,7 +65,7 @@ const Authors = () => {
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgHoverColor="grey-lighter"
+            bgActiveColor="grey-lighter"
             onClick={() => refetch()}
           >
             <TextIcon
@@ -88,6 +88,8 @@ const Authors = () => {
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
+                spacing={['tight', 0]}
+                bgActiveColor={undefined}
                 hasFollow
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {

@@ -17,12 +17,22 @@
   &:not(.disabled) {
     &:hover,
     &:focus {
-      background: var(--color-grey-lighter-hover);
+      background: var(--color-grey-lighter-active);
+    }
+  }
+}
+.bg-yellow-lighter {
+  background: var(--color-yellow-lighter);
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-green-lighter);
     }
   }
 }
 
-.bg-hover-grey-lighter {
+.bg-active-grey-lighter {
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -31,7 +41,7 @@
   }
 }
 
-.bg-hover-green-lighter {
+.bg-active-green-lighter {
   &:not(.disabled) {
     &:hover,
     &:focus {

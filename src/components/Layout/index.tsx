@@ -3,13 +3,17 @@ import { Head, SearchBar, useResponsive } from '~/components'
 import NavBar from './NavBar'
 import SideFooter from './SideFooter'
 import SideNav from './SideNav'
+import Spacing from './Spacing'
 import styles from './styles.css'
 
 interface LayoutProps {
   rightSide?: React.ReactNode
 }
 
-export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
+export const Layout: React.FC<LayoutProps> & { Spacing: typeof Spacing } = ({
+  rightSide,
+  children
+}) => {
   const isLargeUp = useResponsive('lg-up')
 
   return (
@@ -49,3 +53,5 @@ export const Layout: React.FC<LayoutProps> = ({ rightSide, children }) => {
     </>
   )
 }
+
+Layout.Spacing = Spacing

@@ -20,19 +20,19 @@ span.container {
 .text-red {
   color: var(--color-red);
 }
-.text-hover-white {
+.text-active-white {
   &:hover,
   &:focus {
     color: var(--color-white);
   }
 }
-.text-hover-black {
+.text-active-black {
   &:hover,
   &:focus {
     color: var(--color-black);
   }
 }
-.text-hover-green {
+.text-active-green {
   &:hover,
   &:focus {
     color: var(--color-matters-green);
@@ -190,7 +190,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-hover);
+      background: var(--color-grey-lighter-active);
     }
   }
 }
@@ -202,7 +202,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-green-hover);
+      background: var(--color-matters-green-active);
     }
   }
 }
@@ -219,7 +219,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-gold-hover);
+      background: var(--color-matters-gold-active);
     }
   }
 }
@@ -230,7 +230,7 @@ span.container {
 }
 
 /* Background:hover */
-.bg-hover-grey {
+.bg-active-grey {
   &:hover,
   &:focus {
     & .hotarea {
@@ -238,7 +238,7 @@ span.container {
     }
   }
 }
-.bg-hover-grey-lighter {
+.bg-active-grey-lighter {
   &:hover,
   &:focus {
     & .hotarea {
@@ -246,7 +246,7 @@ span.container {
     }
   }
 }
-.bg-hover-green {
+.bg-active-green {
   &:hover,
   &:focus {
     & .hotarea {
@@ -255,7 +255,7 @@ span.container {
     }
   }
 }
-.bg-hover-green-lighter {
+.bg-active-green-lighter {
   &:hover,
   &:focus {
     & .hotarea {
@@ -263,7 +263,7 @@ span.container {
     }
   }
 }
-.bg-hover-gold {
+.bg-active-gold {
   &:hover,
   &:focus {
     & .hotarea {
@@ -271,7 +271,7 @@ span.container {
     }
   }
 }
-.bg-hover-red {
+.bg-active-red {
   &:hover,
   &:focus {
     & .hotarea {

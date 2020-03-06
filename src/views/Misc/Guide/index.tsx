@@ -6,7 +6,6 @@ import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
-import styles from '../styles.css'
 import content from './content'
 
 const Guide = () => {
@@ -16,7 +15,7 @@ const Guide = () => {
     <Layout>
       <Head title={{ id: 'guide' }} />
 
-      <section className="misc">
+      <Layout.Spacing>
         <MiscTab />
 
         <section
@@ -28,9 +27,8 @@ const Guide = () => {
           }}
           className="u-content"
         />
-      </section>
+      </Layout.Spacing>
 
-      <style jsx>{styles}</style>
       <style jsx>{contentStyles}</style>
     </Layout>
   )
