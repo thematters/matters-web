@@ -17,7 +17,10 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ArticleAppreciators } from './__generated__/ArticleAppreciators'
+import {
+  ArticleAppreciators,
+  ArticleAppreciators_article_appreciationsReceived_edges
+} from './__generated__/ArticleAppreciators'
 
 interface AppreciatorsDialogContentProps {
   mediaHash: string
@@ -52,31 +55,6 @@ const ARTICLE_APPRECIATORS = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
-  const { node, cursor } = datum
-  const { articleId } = parentProps
-  return (
-    <div
-      className="appreciator-item"
-      key={cursor}
-      onClick={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-          type: FEED_TYPE.APPRECIATOR,
-          location: index,
-          entrance: articleId
-        })
-      }}
-    >
-      <UserDigest.Rich
-        user={node.sender}
-        avatarBadge={<span className="appreciation-amount">{node.amount}</span>}
-        hasFollow
-      />
-      <style jsx>{styles}</style>
-    </div>
-  )
-}
-
 const AppreciatorsDialogContent = ({
   mediaHash,
   closeDialog
@@ -101,6 +79,39 @@ const AppreciatorsDialogContent = ({
 
   if (!edges || edges.length <= 0 || !pageInfo || !article) {
     return null
+  }
+
+  const ListRow = ({
+    index,
+    datum
+  }: RowRendererProps<
+    ArticleAppreciators_article_appreciationsReceived_edges
+  >) => {
+    const { node, cursor } = datum
+    return (
+      <div
+        className="appreciator-item"
+        key={cursor}
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+            type: FEED_TYPE.APPRECIATOR,
+            location: index,
+            entrance: article.id
+          })
+        }}
+      >
+        {node.sender && (
+          <UserDigest.Rich
+            user={node.sender}
+            avatarBadge={
+              <span className="appreciation-amount">{node.amount}</span>
+            }
+            hasFollow
+          />
+        )}
+        <style jsx>{styles}</style>
+      </div>
+    )
   }
 
   const loadMore = (callback: () => void) => {
@@ -159,7 +170,6 @@ const AppreciatorsDialogContent = ({
             defaultRowHeight={70}
             loader={<Spinner />}
             loadMore={loadMore}
-            parentProps={{ articleId: article.id }}
             renderer={ListRow}
             totalCount={totalCount}
           />

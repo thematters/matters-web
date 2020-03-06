@@ -10,18 +10,16 @@ import {
   ListRowProps
 } from 'react-virtualized'
 
-export interface RowRendererProps {
-  datum: { [key: string]: any }
+export interface RowRendererProps<T> {
+  datum: T
   index: number
-  parentProps: any
 }
 
-interface Props {
-  data: Array<{ [key: string]: any }>
+interface Props<T> {
+  data: T[]
   loader: ReactNode
   loadMore: (callback: () => void) => Promise<any>
-  parentProps: any
-  renderer: (props: RowRendererProps) => ReactNode
+  renderer: (props: RowRendererProps<T>) => ReactNode
   totalCount: number
 
   defaultListHeight?: number
@@ -30,11 +28,10 @@ interface Props {
   threshold?: number
 }
 
-export const InfiniteList = ({
+export const InfiniteList = <T extends object>({
   data,
   loader,
   loadMore,
-  parentProps,
   renderer,
   totalCount,
 
@@ -42,7 +39,7 @@ export const InfiniteList = ({
   defaultListMaxHeight,
   defaultRowHeight,
   threshold = 1
-}: Props) => {
+}: Props<T>) => {
   const cache: CellMeasurerCache = new CellMeasurerCache({
     fixedWidth: true,
     defaultHeight: defaultListHeight
@@ -66,9 +63,7 @@ export const InfiniteList = ({
     const props = { cache, columnIndex: 0, key, parent, rowIndex: index }
     return (
       <CellMeasurer {...props}>
-        <div style={style}>
-          {datum ? renderer({ index, datum, parentProps }) : loader}
-        </div>
+        <div style={style}>{datum ? renderer({ index, datum }) : loader}</div>
       </CellMeasurer>
     )
   }
