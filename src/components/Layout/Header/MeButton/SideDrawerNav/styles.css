@@ -1,0 +1,21 @@
+nav {
+  position: fixed;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  width: 20rem;
+
+  background: var(--color-white);
+  will-change: transform;
+
+  @media (--xs-down) {
+    width: 16rem;
+  }
+}
+
+.overlay {
+  @mixin expand-to-container;
+  content: '';
+  background: rgba(0, 0, 0, 0.25);
+  will-change: opacity;
+}

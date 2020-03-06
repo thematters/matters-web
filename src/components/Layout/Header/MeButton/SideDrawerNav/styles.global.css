@@ -1,0 +1,22 @@
+/* @styled-jsx=global */
+
+.side-drawer-nav[data-reach-dialog-overlay] {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+
+  z-index: var(--z-index-over-global-header);
+}
+
+.side-drawer-nav [data-reach-dialog-content] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  outline: none;
+}
