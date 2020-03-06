@@ -13,7 +13,7 @@ const MeButton = () => {
   return (
     <>
       <Button onClick={() => setShowNav(!showNav)}>
-        <MeAvatar user={viewer} />
+        <MeAvatar user={viewer} size="lg" />
       </Button>
 
       <SideDrawerNav isOpen={showNav} onDismiss={close} />

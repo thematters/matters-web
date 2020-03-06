@@ -76,6 +76,10 @@
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
 }
+.spacing-x-loose {
+  padding-left: var(--spacing-loose);
+  padding-right: var(--spacing-loose);
+}
 
 /* Border */
 .hasBorder {

@@ -8,7 +8,11 @@ type MeAvatarProps = {
   active?: boolean
 } & AvatarProps
 
-const MeAvatar: React.FC<MeAvatarProps> = ({ active, ...avatarProps }) => {
+const MeAvatar: React.FC<MeAvatarProps> = ({
+  active,
+  size = 'md',
+  ...avatarProps
+}) => {
   const meAvatarClass = classNames({
     'me-avatar': true,
     active
@@ -16,7 +20,7 @@ const MeAvatar: React.FC<MeAvatarProps> = ({ active, ...avatarProps }) => {
 
   return (
     <div className={meAvatarClass}>
-      <Avatar size="md" {...avatarProps} />
+      <Avatar size={size} {...avatarProps} />
       <style jsx>{styles}</style>
     </div>
   )

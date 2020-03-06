@@ -1,6 +1,13 @@
 import { useContext } from 'react'
 
-import { Icon, Menu, TextIcon, Translate, ViewerContext } from '~/components'
+import {
+  CardSpacing,
+  Icon,
+  Menu,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
@@ -14,7 +21,11 @@ import {
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
-const NavMenuBottom = () => {
+interface NavMenuBottomProps {
+  isInSideDrawerNav?: boolean
+}
+
+const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
   const viewer = useContext(ViewerContext)
   const onClickLogout = async () => {
@@ -54,23 +65,28 @@ const NavMenuBottom = () => {
     }
   }
 
+  const menuItemSpacing = isInSideDrawerNav
+    ? (['base', 'loose'] as [CardSpacing, CardSpacing])
+    : undefined
+  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md'
+
   return (
-    <Menu>
-      <Menu.Item {...PATHS.ME_SETTINGS_ACCOUNT}>
+    <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
+      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_SETTINGS_ACCOUNT}>
         <TextIcon
           icon={<Icon.SettingsMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="setting" />
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item onClick={onClickLogout}>
+      <Menu.Item spacing={menuItemSpacing} onClick={onClickLogout}>
         <TextIcon
           icon={<Icon.LogoutMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="logout" />
         </TextIcon>

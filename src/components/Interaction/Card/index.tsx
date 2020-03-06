@@ -8,7 +8,7 @@ import styles from './styles.css'
 
 export type CardBgColor = 'grey-lighter' | 'white' | 'yellow-lighter'
 export type CardBgHoverColor = 'grey-lighter' | 'green-lighter'
-export type CardSpacing = 0 | 'xtight' | 'tight' | 'base'
+export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
 export type CardBorderColor = 'grey-lighter'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
 

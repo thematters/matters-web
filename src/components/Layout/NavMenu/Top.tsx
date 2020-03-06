@@ -1,11 +1,22 @@
 import { useContext } from 'react'
 
-import { Icon, Menu, TextIcon, Translate, ViewerContext } from '~/components'
+import {
+  CardSpacing,
+  Icon,
+  Menu,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-const NavMenuTop = () => {
+interface NavMenuTopProps {
+  isInSideDrawerNav?: boolean
+}
+
+const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
   const viewer = useContext(ViewerContext)
   const viewerPath = toPath({
     page: 'userProfile',
@@ -24,49 +35,54 @@ const NavMenuTop = () => {
     userName: viewer.userName || ''
   })
 
+  const menuItemSpacing = isInSideDrawerNav
+    ? (['base', 'loose'] as [CardSpacing, CardSpacing])
+    : undefined
+  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md'
+
   return (
-    <Menu>
-      <Menu.Item {...viewerPath}>
+    <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
+      <Menu.Item spacing={menuItemSpacing} {...viewerPath}>
         <TextIcon
           icon={<Icon.ProfileMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="myProfile" />
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item {...viewerDraftPath}>
+      <Menu.Item spacing={menuItemSpacing} {...viewerDraftPath}>
         <TextIcon
           icon={<Icon.DraftMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="myDrafts" />
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item {...PATHS.ME_APPRECIATIONS_SENT}>
+      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon icon={<Icon.LikeMedium size="md" />} spacing="base" size="md">
           <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item {...viewerBookmarks}>
+      <Menu.Item spacing={menuItemSpacing} {...viewerBookmarks}>
         <TextIcon
           icon={<Icon.BookmarkMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="myBookmarks" />
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item {...viewerHistoryPath}>
+      <Menu.Item spacing={menuItemSpacing} {...viewerHistoryPath}>
         <TextIcon
           icon={<Icon.HistoryMedium size="md" />}
           spacing="base"
-          size="md"
+          size={menuItemSize}
         >
           <Translate id="readHistory" />
         </TextIcon>

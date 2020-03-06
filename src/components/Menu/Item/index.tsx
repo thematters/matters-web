@@ -5,7 +5,7 @@ import { Card, CardProps } from '~/components'
 
 import styles from './styles.css'
 
-type MenuItemProps = {} & CardProps
+type MenuItemProps = CardProps
 
 const MenuItem: React.FC<MenuItemProps> = ({
   children,
