@@ -1,6 +1,6 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { animated, useSpring, useTransition } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
@@ -33,8 +33,10 @@ const Dialog: React.FC<DialogProps> = ({
   const node: React.RefObject<any> | null = useRef(null)
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
-  // controll top of container, to avoid jump between drag release and transition start
-  const [containerTop, setContainerTop] = useState(0)
+  // drag animation
+  const [{ top }, setContainerGoal] = useSpring(() => ({
+    top: 0
+  }))
 
   const isSmallUp = useResponsive('sm-up')
   const transitions = useTransition(isOpen, null, {
@@ -47,16 +49,14 @@ const Dialog: React.FC<DialogProps> = ({
       opacity: 0,
       transform: `translateY(100%)`
     },
-    config: { tension: 270, friction: isSmallUp ? undefined : 30 },
-    onDestroyed: () => setContainerTop(0)
+    config: { tension: 270, friction: isSmallUp ? undefined : 30 }
   })
 
   useOutsideClick(node, onDismiss)
 
   const Container: React.FC<{
     style?: React.CSSProperties
-    initialTop?: number
-  }> = ({ initialTop = 0, ...props }) => {
+  }> = ({ ...props }) => {
     const containerClass = classNames({
       container: true,
       'fixed-height': !!fixedHeight,
@@ -65,35 +65,22 @@ const Dialog: React.FC<DialogProps> = ({
       'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
     })
 
-    // drag animation
-    const [{ top }, set] = useSpring(() => ({
-      top: initialTop
-    }))
-
     const bind = useDrag(({ down, movement: [, my] }) => {
-      if (!down && my > 50) {
-        // set intial top before transition start
-        setContainerTop(my)
+      if (!down && my > 30) {
         onDismiss()
+      } else {
+        setContainerGoal({ top: down ? Math.max(my, -30) : 0 })
       }
-      set({ top: down ? Math.max(my, -30) : 0 })
     })
 
     return (
-      <animated.div
-        style={{
-          top,
-          position: 'relative',
-          width: '100%'
-        }}
-      >
-        <div ref={node} className={containerClass} {...props}>
-          {children}
+      <div ref={node} className={containerClass} {...props}>
+        {children}
 
-          {!isSmallUp && <Handle {...bind()} close={onDismiss} />}
-        </div>
+        {!isSmallUp && <Handle {...bind()} close={onDismiss} />}
+
         <style jsx>{styles}</style>
-      </animated.div>
+      </div>
     )
   }
 
@@ -123,9 +110,9 @@ const Dialog: React.FC<DialogProps> = ({
               <AnimatedContainer
                 style={{
                   transform: !isSmallUp && transform ? transform : undefined,
-                  opacity: isSmallUp ? opacity : undefined
+                  opacity: isSmallUp ? opacity : undefined,
+                  top
                 }}
-                initialTop={containerTop}
               />
             </DialogContent>
           </AnimatedDialogOverlay>
