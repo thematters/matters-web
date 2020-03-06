@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _some from 'lodash/some'
@@ -11,20 +10,16 @@ import {
   Avatar,
   Expandable,
   FollowButton,
-  Icon,
-  ShareButton,
   Spinner,
   Throw404,
-  Tooltip,
   Translate,
   ViewerContext
 } from '~/components'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
+import { CivicLikerBadge, SeedBadge } from './Badges'
 import Cover from './Cover'
-import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import styles from './styles.css'
 
@@ -58,11 +53,9 @@ const fragments = {
       }
       ...AvatarUser
       ...FollowButtonUser @skip(if: $isMe)
-      ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
-    ${DropdownActions.fragments.user}
   `
 }
 
@@ -84,41 +77,11 @@ const ME_PROFILE = gql`
   ${fragments.user}
 `
 
-const SeedBadge = () => (
-  <Tooltip content={<Translate zh_hant="種子用戶" zh_hans="种子用户" />}>
-    <span>
-      <Icon.SeedBadge />
-    </span>
-  </Tooltip>
-)
-
-const CivicLikerBadge = () => (
-  <>
-    <a href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT} target="_blank">
-      <span className="badge-civic-liker">Civic Liker</span>
-    </a>
-    <style jsx>{styles}</style>
-  </>
-)
-
-const CoverContainer: React.FC = ({ children }) => (
-  <div className="cover-container l-row">
-    <section className="l-col-4 l-col-md-8 l-col-lg-12">{children}</section>
-
-    <style jsx>{styles}</style>
-  </div>
-)
-
 export const UserProfile = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
-
-  const containerClass = classNames({
-    container: true
-  })
-
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
     isMe ? ME_PROFILE : USER_PROFILE,
     {
@@ -128,15 +91,7 @@ export const UserProfile = () => {
   const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
 
   if (loading) {
-    return (
-      <section className={containerClass}>
-        <CoverContainer>
-          <Spinner />
-        </CoverContainer>
-
-        <style jsx>{styles}</style>
-      </section>
-    )
+    return <Spinner />
   }
 
   if (!user || user?.status?.state === 'archived') {
@@ -160,109 +115,86 @@ export const UserProfile = () => {
   const isUserFrozen = user.status.state === 'frozen'
   const isUserInactive = isUserArchived || isUserBanned || isUserFrozen
 
-  return (
-    <section className={containerClass}>
-      <CoverContainer>
-        <Cover cover={profileCover} />
-      </CoverContainer>
+  /**
+   * Inactive User
+   */
+  if (isUserInactive) {
+    return (
+      <section className="user-profile">
+        <Cover />
 
-      <div className="content-container">
-        <section className="content">
-          <div className="avatar-container">
-            <Avatar
-              size="xxl"
-              user={!isMe && isUserInactive ? undefined : user}
-            />
+        <header>
+          <section className="avatar">
+            <Avatar size="xxl" />
+          </section>
+        </header>
 
-            {!isMe && (
-              <section className="buttons">
-                <span className="follows">
-                  <FollowButton user={user} size="lg" />
-                  <section className="u-sm-down-hide follow-state">
-                    {!isMe && <FollowButton.State user={user} />}
-                  </section>
-                </span>
-
-                <span className="u-sm-up-hide">
-                  <DropdownActions user={user} />
-                  <ShareButton size="md-s" />
-                </span>
-              </section>
-            )}
-          </div>
-
-          <section className="info">
-            <header className="header">
-              <section className="basic">
-                {!isUserInactive && (
-                  <>
-                    <span className="name">{user.displayName}</span>
-                    <span className="username">@{user.userName}</span>
-                    {hasSeedBadge && <SeedBadge />}
-                    {isCivicLiker && <CivicLikerBadge />}
-                    <span className="u-sm-up-hide">
-                      {!isMe && <FollowButton.State user={user} />}
-                    </span>
-                  </>
-                )}
-
-                {isUserArchived && (
-                  <span>
-                    <Translate id="accountArchived" />
-                  </span>
-                )}
-
-                {isUserFrozen && (
-                  <span>
-                    <Translate id="accountFrozen" />
-                  </span>
-                )}
-
-                {isUserBanned && (
-                  <span>
-                    <Translate id="accountBanned" />
-                  </span>
-                )}
-              </section>
-
-              <section className="buttons">
-                {isMe && !isUserInactive && <EditProfileButton user={user} />}
-
-                <span className={!isMe ? 'u-sm-down-hide' : ''}>
-                  {!isMe && <DropdownActions user={user} />}
-                  <ShareButton size="md-s" />
-                </span>
-              </section>
-            </header>
-
-            {!isUserInactive && (
-              <Expandable>
-                <p className="description">{user.info.description}</p>
-              </Expandable>
-            )}
-
-            <section className="info-follow">
-              <Link {...userFollowersPath}>
-                <a className="followers">
-                  <span className="count">
-                    {numAbbr(user.followers.totalCount)}
-                  </span>
-                  <Translate id="follower" />
-                </a>
-              </Link>
-
-              <Link {...userFolloweesPath}>
-                <a className="followees">
-                  <span className="count">
-                    {numAbbr(user.followees.totalCount)}
-                  </span>
-                  <Translate id="following" />
-                </a>
-              </Link>
-            </section>
+        <section className="info">
+          <section className="display-name">
+            <h1 className="name">
+              {isUserArchived && <Translate id="accountArchived" />}
+              {isUserFrozen && <Translate id="accountFrozen" />}
+              {isUserBanned && <Translate id="accountBanned" />}
+            </h1>
           </section>
         </section>
-      </div>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  /**
+   * Active or Onboarding User
+   */
+  return (
+    <section className="user-profile">
+      <Cover cover={profileCover} />
+
+      <header>
+        <section className="avatar">
+          <Avatar size="xxl" user={!isMe ? undefined : user} />
+        </section>
+
+        {!isMe ? (
+          <FollowButton user={user} size="lg" />
+        ) : (
+          <EditProfileButton user={user} />
+        )}
+      </header>
+
+      <section className="info">
+        <section className="display-name">
+          <h1 className="name">{user.displayName}</h1>
+          {hasSeedBadge && <SeedBadge />}
+          {isCivicLiker && <CivicLikerBadge />}
+        </section>
+
+        <section className="username">
+          <span className="name">@{user.userName}</span>
+          {!isMe && <FollowButton.State user={user} />}
+        </section>
+
+        <Expandable>
+          <p className="description">{user.info.description}</p>
+        </Expandable>
+      </section>
+
+      <footer>
+        <Link {...userFollowersPath}>
+          <a>
+            <span className="count">{numAbbr(user.followers.totalCount)}</span>
+            <Translate id="follower" />
+          </a>
+        </Link>
+
+        <Link {...userFolloweesPath}>
+          <a>
+            <span className="count">{numAbbr(user.followees.totalCount)}</span>
+            <Translate id="following" />
+          </a>
+        </Link>
+      </footer>
 
       <style jsx>{styles}</style>
     </section>

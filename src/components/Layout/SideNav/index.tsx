@@ -4,12 +4,12 @@ import { useContext } from 'react'
 
 import {
   Dropdown,
+  hidePopperOnClick,
   Icon,
   Menu,
   Translate,
   useResponsive,
   ViewerContext,
-  hidePopperOnClick,
   WriteButton
 } from '~/components'
 

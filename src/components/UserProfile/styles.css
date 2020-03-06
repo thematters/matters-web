@@ -1,184 +1,83 @@
-.container {
-  margin-top: calc(var(--spacing-x-loose) * -1);
-  margin-bottom: 2rem;
-
-  @media (--sm-up) {
-    margin-top: calc(var(--spacing-xx-loose) * -1);
-  }
-  @media (--lg-up) {
-    background: initial !important;
-  }
+.user-profile {
+  margin-bottom: var(--spacing-x-loose);
 }
 
-.content-container {
-  padding-top: var(--spacing-loose);
-}
+header {
+  @mixin flex-end-space-between;
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 
-.content {
-  @mixin flex-start-space-between;
-  flex-direction: column;
-  position: relative;
+  & .avatar {
+    display: inline-flex;
+    margin-top: calc(var(--spacing-loose) * -1);
 
-  width: 100%;
-
-  @media (--sm-up) {
-    flex-direction: row;
-  }
-}
-
-.avatar-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-  @media (--sm-up) {
-    text-align: center;
+    box-shadow: 0 0 0 3px var(--color-white);
+    border-radius: 50%;
   }
 }
 
 .info {
-  flex-grow: 1;
-  width: 100%;
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 
-  margin-top: var(--spacing-base);
-  margin-left: 0;
-
-  @media (--sm-up) {
-    margin-top: 0;
-    margin-left: 3rem;
-  }
-}
-
-.header {
-  @mixin flex-start-space-between;
-
-  margin-bottom: var(--spacing-x-tight);
-}
-
-.basic {
-  @mixin flex-center-all;
-
-  & .name {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-
-    @media (--sm-up) {
-      font-size: var(--font-size-xl);
-      line-height: 1.25;
-    }
-  }
-
+  & .display-name,
   & .username {
-    margin-left: var(--spacing-x-tight);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    line-height: 1;
-    color: var(--color-grey);
-  }
-
-  & :global(> *) {
-    display: inline-flex;
-
-    & :global(+ *) {
+    & :global(> * + *) {
       margin-left: var(--spacing-x-tight);
     }
   }
-}
 
-.buttons {
-  position: absolute;
-  top: -12px; /* position hack in small device */
-  right: 0;
-
-  & :global(button) {
-    margin-left: var(--spacing-base);
+  & .display-name {
+    font-size: var(--font-size-xl);
+    line-height: 1;
   }
 
-  & .follows {
-    & :global(button) {
-      margin: 0;
-    }
+  & .username {
+    margin-top: var(--spacing-x-tight);
 
-    & .follow-state {
-      margin-top: var(--spacing-x-tight);
-    }
-  }
-
-  @media (--sm-up) {
-    position: initial;
-    top: initial;
-    right: initial;
-  }
-}
-
-.description {
-  position: relative;
-  color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
-  white-space: pre-wrap;
-
-  @media (--sm-up) {
+    color: var(--color-grey-dark);
     font-size: var(--font-size-md);
+    line-height: 1;
   }
 
-  @media (--sm-up) {
-    & button {
-      line-height: calc(var(--font-size-md) * var(--line-height-base));
+  & .description {
+    position: relative;
+    margin-top: var(--spacing-base);
 
-      & :gloabl(.text) {
-        font-size: var(--font-size-md);
-      }
-    }
+    color: var(--color-grey-darker);
+    font-size: var(--font-size-md);
+    white-space: pre-wrap;
   }
 }
 
-.info-follow {
-  margin-top: var(--spacing-base);
+footer {
+  padding: 0 var(--spacing-base);
 
   color: var(--color-grey);
-  font-size: var(--font-size-sm-s);
+  font-size: var(--font-size-sm);
 
-  & .followers,
-  & .followees {
+  & :global(> *) {
     display: inline-flex;
     align-items: center;
-  }
-  & .followees {
-    margin-left: 2.5rem;
+
+    line-height: 1.5rem;
+
+    & + * {
+      margin-left: var(--spacing-loose);
+    }
   }
 
   & .count {
     display: block;
+    padding-right: var(--spacing-x-tight);
 
     color: var(--color-black);
     font-size: var(--font-size-lg);
-    font-size: calc(var(--font-size-lg) + 2px);
     font-weight: var(--font-weight-bold);
-    line-height: 1;
-    padding-right: var(--spacing-x-tight);
+    line-height: 1.5rem;
   }
-}
-
-.cover-container {
-  @media (--sm-down) {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
-.badge-civic-liker {
-  display: inline-block;
-  height: 16px;
-  padding: 0 6px;
-
-  color: var(--color-white);
-  font-size: 9px;
-  font-weight: var(--font-weight-semibold);
-  line-height: 16px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-
-  background: var(--color-matters-green);
-  border-radius: 20px;
 }
