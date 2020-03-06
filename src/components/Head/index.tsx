@@ -62,7 +62,7 @@ export const Head: React.FC<HeadProps> = props => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
@@ -154,12 +154,7 @@ export const Head: React.FC<HeadProps> = props => {
         href={IMAGE_APPLE_TOUCH_ICON}
       />
       <meta name="application-name" key="application-name" content="Matters" />
-      <meta name="theme-color" key="theme-color" content="#0d6763" />
-      <meta
-        name="apple-mobile-web-app-status-bar-style"
-        key="apple-mobile-web-app-status-bar-style"
-        content="default"
-      />
+      <meta name="theme-color" key="theme-color" content="#fff" />
       <meta
         name="apple-mobile-web-app-title"
         key="apple-mobile-web-app-title"
@@ -168,7 +163,7 @@ export const Head: React.FC<HeadProps> = props => {
       <meta
         name="apple-mobile-web-app-status-bar-style"
         key="apple-mobile-web-app-status-bar-style"
-        content="white"
+        content="default"
       />
       <meta
         name="apple-mobile-web-app-capable"

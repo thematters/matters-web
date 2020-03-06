@@ -33,8 +33,10 @@ const Header: React.FC<HeaderProps> & {
 
   return (
     <header className={headerClass}>
-      <section className="left">{left}</section>
-      <section className="right">{right}</section>
+      <section className="content">
+        <section className="left">{left}</section>
+        <section className="right">{right}</section>
+      </section>
 
       <style jsx>{styles}</style>
     </header>
