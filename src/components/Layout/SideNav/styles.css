@@ -50,8 +50,8 @@ ul {
   width: 2rem;
   height: 2rem;
 
-  &.active {
-    border: 1.5px solid var(--color-matters-green);
+  &.active :global(.avatar) {
+    box-shadow: 0 0 0 1.5px var(--color-matters-green);
   }
 }
 

@@ -84,19 +84,6 @@ export const ArticleDigestFeed = ({
       bgActiveColor="green-lighter"
       onClick={onClick}
     >
-      {inUserArticles && sticky && (
-        <section className="sticky">
-          <TextIcon
-            icon={<Icon.PinMedium />}
-            size="sm"
-            color="grey"
-            weight="md"
-          >
-            <Translate id="stickyArticle" />
-          </TextIcon>
-        </section>
-      )}
-
       <header>
         <section className="left">
           <UserDigest.Mini
@@ -113,6 +100,17 @@ export const ArticleDigestFeed = ({
         </section>
 
         <section className="right">
+          {inUserArticles && sticky && (
+            <TextIcon
+              icon={<Icon.PinMedium />}
+              size="sm"
+              color="grey"
+              weight="md"
+            >
+              <Translate id="stickyArticle" />
+            </TextIcon>
+          )}
+
           <Live article={article} />
           <InactiveState article={article} />
           <CreatedAt article={article} />

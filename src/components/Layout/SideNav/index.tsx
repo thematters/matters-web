@@ -9,6 +9,7 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
+  hidePopperOnClick,
   WriteButton
 } from '~/components'
 
@@ -28,8 +29,16 @@ const SideNav = () => {
   const isInHome = router.pathname === PATHS.HOME.href
   const isInFollow = router.pathname === PATHS.FOLLOW.href
   const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
-  const isInMe = router.pathname.indexOf(viewerUserName) >= 0
-  const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0
+  const isInMe =
+    router.asPath.indexOf(viewerUserName) >= 0 ||
+    [
+      PATHS.ME_APPRECIATIONS_RECEIVED.href,
+      PATHS.ME_APPRECIATIONS_SENT.href,
+      PATHS.ME_SETTINGS_ACCOUNT.href,
+      PATHS.ME_SETTINGS_BLOCKED.href,
+      PATHS.ME_SETTINGS_NOTIFICATION.href
+    ].indexOf(router.pathname) >= 0
+  const isInDraftDetail = router.asPath.indexOf('/me/drafts') >= 0
 
   return (
     <section className="side-nav">
@@ -81,6 +90,9 @@ const SideNav = () => {
           distance={16}
           appendTo={process.browser ? document.body : undefined}
           zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+          onShown={i => {
+            hidePopperOnClick(i)
+          }}
         >
           <NavListItem
             name={<Translate zh_hant="我的" zh_hans="我的" />}

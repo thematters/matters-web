@@ -47,10 +47,6 @@ header {
   }
 }
 
-.sticky {
-  margin-bottom: var(--spacing-base);
-}
-
 .inactive-state {
   display: inline-block;
   padding: var(--spacing-xxx-tight) var(--spacing-xx-tight);

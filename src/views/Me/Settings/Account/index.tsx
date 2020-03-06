@@ -6,6 +6,9 @@ import SettingsAccount from './SettingsAccount'
 export default () => (
   <Layout>
     <SettingsTab />
-    <SettingsAccount />
+
+    <Layout.Spacing>
+      <SettingsAccount />
+    </Layout.Spacing>
   </Layout>
 )

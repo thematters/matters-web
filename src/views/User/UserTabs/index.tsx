@@ -35,7 +35,7 @@ const MeTabs = () => {
 
   if (isMe) {
     return (
-      <Tabs>
+      <Tabs spacingBottom="base">
         <Tabs.Tab
           {...userArticlePath}
           selected={router.pathname === PATHS.USER_ARTICLES.href}

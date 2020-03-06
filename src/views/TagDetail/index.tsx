@@ -79,29 +79,27 @@ const TagDetailContainer = ({ data }: { data: TagDetail }) => {
             </section>
           )}
         </PageHeader>
-
-        <section className="tabs">
-          <Tabs spacingBottom="base">
-            {hasSelected > 0 && (
-              <Tabs.Tab selected={feed === 'selected'}>
-                <Button onClick={() => setFeed('selected')}>
-                  <TextIcon size="xm">
-                    <Translate id="featured" />
-                  </TextIcon>
-                </Button>
-              </Tabs.Tab>
-            )}
-
-            <Tabs.Tab selected={feed === 'latest'}>
-              <Button onClick={() => setFeed('latest')}>
-                <TextIcon size="xm">
-                  <Translate id="latest" />
-                </TextIcon>
-              </Button>
-            </Tabs.Tab>
-          </Tabs>
-        </section>
       </Layout.Spacing>
+
+      <Tabs spacingBottom="base">
+        {hasSelected > 0 && (
+          <Tabs.Tab selected={feed === 'selected'}>
+            <Button onClick={() => setFeed('selected')}>
+              <TextIcon size="xm">
+                <Translate id="featured" />
+              </TextIcon>
+            </Button>
+          </Tabs.Tab>
+        )}
+
+        <Tabs.Tab selected={feed === 'latest'}>
+          <Button onClick={() => setFeed('latest')}>
+            <TextIcon size="xm">
+              <Translate id="latest" />
+            </TextIcon>
+          </Button>
+        </Tabs.Tab>
+      </Tabs>
 
       {feed === 'selected' ? (
         <TagDetailArticles.Selected id={data.node.id} />

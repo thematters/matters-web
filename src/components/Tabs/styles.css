@@ -2,6 +2,7 @@ nav {
   @mixin border-bottom-grey;
   position: relative;
 
+  padding: 0 var(--spacing-base);
   white-space: nowrap;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -21,6 +22,9 @@ nav {
     );
   }
 
+  &.spacing-bottom-xtight {
+    margin-bottom: var(--spacing-x-tight);
+  }
   &.spacing-bottom-base {
     margin-bottom: var(--spacing-base);
   }

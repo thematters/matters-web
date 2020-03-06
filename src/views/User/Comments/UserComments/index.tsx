@@ -158,7 +158,7 @@ const UserComments = ({ user }: UserIdUser) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 0]} hasBorder>
+      <List spacing={['xloose', 'base']} hasBorder>
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
           const filteredComments = filterComments(

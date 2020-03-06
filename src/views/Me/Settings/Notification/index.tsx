@@ -6,6 +6,9 @@ import SettingsNotification from './SettingsNotification'
 export default () => (
   <Layout>
     <SettingsTab />
-    <SettingsNotification />
+
+    <Layout.Spacing>
+      <SettingsNotification />
+    </Layout.Spacing>
   </Layout>
 )
