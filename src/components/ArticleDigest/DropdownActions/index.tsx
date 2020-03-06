@@ -108,7 +108,7 @@ const BaseDropdownActions = ({
         hasArchive ||
         inTagDetailLatest ||
         inTagDetailSelected ||
-        hasRemoveTag) && <Menu.Divider />}
+        hasRemoveTag) && <Menu.Divider spacing="xtight" />}
       {hasSticky && <StickyButton article={article} />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
       {inTagDetailLatest && <SetTagSelectedButton article={article} />}

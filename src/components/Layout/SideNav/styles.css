@@ -54,3 +54,7 @@ ul {
     border: 1.5px solid var(--color-matters-green);
   }
 }
+
+.dropdown-menu {
+  width: 12rem;
+}

@@ -1,47 +1,51 @@
-import { Button, TextIcon } from '~/components'
+import { forwardRef } from 'react'
+
+import { Button, ButtonProps, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
-interface NavListItemProps {
+type NavListItemProps = {
   name: React.ReactNode
-  href: string
-  as: string
   icon: React.ReactNode
   activeIcon: React.ReactNode
   active: boolean
   isMediumUp: boolean
-}
+} & ButtonProps
 
-const NavListItem = ({
-  name,
-  href,
-  as,
-  icon,
-  activeIcon,
-  active,
-  isMediumUp
-}: NavListItemProps) => (
-  <li>
-    <Button
-      href={href}
-      as={as}
-      bgActiveColor="green-lighter"
-      spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
-      size={isMediumUp ? undefined : ['2rem', '2rem']}
-    >
-      <TextIcon
-        icon={active ? activeIcon : icon}
-        size="lg"
-        weight="semibold"
-        spacing="xtight"
-        color={active ? 'green' : 'black'}
+const NavListItem = forwardRef(
+  (
+    {
+      name,
+      icon,
+      activeIcon,
+      active,
+      isMediumUp,
+      ...buttonProps
+    }: NavListItemProps,
+    ref
+  ) => (
+    <li>
+      <Button
+        bgActiveColor="green-lighter"
+        spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
+        size={isMediumUp ? undefined : ['2rem', '2rem']}
+        ref={ref}
+        {...buttonProps}
       >
-        {isMediumUp && name}
-      </TextIcon>
-    </Button>
+        <TextIcon
+          icon={active ? activeIcon : icon}
+          size="lg"
+          weight="semibold"
+          spacing="xtight"
+          color={active ? 'green' : 'black'}
+        >
+          {isMediumUp && name}
+        </TextIcon>
+      </Button>
 
-    <style jsx>{styles}</style>
-  </li>
+      <style jsx>{styles}</style>
+    </li>
+  )
 )
 
 export default NavListItem

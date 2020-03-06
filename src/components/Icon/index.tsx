@@ -27,6 +27,7 @@ import { ReactComponent as CloseGreenMedium } from './icons/close-green-md.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
+import { ReactComponent as DeleteDraftMedium } from './icons/delete-draft-md.svg'
 import { ReactComponent as Down } from './icons/down.svg'
 import { ReactComponent as DownVoteActive } from './icons/downvote-active.svg'
 import { ReactComponent as DownVote } from './icons/downvote.svg'
@@ -149,6 +150,7 @@ export const Icon = {
   Collapse: withIcon(Collapse),
   CollectionMedium: withIcon(CollectionMedium),
   Comment: withIcon(Comment),
+  DeleteDraftMedium: withIcon(DeleteDraftMedium),
   Down: withIcon(Down),
   DownVote: withIcon(DownVote),
   DownVoteActive: withIcon(DownVoteActive),

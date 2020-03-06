@@ -3,16 +3,18 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
+  Dropdown,
   Icon,
+  Menu,
   Translate,
   useResponsive,
   ViewerContext,
   WriteButton
 } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
 
+import NavMenu from '../NavMenu'
 import MeAvatar from './MeAvatar'
 import NavListItem from './NavListItem'
 import styles from './styles.css'
@@ -67,17 +69,28 @@ const SideNav = () => {
           {...PATHS.ME_NOTIFICATIONS}
         />
 
-        <NavListItem
-          name={<Translate zh_hant="我的" zh_hans="我的" />}
-          icon={<MeAvatar user={viewer} />}
-          activeIcon={<MeAvatar user={viewer} active />}
-          active={isInMe}
-          isMediumUp={isMediumUp}
-          {...toPath({
-            page: 'userProfile',
-            userName: viewerUserName
-          })}
-        />
+        <Dropdown
+          content={
+            <section className="dropdown-menu">
+              <NavMenu.Top />
+              <Menu.Divider />
+              <NavMenu.Bottom />
+            </section>
+          }
+          placement="right"
+          distance={16}
+          appendTo={process.browser ? document.body : undefined}
+          zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+        >
+          <NavListItem
+            name={<Translate zh_hant="我的" zh_hans="我的" />}
+            icon={<MeAvatar user={viewer} />}
+            activeIcon={<MeAvatar user={viewer} active />}
+            active={isInMe}
+            isMediumUp={isMediumUp}
+            aira-haspopup="true"
+          />
+        </Dropdown>
 
         {!isInDraftDetail && (
           <li>
