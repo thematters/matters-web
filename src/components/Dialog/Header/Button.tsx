@@ -27,7 +27,7 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
           <Translate id="cancel" />
         </TextIcon>
       )}
-      {isSmallUp && <Icon.CloseGreenLarge size="lg" />}
+      {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
     </Button>
   )
 })

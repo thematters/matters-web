@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
-import { Layout, Spinner, ViewerContext } from '~/components'
+import { Layout, Spinner, useResponsive, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 
@@ -29,7 +29,7 @@ const ME_FOLLOW = gql`
   }
 `
 
-const Follow = () => {
+const BaseFollow = () => {
   const viewer = useContext(ViewerContext)
   const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
     READ_FOLLOWEE_ARTICLES,
@@ -62,13 +62,21 @@ const Follow = () => {
   }
 }
 
-export default () => (
-  <Layout>
-    <Layout.Header
-      left={<Layout.Header.MeButton />}
-      right={<Layout.Header.Title id="follow" />}
-    />
+const Follow = () => {
+  const isSmallUp = useResponsive('sm-up')
 
-    <Follow />
-  </Layout>
-)
+  return (
+    <Layout>
+      <Layout.Header
+        left={
+          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+        }
+        right={<Layout.Header.Title id="follow" />}
+      />
+
+      <BaseFollow />
+    </Layout>
+  )
+}
+
+export default Follow

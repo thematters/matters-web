@@ -228,6 +228,18 @@ span.container {
     background: var(--color-red);
   }
 }
+.bg-half-black {
+  & .hotarea {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &:hover,
+  &:focus {
+    & .hotarea {
+      background: rgba(0, 0, 0, 1);
+    }
+  }
+}
 
 /* Background:hover */
 .bg-active-grey {

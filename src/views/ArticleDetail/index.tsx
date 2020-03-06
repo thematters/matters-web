@@ -181,6 +181,7 @@ const ArticleDetail = () => {
             bgActiveColor={undefined}
           />
         }
+        marginBottom={0}
       />
 
       <Head

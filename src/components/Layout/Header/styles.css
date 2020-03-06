@@ -1,15 +1,28 @@
 header {
   @mixin flex-center-space-between;
-  @mixin border-bottom-grey;
 
-  position: sticky;
   top: 0;
+  width: 100%;
   height: 4rem;
   padding: var(--spacing-base);
-  margin-bottom: var(--spacing-loose);
 
-  background: var(--color-white);
   z-index: var(--z-index-global-header);
+
+  &.solid-fixed {
+    @mixin border-bottom-grey;
+    position: sticky;
+    background: var(--color-white);
+  }
+  &.transparent-absolute {
+    position: absolute;
+  }
+
+  &.margin-base {
+    margin-bottom: var(--spacing-base);
+  }
+  &.margin-loose {
+    margin-bottom: var(--spacing-loose);
+  }
 }
 
 .left {
@@ -25,4 +38,8 @@ header {
   @mixin flex-center-space-between;
   flex-grow: 1;
   flex-shrink: 1;
+
+  & :global(> *:first-child) {
+    flex-grow: 1;
+  }
 }

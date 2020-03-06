@@ -17,14 +17,14 @@ import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
 import { ReactComponent as AvatarLogo } from './icons/avatar-logo.svg'
-import { ReactComponent as BackGreenLarge } from './icons/back-green-lg.svg'
+import { ReactComponent as BackLarge } from './icons/back-lg.svg'
 import { ReactComponent as BookmarkActive } from './icons/bookmark-active.svg'
 import { ReactComponent as BookmarkMedium } from './icons/bookmark-md.svg'
 import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
 import { ReactComponent as Camera } from './icons/camera.svg'
 import { ReactComponent as Clear } from './icons/clear.svg'
-import { ReactComponent as CloseGreenLarge } from './icons/close-green-lg.svg'
+import { ReactComponent as CloseLarge } from './icons/close-lg.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
@@ -143,14 +143,14 @@ export const Icon = {
   AddMedium: withIcon(AddMedium),
   ArchiveMedium: withIcon(ArchiveMedium),
   AvatarLogo: withIcon(AvatarLogo),
-  BackGreenLarge: withIcon(BackGreenLarge),
+  BackLarge: withIcon(BackLarge),
   Bookmark: withIcon(Bookmark),
   BookmarkActive: withIcon(BookmarkActive),
   BookmarkMedium: withIcon(BookmarkMedium),
   Camera: withIcon(Camera),
   CameraMedium: withIcon(CameraMedium),
   Clear: withIcon(Clear),
-  CloseGreenLarge: withIcon(CloseGreenLarge),
+  CloseLarge: withIcon(CloseLarge),
   Collapse: withIcon(Collapse),
   CollectionMedium: withIcon(CollectionMedium),
   Comment: withIcon(Comment),

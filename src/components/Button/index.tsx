@@ -24,20 +24,14 @@ export type ButtonHeight =
   | undefined
   | null
 
-type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
+type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
 
-type ButtonSpacingX =
-  | 0
-  | '0'
-  | 'xxtight'
-  | 'xtight'
-  | 'tight'
-  | 'base'
-  | 'loose'
+type ButtonSpacingX = 0 | 'xxtight' | 'xtight' | 'tight' | 'base' | 'loose'
 
 type ButtonColor =
   | 'white'
   | 'black'
+  | 'half-black'
   | 'grey'
   | 'grey-light'
   | 'grey-lighter'
@@ -50,7 +44,14 @@ type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
 
 type ButtonBgColor = Extract<
   ButtonColor,
-  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red' | 'white'
+  | 'grey'
+  | 'grey-lighter'
+  | 'green-lighter'
+  | 'green'
+  | 'gold'
+  | 'red'
+  | 'white'
+  | 'half-black'
 >
 
 type ButtonBgHoverColor = Extract<
@@ -70,7 +71,7 @@ export interface ButtonProps {
 
   borderColor?: ButtonColor
   borderWidth?: 'sm' | 'md'
-  borderRadius?: 0 | '0' | '5rem'
+  borderRadius?: 0 | '5rem'
 
   href?: string
   as?: string

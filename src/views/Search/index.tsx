@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { Head, Layout, SearchBar } from '~/components'
+import { Head, Layout, SearchBar, useResponsive } from '~/components'
 
 import { getQuery } from '~/common/utils'
 
@@ -10,6 +10,19 @@ import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
+
+const SearchHeader = () => {
+  const isSmallUp = useResponsive('sm-up')
+
+  return (
+    <Layout.Header
+      left={
+        isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+      }
+      right={<SearchBar />}
+    />
+  )
+}
 
 const Search = () => {
   const router = useRouter()
@@ -21,10 +34,7 @@ const Search = () => {
       <Layout>
         <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
 
-        <Layout.Header
-          left={<Layout.Header.MeButton />}
-          right={<SearchBar />}
-        />
+        <SearchHeader />
 
         <EmptySearch inSidebar={false} />
       </Layout>
@@ -44,7 +54,7 @@ const Search = () => {
         </>
       }
     >
-      <Layout.Header left={<Layout.Header.MeButton />} right={<SearchBar />} />
+      <SearchHeader />
 
       <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
 

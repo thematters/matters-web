@@ -4,12 +4,29 @@ import { Button, ButtonProps, Icon, useResponsive } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
-export const BackButton: React.FC<ButtonProps> = props => {
+type BackButtonProps = {
+  mode?: 'black-solid'
+} & ButtonProps
+
+export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   const isSmallUp = useResponsive('sm-up')
   const onBack = () => {
     Router.back()
 
     // TODO: if previous url isn't onsite
+  }
+
+  if (mode === 'black-solid') {
+    return (
+      <Button
+        aria-label={TEXT.zh_hant.close}
+        bgColor="half-black"
+        onClick={onBack}
+        {...props}
+      >
+        <Icon.BackLarge size="lg" color="white" />
+      </Button>
+    )
   }
 
   if (isSmallUp) {
@@ -20,7 +37,7 @@ export const BackButton: React.FC<ButtonProps> = props => {
         onClick={onBack}
         {...props}
       >
-        <Icon.BackGreenLarge size="lg" />
+        <Icon.BackLarge size="lg" color="green" />
       </Button>
     )
   }

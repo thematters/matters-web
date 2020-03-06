@@ -6,15 +6,11 @@
   position: sticky;
   bottom: 0;
   margin: 0;
-  padding: var(--spacing-base) var(--spacing-base) var(--spacing-x-loose);
+  padding: var(--spacing-base);
 
   background: var(--color-white);
   line-height: 1;
   z-index: var(--z-index-over-global-header);
-
-  @media (--sm-up) {
-    padding: var(--spacing-base);
-  }
 }
 
 .appreciate-button {

@@ -5,14 +5,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: var(--spacing-base) var(--spacing-x-loose) var(--spacing-x-loose);
+  padding: var(--spacing-base);
 
   background: var(--color-white);
   z-index: var(--z-index-global-header);
-
-  @media (--xs-down) {
-    padding: var(--spacing-base);
-  }
 }
 
 ul {

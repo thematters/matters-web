@@ -14,6 +14,7 @@ import {
   Spinner,
   Throw404,
   Translate,
+  useResponsive,
   ViewerContext
 } from '~/components'
 
@@ -82,6 +83,7 @@ const ME_PROFILE = gql`
 `
 
 export const UserProfile = () => {
+  const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const userName = getQuery({ router, key: 'userName' })
@@ -96,13 +98,19 @@ export const UserProfile = () => {
 
   const LayoutHeader = () => (
     <Layout.Header
-      left={<Layout.Header.BackButton />}
+      left={
+        <Layout.Header.BackButton
+          mode={!isSmallUp ? 'black-solid' : undefined}
+        />
+      }
       right={
         <>
-          <Layout.Header.Title id="myProfile" />
+          {isSmallUp ? <Layout.Header.Title id="myProfile" /> : <span />}
           {user && <DropdownActions user={user} isMe={isMe} />}
         </>
       }
+      mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
+      marginBottom={0}
     />
   )
 

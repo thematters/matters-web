@@ -8,7 +8,8 @@ import {
   Layout,
   List,
   Notice,
-  Spinner
+  Spinner,
+  useResponsive
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
@@ -22,7 +23,7 @@ import styles from './styles.css'
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
-const Notifications = () => {
+const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
     MARK_ALL_NOTICES_AS_READ,
     {
@@ -84,15 +85,23 @@ const Notifications = () => {
   )
 }
 
-export default () => (
-  <Layout>
-    <Layout.Header
-      left={<Layout.Header.MeButton />}
-      right={<Layout.Header.Title id="notification" />}
-    />
+const Notifications = () => {
+  const isSmallUp = useResponsive('sm-up')
 
-    <Head title={{ id: 'notification' }} />
+  return (
+    <Layout>
+      <Layout.Header
+        left={
+          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+        }
+        right={<Layout.Header.Title id="notification" />}
+      />
 
-    <Notifications />
-  </Layout>
-)
+      <Head title={{ id: 'notification' }} />
+
+      <BaseNotifications />
+    </Layout>
+  )
+}
+
+export default Notifications

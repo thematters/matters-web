@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type EmptySpacing = '0' | 'loose'
+type EmptySpacing = 0 | 'loose'
 
 interface EmptyProps {
   icon?: React.ReactNode

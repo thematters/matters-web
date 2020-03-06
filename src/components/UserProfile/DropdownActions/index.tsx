@@ -4,6 +4,7 @@ import {
   Button,
   DropdownDialog,
   Icon,
+  useResponsive,
   Menu,
   ShareDialog,
   TextIcon,
@@ -43,6 +44,7 @@ const BaseDropdownActions = ({
   openShareDialog,
   openBlockUserDialog
 }: BaseDropdownActionsProps) => {
+  const isSmallUp = useResponsive('sm-up')
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -70,13 +72,13 @@ const BaseDropdownActions = ({
     >
       {({ open, ref }) => (
         <Button
-          bgColor="green-lighter"
+          bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}
           ref={ref}
         >
-          <Icon.MoreLarge size="lg" color="green" />
+          <Icon.MoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
         </Button>
       )}
     </DropdownDialog>
