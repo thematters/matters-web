@@ -1,12 +1,6 @@
-.responses {
-  & > header {
-    margin: var(--spacing-xx-loose) 0 var(--spacing-base);
-  }
-}
-
 .latest-responses,
 .featured-comments {
-  margin-top: var(--spacing-x-loose);
+  margin: var(--spacing-loose) 0;
 
   & header {
     @mixin flex-center-space-between;

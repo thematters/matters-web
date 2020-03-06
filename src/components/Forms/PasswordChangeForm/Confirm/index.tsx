@@ -14,7 +14,6 @@ import { useMutation } from '~/components/GQL'
 
 import {
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateComparedPassword,
   validatePassword
@@ -53,7 +52,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'password-change-confirm-form'
 
   const {
     values,

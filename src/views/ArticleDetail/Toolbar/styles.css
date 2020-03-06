@@ -1,86 +1,40 @@
-.toolbar-left {
-  position: absolute;
-  top: 0;
-  right: calc(100% + var(--spacing-loose));
-  bottom: 0;
-
-  @media (--lg-up) {
-    right: calc(100% + var(--spacing-xx-loose));
-  }
-
-  & .container {
-    display: none;
-    flex-direction: column;
-
-    position: sticky;
-    top: calc(var(--global-header-height) + var(--spacing-xx-loose));
-
-    @media (--md-up) {
-      display: flex;
-    }
-
-    & :global(> * + *) {
-      margin-top: var(--spacing-loose);
-    }
-  }
-}
-
-.toolbar-bottom {
+.container {
+  @mixin border-top-grey;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  margin: 0 calc(var(--spacing-base) * -1);
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
+
+  background: var(--color-white);
+  line-height: 1;
+  z-index: 1;
 
   @media (--sm-up) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  & .left {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-
-  & .right {
-    margin-bottom: var(--spacing-loose);
-    order: -1;
-    text-align: right;
-
-    & :global(> * + *) {
-      margin-left: var(--spacing-loose);
-    }
-
-    @media (--sm-up) {
-      order: initial;
-    }
-  }
-
-  &.fixed .right {
-    @media (--md-down) {
-      @mixin flex-center-space-between;
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: 0;
-      padding: var(--spacing-base);
-
-      background: var(--color-white);
-      box-shadow: -8px 0px 24px rgba(0, 0, 0, 0.08);
-      z-index: 5;
-      transition: transform 0.2s ease-in-out;
-
-      & :global(> *) {
-        flex: 1;
-      }
-    }
+    margin: 0;
   }
 }
 
-:global(.immersive-mode) {
-  @media (--md-down) {
-    & .toolbar-bottom.fixed .right {
-      transform: translateY(100%);
+.appreciate-button {
+  flex-shrink: 0;
+}
+
+.comment-bar {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  margin-left: var(--spacing-base);
+}
+
+.buttons {
+  flex-shrink: 0;
+
+  & :global(> *) {
+    margin-left: var(--spacing-loose);
+
+    @media (--xs-down) {
+      margin-left: var(--spacing-base);
     }
   }
 }

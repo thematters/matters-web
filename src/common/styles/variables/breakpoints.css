@@ -7,5 +7,3 @@
 @custom-media --md-down (max-width: 1023px);
 @custom-media --lg-up (min-width: 1280px);
 @custom-media --lg-down (max-width: 1279px);
-@custom-media --xl-up (min-width: 1440px);
-@custom-media --xl-down (max-width: 1439px);

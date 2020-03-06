@@ -16,8 +16,10 @@ import {
 
 import { TEXT } from '~/common/enums'
 
+import Appreciators from './Appreciators'
 import ArchiveArticle from './ArchiveArticle'
 import ExtendButton from './ExtendButton'
+import Fingerprint from './Fingerprint'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
@@ -38,14 +40,18 @@ type DropdownActionsProps = {
 } & DropdownActionsControls
 
 interface Controls {
-  hasExtendButton: boolean
-  hasRemoveTagButton: boolean
-  hasStickyButton: boolean
-  hasArchiveButton: boolean
+  hasAppreciators: boolean
+  hasFingerprint: boolean
+  hasExtend: boolean
+  hasRemoveTag: boolean
+  hasSticky: boolean
+  hasArchive: boolean
 }
 
 interface DialogProps {
-  openArchiveDialog?: () => void
+  openFingerprintDialog: () => void
+  openAppreciatorsDialog: () => void
+  openArchiveDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -54,10 +60,14 @@ const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
       id
+      ...AppreciatorsArticle
+      ...FingerprintArticle
       ...ArchiveArticleArticle
       ...StickyButtonArticle
       ...ExtendButtonArticle
     }
+    ${Appreciators.Dialog.fragments.article}
+    ${Fingerprint.Dialog.fragments.article}
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
@@ -68,27 +78,42 @@ const BaseDropdownActions = ({
   article,
   color = 'grey',
   size,
-  hasExtendButton,
-  hasStickyButton,
-  hasArchiveButton,
-  hasRemoveTagButton,
+
+  hasAppreciators,
+  hasFingerprint,
+  hasExtend,
+  hasSticky,
+  hasArchive,
+  hasRemoveTag,
   inTagDetailLatest,
   inTagDetailSelected,
+
+  openFingerprintDialog,
+  openAppreciatorsDialog,
   openArchiveDialog
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
-      {hasExtendButton && <ExtendButton article={article} />}
+      {hasAppreciators && (
+        <Appreciators.Button openDialog={openAppreciatorsDialog} />
+      )}
+      {hasFingerprint && (
+        <Fingerprint.Button openDialog={openFingerprintDialog} />
+      )}
+      {hasExtend && <ExtendButton article={article} />}
 
       {/* private */}
-      {hasStickyButton && <StickyButton article={article} />}
-      {hasArchiveButton && openArchiveDialog && (
-        <ArchiveArticle.Button openDialog={openArchiveDialog} />
-      )}
+      {(hasSticky ||
+        hasArchive ||
+        inTagDetailLatest ||
+        inTagDetailSelected ||
+        hasRemoveTag) && <Menu.Divider />}
+      {hasSticky && <StickyButton article={article} />}
+      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
       {inTagDetailLatest && <SetTagSelectedButton article={article} />}
       {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
-      {hasRemoveTagButton && <RemoveTagButton article={article} />}
+      {hasRemoveTag && <RemoveTagButton article={article} />}
     </Menu>
   )
 
@@ -134,16 +159,17 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isInTagDetail = inTagDetailLatest || inTagDetailSelected
 
   const controls = {
-    hasExtendButton: !!isActive,
-    hasRemoveTagButton: !!(isInTagDetail && isMattyUser),
-    hasStickyButton: !!(
+    hasAppreciators: article.appreciationsReceived.totalCount > 0,
+    hasFingerprint: isActive || isArticleAuthor,
+    hasExtend: !!isActive,
+    hasRemoveTag: !!(isInTagDetail && isMattyUser),
+    hasSticky: !!(
       inUserArticles &&
-      !isInTagDetail &&
       isArticleAuthor &&
       isActive &&
       !viewer.isInactive
     ),
-    hasArchiveButton:
+    hasArchive:
       isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
   }
 
@@ -151,21 +177,27 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  if (controls.hasArchiveButton) {
-    return (
-      <ArchiveArticle.Dialog article={article}>
-        {({ open: openArchiveDialog }) => (
-          <BaseDropdownActions
-            {...props}
-            {...controls}
-            openArchiveDialog={openArchiveDialog}
-          />
-        )}
-      </ArchiveArticle.Dialog>
-    )
-  }
-
-  return <BaseDropdownActions {...props} {...controls} />
+  return (
+    <Fingerprint.Dialog article={article}>
+      {({ open: openFingerprintDialog }) => (
+        <Appreciators.Dialog article={article}>
+          {({ open: openAppreciatorsDialog }) => (
+            <ArchiveArticle.Dialog article={article}>
+              {({ open: openArchiveDialog }) => (
+                <BaseDropdownActions
+                  {...props}
+                  {...controls}
+                  openFingerprintDialog={openFingerprintDialog}
+                  openAppreciatorsDialog={openAppreciatorsDialog}
+                  openArchiveDialog={openArchiveDialog}
+                />
+              )}
+            </ArchiveArticle.Dialog>
+          )}
+        </Appreciators.Dialog>
+      )}
+    </Fingerprint.Dialog>
+  )
 }
 
 DropdownActions.fragments = fragments

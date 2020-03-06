@@ -3,7 +3,6 @@ import CreatedAt from './CreatedAt'
 import DropdownActions from './DropdownActions'
 import Feed from './Feed'
 import FooterActions from './FooterActions'
-import Form from './Form'
 import PinnedLabel from './PinnedLabel'
 
 export const Comment = {
@@ -12,6 +11,5 @@ export const Comment = {
   FooterActions,
   PinnedLabel,
   CreatedAt,
-  Form,
   Feed
 }

@@ -18,6 +18,11 @@ header {
   }
 }
 
+.reply-to-container {
+  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
+    var(--spacing-x-loose);
+}
+
 .content-container {
   margin-top: var(--spacing-xx-tight);
   padding-left: var(--spacing-xx-loose);

@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-@lost gutter 48px; /* 3rem */
+@lost gutter 40px;
 @lost flexbox flex;
 
 /*
@@ -13,17 +13,17 @@
 
   @media (--sm-up) {
     & {
-      lost-center: 704px;
+      lost-center: 792px;
     }
   }
   @media (--md-up) {
     & {
-      lost-center: 960px;
+      lost-center: 896px;
     }
   }
   @media (--lg-up) {
     & {
-      lost-center: 1080px;
+      lost-center: 1208px;
     }
   }
 
@@ -76,8 +76,8 @@
   }
 }
 
-/* 12 cols in Large and XLarge */
-@each $device in lg, xl {
+/* 12 cols in Large */
+@each $device in lg {
   @media (--$(device)-up) {
     @each $i in 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
       .l-col-$(device)-$(i) {
@@ -107,7 +107,7 @@
     lost-column: 1/$(i);
   }
 }
-@each $device in sm, md, lg, xl {
+@each $device in sm, md, lg {
   @media (--$(device)-up) {
     @each $i in 1, 2, 3, 4 {
       .l-waffle-$(device)-$(i) {

@@ -17,11 +17,11 @@ import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationArticleDetail } from './__generated__/AppreciationArticleDetail'
+import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
 const fragments = {
   article: gql`
-    fragment AppreciationArticleDetail on Article {
+    fragment AppreciationButtonArticle on Article {
       id
       author {
         id
@@ -49,7 +49,7 @@ const AppreciationButton = ({
   article,
   inFixedToolbar
 }: {
-  article: AppreciationArticleDetail
+  article: AppreciationButtonArticle
   inFixedToolbar?: boolean
 }) => {
   const viewer = useContext(ViewerContext)

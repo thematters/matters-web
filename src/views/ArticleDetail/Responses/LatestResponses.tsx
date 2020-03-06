@@ -185,8 +185,8 @@ const LatestResponses = () => {
     })
   }
 
-  const commentCallback = () => {
-    return fetchMore({
+  const commentCallback = () =>
+    fetchMore({
       variables: {
         before: storedCursor,
         includeBefore: false,
@@ -228,7 +228,6 @@ const LatestResponses = () => {
         return newResult
       }
     })
-  }
 
   const responses = filterResponses(
     (edges || []).map(({ node }) => node)

@@ -143,20 +143,21 @@
   }
 }
 
-#editor-comment-container {
-  @mixin form-input-grey;
-  position: relative;
+#editor-comment-container,
+.quill {
+  height: 100%;
 }
 
 .mention-container {
   position: absolute;
 
   width: var(--sizing-menu-md);
-  visibility: hidden;
+  max-height: calc(4rem * 3);
 
   color: var(--color-black);
-  border-radius: 0.125rem;
+  border-radius: 0.5rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
+  overflow-y: scroll;
   z-index: var(--z-index-under-global-header);
 }

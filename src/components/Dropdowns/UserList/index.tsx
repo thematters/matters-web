@@ -25,6 +25,7 @@ export const DropdownUserList = ({
     <Menu width="md">
       {users.map(user => (
         <Menu.Item
+          spacing={['xtight', 'base']}
           onClick={() => {
             onClick(user)
           }}
