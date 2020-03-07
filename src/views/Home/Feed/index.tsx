@@ -95,6 +95,7 @@ type SortBy = 'hottest' | 'newest'
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isLargeUp = useResponsive('lg-up')
+
   const {
     data,
     error,
@@ -142,12 +143,15 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   }
 
   // insert other feeds
-  const mixFeed: Array<
+  let mixFeed: Array<
     | FeedEdge
     | HottestFeed_viewer_recommendation_feed_edges
     | NewestFeed_viewer_recommendation_feed_edges
   > = edges
+
   if (!isLargeUp) {
+    // get copy
+    mixFeed = JSON.parse(JSON.stringify(edges))
     // get insert entries
     const locs = Object.keys(horizontalFeeds).map(loc => parseInt(loc, 10))
     locs.sort((a, b) => a - b)
@@ -167,23 +171,26 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     <>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder>
-          {mixFeed.map((edge, i) =>
-            edge.__typename === 'HorizontalFeed' ? (
-              <edge.Feed />
-            ) : (
-              <List.Item key={edge.cursor}>
-                <ArticleDigestFeed
-                  article={edge.node}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: sortBy,
-                      location: i
-                    })
-                  }
-                />
-              </List.Item>
-            )
-          )}
+          {mixFeed.map((edge, i) => {
+            if (edge.__typename === 'HorizontalFeed') {
+              const { Feed } = edge
+              return <Feed first={3} key={i} />
+            } else {
+              return (
+                <List.Item key={i}>
+                  <ArticleDigestFeed
+                    article={edge.node}
+                    onClick={() =>
+                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                        type: sortBy,
+                        location: i
+                      })
+                    }
+                  />
+                </List.Item>
+              )
+            }
+          })}
         </List>
       </InfiniteScroll>
     </>
