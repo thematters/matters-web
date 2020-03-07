@@ -65,6 +65,10 @@ const Root = ({
     analytics.trackPage({ path: window.location.pathname })
   })
 
+  useEffect(() => {
+    analytics.identifyUser()
+  }, [])
+
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
 

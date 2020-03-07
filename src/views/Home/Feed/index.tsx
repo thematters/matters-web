@@ -8,8 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  useResponsive,
-  ViewMoreButton
+  useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -17,11 +16,34 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import Icymi from './Icymi'
 import SortBy from './SortBy'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { HottestFeed } from './__generated__/HottestFeed'
-import { NewestFeed } from './__generated__/NewestFeed'
+import {
+  HottestFeed,
+  HottestFeed_viewer_recommendation_feed_edges
+} from './__generated__/HottestFeed'
+import {
+  NewestFeed,
+  NewestFeed_viewer_recommendation_feed_edges
+} from './__generated__/NewestFeed'
+
+type HorizontalFeed = React.FC<{ after?: string; first?: number }>
+
+interface FeedEdge {
+  __typename: 'HorizontalFeed'
+  Feed: HorizontalFeed
+}
+interface FeedLocation {
+  [key: number]: HorizontalFeed
+}
+
+const horizontalFeeds: FeedLocation = {
+  2: Icymi,
+  5: Icymi,
+  8: Icymi
+}
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -71,11 +93,15 @@ export const queries = {
 
 type SortBy = 'hottest' | 'newest'
 
-const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
+const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isLargeUp = useResponsive('lg-up')
-  const { data, error, loading, fetchMore, networkStatus } = useQuery<
-    HottestFeed | NewestFeed
-  >(queries[sortBy], {
+  const {
+    data,
+    error,
+    loading,
+    fetchMore: fetchMoreMainFeed,
+    networkStatus
+  } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true
   })
 
@@ -101,7 +127,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
       type: sortBy,
       location: edges.length
     })
-    return fetchMore({
+    return fetchMoreMainFeed({
       variables: {
         after: pageInfo.endCursor
       },
@@ -115,32 +141,51 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     })
   }
 
+  // insert other feeds
+  const mixFeed: Array<
+    | FeedEdge
+    | HottestFeed_viewer_recommendation_feed_edges
+    | NewestFeed_viewer_recommendation_feed_edges
+  > = edges
+  if (!isLargeUp) {
+    // get insert entries
+    const locs = Object.keys(horizontalFeeds).map(loc => parseInt(loc, 10))
+    locs.sort((a, b) => a - b)
+
+    // insert feed
+    locs.map(loc => {
+      if (mixFeed.length >= loc) {
+        mixFeed.splice(loc, 0, {
+          Feed: (horizontalFeeds as FeedLocation)[loc],
+          __typename: 'HorizontalFeed'
+        })
+      }
+    })
+  }
+
   return (
     <>
-      <InfiniteScroll
-        hasNextPage={isLargeUp && pageInfo.hasNextPage}
-        loadMore={loadMore}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: sortBy,
-                    location: i
-                  })
-                }
-              />
-            </List.Item>
-          ))}
+          {mixFeed.map((edge, i) =>
+            edge.__typename === 'HorizontalFeed' ? (
+              <edge.Feed />
+            ) : (
+              <List.Item key={edge.cursor}>
+                <ArticleDigestFeed
+                  article={edge.node}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: sortBy,
+                      location: i
+                    })
+                  }
+                />
+              </List.Item>
+            )
+          )}
         </List>
       </InfiniteScroll>
-
-      {!isLargeUp && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={loadMore} loading={loading} />
-      )}
     </>
   )
 }
@@ -165,7 +210,7 @@ const HomeFeed = () => {
     <>
       <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
 
-      <Feed feedSortType={feedSortType as SortBy} />
+      <MainFeed feedSortType={feedSortType as SortBy} />
     </>
   )
 }
