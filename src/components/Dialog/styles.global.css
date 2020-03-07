@@ -22,7 +22,6 @@
   right: 0;
 
   outline: none;
-  will-change: transform;
 
   @media (--sm-up) {
     position: relative;
@@ -30,6 +29,5 @@
     left: auto;
     right: auto;
     width: 100%;
-    will-change: initial;
   }
 }
