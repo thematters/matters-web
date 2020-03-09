@@ -13,7 +13,6 @@ import {
 import { useMutation } from '~/components/GQL'
 
 import {
-  randomString,
   translate,
   validateAvatar,
   validateDescription,
@@ -56,7 +55,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'sign-up-profile-form'
 
   const {
     values,

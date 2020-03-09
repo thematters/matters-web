@@ -1,0 +1,23 @@
+.context {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: var(--spacing-base);
+}
+
+form {
+  flex-grow: 1;
+  position: relative;
+  overflow-y: auto;
+
+  & :global(.ql-editor) {
+    min-height: 50vh;
+
+    @media (--sm-up) {
+      min-height: auto;
+    }
+  }
+
+  @media (--sm-up) {
+    height: 40vh;
+  }
+}

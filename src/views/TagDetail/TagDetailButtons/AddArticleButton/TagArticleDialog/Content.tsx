@@ -16,7 +16,7 @@ import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
-import { parseFormSubmitErrors, randomString, translate } from '~/common/utils'
+import { parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -74,7 +74,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
 
-  const formId = randomString()
+  const formId = 'put-article-tag-form'
 
   const {
     values,

@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
 
 import {
   Dialog,
@@ -8,20 +7,25 @@ import {
   RowRendererProps,
   Spinner,
   Translate,
-  UserDigest,
   useResponsive
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import { UserDigest } from '~/components/UserDigest'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { AllArticleAppreciators } from './__generated__/AllArticleAppreciators'
+import { ArticleAppreciators } from './__generated__/ArticleAppreciators'
+
+interface AppreciatorsDialogContentProps {
+  mediaHash: string
+  closeDialog: () => void
+}
 
 const ARTICLE_APPRECIATORS = gql`
-  query AllArticleAppreciators($mediaHash: String, $after: String) {
+  query ArticleAppreciators($mediaHash: String, $after: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       appreciationsReceived(input: { first: 10, after: $after }) {
@@ -74,14 +78,11 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
 }
 
 const AppreciatorsDialogContent = ({
+  mediaHash,
   closeDialog
-}: {
-  closeDialog: () => void
-}) => {
+}: AppreciatorsDialogContentProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data, loading, error, fetchMore } = useQuery<AllArticleAppreciators>(
+  const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
     ARTICLE_APPRECIATORS,
     { variables: { mediaHash } }
   )

@@ -7,7 +7,6 @@ import { useMutation } from '~/components/GQL'
 
 import {
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateComparedUserName,
   validateUserName
@@ -38,7 +37,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
 
-  const formId = randomString()
+  const formId = 'username-confirm-form'
 
   const {
     values,

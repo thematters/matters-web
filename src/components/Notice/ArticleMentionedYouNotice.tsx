@@ -5,7 +5,7 @@ import { Translate } from '~/components'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
 import styles from './styles.css'
 
 import { ArticleMentionedYouNotice as NoticeType } from './__generated__/ArticleMentionedYouNotice'
@@ -14,18 +14,16 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} key={notice.actor.id} />
+        <NoticeActorAvatar user={notice.actor} />
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
           <Translate zh_hant="在作品中提及了你" zh_hans="在作品中提及了你" />
-        </h4>
+        </NoticeHead>
 
-        <NoticeArticle article={notice.target} />
-
-        <NoticeDate notice={notice} />
+        <NoticeArticle article={notice.target} isBlock />
       </section>
 
       <style jsx>{styles}</style>
@@ -39,7 +37,7 @@ ArticleMentionedYouNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actor {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -51,7 +49,7 @@ ArticleMentionedYouNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 

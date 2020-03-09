@@ -3,11 +3,8 @@
   justify-content: flex-start;
   align-items: center;
 
-  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
-    var(--spacing-x-loose);
-
   color: var(--color-grey-dark);
-  font-size: var(--font-size-sm-s);
+  font-size: var(--font-size-sm);
 }
 
 .reply-to {

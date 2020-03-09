@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
@@ -6,7 +5,8 @@ import { Translate } from '~/components'
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
-import NoticeDate from './NoticeDate'
+import NoticeCollectionArticle from './NoticeCollectionArticle'
+import NoticeHead from './NoticeHead'
 import styles from './styles.css'
 
 import { ArticleNewCollectedNotice as NoticeType } from './__generated__/ArticleNewCollectedNotice'
@@ -16,28 +16,21 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
     return null
   }
 
-  const avatarWrapClasses = classNames({
-    'avatar-wrap': true
-  })
-
   return (
     <section className="container">
-      <section className={avatarWrapClasses}>
+      <section className="avatar-wrap">
         <NoticeActorAvatar user={notice.actor} />
       </section>
 
       <section className="content-wrap">
-        <h4>
-          <Translate zh_hant="恭喜！你的大作" zh_hans="恭喜！你的大作" />{' '}
-          <NoticeArticle article={notice.target} />{' '}
-          <Translate zh_hant="已被" zh_hans="已被" />{' '}
+        <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate zh_hant="在其作品" zh_hans="在其作品" />{' '}
-          <NoticeArticle article={notice.collection} />{' '}
-          <Translate zh_hant="中關聯推薦" zh_hans="中关联推荐" />
-        </h4>
+          <Translate zh_hant="關聯了你的作品" zh_hans="关联了你的作品" />
+        </NoticeHead>
 
-        <NoticeDate notice={notice} />
+        <NoticeArticle article={notice.target} isBlock />
+
+        <NoticeCollectionArticle article={notice.collection} />
       </section>
 
       <style jsx>{styles}</style>
@@ -51,13 +44,13 @@ ArticleNewCollectedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actor {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
       collection {
-        ...NoticeArticle
+        ...NoticeCollectionArticle
       }
       target {
         ...NoticeArticle
@@ -66,7 +59,8 @@ ArticleNewCollectedNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeDate.fragments.notice}
+    ${NoticeCollectionArticle.fragments.article}
+    ${NoticeHead.fragments.date}
   `
 }
 

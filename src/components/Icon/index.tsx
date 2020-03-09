@@ -17,6 +17,7 @@ import { ReactComponent as Trends } from '~/static/icons/trends.svg'
 import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
+import { ReactComponent as AvatarLogo } from './icons/avatar-logo.svg'
 import { ReactComponent as BookmarkActive } from './icons/bookmark-active.svg'
 import { ReactComponent as BookmarkMedium } from './icons/bookmark-md.svg'
 import { ReactComponent as Bookmark } from './icons/bookmark.svg'
@@ -131,6 +132,7 @@ export const Icon = {
   Add: withIcon(Add),
   AddMedium: withIcon(AddMedium),
   ArchiveMedium: withIcon(ArchiveMedium),
+  AvatarLogo: withIcon(AvatarLogo),
   Bookmark: withIcon(Bookmark),
   BookmarkActive: withIcon(BookmarkActive),
   BookmarkMedium: withIcon(BookmarkMedium),

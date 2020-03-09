@@ -3,8 +3,6 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { Icon } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
-import { randomString } from '~/common/utils'
-
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -24,8 +22,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = randomString()
-  const fieldMsgId = randomString()
+  const fieldId = `field-${name}`
+  const fieldMsgId = `field-msg-${name}`
 
   return (
     <Field>

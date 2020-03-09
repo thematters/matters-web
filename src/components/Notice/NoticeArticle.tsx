@@ -1,11 +1,19 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { ArticleDigestTitle } from '~/components'
+
 import { toPath } from '~/common/utils'
 
 import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticle'
 
-const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
+const NoticeArticle = ({
+  article,
+  isBlock = false
+}: {
+  article: NoticeArticleType | null
+  isBlock?: boolean
+}) => {
   if (!article) {
     return null
   }
@@ -15,25 +23,24 @@ const NoticeArticle = ({ article }: { article: NoticeArticleType | null }) => {
     article
   })
 
-  return (
-    <Link {...path}>
-      <a>{article.title}</a>
-    </Link>
-  )
+  if (!isBlock) {
+    return (
+      <Link {...path}>
+        <a>{article.title}</a>
+      </Link>
+    )
+  }
+
+  return <ArticleDigestTitle article={article} textSize="md-s" />
 }
 
 NoticeArticle.fragments = {
   article: gql`
     fragment NoticeArticle on Article {
       id
-      title
-      slug
-      mediaHash
-      author {
-        id
-        userName
-      }
+      ...ArticleDigestTitleArticle
     }
+    ${ArticleDigestTitle.fragments.article}
   `
 }
 

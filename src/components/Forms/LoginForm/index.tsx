@@ -17,7 +17,6 @@ import {
   analytics,
   // clearPersistCache,
   parseFormSubmitErrors,
-  randomString,
   redirectToTarget,
   translate,
   validateEmail,
@@ -62,7 +61,7 @@ export const LoginForm: React.FC<FormProps> = ({
 
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'login-form'
 
   const {
     values,

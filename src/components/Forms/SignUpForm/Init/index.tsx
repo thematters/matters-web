@@ -25,7 +25,6 @@ import {
   analytics,
   appendTarget,
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateCode,
   validateEmail,
@@ -94,7 +93,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'sign-up-init-form'
 
   const {
     values,

@@ -6,16 +6,7 @@ import { BREAKPOINTS } from '~/common/enums'
 
 import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
-type Type =
-  | 'sm-down'
-  | 'sm-up'
-  | 'md-up'
-  | 'lg-up'
-  | 'sm'
-  | 'xs'
-  | 'md'
-  | 'lg'
-  | 'xl'
+type Type = 'sm-down' | 'sm-up' | 'md-up' | 'lg-up' | 'sm' | 'xs' | 'md' | 'lg'
 
 export const useResponsive = (type: Type) => {
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
@@ -49,8 +40,6 @@ export const useResponsive = (type: Type) => {
     case 'md':
       return width >= BREAKPOINTS.MD && width < BREAKPOINTS.LG - 1
     case 'lg':
-      return width >= BREAKPOINTS.LG && width < BREAKPOINTS.XL - 1
-    case 'xl':
-      return width >= BREAKPOINTS.XL
+      return width >= BREAKPOINTS.LG
   }
 }
