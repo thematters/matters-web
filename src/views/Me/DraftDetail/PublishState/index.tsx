@@ -12,7 +12,7 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   const isError = draft.publishState === 'error'
   const isPublished = draft.publishState === 'published'
 
-  if (!isPending || !isError || !isPublished) {
+  if (!isPending && !isError && !isPublished) {
     return null
   }
 

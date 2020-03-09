@@ -9,7 +9,7 @@ import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
-import { getQuery } from '~/common/utils'
+import { getQuery, stripHtml } from '~/common/utils'
 
 import PublishButton from './PublishButton'
 import PublishState from './PublishState'
@@ -83,7 +83,12 @@ const DraftDetail = () => {
     return <Throw404 />
   }
 
-  const draft = data?.node?.__typename === 'Draft' && data.node
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
+  const hasContent =
+    draft?.content && stripHtml(draft.content).trim().length > 0
+  const hasTitle = draft?.title && draft.title.length > 0
+  const isUnpublished = draft?.publishState === 'unpublished'
+  const publishable = id && isUnpublished && hasContent && hasTitle
 
   const upload = async (input: { [key: string]: any }) => {
     const result = await singleFileUpload({
@@ -112,12 +117,12 @@ const DraftDetail = () => {
     coverAssetId?: string | null
   }) => {
     try {
-      if (draft && draft.publishState === 'published') {
+      if (draft?.publishState === 'published') {
         return
       }
 
       setSaveStatus('saving')
-      await updateDraft({ variables: { id: draft && draft.id, ...newDraft } })
+      await updateDraft({ variables: { id: draft?.id, ...newDraft } })
       setSaveStatus('saved')
     } catch (error) {
       setSaveStatus('saveFailed')
@@ -138,8 +143,7 @@ const DraftDetail = () => {
         right={
           <>
             <SaveStatus status={saveStatus} />
-
-            {draft && <PublishButton />}
+            {draft && <PublishButton disabled={!publishable} />}
           </>
         }
         marginBottom={0}

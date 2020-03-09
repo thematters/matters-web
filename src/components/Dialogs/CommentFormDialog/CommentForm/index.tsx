@@ -8,7 +8,13 @@ import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, ANALYTICS_EVENTS, TEXT, TextId } from '~/common/enums'
-import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
+import {
+  analytics,
+  dom,
+  stripHtml,
+  subscribePush,
+  trimLineBreaks
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -80,8 +86,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-
-  const isValid = !!trimLineBreaks(content)
+  const isValid = stripHtml(content).trim().length > 0
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)

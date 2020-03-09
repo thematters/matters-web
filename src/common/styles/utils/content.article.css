@@ -373,6 +373,10 @@
     cursor: pointer;
     stroke: var(--color-black);
   }
+
+  @media (--md-up) {
+    margin-left: var(--spacing-x-loose);
+  }
 }
 
 .toolbar-expanded {

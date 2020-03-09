@@ -67,9 +67,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
     try {
       const { data } = await upload({
-        variables: {
-          input: { file, type: 'profileCover', entityType: 'user' }
-        }
+        variables: { input: { file, type: 'profileCover', entityType: 'user' } }
       })
       const id = data?.singleFileUpload.id
       const path = data?.singleFileUpload.path
