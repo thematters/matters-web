@@ -187,6 +187,7 @@ const UserComments = ({ user }: UserIdUser) => {
                         avatarSize="md"
                         hasCreatedAt
                         hasLink
+                        inCard
                       />
                     </Card>
                   </List.Item>

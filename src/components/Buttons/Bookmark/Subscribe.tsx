@@ -13,15 +13,14 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-const Subscribe = ({
-  articleId,
-  size,
-  disabled
-}: {
+interface SubscribeProps {
   articleId: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-}) => {
+  inCard: boolean
+}
+
+const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
@@ -69,7 +68,7 @@ const Subscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor="grey-lighter"
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
       aria-label="收藏"
       onClick={onClick}
       disabled={disabled}

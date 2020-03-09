@@ -258,6 +258,14 @@ span.container {
     }
   }
 }
+.bg-active-grey-lighter-active {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      background: var(--color-grey-lighter-active);
+    }
+  }
+}
 .bg-active-green {
   &:hover,
   &:focus {

@@ -14,6 +14,7 @@ import { FooterActionsComment } from './__generated__/FooterActionsComment'
 export type FooterActionsControls = {
   hasReply?: boolean
   hasCreatedAt?: boolean
+  inCard?: boolean
 } & CreatedAtControls &
   Pick<ReplyButtonProps, 'commentCallback'>
 
@@ -44,6 +45,7 @@ const FooterActions = ({
   hasReply,
   hasLink,
   hasCreatedAt,
+  inCard = false,
 
   ...replyButtonProps
 }: FooterActionsProps) => {
@@ -63,6 +65,7 @@ const FooterActions = ({
               <ReplyButton
                 comment={comment}
                 openLikeCoinDialog={openLikeCoinDialog}
+                inCard={inCard}
                 {...replyButtonProps}
               />
             )}
@@ -73,6 +76,7 @@ const FooterActions = ({
                 viewer.shouldSetupLikerID ? openLikeCoinDialog : undefined
               }
               disabled={isDisabled}
+              inCard={inCard}
             />
 
             <DownvoteButton
@@ -81,6 +85,7 @@ const FooterActions = ({
                 viewer.shouldSetupLikerID ? openLikeCoinDialog : undefined
               }
               disabled={isDisabled}
+              inCard={inCard}
             />
           </section>
         )}

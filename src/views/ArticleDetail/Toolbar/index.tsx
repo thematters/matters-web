@@ -48,9 +48,14 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
       </section>
 
       <section className="buttons">
-        <BookmarkButton article={article} size="md-s" />
-        <ShareButton size="md-s" />
-        <DropdownActions article={article} color="black" size="md-s" />
+        <BookmarkButton article={article} size="md-s" inCard={false} />
+        <ShareButton size="md-s" inCard={false} />
+        <DropdownActions
+          article={article}
+          color="black"
+          size="md-s"
+          inCard={false}
+        />
       </section>
 
       <style jsx>{styles}</style>

@@ -97,7 +97,7 @@ const FollowComment = ({
         </Card>
       </section>
 
-      <Comment.FooterActions comment={comment} />
+      <Comment.FooterActions comment={comment} inCard />
 
       <style jsx>{styles}</style>
     </Card>

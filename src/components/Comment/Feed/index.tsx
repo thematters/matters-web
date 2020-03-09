@@ -108,7 +108,7 @@ export const Feed = ({
 
         <section className="right">
           <PinnedLabel comment={comment} />
-          <DropdownActions comment={comment} />
+          <DropdownActions comment={comment} inCard={actionControls.inCard} />
         </section>
       </header>
 

@@ -29,6 +29,7 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
+  inCard?: boolean
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
@@ -84,6 +85,7 @@ const BaseDropdownActions = ({
   hasSticky,
   hasArchive,
   hasRemoveTag,
+  inCard,
   inTagDetailLatest,
   inTagDetailSelected,
 
@@ -130,7 +132,7 @@ const BaseDropdownActions = ({
       {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}

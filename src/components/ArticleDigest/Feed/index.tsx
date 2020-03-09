@@ -134,6 +134,7 @@ export const ArticleDigestFeed = ({
 
       <FooterActions
         article={article}
+        inCard
         inTagDetailLatest={inTagDetailLatest}
         inTagDetailSelected={inTagDetailSelected}
         inUserArticles={inUserArticles}

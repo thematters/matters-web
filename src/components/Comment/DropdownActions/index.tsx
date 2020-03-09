@@ -24,6 +24,7 @@ import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 
 interface DropdownActionsProps {
   comment: DropdownActionsComment
+  inCard?: boolean
 }
 
 interface Controls {
@@ -74,6 +75,7 @@ const fragments = {
 
 const BaseDropdownActions = ({
   comment,
+  inCard,
 
   hasPin,
   hasEdit,
@@ -116,7 +118,7 @@ const BaseDropdownActions = ({
       {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
+          bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
           compensation="right"
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"

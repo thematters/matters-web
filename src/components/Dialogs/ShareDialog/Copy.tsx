@@ -43,7 +43,7 @@ const Copy = ({ link }: { link: string }) => {
     <section className="copy">
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor="grey-lighter"
+        bgActiveColor="green-lighter"
         aira-label="複製"
         onClick={copy}
       >
