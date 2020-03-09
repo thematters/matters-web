@@ -1,5 +1,5 @@
 .content {
-  padding: var(--spacing-xxx-loose);
+  margin-top: var(--spacing-xx-loose);
   text-align: center;
 
   & h2 {
@@ -11,9 +11,5 @@
     margin-top: var(--spacing-x-tight);
     font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
-  }
-
-  @media (--md-up) {
-    padding: 5rem var(--spacing-xxx-loose) 9rem;
   }
 }

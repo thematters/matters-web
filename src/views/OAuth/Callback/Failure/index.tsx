@@ -7,7 +7,7 @@ import { getQuery } from '~/common/utils'
 import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
 
 import { Box } from '../../Box'
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
@@ -49,21 +49,25 @@ const OAuthCallbackFailure = () => {
 
   return (
     <Layout>
-      <Box avatar={avatar[provider]} title={title[provider]}>
-        <section className="content">
-          <h2>
-            <Translate zh_hant="出錯了" zh_hans="出错了" />
-          </h2>
+      <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-          {errorDetail && (
-            <p>
-              <Translate {...errorDetail} />
-            </p>
-          )}
+      <Layout.Spacing>
+        <Box avatar={avatar[provider]} title={title[provider]}>
+          <section className="content">
+            <h2>
+              <Translate zh_hant="出錯了" zh_hans="出错了" />
+            </h2>
 
-          <style jsx>{styles}</style>
-        </section>
-      </Box>
+            {errorDetail && (
+              <p>
+                <Translate {...errorDetail} />
+              </p>
+            )}
+
+            <style jsx>{styles}</style>
+          </section>
+        </Box>
+      </Layout.Spacing>
     </Layout>
   )
 }

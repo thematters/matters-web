@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useContext } from 'react'
 
-import { Button, Icon, IconSize, Translate } from '~/components'
+import { Button, Icon, IconSize, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -21,6 +22,7 @@ const Subscribe = ({
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -43,7 +45,7 @@ const Subscribe = ({
     await subscribe()
 
     // skip
-    if (!push || !push.supported || push.enabled) {
+    if (!push || !push.supported || push.enabled || !viewer.isAuthed) {
       return
     }
 

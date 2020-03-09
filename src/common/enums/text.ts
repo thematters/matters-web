@@ -199,6 +199,7 @@ export const TEXT = {
     termHint: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
     TOKEN_INVALID: '登入信息已失效，請重新登入',
     topic: '話題',
+    oauthAuthorize: '應用授權',
     uiSetting: '介面設定',
     UNABLE_TO_UPLOAD_FROM_URL:
       '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳',
@@ -429,6 +430,7 @@ export const TEXT = {
     termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
     TOKEN_INVALID: '登录信息已失效，请重新登录',
     topic: '话题',
+    oauthAuthorize: '应用授权',
     uiSetting: '界面设定',
     UNABLE_TO_UPLOAD_FROM_URL:
       '文件上传失败，请确认文件链接是否有效，或手动下载后再上传',
