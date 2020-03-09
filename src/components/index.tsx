@@ -31,7 +31,6 @@ export * from './Layout'
 export * from './Head'
 export * from './Throw404'
 export * from './Protected'
-export * from './ErrorPage'
 export * from './ErrorBoundary'
 
 export * from './Empty'
