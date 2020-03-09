@@ -71,8 +71,8 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
         right={
           <>
             <Layout.Header.Title
-              zh_hant={data.node.content}
-              zh_hans={data.node.content}
+              zh_hant={`#${data.node.content}`}
+              zh_hans={`#${data.node.content}`}
             />
 
             {canEdit && (
@@ -91,7 +91,9 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <Head title={`#${data.node.content}`} />
 
-      <p className="description">{data.node.description}</p>
+      {data.node.description && (
+        <p className="description">{data.node.description}</p>
+      )}
 
       <Tabs spacingBottom="base">
         {hasSelected > 0 && (

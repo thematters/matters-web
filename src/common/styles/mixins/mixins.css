@@ -173,6 +173,16 @@
   }
 }
 
+@define-mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+
+  &::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+  }
+}
+
 @define-mixin unread-dot {
   position: relative;
 

@@ -19,6 +19,7 @@
 
   &:not(.inSidebar) {
     & ul {
+      @mixin hide-scrollbar;
       display: flex;
 
       overflow-x: scroll;

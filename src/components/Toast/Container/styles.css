@@ -1,6 +1,6 @@
 .toast-container {
   position: fixed;
-  top: var(--spacing-x-tight);
+  top: calc(var(--global-header-height) + var(--spacing-base));
   left: 0;
   right: 0;
 

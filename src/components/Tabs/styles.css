@@ -4,8 +4,6 @@ nav {
 
   padding: 0 var(--spacing-base);
   white-space: nowrap;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 
   &::after {
     content: '';
@@ -34,6 +32,12 @@ nav {
   &.spacing-bottom-xxloose {
     margin-bottom: var(--spacing-xx-loose);
   }
+}
+
+ul {
+  @mixin hide-scrollbar;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 li {
