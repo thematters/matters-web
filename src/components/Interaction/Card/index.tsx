@@ -1,8 +1,8 @@
 import classNames from 'classnames'
-import Router from 'next/router'
 import { useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
+import { routerPush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -75,7 +75,7 @@ export const Card: React.FC<CardProps> = ({
       if (newTab) {
         window.open(as, '_blank')
       } else {
-        Router.push(href, as).then(() => window.scrollTo(0, 0))
+        routerPush(href, as)
       }
     }
 

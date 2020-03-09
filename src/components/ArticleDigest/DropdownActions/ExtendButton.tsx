@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { useContext } from 'react'
 
 import { Icon, LanguageContext, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { toPath, translate } from '~/common/utils'
+import { routerPush, toPath, translate } from '~/common/utils'
 
 import { ExtendArticle } from './__generated__/ExtendArticle'
 import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
@@ -45,7 +44,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
 
         if (slug && id) {
           const path = toPath({ page: 'draftDetail', slug, id })
-          Router.push(path.as).then(() => window.scrollTo(0, 0))
+          routerPush(path.href, path.as)
         }
       }}
     >

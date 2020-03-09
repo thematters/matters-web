@@ -216,10 +216,10 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return Router.push(
+  return routerPush(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
     `${PATHS.AUTH_LOGIN.as}?target=${target}`
-  ).then(() => window.scrollTo(0, 0))
+  )
 }
 
 /**
@@ -254,4 +254,21 @@ export const appendTarget = ({
       as
     }
   }
+}
+
+/**
+ * Scroll to page top after `Route.push`
+ *
+ * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
+ * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
+ */
+export const routerPush = (href: string, as?: string) => {
+  Router.push(href, as).then((success: boolean) => {
+    if (!success) {
+      return
+    }
+
+    window.scrollTo(0, 0)
+    document.body.focus()
+  })
 }
