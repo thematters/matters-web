@@ -12,7 +12,7 @@ import {
   useResponsive
 } from '~/components'
 
-import { KEYCODES, TEXT } from '~/common/enums'
+import { KEYCODES, TEXT, TextId } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -57,7 +57,7 @@ type DropdownDialogProps = {
   dropdown: Omit<PopperProps, 'children'>
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
     content: React.ReactNode
-    title: string | React.ReactNode
+    title: React.ReactElement | TextId
   }
 } & DropdownDialogChildren
 

@@ -9,7 +9,6 @@ import {
   DropdownDialog,
   Icon,
   Menu,
-  Translate,
   ViewerContext
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
@@ -111,7 +110,7 @@ const BaseDropdownActions = ({
       }}
       dialog={{
         content: <Content />,
-        title: <Translate id="moreActions" />
+        title: 'moreActions'
       }}
     >
       {({ open, ref }) => (
@@ -163,7 +162,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       commentId={comment.id}
       articleId={comment.article.id}
       defaultContent={comment.content}
-      title={<Translate id="editComment" />}
+      title="editComment"
     >
       {({ open: openEditCommentDialog }) => (
         <DeleteComment.Dialog commentId={comment.id}>

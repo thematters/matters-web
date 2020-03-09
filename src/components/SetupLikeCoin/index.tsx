@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, PageHeader, SignUpComplete, Translate } from '~/components'
+import { Dialog, Layout, SignUpComplete } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -49,14 +49,17 @@ export const SetupLikeCoin: React.FC<Props> = ({
   return (
     <>
       {isInPage && (
-        <PageHeader title={<Translate id="setupLikeCoin" />} hasNoBorder />
+        <Layout.Header
+          left={
+            <>
+              <Layout.Header.Title id="setupLikeCoin" />
+            </>
+          }
+        />
       )}
 
       {isInDialog && closeDialog && (
-        <Dialog.Header
-          title={<Translate id="setupLikeCoin" />}
-          close={closeDialog}
-        />
+        <Dialog.Header title="setupLikeCoin" close={closeDialog} />
       )}
 
       {step === 'select' && (

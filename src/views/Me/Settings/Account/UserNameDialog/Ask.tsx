@@ -7,14 +7,10 @@ interface AskProps {
 
 const Ask = ({ nextStep, closeDialog }: AskProps) => (
   <>
-    <Dialog.Header
-      title={<Translate id="changeUserName" />}
-      close={closeDialog}
-      headerHidden
-    />
+    <Dialog.Header title="changeUserName" close={closeDialog} headerHidden />
 
     <Dialog.Message
-      headline={<Translate id="changeUserName" />}
+      headline="changeUserName"
       description={
         <Translate
           zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"

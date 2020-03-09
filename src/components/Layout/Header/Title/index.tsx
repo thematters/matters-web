@@ -2,9 +2,10 @@ import { Translate, TranslateProps } from '~/components'
 
 import styles from './styles.css'
 
-const Title: React.FC<TranslateProps> = props => (
+const Title: React.FC<TranslateProps> = ({ children, ...props }) => (
   <h1>
-    <Translate {...props} />
+    {children ? children : <Translate {...props} />}
+
     <style jsx>{styles}</style>
   </h1>
 )

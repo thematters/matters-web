@@ -72,14 +72,10 @@ const ArchiveArticleDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} size="sm">
-        <Dialog.Header
-          title={<Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />}
-          close={close}
-          headerHidden
-        />
+        <Dialog.Header title="hide" close={close} headerHidden />
 
         <Dialog.Message
-          headline={<Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />}
+          headline="hide"
           description={
             <>
               <Translate

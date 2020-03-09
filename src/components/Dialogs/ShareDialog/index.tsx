@@ -70,11 +70,7 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
       {children({ open: onShare })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
-        <Dialog.Header
-          title={<Translate id="share" />}
-          close={close}
-          headerHidden
-        />
+        <Dialog.Header title="share" close={close} headerHidden />
 
         <Dialog.Content spacing={[0, 0]}>
           <section className="socials-container">

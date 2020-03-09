@@ -8,7 +8,7 @@ const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
         size="md"
         spacing="base"
       >
-        <Translate zh_hant="站內隱藏" zh_hans="站内隐藏" />
+        <Translate id="hide" />
       </TextIcon>
     </Menu.Item>
   )

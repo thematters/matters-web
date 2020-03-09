@@ -1,5 +1,4 @@
-import classNames from 'classnames'
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Head,
@@ -9,7 +8,6 @@ import {
   SignUpInitForm,
   SignUpProfileForm
 } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import styles from '../styles.css'
 
@@ -18,23 +16,11 @@ type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
 
-  const { updateHeaderState } = useContext(HeaderContext)
-
-  useEffect(() => {
-    updateHeaderState({ type: 'signUp' })
-    return () => updateHeaderState({ type: 'default' })
-  }, [])
-
-  const containerClass = classNames({
-    container: true,
-    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-4 l-offset-md-2 l-col-lg-6 l-offset-lg-3': true
-  })
-
   return (
-    <Layout>
-      <Head title={{ id: 'register' }} />
+    <div className="auth-page">
+      <Layout>
+        <Head title={{ id: 'register' }} />
 
-      <section className={containerClass}>
         {step === 'signUp' && (
           <SignUpInitForm
             purpose="page"
@@ -63,10 +49,10 @@ const SignUp = () => {
         )}
 
         {step === 'complete' && <SignUpComplete purpose="page" />}
-      </section>
+      </Layout>
 
       <style jsx>{styles}</style>
-    </Layout>
+    </div>
   )
 }
 

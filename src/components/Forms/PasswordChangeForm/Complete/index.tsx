@@ -1,4 +1,4 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
@@ -15,26 +15,20 @@ export const PasswordChangeComplete: React.FC<Props> = ({
   closeDialog
 }) => {
   const isForget = type === 'forget'
-
-  const Title = isForget ? (
-    <Translate id="resetPassword" />
-  ) : (
-    <Translate id="changePassword" />
-  )
-
-  const Description = isForget ? (
-    <Translate id="successResetPassword" />
-  ) : (
-    <Translate id="successChangePassword" />
-  )
+  const titleId = isForget ? 'resetPassword' : 'changePassword'
+  const descriptionId = isForget
+    ? 'successResetPassword'
+    : 'successChangePassword'
 
   return (
     <>
+      <Layout.Header left={<Layout.Header.Title id={titleId} />} />
+
       {closeDialog && (
-        <Dialog.Header title={Title} close={closeDialog} headerHidden />
+        <Dialog.Header title={titleId} close={closeDialog} headerHidden />
       )}
 
-      <Dialog.Message headline={Title} description={Description} />
+      <Dialog.Message headline={titleId} description={descriptionId} />
 
       <Dialog.Footer>
         {isForget && (

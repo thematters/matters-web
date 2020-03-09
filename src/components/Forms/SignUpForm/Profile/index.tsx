@@ -3,13 +3,7 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  PageHeader,
-  Translate
-} from '~/components'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
@@ -160,9 +154,15 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader title={<Translate id="register" />} hasNoBorder>
-          {SubmitButton}
-        </PageHeader>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id="register" />
+              {SubmitButton}
+            </>
+          }
+        />
 
         {InnerForm}
       </>
@@ -172,7 +172,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="register" />}
+          title="register"
           close={closeDialog}
           rightButton={SubmitButton}
         />

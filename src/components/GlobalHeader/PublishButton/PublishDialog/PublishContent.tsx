@@ -101,7 +101,7 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate id="publish" />}
+        title="publish"
         close={closeDialog}
         rightButton={SubmitButton}
       />

@@ -10,7 +10,6 @@ import {
   IconColor,
   IconSize,
   Menu,
-  Translate,
   ViewerContext
 } from '~/components'
 
@@ -125,7 +124,7 @@ const BaseDropdownActions = ({
       }}
       dialog={{
         content: <Content />,
-        title: <Translate id="moreActions" />
+        title: 'moreActions'
       }}
     >
       {({ open, ref }) => (

@@ -27,14 +27,10 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        <Dialog.Header
-          title={<Translate id="joinCivicLiker" />}
-          close={close}
-          headerHidden
-        />
+        <Dialog.Header title="joinCivicLiker" close={close} headerHidden />
 
         <Dialog.Message
-          headline={<Translate id="joinCivicLiker" />}
+          headline="joinCivicLiker"
           textAlign="left"
           description={
             <>

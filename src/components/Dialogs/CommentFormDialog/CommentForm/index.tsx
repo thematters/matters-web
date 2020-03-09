@@ -7,7 +7,7 @@ import { Button, Dialog, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT, TextId } from '~/common/enums'
 import { analytics, dom, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
@@ -48,7 +48,7 @@ export interface CommentFormProps {
   defaultContent?: string | null
   submitCallback?: () => void
   closeDialog: () => void
-  title?: React.ReactNode
+  title?: TextId
   context?: React.ReactNode
 }
 
@@ -61,7 +61,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   defaultContent,
   submitCallback,
   closeDialog,
-  title = <Translate id="putComment" />,
+  title = 'putComment',
   context
 }) => {
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||

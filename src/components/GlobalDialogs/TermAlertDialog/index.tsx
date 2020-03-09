@@ -90,10 +90,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Dialog.Header
-        title={<Translate id="termAndPrivacy" />}
-        close={closeDialog}
-      />
+      <Dialog.Header title="termAndPrivacy" close={closeDialog} />
 
       <Dialog.Content>
         <p className="hint">
