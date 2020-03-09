@@ -6,7 +6,7 @@ import styles from './styles.css'
 import Title from './Title'
 
 interface HeaderProps {
-  left: React.ReactNode
+  left?: React.ReactNode
   right?: React.ReactNode
 
   mode?: 'solid-fixed' | 'transparent-absolute'
@@ -34,8 +34,8 @@ const Header: React.FC<HeaderProps> & {
   return (
     <header className={headerClass}>
       <section className="content">
-        <section className="left">{left}</section>
-        <section className="right">{right}</section>
+        {left && <section className="left">{left}</section>}
+        {right && <section className="right">{right}</section>}
       </section>
 
       <style jsx>{styles}</style>

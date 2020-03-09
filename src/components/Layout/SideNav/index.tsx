@@ -22,6 +22,7 @@ import styles from './styles.css'
 
 const SideNav = () => {
   const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const viewerUserName = viewer.userName || ''
@@ -29,6 +30,7 @@ const SideNav = () => {
   const isInHome = router.pathname === PATHS.HOME.href
   const isInFollow = router.pathname === PATHS.FOLLOW.href
   const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
+  const isInSearch = router.pathname === PATHS.SEARCH.href
   const isInMe =
     router.asPath.indexOf(viewerUserName) >= 0 ||
     [
@@ -69,42 +71,57 @@ const SideNav = () => {
           {...PATHS.FOLLOW}
         />
 
-        <NavListItem
-          name={<Translate id="notification" />}
-          icon={<Icon.NotificationLarge size="lg" />}
-          activeIcon={<Icon.NotificationActiveLarge size="lg" />}
-          active={isInNotification}
-          isMediumUp={isMediumUp}
-          {...PATHS.ME_NOTIFICATIONS}
-        />
-
-        <Dropdown
-          content={
-            <section className="dropdown-menu">
-              <NavMenu.Top />
-              <Menu.Divider />
-              <NavMenu.Bottom />
-            </section>
-          }
-          placement="right"
-          distance={16}
-          appendTo={process.browser ? document.body : undefined}
-          zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-          onShown={i => {
-            hidePopperOnClick(i)
-          }}
-        >
+        {viewer.isAuthed && (
           <NavListItem
-            name={<Translate zh_hant="我的" zh_hans="我的" />}
-            icon={<MeAvatar user={viewer} />}
-            activeIcon={<MeAvatar user={viewer} active />}
-            active={isInMe}
+            name={<Translate id="notification" />}
+            icon={<Icon.NotificationLarge size="lg" />}
+            activeIcon={<Icon.NotificationActiveLarge size="lg" />}
+            active={isInNotification}
             isMediumUp={isMediumUp}
-            aira-haspopup="true"
+            {...PATHS.ME_NOTIFICATIONS}
           />
-        </Dropdown>
+        )}
 
-        {!isInDraftDetail && (
+        {!isLargeUp && (
+          <NavListItem
+            name={<Translate id="search" />}
+            icon={<Icon.SearchLarge size="lg" />}
+            activeIcon={<Icon.SearchLarge size="lg" color="green" />}
+            active={isInSearch}
+            isMediumUp={isMediumUp}
+            {...PATHS.SEARCH}
+          />
+        )}
+
+        {viewer.isAuthed && (
+          <Dropdown
+            content={
+              <section className="dropdown-menu">
+                <NavMenu.Top />
+                <Menu.Divider />
+                <NavMenu.Bottom />
+              </section>
+            }
+            placement="right"
+            distance={16}
+            appendTo={process.browser ? document.body : undefined}
+            zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+            onShown={i => {
+              hidePopperOnClick(i)
+            }}
+          >
+            <NavListItem
+              name={<Translate zh_hant="我的" zh_hans="我的" />}
+              icon={<MeAvatar user={viewer} />}
+              activeIcon={<MeAvatar user={viewer} active />}
+              active={isInMe}
+              isMediumUp={isMediumUp}
+              aira-haspopup="true"
+            />
+          </Dropdown>
+        )}
+
+        {viewer.isAuthed && !isInDraftDetail && (
           <li>
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}

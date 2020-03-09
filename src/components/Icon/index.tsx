@@ -175,8 +175,12 @@ export const Icon = {
   Like: withIcon(Like),
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
-  Logo: withIcon(Logo),
-  LogoGraph: withIcon(LogoGraph),
+  Logo: withIcon(props => (
+    <Logo style={{ width: 97, height: 20 }} {...props} />
+  )),
+  LogoGraph: withIcon(props => (
+    <LogoGraph style={{ width: 48, height: 33 }} {...props} />
+  )),
   LogoutMedium: withIcon(LogoutMedium),
   Max: withIcon(Max),
   Min: withIcon(Min),

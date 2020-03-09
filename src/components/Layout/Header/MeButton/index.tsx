@@ -10,6 +10,10 @@ const MeButton = () => {
   const [showNav, setShowNav] = useState(false)
   const close = () => setShowNav(false)
 
+  if (!viewer.isAuthed) {
+    return null
+  }
+
   return (
     <>
       <Button onClick={() => setShowNav(!showNav)}>

@@ -22,16 +22,6 @@
 
   & a {
     display: inline-flex;
-
-    & :global(svg) {
-      width: 48px;
-      height: 33px;
-
-      @media (--md-up) {
-        width: 97px;
-        height: 20px;
-      }
-    }
   }
 }
 

@@ -1,0 +1,9 @@
+.logo {
+  display: inline-flex;
+}
+
+.buttons {
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-loose);
+  }
+}

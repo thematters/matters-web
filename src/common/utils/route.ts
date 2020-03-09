@@ -216,7 +216,7 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return Router.push(
+  return Router.replace(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
     `${PATHS.AUTH_LOGIN.as}?target=${target}`
   )

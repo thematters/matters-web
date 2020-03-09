@@ -44,9 +44,7 @@ const Wall = ({ show }: WallProps) => {
             </p>
 
             <div className="signup">
-              <SignUpButton trackType={SIGNUP_TYPE.AD_WALL}>
-                <Translate zh_hant="註冊帳號" zh_hans="注册账号" />
-              </SignUpButton>
+              <SignUpButton trackType={SIGNUP_TYPE.AD_WALL} />
             </div>
 
             <div className="close">
