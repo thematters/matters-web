@@ -2,8 +2,5 @@
   position: sticky;
   top: calc(var(--global-header-height) + var(--spacing-base));
 
-  margin-top: calc(var(--spacing-xx-loose) * -1);
-  margin-bottom: var(--spacing-loose);
-
   z-index: 10;
 }

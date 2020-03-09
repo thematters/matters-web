@@ -1,4 +1,5 @@
 footer {
+  margin-bottom: var(--spacing-xx-loose);
   color: var(--color-grey);
   font-size: var(--font-size-sm-s);
 

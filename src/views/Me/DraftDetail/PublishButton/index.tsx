@@ -1,18 +1,21 @@
-import { Button, Icon, LikeCoinDialog, TextIcon, Translate } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Button,
+  LikeCoinDialog,
+  TextIcon,
+  Translate,
+  ViewerContext
+} from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { PublishDialog } from './PublishDialog'
 
-interface Props {
-  allowed: boolean
-}
-
 const PublishButton = ({ open }: { open: () => void }) => (
   <Button
-    spacing={[0, 'base']}
-    size={[null, '2.25rem']}
+    size={['4rem', '2rem']}
     bgColor="green"
     onClick={() => {
       analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
@@ -20,14 +23,16 @@ const PublishButton = ({ open }: { open: () => void }) => (
     }}
     aria-haspopup="true"
   >
-    <TextIcon color="white" icon={<Icon.Pen />} weight="md">
+    <TextIcon color="white" size="md" weight="md">
       <Translate id="publish" />
     </TextIcon>
   </Button>
 )
 
-export default ({ allowed }: Props) => {
-  if (allowed) {
+const PublishButtonWithEffect = () => {
+  const viewer = useContext(ViewerContext)
+
+  if (!viewer.shouldSetupLikerID) {
     return (
       <PublishDialog>
         {({ open }) => <PublishButton open={open} />}
@@ -41,3 +46,5 @@ export default ({ allowed }: Props) => {
     </LikeCoinDialog>
   )
 }
+
+export default PublishButtonWithEffect

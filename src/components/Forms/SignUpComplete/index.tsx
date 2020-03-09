@@ -1,4 +1,4 @@
-import { Layout, Dialog, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'

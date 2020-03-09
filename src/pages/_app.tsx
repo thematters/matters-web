@@ -17,7 +17,6 @@ import {
 } from '~/components'
 import { ClientInfoUpdater } from '~/components/ClientInfoUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
-import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
@@ -84,16 +83,14 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        <HeaderContextProvider>
-          {children}
+        {children}
 
-          <GlobalDialogs />
-          <Toast.Container />
-          <ProgressBar />
+        <GlobalDialogs />
+        <Toast.Container />
+        <ProgressBar />
 
-          <AnalyticsListener user={viewer || {}} />
-          <PushInitializer client={client} />
-        </HeaderContextProvider>
+        <AnalyticsListener user={viewer || {}} />
+        <PushInitializer client={client} />
       </LanguageProvider>
     </ViewerProvider>
   )

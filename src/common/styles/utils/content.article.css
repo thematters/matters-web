@@ -6,9 +6,7 @@
 
 .editor-title {
   & input {
-    @mixin border-bottom-grey;
-    margin-bottom: var(--spacing-loose);
-    padding-bottom: var(--spacing-base);
+    margin-bottom: var(--spacing-base);
 
     font-size: var(--font-size-article-title);
     line-height: var(--line-height-article-title);
@@ -346,9 +344,9 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     right: auto;
-    left: calc((var(--side-toolbar-button-size) + var(--spacing-base)) * -1);
+    left: calc((var(--side-toolbar-button-size) + var(--spacing-x-loose)) * -1);
   }
 }
 

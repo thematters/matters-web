@@ -12,12 +12,14 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
   const isError = draft.publishState === 'error'
   const isPublished = draft.publishState === 'published'
 
+  if (!isPending || !isError || !isPublished) {
+    return null
+  }
+
   return (
     <section className="container">
       {isPending && <PendingState draft={draft} />}
-
       {isError && <ErrorState draft={draft} />}
-
       {isPublished && <PublishedState />}
 
       <style jsx>{styles}</style>
