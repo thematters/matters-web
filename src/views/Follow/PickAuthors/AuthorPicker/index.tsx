@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import {
@@ -40,17 +39,7 @@ const AUTHOR_PICKER = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-export const AuthorPicker = ({
-  title,
-  titleIs
-}: {
-  title: React.ReactNode
-  titleIs?: string
-}) => {
-  const containerStyle = classNames({
-    'sm-size-header': titleIs === 'span'
-  })
-
+export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
     AUTHOR_PICKER,
     {
@@ -61,7 +50,7 @@ export const AuthorPicker = ({
   const followeeCount = data?.viewer?.followees.totalCount || 0
 
   return (
-    <section className={containerStyle}>
+    <section className="container">
       <PageHeader title={title}>
         <section className="header-buttons">
           <Button
