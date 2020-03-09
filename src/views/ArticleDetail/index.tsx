@@ -225,23 +225,23 @@ const ArticleDetail = () => {
           }}
         />
 
-        {shouldShowWall && (
-          <>
-            <section id="comments" />
-            <Wall show={fixedWall} />
-          </>
-        )}
-
         {!shouldShowWall && (
           <section className="block">
             <DynamicResponse />
           </section>
         )}
 
-        {!isLargeUp && <RelatedArticles article={article} />}
+        {!isLargeUp && !shouldShowWall && <RelatedArticles article={article} />}
       </Layout.Spacing>
 
       <Toolbar mediaHash={mediaHash} />
+
+      {shouldShowWall && (
+        <>
+          <section id="comments" />
+          <Wall show={fixedWall} />
+        </>
+      )}
 
       <style jsx>{styles}</style>
     </Layout>
