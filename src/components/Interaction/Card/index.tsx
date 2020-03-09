@@ -75,7 +75,7 @@ export const Card: React.FC<CardProps> = ({
       if (newTab) {
         window.open(as, '_blank')
       } else {
-        Router.push(href, as)
+        Router.push(href, as).then(() => window.scrollTo(0, 0))
       }
     }
 

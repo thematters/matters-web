@@ -61,7 +61,7 @@ export const SearchBar: React.FC<{
           page: 'search',
           q: values.q.slice(0, 100)
         })
-        Router.push(path.href, path.as)
+        Router.push(path.href, path.as).then(() => window.scrollTo(0, 0))
         hideDropdown()
       }}
     >

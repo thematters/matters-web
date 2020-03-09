@@ -45,7 +45,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
 
         if (slug && id) {
           const path = toPath({ page: 'draftDetail', slug, id })
-          Router.push(path.as)
+          Router.push(path.as).then(() => window.scrollTo(0, 0))
         }
       }}
     >

@@ -219,7 +219,7 @@ export const redirectToLogin = () => {
   return Router.push(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
     `${PATHS.AUTH_LOGIN.as}?target=${target}`
-  )
+  ).then(() => window.scrollTo(0, 0))
 }
 
 /**

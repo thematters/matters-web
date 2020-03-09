@@ -175,7 +175,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          Router.push(path.as)
+          Router.push(path.as).then(() => window.scrollTo(0, 0))
         } else {
           closeDialog()
         }
