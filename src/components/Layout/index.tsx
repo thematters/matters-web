@@ -10,48 +10,67 @@ import Spacing from './Spacing'
 import styles from './styles.css'
 
 interface LayoutProps {
-  rightSide?: React.ReactNode
+  aside?: React.ReactNode
+  asideShowInMobile?: boolean
   bgColor?: 'grey-lighter'
 }
 
 export const Layout: React.FC<LayoutProps> & {
   Header: typeof Header
   Spacing: typeof Spacing
-} = ({ rightSide, bgColor, children }) => {
+} = ({ aside, asideShowInMobile, bgColor, children }) => {
+  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
   const mainClass = classNames({
-    'l-row full': true,
+    'l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9': true,
     [`bg-${bgColor}`]: !!bgColor
   })
-  const isLargeUp = useResponsive('lg-up')
+  const navClass = classNames({
+    'l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-3': true,
+    'u-sm-down-hide': true
+  })
+  const articleClass = classNames({
+    'l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-9': true
+  })
+  const asideClass = classNames({
+    'l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-3 l-offset-lg-0': true,
+    'u-lg-down-hide': !asideShowInMobile
+  })
+  const showNav = isSmallUp
+  const showAside = isLargeUp || asideShowInMobile
+  const showSearchBar = isLargeUp
 
   return (
     <>
       <Head />
 
-      <main className={mainClass}>
-        <nav
-          role="navigation"
-          className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2 u-sm-down-hide"
-        >
-          <SideNav />
-        </nav>
+      <div className="l-row full">
+        <main className={mainClass}>
+          <div className="l-row full">
+            {showNav && (
+              <nav role="navigation" className={navClass}>
+                <SideNav />
+              </nav>
+            )}
 
-        <article className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-7">
-          {children}
-        </article>
+            <article className={articleClass}>{children}</article>
+          </div>
+        </main>
 
-        {isLargeUp && (
-          <aside className="l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-3 u-lg-down-hide">
-            <section>
-              <SearchBar />
-            </section>
+        {showAside && (
+          <aside className={asideClass}>
+            {showSearchBar && (
+              <section className="u-lg-down-hide">
+                <SearchBar />
+              </section>
+            )}
 
-            {rightSide}
+            {aside}
 
             <SideFooter />
           </aside>
         )}
-      </main>
+      </div>
 
       <footer className="u-sm-up-hide">
         <NavBar />

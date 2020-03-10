@@ -1,5 +1,5 @@
 footer {
-  padding: var(--spacing-loose) var(--spacing-base);
+  margin: var(--spacing-loose) var(--spacing-base);
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
 

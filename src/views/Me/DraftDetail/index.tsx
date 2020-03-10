@@ -72,7 +72,7 @@ const DraftDetail = () => {
   >()
 
   if (!process.browser) {
-    return <Spinner />
+    return null
   }
 
   if (error) {
@@ -131,12 +131,13 @@ const DraftDetail = () => {
 
   return (
     <Layout
-      rightSide={
+      aside={
         <>
           {loading && <Spinner />}
           {draft && <Sidebar draft={draft} setSaveStatus={setSaveStatus} />}
         </>
       }
+      asideShowInMobile
     >
       <Layout.Header
         left={<Layout.Header.BackButton />}

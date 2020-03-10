@@ -21,8 +21,8 @@ const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
   }
   const titleMap = {
     icymi: <Translate zh_hant="不要錯過" zh_hans="不要错过" />,
-    topics: <Translate zh_hant="熱議話題" zh_hans="热议话题" />,
-    authors: <Translate zh_hant="活躍作者" zh_hans="活跃作者" />,
+    topics: <Translate id="allTopics" />,
+    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" />,
     tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" />
   }
   const path = pathMap[type]

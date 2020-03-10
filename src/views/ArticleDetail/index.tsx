@@ -166,9 +166,7 @@ const ArticleDetail = () => {
   }
 
   return (
-    <Layout
-      rightSide={isLargeUp && <RelatedArticles article={article} inSidebar />}
-    >
+    <Layout aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={

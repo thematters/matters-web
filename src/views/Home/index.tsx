@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <Layout
-      rightSide={
+      aside={
         <>
           <Icymi />
           <Tags />

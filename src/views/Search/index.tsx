@@ -46,7 +46,7 @@ const Search = () => {
 
   return (
     <Layout
-      rightSide={
+      aside={
         <>
           {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
           {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}

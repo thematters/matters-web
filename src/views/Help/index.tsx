@@ -30,10 +30,6 @@ const Help = () => {
         />
         <Form.List.Item title={<Translate id="term" />} {...PATHS.MISC_TOS} />
         <Form.List.Item
-          title={<Translate id="about" />}
-          {...PATHS.MISC_ABOUT}
-        />
-        <Form.List.Item
           title={<Translate id="downloadApp" />}
           {...downloadAppLink}
         />
