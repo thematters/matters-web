@@ -138,6 +138,7 @@ const Steps = () => {
             aria-haspopup="false"
             borderColor="green"
             href="https://medium.com/me/export"
+            target="_blank"
             {...buttonProps}
           >
             <TextIcon color="green" size="md" weight="md">

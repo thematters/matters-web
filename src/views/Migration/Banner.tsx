@@ -1,4 +1,4 @@
-import { Button, TextIcon, Translate, useResponsive } from '~/components'
+import { ShareButton, TextIcon, Translate, useResponsive } from '~/components'
 
 import IMAGE_BANNER from '~/static/images/migration-banner.svg'
 
@@ -22,16 +22,16 @@ const Banner = () => {
         />
       </p>
       <section>
-        <Button
-          aria-haspopup="true"
+        <ShareButton
           bgColor="green"
+          hasIcon={false}
           size={[isSmallUp ? '8rem' : '7rem', '2.5rem']}
           spacing={[0, 0]}
         >
           <TextIcon color="white" size={isSmallUp ? 'md' : 'sm'} weight="md">
             <Translate zh_hant="分享給好友" zh_hans="分享给好友" />
           </TextIcon>
-        </Button>
+        </ShareButton>
       </section>
 
       <style jsx>{styles}</style>
