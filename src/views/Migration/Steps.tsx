@@ -119,7 +119,7 @@ const Steps = () => {
                 />
               </p>
               <section className="sub-content-link">
-                <SignUpButton trackType={SIGNUP_TYPE.GENERAL} isPlain >
+                <SignUpButton trackType={SIGNUP_TYPE.GENERAL} isPlain>
                   <Translate
                     zh_hant={zh_hant.sub_content_2}
                     zh_hans={zh_hans.sub_content_2}

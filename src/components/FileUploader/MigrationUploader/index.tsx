@@ -22,7 +22,9 @@ import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
-const uploadSuccess = <Translate zh_hant="作品已上傳完成" zh_hans="作品已上传完成" />
+const uploadSuccess = (
+  <Translate zh_hant="作品已上傳完成" zh_hans="作品已上传完成" />
+)
 
 export const MigrationUploader = () => {
   const [uploaded, setUploaded] = useState<boolean>(false)
@@ -119,9 +121,7 @@ export const MigrationUploader = () => {
           )}
         </TextIcon>
       </Button>
-      <p className="info">
-        {uploaded && uploadSuccess}
-      </p>
+      <p className="info">{uploaded && uploadSuccess}</p>
       <VisuallyHidden>
         <input
           id="migration-uploader"

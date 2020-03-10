@@ -27,7 +27,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   iconSize,
   isPlain,
   size,
-  spacing,
+  spacing
 }) => {
   const isSmallUp = useResponsive('sm-up')
   const clickProps = isSmallUp
