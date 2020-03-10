@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -16,6 +15,7 @@ import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
+  routerPush,
   toPath,
   translate
 } from '~/common/utils'
@@ -95,7 +95,7 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
 
           if (slug && id) {
             const path = toPath({ page: 'draftDetail', slug, id })
-            Router.push(path.as)
+            routerPush(path.href, path.as)
           }
         } catch (error) {
           const [messages, codes] = parseFormSubmitErrors(error, lang)
