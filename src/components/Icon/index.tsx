@@ -29,10 +29,12 @@ import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
 import { ReactComponent as DeleteDraftMedium } from './icons/delete-draft-md.svg'
+import { ReactComponent as DeleteDraftXS } from './icons/delete-draft-xs.svg'
 import { ReactComponent as Down } from './icons/down.svg'
 import { ReactComponent as DownVoteActive } from './icons/downvote-active.svg'
 import { ReactComponent as DownVote } from './icons/downvote.svg'
 import { ReactComponent as DraftMedium } from './icons/draft-md.svg'
+import { ReactComponent as EditXS } from './icons/edit-xs.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
 import { ReactComponent as FollowActiveLarge } from './icons/follow-active-lg.svg'
@@ -156,10 +158,12 @@ export const Icon = {
   CollectionMedium: withIcon(CollectionMedium),
   Comment: withIcon(Comment),
   DeleteDraftMedium: withIcon(DeleteDraftMedium),
+  DeleteDraftXS: withIcon(DeleteDraftXS),
   Down: withIcon(Down),
   DownVote: withIcon(DownVote),
   DownVoteActive: withIcon(DownVoteActive),
   DraftMedium: withIcon(DraftMedium),
+  EditXS: withIcon(EditXS),
   Edit: withIcon(Edit),
   Expand: withIcon(Expand),
   FollowActiveLarge: withIcon(FollowActiveLarge),

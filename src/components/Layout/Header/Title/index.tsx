@@ -1,13 +1,12 @@
-import { Translate, TranslateProps } from '~/components'
+import { Title, Translate, TranslateProps } from '~/components'
 
-import styles from './styles.css'
-
-const Title: React.FC<TranslateProps> = ({ children, ...props }) => (
-  <h1>
+const LayoutHeaderTitle: React.FC<TranslateProps> = ({
+  children,
+  ...props
+}) => (
+  <Title type="nav" is="h1">
     {children ? children : <Translate {...props} />}
-
-    <style jsx>{styles}</style>
-  </h1>
+  </Title>
 )
 
-export default Title
+export default LayoutHeaderTitle
