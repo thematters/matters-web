@@ -50,11 +50,8 @@ export const SetupLikeCoin: React.FC<Props> = ({
     <>
       {isInPage && (
         <Layout.Header
-          left={
-            <>
-              <Layout.Header.Title id="setupLikeCoin" />
-            </>
-          }
+          left={<Layout.Header.Title id="setupLikeCoin" />}
+          marginBottom={0}
         />
       )}
 

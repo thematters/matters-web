@@ -8,7 +8,7 @@
   margin-top: var(--spacing-xx-tight);
   padding: 0 var(--spacing-base);
 
-  & > a {
+  & :global(> a) {
     @mixin truncate;
     display: inline-block;
     padding: var(--spacing-xx-tight) var(--spacing-x-tight);

@@ -8,8 +8,6 @@ import {
   PasswordChangeRequestForm
 } from '~/components'
 
-import styles from '../styles.css'
-
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
@@ -38,35 +36,31 @@ const Forget = () => {
   }
 
   return (
-    <div className="auth-page">
-      <Layout>
-        <Head title={{ id: 'forgetPassword' }} />
+    <Layout bgColor="grey-lighter">
+      <Head title={{ id: 'forgetPassword' }} />
 
-        {step === 'request' && (
-          <PasswordChangeRequestForm
-            defaultEmail={data.request.email}
-            type="forget"
-            purpose="page"
-            submitCallback={requestCodeCallback}
-          />
-        )}
+      {step === 'request' && (
+        <PasswordChangeRequestForm
+          defaultEmail={data.request.email}
+          type="forget"
+          purpose="page"
+          submitCallback={requestCodeCallback}
+        />
+      )}
 
-        {step === 'confirm' && (
-          <PasswordChangeConfirmForm
-            codeId={data.request.codeId}
-            type="forget"
-            purpose="page"
-            submitCallback={() => setStep('complete')}
-          />
-        )}
+      {step === 'confirm' && (
+        <PasswordChangeConfirmForm
+          codeId={data.request.codeId}
+          type="forget"
+          purpose="page"
+          submitCallback={() => setStep('complete')}
+        />
+      )}
 
-        {step === 'complete' && (
-          <PasswordChangeComplete type="forget" purpose="page" />
-        )}
-      </Layout>
-
-      <style jsx>{styles}</style>
-    </div>
+      {step === 'complete' && (
+        <PasswordChangeComplete type="forget" purpose="page" />
+      )}
+    </Layout>
   )
 }
 

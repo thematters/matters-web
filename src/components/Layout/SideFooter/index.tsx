@@ -47,7 +47,7 @@ const SideFooter = () => {
 
       <Link {...downloadAppLink}>
         <a>
-          <Translate zh_hant="下載應用" zh_hans="下载应用" />
+          <Translate id="downloadApp" />
         </a>
       </Link>
 
@@ -55,7 +55,7 @@ const SideFooter = () => {
         href="https://github.com/thematters/developer-resource"
         target="_blank"
       >
-        <Translate zh_hant="開放社區" zh_hans="开放社区" />
+        <Translate id="openCommunity" />
       </a>
 
       <span className="copyright">

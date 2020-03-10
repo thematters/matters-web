@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { Head, SearchBar, useResponsive } from '~/components'
 
 import Header from './Header'
@@ -9,19 +11,24 @@ import styles from './styles.css'
 
 interface LayoutProps {
   rightSide?: React.ReactNode
+  bgColor?: 'grey-lighter'
 }
 
 export const Layout: React.FC<LayoutProps> & {
   Header: typeof Header
   Spacing: typeof Spacing
-} = ({ rightSide, children }) => {
+} = ({ rightSide, bgColor, children }) => {
+  const mainClass = classNames({
+    'l-row full': true,
+    [`bg-${bgColor}`]: !!bgColor
+  })
   const isLargeUp = useResponsive('lg-up')
 
   return (
     <>
       <Head />
 
-      <main className="l-row full">
+      <main className={mainClass}>
         <nav
           role="navigation"
           className="l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-2 u-sm-down-hide"

@@ -4,7 +4,7 @@ li {
 
     &:hover,
     &:focus {
-      background: var(--color-grey-light);
+      background: var(--color-grey-lighter);
     }
 
     @media (--sm-up) {

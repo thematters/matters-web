@@ -23,6 +23,7 @@ export interface CardProps {
 
   href?: string
   as?: string
+  htmlTarget?: '_blank'
 
   onClick?: () => any
 }
@@ -38,6 +39,7 @@ export const Card: React.FC<CardProps> = ({
 
   href,
   as,
+  htmlTarget,
 
   onClick,
 
@@ -57,6 +59,8 @@ export const Card: React.FC<CardProps> = ({
     hasBorder: !!borderColor || !!borderRadius,
     disabled
   })
+  const ariaLabel = href || as ? `跳轉至 ${as || href}` : undefined
+
   const openLink = ({
     newTab,
     event
@@ -71,8 +75,12 @@ export const Card: React.FC<CardProps> = ({
       return
     }
 
-    // determine if it opens on a new tab
-    if (as && href) {
+    // jump behavior
+    if (href && !as) {
+      window.open(href, htmlTarget)
+    }
+
+    if (href && as) {
       if (newTab) {
         window.open(as, '_blank')
       } else {
@@ -98,6 +106,7 @@ export const Card: React.FC<CardProps> = ({
     <section
       className={cardClass}
       tabIndex={disabled ? undefined : 0}
+      aria-label={ariaLabel}
       ref={node}
       data-clickable
       onKeyDown={event => {

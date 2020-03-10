@@ -26,3 +26,13 @@ aside {
     margin-top: var(--spacing-xx-loose);
   }
 }
+
+.bg-grey-lighter {
+  & article {
+    background: var(--color-grey-lighter);
+
+    @media (--sm-up) {
+      background: none;
+    }
+  }
+}

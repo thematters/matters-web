@@ -99,6 +99,7 @@ export const SearchBar: React.FC<{
               />
             }
             trigger="manual"
+            placement="bottom-start"
             onCreate={instance => (instanceRef.current = instance)}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}

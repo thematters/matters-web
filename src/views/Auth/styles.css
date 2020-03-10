@@ -1,9 +1,0 @@
-.auth-page {
-  & :global(main > article) {
-    background: var(--color-grey-lighter);
-
-    @media (--sm-up) {
-      background: none;
-    }
-  }
-}

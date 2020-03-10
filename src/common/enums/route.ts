@@ -42,6 +42,7 @@ type ROUTE_KEY =
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
+  | 'HELP'
   | 'MISC_ABOUT'
   | 'MISC_FAQ'
   | 'MISC_TOS'
@@ -271,6 +272,11 @@ export const ROUTES: Array<{
   },
 
   // Misc
+  {
+    key: 'HELP',
+    href: '/Help',
+    as: '/help'
+  },
   {
     key: 'MISC_ABOUT',
     href: '/MiscAbout',

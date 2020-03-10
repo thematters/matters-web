@@ -63,6 +63,7 @@ export const TEXT = {
     discover: '發現',
     displayName: '姓名',
     done: '完成',
+    downloadApp: '下載應用',
     DRAFT_NOT_FOUND: '草稿不存在',
     draft: '草稿',
     DUPLICATE_TAG: '標籤名稱已被使用',
@@ -200,6 +201,7 @@ export const TEXT = {
     TOKEN_INVALID: '登入信息已失效，請重新登入',
     topic: '話題',
     oauthAuthorize: '應用授權',
+    openCommunity: '開放社區',
     uiSetting: '介面設定',
     UNABLE_TO_UPLOAD_FROM_URL:
       '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳',
@@ -293,6 +295,7 @@ export const TEXT = {
     discover: '发现',
     displayName: '姓名',
     done: '完成',
+    downloadApp: '下载应用',
     DRAFT_NOT_FOUND: '草稿不存在',
     draft: '草稿',
     DUPLICATE_TAG: '标签名称已被使用',
@@ -431,6 +434,7 @@ export const TEXT = {
     TOKEN_INVALID: '登录信息已失效，请重新登录',
     topic: '话题',
     oauthAuthorize: '应用授权',
+    openCommunity: '开放社区',
     uiSetting: '界面设定',
     UNABLE_TO_UPLOAD_FROM_URL:
       '文件上传失败，请确认文件链接是否有效，或手动下载后再上传',

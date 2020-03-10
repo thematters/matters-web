@@ -36,7 +36,11 @@ const Footer = () => {
               zh_hans="媒体查询、活动合作、一般查询，请联系"
             />
             <br />
-            <a className="u-link-green" href="mailto:hi@matters.news">
+            <a
+              className="u-link-green"
+              href="mailto:hi@matters.news"
+              target="_blank"
+            >
               hi@matters.news
             </a>
           </p>
@@ -46,7 +50,11 @@ const Footer = () => {
               zh_hans="对我们的产品有任何疑问，请联系"
             />
             <br />
-            <a className="u-link-green" href="mailto:hi@matters.news">
+            <a
+              className="u-link-green"
+              href="mailto:hi@matters.news"
+              target="_blank"
+            >
               ask@matters.news
             </a>
           </p>
