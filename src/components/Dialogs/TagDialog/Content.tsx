@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -19,6 +18,7 @@ import {
   numAbbr,
   parseFormSubmitErrors,
   randomString,
+  routerPush,
   toPath,
   translate
 } from '~/common/utils'
@@ -175,7 +175,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          Router.push(path.as)
+          routerPush(path.href, path.as)
         } else {
           closeDialog()
         }

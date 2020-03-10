@@ -1,9 +1,9 @@
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { getQuery, routerPush } from '~/common/utils'
 import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
 
 import { Box } from '../../Box'
@@ -20,7 +20,7 @@ const OAuthCallbackSuccess = () => {
   }
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    Router.push(PATHS.HOME.as)
+    routerPush(PATHS.HOME.href, PATHS.HOME.as)
     return null
   }
 
