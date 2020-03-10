@@ -1,0 +1,6 @@
+.info {
+  color: var(--color-matters-green);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-base);
+  text-align: center;
+}

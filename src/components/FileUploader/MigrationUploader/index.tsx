@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   Button,
@@ -18,9 +18,15 @@ import {
   UPLOAD_MIGRATION_SIZE_LIMIT
 } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
+const uploadSuccess = <Translate zh_hant="作品已上傳完成" zh_hans="作品已上传完成" />
+
 export const MigrationUploader = () => {
+  const [uploaded, setUploaded] = useState<boolean>(false)
+
   const viewer = useContext(ViewerContext)
 
   const [migration, { loading }] = useMutation<SingleFileUpload>(MIGRATION)
@@ -79,12 +85,11 @@ export const MigrationUploader = () => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: (
-                <Translate zh_hant="作品已上傳完成" zh_hans="作品已上传完成" />
-              )
+              content: uploadSuccess
             }
           })
         )
+        setUploaded(true)
       }
     } catch (error) {
       // TODO: handle other exception
@@ -99,6 +104,7 @@ export const MigrationUploader = () => {
         size={['7rem', '2.5rem']}
         spacing={[0, 0]}
         onClick={() => {
+          setUploaded(false)
           const element = document.getElementById('migration-uploader')
           if (element) {
             element.click()
@@ -113,6 +119,9 @@ export const MigrationUploader = () => {
           )}
         </TextIcon>
       </Button>
+      <p className="info">
+        {uploaded && uploadSuccess}
+      </p>
       <VisuallyHidden>
         <input
           id="migration-uploader"
@@ -124,6 +133,7 @@ export const MigrationUploader = () => {
           onChange={handleChange}
         />
       </VisuallyHidden>
+      <style jsx>{styles}</style>
     </section>
   )
 }

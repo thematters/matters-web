@@ -108,9 +108,9 @@ const Steps = () => {
             <>
               <LoginButton
                 bgColor="green"
+                iconSize="md"
                 size={['7rem', '2.5rem']}
                 spacing={[0, 0]}
-                textSize="md"
               />
               <p className="sub-content">
                 <Translate
@@ -118,17 +118,14 @@ const Steps = () => {
                   zh_hans={zh_hans.sub_content_1}
                 />
               </p>
-              <SignUpButton
-                bgColor={null}
-                spacing={[0, 0]}
-                textWeight="normal"
-                trackType={SIGNUP_TYPE.GENERAL}
-              >
-                <Translate
-                  zh_hant={zh_hant.sub_content_2}
-                  zh_hans={zh_hans.sub_content_2}
-                />
-              </SignUpButton>
+              <section className="sub-content-link">
+                <SignUpButton trackType={SIGNUP_TYPE.GENERAL} isPlain >
+                  <Translate
+                    zh_hant={zh_hant.sub_content_2}
+                    zh_hans={zh_hans.sub_content_2}
+                  />
+                </SignUpButton>
+              </section>
             </>
           )}
         </Step>

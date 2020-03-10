@@ -13,7 +13,10 @@ import IMAGE_MIGRATION_XS from '~/static/images/migration-intro-xs.svg'
 
 import styles from './styles.css'
 
-const texts = {
+const texts: {
+  zh_hant: Record<string, string>
+  zh_hans: Record<string, string>
+} = {
   zh_hant: {
     intro: '搬家到 Matters',
     content:
@@ -65,9 +68,7 @@ const Intro = () => {
             size={[null, '2.25rem']}
             spacing={[0, 'base']}
             bgColor="green"
-            onClick={() => {
-              jump('#steps', { offset: 10 })
-            }}
+            onClick={() => jump('#steps', { offset: 10 })}
           >
             <TextIcon color="white" weight="md">
               <Translate zh_hant={zh_hant.start} zh_hans={zh_hans.start} />

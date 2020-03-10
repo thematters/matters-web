@@ -5,6 +5,7 @@ import {
   ButtonSpacingX,
   ButtonSpacingY,
   ButtonWidth,
+  IconSize,
   TextIcon,
   Translate,
   useResponsive
@@ -15,18 +16,18 @@ import { appendTarget } from '~/common/utils'
 
 interface LoginButtonProps {
   bgColor?: ButtonBgColor
+  iconSize?: Extract<IconSize, 'md'>
   isPlain?: boolean
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
-  textSize?: 'md'
 }
 
 export const LoginButton: React.FC<LoginButtonProps> = ({
   bgColor,
+  iconSize,
   isPlain,
   size,
   spacing,
-  textSize
 }) => {
   const isSmallUp = useResponsive('sm-up')
   const clickProps = isSmallUp
@@ -47,11 +48,11 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   }
 
   const isGreen = bgColor === 'green'
+  const buttonBgHoverColor = isGreen ? undefined : 'green-lighter'
   const buttonSize = size || [null, '2.25rem']
   const buttonSpacing = spacing || [0, 'loose']
-  const buttonBgHoverColor = isGreen ? undefined : 'green-lighter'
   const textIconColor = isGreen ? 'white' : 'green'
-  const textIconSize = textSize || undefined
+  const textIconSize = iconSize || undefined
 
   return (
     <Button

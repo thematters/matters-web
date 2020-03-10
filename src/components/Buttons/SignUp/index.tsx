@@ -1,13 +1,4 @@
-import {
-  Button,
-  ButtonBgColor,
-  ButtonHeight,
-  ButtonSpacingX,
-  ButtonSpacingY,
-  ButtonWidth,
-  TextIcon,
-  useResponsive
-} from '~/components'
+import { Button, TextIcon, useResponsive } from '~/components'
 
 import {
   ANALYTICS_EVENTS,
@@ -18,19 +9,13 @@ import {
 import { analytics, appendTarget } from '~/common/utils'
 
 interface SignUpButtonProps {
-  bgColor?: ButtonBgColor | null
-  size?: [ButtonWidth, ButtonHeight]
-  spacing?: [ButtonSpacingY, ButtonSpacingX]
-  textWeight?: 'normal'
+  isPlain?: boolean
   trackType: string
 }
 
 export const SignUpButton: React.FC<SignUpButtonProps> = ({
-  bgColor = 'green',
   children,
-  size,
-  spacing,
-  textWeight,
+  isPlain,
   trackType
 }) => {
   const isSmallUp = useResponsive('sm-up')
@@ -47,22 +32,23 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
       }
     : appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true })
 
-  const isGreen = bgColor === 'green'
-  const buttonBgColor = isGreen ? 'green' : undefined
-  const buttonSize = size || [null, '2.25rem']
-  const buttonSpacing = spacing || [0, 'loose']
-  const textIconColor = isGreen ? 'white' : 'green'
-  const textIconWeight = textWeight || 'md'
+  if (isPlain) {
+    return (
+      <Button aria-haspopup="true" {...clickProps}>
+        {children}
+      </Button>
+    )
+  }
 
   return (
     <Button
-      bgColor={buttonBgColor}
-      size={buttonSize}
-      spacing={buttonSpacing}
+      bgColor="green"
+      size={[null, '2.25rem']}
+      spacing={[0, 'loose']}
       aria-haspopup="true"
       {...clickProps}
     >
-      <TextIcon color={textIconColor} weight={textIconWeight}>
+      <TextIcon color="white" weight="md">
         {children}
       </TextIcon>
     </Button>

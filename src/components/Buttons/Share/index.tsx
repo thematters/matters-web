@@ -1,6 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { Button, Icon, IconColor, IconSize } from '~/components'
+import {
+  Button,
+  ButtonBgColor,
+  ButtonHeight,
+  ButtonSpacingX,
+  ButtonSpacingY,
+  ButtonWidth,
+  Icon,
+  IconColor,
+  IconSize
+} from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE, TEXT } from '~/common/enums'
@@ -14,16 +24,25 @@ interface ShareButtonProps {
   title?: string
   path?: string
 
-  size?: Extract<IconSize, 'md-s'>
-  color?: Extract<IconColor, 'grey' | 'black'>
+  bgColor?: ButtonBgColor
+  hasIcon?: boolean
+  iconSize?: Extract<IconSize, 'md-s'>
+  iconColor?: Extract<IconColor, 'grey' | 'black'>
+  size?: [ButtonWidth, ButtonHeight]
+  spacing?: [ButtonSpacingY, ButtonSpacingX]
 }
 
 export const ShareButton: React.FC<ShareButtonProps> = ({
+  children,
   title,
   path,
 
+  bgColor,
+  hasIcon = true,
+  iconSize,
+  iconColor = 'black',
   size,
-  color = 'black'
+  spacing
 }) => {
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
     variables: { id: 'local' }
@@ -38,12 +57,18 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
   const shareTitle =
     title || (process.browser ? window.document.title || '' : '')
 
+  const isGreen = bgColor === 'green'
+  const buttonBgHoverColor = isGreen ? undefined : 'grey-lighter'
+  const buttonSpacing = spacing || ['xtight', 'xtight']
+
   return (
     <ShareDialog title={shareTitle} link={shareLink}>
       {({ open }) => (
         <Button
-          spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
+          size={size}
+          spacing={buttonSpacing}
+          bgColor={bgColor}
+          bgHoverColor={buttonBgHoverColor}
           aria-label={TEXT.zh_hant.share}
           aria-haspopup="true"
           onClick={async () => {
@@ -68,7 +93,8 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
             })
           }}
         >
-          <Icon.Share size={size} color={color} />
+          {hasIcon && <Icon.Share size={iconSize} color={iconColor} />}
+          {children}
         </Button>
       )}
     </ShareDialog>

@@ -186,7 +186,7 @@ export const UserProfile = () => {
 
                   <span className="u-sm-up-hide">
                     <DropdownActions user={user} />
-                    <ShareButton size="md-s" />
+                    <ShareButton iconSize="md-s" />
                   </span>
                 </section>
               )}
@@ -231,7 +231,7 @@ export const UserProfile = () => {
 
                   <span className={!isMe ? 'u-sm-down-hide' : ''}>
                     {!isMe && <DropdownActions user={user} />}
-                    <ShareButton size="md-s" />
+                    <ShareButton iconSize="md-s" />
                   </span>
                 </section>
               </header>

@@ -88,6 +88,7 @@ h2 {
 
     background: var(--color-grey-lighter);
     border-radius: 2rem;
+    font-size: var(--color-black);
     padding: var(--spacing-xx-tight);
     padding-right: var(--spacing-tight);
 
@@ -118,6 +119,11 @@ h2 {
     max-width: 16.5rem;
     margin-bottom: var(--spacing-loose);
     text-align: center;
+  }
+
+  & .sub-content-link {
+    color: var(--color-matters-green);
+    font-size: var(--font-size-sm);
   }
 }
 
