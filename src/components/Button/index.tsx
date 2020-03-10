@@ -27,9 +27,9 @@ export type ButtonHeight =
   | undefined
   | null
 
-type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
 
-type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
+export type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
 
 type ButtonColor =
   | 'white'
@@ -44,7 +44,7 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
 
-type ButtonBgColor = Extract<
+export type ButtonBgColor = Extract<
   ButtonColor,
   'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
 >
