@@ -56,4 +56,10 @@
     margin-left: var(--spacing-xx-tight);
     font-size: var(--font-size-sm);
   }
+
+  font-size: var(--font-size-lg);
+}
+
+.size-lg {
+  font-size: var(--font-size-lg);
 }

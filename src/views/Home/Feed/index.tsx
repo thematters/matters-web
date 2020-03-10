@@ -18,6 +18,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import ArticleFeed from './Articles'
 import SortBy from './SortBy'
+import TagFeed from './Tags'
 import UserFeed from './Users'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -43,7 +44,8 @@ interface FeedLocation {
 const horizontalFeeds: FeedLocation = {
   2: () => <ArticleFeed type={'icymi'} first={3} />,
   5: () => <ArticleFeed type={'topics'} first={3} />,
-  8: () => <UserFeed first={9} />
+  8: () => <TagFeed first={3} />,
+  11: () => <UserFeed first={9} />
 }
 
 const feedFragment = gql`
