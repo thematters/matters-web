@@ -4,7 +4,9 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestFeed,
   EmptyHistory,
+  Head,
   InfiniteScroll,
+  Layout,
   List,
   Spinner
 } from '~/components'
@@ -100,4 +102,16 @@ const MeHistory = () => {
   )
 }
 
-export default MeHistory
+export default () => (
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="readHistory" />}
+      marginBottom={0}
+    />
+
+    <Head title={{ id: 'readHistory' }} />
+
+    <MeHistory />
+  </Layout>
+)

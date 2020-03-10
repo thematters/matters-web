@@ -1,9 +1,9 @@
-import UserHistory from '~/views/User/History'
+import MeHistory from '~/views/Me/History'
 
 import { Protected } from '~/components'
 
 export default () => (
   <Protected>
-    <UserHistory />
+    <MeHistory />
   </Protected>
 )

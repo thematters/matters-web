@@ -1,9 +1,9 @@
-import UserDrafts from '~/views/User/Drafts'
+import MeBookmarks from '~/views/Me/Bookmarks'
 
 import { Protected } from '~/components'
 
 export default () => (
   <Protected>
-    <UserDrafts />
+    <MeBookmarks />
   </Protected>
 )

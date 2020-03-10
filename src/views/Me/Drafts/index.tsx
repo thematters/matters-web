@@ -2,9 +2,11 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  ArticleDigestFeed,
-  EmptyBookmark,
+  DraftDigest,
+  EmptyDraft,
+  Head,
   InfiniteScroll,
+  Layout,
   List,
   Spinner
 } from '~/components'
@@ -12,13 +14,14 @@ import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
-import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import { MeDraftFeed } from './__generated__/MeDraftFeed'
 
-const ME_BOOKMARK_FEED = gql`
-  query MeBookmarkFeed($after: String) {
+const ME_DRAFTS_FEED = gql`
+  query MeDraftFeed($after: String) {
     viewer {
       id
-      subscriptions(input: { first: 10, after: $after }) {
+      drafts(input: { first: 10, after: $after })
+        @connection(key: "viewerDrafts") {
         pageInfo {
           startCursor
           endCursor
@@ -27,18 +30,18 @@ const ME_BOOKMARK_FEED = gql`
         edges {
           cursor
           node {
-            ...ArticleDigestFeedArticle
+            ...DraftDigestFeedDraft
           }
         }
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${DraftDigest.Feed.fragments.draft}
 `
 
-const MeBookmarks = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
-    ME_BOOKMARK_FEED
+const MeDrafts = () => {
+  const { data, loading, error, fetchMore } = useQuery<MeDraftFeed>(
+    ME_DRAFTS_FEED
   )
 
   if (loading) {
@@ -49,11 +52,11 @@ const MeBookmarks = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } = data?.viewer?.subscriptions || {}
+  const connectionPath = 'viewer.drafts'
+  const { edges, pageInfo } = data?.viewer?.drafts || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo || edges.length <= 0) {
-    return <EmptyBookmark />
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyDraft />
   }
 
   const loadMore = () =>
@@ -71,10 +74,10 @@ const MeBookmarks = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List spacing={['xloose', 'base']} hasBorder>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
-            <ArticleDigestFeed article={node} />
+            <DraftDigest.Feed draft={node} />
           </List.Item>
         ))}
       </List>
@@ -82,4 +85,16 @@ const MeBookmarks = () => {
   )
 }
 
-export default MeBookmarks
+export default () => (
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="myDrafts" />}
+      marginBottom={0}
+    />
+
+    <Head title={{ id: 'myDrafts' }} />
+
+    <MeDrafts />
+  </Layout>
+)

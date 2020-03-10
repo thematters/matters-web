@@ -20,13 +20,13 @@ type ROUTE_KEY =
   | 'TAG_DETAIL'
   | 'USER_ARTICLES'
   | 'USER_COMMENTS'
-  | 'USER_DRAFTS'
-  | 'USER_BOOKMARKS'
-  | 'USER_HISTORY'
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_LEGACY'
+  | 'ME_DRAFTS'
+  | 'ME_BOOKMARKS'
+  | 'ME_HISTORY'
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
@@ -110,21 +110,6 @@ export const ROUTES: Array<{
     as: '/@:userName/comments'
   },
   {
-    key: 'USER_DRAFTS',
-    href: '/UserDrafts',
-    as: '/@:userName/drafts'
-  },
-  {
-    key: 'USER_BOOKMARKS',
-    href: '/UserBookmarks',
-    as: '/@:userName/bookmarks'
-  },
-  {
-    key: 'USER_HISTORY',
-    href: '/UserHistory',
-    as: '/@:userName/history'
-  },
-  {
     key: 'USER_FOLLOWERS',
     href: '/UserFollowers',
     as: '/@:userName/followers'
@@ -192,6 +177,21 @@ export const ROUTES: Array<{
   },
 
   // Me
+  {
+    key: 'ME_DRAFTS',
+    href: '/MeDrafts',
+    as: '/me/drafts'
+  },
+  {
+    key: 'ME_BOOKMARKS',
+    href: '/MeBookmarks',
+    as: '/me/bookmarks'
+  },
+  {
+    key: 'ME_HISTORY',
+    href: '/MeHistory',
+    as: '/me/history'
+  },
   {
     key: 'ME_APPRECIATIONS_SENT',
     href: '/MeAppreciationsSent',

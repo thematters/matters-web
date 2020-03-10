@@ -22,18 +22,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
     page: 'userProfile',
     userName: viewer.userName || ''
   })
-  const viewerDraftPath = toPath({
-    page: 'userDrafts',
-    userName: viewer.userName || ''
-  })
-  const viewerBookmarks = toPath({
-    page: 'userBookmarks',
-    userName: viewer.userName || ''
-  })
-  const viewerHistoryPath = toPath({
-    page: 'userHistory',
-    userName: viewer.userName || ''
-  })
 
   const menuItemSpacing = isInSideDrawerNav
     ? (['base', 'loose'] as [CardSpacing, CardSpacing])
@@ -52,7 +40,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...viewerDraftPath}>
+      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_DRAFTS}>
         <TextIcon
           icon={<Icon.DraftMedium size="md" />}
           spacing="base"
@@ -68,7 +56,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...viewerBookmarks}>
+      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_BOOKMARKS}>
         <TextIcon
           icon={<Icon.BookmarkMedium size="md" />}
           spacing="base"
@@ -78,7 +66,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...viewerHistoryPath}>
+      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_HISTORY}>
         <TextIcon
           icon={<Icon.HistoryMedium size="md" />}
           spacing="base"
