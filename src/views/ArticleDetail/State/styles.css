@@ -1,6 +1,6 @@
 .container {
   position: sticky;
-  top: calc(var(--global-header-height) + var(--spacing-base));
+  top: calc(var(--global-nav-height) + var(--spacing-base));
 
   margin-top: calc(var(--spacing-xx-loose) * -1);
   margin-bottom: var(--spacing-loose);

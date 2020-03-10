@@ -1,15 +1,9 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import {
-  Button,
-  Icon,
-  Translate,
-  ViewerContext,
-  WriteButton
-} from '~/components'
+import { Button, Icon, ViewerContext, WriteButton } from '~/components'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -59,7 +53,7 @@ const NavBar = () => {
     <section className="nav-bar" role="navigation">
       <ul>
         <NavListItem
-          name={<Translate id="discover" />}
+          name={TEXT.zh_hant.discover}
           icon={<Icon.HomeLarge size="lg" />}
           activeIcon={<Icon.HomeActiveLarge size="lg" color="green" />}
           active={isInHome}
@@ -67,7 +61,7 @@ const NavBar = () => {
         />
 
         <NavListItem
-          name={<Translate id="follow" />}
+          name={TEXT.zh_hant.follow}
           icon={<Icon.FollowLarge size="lg" />}
           activeIcon={<Icon.FollowActiveLarge size="lg" color="green" />}
           active={isInFollow}
@@ -81,7 +75,7 @@ const NavBar = () => {
         )}
 
         <NavListItem
-          name={<Translate id="search" />}
+          name={TEXT.zh_hant.search}
           icon={<Icon.SearchLarge size="lg" />}
           activeIcon={<Icon.SearchLarge size="lg" color="green" />}
           active={isInSearch}
@@ -89,7 +83,7 @@ const NavBar = () => {
         />
 
         <NavListItem
-          name={<Translate id="notification" />}
+          name={TEXT.zh_hant.notification}
           icon={<Icon.NotificationLarge size="lg" />}
           activeIcon={<Icon.NotificationActiveLarge size="lg" color="green" />}
           active={isInNotification}

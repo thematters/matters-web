@@ -8,9 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -102,9 +100,12 @@ const Topics = () => {
 
 export default () => (
   <Layout>
-    <Head title={{ id: 'allTopics' }} />
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="allTopics" />}
+    />
 
-    <PageHeader title={<Translate id="allTopics" />} />
+    <Head title={{ id: 'allTopics' }} />
 
     <Topics />
   </Layout>
