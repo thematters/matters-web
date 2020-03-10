@@ -32,15 +32,11 @@ const SideNav = () => {
   const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
   const isInSearch = router.pathname === PATHS.SEARCH.href
   const isInMe =
-    router.asPath.indexOf(viewerUserName) >= 0 ||
-    [
-      PATHS.ME_APPRECIATIONS_RECEIVED.href,
-      PATHS.ME_APPRECIATIONS_SENT.href,
-      PATHS.ME_SETTINGS_ACCOUNT.href,
-      PATHS.ME_SETTINGS_BLOCKED.href,
-      PATHS.ME_SETTINGS_NOTIFICATION.href
-    ].indexOf(router.pathname) >= 0
-  const isInDraftDetail = router.asPath.indexOf('/me/drafts') >= 0
+    router.asPath.indexOf('/me') >= 0 ||
+    router.query.userName === viewerUserName
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+
+  console.log(router)
 
   return (
     <section className="side-nav">
