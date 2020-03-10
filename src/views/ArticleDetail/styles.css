@@ -1,4 +1,9 @@
-header {
+.content {
+  padding: var(--spacing-base);
+  min-height: 100vh;
+}
+
+.title {
   margin-bottom: var(--spacing-base);
 
   & .subtitle {

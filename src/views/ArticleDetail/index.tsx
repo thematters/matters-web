@@ -18,7 +18,6 @@ import {
   Throw404,
   Title,
   Translate,
-  useImmersiveMode,
   useResponsive,
   ViewerContext
 } from '~/components'
@@ -114,8 +113,6 @@ const ArticleDetail = () => {
     }
   }, [article])
 
-  useImmersiveMode('article > .content')
-
   if (loading) {
     return (
       <EmptyLayout>
@@ -191,15 +188,15 @@ const ArticleDetail = () => {
 
       <State article={article} />
 
-      <Layout.Spacing>
-        <header>
+      <section className="content">
+        <section className="title">
           <Title type="article">{article.title}</Title>
 
           <section className="subtitle">
             <DateTime date={article.createdAt} />
             <section className="right">{article.live && <Icon.Live />}</section>
           </section>
-        </header>
+        </section>
 
         <Content article={article} />
 
@@ -230,7 +227,7 @@ const ArticleDetail = () => {
         )}
 
         {!isLargeUp && !shouldShowWall && <RelatedArticles article={article} />}
-      </Layout.Spacing>
+      </section>
 
       <Toolbar mediaHash={mediaHash} />
 

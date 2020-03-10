@@ -38,7 +38,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
   const { article } = data
 
   return (
-    <section className="container">
+    <section className="toolbar">
       <section className="appreciate-button">
         <AppreciationButton article={article} inFixedToolbar />
       </section>
