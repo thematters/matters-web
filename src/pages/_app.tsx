@@ -15,7 +15,7 @@ import {
   ViewerFragments,
   ViewerProvider
 } from '~/components'
-import { ClientInfoUpdater } from '~/components/ClientInfoUpdater'
+import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
@@ -104,7 +104,7 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
       <ErrorBoundary>
         <ApolloProvider client={apollo}>
           <GlobalStyles />
-          <ClientInfoUpdater />
+          <ClientUpdater />
 
           <Root client={apollo}>
             <Component {...pageProps} />

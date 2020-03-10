@@ -1,8 +1,12 @@
+import { useQuery } from '@apollo/react-hooks'
 import Router from 'next/router'
 
 import { Button, ButtonProps, Icon, useResponsive } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { TEXT } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 type BackButtonProps = {
   mode?: 'black-solid'
@@ -10,10 +14,18 @@ type BackButtonProps = {
 
 export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   const isSmallUp = useResponsive('sm-up')
-  const onBack = () => {
-    Router.back()
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
 
-    // TODO: if previous url isn't onsite
+  const onBack = () => {
+    const routeHistory = data?.clientPreference.routeHistory || []
+
+    if (routeHistory.length > 0) {
+      Router.back()
+    } else {
+      Router.push(PATHS.HOME.href, PATHS.HOME.as)
+    }
   }
 
   if (mode === 'black-solid') {

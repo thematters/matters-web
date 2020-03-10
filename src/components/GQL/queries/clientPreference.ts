@@ -11,6 +11,7 @@ export default gql`
         enabled
         supported
       }
+      routeHistory
     }
   }
 `
