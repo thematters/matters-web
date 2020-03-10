@@ -46,13 +46,15 @@ const texts: {
   }
 }
 
-const likeCoinLink = 'https://matters.news/@likecoin/'
-  + '%E5%8C%96%E8%AE%9A%E7%82%BA%E8%B3%9E-%E8%AE%9A%E8%B3%9E%E5%85%AC%E6%B0%91%E6%87%B6%E4%BA%BA%E5%8C%85-'
-  + 'zdpuAtWT6a2rjr75JZBzwnvy67vrxw5cBRqwnHbkFehRYHLXx'
+const likeCoinLink =
+  'https://matters.news/@likecoin/' +
+  '%E5%8C%96%E8%AE%9A%E7%82%BA%E8%B3%9E-%E8%AE%9A%E8%B3%9E%E5%85%AC%E6%B0%91%E6%87%B6%E4%BA%BA%E5%8C%85-' +
+  'zdpuAtWT6a2rjr75JZBzwnvy67vrxw5cBRqwnHbkFehRYHLXx'
 
-const communityLink = 'https://matters.news/@Nikko/'
-  + '%E8%AE%A9%E4%B8%A7%E5%AE%B6%E4%B9%8B%E7%8A%AC%E5%86%8D%E8%B7%91%E4%B8%80%E4%BC%9A%E5%84%BF-'
-  + 'zdpuB2uXYrM44Q4KfzpdAsUtiqCH7vccj79m3iqvXTJH4ZS5s'
+const communityLink =
+  'https://matters.news/@Nikko/' +
+  '%E8%AE%A9%E4%B8%A7%E5%AE%B6%E4%B9%8B%E7%8A%AC%E5%86%8D%E8%B7%91%E4%B8%80%E4%BC%9A%E5%84%BF-' +
+  'zdpuB2uXYrM44Q4KfzpdAsUtiqCH7vccj79m3iqvXTJH4ZS5s'
 
 const Feature = ({
   children,
