@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestCard,
   ArticleDigestSidebar,
-  List,
+  // List,
   Spinner,
   useResponsive
 } from '~/components'
@@ -15,6 +15,7 @@ import { analytics } from '~/common/utils'
 
 import FeedHeader from './FeedHeader'
 import styles from './styles.css'
+import TopicSidebarArticleDigest from './TopicSidebarArticleDigest'
 
 import { IcymiFeed } from './__generated__/IcymiFeed'
 import { TopicsFeed } from './__generated__/TopicsFeed'
@@ -33,6 +34,7 @@ const FeedQueries = {
               node {
                 ...ArticleDigestSidebarArticle
                 ...ArticleDigestCardArticle
+                ...TopicSidebarArticleDigestArticle
               }
             }
           }
@@ -41,6 +43,7 @@ const FeedQueries = {
     }
     ${ArticleDigestSidebar.fragments.article}
     ${ArticleDigestCard.fragments.article}
+    ${TopicSidebarArticleDigest.fragments.article}
   `,
   topics: gql`
     query TopicsFeed($first: Int, $after: String) {
@@ -51,16 +54,18 @@ const FeedQueries = {
             edges {
               cursor
               node {
-                ...ArticleDigestSidebarArticle
+                ...TopicSidebarArticleDigestArticle
                 ...ArticleDigestCardArticle
+                ...ArticleDigestSidebarArticle
               }
             }
           }
         }
       }
     }
-    ${ArticleDigestSidebar.fragments.article}
+    ${TopicSidebarArticleDigest.fragments.article}
     ${ArticleDigestCard.fragments.article}
+    ${ArticleDigestSidebar.fragments.article}
   `
 }
 
@@ -106,28 +111,35 @@ const Feed = ({
   return (
     <section className={feedClass}>
       <FeedHeader type={type} />
-      {isMediumUp ? (
-        <List spacing={['loose', 0]}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestSidebar
-                article={node}
-                titleTextSize="sm"
-                hasCover
-                onClick={tranckClick(i)}
-              />
-            </List.Item>
-          ))}
-        </List>
-      ) : (
+      {
         <ul>
-          {edges.map(({ node, cursor }, i) => (
-            <li key={cursor}>
-              {<ArticleDigestCard article={node} onClick={tranckClick(i)} />}
-            </li>
-          ))}
+          {edges.map(({ node, cursor }, i) =>
+            isMediumUp ? (
+              type === 'icymi' ? (
+                <li
+                  key={cursor}
+                  onClick={tranckClick(i)}
+                  style={{ marginTop: 16, marginBottom: 24 }}
+                >
+                  <ArticleDigestSidebar
+                    article={node}
+                    titleTextSize="sm"
+                    hasCover
+                  />
+                </li>
+              ) : (
+                <li key={cursor} onClick={tranckClick(i)}>
+                  <TopicSidebarArticleDigest article={node} />
+                </li>
+              )
+            ) : (
+              <li key={cursor} onClick={tranckClick(i)}>
+                {<ArticleDigestCard article={node} />}
+              </li>
+            )
+          )}
         </ul>
-      )}
+      }
       <style jsx>{styles}</style>
     </section>
   )

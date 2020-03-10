@@ -34,11 +34,11 @@ const USER_QUERY = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-const Authors = ({ first = 5 }: { first?: number }) => {
+const Users = ({ first = 5 }: { first?: number }) => {
   const isMediumUp = useResponsive('md-up')
   const feedClass = classNames({
     'horizontal-feed': !isMediumUp,
-    'author-feed': true
+    'user-feed': true
   })
   const { data, loading, error } = useQuery<UserFeed>(USER_QUERY, {
     notifyOnNetworkStatusChange: true,
@@ -116,4 +116,4 @@ const Authors = ({ first = 5 }: { first?: number }) => {
   )
 }
 
-export default Authors
+export default Users

@@ -50,7 +50,7 @@ const TAG_QUERY = gql`
   ${ArticleDigestTitle.fragments.article}
 `
 
-const Tags = ({ first = 5 }: { first: number }) => {
+const Tags = ({ first = 5 }: { first?: number }) => {
   const isMediumUp = useResponsive('md-up')
 
   const feedClass = classNames({
@@ -84,7 +84,22 @@ const Tags = ({ first = 5 }: { first: number }) => {
             page: 'tagDetail',
             id: node.id
           })
-          return (
+
+          const onClick = () =>
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+              type: FEED_TYPE.TAGS,
+              location: i
+            })
+          return isMediumUp ? (
+            <li key={cursor} onClick={onClick}>
+              <Tag
+                tag={node}
+                size="sm"
+                type="count-fixed"
+                style={{ paddingBottom: '1rem', marginBottom: '1rem' }}
+              />
+            </li>
+          ) : (
             <li key={cursor}>
               <Card
                 {...path}
@@ -100,12 +115,7 @@ const Tags = ({ first = 5 }: { first: number }) => {
                   size="lg"
                   type="count-fixed"
                   count={false}
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAGS,
-                      location: i
-                    })
-                  }
+                  onClick={onClick}
                   style={{
                     paddingBottom: 0,
                     paddingLeft: 15,
