@@ -16,8 +16,9 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import Icymi from './Icymi'
+import ArticleFeed from './Articles'
 import SortBy from './SortBy'
+import UserFeed from './Users'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -40,9 +41,9 @@ interface FeedLocation {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: Icymi,
-  5: Icymi,
-  8: Icymi
+  2: () => <ArticleFeed type={'icymi'} first={3} />,
+  5: () => <ArticleFeed type={'topics'} first={3} />,
+  8: () => <UserFeed first={9} />
 }
 
 const feedFragment = gql`
@@ -160,7 +161,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     locs.map(loc => {
       if (mixFeed.length >= loc) {
         mixFeed.splice(loc, 0, {
-          Feed: (horizontalFeeds as FeedLocation)[loc],
+          Feed: horizontalFeeds[loc],
           __typename: 'HorizontalFeed'
         })
       }
@@ -174,7 +175,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
           {mixFeed.map((edge, i) => {
             if (edge.__typename === 'HorizontalFeed') {
               const { Feed } = edge
-              return <Feed first={3} key={i} />
+              return <Feed key={i} />
             } else {
               return (
                 <List.Item key={i}>

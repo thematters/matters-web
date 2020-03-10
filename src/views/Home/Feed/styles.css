@@ -48,7 +48,21 @@ header {
     & li {
       margin: var(--spacing-loose) 0;
       margin: 0;
-      padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
+      padding: 0 1.5rem var(--spacing-base) 0;
     }
   }
+
+  & header {
+    margin-top: 0;
+    margin-right: var(--spacing-base);
+    margin-bottom: var(--spacing-base);
+  }
+}
+
+.horizontal-feed.article-feed {
+  background: var(--color-green-lighter);
+}
+
+.horizontal-feed.author-feed {
+  background: var(--color-yellow-lighter);
 }

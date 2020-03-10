@@ -17,42 +17,77 @@ import FeedHeader from './FeedHeader'
 import styles from './styles.css'
 
 import { IcymiFeed } from './__generated__/IcymiFeed'
+import { TopicsFeed } from './__generated__/TopicsFeed'
 
-export const ICYMI_FEED = gql`
-  query IcymiFeed($first: Int, $after: String) {
-    viewer {
-      id
-      recommendation {
-        icymi(input: { first: $first, after: $after }) {
-          edges {
-            cursor
-            node {
-              ...ArticleDigestSidebarArticle
-              ...ArticleDigestCardArticle
+type FeedTypes = 'icymi' | 'topics'
+
+const FeedQueries = {
+  icymi: gql`
+    query IcymiFeed($first: Int, $after: String) {
+      viewer {
+        id
+        recommendation {
+          articles: icymi(input: { first: $first, after: $after }) {
+            edges {
+              cursor
+              node {
+                ...ArticleDigestSidebarArticle
+                ...ArticleDigestCardArticle
+              }
             }
           }
         }
       }
     }
-  }
-  ${ArticleDigestSidebar.fragments.article}
-  ${ArticleDigestCard.fragments.article}
-`
+    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestCard.fragments.article}
+  `,
+  topics: gql`
+    query TopicsFeed($first: Int, $after: String) {
+      viewer {
+        id
+        recommendation {
+          articles: topics(input: { first: $first, after: $after }) {
+            edges {
+              cursor
+              node {
+                ...ArticleDigestSidebarArticle
+                ...ArticleDigestCardArticle
+              }
+            }
+          }
+        }
+      }
+    }
+    ${ArticleDigestSidebar.fragments.article}
+    ${ArticleDigestCard.fragments.article}
+  `
+}
 
-const Icymi = ({ first = 5, after }: { first?: number; after?: string }) => {
+const Feed = ({
+  first = 5,
+  after,
+  type = 'icymi'
+}: {
+  first?: number
+  after?: string
+  type?: FeedTypes
+}) => {
+  const QUERY = FeedQueries[type]
   const isMediumUp = useResponsive('md-up')
 
   const feedClass = classNames({
-    'horizontal-feed': !isMediumUp
+    'horizontal-feed': !isMediumUp,
+    'article-feed': true
   })
 
-  const { data, loading } = useQuery<IcymiFeed>(ICYMI_FEED, {
+  const { data, loading } = useQuery<IcymiFeed | TopicsFeed>(QUERY, {
     variables: {
       first,
       after
     }
   })
-  const edges = data?.viewer?.recommendation.icymi.edges
+  const edges = data?.viewer?.recommendation.articles.edges
 
   if (loading) {
     return <Spinner />
@@ -70,7 +105,7 @@ const Icymi = ({ first = 5, after }: { first?: number; after?: string }) => {
 
   return (
     <section className={feedClass}>
-      <FeedHeader type="icymi" />
+      <FeedHeader type={type} />
       {isMediumUp ? (
         <List spacing={['loose', 0]}>
           {edges.map(({ node, cursor }, i) => (
@@ -98,4 +133,4 @@ const Icymi = ({ first = 5, after }: { first?: number; after?: string }) => {
   )
 }
 
-export default Icymi
+export default Feed
