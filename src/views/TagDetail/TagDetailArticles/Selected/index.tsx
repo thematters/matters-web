@@ -28,7 +28,7 @@ import {
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const SelectedArticles = ({ id }: { id: string }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
     TagArticles
   >(TAG_ARTICLES, {
@@ -110,7 +110,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
   return (
     <section>
       <InfiniteScroll
-        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
         <List hasBorder>
@@ -132,7 +132,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
         </List>
       </InfiniteScroll>
 
-      {!isMediumUp && pageInfo.hasNextPage && (
+      {!isLargeUp && pageInfo.hasNextPage && (
         <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </section>

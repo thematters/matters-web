@@ -103,6 +103,7 @@ export default () => (
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="allTopics" />}
+      marginBottom={0}
     />
 
     <Head title={{ id: 'allTopics' }} />

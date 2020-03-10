@@ -72,7 +72,7 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
@@ -118,7 +118,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   return (
     <>
       <InfiniteScroll
-        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
         <List hasBorder>
@@ -138,7 +138,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         </List>
       </InfiniteScroll>
 
-      {!isMediumUp && pageInfo.hasNextPage && (
+      {!isLargeUp && pageInfo.hasNextPage && (
         <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </>

@@ -1,5 +1,5 @@
 .container {
-  margin-top: var(--spacing-loose);
-  margin-bottom: var(--spacing-xx-loose);
+  padding: var(--spacing-x-loose) 0;
   text-align: center;
+  line-height: 1;
 }
