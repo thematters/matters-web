@@ -15,7 +15,8 @@ interface LoginButtonBaseProps {
   isPlain?: boolean
 }
 
-type LoginButtonProps = LoginButtonBaseProps & Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+type LoginButtonProps = LoginButtonBaseProps &
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
 export const LoginButton: React.FC<LoginButtonProps> = ({
   bgColor,

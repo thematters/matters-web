@@ -121,30 +121,32 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          loading={loading}
-          onClick={() => {
-            const element = document.getElementById('migration-uploader')
-            if (element) {
-              element.click()
-            }
-          }}
-        >
-          <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
-          <VisuallyHidden>
-            <input
-              id="migration-uploader"
-              type="file"
-              name="file"
-              aira-label="上傳檔案"
-              accept={acceptTypes}
-              multiple={true}
-              onChange={handleChange}
-            />
-          </VisuallyHidden>
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <form>
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            loading={loading}
+            onClick={() => {
+              const element = document.getElementById('migration-uploader')
+              if (element) {
+                element.click()
+              }
+            }}
+          >
+            <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
+            <VisuallyHidden>
+              <input
+                id="migration-uploader"
+                type="file"
+                name="file"
+                aira-label="上傳檔案"
+                accept={acceptTypes}
+                multiple={true}
+                onChange={handleChange}
+              />
+            </VisuallyHidden>
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      </form>
       <style jsx>{styles}</style>
     </>
   )
