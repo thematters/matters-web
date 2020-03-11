@@ -14,7 +14,7 @@ interface FeedHeaderProps {
 
 const FeedHeader = ({ type, rightButton }: FeedHeaderProps) => {
   const pathMap = {
-    icymi: false,
+    icymi: PATHS.ICYMI,
     topics: PATHS.TOPICS,
     users: PATHS.AUTHORS,
     tags: PATHS.TAGS

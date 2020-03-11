@@ -66,6 +66,7 @@ export const FEED_TYPE = {
   TOPICS: 'topics',
   ICYMI: 'icymi',
   ALL_TOPICS: 'all-topics',
+  ALL_ICYMI: 'all-icymi',
   TAG_DETAIL: 'tag-detail',
   FOLLOW: 'follow',
   USER_ARTICLE: 'user-article',
