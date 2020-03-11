@@ -42,7 +42,7 @@ const CollectionList: React.FC<CollectionListProps> = ({
   }
 
   return (
-    <List spacing={['base', 0]}>
+    <List spacing={['base', 0]} hasBorder={false}>
       {edges.map(({ node, cursor }, i) => (
         <List.Item key={cursor}>
           <ArticleDigestSidebar

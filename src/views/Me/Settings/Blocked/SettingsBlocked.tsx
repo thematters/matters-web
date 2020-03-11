@@ -90,7 +90,7 @@ const SettingsBlocked = () => {
   return (
     <section className="container">
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List hasBorder={false}>
           {filteredUsers.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich

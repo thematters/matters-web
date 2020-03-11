@@ -77,7 +77,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
       {error && <QueryError error={error} />}
 
       {!loading && (
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
               <UserDigest.Rich user={node} hasFollow />

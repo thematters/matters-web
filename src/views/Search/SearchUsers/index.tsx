@@ -78,7 +78,7 @@ const SearchUser = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
+      <List hasBorder={false}>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (

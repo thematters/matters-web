@@ -55,7 +55,7 @@ const AggregateArticleResults = () => {
 
   return (
     <section className="aggregate-section">
-      <List hasBorder>
+      <List>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (

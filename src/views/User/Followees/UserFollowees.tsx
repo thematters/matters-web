@@ -101,7 +101,7 @@ const UserFollowees = () => {
         }}
       />
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich

@@ -83,7 +83,7 @@ const Authors = () => {
       {loading && <Spinner />}
 
       {!loading && (
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich

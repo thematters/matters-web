@@ -55,21 +55,19 @@ const ARTICLE_APPRECIATORS = gql`
 const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
   const { node, cursor } = datum
   const { articleId } = parentProps
+
   return (
-    <div
-      className="appreciator-item"
-      key={cursor}
-      onClick={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-          type: FEED_TYPE.APPRECIATOR,
-          location: index,
-          entrance: articleId
-        })
-      }}
-    >
+    <div className="appreciator-item" key={cursor}>
       <UserDigest.Rich
         user={node.sender}
         avatarBadge={<span className="appreciation-amount">{node.amount}</span>}
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+            type: FEED_TYPE.APPRECIATOR,
+            location: index,
+            entrance: articleId
+          })
+        }}
       />
       <style jsx>{styles}</style>
     </div>

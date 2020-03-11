@@ -59,9 +59,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
     }
 
     return () =>
-      analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, {
-        entrance: id
-      })
+      analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, { entrance: id })
   }, [])
 
   useEffect(() => {

@@ -121,7 +121,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <List hasBorder>
+        <List>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <ArticleDigestFeed

@@ -114,7 +114,7 @@ const LatestArticles = ({ id }: { id: string }) => {
         hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
-        <List hasBorder>
+        <List>
           {(edges || []).map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <ArticleDigestFeed

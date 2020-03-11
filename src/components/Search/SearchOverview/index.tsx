@@ -71,24 +71,24 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
           </Menu.Header>
 
           <ul>
-            {recentSearches.map(({ node }, i) => (
-              <li key={node}>
+            {recentSearches.map(({ node: key }, i) => (
+              <li key={key}>
                 <LinkWrapper
                   {...toPath({
                     page: 'search',
-                    q: node
+                    q: key
                   })}
                   onClick={() => {
                     analytics.trackEvent(
                       ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
                       {
                         location: i,
-                        entrance: node
+                        entrance: key
                       }
                     )
                   }}
                 >
-                  {node}
+                  {key}
                 </LinkWrapper>
               </li>
             ))}

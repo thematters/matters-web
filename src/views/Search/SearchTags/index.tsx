@@ -82,7 +82,7 @@ const SearchTag = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
