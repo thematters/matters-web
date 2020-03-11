@@ -52,14 +52,10 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} size="sm">
-        <Dialog.Header
-          title={<Translate id="changeUserName" />}
-          close={close}
-          headerHidden
-        />
+        <Dialog.Header title="changeUserName" close={close} headerHidden />
 
         <Dialog.Message
-          headline={<Translate id="blockUser" />}
+          headline="blockUser"
           description={
             <>
               <Translate

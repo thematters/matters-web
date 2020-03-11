@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 
 import Content from './Content'
 
@@ -31,7 +31,7 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title={<Translate id="IPFSEntrance" />} close={close} />
+        <Dialog.Header title="IPFSEntrance" close={close} />
 
         <Dialog.Content spacing={[0, 0]} hasGrow>
           <Content dataHash={article.dataHash || ''} />

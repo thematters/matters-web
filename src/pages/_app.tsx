@@ -10,16 +10,13 @@ import {
   AnalyticsListener,
   Error,
   ErrorBoundary,
-  Head,
   LanguageProvider,
   Toast,
   ViewerFragments,
   ViewerProvider
 } from '~/components'
-import { ClientInfoUpdater } from '~/components/ClientInfoUpdater'
+import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
-import { GlobalHeader } from '~/components/GlobalHeader'
-import { HeaderContextProvider } from '~/components/GlobalHeader/Context'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
@@ -35,12 +32,10 @@ const ROOT_QUERY = gql`
     viewer {
       id
       ...ViewerUser
-      ...GlobalHeaderUser
       ...AnalyticsUser
     }
   }
   ${ViewerFragments.user}
-  ${GlobalHeader.fragments.user}
   ${AnalyticsListener.fragments.user}
 `
 
@@ -88,19 +83,14 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        <HeaderContextProvider>
-          <Head />
-          <GlobalHeader user={viewer} />
+        {children}
 
-          {children}
+        <GlobalDialogs />
+        <Toast.Container />
+        <ProgressBar />
 
-          <GlobalDialogs />
-          <Toast.Container />
-          <ProgressBar />
-
-          <AnalyticsListener user={viewer || {}} />
-          <PushInitializer client={client} />
-        </HeaderContextProvider>
+        <AnalyticsListener user={viewer || {}} />
+        <PushInitializer client={client} />
       </LanguageProvider>
     </ViewerProvider>
   )
@@ -114,7 +104,7 @@ class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
       <ErrorBoundary>
         <ApolloProvider client={apollo}>
           <GlobalStyles />
-          <ClientInfoUpdater />
+          <ClientUpdater />
 
           <Root client={apollo}>
             <Component {...pageProps} />

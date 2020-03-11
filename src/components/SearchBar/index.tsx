@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
@@ -11,20 +11,19 @@ import {
   PopperInstance
 } from '~/components'
 
-import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { getQuery, toPath, translate } from '~/common/utils'
+import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
+import { getQuery, routerPush, toPath, translate } from '~/common/utils'
 
 import AutoComplete from './AutoComplete'
 import styles from './styles.css'
 
 const SearchButton = () => (
   <Button
-    size={[null, '2.25rem']}
-    spacing={[0, 'xtight']}
+    size={['2rem', '2rem']}
     type="submit"
-    aria-label="搜尋"
+    aria-label={TEXT.zh_hant.search}
   >
-    <Icon.SearchLarge size="md" color="black" />
+    <Icon.SearchMedium size="md" color="grey-dark" />
   </Button>
 )
 
@@ -61,7 +60,7 @@ export const SearchBar: React.FC<{
           page: 'search',
           q: values.q.slice(0, 100)
         })
-        Router.push(path.href, path.as)
+        routerPush(path.href, path.as)
         hideDropdown()
       }}
     >
@@ -100,6 +99,7 @@ export const SearchBar: React.FC<{
               />
             }
             trigger="manual"
+            placement="bottom-start"
             onCreate={instance => (instanceRef.current = instance)}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}

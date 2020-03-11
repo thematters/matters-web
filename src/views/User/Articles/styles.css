@@ -1,11 +1,12 @@
 .info {
   display: flex;
   align-items: center;
+  padding: var(--spacing-x-tight) var(--spacing-base);
 
-  color: var(--color-grey);
+  color: var(--color-grey-dark);
 
   & .num {
-    color: var(--color-grey-darker);
+    color: var(--color-black);
     font-weight: var(--font-weight-semibold);
   }
 }

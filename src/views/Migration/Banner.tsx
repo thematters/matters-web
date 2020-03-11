@@ -27,9 +27,10 @@ const Banner = () => {
           hasIcon={false}
           size={[isSmallUp ? '8rem' : '7rem', '2.5rem']}
           spacing={[0, 0]}
+          inCard={false}
         >
           <TextIcon color="white" size={isSmallUp ? 'md' : 'sm'} weight="md">
-            <Translate zh_hant="分享給好友" zh_hans="分享给好友" />
+            <Translate zh_hant="邀請朋友搬家" zh_hans="邀请朋友搬家" />
           </TextIcon>
         </ShareButton>
       </section>

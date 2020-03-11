@@ -18,7 +18,7 @@ interface TextIconProps {
 
   color?: TextIconColor
   size?: 'xs' | 'sm' | 'md-s' | 'md' | 'xm' | 'lg'
-  spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
+  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   textPlacement?: 'bottom' | 'left' | 'right'

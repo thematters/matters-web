@@ -222,7 +222,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="addArticleTag" />}
+        title="addArticleTag"
         close={closeDialog}
         rightButton={SubmitButton}
       />

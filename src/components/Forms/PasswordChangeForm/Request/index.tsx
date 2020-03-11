@@ -6,7 +6,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  PageHeader,
+  Layout,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -48,6 +48,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
   const formId = `password-change-request-form`
+  const titleId = isForget ? 'resetPassword' : 'changePassword'
 
   const {
     values,
@@ -142,18 +143,18 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
     />
   )
 
-  const Title = isForget ? (
-    <Translate id="resetPassword" />
-  ) : (
-    <Translate id="changePassword" />
-  )
-
   if (isInPage) {
     return (
       <>
-        <PageHeader title={Title} hasNoBorder>
-          {SubmitButton}
-        </PageHeader>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id={titleId} />
+              {SubmitButton}
+            </>
+          }
+        />
 
         {InnerForm}
       </>
@@ -164,7 +165,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={Title}
+          title={titleId}
           close={closeDialog}
           rightButton={SubmitButton}
         />

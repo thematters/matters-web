@@ -14,6 +14,7 @@
 
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
+  will-change: transform;
 
   &.fixed-height {
     height: 80vh;
@@ -22,6 +23,7 @@
 
   @media (--sm-up) {
     border-radius: 0.5rem;
+    will-change: opacity;
 
     &.no-header {
       padding-top: 0;

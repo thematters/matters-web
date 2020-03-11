@@ -1,13 +1,13 @@
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
-import { Translate } from '~/components'
+import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { getQuery, routerPush } from '~/common/utils'
 import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
 
 import { Box } from '../../Box'
-import styles from './styles.css'
+import styles from '../styles.css'
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
@@ -43,28 +43,32 @@ const OAuthCallbackFailure = () => {
   const errorDetail = ERROR_TEXT[code as any]
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    Router.push(PATHS.HOME.as)
+    routerPush(PATHS.HOME.href, PATHS.HOME.as)
     return null
   }
 
   return (
-    <main className="l-row">
-      <Box avatar={avatar[provider]} title={title[provider]}>
-        <section className="content">
-          <h2>
-            <Translate zh_hant="出錯了" zh_hans="出错了" />
-          </h2>
+    <Layout>
+      <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
-          {errorDetail && (
-            <p>
-              <Translate {...errorDetail} />
-            </p>
-          )}
-        </section>
-      </Box>
+      <Layout.Spacing>
+        <Box avatar={avatar[provider]} title={title[provider]}>
+          <section className="content">
+            <h2>
+              <Translate zh_hant="出錯了" zh_hans="出错了" />
+            </h2>
 
-      <style jsx>{styles}</style>
-    </main>
+            {errorDetail && (
+              <p>
+                <Translate {...errorDetail} />
+              </p>
+            )}
+
+            <style jsx>{styles}</style>
+          </section>
+        </Box>
+      </Layout.Spacing>
+    </Layout>
   )
 }
 

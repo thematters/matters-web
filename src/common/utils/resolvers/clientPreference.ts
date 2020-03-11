@@ -9,6 +9,7 @@ export default (_: any) => {
       supported: false,
       __typename: 'Push'
     },
+    routeHistory: [],
     __typename: 'ClientPreference'
   }
 }

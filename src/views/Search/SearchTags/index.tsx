@@ -6,14 +6,14 @@ import {
   PageHeader,
   Spinner,
   Tag,
-  Translate
+  Translate,
+  ViewAllButton
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 import styles from './styles.css'
 
 import {
@@ -44,7 +44,20 @@ const SEARCH_TAGS = gql`
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
   <PageHeader is="h2" title={<Translate id="tag" />}>
-    {viewAll && q && <ViewAll q={q} type="tag" />}
+    {viewAll && q && (
+      <ViewAllButton
+        {...toPath({
+          page: 'search',
+          type: 'tag',
+          q
+        })}
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
+            type: 'tag-search'
+          })
+        }}
+      />
+    )}
   </PageHeader>
 )
 

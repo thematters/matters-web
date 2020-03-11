@@ -4,13 +4,11 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestFeed,
   EmptyArticle,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -100,22 +98,16 @@ const Topics = () => {
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allTopics' }} />
+export default () => (
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="allTopics" />}
+      marginBottom={0}
+    />
 
-        <PageHeader title={<Translate id="allTopics" />} />
+    <Head title={{ id: 'allTopics' }} />
 
-        <section>
-          <Topics />
-        </section>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-    </main>
-  )
-}
+    <Topics />
+  </Layout>
+)

@@ -1,9 +1,10 @@
-import { useContext, useEffect } from 'react'
+import Link from 'next/link'
+import { useContext } from 'react'
 
-import { Head, LanguageContext } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head, Icon, LanguageContext } from '~/components'
 import Footer from '~/components/Standalone/Footer'
 
+import { PATHS, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import Banner from './Banner'
@@ -33,12 +34,6 @@ const texts: {
 const Migration = () => {
   const { zh_hant, zh_hans } = texts
   const { lang } = useContext(LanguageContext)
-  const { updateHeaderState } = useContext(HeaderContext)
-
-  useEffect(() => {
-    updateHeaderState({ type: 'migration', bgColor: 'transparent' })
-    return () => updateHeaderState({ type: 'default' })
-  }, [])
 
   return (
     <main>
@@ -55,13 +50,21 @@ const Migration = () => {
         })}
       />
 
-      <article>
-        <Intro />
-        <Steps />
-        <Features />
-        <Banner />
-        <Footer />
-      </article>
+      <header>
+        <section className="l-row">
+          <Link {...PATHS.HOME}>
+            <a className="logo" aria-label={TEXT.zh_hant.discover}>
+              <Icon.Logo />
+            </a>
+          </Link>
+        </section>
+      </header>
+
+      <Intro />
+      <Steps />
+      <Features />
+      <Banner />
+      <Footer />
 
       <style jsx>{styles}</style>
     </main>

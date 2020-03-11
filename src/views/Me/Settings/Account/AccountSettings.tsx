@@ -23,8 +23,8 @@ const EditButton = ({
   <Button
     size={['4rem', '1.5rem']}
     textColor="green"
-    textHoverColor="white"
-    bgHoverColor="green"
+    textActiveColor="white"
+    bgActiveColor="green"
     borderColor="green"
     onClick={open}
     disabled={disabled}

@@ -1,11 +1,15 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef } from 'react'
 
+import { Translate } from '~/components'
+
+import { TextId } from '~/common/enums'
+
 import { CloseButton, RightButton } from './Button'
 import styles from './styles.css'
 
 export interface HeaderProps {
-  title: string | React.ReactNode
+  title: TextId | React.ReactElement
   close: () => void
   headerHidden?: boolean
   rightButton?: React.ReactNode | string
@@ -15,7 +19,13 @@ const BaseHeader = forwardRef(
   ({ title, close, rightButton }: HeaderProps, ref) => (
     <header>
       <h1>
-        <span id="dialog-title">{title}</span>
+        <span id="dialog-title">
+          {typeof title === 'string' ? (
+            <Translate id={title as TextId} />
+          ) : (
+            title
+          )}
+        </span>
       </h1>
 
       <section className="left">

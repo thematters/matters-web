@@ -82,7 +82,11 @@ const Dialog: React.FC<DialogProps> = ({
         }
 
         return (
-          <AnimatedDialogOverlay initialFocusRef={closeButtonRef} key={key}>
+          <AnimatedDialogOverlay
+            initialFocusRef={closeButtonRef}
+            key={key}
+            className="dialog"
+          >
             <AnimatedOverlay style={{ opacity }} />
 
             <DialogContent

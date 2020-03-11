@@ -11,14 +11,13 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
-  Footer,
   Head,
   Icon,
+  Layout,
   Spinner,
   Throw404,
   Title,
   Translate,
-  useImmersiveMode,
   useResponsive,
   ViewerContext
 } from '~/components'
@@ -39,7 +38,6 @@ import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-// import { ArticleEdited } from './__generated__/ArticleEdited'
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String) {
@@ -78,6 +76,13 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   loading: Spinner
 })
 
+const EmptyLayout: React.FC = ({ children }) => (
+  <Layout>
+    <Layout.Header left={<Layout.Header.BackButton />} />
+    {children}
+  </Layout>
+)
+
 const ArticleDetail = () => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
@@ -96,26 +101,11 @@ const ArticleDetail = () => {
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
 
-  // subscribeToMore,
-
   const shouldShowWall = !viewer.isAuthed && wall
   const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
-
-  // useEffect(() => {
-  //   if (article && article.live) {
-  //     subscribeToMore<ArticleEdited>({
-  //       document: ARTICLE_EDITED,
-  //       variables: { id: article.id },
-  //       updateQuery: (prev, { subscriptionData }) =>
-  //         _merge(prev, {
-  //           article: subscriptionData.data.nodeEdited
-  //         })
-  //     })
-  //   }
-  // })
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -123,77 +113,92 @@ const ArticleDetail = () => {
     }
   }, [article])
 
-  useImmersiveMode('article > .content')
-
   if (loading) {
-    return <Spinner />
+    return (
+      <EmptyLayout>
+        <Spinner />
+      </EmptyLayout>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <EmptyLayout>
+        <QueryError error={error} />
+      </EmptyLayout>
+    )
   }
 
   if (!article) {
-    return <Throw404 />
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
-      <Error
-        statusCode={404}
-        message={
-          article.state === 'archived' ? (
-            <Translate
-              zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-              zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-            />
-          ) : article.state === 'banned' ? (
-            <Translate
-              zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
-              zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
-            />
-          ) : null
-        }
-      >
-        <BackToHomeButton />
-      </Error>
+      <EmptyLayout>
+        <Error
+          statusCode={404}
+          message={
+            article.state === 'archived' ? (
+              <Translate
+                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+              />
+            ) : article.state === 'banned' ? (
+              <Translate
+                zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
+                zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+              />
+            ) : null
+          }
+        >
+          <BackToHomeButton />
+        </Error>
+      </EmptyLayout>
     )
   }
 
   return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-7 l-offset-lg-2">
-        <section>
-          <Head
-            title={article.title}
-            description={article.summary}
-            keywords={
-              article.tags
-                ? article.tags.map(({ content }: { content: any }) => content)
-                : []
-            }
-            image={article.cover}
+    <Layout aside={<RelatedArticles article={article} inSidebar />}>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={
+          <UserDigest.Rich
+            user={article.author}
+            size="sm"
+            hasFollow
+            hasState
+            spacing={[0, 0]}
+            bgActiveColor={undefined}
           />
+        }
+        marginBottom={0}
+      />
 
-          <State article={article} />
+      <Head
+        title={article.title}
+        description={article.summary}
+        keywords={(article.tags || []).map(({ content }) => content)}
+        image={article.cover}
+      />
 
-          <section className="author">
-            <UserDigest.Rich user={article.author} hasFollow />
+      <State article={article} />
+
+      <section className="content">
+        <section className="title">
+          <Title type="article">{article.title}</Title>
+
+          <section className="subtitle">
+            <DateTime date={article.createdAt} />
+            <section className="right">{article.live && <Icon.Live />}</section>
           </section>
-
-          <section className="title">
-            <Title type="article">{article.title}</Title>
-
-            <span className="subtitle">
-              <p className="date">
-                <DateTime date={article.createdAt} />
-              </p>
-              <span className="right">{article.live && <Icon.Live />}</span>
-            </span>
-          </section>
-
-          <Content article={article} />
         </section>
+
+        <Content article={article} />
 
         {(collectionCount > 0 || canEditCollection) && (
           <section className="block">
@@ -215,32 +220,26 @@ const ArticleDetail = () => {
           }}
         />
 
-        {shouldShowWall && (
-          <>
-            <section id="comments" />
-            <Wall show={fixedWall} />
-          </>
-        )}
-
         {!shouldShowWall && (
           <section className="block">
             <DynamicResponse />
           </section>
         )}
 
-        {!isLargeUp && <RelatedArticles article={article} />}
+        {!isLargeUp && !shouldShowWall && <RelatedArticles article={article} />}
+      </section>
 
-        <Toolbar mediaHash={mediaHash} />
-      </article>
+      <Toolbar mediaHash={mediaHash} />
 
-      <aside className="l-col-lg-3">
-        {isLargeUp && <RelatedArticles article={article} inSidebar />}
-
-        <Footer />
-      </aside>
+      {shouldShowWall && (
+        <>
+          <section id="comments" />
+          <Wall show={fixedWall} />
+        </>
+      )}
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

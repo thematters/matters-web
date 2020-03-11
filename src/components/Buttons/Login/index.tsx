@@ -48,7 +48,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   }
 
   const isGreen = bgColor === 'green'
-  const buttonBgHoverColor = isGreen ? undefined : 'green-lighter'
+  const buttonBgActiveColor = isGreen ? undefined : 'green-lighter'
   const buttonSize = size || [null, '2.25rem']
   const buttonSpacing = spacing || [0, 'loose']
   const textIconColor = isGreen ? 'white' : 'green'
@@ -59,7 +59,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
       bgColor={bgColor}
       size={buttonSize}
       spacing={buttonSpacing}
-      bgHoverColor={buttonBgHoverColor}
+      bgActiveColor={buttonBgActiveColor}
       aria-haspopup="true"
       {...clickProps}
     >

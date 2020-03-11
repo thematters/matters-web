@@ -1,4 +1,4 @@
-import { Empty, Icon, SearchBar } from '~/components'
+import { Empty, Icon } from '~/components'
 
 const EmptySearch = ({
   inSidebar = false,
@@ -12,10 +12,8 @@ const EmptySearch = ({
       icon={!inSidebar && <Icon.Search size="xxl" color="grey-lighter" />}
       description={description}
       size={inSidebar ? 'sm' : undefined}
-      spacing={['loose', '0']}
-    >
-      {!inSidebar && <SearchBar autoComplete={false} />}
-    </Empty>
+      spacing={['loose', 0]}
+    />
   </>
 )
 

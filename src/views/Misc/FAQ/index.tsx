@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Head, LanguageContext } from '~/components'
+import { Head, LanguageContext, Layout } from '~/components'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'
@@ -8,36 +8,42 @@ import { translate } from '~/common/utils'
 
 import MiscTab from '../MiscTab'
 import content from './content'
+import styles from './styles.css'
 
 const FAQ = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <main>
+    <Layout>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={<Layout.Header.Title id="faq" />}
+      />
+
       <Head title={{ id: 'faq' }} />
 
-      <section className="l-row">
-        <div className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <MiscTab />
+      <MiscTab />
 
-          <article
-            dangerouslySetInnerHTML={{
-              __html: translate({
-                ...content,
-                lang
-              })
-            }}
-          />
-        </div>
+      <Layout.Spacing>
+        <section
+          className="faq"
+          dangerouslySetInnerHTML={{
+            __html: translate({
+              ...content,
+              lang
+            })
+          }}
+        />
+      </Layout.Spacing>
 
-        <style jsx global>
-          {contentStyles}
-        </style>
-        <style jsx global>
-          {detailsStyles}
-        </style>
-      </section>
-    </main>
+      <style jsx>{styles}</style>
+      <style jsx global>
+        {contentStyles}
+      </style>
+      <style jsx global>
+        {detailsStyles}
+      </style>
+    </Layout>
   )
 }
 

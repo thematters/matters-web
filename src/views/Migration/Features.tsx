@@ -16,16 +16,16 @@ const texts: {
     header: '搬家完成後，你將立刻獲得以下功能',
     title_1: '實現作品的永久保存',
     content_1:
-      '選擇發佈後，你的文章將被上傳到星際文件系統（InterPlanetary File System，IPFS）的節點上' +
-      '，實現作品内容的分佈式儲存，無法被删改。你可使用這些分佈式節點傳播你的作品。',
+      '選擇發佈後，你的文章將被上載到星際文件系統（InterPlanetary File System，IPFS）的節點上' +
+      '，實現作品内容的分佈式存儲，無法被删改。你可使用這些分佈式節點傳播你的作品。',
     title_4: '持續的被動收入',
     content_4:
-      '你的文章在 Matters 發佈後，讀者就可以為文章讚賞，每一筆讚賞都將轉換成數字貨幣 LikeCoin，' +
-      '變成創作者的收入。讚賞没有時間期限，除非你將作品隱藏，否則每一篇文章都可持續收到讚賞。',
+      '你的文章在 Matters 發佈後，讀者就可以為文章拍手，每一筆拍手都將轉換成加密貨幣 LikeCoin，' +
+      '變成創作者的收入。拍手没有時間期限，除非你將作品隱藏，否則每一篇文章都可持續收到拍手。',
     title_5: '優質的讀者互動',
     content_5:
       'Matters 的用戶來自中國大陸、香港、台灣、馬來西亞等地，擁有華文世界裡最優質與多元的寫作評論社區。',
-    likecoin: '了解 LikeCoin →',
+    likecoin: '了解什麼是 LikeCoin →',
     examples: '有多優質，请看這裡 →'
   },
   zh_hans: {
@@ -41,7 +41,7 @@ const texts: {
     title_5: '优质的读者互动',
     content_5:
       'Matters 的用户来自中国大陆、香港、台湾、马来西亚等地，拥有华文世界里最优质与多元的写作评论社区。',
-    likecoin: '了解 LikeCoin →',
+    likecoin: '了解什么是 LikeCoin →',
     examples: '有多优质，请看这里 →'
   }
 }

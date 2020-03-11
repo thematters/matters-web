@@ -1,43 +1,42 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { DateTime, Title, Translate } from '~/components'
+import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, stripHtml, toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 
-import DeleteButton from '../Components/DeleteButton'
+import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
 import styles from './styles.css'
 
 import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
+
+interface DraftDigestFeedProps {
+  draft: DraftDigestFeedDraft
+}
 
 const fragments = {
   draft: gql`
     fragment DraftDigestFeedDraft on Draft {
       id
       title
-      summary
       slug
-      scheduledAt
       updatedAt
-      publishState
+      ...EditButtonDraft
+      ...DeleteButtonDraft
     }
+    ${EditButton.fragments.draft}
+    ${DeleteButton.fragments.draft}
   `
 }
 
-const DraftDigestFeed = ({ draft }: { draft: DraftDigestFeedDraft }) => {
-  const { id, title, summary, publishState, updatedAt, slug } = draft
+const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
+  const { id, title, updatedAt, slug } = draft
   const path = toPath({
     page: 'draftDetail',
     slug,
     id
   })
-  const containerClasses = classNames({
-    container: true,
-    [publishState]: true
-  })
-  const cleanedSummary = stripHtml(summary)
 
   const onClick = () =>
     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, {
@@ -45,35 +44,31 @@ const DraftDigestFeed = ({ draft }: { draft: DraftDigestFeedDraft }) => {
     })
 
   return (
-    <section className={containerClasses}>
-      <div className="content">
-        <div className="title">
-          <Link {...path}>
-            <a onClick={onClick}>
-              <Title type="feed" is="h2">
-                {title || <Translate id="untitle" />}
-              </Title>
-            </a>
-          </Link>
-        </div>
+    <Card
+      {...path}
+      spacing={['base', 'base']}
+      bgActiveColor="green-lighter"
+      onClick={onClick}
+    >
+      <LinkWrapper {...path} textActiveColor="green">
+        <Title type="feed" is="h2">
+          {title || <Translate id="untitle" />}
+        </Title>
+      </LinkWrapper>
 
-        <div className="description">
-          <Link {...path}>
-            <a onClick={onClick}>
-              <p>{cleanedSummary}</p>
-            </a>
-          </Link>
+      <footer>
+        <section className="left">
+          <EditButton draft={draft} />
+          <DeleteButton draft={draft} />
+        </section>
 
-          <footer className="actions">
-            <DateTime date={updatedAt} type="relative" />
-
-            <DeleteButton id={id} />
-          </footer>
-        </div>
-      </div>
+        <section className="right">
+          <DateTime date={updatedAt} type="relative" />
+        </section>
+      </footer>
 
       <style jsx>{styles}</style>
-    </section>
+    </Card>
   )
 }
 

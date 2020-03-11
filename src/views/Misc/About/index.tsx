@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react'
+import Link from 'next/link'
 
-import { Head } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
+import { Head, Icon } from '~/components'
 import Footer from '~/components/Standalone/Footer'
+
+import { PATHS, TEXT } from '~/common/enums'
 
 import Features from './Features'
 import Goal from './Goal'
@@ -11,24 +12,25 @@ import Slogan from './Slogan'
 import styles from './styles.css'
 
 const About = () => {
-  const { updateHeaderState } = useContext(HeaderContext)
-
-  useEffect(() => {
-    updateHeaderState({ type: 'about', bgColor: 'transparent' })
-    return () => updateHeaderState({ type: 'default' })
-  }, [])
-
   return (
     <main>
       <Head title={{ id: 'about' }} />
 
-      <article>
-        <Slogan />
-        <Goal />
-        <Features />
-        <Reports />
-        <Footer />
-      </article>
+      <header>
+        <section className="l-row">
+          <Link {...PATHS.HOME}>
+            <a className="logo" aria-label={TEXT.zh_hant.discover}>
+              <Icon.Logo />
+            </a>
+          </Link>
+        </section>
+      </header>
+
+      <Slogan />
+      <Goal />
+      <Features />
+      <Reports />
+      <Footer />
 
       <style jsx>{styles}</style>
     </main>

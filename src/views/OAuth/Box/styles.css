@@ -3,20 +3,13 @@
 }
 
 .container {
-  @mixin border-grey;
-  margin-top: 5rem;
-
-  background: var(--color-white);
-  border-radius: 0.25rem;
-
-  @media (--md-up) {
-    margin-top: 10rem;
+  @media (--sm-up) {
+    padding: var(--spacing-xxx-loose);
   }
 }
 
 header {
   padding: 0 var(--spacing-x-loose);
-  margin-top: calc(var(--box-avatar-size) / 2 * -1);
 
   & :global(.avatar) {
     display: block;

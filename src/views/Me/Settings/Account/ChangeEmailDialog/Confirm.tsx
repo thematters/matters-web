@@ -160,7 +160,7 @@ const Confirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="changeEmail" />}
+        title="changeEmail"
         close={closeDialog}
         rightButton={SubmitButton}
       />

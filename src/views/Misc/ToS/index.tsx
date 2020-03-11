@@ -1,19 +1,20 @@
-import { Head, Term } from '~/components'
+import { Head, Layout, Term } from '~/components'
 
 import MiscTab from '../MiscTab'
 
-export default () => {
-  return (
-    <main>
-      <Head title={{ id: 'termAndPrivacy' }} />
+export default () => (
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="termAndPrivacy" />}
+    />
 
-      <section className="l-row">
-        <article className="l-col-4 l-col-md-6 l-offset-md-1 l-col-lg-8 l-offset-lg-2">
-          <MiscTab />
+    <Head title={{ id: 'termAndPrivacy' }} />
 
-          <Term />
-        </article>
-      </section>
-    </main>
-  )
-}
+    <MiscTab />
+
+    <Layout.Spacing>
+      <Term />
+    </Layout.Spacing>
+  </Layout>
+)

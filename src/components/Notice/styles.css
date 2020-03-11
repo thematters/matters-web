@@ -86,17 +86,10 @@
   margin-top: var(--spacing-tight);
 }
 
-.follower-content {
-  background: var(--color-yellow-lighter);
-  border-radius: var(--spacing-xx-tight);
-  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
-}
-
 .tag-content {
   position: relative;
 
   & :global(.card) {
-
     & :global(.tag > span.text) {
       white-space: nowrap;
 
@@ -125,8 +118,8 @@
         &::after {
           background-image: linear-gradient(
             to left,
-            var(--color-grey-lighter-hover),
-            var(--color-grey-lighter-hover) 33%,
+            var(--color-grey-lighter-active),
+            var(--color-grey-lighter-active) 33%,
             rgba(235, 240, 238, 0)
           );
         }

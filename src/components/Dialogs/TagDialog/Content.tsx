@@ -1,6 +1,5 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import Router from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -18,6 +17,7 @@ import { ADD_TOAST } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
+  routerPush,
   toPath,
   translate
 } from '~/common/utils'
@@ -174,7 +174,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          Router.push(path.as)
+          routerPush(path.href, path.as)
         } else {
           closeDialog()
         }
@@ -235,7 +235,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id={content ? 'editTag' : 'createTag'} />}
+        title={content ? 'editTag' : 'createTag'}
         close={closeDialog}
         rightButton={SubmitButton}
       />

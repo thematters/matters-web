@@ -1,9 +1,6 @@
 import jump from 'jump.js'
-import { useContext } from 'react'
-import { Waypoint } from 'react-waypoint'
 
 import { Button, TextIcon, Translate } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import IMAGE_MIGRATION_LG from '~/static/images/migration-intro-lg.svg'
 import IMAGE_MIGRATION_MD from '~/static/images/migration-intro-md.svg'
@@ -34,27 +31,12 @@ const texts: {
 }
 
 const Intro = () => {
-  const type = 'migration'
-
   const { zh_hant, zh_hans } = texts
-
-  const { updateHeaderState } = useContext(HeaderContext)
 
   return (
     <section className="intro-wrap">
       <section className="l-row intro">
         <section className="l-col-4 l-col-md-8 l-col-lg-12">
-          <Waypoint
-            topOffset={64}
-            onEnter={() => updateHeaderState({ type, bgColor: 'transparent' })}
-            onLeave={() => updateHeaderState({ type, bgColor: 'default' })}
-            onPositionChange={({ currentPosition }) => {
-              if (currentPosition === 'above') {
-                updateHeaderState({ type, bgColor: 'default' })
-              }
-            }}
-          />
-
           <section>
             <h2>
               <Translate zh_hant={zh_hant.intro} zh_hans={zh_hans.intro} />

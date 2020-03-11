@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniqBy from 'lodash/uniqBy'
-import { useContext } from 'react'
 
 import { Translate } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
@@ -41,18 +39,19 @@ const UPDATE_COVER = gql`
   ${fragments.draft}
 `
 
-const CoverList = ({
-  draftId,
-  cover,
-  assets
-}: {
-  draftId: string
-  cover: string | null
-  assets: AddCoverDraft_assets[]
-}) => {
-  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER)
-  const { updateHeaderState } = useContext(HeaderContext)
+interface AddCover {
+  draft: AddCoverDraft
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+}
 
+type CoverListProps = AddCover & {
+  assets: AddCoverDraft_assets[]
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+}
+
+const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
+  const { cover, id } = draft
+  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER)
   const uniqAssets = _uniqBy(assets, 'path')
 
   return (
@@ -72,21 +71,17 @@ const CoverList = ({
             aria-label={`選擇圖 ${index + 1} 作爲作品封面`}
             key={asset.path}
             onClick={async () => {
-              updateHeaderState({ type: 'draft', state: 'saving', draftId })
+              setSaveStatus('saving')
               try {
                 await update({
                   variables: {
-                    id: draftId,
+                    id,
                     coverAssetId: asset.id
                   }
                 })
-                updateHeaderState({ type: 'draft', state: 'saved', draftId })
+                setSaveStatus('saved')
               } catch (error) {
-                updateHeaderState({
-                  type: 'draft',
-                  state: 'saveFailed',
-                  draftId
-                })
+                setSaveStatus('saveFailed')
               }
             }}
           >
@@ -98,8 +93,8 @@ const CoverList = ({
   )
 }
 
-const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
-  const { id: draftId, cover, assets } = draft
+const AddCover = ({ draft, ...props }: AddCover) => {
+  const { assets } = draft
   const imageAssets = assets.filter(
     ({ type }: { type: string }) => type === 'embed'
   )
@@ -131,7 +126,7 @@ const AddCover = ({ draft }: { draft: AddCoverDraft }) => {
       </p>
 
       <section className={containerStyle}>
-        <CoverList draftId={draftId} cover={cover} assets={imageAssets} />
+        <CoverList draft={draft} assets={imageAssets} {...props} />
       </section>
 
       <style jsx>{styles}</style>

@@ -7,11 +7,11 @@ import {
   ArticleDigestFeed,
   InfiniteScroll,
   List,
-  LoadMore,
   PageHeader,
   Spinner,
   Translate,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -43,7 +43,7 @@ const SEARCH_ARTICLES = gql`
 `
 
 const SearchArticles = ({ q }: { q: string }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {
@@ -90,7 +90,7 @@ const SearchArticles = ({ q }: { q: string }) => {
 
   return (
     <InfiniteScroll
-      hasNextPage={isMediumUp && pageInfo.hasNextPage}
+      hasNextPage={isLargeUp && pageInfo.hasNextPage}
       loadMore={loadMore}
     >
       <PageHeader is="h2" title={<Translate id="article" />} />
@@ -114,8 +114,8 @@ const SearchArticles = ({ q }: { q: string }) => {
         )}
       </List>
 
-      {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+      {!isLargeUp && pageInfo.hasNextPage && (
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </InfiniteScroll>
   )

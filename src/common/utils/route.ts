@@ -43,18 +43,6 @@ type ToPathArgs =
       userName: string
     }
   | {
-      page: 'userDrafts'
-      userName: string
-    }
-  | {
-      page: 'userBookmarks'
-      userName: string
-    }
-  | {
-      page: 'userHistory'
-      userName: string
-    }
-  | {
       page: 'userFollowers'
       userName: string
     }
@@ -120,24 +108,6 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       return {
         href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
         as: `/@${args.userName}/comments`
-      }
-    }
-    case 'userDrafts': {
-      return {
-        href: `${PATHS.USER_DRAFTS.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/drafts`
-      }
-    }
-    case 'userBookmarks': {
-      return {
-        href: `${PATHS.USER_BOOKMARKS.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/bookmarks`
-      }
-    }
-    case 'userHistory': {
-      return {
-        href: `${PATHS.USER_HISTORY.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/history`
       }
     }
     case 'userFollowers': {
@@ -216,7 +186,7 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return Router.push(
+  return routerPush(
     `${PATHS.AUTH_LOGIN.href}?target=${target}`,
     `${PATHS.AUTH_LOGIN.as}?target=${target}`
   )
@@ -254,4 +224,21 @@ export const appendTarget = ({
       as
     }
   }
+}
+
+/**
+ * Scroll to page top after `Route.push`
+ *
+ * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
+ * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
+ */
+export const routerPush = (href: string, as?: string) => {
+  Router.push(href, as).then((success: boolean) => {
+    if (!success) {
+      return
+    }
+
+    window.scrollTo(0, 0)
+    document.body.focus()
+  })
 }

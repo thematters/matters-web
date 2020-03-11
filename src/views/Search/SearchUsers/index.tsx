@@ -7,14 +7,14 @@ import {
   PageHeader,
   Spinner,
   Translate,
-  UserDigest
+  UserDigest,
+  ViewAllButton
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 
 import { SeachUsers } from './__generated__/SeachUsers'
 
@@ -41,7 +41,20 @@ const SEARCH_USERS = gql`
 
 const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
   <PageHeader is="h2" title={<Translate id="user" />}>
-    {viewAll && q && <ViewAll q={q} type="user" />}
+    {viewAll && q && (
+      <ViewAllButton
+        {...toPath({
+          page: 'search',
+          type: 'user',
+          q
+        })}
+        onClick={() => {
+          analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
+            type: 'user-search'
+          })
+        }}
+      />
+    )}
   </PageHeader>
 )
 

@@ -6,6 +6,7 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   InfiniteScroll,
+  Layout,
   Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -95,9 +96,7 @@ const Feed = () => {
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Feed />
-    </article>
-  </main>
+  <Layout>
+    <Feed />
+  </Layout>
 )

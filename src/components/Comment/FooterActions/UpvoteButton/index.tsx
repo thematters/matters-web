@@ -13,6 +13,13 @@ import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteCo
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import { UpvoteComment } from './__generated__/UpvoteComment'
 
+interface UpvoteButtonProps {
+  comment: UpvoteComment
+  onClick?: () => void
+  disabled?: boolean
+  inCard: boolean
+}
+
 const fragments = {
   comment: gql`
     fragment UpvoteComment on Comment {
@@ -27,12 +34,9 @@ const fragments = {
 const UpvoteButton = ({
   comment,
   onClick,
-  disabled
-}: {
-  comment: UpvoteComment
-  onClick?: () => void
-  disabled?: boolean
-}) => {
+  disabled,
+  inCard
+}: UpvoteButtonProps) => {
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -63,7 +67,7 @@ const UpvoteButton = ({
     return (
       <Button
         spacing={['xtight', 'xtight']}
-        bgHoverColor="grey-lighter"
+        bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
         }}
@@ -80,7 +84,7 @@ const UpvoteButton = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
       onClick={() => {
         onClick ? onClick() : upvote()
       }}

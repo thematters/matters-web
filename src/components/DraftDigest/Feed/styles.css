@@ -1,29 +1,13 @@
-.description {
-  margin-top: var(--spacing-x-tight);
-  padding-right: 0;
-
-  color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
-  line-height: 1.71428571;
-
-  & :global(.actions > *) {
-    margin-top: var(--spacing-base);
-  }
-}
-
-.actions {
-  display: flex;
-  align-items: center;
+footer {
+  @mixin flex-center-space-between;
 
   margin-top: var(--spacing-x-tight);
 
-  font-size: var(--font-size-xs);
-  color: var(--color-grey-dark);
-
-  & :global(> *) {
-    margin-right: var(--spacing-tight);
-
-    color: var(--color-grey-dark);
-    line-height: 1;
+  & .left,
+  & .right {
+    & :global(> *) {
+      padding-right: var(--spacing-loose);
+      vertical-align: middle;
+    }
   }
 }

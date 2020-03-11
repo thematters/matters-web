@@ -1,7 +1,6 @@
 .toast {
-  margin-bottom: var(--spacing-base);
+  margin: 0 var(--spacing-base) var(--spacing-base);
   padding: var(--spacing-x-tight) var(--spacing-base);
-  width: 100%;
 
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);

@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Fragment, useEffect } from 'react'
 
-import { Menu, Translate } from '~/components'
+import { LinkWrapper, Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -65,7 +65,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
 
           <section className="recent-searches">
             {recentSearches.map(({ node }, i) => (
-              <a
+              <LinkWrapper
                 {...toPath({
                   page: 'search',
                   q: node
@@ -79,7 +79,7 @@ const AutoComplete = ({ hideDropdown, searchKey = '' }: Props) => {
                 key={node}
               >
                 {node}
-              </a>
+              </LinkWrapper>
             ))}
 
             <style jsx>{styles}</style>

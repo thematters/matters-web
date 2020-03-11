@@ -7,7 +7,7 @@ import styles from './styles.css'
 
 interface MenuProps {
   width?: 'sm' | 'md'
-  spacingY?: 'xtight' | 0 | '0'
+  spacingY?: 'xtight' | 0
 }
 
 export const Menu: React.FC<MenuProps> & {

@@ -117,7 +117,7 @@ export const MigrationUploader = () => {
           {loading ? (
             <Spinner />
           ) : (
-            <Translate zh_hant="導入作品" zh_hans="导入作品" />
+            <Translate zh_hant="匯入作品" zh_hans="导入作品" />
           )}
         </TextIcon>
       </Button>
@@ -127,7 +127,7 @@ export const MigrationUploader = () => {
           id="migration-uploader"
           type="file"
           name="file"
-          aira-label="導入作品"
+          aira-label="匯入作品"
           accept={acceptTypes}
           multiple={true}
           onChange={handleChange}

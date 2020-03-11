@@ -25,27 +25,27 @@ const texts: {
 } = {
   zh_hant: {
     header: '三個步驟，立即搬家',
-    title_1: '登錄帳號',
-    content_1:
-      '註冊或登入你的 Matters 帳號，加入自主、永續、有價的創作與公共討論空間。',
-    sub_content_1: '還不是 Matters 創作者？',
-    sub_content_2: '馬上入駐 →',
-    title_2: '下載檔案',
-    content_2: '前往 Medium 設定頁面導出你的作品，查收郵件並下載檔案。',
-    title_3: '導入作品',
-    content_3: '你無需守候在電腦旁，搬家完成後你會收到郵件通知，請你上站查看。'
+    title_1: '登入帳戶',
+    content_1: '註冊或登入你的 Matters 帳戶，開啟你的個人創作空間站。',
+    sub_content_1_1: '還不是 Matters 創作者？',
+    sub_content_1_2: '馬上入駐 →',
+    title_2: '預備檔案',
+    content_2: '前往 Medium 設置頁面下載檔案，解壓並找到其中 HTML 格式的作品檔案。',
+    sub_content_2_1: '下載檔案',
+    title_3: '匯入作品',
+    content_3: '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱。'
   },
   zh_hans: {
     header: '三个步骤，立即搬家',
-    title_1: '登录账号',
-    content_1:
-      '注册或登入你的 Matters 账号，加入自主、永续、有价的创作与公共讨论空间。',
-    sub_content_1: '还不是 Matters 创作者？',
-    sub_content_2: '马上入驻 →',
-    title_2: '下载档案',
-    content_2: '前往 Medium 设置页面导出你的作品，查收邮件并下载档案。',
+    title_1: '登陆帐户',
+    content_1: '注册或登入你的 Matters 帐户，开启你的个人创作空间站。',
+    sub_content_1_1: '还不是 Matters 创作者？',
+    sub_content_1_2: '马上入驻 →',
+    title_2: '准备文档',
+    content_2: '前往 Medium 设置页面下载文档，解压并找到其中 HTML 格式的作品文件。',
+    sub_content_2_1: '下载文档',
     title_3: '导入作品',
-    content_3: '你無需守候在電腦旁，搬家完成後你會收到郵件通知，請你上站查看。'
+    content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。'
   }
 }
 
@@ -114,15 +114,15 @@ const Steps = () => {
               />
               <p className="sub-content">
                 <Translate
-                  zh_hant={zh_hant.sub_content_1}
-                  zh_hans={zh_hans.sub_content_1}
+                  zh_hant={zh_hant.sub_content_1_1}
+                  zh_hans={zh_hans.sub_content_1_1}
                 />
               </p>
               <section className="sub-content-link">
                 <SignUpButton trackType={SIGNUP_TYPE.GENERAL} isPlain>
                   <Translate
-                    zh_hant={zh_hant.sub_content_2}
-                    zh_hans={zh_hans.sub_content_2}
+                    zh_hant={zh_hant.sub_content_1_2}
+                    zh_hans={zh_hans.sub_content_1_2}
                   />
                 </SignUpButton>
               </section>
@@ -139,7 +139,10 @@ const Steps = () => {
             {...buttonProps}
           >
             <TextIcon color="green" size="md" weight="md">
-              <Translate zh_hant={zh_hant.title_2} zh_hans={zh_hans.title_2} />
+              <Translate
+                zh_hant={zh_hant.sub_content_2_1}
+                zh_hans={zh_hans.sub_content_2_1}
+              />
             </TextIcon>
           </Button>
         </Step>

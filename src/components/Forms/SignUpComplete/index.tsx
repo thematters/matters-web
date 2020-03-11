@@ -1,4 +1,4 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
@@ -14,9 +14,19 @@ export const SignUpComplete = ({
 
   return (
     <>
+      {isInPage && (
+        <Layout.Header
+          left={
+            <>
+              <Layout.Header.Title id="register" />
+            </>
+          }
+        />
+      )}
+
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="successRegister" />}
+          title="successRegister"
           close={closeDialog}
           headerHidden
         />

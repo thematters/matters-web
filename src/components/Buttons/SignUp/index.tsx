@@ -1,4 +1,5 @@
 import { Button, TextIcon, useResponsive } from '~/components'
+import { Translate } from '~/components/Language'
 
 import {
   ANALYTICS_EVENTS,
@@ -49,7 +50,7 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
       {...clickProps}
     >
       <TextIcon color="white" weight="md">
-        {children}
+        <Translate id="register" />
       </TextIcon>
     </Button>
   )
