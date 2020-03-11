@@ -11,6 +11,8 @@ import styles from './styles.css'
 
 interface LayoutProps {
   aside?: React.ReactNode
+  // TODO: this prop only temporally used by DraftDetail,
+  // would be removed after revamped
   asideShowInMobile?: boolean
   bgColor?: 'grey-lighter'
 }
@@ -23,7 +25,8 @@ export const Layout: React.FC<LayoutProps> & {
   const isLargeUp = useResponsive('lg-up')
   const mainClass = classNames({
     'l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9': true,
-    [`bg-${bgColor}`]: !!bgColor
+    [`bg-${bgColor}`]: !!bgColor,
+    asideShowInMobile
   })
   const navClass = classNames({
     'l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-9-2': true,
