@@ -17,7 +17,8 @@ type ShareButtonBaseProps = {
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
 
-type ShareButtonProps = ShareButtonBaseProps & Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+type ShareButtonProps = ShareButtonBaseProps &
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
 export const ShareButton: React.FC<ShareButtonProps> = ({
   children,
