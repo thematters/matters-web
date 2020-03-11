@@ -26,11 +26,11 @@ export const Layout: React.FC<LayoutProps> & {
     [`bg-${bgColor}`]: !!bgColor
   })
   const navClass = classNames({
-    'l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-3': true,
+    'l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-9-2': true,
     'u-sm-down-hide': true
   })
   const articleClass = classNames({
-    'l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-9': true
+    'l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-9-7': true
   })
   const asideClass = classNames({
     'l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-3 l-offset-lg-0': true,

@@ -20,11 +20,7 @@ import styles from './styles.css'
 
 const prefix = 'toast-'
 
-const Container = ({
-  layout = 'l-col-4 l-offset-sm-1 l-col-sm-7 l-offset-md-1 l-col-md-7 l-offset-lg-2 l-col-lg-7'
-}: {
-  layout?: string
-}) => {
+const Container = () => {
   const [toasts, setToasts] = useState<any[]>([])
 
   const add = (payload: { [key: string]: any }) => {
@@ -48,10 +44,14 @@ const Container = ({
     <>
       <section className="toast-container">
         <div className="l-row full">
-          <div className={layout}>
-            {toasts.map(toast => (
-              <ToastWithEffect key={toast.id} {...toast} />
-            ))}
+          <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9">
+            <div className="l-row full">
+              <div className="l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-9-7 l-offset-lg-9-2">
+                {toasts.map(toast => (
+                  <ToastWithEffect key={toast.id} {...toast} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
