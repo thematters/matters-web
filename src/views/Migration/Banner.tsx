@@ -1,6 +1,12 @@
 import { useContext } from 'react'
 
-import { LanguageContext, ShareButton, TextIcon, Translate, useResponsive } from '~/components'
+import {
+  LanguageContext,
+  ShareButton,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 
 import { translate } from '~/common/utils'
 import IMAGE_BANNER from '~/static/images/migration-banner.svg'
