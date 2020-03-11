@@ -21,7 +21,7 @@ const FeedHeader = ({ type, rightButton }: FeedHeaderProps) => {
   }
   const titleMap = {
     icymi: <Translate zh_hant="不要錯過" zh_hans="不要错过" />,
-    topics: <Translate zh_hant="熱議話題" zh_hans="热议话题" />,
+    topics: <Translate zh_hant="熱議廣場" zh_hans="热议广场" />,
     users: <Translate zh_hant="值得關注" zh_hans="值得关注" />,
     tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" />
   }
