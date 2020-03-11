@@ -90,7 +90,6 @@ const Authors = () => {
                 user={node}
                 spacing={['tight', 0]}
                 bgActiveColor={undefined}
-                hasFollow
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.AUTHORS,

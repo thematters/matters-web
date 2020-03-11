@@ -25,7 +25,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       spacing={['base', 'base']}
       {...toPath({
         page: 'search',
-        type: 'tag',
+        type,
         q
       })}
       onClick={() => {

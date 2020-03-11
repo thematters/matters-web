@@ -96,6 +96,7 @@ const SettingsBlocked = () => {
               <UserDigest.Rich
                 user={node}
                 hasUnblock
+                hasFollow={false}
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.ALL_AUTHORS,

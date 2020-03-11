@@ -63,7 +63,7 @@ const Rich = ({
   size = 'lg',
   avatarBadge,
 
-  hasFollow,
+  hasFollow = true,
   hasState = true,
   hasUnblock,
 

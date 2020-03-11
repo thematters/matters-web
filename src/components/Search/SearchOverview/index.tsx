@@ -47,7 +47,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   })
 
   if (loading) {
-    return <Spinner />
+    return (
+      <Menu width={inPage ? undefined : 'md'}>
+        <Spinner />
+      </Menu>
+    )
   }
 
   if (!showFrequentSearch && !showSearchHistory) {

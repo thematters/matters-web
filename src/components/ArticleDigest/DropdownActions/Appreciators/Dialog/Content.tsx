@@ -70,7 +70,6 @@ const ListRow = ({ index, datum, parentProps }: RowRendererProps) => {
       <UserDigest.Rich
         user={node.sender}
         avatarBadge={<span className="appreciation-amount">{node.amount}</span>}
-        hasFollow
       />
       <style jsx>{styles}</style>
     </div>

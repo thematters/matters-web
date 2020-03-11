@@ -1,16 +1,12 @@
-.autocomplete {
-  & .key {
-    @mixin line-clamp;
-    font-size: var(--font-size-sm);
+.key {
+  @mixin line-clamp;
+  font-size: var(--font-size-sm);
 
-    &.highlight {
-      color: var(--color-matters-green);
-    }
+  &.highlight {
+    color: var(--color-matters-green);
   }
 
   &.inPage {
-    & .key {
-      font-size: var(--font-size-md);
-    }
+    font-size: var(--font-size-md);
   }
 }

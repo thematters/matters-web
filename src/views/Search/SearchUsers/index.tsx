@@ -85,7 +85,6 @@ const SearchUser = () => {
               <List.Item key={cursor}>
                 <UserDigest.Rich
                   user={node}
-                  hasFollow
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_USER,
