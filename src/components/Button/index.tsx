@@ -50,7 +50,10 @@ type ButtonColor =
   | 'gold'
   | 'red'
 
-type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
+type ButtonTextColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'green' | 'red' | 'grey'
+>
 
 export type ButtonBgColor = Extract<
   ButtonColor,
