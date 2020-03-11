@@ -21,15 +21,17 @@ const texts: {
 } = {
   zh_hant: {
     content_1: '選擇並上傳檔案',
-    content_2: '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱'
-      + '，目前支持上傳 HTML 檔案。',
+    content_2:
+      '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱' +
+      '，目前支持上傳 HTML 檔案。',
     upload: '上傳檔案',
     success: '作品上傳完成'
   },
   zh_hans: {
     content_1: '选择并上传文件',
-    content_2: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱'
-      + '，目前支持上传 HTML 文件。',
+    content_2:
+      '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱' +
+      '，目前支持上传 HTML 文件。',
     upload: '上传文件',
     success: '文件上传完成'
   }
@@ -39,9 +41,7 @@ interface MigrationDialogUploadProps {
   nextStep: () => void
 }
 
-const MigrationDialogUpload = ({
-  nextStep
-}: MigrationDialogUploadProps) => {
+const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
   const { zh_hant, zh_hans } = texts
   const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
 
@@ -99,7 +99,9 @@ const MigrationDialogUpload = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
+            content: (
+              <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
+            )
           }
         })
       )
@@ -113,16 +115,10 @@ const MigrationDialogUpload = ({
     <>
       <Dialog.Content spacing={['base', 'base']}>
         <p className="action">
-          <Translate
-            zh_hant={zh_hant.content_1}
-            zh_hans={zh_hans.content_1}
-          />
+          <Translate zh_hant={zh_hant.content_1} zh_hans={zh_hans.content_1} />
         </p>
         <p className="description">
-          <Translate
-            zh_hant={zh_hant.content_2}
-            zh_hans={zh_hans.content_2}
-          />
+          <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
       <Dialog.Footer>

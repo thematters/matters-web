@@ -151,7 +151,7 @@ const Steps = () => {
 
         <Step src={IMAGE_STEP_3} step={3}>
           <MigrationDialog>
-            {({ open }) =>
+            {({ open }) => (
               <Button
                 aria-haspopup="true"
                 bgColor="green"
@@ -160,10 +160,13 @@ const Steps = () => {
                 onClick={open}
               >
                 <TextIcon color="white" size="md" weight="md">
-                  <Translate zh_hant={zh_hant.title_3} zh_hans={zh_hans.title_3} />
+                  <Translate
+                    zh_hant={zh_hant.title_3}
+                    zh_hans={zh_hans.title_3}
+                  />
                 </TextIcon>
               </Button>
-            }
+            )}
           </MigrationDialog>
         </Step>
       </section>
