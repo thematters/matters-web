@@ -3,14 +3,13 @@ import { useEffect } from 'react'
 
 import {
   EmptyNotice,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
   Notice,
-  PageHeader,
   Spinner,
-  Translate
+  useResponsive
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
@@ -19,12 +18,10 @@ import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnread
 
 import { mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
 
-const Notifications = () => {
+const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
     MARK_ALL_NOTICES_AS_READ,
     {
@@ -70,36 +67,35 @@ const Notifications = () => {
     })
 
   return (
-    <section className="container">
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List spacing={['xloose', 0]} hasBorder>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <Notice notice={node} />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      <style jsx>{styles}</style>
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List spacing={['xloose', 'base']} hasBorder>
+        {edges.map(({ node, cursor }) => (
+          <List.Item key={cursor}>
+            <Notice notice={node} />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 
-export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ id: 'allNotification' }} />
+const Notifications = () => {
+  const isSmallUp = useResponsive('sm-up')
 
-      <PageHeader title={<Translate id="allNotification" />} />
+  return (
+    <Layout>
+      <Layout.Header
+        left={
+          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+        }
+        right={<Layout.Header.Title id="notification" />}
+      />
 
-      <section>
-        <Notifications />
-      </section>
-    </article>
+      <Head title={{ id: 'notification' }} />
 
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
-)
+      <BaseNotifications />
+    </Layout>
+  )
+}
+
+export default Notifications

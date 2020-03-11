@@ -11,6 +11,10 @@
   & header {
     @mixin flex-center-space-between;
     padding-bottom: var(--spacing-base);
+
+    & .right :global(> * + *) {
+      margin-left: var(--spacing-x-tight);
+    }
   }
 }
 

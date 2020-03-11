@@ -47,7 +47,7 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor="green-lighter"
       onClick={() => copy(text)}
       aira-label="複製"
     >

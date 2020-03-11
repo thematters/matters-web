@@ -64,8 +64,8 @@ const Follow = ({
     <Button
       size={sizes[size]}
       textColor="green"
-      textHoverColor="white"
-      bgHoverColor="green"
+      textActiveColor="white"
+      bgActiveColor="green"
       borderColor="green"
       onClick={() => {
         follow()

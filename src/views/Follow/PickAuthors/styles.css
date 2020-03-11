@@ -2,7 +2,6 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: var(--spacing-x-loose);
 
   @media (--sm-up) {
     align-items: center;

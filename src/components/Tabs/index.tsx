@@ -14,7 +14,7 @@ interface TabProps {
 }
 
 interface TabsProps {
-  spacingBottom?: 0 | '0' | 'base' | 'loose' | 'xxloose'
+  spacingBottom?: 0 | 'xtight' | 'base' | 'loose' | 'xxloose'
 }
 
 const Tab: React.FC<TabProps> = ({
@@ -53,7 +53,7 @@ const Tab: React.FC<TabProps> = ({
 
 export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
-} = ({ spacingBottom = 'base', children }) => {
+} = ({ spacingBottom = 'xtight', children }) => {
   const navClass = classNames({
     [`spacing-bottom-${spacingBottom}`]: !!spacingBottom
   })

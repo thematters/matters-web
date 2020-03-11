@@ -10,7 +10,6 @@ import {
   IconColor,
   IconSize,
   Menu,
-  Translate,
   ViewerContext
 } from '~/components'
 
@@ -30,6 +29,7 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
+  inCard?: boolean
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
@@ -85,6 +85,7 @@ const BaseDropdownActions = ({
   hasSticky,
   hasArchive,
   hasRemoveTag,
+  inCard,
   inTagDetailLatest,
   inTagDetailSelected,
 
@@ -108,7 +109,7 @@ const BaseDropdownActions = ({
         hasArchive ||
         inTagDetailLatest ||
         inTagDetailSelected ||
-        hasRemoveTag) && <Menu.Divider />}
+        hasRemoveTag) && <Menu.Divider spacing="xtight" />}
       {hasSticky && <StickyButton article={article} />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
       {inTagDetailLatest && <SetTagSelectedButton article={article} />}
@@ -125,13 +126,13 @@ const BaseDropdownActions = ({
       }}
       dialog={{
         content: <Content />,
-        title: <Translate id="moreActions" />
+        title: 'moreActions'
       }}
     >
       {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
+          bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}

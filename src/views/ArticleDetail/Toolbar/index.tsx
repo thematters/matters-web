@@ -38,7 +38,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
   const { article } = data
 
   return (
-    <section className="container">
+    <section className="toolbar">
       <section className="appreciate-button">
         <AppreciationButton article={article} inFixedToolbar />
       </section>
@@ -48,9 +48,14 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
       </section>
 
       <section className="buttons">
-        <BookmarkButton article={article} size="md-s" />
-        <ShareButton size="md-s" />
-        <DropdownActions article={article} color="black" size="md-s" />
+        <BookmarkButton article={article} size="md-s" inCard={false} />
+        <ShareButton size="md-s" inCard={false} />
+        <DropdownActions
+          article={article}
+          color="black"
+          size="md-s"
+          inCard={false}
+        />
       </section>
 
       <style jsx>{styles}</style>

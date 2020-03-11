@@ -4,10 +4,6 @@
   --article-digest-sidebar-card-spacing: var(--spacing-tight);
 }
 
-footer {
-  margin-top: var(--spacing-tight);
-}
-
 .container.has-cover {
   position: relative;
   min-height: var(--article-digest-sidebar-cover-width);
@@ -38,5 +34,16 @@ footer {
 
       border-radius: 0;
     }
+  }
+}
+
+footer {
+  margin-top: var(--spacing-tight);
+
+  line-height: 1;
+
+  /* Make <UserDigest.Mini> as an inline element, otherwise users will easily touch it inadvertently */
+  & :global(> *) {
+    display: inline-flex;
   }
 }

@@ -8,7 +8,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  PageHeader,
+  Layout,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -277,9 +277,15 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader title={<Translate id="register" />} hasNoBorder>
-          {SubmitButton}
-        </PageHeader>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id="register" />
+              {SubmitButton}
+            </>
+          }
+        />
 
         {InnerForm}
       </>
@@ -290,7 +296,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="register" />}
+          title="register"
           close={closeDialog}
           rightButton={SubmitButton}
         />

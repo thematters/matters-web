@@ -1,7 +1,0 @@
-.notice-button-content {
-  line-height: 1;
-
-  &.unread {
-    @mixin unread-dot;
-  }
-}

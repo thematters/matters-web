@@ -1,10 +1,15 @@
 .related-articles {
-  margin: 0 calc(var(--spacing-base) * -1);
+  margin-left: calc(var(--spacing-base) * -1);
+  margin-right: calc(var(--spacing-base) * -1);
+  margin-bottom: calc(var(--spacing-base) * -1);
   padding: var(--spacing-base) 0 0 var(--spacing-base);
+
   background: var(--color-grey-lighter);
 
   @media (--sm-up) {
-    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
     padding: 0;
     background: none;
   }
@@ -17,6 +22,7 @@
 
   &:not(.inSidebar) {
     & ul {
+      @mixin hide-scrollbar;
       display: flex;
 
       overflow-x: scroll;

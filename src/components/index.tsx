@@ -21,19 +21,18 @@ export * from './Toast'
 export * from './Tabs'
 export * from './PageHeader'
 export * from './Spinner'
-export * from './LoadMore'
 export * from './Expandable'
 
 /**
  * Compositions
  */
+export * from './Layout'
+
 export * from './Head'
 export * from './Throw404'
 export * from './Protected'
-export * from './ErrorPage'
 export * from './ErrorBoundary'
 
-export * from './Footer'
 export * from './Empty'
 export * from './Interaction'
 export * from './Analytics'

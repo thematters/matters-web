@@ -3,10 +3,8 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
-import { useContext } from 'react'
 
 import { ArticleDigestDropdown, Spinner, Translate } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { QueryError, useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
@@ -71,8 +69,12 @@ const SET_DRAFT_COLLECTION = gql`
   ${ArticleDigestDropdown.fragments.article}
 `
 
-const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
-  const { updateHeaderState } = useContext(HeaderContext)
+interface CollectArticlesProps {
+  draft: CollectArticlesDraft
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+}
+
+const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
   const draftId = draft.id
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
@@ -83,11 +85,7 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
   const handleCollectionChange = () => async (
     articles: ArticleDigestDropdownArticle[]
   ) => {
-    updateHeaderState({
-      type: 'draft',
-      state: 'saving',
-      draftId
-    })
+    setSaveStatus('saving')
     try {
       await setCollection({
         variables: {
@@ -95,17 +93,9 @@ const CollectArticles = ({ draft }: { draft: CollectArticlesDraft }) => {
           collection: _uniq(articles.map(({ id }) => id))
         }
       })
-      updateHeaderState({
-        type: 'draft',
-        state: 'saved',
-        draftId
-      })
+      setSaveStatus('saved')
     } catch (e) {
-      updateHeaderState({
-        type: 'draft',
-        state: 'saveFailed',
-        draftId
-      })
+      setSaveStatus('saveFailed')
     }
   }
 

@@ -1,9 +1,6 @@
-.sm-size-header {
+.container {
   & :global(> header) {
-    & :global(> h1) {
-      color: var(--color-grey-darker);
-      font-size: var(--font-size-sm);
-    }
+    padding: var(--spacing-base);
   }
 }
 

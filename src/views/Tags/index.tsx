@@ -5,11 +5,10 @@ import { useContext } from 'react'
 import {
   Button,
   EmptyTag,
-  Footer,
   Head,
   Icon,
   InfiniteScroll,
-  PageHeader,
+  Layout,
   Spinner,
   Tag,
   TagDialog,
@@ -21,8 +20,6 @@ import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
-
-import styles from './styles.css'
 
 import { AllTags } from './__generated__/AllTags'
 
@@ -66,7 +63,7 @@ const CreateTagButton = () => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgHoverColor="green-lighter"
+          bgActiveColor="green-lighter"
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
@@ -150,33 +147,27 @@ const Tags = () => {
             </li>
           ))}
         </ul>
-
-        <style jsx>{styles}</style>
       </section>
     </InfiniteScroll>
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allTags' }} />
+export default () => (
+  <Layout>
+    <Head title={{ id: 'allTags' }} />
 
-        <PageHeader title={<Translate id="allTags" />}>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={
+        <>
+          <Layout.Header.Title id="allTags" />
           <CreateTagButton />
-        </PageHeader>
+        </>
+      }
+    />
 
-        <section className="container">
-          <Tags />
-        </section>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-
-      <style jsx>{styles}</style>
-    </main>
-  )
-}
+    <Layout.Spacing>
+      <Tags />
+    </Layout.Spacing>
+  </Layout>
+)

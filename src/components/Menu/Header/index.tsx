@@ -2,11 +2,11 @@ import React from 'react'
 
 import styles from './styles.css'
 
-interface MenuItemProps {
+interface MenuHeaderProps {
   title: string | React.ReactNode
 }
 
-const Item: React.FC<MenuItemProps> = ({ title, children }) => {
+const MenuHeader: React.FC<MenuHeaderProps> = ({ title, children }) => {
   return (
     <header>
       <h4>{title}</h4>
@@ -17,4 +17,4 @@ const Item: React.FC<MenuItemProps> = ({ title, children }) => {
   )
 }
 
-export default Item
+export default MenuHeader

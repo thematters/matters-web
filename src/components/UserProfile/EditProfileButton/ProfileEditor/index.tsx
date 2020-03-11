@@ -197,7 +197,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate id="editUserProfile" />}
+        title="editUserProfile"
         close={closeDialog}
         rightButton={SubmitButton}
       />

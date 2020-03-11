@@ -7,11 +7,9 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
-  LoadMore,
-  PageHeader,
   Spinner,
-  Translate,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -74,7 +72,7 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
@@ -120,7 +118,7 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   return (
     <>
       <InfiniteScroll
-        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
         <List hasBorder>
@@ -140,8 +138,8 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         </List>
       </InfiniteScroll>
 
-      {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+      {!isLargeUp && pageInfo.hasNextPage && (
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </>
   )
@@ -165,18 +163,7 @@ const HomeFeed = () => {
 
   return (
     <>
-      <PageHeader
-        title={
-          feedSortType === 'hottest' ? (
-            <Translate id="hottestArticles" />
-          ) : (
-            <Translate id="latestArticles" />
-          )
-        }
-        is="h2"
-      >
-        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
-      </PageHeader>
+      <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
 
       <Feed feedSortType={feedSortType as SortBy} />
     </>

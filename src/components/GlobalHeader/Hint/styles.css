@@ -1,9 +1,0 @@
-.hint {
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  margin-left: var(--spacing-loose);
-
-  @media (--sm-up) {
-    margin-left: var(--spacing-xx-loose);
-  }
-}

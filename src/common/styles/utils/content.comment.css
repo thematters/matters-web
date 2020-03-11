@@ -119,7 +119,7 @@
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-hover);
+      color: var(--color-matters-green-active);
     }
   }
   /* fix frequent misuse of links */

@@ -20,7 +20,7 @@ type ArticleDigestDropdownProps = {
   extraButton?: React.ReactNode
 } & Pick<
   CardProps,
-  'spacing' | 'bgColor' | 'bgHoverColor' | 'borderRadius' | 'onClick'
+  'spacing' | 'bgColor' | 'bgActiveColor' | 'borderRadius' | 'onClick'
 >
 
 const fragments = {
@@ -54,7 +54,7 @@ export const ArticleDigestDropdown = ({
   // Card Props
   spacing,
   bgColor,
-  bgHoverColor,
+  bgActiveColor,
   borderRadius,
   onClick
 }: ArticleDigestDropdownProps) => {
@@ -77,7 +77,7 @@ export const ArticleDigestDropdown = ({
       spacing={spacing}
       borderRadius={borderRadius}
       bgColor={bgColor}
-      bgHoverColor={bgHoverColor}
+      bgActiveColor={bgActiveColor}
       onClick={onClick}
     >
       <section className={containerClass}>

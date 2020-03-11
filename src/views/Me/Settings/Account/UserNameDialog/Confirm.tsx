@@ -124,7 +124,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate id="changeUserName" />}
+        title="changeUserName"
         close={closeDialog}
         rightButton={SubmitButton}
       />

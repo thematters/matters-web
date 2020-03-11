@@ -7,10 +7,10 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
-  LoadMore,
   Spinner,
   useEventListener,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -28,7 +28,7 @@ import {
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
     TagArticles
   >(TAG_ARTICLES, {
@@ -111,7 +111,7 @@ const LatestArticles = ({ id }: { id: string }) => {
   return (
     <section>
       <InfiniteScroll
-        hasNextPage={isMediumUp && pageInfo.hasNextPage}
+        hasNextPage={isLargeUp && pageInfo.hasNextPage}
         loadMore={loadMore}
       >
         <List hasBorder>
@@ -133,8 +133,8 @@ const LatestArticles = ({ id }: { id: string }) => {
         </List>
       </InfiniteScroll>
 
-      {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+      {!isLargeUp && pageInfo.hasNextPage && (
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
     </section>
   )

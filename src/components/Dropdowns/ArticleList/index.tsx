@@ -32,7 +32,7 @@ export const DropdownArticleList = ({
             extraButton={
               <ArticleDigestDropdown.OpenExternalLink article={article} />
             }
-            bgHoverColor="grey-lighter"
+            bgActiveColor="grey-lighter"
             spacing={['tight', 'base']}
             onClick={() => onClick(article)}
           />

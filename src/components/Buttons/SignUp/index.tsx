@@ -1,4 +1,5 @@
 import { Button, TextIcon, useResponsive } from '~/components'
+import { Translate } from '~/components/Language'
 
 import {
   ANALYTICS_EVENTS,
@@ -8,10 +9,11 @@ import {
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
-export const SignUpButton: React.FC<{ trackType: string }> = ({
-  children,
-  trackType
-}) => {
+interface SignUpButtonProps {
+  trackType: string
+}
+
+export const SignUpButton: React.FC<SignUpButtonProps> = ({ trackType }) => {
   const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp
@@ -35,7 +37,7 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
       {...clickProps}
     >
       <TextIcon color="white" weight="md">
-        {children}
+        <Translate id="register" />
       </TextIcon>
     </Button>
   )

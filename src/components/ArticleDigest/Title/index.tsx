@@ -63,7 +63,7 @@ export const ArticleDigestTitle = ({
   return (
     <LinkWrapper
       {...path}
-      textHoverColor={isClickable ? 'green' : undefined}
+      textActiveColor={isClickable ? 'green' : undefined}
       disabled={!isClickable}
     >
       <>

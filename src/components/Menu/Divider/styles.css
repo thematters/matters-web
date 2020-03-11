@@ -1,2 +1,7 @@
-hr {
+.spacing-xtight {
+  margin: var(--spacing-x-tight) 0;
+}
+
+.spacing-loose {
+  margin: var(--spacing-loose) 0;
 }

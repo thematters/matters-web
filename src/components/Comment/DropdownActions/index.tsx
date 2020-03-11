@@ -9,7 +9,6 @@ import {
   DropdownDialog,
   Icon,
   Menu,
-  Translate,
   ViewerContext
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
@@ -25,6 +24,7 @@ import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 
 interface DropdownActionsProps {
   comment: DropdownActionsComment
+  inCard?: boolean
 }
 
 interface Controls {
@@ -75,6 +75,7 @@ const fragments = {
 
 const BaseDropdownActions = ({
   comment,
+  inCard,
 
   hasPin,
   hasEdit,
@@ -111,13 +112,13 @@ const BaseDropdownActions = ({
       }}
       dialog={{
         content: <Content />,
-        title: <Translate id="moreActions" />
+        title: 'moreActions'
       }}
     >
       {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
+          bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
           compensation="right"
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
@@ -163,7 +164,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       commentId={comment.id}
       articleId={comment.article.id}
       defaultContent={comment.content}
-      title={<Translate id="editComment" />}
+      title="editComment"
     >
       {({ open: openEditCommentDialog }) => (
         <DeleteComment.Dialog commentId={comment.id}>

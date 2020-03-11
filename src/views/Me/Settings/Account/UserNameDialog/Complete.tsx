@@ -6,15 +6,11 @@ interface CompleteProps {
 
 const Complete = ({ closeDialog }: CompleteProps) => (
   <>
-    <Dialog.Header
-      title={<Translate id="changeUserName" />}
-      close={closeDialog}
-      headerHidden
-    />
+    <Dialog.Header title="changeUserName" close={closeDialog} headerHidden />
 
     <Dialog.Message
-      headline={<Translate id="changeUserName" />}
-      description={<Translate id="successChangeUserName" />}
+      headline="changeUserName"
+      description="successChangeUserName"
     />
 
     <Dialog.Footer>

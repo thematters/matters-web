@@ -2,8 +2,6 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components'
 
-import styles from './styles.css'
-
 import { NoticeFollower as NoticeFollowerType } from './__generated__/NoticeFollower'
 
 const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
@@ -12,10 +10,14 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
   }
 
   return (
-    <section className="follower-content">
-      <UserDigest.Rich user={user} hasState={false} hasFollow />
-      <style jsx>{styles}</style>
-    </section>
+    <UserDigest.Rich
+      user={user}
+      spacing={['base', 'base']}
+      borderRadius="xxtight"
+      bgColor="yellow-lighter"
+      hasState={false}
+      hasFollow
+    />
   )
 }
 

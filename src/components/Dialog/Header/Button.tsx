@@ -19,7 +19,7 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
       aria-label={TEXT.zh_hant.close}
       ref={ref}
       bgColor={isSmallUp ? 'grey-lighter' : undefined}
-      bgHoverColor={isSmallUp ? 'green-lighter' : undefined}
+      bgActiveColor={isSmallUp ? 'green-lighter' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
     >
       {!isSmallUp && (
@@ -27,7 +27,7 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
           <Translate id="cancel" />
         </TextIcon>
       )}
-      {isSmallUp && <Icon.CloseGreenMedium size="lg" />}
+      {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
     </Button>
   )
 })

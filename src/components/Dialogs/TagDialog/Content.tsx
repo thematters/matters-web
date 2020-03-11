@@ -235,7 +235,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id={content ? 'editTag' : 'createTag'} />}
+        title={content ? 'editTag' : 'createTag'}
         close={closeDialog}
         rightButton={SubmitButton}
       />

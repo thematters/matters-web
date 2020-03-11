@@ -6,7 +6,6 @@ import {
   ButtonProps,
   CommentFormDialog,
   Icon,
-  Translate,
   useResponsive,
   ViewerContext
 } from '~/components'
@@ -27,6 +26,7 @@ export interface ReplyButtonProps {
   comment: ReplyComemnt
   openLikeCoinDialog: () => void
   commentCallback?: () => void
+  inCard: boolean
 }
 
 const fragments = {
@@ -53,10 +53,10 @@ const fragments = {
   `
 }
 
-const CommentButton: React.FC<ButtonProps> = props => (
+const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
   <Button
     spacing={['xtight', 'xtight']}
-    bgHoverColor="grey-lighter"
+    bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
     aira-label={TEXT.zh_hant.replyComment}
     {...props}
   >
@@ -67,7 +67,8 @@ const CommentButton: React.FC<ButtonProps> = props => (
 const ReplyButton = ({
   comment,
   openLikeCoinDialog,
-  commentCallback
+  commentCallback,
+  inCard
 }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
@@ -86,11 +87,11 @@ const ReplyButton = ({
   }
 
   if (isDisabled) {
-    return <CommentButton disabled />
+    return <CommentButton disabled inCard={inCard} />
   }
 
   if (viewer.shouldSetupLikerID) {
-    return <CommentButton onClick={openLikeCoinDialog} />
+    return <CommentButton onClick={openLikeCoinDialog} inCard={inCard} />
   }
 
   if (!viewer.isAuthed) {
@@ -103,7 +104,7 @@ const ReplyButton = ({
         }
       : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
 
-    return <CommentButton {...clickProps} />
+    return <CommentButton {...clickProps} inCard={inCard} />
   }
 
   return (
@@ -112,11 +113,11 @@ const ReplyButton = ({
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
-      title={<Translate id="replyComment" />}
+      title="replyComment"
       context={<ReplyTo user={author} />}
     >
       {({ open: openCommentFormDialog }) => (
-        <CommentButton onClick={openCommentFormDialog} />
+        <CommentButton onClick={openCommentFormDialog} inCard={inCard} />
       )}
     </CommentFormDialog>
   )

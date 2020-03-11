@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { List, LoadMore, Spinner, Title, Translate } from '~/components'
+import { List, Spinner, Title, Translate, ViewMoreButton } from '~/components'
 
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
@@ -97,7 +97,7 @@ const FeaturedComments = () => {
       </List>
 
       {pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
 
       <style jsx>{styles}</style>

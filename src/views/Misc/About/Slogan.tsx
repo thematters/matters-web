@@ -1,8 +1,4 @@
-import { useContext } from 'react'
-import { Waypoint } from 'react-waypoint'
-
 import { Button, TextIcon, Translate } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 
 import { PATHS } from '~/common/enums'
 import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg'
@@ -12,28 +8,11 @@ import IMAGE_SLOGAN_SM from '~/static/images/about-1-sm.svg'
 import styles from './styles.css'
 
 const Slogan = () => {
-  const { updateHeaderState } = useContext(HeaderContext)
-
   return (
     <section className="slogan">
       <div style={{ width: '100%' }}>
         <div className="l-row">
           <div className="l-col-4 l-col-md-8 l-col-lg-12 ">
-            <Waypoint
-              topOffset={64}
-              onEnter={() => {
-                updateHeaderState({ type: 'about', bgColor: 'transparent' })
-              }}
-              onLeave={() => {
-                updateHeaderState({ type: 'about', bgColor: 'default' })
-              }}
-              onPositionChange={({ currentPosition }) => {
-                if (currentPosition === 'above') {
-                  updateHeaderState({ type: 'about', bgColor: 'default' })
-                }
-              }}
-            />
-
             <h2>
               <Translate
                 zh_hant="一個自主、永續、有價的"
