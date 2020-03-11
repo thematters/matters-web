@@ -1,10 +1,6 @@
 import {
   Button,
-  ButtonBgColor,
-  ButtonHeight,
-  ButtonSpacingX,
-  ButtonSpacingY,
-  ButtonWidth,
+  ButtonProps,
   IconSize,
   TextIcon,
   Translate,
@@ -14,13 +10,12 @@ import {
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
-interface LoginButtonProps {
-  bgColor?: ButtonBgColor
+interface LoginButtonBaseProps {
   iconSize?: Extract<IconSize, 'md'>
   isPlain?: boolean
-  size?: [ButtonWidth, ButtonHeight]
-  spacing?: [ButtonSpacingY, ButtonSpacingX]
 }
+
+type LoginButtonProps = LoginButtonBaseProps & Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
 export const LoginButton: React.FC<LoginButtonProps> = ({
   bgColor,
