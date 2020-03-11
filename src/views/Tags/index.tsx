@@ -4,11 +4,13 @@ import { useContext } from 'react'
 
 import {
   Button,
+  Card,
   EmptyTag,
   Head,
   Icon,
   InfiniteScroll,
   Layout,
+  List,
   Spinner,
   Tag,
   TagDialog,
@@ -19,7 +21,7 @@ import {
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
 
@@ -111,43 +113,35 @@ const Tags = () => {
         })
     })
   }
-  const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
-  const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <section className="l-row full">
-        <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {leftEdges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_TAGS,
-                  location: i * 2
-                })
-              }
-            >
-              <Tag tag={node} type="count-fixed" />
-            </li>
-          ))}
-        </ul>
-        <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {rightEdges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_TAGS,
-                  location: i * 2 + 1
-                })
-              }
-            >
-              <Tag tag={node} type="count-fixed" />
-            </li>
-          ))}
-        </ul>
-      </section>
+      <List>
+        {edges.map(
+          ({ node, cursor }, i) =>
+            node.__typename === 'Tag' && (
+              <List.Item key={cursor}>
+                <Card
+                  bgColor="white"
+                  bgActiveColor="green-lighter"
+                  spacing={['base', 'base']}
+                  {...toPath({
+                    page: 'tagDetail',
+                    id: node.id
+                  })}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.ALL_TAGS,
+                      location: i * 2
+                    })
+                  }
+                >
+                  <Tag tag={node} />
+                </Card>
+              </List.Item>
+            )
+        )}
+      </List>
     </InfiniteScroll>
   )
 }
@@ -164,10 +158,9 @@ export default () => (
           <CreateTagButton />
         </>
       }
+      marginBottom={0}
     />
 
-    <Layout.Spacing>
-      <Tags />
-    </Layout.Spacing>
+    <Tags />
   </Layout>
 )
