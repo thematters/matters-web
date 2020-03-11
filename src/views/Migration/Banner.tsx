@@ -1,10 +1,15 @@
-import { ShareButton, TextIcon, Translate, useResponsive } from '~/components'
+import { useContext } from 'react'
 
+import { LanguageContext, ShareButton, TextIcon, Translate, useResponsive } from '~/components'
+
+import { translate } from '~/common/utils'
 import IMAGE_BANNER from '~/static/images/migration-banner.svg'
 
 import styles from './styles.css'
 
 const Banner = () => {
+  const { lang } = useContext(LanguageContext)
+
   const isSmallUp = useResponsive('sm-up')
 
   return (
@@ -28,6 +33,11 @@ const Banner = () => {
           size={[isSmallUp ? '8rem' : '7rem', '2.5rem']}
           spacing={[0, 0]}
           inCard={false}
+          title={translate({
+            zh_hant: '我正在搬家到 Matters，邀請你一起來',
+            zh_hans: '我正在搬家到 Matters，邀请你一起来',
+            lang
+          })}
         >
           <TextIcon color="white" size={isSmallUp ? 'md' : 'sm'} weight="md">
             <Translate zh_hant="邀請朋友搬家" zh_hans="邀请朋友搬家" />
