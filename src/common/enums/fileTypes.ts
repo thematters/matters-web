@@ -7,3 +7,5 @@ export const ACCEPTED_UPLOAD_IMAGE_TYPES: string[] = [
 ]
 
 export const ACCEPTED_UPLOAD_AUDIO_TYPES: string[] = ['audio/mpeg', 'audio/aac']
+
+export const ACCEPTED_UPLOAD_MIGRATION_TYPES: string[] = ['text/html']

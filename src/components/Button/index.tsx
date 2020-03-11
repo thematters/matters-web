@@ -10,6 +10,8 @@ export type ButtonWidth =
   | '3.25rem'
   | '4rem'
   | '6rem'
+  | '7rem'
+  | '8rem'
   | '100%'
   | undefined
   | null
@@ -20,13 +22,20 @@ export type ButtonHeight =
   | '1.5rem'
   | '2rem'
   | '2.25rem'
+  | '2.5rem'
   | '3rem'
   | undefined
   | null
 
-type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
 
-type ButtonSpacingX = 0 | 'xxtight' | 'xtight' | 'tight' | 'base' | 'loose'
+export type ButtonSpacingX =
+  | 0
+  | 'xxtight'
+  | 'xtight'
+  | 'tight'
+  | 'base'
+  | 'loose'
 
 type ButtonColor =
   | 'white'
@@ -43,7 +52,7 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
 
-type ButtonBgColor = Extract<
+export type ButtonBgColor = Extract<
   ButtonColor,
   | 'grey'
   | 'grey-lighter'

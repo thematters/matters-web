@@ -49,7 +49,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
       <section className="buttons">
         <BookmarkButton article={article} size="md-s" inCard={false} />
-        <ShareButton size="md-s" inCard={false} />
+        <ShareButton iconSize="md-s" inCard={false} />
         <DropdownActions
           article={article}
           color="black"

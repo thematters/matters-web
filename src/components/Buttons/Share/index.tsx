@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonProps,
   Icon,
   IconColor,
   IconSize,
@@ -9,29 +10,52 @@ import {
 
 import { TEXT } from '~/common/enums'
 
-type ShareButtonProps = {
-  size?: Extract<IconSize, 'md-s'>
-  color?: Extract<IconColor, 'grey' | 'black'>
+type ShareButtonBaseProps = {
+  hasIcon?: boolean
+  iconSize?: Extract<IconSize, 'md-s'>
+  iconColor?: Extract<IconColor, 'grey' | 'black'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
 
+type ShareButtonProps = ShareButtonBaseProps &
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+
 export const ShareButton: React.FC<ShareButtonProps> = ({
-  size,
-  color = 'black',
+  children,
+
+  bgColor,
+  hasIcon = true,
+  iconSize,
+  iconColor = 'black',
   inCard,
+  size,
+  spacing,
   ...props
-}) => (
-  <ShareDialog {...props}>
-    {({ open }) => (
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
-        aria-label={TEXT.zh_hant.share}
-        aria-haspopup="true"
-        onClick={open}
-      >
-        <Icon.Share size={size} color={color} />
-      </Button>
-    )}
-  </ShareDialog>
-)
+}) => {
+  const isGreen = bgColor === 'green'
+  const buttonBgActiveColor = isGreen
+    ? undefined
+    : inCard
+    ? 'grey-lighter-active'
+    : 'green-lighter'
+  const buttonSpacing = spacing || ['xtight', 'xtight']
+
+  return (
+    <ShareDialog {...props}>
+      {({ open }) => (
+        <Button
+          bgColor={bgColor}
+          size={size}
+          spacing={buttonSpacing}
+          bgActiveColor={buttonBgActiveColor}
+          aria-label={TEXT.zh_hant.share}
+          aria-haspopup="true"
+          onClick={open}
+        >
+          {hasIcon && <Icon.Share size={iconSize} color={iconColor} />}
+          {children}
+        </Button>
+      )}
+    </ShareDialog>
+  )
+}

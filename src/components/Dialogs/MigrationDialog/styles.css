@@ -1,0 +1,14 @@
+p {
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+}
+
+.action {
+  color: var(--color-black);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.description {
+  color: var(--color-grey-darker);
+}
