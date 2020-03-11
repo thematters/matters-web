@@ -15,8 +15,8 @@ const CancelButton = (props: ButtonProps) => {
   return (
     <Button
       aria-label={TEXT.zh_hant.cancel}
-      bgColor={isSmallUp ? 'grey-lighter' : undefined}
-      bgActiveColor={isSmallUp ? 'green-lighter' : undefined}
+      bgColor={isSmallUp ? 'green-lighter' : undefined}
+      bgActiveColor={isSmallUp ? 'grey-lighter-active' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
       {...props}
     >

@@ -8,9 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  useEventListener,
-  useResponsive,
-  ViewMoreButton
+  useEventListener
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -28,7 +26,6 @@ import {
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
-  const isLargeUp = useResponsive('lg-up')
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
     TagArticles
   >(TAG_ARTICLES, {
@@ -109,34 +106,25 @@ const LatestArticles = ({ id }: { id: string }) => {
   }
 
   return (
-    <section>
-      <InfiniteScroll
-        hasNextPage={isLargeUp && pageInfo.hasNextPage}
-        loadMore={loadMore}
-      >
-        <List>
-          {(edges || []).map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.TAG_DETAIL,
-                    location: i,
-                    entrance: id
-                  })
-                }
-                inTagDetailLatest
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      {!isLargeUp && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={loadMore} loading={loading} />
-      )}
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List>
+        {(edges || []).map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <ArticleDigestFeed
+              article={node}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: FEED_TYPE.TAG_DETAIL,
+                  location: i,
+                  entrance: id
+                })
+              }
+              inTagDetailLatest
+            />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

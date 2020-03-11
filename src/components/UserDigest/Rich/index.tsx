@@ -79,14 +79,10 @@ const Rich = ({
     [`size-${size}`]: !!size,
     disabled: isArchived
   })
-  const defaultCardProps = {
-    spacing: ['tight', 'tight'],
-    bgActiveColor: 'green-lighter'
-  } as CardProps
 
   if (isArchived) {
     return (
-      <Card {...defaultCardProps} {...cardProps}>
+      <Card spacing={['tight', 'tight']} {...cardProps}>
         <section className={containerClass}>
           <span className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
@@ -100,6 +96,10 @@ const Rich = ({
             </header>
           </section>
 
+          <section className="extra-button">
+            {hasUnblock && <UnblockUserButton user={user} />}
+          </section>
+
           <style jsx>{styles}</style>
         </section>
       </Card>
@@ -107,7 +107,12 @@ const Rich = ({
   }
 
   return (
-    <Card {...path} {...defaultCardProps} {...cardProps}>
+    <Card
+      {...path}
+      spacing={['tight', 'tight']}
+      bgActiveColor="green-lighter"
+      {...cardProps}
+    >
       <section className={containerClass}>
         <Link {...path}>
           <a className="avatar">

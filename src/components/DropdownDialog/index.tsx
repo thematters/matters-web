@@ -2,6 +2,7 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef, useState } from 'react'
 
 import {
+  Button,
   Dialog,
   DialogOverlayProps,
   DialogProps,
@@ -113,11 +114,7 @@ export const DropdownDialog = ({
         onClick={closeOnClick}
       >
         <VisuallyHidden>
-          <button
-            type="button"
-            aria-label={TEXT.zh_hant.close}
-            onClick={close}
-          />
+          <Button aria-label={TEXT.zh_hant.close} onClick={close} />
         </VisuallyHidden>
 
         {contentChildren}

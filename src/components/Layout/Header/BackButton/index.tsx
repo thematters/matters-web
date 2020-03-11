@@ -46,6 +46,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
       <Button
         aria-label={TEXT.zh_hant.back}
         bgColor="green-lighter"
+        bgActiveColor="grey-lighter-active"
         onClick={onBack}
         {...props}
       >

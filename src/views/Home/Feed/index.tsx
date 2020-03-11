@@ -7,9 +7,7 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
-  Spinner,
-  useResponsive,
-  ViewMoreButton
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -72,7 +70,6 @@ export const queries = {
 type SortBy = 'hottest' | 'newest'
 
 const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isLargeUp = useResponsive('lg-up')
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     HottestFeed | NewestFeed
   >(queries[sortBy], {
@@ -116,32 +113,23 @@ const Feed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   }
 
   return (
-    <>
-      <InfiniteScroll
-        hasNextPage={isLargeUp && pageInfo.hasNextPage}
-        loadMore={loadMore}
-      >
-        <List>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: sortBy,
-                    location: i
-                  })
-                }
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-
-      {!isLargeUp && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={loadMore} loading={loading} />
-      )}
-    </>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <ArticleDigestFeed
+              article={node}
+              onClick={() =>
+                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                  type: sortBy,
+                  location: i
+                })
+              }
+            />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

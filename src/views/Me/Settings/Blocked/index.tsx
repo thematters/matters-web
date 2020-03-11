@@ -9,6 +9,7 @@ export default () => (
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="blockedSetting" />}
     />
+
     <SettingsTab />
 
     <SettingsBlocked />

@@ -30,7 +30,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
     <Button
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
-      bgActiveColor={'green-lighter'}
+      bgActiveColor="green-lighter"
       aria-haspopup="true"
       {...clickProps}
     >

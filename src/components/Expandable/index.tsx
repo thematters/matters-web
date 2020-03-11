@@ -47,6 +47,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
         <Button
           spacing={['xxtight', 'xtight']}
           bgColor="green-lighter"
+          bgActiveColor="grey-lighter-active"
           textColor="green"
           onClick={() => {
             setExpand(true)

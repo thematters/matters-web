@@ -100,6 +100,7 @@ const UserFollowers = () => {
           zh_hans: `${user.displayName}的追踪者`
         }}
       />
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (

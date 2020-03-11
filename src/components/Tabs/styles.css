@@ -23,6 +23,9 @@ nav {
   &.spacing-bottom-xtight {
     margin-bottom: var(--spacing-x-tight);
   }
+  &.spacing-bottom-tight {
+    margin-bottom: var(--spacing-tight);
+  }
   &.spacing-bottom-base {
     margin-bottom: var(--spacing-base);
   }
