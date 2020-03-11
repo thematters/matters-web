@@ -4,10 +4,11 @@ import { Head, Layout, SearchBar, useResponsive } from '~/components'
 
 import { getQuery } from '~/common/utils'
 
-import EmptySearch from './EmptySearch'
-import SearchArticles from './SearchArticles'
-import SearchTags from './SearchTags'
-import SearchUsers from './SearchUsers'
+import AggregateResults from './AggregateResults'
+// import EmptySearch from './EmptySearch'
+// import SearchArticles from './SearchArticles'
+// import SearchTags from './SearchTags'
+// import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
 const SearchHeader = () => {
@@ -19,14 +20,21 @@ const SearchHeader = () => {
         isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
       }
       right={<SearchBar />}
+      marginBottom={0}
     />
   )
 }
 
 const Search = () => {
   const router = useRouter()
-  const type = getQuery({ router, key: 'type' })
+  // const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
+
+  // const isTagOnly = type === 'tag'
+  // const isUserOnly = type === 'user'
+  // const isArticleOnly = type === 'article'
+  // const isAggregate = !isTagOnly && !isUserOnly && !isArticleOnly
+  const isAggregate = true
 
   if (!q) {
     return (
@@ -35,31 +43,21 @@ const Search = () => {
 
         <SearchHeader />
 
-        <EmptySearch inSidebar={false} />
+        <p>Auto Complete Here</p>
       </Layout>
     )
   }
 
-  const isTagOnly = type === 'tag'
-  const isUserOnly = type === 'user'
-  const isAggregate = !isTagOnly && !isUserOnly
-
   return (
-    <Layout
-      aside={
-        <>
-          {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}
-        </>
-      }
-    >
+    <Layout>
       <SearchHeader />
 
       <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
 
-      {isAggregate && <SearchArticles q={q} />}
-      {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
-      {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
+      {/* {isTagOnly && <SearchTags />}
+      {isUserOnly && <SearchUsers />}
+      {isArticleOnly && <SearchArticles />} */}
+      {isAggregate && <AggregateResults />}
 
       <style jsx>{styles}</style>
     </Layout>

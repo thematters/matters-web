@@ -1,0 +1,9 @@
+.aggregate-section {
+  padding-bottom: var(--spacing-x-tight);
+
+  background: var(--color-grey-lighter);
+}
+
+.result-item {
+  padding: var(--spacing-base);
+}
