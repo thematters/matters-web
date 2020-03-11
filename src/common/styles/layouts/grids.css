@@ -139,3 +139,28 @@
     }
   }
 }
+
+/*
+ * Three Column Layout
+ */
+.l-col-lg-9-2 {
+  @media (--lg-up) {
+    & {
+      lost-column: 2/9;
+    }
+  }
+}
+.l-offset-lg-9-2 {
+  @media (--lg-up) {
+    & {
+      lost-offset: 2/9;
+    }
+  }
+}
+.l-col-lg-9-7 {
+  @media (--lg-up) {
+    & {
+      lost-column: 7/9;
+    }
+  }
+}
