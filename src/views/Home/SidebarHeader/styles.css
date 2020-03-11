@@ -1,6 +1,21 @@
 header {
   @mixin flex-center-space-between;
+}
+
+.icymi {
   margin-bottom: var(--spacing-loose);
+}
+
+.topics {
+  margin-bottom: var(--spacing-base);
+}
+
+.tags {
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.authors {
+  margin-bottom: var(--spacing-tight);
 }
 
 .right {

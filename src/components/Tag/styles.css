@@ -11,25 +11,19 @@
   }
 
   & .count {
-    @mixin font-serif;
     margin-left: var(--spacing-x-tight);
 
     color: var(--color-matters-green);
+    font-size: var(--font-size-sm);
     vertical-align: middle;
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-md);
     user-select: none;
   }
 }
 
 .tag.count-fixed {
-  @mixin border-bottom-grey;
-
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-bottom: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
 
   overflow: hidden;
   white-space: nowrap;
@@ -54,6 +48,5 @@
 
   & .count {
     margin-left: var(--spacing-xx-tight);
-    font-size: var(--font-size-sm);
   }
 }
