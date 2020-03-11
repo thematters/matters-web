@@ -111,6 +111,8 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     }
   }
 
+  const fieldId = 'migration-uploader'
+
   return (
     <>
       <Dialog.Content spacing={['base', 'base']}>
@@ -121,12 +123,12 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
-      <form>
+      <label htmlFor={fieldId}>
         <Dialog.Footer>
           <Dialog.Footer.Button
             loading={loading}
             onClick={() => {
-              const element = document.getElementById('migration-uploader')
+              const element = document.getElementById(fieldId)
               if (element) {
                 element.click()
               }
@@ -135,7 +137,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
             <VisuallyHidden>
               <input
-                id="migration-uploader"
+                id={fieldId}
                 type="file"
                 name="file"
                 aira-label="上傳檔案"
@@ -146,7 +148,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             </VisuallyHidden>
           </Dialog.Footer.Button>
         </Dialog.Footer>
-      </form>
+      </label>
       <style jsx>{styles}</style>
     </>
   )
