@@ -1,6 +1,14 @@
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-import { Head, Layout, SearchBar, useResponsive } from '~/components'
+import {
+  Head,
+  Layout,
+  SearchAutoComplete,
+  SearchBar,
+  SearchOverview,
+  useResponsive
+} from '~/components'
 
 import { getQuery } from '~/common/utils'
 
@@ -11,48 +19,41 @@ import AggregateResults from './AggregateResults'
 // import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
-const SearchHeader = () => {
-  const isSmallUp = useResponsive('sm-up')
-
-  return (
-    <Layout.Header
-      left={
-        isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
-      }
-      right={<SearchBar />}
-      marginBottom={0}
-    />
-  )
-}
-
 const Search = () => {
   const router = useRouter()
-  // const type = getQuery({ router, key: 'type' })
+  const isSmallUp = useResponsive('sm-up')
   const q = getQuery({ router, key: 'q' })
+  const [typingKey, setTypingKey] = useState('')
+  const resetAutoComplete = () => setTypingKey('')
+  // const type = getQuery({ router, key: 'type' })
 
+  const isOverview = !q && !typingKey
+  const isAutoComplete = typingKey
   // const isTagOnly = type === 'tag'
   // const isUserOnly = type === 'user'
   // const isArticleOnly = type === 'article'
   // const isAggregate = !isTagOnly && !isUserOnly && !isArticleOnly
-  const isAggregate = true
+  const isAggregate = !isOverview && !isAutoComplete
 
-  if (!q) {
-    return (
-      <Layout>
-        <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
-
-        <SearchHeader />
-
-        <p>Auto Complete Here</p>
-      </Layout>
-    )
-  }
+  useEffect(() => {
+    Router.events.on('routeChangeStart', resetAutoComplete)
+    return () => Router.events.off('routeChangeStart', resetAutoComplete)
+  }, [])
 
   return (
     <Layout>
-      <SearchHeader />
+      <Layout.Header
+        left={
+          isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
+        }
+        right={<SearchBar hasDropdown={false} onChange={setTypingKey} />}
+        marginBottom={0}
+      />
 
-      <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
+      <Head title={{ id: 'search' }} />
+
+      {isOverview && <SearchOverview inPage />}
+      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
 
       {/* {isTagOnly && <SearchTags />}
       {isUserOnly && <SearchUsers />}
