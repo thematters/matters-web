@@ -5,7 +5,7 @@ import {
   Button,
   ButtonProps,
   LoginButton,
-  MigrationUploader,
+  MigrationDialog,
   SignUpButton,
   TextIcon,
   Translate,
@@ -150,7 +150,21 @@ const Steps = () => {
         </Step>
 
         <Step src={IMAGE_STEP_3} step={3}>
-          <MigrationUploader />
+          <MigrationDialog>
+            {({ open }) =>
+              <Button
+                aria-haspopup="true"
+                bgColor="green"
+                size={['7rem', '2.5rem']}
+                spacing={[0, 0]}
+                onClick={open}
+              >
+                <TextIcon color="white" size="md" weight="md">
+                  <Translate zh_hant={zh_hant.title_3} zh_hans={zh_hans.title_3} />
+                </TextIcon>
+              </Button>
+            }
+          </MigrationDialog>
         </Step>
       </section>
 
