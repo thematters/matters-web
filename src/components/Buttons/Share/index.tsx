@@ -1,10 +1,6 @@
 import {
   Button,
-  ButtonBgColor,
-  ButtonHeight,
-  ButtonSpacingX,
-  ButtonSpacingY,
-  ButtonWidth,
+  ButtonProps,
   Icon,
   IconColor,
   IconSize,
@@ -14,15 +10,14 @@ import {
 
 import { TEXT } from '~/common/enums'
 
-type ShareButtonProps = {
-  bgColor?: ButtonBgColor
+type ShareButtonBaseProps = {
   hasIcon?: boolean
   iconSize?: Extract<IconSize, 'md-s'>
   iconColor?: Extract<IconColor, 'grey' | 'black'>
   inCard: boolean
-  size?: [ButtonWidth, ButtonHeight]
-  spacing?: [ButtonSpacingY, ButtonSpacingX]
 } & Omit<ShareDialogProps, 'children'>
+
+type ShareButtonProps = ShareButtonBaseProps & Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
 export const ShareButton: React.FC<ShareButtonProps> = ({
   children,
