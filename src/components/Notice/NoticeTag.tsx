@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Card, Icon, TextIcon } from '~/components'
-
-import { toPath } from '~/common/utils'
+import { Tag } from '~/components'
 
 import styles from './styles.css'
 
@@ -13,28 +11,10 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
     return null
   }
 
-  const path = toPath({
-    page: 'tagDetail',
-    id: tag.id || ''
-  })
-
   return (
     <section className="sub-content tag-content">
-      <Card
-        {...path}
-        bgColor="grey-lighter"
-        spacing={['xtight', 'base']}
-        borderRadius="xxtight"
-      >
-        <TextIcon
-          icon={<Icon.HashTag color="grey" />}
-          weight="md"
-          size="sm"
-          spacing="xtight"
-        >
-          {tag.content}
-        </TextIcon>
-      </Card>
+      <Tag tag={tag} type="inline" />
+
       <style jsx>{styles}</style>
     </section>
   )
@@ -44,8 +24,9 @@ NoticeTag.fragments = {
   tag: gql`
     fragment NoticeTag on Tag {
       id
-      content
+      ...DigestTag
     }
+    ${Tag.fragments.tag}
   `
 }
 

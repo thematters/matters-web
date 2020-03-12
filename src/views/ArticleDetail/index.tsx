@@ -187,6 +187,8 @@ const ArticleDetail = () => {
       <State article={article} />
 
       <section className="content">
+        <TagList article={article} />
+
         <section className="title">
           <Title type="article">{article.title}</Title>
 
@@ -205,8 +207,6 @@ const ArticleDetail = () => {
               canEdit={canEditCollection}
               collectionCount={collectionCount}
             />
-
-            <TagList article={article} />
           </section>
         )}
 

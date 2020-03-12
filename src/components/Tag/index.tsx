@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, IconSize, TextIcon, TextIconProps } from '~/components'
+import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
@@ -10,21 +10,11 @@ import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
 
-type TagProps = {
-  type?: 'count-fixed'
-  hasCount?: boolean
+interface TagProps {
   tag: DigestTag
-  iconSize?: IconSize
-} & Pick<TextIconProps, 'size' | 'spacing'>
-
-/**
- *
- * Usage:
- *
- * ```tsx
- * <Tag size="sm" tag={tag} />
- * ```
- */
+  type?: 'list' | 'title' | 'inline'
+  active?: boolean
+}
 
 const fragments = {
   tag: gql`
@@ -38,33 +28,65 @@ const fragments = {
   `
 }
 
-export const Tag = ({
-  type,
-  tag,
-  hasCount = true,
-  iconSize = 'md-s',
-  size = 'md',
-  spacing = 'xtight'
-}: TagProps) => {
+export const Tag = ({ tag, type = 'list', active }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
-    'count-fixed': type === 'count-fixed'
+    [type]: type,
+    active
   })
+
   const path = toPath({
     page: 'tagDetail',
     id: tag.id
   })
+
+  const isListTag = type === 'list'
+  const isTitleTag = type === 'title'
+  const isInlineTag = type === 'inline'
+
+  let iconProps: IconProps = {}
+  let textIconProps: TextIconProps = {}
+
+  if (isListTag) {
+    iconProps = {
+      color: 'grey'
+    }
+    textIconProps = {
+      size: 'md',
+      weight: 'normal',
+      spacing: 'xxtight',
+      color: 'black'
+    }
+  } else if (isTitleTag) {
+    iconProps = {
+      color: 'white',
+      size: 'md'
+    }
+    textIconProps = {
+      size: 'lg',
+      weight: 'md',
+      spacing: 0,
+      color: 'white'
+    }
+  } else if (isInlineTag) {
+    iconProps = {
+      color: active ? 'green' : 'grey'
+    }
+    textIconProps = {
+      size: 'sm',
+      weight: 'md',
+      spacing: 0,
+      color: active ? 'green' : 'grey-darker'
+    }
+  }
+
   const tagCount = numAbbr(tag.articles.totalCount || 0)
+  const hasCount = isListTag
 
   return (
     <Link {...path}>
       <a className={tagClasses}>
-        <TextIcon
-          icon={<Icon.HashTag color="grey" size={iconSize} />}
-          weight="md"
-          size={size}
-          spacing={spacing}
-        >
+        <TextIcon icon={<Icon.HashTag {...iconProps} />} {...textIconProps}>
           {tag.content}
         </TextIcon>
 

@@ -66,13 +66,7 @@ const Tags = () => {
                     })
                   }
                 >
-                  <Tag
-                    tag={node}
-                    type="count-fixed"
-                    iconSize="sm"
-                    size="sm"
-                    spacing="xxtight"
-                  />
+                  <Tag tag={node} type="list" />
                 </Card>
               </List.Item>
             )
