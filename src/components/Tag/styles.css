@@ -1,19 +1,29 @@
-.list {
-  display: inline-block;
-  position: relative;
-  width: 100%;
+:root {
+  --list-tag-count-width: 3rem;
+}
 
-  overflow: hidden;
-  white-space: nowrap;
+.list {
+  display: block;
+  position: relative;
+  padding-right: var(--list-tag-count-width);
+
+  line-height: 1rem;
 
   & .count {
     position: absolute;
+    top: 0;
     right: 0;
-    width: 3rem;
+    bottom: 0;
+    width: var(--list-tag-count-width);
 
     color: var(--color-grey);
     font-size: var(--font-size-md-s);
+    line-height: 1rem;
     text-align: right;
+  }
+
+  & :global(.text) {
+    @mixin line-clamp;
   }
 }
 
