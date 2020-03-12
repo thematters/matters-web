@@ -95,6 +95,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input

@@ -109,6 +109,7 @@ const Request: React.FC<FormProps> = ({
         error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
         extraButton={
           <SendCodeButton
             email={values.email}

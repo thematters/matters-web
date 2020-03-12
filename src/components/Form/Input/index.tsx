@@ -51,7 +51,10 @@ const Input: React.FC<InputProps> = ({
           name={name}
           type={type}
           aria-describedby={fieldMsgId}
-          autoComplete="off"
+          autoComplete="nope"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       </Field.Content>
 
