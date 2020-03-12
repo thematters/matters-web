@@ -8,6 +8,7 @@ import MIGRATION from '~/components/GQL/mutations/migration'
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
+  UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT
 } from '~/common/enums'
 
@@ -25,6 +26,7 @@ const texts: {
       '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱' +
       '，目前支持上傳 HTML 檔案。',
     upload: '上傳檔案',
+    count_limit: '上傳檔案數量已達上限，最多 50 個檔案',
     success: '作品上傳完成'
   },
   zh_hans: {
@@ -33,6 +35,7 @@ const texts: {
       '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱' +
       '，目前支持上传 HTML 文件。',
     upload: '上传文件',
+    count_limit: '上传档案数量已达上限，最多 50 个档案',
     success: '文件上传完成'
   }
 }
@@ -66,6 +69,18 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     }
 
     if (!migration || !event.target || !event.target.files) {
+      return
+    }
+
+    if (event.target.files.length > UPLOAD_FILE_COUNT_LIMIT) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate zh_hant={zh_hant.count_limit} zh_hans={zh_hans.count_limit} />,
+          }
+        })
+      )
       return
     }
 

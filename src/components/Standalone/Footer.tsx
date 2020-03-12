@@ -100,7 +100,7 @@ const Footer = () => {
 
           <div id="mc_embed_signup">
             <form
-              action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=82f8e18b83"
+              action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=59e8b859f3"
               method="post"
             >
               <input
