@@ -67,7 +67,7 @@ const FooterActions = ({
         <ShareButton
           title={title}
           path={path.as}
-          color="grey"
+          iconColor="grey"
           inCard={inCard}
         />
       </section>

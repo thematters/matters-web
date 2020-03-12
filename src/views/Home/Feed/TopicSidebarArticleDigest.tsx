@@ -29,11 +29,16 @@ const TopicSidebarArticleDigest = ({
 
   return (
     <Card {...path} spacing={['xtight', 0]}>
-      <section className="container">
-        <ArticleDigestTitle article={article} textSize="sm" is="h3" />
+      <section className="topic-container">
+        <ArticleDigestTitle
+          article={article}
+          textSize="sm"
+          is="h3"
+          textWeight="md"
+        />
 
         {article.topicScore && (
-          <span className="score">{numAbbr(article.topicScore)}</span>
+          <span className="topic-score">{numAbbr(article.topicScore)}</span>
         )}
       </section>
 

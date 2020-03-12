@@ -1,4 +1,5 @@
 import { ApolloQueryResult } from 'apollo-client'
+import { forwardRef, Ref } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { Spinner } from '~/components'
@@ -10,7 +11,7 @@ import { Spinner } from '~/components'
  *     hasNextPage={pageInfo.hasNextPage}
  *     loadMore={loadMore}
  *     loading={loading}
- *     loader={
+ *     Loader={
  *         <Spinner />
  *     }
  *   >
@@ -46,17 +47,21 @@ export const InfiniteScroll: React.FC<Props> = ({
   loader = <Spinner />,
   hasNextPage,
   loadMore
-}) => (
-  <div>
-    {children}
-    <Waypoint
-      bottomOffset="-50%"
-      onEnter={() => {
-        if (hasNextPage) {
-          loadMore()
-        }
-      }}
-    />
-    {hasNextPage && loader}
-  </div>
-)
+}) => {
+  const Loader = ({ innerRef }: { innerRef: Ref<HTMLDivElement> }) => (
+    <div ref={innerRef}>{loader || <Spinner />}</div>
+  )
+  const LoaderWithRef = forwardRef((props, ref: Ref<HTMLDivElement>) => (
+    <Loader innerRef={ref} />
+  ))
+  return (
+    <div>
+      {children}
+      {hasNextPage && (
+        <Waypoint bottomOffset="-100%" onEnter={() => loadMore()}>
+          <LoaderWithRef />
+        </Waypoint>
+      )}
+    </div>
+  )
+}

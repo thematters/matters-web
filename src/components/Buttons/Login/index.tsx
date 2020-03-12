@@ -1,13 +1,30 @@
-import { Button, TextIcon, Translate, useResponsive } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconSize,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
-interface LoginButtonProps {
+interface LoginButtonBaseProps {
+  iconSize?: Extract<IconSize, 'md'>
   isPlain?: boolean
 }
 
-export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
+type LoginButtonProps = LoginButtonBaseProps &
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+
+export const LoginButton: React.FC<LoginButtonProps> = ({
+  bgColor,
+  iconSize,
+  isPlain,
+  size,
+  spacing
+}) => {
   const isSmallUp = useResponsive('sm-up')
   const clickProps = isSmallUp
     ? {
@@ -26,15 +43,23 @@ export const LoginButton: React.FC<LoginButtonProps> = ({ isPlain }) => {
     )
   }
 
+  const isGreen = bgColor === 'green'
+  const buttonBgActiveColor = isGreen ? undefined : 'green-lighter'
+  const buttonSize = size || [null, '2.25rem']
+  const buttonSpacing = spacing || [0, 'loose']
+  const textIconColor = isGreen ? 'white' : 'green'
+  const textIconSize = iconSize || undefined
+
   return (
     <Button
-      size={[null, '2.25rem']}
-      spacing={[0, 'loose']}
-      bgActiveColor="green-lighter"
+      bgColor={bgColor}
+      size={buttonSize}
+      spacing={buttonSpacing}
+      bgActiveColor={buttonBgActiveColor}
       aria-haspopup="true"
       {...clickProps}
     >
-      <TextIcon color="green" weight="md">
+      <TextIcon color={textIconColor} size={textIconSize} weight="md">
         <Translate id="login" />
       </TextIcon>
     </Button>

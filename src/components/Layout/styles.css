@@ -1,4 +1,24 @@
+main {
+  &.bg-grey-lighter {
+    & article {
+      background: var(--color-grey-lighter);
+
+      @media (--sm-up) {
+        background: none;
+      }
+    }
+  }
+
+  &.asideShowInMobile {
+    & article {
+      min-height: auto;
+    }
+  }
+}
+
 article {
+  min-height: 100vh;
+
   padding-bottom: var(--global-nav-height);
   padding-bottom: calc(
     constant(safe-area-inset-bottom) + var(--global-nav-height)
@@ -8,9 +28,6 @@ article {
   @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;
-  }
-  @media (--lg-up) {
-    min-height: 100vh;
     padding-bottom: 0;
   }
 }
@@ -32,15 +49,5 @@ aside {
 
     border-left: none;
     border-right: none;
-  }
-}
-
-.bg-grey-lighter {
-  & article {
-    background: var(--color-grey-lighter);
-
-    @media (--sm-up) {
-      background: none;
-    }
   }
 }

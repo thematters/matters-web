@@ -32,7 +32,7 @@ const Wall = ({ show }: WallProps) => {
       <div className="l-row full">
         <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9">
           <div className="l-row full">
-            <div className="l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-9 l-offset-lg-3">
+            <div className="l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-9-7 l-offset-lg-9-2">
               <section className="container" style={bgStyle}>
                 <h2 className="slogan">
                   <Translate zh_hant="看不過癮？" zh_hans="看不过瘾？" />

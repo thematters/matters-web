@@ -36,8 +36,6 @@ const SideNav = () => {
     router.query.userName === viewerUserName
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
 
-  console.log(router)
-
   return (
     <section className="side-nav">
       <section className="logo">

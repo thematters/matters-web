@@ -3,19 +3,20 @@ header {
 }
 
 .icymi {
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-base);
 }
 
 .topics {
   margin-bottom: var(--spacing-base);
 }
 
-.tags {
-  margin-bottom: var(--spacing-x-tight);
+.users {
+  /* margin-top: var(--spacing-x-loose); */
+  margin-bottom: var(--spacing-tight);
 }
 
-.authors {
-  margin-bottom: var(--spacing-tight);
+.tags {
+  margin-bottom: var(--spacing-loose);
 }
 
 .right {

@@ -10,10 +10,15 @@ import {
 import { analytics, appendTarget } from '~/common/utils'
 
 interface SignUpButtonProps {
+  isPlain?: boolean
   trackType: string
 }
 
-export const SignUpButton: React.FC<SignUpButtonProps> = ({ trackType }) => {
+export const SignUpButton: React.FC<SignUpButtonProps> = ({
+  children,
+  isPlain,
+  trackType
+}) => {
   const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp
@@ -35,11 +40,19 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({ trackType }) => {
         }
       }
 
+  if (isPlain) {
+    return (
+      <Button aria-haspopup="true" {...clickProps}>
+        {children}
+      </Button>
+    )
+  }
+
   return (
     <Button
+      bgColor="green"
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
-      bgColor="green"
       aria-haspopup="true"
       {...clickProps}
     >

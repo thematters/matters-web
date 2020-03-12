@@ -25,6 +25,7 @@ interface TextIconProps {
 
   style?: React.CSSProperties
   className?: string
+  truncateTxt?: boolean
 }
 
 /**
@@ -51,6 +52,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   weight,
 
   textPlacement = 'right',
+  truncateTxt = false,
 
   style,
   className,
@@ -67,7 +69,8 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
     [className || '']: !!className,
-    hasIcon: !!icon
+    hasIcon: !!icon,
+    'truncate-text': truncateTxt
   })
 
   if (textPlacement === 'left') {

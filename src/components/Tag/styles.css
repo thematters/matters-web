@@ -50,3 +50,7 @@
     margin-left: var(--spacing-xx-tight);
   }
 }
+
+.size-lg {
+  font-size: var(--font-size-lg);
+}
