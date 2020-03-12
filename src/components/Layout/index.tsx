@@ -1,6 +1,9 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 import { Head, SearchBar, useResponsive } from '~/components'
+
+import { PATHS } from '~/common/enums'
 
 import Header from './Header'
 import NavBar from './NavBar'
@@ -23,6 +26,7 @@ export const Layout: React.FC<LayoutProps> & {
 } = ({ aside, asideShowInMobile, bgColor, children }) => {
   const isSmallUp = useResponsive('sm-up')
   const isLargeUp = useResponsive('lg-up')
+  const router = useRouter()
   const mainClass = classNames({
     'l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9': true,
     [`bg-${bgColor}`]: !!bgColor,
@@ -39,9 +43,10 @@ export const Layout: React.FC<LayoutProps> & {
     'l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-3 l-offset-lg-0': true,
     'u-lg-down-hide': !asideShowInMobile
   })
+  const isInSearch = router.pathname === PATHS.SEARCH.href
   const showNav = isSmallUp
   const showAside = isLargeUp || asideShowInMobile
-  const showSearchBar = isLargeUp
+  const showSearchBar = isLargeUp && !isInSearch
 
   return (
     <>

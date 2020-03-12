@@ -10,12 +10,7 @@ const update = (cache: DataProxy) => {
       query: UNREAD_FOLLOWEE_ARTICLES
     })
 
-    if (
-      !data ||
-      !data.viewer ||
-      !data.viewer.status ||
-      !data.viewer.status.unreadFolloweeArticles
-    ) {
+    if (!data?.viewer?.status?.unreadFolloweeArticles) {
       return
     }
 

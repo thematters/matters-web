@@ -89,17 +89,7 @@ const AppreciatorsDialogContent = ({
   >) => {
     const { node, cursor } = datum
     return (
-      <div
-        className="appreciator-item"
-        key={cursor}
-        onClick={() => {
-          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-            type: FEED_TYPE.APPRECIATOR,
-            location: index,
-            entrance: article.id
-          })
-        }}
-      >
+      <div className="appreciator-item" key={cursor}>
         {node.sender && (
           <UserDigest.Rich
             user={node.sender}
@@ -107,6 +97,13 @@ const AppreciatorsDialogContent = ({
               <span className="appreciation-amount">{node.amount}</span>
             }
             hasFollow
+            onClick={() => {
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.APPRECIATOR,
+                location: index,
+                entrance: article.id
+              })
+            }}
           />
         )}
         <style jsx>{styles}</style>

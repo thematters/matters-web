@@ -14,7 +14,7 @@ interface TabProps {
 }
 
 interface TabsProps {
-  spacingBottom?: 0 | 'xtight' | 'base' | 'loose' | 'xxloose'
+  spacingBottom?: 0 | 'xtight' | 'tight' | 'base' | 'loose' | 'xxloose'
 }
 
 const Tab: React.FC<TabProps> = ({

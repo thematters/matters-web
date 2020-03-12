@@ -85,7 +85,7 @@ const Authors = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
+      <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <UserDigest.Rich
@@ -110,6 +110,7 @@ export default () => (
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="allAuthors" />}
+      marginBottom={0}
     />
 
     <Head title={{ id: 'allAuthors' }} />

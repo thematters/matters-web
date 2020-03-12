@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 import BackButton from './BackButton'
+import CancelButton from './CancelButton'
 import MeButton from './MeButton'
 import styles from './styles.css'
 import Title from './Title'
@@ -16,6 +17,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> & {
   BackButton: typeof BackButton
+  CancelButton: typeof CancelButton
   MeButton: typeof MeButton
   Title: typeof Title
 } = ({
@@ -44,6 +46,7 @@ const Header: React.FC<HeaderProps> & {
 }
 
 Header.BackButton = BackButton
+Header.CancelButton = CancelButton
 Header.MeButton = MeButton
 Header.Title = Title
 

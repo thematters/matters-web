@@ -1,65 +1,84 @@
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-import { Head, Layout, SearchBar, useResponsive } from '~/components'
+import {
+  Head,
+  Layout,
+  SearchAutoComplete,
+  SearchBar,
+  SearchOverview,
+  useResponsive
+} from '~/components'
 
 import { getQuery } from '~/common/utils'
 
-import EmptySearch from './EmptySearch'
+import AggregateResults from './AggregateResults'
+// import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
-const SearchHeader = () => {
-  const isSmallUp = useResponsive('sm-up')
-
-  return (
-    <Layout.Header
-      left={
-        isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
-      }
-      right={<SearchBar />}
-    />
-  )
-}
-
 const Search = () => {
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
+  const isSmallUp = useResponsive('sm-up')
+  const [typingKey, setTypingKey] = useState('')
+  const resetAutoComplete = () => setTypingKey('')
 
-  if (!q) {
-    return (
-      <Layout>
-        <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
+  const isOverview = !q && !typingKey
+  const isAutoComplete = typingKey
+  const isTagOnly = !isAutoComplete && type === 'tag'
+  const isUserOnly = !isAutoComplete && type === 'user'
+  const isArticleOnly = !isAutoComplete && type === 'article'
+  const isAggregate =
+    !isOverview &&
+    !isAutoComplete &&
+    !isTagOnly &&
+    !isUserOnly &&
+    !isArticleOnly
 
-        <SearchHeader />
-
-        <EmptySearch inSidebar={false} />
-      </Layout>
-    )
-  }
-
-  const isTagOnly = type === 'tag'
-  const isUserOnly = type === 'user'
-  const isAggregate = !isTagOnly && !isUserOnly
+  useEffect(() => {
+    Router.events.on('routeChangeStart', resetAutoComplete)
+    return () => Router.events.off('routeChangeStart', resetAutoComplete)
+  }, [])
 
   return (
-    <Layout
-      aside={
-        <>
-          {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}
-        </>
-      }
-    >
-      <SearchHeader />
+    <Layout>
+      <Layout.Header
+        left={
+          isAutoComplete ? (
+            undefined
+          ) : isSmallUp ? (
+            <Layout.Header.BackButton />
+          ) : (
+            <Layout.Header.MeButton />
+          )
+        }
+        right={
+          <>
+            <SearchBar hasDropdown={false} onChange={setTypingKey} />
+            {isAutoComplete && (
+              <Layout.Header.CancelButton
+                onClick={resetAutoComplete}
+                style={{ marginLeft: '1rem' }}
+              />
+            )}
+          </>
+        }
+        marginBottom={0}
+      />
 
-      <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
+      <Head title={{ id: 'search' }} />
 
-      {isAggregate && <SearchArticles q={q} />}
-      {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
-      {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
+      {isOverview && <SearchOverview inPage />}
+      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
+
+      {isTagOnly && <SearchTags />}
+      {isUserOnly && <SearchUsers />}
+      {isArticleOnly && <SearchArticles />}
+      {isAggregate && <AggregateResults />}
 
       <style jsx>{styles}</style>
     </Layout>

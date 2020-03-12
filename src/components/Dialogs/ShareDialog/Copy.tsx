@@ -2,7 +2,7 @@ import { useRef } from 'react'
 
 import { Button, Icon, Translate } from '~/components'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYCODES, TEXT } from '~/common/enums'
 import { ADD_TOAST } from '~/common/enums/events'
 import { dom } from '~/common/utils'
 
@@ -44,7 +44,7 @@ const Copy = ({ link }: { link: string }) => {
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="green-lighter"
-        aira-label="複製"
+        aira-label={TEXT.zh_hant.copy}
         onClick={copy}
       >
         <Icon.Link color="grey" />

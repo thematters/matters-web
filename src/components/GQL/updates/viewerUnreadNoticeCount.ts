@@ -10,12 +10,7 @@ const update = (cache: DataProxy) => {
       query: UNREAD_NOTICE_COUNT
     })
 
-    if (
-      !cacheData ||
-      !cacheData.viewer ||
-      !cacheData.viewer.status ||
-      !cacheData.viewer.status.unreadNoticeCount
-    ) {
+    if (!cacheData?.viewer?.status?.unreadNoticeCount) {
       return
     }
 

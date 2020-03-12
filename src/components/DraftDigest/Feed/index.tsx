@@ -38,17 +38,14 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
     id
   })
 
-  const onClick = () =>
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, {
-      entrance: id
-    })
-
   return (
     <Card
       {...path}
       spacing={['base', 'base']}
       bgActiveColor="green-lighter"
-      onClick={onClick}
+      onClick={() =>
+        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, { entrance: id })
+      }
     >
       <LinkWrapper {...path} textActiveColor="green">
         <Title type="feed" is="h2">

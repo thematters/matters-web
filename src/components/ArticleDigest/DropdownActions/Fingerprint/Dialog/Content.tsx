@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { Button, Icon, Spinner, Translate } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { dom } from '~/common/utils'
 
 import styles from './styles.css'
@@ -49,7 +49,7 @@ const CopyButton = ({ text }: { text: string }) => {
       spacing={['xtight', 'xtight']}
       bgActiveColor="green-lighter"
       onClick={() => copy(text)}
-      aira-label="複製"
+      aira-label={TEXT.zh_hant.copy}
     >
       <Icon.Link color="grey" />
     </Button>

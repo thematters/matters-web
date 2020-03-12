@@ -74,7 +74,7 @@ const MeDrafts = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <DraftDigest.Feed draft={node} />
