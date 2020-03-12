@@ -14,7 +14,7 @@
 
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
-  will-change: transform;
+  will-change: transform, top;
 
   &.fixed-height {
     height: 80vh;
