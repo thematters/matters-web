@@ -77,7 +77,12 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate zh_hant={zh_hant.count_limit} zh_hans={zh_hans.count_limit} />,
+            content: (
+              <Translate
+                zh_hant={zh_hant.count_limit}
+                zh_hans={zh_hans.count_limit}
+              />
+            )
           }
         })
       )
