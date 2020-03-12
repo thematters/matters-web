@@ -191,8 +191,8 @@
 
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -1px;
+    right: -1px;
     width: 0.5rem;
     height: 0.5rem;
 

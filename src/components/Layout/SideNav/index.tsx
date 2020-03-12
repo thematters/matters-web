@@ -17,7 +17,7 @@ import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
-import NotificationIcon from '../NotificationIcon'
+import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
 import styles from './styles.css'
 
@@ -59,7 +59,7 @@ const SideNav = () => {
 
         <NavListItem
           name={<Translate id="follow" />}
-          icon={<Icon.FollowLarge size="lg" />}
+          icon={<UnreadIcon.Follow size="lg" />}
           activeIcon={<Icon.FollowActiveLarge size="lg" />}
           active={isInFollow}
           isMediumUp={isMediumUp}
@@ -69,7 +69,7 @@ const SideNav = () => {
         {viewer.isAuthed && (
           <NavListItem
             name={<Translate id="notification" />}
-            icon={<NotificationIcon size="lg" />}
+            icon={<UnreadIcon.Notification size="lg" />}
             activeIcon={<Icon.NotificationActiveLarge size="lg" />}
             active={isInNotification}
             isMediumUp={isMediumUp}

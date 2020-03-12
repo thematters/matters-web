@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
-const NotificationIcon: React.FC<IconProps> = iconProps => {
+const NotificationUnreadIcon: React.FC<IconProps> = iconProps => {
   const viewer = useContext(ViewerContext)
   const { data, startPolling } = useQuery<UnreadNoticeCount>(
     UNREAD_NOTICE_COUNT,
@@ -30,7 +30,7 @@ const NotificationIcon: React.FC<IconProps> = iconProps => {
   }, [])
 
   const unread = (data?.viewer?.status?.unreadNoticeCount || 0) >= 1
-  const iconClass = classNames({ 'notification-icon': true, unread })
+  const iconClass = classNames({ 'unread-icon': true, unread })
 
   return (
     <span className={iconClass}>
@@ -41,4 +41,4 @@ const NotificationIcon: React.FC<IconProps> = iconProps => {
   )
 }
 
-export default NotificationIcon
+export default NotificationUnreadIcon
