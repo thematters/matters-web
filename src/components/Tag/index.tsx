@@ -10,11 +10,15 @@ import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
 
-type TagSize = 'sm'
+type TagSize = 'sm' | 'lg'
 
 interface TagProps {
   size?: TagSize
-  type?: 'count-fixed'
+  type?: 'count-fixed' | 'card-title'
+  onClick?: () => void
+  style?: React.CSSProperties
+  count?: boolean
+  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   tag: DigestTag
 }
 
@@ -39,7 +43,15 @@ const fragments = {
   `
 }
 
-export const Tag = ({ size, type, tag }: TagProps) => {
+export const Tag = ({
+  size,
+  type,
+  tag,
+  onClick,
+  style,
+  count = true,
+  spacing
+}: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [`size-${size}`]: !!size,
@@ -50,18 +62,19 @@ export const Tag = ({ size, type, tag }: TagProps) => {
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = numAbbr(tag.articles.totalCount || 0)
+  const tagCount = count && numAbbr(tag.articles.totalCount || 0)
 
   return (
     <Link {...path}>
-      <a className={tagClasses}>
+      <a className={tagClasses} onClick={onClick} style={style}>
         <TextIcon
           icon={
             <Icon.HashTag color="grey" size={isSmall ? undefined : 'md-s'} />
           }
           weight="md"
           size={isSmall ? 'sm' : 'md'}
-          spacing={isSmall ? 'xtight' : 'tight'}
+          spacing={!spacing ? (isSmall ? 'xtight' : 'tight') : spacing}
+          truncateTxt={!count}
         >
           {tag.content}
         </TextIcon>

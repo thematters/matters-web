@@ -15,6 +15,7 @@ type ROUTE_KEY =
   | 'FOLLOW'
   | 'AUTHORS'
   | 'TOPICS'
+  | 'ICYMI'
   | 'SEARCH'
   | 'TAGS'
   | 'TAG_DETAIL'
@@ -74,6 +75,11 @@ export const ROUTES: Array<{
     key: 'TOPICS',
     href: '/Topics',
     as: '/topics'
+  },
+  {
+    key: 'ICYMI',
+    href: '/Icymi',
+    as: 'icymi'
   },
   {
     key: 'SEARCH',

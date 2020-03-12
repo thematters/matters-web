@@ -1,3 +1,3 @@
-import Topics from '~/views/Topics'
+import ArticleFeed from '~/views/ArticleFeed'
 
-export default () => <Topics />
+export default () => <ArticleFeed type="topic" />

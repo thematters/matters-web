@@ -57,3 +57,7 @@
     font-size: var(--font-size-sm);
   }
 }
+
+.size-lg {
+  font-size: var(--font-size-lg);
+}
