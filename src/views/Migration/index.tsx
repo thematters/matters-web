@@ -24,6 +24,11 @@ const Migration = () => {
           zh_hans: '三个步骤，立即搬家到 Matters',
           lang
         })}
+        description={translate({
+          zh_hant: '我正在搬家到 Matters，邀請你一起來',
+          zh_hans: '我正在搬家到 Matters，邀请你一起来',
+          lang
+        })}
       />
 
       <header>
