@@ -1,0 +1,12 @@
+.key {
+  @mixin line-clamp;
+  font-size: var(--font-size-sm);
+
+  &.highlight {
+    color: var(--color-matters-green);
+  }
+
+  &.inPage {
+    font-size: var(--font-size-md);
+  }
+}

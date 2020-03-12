@@ -10,7 +10,6 @@ type MenuItemProps = CardProps
 const MenuItem: React.FC<MenuItemProps> = ({
   children,
   spacing = ['tight', 'base'],
-  bgActiveColor = 'grey-lighter',
   ...restProps
 }) => {
   const menuItemClass = classNames({
@@ -19,7 +18,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
   return (
     <li className={menuItemClass} role="menuitem">
-      <Card spacing={spacing} bgActiveColor={bgActiveColor} {...restProps}>
+      <Card spacing={spacing} bgActiveColor="green-lighter" {...restProps}>
         {children}
       </Card>
 

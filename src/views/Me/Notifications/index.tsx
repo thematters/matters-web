@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
 import {
@@ -12,14 +13,40 @@ import {
   useResponsive
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import MARK_ALL_NOTICES_AS_READ from '~/components/GQL/mutations/markAllNoticesAsRead'
-import { ME_NOTIFICATIONS } from '~/components/GQL/queries/notice'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 
 import { mergeConnections } from '~/common/utils'
 
-import { MarkAllNoticesAsRead } from '~/components/GQL/mutations/__generated__/MarkAllNoticesAsRead'
-import { MeNotifications } from '~/components/GQL/queries/__generated__/MeNotifications'
+import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
+import { MeNotifications } from './__generated__/MeNotifications'
+
+const ME_NOTIFICATIONS = gql`
+  query MeNotifications($first: Int, $after: String) {
+    viewer {
+      id
+      notices(input: { first: $first, after: $after }) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...DigestNotice
+          }
+        }
+      }
+    }
+  }
+  ${Notice.fragments.notice}
+`
+
+const MARK_ALL_NOTICES_AS_READ = gql`
+  mutation MarkAllNoticesAsRead {
+    markAllNoticesAsRead
+  }
+`
 
 const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
@@ -68,7 +95,7 @@ const BaseNotifications = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 'base']} hasBorder>
+      <List spacing={['xloose', 'base']}>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <Notice notice={node} />

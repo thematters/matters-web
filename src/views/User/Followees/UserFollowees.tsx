@@ -100,13 +100,13 @@ const UserFollowees = () => {
           zh_hans: `${user.displayName}追踪的作者`
         }}
       />
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                hasFollow
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.FOLLOWEE,

@@ -170,8 +170,6 @@ const ArticleDetail = () => {
           <UserDigest.Rich
             user={article.author}
             size="sm"
-            hasFollow
-            hasState
             spacing={[0, 0]}
             bgActiveColor={undefined}
           />

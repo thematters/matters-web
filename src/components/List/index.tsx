@@ -55,7 +55,7 @@ export const List: React.FC<ListProps> & {
   Item: typeof ListItem
 } = ({
   spacing = [0, 0],
-  hasBorder,
+  hasBorder = true,
 
   children,
 

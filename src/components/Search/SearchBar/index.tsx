@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
@@ -14,8 +14,14 @@ import {
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
 import { getQuery, routerPush, toPath, translate } from '~/common/utils'
 
-import AutoComplete from './AutoComplete'
+import { SearchAutoComplete } from '../SearchAutoComplete'
+import { SearchOverview } from '../SearchOverview'
 import styles from './styles.css'
+
+interface SearchBarProps {
+  onChange?: (key: string) => void
+  hasDropdown?: boolean
+}
 
 const SearchButton = () => (
   <Button
@@ -27,9 +33,10 @@ const SearchButton = () => (
   </Button>
 )
 
-export const SearchBar: React.FC<{
-  autoComplete?: boolean
-}> = ({ autoComplete = true }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+  onChange,
+  hasDropdown = true
+}) => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' }) || ''
   const { lang } = useContext(LanguageContext)
@@ -51,6 +58,13 @@ export const SearchBar: React.FC<{
     instanceRef.current?.show()
   }
 
+  useEffect(() => {
+    console.log({ debouncedSearch })
+    if (onChange) {
+      onChange(debouncedSearch)
+    }
+  }, [debouncedSearch])
+
   return (
     <Formik
       initialValues={{ q }}
@@ -65,7 +79,7 @@ export const SearchBar: React.FC<{
       }}
     >
       {({ values, handleSubmit, handleChange }) => {
-        if (!autoComplete) {
+        if (!hasDropdown) {
           return (
             <form
               onSubmit={handleSubmit}
@@ -79,7 +93,10 @@ export const SearchBar: React.FC<{
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 autoCorrect="off"
-                onChange={handleChange}
+                onChange={e => {
+                  handleChange(e)
+                  setSearch(e.target.value)
+                }}
                 value={values.q}
               />
 
@@ -93,10 +110,11 @@ export const SearchBar: React.FC<{
         return (
           <Dropdown
             content={
-              <AutoComplete
-                searchKey={debouncedSearch}
-                hideDropdown={hideDropdown}
-              />
+              debouncedSearch ? (
+                <SearchAutoComplete searchKey={debouncedSearch} />
+              ) : (
+                <SearchOverview />
+              )
             }
             trigger="manual"
             placement="bottom-start"

@@ -73,7 +73,7 @@ const MeBookmarks = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
             <ArticleDigestFeed article={node} />

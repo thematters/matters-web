@@ -92,7 +92,7 @@ const AppreciationsReceived = () => {
       <AppreciationTabs activity={data.viewer.activity} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder>
+        <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
               <Transaction.AppreciationReceived tx={node} />

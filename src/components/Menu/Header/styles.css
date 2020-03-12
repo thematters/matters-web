@@ -2,9 +2,16 @@ header {
   @mixin flex-center-space-between;
 
   padding: var(--spacing-x-tight) var(--spacing-base);
+}
 
-  & h4 {
-    font-size: var(--font-size-md-s);
-    font-weight: var(--font-weight-semibold);
-  }
+h3 {
+  font-weight: var(--font-weight-semibold);
+}
+
+.size-md-s {
+  font-size: var(--font-size-md-s);
+}
+
+.size-lg {
+  font-size: var(--font-size-lg);
 }
