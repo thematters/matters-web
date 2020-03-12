@@ -13,7 +13,7 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
 
   return (
     <section className="sub-content tag-content">
-      <Tag tag={tag} type="inline" />
+      <Tag tag={tag} type="inline" active />
 
       <style jsx>{styles}</style>
     </section>
