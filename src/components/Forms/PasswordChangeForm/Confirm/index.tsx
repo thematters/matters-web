@@ -103,6 +103,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input
