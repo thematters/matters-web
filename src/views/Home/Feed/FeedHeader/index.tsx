@@ -41,7 +41,15 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
 
       <section className="right">
         {rightButton}
-        {path && <ViewAllButton {...path} onClick={onClick} bgColor="none" />}
+
+        {path && (
+          <ViewAllButton
+            {...path}
+            onClick={onClick}
+            bgColor={undefined}
+            bgActiveColor="green-lighter"
+          />
+        )}
       </section>
 
       <style jsx>{styles}</style>

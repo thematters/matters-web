@@ -78,7 +78,6 @@ const HorizontalTagDigest = ({ tag }: TagDigestProp) => {
       bgColor="white"
       borderColor={'grey-lighter'}
       borderRadius="xtight"
-      style={{ width: '20rem', height: ' 14.5rem' }}
     >
       <Tag
         spacing="xxxtight"

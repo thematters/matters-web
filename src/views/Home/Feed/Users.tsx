@@ -64,7 +64,6 @@ const HorizontalUsers = ({ users }: UsersProps) => {
                     location: k * 3 + i
                   })
                 }
-                style={{ paddingLeft: 0 }}
               />
             </div>
           ))}
@@ -88,7 +87,6 @@ const VeriticalUsers = ({ users }: UsersProps) => (
               location: i
             })
           }
-          style={{ paddingLeft: 0 }}
         />
       </li>
     ))}
