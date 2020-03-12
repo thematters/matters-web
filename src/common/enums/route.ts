@@ -78,7 +78,7 @@ export const ROUTES: Array<{
   },
   {
     key: 'ICYMI',
-    href: './Icymi',
+    href: '/Icymi',
     as: 'icymi'
   },
   {

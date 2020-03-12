@@ -13,29 +13,35 @@ export const mergeConnections = ({
   path: string
   dedupe?: boolean
 }) => {
-  const { edges: oldEdges, pageInfo: oldPageInfo, ...rest } = _get(
-    oldData,
-    path
-  )
-  const { edges: newEdges, pageInfo: newPageInfo } = _get(newData, path)
+  try {
+    const { edges: oldEdges, pageInfo: oldPageInfo, ...rest } = _get(
+      oldData,
+      path
+    )
 
-  const result = oldData
+    const { edges: newEdges, pageInfo: newPageInfo } = _get(newData, path)
 
-  if (newPageInfo.endCursor !== oldPageInfo.endCursor) {
-    const copy = JSON.parse(JSON.stringify(result))
+    const result = oldData
 
-    const edges = dedupe
-      ? _uniqBy([...oldEdges, ...newEdges], edge => edge.node.id)
-      : [...oldEdges, ...newEdges]
+    if (newPageInfo.endCursor !== oldPageInfo.endCursor) {
+      const copy = JSON.parse(JSON.stringify(result))
 
-    return _set(copy, path, {
-      ...rest,
-      pageInfo: newPageInfo,
-      edges
-    })
+      const edges = dedupe
+        ? _uniqBy([...oldEdges, ...newEdges], edge => edge.node.id)
+        : [...oldEdges, ...newEdges]
+
+      return _set(copy, path, {
+        ...rest,
+        pageInfo: newPageInfo,
+        edges
+      })
+    }
+
+    return result
+  } catch (err) {
+    console.error('Cannot get edges from path, skipping', err)
+    return oldData
   }
-
-  return result
 }
 
 export const unshiftConnections = ({

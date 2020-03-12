@@ -8,21 +8,21 @@ import { analytics } from '~/common/utils'
 import styles from './styles.css'
 
 interface SidebarHeaderProps {
-  type: 'icymi' | 'authors' | 'tags' | 'topics'
+  type: 'icymi' | 'users' | 'tags' | 'topics'
   rightButton?: React.ReactNode
 }
 
-const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
+const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
   const pathMap = {
-    icymi: false,
+    icymi: PATHS.ICYMI,
     topics: PATHS.TOPICS,
-    authors: PATHS.AUTHORS,
+    users: PATHS.AUTHORS,
     tags: PATHS.TAGS
   }
   const titleMap = {
     icymi: <Translate zh_hant="不要錯過" zh_hans="不要错过" />,
     topics: <Translate id="allTopics" />,
-    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" />,
+    users: <Translate zh_hant="值得關注" zh_hans="值得关注" />,
     tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" />
   }
   const path = pathMap[type]
@@ -41,7 +41,7 @@ const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
 
       <section className="right">
         {rightButton}
-        {path && <ViewAllButton {...path} onClick={onClick} />}
+        {path && <ViewAllButton {...path} onClick={onClick} bgColor="none" />}
       </section>
 
       <style jsx>{styles}</style>
@@ -49,4 +49,4 @@ const SidebarHeader = ({ type, rightButton }: SidebarHeaderProps) => {
   )
 }
 
-export default SidebarHeader
+export default FeedHeader

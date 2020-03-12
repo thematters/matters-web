@@ -11,12 +11,11 @@ import {
 
 import { SIGNUP_TYPE } from '~/common/enums'
 
-import Authors from './Authors'
 import Feed from './Feed'
-import Icymi from './Icymi'
+import ArticleFeed from './Feed/Articles'
+import TagFeed from './Feed/Tags'
+import UserFeed from './Feed/Users'
 import styles from './styles.css'
-import Tags from './Tags'
-import Topics from './Topics'
 
 const Home = () => {
   const isSmallUp = useResponsive('sm-up')
@@ -27,10 +26,10 @@ const Home = () => {
     <Layout
       aside={
         <>
-          <Icymi />
-          <Tags />
-          <Topics />
-          <Authors />
+          <ArticleFeed type="icymi" />
+          <TagFeed />
+          <ArticleFeed type="topics" />
+          <UserFeed />
         </>
       }
     >

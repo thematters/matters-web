@@ -14,11 +14,11 @@ type TagSize = 'sm' | 'lg'
 
 interface TagProps {
   size?: TagSize
-  type?: 'count-fixed'
+  type?: 'count-fixed' | 'card-title'
   onClick?: () => void
   style?: React.CSSProperties
   count?: boolean
-  spacing?: 0 | '0' | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
+  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   tag: DigestTag
 }
 
@@ -74,6 +74,7 @@ export const Tag = ({
           weight="md"
           size={isSmall ? 'sm' : 'md'}
           spacing={!spacing ? (isSmall ? 'xtight' : 'tight') : spacing}
+          truncateTxt={!count}
         >
           {tag.content}
         </TextIcon>

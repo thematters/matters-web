@@ -4,13 +4,11 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestFeed,
   EmptyArticle,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -136,21 +134,17 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
 }
 
 export default ({ type = 'topic' }: ArticleFeedProp) => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Head title={{ id: type === 'topic' ? 'allTopics' : 'allIcymi' }} />
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={
+        <Layout.Header.Title id={type === 'topic' ? 'allTopics' : 'allIcymi'} />
+      }
+      marginBottom={0}
+    />
 
-      <PageHeader
-        title={<Translate id={type === 'topic' ? 'allTopics' : 'allIcymi'} />}
-      />
+    <Head title={{ id: type === 'topic' ? 'allTopics' : 'allIcymi' }} />
 
-      <section>
-        <Feed type={type} />
-      </section>
-    </article>
-
-    <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-      <Footer />
-    </aside>
-  </main>
+    <Feed type={type} />
+  </Layout>
 )

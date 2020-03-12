@@ -150,3 +150,7 @@
 .weight-bold {
   font-weight: var(--font-weight-bold);
 }
+
+.truncate-text {
+  @mixin truncate;
+}

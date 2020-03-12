@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { List, Spinner, UserDigest, useResponsive } from '~/components'
+import { Spinner, UserDigest, useResponsive } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -11,7 +11,10 @@ import { analytics } from '~/common/utils'
 import FeedHeader from './FeedHeader'
 import styles from './styles.css'
 
-import { UserFeed } from './__generated__/UserFeed'
+import {
+  UserFeed,
+  UserFeed_viewer_recommendation_authors_edges
+} from './__generated__/UserFeed'
 
 const USER_QUERY = gql`
   query UserFeed($first: Int) {
@@ -34,10 +37,68 @@ const USER_QUERY = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
+interface UsersProps {
+  users: UserFeed_viewer_recommendation_authors_edges[]
+}
+// horizontal style in blocks
+const HorizontalUsers = ({ users }: UsersProps) => {
+  const block = []
+
+  // columns of 3
+  for (let i = 0; i < users.length; i += 3) {
+    block.push(users.slice(i, i + 3))
+  }
+
+  return (
+    <ul>
+      {block.map((list, k) => (
+        <li key={k}>
+          {list.map(({ node, cursor }, i) => (
+            <div key={cursor} className="user-row">
+              <UserDigest.Rich
+                user={node}
+                hasFollow
+                onClick={() =>
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.AUTHORS,
+                    location: k * 3 + i
+                  })
+                }
+                style={{ paddingLeft: 0 }}
+              />
+            </div>
+          ))}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// veritical style in list
+const VeriticalUsers = ({ users }: UsersProps) => (
+  <ul>
+    {users.map(({ node, cursor }, i) => (
+      <li key={cursor}>
+        <UserDigest.Rich
+          user={node}
+          hasFollow
+          onClick={() =>
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+              type: FEED_TYPE.AUTHORS,
+              location: i
+            })
+          }
+          style={{ paddingLeft: 0 }}
+        />
+      </li>
+    ))}
+  </ul>
+)
+
 const Users = ({ first = 5 }: { first?: number }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
   const feedClass = classNames({
-    'horizontal-feed': !isMediumUp,
+    'horizontal-feed': !isLargeUp,
     'user-feed': true
   })
   const { data, loading, error } = useQuery<UserFeed>(USER_QUERY, {
@@ -56,61 +117,15 @@ const Users = ({ first = 5 }: { first?: number }) => {
     return null
   }
 
+  const UsersBlock = isLargeUp ? VeriticalUsers : HorizontalUsers
+
   return (
     <section className={feedClass}>
       <FeedHeader type="users" />
 
       {loading && <Spinner />}
 
-      {!loading &&
-        (isMediumUp ? (
-          <List>
-            {edges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
-                <UserDigest.Rich
-                  user={node}
-                  hasFollow
-                  onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.AUTHORS,
-                      location: i
-                    })
-                  }
-                />
-              </List.Item>
-            ))}
-          </List>
-        ) : (
-          <ul>
-            {(() => {
-              const block = []
-
-              // columns of 3
-              for (let i = 0; i < edges.length; i += 3) {
-                block.push(edges.slice(i, i + 3))
-              }
-
-              return block.map((list, k) => (
-                <li key={k}>
-                  {list.map(({ node, cursor }, i) => (
-                    <div key={cursor} style={{ width: '85vw' }}>
-                      <UserDigest.Rich
-                        user={node}
-                        hasFollow
-                        onClick={() =>
-                          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                            type: FEED_TYPE.AUTHORS,
-                            location: k * 3 + i
-                          })
-                        }
-                      />
-                    </div>
-                  ))}
-                </li>
-              ))
-            })()}
-          </ul>
-        ))}
+      {!loading && <UsersBlock users={edges} />}
       <style jsx>{styles}</style>
     </section>
   )

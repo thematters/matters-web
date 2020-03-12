@@ -17,7 +17,10 @@ import { analytics, toPath } from '~/common/utils'
 import FeedHeader from './FeedHeader'
 import styles from './styles.css'
 
-import { TagFeed } from './__generated__/TagFeed'
+import {
+  TagFeed,
+  TagFeed_viewer_recommendation_tags_edges_node
+} from './__generated__/TagFeed'
 
 const TAG_QUERY = gql`
   query TagFeed($first: Int) {
@@ -50,11 +53,83 @@ const TAG_QUERY = gql`
   ${ArticleDigestTitle.fragments.article}
 `
 
+interface TagDigestProp {
+  tag: TagFeed_viewer_recommendation_tags_edges_node
+}
+
+const VerticalTagDigest = ({ tag }: TagDigestProp) => (
+  <Tag
+    tag={tag}
+    size="sm"
+    type="count-fixed"
+    style={{ paddingBottom: '1rem', marginBottom: '1rem' }}
+  />
+)
+
+const HorizontalTagDigest = ({ tag }: TagDigestProp) => {
+  const path = toPath({
+    page: 'tagDetail',
+    id: tag.id
+  })
+  return (
+    <Card
+      {...path}
+      spacing={[0, 0]}
+      bgColor="white"
+      borderColor={'grey-lighter'}
+      borderRadius="xtight"
+      style={{ width: '20rem', height: ' 14.5rem' }}
+    >
+      <Tag
+        spacing="xxxtight"
+        tag={tag}
+        size="lg"
+        type="count-fixed"
+        count={false}
+        style={{
+          paddingBottom: 0,
+          paddingLeft: 15,
+          paddingRight: 15,
+          marginBottom: 0,
+          height: 56,
+          display: 'flex'
+        }}
+      />
+      {(tag?.selectArticles?.edges || []).map(
+        ({ node: article, cursor: key }, k) => (
+          <div
+            style={{
+              marginTop: 8,
+              marginBottom: 8,
+              marginLeft: 15,
+              marginRight: 15
+            }}
+            key={key}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.TAG_DETAIL,
+                location: k
+              })
+            }
+          >
+            <ArticleDigestTitle
+              article={article}
+              textSize="sm"
+              is="h4"
+              textWeight="normal"
+            />
+          </div>
+        )
+      )}
+    </Card>
+  )
+}
+
 const Tags = ({ first = 5 }: { first?: number }) => {
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
 
   const feedClass = classNames({
-    'horizontal-feed': !isMediumUp,
+    'horizontal-feed': !isLargeUp,
     'tag-feed': true
   })
 
@@ -72,6 +147,9 @@ const Tags = ({ first = 5 }: { first?: number }) => {
   if (!edges || edges.length <= 0) {
     return null
   }
+
+  const TagDigest = isLargeUp ? VerticalTagDigest : HorizontalTagDigest
+
   return (
     <section className={feedClass}>
       <FeedHeader type="tags" />
@@ -79,75 +157,19 @@ const Tags = ({ first = 5 }: { first?: number }) => {
       {loading && <Spinner />}
 
       <ul>
-        {edges.map(({ node, cursor }, i) => {
-          const path = toPath({
-            page: 'tagDetail',
-            id: node.id
-          })
-
-          const onClick = () =>
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-              type: FEED_TYPE.TAGS,
-              location: i
-            })
-          return isMediumUp ? (
-            <li key={cursor} onClick={onClick}>
-              <Tag
-                tag={node}
-                size="sm"
-                type="count-fixed"
-                style={{ paddingBottom: '1rem', marginBottom: '1rem' }}
-              />
-            </li>
-          ) : (
-            <li key={cursor}>
-              <Card
-                {...path}
-                spacing={[0, 0]}
-                bgColor="white"
-                borderColor={'grey-lighter'}
-                borderRadius="xtight"
-                style={{ width: '20rem', height: ' 14.5rem' }}
-              >
-                <Tag
-                  spacing="xxxtight"
-                  tag={node}
-                  size="lg"
-                  type="count-fixed"
-                  count={false}
-                  onClick={onClick}
-                  style={{
-                    paddingBottom: 0,
-                    paddingLeft: 15,
-                    marginBottom: 0,
-                    height: 56,
-                    display: 'flex'
-                  }}
-                />
-                {(node?.selectArticles?.edges || []).map(
-                  ({ node: article, cursor: key }) => (
-                    <div
-                      style={{
-                        marginTop: 8,
-                        marginBottom: 8,
-                        marginLeft: 15,
-                        marginRight: 15
-                      }}
-                      key={key}
-                    >
-                      <ArticleDigestTitle
-                        article={article}
-                        textSize="sm"
-                        is="h4"
-                        textWeight="normal"
-                      />
-                    </div>
-                  )
-                )}
-              </Card>
-            </li>
-          )
-        })}
+        {edges.map(({ node, cursor }, i) => (
+          <li
+            key={cursor}
+            onClick={() =>
+              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                type: FEED_TYPE.TAGS,
+                location: i
+              })
+            }
+          >
+            <TagDigest tag={node} />
+          </li>
+        ))}
       </ul>
 
       <style jsx>{styles}</style>

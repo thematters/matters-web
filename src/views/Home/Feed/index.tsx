@@ -135,13 +135,16 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
       variables: {
         after: pageInfo.endCursor
       },
+      // previousResult could be undefined when scrolling before loading finishes, reason unknown
       updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-          dedupe: true
-        })
+        previousResult
+          ? mergeConnections({
+              oldData: previousResult,
+              newData: fetchMoreResult,
+              path: connectionPath,
+              dedupe: true
+            })
+          : fetchMoreResult
     })
   }
 

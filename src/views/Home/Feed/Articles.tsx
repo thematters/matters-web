@@ -5,7 +5,6 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestCard,
   ArticleDigestSidebar,
-  // List,
   Spinner,
   useResponsive
 } from '~/components'
@@ -17,10 +16,20 @@ import FeedHeader from './FeedHeader'
 import styles from './styles.css'
 import TopicSidebarArticleDigest from './TopicSidebarArticleDigest'
 
-import { IcymiFeed } from './__generated__/IcymiFeed'
-import { TopicsFeed } from './__generated__/TopicsFeed'
+import {
+  IcymiFeed,
+  IcymiFeed_viewer_recommendation_articles_edges_node
+} from './__generated__/IcymiFeed'
+import {
+  TopicsFeed,
+  TopicsFeed_viewer_recommendation_articles_edges_node
+} from './__generated__/TopicsFeed'
 
 type FeedTypes = 'icymi' | 'topics'
+
+type ArticleNode =
+  | IcymiFeed_viewer_recommendation_articles_edges_node
+  | TopicsFeed_viewer_recommendation_articles_edges_node
 
 const FeedQueries = {
   icymi: gql`
@@ -79,11 +88,12 @@ const Feed = ({
   type?: FeedTypes
 }) => {
   const QUERY = FeedQueries[type]
-  const isMediumUp = useResponsive('md-up')
+  const isLargeUp = useResponsive('lg-up')
 
   const feedClass = classNames({
-    'horizontal-feed': !isMediumUp,
-    'article-feed': true
+    'horizontal-feed': !isLargeUp,
+    'article-feed': true,
+    'vertical-card': type === 'icymi'
   })
 
   const { data, loading } = useQuery<IcymiFeed | TopicsFeed>(QUERY, {
@@ -102,44 +112,40 @@ const Feed = ({
     return null
   }
 
-  const tranckClick = (i: number) => () =>
+  // analytics
+  const trackClick = (i: number) => () =>
     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-      type: FEED_TYPE.ICYMI,
+      type: { icymi: FEED_TYPE.ICYMI, topics: FEED_TYPE.TOPICS }[type],
       location: i
     })
+
+  // determine element type
+  let ArticleDigest: React.FC<{ article: ArticleNode }> = ArticleDigestCard
+  if (isLargeUp) {
+    ArticleDigest =
+      type === 'icymi'
+        ? ({ article }: { article: ArticleNode }) => (
+            <ArticleDigestSidebar
+              article={article}
+              titleTextSize="sm"
+              hasCover
+            />
+          )
+        : TopicSidebarArticleDigest
+  }
 
   return (
     <section className={feedClass}>
       <FeedHeader type={type} />
-      {
-        <ul>
-          {edges.map(({ node, cursor }, i) =>
-            isMediumUp ? (
-              type === 'icymi' ? (
-                <li
-                  key={cursor}
-                  onClick={tranckClick(i)}
-                  style={{ marginTop: 16, marginBottom: 24 }}
-                >
-                  <ArticleDigestSidebar
-                    article={node}
-                    titleTextSize="sm"
-                    hasCover
-                  />
-                </li>
-              ) : (
-                <li key={cursor} onClick={tranckClick(i)}>
-                  <TopicSidebarArticleDigest article={node} />
-                </li>
-              )
-            ) : (
-              <li key={cursor} onClick={tranckClick(i)}>
-                {<ArticleDigestCard article={node} />}
-              </li>
-            )
-          )}
-        </ul>
-      }
+
+      <ul>
+        {edges.map(({ node }, i) => (
+          <li onClick={trackClick(i)} key={i}>
+            <ArticleDigest article={node} />
+          </li>
+        ))}
+      </ul>
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -38,7 +38,7 @@ const TopicSidebarArticleDigest = ({
         />
 
         {article.topicScore && (
-          <span className="topicscore">{numAbbr(article.topicScore)}</span>
+          <span className="topic-score">{numAbbr(article.topicScore)}</span>
         )}
       </section>
 
