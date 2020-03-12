@@ -72,7 +72,7 @@ export const Tag = ({
             <Icon.HashTag color="grey" size={isSmall ? undefined : 'md-s'} />
           }
           weight="md"
-          size={isSmall ? 'sm' : 'md'}
+          size={isSmall ? 'sm' : 'lg'}
           spacing={!spacing ? (isSmall ? 'xtight' : 'tight') : spacing}
           truncateTxt={!count}
         >

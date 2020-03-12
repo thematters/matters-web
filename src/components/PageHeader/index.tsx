@@ -4,7 +4,7 @@ import { Title } from '~/components'
 
 import styles from './styles.css'
 
-interface PageHeaderProps {
+export interface PageHeaderProps {
   title: string | React.ReactNode
 
   is?: 'h1' | 'h2' | 'h3'

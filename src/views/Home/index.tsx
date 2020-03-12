@@ -12,9 +12,7 @@ import {
 import { SIGNUP_TYPE } from '~/common/enums'
 
 import Feed from './Feed'
-import ArticleFeed from './Feed/Articles'
-import TagFeed from './Feed/Tags'
-import UserFeed from './Feed/Users'
+import Sidebar from './Sidebar'
 import styles from './styles.css'
 
 const Home = () => {
@@ -26,10 +24,10 @@ const Home = () => {
     <Layout
       aside={
         <>
-          <ArticleFeed type="icymi" />
-          <TagFeed />
-          <ArticleFeed type="topics" />
-          <UserFeed />
+          <Sidebar.Icymi />
+          <Sidebar.Tags />
+          <Sidebar.Topics />
+          <Sidebar.Authors />
         </>
       }
     >

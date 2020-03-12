@@ -4,7 +4,8 @@ import gql from 'graphql-tag'
 import {
   ArticleDigestCard,
   ArticleDigestSidebar,
-  Title,
+  PageHeader,
+  Slides,
   Translate
 } from '~/components'
 
@@ -51,36 +52,50 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     inSidebar
   })
 
+  const onClick = (i: number) => () =>
+    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+      type: FEED_TYPE.RELATED_ARTICLE,
+      location: i,
+      entrance: article.id
+    })
+
+  const Header = (
+    <PageHeader
+      title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
+      hasNoBorder
+    />
+  )
+
+  if (!inSidebar) {
+    return (
+      <section className={relatedArticlesClass}>
+        <Slides header={Header} bgColor="green-lighter">
+          {edges.map(({ node, cursor }, i) => (
+            <Slides.Item key={cursor}>
+              <ArticleDigestCard article={node} onClick={onClick(i)} />
+            </Slides.Item>
+          ))}
+        </Slides>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <section className={relatedArticlesClass}>
-      <Title type="nav" is="h2">
-        <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />
-      </Title>
+      {Header}
 
       <ul>
-        {edges.map(({ node, cursor }, i) => {
-          const onClick = () =>
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-              type: FEED_TYPE.RELATED_ARTICLE,
-              location: i,
-              entrance: article.id
-            })
-
-          return (
-            <li key={cursor}>
-              {inSidebar ? (
-                <ArticleDigestSidebar
-                  article={node}
-                  titleTextSize="sm"
-                  hasCover
-                  onClick={onClick}
-                />
-              ) : (
-                <ArticleDigestCard article={node} onClick={onClick} />
-              )}
-            </li>
-          )
-        })}
+        {edges.map(({ node, cursor }, i) => (
+          <li key={cursor}>
+            <ArticleDigestSidebar
+              article={node}
+              titleTextSize="sm"
+              hasCover
+              onClick={onClick(i)}
+            />
+          </li>
+        ))}
       </ul>
 
       <style jsx>{styles}</style>
