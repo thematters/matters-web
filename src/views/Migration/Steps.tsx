@@ -31,7 +31,7 @@ const texts: {
     sub_content_1_2: '馬上入駐 →',
     title_2: '預備檔案',
     content_2:
-      '前往 Medium 設置頁面下載檔案，解壓並找到其中 HTML 格式的作品檔案。',
+      '前往 Medium 設定頁下載檔案，打開 posts 文件夾並找到 HTML 格式的作品文件。',
     sub_content_2_1: '下載檔案',
     title_3: '匯入作品',
     content_3: '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱。'
@@ -44,7 +44,7 @@ const texts: {
     sub_content_1_2: '马上入驻 →',
     title_2: '准备文档',
     content_2:
-      '前往 Medium 设置页面下载文档，解压并找到其中 HTML 格式的作品文件。',
+      '前往 Medium 设置页下载文档，找到 posts 文件夹並找到 HTML 格式的作品文件。',
     sub_content_2_1: '下载文档',
     title_3: '导入作品',
     content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。'
