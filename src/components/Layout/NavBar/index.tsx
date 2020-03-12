@@ -5,6 +5,7 @@ import { Button, Icon, ViewerContext, WriteButton } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
+import NotificationIcon from '../NotificationIcon'
 import styles from './styles.css'
 
 interface NavListItemProps {
@@ -84,7 +85,7 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.notification}
-          icon={<Icon.NotificationLarge size="lg" />}
+          icon={<NotificationIcon size="lg" />}
           activeIcon={<Icon.NotificationActiveLarge size="lg" color="green" />}
           active={isInNotification}
           {...PATHS.ME_NOTIFICATIONS}

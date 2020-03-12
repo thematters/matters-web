@@ -17,6 +17,7 @@ import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
+import NotificationIcon from '../NotificationIcon'
 import NavListItem from './NavListItem'
 import styles from './styles.css'
 
@@ -68,7 +69,7 @@ const SideNav = () => {
         {viewer.isAuthed && (
           <NavListItem
             name={<Translate id="notification" />}
-            icon={<Icon.NotificationLarge size="lg" />}
+            icon={<NotificationIcon size="lg" />}
             activeIcon={<Icon.NotificationActiveLarge size="lg" />}
             active={isInNotification}
             isMediumUp={isMediumUp}
