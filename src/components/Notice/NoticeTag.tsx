@@ -27,7 +27,6 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
         borderRadius="xxtight"
       >
         <TextIcon
-          className="tag"
           icon={<Icon.HashTag color="grey" />}
           weight="md"
           size="sm"

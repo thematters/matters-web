@@ -21,7 +21,7 @@ const FEED_ARTICLES = {
       viewer {
         id
         recommendation {
-          articles: icymi(input: { first: 3 }) {
+          articles: icymi(input: { first: 5 }) {
             edges {
               cursor
               node {
@@ -39,7 +39,7 @@ const FEED_ARTICLES = {
       viewer {
         id
         recommendation {
-          articles: topics(input: { first: 3 }) {
+          articles: topics(input: { first: 5 }) {
             edges {
               cursor
               node {
@@ -56,8 +56,7 @@ const FEED_ARTICLES = {
 
 const FeedArticles = ({ type = 'icymi' }: FeedArticlesProps) => {
   const { data, loading } = useQuery<IcymiFeed | TopicsFeed>(
-    FEED_ARTICLES[type],
-    { variables: { first: 3 } }
+    FEED_ARTICLES[type]
   )
   const edges = data?.viewer?.recommendation.articles.edges
 

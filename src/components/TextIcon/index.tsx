@@ -22,9 +22,6 @@ export interface TextIconProps {
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
 
   textPlacement?: 'bottom' | 'left' | 'right'
-
-  style?: React.CSSProperties
-  className?: string
 }
 
 /**
@@ -52,13 +49,8 @@ export const TextIcon: React.FC<TextIconProps> = ({
 
   textPlacement = 'right',
 
-  style,
-  className,
-
   children
 }) => {
-  const textStyle = style && style.fontSize ? { fontSize: style.fontSize } : {}
-
   const textIconClasses = classNames({
     'text-icon': true,
     [color || '']: !!color,
@@ -66,18 +58,13 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
-    [className || '']: !!className,
     hasIcon: !!icon
   })
 
   if (textPlacement === 'left') {
     return (
-      <span className={textIconClasses} style={style}>
-        {children && (
-          <span className="text" style={textStyle}>
-            {children}
-          </span>
-        )}
+      <span className={textIconClasses}>
+        {children && <span className="text">{children}</span>}
 
         {icon}
 
@@ -87,14 +74,10 @@ export const TextIcon: React.FC<TextIconProps> = ({
   }
 
   return (
-    <span className={textIconClasses} style={style}>
+    <span className={textIconClasses}>
       {icon}
 
-      {children && (
-        <span className="text" style={textStyle}>
-          {children}
-        </span>
-      )}
+      {children && <span className="text">{children}</span>}
 
       <style jsx>{styles}</style>
     </span>

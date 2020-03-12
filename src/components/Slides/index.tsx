@@ -16,8 +16,6 @@ const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
     [`size-${size}`]: !!size
   })
 
-  // TODO: ARIA
-
   return (
     <li className={slidesItemClass}>
       {children}
@@ -35,9 +33,6 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
     slides: true,
     [`bg-${bgColor}`]: !!bgColor
   })
-
-  // TODO: CSS Scroll Snapping
-  // TODO: ARIA
 
   return (
     <section className={slidesClass}>
