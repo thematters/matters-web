@@ -13,7 +13,7 @@ type TextIconColor =
   | 'white'
   | 'red'
 
-interface TextIconProps {
+export interface TextIconProps {
   icon?: React.ReactNode
 
   color?: TextIconColor
@@ -25,7 +25,6 @@ interface TextIconProps {
 
   style?: React.CSSProperties
   className?: string
-  truncateTxt?: boolean
 }
 
 /**
@@ -52,7 +51,6 @@ export const TextIcon: React.FC<TextIconProps> = ({
   weight,
 
   textPlacement = 'right',
-  truncateTxt = false,
 
   style,
   className,
@@ -69,8 +67,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
     [className || '']: !!className,
-    hasIcon: !!icon,
-    'truncate-text': truncateTxt
+    hasIcon: !!icon
   })
 
   if (textPlacement === 'left') {

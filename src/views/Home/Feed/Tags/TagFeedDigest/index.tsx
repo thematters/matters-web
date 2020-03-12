@@ -42,7 +42,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
     <section className="container">
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
-          <Tag spacing="xxxtight" tag={tag} size="lg" count={false} />
+          <Tag tag={tag} hasCount={false} size="lg" spacing="xxtight" />
         </header>
       </Card>
 

@@ -7,7 +7,7 @@ interface SlidesProps {
   header: React.ReactNode
 }
 
-type SlideItemProps = {
+interface SlideItemProps {
   size?: 'sm' | 'md'
 }
 
@@ -15,6 +15,7 @@ const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
   const slidesItemClass = classNames({
     [`size-${size}`]: !!size
   })
+
   // TODO: ARIA
 
   return (

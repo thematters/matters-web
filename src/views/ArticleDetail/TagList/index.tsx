@@ -25,7 +25,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   return (
     <section className="tag-list">
       {article.tags.map(tag => (
-        <Tag tag={tag} key={tag.id} size="sm" />
+        <Tag tag={tag} key={tag.id} iconSize="sm" size="sm" spacing="xxtight" />
       ))}
       <style jsx>{styles}</style>
     </section>

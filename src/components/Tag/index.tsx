@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon, IconSize, TextIcon, TextIconProps } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
@@ -10,17 +10,12 @@ import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
 
-type TagSize = 'sm' | 'lg'
-
-interface TagProps {
-  size?: TagSize
-  type?: 'count-fixed' | 'card-title'
-  onClick?: () => void
-  style?: React.CSSProperties
-  count?: boolean
-  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
+type TagProps = {
+  type?: 'count-fixed'
+  hasCount?: boolean
   tag: DigestTag
-}
+  iconSize?: IconSize
+} & Pick<TextIconProps, 'size' | 'spacing'>
 
 /**
  *
@@ -44,42 +39,36 @@ const fragments = {
 }
 
 export const Tag = ({
-  size,
   type,
   tag,
-  onClick,
-  style,
-  count = true,
-  spacing
+  hasCount = true,
+  iconSize = 'md-s',
+  size = 'md',
+  spacing = 'xtight'
 }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
-    [`size-${size}`]: !!size,
     'count-fixed': type === 'count-fixed'
   })
-  const isSmall = size === 'sm'
   const path = toPath({
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = count && numAbbr(tag.articles.totalCount || 0)
+  const tagCount = numAbbr(tag.articles.totalCount || 0)
 
   return (
     <Link {...path}>
-      <a className={tagClasses} onClick={onClick} style={style}>
+      <a className={tagClasses}>
         <TextIcon
-          icon={
-            <Icon.HashTag color="grey" size={isSmall ? undefined : 'md-s'} />
-          }
+          icon={<Icon.HashTag color="grey" size={iconSize} />}
           weight="md"
-          size={isSmall ? 'sm' : 'lg'}
-          spacing={!spacing ? (isSmall ? 'xtight' : 'tight') : spacing}
-          truncateTxt={!count}
+          size={size}
+          spacing={spacing}
         >
           {tag.content}
         </TextIcon>
 
-        {!!tagCount && <span className="count">{tagCount}</span>}
+        {hasCount && tagCount && <span className="count">{tagCount}</span>}
 
         <style jsx>{styles}</style>
       </a>

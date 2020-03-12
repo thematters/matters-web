@@ -17,7 +17,6 @@ import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
-import styles from './styles.css'
 
 import { FeedAuthors as FeedAuthorsType } from './__generated__/FeedAuthors'
 
@@ -91,7 +90,7 @@ const FeedAuthors = () => {
       {!loading &&
         _chunk(edges, 3).map((chunks, edgeIndex) => (
           <Slides.Item size="md" key={edgeIndex}>
-            <section className="col">
+            <section>
               {chunks.map(({ node, cursor }, nodeIndex) => (
                 <UserDigest.Rich
                   key={cursor}
@@ -106,8 +105,6 @@ const FeedAuthors = () => {
                   }
                 />
               ))}
-
-              <style jsx>{styles}</style>
             </section>
           </Slides.Item>
         ))}
