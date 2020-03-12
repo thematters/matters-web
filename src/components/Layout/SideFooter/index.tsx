@@ -45,6 +45,12 @@ const SideFooter = () => {
         </a>
       </Link>
 
+      <Link {...PATHS.MIGRATION}>
+        <a>
+          <Translate id="migrationSideBar" />
+        </a>
+      </Link>
+
       <Link {...downloadAppLink}>
         <a>
           <Translate id="downloadApp" />
