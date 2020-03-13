@@ -1,71 +1,29 @@
 import { useRef } from 'react'
 
-import { Button, Icon, Translate } from '~/components'
+import { Button, CopyToClipboard, Icon } from '~/components'
 
-import { KEYCODES, TEXT } from '~/common/enums'
-import { ADD_TOAST } from '~/common/enums/events'
-import { dom } from '~/common/utils'
+import { TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
   const inputRef: React.RefObject<any> | null = useRef(null)
 
-  const copy = () => {
-    const copied = dom.copyToClipboard(decodeURI(link))
-
-    if (!copied) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureCopy" />
-          }
-        })
-      )
-      return
-    }
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="successCopy" />
-        }
-      })
-    )
-    if (inputRef.current) {
-      inputRef.current.select()
-    }
-  }
-
   return (
     <section className="copy">
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgActiveColor="green-lighter"
-        aira-label={TEXT.zh_hant.copy}
-        onClick={copy}
-      >
-        <Icon.Link color="grey" />
-      </Button>
+      <CopyToClipboard text={link}>
+        <Button
+          spacing={['xtight', 'xtight']}
+          bgActiveColor="green-lighter"
+          aira-label={TEXT.zh_hant.copy}
+        >
+          <Icon.Link color="grey" />
+        </Button>
+      </CopyToClipboard>
 
-      <input
-        ref={inputRef}
-        type="text"
-        value={decodeURI(link)}
-        readOnly
-        onClick={copy}
-        onKeyDown={event => {
-          event.stopPropagation()
-
-          if (event.keyCode !== KEYCODES.enter) {
-            return
-          }
-
-          copy()
-        }}
-      />
+      <CopyToClipboard text={link}>
+        <input ref={inputRef} type="text" value={decodeURI(link)} readOnly />
+      </CopyToClipboard>
 
       <style jsx>{styles}</style>
     </section>
