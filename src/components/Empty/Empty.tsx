@@ -1,3 +1,5 @@
+import Alert from '@reach/alert'
+
 import styles from './styles.css'
 
 interface EmptyProps {
@@ -10,7 +12,9 @@ export const Empty = ({ icon, description }: EmptyProps) => {
     <section className="empty">
       <section>{icon}</section>
 
-      <section className="description">{description}</section>
+      <Alert type="polite">
+        <section className="description">{description}</section>
+      </Alert>
 
       <style jsx>{styles}</style>
     </section>
