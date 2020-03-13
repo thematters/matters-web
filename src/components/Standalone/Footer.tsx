@@ -12,7 +12,6 @@ import {
 import { translate } from '~/common/utils'
 import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg'
-import { ReactComponent as IconFooterMedium } from '~/static/icons/footer-medium.svg'
 import { ReactComponent as IconFooterTelegram } from '~/static/icons/footer-telegram.svg'
 import { ReactComponent as IconFooterTwitter } from '~/static/icons/footer-twitter.svg'
 import { ReactComponent as IconFooterWeChat } from '~/static/icons/footer-wechat.svg'
@@ -72,19 +71,13 @@ const Footer = () => {
             <a href="https://www.facebook.com/MattersLab2018/" target="_blank">
               {withIcon(IconFooterFacebook)({ size: 'md' })}
             </a>
-            <a href="https://md.com/matters-lab" target="_blank">
-              {withIcon(IconFooterMedium)({ size: 'md' })}
-            </a>
             <a href="https://www.instagram.com/matterslab2018/" target="_blank">
               {withIcon(IconFooterInstagram)({ size: 'md' })}
             </a>
             <Tooltip content="MattersLab">
               <span>{withIcon(IconFooterWeChat)({ size: 'md' })}</span>
             </Tooltip>
-            <a
-              href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
-              target="_blank"
-            >
+            <a href="https://t.me/thematters" target="_blank">
               {withIcon(IconFooterTelegram)({ size: 'md' })}
             </a>
           </div>

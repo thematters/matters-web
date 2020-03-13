@@ -26,7 +26,7 @@ const texts: {
     content_5:
       'Matters 的用戶來自中國大陸、香港、台灣、馬來西亞等地，擁有華文世界裡最優質與多元的寫作評論社區。',
     likecoin: '了解什麼是 LikeCoin →',
-    examples: '有多優質，请看這裡 →'
+    examples: '有多優質，請看這裡 →'
   },
   zh_hans: {
     header: '搬家完成后，你将立刻获得以下功能',
