@@ -54,7 +54,7 @@ const MeBookmarks = () => {
   const connectionPath = 'viewer.subscriptions'
   const { edges, pageInfo } = data?.viewer?.subscriptions || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo || edges.length <= 0) {
+  if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyBookmark />
   }
 

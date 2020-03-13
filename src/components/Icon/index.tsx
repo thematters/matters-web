@@ -2,16 +2,13 @@ import classNames from 'classnames'
 
 import { ReactComponent as CheckActive } from '~/static/icons/checkbox-check-active.svg'
 import { ReactComponent as CheckInactive } from '~/static/icons/checkbox-check-inactive.svg'
-import { ReactComponent as UnCheck } from '~/static/icons/checkbox-uncheck.svg'
 import { ReactComponent as DotDivider } from '~/static/icons/dot-divider.svg'
 import { ReactComponent as SeedBadge } from '~/static/icons/early-user-badge.svg'
 import { ReactComponent as EmptyWarning } from '~/static/icons/empty-warning.svg'
 import { ReactComponent as External } from '~/static/icons/external.svg'
 import { ReactComponent as Loading } from '~/static/icons/loading.svg'
-import { ReactComponent as Menu } from '~/static/icons/menu.svg'
 import { ReactComponent as Reload } from '~/static/icons/reload.svg'
 import { ReactComponent as Spinner } from '~/static/icons/spinner.svg'
-import { ReactComponent as Trends } from '~/static/icons/trends.svg'
 
 import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
@@ -222,12 +219,9 @@ export const Icon = {
   External: withIcon(External),
   Live,
   Loading: withIcon(Loading),
-  Menu: withIcon(Menu),
   Reload: withIcon(Reload),
   SeedBadge: withIcon(SeedBadge),
   Spinner: withIcon(({ className, ...restProps }) => (
     <Spinner className={`u-motion-spin ${className}`} {...restProps} />
-  )),
-  Trends: withIcon(Trends),
-  UnCheck: withIcon(UnCheck)
+  ))
 }
