@@ -2,6 +2,12 @@
   --list-tag-count-width: 3rem;
 }
 
+.tag {
+  & :global(.text) {
+    @mixin line-clamp;
+  }
+}
+
 .list {
   display: block;
   position: relative;
@@ -20,10 +26,6 @@
     font-size: var(--font-size-md-s);
     line-height: 1rem;
     text-align: right;
-  }
-
-  & :global(.text) {
-    @mixin line-clamp;
   }
 }
 

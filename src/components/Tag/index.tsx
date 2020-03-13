@@ -40,48 +40,48 @@ export const Tag = ({ tag, type = 'list', active }: TagProps) => {
     id: tag.id
   })
 
-  const isListTag = type === 'list'
-  const isTitleTag = type === 'title'
-  const isInlineTag = type === 'inline'
-
   let iconProps: IconProps = {}
   let textIconProps: TextIconProps = {}
 
-  if (isListTag) {
-    iconProps = {
-      color: 'grey'
-    }
-    textIconProps = {
-      size: 'md',
-      weight: 'normal',
-      spacing: 'xxtight',
-      color: 'black'
-    }
-  } else if (isTitleTag) {
-    iconProps = {
-      color: 'white',
-      size: 'md'
-    }
-    textIconProps = {
-      size: 'lg',
-      weight: 'md',
-      spacing: 0,
-      color: 'white'
-    }
-  } else if (isInlineTag) {
-    iconProps = {
-      color: active ? 'green' : 'grey'
-    }
-    textIconProps = {
-      size: 'sm',
-      weight: 'md',
-      spacing: 0,
-      color: active ? 'green' : 'grey-darker'
-    }
+  switch (type) {
+    case 'list':
+      iconProps = {
+        color: 'grey'
+      }
+      textIconProps = {
+        size: 'md',
+        weight: 'normal',
+        spacing: 'xxtight',
+        color: 'black'
+      }
+      break
+    case 'title':
+      iconProps = {
+        color: 'white',
+        size: 'md'
+      }
+      textIconProps = {
+        size: 'lg',
+        weight: 'md',
+        spacing: 0,
+        color: 'white'
+      }
+      break
+    case 'inline':
+      iconProps = {
+        color: active ? 'green' : 'grey'
+      }
+      textIconProps = {
+        size: 'sm',
+        weight: 'md',
+        spacing: 0,
+        color: active ? 'green' : 'grey-darker'
+      }
+      break
   }
 
   const tagCount = numAbbr(tag.articles.totalCount || 0)
-  const hasCount = isListTag
+  const hasCount = type === 'list'
 
   return (
     <Link {...path}>

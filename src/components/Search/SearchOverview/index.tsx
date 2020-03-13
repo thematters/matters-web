@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { Fragment } from 'react'
 
-import { LinkWrapper, Menu, Translate } from '~/components'
+import { Menu, TextIcon, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -73,23 +74,29 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
           <ul>
             {recentSearches.map(({ node: key }, i) => (
               <li key={key}>
-                <LinkWrapper
+                <Link
                   {...toPath({
                     page: 'search',
                     q: key
                   })}
-                  onClick={() => {
-                    analytics.trackEvent(
-                      ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
-                      {
-                        location: i,
-                        entrance: key
-                      }
-                    )
-                  }}
                 >
-                  {key}
-                </LinkWrapper>
+                  <a
+                    className="key"
+                    onClick={() => {
+                      analytics.trackEvent(
+                        ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
+                        {
+                          location: i,
+                          entrance: key
+                        }
+                      )
+                    }}
+                  >
+                    <TextIcon color="grey-darker" size="sm">
+                      {key}
+                    </TextIcon>
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
