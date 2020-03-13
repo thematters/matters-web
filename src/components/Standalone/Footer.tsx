@@ -77,10 +77,7 @@ const Footer = () => {
             <Tooltip content="MattersLab">
               <span>{withIcon(IconFooterWeChat)({ size: 'md' })}</span>
             </Tooltip>
-            <a
-              href="https://t.me/thematters"
-              target="_blank"
-            >
+            <a href="https://t.me/thematters" target="_blank">
               {withIcon(IconFooterTelegram)({ size: 'md' })}
             </a>
           </div>
