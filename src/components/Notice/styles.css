@@ -86,48 +86,6 @@
   margin-top: var(--spacing-tight);
 }
 
-.tag-content {
-  position: relative;
-
-  & :global(.card) {
-    & :global(.tag > span.text) {
-      white-space: nowrap;
-
-      &::after {
-        content: '';
-        position: absolute;
-
-        top: 0;
-        right: 0;
-        width: var(--spacing-xx-loose);
-        height: 100%;
-
-        border-radius: var(--spacing-x-tight);
-        background-image: linear-gradient(
-          to left,
-          var(--color-grey-lighter),
-          var(--color-grey-lighter) 33%,
-          rgba(246, 246, 246, 0)
-        );
-      }
-    }
-
-    &:hover,
-    &:focus {
-      & :global(.tag > span.text) {
-        &::after {
-          background-image: linear-gradient(
-            to left,
-            var(--color-grey-lighter-active),
-            var(--color-grey-lighter-active) 33%,
-            rgba(235, 240, 238, 0)
-          );
-        }
-      }
-    }
-  }
-}
-
 .date {
   margin-top: var(--spacing-xx-tight);
 }

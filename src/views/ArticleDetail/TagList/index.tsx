@@ -24,9 +24,14 @@ const TagList = ({ article }: { article: TagListArticle }) => {
 
   return (
     <section className="tag-list">
-      {article.tags.map(tag => (
-        <Tag tag={tag} key={tag.id} size="sm" />
-      ))}
+      <ul>
+        {article.tags.map(tag => (
+          <li key={tag.id}>
+            <Tag tag={tag} type="inline" />
+          </li>
+        ))}
+      </ul>
+
       <style jsx>{styles}</style>
     </section>
   )

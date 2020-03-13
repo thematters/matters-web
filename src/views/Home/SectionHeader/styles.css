@@ -1,0 +1,7 @@
+.right {
+  @mixin flex-center-all;
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}

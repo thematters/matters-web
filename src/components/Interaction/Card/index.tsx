@@ -26,8 +26,6 @@ export interface CardProps {
   htmlTarget?: '_blank'
 
   onClick?: () => any
-
-  style?: React.CSSProperties
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -45,8 +43,7 @@ export const Card: React.FC<CardProps> = ({
 
   onClick,
 
-  children,
-  style
+  children
 }) => {
   const disabled = !as && !href && !onClick
   const node = useRef<HTMLElement>(null)
@@ -124,7 +121,6 @@ export const Card: React.FC<CardProps> = ({
       onClick={event => {
         openLink({ newTab: event.metaKey, event })
       }}
-      style={style}
     >
       {children}
 

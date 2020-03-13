@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
 
-  width: 287px;
   height: 170px;
   padding: var(--spacing-tight) var(--spacing-base);
 

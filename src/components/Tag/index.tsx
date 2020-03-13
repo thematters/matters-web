@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, TextIcon } from '~/components'
+import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
@@ -10,26 +10,11 @@ import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
 
-type TagSize = 'sm' | 'lg'
-
 interface TagProps {
-  size?: TagSize
-  type?: 'count-fixed' | 'card-title'
-  onClick?: () => void
-  style?: React.CSSProperties
-  count?: boolean
-  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   tag: DigestTag
+  type?: 'list' | 'title' | 'inline'
+  active?: boolean
 }
-
-/**
- *
- * Usage:
- *
- * ```tsx
- * <Tag size="sm" tag={tag} />
- * ```
- */
 
 const fragments = {
   tag: gql`
@@ -43,43 +28,69 @@ const fragments = {
   `
 }
 
-export const Tag = ({
-  size,
-  type,
-  tag,
-  onClick,
-  style,
-  count = true,
-  spacing
-}: TagProps) => {
+export const Tag = ({ tag, type = 'list', active }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
-    [`size-${size}`]: !!size,
-    'count-fixed': type === 'count-fixed'
+    [type]: type,
+    active
   })
-  const isSmall = size === 'sm'
+
   const path = toPath({
     page: 'tagDetail',
     id: tag.id
   })
-  const tagCount = count && numAbbr(tag.articles.totalCount || 0)
+
+  let iconProps: IconProps = {}
+  let textIconProps: TextIconProps = {}
+
+  switch (type) {
+    case 'list':
+      iconProps = {
+        color: 'grey'
+      }
+      textIconProps = {
+        size: 'md',
+        weight: 'normal',
+        spacing: 'xxtight',
+        color: 'black'
+      }
+      break
+    case 'title':
+      iconProps = {
+        color: 'white',
+        size: 'md'
+      }
+      textIconProps = {
+        size: 'lg',
+        weight: 'md',
+        spacing: 0,
+        color: 'white'
+      }
+      break
+    case 'inline':
+      iconProps = {
+        color: active ? 'green' : 'grey'
+      }
+      textIconProps = {
+        size: 'sm',
+        weight: 'md',
+        spacing: 0,
+        color: active ? 'green' : 'grey-darker'
+      }
+      break
+  }
+
+  const tagCount = numAbbr(tag.articles.totalCount || 0)
+  const hasCount = type === 'list'
 
   return (
     <Link {...path}>
-      <a className={tagClasses} onClick={onClick} style={style}>
-        <TextIcon
-          icon={
-            <Icon.HashTag color="grey" size={isSmall ? undefined : 'md-s'} />
-          }
-          weight="md"
-          size={isSmall ? 'sm' : 'md'}
-          spacing={!spacing ? (isSmall ? 'xtight' : 'tight') : spacing}
-          truncateTxt={!count}
-        >
+      <a className={tagClasses}>
+        <TextIcon icon={<Icon.HashTag {...iconProps} />} {...textIconProps}>
           {tag.content}
         </TextIcon>
 
-        {!!tagCount && <span className="count">{tagCount}</span>}
+        {hasCount && tagCount && <span className="count">{tagCount}</span>}
 
         <style jsx>{styles}</style>
       </a>

@@ -16,10 +16,10 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import ArticleFeed from './Articles'
+import Articles from './Articles'
+import Authors from './Authors'
 import SortBy from './SortBy'
-import TagFeed from './Tags'
-import UserFeed from './Users'
+import Tags from './Tags'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -31,21 +31,24 @@ import {
   NewestFeed_viewer_recommendation_feed_edges
 } from './__generated__/NewestFeed'
 
+type SortBy = 'hottest' | 'newest'
+
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
 interface FeedEdge {
   __typename: 'HorizontalFeed'
   Feed: HorizontalFeed
 }
+
 interface FeedLocation {
   [key: number]: HorizontalFeed
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => <ArticleFeed type={'icymi'} first={3} />,
-  5: () => <ArticleFeed type={'topics'} first={3} />,
-  8: () => <TagFeed first={3} />,
-  11: () => <UserFeed first={9} />
+  2: () => <Articles type="icymi" />,
+  5: () => <Articles type="topics" />,
+  8: () => <Tags />,
+  11: () => <Authors />
 }
 
 const feedFragment = gql`
@@ -94,11 +97,8 @@ export const queries = {
   `
 }
 
-type SortBy = 'hottest' | 'newest'
-
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isLargeUp = useResponsive('lg-up')
-
   const {
     data,
     error,
@@ -158,6 +158,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   if (!isLargeUp) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
+
     // get insert entries
     const locs = Object.keys(horizontalFeeds).map(loc => parseInt(loc, 10))
     locs.sort((a, b) => a - b)
@@ -174,32 +175,30 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   }
 
   return (
-    <>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {mixFeed.map((edge, i) => {
-            if (edge.__typename === 'HorizontalFeed') {
-              const { Feed } = edge
-              return <Feed key={i} />
-            } else {
-              return (
-                <List.Item key={i}>
-                  <ArticleDigestFeed
-                    article={edge.node}
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: sortBy,
-                        location: i
-                      })
-                    }
-                  />
-                </List.Item>
-              )
-            }
-          })}
-        </List>
-      </InfiniteScroll>
-    </>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List>
+        {mixFeed.map((edge, i) => {
+          if (edge.__typename === 'HorizontalFeed') {
+            const { Feed } = edge
+            return <Feed key={i} />
+          } else {
+            return (
+              <List.Item key={i}>
+                <ArticleDigestFeed
+                  article={edge.node}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: sortBy,
+                      location: i
+                    })
+                  }
+                />
+              </List.Item>
+            )
+          }
+        })}
+      </List>
+    </InfiniteScroll>
   )
 }
 
@@ -222,7 +221,6 @@ const HomeFeed = () => {
   return (
     <>
       <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
-
       <MainFeed feedSortType={feedSortType as SortBy} />
     </>
   )

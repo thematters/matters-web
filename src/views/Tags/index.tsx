@@ -136,7 +136,7 @@ const Tags = () => {
                     })
                   }
                 >
-                  <Tag tag={node} />
+                  <Tag tag={node} type="list" />
                 </Card>
               </List.Item>
             )

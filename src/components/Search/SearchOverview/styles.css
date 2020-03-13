@@ -12,16 +12,16 @@
         margin-right: var(--spacing-tight);
       }
 
-      & :global(> a) {
-        @mixin truncate;
-        display: inline-block;
+      & .key {
+        display: inline-flex;
         padding: var(--spacing-xx-tight) var(--spacing-x-tight);
 
-        color: var(--color-grey-darker);
-        font-size: var(--font-size-sm);
-        line-height: 1rem;
+        border-radius: 2rem;
         background: var(--color-grey-lighter);
-        border-radius: 3rem;
+
+        & :global(.text) {
+          @mixin line-clamp;
+        }
 
         &:hover,
         &:focus {

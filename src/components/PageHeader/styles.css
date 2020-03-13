@@ -6,6 +6,7 @@ header {
     border: none;
   }
 }
+
 .title {
   @mixin flex-center-space-between;
   flex-wrap: wrap;

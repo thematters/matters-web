@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import styles from './styles.css'
 
-interface LinkWrapperProps {
+export interface LinkWrapperProps {
   href: string
   as: string
 

@@ -184,12 +184,6 @@ span.container {
   }
 }
 
-.bg-none {
-  & .hotarea {
-    background: none;
-  }
-}
-
 .bg-grey-lighter {
   & .hotarea {
     background: var(--color-grey-lighter);

@@ -18,7 +18,6 @@ interface ArticleDigestSidebarProps {
   hasBackground?: boolean
   hasCover?: boolean
   onClick?: () => any
-  style?: React.CSSProperties
 }
 
 const fragments = {
@@ -48,8 +47,7 @@ export const ArticleDigestSidebar = ({
   titleTextSize = 'md-s',
   hasBackground,
   hasCover,
-  onClick,
-  style
+  onClick
 }: ArticleDigestSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
@@ -71,7 +69,6 @@ export const ArticleDigestSidebar = ({
       borderRadius={hasBackground ? 'xtight' : undefined}
       bgColor={hasBackground ? 'grey-lighter' : undefined}
       onClick={onClick}
-      style={style}
     >
       <section className={containerClass}>
         <header>
