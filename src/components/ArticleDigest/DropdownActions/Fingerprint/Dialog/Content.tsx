@@ -1,10 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Button, Icon, Spinner, Translate } from '~/components'
+import { Button, CopyToClipboard, Icon, Spinner, Translate } from '~/components'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
-import { dom } from '~/common/utils'
+import { TEXT } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -19,40 +18,16 @@ const GATEWAYS = gql`
 `
 
 const CopyButton = ({ text }: { text: string }) => {
-  const copy = (link: string) => {
-    const copied = dom.copyToClipboard(link)
-
-    if (!copied) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureCopy" />
-          }
-        })
-      )
-      return
-    }
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="successCopy" />
-        }
-      })
-    )
-  }
-
   return (
-    <Button
-      spacing={['xtight', 'xtight']}
-      bgActiveColor="green-lighter"
-      onClick={() => copy(text)}
-      aira-label={TEXT.zh_hant.copy}
-    >
-      <Icon.Link color="grey" />
-    </Button>
+    <CopyToClipboard text={text}>
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgActiveColor="green-lighter"
+        aira-label={TEXT.zh_hant.copy}
+      >
+        <Icon.Link color="grey" />
+      </Button>
+    </CopyToClipboard>
   )
 }
 

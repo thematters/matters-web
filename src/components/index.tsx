@@ -22,6 +22,7 @@ export * from './PageHeader'
 export * from './Spinner'
 export * from './Expandable'
 export * from './Slides'
+export * from './CopyToClipboard'
 
 /**
  * Compositions
