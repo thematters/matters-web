@@ -49,11 +49,6 @@
     margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
     text-align: center;
 
-    @media (--sm-up) {
-      margin-left: 0;
-      margin-right: 0;
-    }
-
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
       padding: 0 var(--spacing-base);

@@ -22,8 +22,6 @@ import {
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
-import styles from './styles.css'
-
 import {
   UserCommentFeed,
   UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
@@ -158,7 +156,7 @@ const UserComments = ({ user }: UserIdUser) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 'base']}>
+      <List spacing={['loose', 0]}>
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
           const filteredComments = filterComments(
@@ -171,20 +169,26 @@ const UserComments = ({ user }: UserIdUser) => {
 
           return (
             <List.Item key={articleEdge.cursor}>
-              <section className="article-title">
+              <Card
+                spacing={['tight', 'base']}
+                {...toPath({
+                  page: 'articleDetail',
+                  article: articleEdge.node
+                })}
+              >
                 <ArticleDigestTitle article={articleEdge.node} is="h3" />
-              </section>
+              </Card>
 
               <List hasBorder={false}>
                 {filteredComments.map(comment => (
                   <List.Item key={comment.id}>
                     <Card
-                      spacing={['tight', 0]}
+                      spacing={['tight', 'base']}
+                      bgActiveColor="green-lighter"
                       {...toPath({ page: 'commentDetail', comment })}
                     >
                       <Comment.Feed
                         comment={comment}
-                        avatarSize="md"
                         hasCreatedAt
                         hasLink
                         inCard
@@ -196,8 +200,6 @@ const UserComments = ({ user }: UserIdUser) => {
             </List.Item>
           )
         })}
-
-        <style jsx>{styles}</style>
       </List>
     </InfiniteScroll>
   )

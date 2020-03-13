@@ -1,12 +1,8 @@
 import { Empty, Icon, Translate } from '~/components'
 
-export const EmptyTag = ({
-  description
-}: {
-  description?: React.ReactNode
-}) => (
+export const EmptyTag = () => (
   <Empty
-    icon={<Icon.HashTag color="grey-lighter" size="xl" />}
-    description={description || <Translate id="TAG_NOT_FOUND" />}
+    icon={<Icon.HashTag size="xxl" />}
+    description={<Translate id="TAG_NOT_FOUND" />}
   />
 )

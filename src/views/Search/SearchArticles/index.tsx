@@ -61,12 +61,7 @@ const SearchArticles = () => {
   const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <EmptySearch
-        inSidebar={false}
-        description={<Translate id="emptySearchResults" />}
-      />
-    )
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   const loadMore = () => {

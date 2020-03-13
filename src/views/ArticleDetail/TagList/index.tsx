@@ -18,7 +18,7 @@ const fragments = {
 }
 
 const TagList = ({ article }: { article: TagListArticle }) => {
-  if (!article || !article.tags) {
+  if (!article || !article.tags || article.tags.length <= 0) {
     return null
   }
 

@@ -1,57 +1,11 @@
-.container {
+.empty {
+  margin: var(--spacing-xxx-loose) 0;
+  padding: 0 var(--spacing-base);
+
   text-align: center;
   color: var(--color-grey-light);
 }
 
-.spacing-y-loose {
-  padding-top: var(--spacing-x-loose);
-  padding-bottom: var(--spacing-x-loose);
-}
-.spacing-y-0 {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.spacing-x-loose {
-  padding-left: var(--spacing-loose);
-  padding-right: var(--spacing-loose);
-}
-.spacing-x-0 {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .description {
-  margin-top: var(--spacing-loose);
-  font-size: var(--font-size-md);
-  color: var(--color-grey);
-}
-
-.size-sm {
-  & .description {
-    margin-top: var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
-  }
-}
-
-.children {
-  margin-top: var(--spacing-x-loose);
-  text-align: center;
-
-  & :global(> *) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.icon-only,
-.description-only {
-  & .description {
-    margin-top: 0;
-  }
-}
-
-.children-included {
-  & .description {
-    margin-top: var(--spacing-x-tight);
-  }
+  margin-top: var(--spacing-x-tight);
 }

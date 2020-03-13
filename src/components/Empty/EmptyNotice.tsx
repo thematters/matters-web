@@ -1,14 +1,8 @@
 import { Empty, Icon, Translate } from '~/components'
 
-export const EmptyNotice = ({
-  description
-}: {
-  description?: React.ReactNode
-}) => (
+export const EmptyNotice = () => (
   <Empty
-    icon={<Icon.NotificationLarge color="grey-lighter" size="xxl" />}
-    description={
-      description || <Translate zh_hant="還沒有通知" zh_hans="还没有通知" />
-    }
+    icon={<Icon.NotificationLarge size="xxl" />}
+    description={<Translate zh_hant="還沒有通知" zh_hans="还没有通知" />}
   />
 )

@@ -51,7 +51,11 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
       </Menu.Item>
 
       <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_APPRECIATIONS_SENT}>
-        <TextIcon icon={<Icon.LikeMedium size="md" />} spacing="base" size="md">
+        <TextIcon
+          icon={<Icon.LikeMedium size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
           <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
