@@ -1,3 +1,4 @@
+import Alert from '@reach/alert'
 import getConfig from 'next/config'
 
 import { Translate } from '~/components'
@@ -50,24 +51,26 @@ export const Error: React.FC<ErrorProps> = ({
     typeof statusCode === 'string' && statusCode.length > 3
 
   return (
-    <section className="container">
+    <section className="error">
       <section className="image">
         <img src={IMAGE_ILLUSTRATION_EMPTY} />
       </section>
 
       {shouldShowStatusCode && <h3 className="error-code">{statusCode}</h3>}
 
-      <p className="error-message">
-        {message ? (
-          message
-        ) : type === 'not_found' ? (
-          <NotFound />
-        ) : type === 'network' ? (
-          <NetworkError />
-        ) : (
-          <ServerError />
-        )}
-      </p>
+      <Alert type="assertive">
+        <p className="error-message">
+          {message ? (
+            message
+          ) : type === 'not_found' ? (
+            <NotFound />
+          ) : type === 'network' ? (
+            <NetworkError />
+          ) : (
+            <ServerError />
+          )}
+        </p>
+      </Alert>
 
       {children && <section className="error-redirect">{children}</section>}
 
