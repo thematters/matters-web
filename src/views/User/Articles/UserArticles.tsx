@@ -122,9 +122,11 @@ const UserArticles = () => {
   return (
     <>
       <CustomHead />
+
       <ArticleSummaryInfo data={data} />
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder>
+        <List>
           {edges.map(({ node, cursor }, i) => {
             if (
               node.articleState !== 'active' &&

@@ -158,7 +158,7 @@ const UserComments = ({ user }: UserIdUser) => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List spacing={['xloose', 'base']} hasBorder>
+      <List spacing={['xloose', 'base']}>
         {edges.map(articleEdge => {
           const commentEdges = articleEdge.node.comments.edges
           const filteredComments = filterComments(
@@ -175,7 +175,7 @@ const UserComments = ({ user }: UserIdUser) => {
                 <ArticleDigestTitle article={articleEdge.node} is="h3" />
               </section>
 
-              <List>
+              <List hasBorder={false}>
                 {filteredComments.map(comment => (
                   <List.Item key={comment.id}>
                     <Card

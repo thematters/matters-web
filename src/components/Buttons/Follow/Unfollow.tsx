@@ -70,9 +70,7 @@ const Unfollow = ({
       bgActiveColor="red"
       onClick={() => {
         unfollow()
-        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
-          id: user.id
-        })
+        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, { id: user.id })
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}

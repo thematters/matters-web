@@ -88,7 +88,7 @@ const FeaturedComments = () => {
         </Title>
       </header>
 
-      <List spacing={['xloose', 0]} hasBorder>
+      <List spacing={['xloose', 0]}>
         {comments.map(comment => (
           <List.Item key={comment.id}>
             <ResponseComment comment={comment} />

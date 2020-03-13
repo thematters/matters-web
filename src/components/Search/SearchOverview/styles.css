@@ -1,0 +1,49 @@
+.recent-searches {
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-xx-tight);
+    padding: 0 var(--spacing-base);
+
+    & li {
+      margin-bottom: var(--spacing-tight);
+
+      &:not(:last-child) {
+        margin-right: var(--spacing-tight);
+      }
+
+      & :global(> a) {
+        @mixin truncate;
+        display: inline-block;
+        padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+
+        color: var(--color-grey-darker);
+        font-size: var(--font-size-sm);
+        line-height: 1rem;
+        background: var(--color-grey-lighter);
+        border-radius: 3rem;
+
+        &:hover,
+        &:focus {
+          background: var(--color-green-lighter);
+        }
+      }
+    }
+  }
+
+  &.inPage ul li :global(> a) {
+    font-size: var(--font-size-md);
+  }
+}
+
+.frequent-searches {
+  & .key {
+    @mixin line-clamp;
+    color: var(--color-matters-green);
+    font-size: var(--font-size-sm);
+  }
+
+  &.inPage .key {
+    font-size: var(--font-size-md);
+  }
+}

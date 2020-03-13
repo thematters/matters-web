@@ -31,7 +31,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   if (mode === 'black-solid') {
     return (
       <Button
-        aria-label={TEXT.zh_hant.close}
+        aria-label={TEXT.zh_hant.back}
         bgColor="half-black"
         onClick={onBack}
         {...props}
@@ -44,8 +44,9 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   if (isSmallUp) {
     return (
       <Button
-        aria-label={TEXT.zh_hant.close}
+        aria-label={TEXT.zh_hant.back}
         bgColor="green-lighter"
+        bgActiveColor="grey-lighter-active"
         onClick={onBack}
         {...props}
       >
@@ -55,7 +56,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   }
 
   return (
-    <Button aria-label={TEXT.zh_hant.close} onClick={onBack} {...props}>
+    <Button aria-label={TEXT.zh_hant.back} onClick={onBack} {...props}>
       <Icon.LeftLarge size="lg" />
     </Button>
   )

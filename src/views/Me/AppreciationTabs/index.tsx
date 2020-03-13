@@ -26,7 +26,7 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
   const router = useRouter()
 
   return (
-    <Tabs>
+    <Tabs spacingBottom={0}>
       <Tabs.Tab
         {...PATHS.ME_APPRECIATIONS_SENT}
         selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}

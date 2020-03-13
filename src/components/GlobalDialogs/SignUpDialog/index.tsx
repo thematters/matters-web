@@ -45,9 +45,7 @@ const SignUpDialog = () => {
           purpose="dialog"
           submitCallback={() => {
             setStep('profile')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
-              step
-            })
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
           closeDialog={close}
         />
@@ -57,9 +55,7 @@ const SignUpDialog = () => {
           purpose="dialog"
           submitCallback={() => {
             setStep('setupLikeCoin')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
-              step
-            })
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
           closeDialog={close}
         />
@@ -69,9 +65,7 @@ const SignUpDialog = () => {
           purpose="dialog"
           submitCallback={() => {
             setStep('complete')
-            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, {
-              step
-            })
+            analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_STEP_FINISH, { step })
           }}
           closeDialog={close}
         />

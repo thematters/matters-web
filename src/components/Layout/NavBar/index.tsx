@@ -5,6 +5,7 @@ import { Button, Icon, ViewerContext, WriteButton } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
+import UnreadIcon from '../UnreadIcon'
 import styles from './styles.css'
 
 interface NavListItemProps {
@@ -62,7 +63,7 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.follow}
-          icon={<Icon.FollowLarge size="lg" />}
+          icon={<UnreadIcon.Follow size="lg" />}
           activeIcon={<Icon.FollowActiveLarge size="lg" color="green" />}
           active={isInFollow}
           {...PATHS.FOLLOW}
@@ -84,7 +85,7 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.notification}
-          icon={<Icon.NotificationLarge size="lg" />}
+          icon={<UnreadIcon.Notification size="lg" />}
           activeIcon={<Icon.NotificationActiveLarge size="lg" color="green" />}
           active={isInNotification}
           {...PATHS.ME_NOTIFICATIONS}

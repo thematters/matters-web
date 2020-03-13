@@ -334,7 +334,7 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <List spacing={['xloose', 0]} hasBorder>
+      <List spacing={['xloose', 0]}>
         {responses.map(response => (
           <List.Item key={response.id}>
             {response.__typename === 'Article' ? (

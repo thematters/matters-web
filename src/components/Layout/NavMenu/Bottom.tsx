@@ -32,9 +32,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     try {
       await logout()
 
-      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, {
-        id: viewer.id
-      })
+      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, { id: viewer.id })
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

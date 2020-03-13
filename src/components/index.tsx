@@ -53,7 +53,7 @@ export * from './Comment'
 export * from './Notice'
 export * from './Transaction'
 
-export * from './SearchBar'
+export * from './Search'
 export * from './UserProfile'
 export * from './FileUploader'
 export * from './Term'

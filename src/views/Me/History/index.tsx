@@ -83,7 +83,7 @@ const MeHistory = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestFeed

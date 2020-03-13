@@ -31,7 +31,14 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
           window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
         }
       }
-    : appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true })
+    : {
+        ...appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true }),
+        onClick: () => {
+          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
+            type: trackType
+          })
+        }
+      }
 
   if (isPlain) {
     return (

@@ -26,6 +26,8 @@
 
   position: relative;
   padding: var(--spacing-base);
+  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
 
   & .slogan {
     @mixin font-serif;

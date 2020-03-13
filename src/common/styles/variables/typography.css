@@ -48,21 +48,6 @@
   --line-height-feed-title: 1.33333333; /* 24/18 */
   --font-weight-feed-title: var(--font-weight-medium);
 
-  /* Header Title */
-  --font-size-header-title: var(--font-size-lg);
-  --line-height-header-title: 1.2; /* 24/20 */
-  --font-weight-header-title: var(--font-weight-semibold);
-
-  /* Card Title */
-  --font-size-card-title: var(--font-size-sm);
-  --line-height-card-title: 1.7142857143; /* 24/14 */
-  --font-weight-card-title: var(--font-weight-medium);
-
-  /* Card Text */
-  --font-size-card-text: var(--font-size-sm-s);
-  --line-height-card-text: 1.8461538462; /* 24/13 */
-  --font-weight-card-text: var(--font-weight-normal);
-
   /* Timestamp */
   --font-size-timestamp: var(--font-size-xs);
   --line-height-timestamp: 1.33333333; /* 16/12 */

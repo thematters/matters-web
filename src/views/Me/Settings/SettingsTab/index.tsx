@@ -11,7 +11,7 @@ const SettingsTabs = () => {
 
   return (
     <section className="settings-tab">
-      <Tabs spacingBottom="loose">
+      <Tabs spacingBottom="tight">
         <Tabs.Tab
           {...PATHS.ME_SETTINGS_ACCOUNT}
           selected={router.pathname === PATHS.ME_SETTINGS_ACCOUNT.href}

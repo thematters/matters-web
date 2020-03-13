@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 
 import { Button, CopyToClipboard, Icon, Spinner, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
+
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
@@ -21,7 +23,7 @@ const CopyButton = ({ text }: { text: string }) => {
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="green-lighter"
-        aira-label="複製"
+        aira-label={TEXT.zh_hant.copy}
       >
         <Icon.Link color="grey" />
       </Button>
