@@ -133,8 +133,8 @@ const Confirm: React.FC<FormProps> = ({
         name="code"
         required
         placeholder={translate({ id: 'enterVerificationCode', lang })}
-        value={values.email}
-        error={touched.email && errors.email}
+        value={values.code}
+        error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
