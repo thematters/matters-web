@@ -90,8 +90,8 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
       onClick={async () => {
         try {
           analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
-          const { data } = await putDraft()
-          const { slug, id } = data?.putDraft || {}
+          const result = await putDraft()
+          const { slug, id } = result?.data?.putDraft || {}
 
           if (slug && id) {
             const path = toPath({ page: 'draftDetail', slug, id })
