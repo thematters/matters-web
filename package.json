@@ -41,7 +41,7 @@
     "@matters/matters-editor": "^0.1.11",
     "@reach/alert": "^0.8.6",
     "@reach/dialog": "^0.8.6",
-    "@reach/visually-hidden": "^0.8.6",
+    "@reach/visually-hidden": "^0.9.0",
     "@sentry/browser": "^5.14.1",
     "@tippy.js/react": "^3.1.1",
     "@types/jump.js": "^1.0.3",
