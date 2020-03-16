@@ -22,6 +22,8 @@ import {
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
+import UserTabs from '../../UserTabs'
+
 import {
   UserCommentFeed,
   UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
@@ -36,9 +38,13 @@ const USER_ID = gql`
       info {
         description
       }
+      status {
+        state
+      }
     }
   }
 `
+
 const USER_COMMENT_FEED = gql`
   query UserCommentFeed($id: ID!, $after: String) {
     node(input: { id: $id }) {
@@ -80,6 +86,7 @@ const UserCommentsWrap = () => {
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName }
   })
+  const user = data?.user
 
   if (loading) {
     return <Spinner />
@@ -89,7 +96,7 @@ const UserCommentsWrap = () => {
     return <QueryError error={error} />
   }
 
-  if (!data || !data.user) {
+  if (!user || user?.status?.state === 'archived') {
     return null
   }
 
@@ -97,13 +104,14 @@ const UserCommentsWrap = () => {
     <>
       <Head
         title={{
-          zh_hant: `${data.user.displayName}發表的評論`,
-          zh_hans: `${data.user.displayName}发表的评论`
+          zh_hant: `${user.displayName}發表的評論`,
+          zh_hans: `${user.displayName}发表的评论`
         }}
-        description={data.user.info.description}
+        description={user.info.description}
         image={IMAGE_LOGO_192}
       />
-      <UserComments user={data.user} />
+      <UserTabs />
+      <UserComments user={user} />
     </>
   )
 }

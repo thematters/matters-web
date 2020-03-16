@@ -8,6 +8,7 @@ import { useContext } from 'react'
 
 import {
   Avatar,
+  Error,
   Expandable,
   FollowButton,
   Layout,
@@ -123,11 +124,28 @@ export const UserProfile = () => {
     )
   }
 
-  if (!user || user?.status?.state === 'archived') {
+  if (!user) {
     return (
       <>
         <LayoutHeader />
         <Throw404 />
+      </>
+    )
+  }
+
+  if (user?.status?.state === 'archived') {
+    return (
+      <>
+        <LayoutHeader />
+        <Error
+          statusCode={404}
+          message={
+            <Translate
+              zh_hant="此帳號因為違反社區約章而被註銷"
+              zh_hans="此帐号因为违反社区约章而被注销"
+            />
+          }
+        />
       </>
     )
   }

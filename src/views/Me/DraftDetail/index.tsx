@@ -58,6 +58,13 @@ export const UPDATE_DRAFT = gql`
   }
 `
 
+const EmptyLayout: React.FC = ({ children }) => (
+  <Layout>
+    <Layout.Header left={<Layout.Header.BackButton />} />
+    {children}
+  </Layout>
+)
+
 const DraftDetail = () => {
   const router = useRouter()
   const id = getQuery({ router, key: 'id' })
@@ -76,11 +83,19 @@ const DraftDetail = () => {
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <EmptyLayout>
+        <QueryError error={error} />
+      </EmptyLayout>
+    )
   }
 
   if (!loading && (!data || !data.node || data.node.__typename !== 'Draft')) {
-    return <Throw404 />
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
   }
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined

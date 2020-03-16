@@ -29,6 +29,7 @@ export default gql`
         }
       }
       status {
+        state
         articleCount
         totalWordCount
       }
