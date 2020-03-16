@@ -63,9 +63,7 @@ const BaseNotifications = () => {
   })
 
   useEffect(() => {
-    if (!loading) {
-      markAllNoticesAsRead()
-    }
+    markAllNoticesAsRead()
   }, [])
 
   const connectionPath = 'viewer.notices'
