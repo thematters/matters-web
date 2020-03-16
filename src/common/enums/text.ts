@@ -2,7 +2,7 @@ export type TextId = keyof typeof TEXT.zh_hant
 
 export const TEXT = {
   zh_hant: {
-    about: '關於我們',
+    about: 'Matters 長什麼樣',
     accountArchived: '已註銷用戶',
     accountBanned: '已禁言用戶',
     accountFrozen: '已凍結用戶',
@@ -55,6 +55,7 @@ export const TEXT = {
     confirmPush: '確認開啟',
     continue: '繼續',
     copy: '複製',
+    community: '社區共建基地',
     create: '創建',
     createTag: '新增標籤',
     delete: '刪除',
@@ -94,7 +95,6 @@ export const TEXT = {
     failureLogout: '登出失敗，請重試',
     failurePublish: '發佈失敗',
     failureUploadImage: '圖片上傳失敗',
-    faq: '新手指南',
     featured: '精選',
     featuredComments: '社區精選',
     follow: '追蹤',
@@ -106,7 +106,7 @@ export const TEXT = {
     followingYou: '追蹤了你',
     FORBIDDEN: '你尚無權限進行該操作',
     forgetPassword: '忘記密碼',
-    guide: '社區約章',
+    guide: '玩轉 Matters 實用指南',
     helpCenter: '幫助中心',
     hide: '站內隱藏',
     hintDisplayName: '2-20 個字元，僅支持中英文或數字',
@@ -240,7 +240,7 @@ export const TEXT = {
     yourEmail: '你的電子信箱'
   },
   zh_hans: {
-    about: '关于我们',
+    about: 'Matters 长什么样',
     accountArchived: '已注销用户',
     accountBanned: '已禁言用户',
     accountFrozen: '已冻结用户',
@@ -293,6 +293,7 @@ export const TEXT = {
     confirmPush: '确认开启',
     continue: '继续',
     copy: '复制',
+    community: '社区共建基地',
     create: '创建',
     createTag: '新建标签',
     delete: '删除',
@@ -332,7 +333,6 @@ export const TEXT = {
     failureLogout: '登出失败，再来一次',
     failurePublish: '发布失败',
     failureUploadImage: '图片上传失败',
-    faq: '新手指南',
     featured: '精选',
     featuredComments: '社区精选',
     follow: '追踪',
@@ -344,7 +344,7 @@ export const TEXT = {
     followingYou: '追踪了你',
     FORBIDDEN: '你尚无权限进行该操作',
     forgetPassword: '忘记密码',
-    guide: '社区约章',
+    guide: '玩转 Matters 实用指南',
     hide: '站内隐藏',
     helpCenter: '帮助中心',
     hintDisplayName: '2-20 位，仅支持中英文或数字',
