@@ -1,8 +1,10 @@
+import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { useEventListener } from '~/components'
 
-import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
+import { ADD_TOAST, PATHS, REMOVE_TOAST } from '~/common/enums'
 
 import { ToastWithEffect } from '../Instance'
 import styles from './styles.css'
@@ -22,6 +24,8 @@ const prefix = 'toast-'
 
 const Container = () => {
   const [toasts, setToasts] = useState<any[]>([])
+  const router = useRouter()
+  const isMiscPage = router.pathname === PATHS.MIGRATION.href
 
   const add = (payload: { [key: string]: any }) => {
     if (!payload || Object.keys(payload).length === 0) {
@@ -37,6 +41,34 @@ const Container = () => {
     setToasts(prev => prev.filter(toast => toast.id !== id))
   }
 
+  const containerClasses = classNames({
+    'l-col-4': true,
+    'l-col-sm-8': true,
+    'l-col-md-9': true,
+    'l-col-lg-9': !isMiscPage,
+    'l-col-lg-12': isMiscPage
+  })
+
+  const instanceClasses = isMiscPage
+    ? classNames(
+        'l-col-4',
+        'l-col-sm-6',
+        'l-offset-sm-1',
+        'l-col-md-5',
+        'l-offset-md-2',
+        'l-col-lg-6',
+        'l-offset-lg-3'
+      )
+    : classNames(
+        'l-col-4',
+        'l-col-sm-7',
+        'l-offset-sm-1',
+        'l-col-md-7',
+        'l-offset-md-2',
+        'l-col-lg-9-7',
+        'l-offset-lg-9-2'
+      )
+
   useEventListener(ADD_TOAST, add)
   useEventListener(REMOVE_TOAST, remove)
 
@@ -44,9 +76,9 @@ const Container = () => {
     <>
       <section className="toast-container">
         <div className="l-row full">
-          <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9">
+          <div className={containerClasses}>
             <div className="l-row full">
-              <div className="l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-9-7 l-offset-lg-9-2">
+              <div className={instanceClasses}>
                 {toasts.map(toast => (
                   <ToastWithEffect key={toast.id} {...toast} />
                 ))}
