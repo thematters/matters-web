@@ -59,8 +59,8 @@ const SideNav = () => {
 
         <NavListItem
           name={<Translate id="follow" />}
-          icon={<UnreadIcon.Follow size="lg" />}
-          activeIcon={<Icon.FollowActiveLarge size="lg" />}
+          icon={<UnreadIcon.Follow />}
+          activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
           isMediumUp={isMediumUp}
           {...PATHS.FOLLOW}
@@ -69,8 +69,8 @@ const SideNav = () => {
         {viewer.isAuthed && (
           <NavListItem
             name={<Translate id="notification" />}
-            icon={<UnreadIcon.Notification size="lg" />}
-            activeIcon={<Icon.NotificationActiveLarge size="lg" />}
+            icon={<UnreadIcon.Notification />}
+            activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
             isMediumUp={isMediumUp}
             {...PATHS.ME_NOTIFICATIONS}

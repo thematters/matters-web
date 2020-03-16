@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Icon, IconProps, ViewerContext } from '~/components'
+import { Icon, ViewerContext } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 
 import { POLL_INTERVAL } from '~/common/enums'
@@ -11,7 +11,11 @@ import styles from './styles.css'
 
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
-const NotificationUnreadIcon: React.FC<IconProps> = iconProps => {
+interface UnreadIconProps {
+  active?: boolean
+}
+
+const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
   const { data, startPolling } = useQuery<UnreadNoticeCount>(
     UNREAD_NOTICE_COUNT,
@@ -34,7 +38,11 @@ const NotificationUnreadIcon: React.FC<IconProps> = iconProps => {
 
   return (
     <span className={iconClass}>
-      <Icon.NotificationLarge {...iconProps} />
+      {active ? (
+        <Icon.NotificationActiveLarge size="lg" color="green" />
+      ) : (
+        <Icon.NotificationLarge size="lg" />
+      )}
 
       <style jsx>{styles}</style>
     </span>
