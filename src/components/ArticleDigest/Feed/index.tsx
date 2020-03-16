@@ -78,12 +78,7 @@ export const ArticleDigestFeed = ({
   })
 
   return (
-    <Card
-      {...path}
-      spacing={['base', 'base']}
-      bgActiveColor="green-lighter"
-      onClick={onClick}
-    >
+    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <header>
         <section className="left">
           <UserDigest.Mini

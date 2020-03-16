@@ -87,7 +87,7 @@ const Authors = () => {
               <UserDigest.Rich
                 user={node}
                 spacing={['tight', 0]}
-                bgActiveColor={undefined}
+                bgColor="none"
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.AUTHORS,

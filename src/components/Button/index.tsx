@@ -64,14 +64,13 @@ export type ButtonBgColor = Extract<
   | 'half-black'
 >
 
-type ButtonBgHoverColor = Extract<
+type ButtonBgActiveColor = Extract<
   ButtonColor,
   | 'grey'
   | 'grey-lighter'
   | 'green-lighter'
   | 'grey-lighter-active'
   | 'green'
-  | 'gold'
   | 'red'
 >
 
@@ -83,7 +82,7 @@ export interface ButtonProps {
   textActiveColor?: ButtonTextColor
 
   bgColor?: ButtonBgColor
-  bgActiveColor?: ButtonBgHoverColor
+  bgActiveColor?: ButtonBgActiveColor
 
   borderColor?: ButtonColor
   borderWidth?: 'sm' | 'md'

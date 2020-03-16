@@ -19,7 +19,6 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
       aria-label={TEXT.zh_hant.close}
       ref={ref}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
-      bgActiveColor={isSmallUp ? 'grey-lighter-active' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
     >
       {!isSmallUp && (

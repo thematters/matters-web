@@ -10,6 +10,13 @@
 /* Background */
 .bg-white {
   background: var(--color-white);
+
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-green-lighter);
+    }
+  }
 }
 .bg-grey-lighter {
   background: var(--color-grey-lighter);

@@ -73,7 +73,6 @@ const BaseDropdownActions = ({
       {({ open, ref }) => (
         <Button
           bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
-          bgActiveColor={isSmallUp ? 'grey-lighter-active' : undefined}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}
