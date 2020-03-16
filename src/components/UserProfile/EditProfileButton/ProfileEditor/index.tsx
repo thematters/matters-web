@@ -163,6 +163,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Textarea

@@ -27,7 +27,7 @@ const TopicSidebarArticleDigest = ({
   const path = toPath({ page: 'articleDetail', article })
 
   return (
-    <Card {...path} spacing={['xtight', 0]}>
+    <Card {...path} spacing={['xtight', 0]} bgColor="none">
       <section className="container">
         <ArticleDigestTitle
           article={article}

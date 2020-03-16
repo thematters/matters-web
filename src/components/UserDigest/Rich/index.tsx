@@ -107,12 +107,7 @@ const Rich = ({
   }
 
   return (
-    <Card
-      {...path}
-      spacing={['tight', 'tight']}
-      bgActiveColor="green-lighter"
-      {...cardProps}
-    >
+    <Card {...path} spacing={['tight', 'tight']} {...cardProps}>
       <section className={containerClass}>
         <Link {...path}>
           <a className="avatar">

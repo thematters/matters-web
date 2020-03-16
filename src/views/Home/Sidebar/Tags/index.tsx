@@ -54,11 +54,11 @@ const Tags = () => {
             node.__typename === 'Tag' && (
               <List.Item key={cursor}>
                 <Card
-                  bgColor="white"
                   {...toPath({
                     page: 'tagDetail',
                     id: node.id
                   })}
+                  bgColor="none"
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.TAGS,

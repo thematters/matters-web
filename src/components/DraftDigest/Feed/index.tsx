@@ -42,7 +42,6 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
     <Card
       {...path}
       spacing={['base', 'base']}
-      bgActiveColor="green-lighter"
       onClick={() =>
         analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, { entrance: id })
       }

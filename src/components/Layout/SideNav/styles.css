@@ -27,8 +27,6 @@
 
 ul {
   & li {
-    dislay: inline-flex;
-
     & + li {
       margin-top: var(--spacing-x-loose);
     }

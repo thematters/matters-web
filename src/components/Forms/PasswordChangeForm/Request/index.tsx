@@ -129,6 +129,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
             disabled={!!errors.email}
           />
         }
+        autoFocus
       />
     </Form>
   )

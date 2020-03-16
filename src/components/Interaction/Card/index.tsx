@@ -6,8 +6,8 @@ import { routerPush } from '~/common/utils'
 
 import styles from './styles.css'
 
-export type CardBgColor = 'grey-lighter' | 'white' | 'yellow-lighter'
-export type CardBgHoverColor = 'grey-lighter' | 'green-lighter'
+export type CardBgColor = 'grey-lighter' | 'white' | 'yellow-lighter' | 'none'
+export type CardBgHoverColor = 'grey-lighter' | 'green-lighter' | 'none'
 export type CardSpacing = 0 | 'xtight' | 'tight' | 'base' | 'loose'
 export type CardBorderColor = 'grey-lighter'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base'
@@ -31,7 +31,7 @@ export interface CardProps {
 export const Card: React.FC<CardProps> = ({
   spacing = ['base', 0],
 
-  bgColor,
+  bgColor = 'white',
   bgActiveColor,
 
   borderColor,

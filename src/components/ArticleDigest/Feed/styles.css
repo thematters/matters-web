@@ -20,11 +20,11 @@ header {
 
 .title,
 .cover {
-  margin: var(--spacing-x-tight) 0;
+  margin: var(--spacing-tight) 0;
 }
 
 .description {
-  margin: var(--spacing-x-tight) 0 var(--spacing-base);
+  margin: var(--spacing-tight) 0;
 
   color: var(--color-grey-darker);
   font-size: var(--font-size-md-s);

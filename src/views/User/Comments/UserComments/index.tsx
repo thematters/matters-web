@@ -184,7 +184,6 @@ const UserComments = ({ user }: UserIdUser) => {
                   <List.Item key={comment.id}>
                     <Card
                       spacing={['tight', 'base']}
-                      bgActiveColor="green-lighter"
                       {...toPath({ page: 'commentDetail', comment })}
                     >
                       <Comment.Feed

@@ -1,5 +1,3 @@
-import { forwardRef } from 'react'
-
 import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
 import { useResponsive } from '~/components/Hook'
 
@@ -7,19 +5,16 @@ import { TEXT } from '~/common/enums'
 
 interface CloseButtonProps {
   close: () => void
-  ref: React.Ref<any>
 }
 
-export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
+export const CloseButton = ({ close }: CloseButtonProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <Button
       onClick={close}
       aria-label={TEXT.zh_hant.close}
-      ref={ref}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
-      bgActiveColor={isSmallUp ? 'grey-lighter-active' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
     >
       {!isSmallUp && (
@@ -30,7 +25,7 @@ export const CloseButton = forwardRef(({ close }: CloseButtonProps, ref) => {
       {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
     </Button>
   )
-})
+}
 
 type RightButtonProps = {
   text: string | React.ReactNode
