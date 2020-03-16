@@ -52,11 +52,7 @@ export const ArticleDigestDropdown = ({
   extraButton,
 
   // Card Props
-  spacing,
-  bgColor,
-  bgActiveColor,
-  borderRadius,
-  onClick
+  ...cardProps
 }: ArticleDigestDropdownProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
@@ -74,11 +70,7 @@ export const ArticleDigestDropdown = ({
     <Card
       href={cardDisabled ? undefined : path.href}
       as={cardDisabled ? undefined : path.as}
-      spacing={spacing}
-      borderRadius={borderRadius}
-      bgColor={bgColor}
-      bgActiveColor={bgActiveColor}
-      onClick={onClick}
+      {...cardProps}
     >
       <section className={containerClass}>
         <header>

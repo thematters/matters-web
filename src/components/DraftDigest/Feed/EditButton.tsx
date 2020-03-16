@@ -33,7 +33,6 @@ const EditButton = ({ draft }: EditButtonProps) => {
       spacing={[0, 'xtight']}
       size={[null, '1.25rem']}
       bgColor="green-lighter"
-      bgActiveColor="grey-lighter-active"
       {...path}
     >
       <TextIcon

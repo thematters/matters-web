@@ -171,7 +171,7 @@ const ArticleDetail = () => {
             user={article.author}
             size="sm"
             spacing={[0, 0]}
-            bgActiveColor={undefined}
+            bgColor="none"
           />
         }
         marginBottom={0}

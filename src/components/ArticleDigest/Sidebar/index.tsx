@@ -67,7 +67,7 @@ export const ArticleDigestSidebar = ({
       {...path}
       spacing={hasBackground ? ['tight', 'tight'] : [0, 0]}
       borderRadius={hasBackground ? 'xtight' : undefined}
-      bgColor={hasBackground ? 'grey-lighter' : undefined}
+      bgColor={hasBackground ? 'grey-lighter' : 'none'}
       onClick={onClick}
     >
       <section className={containerClass}>

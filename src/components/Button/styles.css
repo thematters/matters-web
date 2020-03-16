@@ -212,6 +212,13 @@ span.container {
   & .hotarea {
     background: var(--color-green-lighter);
   }
+
+  &:hover,
+  &:focus {
+    & .hotarea {
+      background: var(--color-grey-lighter-active);
+    }
+  }
 }
 .bg-gold {
   & .hotarea {

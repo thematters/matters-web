@@ -61,8 +61,6 @@ const AggregateUserResults = () => {
             node.__typename === 'User' && (
               <List.Item key={cursor}>
                 <Card
-                  bgColor="white"
-                  bgActiveColor="green-lighter"
                   spacing={['xtight', 'base']}
                   {...toPath({
                     page: 'userProfile',

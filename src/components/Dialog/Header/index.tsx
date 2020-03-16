@@ -1,5 +1,4 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { forwardRef } from 'react'
 
 import { Translate } from '~/components'
 
@@ -15,33 +14,30 @@ export interface HeaderProps {
   rightButton?: React.ReactNode | string
 }
 
-const BaseHeader = forwardRef(
-  ({ title, close, rightButton }: HeaderProps, ref) => (
-    <header>
-      <h1>
-        <span id="dialog-title">
-          {typeof title === 'string' ? (
-            <Translate id={title as TextId} />
-          ) : (
-            title
-          )}
-        </span>
-      </h1>
+const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
+  <header>
+    <h1>
+      <span id="dialog-title">
+        {typeof title === 'string' ? <Translate id={title as TextId} /> : title}
+      </span>
+    </h1>
 
-      <section className="left">
-        <CloseButton close={close} ref={ref} />
-      </section>
+    <section className="left">
+      <CloseButton close={close} />
+    </section>
 
-      {rightButton && <section className="right">{rightButton}</section>}
+    {rightButton && <section className="right">{rightButton}</section>}
 
-      <style jsx>{styles}</style>
-    </header>
-  )
+    <style jsx>{styles}</style>
+  </header>
 )
 
-const Header = forwardRef(({ headerHidden, ...restProps }, ref) => {
+const Header: React.FC<HeaderProps> & { RightButton: typeof RightButton } = ({
+  headerHidden,
+  ...restProps
+}) => {
   if (!headerHidden) {
-    return <BaseHeader {...restProps} ref={ref} />
+    return <BaseHeader {...restProps} />
   }
 
   return (
@@ -49,15 +45,13 @@ const Header = forwardRef(({ headerHidden, ...restProps }, ref) => {
       <div className="spacing-holder" />
 
       <VisuallyHidden>
-        <BaseHeader {...restProps} ref={ref} />
+        <BaseHeader {...restProps} />
       </VisuallyHidden>
 
       <style jsx>{styles}</style>
     </>
   )
-}) as React.ForwardRefExoticComponent<
-  HeaderProps & React.RefAttributes<unknown>
-> & { RightButton: typeof RightButton }
+}
 
 Header.RightButton = RightButton
 

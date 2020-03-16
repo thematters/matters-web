@@ -31,7 +31,6 @@ const Dialog: React.FC<DialogProps> = ({
   children
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
-  const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
   // drag animation
   const [{ top }, setDragGoal] = useSpring(() => ({
@@ -99,11 +98,7 @@ const Dialog: React.FC<DialogProps> = ({
         }
 
         return (
-          <AnimatedDialogOverlay
-            initialFocusRef={closeButtonRef}
-            key={key}
-            className="dialog"
-          >
+          <AnimatedDialogOverlay key={key} className="dialog">
             <AnimatedOverlay style={{ opacity }} />
 
             <DialogContent

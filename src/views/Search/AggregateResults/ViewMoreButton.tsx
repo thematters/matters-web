@@ -20,8 +20,6 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
 
   return (
     <Card
-      bgColor="white"
-      bgActiveColor="green-lighter"
       spacing={['base', 'base']}
       {...toPath({
         page: 'search',

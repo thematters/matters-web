@@ -61,8 +61,6 @@ const AggregateArticleResults = () => {
             node.__typename === 'Article' && (
               <List.Item key={cursor}>
                 <Card
-                  bgColor="white"
-                  bgActiveColor="green-lighter"
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'articleDetail',

@@ -63,8 +63,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.follow}
-          icon={<UnreadIcon.Follow size="lg" />}
-          activeIcon={<Icon.FollowActiveLarge size="lg" color="green" />}
+          icon={<UnreadIcon.Follow />}
+          activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
           {...PATHS.FOLLOW}
         />
@@ -85,8 +85,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.notification}
-          icon={<UnreadIcon.Notification size="lg" />}
-          activeIcon={<Icon.NotificationActiveLarge size="lg" color="green" />}
+          icon={<UnreadIcon.Notification />}
+          activeIcon={<UnreadIcon.Notification active />}
           active={isInNotification}
           {...PATHS.ME_NOTIFICATIONS}
         />

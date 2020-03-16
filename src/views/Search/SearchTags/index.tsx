@@ -88,8 +88,6 @@ const SearchTag = () => {
             node.__typename === 'Tag' && (
               <List.Item key={cursor}>
                 <Card
-                  bgColor="white"
-                  bgActiveColor="green-lighter"
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'tagDetail',

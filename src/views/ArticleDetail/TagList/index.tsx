@@ -11,6 +11,7 @@ const fragments = {
     fragment TagListArticle on Article {
       tags {
         ...DigestTag
+        selected(input: { mediaHash: $mediaHash })
       }
     }
     ${Tag.fragments.tag}
@@ -27,7 +28,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
       <ul>
         {article.tags.map(tag => (
           <li key={tag.id}>
-            <Tag tag={tag} type="inline" />
+            <Tag tag={tag} type="inline" active={tag.selected} />
           </li>
         ))}
       </ul>

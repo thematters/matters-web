@@ -45,7 +45,7 @@ const AppreciationReceived = ({
     : null
 
   return (
-    <Card {...path} spacing={['base', 'base']} bgActiveColor="green-lighter">
+    <Card {...path} spacing={['base', 'base']}>
       <section className="container">
         <section className="left">
           {sender && !isUseContent && (

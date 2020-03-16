@@ -59,7 +59,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   useEffect(() => {
-    console.log({ debouncedSearch })
     if (onChange) {
       onChange(debouncedSearch)
     }

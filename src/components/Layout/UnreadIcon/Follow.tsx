@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Icon, IconProps, ViewerContext } from '~/components'
+import { Icon, ViewerContext } from '~/components'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
 
 import { POLL_INTERVAL } from '~/common/enums'
@@ -11,7 +11,11 @@ import styles from './styles.css'
 
 import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
 
-const FollowUnreadIcon: React.FC<IconProps> = iconProps => {
+interface FollowUnreadIconProps {
+  active?: boolean
+}
+
+const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
   const { data, startPolling } = useQuery<UnreadFolloweeArticles>(
     UNREAD_FOLLOWEE_ARTICLES,
@@ -34,7 +38,11 @@ const FollowUnreadIcon: React.FC<IconProps> = iconProps => {
 
   return (
     <span className={iconClass}>
-      <Icon.FollowLarge {...iconProps} />
+      {active ? (
+        <Icon.FollowActiveLarge size="lg" color="green" />
+      ) : (
+        <Icon.FollowLarge size="lg" />
+      )}
 
       <style jsx>{styles}</style>
     </span>

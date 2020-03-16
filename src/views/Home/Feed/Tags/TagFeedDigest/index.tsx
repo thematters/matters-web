@@ -50,7 +50,6 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
         {(tag?.selectArticles?.edges || []).map(({ node, cursor }, i) => (
           <li key={cursor}>
             <Card
-              bgActiveColor="green-lighter"
               spacing={['xtight', 'base']}
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
