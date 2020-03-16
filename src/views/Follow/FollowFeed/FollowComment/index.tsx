@@ -68,7 +68,9 @@ const FollowComment = ({
         <section className="left">
           <UserDigest.Mini
             user={author}
-            avatarSize="sm"
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
             hasAvatar
             hasDisplayName
           />

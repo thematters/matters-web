@@ -97,7 +97,7 @@ const SideNav = () => {
                 <NavMenu.Bottom />
               </section>
             }
-            placement="right"
+            placement="right-start"
             distance={16}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
