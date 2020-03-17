@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2020-03-18
+
+### Added
+
+- Migration Page #760 #784 #798
+- Help Center #812
+
+### Revamp
+
+- Revamp: Layout #764
+- Revamp: CommentForm #757
+- Revamp: Homepage #779 #789
+- Revamp: Article Detail Page #801
+- Revamp: Search Page #780
+
+### Changed
+
+- Show current account in OAuth page #813
+- Using `@reach/alert` #799
+- Fix segment script #762
+- Fix unpacking result throwing empty message. #800
+
 ## [2.8.0] - 2020-02-28
 
 ### Revamp
