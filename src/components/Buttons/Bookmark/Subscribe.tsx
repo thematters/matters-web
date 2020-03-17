@@ -68,7 +68,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       aria-label="收藏"
       onClick={onClick}
       disabled={disabled}

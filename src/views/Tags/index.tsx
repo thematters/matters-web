@@ -65,7 +65,7 @@ const CreateTagButton = () => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgActiveColor="green-lighter"
+          bgActiveColor="grey-lighter"
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">

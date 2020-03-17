@@ -12,8 +12,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isNewset = sortBy === 'newest'
 
   const buttonProps = {
-    size: ['6rem', '2rem'],
-    bgActiveColor: 'green-lighter'
+    size: ['6rem', '2rem']
   } as ButtonProps
 
   return (
@@ -22,6 +21,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
         <Button
           {...buttonProps}
           bgColor={isHottest ? 'green-lighter' : 'white'}
+          bgActiveColor={isHottest ? 'grey-lighter-active' : 'grey-lighter'}
           onClick={() => setSortBy('hottest')}
         >
           <TextIcon
@@ -38,6 +38,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
         <Button
           {...buttonProps}
           bgColor={isNewset ? 'green-lighter' : 'white'}
+          bgActiveColor={isNewset ? 'grey-lighter-active' : 'grey-lighter'}
           onClick={() => setSortBy('newest')}
         >
           <TextIcon

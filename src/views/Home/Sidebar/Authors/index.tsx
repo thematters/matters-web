@@ -63,7 +63,7 @@ const Authors = () => {
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgActiveColor="green-lighter"
+            bgActiveColor="grey-lighter"
             onClick={() => refetch()}
           >
             <TextIcon

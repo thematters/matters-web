@@ -14,7 +14,7 @@ const Copy = ({ link }: { link: string }) => {
       <CopyToClipboard text={link}>
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="green-lighter"
+          bgActiveColor="grey-lighter"
           aira-label={TEXT.zh_hant.copy}
         >
           <Icon.Link color="grey" />

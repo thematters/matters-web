@@ -13,7 +13,7 @@ const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgActiveColor="green-lighter"
+          bgActiveColor="grey-lighter"
           onClick={open}
           aria-haspopup="true"
         >

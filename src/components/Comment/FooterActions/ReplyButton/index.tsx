@@ -56,7 +56,7 @@ const fragments = {
 const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
   <Button
     spacing={['xtight', 'xtight']}
-    bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
+    bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
     aira-label={TEXT.zh_hant.replyComment}
     {...props}
   >

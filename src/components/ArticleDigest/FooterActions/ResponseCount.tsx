@@ -45,7 +45,7 @@ const ResponseCount = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       {...path}
       disabled={isBanned}
       onClick={() => {

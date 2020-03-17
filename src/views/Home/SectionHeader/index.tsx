@@ -38,7 +38,7 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
             {...path}
             onClick={onClick}
             bgColor={undefined}
-            bgActiveColor="green-lighter"
+            bgActiveColor="grey-lighter"
           />
         )}
 
