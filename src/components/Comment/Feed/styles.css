@@ -30,7 +30,7 @@ header {
 
 @keyframes commentBackgroundFadeOut {
   50% {
-    background: var(--color-green-lighter);
+    background: var(--color-grey-lighter);
   }
 
   0,

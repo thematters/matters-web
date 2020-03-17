@@ -251,14 +251,6 @@ span.container {
 }
 
 /* Background:hover */
-.bg-active-grey {
-  &:hover,
-  &:focus {
-    & .hotarea {
-      background: var(--color-grey);
-    }
-  }
-}
 .bg-active-grey-lighter {
   &:hover,
   &:focus {
@@ -275,15 +267,6 @@ span.container {
     }
   }
 }
-.bg-active-green {
-  &:hover,
-  &:focus {
-    & .hotarea {
-      color: var(--color-white);
-      background: var(--color-matters-green);
-    }
-  }
-}
 .bg-active-green-lighter {
   &:hover,
   &:focus {
@@ -292,11 +275,12 @@ span.container {
     }
   }
 }
-.bg-active-gold {
+.bg-active-green {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-gold);
+      color: var(--color-white);
+      background: var(--color-matters-green);
     }
   }
 }

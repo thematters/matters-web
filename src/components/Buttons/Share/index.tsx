@@ -37,7 +37,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
     ? undefined
     : inCard
     ? 'grey-lighter-active'
-    : 'green-lighter'
+    : 'grey-lighter'
   const buttonSpacing = spacing || ['xtight', 'xtight']
 
   return (

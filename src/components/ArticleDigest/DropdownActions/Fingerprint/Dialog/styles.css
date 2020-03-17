@@ -24,7 +24,7 @@ header {
   & input {
     padding: var(--spacing-x-tight) var(--spacing-base);
 
-    color: var(--color-yellow);
+    color: var(--color-matters-gold);
     font-size: var(--font-size-sm);
     font-family: var(--font-mono);
     background: var(--color-yellow-lighter);

@@ -1,6 +1,4 @@
-import { Card, CardProps, Icon, TextIcon } from '~/components'
-
-import styles from './styles.css'
+import { Card, CardProps, Icon, TextIcon, useResponsive } from '~/components'
 
 type ItemProps = {
   title: string | React.ReactNode
@@ -14,28 +12,34 @@ const Item: React.FC<ItemProps> = ({
   rightText,
 
   ...cardProps
-}) => (
-  <li>
-    <Card {...cardProps} spacing={cardProps.spacing || [0, 0]}>
-      <section className="container">
-        <section>
-          <h5 className="title">{title}</h5>
-          {subtitle && <p className="subtitle">{subtitle}</p>}
+}) => {
+  const isSmallUp = useResponsive('sm-up')
+
+  return (
+    <li>
+      <Card
+        bgColor={isSmallUp ? 'grey-lighter' : 'white'}
+        {...cardProps}
+        spacing={cardProps.spacing || [0, 0]}
+      >
+        <section className="container">
+          <section>
+            <h5 className="title">{title}</h5>
+            {subtitle && <p className="subtitle">{subtitle}</p>}
+          </section>
+
+          <TextIcon
+            icon={<Icon.Right size="xs" color="grey" />}
+            textPlacement="left"
+            spacing="xtight"
+            color="green"
+          >
+            {rightText}
+          </TextIcon>
         </section>
-
-        <TextIcon
-          icon={<Icon.Right size="xs" color="grey" />}
-          textPlacement="left"
-          spacing="xtight"
-          color="green"
-        >
-          {rightText}
-        </TextIcon>
-      </section>
-    </Card>
-
-    <style jsx>{styles}</style>
-  </li>
-)
+      </Card>
+    </li>
+  )
+}
 
 export default Item

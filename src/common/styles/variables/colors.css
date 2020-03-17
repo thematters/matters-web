@@ -12,22 +12,18 @@
   --color-grey-lighter: #f7f7f7;
   --color-white: #ffffff;
 
-  --color-green-lighter: #f2faf7;
-
-  --color-yellow: #bfa267;
-  --color-yellow-lighter: #faf7f0;
-
   --color-red: #c85c41;
-  --color-red-lighter: #f9eeec;
+
+  --color-green-lighter: #f2faf7;
+  --color-yellow-lighter: #faf7f0;
 
   /* hover */
   --color-matters-gold-active: color(var(--color-matters-gold) shade(5%));
   --color-matters-green-active: color(var(--color-matters-green) shade(5%));
-  --color-red-active: color(var(--color-red) shade(5%));
-  --color-grey-lighter-active: #ebf0ee;
+  --color-grey-lighter-active: #ededed;
 
   /* line */
-  --color-line-grey-light: rgba(0, 0, 0, 0.06);
+  --color-line-grey-light: rgba(0, 0, 0, 0.08);
   --color-line-grey: rgba(0, 0, 0, 0.16);
   --color-line-grey-dark: rgba(0, 0, 0, 0.24);
 }

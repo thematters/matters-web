@@ -26,7 +26,7 @@ const NavListItem = forwardRef(
   ) => (
     <li>
       <Button
-        bgActiveColor="green-lighter"
+        bgActiveColor="grey-lighter"
         spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
         size={isMediumUp ? undefined : ['2rem', '2rem']}
         ref={ref}

@@ -134,7 +134,7 @@ const BaseDropdownActions = ({
       {({ open, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
+          bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}

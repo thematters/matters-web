@@ -11,10 +11,19 @@
 .bg-white {
   background: var(--color-white);
 
+  & :global(.card.bg-grey-lighter) {
+    @mixin border-grey;
+    border-color: transparent;
+  }
+
   &:not(.disabled) {
     &:hover,
     &:focus {
-      background: var(--color-green-lighter);
+      background: var(--color-grey-lighter);
+
+      & :global(.card.bg-grey-lighter) {
+        @mixin border-grey;
+      }
     }
   }
 }
@@ -28,31 +37,12 @@
     }
   }
 }
-.bg-yellow-lighter {
-  background: var(--color-yellow-lighter);
-
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-green-lighter);
-    }
-  }
-}
 
 .bg-active-grey-lighter {
   &:not(.disabled) {
     &:hover,
     &:focus {
       background: var(--color-grey-lighter);
-    }
-  }
-}
-
-.bg-active-green-lighter {
-  &:not(.disabled) {
-    &:hover,
-    &:focus {
-      background: var(--color-green-lighter);
     }
   }
 }

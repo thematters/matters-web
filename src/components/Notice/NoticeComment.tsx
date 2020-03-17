@@ -53,7 +53,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
         {...path}
         bgColor="grey-lighter"
         spacing={['xtight', 'base']}
-        borderRadius="xxtight"
+        borderRadius="xtight"
       >
         <Expandable>
           <CommentContent comment={comment} size="sm" />

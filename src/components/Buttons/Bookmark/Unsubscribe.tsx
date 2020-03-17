@@ -35,7 +35,7 @@ const Unsubscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'green-lighter'}
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       aria-label="取消收藏"
       onClick={unsubscribe}
       disabled={disabled}
