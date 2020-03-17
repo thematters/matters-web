@@ -1,5 +1,7 @@
 import { Card, CardProps, Icon, TextIcon, useResponsive } from '~/components'
 
+import styles from './styles.css'
+
 type ItemProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
@@ -38,6 +40,8 @@ const Item: React.FC<ItemProps> = ({
           </TextIcon>
         </section>
       </Card>
+
+      <style jsx>{styles}</style>
     </li>
   )
 }

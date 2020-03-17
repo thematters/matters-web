@@ -21,9 +21,10 @@ ul {
   padding: var(--spacing-x-tight) 0;
 
   & li {
+    @mixin line-clamp;
+
     & :global(h4) {
-      @mixin line-clamp;
-      line-height: 1rem;
+      line-height: 2rem;
     }
   }
 }
