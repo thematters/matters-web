@@ -45,10 +45,10 @@ type ROUTE_KEY =
   | 'OAUTH_CALLBACK_FAILURE'
   | 'HELP'
   | 'MIGRATION'
-  | 'MISC_ABOUT'
-  | 'MISC_FAQ'
-  | 'MISC_TOS'
-  | 'MISC_GUIDE'
+  | 'ABOUT'
+  | 'GUIDE'
+  | 'COMMUNITY'
+  | 'TOS'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -290,24 +290,24 @@ export const ROUTES: Array<{
     as: '/migration'
   },
   {
-    key: 'MISC_ABOUT',
-    href: '/MiscAbout',
+    key: 'ABOUT',
+    href: '/About',
     as: '/about'
   },
   {
-    key: 'MISC_FAQ',
-    href: '/MiscFAQ',
-    as: '/faq'
-  },
-  {
-    key: 'MISC_TOS',
-    href: '/MiscToS',
-    as: '/tos'
-  },
-  {
-    key: 'MISC_GUIDE',
-    href: '/MiscGuide',
+    key: 'GUIDE',
+    href: '/Guide',
     as: '/guide'
+  },
+  {
+    key: 'COMMUNITY',
+    href: '/Community',
+    as: '/community'
+  },
+  {
+    key: 'TOS',
+    href: '/ToS',
+    as: '/tos'
   }
 ]
 

@@ -17,8 +17,8 @@ const Goal = () => (
         </h2>
         <p>
           <Translate
-            zh_hant="Matters 是一個以分佈式網絡為基礎、加密貨幣驅動的公共討論平台。"
-            zh_hans="Matters 是一个以分布式网络为基础、加密货币驱动的公共讨论平台。"
+            zh_hant="Matters 是一個以分佈式網絡為基礎、加密貨幣驅動的創作和公共討論平台。"
+            zh_hans="Matters 是一个以分布式网络为基础、加密货币驱动的创作和公共讨论平台。"
           />
         </p>
         <p>
@@ -35,8 +35,8 @@ const Goal = () => (
         </p>
         <p>
           <Translate
-            zh_hant="2019 年 10 月，Matters 和 LikeCoin 聯手，將 LikeCoin 這一基於寫作者創造力為衡量的加密貨幣引入到 Matters 自由創作和公共討論空間之中，平台效應以收入的形式回饋給作者。"
-            zh_hans="2019年10月，Matters 和 LikeCoin 联手，将 LikeCoin 这一基于写作者创造力为衡量的加密货币引入到 Matters 自由创作和公共讨论空间之中，平台效应以收入的形式回馈给作者。"
+            zh_hant="2019 年 10 月，Matters 和 LikeCoin 聯手，將 LikeCoin 這一基於寫作者創造力為衡量的加密貨幣，引入到 Matters 的自由創作和公共討論空間之中，平台效應以收入的形式回饋給作者。"
+            zh_hans="2019 年 10 月，Matters 和 LikeCoin 联手，将 LikeCoin 这一基于写作者创造力为衡量的加密货币，引入到 Matters 的自由创作和公共讨论空间之中，平台效应以收入的形式回馈给作者。"
           />
         </p>
       </div>

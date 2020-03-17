@@ -21,7 +21,7 @@ const Copy = ({ link }: { link: string }) => {
         </Button>
       </CopyToClipboard>
 
-      <CopyToClipboard text={link}>
+      <CopyToClipboard text={decodeURI(link)}>
         <input ref={inputRef} type="text" value={decodeURI(link)} readOnly />
       </CopyToClipboard>
 

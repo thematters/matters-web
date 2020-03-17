@@ -19,11 +19,14 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
     <>
       <Button
         size={['6rem', '2rem']}
+        textColor="green"
+        textActiveColor="white"
+        bgActiveColor="green"
         borderColor="green"
         onClick={open}
         aria-haspopup="true"
       >
-        <TextIcon size="md-s" color="green" weight="md">
+        <TextIcon size="md-s" weight="md">
           <Translate
             zh_hant={TEXT.zh_hant.editUserProfile}
             zh_hans={TEXT.zh_hans.editUserProfile}

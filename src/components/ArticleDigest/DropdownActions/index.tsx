@@ -43,9 +43,11 @@ interface Controls {
   hasAppreciators: boolean
   hasFingerprint: boolean
   hasExtend: boolean
-  hasRemoveTag: boolean
   hasSticky: boolean
   hasArchive: boolean
+  hasSetTagSelected: boolean
+  hasSetTagUnSelected: boolean
+  hasRemoveTag: boolean
 }
 
 interface DialogProps {
@@ -78,16 +80,16 @@ const BaseDropdownActions = ({
   article,
   color = 'grey',
   size,
+  inCard,
 
   hasAppreciators,
   hasFingerprint,
   hasExtend,
   hasSticky,
   hasArchive,
+  hasSetTagSelected,
+  hasSetTagUnSelected,
   hasRemoveTag,
-  inCard,
-  inTagDetailLatest,
-  inTagDetailSelected,
 
   openFingerprintDialog,
   openAppreciatorsDialog,
@@ -107,13 +109,13 @@ const BaseDropdownActions = ({
       {/* private */}
       {(hasSticky ||
         hasArchive ||
-        inTagDetailLatest ||
-        inTagDetailSelected ||
+        hasSetTagSelected ||
+        hasSetTagUnSelected ||
         hasRemoveTag) && <Menu.Divider spacing="xtight" />}
       {hasSticky && <StickyButton article={article} />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
-      {inTagDetailLatest && <SetTagSelectedButton article={article} />}
-      {inTagDetailSelected && <SetTagUnselectedButton article={article} />}
+      {hasSetTagSelected && <SetTagSelectedButton article={article} />}
+      {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
     </Menu>
   )
@@ -163,15 +165,16 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasAppreciators: article.appreciationsReceived.totalCount > 0,
     hasFingerprint: isActive || isArticleAuthor,
     hasExtend: !!isActive,
-    hasRemoveTag: !!(isInTagDetail && isMattyUser),
     hasSticky: !!(
       inUserArticles &&
       isArticleAuthor &&
       isActive &&
       !viewer.isInactive
     ),
-    hasArchive:
-      isArticleAuthor && !isInTagDetail && isActive && !viewer.isInactive
+    hasArchive: isArticleAuthor && isActive && !viewer.isInactive,
+    hasSetTagSelected: !!(inTagDetailLatest && isMattyUser),
+    hasSetTagUnSelected: !!(inTagDetailSelected && isMattyUser),
+    hasRemoveTag: !!(isInTagDetail && isMattyUser)
   }
 
   if (_isEmpty(_pickBy(controls))) {

@@ -11,12 +11,6 @@ footer {
   & :global(> *) {
     display: inline-block;
     margin: 0 var(--spacing-base) var(--spacing-base) 0;
-
-    &:nth-child(4n) {
-      @media (--lg-up) {
-        margin-right: 0;
-      }
-    }
   }
 
   & .copyright {

@@ -246,7 +246,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
           <>
             <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-            <Link {...PATHS.MISC_TOS}>
+            <Link {...PATHS.TOS}>
               <a className="u-link-green" target="_blank">
                 &nbsp;
                 <Translate

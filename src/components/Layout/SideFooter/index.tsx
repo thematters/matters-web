@@ -13,35 +13,29 @@ const SideFooter = () => {
   const downloadAppLink = toPath({
     page: 'articleDetail',
     article: {
-      slug: 'matters-web-app',
-      mediaHash: 'zdpuAugkiUK2uwV2nJPvnJPNE73SM5oaNNX9Z2SdgSmiLTjag',
-      author: { userName: 'denkeni' }
+      slug: 'guidance-如何让你的matters之旅更便捷',
+      mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
+      author: { userName: '1ampa55ag3' }
     }
   })
 
   return (
     <footer>
-      <Link {...PATHS.MISC_ABOUT}>
+      <Link {...PATHS.ABOUT}>
         <a>
           <Translate id="about" />
         </a>
       </Link>
 
-      <Link {...PATHS.MISC_FAQ}>
-        <a>
-          <Translate id="faq" />
-        </a>
-      </Link>
-
-      <Link {...PATHS.MISC_GUIDE}>
+      <Link {...PATHS.GUIDE}>
         <a>
           <Translate id="guide" />
         </a>
       </Link>
 
-      <Link {...PATHS.MISC_TOS}>
+      <Link {...PATHS.COMMUNITY}>
         <a>
-          <Translate id="term" />
+          <Translate id="community" />
         </a>
       </Link>
 
@@ -51,9 +45,9 @@ const SideFooter = () => {
         </a>
       </Link>
 
-      <Link {...downloadAppLink}>
+      <Link {...PATHS.TOS}>
         <a>
-          <Translate id="downloadApp" />
+          <Translate id="term" />
         </a>
       </Link>
 
@@ -63,6 +57,12 @@ const SideFooter = () => {
       >
         <Translate id="openCommunity" />
       </a>
+
+      <Link {...downloadAppLink}>
+        <a>
+          <Translate id="downloadApp" />
+        </a>
+      </Link>
 
       <span className="copyright">
         {'@ '}

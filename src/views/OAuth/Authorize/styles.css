@@ -28,11 +28,17 @@
       }
     }
   }
+}
 
-  & .switch-account {
-    margin-top: var(--spacing-x-loose);
+.current-account {
+  @mixin flex-center-all;
+  margin-top: var(--spacing-x-loose);
+}
 
-    color: var(--color-grey-dark);
-    text-align: center;
-  }
+.switch-account {
+  margin-top: var(--spacing-base);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+  text-align: center;
 }

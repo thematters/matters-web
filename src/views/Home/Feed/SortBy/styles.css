@@ -9,4 +9,8 @@ ul {
       margin-left: var(--spacing-x-tight);
     }
   }
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-x-loose);
+  }
 }

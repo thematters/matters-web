@@ -13,6 +13,7 @@ import {
   Spinner,
   Throw404,
   Translate,
+  UserDigest,
   ViewerContext
 } from '~/components'
 
@@ -124,6 +125,16 @@ const OAuthAuthorize = () => {
           </ul>
 
           <hr />
+
+          <section className="current-account">
+            <UserDigest.Mini
+              user={viewer}
+              avatarSize="xs"
+              hasUserName
+              hasAvatar
+              hasDisplayName
+            />
+          </section>
 
           <p className="switch-account">
             <span>

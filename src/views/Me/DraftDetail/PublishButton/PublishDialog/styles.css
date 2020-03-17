@@ -12,7 +12,7 @@
     &::after {
       content: '';
       display: block;
-      padding-bottom: 58%;
+      padding-bottom: 38%;
     }
   }
 }

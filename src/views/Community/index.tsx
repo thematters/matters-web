@@ -5,22 +5,20 @@ import { Head, LanguageContext, Layout } from '~/components'
 import contentStyles from '~/common/styles/utils/content.article.css'
 import { translate } from '~/common/utils'
 
-import MiscTab from '../MiscTab'
 import content from './content'
 
-const Guide = () => {
+const Community = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
     <Layout>
       <Layout.Header
         left={<Layout.Header.BackButton />}
-        right={<Layout.Header.Title id="guide" />}
+        right={<Layout.Header.Title id="community" />}
+        marginBottom={0}
       />
 
-      <Head title={{ id: 'guide' }} />
-
-      <MiscTab />
+      <Head title={{ id: 'community' }} />
 
       <Layout.Spacing>
         <section
@@ -39,4 +37,4 @@ const Guide = () => {
   )
 }
 
-export default Guide
+export default Community

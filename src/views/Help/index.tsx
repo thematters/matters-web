@@ -10,33 +10,34 @@ const Help = () => {
   const downloadAppLink = toPath({
     page: 'articleDetail',
     article: {
-      slug: 'matters-web-app',
-      mediaHash: 'zdpuAugkiUK2uwV2nJPvnJPNE73SM5oaNNX9Z2SdgSmiLTjag',
-      author: { userName: 'denkeni' }
+      slug: 'guidance-如何让你的matters之旅更便捷',
+      mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
+      author: { userName: '1ampa55ag3' }
     }
   })
 
   return (
     <>
       <Form.List>
+        <Form.List.Item title={<Translate id="about" />} {...PATHS.ABOUT} />
+        <Form.List.Item title={<Translate id="guide" />} {...PATHS.GUIDE} />
         <Form.List.Item
-          title={<Translate id="about" />}
-          {...PATHS.MISC_ABOUT}
+          title={<Translate id="community" />}
+          {...PATHS.COMMUNITY}
         />
-        <Form.List.Item title={<Translate id="faq" />} {...PATHS.MISC_FAQ} />
         <Form.List.Item
-          title={<Translate id="guide" />}
-          {...PATHS.MISC_GUIDE}
+          title={<Translate id="migrationSideBar" />}
+          {...PATHS.MIGRATION}
         />
-        <Form.List.Item title={<Translate id="term" />} {...PATHS.MISC_TOS} />
-        <Form.List.Item
-          title={<Translate id="downloadApp" />}
-          {...downloadAppLink}
-        />
+        <Form.List.Item title={<Translate id="term" />} {...PATHS.TOS} />
         <Form.List.Item
           title={<Translate id="openCommunity" />}
           href="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
+        />
+        <Form.List.Item
+          title={<Translate id="downloadApp" />}
+          {...downloadAppLink}
         />
       </Form.List>
 

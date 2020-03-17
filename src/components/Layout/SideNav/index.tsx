@@ -99,6 +99,7 @@ const SideNav = () => {
             }
             placement="right-start"
             distance={16}
+            offset={-16}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
             onShown={i => {
