@@ -13,8 +13,8 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
     <UserDigest.Rich
       user={user}
       spacing={['base', 'base']}
-      borderRadius="xxtight"
-      bgColor="yellow-lighter"
+      borderRadius="xtight"
+      bgColor="grey-lighter"
       hasState={false}
       hasFollow
     />

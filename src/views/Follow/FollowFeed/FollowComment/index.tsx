@@ -86,7 +86,7 @@ const FollowComment = ({
           {...path}
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
-          borderRadius="xxtight"
+          borderRadius="xtight"
         >
           <Expandable limit={5} buffer={2}>
             <Comment.Content comment={comment} size="md-s" />
