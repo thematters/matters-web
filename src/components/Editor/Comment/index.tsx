@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
@@ -32,6 +32,15 @@ const CommentEditor: React.FC<Props> = ({ content, update }) => {
   const mentionKeywordChange = (keyword: string) => {
     search({ variables: { search: keyword } })
   }
+
+  // FIXME: editor can't be focused with dialog on Android devices
+  useEffect(() => {
+    const $editor = document.querySelector('.ql-editor') as HTMLElement
+
+    if ($editor) {
+      $editor.focus()
+    }
+  }, [])
 
   return (
     <>
