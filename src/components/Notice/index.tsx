@@ -12,7 +12,6 @@ import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice'
 import ArticleTagHasBeenUnselectedNotice from './ArticleTagHasBeenUnselectedNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentNewReplyNotice from './CommentNewReplyNotice'
-import CommentNewUpvoteNotice from './CommentNewUpvoteNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
@@ -64,9 +63,6 @@ const fragments = {
       ... on CommentNewReplyNotice {
         ...CommentNewReplyNotice
       }
-      ... on CommentNewUpvoteNotice {
-        ...CommentNewUpvoteNotice
-      }
       ... on CommentMentionedYouNotice {
         ...CommentMentionedYouNotice
       }
@@ -92,7 +88,6 @@ const fragments = {
     ${ArticleMentionedYouNotice.fragments.notice}
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentNewReplyNotice.fragments.notice}
-    ${CommentNewUpvoteNotice.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
     ${DownstreamArticleArchivedNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
@@ -125,8 +120,6 @@ export const Notice = ({ notice }: { notice: DigestNotice }) => {
       return <CommentMentionedYouNotice notice={notice} />
     case 'CommentNewReplyNotice':
       return <CommentNewReplyNotice notice={notice} />
-    case 'CommentNewUpvoteNotice':
-      return <CommentNewUpvoteNotice notice={notice} />
     case 'CommentPinnedNotice':
       return <CommentPinnedNotice notice={notice} />
     case 'DownstreamArticleArchivedNotice':
