@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  AppreciatorsDialog,
   Button,
   DropdownDialog,
   Icon,
@@ -15,7 +16,7 @@ import {
 
 import { TEXT } from '~/common/enums'
 
-import Appreciators from './Appreciators'
+import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import ExtendButton from './ExtendButton'
 import Fingerprint from './Fingerprint'
@@ -62,13 +63,13 @@ const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
       id
-      ...AppreciatorsArticle
+      ...AppreciatorsDialogArticle
       ...FingerprintArticle
       ...ArchiveArticleArticle
       ...StickyButtonArticle
       ...ExtendButtonArticle
     }
-    ${Appreciators.Dialog.fragments.article}
+    ${AppreciatorsDialog.fragments.article}
     ${Fingerprint.Dialog.fragments.article}
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}
@@ -99,7 +100,7 @@ const BaseDropdownActions = ({
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
       {hasAppreciators && (
-        <Appreciators.Button openDialog={openAppreciatorsDialog} />
+        <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
       {hasFingerprint && (
         <Fingerprint.Button openDialog={openFingerprintDialog} />
@@ -184,7 +185,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   return (
     <Fingerprint.Dialog article={article}>
       {({ open: openFingerprintDialog }) => (
-        <Appreciators.Dialog article={article}>
+        <AppreciatorsDialog article={article}>
           {({ open: openAppreciatorsDialog }) => (
             <ArchiveArticle.Dialog article={article}>
               {({ open: openArchiveDialog }) => (
@@ -198,7 +199,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
               )}
             </ArchiveArticle.Dialog>
           )}
-        </Appreciators.Dialog>
+        </AppreciatorsDialog>
       )}
     </Fingerprint.Dialog>
   )
