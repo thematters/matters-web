@@ -2,22 +2,10 @@ import { LikeCoinDialog } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
-const SetupLikerIdAppreciateButton = ({
-  total,
-  inFixedToolbar
-}: {
-  total: number
-  inFixedToolbar?: boolean
-}) => {
+const SetupLikerIdAppreciateButton = ({ total }: { total: number }) => {
   return (
     <LikeCoinDialog>
-      {({ open }) => (
-        <AppreciateButton
-          onClick={open}
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
-      )}
+      {({ open }) => <AppreciateButton onClick={open} total={total} />}
     </LikeCoinDialog>
   )
 }

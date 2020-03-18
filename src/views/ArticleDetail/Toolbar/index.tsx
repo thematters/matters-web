@@ -40,7 +40,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
   return (
     <section className="toolbar">
       <section className="appreciate-button">
-        <AppreciationButton article={article} inFixedToolbar />
+        <AppreciationButton article={article} />
       </section>
 
       <section className="comment-bar">

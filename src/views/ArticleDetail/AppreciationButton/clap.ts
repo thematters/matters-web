@@ -23,10 +23,7 @@ export const handZoomIn = _debounce(($clapButton: HTMLButtonElement) => {
   $clapButton.classList.add('clap-hand-zoom-in')
 }, 1000 / 60)
 
-export const explode = (
-  $clapButton: HTMLButtonElement,
-  inFixedToolbar: boolean
-) => {
+export const explode = ($clapButton: HTMLButtonElement) => {
   const id = `explode-${Date.now()}`
   const $explode = document.createElement('span')
 
@@ -45,17 +42,11 @@ export const explode = (
 
   // style
   const $style = document.createElement('style')
-  const { rangeRotate, rangeScale, iconDefaultSize } = inFixedToolbar
-    ? {
-        rangeRotate: [-180, 100],
-        rangeScale: [1.6, 2],
-        iconDefaultSize: 20
-      }
-    : {
-        rangeRotate: [-45, 15],
-        rangeScale: [2.8, 3.6],
-        iconDefaultSize: 22
-      }
+  const { rangeRotate, rangeScale, iconDefaultSize } = {
+    rangeRotate: [-45, 15],
+    rangeScale: [2.8, 3.6],
+    iconDefaultSize: 24
+  }
   const rotate = getRandomFloat(rangeRotate[0], rangeRotate[1], 0)
   const scale = getRandomFloat(rangeScale[0], rangeScale[1])
   const flip = rotate > 0 ? -1 : 1
@@ -90,14 +81,11 @@ export const explode = (
   $clapButton.appendChild($explode)
 }
 
-export const clap = (
-  $clapButton: HTMLButtonElement,
-  inFixedToolbar: boolean
-) => {
+export const clap = ($clapButton: HTMLButtonElement) => {
   // hand zoom in
   handZoomOut($clapButton)
   handZoomIn($clapButton)
 
   // explode
-  explode($clapButton, inFixedToolbar)
+  explode($clapButton)
 }
