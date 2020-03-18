@@ -15,7 +15,6 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateCode,
   validateEmail
@@ -55,7 +54,7 @@ const Confirm: React.FC<FormProps> = ({
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
 
-  const formId = randomString()
+  const formId = 'change-email-confirm-form'
 
   const {
     values,
@@ -125,6 +124,7 @@ const Confirm: React.FC<FormProps> = ({
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input
@@ -161,7 +161,7 @@ const Confirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="changeEmail" />}
+        title="changeEmail"
         close={closeDialog}
         rightButton={SubmitButton}
       />

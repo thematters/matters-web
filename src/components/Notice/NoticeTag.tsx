@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
+import { Tag } from '~/components'
+
+import styles from './styles.css'
 
 import { NoticeTag as NoticeTagType } from './__generated__/NoticeTag'
 
@@ -10,15 +11,12 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
     return null
   }
 
-  const path = toPath({
-    page: 'tagDetail',
-    id: tag.id || ''
-  })
-
   return (
-    <Link {...path}>
-      <a>{tag.content}</a>
-    </Link>
+    <section className="sub-content tag-content">
+      <Tag tag={tag} type="inline" active />
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
@@ -26,8 +24,9 @@ NoticeTag.fragments = {
   tag: gql`
     fragment NoticeTag on Tag {
       id
-      content
+      ...DigestTag
     }
+    ${Tag.fragments.tag}
   `
 }
 

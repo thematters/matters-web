@@ -2,6 +2,7 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef, useState } from 'react'
 
 import {
+  Button,
   Dialog,
   DialogOverlayProps,
   DialogProps,
@@ -12,7 +13,7 @@ import {
   useResponsive
 } from '~/components'
 
-import { KEYCODES, TEXT } from '~/common/enums'
+import { KEYCODES, TEXT, TextId } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -57,7 +58,7 @@ type DropdownDialogProps = {
   dropdown: Omit<PopperProps, 'children'>
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
     content: React.ReactNode
-    title: string | React.ReactNode
+    title: React.ReactElement | TextId
   }
 } & DropdownDialogChildren
 
@@ -95,11 +96,9 @@ export const DropdownDialog = ({
   }
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
-
     if (target?.closest && target.closest('[data-clickable], a, button')) {
       close()
     }
-
     event.stopPropagation()
   }
 
@@ -115,11 +114,7 @@ export const DropdownDialog = ({
         onClick={closeOnClick}
       >
         <VisuallyHidden>
-          <button
-            type="button"
-            aria-label={TEXT.zh_hant.close}
-            onClick={close}
-          />
+          <Button aria-label={TEXT.zh_hant.close} onClick={close} />
         </VisuallyHidden>
 
         {contentChildren}

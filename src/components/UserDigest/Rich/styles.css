@@ -4,6 +4,13 @@
   align-items: center;
 
   position: relative;
+
+  &:not(.disabled) .name {
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 
 .avatar {

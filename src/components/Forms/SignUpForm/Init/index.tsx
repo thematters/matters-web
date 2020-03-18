@@ -8,7 +8,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  PageHeader,
+  Layout,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -25,7 +25,6 @@ import {
   analytics,
   appendTarget,
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateCode,
   validateEmail,
@@ -94,7 +93,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'sign-up-init-form'
 
   const {
     values,
@@ -177,6 +176,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input
@@ -246,7 +246,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
           <>
             <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-            <Link {...PATHS.MISC_TOS}>
+            <Link {...PATHS.TOS}>
               <a className="u-link-green" target="_blank">
                 &nbsp;
                 <Translate
@@ -278,9 +278,15 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   if (isInPage) {
     return (
       <>
-        <PageHeader title={<Translate id="register" />} hasNoBorder>
-          {SubmitButton}
-        </PageHeader>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id="register" />
+              {SubmitButton}
+            </>
+          }
+        />
 
         {InnerForm}
       </>
@@ -291,7 +297,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="register" />}
+          title="register"
           close={closeDialog}
           rightButton={SubmitButton}
         />

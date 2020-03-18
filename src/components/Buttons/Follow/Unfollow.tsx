@@ -59,7 +59,7 @@ const Unfollow = ({
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
-    'md-s': ['3rem', '1.5rem']
+    'md-s': ['3.25rem', '1.5rem']
   }
 
   return (
@@ -67,12 +67,10 @@ const Unfollow = ({
       size={sizes[size]}
       textColor="white"
       bgColor="green"
-      bgHoverColor="red"
+      bgActiveColor="red"
       onClick={() => {
         unfollow()
-        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, {
-          id: user.id
-        })
+        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, { id: user.id })
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}

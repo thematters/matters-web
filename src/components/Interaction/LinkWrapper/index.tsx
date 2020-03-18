@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 import styles from './styles.css'
 
-interface LinkWrapperProps {
+export interface LinkWrapperProps {
   href: string
   as: string
 
-  textHoverColor?: 'green'
+  textActiveColor?: 'green'
 
   disabled?: boolean
   onClick?: () => any
@@ -17,7 +17,7 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   href,
   as,
 
-  textHoverColor,
+  textActiveColor,
 
   disabled,
   onClick,
@@ -29,7 +29,7 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   }
 
   const linkClass = classNames({
-    [`text-hover-${textHoverColor}`]: !!textHoverColor
+    [`text-active-${textActiveColor}`]: !!textActiveColor
   })
 
   return (

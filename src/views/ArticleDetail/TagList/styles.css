@@ -1,6 +1,16 @@
 .tag-list {
-  & :global(.tag) {
-    padding-right: var(--spacing-loose);
-    padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-base);
+}
+
+ul {
+  @mixin hide-scrollbar;
+  display: flex;
+
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  & li {
+    flex-shrink: 0;
+    margin-right: var(--spacing-base);
   }
 }

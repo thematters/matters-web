@@ -10,13 +10,13 @@ import { useEffect, useState } from 'react'
 import {
   EmptyResponse,
   List,
-  LoadMore,
   Spinner,
   Switch,
   Title,
   Translate,
   useEventListener,
-  useResponsive
+  useResponsive,
+  ViewMoreButton
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -185,8 +185,8 @@ const LatestResponses = () => {
     })
   }
 
-  const commentCallback = () => {
-    return fetchMore({
+  const commentCallback = () =>
+    fetchMore({
       variables: {
         before: storedCursor,
         includeBefore: false,
@@ -228,7 +228,6 @@ const LatestResponses = () => {
         return newResult
       }
     })
-  }
 
   const responses = filterResponses(
     (edges || []).map(({ node }) => node)
@@ -335,7 +334,7 @@ const LatestResponses = () => {
           <EmptyResponse articleOnlyMode={articleOnlyMode} />
         ))}
 
-      <List spacing={['xloose', 0]} hasBorder>
+      <List spacing={['xloose', 0]}>
         {responses.map(response => (
           <List.Item key={response.id}>
             {response.__typename === 'Article' ? (
@@ -353,7 +352,7 @@ const LatestResponses = () => {
       </List>
 
       {pageInfo && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={loadMore} loading={loading} />
       )}
 
       <style jsx>{styles}</style>

@@ -1,20 +1,19 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
 
 import {
   InfiniteScroll,
   List,
-  PageHeader,
   Spinner,
   Translate,
   UserDigest
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
-import ViewAll from '../ViewAll'
 
 import { SeachUsers } from './__generated__/SeachUsers'
 
@@ -39,30 +38,12 @@ const SEARCH_USERS = gql`
   ${UserDigest.Rich.fragments.user}
 `
 
-const Header = ({ viewAll, q }: { viewAll?: boolean; q?: string }) => (
-  <PageHeader is="h2" title={<Translate id="user" />}>
-    {viewAll && q && <ViewAll q={q} type="user" />}
-  </PageHeader>
-)
+const SearchUser = () => {
+  const router = useRouter()
+  const q = getQuery({ router, key: 'q' })
 
-const EmptySearchResult = () => {
-  return (
-    <section>
-      <Header />
-      <EmptySearch description={<Translate id="emptySearchResults" />} />
-    </section>
-  )
-}
-
-const SearchUser = ({
-  q,
-  isAggregate
-}: {
-  q: string
-  isAggregate: boolean
-}) => {
   const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
-    variables: { key: q, first: isAggregate ? 3 : 10 }
+    variables: { key: q, first: 10 }
   })
 
   if (loading) {
@@ -73,7 +54,7 @@ const SearchUser = ({
   const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return isAggregate ? null : <EmptySearchResult />
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   const loadMore = () => {
@@ -96,34 +77,27 @@ const SearchUser = ({
   }
 
   return (
-    <section>
-      <InfiniteScroll
-        hasNextPage={!isAggregate && pageInfo.hasNextPage}
-        loadMore={loadMore}
-      >
-        <Header q={q} viewAll={isAggregate && pageInfo.hasNextPage} />
-        <List>
-          {edges.map(
-            ({ node, cursor }, i) =>
-              node.__typename === 'User' && (
-                <List.Item key={cursor}>
-                  <UserDigest.Rich
-                    user={node}
-                    hasFollow
-                    onClick={() =>
-                      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                        type: FEED_TYPE.SEARCH_USER,
-                        location: i,
-                        entrance: q
-                      })
-                    }
-                  />
-                </List.Item>
-              )
-          )}
-        </List>
-      </InfiniteScroll>
-    </section>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {edges.map(
+          ({ node, cursor }, i) =>
+            node.__typename === 'User' && (
+              <List.Item key={cursor}>
+                <UserDigest.Rich
+                  user={node}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.SEARCH_USER,
+                      location: i,
+                      entrance: q
+                    })
+                  }
+                />
+              </List.Item>
+            )
+        )}
+      </List>
+    </InfiniteScroll>
   )
 }
 

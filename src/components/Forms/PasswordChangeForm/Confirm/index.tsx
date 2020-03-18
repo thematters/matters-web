@@ -3,18 +3,11 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  PageHeader,
-  Translate
-} from '~/components'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateComparedPassword,
   validatePassword
@@ -53,7 +46,8 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = randomString()
+  const formId = 'password-change-confirm-form'
+  const titleId = isForget ? 'resetPassword' : 'changePassword'
 
   const {
     values,
@@ -109,6 +103,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input
@@ -136,18 +131,18 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     />
   )
 
-  const Title = isForget ? (
-    <Translate id="resetPassword" />
-  ) : (
-    <Translate id="changePassword" />
-  )
-
   if (isInPage) {
     return (
       <>
-        <PageHeader title={Title} hasNoBorder>
-          {SubmitButton}
-        </PageHeader>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id={titleId} />
+              {SubmitButton}
+            </>
+          }
+        />
 
         {InnerForm}
       </>
@@ -158,7 +153,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={Title}
+          title={titleId}
           close={closeDialog}
           rightButton={SubmitButton}
         />

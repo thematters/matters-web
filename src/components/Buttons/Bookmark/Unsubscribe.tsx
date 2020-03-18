@@ -5,15 +5,19 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 
-const Unsubscribe = ({
-  articleId,
-  size,
-  disabled
-}: {
+interface UnsubscribeProps {
   articleId: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-}) => {
+  inCard: boolean
+}
+
+const Unsubscribe = ({
+  articleId,
+  size,
+  disabled,
+  inCard
+}: UnsubscribeProps) => {
   const [unsubscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -31,7 +35,7 @@ const Unsubscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       aria-label="取消收藏"
       onClick={unsubscribe}
       disabled={disabled}

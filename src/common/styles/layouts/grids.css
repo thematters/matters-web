@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
-@lost gutter 48px; /* 3rem */
+@lost gutter 40px;
 @lost flexbox flex;
 
 /*
@@ -13,17 +13,17 @@
 
   @media (--sm-up) {
     & {
-      lost-center: 704px;
+      lost-center: 792px;
     }
   }
   @media (--md-up) {
     & {
-      lost-center: 960px;
+      lost-center: 896px;
     }
   }
   @media (--lg-up) {
     & {
-      lost-center: 1080px;
+      lost-center: 1208px;
     }
   }
 
@@ -54,8 +54,8 @@
   }
 }
 
-/* 8 cols in Small and Medium */
-@each $device in sm, md {
+/* 8 cols in Small */
+@each $device in sm {
   @media (--$(device)-up) {
     @each $i in 0, 1, 2, 3, 4, 5, 6, 7, 8 {
       .l-col-$(device)-$(i) {
@@ -76,8 +76,30 @@
   }
 }
 
-/* 12 cols in Large and XLarge */
-@each $device in lg, xl {
+/* 9 cols in Medium */
+@each $device in md {
+  @media (--$(device)-up) {
+    @each $i in 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 {
+      .l-col-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-column: $(i)/9;
+
+        @if $(i) == 9 {
+          flex-basis: 100%;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      .l-offset-$(device)-$(i) {
+        /* prettier-ignore */
+        lost-offset: $(i)/9;
+      }
+    }
+  }
+}
+
+/* 12 cols in Large */
+@each $device in lg {
   @media (--$(device)-up) {
     @each $i in 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
       .l-col-$(device)-$(i) {
@@ -107,13 +129,38 @@
     lost-column: 1/$(i);
   }
 }
-@each $device in sm, md, lg, xl {
+@each $device in sm, md, lg {
   @media (--$(device)-up) {
     @each $i in 1, 2, 3, 4 {
       .l-waffle-$(device)-$(i) {
         /* prettier-ignore */
         lost-column: 1/$(i);
       }
+    }
+  }
+}
+
+/*
+ * Three Column Layout
+ */
+.l-col-lg-9-2 {
+  @media (--lg-up) {
+    & {
+      lost-column: 2/9;
+    }
+  }
+}
+.l-offset-lg-9-2 {
+  @media (--lg-up) {
+    & {
+      lost-offset: 2/9;
+    }
+  }
+}
+.l-col-lg-9-7 {
+  @media (--lg-up) {
+    & {
+      lost-column: 7/9;
     }
   }
 }

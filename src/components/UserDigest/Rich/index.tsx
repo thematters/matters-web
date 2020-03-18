@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Card, Translate } from '~/components'
+import { Card, CardProps, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { FollowButton } from '~/components/Buttons/Follow'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
@@ -22,7 +22,7 @@ import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
  *   <UserDigest.Rich user={user} />
  */
 
-interface RichProps {
+type RichProps = {
   user: UserDigestRichUser
 
   size?: 'sm' | 'lg'
@@ -31,9 +31,7 @@ interface RichProps {
   hasFollow?: boolean
   hasState?: boolean
   hasUnblock?: boolean
-
-  onClick?: () => any
-}
+} & CardProps
 
 const fragments = {
   user: gql`
@@ -65,25 +63,26 @@ const Rich = ({
   size = 'lg',
   avatarBadge,
 
-  hasFollow,
+  hasFollow = true,
   hasState = true,
   hasUnblock,
 
-  onClick
+  ...cardProps
 }: RichProps) => {
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || ''
   })
+  const isArchived = user?.status?.state === 'archived'
   const containerClass = classNames({
     container: true,
-    [`size-${size}`]: !!size
+    [`size-${size}`]: !!size,
+    disabled: isArchived
   })
-  const isArchived = user?.status?.state === 'archived'
 
   if (isArchived) {
     return (
-      <Card spacing={['tight', 0]} onClick={onClick}>
+      <Card spacing={['tight', 'tight']} {...cardProps}>
         <section className={containerClass}>
           <span className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
@@ -97,6 +96,10 @@ const Rich = ({
             </header>
           </section>
 
+          <section className="extra-button">
+            {hasUnblock && <UnblockUserButton user={user} />}
+          </section>
+
           <style jsx>{styles}</style>
         </section>
       </Card>
@@ -104,7 +107,7 @@ const Rich = ({
   }
 
   return (
-    <Card {...path} spacing={['tight', 0]} onClick={onClick}>
+    <Card {...path} spacing={['tight', 'tight']} {...cardProps}>
       <section className={containerClass}>
         <Link {...path}>
           <a className="avatar">
@@ -128,7 +131,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowButton user={user} />}
+          {hasFollow && <FollowButton user={user} size="md-s" />}
         </section>
 
         <style jsx>{styles}</style>

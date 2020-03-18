@@ -22,6 +22,7 @@
 
   &.direction-row {
     flex-direction: row;
+    align-items: center;
   }
   &.direction-column {
     flex-direction: column;

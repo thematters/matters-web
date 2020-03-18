@@ -75,7 +75,7 @@ export const LanguageSwitch = () => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgHoverColor="green-lighter"
+          bgActiveColor="grey-lighter"
           aria-haspopup="true"
           onClick={open}
           ref={ref}

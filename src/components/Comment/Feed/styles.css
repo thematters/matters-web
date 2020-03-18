@@ -18,6 +18,11 @@ header {
   }
 }
 
+.reply-to-container {
+  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
+    var(--spacing-x-loose);
+}
+
 .content-container {
   margin-top: var(--spacing-xx-tight);
   padding-left: var(--spacing-xx-loose);
@@ -25,7 +30,7 @@ header {
 
 @keyframes commentBackgroundFadeOut {
   50% {
-    background: var(--color-green-lighter);
+    background: var(--color-grey-lighter);
   }
 
   0,

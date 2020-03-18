@@ -1,4 +1,4 @@
-import { Head, Translate } from '~/components'
+import { Head, Layout, Translate } from '~/components'
 
 import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
 
@@ -40,11 +40,11 @@ const PickAuthors = () => (
   <>
     <Head title={{ id: 'followAuthor' }} />
 
-    <PickIntroHeader />
+    <Layout.Spacing>
+      <PickIntroHeader />
+    </Layout.Spacing>
 
     <AuthorPicker title={<Translate id="followAuthor" />} />
-
-    <style jsx>{styles}</style>
   </>
 )
 

@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Label, Translate } from '~/components'
+import { Translate } from '~/components'
+
+import styles from './styles.css'
 
 import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
 
@@ -18,9 +20,11 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
   }
 
   return (
-    <Label size="sm">
+    <span className="label">
       <Translate id="authorRecommend" />
-    </Label>
+
+      <style jsx>{styles}</style>
+    </span>
   )
 }
 

@@ -58,12 +58,14 @@ const FollowComment = ({
       : {}
 
   return (
-    <Card {...articlePath} onClick={onClick}>
+    <Card {...articlePath} spacing={['base', 'base']} onClick={onClick}>
       <header>
         <section className="left">
           <UserDigest.Mini
             user={author}
-            avatarSize="sm"
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
             hasAvatar
             hasDisplayName
           />
@@ -84,7 +86,7 @@ const FollowComment = ({
           {...path}
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
-          borderRadius="xxtight"
+          borderRadius="xtight"
         >
           <Expandable limit={5} buffer={2}>
             <Comment.Content comment={comment} size="md-s" />
@@ -92,7 +94,7 @@ const FollowComment = ({
         </Card>
       </section>
 
-      <Comment.FooterActions comment={comment} />
+      <Comment.FooterActions comment={comment} inCard />
 
       <style jsx>{styles}</style>
     </Card>

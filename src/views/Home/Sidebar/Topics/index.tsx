@@ -7,7 +7,7 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import SidebarHeader from '../SidebarHeader'
+import SectionHeader from '../../SectionHeader'
 import TopicSidebarArticleDigest from './TopicSidebarArticleDigest'
 
 import { SidebarTopics } from './__generated__/SidebarTopics'
@@ -49,7 +49,7 @@ const Topics = () => {
 
   return (
     <section>
-      <SidebarHeader type="topics" />
+      <SectionHeader type="topics" />
 
       <ol>
         {edges

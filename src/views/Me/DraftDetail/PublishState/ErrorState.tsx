@@ -1,8 +1,9 @@
 import { Toast, Translate } from '~/components'
-import RetryButton from '~/components/DraftDigest/Components/RetryButton'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
+
+import RetryButton from './RetryButton'
 
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 

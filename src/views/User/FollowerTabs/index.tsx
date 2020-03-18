@@ -22,7 +22,7 @@ const MeTabs = () => {
   })
 
   return (
-    <Tabs>
+    <Tabs spacingBottom={0}>
       <Tabs.Tab
         {...userFollowersPath}
         selected={router.pathname === PATHS.USER_FOLLOWERS.href}

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { LinkWrapper, Translate } from '~/components'
+import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -13,14 +13,14 @@ export type ArticleDigestTitleTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
 export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
 export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4'
 
-interface ArticleDigestTitleProps {
+type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticle
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
   is?: ArticleDigestTitleIs
   disabled?: boolean
-}
+} & Pick<LinkWrapperProps, 'onClick'>
 
 const fragments = {
   article: gql`
@@ -44,7 +44,9 @@ export const ArticleDigestTitle = ({
   textSize = 'md',
   textWeight = 'md',
   is = 'h2',
-  disabled
+  disabled,
+
+  ...restProps
 }: ArticleDigestTitleProps) => {
   const { articleState: state } = article
   const path = toPath({
@@ -63,8 +65,9 @@ export const ArticleDigestTitle = ({
   return (
     <LinkWrapper
       {...path}
-      textHoverColor={isClickable ? 'green' : undefined}
+      textActiveColor={isClickable ? 'green' : undefined}
       disabled={!isClickable}
+      {...restProps}
     >
       <>
         {is === 'h2' ? (

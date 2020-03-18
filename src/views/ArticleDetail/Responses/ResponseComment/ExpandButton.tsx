@@ -10,16 +10,16 @@ const ExpandButton = ({
   restCount: number
 }) => (
   <Button
-    size={[null, '1.5rem']}
-    spacing={[0, 'base']}
-    bgHoverColor="green-lighter"
+    size={[null, '1.25rem']}
+    spacing={[0, 'xtight']}
+    bgActiveColor="grey-lighter"
     onClick={onClick}
   >
     <TextIcon
-      icon={<Icon.Down size="xs" />}
-      size="sm"
+      size="xs"
       color="green"
       textPlacement="left"
+      icon={<Icon.Down size="xs" />}
     >
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}

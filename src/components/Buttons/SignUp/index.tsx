@@ -1,4 +1,5 @@
 import { Button, TextIcon, useResponsive } from '~/components'
+import { Translate } from '~/components/Language'
 
 import {
   ANALYTICS_EVENTS,
@@ -8,8 +9,14 @@ import {
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
-export const SignUpButton: React.FC<{ trackType: string }> = ({
+interface SignUpButtonProps {
+  isPlain?: boolean
+  trackType: string
+}
+
+export const SignUpButton: React.FC<SignUpButtonProps> = ({
   children,
+  isPlain,
   trackType
 }) => {
   const isSmallUp = useResponsive('sm-up')
@@ -24,18 +31,33 @@ export const SignUpButton: React.FC<{ trackType: string }> = ({
           window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
         }
       }
-    : appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true })
+    : {
+        ...appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true }),
+        onClick: () => {
+          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
+            type: trackType
+          })
+        }
+      }
+
+  if (isPlain) {
+    return (
+      <Button aria-haspopup="true" {...clickProps}>
+        {children}
+      </Button>
+    )
+  }
 
   return (
     <Button
+      bgColor="green"
       size={[null, '2.25rem']}
       spacing={[0, 'loose']}
-      bgColor="green"
       aria-haspopup="true"
       {...clickProps}
     >
       <TextIcon color="white" weight="md">
-        {children}
+        <Translate id="register" />
       </TextIcon>
     </Button>
   )

@@ -8,6 +8,12 @@ import { analytics, numAbbr, toPath } from '~/common/utils'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
 
+interface ResponseCountProps {
+  article: ActionsResponseCountArticle
+  size?: 'sm' | 'xs'
+  inCard: boolean
+}
+
 const fragments = {
   article: gql`
     fragment ActionsResponseCountArticle on Article {
@@ -25,11 +31,9 @@ const fragments = {
 
 const ResponseCount = ({
   article,
-  size = 'sm'
-}: {
-  article: ActionsResponseCountArticle
-  size?: 'sm' | 'xs'
-}) => {
+  size = 'sm',
+  inCard
+}: ResponseCountProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -41,7 +45,7 @@ const ResponseCount = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       {...path}
       disabled={isBanned}
       onClick={() => {

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useContext } from 'react'
 
-import { Button, Icon, IconSize, Translate } from '~/components'
+import { Button, Icon, IconSize, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -12,15 +13,15 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-const Subscribe = ({
-  articleId,
-  size,
-  disabled
-}: {
+interface SubscribeProps {
   articleId: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-}) => {
+  inCard: boolean
+}
+
+const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
+  const viewer = useContext(ViewerContext)
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -43,7 +44,7 @@ const Subscribe = ({
     await subscribe()
 
     // skip
-    if (!push || !push.supported || push.enabled) {
+    if (!push || !push.supported || push.enabled || !viewer.isAuthed) {
       return
     }
 
@@ -67,7 +68,7 @@ const Subscribe = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgHoverColor="grey-lighter"
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       aria-label="收藏"
       onClick={onClick}
       disabled={disabled}

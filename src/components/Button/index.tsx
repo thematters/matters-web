@@ -7,8 +7,12 @@ import styles from './styles.css'
 export type ButtonWidth =
   | '2rem'
   | '3rem'
+  | '3.25rem'
   | '4rem'
+  | '5rem'
   | '6rem'
+  | '7rem'
+  | '8rem'
   | '100%'
   | undefined
   | null
@@ -19,20 +23,29 @@ export type ButtonHeight =
   | '1.5rem'
   | '2rem'
   | '2.25rem'
+  | '2.5rem'
   | '3rem'
   | undefined
   | null
 
-type ButtonSpacingY = 0 | '0' | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
 
-type ButtonSpacingX = 0 | '0' | 'xtight' | 'tight' | 'base' | 'loose'
+export type ButtonSpacingX =
+  | 0
+  | 'xxtight'
+  | 'xtight'
+  | 'tight'
+  | 'base'
+  | 'loose'
 
 type ButtonColor =
   | 'white'
   | 'black'
+  | 'half-black'
   | 'grey'
   | 'grey-light'
   | 'grey-lighter'
+  | 'grey-lighter-active'
   | 'green-lighter'
   | 'green'
   | 'gold'
@@ -40,14 +53,21 @@ type ButtonColor =
 
 type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
 
-type ButtonBgColor = Extract<
+export type ButtonBgColor = Extract<
   ButtonColor,
-  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+  | 'grey'
+  | 'grey-lighter'
+  | 'green-lighter'
+  | 'green'
+  | 'gold'
+  | 'red'
+  | 'white'
+  | 'half-black'
 >
 
-type ButtonBgHoverColor = Extract<
+type ButtonBgActiveColor = Extract<
   ButtonColor,
-  'grey' | 'grey-lighter' | 'green-lighter' | 'green' | 'gold' | 'red'
+  'grey-lighter' | 'green-lighter' | 'grey-lighter-active' | 'green' | 'red'
 >
 
 export interface ButtonProps {
@@ -55,14 +75,14 @@ export interface ButtonProps {
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
   textColor?: ButtonTextColor
-  textHoverColor?: ButtonTextColor
+  textActiveColor?: ButtonTextColor
 
   bgColor?: ButtonBgColor
-  bgHoverColor?: ButtonBgHoverColor
+  bgActiveColor?: ButtonBgActiveColor
 
   borderColor?: ButtonColor
   borderWidth?: 'sm' | 'md'
-  borderRadius?: 0 | '0' | '5rem'
+  borderRadius?: 0 | '5rem'
 
   href?: string
   as?: string
@@ -90,8 +110,8 @@ export interface ButtonProps {
  *  <Button
  *    size={['4rem', '1.5rem']}
  *    textColor="green"
- *    textHoverColor="white"
- *    bgHoverColor="green"
+ *    textActiveColor="white"
+ *    bgActiveColor="green"
  *    borderColor="green"
  *    onClick={onClick}
  *  >
@@ -108,10 +128,10 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       size = [null, null],
 
       textColor,
-      textHoverColor,
+      textActiveColor,
 
       bgColor,
-      bgHoverColor,
+      bgActiveColor,
 
       borderColor,
       borderWidth = 'md',
@@ -143,11 +163,11 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`spacing-y-${spacingY}`]: !!spacingY,
       [`spacing-x-${spacingX}`]: !!spacingX,
       [`bg-${bgColor}`]: !!bgColor,
-      [`bg-hover-${bgHoverColor}`]: !!bgHoverColor && isClickable,
+      [`bg-active-${bgActiveColor}`]: !!bgActiveColor && isClickable,
       [`border-${borderColor}`]: !!borderColor,
       [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
-      [`text-hover-${textHoverColor}`]: !!textHoverColor && isClickable,
+      [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
       [className]: !!className
     })
     const containerProps = {

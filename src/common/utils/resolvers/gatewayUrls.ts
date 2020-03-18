@@ -2,21 +2,29 @@ import fetch from 'isomorphic-unfetch'
 
 const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
 const PUBLIC_GATEWAYS: string[] = [
-  'https://d26g9c7mfuzstv.cloudfront.net/ipfs/',
-  'https://ipfs.io/ipfs/',
-  'https://gateway.ipfs.io/ipfs/',
-  'https://ipfs.infura.io/ipfs/',
-  'https://ipfs.jes.xxx/ipfs/',
-  'https://siderus.io/ipfs/',
-  'https://ipfs.eternum.io/ipfs/',
-  'https://hardbin.com/ipfs/',
-  'https://ipfs.wa.hle.rs/ipfs/',
-  'https://cloudflare-ipfs.com/ipfs/',
-  'https://gateway.pinata.cloud/ipfs/',
-  'https://ipfs.sloppyta.co/ipfs/',
-  'https://ipfs.busy.org/ipfs/',
-  'https://ipfs.greyh.at/ipfs/',
-  'https://gateway.serph.network/ipfs/'
+  'https://d26g9c7mfuzstv.cloudfront.net/ipfs/:hash',
+  'https://ipfs.io/ipfs/:hash',
+  'https://:hash.ipfs.dweb.link',
+  'https://gateway.ipfs.io/ipfs/:hash',
+  'https://ipfs.infura.io/ipfs/:hash',
+  'https://ninetailed.ninja/ipfs/:hash',
+  'https://10.via0.com/ipfs/:hash',
+  'https://ipfs.eternum.io/ipfs/:hash',
+  'https://hardbin.com/ipfs/:hash',
+  'https://cloudflare-ipfs.com/ipfs/:hash',
+  'https://:hash.ipfs.cf-ipfs.com',
+  'https://ipns.co/:hash',
+  'https://gateway.pinata.cloud/ipfs/:hash',
+  'https://ipfs.sloppyta.co/ipfs/:hash',
+  'https://jorropo.ovh/ipfs/:hash',
+  'https://gateway.temporal.cloud/ipfs/:hash',
+  'https://ipfs.privacytools.io/ipfs/:hash',
+  'https://ipfs.jeroendeneef.com/ipfs/:hash',
+  'https://permaweb.io/ipfs/:hash',
+  'https://ipfs.stibarc.com/ipfs/:hash',
+  'https://ipfs.best-practice.se/ipfs/:hash',
+  'https://:hash.ipfs.2read.net',
+  'https://ipfs.2read.net/ipfs/:hash'
 ]
 
 function timeout(ms: number, promise: any) {
@@ -33,7 +41,10 @@ const checkGateway = async (
   hash: string,
   gatewayUrl: string
 ): Promise<boolean> => {
-  const testUrl = `${gatewayUrl}${hash}#x-ipfs-companion-no-redirect`
+  const testUrl = `${gatewayUrl.replace(
+    ':hash',
+    hash
+  )}#x-ipfs-companion-no-redirect`
 
   try {
     // const res = await fetch(testUrl)

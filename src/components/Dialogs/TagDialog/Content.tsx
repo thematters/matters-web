@@ -17,7 +17,6 @@ import { ADD_TOAST } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
-  randomString,
   routerPush,
   toPath,
   translate
@@ -123,7 +122,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
 
-  const formId = randomString()
+  const formId = 'put-tag-form'
 
   const {
     values,
@@ -236,7 +235,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id={content ? 'editTag' : 'createTag'} />}
+        title={content ? 'editTag' : 'createTag'}
         close={closeDialog}
         rightButton={SubmitButton}
       />

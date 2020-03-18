@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
@@ -10,7 +9,8 @@ import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
 import NoticeArticle from './NoticeArticle'
 import NoticeComment from './NoticeComment'
-import NoticeDate from './NoticeDate'
+import NoticeHead from './NoticeHead'
+import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
 import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
@@ -26,25 +26,19 @@ const SubscribedArticleNewCommentNotice = ({
 
   const actorsCount = notice.actors.length
   const isMultiActors = notice.actors && actorsCount > 1
-  const avatarWrapClasses = classNames({
-    'avatar-wrap': true,
-    multi: isMultiActors
-  })
 
   return (
     <section className="container">
-      <section className={avatarWrapClasses}>
-        {notice.actors.slice(0, 2).map((actor, index) => (
-          <NoticeActorAvatar
-            user={actor}
-            key={index}
-            size={isMultiActors ? 'md' : undefined}
-          />
-        ))}
+      <section className="avatar-wrap">
+        {isMultiActors ? (
+          <NoticeTypeIcon type="comment" hasSpacing />
+        ) : (
+          <NoticeActorAvatar user={notice.actors[0]} />
+        )}
       </section>
 
       <section className="content-wrap">
-        <h4>
+        <NoticeHead hasDate={isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -62,11 +56,17 @@ const SubscribedArticleNewCommentNotice = ({
             zh_hans="评论了你收藏的作品"
           />{' '}
           <NoticeArticle article={notice.target} />
-        </h4>
+        </NoticeHead>
 
-        <NoticeComment comment={notice.comment} />
-
-        <NoticeDate notice={notice} />
+        {isMultiActors ? (
+          <section className="multi-actor-avatars">
+            {notice.actors.map((actor, index) => (
+              <NoticeActorAvatar key={index} user={actor} />
+            ))}
+          </section>
+        ) : (
+          <NoticeComment comment={notice.comment} />
+        )}
       </section>
 
       <style jsx>{styles}</style>
@@ -80,7 +80,7 @@ SubscribedArticleNewCommentNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeDate
+      ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -96,7 +96,7 @@ SubscribedArticleNewCommentNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
     ${NoticeComment.fragments.comment}
-    ${NoticeDate.fragments.notice}
+    ${NoticeHead.fragments.date}
   `
 }
 

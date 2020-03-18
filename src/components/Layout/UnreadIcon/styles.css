@@ -1,0 +1,7 @@
+.unread-icon {
+  display: inline-flex;
+}
+
+.unread {
+  @mixin unread-dot;
+}

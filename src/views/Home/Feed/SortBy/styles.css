@@ -1,0 +1,16 @@
+ul {
+  margin-top: var(--spacing-loose);
+  padding: 0 var(--spacing-base) var(--spacing-base);
+
+  & li {
+    display: inline-block;
+
+    & + li {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-x-loose);
+  }
+}

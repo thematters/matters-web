@@ -20,7 +20,7 @@ type ArticleDigestDropdownProps = {
   extraButton?: React.ReactNode
 } & Pick<
   CardProps,
-  'spacing' | 'bgColor' | 'bgHoverColor' | 'borderRadius' | 'onClick'
+  'spacing' | 'bgColor' | 'bgActiveColor' | 'borderRadius' | 'onClick'
 >
 
 const fragments = {
@@ -52,11 +52,7 @@ export const ArticleDigestDropdown = ({
   extraButton,
 
   // Card Props
-  spacing,
-  bgColor,
-  bgHoverColor,
-  borderRadius,
-  onClick
+  ...cardProps
 }: ArticleDigestDropdownProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
@@ -74,11 +70,7 @@ export const ArticleDigestDropdown = ({
     <Card
       href={cardDisabled ? undefined : path.href}
       as={cardDisabled ? undefined : path.as}
-      spacing={spacing}
-      borderRadius={borderRadius}
-      bgColor={bgColor}
-      bgHoverColor={bgHoverColor}
-      onClick={onClick}
+      {...cardProps}
     >
       <section className={containerClass}>
         <header>

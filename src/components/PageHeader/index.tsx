@@ -4,9 +4,8 @@ import { Title } from '~/components'
 
 import styles from './styles.css'
 
-interface PageHeaderProps {
+export interface PageHeaderProps {
   title: string | React.ReactNode
-  description?: string | React.ReactNode
 
   is?: 'h1' | 'h2' | 'h3'
   hasNoBorder?: boolean
@@ -14,7 +13,6 @@ interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
-  description,
   is = 'h1',
   hasNoBorder = false,
 
@@ -33,8 +31,6 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
         {children}
       </section>
-
-      {description && <p className="description">{description}</p>}
 
       <style jsx>{styles}</style>
     </header>

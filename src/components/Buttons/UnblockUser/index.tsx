@@ -38,8 +38,8 @@ export const UnblockUserButton = ({
     <Button
       size={['4rem', '1.5rem']}
       textColor="red"
-      textHoverColor="white"
-      bgHoverColor="red"
+      textActiveColor="white"
+      bgActiveColor="red"
       borderColor="red"
       onClick={async () => {
         await unblockUser()

@@ -60,14 +60,10 @@ const DeleteCommentDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} size="sm">
-        <Dialog.Header
-          title={<Translate zh_hant="刪除評論" zh_hans="删除评论" />}
-          close={close}
-          headerHidden
-        />
+        <Dialog.Header title="deleteComment" close={close} headerHidden />
 
         <Dialog.Message
-          headline={<Translate zh_hant="刪除評論" zh_hans="删除评论" />}
+          headline="deleteComment"
           description={
             <>
               <Translate

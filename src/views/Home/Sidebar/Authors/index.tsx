@@ -15,7 +15,7 @@ import { QueryError } from '~/components/GQL'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import SidebarHeader from '../SidebarHeader'
+import SectionHeader from '../../SectionHeader'
 
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
@@ -43,9 +43,7 @@ const SIDEBAR_AUTHORS = gql`
 const Authors = () => {
   const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
     SIDEBAR_AUTHORS,
-    {
-      notifyOnNetworkStatusChange: true
-    }
+    { notifyOnNetworkStatusChange: true }
   )
   const edges = data?.viewer?.recommendation.authors.edges
 
@@ -59,13 +57,13 @@ const Authors = () => {
 
   return (
     <section>
-      <SidebarHeader
+      <SectionHeader
         type="authors"
         rightButton={
           <Button
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
-            bgHoverColor="grey-lighter"
+            bgActiveColor="grey-lighter"
             onClick={() => refetch()}
           >
             <TextIcon
@@ -83,12 +81,13 @@ const Authors = () => {
       {loading && <Spinner />}
 
       {!loading && (
-        <List>
+        <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                hasFollow
+                spacing={['tight', 0]}
+                bgColor="none"
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.AUTHORS,

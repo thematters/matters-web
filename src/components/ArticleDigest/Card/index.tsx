@@ -69,6 +69,7 @@ export const ArticleDigestCard = ({
       {...path}
       spacing={[0, 0]}
       borderColor={cover ? undefined : 'grey-lighter'}
+      bgActiveColor={cover ? undefined : 'grey-lighter'}
       borderRadius="xtight"
       onClick={onClick}
     >

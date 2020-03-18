@@ -1,5 +1,3 @@
-import { randomString } from '~/common/utils'
-
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -40,8 +38,8 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = randomString()
-  const fieldMsgId = randomString()
+  const fieldId = `field-${name}`
+  const fieldMsgId = `field-msg-${name}`
 
   return (
     <Field>
@@ -53,7 +51,10 @@ const Input: React.FC<InputProps> = ({
           name={name}
           type={type}
           aria-describedby={fieldMsgId}
-          autoComplete="off"
+          autoComplete="nope"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       </Field.Content>
 

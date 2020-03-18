@@ -1,4 +1,4 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
@@ -14,9 +14,19 @@ export const SignUpComplete = ({
 
   return (
     <>
+      {isInPage && (
+        <Layout.Header
+          left={
+            <>
+              <Layout.Header.Title id="register" />
+            </>
+          }
+        />
+      )}
+
       {closeDialog && (
         <Dialog.Header
-          title={<Translate id="successRegister" />}
+          title="successRegister"
           close={closeDialog}
           headerHidden
         />
@@ -34,35 +44,16 @@ export const SignUpComplete = ({
           <>
             <p>
               <Translate
-                zh_hant="你已完成註冊，現在可以在 Matters 發佈作品並讚賞他人啦。"
-                zh_hans="你已完成注册，现在可以在 Matters 发布作品并赞赏他人啦。"
+                zh_hant="現在，去為你喜歡的作者打賞吧！你的每一次打賞都將為作者帶來收入。"
+                zh_hans="现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。"
               />
             </p>
             <br />
 
             <p>
               <Translate
-                zh_hant="只要你收穫的讚賞數與閱讀的文章數累積達到一定標準，就能啟動評論功能，參與精彩討論。"
-                zh_hans="只要你获得的赞赏数与阅读的文章数达到一定标准，就能启动评论功能，参与精彩讨论。"
-              />
-            </p>
-            <br />
-
-            <p>
-              <Translate
-                zh_hant="你的專屬 Liker ID 已就位，登入 "
-                zh_hans="你的专属 Liker ID 已就位，登录 "
-              />
-              <a
-                className="u-link-green"
-                href="https://like.co"
-                target="_blank"
-              >
-                like.co
-              </a>
-              <Translate
-                zh_hant=" 管理你的創作收益。"
-                zh_hans=" 管理你的创作收益。"
+                zh_hant="你已擁有個人創作空間站，期待你的第一篇作品。"
+                zh_hans="你已拥有个人创作空间站，期待你的第一篇作品。"
               />
             </p>
             <br />

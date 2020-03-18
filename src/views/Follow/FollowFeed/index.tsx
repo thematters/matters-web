@@ -7,9 +7,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  PageHeader,
-  Spinner,
-  Translate
+  Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -91,7 +89,7 @@ const FollowFeed = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List hasBorder>
+      <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             {node.__typename === 'Article' && (
@@ -127,9 +125,6 @@ const FollowFeed = () => {
 export default () => (
   <>
     <Head title={{ id: 'follow' }} />
-
-    <PageHeader title={<Translate id="follow" />} />
-
     <FollowFeed />
   </>
 )

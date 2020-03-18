@@ -1,76 +1,87 @@
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-import { Footer, Head, SearchBar, useResponsive } from '~/components'
+import {
+  Head,
+  Layout,
+  SearchAutoComplete,
+  SearchBar,
+  SearchOverview,
+  useResponsive
+} from '~/components'
 
 import { getQuery } from '~/common/utils'
 
-import EmptySearch from './EmptySearch'
+import AggregateResults from './AggregateResults'
+// import EmptySearch from './EmptySearch'
 import SearchArticles from './SearchArticles'
-import SearchPageHeader from './SearchPageHeader'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 import styles from './styles.css'
 
-const EmptySeachPage = () => {
-  return (
-    <main>
-      <Head title={{ zh_hant: '搜尋', zh_hans: '搜索' }} />
-
-      <section className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          <EmptySearch inSidebar={false} />
-        </article>
-
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          <Footer />
-        </aside>
-      </section>
-    </main>
-  )
-}
-
 const Search = () => {
-  const isMedium = useResponsive('md')
   const router = useRouter()
   const type = getQuery({ router, key: 'type' })
   const q = getQuery({ router, key: 'q' })
+  const isSmallUp = useResponsive('sm-up')
+  const [typingKey, setTypingKey] = useState('')
+  const resetAutoComplete = () => setTypingKey('')
 
-  if (!q) {
-    return <EmptySeachPage />
-  }
+  const isOverview = !q && !typingKey
+  const isAutoComplete = typingKey
+  const isTagOnly = !isAutoComplete && type === 'tag'
+  const isUserOnly = !isAutoComplete && type === 'user'
+  const isArticleOnly = !isAutoComplete && type === 'article'
+  const isAggregate =
+    !isOverview &&
+    !isAutoComplete &&
+    !isTagOnly &&
+    !isUserOnly &&
+    !isArticleOnly
 
-  const isTagOnly = type === 'tag'
-  const isUserOnly = type === 'user'
-  const isAggregate = !isTagOnly && !isUserOnly
+  useEffect(() => {
+    Router.events.on('routeChangeStart', resetAutoComplete)
+    return () => Router.events.off('routeChangeStart', resetAutoComplete)
+  }, [])
 
   return (
-    <main>
-      <Head title={{ zh_hant: `搜尋「${q}」`, zh_hans: `搜索“${q}”` }} />
+    <Layout>
+      <Layout.Header
+        left={
+          isAutoComplete ? (
+            undefined
+          ) : isSmallUp ? (
+            <Layout.Header.BackButton />
+          ) : (
+            <Layout.Header.MeButton />
+          )
+        }
+        right={
+          <>
+            <SearchBar hasDropdown={false} onChange={setTypingKey} />
+            {isAutoComplete && (
+              <Layout.Header.CancelButton
+                onClick={resetAutoComplete}
+                style={{ marginLeft: '1rem' }}
+              />
+            )}
+          </>
+        }
+        marginBottom={0}
+      />
 
-      {isMedium && (
-        <header className="l-row mobile-search-bar">
-          <SearchBar autoComplete={false} />
-        </header>
-      )}
+      <Head title={{ id: 'search' }} />
 
-      <SearchPageHeader q={q} isAggregate={isAggregate} />
+      {isOverview && <SearchOverview inPage />}
+      {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
 
-      <section className="l-row">
-        <article className="l-col-4 l-col-md-5 l-col-lg-8">
-          {isAggregate && <SearchArticles q={q} />}
-          {isTagOnly && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isUserOnly && <SearchUsers q={q} isAggregate={isAggregate} />}
-        </article>
-
-        <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-          {isAggregate && <SearchTags q={q} isAggregate={isAggregate} />}
-          {isAggregate && <SearchUsers q={q} isAggregate={isAggregate} />}
-          <Footer />
-        </aside>
-      </section>
+      {isTagOnly && <SearchTags />}
+      {isUserOnly && <SearchUsers />}
+      {isArticleOnly && <SearchArticles />}
+      {isAggregate && <AggregateResults />}
 
       <style jsx>{styles}</style>
-    </main>
+    </Layout>
   )
 }
 

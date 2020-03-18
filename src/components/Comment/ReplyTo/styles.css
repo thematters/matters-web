@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+}
+
+.reply-to {
+  margin-right: var(--spacing-xx-tight);
+
+  line-height: 1rem;
+}

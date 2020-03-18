@@ -10,7 +10,6 @@ import {
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT
 } from '~/common/enums'
-import { randomString } from '~/common/utils'
 
 import Cover from '../../../Cover'
 import styles from './styles.css'
@@ -37,7 +36,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = randomString()
+  const fieldId = 'profile-cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -68,9 +67,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
     try {
       const { data } = await upload({
-        variables: {
-          input: { file, type: 'profileCover', entityType: 'user' }
-        }
+        variables: { input: { file, type: 'profileCover', entityType: 'user' } }
       })
       const id = data?.singleFileUpload.id
       const path = data?.singleFileUpload.path

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
@@ -84,21 +84,22 @@ const EditButton = ({
     'edit-button': true
   })
 
+  const buttonProps = {
+    size: ['4rem', '1.25rem'],
+    bgColor: 'grey-lighter'
+  } as ButtonProps
+
   if (!editing) {
     return (
       <span className={editButtonClass}>
-        <Button
-          size={['4rem', '1.5rem']}
-          bgHoverColor="grey-lighter"
-          onClick={() => setEditing(true)}
-        >
+        <Button {...buttonProps} onClick={() => setEditing(true)}>
           <TextIcon
+            icon={<Icon.Edit size="sm" />}
             color="grey"
             size="xs"
             weight="md"
-            icon={<Icon.Edit size="sm" />}
           >
-            <Translate zh_hant="修訂" zh_hans="修订" />
+            <Translate id="edit" />
           </TextIcon>
         </Button>
 
@@ -109,29 +110,18 @@ const EditButton = ({
 
   return (
     <span className={editButtonClass}>
-      <Button
-        size={['4rem', '1.5rem']}
-        bgColor="grey-lighter"
-        onClick={() => setEditing(false)}
-      >
+      <Button {...buttonProps} onClick={() => setEditing(false)}>
         <TextIcon color="grey" size="xs" weight="md">
           <Translate id="cancel" />
         </TextIcon>
       </Button>
 
-      <Button
-        size={['4rem', '1.5rem']}
-        textColor="green"
-        textHoverColor="white"
-        bgHoverColor="green"
-        borderColor="green"
-        disabled={!!loading}
-        onClick={onSave}
-      >
+      <Button {...buttonProps} disabled={!!loading} onClick={onSave}>
         <TextIcon
+          icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
+          color="grey"
           size="xs"
           weight="md"
-          icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
         >
           <Translate id="done" />
         </TextIcon>

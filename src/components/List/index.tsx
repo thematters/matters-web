@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type ListSpacing = 0 | '0' | 'base' | 'loose' | 'xloose'
+type ListSpacing = 0 | 'base' | 'loose' | 'xloose'
 
 interface ListItemProps {
   [key: string]: any
@@ -55,7 +55,7 @@ export const List: React.FC<ListProps> & {
   Item: typeof ListItem
 } = ({
   spacing = [0, 0],
-  hasBorder,
+  hasBorder = true,
 
   children,
 

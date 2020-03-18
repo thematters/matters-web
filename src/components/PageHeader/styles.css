@@ -6,15 +6,8 @@ header {
     border: none;
   }
 }
+
 .title {
   @mixin flex-center-space-between;
   flex-wrap: wrap;
-}
-
-.description {
-  margin-top: var(--spacing-base);
-
-  color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
-  white-space: pre-wrap;
 }

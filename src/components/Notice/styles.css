@@ -9,8 +9,8 @@
 .avatar-wrap {
   flex-shrink: 0;
 
-  margin-right: var(--spacing-base);
-  width: 2.5rem;
+  margin-right: var(--spacing-x-tight);
+  width: 2rem;
 
   &.multi {
     & :global(.avatar) {
@@ -35,6 +35,11 @@
 
 .content-wrap {
   flex-grow: 1;
+  padding-top: var(--spacing-xx-tight);
+
+  &.overflow-hidden {
+    overflow: hidden;
+  }
 
   & h4 {
     margin-bottom: var(--spacing-xx-tight);
@@ -46,9 +51,38 @@
       font-weight: var(--font-weight-medium);
     }
   }
+
+  & .head-wrap {
+    @mixin flex-start-space-between;
+    margin-bottom: var(--spacing-x-tight);
+
+    & h4 {
+      margin: 0;
+    }
+
+    & section.date {
+      flex-shrink: 0;
+      margin: 0 0 0 var(--spacing-xx-tight);
+    }
+  }
 }
 
-.comment-content {
+.icon-wrap {
+  padding: var(--spacing-x-tight);
+}
+
+.multi-actor-avatars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-tight);
+
+  & :global(a) {
+    margin-right: var(--spacing-x-tight);
+  }
+}
+
+.sub-content {
   margin-top: var(--spacing-tight);
 }
 

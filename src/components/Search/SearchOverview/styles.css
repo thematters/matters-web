@@ -1,0 +1,49 @@
+.recent-searches {
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-xx-tight);
+    padding: 0 var(--spacing-base);
+
+    & li {
+      margin-bottom: var(--spacing-tight);
+
+      &:not(:last-child) {
+        margin-right: var(--spacing-tight);
+      }
+
+      & .key {
+        display: inline-flex;
+        padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+
+        border-radius: 2rem;
+        background: var(--color-grey-lighter);
+
+        & :global(.text) {
+          @mixin line-clamp;
+        }
+
+        &:hover,
+        &:focus {
+          background: var(--color-green-lighter);
+        }
+      }
+    }
+  }
+
+  &.inPage ul li :global(> a) {
+    font-size: var(--font-size-md);
+  }
+}
+
+.frequent-searches {
+  & .key {
+    @mixin line-clamp;
+    color: var(--color-matters-green);
+    font-size: var(--font-size-sm);
+  }
+
+  &.inPage .key {
+    font-size: var(--font-size-md);
+  }
+}

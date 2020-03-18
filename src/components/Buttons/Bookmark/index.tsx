@@ -8,6 +8,12 @@ import Unsubscribe from './Unsubscribe'
 
 import { BookmarkArticle } from './__generated__/BookmarkArticle'
 
+interface BookmarkButtonProps {
+  article: BookmarkArticle
+  size?: Extract<IconSize, 'md-s'>
+  inCard: boolean
+}
+
 const fragments = {
   article: gql`
     fragment BookmarkArticle on Article {
@@ -19,11 +25,9 @@ const fragments = {
 
 export const BookmarkButton = ({
   article,
-  size
-}: {
-  article: BookmarkArticle
-  size?: Extract<IconSize, 'md-s'>
-}) => {
+  size,
+  inCard
+}: BookmarkButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   if (article.subscribed) {
@@ -32,6 +36,7 @@ export const BookmarkButton = ({
         articleId={article.id}
         size={size}
         disabled={viewer.isArchived || viewer.isFrozen}
+        inCard={inCard}
       />
     )
   } else {
@@ -40,6 +45,7 @@ export const BookmarkButton = ({
         articleId={article.id}
         size={size}
         disabled={viewer.isArchived || viewer.isFrozen}
+        inCard={inCard}
       />
     )
   }

@@ -1,4 +1,6 @@
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, TextIcon, Translate } from '~/components'
+
+import styles from './styles.css'
 
 interface SortByProps {
   sortBy: 'hottest' | 'newest'
@@ -7,25 +9,50 @@ interface SortByProps {
 
 const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isHottest = sortBy === 'hottest'
+  const isNewset = sortBy === 'newest'
+
+  const buttonProps = {
+    size: ['6rem', '2rem']
+  } as ButtonProps
 
   return (
-    <Button
-      size={[null, '1.5rem']}
-      spacing={[0, 'xtight']}
-      bgHoverColor="green-lighter"
-      onClick={() => {
-        setSortBy(isHottest ? 'newest' : 'hottest')
-      }}
-    >
-      <TextIcon
-        icon={isHottest ? <Icon.Trends /> : <Icon.HistoryMedium />}
-        size="sm"
-        color="green"
-      >
-        {isHottest && <Translate zh_hant="最新排序" zh_hans="最新排序" />}
-        {!isHottest && <Translate zh_hant="熱門排序" zh_hans="热门排序" />}
-      </TextIcon>
-    </Button>
+    <ul role="tablist">
+      <li role="tab">
+        <Button
+          {...buttonProps}
+          bgColor={isHottest ? 'green-lighter' : 'white'}
+          bgActiveColor={isHottest ? 'green-lighter' : 'grey-lighter'}
+          onClick={() => setSortBy('hottest')}
+        >
+          <TextIcon
+            size="md"
+            color={isHottest ? 'green' : 'grey'}
+            weight="semibold"
+          >
+            <Translate zh_hant="熱門作品" zh_hans="热门作品" />
+          </TextIcon>
+        </Button>
+      </li>
+
+      <li role="tab">
+        <Button
+          {...buttonProps}
+          bgColor={isNewset ? 'green-lighter' : 'white'}
+          bgActiveColor={isNewset ? 'green-lighter' : 'grey-lighter'}
+          onClick={() => setSortBy('newest')}
+        >
+          <TextIcon
+            size="md"
+            color={isNewset ? 'green' : 'grey'}
+            weight="semibold"
+          >
+            <Translate zh_hant="最新作品" zh_hans="最新作品" />
+          </TextIcon>
+        </Button>
+      </li>
+
+      <style jsx>{styles}</style>
+    </ul>
   )
 }
 

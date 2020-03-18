@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Dialog, Icon, TextIcon, Translate } from '~/components'
+import { Button, Dialog, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -18,12 +18,15 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
   return (
     <>
       <Button
-        spacing={['xxtight', 'xtight']}
-        bgHoverColor="grey-lighter"
+        size={['6rem', '2rem']}
+        textColor="green"
+        textActiveColor="white"
+        bgActiveColor="green"
+        borderColor="green"
         onClick={open}
         aria-haspopup="true"
       >
-        <TextIcon icon={<Icon.SettingsMedium />} color="grey-dark">
+        <TextIcon size="md-s" weight="md">
           <Translate
             zh_hant={TEXT.zh_hant.editUserProfile}
             zh_hans={TEXT.zh_hans.editUserProfile}

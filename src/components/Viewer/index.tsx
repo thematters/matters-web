@@ -26,6 +26,12 @@ export const ViewerFragments = {
       settings {
         language
       }
+      followees(input: { first: 0 }) {
+        totalCount
+      }
+      followers(input: { first: 0 }) {
+        totalCount
+      }
     }
   `
 }

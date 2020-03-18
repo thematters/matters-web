@@ -4,12 +4,13 @@ import { useContext } from 'react'
 
 import {
   Button,
+  Card,
   EmptyTag,
-  Footer,
   Head,
   Icon,
   InfiniteScroll,
-  PageHeader,
+  Layout,
+  List,
   Spinner,
   Tag,
   TagDialog,
@@ -20,9 +21,7 @@ import {
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
-
-import styles from './styles.css'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
 
@@ -66,7 +65,7 @@ const CreateTagButton = () => {
         <Button
           size={[null, '1.5rem']}
           spacing={[0, 'xtight']}
-          bgHoverColor="green-lighter"
+          bgActiveColor="grey-lighter"
           onClick={open}
         >
           <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
@@ -114,69 +113,52 @@ const Tags = () => {
         })
     })
   }
-  const leftEdges = edges.filter((_: any, i: number) => i % 2 === 0)
-  const rightEdges = edges.filter((_: any, i: number) => i % 2 === 1)
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <section className="l-row full">
-        <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {leftEdges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_TAGS,
-                  location: i * 2
-                })
-              }
-            >
-              <Tag tag={node} type="count-fixed" />
-            </li>
-          ))}
-        </ul>
-        <ul className="l-col-2 l-col-sm-4 l-col-lg-6">
-          {rightEdges.map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_TAGS,
-                  location: i * 2 + 1
-                })
-              }
-            >
-              <Tag tag={node} type="count-fixed" />
-            </li>
-          ))}
-        </ul>
-
-        <style jsx>{styles}</style>
-      </section>
+      <List>
+        {edges.map(
+          ({ node, cursor }, i) =>
+            node.__typename === 'Tag' && (
+              <List.Item key={cursor}>
+                <Card
+                  spacing={['base', 'base']}
+                  {...toPath({
+                    page: 'tagDetail',
+                    id: node.id
+                  })}
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.ALL_TAGS,
+                      location: i * 2
+                    })
+                  }
+                >
+                  <Tag tag={node} type="list" />
+                </Card>
+              </List.Item>
+            )
+        )}
+      </List>
     </InfiniteScroll>
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allTags' }} />
+export default () => (
+  <Layout>
+    <Head title={{ id: 'allTags' }} />
 
-        <PageHeader title={<Translate id="allTags" />}>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={
+        <>
+          <Layout.Header.Title id="allTags" />
           <CreateTagButton />
-        </PageHeader>
+        </>
+      }
+      marginBottom={0}
+    />
 
-        <section className="container">
-          <Tags />
-        </section>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-
-      <style jsx>{styles}</style>
-    </main>
-  )
-}
+    <Tags />
+  </Layout>
+)

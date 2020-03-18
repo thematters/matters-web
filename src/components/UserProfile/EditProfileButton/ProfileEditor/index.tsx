@@ -16,7 +16,6 @@ import { useMutation } from '~/components/GQL'
 import { ADD_TOAST } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  randomString,
   translate,
   validateDescription,
   validateDisplayName
@@ -68,7 +67,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
-  const formId = randomString()
+  const formId = 'edit-profile-form'
 
   const {
     values,
@@ -164,6 +163,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Textarea
@@ -198,7 +198,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate id="editUserProfile" />}
+        title="editUserProfile"
         close={closeDialog}
         rightButton={SubmitButton}
       />

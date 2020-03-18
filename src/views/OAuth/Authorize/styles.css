@@ -1,6 +1,10 @@
 .content {
-  padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-x-loose);
+  padding: var(--spacing-base) var(--spacing-loose);
   text-align: left;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base) var(--spacing-xxx-loose) var(--spacing-x-loose);
+  }
 
   & ul {
     padding: 0 var(--spacing-x-tight) var(--spacing-x-loose);
@@ -24,11 +28,17 @@
       }
     }
   }
+}
 
-  & .switch-account {
-    margin-top: var(--spacing-x-loose);
+.current-account {
+  @mixin flex-center-all;
+  margin-top: var(--spacing-x-loose);
+}
 
-    color: var(--color-grey-dark);
-    text-align: center;
-  }
+.switch-account {
+  margin-top: var(--spacing-base);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm);
+  text-align: center;
 }

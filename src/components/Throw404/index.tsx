@@ -1,14 +1,18 @@
-import Error from 'next/error'
+import NextError from 'next/error'
 
-import { ErrorPage } from '~/components'
+import { BackToHomeButton, Error } from '~/components'
 
 export const Throw404 = () => {
   if (process.browser) {
-    return <ErrorPage statusCode={404} />
+    return (
+      <Error statusCode={404} type="not_found">
+        <BackToHomeButton />
+      </Error>
+    )
   }
 
   // @ts-ignore
-  const e = new Error()
+  const e = new NextError()
   e.code = 'ENOENT'
   throw e
 }

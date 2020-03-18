@@ -7,10 +7,9 @@
   bottom: 0;
   margin: 0;
 
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
   transform: translateY(100%);
   opacity: 0;
-  z-index: 5;
+  z-index: var(--z-index-over-global-header);
 }
 
 .show {
@@ -18,19 +17,17 @@
   opacity: 1;
 }
 
-.bg {
-  background-color: var(--color-white);
-  background-size: cover;
-  max-width: 90rem;
-  margin: 0 auto;
-}
-
 .container {
+  @mixin border-top-grey;
+  @mixin border-left-grey;
+  @mixin border-right-grey;
   display: flex;
   flex-direction: column;
 
   position: relative;
-  padding: var(--spacing-base) 0;
+  padding: var(--spacing-base);
+  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
 
   & .slogan {
     @mixin font-serif;
@@ -48,32 +45,10 @@
   }
 
   & .close {
+    display: inline-flex;
     position: absolute;
-    top: 0.625rem;
+    top: 0;
     right: 0;
-  }
-
-  @media (--md-up) {
-    @mixin flex-center-space-between;
-    flex-direction: row;
-    padding: 2.25rem 0;
-
-    & .slogan {
-      @mixin font-serif;
-
-      font-size: var(--font-size-xxl);
-    }
-
-    & .desc {
-      margin: 0;
-
-      color: var(--color-black);
-      font-size: var(--font-size-md);
-      letter-spacing: 2px;
-    }
-
-    & .signup {
-      padding-right: var(--spacing-xx-loose);
-    }
+    padding: var(--spacing-base);
   }
 }

@@ -1,3 +1,4 @@
+import Alert from '@reach/alert'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
@@ -37,13 +38,19 @@ export const ToastInstance = ({
     [color]: !!color,
     'center-x': !customButton
   })
+  const alertType = color === 'red' ? 'assertive' : 'polite'
 
   return (
     <section className={mainClass}>
-      <section>
-        {content && <p className="content">{content}</p>}
-        {subDescription && <p className="sub-description">{subDescription}</p>}
-      </section>
+      <Alert type={alertType}>
+        <section>
+          {content && <p className="content">{content}</p>}
+          {subDescription && (
+            <p className="sub-description">{subDescription}</p>
+          )}
+        </section>
+      </Alert>
+
       {customButton && (
         <section className="custom-button">{customButton}</section>
       )}

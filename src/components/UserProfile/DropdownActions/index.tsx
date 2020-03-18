@@ -1,6 +1,15 @@
 import gql from 'graphql-tag'
 
-import { Button, DropdownDialog, Icon, Menu, Translate } from '~/components'
+import {
+  Button,
+  DropdownDialog,
+  Icon,
+  Menu,
+  ShareDialog,
+  TextIcon,
+  Translate,
+  useResponsive
+} from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
@@ -17,43 +26,81 @@ const fragments = {
   `
 }
 
-const DropdownActions = ({ user }: { user: DropdownActionsUser }) => {
-  return (
-    <BlockUser.Dialog user={user}>
-      {({ open: openDialog }) => (
-        <DropdownDialog
-          dropdown={{
-            content: (
-              <Menu width={'sm'}>
-                <BlockUser.Button user={user} openDialog={openDialog} />
-              </Menu>
-            ),
-            placement: 'bottom-end'
-          }}
-          dialog={{
-            content: (
-              <Menu>
-                <BlockUser.Button user={user} openDialog={openDialog} />
-              </Menu>
-            ),
-            title: <Translate id="moreActions" />
-          }}
-        >
-          {({ open, ref }) => (
-            <Button
-              spacing={['xtight', 'xtight']}
-              bgHoverColor="grey-lighter"
-              aria-label={TEXT.zh_hant.moreActions}
-              aria-haspopup="true"
-              onClick={open}
-              ref={ref}
-            >
-              <Icon.More color="black" size="md-s" />
-            </Button>
-          )}
-        </DropdownDialog>
+interface DropdownActionsProps {
+  user: DropdownActionsUser
+  isMe: boolean
+}
+
+interface DialogProps {
+  openShareDialog: () => void
+  openBlockUserDialog: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
+
+const BaseDropdownActions = ({
+  user,
+  isMe,
+  openShareDialog,
+  openBlockUserDialog
+}: BaseDropdownActionsProps) => {
+  const isSmallUp = useResponsive('sm-up')
+  const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
+    <Menu width={isInDropdown ? 'sm' : undefined}>
+      <Menu.Item onClick={openShareDialog}>
+        <TextIcon icon={<Icon.Share size="md" />} size="md" spacing="base">
+          <Translate zh_hant="分享主頁" zh_hans="分享主页" />
+        </TextIcon>
+      </Menu.Item>
+
+      {!isMe && (
+        <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
       )}
-    </BlockUser.Dialog>
+    </Menu>
+  )
+
+  return (
+    <DropdownDialog
+      dropdown={{
+        content: <Content isInDropdown />,
+        placement: 'bottom-end'
+      }}
+      dialog={{
+        content: <Content />,
+        title: 'moreActions'
+      }}
+    >
+      {({ open, ref }) => (
+        <Button
+          bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
+          aria-label={TEXT.zh_hant.moreActions}
+          aria-haspopup="true"
+          onClick={open}
+          ref={ref}
+        >
+          <Icon.MoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
+        </Button>
+      )}
+    </DropdownDialog>
+  )
+}
+
+const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+  return (
+    <ShareDialog>
+      {({ open: openShareDialog }) => (
+        <BlockUser.Dialog user={user}>
+          {({ open: openBlockUserDialog }) => (
+            <BaseDropdownActions
+              user={user}
+              isMe={isMe}
+              openShareDialog={openShareDialog}
+              openBlockUserDialog={openBlockUserDialog}
+            />
+          )}
+        </BlockUser.Dialog>
+      )}
+    </ShareDialog>
   )
 }
 

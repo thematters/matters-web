@@ -2,20 +2,18 @@ import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useRouter } from 'next/router'
 
 import {
   ArticleDigestFeed,
   InfiniteScroll,
   List,
-  LoadMore,
-  PageHeader,
   Spinner,
-  Translate,
-  useResponsive
+  Translate
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
 
@@ -42,8 +40,10 @@ const SEARCH_ARTICLES = gql`
   ${ArticleDigestFeed.fragments.article}
 `
 
-const SearchArticles = ({ q }: { q: string }) => {
-  const isMediumUp = useResponsive('md-up')
+const SearchArticles = () => {
+  const router = useRouter()
+  const q = getQuery({ router, key: 'q' })
+
   const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
     {
@@ -61,12 +61,7 @@ const SearchArticles = ({ q }: { q: string }) => {
   const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <EmptySearch
-        inSidebar={false}
-        description={<Translate id="emptySearchResults" />}
-      />
-    )
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   const loadMore = () => {
@@ -89,12 +84,8 @@ const SearchArticles = ({ q }: { q: string }) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={isMediumUp && pageInfo.hasNextPage}
-      loadMore={loadMore}
-    >
-      <PageHeader is="h2" title={<Translate id="article" />} />
-      <List hasBorder>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
@@ -113,10 +104,6 @@ const SearchArticles = ({ q }: { q: string }) => {
             )
         )}
       </List>
-
-      {!isMediumUp && pageInfo.hasNextPage && (
-        <LoadMore onClick={loadMore} loading={loading} />
-      )}
     </InfiniteScroll>
   )
 }

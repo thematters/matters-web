@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
 
 import { Translate } from '~/components'
-import { HeaderContext } from '~/components/GlobalHeader/Context'
 import { useMutation } from '~/components/GQL'
 
 import Collapsable from '../Collapsable'
@@ -35,10 +33,14 @@ const UPDATE_TAGS = gql`
   ${fragments.draft}
 `
 
-const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
+interface AddTagsProps {
+  draft: AddTagsDraft
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+}
+
+const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
   const [updateTags] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
-  const { updateHeaderState } = useContext(HeaderContext)
-  const draftId = draft.id
+  // const draftId = draft.id
   const tags = draft.tags || []
   const hasTags = tags.length > 0
   const isPending = draft.publishState === 'pending'
@@ -48,25 +50,25 @@ const AddTags = ({ draft }: { draft: AddTagsDraft }) => {
     'u-area-disable': isPending || isPublished
   })
   const addTag = async (tag: string) => {
-    updateHeaderState({ type: 'draft', state: 'saving', draftId })
+    setSaveStatus('saving')
     try {
       await updateTags({
         variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
       })
-      updateHeaderState({ type: 'draft', state: 'saved', draftId })
+      setSaveStatus('saved')
     } catch (e) {
-      updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
+      setSaveStatus('saveFailed')
     }
   }
   const deleteTag = async (tag: string) => {
-    updateHeaderState({ type: 'draft', state: 'saving', draftId })
+    setSaveStatus('saving')
     try {
       await updateTags({
         variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
       })
-      updateHeaderState({ type: 'draft', state: 'saved', draftId })
+      setSaveStatus('saved')
     } catch (e) {
-      updateHeaderState({ type: 'draft', state: 'saveFailed', draftId })
+      setSaveStatus('saveFailed')
     }
   }
 

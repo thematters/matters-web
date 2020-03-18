@@ -1,0 +1,38 @@
+:root {
+  --grid-gutter: 40px;
+}
+
+.side-nav {
+  position: sticky;
+  top: 0;
+
+  margin-right: calc(var(--grid-gutter) * -1);
+  padding-top: var(--spacing-x-loose);
+
+  text-align: center;
+
+  @media (--md-up) {
+    margin-right: 0;
+    text-align: left;
+  }
+}
+
+.logo {
+  margin-bottom: var(--spacing-xx-loose);
+
+  & a {
+    display: inline-flex;
+  }
+}
+
+ul {
+  & li {
+    & + li {
+      margin-top: var(--spacing-x-loose);
+    }
+  }
+}
+
+.dropdown-menu {
+  width: 12rem;
+}

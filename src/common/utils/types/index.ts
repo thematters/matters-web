@@ -26,6 +26,7 @@ export default gql`
     readCivicLikerDialog: Boolean!
     wall: Boolean!
     push: Push!
+    routeHistory: [URL!]
   }
 
   type ClientInfo {

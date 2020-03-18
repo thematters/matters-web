@@ -3,11 +3,10 @@ import gql from 'graphql-tag'
 
 import {
   EmptyWarning,
-  Footer,
   Head,
   InfiniteScroll,
+  Layout,
   List,
-  PageHeader,
   Spinner,
   Translate,
   UserDigest
@@ -86,7 +85,7 @@ const Authors = () => {
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
+      <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <UserDigest.Rich
@@ -106,22 +105,16 @@ const Authors = () => {
   )
 }
 
-export default () => {
-  return (
-    <main className="l-row">
-      <article className="l-col-4 l-col-md-5 l-col-lg-8">
-        <Head title={{ id: 'allAuthors' }} />
+export default () => (
+  <Layout>
+    <Layout.Header
+      left={<Layout.Header.BackButton />}
+      right={<Layout.Header.Title id="allAuthors" />}
+      marginBottom={0}
+    />
 
-        <PageHeader title={<Translate id="allAuthors" />} />
+    <Head title={{ id: 'allAuthors' }} />
 
-        <section>
-          <Authors />
-        </section>
-      </article>
-
-      <aside className="l-col-4 l-col-md-3 l-col-lg-4">
-        <Footer />
-      </aside>
-    </main>
-  )
-}
+    <Authors />
+  </Layout>
+)

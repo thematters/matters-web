@@ -1,8 +1,6 @@
 import autosize from 'autosize'
 import { useEffect, useRef } from 'react'
 
-import { randomString } from '~/common/utils'
-
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -40,8 +38,8 @@ const Textarea: React.FC<TextareaProps> = ({
   ...textareaProps
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
-  const fieldId = randomString()
-  const fieldMsgId = randomString()
+  const fieldId = `field-${name}`
+  const fieldMsgId = `field-msg-${name}`
 
   useEffect(() => {
     if (node && node.current) {

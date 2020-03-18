@@ -5,12 +5,11 @@ import { Card, CardProps } from '~/components'
 
 import styles from './styles.css'
 
-type MenuItemProps = {} & CardProps
+type MenuItemProps = CardProps
 
 const MenuItem: React.FC<MenuItemProps> = ({
   children,
   spacing = ['tight', 'base'],
-  bgHoverColor = 'grey-lighter',
   ...restProps
 }) => {
   const menuItemClass = classNames({
@@ -19,7 +18,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
   return (
     <li className={menuItemClass} role="menuitem">
-      <Card spacing={spacing} bgHoverColor={bgHoverColor} {...restProps}>
+      <Card spacing={spacing} {...restProps}>
         {children}
       </Card>
 

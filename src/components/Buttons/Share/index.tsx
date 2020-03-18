@@ -1,74 +1,59 @@
-import { useQuery } from '@apollo/react-hooks'
+import {
+  Button,
+  ButtonProps,
+  Icon,
+  IconColor,
+  IconSize,
+  ShareDialog,
+  ShareDialogProps
+} from '~/components'
 
-import { Button, Icon, IconColor, IconSize } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import { TEXT } from '~/common/enums'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+type ShareButtonBaseProps = {
+  hasIcon?: boolean
+  iconSize?: Extract<IconSize, 'md-s'>
+  iconColor?: Extract<IconColor, 'grey' | 'black'>
+  inCard: boolean
+} & Omit<ShareDialogProps, 'children'>
 
-import { ShareDialog } from './ShareDialog'
-
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
-
-interface ShareButtonProps {
-  title?: string
-  path?: string
-
-  size?: Extract<IconSize, 'md-s'>
-  color?: Extract<IconColor, 'grey' | 'black'>
-}
+type ShareButtonProps = ShareButtonBaseProps &
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
 export const ShareButton: React.FC<ShareButtonProps> = ({
-  title,
-  path,
+  children,
 
+  bgColor,
+  hasIcon = true,
+  iconSize,
+  iconColor = 'black',
+  inCard,
   size,
-  color = 'black'
+  spacing,
+  ...props
 }) => {
-  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' }
-  })
-  const isMobile = data?.clientInfo.isMobile
-
-  const shareLink = process.browser
-    ? path
-      ? `${window.location.origin}${path}`
-      : window.location.href
-    : ''
-  const shareTitle =
-    title || (process.browser ? window.document.title || '' : '')
+  const isGreen = bgColor === 'green'
+  const buttonBgActiveColor = isGreen
+    ? undefined
+    : inCard
+    ? 'grey-lighter-active'
+    : 'grey-lighter'
+  const buttonSpacing = spacing || ['xtight', 'xtight']
 
   return (
-    <ShareDialog title={shareTitle} link={shareLink}>
+    <ShareDialog {...props}>
       {({ open }) => (
         <Button
-          spacing={['xtight', 'xtight']}
-          bgHoverColor="grey-lighter"
+          bgColor={bgColor}
+          size={size}
+          spacing={buttonSpacing}
+          bgActiveColor={buttonBgActiveColor}
           aria-label={TEXT.zh_hant.share}
           aria-haspopup="true"
-          onClick={async () => {
-            const navigator = window.navigator as any
-
-            if (navigator.share && isMobile) {
-              try {
-                await navigator.share({
-                  title: shareTitle,
-                  url: shareLink
-                })
-              } catch (e) {
-                console.error(e)
-              }
-            } else {
-              open()
-            }
-
-            analytics.trackEvent(ANALYTICS_EVENTS, {
-              type: SHARE_TYPE.ROOT,
-              url: shareLink
-            })
-          }}
+          onClick={open}
         >
-          <Icon.Share size={size} color={color} />
+          {hasIcon && <Icon.Share size={iconSize} color={iconColor} />}
+          {children}
         </Button>
       )}
     </ShareDialog>

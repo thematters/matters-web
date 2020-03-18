@@ -15,18 +15,19 @@ type ROUTE_KEY =
   | 'FOLLOW'
   | 'AUTHORS'
   | 'TOPICS'
+  | 'ICYMI'
   | 'SEARCH'
   | 'TAGS'
   | 'TAG_DETAIL'
   | 'USER_ARTICLES'
   | 'USER_COMMENTS'
-  | 'USER_DRAFTS'
-  | 'USER_BOOKMARKS'
-  | 'USER_HISTORY'
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_LEGACY'
+  | 'ME_DRAFTS'
+  | 'ME_BOOKMARKS'
+  | 'ME_HISTORY'
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
@@ -42,10 +43,12 @@ type ROUTE_KEY =
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
-  | 'MISC_ABOUT'
-  | 'MISC_FAQ'
-  | 'MISC_TOS'
-  | 'MISC_GUIDE'
+  | 'HELP'
+  | 'MIGRATION'
+  | 'ABOUT'
+  | 'GUIDE'
+  | 'COMMUNITY'
+  | 'TOS'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -72,6 +75,11 @@ export const ROUTES: Array<{
     key: 'TOPICS',
     href: '/Topics',
     as: '/topics'
+  },
+  {
+    key: 'ICYMI',
+    href: '/Icymi',
+    as: 'icymi'
   },
   {
     key: 'SEARCH',
@@ -107,21 +115,6 @@ export const ROUTES: Array<{
     key: 'USER_COMMENTS',
     href: '/UserComments',
     as: '/@:userName/comments'
-  },
-  {
-    key: 'USER_DRAFTS',
-    href: '/UserDrafts',
-    as: '/@:userName/drafts'
-  },
-  {
-    key: 'USER_BOOKMARKS',
-    href: '/UserBookmarks',
-    as: '/@:userName/bookmarks'
-  },
-  {
-    key: 'USER_HISTORY',
-    href: '/UserHistory',
-    as: '/@:userName/history'
   },
   {
     key: 'USER_FOLLOWERS',
@@ -191,6 +184,21 @@ export const ROUTES: Array<{
   },
 
   // Me
+  {
+    key: 'ME_DRAFTS',
+    href: '/MeDrafts',
+    as: '/me/drafts'
+  },
+  {
+    key: 'ME_BOOKMARKS',
+    href: '/MeBookmarks',
+    as: '/me/bookmarks'
+  },
+  {
+    key: 'ME_HISTORY',
+    href: '/MeHistory',
+    as: '/me/history'
+  },
   {
     key: 'ME_APPRECIATIONS_SENT',
     href: '/MeAppreciationsSent',
@@ -272,24 +280,34 @@ export const ROUTES: Array<{
 
   // Misc
   {
-    key: 'MISC_ABOUT',
-    href: '/MiscAbout',
+    key: 'HELP',
+    href: '/Help',
+    as: '/help'
+  },
+  {
+    key: 'MIGRATION',
+    href: '/Migration',
+    as: '/migration'
+  },
+  {
+    key: 'ABOUT',
+    href: '/About',
     as: '/about'
   },
   {
-    key: 'MISC_FAQ',
-    href: '/MiscFAQ',
-    as: '/faq'
-  },
-  {
-    key: 'MISC_TOS',
-    href: '/MiscToS',
-    as: '/tos'
-  },
-  {
-    key: 'MISC_GUIDE',
-    href: '/MiscGuide',
+    key: 'GUIDE',
+    href: '/Guide',
     as: '/guide'
+  },
+  {
+    key: 'COMMUNITY',
+    href: '/Community',
+    as: '/community'
+  },
+  {
+    key: 'TOS',
+    href: '/ToS',
+    as: '/tos'
   }
 ]
 

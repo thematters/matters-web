@@ -78,25 +78,14 @@ export const ArticleDigestFeed = ({
   })
 
   return (
-    <Card {...path} onClick={onClick}>
-      {inUserArticles && sticky && (
-        <section className="sticky">
-          <TextIcon
-            icon={<Icon.PinMedium />}
-            size="sm"
-            color="grey"
-            weight="md"
-          >
-            <Translate id="stickyArticle" />
-          </TextIcon>
-        </section>
-      )}
-
+    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <header>
         <section className="left">
           <UserDigest.Mini
             user={author}
-            avatarSize="sm"
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
             hasAvatar
             hasDisplayName
           />
@@ -108,6 +97,17 @@ export const ArticleDigestFeed = ({
         </section>
 
         <section className="right">
+          {inUserArticles && sticky && (
+            <TextIcon
+              icon={<Icon.PinMedium />}
+              size="sm"
+              color="grey"
+              weight="md"
+            >
+              <Translate id="stickyArticle" />
+            </TextIcon>
+          )}
+
           <Live article={article} />
           <InactiveState article={article} />
           <CreatedAt article={article} />
@@ -131,6 +131,7 @@ export const ArticleDigestFeed = ({
 
       <FooterActions
         article={article}
+        inCard
         inTagDetailLatest={inTagDetailLatest}
         inTagDetailSelected={inTagDetailSelected}
         inUserArticles={inUserArticles}

@@ -1,5 +1,5 @@
 .spinner {
-  padding: var(--spacing-loose) 0;
+  padding: var(--spacing-x-loose) 0;
   text-align: center;
   line-height: 1;
 }

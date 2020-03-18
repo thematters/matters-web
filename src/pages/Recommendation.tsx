@@ -6,6 +6,7 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   InfiniteScroll,
+  Layout,
   Spinner
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -64,40 +65,36 @@ const Feed = () => {
   }
 
   return (
-    <>
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={() =>
-          fetchMore({
-            variables: {
-              after: pageInfo.endCursor
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) =>
-              mergeConnections({
-                oldData: previousResult,
-                newData: fetchMoreResult,
-                path: connectionPath,
-                dedupe: true
-              })
-          })
-        }
-      >
-        <ul>
-          {edges.map(({ node, cursor }, i) => (
-            <li key={cursor}>
-              <ArticleDigestFeed article={node} />
-            </li>
-          ))}
-        </ul>
-      </InfiniteScroll>
-    </>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={() =>
+        fetchMore({
+          variables: {
+            after: pageInfo.endCursor
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) =>
+            mergeConnections({
+              oldData: previousResult,
+              newData: fetchMoreResult,
+              path: connectionPath,
+              dedupe: true
+            })
+        })
+      }
+    >
+      <ul>
+        {edges.map(({ node, cursor }, i) => (
+          <li key={cursor}>
+            <ArticleDigestFeed article={node} />
+          </li>
+        ))}
+      </ul>
+    </InfiniteScroll>
   )
 }
 
 export default () => (
-  <main className="l-row">
-    <article className="l-col-4 l-col-md-5 l-col-lg-8">
-      <Feed />
-    </article>
-  </main>
+  <Layout>
+    <Feed />
+  </Layout>
 )

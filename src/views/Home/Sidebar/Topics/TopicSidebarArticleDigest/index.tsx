@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { ArticleDigestTitle, Card } from '~/components'
 
@@ -28,9 +27,14 @@ const TopicSidebarArticleDigest = ({
   const path = toPath({ page: 'articleDetail', article })
 
   return (
-    <Card {...path} spacing={['xtight', 0]}>
+    <Card {...path} spacing={['xtight', 0]} bgColor="none">
       <section className="container">
-        <ArticleDigestTitle article={article} textSize="sm" is="h3" />
+        <ArticleDigestTitle
+          article={article}
+          textSize="sm"
+          is="h3"
+          textWeight="md"
+        />
 
         {article.topicScore && (
           <span className="score">{numAbbr(article.topicScore)}</span>

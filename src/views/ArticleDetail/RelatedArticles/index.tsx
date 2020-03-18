@@ -1,6 +1,13 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { ArticleDigestCard, Title, Translate } from '~/components'
+import {
+  ArticleDigestCard,
+  ArticleDigestSidebar,
+  PageHeader,
+  Slides,
+  Translate
+} from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -8,6 +15,11 @@ import { analytics } from '~/common/utils'
 import styles from './styles.css'
 
 import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
+
+interface RelatedArticlesProps {
+  article: RelatedArticlesType
+  inSidebar?: boolean
+}
 
 const fragments = {
   article: gql`
@@ -17,40 +29,70 @@ const fragments = {
         edges {
           cursor
           node {
+            ...ArticleDigestSidebarArticle
             ...ArticleDigestCardArticle
           }
         }
       }
     }
+    ${ArticleDigestSidebar.fragments.article}
     ${ArticleDigestCard.fragments.article}
   `
 }
 
-const RelatedArticles = ({ article }: { article: RelatedArticlesType }) => {
+const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   const edges = article.relatedArticles.edges
 
   if (!edges || edges.length <= 0) {
     return null
   }
 
+  const relatedArticlesClass = classNames({
+    'related-articles': true,
+    inSidebar
+  })
+
+  const onClick = (i: number) => () =>
+    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+      type: FEED_TYPE.RELATED_ARTICLE,
+      location: i,
+      entrance: article.id
+    })
+
+  const Header = (
+    <PageHeader
+      title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
+      hasNoBorder
+    />
+  )
+
+  if (!inSidebar) {
+    return (
+      <section className={relatedArticlesClass}>
+        <Slides header={Header} bgColor="green-lighter">
+          {edges.map(({ node, cursor }, i) => (
+            <Slides.Item key={cursor}>
+              <ArticleDigestCard article={node} onClick={onClick(i)} />
+            </Slides.Item>
+          ))}
+        </Slides>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
-    <section className="related-articles">
-      <Title type="nav" is="h2">
-        <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />
-      </Title>
+    <section className={relatedArticlesClass}>
+      {Header}
 
       <ul>
         {edges.map(({ node, cursor }, i) => (
           <li key={cursor}>
-            <ArticleDigestCard
+            <ArticleDigestSidebar
               article={node}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.RELATED_ARTICLE,
-                  location: i,
-                  entrance: article.id
-                })
-              }
+              titleTextSize="sm"
+              hasCover
+              onClick={onClick(i)}
             />
           </li>
         ))}

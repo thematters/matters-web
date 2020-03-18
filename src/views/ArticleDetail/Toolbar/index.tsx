@@ -1,47 +1,33 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { BookmarkButton, ShareButton } from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 
-import AppreciationButton from './AppreciationButton'
-import Appreciators from './Appreciators'
-import ResponseButton from './ResponseButton'
+import AppreciationButton from '../AppreciationButton'
+import CommentBar from './CommentBar'
 import styles from './styles.css'
 
-import { ArticleTool } from './__generated__/ArticleTool'
+import { ArticleToolbar } from './__generated__/ArticleToolbar'
 
-const ARTICLE_TOOL = gql`
-  query ArticleTool($mediaHash: String) {
+const ARTICLE_TOOLBAR = gql`
+  query ArticleToolbar($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      ...AppreciationArticleDetail
-      ...AppreciatorsArticle
+      ...AppreciationButtonArticle
+      ...CommentBarArticle
       ...BookmarkArticle
-      ...ResponseButtonArticle
       ...DropdownActionsArticle
     }
   }
   ${AppreciationButton.fragments.article}
-  ${Appreciators.fragments.article}
+  ${CommentBar.fragments.article}
   ${BookmarkButton.fragments.article}
-  ${ResponseButton.fragments.article}
   ${DropdownActions.fragments.article}
 `
 
-const Toolbar = ({
-  mediaHash,
-  placement,
-  fixed,
-  mobile
-}: {
-  mediaHash: string
-  placement: 'bottom' | 'left'
-  fixed?: boolean
-  mobile?: boolean
-}) => {
-  const { data, loading } = useQuery<ArticleTool>(ARTICLE_TOOL, {
+const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
+  const { data, loading } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
     variables: { mediaHash }
   })
 
@@ -51,42 +37,25 @@ const Toolbar = ({
 
   const { article } = data
 
-  if (placement === 'left') {
-    return (
-      <section className="toolbar-left">
-        <div className="container">
-          <AppreciationButton article={article} />
-          <ResponseButton article={article} textPlacement="bottom" />
-          <BookmarkButton article={article} size="md-s" />
-          <ShareButton size="md-s" />
-        </div>
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
-
-  const bottomToolbarClass = classNames({
-    'toolbar-bottom': true,
-    fixed
-  })
-
   return (
-    <section className={bottomToolbarClass}>
-      <section className="left">
-        <AppreciationButton article={article} />
-        <Appreciators article={article} />
+    <section className="toolbar">
+      <section className="appreciate-button">
+        <AppreciationButton article={article} inFixedToolbar />
       </section>
 
-      <section className="right">
-        {mobile && fixed && (
-          <AppreciationButton article={article} inFixedToolbar />
-        )}
-        <ResponseButton article={article} />
-        <BookmarkButton article={article} size="md-s" />
-        <ShareButton size="md-s" />
-        {!fixed && (
-          <DropdownActions article={article} color="black" size="md-s" />
-        )}
+      <section className="comment-bar">
+        <CommentBar article={article} />
+      </section>
+
+      <section className="buttons">
+        <BookmarkButton article={article} size="md-s" inCard={false} />
+        <ShareButton iconSize="md-s" inCard={false} />
+        <DropdownActions
+          article={article}
+          color="black"
+          size="md-s"
+          inCard={false}
+        />
       </section>
 
       <style jsx>{styles}</style>

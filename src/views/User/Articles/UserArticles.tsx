@@ -10,7 +10,6 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  Throw404,
   Translate,
   ViewerContext
 } from '~/components'
@@ -21,14 +20,16 @@ import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
+import UserTabs from '../UserTabs'
 import styles from './styles.css'
 
-import { UserArticles as UserArticlesTypes } from '~/components/GQL/queries/__generated__/UserArticles'
+import {
+  UserArticles as UserArticlesTypes,
+  UserArticles_user
+} from '~/components/GQL/queries/__generated__/UserArticles'
 
-const ArticleSummaryInfo = ({ data }: { data: UserArticlesTypes }) => {
-  const { articleCount: articles, totalWordCount: words } = (data &&
-    data.user &&
-    data.user.status) || {
+const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
+  const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0
   }
@@ -59,10 +60,7 @@ const UserArticles = () => {
     USER_ARTICLES,
     { variables: { userName } }
   )
-
-  if (!userName) {
-    return <Throw404 />
-  }
+  const user = data?.user
 
   if (loading) {
     return <Spinner />
@@ -72,13 +70,12 @@ const UserArticles = () => {
     return <QueryError error={error} />
   }
 
-  if (!data || !data.user) {
-    return <Throw404 />
+  if (!user || user?.status?.state === 'archived') {
+    return null
   }
 
-  const user = data.user
   const connectionPath = 'user.articles'
-  const { edges, pageInfo } = data.user.articles
+  const { edges, pageInfo } = user.articles
 
   const CustomHead = () => (
     <Head
@@ -95,7 +92,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <ArticleSummaryInfo data={data} />
+        <UserTabs />
         <EmptyArticle />
       </>
     )
@@ -122,9 +119,13 @@ const UserArticles = () => {
   return (
     <>
       <CustomHead />
-      <ArticleSummaryInfo data={data} />
+
+      <UserTabs />
+
+      <ArticleSummaryInfo user={user} />
+
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder>
+        <List>
           {edges.map(({ node, cursor }, i) => {
             if (
               node.articleState !== 'active' &&

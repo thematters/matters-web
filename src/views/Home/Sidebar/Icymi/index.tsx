@@ -6,7 +6,7 @@ import { ArticleDigestSidebar, List, Spinner } from '~/components'
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import SidebarHeader from '../SidebarHeader'
+import SectionHeader from '../../SectionHeader'
 
 import { SidebarIcymi } from './__generated__/SidebarIcymi'
 
@@ -43,9 +43,9 @@ const ICYMI = () => {
 
   return (
     <section>
-      <SidebarHeader type="icymi" />
+      <SectionHeader type="icymi" />
 
-      <List spacing={['loose', 0]}>
+      <List spacing={['loose', 0]} hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestSidebar

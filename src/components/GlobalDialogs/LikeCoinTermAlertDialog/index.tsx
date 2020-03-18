@@ -11,8 +11,8 @@ const LikeCoinTermAlertDialog = () => {
 
   const allowPaths = [
     PATHS.HOME.href,
-    PATHS.MISC_ABOUT.href,
-    PATHS.MISC_FAQ.href,
+    PATHS.ABOUT.href,
+    PATHS.GUIDE.href,
     PATHS.ME_SETTINGS_ACCOUNT.href,
     PATHS.ME_APPRECIATIONS_RECEIVED.href,
     PATHS.ME_APPRECIATIONS_SENT.href

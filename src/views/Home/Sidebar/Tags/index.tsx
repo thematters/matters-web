@@ -1,14 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Tag } from '~/components'
+import { Card, List, Spinner, Tag } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 
-import SidebarHeader from '../SidebarHeader'
-import styles from './styles.css'
+import SectionHeader from '../../SectionHeader'
 
 import { SidebarTags } from './__generated__/SidebarTags'
 
@@ -45,27 +44,34 @@ const Tags = () => {
 
   return (
     <section>
-      <SidebarHeader type="tags" />
+      <SectionHeader type="tags" />
 
       {loading && <Spinner />}
 
-      <ul>
-        {edges.map(({ node, cursor }, i) => (
-          <li
-            key={cursor}
-            onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.TAGS,
-                location: i
-              })
-            }
-          >
-            <Tag tag={node} size="sm" type="count-fixed" />
-          </li>
-        ))}
-      </ul>
-
-      <style jsx>{styles}</style>
+      <List>
+        {edges.map(
+          ({ node, cursor }, i) =>
+            node.__typename === 'Tag' && (
+              <List.Item key={cursor}>
+                <Card
+                  {...toPath({
+                    page: 'tagDetail',
+                    id: node.id
+                  })}
+                  bgColor="none"
+                  onClick={() =>
+                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                      type: FEED_TYPE.TAGS,
+                      location: i
+                    })
+                  }
+                >
+                  <Tag tag={node} type="list" />
+                </Card>
+              </List.Item>
+            )
+        )}
+      </List>
     </section>
   )
 }
