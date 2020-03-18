@@ -28,7 +28,6 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
           commentSubscribed
           downstream
           commentPinned
-          commentVoted
           officialNotice
           reportFeedback
         }
@@ -56,7 +55,6 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
           commentSubscribed
           downstream
           commentPinned
-          commentVoted
           officialNotice
           reportFeedback
         }
@@ -76,7 +74,6 @@ type SettingItemKey =
   | 'commentSubscribed'
   | 'downstream'
   | 'commentPinned'
-  | 'commentVoted'
   | 'officialNotice'
   | 'reportFeedback'
 
@@ -127,10 +124,6 @@ const settingsMap: {
     {
       key: 'commentPinned',
       title: <Translate zh_hant="評論被置頂" zh_hans="评论被置顶" />
-    },
-    {
-      key: 'commentVoted',
-      title: <Translate zh_hant="評論被頂踩" zh_hans="评论被顶踩" />
     }
   ],
   preference: [
