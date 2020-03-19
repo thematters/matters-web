@@ -13,6 +13,7 @@ import { DigestTag } from './__generated__/DigestTag'
 interface TagProps {
   tag: DigestTag
   type?: 'list' | 'title' | 'inline'
+  textSize?: 'sm'
   active?: boolean
 }
 
@@ -28,7 +29,7 @@ const fragments = {
   `
 }
 
-export const Tag = ({ tag, type = 'list', active }: TagProps) => {
+export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [type]: type,
@@ -86,7 +87,11 @@ export const Tag = ({ tag, type = 'list', active }: TagProps) => {
   return (
     <Link {...path}>
       <a className={tagClasses}>
-        <TextIcon icon={<Icon.HashTag {...iconProps} />} {...textIconProps}>
+        <TextIcon
+          icon={<Icon.HashTag {...iconProps} />}
+          {...textIconProps}
+          size={textSize}
+        >
           {tag.content}
         </TextIcon>
 

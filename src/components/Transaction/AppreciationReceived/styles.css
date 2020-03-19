@@ -28,7 +28,6 @@
   & footer {
     & :global(h2) {
       @mixin line-clamp;
-      -webkit-line-clamp: 1;
     }
   }
 }
