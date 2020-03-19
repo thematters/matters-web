@@ -14,29 +14,22 @@ interface AppreciateButtonProps {
   onClick?: () => void
   count?: number | 'MAX'
   total: number
-  inFixedToolbar?: boolean
 }
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   disabled,
   onClick,
   count,
-  total,
-  inFixedToolbar
+  total
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null)
   const buttonClass = classNames({
     'appreciate-button': true,
-    clap: true,
-    circle: !inFixedToolbar
+    clap: true
   })
   const countClass = classNames({
     count: true,
     max: count === 'MAX'
-  })
-  const totalClass = classNames({
-    total: true,
-    inFixedToolbar
   })
 
   return (
@@ -48,7 +41,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         disabled={disabled}
         onClick={() => {
           if (btnRef.current) {
-            clap.clap(btnRef.current, !!inFixedToolbar)
+            clap.clap(btnRef.current)
           }
 
           if (onClick) {
@@ -62,29 +55,10 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           }
         }}
       >
-        {inFixedToolbar && (
-          <>
-            <Icon.Like
-              className="icon-like"
-              color="green"
-              style={{ width: 20, height: 20 }}
-            />
-            <span className={totalClass}>{numAbbr(total)}</span>
-          </>
-        )}
-
-        {!inFixedToolbar && (
-          <>
-            <Icon.Like
-              className="icon-like"
-              style={{ width: 22, height: 22 }}
-            />
-            {count && <span className={countClass}>{count}</span>}
-          </>
-        )}
+        <Icon.Like className="icon-like" size="md" color="green" />
+        <span className="total">{numAbbr(total)}</span>
+        {count && <span className={countClass}>{count}</span>}
       </button>
-
-      {!inFixedToolbar && <span className={totalClass}>{numAbbr(total)}</span>}
 
       <style jsx>{styles}</style>
       <style jsx global>

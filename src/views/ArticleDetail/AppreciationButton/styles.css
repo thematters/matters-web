@@ -1,17 +1,9 @@
-.container {
-  display: inline-block;
-
-  color: var(--color-matters-green);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.16666667;
-  text-align: center;
-}
-
 .appreciate-button {
   position: relative;
 
-  &.circle {
+  color: var(--color-matters-green);
+
+  @media (--sm-up) {
     width: 3rem;
     height: 3rem;
 
@@ -29,41 +21,45 @@
 }
 
 .count {
-  @mixin flex-center-all;
+  display: none;
 
-  position: absolute;
-  top: -0.25rem;
-  right: -0.25rem;
-  width: 1rem;
-  height: 1rem;
+  @media (--sm-up) {
+    @mixin flex-center-all;
 
-  color: var(--color-white);
-  font-size: var(--font-size-xs-s);
-  font-weight: var(--font-weight-bold);
-  line-height: 1rem;
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 1rem;
+    height: 1rem;
 
-  background: var(--color-matters-green);
-  border-radius: 50%;
+    color: var(--color-white);
+    font-size: var(--font-size-xs-s);
+    font-weight: var(--font-weight-bold);
+    line-height: 1rem;
 
-  &.max {
-    letter-spacing: -1px;
-    letter-spacing: -0.5px;
-    font-size: 6px;
-    font-weight: var(--font-weight-bolder);
+    background: var(--color-matters-green);
+    border-radius: 50%;
+
+    &.max {
+      letter-spacing: -1px;
+      letter-spacing: -0.5px;
+      font-size: 6px;
+      font-weight: var(--font-weight-bolder);
+    }
   }
 }
 
 .total {
-  display: block;
-  margin-top: var(--spacing-xx-tight);
+  display: inline-block;
+  margin-top: 0;
+  margin-left: var(--spacing-x-tight);
 
-  &.inFixedToolbar {
-    display: inline-block;
-    margin-top: 0;
-    margin-left: var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1rem;
+  vertical-align: middle;
 
-    font-weight: var(--font-weight-medium);
-    vertical-align: middle;
-    line-height: 1;
+  @media (--sm-up) {
+    display: none;
   }
 }
