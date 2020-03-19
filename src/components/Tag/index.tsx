@@ -90,7 +90,7 @@ export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
         <TextIcon
           icon={<Icon.HashTag {...iconProps} />}
           {...textIconProps}
-          size={textSize}
+          size={textSize || textIconProps.size}
         >
           {tag.content}
         </TextIcon>
