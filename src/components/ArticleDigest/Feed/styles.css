@@ -92,6 +92,7 @@ header {
     }
 
     & .description {
+      flex-grow: 1;
       margin: 0;
 
       @mixin line-clamp;
