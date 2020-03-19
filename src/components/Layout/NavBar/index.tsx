@@ -1,44 +1,13 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { Button, Icon, ViewerContext, WriteButton } from '~/components'
+import { Icon, ViewerContext, WriteButton } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
 import UnreadIcon from '../UnreadIcon'
+import NavListItem from './NavListItem'
 import styles from './styles.css'
-
-interface NavListItemProps {
-  name: React.ReactNode
-  href: string
-  as: string
-  icon: React.ReactNode
-  activeIcon: React.ReactNode
-  active: boolean
-}
-
-const NavListItem = ({
-  name,
-  href,
-  as,
-  icon,
-  activeIcon,
-  active
-}: NavListItemProps) => (
-  <li>
-    <Button
-      href={href}
-      as={as}
-      bgActiveColor="grey-lighter"
-      size={['2rem', '2rem']}
-      aira-label={name}
-    >
-      {active ? activeIcon : icon}
-    </Button>
-
-    <style jsx>{styles}</style>
-  </li>
-)
 
 const NavBar = () => {
   const router = useRouter()
