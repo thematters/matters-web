@@ -27,6 +27,8 @@
 
 ul {
   & li {
+    display: flex;
+
     & + li {
       margin-top: var(--spacing-x-loose);
     }

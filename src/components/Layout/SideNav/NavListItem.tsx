@@ -1,3 +1,4 @@
+import jump from 'jump.js'
 import { forwardRef } from 'react'
 
 import { Button, ButtonProps, TextIcon } from '~/components'
@@ -10,6 +11,7 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   isMediumUp: boolean
+  canScrollTop?: boolean
 } & ButtonProps
 
 const NavListItem = forwardRef(
@@ -20,32 +22,53 @@ const NavListItem = forwardRef(
       activeIcon,
       active,
       isMediumUp,
-      ...buttonProps
+      canScrollTop = true,
+      ...props
     }: NavListItemProps,
     ref
-  ) => (
-    <li>
-      <Button
-        bgActiveColor="grey-lighter"
-        spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
-        size={isMediumUp ? undefined : ['2rem', '2rem']}
-        ref={ref}
-        {...buttonProps}
-      >
-        <TextIcon
-          icon={active ? activeIcon : icon}
-          size="lg"
-          weight="semibold"
-          spacing="xtight"
-          color={active ? 'green' : 'black'}
-        >
-          {isMediumUp && name}
-        </TextIcon>
-      </Button>
+  ) => {
+    const { onClick, href, as, ...restProps } = props
+    const buttonProps =
+      active && canScrollTop
+        ? {
+            onClick: () => {
+              if (onClick) {
+                buttonProps.onClick()
+              }
 
-      <style jsx>{styles}</style>
-    </li>
-  )
+              if (active) {
+                console.log('...jump')
+                jump(document.body)
+              }
+            },
+            ...restProps
+          }
+        : props
+
+    return (
+      <li>
+        <Button
+          bgActiveColor="grey-lighter"
+          spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
+          size={isMediumUp ? undefined : ['2rem', '2rem']}
+          ref={ref}
+          {...buttonProps}
+        >
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size="lg"
+            weight="semibold"
+            spacing="xtight"
+            color={active ? 'green' : 'black'}
+          >
+            {isMediumUp && name}
+          </TextIcon>
+        </Button>
+
+        <style jsx>{styles}</style>
+      </li>
+    )
+  }
 )
 
 export default NavListItem

@@ -33,8 +33,9 @@ const SideNav = () => {
   const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
   const isInSearch = router.pathname === PATHS.SEARCH.href
   const isInMe =
-    router.asPath.indexOf('/me') >= 0 ||
-    router.query.userName === viewerUserName
+    router.asPath !== PATHS.ME_NOTIFICATIONS.as &&
+    (router.asPath.indexOf('/me') >= 0 ||
+      router.query.userName === viewerUserName)
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
 
   return (
@@ -113,6 +114,7 @@ const SideNav = () => {
               activeIcon={<MeAvatar user={viewer} active />}
               active={isInMe}
               isMediumUp={isMediumUp}
+              canScrollTop={false}
               aira-haspopup="true"
             />
           </Dropdown>
