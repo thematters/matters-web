@@ -81,7 +81,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
                 key={index}
               />
             ))}
-            {appreciatorCount > 4 && (
+            {appreciatorCount >= 4 && (
               <span className="appreciator-count">{appreciatorCount}</span>
             )}
           </section>
