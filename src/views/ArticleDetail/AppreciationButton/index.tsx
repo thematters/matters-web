@@ -9,12 +9,16 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 
+import Appreciators from '../Toolbar/Appreciators'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { AppreciateArticle } from './__generated__/AppreciateArticle'
+import {
+  AppreciateArticle,
+  AppreciateArticle_appreciateArticle
+} from './__generated__/AppreciateArticle'
 import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
 const fragments = {
@@ -39,8 +43,10 @@ const APPRECIATE_ARTICLE = gql`
       appreciationsReceivedTotal
       hasAppreciate
       appreciateLeft
+      ...AppreciatorsArticle
     }
   }
+  ${Appreciators.fragments.article}
 `
 
 const AppreciationButton = ({
@@ -76,7 +82,7 @@ const AppreciationButton = ({
           hasAppreciate: true,
           appreciateLeft: left,
           __typename: 'Article'
-        }
+        } as AppreciateArticle_appreciateArticle
       }
     })
   }, APPRECIATE_DEBOUNCE)
