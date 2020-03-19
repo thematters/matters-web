@@ -43,6 +43,7 @@ const ViewMode = () => {
           icon={<Icon.ViewModeDefault size="md" />}
           size="md"
           spacing="base"
+          weight={isDefaultMode ? 'bold' : 'normal'}
         >
           <Translate zh_hant="默認（大圖）" zh_hans="默认（大图）" />
         </TextIcon>
@@ -52,6 +53,7 @@ const ViewMode = () => {
           icon={<Icon.ViewModeComfortable size="md" />}
           size="md"
           spacing="base"
+          weight={isComfortableMode ? 'bold' : 'normal'}
         >
           <Translate zh_hant="標準（小圖）" zh_hans="标准（小图）" />
         </TextIcon>
@@ -61,6 +63,7 @@ const ViewMode = () => {
           icon={<Icon.ViewModeCompact size="md" />}
           size="md"
           spacing="base"
+          weight={isCompactMode ? 'bold' : 'normal'}
         >
           <Translate zh_hant="緊湊（無圖）" zh_hans="紧凑（无图）" />
         </TextIcon>
