@@ -5,6 +5,7 @@
 }
 
 form {
+  @mixin hide-scrollbar;
   flex-grow: 1;
   position: relative;
   overflow-y: auto;
