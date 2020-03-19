@@ -23,6 +23,7 @@ export default gql`
   type ClientPreference {
     id: ID!
     feedSortType: FeedSortType
+    viewMode: ViewMode
     readCivicLikerDialog: Boolean!
     wall: Boolean!
     push: Push!
@@ -50,5 +51,11 @@ export default gql`
   enum FeedSortType {
     hottest
     newest
+  }
+
+  enum ViewMode {
+    default
+    comfortable
+    compact
   }
 `
