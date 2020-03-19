@@ -59,18 +59,18 @@ export const ClientUpdater = () => {
   }, [])
 
   /**
-   * View Mode
+   * Restore View Mode from localStorage
    */
   useEffect(() => {
-    const viewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
+    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
 
-    if (!client?.writeData) {
+    if (!client?.writeData || !storedViewMode) {
       return
     }
 
     client.writeData({
       id: 'ClientPreference:local',
-      data: { viewMode }
+      data: { viewMode: storedViewMode }
     })
   }, [])
 
