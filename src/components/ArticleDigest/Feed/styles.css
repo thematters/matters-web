@@ -24,7 +24,7 @@ header {
 }
 
 .description {
-  margin: var(--spacing-tight) 0;
+  margin: var(--spacing-tight) 0 var(--spacing-base);
 
   color: var(--color-grey-darker);
   font-size: var(--font-size-md-s);
@@ -72,7 +72,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: var(--spacing-tight) 0;
+    margin: var(--spacing-tight) 0 var(--spacing-base);
 
     & .cover {
       flex-shrink: 0;
@@ -105,6 +105,6 @@ header {
 }
 .mode-compact {
   & .title {
-    margin: var(--spacing-x-tight) 0 0;
+    margin: var(--spacing-x-tight) 0 var(--spacing-tight);
   }
 }

@@ -77,7 +77,6 @@ export const ArticleDigestFeed = ({
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isDefaultMode = viewMode === 'default'
-  // const isComfortableMode = viewMode === 'comfortable'
   const isCompactMode = viewMode === 'compact'
 
   const { author, summary, sticky } = article
@@ -163,15 +162,13 @@ export const ArticleDigestFeed = ({
           </section>
         )}
 
-        {!isCompactMode && (
-          <FooterActions
-            article={article}
-            inCard
-            inTagDetailLatest={inTagDetailLatest}
-            inTagDetailSelected={inTagDetailSelected}
-            inUserArticles={inUserArticles}
-          />
-        )}
+        <FooterActions
+          article={article}
+          inCard
+          inTagDetailLatest={inTagDetailLatest}
+          inTagDetailSelected={inTagDetailSelected}
+          inUserArticles={inUserArticles}
+        />
 
         <style jsx>{styles}</style>
       </section>
