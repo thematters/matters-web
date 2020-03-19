@@ -99,6 +99,7 @@ export const queries = {
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isLargeUp = useResponsive('lg-up')
+  const isHottestFeed = sortBy === 'hottest'
   const {
     data,
     error,
@@ -155,7 +156,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     | NewestFeed_viewer_recommendation_feed_edges
   > = edges
 
-  if (!isLargeUp) {
+  if (!isLargeUp && isHottestFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
