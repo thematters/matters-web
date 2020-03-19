@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
@@ -9,11 +10,13 @@ import {
   Translate,
   UserDigest
 } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { FollowComment as FollowCommentType } from './__generated__/FollowComment'
 
 const fragments = {
@@ -47,6 +50,12 @@ const FollowComment = ({
   comment: FollowCommentType
   onClick?: () => any
 }) => {
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const isDefaultMode = viewMode === 'default'
+
   const { article, author } = comment
   const articlePath = toPath({ page: 'articleDetail', article })
   const path =
@@ -56,6 +65,20 @@ const FollowComment = ({
           comment
         })
       : {}
+
+  let userDigestProps = {}
+  if (isDefaultMode) {
+    userDigestProps = {
+      avatarSize: 'lg',
+      textSize: 'md-s',
+      textWeight: 'md'
+    }
+  } else {
+    userDigestProps = {
+      avatarSize: 'sm',
+      textSize: 'sm'
+    }
+  }
 
   return (
     <Card {...articlePath} spacing={['base', 'base']} onClick={onClick}>
@@ -68,6 +91,7 @@ const FollowComment = ({
             textWeight="md"
             hasAvatar
             hasDisplayName
+            {...userDigestProps}
           />
           <span className="reply-to">
             <Translate zh_hant="評論了作品" zh_hans="评论了作品" />
