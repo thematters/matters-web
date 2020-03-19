@@ -22,7 +22,7 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
  *   <UserDigest.Mini user={user} />
  */
 
-interface MiniProps {
+export interface UserDigestMiniProps {
   user: UserDigestMiniUser
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
@@ -65,7 +65,7 @@ const Mini = ({
   hasDisplayName,
   hasUserName,
   disabled
-}: MiniProps) => {
+}: UserDigestMiniProps) => {
   const isArchived = user?.status?.state === 'archived'
   const path = toPath({
     page: 'userProfile',
