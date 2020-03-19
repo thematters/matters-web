@@ -21,7 +21,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
   }
 
   const actorsCount = notice.actors.length
-  const isMultiActors = notice.actors && actorsCount > 1
+  const isMultiActors = actorsCount > 1
 
   return (
     <section className="container">
@@ -38,7 +38,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
-              {index < actorsCount - 1 && <span>、</span>}
+              {isMultiActors && index < 1 && <span>、</span>}
             </Fragment>
           ))}{' '}
           {isMultiActors && (
