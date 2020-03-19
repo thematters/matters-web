@@ -75,6 +75,9 @@ import { ReactComponent as UpVoteActive } from './icons/upvote-active.svg'
 import { ReactComponent as UpVote } from './icons/upvote.svg'
 import { ReactComponent as User } from './icons/user.svg'
 import { ReactComponent as Volume } from './icons/volume.svg'
+import { ReactComponent as ViewModeDefault } from './icons/view-mode-default.svg'
+import { ReactComponent as ViewModeComfortable } from './icons/view-mode-comfortable.svg'
+import { ReactComponent as ViewModeCompact } from './icons/view-mode-compact.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -208,6 +211,9 @@ export const Icon = {
   UpVoteActive: withIcon(UpVoteActive),
   User: withIcon(User),
   Volume: withIcon(Volume),
+  ViewModeDefault: withIcon(ViewModeDefault),
+  ViewModeComfortable: withIcon(ViewModeComfortable),
+  ViewModeCompact: withIcon(ViewModeCompact),
 
   // legacy
   CheckActive: withIcon(CheckActive),
