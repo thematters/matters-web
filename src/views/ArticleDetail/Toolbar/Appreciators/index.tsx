@@ -47,7 +47,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
     null,
     null,
     null
-  ].slice(0, appreciatorCount >= 4 ? 3 : 4)
+  ].slice(0, appreciatorCount > 4 ? 3 : 4)
 
   return (
     <AppreciatorsDialog article={article}>
@@ -81,7 +81,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
                 key={index}
               />
             ))}
-            {appreciatorCount >= 4 && (
+            {appreciatorCount > 4 && (
               <span className="appreciator-count">{appreciatorCount}</span>
             )}
           </section>
