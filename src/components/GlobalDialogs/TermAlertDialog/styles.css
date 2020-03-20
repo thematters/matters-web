@@ -10,7 +10,7 @@
 
   font-size: var(--font-size-sm);
   border-radius: 0.125rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar-track {

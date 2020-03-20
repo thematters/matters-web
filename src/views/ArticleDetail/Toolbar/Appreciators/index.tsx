@@ -47,7 +47,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
     null,
     null,
     null
-  ].slice(0, appreciatorCount >= 4 ? 3 : 4)
+  ].slice(0, appreciatorCount > 4 ? 3 : 4)
 
   return (
     <AppreciatorsDialog article={article}>
