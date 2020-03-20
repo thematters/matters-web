@@ -1,0 +1,10 @@
+.topbar {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-loose);
+  padding: 0 var(--spacing-base) var(--spacing-base);
+
+  @media (--sm-up) {
+    margin-top: var(--spacing-x-loose);
+  }
+}

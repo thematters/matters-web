@@ -19,7 +19,9 @@ import { analytics, mergeConnections } from '~/common/utils'
 import Articles from './Articles'
 import Authors from './Authors'
 import SortBy from './SortBy'
+import styles from './styles.css'
 import Tags from './Tags'
+import ViewMode from './ViewMode'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -221,8 +223,14 @@ const HomeFeed = () => {
 
   return (
     <>
-      <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
+      <section className="topbar">
+        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
+        <ViewMode />
+      </section>
+
       <MainFeed feedSortType={feedSortType as SortBy} />
+
+      <style jsx>{styles}</style>
     </>
   )
 }

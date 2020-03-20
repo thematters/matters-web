@@ -33,7 +33,7 @@ const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
             <TextIcon
               spacing="base"
               size="md"
-              weight={isZhHantActive ? 'bold' : undefined}
+              weight={isZhHantActive ? 'bold' : 'normal'}
             >
               {textMap.zh_hant}
             </TextIcon>
@@ -47,7 +47,7 @@ const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
             <TextIcon
               spacing="base"
               size="md"
-              weight={isZhHansActive ? 'bold' : undefined}
+              weight={isZhHansActive ? 'bold' : 'normal'}
             >
               {textMap.zh_hans}
             </TextIcon>

@@ -37,7 +37,6 @@ const NavListItem = forwardRef(
               }
 
               if (active) {
-                console.log('...jump')
                 jump(document.body)
               }
             },

@@ -2,6 +2,7 @@ export default (_: any) => {
   return {
     id: 'local',
     feedSortType: 'hottest',
+    viewMode: 'default',
     readCivicLikerDialog: false,
     wall: true,
     push: {

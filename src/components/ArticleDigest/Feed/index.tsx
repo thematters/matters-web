@@ -1,6 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { Card, Icon, TextIcon, Translate } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { stripHtml, toPath } from '~/common/utils'
@@ -13,6 +16,7 @@ import InactiveState from './InactiveState'
 import Live from './Live'
 import styles from './styles.css'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle'
 
 export type ArticleDigestFeedControls = {
@@ -68,6 +72,13 @@ export const ArticleDigestFeed = ({
 
   onClick
 }: ArticleDigestFeedProps) => {
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' }
+  })
+  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const isDefaultMode = viewMode === 'default'
+  const isCompactMode = viewMode === 'compact'
+
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
@@ -76,68 +87,91 @@ export const ArticleDigestFeed = ({
     page: 'articleDetail',
     article
   })
+  const containerClass = classNames({
+    [`mode-${viewMode}`]: !!viewMode
+  })
+
+  let userDigestProps = {}
+  if (isDefaultMode) {
+    userDigestProps = {
+      avatarSize: 'lg',
+      textSize: 'md-s',
+      textWeight: 'md'
+    }
+  } else {
+    userDigestProps = {
+      avatarSize: 'sm',
+      textSize: 'sm'
+    }
+  }
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      <header>
-        <section className="left">
-          <UserDigest.Mini
-            user={author}
-            avatarSize="lg"
-            textSize="md-s"
-            textWeight="md"
-            hasAvatar
-            hasDisplayName
+      <section className={containerClass}>
+        <header>
+          <section className="left">
+            <UserDigest.Mini
+              user={author}
+              hasAvatar
+              hasDisplayName
+              {...userDigestProps}
+            />
+            {inFollowFeed && (
+              <span className="published-article">
+                <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
+              </span>
+            )}
+          </section>
+
+          <section className="right">
+            {inUserArticles && sticky && (
+              <TextIcon
+                icon={<Icon.PinMedium />}
+                size="sm"
+                color="grey"
+                weight="md"
+              >
+                <Translate id="stickyArticle" />
+              </TextIcon>
+            )}
+
+            <Live article={article} />
+            <InactiveState article={article} />
+            <CreatedAt article={article} />
+          </section>
+        </header>
+
+        <section className="title">
+          <ArticleDigestTitle
+            article={article}
+            textSize={isCompactMode ? 'md' : 'xm'}
           />
-          {inFollowFeed && (
-            <span className="published-article">
-              <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
-            </span>
-          )}
         </section>
 
-        <section className="right">
-          {inUserArticles && sticky && (
-            <TextIcon
-              icon={<Icon.PinMedium />}
-              size="sm"
-              color="grey"
-              weight="md"
-            >
-              <Translate id="stickyArticle" />
-            </TextIcon>
-          )}
+        {!isCompactMode && (
+          <section className="content">
+            {cover && (
+              <section
+                className="cover"
+                style={{
+                  backgroundImage: `url(${cover})`
+                }}
+              />
+            )}
+            {<p className="description">{cleanedSummary}</p>}
+          </section>
+        )}
 
-          <Live article={article} />
-          <InactiveState article={article} />
-          <CreatedAt article={article} />
-        </section>
-      </header>
-
-      <section className="title">
-        <ArticleDigestTitle article={article} textSize="xm" />
-      </section>
-
-      {cover && (
-        <section
-          className="cover"
-          style={{
-            backgroundImage: `url(${cover})`
-          }}
+        <FooterActions
+          article={article}
+          inCard
+          inTagDetailLatest={inTagDetailLatest}
+          inTagDetailSelected={inTagDetailSelected}
+          inUserArticles={inUserArticles}
         />
-      )}
 
-      <p className="description">{cleanedSummary}</p>
-
-      <FooterActions
-        article={article}
-        inCard
-        inTagDetailLatest={inTagDetailLatest}
-        inTagDetailSelected={inTagDetailSelected}
-        inUserArticles={inUserArticles}
-      />
-
-      <style jsx>{styles}</style>
+        <style jsx>{styles}</style>
+      </section>
     </Card>
   )
 }

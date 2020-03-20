@@ -5,6 +5,8 @@ import { useEffect, useRef } from 'react'
 import { useWindowResize } from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
+import { STORE_KEY_VIEW_MODE } from '~/common/enums'
+
 import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
 export const ClientUpdater = () => {
@@ -54,6 +56,22 @@ export const ClientUpdater = () => {
   useEffect(() => {
     Router.events.on('routeChangeComplete', routeChangeComplete)
     return () => Router.events.off('routeChangeComplete', routeChangeComplete)
+  }, [])
+
+  /**
+   * Restore View Mode from localStorage
+   */
+  useEffect(() => {
+    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
+
+    if (!client?.writeData || !storedViewMode) {
+      return
+    }
+
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: { viewMode: storedViewMode }
+    })
   }, [])
 
   return null
