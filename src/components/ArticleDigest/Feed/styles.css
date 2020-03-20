@@ -64,10 +64,6 @@ header {
 .mode-default {
 }
 .mode-comfortable {
-  & .title {
-    margin: var(--spacing-x-tight) 0;
-  }
-
   & .content {
     display: flex;
     justify-content: space-between;
@@ -105,7 +101,4 @@ header {
   }
 }
 .mode-compact {
-  & .title {
-    margin: var(--spacing-x-tight) 0 var(--spacing-tight);
-  }
 }

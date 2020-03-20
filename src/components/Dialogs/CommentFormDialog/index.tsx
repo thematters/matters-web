@@ -20,7 +20,7 @@ export const CommentFormDialog = ({
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={showDialog} onDismiss={close}>
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>
