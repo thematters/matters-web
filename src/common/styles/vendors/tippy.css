@@ -123,7 +123,6 @@
   border-radius: 0.5rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  border: 1px solid var(--popper-border-color);
 }
 
 /* theme:tooltip */
@@ -135,72 +134,6 @@
   border-radius: 0.25rem;
   background: var(--color-black);
   box-shadow: var(--shadow-dark);
-}
-
-/* theme:popover */
-.tippy-tooltip.popover-theme {
-  color: var(--color-black);
-  border-radius: 0.125rem;
-  background: var(--color-white);
-  box-shadow: var(--shadow-dark);
-  border: 1px solid var(--popper-border-color);
-
-  &[data-placement^='top'] .tippy-arrow {
-    border-top-color: var(--popper-border-color);
-    bottom: -8px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: -7px;
-      bottom: 1px;
-      border-top: 7px solid var(--color-white);
-      border-right: 7px solid transparent;
-      border-left: 7px solid transparent;
-    }
-  }
-  &[data-placement^='bottom'] .tippy-arrow {
-    border-bottom-color: var(--popper-border-color);
-    top: -8px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: -7px;
-      top: 1px;
-      border-bottom: 7px solid var(--color-white);
-      border-right: 7px solid transparent;
-      border-left: 7px solid transparent;
-    }
-  }
-  &[data-placement^='left'] .tippy-arrow {
-    border-left-color: var(--popper-border-color);
-    right: -8px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -7px;
-      right: 1px;
-      border-left: 7px solid var(--color-white);
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-    }
-  }
-  &[data-placement^='right'] .tippy-arrow {
-    border-right-color: var(--popper-border-color);
-    left: -8px;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -7px;
-      left: 1px;
-      border-right: 7px solid var(--color-white);
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-    }
-  }
 }
 
 /* shadow */

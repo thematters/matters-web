@@ -41,7 +41,7 @@ const Dialog: React.FC<DialogProps> = ({
   const transitions = useTransition(isOpen, null, {
     from: {
       opacity: 0,
-      transform: `translateY(100%)`
+      transform: `translateY(30%)`
     },
     enter: { opacity: 1, transform: `translateY(0%)` },
     leave: {
