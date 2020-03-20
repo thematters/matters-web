@@ -2,6 +2,7 @@ import classNames from 'classnames'
 
 import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
+import { ReactComponent as AppreciationMAX } from './icons/appreciation-max.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
 import { ReactComponent as AvatarLogo } from './icons/avatar-logo.svg'
 import { ReactComponent as BackLarge } from './icons/back-lg.svg'
@@ -141,6 +142,7 @@ export const withIcon = (
 export const Icon = {
   Add: withIcon(Add),
   AddMedium: withIcon(AddMedium),
+  AppreciationMAX: withIcon(AppreciationMAX),
   ArchiveMedium: withIcon(ArchiveMedium),
   AvatarLogo: withIcon(AvatarLogo),
   BackLarge: withIcon(BackLarge),
