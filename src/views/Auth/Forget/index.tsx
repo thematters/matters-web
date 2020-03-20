@@ -36,7 +36,7 @@ const Forget = () => {
   }
 
   return (
-    <Layout bgColor="grey-lighter">
+    <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'forgetPassword' }} />
 
       {step === 'request' && (
@@ -60,7 +60,7 @@ const Forget = () => {
       {step === 'complete' && (
         <PasswordChangeComplete type="forget" purpose="page" />
       )}
-    </Layout>
+    </Layout.Main>
   )
 }
 

@@ -85,7 +85,7 @@ const MeBookmarks = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="myBookmarks" />}
@@ -95,5 +95,5 @@ export default () => (
     <Head title={{ id: 'myBookmarks' }} />
 
     <MeBookmarks />
-  </Layout>
+  </Layout.Main>
 )

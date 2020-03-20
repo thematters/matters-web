@@ -178,11 +178,11 @@ const OAuthAuthorize = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
     <Layout.Spacing>
       <OAuthAuthorize />
     </Layout.Spacing>
-  </Layout>
+  </Layout.Main>
 )

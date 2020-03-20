@@ -145,7 +145,7 @@ const Tags = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Head title={{ id: 'allTags' }} />
 
     <Layout.Header
@@ -160,5 +160,5 @@ export default () => (
     />
 
     <Tags />
-  </Layout>
+  </Layout.Main>
 )

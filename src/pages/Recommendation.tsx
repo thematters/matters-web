@@ -94,7 +94,7 @@ const Feed = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Feed />
-  </Layout>
+  </Layout.Main>
 )

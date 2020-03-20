@@ -4,7 +4,7 @@ import SettingsTab from '../SettingsTab'
 import SettingsNotification from './SettingsNotification'
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="notificationSetting" />}
@@ -15,5 +15,5 @@ export default () => (
     <Layout.Spacing>
       <SettingsNotification />
     </Layout.Spacing>
-  </Layout>
+  </Layout.Main>
 )

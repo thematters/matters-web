@@ -4,6 +4,7 @@ import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import App from 'next/app'
 import getConfig from 'next/config'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 import {
@@ -11,6 +12,7 @@ import {
   Error,
   ErrorBoundary,
   LanguageProvider,
+  Layout,
   Toast,
   ViewerFragments,
   ViewerProvider
@@ -22,6 +24,7 @@ import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
 
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import withApollo from '~/common/utils/withApollo'
 
@@ -69,6 +72,11 @@ const Root = ({
     analytics.identifyUser()
   }, [])
 
+  const router = useRouter()
+  const isInAbout = router.pathname === PATHS.ABOUT.href
+  const isInMigration = router.pathname === PATHS.MIGRATION.href
+  const shouldApplyLayout = !isInAbout && !isInMigration
+
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
 
@@ -87,7 +95,7 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        {children}
+        {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
         <GlobalDialogs />
         <Toast.Container />

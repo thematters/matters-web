@@ -108,7 +108,7 @@ const Notifications = () => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={
           isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
@@ -119,7 +119,7 @@ const Notifications = () => {
       <Head title={{ id: 'notification' }} />
 
       <BaseNotifications />
-    </Layout>
+    </Layout.Main>
   )
 }
 

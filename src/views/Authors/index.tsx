@@ -106,7 +106,7 @@ const Authors = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="allAuthors" />}
@@ -116,5 +116,5 @@ export default () => (
     <Head title={{ id: 'allAuthors' }} />
 
     <Authors />
-  </Layout>
+  </Layout.Main>
 )

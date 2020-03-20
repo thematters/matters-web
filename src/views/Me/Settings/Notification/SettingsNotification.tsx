@@ -269,7 +269,7 @@ const SettingsNotification = () => {
         </section>
       </div>
 
-      <div className="l-row">
+      <div className="l-row full">
         <section className="section-container l-col-4 l-col-md-4 l-lg-6">
           <PageHeader
             title={<Translate zh_hant="其他" zh_hans="其他" />}

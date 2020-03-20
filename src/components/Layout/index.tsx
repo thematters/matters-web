@@ -21,7 +21,6 @@ export const Layout: React.FC & {
   const router = useRouter()
 
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
-
   const showNav = isSmallUp
   const showNavBar = !isSmallUp && !isInDraftDetail
 
@@ -36,7 +35,7 @@ export const Layout: React.FC & {
           </nav>
         )}
 
-        <main className="l-row full">{children}</main>
+        <main>{children}</main>
       </div>
 
       {showNavBar && (
@@ -52,33 +51,35 @@ export const Layout: React.FC & {
 
 interface MainProps {
   aside?: React.ReactNode
+  bgColor?: 'grey-lighter'
   // TODO: this prop only temporally used by DraftDetail,
   // would be removed after revamped
   asideShowInMobile?: boolean
-  bgColor?: 'grey-lighter'
 }
 
-const Main: React.FC<MainProps> = ({ aside, asideShowInMobile, bgColor }) => {
-  const isSmallUp = useResponsive('sm-up')
+const Main: React.FC<MainProps> = ({
+  aside,
+  bgColor,
+  asideShowInMobile,
+  children
+}) => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
 
-  const mainClass = classNames({
+  const articleClass = classNames({
     [`bg-${bgColor}`]: !!bgColor,
     asideShowInMobile
   })
-  const articleClass = classNames({})
   const asideClass = classNames({
     'u-lg-down-hide': !asideShowInMobile
   })
 
   const isInSearch = router.pathname === PATHS.SEARCH.href
-
   const showAside = isLargeUp || asideShowInMobile
   const showSearchBar = isLargeUp && !isInSearch
 
   return (
-    <>
+    <div className="l-row full">
       <article className={articleClass}>{children}</article>
 
       {showAside && (
@@ -94,7 +95,9 @@ const Main: React.FC<MainProps> = ({ aside, asideShowInMobile, bgColor }) => {
           <SideFooter />
         </aside>
       )}
-    </>
+
+      <style jsx>{styles}</style>
+    </div>
   )
 }
 
