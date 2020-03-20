@@ -46,10 +46,11 @@ header {
   & ul {
     @mixin border-top-grey;
     @mixin border-bottom-grey;
+    @mixin hide-scrollbar;
     margin: 0 calc(var(--spacing-base) * -1);
     padding: var(--spacing-x-tight) var(--spacing-base) 0;
     max-height: 11rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 
     & li {
