@@ -27,10 +27,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     'appreciate-button': true,
     clap: true
   })
-  const countClass = classNames({
-    count: true,
-    max: count === 'MAX'
-  })
 
   return (
     <>
@@ -57,7 +53,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       >
         <Icon.Like className="icon-like" size="md" color="green" />
         <span className="total">{numAbbr(total)}</span>
-        {count && <span className={countClass}>{count}</span>}
+        {count && (
+          <span className="count">
+            {count === 'MAX' ? <Icon.AppreciationMAX color="white" /> : count}
+          </span>
+        )}
       </button>
 
       <style jsx>{styles}</style>
