@@ -12,45 +12,17 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
 
-interface LayoutProps {
-  aside?: React.ReactNode
-  // TODO: this prop only temporally used by DraftDetail,
-  // would be removed after revamped
-  asideShowInMobile?: boolean
-  bgColor?: 'grey-lighter'
-}
-
-export const Layout: React.FC<LayoutProps> & {
+export const Layout: React.FC & {
+  Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
-} = ({ aside, asideShowInMobile, bgColor, children }) => {
+} = ({ children }) => {
   const isSmallUp = useResponsive('sm-up')
-  const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
 
-  const mainClass = classNames({
-    'l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-9': true,
-    [`bg-${bgColor}`]: !!bgColor,
-    asideShowInMobile
-  })
-  const navClass = classNames({
-    'l-col-4 l-col-sm-1 l-col-md-2 l-col-lg-9-2': true,
-    'u-sm-down-hide': true
-  })
-  const articleClass = classNames({
-    'l-col-4 l-col-sm-7 l-col-md-7 l-col-lg-9-7': true
-  })
-  const asideClass = classNames({
-    'l-col-4 l-col-sm-7 l-offset-sm-1 l-col-md-7 l-offset-md-2 l-col-lg-3 l-offset-lg-0': true,
-    'u-lg-down-hide': !asideShowInMobile
-  })
-
-  const isInSearch = router.pathname === PATHS.SEARCH.href
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
 
   const showNav = isSmallUp
-  const showAside = isLargeUp || asideShowInMobile
-  const showSearchBar = isLargeUp && !isInSearch
   const showNavBar = !isSmallUp && !isInDraftDetail
 
   return (
@@ -58,31 +30,13 @@ export const Layout: React.FC<LayoutProps> & {
       <Head />
 
       <div className="l-row full">
-        <main className={mainClass}>
-          <div className="l-row full">
-            {showNav && (
-              <nav role="navigation" className={navClass}>
-                <SideNav />
-              </nav>
-            )}
-
-            <article className={articleClass}>{children}</article>
-          </div>
-        </main>
-
-        {showAside && (
-          <aside className={asideClass}>
-            {showSearchBar && (
-              <section className="u-lg-down-hide">
-                <SearchBar />
-              </section>
-            )}
-
-            {aside}
-
-            <SideFooter />
-          </aside>
+        {showNav && (
+          <nav role="navigation" className="u-sm-down-hide">
+            <SideNav />
+          </nav>
         )}
+
+        <main className="l-row full">{children}</main>
       </div>
 
       {showNavBar && (
@@ -96,5 +50,54 @@ export const Layout: React.FC<LayoutProps> & {
   )
 }
 
+interface MainProps {
+  aside?: React.ReactNode
+  // TODO: this prop only temporally used by DraftDetail,
+  // would be removed after revamped
+  asideShowInMobile?: boolean
+  bgColor?: 'grey-lighter'
+}
+
+const Main: React.FC<MainProps> = ({ aside, asideShowInMobile, bgColor }) => {
+  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
+  const router = useRouter()
+
+  const mainClass = classNames({
+    [`bg-${bgColor}`]: !!bgColor,
+    asideShowInMobile
+  })
+  const articleClass = classNames({})
+  const asideClass = classNames({
+    'u-lg-down-hide': !asideShowInMobile
+  })
+
+  const isInSearch = router.pathname === PATHS.SEARCH.href
+
+  const showAside = isLargeUp || asideShowInMobile
+  const showSearchBar = isLargeUp && !isInSearch
+
+  return (
+    <>
+      <article className={articleClass}>{children}</article>
+
+      {showAside && (
+        <aside className={asideClass}>
+          {showSearchBar && (
+            <section className="u-lg-down-hide">
+              <SearchBar />
+            </section>
+          )}
+
+          {aside}
+
+          <SideFooter />
+        </aside>
+      )}
+    </>
+  )
+}
+
+Layout.Main = Main
 Layout.Header = Header
 Layout.Spacing = Spacing
