@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -10,13 +9,16 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { APPRECIATE_DEBOUNCE } from '~/common/enums'
 
+import Appreciators from '../Toolbar/Appreciators'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
-import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { AppreciateArticle } from './__generated__/AppreciateArticle'
+import {
+  AppreciateArticle,
+  AppreciateArticle_appreciateArticle
+} from './__generated__/AppreciateArticle'
 import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
 const fragments = {
@@ -41,16 +43,16 @@ const APPRECIATE_ARTICLE = gql`
       appreciationsReceivedTotal
       hasAppreciate
       appreciateLeft
+      ...AppreciatorsArticle
     }
   }
+  ${Appreciators.fragments.article}
 `
 
 const AppreciationButton = ({
-  article,
-  inFixedToolbar
+  article
 }: {
   article: AppreciationButtonArticle
-  inFixedToolbar?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -69,20 +71,25 @@ const AppreciationButton = ({
   const left = appreciateLeft - amount
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
-  const [debouncedSendAppreciation] = useDebouncedCallback(() => {
-    setAmount(0)
-    sendAppreciation({
-      variables: { id: article.id, amount },
-      optimisticResponse: {
-        appreciateArticle: {
-          id: article.id,
-          appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
-          hasAppreciate: true,
-          appreciateLeft: left,
-          __typename: 'Article'
+  const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
+    try {
+      await sendAppreciation({
+        variables: { id: article.id, amount },
+        optimisticResponse: {
+          appreciateArticle: {
+            id: article.id,
+            appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
+            hasAppreciate: true,
+            appreciateLeft: left,
+            __typename: 'Article'
+          } as AppreciateArticle_appreciateArticle
         }
-      }
-    })
+      })
+    } catch(e) {
+      console.error(e)
+    }
+
+    setAmount(0)
   }, APPRECIATE_DEBOUNCE)
   const appreciate = () => {
     setAmount(amount + 1)
@@ -97,24 +104,12 @@ const AppreciationButton = ({
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
     !viewer.isAuthed
-  const containerClasses = classNames({
-    container: true
-  })
 
   /**
    * Setup Liker Id Button
    */
   if (viewer.shouldSetupLikerID) {
-    return (
-      <section className={containerClasses}>
-        <SetupLikerIdAppreciateButton
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
-
-        <style jsx>{styles}</style>
-      </section>
-    )
+    return <SetupLikerIdAppreciateButton total={total} />
   }
 
   /**
@@ -122,20 +117,13 @@ const AppreciationButton = ({
    */
   if (canAppreciate) {
     return (
-      <section className={containerClasses}>
-        <AppreciateButton
-          onClick={() => appreciate()}
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? appreciatedCount
-              : undefined
-          }
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
-
-        <style jsx>{styles}</style>
-      </section>
+      <AppreciateButton
+        onClick={() => appreciate()}
+        count={
+          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
+        }
+        total={total}
+      />
     )
   }
 
@@ -144,25 +132,18 @@ const AppreciationButton = ({
    */
   if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
     return (
-      <section className={containerClasses}>
-        <CivicLikerButton
-          onClose={() => {
-            client.writeData({
-              id: 'ClientPreference:local',
-              data: { readCivicLikerDialog: true }
-            })
-          }}
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? appreciatedCount
-              : undefined
-          }
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
-
-        <style jsx>{styles}</style>
-      </section>
+      <CivicLikerButton
+        onClose={() => {
+          client.writeData({
+            id: 'ClientPreference:local',
+            data: { readCivicLikerDialog: true }
+          })
+        }}
+        count={
+          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
+        }
+        total={total}
+      />
     )
   }
 
@@ -170,56 +151,41 @@ const AppreciationButton = ({
    * MAX Button
    */
   if (!canAppreciate && isReachLimit) {
-    return (
-      <section className={containerClasses}>
-        <AppreciateButton
-          count="MAX"
-          total={total}
-          inFixedToolbar={inFixedToolbar}
-        />
-
-        <style jsx>{styles}</style>
-      </section>
-    )
+    return <AppreciateButton count="MAX" total={total} />
   }
 
   /**
    * Disabled Button
    */
   return (
-    <section className={containerClasses}>
-      <Tooltip
-        offset="-10, 0"
-        content={
-          <Translate
-            {...(isMe
-              ? {
-                  zh_hant: '去讚賞其他用戶吧',
-                  zh_hans: '去赞赏其他用户吧'
-                }
-              : {
-                  zh_hant: '你還沒有讚賞權限',
-                  zh_hans: '你还没有赞赏权限'
-                })}
-          />
-        }
-      >
-        <div>
-          <AppreciateButton
-            disabled
-            count={
-              viewer.isAuthed && appreciatedCount > 0
-                ? appreciatedCount
-                : undefined
-            }
-            total={total}
-            inFixedToolbar={inFixedToolbar}
-          />
-        </div>
-      </Tooltip>
-
-      <style jsx>{styles}</style>
-    </section>
+    <Tooltip
+      offset="-10, 0"
+      content={
+        <Translate
+          {...(isMe
+            ? {
+                zh_hant: '去讚賞其他用戶吧',
+                zh_hans: '去赞赏其他用户吧'
+              }
+            : {
+                zh_hant: '你還沒有讚賞權限',
+                zh_hans: '你还没有赞赏权限'
+              })}
+        />
+      }
+    >
+      <div>
+        <AppreciateButton
+          disabled
+          count={
+            viewer.isAuthed && appreciatedCount > 0
+              ? appreciatedCount
+              : undefined
+          }
+          total={total}
+        />
+      </div>
+    </Tooltip>
   )
 }
 

@@ -25,7 +25,7 @@ footer {
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
   @mixin line-clamp;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 }
 
 .container.has-cover {

@@ -5,16 +5,16 @@ import { Dialog } from '~/components'
 
 import Content from './Content'
 
-import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
+import { AppreciatorsDialogArticle } from './__generated__/AppreciatorsDialogArticle'
 
 interface AppreciatorsDialogProps {
-  article: AppreciatorsArticle
+  article: AppreciatorsDialogArticle
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const fragments = {
   article: gql`
-    fragment AppreciatorsArticle on Article {
+    fragment AppreciatorsDialogArticle on Article {
       id
       mediaHash
       appreciationsReceived(input: { first: 0 }) {
@@ -24,7 +24,10 @@ const fragments = {
   `
 }
 
-const AppreciatorsDialog = ({ article, children }: AppreciatorsDialogProps) => {
+export const AppreciatorsDialog = ({
+  article,
+  children
+}: AppreciatorsDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -41,5 +44,3 @@ const AppreciatorsDialog = ({ article, children }: AppreciatorsDialogProps) => {
 }
 
 AppreciatorsDialog.fragments = fragments
-
-export default AppreciatorsDialog

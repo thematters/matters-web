@@ -5,6 +5,7 @@
 .tag {
   & :global(.text) {
     @mixin line-clamp;
+    line-height: inherit;
   }
 }
 
@@ -12,8 +13,6 @@
   display: block;
   position: relative;
   padding-right: var(--list-tag-count-width);
-
-  line-height: 1rem;
 
   & .count {
     position: absolute;
@@ -39,7 +38,8 @@
 
 .inline {
   display: inline-flex;
-  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+  padding: 0 var(--spacing-x-tight);
+  height: 1.5rem;
 
   border-radius: 2rem;
   background: var(--color-grey-lighter);

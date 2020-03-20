@@ -1,17 +1,8 @@
 import classNames from 'classnames'
 
-import { ReactComponent as CheckActive } from '~/static/icons/checkbox-check-active.svg'
-import { ReactComponent as CheckInactive } from '~/static/icons/checkbox-check-inactive.svg'
-import { ReactComponent as DotDivider } from '~/static/icons/dot-divider.svg'
-import { ReactComponent as SeedBadge } from '~/static/icons/early-user-badge.svg'
-import { ReactComponent as EmptyWarning } from '~/static/icons/empty-warning.svg'
-import { ReactComponent as External } from '~/static/icons/external.svg'
-import { ReactComponent as Loading } from '~/static/icons/loading.svg'
-import { ReactComponent as Reload } from '~/static/icons/reload.svg'
-import { ReactComponent as Spinner } from '~/static/icons/spinner.svg'
-
 import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
+import { ReactComponent as AppreciationMAX } from './icons/appreciation-max.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
 import { ReactComponent as AvatarLogo } from './icons/avatar-logo.svg'
 import { ReactComponent as BackLarge } from './icons/back-lg.svg'
@@ -20,6 +11,8 @@ import { ReactComponent as BookmarkMedium } from './icons/bookmark-md.svg'
 import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
 import { ReactComponent as Camera } from './icons/camera.svg'
+import { ReactComponent as CheckActive } from './icons/checkbox-check-active.svg'
+import { ReactComponent as CheckInactive } from './icons/checkbox-check-inactive.svg'
 import { ReactComponent as Clear } from './icons/clear.svg'
 import { ReactComponent as CloseLarge } from './icons/close-lg.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
@@ -27,13 +20,16 @@ import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
 import { ReactComponent as DeleteDraftMedium } from './icons/delete-draft-md.svg'
 import { ReactComponent as DeleteDraftXS } from './icons/delete-draft-xs.svg'
+import { ReactComponent as DotDivider } from './icons/dot-divider.svg'
 import { ReactComponent as Down } from './icons/down.svg'
 import { ReactComponent as DownVoteActive } from './icons/downvote-active.svg'
 import { ReactComponent as DownVote } from './icons/downvote.svg'
 import { ReactComponent as DraftMedium } from './icons/draft-md.svg'
 import { ReactComponent as EditXS } from './icons/edit-xs.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
+import { ReactComponent as EmptyWarning } from './icons/empty-warning.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
+import { ReactComponent as External } from './icons/external.svg'
 import { ReactComponent as FollowActiveLarge } from './icons/follow-active-lg.svg'
 import { ReactComponent as FollowLarge } from './icons/follow-lg.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
@@ -60,6 +56,7 @@ import { ReactComponent as NotificationLarge } from './icons/notification-lg.svg
 import { ReactComponent as Pen } from './icons/pen.svg'
 import { ReactComponent as PinMedium } from './icons/pin-md.svg'
 import { ReactComponent as ProfileMedium } from './icons/profile-md.svg'
+import { ReactComponent as Reload } from './icons/reload.svg'
 import { ReactComponent as RemoveMedium } from './icons/remove-md.svg'
 import { ReactComponent as Right } from './icons/right.svg'
 import { ReactComponent as SearchLarge } from './icons/search-lg.svg'
@@ -68,12 +65,16 @@ import { ReactComponent as Search } from './icons/search.svg'
 import { ReactComponent as SettingsMedium } from './icons/settings-md.svg'
 import { ReactComponent as Share } from './icons/share.svg'
 import { ReactComponent as Sort } from './icons/sort.svg'
+import { ReactComponent as Spinner } from './icons/spinner.svg'
 import { ReactComponent as UnMuteMedium } from './icons/unmute-md.svg'
 import { ReactComponent as UnPinMedium } from './icons/unpin-md.svg'
 import { ReactComponent as Up } from './icons/up.svg'
 import { ReactComponent as UpVoteActive } from './icons/upvote-active.svg'
 import { ReactComponent as UpVote } from './icons/upvote.svg'
 import { ReactComponent as User } from './icons/user.svg'
+import { ReactComponent as ViewModeComfortable } from './icons/view-mode-comfortable.svg'
+import { ReactComponent as ViewModeCompact } from './icons/view-mode-compact.svg'
+import { ReactComponent as ViewModeDefault } from './icons/view-mode-default.svg'
 import { ReactComponent as Volume } from './icons/volume.svg'
 import Live from './Live'
 import styles from './styles.css'
@@ -141,6 +142,7 @@ export const withIcon = (
 export const Icon = {
   Add: withIcon(Add),
   AddMedium: withIcon(AddMedium),
+  AppreciationMAX: withIcon(AppreciationMAX),
   ArchiveMedium: withIcon(ArchiveMedium),
   AvatarLogo: withIcon(AvatarLogo),
   BackLarge: withIcon(BackLarge),
@@ -149,6 +151,8 @@ export const Icon = {
   BookmarkMedium: withIcon(BookmarkMedium),
   Camera: withIcon(Camera),
   CameraMedium: withIcon(CameraMedium),
+  CheckActive: withIcon(CheckActive),
+  CheckInactive: withIcon(CheckInactive),
   Clear: withIcon(Clear),
   CloseLarge: withIcon(CloseLarge),
   Collapse: withIcon(Collapse),
@@ -156,13 +160,18 @@ export const Icon = {
   Comment: withIcon(Comment),
   DeleteDraftMedium: withIcon(DeleteDraftMedium),
   DeleteDraftXS: withIcon(DeleteDraftXS),
+  DotDivider: withIcon(props => (
+    <DotDivider style={{ width: 18, height: 18 }} {...props} />
+  )),
   Down: withIcon(Down),
   DownVote: withIcon(DownVote),
   DownVoteActive: withIcon(DownVoteActive),
   DraftMedium: withIcon(DraftMedium),
-  EditXS: withIcon(EditXS),
   Edit: withIcon(Edit),
+  EditXS: withIcon(EditXS),
+  EmptyWarning: withIcon(EmptyWarning),
   Expand: withIcon(Expand),
+  External: withIcon(External),
   FollowActiveLarge: withIcon(FollowActiveLarge),
   FollowLarge: withIcon(FollowLarge),
   HashTag: withIcon(HashTag),
@@ -176,6 +185,7 @@ export const Icon = {
   Like: withIcon(Like),
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
+  Live,
   Logo: withIcon(props => (
     <Logo style={{ width: 97, height: 20 }} {...props} />
   )),
@@ -193,6 +203,7 @@ export const Icon = {
   Pen: withIcon(Pen),
   PinMedium: withIcon(PinMedium),
   ProfileMedium: withIcon(ProfileMedium),
+  Reload: withIcon(Reload),
   RemoveMedium: withIcon(RemoveMedium),
   Right: withIcon(Right),
   Search: withIcon(Search),
@@ -201,27 +212,17 @@ export const Icon = {
   SettingsMedium: withIcon(SettingsMedium),
   Share: withIcon(Share),
   Sort: withIcon(Sort),
+  Spinner: withIcon(({ className, ...restProps }) => (
+    <Spinner className={`u-motion-spin ${className}`} {...restProps} />
+  )),
   UnMuteMedium: withIcon(UnMuteMedium),
   UnPinMedium: withIcon(UnPinMedium),
   Up: withIcon(Up),
   UpVote: withIcon(UpVote),
   UpVoteActive: withIcon(UpVoteActive),
   User: withIcon(User),
-  Volume: withIcon(Volume),
-
-  // legacy
-  CheckActive: withIcon(CheckActive),
-  CheckInactive: withIcon(CheckInactive),
-  DotDivider: withIcon(props => (
-    <DotDivider style={{ width: 18, height: 18 }} {...props} />
-  )),
-  EmptyWarning: withIcon(EmptyWarning),
-  External: withIcon(External),
-  Live,
-  Loading: withIcon(Loading),
-  Reload: withIcon(Reload),
-  SeedBadge: withIcon(SeedBadge),
-  Spinner: withIcon(({ className, ...restProps }) => (
-    <Spinner className={`u-motion-spin ${className}`} {...restProps} />
-  ))
+  ViewModeComfortable: withIcon(ViewModeComfortable),
+  ViewModeCompact: withIcon(ViewModeCompact),
+  ViewModeDefault: withIcon(ViewModeDefault),
+  Volume: withIcon(Volume)
 }

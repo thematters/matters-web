@@ -174,9 +174,13 @@
 }
 
 @define-mixin hide-scrollbar {
+  /* IE 10+ */
   -ms-overflow-style: none;
+
+  /* Firefox */
   overflow: -moz-scrollbars-none;
 
+  /* Chrome & Safari */
   &::-webkit-scrollbar {
     width: 0px !important;
     height: 0px !important;

@@ -1,4 +1,6 @@
 .avatar {
+  position: relative;
+
   /* may under a flex layout, keep it unshrinkable */
   flex-shrink: 0;
   display: inline-block;
@@ -11,6 +13,20 @@
   background-color: var(--color-grey-lighter);
 }
 
+/**
+ * Civic Liker Ring
+ */
+.civic-liker-ring {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+}
+
+/**
+ * Sizes
+ */
 /* 16px */
 .xs {
   width: 1rem;
@@ -33,16 +49,37 @@
 .lg {
   width: 2rem;
   height: 2rem;
+
+  & .civic-liker-ring {
+    top: -3px;
+    right: -3px;
+    bottom: -3px;
+    left: -3px;
+  }
 }
 
 /* 48px */
 .xl {
   width: 3rem;
   height: 3rem;
+
+  & .civic-liker-ring {
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+  }
 }
 
 /* 72px */
 .xxl {
   width: 4.5rem;
   height: 4.5rem;
+
+  & .civic-liker-ring {
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -8px;
+  }
 }

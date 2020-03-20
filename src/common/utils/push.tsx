@@ -4,11 +4,9 @@ import getConfig from 'next/config'
 
 import { Translate, Viewer } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
 
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
-
-const STORE_KEY_PUSH = '__PUSH'
 
 const {
   publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY }

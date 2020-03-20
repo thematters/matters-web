@@ -15,10 +15,11 @@ import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
-import CollapseButton from './CollapseButton'
+import CollapseComment from './CollapseComment'
 import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
+import UncollapseButton from './UncollapseButton'
 
 import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
 
@@ -33,12 +34,14 @@ interface Controls {
   hasDelete: boolean
   hasBlockUser: boolean
   hasCollapse: boolean
+  hasUncollapse: boolean
 }
 
 interface DialogProps {
   openEditCommentDialog: () => void
   openDeleteCommentDialog: () => void
   openBlockUserDialog: () => void
+  openCollapseCommentDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -64,12 +67,10 @@ const fragments = {
       }
       ...EditButtonComment
       ...PinButtonComment
-      ...CollapseButtonComment
     }
     ${EditButton.fragments.comment}
     ${PinButton.fragments.comment}
     ${BlockUser.fragments.user}
-    ${CollapseButton.fragments.comment}
   `
 }
 
@@ -82,10 +83,12 @@ const BaseDropdownActions = ({
   hasDelete,
   hasBlockUser,
   hasCollapse,
+  hasUncollapse,
 
   openEditCommentDialog,
   openDeleteCommentDialog,
-  openBlockUserDialog
+  openBlockUserDialog,
+  openCollapseCommentDialog
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -100,7 +103,10 @@ const BaseDropdownActions = ({
           openDialog={openBlockUserDialog}
         />
       )}
-      {hasCollapse && <CollapseButton comment={comment} />}
+      {hasCollapse && (
+        <CollapseComment.Button openDialog={openCollapseCommentDialog} />
+      )}
+      {hasUncollapse && <UncollapseButton commentId={comment.id} />}
     </Menu>
   )
 
@@ -139,6 +145,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
+  const isAbleCollapse = isArticleAuthor && !isCommentAuthor
   const isCollapsed = comment.state === 'collapsed'
   const isBlocked = comment.article.author.isBlocking
   const isDescendantComment = comment.parentComment
@@ -148,11 +155,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),
     hasDelete: !!(isCommentAuthor && isActive),
     hasBlockUser: !isCommentAuthor,
-    hasCollapse: !!(
-      isArticleAuthor &&
-      !isCommentAuthor &&
-      (isActive || isCollapsed)
-    )
+    hasCollapse: !!(isAbleCollapse && isActive),
+    hasUncollapse: !!(isAbleCollapse && isCollapsed)
   }
 
   if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {
@@ -171,13 +175,18 @@ const DropdownActions = (props: DropdownActionsProps) => {
           {({ open: openDeleteCommentDialog }) => (
             <BlockUser.Dialog user={comment.author}>
               {({ open: openBlockUserDialog }) => (
-                <BaseDropdownActions
-                  {...props}
-                  {...controls}
-                  openEditCommentDialog={openEditCommentDialog}
-                  openDeleteCommentDialog={openDeleteCommentDialog}
-                  openBlockUserDialog={openBlockUserDialog}
-                />
+                <CollapseComment.Dialog commentId={comment.id}>
+                  {({ open: openCollapseCommentDialog }) => (
+                    <BaseDropdownActions
+                      {...props}
+                      {...controls}
+                      openEditCommentDialog={openEditCommentDialog}
+                      openDeleteCommentDialog={openDeleteCommentDialog}
+                      openBlockUserDialog={openBlockUserDialog}
+                      openCollapseCommentDialog={openCollapseCommentDialog}
+                    />
+                  )}
+                </CollapseComment.Dialog>
               )}
             </BlockUser.Dialog>
           )}

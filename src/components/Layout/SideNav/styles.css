@@ -5,15 +5,16 @@
 .side-nav {
   position: sticky;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   margin-right: calc(var(--grid-gutter) * -1);
   padding-top: var(--spacing-x-loose);
 
-  text-align: center;
-
   @media (--md-up) {
+    align-items: flex-start;
     margin-right: 0;
-    text-align: left;
   }
 }
 
@@ -27,6 +28,8 @@
 
 ul {
   & li {
+    display: flex;
+
     & + li {
       margin-top: var(--spacing-x-loose);
     }

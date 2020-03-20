@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2020-03-20
+
+### Added
+
+- View Mode #834
+- Civic Liker Ring #833
+
+### Changed
+
+- Add confirm dialog for comment collapse. #826
+- Scroll to top if tap active nav item #831
+- Flip `<SideNav>` in small viewport #831
+- Hide mixed cards from latest home feed #832
+- Fix `<CivicLikerButton>` is auto closed by state update #830
+- Remove extra suffix comma of notice #829
+- Remove comment voted related notification and setting. #824
+
 ## [3.0.0] - 2020-03-18
 
 ### Added

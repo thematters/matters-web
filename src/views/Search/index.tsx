@@ -10,7 +10,7 @@ import {
   useResponsive
 } from '~/components'
 
-import { getQuery } from '~/common/utils'
+import { getQuery, routerPush, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
@@ -26,6 +26,10 @@ const Search = () => {
   const isSmallUp = useResponsive('sm-up')
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
+  const onCancel = () => {
+    const path = toPath({ page: 'search' })
+    routerPush(path.href, path.as)
+  }
 
   const isOverview = !q && !typingKey
   const isAutoComplete = typingKey
@@ -38,6 +42,9 @@ const Search = () => {
     !isTagOnly &&
     !isUserOnly &&
     !isArticleOnly
+  const showBackButton = isSmallUp && isOverview
+  const showMeButton = !isSmallUp && isOverview
+  const showCancelButton = !isOverview
 
   useEffect(() => {
     Router.events.on('routeChangeStart', resetAutoComplete)
@@ -48,20 +55,19 @@ const Search = () => {
     <Layout>
       <Layout.Header
         left={
-          isAutoComplete ? (
-            undefined
-          ) : isSmallUp ? (
+          showBackButton ? (
             <Layout.Header.BackButton />
-          ) : (
+          ) : showMeButton ? (
             <Layout.Header.MeButton />
-          )
+          ) : null
         }
         right={
           <>
             <SearchBar hasDropdown={false} onChange={setTypingKey} />
-            {isAutoComplete && (
+
+            {showCancelButton && (
               <Layout.Header.CancelButton
-                onClick={resetAutoComplete}
+                onClick={onCancel}
                 style={{ marginLeft: '1rem' }}
               />
             )}

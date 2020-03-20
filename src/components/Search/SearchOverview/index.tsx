@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
-import { Menu, TextIcon, Translate } from '~/components'
+import { Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -92,9 +92,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                       )
                     }}
                   >
-                    <TextIcon color="grey-darker" size="sm">
-                      {key}
-                    </TextIcon>
+                    {key}
                   </a>
                 </Link>
               </li>

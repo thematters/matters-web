@@ -19,7 +19,9 @@ import { analytics, mergeConnections } from '~/common/utils'
 import Articles from './Articles'
 import Authors from './Authors'
 import SortBy from './SortBy'
+import styles from './styles.css'
 import Tags from './Tags'
+import ViewMode from './ViewMode'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -99,6 +101,7 @@ export const queries = {
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isLargeUp = useResponsive('lg-up')
+  const isHottestFeed = sortBy === 'hottest'
   const {
     data,
     error,
@@ -155,7 +158,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     | NewestFeed_viewer_recommendation_feed_edges
   > = edges
 
-  if (!isLargeUp) {
+  if (!isLargeUp && isHottestFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
@@ -220,8 +223,14 @@ const HomeFeed = () => {
 
   return (
     <>
-      <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
+      <section className="topbar">
+        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
+        <ViewMode />
+      </section>
+
       <MainFeed feedSortType={feedSortType as SortBy} />
+
+      <style jsx>{styles}</style>
     </>
   )
 }

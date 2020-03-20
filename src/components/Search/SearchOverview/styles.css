@@ -13,15 +13,15 @@
       }
 
       & .key {
-        display: inline-flex;
-        padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+        @mixin line-clamp;
+        padding: 0 var(--spacing-x-tight);
+        height: 1.5rem;
 
+        color: var(--color-grey-darker);
+        font-size: var(--font-size-sm);
+        line-height: 1.5rem;
         border-radius: 2rem;
         background: var(--color-grey-lighter);
-
-        & :global(.text) {
-          @mixin line-clamp;
-        }
 
         &:hover,
         &:focus {

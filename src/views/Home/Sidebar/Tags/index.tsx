@@ -66,7 +66,7 @@ const Tags = () => {
                     })
                   }
                 >
-                  <Tag tag={node} type="list" />
+                  <Tag tag={node} type="list" textSize="sm" />
                 </Card>
               </List.Item>
             )
