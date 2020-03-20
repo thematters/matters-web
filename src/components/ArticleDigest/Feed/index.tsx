@@ -76,7 +76,6 @@ export const ArticleDigestFeed = ({
     variables: { id: 'local' }
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
-  const isDefaultMode = viewMode === 'default'
   const isCompactMode = viewMode === 'compact'
 
   const { author, summary, sticky } = article
@@ -92,16 +91,16 @@ export const ArticleDigestFeed = ({
   })
 
   let userDigestProps = {}
-  if (isDefaultMode) {
+  if (isCompactMode) {
+    userDigestProps = {
+      avatarSize: 'sm',
+      textSize: 'sm'
+    }
+  } else {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
       textWeight: 'md'
-    }
-  } else {
-    userDigestProps = {
-      avatarSize: 'sm',
-      textSize: 'sm'
     }
   }
 
