@@ -55,7 +55,6 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const { token } = useContext(ReCaptchaContext)
-  console.log({ token })
 
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
