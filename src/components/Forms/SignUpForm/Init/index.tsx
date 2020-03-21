@@ -9,6 +9,7 @@ import {
   Form,
   LanguageContext,
   Layout,
+  ReCaptchaProvider,
   SendCodeButton,
   Translate
 } from '~/components'
@@ -277,7 +278,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
 
   if (isInPage) {
     return (
-      <>
+      <ReCaptchaProvider>
         <Layout.Header
           left={<Layout.Header.BackButton />}
           right={
@@ -287,14 +288,13 @@ export const SignUpInitForm: React.FC<FormProps> = ({
             </>
           }
         />
-
         {InnerForm}
-      </>
+      </ReCaptchaProvider>
     )
   }
 
   return (
-    <>
+    <ReCaptchaProvider>
       {closeDialog && (
         <Dialog.Header
           title="register"
@@ -306,6 +306,6 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       <Dialog.Content spacing={[0, 0]} hasGrow>
         {InnerForm}
       </Dialog.Content>
-    </>
+    </ReCaptchaProvider>
   )
 }

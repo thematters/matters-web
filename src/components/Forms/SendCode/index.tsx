@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import { Button, TextIcon, Translate, useCountdown } from '~/components'
+import {
+  Button,
+  ReCaptchaContext,
+  TextIcon,
+  Translate,
+  useCountdown
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
 
@@ -24,6 +30,7 @@ import { SendVerificationCode } from './__generated__/SendVerificationCode'
  *   />
  * ```
  */
+
 interface SendCodeButtonProps {
   email: string
   type:
@@ -47,8 +54,12 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   disabled
 }) => {
   const { lang } = useContext(LanguageContext)
+  const { token } = useContext(ReCaptchaContext)
+  console.log({ token })
+
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
+
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0
   })
@@ -56,7 +67,7 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   const sendCode = async () => {
     try {
       await send({
-        variables: { input: { email, type } }
+        variables: { input: { email, type, token } }
       })
       setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
       setSent(true)
