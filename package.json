@@ -86,7 +86,7 @@
     "validator": "^12.2.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@svgr/webpack": "^5.2.0",
     "@testing-library/react": "^10.0.1",
     "@types/autosize": "^3.0.7",
