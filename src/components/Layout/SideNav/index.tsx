@@ -51,8 +51,8 @@ const SideNav = () => {
       <ul>
         <NavListItem
           name={<Translate id="discover" />}
-          icon={<Icon.HomeLarge size="lg" />}
-          activeIcon={<Icon.HomeActiveLarge size="lg" />}
+          icon={<Icon.NavHome size="md" />}
+          activeIcon={<Icon.NavHomeActive size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
           {...PATHS.HOME}
@@ -81,8 +81,8 @@ const SideNav = () => {
         {!isLargeUp && (
           <NavListItem
             name={<Translate id="search" />}
-            icon={<Icon.SearchLarge size="lg" />}
-            activeIcon={<Icon.SearchLarge size="lg" color="green" />}
+            icon={<Icon.NavSearch size="md" />}
+            activeIcon={<Icon.NavSearch size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
             {...PATHS.SEARCH}

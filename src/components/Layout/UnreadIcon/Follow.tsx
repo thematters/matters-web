@@ -39,9 +39,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClass}>
       {active ? (
-        <Icon.FollowActiveLarge size="lg" color="green" />
+        <Icon.NavFollowActive size="md" color="green" />
       ) : (
-        <Icon.FollowLarge size="lg" />
+        <Icon.NavFollow size="md" />
       )}
 
       <style jsx>{styles}</style>

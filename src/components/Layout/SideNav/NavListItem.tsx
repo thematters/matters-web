@@ -48,7 +48,7 @@ const NavListItem = forwardRef(
       <li>
         <Button
           bgActiveColor="grey-lighter"
-          spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
+          spacing={isMediumUp ? ['xtight', 'base'] : undefined}
           size={isMediumUp ? undefined : ['2rem', '2rem']}
           ref={ref}
           {...buttonProps}
@@ -57,7 +57,7 @@ const NavListItem = forwardRef(
             icon={active ? activeIcon : icon}
             size="lg"
             weight="semibold"
-            spacing="xtight"
+            spacing="tight"
             color={active ? 'green' : 'black'}
           >
             {isMediumUp && name}
