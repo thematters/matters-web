@@ -48,7 +48,7 @@ const OAuthCallbackFailure = () => {
   }
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
       <Layout.Spacing>
@@ -68,7 +68,7 @@ const OAuthCallbackFailure = () => {
           </section>
         </Box>
       </Layout.Spacing>
-    </Layout>
+    </Layout.Main>
   )
 }
 

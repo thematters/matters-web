@@ -134,7 +134,7 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
 }
 
 export default ({ type = 'topic' }: ArticleFeedProp) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={
@@ -146,5 +146,5 @@ export default ({ type = 'topic' }: ArticleFeedProp) => (
     <Head title={{ id: type === 'topic' ? 'allTopics' : 'allIcymi' }} />
 
     <Feed type={type} />
-  </Layout>
+  </Layout.Main>
 )

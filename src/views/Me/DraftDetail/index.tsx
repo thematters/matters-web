@@ -59,10 +59,10 @@ export const UPDATE_DRAFT = gql`
 `
 
 const EmptyLayout: React.FC = ({ children }) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
-  </Layout>
+  </Layout.Main>
 )
 
 const DraftDetail = () => {
@@ -145,14 +145,14 @@ const DraftDetail = () => {
   }
 
   return (
-    <Layout
+    <Layout.Main
       aside={
         <>
           {loading && <Spinner />}
           {draft && <Sidebar draft={draft} setSaveStatus={setSaveStatus} />}
         </>
       }
-      asideShowInMobile
+      keepAside
     >
       <Layout.Header
         left={<Layout.Header.BackButton />}
@@ -178,7 +178,7 @@ const DraftDetail = () => {
           </Layout.Spacing>
         </>
       )}
-    </Layout>
+    </Layout.Main>
   )
 }
 

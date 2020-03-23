@@ -21,7 +21,7 @@ const Home = () => {
   const hasLogo = !viewer.isAuthed && !isSmallUp
 
   return (
-    <Layout
+    <Layout.Main
       aside={
         <>
           <Sidebar.Icymi />
@@ -58,7 +58,7 @@ const Home = () => {
       <Feed />
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

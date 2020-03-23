@@ -12,7 +12,7 @@ const Guide = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="guide" />}
@@ -39,7 +39,7 @@ const Guide = () => {
       <style jsx global>
         {detailsStyles}
       </style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

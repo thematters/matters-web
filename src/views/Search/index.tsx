@@ -52,7 +52,7 @@ const Search = () => {
   }, [])
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={
           showBackButton ? (
@@ -87,7 +87,7 @@ const Search = () => {
       {isAggregate && <AggregateResults />}
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

@@ -73,12 +73,12 @@ const Help = () => {
 }
 
 export default () => (
-  <Layout bgColor="grey-lighter">
+  <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="helpCenter" />}
     />
 
     <Help />
-  </Layout>
+  </Layout.Main>
 )

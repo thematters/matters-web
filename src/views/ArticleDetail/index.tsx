@@ -77,10 +77,10 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
 })
 
 const EmptyLayout: React.FC = ({ children }) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
-  </Layout>
+  </Layout.Main>
 )
 
 const ArticleDetail = () => {
@@ -163,7 +163,7 @@ const ArticleDetail = () => {
   }
 
   return (
-    <Layout aside={<RelatedArticles article={article} inSidebar />}>
+    <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -237,7 +237,7 @@ const ArticleDetail = () => {
       )}
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

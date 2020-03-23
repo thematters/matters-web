@@ -182,7 +182,17 @@ header {
   }
 
   & .item {
+    width: 100%;
     margin-bottom: var(--spacing-base);
+    padding: 0 var(--spacing-x-tight);
+
+    @media (--sm-up) {
+      width: 50%;
+    }
+
+    @media (--lg-up) {
+      width: 25%;
+    }
 
     & a {
       @mixin all-transition;
@@ -214,8 +224,6 @@ header {
     margin-bottom: 4.5rem;
 
     & .item {
-      margin-bottom: 3rem;
-
       & a {
         height: 17rem;
 

@@ -9,7 +9,7 @@ interface ErrorProps {
 
 const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header left={<Layout.Header.BackButton />} />
 
       <Error
@@ -18,7 +18,7 @@ const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
       >
         <BackToHomeButton />
       </Error>
-    </Layout>
+    </Layout.Main>
   )
 }
 

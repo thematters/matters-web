@@ -86,7 +86,7 @@ const MeDrafts = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="myDrafts" />}
@@ -96,5 +96,5 @@ export default () => (
     <Head title={{ id: 'myDrafts' }} />
 
     <MeDrafts />
-  </Layout>
+  </Layout.Main>
 )

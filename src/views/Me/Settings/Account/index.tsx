@@ -4,7 +4,7 @@ import SettingsTab from '../SettingsTab'
 import SettingsAccount from './SettingsAccount'
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="accountSetting" />}
@@ -15,5 +15,5 @@ export default () => (
     <Layout.Spacing>
       <SettingsAccount />
     </Layout.Spacing>
-  </Layout>
+  </Layout.Main>
 )

@@ -1,7 +1,7 @@
 import { Head, Layout, Term } from '~/components'
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="termAndPrivacy" />}
@@ -13,5 +13,5 @@ export default () => (
     <Layout.Spacing>
       <Term />
     </Layout.Spacing>
-  </Layout>
+  </Layout.Main>
 )

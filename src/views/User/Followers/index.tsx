@@ -4,9 +4,9 @@ import FollowerTabs from '../FollowerTabs'
 import UserFollowers from './UserFollowers'
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <UserProfile />
     <FollowerTabs />
     <UserFollowers />
-  </Layout>
+  </Layout.Main>
 )
