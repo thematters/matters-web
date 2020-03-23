@@ -47,7 +47,8 @@ const EditingList = ({
   const { data, loading, error } = useQuery<EditorCollection>(
     EDITOR_COLLECTION,
     {
-      variables: { mediaHash: article.mediaHash }
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'no-cache'
     }
   )
   const edges = data?.article?.collection.edges || []
