@@ -14,7 +14,7 @@ export interface SideDrawerNavProps {
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
-  const transitions = useTransition(isOpen, null, {
+  const transitions = useTransition(isOpen, {
     from: {
       opacity: 0,
       transform: `translateX(-100%)`
@@ -33,7 +33,7 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
 
   return (
     <>
-      {transitions.map(({ item, key, props: { opacity, transform } }) => {
+      {transitions(({ opacity, transform }, item) => {
         if (!item) {
           return
         }
@@ -41,7 +41,6 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
         return (
           <AnimatedDrawerOverlay
             initialFocusRef={closeButtonRef}
-            key={key}
             className="side-drawer-nav"
           >
             <AnimatedOverlay style={{ opacity }} />

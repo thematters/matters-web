@@ -38,7 +38,7 @@ const Dialog: React.FC<DialogProps> = ({
   }))
 
   const isSmallUp = useResponsive('sm-up')
-  const transitions = useTransition(isOpen, null, {
+  const transitions = useTransition(isOpen, {
     from: {
       opacity: 0,
       transform: `translateY(30%)`
@@ -92,13 +92,13 @@ const Dialog: React.FC<DialogProps> = ({
 
   return (
     <>
-      {transitions.map(({ item, key, props: { opacity, transform } }) => {
+      {transitions(({ opacity, transform }, item) => {
         if (!item) {
           return
         }
 
         return (
-          <AnimatedDialogOverlay key={key} className="dialog">
+          <AnimatedDialogOverlay className="dialog">
             <AnimatedOverlay style={{ opacity }} />
 
             <DialogContent
