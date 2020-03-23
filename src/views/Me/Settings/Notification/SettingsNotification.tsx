@@ -195,8 +195,8 @@ const SettingsNotification = () => {
     <>
       <Head title={{ id: 'notificationSetting' }} />
 
-      <div className="l-row full first">
-        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+      <div className="block">
+        <section className="item">
           <PageHeader
             title={<Translate zh_hant="偏好" zh_hans="偏好" />}
             is="h2"
@@ -215,7 +215,7 @@ const SettingsNotification = () => {
           ))}
         </section>
 
-        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+        <section className="item">
           <PageHeader
             title={<Translate zh_hant="與我有關" zh_hans="与我有关" />}
             is="h2"
@@ -233,8 +233,8 @@ const SettingsNotification = () => {
         </section>
       </div>
 
-      <div className="l-row full">
-        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+      <div className="block">
+        <section className="item">
           <PageHeader
             title={<Translate zh_hant="作品" zh_hans="作品" />}
             is="h2"
@@ -251,7 +251,7 @@ const SettingsNotification = () => {
           ))}
         </section>
 
-        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+        <section className="item">
           <PageHeader
             title={<Translate zh_hant="評論" zh_hans="评论" />}
             is="h2"
@@ -269,8 +269,8 @@ const SettingsNotification = () => {
         </section>
       </div>
 
-      <div className="l-row full">
-        <section className="section-container l-col-4 l-col-md-4 l-lg-6">
+      <div className="block">
+        <section className="item">
           <PageHeader
             title={<Translate zh_hant="其他" zh_hans="其他" />}
             is="h2"

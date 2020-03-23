@@ -12,8 +12,6 @@ export default () => (
 
     <SettingsTab />
 
-    <Layout.Spacing>
-      <SettingsNotification />
-    </Layout.Spacing>
+    <SettingsNotification />
   </Layout.Main>
 )
