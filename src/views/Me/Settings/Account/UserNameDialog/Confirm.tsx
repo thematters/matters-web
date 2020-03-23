@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
@@ -53,16 +54,15 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       userName: '',
       comparedUserName: ''
     },
-    validate: ({ userName, comparedUserName }) => {
-      return {
+    validate: ({ userName, comparedUserName }) =>
+      _pickBy({
         userName: validateUserName(userName, lang),
         comparedUserName: validateComparedUserName(
           userName,
           comparedUserName,
           lang
         )
-      }
-    },
+      }),
     onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {
       try {
         await update({ variables: { input: { userName } } })
