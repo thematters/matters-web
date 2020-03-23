@@ -152,7 +152,7 @@ const DraftDetail = () => {
           {draft && <Sidebar draft={draft} setSaveStatus={setSaveStatus} />}
         </>
       }
-      asideShowInMobile
+      keepAside
     >
       <Layout.Header
         left={<Layout.Header.BackButton />}

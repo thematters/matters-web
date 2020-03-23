@@ -48,28 +48,22 @@ interface MainProps {
   bgColor?: 'grey-lighter'
   // TODO: this prop only temporally used by DraftDetail,
   // would be removed after revamped
-  asideShowInMobile?: boolean
+  keepAside?: boolean
 }
 
-const Main: React.FC<MainProps> = ({
-  aside,
-  bgColor,
-  asideShowInMobile,
-  children
-}) => {
+const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
   const router = useRouter()
+  const isInSearch = router.pathname === PATHS.SEARCH.href
 
   const articleClass = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
-    asideShowInMobile
+    keepAside
   })
   const asideClass = classNames({
     'l-col-three-right': true,
-    'u-lg-down-hide': !asideShowInMobile
+    'u-lg-down-hide': !keepAside
   })
-
-  const isInSearch = router.pathname === PATHS.SEARCH.href
 
   return (
     <>

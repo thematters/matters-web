@@ -15,7 +15,7 @@ article {
     }
   }
 
-  &.asideShowInMobile {
+  &.keepAside {
     @media (--lg-down) {
       min-height: auto;
     }
