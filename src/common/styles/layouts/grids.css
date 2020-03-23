@@ -143,24 +143,70 @@
 /*
  * Three Column Layout
  */
-.l-col-lg-9-2 {
-  @media (--lg-up) {
+.l-col-three-left {
+  lost-column: 4/4;
+
+  @media (--sm-up) {
+    & {
+      lost-column: 1/8;
+    }
+  }
+  @media (--md-up) {
     & {
       lost-column: 2/9;
     }
   }
-}
-.l-offset-lg-9-2 {
   @media (--lg-up) {
     & {
-      lost-offset: 2/9;
+      lost-column: 2/12;
     }
   }
 }
-.l-col-lg-9-7 {
-  @media (--lg-up) {
+
+.l-col-three-mid {
+  lost-column: 4/4;
+
+  @media (--sm-up) {
+    & {
+      lost-column: 7/8;
+    }
+  }
+  @media (--md-up) {
     & {
       lost-column: 7/9;
+    }
+  }
+  @media (--lg-up) {
+    & {
+      lost-column: 7/12;
+    }
+  }
+
+  @media (--lg-down) {
+    margin-right: 0 !important;
+  }
+}
+
+.l-col-three-right {
+  lost-column: 4/4;
+
+  @media (--sm-up) {
+    & {
+      lost-offset: 1/8;
+      lost-column: 7/8;
+    }
+  }
+  @media (--md-up) {
+    & {
+      lost-offset: 2/9;
+      lost-column: 7/9;
+    }
+  }
+  @media (--lg-up) {
+    & {
+      lost-offset: 0/12;
+      lost-column: 3/12;
+      margin-right: 0 !important;
     }
   }
 }

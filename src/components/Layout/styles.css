@@ -1,5 +1,3 @@
-@lost flexbox flex;
-
 article {
   min-height: 100vh;
 
@@ -47,72 +45,5 @@ aside {
 
     border-left: none;
     border-right: none;
-  }
-}
-
-/**
- * Layout
- */
-nav {
-  lost-column: 4/4;
-
-  @media (--sm-up) {
-    & {
-      lost-column: 1/8;
-    }
-  }
-
-  @media (--md-up) {
-    & {
-      lost-column: 2/9;
-    }
-  }
-
-  @media (--lg-up) {
-    & {
-      lost-column: 2/12;
-    }
-  }
-}
-
-main {
-  lost-column: 4/4;
-
-  @media (--sm-up) {
-    & {
-      lost-column: 7/8;
-    }
-  }
-
-  @media (--md-up) {
-    & {
-      lost-column: 7/9;
-    }
-  }
-
-  @media (--lg-up) {
-    & {
-      lost-column: 10/12;
-    }
-  }
-}
-
-article {
-  lost-column: 4/4;
-
-  @media (--lg-up) {
-    & {
-      lost-column: 7/10;
-    }
-  }
-}
-
-aside {
-  lost-column: 4/4;
-
-  @media (--lg-up) {
-    & {
-      lost-column: 3/10;
-    }
   }
 }

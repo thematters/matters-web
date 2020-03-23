@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 
-import { Head, SearchBar, useResponsive } from '~/components'
+import { Head, SearchBar } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -17,28 +17,22 @@ export const Layout: React.FC & {
   Header: typeof Header
   Spacing: typeof Spacing
 } = ({ children }) => {
-  const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
-
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
-  const showNav = isSmallUp
-  const showNavBar = !isSmallUp && !isInDraftDetail
 
   return (
     <>
       <Head />
 
-      <div className="l-row full">
-        {showNav && (
-          <nav role="navigation" className="u-sm-down-hide">
-            <SideNav />
-          </nav>
-        )}
+      <main className="l-row full">
+        <nav role="navigation" className="l-col-three-left u-sm-down-hide">
+          <SideNav />
+        </nav>
 
-        <main>{children}</main>
-      </div>
+        {children}
+      </main>
 
-      {showNavBar && (
+      {!isInDraftDetail && (
         <footer className="u-sm-up-hide">
           <NavBar />
         </footer>
@@ -63,41 +57,38 @@ const Main: React.FC<MainProps> = ({
   asideShowInMobile,
   children
 }) => {
-  const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
 
   const articleClass = classNames({
+    'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
     asideShowInMobile
   })
   const asideClass = classNames({
+    'l-col-three-right': true,
     'u-lg-down-hide': !asideShowInMobile
   })
 
   const isInSearch = router.pathname === PATHS.SEARCH.href
-  const showAside = isLargeUp || asideShowInMobile
-  const showSearchBar = isLargeUp && !isInSearch
 
   return (
-    <div className="l-row full">
+    <>
       <article className={articleClass}>{children}</article>
 
-      {showAside && (
-        <aside className={asideClass}>
-          {showSearchBar && (
-            <section className="u-lg-down-hide">
-              <SearchBar />
-            </section>
-          )}
+      <aside className={asideClass}>
+        {!isInSearch && (
+          <section className="u-lg-down-hide">
+            <SearchBar />
+          </section>
+        )}
 
-          {aside}
+        {aside}
 
-          <SideFooter />
-        </aside>
-      )}
+        <SideFooter />
+      </aside>
 
       <style jsx>{styles}</style>
-    </div>
+    </>
   )
 }
 
