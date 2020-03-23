@@ -116,8 +116,8 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: false }),
         code: validateCode(code, lang),
-        userName: validatePassword(password, lang),
-        password: validateUserName(userName, lang),
+        userName: validateUserName(userName, lang),
+        password: validatePassword(password, lang),
         tos: validateToS(tos, lang)
       }),
     onSubmit: async (
