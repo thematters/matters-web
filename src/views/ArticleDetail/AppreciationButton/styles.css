@@ -39,13 +39,6 @@
 
     background: var(--color-matters-green);
     border-radius: 50%;
-
-    &.max {
-      letter-spacing: -1px;
-      letter-spacing: -0.5px;
-      font-size: 6px;
-      font-weight: var(--font-weight-bolder);
-    }
   }
 }
 
