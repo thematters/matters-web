@@ -23,6 +23,7 @@ export * from './Spinner'
 export * from './Expandable'
 export * from './Slides'
 export * from './CopyToClipboard'
+export * from './ReCaptcha'
 
 /**
  * Compositions
