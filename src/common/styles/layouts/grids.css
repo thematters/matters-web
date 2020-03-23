@@ -121,26 +121,6 @@
 }
 
 /*
- * Waffle
- */
-@each $i in 1, 2, 3, 4 {
-  .l-waffle-$(i) {
-    /* prettier-ignore */
-    lost-column: 1/$(i);
-  }
-}
-@each $device in sm, md, lg {
-  @media (--$(device)-up) {
-    @each $i in 1, 2, 3, 4 {
-      .l-waffle-$(device)-$(i) {
-        /* prettier-ignore */
-        lost-column: 1/$(i);
-      }
-    }
-  }
-}
-
-/*
  * Three Column Layout
  */
 .l-col-three-left {
