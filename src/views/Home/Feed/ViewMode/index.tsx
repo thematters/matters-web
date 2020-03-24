@@ -10,7 +10,7 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { STORE_KEY_VIEW_MODE } from '~/common/enums'
+import { STORE_KEY_VIEW_MODE, TEXT } from '~/common/enums'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
@@ -79,7 +79,7 @@ const ViewMode = () => {
       }}
       dialog={{
         content: <Content />,
-        title: 'moreActions'
+        title: 'switchViewMode'
       }}
     >
       {({ open, ref }) => (
@@ -88,7 +88,7 @@ const ViewMode = () => {
           bgColor="grey-lighter"
           compensation="right"
           aria-haspopup="true"
-          aira-label="切換瀏覽視圖"
+          aira-label={TEXT.zh_hant.switchViewMode}
           onClick={open}
           ref={ref}
         >

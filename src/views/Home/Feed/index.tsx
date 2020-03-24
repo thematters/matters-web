@@ -183,10 +183,10 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {
             const { Feed } = edge
-            return <Feed key={i} />
+            return <Feed key={edge.__typename} />
           } else {
             return (
-              <List.Item key={i}>
+              <List.Item key={edge.node.id}>
                 <ArticleDigestFeed
                   article={edge.node}
                   onClick={() =>
