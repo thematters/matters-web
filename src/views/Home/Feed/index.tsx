@@ -186,7 +186,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
             return <Feed key={edge.__typename} />
           } else {
             return (
-              <List.Item key={edge.node.id}>
+              <List.Item key={edge.cursor}>
                 <ArticleDigestFeed
                   article={edge.node}
                   onClick={() =>

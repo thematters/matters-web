@@ -178,8 +178,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       />
 
       <ul>
-        {selectedArticles.map((article, index) => (
-          <li key={index}>
+        {selectedArticles.map(article => (
+          <li key={article.id}>
             <ArticleDigestDropdown
               article={article}
               titleTextSize="md-s"
