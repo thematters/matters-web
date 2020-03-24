@@ -44,4 +44,4 @@ const BaseDateTime = ({ date, type = 'absolute' }: DateTimeProps) => {
  */
 type MemoedDateTime = React.MemoExoticComponent<React.FC<DateTimeProps>>
 
-export const Translate = React.memo(BaseDateTime) as MemoedDateTime
+export const DateTime = React.memo(BaseDateTime) as MemoedDateTime
