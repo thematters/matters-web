@@ -43,12 +43,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         })
       )
 
-      try {
-        await unsubscribePush({ silent: true })
-        // await clearPersistCache()
-      } catch (e) {
-        console.error('Failed to unsubscribePush after logged out')
-      }
+      await unsubscribePush()
+      // await clearPersistCache()
 
       redirectToTarget()
     } catch (e) {

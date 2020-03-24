@@ -90,15 +90,15 @@ export const initializePush = async ({
    */
   const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
   const isViewerPush = viewer.id === push.userId
-  const isNotificationGranted = Notification.permission === 'granted'
+  const isNotificationGranted =
+    window.Notification && Notification.permission === 'granted'
 
   if (!viewer.id || !isNotificationGranted) {
     return
   }
 
   if (!isViewerPush) {
-    const token = await getToken()
-    await unsubscribePushLocally(token)
+    await unsubscribePush()
   }
 
   client.writeData({
@@ -196,57 +196,52 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
           }
         })
       )
-      console.error('[Push] Failed to subscribe push')
+      console.error('[Push] Failed to subscribe push', e)
     }
   }
 
   console.log('[Push] Subscribed')
 }
 
-export const unsubscribePush = async (options?: { silent?: boolean }) => {
-  const { silent } = options || { silent: false }
-  const token = await getToken()
+export const unsubscribePush = async () => {
+  const firebase = await import('firebase/app')
+  const messaging = firebase.messaging()
 
-  // Delete token in local
+  let token
   try {
-    await unsubscribePushLocally(token)
+    token = await getToken()
   } catch (e) {
-    console.error('[Push] Failed to deleteToken in local')
+    console.error('[Push] Failed to getToken', e)
+  }
 
-    if (!silent) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="關閉失敗，請稍候重試"
-                zh_hans="关闭失败，请稍候重试"
-              />
-            )
-          }
-        })
-      )
+  // Unsubscribe from Firebase
+  if (token) {
+    try {
+      await messaging.deleteToken(token)
+    } catch (e) {
+      console.error('[Push] Failed to deleteToken in local', e)
     }
-
-    throw new Error('[Push] Failed to unsubscribe push')
   }
 
   // Update local state
-  if (cachedClient) {
-    cachedClient.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        push: {
-          enabled: false,
-          __typename: 'Push'
-        }
-      }
-    })
+  localStorage.removeItem(STORE_KEY_PUSH)
+
+  if (!cachedClient) {
+    return
   }
 
-  // Delete token from server
-  if (cachedClient) {
+  cachedClient.writeData({
+    id: 'ClientPreference:local',
+    data: {
+      push: {
+        enabled: false,
+        __typename: 'Push'
+      }
+    }
+  })
+
+  // Unsubscribe from our server
+  if (token) {
     await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
       variables: { id: token, enabled: false }
@@ -254,19 +249,6 @@ export const unsubscribePush = async (options?: { silent?: boolean }) => {
   }
 
   console.log('[Push] Unsubscribed')
-}
-
-const unsubscribePushLocally = async (token?: string) => {
-  const firebase = await import('firebase/app')
-  const messaging = firebase.messaging()
-
-  if (token) {
-    await messaging.deleteToken(token)
-  }
-
-  localStorage.removeItem(STORE_KEY_PUSH)
-
-  return token
 }
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
