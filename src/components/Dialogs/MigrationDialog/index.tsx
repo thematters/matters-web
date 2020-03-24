@@ -13,11 +13,11 @@ interface MigrationDialogProps {
   defaultStep?: Step
 }
 
-export const MigrationDialog = ({
+const BaseMigrationDialog = ({
   children,
   defaultStep = 'upload'
 }: MigrationDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const [step, setStep] = useState<Step>(defaultStep)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -26,6 +26,7 @@ export const MigrationDialog = ({
   return (
     <>
       {children({ open })}
+
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header title="migration" close={close} />
         {step === 'upload' && <Upload nextStep={nextStep} />}
@@ -35,3 +36,15 @@ export const MigrationDialog = ({
     </>
   )
 }
+
+export const MigrationDialog = (props: MigrationDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseMigrationDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

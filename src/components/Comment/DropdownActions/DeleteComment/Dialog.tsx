@@ -26,7 +26,7 @@ const DeleteCommentDialog = ({
   commentId,
   children
 }: DeleteCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -98,4 +98,16 @@ const DeleteCommentDialog = ({
   )
 }
 
-export default DeleteCommentDialog
+const LazyDeleteCommentDialog = (props: DeleteCommentDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <DeleteCommentDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyDeleteCommentDialog

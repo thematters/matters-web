@@ -26,7 +26,7 @@ const CollapseCommentDialog = ({
   commentId,
   children
 }: CollapseCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -102,4 +102,16 @@ const CollapseCommentDialog = ({
   )
 }
 
-export default CollapseCommentDialog
+const LazyCollapseCommentDialog = (props: CollapseCommentDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <CollapseCommentDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyCollapseCommentDialog

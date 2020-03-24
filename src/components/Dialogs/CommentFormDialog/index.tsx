@@ -8,11 +8,11 @@ type CommentFormDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode
 } & Omit<CommentFormProps, 'closeDialog'>
 
-export const CommentFormDialog = ({
+const BaseCommentFormDialog = ({
   children,
   ...props
 }: CommentFormDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -26,3 +26,15 @@ export const CommentFormDialog = ({
     </>
   )
 }
+
+export const CommentFormDialog = (props: CommentFormDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseCommentFormDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

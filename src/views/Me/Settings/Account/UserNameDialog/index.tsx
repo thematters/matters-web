@@ -12,9 +12,9 @@ interface UserNameDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const UserNameDialog = ({ children }: UserNameDialogProps) => {
+const BaseUserNameDialog = ({ children }: UserNameDialogProps) => {
   const [step, setStep] = useState<Step>('ask')
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
 
   const open = () => {
     setStep('ask')
@@ -50,3 +50,15 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
     </>
   )
 }
+
+export const UserNameDialog = (props: UserNameDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseUserNameDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
