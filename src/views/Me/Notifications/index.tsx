@@ -21,10 +21,10 @@ import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from './__generated__/MeNotifications'
 
 const ME_NOTIFICATIONS = gql`
-  query MeNotifications($first: Int, $after: String) {
+  query MeNotifications($after: String) {
     viewer {
       id
-      notices(input: { first: $first, after: $after }) {
+      notices(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -58,9 +58,7 @@ const BaseNotifications = () => {
   const { data, loading, fetchMore } = useQuery<
     MeNotifications,
     { first: number; after?: number }
-  >(ME_NOTIFICATIONS, {
-    variables: { first: 20 }
-  })
+  >(ME_NOTIFICATIONS)
 
   useEffect(() => {
     markAllNoticesAsRead()

@@ -23,7 +23,7 @@ const USER_FOLLOWERS_FEED = gql`
     user(input: { userName: $userName }) {
       id
       displayName
-      followers(input: { first: 10, after: $after }) {
+      followers(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
