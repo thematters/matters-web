@@ -18,21 +18,17 @@ const NavListItem = ({
   active,
   ...props
 }: NavListItemProps) => {
-  const { onClick, href, as, ...restProps } = props
-  const buttonProps = active
-    ? {
-        onClick: () => {
-          if (onClick) {
-            buttonProps.onClick()
-          }
+  const { onClick: baseOnClick } = props
+  const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (baseOnClick) {
+      baseOnClick()
+    }
 
-          if (active) {
-            jump(document.body)
-          }
-        },
-        ...restProps
-      }
-    : props
+    if (active) {
+      event.preventDefault()
+      jump(document.body)
+    }
+  }
 
   return (
     <li>
@@ -40,7 +36,8 @@ const NavListItem = ({
         bgActiveColor="grey-lighter"
         size={['2rem', '2rem']}
         aira-label={name}
-        {...buttonProps}
+        {...props}
+        onClick={onClick}
       >
         {active ? activeIcon : icon}
       </Button>

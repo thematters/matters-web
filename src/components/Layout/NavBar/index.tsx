@@ -24,8 +24,8 @@ const NavBar = () => {
       <ul>
         <NavListItem
           name={TEXT.zh_hant.discover}
-          icon={<Icon.HomeLarge size="lg" />}
-          activeIcon={<Icon.HomeActiveLarge size="lg" color="green" />}
+          icon={<Icon.NavHome size="md" />}
+          activeIcon={<Icon.NavHomeActive size="md" color="green" />}
           active={isInHome}
           {...PATHS.HOME}
         />
@@ -46,8 +46,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.search}
-          icon={<Icon.SearchLarge size="lg" />}
-          activeIcon={<Icon.SearchLarge size="lg" color="green" />}
+          icon={<Icon.NavSearch size="md" />}
+          activeIcon={<Icon.NavSearch size="md" color="green" />}
           active={isInSearch}
           {...PATHS.SEARCH}
         />

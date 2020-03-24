@@ -19,8 +19,8 @@ import EmptySearch from '../EmptySearch'
 import { SeachTags } from './__generated__/SeachTags'
 
 const SEARCH_TAGS = gql`
-  query SeachTags($first: Int!, $key: String!, $after: String) {
-    search(input: { key: $key, type: Tag, first: $first, after: $after }) {
+  query SeachTags($key: String!, $after: String) {
+    search(input: { key: $key, type: Tag, first: 20, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -44,7 +44,7 @@ const SearchTag = () => {
   const q = getQuery({ router, key: 'q' })
 
   const { data, loading, fetchMore } = useQuery<SeachTags>(SEARCH_TAGS, {
-    variables: { key: q, first: 10 }
+    variables: { key: q }
   })
 
   if (loading) {

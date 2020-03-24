@@ -98,3 +98,7 @@ samp {
 pre {
   padding: var(--spacing-x-tight) var(--spacing-base);
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

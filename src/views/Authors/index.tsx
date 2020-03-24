@@ -23,7 +23,7 @@ const ALL_AUTHORSS = gql`
     viewer {
       id
       recommendation {
-        authors(input: { first: 10, after: $after }) {
+        authors(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
             endCursor

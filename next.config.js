@@ -46,7 +46,8 @@ const nextConfig = {
     FB_APP_ID: process.env.FB_APP_ID,
     SENTRY_DSN: process.env.SENTRY_DSN,
     FIREBASE_CONFIG,
-    FCM_VAPID_KEY: process.env.FCM_VAPID_KEY
+    FCM_VAPID_KEY: process.env.FCM_VAPID_KEY,
+    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY
   },
 
   /**

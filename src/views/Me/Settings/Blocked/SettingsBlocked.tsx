@@ -21,7 +21,7 @@ const VIEWER_BLOCK_LIST = gql`
   query ViewerBlockList($after: String) {
     viewer {
       id
-      blockList(input: { first: 10, after: $after }) {
+      blockList(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
