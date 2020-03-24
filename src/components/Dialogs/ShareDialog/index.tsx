@@ -26,8 +26,8 @@ export interface ShareDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+const BaseShareDialog = ({ title, path, children }: ShareDialogProps) => {
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -107,3 +107,11 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
     </>
   )
 }
+
+export const ShareDialog = (props: ShareDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? <BaseShareDialog {...props} /> : <>{props.children({ open })}</>
+    }
+  </Dialog.Lazy>
+)

@@ -4,6 +4,7 @@ import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
 import Message from './Message'
+import Lazy from './Lazy'
 
 /**
  * This is a responsive component which will show
@@ -36,6 +37,7 @@ type DynamicDialogProps = React.ComponentType<DialogProps> & {
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  Lazy: typeof Lazy
 }
 
 const DynamicDialog = dynamic(() => import('./Dialog'), {
@@ -46,5 +48,6 @@ DynamicDialog.Header = Header
 DynamicDialog.Content = Content
 DynamicDialog.Footer = Footer
 DynamicDialog.Message = Message
+DynamicDialog.Lazy = Lazy
 
 export const Dialog = DynamicDialog
