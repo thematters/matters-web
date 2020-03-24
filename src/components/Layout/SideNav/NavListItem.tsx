@@ -27,37 +27,35 @@ const NavListItem = forwardRef(
     }: NavListItemProps,
     ref
   ) => {
-    const { onClick, href, as, ...restProps } = props
-    const buttonProps =
-      active && canScrollTop
-        ? {
-            onClick: () => {
-              if (onClick) {
-                buttonProps.onClick()
-              }
+    const { onClick: baseOnClick } = props
+    const onClick = (
+      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    ) => {
+      if (baseOnClick) {
+        baseOnClick()
+      }
 
-              if (active) {
-                jump(document.body)
-              }
-            },
-            ...restProps
-          }
-        : props
+      if (active && canScrollTop) {
+        event.preventDefault()
+        jump(document.body)
+      }
+    }
 
     return (
       <li>
         <Button
           bgActiveColor="grey-lighter"
-          spacing={isMediumUp ? ['xxtight', 'xtight'] : undefined}
+          spacing={isMediumUp ? ['xtight', 'base'] : undefined}
           size={isMediumUp ? undefined : ['2rem', '2rem']}
           ref={ref}
-          {...buttonProps}
+          {...props}
+          onClick={onClick}
         >
           <TextIcon
             icon={active ? activeIcon : icon}
             size="lg"
             weight="semibold"
-            spacing="xtight"
+            spacing="tight"
             color={active ? 'green' : 'black'}
           >
             {isMediumUp && name}
