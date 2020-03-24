@@ -52,12 +52,7 @@ const ClearHistoryButton = () => {
           query: VIEWER_RECENT_SEARCHES
         })
 
-        if (
-          !data ||
-          !data.viewer ||
-          !data.viewer.activity ||
-          !data.viewer.activity.recentSearches
-        ) {
+        if (!data?.viewer?.activity.recentSearches) {
           return
         }
 
