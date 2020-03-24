@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
-import Message from './Message'
 import Lazy from './Lazy'
+import Message from './Message'
 
 /**
  * This is a responsive component which will show

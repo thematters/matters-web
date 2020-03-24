@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import React from 'react'
 
 import {
   ArticleDigestTitle,
@@ -18,6 +19,11 @@ import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { FollowComment as FollowCommentType } from './__generated__/FollowComment'
+
+interface FollowCommentProps {
+  comment: FollowCommentType
+  onClick?: () => any
+}
 
 const fragments = {
   comment: gql`
@@ -43,13 +49,8 @@ const fragments = {
     ${Comment.FooterActions.fragments.comment}
   `
 }
-const FollowComment = ({
-  comment,
-  onClick
-}: {
-  comment: FollowCommentType
-  onClick?: () => any
-}) => {
+
+const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' }
   })
@@ -125,6 +126,25 @@ const FollowComment = ({
   )
 }
 
-FollowComment.fragments = fragments
+/**
+ * Memoizing
+ */
+type MemoedFollowCommentType = React.MemoExoticComponent<
+  React.FC<FollowCommentProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default FollowComment
+const MemoedFollowComment = React.memo(
+  FollowComment,
+  ({ comment: prevComment }, { comment }) => {
+    return (
+      prevComment.upvotes === comment.upvotes &&
+      prevComment.downvotes === comment.downvotes
+    )
+  }
+) as MemoedFollowCommentType
+
+MemoedFollowComment.fragments = fragments
+
+export default MemoedFollowComment

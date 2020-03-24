@@ -22,7 +22,7 @@ import { LanguageConsumer } from './LanguageContext'
  */
 export type TranslateProps = TranslateArgs
 
-export const Translate = React.memo((props: TranslateProps) => {
+const BaseTranslate = (props: TranslateProps) => {
   const { lang } = props
 
   if (lang) {
@@ -34,4 +34,14 @@ export const Translate = React.memo((props: TranslateProps) => {
       {({ lang: currentLang }) => translate({ lang: currentLang, ...props })}
     </LanguageConsumer>
   )
-})
+}
+
+/**
+ * Memoizing
+ */
+type MemoedTranslate = React.MemoExoticComponent<React.FC<TranslateProps>>
+
+export const Translate = React.memo(
+  BaseTranslate,
+  ({ lang: prevLang }, { lang }) => prevLang === lang
+) as MemoedTranslate

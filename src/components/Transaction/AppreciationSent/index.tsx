@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import React from 'react'
 
 import {
   ArticleDigestTitle,
@@ -13,6 +14,10 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction'
+
+interface AppreciationSentProps {
+  tx: AppreciationSentTransaction
+}
 
 const fragments = {
   transaction: gql`
@@ -32,7 +37,7 @@ const fragments = {
   `
 }
 
-const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
+const AppreciationSent = ({ tx }: AppreciationSentProps) => {
   const { amount, content, purpose, recipient, target } = tx
   const isUseContent = purpose !== 'appreciate'
   const path = target
@@ -82,6 +87,20 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
   )
 }
 
-AppreciationSent.fragments = fragments
+/**
+ * Memoizing
+ */
+type MemoedAppreciationSentType = React.MemoExoticComponent<
+  React.FC<AppreciationSentProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default AppreciationSent
+export const MemoedAppreciationSent = React.memo(
+  AppreciationSent,
+  () => true
+) as MemoedAppreciationSentType
+
+MemoedAppreciationSent.fragments = fragments
+
+export default MemoedAppreciationSent

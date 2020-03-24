@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import React from 'react'
 
 import { Card, Icon, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -62,7 +63,7 @@ const fragments = {
   `
 }
 
-export const ArticleDigestFeed = ({
+const BaseArticleDigestFeed = ({
   article,
 
   inTagDetailLatest,
@@ -174,5 +175,28 @@ export const ArticleDigestFeed = ({
     </Card>
   )
 }
+
+/**
+ * Memoizing
+ */
+type MemoedArticleDigestFeed = React.MemoExoticComponent<
+  React.FC<ArticleDigestFeedProps>
+> & {
+  fragments: typeof fragments
+}
+
+export const ArticleDigestFeed = React.memo(
+  BaseArticleDigestFeed,
+  ({ article: prevArticle }, { article }) => {
+    return (
+      prevArticle.subscribed === article.subscribed &&
+      prevArticle.responseCount === article.responseCount &&
+      prevArticle.articleState === article.articleState &&
+      prevArticle.sticky === article.sticky &&
+      prevArticle.appreciationsReceivedTotal ===
+        article.appreciationsReceivedTotal
+    )
+  }
+) as MemoedArticleDigestFeed
 
 ArticleDigestFeed.fragments = fragments
