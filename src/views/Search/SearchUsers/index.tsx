@@ -18,8 +18,8 @@ import EmptySearch from '../EmptySearch'
 import { SeachUsers } from './__generated__/SeachUsers'
 
 const SEARCH_USERS = gql`
-  query SeachUsers($first: Int!, $key: String!, $after: String) {
-    search(input: { key: $key, type: User, first: $first, after: $after }) {
+  query SeachUsers($key: String!, $after: String) {
+    search(input: { key: $key, type: User, first: 20, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -43,7 +43,7 @@ const SearchUser = () => {
   const q = getQuery({ router, key: 'q' })
 
   const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
-    variables: { key: q, first: 10 }
+    variables: { key: q }
   })
 
   if (loading) {

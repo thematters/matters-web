@@ -20,7 +20,7 @@ const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {
     viewer {
       id
-      drafts(input: { first: 10, after: $after })
+      drafts(input: { first: 20, after: $after })
         @connection(key: "viewerDrafts") {
         pageInfo {
           startCursor
