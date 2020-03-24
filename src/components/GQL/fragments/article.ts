@@ -6,7 +6,7 @@ export default {
   editorCollection: gql`
     fragment EditorCollection on Article {
       id
-      collection(input: { first: null }) @connection(key: "articleCollection") {
+      collection(input: { first: null }) @connection(key: "editorCollection") {
         pageInfo {
           startCursor
           endCursor
@@ -37,13 +37,11 @@ export default {
         edges {
           cursor
           node {
-            ...ArticleDigestDropdownArticle
             ...ArticleDigestSidebarArticle
           }
         }
       }
     }
-    ${ArticleDigestDropdown.fragments.article}
     ${ArticleDigestSidebar.fragments.article}
   `
 }
