@@ -7,7 +7,7 @@ import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/U
 const update = (cache: DataProxy) => {
   try {
     const data = cache.readQuery<UnreadFolloweeArticles>({
-      query: UNREAD_FOLLOWEE_ARTICLES
+      query: UNREAD_FOLLOWEE_ARTICLES,
     })
 
     if (!data?.viewer?.status?.unreadFolloweeArticles) {
@@ -21,10 +21,10 @@ const update = (cache: DataProxy) => {
           ...data.viewer,
           status: {
             ...data.viewer.status,
-            unreadFolloweeArticles: false
-          }
-        }
-      }
+            unreadFolloweeArticles: false,
+          },
+        },
+      },
     })
   } catch (e) {
     console.error(e)

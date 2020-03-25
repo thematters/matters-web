@@ -4,11 +4,11 @@ import Button from './Button'
 import Dialog from './Dialog'
 
 const fragments = {
-  user: userFragments.block
+  user: userFragments.block,
 }
 
 export const BlockUser = {
   fragments,
   Dialog,
-  Button
+  Button,
 }

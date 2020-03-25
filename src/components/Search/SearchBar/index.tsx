@@ -8,7 +8,7 @@ import {
   Dropdown,
   Icon,
   LanguageContext,
-  PopperInstance
+  PopperInstance,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
@@ -35,7 +35,7 @@ const SearchButton = () => (
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
-  hasDropdown = true
+  hasDropdown = true,
 }) => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' }) || ''
@@ -46,7 +46,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const textPlaceholder = translate({
     zh_hant: '搜尋作品、標籤、作者',
     zh_hans: '搜索作品、标签、作者',
-    lang
+    lang,
   })
 
   // dropdown
@@ -68,10 +68,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     <Formik
       initialValues={{ q }}
       enableReinitialize
-      onSubmit={values => {
+      onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: values.q.slice(0, 100)
+          q: values.q.slice(0, 100),
         })
         routerPush(path.href, path.as)
         hideDropdown()
@@ -92,7 +92,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 autoCorrect="off"
-                onChange={e => {
+                onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
                 }}
@@ -117,7 +117,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             }
             trigger="manual"
             placement="bottom-start"
-            onCreate={instance => (instanceRef.current = instance)}
+            onCreate={(instance) => (instanceRef.current = instance)}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
@@ -128,7 +128,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 value={values.q}
-                onChange={e => {
+                onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
                   showDropdown()

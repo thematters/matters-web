@@ -11,7 +11,7 @@ import {
   Layout,
   ReCaptchaProvider,
   SendCodeButton,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
@@ -20,7 +20,7 @@ import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
-  PATHS
+  PATHS,
 } from '~/common/enums'
 import {
   analytics,
@@ -31,7 +31,7 @@ import {
   validateEmail,
   validatePassword,
   validateToS,
-  validateUserName
+  validateUserName,
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
@@ -87,7 +87,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   defaultEmail = '',
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [register] = useMutation<UserRegister>(USER_REGISTER)
@@ -104,14 +104,14 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
       code: '',
       userName: '',
       password: '',
-      tos: true
+      tos: true,
     },
     validate: ({ email, code, userName, password, tos }) =>
       _pickBy({
@@ -119,7 +119,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         code: validateCode(code, lang),
         userName: validateUserName(userName, lang),
         password: validatePassword(password, lang),
-        tos: validateToS(tos, lang)
+        tos: validateToS(tos, lang),
       }),
     onSubmit: async (
       { email, code, userName, password },
@@ -127,14 +127,14 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     ) => {
       try {
         const { data } = await confirm({
-          variables: { input: { email, code, type: 'register' } }
+          variables: { input: { email, code, type: 'register' } },
         })
         const codeId = data?.confirmVerificationCode
 
         await register({
           variables: {
-            input: { email, codeId, userName, displayName: userName, password }
-          }
+            input: { email, codeId, userName, displayName: userName, password },
+          },
         })
 
         analytics.identifyUser()
@@ -145,7 +145,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach(c => {
+        codes.forEach((c) => {
           if (c.includes('USER_EMAIL_')) {
             setFieldError('email', messages[c])
           } else if (c.indexOf('CODE_') >= 0) {
@@ -159,7 +159,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
 
         setSubmitting(false)
       }
-    }
+    },
   })
 
   const InnerForm = (
@@ -171,7 +171,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         required
         placeholder={translate({
           id: 'enterEmail',
-          lang
+          lang,
         })}
         value={values.email}
         error={touched.email && errors.email}
@@ -187,7 +187,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         required
         placeholder={translate({
           id: 'enterVerificationCode',
-          lang
+          lang,
         })}
         value={values.code}
         error={touched.code && errors.code}
@@ -214,11 +214,11 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         placeholder={translate({
           zh_hant: '你的站內身份識別，允許修改一次',
           zh_hans: '你的站内身份识别，允许修改一次',
-          lang
+          lang,
         })}
         hint={translate({
           id: 'hintUserName',
-          lang
+          lang,
         })}
       />
 
@@ -229,7 +229,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         required
         placeholder={translate({
           id: 'enterPassword',
-          lang
+          lang,
         })}
         value={values.password}
         error={touched.password && errors.password}

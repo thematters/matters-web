@@ -12,7 +12,7 @@ const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
 
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName || ''
+    userName: user.userName || '',
   })
 
   return (
@@ -29,7 +29,7 @@ NoticeActorName.fragments = {
       userName
       displayName
     }
-  `
+  `,
 }
 
 export default NoticeActorName

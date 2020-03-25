@@ -7,7 +7,7 @@ import {
   ButtonHeight,
   ButtonWidth,
   TextIcon,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
@@ -33,7 +33,7 @@ const UNFOLLOW_USER = gql`
 
 const Unfollow = ({
   user,
-  size
+  size,
 }: {
   user: FollowButtonUser
   size: FollowButtonSize
@@ -46,20 +46,20 @@ const Unfollow = ({
         id: user.id,
         isFollowee: false,
         isFollower: user.isFollower,
-        __typename: 'User'
-      }
+        __typename: 'User',
+      },
     },
-    update: cache => {
+    update: (cache) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'decrement', userName })
       updateViewerFolloweeCount({ cache, type: 'decrement' })
-    }
+    },
   })
 
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
-    'md-s': ['3.25rem', '1.5rem']
+    'md-s': ['3.25rem', '1.5rem'],
   }
 
   return (

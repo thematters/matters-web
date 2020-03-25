@@ -23,9 +23,9 @@ const RetryButton = ({ id }: { id: string }) => {
         id,
         scheduledAt: new Date(Date.now() + 1000).toISOString(),
         publishState: 'pending' as any,
-        __typename: 'Draft'
-      }
-    }
+        __typename: 'Draft',
+      },
+    },
   })
 
   return (

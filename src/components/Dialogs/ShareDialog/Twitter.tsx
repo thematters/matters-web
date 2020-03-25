@@ -15,11 +15,11 @@ const Twitter = ({ title, link }: { title: string; link: string }) => (
         queryString.stringify({
           url: link,
           text: title,
-          via: 'matterslab'
+          via: 'matterslab',
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.TWITTER,
-        url: link
+        url: link,
       })
       return window.open(shareUrl, 'Share to Twitter')
     }}

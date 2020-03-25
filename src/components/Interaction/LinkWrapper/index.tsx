@@ -22,14 +22,14 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   disabled,
   onClick,
 
-  children
+  children,
 }) => {
   if (disabled) {
     return <>{children}</>
   }
 
   const linkClass = classNames({
-    [`text-active-${textActiveColor}`]: !!textActiveColor
+    [`text-active-${textActiveColor}`]: !!textActiveColor,
   })
 
   return (

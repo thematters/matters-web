@@ -2,7 +2,7 @@ import { DataProxy } from 'apollo-cache'
 
 import {
   UserArticles,
-  UserArticles_user_articles_edges
+  UserArticles_user_articles_edges,
 } from '~/components/GQL/queries/__generated__/UserArticles'
 
 const sortEdgesByCreatedAtDesc = (
@@ -18,7 +18,7 @@ const update = ({
   cache,
   articleId,
   userName,
-  type
+  type,
 }: {
   cache: DataProxy
   articleId: string
@@ -35,7 +35,7 @@ const update = ({
   try {
     const data = cache.readQuery<UserArticles>({
       query: USER_ARTICLES,
-      variables: { userName }
+      variables: { userName },
     })
 
     if (!data || !data.user || !data.user.status || !data.user.articles.edges) {
@@ -59,7 +59,7 @@ const update = ({
         break
       case 'unsticky':
         // unsticky all articles
-        edges = edges.map(edge => {
+        edges = edges.map((edge) => {
           edge.node.sticky = false
           return edge
         })
@@ -79,15 +79,15 @@ const update = ({
           ...data.user,
           articles: {
             ...data.user.articles,
-            edges
+            edges,
           },
           status: {
             ...data.user.status,
             articleCount,
-            totalWordCount
-          }
-        }
-      }
+            totalWordCount,
+          },
+        },
+      },
     })
   } catch (e) {
     console.error(e)

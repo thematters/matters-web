@@ -9,7 +9,7 @@ import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUse
 
 const BlockUserButton = ({
   user,
-  openDialog
+  openDialog,
 }: {
   user: BlockUser
   openDialog: () => void
@@ -20,9 +20,9 @@ const BlockUserButton = ({
       unblockUser: {
         id: user.id,
         isBlocked: false,
-        __typename: 'User'
-      }
-    }
+        __typename: 'User',
+      },
+    },
   })
   const onUnblock = async () => {
     await unblockUser()
@@ -30,8 +30,8 @@ const BlockUserButton = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="successUnblock" />
-        }
+          content: <Translate id="successUnblock" />,
+        },
       })
     )
   }

@@ -6,13 +6,13 @@ import {
   SignUpComplete,
   SignUpInitForm,
   SignUpProfileForm,
-  useEventListener
+  useEventListener,
 } from '~/components'
 
 import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
-  OPEN_SIGNUP_DIALOG
+  OPEN_SIGNUP_DIALOG,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 

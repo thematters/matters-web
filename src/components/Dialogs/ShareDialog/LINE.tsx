@@ -14,12 +14,12 @@ const LINE = ({ title, link }: { title: string; link: string }) => (
         'https://social-plugins.line.me/lineit/share?' +
         queryString.stringify({
           url: link,
-          text: title
+          text: title,
         })
 
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.LINE,
-        url: link
+        url: link,
       })
       return window.open(shareUrl, 'Share to Line')
     }}

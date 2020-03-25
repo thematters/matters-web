@@ -7,5 +7,5 @@ export default {
       publishState
       scheduledAt
     }
-  `
+  `,
 }

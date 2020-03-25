@@ -8,7 +8,7 @@ import {
   LanguageContext,
   Term,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -53,13 +53,13 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
-              content: messages[codes[0]]
-            }
+              content: messages[codes[0]],
+            },
           })
         )
       }
       setSubmitting(false)
-    }
+    },
   })
 
   const onLogout = async () => {
@@ -81,8 +81,8 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureLogout" />
-          }
+            content: <Translate id="failureLogout" />,
+          },
         })
       )
     }

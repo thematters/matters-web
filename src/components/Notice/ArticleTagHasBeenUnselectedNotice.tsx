@@ -12,7 +12,7 @@ import styles from './styles.css'
 import { ArticleTagHasBeenUnselectedNotice as NoticeType } from './__generated__/ArticleTagHasBeenUnselectedNotice'
 
 const ArticleTagHasBeenUnselectedNotice = ({
-  notice
+  notice,
 }: {
   notice: NoticeType
 }) => {
@@ -68,7 +68,7 @@ ArticleTagHasBeenUnselectedNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
     ${NoticeTag.fragments.tag}
-  `
+  `,
 }
 
 export default ArticleTagHasBeenUnselectedNotice

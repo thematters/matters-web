@@ -1,7 +1,7 @@
 import { Empty, Icon } from '~/components'
 
 const EmptySearch = ({
-  description
+  description,
 }: {
   description?: string | React.ReactNode
 }) => <Empty icon={<Icon.NavSearch size="xxl" />} description={description} />

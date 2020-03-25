@@ -10,7 +10,7 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
-  WriteButton
+  WriteButton,
 } from '~/components'
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
@@ -104,7 +104,7 @@ const SideNav = () => {
             boundary="viewport"
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-            onShown={i => {
+            onShown={(i) => {
               hidePopperOnClick(i)
             }}
           >

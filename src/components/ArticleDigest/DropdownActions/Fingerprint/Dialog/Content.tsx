@@ -52,7 +52,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             type="text"
             value={dataHash}
             readOnly
-            onClick={event => event.currentTarget.select()}
+            onClick={(event) => event.currentTarget.select()}
           />
         </section>
       </section>

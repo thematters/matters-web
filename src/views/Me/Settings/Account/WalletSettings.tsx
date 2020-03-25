@@ -9,7 +9,7 @@ import {
   PageHeader,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import styles from './styles.css'
@@ -48,7 +48,7 @@ const WalletSetting = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
   const { data, loading, error } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
-    errorPolicy: 'none'
+    errorPolicy: 'none',
   })
   const LIKE = data?.viewer?.status && data.viewer.status.LIKE
 

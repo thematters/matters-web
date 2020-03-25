@@ -24,10 +24,10 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
           {
             id: commentId,
             state: 'active' as any,
-            __typename: 'Comment'
-          }
-        ]
-      }
+            __typename: 'Comment',
+          },
+        ],
+      },
     }
   )
 

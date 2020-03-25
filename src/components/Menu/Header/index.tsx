@@ -11,10 +11,10 @@ interface MenuHeaderProps {
 const MenuHeader: React.FC<MenuHeaderProps> = ({
   title,
   size = 'md-s',
-  children
+  children,
 }) => {
   const titleClass = classNames({
-    [`size-${size}`]: !!size
+    [`size-${size}`]: !!size,
   })
 
   return (

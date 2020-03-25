@@ -35,7 +35,7 @@ FollowState.fragments = {
       isFollower
       isFollowee
     }
-  `
+  `,
 }
 
 export default FollowState

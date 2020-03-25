@@ -26,7 +26,7 @@ const fragments = {
         userName
       }
     }
-  `
+  `,
 }
 
 const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
@@ -36,17 +36,17 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
       updateArticleInfo: {
         id: article.id,
         sticky: !article.sticky,
-        __typename: 'Article'
-      }
+        __typename: 'Article',
+      },
     },
-    update: cache => {
+    update: (cache) => {
       updateUserArticles({
         cache,
         articleId: article.id,
         userName: article.author.userName,
-        type: article.sticky ? 'unsticky' : 'sticky'
+        type: article.sticky ? 'unsticky' : 'sticky',
       })
-    }
+    },
   })
 
   return (

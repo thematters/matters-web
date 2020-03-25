@@ -3,7 +3,7 @@ import Top from './Top'
 
 const NavMenu = {
   Top,
-  Bottom
+  Bottom,
 }
 
 export default NavMenu

@@ -15,7 +15,7 @@ type BackButtonProps = {
 export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   const isSmallUp = useResponsive('sm-up')
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
 
   const onBack = () => {

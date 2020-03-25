@@ -3,5 +3,5 @@ import { ToastInstance } from './Instance'
 
 export const Toast = {
   Container,
-  Instance: ToastInstance
+  Instance: ToastInstance,
 }

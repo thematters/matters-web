@@ -64,13 +64,13 @@ const AggregateTagResults = () => {
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'tagDetail',
-                    id: node.id
+                    id: node.id,
                   })}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_TAG,
                       location: i,
-                      entrance: q
+                      entrance: q,
                     })
                   }
                 >

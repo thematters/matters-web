@@ -50,7 +50,7 @@ CommentPinnedNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default CommentPinnedNotice

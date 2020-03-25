@@ -49,7 +49,7 @@ const fragments = {
       ...AvatarUser
     }
     ${Avatar.fragments.user}
-  `
+  `,
 }
 
 const Mini = ({
@@ -64,12 +64,12 @@ const Mini = ({
   hasAvatar,
   hasDisplayName,
   hasUserName,
-  disabled
+  disabled,
 }: UserDigestMiniProps) => {
   const isArchived = user?.status?.state === 'archived'
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName || ''
+    userName: user.userName || '',
   })
   const containerClass = classNames({
     container: true,
@@ -77,11 +77,11 @@ const Mini = ({
     [`text-weight-${textWeight}`]: !!textWeight,
     [`name-color-${nameColor}`]: !!nameColor,
     hasAvatar,
-    disabled: disabled || isArchived
+    disabled: disabled || isArchived,
   })
   const nameClass = classNames({
     name: true,
-    [`direction-${direction}`]: !!direction
+    [`direction-${direction}`]: !!direction,
   })
 
   if (isArchived) {

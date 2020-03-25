@@ -32,7 +32,7 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
   const close = () => setShowDialog(false)
 
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const isMobile = data?.clientInfo.isMobile
   const shareLink = process.browser
@@ -50,7 +50,7 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
       try {
         await navigator.share({
           title: shareTitle,
-          url: shareLink
+          url: shareLink,
         })
       } catch (e) {
         console.error(e)
@@ -61,7 +61,7 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
 
     analytics.trackEvent(ANALYTICS_EVENTS, {
       type: SHARE_TYPE.ROOT,
-      url: shareLink
+      url: shareLink,
     })
   }
 

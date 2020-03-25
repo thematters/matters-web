@@ -9,7 +9,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -100,7 +100,7 @@ const FeedAuthors = () => {
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.AUTHORS,
-                      location: (edgeIndex + 1) * (nodeIndex + 1) - 1
+                      location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
                     })
                   }
                 />

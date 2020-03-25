@@ -15,7 +15,7 @@ interface LikeCoinTermProps {
 
 const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
   nextStep,
-  closeDialog
+  closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -37,8 +37,8 @@ const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
           dangerouslySetInnerHTML={{
             __html: translate({
               ...content,
-              lang
-            })
+              lang,
+            }),
           }}
         />
       </Dialog.Content>

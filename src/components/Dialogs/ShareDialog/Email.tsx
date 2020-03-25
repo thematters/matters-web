@@ -17,11 +17,11 @@ const Email = ({ title, link }: { title: string; link: string }) => (
         'mailto:?' +
         queryString.stringify({
           subject: title,
-          body: `${description}\n\n${link}`
+          body: `${description}\n\n${link}`,
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.EMAIL,
-        url: link
+        url: link,
       })
       return (window.location.href = shareUrl)
     }}

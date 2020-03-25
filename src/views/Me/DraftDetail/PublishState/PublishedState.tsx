@@ -6,7 +6,7 @@ import {
   TextIcon,
   Toast,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { toPath } from '~/common/utils'
@@ -15,7 +15,7 @@ const PublishedState = () => {
   const viewer = useContext(ViewerContext)
   const path = toPath({
     page: 'userProfile',
-    userName: viewer.userName || ''
+    userName: viewer.userName || '',
   })
 
   return (

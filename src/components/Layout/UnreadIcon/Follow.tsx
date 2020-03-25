@@ -22,7 +22,7 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
     {
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
-      skip: !viewer.isAuthed || !process.browser
+      skip: !viewer.isAuthed || !process.browser,
     }
   )
 

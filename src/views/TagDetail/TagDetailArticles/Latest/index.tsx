@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  useEventListener
+  useEventListener,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -16,13 +16,13 @@ import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
 import {
   ANALYTICS_EVENTS,
   FEED_TYPE,
-  REFETCH_TAG_DETAIL_ARTICLES
+  REFETCH_TAG_DETAIL_ARTICLES,
 } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import {
   TagArticles,
-  TagArticles_node_Tag_articles
+  TagArticles_node_Tag_articles,
 } from '~/components/GQL/queries/__generated__/TagArticles'
 
 const LatestArticles = ({ id }: { id: string }) => {
@@ -31,7 +31,7 @@ const LatestArticles = ({ id }: { id: string }) => {
   >(TAG_ARTICLES, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   })
 
   const connectionPath = 'node.articles'
@@ -44,24 +44,24 @@ const LatestArticles = ({ id }: { id: string }) => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAG_DETAIL,
       location: edges ? edges.length : 0,
-      entrance: id
+      entrance: id,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
   const sync = ({
     event,
-    differences = 0
+    differences = 0,
   }: {
     event: 'add' | 'delete'
     differences?: number
@@ -72,16 +72,16 @@ const LatestArticles = ({ id }: { id: string }) => {
         refetch({
           variables: {
             id,
-            first: items.length + differences
-          }
+            first: items.length + differences,
+          },
         })
         break
       case 'delete':
         refetch({
           variables: {
             id,
-            first: Math.max(items.length - 1, 0)
-          }
+            first: Math.max(items.length - 1, 0),
+          },
         })
         break
     }
@@ -116,7 +116,7 @@ const LatestArticles = ({ id }: { id: string }) => {
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.TAG_DETAIL,
                   location: i,
-                  entrance: id
+                  entrance: id,
                 })
               }
               inTagDetailLatest

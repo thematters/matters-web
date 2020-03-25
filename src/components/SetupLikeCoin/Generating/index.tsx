@@ -32,7 +32,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID)
 
   useEffect(() => {
-    generate().then(result => {
+    generate().then((result) => {
       const likerId = result?.data?.generateLikerId.liker.likerId
 
       if (likerId) {

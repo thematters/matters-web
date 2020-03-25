@@ -3,5 +3,5 @@ import Selected from './Selected'
 
 export const TagDetailArticles = {
   Latest,
-  Selected
+  Selected,
 }

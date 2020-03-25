@@ -8,5 +8,5 @@ export const fragments = {
       publishState
       content
     }
-  `
+  `,
 }
