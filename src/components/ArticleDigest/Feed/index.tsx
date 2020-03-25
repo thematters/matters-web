@@ -135,7 +135,7 @@ export const ArticleDigestFeed = ({
             )}
 
             <Live article={article} />
-            <InactiveState article={article} />
+            {inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
