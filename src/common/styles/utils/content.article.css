@@ -405,6 +405,8 @@
 
 .mention-container {
   position: absolute;
+  top: 0;
+  left: 0;
 
   width: var(--sizing-menu-md);
   max-height: calc(4rem * 3);
