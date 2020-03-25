@@ -21,6 +21,7 @@
 
 .u-content,
 #editor-article-container .ql-editor {
+  white-space: pre-wrap;
   line-height: var(--line-height-article-base);
   outline: none;
 
