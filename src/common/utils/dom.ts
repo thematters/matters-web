@@ -18,7 +18,7 @@ const offset = (el: HTMLElement) => {
 
   return {
     top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft
+    left: rect.left + document.body.scrollLeft,
   }
 }
 
@@ -30,7 +30,7 @@ const getAttributes = (name: string, str: string): string[] | [] => {
     matches.push(match[1])
     match = re.exec(str)
   }
-  return matches.filter(m => !!m)
+  return matches.filter((m) => !!m)
 }
 
 export const getLangFromRoot = (): HTMLLanguage => {
@@ -45,5 +45,5 @@ export const dom = {
   getWindowWidth,
   offset,
   getAttributes,
-  getLangFromRoot
+  getLangFromRoot,
 }

@@ -14,14 +14,14 @@ import {
   redirectToTarget,
   translate,
   validateEmail,
-  validatePassword
+  validatePassword,
 } from '~/common/utils'
 
 import {
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
   SignUpDialogButton,
-  SignUpRedirectionButton
+  SignUpRedirectionButton,
 } from './Buttons'
 
 import { UserLogin } from './__generated__/UserLogin'
@@ -48,7 +48,7 @@ export const USER_LOGIN = gql`
 export const LoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN)
   const { lang } = useContext(LanguageContext)
@@ -65,16 +65,16 @@ export const LoginForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isValid,
-    isSubmitting
+    isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        password: validatePassword(password, lang)
+        password: validatePassword(password, lang),
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
@@ -88,8 +88,8 @@ export const LoginForm: React.FC<FormProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successLogin" />
-            }
+              content: <Translate id="successLogin" />,
+            },
           })
         )
         analytics.identifyUser()
@@ -98,11 +98,11 @@ export const LoginForm: React.FC<FormProps> = ({
         // await clearPersistCache()
 
         redirectToTarget({
-          fallback: !!isInPage ? 'homepage' : 'current'
+          fallback: !!isInPage ? 'homepage' : 'current',
         })
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach(code => {
+        codes.forEach((code) => {
           if (code.includes('USER_EMAIL_')) {
             setFieldError('email', messages[code])
           } else if (code.indexOf('USER_PASSWORD_') >= 0) {
@@ -114,12 +114,12 @@ export const LoginForm: React.FC<FormProps> = ({
 
         analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
           email,
-          error
+          error,
         })
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (

@@ -168,25 +168,25 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
-      [className]: !!className
+      [className]: !!className,
     })
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
-      className: containerClass
+      className: containerClass,
     }
 
     // content
     const contentStyle = {
       width: (!isTransparent && width) || undefined,
-      height: (!isTransparent && height) || undefined
+      height: (!isTransparent && height) || undefined,
     }
 
     // hotarea
     const hotAreaStyle = {
       width: width || undefined,
       height: height || undefined,
-      borderRadius
+      borderRadius,
     }
 
     // span

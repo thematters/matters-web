@@ -20,7 +20,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
   <p>当你点击同意升级，我们将开始为你提供以上转轨服务。未来，在 Matters 发布作品、赞赏他人，都需要拥有一个 LikeCoin 帐户。若你不同意以上升级，你在 Matters 的历史作品依然可以收到 LikeCoin 赞赏，但无法进行收益管理，未来也无法使用 Matters 的所有服务。</p>
 
   <p>了解更多创作收益的管理细节，请参考我们的 <a href="/faq" class="u-link-green" target="_blank" >新手指南</a>。</p>
-  `
+  `,
 }
 
 export default LikeCoinTerm

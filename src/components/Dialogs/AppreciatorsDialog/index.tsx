@@ -21,12 +21,12 @@ const fragments = {
         totalCount
       }
     }
-  `
+  `,
 }
 
 export const AppreciatorsDialog = ({
   article,
-  children
+  children,
 }: AppreciatorsDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)

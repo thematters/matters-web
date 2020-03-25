@@ -7,14 +7,14 @@ import {
   CommentFormDialog,
   Icon,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
-  TEXT
+  TEXT,
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
@@ -50,7 +50,7 @@ const fragments = {
       }
     }
     ${ReplyTo.fragments.user}
-  `
+  `,
 }
 
 const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
@@ -68,7 +68,7 @@ const ReplyButton = ({
   comment,
   openLikeCoinDialog,
   commentCallback,
-  inCard
+  inCard,
 }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
@@ -100,7 +100,7 @@ const ReplyButton = ({
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-          }
+          },
         }
       : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
 

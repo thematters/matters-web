@@ -5,7 +5,7 @@ import {
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 interface ChangePasswordDialogProps {
@@ -13,7 +13,7 @@ interface ChangePasswordDialogProps {
 }
 
 export const ChangePasswordDialog = ({
-  children
+  children,
 }: ChangePasswordDialogProps) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState('request')
@@ -21,13 +21,13 @@ export const ChangePasswordDialog = ({
     request: {
       prev: 'login',
       next: 'confirm',
-      email: viewer.info.email
+      email: viewer.info.email,
     },
     confirm: {
       prev: 'request',
-      next: 'complete'
+      next: 'complete',
     },
-    complete: {}
+    complete: {},
   })
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
@@ -38,14 +38,14 @@ export const ChangePasswordDialog = ({
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
           email,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('confirm')

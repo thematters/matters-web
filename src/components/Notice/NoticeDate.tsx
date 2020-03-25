@@ -20,7 +20,7 @@ NoticeDate.fragments = {
       id
       createdAt
     }
-  `
+  `,
 }
 
 export default NoticeDate

@@ -10,7 +10,7 @@ import { Icon } from '~/components/Icon'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
-  UPLOAD_IMAGE_SIZE_LIMIT
+  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
 import styles from './styles.css'
@@ -53,8 +53,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
                 zh_hant="上傳檔案超過 5 MB"
                 zh_hans="上传文件超过 5 MB"
               />
-            )
-          }
+            ),
+          },
         })
       )
       return
@@ -62,7 +62,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
     try {
       const { data } = await upload({
-        variables: { input: { file, type: 'avatar', entityType: 'user' } }
+        variables: { input: { file, type: 'avatar', entityType: 'user' } },
       })
       const id = data?.singleFileUpload.id
       const path = data?.singleFileUpload.path
@@ -78,15 +78,15 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureUploadImage" />
-          }
+            content: <Translate id="failureUploadImage" />,
+          },
         })
       )
     }
   }
 
   const labelClass = classNames({
-    'has-border': hasBorder
+    'has-border': hasBorder,
   })
 
   return (

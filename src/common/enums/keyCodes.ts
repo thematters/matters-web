@@ -4,5 +4,5 @@ export const KEYCODES = {
   tab: 9,
   up: 38,
   down: 40,
-  v: 86
+  v: 86,
 }

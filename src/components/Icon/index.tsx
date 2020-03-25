@@ -105,7 +105,7 @@ export const withIcon = (
     icon: true,
     [size]: !!size,
     [color]: !!color,
-    [className]: !!className
+    [className]: !!className,
   })
 
   return (
@@ -160,7 +160,7 @@ export const Icon = {
   Comment: withIcon(Comment),
   DeleteDraftMedium: withIcon(DeleteDraftMedium),
   DeleteDraftXS: withIcon(DeleteDraftXS),
-  DotDivider: withIcon(props => (
+  DotDivider: withIcon((props) => (
     <DotDivider style={{ width: 18, height: 18 }} {...props} />
   )),
   Down: withIcon(Down),
@@ -182,10 +182,10 @@ export const Icon = {
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   Live,
-  Logo: withIcon(props => (
+  Logo: withIcon((props) => (
     <Logo style={{ width: 97, height: 20 }} {...props} />
   )),
-  LogoGraph: withIcon(props => (
+  LogoGraph: withIcon((props) => (
     <LogoGraph style={{ width: 48, height: 33 }} {...props} />
   )),
   LogoutMedium: withIcon(LogoutMedium),
@@ -224,5 +224,5 @@ export const Icon = {
   ViewModeComfortable: withIcon(ViewModeComfortable),
   ViewModeCompact: withIcon(ViewModeCompact),
   ViewModeDefault: withIcon(ViewModeDefault),
-  Volume: withIcon(Volume)
+  Volume: withIcon(Volume),
 }

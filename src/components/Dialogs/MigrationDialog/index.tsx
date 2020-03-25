@@ -15,7 +15,7 @@ interface MigrationDialogProps {
 
 export const MigrationDialog = ({
   children,
-  defaultStep = 'upload'
+  defaultStep = 'upload',
 }: MigrationDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const [step, setStep] = useState<Step>(defaultStep)

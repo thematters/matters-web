@@ -13,7 +13,7 @@ export const SeedBadge = () => (
 export const CivicLikerBadge = () => (
   <Button href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT} target="_blank">
     <span>
-      {withIcon(props => (
+      {withIcon((props) => (
         <IconCivicLikerBadge style={{ width: 67, height: 16 }} {...props} />
       ))({})}
     </span>

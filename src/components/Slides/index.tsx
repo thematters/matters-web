@@ -13,7 +13,7 @@ interface SlideItemProps {
 
 const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
   const slidesItemClass = classNames({
-    [`size-${size}`]: !!size
+    [`size-${size}`]: !!size,
   })
 
   return (
@@ -27,11 +27,11 @@ const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
 export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
   bgColor,
   header,
-  children
+  children,
 }) => {
   const slidesClass = classNames({
     slides: true,
-    [`bg-${bgColor}`]: !!bgColor
+    [`bg-${bgColor}`]: !!bgColor,
   })
 
   return (

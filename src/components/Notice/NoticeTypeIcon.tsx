@@ -34,7 +34,7 @@ const getIcon = (type: IconType) => {
 
 const NoticeTypeIcon = ({
   hasSpacing,
-  type
+  type,
 }: {
   hasSpacing?: boolean
   type: IconType
@@ -42,7 +42,7 @@ const NoticeTypeIcon = ({
   const icon = getIcon(type)
 
   const iconWrapClasses = classNames({
-    'icon-wrap': hasSpacing
+    'icon-wrap': hasSpacing,
   })
 
   return (

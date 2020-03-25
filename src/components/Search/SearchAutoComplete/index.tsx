@@ -29,14 +29,14 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
   const [getAutoComplete, { data, loading }] = useLazyQuery<
     SearchAutoCompleteType
   >(SEARCH_AUTOCOMPLETE, {
-    variables: { searchKey }
+    variables: { searchKey },
   })
   const frequentSearch = data?.frequentSearch || []
   const showFrequentSearch = frequentSearch.length > 0
 
   const itemClass = classNames({
     key: true,
-    inPage
+    inPage,
   })
 
   useEffect(() => {
@@ -69,12 +69,12 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
           <Menu.Item
             {...toPath({
               page: 'search',
-              q: key
+              q: key,
             })}
             onClick={() => {
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
                 location: i,
-                entrance: key
+                entrance: key,
               })
             }}
           >

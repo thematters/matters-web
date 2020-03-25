@@ -20,7 +20,7 @@ const fragments = {
       tags
       publishState
     }
-  `
+  `,
 }
 
 const UPDATE_TAGS = gql`
@@ -47,13 +47,13 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
   const isPublished = draft.publishState === 'published'
   const tagsContainerClasses = classNames({
     'tags-container': true,
-    'u-area-disable': isPending || isPublished
+    'u-area-disable': isPending || isPublished,
   })
   const addTag = async (tag: string) => {
     setSaveStatus('saving')
     try {
       await updateTags({
-        variables: { id: draft.id, tags: _uniq(tags.concat(tag)) }
+        variables: { id: draft.id, tags: _uniq(tags.concat(tag)) },
       })
       setSaveStatus('saved')
     } catch (e) {
@@ -64,7 +64,7 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
     setSaveStatus('saving')
     try {
       await updateTags({
-        variables: { id: draft.id, tags: tags.filter(it => it !== tag) }
+        variables: { id: draft.id, tags: tags.filter((it) => it !== tag) },
       })
       setSaveStatus('saved')
     } catch (e) {
@@ -82,7 +82,7 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
       </p>
 
       <section className={tagsContainerClasses}>
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <Tag tag={tag} deleteTag={deleteTag} key={tag} />
         ))}
         <SearchTags addTag={addTag} />

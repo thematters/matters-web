@@ -10,7 +10,7 @@ interface CopyToClipboardProps {
 
 export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
   text,
-  children
+  children,
 }) => {
   return (
     <C2C
@@ -21,8 +21,8 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: <Translate id="failureCopy" />
-              }
+                content: <Translate id="failureCopy" />,
+              },
             })
           )
           return
@@ -32,8 +32,8 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successCopy" />
-            }
+              content: <Translate id="successCopy" />,
+            },
           })
         )
       }}

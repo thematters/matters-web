@@ -9,7 +9,7 @@ import {
   SignUpButton,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { SIGNUP_TYPE } from '~/common/enums'
@@ -34,7 +34,7 @@ const texts: {
       '前往 Medium 設定頁下載檔案，打開 posts 文件夾並找到 HTML 格式的作品文件。',
     sub_content_2_1: '下載檔案',
     title_3: '匯入作品',
-    content_3: '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱。'
+    content_3: '選中想要搬家的作品檔案並上傳，搬家成功的作品會匯入你的草稿箱。',
   },
   zh_hans: {
     header: '三个步骤，立即搬家',
@@ -47,14 +47,14 @@ const texts: {
       '前往 Medium 设置页下载文档，找到 posts 文件夹並找到 HTML 格式的作品文件。',
     sub_content_2_1: '下载文档',
     title_3: '导入作品',
-    content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。'
-  }
+    content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。',
+  },
 }
 
 const Step = ({
   children,
   src,
-  step
+  step,
 }: {
   children: React.ReactNode
   src: string
@@ -86,7 +86,7 @@ const Steps = () => {
 
   const buttonProps: ButtonProps = {
     size: ['7rem', '2.5rem'],
-    spacing: [0, 0]
+    spacing: [0, 0],
   }
 
   return (

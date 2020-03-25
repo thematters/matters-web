@@ -12,7 +12,7 @@ const fragments = {
       id
       pinned
     }
-  `
+  `,
 }
 const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
   if (!comment.pinned) {

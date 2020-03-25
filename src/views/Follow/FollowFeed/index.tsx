@@ -7,7 +7,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -72,18 +72,18 @@ const FollowFeed = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.FOLLOW,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -98,7 +98,7 @@ const FollowFeed = () => {
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.FOLLOW,
-                    location: i
+                    location: i,
                   })
                 }
                 inFollowFeed
@@ -110,7 +110,7 @@ const FollowFeed = () => {
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.FOLLOW,
-                    location: i
+                    location: i,
                   })
                 }
               />

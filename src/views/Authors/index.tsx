@@ -9,7 +9,7 @@ import {
   List,
   Spinner,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -67,19 +67,19 @@ const Authors = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.ALL_AUTHORS,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-          dedupe: true
-        })
+          dedupe: true,
+        }),
     })
   }
 
@@ -94,7 +94,7 @@ const Authors = () => {
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.ALL_AUTHORS,
-                  location: i
+                  location: i,
                 })
               }
             />

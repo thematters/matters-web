@@ -3,5 +3,5 @@ import EditTagButton from './EditTagButton'
 
 export const TagDetailButtons = {
   AddArticleButton,
-  EditTagButton
+  EditTagButton,
 }

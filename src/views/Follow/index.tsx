@@ -34,7 +34,7 @@ const BaseFollow = () => {
   const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
     READ_FOLLOWEE_ARTICLES,
     {
-      update: viewerUnreadFolloweeArticles
+      update: viewerUnreadFolloweeArticles,
     }
   )
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)

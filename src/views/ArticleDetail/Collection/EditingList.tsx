@@ -13,7 +13,7 @@ import styles from './styles.css'
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import {
   EditorCollection,
-  EditorCollection_article_collection_edges_node
+  EditorCollection_article_collection_edges_node,
 } from './__generated__/EditorCollection'
 
 const EDITOR_COLLECTION = gql`
@@ -29,14 +29,14 @@ const CollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),
   {
     ssr: false,
-    loading: Spinner
+    loading: Spinner,
   }
 )
 
 const EditingList = ({
   article,
   editingArticles,
-  setEditingArticles
+  setEditingArticles,
 }: {
   article: ArticleDetail_article
   editingArticles: EditorCollection_article_collection_edges_node[]
@@ -48,7 +48,7 @@ const EditingList = ({
     EDITOR_COLLECTION,
     {
       variables: { mediaHash: article.mediaHash },
-      fetchPolicy: 'no-cache'
+      fetchPolicy: 'no-cache',
     }
   )
   const edges = data?.article?.collection.edges || []
@@ -71,7 +71,7 @@ const EditingList = ({
     <section className="editing-list">
       <CollectionEditor
         articles={editingArticles}
-        onEdit={articles => setEditingArticles(_uniqBy(articles, 'id'))}
+        onEdit={(articles) => setEditingArticles(_uniqBy(articles, 'id'))}
       />
 
       <style jsx>{styles}</style>

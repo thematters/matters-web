@@ -43,7 +43,7 @@ OfficialAnnouncementNotice.fragments = {
       message
     }
     ${NoticeDate.fragments.notice}
-  `
+  `,
 }
 
 export default OfficialAnnouncementNotice

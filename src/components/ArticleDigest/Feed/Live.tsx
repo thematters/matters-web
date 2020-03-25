@@ -10,7 +10,7 @@ const fragments = {
       id
       live
     }
-  `
+  `,
 }
 
 const Live = ({ article }: { article: LiveArticle }) => {

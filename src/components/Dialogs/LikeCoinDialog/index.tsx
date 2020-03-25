@@ -16,7 +16,7 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
   defaultStep = 'term',
   defaultShowDialog = false,
 
-  children
+  children,
 }) => {
   const [step, setStep] = useState<Step>(defaultStep)
   const nextStep = () => setStep('setup')

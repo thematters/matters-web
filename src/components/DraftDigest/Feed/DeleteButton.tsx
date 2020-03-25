@@ -40,7 +40,7 @@ const fragments = {
     fragment DeleteButtonDraft on Draft {
       id
     }
-  `
+  `,
 }
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
@@ -50,7 +50,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
-    update: cache => {
+    update: (cache) => {
       try {
         const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
 
@@ -74,15 +74,15 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
               ...data.viewer,
               drafts: {
                 ...data.viewer.drafts,
-                edges
-              }
-            }
-          }
+                edges,
+              },
+            },
+          },
         })
       } catch (e) {
         console.error(e)
       }
-    }
+    },
   })
 
   const onDelete = async () => {
@@ -93,8 +93,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         detail: {
           color: 'green',
           content: <Translate zh_hant="草稿已刪除" zh_hans="草稿已删除" />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }

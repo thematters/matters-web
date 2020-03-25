@@ -24,7 +24,7 @@ interface DeleteCommentDialogProps {
 
 const DeleteCommentDialog = ({
   commentId,
-  children
+  children,
 }: DeleteCommentDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
@@ -36,9 +36,9 @@ const DeleteCommentDialog = ({
       deleteComment: {
         id: commentId,
         state: 'archived' as any,
-        __typename: 'Comment'
-      }
-    }
+        __typename: 'Comment',
+      },
+    },
   })
 
   const onDelete = async () => {
@@ -49,8 +49,8 @@ const DeleteCommentDialog = ({
         detail: {
           color: 'green',
           content: <Translate zh_hant="評論已刪除" zh_hans="评论已删除" />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }

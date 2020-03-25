@@ -26,19 +26,19 @@ const fragments = {
         totalCount
       }
     }
-  `
+  `,
 }
 
 export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [type]: type,
-    active
+    active,
   })
 
   const path = toPath({
     page: 'tagDetail',
-    id: tag.id
+    id: tag.id,
   })
 
   let iconProps: IconProps = {}
@@ -47,36 +47,36 @@ export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
   switch (type) {
     case 'list':
       iconProps = {
-        color: 'grey'
+        color: 'grey',
       }
       textIconProps = {
         size: 'md',
         weight: 'normal',
         spacing: 'xxtight',
-        color: 'black'
+        color: 'black',
       }
       break
     case 'title':
       iconProps = {
         color: 'white',
-        size: 'md'
+        size: 'md',
       }
       textIconProps = {
         size: 'lg',
         weight: 'md',
         spacing: 0,
-        color: 'white'
+        color: 'white',
       }
       break
     case 'inline':
       iconProps = {
-        color: active ? 'green' : 'grey'
+        color: active ? 'green' : 'grey',
       }
       textIconProps = {
         size: 'sm',
         weight: 'md',
         spacing: 0,
-        color: active ? 'green' : 'grey-darker'
+        color: active ? 'green' : 'grey-darker',
       }
       break
   }

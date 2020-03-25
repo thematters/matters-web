@@ -6,7 +6,7 @@ import {
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
   useEventListener,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
@@ -18,25 +18,25 @@ const ResetPasswordDialog = () => {
     request: {
       prev: 'login',
       next: 'reset',
-      email: viewer.info.email
+      email: viewer.info.email,
     },
     reset: {
       prev: 'request',
-      next: 'complete'
+      next: 'complete',
     },
-    complete: {}
+    complete: {},
   })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
           email,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('reset')

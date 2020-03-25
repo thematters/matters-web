@@ -6,7 +6,7 @@ import {
   Menu,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -16,7 +16,7 @@ import {
   analytics,
   // clearPersistCache,
   redirectToTarget,
-  unsubscribePush
+  unsubscribePush,
 } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
@@ -38,8 +38,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate id="successLogout" />
-          }
+            content: <Translate id="successLogout" />,
+          },
         })
       )
 
@@ -52,8 +52,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureLogout" />
-          }
+            content: <Translate id="failureLogout" />,
+          },
         })
       )
     }

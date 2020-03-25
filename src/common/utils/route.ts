@@ -67,13 +67,13 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       const {
         slug,
         mediaHash,
-        author: { userName }
+        author: { userName },
       } = args.article
       const asUrl = `/@${userName}/${slug}-${mediaHash}`
 
       return {
         href: `${PATHS.ARTICLE_DETAIL.href}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
-        as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl
+        as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
     case 'commentDetail': {
@@ -83,50 +83,50 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       return toPath({
         page: 'articleDetail',
         article,
-        fragment
+        fragment,
       })
     }
     case 'draftDetail': {
       return {
         href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}&slug=${args.slug}`,
-        as: `/me/drafts/${args.slug}-${args.id}`
+        as: `/me/drafts/${args.slug}-${args.id}`,
       }
     }
     case 'tagDetail': {
       return {
         href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
-        as: `/tags/${args.id}`
+        as: `/tags/${args.id}`,
       }
     }
     case 'userProfile': {
       return {
         href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
-        as: `/@${args.userName}`
+        as: `/@${args.userName}`,
       }
     }
     case 'userComments': {
       return {
         href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/comments`
+        as: `/@${args.userName}/comments`,
       }
     }
     case 'userFollowers': {
       return {
         href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/followers`
+        as: `/@${args.userName}/followers`,
       }
     }
     case 'userFollowees': {
       return {
         href: `${PATHS.USER_FOLLOWEES.href}?userName=${args.userName}`,
-        as: `/@${args.userName}/followees`
+        as: `/@${args.userName}/followees`,
       }
     }
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
         href: `${PATHS.SEARCH.href}?q=${args.q || ''}${typeStr}`,
-        as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`
+        as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`,
       }
     }
   }
@@ -139,7 +139,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
  */
 export const getQuery = ({
   router,
-  key
+  key,
 }: {
   router: NextRouter
   key: string
@@ -165,7 +165,7 @@ export const getEncodedCurrent = () => {
  * (works on CSR)
  */
 export const redirectToTarget = ({
-  fallback = 'current'
+  fallback = 'current',
 }: {
   fallback?: 'homepage' | 'current'
 } = {}) => {
@@ -200,7 +200,7 @@ export const redirectToLogin = () => {
 export const appendTarget = ({
   href,
   as,
-  fallbackCurrent
+  fallbackCurrent,
 }: {
   href: string
   as: string
@@ -216,12 +216,12 @@ export const appendTarget = ({
   if (target) {
     return {
       href: `${href}?target=${target}`,
-      as: `${as}?target=${target}`
+      as: `${as}?target=${target}`,
     }
   } else {
     return {
       href,
-      as
+      as,
     }
   }
 }

@@ -8,9 +8,9 @@ export default (_: any) => {
     push: {
       enabled: false,
       supported: false,
-      __typename: 'Push'
+      __typename: 'Push',
     },
     routeHistory: [],
-    __typename: 'ClientPreference'
+    __typename: 'ClientPreference',
   }
 }

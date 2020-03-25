@@ -9,7 +9,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  Translate
+  Translate,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -48,7 +48,7 @@ const SearchArticles = () => {
     SEARCH_ARTICLES,
     {
       variables: { key: q, first: 10 },
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
     }
   )
   const isNewLoading = networkStatus === NetworkStatus.setVariables
@@ -68,18 +68,18 @@ const SearchArticles = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_ARTICLE,
       location: edges.length,
-      entrance: q
+      entrance: q,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -96,7 +96,7 @@ const SearchArticles = () => {
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_ARTICLE,
                       location: i,
-                      entrance: q
+                      entrance: q,
                     })
                   }
                 />

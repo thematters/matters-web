@@ -6,7 +6,7 @@ import {
   PageHeader,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { ChangeEmailDialog } from './ChangeEmailDialog'
@@ -15,7 +15,7 @@ import { UserNameDialog } from './UserNameDialog'
 
 const EditButton = ({
   open,
-  disabled
+  disabled,
 }: {
   open: () => void
   disabled?: boolean

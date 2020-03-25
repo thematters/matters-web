@@ -4,7 +4,7 @@ import styles from './styles.css'
 
 type AvatarUploadFieldProps = AvatarUploaderProps
 
-const AvatarUploadField: React.FC<AvatarUploadFieldProps> = props => {
+const AvatarUploadField: React.FC<AvatarUploadFieldProps> = (props) => {
   return (
     <section className="container">
       <AvatarUploader {...props} />

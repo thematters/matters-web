@@ -5,7 +5,7 @@ import {
   ShareButton,
   TextIcon,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { translate } from '~/common/utils'
@@ -42,7 +42,7 @@ const Banner = () => {
           title={translate({
             zh_hant: '我正在搬家到 Matters，邀請你一起來',
             zh_hans: '我正在搬家到 Matters，邀请你一起来',
-            lang
+            lang,
           })}
         >
           <TextIcon color="white" size={isSmallUp ? 'md' : 'sm'} weight="md">

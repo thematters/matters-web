@@ -8,13 +8,13 @@ import {
   LanguageContext,
   Menu,
   TextIcon,
-  Translate
+  Translate,
 } from '~/components'
 
 const textMap = {
   zh_hant: '繁體中文',
   zh_hans: '简体中文',
-  en: 'English'
+  en: 'English',
 }
 
 const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
@@ -64,11 +64,11 @@ export const LanguageSwitch = () => {
   return (
     <DropdownDialog
       dropdown={{
-        content: <Content isInDropdown />
+        content: <Content isInDropdown />,
       }}
       dialog={{
         content: <Content />,
-        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />
+        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />,
       }}
     >
       {({ open, ref }) => (

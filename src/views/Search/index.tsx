@@ -7,7 +7,7 @@ import {
   SearchAutoComplete,
   SearchBar,
   SearchOverview,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { getQuery, routerPush, toPath } from '~/common/utils'

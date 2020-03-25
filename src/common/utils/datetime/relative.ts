@@ -17,7 +17,7 @@ const DIFFS = {
     hourAgo: ' 小时前',
     hoursAgo: ' 小时前',
     dayAgo: ' 天前',
-    daysAgo: ' 天前'
+    daysAgo: ' 天前',
   },
   zh_hans: {
     justNow: '刚刚',
@@ -26,7 +26,7 @@ const DIFFS = {
     hourAgo: ' 小时前',
     hoursAgo: ' 小时前',
     dayAgo: ' 天前',
-    daysAgo: ' 天前'
+    daysAgo: ' 天前',
   },
   en: {
     justNow: 'just now',
@@ -35,8 +35,8 @@ const DIFFS = {
     hourAgo: ' hour ago',
     hoursAgo: ' hours ago',
     dayAgo: ' day ago',
-    daysAgo: ' days ago'
-  }
+    daysAgo: ' days ago',
+  },
 }
 
 const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
