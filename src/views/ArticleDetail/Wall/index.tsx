@@ -1,9 +1,8 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import { Button, Icon, SignUpButton, Translate } from '~/components'
+import { Button, Icon, LoginButton, Translate } from '~/components'
 
-import { SIGNUP_TYPE } from '~/common/enums'
 import IMG_AD from '~/static/images/ad.svg'
 
 import styles from './styles.css'
@@ -45,7 +44,7 @@ const Wall = ({ show }: WallProps) => {
             </p>
 
             <div className="signup">
-              <SignUpButton trackType={SIGNUP_TYPE.AD_WALL} />
+              <LoginButton bgColor="green" />
             </div>
 
             <div className="close">
