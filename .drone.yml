@@ -3,12 +3,12 @@ name: default
 
 steps:
   - name: node modules
-    image: node:11.14.0
+    image: node:12.16.1
     commands:
       - npm install --no-progress --quiet --unsafe-perm >  npm-install.log
 
   - name: tslint
-    image: node:11.14.0
+    image: node:12.16.1
     commands:
       - npm run gen:clean
       - npm run gen:type
@@ -16,7 +16,7 @@ steps:
       - npm run format:check
 
   - name: test
-    image: node:11.14.0
+    image: node:12.16.1
     environment:
       CODECOV_TOKEN: f109cbf6-b6c7-4a08-ad03-981bc4cd1fe8
       MATTERS_ENV: test
@@ -28,7 +28,7 @@ steps:
 
   # === CI tasks for `develop` branch ===
   - name: develop:build
-    image: node:11.14.0
+    image: node:12.16.1
     commands:
       - npm run build
     environment:
@@ -75,7 +75,7 @@ steps:
         - push
 
   - name: develop:bdd
-    image: node:11.14.0
+    image: node:12.16.1
     failure: ignore
     environment:
       BDD_USER:
@@ -97,7 +97,7 @@ steps:
 
   # === CI tasks for `master` branch ===
   - name: prod:build
-    image: node:11.14.0
+    image: node:12.16.1
     commands:
       - npm run build
     environment:
