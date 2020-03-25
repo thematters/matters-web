@@ -16,7 +16,7 @@ import styles from './styles.css'
 import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
 
 const SubscribedArticleNewCommentNotice = ({
-  notice
+  notice,
 }: {
   notice: NoticeType
 }) => {
@@ -97,7 +97,7 @@ SubscribedArticleNewCommentNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default SubscribedArticleNewCommentNotice

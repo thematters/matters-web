@@ -10,7 +10,7 @@ import {
   PopperInstance,
   PopperProps,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { KEYCODES, TEXT, TextId } from '~/common/enums'
@@ -43,7 +43,7 @@ import { KEYCODES, TEXT, TextId } from '~/common/enums'
 type DropdownDialogNode = ({
   open,
   close,
-  ref
+  ref,
 }: {
   open: () => void
   close: () => void
@@ -76,12 +76,12 @@ const ForwardChildren = forwardRef(
 export const DropdownDialog = ({
   dropdown,
   dialog,
-  children
+  children,
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
   const [
     dropdownInstance,
-    setDropdownInstance
+    setDropdownInstance,
   ] = useState<PopperInstance | null>(null)
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
@@ -105,7 +105,7 @@ export const DropdownDialog = ({
   const Content: React.FC = ({ children: contentChildren }) => {
     return (
       <section
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           if (event.keyCode !== KEYCODES.enter) {
             return
           }

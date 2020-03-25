@@ -27,7 +27,7 @@ export const deferTry = (fn: () => any, timesLeft = 10, defer = 2000) => {
 
 const handleAnalytics = ({
   detail,
-  user
+  user,
 }: {
   detail: CustomEvent['detail']
   user: AnalyticsUser | {}
@@ -41,7 +41,7 @@ const handleAnalytics = ({
     // GA tracking
     if (type === ANALYTIC_TYPES.PAGE) {
       window.gtag('config', GA_TRACKING_ID, {
-        page_location: args.url
+        page_location: args.url,
       })
     }
   }
@@ -55,12 +55,12 @@ const handleAnalytics = ({
         id,
         {
           email: info.email,
-          username: userName
+          username: userName,
         },
         ...args
       )
       window.gtag('config', GA_TRACKING_ID, {
-        user_id: id
+        user_id: id,
       })
     } else {
       // visitor
@@ -85,5 +85,5 @@ AnalyticsListener.fragments = {
         email
       }
     }
-  `
+  `,
 }

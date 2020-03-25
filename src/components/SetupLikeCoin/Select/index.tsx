@@ -11,7 +11,7 @@ interface SelectProps {
 }
 
 const {
-  publicRuntimeConfig: { OAUTH_URL }
+  publicRuntimeConfig: { OAUTH_URL },
 } = getConfig()
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {

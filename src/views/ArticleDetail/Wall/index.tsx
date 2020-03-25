@@ -22,7 +22,7 @@ const Wall = ({ show }: WallProps) => {
     if (client?.writeData) {
       client.writeData({
         id: 'ClientPreference:local',
-        data: { wall: false }
+        data: { wall: false },
       })
     }
   }

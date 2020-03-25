@@ -59,7 +59,7 @@ const fragments = {
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
-  `
+  `,
 }
 
 export const ArticleDigestFeed = ({
@@ -70,10 +70,10 @@ export const ArticleDigestFeed = ({
   inUserArticles,
   inFollowFeed,
 
-  onClick
+  onClick,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isCompactMode = viewMode === 'compact'
@@ -84,23 +84,23 @@ export const ArticleDigestFeed = ({
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
   const containerClass = classNames({
-    [`mode-${viewMode}`]: !!viewMode
+    [`mode-${viewMode}`]: !!viewMode,
   })
 
   let userDigestProps = {}
   if (isCompactMode) {
     userDigestProps = {
       avatarSize: 'sm',
-      textSize: 'sm'
+      textSize: 'sm',
     }
   } else {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
-      textWeight: 'md'
+      textWeight: 'md',
     }
   }
 
@@ -153,7 +153,7 @@ export const ArticleDigestFeed = ({
               <section
                 className="cover"
                 style={{
-                  backgroundImage: `url(${cover})`
+                  backgroundImage: `url(${cover})`,
                 }}
               />
             )}

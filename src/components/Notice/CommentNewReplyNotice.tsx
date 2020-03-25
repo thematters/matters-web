@@ -93,7 +93,7 @@ CommentNewReplyNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default CommentNewReplyNotice

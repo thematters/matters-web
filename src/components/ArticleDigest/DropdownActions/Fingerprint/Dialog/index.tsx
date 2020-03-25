@@ -18,7 +18,7 @@ const fragments = {
       id
       dataHash
     }
-  `
+  `,
 }
 
 const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {

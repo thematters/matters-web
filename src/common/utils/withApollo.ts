@@ -1,7 +1,7 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
 import {
   InMemoryCache,
-  IntrospectionFragmentMatcher
+  IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink, split } from 'apollo-link'
@@ -23,11 +23,11 @@ import resolvers from './resolvers'
 import typeDefs from './types'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData
+  introspectionQueryResultData,
 })
 
 const {
-  publicRuntimeConfig: { ENV, API_URL, WS_URL }
+  publicRuntimeConfig: { ENV, API_URL, WS_URL },
 } = getConfig()
 const isProd = ENV === 'production'
 
@@ -36,12 +36,12 @@ const agent =
   (API_URL || '').split(':')[0] === 'http'
     ? new http.Agent()
     : new https.Agent({
-        rejectUnauthorized: isProd // allow access to https:...matters.news in localhost
+        rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
       })
 
 // links
 const persistedQueryLink = createPersistedQueryLink({
-  useGETForHashedQueries: true
+  useGETForHashedQueries: true,
 })
 
 const httpLink = ({ headers }: { [key: string]: any }) =>
@@ -50,8 +50,8 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
     credentials: 'include',
     headers,
     fetchOptions: {
-      agent
-    }
+      agent,
+    },
   })
 
 // only do ws with browser
@@ -59,8 +59,8 @@ const wsLink = process.browser
   ? new WebSocketLink({
       uri: WS_URL,
       options: {
-        reconnect: true
-      }
+        reconnect: true,
+      },
     })
   : null
 
@@ -86,8 +86,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
           locations
-        )}, Path: ${JSON.stringify(path)}, Code: ${extensions &&
-          extensions.code}`
+        )}, Path: ${JSON.stringify(path)}, Code: ${
+          extensions && extensions.code
+        }`
       )
     )
   }
@@ -100,8 +101,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'x-client-name': 'web'
-    }
+      'x-client-name': 'web',
+    },
   }
 })
 
@@ -109,7 +110,7 @@ const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
   const actionId = randomString()
 
-  import('@sentry/browser').then(Sentry => {
+  import('@sentry/browser').then((Sentry) => {
     Sentry.configureScope((scope: any) => {
       scope.setTag('action-id', actionId)
     })
@@ -118,8 +119,8 @@ const sentryLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'x-sentry-action-id': actionId
-    }
+      'x-sentry-action-id': actionId,
+    },
   }
 })
 
@@ -135,7 +136,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       errorLink,
       authLink,
       sentryLink,
-      dataLink({ headers })
+      dataLink({ headers }),
     ]),
     cache,
     resolvers: {
@@ -150,12 +151,12 @@ export default withApollo(({ ctx, headers, initialState }) => {
 
           return {
             ...data,
-            ...clientInfo
+            ...clientInfo,
           }
-        }
-      }
+        },
+      },
     },
-    typeDefs
+    typeDefs,
   })
 
   return client

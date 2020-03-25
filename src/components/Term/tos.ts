@@ -684,7 +684,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>12.9    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to ask@matters.news.</p>
 
 </details>
-`
+`,
 }
 
 export default ToS

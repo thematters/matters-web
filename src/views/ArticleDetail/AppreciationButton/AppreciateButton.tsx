@@ -20,12 +20,12 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   disabled,
   onClick,
   count,
-  total
+  total,
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null)
   const buttonClass = classNames({
     'appreciate-button': true,
-    clap: true
+    clap: true,
   })
 
   return (
@@ -45,7 +45,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           }
         }}
         aria-label="讚賞作品"
-        onTransitionEnd={e => {
+        onTransitionEnd={(e) => {
           if (e.propertyName === 'transform' && btnRef.current) {
             clap.handZoomOut(btnRef.current)
           }

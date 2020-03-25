@@ -7,7 +7,7 @@ import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/Unread
 const update = (cache: DataProxy) => {
   try {
     const cacheData = cache.readQuery<UnreadNoticeCount>({
-      query: UNREAD_NOTICE_COUNT
+      query: UNREAD_NOTICE_COUNT,
     })
 
     if (!cacheData?.viewer?.status?.unreadNoticeCount) {
@@ -21,10 +21,10 @@ const update = (cache: DataProxy) => {
           ...cacheData.viewer,
           status: {
             ...cacheData.viewer.status,
-            unreadNoticeCount: 0
-          }
-        }
-      }
+            unreadNoticeCount: 0,
+          },
+        },
+      },
     })
   } catch (e) {
     console.error(e)

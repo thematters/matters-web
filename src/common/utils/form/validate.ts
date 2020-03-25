@@ -4,7 +4,7 @@ import {
   isValidPassword,
   isValidUserName,
   translate,
-  ValidEmailOptions
+  ValidEmailOptions,
 } from '~/common/utils'
 
 export const validateEmail = (
@@ -84,7 +84,7 @@ export const validateDescription = (value: string, lang: Language) => {
     return translate({
       zh_hant: `已超過 200 字，目前 ${value.length} 字`,
       zh_hans: `已超过 200 字，目前 ${value.length} 字`,
-      lang
+      lang,
     })
   }
 }

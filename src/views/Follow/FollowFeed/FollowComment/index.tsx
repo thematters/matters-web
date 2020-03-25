@@ -8,7 +8,7 @@ import {
   Comment,
   Expandable,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -41,17 +41,17 @@ const fragments = {
     ${Comment.CreatedAt.fragments.comment}
     ${Comment.Content.fragments.comment}
     ${Comment.FooterActions.fragments.comment}
-  `
+  `,
 }
 const FollowComment = ({
   comment,
-  onClick
+  onClick,
 }: {
   comment: FollowCommentType
   onClick?: () => any
 }) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isDefaultMode = viewMode === 'default'
@@ -62,7 +62,7 @@ const FollowComment = ({
     comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
-          comment
+          comment,
         })
       : {}
 
@@ -71,12 +71,12 @@ const FollowComment = ({
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
-      textWeight: 'md'
+      textWeight: 'md',
     }
   } else {
     userDigestProps = {
       avatarSize: 'sm',
-      textSize: 'sm'
+      textSize: 'sm',
     }
   }
 

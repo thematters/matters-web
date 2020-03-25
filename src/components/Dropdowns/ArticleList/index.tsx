@@ -5,7 +5,7 @@ import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdow
 export const DropdownArticleList = ({
   articles,
   onClick,
-  loading
+  loading,
 }: {
   articles: ArticleDigestDropdownArticle[]
   onClick: (article: ArticleDigestDropdownArticle) => void
@@ -23,7 +23,7 @@ export const DropdownArticleList = ({
 
   return (
     <Menu width="md">
-      {articles.map(article => (
+      {articles.map((article) => (
         <Menu.Item spacing={[0, 0]} key={article.id}>
           <ArticleDigestDropdown
             article={article}

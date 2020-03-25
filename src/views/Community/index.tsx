@@ -25,8 +25,8 @@ const Community = () => {
           dangerouslySetInnerHTML={{
             __html: translate({
               ...content,
-              lang
-            })
+              lang,
+            }),
           }}
           className="u-content"
         />

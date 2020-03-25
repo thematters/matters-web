@@ -10,7 +10,7 @@ const cache = [
   '      ',
   '       ',
   '        ',
-  '         '
+  '         ',
 ]
 
 export function leftPad(

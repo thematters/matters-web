@@ -26,7 +26,7 @@ const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
  * @see {@url https://github.com/atomiks/tippy.js-react}
  */
 
-export const Dropdown: React.FC<PopperProps> = props => (
+export const Dropdown: React.FC<PopperProps> = (props) => (
   <DynamicTippy {...props} />
 )
 Dropdown.defaultProps = {
@@ -39,10 +39,10 @@ Dropdown.defaultProps = {
   animation: 'shift-away',
   theme: 'dropdown',
   boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
 }
 
-export const Tooltip: React.FC<PopperProps> = props => (
+export const Tooltip: React.FC<PopperProps> = (props) => (
   <DynamicTippy {...props} />
 )
 Tooltip.defaultProps = {
@@ -53,7 +53,7 @@ Tooltip.defaultProps = {
   animation: 'shift-away',
   theme: 'tooltip',
   boundary: 'window',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER
+  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
 }
 
 /**
@@ -63,7 +63,7 @@ Tooltip.defaultProps = {
 export const hidePopperOnClick = (instance: PopperInstance) => {
   const popper = instance.popperChildren.tooltip
 
-  popper.addEventListener('click', event => {
+  popper.addEventListener('click', (event) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {

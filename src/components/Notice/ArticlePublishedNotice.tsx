@@ -45,7 +45,7 @@ ArticlePublishedNotice.fragments = {
     }
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default ArticlePublishedNotice

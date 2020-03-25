@@ -31,7 +31,7 @@ const fragments = {
       }
       createdAt
     }
-  `
+  `,
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {

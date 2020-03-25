@@ -97,7 +97,7 @@ const fragments = {
     ${ArticleTagHasBeenAddedNotice.fragments.notice}
     ${ArticleTagHasBeenRemovedNotice.fragments.notice}
     ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
-  `
+  `,
 }
 
 export const Notice = ({ notice }: { notice: DigestNotice }) => {

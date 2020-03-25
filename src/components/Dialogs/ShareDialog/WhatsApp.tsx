@@ -13,12 +13,12 @@ const Whatsapp = ({ title, link }: { title: string; link: string }) => (
       const shareUrl =
         'https://api.whatsapp.com/send?' +
         queryString.stringify({
-          text: title ? title + ' ' + link : link
+          text: title ? title + ' ' + link : link,
         })
 
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.WHATSAPP,
-        url: link
+        url: link,
       })
       return window.open(shareUrl, 'Share to WhatsApp')
     }}

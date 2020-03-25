@@ -24,7 +24,7 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://ipfs.stibarc.com/ipfs/:hash',
   'https://ipfs.best-practice.se/ipfs/:hash',
   'https://:hash.ipfs.2read.net',
-  'https://ipfs.2read.net/ipfs/:hash'
+  'https://ipfs.2read.net/ipfs/:hash',
 ]
 
 function timeout(ms: number, promise: any) {
@@ -64,7 +64,7 @@ const checkGateway = async (
 
 export default async () => {
   const checkers = await Promise.all(
-    PUBLIC_GATEWAYS.map(url =>
+    PUBLIC_GATEWAYS.map((url) =>
       checkGateway(TEST_HASH, url).then((alive: boolean) => ({ url, alive }))
     )
   )

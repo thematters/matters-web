@@ -7,7 +7,7 @@ const SettingItem = ({
   loading,
   title,
   description,
-  onChange
+  onChange,
 }: {
   enabled: boolean
   loading?: boolean

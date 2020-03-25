@@ -50,7 +50,7 @@ const fragments = {
     ${PinnedLabel.fragments.comment}
     ${DropdownActions.fragments.comment}
     ${FooterActions.fragments.comment}
-  `
+  `,
 }
 
 const REFETCH_COMMENT = gql`

@@ -18,11 +18,11 @@ const Douban = ({ title, link }: { title: string; link: string }) => (
         queryString.stringify({
           href: link,
           name: title,
-          text: description
+          text: description,
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.DOUBAN,
-        url: link
+        url: link,
       })
       return window.open(shareUrl)
     }}

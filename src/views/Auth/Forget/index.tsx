@@ -5,31 +5,31 @@ import {
   Layout,
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm
+  PasswordChangeRequestForm,
 } from '~/components'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'confirm'
+      next: 'confirm',
     },
     confirm: {
       prev: 'request',
-      next: 'complete'
-    }
+      next: 'complete',
+    },
   })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
           email,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('confirm')

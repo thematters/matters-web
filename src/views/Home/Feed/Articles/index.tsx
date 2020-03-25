@@ -51,7 +51,7 @@ const FEED_ARTICLES = {
       }
     }
     ${ArticleDigestCard.fragments.article}
-  `
+  `,
 }
 
 const FeedArticles = ({ type = 'icymi' }: FeedArticlesProps) => {
@@ -79,7 +79,7 @@ const FeedArticles = ({ type = 'icymi' }: FeedArticlesProps) => {
                 type: { icymi: FEED_TYPE.ICYMI, topics: FEED_TYPE.TOPICS }[
                   type
                 ],
-                location: i
+                location: i,
               })
             }
           />

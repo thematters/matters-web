@@ -46,7 +46,7 @@ UpstreamArticleArchivedNotice.fragments = {
     }
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default UpstreamArticleArchivedNotice

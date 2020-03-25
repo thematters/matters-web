@@ -7,7 +7,7 @@ import {
   IndexRange,
   InfiniteLoader,
   List,
-  ListRowProps
+  ListRowProps,
 } from 'react-virtualized'
 
 export interface RowRendererProps<T> {
@@ -38,11 +38,11 @@ export const InfiniteList = <T extends object>({
   defaultListHeight = 10,
   defaultListMaxHeight,
   defaultRowHeight,
-  threshold = 1
+  threshold = 1,
 }: Props<T>) => {
   const cache: CellMeasurerCache = new CellMeasurerCache({
     fixedWidth: true,
-    defaultHeight: defaultListHeight
+    defaultHeight: defaultListHeight,
   })
 
   const [listHeight, setListHeight] = useState(
@@ -108,7 +108,7 @@ export const InfiniteList = <T extends object>({
                 rowHeight={cache.rowHeight}
                 rowRenderer={rowRenderer}
                 rowCount={rowCount}
-                onRowsRendered={params => {
+                onRowsRendered={(params) => {
                   onRowsRendered(params)
                   onRowsHaveRendered()
                 }}

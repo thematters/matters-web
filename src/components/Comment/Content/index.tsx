@@ -27,19 +27,19 @@ const fragments = {
         isBlocked
       }
     }
-  `
+  `,
 }
 
 const Content = ({ comment, size }: ContentProps) => {
   const {
     content,
     state,
-    author: { isBlocked }
+    author: { isBlocked },
   } = comment
 
   const contentClass = classNames({
     content: true,
-    [`size-${size}`]: !!size
+    [`size-${size}`]: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {
@@ -64,7 +64,7 @@ const Content = ({ comment, size }: ContentProps) => {
         <section
           className={`${contentClass} u-content-comment`}
           dangerouslySetInnerHTML={{
-            __html: content || ''
+            __html: content || '',
           }}
         />
 

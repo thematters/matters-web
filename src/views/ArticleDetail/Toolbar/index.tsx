@@ -32,7 +32,7 @@ const ARTICLE_TOOLBAR = gql`
 const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
   const isSmallUp = useResponsive('sm-up')
   const { data, loading } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
-    variables: { mediaHash }
+    variables: { mediaHash },
   })
 
   if (loading || !data || !data.article) {

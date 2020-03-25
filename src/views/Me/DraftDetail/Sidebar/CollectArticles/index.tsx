@@ -19,7 +19,7 @@ const CollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),
   {
     ssr: false,
-    loading: Spinner
+    loading: Spinner,
   }
 )
 
@@ -32,7 +32,7 @@ const fragments = {
         totalCount
       }
     }
-  `
+  `,
 }
 
 const DRAFT_COLLECTION = gql`
@@ -80,7 +80,7 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
   const isPublished = draft.publishState === 'published'
   const containerClasses = classNames({
     container: true,
-    'u-area-disable': isPending || isPublished
+    'u-area-disable': isPending || isPublished,
   })
   const handleCollectionChange = () => async (
     articles: ArticleDigestDropdownArticle[]
@@ -90,8 +90,8 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
       await setCollection({
         variables: {
           id: draft.id,
-          collection: _uniq(articles.map(({ id }) => id))
-        }
+          collection: _uniq(articles.map(({ id }) => id)),
+        },
       })
       setSaveStatus('saved')
     } catch (e) {
@@ -103,7 +103,7 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
   const { data, loading, error } = useQuery<DraftCollectionQuery>(
     DRAFT_COLLECTION,
     {
-      variables: { id: draftId }
+      variables: { id: draftId },
     }
   )
   const edges =

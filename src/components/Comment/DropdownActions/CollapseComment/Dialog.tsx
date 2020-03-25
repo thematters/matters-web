@@ -24,7 +24,7 @@ interface CollapseCommentDialogProps {
 
 const CollapseCommentDialog = ({
   commentId,
-  children
+  children,
 }: CollapseCommentDialogProps) => {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
@@ -37,10 +37,10 @@ const CollapseCommentDialog = ({
         {
           id: commentId,
           state: 'collapsed' as any,
-          __typename: 'Comment'
-        }
-      ]
-    }
+          __typename: 'Comment',
+        },
+      ],
+    },
   })
 
   const onCollapse = async () => {
@@ -50,8 +50,8 @@ const CollapseCommentDialog = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="successCollapseComment" />
-        }
+          content: <Translate id="successCollapseComment" />,
+        },
       })
     )
   }

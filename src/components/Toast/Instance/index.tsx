@@ -30,13 +30,13 @@ export const ToastInstance = ({
   content,
   subDescription,
   buttonPlacement = 'top',
-  customButton
+  customButton,
 }: ToastProps) => {
   const mainClass = classNames({
     toast: true,
     [buttonPlacement]: buttonPlacement,
     [color]: !!color,
-    'center-x': !customButton
+    'center-x': !customButton,
   })
   const alertType = color === 'red' ? 'assertive' : 'polite'
 

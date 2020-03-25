@@ -19,7 +19,7 @@ const fragments = {
     }
 
     ${UserDigest.Mini.fragments.user}
-  `
+  `,
 }
 const ReplyTo = ({ user }: ReplyToProps) => (
   <section className="container">

@@ -10,7 +10,7 @@ import {
   parseFormSubmitErrors,
   translate,
   validateComparedUserName,
-  validateUserName
+  validateUserName,
 } from '~/common/utils'
 
 import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
@@ -48,11 +48,11 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       userName: '',
-      comparedUserName: ''
+      comparedUserName: '',
     },
     validate: ({ userName, comparedUserName }) =>
       _pickBy({
@@ -61,7 +61,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
           userName,
           comparedUserName,
           lang
-        )
+        ),
       }),
     onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {
       try {
@@ -76,7 +76,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (
@@ -88,7 +88,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         required
         placeholder={translate({
           id: 'enterUserName',
-          lang
+          lang,
         })}
         hint={<Translate id="hintUserName" />}
         value={values.userName}

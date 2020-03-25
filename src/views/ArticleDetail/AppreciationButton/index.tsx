@@ -17,7 +17,7 @@ import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
   AppreciateArticle,
-  AppreciateArticle_appreciateArticle
+  AppreciateArticle_appreciateArticle,
 } from './__generated__/AppreciateArticle'
 import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
@@ -33,7 +33,7 @@ const fragments = {
       appreciateLimit
       appreciateLeft
     }
-  `
+  `,
 }
 
 const APPRECIATE_ARTICLE = gql`
@@ -50,13 +50,13 @@ const APPRECIATE_ARTICLE = gql`
 `
 
 const AppreciationButton = ({
-  article
+  article,
 }: {
   article: AppreciationButtonArticle
 }) => {
   const viewer = useContext(ViewerContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
 
   // bundle appreciations
@@ -65,7 +65,7 @@ const AppreciationButton = ({
   const {
     appreciateLimit,
     appreciateLeft,
-    appreciationsReceivedTotal
+    appreciationsReceivedTotal,
   } = article
   const limit = appreciateLimit
   const left = appreciateLeft - amount
@@ -81,11 +81,11 @@ const AppreciationButton = ({
             appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
             hasAppreciate: true,
             appreciateLeft: left,
-            __typename: 'Article'
-          } as AppreciateArticle_appreciateArticle
-        }
+            __typename: 'Article',
+          } as AppreciateArticle_appreciateArticle,
+        },
       })
-    } catch(e) {
+    } catch (e) {
       console.error(e)
     }
 
@@ -136,7 +136,7 @@ const AppreciationButton = ({
         onClose={() => {
           client.writeData({
             id: 'ClientPreference:local',
-            data: { readCivicLikerDialog: true }
+            data: { readCivicLikerDialog: true },
           })
         }}
         count={
@@ -165,11 +165,11 @@ const AppreciationButton = ({
           {...(isMe
             ? {
                 zh_hant: '去讚賞其他用戶吧',
-                zh_hans: '去赞赏其他用户吧'
+                zh_hans: '去赞赏其他用户吧',
               }
             : {
                 zh_hant: '你還沒有讚賞權限',
-                zh_hans: '你还没有赞赏权限'
+                zh_hans: '你还没有赞赏权限',
               })}
         />
       }

@@ -64,7 +64,7 @@ ArticleTagHasBeenRemovedNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
     ${NoticeTag.fragments.tag}
-  `
+  `,
 }
 
 export default ArticleTagHasBeenRemovedNotice

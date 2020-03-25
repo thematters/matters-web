@@ -35,7 +35,7 @@ const fragments = {
         userName
       }
     }
-  `
+  `,
 }
 
 export const ArticleDigestTitle = ({
@@ -51,14 +51,14 @@ export const ArticleDigestTitle = ({
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
   const isBanned = state === 'banned'
   const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
     title: true,
     [`text-size-${textSize}`]: !!textSize,
-    [`text-weight-${textWeight}`]: !!textWeight
+    [`text-weight-${textWeight}`]: !!textWeight,
   })
   const isClickable = !disabled && !isBanned
 

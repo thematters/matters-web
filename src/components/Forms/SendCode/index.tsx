@@ -6,7 +6,7 @@ import {
   ReCaptchaContext,
   TextIcon,
   Translate,
-  useCountdown
+  useCountdown,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { LanguageContext } from '~/components/Language'
@@ -51,7 +51,7 @@ export const SEND_CODE = gql`
 export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   email,
   type,
-  disabled
+  disabled,
 }) => {
   const { lang } = useContext(LanguageContext)
   const { token } = useContext(ReCaptchaContext)
@@ -60,13 +60,13 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   const [sent, setSent] = useState(false)
 
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
-    timeLeft: 0
+    timeLeft: 0,
   })
 
   const sendCode = async () => {
     try {
       await send({
-        variables: { input: { email, type, token } }
+        variables: { input: { email, type, token } },
       })
       setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
       setSent(true)
@@ -76,8 +76,8 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: messages[codes[0]]
-          }
+            content: messages[codes[0]],
+          },
         })
       )
     }

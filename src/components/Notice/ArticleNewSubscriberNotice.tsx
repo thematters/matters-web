@@ -84,7 +84,7 @@ ArticleNewSubscriberNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default ArticleNewSubscriberNotice

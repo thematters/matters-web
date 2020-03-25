@@ -5,7 +5,7 @@ import { analytics, redirectToTarget } from '~/common/utils'
 
 export const SignUpComplete = ({
   purpose,
-  closeDialog
+  closeDialog,
 }: {
   purpose?: 'dialog' | 'page'
   closeDialog?: () => void
@@ -73,7 +73,7 @@ export const SignUpComplete = ({
           onClick={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
             redirectToTarget({
-              fallback: isInPage ? 'homepage' : 'current'
+              fallback: isInPage ? 'homepage' : 'current',
             })
           }}
         >

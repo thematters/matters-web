@@ -14,11 +14,11 @@ export const parseFormSubmitErrors = (
   const codes = getErrorCodes(error)
   const messages: ErrorMessages = {} as any
 
-  codes.forEach(code => {
+  codes.forEach((code) => {
     messages[code] = translate({
       zh_hant: TEXT.zh_hant[code] || TEXT.zh_hant.UNKNOWN_ERROR,
       zh_hans: TEXT.zh_hans[code] || TEXT.zh_hans.UNKNOWN_ERROR,
-      lang
+      lang,
     })
   })
 
