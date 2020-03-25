@@ -5,8 +5,8 @@
   "sideEffects": false,
   "author": "",
   "engines": {
-    "node": ">=10.15.0",
-    "npm": ">=6.5.0"
+    "node": ">=12.16.0",
+    "npm": ">=6.14.0"
   },
   "license": "ISC",
   "scripts": {
