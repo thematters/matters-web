@@ -26,8 +26,12 @@ const ME_DRADTS = gql`
       id
       drafts(input: { first: null }) @connection(key: "viewerDrafts") {
         edges {
+          cursor
           node {
             id
+            title
+            slug
+            updatedAt
           }
         }
       }
@@ -54,12 +58,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       try {
         const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
 
-        if (
-          !data ||
-          !data.viewer ||
-          !data.viewer.drafts ||
-          !data.viewer.drafts.edges
-        ) {
+        if (!data?.viewer?.drafts.edges) {
           return
         }
 

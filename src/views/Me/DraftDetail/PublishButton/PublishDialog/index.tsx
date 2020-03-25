@@ -3,14 +3,13 @@ import { useState } from 'react'
 import { Dialog } from '~/components'
 
 import PublishContent from './PublishContent'
-import styles from './styles.css'
 
 interface PublishDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const PublishDialog = ({ children }: PublishDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+const BasePublishDialog = ({ children }: PublishDialogProps) => {
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -21,8 +20,18 @@ export const PublishDialog = ({ children }: PublishDialogProps) => {
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
         <PublishContent closeDialog={close} />
       </Dialog>
-
-      <style jsx>{styles}</style>
     </>
   )
 }
+
+export const PublishDialog = (props: PublishDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BasePublishDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

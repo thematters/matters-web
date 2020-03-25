@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import React from 'react'
 
 import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
 import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
@@ -20,6 +21,10 @@ import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
 import UserNewFollowerNotice from './UserNewFollowerNotice'
 
 import { DigestNotice } from './__generated__/DigestNotice'
+
+interface NoticeProps {
+  notice: DigestNotice
+}
 
 const fragments = {
   notice: gql`
@@ -100,7 +105,7 @@ const fragments = {
   `,
 }
 
-export const Notice = ({ notice }: { notice: DigestNotice }) => {
+const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
   switch (notice.__typename) {
     case 'ArticleNewAppreciationNotice':
       return <ArticleNewAppreciationNotice notice={notice} />
@@ -142,5 +147,14 @@ export const Notice = ({ notice }: { notice: DigestNotice }) => {
       return null
   }
 }
+
+/**
+ * Memoizing
+ */
+type MemoedNotice = React.MemoExoticComponent<React.FC<NoticeProps>> & {
+  fragments: typeof fragments
+}
+
+export const Notice = React.memo(BaseNotice, () => true) as MemoedNotice
 
 Notice.fragments = fragments

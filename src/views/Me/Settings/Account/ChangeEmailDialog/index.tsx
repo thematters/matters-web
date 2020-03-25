@@ -12,7 +12,7 @@ interface ChangeEmailDialogProps {
 
 type Step = 'request' | 'confirm' | 'complete'
 
-export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
+const BaseChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState<Step>('request')
   const [data, setData] = useState<{ [key: string]: any }>({
@@ -37,7 +37,7 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
     setStep('confirm')
   }
 
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setStep('request')
     setShowDialog(true)
@@ -75,3 +75,15 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
     </>
   )
 }
+
+export const ChangeEmailDialog = (props: ChangeEmailDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseChangeEmailDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

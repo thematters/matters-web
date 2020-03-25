@@ -29,7 +29,7 @@ const ArchiveArticleDialog = ({
   article,
   children,
 }: ArchiveArticleDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -115,4 +115,16 @@ const ArchiveArticleDialog = ({
   )
 }
 
-export default ArchiveArticleDialog
+const LazyArchiveArticleDialog = (props: ArchiveArticleDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <ArchiveArticleDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyArchiveArticleDialog

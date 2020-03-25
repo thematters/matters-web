@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import React from 'react'
 
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
@@ -140,6 +141,21 @@ const Rich = ({
   )
 }
 
-Rich.fragments = fragments
+/**
+ * Memoizing
+ */
+type MemoedRichType = React.MemoExoticComponent<React.FC<RichProps>> & {
+  fragments: typeof fragments
+}
 
-export default Rich
+const MemoedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
+  return (
+    prevUser.isFollowee === user.isFollowee &&
+    prevUser.isFollower === user.isFollower &&
+    prevUser.isBlocked === user.isBlocked
+  )
+}) as MemoedRichType
+
+MemoedRich.fragments = fragments
+
+export default MemoedRich

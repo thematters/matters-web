@@ -12,9 +12,7 @@ interface ChangePasswordDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const ChangePasswordDialog = ({
-  children,
-}: ChangePasswordDialogProps) => {
+const BaseChangePasswordDialog = ({ children }: ChangePasswordDialogProps) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
@@ -29,7 +27,7 @@ export const ChangePasswordDialog = ({
     },
     complete: {},
   })
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setStep('request')
     setShowDialog(true)
@@ -92,3 +90,15 @@ export const ChangePasswordDialog = ({
     </>
   )
 }
+
+export const ChangePasswordDialog = (props: ChangePasswordDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseChangePasswordDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
