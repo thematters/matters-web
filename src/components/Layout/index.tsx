@@ -78,7 +78,9 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
 
         {aside}
 
-        <SideFooter />
+        <section className="u-lg-down-hide">
+          <SideFooter />
+        </section>
       </aside>
 
       <style jsx>{styles}</style>
