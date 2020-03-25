@@ -1,4 +1,4 @@
-FROM node:12.16.1
+FROM node:12.16
 
 # install os level packages
 RUN apt-get update && apt-get -y install \
