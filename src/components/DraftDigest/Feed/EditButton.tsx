@@ -17,7 +17,7 @@ const fragments = {
       slug
       title
     }
-  `
+  `,
 }
 
 const EditButton = ({ draft }: EditButtonProps) => {
@@ -25,7 +25,7 @@ const EditButton = ({ draft }: EditButtonProps) => {
   const path = toPath({
     page: 'draftDetail',
     slug,
-    id
+    id,
   })
 
   return (

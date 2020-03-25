@@ -60,7 +60,7 @@ const fragments = {
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
-  `
+  `,
 }
 
 const BaseArticleDigestFeed = ({
@@ -71,10 +71,10 @@ const BaseArticleDigestFeed = ({
   inUserArticles,
   inFollowFeed,
 
-  onClick
+  onClick,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isCompactMode = viewMode === 'compact'
@@ -85,23 +85,23 @@ const BaseArticleDigestFeed = ({
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
   const containerClass = classNames({
-    [`mode-${viewMode}`]: !!viewMode
+    [`mode-${viewMode}`]: !!viewMode,
   })
 
   let userDigestProps = {}
   if (isCompactMode) {
     userDigestProps = {
       avatarSize: 'sm',
-      textSize: 'sm'
+      textSize: 'sm',
     }
   } else {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
-      textWeight: 'md'
+      textWeight: 'md',
     }
   }
 
@@ -136,7 +136,7 @@ const BaseArticleDigestFeed = ({
             )}
 
             <Live article={article} />
-            <InactiveState article={article} />
+            {inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
@@ -154,7 +154,7 @@ const BaseArticleDigestFeed = ({
               <section
                 className="cover"
                 style={{
-                  backgroundImage: `url(${cover})`
+                  backgroundImage: `url(${cover})`,
                 }}
               />
             )}

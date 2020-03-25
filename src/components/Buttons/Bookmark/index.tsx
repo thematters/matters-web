@@ -20,13 +20,13 @@ const fragments = {
       id
       subscribed
     }
-  `
+  `,
 }
 
 export const BookmarkButton = ({
   article,
   size,
-  inCard
+  inCard,
 }: BookmarkButtonProps) => {
   const viewer = useContext(ViewerContext)
 

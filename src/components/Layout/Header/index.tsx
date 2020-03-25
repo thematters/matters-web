@@ -25,12 +25,12 @@ const Header: React.FC<HeaderProps> & {
   right,
   mode = 'solid-fixed',
   marginBottom = 'loose',
-  className
+  className,
 }) => {
   const headerClass = classNames({
     [mode]: true,
     [`margin-${marginBottom}`]: marginBottom,
-    [`${className}`]: !!className
+    [`${className}`]: !!className,
   })
 
   return (

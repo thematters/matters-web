@@ -28,7 +28,7 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
 }
 
 PublishState.fragments = {
-  draft: draftFragments.publishState
+  draft: draftFragments.publishState,
 }
 
 export default PublishState

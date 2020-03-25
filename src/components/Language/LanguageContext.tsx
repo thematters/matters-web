@@ -32,7 +32,7 @@ export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
   children,
-  defaultLang = DEFAULT_LANG
+  defaultLang = DEFAULT_LANG,
 }: {
   children: React.ReactNode
   defaultLang?: Language
@@ -46,7 +46,7 @@ export const LanguageProvider = ({
     <LanguageContext.Provider
       value={{
         lang: viewerLanguage || lang,
-        setLang: async targetLang => {
+        setLang: async (targetLang) => {
           if (viewer.isAuthed) {
             try {
               await updateLanguage({
@@ -56,11 +56,11 @@ export const LanguageProvider = ({
                     id: viewer.id,
                     settings: {
                       language: targetLang as any,
-                      __typename: 'UserSettings'
+                      __typename: 'UserSettings',
                     },
-                    __typename: 'User'
-                  }
-                }
+                    __typename: 'User',
+                  },
+                },
               })
 
               window.dispatchEvent(
@@ -72,8 +72,8 @@ export const LanguageProvider = ({
                         zh_hant="介面語言已修改"
                         zh_hans="界面语言已修改"
                       />
-                    )
-                  }
+                    ),
+                  },
                 })
               )
             } catch (e) {
@@ -81,8 +81,8 @@ export const LanguageProvider = ({
                 new CustomEvent(ADD_TOAST, {
                   detail: {
                     color: 'red',
-                    content: <Translate id="failureChange" />
-                  }
+                    content: <Translate id="failureChange" />,
+                  },
                 })
               )
             }
@@ -96,7 +96,7 @@ export const LanguageProvider = ({
               langConvert.sys2html(targetLang)
             )
           }
-        }
+        },
       }}
     >
       {children}

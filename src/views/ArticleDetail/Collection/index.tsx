@@ -45,14 +45,14 @@ const Collection: React.FC<{
       variables: {
         mediaHash: article.mediaHash,
         after: pageInfo?.endCursor,
-        first: null
+        first: null,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (

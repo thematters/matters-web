@@ -14,7 +14,7 @@ const iterateScopeTexts = (
   }
 
   // retrieve all nested scopes' __text__
-  Object.keys(scopes).forEach(key => {
+  Object.keys(scopes).forEach((key) => {
     if (key === lang) {
       scopeTexts.push(scopes[key])
     }
@@ -27,7 +27,7 @@ const iterateScopeTexts = (
 
 export const toReadableScope = ({
   scope,
-  lang
+  lang,
 }: {
   scope: string
   lang: Language
@@ -46,7 +46,7 @@ export const toReadableScope = ({
     prefix = {
       zh_hant: '讀取你的',
       zh_hans: '读取你的',
-      en: '讀取你的'
+      en: '讀取你的',
     }[lang]
   }
 

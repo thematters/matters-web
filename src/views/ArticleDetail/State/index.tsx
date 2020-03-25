@@ -16,7 +16,7 @@ const fragments = {
     fragment StateResponse on Article {
       articleState: state
     }
-  `
+  `,
 }
 
 const BannedHeader = () => (

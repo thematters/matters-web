@@ -6,7 +6,7 @@ import {
   Icon,
   Menu,
   TextIcon,
-  Translate
+  Translate,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -18,7 +18,7 @@ type ViewMode = 'default' | 'comfortable' | 'compact'
 
 const ViewMode = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isDefaultMode = viewMode === 'default'
@@ -29,7 +29,7 @@ const ViewMode = () => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
-        data: { viewMode: mode }
+        data: { viewMode: mode },
       })
     }
 
@@ -75,11 +75,11 @@ const ViewMode = () => {
     <DropdownDialog
       dropdown={{
         content: <Content isInDropdown />,
-        placement: 'bottom-end'
+        placement: 'bottom-end',
       }}
       dialog={{
         content: <Content />,
-        title: 'switchViewMode'
+        title: 'switchViewMode',
       }}
     >
       {({ open, ref }) => (

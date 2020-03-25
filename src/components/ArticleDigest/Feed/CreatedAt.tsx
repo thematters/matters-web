@@ -14,7 +14,7 @@ const fragments = {
       id
       createdAt
     }
-  `
+  `,
 }
 
 const CreatedAt = ({ article }: CreatedAtProps) => {

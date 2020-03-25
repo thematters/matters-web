@@ -26,13 +26,13 @@ const fragments = {
     fragment RemoveTagButtonArticle on Article {
       id
     }
-  `
+  `,
 }
 
 const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
   const router = useRouter()
   const {
-    query: { id }
+    query: { id },
   } = router
   const tagId = _isArray(id) ? id[0] : id
 
@@ -49,8 +49,8 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
         window.dispatchEvent(
           new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
             detail: {
-              event: 'delete'
-            }
+              event: 'delete',
+            },
           })
         )
       }}

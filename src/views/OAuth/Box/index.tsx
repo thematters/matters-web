@@ -12,7 +12,7 @@ export const Box: React.FC<Props> = ({
   avatar,
   title,
   titleAlign = 'center',
-  children
+  children,
 }) => {
   return (
     <section className="container">

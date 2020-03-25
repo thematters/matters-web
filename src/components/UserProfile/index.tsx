@@ -16,7 +16,7 @@ import {
   Throw404,
   Translate,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { getQuery, numAbbr, toPath } from '~/common/utils'
@@ -62,7 +62,7 @@ const fragments = {
     ${Avatar.fragments.user}
     ${FollowButton.fragments.user}
     ${DropdownActions.fragments.user}
-  `
+  `,
 }
 
 const USER_PROFILE = gql`
@@ -92,7 +92,7 @@ export const UserProfile = () => {
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
     isMe ? ME_PROFILE : USER_PROFILE,
     {
-      variables: isMe ? {} : { userName }
+      variables: isMe ? {} : { userName },
     }
   )
   const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
@@ -152,11 +152,11 @@ export const UserProfile = () => {
 
   const userFollowersPath = toPath({
     page: 'userFollowers',
-    userName: user.userName
+    userName: user.userName,
   })
   const userFolloweesPath = toPath({
     page: 'userFollowees',
-    userName: user.userName
+    userName: user.userName,
   })
   const badges = user.info.badges || []
   const hasSeedBadge = _some(badges, { type: 'seed' })

@@ -43,5 +43,5 @@ export default {
       }
     }
     ${ArticleDigestSidebar.fragments.article}
-  `
+  `,
 }

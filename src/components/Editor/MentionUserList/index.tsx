@@ -5,7 +5,7 @@ import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/U
 const MentionUserList = ({
   mentionLoading,
   mentionSelection,
-  mentionUsers
+  mentionUsers,
 }: {
   mentionLoading?: boolean
   mentionSelection: (user: UserDigestMiniUser) => void

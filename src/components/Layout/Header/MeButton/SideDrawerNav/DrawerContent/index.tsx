@@ -33,7 +33,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
     <nav
       ref={node}
       {...props}
-      onKeyDown={event => {
+      onKeyDown={(event) => {
         if (event.keyCode !== KEYCODES.enter) {
           return
         }

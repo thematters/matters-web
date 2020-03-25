@@ -18,20 +18,20 @@ const BaseChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       next: 'confirm',
-      email: viewer.info.email
+      email: viewer.info.email,
     },
     confirm: {
-      next: 'complete'
-    }
+      next: 'complete',
+    },
   })
   const requestCallback = (codeId: string) => {
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('confirm')

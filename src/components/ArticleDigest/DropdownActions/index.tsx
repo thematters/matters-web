@@ -11,7 +11,7 @@ import {
   IconColor,
   IconSize,
   Menu,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
@@ -74,7 +74,7 @@ const fragments = {
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
-  `
+  `,
 }
 
 const BaseDropdownActions = ({
@@ -94,7 +94,7 @@ const BaseDropdownActions = ({
 
   openFingerprintDialog,
   openAppreciatorsDialog,
-  openArchiveDialog
+  openArchiveDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -125,11 +125,11 @@ const BaseDropdownActions = ({
     <DropdownDialog
       dropdown={{
         content: <Content isInDropdown />,
-        placement: 'bottom-end'
+        placement: 'bottom-end',
       }}
       dialog={{
         content: <Content />,
-        title: 'moreActions'
+        title: 'moreActions',
       }}
     >
       {({ open, ref }) => (
@@ -153,7 +153,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     article,
     inUserArticles,
     inTagDetailLatest,
-    inTagDetailSelected
+    inTagDetailSelected,
   } = props
   const viewer = useContext(ViewerContext)
 
@@ -175,7 +175,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasArchive: isArticleAuthor && isActive && !viewer.isInactive,
     hasSetTagSelected: !!(inTagDetailLatest && isMattyUser),
     hasSetTagUnSelected: !!(inTagDetailSelected && isMattyUser),
-    hasRemoveTag: !!(isInTagDetail && isMattyUser)
+    hasRemoveTag: !!(isInTagDetail && isMattyUser),
   }
 
   if (_isEmpty(_pickBy(controls))) {

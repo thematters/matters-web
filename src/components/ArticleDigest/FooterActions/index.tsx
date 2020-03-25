@@ -38,7 +38,7 @@ const fragments = {
     ${ResponseCount.fragments.article}
     ${BookmarkButton.fragments.article}
     ${DropdownActions.fragments.article}
-  `
+  `,
 }
 
 const FooterActions = ({
@@ -49,7 +49,7 @@ const FooterActions = ({
   const { title } = article
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
 
   return (

@@ -102,7 +102,7 @@ const fragments = {
     ${ArticleTagHasBeenAddedNotice.fragments.notice}
     ${ArticleTagHasBeenRemovedNotice.fragments.notice}
     ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
-  `
+  `,
 }
 
 const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {

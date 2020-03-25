@@ -12,7 +12,7 @@ interface Props {
 export const PasswordChangeComplete: React.FC<Props> = ({
   type,
   purpose,
-  closeDialog
+  closeDialog,
 }) => {
   const isForget = type === 'forget'
   const titleId = isForget ? 'resetPassword' : 'changePassword'

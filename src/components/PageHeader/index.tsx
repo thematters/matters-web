@@ -16,10 +16,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   is = 'h1',
   hasNoBorder = false,
 
-  children
+  children,
 }) => {
   const headerClass = classNames({
-    hasNoBorder: !!hasNoBorder
+    hasNoBorder: !!hasNoBorder,
   })
 
   return (

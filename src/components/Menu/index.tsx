@@ -18,7 +18,7 @@ export const Menu: React.FC<MenuProps> & {
   const menuClass = classNames({
     menu: true,
     [`width-${width}`]: !!width,
-    [`spacing-y-${spacingY}`]: !!spacingY
+    [`spacing-y-${spacingY}`]: !!spacingY,
   })
 
   return (

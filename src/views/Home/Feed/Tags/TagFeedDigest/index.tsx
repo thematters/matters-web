@@ -29,13 +29,13 @@ const fragments = {
     }
     ${Tag.fragments.tag}
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
   const path = toPath({
     page: 'tagDetail',
-    id: tag.id
+    id: tag.id,
   })
 
   return (
@@ -54,7 +54,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.TAG_DETAIL,
-                  location: i
+                  location: i,
                 })
               }
             >

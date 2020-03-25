@@ -17,10 +17,10 @@ const fragments = {
     }
 
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 const TopicSidebarArticleDigest = ({
-  article
+  article,
 }: {
   article: TopicSidebarArticleDigestArticle
 }) => {

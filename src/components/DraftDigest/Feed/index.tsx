@@ -28,7 +28,7 @@ const fragments = {
     }
     ${EditButton.fragments.draft}
     ${DeleteButton.fragments.draft}
-  `
+  `,
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
@@ -36,7 +36,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   const path = toPath({
     page: 'draftDetail',
     slug,
-    id
+    id,
   })
 
   return (

@@ -33,7 +33,7 @@ export const explode = ($clapButton: HTMLButtonElement) => {
   // remove when animation end
   const $icon = $explode.querySelector('svg')
   if ($icon) {
-    $icon.addEventListener('animationend', event => {
+    $icon.addEventListener('animationend', (event) => {
       if (event.animationName === id) {
         $explode.remove()
       }
@@ -45,7 +45,7 @@ export const explode = ($clapButton: HTMLButtonElement) => {
   const { rangeRotate, rangeScale, iconDefaultSize } = {
     rangeRotate: [-45, 15],
     rangeScale: [2.8, 3.6],
-    iconDefaultSize: 24
+    iconDefaultSize: 24,
   }
   const rotate = getRandomFloat(rangeRotate[0], rangeRotate[1], 0)
   const scale = getRandomFloat(rangeScale[0], rangeScale[1])

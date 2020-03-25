@@ -15,7 +15,7 @@ const fragments = {
       }
     }
     ${Tag.fragments.tag}
-  `
+  `,
 }
 
 const TagList = ({ article }: { article: TagListArticle }) => {
@@ -26,7 +26,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   return (
     <section className="tag-list">
       <ul>
-        {article.tags.map(tag => (
+        {article.tags.map((tag) => (
           <li key={tag.id}>
             <Tag tag={tag} type="inline" active={tag.selected} />
           </li>

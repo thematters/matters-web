@@ -2,7 +2,7 @@ import { CachePersistor } from 'apollo-cache-persist'
 import getConfig from 'next/config'
 
 const {
-  publicRuntimeConfig: { ENV }
+  publicRuntimeConfig: { ENV },
 } = getConfig()
 const isProd = ENV === 'production'
 
@@ -37,7 +37,7 @@ export const setupPersistCache = async (inMemoryCache: any) => {
   persistor = new CachePersistor({
     cache: inMemoryCache,
     storage: window.localStorage as any,
-    debug: !isProd
+    debug: !isProd,
   })
 
   try {

@@ -6,7 +6,7 @@ import {
   SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
-  SignUpProfileForm
+  SignUpProfileForm,
 } from '~/components'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'

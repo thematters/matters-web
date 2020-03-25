@@ -8,7 +8,7 @@ import {
   List,
   Spinner,
   Tag,
-  Translate
+  Translate,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -44,7 +44,7 @@ const SearchTag = () => {
   const q = getQuery({ router, key: 'q' })
 
   const { data, loading, fetchMore } = useQuery<SeachTags>(SEARCH_TAGS, {
-    variables: { key: q }
+    variables: { key: q },
   })
 
   if (loading) {
@@ -61,18 +61,18 @@ const SearchTag = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_TAG,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -91,13 +91,13 @@ const SearchTag = () => {
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'tagDetail',
-                    id: node.id
+                    id: node.id,
                   })}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_TAG,
                       location: i,
-                      entrance: q
+                      entrance: q,
                     })
                   }
                 >

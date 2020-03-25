@@ -10,7 +10,7 @@ import {
   translate,
   validateAvatar,
   validateDescription,
-  validateDisplayName
+  validateDisplayName,
 } from '~/common/utils'
 
 import AvatarUploadField from './AvatarUploadField'
@@ -44,7 +44,7 @@ const UPDATE_USER_INFO = gql`
 export const SignUpProfileForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
@@ -60,18 +60,18 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     handleSubmit,
     setFieldValue,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       avatar: null,
       displayName: '',
-      description: ''
+      description: '',
     },
     validate: ({ avatar, displayName, description }) =>
       _pickBy({
         avatar: validateAvatar(avatar, lang),
         displayName: validateDisplayName(displayName, lang),
-        description: validateDescription(description, lang)
+        description: validateDescription(description, lang),
       }),
     onSubmit: async (
       { avatar, displayName, description },
@@ -83,9 +83,9 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
             input: {
               displayName,
               description,
-              ...(avatar ? { avatar } : {})
-            }
-          }
+              ...(avatar ? { avatar } : {}),
+            },
+          },
         })
       } catch (e) {
         // do not block the next step since register is successfully
@@ -97,13 +97,13 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <AvatarUploadField
-        onUpload={assetId => setFieldValue('avatar', assetId)}
+        onUpload={(assetId) => setFieldValue('avatar', assetId)}
       />
 
       <Form.Input
@@ -114,7 +114,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         placeholder={translate({
           zh_hant: '你的站內暱稱，之後可以修改',
           zh_hans: '你的站内暱称，之后可以修改',
-          lang
+          lang,
         })}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
@@ -129,7 +129,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         placeholder={translate({
           zh_hant: '幫助大家認識你。認真填寫有助於更快獲得追蹤者',
           zh_hans: '帮助大家认识你。认真填写有助于更快获得追踪者',
-          lang
+          lang,
         })}
         hint={<Translate id="hintUserDescription" />}
         value={values.description}

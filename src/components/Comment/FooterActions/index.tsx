@@ -37,7 +37,7 @@ const fragments = {
     ${UpvoteButton.fragments.comment}
     ${DownvoteButton.fragments.comment}
     ${CreatedAt.fragments.comment}
-  `
+  `,
 }
 
 const FooterActions = ({

@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({
 
   onClick,
 
-  children
+  children,
 }) => {
   const disabled = !as && !href && !onClick
   const node = useRef<HTMLElement>(null)
@@ -57,13 +57,13 @@ export const Card: React.FC<CardProps> = ({
     [`border-radius-${borderRadius}`]: !!borderRadius,
 
     hasBorder: !!borderColor || !!borderRadius,
-    disabled
+    disabled,
   })
   const ariaLabel = href || as ? `跳轉至 ${as || href}` : undefined
 
   const openLink = ({
     newTab,
-    event
+    event,
   }: {
     newTab: boolean
     event: React.MouseEvent | React.KeyboardEvent
@@ -109,16 +109,16 @@ export const Card: React.FC<CardProps> = ({
       aria-label={ariaLabel}
       ref={node}
       data-clickable
-      onKeyDown={event => {
+      onKeyDown={(event) => {
         if (event.keyCode !== KEYCODES.enter) {
           return
         }
         openLink({
           newTab: event.metaKey,
-          event
+          event,
         })
       }}
-      onClick={event => {
+      onClick={(event) => {
         openLink({ newTab: event.metaKey, event })
       }}
     >

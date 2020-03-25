@@ -10,7 +10,7 @@ import { ADD_TOAST } from '~/common/enums'
 
 import {
   TagArticles,
-  TagArticles_node_Tag
+  TagArticles_node_Tag,
 } from '~/components/GQL/queries/__generated__/TagArticles'
 import { SetTagUnselected } from './__generated__/SetTagUnselected'
 import { SetTagUnselectedButtonArticle } from './__generated__/SetTagUnselectedButtonArticle'
@@ -31,18 +31,18 @@ const fragments = {
     fragment SetTagUnselectedButtonArticle on Article {
       id
     }
-  `
+  `,
 }
 
 const SetTagUnselectedButton = ({
-  article
+  article,
 }: {
   article: SetTagUnselectedButtonArticle
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
     variables: { id: router.query.id, articles: [article.id] },
-    update: cache => {
+    update: (cache) => {
       try {
         const query = require('~/components/GQL/queries/tagArticles').default
         const variables = { id: router.query.id, selected: true }
@@ -56,7 +56,7 @@ const SetTagUnselectedButton = ({
           return
         }
         const newEdges = node.articles.edges.filter(
-          item => item.node.id !== article.id
+          (item) => item.node.id !== article.id
         )
         cache.writeQuery({
           query,
@@ -66,16 +66,16 @@ const SetTagUnselectedButton = ({
               ...node,
               articles: {
                 ...node.articles,
-                edges: newEdges
-              }
-            }
-          }
+                edges: newEdges,
+              },
+            },
+          },
         })
         sync()
       } catch (error) {
         console.error(error)
       }
-    }
+    },
   })
 
   const sync = () => {
@@ -86,8 +86,8 @@ const SetTagUnselectedButton = ({
           content: (
             <Translate zh_hant="文章已取消精選" zh_hans="文章已取消精选" />
           ),
-          duration: 2000
-        }
+          duration: 2000,
+        },
       })
     )
   }

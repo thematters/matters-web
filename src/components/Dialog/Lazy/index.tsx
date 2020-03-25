@@ -3,7 +3,7 @@ import { useState } from 'react'
 interface DialogLazyProps {
   children: ({
     open,
-    mounted
+    mounted,
   }: {
     open: () => void
     mounted: boolean

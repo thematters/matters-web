@@ -13,7 +13,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   ...restProps
 }) => {
   const menuItemClass = classNames({
-    'menu-item': true
+    'menu-item': true,
   })
 
   return (

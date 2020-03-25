@@ -9,7 +9,7 @@ import {
   Form,
   LanguageContext,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
@@ -18,7 +18,7 @@ import {
   parseFormSubmitErrors,
   translate,
   validateDescription,
-  validateDisplayName
+  validateDisplayName,
 } from '~/common/utils'
 
 import ProfileCoverUploader from './ProfileCoverUploader'
@@ -26,7 +26,7 @@ import styles from './styles.css'
 
 import {
   UpdateUserInfoProfile,
-  UpdateUserInfoProfile_updateUserInfo
+  UpdateUserInfoProfile_updateUserInfo,
 } from './__generated__/UpdateUserInfoProfile'
 
 export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo
@@ -78,18 +78,18 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     handleSubmit,
     isSubmitting,
     isValid,
-    setFieldValue
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       avatar: UNCHANGED_FIELD,
       profileCover: UNCHANGED_FIELD,
       displayName: user.displayName || '',
-      description: user.info.description || ''
+      description: user.info.description || '',
     },
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
-        description: validateDescription(description, lang)
+        description: validateDescription(description, lang),
       }),
     onSubmit: async (
       { avatar, profileCover, displayName, description },
@@ -102,24 +102,24 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
               ...(avatar !== UNCHANGED_FIELD ? { avatar } : {}),
               ...(profileCover !== UNCHANGED_FIELD ? { profileCover } : {}),
               displayName,
-              description
-            }
-          }
+              description,
+            },
+          },
         })
 
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successEditUserProfile" />
-            }
+              content: <Translate id="successEditUserProfile" />,
+            },
           })
         )
 
         closeDialog()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach(code => {
+        codes.forEach((code) => {
           if (code.includes('USER_DISPLAYNAME_INVALID')) {
             setFieldError('displayName', messages[code])
           } else {
@@ -129,7 +129,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (
@@ -137,14 +137,14 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <section className="cover-field">
         <ProfileCoverUploader
           user={user}
-          onUpload={assetId => setFieldValue('profileCover', assetId)}
+          onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
       </section>
 
       <section className="avatar-field">
         <AvatarUploader
           user={user}
-          onUpload={assetId => setFieldValue('avatar', assetId)}
+          onUpload={(assetId) => setFieldValue('avatar', assetId)}
           hasBorder
         />
       </section>
@@ -156,7 +156,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         required
         placeholder={translate({
           id: 'enterDisplayName',
-          lang
+          lang,
         })}
         hint={<Translate id="hintDisplayName" />}
         value={values.displayName}
@@ -172,7 +172,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         required
         placeholder={translate({
           id: 'enterUserDescription',
-          lang
+          lang,
         })}
         hint={<Translate id="hintUserDescription" />}
         value={values.description}

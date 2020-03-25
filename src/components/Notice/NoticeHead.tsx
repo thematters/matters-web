@@ -10,7 +10,7 @@ import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
 const NoticeHead = ({
   children,
   hasDate = true,
-  notice
+  notice,
 }: {
   children: ReactNode
   hasDate?: boolean
@@ -18,7 +18,7 @@ const NoticeHead = ({
 }) => {
   const headWrapClasses = classNames({
     'head-wrap': true,
-    'has-date': hasDate
+    'has-date': hasDate,
   })
 
   return (
@@ -36,7 +36,7 @@ NoticeHead.fragments = {
       ...NoticeDate
     }
     ${NoticeDate.fragments.notice}
-  `
+  `,
 }
 
 export default NoticeHead

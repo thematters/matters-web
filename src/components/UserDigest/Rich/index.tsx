@@ -55,7 +55,7 @@ const fragments = {
     ${FollowButton.State.fragments.user}
     ${FollowButton.fragments.user}
     ${UnblockUserButton.fragments.user}
-  `
+  `,
 }
 
 const Rich = ({
@@ -72,13 +72,13 @@ const Rich = ({
 }: RichProps) => {
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName || ''
+    userName: user.userName || '',
   })
   const isArchived = user?.status?.state === 'archived'
   const containerClass = classNames({
     container: true,
     [`size-${size}`]: !!size,
-    disabled: isArchived
+    disabled: isArchived,
   })
 
   if (isArchived) {

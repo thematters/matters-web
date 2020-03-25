@@ -64,13 +64,13 @@ const AggregateUserResults = () => {
                   spacing={['xtight', 'base']}
                   {...toPath({
                     page: 'userProfile',
-                    userName: node.userName || ''
+                    userName: node.userName || '',
                   })}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_USER,
                       location: i,
-                      entrance: q
+                      entrance: q,
                     })
                   }
                 >

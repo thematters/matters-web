@@ -3,7 +3,7 @@ import Dialog from './Dialog'
 
 const DeleteComment = {
   Dialog,
-  Button
+  Button,
 }
 
 export default DeleteComment

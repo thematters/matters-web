@@ -238,7 +238,7 @@ export const TEXT = {
     waitingForPublish: '正在等待發佈，星際通道有點擁擠',
     walletSetting: '錢包設定',
     write: '創作',
-    yourEmail: '你的電子信箱'
+    yourEmail: '你的電子信箱',
   },
   zh_hans: {
     about: 'Matters 长什么样',
@@ -479,6 +479,6 @@ export const TEXT = {
     waitingForPublish: '正在等待发布，星际通道有点拥挤',
     walletSetting: '钱包设定',
     write: '创作',
-    yourEmail: '你的邮箱'
-  }
+    yourEmail: '你的邮箱',
+  },
 }

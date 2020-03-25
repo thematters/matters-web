@@ -27,9 +27,9 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       blockUser: {
         id: user.id,
         isBlocked: true,
-        __typename: 'User'
-      }
-    }
+        __typename: 'User',
+      },
+    },
   })
 
   const onBlock = async () => {
@@ -41,8 +41,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           color: 'green',
           content: <Translate id="successBlock" />,
           customButton: <ViewBlocksButton />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }

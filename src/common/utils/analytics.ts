@@ -5,7 +5,7 @@ const trackAs = (type: string) => (
 ) => {
   // construct event with details
   const event = new CustomEvent(ANALYTICS, {
-    detail: { args, type }
+    detail: { args, type },
   })
 
   // dispatch event
@@ -15,5 +15,5 @@ const trackAs = (type: string) => (
 export const analytics = {
   trackEvent: trackAs(ANALYTIC_TYPES.TRACK),
   trackPage: trackAs(ANALYTIC_TYPES.PAGE),
-  identifyUser: trackAs(ANALYTIC_TYPES.IDENTIFY)
+  identifyUser: trackAs(ANALYTIC_TYPES.IDENTIFY),
 }

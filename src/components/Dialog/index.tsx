@@ -41,7 +41,7 @@ type DynamicDialogProps = React.ComponentType<DialogProps> & {
 }
 
 const DynamicDialog = dynamic(() => import('./Dialog'), {
-  ssr: false
+  ssr: false,
 }) as DynamicDialogProps
 
 DynamicDialog.Header = Header

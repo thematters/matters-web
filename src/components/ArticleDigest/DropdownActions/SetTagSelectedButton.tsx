@@ -25,17 +25,17 @@ const fragments = {
     fragment SetTagSelectedButtonArticle on Article {
       id
     }
-  `
+  `,
 }
 
 const SetTagSelectedButton = ({
-  article
+  article,
 }: {
   article: SetTagSelectedButtonArticle
 }) => {
   const router = useRouter()
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
-    variables: { id: router.query.id, articles: [article.id] }
+    variables: { id: router.query.id, articles: [article.id] },
   })
 
   return (
@@ -53,8 +53,8 @@ const SetTagSelectedButton = ({
                   zh_hans="文章已添加至精选"
                 />
               ),
-              duration: 2000
-            }
+              duration: 2000,
+            },
           })
         )
       }}

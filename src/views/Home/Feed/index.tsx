@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -26,11 +26,11 @@ import ViewMode from './ViewMode'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
   HottestFeed,
-  HottestFeed_viewer_recommendation_feed_edges
+  HottestFeed_viewer_recommendation_feed_edges,
 } from './__generated__/HottestFeed'
 import {
   NewestFeed,
-  NewestFeed_viewer_recommendation_feed_edges
+  NewestFeed_viewer_recommendation_feed_edges,
 } from './__generated__/NewestFeed'
 
 type SortBy = 'hottest' | 'newest'
@@ -50,7 +50,7 @@ const horizontalFeeds: FeedLocation = {
   2: () => <Articles type="icymi" />,
   5: () => <Articles type="topics" />,
   8: () => <Tags />,
-  11: () => <Authors />
+  11: () => <Authors />,
 }
 
 const feedFragment = gql`
@@ -96,7 +96,7 @@ export const queries = {
       }
     }
     ${feedFragment}
-  `
+  `,
 }
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
@@ -107,9 +107,9 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     error,
     loading,
     fetchMore: fetchMoreMainFeed,
-    networkStatus
+    networkStatus,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   })
 
   const connectionPath = 'viewer.recommendation.feed'
@@ -132,11 +132,11 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: sortBy,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMoreMainFeed({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       // previousResult could be undefined when scrolling before loading finishes, reason unknown
       updateQuery: (previousResult, { fetchMoreResult }) =>
@@ -145,9 +145,9 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
               oldData: previousResult,
               newData: fetchMoreResult,
               path: connectionPath,
-              dedupe: true
+              dedupe: true,
             })
-          : fetchMoreResult
+          : fetchMoreResult,
     })
   }
 
@@ -163,15 +163,15 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     mixFeed = JSON.parse(JSON.stringify(edges))
 
     // get insert entries
-    const locs = Object.keys(horizontalFeeds).map(loc => parseInt(loc, 10))
+    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
     locs.sort((a, b) => a - b)
 
     // insert feed
-    locs.map(loc => {
+    locs.map((loc) => {
       if (mixFeed.length >= loc) {
         mixFeed.splice(loc, 0, {
           Feed: horizontalFeeds[loc],
-          __typename: 'HorizontalFeed'
+          __typename: 'HorizontalFeed',
         })
       }
     })
@@ -192,7 +192,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: sortBy,
-                      location: i
+                      location: i,
                     })
                   }
                 />
@@ -207,16 +207,16 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
 
 const HomeFeed = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { feedSortType } = data?.clientPreference || {
-    feedSortType: 'hottest'
+    feedSortType: 'hottest',
   }
   const setSortBy = (type: SortBy) => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
-        data: { feedSortType: type }
+        data: { feedSortType: type },
       })
     }
   }

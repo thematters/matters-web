@@ -9,7 +9,7 @@ import {
   Dropdown,
   PopperProps,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { KEYCODES, TEXT, TextId } from '~/common/enums'
@@ -41,7 +41,7 @@ import { KEYCODES, TEXT, TextId } from '~/common/enums'
 
 type DropdownDialogNode = ({
   open,
-  ref
+  ref,
 }: {
   open: () => void
   ref?: React.Ref<any>
@@ -72,7 +72,7 @@ const ForwardChildren = forwardRef(
 const BaseDropdownDialog = ({
   dropdown,
   dialog,
-  children
+  children,
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
   const [showDialog, setShowDialog] = useState(true)
@@ -89,7 +89,7 @@ const BaseDropdownDialog = ({
   const Content: React.FC = ({ children: contentChildren }) => {
     return (
       <section
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           if (event.keyCode !== KEYCODES.enter) {
             return
           }
@@ -148,7 +148,7 @@ const BaseDropdownDialog = ({
   )
 }
 
-export const DropdownDialog: React.FC<DropdownDialogProps> = props => (
+export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
   <Dialog.Lazy>
     {({ open, mounted }) =>
       mounted ? (

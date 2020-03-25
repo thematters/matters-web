@@ -7,7 +7,7 @@ import styles from './styles.css'
 export const Switch = ({
   onChange,
   checked,
-  loading
+  loading,
 }: {
   onChange: () => void
   checked: boolean

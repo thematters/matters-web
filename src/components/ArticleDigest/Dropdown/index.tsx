@@ -41,7 +41,7 @@ const fragments = {
 
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 export const ArticleDigestDropdown = ({
@@ -58,11 +58,11 @@ export const ArticleDigestDropdown = ({
   const isBanned = state === 'banned'
   const containerClass = classNames({
     container: true,
-    'has-extra-button': !!extraButton
+    'has-extra-button': !!extraButton,
   })
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
   const cardDisabled = isBanned || disabled
 

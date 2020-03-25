@@ -10,7 +10,7 @@ import styles from './styles.css'
 
 import {
   AddCoverDraft,
-  AddCoverDraft_assets
+  AddCoverDraft_assets,
 } from './__generated__/AddCoverDraft'
 import { UpdateDraftCover } from './__generated__/UpdateDraftCover'
 
@@ -26,7 +26,7 @@ const fragments = {
         path
       }
     }
-  `
+  `,
 }
 
 const UPDATE_COVER = gql`
@@ -60,7 +60,7 @@ const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
         const isSelected = asset.path === cover
         const coverItemClass = classNames({
           'cover-image': true,
-          selected: isSelected
+          selected: isSelected,
         })
 
         return (
@@ -76,8 +76,8 @@ const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
                 await update({
                   variables: {
                     id,
-                    coverAssetId: asset.id
-                  }
+                    coverAssetId: asset.id,
+                  },
                 })
                 setSaveStatus('saved')
               } catch (error) {
@@ -103,7 +103,7 @@ const AddCover = ({ draft, ...props }: AddCover) => {
   const isPublished = draft.publishState === 'published'
   const containerStyle = classNames({
     'cover-container': true,
-    'u-area-disable': isPending || isPublished
+    'u-area-disable': isPending || isPublished,
   })
 
   return (

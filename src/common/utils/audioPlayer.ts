@@ -85,7 +85,7 @@ export const initAudioPlayers = () => {
       loading()
     })
 
-    $progressBar.addEventListener('click', e => {
+    $progressBar.addEventListener('click', (e) => {
       const position = e.pageX - $progressBar.getBoundingClientRect().left
       const percent = position / $progressBar.offsetWidth
       $audio.currentTime = $audio.duration * percent

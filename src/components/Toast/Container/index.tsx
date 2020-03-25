@@ -31,14 +31,14 @@ const Container = () => {
     if (!payload || Object.keys(payload).length === 0) {
       return false
     }
-    setToasts(prev => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
+    setToasts((prev) => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
   }
 
   const remove = ({ id }: { id: string }) => {
     if (!id || !id.startsWith(prefix)) {
       return
     }
-    setToasts(prev => prev.filter(toast => toast.id !== id))
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }
 
   useEventListener(ADD_TOAST, add)
@@ -62,7 +62,7 @@ const Container = () => {
         <div className="l-row full">
           <div className={isMiscPage ? '' : 'l-col-three-left'} />
           <div className={instanceClass}>
-            {toasts.map(toast => (
+            {toasts.map((toast) => (
               <ToastWithEffect key={toast.id} {...toast} />
             ))}
           </div>

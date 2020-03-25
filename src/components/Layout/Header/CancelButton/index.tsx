@@ -4,7 +4,7 @@ import {
   Icon,
   TextIcon,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { TEXT } from '~/common/enums'

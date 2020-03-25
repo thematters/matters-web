@@ -11,11 +11,11 @@ const MeTabs = () => {
 
   const userArticlePath = toPath({
     page: 'userProfile',
-    userName
+    userName,
   })
   const userCommentsPath = toPath({
     page: 'userComments',
-    userName
+    userName,
   })
 
   return (

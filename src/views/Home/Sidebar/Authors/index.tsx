@@ -8,7 +8,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -91,7 +91,7 @@ const Authors = () => {
                 onClick={() =>
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.AUTHORS,
-                    location: i
+                    location: i,
                   })
                 }
               />

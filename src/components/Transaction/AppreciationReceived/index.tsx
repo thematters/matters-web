@@ -7,7 +7,7 @@ import {
   Icon,
   TextIcon,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 
 import { toPath } from '~/common/utils'
@@ -35,7 +35,7 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 const AppreciationReceived = ({ tx }: AppreciationReceivedProps) => {

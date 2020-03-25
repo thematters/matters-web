@@ -30,13 +30,13 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
         toggleSubscribeArticle: {
           id: articleId,
           subscribed: true,
-          __typename: 'Article'
-        }
-      }
+          __typename: 'Article',
+        },
+      },
     }
   )
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const push = data?.clientPreference.push
 
@@ -59,8 +59,8 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
               <Translate id="confirmPush" />
             </Button>
           ),
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }
