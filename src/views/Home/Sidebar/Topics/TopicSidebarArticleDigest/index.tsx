@@ -21,13 +21,15 @@ const fragments = {
 }
 const TopicSidebarArticleDigest = ({
   article,
+  onClick,
 }: {
   article: TopicSidebarArticleDigestArticle
+  onClick?: () => any
 }) => {
   const path = toPath({ page: 'articleDetail', article })
 
   return (
-    <Card {...path} spacing={['xtight', 0]} bgColor="none">
+    <Card {...path} spacing={['xtight', 0]} bgColor="none" onClick={onClick}>
       <section className="container">
         <ArticleDigestTitle
           article={article}
