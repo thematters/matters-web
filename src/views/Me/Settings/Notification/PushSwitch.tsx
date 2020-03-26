@@ -13,7 +13,7 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 const PushSwitch = () => {
   const [loading, setLoading] = useState(false)
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const push = data?.clientPreference.push
 

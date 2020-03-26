@@ -17,11 +17,11 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
   description,
   textAlign,
 
-  children
+  children,
 }) => {
   const descriptionClass = classNames({
     description: true,
-    [`${textAlign}`]: !!textAlign
+    [`${textAlign}`]: !!textAlign,
   })
 
   return (

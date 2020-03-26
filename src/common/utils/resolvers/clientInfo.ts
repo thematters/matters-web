@@ -4,11 +4,11 @@ export default () => {
     viewportSize: {
       width: null,
       height: null,
-      __typename: 'ViewportSize'
+      __typename: 'ViewportSize',
     },
     isPhone: false,
     isTablet: false,
     isMobile: false,
-    __typename: 'ClientInfo'
+    __typename: 'ClientInfo',
   }
 }

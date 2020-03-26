@@ -13,10 +13,10 @@ const OAuthCallbackSuccess = () => {
   const router = useRouter()
   const provider = getQuery({ router, key: 'provider' })
   const title: { [key: string]: any } = {
-    likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />
+    likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />,
   }
   const avatar: { [key: string]: any } = {
-    likecoin: ICON_LIKECOIN
+    likecoin: ICON_LIKECOIN,
   }
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {

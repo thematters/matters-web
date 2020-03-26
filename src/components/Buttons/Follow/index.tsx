@@ -16,14 +16,14 @@ const fragments = {
       isFollower
       isFollowee
     }
-  `
+  `,
 }
 
 export type FollowButtonSize = 'lg' | 'md' | 'md-s'
 
 export const FollowButton = ({
   user,
-  size = 'md'
+  size = 'md',
 }: {
   user: FollowButtonUser
   size?: FollowButtonSize

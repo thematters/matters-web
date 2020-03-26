@@ -5,7 +5,7 @@ import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/U
 export const DropdownUserList = ({
   users,
   onClick,
-  loading
+  loading,
 }: {
   users: UserDigestMiniUser[]
   onClick: (user: UserDigestMiniUser) => void
@@ -23,7 +23,7 @@ export const DropdownUserList = ({
 
   return (
     <Menu width="md">
-      {users.map(user => (
+      {users.map((user) => (
         <Menu.Item
           spacing={['xtight', 'base']}
           onClick={() => {

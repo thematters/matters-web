@@ -10,7 +10,7 @@ import styles from './styles.css'
 import { DownstreamArticleArchivedNotice as NoticeType } from './__generated__/DownstreamArticleArchivedNotice'
 
 const DownstreamArticleArchivedNotice = ({
-  notice
+  notice,
 }: {
   notice: NoticeType
 }) => {
@@ -54,7 +54,7 @@ DownstreamArticleArchivedNotice.fragments = {
     }
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default DownstreamArticleArchivedNotice

@@ -13,7 +13,7 @@ import MentionUserList from '../MentionUserList'
 
 import {
   SearchUsers,
-  SearchUsers_search_edges_node_User
+  SearchUsers_search_edges_node_User,
 } from '~/components/GQL/queries/__generated__/SearchUsers'
 
 interface Props {

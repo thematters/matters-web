@@ -11,12 +11,12 @@ const fragments = {
     fragment AppreciationArticle on Article {
       appreciationsReceivedTotal
     }
-  `
+  `,
 }
 
 const Appreciation = ({
   article,
-  size = 'sm'
+  size = 'sm',
 }: {
   article: AppreciationArticle
   size?: 'sm' | 'xs'

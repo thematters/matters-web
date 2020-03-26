@@ -10,7 +10,7 @@ type Type = 'sm-down' | 'sm-up' | 'md-up' | 'lg-up' | 'sm' | 'xs' | 'md' | 'lg'
 
 export const useResponsive = (type: Type) => {
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { isPhone, isTablet, isMobile } = data?.clientInfo || {}
   const defaultWidth = isPhone

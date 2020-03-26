@@ -12,7 +12,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isNewset = sortBy === 'newest'
 
   const buttonProps = {
-    size: ['6rem', '2rem']
+    size: ['6rem', '2rem'],
   } as ButtonProps
 
   return (

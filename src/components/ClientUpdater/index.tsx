@@ -14,7 +14,7 @@ export const ClientUpdater = () => {
    * Update viewportSize
    */
   const { client } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const [width, height] = useWindowResize()
 
@@ -29,9 +29,9 @@ export const ClientUpdater = () => {
         viewportSize: {
           width,
           height,
-          __typename: 'ViewportSize'
-        }
-      }
+          __typename: 'ViewportSize',
+        },
+      },
     })
   })
 
@@ -49,7 +49,7 @@ export const ClientUpdater = () => {
 
     client.writeData({
       id: 'ClientPreference:local',
-      data: { routeHistory: newRouteHistory }
+      data: { routeHistory: newRouteHistory },
     })
   }
 
@@ -70,7 +70,7 @@ export const ClientUpdater = () => {
 
     client.writeData({
       id: 'ClientPreference:local',
-      data: { viewMode: storedViewMode }
+      data: { viewMode: storedViewMode },
     })
   }, [])
 

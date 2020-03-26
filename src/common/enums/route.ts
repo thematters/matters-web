@@ -59,79 +59,79 @@ export const ROUTES: Array<{
   {
     key: 'HOME',
     href: '/Home',
-    as: '/'
+    as: '/',
   },
   {
     key: 'FOLLOW',
     href: '/Follow',
-    as: '/follow'
+    as: '/follow',
   },
   {
     key: 'AUTHORS',
     href: '/Authors',
-    as: '/authors'
+    as: '/authors',
   },
   {
     key: 'TOPICS',
     href: '/Topics',
-    as: '/topics'
+    as: '/topics',
   },
   {
     key: 'ICYMI',
     href: '/Icymi',
-    as: 'icymi'
+    as: 'icymi',
   },
   {
     key: 'SEARCH',
     href: '/Search',
-    as: '/search'
+    as: '/search',
   },
   // experient page for recommendation engine testing
   {
     key: 'RECOMMENDATION',
     href: '/Recommendation',
-    as: '/recommendation'
+    as: '/recommendation',
   },
 
   // Tag
   {
     key: 'TAGS',
     href: '/Tags',
-    as: '/tags'
+    as: '/tags',
   },
   {
     key: 'TAG_DETAIL',
     href: '/TagDetail',
-    as: '/tags/:id'
+    as: '/tags/:id',
   },
 
   // User
   {
     key: 'USER_ARTICLES',
     href: '/UserArticles',
-    as: '/@:userName'
+    as: '/@:userName',
   },
   {
     key: 'USER_COMMENTS',
     href: '/UserComments',
-    as: '/@:userName/comments'
+    as: '/@:userName/comments',
   },
   {
     key: 'USER_FOLLOWERS',
     href: '/UserFollowers',
-    as: '/@:userName/followers'
+    as: '/@:userName/followers',
   },
   {
     key: 'USER_FOLLOWEES',
     href: '/UserFollowees',
-    as: '/@:userName/followees'
+    as: '/@:userName/followees',
   },
 
   // Article
   {
     key: 'ARTICLE_DETAIL',
     href: '/ArticleDetail',
-    as: '/@:userName/*-:mediaHash'
+    as: '/@:userName/*-:mediaHash',
   },
   {
     key: 'ARTICLE_DETAIL_LEGACY',
@@ -143,14 +143,14 @@ export const ROUTES: Array<{
       }
 
       const {
-        publicRuntimeConfig: { API_URL }
+        publicRuntimeConfig: { API_URL },
       } = getConfig()
 
       try {
         const response = await fetch(API_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             query: `
@@ -163,8 +163,8 @@ export const ROUTES: Array<{
                   }
                 }
               }
-            `
-          })
+            `,
+          }),
         })
         const data = await response.json()
         const slug = _get(data, 'data.article.slug')
@@ -180,63 +180,63 @@ export const ROUTES: Array<{
         console.error(e)
         return res.redirect(302, '/')
       }
-    }
+    },
   },
 
   // Me
   {
     key: 'ME_DRAFTS',
     href: '/MeDrafts',
-    as: '/me/drafts'
+    as: '/me/drafts',
   },
   {
     key: 'ME_BOOKMARKS',
     href: '/MeBookmarks',
-    as: '/me/bookmarks'
+    as: '/me/bookmarks',
   },
   {
     key: 'ME_HISTORY',
     href: '/MeHistory',
-    as: '/me/history'
+    as: '/me/history',
   },
   {
     key: 'ME_APPRECIATIONS_SENT',
     href: '/MeAppreciationsSent',
-    as: '/me/appreciations/sent'
+    as: '/me/appreciations/sent',
   },
   {
     key: 'ME_APPRECIATIONS_RECEIVED',
     href: '/MeAppreciationsReceived',
-    as: '/me/appreciations/received'
+    as: '/me/appreciations/received',
   },
   {
     key: 'ME_NOTIFICATIONS',
     href: '/MeNotifications',
-    as: '/me/notifications'
+    as: '/me/notifications',
   },
 
   // Settings
   {
     key: 'ME_SETTINGS_ACCOUNT',
     href: '/MeSettingsAccount',
-    as: '/me/settings/account'
+    as: '/me/settings/account',
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',
     href: '/MeSettingsNotification',
-    as: '/me/settings/notification'
+    as: '/me/settings/notification',
   },
   {
     key: 'ME_SETTINGS_BLOCKED',
     href: '/MeSettingsBlocked',
-    as: '/me/settings/blocked'
+    as: '/me/settings/blocked',
   },
 
   // Draft
   {
     key: 'ME_DRAFT_DETAIL',
     href: '/MeDraftDetail',
-    as: '/me/drafts/*-:id'
+    as: '/me/drafts/*-:id',
   },
   // {
   //   key: 'EDITOR',
@@ -248,71 +248,71 @@ export const ROUTES: Array<{
   {
     key: 'AUTH_LOGIN',
     href: '/AuthLogin',
-    as: '/login'
+    as: '/login',
   },
   {
     key: 'AUTH_SIGNUP',
     href: '/AuthSignUp',
-    as: '/signup'
+    as: '/signup',
   },
   {
     key: 'AUTH_FORGET',
     href: '/AuthForget',
-    as: '/forget'
+    as: '/forget',
   },
 
   // OAuth
   {
     key: 'OAUTH_AUTHORIZE',
     href: '/OAuthAuthorize',
-    as: '/oauth/authorize'
+    as: '/oauth/authorize',
   },
   {
     key: 'OAUTH_CALLBACK_SUCCESS',
     href: '/OAuthCallbackSuccess',
-    as: '/oauth/:provider/success'
+    as: '/oauth/:provider/success',
   },
   {
     key: 'OAUTH_CALLBACK_FAILURE',
     href: '/OAuthCallbackFailure',
-    as: '/oauth/:provider/failure'
+    as: '/oauth/:provider/failure',
   },
 
   // Misc
   {
     key: 'HELP',
     href: '/Help',
-    as: '/help'
+    as: '/help',
   },
   {
     key: 'MIGRATION',
     href: '/Migration',
-    as: '/migration'
+    as: '/migration',
   },
   {
     key: 'ABOUT',
     href: '/About',
-    as: '/about'
+    as: '/about',
   },
   {
     key: 'GUIDE',
     href: '/Guide',
-    as: '/guide'
+    as: '/guide',
   },
   {
     key: 'COMMUNITY',
     href: '/Community',
-    as: '/community'
+    as: '/community',
   },
   {
     key: 'TOS',
     href: '/ToS',
-    as: '/tos'
-  }
+    as: '/tos',
+  },
 ]
 
 export const UrlFragments = {
-  COMMENTS: 'comments'
+  COMMENTS: 'comments',
 }
 
 export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } }

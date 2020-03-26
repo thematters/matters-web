@@ -1,7 +1,7 @@
 import { Empty, Icon } from '~/components'
 
 export const EmptyWarning = ({
-  description
+  description,
 }: {
   description: React.ReactNode
 }) => (

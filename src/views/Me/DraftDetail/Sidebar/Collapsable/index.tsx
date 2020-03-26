@@ -22,7 +22,7 @@ const Collapsable: React.FC<{
             icon={
               <Icon.Up
                 style={{
-                  transform: `rotate(${collapsed ? 180 : 0}deg)`
+                  transform: `rotate(${collapsed ? 180 : 0}deg)`,
                 }}
               />
             }

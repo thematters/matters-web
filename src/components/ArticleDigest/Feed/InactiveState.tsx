@@ -12,7 +12,7 @@ const fragments = {
       id
       articleState: state
     }
-  `
+  `,
 }
 
 const InactiveState = ({ article }: { article: InactiveStateArticle }) => {

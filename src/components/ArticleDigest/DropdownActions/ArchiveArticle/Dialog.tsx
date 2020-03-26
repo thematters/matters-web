@@ -27,9 +27,9 @@ interface ArchiveArticleDialogProps {
 
 const ArchiveArticleDialog = ({
   article,
-  children
+  children,
 }: ArchiveArticleDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -40,17 +40,17 @@ const ArchiveArticleDialog = ({
         id: article.id,
         articleState: 'archived' as any,
         sticky: false,
-        __typename: 'Article'
-      }
+        __typename: 'Article',
+      },
     },
-    update: cache => {
+    update: (cache) => {
       updateUserArticles({
         cache,
         articleId: article.id,
         userName: article.author.userName,
-        type: 'archive'
+        type: 'archive',
       })
-    }
+    },
   })
 
   const onArchive = async () => {
@@ -61,8 +61,8 @@ const ArchiveArticleDialog = ({
         detail: {
           color: 'green',
           content: <Translate zh_hant="作品已隱藏" zh_hans="作品已隐藏" />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }
@@ -115,4 +115,16 @@ const ArchiveArticleDialog = ({
   )
 }
 
-export default ArchiveArticleDialog
+const LazyArchiveArticleDialog = (props: ArchiveArticleDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <ArchiveArticleDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyArchiveArticleDialog

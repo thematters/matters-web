@@ -37,7 +37,7 @@ const EditButton = ({
   article,
   editing,
   setEditing,
-  editingArticles
+  editingArticles,
 }: {
   article: ArticleDetail_article
   editing: boolean
@@ -53,8 +53,8 @@ const EditButton = ({
         variables: {
           id: article.id,
           collection: _uniq(editingArticles.map((item: any) => item.id)),
-          first: null
-        }
+          first: null,
+        },
       })
 
       window.dispatchEvent(
@@ -62,8 +62,8 @@ const EditButton = ({
           detail: {
             color: 'green',
             content: <Translate zh_hant="關聯已更新" zh_hans="关联已更新" />,
-            duration: 2000
-          }
+            duration: 2000,
+          },
         })
       )
     } catch (error) {
@@ -73,20 +73,20 @@ const EditButton = ({
             color: 'red',
             content: <Translate zh_hant="關聯失敗" zh_hans="关联失敗" />,
             clostButton: true,
-            duration: 2000
-          }
+            duration: 2000,
+          },
         })
       )
     }
     setEditing(false)
   }
   const editButtonClass = classNames({
-    'edit-button': true
+    'edit-button': true,
   })
 
   const buttonProps = {
     size: ['4rem', '1.25rem'],
-    bgColor: 'grey-lighter'
+    bgColor: 'grey-lighter',
   } as ButtonProps
 
   if (!editing) {

@@ -40,11 +40,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
 
   const recentSearchesClass = classNames({
     'recent-searches': true,
-    inPage
+    inPage,
   })
   const frequentSearchesClass = classNames({
     'frequent-searches': true,
-    inPage
+    inPage,
   })
 
   if (loading) {
@@ -77,7 +77,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                 <Link
                   {...toPath({
                     page: 'search',
-                    q: key
+                    q: key,
                   })}
                 >
                   <a
@@ -87,7 +87,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                         ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
                         {
                           location: i,
-                          entrance: key
+                          entrance: key,
                         }
                       )
                     }}
@@ -116,12 +116,12 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
               <Menu.Item
                 {...toPath({
                   page: 'search',
-                  q: key
+                  q: key,
                 })}
                 onClick={() => {
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
                     location: i,
-                    entrance: key
+                    entrance: key,
                   })
                 }}
                 key={key}

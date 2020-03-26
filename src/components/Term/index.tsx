@@ -19,8 +19,8 @@ export const Term = () => {
         dangerouslySetInnerHTML={{
           __html: translate({
             ...ToS,
-            lang
-          })
+            lang,
+          }),
         }}
       />
 
@@ -28,8 +28,8 @@ export const Term = () => {
         dangerouslySetInnerHTML={{
           __html: translate({
             ...ToS,
-            lang: 'en'
-          })
+            lang: 'en',
+          }),
         }}
       />
 
@@ -37,8 +37,8 @@ export const Term = () => {
         dangerouslySetInnerHTML={{
           __html: translate({
             ...Privacy,
-            lang
-          })
+            lang,
+          }),
         }}
       />
 
@@ -46,8 +46,8 @@ export const Term = () => {
         dangerouslySetInnerHTML={{
           __html: translate({
             ...Privacy,
-            lang: 'en'
-          })
+            lang: 'en',
+          }),
         }}
       />
 

@@ -10,7 +10,7 @@ interface TagArticleDialogProps {
 }
 
 const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -25,4 +25,16 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
   )
 }
 
-export default TagArticleDialog
+const LazyTagArticleDialog = (props: TagArticleDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <TagArticleDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyTagArticleDialog

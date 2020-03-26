@@ -12,7 +12,7 @@ interface ExpandableProps {
 export const Expandable: React.FC<ExpandableProps> = ({
   children,
   limit = 3,
-  buffer = 0
+  buffer = 0,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
@@ -38,7 +38,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
     <section
       className="expandable"
       style={{
-        WebkitLineClamp: expand ? 'unset' : limit
+        WebkitLineClamp: expand ? 'unset' : limit,
       }}
     >
       <div ref={node}>{children}</div>

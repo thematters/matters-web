@@ -8,7 +8,7 @@ import {
   Layout,
   List,
   Spinner,
-  Transaction
+  Transaction,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -72,18 +72,18 @@ const AppreciationsSent = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: 'appreciationsSent',
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 

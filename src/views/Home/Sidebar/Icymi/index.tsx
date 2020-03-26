@@ -55,7 +55,7 @@ const ICYMI = () => {
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.ICYMI,
-                  location: i
+                  location: i,
                 })
               }
             />

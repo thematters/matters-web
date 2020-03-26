@@ -8,14 +8,14 @@ import { ViewerFolloweeCount } from '~/components/GQL/queries/__generated__/View
 
 const update = ({
   cache,
-  type
+  type,
 }: {
   cache: DataProxy
   type: 'increment' | 'decrement'
 }) => {
   try {
     const cacheData = cache.readQuery<ViewerFolloweeCount>({
-      query: VIEWER_FOLLOWEE_COUNT
+      query: VIEWER_FOLLOWEE_COUNT,
     })
 
     if (!cacheData || !cacheData.viewer) {
@@ -30,7 +30,7 @@ const update = ({
 
     cache.writeQuery({
       query: VIEWER_FOLLOWEE_COUNT,
-      data: cacheData
+      data: cacheData,
     })
   } catch (e) {
     if (e.message.startsWith("Can't find field")) {

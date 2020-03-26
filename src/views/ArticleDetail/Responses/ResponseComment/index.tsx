@@ -38,14 +38,14 @@ const fragments = {
     }
 
     ${Comment.Feed.fragments.comment}
-  `
+  `,
 }
 
 const ResponseComment = ({
   comment,
   defaultExpand,
   hasLink,
-  commentCallback
+  commentCallback,
 }: ResponseCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
@@ -68,7 +68,7 @@ const ResponseComment = ({
         <ul className="descendants">
           {descendants
             .slice(0, expand ? undefined : COLLAPSE_COUNT)
-            .map(descendantComment => (
+            .map((descendantComment) => (
               <li key={descendantComment.id}>
                 <Comment.Feed
                   comment={descendantComment}

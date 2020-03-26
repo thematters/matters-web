@@ -7,7 +7,7 @@ import {
   DropdownArticleList,
   hidePopperOnClick,
   LanguageContext,
-  PopperInstance
+  PopperInstance,
 } from '~/components'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
@@ -18,7 +18,7 @@ import styles from './styles.css'
 
 import {
   SearchArticles,
-  SearchArticles_search_edges_node_Article
+  SearchArticles_search_edges_node_Article,
 } from '~/components/GQL/queries/__generated__/SearchArticles'
 
 interface Props {
@@ -35,7 +35,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
   // query
   const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
     variables: { search: debouncedSearch },
-    skip: !debouncedSearch
+    skip: !debouncedSearch,
   })
   const articles = (data?.search.edges || [])
     .filter(({ node }) => node.__typename === 'Article')
@@ -66,7 +66,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     <>
       <Dropdown
         trigger="manual"
-        onShown={i => {
+        onShown={(i) => {
           hidePopperOnClick(i)
         }}
         placement="bottom-start"
@@ -75,7 +75,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           <DropdownArticleList
             articles={articles}
             loading={loading}
-            onClick={article => {
+            onClick={(article) => {
               onAdd(article)
               setSearch('')
               if (inputNode && inputNode.current) {
@@ -91,9 +91,9 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           placeholder={translate({
             zh_hant: '搜尋作品標題…',
             zh_hans: '搜索作品标题…',
-            lang
+            lang,
           })}
-          onChange={event => {
+          onChange={(event) => {
             const value = event.target.value
             setSearch(value)
           }}

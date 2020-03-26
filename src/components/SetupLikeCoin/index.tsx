@@ -20,7 +20,7 @@ interface Props {
 export const SetupLikeCoin: React.FC<Props> = ({
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
@@ -30,7 +30,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
     setStepState(newStep)
     analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_CHANGE, {
       from: step,
-      to: newStep
+      to: newStep,
     })
   }
 

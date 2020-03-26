@@ -11,12 +11,8 @@ interface TagDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const TagDialog = ({
-  children,
-  content,
-  ...restProps
-}: TagDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+const BaseTagDialog = ({ children, content, ...restProps }: TagDialogProps) => {
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -30,3 +26,11 @@ export const TagDialog = ({
     </>
   )
 }
+
+export const TagDialog = (props: TagDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? <BaseTagDialog {...props} /> : <>{props.children({ open })}</>
+    }
+  </Dialog.Lazy>
+)

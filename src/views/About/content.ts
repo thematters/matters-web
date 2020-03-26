@@ -68,5 +68,5 @@ export default {
   <li>微信: MattersLab</li>
   <li>微博: MattersLab</li>
 </ul>
-  `
+  `,
 }

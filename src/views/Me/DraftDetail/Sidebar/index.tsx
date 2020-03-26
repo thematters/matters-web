@@ -30,7 +30,7 @@ Sidebar.fragments = {
     ${AddCover.fragments.draft}
     ${AddTags.fragments.draft}
     ${CollectArticles.fragments.draft}
-  `
+  `,
 }
 
 export default Sidebar

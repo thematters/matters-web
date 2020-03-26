@@ -9,20 +9,20 @@ const FORMATS = {
     absoluteToday: '今天 H:mm',
     absoluteYesterday: '昨天 H:mm',
     absoluteThisYear: 'M 月 d 日',
-    absoluteFull: 'yyyy 年 M 月 d 日'
+    absoluteFull: 'yyyy 年 M 月 d 日',
   },
   zh_hans: {
     absoluteToday: '今天 H:mm',
     absoluteYesterday: '昨天 H:mm',
     absoluteThisYear: 'M 月 d 日',
-    absoluteFull: 'yyyy 年 M 月 d 日'
+    absoluteFull: 'yyyy 年 M 月 d 日',
   },
   en: {
     absoluteToday: 'HH:mm',
     absoluteYesterday: 'MM-dd',
     absoluteThisYear: 'MM-dd',
-    absoluteFull: 'yyyy-MM-dd'
-  }
+    absoluteFull: 'yyyy-MM-dd',
+  },
 }
 
 const absolute = (date: Date | string | number, lang: Language = 'zh_hant') => {

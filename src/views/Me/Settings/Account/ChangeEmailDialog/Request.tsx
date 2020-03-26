@@ -7,7 +7,7 @@ import {
   Form,
   LanguageContext,
   SendCodeButton,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
@@ -16,7 +16,7 @@ import {
   parseFormSubmitErrors,
   translate,
   validateCode,
-  validateEmail
+  validateEmail,
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
@@ -35,7 +35,7 @@ interface FormValues {
 const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
@@ -49,21 +49,21 @@ const Request: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
-      code: ''
+      code: '',
     },
     validate: ({ email, code }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        code: validateCode(code, lang)
+        code: validateCode(code, lang),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'email_reset', code } }
+          variables: { input: { email, type: 'email_reset', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
 
@@ -72,7 +72,7 @@ const Request: React.FC<FormProps> = ({
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach(c => {
+        codes.forEach((c) => {
           if (c.includes('CODE_')) {
             setFieldError('code', messages[c])
           } else {
@@ -82,7 +82,7 @@ const Request: React.FC<FormProps> = ({
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (

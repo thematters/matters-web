@@ -6,7 +6,7 @@ export const mergeConnections = ({
   oldData,
   newData,
   path,
-  dedupe = false
+  dedupe = false,
 }: {
   oldData: any
   newData: any
@@ -27,13 +27,13 @@ export const mergeConnections = ({
       const copy = JSON.parse(JSON.stringify(result))
 
       const edges = dedupe
-        ? _uniqBy([...oldEdges, ...newEdges], edge => edge.node.id)
+        ? _uniqBy([...oldEdges, ...newEdges], (edge) => edge.node.id)
         : [...oldEdges, ...newEdges]
 
       return _set(copy, path, {
         ...rest,
         pageInfo: newPageInfo,
-        edges
+        edges,
       })
     }
 
@@ -47,7 +47,7 @@ export const mergeConnections = ({
 export const unshiftConnections = ({
   oldData,
   newData,
-  path
+  path,
 }: {
   oldData: any
   newData: any
@@ -64,8 +64,8 @@ export const unshiftConnections = ({
     pageInfo: {
       ...newPageInfo,
       endCursor: oldPageInfo.endCursor,
-      hasNextPage: oldPageInfo.hasNextPage
+      hasNextPage: oldPageInfo.hasNextPage,
     },
-    edges: [...newEdges, ...oldEdges]
+    edges: [...newEdges, ...oldEdges],
   })
 }

@@ -4,7 +4,7 @@ module.exports = {
     require('postcss-conditionals'),
     require('lost'),
     require('postcss-mixins')({
-      mixinsFiles: './src/common/styles/mixins/mixins.css'
+      mixinsFiles: './src/common/styles/mixins/mixins.css',
     }),
     require('postcss-preset-env')({
       stage: 0,
@@ -16,10 +16,10 @@ module.exports = {
         './src/common/styles/variables/z-index.css',
         './src/common/styles/variables/spacing.css',
         './src/common/styles/variables/typography.css',
-        './src/common/styles/variables/shadows.css'
-      ]
+        './src/common/styles/variables/shadows.css',
+      ],
     }),
     require('postcss-calc'),
-    require('postcss-color-function')
-  ]
+    require('postcss-color-function'),
+  ],
 }

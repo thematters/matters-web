@@ -13,13 +13,13 @@ const fragments = {
         userName
       }
     }
-  `
+  `,
 }
 
 const ArchiveArticle = {
   fragments,
   Dialog,
-  Button
+  Button,
 }
 
 export default ArchiveArticle

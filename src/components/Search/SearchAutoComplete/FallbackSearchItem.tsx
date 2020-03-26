@@ -15,19 +15,19 @@ interface FallbackSearchItemProps {
 const FallbackSearchItem = ({ searchKey, inPage }: FallbackSearchItemProps) => {
   const itemClass = classNames({
     'key highlight': true,
-    inPage
+    inPage,
   })
 
   return (
     <Menu.Item
       {...toPath({
         page: 'search',
-        q: searchKey
+        q: searchKey,
       })}
       onClick={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
           location: -1,
-          entrance: searchKey
+          entrance: searchKey,
         })
       }}
     >

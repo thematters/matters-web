@@ -8,7 +8,7 @@ import {
   LanguageContext,
   Term,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -53,25 +53,21 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'red',
-              content: messages[codes[0]]
-            }
+              content: messages[codes[0]],
+            },
           })
         )
       }
       setSubmitting(false)
-    }
+    },
   })
 
   const onLogout = async () => {
     try {
       await logout()
 
-      try {
-        await unsubscribePush({ silent: true })
-        // await clearPersistCache()
-      } catch (e) {
-        console.error('Failed to unsubscribePush after logged out')
-      }
+      await unsubscribePush()
+      // await clearPersistCache()
 
       closeDialog()
 
@@ -81,8 +77,8 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureLogout" />
-          }
+            content: <Translate id="failureLogout" />,
+          },
         })
       )
     }

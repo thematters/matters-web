@@ -27,7 +27,7 @@ NoticeFollower.fragments = {
       ...UserDigestRichUser
     }
     ${UserDigest.Rich.fragments.user}
-  `
+  `,
 }
 
 export default NoticeFollower

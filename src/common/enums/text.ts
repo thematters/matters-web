@@ -194,6 +194,7 @@ export const TEXT = {
     successResetPassword: '密碼重置成功',
     successUnblock: '已取消封鎖。該用戶現在可以評論你的作品。',
     successUploadImage: '圖片上傳成功',
+    switchViewMode: '切換瀏覽視圖',
     TAG_NOT_FOUND: '標籤不存在',
     tag: '標籤',
     tagCreated: '標籤已創建',
@@ -237,7 +238,7 @@ export const TEXT = {
     waitingForPublish: '正在等待發佈，星際通道有點擁擠',
     walletSetting: '錢包設定',
     write: '創作',
-    yourEmail: '你的電子信箱'
+    yourEmail: '你的電子信箱',
   },
   zh_hans: {
     about: 'Matters 长什么样',
@@ -433,6 +434,7 @@ export const TEXT = {
     successUnblock: '已取消屏蔽。该用户现在可以评论你的作品。',
     successUpdateUserProfile: '',
     successUploadImage: '图片上传成功',
+    switchViewMode: '切换浏览视图',
     TAG_NOT_FOUND: '标签不存在',
     tag: '标签',
     tagCreated: '标签已创建',
@@ -477,6 +479,6 @@ export const TEXT = {
     waitingForPublish: '正在等待发布，星际通道有点拥挤',
     walletSetting: '钱包设定',
     write: '创作',
-    yourEmail: '你的邮箱'
-  }
+    yourEmail: '你的邮箱',
+  },
 }

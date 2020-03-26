@@ -5,7 +5,7 @@ import {
   LikeCoinDialog,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -15,7 +15,7 @@ import { PublishDialog } from './PublishDialog'
 
 const PublishButton = ({
   open,
-  disabled
+  disabled,
 }: {
   open: () => void
   disabled?: boolean

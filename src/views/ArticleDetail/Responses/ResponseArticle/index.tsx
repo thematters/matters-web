@@ -27,7 +27,7 @@ const fragments = {
 
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestSidebar.fragments.article}
-  `
+  `,
 }
 
 const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {

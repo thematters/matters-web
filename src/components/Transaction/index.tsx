@@ -3,5 +3,5 @@ import AppreciationSent from './AppreciationSent'
 
 export const Transaction = {
   AppreciationSent,
-  AppreciationReceived
+  AppreciationReceived,
 }

@@ -14,11 +14,11 @@ const MeTabs = () => {
 
   const userFollowersPath = toPath({
     page: 'userFollowers',
-    userName
+    userName,
   })
   const userFolloweesPath = toPath({
     page: 'userFollowees',
-    userName
+    userName,
   })
 
   return (

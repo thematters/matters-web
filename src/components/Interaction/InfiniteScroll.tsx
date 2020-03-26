@@ -46,7 +46,7 @@ export const InfiniteScroll: React.FC<Props> = ({
   children,
   loader = <Spinner />,
   hasNextPage,
-  loadMore
+  loadMore,
 }) => {
   const Loader = ({ innerRef }: { innerRef: Ref<HTMLDivElement> }) => (
     <div ref={innerRef}>{loader || <Spinner />}</div>

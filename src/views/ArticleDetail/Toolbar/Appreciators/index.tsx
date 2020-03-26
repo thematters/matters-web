@@ -34,7 +34,7 @@ const fragments = {
     }
     ${AppreciatorsDialog.fragments.article}
     ${Avatar.fragments.user}
-  `
+  `,
 }
 
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
@@ -42,11 +42,11 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
   const totalReceivedCount = article.appreciationsReceivedTotal
   const appreciatorCount = Math.min(article.received.totalCount, 99)
   const appreciators = [
-    ...(edges?.map(({ node }) => node.sender).filter(user => !!user) || []),
+    ...(edges?.map(({ node }) => node.sender).filter((user) => !!user) || []),
     null,
     null,
     null,
-    null
+    null,
   ].slice(0, appreciatorCount > 4 ? 3 : 4)
 
   return (

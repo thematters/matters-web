@@ -2,7 +2,7 @@ import { OperationVariables } from '@apollo/react-common'
 import {
   MutationHookOptions,
   MutationTuple,
-  useMutation as baseUseMutation
+  useMutation as baseUseMutation,
 } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
 
@@ -13,8 +13,8 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
   options?: MutationHookOptions<TData, TVariables>
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {
-    onError: error => mutationOnError(error),
-    ...options
+    onError: (error) => mutationOnError(error),
+    ...options,
   })
 
   return [mutate, result]

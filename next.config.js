@@ -47,7 +47,7 @@ const nextConfig = {
     SENTRY_DSN: process.env.SENTRY_DSN,
     FIREBASE_CONFIG,
     FCM_VAPID_KEY: process.env.FCM_VAPID_KEY,
-    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY
+    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
   },
 
   /**
@@ -55,7 +55,7 @@ const nextConfig = {
    */
   pageExtensions: ['tsx'],
   env: {
-    app_version: packageJson.version
+    app_version: packageJson.version,
   },
   useFileSystemPublicRoutes: false,
   distDir: 'build',
@@ -70,9 +70,9 @@ const nextConfig = {
       use: [
         defaultLoaders.babel,
         {
-          loader: require('styled-jsx/webpack').loader
-        }
-      ]
+          loader: require('styled-jsx/webpack').loader,
+        },
+      ],
     })
 
     config.module.rules.push({
@@ -82,18 +82,18 @@ const nextConfig = {
           loader: '@svgr/webpack',
           options: {
             memo: true,
-            dimensions: false
-          }
+            dimensions: false,
+          },
         },
         {
           loader: 'url-loader',
           options: {
             limit: 1024,
             publicPath: '/_next/static/',
-            outputPath: `${isServer ? '../' : ''}static/`
-          }
-        }
-      ]
+            outputPath: `${isServer ? '../' : ''}static/`,
+          },
+        },
+      ],
     })
 
     /***
@@ -115,13 +115,13 @@ const nextConfig = {
 
     return config
   },
-  exportPathMap: async function(defaultPathMap) {
+  exportPathMap: async function (defaultPathMap) {
     return {
       '/': {
-        page: '/_error'
-      }
+        page: '/_error',
+      },
     }
-  }
+  },
 }
 
 module.exports = withPlugins(
@@ -132,8 +132,8 @@ module.exports = withPlugins(
       {
         handleImages: ['jpeg', 'png'],
         optimizeImagesInDev: true,
-        inlineImageLimit: 1024
-      }
+        inlineImageLimit: 1024,
+      },
     ],
 
     // bundle analyzer
@@ -147,14 +147,14 @@ module.exports = withPlugins(
         bundleAnalyzerConfig: {
           server: {
             analyzerMode: 'static',
-            reportFilename: './bundles/server.html'
+            reportFilename: './bundles/server.html',
           },
           browser: {
             analyzerMode: 'static',
-            reportFilename: './bundles/client.html'
-          }
-        }
-      }
+            reportFilename: './bundles/client.html',
+          },
+        },
+      },
     ],
 
     // offline
@@ -171,8 +171,8 @@ module.exports = withPlugins(
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {
-                cacheName: 'homepage-cache'
-              }
+                cacheName: 'homepage-cache',
+              },
             },
             {
               urlPattern: new RegExp('/_next/static/'),
@@ -180,14 +180,14 @@ module.exports = withPlugins(
               options: {
                 cacheName: 'static-cache',
                 cacheableResponse: {
-                  statuses: [0, 200]
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
   ],
   nextConfig
 )

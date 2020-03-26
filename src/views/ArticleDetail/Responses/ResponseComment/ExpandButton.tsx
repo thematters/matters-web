@@ -4,7 +4,7 @@ import styles from './styles.css'
 
 const ExpandButton = ({
   onClick,
-  restCount
+  restCount,
 }: {
   onClick: () => any
   restCount: number

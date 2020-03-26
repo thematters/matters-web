@@ -10,7 +10,7 @@ import {
   parseFormSubmitErrors,
   translate,
   validateComparedPassword,
-  validatePassword
+  validatePassword,
 } from '~/common/utils'
 
 import { ResetPassword } from './__generated__/ResetPassword'
@@ -39,7 +39,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   type,
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
   const { lang } = useContext(LanguageContext)
@@ -57,11 +57,11 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
-      comparedPassword: ''
+      comparedPassword: '',
     },
     validate: ({ password, comparedPassword }) =>
       _pickBy({
@@ -70,12 +70,12 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
           password,
           comparedPassword,
           lang
-        )
+        ),
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await reset({
-          variables: { input: { password, codeId } }
+          variables: { input: { password, codeId } },
         })
         const resetPassword = data?.resetPassword
 
@@ -88,7 +88,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (

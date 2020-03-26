@@ -9,7 +9,7 @@ import { filterComment } from './comment'
  * @param responses
  */
 export const filterResponses = (responses: any[]) =>
-  responses.filter(response => {
+  responses.filter((response) => {
     // article
     if (_has(response, 'articleState')) {
       return true

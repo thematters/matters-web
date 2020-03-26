@@ -9,7 +9,7 @@ import {
   Menu,
   PopperInstance,
   Spinner,
-  Translate
+  Translate,
 } from '~/components'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
@@ -20,14 +20,14 @@ import styles from './styles.css'
 
 import {
   SearchTagsQuery,
-  SearchTagsQuery_search_edges_node_Tag
+  SearchTagsQuery_search_edges_node_Tag,
 } from '~/components/GQL/queries/__generated__/SearchTagsQuery'
 
 const DropdownContent = ({
   tags,
   search,
   addTag,
-  loading
+  loading,
 }: {
   tags: SearchTagsQuery_search_edges_node_Tag[]
   search: string
@@ -43,7 +43,7 @@ const DropdownContent = ({
   ) : (
     <>
       <Menu width="sm">
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <Menu.Item
             onClick={() => {
               addTag(tag.content)
@@ -93,7 +93,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
 
   const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
     variables: { search: debouncedSearch },
-    skip: !debouncedSearch
+    skip: !debouncedSearch,
   })
 
   return (
@@ -101,7 +101,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
       <Dropdown
         trigger="manual"
         onCreate={setInstance}
-        onShown={i => {
+        onShown={(i) => {
           hidePopperOnClick(i)
         }}
         content={
@@ -122,7 +122,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
       >
         <input
           className="search-tag-input"
-          onChange={e => {
+          onChange={(e) => {
             const value = e.target.value
             setSearch(value)
             if (value) {
@@ -137,7 +137,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
           placeholder={translate({
             zh_hant: '增加標籤…',
             zh_hans: '增加标签…',
-            lang
+            lang,
           })}
         />
       </Dropdown>

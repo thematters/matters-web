@@ -8,7 +8,7 @@ import {
   countWordsLength,
   makeSummary,
   makeTitle,
-  toPath
+  toPath,
 } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
@@ -41,12 +41,12 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 export const ArticleDigestCard = ({
   article,
-  onClick
+  onClick,
 }: ArticleDigestCardProps) => {
   const { summary, state } = article
   const isBanned = state === 'banned'
@@ -57,11 +57,11 @@ export const ArticleDigestCard = ({
     : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70)
   const containerClass = classNames({
     container: true,
-    'has-cover': !!cover
+    'has-cover': !!cover,
   })
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
 
   return (
@@ -77,7 +77,7 @@ export const ArticleDigestCard = ({
         className={containerClass}
         style={
           cover && {
-            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.64) 100%), url("${cover}")`
+            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.64) 100%), url("${cover}")`,
           }
         }
       >

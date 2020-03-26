@@ -16,7 +16,7 @@ const Unsubscribe = ({
   articleId,
   size,
   disabled,
-  inCard
+  inCard,
 }: UnsubscribeProps) => {
   const [unsubscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
@@ -26,9 +26,9 @@ const Unsubscribe = ({
         toggleSubscribeArticle: {
           id: articleId,
           subscribed: false,
-          __typename: 'Article'
-        }
-      }
+          __typename: 'Article',
+        },
+      },
     }
   )
 

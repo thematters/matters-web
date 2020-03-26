@@ -10,7 +10,7 @@ import {
   Form,
   Icon,
   LanguageContext,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
@@ -36,7 +36,7 @@ const PUT_ARTICLES_TAGS = gql`
 const DropdownContent = ({
   callback,
   items,
-  loading
+  loading,
 }: {
   callback: (params: any) => void
   items: any
@@ -49,7 +49,7 @@ const DropdownContent = ({
     <DropdownArticleList
       articles={articles}
       loading={loading}
-      onClick={article => {
+      onClick={(article) => {
         callback(article)
       }}
     />
@@ -68,7 +68,7 @@ interface FormValues {
 
 const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   closeDialog,
-  id
+  id,
 }) => {
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
   const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
@@ -85,11 +85,11 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
     handleSubmit,
     isSubmitting,
     isValid,
-    setFieldValue
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       name: '',
-      articles: []
+      articles: [],
     },
     validate: ({ name, articles }) => {
       if (articles.length <= 0) {
@@ -97,8 +97,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           name: translate({
             zh_hant: '至少添加一篇作品',
             zh_hans: '至少添加一篇作品',
-            lang
-          })
+            lang,
+          }),
         }
       }
     },
@@ -117,8 +117,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             detail: {
               color: 'green',
               content: translate({ id: 'addedArticleTag', lang }),
-              duration: 2000
-            }
+              duration: 2000,
+            },
           })
         )
 
@@ -126,8 +126,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
             detail: {
               event: 'add',
-              differences: articles.length
-            }
+              differences: articles.length,
+            },
           })
         )
 
@@ -137,7 +137,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         setFieldError('name', messages[codes[0]])
         setSubmitting(false)
       }
-    }
+    },
   })
 
   const onClickMenuItem = (params: any) => {
@@ -149,7 +149,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   const onDelete = (article: any) => {
     setFieldValue(
       'articles',
-      values.articles.filter(articleId => articleId !== article.id)
+      values.articles.filter((articleId) => articleId !== article.id)
     )
     setSelectedArticles(
       selectedArticles.filter(({ id: articleId }) => articleId !== article.id)
@@ -164,7 +164,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         placeholder={translate({
           zh_hant: '搜尋作品標題…',
           zh_hans: '搜索作品标题…',
-          lang
+          lang,
         })}
         value={values.name}
         error={touched.name && errors.name}
@@ -178,8 +178,8 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       />
 
       <ul>
-        {selectedArticles.map((article, index) => (
-          <li key={index}>
+        {selectedArticles.map((article) => (
+          <li key={article.id}>
             <ArticleDigestDropdown
               article={article}
               titleTextSize="md-s"

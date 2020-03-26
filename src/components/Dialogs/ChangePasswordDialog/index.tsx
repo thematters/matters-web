@@ -5,31 +5,29 @@ import {
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 interface ChangePasswordDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const ChangePasswordDialog = ({
-  children
-}: ChangePasswordDialogProps) => {
+const BaseChangePasswordDialog = ({ children }: ChangePasswordDialogProps) => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       prev: 'login',
       next: 'confirm',
-      email: viewer.info.email
+      email: viewer.info.email,
     },
     confirm: {
       prev: 'request',
-      next: 'complete'
+      next: 'complete',
     },
-    complete: {}
+    complete: {},
   })
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setStep('request')
     setShowDialog(true)
@@ -38,14 +36,14 @@ export const ChangePasswordDialog = ({
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
           email,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('confirm')
@@ -92,3 +90,15 @@ export const ChangePasswordDialog = ({
     </>
   )
 }
+
+export const ChangePasswordDialog = (props: ChangePasswordDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseChangePasswordDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

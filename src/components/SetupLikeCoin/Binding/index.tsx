@@ -32,7 +32,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser
+    skip: !process.browser,
   })
   const likerId = data?.viewer?.liker.likerId
 

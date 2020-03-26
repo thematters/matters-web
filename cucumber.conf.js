@@ -3,7 +3,7 @@ const {
   createSession,
   closeSession,
   startWebDriver,
-  stopWebDriver
+  stopWebDriver,
 } = require('nightwatch-api')
 
 const driver = process.env.BDD_DRIVER

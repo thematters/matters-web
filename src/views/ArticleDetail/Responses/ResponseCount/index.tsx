@@ -10,7 +10,7 @@ const fragments = {
       id
       responseCount
     }
-  `
+  `,
 }
 
 const ResponseCount = ({ article }: { article: ResponseCountArticle }) => {
