@@ -99,10 +99,11 @@ export const Card: React.FC<CardProps> = ({
     }
 
     // stop bubbling if it's nested to another `<Card>`
-    if (node.current && node.current.parentElement?.closest('.card')) {
+    if (node.current?.parentElement?.closest('.card')) {
       event.stopPropagation()
     }
 
+    // blur on click
     if (node.current) {
       node.current.blur()
     }

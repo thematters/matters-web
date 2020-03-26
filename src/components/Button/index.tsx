@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import { forwardRef } from 'react'
+import { forwardRef, useRef } from 'react'
 
 import styles from './styles.css'
 
@@ -149,6 +149,9 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     },
     ref
   ) => {
+    const fallbackRef = useRef(null)
+    const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+
     const isClickable = is !== 'span' && !restProps.disabled
     const isTransparent = !bgColor && !borderColor
     const [width, height] = size
@@ -170,9 +173,24 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
       [className]: !!className,
     })
+
+    // handle click
+    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (restProps.onClick) {
+        restProps.onClick()
+      }
+
+      // blur on click
+      if (buttonRef?.current) {
+        console.log('blur', buttonRef.current)
+        buttonRef.current.blur()
+      }
+    }
+
     const containerProps = {
       ...restProps,
-      ref: ref as React.RefObject<any>,
+      onClick,
+      ref: buttonRef as React.RefObject<any>,
       className: containerClass,
     }
 
