@@ -131,8 +131,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant="操作失敗，請檢查網路連線"
-                zh_hans="操作失败，请检查网路连线"
+                zh_hant="開啓失敗，你的瀏覽器可能不支持推送通知"
+                zh_hans="开启失败，你的瀏覽器可能不支持推送通知"
               />
             ),
           },
@@ -141,11 +141,15 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
     }
   }
 
-  try {
-    if (!cachedClient) {
-      throw new Error('[Push] `cachedClient` is required')
-    }
+  if (!token) {
+    return
+  }
 
+  if (!cachedClient) {
+    throw new Error('[Push] `cachedClient` is required')
+  }
+
+  try {
     // Send to server
     const { data } = await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
@@ -189,8 +193,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant="開啓失敗，請稍候重試"
-                zh_hans="开启失败，请稍候重试"
+                zh_hant="開啓失敗，請檢查網路連線"
+                zh_hans="开启失败，请检查网路连线"
               />
             ),
           },
