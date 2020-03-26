@@ -70,6 +70,16 @@ export const Card: React.FC<CardProps> = ({
   }) => {
     const target = event.target as HTMLElement
 
+    if (disabled) {
+      return
+    }
+
+    // We have some trackers rely on `onClick`,
+    // allow <a> and skip if it's from <button>
+    if (!target.closest('button') && onClick) {
+      onClick()
+    }
+
     // skip if the inside <button> or <a> was clicked
     if (target.closest('a, button')) {
       return
@@ -88,15 +98,12 @@ export const Card: React.FC<CardProps> = ({
       }
     }
 
-    if (onClick) {
-      onClick()
-    }
-
     // stop bubbling if it's nested to another `<Card>`
-    if (node.current && node.current.parentElement?.closest('.card')) {
+    if (node.current?.parentElement?.closest('.card')) {
       event.stopPropagation()
     }
 
+    // blur on click
     if (node.current) {
       node.current.blur()
     }
