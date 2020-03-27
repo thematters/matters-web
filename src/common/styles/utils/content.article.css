@@ -49,6 +49,7 @@
   & :global(figure) {
     margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
     text-align: center;
+    white-space: initial;
 
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
