@@ -14,7 +14,7 @@ import {
   TextIcon,
   Throw404,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
@@ -44,10 +44,10 @@ const TAG_DETAIL = gql`
 type TagFeed = 'latest' | 'selected'
 
 const EmptyLayout: React.FC = ({ children }) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
-  </Layout>
+  </Layout.Main>
 )
 
 const TagDetail = ({ data }: { data: TagDetailType }) => {
@@ -65,7 +65,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   }
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -122,14 +122,14 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
       )}
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 
 const TagDetailContainer = () => {
   const router = useRouter()
   const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
-    variables: { id: router.query.id }
+    variables: { id: router.query.id },
   })
 
   if (loading) {

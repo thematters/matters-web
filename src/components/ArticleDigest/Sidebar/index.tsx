@@ -38,7 +38,7 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 export const ArticleDigestSidebar = ({
@@ -47,7 +47,7 @@ export const ArticleDigestSidebar = ({
   titleTextSize = 'md-s',
   hasBackground,
   hasCover,
-  onClick
+  onClick,
 }: ArticleDigestSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
@@ -55,11 +55,11 @@ export const ArticleDigestSidebar = ({
   const containerClass = classNames({
     container: true,
     'has-cover': !!cover,
-    'has-background': !!hasBackground
+    'has-background': !!hasBackground,
   })
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
 
   return (

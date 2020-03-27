@@ -17,7 +17,7 @@ interface BlockUserDialogProps {
 }
 
 const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -27,9 +27,9 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
       blockUser: {
         id: user.id,
         isBlocked: true,
-        __typename: 'User'
-      }
-    }
+        __typename: 'User',
+      },
+    },
   })
 
   const onBlock = async () => {
@@ -41,8 +41,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           color: 'green',
           content: <Translate id="successBlock" />,
           customButton: <ViewBlocksButton />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }
@@ -95,4 +95,12 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   )
 }
 
-export default BlockUserDialog
+const LazyBlockUserDialog = (props: BlockUserDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? <BlockUserDialog {...props} /> : <>{props.children({ open })}</>
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyBlockUserDialog

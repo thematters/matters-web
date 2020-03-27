@@ -22,7 +22,7 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
     {
       errorPolicy: 'ignore',
       fetchPolicy: 'network-only',
-      skip: !viewer.isAuthed || !process.browser
+      skip: !viewer.isAuthed || !process.browser,
     }
   )
 
@@ -39,9 +39,9 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClass}>
       {active ? (
-        <Icon.NotificationActiveLarge size="lg" color="green" />
+        <Icon.NavNotificationActive size="md" color="green" />
       ) : (
-        <Icon.NotificationLarge size="lg" />
+        <Icon.NavNotification size="md" />
       )}
 
       <style jsx>{styles}</style>

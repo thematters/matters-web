@@ -4,7 +4,7 @@ import {
   Icon,
   Spinner,
   TextIcon,
-  Translate
+  Translate,
 } from '~/components'
 
 import styles from './styles.css'

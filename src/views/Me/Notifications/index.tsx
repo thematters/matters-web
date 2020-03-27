@@ -10,7 +10,7 @@ import {
   List,
   Notice,
   Spinner,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
@@ -21,10 +21,10 @@ import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from './__generated__/MeNotifications'
 
 const ME_NOTIFICATIONS = gql`
-  query MeNotifications($first: Int, $after: String) {
+  query MeNotifications($after: String) {
     viewer {
       id
-      notices(input: { first: $first, after: $after }) {
+      notices(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -52,15 +52,13 @@ const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
     MARK_ALL_NOTICES_AS_READ,
     {
-      update: updateViewerUnreadNoticeCount
+      update: updateViewerUnreadNoticeCount,
     }
   )
   const { data, loading, fetchMore } = useQuery<
     MeNotifications,
     { first: number; after?: number }
-  >(ME_NOTIFICATIONS, {
-    variables: { first: 20 }
-  })
+  >(ME_NOTIFICATIONS)
 
   useEffect(() => {
     markAllNoticesAsRead()
@@ -81,14 +79,14 @@ const BaseNotifications = () => {
     fetchMore({
       variables: {
         first: 20,
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (
@@ -108,7 +106,7 @@ const Notifications = () => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={
           isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
@@ -119,7 +117,7 @@ const Notifications = () => {
       <Head title={{ id: 'notification' }} />
 
       <BaseNotifications />
-    </Layout>
+    </Layout.Main>
   )
 }
 

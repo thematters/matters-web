@@ -11,7 +11,7 @@ const Community = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="community" />}
@@ -25,15 +25,15 @@ const Community = () => {
           dangerouslySetInnerHTML={{
             __html: translate({
               ...content,
-              lang
-            })
+              lang,
+            }),
           }}
           className="u-content"
         />
       </Layout.Spacing>
 
       <style jsx>{contentStyles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

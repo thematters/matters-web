@@ -30,13 +30,9 @@ import { ReactComponent as Edit } from './icons/edit.svg'
 import { ReactComponent as EmptyWarning } from './icons/empty-warning.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
 import { ReactComponent as External } from './icons/external.svg'
-import { ReactComponent as FollowActiveLarge } from './icons/follow-active-lg.svg'
-import { ReactComponent as FollowLarge } from './icons/follow-lg.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
 import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
-import { ReactComponent as HomeActiveLarge } from './icons/home-active-lg.svg'
-import { ReactComponent as HomeLarge } from './icons/home-lg.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
 import { ReactComponent as LeftLarge } from './icons/left-lg.svg'
 import { ReactComponent as Left } from './icons/left.svg'
@@ -51,15 +47,19 @@ import { ReactComponent as Min } from './icons/min.svg'
 import { ReactComponent as MoreLarge } from './icons/more-lg.svg'
 import { ReactComponent as More } from './icons/more.svg'
 import { ReactComponent as MuteMedium } from './icons/mute-md.svg'
-import { ReactComponent as NotificationActiveLarge } from './icons/notification-active-lg.svg'
-import { ReactComponent as NotificationLarge } from './icons/notification-lg.svg'
+import { ReactComponent as NavFollowActive } from './icons/nav-follow-active.svg'
+import { ReactComponent as NavFollow } from './icons/nav-follow.svg'
+import { ReactComponent as NavHomeActive } from './icons/nav-home-active.svg'
+import { ReactComponent as NavHome } from './icons/nav-home.svg'
+import { ReactComponent as NavNotificationActive } from './icons/nav-notification-active.svg'
+import { ReactComponent as NavNotification } from './icons/nav-notification.svg'
+import { ReactComponent as NavSearch } from './icons/nav-search.svg'
 import { ReactComponent as Pen } from './icons/pen.svg'
 import { ReactComponent as PinMedium } from './icons/pin-md.svg'
 import { ReactComponent as ProfileMedium } from './icons/profile-md.svg'
 import { ReactComponent as Reload } from './icons/reload.svg'
 import { ReactComponent as RemoveMedium } from './icons/remove-md.svg'
 import { ReactComponent as Right } from './icons/right.svg'
-import { ReactComponent as SearchLarge } from './icons/search-lg.svg'
 import { ReactComponent as SearchMedium } from './icons/search-md.svg'
 import { ReactComponent as Search } from './icons/search.svg'
 import { ReactComponent as SettingsMedium } from './icons/settings-md.svg'
@@ -105,7 +105,7 @@ export const withIcon = (
     icon: true,
     [size]: !!size,
     [color]: !!color,
-    [className]: !!className
+    [className]: !!className,
   })
 
   return (
@@ -160,7 +160,7 @@ export const Icon = {
   Comment: withIcon(Comment),
   DeleteDraftMedium: withIcon(DeleteDraftMedium),
   DeleteDraftXS: withIcon(DeleteDraftXS),
-  DotDivider: withIcon(props => (
+  DotDivider: withIcon((props) => (
     <DotDivider style={{ width: 18, height: 18 }} {...props} />
   )),
   Down: withIcon(Down),
@@ -172,13 +172,9 @@ export const Icon = {
   EmptyWarning: withIcon(EmptyWarning),
   Expand: withIcon(Expand),
   External: withIcon(External),
-  FollowActiveLarge: withIcon(FollowActiveLarge),
-  FollowLarge: withIcon(FollowLarge),
   HashTag: withIcon(HashTag),
   HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
-  HomeActiveLarge: withIcon(HomeActiveLarge),
-  HomeLarge: withIcon(HomeLarge),
   IPFSMedium: withIcon(IPFSMedium),
   Left: withIcon(Left),
   LeftLarge: withIcon(LeftLarge),
@@ -186,10 +182,10 @@ export const Icon = {
   LikeMedium: withIcon(LikeMedium),
   Link: withIcon(Link),
   Live,
-  Logo: withIcon(props => (
+  Logo: withIcon((props) => (
     <Logo style={{ width: 97, height: 20 }} {...props} />
   )),
-  LogoGraph: withIcon(props => (
+  LogoGraph: withIcon((props) => (
     <LogoGraph style={{ width: 48, height: 33 }} {...props} />
   )),
   LogoutMedium: withIcon(LogoutMedium),
@@ -198,8 +194,13 @@ export const Icon = {
   More: withIcon(More),
   MoreLarge: withIcon(MoreLarge),
   MuteMedium: withIcon(MuteMedium),
-  NotificationActiveLarge: withIcon(NotificationActiveLarge),
-  NotificationLarge: withIcon(NotificationLarge),
+  NavFollow: withIcon(NavFollow),
+  NavFollowActive: withIcon(NavFollowActive),
+  NavHome: withIcon(NavHome),
+  NavHomeActive: withIcon(NavHomeActive),
+  NavNotification: withIcon(NavNotification),
+  NavNotificationActive: withIcon(NavNotificationActive),
+  NavSearch: withIcon(NavSearch),
   Pen: withIcon(Pen),
   PinMedium: withIcon(PinMedium),
   ProfileMedium: withIcon(ProfileMedium),
@@ -207,7 +208,6 @@ export const Icon = {
   RemoveMedium: withIcon(RemoveMedium),
   Right: withIcon(Right),
   Search: withIcon(Search),
-  SearchLarge: withIcon(SearchLarge),
   SearchMedium: withIcon(SearchMedium),
   SettingsMedium: withIcon(SettingsMedium),
   Share: withIcon(Share),
@@ -224,5 +224,5 @@ export const Icon = {
   ViewModeComfortable: withIcon(ViewModeComfortable),
   ViewModeCompact: withIcon(ViewModeCompact),
   ViewModeDefault: withIcon(ViewModeDefault),
-  Volume: withIcon(Volume)
+  Volume: withIcon(Volume),
 }

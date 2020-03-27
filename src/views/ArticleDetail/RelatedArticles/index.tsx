@@ -6,7 +6,7 @@ import {
   ArticleDigestSidebar,
   PageHeader,
   Slides,
-  Translate
+  Translate,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -37,7 +37,7 @@ const fragments = {
     }
     ${ArticleDigestSidebar.fragments.article}
     ${ArticleDigestCard.fragments.article}
-  `
+  `,
 }
 
 const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
@@ -49,14 +49,14 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
 
   const relatedArticlesClass = classNames({
     'related-articles': true,
-    inSidebar
+    inSidebar,
   })
 
   const onClick = (i: number) => () =>
     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
       type: FEED_TYPE.RELATED_ARTICLE,
       location: i,
-      entrance: article.id
+      entrance: article.id,
     })
 
   const Header = (

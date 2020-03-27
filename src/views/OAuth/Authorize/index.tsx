@@ -14,7 +14,7 @@ import {
   Throw404,
   Translate,
   UserDigest,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
@@ -26,7 +26,7 @@ import styles from './styles.css'
 import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 
 const {
-  publicRuntimeConfig: { OAUTH_URL }
+  publicRuntimeConfig: { OAUTH_URL },
 } = getConfig()
 const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`
 
@@ -55,7 +55,7 @@ const OAuthAuthorize = () => {
   const redirectUri = getQuery({ router, key: 'redirect_uri' })
 
   const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
-    variables: { id: clientId }
+    variables: { id: clientId },
   })
 
   if (!clientId) {
@@ -113,7 +113,7 @@ const OAuthAuthorize = () => {
               scopes.map((s: any) => {
                 const readableScope = toReadableScope({
                   scope: s,
-                  lang
+                  lang,
                 })
 
                 if (!readableScope) {
@@ -145,7 +145,7 @@ const OAuthAuthorize = () => {
               <Link
                 {...appendTarget({
                   ...PATHS.AUTH_LOGIN,
-                  fallbackCurrent: true
+                  fallbackCurrent: true,
                 })}
               >
                 <a className="u-link-green">
@@ -178,11 +178,11 @@ const OAuthAuthorize = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
     <Layout.Spacing>
       <OAuthAuthorize />
     </Layout.Spacing>
-  </Layout>
+  </Layout.Main>
 )

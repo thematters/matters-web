@@ -10,7 +10,7 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
-  WriteButton
+  WriteButton,
 } from '~/components'
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
@@ -51,8 +51,8 @@ const SideNav = () => {
       <ul>
         <NavListItem
           name={<Translate id="discover" />}
-          icon={<Icon.HomeLarge size="lg" />}
-          activeIcon={<Icon.HomeActiveLarge size="lg" />}
+          icon={<Icon.NavHome size="md" />}
+          activeIcon={<Icon.NavHomeActive size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
           {...PATHS.HOME}
@@ -81,8 +81,8 @@ const SideNav = () => {
         {!isLargeUp && (
           <NavListItem
             name={<Translate id="search" />}
-            icon={<Icon.SearchLarge size="lg" />}
-            activeIcon={<Icon.SearchLarge size="lg" color="green" />}
+            icon={<Icon.NavSearch size="md" />}
+            activeIcon={<Icon.NavSearch size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
             {...PATHS.SEARCH}
@@ -104,7 +104,7 @@ const SideNav = () => {
             boundary="viewport"
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-            onShown={i => {
+            onShown={(i) => {
               hidePopperOnClick(i)
             }}
           >

@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -66,18 +66,18 @@ const MeHistory = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.READ_HISTORY,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -91,7 +91,7 @@ const MeHistory = () => {
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.READ_HISTORY,
-                  location: i
+                  location: i,
                 })
               }
             />
@@ -103,7 +103,7 @@ const MeHistory = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="readHistory" />}
@@ -113,5 +113,5 @@ export default () => (
     <Head title={{ id: 'readHistory' }} />
 
     <MeHistory />
-  </Layout>
+  </Layout.Main>
 )

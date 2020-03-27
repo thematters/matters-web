@@ -186,35 +186,3 @@
     height: 0px !important;
   }
 }
-
-@define-mixin unread-dot {
-  position: relative;
-
-  &::after {
-    @mixin all-transition;
-
-    content: '';
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    width: 0.5rem;
-    height: 0.5rem;
-
-    background: var(--color-matters-green);
-    border-radius: 50%;
-    transform: scale(0);
-  }
-
-  &.unread::after {
-    transform: scale(1);
-  }
-}
-
-@define-mixin unread-dot-loose {
-  @mixin unread-dot;
-
-  &::after {
-    top: -0.25rem;
-    right: calc(var(--spacing-tight) * -1);
-  }
-}

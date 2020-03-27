@@ -7,7 +7,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  Translate
+  Translate,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -21,7 +21,7 @@ const VIEWER_BLOCK_LIST = gql`
   query ViewerBlockList($after: String) {
     viewer {
       id
-      blockList(input: { first: 10, after: $after }) {
+      blockList(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -70,18 +70,18 @@ const SettingsBlocked = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.ALL_AUTHORS,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -97,7 +97,7 @@ const SettingsBlocked = () => {
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.ALL_AUTHORS,
-                  location: i
+                  location: i,
                 })
               }
             />

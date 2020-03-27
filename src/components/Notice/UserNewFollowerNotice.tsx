@@ -78,7 +78,7 @@ UserNewFollowerNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeFollower.fragments.follower}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default UserNewFollowerNotice

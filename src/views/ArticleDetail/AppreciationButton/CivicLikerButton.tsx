@@ -4,7 +4,7 @@ import CivicLikerDialog from './CivicLikerDialog'
 const CivicLikerButton = ({
   onClose,
   count,
-  total
+  total,
 }: {
   onClose: () => void
   count?: number

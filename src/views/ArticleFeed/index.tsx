@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -68,7 +68,7 @@ const QUERIES = {
       }
     }
     ${ArticleDigestFeed.fragments.article}
-  `
+  `,
 }
 
 const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
@@ -94,18 +94,18 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: type === 'topic' ? FEED_TYPE.ALL_TOPICS : FEED_TYPE.ALL_ICYMI,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -122,7 +122,7 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
                     type === 'topic'
                       ? FEED_TYPE.ALL_TOPICS
                       : FEED_TYPE.ALL_ICYMI,
-                  location: i
+                  location: i,
                 })
               }
             />
@@ -134,7 +134,7 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
 }
 
 export default ({ type = 'topic' }: ArticleFeedProp) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={
@@ -146,5 +146,5 @@ export default ({ type = 'topic' }: ArticleFeedProp) => (
     <Head title={{ id: type === 'topic' ? 'allTopics' : 'allIcymi' }} />
 
     <Feed type={type} />
-  </Layout>
+  </Layout.Main>
 )

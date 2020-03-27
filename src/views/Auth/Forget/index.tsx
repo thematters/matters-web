@@ -5,38 +5,38 @@ import {
   Layout,
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
-  PasswordChangeRequestForm
+  PasswordChangeRequestForm,
 } from '~/components'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
-      next: 'confirm'
+      next: 'confirm',
     },
     confirm: {
       prev: 'request',
-      next: 'complete'
-    }
+      next: 'complete',
+    },
   })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
         request: {
           ...prev.request,
           email,
-          codeId
-        }
+          codeId,
+        },
       }
     })
     setStep('confirm')
   }
 
   return (
-    <Layout bgColor="grey-lighter">
+    <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'forgetPassword' }} />
 
       {step === 'request' && (
@@ -60,7 +60,7 @@ const Forget = () => {
       {step === 'complete' && (
         <PasswordChangeComplete type="forget" purpose="page" />
       )}
-    </Layout>
+    </Layout.Main>
   )
 }
 

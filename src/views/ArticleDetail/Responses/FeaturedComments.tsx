@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import {
   ArticleFeaturedComments,
-  ArticleFeaturedComments_article_featuredComments_edges_node
+  ArticleFeaturedComments_article_featuredComments_edges_node,
 } from './__generated__/ArticleFeaturedComments'
 
 const FEATURED_COMMENTS = gql`
@@ -48,7 +48,7 @@ const FeaturedComments = () => {
     FEATURED_COMMENTS,
     {
       variables: { mediaHash },
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
     }
   )
 
@@ -69,14 +69,14 @@ const FeaturedComments = () => {
   const loadMore = () => {
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -89,7 +89,7 @@ const FeaturedComments = () => {
       </header>
 
       <List spacing={['xloose', 0]}>
-        {comments.map(comment => (
+        {comments.map((comment) => (
           <List.Item key={comment.id}>
             <ResponseComment comment={comment} />
           </List.Item>

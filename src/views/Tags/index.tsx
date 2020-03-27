@@ -16,7 +16,7 @@ import {
   TagDialog,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -98,19 +98,19 @@ const Tags = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAGS,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-          dedupe: true
-        })
+          dedupe: true,
+        }),
     })
   }
 
@@ -125,12 +125,12 @@ const Tags = () => {
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'tagDetail',
-                    id: node.id
+                    id: node.id,
                   })}
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.ALL_TAGS,
-                      location: i * 2
+                      location: i * 2,
                     })
                   }
                 >
@@ -145,7 +145,7 @@ const Tags = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Head title={{ id: 'allTags' }} />
 
     <Layout.Header
@@ -160,5 +160,5 @@ export default () => (
     />
 
     <Tags />
-  </Layout>
+  </Layout.Main>
 )

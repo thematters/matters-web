@@ -16,7 +16,7 @@ import {
   Translate,
   useEventListener,
   useResponsive,
-  ViewMoreButton
+  ViewMoreButton,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -26,7 +26,7 @@ import {
   filterResponses,
   getQuery,
   mergeConnections,
-  unshiftConnections
+  unshiftConnections,
 } from '~/common/utils'
 
 import ResponseArticle from './ResponseArticle'
@@ -35,11 +35,11 @@ import styles from './styles.css'
 
 import {
   LatestResponses as LatestResponsesType,
-  LatestResponses_article_responses_edges_node
+  LatestResponses_article_responses_edges_node,
 } from './__generated__/LatestResponses'
 import {
   ResponseAdded,
-  ResponseAdded_nodeEdited_Article
+  ResponseAdded_nodeEdited_Article,
 } from './__generated__/ResponseAdded'
 
 const RESPONSES_COUNT = 15
@@ -150,14 +150,14 @@ const LatestResponses = () => {
     error,
     fetchMore,
     subscribeToMore,
-    refetch
+    refetch,
   } = useQuery<LatestResponsesType>(LATEST_RESPONSES, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
-      articleOnly: articleOnlyMode
+      articleOnly: articleOnlyMode,
     },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   })
   const connectionPath = 'article.responses'
   const article = data?.article
@@ -174,14 +174,14 @@ const LatestResponses = () => {
         before: loadBefore,
         first: noLimit ? null : RESPONSES_COUNT,
         includeBefore: !!loadBefore,
-        articleOnly: articleOnlyMode
+        articleOnly: articleOnlyMode,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -190,7 +190,7 @@ const LatestResponses = () => {
       variables: {
         before: storedCursor,
         includeBefore: false,
-        articleOnly: articleOnlyMode
+        articleOnly: articleOnlyMode,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
@@ -204,8 +204,8 @@ const LatestResponses = () => {
               ...previousResult,
               article: {
                 ...previousResult.article,
-                responseCount: newResponseCount
-              }
+                responseCount: newResponseCount,
+              },
             }
           }
           return previousResult
@@ -215,7 +215,7 @@ const LatestResponses = () => {
         const newResult = unshiftConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
         })
         const newStartCursor = _get(
           newResult,
@@ -226,7 +226,7 @@ const LatestResponses = () => {
           setStoredCursor(newStartCursor)
         }
         return newResult
-      }
+      },
     })
 
   const responses = filterResponses(
@@ -242,7 +242,7 @@ const LatestResponses = () => {
           id: article.id,
           before: pageInfo.endCursor,
           includeBefore: true,
-          articleOnly: articleOnlyMode
+          articleOnly: articleOnlyMode,
         },
         updateQuery: (prev, { subscriptionData }) => {
           if (!prev.article) {
@@ -264,12 +264,12 @@ const LatestResponses = () => {
                 edges: [...diff, ...(oldData.responses.edges || [])],
                 pageInfo: {
                   ...newData.responses.pageInfo,
-                  endCursor: oldData.responses.pageInfo.endCursor
-                }
-              }
-            }
+                  endCursor: oldData.responses.pageInfo.endCursor,
+                },
+              },
+            },
           }
-        }
+        },
       })
     }
   }, [articleId])
@@ -282,7 +282,7 @@ const LatestResponses = () => {
 
     const jumpToFragment = () => {
       jump(`#${fragment}`, {
-        offset: fragment === UrlFragments.COMMENTS ? -10 : -64
+        offset: fragment === UrlFragments.COMMENTS ? -10 : -64,
       })
     }
     const element = dom.$(`#${fragment}`)
@@ -335,7 +335,7 @@ const LatestResponses = () => {
         ))}
 
       <List spacing={['xloose', 0]}>
-        {responses.map(response => (
+        {responses.map((response) => (
           <List.Item key={response.id}>
             {response.__typename === 'Article' ? (
               <ResponseArticle article={response} hasCover={isMediumUp} />

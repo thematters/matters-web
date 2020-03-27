@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -61,14 +61,14 @@ const MeBookmarks = () => {
   const loadMore = () =>
     fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (
@@ -85,7 +85,7 @@ const MeBookmarks = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="myBookmarks" />}
@@ -95,5 +95,5 @@ export default () => (
     <Head title={{ id: 'myBookmarks' }} />
 
     <MeBookmarks />
-  </Layout>
+  </Layout.Main>
 )

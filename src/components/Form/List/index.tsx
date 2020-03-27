@@ -16,10 +16,10 @@ interface ListProps {
 
 const List: React.FC<ListProps> & { Item: typeof Item } = ({
   spacing = 0,
-  children
+  children,
 }) => {
   const listClass = classNames({
-    [`spacing-${spacing}`]: !!spacing
+    [`spacing-${spacing}`]: !!spacing,
   })
 
   return (

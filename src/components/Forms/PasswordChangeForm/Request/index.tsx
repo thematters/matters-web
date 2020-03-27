@@ -8,7 +8,7 @@ import {
   LanguageContext,
   Layout,
   SendCodeButton,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
@@ -17,7 +17,7 @@ import {
   parseFormSubmitErrors,
   translate,
   validateCode,
-  validateEmail
+  validateEmail,
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
@@ -40,7 +40,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
   type,
   purpose,
   submitCallback,
-  closeDialog
+  closeDialog,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
@@ -58,21 +58,21 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid
+    isValid,
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
-      code: ''
+      code: '',
     },
     validate: ({ email, code }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        code: validateCode(code, lang)
+        code: validateCode(code, lang),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'password_reset', code } }
+          variables: { input: { email, type: 'password_reset', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
 
@@ -81,7 +81,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach(c => {
+        codes.forEach((c) => {
           if (c.includes('CODE_')) {
             setFieldError('code', messages[c])
           } else {
@@ -91,7 +91,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const InnerForm = (
@@ -103,7 +103,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         required
         placeholder={translate({
           id: isForget ? 'enterRegisteredEmail' : 'enterEmail',
-          lang
+          lang,
         })}
         value={values.email}
         error={touched.email && errors.email}

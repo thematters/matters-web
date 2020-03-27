@@ -9,7 +9,7 @@ import { UserFollowerCount } from '~/components/GQL/queries/__generated__/UserFo
 const update = ({
   cache,
   type,
-  userName
+  userName,
 }: {
   cache: DataProxy
   type: 'increment' | 'decrement'
@@ -23,7 +23,7 @@ const update = ({
     const variables = { userName }
     const cacheData = cache.readQuery<UserFollowerCount>({
       query: USER_FOLLOWER_COUNT,
-      variables
+      variables,
     })
 
     if (!cacheData || !cacheData.user) {
@@ -39,7 +39,7 @@ const update = ({
     cache.writeQuery({
       query: USER_FOLLOWER_COUNT,
       variables,
-      data: cacheData
+      data: cacheData,
     })
   } catch (e) {
     if (e.message.startsWith("Can't find field")) {

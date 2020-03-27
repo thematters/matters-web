@@ -9,7 +9,7 @@ import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
 const {
-  publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY }
+  publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY },
 } = getConfig()
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
@@ -24,7 +24,7 @@ let cachedClient: ApolloClient<any> | null = null
 
 export const initializePush = async ({
   client,
-  viewer
+  viewer,
 }: {
   client: ApolloClient<any>
   viewer: Viewer
@@ -48,9 +48,9 @@ export const initializePush = async ({
       data: {
         push: {
           supported: true,
-          __typename: 'Push'
-        }
-      }
+          __typename: 'Push',
+        },
+      },
     })
   } else {
     return
@@ -74,7 +74,7 @@ export const initializePush = async ({
   // - a message is received while the app has focus
   // - the user clicks on an app notification created by a service worker
   //   `messaging.setBackgroundMessageHandler` handler.
-  messaging.onMessage(payload => {
+  messaging.onMessage((payload) => {
     console.log('[Push] Message received. ', payload)
     // ...
   })
@@ -90,15 +90,15 @@ export const initializePush = async ({
    */
   const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
   const isViewerPush = viewer.id === push.userId
-  const isNotificationGranted = Notification.permission === 'granted'
+  const isNotificationGranted =
+    window.Notification && Notification.permission === 'granted'
 
   if (!viewer.id || !isNotificationGranted) {
     return
   }
 
   if (!isViewerPush) {
-    const token = await getToken()
-    await unsubscribePushLocally(token)
+    await unsubscribePush()
   }
 
   client.writeData({
@@ -106,9 +106,9 @@ export const initializePush = async ({
     data: {
       push: {
         enabled: (isViewerPush && push.enabled) || false,
-        __typename: 'Push'
-      }
-    }
+        __typename: 'Push',
+      },
+    },
   })
 }
 
@@ -131,25 +131,29 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant="操作失敗，請檢查網路連線"
-                zh_hans="操作失败，请检查网路连线"
+                zh_hant="開啓失敗，你的瀏覽器可能不支持推送通知"
+                zh_hans="开启失败，你的瀏覽器可能不支持推送通知"
               />
-            )
-          }
+            ),
+          },
         })
       )
     }
   }
 
-  try {
-    if (!cachedClient) {
-      throw new Error('[Push] `cachedClient` is required')
-    }
+  if (!token) {
+    return
+  }
 
+  if (!cachedClient) {
+    throw new Error('[Push] `cachedClient` is required')
+  }
+
+  try {
     // Send to server
     const { data } = await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
-      variables: { id: token, enabled: true }
+      variables: { id: token, enabled: true },
     })
 
     // Update local state
@@ -158,16 +162,16 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
       data: {
         push: {
           enabled: true,
-          __typename: 'Push'
-        }
-      }
+          __typename: 'Push',
+        },
+      },
     })
     localStorage.setItem(
       STORE_KEY_PUSH,
       JSON.stringify({
         userId: data?.toggleSubscribePush?.id,
         enabled: true,
-        token
+        token,
       })
     )
 
@@ -176,8 +180,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate zh_hant="推送已開啓" zh_hans="推送已开启" />
-          }
+            content: <Translate zh_hant="推送已開啓" zh_hans="推送已开启" />,
+          },
         })
       )
     }
@@ -189,84 +193,70 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             color: 'red',
             content: (
               <Translate
-                zh_hant="開啓失敗，請稍候重試"
-                zh_hans="开启失败，请稍候重试"
+                zh_hant="開啓失敗，請檢查網路連線"
+                zh_hans="开启失败，请检查网路连线"
               />
-            )
-          }
+            ),
+          },
         })
       )
-      console.error('[Push] Failed to subscribe push')
+      console.error('[Push] Failed to subscribe push', e)
     }
   }
 
   console.log('[Push] Subscribed')
 }
 
-export const unsubscribePush = async (options?: { silent?: boolean }) => {
-  const { silent } = options || { silent: false }
-  const token = await getToken()
-
-  // Delete token in local
-  try {
-    await unsubscribePushLocally(token)
-  } catch (e) {
-    console.error('[Push] Failed to deleteToken in local')
-
-    if (!silent) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: (
-              <Translate
-                zh_hant="關閉失敗，請稍候重試"
-                zh_hans="关闭失败，请稍候重试"
-              />
-            )
-          }
-        })
-      )
-    }
-
-    throw new Error('[Push] Failed to unsubscribe push')
-  }
-
-  // Update local state
-  if (cachedClient) {
-    cachedClient.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        push: {
-          enabled: false,
-          __typename: 'Push'
-        }
-      }
-    })
-  }
-
-  // Delete token from server
-  if (cachedClient) {
-    await cachedClient.mutate<ToggleSubscribePush>({
-      mutation: TOGGLE_SUBSCRIBE_PUSH,
-      variables: { id: token, enabled: false }
-    })
-  }
-
-  console.log('[Push] Unsubscribed')
-}
-
-const unsubscribePushLocally = async (token?: string) => {
+export const unsubscribePush = async () => {
   const firebase = await import('firebase/app')
   const messaging = firebase.messaging()
 
-  if (token) {
-    await messaging.deleteToken(token)
+  let token
+  try {
+    token = await getToken()
+  } catch (e) {
+    console.error('[Push] Failed to getToken', e)
   }
 
+  // Unsubscribe from Firebase
+  if (token) {
+    try {
+      await messaging.deleteToken(token)
+    } catch (e) {
+      console.error('[Push] Failed to deleteToken in local', e)
+    }
+  }
+
+  // Update local state
   localStorage.removeItem(STORE_KEY_PUSH)
 
-  return token
+  if (!cachedClient) {
+    return
+  }
+
+  cachedClient.writeData({
+    id: 'ClientPreference:local',
+    data: {
+      push: {
+        enabled: false,
+        __typename: 'Push',
+      },
+    },
+  })
+
+  // Unsubscribe from our server
+  if (token) {
+    try {
+      await cachedClient.mutate<ToggleSubscribePush>({
+        mutation: TOGGLE_SUBSCRIBE_PUSH,
+        variables: { id: token, enabled: false },
+      })
+    } catch (e) {
+      console.error('[Push] Failed to unsubscribe from server', e)
+    }
+  }
+
+  console.log('[Push] Unsubscribed')
 }
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
@@ -307,8 +297,8 @@ const requestPermission = async () => {
               zh_hant="開啓失敗，請檢查你的瀏覽器通知設定"
               zh_hans="开启失败，请检查你的浏览器通知设定"
             />
-          )
-        }
+          ),
+        },
       })
     )
     throw new Error('[Push] Need to grant permission')

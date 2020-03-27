@@ -19,7 +19,7 @@ import {
   Title,
   Translate,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -73,14 +73,14 @@ const ARTICLE_DETAIL = gql`
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
-  loading: Spinner
+  loading: Spinner,
 })
 
 const EmptyLayout: React.FC = ({ children }) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
-  </Layout>
+  </Layout.Main>
 )
 
 const ArticleDetail = () => {
@@ -90,13 +90,13 @@ const ArticleDetail = () => {
   const viewer = useContext(ViewerContext)
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
-    variables: { mediaHash }
+    variables: { mediaHash },
   })
 
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
     {
-      variables: { id: 'local' }
+      variables: { id: 'local' },
     }
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
@@ -163,7 +163,7 @@ const ArticleDetail = () => {
   }
 
   return (
-    <Layout aside={<RelatedArticles article={article} inSidebar />}>
+    <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -237,7 +237,7 @@ const ArticleDetail = () => {
       )}
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

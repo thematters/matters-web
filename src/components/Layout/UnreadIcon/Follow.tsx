@@ -22,7 +22,7 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
     {
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
-      skip: !viewer.isAuthed || !process.browser
+      skip: !viewer.isAuthed || !process.browser,
     }
   )
 
@@ -39,9 +39,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClass}>
       {active ? (
-        <Icon.FollowActiveLarge size="lg" color="green" />
+        <Icon.NavFollowActive size="md" color="green" />
       ) : (
-        <Icon.FollowLarge size="lg" />
+        <Icon.NavFollow size="md" />
       )}
 
       <style jsx>{styles}</style>

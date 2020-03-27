@@ -7,7 +7,7 @@ import {
   List,
   Spinner,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -18,8 +18,8 @@ import EmptySearch from '../EmptySearch'
 import { SeachUsers } from './__generated__/SeachUsers'
 
 const SEARCH_USERS = gql`
-  query SeachUsers($first: Int!, $key: String!, $after: String) {
-    search(input: { key: $key, type: User, first: $first, after: $after }) {
+  query SeachUsers($key: String!, $after: String) {
+    search(input: { key: $key, type: User, first: 20, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -43,7 +43,7 @@ const SearchUser = () => {
   const q = getQuery({ router, key: 'q' })
 
   const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
-    variables: { key: q, first: 10 }
+    variables: { key: q },
   })
 
   if (loading) {
@@ -61,18 +61,18 @@ const SearchUser = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_USER,
       location: edges.length,
-      entrance: q
+      entrance: q,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -89,7 +89,7 @@ const SearchUser = () => {
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.SEARCH_USER,
                       location: i,
-                      entrance: q
+                      entrance: q,
                     })
                   }
                 />

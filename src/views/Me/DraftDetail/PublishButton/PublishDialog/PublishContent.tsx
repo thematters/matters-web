@@ -34,9 +34,9 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         id,
         scheduledAt: new Date(Date.now() + 1000).toISOString(),
         publishState: 'pending' as any,
-        __typename: 'Draft'
-      }
-    }
+        __typename: 'Draft',
+      },
+    },
   })
 
   const onPublish = async () => {

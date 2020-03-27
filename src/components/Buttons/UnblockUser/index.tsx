@@ -15,11 +15,11 @@ const fragments = {
       id
       isBlocked
     }
-  `
+  `,
 }
 
 export const UnblockUserButton = ({
-  user
+  user,
 }: {
   user: UnblockUserButtonUser
 }) => {
@@ -29,9 +29,9 @@ export const UnblockUserButton = ({
       unblockUser: {
         id: user.id,
         isBlocked: false,
-        __typename: 'User'
-      }
-    }
+        __typename: 'User',
+      },
+    },
   })
 
   return (
@@ -47,8 +47,8 @@ export const UnblockUserButton = ({
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successUnblock" />
-            }
+              content: <Translate id="successUnblock" />,
+            },
           })
         )
       }}

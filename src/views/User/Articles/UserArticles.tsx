@@ -11,7 +11,7 @@ import {
   List,
   Spinner,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
@@ -25,13 +25,13 @@ import styles from './styles.css'
 
 import {
   UserArticles as UserArticlesTypes,
-  UserArticles_user
+  UserArticles_user,
 } from '~/components/GQL/queries/__generated__/UserArticles'
 
 const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
-    totalWordCount: 0
+    totalWordCount: 0,
   }
 
   return (
@@ -81,7 +81,7 @@ const UserArticles = () => {
     <Head
       title={{
         zh_hant: `${user.displayName}的創作空間站`,
-        zh_hans: `${user.displayName}的创作空间站`
+        zh_hans: `${user.displayName}的创作空间站`,
       }}
       description={user.info.description || ''}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -101,18 +101,18 @@ const UserArticles = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.USER_ARTICLE,
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -143,7 +143,7 @@ const UserArticles = () => {
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.USER_ARTICLE,
-                      location: i
+                      location: i,
                     })
                   }
                 />

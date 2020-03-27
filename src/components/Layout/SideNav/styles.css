@@ -28,10 +28,10 @@
 
 ul {
   & li {
-    display: flex;
+    @mixin flex-center-all;
 
     & + li {
-      margin-top: var(--spacing-x-loose);
+      margin-top: var(--spacing-xx-loose);
     }
   }
 }

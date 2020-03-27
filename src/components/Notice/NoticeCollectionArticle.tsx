@@ -7,7 +7,7 @@ import styles from './styles.css'
 import { NoticeCollectionArticle as NoticeCollectionArticleType } from './__generated__/NoticeCollectionArticle'
 
 const NoticeCollectionArticle = ({
-  article
+  article,
 }: {
   article: NoticeCollectionArticleType | null
 }) => {
@@ -30,7 +30,7 @@ NoticeCollectionArticle.fragments = {
       ...ArticleDigestSidebarArticle
     }
     ${ArticleDigestSidebar.fragments.article}
-  `
+  `,
 }
 
 export default NoticeCollectionArticle

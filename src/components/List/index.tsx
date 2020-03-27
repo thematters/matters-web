@@ -40,7 +40,7 @@ const ListItem: React.FC<ListItemProps> = ({
 }) => {
   const listItemClass = classNames({
     'list-item': true,
-    [className]: !!className
+    [className]: !!className,
   })
 
   return (
@@ -67,7 +67,7 @@ export const List: React.FC<ListProps> & {
     [`spacing-y-${spacing[0]}`]: !!spacing[0],
     [`spacing-x-${spacing[1]}`]: !!spacing[1],
     'has-border': !!hasBorder,
-    [className]: !!className
+    [className]: !!className,
   })
 
   return (

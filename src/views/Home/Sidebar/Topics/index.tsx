@@ -55,16 +55,16 @@ const Topics = () => {
         {edges
           .filter(({ node }) => !!node.mediaHash)
           .map(({ node, cursor }, i) => (
-            <li
-              key={cursor}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TOPICS,
-                  location: i
-                })
-              }
-            >
-              <TopicSidebarArticleDigest article={node} />
+            <li key={cursor}>
+              <TopicSidebarArticleDigest
+                article={node}
+                onClick={() => {
+                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    type: FEED_TYPE.TOPICS,
+                    location: i,
+                  })
+                }}
+              />
             </li>
           ))}
       </ol>

@@ -7,10 +7,9 @@ import {
   DialogOverlayProps,
   DialogProps,
   Dropdown,
-  PopperInstance,
   PopperProps,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { KEYCODES, TEXT, TextId } from '~/common/enums'
@@ -42,11 +41,9 @@ import { KEYCODES, TEXT, TextId } from '~/common/enums'
 
 type DropdownDialogNode = ({
   open,
-  close,
-  ref
+  ref,
 }: {
   open: () => void
-  close: () => void
   ref?: React.Ref<any>
 }) => React.ReactChild | React.ReactChild[]
 
@@ -64,36 +61,23 @@ type DropdownDialogProps = {
 
 type ForwardChildrenProps = {
   open: () => void
-  close: () => void
 } & DropdownDialogChildren
 
 const ForwardChildren = forwardRef(
-  ({ open, close, children }: ForwardChildrenProps, ref) => (
-    <>{children({ open, close, ref })}</>
+  ({ open, children }: ForwardChildrenProps, ref) => (
+    <>{children({ open, ref })}</>
   )
 )
 
-export const DropdownDialog = ({
+const BaseDropdownDialog = ({
   dropdown,
   dialog,
-  children
+  children,
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const [
-    dropdownInstance,
-    setDropdownInstance
-  ] = useState<PopperInstance | null>(null)
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
-  const close = () => {
-    // dropdown
-    if (dropdownInstance) {
-      dropdownInstance.hide()
-    }
-
-    // dialog
-    setShowDialog(false)
-  }
+  const close = () => setShowDialog(false)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -105,7 +89,7 @@ export const DropdownDialog = ({
   const Content: React.FC = ({ children: contentChildren }) => {
     return (
       <section
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           if (event.keyCode !== KEYCODES.enter) {
             return
           }
@@ -130,9 +114,10 @@ export const DropdownDialog = ({
       <Dropdown
         {...dropdown}
         content={<Content>{dropdown.content}</Content>}
-        onCreate={setDropdownInstance}
+        onHidden={close}
+        visible={showDialog}
       >
-        <ForwardChildren open={open} close={close} children={children} />
+        <ForwardChildren open={open} children={children} />
       </Dropdown>
     )
   }
@@ -142,7 +127,7 @@ export const DropdownDialog = ({
    */
   return (
     <>
-      {children({ open, close })}
+      {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog}>
         <Dialog.Header title={dialog.title} close={close} headerHidden />
@@ -162,3 +147,15 @@ export const DropdownDialog = ({
     </>
   )
 }
+
+export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseDropdownDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)

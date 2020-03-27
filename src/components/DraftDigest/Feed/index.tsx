@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import React from 'react'
 
 import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
 
@@ -27,7 +28,7 @@ const fragments = {
     }
     ${EditButton.fragments.draft}
     ${DeleteButton.fragments.draft}
-  `
+  `,
 }
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
@@ -35,7 +36,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   const path = toPath({
     page: 'draftDetail',
     slug,
-    id
+    id,
   })
 
   return (
@@ -68,6 +69,20 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   )
 }
 
-DraftDigestFeed.fragments = fragments
+/**
+ * Memoizing
+ */
+type MemoedDraftDigestFeedType = React.MemoExoticComponent<
+  React.FC<DraftDigestFeedProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default DraftDigestFeed
+const MemoedDraftDigestFeed = React.memo(
+  DraftDigestFeed,
+  () => true
+) as MemoedDraftDigestFeedType
+
+MemoedDraftDigestFeed.fragments = fragments
+
+export default MemoedDraftDigestFeed

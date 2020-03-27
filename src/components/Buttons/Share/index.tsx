@@ -5,7 +5,7 @@ import {
   IconColor,
   IconSize,
   ShareDialog,
-  ShareDialogProps
+  ShareDialogProps,
 } from '~/components'
 
 import { TEXT } from '~/common/enums'

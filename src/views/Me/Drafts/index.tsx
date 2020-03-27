@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -20,7 +20,7 @@ const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {
     viewer {
       id
-      drafts(input: { first: 10, after: $after })
+      drafts(input: { first: 20, after: $after })
         @connection(key: "viewerDrafts") {
         pageInfo {
           startCursor
@@ -62,14 +62,14 @@ const MeDrafts = () => {
   const loadMore = () =>
     fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (
@@ -86,7 +86,7 @@ const MeDrafts = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="myDrafts" />}
@@ -96,5 +96,5 @@ export default () => (
     <Head title={{ id: 'myDrafts' }} />
 
     <MeDrafts />
-  </Layout>
+  </Layout.Main>
 )

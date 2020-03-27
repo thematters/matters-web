@@ -4,7 +4,7 @@ import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_RESET_PASSWORD_DIALOG,
   OPEN_SIGNUP_DIALOG,
-  PATHS
+  PATHS,
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 

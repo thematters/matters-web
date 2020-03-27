@@ -8,7 +8,7 @@ import {
   ShareDialog,
   TextIcon,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
@@ -23,7 +23,7 @@ const fragments = {
       ...BlockUser
     }
     ${BlockUser.fragments.user}
-  `
+  `,
 }
 
 interface DropdownActionsProps {
@@ -42,7 +42,7 @@ const BaseDropdownActions = ({
   user,
   isMe,
   openShareDialog,
-  openBlockUserDialog
+  openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const isSmallUp = useResponsive('sm-up')
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
@@ -63,11 +63,11 @@ const BaseDropdownActions = ({
     <DropdownDialog
       dropdown={{
         content: <Content isInDropdown />,
-        placement: 'bottom-end'
+        placement: 'bottom-end',
       }}
       dialog={{
         content: <Content />,
-        title: 'moreActions'
+        title: 'moreActions',
       }}
     >
       {({ open, ref }) => (

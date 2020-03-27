@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  Translate
+  Translate,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -23,7 +23,7 @@ const USER_FOLLOWEES_FEED = gql`
     user(input: { userName: $userName }) {
       id
       displayName
-      followees(input: { first: 10, after: $after }) {
+      followees(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -47,7 +47,7 @@ const UserFollowees = () => {
   const { data, loading, error, fetchMore } = useQuery<UserFolloweeFeed>(
     USER_FOLLOWEES_FEED,
     {
-      variables: { userName }
+      variables: { userName },
     }
   )
 
@@ -77,18 +77,18 @@ const UserFollowees = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.FOLLOWEE,
       location: edges.length,
-      entrance: user.id
+      entrance: user.id,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -97,7 +97,7 @@ const UserFollowees = () => {
       <Head
         title={{
           zh_hant: `${user.displayName}追蹤的作者`,
-          zh_hans: `${user.displayName}追踪的作者`
+          zh_hans: `${user.displayName}追踪的作者`,
         }}
       />
 
@@ -111,7 +111,7 @@ const UserFollowees = () => {
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.FOLLOWEE,
                     location: i,
-                    entrance: user.id
+                    entrance: user.id,
                   })
                 }
               />

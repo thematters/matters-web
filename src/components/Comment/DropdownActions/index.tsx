@@ -9,7 +9,7 @@ import {
   DropdownDialog,
   Icon,
   Menu,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
@@ -71,7 +71,7 @@ const fragments = {
     ${EditButton.fragments.comment}
     ${PinButton.fragments.comment}
     ${BlockUser.fragments.user}
-  `
+  `,
 }
 
 const BaseDropdownActions = ({
@@ -88,7 +88,7 @@ const BaseDropdownActions = ({
   openEditCommentDialog,
   openDeleteCommentDialog,
   openBlockUserDialog,
-  openCollapseCommentDialog
+  openCollapseCommentDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -114,11 +114,11 @@ const BaseDropdownActions = ({
     <DropdownDialog
       dropdown={{
         content: <Content isInDropdown />,
-        placement: 'bottom-end'
+        placement: 'bottom-end',
       }}
       dialog={{
         content: <Content />,
-        title: 'moreActions'
+        title: 'moreActions',
       }}
     >
       {({ open, ref }) => (
@@ -156,7 +156,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasDelete: !!(isCommentAuthor && isActive),
     hasBlockUser: !isCommentAuthor,
     hasCollapse: !!(isAbleCollapse && isActive),
-    hasUncollapse: !!(isAbleCollapse && isCollapsed)
+    hasUncollapse: !!(isAbleCollapse && isCollapsed),
   }
 
   if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {

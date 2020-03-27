@@ -6,7 +6,7 @@ import {
   LoginButton,
   SignUpButton,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { SIGNUP_TYPE } from '~/common/enums'
@@ -21,7 +21,7 @@ const Home = () => {
   const hasLogo = !viewer.isAuthed && !isSmallUp
 
   return (
-    <Layout
+    <Layout.Main
       aside={
         <>
           <Sidebar.Icymi />
@@ -58,7 +58,7 @@ const Home = () => {
       <Feed />
 
       <style jsx>{styles}</style>
-    </Layout>
+    </Layout.Main>
   )
 }
 

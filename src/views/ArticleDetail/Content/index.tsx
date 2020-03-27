@@ -25,7 +25,7 @@ const fragments = {
       id
       content
     }
-  `
+  `,
 }
 
 const Content = ({ article }: { article: ContentArticle }) => {
@@ -37,7 +37,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
   useEffect(() => {
     // enter and leave article for analytics
     analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
-      entrance: id
+      entrance: id,
     })
 
     // send referrer to likebutton
@@ -50,7 +50,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
           likeButtonIframe.contentWindow.postMessage(
             {
               action: 'SET_REFERRER',
-              content: { referrer: window.location.href.split('#')[0] }
+              content: { referrer: window.location.href.split('#')[0] },
             },
             'https://button.like.co'
           )
@@ -93,7 +93,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
         onEnter={() => {
           if (!trackedFinish) {
             analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-              entrance: id
+              entrance: id,
             })
             setTrackedFinish(true)
           }
@@ -101,7 +101,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
         onPositionChange={({ currentPosition: to, previousPosition: from }) => {
           analytics.trackEvent(ANALYTICS_EVENTS.ARTICLE_BOTTOM_CROSS, {
             from,
-            to
+            to,
           })
         }}
       />

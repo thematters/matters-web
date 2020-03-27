@@ -19,8 +19,6 @@
 
 .container {
   @mixin border-top-grey;
-  @mixin border-left-grey;
-  @mixin border-right-grey;
   display: flex;
   flex-direction: column;
 
@@ -28,6 +26,12 @@
   padding: var(--spacing-base);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    @mixin border-left-grey;
+    @mixin border-right-grey;
+  }
 
   & .slogan {
     @mixin font-serif;

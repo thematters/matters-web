@@ -11,7 +11,7 @@ export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
     return errorCodes
   }
 
-  error.graphQLErrors.forEach(e => {
+  error.graphQLErrors.forEach((e) => {
     const code = e.extensions?.code
     if (code) {
       errorCodes.push(code)
@@ -26,7 +26,7 @@ export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
  */
 export const mutationOnError = (error: ApolloError) => {
   // Add info to Sentry
-  import('@sentry/browser').then(Sentry => {
+  import('@sentry/browser').then((Sentry) => {
     Sentry.captureException(error)
   })
 
@@ -36,7 +36,7 @@ export const mutationOnError = (error: ApolloError) => {
 
   const errorCodes = getErrorCodes(error)
   const errorMap: { [key: string]: boolean } = {}
-  errorCodes.forEach(code => {
+  errorCodes.forEach((code) => {
     errorMap[code] = true
   })
 
@@ -68,8 +68,8 @@ export const mutationOnError = (error: ApolloError) => {
           color: 'red',
           content: errorMessage,
           customButton: <LoginButton isPlain />,
-          buttonPlacement: 'center'
-        }
+          buttonPlacement: 'center',
+        },
       })
     )
   }
@@ -97,17 +97,17 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.LIKER_NOT_FOUND,
     ERROR_CODES.LIKER_USER_ID_EXISTS,
     ERROR_CODES.LIKER_EMAIL_EXISTS,
-    ERROR_CODES.MIGRATION_REACH_LIMIT
+    ERROR_CODES.MIGRATION_REACH_LIMIT,
   ] as ErrorCodeKeys[]
-  CATCH_CODES.forEach(code => {
+  CATCH_CODES.forEach((code) => {
     if (errorMap[code]) {
       isCatched = true
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id={code} />
-          }
+            content: <Translate id={code} />,
+          },
         })
       )
     }
@@ -128,7 +128,7 @@ export const mutationOnError = (error: ApolloError) => {
 
 export const QueryError = ({ error }: { error: ApolloError }) => {
   // Add info to Sentry
-  import('@sentry/browser').then(Sentry => {
+  import('@sentry/browser').then((Sentry) => {
     Sentry.captureException(error)
   })
 

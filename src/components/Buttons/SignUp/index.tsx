@@ -5,7 +5,7 @@ import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_SIGNUP_DIALOG,
-  PATHS
+  PATHS,
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
@@ -17,7 +17,7 @@ interface SignUpButtonProps {
 export const SignUpButton: React.FC<SignUpButtonProps> = ({
   children,
   isPlain,
-  trackType
+  trackType,
 }) => {
   const isSmallUp = useResponsive('sm-up')
 
@@ -25,19 +25,19 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
     ? {
         onClick: () => {
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
-            type: trackType
+            type: trackType,
           })
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
           window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
-        }
+        },
       }
     : {
         ...appendTarget({ ...PATHS.AUTH_SIGNUP, fallbackCurrent: true }),
         onClick: () => {
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
-            type: trackType
+            type: trackType,
           })
-        }
+        },
       }
 
   if (isPlain) {

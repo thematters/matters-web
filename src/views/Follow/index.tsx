@@ -34,7 +34,7 @@ const BaseFollow = () => {
   const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
     READ_FOLLOWEE_ARTICLES,
     {
-      update: viewerUnreadFolloweeArticles
+      update: viewerUnreadFolloweeArticles,
     }
   )
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
@@ -66,7 +66,7 @@ const Follow = () => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
-    <Layout>
+    <Layout.Main>
       <Layout.Header
         left={
           isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
@@ -76,7 +76,7 @@ const Follow = () => {
       />
 
       <BaseFollow />
-    </Layout>
+    </Layout.Main>
   )
 }
 

@@ -23,7 +23,7 @@ const fragments = {
         id
       }
     }
-  `
+  `,
 }
 
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {

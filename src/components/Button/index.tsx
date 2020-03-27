@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import { forwardRef } from 'react'
+import { forwardRef, useRef } from 'react'
 
 import styles from './styles.css'
 
@@ -149,6 +149,9 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     },
     ref
   ) => {
+    const fallbackRef = useRef(null)
+    const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+
     const isClickable = is !== 'span' && !restProps.disabled
     const isTransparent = !bgColor && !borderColor
     const [width, height] = size
@@ -168,25 +171,39 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
-      [className]: !!className
+      [className]: !!className,
     })
+
+    // handle click
+    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (restProps.onClick) {
+        restProps.onClick()
+      }
+
+      // blur on click
+      if (buttonRef?.current) {
+        buttonRef.current.blur()
+      }
+    }
+
     const containerProps = {
       ...restProps,
-      ref: ref as React.RefObject<any>,
-      className: containerClass
+      onClick,
+      ref: buttonRef as React.RefObject<any>,
+      className: containerClass,
     }
 
     // content
     const contentStyle = {
       width: (!isTransparent && width) || undefined,
-      height: (!isTransparent && height) || undefined
+      height: (!isTransparent && height) || undefined,
     }
 
     // hotarea
     const hotAreaStyle = {
       width: width || undefined,
       height: height || undefined,
-      borderRadius
+      borderRadius,
     }
 
     // span

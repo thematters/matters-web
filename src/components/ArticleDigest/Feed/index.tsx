@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import React from 'react'
 
 import { Card, Icon, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -59,10 +60,10 @@ const fragments = {
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
-  `
+  `,
 }
 
-export const ArticleDigestFeed = ({
+const BaseArticleDigestFeed = ({
   article,
 
   inTagDetailLatest,
@@ -70,10 +71,10 @@ export const ArticleDigestFeed = ({
   inUserArticles,
   inFollowFeed,
 
-  onClick
+  onClick,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' }
+    variables: { id: 'local' },
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const isCompactMode = viewMode === 'compact'
@@ -84,23 +85,23 @@ export const ArticleDigestFeed = ({
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
   const containerClass = classNames({
-    [`mode-${viewMode}`]: !!viewMode
+    [`mode-${viewMode}`]: !!viewMode,
   })
 
   let userDigestProps = {}
   if (isCompactMode) {
     userDigestProps = {
       avatarSize: 'sm',
-      textSize: 'sm'
+      textSize: 'sm',
     }
   } else {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
-      textWeight: 'md'
+      textWeight: 'md',
     }
   }
 
@@ -135,7 +136,7 @@ export const ArticleDigestFeed = ({
             )}
 
             <Live article={article} />
-            <InactiveState article={article} />
+            {inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
@@ -153,7 +154,7 @@ export const ArticleDigestFeed = ({
               <section
                 className="cover"
                 style={{
-                  backgroundImage: `url(${cover})`
+                  backgroundImage: `url(${cover})`,
                 }}
               />
             )}
@@ -174,5 +175,28 @@ export const ArticleDigestFeed = ({
     </Card>
   )
 }
+
+/**
+ * Memoizing
+ */
+type MemoedArticleDigestFeed = React.MemoExoticComponent<
+  React.FC<ArticleDigestFeedProps>
+> & {
+  fragments: typeof fragments
+}
+
+export const ArticleDigestFeed = React.memo(
+  BaseArticleDigestFeed,
+  ({ article: prevArticle }, { article }) => {
+    return (
+      prevArticle.subscribed === article.subscribed &&
+      prevArticle.responseCount === article.responseCount &&
+      prevArticle.articleState === article.articleState &&
+      prevArticle.sticky === article.sticky &&
+      prevArticle.appreciationsReceivedTotal ===
+        article.appreciationsReceivedTotal
+    )
+  }
+) as MemoedArticleDigestFeed
 
 ArticleDigestFeed.fragments = fragments

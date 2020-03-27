@@ -4,7 +4,7 @@ import SettingsTab from '../SettingsTab'
 import SettingsBlocked from './SettingsBlocked'
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="blockedSetting" />}
@@ -13,5 +13,5 @@ export default () => (
     <SettingsTab />
 
     <SettingsBlocked />
-  </Layout>
+  </Layout.Main>
 )

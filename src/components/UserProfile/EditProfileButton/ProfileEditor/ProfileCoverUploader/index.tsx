@@ -8,7 +8,7 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
-  UPLOAD_IMAGE_SIZE_LIMIT
+  UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
 import Cover from '../../../Cover'
@@ -58,8 +58,8 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
                 zh_hant="上傳檔案超過 5 MB"
                 zh_hans="上传文件超过 5 MB"
               />
-            )
-          }
+            ),
+          },
         })
       )
       return
@@ -67,7 +67,9 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
     try {
       const { data } = await upload({
-        variables: { input: { file, type: 'profileCover', entityType: 'user' } }
+        variables: {
+          input: { file, type: 'profileCover', entityType: 'user' },
+        },
       })
       const id = data?.singleFileUpload.id
       const path = data?.singleFileUpload.path
@@ -83,8 +85,8 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureUploadImage" />
-          }
+            content: <Translate id="failureUploadImage" />,
+          },
         })
       )
     }

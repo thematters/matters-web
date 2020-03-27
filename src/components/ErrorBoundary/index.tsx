@@ -20,12 +20,12 @@ interface State {
 export class ErrorBoundary extends React.Component<Props, State> {
   state: State = {
     error: null,
-    info: null
+    info: null,
   }
 
   componentDidCatch(error: Error, info: any): void {
     // Add info to Sentry
-    import('@sentry/browser').then(Sentry => {
+    import('@sentry/browser').then((Sentry) => {
       Sentry.captureException(error)
     })
 

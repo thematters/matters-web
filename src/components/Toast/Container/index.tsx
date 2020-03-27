@@ -31,25 +31,20 @@ const Container = () => {
     if (!payload || Object.keys(payload).length === 0) {
       return false
     }
-    setToasts(prev => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
+    setToasts((prev) => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
   }
 
   const remove = ({ id }: { id: string }) => {
     if (!id || !id.startsWith(prefix)) {
       return
     }
-    setToasts(prev => prev.filter(toast => toast.id !== id))
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }
 
-  const containerClasses = classNames({
-    'l-col-4': true,
-    'l-col-sm-8': true,
-    'l-col-md-9': true,
-    'l-col-lg-9': !isMiscPage,
-    'l-col-lg-12': isMiscPage
-  })
+  useEventListener(ADD_TOAST, add)
+  useEventListener(REMOVE_TOAST, remove)
 
-  const instanceClasses = isMiscPage
+  const instanceClass = isMiscPage
     ? classNames(
         'l-col-4',
         'l-col-sm-6',
@@ -59,31 +54,17 @@ const Container = () => {
         'l-col-lg-6',
         'l-offset-lg-3'
       )
-    : classNames(
-        'l-col-4',
-        'l-col-sm-7',
-        'l-offset-sm-1',
-        'l-col-md-7',
-        'l-offset-md-2',
-        'l-col-lg-9-7',
-        'l-offset-lg-9-2'
-      )
-
-  useEventListener(ADD_TOAST, add)
-  useEventListener(REMOVE_TOAST, remove)
+    : classNames('l-col-three-mid')
 
   return (
     <>
       <section className="toast-container">
         <div className="l-row full">
-          <div className={containerClasses}>
-            <div className="l-row full">
-              <div className={instanceClasses}>
-                {toasts.map(toast => (
-                  <ToastWithEffect key={toast.id} {...toast} />
-                ))}
-              </div>
-            </div>
+          <div className={isMiscPage ? '' : 'l-col-three-left'} />
+          <div className={instanceClass}>
+            {toasts.map((toast) => (
+              <ToastWithEffect key={toast.id} {...toast} />
+            ))}
           </div>
         </div>
       </section>

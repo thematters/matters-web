@@ -11,7 +11,7 @@ interface CivicLikerDialogProps {
 }
 
 const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
     analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
@@ -78,4 +78,16 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
   )
 }
 
-export default CivicLikerDialog
+const LazyCivicLikerDialog = (props: CivicLikerDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <CivicLikerDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
+
+export default LazyCivicLikerDialog

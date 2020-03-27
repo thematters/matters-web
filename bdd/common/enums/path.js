@@ -1,5 +1,5 @@
 module.exports = {
-  HOME: prefix => {
+  HOME: (prefix) => {
     return `https://${prefix}web-develop.matters.news`
-  }
+  },
 }

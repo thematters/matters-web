@@ -10,7 +10,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -18,7 +18,7 @@ import {
   filterComments,
   getQuery,
   mergeConnections,
-  toPath
+  toPath,
 } from '~/common/utils'
 import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
 
@@ -26,7 +26,7 @@ import UserTabs from '../../UserTabs'
 
 import {
   UserCommentFeed,
-  UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node
+  UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node,
 } from './__generated__/UserCommentFeed'
 import { UserIdUser } from './__generated__/UserIdUser'
 
@@ -84,7 +84,7 @@ const UserCommentsWrap = () => {
   const userName = getQuery({ router, key: 'userName' })
 
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
-    variables: { userName }
+    variables: { userName },
   })
   const user = data?.user
 
@@ -105,7 +105,7 @@ const UserCommentsWrap = () => {
       <Head
         title={{
           zh_hant: `${user.displayName}發表的評論`,
-          zh_hans: `${user.displayName}发表的评论`
+          zh_hans: `${user.displayName}发表的评论`,
         }}
         description={user.info.description}
         image={IMAGE_LOGO_192}
@@ -120,7 +120,7 @@ const UserComments = ({ user }: UserIdUser) => {
   const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
     USER_COMMENT_FEED,
     {
-      variables: { id: user?.id }
+      variables: { id: user?.id },
     }
   )
 
@@ -152,20 +152,20 @@ const UserComments = ({ user }: UserIdUser) => {
   const loadMore = () =>
     fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List spacing={['loose', 0]}>
-        {edges.map(articleEdge => {
+        {edges.map((articleEdge) => {
           const commentEdges = articleEdge.node.comments.edges
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
@@ -181,14 +181,14 @@ const UserComments = ({ user }: UserIdUser) => {
                 spacing={['tight', 'base']}
                 {...toPath({
                   page: 'articleDetail',
-                  article: articleEdge.node
+                  article: articleEdge.node,
                 })}
               >
                 <ArticleDigestTitle article={articleEdge.node} is="h3" />
               </Card>
 
               <List hasBorder={false}>
-                {filteredComments.map(comment => (
+                {filteredComments.map((comment) => (
                   <List.Item key={comment.id}>
                     <Card
                       spacing={['tight', 'base']}

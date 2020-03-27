@@ -1,21 +1,3 @@
-main {
-  &.bg-grey-lighter {
-    & article {
-      background: var(--color-grey-lighter);
-
-      @media (--sm-up) {
-        background: none;
-      }
-    }
-  }
-
-  &.asideShowInMobile {
-    & article {
-      min-height: auto;
-    }
-  }
-}
-
 article {
   min-height: 100vh;
 
@@ -24,6 +6,20 @@ article {
     constant(safe-area-inset-bottom) + var(--global-nav-height)
   );
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--global-nav-height));
+
+  &.bg-grey-lighter {
+    background: var(--color-grey-lighter);
+
+    @media (--sm-up) {
+      background: none;
+    }
+  }
+
+  &.keepAside {
+    @media (--lg-down) {
+      min-height: auto;
+    }
+  }
 
   @media (--sm-up) {
     @mixin border-left-grey;
@@ -35,7 +31,7 @@ article {
 aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
-  padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-base);
+  padding: var(--spacing-base);
 
   & :global(> * + *) {
     margin-top: var(--spacing-xx-loose);

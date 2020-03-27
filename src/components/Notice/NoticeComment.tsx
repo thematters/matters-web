@@ -31,7 +31,7 @@ const fragments = {
     }
 
     ${CommentContent.fragments.comment}
-  `
+  `,
 }
 
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
@@ -43,7 +43,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
     comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
-          comment
+          comment,
         })
       : {}
 

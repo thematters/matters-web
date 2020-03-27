@@ -27,7 +27,7 @@ NoticeTag.fragments = {
       ...DigestTag
     }
     ${Tag.fragments.tag}
-  `
+  `,
 }
 
 export default NoticeTag

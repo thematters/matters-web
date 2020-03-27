@@ -25,7 +25,7 @@ const Tab: React.FC<TabProps> = ({
   selected,
 
   sup,
-  children
+  children,
 }) => {
   if (href && as) {
     return (
@@ -55,7 +55,7 @@ export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
 } = ({ spacingBottom = 'xtight', children }) => {
   const navClass = classNames({
-    [`spacing-bottom-${spacingBottom}`]: !!spacingBottom
+    [`spacing-bottom-${spacingBottom}`]: !!spacingBottom,
   })
 
   return (

@@ -1,7 +1,7 @@
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyResponse = ({
-  articleOnlyMode
+  articleOnlyMode,
 }: {
   articleOnlyMode?: boolean
 }) => {

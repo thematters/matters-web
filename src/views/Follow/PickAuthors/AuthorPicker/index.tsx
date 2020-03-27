@@ -9,7 +9,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  UserDigest
+  UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -43,7 +43,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
     AUTHOR_PICKER,
     {
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
     }
   )
   const edges = data?.viewer?.recommendation.authors.edges || []

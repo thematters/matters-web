@@ -8,7 +8,7 @@ import {
   Layout,
   List,
   Spinner,
-  Transaction
+  Transaction,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -72,18 +72,18 @@ const AppreciationsSent = () => {
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: 'appreciationsSent',
-      location: edges.length
+      location: edges.length,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
   }
 
@@ -105,7 +105,7 @@ const AppreciationsSent = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="appreciationsSent" />}
@@ -114,5 +114,5 @@ export default () => (
     <Head title={{ id: 'appreciationsSent' }} />
 
     <AppreciationsSent />
-  </Layout>
+  </Layout.Main>
 )

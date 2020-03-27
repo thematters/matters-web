@@ -22,7 +22,7 @@ import { UpdateDraft } from './__generated__/UpdateDraft'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
-  loading: Spinner
+  loading: Spinner,
 })
 
 const DRAFT_DETAIL = gql`
@@ -59,10 +59,10 @@ export const UPDATE_DRAFT = gql`
 `
 
 const EmptyLayout: React.FC = ({ children }) => (
-  <Layout>
+  <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
-  </Layout>
+  </Layout.Main>
 )
 
 const DraftDetail = () => {
@@ -70,7 +70,7 @@ const DraftDetail = () => {
   const id = getQuery({ router, key: 'id' })
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
     variables: { id },
-    fetchPolicy: 'network-only'
+    fetchPolicy: 'network-only',
   })
   const [updateDraft] = useMutation<UpdateDraft>(UPDATE_DRAFT)
   const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -112,9 +112,9 @@ const DraftDetail = () => {
           type: 'embed',
           entityType: 'draft',
           entityId: draft && draft.id,
-          ...input
-        }
-      }
+          ...input,
+        },
+      },
     })
     const { id: assetId, path } =
       (result && result.data && result.data.singleFileUpload) || {}
@@ -145,14 +145,14 @@ const DraftDetail = () => {
   }
 
   return (
-    <Layout
+    <Layout.Main
       aside={
         <>
           {loading && <Spinner />}
           {draft && <Sidebar draft={draft} setSaveStatus={setSaveStatus} />}
         </>
       }
-      asideShowInMobile
+      keepAside
     >
       <Layout.Header
         left={<Layout.Header.BackButton />}
@@ -178,7 +178,7 @@ const DraftDetail = () => {
           </Layout.Spacing>
         </>
       )}
-    </Layout>
+    </Layout.Main>
   )
 }
 

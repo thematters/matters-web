@@ -6,7 +6,7 @@ import {
   TextIcon,
   Tooltip,
   Translate,
-  withIcon
+  withIcon,
 } from '~/components'
 
 import { translate } from '~/common/utils'

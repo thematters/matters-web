@@ -6,7 +6,7 @@ import {
   SetupLikeCoin,
   SignUpComplete,
   SignUpInitForm,
-  SignUpProfileForm
+  SignUpProfileForm,
 } from '~/components'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
@@ -15,7 +15,7 @@ const SignUp = () => {
   const [step, setStep] = useState<Step>('signUp')
 
   return (
-    <Layout bgColor="grey-lighter">
+    <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'register' }} />
 
       {step === 'signUp' && (
@@ -46,7 +46,7 @@ const SignUp = () => {
       )}
 
       {step === 'complete' && <SignUpComplete purpose="page" />}
-    </Layout>
+    </Layout.Main>
   )
 }
 

@@ -7,7 +7,7 @@ import {
   EmptyArticle,
   InfiniteScroll,
   Layout,
-  Spinner
+  Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -44,7 +44,7 @@ const Feed = () => {
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     RecommendationArticles
   >(query, {
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   })
 
   const connectionPath = 'viewer.recommendation.recommendArticles'
@@ -70,15 +70,15 @@ const Feed = () => {
       loadMore={() =>
         fetchMore({
           variables: {
-            after: pageInfo.endCursor
+            after: pageInfo.endCursor,
           },
           updateQuery: (previousResult, { fetchMoreResult }) =>
             mergeConnections({
               oldData: previousResult,
               newData: fetchMoreResult,
               path: connectionPath,
-              dedupe: true
-            })
+              dedupe: true,
+            }),
         })
       }
     >
@@ -94,7 +94,7 @@ const Feed = () => {
 }
 
 export default () => (
-  <Layout>
+  <Layout.Main>
     <Feed />
-  </Layout>
+  </Layout.Main>
 )

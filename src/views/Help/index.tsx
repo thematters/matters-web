@@ -12,8 +12,8 @@ const Help = () => {
     article: {
       slug: 'guidance-如何让你的matters之旅更便捷',
       mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
-      author: { userName: '1ampa55ag3' }
-    }
+      author: { userName: '1ampa55ag3' },
+    },
   })
 
   return (
@@ -73,12 +73,12 @@ const Help = () => {
 }
 
 export default () => (
-  <Layout bgColor="grey-lighter">
+  <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="helpCenter" />}
     />
 
     <Help />
-  </Layout>
+  </Layout.Main>
 )

@@ -3,7 +3,7 @@ import Dialog from './Dialog'
 
 const CollapseComment = {
   Dialog,
-  Button
+  Button,
 }
 
 export default CollapseComment

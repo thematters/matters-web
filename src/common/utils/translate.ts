@@ -44,7 +44,7 @@ export const translate = ({ lang, ...props }: TranslateArgs): string => {
     const { id } = props
     translations = {
       zh_hant: TEXT.zh_hant[id],
-      zh_hans: TEXT.zh_hans[id]
+      zh_hans: TEXT.zh_hans[id],
     }
   } else {
     const { zh_hant, zh_hans, en } = props

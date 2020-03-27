@@ -24,11 +24,11 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       {...toPath({
         page: 'search',
         type,
-        q
+        q,
       })}
       onClick={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
-          type: `${type}-search`
+          type: `${type}-search`,
         })
       }}
     >

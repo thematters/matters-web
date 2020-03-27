@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
+import Lazy from './Lazy'
 import Message from './Message'
 
 /**
@@ -36,15 +37,17 @@ type DynamicDialogProps = React.ComponentType<DialogProps> & {
   Content: typeof Content
   Footer: typeof Footer
   Message: typeof Message
+  Lazy: typeof Lazy
 }
 
 const DynamicDialog = dynamic(() => import('./Dialog'), {
-  ssr: false
+  ssr: false,
 }) as DynamicDialogProps
 
 DynamicDialog.Header = Header
 DynamicDialog.Content = Content
 DynamicDialog.Footer = Footer
 DynamicDialog.Message = Message
+DynamicDialog.Lazy = Lazy
 
 export const Dialog = DynamicDialog

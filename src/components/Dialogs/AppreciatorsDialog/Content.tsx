@@ -7,7 +7,7 @@ import {
   RowRendererProps,
   Spinner,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -19,7 +19,7 @@ import styles from './styles.css'
 
 import {
   ArticleAppreciators,
-  ArticleAppreciators_article_appreciationsReceived_edges
+  ArticleAppreciators_article_appreciationsReceived_edges,
 } from './__generated__/ArticleAppreciators'
 
 interface AppreciatorsDialogContentProps {
@@ -57,7 +57,7 @@ const ARTICLE_APPRECIATORS = gql`
 
 const AppreciatorsDialogContent = ({
   mediaHash,
-  closeDialog
+  closeDialog,
 }: AppreciatorsDialogContentProps) => {
   const isSmallUp = useResponsive('sm-up')
   const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
@@ -83,7 +83,7 @@ const AppreciatorsDialogContent = ({
 
   const ListRow = ({
     index,
-    datum
+    datum,
   }: RowRendererProps<
     ArticleAppreciators_article_appreciationsReceived_edges
   >) => {
@@ -101,7 +101,7 @@ const AppreciatorsDialogContent = ({
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.APPRECIATOR,
                 location: index,
-                entrance: article.id
+                entrance: article.id,
               })
             }}
           />
@@ -115,20 +115,20 @@ const AppreciatorsDialogContent = ({
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.APPRECIATOR,
       location: edges.length,
-      entrance: article.id
+      entrance: article.id,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         callback()
         return mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
+          path: connectionPath,
         })
-      }
+      },
     })
   }
 

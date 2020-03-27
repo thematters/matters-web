@@ -33,7 +33,7 @@ export const ViewerFragments = {
         totalCount
       }
     }
-  `
+  `,
 }
 
 export type Viewer = ViewerUser & {
@@ -64,12 +64,12 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
 
   // Add user info for Sentry
-  import('@sentry/browser').then(Sentry => {
+  import('@sentry/browser').then((Sentry) => {
     Sentry.configureScope((scope: any) => {
       scope.setUser({
         id: viewer.id,
         role,
-        language: viewer.settings.language
+        language: viewer.settings.language,
       })
       scope.setTag('source', 'web')
     })
@@ -86,7 +86,7 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isInactive,
     isAdmin,
     isCivicLiker,
-    shouldSetupLikerID
+    shouldSetupLikerID,
   }
 }
 
@@ -96,7 +96,7 @@ export const ViewerConsumer = ViewerContext.Consumer
 
 export const ViewerProvider = ({
   children,
-  viewer
+  viewer,
 }: {
   children: React.ReactNode
   viewer: ViewerUser

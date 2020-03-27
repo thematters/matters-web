@@ -15,12 +15,12 @@ import styles from './styles.css'
 
 import {
   SearchUsers,
-  SearchUsers_search_edges_node_User
+  SearchUsers_search_edges_node_User,
 } from '~/components/GQL/queries/__generated__/SearchUsers'
 import { EditorDraft } from '../__generated__/EditorDraft'
 
 const {
-  publicRuntimeConfig: { ASSET_DOMAIN }
+  publicRuntimeConfig: { ASSET_DOMAIN },
 } = getConfig()
 
 interface Props {
