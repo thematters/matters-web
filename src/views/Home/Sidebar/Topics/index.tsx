@@ -59,7 +59,6 @@ const Topics = () => {
               <TopicSidebarArticleDigest
                 article={node}
                 onClick={() => {
-                  alert(i)
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                     type: FEED_TYPE.TOPICS,
                     location: i,
