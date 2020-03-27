@@ -1,6 +1,6 @@
 .toast-container {
   position: fixed;
-  top: calc(3rem + var(--spacing-base));
+  top: calc(var(--global-header-height-mobile) + var(--spacing-base));
   left: 0;
   right: 0;
 
@@ -11,6 +11,6 @@
   z-index: var(--z-index-over-dialog);
 
   @media (--sm-up) {
-    top: calc(4rem + var(--spacing-base));
+    top: calc(var(--global-header-height) + var(--spacing-base));
   }
 }
