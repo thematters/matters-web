@@ -128,11 +128,11 @@ const sentryLink = setContext((_, { headers }) => {
 // Temporarily disable
 // const agentHashLink = setContext((_, { headers }) => {
 //   let agentHash: string | null = null
-// 
+//
 //   if (typeof window !== 'undefined') {
 //     const storedAgentHash = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
 //     agentHash = storedAgentHash
-// 
+//
 //     if (!agentHash) {
 //       agentHash = initAgentHash(window)
 //     }
@@ -140,7 +140,7 @@ const sentryLink = setContext((_, { headers }) => {
 //       window.localStorage.setItem(STORE_KEY_AGENT_HASH, agentHash)
 //     }
 //   }
-// 
+//
 //   return {
 //     headers: {
 //       ...headers,
