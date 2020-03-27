@@ -112,6 +112,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
           borderRadius="xtight"
+          onClick={onClick}
         >
           <Expandable limit={5} buffer={2}>
             <Comment.Content comment={comment} size="md-s" />

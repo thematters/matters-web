@@ -31,7 +31,7 @@ article {
 aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
-  padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-base);
+  padding: var(--spacing-base);
 
   & :global(> * + *) {
     margin-top: var(--spacing-xx-loose);
