@@ -143,8 +143,8 @@ const agentHashLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      ...(agentHash ? { 'x-user-agent-hash': agentHash } : {})
-    }
+      ...(agentHash ? { 'x-user-agent-hash': agentHash } : {}),
+    },
   }
 })
 
