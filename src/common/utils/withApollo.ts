@@ -15,9 +15,9 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import { STORE_KEY_AGENT_HASH } from '~/common/enums'
+// import { STORE_KEY_AGENT_HASH } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { initAgentHash, randomString } from '~/common/utils'
+import { randomString } from '~/common/utils'
 
 // import { setupPersistCache } from './cache'
 import resolvers from './resolvers'
@@ -125,28 +125,29 @@ const sentryLink = setContext((_, { headers }) => {
   }
 })
 
-const agentHashLink = setContext((_, { headers }) => {
-  let agentHash: string | null = null
-
-  if (typeof window !== 'undefined') {
-    const storedAgentHash = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
-    agentHash = storedAgentHash
-
-    if (!agentHash) {
-      agentHash = initAgentHash(window)
-    }
-    if (agentHash && storedAgentHash !== agentHash) {
-      window.localStorage.setItem(STORE_KEY_AGENT_HASH, agentHash)
-    }
-  }
-
-  return {
-    headers: {
-      ...headers,
-      ...(agentHash ? { 'x-user-agent-hash': agentHash } : {})
-    }
-  }
-})
+// Temporarily disable
+// const agentHashLink = setContext((_, { headers }) => {
+//   let agentHash: string | null = null
+// 
+//   if (typeof window !== 'undefined') {
+//     const storedAgentHash = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
+//     agentHash = storedAgentHash
+// 
+//     if (!agentHash) {
+//       agentHash = initAgentHash(window)
+//     }
+//     if (agentHash && storedAgentHash !== agentHash) {
+//       window.localStorage.setItem(STORE_KEY_AGENT_HASH, agentHash)
+//     }
+//   }
+// 
+//   return {
+//     headers: {
+//       ...headers,
+//       ...(agentHash ? { 'x-user-agent-hash': agentHash } : {}),
+//     },
+//   }
+// })
 
 export default withApollo(({ ctx, headers, initialState }) => {
   const cache = new InMemoryCache({ fragmentMatcher })
@@ -160,7 +161,6 @@ export default withApollo(({ ctx, headers, initialState }) => {
       errorLink,
       authLink,
       sentryLink,
-      agentHashLink,
       dataLink({ headers }),
     ]),
     cache,
