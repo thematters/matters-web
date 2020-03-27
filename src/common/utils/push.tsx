@@ -246,10 +246,14 @@ export const unsubscribePush = async () => {
 
   // Unsubscribe from our server
   if (token) {
-    await cachedClient.mutate<ToggleSubscribePush>({
-      mutation: TOGGLE_SUBSCRIBE_PUSH,
-      variables: { id: token, enabled: false },
-    })
+    try {
+      await cachedClient.mutate<ToggleSubscribePush>({
+        mutation: TOGGLE_SUBSCRIBE_PUSH,
+        variables: { id: token, enabled: false },
+      })
+    } catch (e) {
+      console.error('[Push] Failed to unsubscribe from server', e)
+    }
   }
 
   console.log('[Push] Unsubscribed')
