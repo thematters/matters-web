@@ -182,7 +182,6 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
       // blur on click
       if (buttonRef?.current) {
-        console.log('blur', buttonRef.current)
         buttonRef.current.blur()
       }
     }

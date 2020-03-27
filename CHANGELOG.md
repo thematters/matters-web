@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2020-03-27
+
+### Added
+
+- ReCaptcha #845
+
+### Changed
+
+- Boost Performance #864
+- Layout Enhancement #843
+- Revise Nav icons #858
+- Prettier 2.0 #868
+- Change SignUpButton to LoginButton in <Wall> #869
+- Fix broken trackers #875
+- Change `first` of InfinteScroll to 20 #862 #861
+- Fix collection articles are lost while editing #859
+- Hide <SideFooter> in mobile #863
+- Fix FCM cannot be unsubscribed #865
+- Alter message for get push token error #870
+- Fix unable to type spaces in the article editor on Firefox #871
+- Fix @user will cause scroll to top in the article editor #884
+
 ## [3.1.0] - 2020-03-20
 
 ### Added
