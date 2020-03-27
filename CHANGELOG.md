@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ReCaptcha #845
-- Generate agent hash and inject into every request header #874
 
 ### Changed
 
