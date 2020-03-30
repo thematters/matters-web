@@ -21,7 +21,6 @@
 
 .u-content,
 #editor-article-container .ql-editor {
-  white-space: pre-wrap;
   line-height: var(--line-height-article-base);
   outline: none;
 
@@ -33,6 +32,14 @@
   }
   & :global(> *:last-child) {
     margin-bottom: var(--spacing-loose);
+  }
+
+  & :global(p) {
+    /* FIXME: Firefox eats "&nbsp;", which makes
+     *
+     * @see {@url https://github.com/quilljs/quill/issues/1760}
+     */
+    white-space: pre-wrap;
   }
 
   /* Media
@@ -49,7 +56,6 @@
   & :global(figure) {
     margin: var(--spacing-x-loose) calc(var(--spacing-base) * -1);
     text-align: center;
-    white-space: initial;
 
     & :global(figcaption) {
       margin-top: var(--spacing-x-tight);
@@ -416,7 +422,7 @@
   border-radius: 0.5rem;
   background: var(--color-white);
   box-shadow: var(--shadow-dark);
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: var(--z-index-under-global-header);
 }
 
