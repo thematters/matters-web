@@ -143,7 +143,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
-      <label htmlFor={fieldId}>
+      <label>
         <Dialog.Footer>
           <Dialog.Footer.Button
             loading={loading}
