@@ -42,14 +42,14 @@ export const ToastInstance = ({
 
   return (
     <section className={mainClass}>
-      <Alert type={alertType}>
-        <section>
+      <section>
+        <Alert type={alertType}>
           {content && <p className="content">{content}</p>}
           {subDescription && (
             <p className="sub-description">{subDescription}</p>
           )}
-        </section>
-      </Alert>
+        </Alert>
+      </section>
 
       {customButton && (
         <section className="custom-button">{customButton}</section>
