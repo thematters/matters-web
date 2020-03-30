@@ -70,6 +70,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   title = 'putComment',
   context,
 }) => {
+  // retrieve comment draft
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId || 0}:${
     replyToId || 0
   }`
@@ -78,6 +79,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
   })
+
+  // retrieve push setting
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
@@ -110,8 +113,14 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     try {
       await putComment({ variables: { input } })
+
       setContent('')
-      closeDialog()
+
+      // clear draft
+      client.writeData({
+        id: `CommentDraft:${commentDraftId}`,
+        data: { content: '' },
+      })
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -135,6 +144,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
       if (submitCallback) {
         submitCallback()
       }
+
+      closeDialog()
     } catch (e) {
       console.error(e)
     }
