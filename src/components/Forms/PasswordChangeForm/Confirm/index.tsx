@@ -94,11 +94,11 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="password" />}
+        label={<Translate id="newPassword" />}
         type="password"
         name="password"
         required
-        placeholder={translate({ id: 'enterPassword', lang })}
+        placeholder={translate({ id: 'enterNewPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
@@ -111,7 +111,7 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
         type="password"
         name="comparedPassword"
         required
-        placeholder={translate({ id: 'enterPasswordAgain', lang })}
+        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={<Translate id="hintPassword" />}
