@@ -17,7 +17,7 @@
   }
 
   & :global(p) {
-    /* FIXME: Firefox eats "&nbsp;", which makes
+    /* FIXME: Firefox eats trailing spaces
      *
      * @see {@url https://github.com/quilljs/quill/issues/1760}
      */
