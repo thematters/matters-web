@@ -125,7 +125,6 @@ const sentryLink = setContext((_, { headers }) => {
   }
 })
 
-// Temporarily disable
 const agentHashLink = setContext((_, { headers }) => {
   let agentHash: string | null = null
 
