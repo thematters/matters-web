@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
@@ -27,7 +27,7 @@ export interface ShareDialogProps {
 }
 
 const BaseShareDialog = ({ title, path, children }: ShareDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
+  const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -64,6 +64,11 @@ const BaseShareDialog = ({ title, path, children }: ShareDialogProps) => {
       url: shareLink,
     })
   }
+
+  // With <Dialog.Lazy>, we will trigger onShare when dialog is mounted
+  useEffect(() => {
+    onShare()
+  }, [])
 
   return (
     <>
