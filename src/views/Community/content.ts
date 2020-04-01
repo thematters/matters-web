@@ -3,16 +3,16 @@ export default {
 <p>社區的事情社區作主，是 Matters 社區的主旨。Matters 社區由 Matters 用戶共同創建，只要你是 Matters 註冊用戶，就能夠透過以下方式參與社區建設。</p>
 <p>隨著用戶提出更多不同的社區建設方法，此頁面也會不斷更新。</p>
 
-<h3 id="events">1. 熱門活動</h3>
+<h3 id="events">1、熱門活動</h3>
 <p>由用戶發起活動，是 Matters 社區的特色。</p>
 <p>透過參與這些活動，你能夠親身體會 Matters 社區的多元與包容，並認識到來自不同地區的作者與非常樂於讚賞與交流的讀者們。</p>
 <p><a class="u-link-green" href="https://matters.news/tags/VGFnOjEwNzE2">點擊這裡</a> 馬上參與吧！</p>
 
 
-<h3 id="developers">2. <a class="u-link-green" href="https://matters.news/tags/VGFnOjExMzU0">Matties 自製工具箱</a></h3>
+<h3 id="developers">2、<a class="u-link-green" href="https://matters.news/tags/VGFnOjExMzU0">Matties 自製工具箱</a></h3>
 
 
-<h3 id="governance">3. 社區治理</h3>
+<h3 id="governance">3、社區治理</h3>
 
 <h4>社區自治</h4>
 <p>Matters 社區實行社區自治。當用戶認為出現違反社區共識的行為時，可以發起訴訟，啟動社區審判。一旦社區審判中，出現「贊同懲罰」的多數意見，即實行懲罰，這些案例同時成為社區治理的判例，被納入社區約章作為社區治理準則。</p>
@@ -32,23 +32,34 @@ export default {
 <p>為了社區的可持續與良性運轉，Matters 鼓勵和保護所有塑造理性、友善，真誠的社區氛圍的行為。對社區造成不利影響的內容和行為，Matters 站方保留對其施行處理的權利。</p>
 <p>當用戶看到任何疑似違反社區約章的狀況，想要回報給站方，也可以直接在 <a class="u-link-green" href="https://matters.news/@hi176/%E7%9C%8B%E5%88%B0%E7%A4%BE%E5%8D%80%E7%95%B0%E5%B8%B8%E7%8B%80%E6%B3%81-%E6%AD%A1%E8%BF%8E%E4%BE%86%E6%AD%A4%E5%B8%96%E5%9B%9E%E5%A0%B1-bafyreiaeziginnm4e4vdzq5y5tdtnqurzgxrngp4ajp2rbdghv6inuv5ie">這個帖子</a> 下方留言，謝謝大家共同維護 Matters。</p>
 
-<br/>
 <p id="sup-1"><sup>[1]</sup> <small>歧視行為定義：針對人們受保護的特徵向對方發起的言論攻擊，這些特徵包括民族、種族、國籍、宗教信仰、性取向、種姓、性別、性別認同，以及嚴重疾病或殘疾。</small></p>
+
+
+<h3>4、Matters 成長信息共享</h3>
+<p>因為有用戶們的參與與投入，Matters 才得以發展。因此，我們希望通過數據共享，與大家共同見證 Matters 的成長。</p>
+<figure class="embed-data-dashbord">
+  <div class="iframe-container">
+    <iframe src="https://data.matters.news/public/dashboard/75ac47e6-e1d8-4cab-97f6-1004a0ba7f68" frameborder="0" allowfullscreen="false" sandbox="allow-scripts allow-same-origin allow-popups">
+  </div>
+</figure>
+<p>圖表一是 Matters 註冊人數的上漲數字與趨勢圖，Matters 社區正在不斷壯大，非常期待在大家的共同建設下 Matters 未來的模樣。</p>
+<p>圖表二是 最近90天，Matters社區裡的拍手互動情況。LikeCoin 是每位作者在 Matters 寫作獲得的收入，收入多寡與你獲得的讚賞數相關。讚賞人數與次數越多，也更有利於 LikeCoin 生態的生長。</p>
+<p>你的每次寫作、分享與打賞，都在幫助 Matters 與 LikeCoin 進步。</p>
   `,
   zh_hans: /* html */ `
 <p>社区的事情社区作主，是 Matters 社区的主旨。Matters 社区由 Matters 用户共同创建，只要你是 Matters 注册用户，就能够透过以下方式参与社区建设。</p>
 <p>随著用户提出更多不同的社区建设方法，此页面也会不断更新。</p>
 
-<h3 id="events">1. 热门活动</h3>
+<h3 id="events">1、热门活动</h3>
 <p>由用户发起活动，是 Matters 社区的特色。</p>
 <p>通过参与这些活动，你能够亲身体会 Matters 社区的多元与包容，并认识到来自不同地区的作者与非常乐于赞赏与交流的读者们。</p>
 <p><a class="u-link-green" href="https://matters.news/tags/VGFnOjEwNzE2">点击这里</a> 马上参与吧！</p>
 
 
-<h3 id="developers">2. <a class="u-link-green" href="https://matters.news/tags/VGFnOjExMzU0">Matties 自制工具箱</a></h3>
+<h3 id="developers">2、<a class="u-link-green" href="https://matters.news/tags/VGFnOjExMzU0">Matties 自制工具箱</a></h3>
 
 
-<h3 id="governance">3. 社区治理</h3>
+<h3 id="governance">3、社区治理</h3>
 
 <h4>社区自治</h4>
 <p>Matters 社区实行社区自治。当用户认为出现违反社区共识的行为时，可以发起诉讼，启动社区审判。一旦社区审判中，出现“赞同惩罚”的多数意见，即实行惩罚，这些案例同时成为社区治理的判例，被纳入社区约章作为社区治理准则。</p>
@@ -68,7 +79,19 @@ export default {
 <p>为了社区的可持续与良性运转，Matters 鼓励和保护所有塑造理性、友善，真诚的社区氛围的行为。对社区造成不利影响的内容和行为，Matters 站方保留对其施行处理的权利。</p>
 <p>当用户看到任何疑似违反社区约章的状况，想要回报给站方，也可以直接在 <a class="u-link-green" href="https://matters.news/@hi176/%E7%9C%8B%E5%88%B0%E7%A4%BE%E5%8D%80%E7%95%B0%E5%B8%B8%E7%8B%80%E6%B3%81-%E6%AD%A1%E8%BF%8E%E4%BE%86%E6%AD%A4%E5%B8%96%E5%9B%9E%E5%A0%B1-bafyreiaeziginnm4e4vdzq5y5tdtnqurzgxrngp4ajp2rbdghv6inuv5ie">这个帖子</a> 下方留言，谢谢大家共同维护 Matters。</p>
 
-<br/>
 <p id="sup-1"><sup>[1]</sup> <small>歧视行为定义：针对人们受保护的特征向对方发起的言论攻击，这些特征包括民族、种族、国籍、宗教信仰、性取向、种姓、性别、性别认同，以及严重疾病或残疾。</small></p>
+
+
+<h3>4、Matters 成长信息共享</h3>
+<p>因为有用户们的参与与投入，Matters 才得以发展。因此，我们希望通过数据共享，与大家共同见证 Matters 的成长。</p>
+<figure class="embed-data-dashbord">
+  <div class="iframe-container">
+    <iframe src="https://data.matters.news/public/dashboard/75ac47e6-e1d8-4cab-97f6-1004a0ba7f68" frameborder="0" allowfullscreen="false" sandbox="allow-scripts allow-same-origin allow-popups">
+  </div>
+</figure>
+<p>图表一是 Matters 注册人数的上涨数字与趋势图，Matters 社区正在不断壮大，非常期待在大家的共同建设下 Matters 未来的模样。</p>
+<p>图表二是 最近90天，Matters 社区的拍手互动情況。LikeCoin 是每位作者在 Matters 写作获得的收入，收入多寡与你获得的赞赏数相关。赞赏人数与次数越多，也更有利于 LikeCoin 生态的生长。</p>
+<p>你的每次写作、分享与打赏，都在帮助 Matters 与 LikeCoin 进步。</p>
+<p>谢谢大家与 Matters 同行。</p>
   `,
 }

@@ -60,7 +60,8 @@ header {
   }
 }
 
-.goal {
+.goal,
+.growing {
   padding: var(--spacing-xxx-loose) 0;
 
   & img {

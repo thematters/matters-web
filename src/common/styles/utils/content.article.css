@@ -198,6 +198,10 @@
       padding-top: 0;
     }
   }
+  & :global(figure.embed-data-dashbord) {
+    padding: var(--spacing-base);
+    background: var(--color-grey-lighter);
+  }
 
   /* Blockquote
    ========================================================================== */

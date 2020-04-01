@@ -7,6 +7,7 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import Features from './Features'
 import Goal from './Goal'
+import Growing from './Growing'
 import Reports from './Reports'
 import Slogan from './Slogan'
 import styles from './styles.css'
@@ -28,6 +29,7 @@ const About = () => {
 
       <Slogan />
       <Goal />
+      <Growing />
       <Features />
       <Reports />
       <Footer />
