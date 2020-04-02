@@ -3,13 +3,13 @@ import { useContext, useState } from 'react'
 
 import {
   Button,
+  LanguageContext,
   ReCaptchaContext,
   TextIcon,
   Translate,
   useCountdown,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
