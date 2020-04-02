@@ -9,7 +9,7 @@ import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
   UPLOAD_FILE_COUNT_LIMIT,
-  UPLOAD_MIGRATION_SIZE_LIMIT
+  UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
 
 import styles from './styles.css'
@@ -27,7 +27,7 @@ const texts: {
       '，目前支持上傳 HTML 檔案。',
     upload: '上傳檔案',
     count_limit: '上傳檔案數量已達上限，最多 50 個檔案',
-    success: '作品上傳完成'
+    success: '作品上傳完成',
   },
   zh_hans: {
     content_1: '选择并上传文件',
@@ -36,8 +36,8 @@ const texts: {
       '，目前支持上传 HTML 文件。',
     upload: '上传文件',
     count_limit: '上传档案数量已达上限，最多 50 个档案',
-    success: '文件上传完成'
-  }
+    success: '文件上传完成',
+  },
 }
 
 interface MigrationDialogUploadProps {
@@ -61,8 +61,8 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             color: 'red',
             content: <Translate id="UNAUTHENTICATED" />,
             customButton: <LoginButton isPlain />,
-            buttonPlacement: 'center'
-          }
+            buttonPlacement: 'center',
+          },
         })
       )
       return
@@ -82,8 +82,8 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
                 zh_hant={zh_hant.count_limit}
                 zh_hans={zh_hans.count_limit}
               />
-            )
-          }
+            ),
+          },
         })
       )
       return
@@ -92,7 +92,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     // gather files
     const items = event.target.files
     const counter = [...Array(event.target.files.length).keys()]
-    const files: File[] = counter.map(index => items[index])
+    const files: File[] = counter.map((index) => items[index])
     event.target.value = ''
 
     // calculate file sizes
@@ -103,8 +103,8 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="MIGRATION_REACH_LIMIT" />
-          }
+            content: <Translate id="MIGRATION_REACH_LIMIT" />,
+          },
         })
       )
       return
@@ -112,7 +112,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
 
     try {
       await migration({
-        variables: { input: { type: 'medium', files } }
+        variables: { input: { type: 'medium', files } },
       })
 
       window.dispatchEvent(
@@ -121,8 +121,8 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             color: 'green',
             content: (
               <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
-            )
-          }
+            ),
+          },
         })
       )
       nextStep()
@@ -143,7 +143,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
-      <label htmlFor={fieldId}>
+      <label>
         <Dialog.Footer>
           <Dialog.Footer.Button
             loading={loading}

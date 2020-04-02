@@ -4,7 +4,7 @@ import {
   IconSize,
   TextIcon,
   Translate,
-  useResponsive
+  useResponsive,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
@@ -23,7 +23,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   iconSize,
   isPlain,
   size,
-  spacing
+  spacing,
 }) => {
   const isSmallUp = useResponsive('sm-up')
   const clickProps = isSmallUp
@@ -31,7 +31,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
         onClick: () => {
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
           window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-        }
+        },
       }
     : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
 

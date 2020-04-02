@@ -81,7 +81,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
 
   const { data, loading } = useQuery(query, {
     variables: { search: debouncedSearch },
-    skip: !debouncedSearch
+    skip: !debouncedSearch,
   })
 
   const items = ((data && data.search.edges) || []).map(({ node }: any) => node)
@@ -92,7 +92,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
     items,
     callback: dropdownContentCallback,
     hideDropdown,
-    width: getDropdownSize()
+    width: getDropdownSize(),
   }
 
   const fieldMsgId = `dropdown-input-msg-${name}`
@@ -109,7 +109,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
           content={<DropdownContent {...dropdownContentProps} />}
           zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
-          onShown={i => {
+          onShown={(i) => {
             hidePopperOnClick(i)
           }}
         >
@@ -119,7 +119,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
             name={name}
             type={type}
             aria-describedby={fieldMsgId}
-            onClick={e => {
+            onClick={(e) => {
               if (inputProps.onClick) {
                 inputProps.onClick(e)
               }
@@ -128,7 +128,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
                 showDropdown()
               }
             }}
-            onFocus={e => {
+            onFocus={(e) => {
               if (inputProps.onFocus) {
                 inputProps.onFocus(e)
               }
@@ -137,7 +137,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
                 showDropdown()
               }
             }}
-            onChange={e => {
+            onChange={(e) => {
               if (inputProps.onChange) {
                 inputProps.onChange(e)
               }

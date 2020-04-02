@@ -28,30 +28,30 @@ const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onDismiss,
 
-  children
+  children,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
 
   // drag animation
   const [{ top }, setDragGoal] = useSpring(() => ({
-    top: 0
+    top: 0,
   }))
 
   const isSmallUp = useResponsive('sm-up')
   const transitions = useTransition(isOpen, {
     from: {
       opacity: 0,
-      transform: `translateY(30%)`
+      transform: `translateY(30%)`,
     },
     enter: { opacity: 1, transform: `translateY(0%)` },
     leave: {
       opacity: 0,
-      transform: `translateY(100%)`
+      transform: `translateY(100%)`,
     },
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
     onDestroyed: () => {
       setDragGoal({ top: 0 })
-    }
+    },
   })
 
   useOutsideClick(node, onDismiss)
@@ -64,7 +64,8 @@ const Dialog: React.FC<DialogProps> = ({
       'fixed-height': !!fixedHeight,
       'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
         size === 'lg',
-      'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm'
+      'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4':
+        size === 'sm',
     })
 
     const bind = useDrag(({ down, movement: [, my] }) => {
@@ -109,7 +110,7 @@ const Dialog: React.FC<DialogProps> = ({
                 style={{
                   transform: !isSmallUp && transform ? transform : undefined,
                   opacity: isSmallUp ? opacity : undefined,
-                  top
+                  top,
                 }}
               />
             </DialogContent>

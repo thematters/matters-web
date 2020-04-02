@@ -12,7 +12,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
   const scheduledAt = draft.scheduledAt
   const {
     countdown: { timeLeft },
-    formattedTimeLeft
+    formattedTimeLeft,
   } = useCountdown({ timeLeft: Date.parse(scheduledAt) - Date.now() })
   const isPublishing = !scheduledAt || !timeLeft || timeLeft <= 0
 
@@ -21,7 +21,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
     pollInterval: 1000 * 2,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser || !isPublishing
+    skip: !process.browser || !isPublishing,
   })
 
   return (

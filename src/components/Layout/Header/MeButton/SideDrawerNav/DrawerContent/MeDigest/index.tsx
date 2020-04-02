@@ -12,15 +12,15 @@ const MeDigest = () => {
 
   const viewerPath = toPath({
     page: 'userProfile',
-    userName: viewer.userName || ''
+    userName: viewer.userName || '',
   })
   const viewerFollowersPath = toPath({
     page: 'userFollowers',
-    userName: viewer.userName || ''
+    userName: viewer.userName || '',
   })
   const viewerFolloweesPath = toPath({
     page: 'userFollowees',
-    userName: viewer.userName || ''
+    userName: viewer.userName || '',
   })
 
   return (

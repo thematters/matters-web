@@ -58,7 +58,7 @@ const TagsFeed = () => {
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.TAGS,
-                location: i
+                location: i,
               })
             }
           />

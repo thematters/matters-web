@@ -21,14 +21,14 @@ const fragments = {
         totalCount
       }
     }
-  `
+  `,
 }
 
-export const AppreciatorsDialog = ({
+const BaseAppreciatorsDialog = ({
   article,
-  children
+  children,
 }: AppreciatorsDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -42,5 +42,17 @@ export const AppreciatorsDialog = ({
     </>
   )
 }
+
+export const AppreciatorsDialog = (props: AppreciatorsDialogProps) => (
+  <Dialog.Lazy>
+    {({ open, mounted }) =>
+      mounted ? (
+        <BaseAppreciatorsDialog {...props} />
+      ) : (
+        <>{props.children({ open })}</>
+      )
+    }
+  </Dialog.Lazy>
+)
 
 AppreciatorsDialog.fragments = fragments

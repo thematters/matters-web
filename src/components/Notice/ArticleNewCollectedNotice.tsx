@@ -61,7 +61,7 @@ ArticleNewCollectedNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeCollectionArticle.fragments.article}
     ${NoticeHead.fragments.date}
-  `
+  `,
 }
 
 export default ArticleNewCollectedNotice

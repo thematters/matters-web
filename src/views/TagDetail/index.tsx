@@ -14,7 +14,7 @@ import {
   TextIcon,
   Throw404,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
@@ -129,7 +129,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 const TagDetailContainer = () => {
   const router = useRouter()
   const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
-    variables: { id: router.query.id }
+    variables: { id: router.query.id },
   })
 
   if (loading) {

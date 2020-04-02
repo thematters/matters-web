@@ -313,7 +313,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>10.5 The website of the Data Controller and the Services may contain links to other websites or applications. The Users understand and acknowledge that the fact that the website of the Data Controller and the Services link to a website, application or advertisement does not mean that the Data Controller endorses or authorises the collection of personal information from the Users of such third parties, nor does it constitutes a representation of any affiliation between the Data Controller and such third parties. The Users understand and acknowledge that, once the Users click on a link to third-party websites, applications or advertisements, they will access third-party websites, applications and advertisements which may collect information from such Users. The Users understand and acknowledge that such third-party websites, applications and advertisements follow different rules regarding the collection, use, processing or disclosure of the personal information such Users submit to them. Hence, the Users understand and acknowledge that the Data Controller shall not be responsible for any collection, use, processing or disclosure of personal information of Users by such third parties. </p>
 
 </details>
-  `
+  `,
 }
 
 export default Privacy

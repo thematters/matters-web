@@ -14,11 +14,11 @@ const Telegram = ({ title, link }: { title: string; link: string }) => (
         'https://telegram.me/share?' +
         queryString.stringify({
           url: link,
-          text: title
+          text: title,
         })
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.TELEGRAM,
-        url: link
+        url: link,
       })
       return window.open(shareUrl, 'Share to Telegram')
     }}

@@ -11,5 +11,5 @@ export const Comment = {
   FooterActions,
   PinnedLabel,
   CreatedAt,
-  Feed
+  Feed,
 }

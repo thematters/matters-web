@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({
 
   onClick,
 
-  children
+  children,
 }) => {
   const disabled = !as && !href && !onClick
   const node = useRef<HTMLElement>(null)
@@ -57,18 +57,28 @@ export const Card: React.FC<CardProps> = ({
     [`border-radius-${borderRadius}`]: !!borderRadius,
 
     hasBorder: !!borderColor || !!borderRadius,
-    disabled
+    disabled,
   })
   const ariaLabel = href || as ? `跳轉至 ${as || href}` : undefined
 
   const openLink = ({
     newTab,
-    event
+    event,
   }: {
     newTab: boolean
     event: React.MouseEvent | React.KeyboardEvent
   }) => {
     const target = event.target as HTMLElement
+
+    if (disabled) {
+      return
+    }
+
+    // We have some trackers rely on `onClick`,
+    // allow <a> and skip if it's from <button>
+    if (!target.closest('button') && onClick) {
+      onClick()
+    }
 
     // skip if the inside <button> or <a> was clicked
     if (target.closest('a, button')) {
@@ -88,15 +98,12 @@ export const Card: React.FC<CardProps> = ({
       }
     }
 
-    if (onClick) {
-      onClick()
-    }
-
     // stop bubbling if it's nested to another `<Card>`
-    if (node.current && node.current.parentElement?.closest('.card')) {
+    if (node.current?.parentElement?.closest('.card')) {
       event.stopPropagation()
     }
 
+    // blur on click
     if (node.current) {
       node.current.blur()
     }
@@ -109,16 +116,16 @@ export const Card: React.FC<CardProps> = ({
       aria-label={ariaLabel}
       ref={node}
       data-clickable
-      onKeyDown={event => {
+      onKeyDown={(event) => {
         if (event.keyCode !== KEYCODES.enter) {
           return
         }
         openLink({
           newTab: event.metaKey,
-          event
+          event,
         })
       }}
-      onClick={event => {
+      onClick={(event) => {
         openLink({ newTab: event.metaKey, event })
       }}
     >

@@ -6,7 +6,7 @@ import {
   LoginButton,
   SignUpButton,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { SIGNUP_TYPE } from '~/common/enums'

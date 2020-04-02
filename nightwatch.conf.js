@@ -1,9 +1,9 @@
 const base = {
-  launch: 'http://localhost:3000'
+  launch: 'http://localhost:3000',
 }
 
 const baseDriver = {
-  start_process: true
+  start_process: true,
 }
 
 module.exports = {
@@ -17,14 +17,14 @@ module.exports = {
         ...baseDriver,
         server_path: 'node_modules/.bin/chromedriver',
         port: 9000,
-        cli_args: ['--port=9000']
+        cli_args: ['--port=9000'],
       },
       desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-          args: ['headless', 'no-sandbox']
-        }
-      }
+          args: ['headless', 'no-sandbox'],
+        },
+      },
     },
 
     // firefox
@@ -34,7 +34,7 @@ module.exports = {
         ...baseDriver,
         server_path: 'node_modules/.bin/geckodriver',
         port: 9001,
-        cli_args: ['--port=9001']
+        cli_args: ['--port=9001'],
       },
       desiredCapabilities: {
         browserName: 'firefox',
@@ -43,10 +43,10 @@ module.exports = {
         acceptSslCerts: true,
         alwaysMatch: {
           'moz:firefoxOptions': {
-            args: ['--headless']
-          }
-        }
-      }
-    }
-  }
+            args: ['--headless'],
+          },
+        },
+      },
+    },
+  },
 }

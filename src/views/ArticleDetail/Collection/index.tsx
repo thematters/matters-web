@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useState } from 'react'
 
-import { Title, Translate, ViewAllButton } from '~/components'
+import { Title, Translate, ViewMoreButton } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { mergeConnections } from '~/common/utils'
@@ -45,14 +45,14 @@ const Collection: React.FC<{
       variables: {
         mediaHash: article.mediaHash,
         after: pageInfo?.endCursor,
-        first: null
+        first: null,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (
@@ -75,10 +75,6 @@ const Collection: React.FC<{
               editingArticles={editingArticles}
             />
           )}
-
-          {!editing && pageInfo?.hasNextPage && (
-            <ViewAllButton onClick={loadAll} arrowIconDirection="down" />
-          )}
         </section>
       </header>
 
@@ -92,6 +88,10 @@ const Collection: React.FC<{
           editingArticles={editingArticles}
           setEditingArticles={setEditingArticles}
         />
+      )}
+
+      {!editing && pageInfo?.hasNextPage && (
+        <ViewMoreButton onClick={loadAll} />
       )}
 
       <style jsx>{styles}</style>

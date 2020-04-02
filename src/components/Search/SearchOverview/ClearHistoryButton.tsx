@@ -25,7 +25,7 @@ const fragments = {
         }
       }
     }
-  `
+  `,
 }
 
 const CLEAR_HISTORY = gql`
@@ -46,18 +46,13 @@ const VIEWER_RECENT_SEARCHES = gql`
 
 const ClearHistoryButton = () => {
   const [clear] = useMutation<ClearHistory>(CLEAR_HISTORY, {
-    update: cache => {
+    update: (cache) => {
       try {
         const data = cache.readQuery<ViewerRecentSearches>({
-          query: VIEWER_RECENT_SEARCHES
+          query: VIEWER_RECENT_SEARCHES,
         })
 
-        if (
-          !data ||
-          !data.viewer ||
-          !data.viewer.activity ||
-          !data.viewer.activity.recentSearches
-        ) {
+        if (!data?.viewer?.activity.recentSearches) {
           return
         }
 
@@ -70,16 +65,16 @@ const ClearHistoryButton = () => {
                 ...data.viewer.activity,
                 recentSearches: {
                   ...data.viewer.activity.recentSearches,
-                  edges: []
-                }
-              }
-            }
-          }
+                  edges: [],
+                },
+              },
+            },
+          },
         })
       } catch (e) {
         console.error(e)
       }
-    }
+    },
   })
 
   return (
@@ -96,8 +91,8 @@ const ClearHistoryButton = () => {
               color: 'green',
               content: (
                 <Translate zh_hant="已清空搜尋紀錄" zh_hans="已清空搜索纪录" />
-              )
-            }
+              ),
+            },
           })
         )
       }}

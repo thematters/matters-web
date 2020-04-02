@@ -6,7 +6,7 @@ import {
   Menu,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
@@ -16,7 +16,7 @@ import {
   analytics,
   // clearPersistCache,
   redirectToTarget,
-  unsubscribePush
+  unsubscribePush,
 } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
@@ -38,17 +38,13 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate id="successLogout" />
-          }
+            content: <Translate id="successLogout" />,
+          },
         })
       )
 
-      try {
-        await unsubscribePush({ silent: true })
-        // await clearPersistCache()
-      } catch (e) {
-        console.error('Failed to unsubscribePush after logged out')
-      }
+      await unsubscribePush()
+      // await clearPersistCache()
 
       redirectToTarget()
     } catch (e) {
@@ -56,8 +52,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: <Translate id="failureLogout" />
-          }
+            content: <Translate id="failureLogout" />,
+          },
         })
       )
     }

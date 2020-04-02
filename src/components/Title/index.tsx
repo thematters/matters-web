@@ -27,11 +27,11 @@ export const Title: React.FC<TitleProps> = ({
   type,
   is = 'h1',
   className,
-  children
+  children,
 }) => {
   const titleClasses = classNames({
     [type]: true,
-    [className || '']: !!className
+    [className || '']: !!className,
   })
 
   return (

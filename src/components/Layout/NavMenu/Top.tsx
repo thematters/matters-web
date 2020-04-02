@@ -6,7 +6,7 @@ import {
   Menu,
   TextIcon,
   Translate,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
@@ -20,7 +20,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
   const viewer = useContext(ViewerContext)
   const viewerPath = toPath({
     page: 'userProfile',
-    userName: viewer.userName || ''
+    userName: viewer.userName || '',
   })
 
   const menuItemSpacing = isInSideDrawerNav

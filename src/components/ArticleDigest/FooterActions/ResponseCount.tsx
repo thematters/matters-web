@@ -26,19 +26,19 @@ const fragments = {
         userName
       }
     }
-  `
+  `,
 }
 
 const ResponseCount = ({
   article,
   size = 'sm',
-  inCard
+  inCard,
 }: ResponseCountProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
     article,
-    fragment: UrlFragments.COMMENTS
+    fragment: UrlFragments.COMMENTS,
   })
   const isBanned = state === 'banned'
 
@@ -51,7 +51,7 @@ const ResponseCount = ({
       onClick={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
           entrance: article.id,
-          type: 'article-digest'
+          type: 'article-digest',
         })
       }}
       aira-label="查看評論"

@@ -17,7 +17,7 @@ const fragments = {
       appreciationsSentTotal
       appreciationsReceivedTotal
     }
-  `
+  `,
 }
 
 const AppreciationTabs: React.FC<AppreciationTabsProps> & {

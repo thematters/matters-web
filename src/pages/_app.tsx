@@ -15,7 +15,7 @@ import {
   Layout,
   Toast,
   ViewerFragments,
-  ViewerProvider
+  ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
@@ -43,12 +43,12 @@ const ROOT_QUERY = gql`
 `
 
 // Sentry
-import('@sentry/browser').then(Sentry => {
+import('@sentry/browser').then((Sentry) => {
   /**
    * Initialize
    */
   const {
-    publicRuntimeConfig: { SENTRY_DSN }
+    publicRuntimeConfig: { SENTRY_DSN },
   } = getConfig()
   Sentry.init({ dsn: SENTRY_DSN || '' })
 })
@@ -59,7 +59,7 @@ import('@sentry/browser').then(Sentry => {
  */
 const Root = ({
   client,
-  children
+  children,
 }: {
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode

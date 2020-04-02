@@ -52,7 +52,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             type="text"
             value={dataHash}
             readOnly
-            onClick={event => event.currentTarget.select()}
+            onClick={(event) => event.currentTarget.select()}
           />
         </section>
       </section>
@@ -73,12 +73,12 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
         <ul>
           {(!data || loading) && <Spinner />}
 
-          {gateways.map((url, i) => {
+          {gateways.map((url) => {
             const gatewayUrl = url.replace(':hash', dataHash)
             const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
 
             return (
-              <li key={i}>
+              <li key={url}>
                 <a
                   href={gatewayUrl}
                   target="_blank"

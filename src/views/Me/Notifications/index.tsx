@@ -10,7 +10,7 @@ import {
   List,
   Notice,
   Spinner,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
@@ -52,7 +52,7 @@ const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
     MARK_ALL_NOTICES_AS_READ,
     {
-      update: updateViewerUnreadNoticeCount
+      update: updateViewerUnreadNoticeCount,
     }
   )
   const { data, loading, fetchMore } = useQuery<
@@ -79,14 +79,14 @@ const BaseNotifications = () => {
     fetchMore({
       variables: {
         first: 20,
-        after: pageInfo.endCursor
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
-          path: connectionPath
-        })
+          path: connectionPath,
+        }),
     })
 
   return (

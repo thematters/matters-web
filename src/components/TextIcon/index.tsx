@@ -49,7 +49,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
 
   textPlacement = 'right',
 
-  children
+  children,
 }) => {
   const textIconClasses = classNames({
     'text-icon': true,
@@ -58,7 +58,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [`size-${size}`]: true,
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
-    hasIcon: !!icon
+    hasIcon: !!icon,
   })
 
   if (textPlacement === 'left') {

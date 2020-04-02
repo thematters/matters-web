@@ -8,14 +8,14 @@ import {
   LikeCoinDialog,
   Translate,
   useResponsive,
-  ViewerContext
+  ViewerContext,
 } from '~/components'
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
-  REFETCH_RESPONSES
+  REFETCH_RESPONSES,
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
@@ -33,7 +33,7 @@ const fragments = {
         isBlocking
       }
     }
-  `
+  `,
 }
 
 const CommentBar = ({ article }: { article: CommentBarArticle }) => {
@@ -50,7 +50,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
   const cardProps: CardProps = {
     bgColor: 'grey-lighter',
     spacing: [0, 0],
-    borderRadius: 'base'
+    borderRadius: 'base',
   }
 
   if (viewer.shouldSetupLikerID) {
@@ -105,7 +105,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-          }
+          },
         }
       : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
 

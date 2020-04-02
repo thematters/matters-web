@@ -3,5 +3,5 @@ import Rich from './Rich'
 
 export const UserDigest = {
   Mini,
-  Rich
+  Rich,
 }

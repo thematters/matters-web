@@ -5,7 +5,7 @@ import {
   DragDropContext,
   Draggable,
   Droppable,
-  DropResult
+  DropResult,
 } from 'react-beautiful-dnd'
 
 import { ArticleDigestDropdown, Button, Icon } from '~/components'
@@ -39,7 +39,7 @@ class CollectionEditor extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      articles: this.props.articles
+      articles: this.props.articles,
     }
   }
 
@@ -104,7 +104,7 @@ class CollectionEditor extends React.Component<Props, State> {
                         {...dragProvided.draggableProps}
                         {...dragProvided.dragHandleProps}
                         className={classNames({
-                          dragging: dragSnapshot.isDragging
+                          dragging: dragSnapshot.isDragging,
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">

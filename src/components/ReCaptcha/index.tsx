@@ -9,7 +9,7 @@ declare global {
 
 // recaptcha related setup
 const {
-  publicRuntimeConfig: { RECAPTCHA_KEY }
+  publicRuntimeConfig: { RECAPTCHA_KEY },
 } = getConfig()
 
 const recaptchaScriptId = 'recaptcha-script'
@@ -19,7 +19,7 @@ export const ReCaptchaContext = createContext({ token: '' })
 export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
 export const ReCaptchaProvider = ({
-  children
+  children,
 }: {
   children: React.ReactNode
 }) => {
@@ -33,7 +33,7 @@ export const ReCaptchaProvider = ({
     const getToken = () => {
       window.grecaptcha
         .execute(RECAPTCHA_KEY, { action: 'homepage' })
-        .then(newToken => {
+        .then((newToken) => {
           setToken(newToken)
         })
     }

@@ -9,7 +9,7 @@ import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
 
 const NoticeActorAvatar = ({
   user,
-  size = 'lg'
+  size = 'lg',
 }: {
   user: NoticeActorAvatarUser | null
   size?: 'md' | 'lg'
@@ -20,7 +20,7 @@ const NoticeActorAvatar = ({
 
   const path = toPath({
     page: 'userProfile',
-    userName: user.userName || ''
+    userName: user.userName || '',
   })
 
   return (
@@ -40,7 +40,7 @@ NoticeActorAvatar.fragments = {
       ...AvatarUser
     }
     ${Avatar.fragments.user}
-  `
+  `,
 }
 
 export default NoticeActorAvatar

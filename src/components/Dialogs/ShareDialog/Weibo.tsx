@@ -15,7 +15,7 @@ const Weibo = ({ title, link }: { title: string; link: string }) => (
         queryString.stringify({
           url: link,
           title,
-          pic: cover
+          pic: cover,
         })
       return window.open(shareUrl, '分享到微博')
     }}

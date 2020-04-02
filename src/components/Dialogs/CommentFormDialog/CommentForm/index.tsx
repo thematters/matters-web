@@ -13,7 +13,7 @@ import {
   dom,
   stripHtml,
   subscribePush,
-  trimLineBreaks
+  trimLineBreaks,
 } from '~/common/utils'
 
 import styles from './styles.css'
@@ -24,7 +24,7 @@ import { PutComment } from './__generated__/PutComment'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: Spinner
+  loading: Spinner,
 })
 
 export const PUT_COMMENT = gql`
@@ -68,15 +68,19 @@ const CommentForm: React.FC<CommentFormProps> = ({
   submitCallback,
   closeDialog,
   title = 'putComment',
-  context
+  context,
 }) => {
-  const commentDraftId = `${articleId}:${commentId || 0}:${parentId ||
-    0}:${replyToId || 0}`
+  // retrieve comment draft
+  const commentDraftId = `${articleId}:${commentId || 0}:${parentId || 0}:${
+    replyToId || 0
+  }`
   const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
-    variables: { id: commentDraftId }
+    variables: { id: commentDraftId },
   })
+
+  // retrieve push setting
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
   )
@@ -97,8 +101,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
         replyTo: replyToId,
         articleId,
         parentId,
-        mentions
-      }
+        mentions,
+      },
     }
 
     const push = clientPreferenceData?.clientPreference.push
@@ -109,8 +113,14 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     try {
       await putComment({ variables: { input } })
+
       setContent('')
-      closeDialog()
+
+      // clear draft
+      client.writeData({
+        id: `CommentDraft:${commentDraftId}`,
+        data: { content: '' },
+      })
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -126,14 +136,16 @@ const CommentForm: React.FC<CommentFormProps> = ({
                 <Translate id="confirmPush" />
               </Button>
             ),
-            buttonPlacement: 'center'
-          }
+            buttonPlacement: 'center',
+          },
         })
       )
 
       if (submitCallback) {
         submitCallback()
       }
+
+      closeDialog()
     } catch (e) {
       console.error(e)
     }
@@ -146,7 +158,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     client.writeData({
       id: `CommentDraft:${commentDraftId}`,
-      data: { content: newContent }
+      data: { content: newContent },
     })
   }
 
@@ -176,14 +188,14 @@ const CommentForm: React.FC<CommentFormProps> = ({
             analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
               state: 'focus',
               level: parentId ? 2 : 1,
-              operation: commentId ? 'edit' : 'create'
+              operation: commentId ? 'edit' : 'create',
             })
           }}
           onBlur={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
               state: 'blur',
               level: parentId ? 2 : 1,
-              operation: commentId ? 'update' : 'create'
+              operation: commentId ? 'update' : 'create',
             })
           }}
           aria-label={TEXT.zh_hant.putComment}

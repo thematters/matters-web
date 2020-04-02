@@ -93,38 +93,38 @@ const settingsMap: {
   me: [
     {
       key: 'mention',
-      title: <Translate zh_hant="提及我" zh_hans="提及我" />
+      title: <Translate zh_hant="提及我" zh_hans="提及我" />,
     },
     {
       key: 'follow',
-      title: <Translate zh_hant="追蹤我" zh_hans="追踪我" />
-    }
+      title: <Translate zh_hant="追蹤我" zh_hans="追踪我" />,
+    },
   ],
   article: [
     {
       key: 'appreciation',
-      title: <Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" />
+      title: <Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" />,
     },
     {
       key: 'articleSubscription',
-      title: <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />
+      title: <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />,
     },
     {
       key: 'commentSubscribed',
       title: (
         <Translate zh_hant="收藏的作品有新評論" zh_hans="收藏的作品有新评论" />
-      )
-    }
+      ),
+    },
   ],
   comment: [
     {
       key: 'comment',
-      title: <Translate zh_hant="評論和回覆" zh_hans="评论和回复" />
+      title: <Translate zh_hant="評論和回覆" zh_hans="评论和回复" />,
     },
     {
       key: 'commentPinned',
-      title: <Translate zh_hant="評論被置頂" zh_hans="评论被置顶" />
-    }
+      title: <Translate zh_hant="評論被置頂" zh_hans="评论被置顶" />,
+    },
   ],
   preference: [
     {
@@ -135,19 +135,19 @@ const settingsMap: {
           zh_hant="精選過去 24 小時與你有關的消息"
           zh_hans="精选过去 24 小时与你有关的消息"
         />
-      )
-    }
+      ),
+    },
   ],
   others: [
     {
       key: 'officialNotice',
-      title: <Translate zh_hant="官方公告" zh_hans="官方公告" />
+      title: <Translate zh_hant="官方公告" zh_hans="官方公告" />,
     },
     {
       key: 'reportFeedback',
-      title: <Translate zh_hant="檢舉反饋" zh_hans="检举反馈" />
-    }
-  ]
+      title: <Translate zh_hant="檢舉反饋" zh_hans="检举反馈" />,
+    },
+  ],
 }
 
 const SettingsNotification = () => {
@@ -172,7 +172,7 @@ const SettingsNotification = () => {
     updateNotification({
       variables: {
         type,
-        enabled: !settings[type]
+        enabled: !settings[type],
       },
       optimisticResponse: {
         updateNotificationSetting: {
@@ -181,13 +181,13 @@ const SettingsNotification = () => {
             notification: {
               ...settings,
               [type]: !settings[type],
-              __typename: 'NotificationSetting'
+              __typename: 'NotificationSetting',
             },
-            __typename: 'UserSettings'
+            __typename: 'UserSettings',
           },
-          __typename: 'User'
-        }
-      }
+          __typename: 'User',
+        },
+      },
     })
   }
 
@@ -204,7 +204,7 @@ const SettingsNotification = () => {
 
           <PushSwitch />
 
-          {settingsMap.preference.map(setting => (
+          {settingsMap.preference.map((setting) => (
             <SettingItem
               key={setting.key}
               enabled={settings[setting.key]}
@@ -221,7 +221,7 @@ const SettingsNotification = () => {
             is="h2"
           />
 
-          {settingsMap.me.map(setting => (
+          {settingsMap.me.map((setting) => (
             <SettingItem
               key={setting.key}
               enabled={settings[setting.key]}
@@ -240,7 +240,7 @@ const SettingsNotification = () => {
             is="h2"
           />
 
-          {settingsMap.article.map(setting => (
+          {settingsMap.article.map((setting) => (
             <SettingItem
               key={setting.key}
               enabled={settings[setting.key]}
@@ -257,7 +257,7 @@ const SettingsNotification = () => {
             is="h2"
           />
 
-          {settingsMap.comment.map(setting => (
+          {settingsMap.comment.map((setting) => (
             <SettingItem
               key={setting.key}
               enabled={settings[setting.key]}
@@ -276,7 +276,7 @@ const SettingsNotification = () => {
             is="h2"
           />
 
-          {settingsMap.others.map(setting => (
+          {settingsMap.others.map((setting) => (
             <SettingItem
               key={setting.key}
               enabled={settings[setting.key]}

@@ -54,15 +54,16 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH.href
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
 
   const articleClass = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
-    keepAside
+    keepAside,
   })
   const asideClass = classNames({
     'l-col-three-right': true,
-    'u-lg-down-hide': !keepAside
+    'u-lg-down-hide': !keepAside,
   })
 
   return (
@@ -78,7 +79,11 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
 
         {aside}
 
-        <SideFooter />
+        {!isInDraftDetail && (
+          <section className="u-lg-down-hide">
+            <SideFooter />
+          </section>
+        )}
       </aside>
 
       <style jsx>{styles}</style>

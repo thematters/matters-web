@@ -7,5 +7,5 @@ export default {
   Icymi,
   Topics,
   Tags,
-  Authors
+  Authors,
 }

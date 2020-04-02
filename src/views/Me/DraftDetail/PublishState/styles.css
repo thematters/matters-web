@@ -1,10 +1,10 @@
 .container {
   position: sticky;
-  top: calc(3rem + var(--spacing-base));
+  top: calc(var(--global-header-height-mobile) + var(--spacing-base));
 
   z-index: 10;
 
   @media (--sm-up) {
-    top: calc(4rem + var(--spacing-base));
+    top: calc(var(--global-header-height) + var(--spacing-base));
   }
 }

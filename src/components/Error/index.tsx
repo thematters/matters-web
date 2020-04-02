@@ -8,7 +8,7 @@ import IMAGE_ILLUSTRATION_EMPTY from '~/static/images/illustration-empty.svg'
 import styles from './styles.css'
 
 const {
-  publicRuntimeConfig: { ENV }
+  publicRuntimeConfig: { ENV },
 } = getConfig()
 const isProd = ENV === 'production'
 
@@ -45,7 +45,7 @@ export const Error: React.FC<ErrorProps> = ({
   children,
   error,
   type = 'network',
-  message
+  message,
 }) => {
   const shouldShowStatusCode =
     typeof statusCode === 'string' && statusCode.length > 3
@@ -78,7 +78,7 @@ export const Error: React.FC<ErrorProps> = ({
         <pre
           className="error-detail"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(error, null, 4)
+            __html: JSON.stringify(error, null, 4),
           }}
         />
       )}

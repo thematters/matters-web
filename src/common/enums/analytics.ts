@@ -3,7 +3,7 @@ export const GA_TRACKING_ID = 'UA-127561991-1'
 export const ANALYTIC_TYPES = {
   TRACK: 'track',
   PAGE: 'page',
-  IDENTIFY: 'identify'
+  IDENTIFY: 'identify',
 }
 
 export const ANALYTICS_EVENTS = {
@@ -42,7 +42,7 @@ export const ANALYTICS_EVENTS = {
   CLOSE_SIGNUP_MODAL: 'close-signup-modal',
   SIGNUP_STEP_FINISH: 'signup-step-finish',
   LIKECOIN_STEP_CHANGE: 'likecoin-step-change',
-  LIKECOIN_STEP_RETRY: 'likecoin-step-retry'
+  LIKECOIN_STEP_RETRY: 'likecoin-step-retry',
 }
 
 export const SHARE_TYPE = {
@@ -55,7 +55,7 @@ export const SHARE_TYPE = {
   FACEBOOK: 'facebook',
   WEIBO: 'weibo',
   DOUBAN: 'douban',
-  ROOT: 'root'
+  ROOT: 'root',
 }
 
 export const FEED_TYPE = {
@@ -86,10 +86,10 @@ export const FEED_TYPE = {
   // tags
   TAGS: 'tags',
   ALL_TAGS: 'all-tags',
-  SEARCH_TAG: 'search-tag'
+  SEARCH_TAG: 'search-tag',
 }
 
 export const SIGNUP_TYPE = {
   GENERAL: 'general',
-  AD_WALL: 'ad-wall'
+  AD_WALL: 'ad-wall',
 }

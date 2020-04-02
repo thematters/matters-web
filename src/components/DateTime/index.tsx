@@ -27,16 +27,21 @@ interface DateTimeProps {
  * ```
  */
 
-export const DateTime = React.memo(
-  ({ date, type = 'absolute' }: DateTimeProps) => {
-    const { lang } = useContext(LanguageContext)
+const BaseDateTime = ({ date, type = 'absolute' }: DateTimeProps) => {
+  const { lang } = useContext(LanguageContext)
 
-    return (
-      <time dateTime={new Date(date).toISOString()}>
-        {datetimeFormat[type](date, lang)}
+  return (
+    <time dateTime={new Date(date).toISOString()}>
+      {datetimeFormat[type](date, lang)}
 
-        <style jsx>{styles}</style>
-      </time>
-    )
-  }
-)
+      <style jsx>{styles}</style>
+    </time>
+  )
+}
+
+/**
+ * Memoizing
+ */
+type MemoedDateTime = React.MemoExoticComponent<React.FC<DateTimeProps>>
+
+export const DateTime = React.memo(BaseDateTime) as MemoedDateTime

@@ -6,7 +6,7 @@ import {
   ArticleDigestSidebar,
   List,
   Spinner,
-  useResponsive
+  useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -24,7 +24,7 @@ interface CollectionListProps {
 const CollectionList: React.FC<CollectionListProps> = ({
   data,
   loading,
-  error
+  error,
 }) => {
   const isMediumUp = useResponsive('md-up')
   const { edges, pageInfo } = data?.article?.collection || {}
@@ -52,7 +52,7 @@ const CollectionList: React.FC<CollectionListProps> = ({
             onClick={() =>
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.COLLECTION,
-                location: i
+                location: i,
               })
             }
           />

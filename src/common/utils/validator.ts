@@ -21,7 +21,7 @@ export const isValidEmail = (str: string, options: ValidEmailOptions) => {
   }
 
   return isEmail(str, {
-    allow_utf8_local_part: false
+    allow_utf8_local_part: false,
   })
 }
 

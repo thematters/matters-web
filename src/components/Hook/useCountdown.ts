@@ -23,14 +23,14 @@ export const useCountdown = ({ timeLeft, step = 1000 }: UseCountdownProps) => {
     if (countdown.timeLeft > 0) {
       setCountdown({
         ...countdown,
-        timeLeft: Math.max(countdown.timeLeft - 1000, 0)
+        timeLeft: Math.max(countdown.timeLeft - 1000, 0),
       })
     }
 
     if (timeLeft < 0) {
       setCountdown({
         ...countdown,
-        timeLeft: 0
+        timeLeft: 0,
       })
     }
   }, countdown.step)
@@ -40,11 +40,11 @@ export const useCountdown = ({ timeLeft, step = 1000 }: UseCountdownProps) => {
     setCountdown: (props: UseCountdownProps) =>
       setCountdown({
         timeLeft: props.timeLeft,
-        step: props.step || countdown.step
+        step: props.step || countdown.step,
       }),
     formattedTimeLeft: {
       mmss: `${leftPad(formatted.mins, 2, 0)}:${leftPad(formatted.secs, 2, 0)}`,
-      ss: `${leftPad(formatted.secs, 2, 0)}`
-    }
+      ss: `${leftPad(formatted.secs, 2, 0)}`,
+    },
   }
 }

@@ -7,7 +7,7 @@ import {
   LanguageContext,
   LikeCoinDialog,
   TextIcon,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
@@ -17,7 +17,7 @@ import {
   parseFormSubmitErrors,
   routerPush,
   toPath,
-  translate
+  translate,
 } from '~/common/utils'
 
 import { CreateDraft } from './__generated__/CreateDraft'
@@ -39,7 +39,7 @@ export const CREATE_DRAFT = gql`
 const BaseWriteButton = ({
   onClick,
   loading,
-  isLarge
+  isLarge,
 }: {
   onClick: () => any
   loading?: boolean
@@ -71,8 +71,8 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
-      title: translate({ id: 'untitle', lang })
-    }
+      title: translate({ id: 'untitle', lang }),
+    },
   })
 
   if (!allowed) {
@@ -102,8 +102,8 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: messages[codes[0]]
-              }
+                content: messages[codes[0]],
+              },
             })
           )
         }

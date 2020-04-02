@@ -22,7 +22,7 @@ const fragments = {
     fragment AvatarUser on User {
       avatar
     }
-  `
+  `,
 }
 
 export const Avatar = (props: AvatarProps) => {
@@ -30,7 +30,7 @@ export const Avatar = (props: AvatarProps) => {
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const avatarClasses = classNames({
     avatar: true,
-    [size]: !!size
+    [size]: !!size,
   })
 
   return (

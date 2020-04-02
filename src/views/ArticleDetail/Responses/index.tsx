@@ -39,7 +39,7 @@ const Responses = () => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
 
   const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
-    variables: { mediaHash }
+    variables: { mediaHash },
   })
 
   if (loading || !data || !data.article) {
@@ -64,7 +64,7 @@ const Responses = () => {
         onEnter={() => {
           if (!trackedFinish) {
             analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
-              entrance: article.id
+              entrance: article.id,
             })
             setTrackedFinish(true)
           }
@@ -88,7 +88,7 @@ Responses.fragments = {
       ...ResponseCountArticle
     }
     ${ResponseCount.fragments.article}
-  `
+  `,
 }
 
 export default Responses

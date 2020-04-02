@@ -47,7 +47,7 @@ const fragments = {
         pinCommentLeft
       }
     }
-  `
+  `,
 }
 
 const PinButton = ({ comment }: { comment: PinButtonComment }) => {
@@ -59,11 +59,11 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         id: comment.id,
         pinned: false,
         article: {
-          ...comment.article
+          ...comment.article,
         },
-        __typename: 'Comment'
-      }
-    }
+        __typename: 'Comment',
+      },
+    },
   })
   const [pinComment] = useMutation<PinComment>(PIN_COMMENT, {
     variables: { id: comment.id },
@@ -72,11 +72,11 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         id: comment.id,
         pinned: true,
         article: {
-          ...comment.article
+          ...comment.article,
         },
-        __typename: 'Comment'
-      }
-    }
+        __typename: 'Comment',
+      },
+    },
   })
 
   if (comment.pinned) {

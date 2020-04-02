@@ -24,7 +24,7 @@ const fragments = {
       id
       articleState: state
     }
-  `
+  `,
 }
 
 const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
@@ -32,8 +32,8 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   const [extendArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
     variables: {
       title: translate({ id: 'untitle', lang }),
-      collection: [article.id]
-    }
+      collection: [article.id],
+    },
   })
 
   return (

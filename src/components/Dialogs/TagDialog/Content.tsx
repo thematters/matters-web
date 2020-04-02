@@ -8,7 +8,7 @@ import {
   LanguageContext,
   Menu,
   Spinner,
-  Translate
+  Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
@@ -19,7 +19,7 @@ import {
   parseFormSubmitErrors,
   routerPush,
   toPath,
-  translate
+  translate,
 } from '~/common/utils'
 
 import styles from './styles.css'
@@ -58,7 +58,7 @@ const DropdownList = ({
   items,
   loading,
   search,
-  children
+  children,
 }: DropdownListBaseProps & { children?: any }) => {
   if (loading) {
     return (
@@ -77,7 +77,7 @@ const DropdownList = ({
   return (
     <>
       <Menu width="sm">
-        {items.map(item => (
+        {items.map((item) => (
           <Menu.Item key={item.content}>
             <span className="search-tag-item">
               <span>{item.content}</span>
@@ -117,7 +117,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   id,
   content,
   description,
-  closeDialog
+  closeDialog,
 }) => {
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
@@ -133,11 +133,11 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
     handleSubmit,
     isSubmitting,
     isValid,
-    setFieldValue
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       newContent: content || '',
-      newDescription: description || ''
+      newDescription: description || '',
     },
     validate: ({ newContent }) => {
       if (!newContent) {
@@ -145,8 +145,8 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
           newContent: translate({
             zh_hant: '請輸入標籤名稱',
             zh_hans: '請输入标签名称',
-            lang
-          })
+            lang,
+          }),
         }
       }
     },
@@ -156,7 +156,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
     ) => {
       try {
         const result = await update({
-          variables: { id, content: newContent, description: newDescription }
+          variables: { id, content: newContent, description: newDescription },
         })
 
         window.dispatchEvent(
@@ -164,8 +164,8 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             detail: {
               color: 'green',
               content: <Translate id={id ? 'tagEdited' : 'tagCreated'} />,
-              duration: 2000
-            }
+              duration: 2000,
+            },
           })
         )
 
@@ -184,7 +184,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       }
 
       setSubmitting(false)
-    }
+    },
   })
 
   const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
@@ -198,7 +198,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
         value={values.newContent}
         error={touched.newContent && errors.newContent}
-        onBlur={e => {
+        onBlur={(e) => {
           setFieldValue('content', e.target.value.trim())
           handleBlur(e)
         }}

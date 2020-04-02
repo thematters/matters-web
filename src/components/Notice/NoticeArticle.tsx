@@ -9,7 +9,7 @@ import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticl
 
 const NoticeArticle = ({
   article,
-  isBlock = false
+  isBlock = false,
 }: {
   article: NoticeArticleType | null
   isBlock?: boolean
@@ -20,7 +20,7 @@ const NoticeArticle = ({
 
   const path = toPath({
     page: 'articleDetail',
-    article
+    article,
   })
 
   if (!isBlock) {
@@ -41,7 +41,7 @@ NoticeArticle.fragments = {
       ...ArticleDigestTitleArticle
     }
     ${ArticleDigestTitle.fragments.article}
-  `
+  `,
 }
 
 export default NoticeArticle

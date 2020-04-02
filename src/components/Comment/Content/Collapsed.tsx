@@ -15,7 +15,7 @@ interface CollapsedProps {
 const Collapsed = ({
   content,
   collapsedContent,
-  className
+  className,
 }: CollapsedProps) => {
   const [collapsed, setCollapsed] = useState(true)
 
@@ -25,7 +25,7 @@ const Collapsed = ({
         <div
           className={`${className} u-content-comment `}
           dangerouslySetInnerHTML={{
-            __html: content || ''
+            __html: content || '',
           }}
         />
 

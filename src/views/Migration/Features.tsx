@@ -26,7 +26,7 @@ const texts: {
     content_5:
       'Matters 的用戶來自中國大陸、香港、台灣、馬來西亞等地，擁有華文世界裡最優質與多元的寫作評論社區。',
     likecoin: '了解什麼是 LikeCoin →',
-    examples: '有多優質，請看這裡 →'
+    examples: '有多優質，請看這裡 →',
   },
   zh_hans: {
     header: '搬家完成后，你将立刻获得以下功能',
@@ -42,8 +42,8 @@ const texts: {
     content_5:
       'Matters 的用户来自中国大陆、香港、台湾、马来西亚等地，拥有华文世界里最优质与多元的写作评论社区。',
     likecoin: '了解什么是 LikeCoin →',
-    examples: '有多优质，请看这里 →'
-  }
+    examples: '有多优质，请看这里 →',
+  },
 }
 
 const likeCoinLink =
@@ -59,7 +59,7 @@ const communityLink =
 const Feature = ({
   children,
   index,
-  src
+  src,
 }: {
   children?: React.ReactNode
   index: number
@@ -107,7 +107,7 @@ const Features = () => {
         <a className="u-link-green" href={likeCoinLink} target="_blank">
           <Translate zh_hant={zh_hant.likecoin} zh_hans={zh_hans.likecoin} />
         </a>
-      )
+      ),
     },
     {
       index: 5,
@@ -115,9 +115,9 @@ const Features = () => {
         <a className="u-link-green" href={communityLink} target="_blank">
           <Translate zh_hant={zh_hant.examples} zh_hans={zh_hans.examples} />
         </a>
-      )
+      ),
     },
-    { index: 6, src: IMAGE_FEATURE_3 }
+    { index: 6, src: IMAGE_FEATURE_3 },
   ]
 
   if (!isMediumUp) {

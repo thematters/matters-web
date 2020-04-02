@@ -7,9 +7,9 @@ export default {
   Query: {
     commentDraft,
     clientPreference,
-    clientInfo
+    clientInfo,
   },
   Official: {
-    gatewayUrls
-  }
+    gatewayUrls,
+  },
 }

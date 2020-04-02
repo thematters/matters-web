@@ -20,7 +20,7 @@ import IMAGE_LAUNCH_640 from '~/static/images/splashscreens/launch-640x1136.png?
 import IMAGE_LAUNCH_750 from '~/static/images/splashscreens/launch-750x1294.png?url'
 
 const {
-  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID }
+  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID },
 } = getConfig()
 const isProd = ENV === 'production'
 
@@ -32,7 +32,7 @@ interface HeadProps {
   image?: string
 }
 
-export const Head: React.FC<HeadProps> = props => {
+export const Head: React.FC<HeadProps> = (props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const title =
@@ -52,7 +52,7 @@ export const Head: React.FC<HeadProps> = props => {
       : router.asPath
       ? `${SITE_DOMAIN}${router.asPath}`
       : SITE_DOMAIN,
-    image: props.image || IMAGE_INTRO
+    image: props.image || IMAGE_INTRO,
   }
   const canonicalUrl = head.url.split('#')[0].split('?')[0]
 
