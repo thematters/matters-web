@@ -38,7 +38,7 @@ const BaseShareDialog = ({
   shareLink,
   children,
 }: BaseShareDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
