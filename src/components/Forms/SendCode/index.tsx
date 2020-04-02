@@ -54,7 +54,7 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   disabled,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { token } = useContext(ReCaptchaContext)
+  const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
@@ -68,8 +68,13 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
       await send({
         variables: { input: { email, type, token } },
       })
+
       setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
       setSent(true)
+
+      if (refreshToken) {
+        refreshToken()
+      }
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error, lang)
       window.dispatchEvent(
