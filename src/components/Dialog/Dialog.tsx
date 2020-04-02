@@ -1,7 +1,7 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
-import { useRef } from 'react'
-import { animated, useSpring, useTransition } from 'react-spring'
+import { useEffect, useRef, useState } from 'react'
+import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { useOutsideClick, useResponsive } from '~/components'
@@ -30,28 +30,38 @@ const Dialog: React.FC<DialogProps> = ({
 
   children,
 }) => {
+  const [mounted, setMounted] = useState(isOpen)
+  const [fadeIn, setFadeIn] = useState(false)
   const node: React.RefObject<any> | null = useRef(null)
+  const isSmallUp = useResponsive('sm-up')
 
-  // drag animation
+  // Drag
   const [{ top }, setDragGoal] = useSpring(() => ({
     top: 0,
   }))
 
-  const isSmallUp = useResponsive('sm-up')
-  const transitions = useTransition(isOpen, {
-    from: {
-      opacity: 0,
-      transform: `translateY(100%)`,
-    },
-    enter: { opacity: 1, transform: `translateY(0%)` },
-    leave: {
-      opacity: 0,
-      transform: `translateY(100%)`,
-    },
+  // Fade In/ Fade Out
+  const { opacity, transform } = useSpring({
+    opacity: fadeIn ? 1 : 0,
+    transform: fadeIn ? 'translateY(0%)' : 'translateY(90%)',
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
-    onDestroyed: () => {
-      setDragGoal({ top: 0 })
+    onRest: (props) => {
+      if (props.opacity === 0) {
+        setMounted(false)
+      }
     },
+    // onDestroyed: () => {
+    //   setDragGoal({ top: 0 })
+    // },
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      setMounted(true)
+      setFadeIn(true)
+    } else {
+      setFadeIn(false)
+    }
   })
 
   useOutsideClick(node, onDismiss)
@@ -91,32 +101,25 @@ const Dialog: React.FC<DialogProps> = ({
   const AnimatedContainer = animated(Container)
   const AnimatedOverlay = animated(Overlay)
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <>
-      {transitions(({ opacity, transform }, item) => {
-        if (!item) {
-          return
-        }
+      <AnimatedDialogOverlay className="dialog">
+        <AnimatedOverlay style={{ opacity }} />
 
-        return (
-          <AnimatedDialogOverlay className="dialog">
-            <AnimatedOverlay style={{ opacity }} />
-
-            <DialogContent
-              className="l-row full"
-              aria-labelledby="dialog-title"
-            >
-              <AnimatedContainer
-                style={{
-                  transform: !isSmallUp && transform ? transform : undefined,
-                  opacity: isSmallUp ? opacity : undefined,
-                  top,
-                }}
-              />
-            </DialogContent>
-          </AnimatedDialogOverlay>
-        )
-      })}
+        <DialogContent className="l-row full" aria-labelledby="dialog-title">
+          <AnimatedContainer
+            style={{
+              transform: !isSmallUp && transform ? transform : undefined,
+              opacity: isSmallUp ? opacity : undefined,
+              top,
+            }}
+          />
+        </DialogContent>
+      </AnimatedDialogOverlay>
 
       <style jsx global>
         {globalStyles}
