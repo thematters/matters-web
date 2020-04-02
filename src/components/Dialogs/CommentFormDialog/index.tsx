@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog } from '~/components'
 
@@ -15,6 +15,19 @@ const BaseCommentFormDialog = ({
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+
+  // FIXME: editor can't be focused with dialog on Android devices
+  useEffect(() => {
+    if (!showDialog) {
+      return
+    }
+
+    const $editor = document.querySelector('.ql-editor') as HTMLElement
+
+    if ($editor) {
+      $editor.focus()
+    }
+  })
 
   return (
     <>
