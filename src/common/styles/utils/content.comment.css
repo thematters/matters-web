@@ -43,10 +43,6 @@
 
       font-size: var(--font-size-sm-s);
       color: var(--color-grey);
-
-      @media (--sm-up) {
-        padding: 0;
-      }
     }
   }
 
