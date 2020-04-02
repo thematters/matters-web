@@ -64,10 +64,6 @@
       font-size: var(--font-size-sm-s);
       color: var(--color-grey);
       white-space: pre-wrap;
-
-      @media (--sm-up) {
-        padding: 0;
-      }
     }
   }
 
