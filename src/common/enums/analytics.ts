@@ -16,6 +16,7 @@ export const ANALYTICS_EVENTS = {
   CLICK_DRAFT: 'click-draft',
   CLICK_FREQUENT_SEARCH: 'click-frequent-search',
   CLICK_SEARCH_HISTORY: 'click-search-history',
+  CLICK_VIEW_MODE: 'click-view-mode',
   COMMENT_EDITOR_CHANGE: 'comment-editor-change',
   ARTICLE_BOTTOM_CROSS: 'article-bottom-cross',
   PUBLISH_ERROR: 'publish-error',
