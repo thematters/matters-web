@@ -25,7 +25,7 @@ const fragments = {
   article: gql`
     fragment RelatedArticles on Article {
       id
-      relatedArticles(input: { first: 3 }) {
+      relatedArticles(input: { first: 5 }) {
         edges {
           cursor
           node {
