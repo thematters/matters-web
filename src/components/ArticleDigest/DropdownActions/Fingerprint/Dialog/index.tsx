@@ -30,7 +30,7 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight noTransform>
+      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header title="IPFSEntrance" close={close} />
 
         <Dialog.Content spacing={[0, 0]} hasGrow>

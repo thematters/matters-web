@@ -51,7 +51,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
         <Dialog.Header title="changeUserName" close={close} headerHidden />
 
         <Dialog.Message

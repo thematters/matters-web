@@ -46,7 +46,7 @@ const BaseShareDialog = ({
     <>
       {children({ open: () => onShare(open) })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={showDialog} onDismiss={close} slideIn>
         <Dialog.Header title="share" close={close} headerHidden />
 
         <Dialog.Content spacing={[0, 0]}>
