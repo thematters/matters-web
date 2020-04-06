@@ -116,7 +116,7 @@
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
-    "chromedriver": "^80.0.1",
+    "chromedriver": "^80.0.2",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "dotenv": "^8.2.0",
