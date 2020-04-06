@@ -60,7 +60,8 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const isArchived = state === 'archived'
   const isForbidden = state === 'forbidden'
   const isOnboarding = state === 'onboarding'
-  const isInactive = isAuthed && (isFrozen || isBanned || isArchived || isForbidden)
+  const isInactive =
+    isAuthed && (isFrozen || isBanned || isArchived || isForbidden)
   const isAdmin = role === 'admin'
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
