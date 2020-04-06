@@ -81,7 +81,7 @@
     "react-virtualized": "^9.21.2",
     "react-waypoint": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
-    "use-debounce": "^3.4.0",
+    "use-debounce": "^3.4.1",
     "validator": "^13.0.0",
     "xxhashjs": "^0.2.2"
   },
