@@ -14,7 +14,12 @@ const {
 
 const recaptchaScriptId = 'recaptcha-script'
 
-export const ReCaptchaContext = createContext({ token: '' })
+export const ReCaptchaContext = createContext<{
+  token: string
+  refreshToken?: () => void
+}>({
+  token: '',
+})
 
 export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
@@ -24,6 +29,7 @@ export const ReCaptchaProvider = ({
   children: React.ReactNode
 }) => {
   const [token, setToken] = useState('')
+  const [refreshToken, setRefreshToken] = useState<() => void>()
 
   // keep interval id for GC
   const [recaptchaInterval, setRecaptchaInterval] = useState(0)
@@ -37,6 +43,8 @@ export const ReCaptchaProvider = ({
           setToken(newToken)
         })
     }
+
+    setRefreshToken(getToken)
 
     window.grecaptcha.ready(() => {
       getToken()
@@ -79,7 +87,7 @@ export const ReCaptchaProvider = ({
   )
 
   return (
-    <ReCaptchaContext.Provider value={{ token }}>
+    <ReCaptchaContext.Provider value={{ token, refreshToken }}>
       {children}
     </ReCaptchaContext.Provider>
   )
