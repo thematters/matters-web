@@ -64,7 +64,7 @@ const Container: React.FC<
     >
       {children}
 
-      {!isSmallUp && <Handle {...bind()} close={onDismiss} />}
+      {!isSmallUp && <Handle close={onDismiss} {...bind()} />}
 
       <style jsx>{styles}</style>
     </div>
@@ -74,7 +74,6 @@ const Container: React.FC<
 const Dialog: React.FC<DialogProps> = (props) => {
   const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
-  const [fadeIn, setFadeIn] = useState(false)
   const isSmallUp = useResponsive('sm-up')
 
   // Drag
@@ -83,12 +82,14 @@ const Dialog: React.FC<DialogProps> = (props) => {
   }))
 
   // Fade In/ Fade Out
-  const { opacity, transform } = useSpring({
-    opacity: fadeIn ? 1 : 0,
-    transform: fadeIn ? 'translateY(0%)' : 'translateY(100%)',
+  const [{ opacity, transform }, setFade] = useSpring(() => ({
+    opacity: 0,
+    transform: 'translateY(100%)',
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
-    onRest: () => {
-      if (!isOpen) {
+    onRest: (val: { opacity: number }) => {
+      const isFadedOut = val.opacity <= 0
+
+      if (isFadedOut) {
         setMounted(false)
         setDragGoal({ top: 0 })
       }
@@ -97,14 +98,14 @@ const Dialog: React.FC<DialogProps> = (props) => {
         onRest()
       }
     },
-  })
+  }))
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      setFadeIn(true)
+      setFade({ opacity: 1, transform: 'translateY(0%)' })
     } else {
-      setFadeIn(false)
+      setFade({ opacity: 0, transform: 'translateY(100%)' })
     }
   })
 
@@ -126,7 +127,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
             style={{
               transform: !isSmallUp && transform ? transform : undefined,
               opacity: isSmallUp ? opacity : undefined,
-              top,
+              top: !isSmallUp ? top : undefined,
             }}
             setDragGoal={setDragGoal}
             {...props}

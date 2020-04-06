@@ -35,6 +35,7 @@
   @media (--sm-up) {
     border-radius: 0.5rem;
     will-change: opacity;
+    transform: translateY(0%);
 
     &::before {
       display: none;
