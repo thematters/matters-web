@@ -22,6 +22,7 @@ export interface DialogOverlayProps {
 export type DialogProps = {
   size?: 'sm' | 'lg'
   fixedHeight?: boolean
+  noTransform?: boolean
 } & DialogOverlayProps
 
 const Container: React.FC<
@@ -72,7 +73,7 @@ const Container: React.FC<
 }
 
 const Dialog: React.FC<DialogProps> = (props) => {
-  const { isOpen, onRest } = props
+  const { isOpen, noTransform, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
   const isSmallUp = useResponsive('sm-up')
 
@@ -125,8 +126,8 @@ const Dialog: React.FC<DialogProps> = (props) => {
         <DialogContent className="l-row full" aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{
-              transform: !isSmallUp && transform ? transform : undefined,
-              opacity: isSmallUp ? opacity : undefined,
+              transform: !isSmallUp && !noTransform ? transform : undefined,
+              opacity: isSmallUp || noTransform ? opacity : undefined,
               top: !isSmallUp ? top : undefined,
             }}
             setDragGoal={setDragGoal}

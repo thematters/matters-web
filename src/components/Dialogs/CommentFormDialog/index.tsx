@@ -18,14 +18,15 @@ const BaseCommentFormDialog = ({
 
   // FIXME: editor can't be focused with dialog on Android devices
   const focusEditor = () => {
-    if (!showDialog) {
-      return
-    }
-
     const $editor = document.querySelector('.ql-editor') as HTMLElement
-
     if ($editor) {
       $editor.focus()
+    }
+  }
+
+  const onRest = () => {
+    if (showDialog) {
+      focusEditor()
     }
   }
 
@@ -33,7 +34,7 @@ const BaseCommentFormDialog = ({
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} onRest={focusEditor}>
+      <Dialog isOpen={showDialog} onDismiss={close} onRest={onRest} noTransform>
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>

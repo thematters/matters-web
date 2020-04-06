@@ -15,9 +15,8 @@
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
   will-change: transform, top;
-  transform: translateY(100%);
 
-  /* &::before {
+  &::before {
     content: '';
     position: absolute;
     left: 0;
@@ -25,7 +24,7 @@
     top: 100%;
     height: 300vh;
     background: var(--color-white);
-  } */
+  }
 
   &.fixed-height {
     height: 80vh;
@@ -35,7 +34,6 @@
   @media (--sm-up) {
     border-radius: 0.5rem;
     will-change: opacity;
-    transform: translateY(0%);
 
     &::before {
       display: none;
