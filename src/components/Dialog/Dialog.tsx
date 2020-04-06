@@ -6,6 +6,8 @@ import { useDrag } from 'react-use-gesture'
 
 import { useOutsideClick, useResponsive } from '~/components'
 
+import { KEYCODES } from '~/common/enums'
+
 import Handle from './Handle'
 import Overlay from './Overlay'
 import styles from './styles.css'
@@ -14,6 +16,7 @@ import globalStyles from './styles.global.css'
 export interface DialogOverlayProps {
   isOpen: boolean | undefined
   onDismiss: () => void
+  onRest?: () => void
 }
 
 export type DialogProps = {
@@ -21,18 +24,57 @@ export type DialogProps = {
   fixedHeight?: boolean
 } & DialogOverlayProps
 
-const Dialog: React.FC<DialogProps> = ({
-  size = 'lg',
-  fixedHeight,
+const Container: React.FC<
+  {
+    style?: React.CSSProperties
+    setDragGoal: (val: any) => void
+  } & DialogProps
+> = ({ size = 'lg', fixedHeight, onDismiss, children, style, setDragGoal }) => {
+  const isSmallUp = useResponsive('sm-up')
+  const node: React.RefObject<any> | null = useRef(null)
 
-  isOpen,
-  onDismiss,
+  const containerClass = classNames({
+    container: true,
+    'fixed-height': !!fixedHeight,
+    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
+      size === 'lg',
+    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm',
+  })
 
-  children,
-}) => {
+  const bind = useDrag(({ down, movement: [, my] }) => {
+    if (!down && my > 30) {
+      onDismiss()
+    } else {
+      setDragGoal({ top: down ? Math.max(my, -30) : 0 })
+    }
+  })
+
+  useOutsideClick(node, onDismiss)
+
+  return (
+    <div
+      ref={node}
+      className={containerClass}
+      style={style}
+      onKeyDown={(event) => {
+        if (event.keyCode === KEYCODES.escape) {
+          onDismiss()
+        }
+      }}
+    >
+      {children}
+
+      {!isSmallUp && <Handle {...bind()} close={onDismiss} />}
+
+      <style jsx>{styles}</style>
+    </div>
+  )
+}
+
+const Dialog: React.FC<DialogProps> = (props) => {
+  const { isOpen, onRest } = props
   const [mounted, setMounted] = useState(isOpen)
   const [fadeIn, setFadeIn] = useState(false)
-  const node: React.RefObject<any> | null = useRef(null)
   const isSmallUp = useResponsive('sm-up')
 
   // Drag
@@ -43,16 +85,18 @@ const Dialog: React.FC<DialogProps> = ({
   // Fade In/ Fade Out
   const { opacity, transform } = useSpring({
     opacity: fadeIn ? 1 : 0,
-    transform: fadeIn ? 'translateY(0%)' : 'translateY(90%)',
+    transform: fadeIn ? 'translateY(0%)' : 'translateY(100%)',
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
-    onRest: (props) => {
-      if (props.opacity === 0) {
+    onRest: () => {
+      if (!isOpen) {
         setMounted(false)
+        setDragGoal({ top: 0 })
+      }
+
+      if (onRest) {
+        onRest()
       }
     },
-    // onDestroyed: () => {
-    //   setDragGoal({ top: 0 })
-    // },
   })
 
   useEffect(() => {
@@ -63,39 +107,6 @@ const Dialog: React.FC<DialogProps> = ({
       setFadeIn(false)
     }
   })
-
-  useOutsideClick(node, onDismiss)
-
-  const Container: React.FC<{
-    style?: React.CSSProperties
-  }> = ({ ...props }) => {
-    const containerClass = classNames({
-      container: true,
-      'fixed-height': !!fixedHeight,
-      'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
-        size === 'lg',
-      'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4':
-        size === 'sm',
-    })
-
-    const bind = useDrag(({ down, movement: [, my] }) => {
-      if (!down && my > 30) {
-        onDismiss()
-      } else {
-        setDragGoal({ top: down ? Math.max(my, -30) : 0 })
-      }
-    })
-
-    return (
-      <div ref={node} className={containerClass} {...props}>
-        {children}
-
-        {!isSmallUp && <Handle {...bind()} close={onDismiss} />}
-
-        <style jsx>{styles}</style>
-      </div>
-    )
-  }
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)
@@ -117,6 +128,8 @@ const Dialog: React.FC<DialogProps> = ({
               opacity: isSmallUp ? opacity : undefined,
               top,
             }}
+            setDragGoal={setDragGoal}
+            {...props}
           />
         </DialogContent>
       </AnimatedDialogOverlay>
