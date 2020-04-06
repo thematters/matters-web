@@ -17,7 +17,7 @@ const BasePublishDialog = ({ children }: PublishDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight slideIn>
+      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
         <PublishContent closeDialog={close} />
       </Dialog>
     </>
