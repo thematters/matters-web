@@ -133,7 +133,10 @@ export const UserProfile = () => {
     )
   }
 
-  if (user?.status?.state === 'archived') {
+  if (
+    user?.status?.state === 'archived' ||
+    user?.status?.state === 'forbidden'
+  ) {
     return (
       <>
         <LayoutHeader />
@@ -162,7 +165,8 @@ export const UserProfile = () => {
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = user.status.state === 'archived'
+  const isUserArchived =
+    user.status.state === 'archived' || user.status.state === 'forbidden'
   const isUserBanned = user.status.state === 'banned'
   const isUserFrozen = user.status.state === 'frozen'
   const isUserInactive = isUserArchived || isUserBanned || isUserFrozen

@@ -66,7 +66,8 @@ const Mini = ({
   hasUserName,
   disabled,
 }: UserDigestMiniProps) => {
-  const isArchived = user?.status?.state === 'archived'
+  const isArchived =
+    user?.status?.state === 'archived' || user?.status?.state === 'forbidden'
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',

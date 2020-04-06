@@ -35,7 +35,7 @@ export const BookmarkButton = ({
       <Unsubscribe
         articleId={article.id}
         size={size}
-        disabled={viewer.isArchived || viewer.isFrozen}
+        disabled={viewer.isArchived || viewer.isForbidden || viewer.isFrozen}
         inCard={inCard}
       />
     )
@@ -44,7 +44,7 @@ export const BookmarkButton = ({
       <Subscribe
         articleId={article.id}
         size={size}
-        disabled={viewer.isArchived || viewer.isFrozen}
+        disabled={viewer.isArchived || viewer.isForbidden || viewer.isFrozen}
         inCard={inCard}
       />
     )

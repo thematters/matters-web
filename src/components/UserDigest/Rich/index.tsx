@@ -74,7 +74,8 @@ const Rich = ({
     page: 'userProfile',
     userName: user.userName || '',
   })
-  const isArchived = user?.status?.state === 'archived'
+  const isArchived =
+    user?.status?.state === 'archived' || user?.status?.state === 'forbidden'
   const containerClass = classNames({
     container: true,
     [`size-${size}`]: !!size,

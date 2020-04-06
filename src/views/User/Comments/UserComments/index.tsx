@@ -96,7 +96,11 @@ const UserCommentsWrap = () => {
     return <QueryError error={error} />
   }
 
-  if (!user || user?.status?.state === 'archived') {
+  if (
+    !user ||
+    user?.status?.state === 'archived' ||
+    user?.status?.state === 'forbidden'
+  ) {
     return null
   }
 

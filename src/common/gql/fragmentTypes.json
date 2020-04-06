@@ -28,7 +28,8 @@
           { "name": "NoticeConnection" },
           { "name": "SearchResultConnection" },
           { "name": "ReportConnection" },
-          { "name": "OAuthClientConnection" }
+          { "name": "OAuthClientConnection" },
+          { "name": "SkippedListItemsConnection" }
         ]
       },
       {
