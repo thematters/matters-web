@@ -3,6 +3,8 @@ import queryString from 'query-string'
 
 import { PATHS } from '~/common/enums'
 
+import { parseURL } from './url'
+
 interface ArticleArgs {
   slug: string
   mediaHash: string | null
@@ -241,4 +243,74 @@ export const routerPush = (href: string, as?: string) => {
     window.scrollTo(0, 0)
     document.body.focus()
   })
+}
+
+/**
+ * Capture <a> clicks, and `Router.push` if there's a matching route.
+ *
+ * @see {@url https://github.com/STRML/react-router-component/blob/e453e24342c12a2fcfd7d7ba797be18415f9a497/lib/CaptureClicks.js}
+ */
+export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  // Ignore canceled events, modified clicks, and right clicks.
+  if (e.defaultPrevented) {
+    return
+  }
+
+  if (e.metaKey || e.ctrlKey || e.shiftKey) {
+    return
+  }
+
+  if (e.button !== 0) {
+    return
+  }
+
+  // Get the <a> element.
+  let el = e.target as HTMLAnchorElement
+  while (el && el.nodeName !== 'A') {
+    el = el.parentNode as HTMLAnchorElement
+  }
+
+  // Ignore clicks from non-a elements.
+  if (!el) {
+    return
+  }
+
+  // Ignore the click if the element has a target.
+  // if (el.target && el.target !== '_self') {
+  //   return
+  // }
+
+  // Ignore the click if it's a download link. (We use this method of
+  // detecting the presence of the attribute for old IE versions.)
+  // @ts-ignore
+  if (el.attributes.download) {
+    return
+  }
+
+  // Ignore hash (used often instead of javascript:void(0) in strict CSP envs)
+  if (el.getAttribute('href') === '#') {
+    return
+  }
+
+  // Use a regular expression to parse URLs instead of relying on the browser
+  // to do it for us (because IE).
+  const url = parseURL(el.href)
+  // const windowURL = parseURL(window.location.href)
+
+  // Ignore links that don't share a protocol and host with ours.
+  // if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
+  //   return
+  // }
+
+  // Ignore 'rel="external"' links.
+  if (el.rel && /(?:^|\s+)external(?:\s+|$)/.test(el.rel)) {
+    return
+  }
+
+  // Prevent :focus from sticking; preventDefault() stops blur in some browsers
+  el.blur()
+  e.preventDefault()
+
+  console.log(url)
+  routerPush(url.pathname)
 }

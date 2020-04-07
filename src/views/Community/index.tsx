@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Head, LanguageContext, Layout } from '~/components'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
-import { translate } from '~/common/utils'
+import { captureClicks, translate } from '~/common/utils'
 
 import content from './content'
 
@@ -29,6 +29,7 @@ const Community = () => {
             }),
           }}
           className="u-content"
+          onClick={captureClicks}
         />
       </Layout.Spacing>
 

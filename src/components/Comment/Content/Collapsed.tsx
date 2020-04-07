@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import { captureClicks } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -27,6 +28,7 @@ const Collapsed = ({
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
+          onClick={captureClicks}
         />
 
         <style jsx>{styles}</style>

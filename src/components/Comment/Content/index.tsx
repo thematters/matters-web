@@ -9,6 +9,7 @@ import Collapsed from './Collapsed'
 import styles from './styles.css'
 
 import { ContentComment } from './__generated__/ContentComment'
+import { captureClicks } from '~/common/utils'
 
 interface ContentProps {
   comment: ContentComment
@@ -66,6 +67,7 @@ const Content = ({ comment, size }: ContentProps) => {
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
+          onClick={captureClicks}
         />
 
         <style jsx>{styles}</style>
