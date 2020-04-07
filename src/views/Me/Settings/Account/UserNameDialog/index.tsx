@@ -33,6 +33,7 @@ const BaseUserNameDialog = ({ children }: UserNameDialogProps) => {
         onDismiss={close}
         size={step === 'ask' || step === 'complete' ? 'sm' : 'lg'}
         fixedHeight={step === 'confirm'}
+        slideIn={step === 'ask'}
       >
         {step === 'ask' && (
           <Ask nextStep={() => setStep('confirm')} closeDialog={close} />
