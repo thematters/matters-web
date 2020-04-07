@@ -1,7 +1,7 @@
 import Router, { NextRouter } from 'next/router'
 import queryString from 'query-string'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, ROUTES } from '~/common/enums'
 
 import { parseURL } from './url'
 
@@ -311,6 +311,17 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
   el.blur()
   e.preventDefault()
 
-  console.log(url)
-  routerPush(url.pathname)
+  // push if it's matched defined routes
+  let matched = false
+  ROUTES.some(({ regexp }) => {
+    if (regexp.test(url.pathname)) {
+      matched = true
+      console.log(regexp, 'matched')
+      return true
+    }
+  })
+
+  if (matched) {
+    routerPush(url.pathname, el.href)
+  }
 }
