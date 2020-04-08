@@ -12,6 +12,7 @@ import {
 } from '~/components'
 
 import {
+  ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
@@ -53,18 +54,20 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
     borderRadius: 'base',
   }
 
+  const Content = () => (
+    <p>
+      <Translate id="putComment" />
+      <Translate zh_hant="…" zh_hans="…" />
+      <style jsx>{styles}</style>
+    </p>
+  )
+
   if (viewer.shouldSetupLikerID) {
     return (
       <LikeCoinDialog>
         {({ open }) => (
           <Card aria-haspopup="true" onClick={open} {...cardProps}>
-            <p>
-              <Translate
-                zh_hant="設置 Liker ID 後即可參與精彩討論"
-                zh_hans="设置 Liker ID 后即可参与精彩讨论"
-              />
-              <style jsx>{styles}</style>
-            </p>
+            <Content />
           </Card>
         )}
       </LikeCoinDialog>
@@ -73,28 +76,50 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
 
   if (viewer.isOnboarding && article.author.id !== viewer.id) {
     return (
-      <Card {...cardProps}>
-        <p>
-          <Translate
-            zh_hant="新手小貼士：發佈作品收穫讚賞及瀏覽他人作品都能幫你開啓評論權限喔！"
-            zh_hans="新手小贴士：发布作品收获赞赏及浏览他人作品都能帮你开启评论权限喔！"
-          />
-          <style jsx>{styles}</style>
-        </p>
+      <Card
+        {...cardProps}
+        onClick={() => {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: (
+                  <Translate
+                    zh_hant="當你獲得 15 次讚賞或積極閱讀文章，即可評論。"
+                    zh_hans="当你获得 15 次赞赏或积极阅读文章，即可评论。"
+                  />
+                ),
+              },
+            })
+          )
+        }}
+      >
+        <Content />
       </Card>
     )
   }
 
   if (article.author.isBlocking) {
     return (
-      <Card {...cardProps}>
-        <p>
-          <Translate
-            zh_hant="因爲作者設置，你無法參與該作品下的討論。"
-            zh_hans="因为作者设置，你无法参与该作品下的讨论。"
-          />
-          <style jsx>{styles}</style>
-        </p>
+      <Card
+        {...cardProps}
+        onClick={() => {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: (
+                  <Translate
+                    zh_hant="因爲作者設置，你無法參與該作品下的討論。"
+                    zh_hans="因为作者设置，你无法参与该作品下的讨论。"
+                  />
+                ),
+              },
+            })
+          )
+        }}
+      >
+        <Content />
       </Card>
     )
   }
@@ -111,12 +136,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
 
     return (
       <Card {...clickProps} {...cardProps}>
-        <p>
-          <Translate id="login" />
-          <Translate id="putComment" />
-          <Translate zh_hant="…" zh_hans="…" />
-          <style jsx>{styles}</style>
-        </p>
+        <Content />
       </Card>
     )
   }
@@ -125,11 +145,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
     <CommentFormDialog articleId={article.id} submitCallback={refetchResponses}>
       {({ open }) => (
         <Card aria-haspopup="true" onClick={open} {...cardProps}>
-          <p>
-            <Translate id="putComment" />
-            <Translate zh_hant="…" zh_hans="…" />
-            <style jsx>{styles}</style>
-          </p>
+          <Content />
         </Card>
       )}
     </CommentFormDialog>
