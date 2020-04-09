@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove htmlFor of label wrapped up migration file upload input. #899
 - Add space for `<figcaption>` #912
 - Fix native sharing #903 #913
+- Show error toast instead of inner text in `<CommentBar>` #945
+- Hide follow state in sidebar authors #953
 
 ## [3.2.0] - 2020-03-27
 
