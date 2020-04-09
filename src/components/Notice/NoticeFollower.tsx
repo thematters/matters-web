@@ -16,7 +16,6 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
       borderRadius="xtight"
       bgColor="grey-lighter"
       hasState={false}
-      hasFollow
     />
   )
 }
