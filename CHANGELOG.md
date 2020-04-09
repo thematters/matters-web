@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2020-04-09
+
+### Added
+
+- Canvas Fingerprint #898
+
+### Changed
+
+- View Mode analytics #922
+- Dialog Enhancement #860
+- Add "Segoe UI", "Roboto" & Arial to font stacks #913
+- Remove htmlFor of label wrapped up migration file upload input. #899
+- Add space for `<figcaption>` #912
+- Fix native sharing #903 #913
+- Show error toast instead of inner text in `<CommentBar>` #945
+- Hide follow state in sidebar authors #953
+
 ## [3.2.0] - 2020-03-27
 
 ### Added
