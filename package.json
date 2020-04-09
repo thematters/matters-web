@@ -33,10 +33,8 @@
     "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r \"bdd/steps/*.js\" --format node_modules/cucumber-pretty"
   },
   "dependencies": {
-    "@apollo/react-common": "^3.1.4",
-    "@apollo/react-components": "^3.1.4",
-    "@apollo/react-hooks": "^3.1.4",
-    "@apollo/react-testing": "^3.1.4",
+    "@apollo/react-common": "^3.1.3",
+    "@apollo/react-hooks": "^3.1.3",
     "@matters/apollo-upload-client": "^11.1.0",
     "@matters/matters-editor": "^0.1.13",
     "@reach/alert": "^0.10.0",
