@@ -40,6 +40,7 @@
   display: inline-flex;
   padding: 0 var(--spacing-x-tight);
   height: 1.5rem;
+  line-height: 1.5rem;
 
   border-radius: 2rem;
   background: var(--color-grey-lighter);
